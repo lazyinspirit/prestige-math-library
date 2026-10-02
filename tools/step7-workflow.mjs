@@ -252,8 +252,11 @@ export function prepareAdjudication(root,run,phase,round) {
   const frontier=initialize(root,run), dir=workflowDir(root,run);
   const judgeInput=phase==='initial'?join(dir,'step6-verdicts.json'):join(dir,`judge-${round}.json`);
   const verdicts=phase==='initial' ? read(judgeInput) : read(judgeInput).verdicts;
-  const activeModel=phase==='repeat'?MODELS.sol.id
-    : verdicts.some(row=>row.model===MODELS.luna.id)?MODELS.luna.id:MODELS.sol.id;
+  const sol61Run=read(join(dir,'step6-verdicts.json')).some(row=>row.model===MODELS.sol61.id);
+  const activeModel=phase==='repeat'
+    ? (sol61Run?MODELS.sol61.id:MODELS.sol.id)
+    : sol61Run?MODELS.sol61.id
+      : verdicts.some(row=>row.model===MODELS.luna.id)?MODELS.luna.id:MODELS.sol.id;
   const latest=new Map(); for(const row of validVerdicts(verdicts).filter(row=>row.model===activeModel)) latest.set(`${row.id}\0${row.model}`,row);
   const repairable=gateFrontier(root,run);
   if(phase==='initial')for(const id of repairable)requireValue([...latest.values()].some(row=>row.id===id&&typeof row.keep==='boolean'),`missing Step 6 verdict: ${id}`);
@@ -451,9 +454,12 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     const role=phase==='initial'||phase==='repeat'?'alpha-adjudicate':'alpha-repair';
     const dispatch=join(root,'research',`${run}-dispatch`,`${role}-${workerLabel(phase,round,unit)}.result.json`);
     const receipt=read(dispatch);
-    const expected=role==='alpha-adjudicate'
-      ? pack.judge_model===MODELS.luna.id?[[MODELS.astra.id,'medium']]:[[MODELS.astra.id,'medium'],[MODELS.sol.id,'xhigh']]
-      : [[MODELS.sol.id,'xhigh']];
+    const sol61Run=read(join(workflowDir(root,run),'step6-verdicts.json')).some(row=>row.model===MODELS.sol61.id);
+    const expected=sol61Run
+      ? [[MODELS.sol61.id,'high']]
+      : role==='alpha-adjudicate'
+        ? pack.judge_model===MODELS.luna.id?[[MODELS.astra.id,'medium']]:[[MODELS.astra.id,'medium'],[MODELS.sol.id,'xhigh']]
+        : [[MODELS.sol.id,'xhigh']];
     if(receipt.ok!==true||receipt.run!==run||receipt.role!==role||receipt.label!==workerLabel(phase,round,unit)
       ||!expected.some(([model,effort])=>receipt.model===model&&receipt.provider_effort===effort))
       throw Error(`worker did not succeed with an authorized identity: ${dispatch}`);
@@ -531,7 +537,11 @@ export function advanceImpact(root,run,phase,round) {
     for(const lane of pack.lanes){
       const label=maintenanceLabel(phase,round,pack.id,lane.lane);
       const dispatch=join(root,'research',`${run}-dispatch`,`alpha-repair-${label}.result.json`),result=read(dispatch);
-      requireValue(result.ok===true&&result.run===run&&result.role==='alpha-repair'&&result.label===label&&result.model===MODELS.sol.id&&result.provider_effort==='xhigh',`maintenance worker did not succeed with Sol xhigh identity: ${label}`);
+      const sol61Run=read(join(workflowDir(root,run),'step6-verdicts.json')).some(row=>row.model===MODELS.sol61.id);
+      const authorized=sol61Run
+        ? result.model===MODELS.sol61.id&&result.provider_effort==='high'
+        : result.model===MODELS.sol.id&&result.provider_effort==='xhigh';
+      requireValue(result.ok===true&&result.run===run&&result.role==='alpha-repair'&&result.label===label&&authorized,`maintenance worker did not succeed with an authorized identity: ${label}`);
       progress.maintenance_evidence??={};progress.maintenance_evidence[dispatch]=digest(readFileSync(dispatch,'utf8'));
     }
     const state=maintenanceStatus(root,run);
@@ -745,19 +755,23 @@ export function judge(root,run,round,{contextHasher=currentHashesMany,runSweep=n
   const current=hashes(root);for(const row of candidates)if(current[row.id]!==row.guard_sha256)throw Error(`item changed before Sol judgment: ${row.id}`);
   requireValue((round===1&&cert.phase==='impact-initial')||(round>1&&cert.phase==='impact-repeat'&&cert.round===round-1),'Sol judge round does not follow a completed certification barrier');
   const priorVerdicts=round===1?[]:read(join(dir,`judge-${round-1}.json`)).verdicts;
-  const prev=Object.fromEntries(priorVerdicts.filter(r=>r.model===MODELS.sol.id).map(r=>[r.id,r]));
+  const step6Verdicts=read(join(dir,'step6-verdicts.json'));
+  const judgeModel=step6Verdicts.some(row=>row.model===MODELS.sol61.id)?MODELS.sol61.id:MODELS.sol.id;
+  const judgeLineup=judgeModel===MODELS.sol61.id?'sol61':'sol';
+  const judgeEffort='high';
+  const prev=Object.fromEntries(priorVerdicts.filter(r=>r.model===judgeModel).map(r=>[r.id,r]));
   const beforeContexts=contextHasher(root,candidates.map(row=>row.id));
   for(const row of candidates){const now=beforeContexts.get(row.id);requireValue(now?.item_sha256===row.item_sha256&&now?.context_sha256===row.context_sha256,`certified context changed before Sol judgment: ${row.id}`);}
-  const migrationIds=priorVerdicts.filter(r=>r.model!==MODELS.sol.id).map(r=>r.id);
+  const migrationIds=priorVerdicts.filter(r=>r.model!==judgeModel).map(r=>r.id);
   const ids=[...new Set([...cert.changed,...migrationIds])].filter(id=>frontier.has(id)).filter(id=>{const now=beforeContexts.get(id);requireValue(now,`missing judge context ${id}`);return prev[id]?.item_sha256!==now.item_sha256||prev[id]?.context_sha256!==now.context_sha256;});
   const ledger=join(root,'research',`${run}-judge.jsonl`);
   if(ids.length) {
-    const out=runSweep?runSweep({root,run,ids,ledger}):spawnSync(process.execPath,['tools/judge-sweep.mjs','--run',run,'--ledger',ledger,'--cost',`research/${run}-judge-cost.jsonl`,'--items',ids.join(','),'--lineup','sol','--effort','high'],{cwd:root,stdio:'inherit',timeout:43200000});
+    const out=runSweep?runSweep({root,run,ids,ledger}):spawnSync(process.execPath,['tools/judge-sweep.mjs','--run',run,'--ledger',ledger,'--cost',`research/${run}-judge-cost.jsonl`,'--items',ids.join(','),'--lineup',judgeLineup,'--effort',judgeEffort],{cwd:root,stdio:'inherit',timeout:43200000});
     if(out.status!==0)throw Error(`Sol sweep failed (${out.status}); resume preserves completed verdicts`);
   }
   const currentContexts=contextHasher(root,ids), verdicts=[];
   for(const id of ids)requireValue(JSON.stringify(beforeContexts.get(id))===JSON.stringify(currentContexts.get(id)),`item changed during Sol judgment: ${id}`);
-  for(const id of ids){const now=currentContexts.get(id);const row=lines(ledger).filter(r=>r.id===id&&r.model===MODELS.sol.id&&r.item_sha256===now.item_sha256&&r.context_sha256===now.context_sha256&&typeof r.keep==='boolean').at(-1);if(!row)throw Error(`missing current Sol verdict ${id}`);verdicts.push(row);}
+  for(const id of ids){const now=currentContexts.get(id);const row=lines(ledger).filter(r=>r.id===id&&r.model===judgeModel&&r.item_sha256===now.item_sha256&&r.context_sha256===now.context_sha256&&typeof r.keep==='boolean').at(-1);if(!row)throw Error(`missing current ${judgeModel} verdict ${id}`);verdicts.push(row);}
   const carried=Object.values(prev).filter(row=>frontier.has(row.id)&&!ids.includes(row.id));
   const receipt={version:2,run,round,items:ids,verdicts:[...carried,...verdicts],certification_sha256:cert.sha256};frozen(path,receipt);return receipt;
 }

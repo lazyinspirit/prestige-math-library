@@ -657,7 +657,9 @@ functions, and the $s=-n/2$ Dirac endpoint diverges logarithmically.
 **A page:** `hilbert-and-riesz-transforms`
 **B page:** `hilbert-and-riesz-transforms-examples`
 **Requires:** the FR-1 and FR-6 A pages, the FA Plancherel/tempered-transform
-pages, and the repaired MT-CA-1 endpoint interpolation theorem. Generic weak $(1,1)$, real-line
+pages, `fejer-and-poisson-summability-of-fourier-series` for polynomial density
+and periodic $L^p$ convergence, and the repaired MT-CA-1 endpoint interpolation
+theorem. Generic weak $(1,1)$, real-line
 $L^p$ boundedness, and the BMO endpoint occur later and are orientation-only
 forward references.  **Sources
 read:** L chs. 10–12 and 20–21, pp. 57–70 and 113–126; G §5.1,

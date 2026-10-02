@@ -5,19 +5,15 @@ title: "Levi pseudoconvex domains"
 status: published
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 deps: [def-levi-form-and-strict-plurisubharmonicity]
 justified_by: []
 aliases: []
 landmark: false
 verification:
-  audited: 2026-08-28
+  audited: 2026-10-02
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references:
@@ -29,6 +25,14 @@ pipeline_run: null
 ---
 
 ## Definition
+
+Fix an integer $m\ge1$. Use the one-based coordinate, vector-component
+and Wirtinger-operator aliases of
+[[def-levi-form-and-strict-plurisubharmonicity]]: for $1\le j\le m$,
+$z_j$ and $v_j$ denote the canonical coordinate and vector component with
+index $j-1$, and $\partial_{z_j}$ denotes the canonical Wirtinger operator
+with index $j-1$. All coordinates, vector components and derivatives below
+use these aliases.
 
 Let $\Omega\subseteq\mathbb C^m$ be a domain with $C^2$ boundary. We say that
 $\Omega$ is **Levi pseudoconvex** when for every boundary point $p\in\partial\Omega$

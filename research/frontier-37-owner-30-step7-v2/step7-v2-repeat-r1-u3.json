@@ -1,0 +1,126 @@
+{
+  "run": "frontier-37-owner-30",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "3",
+  "input_sha256": "e05cdf19d5e313eca8bcdfe4dd966cdf4b0c59c46fd851eb9dff4ee3cbf9156e",
+  "decisions": [
+    {
+      "id": "def-s-integers-and-s-units-of-a-number-field",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "cdafe6380aa02f005a1eed27f14f0aa5dd4ca54ab914cb1f0a7486109d2fb62a",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed a missing prerequisite: the original cited ring-of-integers definition only identifies the integral closure and does not prove the Dedekind property or its fraction field. The new well-definedness argument proves both in ZF and uses the explicit local calculation of thm-number-field-integral-ideal-factorisation-in-zf, steps 2.1--6.1, to justify the integer valuation of each principal fractional ideal without invoking the AC-qualified general invertibility theorem.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-s-integers-and-s-units-of-a-number-field",
+      "disposition": "repaired",
+      "post_sha256": "ebb371b8d1d8367cafbebd4d2ee3a1e2429f65396a9613cdf40440659254fef1",
+      "review_context_sha256": "6d0d5b2c4e7e0e88ffa2f94a1c7601b01912e92b9bb1f1a913f1e62dfa5fb5cc",
+      "reason": "Checked the repaired prerequisites directly: denominator clearing makes xR a fractional ideal in K; finite-rank subgroup induction gives Noetherianity; integral closure gives normality; finite prime quotients and a maximal ideal of the finite nonzero ring R/2R establish dimension one. The existing ZF local argument gives unique unit-times-uniformizer expressions, so nonnegative valuations define an intersection of local subrings and zero valuations its unit group. The Definition and choice-free contract remain unchanged. This is a local review of my own repair, not an independent audit.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "def-s-integers-and-s-units-of-a-number-field",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "status": "repaired",
+      "reason": "Confirmed a missing prerequisite: the original cited ring-of-integers definition only identifies the integral closure and does not prove the Dedekind property or its fraction field. The new well-definedness argument proves both in ZF and uses the explicit local calculation of thm-number-field-integral-ideal-factorisation-in-zf, steps 2.1--6.1, to justify the integer valuation of each principal fractional ideal without invoking the AC-qualified general invertibility theorem.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.jmilne.org/math/CourseNotes/ANT.pdf"
+      ],
+      "familiar": true,
+      "post_sha256": "ebb371b8d1d8367cafbebd4d2ee3a1e2429f65396a9613cdf40440659254fef1"
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "disposition": "no_update_needed",
+      "reason": "No published item was edited or found defective in this assignment; the repaired supplier Definition is unchanged, so no published consumer interface event is opened.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": {
+    "claim_and_conventions": "K is any number field; S is finite and contains only nonzero prime ideals. The valuation conditions, principal-fractional-ideal convention, and entire original Definition are unchanged. No AC assumption is added.",
+    "dependencies_added": [
+      "def-dedekind-domain",
+      "lem-nonzero-number-field-ideal-has-finite-quotient",
+      "thm-clearing-denominators-for-an-algebraic-number",
+      "thm-integral-closure-is-integrally-closed",
+      "thm-number-field-integral-ideal-factorisation-in-zf",
+      "thm-ring-of-integers-free-of-rank-degree"
+    ],
+    "sources_consulted": [
+      {
+        "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+        "locators": "Proposition 2.6 and Corollary 2.7, printed p.28; complete Proposition 2.29 proof, printed p.35; complete S-unit subsection including Theorem 5.11 proof, printed p.90. The ZF choice accounting is checked from the local library arguments rather than attributed to Milne."
+      }
+    ],
+    "contract": "research/frontier-37-owner-30-batch-3.proof-contracts.json: the definition contract requires no Choice and its empty, zero, one and finite-prime boundary clauses still hold. No contract/page edit needed.",
+    "published_findings": [],
+    "interface_comparison": {
+      "sections": "Only ## Definition occurs in the original item; it was preserved verbatim. The added ## Well-definedness is outside that section. Exact section extraction produces the same frozen statement hash; there is no interface-change propagation.",
+      "before_statement_sha256": "83c7b3b3b103ed7cdbdbb789401eb3674ddc7d10ed7c4776f1bb648bc19124bf",
+      "after_statement_sha256": "83c7b3b3b103ed7cdbdbb789401eb3674ddc7d10ed7c4776f1bb648bc19124bf"
+    },
+    "checks": [
+      {
+        "command": "node tools/rendercheck.mjs items/def-s-integers-and-s-units-of-a-number-field.md --json",
+        "exit_code": 0,
+        "result": "1 checked; zero errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-s-integers-and-s-units-of-a-number-field.md --json",
+        "exit_code": 0,
+        "result": "Definition: phase-format proof check not applicable; zero failures. The well-definedness prose was checked mathematically by this adjudicator."
+      },
+      {
+        "command": "node tools/depcheck.mjs --items-file /tmp/step7-repeat-r1-u3-items.json --json",
+        "exit_code": 0,
+        "result": "Focused assigned item and global metadata/cycles: zero errors; 141 multi-home warnings, none naming this item."
+      },
+      {
+        "command": "node tools/fwdcheck.mjs --items-file /tmp/step7-repeat-r1-u3-items.json --json",
+        "exit_code": 0,
+        "result": "Focused assigned item plus global cycles: zero errors or warnings."
+      },
+      {
+        "command": "node tools/extcheck.mjs --items-file /tmp/step7-repeat-r1-u3-items.json --json",
+        "exit_code": 0,
+        "result": "Checker reports whole-corpus summary: zero errors, 40 warnings. This is not an audit of unrelated published mathematics."
+      },
+      {
+        "command": "node tools/content-policy.mjs research/frontier-37-owner-30-batch-3.pages.json --json",
+        "exit_code": 0,
+        "result": "Batch scope 25: zero errors or warnings."
+      },
+      {
+        "command": "node tools/step7-workflow.mjs review-contexts --run frontier-37-owner-30 --items def-s-integers-and-s-units-of-a-number-field",
+        "exit_code": 0,
+        "result": "Recorded the review hashes immediately after completing the item repair; no item was edited afterward."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Engine collection and any independently required rejudgment; no unresolved mathematical obligation in this assignment."
+  }
+}

@@ -1,0 +1,798 @@
+[
+  {
+    "order": 510.049,
+    "id": "the-branching-rule-and-the-young-graph",
+    "kind": "A",
+    "category": "representation-theory",
+    "title": "The Branching Rule and the Young Graph",
+    "companion": "the-branching-rule-and-the-young-graph-examples",
+    "requires": [
+      "young-diagrams-tableaux-and-permutation-modules",
+      "specht-modules-and-the-irreducibles-of-the-symmetric-group",
+      "induced-representations-and-frobenius-reciprocity",
+      "tensor-products-of-modules"
+    ],
+    "items": [
+      {
+        "id": "def-polytabloid-specht-module-over-an-arbitrary-field",
+        "kind": "definition",
+        "title": "Integral and field-valued Specht modules",
+        "statement": "For any commutative ring R, define M_R^lambda as the free R-module on lambda-tabloids and S_R^lambda as the R-span of the signed polytabloids; for R=C this agrees with the published complex Specht module.",
+        "strategy": "Use the published left tabloid action and integral permutation signs. Define kappa_t and e_t by finite sums over C_t, including lambda=empty; prove covariance by reindexing, so S_R^lambda is an R[S_n]-submodule. The complex scalar extension is the existing S^lambda. No choice is used.",
+        "deps": [
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "def-row-and-column-stabilizers-of-a-tableau",
+          "thm-sign-is-a-homomorphism",
+          "lem-polytabloid-covariance-and-column-sign"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Wildon, Representation Theory of the Symmetric Group, Section 6, printed pp. 26-33",
+              "url": "https://www.ma.rhul.ac.uk/~uvah099/Maths/Sym/SymGroup2014.pdf"
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups, Theorem 4.16, printed pp. 18-19, and Theorem 6.8, printed p. 26",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-integral-specht-garnir-straightening-and-field-basis",
+        "kind": "lemma",
+        "title": "Integral Garnir straightening and the field-uniform standard basis",
+        "statement": "For every partition lambda, the standard polytabloids are a Z-basis of S_Z^lambda; after extension to any field F their images are an F-basis of S_F^lambda. The signed adjacent-column Garnir relation holds over Z and every field.",
+        "strategy": "Prove tabloid leading-term independence with coefficient +1 over Z. For adjacent columns j,j+1 choose X from the lower part of j and Y from the upper part of j+1 with |X|+|Y| exceeding column height; pair terms by a same-row transposition to prove the integral Garnir relation. Sort columns and induct on Wildon\u2019s finite greatest-moved-label column order: isolate the identity coset, replace every nonidentity term by a later column-standard polytabloid with coefficient \u00b11, and stop at standard tableaux. This proves integral spanning without dividing by any factorial. Pass the explicit integral expansions and unitriangular independence to F, including F_2 and the empty shape.",
+        "deps": [
+          "def-polytabloid-specht-module-over-an-arbitrary-field",
+          "def-young-tableau-standard-tableau-and-shape",
+          "def-row-and-column-stabilizers-of-a-tableau",
+          "def-tabloid-and-column-orders-for-specht-straightening"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Wildon, Representation Theory of the Symmetric Group, Section 6, printed pp. 26-33",
+              "url": "https://www.ma.rhul.ac.uk/~uvah099/Maths/Sym/SymGroup2014.pdf"
+            },
+            {
+              "title": "Andrew Snowden, MATH 711 Representation Theory of Symmetric Groups, Lemmas 2.45-2.46 and Section 3.2, PDF pp. 23-24 and 36-39",
+              "url": "https://people.maths.ox.ac.uk/horawa/math_711.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-corner-order-and-specht-deletion-map",
+        "kind": "definition",
+        "title": "Ordered removable corners and tabloid deletion maps",
+        "statement": "For n>=1 list removable rows r_1<...<r_m of lambda and set lambda^(i)=lambda minus the corner of row r_i. Define the S_(n-1)-equivariant tabloid deletion map theta_i:M_F^lambda->M_F^(lambda^(i)) by deleting n if n lies in row r_i and sending other tabloids to zero.",
+        "strategy": "Use the published removable-node criterion to show deleting n from a row-r_i tabloid gives a well-defined tabloid of shape lambda^(i). S_(n-1) fixes n and commutes with deletion. Fix the upper-to-lower corner order and exclude n=0 from restriction.",
+        "deps": [
+          "def-polytabloid-specht-module-over-an-arbitrary-field",
+          "def-removable-and-addable-nodes-of-a-partition",
+          "def-young-tableau-standard-tableau-and-shape"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups, Theorem 4.16, printed pp. 18-19, and Theorem 6.8, printed p. 26",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-specht-branching-subspaces-are-invariant",
+        "kind": "lemma",
+        "title": "The corner-indexed Specht subspaces are stable under restriction",
+        "statement": "For n>=1 and any field F, the span V_i of standard lambda-polytabloids with n in rows r_1,...,r_i is stable under S_(n-1), with V_0=0 and V_m=S_F^lambda.",
+        "strategy": "For sigma in S_(n-1), covariance fixes the box containing n in sigma t. Straighten e_(sigma t) using the integral Garnir algorithm. Initially n is at the removable corner of row r<=r_i and hence at the bottom of its column; column sorting keeps it there. If a Garnir move changes n, then n is the greatest affected label and moves rightward. After column sorting it sits at the bottom of a column of height at most its previous column height, so its row never increases; the first move from a removable corner is strictly upward. Thus every standard term still has n in a removable row <=r_i. The field-uniform basis and largest-entry-removable lemma identify V_m; finite invariance needs no AC.",
+        "deps": [
+          "def-corner-order-and-specht-deletion-map",
+          "lem-integral-specht-garnir-straightening-and-field-basis",
+          "lem-largest-entry-of-a-standard-tableau-is-removable"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Wildon, Representation Theory of the Symmetric Group, Section 6, printed pp. 26-33",
+              "url": "https://www.ma.rhul.ac.uk/~uvah099/Maths/Sym/SymGroup2014.pdf"
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups, Theorem 4.16, printed pp. 18-19, and Theorem 6.8, printed p. 26",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+            },
+            {
+              "title": "Andrew Snowden, MATH 711 Representation Theory of Symmetric Groups, Lemmas 2.45-2.46 and Section 3.2, PDF pp. 23-24 and 36-39",
+              "url": "https://people.maths.ox.ac.uk/horawa/math_711.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-specht-branching-successive-quotients",
+        "kind": "lemma",
+        "title": "Deletion identifies each Specht branching quotient",
+        "statement": "For n>=1 and any field F, theta_i restricts to a surjection V_i->S_F^(lambda^(i)) with kernel V_(i-1), so V_i/V_(i-1) is that Specht module.",
+        "strategy": "On a standard t with n in row r_i, only column permutations fixing n contribute to theta_i(e_t); they give exactly e_(t minus n). For n in an earlier removable row, its corner column has height that row, so no column permutation puts n in row r_i and theta_i(e_t)=0. Deleted standard tableaux run through the full standard basis of S_F^(lambda^(i)); compare field-uniform basis vectors on both sides to identify the kernel exactly. Equivariance follows from the definition of theta_i.",
+        "deps": [
+          "lem-specht-branching-subspaces-are-invariant",
+          "def-corner-order-and-specht-deletion-map",
+          "lem-integral-specht-garnir-straightening-and-field-basis"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups, Theorem 4.16, printed pp. 18-19, and Theorem 6.8, printed p. 26",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            },
+            {
+              "title": "Andrew Snowden, MATH 711 Representation Theory of Symmetric Groups, Lemmas 2.45-2.46 and Section 3.2, PDF pp. 23-24 and 36-39",
+              "url": "https://people.maths.ox.ac.uk/horawa/math_711.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-specht-restriction-branching-filtration",
+        "kind": "theorem",
+        "title": "Specht restriction has a removable-corner filtration over every field",
+        "statement": "For n>=1 and any field F, Res^(S_n)_(S_(n-1)) S_F^lambda has the filtration 0=V_0 subset ... subset V_m=S_F^lambda with V_i/V_(i-1) isomorphic to S_F^(lambda^(i)) for removable corners listed from top to bottom.",
+        "strategy": "Assemble the invariant subspaces and quotient isomorphisms. Check that every removable corner occurs once, that n=1 gives S_F^empty as the unique quotient, and that no semisimple splitting is claimed in positive characteristic.",
+        "deps": [
+          "lem-specht-branching-subspaces-are-invariant",
+          "lem-specht-branching-successive-quotients"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups, Theorem 4.16, printed pp. 18-19, and Theorem 6.8, printed p. 26",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            },
+            {
+              "title": "Mark Wildon, Representation Theory of the Symmetric Group, Section 6, printed pp. 26-33",
+              "url": "https://www.ma.rhul.ac.uk/~uvah099/Maths/Sym/SymGroup2014.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-complex-specht-restriction-branching-rule",
+        "kind": "corollary",
+        "title": "Multiplicity-free complex Specht restriction",
+        "statement": "For n>=1, Res^(S_n)_(S_(n-1)) S^lambda is the direct sum of S^(lambda minus x) over removable nodes x, each once.",
+        "strategy": "Specialize the field-uniform filtration to C. Maschke for S_(n-1) splits each short exact sequence; distinct removed diagrams yield distinct irreducible Specht modules by the published classification. The decomposition includes n=1.",
+        "deps": [
+          "thm-specht-restriction-branching-filtration",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups, Theorem 4.16, printed pp. 18-19, and Theorem 6.8, printed p. 26",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-complex-specht-induction-branching-rule",
+        "kind": "theorem",
+        "title": "Multiplicity-free complex Specht induction",
+        "statement": "For n>=0, Ind^(S_(n+1))_(S_n) S^lambda is the direct sum of S^(lambda plus y) over addable nodes y, each once.",
+        "strategy": "For each irreducible S^nu of S_(n+1), apply the published left adjunction in the correct direction Hom_(S_(n+1))(Ind S^lambda,S^nu)=Hom_(S_n)(S^lambda,Res S^nu). The restriction rule and Schur\u2019s lemma make this dimension one exactly when nu is obtained by adding one box, zero otherwise. Maschke and completeness identify the full induction, including n=0.",
+        "deps": [
+          "cor-complex-specht-restriction-branching-rule",
+          "thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups, Theorem 4.16, printed pp. 18-19, and Theorem 6.8, printed p. 26",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 6
+      },
+      {
+        "id": "def-young-graph",
+        "kind": "definition",
+        "title": "The Young graph of partitions",
+        "statement": "The Young graph has all partitions, including the empty partition, as vertices; a directed edge lambda->nu joins successive sizes exactly when nu adds one addable node to lambda.",
+        "strategy": "Use English diagrams and the published addable-node convention. Every edge is oriented from size n to n+1 and is a single edge; do not identify row endpoints that are not addable.",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-removable-and-addable-nodes-of-a-partition"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups, Theorem 4.16, printed pp. 18-19, and Theorem 6.8, printed p. 26",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cor-paths-in-the-young-graph-index-standard-tableaux",
+        "kind": "corollary",
+        "title": "Young-graph paths correspond to standard tableaux",
+        "statement": "Paths from the empty partition to lambda are in bijection with standard tableaux of shape lambda; the number of paths is f^lambda.",
+        "strategy": "Label the unique box added at step k by k; nested Young diagrams make rows and columns increase. Conversely delete n,n-1,... from a standard tableau, using the largest-entry-removable lemma at each step. The two finite constructions are inverse, including lambda=empty.",
+        "deps": [
+          "def-young-graph",
+          "lem-largest-entry-of-a-standard-tableau-is-removable",
+          "def-young-tableau-standard-tableau-and-shape"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups, Theorem 4.16, printed pp. 18-19, and Theorem 6.8, printed p. 26",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-semistandard-tableau-homomorphisms-to-young-permutation-modules",
+        "kind": "lemma",
+        "title": "Semistandard fillings construct Specht-to-permutation homomorphisms",
+        "statement": "For lambda,mu partitions of n and every semistandard lambda-tableau T of content mu, the row-orbit sum of T defines an S_n-map theta_T:M^lambda->M^mu; its restriction to S^lambda is a Specht-to-permutation homomorphism.",
+        "strategy": "Fix a reference lambda-tableau t. Identify mu-tabloids with all content-mu fillings of the boxes of t by recording the row containing each label; the transported left action uses sigma inverse on positions. The R_t-orbit sum of T is R_t-invariant, so the transitive tabloid permutation module universal property gives theta_T. Restrict to the published complex S^lambda, with no assertion yet that the restriction is nonzero.",
+        "deps": [
+          "def-semistandard-tableau-and-kostka-number",
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "def-row-and-column-stabilizers-of-a-tableau"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            },
+            {
+              "title": "Andrew Snowden, MATH 711 Representation Theory of Symmetric Groups, Lemmas 2.45-2.46 and Section 3.2, PDF pp. 23-24 and 36-39",
+              "url": "https://people.maths.ox.ac.uk/horawa/math_711.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-semistandard-homomorphisms-are-independent-and-dominance-triangular",
+        "kind": "lemma",
+        "title": "Semistandard maps are independent and respect dominance",
+        "statement": "Over C, the restrictions of theta_T for distinct semistandard T are nonzero and linearly independent; such a T can exist only when lambda dominates mu, and for lambda=mu there is exactly one.",
+        "strategy": "Evaluate every restricted map on the reference polytabloid e_t. Antisymmetrization has nonzero coefficient on its semistandard filling because each column is strictly increasing. Order column words by the greatest label whose position changes; row permutations followed by column antisymmetrization give a triangular expansion with distinct leading terms, proving nonzero independence. Counting entries <=i in the first i rows proves dominance, and equality forces row i to contain only i.",
+        "deps": [
+          "lem-semistandard-tableau-homomorphisms-to-young-permutation-modules",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-dominance-order-on-partitions",
+          "lem-column-collision-causes-antisymmetrizer-cancellation"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            },
+            {
+              "title": "Andrew Snowden, MATH 711 Representation Theory of Symmetric Groups, Lemmas 2.45-2.46 and Section 3.2, PDF pp. 23-24 and 36-39",
+              "url": "https://people.maths.ox.ac.uk/horawa/math_711.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-semistandard-homomorphisms-span-in-characteristic-zero",
+        "kind": "lemma",
+        "title": "Semistandard maps span the complex intertwiner space",
+        "statement": "For partitions lambda,mu of n, the semistandard restrictions theta_T|S^lambda span Hom_(C[S_n])(S^lambda,M^mu).",
+        "strategy": "Evaluate any intertwiner f at a cyclic standard e_t and expand in the content-filling basis. Column sign covariance forces coefficients with a repeated entry in a column to vanish over C. Choose a maximal remaining column word; if its rows descend, apply the integral adjacent-column Garnir relation to e_t and compare the coefficient of the maximal word in f(relation)=0, obtaining a strictly larger nonzero term, contradiction. Thus a maximal nonzero term is semistandard. Subtract its coefficient times the corresponding theta_T, whose triangular leading coefficient is one, and descend through the finite order. This uses no RSK or later Young-rule count.",
+        "deps": [
+          "lem-semistandard-homomorphisms-are-independent-and-dominance-triangular",
+          "lem-integral-specht-garnir-straightening-and-field-basis",
+          "lem-polytabloid-covariance-and-column-sign"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Snowden, MATH 711 Representation Theory of Symmetric Groups, Lemmas 2.45-2.46 and Section 3.2, PDF pp. 23-24 and 36-39",
+              "url": "https://people.maths.ox.ac.uk/horawa/math_711.pdf"
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-youngs-rule-for-permutation-modules",
+        "kind": "theorem",
+        "title": "Young\u2019s rule for complex permutation modules",
+        "statement": "For partitions lambda,mu of n, the multiplicity [M^mu:S^lambda] equals the Kostka number K_(lambda,mu), and M^mu is the direct sum of these Specht modules with those multiplicities.",
+        "strategy": "Combine the independent and spanning semistandard maps to get dim Hom_(S_n)(S^lambda,M^mu)=K_(lambda,mu). Apply complex Specht irreducibility and completeness plus Maschke and Schur\u2019s lemma to identify this Hom dimension with the summand multiplicity. Include n=0 and the dominance/diagonal-one boundary; do not cite later RSK.",
+        "deps": [
+          "lem-semistandard-homomorphisms-are-independent-and-dominance-triangular",
+          "lem-semistandard-homomorphisms-span-in-characteristic-zero",
+          "def-semistandard-tableau-and-kostka-number",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            },
+            {
+              "title": "Andrew Snowden, MATH 711 Representation Theory of Symmetric Groups, Lemmas 2.45-2.46 and Section 3.2, PDF pp. 23-24 and 36-39",
+              "url": "https://people.maths.ox.ac.uk/horawa/math_711.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 3
+      },
+      {
+        "id": "def-commuting-symmetric-and-linear-actions-on-tensor-power",
+        "kind": "definition",
+        "title": "Commuting symmetric-group and linear actions on a tensor power",
+        "statement": "For finite-dimensional complex V and n>=0, S_n acts on E=V^tensor n from the left by sigma(v_1 tensor ... tensor v_n)=v_(sigma^-1(1)) tensor ... tensor v_(sigma^-1(n)), while GL(V) acts by g^tensor n; these commute. The diagonal infinitesimal operator is Delta(T)=sum_i 1^tensor(i-1) tensor T tensor 1^tensor(n-i).",
+        "strategy": "Define V^tensor0=C and S_0 trivial. Check the inverse makes a left S_n-action, that diagonal GL(V) commutes with place permutations, and that Delta is the derivative of the diagonal action. Define here the image of U(gl(V)) as the unital associative algebra generated by all Delta(T); no Lie-track result is imported.",
+        "deps": [
+          "def-symmetric-group",
+          "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "thm-tensor-product-basis-from-bases"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pavel Etingof et al., Introduction to Representation Theory, MIT 18.712 Chapter 4, Sections 4.18-4.21, PDF pp. 18-21",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
+            },
+            {
+              "title": "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74",
+              "url": "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-tensor-place-operators-span-the-symmetric-centralizer",
+        "kind": "lemma",
+        "title": "Diagonal tensor operators span the symmetric centralizer",
+        "statement": "For finite-dimensional complex V and n>=0, End_(S_n)(V^tensor n) is canonically the invariant symmetric tensors in (End V)^tensor n, identified by symmetrization with Sym^n(End V). It is the linear span of T^tensor n for T in End V, the span of g^tensor n for g in GL(V), and the image of the algebra generated by Delta(T).",
+        "strategy": "Use a tensor-product basis to identify End(E) with (End V)^tensor n and conjugation by S_n with place permutation. Polarize the homogeneous polynomial T->T^tensor n over C to span the invariant tensors. For any T, interpolate the degree-n polynomial (tI+T)^tensor n at n+1 invertible choices of t to express T^tensor n as a linear combination of invertible diagonal tensors. For fixed T, the commuting place operators T_i have power sums Delta(T^k); Newton identities express their product T^tensor n in the generated algebra. The reverse inclusion is immediate; treat n=0 and V=0 explicitly.",
+        "deps": [
+          "def-commuting-symmetric-and-linear-actions-on-tensor-power",
+          "thm-tensor-product-basis-from-bases",
+          "cor-finite-iterated-tensor-products-represent-multilinear-maps"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pavel Etingof et al., Introduction to Representation Theory, MIT 18.712 Chapter 4, Sections 4.18-4.21, PDF pp. 18-21",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
+            },
+            {
+              "title": "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74",
+              "url": "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-schur-weyl-double-centralizer",
+        "kind": "theorem",
+        "title": "Schur\u2013Weyl mutual centralizers for GL(V) and gl(V)",
+        "statement": "For finite-dimensional complex V and n>=0, the image A of C[S_n] on E=V^tensor n and the linear span B of diagonal GL(V) operators are mutual centralizers in End(E); B is also the image of diagonal U(gl(V)).",
+        "strategy": "The preceding tensor-operator lemma gives B=End_A(E). Maschke makes the image algebra A semisimple. Decompose E into its simple A-isotypic blocks S^lambda tensor M_lambda and compute End_A(E)=product End(M_lambda); the commutant of those full matrix blocks in End(E) is exactly A. This finite matrix-block calculation proves the double-centralizer assertion without a Lie-track prerequisite. The generated Delta algebra equals B by Newton identities; the zero tensor-space edge case is read inside End(0).",
+        "deps": [
+          "lem-tensor-place-operators-span-the-symmetric-centralizer",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pavel Etingof et al., Introduction to Representation Theory, MIT 18.712 Chapter 4, Sections 4.18-4.21, PDF pp. 18-21",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
+            },
+            {
+              "title": "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74",
+              "url": "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-schur-weyl-length-cutoff-by-column-antisymmetrization",
+        "kind": "lemma",
+        "title": "Column antisymmetrization gives the exact Schur\u2013Weyl length cutoff",
+        "statement": "For lambda partition n and d=dim_C V, Hom_(S_n)(S^lambda,V^tensor n) is nonzero exactly when the number of nonzero rows of lambda is at most d.",
+        "strategy": "If length(lambda)<=d, choose basis e_1,...,e_d and a lambda-tableau t; put e_i at tensor positions labelled by row i, giving a well-defined S_n-map M^lambda->E because the row stabilizer fixes that tensor. Its image of e_t is kappa_t w_t and is nonzero: distinct column permutations yield distinct basis tensors, since each column starts with distinct labels. Restriction to irreducible S^lambda is therefore injective. If length(lambda)>d, antisymmetrizing the first column annihilates E, whereas kappa_t e_t=|C_t|e_t and |C_t| is nonzero in C; hence every S_n-map from S^lambda to E is zero. Handle n=0 and d=0.",
+        "deps": [
+          "def-commuting-symmetric-and-linear-actions-on-tensor-power",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "lem-polytabloid-covariance-and-column-sign",
+          "thm-complex-specht-modules-are-irreducible",
+          "def-row-and-column-stabilizers-of-a-tableau"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pavel Etingof et al., Introduction to Representation Theory, MIT 18.712 Chapter 4, Sections 4.18-4.21, PDF pp. 18-21",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
+            },
+            {
+              "title": "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74",
+              "url": "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-schur-weyl-polytabloid-highest-weight",
+        "kind": "lemma",
+        "title": "The row-labelled polytabloid map has highest weight lambda",
+        "statement": "For length(lambda)<=d, the nonzero row-labelled map S^lambda->V^tensor n represents a vector of weight (lambda_1,...,lambda_d) in the multiplicity space M_lambda=Hom_(S_n)(S^lambda,E), killed by every upper-triangular raising matrix E_ij with i<j. If M_lambda is irreducible, this is its unique highest-weight value.",
+        "strategy": "Diagonal matrices act on the row-labelled tensor with weight lambda and commute with its column antisymmetrizer. In Delta(E_ij) kappa_t w_t, each replacement of row label j by i meets the existing i in that same column, so alternating cancellation gives zero. E_ij acts on the whole equivariant map by postcomposition; since e_t generates S^lambda, killing its image kills the map. For uniqueness, reorder products of matrix units using [E_ij,E_kl]=delta_(jk)E_il-delta_(li)E_kj so all raising operators move to the right and kill a highest vector. The remaining lowering operators only decrease weights in positive-root order; two distinct highest-weight values cannot both generate the same irreducible M_lambda. This is a local finite matrix argument, not imported Lie classification.",
+        "deps": [
+          "lem-schur-weyl-length-cutoff-by-column-antisymmetrization",
+          "thm-schur-weyl-double-centralizer",
+          "lem-polytabloid-covariance-and-column-sign"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pavel Etingof et al., Introduction to Representation Theory, MIT 18.712 Chapter 4, Sections 4.18-4.21, PDF pp. 18-21",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
+            },
+            {
+              "title": "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74",
+              "url": "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-schur-weyl-decomposition-with-length-cutoff",
+        "kind": "theorem",
+        "title": "Schur\u2013Weyl decomposition and highest weights",
+        "statement": "For finite-dimensional complex V with d=dim V and n>=0, E=V^tensor n is the direct sum over lambda partition n with length(lambda)<=d of S^lambda tensor Hom_(S_n)(S^lambda,E). Every multiplicity factor is a nonzero irreducible homogeneous polynomial GL(V)-module of degree n, also irreducible for gl(V), pairwise inequivalent, with highest weight lambda padded with zeros for the upper-triangular Borel.",
+        "strategy": "Apply Maschke to the S_n-action and its published Specht classification. The mutual-centralizer theorem identifies B with the product of full matrix algebras on nonzero multiplicity spaces; because both diagonal GL(V) and Delta(gl(V)) generate B, each factor is irreducible and factors at different lambda are inequivalent for both actions. Use the column-antisymmetrizer lemma for exactly which factors are nonzero and the local highest-weight lemma for the stated weight; matrix entries of g^tensor n are homogeneous degree-n polynomials. Check n=0 gives the single trivial empty-shape factor, and V=0,n>0 gives the empty sum. No later RL or RSK theorem is used.",
+        "deps": [
+          "thm-schur-weyl-double-centralizer",
+          "lem-schur-weyl-length-cutoff-by-column-antisymmetrization",
+          "lem-schur-weyl-polytabloid-highest-weight",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pavel Etingof et al., Introduction to Representation Theory, MIT 18.712 Chapter 4, Sections 4.18-4.21, PDF pp. 18-21",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
+            },
+            {
+              "title": "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74",
+              "url": "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "constructive",
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 510.05,
+    "id": "the-branching-rule-and-the-young-graph-examples",
+    "kind": "B",
+    "category": "representation-theory",
+    "title": "The Branching Rule and the Young Graph \u2014 Examples",
+    "companion": "the-branching-rule-and-the-young-graph",
+    "requires": [
+      "the-branching-rule-and-the-young-graph"
+    ],
+    "items": [
+      {
+        "id": "ex-young-graph-through-s4",
+        "kind": "example",
+        "title": "The Young graph through size four",
+        "statement": "The graph at ranks 0 through 4 has the partition vertices and the add-one-box edges; the corresponding restriction and induction decompositions each have edge multiplicity one.",
+        "strategy": "List ranks: empty; (1); (2),(1,1); (3),(2,1),(1,1,1); (4),(3,1),(2,2),(2,1,1),(1,1,1,1). Draw each edge by the published addable-node criterion, then read both branching rules along the same edges, checking the two incoming edges at (2,1) and the expected dimensions.",
+        "deps": [
+          "def-young-graph",
+          "cor-complex-specht-restriction-branching-rule",
+          "thm-complex-specht-induction-branching-rule"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups, Theorem 4.16, printed pp. 18-19, and Theorem 6.8, printed p. 26",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-youngs-rule-for-m-two-one",
+        "kind": "example",
+        "title": "Young\u2019s rule for M^(2,1)",
+        "statement": "For S_3, M^(2,1) is S^(3) direct sum S^(2,1); its nonzero Kostka numbers K_((3),(2,1)) and K_((2,1),(2,1)) are both one.",
+        "strategy": "Enumerate the semistandard fillings of each shape of three boxes with two 1s and one 2: 112 in one row and 11/2 in shape (2,1), with no column filling. Apply Young\u2019s rule and verify 1+2=3 against the three (2,1)-tabloids using the published standard Specht basis.",
+        "deps": [
+          "thm-youngs-rule-for-permutation-modules",
+          "def-semistandard-tableau-and-kostka-number",
+          "thm-standard-polytabloid-basis"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            },
+            {
+              "title": "Andrew Snowden, MATH 711 Representation Theory of Symmetric Groups, Lemmas 2.45-2.46 and Section 3.2, PDF pp. 23-24 and 36-39",
+              "url": "https://people.maths.ox.ac.uk/horawa/math_711.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-schur-weyl-for-two-tensor-factors",
+        "kind": "example",
+        "title": "Symmetric and alternating squares in two tensor factors",
+        "statement": "For finite-dimensional complex V, V tensor V is Sym^2(V) direct sum exterior^2(V), corresponding to Specht shapes (2) and (1,1); the alternating factor vanishes when dim V<2.",
+        "strategy": "Use the two idempotents (1+(12))/2 and (1-(12))/2 and the left place action. Identify their images as symmetric and alternating tensors, compare to the two Specht dimensions, and check the d=0,1 cutoffs.",
+        "deps": [
+          "thm-schur-weyl-decomposition-with-length-cutoff",
+          "def-commuting-symmetric-and-linear-actions-on-tensor-power"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pavel Etingof et al., Introduction to Representation Theory, MIT 18.712 Chapter 4, Sections 4.18-4.21, PDF pp. 18-21",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
+            },
+            {
+              "title": "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74",
+              "url": "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-schur-weyl-for-c2-tensor-three",
+        "kind": "example",
+        "title": "Schur\u2013Weyl decomposition of (C^2)^tensor3",
+        "statement": "(C^2)^tensor3 is S^(3) tensor Sym^3(C^2) direct sum S^(2,1) tensor M_(2,1), where M_(2,1) has dimension two and highest weight (2,1); shape (1,1,1) is absent.",
+        "strategy": "The length cutoff excludes (1,1,1). The symmetric cube has basis x^3,x^2y,xy^2,y^3 and dimension four. The standard tableaux counts are f^(3)=1 and f^(2,1)=2, so 8=1*4+2*2 gives the second multiplicity dimension. The highest weight lemma identifies (2,1); explicitly M_(2,1) is determinant tensor C^2 if desired.",
+        "deps": [
+          "thm-schur-weyl-decomposition-with-length-cutoff",
+          "lem-schur-weyl-polytabloid-highest-weight",
+          "thm-standard-polytabloid-basis"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pavel Etingof et al., Introduction to Representation Theory, MIT 18.712 Chapter 4, Sections 4.18-4.21, PDF pp. 18-21",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
+            },
+            {
+              "title": "Hsueh-Yung Lin, Modern Algebra I, Section 27, printed pp. 71-74",
+              "url": "https://homepage.ntu.edu.tw/~hsuehyunglin/Modern_Algebra_I.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-branching-filtration-need-not-split-in-modular-characteristic",
+        "kind": "counterexample",
+        "title": "A nonsplit modular Specht branching filtration",
+        "statement": "Over F_2, the restriction of S_F2^(2,1) from S_3 to S_2 is a nonsplit extension of the two one-dimensional Specht factors S_F2^(2) and S_F2^(1,1), both trivial for S_2.",
+        "strategy": "Write M_F2^(2,1) with tabloid basis v_1,v_2,v_3 indexed by the singleton row, and S_F2^(2,1)=span(v_1+v_2,v_1+v_3), the two-dimensional augmentation plane. The transposition (12) swaps v_1,v_2 and acts nontrivially unipotently on this plane; its fixed space is one-dimensional. Both one-dimensional factors of the branching filtration are trivial because sign equals trivial in F_2. A direct sum of two trivial factors would have a two-dimensional fixed space, contradiction.",
+        "deps": [
+          "def-polytabloid-specht-module-over-an-arbitrary-field",
+          "thm-specht-restriction-branching-filtration",
+          "def-young-subgroup-tabloid-and-permutation-module"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Wildon, Representation Theory of the Symmetric Group, Section 6, printed pp. 26-33",
+              "url": "https://www.ma.rhul.ac.uk/~uvah099/Maths/Sym/SymGroup2014.pdf"
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory, Sections 2.2 and 2.4, printed pp. 22-23 and 28-31",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      }
+    ]
+  }
+]

@@ -1,0 +1,904 @@
+[
+  {
+    "order": 458.021,
+    "id": "smooth-approximation-and-sobolev-extension",
+    "kind": "A",
+    "category": "pde",
+    "title": "Smooth Approximation and Sobolev Extension",
+    "companion": "smooth-approximation-and-sobolev-extension-examples",
+    "requires": [
+      "weak-derivatives-and-sobolev-spaces",
+      "euclidean-surface-measure-divergence-and-green-identities"
+    ],
+    "items": [
+      {
+        "id": "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+        "kind": "lemma",
+        "title": "Interior mollification commutes with weak derivatives",
+        "statement": "Assume Countable Choice. For an open Ω⊂R^n, u∈W^{k,p}(Ω;K), k≥0 and 1≤p≤∞, let ρ be a nonnegative unit-mass C∞ bump supported in the closed unit ball and Ω_ε={x∈Ω:dist(x,R^n\\Ω)>ε} (Ω_ε=R^n if Ω=R^n). On Ω_ε, ρ_ε*u is smooth and D^α(ρ_ε*u)=ρ_ε*(D^αu) for every |α|≤k, as pointwise smooth functions and a.e. classes.",
+        "strategy": "For each x∈Ω_ε, y↦ρ_ε(x−y) is a compactly supported test in Ω. Localize u near x to a compactly supported whole-space L¹ function, so the published mollifier theorem differentiates under the integral. Replace D_x^αρ_ε(x−y) by (−1)^|α|D_y^αρ_ε(x−y), apply the weak test identity to u, and cancel signs. The resulting integral is continuous in x and gives the unique weak derivative class; null-set changes do not alter it. The localization also handles Ω=R^n and boundary-free x.",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "lem-weak-derivative-is-independent-of-lp-representatives",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-chain-rule-for-total-derivatives",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Theorem 1.19(1) and Remark 1.20",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 §1.4, Theorem 1.19 and Remark 1.20, printed pp. 17–19"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), Proposition 3.7",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 §3.4, Proposition 3.7, printed pp. 57–58"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-local-smooth-approximation-in-wkp",
+        "kind": "theorem",
+        "title": "Local smooth approximation in integer-order Sobolev spaces",
+        "statement": "Assume Countable Choice. If u∈W^{k,p}(Ω;K), k≥0 and 1≤p<∞, its interior mollifications u_ε converge to u in W^{k,p}(U) for every U⊂⊂Ω. Equivalently u_ε→u in W^{k,p}_{loc}(Ω); the assertion includes p=1 but makes no W^{k,∞} norm-density claim.",
+        "strategy": "Choose χ∈C_c∞(Ω) equal to one on a fixed neighborhood of the compact closure of U. For ε smaller than that collar, each D^αu_ε on U is the convolution of the zero-extended χD^αu, by the preceding lemma. The published real or complex approximate-identity interface converges to each χD^αu in whole-space Lp for finite p. Restrict to U and sum the finitely many derivative norms. Choose a nested U to cover all compact tests and preserve the a.e.-class convention.",
+        "deps": [
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "lem-complex-translation-and-approximate-identity-interfaces",
+          "def-integral-over-a-measurable-set",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Lemma 1.18 and Theorem 1.19(2)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 §1.4, Lemma 1.18 and Theorem 1.19, printed pp. 14–19"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), Proposition 3.7",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 §3.4, Proposition 3.7, printed pp. 57–58"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+        "kind": "theorem",
+        "title": "Meyers–Serrin density on an arbitrary open set",
+        "statement": "Assume Countable Choice. For every open Ω⊂R^n, k≥0, 1≤p<∞ and K∈{R,C}, C∞(Ω;K)∩W^{k,p}(Ω;K) is dense in W^{k,p}(Ω;K), with no boundary regularity assumption.",
+        "strategy": "Exhaust Ω by compact K_j with K_j⊂int K_{j+1}. Choose smooth 0≤ψ_j≤1 equal to one near K_j and supported in int K_{j+1}, and set χ_j=1−∏_{i≤j}(1−ψ_i). Then χ_j are nondecreasing, equal to one near K_j and supported in int K_{j+1}; η_1=χ_1 and η_j=χ_j−χ_{j−1} form a nonnegative locally finite partition of one, with each η_j u compactly supported in a shell. Use local W^{k,p} smoothing on a compact neighborhood of each shell, selecting a dyadic radius small enough to keep its convolution in a slightly larger compact shell and make the global W^{k,p} error e_j=ρ_{ε_j}*(η_j u)−η_j u smaller than δ2^{−j−1}. Let v be the locally finite sum of the mollified pieces. It is C∞ and v−u is the locally finite sum of the errors e_j. Local finiteness identifies each D^α(v−u) with Σ_j D^αe_j. Apply Fatou to the finite sum of |D^α(v−u)|^p over |α|≤k, then the triangle inequality to the W^{k,p} norms of the partial error sums, obtaining ∥v−u∥_{W^{k,p}}≤Σ_j∥e_j∥_{W^{k,p}}<δ. Empty Ω is trivial. Countable Choice covers the published weak and Lp interfaces; the cutoffs and dyadic radii may be selected by least-index rules.",
+        "deps": [
+          "thm-local-smooth-approximation-in-wkp",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "lem-sobolev-norm-is-well-defined-and-definite",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-fatou-lemma",
+          "lem-weak-derivative-linearity-locality-and-commutation",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Theorem 1.21 and Remark 1.22",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 §1.5, Theorem 1.21 and Remark 1.22, printed pp. 19–21"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), Theorems 3.8–3.9",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 §3.4, Theorems 3.8–3.9, printed pp. 58–59"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+        "kind": "corollary",
+        "title": "Compactly supported smooth functions are dense in W^{k,p}(R^n)",
+        "statement": "Assume Countable Choice. For k≥0 and 1≤p<∞, C_c∞(R^n;K) is dense in W^{k,p}(R^n;K). No such norm-density assertion is made for p=∞.",
+        "strategy": "Take a fixed smooth χ equal to one on B_1 and zero outside B_2; χ_R(x)=χ(x/R). The Leibniz rule shows χ_Ru→u in W^{k,p}: dominated convergence sends the β=0 Lp tails to zero, and every β≠0 term is bounded by C_βR^{−|β|}∥D^{α−β}u∥p. For a chosen R, mollify χ_Ru with a radius smaller than its support margin. The published real or complex approximate-identity interface converges for each weak derivative and makes a C_c∞ function within the remaining error. The preceding Meyers–Serrin theorem guarantees smooth finite-p approximation; this cutoff-mollifier construction ensures compact support.",
+        "deps": [
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "lem-complex-translation-and-approximate-identity-interfaces",
+          "thm-dominated-convergence",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Theorem 1.21 and Remark 1.22(1)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 §1.5, Theorem 1.21 and Remark 1.22, printed pp. 19–21"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), Theorem 3.9",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 §3.4, Theorem 3.9, printed pp. 58–59"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "rem-meyers-serrin-does-not-assert-density-for-p-infinity",
+        "kind": "remark",
+        "title": "Meyers–Serrin excludes the W^{k,∞} norm endpoint",
+        "statement": "The local mollification and Meyers–Serrin norm-density theorems require finite p. In W^{1,∞}(−1,1), u(x)=|x| has weak derivative sign(x), and no smooth sequence converges to u in W^{1,∞} norm; local convergence in every finite W^{1,q} does not imply this endpoint norm convergence.",
+        "strategy": "Use the published absolute-value weak derivative. If a continuous derivative g approximated sign in essential supremum below one, continuity across zero would force g to be simultaneously near −1 on the left and +1 on the right, impossible. This gives a concrete failed endpoint while leaving finite-p local convergence intact.",
+        "deps": [
+          "cor-positive-negative-part-and-truncation-calculus-in-w-one-p",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "thm-local-smooth-approximation-in-wkp",
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-wkp-zero-as-a-sobolev-closure",
+        "kind": "definition",
+        "title": "Zero-boundary Sobolev space as a norm closure",
+        "statement": "Assume Countable Choice. For any open Ω⊂R^n, k≥0 and 1≤p≤∞, define W_0^{k,p}(Ω;K)=closure of C_c∞(Ω;K) in the W^{k,p}(Ω;K) norm. Set H_0^k=W_0^{k,2}. This is a closure of a.e. classes; it asserts no pointwise boundary values or trace characterization.",
+        "strategy": "Use the published well-defined Sobolev quotient norm. Record that a closure member admits norm-approximating test functions under Countable Choice; do not identify this closure with zero trace before the later trace page. The p=∞ closure is defined but is not claimed to contain every compactly supported W^{k,∞} function.",
+        "deps": [
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-sobolev-norm-is-well-defined-and-definite"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-zero-extension-from-w-one-p-zero",
+        "kind": "lemma",
+        "title": "Zero extension of W_0^{1,p} has no boundary derivative",
+        "statement": "Assume Countable Choice. For any open Ω⊂R^n and 1≤p≤∞, extension by zero sends W_0^{1,p}(Ω;K) linearly into W^{1,p}(R^n;K); D_i(E_0u) is the zero extension of D_i u a.e. and every Lp component norm, hence the W^{1,p} norm, is preserved.",
+        "strategy": "Choose test functions u_j→u in W^{1,p}(Ω) from the closure definition. Their zero extensions are C_c∞(R^n) and their derivative components are the zero extensions of D_i u_j. For every global test φ, pass the identity ∫E_0u_j∂_iφ=−∫E_0(D_i u_j)φ to the limit by Hölder on supp φ, including p=1 and p=∞. This identifies the global weak derivative directly, without assuming global Sobolev completeness or any boundary trace. Equality of component norms follows by integrating over Ω; a.e. representatives give the same extension.",
+        "deps": [
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "thm-holder-inequality-for-integrals",
+          "lem-weak-derivative-is-independent-of-lp-representatives",
+          "lem-weak-derivatives-are-unique-almost-everywhere",
+          "def-integral-over-a-measurable-set",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Theorem 1.25",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 §1.6, Theorem 1.25 and its proof, printed pp. 22–23"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), Theorem 3.12",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 §3.6, proof of Theorem 3.12, printed pp. 60–62"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-compact-support-zero-extension-in-wkp",
+        "kind": "lemma",
+        "title": "Compactly supported Sobolev functions extend by zero in every integer order",
+        "statement": "Assume Countable Choice. If Ω⊂R^n is open, k≥0, 1≤p≤∞, and u∈W^{k,p}(Ω;K) vanishes a.e. outside a compact K_0⊂Ω, then its zero extension E_0u belongs to W^{k,p}(R^n;K), with D^α(E_0u)=E_0(D^αu) for every |α|≤k and ∥E_0u∥_{W^{k,p}(R^n)}=∥u∥_{W^{k,p}(Ω)}.",
+        "strategy": "Choose χ∈C_c∞(Ω) equal to one on a neighborhood of K_0. Weak locality makes every D^αu vanish a.e. on Ω outside K_0. For any global test φ, χφ is a test on Ω, and uD^αφ=uD^α(χφ) a.e. because χ is locally constant near K_0. Apply the Ω weak identity, then replace χD^αu by D^αu using its support. This is exactly the global weak identity for the two zero extensions, for each |α|≤k. Equality of finite-p component integrals and of essential suprema is immediate from zero off Ω. The argument also covers k=0 and complex scalars componentwise.",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "lem-weak-derivative-linearity-locality-and-commutation",
+          "lem-weak-derivatives-are-unique-almost-everywhere",
+          "lem-weak-derivative-is-independent-of-lp-representatives",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-integral-over-a-measurable-set",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Lemma 1.14(4)–(5)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 §1.3, Lemma 1.14 and its proof, printed pp. 9–11"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014), §3.4",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3, Propositions 3.17–3.18, printed pp. 54–55"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-sobolev-extension-domain-and-extension-operator",
+        "kind": "definition",
+        "title": "Sobolev extension domains and operators",
+        "statement": "Assume Countable Choice. For fixed k≥0 and 1≤p≤∞, an open Ω⊂R^n is a W^{k,p}-extension domain if there is a bounded linear E:W^{k,p}(Ω;K)→W^{k,p}(R^n;K) such that (Eu)|_Ω=u as an a.e. class for every u. The operator and its bound may depend on k,p,Ω; no common operator for all indices is asserted.",
+        "strategy": "Define restriction on a.e. classes using the published Sobolev quotient convention and locality of weak derivatives. State explicitly that pointwise values on ∂Ω do not define the right-inverse property.",
+        "deps": [
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-sobolev-norm-is-well-defined-and-definite",
+          "lem-weak-derivative-linearity-locality-and-commutation",
+          "lem-weak-derivatives-are-unique-almost-everywhere"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-wkp-extension-from-a-half-space",
+        "kind": "theorem",
+        "title": "Integer-order Sobolev extension from a half-space",
+        "statement": "For n≥1, finite k≥0 and 1≤p≤∞, an explicit finite-reflection operator extends W^{k,p} from a half-space to Rⁿ with a bounded norm.",
+        "strategy": "The nodes −1,…,−k are distinct, so the finite Vandermonde system is invertible. Affine change of variables gives each negative-side mixed derivative D_{x′}^β∂_t^m Eu=Σ_j a_j(−j)^m(D_{x′}^β∂_t^m u)(x′,−jt) and an Lp bound, including p=∞. For each |β|+m≤k−1, the one-dimensional normal sections of D_{x′}^β∂_t^m u have AC representatives up to t=0 on almost every x′ line; for p=∞ first use the finite-measure W^{1,1} restriction. The moment equations match their traces across t=0. Integrate by parts on the two half-lines and cancel the boundary terms; the completed-product identification and Fubini identify all global weak derivatives through order k when n≥2, while n=1 uses the one-dimensional AC theorem directly. k=0 requires only Lp reflection. This direct argument does not infer p=∞ norm density.",
+        "deps": [
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-acl-characterisation-of-w-one-p",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-holder-inequality-for-integrals",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "lem-weak-derivative-linearity-locality-and-commutation",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Example 2.39",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 2, Example 2.39 and its proof, printed p. 59"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A (2024), §11.3",
+              "url": "https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§11.3, Proposition 11.13 and Remark 11.14, printed pp. 157–159"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), Theorem 3.12 and Corollary 3.13",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 §3.6, Theorem 3.12 and Corollary 3.13, printed pp. 60–62"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-bounded-c-k-domain-and-boundary-charts",
+        "kind": "definition",
+        "title": "Bounded C^k domains and flattened boundary charts",
+        "statement": "A bounded C^k domain has locally one-sided C^k graph charts with a flattening map from physical coordinates to a half-space; dimension one permits finite unions of intervals.",
+        "strategy": "Extend the published bounded C^1 graph convention to fixed integer k. State the local graph and chart formulas explicitly; on a compactly shrunk patch, continuity of the finitely many chart derivatives supplies finite bounds and the Jacobian determinant is one for this graph flattening. This definition does not assert an extension theorem.",
+        "deps": [
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), Definition 3.10",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 \"Boundary traces\" §3.5, Definition 3.10, printed pp. 58–59"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A (2024), Remark 11.14",
+              "url": "https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§11.3, Proposition 11.13 and Remark 11.14, printed pp. 157–159"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-c-k-boundary-flattening-preserves-wkp-locally",
+        "kind": "lemma",
+        "title": "C^k boundary flattening preserves local W^{k,p}",
+        "statement": "Assume Countable Choice. For k≥1, 1≤p≤∞, and a C^k bi-Lipschitz boundary chart Φ:U→V with inverse and derivatives through order k bounded on the compact local patches used, composition u↦u∘Φ^{-1} and its inverse are bounded between the corresponding local W^{k,p} spaces. For k=1, bounded C^1 chart and inverse data suffice; no C^1-only claim is made for k>1.",
+        "strategy": "For smooth u use the ordinary chain rule repeatedly: each derivative D^α(u∘Φ^{-1}) is a finite sum of (D^βu)∘Φ^{-1} times bounded products of chart derivatives, with 1≤|β|≤|α|. The published C^1 change-of-variables formula and Jacobian bounds give Lp estimates; bi-Lipschitz maps carry null sets to null sets, so compositions are a.e.-class well defined. For finite p, localize and apply preceding local Wkp smoothing, then pass derivative identities in local Lp. For p=∞, finite measure of bounded chart patches and Hölder put every derivative in local finite Lq. Use the same approximation in finite q, retain uniform L∞ bounds of mollified derivatives, pass in Lq, and identify the resulting weak derivatives and L∞ bounds. Apply the argument to Φ^{-1} for the reverse inequality.",
+        "deps": [
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-holder-inequality-for-integrals",
+          "lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets",
+          "lem-weak-stability-of-sobolev-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A (2024), §11.3",
+              "url": "https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§11.3, Proposition 11.13 and Remark 11.14, printed pp. 157–159"
+            },
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), proof of Theorem 1.25",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 §1.6, printed pp. 22–23"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-extension-theorem-for-bounded-smooth-domains",
+        "kind": "theorem",
+        "title": "Bounded C^k domains admit integer-order Sobolev extension",
+        "statement": "Assume the Axiom of Choice. Let k≥1, 1≤p≤∞, and Ω⊂R^n be a bounded C^k domain in the stated graph sense. For every open V containing the compact closure of Ω, there is a bounded linear E:W^{k,p}(Ω;K)→W^{k,p}(R^n;K) with Eu=u a.e. on Ω and supp(Eu) compact in V. For k=0, zero extension gives the corresponding Lp result on any open Ω.",
+        "strategy": "Use compactness of ∂Ω to select finitely many shrunk C^k graph patches whose closures lie in V, plus one interior cutoff. Construct a finite smooth partition summing to one near the closure of Ω. Multiply u by each cutoff using the published Leibniz estimate. Zero-extend the compactly supported interior piece by the local zero-extension lemma; for each boundary piece flatten by its chart, apply the half-space extension of the same k,p, pull back, and multiply by an outer cutoff supported in that patch, then use the same zero-extension lemma on this localized piece. The chart lemma bounds pullback and pushforward, reflection gives a uniform local bound, and finite overlap gives ∥Eu∥≤C∥u∥. On Ω the partition sum is u a.e.; outside Ω every piece has compact support in V. All maps are linear on a.e. classes. For p=∞ use the direct half-space and chart arguments. AC is invoked through the published bounded cutoff/restriction interface.",
+        "deps": [
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "thm-wkp-extension-from-a-half-space",
+          "lem-c-k-boundary-flattening-preserves-wkp-locally",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces",
+          "lem-compact-support-zero-extension-in-wkp",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A (2024), §11.3",
+              "url": "https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§11.3, Proposition 11.13 and Remark 11.14, printed pp. 157–159"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), Theorem 3.12 and Corollary 3.13",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 §3.6, printed pp. 60–62"
+            },
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Definition 3.42 and Theorem 3.43",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 §3.6, printed pp. 84–85"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-smooth-up-to-the-boundary-density-on-smooth-domains",
+        "kind": "theorem",
+        "title": "Ambient smooth restrictions are dense on bounded C^k domains",
+        "statement": "Assume the Axiom of Choice. If Ω is a bounded C^k domain, k≥1 and 1≤p<∞, then restrictions to Ω of C_c∞(R^n;K) functions are dense in W^{k,p}(Ω;K). The result does not assert W^{k,∞} norm density or hold on arbitrary open sets.",
+        "strategy": "Apply the preceding compactly supported extension E to u. Each D^αEu belongs to Lp(R^n), so whole-space mollification commutes with derivatives and converges in every derivative norm by the published approximate-identity theorem. The convolution is C_c∞ because Eu has fixed compact support. Restrict to Ω using the contraction estimate; the resulting restrictions converge to u in W^{k,p}(Ω). The p=∞ endpoint is excluded because the whole-space approximate identity does not converge in L∞ norm.",
+        "deps": [
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "lem-complex-translation-and-approximate-identity-interfaces",
+          "lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Theorem 1.21 and Theorem 3.43",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 §1.5, Theorem 1.21, printed p. 19, and Chapter 3 §3.6, printed pp. 84–85"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), Theorem 3.9 and §3.6",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Theorems 3.8–3.9 and §3.6, printed pp. 57–62"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A (2024), §11.3",
+              "url": "https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§11.3, Proposition 11.13, printed pp. 157–159"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-sobolev-embeddings-transfer-from-rn-to-extension-domains",
+        "kind": "corollary",
+        "title": "Whole-space inequalities transfer through a Sobolev extension",
+        "statement": "Assume the Axiom of Choice. If E is a bounded W^{k,p}(Ω)→W^{k,p}(R^n) extension and a whole-space norm N satisfies N(F|_Ω)≤N(F) and N(F)≤C∥F∥_{W^{k,p}(R^n)}, then N(u)≤C∥E∥∥u∥_{W^{k,p}(Ω)}. In particular any valid whole-space L^q Sobolev inequality transfers to a W^{k,p} extension domain with its extension constant; no future embedding theorem is asserted here.",
+        "strategy": "For u choose F=Eu. The right-inverse property identifies F|_Ω with u as an a.e. class. Apply restriction monotonicity, the assumed whole-space estimate, and boundedness of E in that order. For Lq norms, monotonicity is immediate from integration over Ω (or essential-supremum restriction). The claim is conditional on an independently proved whole-space inequality and never cites later PDE-14 as a supplier.",
+        "deps": [
+          "def-sobolev-extension-domain-and-extension-operator",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Theorem 3.43",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 §3.6, Definition 3.42 and Theorem 3.43, printed pp. 84–85"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A (2024), §11.3",
+              "url": "https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§11.3, Proposition 11.13, printed pp. 157–159"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "rem-lipschitz-versus-c-one-versus-smooth-domain-hypotheses",
+        "kind": "remark",
+        "title": "Boundary regularity required by the constructed extension",
+        "statement": "Meyers–Serrin needs only Ω open and finite p; zero extension from W_0^{1,p} needs no boundary regularity. The constructed first-order extension works on bounded C^1 graph domains, while the displayed k-th order chart/reflection construction assumes bounded C^k graph domains and fixed k≥1. Local mollification stays away from ∂Ω, and p=∞ norm density is excluded. Stronger Lipschitz or universal all-order extensions are separate theorems, not consequences of this C^k-chart proof.",
+        "strategy": "Record the exact hypotheses of the preceding results and why a C^1 chart supplies bounded first derivatives but does not supply bounded derivatives through arbitrary k. Laugesen supports k=1 C^1; Oh uses C^k charts and mentions Stein’s stronger theorem without proving it locally. Keep the C^k route as the proven claim and avoid a hidden Lipschitz upgrade.",
+        "deps": [
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-c-k-boundary-flattening-preserves-wkp-locally",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "lem-zero-extension-from-w-one-p-zero",
+          "rem-meyers-serrin-does-not-assert-density-for-p-infinity",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+          "thm-smooth-up-to-the-boundary-density-on-smooth-domains"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026)",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A (2024)",
+              "url": "https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 458.022,
+    "id": "smooth-approximation-and-sobolev-extension-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Smooth Approximation and Sobolev Extension — Examples",
+    "companion": "smooth-approximation-and-sobolev-extension",
+    "requires": [
+      "smooth-approximation-and-sobolev-extension"
+    ],
+    "items": [
+      {
+        "id": "ex-mollification-of-the-absolute-value",
+        "kind": "example",
+        "title": "Mollifying the absolute-value corner",
+        "statement": "For u(x)=|x| on R and a nonnegative even unit-mass mollifier ρ, u_ε=ρ_ε*u is smooth and u_ε→u in W^{1,p}(I) for every bounded interval I and 1≤p<∞; u_ε′=ρ_ε*sign. Convergence fails in W^{1,∞} on any interval crossing zero.",
+        "strategy": "Use the published weak derivative of |x| and interior commutation. On bounded I, local approximate identity convergence applies to |x| and sign for every finite p. At zero, an even mollifier gives u_ε′(0)=0; continuity of u_ε′ and the one-sided sign values force L∞ derivative error at least one.",
+        "deps": [
+          "thm-local-smooth-approximation-in-wkp",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "rem-meyers-serrin-does-not-assert-density-for-p-infinity",
+          "cor-positive-negative-part-and-truncation-calculus-in-w-one-p",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Lemma 1.14 and Lemma 1.18",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 §1.3–§1.4, printed pp. 10–16"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), Proposition 3.7",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 §3.4, Proposition 3.7, printed pp. 57–58"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-zero-extension-of-a-compactly-supported-sobolev-function",
+        "kind": "example",
+        "title": "Compactly supported Sobolev functions extend by zero without a jump",
+        "statement": "Assume Countable Choice. If u∈W^{1,p}(Ω;K), 1≤p≤∞, vanishes a.e. outside a compact K⊂Ω, then its zero extension belongs to W^{1,p}(R^n), with derivative components equal to zero extensions of D_i u and equal component norms. This does not claim u∈W_0^{1,∞}(Ω).",
+        "strategy": "Apply the preceding compact-support zero-extension lemma with k=1. Its cutoff test argument identifies each global weak derivative and proves the exact component norms, including p=∞. Compact support alone does not assert W_0^{1,∞} membership.",
+        "deps": [
+          "lem-compact-support-zero-extension-in-wkp",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Lemma 1.14(4)–(5) and Theorem 1.25",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 §1.3 and §1.6, printed pp. 9–11 and 22–23"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014), §3.4",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3, Propositions 3.17–3.18, printed pp. 54–55"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "cex-zero-extension-of-a-nonzero-boundary-function-creates-a-jump",
+        "kind": "counterexample",
+        "title": "A nonzero boundary value creates a zero-extension jump",
+        "statement": "On Ω=(0,1), u≡1 belongs to W^{1,p}(Ω) for every 1≤p≤∞, but its zero extension χ_(0,1) has distributional derivative δ_0−δ_1 and does not belong to W^{1,p}(R) for any p. Thus unrestricted zero extension is not a Sobolev extension operator.",
+        "strategy": "Test χ_(0,1) against φ′ to get ∫_0^1φ′=φ(1)−φ(0), hence distribution derivative δ_0−δ_1. A Dirac mass is not represented by an L¹_loc function: test with unit-height bumps shrinking to an endpoint, whose L¹_loc pairing tends to zero but whose Dirac pairing remains one. The constant has zero weak derivative on (0,1).",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-dirac-delta-and-its-derivatives",
+          "rem-weak-derivatives-are-distributional-derivatives-with-function-values",
+          "lem-complex-integration-by-parts-on-intervals-and-decaying-lines",
+          "thm-dominated-convergence",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-sobolev-extension-domain-and-extension-operator"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Theorem 1.25 and Example 1.7",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 §1.1 and §1.6, Example 1.7, printed pp. 2–3, and Theorem 1.25, printed pp. 22–23"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), §3.6",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 §3.6 \"Extending past the boundary\", printed pp. 60–62"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014), Example 3.4",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3 §3.2, Example 3.4, printed pp. 48–49"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "cex-c-infinity-up-to-boundary-density-is-domain-sensitive",
+        "kind": "counterexample",
+        "title": "Ambient-smooth density fails on a slit disc",
+        "statement": "Assume the Axiom of Choice. Let Ω=B(0,1)\\{(x,0):0≤x<1}⊂R² and 1≤p<2. The branch u(x,y)=arg(x+iy)∈(0,2π) belongs to W^{1,p}(Ω), but no sequence of restrictions of globally smooth functions can converge to u in W^{1,p}(Ω). Hence the smooth-up-to-boundary density conclusion for bounded C^k domains cannot be extended to arbitrary open sets.",
+        "strategy": "The branch is smooth on Ω, bounded, and |∇u|=1/r; polar integration gives ∫_0^1r^{1−p}dr<∞. Fix a rectangle crossing a positive segment of the slit and split it into upper/lower half-rectangles. The one-dimensional endpoint estimate |v(0)|≤C∥v∥_{W^{1,p}(0,a)} on almost every vertical section yields bounded trace maps from both sides to Lp of the slit. The upper trace of u is zero and lower trace is 2π. Every ambient smooth approximant has equal two-sided traces; convergence in W^{1,p} would force these unequal limits to be equal, contradiction.",
+        "deps": [
+          "thm-smooth-up-to-the-boundary-density-on-smooth-domains",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "thm-holder-inequality-for-integrals",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "def-integral-over-a-measurable-set",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        },
+        "dependency_level": 6,
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Lemma 1.14 and §1.5",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 §1.3–§1.5, printed pp. 10–20"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), §3.6",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 §3.6, printed pp. 60–62"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-not-every-open-set-is-a-w-one-p-extension-domain",
+        "kind": "counterexample",
+        "title": "An inward cusp blocks W^{1,3/2} extension",
+        "statement": "Assume the Axiom of Choice. In R² let C={(x,y):x≥0 and |y|≤x²} and Ω=B(0,1)\\C. Then Ω is a bounded connected open inward-cusp domain and u=arg(x+iy)/(2π), with branch 0<arg<2π on Ω, lies in W^{1,3/2}(Ω) but has no W^{1,3/2}(R²) extension. Therefore Ω is not a W^{1,3/2}-extension domain.",
+        "strategy": "The removed closed cusp contains the positive axis, so the branch is smooth on Ω. It is bounded and |∇u|=1/(2πr); polar integration gives ∫_0^1r^{1−3/2}dr<∞. Suppose U extends it. ACL/Fubini gives an absolutely continuous representative on almost every vertical line x∈(0,δ). On that line U agrees with u above y=x² and below y=−x²; continuity fixes the two gap endpoint values, whose difference tends to one and stays ≥1/2 for small x. Hölder on the gap gives ∫_{−x²}^{x²}|∂_yU|^{3/2}dy≥(1/2)^{3/2}(2x²)^{−1/2}=c/x. Integrating x to zero diverges, contradicting U∈W^{1,3/2}(R²). This excludes even a nonlinear individual extension.",
+        "deps": [
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-acl-characterisation-of-w-one-p",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "thm-holder-inequality-for-integrals",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Definition 3.42 and Theorem 1.25",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 3 §3.6, Definition 3.42, printed p. 84, and Chapter 1 §1.6, Theorem 1.25, printed pp. 22–23"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), Theorem 3.12",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 §3.6, Theorem 3.12, printed pp. 60–62"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-reflection-extension-on-the-half-line",
+        "kind": "example",
+        "title": "Even reflection on the half-line",
+        "statement": "Assume the Axiom of Choice. For u∈W^{1,p}(0,∞), 1≤p≤∞, define Eu(x)=u(|x|) a.e. Then Eu∈W^{1,p}(R), (Eu)′(x)=u′(x) for x>0 and −u′(−x) for x<0, and ∥Eu∥_{W^{1,p}(R)}=2^{1/p}∥u∥_{W^{1,p}(0,∞)} for finite p while ∥Eu∥_{W^{1,∞}(R)}=∥u∥_{W^{1,∞}(0,∞)}.",
+        "strategy": "Take k=1 in the half-space moment system; its sole coefficient is a_1=1. The AC normal representative matches its value at zero, so no Dirac term appears. Change variables x↦−x on the negative half-line for every derivative component. The finite-p sum norm doubles in its p-th power, giving 2^{1/p}; the p=∞ maximum is unchanged. Explicitly correct the source’s printed factor two for p>1.",
+        "deps": [
+          "thm-wkp-extension-from-a-half-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Example 2.39",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 2, Example 2.39, printed p. 59"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), Corollary 3.13",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 §3.6, Corollary 3.13, printed p. 62"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-mollification-after-zero-extension-does-not-preserve-boundary-values",
+        "kind": "counterexample",
+        "title": "Mollifying a zero extension leaks across the boundary",
+        "statement": "Assume the Axiom of Choice. Let u≡1 on (0,1), let χ_(0,1) be its zero extension and let ρ_ε be a nonnegative even unit-mass mollifier with ε<1/2. The restriction v_ε=(ρ_ε*χ_(0,1))|_(0,1) is smooth but has endpoint limits v_ε(0+)=v_ε(1−)=1/2; hence v_ε∉W_0^{1,p}(0,1) for every 1≤p≤∞. Smoothing after zero extension does not impose zero Sobolev boundary values.",
+        "strategy": "Symmetry gives v_ε(0)=∫_0^ερ_ε(y)dy=1/2 and similarly at one; convolution smoothness is published. For w∈W^{1,p}(0,1), the AC representative satisfies |w(0)|≤∫_0^1|w|+∫_0^1|w′| by choosing an interior point with small |w| and applying the fundamental theorem. Thus endpoint evaluation is continuous in W^{1,p}; every C_c∞ test has endpoint value zero, so every W_0^{1,p} closure member has zero endpoint values. The positive half value excludes v_ε. The zero extension itself is not W^{1,p}, as the preceding counterexample shows.",
+        "deps": [
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cex-zero-extension-of-a-nonzero-boundary-function-creates-a-jump",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-holder-inequality-for-integrals",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces (2026), Definition 1.23 and Theorem 1.25",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf",
+              "locator": "Chapter 1 §1.6, Definition 1.23 and Theorem 1.25, printed pp. 21–23"
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (2020), Definition 3.11 and §3.6",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3 §3.5–3.6, printed pp. 59–62"
+            }
+          ]
+        },
+        "dependency_level": 2
+      }
+    ]
+  }
+]

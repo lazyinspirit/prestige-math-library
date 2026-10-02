@@ -42,15 +42,17 @@ import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { sectionText } from './facts-block.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { includesItem, parseItemScope, unknownItems } from './item-scope.mjs';
 import { recordedPublishedRepair } from './published-repair-policy.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
-const asJson = process.argv.includes('--json');
-const quiet = process.argv.includes('--quiet');
+const itemScope = parseItemScope(process.argv.slice(2));
+const asJson = itemScope.args.includes('--json');
+const quiet = itemScope.args.includes('--quiet');
 // Legacy bounded pre-certification mode. It cannot excuse an invalid recorded
 // repair. Current published repairs use hash-bound local evidence under
 // CLAUDE §8; this does not certify an initial publication or a whole proof.
-const pendingAuditOk = process.argv.includes('--pending-audit-ok');
+const pendingAuditOk = itemScope.args.includes('--pending-audit-ok');
 
 const PREFIX_OF_KIND = {
   definition: 'def', theorem: 'thm', lemma: 'lem', proposition: 'prop',
@@ -120,7 +122,6 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
   const file = `items/${f}`;
   const src = readFileSync(join(REPO, file), 'utf8');
   const { fm, body } = split(src);
-  badEscapes(fm, file);
   const id = scalar(fm, 'id');
   const kind = scalar(fm, 'kind');
   const authorship = scalar(fm, 'authorship');
@@ -128,22 +129,24 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
   const provenanceProof = nested(fm, 'provenance', 'proof');
   const provenancePresent = /^provenance:[ \t]*(?:#.*)?$/m.test(fm);
   const stem = basename(f, '.md');
+  const selectedFile = includesItem(itemScope, id ?? stem);
+  if (selectedFile) badEscapes(fm, file);
 
-  if (!id) { err('id-filename', `${file}: no id in frontmatter`); continue; }
-  if (id !== stem) err('id-filename', `${file}: id "${id}" != filename "${stem}"`);
+  if (!id) { if (selectedFile) err('id-filename', `${file}: no id in frontmatter`); continue; }
+  if (selectedFile && id !== stem) err('id-filename', `${file}: id "${id}" != filename "${stem}"`);
 
   const want = PREFIX_OF_KIND[kind];
-  if (!want) err('kind-prefix', `${file}: unknown or missing kind "${kind}"`);
-  else if (!id.startsWith(want + '-')) err('kind-prefix', `${file}: kind ${kind} requires prefix "${want}-", got "${id}"`);
-  if (authorship !== undefined && !AUTHORSHIP_VALUES.has(authorship))
+  if (selectedFile && !want) err('kind-prefix', `${file}: unknown or missing kind "${kind}"`);
+  else if (selectedFile && !id.startsWith(want + '-')) err('kind-prefix', `${file}: kind ${kind} requires prefix "${want}-", got "${id}"`);
+  if (selectedFile && authorship !== undefined && !AUTHORSHIP_VALUES.has(authorship))
     err('authorship-invalid', `${file}: authorship must be ai-generated, ai-altered, or literature-derived, got "${authorship}"`);
-  if (authorship !== undefined && !AUTHORSHIP_KINDS.has(kind))
+  if (selectedFile && authorship !== undefined && !AUTHORSHIP_KINDS.has(kind))
     err('authorship-kind', `${file}: authorship is allowed only on a mathematical content item, got kind "${kind}"`);
-  if (provenancePresent && !AUTHORSHIP_VALUES.has(provenanceStatement))
+  if (selectedFile && provenancePresent && !AUTHORSHIP_VALUES.has(provenanceStatement))
     err('provenance-statement-invalid', `${file}: provenance.statement must be ai-generated, ai-altered, or literature-derived`);
-  if (provenancePresent && !PROOF_PROVENANCE_VALUES.has(provenanceProof))
+  if (selectedFile && provenancePresent && !PROOF_PROVENANCE_VALUES.has(provenanceProof))
     err('provenance-proof-invalid', `${file}: provenance.proof must be ai-generated, ai-altered, literature-derived, not-supplied, or not-applicable`);
-  if (provenanceProof === 'not-applicable' && !['definition', 'remark'].includes(kind))
+  if (selectedFile && provenanceProof === 'not-applicable' && !['definition', 'remark'].includes(kind))
     err('provenance-proof-applicability', `${file}: provenance.proof: not-applicable is reserved for definitions and remarks`);
 
   const links = [...body.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)].map((m) => m[1].trim());
@@ -167,6 +170,9 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
   });
   for (const a of list(fm, 'aliases')) aliasTo.set(a, id);
 }
+
+for (const id of unknownItems(itemScope, items.keys()))
+  err('focus-item-unknown', `--items-file names unknown item "${id}"`);
 
 /** Resolve an id through aliases; undefined if unknown. */
 const resolve = (x) => (items.has(x) ? x : aliasTo.get(x));
@@ -221,6 +227,7 @@ try {
 // ---------------------------------------------------------- resolve references
 
 for (const it of items.values()) {
+  if (!includesItem(itemScope, it.id)) continue;
   for (const d of it.deps) {
     if (d === it.id) err('self-dep', `${it.file}: depends on itself`);
     else if (!resolve(d)) err('dep-unresolved', `${it.file}: deps entry "${d}" resolves to nothing`);
@@ -265,6 +272,7 @@ for (const p of pages) {
 }
 
 for (const it of items.values()) {
+  if (!includesItem(itemScope, it.id)) continue;
   // A `proved_here: false` item has no proof, so `audited` (an audit OF A PROOF)
   // is not what verifies it and `judge` is forbidden outright (extcheck
   // `unproved-judged`). Its gate is `verification.sources_checked`: the statement,
@@ -297,6 +305,8 @@ for (const p of pages) {
   for (const source of [...p.items, ...p.examples]) {
     const sourceId = resolve(source);
     if (!sourceId) continue;
+    // This is a repository metadata join, not a per-item proof scan. Keep it
+    // complete in focused mode along with page hygiene and the cycle checks.
     for (const dep of items.get(sourceId).deps) {
       const targetId = resolve(dep);
       const targetHomes = targetId && homesOf.get(targetId);
@@ -326,6 +336,7 @@ for (const p of pages) {
 // and a judge caught one that an earlier version of this check, which read only
 // Facts & Assumptions, structurally could not see.
 for (const it of items.values()) {
+  if (!includesItem(itemScope, it.id)) continue;
   const src = it.body ?? '';
   // The section reader is tools/facts-block.mjs, the one parser for this
   // grammar. It differs from the regex it replaced in one way: the heading is
@@ -467,13 +478,19 @@ const summary = {
   pages: pages.length,
   errors: errors.length,
   warnings: warns.length,
+  ...(itemScope.selected === null ? { scope: 'full' } : {
+    scope: 'focused-items', item_checks: [...itemScope.selected].sort(),
+    global_page_metadata_and_cycle_checks: 'complete',
+  }),
 };
 
 if (asJson) {
   console.log(JSON.stringify({ summary, errors, warns }, null, 2));
 } else {
   if (!quiet) {
-    console.log(`depcheck: ${summary.items} items (${summary.published} published), ${summary.pages} pages`);
+    console.log(itemScope.selected === null
+      ? `depcheck: ${summary.items} items (${summary.published} published), ${summary.pages} pages`
+      : `depcheck: focused item checks for ${summary.item_checks.length} item(s); global page and cycle checks cover ${summary.items} items and ${summary.pages} pages`);
     // topological depth per page, for eyeballing the reading order
     const depth = new Map();
     const deep = (p, seen = new Set()) => {
@@ -497,7 +514,9 @@ if (asJson) {
     for (const e of errors) console.log(`  [${e.code}] ${e.msg}`);
     console.log('\nFAIL');
   } else {
-    console.log('\nOK — no cycles, all references resolve, no draft items on published pages.');
+    console.log(itemScope.selected === null
+      ? '\nOK — no cycles, all references resolve, no draft items on published pages.'
+      : '\nOK — selected item checks passed; complete global page and cycle checks passed.');
   }
 }
 

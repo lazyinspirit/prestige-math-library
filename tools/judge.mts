@@ -275,10 +275,10 @@ const runCodex = (model: string, prompt: string, timeoutMs: number): Promise<Cod
   }
   const args = [
     'exec', '--ephemeral', '--model', model,
-    '-c', `model_reasoning_effort="${effortOverride ?? (model === MODELS.luna.id ? 'max' : 'xhigh')}"`,
+    '-c', `model_reasoning_effort="${effortOverride ?? (model === MODELS.sol61.id ? 'high' : model === MODELS.luna.id ? 'max' : 'xhigh')}"`,
     '-c', 'tools.web_search=true',
     '-c', `model_context_window=${JUDGE_CONTEXT_WINDOW}`,
-    '-c', 'model_auto_compact_token_limit=200000',
+    '-c', 'model_auto_compact_token_limit=500000',
     '-c', 'model_auto_compact_token_limit_scope="total"',
     '--sandbox', 'read-only', '--skip-git-repo-check', '--ignore-rules',
     '--output-schema', join(REPO, 'briefs', 'schemas', 'judge-verdict.json'),

@@ -51,8 +51,7 @@ const { step7Stages } = await import(
 const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
 // A live engine hot-reloads this stage module but retains its first models.mjs
 // import. The new profile name must also resolve in that already-running process.
-const LUNA_MAX = MODEL_PROFILE_NAMES.lunaMax ?? 'gpt-6-luna-max';
-const SOL_MAX = MODEL_PROFILE_NAMES.solMax;
+const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
@@ -629,7 +628,7 @@ const OUTAGE_CLASSIFIERS: Record<string, (ctx: any, startedAt: string) => string
  *                 `fetch-check-...: <page>: <url>` lines, or a bare URL); the
  *                 caller may route the residue to a scouting dispatch.
  *  'unhandled'  — no table entry for any of the failing gates. */
-export const mechanicalRepair = async ({ ctx, failure, excludeGateIds = [], judgeLineup = 'sol', judgeEffort = null }: any): Promise<{ outcome: string; stderr?: string; reason?: string; handledIds?: string[] }> => {
+export const mechanicalRepair = async ({ ctx, failure, excludeGateIds = [], judgeLineup = 'sol61', judgeEffort = 'high' }: any): Promise<{ outcome: string; stderr?: string; reason?: string; handledIds?: string[] }> => {
   const excluded = new Set((excludeGateIds ?? []).map(String));
   const failing = [failure, ...(failure?.advisory ?? [])].filter((f: any) => f?.id);
   const handled = failing.filter((f: any) => !excluded.has(String(f.id)) && MECHANICAL_REPAIRS[f.id]);
@@ -979,7 +978,7 @@ const step8ChangesGate = (ctx) => gate('step8-changes', ['node', 'tools/step8-ch
   '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
   '--out', step8ChangesPath(ctx), '--scope-out', step8ChangesScopePath(ctx), '--check']);
 
-const step8ClosureGate = (ctx) => gate('step8-judge-closure', ['node', 'tools/level-coverage.mjs',
+const step8ClosureGate = (ctx) => gate('step8-judge-closure', ['env', 'JUDGE_LINEUP=sol61', 'node', 'tools/level-coverage.mjs',
   '--judge-only', '--verify-current-context', '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
   '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
   ...auditorCertificationArgs(ctx),
@@ -1187,7 +1186,7 @@ const ledgerGate = (ctx, { terminal = false } = {}) => gate('defect-ledger', ['n
  *            that; an unadjudicated rejection and an open fatal are NOT allowed.
  *   after  — no allowances at all.
  */
-const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, judgeLineup = 'sol', excludePublished = true } = {}) =>
+const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, judgeLineup = 'sol61', excludePublished = true } = {}) =>
   gate('judge-closure', ['env', `JUDGE_LINEUP=${judgeLineup}`, 'node', 'tools/level-coverage.mjs',
     '--judge-only', '--verify-current-context',
     ...(excludePublished ? ['--exclude-published'] : []),
@@ -1204,7 +1203,7 @@ const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, 
   });
 
 /** The whole-level receipt gate. The one frontier-14 never ran. */
-const levelCoverageGate = (ctx) => gate('level-coverage', ['node', 'tools/level-coverage.mjs',
+const levelCoverageGate = (ctx) => gate('level-coverage', ['env', 'JUDGE_LINEUP=sol61', 'node', 'tools/level-coverage.mjs',
   '--exclude-published',
   '--contracts', contractsPath(ctx),
   '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
@@ -1490,7 +1489,7 @@ export const stages = [
     id: '1-scaffold',
     label: 'Beta scaffolding',
     modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'scaffolding'
-      ? SOL_MAX
+      ? DEEPSEEK_FLASH_MAX
       : undefined,
     units: (ctx: any) => batches(ctx),
     unitPrerequisites: (ctx: any, unit: string) => batchDependencies(ctx, unit),
@@ -1620,10 +1619,22 @@ export const stages = [
     pattern: ctx => resultPattern('alpha-high', legacyStep3(ctx)
       ? 'step3b-[a-z]+-[a-f0-9]+' : 'step3b-pair-[a-z0-9-]+-[a-f0-9]+'),
     concurrency: MAX_RUN_BATCHES,
-    plan: (ctx, pending) => legacyStep3(ctx)
-      ? alphaGroups(ctx).filter(g => g.covers.some(b => pending.includes(String(b))))
-        .map(g => step3Plan(ctx, g, 'final'))
-      : pairPlans(ctx, pending, 'final'),
+    plan: (ctx, pending) => {
+      if (ctx.doctor && !legacyStep3(ctx)) {
+        // A restart may occur while Step 1 writers still own empty pair
+        // inventories. Step 3 cannot plan those pairs until scaffolding lands;
+        // the Step 1 gate enforces that boundary before this plan runs live.
+        try { return pairPlans(ctx, pending, 'final'); }
+        catch (error: any) {
+          if (/empty scaffold inventory/.test(String(error?.message ?? error))) return [];
+          throw error;
+        }
+      }
+      return legacyStep3(ctx)
+        ? alphaGroups(ctx).filter(g => g.covers.some(b => pending.includes(String(b))))
+          .map(g => step3Plan(ctx, g, 'final'))
+        : pairPlans(ctx, pending, 'final');
+    },
     gates: ctx => [scopeGate(ctx),
       ...(loadStep3(ctx.repo, ctx.run).pages.some((page: any) =>
         page.items?.some((item: any) => item.dependency_level !== undefined))
@@ -1845,7 +1856,7 @@ export const stages = [
     id: '6-judge',
     label: 'one stateless judge per item, with whole-group readers alongside',
     modelProfile: (plan: any) => plan.role === 'alpha-group-read'
-      ? LUNA_MAX
+      ? SOL61_HIGH
       : undefined,
     // One unit for the sweep, one per group. The stage is done when the ledger
     // is covered AND every group has a digest — which is what makes the reading
@@ -1884,7 +1895,7 @@ export const stages = [
           // argv, so there is nothing to quote and nothing to parse. The engine
           // writes the result record when this exits zero.
           argv: ['node', 'tools/judge-sweep.mjs', '--run', ctx.run,
-            '--lineup', 'sol', '--effort', 'high',
+            '--lineup', 'sol61', '--effort', 'high',
             '--ledger', `research/${ctx.run}-judge.jsonl`,
             '--cost', `research/${ctx.run}-judge-cost.jsonl`,
             '--pages', aPages.join(',')],
@@ -1920,7 +1931,7 @@ export const stages = [
     // list — a careful reading that finds nothing thin is a result, and failing
     // it would teach the lane to manufacture concerns.
     gates: (ctx) => [
-      closureGate(ctx, { allowUnadjudicated: true, judgeLineup: 'sol', excludePublished: false }),
+      closureGate(ctx, { allowUnadjudicated: true, judgeLineup: 'sol61', excludePublished: false }),
       gate('step7-digests', ['node', 'tools/step7-scope.mjs', 'digests', '--run', ctx.run], {
         liveness: { pattern: /(\d+) item\(s\) opened/.source, min: 1, unit: 'items opened while reading' },
       }),
@@ -1974,7 +1985,7 @@ export const stages = [
         return;
       }
       if (args.failure.id !== 'judge-closure') return;
-      const r = await mechanicalRepair({ ctx: args.ctx, failure: { id: 'judge-closure' }, judgeLineup: 'sol', judgeEffort: 'high' });
+      const r = await mechanicalRepair({ ctx: args.ctx, failure: { id: 'judge-closure' }, judgeLineup: 'sol61', judgeEffort: 'high' });
       // A lane down to an account limit is not a failed repair: report the
       // outage and the executor refunds the round and waits on a clock.
       if (r.outcome === 'outage') return { outage: { reason: r.reason! } };
@@ -2107,7 +2118,8 @@ export const stages = [
         timeout: 43200,
         argv: ids.length
           ? ['node', 'tools/judge-sweep.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
-            '--cost', `research/${ctx.run}-judge-cost.jsonl`, '--items', ids.join(',')]
+            '--cost', `research/${ctx.run}-judge-cost.jsonl`, '--items', ids.join(','),
+            '--lineup', 'sol61', '--effort', 'high']
           : ['node', '-e', 'console.log("step8 changes: nothing to judge")'],
       }];
     },
@@ -2126,7 +2138,8 @@ export const stages = [
           executor.start(stage, {
             role: 'tool', label: `step8-changes-rejudge-${round}`, job: 'judgement', covers: [], timeout: 43200,
             argv: ['node', 'tools/judge-sweep.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
-              '--cost', `research/${ctx.run}-judge-cost.jsonl`, '--items', needsJudge.join(',')],
+              '--cost', `research/${ctx.run}-judge-cost.jsonl`, '--items', needsJudge.join(','),
+              '--lineup', 'sol61', '--effort', 'high'],
           });
           return;
         }
@@ -2236,7 +2249,8 @@ export const stages = [
           executor.start(stage, {
             role: 'tool', label: `step8-close-rejudge-${round}`, job: 'judgement', covers: [], timeout: 43200,
             argv: ['node', 'tools/judge-sweep.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
-              '--cost', `research/${ctx.run}-judge-cost.jsonl`, '--items', needsJudge.join(',')],
+              '--cost', `research/${ctx.run}-judge-cost.jsonl`, '--items', needsJudge.join(','),
+              '--lineup', 'sol61', '--effort', 'high'],
           });
           return;
         }
@@ -2640,10 +2654,10 @@ for (const stage of stages) {
       ...(previousGates?.(ctx) ?? [])];
   }
   if (/^(?:8|9)-/.test(stage.id)) {
-    // Step 8 uses Sol max; Step 9 keeps DeepSeek max. The stage boundary also
+    // Step 8 uses Sol 6.1 high; Step 9 keeps DeepSeek max. The stage boundary also
     // covers repair hooks and obligation re-dispatches. Item judges are selected
     // by the separate judge lineup.
-    const profile = stage.id.startsWith('8-') ? SOL_MAX : DEEPSEEK_FLASH_MAX;
+    const profile = stage.id.startsWith('8-') ? SOL61_HIGH : DEEPSEEK_FLASH_MAX;
     stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined : profile;
   }
 }

@@ -5,6 +5,7 @@ title: "The PCP theorem: NP equals PCP(log n, O(1))"
 status: published
 origin: pipeline
 deps:
+  - def-axiom-of-choice
   - thm-gap-csp-is-np-hard
   - lem-two-query-pcps-and-constraint-graphs-are-equivalent
   - def-pcp-class-with-completeness-and-soundness
@@ -15,7 +16,7 @@ deps:
   - lem-rat-embeds-dense
 proof_strategy: direct
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 sources:
   scraped: []
@@ -26,14 +27,12 @@ sources:
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
+  repair: research/frontier-37-owner-30-published-repair-evidence/thm-pcp-theorem-np-equals-pcp-log-n-o-one.repair.json
 ---
 
 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
 
 $\mathrm{NP}=\operatorname{PCP}(\log n,O(1))$ in the shorthand of
 [[def-pcp-class-with-completeness-and-soundness]]: a language
@@ -47,9 +46,9 @@ number of nonadaptive bit queries.
 
 ## Facts & Assumptions
 
-**Given:** Use the shorthand convention of [[def-pcp-class-with-completeness-and-soundness]] and the fixed $\operatorname{GapCSP}(1,1-\alpha)$ promise problem of [[thm-gap-csp-is-np-hard]].
+**Given:** Assume the Axiom of Choice and use the shorthand convention of [[def-pcp-class-with-completeness-and-soundness]] and the fixed $\operatorname{GapCSP}(1,1-\alpha)$ promise problem of [[thm-gap-csp-is-np-hard]].
 
-[F1] For every language $L\in\mathrm{NP}$ there is a total function $f_L$, computable by a deterministic polynomial-time algorithm, such that $f_L(x)$ is an explicit binary constraint graph over $\Sigma_\star$ with $\operatorname{val}(f_L(x))\ge1$ for $x\in L$ and $\operatorname{val}(f_L(x))\le1-\alpha$ for $x\notin L$, where $\alpha>0$ is the fixed gap constant. ([[thm-gap-csp-is-np-hard]])
+[F1] Assuming the Axiom of Choice, for every language $L\in\mathrm{NP}$ there is a total function $f_L$, computable by a deterministic polynomial-time algorithm, such that $f_L(x)$ is an explicit binary constraint graph over $\Sigma_\star$ with $\operatorname{val}(f_L(x))\ge1$ for $x\in L$ and $\operatorname{val}(f_L(x))\le1-\alpha$ for $x\notin L$, where $\alpha>0$ is the fixed gap constant. ([[thm-gap-csp-is-np-hard]])
 
 [F2] For every explicit binary constraint multigraph $G$ over a finite alphabet $\Sigma$ with $m\ge1$ edges there is a nonadaptive verifier whose proof is a labeling $\sigma:V(G)\to\Sigma$, which uses exactly $\lceil\log_2m\rceil$ random bits and reads at most two symbols, such that for every fixed labeling $$\Pr[V^\sigma\text{ rejects}]=\frac{m}{2^{\lceil\log_2m\rceil}}\,\operatorname{UNSAT}_\sigma(G)\ge\frac12\operatorname{UNSAT}_\sigma(G);$$ it has perfect completeness on satisfiable graphs, and if $\operatorname{UNSAT}(G)\ge\delta$ then every proof is rejected with probability at least $\delta/2$. ([[lem-two-query-pcps-and-constraint-graphs-are-equivalent]])
 
@@ -69,13 +68,15 @@ number of nonadaptive bit queries.
 
 [F10] Between any two real numbers lies a rational ([[lem-rat-embeds-dense]]).
 
+[A1] The Axiom of Choice is assumed ([[def-axiom-of-choice]]), supplying the premise of the gap-CSP theorem [F1] in the NP-to-PCP inclusion.
+
 ## Proof
 
-**Given:** Use the shorthand class convention of [F5] and the fixed gap problem [F1].
+**Given:** Assume the Axiom of Choice and use the shorthand class convention of [F5] and the fixed gap problem [F1].
 
 1.1 Suppose $K\in\operatorname{PCP}(\log n,O(1))$. By [F4] and [F5] there are a constant $s<1$, bounds $r(n)=O(\log n)$ and $q(n)=O(1)$, a verifier $V$ with binary proof alphabet, and an integer-valued polynomial $p$ with $L_V(n)\le p(n)$ such that on every input $x$ of length $n$: if $x\in K$ some fixed proof is accepted with probability at least $1$, and if $x\notin K$ every fixed proof is accepted with probability at most $s$. Fix once and for all a rational constant $s'$ with $s<s'<1$; [F10] supplies one, and the certificate machine can hardcode it without computing $s$. Use the same query algorithm on proofs of length $p(n)$; its query locations remain in $[L_V(n)]\subseteq[p(n)]$, so the added suffix is never read. Call this fixed-length interface $\widehat V$. Define the binary relation $$R:=\{(x,\pi): \lvert\pi\rvert=p(\lvert x\rvert)\text{ and }\Pr[\widehat V^\pi(x)\text{ accepts}]>s'\}.$$ Thus every invocation in the relation has a valid fixed-length proof string. [F4, F5, F10, given, construct]
 
-1.2 Suppose $L\in\mathrm{NP}$ and fix the reduction $f_L$ of [F1]. For an input $x$ of length $n$ put $G_x:=f_L(x)$ and $M:=\lvert E(G_x)\rvert$; then $x\in L$ implies $\operatorname{val}(G_x)\ge1$ and $x\notin L$ implies $\operatorname{val}(G_x)\le1-\alpha$, and $G_x$ together with its explicit encoding is computable in deterministic polynomial time in $n$, so $M\le\mathrm{poly}(n)$ and the encoding length of $G_x$ is $\mathrm{poly}(n)$. [F1, given]
+1.2 Under [A1], suppose $L\in\mathrm{NP}$ and fix the reduction $f_L$ of [F1]. For an input $x$ of length $n$ put $G_x:=f_L(x)$ and $M:=\lvert E(G_x)\rvert$; then $x\in L$ implies $\operatorname{val}(G_x)\ge1$ and $x\notin L$ implies $\operatorname{val}(G_x)\le1-\alpha$, and $G_x$ together with its explicit encoding is computable in deterministic polynomial time in $n$, so $M\le\mathrm{poly}(n)$ and the encoding length of $G_x$ is $\mathrm{poly}(n)$. [A1, F1, given]
 
 2.1 The paired language $L_R=\{\langle x,\pi\rangle:(x,\pi)\in R\}$ belongs to $P$: a deterministic machine checks $\lvert\pi\rvert=p(\lvert x\rvert)$, enumerates the $2^{r(n)}$ coin strings of $\widehat V$ on $x$ (there are $2^{O(\log n)}=\mathrm{poly}(n)$ of them), simulates $\widehat V^\pi(x)$ deterministically on each, counts the accepting runs, and compares the exact rational acceptance probability with the fixed rational $s'$ by integer arithmetic. [F6, step 1.1, algebra]
 
@@ -95,4 +96,4 @@ number of nonadaptive bit queries.
 
 ## Remarks
 
-The two inclusions use different faces of the same gap: soundness of the fixed-alphabet gap problem supplies the constant rejection probability $\alpha/2$ for a randomly sampled constraint, while the enumeration of the $2^{O(\log n)}$ coin strings turns any PCP verifier into a polynomial-time certificate checker. Both quantifications are over one fixed proof: the verifier never resamples the proof, and the NP machine guesses it once. The gap problem is the one produced by the Dinur transformation of [[thm-gap-csp-is-np-hard]], so no additional hardness assumption enters, and no choice principle is used: the reduction, the sampled edge and the guessed certificate are all explicit finite objects.
+The two inclusions use different faces of the same gap: soundness of the fixed-alphabet gap problem supplies the constant rejection probability $\alpha/2$ for a randomly sampled constraint, while the enumeration of the $2^{O(\log n)}$ coin strings turns any PCP verifier into a polynomial-time certificate checker. Both quantifications are over one fixed proof: the verifier never resamples the proof, and the NP machine guesses it once. The gap problem is the one produced by the Dinur transformation of [[thm-gap-csp-is-np-hard]], so its Axiom of Choice premise is carried into the NP-to-PCP inclusion. The reduction, sampled edge and guessed certificate are explicit finite objects; the Choice premise is inherited from the supplied gap-CSP proof route through expander spectral theory and algebraic embedding extension. This is a statement about the current library argument, not an intrinsic necessity claim for the PCP theorem.

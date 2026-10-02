@@ -157,7 +157,7 @@ function main() {
       `Do not edit unrelated items, invent source reading or bypass the recorder. Report any unresolved blocker.\n`);
     const resultPath = `research/${run}-dispatch/final-adjudicator-${label}.result.json`;
     if (existsSync(resultPath)) throw new Error(`${id}: final dispatch already attempted; inspect its result instead of looping`);
-    execute(['tools/dispatch.mjs', '--role', 'final-adjudicator', '--profile', 'gpt-6-astra-medium',
+    execute(['tools/dispatch.mjs', '--role', 'final-adjudicator', '--profile', 'gpt-6.1-sol-high',
       '--brief', 'briefs/final-adjudicator.md', '--task', taskPath, '--label', label, '--run', run,
       '--timeout', '21600', '--attempt', '1']);
     const completed = parseTerminalResolutions(terminalPath, { allowMissing: false });

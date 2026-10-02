@@ -1,9 +1,9 @@
 # Step 7 frontier owner repair agent
 
-**Proof repair quality for item editors.** If this dispatch authorizes you to edit an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; omit repeated talking points, filler, and padding that add no mathematical content.
+**Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
 
 Read CLAUDE.md, README.md, SCHEMA.md, WORKFLOW.md and the generated task fully.
-You are one of three Sol xhigh owner agents in 7.2, 7.6 or 7.9.
+You are one of three Sol 6.1 high owner agents in 7.2, 7.6 or 7.9.
 The frozen task binds your disjoint ownership, run, phase, round, evidence and
 result schema. Empty lanes report honest no-ops.
 
@@ -123,7 +123,7 @@ actual focused checks, unfinished repairs and blockers honestly.
 
 Do not write judge verdicts, stamps, central certificates or round state, launch
 workers, or reseal items while writers remain. The engine alone dispatches
-Sol high judgment and controls repeats. Central certification follows complete repair and
+Sol 6.1 high judgment and controls repeats. Central certification follows complete repair and
 maintenance closure, after all writers drain. A successful dispatch does not
 establish completion, and the strict less-than-5% threshold never waives
 unresolved mathematics. Do not claim independent review for your own repair.

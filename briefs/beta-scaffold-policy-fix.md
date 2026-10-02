@@ -1,5 +1,7 @@
 # Step 1 — scaffold repair
 
+**Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
+
 Repair only reported subjects in `research/<run>-batch-<i>.pages.json` and its
 coverage and notes.
 

@@ -1,11 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, utimesSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
-import { loadStep3, scopeHash, itemHash, itemDecision, recordStep3, checkStep3 } from '../../step3-decisions.mjs';
+import { loadStep3, scopeHash, itemHash, itemInputPaths, itemDecision, recordStep3, checkStep3 } from '../../step3-decisions.mjs';
 import { recordStep1 } from '../../step1-decisions.mjs';
 import { stages, step3Plan, step3PairPlan } from '../stages/mathlib.mts';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
@@ -505,6 +506,125 @@ test('owner gate repair recertifies an existing auditor-created item without for
   const owner = JSON.parse(readFileSync(ownerPath, 'utf8'));
   writeFileSync(ownerPath, JSON.stringify({ ...owner, reason: 'Tampered reason' }));
   assert.throws(() => loadStep3AuditorProvenance(f.root, 'demo'), /invalid owner recertification provenance/);
+});
+
+test('a current independent confidence-1 repaired review recertifies a postbaseline addition', t => {
+  const f = fixture(t); f.scope(); writeAuditorBaseline(f.root, 'demo');
+  f.pages[0].items.push({ id: 'lem-created', kind: 'lemma', statement: 'Created', strategy: 'Direct', deps: [] });
+  f.put('demo-batch-1.pages.json', f.pages);
+  const itemPath = join(f.root, 'items/lem-created.md');
+  writeFileSync(itemPath, '---\nid: lem-created\nstatus: draft\ndeps: []\n---\n\n## Proof\n\nInitial proof.\n');
+  const authoredAt = new Date('2024-01-01T00:00:00.000Z');
+  utimesSync(itemPath, authoredAt, authoredAt);
+  mkdirSync(join(f.root, 'research/demo-dispatch'));
+  const author = { run: 'demo', role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'], ok: true,
+    started_at: '2023-12-31T00:00:00.000Z', ended_at: '2024-01-02T00:00:00.000Z' };
+  f.put('demo-dispatch/alpha-high-step3b-a.result.json', author);
+  const first = certifyAuditorItems(f.root, 'demo').items[0];
+
+  writeFileSync(itemPath, '---\nid: lem-created\nstatus: draft\ndeps: []\n---\n\n## Proof\n\nRepaired proof.\n');
+  const repairedAt = new Date('2025-01-01T00:00:00.000Z');
+  utimesSync(itemPath, repairedAt, repairedAt);
+  const review = f.audit('lem-created', { decision: 'repaired', dependencies: [],
+    reason: 'Independent confidence-1 review after the mathematical repair.' });
+  const current = loadStep3(f.root, 'demo');
+  assert.equal(review.sha256, itemHash(current, 'lem-created', []));
+  assert.ok(itemInputPaths(current, 'lem-created', [])
+    .filter(path => path.startsWith(join(f.root, 'items') + '/') && path.endsWith('.md'))
+    .every(path => statSync(path).mtimeMs <= Date.parse(review.at)));
+  const certified = certifyAuditorItems(f.root, 'demo').items[0];
+  assert.equal(certified.author_result, first.author_result, 'retain original author provenance');
+  assert.deepEqual(certified.review_recertification, {
+    sha256: createHash('sha256').update(JSON.stringify(review)).digest('hex'), at: review.at,
+  });
+  assert.equal(itemDecision(loadStep3(f.root, 'demo'), 'lem-created').closed, true);
+  assert.doesNotThrow(() => loadStep3AuditorProvenance(f.root, 'demo'));
+
+  const reviewPath = join(f.root, 'research/demo-step3b-review-lem-created.json');
+  writeFileSync(reviewPath, JSON.stringify({ ...review, owner: true }));
+  assert.throws(() => certifyAuditorItems(f.root, 'demo'), /prior ordinary review is no longer current/);
+});
+
+test('shared batch and plan touches preserve a review, but a per-item manifest edit stales it', t => {
+  const f = fixture(t); f.scope(); writeAuditorBaseline(f.root, 'demo');
+  f.pages[0].items.push({ id: 'lem-created', kind: 'lemma', statement: 'Created', strategy: 'Direct', deps: ['lem-planned'] });
+  f.put('demo-batch-1.pages.json', f.pages);
+  const planPages = structuredClone(f.pages);
+  planPages[0].items.push({ id: 'lem-planned', kind: 'lemma', statement: 'Planned supplier', deps: [] });
+  f.put('plan-spec.json', { pages: planPages });
+  const itemPath = join(f.root, 'items/lem-created.md');
+  const supplierPath = join(f.root, 'items/lem-planned.md');
+  writeFileSync(itemPath, '---\nid: lem-created\nstatus: draft\ndeps: [lem-planned]\n---\n\nProof.\n');
+  writeFileSync(supplierPath, '---\nid: lem-planned\nstatus: draft\ndeps: []\n---\n\nSupplier proof.\n');
+  const authoredAt = new Date('2024-01-01T00:00:00.000Z');
+  for (const path of [itemPath, supplierPath, join(f.root, 'research/plan-spec.json')])
+    utimesSync(path, authoredAt, authoredAt);
+  mkdirSync(join(f.root, 'research/demo-dispatch'));
+  f.put('demo-dispatch/alpha-high-step3b-a.result.json', {
+    run: 'demo', role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'], ok: true,
+    started_at: '2023-12-31T00:00:00.000Z', ended_at: '2024-01-02T00:00:00.000Z',
+  });
+  certifyAuditorItems(f.root, 'demo');
+
+  writeFileSync(itemPath, '---\nid: lem-created\nstatus: draft\ndeps: [lem-planned]\n---\n\nCorrected proof.\n');
+  const correctedAt = new Date('2025-01-01T00:00:00.000Z');
+  utimesSync(itemPath, correctedAt, correctedAt);
+  const review = f.audit('lem-created', { decision: 'repaired', dependencies: ['lem-planned'],
+    reason: 'Independent confidence-1 review after the proof correction.' });
+  const laterCarrierTime = new Date(Date.parse(review.at) + 5000);
+  for (const path of [join(f.root, 'research/demo-batch-1.pages.json'), join(f.root, 'research/plan-spec.json')])
+    utimesSync(path, laterCarrierTime, laterCarrierTime);
+  const current = loadStep3(f.root, 'demo');
+  assert.equal(review.owner, false);
+  assert.equal(review.confidence, 1);
+  assert.deepEqual(review.dependencies, ['lem-planned']);
+  assert.equal(review.sha256, itemHash(current, 'lem-created', ['lem-planned']));
+  assert.ok(itemInputPaths(current, 'lem-created', ['lem-planned'])
+    .filter(path => path.startsWith(join(f.root, 'items') + '/') && path.endsWith('.md'))
+    .every(path => statSync(path).mtimeMs <= Date.parse(review.at)));
+  const certified = certifyAuditorItems(f.root, 'demo').items[0];
+  assert.equal(certified.review_recertification.at, review.at,
+    'unrelated shared carrier mtimes do not stale an exact current review');
+
+  const receiptPath = join(f.root, 'research/demo-step3-auditor-certifications.json');
+  const receipt = readFileSync(receiptPath, 'utf8');
+  f.pages[0].items.find((item: any) => item.id === 'lem-created').strategy = 'Changed manifest strategy';
+  f.put('demo-batch-1.pages.json', f.pages);
+  assert.notEqual(itemHash(loadStep3(f.root, 'demo'), 'lem-created', ['lem-planned']), review.sha256,
+    'a relevant per-item manifest edit changes the review hash');
+  assert.throws(() => certifyAuditorItems(f.root, 'demo'), /changed after its latest successful Step 3/);
+  assert.equal(readFileSync(receiptPath, 'utf8'), receipt, 'stale evidence preserves the prior receipt');
+});
+
+for (const defect of ['stale', 'held', 'owner-held', 'non-independent']) test(`Step-3 review recertification rejects ${defect} evidence`, t => {
+  const f = fixture(t); f.scope(); writeAuditorBaseline(f.root, 'demo');
+  f.pages[0].items.push({ id: 'lem-created', kind: 'lemma', statement: 'Created', deps: [] });
+  f.put('demo-batch-1.pages.json', f.pages);
+  const itemPath = join(f.root, 'items/lem-created.md');
+  writeFileSync(itemPath, '---\nid: lem-created\nstatus: draft\ndeps: []\n---\n\nProof.\n');
+  const authoredAt = new Date('2024-01-01T00:00:00.000Z');
+  utimesSync(itemPath, authoredAt, authoredAt);
+  mkdirSync(join(f.root, 'research/demo-dispatch'));
+  f.put('demo-dispatch/alpha-high-step3b-a.result.json', {
+    run: 'demo', role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'], ok: true,
+    started_at: '2023-12-31T00:00:00.000Z', ended_at: '2024-01-02T00:00:00.000Z',
+  });
+  certifyAuditorItems(f.root, 'demo');
+  writeFileSync(itemPath, '---\nid: lem-created\nstatus: draft\ndeps: []\n---\n\nCorrected proof.\n');
+  const review = f.audit('lem-created', { decision: 'repaired', dependencies: [],
+    reason: 'Independent confidence-1 review after authoring.' });
+  const reviewPath = join(f.root, 'research/demo-step3b-review-lem-created.json');
+  if (defect === 'stale') {
+    writeFileSync(itemPath, '---\nid: lem-created\nstatus: draft\ndeps: []\n---\n\nChanged after review.\n');
+  } else if (defect === 'held') {
+    writeFileSync(reviewPath, JSON.stringify({ ...review, decision: 'hold' }));
+  } else if (defect === 'owner-held') {
+    f.record({ phase: 'item', item: 'lem-created', owner: true, decision: 'hold', dependencies: [],
+      reason: 'Owner holds this item.' });
+  } else {
+    writeFileSync(reviewPath, JSON.stringify({ ...review, owner: true }));
+  }
+  assert.throws(() => certifyAuditorItems(f.root, 'demo'), /changed after its latest successful Step 3/);
 });
 
 for (const mode of ['legacy', 'post-end']) test(`Step-3 ${mode} supplier provenance must be revalidated`, t => {

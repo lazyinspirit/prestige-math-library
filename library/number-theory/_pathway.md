@@ -21,6 +21,8 @@ parts:
       - absolute-values-completions-and-p-adic-numbers
       - prime-ideal-decomposition-ramification-and-the-different
       - decomposition-inertia-and-frobenius
+      - dirichlets-unit-theorem-regulators-and-s-units
+      - minkowski-theory-and-number-field-class-groups
   - part: quadratic-residues
     title: "Quadratic residues and reciprocity"
     pages:
@@ -29,6 +31,7 @@ parts:
       - sums-of-two-squares
       - lagrange-four-square-theorem
       - average-orders-divisor-sums-and-representation-counts
+      - cyclotomic-arithmetic-and-reciprocity-via-frobenius
       - chebyshev-bounds-and-mertens-theorems
       - perron-inversion-and-the-explicit-formula
       - hilbert-symbols-and-the-quadratic-local-global-principle
@@ -52,23 +55,30 @@ solubility decidable by a finite search.
 
 ## congruences-and-unit-groups
 
-Congruences modulo $n$, the Chinese remainder theorem, Euler's totient, and primitive roots
-give quotient-ring arithmetic, while quadratic forms and arithmetic functions organize
-multiplicative information. For finite $K/\mathbb Q$, trace, norm, embeddings, and
-discriminants lead to the Dedekind property and unique prime-ideal factorization; the different
-detects ramification and has exponent $e-1$ in the tame case. Completions supply
-$\mathbb Q_p$ and $\mathbb Z_p$. The decomposition page identifies the decomposition group as a
-prime stabilizer and inertia as the kernel of the residue action; its exact sequence, towers,
-fixed fields, and Frobenius coset separate ramification, residue degree, and splitting. After
-good reduction kills inertia, factor degrees give Frobenius cycle lengths.
+Congruences, Chinese remainder theorem, Euler's totient and primitive roots
+give quotient-ring arithmetic; quadratic forms and arithmetic functions
+organize multiplicative information. For finite $K/\mathbb Q$, trace, norm,
+embeddings and discriminants give the Dedekind property and unique prime-ideal
+factorization; the different detects ramification (exponent $e-1$ tame), and
+completions supply $\mathbb Q_p$ and $\mathbb Z_p$. The decomposition page
+identifies the decomposition group as prime stabilizer and inertia as
+residue-action kernel, reading ramification, residue degree, splitting and
+Frobenius cycle lengths from exact sequences, towers, fixed fields and cosets.
+Minkowski embedding and convex bodies turn $\mathcal O_K$ and ideals into full
+lattices, bound discriminants and force the class group finite; unit logarithms
+form a full lattice whose rank and regulator give Dirichlet's theorem and $S$-units.
 
 ## quadratic-residues
 
-The Legendre and Jacobi symbols, Euler's criterion, Gauss's lemma, and reciprocity control
-quadratic residues and the two- and four-square problems. Average orders and Perron inversion
-lead to Chebyshev and Mertens estimates and the explicit formula, while Hilbert symbols give
-Hasse--Minkowski and Dirichlet characters give primitive $L$-function continuation and
-functional equations. The classical zeta page uses the Hadamard product and a
-logarithmic-derivative inequality for a zero-free region near $1$; a balanced truncated
-explicit formula yields the stated prime-number-theorem error. Its damped-contour Tauberian
-route is independent, and the progression result keeps the modulus fixed.
+The Legendre and Jacobi symbols, Euler's criterion, Gauss's lemma, and
+reciprocity control quadratic residues and the two- and four-square problems.
+Average orders and Perron inversion lead to Chebyshev and Mertens estimates and
+the explicit formula, while Hilbert symbols give Hasse--Minkowski and Dirichlet
+characters give primitive $L$-function continuation and functional equations.
+Cyclotomic arithmetic gives the ring of integers $\mathbb Z[\zeta_n]$ and its
+discriminant, the ramification and Frobenius decomposition of rational primes,
+and reciprocity via Gauss sums. The zeta page uses the Hadamard product and a
+logarithmic-derivative inequality for a zero-free region near $1$; a balanced
+truncated explicit formula yields the stated prime-number-theorem error. Its
+damped-contour Tauberian route is independent, and the progression result keeps
+the modulus fixed.

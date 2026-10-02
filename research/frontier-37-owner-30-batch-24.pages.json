@@ -1,0 +1,1430 @@
+[
+  {
+    "order": 833,
+    "id": "logarithmic-potential-capacity-and-riesz-decomposition",
+    "kind": "A",
+    "category": "complex-analysis",
+    "title": "Logarithmic Potential, Capacity, and Riesz Decomposition",
+    "companion": "logarithmic-potential-capacity-and-riesz-decomposition-examples",
+    "requires": [
+      "subharmonic-functions-and-the-dirichlet-problem",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "radon-measures-and-the-riesz-markov-kakutani-theorem",
+      "banach-alaoglu-goldstine-and-krein-milman",
+      "distributions-test-functions-and-differentiation",
+      "fundamental-solutions-newtonian-potentials-and-green-functions",
+      "green-functions-harmonic-measure-and-conformal-invariance",
+      "weak-derivatives-and-sobolev-spaces",
+      "weak-convergence-tightness-and-representation"
+    ],
+    "items": [
+      {
+        "id": "def-support-of-a-borel-measure",
+        "kind": "definition",
+        "title": "Support of a finite Borel measure on the plane",
+        "statement": "For a finite positive Borel measure \u03bc on C, supp \u03bc is the complement of the union of all open sets V with \u03bc(V)=0; it is closed, it is the smallest closed set carrying \u03bc, \u03bc is carried by a compact set exactly when supp \u03bc is compact, and \u03bc\u22600 exactly when supp \u03bc\u2260\u2205.",
+        "deps": [
+          "def-radon-measure-on-an-lch-space",
+          "def-metric-interior-closure-boundary",
+          "def-measure",
+          "def-measure-concentrated-on-a-measurable-set",
+          "thm-rational-points-and-boxes-in-rn"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            },
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "strategy": "Define the support as the complement of the union of all open null sets; use the countable rational-box basis to show that this union is null without any choice principle, so the support is the smallest closed carrier, and record the nonempty, carried-by-compact and compact-support conventions."
+      },
+      {
+        "id": "def-logarithmic-potential-and-energy",
+        "kind": "definition",
+        "title": "Logarithmic potential and energy of a positive compactly supported measure",
+        "statement": "For a finite positive Borel measure \u03bc of compact support in C set U^\u03bc(z)=\u222blog(1/|z\u2212w|)d\u03bc(w)\u2208(\u2212\u221e,+\u221e] and I(\u03bc)=\u222clog(1/|z\u2212w|)d\u03bc(z)d\u03bc(w)\u2208(\u2212\u221e,+\u221e]. Write p_\u03bc=\u2212U^\u03bc=\u222blog|z\u2212w|d\u03bc(w). For a finite measure without compact support these integrals are defined only when their positive and negative parts are not both infinite.",
+        "deps": [
+          "def-radon-measure-on-an-lch-space",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "strategy": "On a fixed compact support the logarithmic kernel has a finite lower bound and is Borel, with +\u221e on the diagonal. Integrate its nonnegative shift using Tonelli and subtract the finite constant; the same argument applies to the point potential. State the failure of an unconditional extended integral for arbitrary noncompact finite measures when the near-diagonal and far-tail parts both diverge."
+      },
+      {
+        "id": "def-logarithmic-capacity-compact-set",
+        "kind": "definition",
+        "title": "Robin constant and logarithmic capacity of a compact set",
+        "statement": "Let $K\\subseteq\\mathbb C$ be compact and nonempty, and let $P(K)$ be the set of\nBorel probability measures on $K$ (def-probability-measure), viewed as\nmeasures on $\\mathbb C$ carried by $K$. Every $\\mu\\in P(K)$ has compact support\ncontained in $K$, so its logarithmic energy $I(\\mu)\\in(-\\infty,+\\infty]$ is the\nquantity of def-logarithmic-potential-and-energy; indeed the kernel\n$k(z,w)=\\log(1/|z-w|)$ is bounded below on $K\\times K$: it is $\\ge-\\log\\operatorname{diam}K$\nwhen $\\operatorname{diam}K>0$, and $I(\\mu)=+\\infty$ for the only measure of\n$P(K)$ when $K$ is a singleton.\n\nThe **Robin constant** of $K$ is\n\n$$V_K:=\\inf_{\\mu\\in P(K)}I(\\mu)\\in(-\\infty,+\\infty].$$\n\nThe set $P(K)$ is nonempty: it contains the Dirac measure at any point of\n$K$ (def-dirac-measure). Put $E_K:=\\{I(\\mu):\\mu\\in P(K),\\ I(\\mu)<+\\infty\\}$.\nIf $E_K=\\varnothing$, all energies are $+\\infty$ and we set $V_K=+\\infty$.\nOtherwise $K$ is not a singleton, and $E_K$ is a nonempty subset of $\\mathbb R$\nbounded below by $-\\log\\operatorname{diam}K$, so thm-infimum-property\ngives its real infimum. Set $V_K=\\inf E_K$ in this case. Adding the value\n$+\\infty$ does not change any real lower bound, so this is exactly the\nextended infimum displayed above. The **logarithmic capacity** of $K$ is\n\n$$\\operatorname{cap}(K):=\\begin{cases}\\exp(-V_K) & \\text{if } V_K<+\\infty,\\\\ 0 & \\text{if } V_K=+\\infty,\\end{cases}$$\n\nwith $\\exp$ the real exponential function (def-real-exponential-function-and-e).\nThus $\\operatorname{cap}(K)\\in[0,\\infty)$ for every nonempty compact $K$, and for\nthe empty set one uses the separate convention\n\n$$\\operatorname{cap}(\\varnothing):=0.$$",
+        "deps": [
+          "def-logarithmic-potential-and-energy",
+          "def-probability-measure",
+          "def-dirac-measure",
+          "def-real-exponential-function-and-e",
+          "thm-infimum-property"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 1,
+        "strategy": "Use the finite diameter bound log(1/|z\u2212w|)\u2265\u2212log diam K for diam K>0; a singleton has only its Dirac law and infinite energy. For K empty use the separate convention. Monotonicity follows by inclusion of admissible probability families."
+      },
+      {
+        "id": "thm-logarithmic-energy-well-defined-and-lower-semicontinuous",
+        "kind": "theorem",
+        "title": "Lower semicontinuity of logarithmic potential and energy",
+        "statement": "Let K\u2282C be nonempty compact and let \u03bc_n,\u03bc be Borel probability measures on K with \u03bc_n\u21d2\u03bc. With the Borel logarithmic kernel assigned +\u221e on the diagonal, U^\u03bc(z) and I(\u03bc) are unambiguous extended integrals: two Borel kernels agreeing with k off a \u03bc-null set give the same potential, and two agreeing off a (\u03bc\u2297\u03bc)-null set give the same energy. Moreover U^\u03bc(z)\u2264liminf_n U^{\u03bc_n}(z) for every z\u2208C and I(\u03bc)\u2264liminf_n I(\u03bc_n). If \u03bc({z})>0 then U^\u03bc(z)=+\u221e, so for atomic measures the diagonal value is not free. No choice principle is required.",
+        "deps": [
+          "def-logarithmic-potential-and-energy",
+          "def-weak-convergence-of-borel-probability-measures",
+          "def-probability-measure",
+          "def-product-measure-on-sigma-finite-spaces",
+          "cor-integral-over-a-null-set-vanishes",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "thm-algebra-of-continuous-functions",
+          "thm-logarithm-derivative-and-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-real-stone-weierstrass-for-compact-metric-spaces",
+          "thm-finite-products-of-compact-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-logarithmic-energy-strict-positivity-for-zero-mass-charges",
+        "kind": "lemma",
+        "title": "Strict positivity of logarithmic energy for a zero-mass signed charge",
+        "statement": "Assume Countable Choice. If \u03bc and \u03bd are compactly supported positive measures of equal mass and finite logarithmic energy, their mixed energy is finite and \u03c3=\u03bc\u2212\u03bd has well-defined I(\u03c3)\u22650, with equality exactly when \u03c3=0.",
+        "deps": [
+          "def-logarithmic-potential-and-energy",
+          "def-support-of-a-borel-measure",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-real-stone-weierstrass-for-compact-metric-spaces",
+          "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+          "def-countable-choice"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            },
+            {
+              "title": "Frerick\u2013M\u00fcller\u2013Thomaser, A Fourier integral formula for logarithmic energy, Theorem 1.1 and Remark 3.3",
+              "url": "https://arxiv.org/pdf/2209.05439"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-equilibrium-measure-existence-and-uniqueness",
+        "kind": "theorem",
+        "title": "Existence and uniqueness of the equilibrium measure",
+        "statement": "Assume the Axiom of Choice. Let $K\\subseteq\\mathbb C$ be nonempty and compact with $\\operatorname{cap}(K)>0$. Then there is exactly one Borel probability measure $\\mu_K$ on $K$ with $$I(\\mu_K)=V_K=\\inf_{\\mu\\in P(K)}I(\\mu)<+\\infty .$$ The measure $\\mu_K$ is the **equilibrium measure** of $K$. If $\\operatorname{cap}(K)=0$ then $V_K=+\\infty$, every $\\mu\\in P(K)$ has $I(\\mu)=+\\infty$, and no equilibrium measure is asserted. The Axiom of Choice is spent twice: through Countable Choice for the minimizing sequence, and through the weak sequential compactness of probability laws of lem-probability-laws-on-a-compact-metric-space-have-weakly-convergent-subsequences. The energy lower semicontinuity used below is choice-free (thm-logarithmic-energy-well-defined-and-lower-semicontinuous).",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-logarithmic-capacity-compact-set",
+          "def-logarithmic-potential-and-energy",
+          "def-probability-measure",
+          "def-weak-convergence-of-borel-probability-measures",
+          "lem-inf-epsilon",
+          "lem-logarithmic-energy-strict-positivity-for-zero-mass-charges",
+          "lem-probability-laws-on-a-compact-metric-space-have-weakly-convergent-subsequences",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-logarithmic-energy-well-defined-and-lower-semicontinuous",
+          "thm-nonnegative-weighted-sums-of-measures"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "def-polar-set-and-quasi-everywhere",
+        "kind": "definition",
+        "title": "Capacity-polar sets, quasi-everywhere, and subharmonic polar sets",
+        "statement": "Let $K\\subseteq\\mathbb C$ be compact; call it the **conductor** when it is fixed as the ambient set of a quasi-everywhere statement. Capacity is the logarithmic capacity of def-logarithmic-capacity-compact-set, whose conventions $\\operatorname{cap}(\\varnothing)=0$ and $\\operatorname{cap}(F)>0$ or $=0$ for nonempty compact $F$ are used verbatim. **Capacity-polar sets.** A set $E\\subseteq\\mathbb C$ is **capacity-polar** when $$\\operatorname{cap}(F)=0\\qquad\\text{for every compact }F\\subseteq E .$$ The restriction to compact subsets is deliberate: capacity is defined here for compact sets, so the definition tests $E$ through its compact parts, and a capacity-polar set may be neither compact nor Borel. A compact $F$ is capacity-polar exactly when $\\operatorname{cap}(F)=0$, and $\\varnothing$ is capacity-polar by the convention $\\operatorname{cap} (\\varnothing)=0$. A set $E$ is **nonpolar** when it is not capacity-polar, that is, when it contains a compact set of positive capacity. **Quasi-everywhere.** Let $P$ be a property of the points of a compact conductor $K$, that is, a statement $P(z)$ for $z\\in K$. One says that $P$ holds **quasi-everywhere on $K$**, abbreviated $P$ holds q.e. on $K$, when there is a Borel capacity-polar set $E\\subseteq K$ with $$P(z)\\ \\text{holds for every }z\\in K\\setminus E .$$ The exceptional set $E$ is required to be Borel so that the statement has a measurable exceptional carrier; the definition itself asks nothing about the values of $P$ on $E$. If $P$ holds everywhere on $K$ it holds q.e. on $K$, with $E=\\varnothing$. A set $N\\subseteq K$ is called q.e.-negligible when it is contained in a Borel capacity-polar subset of $K$; a property holds q.e. exactly when it fails on a q.e.-negligible set. **Subharmonic polar sets.** A set $E\\subseteq\\mathbb C$ is **subharmonically polar** when for every $x\\in E$ there are an open set $U_x\\ni x$ and a function $u_x$ subharmonic on $U_x$ (def-plane-subharmonic-function) with $$E\\cap U_x\\ \\subseteq\\ \\{z\\in U_x:u_x(z)=-\\infty\\}.$$ Because subharmonicity on $U_x$ already excludes the function $-\\infty$ on a connected component (def-complex-domain), such a $u_x$ is automatically not identically $-\\infty$ on any component of $U_x$; the requirement in the literature that the witness be \"not identically $-\\infty$\" is therefore automatic in this convention. If $E$ is contained in the union of a single open set carrying one such witness, the local condition holds with that one function; the definition uses the local form so that unbounded or noncompact $E$ need no global witness.",
+        "deps": [
+          "def-logarithmic-capacity-compact-set",
+          "def-plane-subharmonic-function",
+          "def-complex-domain",
+          "def-logarithmic-potential-and-energy"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 2,
+        "strategy": "Define capacity-polar through the inner compact capacity: a set is capacity-polar when every compact subset has cap 0. Quasi-everywhere on a compact conductor K means a property fails only on a Borel capacity-polar set. Define subharmonically polar sets locally, by existence of a local subharmonic witness whose -infinity locus covers the set near each point; subharmonicity already excludes the identical -infinity function on components, and no global witness is required for unbounded sets. Keep the two notions separate: the compact-polar equivalence is the following lemma, and no equivalence for arbitrary non-Borel sets is asserted. Record that polarity is inherited by subsets and that the definition is choice-free."
+      },
+      {
+        "id": "lem-logarithmic-potential-maximum-principle",
+        "kind": "lemma",
+        "title": "Maximum principle for a compact logarithmic potential",
+        "statement": "For a finite positive compactly supported \u03bc with \u03bc\u22600, if U^\u03bc\u2264M at every point of supp \u03bc for some real M, then U^\u03bc\u2264M throughout C.",
+        "deps": [
+          "def-logarithmic-potential-and-energy",
+          "def-support-of-a-borel-measure",
+          "thm-continuity-from-above-for-measures",
+          "thm-differentiation-under-the-integral-sign",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "def-plane-harmonic-function",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-metric-interior-closure-boundary",
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "thm-path-connected-implies-connected",
+          "thm-maximum-and-minimum-principles-for-plane-harmonic-functions",
+          "cor-rn-is-polygonally-connected-and-locally-path-connected",
+          "def-complex-domain"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-frostman-equilibrium-theorem",
+        "kind": "theorem",
+        "title": "Frostman inequalities and quasi-everywhere equilibrium equality",
+        "statement": "Assume AC and let K be nonpolar compact with equilibrium \u03bc_K. Then U^{\u03bc_K}(z)\u2264V_K for every z\u2208C, and U^{\u03bc_K}(z)=V_K outside a Borel capacity-polar subset of K. The exceptional set may be taken as a countable union of compact zero-capacity sets.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-logarithmic-potential-and-energy",
+          "def-logarithmic-capacity-compact-set",
+          "def-support-of-a-borel-measure",
+          "def-polar-set-and-quasi-everywhere",
+          "def-plane-subharmonic-function",
+          "thm-equilibrium-measure-existence-and-uniqueness",
+          "lem-logarithmic-potential-distributional-laplacian",
+          "lem-logarithmic-potential-maximum-principle",
+          "lem-compact-polar-sets-and-subharmonic-minus-infinity-loci",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "prop-reciprocity-inequality-for-logarithmic-potential",
+        "kind": "proposition",
+        "title": "Reciprocity inequality for logarithmic potentials",
+        "statement": "Assume AC. Let K\u2282C be compact with cap(K)>0 and equilibrium measure \u03bc_K. For every compactly supported Borel probability measure \u03c3 on C, inf_{z\u2208K} U^\u03c3(z)\u2264V_K=log(1/cap(K)).",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-logarithmic-potential-and-energy",
+          "def-logarithmic-capacity-compact-set",
+          "def-probability-measure",
+          "def-support-of-a-borel-measure",
+          "thm-equilibrium-measure-existence-and-uniqueness",
+          "thm-frostman-equilibrium-theorem",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a71",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 5,
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-chebyshev-constant-compact-set",
+        "kind": "definition",
+        "title": "Chebyshev constant of a compact planar set",
+        "statement": "For nonempty compact K\u2282C and n\u22651, let t_n(K)=inf{\u2016p\u2016_K:p is a monic complex polynomial of degree n}, where \u2016p\u2016_K=sup_{z\u2208K}|p(z)|. Define cheb(K)=inf_{n\u22651} t_n(K)^{1/n}; set cheb(\u2205)=0. The following lemma proves that the infimum is also the limit of t_n(K)^{1/n}.",
+        "deps": [
+          "def-complex-polynomial-degree-and-monic",
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-extreme-value-metric",
+          "thm-infimum-property",
+          "thm-nth-roots-exist",
+          "def-infimum"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a71",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "strategy": "For nonempty compact K, polynomial evaluation and modulus are continuous and bounded, so each sup norm is finite; z^n shows the monic class is nonempty. The infimum and nonnegative nth roots are therefore defined. Leave uniqueness of a best monic polynomial unasserted; the Chebyshev constant only uses the extremal infima."
+      },
+      {
+        "id": "lem-chebyshev-constant-is-submultiplicative-root-limit",
+        "kind": "lemma",
+        "title": "The Chebyshev constant is the root limit of monic extremal norms",
+        "statement": "For every nonempty compact K\u2282C, t_{m+n}(K)\u2264t_m(K)t_n(K) for m,n\u22651, and therefore lim_{n\u2192\u221e}t_n(K)^{1/n}=inf_{n\u22651}t_n(K)^{1/n}=cheb(K).",
+        "deps": [
+          "def-chebyshev-constant-compact-set",
+          "thm-polynomial-degree-of-a-product-over-a-domain",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-inf-epsilon",
+          "thm-nth-roots-exist",
+          "lem-power-monotone",
+          "def-limsup-liminf",
+          "thm-convergence-iff-limsup-equals-liminf",
+          "lem-limsup-monotone-comparison",
+          "lem-nth-root-of-constant-tends-to-one",
+          "lem-finite-set-has-max",
+          "def-max-min"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a71",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-monic-polynomial-capacity-lower-bound",
+        "kind": "lemma",
+        "title": "Monic polynomial lower bounds for the Chebyshev constant and capacity",
+        "statement": "For every nonempty compact K\u2282C and every monic complex polynomial p of degree n\u22651, \u2016p\u2016_K\u2265cheb(K)^n. Also \u2016p\u2016_K\u2265cap(K)^n; hence cap(K)\u2264cheb(K).",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-chebyshev-constant-compact-set",
+          "thm-nth-roots-exist",
+          "def-complex-polynomial-degree-and-monic",
+          "def-logarithmic-potential-and-energy",
+          "def-logarithmic-capacity-compact-set",
+          "def-probability-measure",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "thm-complex-polynomial-has-exactly-degree-many-roots-counted-with-multiplicity",
+          "lem-complex-conjugation-and-modulus-laws",
+          "prop-reciprocity-inequality-for-logarithmic-potential"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a71",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 6,
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-riesz-measure-subharmonic-function",
+        "kind": "definition",
+        "title": "Distributional Riesz measure of a plane subharmonic function",
+        "statement": "Let $\\Omega\\subseteq\\mathbb C$ be a plane domain and let $u:\\Omega\\to[-\\infty,\\infty)$\nbe subharmonic on $\\Omega$ (def-plane-subharmonic-function); in particular\n$u$ is not identically $-\\infty$ on any component. Then $u\\in L^1_{\\mathrm{loc}}(\\Omega)$\n(thm-plane-subharmonic-functions-are-locally-integrable), so for every\ncompactly supported smooth test function $\\varphi\\in C_c^\\infty(\\Omega)$ the\nLebesgue integral $\\int_\\Omega u\\,\\Delta\\varphi\\,dA$ converges absolutely: the\nsupport of $\\Delta\\varphi$ is compact and $\\Delta\\varphi$ is bounded, so\n$\\int_\\Omega|u\\,\\Delta\\varphi|\\,dA\\le\\|\\Delta\\varphi\\|_\\infty\\int_{\\operatorname{supp}\\Delta\\varphi}|u|\\,dA<\\infty$.\nThe **distributional Riesz functional** of $u$ is\n\n$$\\mu_u(\\varphi):=\\frac1{2\\pi}\\int_\\Omega u\\,\\Delta\\varphi\\,dA\\qquad(\\varphi\\in C_c^\\infty(\\Omega)),$$\n\nwhere $\\Delta=\\partial_x^2+\\partial_y^2$ is the Laplacian, $dA$ is area Lebesgue\nmeasure, and $C_c^\\infty(\\Omega)$ is the test space of def-distribution\nwith the distributional derivative conventions of def-distributional-derivative.\nThe value is complex in general and is real for real-valued test functions.\nThe functional $\\mu_u$ depends only on the almost-everywhere\nrepresentative of $u$: if $u=v$ a.e. then $u\\,\\Delta\\varphi=v\\,\\Delta\\varphi$\na.e. for every test function, so the integrals agree. Linearity in $\\varphi$ is\ninherited from the linearity of differentiation and integration.\n\nThe normalization factor $(2\\pi)^{-1}$ is chosen so that, under Countable\nChoice (def-countable-choice), a logarithmic point potential has unit\nmass at its pole: $\\Delta\\log|z-a|=2\\pi\\delta_a$ in the\ndistributional sense, that is, $\\mu_{\\log|{\\cdot}-a|}=\\delta_a$\n(thm-minus-laplacian-of-the-fundamental-solution-is-dirac).",
+        "deps": [
+          "def-plane-subharmonic-function",
+          "thm-plane-subharmonic-functions-are-locally-integrable",
+          "def-distributional-derivative",
+          "def-distribution",
+          "thm-minus-laplacian-of-the-fundamental-solution-is-dirac",
+          "def-countable-choice"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "strategy": "Local L\u00b9 integrability makes the formula independent of the a.e. representative of u and gives a distribution. Different test-function coordinates are covered by the distributional derivative definition; positivity and measure representation are not assumed at definition time.",
+        "justified_by": [
+          "thm-riesz-measure-is-positive-radon"
+        ],
+        "proof_strategy": "Local integrability of plane subharmonic u makes \u222bu\u0394\u03c6 finite for every compactly supported smooth test. Changing u on an area-null set does not change this integral. The two distributional derivative signs cancel in \u0394u, giving the stated functional and fixing the 2\u03c0 normalization; positivity and Radon representation are established by the immediately following theorem."
+      },
+      {
+        "id": "thm-riesz-measure-is-positive-radon",
+        "kind": "theorem",
+        "title": "The distributional Laplacian of a subharmonic function is a positive Radon measure",
+        "statement": "Assume DC. For a subharmonic u on a complex domain \u03a9 with distributional Riesz functional \u03bc_u=(2\u03c0)^{\u22121}\u222bu\u0394\u03c6 dA: (i) \u03bc_u(\u03c6)\u22650 for every real \u03c6\u2208C_c^\u221e(\u03a9) with \u03c6\u22650; (ii) there is exactly one positive Radon measure \u03bd on \u03a9 with \u03bc_u(\u03c6)=\u222b\u03c6 d\u03bd for all \u03c6\u2208C_c^\u221e(\u03a9). DC is used for the RMK representation and uniqueness; mollification and density use only AC_\u03c9, which DC implies.",
+        "deps": [
+          "def-riesz-measure-subharmonic-function",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "lem-dependent-choice-implies-countable-choice",
+          "def-plane-subharmonic-function",
+          "def-complex-domain",
+          "thm-plane-subharmonic-functions-are-locally-integrable",
+          "def-locally-integrable-function-as-a-regular-distribution",
+          "def-distributional-derivative",
+          "def-distributional-harmonicity-and-poisson-equation-in-rn",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-mollifier-approximation-in-distributions",
+          "thm-distributional-differentiation-is-continuous-and-commutes",
+          "thm-c-two-characterization-of-plane-subharmonicity",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-relative-compact-closed-sets-have-a-positive-distance-gap",
+          "lem-limit-preserves-order",
+          "thm-infimum-property",
+          "def-positive-linear-functional-on-c-c",
+          "lem-positive-linear-functionals-on-c-c-are-monotone",
+          "lem-rmk-functional-outer-content-is-well-defined",
+          "lem-rmk-compact-set-formula-and-local-finiteness",
+          "thm-rmk-representing-measure-is-inner-regular-on-open-sets",
+          "thm-rmk-positive-functional-is-integration-against-its-representing-measure",
+          "def-radon-measure-on-an-lch-space",
+          "thm-rmk-uniqueness-among-radon-measures",
+          "thm-dominated-convergence",
+          "cor-rn-is-locally-compact-and-sigma-compact",
+          "thm-metric-hausdorff-separation",
+          "thm-locally-compact-hausdorff-basics",
+          "lem-t0-t1-and-hausdorff-are-hereditary",
+          "lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-logarithmic-potential-distributional-laplacian",
+        "kind": "lemma",
+        "title": "Distributional Laplacian of a compact logarithmic potential",
+        "statement": "Assume Countable Choice. For finite positive compactly supported \u03bc, p_\u03bc=\u222blog|z\u2212w|d\u03bc(w) is locally integrable, subharmonic on C, harmonic off supp \u03bc, and \u0394p_\u03bc=2\u03c0\u03bc in distributions; equivalently \u0394U^\u03bc=\u22122\u03c0\u03bc.",
+        "deps": [
+          "def-logarithmic-potential-and-energy",
+          "def-support-of-a-borel-measure",
+          "def-riesz-measure-subharmonic-function",
+          "def-plane-subharmonic-function",
+          "thm-log-modulus-of-a-holomorphic-function-is-subharmonic",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "thm-plane-subharmonic-functions-are-locally-integrable",
+          "thm-minus-laplacian-of-the-fundamental-solution-is-dirac",
+          "thm-fatou-lemma",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-dominated-convergence",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-countable-choice"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-riesz-decomposition-subharmonic-plane",
+        "kind": "theorem",
+        "title": "Local Riesz decomposition of a plane subharmonic function",
+        "statement": "Assume Dependent Choice. Let $\\Omega\\subseteq\\mathbb C$ be a complex domain,\nlet $u$ be subharmonic on $\\Omega$ in the sense of\ndef-plane-subharmonic-function, and let $D\\subseteq\\Omega$ be open with\n$\\overline D$ compact and $\\overline D\\subseteq\\Omega$. Let\n$\\mu_u=(2\\pi)^{-1}\\Delta u$ be the Riesz measure of\ndef-riesz-measure-subharmonic-function and let\n$M$ be the restriction $\\mu_u|_D$ of def-restriction-of-a-measure,\nextended by zero to $\\mathbb C$: explicitly,\n$M(A):=\\mu_u(A\\cap D)$ for $A\\in\\mathcal B(\\mathbb C)$. Then $M$ is a finite positive Borel measure\ncarried by $D$, and there is a function $h$ harmonic on $D$ with\n\n$$u(z)=h(z)+\\int_{\\mathbb C}\\log|z-w|\\,dM(w)\\qquad\\text{for every }z\\in D,$$\n\nthe integral $\\int\\log|z-w|\\,dM(w)$ being an element of $[-\\infty,+\\infty)$\nwhose value $-\\infty$ is allowed. Moreover the pair is unique: if $M'$ is a\nfinite positive Borel measure carried by $D$ and $h'$ is harmonic on $D$ with\n$u(z)=h'(z)+\\int_{\\mathbb C}\\log|z-w|\\,dM'(w)$ for every $z\\in D$, then\n$M'=M$ and $h'=h$.\n\nDependent Choice is spent through Countable Choice in the Fourier/Radon suppliers, the Weyl lemma, the embedding of locally integrable functions in distributions, the polar-coordinate formula used to compare circle averages, and the selection of radii in step 8.1. The potential and averaging estimates themselves are choice-free.",
+        "deps": [
+          "def-dependent-choice",
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+          "lem-dependent-choice-implies-countable-choice",
+          "def-plane-subharmonic-function",
+          "def-plane-harmonic-function",
+          "def-riesz-measure-subharmonic-function",
+          "def-radon-measure-on-an-lch-space",
+          "def-restriction-of-a-measure",
+          "def-locally-integrable-function-as-a-regular-distribution",
+          "thm-plane-subharmonic-functions-are-locally-integrable",
+          "thm-riesz-measure-is-positive-radon",
+          "lem-logarithmic-potential-distributional-laplacian",
+          "thm-weyl-lemma-for-the-laplacian",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "thm-distributional-differentiation-is-continuous-and-commutes",
+          "lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity",
+          "thm-c-two-characterization-of-plane-subharmonicity",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            },
+            {
+              "title": "Christian Kuehn, Introduction to Potential Theory via Applications, \u00a72.3 Theorem 2.44",
+              "url": "https://arxiv.org/pdf/0804.4689"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-compact-polar-sets-and-subharmonic-minus-infinity-loci",
+        "kind": "lemma",
+        "title": "Compact capacity-zero sets and subharmonic polar loci",
+        "statement": "Assume Dependent Choice (hence Countable Choice). For a compact E\u2282C, cap(E)=0 if and only if E is contained in the \u2212\u221e locus of a nonidentically\u2212\u221e subharmonic function on a neighborhood of E. The equivalence extends to a specified F\u03c3 countable union of such compacts, even when unbounded; no arbitrary non-Borel-set equivalence is asserted.",
+        "deps": [
+          "def-dependent-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-logarithmic-capacity-compact-set",
+          "def-logarithmic-potential-and-energy",
+          "def-polar-set-and-quasi-everywhere",
+          "def-probability-measure",
+          "def-weak-convergence-of-borel-probability-measures",
+          "def-plane-subharmonic-function",
+          "def-restriction-of-a-measure",
+          "thm-riesz-decomposition-subharmonic-plane",
+          "lem-logarithmic-potential-maximum-principle",
+          "lem-logarithmic-potential-distributional-laplacian",
+          "lem-positive-c-zero-functionals-have-finite-regular-representing-measures",
+          "thm-rational-points-and-boxes-in-rn",
+          "thm-real-stone-weierstrass-for-compact-metric-spaces",
+          "thm-bolzano-weierstrass",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-log-modulus-of-a-holomorphic-function-is-subharmonic",
+          "thm-minus-laplacian-of-the-fundamental-solution-is-dirac",
+          "thm-heine-cantor-metric",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-dominated-convergence",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity",
+          "thm-c-two-characterization-of-plane-subharmonicity",
+          "thm-nonnegative-weighted-sums-of-measures"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            },
+            {
+              "title": "W. Hansen and I. Netuka, On Evans' and Choquet's Theorems for Polar Sets",
+              "url": "https://arxiv.org/pdf/2002.08091",
+              "locator": "Theorem 1.1 and proof \u00a72.1, printed pp. 2\u20134; direct shifted-kernel construction is recorded in the owner repair note"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-principle-of-descent-and-domination",
+        "kind": "theorem",
+        "title": "Principle of descent and the logarithmic domination principle",
+        "statement": "Assume Dependent Choice. (a) Principle of descent: if K\u2282C is nonempty compact and \u03bc_n,\u03bc are finite positive Borel measures on K with \u03bc_n\u21d2\u03bc, then U^\u03bc(z)\u2264liminf_nU^{\u03bc_n}(z) for every z\u2208C and I(\u03bc)\u2264liminf_nI(\u03bc_n). (b) Logarithmic domination: if \u03bc,\u03bd are finite positive Borel measures with compact support, \u03bc(C)>0, \u03bd(C)\u2264\u03bc(C), I(\u03bc)<+\u221e, and U^\u03bc\u2264U^\u03bd+c holds \u03bc-a.e. for some c\u2208R, then U^\u03bc\u2264U^\u03bd+c everywhere on C. The hypothesis \u03bc(C)>0 is necessary: \u03bc=\u03bd=0, c<0 is a counterexample.",
+        "deps": [
+          "def-dependent-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-logarithmic-potential-and-energy",
+          "thm-logarithmic-energy-well-defined-and-lower-semicontinuous",
+          "def-plane-subharmonic-function",
+          "lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity",
+          "def-riesz-measure-subharmonic-function",
+          "thm-riesz-measure-is-positive-radon",
+          "thm-plane-subharmonic-functions-are-locally-integrable",
+          "lem-logarithmic-potential-distributional-laplacian",
+          "def-radon-measure-on-an-lch-space",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-weyl-lemma-for-the-laplacian",
+          "cor-nonnegative-harmonic-function-with-an-interior-zero-vanishes",
+          "thm-c-two-characterization-of-plane-subharmonicity",
+          "def-plane-harmonic-function",
+          "lem-distributional-laplacian-commutes-with-mollification",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "thm-minkowski-inequality-for-integrals",
+          "thm-c-c-rn-is-dense-in-l-p-of-rn",
+          "thm-jensens-integral-inequality",
+          "thm-dominated-convergence",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice",
+          "thm-rmk-uniqueness-among-radon-measures"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            },
+            {
+              "title": "T. Bloom and N. Levenberg, Pluripotential Energy",
+              "url": "https://arxiv.org/pdf/1007.2391",
+              "locator": "Proposition 5.9, printed pp. 21\u201323, especially the epsilon-maximum domination proof"
+            },
+            {
+              "title": "V. Guedj and A. Zeriahi, The Weighted Monge\u2013Amp\u00e8re Energy of Quasi-Plurisubharmonic Functions",
+              "url": "https://arxiv.org/pdf/math/0612630",
+              "locator": "\u00a71.1, Proposition 1.6 and Corollary 1.7, printed pp. 3\u20138, strict-contact measure identity"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "def-green-function-with-pole-at-infinity",
+        "kind": "definition",
+        "title": "Green function with a pole at infinity",
+        "statement": "Let $K\\subseteq\\mathbb C$ be **compact and nonpolar**, meaning that\n$\\operatorname{cap}(K)>0$ for the logarithmic capacity of\ndef-logarithmic-capacity-compact-set; by def-polar-set-and-quasi-everywhere\nthis is exactly the statement that $K$ is not capacity-polar. Such a $K$ is\nnonempty, the complement $\\mathbb C\\setminus K$ is a nonempty open set, and it\nhas exactly one unbounded connected component\n(thm-complement-of-a-compact-plane-set-has-one-unbounded-component); that\ncomponent is written\n\n$$\\Omega:=\\Omega(K)\\subseteq\\mathbb C\\setminus K .$$\n\nBy def-complex-domain, $\\Omega$ is a complex domain, and $\\Omega\\ne\\mathbb C$\nbecause $K\\ne\\varnothing$ is disjoint from it. It is called the **exterior\ndomain of $K$**. Its boundary $\\partial\\Omega$ (interior, closure and boundary\nin the sense of def-metric-interior-closure-boundary) is a compact subset of\n$K$: indeed $\\partial\\Omega\\subseteq\\partial(\\mathbb C\\setminus K)\\subseteq K$,\nand it is called the **outer boundary of $K$**. Every point of $\\partial\\Omega$\nis a finite point of $\\mathbb C$; the point $\\infty$ is not part of it.\n\nSince $\\operatorname{cap}(K)>0$, the Robin constant\n$V_K=\\inf_{\\mu\\in P(K)}I(\\mu)$ of $K$ is a real number, $V_K<+\\infty$\n(def-logarithmic-capacity-compact-set); it is the **Robin constant in the\npole at infinity**. Harmonicity below is that of\ndef-plane-harmonic-function, and moduli are those of\ndef-complex-conjugate-real-imaginary-part-and-modulus.\n\nA **Green function of $\\Omega$ with pole at infinity and Robin constant\n$V_K$** is a function $g:\\Omega\\to\\mathbb R$ with the following four\nproperties.\n\n1. **Positive and harmonic.** $g(z)>0$ for every $z\\in\\Omega$, and $g$ is\n   harmonic on $\\Omega$.\n2. **Logarithmic normalization at infinity.** Writing $\\log$ for the natural\n   logarithm and $|{\\cdot}|$ for the modulus,\n\n   $$g(z)-\\log|z|\\longrightarrow V_K\\qquad\\text{as }|z|\\to\\infty,\\ z\\in\\Omega, $$\n\n   meaning: for every real $\\varepsilon>0$ there is a real $r$ such that\n   $|g(z)-\\log|z|-V_K|<\\varepsilon$ for every $z\\in\\Omega$ with $|z|>r$.\n   Because $\\Omega$ is unbounded, this condition is never vacuous.\n3. **Local boundedness near finite boundary points.** For every\n   $\\xi\\in\\partial\\Omega$ there is a real $r>0$ with\n\n   $$\\sup\\{\\,g(z):z\\in\\Omega,\\ |z-\\xi|<r\\,\\}<+\\infty .$$\n\n4. **Zero boundary limit quasi-everywhere.** There is a Borel capacity-polar\n   set $E\\subseteq\\partial\\Omega$ such that\n\n   $$\\lim_{\\Omega\\ni z\\to\\xi}g(z)=0\\qquad\\text{for every }\\xi\\in\\partial\\Omega\\setminus E .$$\n\n   That is, $g$ has boundary limit $0$ **quasi-everywhere on the outer\n   boundary**, in the sense of def-polar-set-and-quasi-everywhere applied\n   to the compact conductor $\\partial\\Omega$.\n\n**Notation.** If a Green function with pole at infinity and Robin constant\n$V_K$ exists and is unique under properties 1\u20134, that unique function is\nwritten\n\n$$z\\mapsto g_\\Omega(z,\\infty),\\qquad\\text{equivalently } z\\mapsto g_{\\Omega(K)}(z,\\infty).$$\n\nNeither existence nor uniqueness is asserted by this definition: they are\nconclusions of the theorem that builds the Green function from the equilibrium\npotential, and it is only there that the notation $g_\\Omega(\\cdot,\\infty)$ is\nlicensed.\n\n**Independence from the finite-pole kernel.** Properties 1\u20134 are stated for an\nunbounded exterior domain and normalize the logarithmic term with coefficient\n$+1$ and the additive constant $V_K$ at infinity. This is not the published\nfinite-pole canonical Green kernel $z\\mapsto g_\\Omega(z,a)$ of\ndef-green-function-plane-domain, whose pole is a point $a\\in\\Omega$ and\nwhose local form is $g_\\Omega(z,a)=-\\log|z-a|+h(z)$ with $h$ harmonic across $a$. No clause\nabove is imported from, or reduces to, that kernel; the two are different\nobjects even on a common domain.",
+        "deps": [
+          "def-logarithmic-capacity-compact-set",
+          "def-polar-set-and-quasi-everywhere",
+          "thm-complement-of-a-compact-plane-set-has-one-unbounded-component",
+          "def-green-function-plane-domain",
+          "def-complex-domain",
+          "def-plane-harmonic-function",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-metric-interior-closure-boundary"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 3,
+        "strategy": "For a compact nonpolar K, let Omega be the one unbounded component of C minus K with outer boundary the compact set partial Omega contained in K, and let V_K be the (finite) Robin constant. Define a Green function with pole at infinity and Robin constant V_K as a positive harmonic g on Omega that is normalized by g(z) - log|z| -> V_K as |z| -> infinity, is locally bounded near every finite boundary point, and has boundary limit zero quasi-everywhere on the outer boundary; record that existence and uniqueness are not asserted here and that the notation g_Omega(.,infinity) is licensed only by the later uniqueness theorem, and keep this distinct from the published finite-pole Green kernel."
+      },
+      {
+        "id": "thm-green-function-from-equilibrium-potential",
+        "kind": "theorem",
+        "title": "Green function at infinity from the equilibrium potential",
+        "statement": "Assume AC. For compact nonpolar K and \u03a9 the unbounded component of C\u2216K, g_\u03a9(z,\u221e)=V_K\u2212U^{\u03bc_K}(z) on \u03a9 in the preceding infinity-pole normalization. It is positive harmonic on \u03a9, has g(z)\u2212log|z|\u2192V_K at infinity, and tends to zero at every regular boundary point and quasi-everywhere on the outer boundary; no value is imposed at irregular points.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-logarithmic-potential-and-energy",
+          "def-logarithmic-capacity-compact-set",
+          "def-polar-set-and-quasi-everywhere",
+          "def-green-function-with-pole-at-infinity",
+          "def-complex-domain",
+          "def-plane-harmonic-function",
+          "def-plane-subharmonic-function",
+          "def-probability-measure",
+          "def-support-of-a-borel-measure",
+          "def-metric-interior-closure-boundary",
+          "thm-complement-of-a-compact-plane-set-has-one-unbounded-component",
+          "thm-equilibrium-measure-existence-and-uniqueness",
+          "thm-frostman-equilibrium-theorem",
+          "lem-logarithmic-potential-distributional-laplacian",
+          "lem-compact-polar-sets-and-subharmonic-minus-infinity-loci",
+          "thm-maximum-principle-for-plane-subharmonic-functions",
+          "thm-maximum-and-minimum-principles-for-plane-harmonic-functions",
+          "thm-c-two-characterization-of-plane-subharmonicity",
+          "thm-borel-probability-measures-on-polish-spaces-are-inner-regular",
+          "thm-euclidean-space-complete",
+          "lem-rat-embeds-dense",
+          "thm-rationals-countable",
+          "thm-product-of-countable",
+          "lem-metrics-on-rn",
+          "def-polish-space",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "def-fekete-points-and-transfinite-diameter",
+        "kind": "definition",
+        "title": "Fekete points and the transfinite diameter of a compact set",
+        "statement": "Let $K\\subseteq\\mathbb C$ be compact and nonempty, let $n\\ge2$ be an integer, and\nwrite $K^n$ for the $n$-fold product with the product topology. For\n$z=(z_1,\\dots,z_n)\\in K^n$ set\n\n$$\\Delta_n(z):=\\prod_{1\\le i<j\\le n}(z_i-z_j),\\qquad D_n(z):=|\\Delta_n(z)|=\\prod_{1\\le i<j\\le n}|z_i-z_j|\\in[0,\\infty).$$\n\nThe formula for $\\Delta_n$ is the Vandermonde product, whose polynomial form in\n$n$ indeterminates is def-vandermonde-polynomial; only the numerical\nfunction $D_n$ on $K^n$ is used here. Each factor $(z_1,\\dots,z_n)\\mapsto z_i-z_j$\nis continuous: the projections are continuous for the product topology\n(thm-product-universal-property, def-product-topology), and complex\nsubtraction is continuous since\n$|(z-w)-(z_0-w_0)|\\le|z-z_0|+|w-w_0|$\n(lem-complex-conjugation-and-modulus-laws). Finite products and the modulus\npreserve continuity\n(lem-algebra-of-continuous-real-maps-on-a-space,\nlem-complex-conjugation-and-modulus-laws); the product $K^n$ of finitely\nmany compact spaces is compact\n(thm-finite-products-of-compact-spaces), and $K^n\\ne\\varnothing$. Hence\n$D_n$ and the composition\n\n$$(z_1,\\dots,z_n)\\longmapsto D_n(z)^{2/[n(n-1)]}$$\n\nattain greatest values on $K^n$\n(thm-extreme-value-metric). The $n$-th **Fekete diameter** of $K$ is\n\n$$\\delta_n(K):=\\max_{(z_1,\\dots,z_n)\\in K^n}D_n(z_1,\\dots,z_n)^{2/[n(n-1)]}\\in[0,\\infty),$$\n\nequivalently $\\delta_n(K)=\\bigl(\\max_{K^n}D_n\\bigr)^{2/[n(n-1)]}$, because\n$t\\mapsto t^{2/[n(n-1)]}$ is increasing on $[0,\\infty)$ and the root is the\nnonnegative one (thm-nth-roots-exist). The exponent\n$2/[n(n-1)]=1/\\binom n2$ is the reciprocal of the number of unordered pairs, so\nthat $\\delta_n$ scales like a length. A tuple\n$z\\in K^n$ at which the maximum is attained is an $n$-point **Fekete tuple** of\n$K$, and its entries $z_1,\\dots,z_n$ are $n$-point **Fekete points**.\n\nTo a Fekete tuple $z$ one associates its **monic Fekete polynomial**\n\n$$F_n(Z):=\\prod_{j=1}^n(Z-z_j),$$\n\na monic polynomial of degree $n$ in the conventions of\ndef-complex-polynomial-degree-and-monic: each factor $Z-z_j$ is monic of\ndegree $1$, and degrees add and leading coefficients multiply under multiplication over\nthe integral domain $\\mathbb C$ (thm-polynomial-degree-of-a-product-over-a-domain),\nby induction on $n$.\n\nThe **transfinite diameter** of $K$ is\n\n$$\\tau(K):=\\inf_{n\\ge2}\\delta_n(K)\\in[0,\\infty),$$\n\nan infimum over a nonempty set of nonnegative reals, hence a well-defined real\nnumber (thm-infimum-property, def-infimum). For the empty set one uses\nthe separate convention $\\tau(\\varnothing):=0$. Whether the sequence\n$(\\delta_n(K))_{n\\ge2}$ is nonincreasing, and whether $\\tau(K)$ is its limit, is\nnot assumed in the definition.",
+        "deps": [
+          "def-complex-polynomial-degree-and-monic",
+          "def-logarithmic-capacity-compact-set",
+          "thm-polynomial-degree-of-a-product-over-a-domain",
+          "thm-finite-products-of-compact-spaces",
+          "thm-extreme-value-metric",
+          "thm-product-universal-property",
+          "def-product-topology",
+          "lem-algebra-of-continuous-real-maps-on-a-space",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-nth-roots-exist",
+          "thm-infimum-property",
+          "def-infimum",
+          "def-vandermonde-polynomial"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 2,
+        "strategy": "The Vandermonde product D_n is continuous on the compact nonempty product K^n (projections continuous, complex subtraction and the modulus continuous, finite products of continuous real maps), so it attains a maximum; the exponent 2/[n(n-1)] is the reciprocal of the number of unordered pairs, making delta_n an order-independent length and equal to the increasing normalization of max D_n. Fekete tuples are maximizing tuples (existence, not uniqueness). The monic Fekete polynomial F_n(z)=prod(z-z_j) is monic of degree n by the product-degree theorem. tau(K)=inf_{n>=2} delta_n is a well-defined real infimum, with the separate convention tau(empty)=0; monotonicity of delta_n and equality tau=lim delta_n are deliberately not assumed here and are proved in lem-fekete-diameters-decrease. No choice principle is used."
+      },
+      {
+        "id": "lem-fekete-diameters-decrease",
+        "kind": "lemma",
+        "title": "Monotonicity of normalized Fekete diameters",
+        "statement": "For every nonempty compact K, \u03b4_{n+1}(K)\u2264\u03b4_n(K) for n\u22652, so \u03c4(K)=lim_{n\u2192\u221e}\u03b4_n(K).",
+        "deps": [
+          "def-fekete-points-and-transfinite-diameter",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-nth-roots-exist",
+          "lem-power-monotone",
+          "cor-monotone-converges-iff-bounded",
+          "lem-limit-preserves-order",
+          "def-infimum",
+          "thm-infimum-property"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-logarithmic-capacity-equals-transfinite-diameter",
+        "kind": "theorem",
+        "title": "Fekete\u2013Szeg\u0151 equality of logarithmic capacity, transfinite diameter, and Chebyshev constant",
+        "statement": "Assume AC. For every compact K\u2282C, cap(K)=\u03c4(K)=cheb(K). If K is infinite, then for any sequence of n-point Fekete tuples with associated monic polynomials F_n, lim_{n\u2192\u221e}\u2016F_n\u2016_K^{1/n}=cheb(K)=cap(K). If cap(K)>0, the empirical probability measures of any sequence of Fekete n-tuples converge weakly to the unique equilibrium measure \u03bc_K; moreover, |F_n(z)|^{1/n}\u2192exp(\u2212U^{\u03bc_K}(z)) uniformly on every compact subset of C\\K.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-chebyshev-constant-compact-set",
+          "def-complex-polynomial-degree-and-monic",
+          "def-countable-choice",
+          "def-dirac-measure",
+          "def-fekete-points-and-transfinite-diameter",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-logarithmic-capacity-compact-set",
+          "def-logarithmic-potential-and-energy",
+          "def-metric-compactness",
+          "def-nonnegative-lebesgue-integral",
+          "def-nonnegative-weighted-sum-of-measures",
+          "def-probability-measure",
+          "def-product-measure-on-sigma-finite-spaces",
+          "def-real-exponential-function-and-e",
+          "def-weak-convergence-of-borel-probability-measures",
+          "cor-differentiable-implies-continuous",
+          "cor-exponential-is-a-bijection-onto-positive-reals",
+          "cor-power-series-sums-are-continuous",
+          "lem-algebra-of-continuous-real-maps-on-a-space",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-fekete-diameters-decrease",
+          "lem-limsup-monotone-comparison",
+          "lem-monic-polynomial-capacity-lower-bound",
+          "lem-power-monotone",
+          "lem-probability-laws-on-a-compact-metric-space-have-weakly-convergent-subsequences",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "prop-dirac-measure-is-a-probability-measure",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-algebra-of-continuous-functions",
+          "thm-algebra-of-limits",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-composition-of-continuous-functions",
+          "thm-equilibrium-measure-existence-and-uniqueness",
+          "thm-extreme-value-metric",
+          "thm-finite-products-of-compact-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-heine-cantor-metric",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-logarithm-derivative-and-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-natural-logarithm-laws",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "thm-nth-roots-exist",
+          "thm-product-universal-property",
+          "thm-real-power-laws",
+          "thm-real-stone-weierstrass-for-compact-metric-spaces",
+          "thm-sequential-criterion-for-continuity",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 834,
+    "id": "logarithmic-potential-capacity-and-riesz-decomposition-examples",
+    "kind": "B",
+    "category": "complex-analysis",
+    "title": "Logarithmic Potential, Capacity, and Riesz Decomposition: Examples and Counterexamples",
+    "companion": "logarithmic-potential-capacity-and-riesz-decomposition",
+    "requires": [
+      "logarithmic-potential-capacity-and-riesz-decomposition",
+      "infinite-products-and-weierstrass-factorisation",
+      "hausdorff-measure-and-hausdorff-dimension"
+    ],
+    "items": [
+      {
+        "id": "ex-logarithmic-capacity-of-disc-and-equilibrium-circle",
+        "kind": "example",
+        "title": "Capacity of a disc and its circular equilibrium measure",
+        "statement": "Assume AC. For K=closed D(a,r), r>0, normalized arclength on |z\u2212a|=r is the unique equilibrium measure, U(z)=log(1/r) for |z\u2212a|\u2264r and U(z)=log(1/|z\u2212a|) for |z\u2212a|\u2265r, and cap K=r. The same capacity and measure hold for its boundary circle.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-logarithmic-potential-and-energy",
+          "def-logarithmic-capacity-compact-set",
+          "def-probability-measure",
+          "lem-logarithmic-energy-strict-positivity-for-zero-mass-charges",
+          "thm-equilibrium-measure-existence-and-uniqueness",
+          "def-harmonic-measure-plane-domain",
+          "thm-harmonic-measure-disc-poisson-density",
+          "def-mean-value-property-for-plane-functions",
+          "thm-mean-value-property-for-plane-harmonic-functions",
+          "thm-jensen-formula-on-a-disc",
+          "thm-dominated-convergence",
+          "thm-sine-and-cosine-derivatives",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "def-plane-harmonic-function",
+          "def-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-logarithmic-capacity-of-a-real-interval",
+        "kind": "example",
+        "title": "Arcsine equilibrium measure and capacity of a segment",
+        "statement": "Assume AC. For a<b, the unique equilibrium measure of [a,b] is dx/[\u03c0\u221a((x\u2212a)(b\u2212x))] and cap([a,b])=(b\u2212a)/4; its potential is log(4/(b\u2212a)) on the segment.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-logarithmic-potential-and-energy",
+          "def-logarithmic-capacity-compact-set",
+          "def-probability-measure",
+          "def-measure",
+          "def-distribution-function-of-a-borel-measure-on-r",
+          "def-principal-inverse-sine-and-cosine",
+          "lem-logarithmic-energy-strict-positivity-for-zero-mass-charges",
+          "thm-equilibrium-measure-existence-and-uniqueness",
+          "ex-logarithmic-capacity-of-disc-and-equilibrium-circle",
+          "def-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-nth-roots-and-roots-of-unity",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-principal-inverse-sine-and-cosine-derivatives",
+          "thm-ftc-second-part",
+          "thm-lebesgue-stieltjes-correspondence-with-distribution-functions"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-chebyshev-extremal-polynomials-and-capacity",
+        "kind": "example",
+        "title": "Chebyshev extremals and the exact disk Fekete polynomial",
+        "statement": "Assume AC. For the closed disk $K=\\overline{D(a,R)}$, $R>0$, $t_n(K)=R^n$ and $\\operatorname{cheb}(K)=R=\\operatorname{cap}(K)$, attained by $(z-a)^n$. For $K=[-1,1]$, $t_n(K)=2^{1-n}$ and $\\operatorname{cheb}(K)=1/2=\\operatorname{cap}(K)$, attained by the monic Chebyshev polynomial $2^{1-n}T_n$. For each $n\\ge2$, the $n$th roots of unity form an $n$-point Fekete tuple of the closed unit disk and its monic Fekete polynomial is $F_n(z)=z^n-1$. Their empirical measures converge weakly to normalized arclength on the unit circle. On the unit disk, $\\|z^n-1\\|=2$, so its nth-root norm tends to $1=\\operatorname{cheb}(K)$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-chebyshev-constant-compact-set",
+          "def-chebyshev-polynomials-first-and-second-kind",
+          "def-complex-exponential",
+          "def-complex-integer-powers",
+          "def-complex-polynomial-degree-and-monic",
+          "def-determinant-of-a-square-matrix",
+          "def-fekete-points-and-transfinite-diameter",
+          "def-inner-product-norm",
+          "def-inner-product-space",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-logarithmic-capacity-compact-set",
+          "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "def-vandermonde-polynomial",
+          "def-weak-convergence-of-borel-probability-measures",
+          "cor-cauchy-inequalities",
+          "cor-sum-of-roots-of-unity",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
+          "ex-logarithmic-capacity-of-a-real-interval",
+          "ex-logarithmic-capacity-of-disc-and-equilibrium-circle",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-nth-root-of-constant-tends-to-one",
+          "lem-power-monotone",
+          "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "thm-algebra-of-limits",
+          "thm-chebyshev-minimax-monic-polynomial",
+          "thm-chebyshev-multiple-angle-identities",
+          "thm-complex-nth-roots-and-roots-of-unity",
+          "thm-complex-numbers-form-a-field",
+          "thm-complex-polynomial-has-exactly-degree-many-roots-counted-with-multiplicity",
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-finite-dimensional-isometry-characterisations",
+          "thm-gram-schmidt-orthonormalisation",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+          "thm-logarithmic-capacity-equals-transfinite-diameter",
+          "thm-nth-roots-exist"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a71",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 8,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-chebyshev-extremal-nodes-and-arcsine-measure",
+        "kind": "example",
+        "title": "Chebyshev extremal nodes converge to the arcsine equilibrium measure",
+        "statement": "Assume AC. For n\u22651 let x_{k,n}=cos(k\u03c0/n), 0\u2264k\u2264n, and \u03bd_n=(n+1)^{-1}\u03a3_{k=0}^n \u03b4_{x_{k,n}}. Then \u03bd_n converges weakly to dx/(\u03c0\u221a(1\u2212x\u00b2)), the arcsine equilibrium measure of [\u22121,1]; the x_{k,n} are the extreme points of T_n(x)=cos(n arccos x).",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-weak-convergence-of-borel-probability-measures",
+          "ex-logarithmic-capacity-of-a-real-interval",
+          "def-chebyshev-polynomials-first-and-second-kind",
+          "thm-chebyshev-multiple-angle-identities",
+          "thm-darboux-equals-riemann",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a71",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-finite-and-countable-sets-are-logarithmically-polar",
+        "kind": "example",
+        "title": "Finite and countable planar sets have zero logarithmic capacity",
+        "statement": "Assume Countable Choice. Every finite or countable E\u2282C is capacity-polar in the compact/local sense. Moreover E is contained in the \u2212\u221e locus of an explicitly constructed nonidentically\u2212\u221e subharmonic function on C.",
+        "deps": [
+          "def-countable-choice",
+          "def-countable",
+          "def-polar-set-and-quasi-everywhere",
+          "def-logarithmic-potential-and-energy",
+          "def-logarithmic-capacity-compact-set",
+          "def-probability-measure",
+          "def-dirac-measure",
+          "def-complex-domain",
+          "def-plane-subharmonic-function",
+          "def-plane-harmonic-function",
+          "def-nonnegative-weighted-sum-of-measures",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "thm-monotone-convergence-for-the-integral",
+          "lem-logarithmic-potential-distributional-laplacian",
+          "thm-log-modulus-of-a-holomorphic-function-is-subharmonic",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "thm-c-two-characterization-of-plane-subharmonicity",
+          "lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-dominated-convergence",
+          "thm-plane-subharmonic-functions-are-locally-integrable",
+          "cor-finite-nonnegative-integral-implies-finite-almost-everywhere"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-cantor-sets-with-positive-and-zero-logarithmic-capacity",
+        "kind": "example",
+        "title": "Two Cantor sets with different logarithmic capacities",
+        "statement": "Assume the Axiom of Choice. Let $C\\subseteq[0,1]$ be the middle-thirds Cantor set with Cantor measure $\\mu_c$ (def-cantor-set, def-cantor-measure). Then $$I(\\mu_c)\\le 3\\log 3<+\\infty,\\qquad\\text{hence}\\qquad \\operatorname{cap}(C)\\ge e^{-3\\log 3}=\\tfrac1{27}>0 .$$ Let $\\ell_n:=e^{-4^n}$ for $n\\ge1$ and let $K\\subseteq[0,1]$ be the nested binary Cantor set constructed as follows: $K_0=[0,1]$ is one closed cell, and each level-$(n-1)$ cell $[a,a+s]$ is replaced by the two disjoint closed cells $[a,a+\\ell_n]$ and $[a+s-\\ell_n,a+s]$, with $K_n$ the union of the resulting $2^n$ cells and $K:=\\bigcap_{n\\ge0}K_n$. Then every Borel probability $\\nu$ on $K$ has $I(\\nu)=+\\infty$, so $V_K=+\\infty$ and $\\operatorname{cap}(K)=0$. Both $C$ and $K$ are uncountable compact Lebesgue-null subsets of $[0,1]$. Thus Lebesgue measure and cardinality alone do not determine logarithmic capacity.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-countable",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-logarithmic-capacity-compact-set",
+          "def-logarithmic-potential-and-energy",
+          "def-cantor-set",
+          "def-cantor-measure",
+          "thm-cantor-set-properties",
+          "thm-cantor-set-ternary-description",
+          "lem-cantor-cylinder-masses",
+          "prop-cantor-measure-is-a-singular-atomless-probability-measure",
+          "thm-layer-cake-formula-for-l-p-powers",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-cauchy-schwarz-finite",
+          "thm-nested-interval-property",
+          "thm-recursion",
+          "def-measure-zero-and-content-zero"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-riesz-measure-of-log-modulus-is-zero-divisor",
+        "kind": "example",
+        "title": "Riesz measure of a log modulus records the holomorphic zeros",
+        "statement": "Assume Dependent Choice. Let $\\Omega\\subseteq\\mathbb C$ be a complex domain and let $f$ be holomorphic on $\\Omega$, not identically zero on any connected component of $\\Omega$. Put $u:=\\log|f|$, subharmonic on $\\Omega$ (thm-log-modulus-of-a-holomorphic-function-is-subharmonic), with Riesz measure $\\mu_u=(2\\pi)^{-1}\\Delta u$ (def-riesz-measure-subharmonic-function). Then $$\\mu_u=\\sum_{a\\in Z(f)}\\operatorname{ord}_a(f)\\,\\delta_a,$$ where $Z(f)=\\{a\\in\\Omega:f(a)=0\\}$, the integers $\\operatorname{ord}_a(f)\\ge1$ are the vanishing orders (thm-zero-order-factorization-holomorphic-function) and $\\delta_a$ is the unit Dirac measure at $a$ (def-dirac-measure); the sum is a locally finite positive measure on $\\Omega$. In particular $\\log|f|$ has no Riesz mass on $\\Omega\\setminus Z(f)$.",
+        "deps": [
+          "def-dependent-choice",
+          "lem-dependent-choice-implies-countable-choice",
+          "def-complex-domain",
+          "def-riesz-measure-subharmonic-function",
+          "def-dirac-measure",
+          "thm-log-modulus-of-a-holomorphic-function-is-subharmonic",
+          "thm-zero-order-factorization-holomorphic-function",
+          "thm-identity-theorem-holomorphic-functions",
+          "lem-local-holomorphic-logarithm-nonvanishing-function-on-disc",
+          "cor-holomorphic-functions-are-real-analytic-and-smooth",
+          "thm-c2-holomorphic-components-are-harmonic",
+          "lem-logarithmic-potential-distributional-laplacian",
+          "thm-riesz-measure-is-positive-radon",
+          "thm-distributional-differentiation-is-continuous-and-commutes",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "cor-bolzano-weierstrass-in-rn",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+          "def-radon-measure-on-an-lch-space",
+          "thm-rational-points-and-boxes-in-rn",
+          "cor-rn-is-locally-compact-and-sigma-compact",
+          "thm-metric-hausdorff-separation",
+          "thm-locally-compact-hausdorff-basics",
+          "lem-t0-t1-and-hausdorff-are-hereditary"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            },
+            {
+              "title": "C. Kuehn, Introduction to Potential Theory via Applications, \u00a7\u00a72.3 and 3.4\u20133.5",
+              "url": "https://arxiv.org/pdf/0804.4689"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-green-function-of-a-circular-conductor",
+        "kind": "example",
+        "title": "Infinity-pole Green function recovered from a circular conductor",
+        "statement": "Assume AC. For K=closed D(a,r) with r>0, \u03a9={|z\u2212a|>r}, the normalized infinity-pole Green function is g_\u03a9(z,\u221e)=log(|z\u2212a|/r). It equals V_K\u2212U^{\u03bc_K}(z), vanishes on the entire circle, and has g(z)\u2212log|z|\u2192\u2212log r at infinity.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-logarithmic-potential-and-energy",
+          "def-logarithmic-capacity-compact-set",
+          "def-polar-set-and-quasi-everywhere",
+          "def-complex-domain",
+          "def-green-function-with-pole-at-infinity",
+          "def-plane-harmonic-function",
+          "lem-log-modulus-is-harmonic-off-its-centre",
+          "thm-complement-of-a-compact-plane-set-has-one-unbounded-component",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "ex-logarithmic-capacity-of-disc-and-equilibrium-circle",
+          "thm-green-function-from-equilibrium-potential"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "E. B. Saff, Logarithmic Potential Theory with Applications to Approximation Theory, \u00a7\u00a71\u20133",
+              "url": "https://arxiv.org/pdf/1010.3760"
+            },
+            {
+              "title": "B. Khoruzhenko, LTCC Potential Theory notes, \u00a7\u00a73 and 5",
+              "url": "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "strategy": "direct"
+      }
+    ]
+  }
+]

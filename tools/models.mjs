@@ -12,6 +12,11 @@ export const MODELS = Object.freeze({
     runner: 'codex',
     family: 'openai',
   }),
+  sol61: Object.freeze({
+    id: process.env.SOL61_MODEL ?? 'gpt-6.1-sol',
+    runner: 'codex',
+    family: 'openai',
+  }),
   luna: Object.freeze({
     id: process.env.LUNA_MODEL ?? 'gpt-6-luna',
     runner: 'codex',
@@ -32,6 +37,8 @@ export const MODEL_PROFILE_NAMES = Object.freeze({
   solHigh: 'gpt-6-sol-high',
   solXHigh: 'gpt-6-sol-xhigh',
   solMax: 'gpt-6-sol-max',
+  sol61Medium: 'gpt-6.1-sol-medium',
+  sol61High: 'gpt-6.1-sol-high',
   deepseekFlashMax: 'deepseek-v4.1-flash-max',
 });
 
@@ -56,6 +63,14 @@ export const MODEL_PROFILES = Object.freeze({
     model: MODELS.sol.id, runner: MODELS.sol.runner, family: MODELS.sol.family,
     provider: 'openai', effort: 'max', requestedEffort: 'max', contextWindow: 1_000_000,
   }),
+  [MODEL_PROFILE_NAMES.sol61Medium]: Object.freeze({
+    model: MODELS.sol61.id, runner: MODELS.sol61.runner, family: MODELS.sol61.family,
+    provider: 'openai', effort: 'medium', requestedEffort: 'medium', contextWindow: 1_000_000,
+  }),
+  [MODEL_PROFILE_NAMES.sol61High]: Object.freeze({
+    model: MODELS.sol61.id, runner: MODELS.sol61.runner, family: MODELS.sol61.family,
+    provider: 'openai', effort: 'high', requestedEffort: 'high', contextWindow: 1_000_000,
+  }),
   [MODEL_PROFILE_NAMES.deepseekFlashMax]: Object.freeze({
     model: MODELS.deepseekFlash.id,
     runner: MODELS.deepseekFlash.runner,
@@ -68,20 +83,21 @@ export const MODEL_PROFILES = Object.freeze({
 });
 
 export const LANES = Object.freeze({
-  agentic: 'sol',
-  secondary: 'sol',
-  partition: 'sol',
-  adjudication: 'sol',
+  agentic: 'sol61',
+  secondary: 'sol61',
+  partition: 'sol61',
+  adjudication: 'sol61',
   finalAdjudication: 'astra',
 });
 
 export const JUDGE_LINEUPS = Object.freeze({
   sol: Object.freeze([MODELS.sol.id]),
+  sol61: Object.freeze([MODELS.sol61.id]),
   luna: Object.freeze([MODELS.luna.id]),
 });
 
 export const KNOWN_JUDGES = Object.freeze([...new Set(Object.values(JUDGE_LINEUPS).flat())]);
-export const DEFAULT_LINEUP = 'sol';
+export const DEFAULT_LINEUP = 'sol61';
 
 // Each item judge is ephemeral, but keep the active lane's context window
 // explicit so an unusually large target and its compact interfaces fit without

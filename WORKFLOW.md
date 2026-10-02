@@ -143,6 +143,17 @@ Restart the controller when selecting the run-local stage table.
 
 ## Controls
 
+- Current agent defaults and Step-5/6 review profiles use GPT-6.1 Sol at high
+  effort. DeepSeek V4.1 Flash max assignments remain explicit. Legacy Sol and
+  Luna registry entries preserve historical evidence; new default judges use
+  the `sol61` lineup at high effort. Running workers retain their launch settings.
+
+- All agent lanes use `model_auto_compact_token_limit=500000` with scope `total`.
+  The dispatcher and judge pass this explicitly for isolated Codex homes;
+  the orchestrator and its spawned agents use the global Codex configuration.
+  Running sessions retain their startup settings until restarted or resumed
+  with the updated configuration. Compaction occurs at a turn boundary.
+
 - Send controls to the run's state directory:
 
   ```bash

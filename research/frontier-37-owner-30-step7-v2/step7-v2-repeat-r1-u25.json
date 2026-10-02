@@ -1,0 +1,264 @@
+{
+  "run": "frontier-37-owner-30",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "25",
+  "input_sha256": "e05cdf19d5e313eca8bcdfe4dd966cdf4b0c59c46fd851eb9dff4ee3cbf9156e",
+  "decisions": [
+    {
+      "id": "def-poisson-integral-of-finite-boundary-measure",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "12fb4a435aae025fe821d07c7eef0cc81d13c15d28915621e6a75dcac83aace2",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed unlicensed dependency invocation: the complex-measure clause of def-radon-nikodym-derivative explicitly assumes full Choice, whereas this Definition assumes only countable choice. Replaced that invocation and thm-integration-against-a-radon-nikodym-derivative with the canonical finite simple-integral formula and Lebesgue linearity. Each density restriction is integrable and every simple level set has finite total variation. The existing explicit dyadic approximants then extend the identity to bounded tests without additional choice; density uniqueness follows from equality of indefinite integrals.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-poisson-integral-of-finite-boundary-measure",
+      "disposition": "repaired",
+      "post_sha256": "15569ade05740fc9c47972bf2c8a89379242a32b93bd7c1c5a322b559afb53cf",
+      "review_context_sha256": "27cf3625267b834b47f6923ee403b4d406fb0109a2f235e1a1bf27b642d7d726",
+      "reason": "Confirmed unlicensed dependency invocation: the complex-measure clause of def-radon-nikodym-derivative explicitly assumes full Choice, whereas this Definition assumes only countable choice. Replaced that invocation and thm-integration-against-a-radon-nikodym-derivative with the canonical finite simple-integral formula and Lebesgue linearity. Each density restriction is integrable and every simple level set has finite total variation. The existing explicit dyadic approximants then extend the identity to bounded tests without additional choice; density uniqueness follows from equality of indefinite integrals. Local mathematical repair review; no independent review of this repair is claimed. Both owning contracts also replace stale RN risk notes, identify the precise countable-choice uses and check r=0 rather than declaring endpoints inapplicable. The kernel is bounded on each interior fibre; total variation makes the integral finite; regularity of fm, invariance under almost-everywhere changes, radial convolution and the continuous-data substitution retain their stated hypotheses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "cex-radial-boundary-limit-does-not-force-tangential-limit",
+    "cor-bounded-harmonic-functions-have-nontangential-limits",
+    "ex-poisson-boundary-atom-in-h-one",
+    "ex-poisson-extension-of-an-indicator-arc",
+    "thm-fatou-nontangential-boundary-theorem-harmonic",
+    "thm-harmonic-hardy-one-measure-representation",
+    "thm-harmonic-hardy-representation-p-greater-one",
+    "thm-harnack-convergence-positive-harmonic-functions",
+    "thm-poisson-extension-lp-contraction-and-norm-limit",
+    "thm-poisson-nontangential-maximal-bound"
+  ],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "companion": "research/DEFECT-LEDGER.md",
+      "id": "def-poisson-integral-of-finite-boundary-measure",
+      "run": "frontier-37-owner-30",
+      "phase": "repeat",
+      "round": 1,
+      "unit": "25",
+      "status": "repaired",
+      "defect_type": "dependency_citation",
+      "finding": "The complex-measure clause in def-radon-nikodym-derivative requires full Choice; this countable-choice Definition invoked it and its integration theorem without that hypothesis.",
+      "repair": "Use the supplied measurable-set density formula and canonical simple integration with finite Lebesgue linearity, followed by the explicit dyadic bounded-test argument. Density uniqueness is supplied by thm-the-lebesgue-integral-respects-almost-everywhere-equality. Remove both RN dependencies and add def-simple-integral-against-a-signed-or-complex-measure.",
+      "evidence_paths": [
+        "items/def-poisson-integral-of-finite-boundary-measure.md",
+        "items/def-radon-nikodym-derivative.md",
+        "items/def-simple-integral-against-a-signed-or-complex-measure.md"
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "additional_nonfatal_finding": "The contracts marked endpoints inapplicable despite the included radial endpoint r=0. Both assigned entries now verify P[mu](0)=mu(T) and P[f](0)=integral f dm and state that r=1 is excluded."
+    }
+  ],
+  "repair_notes": {
+    "completed": "The assigned frontier Definition is repaired. Its exact before guard matches the assignment. The complete Definition sections differ, so all ten direct dependency/reference consumers and the owning page were examined; their used formulas remain sound and their statements were not edited. Both owning contract entries now record the direct density argument, precise choice uses, and the included radial endpoint r=0.",
+    "pending": [],
+    "source_evidence": "Local supplier interfaces consulted; no external source retrieval claimed. The repair is elementary finite simple integration and an explicit uniform approximation argument.",
+    "dependencies_removed": [
+      "def-radon-nikodym-derivative",
+      "thm-integration-against-a-radon-nikodym-derivative"
+    ],
+    "dependencies_added": [
+      "def-simple-integral-against-a-signed-or-complex-measure"
+    ],
+    "direct_consumer_reviews": [
+      {
+        "id": "cex-radial-boundary-limit-does-not-force-tangential-limit",
+        "path": "items/cex-radial-boundary-limit-does-not-force-tangential-limit.md",
+        "locator": "Counterexample steps 2.1-2.3 and 3.1",
+        "snippet": "[L2] For $f\\in L^1(\\mathbb T,m)$ the Poisson integral is $P[f]=P[fm]$, given by $P[f](z)=\\int_{\\mathbb T}P(z,\\eta)f(\\eta)\\,dm(\\eta)$ with $P(z,\\eta)=(1-|z|^2)\\big/|\\varphi(\\eta)-z|^2>0$ for $z\\in\\mathbb D$ and $\\eta\\in\\mathbb T$; writing $z=r\\varphi([t])$ and $\\eta=\\varphi([s])$ gives $P(z,\\eta)=(1-r^2)\\big/(1-2r\\cos(2\\pi(s-t))+r^2)$, and the radial function is $(P_r*f)(\\zeta)=P[f](r\\zeta)=\\int_{\\mathbb T}P_r(\\zeta-\\eta)f(\\eta)\\,dm(\\eta)$, where $P_r(\\theta)=(1-r^2)/(1-2r\\cos(2\\pi\\theta)+r^2)$ in torus coordinates ([[def-poisson-integral-of-finite-boundary-measure]], [[def-poisson-kernel-on-the-disc]], [[lem-poisson-kernel-properties-on-the-disc]]).",
+        "affected_use": "Uses P[f](z)=integral P(z,eta)f(eta) dm and the radial kernel formula for the explicit indicator. Those formulas and countable choice remain unchanged.",
+        "invalidated_claim": "None: this use does not rely on the removed Radon-Nikodym naming clause.",
+        "disposition": "unaffected",
+        "minimality": "The used measure, density, bounded-test and Poisson formulas are preserved; no consumer edit or further hop is required.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "cor-bounded-harmonic-functions-have-nontangential-limits",
+        "path": "items/cor-bounded-harmonic-functions-have-nontangential-limits.md",
+        "locator": "Given and Proof steps 2.1-4.1",
+        "snippet": "**Given:** The Axiom of Choice; a complex harmonic function\n$u:\\mathbb D\\to\\mathbb C$ with $M:=\\sup_{z\\in\\mathbb D}|u(z)|<+\\infty$; the\nnotation $u_r(\\zeta)=u(r\\zeta)$ and $P[f]=P[fm]$.",
+        "affected_use": "Uses the notation P[f]=P[fm] for the bounded boundary datum; the representation and Fatou results supply the other claims. The density convention and AC hypothesis are unchanged.",
+        "invalidated_claim": "None: this use does not rely on the removed Radon-Nikodym naming clause.",
+        "disposition": "unaffected",
+        "minimality": "The used measure, density, bounded-test and Poisson formulas are preserved; no consumer edit or further hop is required.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "ex-poisson-boundary-atom-in-h-one",
+        "path": "items/ex-poisson-boundary-atom-in-h-one.md",
+        "locator": "Verification steps 2.1 and 4.1",
+        "snippet": "[L2] For a finite regular complex Borel measure $\\mu$ on $\\mathbb T$ one has $P[\\mu](z)=\\int_{\\mathbb T}P(z,\\zeta)\\,d\\mu(\\zeta)$ with $P(z,\\zeta)=(1-|z|^2)/|\\varphi(\\zeta)-z|^2>0$; for $f\\in L^1(\\mathbb T,m)$ the density measure is $(fm)(E)=\\int_Ef\\,dm$ and $P[f]=P[fm]$ ([[def-poisson-integral-of-finite-boundary-measure]], [[def-poisson-kernel-on-the-disc]]).",
+        "affected_use": "Uses the complex-measure Poisson integral, its Dirac evaluation and the formula (fm)(E)=integral_E f dm with P[f]=P[fm] in the no-density contradiction. All are retained.",
+        "invalidated_claim": "None: this use does not rely on the removed Radon-Nikodym naming clause.",
+        "disposition": "unaffected",
+        "minimality": "The used measure, density, bounded-test and Poisson formulas are preserved; no consumer edit or further hop is required.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "ex-poisson-extension-of-an-indicator-arc",
+        "path": "items/ex-poisson-extension-of-an-indicator-arc.md",
+        "locator": "Verification steps 2.2-2.3 and 3.3",
+        "snippet": "[L2] For $f\\in L^p(\\mathbb T,m)$, $P[f](z)=\\int_{\\mathbb T}P(z,\\eta)f(\\eta)\\,dm(\\eta)$ with $P(z,\\eta)=(1-|z|^2)/|\\varphi(\\eta)-z|^2>0$; the radial functions satisfy $(P_r*f)(\\zeta)=\\int_{\\mathbb T}P_r(\\zeta-\\eta)f(\\eta)\\,dm(\\eta)=P[f](r\\zeta)$ with $P_r(u)=(1-r^2)/(1-2r\\cos(2\\pi u)+r^2)$, and $P_r$ is even because cosine is even ([[def-poisson-integral-of-finite-boundary-measure]], [[def-poisson-kernel-on-the-disc]]).",
+        "affected_use": "Uses the density Poisson formula, radial convolution and torus coordinates for f=1_I. The strengthened direct simple-integration justification establishes exactly the same identities.",
+        "invalidated_claim": "None: this use does not rely on the removed Radon-Nikodym naming clause.",
+        "disposition": "unaffected",
+        "minimality": "The used measure, density, bounded-test and Poisson formulas are preserved; no consumer edit or further hop is required.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "thm-fatou-nontangential-boundary-theorem-harmonic",
+        "path": "items/thm-fatou-nontangential-boundary-theorem-harmonic.md",
+        "locator": "Proof steps 1.1 and 2.1",
+        "snippet": "[L1] The region $\\Gamma_A(\\zeta)$, the nontangential maximal function $N_Av(\\zeta)=\\sup_{z\\in\\Gamma_A(\\zeta)}|v(z)|$, the circle maximal function $M_{\\mathbb T}f$ and the definition $P[f]=P[fm]$ are as in the two definitions cited; the regions increase with the aperture, so verifying a nontangential limit for every integer aperture $m\\ge2$ verifies it for every $A>1$ ([[def-circle-maximal-function-and-nontangential-region]], [[def-poisson-integral-of-finite-boundary-measure]]).",
+        "affected_use": "Uses P[f]=P[fm], the kernel density integral and linearity for f-g. These identities still hold under the same countable-choice hypothesis; removal of RN naming changes none of them.",
+        "invalidated_claim": "None: this use does not rely on the removed Radon-Nikodym naming clause.",
+        "disposition": "unaffected",
+        "minimality": "The used measure, density, bounded-test and Poisson formulas are preserved; no consumer edit or further hop is required.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "thm-harmonic-hardy-one-measure-representation",
+        "path": "items/thm-harmonic-hardy-one-measure-representation.md",
+        "locator": "Proof steps 1.1-1.4 and 2.2",
+        "snippet": "[L1] $P[\\mu](z)=\\int_{\\mathbb T}P(z,\\zeta)\\,d\\mu(\\zeta)$ for finite complex Borel measures and $P[f]=P[fm]$ for $f\\in L^1$; the radial traces are $(P[\\mu])_r(\\zeta)=P[\\mu](r\\zeta)$ ([[def-poisson-integral-of-finite-boundary-measure]]).",
+        "affected_use": "Uses P[mu](z)=integral P(z,zeta) dmu and P[f]=P[fm]; step 1.3 also pairs continuous tests with supplied densities u_r. The bounded-test identity is retained and AC supplies countable choice.",
+        "invalidated_claim": "None: this use does not rely on the removed Radon-Nikodym naming clause.",
+        "disposition": "unaffected",
+        "minimality": "The used measure, density, bounded-test and Poisson formulas are preserved; no consumer edit or further hop is required.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "thm-harmonic-hardy-representation-p-greater-one",
+        "path": "items/thm-harmonic-hardy-representation-p-greater-one.md",
+        "locator": "Proof steps 3.1 and 4.1",
+        "snippet": "[L7] Integration against every continuous function determines a finite regular complex Borel measure on $\\mathbb T$ uniquely; the density measure $fm$ of $f\\in L^1$ is a finite Borel measure with $|fm|(E)=\\int_E|f|\\,dm$, and every finite Borel measure on the second-countable space $\\mathbb T$ is regular ([[thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals]], [[cor-second-countable-lch-locally-finite-borel-measures-are-regular]], [[def-poisson-integral-of-finite-boundary-measure]]).",
+        "affected_use": "Uses the finite regular density measure fm with total variation integral_E |f| dm, its continuous-test pairing, and P[f]=P[fm]. These interfaces remain valid and no RN derivative is invoked at those uses.",
+        "invalidated_claim": "None: this use does not rely on the removed Radon-Nikodym naming clause.",
+        "disposition": "unaffected",
+        "minimality": "The used measure, density, bounded-test and Poisson formulas are preserved; no consumer edit or further hop is required.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "thm-harnack-convergence-positive-harmonic-functions",
+        "path": "items/thm-harnack-convergence-positive-harmonic-functions.md",
+        "locator": "Proof steps 2.2, 3.1 and 10.1",
+        "snippet": "[L5] For a finite regular complex Borel measure $\\mu$ on $\\mathbb T$ one has $P[\\mu](z)=\\int_{\\mathbb T}P(z,\\zeta)\\,d\\mu(\\zeta)$; the kernel is $P(z,\\zeta)=(1-|z|^2)/|\\varphi(\\zeta)-z|^2>0$ with $P(0,\\zeta)=1$ and $\\zeta\\mapsto P(z,\\zeta)$ continuous on $\\mathbb T$; for $f\\in L^1(\\mathbb T,m)$ the density measure satisfies $P[f]=P[fm]$ and $\\int_{\\mathbb T}g\\,d(u_rm)=\\int_{\\mathbb T}gu_r\\,dm$ for bounded measurable $g$ ([[def-poisson-integral-of-finite-boundary-measure]], [[def-poisson-kernel-on-the-disc]]).",
+        "affected_use": "Uses the positive continuous kernel and P[mu] formula; step 3.1 explicitly needs integral g d(u_r m)=integral gu_r dm for continuous bounded g. The direct bounded-test proof retains this identity.",
+        "invalidated_claim": "None: this use does not rely on the removed Radon-Nikodym naming clause.",
+        "disposition": "unaffected",
+        "minimality": "The used measure, density, bounded-test and Poisson formulas are preserved; no consumer edit or further hop is required.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "thm-poisson-extension-lp-contraction-and-norm-limit",
+        "path": "items/thm-poisson-extension-lp-contraction-and-norm-limit.md",
+        "locator": "Proof steps 1.1-1.3, 2.4-2.5 and 4.1",
+        "snippet": "[L1] For $f\\in L^1(\\mathbb T,m)$ the Poisson integral $P[f]=P[fm]$ and the radial functions $(P_r*f)(\\zeta)=P[f](r\\zeta)=\\int_{\\mathbb T}P_r(\\zeta-\\eta)f(\\eta)\\,dm(\\eta)$ are defined by integration against the kernel; for real continuous data on $\\partial\\mathbb D$ this agrees with the published continuous-data Poisson integral ([[def-poisson-integral-of-finite-boundary-measure]]).",
+        "affected_use": "Uses the L1 density integral, radial convolution and agreement with continuous real boundary data. All formulas and their countable-choice hypotheses survive the citation repair unchanged.",
+        "invalidated_claim": "None: this use does not rely on the removed Radon-Nikodym naming clause.",
+        "disposition": "unaffected",
+        "minimality": "The used measure, density, bounded-test and Poisson formulas are preserved; no consumer edit or further hop is required.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "thm-poisson-nontangential-maximal-bound",
+        "path": "items/thm-poisson-nontangential-maximal-bound.md",
+        "locator": "Proof steps 2.1 and 3.1",
+        "snippet": "[L1] The sets $\\Gamma_A(\\zeta)=\\{z\\in\\mathbb D:|z-\\zeta|<A(1-|z|)\\}$ and $N_Av(\\zeta)=\\sup_{z\\in\\Gamma_A(\\zeta)}|v(z)|$ are the nontangential regions and maximal functions, and $M_{\\mathbb T}\\mu(\\zeta)=\\sup_{0<h\\le1/2}|\\mu|(I_h(\\zeta))/m(I_h(\\zeta))$ takes values in $[0,+\\infty]$; moreover $M_{\\mathbb T}f=M_{\\mathbb T}(fm)$ and $P[f]=P[fm]$ ([[def-circle-maximal-function-and-nontangential-region]], [[def-poisson-integral-of-finite-boundary-measure]]).",
+        "affected_use": "Uses the finite-measure Poisson integral and P[f]=P[fm] to specialize the measure estimate to densities. Regularity and total variation of fm are retained under countable choice.",
+        "invalidated_claim": "None: this use does not rely on the removed Radon-Nikodym naming clause.",
+        "disposition": "unaffected",
+        "minimality": "The used measure, density, bounded-test and Poisson formulas are preserved; no consumer edit or further hop is required.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    ],
+    "interface_comparison": {
+      "method": "Direct comparison of the original and current complete ## Definition sections.",
+      "changed": true,
+      "before_guard": "72f66f2898f0327375e87c1a4169e5534263a9e92c7777e9b0d0299d06dd5de5",
+      "change": "Replaced the AC-conditioned RN terminology/invocation with the supplied density formula, uniqueness of the density class and a direct simple-integration calculation; retained the bounded-test, Poisson, radial and continuous-data identities."
+    },
+    "page_review": {
+      "path": "library/complex-analysis/harmonic-hardy-classes-and-fatou-boundary-limits.md",
+      "affected_use": "The introductory paragraph says the measure Poisson integral extends the continuous-data definition and the density case agrees with integration against the corresponding L1 function. The final paragraph assigns countable choice to the maximal-function and Fatou results.",
+      "disposition": "unaffected",
+      "reason": "The direct density calculation preserves both claims and removes the unintended invocation of a full-Choice supplier."
+    },
+    "published_ledger_review": "All ten direct item consumers are draft items in the frozen frontier; no published or outside-frontier consumer was found. No published-consumer ledger update or separate maintenance repair is proposed.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-poisson-integral-of-finite-boundary-measure.md --json",
+        "exit_code": 0,
+        "result": "1 file, 0 checked, 0 failed; definition reported not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-poisson-integral-of-finite-boundary-measure.md",
+        "exit_code": 0,
+        "result": "OK: 1 file; YAML and all mathematical expressions parsed with the real renderer dependencies."
+      },
+      {
+        "command": "node tools/depcheck.mjs --items-file /tmp/step7-v2-repeat-r1-u25-items.json --json",
+        "exit_code": 0,
+        "result": "Focused item checks plus global page metadata and cycles complete: 0 errors, 141 multi-home warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-37-owner-30-batch-25.proof-contracts.json --items def-poisson-integral-of-finite-boundary-measure --strict --json",
+        "exit_code": 0,
+        "result": "Final focused contract check passed: ok=true, no errors, no warnings. The first attempt returned boundary-evidence-unanchored for nonempty-choice; explicitly anchoring that evidence to the Definition resolved it."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-37-owner-30-proof-contracts.json --items def-poisson-integral-of-finite-boundary-measure --strict --json",
+        "exit_code": 0,
+        "result": "Final focused contract check passed: ok=true, no errors, no warnings. The first attempt returned boundary-evidence-unanchored for nonempty-choice; explicitly anchoring that evidence to the Definition resolved it."
+      }
+    ],
+    "contract_repairs": {
+      "paths": [
+        "research/frontier-37-owner-30-batch-25.proof-contracts.json",
+        "research/frontier-37-owner-30-proof-contracts.json"
+      ],
+      "changes": "Replaced stale simple-RN risk-review notes with the direct supplied-density calculation and exact choice uses. Corrected the nonfatal endpoints record, which had incorrectly called all parameter endpoints inapplicable although r=0 is expressly included; verified the mass identity at r=0 and exclusion of r=1.",
+      "shared_lock": "Acquired the shared write lock, reread and updated only the assigned contract entries, ran focused strict checks, and released. A second short locked pass restored canonical UTF-8 JSON serialization and verified all parsed contract values were preserved."
+    },
+    "unresolved_mathematics": [],
+    "outside_consumer_maintenance": []
+  }
+}

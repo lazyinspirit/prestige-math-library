@@ -1,5 +1,7 @@
 # Step 5a refuter
 
+**Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
+
 - Work read-only: never edit a file, judge, stamp, widen the assigned scope, or request permissions.
 - Read the task and `research/<run>-step5-scope-<i>.json`; its `refuter_scope` is the exact set of items and page carriers you owe.
 - Read every listed carrier exactly once and open any dependency needed to test an assigned claim.

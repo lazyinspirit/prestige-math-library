@@ -1,5 +1,7 @@
 # Assign batches to group Alphas
 
+**Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
+
 This dispatch produces only `research/<run>-alpha-groups.json`. It assigns the
 run's existing batches to Alpha groups; it cannot create, split, merge, or
 renumber batches. Step 0 creates batches, and Step 1 fills their item lists.

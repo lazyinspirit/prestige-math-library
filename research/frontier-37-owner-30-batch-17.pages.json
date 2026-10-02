@@ -1,0 +1,813 @@
+[
+  {
+    "order": 651,
+    "id": "approximation-algorithms-and-gap-reductions",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Approximation Algorithms and Gap Reductions",
+    "companion": "approximation-algorithms-and-gap-reductions-examples",
+    "requires": [
+      "alphabet-reduction-and-the-pcp-theorem",
+      "classical-np-completeness-reductions",
+      "finite-counting-and-binomial-coefficients",
+      "graphs-walks-and-connectivity",
+      "trees-forests-and-spanning-trees",
+      "eulerian-and-hamiltonian-graphs"
+    ],
+    "items": [
+      {
+        "id": "def-optimization-problem-and-approximation-ratio",
+        "kind": "definition",
+        "title": "Optimization problems and approximation ratios",
+        "dependency_level": 0,
+        "deps": [],
+        "statement": "A finite-instance optimization problem specifies a polynomially bounded feasible-solution encoding length, a polynomially recognizable feasible-solution relation, a polynomial-time computable nonnegative rational objective value, and minimization or maximization. OPT is the attained minimum or maximum over feasible solutions. For rho>=1, a polynomial-time rho-approximation returns a feasible solution of value at most rho OPT in minimization; for 0<rho<=1 it returns value at least rho OPT in maximization. The guarantees include OPT=0, so no division by OPT is required. Inputs in the stated problem domain have at least one feasible solution.",
+        "strategy": "Define the polynomial solution-length bound, feasible encodings, objective, and the direction of the inequality; make clear that ratios are bounds on values rather than quotients when OPT=0. Examples on this page are minimum vertex cover, weighted set cover, Max-Cut, metric TSP, Max-3SAT and maximum independent set. Fix rational weights to make time and comparison bounds meaningful.",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            },
+            {
+              "title": "Ghaffari, Advanced Algorithms, Lecture 1: Approximation Algorithms I, §§1, 2.1, 2.2.2, PDF pp. 1–5",
+              "url": "https://people.csail.mit.edu/ghaffari/AA18/Notes/S_18_01.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-ptas-fptas-and-apx",
+        "kind": "definition",
+        "title": "PTAS, FPTAS and APX",
+        "dependency_level": 1,
+        "deps": [
+          "def-optimization-problem-and-approximation-ratio"
+        ],
+        "statement": "For a finite-instance optimization problem in the preceding model, a PTAS is a family A_epsilon such that for every fixed 0<epsilon<1, A_epsilon runs in polynomial time in the input length and guarantees factor 1+epsilon for minimization or 1-epsilon for maximization. An FPTAS has one running-time bound polynomial jointly in input length and 1/epsilon. Here APX denotes, by explicit local convention, the class of problems in that model admitting one polynomial-time fixed-factor approximation in the objective direction specified above. The value guarantees include OPT=0 and do not require division by OPT.",
+        "strategy": "State the quantifier order: for a PTAS each fixed epsilon>0 has a polynomial-time algorithm whose degree may depend on epsilon; for an FPTAS the running-time bound is polynomial jointly in input length and 1/epsilon. APX is locally defined here as one fixed-factor polynomial-time approximation for a problem in the preceding finite-instance optimization model. This records a selected convention and does not claim that all literature uses the same reduction-based APX-hardness notion. Approximation guarantees use the value inequalities from the preceding definition, so OPT=0 is included without forming a quotient. Since every FPTAS is a PTAS, a no-PTAS result also rules out an FPTAS unless P=NP; neither result by itself proves APX-hardness.",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §1.1 Definition 1.2 (printed p. 15), §3.1 Definition 3.4 and Theorem 3.5 (printed pp. 68–69)",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-maximal-matching-is-a-two-approximation-for-vertex-cover",
+        "kind": "theorem",
+        "title": "A maximal matching gives a 2-approximate minimum vertex cover",
+        "dependency_level": 1,
+        "deps": [
+          "def-finite-simple-graph",
+          "def-optimization-problem-and-approximation-ratio",
+          "def-matching-maximum-perfect-and-matching-number",
+          "def-clique-independent-set-and-vertex-cover-problems"
+        ],
+        "statement": "For every finite simple graph, greedily construct any maximal matching M and return the set C of its endpoints. The procedure is deterministic polynomial time after fixing a tie rule; C is a vertex cover and |C|=2|M|<=2 OPT_VC. This includes an edgeless graph, for which both sides are zero.",
+        "strategy": "Scan edges in an explicit order, inserting one whose endpoints are still unmatched. If an edge had both endpoints outside C, M could be enlarged, contradicting maximality. Distinct matching edges require distinct cover vertices, so |M|<=OPT; count two endpoints per matched edge. Scan time is polynomial and finite tie breaking needs no choice axiom.",
+        "proof_strategy": "direct",
+        "landmark": true,
+        "sources": {
+          "references": [
+            {
+              "title": "Ghaffari, Advanced Algorithms, Lecture 1: Approximation Algorithms I, §§1, 2.1, 2.2.2, PDF pp. 1–5",
+              "url": "https://people.csail.mit.edu/ghaffari/AA18/Notes/S_18_01.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-greedy-set-cover",
+        "kind": "definition",
+        "title": "Weighted greedy set cover and element charges",
+        "dependency_level": 1,
+        "deps": [
+          "def-optimization-problem-and-approximation-ratio",
+          "def-set-cover",
+          "def-harmonic-number-for-set-cover-analysis"
+        ],
+        "statement": "For a finite universe U of n elements and explicitly listed sets S_i whose union is U, give each set a nonnegative rational cost c_i. The weighted set-cover objective is total selected cost. Repeatedly choose, among sets with positive newly covered count, a set minimizing c_i divided by that count; ties follow input order. Each newly covered element receives the same charge, that ratio. For U empty the algorithm returns the empty cover. H_n=sum_{j=1}^n 1/j for n>=1 and H_0=0.",
+        "strategy": "Separate the optimization problem from the published decision parameter k. Define uncovered elements and positive denominators before the greedy choice; input order makes the algorithm deterministic. Every round covers at least one element because the family covers U. Rational comparisons have polynomial bit complexity.",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            },
+            {
+              "title": "Ghaffari, Advanced Algorithms, Lecture 1: Approximation Algorithms I, §§1, 2.1, 2.2.2, PDF pp. 1–5",
+              "url": "https://people.csail.mit.edu/ghaffari/AA18/Notes/S_18_01.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-harmonic-number-for-set-cover-analysis",
+        "kind": "definition",
+        "title": "Harmonic numbers for set-cover analysis",
+        "dependency_level": 0,
+        "deps": [],
+        "statement": "For each integer n≥1, define the n-th harmonic number H_n=∑_{j=1}^n 1/j, and set H_0=0.",
+        "strategy": "State the finite sum and empty-index convention used in the greedy set-cover bound. The definition uses rational terms and an explicitly finite index set.",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-greedy-set-cover-charging-bound",
+        "kind": "lemma",
+        "title": "The greedy charge on each newly covered element is at most OPT divided by the remaining count",
+        "dependency_level": 2,
+        "deps": [
+          "def-greedy-set-cover",
+          "def-optimization-problem-and-approximation-ratio"
+        ],
+        "statement": "Let r>=1 elements remain uncovered just before a weighted greedy set-cover step, and let OPT be the cost of a fixed minimum cover. The chosen price per newly covered element is at most OPT/r. Equivalently, if element u is the j-th element covered under any order within a round, its charge is at most OPT/(n-j+1).",
+        "strategy": "Fix an optimal cover O. Its sets still cover the r uncovered elements, so sum over S in O of |S intersect R| is at least r. If every useful S in O had c(S)/|S intersect R|>OPT/r, summing costs would exceed OPT, contradiction; zero-cost cases use non-strict inequalities. The greedy minimum ratio is no larger. In one round, every newly covered element sees r at least n-j+1; reconcile the index without reversing the inequality.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            },
+            {
+              "title": "Ghaffari, Advanced Algorithms, Lecture 1: Approximation Algorithms I, §§1, 2.1, 2.2.2, PDF pp. 1–5",
+              "url": "https://people.csail.mit.edu/ghaffari/AA18/Notes/S_18_01.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-greedy-set-cover-is-an-h-n-approximation",
+        "kind": "theorem",
+        "title": "Weighted greedy set cover has approximation factor H_n",
+        "dependency_level": 3,
+        "deps": [
+          "def-optimization-problem-and-approximation-ratio",
+          "def-greedy-set-cover",
+          "def-harmonic-number-for-set-cover-analysis",
+          "lem-greedy-set-cover-charging-bound"
+        ],
+        "statement": "On a feasible weighted set-cover instance with n=|U|, the greedy algorithm returns a cover in polynomial time with total cost at most H_n OPT. For n=0 both costs are zero. Thus it is an H_n-approximation for n>=1.",
+        "strategy": "Charge each chosen set cost equally to its newly covered elements, so total algorithmic cost is the sum of the n charges. Order elements by first coverage; apply the charging lemma to element j and sum OPT/(n-j+1)=H_n using [[def-harmonic-number-for-set-cover-analysis]]. Prove termination in at most n rounds and polynomial exact comparisons for rational costs; handle n=0 separately.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            },
+            {
+              "title": "Ghaffari, Advanced Algorithms, Lecture 1: Approximation Algorithms I, §§1, 2.1, 2.2.2, PDF pp. 1–5",
+              "url": "https://people.csail.mit.edu/ghaffari/AA18/Notes/S_18_01.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-random-cut-has-expected-half-the-edges",
+        "kind": "theorem",
+        "title": "A random cut crosses half the edges in expectation",
+        "dependency_level": 1,
+        "deps": [
+          "def-optimization-problem-and-approximation-ratio",
+          "def-finite-simple-graph",
+          "thm-product-probability-has-independent-coordinate-events",
+          "lem-indicator-expectation-and-products",
+          "thm-linearity-of-expectation"
+        ],
+        "statement": "In a finite simple graph G with m edges, place each vertex independently and uniformly in one of two sides. The number X of crossing edges satisfies E[X]=m/2. Since OPT_MaxCut<=m, this random algorithm has expected value at least OPT_MaxCut/2; for m=0 both values are zero.",
+        "strategy": "For each edge uv, independence of its two fair endpoint bits makes Pr[bits differ]=1/2. Write X as the sum of edge-crossing indicators and use finite linearity; independence among distinct edge indicators is neither assumed nor needed. The deterministic lower bound OPT<=m gives the approximation comparison.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            },
+            {
+              "title": "Cornell CS 4820, Lecture notes on randomized approximation algorithms, §1.1–1.1.2, PDF pp. 1–3",
+              "url": "https://www.cs.cornell.edu/courses/cs4820/2011sp/handouts/approx_algs.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-conditional-expectation-derandomizes-max-cut-half-approximation",
+        "kind": "theorem",
+        "title": "Conditional expectation yields a deterministic half-approximation for Max-Cut",
+        "dependency_level": 2,
+        "deps": [
+          "def-finite-simple-graph",
+          "def-optimization-problem-and-approximation-ratio",
+          "thm-linearity-of-expectation",
+          "thm-random-cut-has-expected-half-the-edges"
+        ],
+        "statement": "For every finite simple graph, there is a deterministic polynomial-time algorithm returning a cut of at least m/2 edges, hence at least half of OPT_MaxCut. It fixes vertices one at a time to the side with the larger conditional expected final cut size.",
+        "strategy": "Condition only on the finitely many already fixed unbiased bits. Each unfinished edge contributes 1/2 when at least one endpoint remains free, and a finished edge contributes its known crossing indicator; thus both candidate conditional expectations are computable in O(m) rational operations. Their average is the current conditional expectation, so choosing the larger never decreases it. At the end the conditional expectation is the actual cut size, at least initial m/2. This elementary finite averaging needs no measure-theoretic conditional expectation theorem.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            },
+            {
+              "title": "Cornell CS 4820, Lecture notes on randomized approximation algorithms, §1.1–1.1.2, PDF pp. 1–3",
+              "url": "https://www.cs.cornell.edu/courses/cs4820/2011sp/handouts/approx_algs.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-metric-tsp",
+        "kind": "definition",
+        "title": "Metric traveling-salesperson problem",
+        "dependency_level": 1,
+        "deps": [
+          "def-optimization-problem-and-approximation-ratio",
+          "def-finite-simple-graph"
+        ],
+        "statement": "An instance has n>=3 labelled vertices, the complete undirected graph on them, and explicitly encoded nonnegative rational symmetric lengths d(u,v) satisfying d(u,u)=0 and the triangle inequality. A feasible tour is a cyclic ordering visiting every vertex once; its cost is the sum of consecutive lengths including the return edge. OPT_TSP is the minimum tour cost.",
+        "strategy": "State symmetry, nonnegativity, completeness, rational encoding and n>=3. The triangle inequality permits shortcutting a repeated-vertex closed walk. Distinguish this metric problem from unrestricted TSP; a fixed lexicographic order resolves MST and traversal ties.",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-minimum-spanning-tree-cost-lower-bounds-metric-tsp",
+        "kind": "lemma",
+        "title": "A minimum spanning tree lower-bounds metric-TSP optimum",
+        "dependency_level": 2,
+        "deps": [
+          "def-metric-tsp",
+          "def-spanning-tree",
+          "def-weighted-graph-and-minimum-spanning-tree",
+          "thm-connected-iff-has-spanning-tree"
+        ],
+        "statement": "For a metric-TSP instance, let T be a minimum spanning tree of its complete weighted graph. Then w(T)≤OPT_TSP.",
+        "strategy": "Choose an optimal Hamiltonian tour and delete any one of its edges. The remaining spanning path is a spanning tree, and nonnegative edge lengths make its weight at most OPT_TSP. The defining minimality of T gives w(T) no larger than that path. This is a cost lower bound, not an algorithm for finding the optimum tour.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-euler-double-tree-shortcutting-does-not-increase-cost",
+        "kind": "lemma",
+        "title": "Euler-tour shortcutting of a doubled tree does not increase metric cost",
+        "dependency_level": 2,
+        "deps": [
+          "def-euler-trail-and-circuit",
+          "def-metric-tsp",
+          "def-multigraph-and-digraph-degrees-and-connectivity",
+          "def-spanning-tree",
+          "def-weighted-graph-and-minimum-spanning-tree",
+          "thm-eulers-euler-circuit-characterisation"
+        ],
+        "statement": "In a metric-TSP instance, double every edge of any spanning tree T. An Euler circuit of the resulting connected even-degree multigraph, followed by first-visit shortcutting, yields a Hamiltonian tour of cost at most 2w(T).",
+        "strategy": "The doubled tree is connected and each vertex degree is twice its tree degree, so [[thm-eulers-euler-circuit-characterisation]] supplies a constructible Euler circuit. Order the vertices by first visit, beginning at the circuit start, and close the list back to that start. The intervening circuit segments partition the Euler circuit. Repeated triangle inequalities bound each shortcut edge by its segment length; summing yields tour cost≤2w(T). Hierholzer construction and the scan are polynomial in the explicit graph size. Nonnegative rational metric data support exact comparison and polynomial-bit arithmetic.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-doubled-spanning-tree-is-a-two-approximation-for-metric-tsp",
+        "kind": "theorem",
+        "title": "Double-tree shortcutting is a 2-approximation for metric TSP",
+        "dependency_level": 3,
+        "deps": [
+          "def-connected-graph-and-connected-component",
+          "def-metric-tsp",
+          "def-optimization-problem-and-approximation-ratio",
+          "def-weighted-graph-and-minimum-spanning-tree",
+          "lem-euler-double-tree-shortcutting-does-not-increase-cost",
+          "lem-minimum-spanning-tree-cost-lower-bounds-metric-tsp",
+          "thm-kruskals-minimum-spanning-tree-algorithm"
+        ],
+        "statement": "Compute a minimum spanning tree T of the complete metric graph, double its edges, traverse the resulting closed Euler walk and shortcut repeated vertices in first-visit order. The resulting Hamiltonian tour is found in polynomial time and has cost at most 2 w(T)<=2 OPT_TSP.",
+        "strategy": "Run Kruskal on the complete rational metric graph to obtain a minimum spanning tree T in polynomial time. The MST lower-bound lemma gives w(T)≤OPT_TSP. Double T and construct an Euler circuit using the published connected-even-multigraph result; first-visit shortcutting has cost at most 2w(T) by the shortcutting lemma. Therefore the returned Hamiltonian tour costs at most 2OPT_TSP. A fixed lexicographic order resolves all finite algorithmic ties.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-gap-problem-and-gap-preserving-reduction",
+        "kind": "definition",
+        "title": "Gap promise problems and gap-preserving reductions",
+        "dependency_level": 1,
+        "deps": [
+          "def-optimization-problem-and-approximation-ratio",
+          "def-polynomial-time-many-one-reduction"
+        ],
+        "statement": "For a maximization problem and fixed 0<=s<c, Gap_OPT(c,s) distinguishes OPT>=c M from OPT<=s M for an explicitly specified positive instance scale M; intermediate instances are outside the promise. A gap-preserving reduction is a total deterministic polynomial-time map from a language or promise pair to another promised pair carrying each yes side into the target yes side and each no side into its no side. For Max-3SAT M is the number of clauses, with OPT the maximum satisfied count; for maximum independent set the reduction may use the number of clause clusters as M. Empty-size cases are assigned explicitly by each reduction.",
+        "strategy": "Keep the direction yes-to-yes and no-to-no. Define normalized value only when the positive scale is nonzero, and state empty-case convention in the reduction. A solution decoder is additional data when proving an L-reduction, not an automatic property of a gap map.",
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, author-hosted draft, §18.2.4–18.2.5, printed pp. 358–361",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-pcp-verifier-reduces-to-gap-max-three-sat",
+        "kind": "lemma",
+        "title": "A constant-query PCP verifier yields constant-gap Max-3SAT",
+        "dependency_level": 2,
+        "deps": [
+          "def-gap-problem-and-gap-preserving-reduction",
+          "thm-pcp-theorem-np-equals-pcp-log-n-o-one",
+          "def-pcp-class-with-completeness-and-soundness",
+          "def-pcp-verifier-randomness-query-and-proof-length",
+          "thm-three-sat-is-np-complete",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice for the currently published PCP supplier proof route. For every language L in NP, the published perfect-completeness binary PCP verifier with q=O(1) nonadaptive queries, r=O(log n) fair random bits and fixed soundness s<1 gives a deterministic polynomial-time map x to a 3-CNF formula F_x with M>=1 clauses and a fixed delta>0 such that x in L implies OPT_Max3SAT(F_x)=M, while x outside L implies OPT_Max3SAT(F_x)<=(1-delta)M.",
+        "strategy": "Enumerate all R=2^r coin strings. On each, the nonadaptive verifier tests a Boolean predicate of at most q queried proof bits; make one forbidden-assignment clause for each local bit pattern rejected by that predicate, at most 2^q clauses. For predicates with zero rejected patterns, contribute a tautology so every coin string has a positive constant-size block. Convert each clause of width at most q to an equisatisfiable chain of 3-clauses using private auxiliary bits for that block, with both directions: a true original clause extends to all true 3-clauses, a false original clause forces at least one false 3-clause under every auxiliary assignment. Pad one- or two-literal clauses by repeated literals; replace a rejecting zero-query empty clause by the contradictory pair (z) and (not z) on a fresh bit, then pad each to three literals. There is a fixed K with R<=M<=KR, so at least (1-s)R rejecting coin strings force at least that many distinct false clauses, giving delta=(1-s)/K. A complete accepting fixed proof supplies all auxiliary values. Uniform enumeration and fixed q give polynomial time, including empty or tautological predicates. This scaffold carries AC because the published PCP theorem currently reaches the published complex-algebraic-closure/Galois proof that invokes Zorn; the finite reduction itself makes only explicit finite choices.",
+        "proof_strategy": "direct",
+        "landmark": true,
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, author-hosted draft, §18.2.4–18.2.5, printed pp. 358–361",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-max-three-sat-has-no-ptas-unless-p-equals-np",
+        "kind": "theorem",
+        "title": "Max-3SAT has no PTAS unless P=NP",
+        "dependency_level": 3,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-gap-problem-and-gap-preserving-reduction",
+          "def-np-by-verifiers",
+          "def-np-hard-and-np-complete",
+          "def-p",
+          "def-ptas-fptas-and-apx",
+          "lem-pcp-verifier-reduces-to-gap-max-three-sat",
+          "prop-p-is-contained-in-np-intersection-conp"
+        ],
+        "statement": "Assume the Axiom of Choice for the currently published PCP supplier proof route. If Max-3SAT has a polynomial-time approximation scheme, then P=NP. More precisely, for the fixed delta>0 of the preceding reduction, any polynomial-time maximization factor rho>1-delta would decide every language in NP.",
+        "strategy": "Choose a fixed epsilon with 0<epsilon<delta and run the PTAS on F_x. In a yes instance OPT=M and the returned assignment satisfies at least (1-epsilon)M>(1-delta)M; in a no instance every assignment satisfies at most (1-delta)M. Compare the exact integer satisfied-clause count to the rational threshold, using the fixed gap and polynomial time. An arbitrary NP language then lies in P, while P is contained in NP. This scaffold carries AC because the published PCP theorem currently reaches the published complex-algebraic-closure/Galois proof that invokes Zorn; the finite reduction itself makes only explicit finite choices.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, author-hosted draft, §18.2.4–18.2.5, printed pp. 358–361",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-gap-three-sat-reduces-to-gap-independent-set",
+        "kind": "lemma",
+        "title": "Clause-literal consistency graph preserves the Max-3SAT optimum",
+        "dependency_level": 2,
+        "deps": [
+          "def-clique-independent-set-and-vertex-cover-problems",
+          "def-finite-simple-graph",
+          "def-gap-problem-and-gap-preserving-reduction",
+          "thm-three-sat-is-np-complete",
+          "thm-three-sat-reduces-to-clique"
+        ],
+        "statement": "For every 3-CNF formula F with m clauses of exactly three literal occurrences, construct in polynomial time a simple graph G with 3m vertices, one per occurrence. Vertices in the same clause are adjacent, and vertices from distinct clauses are adjacent exactly when their literals are complementary. Then alpha(G)=OPT_Max3SAT(F). In particular the promise m versus at most (1-delta)m transfers with unchanged delta and scale m; from any independent set of k vertices one can produce an assignment satisfying at least k clauses in polynomial time.",
+        "strategy": "An assignment satisfying t clauses selects one true literal occurrence in each of those clauses; chosen literals are pairwise noncomplementary and in distinct clusters, hence independent. Conversely an independent set contains at most one occurrence per clause and no complementary pair; set represented literals true consistently, assign unused variables arbitrarily, and satisfy all selected clauses. This proves both optimum inequalities and the decoder, even with repeated literals and tautological clauses. The published 3SAT-to-clique proof has the analogous occurrence convention, but its decision equivalence alone is not treated as a gap proof.",
+        "proof_strategy": "direct",
+        "landmark": true,
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, author-hosted draft, §18.2.4–18.2.5, printed pp. 358–361",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-independent-set-has-no-ptas-unless-p-equals-np",
+        "kind": "theorem",
+        "title": "Maximum independent set has no PTAS unless P=NP",
+        "dependency_level": 3,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-clique-independent-set-and-vertex-cover-problems",
+          "def-gap-problem-and-gap-preserving-reduction",
+          "def-np-by-verifiers",
+          "def-np-hard-and-np-complete",
+          "def-p",
+          "def-ptas-fptas-and-apx",
+          "lem-gap-three-sat-reduces-to-gap-independent-set",
+          "lem-pcp-verifier-reduces-to-gap-max-three-sat",
+          "prop-p-is-contained-in-np-intersection-conp"
+        ],
+        "statement": "Assume the Axiom of Choice for the currently published PCP supplier proof route. A polynomial-time approximation scheme for maximum independent set on finite simple graphs implies P=NP. On graphs G_x from the two gap reductions, alpha(G_x)=m when x is a yes instance and alpha(G_x)<=(1-delta)m when x is a no instance, for the same fixed delta>0.",
+        "strategy": "Compose the PCP-to-Max3SAT map and the clause-literal graph. Fix epsilon<delta. A PTAS returns an independent set of size at least (1-epsilon)m in yes instances, strictly above the no-instance upper bound (1-delta)m. Evaluate its cardinality against the gap threshold in polynomial time. Retain m>=1 from the first reduction and the exact optimum equality from the second. This scaffold carries AC because the published PCP theorem currently reaches the published complex-algebraic-closure/Galois proof that invokes Zorn; the finite reduction itself makes only explicit finite choices.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, author-hosted draft, §18.2.4–18.2.5, printed pp. 358–361",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-l-reduction",
+        "kind": "definition",
+        "title": "L-reductions between optimization problems",
+        "dependency_level": 2,
+        "deps": [
+          "def-optimization-problem-and-approximation-ratio",
+          "def-ptas-fptas-and-apx"
+        ],
+        "statement": "An L-reduction from optimization problem Π to Γ consists of a polynomial-time instance map f, a polynomial-time feasible-solution map g(x,y) for every feasible y of f(x), and constants a,b>0 independent of x with OPT_Γ(f(x))≤a OPT_Π(x) and |OPT_Π(x)-val_Π(g(x,y))|≤b|OPT_Γ(f(x))-val_Γ(y)|. The objective direction and nonnegative value convention for each problem are explicit.",
+        "strategy": "State both inequalities, the solution decoder, nonnegative objective values, and polynomial-time maps. This definition covers minimization or maximization problems with their feasible-solution conventions. APX-hardness and APX-completeness under this reduction notion are defined separately by def-apx-hardness-and-apx-completeness.",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-apx-hardness-and-apx-completeness",
+        "kind": "definition",
+        "title": "APX-hardness and APX-completeness under L-reductions",
+        "dependency_level": 3,
+        "deps": [
+          "def-ptas-fptas-and-apx",
+          "def-l-reduction"
+        ],
+        "statement": "Under the explicitly selected L-reduction convention, an optimization problem Gamma is APX-hard if every problem Pi in the locally defined APX class has an L-reduction to Gamma. Gamma is APX-complete under this convention if it is APX-hard and belongs to APX. The reduction notion is part of this definition; no concrete target is certified APX-hard or APX-complete without a reduction theorem.",
+        "strategy": "Use APX as defined by def-ptas-fptas-and-apx in the preceding finite-instance model, and use the two-sided value inequalities and polynomial maps in def-l-reduction. This page explicitly chooses L-reductions and does not claim that this is the unique convention in the literature. APX-hardness quantifies over every source in that class; APX-completeness adds target membership. The PCP gap arguments establish no-PTAS consequences only and do not establish APX-hardness under L-reductions or APX-completeness of a specific target.",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §16.2 Definition 16.4 and Theorems 16.5–16.6, printed pp. 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-l-reductions-transfer-apx-hardness",
+        "kind": "lemma",
+        "title": "L-reductions compose and transfer PTAS and APX-hardness",
+        "dependency_level": 4,
+        "deps": [
+          "def-l-reduction",
+          "def-ptas-fptas-and-apx",
+          "def-apx-hardness-and-apx-completeness",
+          "def-optimization-problem-and-approximation-ratio"
+        ],
+        "statement": "Let Pi and Gamma be finite-instance optimization problems with polynomially bounded feasible encodings, polynomial-time feasibility and value operations, attained optima, and nonnegative objective values. If Pi L-reduces to Gamma with constants a,b>0, then for OPT_Gamma>0 a feasible Gamma solution with relative error at most epsilon decodes to a Pi solution with relative error at most ab epsilon. If OPT_Gamma=0, the appropriate minimization or maximization ratio guarantee and nonnegative feasible values force the Gamma value to be zero, and the L-reduction error bound forces the decoded Pi solution to be optimal. Thus an L-reduction transfers PTAS membership. L-reductions compose: constants (a,b) followed by (a',b') give constants (aa',bb'). Consequently, if Pi is APX-hard under L-reductions and Pi L-reduces to Gamma, then Gamma is APX-hard under L-reductions.",
+        "strategy": "For OPT_Gamma>0, a (1+epsilon)-approximation for minimization or (1-epsilon)-approximation for maximization has absolute error at most epsilon OPT_Gamma. The L-reduction error bound and optimum bound yield |OPT_Pi-val_Pi(g(x,y))| <= b epsilon OPT_Gamma <= ab epsilon OPT_Pi, so the source relative error is at most ab epsilon. If OPT_Pi=0, OPT_Gamma<=a OPT_Pi and nonnegativity imply OPT_Gamma=0; in that zero case the ratio guarantee forces an optimal Gamma value and the error bound forces an optimal decoded Pi value. If OPT_Gamma=0, nonnegative feasible values and the ratio guarantee give val_Gamma=0, after which the L-reduction error inequality gives an optimal decoded Pi solution. For any requested source PTAS tolerance eta in (0,1), choose a fixed target epsilon with 0<epsilon<min(1/2, eta/(2ab)); then ab epsilon<eta and ab epsilon<1, and the fixed-epsilon running time remains polynomial. For composition, given Pi->Gamma with (a,b) and Gamma->Delta with (a',b'), use f_comp=f_Gamma->Delta composed with f_Pi->Gamma and g_comp(x,z)=g_Pi->Gamma(x,g_Gamma->Delta(f_Pi->Gamma(x),z)). Then OPT_Delta(f_comp(x))<=a' OPT_Gamma(f_Pi->Gamma(x))<=a'a OPT_Pi(x), while |OPT_Pi(x)-val_Pi(g_comp(x,z))|<=b |OPT_Gamma(f_Pi->Gamma(x))-val_Gamma(g_Gamma->Delta(f_Pi->Gamma(x),z))| <=bb' |OPT_Delta(f_comp(x))-val_Delta(z)|. Both composed maps are polynomial-time and feasible, so the composite is an L-reduction with constants (aa',bb'). Quantifying this composition over each APX source proves the APX-hardness transfer. A PCP gap/no-PTAS theorem alone does not prove APX-hardness under this selected reduction.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "fs-exact-np-hardness-implies-no-constant-approximation",
+        "kind": "false-statement",
+        "title": "Exact NP-hardness does not rule out constant approximation",
+        "dependency_level": 2,
+        "deps": [
+          "cor-independent-set-and-vertex-cover-are-np-complete",
+          "def-clique-independent-set-and-vertex-cover-problems",
+          "def-finite-simple-graph",
+          "def-optimization-problem-and-approximation-ratio",
+          "thm-maximal-matching-is-a-two-approximation-for-vertex-cover"
+        ],
+        "statement": "False claim: if exact optimization of a problem is NP-hard, then no polynomial-time constant-factor approximation exists unless P=NP. Minimum vertex cover is a counterexample: its threshold decision problem is NP-complete, yet endpoints of a maximal matching yield a deterministic polynomial-time factor-two approximation.",
+        "strategy": "Use the published NP-completeness of VERTEX COVER to establish exact hardness and the local maximal-matching theorem to exhibit its factor-two algorithm. Explain that an approximation algorithm need not distinguish covers of sizes k and k+1, so the exact decision reduction provides no forbidden approximation ratio.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ghaffari, Advanced Algorithms, Lecture 1: Approximation Algorithms I, §§1, 2.1, 2.2.2, PDF pp. 1–5",
+              "url": "https://people.csail.mit.edu/ghaffari/AA18/Notes/S_18_01.pdf"
+            },
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 652,
+    "id": "approximation-algorithms-and-gap-reductions-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Approximation Algorithms and Gap Reductions: Examples and Counterexamples",
+    "requires": [
+      "approximation-algorithms-and-gap-reductions"
+    ],
+    "items": [
+      {
+        "id": "ex-greedy-set-cover-charging-bound",
+        "kind": "example",
+        "title": "A four-element greedy set-cover charge calculation",
+        "dependency_level": 4,
+        "deps": [
+          "def-greedy-set-cover",
+          "def-harmonic-number-for-set-cover-analysis",
+          "lem-greedy-set-cover-charging-bound",
+          "thm-greedy-set-cover-is-an-h-n-approximation"
+        ],
+        "statement": "Take U={1,2,3,4}, S_1={1,2} of cost 2, S_2={3,4} of cost 2, and S_3=U of cost 5. Greedy chooses S_1 then S_2 (input-order tie), charges each element 1, and costs 4=OPT. The pointwise bounds OPT/4, OPT/3, OPT/2, OPT are conservative: the actual charges satisfy them only after the correct uncovered-count ordering is applied.",
+        "strategy": "Correct the illustrative order if needed: at the first step r=4 and chosen price 1, while OPT=4 makes OPT/r=1; at the second step r=2 and chosen price 1<=OPT/2. Each of four charges is 1, summing to 4<=H_4 OPT. Verify S_3 alone costs 5 and the two disjoint 2-element sets are the cheapest cover.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ghaffari, Advanced Algorithms, Lecture 1: Approximation Algorithms I, §§1, 2.1, 2.2.2, PDF pp. 1–5",
+              "url": "https://people.csail.mit.edu/ghaffari/AA18/Notes/S_18_01.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-l-reductions-transfer-apx-hardness",
+        "kind": "example",
+        "title": "The clause graph is an L-reduction with constants one and one",
+        "dependency_level": 5,
+        "deps": [
+          "def-apx-hardness-and-apx-completeness",
+          "def-clique-independent-set-and-vertex-cover-problems",
+          "def-l-reduction",
+          "def-optimization-problem-and-approximation-ratio",
+          "lem-gap-three-sat-reduces-to-gap-independent-set",
+          "lem-l-reductions-transfer-apx-hardness"
+        ],
+        "statement": "On the Max-3SAT-to-independent-set clause-literal graph, the optimum values are equal and every independent set of size k decodes to an assignment satisfying at least k clauses. Hence this explicit map is an L-reduction with a=b=1, and any independent-set approximation ratio transfers with the same relative error to Max-3SAT.",
+        "strategy": "Apply the earlier exact alpha(G)=OPT(F) proof. Given independent set I, construct the consistent assignment and let t be its satisfied-clause count, t>=|I|; therefore OPT(F)-t<=OPT(F)-|I|=alpha(G)-|I|. The graph map is polynomial and the target optimum equals the source optimum, giving a=b=1. For a concrete formula (x∨x∨x)∧(¬x∨¬x∨¬x), both optima equal 1 although the graph has six occurrence vertices.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, author-hosted draft, §18.2.4–18.2.5, printed pp. 358–361",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-exact-np-hardness-implies-no-constant-approximation",
+        "kind": "counterexample",
+        "title": "Minimum vertex cover refutes the exact-hardness approximation claim",
+        "dependency_level": 3,
+        "deps": [
+          "cor-independent-set-and-vertex-cover-are-np-complete",
+          "def-clique-independent-set-and-vertex-cover-problems",
+          "def-finite-simple-graph",
+          "def-matching-maximum-perfect-and-matching-number",
+          "fs-exact-np-hardness-implies-no-constant-approximation",
+          "thm-maximal-matching-is-a-two-approximation-for-vertex-cover"
+        ],
+        "statement": "Minimum vertex cover has an NP-complete exact threshold problem and a deterministic polynomial-time 2-approximation. For the three-edge path P_4, a maximal middle-edge matching returns all two middle vertices and the matching lower bound is one; the general theorem, not this single graph, establishes the uniform factor two.",
+        "strategy": "Cite exact NP-completeness and run the maximal-matching algorithm on arbitrary graphs. For P_4 clarify a maximal matching consisting of the middle edge has endpoints equal to the optimal cover of size two, while a matching of the two outer edges returns four vertices and realizes the factor-two upper bound. The existence of this uniform algorithm refutes the proposed universal implication without assuming P!=NP.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Ghaffari, Advanced Algorithms, Lecture 1: Approximation Algorithms I, §§1, 2.1, 2.2.2, PDF pp. 1–5",
+              "url": "https://people.csail.mit.edu/ghaffari/AA18/Notes/S_18_01.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-conditional-expectation-for-a-small-max-cut-instance",
+        "kind": "example",
+        "title": "Conditional expectation derandomizes Max-Cut on a triangle",
+        "dependency_level": 3,
+        "deps": [
+          "def-optimization-problem-and-approximation-ratio",
+          "thm-conditional-expectation-derandomizes-max-cut-half-approximation",
+          "thm-random-cut-has-expected-half-the-edges"
+        ],
+        "statement": "Run the conditional-expectation algorithm on K_3 with vertices v_1,v_2,v_3 in that order. The initial expected cut size is 3/2. Fix v_1=0. Setting v_2=0 leaves conditional expectation 1, while setting v_2=1 gives 2, so choose v_2=1. The two choices for v_3 then both give final cut size 2. Thus the returned cut has 2≥3/2 edges.",
+        "strategy": "For each candidate value of v_2, count already determined crossing edges and add 1/2 for each edge with a still-free endpoint; explicitly obtain 1 and 2. With v_1=0 and v_2=1, choosing v_3=0 crosses v_1v_2 and v_2v_3, while choosing v_3=1 crosses v_1v_2 and v_1v_3. Both choices give 2, so the input-order tie rule selects v_3=0. This instantiates the conditional-expectation theorem and checks its initial expectation from the random-cut theorem.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Cornell CS 4820, Lecture notes on randomized approximation algorithms, §1.1.2, PDF pp. 2–3",
+              "url": "https://www.cs.cornell.edu/courses/cs4820/2011sp/handouts/approx_algs.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-double-tree-shortcutting-for-a-metric-tsp-instance",
+        "kind": "example",
+        "title": "Double-tree shortcutting on the four-vertex square metric",
+        "dependency_level": 4,
+        "deps": [
+          "cor-tree-edge-count",
+          "def-metric-tsp",
+          "def-spanning-tree",
+          "def-weighted-graph-and-minimum-spanning-tree",
+          "lem-euler-double-tree-shortcutting-does-not-increase-cost",
+          "lem-minimum-spanning-tree-cost-lower-bounds-metric-tsp",
+          "thm-doubled-spanning-tree-is-a-two-approximation-for-metric-tsp"
+        ],
+        "statement": "Let the four vertices be A,B,C,D, with the four cyclic side lengths AB=BC=CD=DA=1 and diagonals AC=BD=2. For T={AB,BC,CD}, the doubled-tree Euler walk A-B-C-D-C-B-A has cost 6. First-visit shortcutting gives the tour A-B-C-D-A of cost 4; in particular the closing edge D-A has length 1, at most the bypass D-C-B-A of length 3. The MST has weight 3, the optimum tour has weight 4, and the output meets the 2·MST bound.",
+        "strategy": "Verify the stated distances form the shortest-path metric of a four-cycle, so the triangle inequality holds. T is a spanning tree of weight 3. List all first visits in the closed doubled-tree walk; the shortcut replaces the final three-edge return segment D-C-B-A by D-A, reducing that segment cost from 3 to 1. The cyclic side tour has cost 4, which is optimal because every Hamiltonian cycle uses at least four unit-length edges or has larger cost. Thus the concrete costs satisfy 4≤6=2w(T) and w(T)≤OPT_TSP=4.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Williamson and Shmoys, The Design of Approximation Algorithms, §§1.1, 1.6, 2.4, 5.1–5.2, 16.2, printed pp. 14–15, 24–26, 44–46, 107–109, 413–414",
+              "url": "https://designofapproxalgs.com/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

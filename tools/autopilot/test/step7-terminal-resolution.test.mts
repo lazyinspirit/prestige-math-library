@@ -46,7 +46,7 @@ function resolution(now: any) {
   };
 }
 
-test('current final-adjudicator receipts require Astra medium after one Terra rejudge', () => {
+test('current final-adjudicator receipts accept Sol 6.1 high and historical Astra medium', () => {
   const dir = mkdtempSync(join(tmpdir(), 'step7-terminal-v3-'));
   try {
     const path = join(dir, 'terminal.jsonl');
@@ -71,6 +71,10 @@ test('current final-adjudicator receipts require Astra medium after one Terra re
       at: '2026-09-05T00:01:00.000Z',
     };
     writeFileSync(path, `${JSON.stringify(row)}\n`);
+    assert.deepEqual(parseTerminalResolutions(path).errors, []);
+    writeFileSync(path, `${JSON.stringify({
+      ...row, final_adjudicator: { ...row.final_adjudicator, model: MODELS.sol61.id, effort: 'high' },
+    })}\n`);
     assert.deepEqual(parseTerminalResolutions(path).errors, []);
     writeFileSync(path, `${JSON.stringify({
       ...row, final_adjudicator: { ...row.final_adjudicator, model: MODELS.sol.id, effort: 'xhigh' },

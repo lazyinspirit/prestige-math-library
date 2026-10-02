@@ -67,3 +67,7 @@ constant soundness below one. Independent repetition amplifies soundness on
 the same fixed proof. The two false statements delimit the construction:
 graph powering alone can enlarge its view alphabet, and the PCP proof string is
 not sampled afresh for each verifier run.
+
+The gap-CSP and PCP theorems assume the Axiom of Choice for the current
+expander spectral proof route through algebraic embedding extension. Their
+finite reductions retain deterministic polynomial-time constructions.

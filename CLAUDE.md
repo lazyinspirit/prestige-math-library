@@ -8,7 +8,7 @@
 
 4. **Mathematical integrity.** Before a fatal repair, understand the claim, proof, and actual dependencies. Helpers must check arguments independently, consult authoritative full texts when unsure, and report unresolved uncertainty. Never invent source reading, proof completion, confidence, or check results. Logical validity outranks prior acceptance, judges, and citations.
 
-5. **Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content.
+5. **Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
 
 6. **Supervision and gates.** Check a live run every ten minutes; intervene for blockers or stages that fail to close. Outside the authorized Step-7 loop, every failed gate is owner-held. Repair every rejected item, finish related writing, wait for writers to drain, refresh invalidated evidence on stable content, then retry that same gate. Do not use `retry` to start an automatic repair wave.
 
@@ -26,14 +26,20 @@
 
 13. **Step 3 — author.** Resolve owner-held scope decisions, unmet prerequisites, and incomplete item or contract evidence. Keep every promised claim; require complete arguments and exact supplier uses before clearing escalations. Refresh affected certifications after authors finish.
 
-14. **Step 4 — splice.** Resolve plan, page, manifest, and snapshot discrepancies. Check that authorized local additions precede their consumers before advancing.
+14. **Gate and escalation ownership.** Gate failure or workflow engine escalation triggers an agent review and repair of the flagged item or subject. The same reviewer owns the repair, including all affected direct and indirect downstream consumers; the orchestrator must not spawn separate read-only reviewers. A downstream consumer is affected only when the supplier's original statement is altered, including a Definition when it is the supplier's claim. This rule applies to all steps of the workflow.
 
-15. **Step 5 — review.** Resolve reader, refuter, adjudicator, source, and cross-group findings. Repair actual failing subjects; examine direct consumers when a Statement or Definition changes. Track published defects in the canonical ledger and recertify affected evidence before gate retry.
+15. **Step 4 — splice.** Resolve plan, page, manifest, and snapshot discrepancies. Check that authorized local additions precede their consumers before advancing.
 
-16. **Step 6 — judge.** Resolve owner-held scope, coverage, and evidence blockers. Preserve mathematical rejections for the assigned Step-7 adjudication unless an actual Step-6 gate requires owner repair.
+16. **Step 5 — review.** Resolve reader, refuter, adjudicator, source, and cross-group findings. Repair actual failing subjects; examine direct consumers when a Statement or Definition changes. Track published defects in the canonical ledger and recertify affected evidence before gate retry.
 
-17. **Step 7 — repair.** Supervise the frozen-frontier loop in [WORKFLOW.md](WORKFLOW.md). Assign helpers only disjoint owner-held work; do not expand frontier authority. Finish frontier repairs and separate published or outside-consumer maintenance before stable central certification. Escalate repeated unchanged pending work rather than inventing completion.
+17. **Step 6 — judge.** Resolve owner-held scope, coverage, and evidence blockers. Preserve mathematical rejections for the assigned Step-7 adjudication unless an actual Step-6 gate requires owner repair.
 
-18. **Step 8 — close changes.** Resolve changed-item judgments and direct-consumer impacts after the Step-7 freeze. Use guarded recovery only with the required owner authorization; preserve Step-7 history and recertify the reopened suffix.
+18. **Step 7 — repair.** Supervise the frozen-frontier loop in [WORKFLOW.md](WORKFLOW.md). Assign helpers only disjoint owner-held work; do not expand frontier authority. Finish frontier repairs and separate published or outside-consumer maintenance before stable central certification. Escalate repeated unchanged pending work rather than inventing completion.
 
-19. **Step 9 — handoff.** Resolve contract, pathway, readiness, and report blockers; verify the engine's closeout commit. New content remains draft. Publication and pushing remain owner actions.
+19. **Step 8 — close changes.** Resolve changed-item judgments and direct-consumer impacts after the Step-7 freeze. Use guarded recovery only with the required owner authorization; preserve Step-7 history and recertify the reopened suffix.
+
+20. **Step 9 — handoff.** Resolve contract, pathway, readiness, and report blockers; verify the engine's closeout commit. New content remains draft. Publication and pushing remain owner actions.
+
+21. **Step 3 pre-gate recertification.** Immediately before each Step 3 gate attempt, after the orchestrator, engine workers, and owner-spawned review and repair agents have finished writing, the orchestrator must rehash and recertify every Step 3 item in one dependency-ordered pass against the current content and mathematical evidence. Do not attempt the gate until the pass is complete.
+
+22. **Dependency order and published consumer repairs.** All owner/orchestrator-spawned agents must review and/or repair items in the correct dependency order: suppliers before their direct and indirect consumers. Agents are authorized to surgically repair published direct or indirect consumers if the original supplier's statement is changed.

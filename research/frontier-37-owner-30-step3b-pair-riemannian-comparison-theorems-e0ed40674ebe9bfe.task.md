@@ -1,0 +1,77 @@
+# step3b: A/B pair riemannian-comparison-theorems
+
+- Run: frontier-37-owner-30
+- A page: riemannian-comparison-theorems
+- B page: riemannian-comparison-theorems-examples
+- Batches: 13
+- Own only this pair; preserve other pairs in shared batch files.
+- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.
+- Read current manifests, coverage, prose, plan and dependency records.
+- Audit scaffolds for authoring readiness: hypotheses, sources, direct suppliers and proof route. Author every assigned item, including consumers with flagged unfinished suppliers; reconcile their actual proof uses and clear all required Step-3 gates before handoff. Thorough independent mathematical audit and systematic defect repair follow in Steps 5–8.
+- Direct in-run prerequisite pairs to inspect (they may still be unfinished): none.
+- If an item supplier is not yet authored, flag its exact ID and consuming step in research/frontier-37-owner-30-step3b-pair-riemannian-comparison-theorems.md; author the assigned consumer anyway, then leave its decision escalated until the supplier and proof use are reconciled.
+- Audit and author in this exact dependency-level order (lower first; ties by page order and item ID):
+  0. def-comparison-sine-cosine-and-cotangent-functions (riemannian-comparison-theorems)
+  0. def-laplace-beltrami-operator-as-trace-of-the-hessian (riemannian-comparison-theorems)
+  0. def-radial-jacobi-tensor (riemannian-comparison-theorems)
+  0. lem-first-variation-hinge-derivative-formula (riemannian-comparison-theorems)
+  0. lem-pullback-metric-on-a-cover-of-a-complete-manifold-is-complete (riemannian-comparison-theorems)
+  0. thm-a-complete-local-isometry-is-a-covering-map (riemannian-comparison-theorems)
+  0. thm-no-conjugate-points-under-nonpositive-sectional-curvature (riemannian-comparison-theorems)
+  0. cex-positive-sectional-curvature-with-no-fixed-lower-bound-on-a-noncompact-manifold (riemannian-comparison-theorems-examples)
+  0. cex-ricci-lower-bound-does-not-control-every-sectional-curvature-in-dimension-at-least-three (riemannian-comparison-theorems-examples)
+  1. def-comparison-triangle-in-the-two-dimensional-space-form (riemannian-comparison-theorems)
+  1. def-model-space-radial-area-and-ball-volume (riemannian-comparison-theorems)
+  1. fs-the-laplace-beltrami-definition-licenses-the-use-of-all-euclidean-harmonic-function-theory-on-manifolds (riemannian-comparison-theorems)
+  1. lem-radial-jacobi-tensor-is-invertible-before-the-first-conjugate-point (riemannian-comparison-theorems)
+  1. prop-model-functions-solve-the-constant-curvature-jacobi-equation (riemannian-comparison-theorems)
+  1. thm-cartan-hadamard (riemannian-comparison-theorems)
+  2. cor-simply-connected-complete-nonpositively-curved-manifolds-have-unique-geodesics-between-points (riemannian-comparison-theorems)
+  2. def-radial-riccati-operator (riemannian-comparison-theorems)
+  2. def-radial-volume-jacobian (riemannian-comparison-theorems)
+  2. fs-cartan-hadamard-says-exp-p-is-injective-without-simple-connectedness (riemannian-comparison-theorems)
+  2. thm-bonnet-conjugate-radius-theorem (riemannian-comparison-theorems)
+  2. thm-bonnet-myers (riemannian-comparison-theorems)
+  2. thm-sturm-comparison-for-scalar-jacobi-equations (riemannian-comparison-theorems)
+  2. ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity (riemannian-comparison-theorems-examples)
+  2. ex-cartan-hadamard-for-hyperbolic-space (riemannian-comparison-theorems-examples)
+  2. ex-model-jacobi-fields-in-positive-zero-and-negative-curvature (riemannian-comparison-theorems-examples)
+  3. cor-bonnet-myers-fundamental-group-is-finite (riemannian-comparison-theorems)
+  3. fs-positive-ricci-curvature-without-a-uniform-lower-bound-implies-compactness (riemannian-comparison-theorems)
+  3. lem-logarithmic-derivative-of-the-radial-volume-jacobian-is-the-distance-laplacian (riemannian-comparison-theorems)
+  3. thm-radial-riccati-equation (riemannian-comparison-theorems)
+  3. ex-bonnet-myers-for-the-round-sphere (riemannian-comparison-theorems-examples)
+  4. lem-riccati-comparison-for-scalar-initial-shape (riemannian-comparison-theorems)
+  4. lem-trace-riccati-inequality (riemannian-comparison-theorems)
+  4. thm-rauch-comparison-theorem-first-form (riemannian-comparison-theorems)
+  5. cor-lower-positive-sectional-curvature-forces-conjugate-points (riemannian-comparison-theorems)
+  5. cor-upper-sectional-curvature-bounds-delay-conjugate-points (riemannian-comparison-theorems)
+  5. fs-higher-sectional-curvature-makes-jacobi-fields-spread-faster (riemannian-comparison-theorems)
+  5. thm-hessian-comparison-for-distance-under-sectional-curvature-bounds (riemannian-comparison-theorems)
+  5. thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound (riemannian-comparison-theorems)
+  5. thm-rauch-comparison-theorem-second-form (riemannian-comparison-theorems)
+  5. thm-relative-volume-density-comparison (riemannian-comparison-theorems)
+  5. ex-rauch-comparison-between-euclidean-and-spherical-geodesics (riemannian-comparison-theorems-examples)
+  6. cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold (riemannian-comparison-theorems)
+  6. lem-toponogov-distance-support-inequality (riemannian-comparison-theorems)
+  6. prop-rigidity-in-rauch-comparison (riemannian-comparison-theorems)
+  6. rem-weak-laplacian-comparison-at-the-cut-locus (riemannian-comparison-theorems)
+  6. thm-bishop-gromov-volume-comparison (riemannian-comparison-theorems)
+  6. ex-distance-hessian-and-laplacian-in-space-forms (riemannian-comparison-theorems-examples)
+  7. cor-bishop-volume-upper-bound (riemannian-comparison-theorems)
+  7. cor-volume-doubling-under-a-nonnegative-ricci-lower-bound (riemannian-comparison-theorems)
+  7. fs-bishop-gromov-volume-ratio-is-nondecreasing-under-a-ricci-lower-bound (riemannian-comparison-theorems)
+  7. prop-rigidity-in-bishop-gromov-on-an-interval (riemannian-comparison-theorems)
+  7. thm-cheng-maximal-diameter-rigidity (riemannian-comparison-theorems)
+  7. thm-toponogov-hinge-comparison (riemannian-comparison-theorems)
+  7. ex-bishop-gromov-ratio-is-constant-in-the-model-space (riemannian-comparison-theorems-examples)
+  7. ex-volume-growth-in-euclidean-and-hyperbolic-space (riemannian-comparison-theorems-examples)
+  8. cor-complete-noncompact-manifolds-with-nonnegative-ricci-curvature-have-at-most-euclidean-volume-growth (riemannian-comparison-theorems)
+  8. thm-toponogov-triangle-comparison (riemannian-comparison-theorems)
+  9. fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model (riemannian-comparison-theorems)
+  9. prop-distance-between-corresponding-side-points-in-toponogov-comparison (riemannian-comparison-theorems)
+  9. rem-alexandrov-and-differentiable-sphere-theorems (riemannian-comparison-theorems)
+  9. ex-equality-cases-as-diagnostics-for-all-comparison-signs (riemannian-comparison-theorems-examples)
+  9. ex-toponogov-comparison-on-a-round-sphere (riemannian-comparison-theorems-examples)
+  10. cor-diameter-rigidity-from-toponogov-under-a-sectional-lower-bound (riemannian-comparison-theorems)
+- Write research/frontier-37-owner-30-step3b-pair-riemannian-comparison-theorems.md.

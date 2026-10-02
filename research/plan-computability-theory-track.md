@@ -2187,6 +2187,14 @@ the metric-TSP proof.  The binding A inventory is:
 21. `lem-l-reductions-transfer-apx-hardness`
 22. `fs-exact-np-hardness-implies-no-constant-approximation`
 
+State the finite-instance, feasible-encoding and nonnegative-value conventions
+explicitly. The APX-hardness definition in this scaffold selects L-reductions;
+it does not assert that this is the unique literature convention or that any
+specific target is APX-complete. Prove composition with multiplied constants,
+the relative-error transfer and the zero-optimum cases. The PCP gap results
+give no-PTAS consequences and do not independently establish this selected
+APX-hardness property.
+
 The PCP-to-Max-3SAT item must construct the constant-size local-predicate CNF,
 track the number of coins/queries/clauses, and prove both completeness and the
 gap; a bare appeal to Cook--Levin is insufficient.  The B page

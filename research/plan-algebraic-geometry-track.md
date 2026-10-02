@@ -102,8 +102,9 @@ are non-normative.
   `krull-dimension-and-height-theorems` supplies chain dimension, principal
   ideal/height results, and dimension of polynomial rings;
   `valuation-rings-and-discrete-valuation-rings` supplies valuations and DVR
-  structure; `dedekind-domains-and-ideal-classes` supplies the one-dimensional
-  normal-domain ideal theory; `flatness-and-faithful-flatness` supplies the
+  structure; `dedekind-domains-and-ideal-classes` supplies ideal theory only
+  for Dedekind-domain specializations, not the general normal-scheme claims;
+  `flatness-and-faithful-flatness` supplies the
   algebraic flatness criteria. Localisation, integral closure, primary
   decomposition, graded/Hilbert theory, completion, depth/regularity, Koszul
   theory, Ext, Tor, derived functors, triangulated categories, and spectral
@@ -163,7 +164,7 @@ PDF pp. 36--50.
 | `def-quasi-affine-algebraic-set` | def | Define quasi-affine algebraic sets as open subspaces of affine algebraic sets; distinguishes them from affine objects. | literature-derived | not-applicable |
 | `lem-algebraic-set-finite-irreducible-components` | lem | Use Noetherianity of the classical Zariski space to obtain a finite irredundant decomposition into irreducible components and prove uniqueness. | literature-derived | ai-altered |
 | `def-reduced-affine-algebra` | def | Name reduced finitely generated $k$-algebras and note why nilpotents are invisible to classical point sets; motivates schemes. | literature-derived | not-applicable |
-| `thm-affine-algebraic-sets-coordinate-duality` | thm | Establish the contravariant equivalence between affine algebraic sets and reduced finitely generated $k$-algebras, after `AV-2` supplies morphisms; states the target and defers only the morphism half. | literature-derived | not-supplied |
+| `thm-affine-algebraic-sets-coordinate-duality` | thm | Historical AV-1 object-level Nullstellensatz dictionary between affine algebraic sets and radical ideals; the full morphism antiequivalence is already proved by AG-P2. Treat this name as superseded and do not emit a duplicate theorem. | literature-derived | ai-altered |
 | `lem-maximal-ideals-are-points-over-algebraically-closed-field` | lem | Apply weak Nullstellensatz to identify closed points with maximal ideals $(x_1-a_1,\ldots,x_n-a_n)$; powers the scheme comparison. | literature-derived | ai-altered |
 | `cor-zariski-topology-cofinite-on-affine-line` | cor | Show proper closed subsets of $\mathbf A^1_k$ are finite; supplies the first concrete warning that Zariski topology is coarse. | literature-derived | ai-altered |
 | `lem-density-nonempty-open-affine-variety` | lem | Prove every nonempty open subset of an affine variety is dense; later guarantees rational maps are determined on overlaps. | literature-derived | ai-altered |
@@ -521,7 +522,7 @@ pp. 81--99; Arapura Ch. 5 §§5.1--5.4, pp. 34--40; Vakil Ch. 13
 |---|---|---|---|---|
 | `def-zariski-cotangent-space-point` | def | Define $\mathfrak m_x/\mathfrak m_x^2$ and its residue-field vector-space structure. | literature-derived | not-applicable |
 | `def-zariski-tangent-space-point` | def | Define $T_xX=\operatorname{Hom}_{\kappa(x)}(\mathfrak m_x/\mathfrak m_x^2,\kappa(x))$; works intrinsically and later for schemes. | literature-derived | not-applicable |
-| `lem-tangent-vectors-as-dual-number-points` | lem | Identify tangent vectors with maps $\operatorname{Spec}\kappa(x)[\epsilon]/(\epsilon^2)\to X$ based at $x$ once schemes are available; state now, prove at `AV-16`. | literature-derived | not-supplied |
+| `lem-tangent-vectors-as-dual-number-points` | lem | At a $k$-rational point $x$ of a $k$-scheme, identify $T_xX$ with based $k$-maps $\operatorname{Spec}k[\epsilon]/(\epsilon^2)\to X$ and with $\operatorname{Der}_k(\mathcal O_{X,x},k)$; make no non-rational-point claim in this classical lemma. The relative residue-field version is the separate AV-16 theorem. | literature-derived | ai-altered |
 | `def-jacobian-matrix-affine-algebraic-set` | def | Define the Jacobian at a point for chosen equations and fix row/column convention. | literature-derived | not-applicable |
 | `thm-zariski-tangent-space-jacobian-kernel` | thm | Prove $T_xX$ is the common kernel of the differentials of all defining equations and is unchanged by generators. | literature-derived | ai-altered |
 | `lem-tangent-space-functoriality-classical` | lem | Construct $d_xf:T_xX\to T_{f(x)}Y$ and prove identity/chain rules. | literature-derived | ai-altered |
@@ -535,7 +536,7 @@ pp. 81--99; Arapura Ch. 5 §§5.1--5.4, pp. 34--40; Vakil Ch. 13
 | `thm-nonempty-regular-locus-reduced-variety-perfect-field` | thm | Show each irreducible component has a dense open regular locus over a perfect field. | literature-derived | ai-altered |
 | `def-smooth-morphism-to-field-classical` | def | Define a variety smooth over $k$ by geometric regularity after field extension, separating it from mere regularity. | literature-derived | not-applicable |
 | `thm-regular-equals-smooth-over-perfect-field` | thm | Prove regular finite-type $k$-schemes are smooth when $k$ is perfect; records the exact convention used in the classical block. | literature-derived | ai-altered |
-| `cex-regular-not-smooth-imperfect-field-theorem` | thm | State the standard purely inseparable field-extension counterexample to regular implying smooth; retained as a theorem row because later definitions depend on the distinction. | literature-derived | not-supplied |
+| `thm-regular-not-smooth-imperfect-field` | thm | For an imperfect field $k$ of characteristic $p>0$ and $a\notin k^p$, prove $\operatorname{Spec}k[t]/(t^p-a)$ is regular but not smooth over $k$ by exhibiting its nonregular purely inseparable base change; the explicit calculation also appears on the B page. | literature-derived | ai-altered |
 | `def-tangent-cone-point` | def | Define the tangent cone by the associated graded local ring, citing graded algebra for construction. | literature-derived | not-applicable |
 | `lem-tangent-cone-linear-span-tangent-space` | lem | Show the linear span of the tangent cone is the Zariski tangent space. | literature-derived | ai-altered |
 | `def-multiplicity-hypersurface-point` | def | Define hypersurface multiplicity as the least nonzero degree in the local expansion; prepares plane-curve intersection. | literature-derived | not-applicable |
@@ -621,8 +622,7 @@ commutative algebra. AV records the geometric maps and consequences only.
 
 ## AV-8. Plane curves, local intersection multiplicity, and Bézout
 
-`requires`: `AV-3`, `AV-5`, `AV-6`, local lengths/resultants from algebra,
-and graded Hilbert theory by citation. Pair sources: Fulton, *Algebraic
+`requires`: published AV-3, AV-5, AV-6, CA-11 `rees-modules-artin-rees-and-hilbert-samuel-theory`, and CA-21 `homogeneous-resultants-and-projective-intersection-length`; prove the local length and tangent-cone steps explicitly before applying the published graded/global calculation. Pair sources: Fulton, *Algebraic
 Curves*, Ch. 5 §§5.1--5.6, pp. 53--66; Artin, MIT 18.721, Ch. 1
 §§1.3--1.10, PDF pp. 9--34; MIT 18.725 Lectures 15--16,
 consolidated-notes PDF pp. 35--40.
@@ -808,7 +808,7 @@ localization. Pair sources: Vakil Ch. 4 §§4.1--4.7, pp. 85--110 and Ch. 5
 Milne AG10 §§a--b, pp. 2--10; Stacks Project, *Schemes* §§26.2--26.6
 (tags 01HA--01I1).
 
-### Proposed A-page inventory (28 items)
+### Proposed A-page inventory (30 items)
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -884,7 +884,7 @@ pp. 149--161; Gao--Zhang Ch. 4 §§4.1--4.5, pp. 39--48; Milne AG10
 | `def-ideal-sheaf` | def | Define a sheaf of ideals $\mathcal I\subseteq\mathcal O_X$. | literature-derived | not-applicable |
 | `def-closed-immersion-schemes` | def | Define a closed immersion by a closed topological embedding and surjection of structure sheaves. | literature-derived | not-applicable |
 | `thm-affine-closed-immersions-quotient-rings` | thm | Characterize closed immersions into $\operatorname{Spec}A$ as $\operatorname{Spec}(A/I)\to\operatorname{Spec}A$. | literature-derived | ai-altered |
-| `thm-quasi-coherent-ideal-closed-subscheme-correspondence` | thm | State the correspondence between quasi-coherent ideal sheaves and closed subschemes, with proof completed after `AV-18`. | literature-derived | not-supplied |
+| `thm-quasi-coherent-ideal-closed-subscheme-correspondence` | thm | Under the library's stated Axiom of Choice hypothesis, prove the scheme-wide inverse correspondence between quasi-coherent ideal sheaves and closed subschemes; the theorem and its local proof are already published, with Stacks [01QP, 01QQ] as the direct source route. | literature-derived | ai-altered |
 | `def-reduction-of-scheme` | def | Define $X_{\mathrm{red}}$ by the nilradical sheaf and the same underlying topological space. | literature-derived | not-applicable |
 | `thm-reduction-universal-property` | thm | Any morphism from a reduced scheme to $X$ factors uniquely through $X_{\mathrm{red}}$. | literature-derived | ai-altered |
 | `def-irreducible-component-scheme` | def | Define irreducible components topologically and their reduced induced subschemes. | literature-derived | not-applicable |
@@ -1025,25 +1025,30 @@ Artin Ch. 5 §5.6, pp. 111--114.
 and valuation rings by citation. Pair sources: Vakil Ch. 8 §§8.1--8.4,
 pp. 171--189 and Ch. 11 §§11.2--11.3, pp. 236--246; Milne Ch. 7
 §§a--h, pp. 161--175 and Ch. 8 §§d--f, pp. 185--193; Tong Ch. 2 §2.6,
-pp. 67--71; Stacks Project, *Morphisms of Schemes* §§29.11, 29.42--29.45.
+pp. 67--71; Stacks Project, *Morphisms of Schemes* §§29.11, 29.21,
+29.42--29.45. The quasi-finite local criteria are [01TD, 02NG, 01TJ]; the
+global scheme-level Zariski Main proof is assigned to AV-17.
 
-**Frontier-36 owner resolution:** The relative-Spec characterization is
-proved here before AV-18. The affine-local algebra definition, principal-open
-localization of $f_*\mathcal O_X$, and gluing of relative spectra are explicit
-support items below. Stacks Project Lemma 29.11.3 (tag `01S8`) identifies the
-needed equivalence and its quasi-coherent-algebra input; the local proof must
-establish that input rather than cite the later AV-18 page.
+**Supplier placement:** AV-15 retains the affine-local algebra definition,
+principal-open localization of $f_*\mathcal O_X$, and relative-spectrum
+gluing lemmas as inputs. AV-18 owns the affine-morphism/relative-Spec theorem,
+after the affine quasi-coherent equivalence; it proves the characterization
+using these earlier local suppliers. Stacks Project Lemma 29.11.3 (tag
+`01S8`) identifies the theorem and hypotheses, but the library proof still
+has to establish the quasi-coherent-algebra input and the affine-local
+construction.
 
 ### Proposed A-page inventory (28 items)
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
-| `def-affine-morphism-schemes` | def | Define an affine morphism by affine inverse images of affine opens. | literature-derived | not-applicable |
-| `def-affine-local-quasi-coherent-algebra` | def | Define an affine-locally module-associated sheaf of $\mathcal O_S$-algebras, sufficient for relative Spec before the general AV-18 theory. | literature-derived | not-applicable |
+| `def-affine-local-quasi-coherent-algebra` | def | Define an affine-locally module-associated sheaf of $\mathcal O_S$-algebras for the relative-Spec theorem in AV-18. | literature-derived | not-applicable |
 | `lem-affine-morphism-structure-sheaf-pushforward-localizes` | lem | For affine $f$, prove $f_*\mathcal O_X$ is locally $\widetilde B$ by checking principal-open localization $B_a$ on every affine base chart. | literature-derived | ai-altered |
 | `lem-relative-spectrum-glues-over-affine-base-cover` | lem | Glue $\operatorname{Spec}$ of an affine-locally associated algebra across overlaps and verify its affine-local universal property. | literature-derived | ai-altered |
-| `thm-affine-morphism-relative-spec-characterization` | thm | Characterize affine morphisms as relative spectra of quasi-coherent algebras using the three local constructions immediately above, without AV-18. | literature-derived | ai-altered |
 | `def-finite-morphism-schemes` | def | Define finite morphisms affine-locally by finite modules. | literature-derived | not-applicable |
+| `def-quasi-finite-at-point-and-morphism` | def | Define locally quasi-finite at a point and quasi-finite, keeping locally finite type, finite type, and quasi-compactness hypotheses distinct. | literature-derived | not-applicable |
+| `lem-quasi-finite-finite-fibre-characterization` | lem | For a locally finite-type morphism, characterize quasi-finiteness at a point by an isolated point of the fibre with finite residue-field extension; cite Stacks [02NG] with its exact local hypotheses. | literature-derived | ai-altered |
+| `lem-algebraic-zariski-main-quasi-finite-localization` | lem | Prove the finite-algebra localization step used by the algebraic Zariski Main argument, with the finite-type and quasi-finiteness assumptions of Stacks [00Q9]. | literature-derived | ai-altered |
 | `lem-finite-morphism-affine` | lem | Prove every finite morphism is affine. | literature-derived | ai-altered |
 | `lem-finite-stable-base-change-composition` | lem | Prove finiteness is stable under base change and composition. | literature-derived | ai-altered |
 | `thm-finite-morphism-integral-closed` | thm | Show a finite morphism is universally closed using the cited integral-extension theorem. | literature-derived | ai-altered |
@@ -1064,7 +1069,6 @@ establish that input rather than cite the later AV-18 page.
 | `thm-projective-morphism-proper` | thm | Deduce projective morphisms are proper from closed immersions and projective space. | literature-derived | ai-altered |
 | `lem-closed-immersion-proper` | lem | Prove closed immersions are proper, including finite type. | literature-derived | ai-altered |
 | `cor-proper-birational-normal-curve-isomorphism-off-finite-set` | cor | For normal curves, control a proper birational morphism away from finitely many points. | literature-derived | ai-altered |
-| `thm-properness-descent-fpqc` | thm | State descent of properness under fpqc base change, using flat descent as an application rather than rebuilding it. | literature-derived | not-supplied |
 | `lem-proper-fibres-proper` | lem | Every scheme-theoretic fibre of a proper morphism is proper over its residue field. | literature-derived | ai-altered |
 | `rem-projective-versus-proper` | rem | State that projective implies proper, while the converse needs extra hypotheses and is false in general. | literature-derived | not-applicable |
 | `rem-proper-not-topologically-compact-over-arbitrary-field` | rem | Separate scheme properness from compactness of a chosen set of rational points. | literature-derived | not-applicable |
@@ -1105,7 +1109,7 @@ MIT 18.725 Lectures 18--20, consolidated-notes PDF pp. 42--48; Milne AG10
 §g, pp. 20--21 and AG14, pp. 1--3; Stacks Project, *Morphisms of Schemes*
 §§29.32--29.34 and *Modules of Differentials* §§10.131--10.134.
 
-### Proposed A-page inventory (30 items)
+### Proposed A-page inventory (29 items)
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1136,7 +1140,6 @@ MIT 18.725 Lectures 18--20, consolidated-notes PDF pp. 42--48; Milne AG10
 | `def-unramified-morphism-finite-type` | def | Define unramified as locally of finite type and formally unramified. | literature-derived | not-applicable |
 | `thm-unramified-diagonal-open-immersion` | thm | Characterize unramified morphisms by the diagonal being an open immersion under finite-type hypotheses. | literature-derived | ai-altered |
 | `lem-etale-residue-extensions-finite-separable` | lem | For an étale morphism at a point, show the residue-field extension is finite separable under finite-presentation hypotheses. | literature-derived | ai-altered |
-| `def-smooth-relative-dimension-via-differentials` | def | Record the intended rank-$n$ differential bundle criterion, proved with flatness in `AV-17`. | literature-derived | not-supplied |
 | `rem-conormal-map-need-not-injective` | rem | Warn that the conormal sequence is right exact; left injectivity needs regularity hypotheses. | literature-derived | not-applicable |
 | `rem-differentials-detect-infinitesimals-not-all-singularities-alone` | rem | Require flatness/presentation conditions before converting differential rank into smoothness. | literature-derived | not-applicable |
 
@@ -1159,10 +1162,12 @@ MIT 18.725 Lectures 18--20, consolidated-notes PDF pp. 42--48; Milne AG10
 ## AV-17. Flat, smooth, and étale morphisms
 
 `requires`: `AV-13`, `AV-15`, `AV-16`, `flatness-and-faithful-flatness`, finite
-presentation, and generic freeness by citation. Pair sources: Vakil Ch. 25
+presentation, and the generic-freeness supplier proved locally below. Pair
+sources: Vakil Ch. 25
 §§25.1--25.10, pp. 519--552 and Ch. 26 §§26.1--26.6, pp. 553--566;
 Tong Ch. 2 §2.7, pp. 72--84; Stacks Project, *Morphisms of Schemes*
-§§29.25--29.31 and §§29.35--29.37, plus *Étale Morphisms* §§41.11--41.18;
+§§29.21, 29.25--29.31, 29.35--29.37 and 37.43--37.44; *Algebra* §10.118;
+plus *Étale Morphisms* §§41.11--41.18;
 Milne AG10 §l, pp. 29--33.
 
 **Frontier-36 owner resolution:** The fibre-dimension theorem uses the
@@ -1170,7 +1175,7 @@ proper, flat, finite-presentation route of Stacks Project Lemma 37.30.6
 (tag `0D4J`). AV-15 is an earlier declared supplier for properness. This
 theorem does not assert local constancy for arbitrary flat families.
 
-### Proposed A-page inventory (31 base items, plus scheme Zariski Main support)
+### Proposed A-page inventory (33 base items, plus scheme Zariski Main support)
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1180,7 +1185,8 @@ theorem does not assert local constancy for arbitrary flat families.
 | `lem-flat-morphisms-stable-composition` | lem | Prove flatness is stable under composition. | literature-derived | ai-altered |
 | `def-faithfully-flat-morphism-schemes` | def | Define faithfully flat using flatness and surjectivity on spectra, aligned with the algebra supplier. | literature-derived | not-applicable |
 | `thm-faithfully-flat-descent-vanishing` | thm | If a quasi-coherent module pulls back to zero along an fpqc cover, prove it was zero; first geometric descent application. | literature-derived | ai-altered |
-| `thm-generic-flatness-morphisms` | thm | For finite-type morphisms over an integral Noetherian base, find a dense open over which the morphism is flat, citing generic freeness. | literature-derived | ai-altered |
+| `lem-generic-freeness-finite-type-domain-algebra-module` | lem | If $R$ is a domain, $S$ is a finite-type $R$-algebra, and $M$ is finite type over $S$, prove that some $0\ne f\in R$ makes $S_f$ and $M_f$ free as $R_f$-modules; use Stacks [051T] with its exact hypotheses. | literature-derived | ai-altered |
+| `thm-generic-flatness-morphisms` | thm | For finite-type morphisms over an integral Noetherian base, find a dense open over which the morphism is flat, using the locally proved generic-freeness supplier. | literature-derived | ai-altered |
 | `thm-flat-finite-presentation-is-open` | thm | Prove a flat morphism locally of finite presentation is open. | literature-derived | ai-altered |
 | `thm-flat-families-fibre-dimension-locally-constant` | thm | For a proper, flat morphism of finite presentation, prove that the fibre-dimension function on the base is locally constant; do not claim this for arbitrary flat families. | literature-derived | ai-altered |
 | `def-smooth-morphism-schemes` | def | Define smooth as locally of finite presentation, flat, with geometrically regular fibres. | literature-derived | not-applicable |
@@ -1190,6 +1196,7 @@ theorem does not assert local constancy for arbitrary flat families.
 | `thm-smooth-local-standard-form` | thm | Étale-locally on source and target, express a smooth morphism as étale over affine space. | literature-derived | ai-altered |
 | `thm-jacobian-criterion-smooth-morphism` | thm | For a finite presentation by equations, characterize smoothness through an invertible Jacobian minor plus flat/dimension conditions. | literature-derived | ai-altered |
 | `thm-differentials-smooth-locally-free` | thm | If $f$ is smooth of relative dimension $n$, prove $\Omega_{X/S}$ is locally free of rank $n$. | literature-derived | ai-altered |
+| `def-smooth-relative-dimension-via-differentials` | def | Define differential rank $n$ by local freeness of $\Omega_{X/S}$ of constant rank $n$ and state that this condition alone is not smoothness; the smooth-relative-dimension criterion also needs the applicable finite-presentation, flatness, and fibre hypotheses. | ai-altered | not-applicable |
 | `lem-smooth-fibres-smooth` | lem | Every fibre and geometric fibre of a smooth morphism is smooth. | literature-derived | ai-altered |
 | `def-etale-morphism-schemes` | def | Define étale as smooth of relative dimension zero. | literature-derived | not-applicable |
 | `thm-etale-equivalent-flat-unramified-fp` | thm | Under finite presentation, identify étale with flat and unramified. | literature-derived | ai-altered |
@@ -1199,7 +1206,7 @@ theorem does not assert local constancy for arbitrary flat families.
 | `def-standard-etale-algebra` | def | Define $B=(A[x]/(f))_g$ with $f'$ invertible as a standard étale algebra. | literature-derived | not-applicable |
 | `thm-etale-locally-standard-etale` | thm | Show every étale morphism is locally standard étale. | literature-derived | ai-altered |
 | `lem-elementary-etale-neighbourhood-finite-decomposition` | lem | Prove the étale-local finite-component decomposition near isolated points of a separated finite-type morphism, with the exact Stacks §37.41 hypotheses. | literature-derived | ai-altered |
-| `lem-scheme-zariski-main-factorization-quasi-finite` | lem | For a quasi-finite separated morphism over a quasi-compact quasi-separated base, prove the open-immersion/finite factorization using relative normalization, elementary étale localization and finite-stage descent; obtain the general result locally on the base when needed. | literature-derived | ai-altered |
+| `thm-zariski-main-quasi-finite-factorization` | thm | For a quasi-finite separated morphism over a quasi-compact quasi-separated base, prove the open-immersion/finite factorization using relative normalization, elementary étale localization and finite-stage descent; obtain the general result locally on the base when needed. This is the canonical ID replacing the historical lemma label, not a second theorem. | literature-derived | ai-altered |
 | `thm-proper-quasi-finite-is-finite` | thm | Show a proper quasi-finite morphism is finite using the preceding factorization or the étale-local finite-component decomposition and fpqc descent, with no affine-algebra theorem substituted for scheme-level gluing. | literature-derived | ai-altered |
 | `thm-etale-over-algebraically-closed-field-discrete-smooth-points` | thm | Describe finite étale $k$-schemes as finite disjoint unions of points when $k$ is algebraically closed. | literature-derived | ai-altered |
 | `def-smooth-locus-morphism` | def | Define the smooth locus of a finite-presentation morphism. | literature-derived | not-applicable |
@@ -1239,7 +1246,7 @@ Milne AG13 §§13.1--13.16, pp. 1--8; MIT 18.725 Lectures 10--14,
 consolidated-notes PDF pp. 25--34; Stacks Project, *Schemes* §§26.24--26.26
 and *Properties of Schemes* §§28.20--28.26.
 
-### Proposed A-page inventory (31 items)
+### Proposed A-page inventory (32 items)
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1249,6 +1256,7 @@ and *Properties of Schemes* §§28.20--28.26.
 | `lem-associated-sheaf-sections-basic-open` | lem | Prove $\Gamma(D(f),\widetilde M)\cong M_f$. | literature-derived | ai-altered |
 | `def-quasi-coherent-module-scheme` | def | Define quasi-coherent sheaves as locally associated to modules on affine opens. | literature-derived | not-applicable |
 | `thm-affine-quasi-coherent-equivalence` | thm | Prove $M\mapsto\widetilde M$ and $\mathcal F\mapsto\Gamma(X,\mathcal F)$ are quasi-inverse equivalences on affine schemes. | literature-derived | ai-altered |
+| `thm-affine-morphism-relative-spec-characterization` | thm | Characterize affine morphisms as relative spectra of quasi-coherent algebras by the affine-local construction, principal-open localization, and gluing proof; write the proof here after the affine quasi-coherent equivalence. | literature-derived | ai-altered |
 | `cor-affine-qc-sheaf-determined-global-sections` | cor | A quasi-coherent sheaf on an affine scheme is determined by its global module. | literature-derived | ai-altered |
 | `thm-quasi-coherence-check-affine-cover` | thm | Show quasi-coherence can be checked on any affine open cover, including overlap compatibility. | literature-derived | ai-altered |
 | `thm-kernels-cokernels-qc-modules` | thm | On any scheme, check on affine opens that kernels and cokernels of maps of quasi-coherent modules remain quasi-coherent; quasi-separatedness belongs to the separate pushforward theorem. | literature-derived | ai-altered |
@@ -1356,9 +1364,11 @@ Schemes* §§29.38--29.44; Milne AG10 §i, pp. 23--25.
 
 ## AV-20. Cartier and Weil divisors, line bundles, and Picard groups
 
-`requires`: `AV-7`, `AV-18`, `AV-19`,
+`requires`: `AV-12`, `AV-18`, `AV-19`,
 `valuation-rings-and-discrete-valuation-rings`, and
-`dedekind-domains-and-ideal-classes`. Pair sources: Vakil Ch. 15
+`krull-dimension-and-height-theorems`. `dedekind-domains-and-ideal-classes`
+is optional only for an explicitly stated Dedekind-domain specialization.
+Pair sources: Vakil Ch. 15
 §§15.1--15.3, pp. 317--327; Milne AG12 §§12.1--12.17, pp. 1--9;
 MIT 18.725 Lecture 15, consolidated-notes PDF pp. 35--37; Stacks Project,
 *Divisors* §§31.14--31.30.
@@ -1378,7 +1388,7 @@ MIT 18.725 Lecture 15, consolidated-notes PDF pp. 35--37; Stacks Project,
 | `lem-cartier-divisor-sheaf-invertible` | lem | Prove $\mathcal O_X(D)$ is invertible and embeds in $\mathcal K_X$ on integral schemes. | literature-derived | ai-altered |
 | `lem-cartier-divisor-addition-tensor` | lem | Prove $\mathcal O_X(D+D')\cong\mathcal O_X(D)\otimes\mathcal O_X(D')$ and $\mathcal O_X(-D)\cong\mathcal O_X(D)^\vee$. | literature-derived | ai-altered |
 | `thm-cartier-divisors-mod-principal-to-picard` | thm | Map Cartier divisor classes to $\operatorname{Pic}(X)$ and state the hypotheses for surjectivity/isomorphism. | literature-derived | ai-altered |
-| `def-picard-group-scheme` | def | Define $\operatorname{Pic}(X)$ as isomorphism classes of invertible sheaves under tensor product. | literature-derived | not-applicable |
+| `def-picard-group` | def | Define $\operatorname{Pic}(X)$ as the ordinary group of isomorphism classes of invertible sheaves under tensor product; this is not a representing Picard scheme or Picard functor. | literature-derived | not-applicable |
 | `def-rational-section-line-bundle` | def | Define a nonzero rational section of an invertible sheaf on an integral scheme. | literature-derived | not-applicable |
 | `thm-line-bundle-rational-section-cartier-divisor` | thm | A rational section gives a Cartier divisor, and $(\mathcal L,s)\leftrightarrow D$ up to the stated equivalence. | literature-derived | ai-altered |
 | `lem-global-section-effective-divisor` | lem | A regular section of a line bundle that is a nonzerodivisor locally cuts out an effective Cartier divisor. | literature-derived | ai-altered |
@@ -1389,7 +1399,7 @@ MIT 18.725 Lecture 15, consolidated-notes PDF pp. 35--37; Stacks Project,
 | `thm-cartier-to-weil-divisor-normal-scheme` | thm | Send local Cartier equations to codimension-one valuations and prove well-definedness. | literature-derived | ai-altered |
 | `lem-cartier-to-weil-respects-principal-and-addition` | lem | Show the map descends to $\operatorname{Pic}(X)\to\operatorname{Cl}(X)$. | literature-derived | ai-altered |
 | `thm-cartier-weil-isomorphism-locally-factorial` | thm | On a locally factorial integral Noetherian scheme, prove every Weil divisor is Cartier, hence $\operatorname{Pic}\cong\operatorname{Cl}$. | literature-derived | ai-altered |
-| `def-locally-factorial-scheme` | def | Define local factoriality and record regular locally Noetherian schemes as the principal case by citation. | literature-derived | not-applicable |
+| `def-locally-factorial-scheme` | def | Define local factoriality by requiring the local rings to be UFDs. Do not assert that every regular locally Noetherian scheme is locally factorial: the published commutative-algebra route establishes regular-local normality, not the regular-local UFD theorem. | literature-derived | not-applicable |
 | `def-pullback-cartier-divisor` | def | Define $f^*D$ when pullback local equations remain nonzerodivisors; state flat morphisms as a safe case. | literature-derived | not-applicable |
 | `lem-pullback-cartier-divisor-line-bundle` | lem | Prove $\mathcal O_X(f^*D)\cong f^*\mathcal O_Y(D)$. | literature-derived | ai-altered |
 | `def-degree-divisor-proper-curve` | def | For a proper curve, define $\deg\sum n_x[x]=\sum n_x[\kappa(x):k]$. | literature-derived | not-applicable |
@@ -1501,13 +1511,14 @@ pp. 514--518; Gao--Zhang Ch. 6 §§6.3--6.6, pp. 70--81; Artin Ch. 7
 §§7.1--7.7, pp. 140--158; Stacks Project, *Cohomology of Schemes*
 §§30.2--30.8 and §§30.14--30.19.
 
-### Proposed A-page inventory (34 items)
+### Proposed A-page inventory (35 items)
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
 | `thm-qc-sheaf-affine-higher-cohomology-vanishes` | thm | For quasi-coherent $\mathcal F$ on an affine scheme, prove $H^i(X,\mathcal F)=0$ for $i>0$. | literature-derived | ai-altered |
 | `lem-principal-open-cover-qc-acyclic-intersections` | lem | Show finite intersections of principal affine opens are affine and acyclic for quasi-coherent sheaves. | literature-derived | ai-altered |
 | `thm-cech-computes-qc-cohomology-separated-scheme-affine-cover` | thm | On a separated scheme, a finite affine cover is acyclic on all finite intersections, so its Čech complex computes quasi-coherent cohomology. | literature-derived | ai-altered |
+| `def-higher-direct-image-sheaf` | def | Define $R^if_*\mathcal F$ as derived direct image, citing homological algebra. | literature-derived | not-applicable |
 | `thm-affine-morphism-higher-direct-images-qc-vanish` | thm | For affine $f$ and quasi-coherent $\mathcal F$, prove $R^if_*\mathcal F=0$ for $i>0$. | literature-derived | ai-altered |
 | `lem-affine-morphism-cohomology-pushforward` | lem | Identify $H^i(X,\mathcal F)\cong H^i(Y,f_*\mathcal F)$ for affine $f$. | literature-derived | ai-altered |
 | `def-twist-quasi-coherent-sheaf-projective` | def | Define $\mathcal F(n)=\mathcal F\otimes\mathcal O_X(n)$. | literature-derived | not-applicable |
@@ -1526,10 +1537,10 @@ pp. 514--518; Gao--Zhang Ch. 6 §§6.3--6.6, pp. 70--81; Artin Ch. 7
 | `def-hilbert-function-sheaf-projective` | def | Define $n\mapsto\chi(X,\mathcal F(n))$ and distinguish it from $h^0$ before vanishing. | literature-derived | not-applicable |
 | `thm-hilbert-polynomial-coherent-sheaf` | thm | Cite graded Hilbert theory and prove $\chi(X,\mathcal F(n))$ agrees with a polynomial for all $n$ after appropriate setup. | literature-derived | ai-altered |
 | `thm-hilbert-polynomial-degree-support-dimension` | thm | Relate the polynomial degree to $\dim\operatorname{Supp}\mathcal F$. | literature-derived | ai-altered |
-| `def-higher-direct-image-sheaf` | def | Define $R^if_*\mathcal F$ as derived direct image, citing homological algebra. | literature-derived | not-applicable |
 | `thm-proper-pushforward-coherent` | thm | For proper finite-type morphisms of Noetherian schemes, prove $R^if_*\mathcal F$ is coherent. | literature-derived | ai-altered |
+| `thm-proper-flat-coherent-cohomology-perfect-complex` | thm | For Noetherian $A$, proper $X\to\operatorname{Spec}A$, and coherent $A$-flat $\mathcal F$, prove $R\Gamma(X,\mathcal F)$ is perfect and satisfies derived base change for every $A\to A'$; use Stacks [07VJ] and state flatness explicitly. | literature-derived | ai-altered |
 | `def-base-change-map-cohomology` | def | Construct $(R^if_*\mathcal F)\otimes\kappa(s)\to H^i(X_s,\mathcal F_s)$. | literature-derived | not-applicable |
-| `thm-cohomology-and-base-change` | thm | For a proper finite-presentation morphism and a coherent sheaf flat over the base, give the local criterion for the base-change map to be an isomorphism and for $R^if_*\mathcal F$ to be locally free. | literature-derived | ai-altered |
+| `thm-cohomology-and-base-change` | thm | For a proper morphism of finite presentation over a locally Noetherian base and a coherent sheaf flat over the base, derive the local criterion for the base-change map to be an isomorphism and for $R^if_*\mathcal F$ to be locally free from the preceding perfect-complex supplier. | literature-derived | ai-altered |
 | `cor-upper-semicontinuity-cohomology-dimension` | cor | Show $s\mapsto\dim_{\kappa(s)}H^i(X_s,\mathcal F_s)$ is upper semicontinuous for a proper finite-presentation morphism with coherent $\mathcal F$ flat over the base. | literature-derived | ai-altered |
 | `cor-euler-characteristic-locally-constant-flat-proper-family` | cor | Deduce Euler characteristic is locally constant in a proper flat family with coherent flat sheaf. | literature-derived | ai-altered |
 | `thm-cohomological-dimension-projective-n-space` | thm | Show quasi-coherent cohomology on $\mathbf P^n_A$ vanishes above degree $n$. | literature-derived | ai-altered |
@@ -1560,20 +1571,29 @@ pp. 514--518; Gao--Zhang Ch. 6 §§6.3--6.6, pp. 70--81; Artin Ch. 7
 
 ## AV-23. Smooth proper curves, divisors, genus, and ramification
 
-`requires`: `AV-7`, `AV-15`--`AV-22`. Pair sources: Fulton, *Algebraic
+`requires`: published AG-P2, AV-3, AV-6, AV-12, AV-15--AV-19, AV-21/22,
+CA-8, and CA-19 `normalization-finiteness-for-affine-domains`. The published
+AV-6 `zariski-tangent-spaces-regular-points-smoothness-and-bertini` page
+supplies the perfect-field regular/smooth criterion, and AG-LIE's published
+`thm-serre-duality-smooth-projective-variety-locally-free-sheaves` for curve
+duality. AV-23 constructs divisors and curve normalization locally from these
+published interfaces; neither the unbuilt AV-7 normalization promise nor the
+unbuilt AV-20 divisor pair is counted as a supplier. Pair sources:
+Fulton, *Algebraic
 Curves*, Ch. 6 §§6.1--6.6, pp. 67--80, Ch. 7 §§7.1--7.4,
 pp. 81--96, and Ch. 8 §§8.1--8.5, pp. 97--107; Vakil Ch. 21
 §§21.1--21.9, pp. 431--460; Gao--Zhang Ch. 7 §§7.1--7.3,
 pp. 82--89; Stacks Project, *Algebraic Curves* §§53.2--53.3,
 §§53.6--53.13.
 
-### Proposed A-page inventory (36 items)
+### Proposed A-page inventory (33 items)
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
 | `def-algebraic-curve-over-field` | def | Define a curve as a geometrically integral separated finite-type $k$-scheme of dimension one; smooth and proper remain extra adjectives. | literature-derived | not-applicable |
-| `thm-curves-function-fields-equivalence` | thm | Relate smooth proper geometrically integral curves with dominant rational maps to transcendence-degree-one extensions $K/k$ in which $k$ is algebraically closed, including unique smooth projective models over a perfect field. | literature-derived | ai-altered |
+| `thm-normalization-glues-integral-finite-type-curves` | thm | For an integral separated finite-type curve over a field, glue the affine integral closures in its function field to obtain its finite birational normalization; on each chart use CA-19 finiteness and principal-open localization. | literature-derived | ai-altered |
 | `lem-rational-map-smooth-curve-to-proper-scheme-extends` | lem | Use the DVR local rings and proper valuative criterion to extend a rational map across every missing closed point. | literature-derived | ai-altered |
+| `thm-curves-function-fields-equivalence` | thm | Assuming AC for the cited properness/global-functions interfaces, identify dominant rational maps of smooth proper geometrically integral curves over any field with contravariant field embeddings; over a perfect field, construct for every finitely generated transcendence-degree-one extension $K/k$ with $k$ algebraically closed in $K$ its unique smooth projective model, up to unique isomorphism compatible with the chosen field isomorphism. | literature-derived | ai-altered |
 | `cor-birational-smooth-proper-curves-isomorphic` | cor | Deduce a birational map between smooth proper curves is an isomorphism. | literature-derived | ai-altered |
 | `thm-local-ring-smooth-curve-dvr` | thm | At every closed point of a smooth curve, identify the local ring as a DVR with uniformizer and order. | literature-derived | ai-altered |
 | `def-divisor-smooth-proper-curve` | def | Define divisors as finite integer sums of closed points and reconcile Cartier and Weil notions. | literature-derived | not-applicable |
@@ -1594,19 +1614,80 @@ pp. 82--89; Stacks Project, *Algebraic Curves* §§53.2--53.3,
 | `def-ramification-and-branch-points` | def | Define ramification points by $e_p>1$ and branch points as their images, with inseparability caveat. | literature-derived | not-applicable |
 | `def-different-divisor-curve-map` | def | Define the different/ramification divisor for a finite generically separable morphism through relative differentials. | literature-derived | not-applicable |
 | `thm-canonical-bundle-ramification-formula` | thm | Prove $\omega_C\cong f^*\omega_D\otimes\mathcal O_C(R)$ for a finite separable map of smooth proper curves. | literature-derived | ai-altered |
-| `thm-riemann-hurwitz` | thm | Taking degrees, prove $2g(C)-2=\deg(f)(2g(D)-2)+\deg R$, after `AV-25` establishes $\deg\omega=2g-2`; record the forward dependency as non-load-bearing until then. | literature-derived | not-supplied |
-| `lem-unramified-cover-curves-genus-relation` | lem | For finite étale $f$, specialize Riemann--Hurwitz to $2g(C)-2=\deg(f)(2g(D)-2)$. | literature-derived | not-supplied |
 | `thm-degree-positive-line-bundle-sections-zero-bound` | thm | Prove a line bundle of negative degree has no nonzero global sections. | literature-derived | ai-altered |
 | `lem-degree-effective-divisor-nonnegative` | lem | Show effective divisors have nonnegative degree, zero only for the empty divisor over a field. | literature-derived | ai-altered |
-| `thm-high-degree-line-bundle-basepoint-free-preview` | thm | State the degree $\ge2g$ base-point-free bound, proved after Riemann--Roch/duality in `AV-25`. | literature-derived | not-supplied |
-| `thm-high-degree-line-bundle-very-ample-preview` | thm | State the degree $\ge2g+1$ very-ample bound, proved after Riemann--Roch/duality in `AV-25`. | literature-derived | not-supplied |
 | `def-gonality-curve` | def | Define gonality as the least degree of a nonconstant map to $\mathbf P^1$; records a concrete consumer of linear systems. | literature-derived | not-applicable |
 | `lem-function-with-poles-defines-map-p1` | lem | A nonconstant $f\in k(C)$ defines a finite morphism $C\to\mathbf P^1$ whose pole divisor is the fibre at infinity. | literature-derived | ai-altered |
-| `def-geometric-genus-singular-curve` | def | Define geometric genus as the genus of the smooth proper normalization. | literature-derived | not-applicable |
-| `lem-normalization-lowers-arithmetic-genus-delta` | lem | For a reduced proper curve, relate arithmetic and geometric genus through the finite-length normalization quotient. | literature-derived | ai-altered |
+| `def-geometric-genus-singular-curve` | def | For an integral proper finite-type curve over a perfect field, define geometric genus as the genus of the smooth projective normalization constructed earlier on this page. | literature-derived | not-applicable |
+| `lem-normalization-lowers-arithmetic-genus-delta` | lem | For an integral proper finite-type curve over an algebraically closed field, prove the arithmetic/geometric genus relation through the finite-length normalization quotient, descended to its nilpotent-retaining annihilator thickening. | literature-derived | ai-altered |
 | `def-delta-invariant-curve-singularity` | def | Define $\delta_p=\dim_k(\widetilde{\mathcal O}_{C,p}/\mathcal O_{C,p})$ over algebraically closed $k$. | literature-derived | not-applicable |
 | `thm-plane-curve-arithmetic-genus` | thm | For a degree-$d$ plane curve, compute $p_a=(d-1)(d-2)/2$ from the hypersurface cohomology sequence. | literature-derived | ai-altered |
-| `cor-plane-curve-geometric-genus-delta-correction` | cor | For a reduced plane curve with isolated singularities, relate normalization genus to arithmetic genus and $\delta$-invariants under the stated connectivity hypotheses. | literature-derived | ai-altered |
+| `cor-plane-curve-geometric-genus-delta-correction` | cor | For an integral finite-type plane curve over an algebraically closed field with isolated singularities, relate normalization genus to arithmetic genus and $\delta$-invariants under the stated connectivity hypotheses. | literature-derived | ai-altered |
+
+**Binding AV-23 normalization and model proof route.** The new normalization
+item is proved locally and uses only the published CA-19 interfaces
+`thm-integral-closure-finite-finite-type-domain-over-field` and
+`lem-finite-normalization-compatible-with-principal-opens`. For an integral
+separated finite-type curve $C$, choose a finite affine cover
+$U_i=\operatorname{Spec}(A_i)$ and identify every $\operatorname{Frac}(A_i)$
+with $K=k(C)$. Each integral closure $B_i$ of $A_i$ in $K$ is finite over
+$A_i$ by the first CA-19 item. The intersections $U_i\cap U_j$ are affine
+because $C$ is separated; cover each such quasi-compact open in either chart
+by principal opens. The second CA-19 item identifies the localized closures
+on those opens, so the chart normalizations glue canonically, with the cocycle
+law holding inside $K$. The resulting map is finite by its affine charts,
+birational because $\operatorname{Frac}(B_i)=K$, and normal because each
+$B_i$ is integrally closed. Use the published `thm-gluing-affine-schemes`
+interface for the scheme gluing. `cor-affine-normalization-is-finite` is only
+the algebraically closed-field classical specialization; the generic
+finite-type-domain theorem is required for AV-23's arbitrary perfect base.
+
+For the smooth-projective-model clause, take field generators
+$a_1,\ldots,a_n$ of $K/k$ and set $A=k[a_1,\ldots,a_n]$; then
+$\operatorname{Frac}(A)=K$ and $\dim(A)=1$. Embed $\operatorname{Spec}(A)$ as
+an integral affine closed subscheme of $\mathbf A^n_k$ and take its
+scheme-theoretic projective closure in $\mathbf P^n_k$ using the published
+AV-3 `thm-ideal-projective-closure-saturation` interface. The standard affine
+chart is the original dense curve, so the closure is an integral projective
+curve with function field $K$. Apply the preceding gluing item to normalize
+that closure. The normalization is proper by published
+`cor-finite-morphism-proper` and properness under composition. Its pullback of
+$\mathcal O(1)$ is ample by `lem-ample-pullback-finite-morphism`; the published
+`thm-ample-powers-very-ample-proper-base` then makes the normalization
+projective. Its local rings are fields at generic points and one-dimensional
+Noetherian normal local domains at closed points; the latter are DVRs by
+`thm-equivalent-characterisations-of-a-dvr`, hence regular, and over perfect
+$k$ it is smooth by published
+`thm-regular-equals-smooth-over-perfect-field` (home page
+`zariski-tangent-spaces-regular-points-smoothness-and-bertini`).
+
+To retain geometric integrality, use published
+`thm-global-functions-proper-integral-variety`: assuming AC, global functions
+on the proper integral model form a finite extension of $k$ inside $K$, hence
+equal $k$ by the hypothesis on constants. For an algebraic closure $\bar k/k$,
+compute $\Gamma(C_{\bar k},\mathcal O)=\Gamma(C,\mathcal O)\otimes_k\bar k$
+from the degree-zero equalizer for a finite standard affine cover of the
+projective model; flatness of $\bar k/k$ preserves that equalizer. Thus the
+base change is connected. Smoothness is stable under base change, so it is
+regular; regular components are disjoint, and connectedness makes it integral.
+For the converse over perfect $k$, geometric integrality makes
+$K\otimes_k\bar k$ a domain: every nonempty affine open remains integral
+after base change, and localization embeds this tensor product in its
+base-changed function field. If a nontrivial finite algebraic extension
+$L/k$ lay inside $K$, perfection would make $L/k$ separable, while the
+faithfully flat injection $L\otimes_k\bar k\hookrightarrow
+K\otimes_k\bar k$ would embed a split algebra with zero divisors into a
+domain. Thus $k$ is algebraically closed in $K$. Use the published
+function-field interface for integral finite-type schemes and the
+perfect-field separating-transcendence basis theorem for the remaining
+field-theoretic direction. An embedding of function fields gives a rational map by
+clearing the finitely many denominators of affine target generators; the
+earlier valuative-extension lemma extends it uniquely across the closed
+points of a smooth proper source. Applying this to inverse field
+isomorphisms proves uniqueness up to the unique isomorphism compatible with
+the chosen field isomorphism. The projective, smoothness, and properness
+interfaces used here carry AC; state AC in the main theorem contract and its
+deps. No dependent-choice or unpublished AV-7/AV-8 supplier is used.
 
 ### Proposed B-page inventory (12 dependency leaves)
 
@@ -1625,18 +1706,22 @@ pp. 82--89; Stacks Project, *Algebraic Curves* §§53.2--53.3,
 | `ex-ramification-power-map-projective-line` | ex | Compute ramification indices of $[s:t]\mapsto[s^n:t^n]$ in tame characteristic. | literature-derived | not-applicable |
 | `ex-plane-quartic-genus-three-smooth` | ex | Apply the plane arithmetic-genus formula and zero delta correction. | literature-derived | not-applicable |
 
-**Ordering note.** The two high-degree bounds and Riemann--Hurwitz degree
-formula are statements placed for a curve-theory reader but explicitly have
-`not-supplied` proofs here. They are not dependency targets until `AV-25`
-supplies the proofs; the builder may rehome the final theorem items to
-`AV-25` while leaving only non-load-bearing previews here.
+**Ordering note.** AV-23 records the Riemann--Hurwitz and high-degree
+conclusions as roadmap promises but emits no theorem rows for them. Their
+stable proof destinations are AV-25's `thm-riemann-hurwitz-complete`,
+`cor-unramified-cover-curves-genus-complete`,
+`thm-degree-two-g-line-bundle-basepoint-free`, and
+`thm-degree-two-g-plus-one-line-bundle-very-ample`, after AV-24 proves the
+Euler-characteristic formula. The proof route uses the published AG-LIE
+smooth-projective duality theorem, AV-16's differential sequence, AV-22 base
+change, and the local DVR calculations recorded in the audit matrix. AV-25
+is the planned proof destination, never an existing supplier to AV-23.
 
 ---
 
 ## AV-24. Riemann--Roch for curves via Euler characteristics
 
-`requires`: `AV-20`--`AV-23`. This pair proves the Euler-characteristic form
-without using Serre duality; `AV-25` then derives the symmetric classical form.
+`requires`: the divisor, curve, cohomology, and normalization interfaces proved locally in AV-20/23 together with published AV-21/22. No empty planned AV page is counted as an existing supplier. This pair proves the Euler-characteristic form without Serre duality; the symmetric form is derived by the separate local residue-duality chain recorded in the audit report.
 Pair sources: Fulton Ch. 8 §§8.1--8.6, pp. 97--108; Artin Ch. 8 §§8.1--8.4,
 PDF pp. 160--171; Vakil Ch. 21 §§21.5--21.9, pp. 444--460; Stacks Project,
 *Algebraic Curves* §§53.3, 53.5--53.8.
@@ -1696,8 +1781,7 @@ PDF pp. 160--171; Vakil Ch. 21 §§21.5--21.9, pp. 444--460; Stacks Project,
 
 ## AV-25. Residues, Serre duality for curves, and the full Riemann--Roch theorem
 
-`requires`: `AV-16`, `AV-21`--`AV-24`; derived-functor/Ext formalism is cited
-from homological algebra, while this page proves the curve pairing concretely.
+`requires`: published AV-16/21/22 and AG-LIE's `thm-serre-duality-smooth-projective-variety-locally-free-sheaves`, plus the divisor, curve, and Euler-characteristic arguments proved locally in AV-23/24. The published AG-LIE theorem supplies abstract locally-free Serre duality over an arbitrary field; combine it with AV-24 for full divisor Riemann--Roch over an arbitrary field. The coefficient-trace residue and principal-parts calculation below is a separate subtheory, stated over a perfect field (or locally at closed points with separable residue field). Do not use its uniformizer coefficient formula at inseparable closed points. Derived-functor/Ext formalism is cited from published Homological Algebra.
 Pair sources: Vakil Ch. 27 §§27.1--27.6, pp. 567--579; MIT 18.725 Lectures
 24--25, consolidated-notes PDF pp. 55--62; Fulton Ch. 8 §§8.4--8.6,
 pp. 104--112; Gao--Zhang Ch. 7 §§7.4--7.5, pp. 89--93.
@@ -1706,21 +1790,21 @@ pp. 104--112; Gao--Zhang Ch. 7 §§7.4--7.5, pp. 89--93.
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
-| `def-residue-rational-differential-curve-point` | def | For a uniformizer $t$, define $\operatorname{res}_p(\sum a_nt^n dt)=\operatorname{Tr}_{\kappa(p)/k}(a_{-1})$. | literature-derived | not-applicable |
-| `lem-residue-independent-uniformizer` | lem | Prove the residue is unchanged by replacing the uniformizer. | literature-derived | ai-altered |
-| `lem-residue-exact-differential-zero` | lem | Show $\operatorname{res}_p(df)=0$, with the characteristic caveat handled through formal Laurent series. | literature-derived | ai-altered |
-| `thm-global-residue-theorem-algebraic-curve` | thm | Prove $\sum_p\operatorname{res}_p(\omega)=0$ for a rational differential on a smooth proper curve. | literature-derived | ai-altered |
+| `def-residue-rational-differential-curve-point` | def | For a smooth curve over a perfect field $k$ and a closed point $p$, choose a coefficient field $\kappa(p)$ in $\widehat{\mathcal O}_{C,p}\cong\kappa(p)[[t]]$ and a uniformizer $t$; define $\operatorname{res}_p(\sum a_nt^n dt)=\operatorname{Tr}_{\kappa(p)/k}(a_{-1})$. For arbitrary $k$, this coordinate formula is defined only at closed points with separable residue field. | literature-derived | not-applicable |
+| `lem-residue-independent-uniformizer` | lem | Over a perfect $k$ (or at a point with separable residue field), prove the residue is unchanged by replacing the uniformizer; use the cotangent sequence to show $dt$ is a basis and the formal change-of-parameter calculation. | literature-derived | ai-altered |
+| `lem-residue-exact-differential-zero` | lem | Over a perfect $k$ (or at a point with separable residue field), show $\operatorname{res}_p(df)=0$ by expanding in formal Laurent series, including positive characteristic. | literature-derived | ai-altered |
+| `thm-global-residue-theorem-algebraic-curve` | thm | For a smooth proper curve over a perfect field $k$, prove $\sum_p\operatorname{res}_p(\omega)=0$ for a rational differential. The coefficient-trace formula is not asserted at inseparable closed points over imperfect fields. | literature-derived | ai-altered |
 | `def-principal-parts-sheaf-line-bundle-curve` | def | Define rational sections modulo regular sections and their finite-support principal parts. | literature-derived | not-applicable |
 | `lem-principal-parts-cech-h1-presentation` | lem | For an affine cover of a curve, represent $H^1(C,\mathcal L)$ by principal parts modulo global rational and local regular sections. | literature-derived | ai-altered |
-| `def-residue-pairing-principal-parts` | def | Pair a rational $\mathcal L$-principal part with a rational $\omega_C\otimes\mathcal L^{-1}$ section by summed residues. | literature-derived | not-applicable |
-| `lem-residue-pairing-descends-cohomology` | lem | Use the global residue theorem to show the pairing kills rational and regular representatives. | literature-derived | ai-altered |
-| `lem-residue-pairing-functorial-line-bundle` | lem | Prove naturality under maps of line bundles and compatibility with connecting homomorphisms. | literature-derived | ai-altered |
-| `lem-local-residue-annihilator-regular-sections` | lem | Identify the annihilator of local regular differentials/sections inside Laurent principal parts. | literature-derived | ai-altered |
-| `lem-global-residue-pairing-injective-left` | lem | Show a nonzero global section of $\omega_C\otimes\mathcal L^{-1}$ detects some $H^1(\mathcal L)$ class. | literature-derived | ai-altered |
-| `lem-global-residue-pairing-dimension-balance` | lem | Use finite-dimensionality and induction on divisors to prove the two sides have equal dimension. | literature-derived | ai-altered |
-| `thm-serre-duality-curves-line-bundles` | thm | Establish a perfect pairing $H^1(C,\mathcal L)\times H^0(C,\omega_C\otimes\mathcal L^{-1})\to k$. | literature-derived | ai-altered |
-| `thm-serre-duality-curves-vector-bundles` | thm | Extend to finite locally free $\mathcal E$: $H^1(C,\mathcal E)^\vee\cong H^0(C,\mathcal E^\vee\otimes\omega_C)$. | literature-derived | ai-altered |
-| `thm-serre-duality-curves-coherent-sheaves` | thm | State the functorial $\operatorname{Ext}$ form for coherent sheaves, citing Ext machinery and proving the locally free reduction. | literature-derived | ai-altered |
+| `def-residue-pairing-principal-parts` | def | Over a perfect field $k$, pair a rational $\mathcal L$-principal part with a rational $\omega_C\otimes\mathcal L^{-1}$ section by summed coefficient-trace residues. | literature-derived | not-applicable |
+| `lem-residue-pairing-descends-cohomology` | lem | Over a perfect $k$, use the global residue theorem to show the pairing kills rational and regular representatives. | literature-derived | ai-altered |
+| `lem-residue-pairing-functorial-line-bundle` | lem | Over a perfect $k$, prove naturality under maps of line bundles and compatibility with connecting homomorphisms. | literature-derived | ai-altered |
+| `lem-local-residue-annihilator-regular-sections` | lem | At a separable closed point, identify the annihilator of local regular differentials/sections inside Laurent principal parts. | literature-derived | ai-altered |
+| `lem-global-residue-pairing-injective-left` | lem | Over a perfect $k$, show a nonzero global section of $\omega_C\otimes\mathcal L^{-1}$ detects some $H^1(\mathcal L)$ class. | literature-derived | ai-altered |
+| `lem-global-residue-pairing-dimension-balance` | lem | Over a perfect $k$, use finite-dimensionality and induction on divisors to prove the two residue-pairing sides have equal dimension. | literature-derived | ai-altered |
+| `thm-serre-duality-curves-line-bundles` | thm | Over an arbitrary field, specialize published AG-LIE duality to establish a perfect pairing $H^1(C,\mathcal L)\times H^0(C,\omega_C\otimes\mathcal L^{-1})\to k$; over perfect $k$, identify it with the residue pairing above. | literature-derived | ai-altered |
+| `thm-serre-duality-curves-vector-bundles` | thm | Over an arbitrary field, specialize published AG-LIE duality to finite locally free $\mathcal E$: $H^1(C,\mathcal E)^\vee\cong H^0(C,\mathcal E^\vee\otimes\omega_C)$. | literature-derived | ai-altered |
+| `thm-serre-duality-curves-coherent-sheaves` | thm | Over an arbitrary field, choose $n$ so AV-19's ample twist makes a coherent $\mathcal F(n)$ globally generated; the kernel of the resulting finite vector-bundle surjection is torsion-free and hence locally free over the curve's DVR local rings. Construct both canonical pairings with the fixed trace, prove global Ext/cohomology comparison via tensor adjunction and flasque injectives, use a kernel comparison for Hom/H¹, and an aligned five-lemma diagram for Ext¹/H⁰ with explicit injective pushout/pullback connecting-sign compatibility. | literature-derived | ai-altered |
 | `cor-h1-line-bundle-dual-sections` | cor | Identify $h^1(\mathcal O(D))=\ell(K-D)$. | literature-derived | ai-altered |
 | `thm-full-riemann-roch-divisor` | thm | Combine `AV-24` with duality to prove $\ell(D)-\ell(K-D)=\deg D+1-g$. | literature-derived | ai-altered |
 | `cor-canonical-degree-two-g-minus-two` | cor | Put $D=K$ and use $h^0(\mathcal O)=1$ to prove $\deg K=2g-2$. | literature-derived | ai-altered |
@@ -1729,13 +1813,13 @@ pp. 104--112; Gao--Zhang Ch. 7 §§7.4--7.5, pp. 89--93.
 | `cor-rr-exact-high-degree-formula` | cor | For $\deg D>2g-2$, obtain $\ell(D)=\deg D+1-g$. | literature-derived | ai-altered |
 | `thm-degree-two-g-line-bundle-basepoint-free` | thm | If $\deg\mathcal L\ge2g$, prove evaluation at every point is surjective by duality and the point exact sequence. | literature-derived | ai-altered |
 | `thm-degree-two-g-plus-one-line-bundle-very-ample` | thm | If $\deg\mathcal L\ge2g+1$, prove sections separate points and tangent vectors, hence define a closed immersion. | literature-derived | ai-altered |
-| `cor-projective-embedding-every-smooth-proper-curve` | cor | Deduce every smooth proper curve has a projective embedding. | literature-derived | ai-altered |
+| `cor-projective-embedding-every-smooth-proper-curve` | cor | Without RR or duality, prove trdeg k(C)=1 and normality, choose a transcendental function, use the proper-normal-curve finite map to P¹, pull back ample O(1), and apply ample powers to obtain a closed H-projective embedding. | literature-derived | ai-altered |
 | `thm-canonical-map-nonhyperelliptic-curve` | thm | For $g\ge2$, state the canonical-map embedding criterion and isolate the hyperelliptic exception. | literature-derived | ai-altered |
 | `def-hyperelliptic-curve` | def | Define hyperelliptic as admitting a degree-two morphism to $\mathbf P^1$. | literature-derived | not-applicable |
 | `thm-adjunction-smooth-plane-curve` | thm | For a smooth degree-$d$ plane curve, prove $\omega_C\cong\mathcal O_C(d-3)$ via the conormal sequence and determinant. | literature-derived | ai-altered |
 | `cor-genus-degree-smooth-plane-curve` | cor | Deduce $g=(d-1)(d-2)/2$ from adjunction or arithmetic genus. | literature-derived | ai-altered |
-| `thm-riemann-hurwitz-complete` | thm | Complete the `AV-23` proof using $\deg\omega=2g-2$ and the canonical ramification formula. | literature-derived | ai-altered |
-| `cor-unramified-cover-curves-genus-complete` | cor | Complete the étale-cover genus relation from `AV-23`. | literature-derived | ai-altered |
+| `thm-riemann-hurwitz-complete` | thm | After AV-24, locally derive the canonical ramification formula from published AV-16's differential sequence, then combine it with published AG-LIE curve duality and $\deg\omega=2g-2$ to prove Riemann--Hurwitz; write the local different and fibre-degree arguments. Do not treat the unpublished AV-23 theorem row as a supplier. | literature-derived | ai-altered |
+| `cor-unramified-cover-curves-genus-complete` | cor | After AV-24, complete the AV-23 étale-cover genus relation by proving the different divisor vanishes for finite étale maps and specializing `thm-riemann-hurwitz-complete`. | literature-derived | ai-altered |
 | `thm-genus-one-canonical-bundle-trivial` | thm | For a genus-one smooth proper curve with a rational point, prove $\omega_C\cong\mathcal O_C$. | literature-derived | ai-altered |
 | `cor-degree-three-line-bundle-embeds-genus-one-plane-cubic` | cor | Embed a genus-one curve with a point as a plane cubic using a degree-three line bundle. | literature-derived | ai-altered |
 | `rem-duality-trace-normalization` | rem | Fix the trace $H^1(C,\omega_C)\to k$ so the perfect pairing is canonical, not merely dimension equality. | literature-derived | not-applicable |
@@ -1745,7 +1829,7 @@ pp. 104--112; Gao--Zhang Ch. 7 §§7.4--7.5, pp. 89--93.
 
 | id | kind | statement and purpose | statement provenance | proof provenance |
 |---|---|---|---|---|
-| `ex-residue-projective-line` | ex | Compute residues of $f(t)dt$ at finite points and infinity and verify their sum. | literature-derived | not-applicable |
+| `ex-residue-projective-line` | ex | Over a perfect field $k$, compute residues of $f(t)dt$ at finite points and infinity and verify their sum. | literature-derived | not-applicable |
 | `ex-serre-duality-projective-line-twists` | ex | Pair the monomial bases of $H^1(\mathcal O(-d-2))$ and $H^0(\mathcal O(d))$. | literature-derived | not-applicable |
 | `ex-full-rr-projective-line` | ex | Verify $\ell(D)-\ell(K-D)=\deg D+1$ for all degrees. | literature-derived | not-applicable |
 | `ex-genus-one-rr-degree-positive` | ex | Show a positive-degree line bundle on a genus-one curve has $h^0=\deg$. | literature-derived | not-applicable |
@@ -1755,14 +1839,13 @@ pp. 104--112; Gao--Zhang Ch. 7 §§7.4--7.5, pp. 89--93.
 | `cex-degree-two-g-minus-one-not-always-basepoint-free` | cex | Record a sharpness example for the safe $2g$ bound. | literature-derived | not-applicable |
 | `cex-degree-two-g-not-always-very-ample` | cex | Record a sharpness example for the safe $2g+1$ bound. | literature-derived | not-applicable |
 | `ex-riemann-hurwitz-double-cover` | ex | Compute genus from a tame double cover with $2r$ simple branch points. | literature-derived | not-applicable |
-| `ex-residue-pairing-one-cocycle` | ex | Carry one explicit principal part through the duality pairing. | ai-generated | not-applicable |
+| `ex-residue-pairing-one-cocycle` | ex | Over a perfect field, carry one explicit principal part through the residue realization of the duality pairing. | ai-generated | not-applicable |
 
 ---
 
 ## AV-26. Blowups, exceptional divisors, and strict transforms
 
-`requires`: `AV-13`, `AV-15`, `AV-18`--`AV-20`, and Rees/associated-graded
-algebra by citation. Pair sources: Vakil Ch. 19 §§19.1--19.4,
+`requires`: published AV-13/15/17/18/19/21/22, CA-8 `valuation-rings-and-discrete-valuation-rings`, CA-11 `rees-modules-artin-rees-and-hilbert-samuel-theory`, CA-19 `normalization-finiteness-for-affine-domains`, and the published `cor-regular-local-ring-satisfies-s-two` plus `lem-r-one-s-two-intersection-of-height-one-localisations` from `regular-local-rings-and-homological-dimension`; prove the blowup divisor identities locally in the two charts. Do not count the empty AV-20 slot as a supplier. Pair sources: Vakil Ch. 19 §§19.1--19.4,
 pp. 379--395; Milne Ch. 8 §h, pp. 194--197; MIT 18.725 Lecture 9,
 consolidated-notes PDF pp. 23--25; Stacks Project, *Divisors* §§31.33--31.36
 and *More on Morphisms* §§37.16--37.18.
@@ -1795,11 +1878,11 @@ and *More on Morphisms* §§37.16--37.18.
 | `lem-blowup-plane-origin-incidence-equations` | lem | Realize $\operatorname{Bl}_0\mathbf A^2$ inside $\mathbf A^2\times\mathbf P^1$ by $xv=yu$. | literature-derived | ai-altered |
 | `thm-blowup-separates-plane-curve-tangent-directions` | thm | Show points of the strict transform above a plane-curve singularity correspond to tangent-cone directions with multiplicity data. | literature-derived | ai-altered |
 | `lem-plane-curve-multiplicity-transform-chart` | lem | Compute the strict-transform equation by dividing the total transform by the maximal exceptional power. | literature-derived | ai-altered |
-| `thm-resolution-plane-curves-by-point-blowups` | thm | State embedded resolution of reduced plane curves by finitely many point blowups; proof is not supplied because its termination invariant exceeds this page's prerequisites. | literature-derived | not-supplied |
+| `thm-resolution-plane-curves-by-point-blowups` | thm | For a reduced projective plane curve over a field $k$, prove by point blowups that its strict transform becomes regular and the total support has regular components, pairwise transverse intersections, and at most two components through a point on the resulting regular ambient surface. At a closed centre $p$ of multiplicity $m$ and residue degree $r=[\kappa(p):k]$, prove $\delta_k(C')=\delta_k(C)-r m(m-1)/2$, where $Q_C=\nu_*\mathcal O_{\widetilde C}/\mathcal O_C$ and $\delta_k(C)=\dim_k H^0(C,Q_C)$; local $\mathcal O_{C,p}$-lengths are weighted by residue degrees. After regularizing components, use the lexicographic descent of maximum pairwise contact order and multiple-point excess, including the shared-tangent case. This is regular embedded normal-crossing support, not necessarily a relative SNC divisor with components smooth over an imperfect $k$. | literature-derived | ai-altered |
 | `def-blowup-fractional-ideal` | def | Explain invariance under multiplying an ideal by an invertible ideal/fractional unit in the integral setting. | literature-derived | not-applicable |
 | `lem-blowup-power-of-ideal-same` | lem | Prove $\operatorname{Bl}_{I^d}X\cong\operatorname{Bl}_IX$ using Veronese invariance. | literature-derived | ai-altered |
 | `lem-blowup-reduced-integral-under-domain-rees` | lem | For integral $X$ and nonzero ideal, prove the Rees algebra charts are domains, hence the blowup is integral. | literature-derived | ai-altered |
-| `thm-blowup-closed-immersion-transform-universal` | thm | Characterize strict transform as the dominant component/closure satisfying the universal property after removing components supported over the centre. | literature-derived | ai-altered |
+| `thm-blowup-closed-immersion-transform-universal` | thm | For a closed subscheme, define the strict transform by schematic closure of its inverse image off the centre (equivalently, saturation of the pulled-back ideal by the exceptional ideal on each chart); do not identify it with a “dominant component” when the source is reducible. | literature-derived | ai-altered |
 | `cor-rational-map-to-projective-space-resolved-by-base-ideal-blowup` | cor | A rational map defined by sections becomes a morphism after blowing up its base ideal. | literature-derived | ai-altered |
 | `rem-blowup-does-not-mean-delete-point` | rem | Record that the centre is replaced by projectivized normal directions and the map remains proper. | literature-derived | not-applicable |
 | `rem-resolution-higher-dimension-not-claimed` | rem | Deny any inference from these constructions to general resolution of singularities. | literature-derived | not-applicable |
@@ -1821,10 +1904,108 @@ and *More on Morphisms* §§37.16--37.18.
 | `ex-total-versus-strict-transform-line-through-origin` | ex | Compute the exceptional component in the total transform and remove it for the strict transform. | literature-derived | not-applicable |
 | `ex-empty-center-blowup-identity` | ex | Verify blowing up the unit ideal/empty centre is the identity. | ai-generated | not-applicable |
 
-**Last-page status.** `AV-26` is the final AV pair. The embedded resolution
-statement is deliberately `not-supplied` and is not a dependency target; the
-track supplies the blowup construction and local calculations, not a hidden
-proof of resolution in every characteristic or dimension.
+### Binding AV-26 termination and contact-order proof route
+
+Let $S$ be the projective regular surface obtained from $\mathbf P^2_k$ by
+finitely many blowups at closed points, and let $C\subset S$ be the reduced
+strict transform of a reduced projective plane curve. The two blowup charts
+show that $S$ remains regular even when a center has inseparable residue field
+over an imperfect $k$: locally, if $\mathfrak m_p=(x,y)$, the charts are
+$A[y/x]$ and $A[x/y]$, and their exceptional fibers are charts of
+$\mathbf P^1_{\kappa(p)}$. At a point of the exceptional fiber, the exceptional
+parameter is a nonzerodivisor and its quotient local ring is a localization
+of $\kappa(p)[t]$, so the chart local ring is regular. Smoothness over $k$ is
+not asserted at such a center. Each strict transform is an effective Cartier divisor, since its
+chart equation is obtained by removing the exceptional factor from the total
+transform. For a closed point $p$ on $C$, put $r=[\kappa(p):k]$ and let $m$
+be the $\mathfrak m_p$-adic order of a local reduced equation. If
+$\nu:\widetilde C\to C$ is the componentwise finite normalization, set
+$Q_C=\nu_*\mathcal O_{\widetilde C}/\mathcal O_C$ and
+$\delta_k(C)=\dim_k H^0(C,Q_C)$. This equals the sum of the local
+$\mathcal O_{C,p}$-lengths weighted by $[\kappa(p):k]$.
+
+Write $\pi:S'\to S$ for the point blowup, $E$ for its exceptional curve,
+and $C'$ for the strict transform. The two standard blowup charts give
+$\pi^*C=C'+mE$ and $\mathcal O_E(E)=\mathcal O_{\mathbf P^1_{\kappa(p)}}(-1)$.
+Locally over $\operatorname{Spec}A$ at $p$, with $\mathfrak m=(x,y)$ a
+regular sequence, the blowup is the incidence divisor
+$X=V(xv-yu)\subset\mathbf P^1_A$. The exact sequence
+$0\to\mathcal O_{\mathbf P^1_A}(-1)\xrightarrow{xv-yu}
+\mathcal O_{\mathbf P^1_A}\to\mathcal O_X\to0$ and the two-standard-chart
+Čech calculations $p_*\mathcal O= A$, $R^ip_*\mathcal O=0$ for $i>0$,
+$p_*\mathcal O(-1)=R^ip_*\mathcal O(-1)=0$ for all $i$, give
+$\pi_*\mathcal O_{S'}=\mathcal O_S$ and $R^i\pi_*\mathcal O_{S'}=0$ for
+$i>0$. The local section intersection is also the published normal-domain
+intersection `lem-r-one-s-two-intersection-of-height-one-localisations`,
+with its required $(S_2)$ hypothesis supplied by
+`cor-regular-local-ring-satisfies-s-two`. Projection formula then preserves
+Euler characteristic of a pulled-back line bundle. For $j=1,\ldots,m$, use
+\[
+0\longrightarrow \mathcal O_{S'}(-\pi^*C+(j-1)E)
+\longrightarrow \mathcal O_{S'}(-\pi^*C+jE)
+\longrightarrow \mathcal O_E(-j)\longrightarrow0.
+\]
+Since $\chi_k(\mathcal O_E(-j))=r(1-j)$, summing these sequences gives
+\[
+\chi_{S'}(\mathcal O_{S'}(-C'))
+=\chi_S(\mathcal O_S(-C))-r\binom m2.
+\]
+Apply $0\to\mathcal O_S(-C)\to\mathcal O_S\to\mathcal O_C\to0$
+and its $C'$ counterpart to obtain
+$\chi(\mathcal O_{C'})-\chi(\mathcal O_C)=r\binom m2$.
+The blowup $C'\to C$ is proper and has finite fibres, hence finite by the
+published proper quasi-finite criterion. It is birational, so the finite
+normalization is unchanged. The exact normalization sequences therefore give
+\[
+\delta_k(C')=\delta_k(C)-r\binom m2.
+\]
+For an individual non-rational center this says that
+$r\,\ell_{\mathcal O_{C,p}}(\widetilde{\mathcal O}_{C,p}/\mathcal O_{C,p})$
+is replaced by
+$\sum_{q\mapsto p}[\kappa(q):k]\,
+\ell_{\mathcal O_{C',q}}(\widetilde{\mathcal O}_{C',q}/\mathcal O_{C',q})$;
+thus the unweighted formula applies only at rational centers over an
+algebraically closed base. Because $r>0$, every singular center has $m\ge2$
+and strictly decreases the nonnegative integer $\delta_k$. At $\delta_k=0$
+the reduced curve equals its normalization; each one-dimensional normal
+Noetherian local ring is a DVR by CA-8, so the curve is regular and its
+components are disjoint. This proof asserts regularity, not smoothness over an
+imperfect field; an inseparable closed residue field can make a regular point
+nonsmooth over $k$.
+
+For the embedded crossing stage, include all current exceptional components
+and regular strict-transform components in the support. For two regular
+components $Y,Z$ meeting at $p$, define
+$n_p(Y,Z)=\ell_{\mathcal O_{Y,p}}(\mathcal O_{Y,p}/I_Z\mathcal O_{Y,p})$.
+If $n>1$, choose regular parameters $x,y$ on the surface with $Y=(y=0)$
+and $x|_Y$ a uniformizer. In the blowup chart $y=xt$, a local equation
+$f(x,y)$ of the smooth component $Z$ has multiplicity one and
+$f(x,xt)/x$ defines its strict transform. Restriction to $Y'=(t=0)$ is
+$f(x,0)/x$, whose order is exactly $n-1$; if $n=1$, the distinct tangent
+directions meet $E$ at distinct points and the strict transforms separate.
+Every strict-transform/exceptional intersection has order one. For a finite
+support define $N$ to be the maximum pairwise contact order, or $0$ if no
+pairs meet, and $M=\sum_p\max(s_p-2,0)$, where $s_p$ is the number of
+regular support components through $p$. Order the pair $(N,M)$
+lexicographically. While $N>1$, blow up every point where a pair realizes
+$N$. The chart calculation replaces each still-existing contact of order
+$N$ by order $N-1$, separates it if the tangent directions differ, and
+creates only order-one contacts with the exceptional component. Thus the
+maximum strictly decreases; this includes any number of branches sharing
+one tangent, since each pair in that tangent group drops by one. Once $N\le1$,
+every meeting pair is transverse. At a point with $s_p\ge3$, these transverse
+components have distinct tangent directions, so one blowup sends them to
+distinct points of $E$; it creates only pairwise transverse intersections
+with $E$ and strictly lowers $M$ without creating a higher contact. There are
+finitely many pairwise intersections and multiple points at every stage, so
+the lexicographic descent terminates. The resulting support has regular
+components, pairwise transverse intersections, and at most two components
+through a point. This is regular embedded normal-crossing support on the
+regular ambient surface; over an imperfect field it need not be a relative
+SNC divisor with components smooth over $k$. No higher-dimensional
+resolution is claimed.
+
+**Last-page status.** `AV-26` is the final AV pair and retains its embedded resolution promise for reduced projective plane curves. The local termination route and residue-degree convention are stated above and in the dated proof-route reconciliation below. The conclusion is regular embedded normal-crossing support on a regular ambient surface; it does not assert smoothness over an imperfect field, relative SNC smoothness of components, or resolution in higher dimension.
 
 ---
 
@@ -1837,7 +2018,8 @@ but no fixed pagination, so section/tag ranges are exact locators.
 
 | code | full treatment obtained and URL | exact range read | register and access finding |
 |---|---|---|---|
-| V | Ravi Vakil, [*Foundations of Algebraic Geometry* / early author-hosted *Rising Sea* draft](https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf) | Ch. 3 §§3.1--3.7 pp. 59--80; Chs. 4--11 §§4.1--11.3 pp. 85--246; Chs. 12--20 §§12.1--20.8 pp. 249--430; Ch. 21 §§21.1--21.9 pp. 431--460; Ch. 23 §§23.1--23.5 pp. 473--499; Ch. 24 §§24.4--24.5 pp. 514--518; Chs. 25--27 §§25.1--27.6 pp. 519--579 | Full author-hosted scheme treatment. The PDF is a complete early public draft, not a publisher preview. |
+| V | Ravi Vakil, [*Foundations of Algebraic Geometry* / early author-hosted *Rising Sea* draft](https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf) | Ch. 3 §§3.1--3.7 pp. 59--80; Chs. 4--11 §§4.1--11.3 pp. 85--246; Chs. 12--20 §§12.1--20.8 pp. 249--430; Ch. 21 §§21.1--21.9 pp. 431--460; Ch. 23 §§23.1--23.5 pp. 473--499; Ch. 24 §§24.4--24.5 pp. 514--518; Chs. 25--27 §§25.1--27.6 pp. 519--579 | Historical source edition retained for the original pair matrix; do not transfer its page numbers to the current edition. |
+| V25 | Ravi Vakil, [*The Rising Sea: Foundations of Algebraic Geometry*, 2025-10-21 notes](https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf) | §13.2.8; §§19.2.5--19.2.11; §§20.1--20.2; §21.4.3 and Ex. 21.4.D; §§24.5.13; §§25.2.1 and 25.3.1--25.3.6; §28.4.4; §§28.5.1--28.5.4; Ch. 29 | Current author-hosted edition (852-page PDF), identified by date and stable section/exercise locators. The complete source report is `research/algebraic-geometry-expansion-2026-09-30/source-vakil.md`; locators are targeted, not an assertion that every advanced branch is proved. |
 | M | J. S. Milne, [*Algebraic Geometry* v6.10](https://www.jmilne.org/math/CourseNotes/AG.pdf), with official [course-note supplements](https://www.jmilne.org/math/CourseNotes/ag.html) | Main Ch. 2 §§a--m pp. 36--58; Ch. 3 §§a--l pp. 59--80; Ch. 4 §§a--j pp. 81--99; Ch. 5 §§a--r pp. 100--129; Ch. 6 §§a--q pp. 130--160; Ch. 7 §§a--h pp. 161--175; Ch. 8 §§a--h pp. 176--197; Ch. 9 §§a--f pp. 198--220. AG10 §§a--p pp. 2--38; AG12 pp. 1--9; AG13 pp. 1--8; AG14 pp. 1--3 | Full author-hosted classical treatment plus scheme/divisor/coherent supplements; explicit author copyright and personal-copy permission. |
 | S | [The Stacks Project](https://stacks.math.columbia.edu/browse) | *Algebra* §§10.99, 10.131, 10.137, 10.140, 10.166 (in particular tags 00MK, 00T6, 00T7, 00TU, 00TV); *Sheaves on Spaces* §§6.2--6.33; *Cohomology of Sheaves* §§20.2--20.15, 20.20, 20.30--20.31; *Schemes* §§26.2--26.24; *Constructions* §§27.2--27.21; *Properties* §§28.2--28.26; *Morphisms* §§29.2--29.45; *Cohomology of Schemes* §§30.2--30.19; *Divisors* §§31.13--31.36; *Varieties* §§33.2--33.44; *More on Morphisms* §§37.16--37.18; *Étale Morphisms* §§41.11--41.18; *Algebraic Curves* §§53.2--53.13 | Full open canonical scheme reference, read by stable chapter/section tags. |
 | GZ | Jiahui Gao and Shouwu Zhang, [*Lectures on Algebraic Geometry*](https://web.math.princeton.edu/~shouwu/publications/LAG2.pdf) | Ch. 2 §§2.1--2.5 pp. 14--19; Ch. 3 §§3.1--3.8 pp. 20--38; Ch. 4 §§4.1--4.5 pp. 39--48; Ch. 5 §§5.1--5.6 pp. 49--63; Ch. 6 §§6.1--6.6 pp. 64--81; Ch. 7 §§7.1--7.5 pp. 82--93; Ch. 8 §§8.1--8.7 pp. 95--106 (harvested but mostly declined) | Complete author/institution-hosted scheme and curve treatment. |
@@ -2075,7 +2257,7 @@ heading-specific reasons, in the next section.
 | 6.33 “Glueing sheaves” | [included] | `def-gluing-datum-sheaves`, `thm-gluing-sheaves`, `thm-gluing-ringed-and-locally-ringed-spaces` |
 | 20.2 “Cohomology of sheaves” | [included] | `def-sheaf-cohomology-derived-global-sections`, `thm-zero-sheaf-cohomology-global-sections`, `thm-long-exact-sequence-sheaf-cohomology` |
 | 20.4 “First cohomology and torsors” | [included] | `def-cech-cohomology-open-cover`, `thm-cech-to-sheaf-cohomology-comparison` |
-| 20.6 “First cohomology and invertible sheaves” | [included] | `def-picard-group-scheme`, `ex-glue-line-bundle-transition-functions` |
+| 20.6 “First cohomology and invertible sheaves” | [included] | `def-picard-group`, `ex-glue-line-bundle-transition-functions` |
 | 20.7 “Locality of cohomology” | [included] | `lem-cohomology-functoriality-sheaf-and-space`, `thm-cohomology-disjoint-union` |
 | 20.8 “Mayer--Vietoris” | [included] | `lem-two-open-cover-cech-complex`, `thm-mayer-vietoris-sheaf-cohomology` |
 | 20.9 “The Čech complex and Čech cohomology” | [included] | `def-cech-cochain-complex-open-cover`, `lem-cech-differential-squares-zero`, `def-cech-cohomology-open-cover` |
@@ -2221,7 +2403,7 @@ readable.
 | 31.26 “Meromorphic functions and sections; reduced case” | [included] | `def-sheaf-total-quotient-rings`, `def-reduced-affine-scheme` |
 | 31.27 “Weil divisors” | [included] | `def-weil-divisor-normal-noetherian-scheme`, `def-principal-weil-divisor-and-class-group` |
 | 31.28 “The Weil divisor class associated to an invertible module” | [included] | `thm-cartier-to-weil-divisor-normal-scheme`, `lem-cartier-to-weil-respects-principal-and-addition` |
-| 31.29 “More on invertible modules” | [included] | `def-picard-group-scheme`, `thm-cartier-divisors-mod-principal-to-picard`, `thm-line-bundle-rational-section-cartier-divisor` |
+| 31.29 “More on invertible modules” | [included] | `def-picard-group`, `thm-cartier-divisors-mod-principal-to-picard`, `thm-line-bundle-rational-section-cartier-divisor` |
 | 31.30 “Weil divisors on normal schemes” | [included] | `thm-normal-functions-codimension-one-intersection`, `thm-cartier-weil-isomorphism-locally-factorial` |
 | 31.31 “Relative Proj” | [included] | `def-relative-proj-quasi-coherent-graded-algebra`, `def-blowup-scheme-along-ideal` |
 | 31.32 “Closed subschemes of relative proj” | [included] | `thm-closed-subschemes-projective-space-homogeneous-ideals`, `lem-projective-morphism-relative-proj-presentation` |
@@ -2290,14 +2472,14 @@ topics” bucket.
 | Stacks 31.35 “Admissible blowups” | This refinement is aimed at formal/admissible geometry, whose completion/formal-scheme prerequisites are outside the track. |
 | MIT 18.725 Lecture 17 “Abel--Jacobi Map, Elliptic Curves” | Abstract Picard groups and genus-one plane embeddings are included, but representability of the Picard functor, Jacobians, and Abel--Jacobi belong to moduli/abelian varieties. |
 | Fulton Ch. 5 §5.5 “Max Noether's Fundamental Theorem” | Its ideal-membership/interpolation package is not used by the selected Bézout proof; including it alone would open a separate plane-linear-systems branch. |
-| Fulton Ch. 7 “Resolution of Singularities” beyond explicit curve charts | `AV-26` supplies blowups and examples but records the termination theorem as `not-supplied`; a full embedded-resolution proof needs a separately commissioned singularity invariant sequence. |
+| Fulton Ch. 7 “Resolution of Singularities” beyond explicit curve charts | Higher-dimensional resolution remains outside scope. AV-26 now retains and proves the reduced projective plane-curve termination theorem by the δ recurrence and local contact-order descent; AG-CRES-1 may not duplicate it. |
 | Tong Ch. 3 §3.2 “Differentials, residues, repartitions, duality,” proof paragraph at p. 93 | The heading is in scope, but this source explicitly says its proof is to be added. It supplied no item provenance and was not counted as a duality treatment. |
 | Vakil Ch. 24 §§24.1--24.3 “Derived functors” machinery | Derived functors/injectives are homological algebra; only the sheaf-cohomology applications in §§24.4--24.5 were harvested into AV. |
 | Vakil/Stacks fpqc descent beyond the single properness and vanishing interfaces | Full descent data/effectivity needs a dedicated descent page and belongs after a broader faithfully-flat geometry treatment. |
 | Moduli spaces, algebraic spaces, stacks, Picard schemes, Hilbert schemes | Not in the finite-type scheme foundation requested, and require representability/descent prerequisites not reached. |
 | Étale cohomology, fundamental groups, and Weil conjectures | Require sites/topoi and arithmetic input beyond ordinary topological-space sheaves; the track stops at étale morphisms. |
 | Higher-dimensional Serre/Grothendieck duality and dualizing complexes | Homological algebra owns derived categories; the commission expressly asks for Serre duality for curves, which is fully built. |
-| General resolution of singularities | The user asked for blowups, not a characteristic-dependent research-scale resolution theorem. Only plane-curve resolution is recorded, without proof or dependency use. |
+| General resolution of singularities | The current AV-26 contract proves embedded resolution for reduced projective plane curves over any field: a residue-degree-weighted normalization-defect drop terminates singular-point blowups, then the local contact-order invariant terminates embedded crossing blowups, giving regular embedded normal-crossing support on a regular surface. This does not claim relative smoothness over an imperfect field or resolution on arbitrary regular surfaces/higher-dimensional schemes. |
 
 ## Well-definedness and proof-closure audit
 
@@ -2330,7 +2512,7 @@ topics” bucket.
 | Čech cohomology | cover indexing, $\delta^2=0$, refinement homotopy, and derived comparison are separate; equality needs acyclicity |
 | Euler characteristic | finiteness and high-degree vanishing precede definition and additivity |
 | degree and genus over nonclosed fields | residue degrees and geometric connectedness are explicit |
-| residue | coordinate independence and field trace precede the global residue theorem |
+| residue | over perfect fields (or at separable closed points), coordinate independence and field trace precede the global residue theorem; no coefficient formula is used at inseparable closed points |
 | Serre pairing | descent to cohomology, nondegeneracy on one side, dimension balance, and trace normalization are separate |
 | blowup | Rees/Proj definition, generator-independent charts, invertible pullback, and universal property are separate |
 | strict transform | scheme-theoretic closure and exceptional multiplicity are distinguished from total transform |
@@ -2675,40 +2857,48 @@ unavailable source supports the replacement.
    the A inventory 26 items; its 7-item B page
    remains unchanged and a leaf.
 
-8. **AV-6 (unpublished).**  Replace the obsolete inventory by the audited
-   42-A/17-B manifest recorded in the AV-6 frontier amendment.  In particular,
-   own the dual-number tangent proof here, use AV-5a for product smoothness,
-   define the tangent cone as `Spec(gr_m O)` without discarding nilpotents,
-   and distinguish source-open generic smoothness from target-open generic
-   smoothness (the latter needs a smooth source).  Keep the constant cusp
-   family counterexample, the perfect-field residue-separability input to the
-   closed-point Jacobian criterion, and the characteristic-zero/general-linear-
-   system hypotheses in Bertini.  The B page contains examples/counterexamples
-   only and supplies no later proof.
+8. **AV-6 (published Frontier-36 pair).**  The audited live A/B pages were
+   published on 2026-09-30 and contain 43 A items and 17 B examples, all
+   published.  This supersedes the earlier 42-A/17-B manifest count and the
+   obsolete 27-A/9-B preview above; use the live page inventories.  The
+   published A page owns the rational-point dual-number tangent proof, retains
+   the full possibly nonreduced tangent cone, and distinguishes source-open
+   generic smoothness from target-open generic smoothness (the latter needs a
+   smooth source).  Its imperfect-field theorem is
+   `thm-regular-not-smooth-imperfect-field`; the explicit point calculation is
+   the B item `cex-regular-not-smooth-purely-inseparable-point`.  The B page
+   contains examples/counterexamples only and supplies no later proof.
 
-9. **AV-7 (unpublished).**  The live corpus has no proof that the integral
-   closure of a finite-type domain over a field is finite, and no algebraic
-   Zariski Main supplier.  The assertion above that existing commutative
-   algebra supplies normalization finiteness is withdrawn.  Add the two
-   supplier pairs below.  State the Zariski Main direction as: a quasi-finite
-   separated morphism of finite type factors as an open immersion followed by
-   a finite morphism; do not claim the converse without its own hypotheses.
-   Classical varieties are Noetherian, hence the needed quasi-compact and
-   quasi-separated hypotheses must be derived, not omitted.  Projectivity of
-   a normalized projective curve requires the later relative-projectivity
-   interface, which does not yet exist at AV-7.  Preserve
-   `cor-normalization-resolves-singularities-of-curves` by rehoming it to
-   `finite-proper-and-projective-morphisms` (or its first later consumer) after
-   “finite over projective is projective” is proved; AV-7 may conclude only the
-   already supplied finite birational normalization and nonsingularity.
+9. **AV-7 (current unpublished prose promise; supplier correction,
+   2026-09-30).** CA-19 `normalization-finiteness-for-affine-domains` and CA-20
+   page `algebraic-zariski-main-for-quasi-finite-morphisms`, theorem
+   `thm-algebraic-zariski-main-localization`, are already published.
+   Use CA-19's finite integral-closure and principal-open localization items,
+   then glue the normal affine charts inside the common function field; use
+   CA-20's algebraic quasi-finite factorization, with the finite-type,
+   separated, quasi-compact and quasi-separated hypotheses stated. For the
+   scheme-level consumers, use published AV-17
+   `lem-scheme-zariski-main-factorization-quasi-finite` and
+   `thm-proper-quasi-finite-is-finite`. To obtain a smooth projective model of
+   a one-variable function field, take projective closure, normalize, use
+   finite-over-projective projectivity from AV-15/19, then use the published
+   DVR and perfect-field regular/smooth criteria; the complete local route is
+   given under AV-23. Do not retain the stale claim that CA-19/20 are future
+   supplier pairs or that projectivity has no published route.
 
-10. **AV-8 (unpublished).**  The available resultant theorem is only the
-    monic univariate statement and cannot supply common projective roots,
-    including roots at infinity.  Add the homogeneous-resultant supplier pair
-    below.  Bézout must distinguish local Artinian length, invariance under
-    local equations, finiteness/no common component, the global graded-length
-    computation, and the sum with residue degrees.  Require the Artinian-length
-    and Hilbert-series suppliers explicitly; do not infer them from a citation.
+10. **AV-8 (current unpublished prose promise; supplier correction,
+    2026-09-30).** CA-21
+    `homogeneous-resultants-and-projective-intersection-length` is already
+    published and supplies the homogeneous resultant and total projective
+    complete-intersection length. CA-11 supplies the Hilbert--Samuel/graded
+    length interfaces. AV-8 must still give the local steps: finite length iff
+    no common local component, invariance under units and coordinates,
+    additivity and the tangent-cone inequality from the associated graded
+    ring, finiteness of the global intersection, and decomposition of its
+    length into residue-degree-weighted local lengths. The homogeneous
+    coordinate ring of a zero-dimensional projective intersection is not
+    called Artinian; use its Hilbert polynomial. CA-21 is a published exact
+    supplier, not a future pair.
 
 The Stacks Project full text was checked for the AV-5a standard-smooth and
 geometric-regularity boundaries (tags 00T6, 00T7, 00TU, 00TV, 00MK, and 07EM)
@@ -2731,30 +2921,22 @@ inseparable reduction), and
 of Japanese rings).  These full texts supply the proposed reduction rather
 than an unsupported appeal to “finite-type normalization.”
 
-### New future supplier pairs
+### Published commutative-algebra suppliers for AV-7/8 (2026-09-30 correction)
 
-Each B page below requires only its companion A page and is a dependency leaf.
-The completed Commutative Algebra audit §11.4 owns and supplies the exact full
-inventories, hypotheses, proof order, and source locators. Its 8/3, 11/3, and
-10/4 inventories supersede the thinner provisional lists formerly printed
-here: in particular, do not duplicate the published integral-closure
-definition, omit the purely-inseparable/Japanese normalization steps or the
-strongly-transcendental Zariski Main reduction, or call a zero-dimensional
-projective intersection's homogeneous coordinate ring Artinian.
+The following pages were once proposed as future AV prerequisites. They are
+now published and supply the named algebraic inputs; AV-7/8 still owe the
+geometric gluing and local-intersection arguments stated above. This is a
+prose availability correction only and changes no machine plan or run scope.
 
-| proposed A / B page ids | canonical inventory | intended planned consumers |
+| Published A / B page ids | live inventory | exact AV use |
 |---|---|---|
-| `normalization-finiteness-for-affine-domains` / `normalization-finiteness-for-affine-domains-examples` | Commutative Algebra §11.4, CA-19 (8 A / 3 B) | AV-7 A: normalization existence/finite morphism and chart gluing |
-| `algebraic-zariski-main-for-quasi-finite-morphisms` / `algebraic-zariski-main-for-quasi-finite-morphisms-examples` | Commutative Algebra §11.4, CA-20 (11 A / 3 B) | AV-7 A: classical Zariski Main and openness near quasi-finite points; AV-7 owns the classical gluing step |
-| `homogeneous-resultants-and-projective-intersection-length` / `homogeneous-resultants-and-projective-intersection-length-examples` | Commutative Algebra §11.4, CA-21 (10 A / 4 B) | AV-8 A: resultant items and the global graded/length steps of Bézout |
+| `normalization-finiteness-for-affine-domains` / `normalization-finiteness-for-affine-domains-examples` | CA-19, 8 A / 3 B | Finite integral closures of finite-type domains over a field and compatibility with principal-open localization; AV-7/23/26 add the geometric gluing or curve argument. |
+| `algebraic-zariski-main-for-quasi-finite-morphisms` / `algebraic-zariski-main-for-quasi-finite-morphisms-examples` | CA-20, 11 A / 3 B; theorem ID `thm-algebraic-zariski-main-localization` | Localize a finite-type algebra map quasi-finite at a prime to identify it with a localization of the relative integral closure. AV-7 states the AC and pointwise quasi-finite hypotheses; scheme-level consumers use published AV-17 factorization items. |
+| `homogeneous-resultants-and-projective-intersection-length` / `homogeneous-resultants-and-projective-intersection-length-examples` | CA-21, 10 A / 4 B | Homogeneous resultant and projective complete-intersection total length; AV-8 adds local intersection-multiplicity invariance and residue-degree bookkeeping. |
 
-The three new pairs have **no currently published consumers**; their consumers
-are the planned AV-7/AV-8 A items just identified. AV-5a likewise has no
-currently published consumer; planned AV-6 is its first consumer. Under the
-owner's “all and only” rule, none is an independent Phase-2 root. Build one in
-Phase 2 only if the final graph shows that it lies in the prerequisite closure
-of a supplier needed by a published consumer; otherwise leave it for a later
-frontier.
+Do not commission duplicate supplier pairs for these results. CA-19/20/21
+inventories, exact theorem IDs, and proof routes are controlled by the
+published Commutative Algebra pages and their track audit.
 
 **Combinatorics reconciliation (2026-09-08).** Algebraic Geometry introduces
 no Combinatorics supplier or consumer edge. The published combinatorial
@@ -2776,7 +2958,7 @@ metadata):
 |---:|---|---|---|---|
 | 366.0601 | `normalization-finiteness-for-affine-domains` | Normalization Finiteness for Affine Domains | A / commutative-algebra | `normalization-finiteness-for-affine-domains-examples` |
 | 366.0602 | `normalization-finiteness-for-affine-domains-examples` | Normalization Finiteness for Affine Domains — Examples | B / commutative-algebra | `normalization-finiteness-for-affine-domains` |
-| 366.0603 | `algebraic-zariski-main-for-quasi-finite-morphisms` | Algebraic Zariski Main for Quasi-Finite Morphisms | A / commutative-algebra | `algebraic-zariski-main-for-quasi-finite-morphisms-examples` |
+| 366.0603 | `algebraic-zariski-main-for-quasi-finite-morphisms` | Algebraic Zariski Main for Quasi-Finite Morphisms | A / commutative-algebra; theorem ID `thm-algebraic-zariski-main-localization` | `algebraic-zariski-main-for-quasi-finite-morphisms-examples` |
 | 366.0604 | `algebraic-zariski-main-for-quasi-finite-morphisms-examples` | Algebraic Zariski Main for Quasi-Finite Morphisms — Examples | B / commutative-algebra | `algebraic-zariski-main-for-quasi-finite-morphisms` |
 | 366.0621 | `homogeneous-resultants-and-projective-intersection-length` | Homogeneous Resultants and Projective Intersection Length | A / commutative-algebra | `homogeneous-resultants-and-projective-intersection-length-examples` |
 | 366.0622 | `homogeneous-resultants-and-projective-intersection-length-examples` | Homogeneous Resultants and Projective Intersection Length — Examples | B / commutative-algebra | `homogeneous-resultants-and-projective-intersection-length` |
@@ -3088,12 +3270,24 @@ never Phase-2 suppliers: `ex-affine-line-and-affine-space-coordinate-rings`,
 `ex-local-ring-affine-line-at-origin`, and
 `cex-regular-bijection-not-isomorphism-cusp`.
 
-### Planned-only AG supplier for the two Lie A shells
+### Frontier-36 AG supplier for the two Lie A shells: publication reconciliation
+
+**Current metadata correction (2026-09-30).** The chronology and 17-item A
+inventory below record the earlier commissioning contract; they are not the
+current page inventory or publication state. The live pages
+`smooth-projective-serre-duality-and-flag-variety-line-bundles` (510.0161)
+and its examples companion (510.0162) are both `published`; their current
+inventories contain 39 A items and 3 B examples, all published. The publication
+commit is `fc59133d593f6883e00f24ef5084b0dd550ff7cf` (2026-09-30). The page
+bodies still contain stale “draft” wording; page/item metadata and the commit
+are the publication evidence. This prose-only amendment does not edit those
+pages, their items, `plan-spec.json`, or the active run.
 
 RL-9 cannot be bound merely to AV-22: Borel--Weil--Bott also needs the
 algebraic flag quotient, homogeneous line bundles, minimal-parabolic
 $\mathbf P^1$ fibrations, and higher-dimensional Serre duality, while AV-25
-deliberately proves duality only for curves. Add this one planned-only AG pair:
+deliberately proves duality only for curves. The supplier pair described here
+has since been built and published; RL-9 remains an unbuilt planned consumer.
 
 | field | binding value |
 |---|---|
@@ -3102,7 +3296,13 @@ deliberately proves duality only for curves. Add this one planned-only AG pair:
 | A `requires` | `kahler-differentials-conormal-sequences-and-infinitesimal-lifting`, `quasi-coherent-and-coherent-sheaves-and-vector-bundles`, `proj-projective-schemes-twisting-sheaves-and-ampleness`, `sheaf-cohomology-cech-cohomology-and-comparison`, `cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes`, `ext-and-balanced-resolutions`, `derived-categories`, `spectral-sequences`, `grothendieck-spectral-sequences-and-computations`, `lie-subgroups-actions-and-homogeneous-spaces`, `cartan-subalgebras-and-root-space-decompositions`, `root-systems-dynkin-diagrams-and-cartan-killing-classification`, `highest-weight-theory-for-complex-semisimple-lie-algebras` |
 | B page id / title | `smooth-projective-serre-duality-and-flag-variety-line-bundles-examples` / *Smooth-projective Serre duality and flag-variety line bundles — examples* |
 | B category / order / `requires` | `algebraic-geometry` / **510.0162** / singleton `smooth-projective-serre-duality-and-flag-variety-line-bundles` |
-| companions / phase | reciprocal; **planned-only**, with zero published consumers |
+| companions / phase | reciprocal; **published** (39 A items, 3 B examples), with zero published consumers |
+
+The 17-item list below is retained as historical commissioning evidence only.
+Use the current page front matter and item files for any present-day consumer
+or inventory audit. The newer group-scheme roadmap in
+`research/plan-algebraic-geometry-expansion-track.md` treats Frontier-36 as the
+already-published complex flag specialization and proposes no duplicate page.
 
 **Frontier-35 disposition (2026-09-24):** this A/B pair was deferred from
 `frontier-35-ten-categories` after its Step-1 scaffold left 25 of 30 items
@@ -3235,7 +3435,9 @@ amendments, not edits in this audit:
 The flag pair has one direct **planned** consumer, RL-9, and no published
 consumer. The classical affine replacement has RL-10 as an additional planned
 consumer, which does not change its 105-item published impact. Both Lie B
-pages remain singleton leaves.
+pages remain singleton leaves. The current page bodies' stale draft labels are
+an outstanding metadata/text maintenance defect, not evidence that the
+published AG-LIE pages are still planned.
 
 The flag and duality claims were checked against complete author/primary full
 text: Brion, *Lectures on the Geometry of Flag Varieties*, §§1.2--1.4 and
@@ -3250,12 +3452,10 @@ pairings, the $G/B$ line-bundle classification, minimal-parabolic
 $\mathbf P^1$ reduction, and the relative cohomology shift. There is no source
 access blocker.
 
-This mapping is the execution contract: Phase 2 builds the new classical
-affine replacement pair (and only other independently eligible new roots from
-the central ledger), never the AV-1/AV-2 items. The flag pair is planned-only.
-Phase 3 performs the published cutovers in direct-first topological order,
-then rechecks the 79 transitively blocked items. No B-page item may be
-introduced as a shortcut supplier in either phase.
+This was the 2026-09-08 execution mapping. The classical affine replacement
+and flag/duality pair have since been published; the phase counts and the
+79-item follow-up are historical run evidence, not current work instructions.
+The B pages remain examples, not shortcut suppliers for A-page claims.
 
 ---
 
@@ -3263,7 +3463,11 @@ introduced as a shortcut supplier in either phase.
 
 These are the historical commission measurements before the binding
 replacement amendment above. They are retained to preserve the original
-crosswalk denominator. The effective amended totals follow the table.
+crosswalk denominator. The effective amended totals printed below are also
+historical: Frontier-36 later expanded and published the AG-LIE pair, and
+the live AG-P2 page includes its published shared definition. Use the
+2026-09-30 page/item census in the final reconciliation section rather than
+the former aggregate as current membership.
 
 | measurement | verified result | counting rule |
 |---|---:|---|
@@ -3274,7 +3478,7 @@ crosswalk denominator. The effective amended totals follow the table.
 | original A/B pairs | 27 | Headings `AV-1` through `AV-26`, plus inserted `AV-5a`, with no duplicate. |
 | included heading dispositions | 266 | Table rows matching an exact `[included]` disposition in the canonical crosswalk. Duplicate headings in non-harvest verification sources are not double-counted; every one of these 266 rows names at least one actual proposed id. |
 | decomposition ratio | **1018 / 266 = 3.83×** | Proposed item ids divided by included canonical heading dispositions. This denominator measures section-level source headings, not chapters and not repeated synonyms from every corroborating book. |
-| largest A page | **AV-23, 36 items** | Actual inventory-row count, not its prose declaration. |
+| largest A page in original 2026-09-08 commission snapshot | **AV-23, 36 items** | Historical inventory-row count. The current AV-23 inventory has 33 A rows after removal of the four proof-preview rows; the separate active batch-6 manifest has 35 A placements. |
 | A pages over 60 | 0 | No split was required; splitting would have manufactured extra page boundaries. |
 | independent full treatments | 10 | V, M, S, GZ, A, F, B, T, Ar, K. Tong is excluded only from AV-25's duality cell, not from the corpus. |
 | independent full-source hosts | 9 | `math.stanford.edu`, `www.jmilne.org`, `stacks.math.columbia.edu`, `web.math.princeton.edu`, `math.mit.edu`, `www.math.lsa.umich.edu`, `ocw.mit.edu`, `www.math.u-bordeaux.fr`, `www.math.purdue.edu`. |
@@ -3285,12 +3489,11 @@ crosswalk denominator. The effective amended totals follow the table.
 | crosswalk references to nonexistent proposed ids | 0 | Exact comparison of every backticked item id on an `[included]` row against the 990 inventory ids. |
 | AV label collisions elsewhere in `research/*.md` or `plan-spec.json` | 0 at verification time | Exact `AV-[0-9]+` heading/string scan, excluding this file. |
 
-The binding amendment adds **2 pairs and 65 ids**: AG-P2-1 has 44 A and 1 B;
-AG-LIE-1 has 17 A and 3 B. The effective prose contract is therefore **29
-pairs, 830 A items, 253 B leaves, and 1,083 total item ids**. The largest A
-inventory is now AG-P2-1 at 44, still below the 60-item ceiling. The new ids
-were checked separately for collision and do not alter the 266-heading
-historical source-crosswalk denominator.
+The historical binding amendment added **2 pairs and 65 ids**: its then-current
+AG-P2-1 count was 44 A and 1 B, and its AG-LIE-1 count was 17 A and 3 B. Those
+counts are superseded by the published page inventories recorded below; do
+not use the resulting historical aggregate as the current plan total. The
+266-heading source-crosswalk denominator remains historical evidence.
 
 The ratio is not being used as a quota. Its 3.72× value comes from named proof
 splits: for example, Bézout separates local length, invariance, finiteness,
@@ -3318,28 +3521,26 @@ These are planned-to-planned seams. They add zero direct and zero transitive
 published consumers to AV-9, AV-10, or AV-21, and do not alter Phase-2
 eligibility.
 
-## Binding Lie Theory reconciliation (2026-09-08)
+## Binding Lie Theory reconciliation (2026-09-08; publication state updated 2026-09-30)
 
-Future RL-9 Borel--Weil--Bott and the localisation/D-module portion of RL-10
-remain build-held until Algebraic Geometry owns exact, fully proved A-page
-interfaces for `G/B`, associated equivariant line bundles, coherent sheaf
-cohomology, projective-line fibres, Serre duality, localisation, and
-D-modules. A descriptive placeholder or recorded theorem is not a dependency.
-No currently published Lie item consumes one of these future AG suppliers, so
-this hold adds zero direct and zero transitive published consumers and no new
-Phase-2 root at this checkout.
+The AG-LIE supplier A/B pages at 510.0161/510.0162 are now published, as are
+their 39 A items and 3 B examples. They provide the complex flag, equivariant
+line-bundle, projective-line-fibre, and smooth-projective duality interfaces
+in their stated scope. RL-9 Borel--Weil--Bott and the localisation/D-module
+portion of RL-10 remain unbuilt planned consumers; their exact downstream
+dependencies and D-module suppliers still require the Lie plan's own
+reconciliation. No currently published Lie item consumes these AG suppliers,
+so this state adds zero published consumer impact and no new Phase-2 root at
+this checkout. The AG-LIE page bodies' stale “draft” text is noted above.
 
-## Binding Scheme Theory audit (2026-09-08)
+## Historical Scheme Theory audit snapshot (2026-09-08; superseded 2026-09-30)
 
-This is the canonical binding section for **Scheme Theory only**: AV-9
-through AV-26.  The original AV-9--AV-26 inventories and their source
-crosswalk remain historical evidence, while this section supersedes every
-conflicting count, placement, dependency, proof-provenance, and ownership
-sentence in them.  It does not supersede the preceding AV-1--AV-8 Algebraic
-Geometry binding, the Complex Analysis reconciliation, or the Lie Theory
-reconciliation.  Published pages, item files, generated files, and the
-machine plan remain read-only in this audit; every live repair below is a
-Phase-3 instruction.
+This section preserves the Phase-3 repair evidence recorded on 2026-09-08.
+Its census and statements about empty/published pages are historical. The
+current live census, availability, theorem destinations, and proof routes are
+controlled by the 2026-09-30 `Proof-route reconciliation and current
+publication state` below and by `research/algebraic-geometry-expansion-2026-09-30/audit-repair.md`.
+No machine plan or live run state was changed in this audit.
 
 ### Live census and hard dependency result
 
@@ -3512,7 +3713,13 @@ paragraph above is therefore historical, not an outstanding Phase-2 task.
 Its seven direct and three additional transitive published consumers remain
 the exact regression set for Phase 3.
 
-### Binding repairs to the planned AV-14--AV-26 inventory
+### Historical binding repairs to the planned AV-14--AV-26 inventory
+
+This subsection records the earlier commission disposition and is superseded
+where the dated 2026-09-30 reconciliation below gives a later result. In
+particular, the four AV-23 proof previews remain deleted and their complete
+theorem destinations are AV-25 after AV-24; the plane-curve resolution claim
+is now retained on AV-26 with the complete local termination route below.
 
 The 542 historical planned IDs have no machine-plan homes yet.  One of them,
 `def-affine-morphism-schemes`, collides with the already published AV-13 A
@@ -3542,12 +3749,12 @@ dispositions:
   `cor-unramified-cover-curves-genus-complete`,
   `thm-degree-two-g-line-bundle-basepoint-free`, and
   `thm-degree-two-g-plus-one-line-bundle-very-ample` on AV-25; and
-- delete the zero-impact
-  `thm-resolution-plane-curves-by-point-blowups`.  AV-26 proves blowup and
-  strict-transform calculations but does not contain the termination
-  invariant for embedded resolution.  Keep
-  `rem-resolution-higher-dimension-not-claimed` and strengthen it to deny
-  curve-resolution as well; and
+- The original deletion proposal for
+  `thm-resolution-plane-curves-by-point-blowups` is superseded by the
+  2026-09-30 AV-26 proof reconstruction below. Retain the promised reduced
+  plane-curve resolution theorem with its δ and contact-order termination
+  arguments. Keep `rem-resolution-higher-dimension-not-claimed` for the
+  separate boundary: AV-26 makes no higher-dimensional resolution claim; and
 - delete the zero-impact
   `thm-canonical-map-nonhyperelliptic-curve` and its B counterexample
   `cex-canonical-map-hyperelliptic-not-embedding`.  The available corpus does
@@ -3561,10 +3768,10 @@ the listed stable new IDs and `literature-derived`/`ai-altered` provenance:
 
 | placement | new supplier | exact role |
 |---|---|---|
-| AV-15 before `thm-proper-quasi-finite-is-finite` | `def-quasi-finite-at-point-and-morphism` | Define locally quasi-finite and quasi-finite, including finite type and quasi-compactness distinctions. |
-| AV-15 | `lem-quasi-finite-finite-fibre-characterization` | Under locally finite-type hypotheses, identify local quasi-finiteness with discrete/zero-dimensional fibres. |
+| AV-15 prerequisites consumed by AV-17's `thm-proper-quasi-finite-is-finite` | `def-quasi-finite-at-point-and-morphism` | Define locally quasi-finite and quasi-finite, including finite type and quasi-compactness distinctions. |
+| AV-15 | `lem-quasi-finite-finite-fibre-characterization` | Under locally finite-type hypotheses, identify quasi-finiteness at a point with being isolated in the fibre and having finite residue-field extension. |
 | AV-15 | `lem-algebraic-zariski-main-quasi-finite-localization` | Supply the finite-algebra localization lemma used in the algebraic Zariski Main proof. |
-| AV-15 | `thm-zariski-main-quasi-finite-factorization` | Prove a separated quasi-finite morphism factors as an open immersion followed by a finite morphism; `thm-proper-quasi-finite-is-finite` then follows by closedness of the proper open image. |
+| AV-17, replacing the historical `lem-scheme-zariski-main-factorization-quasi-finite` label | `thm-zariski-main-quasi-finite-factorization` | Prove the scheme-level separated quasi-finite open-immersion/finite factorization after the AV-17 étale-local decomposition; `thm-proper-quasi-finite-is-finite` then follows by closedness of the proper open image. Do not duplicate the theorem under the old lemma ID. |
 | AV-17 before generic flatness | `lem-generic-freeness-finite-type-domain-algebra-module` | Prove the algebraic generic-freeness step rather than cite a nonexistent CA supplier. |
 | AV-22 before base change | `thm-proper-flat-coherent-cohomology-perfect-complex` | For proper `X -> Spec A`, Noetherian `A`, and coherent `A`-flat `F`, construct the bounded finite-projective complex computing all base changes. |
 
@@ -3617,10 +3824,13 @@ Further binding hypotheses and relocations:
   `thm-cohomology-and-base-change` in the proper/Noetherian/coherent/flat form
   supported by the new perfect-complex supplier, not as unrestricted base
   change.
-- Before AV-23's function-field equivalence, construct normalization of an
-  integral locally finite-type scheme by gluing affine integral closures and
-  cite CA-19's `cor-affine-normalization-is-finite` and
-  `lem-finite-normalization-compatible-with-principal-opens`.  Narrow
+- Before AV-23's function-field equivalence, prove the new local
+  `thm-normalization-glues-integral-finite-type-curves`: for an integral
+  separated finite-type curve, glue affine integral closures using CA-19's
+  generic `thm-integral-closure-finite-finite-type-domain-over-field` and
+  `lem-finite-normalization-compatible-with-principal-opens`. The classical
+  `cor-affine-normalization-is-finite` has the narrower algebraically closed
+  base hypothesis and is not the general supplier. Narrow
   `lem-normalization-lowers-arithmetic-genus-delta` and
   `cor-plane-curve-geometric-genus-delta-correction` to integral finite-type
   curves.  CA-19 does not supply normalization of an arbitrary reduced
@@ -3631,9 +3841,10 @@ Further binding hypotheses and relocations:
   as schematic closure and delete “dominant component” language for reducible
   sources.
 
-After all binding deletions and additions, AV-14--AV-26 contains **534 exact
-planned IDs: 403 A items and 131 B leaves**.  Relocations do not change those
-totals.  The collision scan is over this amended set, not the historical 542.
+After all binding deletions and additions, AV-14--AV-26 contains **535 exact
+planned IDs: 404 A items and 131 B leaves**. AV-23's local normalization
+supplier is included in this amended total. Relocations do not change those
+totals. The collision scan is over this amended set, not the historical 542.
 
 ### Canonical A-only prerequisite spine and ownership seams
 
@@ -3647,34 +3858,40 @@ interface, with generic freeness proved locally as above.  AV-18 requires
 AV-10--AV-13, AV-17, CA-1 `noetherian-rings-and-hilbert-basis`, and CA-2
 `localisation-of-modules-and-support`.  AV-19 requires AV-13, AV-15, AV-18,
 and CA-11 `rees-modules-artin-rees-and-hilbert-samuel-theory`.  AV-20 requires
-AV-18, AV-19, CA-8, CA-9 `dedekind-domains-and-ideal-classes`, and CA-10
-`krull-dimension-and-height-theorems`; it does not require classical AV-7.
+AV-12, AV-18, AV-19, CA-8, and CA-10
+`krull-dimension-and-height-theorems`; CA-9
+`dedekind-domains-and-ideal-classes` is optional only for an explicitly stated
+Dedekind-domain specialization. It does not require classical AV-7.
 AV-21 requires AV-9, AV-10, and the Homological Algebra A pages for injective
 resolutions/right derived functors.  AV-22 requires AV-18, AV-19, AV-21,
-CA-11, and the relevant Homological Algebra A interfaces.  AV-23 requires
-AV-15--AV-22 and planned CA-19
-`normalization-finiteness-for-affine-domains`; this planned-to-planned seam is
-a build gate, not a citation licence.  AV-24 requires AV-20--AV-23.  AV-25
+CA-11, and the relevant Homological Algebra A interfaces. AV-23 requires
+AV-15--AV-22 and the published CA-19
+`normalization-finiteness-for-affine-domains`. The published
+`zariski-tangent-spaces-regular-points-smoothness-and-bertini` criterion is
+already in its transitive prerequisite closure. Its local curve-normalization
+item uses CA-19's generic finite-normalization and principal-open localization
+interfaces; it does not require AV-7. AV-24 requires AV-20--AV-23. AV-25
 requires AV-16 and AV-21--AV-24.  AV-26 requires AV-13, AV-15, AV-18--AV-20,
 and CA-11.  Each future B page requires only its A companion and has no
 consumer.
 
 The active Complex Analysis binding above has two planned AV-21 consumers and
-zero published impact. The Lie binding is now exact through AG-LIE-1 and has
-zero published impact. AG-P2-1 is the new-pair root closing the live AV-1
-cross-category publication blocker. The bad Complex Analysis Noetherian home is a Phase-3
-ownership repair using Abstract Algebra's published definition.  CA-19 is
-planned-only; until it is built, AV-23 and everything downstream through
-AV-26 remain planned-only and blocked.  None of these seams may be routed
-through a Recorded/Not-Proved remark.
+zero published impact. The AG-LIE supplier is published with zero published
+consumers. Published AG-P2 closes the historical AV-1 cross-category
+publication blocker. The bad Complex Analysis Noetherian home
+is a Phase-3 ownership repair using Abstract Algebra's published definition.
+CA-19 is published; AV-23 supplies its own local curve-normalization gluing
+argument before using it. AV-23 and its downstream pages remain planned-only
+until built. None of these seams may be routed through a Recorded/Not-Proved
+remark.
 
-### Phase classification and authoritative full-text evidence
+### Historical phase classification and authoritative full-text evidence (2026-09-08; superseded)
 
-There are **zero Scheme-owned Phase-2 roots**.  Phase 2 creates new A/B
-supplier pairs for published consumers only; it may not insert items into the
-ten published pages.  All live repairs above are Phase 3.  The six new
-supplier items and every other AV-14--AV-26 item are planned-only enrichment
-with zero published impact.
+This paragraph records the 2026-09-08 planning snapshot and is not a current
+run-status statement. CA-19/20/21 are now published exact AV-7/8 suppliers;
+the AV-7/8 geometric proof work and AV-14--AV-26 page promises remain prose
+contracts outside the canonical plan. Current publication availability and
+proof routes are controlled by the 2026-09-30 reconciliation below.
 
 The proof/hypothesis decisions above were checked against accessible complete
 Stacks Project text, not search snippets: Tag `01S5`, Definition 29.11.1 and
@@ -3689,3 +3906,59 @@ pages expose their proofs and dependency links in full.  The historical
 source corpus continues to supply the standard sheaf, divisor, curve,
 duality, and blowup proofs; the audit removes rather than blesses the claims
 for which that scaffold explicitly admitted no proof.
+
+## Proof-route reconciliation and current publication state (2026-09-30)
+
+This dated reconciliation controls over historical `not-supplied` labels and
+publication-state sentences above. It preserves the AV-1--AV-26 mathematical
+promises by identifying published item suppliers or complete local proof
+routes from published prerequisites; it does not insert these promises into
+`plan-spec.json` or change the live 30-pair run. This prose audit reconciles
+historical AV-15/17/22 supplier placement and records the published AV-6
+census; it changes no active run manifest or page selection.
+
+| historical row or claim | current proof route and exact scope | state / remaining work |
+|---|---|---|
+| AV-1 `thm-affine-algebraic-sets-coordinate-duality` | The published AG-P2 item `thm-classical-affine-algebraic-sets-reduced-algebras-antiequivalence` on `classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface` proves the object dictionary over an algebraically closed field; the same page also proves `thm-classical-affine-morphisms-coordinate-ring-antiequivalence`. The local route is Nullstellensatz ideal/point correspondence, coordinate functions, and mutually inverse pullback/zero-locus maps. | Supplied and published; AV-1’s historical object-only label must not overclaim the morphism theorem. |
+| AV-6 `lem-tangent-vectors-as-dual-number-points` | The published AV-6 lemma proves the rational-point statement for a $k$-scheme and $x\in X(k)$, identifying $T_xX$ with based $k$-maps from $\operatorname{Spec}k[\epsilon]/(\epsilon^2)$ and with $\operatorname{Der}_k(\mathcal O_{X,x},k)$. It makes no non-rational-point claim. The separate AG-P2 item `thm-tangent-vectors-dual-numbers` proves the residue-field-relative formulation; Stacks *Varieties* 33.16.1, 33.16.3--33.16.5 [0B29, 0B2C--0B2E] supports the setup. | Both published; keep the rational and relative statements distinct. |
+| AV-6 `thm-regular-not-smooth-imperfect-field` | Published theorem: for $k$ imperfect of characteristic $p>0$ and $a\notin k^p$, $\operatorname{Spec}k[t]/(t^p-a)$ is regular but not smooth; the published B item computes the nonregular purely inseparable base change. Stacks *Varieties* Example 33.12.7 [038S] and Vakil 2025 §13.2.8 are the source routes. | Supplied and published; this is an existence theorem witnessing failure of regular $\Rightarrow$ smooth, not a general theorem that regular implies smooth. |
+| AV-12 QC-ideal/closed-subscheme correspondence | The live AV-12 page supplies affine quotient rings, ideal sheaves, and closed immersions; the exact scheme-wide theorem destinations are published on AV-18 `quasi-coherent-and-coherent-sheaves-and-vector-bundles`: `thm-qc-ideal-closed-subscheme-correspondence-complete` and `thm-quasi-coherent-ideal-closed-subscheme-correspondence`. Route: prove the affine module/ideal quotient, localize on affine opens, glue the ideals and quotient schemes, and check the two assignments are inverse on the cover. | Supplied and published under the stated AC hypothesis; the former claim that AV-12 itself contains that theorem is stale. |
+| AV-15 `thm-properness-descent-fpqc` | The theorem is already a published item with a local proof. Stacks *Descent* §35.23 [02YJ], Lemma 35.23.16 [02L1] reduces fpqc locality of properness to universally closed [02KS], separated [02KU], and finite type [02KZ]. | Promise supplied and published. Reuse that item if an edge is needed; do not emit a duplicate AV-15 item. |
+| AV-17 scheme-level separated quasi-finite factorization and proper quasi-finite finiteness | Both claims are already published on `flat-smooth-and-etale-morphisms`: `lem-scheme-zariski-main-factorization-quasi-finite` and `thm-proper-quasi-finite-is-finite`. The scheme factorization is assembled from published `lem-relative-normalization-finite-stage` and `thm-quasi-finite-algebra-open-finite-factorization`, followed by the open-immersion/finite argument. The affine algebra step explicitly uses CA-20 `thm-algebraic-zariski-main-localization`; AV-15 supplies the quasi-finite fibre interfaces, while AV-17 supplies étale-local descent and the finite-stage construction. Properness makes the open image closed and yields finiteness. Stacks [03GT, 05K0, 02LS] is the checked full-text route, with exact separatedness and finite-type hypotheses retained. | Supplied and published; do not assign the same theorem to AV-15 or cite Vakil’s proper-only form as the general factorization. |
+| AV-16 `def-smooth-relative-dimension-via-differentials` | This published AV-16 item is a definition (`proof: not-applicable`), not a theorem: relative dimension is named after AV-16’s Kähler/conormal and smooth-differential results. The actual theorem `thm-differentials-smooth-locally-free` is published on AV-17; its converse is proved there using flatness, local finite presentation, and smooth geometric fibres/Jacobian presentation. | Definition destination is AV-16; smoothness criteria are AV-17. Local freeness of differentials alone is not a smoothness criterion [00T1]. |
+| AV-17 generic freeness | The published AV-17 A page `flat-smooth-and-etale-morphisms` contains `lem-generic-freeness-finite-type-algebra-module` and `thm-generic-flatness-morphisms`. State AC, Noetherian domain A, finite-type A-algebra B, and finite B-module M; the free localization may have infinite rank. The published proof inducts on a finite algebra-generator list. With zero generators, a prime filtration becomes free-or-zero after inverting a product of nonzero elements in nonzero filtration primes, and each extension splits. For B=A'[x], define M_k=Σ_{j≤k}x^jM_0; the kernels of M_0→M_{k+1}/M_k stabilize because A' is Noetherian. The tail quotients are then one finite A'-module Q. Inductively localize M_0, Q, and the finite initial quotients to free modules; split the localized exact sequences and take their union as a direct sum of free modules. AC supplies prime filtrations and simultaneous choices of basis preimages. Stacks 10.118.1 [051R] is the cited exact-statement check; 10.118.3 [051T] and Generic Flatness [0529] give the stronger finite-presentation/generic-flatness route. | Supplied and published; the old future-item name `lem-generic-freeness-finite-type-domain-algebra-module` is not the live ID. |
+| AV-22 proper-flat coherent cohomology/base change | The published AV-22 page contains `lem-proper-flat-cohomology-perfect-complex` and `lem-proper-flat-fp-cohomology-perfect-complex`, followed by `thm-cohomology-and-base-change`. The proof first obtains a bounded-above finite-free representative from AV-22’s projective cohomology construction, uses Stacks [07VJ] under Noetherian/proper/coherent/base-flat hypotheses to truncate to a bounded perfect complex, then applies the finite-complex base-change criterion to fibre maps and local freeness. | Supplied and published with the item’s exact hypotheses; the earlier draft name `thm-proper-flat-coherent-cohomology-perfect-complex` is not the current theorem ID. |
+| AV-7 normality, normalization, and Zariski Main | Published CA-19 `thm-integral-closure-finite-finite-type-domain-over-field` and `lem-finite-normalization-compatible-with-principal-opens` supply finite affine normalization and localization; AV-7 glues the closures inside `k(X)` using the overlap cocycle. CA-20 theorem `thm-algebraic-zariski-main-localization` supplies the local statement that a finite-type algebra map quasi-finite at a prime becomes, after inverting an element, a localization of its relative integral closure; retain its AC and pointwise hypotheses. For scheme consumers reuse AV-17 `lem-scheme-zariski-main-factorization-quasi-finite` and `thm-proper-quasi-finite-is-finite`. A projective curve model route is: affine finite-type model → AV-3 projective closure → CA-19 normalization → AV-15/19 finite-over-projective ampleness/projectivity → CA-8 one-dimensional normal local rings are DVRs → published AV-6 regular/smooth over a perfect field. | Complete local route from published CA-19/20, AV-3/15/17/19, CA-8, and AV-6; no future CA supplier pair is counted. |
+| AV-8 local plane intersections and Bézout | Published CA-11 supplies associated-graded/Hilbert--Samuel length calculations and CA-21 `thm-projective-plane-complete-intersection-total-length` supplies the homogeneous resultant and projective total length. AV-8 proves locally that `(f,g)` is m-primary exactly when no local component is shared, invariance under multiplying equations by units, additivity via the product exact sequence, and the tangent-cone inequality by passing to initial forms in `gr_m(O_{P²,p})`. AV-5/13 supply the dimension and scheme-theoretic intersection interfaces; decompose the finite global scheme length into local lengths multiplied by residue degrees. The homogeneous coordinate ring of a zero-dimensional projective intersection is not Artinian; use the Hilbert polynomial. | Complete local route from published AV-5/13, CA-11, and CA-21; no future CA supplier pair is counted. |
+| AV-20 Cartier/Weil divisors, line bundles, and Picard groups | AV-18/19 supply invertible sheaves, QC ideals, and projective twists; AV-12 supplies closed subschemes; CA-8 supplies the height-one DVR valuation; CA-10 supplies the dimension/height interface. Prove Cartier divisor/local-equation equivalence by unit changes on an open cover; tensor/addition and rational-section correspondences by multiplying local equations; Cartier-to-Weil by taking height-one valuations. The converse is stated only for locally factorial schemes defined by UFD local rings, not for all regular schemes. CA-9's Dedekind ideal theory is optional only for an explicitly stated Dedekind-domain specialization and is not a supplier for the general normal-scheme claim. On a proper normal curve, a principal divisor has degree zero by factoring the rational function as a finite map to P¹ and comparing the two fibre degrees. | Complete elementary route from the named published interfaces; no regular-local-UFD assertion is used. |
+| AV-23 curve-map and high-degree promises; AV-25 proof destination | AV-23 retains the differential/different and curve-map setup and records the Riemann--Hurwitz, étale-genus, basepoint-free, and very-ample promises, but emits no theorem rows for those four results. The complete stable destinations are AV-25 `thm-riemann-hurwitz-complete`, `cor-unramified-cover-curves-genus-complete`, `thm-degree-two-g-line-bundle-basepoint-free`, and `thm-degree-two-g-plus-one-line-bundle-very-ample`, in that order after AV-24. Their route locally rederives the canonical differential map from published AV-16; its DVR cokernel length is the different exponent, and finite flatness gives `Σ_{p|q}e_p[κ(p):κ(q)]=deg(f)`. Published AG-LIE duality and AV-24's locally proved Euler-RR give `deg ω=2g−2`; taking degrees proves Riemann--Hurwitz, and `Ω_{C/D}=0` gives the finite-étale case. For high-degree bounds, exact sequences at a geometric point and a length-two subscheme reduce to vanishing of sections of `ω⊗L⁻¹(p)` and `ω⊗L⁻¹(Z)`, both negative degree at bounds `2g` and `2g+1`; AV-22 flat proper base change descends from the algebraic closure. AV-24's local proof uses published AV-21/22 and local AV-20/23 divisor/curve definitions; AV-25 is the proof destination after AV-24. Do not count AV-23's unpublished canonical ramification row as a supplier. | Closed local route at the planned AV-25 destination from published AV-16/21/22 and AG-LIE plus AV-24's explicit local proof. No unpublished AV-23 or AV-25 theorem row is counted as a supplier. V25/Stacks are comparisons only. |
+| AV-24 Euler-characteristic Riemann--Roch | For every closed point `p`, the exact sequence `0→O(D)→O(D+p)→O(D+p)|_p→0` has quotient k-dimension `[κ(p):k]`. Published AV-21/22 supplies coherent-cohomology finiteness, long exact sequences, and Euler additivity. Induction over the positive and negative point coefficients gives `χ(O(D))−χ(O)=deg D`; geometric connectedness gives `H⁰(O)=k`, so `χ(O)=1−g` and `χ(O(D))=deg D+1−g`. | Complete local route from published AV-21/22 and the AV-20/23 divisor and curve definitions. No AV-25 result is used. |
+| AV-25 curve residues, duality, and full Riemann--Roch | Published AG-LIE `thm-serre-duality-smooth-projective-variety-locally-free-sheaves` supplies abstract perfect pairings for every locally free sheaf on a smooth projective curve over an arbitrary field. Its line-bundle specialization with AV-24's Euler-characteristic formula gives full divisor RR and `deg ω=2g−2` over an arbitrary field; vector-bundle duality is the direct specialization. For coherent `F`, use AV-19's ample twist to choose a finite vector-bundle surjection `E₀→F`; the kernel `E₁` is a subsheaf of `E₀`, hence torsion-free and locally free over regular one-dimensional local rings. Apply long exact cohomology/Ext sequences, naturality of AG-LIE duality, and the five lemma to get coherent duality. The coefficient-trace residue subtheory is restricted to perfect `k` (or individual closed points with separable residue field): then `Ω_{κ(p)/k}=0`, and the cotangent sequence `m_p/m_p²→Ω_{C/k}⊗κ(p)→Ω_{κ(p)/k}→0` shows that `dt` for any uniformizer is a basis; the separable coefficient-field lift gives `\widehat O_{C,p}≅κ(p)[[t]]`. Formal change-of-parameter calculation proves independence and `res(df)=0`; the connecting map for `0→ω→ω(D)→ω(D)|_D→0` is the local coefficient trace, and the Čech principal-parts boundary sums these traces. Do not use `Tr_{κ(p)/k}(a_{-1})` at an inseparable closed point on an imperfect base. For high-degree bounds, evaluation at a geometric point or length-two subscheme is controlled by `H⁰(ω⊗L⁻¹(Z))`, whose degree is at most `−1` at the `2g`/`2g+1` thresholds; use AV-22 base change to descend. | Arbitrary-field abstract curve duality and RR are closed by published AG-LIE plus AV-24/AV-21/22. The residue identification has a separate local proof route only in the stated separable-residue scope; higher-dimensional coherent duality remains outside AV-25. |
+| AV-26 `thm-resolution-plane-curves-by-point-blowups` | Preserve the proof-bearing claim for reduced projective plane curves over any field. Let `Q_C=ν_*O_{Ĉ}/O_C` and define `δ_k(C)=dim_k H⁰(C,Q_C)`; this is the sum of local `O_{C,p}`-lengths weighted by `[κ(p):k]`. For each closed center `p`, put `r=[κ(p):k]` and let `m` be the multiplicity of a local reduced equation. The exact recurrence is `δ_k(C′)=δ_k(C)−r·m(m−1)/2`. It follows from `C′=π*C−mE`, the two-chart computation `π_*O_{S'}=O_S`, `R^iπ_*O_{S'}=0` for `i>0`, and the `m` exceptional sequences with quotients `O_E(−j)` and `χ_k(O_E(−j))=r(1−j)`, together with additivity of proper coherent Euler characteristic. The finite birational map `C′→C` has the same componentwise finite normalization, so the normalization exact sequences turn `χ(C′)−χ(C)=r·m(m−1)/2` into the stated δ drop. At a non-rational center the local term `r·length_{O_{C,p}}(Q_{C,p})` is replaced by `Σ_{q|p}[κ(q):k]·length_{O_{C′,q}}(Q_{C′,q})`. Since `r>0`, each singular center (`m≥2`) strictly lowers δ. Once δ=0 the reduced curve is normal and its one-dimensional local rings are DVRs by CA-8, hence regular with disjoint components. For embedded crossings use `(N,M)` lexicographically: `N` is maximum pairwise contact order and `M=Σ_p max(s_p−2,0)`. In a chart `y=xt`, a contact of order `n>1` restricts on the strict transform to `f(x,0)/x` and becomes exactly `n−1` if it remains; all pairs among branches sharing a tangent satisfy the same recurrence, and new exceptional contacts have order one. Thus blowing all maximum-contact points strictly lowers `N`. Once `N≤1`, all meetings are transverse; blowing any point with at least three components separates their distinct tangent directions and strictly lowers `M`. The result is regular embedded normal-crossing support on a regular ambient surface, not necessarily a relative SNC divisor with components smooth over imperfect `k`. Blowups remain regular at inseparable closed centers by the two-chart regularity check. | CA-19 normalization; CA-8 DVR; AV-15/17 proper-quasi-finite finiteness; AV-21/22 Euler additivity/cohomology; CA-11 Rees construction; published `lem-r-one-s-two-intersection-of-height-one-localisations`; AV-26 local charts and exceptional normal bundle. No AG-CRES-1 supplier and no higher-dimensional resolution claim. |
+
+The current manifest census supersedes the dated 2026-09-08 count: Scheme
+Theory has 13 published A/B pairs, AV-9--AV-19 and AV-21--AV-22, with 547 A
+and 121 B item placements (668 total). AV-9--AV-13 are 162/44 (206 total),
+not the former 162/47 (209). AV-20 and AV-23--AV-26 each have empty 0/0
+planned A/B slots. AV-7/8 are prose-only promises with no live pair pages.
+Exact slugs, pair counts, page-manifest differences, and the 30-pair run
+status are recorded in `research/algebraic-geometry-expansion-2026-09-30/audit-repair.md`.
+
+AG-LIE (`smooth-projective-serre-duality-and-flag-variety-line-bundles` and
+its examples page) is published by `fc59133d593f6883e00f24ef5084b0dd550ff7cf`
+with 39 A and 3 B items and zero published consumers. AG-P2 has 49 A/1 B in
+`plan-spec.json`, 50 unique IDs across the pair, and one repeated B example
+placement on the A page; its 49 A IDs include one shared pre-existing
+definition, so 48 A IDs are newly commissioned. AV-6 has 43 A/17 B, all
+published. CA-19, CA-20, and CA-21 are published exact suppliers for AV-7/8
+and AV-23/26. The active Frontier-37 run remains the approved 30-pair run;
+no run scope, manifest, or engine state changed.
+
+The expansion file separates results with an explicit proof route in the
+reviewed texts from exercise/citation routes requiring a local write-up and
+from branches for which these four texts do not supply a proof. The latter
+include general quotient representability beyond controlled cases, full GIT
+and Hilbert-scheme representability, higher-dimensional resolution, broad
+deformation/moduli theory, étale fundamental groups/cohomology, Chow/GRR,
+and arithmetic models such as Néron models. No all-fields/all-schemes
+completeness claim is made for those branches.

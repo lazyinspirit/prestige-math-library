@@ -1,0 +1,2901 @@
+[
+  {
+    "order": 487,
+    "id": "riemannian-comparison-theorems",
+    "kind": "A",
+    "category": "differential-geometry",
+    "title": "Riemannian Comparison Theorems",
+    "companion": "riemannian-comparison-theorems-examples",
+    "requires": [
+      "riemannian-metrics-length-distance-and-volume",
+      "connections-levi-civita-and-parallel-transport",
+      "geodesics-the-exponential-map-completeness-and-hopf-rinow",
+      "riemann-curvature-and-riemannian-submanifolds",
+      "jacobi-fields-conjugate-points-and-the-cut-locus",
+      "covering-spaces-and-lifting",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "radon-measures-and-the-riesz-markov-kakutani-theorem",
+      "simply-connected-plane-domains"
+    ],
+    "items": [
+      {
+        "id": "def-comparison-sine-cosine-and-cotangent-functions",
+        "kind": "definition",
+        "title": "Comparison sine cosine and cotangent functions",
+        "statement": "For real k define sn_k(t)=sin(sqrt(k)t)/sqrt(k) if k>0, t if k=0, and sinh(sqrt(-k)t)/sqrt(-k) if k<0. Set cs_k=sn_k prime and ct_k=cs_k/sn_k where sn_k is positive: t in (0,pi/sqrt(k)) for k>0 and t>0 otherwise.",
+        "deps": [],
+        "strategy": "Piecewise formulas and positive domains; the terminal spherical endpoint is excluded.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§24.1, pp.173–176"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§2, pp.6–11"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+        "kind": "proposition",
+        "title": "Model functions solve the constant curvature jacobi equation",
+        "statement": "sn_k double-prime+k sn_k=0, sn_k(0)=0, sn_k prime(0)=1, cs_k double-prime+k cs_k=0, cs_k(0)=1, cs_k prime(0)=0, and cs_k squared+k sn_k squared=1.",
+        "deps": [
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-hyperbolic-identities-and-derivatives",
+          "def-hyperbolic-functions",
+          "thm-chain-rule",
+          "cor-zero-derivative-implies-constant"
+        ],
+        "strategy": "Differentiate each of the three formulas, check data at zero and constancy of the Wronskian identity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§24.1, pp.173–176"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§2, pp.6–11"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-radial-jacobi-tensor",
+        "kind": "definition",
+        "title": "Radial jacobi tensor",
+        "statement": "Along a unit-speed geodesic gamma from p, n>=2, identify normal spaces by parallel transport. The radial Jacobi tensor A(t):v-perp to gamma-prime(t)-perp sends w to the unique normal Jacobi field J_w(t) with J_w(0)=0, D_tJ_w(0)=w.",
+        "deps": [
+          "def-jacobi-field",
+          "thm-existence-and-uniqueness-of-jacobi-fields-from-initial-data",
+          "thm-existence-and-uniqueness-of-parallel-sections",
+          "def-covariant-derivative-along-a-curve",
+          "def-levi-civita-connection",
+          "def-riemann-curvature-four-tensor",
+          "thm-algebraic-symmetries-of-the-riemann-tensor"
+        ],
+        "strategy": "Use linear ODE dependence and parallel transport to define a smooth matrix family; A(0)=0 and its covariant derivative at zero is I.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§26.1–26.2 and 28.1, pp.191–197, 205–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§2–4, pp.6–16"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-radial-jacobi-tensor-is-invertible-before-the-first-conjugate-point",
+        "kind": "lemma",
+        "title": "Radial jacobi tensor is invertible before the first conjugate point",
+        "statement": "For t>0 before the first conjugate instant of p along gamma, A(t) is a linear isomorphism of normal spaces.",
+        "deps": [
+          "def-radial-jacobi-tensor",
+          "def-conjugate-points-along-a-geodesic-and-their-multiplicity",
+          "thm-existence-and-uniqueness-of-jacobi-fields-from-initial-data",
+          "def-jacobi-field",
+          "thm-rank-nullity",
+          "thm-algebraic-symmetries-of-the-riemann-tensor"
+        ],
+        "strategy": "Kernel of A(t) is exactly the initial normal derivative of an endpoint-vanishing Jacobi field. Finite-dimensional rank-nullity gives invertibility.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§26.1–26.2 and 28.1, pp.191–197, 205–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§2–4, pp.6–16"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-radial-riccati-operator",
+        "kind": "definition",
+        "title": "Radial riccati operator",
+        "statement": "Where A(t) is invertible, define S(t)=D_tA(t) A(t)^(-1) on the normal space, using parallel frames. Its domain is t>0 before the first conjugate instant.",
+        "deps": [
+          "def-radial-jacobi-tensor",
+          "lem-radial-jacobi-tensor-is-invertible-before-the-first-conjugate-point",
+          "thm-existence-and-uniqueness-of-parallel-sections"
+        ],
+        "strategy": "Define in a parallel orthonormal frame; frame changes conjugate the matrix and preserve the endomorphism.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§26.1–26.2 and 28.1, pp.191–197, 205–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§2–4, pp.6–16"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-radial-riccati-equation",
+        "kind": "theorem",
+        "title": "Radial riccati equation",
+        "statement": "Assume AC_omega. Along the interval where S is defined, D_tS+S squared+R_gamma-prime=0, where R_gamma-prime(X)=R(X,gamma-prime)gamma-prime. S is self-adjoint and S(t)=t^(-1)I+O(t) near zero.",
+        "deps": [
+          "def-radial-riccati-operator",
+          "def-jacobi-field",
+          "lem-wronskian-of-two-jacobi-fields-is-constant",
+          "prop-curvature-tensor-of-constant-sectional-curvature",
+          "def-countable-choice",
+          "def-radial-jacobi-tensor",
+          "lem-radial-jacobi-tensor-is-invertible-before-the-first-conjugate-point",
+          "thm-existence-and-uniqueness-of-parallel-sections",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-taylor-peano-remainder",
+          "cor-inverse-matrix-by-adjugate",
+          "thm-adjugate-identity-over-a-commutative-ring",
+          "def-matrix-minors-cofactors-and-adjugate",
+          "def-covariant-derivative-along-a-curve",
+          "def-levi-civita-connection",
+          "def-riemann-curvature-four-tensor"
+        ],
+        "strategy": "Differentiate A prime A inverse and insert the Jacobi equation. The Jacobi Wronskian of columns vanishes at zero, giving A star A prime=A prime star A; conjugate by A inverse to get symmetry. Taylor-expand the smooth Jacobi ODE at zero.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§26.1–26.2 and 28.1, pp.191–197, 205–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§2–4, pp.6–16"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-trace-riccati-inequality",
+        "kind": "lemma",
+        "title": "Trace riccati inequality",
+        "statement": "Assume AC_omega. For n>=2, h=tr S satisfies h prime+h squared/(n-1)+Ric(gamma-prime,gamma-prime)<=0 before the first conjugate instant.",
+        "deps": [
+          "thm-radial-riccati-equation",
+          "def-ricci-curvature",
+          "lem-ricci-curvature-is-symmetric-and-basis-independent",
+          "def-countable-choice",
+          "def-trace-of-an-endomorphism",
+          "def-radial-jacobi-tensor",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "strategy": "Trace the Riccati equation and use tr(S squared)>=h squared/(n-1) by Cauchy-Schwarz for real eigenvalues. The curvature trace is Ric.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§26.1–26.2 and 28.1, pp.191–197, 205–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§2–4, pp.6–16"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-sturm-comparison-for-scalar-jacobi-equations",
+        "kind": "theorem",
+        "title": "Sturm comparison for scalar jacobi equations",
+        "statement": "Let a<=b be continuous. Let u,v solve u double-prime+a u=0 and v double-prime+b v=0, with u(0)=v(0)=0 and u prime(0)=v prime(0)>0. While v is positive, u>=v and u has no zero; in particular its first positive zero is no earlier than that of v.",
+        "deps": [
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "thm-algebra-of-derivatives",
+          "lem-sign-preservation-near-a-limit",
+          "cor-mean-value-theorem",
+          "def-complete-ordered-field",
+          "thm-dedekind-complete"
+        ],
+        "strategy": "On the first interval where both are positive, (u prime v-u v prime) prime=(b-a)uv>=0. The ratio u/v starts at one and is nondecreasing. A first-crossing argument rules out u reaching zero before v.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§24.2, 25.3, 26.2, pp.176–177, 188–189, 194–197"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§3, pp.12–14"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-rauch-comparison-theorem-first-form",
+        "kind": "theorem",
+        "title": "Rauch comparison theorem first form",
+        "statement": "Assume AC_omega. For unit-speed geodesics in n-dimensional manifolds, compare normal Jacobi fields J_i with J_i(0)=0 and equal positive initial-derivative norms. If every relevant radial sectional curvature of M_1 is >= every such curvature of M_2, and M_1 has no conjugate point in (0,T], then |J_1(t)|<=|J_2(t)| for 0<=t<=T; the interval ends before any first zero of J_1.",
+        "deps": [
+          "thm-index-lemma",
+          "def-radial-jacobi-tensor",
+          "lem-radial-jacobi-tensor-is-invertible-before-the-first-conjugate-point",
+          "thm-radial-riccati-equation",
+          "def-sectional-curvature",
+          "thm-sturm-comparison-for-scalar-jacobi-equations",
+          "def-countable-choice",
+          "def-index-form-of-a-geodesic-segment",
+          "lem-integration-by-parts-for-the-index-form",
+          "def-jacobi-field",
+          "def-conjugate-points-along-a-geodesic-and-their-multiplicity",
+          "thm-existence-and-uniqueness-of-parallel-sections",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume",
+          "thm-taylor-peano-remainder",
+          "def-riemannian-metric-and-riemannian-manifold"
+        ],
+        "strategy": "Transfer terminal vectors through parallel orthonormal frames. The published index lemma makes the actual Jacobi field minimize the index form; ordered curvature terms compare it with the transferred competing field. This gives ordered logarithmic norm derivatives; equal t-asymptotics at zero integrate to the asserted sign, and continuity handles a first-zero endpoint.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§24.2, 25.3, 26.2, pp.176–177, 188–189, 194–197"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§3, pp.12–14"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "landmark": true,
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-riccati-comparison-for-scalar-initial-shape",
+        "kind": "lemma",
+        "title": "Riccati comparison for scalar initial shape",
+        "statement": "Let symmetric curvature matrices R_1>=R_2 and Jacobi tensors Y_i solve Y_i double-prime+R_iY_i=0 with Y_i(0)=I and Y_i prime(0)=lambda I. Before the first singularity of Y_1, their self-adjoint Riccati operators satisfy S_1<=S_2 and every pair of solutions starting from equal-length matched vectors obeys |Y_1(t)u|<=|Y_2(t)u| when the scalar model R_2=kI is used.",
+        "deps": [
+          "thm-radial-riccati-equation",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-derivative-of-matrix-inversion",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "prop-a-fundamental-matrix-is-invertible",
+          "thm-monotonicity-of-the-integral",
+          "def-euclidean-inner-product"
+        ],
+        "strategy": "The same Wronskian calculation gives self-adjoint S_i. For U=S_2-S_1, U prime=XU+UX+(R_1-R_2), U(0)=0; conjugate by a fundamental matrix of X to prove U>=0. Against scalar S_2, differentiate log|Y_1u|<=S_2 to integrate the length bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§26.1–26.2 and 28.1, pp.191–197, 205–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§2–4, pp.6–16"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-rauch-comparison-theorem-second-form",
+        "kind": "theorem",
+        "title": "Rauch comparison theorem second form",
+        "statement": "Assume AC_omega. For nonzero normal Jacobi fields compared with a constant-curvature k model, suppose J(0) and J_k(0) have equal norm and D_tJ(0)=lambda J(0), D_tJ_k(0)=lambda J_k(0) for the same real lambda. Let t_f be the first focal time of the full Jacobi tensor Y_M with Y_M(0)=I and Y_M'(0)=lambda I. If radial sectional curvature K_M>=k, then |J(t)|<=|J_k(t)| for 0<=t<t_f, and at finite t_f by continuity; the model solution stays nonzero before t_f. The comparison makes no claim beyond t_f merely because this particular J remains nonzero.",
+        "deps": [
+          "lem-riccati-comparison-for-scalar-initial-shape",
+          "def-sectional-curvature",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-countable-choice",
+          "def-radial-jacobi-tensor",
+          "def-jacobi-field",
+          "thm-radial-riccati-equation",
+          "thm-existence-and-uniqueness-of-jacobi-fields-from-initial-data",
+          "thm-existence-and-uniqueness-of-parallel-sections",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume",
+          "prop-curvature-tensor-of-constant-sectional-curvature",
+          "def-constant-sectional-curvature-and-space-form",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-riemann-curvature-four-tensor"
+        ],
+        "strategy": "Build the Jacobi tensor with initial data I,lambda I and apply scalar-initial-shape Riccati comparison on its invertibility interval. Integrate the logarithmic norm inequality against the scalar model and use continuity at the focal endpoint. Equal initial norms and logarithmic derivatives alone are insufficient (flat-plane transverse-derivative counterexample in notes). A nonzero selected field does not extend the matrix proof past another field's first focal time.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§24.2, 25.3, 26.2, pp.176–177, 188–189, 194–197"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§3, pp.12–14"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "prop-rigidity-in-rauch-comparison",
+        "kind": "proposition",
+        "title": "Rigidity in rauch comparison",
+        "statement": "Assume AC_omega. In the first-form comparison against constant k, if |J(t)| equals |J_k(t)| throughout (0,T], matched initial derivatives force J(t)=sn_k(t)P_t w and K(span(J,gamma-prime))=k wherever J is nonzero. The analogous conclusion holds in the scalar-initial-shape second form with its model solution on an interval before the first focal time of the full initial-shape Jacobi tensor.",
+        "deps": [
+          "thm-rauch-comparison-theorem-first-form",
+          "thm-rauch-comparison-theorem-second-form",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-countable-choice",
+          "thm-index-lemma",
+          "def-index-form-of-a-geodesic-segment",
+          "lem-integration-by-parts-for-the-index-form",
+          "def-radial-riccati-operator",
+          "thm-radial-riccati-equation",
+          "def-radial-jacobi-tensor",
+          "def-sectional-curvature",
+          "def-riemann-curvature-four-tensor",
+          "prop-curvature-tensor-of-constant-sectional-curvature",
+          "def-constant-sectional-curvature-and-space-form",
+          "thm-existence-and-uniqueness-of-parallel-sections",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume",
+          "lem-riccati-comparison-for-scalar-initial-shape",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "thm-existence-and-uniqueness-of-jacobi-fields-from-initial-data",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-jacobi-field",
+          "def-conjugate-points-along-a-geodesic-and-their-multiplicity"
+        ],
+        "strategy": "In the first form, equality of integrated logarithmic norms forces equality in the index and curvature inequalities; the index lemma gives the transferred model Jacobi field and radial sectional equality. In the second form, equality in the scalar-model Riccati inequality forces S(J)=ct_(k,lambda)J, so J is the parallel model multiple and its Jacobi equation gives radial sectional equality. Stop before the tensor's first focal time.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§24.2, 25.3, 26.2, pp.176–177, 188–189, 194–197"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§3, pp.12–14"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-upper-sectional-curvature-bounds-delay-conjugate-points",
+        "kind": "corollary",
+        "title": "Upper sectional curvature bounds delay conjugate points",
+        "statement": "Assume AC_omega. If K<=k with k>0 on a complete n>=2 manifold, no unit-speed geodesic has a conjugate point to its start at t<pi/sqrt(k). For k<=0 there are no conjugate points at any positive time.",
+        "deps": [
+          "thm-rauch-comparison-theorem-first-form",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-conjugate-points-along-a-geodesic-and-their-multiplicity",
+          "def-countable-choice",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-constant-sectional-curvature-and-space-form",
+          "prop-curvature-tensor-of-constant-sectional-curvature",
+          "prop-tangential-jacobi-fields-are-affine-multiples-of-the-velocity",
+          "thm-algebraic-symmetries-of-the-riemann-tensor",
+          "def-jacobi-field",
+          "def-riemann-curvature-four-tensor",
+          "def-sectional-curvature",
+          "thm-existence-and-uniqueness-of-parallel-sections",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume",
+          "cor-the-space-of-jacobi-fields-along-a-geodesic-has-dimension-two-n"
+        ],
+        "strategy": "Compare an arbitrary normal Jacobi field with sn_k(t) times a parallel field; the model stays positive on the claimed interval, so the comparison lower bound prevents an endpoint zero.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§24.2, 25.3, 26.2, pp.176–177, 188–189, 194–197"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§3, pp.12–14"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-lower-positive-sectional-curvature-forces-conjugate-points",
+        "kind": "corollary",
+        "title": "Lower positive sectional curvature forces conjugate points",
+        "statement": "Assume AC_omega. For n>=2, K>=k>0 on a complete manifold forces every unit-speed geodesic from p to have a first conjugate instant no later than pi/sqrt(k).",
+        "deps": [
+          "thm-rauch-comparison-theorem-first-form",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "prop-at-a-conjugate-endpoint-the-index-form-is-degenerate",
+          "def-countable-choice",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-constant-sectional-curvature-and-space-form",
+          "prop-curvature-tensor-of-constant-sectional-curvature",
+          "def-radial-jacobi-tensor",
+          "lem-radial-jacobi-tensor-is-invertible-before-the-first-conjugate-point",
+          "def-jacobi-field",
+          "def-conjugate-points-along-a-geodesic-and-their-multiplicity",
+          "def-sectional-curvature",
+          "thm-existence-and-uniqueness-of-parallel-sections",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume"
+        ],
+        "strategy": "Assume no conjugacy through the model endpoint. Compare with a model sine field: the higher-curvature field cannot remain nonzero while the model vanishes. Equivalently use the index form sine test and strict positivity before conjugacy.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§24.2, 25.3, 26.2, pp.176–177, 188–189, 194–197"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§3, pp.12–14"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "def-laplace-beltrami-operator-as-trace-of-the-hessian",
+        "kind": "definition",
+        "title": "Laplace beltrami operator as trace of the hessian",
+        "statement": "For a smooth function f on a Riemannian manifold define Delta f=tr_g Hess f=div(grad f), with the positive-divergence convention. This is only the pointwise geometric operator; no analytic harmonic theory is asserted.",
+        "deps": [
+          "prop-gradient-hessian-and-divergence-connection-formulas",
+          "def-riemannian-divergence"
+        ],
+        "strategy": "Take the trace in an orthonormal frame and use the published gradient, Hessian and divergence connection formulas.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§26.1–26.2 and 28.1, pp.191–197, 205–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§2–4, pp.6–16"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-hessian-comparison-for-distance-under-sectional-curvature-bounds",
+        "kind": "theorem",
+        "title": "Hessian comparison for distance under sectional curvature bounds",
+        "statement": "Assume AC_omega. Let M be complete, n>=2, r=d(p,.) and q off p and Cut(p), with r(q)<pi/sqrt(k) if k>0. On grad r-perp, K>=k implies Hess r<=ct_k(r)g; K<=k implies Hess r>=ct_k(r)g wherever the model is positive. Hess r(grad r,.)=0.",
+        "deps": [
+          "prop-hessian-of-distance-in-terms-of-radial-jacobi-fields",
+          "prop-gradient-of-the-distance-is-the-outward-unit-radial-field-off-the-cut-locus",
+          "thm-exp-p-is-a-diffeomorphism-from-the-open-tangent-cut-domain-onto-m-minus-the-cut-locus-and-p",
+          "def-radial-jacobi-tensor",
+          "def-radial-riccati-operator",
+          "lem-radial-jacobi-tensor-is-invertible-before-the-first-conjugate-point",
+          "thm-radial-riccati-equation",
+          "thm-rauch-comparison-theorem-first-form",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-sectional-curvature",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-taylor-peano-remainder",
+          "def-countable-choice"
+        ],
+        "strategy": "Identify Hess r with S by the published radial-Jacobi formula. Riccati comparison with ct_k I (singular start matched by asymptotics) gives both directions; apply only before the radial cut time, and use the unit radial gradient for the zero direction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§26.1–26.2 and 28.1, pp.191–197, 205–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§2–4, pp.6–16"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound",
+        "kind": "theorem",
+        "title": "Laplacian comparison for distance under a ricci lower bound",
+        "statement": "Assume AC_omega. For complete connected n>=2 with Ric>=(n-1)k g, Delta r_p<=(n-1)ct_k(r_p) at q off p and Cut(p), with r_p(q)<pi/sqrt(k) when k>0.",
+        "deps": [
+          "def-laplace-beltrami-operator-as-trace-of-the-hessian",
+          "lem-trace-riccati-inequality",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "prop-hessian-of-distance-in-terms-of-radial-jacobi-fields",
+          "prop-gradient-of-the-distance-is-the-outward-unit-radial-field-off-the-cut-locus",
+          "thm-exp-p-is-a-diffeomorphism-from-the-open-tangent-cut-domain-onto-m-minus-the-cut-locus-and-p",
+          "def-radial-jacobi-tensor",
+          "def-radial-riccati-operator",
+          "thm-radial-riccati-equation",
+          "def-ricci-curvature",
+          "thm-taylor-peano-remainder",
+          "def-countable-choice"
+        ],
+        "strategy": "Trace Hess r=S in the n-1 normal directions, compare its scalar Riccati differential inequality with (n-1)ct_k by a first-crossing argument at the common 1/t pole. The radial Hessian is zero.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§26.1–26.2 and 28.1, pp.191–197, 205–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§2–4, pp.6–16"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "rem-weak-laplacian-comparison-at-the-cut-locus",
+        "kind": "remark",
+        "title": "Weak laplacian comparison at the cut locus",
+        "statement": "Barrier and distributional distance-Laplacian statements at the cut locus require additional PDE setup; this remark is non-load-bearing. The pointwise comparison here is confined to the smooth cut complement.",
+        "deps": [
+          "thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound",
+          "thm-distance-from-p-is-smooth-off-p-and-the-cut-locus",
+          "def-cut-point-and-cut-locus-of-a-point",
+          "def-laplace-beltrami-operator-as-trace-of-the-hessian",
+          "def-countable-choice",
+          "cor-polar-integration-may-discard-the-cut-locus",
+          "thm-cut-locus-of-a-point-has-riemannian-volume-zero"
+        ],
+        "strategy": "State the boundary clearly and do not use this remark as a proof input for Cheng or Toponogov; their needed upper support tests are proved locally.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§26.1–26.2 and 28.1, pp.191–197, 205–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§2–4, pp.6–16"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-no-conjugate-points-under-nonpositive-sectional-curvature",
+        "kind": "theorem",
+        "title": "No conjugate points under nonpositive sectional curvature",
+        "statement": "If K<=0, a nonzero Jacobi field with J(0)=0 cannot vanish at any later t>0 along a unit-speed geodesic.",
+        "deps": [
+          "def-jacobi-field",
+          "def-sectional-curvature",
+          "def-conjugate-points-along-a-geodesic-and-their-multiplicity",
+          "def-riemann-curvature-four-tensor",
+          "thm-algebraic-symmetries-of-the-riemann-tensor",
+          "lem-curvature-is-c-infinity-linear-in-all-three-vector-fields",
+          "thm-existence-and-uniqueness-of-jacobi-fields-from-initial-data",
+          "cor-second-derivative-characterises-convexity",
+          "prop-geodesics-have-constant-speed-for-a-metric-compatible-connection"
+        ],
+        "strategy": "For a normal field, (|J| squared) double-prime=2|D_tJ| squared-2<K(J,T)T,J>>=0. Convexity and zero at both ends force J=0; tangential Jacobi fields are affine multiples of T and cannot vanish twice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§20.1 and 24.3, pp.147–149, 178–179"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§5, pp.17–19"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-a-complete-local-isometry-is-a-covering-map",
+        "kind": "theorem",
+        "title": "A complete local isometry is a covering map",
+        "statement": "Assume AC_omega. A local isometry F:N->M between connected boundaryless Riemannian manifolds is surjective and a smooth covering map if N is complete; M is then complete.",
+        "deps": [
+          "def-riemannian-isometry-and-local-isometry",
+          "thm-hopf-rinow",
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "lem-local-isometries-send-geodesics-to-geodesics",
+          "thm-existence-of-normal-neighborhoods",
+          "thm-radial-geodesics-minimize-length-in-a-normal-neighborhood",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "def-geodesically-complete-riemannian-manifold",
+          "def-countable-choice"
+        ],
+        "strategy": "Lift radial geodesics from a chosen target point through each source fibre. The lift has the same finite length and cannot escape a complete source; extend it to the endpoint. This proves surjectivity and yields inverse branches over a sufficiently small normal ball. Uniqueness of lifted radial paths makes these branches disjoint and exhaustive, hence evenly covered. Lift geodesic extensions to transfer completeness to M.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§20.1 and 24.3, pp.147–149, 178–179"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§5, pp.17–19"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-cartan-hadamard",
+        "kind": "theorem",
+        "title": "Cartan hadamard",
+        "statement": "Assume AC_omega. If M is complete connected boundaryless with K<=0, exp_p:T_pM->M is a smooth covering and a universal cover for every p. If M is simply connected, exp_p is a diffeomorphism.",
+        "deps": [
+          "thm-no-conjugate-points-under-nonpositive-sectional-curvature",
+          "prop-conjugate-points-and-multiplicity-are-invariant-under-affine-reparametrization",
+          "thm-a-complete-local-isometry-is-a-covering-map",
+          "thm-hopf-rinow",
+          "thm-gauss-lemma",
+          "thm-conjugate-points-are-critical-values-of-the-exponential-map-along-the-geodesic",
+          "def-universal-covering-space",
+          "cor-connected-cover-of-a-simply-connected-space-is-trivial",
+          "def-countable-choice",
+          "thm-the-differential-of-exp-p-at-zero-is-the-identity",
+          "prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions",
+          "def-pullback-riemannian-metric",
+          "lem-local-isometries-send-geodesics-to-geodesics",
+          "def-riemannian-isometry-and-local-isometry",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "cor-convex-subsets-of-rn-are-contractible",
+          "lem-contractibility-implies-trivial-fundamental-group",
+          "def-simply-connected",
+          "prop-topological-manifolds-are-locally-compact-and-locally-path-connected",
+          "cor-rn-is-polygonally-connected-and-locally-path-connected",
+          "def-sectional-curvature"
+        ],
+        "strategy": "No conjugate points makes exp_p a local diffeomorphism. Pull back g and use Gauss lemma: every curve from 0 to v has pulled-back length at least |v| and the radial segment attains it, so closed metric balls about 0 are Euclidean-compact and the pullback metric is complete. Apply the complete-local-isometry covering theorem. T_pM is simply connected, so it is universal; a connected cover of simply connected M has one sheet.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§20.1 and 24.3, pp.147–149, 178–179"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§5, pp.17–19"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "landmark": true,
+        "dependency_level": 1
+      },
+      {
+        "id": "cor-simply-connected-complete-nonpositively-curved-manifolds-have-unique-geodesics-between-points",
+        "kind": "corollary",
+        "title": "Simply connected complete nonpositively curved manifolds have unique geodesics between points",
+        "statement": "Assume AC_omega. In a complete simply connected K<=0 manifold every two points are joined by exactly one geodesic segment with affine parameter on [0,1], and it minimizes length.",
+        "deps": [
+          "thm-cartan-hadamard",
+          "thm-hopf-rinow",
+          "def-countable-choice",
+          "lem-local-isometries-send-geodesics-to-geodesics",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "def-pullback-riemannian-metric",
+          "def-riemannian-isometry-and-local-isometry"
+        ],
+        "strategy": "exp_p is a diffeomorphism, so each endpoint determines one initial vector. Hopf-Rinow gives a minimizing radial geodesic; any other affinely parametrized joining segment has the same endpoint vector by injectivity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§20.1 and 24.3, pp.147–149, 178–179"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§5, pp.17–19"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold",
+        "kind": "corollary",
+        "title": "Squared distance is strictly convex along geodesics in a hadamard manifold",
+        "statement": "Assume AC_omega. On a Hadamard manifold (complete, simply connected, K<=0), for every p the function d(p,.) squared is strictly convex along every nonconstant affinely parametrized geodesic; constant geodesics are excluded.",
+        "deps": [
+          "thm-cartan-hadamard",
+          "cor-simply-connected-complete-nonpositively-curved-manifolds-have-unique-geodesics-between-points",
+          "thm-no-conjugate-points-under-nonpositive-sectional-curvature",
+          "thm-characterization-of-a-cut-point",
+          "thm-hessian-comparison-for-distance-under-sectional-curvature-bounds",
+          "prop-gradient-of-the-distance-is-the-outward-unit-radial-field-off-the-cut-locus",
+          "prop-gradient-hessian-and-divergence-connection-formulas",
+          "prop-the-riemannian-hessian-is-symmetric",
+          "def-levi-civita-connection",
+          "prop-geodesics-have-constant-speed-for-a-metric-compatible-connection",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "cor-second-derivative-characterises-convexity",
+          "def-sectional-curvature",
+          "def-countable-choice"
+        ],
+        "strategy": "Off p, Hess(r squared/2)=dr tensor dr+r Hess r>=g by K<=0 Hessian comparison; at p use global normal coordinates and the quadratic expansion. Along a nonconstant affine geodesic the second derivative is at least its positive constant speed squared.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§20.1 and 24.3, pp.147–149, 178–179"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§5, pp.17–19"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-bonnet-conjugate-radius-theorem",
+        "kind": "theorem",
+        "title": "Bonnet conjugate radius theorem",
+        "statement": "Assume AC_omega. On a complete n>=2 manifold with K>=k>0, every unit-speed geodesic has a conjugate instant to its start by t=pi/sqrt(k).",
+        "deps": [
+          "thm-index-lemma",
+          "def-index-form-of-a-geodesic-segment",
+          "def-sectional-curvature",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-countable-choice",
+          "def-conjugate-points-along-a-geodesic-and-their-multiplicity",
+          "def-riemann-curvature-four-tensor",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "thm-existence-and-uniqueness-of-parallel-sections",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume",
+          "thm-ftc-second-part",
+          "thm-algebra-of-derivatives",
+          "def-radial-jacobi-tensor",
+          "thm-hopf-rinow",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "def-geodesic-of-an-affine-connection"
+        ],
+        "strategy": "Use a parallel normal unit field E and V=sn_k(t)E on the model-length interval. The index integral is nonpositive; if no conjugacy through its endpoint, strict index-lemma positivity for a nonzero zero-endpoint field contradicts it. Longer intervals have a negative sine test.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.1 and 28.2, pp.199–200, 210–212"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§12, pp.59–62"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-bonnet-myers",
+        "kind": "theorem",
+        "title": "Bonnet myers",
+        "statement": "Assume AC_omega. If M is complete connected boundaryless n>=2 and Ric>=(n-1)k g with k>0, then diam M<=pi/sqrt(k) and M is compact.",
+        "deps": [
+          "def-index-form-of-a-geodesic-segment",
+          "def-ricci-curvature",
+          "thm-hopf-rinow",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-countable-choice",
+          "def-riemannian-distance-on-a-connected-manifold",
+          "def-metric-bounded-diameter",
+          "def-energy-of-a-piecewise-smooth-curve",
+          "prop-length-energy-inequality-and-constant-speed-equality-case",
+          "thm-second-variation-formula-for-energy",
+          "lem-ricci-curvature-is-symmetric-and-basis-independent",
+          "def-sectional-curvature",
+          "def-riemann-curvature-four-tensor",
+          "thm-algebraic-symmetries-of-the-riemann-tensor",
+          "thm-existence-and-uniqueness-of-parallel-sections",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume",
+          "def-orthogonal-complement",
+          "cor-double-orthogonal-complement-and-dimension",
+          "thm-the-exponential-domain-is-open-and-the-exponential-map-is-smooth",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "thm-chain-rule",
+          "thm-ftc-second-part"
+        ],
+        "strategy": "If a minimizing unit-speed segment had length L>pi/sqrt(k), take n-1 parallel normal sine test fields on [0,L]; their index forms sum to at most (n-1)(pi squared/L squared-k)L/2<0, contradicting nonnegativity of second variation for a minimizer. Hopf-Rinow makes the closed bounded manifold compact.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.1 and 28.2, pp.199–200, 210–212"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§12, pp.59–62"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "landmark": true,
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-pullback-metric-on-a-cover-of-a-complete-manifold-is-complete",
+        "kind": "lemma",
+        "title": "Pullback metric on a cover of a complete manifold is complete",
+        "statement": "Assume AC_omega. For a smooth covering pi:N->M of a complete connected boundaryless Riemannian manifold, the lifted smooth structure and metric pi-star g make N a complete Riemannian manifold; pi is a local isometry.",
+        "deps": [
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "thm-path-lifting-for-covering-maps",
+          "def-pullback-riemannian-metric",
+          "prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions",
+          "lem-local-isometries-send-geodesics-to-geodesics",
+          "thm-hopf-rinow",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "def-geodesically-complete-riemannian-manifold",
+          "def-countable-choice"
+        ],
+        "strategy": "Use evenly covered charts to lift the smooth structure and g. Every maximal N-geodesic projects to an M-geodesic, which extends globally by Hopf-Rinow; path lifting uniquely lifts the extended base geodesic through its initial point, and local isometry makes the lift a geodesic. Thus N is geodesically complete, hence metrically complete.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§20.1 and 24.3, pp.147–149, 178–179"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§5, pp.17–19"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "cor-bonnet-myers-fundamental-group-is-finite",
+        "kind": "corollary",
+        "title": "Bonnet myers fundamental group is finite",
+        "statement": "Assume AC_omega. A complete connected boundaryless n>=2 manifold with Ric>=(n-1)k g for k>0 has finite fundamental group.",
+        "deps": [
+          "thm-bonnet-myers",
+          "lem-pullback-metric-on-a-cover-of-a-complete-manifold-is-complete",
+          "thm-universal-cover-existence",
+          "thm-deck-group-of-a-universal-cover-is-the-fundamental-group",
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "def-compact-space",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "thm-riemannian-distance-is-a-metric",
+          "def-countable-choice",
+          "prop-topological-manifolds-are-locally-compact-and-locally-path-connected",
+          "thm-connected-and-locally-path-connected-implies-path-connected",
+          "cor-convex-subsets-of-rn-are-contractible",
+          "def-semilocally-simply-connected-space",
+          "def-universal-covering-space",
+          "def-ricci-curvature",
+          "lem-ricci-curvature-is-symmetric-and-basis-independent",
+          "thm-fundamental-theorem-of-riemannian-geometry",
+          "def-riemannian-isometry-and-local-isometry",
+          "def-riemann-curvature-four-tensor",
+          "def-deck-transformation-and-deck-group",
+          "prop-deck-transformations-are-determined-by-one-point-and-act-freely",
+          "ex-discrete-metric-compact-iff-finite",
+          "def-simply-connected"
+        ],
+        "strategy": "Lift the metric to the universal cover; local isometry preserves Ric and the lifted metric is complete. Bonnet-Myers makes the cover compact. A covering fibre is discrete and closed in a compact space, hence finite; the deck group acts freely on that finite fibre and equals pi_1(M).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.1 and 28.2, pp.199–200, 210–212"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§12, pp.59–62"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "prop-round-sphere-model-geometry",
+        "kind": "proposition",
+        "title": "Round sphere model geometry",
+        "statement": "Assume AC_omega. For R>0 and n>=2 let S^n_R be the round sphere of radius R in R^(n+1) with the induced metric. Then S^n_R is a compact connected complete boundaryless Riemannian manifold of constant sectional curvature 1/R^2; the maximal geodesic with gamma(0)=p, gamma'(0)=v is gamma(t)=cos(|v|t/R)p+(R/|v|)sin(|v|t/R)v for v nonzero (constant for v=0); d_g(x,y)=R arccos(<x,y>/R^2), with diameter pi R attained exactly at antipodal pairs; and for unit v the cut time is c_p(v)=pi R, Cut(p)={-p}, inj(p)=pi R and exp_p is injective on the open tangent ball of radius pi R.",
+        "deps": [
+          "def-countable-choice",
+          "thm-a-regular-level-set-is-an-embedded-submanifold",
+          "prop-tangent-space-of-a-regular-level-set-is-the-kernel",
+          "prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "thm-fundamental-theorem-of-riemannian-geometry",
+          "prop-coordinate-formula-for-the-lie-bracket",
+          "thm-clairaut-schwarz-mixed-partials",
+          "def-affine-connection-on-a-smooth-manifold",
+          "prop-connection-laws-in-directional-form",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "prop-affine-reparametrization-of-a-geodesic-is-a-geodesic",
+          "prop-geodesics-have-constant-speed-for-a-metric-compatible-connection",
+          "def-geodesic-of-an-affine-connection",
+          "thm-hopf-rinow",
+          "thm-a-length-minimizing-piecewise-smooth-curve-is-a-constant-speed-geodesic-up-to-reparametrization",
+          "def-riemannian-distance-on-a-connected-manifold",
+          "thm-riemannian-distance-is-a-metric",
+          "ex-the-round-sphere-has-positive-constant-sectional-curvature",
+          "def-sectional-curvature",
+          "def-cut-time-in-a-unit-tangent-direction",
+          "def-cut-point-and-cut-locus-of-a-point",
+          "prop-injectivity-radius-is-the-infimum-of-cut-times",
+          "def-injectivity-radius-at-a-point-and-of-a-manifold",
+          "thm-exp-p-is-a-diffeomorphism-from-the-open-tangent-cut-domain-onto-m-minus-the-cut-locus-and-p",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-principal-inverse-sine-and-cosine",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ],
+        "strategy": "Project the ambient derivative to get the Levi-Civita connection, integrate the geodesic ODE in closed form, use Hopf-Rinow for the minimizing direction of the distance formula, and read the cut time and injectivity radius off the distance formula.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Example 8.2.7 and Theorem 8.2.3, printed pp.49 and 46–47: sectional curvature of the round sphere; Proposition 15.3.1, pp.117–118: great circles as geodesics"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§1.1, printed pp.1–4: the sphere of radius R as the simply connected space form of curvature 1/R^2, its diameter pi R and its cut time"
+            },
+            {
+              "title": "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Sectional Curvatures of the Model Spaces, printed pp.148–149; Chapter 10 on the cut locus of the round sphere"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-half-space-model-geometry",
+        "kind": "proposition",
+        "title": "Upper half-space model geometry",
+        "statement": "Assume AC_omega. For a>0 let U^n={y>0} in R^n carry g_a=(a^2y^2)^(-1) sum dx^i dx^i. Then g_a is a Riemannian metric and (U^n,g_a) is a complete simply connected boundaryless n-manifold of constant sectional curvature -a^2; the vertical lines t->(x_0,y_0e^(at)) and the Euclidean semicircles centred on y=0 are unit-speed geodesics defined on all of R, and every maximal geodesic is one of them.",
+        "deps": [
+          "def-countable-choice",
+          "prop-coordinate-criterion-for-a-riemannian-metric",
+          "prop-christoffel-formula-for-the-levi-civita-connection",
+          "prop-coordinate-geodesic-equation",
+          "prop-coordinate-formula-for-the-curvature-tensor",
+          "thm-curvature-is-a-type-one-three-tensor",
+          "def-riemann-curvature-four-tensor",
+          "def-sectional-curvature",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "prop-affine-reparametrization-of-a-geodesic-is-a-geodesic",
+          "thm-hopf-rinow",
+          "def-hyperbolic-functions",
+          "thm-hyperbolic-identities-and-derivatives",
+          "cor-convex-subsets-of-rn-are-contractible",
+          "cor-contractible-spaces-are-path-connected",
+          "lem-contractibility-implies-trivial-fundamental-group",
+          "def-simply-connected",
+          "thm-path-connected-implies-connected"
+        ],
+        "strategy": "Compute the Christoffel symbols of the conformal factor, evaluate the coordinate curvature formula to get R(X,Y)Z=-a^2(g(Y,Z)X-g(X,Z)Y), exhibit vertical lines and semicircles as complete unit-speed geodesics, show they cover every initial datum, and use convexity of the half-space plus Hopf-Rinow.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Example 8.2.6, printed page 49: the upper half-space metric and its constant negative curvature; §24.1, pp.173–176: model space forms and their geodesics"
+            },
+            {
+              "title": "John M. Lee, Riemannian Manifolds: An Introduction to Curvature (1997)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf",
+              "locator": "Sectional Curvatures of the Model Spaces, printed pp.148–149; geodesics of the hyperbolic metric, printed pp.152–154"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§1.1, printed pp.1–4: the space forms, their curvatures and their geodesics"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-flat-torus-model-geometry",
+        "kind": "proposition",
+        "title": "Flat torus model geometry",
+        "statement": "Assume AC_omega. For n>=1 let Z^n act on R^n by translations and let T^n=R^n/Z^n carry the quotient metric g with q^*g the Euclidean metric. Then (T^n,g) is a connected boundaryless complete Riemannian n-manifold, q is a surjective local isometry, the curvature vanishes for n>=2, and the quotient charts identify T_[x]T^n with R^n so the maximal geodesic with initial datum v is t->[x+tv] and exp_[x](v)=[x+v]; hence exp_[x](0)=exp_[x](e_1) and exp_[x] is not injective.",
+        "deps": [
+          "def-countable-choice",
+          "def-quotient-topology",
+          "def-topological-manifold-without-boundary",
+          "def-smooth-atlas",
+          "def-smooth-manifold",
+          "prop-coordinate-criterion-for-a-riemannian-metric",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "def-riemannian-isometry-and-local-isometry",
+          "ex-straight-lines-as-euclidean-geodesics",
+          "lem-local-isometries-send-geodesics-to-geodesics",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "thm-hopf-rinow",
+          "prop-christoffel-formula-for-the-levi-civita-connection",
+          "prop-coordinate-formula-for-the-curvature-tensor",
+          "def-riemann-curvature-four-tensor",
+          "def-sectional-curvature",
+          "cor-rn-is-polygonally-connected-and-locally-path-connected",
+          "thm-path-connected-implies-connected",
+          "thm-continuous-image-of-a-connected-space"
+        ],
+        "strategy": "Covering boxes give a smooth atlas and the Hausdorff second-countable quotient; translations make the Euclidean metric descend along the local isometry q; straight lines push to complete geodesics; constant-coefficient charts have zero curvature; and exp_[x](e_1)=exp_[x](0).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§20.1 and 24.3, pp.147–149 and 178–179: the flat torus as the complete non-simply-connected flat model"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§5, pp.17–19: completeness and the exponential map of a flat quotient"
+            },
+            {
+              "title": "John M. Lee, Introduction to Smooth Manifolds, 2nd ed.",
+              "url": "https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf",
+              "locator": "Proposition 21.4 and Theorem 21.10, printed pp.543–547: quotient manifolds of free proper actions; Example 21.14, the torus"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-model-space-radial-area-and-ball-volume",
+        "kind": "definition",
+        "title": "Model space radial area and ball volume",
+        "statement": "For n>=2 and r in the positive sn_k interval, A_k(r)=omega_(n-1) sn_k(r)^(n-1) and V_k(r)=integral_0^r A_k(t)dt. If k>0, set V_k-star(r)=V_k(min(r,pi/sqrt(k))) for all r>=0; for k<=0 set V_k-star=V_k.",
+        "deps": [
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-polar-surface-measure-on-the-unit-sphere"
+        ],
+        "strategy": "Use the area of the unit sphere in T_pM and the constant-curvature polar metric; specify the saturated positive-curvature terminal convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.2 and 28.1, pp.200–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§4–5, pp.15–20"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-radial-volume-jacobian",
+        "kind": "definition",
+        "title": "Radial volume jacobian",
+        "statement": "Assume AC_omega. For n>=2 and 0<t<cut_p(v), define J_p(t,v)=det A_v(t)>0 using oriented parallel orthonormal normal frames whose orientations agree at zero. It is the polar volume-density factor, with J_p(t,v)/t^(n-1)->1.",
+        "deps": [
+          "def-radial-jacobi-tensor",
+          "lem-radial-jacobi-tensor-is-invertible-before-the-first-conjugate-point",
+          "def-cut-time-in-a-unit-tangent-direction",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume",
+          "def-countable-choice"
+        ],
+        "strategy": "Choose an oriented normal basis once and transport it; determinant is positive near zero and cannot change sign before conjugacy. By the exponential differential formula and Gauss lemma, the polar pullback density is det A dt dS.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.2 and 28.1, pp.200–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§4–5, pp.15–20"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-logarithmic-derivative-of-the-radial-volume-jacobian-is-the-distance-laplacian",
+        "kind": "lemma",
+        "title": "Logarithmic derivative of the radial volume jacobian is the distance laplacian",
+        "statement": "Assume AC_omega. Before radial cut time, d/dt log J_p(t,v)=tr S_v(t)=Delta r_p(exp_p(tv)).",
+        "deps": [
+          "def-radial-volume-jacobian",
+          "def-radial-riccati-operator",
+          "prop-hessian-of-distance-in-terms-of-radial-jacobi-fields",
+          "def-laplace-beltrami-operator-as-trace-of-the-hessian",
+          "thm-determinant-differential-and-jacobis-formula",
+          "def-countable-choice",
+          "def-cut-time-in-a-unit-tangent-direction",
+          "def-riemannian-distance-on-a-connected-manifold",
+          "lem-radial-jacobi-tensor-is-invertible-before-the-first-conjugate-point"
+        ],
+        "strategy": "Jacobi determinant differentiation gives J prime/J=tr(A prime A inverse). The published Hessian formula identifies this operator with Hess r on normal space and its radial trace is zero.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.2 and 28.1, pp.200–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§4–5, pp.15–20"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-relative-volume-density-comparison",
+        "kind": "theorem",
+        "title": "Relative volume density comparison",
+        "statement": "Assume AC_omega. Under Ric>=(n-1)k g on a complete connected n>=2 manifold, q_v(t)=J_p(t,v)/sn_k(t)^(n-1) is nonincreasing and at most one for 0<t<min(cut_p(v),pi/sqrt(k)) when k>0, or 0<t<cut_p(v) otherwise.",
+        "deps": [
+          "lem-trace-riccati-inequality",
+          "lem-logarithmic-derivative-of-the-radial-volume-jacobian-is-the-distance-laplacian",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-radial-volume-jacobian",
+          "def-radial-riccati-operator",
+          "thm-radial-riccati-equation",
+          "def-radial-jacobi-tensor",
+          "lem-radial-jacobi-tensor-is-invertible-before-the-first-conjugate-point",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-ricci-curvature",
+          "def-cut-time-in-a-unit-tangent-direction",
+          "thm-taylor-peano-remainder",
+          "def-countable-choice"
+        ],
+        "strategy": "Trace Riccati comparison yields tr S<=(n-1)ct_k. Therefore (log q_v) prime<=0. Jacobi initial data give q_v(t)->1 at zero. Keep the model endpoint outside the domain.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.2 and 28.1, pp.200–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§4–5, pp.15–20"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-bishop-gromov-volume-comparison",
+        "kind": "theorem",
+        "title": "Bishop gromov volume comparison",
+        "statement": "Assume AC_omega. For complete connected boundaryless n>=2 with Ric>=(n-1)k g, r->vol_g(B(p,r))/V_k-star(r) is nonincreasing on r>0, tends to one as r decreases to zero, and is constant after pi/sqrt(k) when k>0.",
+        "deps": [
+          "thm-relative-volume-density-comparison",
+          "def-model-space-radial-area-and-ball-volume",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "cor-polar-integration-may-discard-the-cut-locus",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-radial-volume-jacobian",
+          "def-riemannian-volume-density",
+          "def-cut-time-in-a-unit-tangent-direction",
+          "lem-minimizing-along-a-geodesic-is-an-initial-interval-property",
+          "thm-bonnet-myers",
+          "prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density",
+          "thm-hopf-rinow",
+          "thm-dominated-convergence",
+          "def-countable-choice"
+        ],
+        "strategy": "Extend each q_v by zero after its cut time; radial monotonicity survives. Integrate over directions by Tonelli, then take the sn_k^(n-1)-weighted average on [0,r], which is nonincreasing as r grows. Polar integration discards the null cut locus and identifies the numerator. Small-radius Jacobi asymptotics and dominated convergence give limit one. In positive k, Myers and cut-locus nullity make both numerator and saturated model denominator constant beyond the endpoint.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.2 and 28.1, pp.200–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§4–5, pp.15–20"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "landmark": true,
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-cheng-maximal-diameter-rigidity",
+        "kind": "theorem",
+        "title": "Cheng maximal diameter rigidity",
+        "statement": "Assume AC_omega. If M is complete connected boundaryless n>=2, Ric>=(n-1)k g for k>0, and diam M=pi/sqrt(k), then M is isometric to the round n-sphere of sectional curvature k.",
+        "deps": [
+          "thm-bonnet-myers",
+          "thm-bishop-gromov-volume-comparison",
+          "def-model-space-radial-area-and-ball-volume",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-one-dimensional-change-of-variables-with-absolute-derivative",
+          "cor-polar-integration-may-discard-the-cut-locus",
+          "def-riemannian-volume-density",
+          "prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density",
+          "prop-rigidity-in-bishop-gromov-on-an-interval",
+          "def-cut-time-in-a-unit-tangent-direction",
+          "lem-minimizing-along-a-geodesic-is-an-initial-interval-property",
+          "thm-a-length-minimizing-piecewise-smooth-curve-is-a-constant-speed-geodesic-up-to-reparametrization",
+          "thm-hopf-rinow",
+          "def-riemannian-isometry-and-local-isometry",
+          "lem-local-isometries-send-geodesics-to-geodesics",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "thm-extreme-value-metric",
+          "def-metric-bounded-diameter",
+          "ex-great-circles-as-round-sphere-geodesics",
+          "prop-round-sphere-model-geometry",
+          "thm-exp-p-is-a-diffeomorphism-from-the-open-tangent-cut-domain-onto-m-minus-the-cut-locus-and-p",
+          "ex-the-round-sphere-has-positive-constant-sectional-curvature",
+          "thm-finite-dimensional-isometry-characterisations",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "cor-positive-density-measures-assign-positive-volume-to-nonempty-open-sets-and-metric-balls",
+          "def-countable-choice"
+        ],
+        "strategy": "Scale k to one and choose diameter endpoints p,q. The open balls B(p,r), B(q,pi-r) are disjoint. At r=pi/2 their volumes each reach half vol M by Bishop-Gromov, so equality forces the volume ratios at p and q to equal alpha=vol M/vol S^n for r>=pi/2. Repeat for 0<r<pi/2; disjointness forces the same ratio there, and its limit at zero gives alpha=1. Equality in the ball-packing bound also gives d(p,x)+d(q,x)=pi for every x: if the sum were larger, a small ball about x would miss two complementary balls whose volumes already sum to vol M. Equality of polar integrals and monotone radial density gives model density in every direction and no cut before pi: an earlier cut would, by continuous cut time, remove a positive-measure set of directions. Equality in trace Riccati and Cauchy-Schwarz forces S=cot(t)I and all radial curvatures one. Thus exp_p has the round polar metric on the radius-pi ball, all radial endpoints at pi equal q, and the q-polar equality supplies the smooth endpoint chart. The resulting complete local isometry S^n->M is a covering; equal total volumes force one sheet. Rescale to k.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.1 and 28.2, pp.199–200, 210–212"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§12, pp.59–62"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "cor-bishop-volume-upper-bound",
+        "kind": "corollary",
+        "title": "Bishop volume upper bound",
+        "statement": "Assume AC_omega. Under the Bishop–Gromov hypotheses, vol_g B(p,r)<=V_k-star(r) for every r>0.",
+        "deps": [
+          "thm-bishop-gromov-volume-comparison",
+          "def-model-space-radial-area-and-ball-volume",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-countable-choice"
+        ],
+        "strategy": "Use monotonicity of the ratio and its limit one at zero.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.2 and 28.1, pp.200–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§4–5, pp.15–20"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-volume-doubling-under-a-nonnegative-ricci-lower-bound",
+        "kind": "corollary",
+        "title": "Volume doubling under a nonnegative ricci lower bound",
+        "statement": "Assume AC_omega. Under Ric>=(n-1)k g, vol B(p,2r)<=V_k-star(2r)/V_k-star(r) times vol B(p,r). When k=0, this factor is exactly 2^n; for k<0 it is the displayed scale-dependent model ratio.",
+        "deps": [
+          "thm-bishop-gromov-volume-comparison",
+          "def-model-space-radial-area-and-ball-volume",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-countable-choice",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "lem-power-laws",
+          "def-integer-power"
+        ],
+        "strategy": "Apply Bishop–Gromov at r and 2r and compute the Euclidean model quotient. No uniform 2^n assertion is made for negative k.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.2 and 28.1, pp.200–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§4–5, pp.15–20"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "prop-rigidity-in-bishop-gromov-on-an-interval",
+        "kind": "proposition",
+        "title": "Rigidity in bishop gromov on an interval",
+        "statement": "Assume AC_omega. If the Bishop–Gromov ball-volume ratio is equal at 0<r<R below the positive model endpoint, then the open metric ball B(p,R) is isometric to the open radius-R ball of the simply connected k-space form, provided the radial exponential map has no cut points in that ball. Equality of the ratio alone first forces radial density equality almost everywhere up to R.",
+        "deps": [
+          "thm-bishop-gromov-volume-comparison",
+          "thm-relative-volume-density-comparison",
+          "def-radial-volume-jacobian",
+          "def-model-space-radial-area-and-ball-volume",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-radial-jacobi-tensor",
+          "def-radial-riccati-operator",
+          "thm-radial-riccati-equation",
+          "lem-radial-jacobi-tensor-is-invertible-before-the-first-conjugate-point",
+          "lem-logarithmic-derivative-of-the-radial-volume-jacobian-is-the-distance-laplacian",
+          "thm-bonnet-myers",
+          "cor-polar-integration-may-discard-the-cut-locus",
+          "def-cut-time-in-a-unit-tangent-direction",
+          "lem-minimizing-along-a-geodesic-is-an-initial-interval-property",
+          "thm-exp-p-is-a-diffeomorphism-from-the-open-tangent-cut-domain-onto-m-minus-the-cut-locus-and-p",
+          "thm-differential-of-the-exponential-map-in-terms-of-jacobi-fields",
+          "thm-the-differential-of-exp-p-at-zero-is-the-identity",
+          "prop-tangential-jacobi-fields-are-affine-multiples-of-the-velocity",
+          "prop-curvature-tensor-of-constant-sectional-curvature",
+          "thm-existence-and-uniqueness-of-jacobi-fields-from-initial-data",
+          "prop-round-sphere-model-geometry",
+          "ex-the-round-sphere-has-positive-constant-sectional-curvature",
+          "thm-higher-dimensional-spheres-are-simply-connected",
+          "ex-euclidean-space-has-zero-curvature",
+          "prop-half-space-model-geometry",
+          "thm-euclidean-space-complete",
+          "thm-cartan-hadamard",
+          "thm-hopf-rinow",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "def-ricci-curvature",
+          "def-sectional-curvature",
+          "def-riemann-curvature-four-tensor",
+          "def-cut-point-and-cut-locus-of-a-point",
+          "prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density",
+          "def-riemannian-volume-density",
+          "cor-convex-subsets-of-rn-are-contractible",
+          "lem-contractibility-implies-trivial-fundamental-group",
+          "def-simply-connected",
+          "def-countable-choice"
+        ],
+        "strategy": "Equality of the weighted averages at two radii and monotonicity of each radial density ratio, together with its unit limit at zero, force q_v(t)=1 for almost every direction and all t<R by continuity. Equality in trace Riccati/Cauchy–Schwarz forces S=ct_k I and radial curvature k. With no cut points, Gauss lemma gives the model polar metric and exp_p is an isometry on the open ball.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.2 and 28.1, pp.200–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§4–5, pp.15–20"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-complete-noncompact-manifolds-with-nonnegative-ricci-curvature-have-at-most-euclidean-volume-growth",
+        "kind": "corollary",
+        "title": "Complete noncompact manifolds with nonnegative ricci curvature have at most euclidean volume growth",
+        "statement": "Assume AC_omega. If M is complete connected noncompact n>=2 and Ric>=0, then vol B(p,r)<=omega_(n-1)r^n/n for all r>0.",
+        "deps": [
+          "cor-bishop-volume-upper-bound",
+          "def-model-space-radial-area-and-ball-volume",
+          "def-countable-choice",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "thm-continuous-implies-integrable"
+        ],
+        "strategy": "Take k=0 in the Bishop upper bound and integrate omega_(n-1)t^(n-1). Noncompactness is context, not needed for the inequality.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.2 and 28.1, pp.200–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§4–5, pp.15–20"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "def-comparison-triangle-in-the-two-dimensional-space-form",
+        "kind": "definition",
+        "title": "Comparison triangle in the two dimensional space form",
+        "statement": "Given positive side lengths a,b,c satisfying strict triangle inequalities, define a constant-k comparison triangle with these sides in the complete simply connected two-dimensional k-space form. For k>0 require each side<pi/sqrt(k) and a+b+c<2pi/sqrt(k); the triangle is then unique up to isometry and reflection.",
+        "deps": [
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-constant-sectional-curvature-and-space-form",
+          "def-pointwise-norm-and-angle-from-a-riemannian-metric"
+        ],
+        "strategy": "Use the spherical, Euclidean or hyperbolic cosine law to construct the model angle and check it lies in (0,pi); the positive-curvature restrictions exclude antipodal ambiguity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§25.2, pp.185–188"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§6, pp.21–25"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-first-variation-hinge-derivative-formula",
+        "kind": "lemma",
+        "title": "First variation hinge derivative formula",
+        "statement": "Assume AC_omega. For a smooth one-parameter family of minimizing geodesic segments between moving hinge endpoints, while endpoints avoid the cut relation, the derivative of opposite-side length is the signed endpoint inner-product term; moving an endpoint at unit speed along a hinge leg gives minus the cosine of its included endpoint angle.",
+        "deps": [
+          "thm-first-variation-formula-for-length",
+          "thm-distance-from-p-is-smooth-off-p-and-the-cut-locus",
+          "prop-gradient-of-the-distance-is-the-outward-unit-radial-field-off-the-cut-locus",
+          "prop-gradient-hessian-and-divergence-connection-formulas",
+          "def-countable-choice"
+        ],
+        "strategy": "Apply the published first-variation formula to the minimizing family: geodesic interior terms vanish and the two endpoint boundary terms remain. State the orientation of each terminal tangent before taking the cosine.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§25.2, pp.185–188"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§6, pp.21–25"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-toponogov-distance-support-inequality",
+        "kind": "lemma",
+        "title": "Toponogov distance support inequality",
+        "statement": "Assume AC_omega. Under K>=k and complete connected n>=2, let gamma:[0,L]->M be a minimizing geodesic and o a third point. For the comparison triangle with the three endpoint distances and, if k>0, every side<pi/sqrt(k) and perimeter<2pi/sqrt(k), d(o,gamma(t))>=d(o_tilde,gamma_tilde(t)) for 0<=t<=L.",
+        "deps": [
+          "thm-hessian-comparison-for-distance-under-sectional-curvature-bounds",
+          "def-comparison-triangle-in-the-two-dimensional-space-form",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-constant-sectional-curvature-and-space-form",
+          "thm-distance-from-p-is-smooth-off-p-and-the-cut-locus",
+          "thm-characterization-of-a-cut-point",
+          "def-cut-point-and-cut-locus-of-a-point",
+          "thm-a-geodesic-does-not-minimize-past-its-first-conjugate-point",
+          "thm-a-length-minimizing-piecewise-smooth-curve-is-a-constant-speed-geodesic-up-to-reparametrization",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "thm-hopf-rinow",
+          "thm-riemannian-distance-is-a-metric",
+          "prop-round-sphere-model-geometry",
+          "cor-simply-connected-complete-nonpositively-curved-manifolds-have-unique-geodesics-between-points",
+          "thm-no-conjugate-points-under-nonpositive-sectional-curvature",
+          "prop-gradient-hessian-and-divergence-connection-formulas",
+          "def-countable-choice"
+        ],
+        "strategy": "Follow Eschenburg §6: take f'=sn_k and sigma=f composed with distance to o. Hessian comparison gives Hess sigma<=-k sigma+C on its smooth locus, with equality in the model. Put delta=sigma(gamma)-sigma(model). If delta has a negative value, choose k'>k and a negative solution of a''+k'a=0 lying below delta and touching it at an interior point; the positive model-domain length bound permits this strict barrier. At contact, (delta-a)''<0 contradicts its local minimum. At a cut point replace d(o,.) by d(o,o_epsilon)+d(o_epsilon,.), a smooth upper support touching at the point; its Hessian error tends to zero. Monotonicity of f gives the greater-than distance sign, and continuity handles endpoints.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§25.2, pp.185–188"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§6, pp.21–25"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-toponogov-hinge-comparison",
+        "kind": "theorem",
+        "title": "Toponogov hinge comparison",
+        "statement": "Assume AC_omega. Let M be complete, connected, boundaryless, n>=2, with K>=k. For a minimizing hinge with leg lengths a,b, included angle theta in [0,pi], and opposite endpoint distance c, if k>0 require a,b,c<pi/sqrt(k) and a+b+c<2pi/sqrt(k). Then c is no greater than the opposite side of the constant-k model hinge with the same a,b,theta.",
+        "deps": [
+          "lem-toponogov-distance-support-inequality",
+          "lem-first-variation-hinge-derivative-formula",
+          "def-comparison-triangle-in-the-two-dimensional-space-form",
+          "def-countable-choice",
+          "def-constant-sectional-curvature-and-space-form",
+          "def-pointwise-norm-and-angle-from-a-riemannian-metric",
+          "thm-riemannian-distance-is-a-metric",
+          "thm-hopf-rinow",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "def-cut-point-and-cut-locus-of-a-point",
+          "thm-characterization-of-a-cut-point",
+          "lem-minimizing-along-a-geodesic-is-an-initial-interval-property",
+          "thm-a-geodesic-does-not-minimize-past-its-first-conjugate-point",
+          "thm-a-length-minimizing-piecewise-smooth-curve-is-a-constant-speed-geodesic-up-to-reparametrization",
+          "prop-round-sphere-model-geometry",
+          "thm-cartan-hadamard",
+          "cor-simply-connected-complete-nonpositively-curved-manifolds-have-unique-geodesics-between-points",
+          "thm-no-conjugate-points-under-nonpositive-sectional-curvature",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-hyperbolic-identities-and-derivatives",
+          "def-principal-inverse-sine-and-cosine",
+          "thm-continuous-inverse",
+          "thm-algebra-of-continuous-functions",
+          "thm-sine-and-cosine-derivatives",
+          "cor-differentiable-implies-continuous"
+        ],
+        "strategy": "Form the model triangle with actual side lengths, use the support inequality near the vertex and first variation to get actual angle>=model angle. The model opposite side is strictly increasing in the included angle for nondegenerate legs, so c>c_k(a,b,theta) would force model angle>theta, contradiction. Degenerate angles follow by continuity; print spherical perimeter and antipodal restrictions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§25.2, pp.185–188"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§6, pp.21–25"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "landmark": true,
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-toponogov-triangle-comparison",
+        "kind": "theorem",
+        "title": "Toponogov triangle comparison",
+        "statement": "Assume AC_omega. For a minimizing geodesic triangle in a complete K>=k manifold with an admissible constant-k comparison triangle (positive k: sides<pi/sqrt(k), perimeter<2pi/sqrt(k)), every actual vertex angle is at least its model angle.",
+        "deps": [
+          "thm-toponogov-hinge-comparison",
+          "def-comparison-triangle-in-the-two-dimensional-space-form",
+          "lem-first-variation-hinge-derivative-formula",
+          "def-countable-choice",
+          "def-constant-sectional-curvature-and-space-form",
+          "def-pointwise-norm-and-angle-from-a-riemannian-metric"
+        ],
+        "strategy": "Fix the two incident side lengths at each vertex. The hinge theorem says the opposite actual side is at most the model opposite side for the actual angle; strict monotonicity of the model side in angle forces actual angle>=comparison angle. Treat zero-length or collinear limiting cases separately.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§25.2, pp.185–188"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§6, pp.21–25"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "prop-distance-between-corresponding-side-points-in-toponogov-comparison",
+        "kind": "proposition",
+        "title": "Distance between corresponding side points in toponogov comparison",
+        "statement": "Assume AC_omega. Let a minimizing geodesic triangle in a complete connected boundaryless n>=2 manifold with K>=k have three strict triangle inequalities. If k>0 require each side<pi/sqrt(k) and perimeter<2pi/sqrt(k). For any x,y on two sides issuing from the same vertex, at specified distances s,t from that vertex, d(x,y)>=d(x_tilde,y_tilde) for corresponding points on the constant-k comparison triangle.",
+        "deps": [
+          "thm-toponogov-triangle-comparison",
+          "thm-toponogov-hinge-comparison",
+          "def-comparison-triangle-in-the-two-dimensional-space-form",
+          "thm-hopf-rinow",
+          "def-countable-choice",
+          "def-constant-sectional-curvature-and-space-form",
+          "def-pointwise-norm-and-angle-from-a-riemannian-metric",
+          "thm-riemannian-distance-is-a-metric",
+          "lem-minimizing-along-a-geodesic-is-an-initial-interval-property",
+          "def-principal-inverse-sine-and-cosine",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "prop-round-sphere-model-geometry",
+          "thm-higher-dimensional-spheres-are-simply-connected"
+        ],
+        "strategy": "Use Lang Lemma 5.9 in the lower-curvature convention. Smooth minimizing sides are balanced. Apply angle comparison to the two subtriangles formed by the first selected side point and the opposite vertex; the model angle sum and monotone cosine law give the corresponding point-to-opposite-vertex chord inequality. Repeat for the independently selected point on the second side to obtain d(x,y)>=d(x_tilde,y_tilde) for arbitrary real fractions. Every subtriangle side and perimeter are bounded by the original strict positive-curvature domain, since pairwise distances are bounded by shorter boundary arcs. Endpoints follow directly or by continuity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§25.2, pp.185–188"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§6, pp.21–25"
+            },
+            {
+              "title": "U. Lang, Riemannian Geometry lecture notes",
+              "url": "https://people.math.ethz.ch/~lang/RG.pdf",
+              "locator": "Definition 5.7 and Lemma 5.9, printed pp. 66–67, PDF pp. 70–71"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 9
+      },
+      {
+        "id": "cor-diameter-rigidity-from-toponogov-under-a-sectional-lower-bound",
+        "kind": "corollary",
+        "title": "Diameter rigidity from toponogov under a sectional lower bound",
+        "statement": "Assume AC_omega. If a complete connected n>=2 manifold has K>=k>0 and diameter pi/sqrt(k), then it is isometric to the round sphere of curvature k.",
+        "deps": [
+          "prop-distance-between-corresponding-side-points-in-toponogov-comparison",
+          "thm-toponogov-triangle-comparison",
+          "thm-hopf-rinow",
+          "def-index-form-of-a-geodesic-segment",
+          "thm-second-variation-formula-for-energy",
+          "thm-existence-and-uniqueness-of-jacobi-fields-from-initial-data",
+          "thm-differential-of-the-exponential-map-in-terms-of-jacobi-fields",
+          "thm-gauss-lemma",
+          "cor-polar-form-of-the-metric-in-normal-coordinates",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "thm-metric-completion-unique",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-countable-choice",
+          "def-comparison-triangle-in-the-two-dimensional-space-form",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-constant-sectional-curvature-and-space-form",
+          "def-sectional-curvature",
+          "def-riemann-curvature-four-tensor",
+          "thm-algebraic-symmetries-of-the-riemann-tensor",
+          "thm-polarization-bijection-in-characteristic-not-two",
+          "prop-round-sphere-model-geometry",
+          "ex-the-round-sphere-has-positive-constant-sectional-curvature",
+          "thm-a-length-minimizing-piecewise-smooth-curve-is-a-constant-speed-geodesic-up-to-reparametrization",
+          "thm-exp-p-is-a-diffeomorphism-from-the-open-tangent-cut-domain-onto-m-minus-the-cut-locus-and-p",
+          "def-cut-time-in-a-unit-tangent-direction",
+          "def-cut-point-and-cut-locus-of-a-point",
+          "thm-existence-and-uniqueness-of-parallel-sections",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume",
+          "thm-the-differential-of-exp-p-at-zero-is-the-identity",
+          "def-riemannian-isometry-and-local-isometry",
+          "lem-local-isometries-send-geodesics-to-geodesics",
+          "thm-finite-dimensional-isometry-characterisations",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "lem-punctured-rn-is-polygonally-connected",
+          "def-polygonal-path-and-polygonal-connectedness",
+          "thm-path-connected-implies-connected",
+          "thm-continuous-image-of-a-connected-space",
+          "thm-second-derivative-test",
+          "thm-nonnegative-continuous-with-zero-integral-vanishes",
+          "thm-ftc-second-part",
+          "prop-length-energy-inequality-and-constant-speed-equality-case",
+          "def-energy-of-a-piecewise-smooth-curve",
+          "thm-algebra-of-limits",
+          "thm-sine-and-cosine-derivatives",
+          "cor-differentiable-implies-continuous",
+          "def-principal-inverse-sine-and-cosine",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral",
+          "thm-riemannian-distance-is-a-metric",
+          "def-metric-bounded-diameter",
+          "thm-extreme-value-metric"
+        ],
+        "strategy": "Derive Lang's endpoint perimeter bound without using comparison at an excluded equality case. Let D=pi/sqrt(k). If a minimizing triangle had perimeter P>2D, set k_*=(2pi/P)^2<k and choose k'<k_* close to k_*. The triangle lies in the strict k' comparison domain. Choose a point on one side whose distance from an adjacent vertex plus the other adjacent side is P/2; the corresponding model chord tends to P/2 as k' increases to k_*. The preceding side-point proposition would give an actual chord at least P/2>D, contradicting the diameter. Thus every triangle perimeter is at most 2D. Choose diametral p,q by Hopf-Rinow. For every x, triangle inequality and the perimeter bound force d(p,x)+d(x,q)=D, so every radial geodesic from p remains minimizing to q at time D and minimizing segments are unique by geodesic initial-value uniqueness. Scale k to one. Along any radial geodesic of length pi, fixed-endpoint energy minimality and the second-variation formula make the index form nonnegative; test it with V(t)=sin(t)E(t) for a parallel unit normal E. The sectional bound gives 0<=I(V,V)<=integral_0^pi(cos²t−sin²t)dt=0, so every radial sectional curvature is exactly one. The Jacobi equation, differential of exp, and Gauss lemma give the round polar metric dr²+sin²(r)g_{S^{n−1}} on M\\{q}; uniqueness and Hopf-Rinow make exp_p a global isometry there. Complete both punctured spaces to obtain the round sphere, then rescale. This is the Toponogov-specific sectional route; Cheng remains a separate in-batch theorem. The full source and axiom audit are in research/frontier-37-owner-30-step1-toponogov-repair.md.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§25.2, pp.185–188"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§6, pp.21–25"
+            },
+            {
+              "title": "U. Lang, Riemannian Geometry lecture notes",
+              "url": "https://people.math.ethz.ch/~lang/RG.pdf",
+              "locator": "Theorem 5.17 and proof, printed p. 71, PDF p. 75; the local endpoint limit and radial equality are reconstructed in the owner repair note"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 10
+      },
+      {
+        "id": "rem-alexandrov-and-differentiable-sphere-theorems",
+        "kind": "remark",
+        "title": "Alexandrov and differentiable sphere theorems",
+        "statement": "Alexandrov curvature bounds, Grove–Shiohama and quarter-pinched differentiable sphere theorems, and stability theory need extra topology and are deferred. No such result is a dependency of this page.",
+        "deps": [
+          "thm-toponogov-triangle-comparison",
+          "thm-toponogov-hinge-comparison",
+          "thm-cheng-maximal-diameter-rigidity"
+        ],
+        "strategy": "Mark exact limits of scope; no proof or recorded deep result is consumed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§25.2, pp.185–188"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§6, pp.21–25"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "fs-higher-sectional-curvature-makes-jacobi-fields-spread-faster",
+        "kind": "false-statement",
+        "title": "Higher sectional curvature makes jacobi fields spread faster",
+        "statement": "False claim: higher sectional curvature makes initially equal radial normal Jacobi fields longer.",
+        "deps": [
+          "thm-rauch-comparison-theorem-first-form",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-constant-sectional-curvature-and-space-form",
+          "prop-curvature-tensor-of-constant-sectional-curvature",
+          "def-jacobi-field",
+          "thm-existence-and-uniqueness-of-parallel-sections",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume",
+          "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+          "cor-mean-value-theorem",
+          "def-sine-and-cosine-by-power-series",
+          "def-countable-choice"
+        ],
+        "strategy": "In curvature k>0 the radial normal field has norm sn_k(t)<t, whereas in flat space its counterpart has norm t for 0<t<pi/sqrt(k).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§24.2, 25.3, 26.2, pp.176–177, 188–189, 194–197"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§3, pp.12–14"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "fs-cartan-hadamard-says-exp-p-is-injective-without-simple-connectedness",
+        "kind": "false-statement",
+        "title": "Cartan hadamard says exp p is injective without simple connectedness",
+        "statement": "Assume AC_omega. False claim: completeness and K<=0 alone make exp_p globally injective.",
+        "deps": [
+          "thm-cartan-hadamard",
+          "thm-a-complete-local-isometry-is-a-covering-map",
+          "def-countable-choice",
+          "prop-flat-torus-model-geometry",
+          "cor-fundamental-group-of-two-dimensional-torus",
+          "prop-christoffel-formula-for-the-levi-civita-connection",
+          "prop-coordinate-formula-for-the-curvature-tensor",
+          "def-sectional-curvature",
+          "def-riemann-curvature-four-tensor",
+          "thm-hopf-rinow",
+          "def-two-dimensional-torus",
+          "lem-pullback-metric-on-a-cover-of-a-complete-manifold-is-complete"
+        ],
+        "strategy": "Take the flat quotient R^2/Z^2 with the descended Euclidean metric. Its tangent exponential identifies vectors differing by lattice vectors; Cartan–Hadamard correctly says covering, not injectivity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§20.1 and 24.3, pp.147–149, 178–179"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§5, pp.17–19"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "fs-positive-ricci-curvature-without-a-uniform-lower-bound-implies-compactness",
+        "kind": "false-statement",
+        "title": "Positive ricci curvature without a uniform lower bound implies compactness",
+        "statement": "Assume AC_omega. False claim: pointwise positive Ricci curvature on a complete manifold implies compactness.",
+        "deps": [
+          "thm-bonnet-myers",
+          "def-ricci-curvature",
+          "prop-euclidean-hypersurface-sectional-curvature-from-principal-curvatures",
+          "def-countable-choice",
+          "def-sectional-curvature",
+          "def-shape-operator",
+          "def-principal-curvatures-gaussian-curvature-and-mean-curvature-of-an-oriented-hypersurface",
+          "def-induced-connection-and-second-fundamental-form",
+          "prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold",
+          "lem-the-graph-of-a-continuous-map-into-a-hausdorff-space-is-closed",
+          "cor-a-closed-embedded-submanifold-of-a-complete-riemannian-manifold-is-complete-in-the-induced-metric",
+          "thm-euclidean-space-complete",
+          "def-complete-metric-space",
+          "def-metric-compactness",
+          "def-infimum",
+          "cor-rn-is-polygonally-connected-and-locally-path-connected",
+          "thm-path-connected-implies-connected",
+          "thm-continuous-image-of-a-connected-space",
+          "lem-ricci-curvature-is-symmetric-and-basis-independent",
+          "thm-algebraic-symmetries-of-the-riemann-tensor",
+          "def-riemann-curvature-four-tensor"
+        ],
+        "strategy": "The paraboloid z=x^2+y^2 is a complete noncompact surface with Gaussian and Ricci curvature 4/(1+4r^2)^2>0, tending to zero. Its induced metric dominates the Euclidean base metric, giving completeness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.1 and 28.2, pp.199–200, 210–212"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§12, pp.59–62"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "fs-bishop-gromov-volume-ratio-is-nondecreasing-under-a-ricci-lower-bound",
+        "kind": "false-statement",
+        "title": "Bishop gromov volume ratio is nondecreasing under a ricci lower bound",
+        "statement": "Assume AC_omega. False claim: under Ric>=(n-1)k, the Bishop–Gromov ball-volume ratio is nondecreasing.",
+        "deps": [
+          "thm-bishop-gromov-volume-comparison",
+          "def-model-space-radial-area-and-ball-volume",
+          "def-countable-choice",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "ex-the-round-sphere-has-positive-constant-sectional-curvature",
+          "prop-round-sphere-model-geometry",
+          "prop-curvature-tensor-of-constant-sectional-curvature",
+          "def-ricci-curvature",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density",
+          "def-riemannian-volume-density",
+          "def-metric-bounded-diameter"
+        ],
+        "strategy": "On a round sphere of curvature 1 take k=0. The volume ratio tends to one near zero and to zero as r grows without bound after the manifold volume saturates.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.2 and 28.1, pp.200–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§4–5, pp.15–20"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model",
+        "kind": "false-statement",
+        "title": "A section curvature lower bound makes triangles thinner than the model",
+        "statement": "Assume AC_omega. False claim: K>=k makes fixed-side triangles thinner than their k-model triangles.",
+        "deps": [
+          "thm-toponogov-triangle-comparison",
+          "def-comparison-triangle-in-the-two-dimensional-space-form",
+          "def-countable-choice",
+          "ex-the-round-sphere-has-positive-constant-sectional-curvature",
+          "cor-euclidean-spheres-are-path-connected",
+          "ex-great-circles-as-round-sphere-geodesics",
+          "prop-round-sphere-model-geometry",
+          "ex-the-round-metric-on-the-sphere-as-an-induced-metric",
+          "def-pointwise-norm-and-angle-from-a-riemannian-metric",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "def-principal-inverse-sine-and-cosine"
+        ],
+        "strategy": "A small spherical equilateral triangle with k=0 has angles strictly greater than pi/3 by its positive spherical excess; fixed-side triangles are thicker in the lower-curvature convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§25.2, pp.185–188"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§6, pp.21–25"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 9
+      },
+      {
+        "id": "fs-the-laplace-beltrami-definition-licenses-the-use-of-all-euclidean-harmonic-function-theory-on-manifolds",
+        "kind": "false-statement",
+        "title": "The laplace beltrami definition licenses the use of all euclidean harmonic function theory on manifolds",
+        "statement": "Assume AC_omega. False claim: defining Delta=div grad makes every Euclidean harmonic-function conclusion valid unchanged on all Riemannian manifolds.",
+        "deps": [
+          "def-laplace-beltrami-operator-as-trace-of-the-hessian",
+          "thm-riemannian-divergence-theorem",
+          "def-countable-choice",
+          "prop-gradient-hessian-and-divergence-connection-formulas",
+          "def-riemannian-gradient",
+          "def-riemannian-divergence",
+          "def-riemannian-volume-density",
+          "def-laplacian-of-a-c2-function",
+          "prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density",
+          "thm-nonnegative-continuous-with-zero-integral-vanishes",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "cor-euclidean-spheres-are-path-connected",
+          "ex-the-round-sphere-has-positive-constant-sectional-curvature"
+        ],
+        "strategy": "On a compact connected sphere, a smooth harmonic function has integral |grad f|^2=integral div(f grad f)=0 and so is constant. Euclidean space has nonconstant linear harmonic functions. Geometry and boundary/compactness hypotheses matter.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§26.1–26.2 and 28.1, pp.191–197, 205–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§2–4, pp.6–16"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      }
+    ]
+  },
+  {
+    "order": 488,
+    "id": "riemannian-comparison-theorems-examples",
+    "kind": "B",
+    "category": "differential-geometry",
+    "title": "Riemannian Comparison Theorems — Examples",
+    "companion": "riemannian-comparison-theorems",
+    "requires": [
+      "riemannian-comparison-theorems"
+    ],
+    "items": [
+      {
+        "id": "ex-model-jacobi-fields-in-positive-zero-and-negative-curvature",
+        "kind": "example",
+        "title": "Model jacobi fields in positive zero and negative curvature",
+        "statement": "In k-space forms, a radial normal field with initial derivative E has J(t)=sn_k(t)P_tE; the three signs give sine, linear and hyperbolic-sine separation.",
+        "deps": [
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-radial-jacobi-tensor",
+          "def-constant-sectional-curvature-and-space-form",
+          "prop-curvature-tensor-of-constant-sectional-curvature",
+          "prop-half-space-model-geometry",
+          "prop-round-sphere-model-geometry",
+          "def-countable-choice",
+          "def-parallel-section-along-a-curve",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume",
+          "def-jacobi-field",
+          "def-covariant-derivative-along-a-curve"
+        ],
+        "strategy": "Insert constant curvature R(J,T)T=kJ into the Jacobi equation and solve with J(0)=0, J prime(0)=E. Check signs directly.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§24.1, pp.173–176"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§2, pp.6–11"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-rauch-comparison-between-euclidean-and-spherical-geodesics",
+        "kind": "example",
+        "title": "Rauch comparison between euclidean and spherical geodesics",
+        "statement": "Assume AC_omega. For equal unit normal initial derivatives, the unit sphere field has length sin t and the Euclidean field length t, so sin t<=t on 0<=t<=pi; the inequality is strict in the interior.",
+        "deps": [
+          "thm-rauch-comparison-theorem-first-form",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-countable-choice",
+          "def-constant-sectional-curvature-and-space-form",
+          "prop-curvature-tensor-of-constant-sectional-curvature",
+          "def-jacobi-field",
+          "thm-existence-and-uniqueness-of-parallel-sections",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume",
+          "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+          "cor-mean-value-theorem",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-sine-and-cosine-by-power-series"
+        ],
+        "strategy": "Use explicit model Jacobi solutions, compare with the first Rauch direction, and note the spherical first zero at pi.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§24.2, 25.3, 26.2, pp.176–177, 188–189, 194–197"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§3, pp.12–14"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-distance-hessian-and-laplacian-in-space-forms",
+        "kind": "example",
+        "title": "Distance hessian and laplacian in space forms",
+        "statement": "Assume AC_omega. Off the pole and cut locus of an n-dimensional k-space form, Hess r=ct_k(r)(g-dr tensor dr) and Delta r=(n-1)ct_k(r), with r below the positive model endpoint.",
+        "deps": [
+          "thm-hessian-comparison-for-distance-under-sectional-curvature-bounds",
+          "thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-countable-choice",
+          "def-constant-sectional-curvature-and-space-form",
+          "thm-hopf-rinow",
+          "def-sectional-curvature",
+          "def-riemann-curvature-four-tensor",
+          "prop-curvature-tensor-of-constant-sectional-curvature",
+          "thm-exp-p-is-a-diffeomorphism-from-the-open-tangent-cut-domain-onto-m-minus-the-cut-locus-and-p",
+          "prop-gradient-of-the-distance-is-the-outward-unit-radial-field-off-the-cut-locus",
+          "def-riemannian-gradient",
+          "prop-hessian-of-distance-in-terms-of-radial-jacobi-fields",
+          "cor-hessian-is-symmetric",
+          "thm-distance-from-p-is-smooth-off-p-and-the-cut-locus",
+          "def-laplace-beltrami-operator-as-trace-of-the-hessian",
+          "def-ricci-curvature",
+          "lem-ricci-curvature-is-symmetric-and-basis-independent",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "ex-the-round-sphere-has-positive-constant-sectional-curvature",
+          "cor-compact-riemannian-manifolds-are-geodesically-complete",
+          "prop-round-sphere-model-geometry",
+          "ex-euclidean-space-has-zero-curvature",
+          "thm-euclidean-space-complete",
+          "prop-half-space-model-geometry",
+          "ex-cartan-hadamard-for-hyperbolic-space"
+        ],
+        "strategy": "Differentiate the model radial Jacobi tensor sn_k I and take its normal trace. This tests both Hessian and Laplacian comparison signs.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§26.1–26.2 and 28.1, pp.191–197, 205–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§2–4, pp.6–16"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-cartan-hadamard-for-hyperbolic-space",
+        "kind": "example",
+        "title": "Cartan hadamard for hyperbolic space",
+        "statement": "Assume AC_omega. The hyperboloid model H^n has K=-1, is complete and simply connected, and exp_p is a global diffeomorphism, as Cartan–Hadamard predicts.",
+        "deps": [
+          "thm-cartan-hadamard",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-countable-choice",
+          "thm-a-regular-level-set-is-an-embedded-submanifold",
+          "def-tangent-space-to-a-regular-level-set",
+          "prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure",
+          "prop-pullback-of-covariant-tensors-is-smooth-and-functorial",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-fundamental-theorem-of-riemannian-geometry",
+          "prop-coordinate-formula-for-the-lie-bracket",
+          "thm-clairaut-schwarz-mixed-partials",
+          "def-sectional-curvature",
+          "def-riemann-curvature-four-tensor",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "prop-affine-reparametrization-of-a-geodesic-is-a-geodesic",
+          "thm-hopf-rinow",
+          "cor-convex-subsets-of-rn-are-contractible",
+          "lem-contractibility-implies-trivial-fundamental-group",
+          "def-simply-connected",
+          "thm-path-connected-implies-connected"
+        ],
+        "strategy": "Compute geodesics cosh(t)p+sinh(t)v in the hyperboloid model, verify completeness and invertibility from the explicit formula; the curvature sign follows from its shape operator.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§20.1 and 24.3, pp.147–149, 178–179"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§5, pp.17–19"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-a-flat-torus-showing-simple-connectedness-is-needed-for-global-exp-injectivity",
+        "kind": "example",
+        "title": "A flat torus showing simple connectedness is needed for global exp injectivity",
+        "statement": "Assume AC_omega. The flat torus R^n/Z^n, n>=2, is complete with K=0; exp at any point is the quotient map on T_pM and is not injective.",
+        "deps": [
+          "thm-cartan-hadamard",
+          "thm-a-complete-local-isometry-is-a-covering-map",
+          "def-countable-choice",
+          "prop-flat-torus-model-geometry",
+          "prop-christoffel-formula-for-the-levi-civita-connection",
+          "prop-coordinate-geodesic-equation",
+          "prop-coordinate-formula-for-the-curvature-tensor",
+          "def-sectional-curvature",
+          "def-riemann-curvature-four-tensor",
+          "def-riemannian-isometry-and-local-isometry",
+          "thm-euclidean-space-complete",
+          "thm-homotopy-lifting-for-covering-maps",
+          "thm-path-lifting-for-covering-maps",
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "def-based-loops-and-fundamental-group",
+          "thm-fundamental-group-laws",
+          "def-simply-connected"
+        ],
+        "strategy": "Descend the Euclidean metric through translations. Straight lines project to geodesics and vectors differing by a lattice vector have one endpoint; the covering is nontrivial.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§20.1 and 24.3, pp.147–149, 178–179"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§5, pp.17–19"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-bonnet-myers-for-the-round-sphere",
+        "kind": "example",
+        "title": "Bonnet myers for the round sphere",
+        "statement": "Assume AC_omega. The round sphere of radius 1/sqrt(k), n>=2, has Ric=(n-1)k g and diameter pi/sqrt(k), attaining Bonnet–Myers equality.",
+        "deps": [
+          "thm-bonnet-myers",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "prop-curvature-tensor-of-constant-sectional-curvature",
+          "def-countable-choice",
+          "def-constant-sectional-curvature-and-space-form",
+          "def-ricci-curvature",
+          "lem-ricci-curvature-is-symmetric-and-basis-independent",
+          "def-sectional-curvature",
+          "def-riemann-curvature-four-tensor",
+          "ex-the-round-sphere-has-positive-constant-sectional-curvature",
+          "prop-round-sphere-model-geometry",
+          "ex-great-circles-as-round-sphere-geodesics",
+          "def-cut-time-in-a-unit-tangent-direction",
+          "def-metric-bounded-diameter",
+          "cor-compact-riemannian-manifolds-are-geodesically-complete",
+          "def-riemannian-distance-on-a-connected-manifold"
+        ],
+        "strategy": "Trace constant sectional curvature to get Ric, and compute the antipodal distance by great-circle arcs.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.1 and 28.2, pp.199–200, 210–212"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§12, pp.59–62"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-bishop-gromov-ratio-is-constant-in-the-model-space",
+        "kind": "example",
+        "title": "Bishop gromov ratio is constant in the model space",
+        "statement": "Assume AC_omega. For the simply connected k-space form, its ball volume is V_k-star(r), hence its Bishop–Gromov ratio is one at every positive radius, with saturation past the spherical endpoint.",
+        "deps": [
+          "thm-bishop-gromov-volume-comparison",
+          "def-model-space-radial-area-and-ball-volume",
+          "def-radial-volume-jacobian",
+          "def-countable-choice",
+          "cor-polar-integration-may-discard-the-cut-locus",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "def-borel-sigma-algebra",
+          "def-radial-jacobi-tensor",
+          "ex-model-jacobi-fields-in-positive-zero-and-negative-curvature",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "def-constant-sectional-curvature-and-space-form",
+          "def-cut-time-in-a-unit-tangent-direction",
+          "lem-minimizing-along-a-geodesic-is-an-initial-interval-property",
+          "thm-cartan-hadamard",
+          "thm-hopf-rinow",
+          "prop-round-sphere-model-geometry",
+          "ex-the-round-sphere-has-positive-constant-sectional-curvature",
+          "ex-distance-hessian-and-laplacian-in-space-forms"
+        ],
+        "strategy": "Use the polar Jacobian sn_k^(n-1) up to cut time; integrate and apply the terminal convention for the sphere.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.2 and 28.1, pp.200–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§4–5, pp.15–20"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-volume-growth-in-euclidean-and-hyperbolic-space",
+        "kind": "example",
+        "title": "Volume growth in euclidean and hyperbolic space",
+        "statement": "Assume AC_omega. Euclidean n-space has V_0(r)=omega_(n-1)r^n/n, while curvature -a^2 hyperbolic n-space has volume omega_(n-1) integral_0^r(sinh(at)/a)^(n-1)dt and exponential large-r growth for n>=2.",
+        "deps": [
+          "def-model-space-radial-area-and-ball-volume",
+          "thm-bishop-gromov-volume-comparison",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-countable-choice",
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "cor-polar-integration-may-discard-the-cut-locus",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "def-borel-sigma-algebra",
+          "def-radial-jacobi-tensor",
+          "def-radial-volume-jacobian",
+          "ex-model-jacobi-fields-in-positive-zero-and-negative-curvature",
+          "def-cut-time-in-a-unit-tangent-direction",
+          "lem-minimizing-along-a-geodesic-is-an-initial-interval-property",
+          "thm-cartan-hadamard",
+          "thm-hopf-rinow",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "thm-continuous-implies-integrable",
+          "def-hyperbolic-functions",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "cor-two-less-than-e-less-than-three",
+          "thm-monotonicity-of-the-integral",
+          "thm-additivity-over-subintervals",
+          "ex-euclidean-space-has-zero-curvature",
+          "thm-euclidean-space-complete",
+          "prop-half-space-model-geometry",
+          "ex-distance-hessian-and-laplacian-in-space-forms"
+        ],
+        "strategy": "Insert the two model sine functions into the polar area formula and compare sinh(at) with e^(at)/2 at large t.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.2 and 28.1, pp.200–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§4–5, pp.15–20"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-toponogov-comparison-on-a-round-sphere",
+        "kind": "example",
+        "title": "Toponogov comparison on a round sphere",
+        "statement": "Assume AC_omega. On a round sphere of curvature k, every admissible minimizing triangle is its own constant-k comparison triangle, and all hinge, angle and side-point inequalities become equalities.",
+        "deps": [
+          "thm-toponogov-hinge-comparison",
+          "thm-toponogov-triangle-comparison",
+          "def-comparison-triangle-in-the-two-dimensional-space-form",
+          "def-countable-choice",
+          "prop-round-sphere-model-geometry",
+          "ex-the-round-sphere-has-positive-constant-sectional-curvature",
+          "def-constant-sectional-curvature-and-space-form",
+          "def-pointwise-norm-and-angle-from-a-riemannian-metric",
+          "def-riemannian-distance-on-a-connected-manifold",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-sine-and-cosine-addition-formulas",
+          "def-principal-inverse-sine-and-cosine",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-riemannian-isometry-and-local-isometry",
+          "cor-riemannian-isometries-preserve-length-and-distance"
+        ],
+        "strategy": "Identify the surface with the model itself, use the spherical cosine law and verify each distance and angle directly; the side-point check is diagnostic, not a proof of its general theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§25.2, pp.185–188"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§6, pp.21–25"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "cex-positive-sectional-curvature-with-no-fixed-lower-bound-on-a-noncompact-manifold",
+        "kind": "counterexample",
+        "title": "Positive sectional curvature with no fixed lower bound on a noncompact manifold",
+        "statement": "Assume AC_omega. The paraboloid z=x^2+y^2 in Euclidean R^3 is complete, noncompact, and has sectional curvature K(r)=4/(1+4r^2)^2>0 with infimum zero.",
+        "deps": [
+          "def-sectional-curvature",
+          "prop-euclidean-hypersurface-sectional-curvature-from-principal-curvatures",
+          "def-countable-choice",
+          "def-shape-operator",
+          "def-principal-curvatures-gaussian-curvature-and-mean-curvature-of-an-oriented-hypersurface",
+          "def-induced-connection-and-second-fundamental-form",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "def-riemannian-distance-on-a-connected-manifold",
+          "prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold",
+          "lem-the-graph-of-a-continuous-map-into-a-hausdorff-space-is-closed",
+          "cor-a-closed-embedded-submanifold-of-a-complete-riemannian-manifold-is-complete-in-the-induced-metric",
+          "thm-euclidean-space-complete",
+          "def-complete-metric-space",
+          "def-metric-compactness",
+          "def-infimum"
+        ],
+        "strategy": "Compute first and second fundamental forms of the graph: det Hess f/(1+|grad f|^2)^2=4/(1+4r^2)^2. The induced metric dominates the Euclidean plane metric and its graph projection is proper, yielding completeness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§27.1 and 28.2, pp.199–200, 210–212"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§12, pp.59–62"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cex-ricci-lower-bound-does-not-control-every-sectional-curvature-in-dimension-at-least-three",
+        "kind": "counterexample",
+        "title": "Ricci lower bound does not control every sectional curvature in dimension at least three",
+        "statement": "Assume AC_omega. For n>=3 the product H^2(-1) x R^(n-2) has Ric>=-g=(n-1)k g for k=-1/(n-1), but a plane tangent to H^2 has sectional curvature -1<k.",
+        "deps": [
+          "def-ricci-curvature",
+          "def-sectional-curvature",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "def-countable-choice",
+          "def-riemann-curvature-four-tensor",
+          "lem-ricci-curvature-is-symmetric-and-basis-independent",
+          "prop-half-space-model-geometry",
+          "ex-euclidean-space-has-zero-curvature",
+          "thm-euclidean-space-complete",
+          "prop-a-riemannian-product-is-complete-iff-each-factor-is-complete",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "thm-canonical-tangent-and-cotangent-splittings-for-products",
+          "prop-coordinate-criterion-for-a-riemannian-metric",
+          "thm-fundamental-theorem-of-riemannian-geometry",
+          "prop-christoffel-formula-for-the-levi-civita-connection",
+          "prop-connection-laws-in-directional-form",
+          "prop-coordinate-formula-for-the-curvature-tensor",
+          "thm-curvature-is-a-type-one-three-tensor"
+        ],
+        "strategy": "The product Levi-Civita connection splits, so mixed curvature is zero and the H^2 factor has K=-1; tracing gives Ric eigenvalues -1,-1,0,...,0. The product is complete and gives the required failure in every n>=3.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§§26.1–26.2 and 28.1, pp.191–197, 205–209"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§§2–4, pp.6–16"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-equality-cases-as-diagnostics-for-all-comparison-signs",
+        "kind": "example",
+        "title": "Equality cases as diagnostics for all comparison signs",
+        "statement": "Assume AC_omega. In constant-k models the Jacobi, Hessian, Laplacian, volume and Toponogov comparisons are equalities; in the flat-versus-positive and flat-versus-negative models their strict signs follow from the explicit sn_k formulas. This diagnostic example is never a dependency.",
+        "deps": [
+          "def-comparison-sine-cosine-and-cotangent-functions",
+          "prop-model-functions-solve-the-constant-curvature-jacobi-equation",
+          "def-constant-sectional-curvature-and-space-form",
+          "def-comparison-triangle-in-the-two-dimensional-space-form",
+          "def-model-space-radial-area-and-ball-volume",
+          "thm-rauch-comparison-theorem-first-form",
+          "thm-hessian-comparison-for-distance-under-sectional-curvature-bounds",
+          "thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound",
+          "thm-bishop-gromov-volume-comparison",
+          "thm-toponogov-hinge-comparison",
+          "thm-toponogov-triangle-comparison",
+          "ex-model-jacobi-fields-in-positive-zero-and-negative-curvature",
+          "ex-distance-hessian-and-laplacian-in-space-forms",
+          "ex-bishop-gromov-ratio-is-constant-in-the-model-space",
+          "cor-complex-trigonometric-and-hyperbolic-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-hyperbolic-identities-and-derivatives",
+          "thm-tangent-cotangent-secant-cosecant-derivatives-and-periods",
+          "def-countable-choice"
+        ],
+        "strategy": "Check sn_k, ct_k and V_k formulas directly and compare the spherical, Euclidean and hyperbolic cosine laws. The example tests direction conventions but supplies no later proof.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry (2025)",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "§25.2, pp.185–188"
+            },
+            {
+              "title": "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry",
+              "url": "https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf",
+              "locator": "§6, pp.21–25"
+            }
+          ]
+        },
+        "dependency_level": 9
+      }
+    ]
+  }
+]

@@ -640,8 +640,9 @@ dependency is required.
 **A page:** `the-branching-rule-and-the-young-graph`
 
 **Requires:** RG-8–RG-9; finite induction and Frobenius reciprocity from
-abstract algebra.  The Schur–Weyl interface cites `RL-n` only where the
-$GL(V)$/$\mathfrak{gl}(V)$ factor enters.
+abstract algebra.  RG-10 proves the finite-dimensional complex
+$GL(V)$/$\mathfrak{gl}(V)$ Schur–Weyl interface locally; no Lie-track output is
+a prerequisite.
 
 **Source backing read:** Chan §4 (branching filtration) and §6, pp. 18–19 and
 24–26; Craven §§2.2 and 2.4, pp. 21–24 and 28–32; Etingof et al.
@@ -661,17 +662,49 @@ $GL(V)$/$\mathfrak{gl}(V)$ factor enters.
 | `lem-semistandard-homomorphisms-are-independent-and-dominance-triangular` (lemma) | The source's semistandard maps are independent and vanish outside dominance. | Supplies the triangularity step of Young's rule. | literature-derived | literature-derived |
 | `thm-youngs-rule-for-permutation-modules` (theorem) | $[M^\mu:S^\lambda]=K_{\lambda\mu}$ over $\mathbb C$. | Computes the permutation-module decomposition. | literature-derived | literature-derived |
 | `def-commuting-symmetric-and-linear-actions-on-tensor-power` (definition) | $S_n$ permutes tensor places using $\sigma^{-1}$ and $GL(V)$ acts diagonally. | Fixes the left-action convention for Schur–Weyl. | literature-derived | not-applicable |
-| `lem-tensor-place-operators-span-the-symmetric-centralizer` (lemma) | Polarization and matrix units generate the commutant required in finite tensor degree. | Splits the long double-centralizer proof. | literature-derived | literature-derived |
-| `thm-schur-weyl-double-centralizer` (theorem) | The images of $\mathbb C[S_n]$ and $GL(V)$ on $V^{\otimes n}$ are mutual centralizers, with the precise finite-dimensional hypotheses. | Connects symmetric-group multiplicities to the concurrent Lie-algebra block. | literature-derived | literature-derived |
-| `thm-schur-weyl-decomposition-with-length-cutoff` (theorem) | $V^{\otimes n}$ decomposes over $\ell(\lambda)\le\dim V$ as the $S^\lambda$ factor tensored with the corresponding polynomial $GL(V)$/$\mathfrak{gl}(V)$ factor. | Records the interface: RG owns the $S_n$ side; `RL-n` supplies the Lie-algebra side. | literature-derived | literature-derived |
-| `lem-schur-weyl-length-cutoff-by-column-antisymmetrization` (lemma) | Column antisymmetrization vanishes for more than $\dim V$ rows and is nonzero at the allowed boundary. | Justifies the indexing condition. | literature-derived | literature-derived |
+| `lem-tensor-place-operators-span-the-symmetric-centralizer` (lemma) | For finite-dimensional complex $V$, $\operatorname{End}_{S_n}(V^{\otimes n})$ is, as a vector space, $\operatorname{Sym}^n(\operatorname{End}V)$; it is spanned by diagonal $g^{\otimes n}$, $g\in GL(V)$, and is the image of diagonal $U(\mathfrak{gl}(V))$. Polarization/Newton identities prove these equalities. | Identifies the group and Lie algebra actions with the full commutant needed for double centralization. | literature-derived | literature-derived |
+| `thm-schur-weyl-double-centralizer` (theorem) | For finite-dimensional complex $V$, the image of $\mathbb C[S_n]$ and the linear span of diagonal $GL(V)$ operators on $V^{\otimes n}$ are mutual centralizers; this span is also the image of diagonal $U(\mathfrak{gl}(V))$. | Makes the double-centralizer theorem apply to both the group and Lie algebra actions. | literature-derived | literature-derived |
+| `thm-schur-weyl-decomposition-with-length-cutoff` (theorem) | $V^{\otimes n}\cong\bigoplus_{\lambda\vdash n,\,\ell(\lambda)\le d}S^\lambda\otimes\operatorname{Hom}_{S_n}(S^\lambda,V^{\otimes n})$, where $d=\dim V$; each multiplicity factor is a nonzero irreducible homogeneous polynomial $GL(V)$/$\mathfrak{gl}(V)$ module of degree $n$, pairwise inequivalent, with highest weight $\lambda$ padded by zeros to $d$ parts for the upper-triangular Borel. | Gives the complete type-$A$ linear-group interface from the mutual centralizers and the local tableau construction. | literature-derived | literature-derived |
+| `lem-schur-weyl-length-cutoff-by-column-antisymmetrization` (lemma) | $\operatorname{Hom}_{S_n}(S^\lambda,V^{\otimes n})\ne0$ exactly when $\ell(\lambda)\le d$: a column of length $d+1$ antisymmetrizes to zero, while row-labelled basis tensors give a nonzero Specht map when every column has length at most $d$. | Proves both directions of the indexing cutoff and supplies the highest-weight vector. | literature-derived | literature-derived |
 
 **Hard proof plan.**  Build restriction as a filtration first and invoke
 Maschke only for the complex direct-sum corollary.  Derive induction branching
 by the already-owned reciprocity theorem.  For Young's rule, construct and
-triangularize the semistandard maps.  For Schur–Weyl, prove commuting actions
-and the tensor-operator centralizer lemma here; cite the actual `RL-n` output
-for the irreducibility/highest-weight description of the linear-group factor.
+triangularize the semistandard maps.  For Schur–Weyl, put
+$E=V^{\otimes n}$, $A=\operatorname{im}\mathbb C[S_n]$, and
+$B=\operatorname{End}_A(E)$.  Identify the conjugation-fixed subspace
+$\operatorname{End}(E)^{S_n}$ with $\operatorname{Sym}^n(\operatorname{End}V)$;
+polarization spans it by $T^{\otimes n}$, and interpolation in
+$(tI+T)^{\otimes n}$ replaces each $T$ by a linear combination of invertible
+diagonal $GL(V)$ operators.  Newton identities (equivalently the tensor-place
+operator argument of Etingof §4.18) identify the same algebra with the image
+of $U(\mathfrak{gl}(V))$.  Maschke and double centralization then give
+$E\cong\bigoplus_{\lambda\vdash n}S^\lambda\otimes M_\lambda$, with
+$M_\lambda=\operatorname{Hom}_{S_n}(S^\lambda,E)$; the full matrix blocks of
+$B$ make the nonzero $M_\lambda$ irreducible and pairwise inequivalent for
+both actions.
+
+For the exact cutoff and highest weight, fix a basis $e_1,\ldots,e_d$ and a
+tableau $t$ of shape $\lambda$.  Let $w_t$ have factor $e_i$ in each tensor
+place labelled by row $i$, and map a row tabloid $\{\sigma t\}$ to
+$\sigma w_t$.  This is a well-defined $S_n$-map from the Young permutation
+module, and on the polytabloid $e_t=\kappa_t\{t\}$ its value is
+$\kappa_t w_t$.  If $\ell(\lambda)\le d$, every column of $w_t$ has distinct
+basis labels, so this value is nonzero and embeds $S^\lambda$ into $E$.  If
+$\ell(\lambda)>d$, the first-column antisymmetrizer is zero on $E$; any
+embedding $f:S^\lambda\to E$ would have
+$\kappa_t f(e_t)=|C_t|f(e_t)\ne0$, a contradiction.  Thus the multiplicity
+factor is nonzero exactly at the stated cutoff.  The nonzero vector
+$\kappa_t w_t$ has weight $\lambda$ and is killed by every raising operator
+$E_{ij}$ ($i<j$): each replacement of an $e_j$ by $e_i$ collides with the
+existing $e_i$ in the same column and is killed by column antisymmetrization.
+In the double-centralizer decomposition, the equivariant map
+$S^\lambda\to E$ has the form $x\mapsto x\otimes m$ for some nonzero
+$m\in M_\lambda$, so the weight and raising-operator calculation says that
+$m$ is a highest-weight vector of weight $\lambda$ for the upper-triangular
+Borel.  Since $M_\lambda$ is irreducible, its highest weight is $\lambda$;
+it is homogeneous polynomial of degree $n$ because it occurs in
+$V^{\otimes n}$.  No RL page is used for this interface.
 
 **B page:** `the-branching-rule-and-the-young-graph-examples`
 
@@ -1689,6 +1722,10 @@ representation; when $G/H$ has invariant measure the cocycle disappears.
 
 **B page:** `induced-unitary-representations-of-locally-compact-groups-examples`
 
+The B page also requires the published
+`induced-representations-and-frobenius-reciprocity` A page for its comparison
+with the finite algebraic induction model.
+
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
 | `ex-unitary-induction-from-the-trivial-subgroup` (example) | Identify $\operatorname{Ind}_{\{e\}}^G1$ with the left regular representation. | Checks the quotient and action conventions. | literature-derived | literature-derived |
@@ -2700,9 +2737,10 @@ the three displayed A ids, never their companions.  This table replaces all
 | `sl2-r-discrete-series-and-unitary-dual` | group-$C^*$ A; direct-integral/type-I A; principal/complementary-series A; `harish-chandra-isomorphism-casimir-and-central-characters`; `verma-modules-and-shapovalov-forms` |
 
 The Schur--Weyl rows on RG-10 use the double-centralizer and Specht arguments
-proved on RG-9/RG-10.  They do not consume a Lie B page or RL-15.  Lie owns the
-highest-weight interpretation of the $GL$ factor; the two statements are an
-agreement seam, not a dependency cycle.  Likewise RG-28/RG-30 need the
+proved on RG-9/RG-10.  They do not consume a Lie B page or RL-15.  RG-10 proves
+the type-A polynomial $GL$ factor, its irreducibility and highest weight
+locally; Lie owns the broader highest-weight theory, so the shared interface
+is an agreement seam rather than a dependency.  Likewise RG-28/RG-30 need the
 published finite-$\mathfrak{sl}_2$/Verma/Casimir A interfaces named above, not
 the unrelated Weyl--Kac A or B page.
 

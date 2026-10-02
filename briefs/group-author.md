@@ -1,132 +1,29 @@
 # Step 3b — scaffold auditor and item author
 
-**Proof repair quality for item editors.** If this dispatch authorizes you to edit an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; omit repeated talking points, filler, and padding that add no mathematical content.
+- **Ownership and inputs:** Own only the assigned A/B pairs; audit their scaffolds for authoring readiness, repair local gaps, and author every assigned item and page. Read CLAUDE.md, SCHEMA.md, designs, current manifests and coverage, Step 3a observations and decisions, named repair reports, relevant suppliers, and any owner authoring direction. Recheck applicable pre-splice findings against current inputs. Read sibling work when needed and preserve it in shared files. Thorough independent auditing follows in Steps 5–8.
 
-Own the A/B pair(s) listed in this dispatch. Audit each scaffold for the
-hypotheses, sources, direct prerequisites and proof route needed to author its
-claim; repair local scaffold gaps, then author every assigned item and A/B page.
-The Step-3b audit is an author-level readiness check. Thorough independent
-mathematical auditing and defect repair belong to Steps 5–8. Write complete
-arguments now and repair a concrete defect if you find one while authoring.
-Preserve other pairs in any shared batch files. Work one item
-at a time in ascending scaffold `dependency_level` order, breaking ties by
-page order and item ID; checkpoint before moving on. The generated dispatch
-task lists the exact order for your assigned items. Audit an item's scaffold
-and author that item before advancing to the next level. Recompute the order
-and labels when a local repair or new supplier changes dependencies. A later
-item must never be used to justify an earlier one.
+- **Dependency order and checkpoints:** Create the assigned report at entry with owned IDs and open obligations. Audit, author, check, and checkpoint one item at a time in ascending `dependency_level`, breaking ties by page order and item ID as listed in the dispatch task. Read the first item's exact suppliers and write it before surveying later items or tool implementations. Recompute labels and order after dependency changes; never justify an earlier item with a later one.
 
-Create the assigned report at entry with the owned IDs and open obligations.
-After reading the exact suppliers for the first item, write and check that
-item before surveying later items or reading tool implementation files.
-Continue with a completed item and its checkpoint at each dependency level.
-An exit with missing items, pages, contracts or report is a failed handoff.
+- **New-item dependency levels:** Give every newly created item the correct `dependency_level` computed from its actual dependencies, and record that level consistently in its item metadata and manifest entry. Verify the level with the repository's dependency-level checks before handoff.
 
-Read access covers the entire library and every pair in this frontier, including
-pairs still being constructed. Read sibling manifests, items and pages whenever
-needed to check prerequisites, conventions or cross-pair dependencies. Do not
-edit another pair's files; route a needed change to its owner or escalate it.
-Treat a sibling's in-progress draft as provisional and recheck its completed
-claim before closing a dependent item. If a supplier item has not yet been
-authored, flag the exact supplier ID, consumer ID and consuming proof step in
-your report, and author the consumer now with the needed proof obligation
-stated plainly. Record an escalation rather than an acceptance for that item
-until the supplier and its actual use are verified. Do not wait for a sibling
-pair to finish before authoring the rest of your assigned batch.
+- **Mathematical soundness and proof quality:** Mathematical soundness is non-negotiable; never pretend to understand something you do not. Proofs must be complete; make them concise wherever possible. Stress important caveats, but do not repeat the same argument twice. Do not use fillers or unnecessary padding.
 
-## Read and decide
+- **Complete mathematics and source verification:** Logical validity is ground truth; authoritative sources can also contain mistakes. Provide complete calculations and counterexample witnesses with their failed conclusions. Check each inference, hypothesis, quantifier, well-definedness condition, and supplier use independently rather than accepting citations as proof. Cite facts where used; consult complete authoritative arguments when uncertain and record exact locators and unresolved qualifications. Record provenance accurately; scripts may format completed mathematics, not generate generic proofs from scaffold strategies.
 
-Read CLAUDE.md, SCHEMA.md, the assigned design sections, current manifests,
-coverage, Step 3a decisions and the supplier statements and proof passages
-needed for each authored claim. Read
-`research/<run>-step3a-pair-<A-page-id>.md` for the scope review's authoring
-observations, and every repair report named by the owner's scope decision.
-Carry those specific proof and source obligations into authoring and resolve
-them before accepting the affected items.
-If `research/<run>-pre-splice-plan-findings.json` exists, recheck the findings
-for your pair against current inputs. Resolve applicable item kind, ordering,
-dependency and prerequisite defects in your assigned files. Preserve every
-promised claim: replace a load-bearing examples-page dependency with an exact
-A-page supplier or a complete local argument. Report required shared plan
-changes to the owner. This diagnostic snapshot is not a current gate verdict.
-If `research/<run>-owner-authoring-direction.md` exists, read that explicit
-owner direction and retain its unresolved obligations in your repair workload.
-Be impartial and honest about what you understand. If unsure, search the web
-and read complete relevant arguments from authoritative sources. Record exact
-locators and unresolved qualifications. Do not equate a citation, structural
-check or confidence statement with a proof.
+- **Track Choice precisely:** State AC and its exact use, declare its dependency, and propagate it. Preserve choice-free arguments and incompatible-axiom branches.
 
-Check the scaffold's hypotheses, quantifiers, implicit proof uses and
-well-definedness far enough to write the promised argument. Do not treat this
-as a second independent audit of completed items; later stages perform that
-review.
-Before accepting an item, its prerequisites must be proved earlier or supplied
-locally. A provisional consumer draft may cite an unfinished in-run supplier
-only with the exact flag and escalated decision described above. Add and fully author
-necessary definitions and lemmas on assigned existing A pages, before their
-consumers. Register them in manifests, coverage and contracts. Do not add pairs,
-drop promised results, consume Recorded results or edit published content.
-Escalate substantial unmet prerequisites, irrecoverable source uncertainty or
-required cross-group changes to the owner, with exact IDs and proposed remedies.
-Never mark an unresolved item complete or override an owner-held escalation.
+- **Prerequisites:** Identify prerequisites missing from both the published library and current scaffold. Create and fully author the necessary prerequisite items on assigned existing A pages, register them in manifests, coverage, and contracts, and place them before their consumers. Before accepting a consumer, verify that its prerequisites are proved earlier or supplied locally. When a sibling supplier is unfinished, inspect it provisionally, flag the exact supplier ID, consumer ID, and consuming proof step, and author the consumer with its open obligation stated plainly. Keep that decision escalated until the completed supplier and its actual use are verified; continue other assigned work. Escalate prerequisites that cannot be supplied within the authorized scope.
 
-Report every potentially defective published item to the owner in the dispatch
-report: exact item/page IDs, evidence, confidence, required suppliers and repair
-strategy. Distinguish suspicion from a confirmed defect. The serial reconciler
-updates published-consumer-supplier-ledger.md; do not race another group on it.
-Unrelated published debt does not block a sound new supplier.
+- **Escalate genuine blockers:** Report substantial prerequisite gaps, irrecoverable source uncertainty, and required cross-group changes with exact IDs and remedies. Never mark unresolved work complete or override owner-held decisions.
 
-State AC and its exact use, declare its dependency and propagate the assumption.
-Keep choice-free arguments choice-free and preserve incompatible-axiom branches.
+- **Scope and published-content boundaries:** Preserve every original item/page ID and promised claim. Do not add pairs, consume Recorded results, edit sibling or published content, or invent owner decisions. Replace load-bearing examples-page dependencies with exact A-page suppliers or complete local arguments.
 
-## Author and record
+- **Report published concerns:** Give exact IDs, evidence, confidence, required suppliers, and repair strategy; distinguish suspicion from confirmed defects. Leave shared-ledger updates to the serial reconciler. Unrelated published debt does not block sound new work.
 
-A scaffold strategy is work to do, not proof text. Derive the actual argument.
-Examples need calculations; counterexamples need witnesses and failed
-conclusions. Cite facts where used and verify their precise hypotheses.
-Scripts may format completed mathematics, not generate generic proofs from
-strategies. Keep every original item/page ID and promised claim.
+- **Proof contracts and registration:** Derive item-specific contracts from completed arguments: each numbered step's actual claim and inputs, exact cited excerpts and uses, and evidence for empty, zero, one, degenerate, endpoint, Choice, and both iff cases. Explain inapplicable cases specifically. Maintain manifests and coverage, preserving sibling rows. Keep generated statements within permitted leaf examples/corollaries.
 
-Write item-specific proof contracts from completed arguments: each numbered
-step's actual claim and inputs, exact cited excerpts and uses, and evidence for
-empty, zero, one, degenerate, endpoint, choice and both iff cases. Mark a case
-inapplicable only with an item-specific reason. Preserve accurate provenance;
-generated statements must remain permitted leaf examples/corollaries.
+- **Maintain records:** Update cross-batch dependency inputs without disturbing siblings. Report shared plan/prose amendments for Step 4. Refresh scope and item decisions when actual changes invalidate them; do not re-author unchanged completed items. Follow `briefs/tasks/frontier-dependency-ledger.md`. Refresh sufficient scope decisions after local repairs and additions; unresolved or owner-held scope still requires the owner. Preserve independent review records.
 
-Maintain each containing batch's cross-batch dependency input, preserving rows
-for sibling pairs, under briefs/tasks/frontier-dependency-ledger.md. Shared plan/prose
-amendments belong in the dispatch report for serial reconciliation in Step 4.
-After local scaffold repairs/additions, refresh sufficient scope decisions for
-the preserved pair; unresolved or owner-held scope still requires the owner.
-Record item decisions after authoring, not merely after accepting a strategy.
-An accepted scaffold or owner repair still needs authored content and contracts.
-Refresh decisions invalidated by actual dependency changes; do not re-author
-unchanged completed items. Never use --owner or add judge/audit stamps.
-Reconcile all flagged suppliers and their actual proof uses, then clear the
-required Step-3 dependency, source, content and contract gates before Step 4.
+- **Checks and acceptance:** Run explicit-path precheck and rendering, content policy, strict proof contracts, dependency-level checks, and `validate-plan` against `research/plan-spec.json` for each containing batch. Report pre-splice plan mismatches for Step 4 without hiding unresolved dependencies. Reconcile flagged suppliers and actual proof uses, and clear required Step 3 dependency, source, content, and contract gates before Step 4. Use `tools/step3-decisions.mjs record-item` with `accept` or `repaired` only after complete authoring and checks, confidence 1, examined dependency IDs, and concrete evidence; otherwise record `escalate`. Only the owner resolves escalations. Never use `--owner` or add judge/audit stamps.
 
-Genuinely new item IDs absent from both the pre-author scaffold inventory and
-its existing-item-file list are a separate class when fully authored during
-this dispatch: do not send those additions through a Step 3 self-review or
-review-repair-author loop. Original scaffold IDs still require ordinary current
-item decisions, even when their files are first written during this dispatch.
-Register each in the manifest, coverage, contracts, and authored item/page as
-usual. The engine compares the post-author inventory with its immutable
-pre-author baseline and, after your successful dispatch, gives those additions
-the current scope and item certifications needed to enter Step 4. This exception
-does not waive content, dependency, source, rendering, or proof-contract gates.
-
-For each containing batch, run explicit-path precheck and rendering, content-policy,
-strict proof-contract checks, item-dependency-levels, and validate-plan with research/plan-spec.json.
-Report pre-splice plan mismatches for Step 4; do not hide actual unresolved
-dependencies. Refresh current scope-decline decisions with evidence, never an
-invented owner ruling. Preserve independent review records.
-
-Use tools/step3-decisions.mjs record-item with accept or repaired only after
-the complete item is written and checked, confidence 1, examined dependency
-IDs, and a concrete evidence reason. Otherwise record escalate. The owner alone
-resolves escalations. At handoff list completed IDs, checks actually
-run, local suppliers added, published concerns and all open obligations.
-
-After compaction reread the checkpoint, current item, relevant dependencies and
-source passages. Summaries are navigation aids, not mathematical evidence.
+- **Additions and handoff:** Fully authored new IDs absent from both the immutable pre-author scaffold inventory and its existing-item-file list receive their scope and item certifications from the engine after successful dispatch; do not put these additions through a self-review or review-repair-author loop. Register them normally in manifests, coverage, contracts, and pages; all content, dependency, source, rendering, and contract gates still apply. Original scaffold IDs require ordinary current item decisions even when their files are newly written. At handoff report completed IDs, checks actually run, added suppliers, published concerns, and open obligations; missing items, pages, contracts, or report mean failed handoff. After compaction reread the checkpoint, current item, relevant dependencies, and source passages; summaries are navigation aids, not mathematical evidence.

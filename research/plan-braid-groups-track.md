@@ -302,7 +302,8 @@ identities used in the three-strand example.
 **Requires:** `braids-as-fundamental-groups-of-configuration-spaces`,
 `fibrations-fiber-bundles-and-homotopy-exact-sequences`,
 `partitions-of-unity-and-paracompactness`,
-`vector-fields-flows-and-lie-derivatives`.
+`vector-fields-flows-and-lie-derivatives`, `ascoli-arzela` for the compact-open
+topology and its agreement with uniform convergence on the compact disk.
 
 | proposed item (kind) | deps | exact content and proof route | source locator |
 |---|---|---|---|
@@ -344,7 +345,9 @@ injectivity.
 `braids-as-fundamental-groups-of-configuration-spaces`,
 `punctured-disks-mapping-classes-and-point-pushing`,
 `free-groups-and-presentations`, `semidirect-products-and-automorphism-groups`,
-`fibrations-fiber-bundles-and-homotopy-exact-sequences`.
+`fibrations-fiber-bundles-and-homotopy-exact-sequences`,
+`group-extensions-complements-and-schur-zassenhaus` for the proved section and
+semidirect-product splitting criterion.
 
 | proposed item (kind) | deps | exact content and proof route | source locator |
 |---|---|---|---|

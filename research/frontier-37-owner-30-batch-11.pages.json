@@ -1,0 +1,839 @@
+[
+  {
+    "order": 458.02603,
+    "id": "hilbert-and-riesz-transforms",
+    "kind": "A",
+    "category": "fourier-analysis",
+    "title": "Hilbert and Riesz Transforms",
+    "companion": "hilbert-and-riesz-transforms-examples",
+    "requires": [
+      "dirichlet-kernel-localisation-and-pointwise-fourier-convergence",
+      "fourier-multipliers-and-sobolev-characterisations",
+      "schwartz-space-and-the-plancherel-theorem",
+      "tempered-distributions-and-the-fourier-transform",
+      "fejer-and-poisson-summability-of-fourier-series",
+      "divergence-and-almost-everywhere-convergence-of-fourier-series",
+      "trigonometric-and-oscillatory-examples-in-one-variable"
+    ],
+    "items": [
+      {
+        "id": "def-conjugate-function-on-the-circle",
+        "kind": "definition",
+        "title": "Conjugate function on the circle",
+        "statement": "On trigonometric polynomials on T=R/Z with e_k(x)=e^{2πikx}, define C by (Cf)^hat(k)=-i sgn(k) f^hat(k), sgn(0)=0. Thus C kills constants; extension beyond the polynomial core is not part of the definition.",
+        "deps": [
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 10, Definition 10.1, printed p. 57"
+            }
+          ]
+        },
+        "strategy": "Define a finite coefficient multiplier; check that real polynomials remain real by conjugate symmetry. Fix normalized Haar measure and the 2π negative-forward convention."
+      },
+      {
+        "id": "lem-conjugate-dirichlet-kernel-and-principal-value-formula",
+        "kind": "lemma",
+        "title": "Conjugate Dirichlet kernel and periodic principal value",
+        "statement": "Assume Countable Choice. For N≥1 the conjugate partial sum C S_N f is convolution with K_N(t)=2∑_{k=1}^N sin(2πkt)=[cos(πt)-cos((2N+1)πt)]/sin(πt). If f∈L²(T) is C¹ near x, then C f(x)=lim_{ε↓0}∫_{ε<|t|<1/2} f(x-t)cot(πt)dt for almost every such x; finite K_N convolution is not itself a cotangent truncation.",
+        "deps": [
+          "def-conjugate-function-on-the-circle",
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "def-dirichlet-and-fejer-kernels",
+          "lem-fourier-partial-sums-are-dirichlet-convolutions",
+          "lem-finite-sine-harmonic-sums",
+          "thm-parseval-identity-for-fourier-series",
+          "thm-riesz-fischer-for-fourier-coefficients",
+          "thm-riemann-lebesgue-lemma-for-fourier-coefficients",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "cor-mean-value-theorem",
+          "thm-dominated-convergence",
+          "thm-sine-and-cosine-addition-formulas",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 10, Proposition 10.3 and equation (10.3), printed pp. 58–59"
+            }
+          ]
+        },
+        "strategy": "Expand the finite multiplier sum and sum the geometric series to obtain K_N. Pair the odd kernel at ±t. Local C¹ regularity makes [f(x-t)-f(x+t)]/sin(πt) integrable; the oscillatory remainder tends to zero by the torus Riemann–Lebesgue lemma after absorbing the half-frequency e^{πit} into the fixed L¹ function supported on 0<t<1/2. Parseval gives L² convergence of C S_N f to the multiplier extension, and an a.e. subsequence identifies that extension with the symmetric principal value. Explicitly retain the finite-sum versus limit distinction.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-periodic-conjugate-square-identity",
+        "kind": "lemma",
+        "title": "Periodic conjugate square identity",
+        "statement": "For every real mean-zero trigonometric polynomial g on T, (Cg)²=g²+2C(g Cg). No assertion for arbitrary Lp inputs is made before bounded extension.",
+        "deps": [
+          "def-conjugate-function-on-the-circle",
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "lem-trigonometric-characters-are-orthonormal"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.3, square identity (5.1.23) and Fourier proof, printed pp. 320–321; adapted to zero-mean periodic polynomials"
+            }
+          ]
+        },
+        "strategy": "Put F=g+iCg. Its Fourier support consists only of strictly positive modes. Therefore F² has only strictly positive modes; writing F²=u+iv gives C(v)=-u because u and v both have zero mean. Since u=g²-(Cg)² and v=2gCg, rearrange. The zero-mode check is essential on the circle. All calculations are finite and choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-marcel-riesz-conjugate-function-theorem",
+        "kind": "theorem",
+        "title": "Marcel Riesz conjugate-function theorem",
+        "statement": "Assume Countable Choice. The circle conjugate operator extends uniquely from trigonometric polynomials to a bounded complex-linear C:L^p(T)→L^p(T) for every 1<p<∞, and no compatible strong L¹ or L∞ extension exists. Constants remain in its kernel.",
+        "deps": [
+          "def-conjugate-function-on-the-circle",
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "lem-periodic-conjugate-square-identity",
+          "thm-parseval-identity-for-fourier-series",
+          "thm-riesz-thorin-interpolation",
+          "lem-complex-lp-duality-from-real-lp-duality",
+          "thm-fejer-convergence-in-lp",
+          "thm-fejer-uniform-convergence-for-continuous-periodic-functions",
+          "lem-fejer-kernel-is-a-positive-approximate-identity",
+          "def-cesaro-and-abel-means-of-a-fourier-series",
+          "def-dirichlet-and-fejer-kernels",
+          "lem-fourier-partial-sums-are-dirichlet-convolutions",
+          "lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "cor-l-p-norm-recovery-by-unit-l-q-pairings",
+          "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-countable-choice",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 10, Definition 10.1/Lemma 10.2, pp. 57–58; Chapter 12, Corollary 12.2, pp. 70–71 (comparison strong-range result)"
+            },
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.3, Theorem 5.1.7 square-identity/power-interpolation proof, printed pp. 320–322; periodic zero-mode adaptation"
+            }
+          ]
+        },
+        "strategy": "For real mean-zero polynomials use the square identity and the L² isometry to inductively bound C in L^{2^m}: if A=||Cg||_{2p}, B=||g||_{2p}, then A²≤B²+2||C||_{p→p}AB. Remove means at cost ≤2 and split complex functions into real and imaginary parts. Extend each power bound from polynomials by Fejér density and Lp completeness; all extensions agree with the L² multiplier on overlaps. Restrict this common operator to finite simple classes and apply the published Riesz–Thorin theorem between adjacent finite powers for every p≥2. For 1<p<2, periodic Lp duality and the L² skew identity give the bound and extension. For the upper endpoint compute the periodic conjugate of an arc indicator as π^{-1}log|sin(πx)/sin(π(x-a))|, unbounded near endpoints; a hypothetical bounded L¹ extension, paired with L∞ test functions using skewness and elementary norming, would force an L∞ bound, contradiction. The latter endpoint argument does not use the later generic weak (1,1) theorem. To rule out a bounded L∞ extension of the polynomial core, approximate the arc indicator by its Fejér means: they are trigonometric polynomials of sup norm at most one and converge in L² to the indicator; a uniform L∞ bound on their conjugates would pass through the L² limit and contradict the logarithmic arc transform.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-fourier-partial-sums-are-uniformly-bounded-on-periodic-lp",
+        "kind": "lemma",
+        "title": "Uniform Lp bounds for periodic Fourier partial sums",
+        "statement": "Assume Countable Choice. For every 1<p<∞, sup_N ||S_N||_{L^p(T)→L^p(T)}<∞.",
+        "deps": [
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "def-conjugate-function-on-the-circle",
+          "thm-marcel-riesz-conjugate-function-theorem",
+          "thm-fejer-convergence-in-lp",
+          "def-cesaro-and-abel-means-of-a-fourier-series",
+          "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+          "lem-trigonometric-characters-are-orthonormal",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 9, formula (9.1) and Theorem 9.5 setup, printed pp. 55–56"
+            }
+          ]
+        },
+        "strategy": "Define P_+f=(f+iCf)/2+(∫f)/2. Its multiplier is 1 for k≥0 and 0 for k<0; Hölder bounds the mean and Marcel Riesz bounds C. For M_jf=e_j f, verify coefficientwise S_N=M_{-N}P_+M_N-M_{N+1}P_+M_{-(N+1)}. Each modulation is an Lp isometry. This yields the N-independent bound 2||P_+||.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-fourier-partial-sums-converge-in-periodic-lp",
+        "kind": "theorem",
+        "title": "Periodic Fourier partial sums converge in the strict Lp range",
+        "statement": "Assume Countable Choice. S_N f→f in L^p(T) for every f∈L^p(T) and every 1<p<∞. At p=1 and p=∞ this universal norm convergence fails; ||S_N|| grows at least as the Lebesgue constants.",
+        "deps": [
+          "lem-fourier-partial-sums-are-uniformly-bounded-on-periodic-lp",
+          "thm-fejer-convergence-in-lp",
+          "lem-fourier-partial-sums-are-dirichlet-convolutions",
+          "lem-fejer-kernel-is-a-positive-approximate-identity",
+          "def-dirichlet-and-fejer-kernels",
+          "def-cesaro-and-abel-means-of-a-fourier-series",
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "lem-fourier-partial-sum-operator-norm-equals-the-lebesgue-constant",
+          "thm-sequential-uniform-boundedness-under-countable-choice",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "thm-integral-triangle-inequality",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-countable-choice",
+          "def-complex-lp-and-euclidean-test-function-conventions"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 9, Examples 9.3–9.4 and Theorem 9.5, printed pp. 55–56"
+            }
+          ]
+        },
+        "strategy": "Fejér convergence supplies dense trigonometric polynomials for finite p. Every S_N fixes a given polynomial once N exceeds its degree; uniform Lp operator bounds then yield convergence. At p=∞ choose the bounded sign of D_N(-t) and evaluate S_Nf at 0 to get ||S_N||∞≥||D_N||₁. At p=1 test S_N on F_M (norm one) and let M→∞; for fixed N, its Fourier coefficients converge to those of D_N, so ||S_N||₁≥||D_N||₁. The published logarithmic lower bound makes both operator families unbounded. Since L¹ and L∞ are Banach under Countable Choice, sequential uniform boundedness implies some input lacks norm convergence at each endpoint. This does not claim divergence for every endpoint input.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-truncated-hilbert-transform-and-principal-value",
+        "kind": "definition",
+        "title": "Truncated line Hilbert transform and principal value",
+        "statement": "For 1≤p<∞ and f∈L^p(R), H_εf(x)=π^{-1}∫_{|x-y|>ε} f(y)/(x-y)dy is absolutely defined for every ε>0 and every x. H_pv f(x)=lim_{ε↓0}H_εf(x) only where that limit exists; no general almost-everywhere existence or Lp bound is built into the definition.",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "thm-complex-holder-minkowski-and-the-quotient-norm"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.1, Definition 5.1.1 and Remark 5.1.2, printed pp. 314–315"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, Proposition 20.2, printed pp. 114–115"
+            }
+          ]
+        },
+        "strategy": "Use Hölder for the tail |x-y|≥ε when p>1, and the ε^{-1} bound when p=1; the representative dependence is null for each fixed x. Distinguish the pointwise partial domain from the later L² multiplier extension, and do not define H on arbitrary L∞ with an uncontrolled tail."
+      },
+      {
+        "id": "lem-singular-kernel-sine-integral-under-countable-choice",
+        "kind": "lemma",
+        "title": "Sine integral for singular kernel multipliers under Countable Choice",
+        "statement": "Assume Countable Choice. The improper integral ∫_0^∞ sin(t)/t dt equals π/2 and its partial integrals are uniformly bounded. Consequently symmetric sine integrals scale to π sgn(x) with a bound independent of the scale; this statement is proved without invoking the published full-AC sine-integral lemma.",
+        "deps": [
+          "def-countable-choice",
+          "thm-sine-and-cosine-derivatives",
+          "cor-sine-and-cosine-are-one-lipschitz",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "lem-exponential-dominates-one-plus-x",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-ftc-second-part",
+          "thm-integration-by-parts",
+          "thm-additivity-over-subintervals",
+          "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-principal-inverse-tangent-calculus",
+          "def-principal-inverse-tangent",
+          "thm-substitution-for-improper-integrals"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.1, equations (5.1.9)–(5.1.12) and uniform sine-integral argument, printed pp. 316–317"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, oscillatory Hilbert kernel calculation (20.2), printed pp. 114–115"
+            }
+          ]
+        },
+        "strategy": "Near zero use |sin t|≤|t|. Integration by parts gives the uniform tail bound |∫_A^B sin t/t dt|≤2/A for A≥1. For a>0, absolute Fubini applied to sin t/t=∫_0^1 cos(st)ds yields ∫_0^∞e^{-at}sin t/t dt=arctan(1/a); the tail bound is uniform in a, so pass a↓0 then A→∞. Substitute t↦|x|t for the sign formula. Only the Countable Choice measure/integration convention is used; no full AC supplier is consumed.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-hilbert-transform-has-signum-fourier-multiplier",
+        "kind": "lemma",
+        "title": "Hilbert principal-value kernel has signum multiplier",
+        "statement": "Assume Countable Choice and the e^{-2πixξ} Fourier convention. On Schwartz functions the principal value exists pointwise, defines the tempered convolution Hf=(pv 1/(πx))*f, and its Fourier transform is -i sgn(ξ) f-hat(ξ).",
+        "deps": [
+          "def-truncated-hilbert-transform-and-principal-value",
+          "lem-singular-kernel-sine-integral-under-countable-choice",
+          "def-fourier-transform-of-a-tempered-distribution",
+          "thm-fourier-transform-converts-allowed-tempered-convolutions-to-products",
+          "def-convolution-of-a-tempered-distribution-with-a-schwartz-function",
+          "def-tempered-distribution",
+          "def-schwartz-space-and-its-seminorms",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "cor-mean-value-theorem",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "thm-substitution-for-improper-integrals",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.1, equations (5.1.1)–(5.1.13), printed pp. 314–317"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, Proposition 20.2, printed pp. 114–115"
+            }
+          ]
+        },
+        "strategy": "Define W by pairing a Schwartz test with its odd-kernel cancellation on |x|<1 and its integrable tail. This is tempered. Truncate symmetrically in x and at reciprocal large radius; Fubini on finite annuli gives a sine-integral multiplier. The local sine lemma provides a uniform bound and the limit -i sgn ξ; dominated convergence against a Schwartz test yields F(W)=-i sgn ξ in S′. The published tempered-convolution theorem then gives the claimed transform. For each Schwartz f, subtract f(x) on |y|<1 to show the pointwise PV exists and equals W*f.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity",
+        "kind": "corollary",
+        "title": "Line Hilbert transform is an L² isometry and squares to minus identity",
+        "statement": "Assume Countable Choice. The Schwartz Hilbert transform extends uniquely to L²(R), satisfies ||Hf||₂=||f||₂ and H²f=-f for every f∈L²(R). The singleton ξ=0 has no L² zero-mode exception.",
+        "deps": [
+          "lem-hilbert-transform-has-signum-fourier-multiplier",
+          "lem-ltwo-fourier-multiplier-bound",
+          "thm-plancherel",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.1, equations (5.1.14)–(5.1.15), printed p. 317"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, Definition 20.1 and following identities, printed pp. 113–114"
+            }
+          ]
+        },
+        "strategy": "Use the exact L² multiplier extension. Since |sgn ξ|=1 off the null singleton, Plancherel gives isometry. The squared multiplier (-i sgn ξ)²=-1 almost everywhere, hence H²=-I on all L². Separate this from the periodic operator, which kills constants.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-hilbert-transform-is-skew-adjoint-on-ltwo",
+        "kind": "lemma",
+        "title": "Hilbert transform is skew adjoint on complex L²",
+        "statement": "Assume Countable Choice and the first-variable-linear pairing <f,g>=∫f overline(g). Then <Hf,g>=-<f,Hg> for all f,g∈L²(R).",
+        "deps": [
+          "cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity",
+          "lem-ltwo-fourier-multiplier-bound",
+          "thm-plancherel",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.1, adjoint computation following equation (5.1.15), printed p. 317"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, Definition 20.1 and adjoint identity, printed p. 114"
+            }
+          ]
+        },
+        "strategy": "Transport the pairing through the unitary Fourier transform and conjugate the multiplier: overline(-i sgn ξ)=+i sgn ξ=-(-i sgn ξ). The equality extends from Schwartz functions to L² by continuity; state the pairing convention.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-riesz-transforms-on-euclidean-space",
+        "kind": "definition",
+        "title": "Riesz transforms on Euclidean L²",
+        "statement": "Assume Countable Choice, n≥1 and 1≤j≤n. Define R_j on L²(R^n) by multiplier m_j(ξ)=-i ξ_j/|ξ| for ξ≠0 and m_j(0)=0. Set c_n=Γ((n+1)/2)/π^{(n+1)/2} and K_j(x)=c_n x_j/|x|^{n+1} off 0. The following kernel lemma proves that K_j gives the principal-value formula on Schwartz functions; the definition itself does not assert pointwise limits for all L² inputs.",
+        "deps": [
+          "lem-ltwo-fourier-multiplier-bound",
+          "thm-plancherel",
+          "def-real-gamma-function-by-the-euler-integral",
+          "thm-real-gamma-euler-integral-convergence",
+          "thm-real-gamma-functional-equation",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.4, Definition 5.1.13 and Proposition 5.1.14, printed pp. 324–326"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, Definition 20.1 and Proposition 20.3, printed pp. 113–116"
+            }
+          ]
+        },
+        "strategy": "Bound |m_j|≤1 and apply the published L² multiplier theorem; Γ is positive and finite at (n+1)/2. Fix the kernel normalization and origin convention. At n=1, c_1=1/π; comparison with the line Hilbert transform is made in the later example."
+      },
+      {
+        "id": "lem-riesz-transform-principal-value-kernel-formula",
+        "kind": "lemma",
+        "title": "Riesz multiplier equals the principal-value kernel on Schwartz functions",
+        "statement": "Assume Countable Choice. For f∈S(R^n), the limit lim_{ε↓0}∫_{|y|>ε} K_j(y)f(x-y)dy exists for every x and gives a continuous representative of the L² multiplier class R_j f, with K_j from the Riesz definition and the 2π Fourier convention.",
+        "deps": [
+          "def-riesz-transforms-on-euclidean-space",
+          "lem-singular-kernel-sine-integral-under-countable-choice",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "cor-volume-of-the-unit-n-ball",
+          "thm-real-gamma-functional-equation",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "def-convolution-of-a-tempered-distribution-with-a-schwartz-function",
+          "thm-fourier-transform-converts-allowed-tempered-convolutions-to-products",
+          "thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions",
+          "def-fourier-transform-of-a-tempered-distribution",
+          "thm-mean-value-inequality",
+          "thm-chain-rule",
+          "def-schwartz-space-and-its-seminorms",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.4, Proposition 5.1.14 and Lemma 5.1.15, printed pp. 325–327"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, Proposition 20.3 and Lemma 20.4, printed pp. 115–119"
+            }
+          ]
+        },
+        "strategy": "Odd spherical cancellation gives convergence at every x after subtracting f(x) near zero; the Schwartz tail is absolutely integrable. The same local domination proves continuity in x. Define the kernel distribution by this cancellation. Fourier-transform finite annuli ε<|y|<1/ε, use polar coordinates, and apply the local uniform sine-integral bound to pass under the spherical integral and Schwartz test. Rotational symmetry makes ∫_{S^{n-1}}sgn(ξ·ω)ω_jdσ=A_n ξ_j/|ξ|, A_n=∫|ω_1|dσ=2π^{(n-1)/2}/Γ((n+1)/2); prove the latter by computing ∫_{B_n}|x_1| twice: polar coordinates give A_n/(n+1), while slices x_1=t and the (n−1)-ball volume give 2V_{n−1}/(n+1); use the published V_{n−1} formula for n≥2 and treat n=1 separately. Thus c_n(π/2)A_n=1 and the transform is -iξ_j/|ξ|. The tempered-convolution law and injectivity of Fourier identify the PV representative with the L² class R_j f. Do not assert a.e. PV convergence on general L² or Lp here.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-riesz-transforms-are-ltwo-bounded",
+        "kind": "corollary",
+        "title": "Riesz transforms are L² contractions and their squares sum to minus identity",
+        "statement": "Assume Countable Choice. Each ||R_j f||₂≤||f||₂ on L²(R^n), and ∑_{j=1}^n R_j²f=-f for every f∈L²(R^n).",
+        "deps": [
+          "def-riesz-transforms-on-euclidean-space",
+          "lem-ltwo-fourier-multiplier-bound",
+          "thm-plancherel",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.4, Proposition 5.1.16, printed p. 327"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, formulas following Definition 20.1, printed p. 114"
+            }
+          ]
+        },
+        "strategy": "Use |ξ_j|/|ξ|≤1 for the contraction. Away from the null origin, ∑_j(-iξ_j/|ξ|)²=-1; apply Plancherel and finite sum. No special constant mode exists in Euclidean L².",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-riesz-transform-kernels-have-explicit-size-difference-and-spherical-cancellation-bounds",
+        "kind": "lemma",
+        "title": "Riesz kernel size, difference and cancellation estimates",
+        "statement": "For n≥1, K_j(x)=c_n x_j/|x|^{n+1} obeys |K_j(x)|≤c_n|x|^{-n}, |K_j(x-h)-K_j(x)|≤C_n|h||x|^{-n-1} when |h|≤|x|/2, and ∫_{S^{n-1}}K_j(rω)dσ(ω)=0 for every r>0. Thus the raw estimates needed by the later singular-integral page hold.",
+        "deps": [
+          "def-riesz-transforms-on-euclidean-space",
+          "lem-riesz-transform-principal-value-kernel-formula",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "cor-mean-value-theorem",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "lem-derivative-of-a-power",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.4, kernel in Definition 5.1.13 and proof of Proposition 5.1.14, printed pp. 324–327"
+            }
+          ]
+        },
+        "strategy": "The size estimate uses |x_j|≤|x|. Differentiate x_j|x|^{-n-1}: each partial derivative is bounded by (n+2)|x|^{-n-1}; integrate along x-th for |h|≤|x|/2, where the radius stays ≥|x|/2. Oddness under ω↦-ω makes each spherical integral zero. For n=1 take the two-point sphere. Avoid invoking the later Calderón–Zygmund kernel definition.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "rem-hilbert-and-riesz-transform-endpoint-map",
+        "kind": "remark",
+        "title": "Endpoint map for Hilbert and Riesz transforms",
+        "statement": "The present page proves the periodic conjugate strict Lp range and Euclidean L² facts. The later Calderón–Zygmund page treats weak L¹, real-line/Riesz strict-range Lp and a.e. truncation claims; later real Hardy and BMO pages treat their respective endpoints. The interval examples below refute strong L¹ and L∞ mapping but do not refute weak (1,1) or BMO bounds.",
+        "deps": [
+          "thm-marcel-riesz-conjugate-function-theorem",
+          "cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity",
+          "cor-riesz-transforms-are-ltwo-bounded"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapters 12 and 20, printed pp. 67–71 and 113–119"
+            },
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.3, Remark 5.1.9, printed p. 322"
+            }
+          ]
+        },
+        "strategy": "Orientation only. Never use a later result as a premise here. Refer to later planned pages by page title in prose, without unresolved item wikilinks or forward_refs until their item inventories enter the plan. Keep circle/line zero modes and transform-versus-partial-sum endpoint failures separate."
+      }
+    ]
+  },
+  {
+    "order": 458.02604,
+    "id": "hilbert-and-riesz-transforms-examples",
+    "kind": "B",
+    "category": "fourier-analysis",
+    "title": "Hilbert and Riesz Transforms — Examples",
+    "companion": "hilbert-and-riesz-transforms",
+    "requires": [
+      "hilbert-and-riesz-transforms"
+    ],
+    "items": [
+      {
+        "id": "ex-hilbert-transform-of-an-interval-indicator",
+        "kind": "example",
+        "title": "Hilbert transform of an interval indicator",
+        "statement": "Assume Countable Choice. For f=1_(0,1), the symmetric principal value exists for x∉{0,1} and Hf(x)=π^{-1}log|x/(x-1)|. The formula represents the L² multiplier extension almost everywhere.",
+        "deps": [
+          "def-truncated-hilbert-transform-and-principal-value",
+          "lem-hilbert-transform-has-signum-fourier-multiplier",
+          "cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity",
+          "def-countable-choice",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "thm-chain-rule",
+          "thm-ftc-second-part",
+          "thm-additivity-over-subintervals",
+          "cor-mean-value-theorem",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.1, Example 5.1.3 and equation (5.1.7), printed pp. 315–316"
+            }
+          ]
+        },
+        "strategy": "Integrate 1/(x-y) separately in x<0, 0<x<1 and x>1, showing exact cancellation of the two log ε terms in the interior. Mollify the compactly supported indicator with a positive unit-mass smooth bump. The approximants converge in L², so their Hilbert transforms converge in L². At each x outside {0,1}, choose a neighborhood on which the indicator is constant; for sufficiently small mollifier scales the approximants have that same constant there. The local principal-value contributions cancel, while L¹ convergence controls the nonsingular complement pointwise. Thus their Hilbert transforms converge pointwise to the logarithmic principal value. L² uniqueness identifies the multiplier class. Values at the endpoints are immaterial.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-hilbert-transform-is-not-strong-type-one-one",
+        "kind": "counterexample",
+        "title": "Hilbert transform is not strong type (1,1)",
+        "statement": "Assume Countable Choice. The interval indicator belongs to L¹(R), but its Hilbert transform π^{-1}log|x/(x-1)| is not integrable, since it has a nonintegrable 1/|x| tail. Therefore the Schwartz-core transform has no bounded L¹→L¹ extension compatible with the L² transform.",
+        "deps": [
+          "ex-hilbert-transform-of-an-interval-indicator",
+          "cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-schwartz-space-and-its-seminorms",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "thm-dominated-convergence",
+          "thm-monotone-convergence-for-the-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.1, Example 5.1.3, printed pp. 315–316; §5.1.3, Remark 5.1.9, p. 322"
+            }
+          ]
+        },
+        "strategy": "For |x| large, log|x/(x-1)|=-log(1-1/x)=1/x+O(x^{-2}), so its absolute integral diverges. Positive smooth mollifications fε of the interval indicator converge in both L¹ and L². If H had a bounded L¹ extension from the Schwartz core, Hfε would converge in L¹; the L² isometry gives convergence of the same sequence in L² to the logarithmic class. Convergence in measure on every bounded interval identifies the L¹ and L² limits, contradicting nonintegrability of that class. This does not dispute weak (1,1).",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-hilbert-transform-does-not-map-linfinity-to-linfinity",
+        "kind": "counterexample",
+        "title": "Hilbert transform does not map L∞ to L∞",
+        "statement": "Assume Countable Choice. The bounded interval indicator is in L∞(R)∩L²(R), but its compatible Hilbert transform π^{-1}log|x/(x-1)| is essentially unbounded near 0 and 1. There is no bounded L∞ action agreeing with the L² transform on the intersection.",
+        "deps": [
+          "ex-hilbert-transform-of-an-interval-indicator",
+          "cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-schwartz-space-and-its-seminorms",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-natural-logarithm-laws",
+          "cor-exponential-is-a-bijection-onto-positive-reals",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-operator-norm",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.1, Example 5.1.3, printed pp. 315–316; §5.1.3, Remark 5.1.9, p. 322"
+            }
+          ]
+        },
+        "strategy": "As x→0 or x→1 through positive-measure intervals, the logarithm has arbitrarily large magnitude. Mollify the indicator by a nonnegative unit-mass Schwartz bump: fε stays bounded by one and converges in L². A bounded L∞ extension on the Schwartz core would bound all Hfε uniformly in L∞, while L² continuity makes Hfε converge in L² to the unbounded logarithmic class; an almost-everywhere subsequence would make that class essentially bounded, contradiction. This does not rule out a BMO-valued endpoint.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-hilbert-transform-of-the-poisson-kernel",
+        "kind": "example",
+        "title": "Hilbert transform of the line Poisson kernel",
+        "statement": "Assume Countable Choice. For a>0, P_a(x)=a/[π(a²+x²)] has Fourier transform e^{-2πa|ξ|}; its Hilbert transform is Q_a(x)=x/[π(a²+x²)], the conjugate Poisson kernel. The identity holds pointwise and in L².",
+        "deps": [
+          "def-truncated-hilbert-transform-and-principal-value",
+          "lem-hilbert-transform-has-signum-fourier-multiplier",
+          "cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-countable-choice",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-schwartz-space-and-its-seminorms",
+          "def-fourier-transform-on-l-one-of-rn",
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+          "thm-l-one-fourier-inversion",
+          "lem-complex-integration-by-parts-on-intervals-and-decaying-lines",
+          "thm-sine-and-cosine-derivatives",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-derivative-of-exponential",
+          "thm-algebra-of-derivatives",
+          "thm-composition-of-continuous-functions",
+          "cor-differentiable-implies-continuous",
+          "lem-exponential-dominates-one-plus-x",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line",
+          "thm-additivity-over-subintervals",
+          "thm-ftc-second-part",
+          "thm-chain-rule",
+          "thm-principal-inverse-tangent-calculus",
+          "def-principal-inverse-tangent",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "cor-mean-value-theorem",
+          "thm-dominated-convergence",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "thm-algebra-of-continuous-functions",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "def-ball-average-operator-on-r-n",
+          "def-lebesgue-point-and-lebesgue-set",
+          "def-locally-integrable-function-on-r-n",
+          "def-integral-over-a-measurable-set",
+          "prop-indefinite-integral-of-an-integrable-function-is-countably-additive",
+          "cor-continuous-functions-are-borel-measurable",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "def-integral-of-a-nonnegative-simple-function"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.1, Hilbert signum multiplier, printed pp. 316–317"
+            }
+          ]
+        },
+        "strategy": "Multiply the published Poisson transform by -i sgn ξ and invert the two half-line exponential integrals: ∫_0∞e^{-2πaξ}sin(2πxξ)dξ=x/[2π(a²+x²)]. Their signed difference gives Q_a. Both sides lie in L² and are continuous, so Fourier uniqueness upgrades the a.e. identity to pointwise. Note this is the line, not the periodic Poisson kernel.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-riesz-transforms-square-to-minus-the-identity-in-sum",
+        "kind": "example",
+        "title": "Finite sum of Riesz squares in L²",
+        "statement": "Assume Countable Choice. For n≥1 and f∈L²(R^n), the finite sum ∑_{j=1}^n R_j²f=-f. At n=1 this is H²=-I; the assigned value m_j(0)=0 has no effect on L².",
+        "deps": [
+          "def-riesz-transforms-on-euclidean-space",
+          "cor-riesz-transforms-are-ltwo-bounded",
+          "cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity",
+          "lem-ltwo-fourier-multiplier-bound",
+          "thm-plancherel",
+          "def-countable-choice",
+          "def-complex-lp-and-euclidean-test-function-conventions"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.4, Proposition 5.1.16, printed p. 327"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, identities after Definition 20.1, printed p. 114"
+            }
+          ]
+        },
+        "strategy": "Write the finite multiplier sum at ξ≠0, equal to -∑ξ_j²/|ξ|²=-1, and use Plancherel. For n=1 identify R_1 with H by the common signum multiplier. Explicitly note that the null singleton does not create a constant-function exception on Euclidean L².",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

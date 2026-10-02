@@ -23,6 +23,7 @@ parts:
       - the-gamma-function
       - mittag-leffler-and-runges-theorem
       - jensen-theory-and-nevanlinnas-first-main-theorem
+      - harmonic-hardy-classes-and-fatou-boundary-limits
       - the-hartogs-phenomena
       - subharmonic-functions-and-the-dirichlet-problem
       - the-residue-theorem
@@ -33,12 +34,18 @@ parts:
       - normal-families-and-montels-theorem
       - conformal-mapping-branches-and-the-schwarz-lemma
       - the-dbar-complex-and-integral-solutions
+      - hormander-estimates-and-the-levi-problem
+      - analytic-hypersurfaces-and-local-parametrisation
       - bloch-schottky-and-picard
       - the-riemann-mapping-theorem
       - simply-connected-plane-domains
       - green-functions-harmonic-measure-and-conformal-invariance
       - analytic-continuation-and-monodromy
       - riemann-surfaces-branched-maps-and-differentials
+      - hyperbolic-riemann-surfaces-and-uniformization
+      - elliptic-functions-and-complex-tori
+      - nevanlinna-second-main-theorem-and-defects
+      - logarithmic-potential-capacity-and-riesz-decomposition
 ---
 
 ## holomorphic-functions
@@ -51,15 +58,17 @@ term, and its derivatives recover its coefficients.
 
 ## contours-and-cauchy
 
-Contour integrals, Goursat and Cauchy's formula turn local holomorphy into analyticity,
-derivative estimates, residues and zero-pole counting; Poisson, Dirichlet, Hartogs,
-pseudoconvexity, Runge-Mittag-Leffler, Gamma and Weierstrass extend that control to
-boundary values, approximation, principal parts and special functions; Montel,
-Schwarz-Pick, Bloch-Schottky-Picard and Riemann mapping complete the conformal side, and
-simply connected domains with analytic continuation globalise germs through periods,
-primitives, harmonic conjugates and monodromy. Green kernels and harmonic measure add
-conformal covariance; the Poisson-Jensen formula yields Nevanlinna's first main theorem
-and order of growth; Cauchy-Pompeiu and Bochner-Martinelli solve the $\bar\partial$
-equation, giving Dolbeault vanishing and Hartogs extension; and Riemann surfaces with
-branched maps give genus and Riemann-Hurwitz. The zeta page applies it to Euler products,
-meromorphic continuation and the functional equation.
+Contour integrals, Goursat and Cauchy turn local holomorphy into analyticity,
+derivative estimates, residues and zero-pole counting; Poisson, Dirichlet,
+Hardy-Fatou, Hartogs, pseudoconvexity, Runge-Mittag-Leffler, Gamma, Weierstrass
+and hypersurface parametrisation extend to boundary values, extension,
+approximation, principal parts and special functions; Montel, Schwarz-Pick,
+Bloch-Schottky-Picard, Riemann mapping, hyperbolic uniformization and elliptic
+functions complete the conformal side; simply-connected domains and analytic
+continuation globalise germs through periods, conjugates and monodromy. Green
+kernels and harmonic measure add conformal covariance; Poisson-Jensen yields
+Nevanlinna's first and second main theorems with defects; Bochner-Martinelli,
+Cauchy-Pompeiu and Hörmander solve $\bar\partial$: Dolbeault vanishing, Levi
+problem and Hartogs extension; logarithmic capacity and Riesz decomposition
+organise subharmonic functions; branched maps give genus and Riemann-Hurwitz;
+the zeta page applies Euler products, continuation and the functional equation.

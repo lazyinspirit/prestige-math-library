@@ -1,0 +1,1214 @@
+[
+  {
+    "order": 365.917,
+    "id": "minkowski-theory-and-number-field-class-groups",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Minkowski Theory and Number Field Class Groups",
+    "companion": "minkowski-theory-and-number-field-class-groups-examples",
+    "requires": [
+      "decomposition-inertia-and-frobenius",
+      "convex-and-semicontinuous-functions-on-rn"
+    ],
+    "items": [
+      {
+        "id": "def-minkowski-embedding-of-a-number-field",
+        "kind": "definition",
+        "title": "Unscaled Minkowski embedding",
+        "deps": [
+          "def-archimedean-embeddings-and-number-field-signature",
+          "def-number-field",
+          "thm-discriminant-as-an-embedding-determinant"
+        ],
+        "statement": "For a degree-n number field K of signature (r₁,r₂), σ:K→R^{r₁}×C^{r₂}≅R^n lists the real embeddings and one representative from each complex-conjugate pair, using real and imaginary coordinates. Its complex block has Euclidean norm (Σ_j |τ_j(x)|²)^{1/2}; no √2 scaling is applied.",
+        "strategy": "Because n=r₁+2r₂>0, at least one listed embedding exists, so a zero image forces x=0. Real-linear independence of the images of a Q-basis follows from the nonzero all-embedding determinant theorem; replacing each complex-conjugate row pair by real and imaginary rows changes absolute determinant by a factor 2.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 p.79"
+            },
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§7.1 p.80"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-full-euclidean-lattice-and-covolume",
+        "kind": "definition",
+        "title": "Full Euclidean lattice and covolume",
+        "deps": [
+          "def-determinant-of-a-square-matrix"
+        ],
+        "statement": "A full lattice Λ⊂R^n is the integer span of a real basis b₁,…,bₙ; its covolume is |det(b₁,…,bₙ)|.",
+        "strategy": "If c is another integer basis, both change matrices have integer entries and are inverses, so their determinants are ±1. Hence the absolute determinant is basis independent, positive, and equals the volume of its half-open parallelotope once the volume theorem is invoked.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Remark 4.16(a), p.75"
+            },
+            {
+              "title": "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory",
+              "url": "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf",
+              "locator": "§27 Lemma 27.2, pp.139–140"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-full-lattice-fundamental-domain-and-bounded-points",
+        "kind": "lemma",
+        "title": "Fundamental parallelotope and finite bounded intersections",
+        "deps": [
+          "def-full-euclidean-lattice-and-covolume",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-axiom-of-choice",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-half-open-box",
+          "lem-integer-part",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "def-metric-bounded-diameter",
+          "def-metric-ball",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. For a full lattice Λ=ΣZbᵢ, the half-open P={Σtᵢbᵢ:0≤tᵢ<1} tiles R^n uniquely by Λ-translates, has Lebesgue volume covol(Λ), and every bounded subset of R^n meets Λ in finitely many points.",
+        "strategy": "Apply the inverse basis matrix to x, split each real coordinate uniquely into integer and fractional parts, and return the fractional point to P. The invertible linear change-of-variables theorem gives vol(P)=|det(bᵢ)| because [0,1)^n has unit volume. The inverse basis map sends any bounded set to bounded coordinate ranges, so only finitely many integer tuples occur.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Lemma 4.14 and Remark 4.16, pp.73–75"
+            },
+            {
+              "title": "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory",
+              "url": "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf",
+              "locator": "§27 Lemma 27.2 and §28 pp.144–146"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-blichfeldt-lattice-point-principle",
+        "kind": "lemma",
+        "title": "Blichfeldt lattice-point principle",
+        "deps": [
+          "lem-full-lattice-fundamental-domain-and-bounded-points",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-axiom-of-choice",
+          "def-full-euclidean-lattice-and-covolume",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-measure",
+          "def-countable",
+          "def-integers",
+          "thm-n-cross-n-countable",
+          "thm-product-of-countable",
+          "lem-countable-iff-surjection-from-n",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. If S⊂R^n is Lebesgue measurable with vol(S)>covol(Λ), two distinct points x,y∈S satisfy x−y∈Λ.",
+        "strategy": "Partition S among the disjoint half-open translates P+λ. Translate each measurable piece into P; their measures sum to vol(S), including when S is unbounded since Λ is countable via its integer coordinates. If every translated pair were disjoint, countable additivity would give union measure vol(S)>vol(P), impossible. An overlap supplies distinct points from different tiles with lattice difference; equality on tile boundaries is fixed by the half-open convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Theorem 4.17, p.75"
+            },
+            {
+              "title": "Ben Green, Additive Combinatorics, Lecture 3 §3.7",
+              "url": "https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf",
+              "locator": "Lecture 3 §3.7 Lemma 3.4, pp.26–27"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-minkowski-convex-body-theorem",
+        "kind": "theorem",
+        "title": "Minkowski convex-body theorem, strict form",
+        "deps": [
+          "lem-blichfeldt-lattice-point-principle",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "def-axiom-of-choice",
+          "def-convex-subset-of-euclidean-space",
+          "def-full-euclidean-lattice-and-covolume",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. If measurable C⊂R^n is convex, centrally symmetric, and vol(C)>2^n covol(Λ), then C contains a nonzero point of Λ.",
+        "strategy": "Dilate C by 1/2; its volume exceeds covol(Λ). Blichfeldt gives distinct u,v in C/2 with u−v∈Λ. Since 2u,−2v∈C, their midpoint u−v lies in C by convexity, and is nonzero.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Remark 4.18 and Theorem 4.19, p.76"
+            },
+            {
+              "title": "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory",
+              "url": "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf",
+              "locator": "§28 pp.144–147"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-minkowski-convex-body-theorem-at-equality",
+        "kind": "corollary",
+        "title": "Minkowski convex-body theorem at equality",
+        "deps": [
+          "thm-minkowski-convex-body-theorem",
+          "lem-full-lattice-fundamental-domain-and-bounded-points",
+          "def-axiom-of-choice",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "def-convex-subset-of-euclidean-space",
+          "def-full-euclidean-lattice-and-covolume",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. If C⊂R^n is compact, convex, centrally symmetric, and vol(C)≥2^n covol(Λ), then C contains a nonzero lattice point.",
+        "strategy": "For m≥1 apply the strict form to (1+1/m)C. All resulting nonzero lattice points lie in 2C, whose lattice intersection is finite. One point occurs along an unbounded subsequence; its rescaled preimages converge to it in closed C. Compactness and the half-open tile argument handle the boundary case.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Theorem 4.19, p.76"
+            },
+            {
+              "title": "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory",
+              "url": "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf",
+              "locator": "§28 pp.145–146"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 4
+      },
+      {
+        "id": "def-successive-minima-of-a-convex-body-with-respect-to-a-lattice",
+        "kind": "definition",
+        "title": "Successive minima of a convex body",
+        "deps": [
+          "def-full-euclidean-lattice-and-covolume",
+          "def-convex-subset-of-euclidean-space",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded"
+        ],
+        "statement": "For compact centrally symmetric convex C⊂R^n with nonempty interior and a full lattice Λ, λᵢ(C,Λ) is the infimum of t>0 such that span_R(tC∩Λ) has dimension at least i, for 1≤i≤n.",
+        "strategy": "The body contains a Euclidean ball about zero and is bounded, giving finite thresholds. For positivity, write the full lattice as B Z^n; boundedness of B^{-1} gives |Bm|≥1/K for every nonzero integer vector m, so a nonzero lattice point in tC forces t≥1/(KR). Nesting of dilates and a spanning dilate give 0<λ₁≤⋯≤λₙ<∞; the later attainment lemma proves the infima occur.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ben Green, Additive Combinatorics, Lecture 3 §3.7",
+              "url": "https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf",
+              "locator": "Lecture 3 §3.7 p.27"
+            },
+            {
+              "title": "Martin Henk, Successive Minima and Lattice Points",
+              "url": "https://arxiv.org/pdf/math/0204158",
+              "locator": "§1 pp.1–2"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-successive-minima-attainment-and-adapted-flag",
+        "kind": "lemma",
+        "title": "Attained successive minima and adapted flag",
+        "deps": [
+          "def-successive-minima-of-a-convex-body-with-respect-to-a-lattice",
+          "lem-full-lattice-fundamental-domain-and-bounded-points",
+          "def-convex-subset-of-euclidean-space",
+          "def-linear-basis",
+          "def-linear-combination-and-span",
+          "def-full-euclidean-lattice-and-covolume",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Each successive minimum λᵢ is attained. There are independent a₁,…,aₙ∈Λ with aᵢ∈λᵢC and span(λᵢC∩Λ)=span{aⱼ:λⱼ≤λᵢ}; moreover span(int(λᵢC)∩Λ)⊆span{aⱼ:λⱼ<λᵢ} for every i.",
+        "strategy": "Approximate each infimum by a countable sequence of thresholds, then pass to a recurring subset of the finite lattice set in a fixed bounded dilate. Build the adapted basis by least indices from that finite set. For the interior flag, shrink an interior lattice point using continuity; when p=0 choose only this shrink parameter, and when p>0 also choose it below the finite positive gaps to the smaller minima, giving the dimension contradiction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ben Green, Additive Combinatorics, Lecture 3 §3.7",
+              "url": "https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf",
+              "locator": "Lecture 3 §3.7 p.27"
+            },
+            {
+              "title": "Martin Henk, Successive Minima and Lattice Points",
+              "url": "https://arxiv.org/pdf/math/0204158",
+              "locator": "§§1–2 pp.1–4"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-triangular-borel-maps-scale-euclidean-volume",
+        "kind": "lemma",
+        "title": "Triangular Borel maps scale Euclidean volume",
+        "deps": [
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let aᵢ>0 and Borel ψᵢ:R^{n−i}→R. The triangular Borel bijection Tᵢ(x)=aᵢxᵢ+ψᵢ(x_{i+1},…,xₙ) sends Borel sets E to Borel sets and vol(T(E))=(∏aᵢ)vol(E); its inverse scales by (∏aᵢ)^{-1}.",
+        "strategy": "Solve coordinates backward, so T and T^{-1} are Borel. Factor T into coordinate scalings and shears. For a shear, each one-dimensional fibre is translated by a Borel function of later coordinates, so translation invariance and Tonelli give equal measure. A positive coordinate scaling multiplies one-dimensional fibre length by aᵢ; Fubini/Tonelli and product–Euclidean identification give the formula for arbitrary Borel E, with extended values allowed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ben Green, Additive Combinatorics, Lecture 3 §3.7",
+              "url": "https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf",
+              "locator": "Lecture 3 §3.7 pp.27–28, triangular map in Theorem 3.3"
+            },
+            {
+              "title": "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory",
+              "url": "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf",
+              "locator": "§27 Lemma 27.2 and §28 volume arguments"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-minkowski-successive-minima-volume-deformation",
+        "kind": "lemma",
+        "title": "Successive-minima volume deformation and collision avoidance",
+        "deps": [
+          "def-successive-minima-of-a-convex-body-with-respect-to-a-lattice",
+          "lem-successive-minima-attainment-and-adapted-flag",
+          "lem-triangular-borel-maps-scale-euclidean-volume",
+          "def-convex-subset-of-euclidean-space",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-strict-separation-of-a-point-from-a-closed-convex-set",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-measure",
+          "def-full-euclidean-lattice-and-covolume",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. For U=int(C), an adapted directional lattice basis aᵢ, and successive minima λᵢ, the slice-centroid triangular map Φ(U) is measurable, centrally symmetric, has volume (∏λᵢ)vol(C), and has no two distinct points differing by an element of 2Λ. In particular Φ(U)∩Λ={0}. Convexity of Φ(U) is not asserted.",
+        "strategy": "Use the adapted vectors as a real coordinate basis. Each slice has positive finite relative volume and its centroid lies in the slice by separation in its affine hull. Paired slices satisfy F_j(-x)=-F_j(x), so reflection makes the centroid map odd without asserting that an individual slice is symmetric. Tonelli gives Borel coordinate ratios; the constant fibre Jacobian sqrt(det(AᵀA)) cancels. Exhaust int(C) by positive dilates with k≥2, apply triangular volume scaling, and use the adapted interior flag to exclude collisions modulo 2Λ.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ben Green, Additive Combinatorics, Lecture 3 §3.7",
+              "url": "https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf",
+              "locator": "Lecture 3 §3.7 Theorem 3.3 proof, pp.27–28"
+            },
+            {
+              "title": "Martin Henk, Successive Minima and Lattice Points",
+              "url": "https://arxiv.org/pdf/math/0204158",
+              "locator": "§3 pp.5–7, independent upper-bound proof"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-minkowski-second-theorem-on-successive-minima",
+        "kind": "theorem",
+        "title": "Minkowski second theorem on successive minima",
+        "deps": [
+          "def-successive-minima-of-a-convex-body-with-respect-to-a-lattice",
+          "lem-successive-minima-attainment-and-adapted-flag",
+          "lem-minkowski-successive-minima-volume-deformation",
+          "lem-blichfeldt-lattice-point-principle",
+          "lem-full-lattice-fundamental-domain-and-bounded-points",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-countable-additivity-and-set-function-continuity",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "def-axiom-of-choice",
+          "def-convex-subset-of-euclidean-space",
+          "def-full-euclidean-lattice-and-covolume",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "cor-index-of-a-full-rank-integer-sublattice-is-the-absolute-determinant",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. For a compact centrally symmetric convex body C⊂R^n with nonempty interior and full lattice Λ, (2^n/n!)covol(Λ)≤(∏_{i=1}^n λᵢ(C,Λ))vol(C)≤2^n covol(Λ).",
+        "strategy": "Choose independent adapted aᵢ. The cross-polytope conv{±aᵢ/λᵢ} lies in C. Decompose the standard cross-polytope into 2^n orthant simplices, integrate each simplex to volume 1/n! by Tonelli, then apply the linear determinant formula; the resulting volume is 2^n|det(aᵢ)|/(n!∏λᵢ). because the aᵢ generate a finite-index sublattice, |det(aᵢ)|≥covol(Λ), yielding the lower bound. For the upper bound, the deformation lemma gives Borel Φ(int C) of volume (∏λᵢ)vol(C) and forbids 2Λ-congruent distinct points. If this volume exceeded covol(2Λ)=2^n covol(Λ), Blichfeldt would produce exactly such a pair. The boundary of a convex body has zero volume by nested homothetic approximation, so vol(int C)=vol(C).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ben Green, Additive Combinatorics, Lecture 3 §3.7",
+              "url": "https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf",
+              "locator": "Lecture 3 §3.7 Theorem 3.3, pp.27–28, upper bound"
+            },
+            {
+              "title": "Martin Henk, Successive Minima and Lattice Points",
+              "url": "https://arxiv.org/pdf/math/0204158",
+              "locator": "§3 pp.5–7, independent upper bound"
+            },
+            {
+              "title": "Martin Henk, Successive Minima and Lattice Points",
+              "url": "https://arxiv.org/pdf/math/0204158",
+              "locator": "§1 pp.1–2, cross-polytope lower bound"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-ring-of-integers-and-ideals-are-full-lattices",
+        "kind": "theorem",
+        "title": "Number-field integer rings and ideals are full lattices",
+        "deps": [
+          "def-minkowski-embedding-of-a-number-field",
+          "def-full-euclidean-lattice-and-covolume",
+          "thm-discriminant-as-an-embedding-determinant",
+          "thm-ring-of-integers-free-of-rank-degree",
+          "lem-subgroups-of-z-are-cyclic",
+          "def-left-right-and-two-sided-ideal",
+          "def-fractional-ideal",
+          "def-number-field",
+          "def-ring-of-integers-of-a-number-field"
+        ],
+        "statement": "The unscaled Minkowski images of O_K and every nonzero fractional O_K-ideal are full lattices in R^{[K:Q]}.",
+        "strategy": "A Z-basis of O_K is Q-independent after positive-denominator clearing and therefore a Q-basis; the published embedding-determinant theorem makes its realified images a real basis. Prove locally by induction that each subgroup of Z^n has a basis of at most n elements, projecting to dZ and adjoining one lift to a basis of the kernel. For a nonzero integral ideal a, uO_K⊂a makes its real span full, so its subgroup basis has exactly n members; Z-independence then gives Q-independence. For fractional I, dI is integral by definition, and invertible real block multiplication transports its lattice to σ(I). This proof uses no Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Proposition 4.26, pp.79–80"
+            },
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§7.1 Lemmas 7.1.7–7.1.8, pp.80–81"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-covolume-of-an-ideal-lattice",
+        "kind": "theorem",
+        "title": "Covolume of an integral ideal lattice",
+        "deps": [
+          "thm-ring-of-integers-and-ideals-are-full-lattices",
+          "thm-number-field-discriminant-is-well-defined-and-nonzero",
+          "lem-discriminant-change-of-basis",
+          "thm-discriminant-as-an-embedding-determinant",
+          "def-absolute-norm-of-an-ideal",
+          "lem-nonzero-number-field-ideal-has-finite-quotient",
+          "def-minkowski-embedding-of-a-number-field",
+          "def-integral-basis-and-power-integral-basis",
+          "def-discriminant-of-a-number-field-basis-and-order",
+          "cor-index-of-a-full-rank-integer-sublattice-is-the-absolute-determinant",
+          "def-full-euclidean-lattice-and-covolume",
+          "def-number-field"
+        ],
+        "statement": "With the unscaled embedding and a nonzero integral ideal a⊂O_K, covol(σ(a))=2^{-r₂}√|d_K|·Na.",
+        "strategy": "For any Z-basis of a, form the all-complex embedding matrix B and the real matrix A obtained by replacing each conjugate pair by real and imaginary columns. Each pair changes |det| by factor 2, so |det A|=2^{-r₂}√|disc(a-basis)|. The integral inclusion a⊂O_K has index Na and change-of-basis determinant ±Na, giving |disc(a-basis)|=(Na)^2|d_K|. For a fractional ideal first multiply by a positive integer to become integral; never apply the displayed integral norm formula to a fractional ideal without that reduction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Proposition 4.26, pp.79–80"
+            },
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§7.1 Lemmas 7.1.7–7.1.8, pp.80–81"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-archimedean-norm-bound",
+        "kind": "lemma",
+        "title": "Archimedean product region, volume and norm bound",
+        "deps": [
+          "def-minkowski-embedding-of-a-number-field",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-am-gm",
+          "def-axiom-of-choice",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "cor-volume-of-the-unit-n-ball",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-polar-surface-measure-on-the-unit-sphere"
+        ],
+        "statement": "Assume the Axiom of Choice. For t>0 put X_t={(x,z)∈R^{r₁}×C^{r₂}:Σ|xᵢ|+2Σ|zⱼ|≤t}, n=r₁+2r₂. Then X_t is compact, convex, symmetric, vol(X_t)=2^{r₁}(π/2)^{r₂}t^n/n!, and every point satisfies ∏|xᵢ|∏|zⱼ|²≤(t/n)^n.",
+        "strategy": "Split real coordinates by signs and put each complex coordinate in polar form z=ρe^{iθ}. The angular integral is 2π, and u=2ρ contributes (π/2)u du; iterating the simplex integral over r₁ variables of weight 1 and r₂ variables of weight u gives t^n/n!, with every boundary negligible. Apply the n-variable AM–GM inequality to the r₁ entries |xᵢ| and the two copies of each |zⱼ|. The factor π/2 is tied to the unscaled real/imaginary convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Lemmas 4.22–4.25, pp.78–79"
+            },
+            {
+              "title": "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory",
+              "url": "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf",
+              "locator": "§27 Lemma 27.8 and Theorem 27.7, pp.143–144"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-small-element-in-a-number-field-ideal",
+        "kind": "theorem",
+        "title": "Small nonzero element in a number-field ideal",
+        "deps": [
+          "cor-minkowski-convex-body-theorem-at-equality",
+          "thm-covolume-of-an-ideal-lattice",
+          "lem-archimedean-norm-bound",
+          "thm-field-norm-and-trace-by-embeddings",
+          "def-axiom-of-choice",
+          "thm-ring-of-integers-and-ideals-are-full-lattices",
+          "def-minkowski-embedding-of-a-number-field",
+          "def-full-euclidean-lattice-and-covolume"
+        ],
+        "statement": "Assume the Axiom of Choice. For nonzero integral a⊂O_K, some 0≠α∈a satisfies |N_{K/Q}(α)|≤(4/π)^{r₂}(n!/n^n)√|d_K|·Na.",
+        "strategy": "Set t^n=n!(4/π)^{r₂}√|d_K|Na, so the product region X_t has volume exactly 2^n covol(σ(a)). Equality-form Minkowski yields nonzero σ(α)∈X_t∩σ(a). The embedding norm formula gives |Nα|=∏real|σᵢα|∏complex|τⱼα|²; the region lemma bounds this by (t/n)^n. Carry the unscaled covolume factor 2^{-r₂} through the volume equation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Proposition 4.27, pp.80–81"
+            },
+            {
+              "title": "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory",
+              "url": "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf",
+              "locator": "§27 Theorems 27.5–27.7, pp.141–144"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-minkowski-bound-for-ideal-classes",
+        "kind": "theorem",
+        "title": "Minkowski bound for ideal classes",
+        "deps": [
+          "thm-small-element-in-a-number-field-ideal",
+          "cor-ring-of-integers-is-a-dedekind-domain",
+          "def-ideal-class-group-of-a-domain",
+          "lem-ideal-class-group-well-defined",
+          "thm-nonzero-ideals-in-dedekind-domains-are-invertible",
+          "thm-ideal-norm-is-multiplicative",
+          "thm-principal-ideal-norm-is-absolute-field-norm",
+          "def-fractional-ideal",
+          "def-axiom-of-choice",
+          "def-invertible-fractional-ideal",
+          "def-product-and-colon-of-fractional-ideals",
+          "lem-fractional-ideal-operations-well-defined",
+          "def-generated-and-principal-ideals"
+        ],
+        "statement": "Assume the Axiom of Choice. Every class in Cl(O_K) contains an integral ideal b with Nb≤M_K=(4/π)^{r₂}(n!/n^n)√|d_K|.",
+        "strategy": "The published number-field Dedekind corollary applies to O_K (with AC), so the CA-9 fractional-ideal group and invertibility theorems apply. For any class [I] choose a nonzero fractional representative I and 0≠u∈O_K such that b=uI^{-1}⊂O_K is integral, as the fractional-ideal definition permits. Small-element theorem gives 0≠β∈b with |Nβ|≤M_K Nb. Because (β)⊂b and b is invertible, a=(β)b^{-1} is integral; [a]=[b]^{-1}=[I], not [I]^{-1}. The identity ab=(β) and the integral ideal norm theorem give Na=|Nβ|/Nb≤M_K. If u changes, b changes by a principal factor, so the class assertion is independent of the preliminary denominator.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Theorem 4.3 proof, p.81"
+            },
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§7.1 Theorem 7.1.2 proof, pp.81–82"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-finitely-many-number-field-ideals-of-bounded-norm",
+        "kind": "lemma",
+        "title": "Finitely many ideals of bounded norm",
+        "deps": [
+          "def-absolute-norm-of-an-ideal",
+          "lem-nonzero-number-field-ideal-has-finite-quotient",
+          "thm-ring-of-integers-free-of-rank-degree",
+          "thm-lagrange"
+        ],
+        "statement": "For every real B≥1, only finitely many nonzero integral O_K-ideals a satisfy Na≤B.",
+        "strategy": "For a with Na=m, Lagrange applied to the finite additive group O_K/a gives mO_K⊂a. For each positive integer m≤B, ideals between mO_K and O_K correspond to ideals of the finite ring O_K/mO_K, hence form a finite set. A finite union over m≤⌊B⌋ completes the proof. This finiteness argument itself makes no Choice assumption.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§6.3 Proposition 6.3.6 and §7.1 p.77"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Theorem 4.4 proof, p.71"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-finiteness-of-the-number-field-class-group",
+        "kind": "theorem",
+        "title": "Finiteness of the number-field class group",
+        "deps": [
+          "thm-minkowski-bound-for-ideal-classes",
+          "lem-finitely-many-number-field-ideals-of-bounded-norm",
+          "lem-ideal-class-group-well-defined",
+          "def-axiom-of-choice",
+          "def-ideal-class-group-of-a-domain"
+        ],
+        "statement": "Assume the Axiom of Choice. The ideal class group Cl(O_K) is finite.",
+        "strategy": "The finite set of integral ideals with norm ≤M_K surjects onto Cl(O_K) by the class-bound theorem. The class quotient is well defined by the published CA interface, so its image is finite. The Choice cost comes only through the class-bound and class-group route.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Theorem 4.4, p.71"
+            },
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§7.1 Theorem 7.1.2, pp.77–82"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-class-group-generated-by-small-primes",
+        "kind": "corollary",
+        "title": "Class group generated by small prime ideals",
+        "deps": [
+          "thm-minkowski-bound-for-ideal-classes",
+          "thm-unique-factorisation-of-ideals-in-dedekind-domains",
+          "thm-ideal-norm-is-multiplicative",
+          "cor-norm-of-a-prime-ideal",
+          "def-axiom-of-choice",
+          "cor-ring-of-integers-is-a-dedekind-domain",
+          "def-ideal-class-group-of-a-domain",
+          "lem-ideal-class-group-well-defined"
+        ],
+        "statement": "Assume the Axiom of Choice. Cl(O_K) is generated by classes of nonzero prime ideals p with Np≤M_K.",
+        "strategy": "Use the CA-9 proved unique factorisation theorem, under AC, to factor each bounded integral representative a=∏pᵢ^{eᵢ}. Multiplicativity of positive integer ideal norm gives each Npᵢ≤Na≤M_K, and the class of a is the product of their classes. The separately published ZF factorisation route is not substituted for this AC-qualified CA-9 supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 discussion after Theorem 4.3, pp.70–71"
+            },
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§7.3 Lemma 7.3.1, p.84"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one",
+        "kind": "corollary",
+        "title": "Nontrivial number fields have discriminant of absolute value greater than one",
+        "deps": [
+          "thm-minkowski-bound-for-ideal-classes",
+          "def-axiom-of-choice",
+          "def-absolute-norm-of-an-ideal",
+          "lem-nonzero-number-field-ideal-has-finite-quotient",
+          "lem-bernoulli-inequality",
+          "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder",
+          "def-ideal-class-group-of-a-domain"
+        ],
+        "statement": "Assume the Axiom of Choice. If [K:Q]=n>1, then |d_K|>1.",
+        "strategy": "At least one ideal class exists, so its bounded representative has norm ≥1, implying √|d_K|≥n^n/(n!(4/π)^{r₂}). Since r₂≤n/2, set U_n=(4/π)^{n/2}n!/n^n. At n=2, U₂=2/π<1; for n≥2, U_{n+1}/U_n=(2/√π)(n/(n+1))^n<1 because the binomial expansion gives (1+1/n)^n≥2+(n−1)/(2n)>2, hence (n/(n+1))^n<1/2. Thus U_n<1 and hence (4/π)^{r₂}n!/n^n<1. Therefore |d_K|>1; degree one is excluded explicitly.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Theorem 4.9 proof, p.72"
+            },
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§7.1 Corollary 7.1.9, p.82"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-no-nontrivial-number-field-is-unramified-over-q",
+        "kind": "corollary",
+        "title": "Every nontrivial number field has a ramified finite prime",
+        "deps": [
+          "cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one",
+          "thm-ramified-primes-and-the-number-field-discriminant",
+          "def-axiom-of-choice",
+          "thm-ring-of-integers-free-of-rank-degree",
+          "def-discriminant-of-a-number-field-basis-and-order",
+          "thm-number-field-discriminant-is-well-defined-and-nonzero",
+          "def-field-norm-and-trace",
+          "thm-number-field-integral-ideal-factorisation-in-zf",
+          "def-ramification-index",
+          "def-prime-above-and-residue-degree",
+          "def-split-inert-ramified-and-unramified-prime",
+          "thm-chinese-remainder-theorem-for-comaximal-ideals",
+          "lem-trace-pairing-for-a-finite-separable-extension",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "cor-algebraic-extensions-of-perfect-fields-are-separable",
+          "thm-trace-is-sum-of-eigenvalues",
+          "def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form",
+          "cor-ring-of-integers-is-a-dedekind-domain",
+          "thm-nonzero-ideals-in-dedekind-domains-are-invertible",
+          "lem-every-integer-above-one-has-a-prime-divisor"
+        ],
+        "statement": "Assume the Axiom of Choice. Every finite number-field extension K/Q with [K:Q]>1 has a rational prime that ramifies in K.",
+        "strategy": "The preceding corollary gives an integer d_K with |d_K|>1, so some rational prime p divides it. The published ramification–discriminant criterion gives p ramified. Independently check that criterion here via the finite F_p-algebra O_K/pO_K: p divides d_K exactly when its trace pairing is degenerate; over the perfect field F_p this is equivalent to a nonreduced algebra, and the prime-power CRT decomposition is nonreduced exactly when some ramification index exceeds one. This concerns finite primes only.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 3 Theorem 3.35 and Lemmas 3.36–3.38, pp.60–61; Ch. 4 Theorem 4.9, p.72"
+            },
+            {
+              "title": "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory",
+              "url": "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf",
+              "locator": "§28 Theorem 28.3, p.147"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-bounded-conjugates-give-finitely-many-integral-polynomials",
+        "kind": "lemma",
+        "title": "Bounded roots give finitely many monic integer polynomials",
+        "deps": [],
+        "statement": "For fixed n≥1 and R≥1, there are finitely many monic integer polynomials of degree at most n whose complex roots, counted with multiplicity, all have modulus at most R.",
+        "strategy": "For a monic degree-m polynomial f(X)=∏_{j=1}^m(X−α_j), Vieta gives each coefficient c_{m-k}=(-1)^k Σ_{|S|=k}∏_{j∈S}α_j, so |c_{m-k}|≤binom(m,k)R^k. For each m≤n, every coefficient lies in an explicitly finite integer interval; the finite union of boxes is finite. The constant polynomial 1 handles m=0 if included.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 8 Theorem 8.43 proof, pp.151–152"
+            },
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§6.2 discriminants and integral minimal polynomials"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-hermite-minkowski-bounded-primitive-integral-element",
+        "kind": "lemma",
+        "title": "Bounded primitive integral element for Hermite–Minkowski",
+        "deps": [
+          "def-minkowski-embedding-of-a-number-field",
+          "thm-ring-of-integers-and-ideals-are-full-lattices",
+          "thm-covolume-of-an-ideal-lattice",
+          "thm-minkowski-convex-body-theorem",
+          "cor-trace-and-norm-of-an-algebraic-integer",
+          "thm-field-norm-and-trace-by-embeddings",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "cor-algebraic-extensions-of-perfect-fields-are-separable",
+          "lem-restriction-fibres-for-embeddings-in-a-finite-tower",
+          "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder",
+          "cor-rational-algebraic-integers-are-integers",
+          "thm-tower-law-for-finite-field-extensions",
+          "def-full-euclidean-lattice-and-covolume",
+          "def-convex-subset-of-euclidean-space",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. For fixed integers n≥2 and real B≥1, every degree-n number field K with |d_K|≤B has α∈O_K with K=Q(α) and every conjugate of α of modulus at most √(B+2).",
+        "strategy": "Use the real or totally complex convex window and compare its volume with the unscaled ideal-lattice covolume; the Gregory–Leibniz N=1 remainder proves π>2. The norm makes the distinguished real embedding exceptional in the real case and, for r₂≥2, makes the first complex pair uniquely larger than one. When r₂=1, the window point is a nonzero integral element with |Re τ₁(α)|<1, so it cannot be rational; degree two then makes it primitive. The windows give the common conjugate bound √(B+2).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 8 Theorem 8.43 proof, pp.151–152"
+            },
+            {
+              "title": "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory",
+              "url": "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf",
+              "locator": "§28 Theorem 28.4, p.147, statement and Samuel reference"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-hermite-minkowski-finiteness",
+        "kind": "theorem",
+        "title": "Hermite–Minkowski finiteness",
+        "deps": [
+          "lem-hermite-minkowski-bounded-primitive-integral-element",
+          "lem-bounded-conjugates-give-finitely-many-integral-polynomials",
+          "cor-algebraic-integer-minimal-polynomial-criterion",
+          "def-axiom-of-choice",
+          "thm-universal-property-of-adjoining-an-irreducible-root",
+          "prop-extension-degree-one-iff-equal-fields",
+          "def-number-field"
+        ],
+        "statement": "Assume the Axiom of Choice. For fixed positive integers n and B, only finitely many Q-isomorphism classes of degree-n number fields have |d_K|≤B.",
+        "strategy": "For n=1 only Q occurs. For n≥2 the primitive-element lemma produces integral α generating each field and with every conjugate bounded by √(B+2); its monic degree-n minimal polynomial has integer coefficients. The bounded-polynomial lemma leaves finitely many such polynomials. Each irreducible polynomial determines at most one Q-isomorphism class Q[X]/(f), so the field set is finite. No generated field is counted merely from a nonprimitive integer.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 8 Theorem 8.43, pp.151–152"
+            },
+            {
+              "title": "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory",
+              "url": "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf",
+              "locator": "§28 Theorem 28.4, p.147"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 365.918,
+    "id": "minkowski-theory-and-number-field-class-groups-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Minkowski Theory and Number Field Class Groups — Examples",
+    "companion": "minkowski-theory-and-number-field-class-groups",
+    "requires": [
+      "minkowski-theory-and-number-field-class-groups"
+    ],
+    "items": [
+      {
+        "id": "ex-minkowski-bound-for-gaussian-integers",
+        "kind": "example",
+        "title": "Minkowski bound for Gaussian integers",
+        "deps": [
+          "thm-minkowski-bound-for-ideal-classes",
+          "thm-ring-of-integers-of-a-quadratic-field",
+          "cor-discriminant-of-a-quadratic-field",
+          "thm-dedekind-pid-class-group-characterisation",
+          "def-axiom-of-choice",
+          "def-archimedean-embeddings-and-number-field-signature",
+          "def-absolute-norm-of-an-ideal",
+          "lem-nonzero-number-field-ideal-has-finite-quotient",
+          "def-ideal-class-group-of-a-domain",
+          "cor-ring-of-integers-is-a-dedekind-domain",
+          "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder"
+        ],
+        "statement": "Assume the Axiom of Choice. For K=Q(i), M_K=4/π<2, so Cl(Z[i]) is trivial and Z[i] is a PID.",
+        "strategy": "Use O_K=Z[i], d_K=−4, n=2 and r₂=1. The formula gives M_K=(4/π)(2!/2²)·2=4/π. Every bounded integral representative has positive integer norm 1, hence is O_K; the class group is trivial. Apply the published Dedekind PID criterion. The inequality uses π>2.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Example 4.5, p.71"
+            },
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§7.1 Example 7.1.3, p.78"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-class-group-of-q-sqrt-minus-five",
+        "kind": "example",
+        "title": "Class group of Q(√−5)",
+        "deps": [
+          "thm-minkowski-bound-for-ideal-classes",
+          "thm-ring-of-integers-of-a-quadratic-field",
+          "cor-discriminant-of-a-quadratic-field",
+          "thm-ideal-norm-is-multiplicative",
+          "thm-principal-ideal-norm-is-absolute-field-norm",
+          "def-axiom-of-choice",
+          "def-absolute-norm-of-an-ideal",
+          "def-field-norm-and-trace",
+          "def-ideal-class-group-of-a-domain",
+          "def-generated-and-principal-ideals",
+          "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder"
+        ],
+        "statement": "Assume the Axiom of Choice. For K=Q(√−5), Cl(O_K)≅Z/2Z, generated by the class of p=(2,1+√−5).",
+        "strategy": "O_K=Z[√−5], d_K=−20, so M_K=(2/π)√20<3 and integral class representatives have norm 1 or 2. A norm-2 quotient is F₂ and sends √−5 to its unique root 1, hence p is the unique norm-2 ideal. It satisfies p²=(2) by containment and equal norm 4, or the ramified prime factorization. If p=(a+b√−5), its norm would be a²+5b²=2, impossible. Thus p is nonprincipal of order two, and {1,[p]} exhausts the bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Example 4.6, p.71"
+            },
+            {
+              "title": "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory",
+              "url": "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf",
+              "locator": "§25 imaginary quadratic examples, pp.129–131"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-class-group-of-q-sqrt-ten",
+        "kind": "example",
+        "title": "Class group of Q(√10)",
+        "deps": [
+          "thm-minkowski-bound-for-ideal-classes",
+          "thm-ring-of-integers-of-a-quadratic-field",
+          "cor-discriminant-of-a-quadratic-field",
+          "thm-ideal-norm-is-multiplicative",
+          "thm-principal-ideal-norm-is-absolute-field-norm",
+          "def-axiom-of-choice",
+          "def-archimedean-embeddings-and-number-field-signature",
+          "def-absolute-norm-of-an-ideal",
+          "lem-nonzero-number-field-ideal-has-finite-quotient",
+          "def-field-norm-and-trace",
+          "def-sum-and-product-of-ideals",
+          "def-generated-and-principal-ideals",
+          "def-ideal-class-group-of-a-domain",
+          "thm-lagrange"
+        ],
+        "statement": "Assume the Axiom of Choice. For K=Q(√10), Cl(O_K)≅Z/2Z.",
+        "strategy": "O_K=Z[√10], d_K=40, n=2, r₂=0 and M_K=√10<4, so only norms 1,2,3 occur. The quotient maps give p₂=(2,√10) of norm2 and p₃=(3,1+√10), p₃′=(3,1−√10) of norm3, with no other ideals of those norms; show this by homomorphisms to F₂ and F₃. Explicit ideal containment and norm give p₂²=(2), p₃p₃′=(3), and p₂p₃=(4+√10) because N(4+√10)=6 and 4+√10 lies in both primes. Thus [p₃]=[p₂] and [p₃′]=[p₂]^{-1}=[p₂]. If p₂ were principal, a²−10b²=±2, impossible modulo 5; hence [p₂] has order exactly two, and the bound exhausts all classes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§7.1 Example 7.1.4, pp.78–79"
+            },
+            {
+              "title": "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory",
+              "url": "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf",
+              "locator": "§25 computing class groups, pp.128–134"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-class-group-from-small-prime-ideals",
+        "kind": "example",
+        "title": "Higher-degree class group by norm exclusions",
+        "deps": [
+          "thm-minkowski-bound-for-ideal-classes",
+          "thm-reduction-mod-prime-irreducibility-test",
+          "thm-power-basis-discriminant-is-polynomial-discriminant",
+          "cor-squarefree-power-basis-discriminant-gives-ring-of-integers",
+          "cor-algebraic-integer-minimal-polynomial-criterion",
+          "cor-norm-of-a-prime-ideal",
+          "cor-discriminant-as-a-resultant-with-the-derivative",
+          "def-monic-resultant",
+          "def-discriminant-of-a-monic-polynomial",
+          "def-absolute-norm-of-an-ideal",
+          "cor-vietas-formulas-for-a-split-monic-polynomial",
+          "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder",
+          "def-ideal-class-group-of-a-domain",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let α be a root of f=X⁵−X−1 and K=Q(α). Then O_K=Z[α], d_K=2869=19·151, M_K<4, and Cl(O_K) is trivial because no ideal has norm 2 or 3.",
+        "strategy": "Over F₃, f has no roots and no irreducible quadratic factor, so it is irreducible over Q. Compute disc(f)=2869 via the resultant; its two distinct prime factors give the maximal power basis. The derivative has critical points ±c with f(−c)=4c/5−1<0 and f(c)=−4c/5−1<0, giving signature (1,2). The finite-remainder Gregory–Leibniz bound gives π>3 and hence M_K<4. Norm-two and norm-three ideals would yield roots of f modulo those primes, so every bounded class representative has norm one.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 2 Example 2.39 p.39; Ch. 4 Example 4.8 p.72"
+            },
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§7.3 class-group norm-exclusion method, pp.84–85"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-discriminant-lower-bound",
+        "kind": "example",
+        "title": "Signature constant rules out discriminant ±1",
+        "deps": [
+          "cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one",
+          "thm-minkowski-bound-for-ideal-classes",
+          "def-axiom-of-choice",
+          "def-ideal-class-group-of-a-domain",
+          "def-absolute-norm-of-an-ideal",
+          "lem-nonzero-number-field-ideal-has-finite-quotient",
+          "lem-bernoulli-inequality",
+          "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder"
+        ],
+        "statement": "Assume the Axiom of Choice. For every signature (r₁,r₂) with n=r₁+2r₂>1, the inequality 1≤(4/π)^{r₂}(n!/n^n)√|d_K| forces |d_K|>1.",
+        "strategy": "Write the numerical constant C_{n,r₂}; check n=2 separately: C_{2,0}=1/2 and C_{2,1}=2/π. For n≥3 use r₂≤n/2 and the decreasing bound U_n from the preceding corollary, so C_{n,r₂}<1. Apply the class bound to any class and the fact its representative norm is a positive integer. This records exactly where the signature factor enters.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Theorem 4.9 proof, p.72"
+            },
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§7.1 Corollary 7.1.9, p.82"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-no-everywhere-unramified-extension-of-q",
+        "kind": "example",
+        "title": "No nontrivial everywhere unramified number field over Q",
+        "deps": [
+          "cor-no-nontrivial-number-field-is-unramified-over-q",
+          "thm-ramified-primes-and-the-number-field-discriminant",
+          "def-axiom-of-choice",
+          "cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one",
+          "thm-number-field-discriminant-is-well-defined-and-nonzero",
+          "lem-every-integer-above-one-has-a-prime-divisor",
+          "def-split-inert-ramified-and-unramified-prime"
+        ],
+        "statement": "Assume the Axiom of Choice. A finite number field K≠Q cannot be unramified at every finite rational prime.",
+        "strategy": "If all finite primes were unramified, the discriminant criterion would make d_K a nonzero integer with no prime divisors, hence ±1. The discriminant lower-bound corollary rules this out for degree>1. State explicitly that the conclusion concerns finite primes, without silently adding an archimedean convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Theorem 4.9, p.72"
+            },
+            {
+              "title": "Brian Conrad and Aaron Landesman, Math 154 Algebraic Number Theory",
+              "url": "https://people.math.harvard.edu/~landesman/assets/undergraduate-number-theory.pdf",
+              "locator": "§28 Theorem 28.3, p.147"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "dependency_level": 9
+      },
+      {
+        "id": "cex-minkowski-constants-change-under-scaled-embedding",
+        "kind": "counterexample",
+        "title": "Mixing scaled and unscaled Minkowski covolumes fails",
+        "deps": [
+          "def-minkowski-embedding-of-a-number-field",
+          "thm-covolume-of-an-ideal-lattice",
+          "thm-ring-of-integers-of-a-quadratic-field",
+          "cor-discriminant-of-a-quadratic-field",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "cor-minkowski-convex-body-theorem-at-equality",
+          "def-full-euclidean-lattice-and-covolume",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice",
+          "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder"
+        ],
+        "statement": "Assume the Axiom of Choice. For K=Q(i), the unscaled lattice σ(O_K)=Z² has covolume 1, while the √2-scaled lattice √2Z² has covolume 2. Using the unscaled value 1 as the latter covolume falsely predicts a nonzero lattice point in the disk of radius 6/5: its area 36π/25>4, but the shortest nonzero scaled-lattice vector has length √2>6/5.",
+        "strategy": "Compute d_K=−4 and 2^{-r₂}√|d_K|=1 for the unscaled embedding. Scaling both real coordinates by √2 multiplies determinant by 2. Gregory–Leibniz partial sums N=7 and N=2 with opposite-signed remainders prove 3<π<4, placing the disk area 36π/25 strictly between the false threshold 4 and the true threshold 8; its radius remains below the shortest nonzero scaled-lattice length √2.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Number Theory v3.08",
+              "url": "https://www.jmilne.org/math/CourseNotes/ANTc.pdf",
+              "locator": "Ch. 4 Proposition 4.26, pp.79–80"
+            },
+            {
+              "title": "William A. Stein, Algebraic Number Theory: A Computational Approach",
+              "url": "https://wstein.org/books/ant/ant.pdf",
+              "locator": "§7.1 Lemma 7.1.7, pp.80–81"
+            }
+          ]
+        },
+        "axiom_use": "AC supplies Countable Choice for the published Lebesgue-volume interface and the AC-qualified Dedekind ideal-class route, exactly where these are used in the strategy. Finite selections themselves need no additional choice.",
+        "generation": {
+          "role": "counterexample"
+        },
+        "dependency_level": 5
+      }
+    ]
+  }
+]

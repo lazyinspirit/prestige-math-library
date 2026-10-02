@@ -89,6 +89,8 @@ test('the sweep gives each item a fresh compact Terra call and records real usag
       assert.equal(call.args[call.args.indexOf('--model') + 1], 'gpt-6-sol');
       assert.ok(call.args.includes('model_reasoning_effort="xhigh"'));
       assert.ok(call.args.includes(`model_context_window=${JUDGE_CONTEXT_WINDOW}`));
+      assert.ok(call.args.includes('model_auto_compact_token_limit=500000'));
+      assert.ok(call.args.includes('model_auto_compact_token_limit_scope="total"'));
       assert.equal(call.target_blocks, 1, 'one full target item per judge');
       assert.equal(call.interface_blocks, 1, 'compact A/B awareness is retained');
       assert.ok(call.proof_headings <= 1, 'a sibling proof must not enter the prompt');

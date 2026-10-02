@@ -187,7 +187,7 @@ test('a closure retry judges only ids that are actually stale', async () => {
     await stage.onGateFailure({ ctx: { run: 'demo', repo: root }, executor: { start: (_stage: any, plan: any) => started.push(plan) },
       stage, round: 1, failure: { id: 'judge-closure' } });
     assert.equal(started.length, 1);
-    assert.deepEqual(started[0].argv.slice(-2), ['--items', 'modified']);
+    assert.deepEqual(started[0].argv.slice(-6), ['--items', 'modified', '--lineup', 'sol61', '--effort', 'high']);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 

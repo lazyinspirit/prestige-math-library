@@ -1,0 +1,492 @@
+{
+  "version": 1,
+  "run": "frontier-37-owner-30",
+  "contracts": {
+    "def-greedy-set-cover": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition handles an empty universe: when U is empty no set is chosen, the empty cover is returned, and no charge is incurred."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition allows zero costs, and a zero-cost listed set with positive newly covered count has ratio 0 under exact rational arithmetic; the harmonic convention H_0 = 0 is fixed for the empty universe."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-element universe the loop of the Definition performs one round with positive newly covered count, charges the element the chosen set cost divided by its newly covered count, and stops."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition excludes a degenerate listed family by requiring the union of the listed sets to be U; empty or redundant listed sets may occur but contribute nothing, since a chosen set must have positive newly covered count."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or real endpoint parameter occurs; the loop runs over a finite element set and terminates because each round newly covers at least one element."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Each round chooses among finitely many candidate ratios and the Definition fixes the tie rule by smallest input index, so the selection is explicit and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition describes a deterministic algorithm and its charging convention; it is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse implication in the definition of the weighted greedy procedure."
+        }
+      ]
+    },
+    "lem-gap-three-sat-reduces-to-gap-independent-set": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-three-sat-is-np-complete",
+          "source_section": "Statement",
+          "quote": "The language $3$-SAT of satisfiable CNF formulas with exactly three literals per clause is NP-complete.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-three-sat-reduces-to-clique",
+          "source_section": "Proof, step 1.2",
+          "quote": "Construct a graph $G_\\varphi$ with one vertex $v_{jr}$ for each literal occurrence $\\ell_{jr}$ in clause $C_j$. Join $v_{jr}$ and $v_{j'r'}$ by an edge exactly when $j\\ne j'$ and the literals $\\ell_{jr}$ and $\\ell_{j'r'}$ are not complementary. Output the CLIQUE instance $(G_\\varphi,m)$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-clique-independent-set-and-vertex-cover-problems",
+          "source_section": "Definition",
+          "quote": "- A subset $K\\subseteq V$ is a **clique** when every two distinct vertices of $K$ are adjacent. - A subset $I\\subseteq V$ is an **independent set** when no two distinct vertices of $I$ are adjacent. - A subset $C\\subseteq V$ is a **vertex cover** when every edge in $E$ has at least one endpoint in $C$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-simple-graph",
+          "source_section": "Definition",
+          "quote": "The elements of $V=V(G)$ are the **vertices** and the elements of $E=E(G)$ are the **edges**. Thus every edge has two distinct endpoints, there are no loops, and an unordered pair of vertices occurs as at most one edge. Finiteness and the notation $|V|$ and $|E|$ are those of [[def-finite-cardinality]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gap-problem-and-gap-preserving-reduction",
+          "source_section": "Definition",
+          "quote": "The two gap reductions on this page use these fixed conventions. For max-3SAT the gap domain consists of formulas with $m\\ge1$ clauses, the scale is $m$, and the optimum is the maximum number of simultaneously satisfiable clauses. For maximum independent set the clause-literal reduction uses the number $m$ of clause clusters as its positive scale. The PCP reduction constructs a formula with at least one clause on every input, so its composition with the clause-literal reduction stays in these domains. The latter construction also preserves optimum values for the empty formula and its empty graph, but these zero-clause instances are outside the positive-scale gap domains.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "List the occurrences of $F$ as pairs $(j,r)$ with $1\\le j\\le m$ and $r\\in\\{1,2,3\\}$, where $(j,r)$ carries the $r$-th listed literal occurrence of clause $C_j$, and let $G$ have vertex set $V=\\{(j,r)\\}$. Declare two vertices adjacent exactly when either $j=j'$ and $r\\ne r'$ (same clause) or $j\\ne j'$ and the two carried literals are complementary, that is, one is the negation of the other (distinct clauses). Then $|V|=3m$, no loops or repeated edges occur because adjacency is a symmetric condition on distinct listed pairs, and $G$ is a finite simple graph. Building the vertex list and testing $3m(3m-1)/2$ pairs runs in polynomial time in the encoding of $F$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let an assignment satisfy a set of $t$ clauses. In each satisfied clause choose one of its three occurrences whose literal is true under the assignment. The chosen vertices number $t$, no two lie in the same clause, and no two are complementary, since a single assignment cannot make a variable and its negation both true; hence the chosen set is independent and $\\alpha(G)\\ge t$. Taking a best assignment gives $\\alpha(G)\\ge\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conversely let $I$ be an independent set of $G$ of size $k$. By step 1.1, $I$ contains at most one occurrence from each clause, and no two of its occurrences are complementary. Assign a variable $x$ the value true if some occurrence in $I$ carries the literal $x$, the value false if some occurrence in $I$ carries the literal $\\lnot x$, and the value false otherwise; this is well defined because complementary occurrences cannot both belong to $I$, and it assigns a value to every variable in polynomial time. Every occurrence in $I$ is then true, so the $k$ distinct clauses containing members of $I$ are all satisfied, and $\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F)\\ge k$. Taking a largest independent set gives $\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F)\\ge\\alpha(G)$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 give $\\alpha(G)\\le\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F)$ and $\\alpha(G)\\ge\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F)$, hence the exact equality $\\alpha(G)=\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F)$ for every 3-CNF formula with three literal occurrences per clause, including repeated literals and tautological clauses. For $m=0$ the graph is empty and both optima are $0$, so the equality and decoder remain valid. For $m\\ge1$ and $0<\\delta\\le1$, with positive scale $m$ by [F4], an instance with $\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F)=m$ gives $\\alpha(G)=m$, and an instance with $\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F)\\le(1-\\delta)m$ gives $\\alpha(G)\\le(1-\\delta)m$, so the gap promise transfers with the same $\\delta$ and scale $m$. The empty formula is outside this positive-scale gap domain.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The graph of step 1.1 is the complement, on the same occurrence vertices, of the published occurrence graph in [F1]: it joins exactly the pairs that the CLIQUE construction does not. Steps 2.1–3.1 establish directly that this complement graph has independent-set number $\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F)$ and give a polynomial-time decoder; the cited decision theorem alone states only a satisfiability equivalence.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 preserve the empty formula: G has no vertices and alpha(G)=OPT(F)=0; the decoder returns an assignment satisfying zero clauses. This case is outside the positive-scale gap domain, which requires m≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For m=0 both optima are zero. For m≥1 every three-literal clause is satisfiable by some assignment, hence OPT(F)≥1 and alpha(G)≥1; unsatisfiability does not imply zero Max3SAT optimum. The decoder also covers an empty independent set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m = 1 the graph is a triangle on the three occurrences, so no two vertices are independent in the same clause; step 2.1 and step 2.2 give equality alpha = OPT together with any single vertex, matching step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 states that repeated literal occurrences and tautological clauses are included; step 2.2 assigns values so that complementary occurrences cannot both lie in the independent set, and step 1.1 records that repeated occurrences receive distinct vertices."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or extremal real parameter occurs; m is a nonnegative integer counted by the construction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 selects one satisfied occurrence per satisfied clause and can do so by the least listed such occurrence; step 2.2 assigns variables by an explicit rule that sets a variable true only if an occurrence of it lies in the given finite independent set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the forward direction: a satisfying assignment yields an independent set, hence alpha at least OPT."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 gives the reverse direction: an independent set decodes to an assignment satisfying at least that many clauses, hence OPT at least alpha."
+        }
+      ]
+    }
+  },
+  "necessary_related_contracts": {
+    "def-gap-problem-and-gap-preserving-reduction": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Max3SAT and clause-cluster gap domains require m≥1. The PCP reduction constructs M≥1 on every input; empty formulas and their empty graphs retain the separate zero-optimum equality outside these gap domains."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition covers OPT(x) = 0 by the no side whenever s is nonnegative, and records that no quotient by OPT(x) is formed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition allows the completeness endpoint c = 1 with 0 at most s < c at most 1, the range used by the perfect-completeness verifier reductions below."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Promise problems have no separate degenerate instance shape: instances falling outside the gap window are simply outside the promise, by the Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition states the parameter range 0 at most s < c, so the smallest soundness value s = 0 and any completeness value up to c = 1 are included; both value inequalities are formed with the positive scale M(x)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A gap-preserving reduction is a total function computed by a deterministic algorithm; no member is selected from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is a promise-problem reduction that carries yes instances to yes instances; it is not one direction of a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted: the reduction carries no instances to no instances, which is not the converse of the yes-side transport."
+        }
+      ]
+    },
+    "thm-independent-set-has-no-ptas-unless-p-equals-np": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-pcp-verifier-reduces-to-gap-max-three-sat",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the currently published PCP supplier proof route. For every language $L$ in NP, the published perfect-completeness binary PCP verifier with $q=O(1)$ nonadaptive queries, $r=O(\\log n)$ fair random bits and fixed soundness $s<1$ gives a deterministic polynomial-time map $x\\mapsto F_x$ to a 3-CNF formula $F_x$ with $M\\ge1$ clauses and a fixed $\\delta>0$ such that $x\\in L$ implies $\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F_x)=M$, while $x\\notin L$ implies $\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F_x)\\le(1-\\delta)M$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gap-three-sat-reduces-to-gap-independent-set",
+          "source_section": "Statement",
+          "quote": "For every 3-CNF formula $F$ with $m$ clauses of exactly three literal occurrences, construct in polynomial time a simple graph $G$ with $3m$ vertices, one per occurrence. Vertices in the same clause are adjacent, and vertices from distinct clauses are adjacent exactly when their literals are complementary. Then $\\alpha(G)=\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F)$. For $m\\ge1$ and $0<\\delta\\le1$, the promise $m$ versus at most $(1-\\delta)m$ transfers with unchanged $\\delta$ and positive scale $m$. For $m=0$ the graph is empty and both optima are $0$; this case is outside the positive-scale gap domain. From any independent set of $k$ vertices one can produce an assignment satisfying at least $k$ clauses in polynomial time.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gap-problem-and-gap-preserving-reduction",
+          "source_section": "Definition",
+          "quote": "The two gap reductions on this page use these fixed conventions. For max-3SAT the gap domain consists of formulas with $m\\ge1$ clauses, the scale is $m$, and the optimum is the maximum number of simultaneously satisfiable clauses. For maximum independent set the clause-literal reduction uses the number $m$ of clause clusters as its positive scale. The PCP reduction constructs a formula with at least one clause on every input, so its composition with the clause-literal reduction stays in these domains. The latter construction also preserves optimum values for the empty formula and its empty graph, but these zero-clause instances are outside the positive-scale gap domains.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-clique-independent-set-and-vertex-cover-problems",
+          "source_section": "Definition",
+          "quote": "- A subset $K\\subseteq V$ is a **clique** when every two distinct vertices of $K$ are adjacent. - A subset $I\\subseteq V$ is an **independent set** when no two distinct vertices of $I$ are adjacent. - A subset $C\\subseteq V$ is a **vertex cover** when every edge in $E$ has at least one endpoint in $C$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ptas-fptas-and-apx",
+          "source_section": "Definition",
+          "quote": "- A **polynomial-time approximation scheme** (PTAS) is a family $(A_\\epsilon)_{0<\\epsilon<1}$ of algorithms such that for every fixed $\\epsilon$ with $0<\\epsilon<1$ the algorithm $A_\\epsilon$ runs in deterministic time polynomial in the input length and guarantees factor $1+\\epsilon$ for minimization, respectively $1-\\epsilon$ for maximization, in the value inequalities of [[def-optimization-problem-and-approximation-ratio]]. The order of quantifiers is that the exponent of the polynomial may depend on the fixed $\\epsilon$. - A **fully polynomial-time approximation scheme** (FPTAS) is a PTAS with one running-time bound that is a polynomial jointly in the input length and in $1/\\epsilon$. - **APX** denotes, by explicit local convention, the class of finite-instance optimization problems in that model that admit one polynomial-time fixed-factor approximation in the objective direction of [[def-optimization-problem-and-approximation-ratio]]: a rational $\\rho\\ge 1$ with a polynomial-time $\\rho$-approximation for a minimization problem, or a rational $0<\\rho\\le 1$ with a polynomial-time $\\rho$-approximation for a maximization problem. This is a selected convention for this page; it does not claim that all of the literature uses the same reduction-based notion of APX-hardness.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-p",
+          "source_section": "Definition",
+          "quote": "Thus a language belongs to $P$ exactly when some deterministic Turing machine decides it in time bounded by a polynomial in the input length.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-p-is-contained-in-np-intersection-conp",
+          "source_section": "Statement",
+          "quote": "Every language in $P$ belongs to both $NP$ and $coNP$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-np-by-verifiers",
+          "source_section": "Definition",
+          "quote": "The class **NP** is the set of languages $$ L\\subseteq\\{0,1\\}^* $$ that admit a polynomial-time verifier with polynomially bounded certificates in the sense of [[def-polynomially-balanced-verifier]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-np-hard-and-np-complete",
+          "source_section": "Definition",
+          "quote": "- $C$ is **NP-hard** when for every language $L\\in NP$ one has $L\\le_p C$. - $C$ is **NP-complete** when $C$ is NP-hard and $C\\in NP$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $L\\in NP$ and the reduction of [F1], which supplies the fixed constant $\\delta>0$ and, for each input $x$, the formula $F_x$ with $M\\ge1$ clauses; for each $x$ apply the polynomial-time construction of [F2] to obtain the finite simple graph $G_x$ with $3M$ vertices and $\\alpha(G_x)=\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F_x)$, whose scale is the number $M$ of clause clusters. Assume the PTAS $A=(A_\\epsilon)$ of [F4] and fix a rational $\\epsilon$ with $0<\\epsilon<\\delta$, for instance $\\epsilon=\\delta/2$. The PCP supplier route is used under the Axiom of Choice hypothesis of [F7].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F7",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] and the exact optimum equality of [F2], the graphs $G_x$ satisfy $\\alpha(G_x)=\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F_x)=M$ when $x\\in L$, and $\\alpha(G_x)=\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F_x)\\le(1-\\delta)M$ when $x\\notin L$; the scale $M$ is positive and unchanged, so the same fixed $\\delta>0$ separates the two cases.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define the decision procedure: on input $x$, construct $G_x$, run the fixed algorithm $A_\\epsilon$ on $G_x$ to obtain an independent set $I$, let $s=|I|$, and accept $x$ exactly when $s>(1-\\delta)M$. The graph construction is polynomial by [F2], the algorithm $A_\\epsilon$ is polynomial time for the fixed $\\epsilon$ by [F4], and the returned set is independent of size $s$; by the PTAS guarantee the value satisfies $s\\ge(1-\\epsilon)\\alpha(G_x)$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F3",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $x\\in L$, then $\\alpha(G_x)=M$ by step 2.1, so $s\\ge(1-\\epsilon)M>(1-\\delta)M$ because $\\epsilon<\\delta$; hence the procedure accepts $x$.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "If $x\\notin L$, then $\\alpha(G_x)\\le(1-\\delta)M$ by step 2.1, and $s\\le\\alpha(G_x)$ because $s$ is the size of an independent set; hence $s\\le(1-\\delta)M$ and the procedure rejects $x$.",
+          "step": "4.2",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Steps 4.1 and 4.2 show that the deterministic polynomial-time procedure accepts exactly the inputs of $L$, so $L\\in P$; since $L\\in NP$ was arbitrary (the quantifier in [F6]), $NP\\subseteq P$, and $P\\subseteq NP$ by [F5], so $P=NP$. Therefore a PTAS for maximum independent set implies $P=NP$, and on the graphs $G_x$ one has $\\alpha(G_x)=M$ for yes instances and $\\alpha(G_x)\\le(1-\\delta)M$ for no instances with the same fixed $\\delta>0$.",
+          "step": "5.1",
+          "inputs": [
+            "F6",
+            "F5",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses M at least 1 from the gap reduction, so no empty formula or zero-vertex graph occurs among the instances G_x; the m = 0 case of the reduction is excluded by that lower bound."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "An independent set of size 0 is always feasible; step 4.2 bounds the algorithm output by alpha(G_x) which is at most (1 - delta) M, so a zero-size output is accepted by the threshold test only on the yes side, where step 4.1 forces a positive size."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes the rational epsilon with 0 < epsilon < delta, for instance epsilon = delta/2, so the PTAS parameter is strictly inside its range; the threshold comparison is strict."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The graphs G_x have 3M vertices and their independent sets may be empty; step 3.1 runs the fixed algorithm A_epsilon on the whole graph, and step 4.2 handles the trivial empty output through the inequality s at most alpha."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The acceptance threshold (1 - delta) M lies strictly below the yes value (1 - epsilon) M and above the no value (1 - delta) M only through the strict comparison of steps 4.1 and 4.2; both endpoint inequalities are used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 runs the fixed member A_epsilon of the given PTAS family; the Axiom of Choice enters only through the cited PCP supplier route of step 1.1, and the graph construction is polynomial and explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 proves the forward side: membership in L forces the decision procedure to accept."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.2 proves the reverse side: non-membership forces the decision procedure to reject."
+        }
+      ]
+    }
+  },
+  "citation_quote_patches": [
+    {
+      "id": "lem-pcp-verifier-reduces-to-gap-max-three-sat",
+      "citation_index": 4,
+      "source": "def-gap-problem-and-gap-preserving-reduction",
+      "quote": "The two gap reductions on this page use these fixed conventions. For max-3SAT the gap domain consists of formulas with $m\\ge1$ clauses, the scale is $m$, and the optimum is the maximum number of simultaneously satisfiable clauses. For maximum independent set the clause-literal reduction uses the number $m$ of clause clusters as its positive scale. The PCP reduction constructs a formula with at least one clause on every input, so its composition with the clause-literal reduction stays in these domains. The latter construction also preserves optimum values for the empty formula and its empty graph, but these zero-clause instances are outside the positive-scale gap domains."
+    },
+    {
+      "id": "thm-max-three-sat-has-no-ptas-unless-p-equals-np",
+      "citation_index": 2,
+      "source": "def-gap-problem-and-gap-preserving-reduction",
+      "quote": "The two gap reductions on this page use these fixed conventions. For max-3SAT the gap domain consists of formulas with $m\\ge1$ clauses, the scale is $m$, and the optimum is the maximum number of simultaneously satisfiable clauses. For maximum independent set the clause-literal reduction uses the number $m$ of clause clusters as its positive scale. The PCP reduction constructs a formula with at least one clause on every input, so its composition with the clause-literal reduction stays in these domains. The latter construction also preserves optimum values for the empty formula and its empty graph, but these zero-clause instances are outside the positive-scale gap domains."
+    },
+    {
+      "id": "ex-l-reductions-transfer-apx-hardness",
+      "citation_index": 0,
+      "source": "lem-gap-three-sat-reduces-to-gap-independent-set",
+      "quote": "For every 3-CNF formula $F$ with $m$ clauses of exactly three literal occurrences, construct in polynomial time a simple graph $G$ with $3m$ vertices, one per occurrence. Vertices in the same clause are adjacent, and vertices from distinct clauses are adjacent exactly when their literals are complementary. Then $\\alpha(G)=\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F)$. For $m\\ge1$ and $0<\\delta\\le1$, the promise $m$ versus at most $(1-\\delta)m$ transfers with unchanged $\\delta$ and positive scale $m$. For $m=0$ the graph is empty and both optima are $0$; this case is outside the positive-scale gap domain. From any independent set of $k$ vertices one can produce an assignment satisfying at least $k$ clauses in polynomial time."
+    }
+  ],
+  "note": "Merge contracts and necessary_related_contracts by item ID; apply citation_quote_patches to the latest shared rows, preserving concurrent PCP F1 refresh. No findings, decisions, or gates altered."
+}

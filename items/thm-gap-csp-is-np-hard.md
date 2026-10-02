@@ -5,6 +5,7 @@ title: "Constant-gap binary CSP is NP-hard"
 status: published
 origin: pipeline
 deps:
+  - def-axiom-of-choice
   - lem-three-sat-to-binary-constraint-graph
   - thm-three-sat-is-np-complete
   - lem-logarithmically-many-iterations-reach-constant-gap
@@ -16,7 +17,7 @@ deps:
   - lem-one-transformation-amplifies-gap
 proof_strategy: constructive
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 sources:
   scraped: []
@@ -27,14 +28,12 @@ sources:
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-29
-  audited: 2026-09-30
+  repair: research/frontier-37-owner-30-published-repair-evidence/thm-gap-csp-is-np-hard.repair.json
 ---
 
 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
 
 Let $\Sigma_\star$ be the fixed $66$-symbol alphabet of
 [[def-dinur-pcp-transformation]], let $T=T_t$ be the fixed transformation of
@@ -50,7 +49,7 @@ $$\operatorname{val}(f_L(x))\ge1\quad\text{for }x\in L,\qquad \operatorname{val}
 
 ## Facts & Assumptions
 
-**Given:** Use the fixed alphabet $\Sigma_\star$, the fixed map $T$ and the fixed cap $\alpha>0$.
+**Given:** Assume the Axiom of Choice and use the fixed alphabet $\Sigma_\star$, the fixed map $T$ and the fixed cap $\alpha>0$.
 
 [F1] For a three-CNF formula $F$ with $m$ clauses, each having exactly three literal occurrences, there is a polynomial-time binary constraint graph over the fixed alphabet $$\widehat\Sigma=\{B(0),B(1)\}\sqcup\{T(a):a\in\{0,1\}^3\}$$ with exactly $3m$ edges. Its value is one exactly when $F$ is satisfiable. If $F$ is unsatisfiable and $m\ge1$, then $$\operatorname{UNSAT}(G_F)\ge\frac1{3m}.$$ The zero-clause formula maps to an edgeless graph. ([[lem-three-sat-to-binary-constraint-graph]])
 
@@ -74,11 +73,13 @@ $$\operatorname{val}(f_L(x))\ge1\quad\text{for }x\in L,\qquad \operatorname{val}
 
 [F11] There are constants $C_E,C_V\ge1$, fixed before any input, such that every finite $\Sigma_\star$-graph $G$ with $m=\lvert E(G)\rvert$ edge records satisfies $\lvert E(T(G))\rvert\le C_Em$, $\lvert V(T(G))\rvert\le C_Vm$, and $T$ is deterministic and computable in time polynomial in the bit length of the explicit encoding of $G$. ([[lem-one-transformation-has-constant-factor-growth]])
 
+[A1] The Axiom of Choice is assumed ([[def-axiom-of-choice]]). It supplies the inherited premise of the current Dinur-transformation proof route through expander spectral theory and algebraic embedding extension.
+
 ## Proof
 
-**Given:** Use the fixed alphabet $\Sigma_\star$, the fixed map $T$ and $\alpha>0$, and let $x$ be an arbitrary instance of a language $L\in\mathrm{NP}$.
+**Given:** Assume the Axiom of Choice and use the fixed alphabet $\Sigma_\star$, the fixed map $T$ and $\alpha>0$, and let $x$ be an arbitrary instance of a language $L\in\mathrm{NP}$.
 
-1.1 By [F2] and [F8] there is a deterministic polynomial-time total reduction $g$ from $L$ to 3-SAT, which we fix; put $\varphi:=g(x)$, with $m$ clauses, each of exactly three literal occurrences. By [F1] the formula $\varphi$ has a polynomial-time computable graph $G_\varphi$ over $\widehat\Sigma=\{B(0),B(1)\}\sqcup\{T(a):a\in\{0,1\}^3\}$ with exactly $3m$ edges, and by [F10] the transformation alphabet is $\Sigma_\star=\{B(0),B(1)\}\sqcup\{0,1\}^6$. Let $f$ be the fixed injection $f:\widehat\Sigma\to\Sigma_\star$ with $f(B(i))=B(i)$ and $f(T(a))=(a,0,0,0)$, and let $\hat G$ be the graph with the same vertices, incidence slots and endpoint orders as $G_\varphi$ and relations $f(R_e)=\{(f(a),f(b)):(a,b)\in R_e\}$; then $\hat G$ is an explicit binary constraint graph over $\Sigma_\star$ with exactly $3m$ edges. Put $K:=\lceil\log_2(3m)\rceil$ if $m\ge1$, and define $h(\varphi):=T^K(\hat G)$ for $m\ge1$ (a finite $\Sigma_\star$-graph by [F6]) while $h(\varphi)$ is the edgeless graph over $\Sigma_\star$ for $m=0$. [F1, F2, F6, F8, F10, given, construct]
+1.1 Under [A1], use the current Dinur-transformation suppliers [F3]–[F6], [F10] and [F11], whose proof route uses Choice through expander spectral theory and algebraic embedding extension. By [F2] and [F8] there is a deterministic polynomial-time total reduction $g$ from $L$ to 3-SAT, which we fix; put $\varphi:=g(x)$, with $m$ clauses, each of exactly three literal occurrences. By [F1] the formula $\varphi$ has a polynomial-time computable graph $G_\varphi$ over $\widehat\Sigma=\{B(0),B(1)\}\sqcup\{T(a):a\in\{0,1\}^3\}$ with exactly $3m$ edges, and by [F10] the transformation alphabet is $\Sigma_\star=\{B(0),B(1)\}\sqcup\{0,1\}^6$. Let $f$ be the fixed injection $f:\widehat\Sigma\to\Sigma_\star$ with $f(B(i))=B(i)$ and $f(T(a))=(a,0,0,0)$, and let $\hat G$ be the graph with the same vertices, incidence slots and endpoint orders as $G_\varphi$ and relations $f(R_e)=\{(f(a),f(b)):(a,b)\in R_e\}$; then $\hat G$ is an explicit binary constraint graph over $\Sigma_\star$ with exactly $3m$ edges. Put $K:=\lceil\log_2(3m)\rceil$ if $m\ge1$, and define $h(\varphi):=T^K(\hat G)$ for $m\ge1$ (a finite $\Sigma_\star$-graph by [F6]) while $h(\varphi)$ is the edgeless graph over $\Sigma_\star$ for $m=0$. [A1, F1, F2, F6, F8, F10, given, construct]
 
 2.1 For a labeling $\sigma$ of $\hat G$, define $\sigma_0(v):=f^{-1}(\sigma(v))$ if $\sigma(v)\in f(\widehat\Sigma)$ and $\sigma_0(v):=B(0)$ otherwise. If an edge $e$ is satisfied by $\sigma$ in $\hat G$, then $(\sigma(u),\sigma(v))\in f(R_e)$, so both labels lie in $f(\widehat\Sigma)$ and $(\sigma_0(u),\sigma_0(v))=(f^{-1}\sigma(u),f^{-1}\sigma(v))\in R_e$: the same edge is satisfied by $\sigma_0$ in $G_\varphi$. Hence $\operatorname{val}_\sigma(\hat G)\le\operatorname{val}_{\sigma_0}(G_\varphi)\le\operatorname{val}(G_\varphi)$ for every $\sigma$ by [F9], so $\operatorname{val}(\hat G)\le\operatorname{val}(G_\varphi)$; conversely the labelings $f\circ\tau$ of $\hat G$ for $\tau:V\to\widehat\Sigma$ realize the same satisfied edges, so $\operatorname{val}(\hat G)\ge\operatorname{val}(G_\varphi)$. Thus $\operatorname{val}(\hat G)=\operatorname{val}(G_\varphi)$ and $\operatorname{UNSAT}(\hat G)=\operatorname{UNSAT}(G_\varphi)$. [F1, F9, step 1.1, algebra]
 
@@ -92,4 +93,4 @@ $$\operatorname{val}(f_L(x))\ge1\quad\text{for }x\in L,\qquad \operatorname{val}
 
 ## Remarks
 
-The route is the classical one: 3-SAT is reduced to a fixed-alphabet binary constraint graph, the fixed transformation $T$ is iterated logarithmically many times, and the Dinur transformation turns the $1/(3m)$ unsatisfaction gap of an unsatisfiable instance into the absolute gap $\alpha$, while satisfiable instances stay satisfiable. The relabeling of the ten-symbol gadget alphabet into the $66$-symbol alphabet $\Sigma_\star$ preserves value because a labeling that uses a symbol outside the image satisfies no edge incident to that vertex, so the clamped labeling satisfies at least as many edges. The reduction is deterministic and runs in polynomial time because the intermediate graphs have polynomially many edges and vertices. No choice principle is used: all constructions are fixed by the input and by absolute constants.
+The route is the classical one: 3-SAT is reduced to a fixed-alphabet binary constraint graph, the fixed transformation $T$ is iterated logarithmically many times, and the Dinur transformation turns the $1/(3m)$ unsatisfaction gap of an unsatisfiable instance into the absolute gap $\alpha$, while satisfiable instances stay satisfiable. The relabeling of the ten-symbol gadget alphabet into the $66$-symbol alphabet $\Sigma_\star$ preserves value because a labeling that uses a symbol outside the image satisfies no edge incident to that vertex, so the clamped labeling satisfies at least as many edges. The reduction is deterministic and runs in polynomial time because the intermediate graphs have polynomially many edges and vertices. The Axiom of Choice premise is inherited from the current proof of the Dinur transformation: its expander spectral route reaches algebraic embedding extension and Zorn's lemma. This records the assumption spent by the supplied argument; it does not assert that the gap-CSP theorem intrinsically requires Choice.

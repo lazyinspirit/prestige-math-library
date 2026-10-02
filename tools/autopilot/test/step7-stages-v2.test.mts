@@ -25,10 +25,10 @@ test('Step 7 exposes all ten phases with one adjudicator per batch and exactly t
     assert.deepEqual(f.stages.map(s=>s.id),['7-scope','7.1-adjudicate','7.2-impact','7.3-certify','7.4-rejudge','7.5-adjudicate','7.6-impact','7.7-certify','7.8-gate','7.9-repair','7.10-gate']);
     for(const id of ['7.1-adjudicate','7.5-adjudicate']){
       assert.deepEqual(f.stage(id).units(f.ctx),['1','2']);
-      assert.equal(f.stage(id).modelProfile,MODEL_PROFILE_NAMES.astraMedium);
+      assert.equal(f.stage(id).modelProfile,MODEL_PROFILE_NAMES.sol61High);
     }
     for(const id of ['7.2-impact','7.6-impact','7.9-repair']) {
-      const stage=f.stage(id);assert.deepEqual(stage.units(f.ctx),['1','2','3']);assert.equal(stage.modelProfile,MODEL_PROFILE_NAMES.solXHigh);
+      const stage=f.stage(id);assert.deepEqual(stage.units(f.ctx),['1','2','3']);assert.equal(stage.modelProfile,MODEL_PROFILE_NAMES.sol61High);
       assert.equal(stage.concurrency,3);
       for(const unit of ['1','2','3'])assert.deepEqual(stage.unitPrerequisites(f.ctx,unit),[]);
     }
@@ -98,7 +98,7 @@ test('outside maintenance has separate tasks and waits between parallel frontier
       assert.equal(job.brief,'briefs/consumer-maintenance.md');
       assert.match(job.task,/consumer-maintenance\/pack-/);
       assert.ok(stage.pattern(f.ctx).test(`alpha-repair-${job.label}.result.json`));
-      assert.equal(job.profile,MODEL_PROFILE_NAMES.solXHigh);
+      assert.equal(job.profile,MODEL_PROFILE_NAMES.sol61High);
     }
   }finally{f.close();}
 });

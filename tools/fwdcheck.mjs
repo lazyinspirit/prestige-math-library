@@ -74,11 +74,15 @@ import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { includesItem, parseItemScope, unknownItems } from './item-scope.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
-const asJson = process.argv.includes('--json');
-const quiet = process.argv.includes('--quiet');
-const writeLedger = process.argv.includes('--ledger');
+const itemScope = parseItemScope(process.argv.slice(2));
+const asJson = itemScope.args.includes('--json');
+const quiet = itemScope.args.includes('--quiet');
+const writeLedger = itemScope.args.includes('--ledger');
+if (itemScope.selected !== null && writeLedger)
+  throw new Error('--ledger cannot be combined with --items-file; ledger output is a full-corpus artifact');
 
 /** Kinds that may rest on later material. Everything else is the spine. */
 const CONSEQUENCE_KINDS = new Set(['example', 'counterexample', 'false-statement', 'remark', 'corollary']);
@@ -161,6 +165,9 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
   for (const a of list(fm, 'aliases')) aliasTo.set(a, id);
 }
 
+for (const id of unknownItems(itemScope, items.keys()))
+  err('focus-item-unknown', `--items-file names unknown item "${id}"`);
+
 const resolve = (x) => (items.has(x) ? x : aliasTo.get(x));
 
 // ---------------------------------------------------------------- load pages
@@ -201,34 +208,37 @@ const closed = [];      // forward refs whose target now exists
 const loadBearingEdges = [];   // {from, to} genuine forward dependencies
 
 for (const it of items.values()) {
+  const selectedItem = includesItem(itemScope, it.id);
   const home = homeOf(it.id);
   const declared = new Set(it.forward);
 
   for (const t of declared)
-    if (!it.links.includes(t))
+    if (selectedItem && !it.links.includes(t))
       err('forward-unused', `${it.file}: declares forward_refs "${t}" but never links it`);
 
   for (const t of declared) {
-    if (it.deps.includes(t) || it.justified.includes(t))
+    if (selectedItem && (it.deps.includes(t) || it.justified.includes(t)))
       err('forward-in-deps', `${it.file}: "${t}" is in forward_refs AND in deps/justified_by; a forward reference is not a dependency`);
 
     const bearing = it.loadBearingText.includes('[[' + t);
-    if (bearing && !CONSEQUENCE_KINDS.has(it.kind))
+    if (selectedItem && bearing && !CONSEQUENCE_KINDS.has(it.kind))
       err('forward-on-spine', `${it.file}: kind "${it.kind}" uses forward reference "${t}" outside Remarks; only ${[...CONSEQUENCE_KINDS].join('/')} may rest on later material, the spine must stay strictly ordered`);
 
     const th = homeOf(t);
-    if (!th) { err('forward-dangling', `${it.file}: forward_refs "${t}" is planned nowhere and can never be closed`); continue; }
-    if (th === home) { err('forward-same-page', `${it.file}: "${t}" is on this item's own page (${th}); that is an ordinary link, not a forward reference`); continue; }
-    if (orderOf(th) <= orderOf(home))
+    if (!th) { if (selectedItem) err('forward-dangling', `${it.file}: forward_refs "${t}" is planned nowhere and can never be closed`); continue; }
+    if (th === home) { if (selectedItem) err('forward-same-page', `${it.file}: "${t}" is on this item's own page (${th}); that is an ordinary link, not a forward reference`); continue; }
+    if (selectedItem && orderOf(th) <= orderOf(home))
       err('forward-not-later', `${it.file}: forward_refs "${t}" lives on ${th} (#${orderOf(th)}), which is NOT after ${home} (#${orderOf(home)}); this is a backward or lateral dependency`);
 
+    // The global item-cycle check must see every actual load-bearing edge, even
+    // in focused mode. Only the per-item diagnostics are filtered.
     if (bearing) loadBearingEdges.push({ from: it.id, to: t });
 
     const rec = { from: it.id, fromPage: home, to: t, toPage: th, toLevel: level(th), bearing };
     if (resolve(t)) closed.push(rec);
     else {
       open.push(rec);
-      if (it.status === 'published')
+      if (selectedItem && it.status === 'published')
         warn('open-on-published', `${it.file} is PUBLISHED and points forward at "${t}", not authored yet (closes on ${th})`);
     }
   }
@@ -248,6 +258,7 @@ for (const it of items.values()) {
   // it.
   const sanctioned = new Set([...declared, ...it.justified]);
 
+  if (!selectedItem) continue;
   for (const l of it.links) {
     if (sanctioned.has(l)) continue;
     const r = resolve(l);
@@ -424,13 +435,19 @@ const summary = {
   restingOnLaterMaterial: forwardDependent.size,
   errors: errors.length,
   warnings: warns.length,
+  ...(itemScope.selected === null ? { scope: 'full' } : {
+    scope: 'focused-items', item_checks: [...itemScope.selected].sort(),
+    global_item_and_page_cycle_checks: 'complete',
+  }),
 };
 
 if (asJson) {
   console.log(JSON.stringify({ summary, open, closed, forwardDependent: [...forwardDependent], errors, warns }, null, 2));
 } else {
   if (!quiet) {
-    console.log(`fwdcheck: ${items.size} items, ${open.length} open forward reference(s), ${closed.length} closed, ${loadBearingEdges.length} load bearing`);
+    console.log(itemScope.selected === null
+      ? `fwdcheck: ${items.size} items, ${open.length} open forward reference(s), ${closed.length} closed, ${loadBearingEdges.length} load bearing`
+      : `fwdcheck: focused item checks for ${summary.item_checks.length} item(s); complete global dependency/forward graph checks cover ${items.size} items`);
     if (open.length) {
       console.log('\nopen forward references (target not authored yet):');
       for (const r of open)
@@ -450,7 +467,9 @@ if (asJson) {
     for (const e of errors) console.log(`  [${e.code}] ${e.msg}`);
     console.log('\nFAIL');
   } else {
-    console.log('\nOK — every forward reference is declared, points strictly forward, is closed by a planned later page, stays off the spine unless orientation only, and introduces no cycle.');
+    console.log(itemScope.selected === null
+      ? '\nOK — every forward reference is declared, points strictly forward, is closed by a planned later page, stays off the spine unless orientation only, and introduces no cycle.'
+      : '\nOK — selected item checks passed; complete global dependency/forward graph checks passed.');
   }
 }
 

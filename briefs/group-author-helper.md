@@ -1,6 +1,6 @@
 # Step 3b — pair authoring helper
 
-**Proof repair quality for item editors.** If this dispatch authorizes you to edit an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; omit repeated talking points, filler, and padding that add no mathematical content.
+**Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
 
 Read `CLAUDE.md`, `README.md`, `SCHEMA.md`, the assigned helper task, the
 current pair manifest rows, relevant source passages, and exact prerequisite

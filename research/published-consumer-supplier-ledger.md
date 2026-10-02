@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 0, U-C 0, A-R 1248, A-P 7. The
+Current classifications: U-P 0, U-C 1, A-R 1250, A-P 7. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -31380,10 +31380,10 @@ The supplier objects are already published: `def-projective-object`, `def-projec
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled IDs. Its current literal rows contain **3,516 unique
-item IDs**, all **3,516 currently published**.
+subsequently reconciled IDs. Its current literal rows contain **3,518 unique
+item IDs**, all **3,518 currently published**.
 The current item-file census contains **20,731 `status: published` items**;
-**17,215 published items remain outside this index**. These counts are a status census, not a claim
+**17,213 published items remain outside this index**. These counts are a status census, not a claim
 that outside-index items or entire dependency closures have been audited.
 The initial extraction also contained
 787 planned, draft, absent or noncanonical IDs, not published targets.
@@ -31391,13 +31391,13 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 8 | Evidence/role reconciliation incomplete; not a defect verdict. |
-| U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
-| A-R | Audited and repaired items | 1247 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 7 | Recorded direct review and an unresolved item-specific repair. |
+| U-P | Unaudited and potentially defective items | 0 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-C | Unaudited and confirmed defective items | 1 | Confirmed mathematical or prerequisite defect; repair audit pending. |
+| A-R | Audited and repaired items | 1248 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
+| A-P | Audited items pending Phase 3 repair | 9 | Recorded direct review and an unresolved item-specific repair. |
 
 Bounded no-repair-needed dispositions appear below, outside these four active
-defect classes. The four queues currently contain 1,254 distinct items.
+defect classes. The four queues currently contain 1,258 distinct items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -33984,7 +33984,7 @@ owner's scan policy.
 
 | Published item | Exact prerequisite debt at classification |
 |---|---|
-| *(none currently)* | All confirmed published defects in this index have a repair receipt; pending independent publication certification is noted under A-R. |
+| `def-levi-form-and-strict-plurisubharmonicity` | U-C, frontier-37-owner-30 group-e Step 5a: Definition uses $j,k=1,\ldots,m$ and $z_j,v_j$ without a relabeling, while published `rem-complex-euclidean-space-dictionary` defines $\mathbb C^m$ coordinates only for $j<m$. The term at $j=m$ is undefined. Draft batch-29 consumers declare a one-based alias or sum over $j,k<m$; published supplier remains read-only. Repair strategy: add an explicit one-based alias or use the canonical $0,\ldots,m-1$ range, then check direct published consumers. Evidence: `items/def-levi-form-and-strict-plurisubharmonicity.md` Definition line 37 and `items/rem-complex-euclidean-space-dictionary.md` Remark. |
 
 The original 73-item audit is complete; its results are recorded in the
 A-R/A-P queues and uc73-astra-agent-1.md through uc73-astra-agent-5.md.
@@ -33997,6 +33997,8 @@ The historical U-P300 scan’s 19 findings completed repair audit (7 A-R, 12 A-P
 
 ### A-R — Audited and repaired items
 
+| `thm-equivalent-psh-exhaustion-and-boundary-distance-pseudoconvexity` | A-R, bounded owner local coordinate-typing repair complete; original finding preserved in dated debt evidence. Exact original/current hashes, suppliers, correction and local check scope in `research/frontier-37-owner-30-5b-published-coordinate-owner-repair.md` and supported verification.repair receipt. No independent certification. |
+| `ex-the-ball-is-levi-pseudoconvex` | A-R, bounded owner local coordinate-typing repair complete; original finding preserved in dated debt evidence. Exact original/current hashes, suppliers, correction and local check scope in `research/frontier-37-owner-30-5b-published-coordinate-owner-repair.md` and supported verification.repair receipt. No independent certification. |
 | `lem-extension-from-subobjects-of-a-generator-detects-injectivity` | A-R, 2026-09-29 bounded Zorn/AC/AB5 repair at SHA `886200d3…`: compatible extension order, empty-chain bound, exact filtered-colimit supplier and direct AC dependency. Statement unchanged. Focused checks and independent bounded read passed; no new judge. |
 | `lem-transfinite-iteration-of-the-generator-extension-preserves-monomorphisms-and-factorizes-small-source-maps` | A-R, 2026-09-29 bounded AC/AB5 repair at SHA `255168f6…`: exact filtered-colimit supplier and uniform subobject bound `κ=|Sub(U)|`. Statement unchanged; focused checks and independent bounded read passed. No new judge. |
 | `lem-a-sufficiently-long-generator-extension-iteration-is-injective` | A-R, 2026-09-29 direct AC-contract repair at SHA `b9403ed3…`; choice hypothesis is declared at the generator-injectivity use. Statement unchanged; focused checks and independent bounded read passed. No new judge. |
@@ -35607,3 +35609,318 @@ later combined definition. Its proved claim, that a field is Noetherian,
 is unchanged; examination of its direct consumers found only uses of that
 claim. This was a supplier-order and citation repair, not a new proof claim.
 The owner re-home receipt records each old and new page.
+
+## Frontier37 number-field supplier findings (2026-09-30)
+
+These findings concern actual used interfaces reported by the current
+number-theory authors and independently inspected by root. They supersede
+no frozen historical receipt; they describe current proof obligations.
+
+| Published item | Confirmed gap and exact route | Current repair/audit status |
+|---|---|---|
+| thm-ring-of-integers-free-of-rank-degree | Proof2.1's former generic PID-submodule route spent AC/DC and did not establish the unqualified Statement. | One-item in-place repair complete; Statement unchanged. The current reviewed proof SHA-256 is `4e8c6d6fb6a0bd775fad4c47564b0c7cbaffd4ddb7eaac7601a996fe96e06af1`; root read the complete repaired proof and all 8 current direct supplier interfaces, including the reciprocal-trace witness, trace-dual lattice sandwich, and finite subgroup induction. The current item-file SHA-256 after audit-metadata insertion is `ff68516141e5710a7bf35d01a9c8646e0597c222f8abc5586907d9db83c398b7`. `verification.audited: 2026-10-01` now records that local owner review; `verification.precheck: pass` is retained. No independent `verification.verified` or judge stamp is claimed. All 8 supplier homes remain in the prerequisite closure. Evidence: research/frontier-37-owner-30-number-field-lattice-repair.md and research/frontier-37-owner-30-integral-basis-choice-route-audit.md. |
+| thm-number-field-integral-ideal-factorisation-in-zf | Current proof1.1 uses the same generic finite-free PID-submodule assertion to obtain Noetherianity. This is an actual AC-spending premise, not merely an unrelated transitive axiom edge. Existing9/23 finite-quotient/local-DVR/finite-annihilator repair remains useful but did not audit this lattice premise. | Read-only full-source route audit complete: research/frontier-37-owner-30-number-field-zf-route-audit.md. Preserve no-Choice Statement; after the finite-free supplier repair, prove ideal finite generation by the same inline finite-Z-subgroup argument and retain the finite quotient/DVR/annihilator construction. One-item repair complete after writer drain: finite-Z-subgroup induction, finite local-ring nilpotence/determinant trick, unique recursive division, local layers, and proper-ideal annihilator selection. Root read the full replacement and all11 actual direct suppliers, clarified Frac(R)=K and exact localization instantiation/quotient notation, recorded current local owner audit2026-09-30, synchronized its plan deps, and verified all11 homes already upstream. Selected precheck/rendercheck pass; seven direct consumers retain their promised interfaces. Evidence: research/frontier-37-owner-30-zf-ideal-factorisation-repair.md. No independent judgment or whole-closure audit is claimed. |
+| cor-ring-of-integers-is-a-dedekind-domain | Proof1.1 applies the integral-closure Dedekind supplier without supplying Z Dedekind and finite separability of K/Q. These premises are true but unproved/uncited in that item. | Root read current claim/proof. Establish Z ideals nZ via the published A lemma lem-subgroups-of-z-are-cyclic, rational integrality for normality, prime-quotient field for dimension1, and characteristic-zero perfectness/separability via published A suppliers. Do not adopt the author's proposed B-page examples as load-bearing suppliers. One-item in-place repair complete after writer drain: Z Noetherian/normal/dimension1 and finite separability are proved explicitly, including the inline proof that 2 is prime. Root fully read the replacement and all37 actual direct suppliers, recorded local owner audit2026-10-01, synchronized the selected plan deps/strategy, and confirmed all37 supplier homes already lie in the existing272-page prerequisite closure. Statement and original AC qualifier retained. Final helper precheck/render checks pass and are reused after metadata-only integration. Evidence: research/frontier-37-owner-30-dedekind-supplier-repair.md. No independent judgment or whole-closure audit is claimed. |
+| thm-ramified-primes-and-the-number-field-discriminant | Proof1.1's former compressed claim omitted the finite CRT decomposition, ramified-factor nilpotent argument, and finite-field trace-pairing proof. | One-item replacement complete; Statement unchanged. The current reviewed proof SHA-256 is `12257848944ef8aa24393416bda3904ccebf09828be22f73c18ec5c5c8bf8629`; root read the complete finite CRT/nilpotent/Frobenius/character-independence/Gram-reduction proof and all 32 current direct supplier interfaces. The current item-file SHA-256 after audit-metadata insertion is `8cd03fdba08766a96bac52075dff6840d69fcb7b510f9542b42d24bfd2d1ceb8`. `verification.audited: 2026-10-01` now records that local owner review; `verification.precheck: pass` is retained. No independent `verification.verified` or judge stamp is claimed. All supplier homes are in the prerequisite closure after adding the published linear-algebra-methods-in-combinatorics page prerequisite. The earlier note about the rank-degree theorem's generic Choice-bearing trace route is superseded by its reciprocal-trace repair (current reviewed proof SHA-256 `4e8c6d6fb6a0bd775fad4c47564b0c7cbaffd4ddb7eaac7601a996fe96e06af1`). Evidence: research/frontier-37-owner-30-discriminant-supplier-repair.md and research/frontier-37-owner-30-integral-basis-choice-route-audit.md. |
+
+Supplier findings are mathematically local; no whole-closure audit is asserted.
+The historical locally reviewed9/23 entry at the earlier table and the
+up-1630 agent04 receipt retain their original scope. The finite-rank
+replacement uses finitely many witnesses at a fixed rank, not an infinite
+family of choices. Milne/Stacks corroborate the algebraic ingredients; none
+is claimed to explicitly prove the complete ZF theorem. Repair-specific
+before/after hashes, exact direct consumers and honest local checks belong
+in the bound repair evidence; central draft evidence must be refreshed on
+stable inputs after related writers drain. Operational supervision is in
+research/frontier-37-owner-30-operator-record.md.
+
+### Frontier-37 additional integer-module supplier finding — 2026-10-01
+
+`cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules`
+is reopened from the earlier U-P300 interface-clear assessment for a bounded
+axiom-strength proof finding. Root fully read its current claim/proof and the
+actual invariant-factor, primary-decomposition, simultaneous-basis,
+maximal-divisor-pivot and PID-UFD supplier bodies. The unqualified integer
+corollary invokes the generic simultaneous-basis route via invariant factors;
+the pivot explicitly invokes the PID-UFD theorem, whose actual Statement and
+proof assume AC and spend DC for maximal bad principal ideals. The primary
+route invokes the same AC-qualified UFD theorem directly. This is a used proof
+premise, not merely an unrelated transitive metadata edge. The integer result
+itself remains true without Choice; a finite integer presentation and the
+existing Euclidean Smith algorithm, plus finite-rank Z-subgroup induction,
+provide a potential constructive replacement. No published edit or general
+PID repair is made here. The active exact consumer
+`lem-discrete-subgroups-of-real-vector-spaces-are-lattices` instead receives
+an inline choice-free proof: its finite coset representatives give an exponent
+N and an embedding into (1/N)Z^r, then project-coordinate cyclic Z-subgroup
+induction constructs a finite basis. Its unqualified Statement is preserved.
+Current repair/evidence handoff: research/frontier-37-owner-30-dirichlet-completion.md.
+This finding does not claim a new whole-closure audit or erase prior reviews.
+
+### Frontier-37 integral-basis trace-route follow-up — 2026-10-01
+
+The first finite-Z-subgroup repair removed the generic PID/AC route, but the current rank-degree proof still invokes perfectness/separability and the generic trace-pairing lemma. Root read the actual proof, trace suppliers and complete finite integral-trace proof. The generic trace formula invokes an algebraic closure through def-separable-degree, whose library route explicitly assumes Choice. Preserve the unqualified Statement; replace only that unnecessary route by Tr(x x⁻¹)=Tr(1)=[K:Q]≠0, then retain the trace-dual sandwich and finite subgroup induction. The integral-trace corollary already proves its fact by finite companion blocks; no second published edit is needed. Sole-item follow-up repair is complete after the discriminant integration drain. Root read the full replacement and its actual8 supplier interfaces, synchronized the selected plan/prose, and verified all8 homes already lie in its existing prerequisite closure. Exact Statement/status remain unchanged. Reused helper target precheck/render; this is a local owner review, not an independent judgment or whole-closure audit. Exact evidence: research/frontier-37-owner-30-integral-basis-choice-route-audit.md.
+
+## Frontier-37 PCP supplier Choice interface repairs — 2026-10-01
+
+### `thm-gap-csp-is-np-hard`
+
+Reader17 found a fatal premise defect: the published Statement omitted AC and
+Remarks denied Choice although the invoked Dinur-transformation argument
+spends AC. The exact used route is gap CSP → Dinur transformation → gap
+amplification → expander overlay → expander size adjustment → Margulis
+spectral gap → real self-adjoint spectral theorem → real normal classification
+→ complex normal spectral theorem → algebraic closure of C → finite Galois
+theory → Artin fixed-field degree → relative automorphism bound → algebraic
+embedding extension → Zorn → AC. Exact item IDs and consuming proof steps
+are recorded in `research/frontier-37-owner-30-pcp-choice-repair.md`.
+
+After refuter17's successful final receipt/artifact drained at 11:24:29Z, with
+no Step5 Alpha writer active, group `h` claimed this published item using
+`tools/published-repairs.mjs`. One-item local repair adds AC to Statement,
+Given, deps and assumption A1, tags the imported supplier use in proof1.1,
+and replaces the denial of Choice with the inherited-premise explanation.
+The numerical claim and deterministic finite reduction are retained. This
+is not a claim of intrinsic necessity of AC; no new Phase2 supplier is needed.
+
+Raw pre SHA256: `3fb7cf91522e027a8c56d4b2f2bf09a53b123f493fba445ae4fbf6264af99696`.
+Raw repaired SHA256: `67ddc5a40557d72f265b3fdf792598dce77fa8b160b59b3fa37f924bcbc50bed`.
+Canonical pre hash is preserved in the run's Step5 published claim. Targeted
+precheck and real renderer pass. Stale judge/audited stamps were removed;
+precheck remains a local format pass. No independent audit, item gate,
+rejudgment or adjudication receipt is claimed. The only direct consumer is
+the published PCP theorem, which is the next serialized repair. Historical
+frontier36 contracts remain immutable evidence.
+
+### `thm-pcp-theorem-np-equals-pcp-log-n-o-one`
+
+The published PCP Statement omitted the inherited AC premise and Remarks
+denied Choice. Its proof1.2 invokes gap-CSP [F1], whose current argument
+spends AC along the exact route recorded above. After recording the gap-CSP
+repair, group `h` claimed and repaired this second published item serially.
+Statement, both Given lines, deps, assumption A1 and proof1.2 now supply AC;
+F1 explicitly qualifies the gap-CSP supplier. Remarks explain the inherited
+premise without claiming that PCP intrinsically needs Choice. The equality,
+completeness, soundness, resource bounds and finite reductions are retained.
+
+Raw pre SHA256: `26dc296003a1d16b5cdc6ea323cfcfee29bcf5c5a942df7ae6f86e29c0d27117`.
+Raw repaired SHA256: `88eea3386b085c33af804801f28c578e50d69eb8941c98719c18adba5ba1cfc4`. Targeted precheck and real renderer pass.
+Stale judge/audited stamps removed; no independent audit or manufactured
+Step5 adjudication receipt is claimed. The published home page records the
+current inherited premise. The sole direct consumer, draft
+`lem-pcp-verifier-reduces-to-gap-max-three-sat`, already assumes AC in its
+Statement, F6 and proof1.1, so its claim and proof need no repair and interface
+propagation stops there. Its current B17 contract F1 supplier quote now
+includes the complete repaired PCP Statement including the AC premise.
+Reader/refuter findings are preserved for native Alpha handling; historical
+frontier36 evidence is unchanged. Root owns plan metadata integration.
+
+The active `research/plan-spec.json` mirrors for both published PCP targets
+were subsequently reconciled with their AC qualifier, direct AC dependency
+and `ai-altered` statement provenance by an atomic narrow edit. All strategy
+text and other rows preserved. No owner audit stamp, independent certificate
+or published gate obligation was created.
+
+<!-- local-published-repair:frontier-37-owner-30:thm-gap-csp-is-np-hard:begin -->
+Item: `thm-gap-csp-is-np-hard`. Repair owner: group h, pre-edit claim in `research/frontier-37-owner-30-step5-published-claims.jsonl`.
+Current canonical content SHA256: `ee5099f31395fc933056cbe8b6bbaf327a89e40c8cdcd02bf589099ae1dc81f3`.
+Before canonical SHA256: `9aefea83c549eca4c20e4b8ba5644d39decabac64fb160f50bc9fe23fe21c7a0`; raw SHA256: `3fb7cf91522e027a8c56d4b2f2bf09a53b123f493fba445ae4fbf6264af99696`.
+Correction: carry the AC premise actually spent by the current Dinur/expander spectral/algebraic embedding-extension route in the Statement, dependencies, assumptions and supplier use, replacing the denial of Choice. No intrinsic necessity of AC is asserted.
+Exact supplier mapping and direct-consumer disposition: `research/frontier-37-owner-30-pcp-choice-repair.md` and the preceding PCP ledger entries.
+Current precheck and real renderer passed locally. This is recorded local correction evidence, not a whole-theorem audit or renewed mathematical acceptance of the complete proof. No item gate, rejudgment or adjudication certificate.
+<!-- local-published-repair:frontier-37-owner-30:thm-gap-csp-is-np-hard:end -->
+
+<!-- local-published-repair:frontier-37-owner-30:thm-pcp-theorem-np-equals-pcp-log-n-o-one:begin -->
+Item: `thm-pcp-theorem-np-equals-pcp-log-n-o-one`. Repair owner: group h, pre-edit claim in `research/frontier-37-owner-30-step5-published-claims.jsonl`.
+Current canonical content SHA256: `2eeea510a7fba6c68850b53179d5fa81e52fae6a04a0281ab78055076223b348`.
+Before canonical SHA256: `7724dce6ee8ae569a38d482bece1536ee9a9de45fe2aa8b166106e903408629e`; raw SHA256: `26dc296003a1d16b5cdc6ea323cfcfee29bcf5c5a942df7ae6f86e29c0d27117`.
+Correction: carry the AC premise actually spent by the current Dinur/expander spectral/algebraic embedding-extension route in the Statement, dependencies, assumptions and supplier use, replacing the denial of Choice. No intrinsic necessity of AC is asserted.
+Exact supplier mapping and direct-consumer disposition: `research/frontier-37-owner-30-pcp-choice-repair.md` and the preceding PCP ledger entries.
+Current precheck and real renderer passed locally. This is recorded local correction evidence, not a whole-theorem audit or renewed mathematical acceptance of the complete proof. No item gate, rejudgment or adjudication certificate.
+<!-- local-published-repair:frontier-37-owner-30:thm-pcp-theorem-np-equals-pcp-log-n-o-one:end -->
+
+## Frontier-37 group-e published Levi-form notation finding — 2026-10-01
+
+Published supplier `def-levi-form-and-strict-plurisubharmonicity` is U-C for the undefined endpoint coordinate $z_m$ in its displayed double sum. Exact suppliers are `rem-complex-euclidean-space-dictionary` and `def-wirtinger-operators-in-several-complex-variables` (canonical indices $0,\ldots,m-1$). Direct draft consumers `ex-levi-form-of-the-unit-ball` and `ex-strictly-psh-exhaustion-of-a-convex-domain` are locally typed by explicit relabeling. Status: published item untouched, owner repair required. Strategy: correct its Definition and trace its published direct consumers; retain current draft aliases until that repair is accepted. The finding is distinct from the still-open peak-function construction in batch 29.
+
+## Frontier-37 group-e Levi Definition local owner repair — 2026-10-01
+
+`def-levi-form-and-strict-plurisubharmonicity` repaired serially after actual
+group-e pre-edit ownership claim. Prepended one-based coordinate AND vector
+aliases j=1..m→canonical index j−1, with all derivatives explicitly the
+canonical Wirtinger operators; original Definition/Remarks suffix and all
+old contiguous quotes remain unchanged. Exact actual suppliers/deps:
+`rem-complex-euclidean-space-dictionary`,
+`def-wirtinger-operators-in-several-complex-variables`. The operator, Hermitian
+matrix and positivity predicates are unchanged under the bijective relabeling;
+no bound or hypothesis is weakened. Targeted renderer pass; precheck n/a;
+stale audit/judge metadata removed. No whole-item audit or independent
+mathematical acceptance is claimed. Root owns actual final Definition review.
+All19 direct consumer uses were traced for this interface effect (5 published,
+14 draft); zero-based draft aliases remain valid and no source rewrite solely
+for references is required. Separate preexisting one-based consumer notation
+risks are recorded, not silently certified. Exact hashes, before snapshot,
+consumer fact/step map, new-edge/home checks and active-plan integration:
+`research/frontier-37-owner-30-levi-definition-owner-repair.md`. Historical
+frontier36 contracts and peak findings are preserved. No published item gate,
+rejudgment or adjudication duty; no new content published.
+
+### Owner completion of Levi Definition review — 2026-10-02
+
+The owner read the complete repaired Definition and Remarks, the canonical complex-coordinate dictionary, and the complete several-variable Wirtinger Definition. The explicit dimension m>=1 matches both actual supplier domains. Reindexing j to j-1 covers exactly the m coordinate and vector components; every mixed derivative exists for real C2 u. Expanding the Wirtinger operators and using commutation of real C2 mixed partials gives a Hermitian matrix, so its vector form and stated positivity convention are unchanged. The root owner recorded this actual short Definition audit dated 2026-10-02; no whole-theorem audit or delegated certification is inferred. Current real rendering passed.
+
+Final raw source SHA-256: `7ae307cf0981b0b00e8c064d39770ab290b850c815201af1387867138abd85a6`. Existing direct-consumer formula quotes remain contiguous and unchanged; no consumer interface repair was required for this indexing clarification. The extra dimension qualifier was mirrored into the exact active plan entry. The separately observed consumer notation risks remain separately recorded, not silently declared repaired.
+
+## Frontier-37 group-e Levi-domain Definition local repair — 2026-10-02
+
+`def-levi-pseudoconvex-domain` repaired serially under actual pre-edit group-e
+claim. Its one-based tangent functional had unbound endpoint z_m/v_m.
+Exact actual supplier is the existing declared, now root-reviewed published
+`def-levi-form-and-strict-plurisubharmonicity`: prefix explicitly fixes integer
+m>=1 and adopts its coordinate, vector-component and canonical Wirtinger
+operator aliases j↦j−1. All factors of the tangent functional are now bound;
+the complex tangent kernel and its nonnegative Levi predicate are unchanged
+under this bijective relabeling, as are negative-side/C2/nonzero-differential
+conditions. Old Definition suffix and contiguous quotes remain intact.
+All11 direct consumer actual uses checked for this input binding (3 published,
+8 draft); existing draft/peak bindings remain valid. No source references
+rewritten and no whole-consumer proof audit claimed. Stale audit/judge
+markers removed; precheck n/a; targeted renderer and home/dependency checks
+pass. Active plan mirrors dimension/aliases and provenance; exact sole dep
+preserved. Root owns full short Definition review and truthful owner audit.
+Before snapshot, raw/canonical hashes and consumer fact/step mapping:
+`research/frontier-37-owner-30-levi-domain-definition-owner-repair.md`.
+Standalone norm observations and unused closed-zero-set caveat remain
+separate. No item gate, rejudgment, adjudication, new publication or commit.
+
+### Owner completion of Levi-domain Definition review — 2026-10-02
+
+The owner read the complete repaired Definition against the repaired Levi-form and canonical Wirtinger interfaces. Dimension m>=1, one-based aliases, real C2 defining function and nonzero real differential make every displayed derivative and vector component typed. The tangent equation is the kernel of the complex-linear Wirtinger differential; for real rho it is equivalent to both drho(v)=0 and drho(iv)=0. The nonnegative Hermitian Levi predicate is unchanged. This actual short owner Definition audit is dated 2026-10-02, without a fabricated delegated or whole-theorem audit. Local real rendering and the helper direct-consumer/use-map checks passed; existing suffix quotes remain intact.
+
+Final raw source SHA-256: `c5635bd9afd31a18213d38871c592f81516183e677b3d642e33de2b224fe5283`.
+
+## Unused closed-zero-set supplier proof caveat from frontier-37 — 2026-10-02
+
+Published `cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function` assumes Countable Choice. Its proof1.1 constructs a locally finite shrinking on the open manifold M\A via `lem-a-countable-coordinate-ball-cover-has-a-countable-locally-finite-shrinking`; proof2.1 invokes `thm-a-locally-finite-sum-of-smooth-functions-is-smooth` on M. Local finiteness on M\A does not establish local finiteness across A, so smoothness at A is not discharged by this argument. Classification: U-C proof-route gap; the claimed theorem itself is not refuted. The peak owner repair avoids this supplier and proves the required Euclidean derivative-controlled construction directly in its new collar lemma. No current selected-pair consumer was changed to rely on this unclosed corollary.
+
+Strategy for separate manifold maintenance: choose a countable precompact coordinate cover and compact seminorm sets, weight the selected bumps by coefficients controlling every derivative on the first k coordinate sets, and prove convergence of all coordinate derivatives on each chart. Retain the existing Countable Choice hypothesis and inspect actual suppliers before adding dependencies. Status: outside the selected repair scope, published carrier untouched, current closed-set smoothness step unverified; no new audit or repair claimed. Exact current-source evidence is proof1.1-2.1, with context in `research/frontier-37-owner-30-boundary-peak-owner-repair.md`.
+
+
+## Standalone SCV coordinate formula debt — frontier-37-owner-30 Step 5b
+
+Bounded current-content review confirms two published typing defects.
+Published sources remain unchanged. The supplier coordinate repair did not
+bind symbols globally in other items: its aliases are explicitly local to
+its own Definition. The existing owner report recorded these formulas as
+separate risks; this reading confirms their exact written locations.
+For m=1 the canonical point is a function 1→C with only coordinate z_0;
+z_1 and v_1 are not defined without a local alias.
+
+| Published item / current raw SHA-256 | Exact finding and actual suppliers | Status and repair strategy |
+|---|---|---|
+| `ex-the-ball-is-levi-pseudoconvex` / `8a9daed0ebf3b5a590c40a41789e0adff509a4ff82b7018dd28333557bd3af7e` | Example, Given and Verification 1.1: the purported unit-ball function is |z_1|^2+...+|z_m|^2, and the computed Levi value is |v_1|^2+...+|v_m|^2. No local coordinate/vector alias is declared. Suppliers: `rem-complex-euclidean-space-dictionary` (canonical 0,...,m-1 coordinates); `def-levi-form-and-strict-plurisubharmonicity` (one-based aliases confined to its Definition); `def-levi-pseudoconvex-domain` (tangential predicate). | **A-P; open.** Declare m≥1 and one-based aliases for every coordinate, vector component and Wirtinger operator, or use the canonical sums j<m. Then recheck the current proof and actual direct consumers. The intended unit-ball or exhaustion conclusion is preserved. Evidence: `research/frontier-37-owner-30-alpha-5b.md`; prior risk inventory in `research/frontier-37-owner-30-levi-definition-owner-repair.md`. |
+| `thm-equivalent-psh-exhaustion-and-boundary-distance-pseudoconvexity` / `8dd8af58d805cd0c837915e3be7f09e872305b0d77cc0f323d7949240246e2b4` | Proof 1.1: q(z)=|z_1|^2+...+|z_m|^2 is asserted to be the squared norm. No local coordinate/vector alias is declared. Suppliers: `rem-complex-euclidean-space-dictionary` (canonical 0,...,m-1 coordinates); `def-levi-form-and-strict-plurisubharmonicity` (one-based aliases confined to its Definition); `thm-c-two-levi-criterion-for-plurisubharmonicity` (positivity criterion). | **A-P; open.** Declare m≥1 and one-based aliases for every coordinate, vector component and Wirtinger operator, or use the canonical sums j<m. Then recheck the current proof and actual direct consumers. The intended unit-ball or exhaustion conclusion is preserved. Evidence: `research/frontier-37-owner-30-alpha-5b.md`; prior risk inventory in `research/frontier-37-owner-30-levi-definition-owner-repair.md`. |
+
+<!-- local-published-repair:frontier-37-owner-30:5b:ex-the-ball-is-levi-pseudoconvex:begin -->
+Item: `ex-the-ball-is-levi-pseudoconvex`. Classification: A-R, bounded owner local repair (not independent certification).
+Actual serialized repair owner: group e; pre-edit claim in `research/frontier-37-owner-30-step5-published-claims.jsonl`.
+Raw before SHA256: `8a9daed0ebf3b5a590c40a41789e0adff509a4ff82b7018dd28333557bd3af7e`; canonical pre SHA256: `8b139f99bf6195aeda5936135caf6193f3c3dbcbe0312f3c3db51a90fbd542de`.
+Current canonical content SHA256: `3c98f8f3584984f0c4b99e42fe15abce3711cff4a7a27c65eed6fa1e1403ead8`.
+Exact actual suppliers read: rem-complex-euclidean-space-dictionary; def-levi-form-and-strict-plurisubharmonicity; def-levi-pseudoconvex-domain.
+Correction: Replace standalone one-based coordinate/vector norms with canonical j<m sums and reindex the Levi form, explicitly verify the unit-sphere defining function.
+Consumer disposition: The Example describes the same unit ball under canonical coordinates; no declared direct item consumers.
+Actual dated precheck and real renderer pass recorded in the hash-bound local receipt; no stale audit/judge stamp retained, no new independent audit or whole-supplier-closure certification claimed.
+Review/repair and current raw-hash sidecar: `research/frontier-37-owner-30-5b-published-coordinate-owner-repair.md` and .json. No native5b report, verdict, impact or contract/manifest edits; root owns their integration.
+<!-- local-published-repair:frontier-37-owner-30:5b:ex-the-ball-is-levi-pseudoconvex:end -->
+
+<!-- local-published-repair:frontier-37-owner-30:5b:thm-equivalent-psh-exhaustion-and-boundary-distance-pseudoconvexity:begin -->
+Item: `thm-equivalent-psh-exhaustion-and-boundary-distance-pseudoconvexity`. Classification: A-R, bounded owner local repair (not independent certification).
+Actual serialized repair owner: group e; pre-edit claim in `research/frontier-37-owner-30-step5-published-claims.jsonl`.
+Raw before SHA256: `8dd8af58d805cd0c837915e3be7f09e872305b0d77cc0f323d7949240246e2b4`; canonical pre SHA256: `364565f4bbec728ee6a55c7142841a47c174451e5cdef63c81e0aa82e337e750`.
+Current canonical content SHA256: `e63689ac8c16765fa3fb6b565b4755a1b9e430ee400c215bf7f7988998248070`.
+Exact actual suppliers read: rem-complex-euclidean-space-dictionary; def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity; def-polydisc-boundary-radius; def-levi-form-and-strict-plurisubharmonicity; thm-c-two-levi-criterion-for-plurisubharmonicity; thm-stability-operations-for-plurisubharmonic-functions.
+Correction: Replace the squared norm with its canonical j<m sum, respect the existing whole-space boundary-distance convention and spell out compact-sublevel bounds; Statement unchanged.
+Consumer disposition: Original Statement is byte-for-byte unchanged; downstream statement uses remain unchanged. No consumer proof rereview is required for this proof-only correction.
+Actual dated precheck and real renderer pass recorded in the hash-bound local receipt; no stale audit/judge stamp retained, no new independent audit or whole-supplier-closure certification claimed.
+Review/repair and current raw-hash sidecar: `research/frontier-37-owner-30-5b-published-coordinate-owner-repair.md` and .json. No native5b report, verdict, impact or contract/manifest edits; root owns their integration.
+<!-- local-published-repair:frontier-37-owner-30:5b:thm-equivalent-psh-exhaustion-and-boundary-distance-pseudoconvexity:end -->
+
+
+## Frontier-37 assigned consumer interface reconciliation — Step 7 impact unit 1
+
+The assigned draft consumers were examined against their changed suppliers. No published item was edited and no new published mathematical defect was found. Local repairs below carry no independent audit or central certification claim. Historical assignments and findings remain intact.
+
+| Consumer | Supplier / exact affected use | Repair and audit status |
+| --- | --- | --- |
+| `cex-a-stationary-chain-need-not-be-ergodic` | `def-stationary-process-and-canonical-shift`, F3 ergodicity convention | Specify strictly stationary process. The fixed-path mixture meets that condition. Locally repaired. |
+| `lem-specht-branching-subspaces-are-invariant` | Corner/deletion interface; Proof 1.4 Garnir label sets | Remove “hence of any tableau”; only s's columns are used. Locally repaired. |
+| `lem-divisor-order-monotonicity-sections` | `def-order-codimension-one-rational-function`, F3 field domain and zero-section inequalities | Require integral X; explicitly use ord(0)=infinity only in inequalities; include the actual Cartier/Weil Choice use. Locally repaired. |
+| `lem-add-one-point-exact-sequence-line-bundle` | Order and smooth-curve DVR interfaces, F2 and F11 | Specify the zero-section inequality convention and the inherited DVR Choice use. Locally repaired. |
+| `lem-principal-parts-cech-h1-presentation` | `def-principal-parts-sheaf-line-bundle-curve`, Statement, F1, diagonal cokernel | Use the meromorphic vector space including zero throughout. Cokernel unchanged; direct consumers inventoried for their owners. Locally repaired. |
+| `def-residue-pairing-principal-parts` | Principal-parts interface, final Definition paragraph | Changes of representatives may be the zero meromorphic section. Pairing unchanged; direct consumers inventoried. Locally repaired. |
+| `lem-evaluation-on-an-unordered-marked-set-is-a-numerable-bundle-and-fibration` | Boundary-fixed evaluation interface; Proof 2.1 metric partition supplier | Construct the finite-orbit metric and prove it induces the quotient topology before applying the partition theorem; include singleton n=0. Locally repaired. |
+| `prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality` | Sign-duality supplier, F2 | Delete the ill-typed shorthand pairing formula; retain the exact supplied module isomorphism. Locally repaired. |
+| `cex-projection-branch-locus-is-not-singular-locus` | Discriminant/branch Definition, F5 fixed projection | Choose epsilon<r^2 explicitly; prove both roots remain inside, compact preimages, and two implicit sheets. Nonzero differential proves local reducedness and regularity. Locally repaired. |
+| `def-pure-mapping-class-group-of-a-punctured-disk` | Boundary-fixed group interface, concluding Remark | Attribute identity-component claim to the actual Alexander theorem and declare that dependency. Definition unchanged. Locally repaired. |
+| `cex-weil-divisor-not-cartier-singular-cone` | Order interface, Proof 10.2 | Handle g=0 before applying valuations to g and g/f. Locally repaired. |
+| `lem-each-combing-factor-reduces-to-a-lower-rank-letter-or-an-x-letter` | Prefix-position supplier, F3 | State exchanged adjacent pair versus fixed point outside support; recursion and case table unchanged. Locally repaired. |
+
+Direct-consumer findings outside this lane: the F1/F3 descriptions in `lem-residue-pairing-functorial-line-bundle`, F4 of `ex-residue-pairing-one-cocycle`, and F7 of `ex-residue-projective-line` retain rational-section terminology for a vector-space diagonal image. Their owners should allow zero by using meromorphic terminology where that full image is meant. No edit or audit of these carriers is made here. The other direct consumers retain the same cokernel, bilinear pairing, finite-tail representatives or residue normalization; exact uses and scope routes are in the assignment report.
+
+The owning residue page now calls the generic section space meromorphic and describes the pairing against global regular dual sections. The latter regularity is essential: a pole in the dual germ would make the local residue depend on the chosen principal-part lift. Only this interface prose was corrected; no published page was changed.
+
+Current-clause reconciliation for the new principal-parts events: `lem-residue-pairing-functorial-line-bundle` F1 and Proof 1.1 now correctly use meromorphic sections after a concurrent owner repair. Its F3 still calls the full generic vector space “the rational sheaf L_eta”; the pending proposal is limited to that F3 terminology. The two example clauses remain F4 in `ex-residue-pairing-one-cocycle` and F7 in `ex-residue-projective-line`. This updates the same recorded obligations; it opens no duplicate interface wave.
+
+
+## Frontier-37 assigned consumer interface reconciliation — Step 7 impact unit 2
+
+The assigned draft consumers retain their original Statement/Definition sections. No published item was edited, and no new published or outside-frontier consumer finding arose from these interface examinations. These are local owner repairs, with no independent audit, verdict or central certification claim.
+
+| Consumer | Supplier / affected clause | Mathematical repair and local status |
+| --- | --- | --- |
+| `thm-harmonic-hardy-one-measure-representation` | `def-poisson-integral-of-finite-boundary-measure`; Proof 1.1 inferred h1 membership from its norm bound alone | Added finite harmonic polynomial sums of the Poisson series. The remainder is at most 2 times total variation times rho^(N+1)/(1-rho) on each closed rho-disc; the Countable Choice harmonic-limit theorem proves harmonicity. The existing AC premise supplies that hypothesis. Statement unchanged; locally repaired. |
+| `lem-trace-riccati-inequality` | `def-radial-jacobi-tensor` and `thm-radial-riccati-equation`; A1 | Attribute inherited Countable Choice to curvature/Wronskian and Ricci inputs rather than the choice-free radial construction. Its interior initial interval meets the repaired Riccati hypothesis. Locally repaired. |
+| `ex-model-jacobi-fields-in-positive-zero-and-negative-curvature` | Radial Jacobi Definition; A1 | Remove the false attribution of Countable Choice to Jacobi initial-value existence. The constant-curvature premise remains; unit-speed model fields retain the same sn_k solution. Locally repaired. |
+| `cor-lower-positive-sectional-curvature-forces-conjugate-points` | Radial Jacobi Definition; A1 | Retain Countable Choice through curvature/index-form inputs, and state that Jacobi/parallel initial-value construction requires no choice. Conjugate-time conclusion unchanged; locally repaired. |
+| `thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound` | Radial tensor/Riccati interfaces; A1 | Attribute Countable Choice to cut-time, curvature and Hessian inputs. Complete radial geodesics meet the positive-initial-interval qualification. Locally repaired. |
+| `cor-bonnet-myers-fundamental-group-is-finite` | `thm-bonnet-myers`; F4 | Restore nonemptiness in the supplier restatement. The chosen basepoint and its lift establish nonemptiness in the actual application. Statement unchanged; locally repaired. |
+| `thm-bishop-gromov-volume-comparison` | `thm-bonnet-myers`, radial tensor and model-volume interfaces; A1/F6 | The given p explicitly establishes nonemptiness before Bonnet-Myers. Countable Choice is attributed to curvature rather than choice-free Jacobi initial data; the same polar and model formulas apply. Statement unchanged; locally repaired. |
+| `ex-distance-hessian-and-laplacian-in-space-forms` | Radial tensor and half-space model; A1 | Correct inherited choice attribution to curvature/Riccati inputs. Added constant model geodesics do not affect its unit-speed radial calculation. Locally repaired. |
+| `cor-smooth-proper-curve-finite-map-projective-line` | `lem-function-with-poles-defines-map-p1`; F1 | Require a nonzero pole-free rational function for the global-unit clause. The given nonconstant function is already nonzero; finite-map and pole-fibre conclusions unchanged. Locally repaired. |
+| `ex-divisor-cusp-normalization-pullback` | `def-order-codimension-one-rational-function`; F16 | State the local-unit criterion for the component value f_xi, which belongs to the codimension-one stalk. The actual normalization is integral, and the order-two pullback calculation is unchanged. Locally repaired. |
+
+The other assigned uses retain the actual revised supplier hypotheses and conclusions; item-specific reasons and guarded contexts are in `research/frontier-37-owner-30-step7-v2/step7-v2-impact-initial-r1-u2.json`. Necessary exact supplier quotes and citation-use mappings were reconciled in owning batch contracts. A contract-only repair is recorded as an unchanged item, not as an item repair. Since these local repairs change no Statement or Definition, they create no further supplier-interface event.
+
+
+## Frontier-37 residue interface reconciliation — impact-initial-pass-2 unit 2
+
+The assigned prior local repair proposal for `lem-global-residue-pairing-injective-left` is reconciled here. Its Statement, F1 and Proof 7.1 already use the full meromorphic generic fibre, including zero, at the start of this assignment (item guard `3f5093283e1081946e5a7567cea7db5ef6f59c0afc2f9bf25fb0795886782bc4`). This is necessary because the zero principal-part family need not admit a nonzero diagonal preimage. The current principal-parts, cokernel and residue-pairing supplier clauses support that convention; the nonzero local-coefficient/trace proof of injectivity remains valid. No item edit or independent audit is claimed in this lane.
+
+`lem-global-residue-pairing-dimension-balance` uses `def-residue-pairing-principal-parts` and `lem-global-residue-pairing-injective-left` in F4 and Proof 5.1 only for bilinearity and injectivity. Those conclusions are unchanged. Projectivity and the smooth-projective duality supplier at n=q=1 give the equal finite dimensions, so the final residue-pairing isomorphism remains valid under its declared AC and perfect-field hypotheses. Its two stale F4 supplier quotes in `research/frontier-37-owner-30-batch-8.proof-contracts.json` were refreshed to the current sections. The item carrier is unchanged; this is a local contract correction.
+
+No published carrier was edited or newly found defective. No Statement/Definition changed in this assignment, so there is no new downstream interface event. Historical proposals and consumer assignments are preserved. Exact review hashes and focused-check results belong to `research/frontier-37-owner-30-step7-v2/step7-v2-impact-initial-pass-2-r1-u2.json`; this entry establishes neither central certification nor independent review of the prior repair.
+
+<!-- frontier-37-owner-30:impact-repeat-r1-u1:interface-reconciliation -->
+## Frontier-37 consumer interface reconciliation — impact-repeat unit 1
+
+All sixteen assigned draft consumers retain their item carriers and Statement/Definition sections. The affected supplier clauses remain sufficient for their exact uses. The following eleven owning contracts had stale literal quotations; these are local citation-evidence corrections, with no independent mathematical audit or central certification claim.
+
+| Consumer | Supplier and exact use | Repair status |
+| --- | --- | --- |
+| `thm-poisson-extension-lp-contraction-and-norm-limit` | `def-poisson-integral-of-finite-boundary-measure`; L1: supplied-density integral, radial convolution and continuous-data agreement. | Stale quotation corrected in batch-25 proof contracts; guarded item unchanged. |
+| `thm-poisson-nontangential-maximal-bound` | `def-poisson-integral-of-finite-boundary-measure`; L1/L5: finite regular measure integration, P[f]=P[fm] and r=0. | Stale quotation corrected in batch-25 proof contracts; guarded item unchanged. |
+| `cex-radial-boundary-limit-does-not-force-tangential-limit` | `def-poisson-integral-of-finite-boundary-measure`; L2: the explicit indicator density and kernel formula. | Stale quotation corrected in batch-25 proof contracts; guarded item unchanged. |
+| `thm-harmonic-hardy-representation-p-greater-one` | `def-poisson-integral-of-finite-boundary-measure`; L7: supplied Lp density defines a finite regular complex measure. | Stale quotation corrected in batch-25 proof contracts; guarded item unchanged. |
+| `lem-toponogov-distance-support-inequality` | `prop-round-sphere-model-geometry`; F5: antipodal cut locus and cut time only. | Stale quotation corrected in batch-13 proof contracts; guarded item unchanged. |
+| `thm-toponogov-hinge-comparison` | `prop-round-sphere-model-geometry`; F5: cut time, antipodal involution and periodic complete model geodesics. | Stale quotation corrected in batch-13 proof contracts; guarded item unchanged. |
+| `prop-distance-between-corresponding-side-points-in-toponogov-comparison` | `prop-round-sphere-model-geometry`; F1: sphere curvature/diameter and finite minimizing model segments. | Stale quotation corrected in batch-13 proof contracts; guarded item unchanged. |
+| `cor-diameter-rigidity-from-toponogov-under-a-sectional-lower-bound` | `prop-round-sphere-model-geometry`; F13: exponential formula, tangent hyperplanes, injectivity below pi R and antipodal limit. | Stale quotation corrected in batch-13 proof contracts; guarded item unchanged. |
+| `ex-distance-hessian-and-laplacian-in-space-forms` | `prop-round-sphere-model-geometry`; F13: constant curvature, completeness and antipodal cut locus. | Stale quotation corrected in batch-13 proof contracts; guarded item unchanged. |
+| `ex-model-jacobi-fields-in-positive-zero-and-negative-curvature` | `prop-round-sphere-model-geometry`; F5: constant curvature, completeness and antipodal refocusing. | Stale quotation corrected in batch-13 proof contracts; guarded item unchanged. |
+| `thm-bishop-gromov-volume-comparison` | `thm-relative-volume-density-comparison`; F3: q_v is compared before cut time; J is explicitly zero-extended afterward, while exp remains defined. | Stale quotation corrected in batch-13 proof contracts; guarded item unchanged. |
+
+The prior proposal concerning `def-green-function-with-pole-at-infinity` is reconciled without another item edit: the current Remark no longer claims an independent unbounded-boundary counterexample, and all four Definition conditions remain intact. The present impact review checks only the changed polar-set interface: compact nonpolarity and the Borel capacity-polar q.e. exception are unchanged; no connected-domain subharmonic witness is used. The earlier mathematical repair and source consultation belong to `research/frontier-37-owner-30-step7-v2/step7-v2-repeat-r1-u24.json`, not to a new independent audit here.
+
+The existing separate-maintenance proposal for published `def-constant-sectional-curvature-and-space-form` is preserved: its Definition second paragraph says Countable Choice is used only through the geodesic-completeness supplier, while its first paragraph and the opening of `def-sectional-curvature` explicitly inherit Countable Choice through curvature symmetries. Direct current-clause comparison confirms this accounting inconsistency. Repair strategy: identify both sectional-curvature and geodesic-completeness interfaces without altering the geometric predicate or AC_omega premise. Status: outside this assigned draft lane; published carrier untouched, separate maintenance proposed, no audit or frontier gate obligation. This reconciles the existing proposal rather than opening a duplicate supplier-interface event.
+
+The guarded review reasons and actual focused checks are in `research/frontier-37-owner-30-step7-v2/step7-v2-impact-repeat-r1-u1.json`. No new item or consumer Statement/Definition was authored, so these local contract changes trigger no further propagation hop.

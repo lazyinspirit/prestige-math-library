@@ -60,7 +60,7 @@ test('diagnostic filtering preserves owned proofs, continuation lines, cross-own
   assert.equal(scopedGateOutput(input, new Set(['thm-own', 'thm-other']), new Set(['thm-own', 'thm-other'])), input);
 });
 
-test('every agent, including final adjudicators, compacts at 200k', () => {
+test('every agent, including final adjudicators, compacts at 500k', () => {
   for (const role of ['beta', 'reader', 'refuter', 'alpha', 'alpha-report', 'final-adjudicator']) {
     const result = spawnSync(process.execPath, [
       'tools/dispatch.mjs', '--role', role, '--brief', 'briefs/alpha.md',
@@ -71,8 +71,8 @@ test('every agent, including final adjudicators, compacts at 200k', () => {
     const row = JSON.parse(result.stdout);
     assert.match(row.prompt, /After compaction or handoff, reread/);
     if (row.sandbox === 'read-only') assert.match(row.prompt, /do not write checkpoints or extra files/);
-    assert.equal(row.auto_compact_token_limit, 250000);
-    assert.match(row.command, /model_auto_compact_token_limit=250000/);
+    assert.equal(row.auto_compact_token_limit, 500000);
+    assert.match(row.command, /model_auto_compact_token_limit=500000/);
     assert.match(row.command, /model_auto_compact_token_limit_scope="total"/);
   }
 });

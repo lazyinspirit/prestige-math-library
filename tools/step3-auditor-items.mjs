@@ -7,7 +7,7 @@
 
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { itemHash, itemInputPaths, loadStep3, scopeHash } from './step3-decisions.mjs';
 import { authorResultAllowed, loadStep3AuditorProvenance } from './auditor-created-items.mjs';
@@ -85,6 +85,34 @@ function currentOwnerRepair(s, id, dependencies, sha256) {
     || !String(row.reason ?? '').trim()) return null;
   const decided = Date.parse(row.at);
   if (!Number.isFinite(decided) || itemInputPaths(s, id, dependencies)
+    .some(path => statSync(path).mtimeMs > decided)) return null;
+  return { sha256: digest(row), at: row.at };
+}
+
+// An ordinary Step-3b review can recertify a postbaseline addition after its
+// author window closes. It must be the current, independent, confidence-1
+// decision for the exact current hash and dependencies. The hash binds the
+// relevant shared-manifest entries, so only item-source mtimes must predate it.
+function currentOrdinaryReview(s, id, dependencies, sha256) {
+  const ownerPath = join(s.root, 'research', `${s.run}-step3b-owner-${safe(id)}.json`);
+  if (existsSync(ownerPath)) {
+    const owner = json(ownerPath);
+    if (owner.run === s.run && owner.phase === 'item' && owner.target === id
+      && owner.owner === true && owner.decision === 'hold') return null;
+  }
+  const path = join(s.root, 'research', `${s.run}-step3b-review-${safe(id)}.json`);
+  if (!existsSync(path)) return null;
+  const row = json(path);
+  if (row.version !== 1 || row.run !== s.run || row.phase !== 'item'
+    || row.target !== id || row.owner !== false
+    || !['accept', 'repaired'].includes(row.decision) || row.confidence !== 1
+    || row.sha256 !== sha256 || !Array.isArray(row.dependencies)
+    || JSON.stringify(row.dependencies) !== JSON.stringify(dependencies)
+    || !String(row.reason ?? '').trim()) return null;
+  const decided = Date.parse(row.at);
+  const itemRoot = join(s.root, 'items') + sep;
+  if (!Number.isFinite(decided) || itemInputPaths(s, id, dependencies)
+    .filter(path => path.startsWith(itemRoot) && path.endsWith('.md'))
     .some(path => statSync(path).mtimeMs > decided)) return null;
   return { sha256: digest(row), at: row.at };
 }
@@ -180,7 +208,7 @@ function certify(root, run, partial) {
     const priorCurrent = prior?.sha256 === sha256 && prior.page === value.page.id && prior.batch === batch
       && JSON.stringify(prior.dependencies) === JSON.stringify(dependencies);
     const pair = [...s.pairs].find(([, pages]) => pages.some(page => page.id === value.page.id))?.[0];
-    let author, ownerRecertification;
+    let author, ownerRecertification, reviewRecertification;
     if (priorCurrent) {
       author = { label: prior.author_result };
       // A reused item hash is not permission to detach its owner repair from
@@ -190,6 +218,13 @@ function certify(root, run, partial) {
       if (prior.owner_recertification && !ownerRecertification) {
         defer(`${id}: prior owner repair is no longer current`);
         continue;
+      }
+      if (prior.review_recertification && !ownerRecertification) {
+        reviewRecertification = currentOrdinaryReview(s, id, dependencies, sha256);
+        if (!reviewRecertification) {
+          defer(`${id}: prior ordinary review is no longer current`);
+          continue;
+        }
       }
     }
     else {
@@ -210,7 +245,9 @@ function certify(root, run, partial) {
         const originAuthorResult = prior?.author_result ?? author?.label;
         ownerRecertification = originAuthorResult
           ? currentOwnerRepair(s, id, dependencies, sha256) : null;
-        if (!ownerRecertification) {
+        reviewRecertification = !ownerRecertification && originAuthorResult
+          ? currentOrdinaryReview(s, id, dependencies, sha256) : null;
+        if (!ownerRecertification && !reviewRecertification) {
           defer(author ? `${id}: changed after its latest successful Step 3 auditor/author result`
             : `${id}: no successful Step 3 auditor/author result covers batch ${batch} or pair ${pair}`);
           continue;
@@ -220,7 +257,8 @@ function certify(root, run, partial) {
     }
     certified.push({ id, page: value.page.id, batch, dependencies,
       sha256, author_result: author.label,
-      ...(ownerRecertification ? { owner_recertification: ownerRecertification } : {}) });
+      ...(ownerRecertification ? { owner_recertification: ownerRecertification } : {}),
+      ...(reviewRecertification ? { review_recertification: reviewRecertification } : {}) });
   }
 
   const scopes = [];

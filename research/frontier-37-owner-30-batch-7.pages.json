@@ -1,0 +1,2192 @@
+[
+  {
+    "order": 366.087,
+    "id": "riemann-roch-for-curves-via-euler-characteristics",
+    "kind": "A",
+    "category": "scheme-theory",
+    "title": "Riemann Roch for Curves via Euler Characteristics",
+    "companion": "riemann-roch-for-curves-via-euler-characteristics-examples",
+    "requires": [
+      "cartier-and-weil-divisors-line-bundles-and-picard-groups",
+      "sheaf-cohomology-cech-cohomology-and-comparison",
+      "cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes",
+      "smooth-proper-curves-divisors-genus-and-ramification"
+    ],
+    "items": [
+      {
+        "id": "def-little-l-divisor",
+        "kind": "definition",
+        "title": "The integer l(D)",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). It supplies the Dependent Choice premise of the current curve Cartier-to-Weil result by thm-choice-implies-dependent-implies-countable-choice. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field) and let $D$ be a divisor on $C$ (def-divisor-smooth-proper-curve) with associated invertible sheaf $\\mathcal O_C(D)$. For every such $k$, $C$ and $D$, the dimensions below are finite; define $$l(D):=\\dim_kL(D)=\\dim_kH^0(C,\\mathcal O_C(D))=h^0(D)$$ to be the dimension of the Riemann-Roch space, and define $$h^i(D):=\\dim_kH^i(C,\\mathcal O_C(D)),\\qquad i\\ge0,$$ for the dimensions of the sheaf cohomology groups (def-sheaf-cohomology-derived-global-sections, def-dimension). For finiteness, $\\mathcal O_C(D)$ is invertible by def-invertible-sheaf-of-cartier-divisor, lem-cartier-divisor-sheaf-invertible and thm-cartier-weil-divisors-curves-agree. An invertible sheaf is locally free of rank one, hence quasi-coherent and of finite type. The curve is locally Noetherian because it is of finite type over the Noetherian field $k$; therefore a finite-type quasi-coherent sheaf on it is coherent (def-invertible-sheaf, def-locally-free-sheaf-finite-rank, def-quasi-coherent-module-scheme, def-finite-type-finite-presentation-module-sheaf, def-locally-finite-type-and-finite-type-morphism, lem-field-is-noetherian, cor-finite-type-algebra-over-noetherian-ring-is-noetherian, def-locally-noetherian-and-noetherian-scheme, thm-coherent-sheaves-abelian-noetherian-scheme). The published proper coherent-cohomology theorem then makes every $H^i(C,\\mathcal O_C(D))$ finite-dimensional over $k$ (cor-projective-cohomology-finite-dimensional-field). Thus $l(D)$ and each $h^i(D)$ are always nonnegative integers in this setting. For the zero divisor, $$l(0)=\\dim_kH^0(C,\\mathcal O_C)=1,$$ because $H^0(C,\\mathcal O_C)$ is canonically $k$ (thm-h0-structure-sheaf-proper-curve); more generally $l(D)$ depends only on the divisor $D$ through its associated invertible sheaf. The current def-riemann-roch-space-of-divisor supplies the order-defined space $L(D)$ and identifies it with $H^0(C,\\mathcal O_C(D))$, using the rational-section dictionary thm-line-bundle-rational-section-cartier-divisor. The Cartier-to-Weil route requires Dependent Choice, which the stated Axiom of Choice supplies through thm-choice-implies-dependent-implies-countable-choice. This finiteness route uses the published proper cohomology result directly and does not depend on the later Riemann-Roch-space finite-dimensionality lemma.",
+        "deps": [
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "cor-projective-cohomology-finite-dimensional-field",
+          "def-axiom-of-choice",
+          "def-algebraic-curve-over-field",
+          "def-coherent-module-scheme",
+          "def-dependent-choice",
+          "def-dimension",
+          "def-divisor-smooth-proper-curve",
+          "def-finite-type-finite-presentation-module-sheaf",
+          "def-invertible-sheaf",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-locally-free-sheaf-finite-rank",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-quasi-coherent-module-scheme",
+          "def-riemann-roch-space-of-divisor",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-cartier-divisor-sheaf-invertible",
+          "lem-field-is-noetherian",
+          "thm-cartier-weil-divisors-curves-agree",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "thm-h0-structure-sheaf-proper-curve",
+          "thm-line-bundle-rational-section-cartier-divisor"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "lem-riemann-roch-space-finite-dimensional",
+        "kind": "lemma",
+        "title": "Finite-dimensionality of the Riemann-Roch space",
+        "statement": "Assume the Axiom of Choice as inherited from the proper finiteness theorem. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field) and let $D$ be a divisor on $C$. Then: 1. the invertible sheaf $\\mathcal O_C(D)$ is a coherent $\\mathcal O_C$-module (def-coherent-module-scheme); 2. $L(D)=H^0(C,\\mathcal O_C(D))$ is a finite-dimensional $k$-vector space; 3. $H^q(C,\\mathcal O_C(D))$ is a finite-dimensional $k$-vector space (def-dimension) for every $q\\ge0$, and vanishes for every $q\\ge2$; 4. the Euler characteristic $\\chi(C,\\mathcal O_C(D))=h^0(D)-h^1(D)$ is defined (def-euler-characteristic-coherent-sheaf); 5. consequently $l(D):=\\dim_kL(D)=h^0(D)$ is a nonnegative integer. The divisor $D$ is first identified as a Cartier divisor by thm-cartier-weil-divisors-curves-agree. The associated sheaf is constructed by def-invertible-sheaf-of-cartier-divisor and proved invertible by lem-cartier-divisor-sheaf-invertible. The Riemann-Roch space and its identification with $H^0(C,\\mathcal O_C(D))$ are supplied by def-riemann-roch-space-of-divisor, using the rational-section dictionary thm-line-bundle-rational-section-cartier-divisor; these are the inputs used in [F8]. The stated Axiom of Choice supplies the Dependent Choice premise of the curve Cartier-to-Weil result through thm-choice-implies-dependent-implies-countable-choice.",
+        "deps": [
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "cor-projective-cohomology-finite-dimensional-field",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-coherent-module-scheme",
+          "def-dependent-choice",
+          "def-dimension",
+          "def-dimension-noetherian-topological-space",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-finite-type-finite-presentation-module-sheaf",
+          "def-integral-scheme",
+          "def-invertible-sheaf",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-locally-free-sheaf-finite-rank",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-quasi-coherent-module-scheme",
+          "def-riemann-roch-space-of-divisor",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-curve-closed-subsets-finite",
+          "lem-cartier-divisor-sheaf-invertible",
+          "lem-field-is-noetherian",
+          "thm-cartier-weil-divisors-curves-agree",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "thm-line-bundle-rational-section-cartier-divisor",
+          "thm-noetherian-topological-space-dimension-vanishing"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "First identify D as Cartier via the smooth-curve Cartier-to-Weil result, with DC supplied by AC; construct O_C(D) and prove it invertible. On the locally Noetherian curve, this invertible sheaf is quasi-coherent of finite type and hence coherent. Proper coherent-cohomology finiteness gives finite-dimensional H^q, while the one-dimensional Noetherian-space vanishing theorem kills q >= 2. The rational-section dictionary identifies L(D) with H^0; the Euler-characteristic and nonnegative-dimension conclusions follow.",
+        "proof_strategy": "direct",
+        "dependency_level": 12
+      },
+      {
+        "id": "lem-divisor-order-monotonicity-sections",
+        "kind": "lemma",
+        "title": "Monotonicity of L(D) in the divisor",
+        "statement": "Assume the Axiom of Choice as inherited from the local-DVR, divisor and finite-dimensionality suppliers. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field) and let $D\\le E$ be divisors on $C$ (def-divisor-smooth-proper-curve), so that $E-D$ is effective. Then $L(D)\\subseteq L(E)$ as $k$-subspaces of the function field $k(C)$; equivalently, the natural morphism of invertible subsheaves of the constant sheaf of rational functions $\\mathcal O_C(D)\\to\\mathcal O_C(E)$ is injective. If in addition $E=D+p$ for a single closed point $p$, choose a uniformizer $t$ of $\\mathcal O_{C,p}$ and put $a=n_p(D)$. The canonical evaluation map from $L(D+p)=H^0(C,\\mathcal O_C(D+p))$ to the fiber $\\mathcal O_C(D+p)|_p$ has, in the frame $t^{-a-1}$, the coordinate $$L(D+p)\\longrightarrow\\kappa(p),\\qquad f\\longmapsto t^{a+1}f\\bmod(t).$$ In this chosen coordinate its kernel is $L(D)$, so the quotient $L(D+p)/L(D)$ embeds $k$-linearly into $\\kappa(p)$. The coordinate map depends on the chosen uniformizer; the kernel and dimension bound do not. Consequently $$\\dim_kL(D+p)/L(D)\\le[\\kappa(p):k].$$ In particular $$l(D)\\le l(E)\\le l(D)+\\deg_k(E-D)$$ for all divisors $D\\le E$ (def-little-l-divisor, def-degree-divisor-proper-curve). The current interfaces def-riemann-roch-space-of-divisor, def-principal-weil-divisor-and-class-group, def-invertible-sheaf-of-cartier-divisor and thm-cartier-weil-divisors-curves-agree supply the spaces, divisors and sheaves used below. The Cartier-to-Weil route requires Dependent Choice, which the stated Axiom of Choice supplies through thm-choice-implies-dependent-implies-countable-choice. The rational-section identification uses thm-line-bundle-rational-section-cartier-divisor.",
+        "deps": [
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-degree-divisor-proper-curve",
+          "def-dimension",
+          "def-divisor-smooth-proper-curve",
+          "def-divisor-support-positive-negative-parts",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-little-l-divisor",
+          "def-order-codimension-one-rational-function",
+          "def-principal-weil-divisor-and-class-group",
+          "def-riemann-roch-space-of-divisor",
+          "def-residue-field-scheme-point",
+          "lem-quotient-basis-lifts-to-an-adapted-basis",
+          "lem-riemann-roch-space-finite-dimensional",
+          "thm-cartier-weil-divisors-curves-agree",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-first-isomorphism-theorem-for-vector-spaces",
+          "thm-local-ring-smooth-curve-dvr",
+          "thm-rank-nullity",
+          "thm-line-bundle-rational-section-cartier-divisor"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "Both spaces are submodules of the one-dimensional k(C)-space of rational functions: f lies in L(D) iff div(f) + D >= 0, and D <= E gives div(f) + E >= div(f) + D >= 0, hence L(D) is contained in L(E). For E = D + p, tensor the inclusion O_C(D) -> O_C(D+p) with the skyscraper: the quotient O_C(D+p)/O_C(D) is supported at p with stalk O_{C,p}/(t) = kappa(p) after trivialising, so its space of global sections is a k-subspace of kappa(p); the long exact sequence of global sections identifies L(D+p)/L(D) with a k-subspace of kappa(p), of dimension at most [kappa(p):k], and L(D) is exactly the kernel of the composite L(D+p) -> kappa(p). Induction over the finitely many points of E - D and additivity of the residue degrees give l(E) <= l(D) + deg_k(E - D).",
+        "proof_strategy": "direct",
+        "dependency_level": 13
+      },
+      {
+        "id": "lem-add-one-point-exact-sequence-line-bundle",
+        "kind": "lemma",
+        "title": "The exact sequence for adding one point to a divisor",
+        "statement": "Assume the Axiom of Choice, inherited through the sheaf-cohomology and Cartier-divisor suppliers of this page. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field), let $D$ be a divisor on $C$ (def-divisor-smooth-proper-curve), let $p\\in C$ be a closed point with residue field $\\kappa(p)$ and residue degree $d:=[\\kappa(p):k]$ (def-residue-field-scheme-point, def-degree-divisor-proper-curve), and let $i_{p,*}\\kappa(p)$ be the skyscraper sheaf at $p$ with value $\\kappa(p)$ (def-skyscraper-sheaf-abelian-group). 1. The natural morphism $\\mathcal O_C(D)\\to\\mathcal O_C(D+p)$ of invertible subsheaves of the constant sheaf of rational functions is injective (lem-divisor-order-monotonicity-sections), and it fits into a short exact sequence of coherent $\\mathcal O_C$-modules $$0\\to\\mathcal O_C(D)\\to\\mathcal O_C(D+p)\\to i_{p,*}\\kappa(p)\\to0;$$ thus the cokernel of the inclusion is the skyscraper sheaf at $p$ with value $\\kappa(p)$ (def-coherent-module-scheme). This realises the promised third term $i_*\\bigl(\\mathcal O_C(D+p)|_p\\bigr)$: the restriction of the invertible sheaf $\\mathcal O_C(D+p)$ to the closed point $p$ is a one-dimensional $\\kappa(p)$-vector space, and the pushforward of that value is the skyscraper sheaf of the exact sequence. 2. $H^0\\bigl(C,i_{p,*}\\kappa(p)\\bigr)\\cong\\kappa(p)$, so $\\dim_kH^0\\bigl(C,i_{p,*}\\kappa(p)\\bigr)=d$, and $H^q\\bigl(C,i_{p,*}\\kappa(p)\\bigr)=0$ for every $q\\ge1$ (def-sheaf-cohomology-derived-global-sections). 3. Iterating: for every effective divisor $E\\ge0$ on $C$ the inclusion $\\mathcal O_C(D)\\to\\mathcal O_C(D+E)$ has cokernel $Q_E$ fitting into a short exact sequence of coherent $\\mathcal O_C$-modules $$0\\to\\mathcal O_C(D)\\to\\mathcal O_C(D+E)\\to Q_E\\to0$$ with $(Q_E)_x=0$ for every closed point $x\\notin\\operatorname{Supp}(E)$; moreover $H^q(C,Q_E)=0$ for every $q\\ge1$ and $$\\dim_kH^0(C,Q_E)=\\deg_k(E),$$ so in particular $0\\le\\dim_kH^0(C,Q_E)\\le\\deg_k(E)$, the upper bound being the one promised (def-divisor-support-positive-negative-parts, lem-degree-effective-divisor-nonnegative). The sheaves $\\mathcal O_C(D')$ used here are constructed from the actual Weil-to-Cartier and Cartier-sheaf interfaces in [F2]. Under the stated Axiom of Choice, [F12] supplies the Dependent Choice premise of the curve Cartier-to-Weil result. The open-set order description in [F2] is stated for nonempty opens; the section group on the empty open is zero.",
+        "deps": [
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-coherent-module-scheme",
+          "def-degree-divisor-proper-curve",
+          "def-dependent-choice",
+          "def-dimension",
+          "def-direct-image-sheaf",
+          "def-divisor-smooth-proper-curve",
+          "def-divisor-support-positive-negative-parts",
+          "def-exact-sequence-sheaves",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-kernel-cokernel-image-sheaves",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-order-codimension-one-rational-function",
+          "def-riemann-roch-space-of-divisor",
+          "def-residue-field-scheme-point",
+          "def-stalk-of-presheaf",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-sheaf-total-quotient-rings",
+          "def-skyscraper-sheaf-abelian-group",
+          "def-subspace-topology-top",
+          "def-the-quotient-of-an-object-by-a-subobject",
+          "lem-cartier-divisor-sheaf-invertible",
+          "lem-closed-immersion-preserves-sheaf-cohomology",
+          "lem-degree-effective-divisor-nonnegative",
+          "lem-divisor-order-monotonicity-sections",
+          "lem-field-is-noetherian",
+          "lem-filtered-colimits-of-abelian-groups-are-exact",
+          "lem-quotient-basis-lifts-to-an-adapted-basis",
+          "lem-riemann-roch-space-finite-dimensional",
+          "thm-abelian-sheaves-form-abelian-category",
+          "thm-cartier-weil-divisors-curves-agree",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "thm-cohomology-one-point-space",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-first-isomorphism-theorem-for-vector-spaces",
+          "thm-first-isomorphism-theorem-in-an-abelian-category",
+          "thm-line-bundle-rational-section-cartier-divisor",
+          "thm-local-ring-smooth-curve-dvr",
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "thm-rank-nullity",
+          "thm-sheafification-preserves-stalks",
+          "thm-third-isomorphism-theorem-in-an-abelian-category"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            }
+          ]
+        },
+        "strategy": "On the smooth curve, identify each Weil divisor as Cartier using the curve Cartier-to-Weil result (with DC supplied by AC), construct its Cartier sheaf, and use the DVR order criterion to describe sections on nonempty opens; the empty-open sections are zero. Define the evaluation map by f |-> t^(a+1)f mod t near p, prove it is an O_C-module map with kernel O_C(D), and check its stalks give the quotient kappa(p). Use the one-point-space calculation for skyscraper cohomology, local Noetherianity for coherence, and induction over the finite support of E for the quotient, cohomology vanishing, and dimension formula.",
+        "proof_strategy": "direct",
+        "dependency_level": 14
+      },
+      {
+        "id": "lem-add-one-point-euler-characteristic",
+        "kind": "lemma",
+        "title": "Euler characteristic changes by the residue degree",
+        "statement": "Assume the Axiom of Choice, inherited from the Euler-characteristic, finiteness and skyscraper suppliers below. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field), let $D$ be a divisor on $C$ (def-divisor-smooth-proper-curve) and let $p\\in C$ be a closed point with residue degree $d=[\\kappa(p):k]$ (def-degree-divisor-proper-curve). Then $$\\chi\\bigl(C,\\mathcal O_C(D+p)\\bigr)=\\chi\\bigl(C,\\mathcal O_C(D)\\bigr)+d,$$ and more generally $$\\chi\\bigl(C,\\mathcal O_C(D+E)\\bigr)=\\chi\\bigl(C,\\mathcal O_C(D)\\bigr)+\\deg_k(E)$$ for every effective divisor $E\\ge0$ on $C$, where $\\chi$ is the Euler characteristic of coherent sheaves on the proper $k$-scheme $C$ (def-euler-characteristic-coherent-sheaf). Both identities hold in $\\mathbb Z$. The short exact sequence $0\\to\\mathcal O_C(D)\\to\\mathcal O_C(D+p)\\to i_{p,*}\\kappa(p)\\to0$, the cokernel $Q_E$ of $\\mathcal O_C(D)\\to\\mathcal O_C(D+E)$ together with $\\dim_kH^0(C,Q_E)=\\deg_k(E)$ and the higher vanishing, and the coherence of $i_{p,*}\\kappa(p)$ and of $Q_E$ are supplied by lem-add-one-point-exact-sequence-line-bundle. That current supplier states and proves the Cartier-to-Weil, Cartier-sheaf and local-order interfaces used to construct the sequence; its Cartier-to-Weil route obtains Dependent Choice from the Axiom of Choice by thm-choice-implies-dependent-implies-countable-choice. This corollary uses the stated sequence interface and does not certify its separate suppliers.",
+        "deps": [
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-coherent-module-scheme",
+          "def-degree-divisor-proper-curve",
+          "def-dimension",
+          "def-divisor-smooth-proper-curve",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-add-one-point-exact-sequence-line-bundle",
+          "lem-degree-effective-divisor-nonnegative",
+          "lem-euler-characteristic-additive-short-exact",
+          "lem-riemann-roch-space-finite-dimensional",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply additivity of chi in the short exact sequence of lem-add-one-point-exact-sequence-line-bundle: chi(O_C(D+p)) = chi(O_C(D)) + chi(i_*kappa(p)), and chi of the skyscraper is dim_k H^0 = d because its higher cohomology vanishes. Iterating over the closed points of E and using additivity of deg_k over effective sums gives the general formula.",
+        "proof_strategy": "direct",
+        "dependency_level": 15
+      },
+      {
+        "id": "lem-divisor-decomposition-positive-negative-points",
+        "kind": "lemma",
+        "title": "Every divisor is a finite signed sum of points",
+        "statement": "Assume the Axiom of Choice, inherited from the Euler-characteristic suppliers below. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field) and let $D=\\sum_xn_x[x]$ be a divisor on $C$ (def-divisor-smooth-proper-curve). Write $D^{+}$ and $D^{-}$ for the positive and negative parts of $D$ (def-divisor-support-positive-negative-parts). 1. (Decomposition.) $D$ is a finite $\\mathbb Z$-linear combination of closed points, and $D=D^{+}-D^{-}$ with $D^{+}$ and $D^{-}$ effective divisors of disjoint support; consequently $\\deg_k(D)=\\deg_k(D^{+})-\\deg_k(D^{-})$ (def-degree-divisor-proper-curve, lem-degree-effective-divisor-nonnegative). 2. (Chain.) Let $p_1,\\ldots,p_m$ be a listing of the points of $\\operatorname{Supp}(D^{+})$ in which each point $x$ occurs exactly $n_x$ times, and let $q_1,\\ldots,q_n$ be a listing of the points of $\\operatorname{Supp}(D^{-})$ in which each point $y$ occurs exactly $-n_y$ times. For every ordering of the $m+n$ signed symbols $+[p_1],\\ldots,+[p_m],-[q_1],\\ldots,-[q_n]$, the chain of divisors $M_0=0$, $M_k=M_{k-1}\\pm[r_k]$, where the $k$-th symbol is $\\pm[r_k]$, has successive differences $\\pm[r_k]$ at closed points and ends at $M_{m+n}=\\sum_i[p_i]-\\sum_j[q_j]=D$. 3. (Order-independent iterated computation.) Computing $\\chi$ along this chain by the one-point shift of lem-add-one-point-euler-characteristic, every step changes the value by $+[\\kappa(r_k):k]$ for an addition and by $-[\\kappa(r_k):k]$ for a removal, so the telescoping total is $$\\chi\\bigl(C,\\mathcal O_C(D)\\bigr)=\\chi\\bigl(C,\\mathcal O_C(0)\\bigr)+\\sum_i[\\kappa(p_i):k]-\\sum_j[\\kappa(q_j):k]=\\chi\\bigl(C,\\mathcal O_C(0)\\bigr)+\\deg_k(D^{+})-\\deg_k(D^{-})=\\chi\\bigl(C,\\mathcal O_C(0)\\bigr)+\\deg_k(D),$$ a value that depends only on the multiset of listed points and not on the chosen ordering; identifying $\\mathcal O_C(0)\\cong\\mathcal O_C$ with the structure sheaf, this reads $\\chi(C,\\mathcal O_C(D))=\\chi(C,\\mathcal O_C)+\\deg_k(D)$. Here $\\chi$ is the Euler characteristic of coherent sheaves on the proper $k$-scheme $C$ (def-euler-characteristic-coherent-sheaf), and every sheaf appearing is coherent (lem-riemann-roch-space-finite-dimensional). The attachment of the invertible sheaf $\\mathcal O_C(D)$ to the divisor $D$ and the identification $\\mathcal O_C(0)\\cong\\mathcal O_C$ use the current interfaces of def-invertible-sheaf-of-cartier-divisor and thm-cartier-weil-divisors-curves-agree. The latter has an explicit Dependent Choice premise, supplied by the stated Axiom of Choice through thm-choice-implies-dependent-implies-countable-choice; these premises are recorded in [F6] and [F7]. (Scaffold repair: the scaffold's phrase \"enumeration of the support\" is read as a listing with repetitions, each point occurring exactly as often as its coefficient, which is what makes the chain end at $D$; the statement above says this explicitly.)",
+        "deps": [
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-degree-divisor-proper-curve",
+          "def-dimension",
+          "def-divisor-smooth-proper-curve",
+          "def-divisor-support-positive-negative-parts",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-add-one-point-euler-characteristic",
+          "lem-cohomology-functoriality-sheaf-and-space",
+          "lem-degree-effective-divisor-nonnegative",
+          "lem-riemann-roch-space-finite-dimensional",
+          "prop-functors-preserve-isomorphisms",
+          "thm-cartier-weil-divisors-curves-agree",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            }
+          ]
+        },
+        "strategy": "A divisor is by definition a finite integral sum of closed points, so D^+ = sum_{n_x>0} n_x[x] and D^- = sum_{n_x<0} (-n_x)[x] are effective with disjoint supports and D = D^+ - D^-. Expanding each multiple n_x[x] as n_x successive single-point additions realizes D by a finite chain, and each single step shifts chi by the residue degree (lem-add-one-point-euler-characteristic, applied in the form chi(D+p) = chi(D) + [kappa(p):k], also in reverse); the sum of the shifts is deg_k(D^+) - deg_k(D^-) = deg_k D, independent of the enumeration. The nonnegativity of deg_k on effective divisors keeps the bookkeeping within the integers.",
+        "proof_strategy": "direct",
+        "dependency_level": 16
+      },
+      {
+        "id": "thm-euler-characteristic-degree-shift-curve",
+        "kind": "theorem",
+        "title": "Riemann-Roch in Euler-characteristic form: degree shift",
+        "statement": "Assume the Axiom of Choice as inherited from the proper-cohomology suppliers. Let C be a smooth proper geometrically integral curve over k. Then for every divisor D on C, chi(C, O_C(D)) - chi(C, O_C) = deg_k(D); equivalently h^0(D) - h^1(D) = deg_k(D) + h^0(0) - h^1(0).",
+        "deps": [
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-degree-divisor-proper-curve",
+          "def-dimension",
+          "def-divisor-smooth-proper-curve",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-little-l-divisor",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-divisor-decomposition-positive-negative-points",
+          "lem-riemann-roch-space-finite-dimensional"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "Decompose D into a finite signed sum as in lem-divisor-decomposition-positive-negative-points and follow chi from O_C to O_C(D) through the point-by-point chain; each step adds or subtracts the residue degree of the point, and the total shift is deg_k(D). The reformulation in dimensions is the definition of chi.",
+        "proof_strategy": "direct",
+        "dependency_level": 17
+      },
+      {
+        "id": "def-genus-euler-characteristic-curve",
+        "kind": "definition",
+        "title": "Genus via the Euler characteristic",
+        "statement": "Assume the Axiom of Choice for proper-cohomology finiteness and the global functions theorem (def-axiom-of-choice). Let $k$ be a field and let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field). The current lem-riemann-roch-space-finite-dimensional proves under this assumption that $H^1(C,\\mathcal O_C)$ is finite-dimensional. The genus of $C$ is the nonnegative integer $$g(C):=h^1(C,\\mathcal O_C)=\\dim_kH^1(C,\\mathcal O_C)$$ (def-little-l-divisor, def-sheaf-cohomology-derived-global-sections, def-dimension). The global functions theorem thm-h0-structure-sheaf-proper-curve gives $H^0(C,\\mathcal O_C)=k$. Consequently the Euler characteristic $\\chi(C,\\mathcal O_C)=h^0(C,\\mathcal O_C)-h^1(C,\\mathcal O_C)$ of def-euler-characteristic-coherent-sheaf satisfies $$\\chi(C,\\mathcal O_C)=1-g(C),\\qquad\\text{equivalently}\\qquad g(C)=1-\\chi(C,\\mathcal O_C).$$ This is the arithmetic genus $p_a(C)=1-\\chi(\\mathcal O_C)$ of def-arithmetic-genus-proper-curve for a smooth geometrically connected proper curve. The equality of the two definitions here follows from $H^0(C,\\mathcal O_C)=k$ and finite-dimensionality of $H^1$. For the projective line, the direct published cohomology calculation cor-top-cohomology-projective-space-o-d gives $H^1(\\mathbb P^1_k,\\mathcal O)=0$ (take projective dimension $1$ and twist $d=0$), so $g(\\mathbb P^1_k)=0$. No Serre duality is used in this definition.",
+        "deps": [
+          "cor-top-cohomology-projective-space-o-d",
+          "def-axiom-of-choice",
+          "def-algebraic-curve-over-field",
+          "def-arithmetic-genus-proper-curve",
+          "def-dimension",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-little-l-divisor",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-riemann-roch-space-finite-dimensional",
+          "thm-h0-structure-sheaf-proper-curve"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "thm-riemann-roch-euler-characteristic-curve",
+        "kind": "theorem",
+        "title": "Riemann-Roch for curves: the Euler-characteristic form",
+        "statement": "Assume the Axiom of Choice as inherited from the proper-cohomology suppliers. Let C be a smooth proper geometrically integral curve over k with genus g = g(C). Then for every divisor D on C, h^0(D) - h^1(D) = chi(C, O_C(D)) = deg_k(D) + 1 - g. No Serre duality is used: the index of speciality h^1(D) is left as an unknown nonnegative integer.",
+        "deps": [
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-degree-divisor-proper-curve",
+          "def-dimension",
+          "def-divisor-smooth-proper-curve",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-genus-euler-characteristic-curve",
+          "def-little-l-divisor",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-riemann-roch-space-finite-dimensional",
+          "thm-euler-characteristic-degree-shift-curve"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "Combine the degree shift chi(O_C(D)) - chi(O_C) = deg D with chi(O_C) = 1 - g from the definition of the genus.",
+        "proof_strategy": "direct",
+        "dependency_level": 18
+      },
+      {
+        "id": "cor-riemann-inequality-divisor-sections",
+        "kind": "corollary",
+        "title": "The Riemann inequality",
+        "statement": "Assume the Axiom of Choice as inherited from the proper-cohomology suppliers. Let C be a smooth proper geometrically integral curve over k with genus g. For every divisor D, l(D) = h^0(D) >= deg_k(D) + 1 - g.",
+        "deps": [
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-dimension",
+          "def-divisor-smooth-proper-curve",
+          "def-genus-euler-characteristic-curve",
+          "def-index-speciality-divisor",
+          "def-little-l-divisor",
+          "thm-riemann-roch-euler-characteristic-curve"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "h^0(D) = deg D + 1 - g + h^1(D) and h^1(D) >= 0. Choice is inherited from the Riemann-Roch theorem cited above; the deduction itself is the nonnegativity of h^1.",
+        "proof_strategy": "direct",
+        "dependency_level": 20
+      },
+      {
+        "id": "cor-negative-degree-no-sections-rr",
+        "kind": "corollary",
+        "title": "No sections in negative degree",
+        "statement": "Assume the Axiom of Choice as inherited from the divisor and degree suppliers. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field) and let $D$ be a divisor on $C$ (def-divisor-smooth-proper-curve). If $\\deg_k(D)<0$ then $L(D)=0$ and $l(D)=0$ (def-riemann-roch-space-of-divisor, def-little-l-divisor). The proof given is the effective-divisor argument: a nonzero $f\\in L(D)$ would exhibit the effective divisor $\\operatorname{div}(f)+D$ linearly equivalent to $D$, whose degree is therefore $\\deg_k(D)$, contradicting the nonnegativity of the degree of an effective divisor. It does not appeal to the Riemann inequality, which for negative degree would only give the vacuous bound $l(D)\\ge\\deg_k(D)+1-g$ with a negative right-hand side.",
+        "deps": [
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-degree-divisor-proper-curve",
+          "def-divisor-smooth-proper-curve",
+          "def-little-l-divisor",
+          "def-riemann-roch-space-of-divisor",
+          "lem-degree-effective-divisor-nonnegative",
+          "lem-effective-divisors-sections-mod-scalars",
+          "thm-principal-divisor-degree-zero-proper-curve"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "Suppose f is a nonzero element of L(D). Then div(f) + D = E is an effective divisor linearly equivalent to D, so deg_k E = deg_k D by the degree-zero theorem for principal divisors; but deg_k E >= 0 for effective E. Hence deg_k D >= 0, a contradiction. The argument uses no inequality, only effectivity and degree.",
+        "proof_strategy": "direct",
+        "dependency_level": 13
+      },
+      {
+        "id": "lem-h1-stabilizes-downward-point-removal",
+        "kind": "lemma",
+        "title": "Adding points never raises h^1, and h^1 stabilizes",
+        "statement": "Assume the Axiom of Choice as inherited from the sheaf-cohomology suppliers. Let C be a smooth proper geometrically integral curve over k, D a divisor and p a closed point with d = [kappa(p):k]. The long exact sequence of lem-add-one-point-exact-sequence-line-bundle identifies H^1(C, O_C(D+p)) with the quotient of H^1(C, O_C(D)) by the image of the connecting map kappa(p) -> H^1(C, O_C(D)); hence h^1(D+p) <= h^1(D), with equality exactly when that connecting map is zero, and h^1(D) - h^1(D+p) <= d. Consequently for every effective divisor E one has h^1(D+E) <= h^1(D): h^1 is antitone in the divisor. In particular, for a fixed divisor D_0 and a fixed effective divisor A, the sequence n |-> h^1(O_C(D_0 + nA)) is non-increasing, hence stabilizes; equivalently, removing points from a divisor can only raise or preserve h^1.",
+        "deps": [
+          "cor-projective-cohomology-finite-dimensional-field",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-degree-divisor-proper-curve",
+          "def-dimension",
+          "def-divisor-support-positive-negative-parts",
+          "def-divisor-smooth-proper-curve",
+          "def-little-l-divisor",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-add-one-point-exact-sequence-line-bundle",
+          "lem-degree-effective-divisor-nonnegative",
+          "lem-quotient-basis-lifts-to-an-adapted-basis",
+          "lem-riemann-roch-space-finite-dimensional",
+          "thm-first-isomorphism-theorem-for-vector-spaces",
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "thm-rank-nullity"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 18.5 and 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "The long exact sequence of the short exact sequence 0 -> O_C(D) -> O_C(D+p) -> i_*kappa(p) -> 0 reads 0 -> H^0(D) -> H^0(D+p) -> kappa(p) -> H^1(D) -> H^1(D+p) -> 0, because H^1(i_*kappa(p)) = 0. Hence the last map is surjective with kernel the image of the connecting map, which gives both the inequality and the exact description of the drop, bounded by dim_k kappa(p) = d. Iterating over the points of E gives h^1(D+E) <= h^1(D). A non-increasing sequence of nonnegative integers is eventually constant, which is the stabilization statement.",
+        "proof_strategy": "direct",
+        "dependency_level": 15
+      },
+      {
+        "id": "cor-existence-rational-function-bounded-pole",
+        "kind": "corollary",
+        "title": "Rational functions with poles bounded at one point",
+        "statement": "Assume the Axiom of Choice as inherited from the proper-cohomology suppliers. Let C be a smooth proper geometrically integral curve over k with genus g, and let p be a closed point with residue degree d = [kappa(p):k] (closed points exist on C). For every integer n >= 1 with nd + 1 - g >= 2 there is a function f in L(np) that is not constant; every such f is nonconstant and every pole of f is at p, so the pole divisor (f)_infinity is an effective divisor supported at p and f has at least one pole there.",
+        "deps": [
+          "cor-riemann-inequality-divisor-sections",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-degree-divisor-proper-curve",
+          "def-dimension",
+          "def-divisor-smooth-proper-curve",
+          "def-divisor-support-positive-negative-parts",
+          "def-genus-euler-characteristic-curve",
+          "def-little-l-divisor",
+          "def-order-codimension-one-rational-function",
+          "def-riemann-roch-space-of-divisor",
+          "lem-curve-closed-subsets-finite",
+          "thm-h0-structure-sheaf-proper-curve"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "The Riemann inequality gives l(np) >= nd + 1 - g >= 2, while the constants k form a one-dimensional subspace of L(np); hence L(np) contains some f not in k. Such an f is nonconstant because the constants are exactly H^0(C, O_C) = k, and f lies in L(np), which means div(f) + np >= 0, i.e. all poles of f lie at p and have order at most n. A nonconstant rational function has at least one pole: otherwise it is a global section of O_C and would be constant. Choice is declared in the contract because the constants are identified with H^0(C,O_C)=k through the proper-cohomology suppliers and because a closed point of C is produced by the maximal-ideal machinery of the affine charts.",
+        "proof_strategy": "direct",
+        "dependency_level": 21
+      },
+      {
+        "id": "cor-smooth-proper-curve-finite-map-projective-line",
+        "kind": "corollary",
+        "title": "Finite morphisms from a curve to the projective line",
+        "statement": "Assume the Axiom of Choice as inherited from the rational-map extension and finite-map suppliers. Let C be a smooth proper geometrically integral curve over k and let f in k(C)^x be a nonconstant rational function, for instance one produced by cor-existence-rational-function-bounded-pole. Then f defines a finite locally free k-morphism phi_f: C -> P^1_k of degree [k(C):k(f)] >= 1, whose fibre over infinity is the pole divisor (f)_infinity = sum_{ord_x(f)<0} (-ord_x(f))[x]. In particular every smooth proper geometrically integral curve over k admits a finite k-morphism to P^1_k, and if A := (f)_infinity then A is an effective divisor with O_C(A) isomorphic to phi_f^* O_{P^1_k}(1).",
+        "deps": [
+          "lem-curve-closed-subsets-finite",
+          "lem-pullback-cartier-divisor-line-bundle",
+          "def-pullback-cartier-divisor",
+          "cor-existence-rational-function-bounded-pole",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-divisor-smooth-proper-curve",
+          "def-divisor-support-positive-negative-parts",
+          "def-nonconstant-morphism-curves-degree",
+          "def-order-codimension-one-rational-function",
+          "def-relative-projective-space-standard-charts",
+          "lem-function-with-poles-defines-map-p1",
+          "lem-projective-line-divisors-classified-by-degree",
+          "lem-proper-normal-curve-rational-function-map",
+          "thm-h0-structure-sheaf-proper-curve"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 18.5 and 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            }
+          ]
+        },
+        "strategy": "Rule out the algebraic case using the normal-curve rational-map supplier and H0(C,O)=k; apply the actual pole-map lemma for finite locally free degree and weighted infinity fibre. A closed point exists by a nonempty proper closed member of a dimension-one chain; high-pole RR supplies a nonconstant function. Pull back the infinity Cartier equations 1/t and 1 explicitly: their orders equal the poles of f. Apply the actual Cartier pullback line-bundle isomorphism to O(1)=O(infinity), without asserting degree is preserved by pullback.",
+        "proof_strategy": "direct",
+        "dependency_level": 22
+      },
+      {
+        "id": "thm-h1-line-bundle-vanishes-sufficiently-high-degree",
+        "kind": "theorem",
+        "title": "Vanishing of H^1 in a fixed ample direction",
+        "statement": "Assume the Axiom of Choice as inherited from Serre vanishing and the ample-powers theorem. It also supplies the Dependent Choice premise of the curve Cartier-to-Weil result through thm-choice-implies-dependent-implies-countable-choice. Let $k$ be a field and let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field). Let $\\varphi:C\\to\\mathbb P^1_k$ be a finite $k$-morphism (such a morphism exists by cor-smooth-proper-curve-finite-map-projective-line) and let $A$ be an effective divisor on $C$ with $\\mathcal O_C(A)\\cong\\varphi^*\\mathcal O_{\\mathbb P^1_k}(1)$ (def-divisor-smooth-proper-curve). Write $L=\\mathcal O_C(A)$ (def-little-l-divisor). Then for every divisor $D_0$ on $C$ there is an integer $n_0$ such that $$H^1\\bigl(C,\\mathcal O_C(D_0+nA+E)\\bigr)=0 \\qquad\\text{for every }n\\ge n_0\\text{ and every effective divisor }E,$$ equivalently $h^1(D)=0$ for every divisor $D$ with $D\\ge D_0+n_0A$. The bound $n_0$ may depend on $D_0$ and on the fixed morphism $\\varphi$, but not on $E$ or on the degree of $E$. No Serre duality and no Riemann-Roch threshold $2g-2$ are used. The divisor-to-sheaf interface used below first identifies the Weil divisors $D_0$ and $A$ as Cartier divisors, constructs their sheaves, and applies the Cartier addition/tensor isomorphism; the actual interfaces and their uses are recorded in [F6]. The finite morphism and pole-divisor realization in [F1] are the stated interface of cor-smooth-proper-curve-finite-map-projective-line. The proof uses the closed H-very ample witness from [F4] and the established affine-base implication in [F9] for Serre vanishing, and uses lem-riemann-roch-space-finite-dimensional to establish coherence of $\\mathcal O_C(D_0)$ as recorded in [F10].",
+        "deps": [
+          "cor-smooth-proper-curve-finite-map-projective-line",
+          "def-algebraic-curve-over-field",
+          "def-ample-invertible-sheaf",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-cartier-divisor",
+          "def-coherent-module-scheme",
+          "def-divisor-smooth-proper-curve",
+          "def-finite-morphism-schemes",
+          "def-invertible-sheaf",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-little-l-divisor",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-projective-morphism-pre-proj",
+          "def-riemann-roch-space-of-divisor",
+          "def-proper-morphism",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-twist-quasi-coherent-sheaf-projective",
+          "def-very-ample-invertible-sheaf-relative",
+          "lem-ample-pullback-finite-morphism",
+          "lem-cartier-divisor-addition-tensor",
+          "lem-cartier-divisor-sheaf-invertible",
+          "lem-field-is-noetherian",
+          "lem-h1-stabilizes-downward-point-removal",
+          "lem-riemann-roch-space-finite-dimensional",
+          "lem-very-ample-implies-ample",
+          "thm-ample-powers-very-ample-proper-base",
+          "thm-cartier-weil-divisors-curves-agree",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-line-bundle-rational-section-cartier-divisor",
+          "thm-noetherian-ring-has-noetherian-spectrum",
+          "thm-serre-vanishing"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 18.5 and 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "O(1) on P^1_k is ample by the closed immersion identity and the affine-base very-ample-implies-ample lemma; finite pullback makes L=O_C(A) ample. The ample-powers theorem supplies d >= 1 with L^d closed H-very ample, hence ample by the same affine-base lemma and giving the projective embedding required by Serre vanishing. The finite-dimensionality lemma gives coherence of O_C(D_0). Serre supplies m_1; replace it by m_0=max(m_1,0). After identifying D_0 and A as Cartier, the Cartier addition/tensor and rational-section dictionaries translate vanishing for O_C(D_0) tensor L^(dm) to O_C(D_0+dmA) for m >= m_0. Set n_0=dm_0 and use h^1 antitonicity to add every effective E; the threshold is independent of E and its degree.",
+        "proof_strategy": "direct",
+        "dependency_level": 23
+      },
+      {
+        "id": "cor-riemann-theorem-large-degree",
+        "kind": "corollary",
+        "title": "Riemann's theorem for sufficiently positive divisors",
+        "statement": "Assume the Axiom of Choice as inherited from the vanishing theorem. Let C be a smooth proper geometrically integral curve over k of genus g, let phi: C -> P^1_k be finite and A effective with O_C(A) isomorphic to phi^*O(1). With n_0 = n_0(D_0) as in thm-h1-line-bundle-vanishes-sufficiently-high-degree, every divisor D with D >= D_0 + n_0 A satisfies h^1(D) = 0 and l(D) = deg_k(D) + 1 - g. In particular this holds for every D = D_0 + nA + E with n >= n_0 and E effective.",
+        "deps": [
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-divisor-smooth-proper-curve",
+          "def-genus-euler-characteristic-curve",
+          "def-little-l-divisor",
+          "thm-h1-line-bundle-vanishes-sufficiently-high-degree",
+          "thm-riemann-roch-euler-characteristic-curve"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 18.5 and 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "Vanishing of h^1 is exactly the content of the vanishing theorem, and substituting h^1(D) = 0 into the Euler-characteristic form of Riemann-Roch gives the dimension formula.",
+        "proof_strategy": "direct",
+        "dependency_level": 24
+      },
+      {
+        "id": "thm-genus-zero-point-implies-projective-line",
+        "kind": "theorem",
+        "title": "A genus-zero curve with a degree-one divisor is the projective line",
+        "statement": "Assume the Axiom of Choice as inherited from the curve, divisor and cohomology suppliers. Let $k$ be a field and let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field) with genus $g(C)=0$ (def-genus-euler-characteristic-curve). Suppose that $C$ admits a divisor of degree $1$ (def-degree-divisor-proper-curve). Then $C$ is isomorphic to $\\mathbb P^1_k$; equivalently, if $C$ has a $k$-rational closed point $p$, that is a closed point with $[\\kappa(p):k]=1$ (def-residue-field-scheme-point), then $C\\cong\\mathbb P^1_k$. The two hypotheses are equivalent by step 1.1. The current thm-principal-divisor-degree-zero-proper-curve supplies $\\deg_k(\\operatorname{div}f)=0$ in step 1.1. The divisor and function-space interfaces are def-principal-weil-divisor-and-class-group and def-riemann-roch-space-of-divisor. The finite map and its pole-fibre degree in steps 3.1–4.1 are supplied by lem-function-with-poles-defines-map-p1, which uses the current finite-flat fibre-degree result.",
+        "deps": [
+          "cor-birational-smooth-proper-curves-isomorphic",
+          "cor-riemann-inequality-divisor-sections",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-degree-divisor-proper-curve",
+          "def-dimension",
+          "def-divisor-smooth-proper-curve",
+          "def-genus-euler-characteristic-curve",
+          "def-little-l-divisor",
+          "def-nonconstant-morphism-curves-degree",
+          "def-principal-weil-divisor-and-class-group",
+          "def-residue-field-scheme-point",
+          "def-riemann-roch-space-of-divisor",
+          "lem-effective-divisors-sections-mod-scalars",
+          "lem-function-with-poles-defines-map-p1",
+          "thm-principal-divisor-degree-zero-proper-curve"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "First reduce an arbitrary degree-one divisor D to a k-rational point: l(D) >= deg D + 1 - g = 2, so choose f in L(D) not in k. Then E := div(f) + D is effective of degree 1, hence E = [q] for a single k-rational point q, and D is linearly equivalent to [q]. Now work with q: l([q]) >= 2, choose h in L([q]) not in k, and let E' = div(h) + [q], again a single k-rational point q'. Then div(h) = [q'] - [q], so h has exactly one pole, at q, of order one; the pole divisor of h has degree 1 and equals the fibre of phi_h over infinity. The finite morphism phi_h: C -> P^1_k therefore has degree [k(C):k(h)] equal to the degree of its pole fibre, namely 1. A nonconstant morphism of smooth proper curves of degree one is birational, and a birational rational map between smooth proper geometrically integral curves is represented by an isomorphism (cor-birational-smooth-proper-curves-isomorphic); hence C is isomorphic to P^1_k.",
+        "proof_strategy": "direct",
+        "dependency_level": 21
+      },
+      {
+        "id": "lem-projective-line-divisors-classified-by-degree",
+        "kind": "lemma",
+        "title": "Divisors on the projective line are classified by degree",
+        "statement": "Assume the Axiom of Choice as inherited from the cohomology, DVR/normality, degree and Cartier-divisor suppliers. It supplies the Dependent Choice premise of the curve Cartier-to-Weil route through thm-choice-implies-dependent-implies-countable-choice. Let $k$ be a field and let $\\mathbb P^1_k$ be the projective line over $k$ with standard affine chart $U_0=\\operatorname{Spec}k[t]$, coordinate $t=x_1/x_0$, and point at infinity $\\infty=[0:1]=V(x_0)$, the pole of $t$; the origin is the point $[1:0]=V(x_1)$ of $U_0$, where $t=0$. Then: 1. $\\mathbb P^1_k$ is a smooth proper geometrically integral curve over $k$ of genus $0$; 2. for every monic irreducible polynomial $g\\in k[t]$ of degree $d$, the closed point $p=V(g)$ of $U_0$ has $[\\kappa(p):k]=d$ and $\\operatorname{div}(g)=[p]-d[\\infty]$ for the divisor of the rational function $g$, so $[p]$ is linearly equivalent to $d[\\infty]$; 3. the coordinate section $x_0$ of $\\mathcal O(1)$ vanishes exactly at infinity with multiplicity one, so $\\operatorname{div}(x_0)=[\\infty]$ and $\\mathcal O(1)\\cong\\mathcal O(\\infty)$ with $\\deg_k\\mathcal O(1)=1$, while the other coordinate section $x_1$ vanishes exactly at the origin, with $\\operatorname{div}(x_1)=[\\,[1:0]\\,]=[V(x_1)]$; 4. every divisor $D$ on $\\mathbb P^1_k$ is linearly equivalent to $\\deg_k(D)[\\infty]$; consequently the degree homomorphism $\\deg_k\\colon\\operatorname{CaDiv}(\\mathbb P^1_k)/\\operatorname{Prin}(\\mathbb P^1_k)\\to\\mathbb Z$ is an isomorphism.",
+        "deps": [
+          "cor-closed-points-of-spectrum-are-maximal-ideals",
+          "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+          "cor-h0-projective-space-o-d-homogeneous-polynomials",
+          "cor-polynomial-ring-over-a-field-is-a-pid",
+          "cor-top-cohomology-projective-space-o-d",
+          "def-ag-standard-smooth-algebra",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-cartier-divisor",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-degree-divisor-proper-curve",
+          "def-dimension-noetherian-topological-space",
+          "def-discrete-valuation",
+          "def-divisor-smooth-proper-curve",
+          "def-divisor-support-positive-negative-parts",
+          "def-principal-weil-divisor-and-class-group",
+          "def-extension-degree-and-finite-extension",
+          "def-genus-euler-characteristic-curve",
+          "def-integral-affine-scheme",
+          "def-krull-dimension-of-a-ring",
+          "def-projective-line-two-affine-cover-and-twisting-sheaf",
+          "def-proper-morphism",
+          "def-rational-section-line-bundle",
+          "def-reduced-affine-scheme",
+          "def-relative-projective-space-standard-charts",
+          "def-residue-field-scheme-point",
+          "def-smooth-morphism-classical",
+          "def-twisting-sheaf-proj",
+          "cor-degree-descends-picard-curve",
+          "lem-chain-dimension-open-cover",
+          "lem-integral-finite-type-scheme-function-field",
+          "lem-irreducibility-criteria-and-open-subspaces",
+          "lem-projective-space-finite-type-over-base",
+          "lem-uniqueness-of-twists-on-the-projective-line",
+          "thm-regular-local-rings-are-normal",
+          "thm-affine-domain-dimension-transcendence-degree",
+          "thm-gluing-affine-schemes",
+          "thm-irreducible-closed-subsets-and-prime-ideals",
+          "thm-local-ring-smooth-curve-dvr",
+          "thm-polynomial-quotient-is-a-field-iff-irreducible",
+          "thm-principal-ideal-domains-are-unique-factorisation-domains",
+          "thm-projective-space-as-proj",
+          "thm-projective-space-proper-over-base",
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "thm-cartier-weil-divisors-curves-agree",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-line-bundle-rational-section-cartier-divisor"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 18.5 and 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "Smoothness and properness of P^1_k are read off the two charts Spec k[t] and Spec k[u] with u = t^{-1}: both are smooth over k (polynomial algebras are smooth and smoothness is local on the source) and the standard gluing gives properness, geometric integrality and chain dimension one. Closed points of U_0 = Spec k[t] are the maximal ideals, and since k[t] is a principal ideal domain the maximal ideals are exactly the principal ideals (g) with g irreducible, normalized to be monic; the residue field is k[t]/(g), of degree d = deg g over k. At such a point the order of vanishing of g is one (g generates the maximal ideal and the local ring is a DVR), and at infinity the substitution t = 1/u shows g(t) = u^{-d} times a unit, so the order there is -d; hence div(g) = [p] - d[infinity]. For a general divisor D = sum n_i[p_i] with all p_i finite, the difference D - deg_k(D)[infinity] = sum n_i([p_i] - d_i[infinity]) equals div(prod g_i^{n_i}), a principal divisor; points equal to infinity contribute zero to this difference. This both proves the linear equivalence in (4) and the injectivity of the degree map on divisor classes, while [infinity] maps to 1, giving surjectivity. Finally x_1 is a global section of O(1) (frame on the chart U_1 = D_+(x_1), and x_1 = t x_0 = t e_0 on U_0 in the standard frame relation of ex-twisting-sheaf-projective-line-transitions), it vanishes only at infinity and with order one there, so the divisor of the rational section x_1 is [infinity] and the associated sheaf O(infinity) is isomorphic to O(1) by thm-line-bundle-rational-section-cartier-divisor; its degree is 1 by the previous paragraph. The genus in (1) is computed, not assumed: h^0(P^1_k,O(0))=1 and h^1(P^1_k,O(0))=0 by ex-cohomology-o-d-projective-line-all-d, so chi(P^1_k,O)=1 and g = 1 - chi = 0 by def-genus-euler-characteristic-curve.",
+        "proof_strategy": "direct",
+        "dependency_level": 14
+      },
+      {
+        "id": "cor-picard-projective-line-integers",
+        "kind": "corollary",
+        "title": "The Picard group of the projective line",
+        "statement": "Assume the Axiom of Choice as inherited from the divisor and Cartier-to-Picard suppliers. For every field $k$ the degree homomorphism induces an isomorphism $\\operatorname{Pic}(\\mathbb P^1_k)\\to\\mathbb Z$. Under it the class of the twisting sheaf $\\mathcal O_{\\mathbb P^1_k}(d)$ corresponds to $d$, so $[\\mathcal O(1)]$ is a generator, and every invertible sheaf on $\\mathbb P^1_k$ is isomorphic to $\\mathcal O_{\\mathbb P^1_k}(d)$ for a unique integer $d$.",
+        "deps": [
+          "cor-degree-descends-picard-curve",
+          "def-axiom-of-choice",
+          "def-cartier-divisor",
+          "def-invertible-sheaf",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-picard-group-scheme",
+          "def-sheaf-tensor-product",
+          "def-twisting-sheaf-proj",
+          "lem-cartier-divisor-addition-tensor",
+          "lem-projective-line-divisors-classified-by-degree",
+          "lem-uniqueness-of-twists-on-the-projective-line",
+          "thm-cartier-divisors-mod-principal-to-picard",
+          "thm-gluing-sheaves"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 18.5 and 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            }
+          ]
+        },
+        "strategy": "On the integral scheme P^1_k the map D |-> [O(D)] from Cartier divisors to Picard classes induces an isomorphism CaDiv/Prin -> Pic (thm-cartier-divisors-mod-principal-to-picard), and degree descends to a homomorphism on Pic(P^1_k) because principal divisors have degree zero (cor-degree-descends-picard-curve). By lem-projective-line-divisors-classified-by-degree the degree map CaDiv/Prin -> Z is an isomorphism, so its composite with the Cartier-to-Picard isomorphism is an isomorphism Pic(P^1_k) -> Z. The identification of O(d) with the class of d[infinity] is the additivity of the Cartier-divisor-to-line-bundle map together with O(1) = O(infinity), and uniqueness of d follows from injectivity of degree.",
+        "proof_strategy": "direct",
+        "dependency_level": 15
+      },
+      {
+        "id": "lem-smooth-curve-coherent-torsion-free-locally-free",
+        "kind": "lemma",
+        "title": "Torsion-free coherent modules on a smooth curve are locally free",
+        "statement": "Assume the Axiom of Choice as inherited from the DVR and coherence suppliers. Let C be a smooth curve over a field k and let M be a coherent O_C-module. Then: (1) M is finite locally free if and only if M is torsion-free in the following local sense: there are no open U, nonzero m in M(U) and nonzero a in O_C(U) with a m = 0. (2) If M is not torsion-free in that sense, then M has a nonzero global section; in particular a nonzero coherent module killed locally by a nonzerodivisor has a nonzero global section. (3) A subsheaf of a locally free O_C-module is torsion-free, and a coherent torsion-free O_C-module is finite locally free.",
+        "deps": [
+          "cor-dvr-is-a-pid",
+          "cor-finitely-generated-torsion-free-modules-over-a-pid-are-free",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-coherent-module-scheme",
+          "def-finite-type-finite-presentation-module-sheaf",
+          "def-integral-scheme",
+          "def-irreducible-topological-space-and-subset",
+          "def-locally-free-sheaf-finite-rank",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-module-on-ringed-space",
+          "def-sheaf-on-topological-space",
+          "def-stalk-of-presheaf",
+          "def-subsheaf",
+          "lem-curve-closed-subsets-finite",
+          "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "thm-local-ring-smooth-curve-dvr",
+          "thm-locally-free-locus-finite-presentation-open"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            }
+          ]
+        },
+        "strategy": "(1) The question is local, so reduce to stalks: every point of the integral curve is generic or closed; its local ring is respectively the function field or a DVR, hence a PID. A finitely generated torsion-free module over a PID is free, and the locally free locus of a finitely presented module is open. Conversely, if a m = 0 with m nonzero, choose a point x where m_x is nonzero. A nonzero regular section a on an open subset of an integral scheme has nonzero image in the function field, so a_x is nonzero at this chosen point; multiplication by it is injective in a free stalk over a domain. (2) For a nonzero relation a m = 0, choose an affine open W around a point where m has nonzero germ. The residue-zero locus Z = V(a|W) is a proper closed subset of the integral curve W, hence finite; every point of Z is also closed in C. Thus V = C\\Z is open, W union V = C, and a is a unit on W intersect V, so m and zero glue to a nonzero global section. (3) Subsheaves of locally free modules are torsion-free; apply (1) to coherent torsion-free modules.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-nonzero-map-invertible-to-locally-free-injective",
+        "kind": "lemma",
+        "title": "Nonzero maps from an invertible sheaf to a locally free sheaf are injective",
+        "statement": "Let X be an integral scheme, L an invertible O_X-module and M a locally free O_X-module of finite rank. Then every nonzero morphism phi: L -> M of O_X-modules is injective.",
+        "deps": [
+          "def-affine-scheme-spectrum",
+          "def-integral-scheme",
+          "def-invertible-sheaf",
+          "def-irreducible-topological-space-and-subset",
+          "def-kernel-cokernel-image-sheaves",
+          "def-locally-free-sheaf-finite-rank",
+          "def-module-on-ringed-space",
+          "def-stalk-of-presheaf",
+          "lem-distinguished-open-refinement-at-a-point",
+          "lem-irreducibility-criteria-and-open-subspaces",
+          "lem-morphisms-of-sheaves-determined-by-stalks",
+          "lem-spectrum-localization-open-immersion",
+          "prop-localisation-zero-equality-and-kernel-criteria",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-sections-basic-open-affine-scheme",
+          "thm-sheaf-morphism-isomorphism-stalkwise"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            }
+          ]
+        },
+        "strategy": "Injectivity of a morphism of sheaves is tested on stalks, and on a sufficiently small affine chart both L and M are free; there phi corresponds to a nonzero homomorphism A^1 -> A^r over a domain A, which is injective because a nonzero element of a domain is not a zero divisor. A morphism is injective if all its stalk maps are injective.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-vector-bundle-p1-has-maximal-degree-line-subbundle",
+        "kind": "lemma",
+        "title": "A vector bundle on the projective line has a line subbundle of maximal degree",
+        "statement": "Assume the Axiom of Choice as inherited from the cohomology, local-DVR, and divisor-degree suppliers. Let $k$ be a field, put $X=\\mathbb P^1_k$, and let $E$ be a nonzero finite locally free $\\mathcal O_X$-module of rank $r\\ge1$ (def-locally-free-sheaf-finite-rank). Then the set of integers $n$ with $H^0(X,E(n))$ nonzero is nonempty and bounded below, so it has a minimum $a$; putting $b:=-a$, one has $H^0(X,E(-b))$ nonzero, $H^0(X,E(-b-1))=0$, and every nonzero morphism $\\mathcal O_X(b)\\to E$ is injective, so its image is a line subbundle of $E$ of degree $b$. Moreover no line subbundle of $E$ has degree greater than $b$: $E$ contains a line subbundle of maximal degree $b$.",
+        "deps": [
+          "cor-degree-descends-picard-curve",
+          "cor-h0-projective-space-o-d-homogeneous-polynomials",
+          "cor-projective-cohomology-finite-dimensional-field",
+          "cor-picard-projective-line-integers",
+          "def-cartier-divisor",
+          "def-effective-cartier-divisor",
+          "def-ample-invertible-sheaf",
+          "def-axiom-of-choice",
+          "def-coherent-module-scheme",
+          "def-globally-generated-sheaf",
+          "def-invertible-sheaf",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-locally-free-sheaf-finite-rank",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-module-on-ringed-space",
+          "def-projective-morphism-pre-proj",
+          "def-relative-projective-space-standard-charts",
+          "def-twist-quasi-coherent-sheaf-projective",
+          "def-twisting-sheaf-proj",
+          "def-very-ample-invertible-sheaf-relative",
+          "lem-eventual-global-generation-coherent-twists",
+          "lem-cartier-divisor-addition-tensor",
+          "lem-global-sections-left-exact",
+          "lem-nonzero-map-invertible-to-locally-free-injective",
+          "lem-projective-line-divisors-classified-by-degree",
+          "lem-very-ample-implies-ample",
+          "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "thm-local-ring-smooth-curve-dvr",
+          "thm-projective-space-as-proj",
+          "thm-twisting-sheaf-invertible-standard-graded",
+          "thm-zero-sheaf-cohomology-global-sections"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 18.5 and 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            }
+          ]
+        },
+        "strategy": "For m large, E(m) is globally generated by lem-eventual-global-generation-coherent-twists, applied with the ample invertible sheaf O(1) (ample because the identity exhibits it as H-very ample relative to Spec k, so lem-very-ample-implies-ample applies); a globally generated nonzero module of rank at least one on a nonempty scheme has a nonzero global section, so H^0(E(m)) is nonzero for all large m. Boundedness below: a nonzero global section s of E(n) is a nonzero morphism O -> E(n), which twisted by O(-n) gives a nonzero morphism O(-n) -> E, injective by lem-nonzero-map-invertible-to-locally-free-injective, and therefore injective on global sections; hence h^0(O(-n)) <= h^0(E), with h^0(E) finite. For n <= 0 this reads -n + 1 <= h^0(E), so every n with a nonzero section satisfies n >= 1 - h^0(E); for n >= 1 the same bound is automatic. The minimum a exists, and b = -a satisfies H^0(E(-b)) = H^0(E(a)) nonzero and H^0(E(-b-1)) = H^0(E(a-1)) = 0. A nonzero morphism O(b) -> E corresponds to a nonzero global section of the invertible sheaf E(-b) (tensor the morphism with O(-b)), hence exists and is injective by lem-nonzero-map-invertible-to-locally-free-injective. Maximality: a line subbundle of degree d is an injective morphism O(d) -> E, which is nonzero, so H^0(E(-d)) is nonzero and -d >= a, i.e. d <= b. Choice enters through the cohomology and global-generation suppliers.",
+        "proof_strategy": "direct",
+        "dependency_level": 16
+      },
+      {
+        "id": "lem-vector-bundle-p1-maximal-line-quotient-locally-free",
+        "kind": "lemma",
+        "title": "The quotient by a maximal line subbundle is locally free",
+        "statement": "Assume the Axiom of Choice as inherited from the cohomology and curve suppliers. Let E be a finite locally free O_{P^1_k}-module of rank r >= 2 and let phi: O_{P^1_k}(b) -> E be a nonzero morphism with b maximal as in lem-vector-bundle-p1-has-maximal-degree-line-subbundle, so H^0(E(-b-1)) = 0. Let F := E/O(b) be the cokernel of phi. Then F is a finite locally free O_{P^1_k}-module of rank r - 1.",
+        "deps": [
+          "cor-affine-scheme-quasi-compact",
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "cor-finitely-generated-torsion-free-modules-over-a-pid-are-free",
+          "cor-h0-projective-space-o-d-homogeneous-polynomials",
+          "cor-polynomial-ring-over-a-field-is-a-pid",
+          "cor-top-cohomology-projective-space-o-d",
+          "def-affine-scheme-spectrum",
+          "def-axiom-of-choice",
+          "def-coherent-module-scheme",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-exact-sequence-sheaves",
+          "def-finite-type-finite-presentation-module-sheaf",
+          "def-hilbert-function-sheaf-projective",
+          "def-integral-scheme",
+          "def-invertible-sheaf",
+          "def-locally-free-sheaf-finite-rank",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-locally-ringed-space",
+          "def-module-on-ringed-space",
+          "def-projective-line-two-affine-cover-and-twisting-sheaf",
+          "def-quasi-compact-and-quasi-separated-scheme",
+          "def-sheaf-on-topological-space",
+          "def-sheaf-tensor-product",
+          "def-twist-quasi-coherent-sheaf-projective",
+          "lem-associated-sheaf-sections-basic-open",
+          "lem-curve-closed-subsets-finite",
+          "lem-field-is-noetherian",
+          "lem-invertible-sheaf-dual-tensor-inverse",
+          "lem-section-nonvanishing-affine-intersection",
+          "lem-vector-bundle-p1-has-maximal-degree-line-subbundle",
+          "lem-zero-in-a-localised-module",
+          "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "thm-quasi-coherence-check-affine-cover"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 18.5 and 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            }
+          ]
+        },
+        "strategy": "Twist the exact sequence by O(-b) and use the vanishing of H^0(E(-b-1)) and H^1(O(-1)) to show H^0(F(-b-1))=0. If F(-b) had torsion, choose a point where a nonzero torsion section has nonzero germ and an affine principal neighborhood U in a standard chart. The nonzero annihilator remains nonzero on U. Its residue-zero locus Z=V(a|U) is a proper closed subset of this integral curve, so it is finite, and its points are closed in X. Therefore W=X\\Z is open and U union W covers X; on the overlap a is a unit, so the torsion section, after tensoring with a chart frame of O(-1), glues with zero to a nonzero global section of F(-b-1), contradiction. Hence F(-b) is torsion-free. On each standard chart, finite-type localizations give a finite basic-open cover and finite local generators. For each element of M/N, localization gives powers of each covering function that annihilate that element; those powers still generate the unit ideal, so the element is zero. Thus the chart module M is finitely generated; torsion-free over k[t] or k[u], it is free. After local freeness is established, exact stalk sequences with free quotient split, giving rank r-1.",
+        "proof_strategy": "direct",
+        "dependency_level": 17
+      },
+      {
+        "id": "lem-vector-bundle-p1-extension-splits",
+        "kind": "lemma",
+        "title": "Extensions of line bundles on the projective line split after ordering",
+        "statement": "Assume the Axiom of Choice as inherited from the sheaf-cohomology suppliers. Let 0 -> O_{P^1_k} -> M -> W -> 0 be a short exact sequence of finite locally free O_{P^1_k}-modules in which W is isomorphic to a finite direct sum of twisting sheaves O(n_i) with n_i <= 0 for every i. Then M is isomorphic to O_{P^1_k} directly summed with W, M = O + W. More generally, if 0 -> O(b) -> E -> F -> 0 is a short exact sequence of finite locally free sheaves with F isomorphic to a direct sum of line bundles O(b_i), b_i <= b, then E is isomorphic to O(b) + F.",
+        "deps": [
+          "cor-h0-projective-space-o-d-homogeneous-polynomials",
+          "cor-top-cohomology-projective-space-o-d",
+          "def-axiom-of-choice",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-exact-sequence-sheaves",
+          "def-invertible-sheaf",
+          "def-kernel-cokernel-image-sheaves",
+          "def-locally-free-sheaf-finite-rank",
+          "def-module-on-ringed-space",
+          "def-section-restriction-and-global-section",
+          "def-sheaf-tensor-product",
+          "def-twist-quasi-coherent-sheaf-projective",
+          "def-twisting-sheaf-proj",
+          "lem-stalk-tensor-product",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "thm-projective-space-as-proj",
+          "thm-twisting-sheaf-invertible-standard-graded",
+          "thm-zero-sheaf-cohomology-global-sections"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 18.5 and 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            }
+          ]
+        },
+        "strategy": "Dualize the sequence: since W is finite locally free, the dual sequence 0 -> W^vee -> M^vee -> O^vee -> 0 is exact (the original sequence splits locally, so its dual is locally split and hence exact). By ex-cohomology-o-d-projective-line-all-d each H^1(O(-n_i)) = 0 for n_i <= 0, and cohomology of a finite direct sum is the direct sum of the cohomologies, so H^1(W^vee) = 0. The long exact sequence therefore gives that H^0(M^vee) -> H^0(O^vee) = k is surjective; choose a global section s of M^vee mapping to the unit section of O^vee. Multiplication by s is a morphism O -> M^vee whose composite with the surjection M^vee -> O is the identity, so this morphism is a section of the surjection; a surjection with a section is split, with kernel W^vee, and therefore M^vee is isomorphic to O + W^vee. Dualizing once more and using that the evaluation morphism is an isomorphism for finite locally free modules (lem-dual-locally-free-and-base-change) gives M = O + W. Twisting the whole argument by O(b) (an equivalence of categories that preserves direct sums, duals and exact sequences) gives the general statement for 0 -> O(b) -> E -> F -> 0 with all b_i <= b.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-birkhoff-grothendieck-vector-bundles-p1",
+        "kind": "theorem",
+        "title": "Birkhoff-Grothendieck: vector bundles on the projective line split",
+        "statement": "Assume the Axiom of Choice as inherited from the cohomology and splitting suppliers. Let E be a finite locally free O_{P^1_k}-module of rank r >= 1 on the projective line over a field k. Then E is isomorphic to a direct sum of line bundles, E = O(a_1) + ... + O(a_r) with integers a_1 <= ... <= a_r. The multiset {a_1,...,a_r} is determined by E; equivalently, the function m |-> h^0(P^1_k, E(m)) determines it, and the decomposition is unique up to permutation. In the language of geometric vector bundles, every vector bundle on P^1_k is a direct sum of line bundles of uniquely determined degrees.",
+        "deps": [
+          "cor-h0-projective-space-o-d-homogeneous-polynomials",
+          "cor-picard-projective-line-integers",
+          "cor-top-cohomology-projective-space-o-d",
+          "def-axiom-of-choice",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-invertible-sheaf",
+          "def-locally-free-sheaf-finite-rank",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-twist-quasi-coherent-sheaf-projective",
+          "def-twisting-sheaf-proj",
+          "lem-global-sections-left-exact",
+          "lem-nonzero-map-invertible-to-locally-free-injective",
+          "lem-vector-bundle-p1-extension-splits",
+          "lem-vector-bundle-p1-has-maximal-degree-line-subbundle",
+          "lem-vector-bundle-p1-maximal-line-quotient-locally-free",
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "thm-twisting-sheaf-invertible-standard-graded",
+          "thm-vector-bundles-locally-free-sheaves-equivalence"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Chs. 18.5 and 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            }
+          ]
+        },
+        "strategy": "Induction on the rank r. For r = 1 the splitting is the classification of line bundles on P^1_k by degree, cor-picard-projective-line-integers. For r >= 2, let b be the maximal degree of a line subbundle of E and phi: O(b) -> E nonzero as produced by lem-vector-bundle-p1-has-maximal-degree-line-subbundle; phi is injective, and its cokernel F is finite locally free of rank r - 1 by lem-vector-bundle-p1-maximal-line-quotient-locally-free. Twist by O(-b) to reach the normalized situation M := E(-b), for which H^0(M) is nonzero and H^0(M(-1)) = 0; choose a nonzero global section s of M, giving an injection O -> M (lem-nonzero-map-invertible-to-locally-free-injective), and let W be its cokernel. Then H^0(W(-1)) = 0 by the long exact sequence of 0 -> O(-1) -> M(-1) -> W(-1) -> 0, using H^0(M(-1)) = 0 and H^1(O(-1)) = 0. By induction W is a direct sum of line bundles O(n_i), and H^0(W(-1)) = sum of the h^0(O(n_i - 1)) vanishes, so each n_i <= 0. Now lem-vector-bundle-p1-extension-splits applies to 0 -> O -> M -> W -> 0 and yields M = O + W, hence E = O(b) + sum of line bundles O(n_i + b) with n_i + b <= b. This proves existence. Uniqueness: if E is a direct sum of line bundles O(a_i), then h^0(E(m)) = sum_i max(a_i + m + 1, 0) by ex-cohomology-o-d-projective-line-all-d and additivity of cohomology over finite direct sums; the discrete second difference of the function m |-> h^0(E(m)) at the value v is the multiplicity of v among the a_i, so the multiset is determined by E. Choice enters through the cohomology and splitting suppliers.",
+        "proof_strategy": "direct",
+        "dependency_level": 18
+      },
+      {
+        "id": "lem-degree-zero-effective-divisor-empty",
+        "kind": "lemma",
+        "title": "An effective divisor of degree zero is empty",
+        "statement": "Let C be a proper geometrically integral curve over a field k and let D be an effective divisor on C. Then deg_k(D) >= 0, and deg_k(D) = 0 if and only if D = 0. In particular if D <= D' are effective divisors with deg_k(D) = deg_k(D') then D = D'.",
+        "deps": [
+          "def-algebraic-curve-over-field",
+          "def-degree-divisor-proper-curve",
+          "def-divisor-smooth-proper-curve",
+          "def-divisor-support-positive-negative-parts",
+          "lem-degree-effective-divisor-nonnegative"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "Write D as a finite sum sum_x n_x[x] with n_x >= 0. Its degree is sum_x n_x [kappa(x):k], a sum of nonnegative terms because residue fields of closed points of a curve over k are finite extensions of k and hence of degree at least one (lem-degree-effective-divisor-nonnegative, def-degree-divisor-proper-curve). If D is nonzero then some n_x > 0, so deg_k(D) >= [kappa(x):k] >= 1; conversely if D = 0 the sum is empty. The final form applies this to the effective divisor D' - D, whose degree is deg_k(D') - deg_k(D) = 0.",
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-degree-zero-line-bundle-section-trivial",
+        "kind": "corollary",
+        "title": "A degree-zero line bundle with a nonzero section is trivial",
+        "statement": "Assume the Axiom of Choice as inherited from the degree homomorphism on $\\operatorname{Pic}$ and the structure-sheaf cohomology supplier. It supplies the Dependent Choice premise of the Cartier-to-Weil route through thm-choice-implies-dependent-implies-countable-choice. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field) and let $\\mathcal L$ be an invertible sheaf on $C$ (def-invertible-sheaf) with $\\deg_k\\mathcal L=0$. If $H^0(C,\\mathcal L)\\ne0$ then $\\mathcal L\\cong\\mathcal O_C$; equivalently, an invertible sheaf of degree zero that is not trivial has no nonzero global section, that is $H^0(C,\\mathcal L)=0$ (def-sheaf-cohomology-derived-global-sections). The degree, Cartier-sheaf and rational-section interfaces used here are cor-degree-descends-picard-curve, def-invertible-sheaf-of-cartier-divisor, thm-line-bundle-rational-section-cartier-divisor and thm-cartier-weil-divisors-curves-agree. The proof verifies that a nonzero global section has nonzero generic germ before applying the rational-section interface; the facts and their exact uses are recorded below.",
+        "deps": [
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-divisor-smooth-proper-curve",
+          "def-global-sections-functor-sheaves",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-invertible-sheaf",
+          "def-integral-scheme",
+          "def-principal-weil-divisor-and-class-group",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-degree-effective-divisor-nonnegative",
+          "thm-cartier-weil-divisors-curves-agree",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-h0-structure-sheaf-proper-curve",
+          "thm-line-bundle-rational-section-cartier-divisor",
+          "cor-degree-descends-picard-curve"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "Let s be a nonzero global section of L. The vanishing locus of the rational section s is an effective Cartier divisor D with (L,s) isomorphic to (O_C(D),1), by the rational-section and global-section dictionary of the Cartier-Weil suppliers, so L is isomorphic to O_C(D) and deg_k(D) = deg(L) = 0 by the degree homomorphism on Pic (this is where AC enters). Then lem-degree-zero-effective-divisor-empty forces D = 0, hence L = O_C(D) = O_C. Conversely the constant section exhibits O_C as a degree-zero invertible sheaf with a nonzero section, so the implication is an equivalence.",
+        "proof_strategy": "direct",
+        "dependency_level": 11
+      },
+      {
+        "id": "cor-nontrivial-degree-zero-line-bundle-no-sections",
+        "kind": "corollary",
+        "title": "Nontrivial degree-zero line bundles have no sections",
+        "statement": "Assume the Axiom of Choice as inherited from the degree, Cartier-to-Weil, smooth-base-change, weighted-Bezout and structure-sheaf cohomology suppliers. It supplies the Dependent Choice premise of the Cartier-to-Weil route through thm-choice-implies-dependent-implies-countable-choice. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field) and let $\\mathcal L$ be an invertible sheaf on $C$ (def-invertible-sheaf) with $\\deg_k\\mathcal L=0$ which is not isomorphic to $\\mathcal O_C$. Then $$H^0(C,\\mathcal L)=0.$$ *The plane-cubic instance.* Moreover, let $E=V_+(F)\\subseteq\\mathbb P^2_k$ be a plane cubic smooth over $k$ and of pure dimension one, where $F$ is a nonzero homogeneous form of degree three, and let $P\\ne Q$ be $k$-rational points of $E$. The proof shows that this smooth plane cubic is geometrically integral, so the arithmetic-genus computation of thm-plane-curve-arithmetic-genus applies. Then the invertible sheaf $\\mathcal O_E(P-Q)$ has degree zero, is not trivial, and $$H^0\\bigl(E,\\mathcal O_E(P-Q)\\bigr)=0.$$ The triviality obstruction is the classical one: a trivialization would exhibit a rational function with divisor $P-Q$, hence a degree-one morphism $E\\to\\mathbb P^1_k$ and an isomorphism $E\\cong\\mathbb P^1_k$, contradicting $g(E)=1$ and $g(\\mathbb P^1_k)=0$. This discharges, without Serre duality, the promise recorded by the preceding-pair counterexample item cex-degree-zero-line-bundle-no-section (batch 6 of this run).",
+        "deps": [
+          "cor-birational-smooth-proper-curves-isomorphic",
+          "cor-degree-zero-line-bundle-section-trivial",
+          "cor-degree-descends-picard-curve",
+          "cor-projective-plane-bezout-length-form",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-cartier-divisor",
+          "def-dependent-choice",
+          "def-degree-divisor-proper-curve",
+          "def-divisor-smooth-proper-curve",
+          "def-residue-field-scheme-point",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-genus-euler-characteristic-curve",
+          "def-invertible-sheaf",
+          "def-principal-weil-divisor-and-class-group",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-smooth-morphism-schemes",
+          "def-base-change-morphism-schemes",
+          "def-algebraically-closed-field",
+          "lem-closed-immersion-proper",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-function-with-poles-defines-map-p1",
+          "lem-projective-hypersurface-affine-pieces",
+          "lem-proper-stable-composition",
+          "lem-cohomology-functoriality-sheaf-and-space",
+          "prop-functors-preserve-isomorphisms",
+          "lem-projective-line-divisors-classified-by-degree",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-cartier-divisors-mod-principal-to-picard",
+          "thm-line-bundle-rational-section-cartier-divisor",
+          "thm-projective-space-proper-over-base",
+          "thm-smooth-morphisms-stable-base-change-composition",
+          "thm-jacobian-criterion-smooth-morphism",
+          "thm-local-ring-smooth-curve-dvr",
+          "thm-regular-local-rings-are-normal",
+          "thm-cartier-weil-divisors-curves-agree",
+          "thm-plane-curve-arithmetic-genus"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "The main statement is the contrapositive of cor-degree-zero-line-bundle-section-trivial. For the plane-cubic instance: O_E(P-Q) has degree deg P - deg Q = 0; if it were trivial then P and Q would be linearly equivalent, so there would be f in k(E)^x with div(f) = P - Q; then f lies in L([Q]) with div(f) + [Q] = [P] effective, so f is nonconstant with pole divisor [Q] of degree one, and lem-function-with-poles-defines-map-p1 makes the associated morphism E -> P^1_k finite of degree one; a degree-one morphism of smooth proper geometrically integral curves is birational, hence an isomorphism (cor-birational-smooth-proper-curves-isomorphic), so E would be P^1_k and would have genus 0. But a smooth plane cubic has arithmetic genus (3-1)(3-2)/2 = 1 by thm-plane-curve-arithmetic-genus, and for a smooth curve the arithmetic genus is h^1(O_E) = g(E) by def-genus-euler-characteristic-curve, so g(E) = 1, and genus is an isomorphism invariant (lem-projective-line-divisors-classified-by-degree computes g(P^1_k) = 0). The contradiction shows O_E(P-Q) is nontrivial; the previous corollary then gives H^0(E, O_E(P-Q)) = 0. AC enters only through the degree homomorphism inherited from the previous corollary.",
+        "proof_strategy": "direct",
+        "dependency_level": 15
+      },
+      {
+        "id": "def-index-speciality-divisor",
+        "kind": "definition",
+        "title": "The index of speciality i(D)",
+        "statement": "Assume the Axiom of Choice for proper-cohomology finiteness, the curve Cartier-to-Weil identification, and the cohomological Riemann-Roch theorem (def-axiom-of-choice). AC supplies the Dependent Choice premise of the curve Cartier-to-Weil result through thm-choice-implies-dependent-implies-countable-choice. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field), let $D$ be a divisor on $C$ (def-divisor-smooth-proper-curve) and let $\\mathcal O_C(D)$ be its associated invertible sheaf. The current lem-riemann-roch-space-finite-dimensional proves that $H^1(C,\\mathcal O_C(D))$ is finite-dimensional under this assumption. The index of speciality of $D$ is the nonnegative integer $$i(D):=h^1(C,\\mathcal O_C(D))=\\dim_kH^1(C,\\mathcal O_C(D)),$$ the first cohomology dimension of the attached invertible sheaf (def-sheaf-cohomology-derived-global-sections, def-dimension, def-little-l-divisor). The index of speciality depends only on the linear equivalence class of $D$. Indeed, thm-cartier-weil-divisors-curves-agree identifies the Weil divisors on $C$ with Cartier divisors and preserves principal divisors; def-linear-equivalence-cartier-divisors gives the Cartier equivalence relation; and the current Cartier-sheaf and addition-tensor dictionaries (def-invertible-sheaf-of-cartier-divisor, lem-cartier-divisor-sheaf-invertible, lem-cartier-divisor-addition-tensor, thm-line-bundle-rational-section-cartier-divisor) identify linearly equivalent divisors with isomorphic invertible sheaves. Their first cohomology groups therefore have the same dimension. For the zero divisor, $$i(0)=h^1(C,\\mathcal O_C)=g(C),$$ by def-genus-euler-characteristic-curve. The independent thm-riemann-roch-euler-characteristic-curve gives $$h^0(C,\\mathcal O_C(D))-h^1(C,\\mathcal O_C(D))=\\deg_k(D)+1-g(C).$$ By the definitions of $l(D)$ and $i(D)$ this is $$l(D)-i(D)=\\deg_k(D)+1-g(C).$$ Thus $i(D)\\ge0$ gives the Riemann inequality $$l(D)\\ge\\deg_k(D)+1-g(C),$$ and equality holds exactly when $i(D)=0$. This definition is deliberately one-sided. No identification of $H^1(C,\\mathcal O_C(D))$ with the sections of a complementary invertible sheaf, and no Serre-duality statement, is made or used here. The Cartier, finite-dimensionality, and Euler-characteristic suppliers named above are present in the working tree as draft or published items as indicated by their frontmatter; their presence alone does not certify a mathematical review.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-algebraic-curve-over-field",
+          "def-dimension",
+          "def-degree-divisor-proper-curve",
+          "def-divisor-smooth-proper-curve",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-linear-equivalence-cartier-divisors",
+          "def-genus-euler-characteristic-curve",
+          "def-little-l-divisor",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-cartier-divisor-addition-tensor",
+          "lem-cartier-divisor-sheaf-invertible",
+          "lem-riemann-roch-space-finite-dimensional",
+          "thm-cartier-weil-divisors-curves-agree",
+          "thm-line-bundle-rational-section-cartier-divisor",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-riemann-roch-euler-characteristic-curve"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "dependency_level": 19
+      },
+      {
+        "id": "thm-riemann-roch-as-l-minus-index",
+        "kind": "theorem",
+        "title": "Riemann-Roch as l minus i",
+        "statement": "Assume the Axiom of Choice as inherited from the proper-cohomology suppliers. Let C be a smooth proper geometrically integral curve over k with genus g = g(C) = h^1(C, O_C), and let D be a divisor on C. Then l(D) - i(D) = h^0(C, O_C(D)) - h^1(C, O_C(D)) = deg_k(D) + 1 - g, and i(D) >= 0, so l(D) >= deg_k(D) + 1 - g with equality if and only if D is nonspecial. For D = 0 this reads 1 - g = 0 + 1 - g with i(0) = g. The index of speciality remains an unknown defect: no duality identifies it with the space of sections of a complementary divisor.",
+        "deps": [
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-divisor-smooth-proper-curve",
+          "def-genus-euler-characteristic-curve",
+          "def-index-speciality-divisor",
+          "def-little-l-divisor",
+          "thm-riemann-roch-euler-characteristic-curve"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "Substitute the definitions l(D) = h^0(C, O_C(D)) and i(D) = h^1(C, O_C(D)) into the Euler-characteristic form thm-riemann-roch-euler-characteristic-curve; the inequality and its equality case follow from i(D) >= 0.",
+        "proof_strategy": "direct",
+        "dependency_level": 20
+      },
+      {
+        "id": "def-nonspecial-divisor",
+        "kind": "definition",
+        "title": "Special and nonspecial divisors",
+        "statement": "Assume the Axiom of Choice inherited from proper-cohomology finiteness and the Riemann-Roch theorem (def-axiom-of-choice). Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field) with genus $g=g(C)$ (def-genus-euler-characteristic-curve), and let $D$ be a divisor on $C$ (def-divisor-smooth-proper-curve) with index of speciality $i(D)=h^1(C,\\mathcal O_C(D))$ and $l(D)=h^0(D)$ (def-index-speciality-divisor, def-little-l-divisor). Call $D$ nonspecial when $$i(D)=0,\\qquad\\text{that is, when}\\qquad H^1(C,\\mathcal O_C(D))=0,$$ and call it special otherwise, so that $D$ is special exactly when $i(D)\\ge1$. These are the classical names for the two cases of the index of speciality: vanishing first cohomology, and nonvanishing first cohomology. The current thm-riemann-roch-as-l-minus-index gives $$l(D)-i(D)=\\deg_k(D)+1-g,$$ and $i(D)\\ge0$, so the Riemann inequality $$l(D)\\ge\\deg_k(D)+1-g$$ always holds. Consequently, $$D\\text{ nonspecial}\\iff l(D)=\\deg_k(D)+1-g \\iff\\text{the Riemann inequality is an equality for }D,$$ and $$D\\text{ special}\\iff l(D)>\\deg_k(D)+1-g,$$ because the difference $l(D)-\\bigl(\\deg_k(D)+1-g\\bigr)=i(D)$ is exactly the index of speciality. Thus a divisor is special precisely when its space of sections is larger than the Riemann inequality requires, and the equality case of that inequality is the vanishing of $H^1(C,\\mathcal O_C(D))$. Speciality is a property of the divisor class and not of the individual divisor: the index of speciality depends only on the linear equivalence class of $D$ (def-index-speciality-divisor), so linearly equivalent divisors are special or nonspecial together. For the zero divisor the definition gives $$i(0)=h^1(C,\\mathcal O_C)=g,$$ the genus of $C$ (def-index-speciality-divisor, def-genus-euler-characteristic-curve), so $0$ is nonspecial exactly when $g=0$ and special exactly when $g\\ge1$; equivalently, the equality reading $l(0)=1=\\deg_k(0)+1-g$ holds exactly when $g=0$, in agreement with $l(0)=1$ for the zero divisor (def-little-l-divisor). The finite-valued cohomology dimensions and Riemann-Roch identity used here are supplied by the current lem-riemann-roch-space-finite-dimensional, def-index-speciality-divisor, def-genus-euler-characteristic-curve and thm-riemann-roch-as-l-minus-index. Their source files are present in the working tree; their mathematical status remains the status recorded in their frontmatter.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-algebraic-curve-over-field",
+          "def-degree-divisor-proper-curve",
+          "def-divisor-smooth-proper-curve",
+          "def-genus-euler-characteristic-curve",
+          "def-index-speciality-divisor",
+          "def-little-l-divisor",
+          "lem-riemann-roch-space-finite-dimensional",
+          "thm-riemann-roch-as-l-minus-index"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "dependency_level": 21
+      },
+      {
+        "id": "lem-large-positive-divisors-nonspecial",
+        "kind": "lemma",
+        "title": "Sufficiently positive divisors in a fixed direction are nonspecial",
+        "statement": "Assume the Axiom of Choice as inherited from the vanishing theorem. Let C be a smooth proper geometrically integral curve over k, let phi: C -> P^1_k be a finite k-morphism and let A be an effective divisor with O_C(A) isomorphic to phi^*O_{P^1_k}(1) (for instance A = (f)_infinity for a nonconstant f in k(C)^x, as produced by cor-smooth-proper-curve-finite-map-projective-line), and let D_0 be a divisor on C. Then there is an integer n_0, depending on D_0 and on phi, such that every divisor D with D >= D_0 + n_0 A is nonspecial: H^1(C, O_C(D)) = 0. Explicitly, every divisor of the form D_0 + nA + E with n >= n_0 and E effective is nonspecial. This is only a fixed-direction statement: it is not claimed that every divisor of degree greater than 2g - 2 is nonspecial, which requires the duality pair that follows this page.",
+        "deps": [
+          "cor-smooth-proper-curve-finite-map-projective-line",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-divisor-smooth-proper-curve",
+          "def-genus-euler-characteristic-curve",
+          "def-index-speciality-divisor",
+          "def-little-l-divisor",
+          "def-nonspecial-divisor",
+          "thm-h1-line-bundle-vanishes-sufficiently-high-degree"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Ch. 18.5 and Ch. 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply thm-h1-line-bundle-vanishes-sufficiently-high-degree to the fixed divisor D_0: it supplies n_0 with H^1(C, O_C(D_0 + nA + E)) = 0 for every n >= n_0 and every effective E. A divisor D with D >= D_0 + n_0 A is of that form, with E := D - D_0 - n_0 A effective. Since nonspecial means exactly the vanishing of H^1, such D are nonspecial. The threshold depends on D_0 and on the fixed morphism phi through the ample sheaf O_C(A) = phi^*O(1); the last sentence records the deliberate restriction of the statement.",
+        "proof_strategy": "direct",
+        "dependency_level": 24
+      },
+      {
+        "id": "cor-dimension-complete-linear-system",
+        "kind": "corollary",
+        "title": "The dimension of a complete linear system",
+        "statement": "Assume the Axiom of Choice as inherited from proper-cohomology, projective-space and Riemann-Roch suppliers (def-axiom-of-choice). Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field) of genus $g=g(C)$ (def-genus-euler-characteristic-curve), let $D$ be a divisor on $C$ (def-divisor-smooth-proper-curve) and let $|D|$ be its complete linear system (def-complete-linear-system). For a finite-dimensional $k$-vector space $W$, write $$\\mathbf P_k(W):=\\operatorname{Proj}(\\operatorname{Sym}_k(W^\\vee))$$ for the projective scheme parameterizing one-dimensional subspaces of $W$. When $|D|$ is nonempty, put $$\\mathscr P_D:=\\mathbf P_k(L(D)).$$ The section-divisor correspondence identifies the set $|D|$ with the set of $k$-rational points $\\mathscr P_D(k)$. Then: 1. $|D|$ is nonempty if and only if $l(D)\\ge1$ (def-little-l-divisor); equivalently $|D|$ is empty exactly when $L(D)=0$; 2. if $|D|$ is nonempty and $l(D)=r\\ge1$, a choice of basis of $L(D)$ identifies $\\mathscr P_D$ with the projective scheme $\\mathbf P_k^{r-1}$, and we define $\\dim_k|D|:=\\dim\\mathscr P_D$. Its dimension is $$\\dim_k|D|=l(D)-1=\\deg_k(D)-g+i(D),$$ with $i(D)$ the index of speciality (def-index-speciality-divisor); 3. if $D$ is nonspecial (def-nonspecial-divisor) then $|D|$ is nonempty if and only if $\\deg_k(D)\\ge g$, and in that case $\\dim_k|D|=\\deg_k(D)-g$; 4. for the zero divisor, $|0|=\\{0\\}$ is a single $k$-rational point, $\\mathscr P_0\\cong\\mathbf P^0_k$, and $\\dim_k|0|=0=l(0)-1$. The nonspecial value $\\deg_k(0)-g=-g$ is attained as $\\dim_k|0|$ exactly when $g=0$. Thus $\\dim_k|D|$ means the Krull dimension of the projectivization scheme, not the dimension of its set of $k$-rational points. No algebraic-closure hypothesis on $k$ is used.",
+        "deps": [
+          "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-complete-linear-system",
+          "def-degree-divisor-proper-curve",
+          "def-dimension",
+          "def-dimension-noetherian-topological-space",
+          "def-divisor-smooth-proper-curve",
+          "def-genus-euler-characteristic-curve",
+          "def-index-speciality-divisor",
+          "def-little-l-divisor",
+          "def-nonspecial-divisor",
+          "def-relative-projective-space-standard-charts",
+          "def-symmetric-algebra-of-a-vector-space",
+          "def-vector-space",
+          "lem-chain-dimension-open-cover",
+          "lem-effective-divisors-sections-mod-scalars",
+          "lem-field-is-noetherian",
+          "lem-riemann-roch-space-finite-dimensional",
+          "thm-h0-structure-sheaf-proper-curve",
+          "thm-noetherian-ring-has-noetherian-spectrum",
+          "thm-projective-space-as-proj",
+          "thm-riemann-roch-as-l-minus-index"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "strategy": "By lem-effective-divisors-sections-mod-scalars the assignment f |-> div(f) + D induces a bijection (L(D)\\0)/k^x -> |D|; hence |D| is empty exactly when L(D) = 0, and otherwise the bijection identifies |D| with the set of k-lines in the finite-dimensional k-vector space L(D), so dim_k |D| = l(D) - 1. Substituting l(D) = deg_k(D) + 1 - g + i(D) from thm-riemann-roch-as-l-minus-index gives dim_k |D| = deg_k(D) - g + i(D); for nonspecial D the last term is zero, and then deg_k(D) >= g makes l(D) = deg_k(D) + 1 - g >= 1, so |D| is nonempty. For D = 0, L(0) = H^0(C, O_C) = k has dimension one, so |0| is a single point. Choice enters exactly through the inherited cohomology interface and the Riemann-Roch identity, both of which declare it.",
+        "proof_strategy": "direct",
+        "dependency_level": 22
+      },
+      {
+        "id": "rem-sharp-degree-thresholds-wait-for-duality",
+        "kind": "remark",
+        "title": "Why the sharp degree thresholds wait for the duality pair",
+        "statement": "This page proves the Euler-characteristic form l(D) - i(D) = deg_k(D) + 1 - g and the fixed-direction vanishing theorem thm-h1-line-bundle-vanishes-sufficiently-high-degree, whose threshold n_0 depends on the chosen finite morphism to P^1_k and on D_0. The classical thresholds are not available here and must not be quoted from this page: the identities deg K_C = 2g - 2 and h^0(C, K_C) = g for a canonical divisor, the vanishing i(D) = 0 for every divisor of degree greater than 2g - 2 (not merely along one ample direction), the base-point-freeness of every invertible sheaf of degree at least 2g, and the very ampleness of every invertible sheaf of degree at least 2g + 1 all rest on the identification i(D) = l(K_C - D) supplied by Serre duality, in the pair on residues, Serre duality and the full Riemann-Roch theorem that follows this page. In the vocabulary of the index of speciality, the missing ingredient is exactly a description of the dual space of H^1(C, O_C(D)); until it is available, cor-riemann-theorem-large-degree and lem-large-positive-divisors-nonspecial give only the fixed-direction form stated above.",
+        "deps": [
+          "cor-riemann-theorem-large-degree",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-genus-euler-characteristic-curve",
+          "def-index-speciality-divisor",
+          "def-little-l-divisor",
+          "lem-large-positive-divisors-nonspecial",
+          "thm-h1-line-bundle-vanishes-sufficiently-high-degree",
+          "thm-riemann-roch-as-l-minus-index",
+          "thm-riemann-roch-euler-characteristic-curve"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Ch. 18.5 and Ch. 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "dependency_level": 25
+      }
+    ]
+  },
+  {
+    "order": 366.088,
+    "id": "riemann-roch-for-curves-via-euler-characteristics-examples",
+    "kind": "B",
+    "category": "scheme-theory",
+    "title": "Riemann Roch for Curves via Euler Characteristics — Examples",
+    "companion": "riemann-roch-for-curves-via-euler-characteristics",
+    "requires": [
+      "riemann-roch-for-curves-via-euler-characteristics"
+    ],
+    "items": [
+      {
+        "id": "ex-riemann-roch-projective-line-divisor",
+        "kind": "example",
+        "title": "Riemann-Roch on the projective line for every degree",
+        "statement": "Assume the Axiom of Choice inherited from the current projective-line cohomology and divisor/Picard suppliers. Let $k$ be a field, let $\\mathbb P^1_k$ have coordinate $t$ with point at infinity $\\infty$, and let $D=d[\\infty]$ for an integer $d$. Since $\\mathcal O_{\\mathbb P^1_k}(d)$ is isomorphic to $\\mathcal O_{\\mathbb P^1_k}(d[\\infty])$ — the class of the point at infinity generates $\\operatorname{Pic}(\\mathbb P^1_k)=\\mathbb Z$ with $\\mathcal O(1)$ corresponding to $1$ (cor-picard-projective-line-integers) — the explicit cohomology of the twists gives $$l(D)=h^0(\\mathcal O(d))=\\max(d+1,0),\\qquad i(D)=h^1(\\mathcal O(d))=\\max(-d-1,0),$$ the values being read off from cor-h0-projective-space-o-d-homogeneous-polynomials and cor-top-cohomology-projective-space-o-d. Hence $$l(D)-i(D)=d+1=\\deg_k(D)+1-g$$ with $g=0$ for every integer $d$: on the projective line Riemann-Roch is an identity between explicit numbers, including the negative-degree range where $l(D)=0$ and $i(D)=-d-1$ compensates. The divisors of degree at least $-1$ are exactly the nonspecial ones here, and the complete linear system $|D|$ of def-complete-linear-system is nonempty exactly for $d\\ge0$. *Scaffold repair, recorded for the owner.* The frozen scaffold statement cited the examples-page item `ex-cohomology-o-d-projective-line-all-d` for the cohomology of the twists. That item is homed on the examples page `cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes-examples`, and an examples-page item may not depend on another examples-page item, so the citation is replaced here by the published A-page corollaries cor-h0-projective-space-o-d-homogeneous-polynomials and cor-top-cohomology-projective-space-o-d, which contain the same values for $n=1$; every promised claim is preserved. The example's negative-degree compensation clause is also corrected to $l(D)=0$ and $i(D)=-d-1$ with $l-i=d+1$, so that the displayed identity is true at every $d$. The current lem-projective-line-divisors-classified-by-degree and cor-picard-projective-line-integers give the divisor-to-twist identification used in the calculation. The dimension notation is supplied by def-little-l-divisor, def-index-speciality-divisor and def-nonspecial-divisor, and the complete linear system by def-complete-linear-system.",
+        "deps": [
+          "cor-h0-projective-space-o-d-homogeneous-polynomials",
+          "cor-picard-projective-line-integers",
+          "cor-top-cohomology-projective-space-o-d",
+          "def-axiom-of-choice",
+          "def-complete-linear-system",
+          "def-degree-divisor-proper-curve",
+          "def-divisor-smooth-proper-curve",
+          "def-index-speciality-divisor",
+          "def-little-l-divisor",
+          "def-nonspecial-divisor",
+          "lem-projective-line-divisors-classified-by-degree",
+          "thm-riemann-roch-as-l-minus-index"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Ch. 18.5 and Ch. 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "dependency_level": 22
+      },
+      {
+        "id": "ex-genus-zero-conic-with-rational-point",
+        "kind": "example",
+        "title": "A smooth conic with a rational point is a projective line",
+        "statement": "Assume the Axiom of Choice inherited from the current plane-genus, rational-point and cohomology suppliers. Let $k$ be a field of characteristic not two, let $C=V_+(F)\\subseteq\\mathbb P^2_k$ be a smooth plane conic that is a curve (integral of dimension one — the hypothesis under which thm-plane-curve-arithmetic-genus applies), and let $p\\in C$ be a $k$-rational point. Then: 1. $\\deg_k[p]=[\\kappa(p):k]=1$, so $D=[p]$ is a divisor of degree one (def-degree-divisor-proper-curve); 2. thm-genus-zero-point-implies-projective-line applies once $g(C)=0$: thm-plane-curve-arithmetic-genus gives arithmetic genus $p_a(C)=\\frac{(2-1)(2-2)}{2}=0$, which for a smooth curve is the genus, and a degree-one divisor is present, so $C\\cong\\mathbb P^1_k$; 3. under such an isomorphism the degree-one divisor $[p]$ corresponds to a degree-one divisor $[q]$ of $\\mathbb P^1_k$, and the projective-line computation gives $l([q])=h^0(\\mathcal O(1))=2$ and $i([q])=0$ (cor-h0-projective-space-o-d-homogeneous-polynomials); dimensions of cohomology are invariant under isomorphism, so $$l([p])=2,\\qquad i([p])=0:$$ Riemann-Roch on $C$ reads $2-i([p])=1+1-0$, forcing $i([p])=0$, and the two-dimensional space $L([p])$ is spanned by $1$ and a coordinate function with a single simple pole at $p$, the coordinate of the isomorphism $C\\cong\\mathbb P^1_k$ supplied by the rational-point theorem. The classical form of this computation is the projection parametrisation: for each line $\\ell$ through $p$ the residual intersection $C\\cap\\ell$ pairs the second point of $\\ell\\cap C$ with $p$, giving the pencil $|[p]|$ and the coordinate above; the reverse direction — that the quadratic Veronese image of $\\mathbb P^1_k$ is such a conic — is the batch-6 examples-page item `ex-quadratic-veronese-conic`, which is not consumable here because examples-page items are leaves. *Scaffold repair, recorded for the owner.* The frozen scaffold cited the examples-page items `ex-quadratic-veronese-conic` and `ex-rational-parametrization-circle-conic`. Both are leaves and cannot carry a load; the citations are replaced by the A-page rational-point theorem thm-genus-zero-point-implies-projective-line, the published A-page computation of $h^0(\\mathcal O(1))=2$ cor-h0-projective-space-o-d-homogeneous-polynomials, and the local argument of items 1–3. Every promised numerical claim ($\\deg_k[p]=1$, $p_a=0$, $g=0$, $C\\cong\\mathbb P^1_k$, $l([p])=2$, $i([p])=0$, and the reading $2-i=1+1-0$) is preserved. The explicit line-pencil description of $|[p]|$ is recorded as the classical geometric picture rather than as a consumed claim, with its would-be supplier named above. The current thm-plane-curve-arithmetic-genus gives the arithmetic genus; smoothness identifies it with the curve genus. The current thm-genus-zero-point-implies-projective-line supplies the isomorphism, and the published projective-space cohomology result cor-h0-projective-space-o-d-homogeneous-polynomials supplies the section dimension. The proof transports cohomology through the isomorphism using the current cohomology and Riemann-Roch interfaces cited below.",
+        "deps": [
+          "cor-h0-projective-space-o-d-homogeneous-polynomials",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-degree-divisor-proper-curve",
+          "def-genus-euler-characteristic-curve",
+          "def-index-speciality-divisor",
+          "def-little-l-divisor",
+          "def-nonspecial-divisor",
+          "def-sheaf-cohomology-derived-global-sections",
+          "lem-projective-line-divisors-classified-by-degree",
+          "thm-genus-zero-point-implies-projective-line",
+          "thm-plane-curve-arithmetic-genus",
+          "thm-riemann-roch-as-l-minus-index"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Ch. 18.5 and Ch. 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "dependency_level": 22
+      },
+      {
+        "id": "cex-genus-zero-without-rational-point-not-p1",
+        "kind": "counterexample",
+        "title": "A genus-zero curve need not be the projective line",
+        "statement": "Assume the Axiom of Choice inherited from the current smoothness, properness, plane-genus and rational-point suppliers. Let $k=\\mathbb R$ and let $$C=V_+(x^2+y^2+z^2)\\subseteq\\mathbb P^2_{\\mathbb R}$$ be the real projective conic. Then: 1. $C$ is a smooth proper geometrically integral curve over $\\mathbb R$. On each of the three standard affine charts, after permuting coordinates, the equation is $1+u^2+v^2=0$. In its chart ring the Jacobian entries $2u,2v$ generate the unit ideal, since $1=(-u/2)(2u)+(-v/2)(2v)$; each prime therefore has a neighborhood on which one Jacobian minor is invertible, giving a standard smooth presentation. Thus all three charts are smooth over $\\mathbb R$. The conic is a closed subscheme of the proper $\\mathbb R$-scheme $\\mathbb P^2_{\\mathbb R}$, hence proper. Over $\\mathbb C$ the form $F$ is irreducible: a factorisation $x^2+y^2+z^2=L_1L_2$ into linear forms would, after setting $z=0$, make $x^2+y^2=(x+iy)(x-iy)$ the product of the restrictions of $L_1,L_2$, so by unique factorisation in $\\mathbb C[x,y]$ the restrictions are units times $x+iy$ and $x-iy$. After rescaling and, if necessary, interchanging the factors, write $L_1=x+iy+\\alpha z$ and $L_2=x-iy+\\gamma z$. Expanding gives $$L_1L_2=x^2+y^2+(\\alpha+\\gamma)xz+i(\\gamma-\\alpha)yz+\\alpha\\gamma z^2.$$ Comparing with $F$ gives $\\alpha+\\gamma=0$, $i(\\gamma-\\alpha)=0$, and $\\alpha\\gamma=1$. The first two equations force $\\gamma=\\alpha$ and $2\\alpha=0$, hence $\\alpha=\\gamma=0$ in characteristic zero, contradicting $\\alpha\\gamma=1$. Thus $F$ is irreducible over $\\mathbb C$. The scheme $C_{\\mathbb C}=V_+(F)$ is reduced and irreducible; it is nonempty since it contains $[i:0:1]$. The field $\\mathbb C$ is an algebraic closure of $\\mathbb R$, so this is the geometric fibre used to establish geometric integrality over $\\mathbb R$; since $\\mathbb C$ is algebraically closed, the same scheme is geometrically integral over $\\mathbb C$. Its chain dimension, and that of $C$ over $\\mathbb R$, are one by the direct affine-chart calculation in [F4]. 2. $g(C)=0$. By thm-plane-curve-arithmetic-genus applied to the curve $C$ cut out by the degree-two form, the arithmetic genus is $p_a(C)=\\frac{(2-1)(2-2)}{2}=0$, and for a smooth curve the arithmetic genus is the genus (def-genus-euler-characteristic-curve), so $g(C)=0$. 3. $C$ has no $\\mathbb R$-rational point. If $x,y,z\\in\\mathbb R$ with $x^2+y^2+z^2=0$, then $x=y=z=0$; since $[0:0:0]$ is not a point of $\\mathbb P^2_{\\mathbb R}$, the conic has no $\\mathbb R$-point, $C(\\mathbb R)=\\varnothing$. 4. The hypothesis of thm-genus-zero-point-implies-projective-line is not satisfied. For every closed point $p\\in C$, its residue field is a finite extension of $\\mathbb R$; it is separable and simple, so an irreducible real minimal polynomial for a generator has degree $1$ or $2$ (lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite, cor-fields-of-characteristic-zero-and-finite-fields-are-perfect, cor-algebraic-extensions-of-perfect-fields-are-separable, thm-primitive-element-theorem-for-finite-separable-extensions, thm-evaluation-kernel-and-minimal-polynomial, thm-simple-algebraic-extension-quotient-power-basis-and-degree, cor-irreducible-real-polynomials-have-degree-one-or-two). Degree $1$ would make $\\kappa(p)=\\mathbb R$ and give an $\\mathbb R$-point by lem-field-valued-points-of-schemes, contradicting item 3. Thus every closed point has degree $2$. Every divisor, including a signed divisor $D=\\sum_p n_p[p]$ with arbitrary integers $n_p$, has degree $\\deg_{\\mathbb R}D=2\\sum_p n_p$, which is even (def-degree-divisor-proper-curve). In particular, no divisor has degree one, so the theorem's degree-one-divisor hypothesis fails. 5. Geometrically the conic is a projective line. Over $\\mathbb C$ the point $[i:0:1]$ satisfies $i^2+0^2+1=0$, so $C_{\\mathbb C}$ has a $\\mathbb C$-rational point; $C_{\\mathbb C}$ is a smooth proper geometrically integral genus-zero curve over $\\mathbb C$ by items 1 and 2 applied over $\\mathbb C$, and thm-genus-zero-point-implies-projective-line therefore gives $C_{\\mathbb C}\\cong\\mathbb P^1_{\\mathbb C}$. Thus the same curve becomes a projective line after base change to $\\mathbb C$. 6. $C\\not\\cong\\mathbb P^1_{\\mathbb R}$. The line $\\mathbb P^1_{\\mathbb R}$ has the $\\mathbb R$-rational point $[1:0]$, and an $\\mathbb R$-isomorphism would induce a bijection on $\\mathbb R$-rational points; since $C(\\mathbb R)=\\varnothing$ by item 3, no such isomorphism exists. Over a non-algebraically-closed field, genus zero therefore does not determine the curve: the real conic is a projective line geometrically and a form of $\\mathbb P^1$ with no rational point arithmetically. *Scaffold repair, recorded for the owner.* The frozen scaffold cited the examples-page items `ex-base-change-real-conic-to-complex` and `ex-projective-conic-standard-charts`; examples-page items are leaves and cannot carry a load, and both uses are replaced here by the explicit computations in items 1, 3, 5 and 6 ($F$ and its partials, the sign of a sum of squares over $\\mathbb R$, the evaluation at $[i:0:1]$, and the transport of rational points along an isomorphism). The current thm-plane-curve-arithmetic-genus supplies the genus computation, and the current thm-genus-zero-point-implies-projective-line is used only to state the missing rational-point hypothesis. The explicit smoothness, geometric-integrality, residue-degree, and real-point arguments below establish the counterexample directly.",
+        "deps": [
+          "cor-algebraic-extensions-of-perfect-fields-are-separable",
+          "cor-complex-numbers-are-a-quadratic-real-extension",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "cor-irreducible-real-polynomials-have-degree-one-or-two",
+          "cor-transcendence-degree-tower-additivity",
+          "def-ag-standard-smooth-algebra",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-algebraic-closure",
+          "def-dimension-noetherian-topological-space",
+          "def-degree-divisor-proper-curve",
+          "def-genus-euler-characteristic-curve",
+          "def-geometric-fibre",
+          "def-geometrically-reduced-integral-connected-fibre",
+          "def-krull-dimension-of-a-ring",
+          "def-proper-morphism",
+          "def-relative-projective-space-standard-charts",
+          "def-residue-field-scheme-point",
+          "def-smooth-morphism-classical",
+          "lem-chain-dimension-open-cover",
+          "lem-closed-immersion-proper",
+          "lem-field-valued-points-of-schemes",
+          "lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite",
+          "lem-proper-stable-composition",
+          "thm-affine-domain-dimension-transcendence-degree",
+          "thm-evaluation-kernel-and-minimal-polynomial",
+          "thm-genus-zero-point-implies-projective-line",
+          "thm-irreducible-closed-subsets-and-prime-ideals",
+          "thm-noetherian-ring-has-noetherian-spectrum",
+          "thm-plane-curve-arithmetic-genus",
+          "thm-primitive-element-theorem-for-finite-separable-extensions",
+          "thm-polynomial-degree-of-a-product-over-a-domain",
+          "thm-projective-space-proper-over-base",
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "thm-the-complex-numbers-are-algebraically-closed"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Ch. 18.5 and Ch. 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "dependency_level": 22,
+        "strategy": "Use the three standard affine charts over R and C: the unit Jacobian ideal proves smoothness at every prime; irreducible homogeneous F gives domain charts, each with transcendence degree and scheme chain dimension one. Closed-immersion properness and proper composition give properness. All closed residue degrees over R are two, so all signed divisor degrees are even. The degree-two plane-genus supplier and genus-zero rational-point theorem give genus zero and complex projective-line identification; their draft closure remains pending."
+      },
+      {
+        "id": "ex-adding-point-section-dimension-jump",
+        "kind": "example",
+        "title": "The jump l(D+p) - l(D) is zero or the residue degree",
+        "statement": "Assume the Axiom of Choice inherited from the current divisor, residue-field and projective-line suppliers. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ (def-algebraic-curve-over-field), let $D$ be a divisor and let $p$ be a closed point. By lem-divisor-order-monotonicity-sections the quotient $L(D+p)/L(D)$ embeds $k$-linearly into the residue field $\\kappa(p)$, so the jump is bounded: $$0\\le l(D+p)-l(D)\\le[\\kappa(p):k],$$ and both extremes occur. The intermediate values occur as well: the jump need not be $0$ or $[\\kappa(p):k]$, as case (iv) below shows in residue degree two. On $\\mathbb P^1_k$, with coordinate $t=x_1/x_0$ and point at infinity $\\infty=[0:1]=V(x_0)$ (lem-projective-line-divisors-classified-by-degree): 1. for $D=-2[q]$ and $p=[a]$ with $q=[0]$ and $a\\ne0$ rational, both $D$ and $D+p=-2[q]+[a]$ have negative degree, so $L(D)=L(D+p)=0$ and the jump is $0$; 2. for $D=-[q]$ and $p=[a]$ with $a\\ne q$ rational, $L(D)=0$ while $L(D+p)$ is the one-dimensional space spanned by $(t-q)/(t-a)$, whose divisor is $[q]-[a]=-(D+p)$, so the jump is $1=[\\kappa(p):k]$; 3. over $k=\\mathbb R$, for $D=0$ and $p=V(t^2+1)$ of residue degree two, $L(0)$ is the constant field with $l(0)=1$, while $p$ is linearly equivalent to $2[\\infty]$ because $\\operatorname{div}(t^2+1)=[p]-2[\\infty]$, so $\\mathcal O(p)\\cong\\mathcal O(2)$ and $L(p)=\\{A/(t^2+1):\\deg A\\le2\\}$ is three-dimensional: the jump is $2=[\\kappa(p):k]$; 4. over $k=\\mathbb R$, for $D=-2[\\infty]$ and $p=V(t^2+1)$, one has $L(D)=0$ and $L(D+p)$ is the one-dimensional space spanned by $1/(t^2+1)$, so the jump is $1$ inside residue degree $2$. The residue-degree case therefore really occurs, the bound is sharp in both extremes, and the jump is in general an intermediate integer of the interval $[0,[\\kappa(p):k]]$. *Scaffold repair, recorded for the owner.* The frozen scaffold statement claimed that \"the jump $l(D+p)-l(D)$ is either $0$ or $[\\kappa(p):k]$\". That strengthening is false: case (iv) exhibits a jump of $1$ with residue degree $2$. The statement above keeps every promised instance (i)-(iii) with their computations, corrects the general claim to the true bound $0\\le l(D+p)-l(D)\\le[\\kappa(p):k]$ of lem-divisor-order-monotonicity-sections, and adds case (iv) as the disproof of the false reading. The scaffold's parenthetical in (ii), \"a function with divisor $[a]-[q]$\", is also corrected: the spanning function $(t-q)/(t-a)$ has divisor $[q]-[a]=-(D+p)$. The current lem-divisor-order-monotonicity-sections supplies the general residue-field bound. The current Riemann-Roch-space, principal-divisor, Cartier-sheaf, and Cartier-to-Weil interfaces used for the displayed projective-line calculations are def-riemann-roch-space-of-divisor, def-principal-weil-divisor-and-class-group, def-invertible-sheaf-of-cartier-divisor, thm-cartier-weil-divisors-curves-agree, thm-cartier-divisors-mod-principal-to-picard and cor-picard-projective-line-integers.",
+        "deps": [
+          "cor-picard-projective-line-integers",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-degree-divisor-proper-curve",
+          "def-dimension",
+          "def-divisor-smooth-proper-curve",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-little-l-divisor",
+          "def-order-codimension-one-rational-function",
+          "def-principal-weil-divisor-and-class-group",
+          "def-residue-field-scheme-point",
+          "def-riemann-roch-space-of-divisor",
+          "def-twisting-sheaf-proj",
+          "lem-divisor-order-monotonicity-sections",
+          "lem-projective-line-divisors-classified-by-degree",
+          "lem-riemann-roch-space-finite-dimensional",
+          "thm-cartier-divisors-mod-principal-to-picard",
+          "thm-cartier-weil-divisors-curves-agree",
+          "thm-local-ring-smooth-curve-dvr",
+          "thm-polynomial-ring-over-a-field-is-a-ufd"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 16
+      },
+      {
+        "id": "cex-riemann-inequality-not-equality-special-divisor",
+        "kind": "counterexample",
+        "title": "The Riemann inequality is not an equality for special divisors",
+        "statement": "Assume the Axiom of Choice inherited from the Riemann--Roch, curve-divisor, Jacobian, weighted-Bezout, dimension, and projective-properness suppliers. For any field k and smooth proper geometrically integral curve C/k of genus g >= 1, the zero divisor satisfies l(0) = 1 and i(0) = g, so the Riemann inequality is strict by exactly i(0). For every divisor D, l(D) = deg_k(D) + 1 - g + i(D), hence equality with the lower bound holds exactly for nonspecial D and every special divisor gives strict inequality. Over an algebraically closed field of characteristic zero, the Fermat quartic V_+(x_0^4 + x_1^4 + x_2^4) is a concrete smooth proper geometrically integral genus-three example, with 1 > -2 at D = 0.",
+        "deps": [
+          "cor-projective-plane-bezout-length-form",
+          "cor-smooth-variety-classical-scheme-conventions-agree",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-degree-divisor-proper-curve",
+          "def-genus-euler-characteristic-curve",
+          "def-index-speciality-divisor",
+          "def-little-l-divisor",
+          "def-nonspecial-divisor",
+          "lem-finite-variable-polynomial-algebras-over-fields-are-noetherian-direct",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-chain-dimension-open-cover",
+          "lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite",
+          "lem-projective-hypersurface-affine-pieces",
+          "lem-closed-immersion-proper",
+          "lem-proper-stable-composition",
+          "thm-affine-domain-dimension-transcendence-degree",
+          "thm-dimension-formula-for-affine-domains",
+          "thm-h0-structure-sheaf-proper-curve",
+          "thm-jacobian-criterion-affine-variety",
+          "thm-jacobian-criterion-smooth-morphism",
+          "thm-krull-principal-ideal-theorem",
+          "thm-projective-space-proper-over-base",
+          "thm-riemann-roch-as-l-minus-index",
+          "thm-plane-curve-arithmetic-genus"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Ch. 18.5 and Ch. 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "dependency_level": 22,
+        "strategy": "Compute the zero-divisor terms from the Riemann--Roch, genus, and structure-section interfaces; rearrange Riemann--Roch to identify the exact speciality defect for every divisor; and realize the genus-three case with the explicit Fermat quartic. Verify its smoothness, scheme dimension, properness, and geometric integrality using the actual affine equations, Jacobian criteria, weighted Bezout lengths, and polynomial UFD facts. The Axiom of Choice is inherited from the cited suppliers; the Fermat geometry does not use the generic complete-intersection existence result.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-degree-zero-principal-divisor",
+        "kind": "example",
+        "title": "A principal divisor of degree zero on the projective line",
+        "statement": "Assume the Axiom of Choice inherited from the current divisor and projective-line cohomology suppliers. Let $k$ be a field and let $\\mathbb P^1_k$ have coordinate $t=x_1/x_0$ on the standard chart $U_0=\\operatorname{Spec}k[t]$, with point at infinity $\\infty=[0:1]=V(x_0)$ (lem-projective-line-divisors-classified-by-degree). Let $a\\ne b$ be distinct $k$-rational points of $U_0$, so $a,b\\in k$ and the associated closed points are $[a]=V(t-a)$ and $[b]=V(t-b)$. The rational function $$f=\\frac{t-a}{t-b}\\ \\in\\ k(t)^\\times$$ has divisor $$\\operatorname{div}(f)=[a]-[b],$$ which is a principal divisor of degree $\\deg_k([a]-[b])=1-1=0$. Its divisor class satisfies the degree shift and Riemann-Roch numerically: the attached invertible sheaf $\\mathcal O(\\operatorname{div}f)=\\mathcal O([a])\\otimes\\mathcal O([b])^{-1}$ is isomorphic to $\\mathcal O_{\\mathbb P^1_k}$, since the class of a principal divisor is trivial and since $\\deg_k\\operatorname{div}(f)=0$ on $\\mathbb P^1_k$ forces the class to be trivial under the isomorphism $\\operatorname{Pic}(\\mathbb P^1_k)\\to\\mathbb Z$ (cor-picard-projective-line-integers). Hence $$l(\\operatorname{div}f)=h^0(\\mathcal O)=1,\\qquad i(\\operatorname{div}f)=h^1(\\mathcal O)=0,$$ by the explicit cohomology of the structure sheaf (cor-h0-projective-space-o-d-homogeneous-polynomials, cor-top-cohomology-projective-space-o-d). Alternatively $L(\\operatorname{div}f)$ is the one-dimensional $k$-space spanned by $$1/f=\\frac{t-b}{t-a},$$ because $\\operatorname{div}(g)+\\operatorname{div}(f)\\ge0$ for a nonzero $g\\in k(t)$ is equivalent to $\\operatorname{div}(gf)\\ge0$, and a rational function on $\\mathbb P^1_k$ with no poles is constant. In particular $f\\notin L(\\operatorname{div}f)$: the divisor $\\operatorname{div}(f)+\\operatorname{div}(f)=2[a]-2[b]$ is not effective, so the nonzero elements of $L(\\operatorname{div}f)$ are the scalar multiples of $1/f$ and not those of $f$. Hence $\\chi(\\mathcal O(\\operatorname{div}f))=1=\\chi(\\mathcal O)$ with $\\deg_k\\operatorname{div}(f)=0$, and Riemann-Roch reads $$1-0=0+1-0$$ on both sides, the right-hand side being $\\deg_k\\operatorname{div}(f)+1-g$ with $g=g(\\mathbb P^1_k)=0$ (thm-riemann-roch-as-l-minus-index). The same computation for $f=g(t)$ a monic polynomial of degree $d$ gives $$\\operatorname{div}(g)=Z(g)-d[\\infty],\\qquad Z(g)=\\sum\\nolimits_im_i[p_i],$$ where $g=\\prod_ig_i^{m_i}$ is the factorisation of $g$ into monic irreducibles $g_i$ of degree $d_i$ and $p_i=V(g_i)$; this divisor has degree $\\sum_im_id_i-d=0$, showing that the individual zero and pole parts need not be trivial even though the class is principal. *Scaffold repair, recorded for the owner.* The frozen scaffold statement claimed that \"alternatively $L(\\operatorname{div}f)$ consists of the scalar multiples of $f$ because $\\operatorname{div}(g)+\\operatorname{div}(f)\\ge0$ forces $g/f$ to have no poles\". That is false as written: the condition is equivalent to $\\operatorname{div}(gf)\\ge0$, hence to $gf\\in k$, so $L(\\operatorname{div}f)$ consists of the scalar multiples of $1/f$, and $f$ itself is not in $L(\\operatorname{div}f)$ because $2[a]-2[b]$ is not effective. The statement above keeps every other promised claim and records the corrected spanning function; the general degree-zero claim is $\\deg_k([a]-[b])=0$, computed directly below. The current principal-divisor, Cartier/Picard, and line-bundle interfaces used below are def-principal-weil-divisor-and-class-group, def-invertible-sheaf-of-cartier-divisor, lem-cartier-divisor-addition-tensor, thm-cartier-divisors-mod-principal-to-picard and thm-cartier-weil-divisors-curves-agree. The degree zero asserted for this example is computed explicitly from $[a]-[b]$; no general principal-divisor degree theorem is needed.",
+        "deps": [
+          "cor-h0-projective-space-o-d-homogeneous-polynomials",
+          "cor-picard-projective-line-integers",
+          "cor-top-cohomology-projective-space-o-d",
+          "def-axiom-of-choice",
+          "def-degree-divisor-proper-curve",
+          "def-divisor-smooth-proper-curve",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-little-l-divisor",
+          "def-order-codimension-one-rational-function",
+          "def-principal-weil-divisor-and-class-group",
+          "def-riemann-roch-space-of-divisor",
+          "def-twisting-sheaf-proj",
+          "lem-cartier-divisor-addition-tensor",
+          "lem-projective-line-divisors-classified-by-degree",
+          "thm-cartier-divisors-mod-principal-to-picard",
+          "thm-cartier-weil-divisors-curves-agree",
+          "thm-euler-characteristic-degree-shift-curve",
+          "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "thm-riemann-roch-as-l-minus-index"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "dependency_level": 21
+      },
+      {
+        "id": "ex-linear-system-poles-at-one-point",
+        "kind": "example",
+        "title": "A pencil of functions with poles at one point defines a finite map to the projective line",
+        "statement": "Assume the Axiom of Choice inherited from the current bounded-pole, linear-system and finite-map suppliers. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$, and let $f\\in k(C)^{\\times}$ be a nonconstant rational function whose poles all lie at a single closed point $p$, of order $m\\ge1$; thus $$(f)_\\infty=m[p]$$ is the pole divisor of $f$, and $f\\in L(np)$ for every $n\\ge m$ — the case \"all poles at $p$, of order at most $n$\" of the scaffold. Write $D_0:=(f)_\\infty=m[p]$. Then: 1. $1$ and $f$ are linearly independent elements of $L(np)$ for every $n\\ge m$, hence also of $L(D_0)$. 2. In the space $L(D_0)$ the subspace $V_0=k\\cdot1+k\\cdot f$ is two-dimensional and base-point-free: the section $s_f$ of $\\mathcal O_C(D_0)$ has unit coefficient in a local trivialization at $p$, and $s_1$ has unit coefficient at every point away from $p$. The morphism $\\varphi_{V_0}:C\\to\\mathbb P^1_k$ attached to $V_0$ by thm-base-point-free-linear-system-morphism is exactly the finite morphism $\\varphi_f$ of lem-function-with-poles-defines-map-p1, of degree $[k(C):k(f)]$ and with fibre over infinity equal to the pole divisor $(f)_\\infty$. 3. For $n>m$ the same two elements $1,f$ in the larger space $L(np)$ are not base-point-free: since $\\operatorname{div}(1)+np=np$ and $\\operatorname{div}(f)+np=(f)_0+(n-m)p$, the point $p$ lies in both divisors, so $p$ is a base point. Among the divisors $np\\ge(f)_\\infty$ the base-point-free hypothesis therefore holds exactly at the pole divisor $D_0$ ($n=m$). 4. On the projective line, with coordinate $t$ and $D=[\\infty]=(t)_\\infty$, the pair $1,t$ inside $L([\\infty])$ is base-point-free and the attached morphism is $[1:t]$, the identity of $\\mathbb P^1_k$: it is finite of degree one with fibre over infinity the single point $[\\infty]$. For $n\\ge2$ the same pair inside $L(n[\\infty])$ has base point $\\infty$ (the two divisors $n[\\infty]$ and $[0]+(n-1)[\\infty]$ both contain $\\infty$), so no morphism is attached there; the identity is attached to the pole divisor $[\\infty]$. 5. The morphism attached to a base-point-free subspace of $L(D)$ depends on the subspace and not only on $D$: on $\\mathbb P^1_k$ with $D=2[\\infty]$ the pencils $V_1=k\\cdot1+k\\cdot t^2$ and $V_2=k\\cdot1+k\\cdot(t^2+t)$ are both base-point-free subspaces of the same $L(2[\\infty])$, and the attached morphisms satisfy $\\varphi_{V_1}^{\\sharp}(t)=t^2$ and $\\varphi_{V_2}^{\\sharp}(t)=t^2+t$; no fractional linear transformation $M(u)=\\frac{au+b}{cu+d}$ satisfies $M(t^2)=t^2+t$, so the two morphisms are not related by the projective-linear action of $\\mathrm{PGL}_2(k)$ on the target and are genuinely different. 6. By cor-existence-rational-function-bounded-pole, for every closed point $p$ of residue degree $d$ and every $n\\ge1$ with $nd+1-g\\ge2$ a nonconstant $f\\in L(np)$ of exactly this kind exists, so the construction is nonempty. The simplest instance is $C=\\mathbb P^1_k$ with $f=t$, whose only pole is at infinity and for which $\\varphi_f$ is the identity; this realizes the construction of cor-smooth-proper-curve-finite-map-projective-line in the case where the only pole is at infinity. *Scaffold repair, recorded for the owner.* The frozen scaffold claimed that $1$ and $f$ span a base-point-free subspace of $L(np)$ for a pole order \"at most $n$\", and that \"the same two sections, viewed inside the larger space $L(n[\\infty])$, define the same morphism\". Both clauses are false when the pole order $m$ at $p$ is strictly smaller than $n$, and false on $\\mathbb P^1_k$ for $n\\ge2$: in $L(np)$ both $\\operatorname{div}(1)+np=np$ and $\\operatorname{div}(f)+np=(f)_0+(n-m)p$ contain $p$, so $p$ is a base point and the hypothesis of the base-point-free morphism theorem fails. The repair keeps every promised object — the two sections, the two-dimensional subspace, the identification of its morphism with $\\varphi_f$, the projective-line identity at $D=[\\infty]$, and the dependence of the morphism on the chosen subspace rather than on $D$ alone — and states base-point-freeness at the correct divisor, the pole divisor $(f)_\\infty$; the enlarged divisors are handled as the base-point case in item 3. The current cor-existence-rational-function-bounded-pole supplies the nonconstant function in the existence clause. The Riemann-Roch-space and base-point-free interfaces are def-riemann-roch-space-of-divisor, def-base-point-linear-system and thm-base-point-free-linear-system-morphism. The finite map and its pole fibre are supplied by lem-function-with-poles-defines-map-p1 and cor-smooth-proper-curve-finite-map-projective-line.",
+        "deps": [
+          "cor-existence-rational-function-bounded-pole",
+          "cor-smooth-proper-curve-finite-map-projective-line",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-base-point-linear-system",
+          "def-divisor-smooth-proper-curve",
+          "def-divisor-support-positive-negative-parts",
+          "def-relative-projective-space-standard-charts",
+          "def-riemann-roch-space-of-divisor",
+          "lem-function-with-poles-defines-map-p1",
+          "lem-projective-line-divisors-classified-by-degree",
+          "thm-base-point-free-linear-system-morphism"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Ch. 18.5 and Ch. 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "dependency_level": 23
+      },
+      {
+        "id": "ex-nonspecial-large-divisor",
+        "kind": "example",
+        "title": "A sufficiently positive divisor is nonspecial and Riemann-Roch counts its sections",
+        "statement": "Assume the Axiom of Choice inherited from the current fixed-direction vanishing, divisor and Riemann-Roch suppliers. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ of genus $g=g(C)$ (def-algebraic-curve-over-field, def-genus-euler-characteristic-curve), let $\\varphi:C\\to\\mathbb P^1_k$ be a finite $k$-morphism, and let $A$ be an effective divisor on $C$ with $\\mathcal O_C(A)\\cong\\varphi^*\\mathcal O_{\\mathbb P^1_k}(1)$. Let $D_0$ be any divisor on $C$ and let $n_0=n_0(D_0,\\varphi)$ be an integer supplied for $D_0$ and $\\varphi$ by the fixed-direction vanishing theorem. Then for every $n\\ge n_0$ and every effective divisor $E$ the divisor $$D=D_0+nA+E$$ is nonspecial, $H^1(C,\\mathcal O_C(D))=0$ (lem-large-positive-divisors-nonspecial), so Riemann-Roch computes its dimension exactly: $$l(D)=\\deg_k(D)+1-g$$ (thm-riemann-roch-as-l-minus-index). The concrete instance is the projective line. Take $C=\\mathbb P^1_k$, $\\varphi=\\mathrm{id}$ and $A=[\\infty]$, so that $\\varphi^*\\mathcal O(1)=\\mathcal O(1)\\cong\\mathcal O([\\infty])$; then $g=0$ and, for every $d\\in\\mathbb Z$, $$l(d[\\infty])=h^0(\\mathbb P^1_k,\\mathcal O(d))=\\begin{cases}d+1,&d\\ge0,\\\\0,&d<0,\\end{cases} \\qquad i(d[\\infty])=h^1(\\mathbb P^1_k,\\mathcal O(d))=\\begin{cases}0,&d\\ge-1,\\\\-d-1,&d\\le-2,\\end{cases}$$ while $\\deg_k(d[\\infty])=d\\cdot[\\kappa(\\infty):k]=d$. Consequently: 1. for $d\\ge-1$ the divisor $d[\\infty]$ is nonspecial, $i(d[\\infty])=0$, and Riemann-Roch reads $l(d[\\infty])=d+1=\\deg_k(d[\\infty])+1-g$ — including the boundary case $d=-1$, where $l=i=0$ (the sheaf $\\mathcal O(-1)$ has no sections); 2. for $d\\le-2$ the divisor is special, with $l(d[\\infty])=0$ and $i(d[\\infty])=-d-1\\ge1$, and Riemann-Roch reads $0-(-d-1)=d+1$; 3. so in this family nonspeciality holds exactly for $d\\ge-1$, and the exact threshold is the boundary value $d=-1$; the general statement only provides some threshold $n_0(D_0,\\varphi)$ depending on $D_0$ and on the fixed morphism, which this instance computes exactly. The \"sufficiently positive\" threshold of the general statement is the fixed-direction one of the vanishing theorem; the example does not assert the universal bound \"$\\deg_k(D)>2g-2$ implies $i(D)=0$\", which requires Serre duality and belongs to the next pair. *Scaffold repair, recorded for the owner.* The frozen scaffold cited the examples-page item `ex-cohomology-o-d-projective-line-all-d` (on another page) and `ex-riemann-roch-projective-line-divisor` (on this page) for the projective-line values $l(d[\\infty])=d+1$ and the nonspecial range. Both are examples and cannot carry a load; the citations are replaced by the published A-page suppliers cor-h0-projective-space-o-d-homogeneous-polynomials, cor-top-cohomology-projective-space-o-d and lem-projective-line-divisors-classified-by-degree, together with cor-picard-projective-line-integers for the identification $\\mathcal O(d[\\infty])\\cong\\mathcal O(d)$ of the attached sheaves. Every promised numerical claim is preserved: $l(d[\\infty])=d+1$ for $d\\ge0$, nonspeciality exactly for $d\\ge-1$, the boundary case $d=-1$ with $l=i=0$, and the fixed-direction restriction. The current lem-large-positive-divisors-nonspecial supplies the fixed-direction vanishing, and thm-riemann-roch-as-l-minus-index supplies the dimension identity. The current projective-line divisor and Picard interfaces lem-projective-line-divisors-classified-by-degree and cor-picard-projective-line-integers identify the attached twists; the published cohomology corollaries supply their dimensions.",
+        "deps": [
+          "cor-h0-projective-space-o-d-homogeneous-polynomials",
+          "cor-picard-projective-line-integers",
+          "cor-top-cohomology-projective-space-o-d",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-degree-divisor-proper-curve",
+          "def-divisor-smooth-proper-curve",
+          "def-genus-euler-characteristic-curve",
+          "def-index-speciality-divisor",
+          "def-little-l-divisor",
+          "def-nonspecial-divisor",
+          "lem-large-positive-divisors-nonspecial",
+          "lem-projective-line-divisors-classified-by-degree",
+          "thm-riemann-roch-as-l-minus-index"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea (version of October 21, 2025), Ch. 18.5 and Ch. 21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 25
+      },
+      {
+        "id": "cex-negative-degree-rr-right-side-negative",
+        "kind": "counterexample",
+        "title": "A negative right-hand side does not contradict Riemann-Roch",
+        "statement": "Assume the Axiom of Choice inherited from the current divisor, cohomology and Riemann-Roch suppliers. Let $k$ be a field, let $m\\ge1$ be an integer, let $\\mathbb P^1_k$ be the projective line over $k$ with point at infinity $\\infty$ and coordinate $t$, and put $D:=-m[\\infty]$. Then $$\\deg_k(D)=-m<0,\\qquad l(D)=0,\\qquad i(D)=m-1,$$ so Riemann-Roch on $\\mathbb P^1_k$ ($g=0$) reads $$0-(m-1)=1-m=\\deg_k(D)+1-g;$$ for $m=2$ this is the identity $0-1=-1=-2+1$. The explicitly refuted readings are: 1. \"$l(D)=\\deg_k(D)+1-g$ for every divisor $D$\": at $D=-2[\\infty]$ one has $l(D)=0$ while $\\deg_k(D)+1-g=-1$, and a negative integer is not the dimension of any $k$-vector space; 2. \"there exist $\\deg_k(D)+1-g$ independent sections\": for every $m\\ge2$ the number $1-m$ is negative, so it cannot count sections, and indeed $l(D)=0$; 3. \"the Riemann inequality produces sections\": the inequality $l(D)\\ge1-m$ is vacuous for $m\\ge2$, since its right-hand side is negative. There is no contradiction with the vanishing $l(D)=0$ for $\\deg_k(D)<0$ (cor-negative-degree-no-sections-rr): that corollary asserts exactly the value $l(D)=0$ computed here and is proved without the Riemann inequality, precisely because the right-hand side of that inequality is negative. The Euler characteristic $l(D)-i(D)=1-m$ is an integer that may be negative, and the compensation is supplied by $H^1$, whose dimension $i(D)=m-1$ is not zero as soon as $m\\ge2$; the right-hand side of Riemann-Roch is therefore not itself the dimension of a space of sections. At the boundary $m=1$, where $\\deg_k(D)+1-g=0$ and $l(D)=i(D)=0$, all three readings are trivially consistent, so the counterexample is sharp: it first bites at $m=2$ and persists for all larger $m$. *Scaffold repair, recorded for the owner.* The frozen scaffold statement cited the examples-page item `ex-cohomology-o-d-projective-line-all-d` for the cohomology of the twists, and it also cited the same-page example `ex-riemann-roch-projective-line-divisor`. Both are examples-page items: the first is homed on the examples page `cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes-examples`, and an examples-page item may not be consumed by another item, while the second is an example on this very page and likewise cannot carry the load. The two citations are replaced here by the published A-page corollaries cor-h0-projective-space-o-d-homogeneous-polynomials and cor-top-cohomology-projective-space-o-d (the same values at $n=1$, with the monomial count $d+1$ for $d\\ge0$ and the rank $\\binom{-d-1}{1}=m-1$ for $d=-m\\le-2$) together with the A-page suppliers lem-projective-line-divisors-classified-by-degree and cor-picard-projective-line-integers; every promised claim is preserved. The current divisor-to-line-bundle route uses lem-projective-line-divisors-classified-by-degree and cor-picard-projective-line-integers, while def-little-l-divisor and def-index-speciality-divisor identify the two cohomology dimensions. The published projective-line cohomology corollaries give their explicit values.",
+        "deps": [
+          "cor-h0-projective-space-o-d-homogeneous-polynomials",
+          "cor-negative-degree-no-sections-rr",
+          "cor-picard-projective-line-integers",
+          "cor-riemann-inequality-divisor-sections",
+          "cor-top-cohomology-projective-space-o-d",
+          "def-algebraic-curve-over-field",
+          "def-axiom-of-choice",
+          "def-degree-divisor-proper-curve",
+          "def-dimension",
+          "def-divisor-smooth-proper-curve",
+          "def-index-speciality-divisor",
+          "def-little-l-divisor",
+          "lem-projective-line-divisors-classified-by-degree",
+          "thm-riemann-roch-as-l-minus-index"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Introduction to Algebraic Geometry (July 20, 2020 notes), Ch. 8",
+              "url": "https://math.mit.edu/classes/18.721/ag-jul20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "dependency_level": 21
+      },
+      {
+        "id": "ex-empty-divisor-euler-characteristic",
+        "kind": "example",
+        "title": "The empty divisor, its Euler characteristic and the genus boundary cases",
+        "statement": "Assume the Axiom of Choice inherited from the current cohomology, dimension and Riemann-Roch suppliers. Let $k$ be a field, let $C$ be a smooth proper geometrically integral curve over $k$ of genus $g=g(C)$ (def-genus-euler-characteristic-curve), and let $D=0$ be the empty divisor. Then $$l(0)=h^0(C,\\mathcal O_C)=1,\\qquad i(0)=h^1(C,\\mathcal O_C)=g,$$ so the Euler characteristic of the structure sheaf is $$\\chi(C,\\mathcal O_C)=h^0(C,\\mathcal O_C)-h^1(C,\\mathcal O_C)=1-g,$$ and Riemann-Roch on the empty divisor reads $$1-g=0+1-g,$$ the normalization that makes $\\chi(C,\\mathcal O_C)=1-g$ the definition of the genus. The complete linear system $|0|$ consists of the single divisor $0$ in every genus, so $\\dim_k|0|=0=l(0)-1$. The two boundary genera: for $g=0$ one has $\\chi=1$ with $i(0)=0$, so the empty divisor is nonspecial — for $\\mathbb P^1_k$ this reads $h^0(\\mathcal O)=1$, $h^1(\\mathcal O)=0$ — while for $g=1$ one has $\\chi=0$ with $l(0)=1=i(0)$, the first and simplest case of a divisor of degree zero that is special, where the Riemann inequality for $D=0$ is the strict bound $1\\ge0$ with gap $i(0)=1$. In genus zero the equality case $l(D)=\\deg_k(D)+1-g$ holds at $D=0$, and it fails at $D=0$ as soon as $g\\ge1$. *Scaffold repair, recorded for the owner.* The frozen scaffold cited the examples-page item `ex-cohomology-o-d-projective-line-all-d` for the projective-line values $h^0(\\mathcal O)=1$, $h^1(\\mathcal O)=0$. Examples-page items are leaves and cannot carry a load; the citation is replaced by the published A-page corollaries cor-h0-projective-space-o-d-homogeneous-polynomials and cor-top-cohomology-projective-space-o-d together with lem-projective-line-divisors-classified-by-degree, which give the same values at $d=0$ and $g(\\mathbb P^1_k)=0$. Every promised claim is preserved. The current thm-riemann-roch-as-l-minus-index supplies the Riemann-Roch identity, cor-dimension-complete-linear-system supplies the dimension formula for $|0|$, and def-complete-linear-system identifies the linear system. The current structure-sheaf and cohomology suppliers give the empty divisor and genus boundary values.",
+        "deps": [
+          "cor-dimension-complete-linear-system",
+          "cor-h0-projective-space-o-d-homogeneous-polynomials",
+          "cor-top-cohomology-projective-space-o-d",
+          "def-axiom-of-choice",
+          "def-complete-linear-system",
+          "def-divisor-smooth-proper-curve",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-genus-euler-characteristic-curve",
+          "def-index-speciality-divisor",
+          "def-little-l-divisor",
+          "def-nonspecial-divisor",
+          "lem-projective-line-divisors-classified-by-degree",
+          "thm-h0-structure-sheaf-proper-curve",
+          "thm-riemann-roch-as-l-minus-index"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves (Internet Archive copy), Chs. 8 and 6",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "The Stacks Project, Algebraic Curves (tag 0BRV)",
+              "url": "https://stacks.math.columbia.edu/download/curves.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 23
+      }
+    ]
+  }
+]

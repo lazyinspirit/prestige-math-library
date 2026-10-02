@@ -1,0 +1,68 @@
+{
+  "run": "frontier-37-owner-30",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "17",
+  "input_sha256": "e05cdf19d5e313eca8bcdfe4dd966cdf4b0c59c46fd851eb9dff4ee3cbf9156e",
+  "decisions": [
+    {
+      "id": "thm-max-three-sat-has-no-ptas-unless-p-equals-np",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "8a456de3ea08f01dd3e9e8c2e11c6514eb0fc10ab275b74adaee5e4289ef5d7b",
+      "outcome": "false_positive",
+      "reason": "The supplier Statement alone asserts only delta>0, but the rejected step explicitly cites its construction, not a rationality assertion in that Statement. In lem-pcp-verifier-reduces-to-gap-max-three-sat, proof 1.1 chooses rational s with s0<s<1 using its cited rational-density lemma; the PCP definition gives s0>=0. Proof 5.1 sets K=(2^q+1)max(2,q-2), an integer at least 4 for every nonnegative integer query bound q, including q=0. Proof 7.1 explicitly sets the fixed rational delta=(1-s)/K. Thus 0<delta<1 and epsilon=delta/2 is an admissible fixed PTAS tolerance. Writing delta=a/b with fixed positive integers, the threshold test is exactly b*s(x)>(b-a)*M, computable in polynomial time. The actual cited proof establishes the needed constants; there is no unproved strengthening or defective dependency citation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-max-three-sat-has-no-ptas-unless-p-equals-np",
+      "disposition": "unaffected",
+      "post_sha256": "8f110478badb5d25b8bd03448059492c5c5f5d171746df27de99dd653ddd80e5",
+      "review_context_sha256": "ac620a8f11236445b4601e32d4d355f5a6080a8993c1c0ee9920dbe077021671",
+      "reason": "The supplier's complete finite reduction proves the rational gap used by proof 1.1. Its M>=1 ensures strict acceptance on yes inputs: s(x)>=(1-epsilon)M>(1-delta)M, or s(x)>=rho*M>(1-delta)M. On no inputs every feasible assignment has s(x)<=OPT<=(1-delta)M, including equality and zero value. Fixing this one 3-SAT reduction and algorithm before composing each NP language's many-one reduction proves NP contained in P; the cited P-in-NP proposition gives equality. The AC premise remains explicitly inherited from the PCP route. The owning contract's quotations and derivations and the page's positive-scale and AC conventions are consistent. No item, contract, page, or verification metadata was changed; the guard equals the assignment's before hash.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "repair_notes": {
+    "scope": "Only the single assigned draft frontier theorem was adjudicated. No confirmed fatal or nonfatal defect and no potentially defective published consumer was discovered. There are no proposed canonical defect-ledger or published-ledger amendments.",
+    "claim_and_conventions": "Under the stated AC hypothesis, a Max-3SAT PTAS or a polynomial-time factor rho>1-delta for the fixed 3-SAT reduction decides every NP language. Max-3SAT values count satisfied clause occurrences; the reduction always has M>=1; acceptance is strict above the rational threshold and equality rejects.",
+    "local_evidence": [
+      "items/lem-pcp-verifier-reduces-to-gap-max-three-sat.md: complete Statement, Facts and Proof, especially proof 1.1 (rational soundness), 5.1 (integer K), 6.1-6.2 (gap), 7.1 (rational delta) and 8.1 (polynomial construction).",
+      "items/lem-rat-embeds-dense.md: Statement and complete proof, including proof 3.1 establishing a rational strictly between two reals.",
+      "items/def-pcp-class-with-completeness-and-soundness.md: Definition requires nonnegative soundness and natural-number resource bounds.",
+      "items/def-ptas-fptas-and-apx.md and items/def-optimization-problem-and-approximation-ratio.md: fixed-tolerance deterministic polynomial time and feasible-solution value guarantees.",
+      "items/def-gap-problem-and-gap-preserving-reduction.md: positive scale and Max-3SAT clause-count optimum.",
+      "items/thm-three-sat-is-np-complete.md, items/def-np-hard-and-np-complete.md and items/def-polynomial-time-many-one-reduction.md: NP-complete anchor and deterministic polynomial composition.",
+      "items/def-p.md, items/def-np-by-verifiers.md and items/prop-p-is-contained-in-np-intersection-conp.md: class conventions and P contained in NP.",
+      "items/thm-pcp-theorem-np-equals-pcp-log-n-o-one.md: Statement supplies the binary nonadaptive perfect-completeness verifier under AC; items/def-axiom-of-choice.md records that hypothesis.",
+      "research/frontier-37-owner-30-batch-17.proof-contracts.json: assigned theorem's complete citations, derivations and boundary checks; library/computability-theory/approximation-algorithms-and-gap-reductions.md: owning page interface."
+    ],
+    "source_consultation": "The decision uses familiar rational arithmetic, finite PCP-to-formula reasoning, and polynomial-time reduction composition, checked against the local arguments above. No external source was consulted or claimed to have been read.",
+    "focused_checks": [
+      {
+        "command": "node tools/step7-workflow.mjs review-contexts --run frontier-37-owner-30 --items thm-max-three-sat-has-no-ptas-unless-p-equals-np",
+        "exit_code": 0,
+        "result": "Returned post_sha256 and review_context_sha256 copied verbatim into the review immediately after the mathematical review; no subsequent supplier edit occurred."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-max-three-sat-has-no-ptas-unless-p-equals-np.md",
+        "exit_code": 0,
+        "result": "PASS (direct); 1 checked, 0 failing."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-max-three-sat-has-no-ptas-unless-p-equals-np.md",
+        "exit_code": 0,
+        "result": "OK, 1 file; renderer YAML and all mathematical expressions parse; no delimiter or math-wikilink errors."
+      }
+    ],
+    "interface_and_followup": "The original Statement is unchanged byte-for-byte and no prerequisite was created, so no direct-consumer propagation is triggered. No unresolved mathematical obligation remains for this assignment. The controller may collect this evidence; no judge, gate, certificate, or round transition was launched."
+  }
+}

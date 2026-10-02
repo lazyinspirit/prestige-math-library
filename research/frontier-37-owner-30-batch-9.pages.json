@@ -1,0 +1,1185 @@
+[
+  {
+    "order": 458.009,
+    "id": "poisson-problems-and-interior-harmonic-estimates",
+    "kind": "A",
+    "category": "pde",
+    "title": "Poisson Problems and Interior Harmonic Estimates",
+    "companion": "poisson-problems-and-interior-harmonic-estimates-examples",
+    "requires": [
+      "fundamental-solutions-newtonian-potentials-and-green-functions",
+      "analytic-majorants-and-the-cauchy-kovalevskaya-theorem",
+      "harmonic-functions-and-the-poisson-integral"
+    ],
+    "items": [
+      {
+        "id": "lem-kelvin-inversion-and-the-laplace-operator",
+        "kind": "lemma",
+        "title": "Kelvin inversion transforms harmonic functions",
+        "statement": "Let n≥3, R>0, and a∈ℝⁿ. Write I_R(x)=a+R²(x−a)/|x−a|² for x≠a. If u∈C²(U) on an open set U avoiding a, define K_Ru(x)=(R/|x−a|)^{n−2}u(I_R(x)) on I_R^{-1}(U). Then Δ(K_Ru)(x)=(R/|x−a|)^{n+2}(Δu)(I_R(x)). In particular inversion preserves harmonicity on the punctured domains on which both sides are defined.",
+        "deps": [
+          "def-directional-and-partial-derivatives",
+          "def-laplacian-of-a-c2-function",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-real-power-continuity-and-derivatives"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.8, printed pp. 44–49"
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4, printed pp. 28–34; §§8.1–8.3, pp. 139–146"
+            },
+            {
+              "title": "Sheldon Axler, Paul Bourdon and Wade Ramey, Harmonic Function Theory, 2nd ed. (2001)",
+              "url": "https://www.axler.net/HFT.pdf",
+              "locator": "Chapter 4, Proposition 4.6 and Theorem 4.7, printed pp. 62–63"
+            }
+          ]
+        },
+        "strategy": "Translate a to zero, set r=|x| and z=R²x/r², and calculate ∂_i z_j and Δz_j. Apply the product and chain rules to r^{2−n}u(z): all first-derivative terms cancel, leaving R^{n+2}r^{-n-2}(Δu)(z). Restoring the factor R^{n−2} gives the stated identity. Every evaluation excludes r=0; no measure or choice assumption is used.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-green-function-for-a-ball-in-rn",
+        "kind": "theorem",
+        "title": "Dirichlet Green function of a Euclidean ball",
+        "statement": "Assume Countable Choice and n≥3. For B_R(a), put y*=a+R²(y−a)/|y−a|² when y≠a. With −ΔΦ=δ₀, G(x,y)=Φ(x−y)−(R/|y−a|)^{n−2}Φ(x−y*) for y≠a, and G(x,a)=Φ(x−a)−Φ(R). For x,y∈B_R(a), x≠y, this is the positive, symmetric Dirichlet Green function: it is harmonic in x off y, has the correct point singularity, vanishes continuously on the boundary, and its corrector is C² on the closed ball.",
+        "deps": [
+          "def-countable-choice",
+          "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+          "def-dirichlet-green-function-for-minus-laplacian",
+          "lem-laplace-fundamental-solution-is-harmonic-off-its-pole",
+          "lem-kelvin-inversion-and-the-laplace-operator",
+          "thm-minus-laplacian-of-the-fundamental-solution-is-dirac",
+          "thm-green-function-symmetry"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.8, printed pp. 44–49"
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4, printed pp. 28–34; §§8.1–8.3, pp. 139–146"
+            }
+          ]
+        },
+        "strategy": "For y≠a the inverse pole y* is outside the closed ball, so its fundamental kernel is smooth and harmonic there; alternatively use Kelvin inversion. The identity |y−a|²|x−y*|²−R²|x−y|²=(R²−|x−a|²)(R²−|y−a|²) gives equality of the two terms on the sphere and strict positivity inside. Handle y=a by the displayed constant limit, rather than evaluating y*. The point-source distribution identity comes solely from Φ. The corrector is C² on the closure, so the published Green definition and symmetry theorem apply with exactly their bounded-domain and Countable Choice hypotheses.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-poisson-kernel-for-a-ball-in-rn",
+        "kind": "theorem",
+        "title": "Poisson kernel of a Euclidean ball",
+        "statement": "Assume Countable Choice and n≥3. For x∈B_R(a), y∈∂B_R(a), the negative outward boundary-slot normal derivative of the ball Green function is P_{R,a}(x,y)=(R²−|x−a|²)/(R ω_{n−1}|x−y|ⁿ). The formula defines a continuous function of (x,y) on B_R(a)×∂B_R(a).",
+        "deps": [
+          "def-countable-choice",
+          "thm-green-function-for-a-ball-in-rn",
+          "def-poisson-kernel-from-a-green-function"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.8, printed pp. 47–48"
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4.1, printed pp. 33–34"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A: Partial Differential Equations (2023)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§4.4, printed pp. 71–72, ball Poisson kernel computation and Theorem 4.24"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.6, printed p. 133, formula (5.61)"
+            }
+          ]
+        },
+        "strategy": "Differentiate the symmetric image formula in the boundary variable and dot with ν_y=(y−a)/R. On |y−a|=R the inversion-distance identity cancels the radial terms and gives the stated sign and coefficient. The resulting explicit expression has a positive denominator and is continuous for interior x and boundary y. Positivity and unit mass are recorded and proved separately in [[lem-ball-poisson-kernel-is-positive-and-normalised]].",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-ball-poisson-kernel-is-positive-and-normalised",
+        "kind": "lemma",
+        "title": "The ball Poisson kernel is positive and has unit mass",
+        "statement": "Assume Countable Choice and n≥3. For every ball B_R(a), interior point x and boundary point y, P_{R,a}(x,y)>0, and the kernel has total surface mass one: ∫_{∂B_R(a)}P_{R,a}(x,y)dS_y=1.",
+        "deps": [
+          "def-countable-choice",
+          "thm-poisson-kernel-for-a-ball-in-rn",
+          "thm-green-representation-formula",
+          "lem-sphere-and-ball-measures-scale"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.8, printed pp. 48–50; positivity and unit mass are used in the alternative boundary-attainment proof"
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4.1, printed pp. 33–34, Theorem 2.13"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A: Partial Differential Equations (2023)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§4.4, printed pp. 71–72, Theorem 4.24"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.4, printed pp. 126–127, Lemma 5.23; §5.6, printed p. 133"
+            }
+          ]
+        },
+        "strategy": "Strict positivity follows directly from the formula because R²−|x−a|²>0 and the denominator is positive. For normalization, apply the published Green representation formula on B_R(a) to the constant harmonic function 1. The volume term vanishes, while the boundary term is ∫P_{R,a}(x,y)dS_y. The ball Green function and its boundary-slot derivative have the hypotheses required by that formula; finite sphere measure and the positive distance from x to the sphere make the integral finite. This argument uses Green representation, not the ball Dirichlet theorem, so it is independent of the boundary-convergence claim.",
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-poisson-kernel-boundary-cap-and-complement-estimate",
+        "kind": "lemma",
+        "title": "Cap and complement estimate for the ball Poisson integral",
+        "statement": "Assume Countable Choice and n≥3. Let g∈C(∂B_R(a);ℂ), p∈∂B_R(a), δ>0, and x∈B_R(a) satisfy |x−p|<δ/2. Write U_g(x)=∫_{∂B_R(a)}P_{R,a}(x,y)g(y)dS_y and ω_{g,p}(δ)=sup{|g(y)−g(p)|:y∈∂B_R(a), |y−p|<δ}. Then |U_g(x)−g(p)|≤ω_{g,p}(δ)+2^{n+1}R^{n−2}δ^{−n}∥g∥_∞(R²−|x−a|²). In particular, the integral tends to g(p) as x→p from inside the ball.",
+        "deps": [
+          "def-countable-choice",
+          "thm-poisson-kernel-for-a-ball-in-rn",
+          "lem-ball-poisson-kernel-is-positive-and-normalised",
+          "lem-sphere-and-ball-measures-scale",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "thm-extreme-value-metric"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.8, printed pp. 49–50, alternative proof of boundary attainment by cap/complement splitting"
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4.1, printed pp. 33–34, Theorem 2.13 states pointwise boundary recovery"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A: Partial Differential Equations (2023)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§4.4, printed p. 72, Theorem 4.24 states boundary recovery for ball data"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.6, printed pp. 133–134, Theorem 5.25 proof"
+            }
+          ]
+        },
+        "strategy": "The sphere is compact by the published Euclidean sphere compactness corollary, so the extreme-value theorem makes ∥g∥∞ finite. On the cap |y−p|<δ, positivity and unit mass bound the integral of |g(y)−g(p)| by ω_{g,p}(δ). On the complement, |x−y|≥|y−p|−|x−p|>δ/2, so the explicit kernel gives P_{R,a}(x,y)≤(R²−|x−a|²)2ⁿ/(Rω_{n−1}δⁿ). Multiplying by the sphere area ω_{n−1}R^{n−1} bounds the complementary mass by 2ⁿR^{n−2}δ⁻ⁿ(R²−|x−a|²). Since |g(y)−g(p)|≤2∥g∥∞ there, the displayed estimate follows. For a boundary limit, first choose δ so continuity makes the cap modulus small, then let x→p to send the complementary term to zero. The proof uses normalization from the preceding lemma and does not invoke the Dirichlet solution theorem.",
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-dirichlet-problem-on-a-ball-by-the-poisson-integral",
+        "kind": "theorem",
+        "title": "Continuous Dirichlet problem on a ball",
+        "statement": "Assume Countable Choice and n≥3. For every real or complex g∈C(∂B_R(a)), U_g(x)=∫_{∂B_R(a)}P_{R,a}(x,y)g(y)dS_y is absolutely convergent and smooth harmonic on B_R(a), extends continuously to the closed ball with boundary trace g, and is the unique function in C²(B_R(a))∩C(closure B_R(a)) with those properties.",
+        "deps": [
+          "def-countable-choice",
+          "thm-poisson-kernel-for-a-ball-in-rn",
+          "lem-ball-poisson-kernel-is-positive-and-normalised",
+          "lem-poisson-kernel-boundary-cap-and-complement-estimate",
+          "thm-weak-maximum-principle-for-the-laplacian",
+          "thm-dominated-convergence",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.8, printed pp. 48–50, Main Theorem and alternative cap/complement proof"
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4.1, printed pp. 33–34, Theorem 2.13"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A: Partial Differential Equations (2023)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§4.4, printed pp. 71–72, Theorem 4.24"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.6, printed pp. 133–134, Theorem 5.25"
+            }
+          ]
+        },
+        "strategy": "On each compact interior set the sphere is separated from x, so every x-derivative of P has an integrable uniform majorant; differentiation under the integral and the direct identity Δ_x[(R²−|x−a|²)|x−y|^{-n}]=0 for |y−a|=R give smooth harmonicity. Absolute convergence follows from continuity of g, the bounded kernel for fixed interior x, and finite sphere measure. The boundary trace follows from the cap/complement estimate in [[lem-poisson-kernel-boundary-cap-and-complement-estimate]], whose proof uses positivity and unit mass from [[lem-ball-poisson-kernel-is-positive-and-normalised]]. Apply the weak maximum principle to real and imaginary parts of the difference for uniqueness. The cap estimate gives the limit for every approach to p, not only radial limits; this theorem has no dependency on the later uniform-radial corollary.",
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-uniform-boundary-convergence-of-ball-poisson-integrals",
+        "kind": "corollary",
+        "title": "Ball Poisson integrals converge uniformly along radial boundary approaches",
+        "statement": "Assume Countable Choice and n≥3. For g∈C(∂B_R(a);ℂ), let U_g be its ball Poisson integral. Then sup_{θ∈S^{n−1}}|U_g(a+rθ)−g(a+Rθ)|→0 as r↑R.",
+        "deps": [
+          "def-countable-choice",
+          "thm-dirichlet-problem-on-a-ball-by-the-poisson-integral",
+          "lem-poisson-kernel-boundary-cap-and-complement-estimate",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "thm-heine-cantor-metric"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.8, printed pp. 49–50, pointwise cap/complement estimate"
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4.1, printed pp. 33–34, Theorem 2.13"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A: Partial Differential Equations (2023)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§4.4, printed pp. 71–72, Theorem 4.24"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.6, printed pp. 133–134, Theorem 5.25 cap estimate; radial uniformity is the compact-sphere consequence"
+            }
+          ]
+        },
+        "strategy": "The sphere ∂B_R(a) is compact by the published Euclidean sphere compactness corollary, so Heine–Cantor gives a uniform modulus of continuity ω_g. For p=a+Rθ and x=a+rθ, use the cap/complement estimate once R−r<δ/2. Its cap term is at most ω_g(δ), independent of θ; its complement term is at most 2^{n+1}R^{n−2}δ^{−n}(R²−r²), also independent of θ. Choose δ to make the first term small, then choose r close to R to make the second small. This proves the supremum over all θ tends to zero. The estimate itself does not depend on the Dirichlet theorem, so placing this corollary after that theorem creates no cycle.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-reflection-green-function-for-the-half-space",
+        "kind": "lemma",
+        "title": "Reflected Green kernel for the upper half-space",
+        "statement": "Assume Countable Choice and n≥3. For H={x∈ℝⁿ:x_n>0}, y∈H and y†=(y',−y_n), put G_H(x,y)=Φ(x−y)−Φ(x−y†). This is symmetric, strictly positive for distinct x,y∈H, smooth and harmonic in x off y, has −Δ_xG_H(·,y)=δ_y distributionally in H, and has zero continuous boundary trace. It is a Green kernel for this unbounded half-space; the published definition for bounded domains is not being applied to H.",
+        "deps": [
+          "def-countable-choice",
+          "def-dirac-delta-and-its-derivatives",
+          "def-distributional-harmonicity-and-poisson-equation-in-rn",
+          "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+          "lem-laplace-fundamental-kernel-is-locally-integrable",
+          "lem-laplace-fundamental-solution-is-harmonic-off-its-pole",
+          "thm-minus-laplacian-of-the-fundamental-solution-is-dirac"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.4, printed pp. 28–32, reflection of the fundamental solution for the half-space"
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4, printed pp. 28–34, Poisson kernel on the half-space"
+            }
+          ]
+        },
+        "strategy": "Reflect the pole across the plane. The reflected point is outside H; on the plane the two distances agree, so the difference vanishes. For x,y∈H, |x−y†|>|x−y|, and the positive power kernel decreases radially, proving positivity. Symmetry follows by the two distance identities. The reflected term is harmonic and has no interior distributional mass; the published fundamental-solution identity gives the δ_y term. The proof uses the normalized Φ and hence its Countable Choice convention, while no bounded-domain Green theorem is invoked.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-poisson-kernel-and-bounded-dirichlet-problem-on-the-half-space",
+        "kind": "theorem",
+        "title": "Poisson kernel and bounded Dirichlet problem on a half-space",
+        "statement": "Assume Countable Choice and n≥3. For x=(x',t)∈H, z∈ℝ^{n−1}, P_H((x',t),z)=2t/[ω_{n−1}(|x'−z|²+t²)^{n/2}] is the negative outward boundary derivative of G_H, is positive, and integrates to 1 over ℝ^{n−1}. For bounded continuous real or complex g, U_g(x)=∫P_H(x,z)g(z)dz is bounded smooth harmonic on H and tends to g(z₀) as x→(z₀,0) from H. It is the unique bounded harmonic function continuous on the closed half-space with that trace; boundedness is the growth condition at infinity.",
+        "deps": [
+          "def-countable-choice",
+          "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+          "def-laplacian-of-a-c2-function",
+          "def-real-beta-integral",
+          "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "lem-laplace-fundamental-solution-is-harmonic-off-its-pole",
+          "lem-reflection-green-function-for-the-half-space",
+          "lem-sphere-and-ball-measures-scale",
+          "cor-real-gamma-one-half-is-root-pi",
+          "cor-volume-of-the-unit-n-ball",
+          "thm-algebra-of-derivatives",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-dirichlet-problem-on-a-ball-by-the-poisson-integral",
+          "thm-dominated-convergence",
+          "thm-liouville-theorem-for-bounded-harmonic-functions",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-real-beta-gamma-identity",
+          "thm-real-gamma-functional-equation",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-weak-maximum-principle-for-the-laplacian"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4, printed pp. 28–34, Poisson kernel on the half-space and its bounded Dirichlet problem"
+            },
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.4, printed pp. 28–32, reflection construction and half-space Poisson kernel"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.1, printed p. 111, Lemma 5.8 and Theorem 5.9 half-space case"
+            }
+          ]
+        },
+        "strategy": "Differentiate the reflected Green expression in its boundary slot; the outward normal is −e_n, giving the factor 2. Substitute z=x'+tρ in the integral and use polar coordinates in ℝ^{n−1}; the radial beta integral and sphere-volume formulas evaluate it as ω_{n−1}/2, proving unit mass. The integrable tail gives absolute convergence and compact-interior derivative majorants, hence smooth harmonicity. For boundary convergence split into |z−z₀|<δ and its complement; for |x'−z₀|<δ/2, polar integration of t|x'−z|^{-n} bounds the complementary mass by O(t/δ). For uniqueness, let w be the bounded difference with zero plane trace. Near each plane point prescribe on a full small sphere the continuous odd reflection of w's upper-sphere data; the ball Poisson theorem gives an odd harmonic replacement. It agrees with w on the upper half-ball by the weak maximum principle, so the odd reflection of w is harmonic across the whole plane. It is bounded and entire; Liouville makes it zero. No decay of U_g as t→∞ is claimed for arbitrary bounded g (constants are a counterexample).",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-interior-derivative-estimates-for-harmonic-functions",
+        "kind": "theorem",
+        "title": "Interior L-one derivative estimates for harmonic functions",
+        "statement": "Assume Countable Choice and n≥2. If u is real or complex harmonic on an open Ω, closure B_r(x)⊂Ω, and α is a multi-index, then |D^αu(x)|≤C_{n,α} r^{-n−|α|}∫_{B_r(x)}|u(y)|dy. The constant is independent of u, x, r and Ω.",
+        "deps": [
+          "def-countable-choice",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "cor-ball-mean-value-property-for-harmonic-functions",
+          "lem-sphere-and-ball-measures-scale",
+          "thm-continuous-mean-value-functions-are-harmonic",
+          "lem-smooth-sphere-data-have-a-harmonic-replacement",
+          "thm-dirichlet-problem-on-a-ball-by-the-poisson-integral",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.2, printed pp. 23–25, Theorems 2.7 and 2.9"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A: Partial Differential Equations (2023)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§4.2, printed pp. 60–61, Theorem 4.4"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.1, printed p. 111, Lemma 5.8"
+            }
+          ]
+        },
+        "strategy": "For n≥3 apply the owned ball Poisson formula on B_{r/2}(x). In n=2 the ball mean and converse theorem first make the initially C² harmonic u smooth; then apply the published real-valued smooth-sphere harmonic replacement separately to the real and imaginary parts; it has the same kernel formula. For any y on that sphere the ball B_{r/4}(y) lies in B_r(x); the ball mean formula and the triangle inequality give |u(y)|≤C_nr^{-n}∥u∥_{L¹(B_r)}. Differentiate the Poisson formula |α| times at x. Because the boundary sphere is separated from x, derivatives pass under the finite surface integral, and scaling its explicit kernel bounds each derivative by C_{n,α}r^{-(n−1)-|α|}. Multiply by sphere area O(r^{n−1}) and the boundary bound. All integrations use the declared Countable Choice interface.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-harmonic-cauchy-estimates-in-supremum-norm",
+        "kind": "corollary",
+        "title": "Scale-invariant supremum Cauchy estimates for harmonic functions",
+        "statement": "Assume Countable Choice and n≥2. Under the same compact-ball hypotheses, every harmonic u satisfies |D^αu(x)|≤C'_{n,α}r^{-|α|} sup_{B_r(x)}|u| for every multi-index α, with C'_{n,α} independent of the ball and function.",
+        "deps": [
+          "def-countable-choice",
+          "thm-interior-derivative-estimates-for-harmonic-functions",
+          "lem-sphere-and-ball-measures-scale"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.2, printed pp. 23–25, Theorems 2.7 and 2.9"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A: Partial Differential Equations (2023)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§4.2, printed pp. 60–61, Theorem 4.4"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.1, printed p. 111, Lemma 5.8"
+            }
+          ]
+        },
+        "strategy": "Bound ∫_{B_r}|u| by |B_r|sup_{B_r}|u|, use |B_r|=(ω_{n−1}/n)r^n, and absorb the dimension factor into C'_{n,α}. If the supremum is infinite, the bound is vacuous; for local analytic use choose a compactly contained larger ball where it is finite.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-interior-oscillation-controls-harmonic-gradient",
+        "kind": "lemma",
+        "title": "Interior oscillation controls the harmonic gradient",
+        "statement": "Assume Countable Choice and n≥2. If u is real or complex harmonic on an open set Ω and the closed ball B̄_r(x) lies in Ω, then |Du(x)|≤C_n r^{−1} osc_{B_r(x)}u, where osc_E u=sup_{y,z∈E}|u(y)−u(z)|.",
+        "deps": [
+          "def-countable-choice",
+          "cor-harmonic-cauchy-estimates-in-supremum-norm"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.2, printed p. 23, Theorem 2.7 first-derivative estimate"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A: Partial Differential Equations (2023)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§4.2, printed pp. 60–61, Theorem 4.4 derivative estimates"
+            },
+            {
+              "title": "Leon Simon, Lectures on PDE (2015 rough draft)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 4, Problems 4.4–4.5, printed p. 39, interior derivative estimate"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.1, printed p. 111, Lemma 5.8"
+            }
+          ]
+        },
+        "strategy": "Set v=u−u(x), which is harmonic and has the same gradient as u. Since x∈B_r(x), sup_{B_r(x)}|v|≤osc_{B_r(x)}u. Apply the first-order case of the published supremum Cauchy estimate to v on B_r(x). The derivative of the subtracted constant is zero; the dimension-dependent component estimates combine into C_n.",
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "cor-entire-harmonic-function-of-sublinear-growth-is-constant",
+        "kind": "corollary",
+        "title": "Entire harmonic functions of sublinear growth are constant",
+        "statement": "Assume Countable Choice and n≥2. Let u:ℝⁿ→ℝ or ℂ be harmonic. If lim_{R→∞}R^{−1}sup_{B_R(0)}|u|=0, then u is constant.",
+        "deps": [
+          "def-countable-choice",
+          "cor-harmonic-cauchy-estimates-in-supremum-norm",
+          "cor-zero-derivative-implies-constant",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leon Simon, Lectures on PDE (2015 rough draft)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 4, printed pp. 36–39, Problem 4.5 polynomial-growth consequences of the derivative estimate"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.2, printed pp. 23–25, interior derivative estimates"
+            }
+          ]
+        },
+        "strategy": "Fix x∈ℝⁿ and R>|x|. The ball B_{R−|x|}(x) is contained in B_R(0), so the first-order supremum Cauchy estimate yields |Du(x)|≤C_n(R−|x|)⁻¹sup_{B_R(0)}|u|. The right-hand side tends to zero because R/(R−|x|)→1 and the assumed growth is o(R). Thus Du(x)=0 for every x. Integrating along each line segment shows u is constant. No bounded-Liouville theorem is used as a substitute for the stated sublinear growth argument.",
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-locally-uniform-harmonic-convergence-is-c-infinity-local",
+        "kind": "theorem",
+        "title": "Locally uniform convergence of harmonic functions is smooth on compact subsets",
+        "statement": "Assume Countable Choice and n≥2. Let Ω⊂ℝⁿ be open and u_j:Ω→ℝ or ℂ be harmonic with u_j→u locally uniformly. Then u is smooth and harmonic, and for every compact K⊂Ω and multi-index α, sup_{x∈K}|D^αu_j(x)−D^αu(x)|→0.",
+        "deps": [
+          "def-countable-choice",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic",
+          "cor-harmonic-cauchy-estimates-in-supremum-norm"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.2, printed pp. 23–24, Theorems 2.7 and 2.9 derivative estimates"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A: Partial Differential Equations (2023)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§4.2, printed pp. 60–61, Theorem 4.4 derivative estimates"
+            },
+            {
+              "title": "Leon Simon, Lectures on PDE (2015 rough draft)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 4, Problem 4.4, printed p. 39, interior derivative estimate"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.1, printed p. 111, Lemma 5.8 derivative estimate"
+            }
+          ]
+        },
+        "strategy": "The published compact-limit theorem first gives that u is harmonic, so D^αu exists. Fix compact K⊂Ω and choose ρ>0 such that the closed ρ-neighborhood K_ρ lies in Ω; it is compact. Local uniform convergence gives ε_j=sup_{K_ρ}|u_j−u|→0. For x∈K, apply the supremum Cauchy estimate of order |α| to the harmonic difference u_j−u on a ball of fixed radius smaller than ρ centered at x. The result is |D^αu_j(x)−D^αu(x)|≤C_{n,α,ρ}ε_j, uniformly in x∈K. This proves convergence of every derivative without differentiating the original sequence term by term. For complex-valued functions, apply the real-valued compact-limit theorem to the real and imaginary parts and combine their derivative bounds.",
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-harmonic-functions-are-real-analytic",
+        "kind": "theorem",
+        "title": "Harmonic functions are real analytic in every dimension",
+        "statement": "Assume Countable Choice and n≥2. Every real or complex harmonic u on an open Ω⊂ℝⁿ is real analytic: for each a∈Ω some radius ρ>0 satisfies u(a+h)=Σ_{α∈ℕⁿ} D^αu(a)h^α/α! with absolute convergence whenever |h|<ρ. In particular the factorial derivative bound |D^αu(a)|≤M C_n^{|α|}|α|! r^{-|α|} holds when closure B_{2r}(a)⊂Ω and M=sup_{B_{2r}(a)}|u|.",
+        "deps": [
+          "cor-ball-mean-value-property-for-harmonic-functions",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-countable-choice",
+          "def-multivariable-power-series",
+          "def-real-analytic-germ-in-several-variables",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "lem-ball-poisson-kernel-is-positive-and-normalised",
+          "lem-smooth-sphere-data-have-a-harmonic-replacement",
+          "lem-sphere-and-ball-measures-scale",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-continuous-mean-value-functions-are-harmonic",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-dirichlet-problem-on-a-ball-by-the-poisson-integral",
+          "thm-dominated-convergence",
+          "thm-multinomial-theorem",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "thm-extreme-value-metric",
+          "thm-poisson-kernel-for-a-ball-in-rn",
+          "thm-real-power-continuity-and-derivatives"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.2, printed pp. 23–25, analyticity of harmonic functions and the factorial derivative bound"
+            },
+            {
+              "title": "Leon Simon, Lectures on PDE (2015 rough draft)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 4, printed pp. 36–39, Problem 4.5 polynomial-growth consequence"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A: Partial Differential Equations (2023)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§4.4, printed pp. 71–72, analyticity from the Poisson integral"
+            }
+          ]
+        },
+        "strategy": "Hunter's induction supplies the quantitative step missing from a generic C_{n,α}: apply the first-derivative estimate to D^βu on a ball of radius (1−θ)r, and apply the k-th estimate to D^βu on radius θr around each point there. With θ=k/(k+1), 1/[θ^k(1−θ)]≤e(k+1), so induction gives ≤n^k e^{k−1}k! M/r^k. Apply the published real-valued multivariable Taylor formula separately to the real and imaginary parts at a, with remainder evaluated along the segment to a+h; all radius-r balls about segment points lie in B_{2r}(a). Sum the order-k remainder using Σ_{|α|=k}1/α!=n^k/k!. It tends to zero for |h|<r/(en²) and also bounds the absolute Taylor series. The published derivative-harmonicity supplier makes each induction application legitimate. As an inline growth consequence, if an entire harmonic u has sup_{B_R}|u|≤C R^k for all sufficiently large R and an integer k≥0, the order-(k+1) derivative estimate on arbitrarily large balls forces D^{k+1}u=0 everywhere; Taylor’s formula then makes u a polynomial of degree at most k. In particular, subcubic growth forces a quadratic polynomial. This is the derivative-estimate argument in Simon’s Exercise 4.5, stated with the growth hypothesis needed for the bound.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-unique-continuation-for-harmonic-functions",
+        "kind": "corollary",
+        "title": "Unique continuation from an open set for harmonic functions",
+        "statement": "Assume Countable Choice and n≥2. If Ω⊂ℝⁿ is connected and open and a real or complex harmonic u on Ω vanishes on a nonempty open subset, then u vanishes identically on Ω.",
+        "deps": [
+          "def-countable-choice",
+          "def-connected-space",
+          "thm-harmonic-functions-are-real-analytic",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.2, printed pp. 23–25"
+            }
+          ]
+        },
+        "strategy": "Let F be the points at which every multi-index derivative of u is zero. The given open zero set lies in F. Continuity of every derivative makes F closed relative to Ω. At a point of F, the owned convergent Taylor representation is identically zero on a smaller ball, and all derivatives there vanish, so F is open. Connectedness implies F=Ω. Apply the argument to real and imaginary parts if needed.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "def-local-holder-and-c-two-alpha-norms-on-euclidean-balls",
+        "kind": "definition",
+        "title": "Local Hölder and scaled C-two-alpha norms on balls",
+        "statement": "Let 0<α<1, B_r(a)⊂ℝⁿ, and f:B_r(a)→ℝ or ℂ. Set [f]_{0,α;B_r}=sup_{x≠y∈B_r}|f(x)−f(y)|/|x−y|^α and ∥f∥^*_{0,α;B_r}=∥f∥_{∞;B_r}+r^α[f]_{0,α;B_r}. For u∈C²(B_r), set ∥u∥^*_{2,α;B_r}=Σ_{j=0}² r^j sup_{B_r}|D^j u|+r^{2+α}[D²u]_{0,α;B_r}, taking a maximum over the finitely many order-j partials. A norm can be +∞; C^{2,α}(B_r) means the displayed quantity is finite. These local ball norms do not define a global boundary Schauder scale.",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-euclidean-spheres-and-closed-balls"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4, printed pp. 28–34; §§8.1–8.3, pp. 139–146"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-interior-estimate-for-poisson-equation-with-holder-data",
+        "kind": "theorem",
+        "title": "Interior C-two-alpha estimate for Poisson's equation",
+        "statement": "Assume Countable Choice, n≥2 and 0<α<1. Let u∈C²(B_r(a))∩L∞(B_r(a)) and f∈C^{0,α}(B_r(a)) with finite Hölder norm satisfy −Δu=f pointwise. Then u∈C^{2,α}(B_{r/2}(a)) and ∥u∥^*_{2,α;B_{r/2}(a)}≤C_{n,α}(∥u∥_{∞;B_r(a)}+r²∥f∥_{∞;B_r(a)}+r^{2+α}[f]_{0,α;B_r(a)}). The constant does not depend on r, a, u or f.",
+        "deps": [
+          "def-countable-choice",
+          "def-local-holder-and-c-two-alpha-norms-on-euclidean-balls",
+          "thm-newtonian-potential-for-holder-data-is-classical",
+          "def-newtonian-potential",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-interior-derivative-estimates-for-harmonic-functions"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4, printed pp. 28–34; §§8.1–8.3, pp. 139–146"
+            }
+          ]
+        },
+        "strategy": "Rescale first to B_1: v(z)=u(a+rz) and F(z)=r²f(a+rz), so −Δv=F. Choose a fixed smooth cutoff η supported in B_{7/8}, η=1 on B_{3/4}; extend ηF by zero to a compactly supported global C^{0,α} function with norm ≤C(∥F∥∞+[F]α). Apply the published Newtonian theorem to w=N(ηF), obtaining −Δw=ηF and a C^{2,α} bound on B_{3/4}; its singular Hessian formula subtracts F(x), only the zeroth-order value. On a fixed unit ball the kernel is integrable, so ∥w∥∞≤C∥F∥∞. Thus h=v−w is harmonic on B_{3/4}, with supremum ≤∥v∥∞+C∥F∥∞. The owned derivative estimate for orders up to three bounds h's C^{2,α} norm on B_{1/2} (third derivatives give the Hölder seminorm). Combine h and w and undo scaling. Scaling before using the logarithmic n=2 potential avoids a spurious log r term. No differentiability of f or first-order Taylor subtraction is asserted.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-interior-laplacian-gradient-estimate",
+        "kind": "corollary",
+        "title": "Interior gradient bound for Poisson solutions",
+        "statement": "Assume Countable Choice, n≥2 and the regularity hypotheses of the preceding Poisson estimate. If −Δu=f on B_r(a), then ∥Du∥_{∞;B_{r/2}(a)}≤C_n(r^{-1}∥u∥_{∞;B_r(a)}+r∥f∥_{∞;B_r(a)}). No Hölder seminorm of f occurs on the right.",
+        "deps": [
+          "def-countable-choice",
+          "thm-interior-estimate-for-poisson-equation-with-holder-data",
+          "thm-interior-derivative-estimates-for-harmonic-functions",
+          "thm-newtonian-potential-for-holder-data-is-classical",
+          "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.2, printed pp. 23–25, Theorems 2.7 and 2.9"
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A: Partial Differential Equations (2023)",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "§4.2, printed pp. 60–61, Theorem 4.4"
+            }
+          ]
+        },
+        "strategy": "For each point in B_{r/2}, work on a radius-comparable ball inside B_r and choose a cutoff of f supported there. The potential proof gives Dw(x)=∫DΦ(x−y)η(y)f(y)dy; |DΦ(z)|≤C_n|z|^{1−n}, whose integral over a radius-r support is O(r), so |Dw|≤Cr∥f∥∞. Likewise |w|≤Cr²∥f∥∞ after centering/scaling; for n=2 subtract the harmless constant in Φ before estimating, since gradients are unchanged. The remainder h=u−w is harmonic on an inner ball and the first-order owned estimate gives |Dh|≤Cr^{-1}(∥u∥∞+r²∥f∥∞). Cover B_{r/2} by such pointwise constructions. The C²,α theorem ensures all derivatives in the statement are classical, but the quantitative gradient argument uses only ∥f∥∞.",
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "rem-two-dimensional-poisson-disc-theory-is-cited-not-repeated",
+        "kind": "remark",
+        "title": "Dimension split and the separate Poisson-disc theory",
+        "statement": "The Kelvin/image construction, ball and half-space kernels, and their Dirichlet statements above are stated for n≥3. The logarithmic n=2 ball and half-plane Poisson theory is developed in complex analysis and is not repeated here. The interior L¹ derivative, analyticity, unique-continuation, and Poisson C²,α estimates above include n=2 through the mean-value and logarithmic-potential arguments. This dimension split is about the scope of these items; it does not claim that the n=2 kernels fail to exist.",
+        "deps": [
+          "thm-green-function-for-a-ball-in-rn",
+          "thm-harmonic-functions-are-real-analytic",
+          "thm-interior-derivative-estimates-for-harmonic-functions",
+          "thm-interior-estimate-for-poisson-equation-with-holder-data",
+          "lem-smooth-sphere-data-have-a-harmonic-replacement",
+          "thm-poisson-integral-solves-the-disc-dirichlet-problem",
+          "thm-poisson-kernel-and-bounded-dirichlet-problem-on-the-half-space",
+          "thm-poisson-kernel-for-a-ball-in-rn"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.2, printed pp. 23–25, derivative estimates and analyticity; §2.6, printed p. 33, fundamental solution"
+            },
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.8, printed pp. 44–49, ball Green function and image construction"
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4, printed pp. 28–34, and §§8.1–8.3, printed pp. 139–146, local Schauder theory"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-euclidean-balls-are-bounded-c-one-domains",
+        "kind": "lemma",
+        "title": "Euclidean balls are bounded C-one domains with radial outward normal",
+        "statement": "For n≥2, a Euclidean ball is a bounded C¹ domain; conventional one-based coordinate labels are explicitly aliased to the canonical zero-based coordinates.",
+        "deps": [
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-countable-choice",
+          "def-euclidean-spheres-and-closed-balls",
+          "cor-double-orthogonal-complement-and-dimension",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-bessel-inequality-and-finite-parseval-identity",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.8, printed pp. 44–49, ball boundary as a smooth graph with radial normal"
+            }
+          ]
+        },
+        "dependency_level": 0
+      }
+    ]
+  },
+  {
+    "order": 458.01,
+    "id": "poisson-problems-and-interior-harmonic-estimates-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Poisson Problems and Interior Harmonic Estimates — Examples",
+    "companion": "poisson-problems-and-interior-harmonic-estimates",
+    "requires": [
+      "poisson-problems-and-interior-harmonic-estimates",
+      "tempered-distributions-and-the-fourier-transform"
+    ],
+    "items": [
+      {
+        "id": "ex-poisson-extension-of-a-coordinate-function-on-a-ball",
+        "kind": "example",
+        "title": "Poisson extension fixes coordinate functions",
+        "statement": "Assume Countable Choice and n≥3. For any ball B_R(a), coordinate j and boundary datum g(y)=y_j, the ball Poisson integral equals U_g(x)=x_j throughout the ball.",
+        "deps": [
+          "def-countable-choice",
+          "def-directional-and-partial-derivatives",
+          "def-laplacian-of-a-c2-function",
+          "lem-sphere-and-ball-measures-scale",
+          "thm-dirichlet-problem-on-a-ball-by-the-poisson-integral",
+          "thm-poisson-kernel-for-a-ball-in-rn"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.8, printed pp. 44–49"
+            }
+          ]
+        },
+        "strategy": "The coordinate function has Δx_j=0 and has trace g on the sphere. The owned Dirichlet theorem gives uniqueness in the required continuous-closure harmonic class, so its Poisson integral is x_j. At the center this also checks the spherical first moment by symmetry.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-poisson-kernel-concentrates-at-a-boundary-point",
+        "kind": "example",
+        "title": "Quantitative concentration of the ball Poisson kernel",
+        "statement": "Assume Countable Choice and n≥3. For p∈∂B_R(a), δ>0 and x∈B_R(a) with |x−p|<δ/2, the ball Poisson kernel mass outside the cap {|y−p|<δ} is at most C_{n,R}δ^{-n}(R²−|x−a|²), hence tends to zero as x→p from inside. The cap mass tends to one.",
+        "deps": [
+          "lem-poisson-kernel-boundary-cap-and-complement-estimate"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.8, printed pp. 49–50, cap/complement estimate"
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4.1, printed pp. 33–34, Theorem 2.13"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.6, printed pp. 133–134, Theorem 5.25 proof"
+            }
+          ]
+        },
+        "strategy": "Apply [[lem-poisson-kernel-boundary-cap-and-complement-estimate]] to the constant datum g≡1. Its cap term is zero and its complementary-mass bound is 2ⁿR^{n−2}δ⁻ⁿ(R²−|x−a|²). Unit total mass then makes the cap mass tend to one. This example records the kernel-only concentration consequence; the full data estimate and boundary limit are proved separately on the A page.",
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-poisson-integral-need-not-recover-discontinuous-data-at-the-jump",
+        "kind": "counterexample",
+        "title": "The disc Poisson integral can miss the assigned value at a jump",
+        "statement": "Let g:∂𝔻→{0,1} be g(e^{it})=1 for 0<t<π and g(e^{it})=0 for π≤t≤2π, so g(1)=0. For 0≤r<1 define its bounded-data Poisson integral by U_g(r)=(2π)⁻¹∫₀^{2π}P_r(t)g(e^{it})dt. Then U_g(r)=1/2 for every r, so U_g(r)→1/2≠g(1) as r↑1.",
+        "deps": [
+          "def-poisson-kernel-on-the-disc",
+          "lem-poisson-kernel-properties-on-the-disc"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Per Kristen Jakobsen, An Introduction to Partial Differential Equations (2019)",
+              "url": "https://arxiv.org/pdf/1901.03022",
+              "locator": "§11.1.4, printed pp. 193–194, Heaviside boundary datum and explicit arctangent Poisson extension"
+            },
+            {
+              "title": "Leon Simon, Lectures on PDE (2015 rough draft)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 4, printed pp. 36–37, ball Poisson formula and boundary recovery for continuous data"
+            },
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.8, printed p. 50, boundary recovery at continuity points"
+            }
+          ]
+        },
+        "strategy": "For the bounded step function the explicit kernel formula defines a finite integral. Reflection t↦2π−t leaves P_r(t) unchanged, while it interchanges the upper and lower semicircles; the two semicircles therefore carry equal kernel mass. The kernel has total mass one, so the upper-semicircle integral is 1/2. The assigned value at e^{i0}=1 is zero, hence the radial limit fails to recover that value. The value at the other jump point has no effect on the integral. This uses the published disc kernel and its normalization, not the continuous-data Dirichlet theorem.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "ex-half-space-poisson-extension-of-a-plane-wave",
+        "kind": "example",
+        "title": "Half-space Poisson extension of a plane wave",
+        "statement": "Assume Countable Choice and n≥3. For ξ∈ℝ^{n−1}, boundary data g(x')=exp(2πiξ·x'), the half-space Poisson integral is exp(−2π|ξ|t)exp(2πiξ·x') at (x',t)∈H, including ξ=0. Thus a nonzero frequency decays exponentially in height while the constant frequency stays constant. Its upward derivative ∂_tU_g at t=0 is −2π|ξ|g, and its outward derivative is +2π|ξ|g, a single-mode Dirichlet-to-Neumann calculation.",
+        "deps": [
+          "def-countable-choice",
+          "def-directional-and-partial-derivatives",
+          "def-laplacian-of-a-c2-function",
+          "thm-algebra-of-derivatives",
+          "thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials",
+          "thm-poisson-kernel-and-bounded-dirichlet-problem-on-the-half-space",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-derivative-of-exponential",
+          "thm-complex-exponential-is-entire-with-derivative-itself"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4, printed pp. 28–34, half-space Poisson kernel"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§5.1, printed p. 111, half-space Poisson kernel and bounded solutions"
+            }
+          ]
+        },
+        "strategy": "Direct differentiation shows the displayed bounded function is harmonic because the tangential Laplacian contributes −(2π|ξ|)² and the normal second derivative contributes +(2π|ξ|)². Its boundary trace is the plane wave, so bounded uniqueness identifies it with the Poisson integral. The published Fourier transform of a plane wave is δ_ξ in its 2π normalization; this independently identifies the same multiplier e^{-2πt|ξ|}. The ξ=0 case is constant and does not decay. Differentiating once in the upward t direction at t=0 gives −2π|ξ|g; the published outward-normal convention is −e_n and reverses this sign.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "cex-poisson-integral-on-the-half-space-is-not-unique-without-growth-control",
+        "kind": "counterexample",
+        "title": "Zero half-space trace does not ensure uniqueness without growth control",
+        "statement": "For n≥2 the normal coordinate u(x',t)=t is harmonic on H, continuous on its closure, and zero on the boundary plane, while u is nonzero and unbounded. Hence the zero Dirichlet trace has at least the solutions 0 and t if boundedness or another valid growth condition is omitted.",
+        "deps": [
+          "def-laplacian-of-a-c2-function"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (2025)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§2.4, printed pp. 28–34; §§8.1–8.3, pp. 139–146"
+            }
+          ]
+        },
+        "strategy": "All second coordinate derivatives of t vanish, so Δt=0. The boundary value at t=0 is zero, but t>0 in H and t→∞ along a vertical ray. Zero is a second solution with the same trace. This elementary computation uses no choice principle.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "cex-exterior-dirichlet-uniqueness-needs-growth-or-decay-control",
+        "kind": "counterexample",
+        "title": "Exterior Dirichlet uniqueness needs a far-field condition",
+        "statement": "Let n≥3, R>0, a∈ℝⁿ, and Ω={x:|x−a|>R}. The functions 0 and u(x)=1−(R/|x−a|)^{n−2} are distinct bounded harmonic functions on Ω with the same zero trace on ∂B_R(a); u tends to 1 at infinity. Thus boundary data alone, and even boundedness alone, do not imply uniqueness in this exterior domain. A uniqueness class must also prescribe behavior at infinity; in particular, u→0 excludes this witness.",
+        "deps": [
+          "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+          "lem-laplace-fundamental-solution-is-harmonic-off-its-pole"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leon Simon, Lectures on PDE (2015 rough draft)",
+              "url": "https://math.stanford.edu/~lms/lecs-on-pde.pdf",
+              "locator": "Lecture 4, Problem 4.2, printed p. 38, radial harmonic functions on annuli"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.6.1, printed p. 33, Newtonian fundamental solution is harmonic away from its pole"
+            }
+          ]
+        },
+        "strategy": "The function |x−a|^{2−n} is a constant multiple of the published Newtonian fundamental solution and is harmonic away from a. Hence u is harmonic on Ω. At |x−a|=R its value is zero; for |x−a|>R it lies strictly between zero and one, and it tends to one as |x−a|→∞. The zero function has the same boundary trace. This witness is bounded, so boundedness alone is insufficient; prescribing a far-field limit such as zero excludes this particular second solution.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "cex-interior-estimates-cannot-use-distance-zero-to-the-boundary",
+        "kind": "counterexample",
+        "title": "Boundary-scale derivative blowup despite bounded ball data",
+        "statement": "For every integer k≥2, the harmonic counterexample shows that an interior derivative estimate cannot use zero distance to the boundary of the full ball in place of a positive interior radius.",
+        "deps": [
+          "def-countable-choice",
+          "thm-dirichlet-problem-on-a-ball-by-the-poisson-integral",
+          "cor-interior-laplacian-gradient-estimate",
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "thm-c2-holomorphic-components-are-harmonic",
+          "def-laplacian-of-a-c2-function",
+          "def-directional-and-partial-derivatives",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-euclidean-inner-product",
+          "def-euclidean-spheres-and-closed-balls",
+          "lem-of-square-monotone",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-power-monotone",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-real-power-agrees-with-rational-exponent",
+          "thm-exponential-product-limit",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-real-exponential-function-and-e"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Schmidt, Partial Differential Equations I (2026)",
+              "url": "https://wwwp2.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf",
+              "locator": "§2.8, printed pp. 44–49; Poisson representation and the interior estimates of the Dirichlet problem on a ball"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.2, printed pp. 23–25, derivative estimates on balls compactly contained in the domain"
+            }
+          ]
+        },
+        "strategy": "The real part of a holomorphic monomial in the first two coordinates has zero Laplacian, and the other coordinate second derivatives vanish. On the unit sphere |x_1+ix_2|≤1, so the traces are uniformly bounded. The ball Dirichlet theorem identifies each u_k with its Poisson integral. Direct differentiation gives the formula at x_k, and (1−1/k)^{k−1}→e^{-1}. Their boundary distance is 1/k, exactly the missing positive scale in the interior estimate.",
+        "proof_strategy": "direct",
+        "dependency_level": 9
+      },
+      {
+        "id": "ex-harmonic-taylor-series-on-a-ball",
+        "kind": "example",
+        "title": "A finite harmonic Taylor series and its Cauchy bound",
+        "statement": "Assume Countable Choice and n≥2. The polynomial u(x)=x_1²−x_2² is harmonic on every Euclidean ball. Its Taylor expansion about any a terminates at degree two and agrees with u everywhere; its derivatives satisfy the factorial Cauchy estimates on every compactly contained ball.",
+        "deps": [
+          "def-countable-choice",
+          "thm-harmonic-functions-are-real-analytic"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.2, printed pp. 23–25, Taylor expansions of harmonic functions"
+            }
+          ]
+        },
+        "strategy": "Compute Δu=2−2=0. Expanding u(a+h) gives its constant, linear and quadratic Taylor terms with all higher derivatives zero. The general owned Cauchy theorem applies on any compactly contained ball; the finite expansion checks the factorial normalization α! directly.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "cex-smooth-does-not-imply-real-analytic-for-general-pde",
+        "kind": "counterexample",
+        "title": "A smooth nonanalytic solution of a first-order PDE",
+        "statement": "For n≥3 let β be the standard flat function and u(x)=β(x_1) on ℝⁿ. Then u∈C∞ and solves the first-order PDE ∂_{x_2}u=0, but u is not real analytic at the origin: every Taylor coefficient there is zero, whereas u(x)>0 for points with x_1>0 arbitrarily near the origin. Thus smoothness alone does not imply the harmonic analyticity conclusion for general PDE.",
+        "deps": [
+          "def-the-standard-flat-function",
+          "thm-the-standard-flat-function-is-smooth-and-flat-at-zero",
+          "def-real-analytic-germ-in-several-variables"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": []
+        },
+        "strategy": "The published flat-function theorem gives smoothness and β^{(m)}(0)=0 for all m; dependence on x_1 alone makes ∂_{x_2}u=0. Every multivariable derivative at the origin therefore vanishes, so the only possible Taylor series is zero. Since β(t)=e^{-1/t}>0 for t>0, that series cannot equal u on any neighbourhood. The counterexample itself is choice-free.",
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

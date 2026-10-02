@@ -26,25 +26,47 @@ function checkableText(md: string): string | null {
   if (m.length >= 3) return m[m.length - 1].trim();
   return null;
 }
-const files = process.argv.slice(2).length
-  ? process.argv.slice(2)
+const argv = process.argv.slice(2);
+const asJson = argv.includes('--json');
+const files = argv.filter(arg => arg !== '--json').length
+  ? argv.filter(arg => arg !== '--json')
   : readdirSync('items').filter(f => f.endsWith('.md')).map(f => join('items', f));
 
 let failed = 0, checked = 0;
+const results: Array<Record<string, unknown>> = [];
 for (const file of files) {
   const md = readFileSync(file, 'utf8');
   const text = checkableText(md);
-  if (text === null) continue; // no phase-format body (def/rem/ex without Verification)
+  const item_id = file.replaceAll('\\', '/').split('/').at(-1)?.replace(/\.md$/, '');
+  if (text === null) {
+    results.push({ file, item_id, status: 'not-applicable' });
+    continue; // no phase-format body (def/rem/ex without Verification)
+  }
   const strategy = md.match(/^proof_strategy:\s*(\S+)/m)?.[1];
-  if (!strategy) { console.log(`FAIL ${file}: phase body but no proof_strategy in frontmatter`); failed++; continue; }
+  if (!strategy) {
+    results.push({ file, item_id, status: 'fail', error: 'phase body but no proof_strategy in frontmatter' });
+    if (!asJson) console.log(`FAIL ${file}: phase body but no proof_strategy in frontmatter`);
+    failed++; continue;
+  }
   const r = proposedPrecheck(text, strategy);
   checked++;
-  if (r.err) { console.log(`FAIL ${file}: ${r.err}`); failed++; }
-  else if (r.repaired) {
-    console.log(`REPAIR ${file}: passes only after auto-repair — adopt the canonical form:`);
-    console.log((r.proof ?? '').split('\n').map(l => '  | ' + l).join('\n'));
+  if (r.err) {
+    results.push({ file, item_id, status: 'fail', strategy, error: r.err });
+    if (!asJson) console.log(`FAIL ${file}: ${r.err}`);
     failed++;
-  } else console.log(`PASS ${file} (${strategy})`);
+  }
+  else if (r.repaired) {
+    results.push({ file, item_id, status: 'repair', strategy, proposed_proof: r.proof ?? '' });
+    if (!asJson) {
+      console.log(`REPAIR ${file}: passes only after auto-repair — adopt the canonical form:`);
+      console.log((r.proof ?? '').split('\n').map(l => '  | ' + l).join('\n'));
+    }
+    failed++;
+  } else {
+    results.push({ file, item_id, status: 'pass', strategy });
+    if (!asJson) console.log(`PASS ${file} (${strategy})`);
+  }
 }
-console.log(`\n${checked} checked, ${failed} failing${failed ? '' : ' — all clean'}`);
+if (asJson) console.log(JSON.stringify({ summary: { files: files.length, checked, failed }, results }, null, 2));
+else console.log(`\n${checked} checked, ${failed} failing${failed ? '' : ' — all clean'}`);
 process.exit(failed ? 1 : 0);

@@ -1,0 +1,985 @@
+[
+  {
+    "order": 288.129,
+    "id": "stationary-markov-chains-and-ergodic-limits",
+    "kind": "A",
+    "category": "probability",
+    "title": "Stationary Markov Chains and Ergodic Limits",
+    "companion": "stationary-markov-chains-and-ergodic-limits-examples",
+    "requires": [
+      "strong-laws-of-large-numbers",
+      "conditional-expectation",
+      "conditional-distributions-and-regular-conditional-probability",
+      "discrete-time-martingales",
+      "martingale-inequalities-and-convergence",
+      "stopping-times-and-optional-stopping",
+      "markov-kernels-and-markov-chains",
+      "recurrence-transience-and-hitting-times-for-markov-chains",
+      "the-ergodic-theorems-of-von-neumann-and-birkhoff"
+    ],
+    "items": [
+      {
+        "id": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+        "kind": "definition",
+        "title": "Invariant and stationary distribution for a Markov kernel",
+        "deps": [
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums",
+          "def-transition-matrix-and-n-step-transition-probabilities"
+        ],
+        "statement": "For a probability kernel K on (E,ℰ), a probability π is invariant when (πK)(A):=∫_E K(x,A)π(dx)=π(A) for every A∈ℰ. A K-chain with initial law π is called stationary. On a countable state space this is π(y)=∑_xπ(x)p(x,y).",
+        "strategy": "For fixed A, kernel measurability defines the integral. Nonnegative monotone convergence proves countable additivity of πK and K(x,E)=1 gives total mass one. On countable E, disjoint singleton decomposition gives the matrix formula. Stationarity of the process is proved next, not assumed from identical one-time marginals.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-invariant-initial-law-makes-the-chain-stationary",
+        "kind": "theorem",
+        "title": "Invariant initial law makes a Markov chain stationary",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-iterated-transition-kernels",
+          "def-initial-distribution-of-a-markov-chain",
+          "def-stochastic-process-and-finite-dimensional-distributions",
+          "thm-finite-dimensional-laws-of-a-markov-chain",
+          "thm-dynkin-pi-lambda"
+        ],
+        "statement": "Assume AC. If X is a K-chain with initial law π and πK=π, then every finite-dimensional law is invariant under every nonnegative integer time shift; equivalently its canonical path law is invariant under the left shift.",
+        "strategy": "Use the finite-dimensional kernel formula: the joint law at times m,m+n1,…,m+nr has initial measure πK^m=π and the same transition gaps as at times 0,n1,…,nr. Prove πK^m=π by induction. Cylinder equality and the pi-lambda theorem extend to the product sigma-algebra. AC is used through the published chain-law supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-every-finite-transition-matrix-has-a-stationary-distribution",
+        "kind": "theorem",
+        "title": "Every finite transition matrix has a stationary distribution",
+        "deps": [
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "thm-bolzano-weierstrass"
+        ],
+        "statement": "Every transition matrix on a nonempty finite state space has an invariant probability distribution; irreducibility and aperiodicity are unnecessary.",
+        "strategy": "Fix one state and use only its point mass μ. Define ν_n=n^{-1}∑_{k=0}^{n−1}μP^k. The vectors lie in the closed finite simplex. Apply the published real Bolzano–Weierstrass theorem successively to finitely many coordinates, retaining nested subsequences, to get ν_{n_j}→π. Finite sums preserve nonnegativity and mass one. The exact telescoping identity ν_nP−ν_n=(μP^n−μ)/n tends to zero coordinatewise, so πP=π. No arbitrary choice or path law is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Aldous–Chewi, Probability Theory, Lectures 13–15",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-positive-recurrent-and-null-recurrent-state",
+        "kind": "definition",
+        "title": "Positive and null recurrence of a state",
+        "deps": [
+          "def-recurrent-and-transient-state",
+          "def-hitting-return-and-visit-times"
+        ],
+        "statement": "A recurrent state x is positive recurrent when E_xT_x^+<∞ and null recurrent when E_xT_x^+=∞; T_x^+ is the first strictly positive return and may equal ∞.",
+        "strategy": "The return-time convention is the published one, so the definition never counts time zero as a return. Finite mean implies almost-sure return. A transient state is in neither subclass. The expectation is an extended nonnegative expectation, so the cases are exhaustive for a recurrent state.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-return-cycle-occupation-measure-and-minimality",
+        "kind": "lemma",
+        "title": "Return-cycle occupation measure and minimality",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-hitting-return-and-visit-times",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "thm-finite-dimensional-laws-of-a-markov-chain",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-tonelli-for-nonnegative-double-series"
+        ],
+        "statement": "Assume AC and a countable p-chain started at b. Let μ_b(y)=E_b∑_{0≤n<T_b^+}1_{X_n=y}. Then μ_b(b)=1, ∑_yμ_b(y)=E_bT_b^+, μ_b(y)=∑_xμ_b(x)p(x,y) for y≠b, and (μ_bp)(b)=P_b(T_b^+<∞). It is pointwise minimal among nonnegative solutions ν with ν(b)=1 and ν(y)=(νp)(y) off b. If b is recurrent then μ_bp=μ_b.",
+        "strategy": "Put Q(x,y)=p(x,y)1_{y≠b}. The killed-prefix law α_n(y)=P_b(X_n=y,T_b^+>n) satisfies α_0=δ_b and α_{n+1}=α_nQ; Tonelli gives μ_b=∑_{n≥0}δ_bQ^n and the return-time tail sum. A competing ν solves ν=δ_b+νQ; iterate n times and discard the nonnegative remainder to get ν≥μ_b. Split the flow into b from the first-return event and other states from surviving prefixes. Recurrence makes the b-flow equal one. AC is inherited from the published fixed-start finite-dimensional law; the recursion itself is a finite-time calculation and is choice-free once that law is given. No X_∞ is evaluated.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Aldous–Chewi, Probability Theory, Lectures 13–15",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-positive-recurrence-and-stationary-probability-for-irreducible-countable-chains",
+        "kind": "theorem",
+        "title": "Positive recurrence and stationary probability for irreducible countable chains",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-positive-recurrent-and-null-recurrent-state",
+          "lem-return-cycle-occupation-measure-and-minimality",
+          "def-accessibility-communication-and-irreducibility",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "thm-tonelli-for-nonnegative-double-series"
+        ],
+        "statement": "Assume AC. For a nonempty irreducible countable p-chain, the following are equivalent: one state is positive recurrent; every state is positive recurrent; an invariant probability π exists. If b is positive recurrent, π(y)=μ_b(y)/E_bT_b^+ with μ_b from the return-cycle lemma.",
+        "strategy": "If π exists, irreducibility and πP^n=π make every π(b)>0. The normalized π/π(b) solves the return-cycle off-b equations, so minimality gives μ_b≤π/π(b) and E_bT_b^+≤1/π(b)<∞ for every b. Conversely, finite mean at b makes its return a.s.; the lemma makes μ_b invariant, and dividing by its finite positive total produces π. The one-state and all-state formulations then agree. AC is inherited only from construction of the chain/return-cycle supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            },
+            {
+              "title": "Aldous–Chewi, Probability Theory, Lectures 13–15",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-kac-return-time-formula-for-a-state",
+        "kind": "theorem",
+        "title": "Kac return-time formula for a state",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-positive-recurrence-and-stationary-probability-for-irreducible-countable-chains",
+          "lem-return-cycle-occupation-measure-and-minimality",
+          "def-accessibility-communication-and-irreducibility",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "thm-tonelli-for-nonnegative-double-series"
+        ],
+        "statement": "Assume AC. For an irreducible countable stationary chain with invariant probability π, every state b satisfies π(b)>0, E_bT_b^+=1/π(b), and μ_b(y)=π(y)/π(b) for every y, where μ_b is the expected occupation measure before the positive return to b.",
+        "strategy": "Positive recurrence from the previous theorem makes μ_b finite, invariant and minimal. Hence δ(y)=π(y)/π(b)−μ_b(y) is a nonnegative invariant measure with δ(b)=0. Invariance gives 0=δ(b)=∑_yδ(y)p^n(y,b) for every n; irreducibility supplies, for each y, an n with p^n(y,b)>0, forcing δ(y)=0. Sum π=π(b)μ_b and use ∑μ_b=E_bT_b^+ to obtain the formula. This also proves invariant-measure uniqueness up to scale without a circular appeal to the later uniqueness corollary.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            },
+            {
+              "title": "Aldous–Chewi, Probability Theory, Lectures 13–15",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-uniqueness-of-the-stationary-distribution-for-an-irreducible-positive-recurrent-chain",
+        "kind": "corollary",
+        "title": "Uniqueness of the stationary law for an irreducible positive-recurrent chain",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-kac-return-time-formula-for-a-state",
+          "thm-positive-recurrence-and-stationary-probability-for-irreducible-countable-chains",
+          "thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums"
+        ],
+        "statement": "Assume AC. An irreducible positive-recurrent countable transition matrix has exactly one invariant probability π.",
+        "strategy": "Existence is the positive-recurrence theorem. For two invariant probabilities π and ρ, Kac gives π(x)=1/E_xT_x^+=ρ(x) for every state x. Countable singleton equality identifies the laws. The argument does not require aperiodicity and never uses ordinary-time convergence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-reversible-measure-and-detailed-balance",
+        "kind": "definition",
+        "title": "Reversible measure and detailed balance",
+        "deps": [
+          "def-transition-matrix-and-n-step-transition-probabilities"
+        ],
+        "statement": "For a countable transition matrix p, a nonzero finite-valued nonnegative state measure μ is reversible when μ(x)p(x,y)=μ(y)p(y,x) for all x,y. If ∑_xμ(x)=1 it is a reversible probability distribution.",
+        "strategy": "Each point mass is finite, so the products in detailed balance are defined even if total mass is infinite. Zero-mass states are allowed; detailed balance then forces zero flow from the positive support into them. This definition makes no assumption of irreducibility.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-detailed-balance-implies-invariance",
+        "kind": "lemma",
+        "title": "Detailed balance implies invariance",
+        "deps": [
+          "def-reversible-measure-and-detailed-balance",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel"
+        ],
+        "statement": "Any finite-point-mass nonnegative measure satisfying detailed balance for a countable transition matrix p satisfies μp=μ, including when its total mass is infinite.",
+        "strategy": "For fixed y, sum the nonnegative balance identities μ(x)p(x,y)=μ(y)p(y,x) over x. The row sum ∑_xp(y,x)=1 gives (μp)(y)=μ(y); no subtraction of infinite quantities or Choice is used. If μ is normalized, it is an invariant probability.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-time-reversal-of-a-stationary-markov-chain",
+        "kind": "theorem",
+        "title": "Time reversal of a stationary Markov chain",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "thm-invariant-initial-law-makes-the-chain-stationary",
+          "def-reversible-measure-and-detailed-balance",
+          "thm-finite-dimensional-laws-of-a-markov-chain",
+          "def-transition-matrix-and-n-step-transition-probabilities"
+        ],
+        "statement": "Assume AC. For a stationary countable p-chain with law π, put E_+={x:π(x)>0}. The reverse kernel on E_+ is p*(x,y)=π(y)p(y,x)/π(x). Every finite path segment read backward is a stationary p*-chain. Detailed balance is equivalent to p*=p on E_+; null-state rows may be chosen arbitrarily if a kernel on all E is desired.",
+        "strategy": "Invariance makes p* rows sum one, and nonnegative stationarity makes p(x,E\\E_+)=0 for x∈E_+. The finite-dimensional Markov formula gives π(x_0)∏p(x_i,x_{i+1})=π(x_n)∏p*(x_{i+1},x_i) for paths in E_+; sum over finite cylinders to identify reversal. Equality p*=p is exactly detailed balance after multiplying by π(x)>0. A fixed positive-mass state supplies any arbitrary null row. AC is inherited from the chain-law supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-kac-return-time-formula-for-a-positive-mass-set",
+        "kind": "theorem",
+        "title": "Kac return-time formula for a positive-mass set",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-time-reversal-of-a-stationary-markov-chain",
+          "thm-positive-recurrence-and-stationary-probability-for-irreducible-countable-chains",
+          "thm-recurrence-and-transience-are-class-properties",
+          "def-hitting-return-and-visit-times",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-tonelli-for-nonnegative-double-series"
+        ],
+        "statement": "Assume AC. In an irreducible stationary countable chain, every nonempty A⊆E has π(A)>0 and ∑_{x∈A}π(x)E_xT_A^+=1, where T_A^+=inf{n≥1:X_n∈A}. Equivalently E_{π(.|A)}T_A^+=1/π(A); a singleton recovers the state Kac identity.",
+        "strategy": "Use the stationary reversed kernel p*. It is irreducible because every positive forward path reverses to a positive p* path and has invariant probability π, so the positive-recurrence theorem and published recurrence/hitting result make its hitting time of A finite a.s. For n≥0, stationary path reversal identifies ∑_{x∈A}π(x)P_x(T_A^+>n) with the probability that the reversed stationary path first hits A at time n. Sum n by nonnegative Tonelli; the reversed hitting probabilities sum to one. The positive-integer tail formula gives the asserted expectation, with possible infinite individual means handled before the equality proves finiteness of the weighted sum.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-total-variation-distance-for-probability-laws",
+        "kind": "definition",
+        "title": "Total variation distance for probability laws",
+        "deps": [
+          "def-probability-measure"
+        ],
+        "statement": "For probability laws μ,ν on the same measurable space, ||μ−ν||_TV:=sup_{A}|μ(A)−ν(A)|∈[0,1]. For countable E with its power-set sigma-algebra, the half-ℓ1 formula is proved in the next lemma.",
+        "strategy": "The set-function difference is finite on each event, the supremum exists in [0,1], and the convention has no extra factor in the supremum. This distinguishes it from the total variation norm of a signed measure.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            },
+            {
+              "title": "Aldous–Chewi, Probability Theory, Lectures 13–15",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-total-variation-half-l1-formula-on-a-countable-space",
+        "kind": "lemma",
+        "title": "Half-l1 formula for total variation on a countable space",
+        "deps": [
+          "def-total-variation-distance-for-probability-laws",
+          "thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums"
+        ],
+        "statement": "For probability laws μ,ν on a countable discrete E, ||μ−ν||_TV=½∑_{x∈E}|μ(x)−ν(x)|.",
+        "strategy": "Let d(x)=μ(x)−ν(x), whose absolutely convergent sum is zero. The positive and negative masses coincide and equal half the absolute sum. Every event sum lies between their negatives and positives, and A={x:d(x)≥0} attains the positive mass. Empty and finite spaces are included. No Choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            },
+            {
+              "title": "Aldous–Chewi, Probability Theory, Lectures 13–15",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-aperiodic-return-times-are-eventually-positive",
+        "kind": "lemma",
+        "title": "Aperiodic return times are eventually positive",
+        "deps": [
+          "def-aperiodic-chain",
+          "def-period-of-a-state",
+          "def-common-divisor-and-gcd",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "def-accessibility-communication-and-irreducibility"
+        ],
+        "statement": "For an irreducible aperiodic countable transition matrix, every state x has N_x such that p^n(x,x)>0 for all n≥N_x. Consequently, for each u,v there is N_{u,v} with p^n(u,v)>0 for all n≥N_{u,v}.",
+        "strategy": "The positive return-time set is additive by Chapman–Kolmogorov and has gcd one. A finite subset has gcd one: choose a finite-subset gcd of least positive value and adjoin any return time that would lower it. Fix a∈R_x. The residues of the additive semigroup generated by that finite subset form a subgroup of the finite cyclic group Z/aZ; gcd one makes it the whole group. Choose a realized representative in each of finitely many residues, then add enough copies of a to obtain every sufficiently large integer. For u→v in r steps, append a sufficiently long loop at v. The proof is finite arithmetic, not a renewal theorem or a choice argument.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Aldous–Chewi, Probability Theory, Lectures 13–15",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-convergence-to-stationarity-for-irreducible-aperiodic-positive-recurrent-chains",
+        "kind": "theorem",
+        "title": "Convergence to stationarity for irreducible aperiodic positive-recurrent chains",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-aperiodic-chain",
+          "def-accessibility-communication-and-irreducibility",
+          "thm-positive-recurrence-and-stationary-probability-for-irreducible-countable-chains",
+          "thm-kac-return-time-formula-for-a-state",
+          "lem-aperiodic-return-times-are-eventually-positive",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "thm-recurrence-and-transience-are-class-properties",
+          "thm-discrete-strong-markov-property",
+          "cor-canonical-markov-chain-on-path-space",
+          "def-total-variation-distance-for-probability-laws",
+          "lem-total-variation-half-l1-formula-on-a-countable-space",
+          "thm-invariant-initial-law-makes-the-chain-stationary",
+          "thm-tonelli-for-nonnegative-double-series"
+        ],
+        "statement": "Assume AC. If p is irreducible, aperiodic and positive recurrent on countable E, then for every x∈E, ||p^n(x,·)−π||_TV→0, where π is its unique invariant probability.",
+        "strategy": "First, positive recurrence supplies an invariant probability, and applying the statewise Kac formula to this and any other invariant law at each state proves uniqueness. Build the product p-chain Q((x,y),(u,v))=p(x,u)p(y,v) with initial δ_x⊗π. Eventual positivity makes Q irreducible; π⊗π is invariant, so positive recurrence and the published recurrent-class hitting theorem make a fixed diagonal state hit almost surely. At first meeting, compare the two coordinate future laws by strong Markov, giving |p^n(x,z)−π(z)|≤2P(T>n)→0 for each z. For countable TV, use the half-ℓ1 formula and ∑|p^n−π|=2(1−∑min(p^n,π)); a finite set of π-mass >1−ε and pointwise convergence make the minimum sum tend to one. AC is used by the canonical product-chain law, Kac, and strong Markov suppliers. No limit is taken under an unstated optional-stopping hypothesis.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            },
+            {
+              "title": "Aldous–Chewi, Probability Theory, Lectures 13–15",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-markov-chain-ergodic-theorem",
+        "kind": "theorem",
+        "title": "Ergodic theorem for an irreducible positive-recurrent Markov chain",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-positive-recurrent-and-null-recurrent-state",
+          "thm-kac-return-time-formula-for-a-state",
+          "thm-renewal-decomposition-at-successive-return-times",
+          "thm-recurrence-and-transience-are-class-properties",
+          "thm-kolmogorov-iid-l1-strong-law",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "statement": "Assume AC. For an irreducible positive-recurrent countable p-chain and f:E→R with ∑_xπ(x)|f(x)|<∞, n^{-1}∑_{k=0}^{n−1}f(X_k)→∑_xπ(x)f(x) almost surely under P_x for every starting state x. The same follows componentwise for complex f.",
+        "strategy": "Choose a return state b. Published strong Markov gives iid finite excursions. Kac identifies their mean length as 1/π(b) and their expected absolute f-reward as ∑π|f|/π(b), hence rewards are integrable. Apply the iid L1 strong law separately to lengths and signed rewards. At completed return epochs the ratio converges to πf. For f≥0 sandwich the partial final cycle between completed sums; for signed f bound its absolute remainder by the next integrable |f|-cycle reward, whose size divided by its index tends to zero by subtracting two SLLN partial sums. Any initial segment before T_b is finite a.s. by the published hitting theorem and vanishes after division by n. This handles every deterministic start and does not use Birkhoff or aperiodicity. AC is spent by the return-excursion supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            },
+            {
+              "title": "Aldous–Chewi, Probability Theory, Lectures 13–15",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cesaro-convergence-for-irreducible-positive-recurrent-chains",
+        "kind": "theorem",
+        "title": "Cesaro convergence for irreducible positive-recurrent chains",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-markov-chain-ergodic-theorem",
+          "cor-bounded-convergence-on-a-finite-measure-space",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "thm-chapman-kolmogorov-equations"
+        ],
+        "statement": "Assume AC. For an irreducible positive-recurrent countable chain and every x,y, n^{-1}∑_{k=0}^{n−1}p^{(k)}(x,y)→π(y), with no aperiodicity hypothesis.",
+        "strategy": "Apply the Markov-chain ergodic theorem from deterministic start x to the bounded indicator f=1_{y}. Its average converges a.s. to π(y) and stays in [0,1]. Bounded convergence passes to expectations, and the finite-dimensional transition law identifies those expectations with the displayed Cesaro means. The theorem keeps the time-zero term and works for periodic chains.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Aldous–Chewi, Probability Theory, Lectures 13–15",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-stationary-process-and-canonical-shift",
+        "kind": "definition",
+        "title": "Stationary process and canonical path shift",
+        "deps": [
+          "def-stochastic-process-and-finite-dimensional-distributions",
+          "def-measure-preserving-transformation-and-system",
+          "def-ergodic-measure-preserving-system",
+          "thm-dynkin-pi-lambda"
+        ],
+        "statement": "A real- or complex-valued one-sided process Y=(Y_n)_{n≥0} with state space S∈{R,C} is strictly stationary when every finite-dimensional law is unchanged by a common nonnegative time shift. Its canonical path law P_Y on S^{N_0} is the pushforward of the coordinate map; the left shift θ is measure preserving for P_Y. The process is ergodic when this canonical shift is ergodic.",
+        "strategy": "Coordinate maps are measurable into the product sigma-algebra on S^{N_0} for either S=R or S=C, so P_Y exists as a pushforward. Shift invariance of all finite-dimensional cylinders follows from strict stationarity; the pi-lambda theorem gives invariance of the full path sigma-algebra. This fixes the path-space meaning of the invariant sigma-algebra even when the original sample space has no shift map. No Choice is used to select a new path law.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-stationary-process-birkhoff-ergodic-limit",
+        "kind": "theorem",
+        "title": "Birkhoff limit for a stationary integrable process",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-stationary-process-and-canonical-shift",
+          "def-strict-and-mod-null-invariant-sigma-algebras",
+          "def-ergodic-measure-preserving-system",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "thm-birkhoff-ergodic-theorem",
+          "thm-birkhoff-limit-identification-on-finite-measure-spaces",
+          "lem-ergodic-averages-converge-in-l-p-on-finite-measure-spaces",
+          "cor-birkhoff-ergodic-theorem-for-ergodic-probability-systems"
+        ],
+        "statement": "Assume AC. If a strictly stationary real process has E|Y_0|<∞, then n^{-1}∑_{k<n}Y_k converges almost surely and in L1 to the pullback of E_{P_Y}[z_0|I], where I={A:θ^{-1}A=A} is the strict invariant sigma-algebra of its canonical shift. If the shift is ergodic, the limit is the constant EY_0. Complex processes follow componentwise.",
+        "strategy": "On canonical path space use f(z)=z_0 and the measure-preserving left shift. The published Birkhoff theorem gives a.s. convergence, its finite-measure identification identifies the invariant conditional expectation, and its finite-measure L1 lemma gives L1 convergence; pullback preserves both modes. Ergodicity makes the invariant expectation constant. AC is exactly the Radon–Nikodym/conditional-expectation cost of the published identification. Mere stationarity is never used as a substitute for ergodicity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-stationary-irreducible-markov-shift-is-ergodic",
+        "kind": "corollary",
+        "title": "Stationary irreducible Markov shift is ergodic",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-accessibility-communication-and-irreducibility",
+          "def-strict-and-mod-null-invariant-sigma-algebras",
+          "def-ergodic-measure-preserving-system",
+          "def-hitting-return-and-visit-times",
+          "thm-invariant-initial-law-makes-the-chain-stationary",
+          "thm-positive-recurrence-and-stationary-probability-for-irreducible-countable-chains",
+          "thm-kac-return-time-formula-for-a-state",
+          "thm-recurrence-and-transience-are-class-properties",
+          "thm-markov-property-for-bounded-future-path-functionals",
+          "cor-bounded-harmonic-functions-yield-markov-chain-martingales",
+          "thm-optional-sampling-for-bounded-stopping-times",
+          "thm-levy-upward-convergence-of-conditional-expectations",
+          "thm-dominated-convergence"
+        ],
+        "statement": "Assume AC. The canonical path shift of an irreducible positive-recurrent countable Markov chain started in its unique invariant probability is ergodic, whether or not the chain is aperiodic.",
+        "strategy": "Positive recurrence supplies an invariant probability; applying the statewise Kac formula to it and any other invariant law at each state proves uniqueness. For any strictly shift-invariant path event A define h(x)=P_x(A). Because A=θ^{-1}A, the path Markov identity gives Ph=h and E_π[1_A|F_n]=h(X_n). The bounded harmonic martingale stopped at T_y∧n has expectation h(x); since the published recurrence-class theorem gives P_x(T_y<∞)=1, dominated convergence with the integrable majorant 1 yields h(x)=h(y). Thus h is constant. Levy upward convergence makes h(X_n)=E[1_A|F_n] tend to 1_A because F_∞ is the full path sigma-algebra. Therefore 1_A is a constant indicator and P_π(A)∈{0,1}. AC comes from the Markov conditional laws, statewise Kac, and conditional-expectation convergence, not from irreducibility itself.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-aperiodicity-is-needed-for-ordinary-time-convergence-not-ergodic-averages",
+        "kind": "remark",
+        "title": "Aperiodicity separates ordinary convergence from ergodic averages",
+        "deps": [
+          "thm-convergence-to-stationarity-for-irreducible-aperiodic-positive-recurrent-chains",
+          "thm-cesaro-convergence-for-irreducible-positive-recurrent-chains",
+          "thm-markov-chain-ergodic-theorem"
+        ],
+        "statement": "The ordinary-time total-variation theorem assumes aperiodicity; the Cesaro and almost-sure empirical-average theorems do not. Periodic examples show the assumption cannot simply be removed from ordinary-time convergence.",
+        "strategy": "Compare the exact hypotheses and conclusions of the three preceding results. The B-page two-cycle and three-cycle calculate the obstruction directly. This remark adds no stronger convergence claim.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.13,
+    "id": "stationary-markov-chains-and-ergodic-limits-examples",
+    "kind": "B",
+    "category": "probability",
+    "title": "Stationary Markov Chains and Ergodic Limits — Examples",
+    "companion": "stationary-markov-chains-and-ergodic-limits",
+    "requires": [
+      "stationary-markov-chains-and-ergodic-limits"
+    ],
+    "items": [
+      {
+        "id": "ex-stationary-law-of-a-two-state-chain",
+        "kind": "example",
+        "title": "Stationary law of a two-state chain",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "thm-every-finite-transition-matrix-has-a-stationary-distribution",
+          "thm-positive-recurrence-and-stationary-probability-for-irreducible-countable-chains",
+          "cor-uniqueness-of-the-stationary-distribution-for-an-irreducible-positive-recurrent-chain"
+        ],
+        "statement": "For P=[[1−a,a],[b,1−b]] with 0<a,b≤1, the unique stationary law is π=(b/(a+b),a/(a+b)).",
+        "strategy": "Solve π(0)a=π(1)b and π(0)+π(1)=1; verify both stationarity equations. Positive a,b make the chain irreducible, so uniqueness also follows from the earlier corollary. Boundary a=1 or b=1 remains valid.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 4,
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-stationary-distribution-of-a-finite-birth-and-death-chain",
+        "kind": "example",
+        "title": "Stationary law of a finite birth-and-death chain",
+        "deps": [
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-reversible-measure-and-detailed-balance",
+          "lem-detailed-balance-implies-invariance"
+        ],
+        "statement": "For an irreducible birth-and-death chain on {0,…,m} with p_i=P(i,i+1)>0, q_i=P(i,i−1)>0 on applicable edges and nonnegative holding probabilities, let w_0=1 and w_i=∏_{j=0}^{i−1}p_j/q_{j+1}. Then π(i)=w_i/∑_{k=0}^m w_k is its stationary law.",
+        "strategy": "Check w_i p_i=w_{i+1}q_{i+1} on adjacent pairs; all other off-diagonal flows vanish, so detailed balance applies. The finite sum is positive and normalizes the measure. The example deliberately states the finite formula; countable normalization is described in the source disposition rather than silently assumed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-random-walk-on-a-finite-undirected-graph-is-reversible",
+        "kind": "example",
+        "title": "Random walk on a finite undirected graph is reversible",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "thm-handshake-lemma-for-finite-simple-graphs",
+          "def-reversible-measure-and-detailed-balance",
+          "lem-detailed-balance-implies-invariance"
+        ],
+        "statement": "For simple random walk on a finite connected undirected simple graph with at least one edge, P(v,w)=1/deg(v) on adjacent vertices and zero otherwise; π(v)=deg(v)/(2|E|) is reversible and stationary.",
+        "strategy": "Connectivity and a nonempty edge set make all degrees positive. The handshake lemma normalizes π. On an edge {v,w}, π(v)P(v,w)=1/(2|E|)=π(w)P(w,v); on nonedges both sides vanish. Detailed balance then gives invariance. The one-vertex edgeless case is excluded because its displayed transition row would divide by zero.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §1.4 and Example 1.12, printed pp. 8–10/PDF pp. 24–26",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-doubly-stochastic-transition-matrix-has-uniform-stationary-law",
+        "kind": "example",
+        "title": "Uniform law for a finite doubly stochastic matrix",
+        "deps": [
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-transition-matrix-and-n-step-transition-probabilities"
+        ],
+        "statement": "For a nonempty finite n-state transition matrix whose column sums are also one, the uniform probability π(x)=1/n is invariant; irreducibility is unnecessary.",
+        "strategy": "Compute (πP)(y)=n^{-1}∑_x p(x,y)=1/n for each column. Row stochasticity supplies the transition matrix, while column stochasticity is the extra hypothesis. A reducible doubly stochastic matrix still has this invariant law, so no uniqueness is asserted.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 1,
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-empirical-state-frequencies-converge-to-stationary-masses",
+        "kind": "example",
+        "title": "Empirical state frequencies converge to stationary masses",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-positive-recurrent-and-null-recurrent-state",
+          "thm-markov-chain-ergodic-theorem",
+          "thm-cesaro-convergence-for-irreducible-positive-recurrent-chains",
+          "thm-chapman-kolmogorov-equations",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "cor-bounded-convergence-on-a-finite-measure-space"
+        ],
+        "statement": "For every irreducible positive-recurrent countable chain, state y and deterministic start x, n^{-1}#{0≤k<n:X_k=y}→π(y) almost surely; its expectation converges to π(y).",
+        "strategy": "Put f=1_{y} in the chain ergodic theorem; f is automatically L1(π). Its path average is the displayed frequency. Taking expectations via bounded convergence recovers the Cesaro transition probability result. No aperiodicity is needed.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 5,
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-periodic-chain-has-cesaro-but-not-ordinary-convergence",
+        "kind": "example",
+        "title": "A periodic chain has Cesaro but not ordinary convergence",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "def-accessibility-communication-and-irreducibility",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-period-of-a-state",
+          "def-aperiodic-chain",
+          "thm-positive-recurrence-and-stationary-probability-for-irreducible-countable-chains",
+          "thm-cesaro-convergence-for-irreducible-positive-recurrent-chains"
+        ],
+        "statement": "The deterministic two-state alternation P=[[0,1],[1,0]] has π=(1/2,1/2), and from state 0 its Cesaro laws tend to π while P^n(0,0) alternates between 1 and 0.",
+        "strategy": "Compute P^{2m}=I and P^{2m+1}=P, so the even and odd subsequences have distinct pointwise laws. Half of the first n times have each parity asymptotically. The positive return times are the even integers, so period two explains why ordinary convergence fails.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., §§5.5–5.6 and §6.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-a-null-recurrent-chain-has-no-stationary-probability",
+        "kind": "counterexample",
+        "title": "A null recurrent chain has no stationary probability",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-simple-symmetric-walk-on-zd",
+          "cor-recurrence-of-the-one-dimensional-simple-symmetric-random-walk",
+          "def-positive-recurrent-and-null-recurrent-state",
+          "thm-positive-recurrence-and-stationary-probability-for-irreducible-countable-chains",
+          "def-accessibility-communication-and-irreducibility",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel"
+        ],
+        "statement": "Assume AC for the canonical walk law. Simple symmetric nearest-neighbor random walk on Z is recurrent but has no invariant probability, hence every state is null recurrent.",
+        "strategy": "The published one-dimensional recurrence theorem supplies recurrence. If π were stationary, 2π(k)=π(k−1)+π(k+1), so successive differences are constant. A nonnegative summable bi-infinite sequence with constant differences must be identically zero, contradicting mass one. The positive-recurrence equivalence then gives infinite mean positive return. This avoids treating a nonnormalizable counting invariant measure as a probability.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Levin–Peres–Wilmer, Markov Chains and Mixing Times, 2nd ed., §21.3 and Appendix C.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf"
+            },
+            {
+              "title": "Aldous–Chewi, Probability Theory, Lectures 13–15",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-a-stationary-chain-need-not-be-ergodic",
+        "kind": "counterexample",
+        "title": "A stationary chain need not be ergodic",
+        "deps": [
+          "def-stationary-process-and-canonical-shift",
+          "def-ergodic-measure-preserving-system",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-transition-matrix-and-n-step-transition-probabilities"
+        ],
+        "statement": "On E={0,1}, take the identity transition matrix and π=(1/2,1/2). The chain started from π is strictly stationary, but the strictly shift-invariant path event {zero occurs infinitely often} has probability 1/2.",
+        "strategy": "Each starting state is absorbing, so X_n=X_0 for all n and πP=π. The event A={z∈E^{N_0}: z_n=0 for infinitely many n} is measurable and satisfies θ^{-1}A=A on the entire path space, since deleting the first coordinate does not change whether infinitely many zeros occur. Under the stationary mixture, P_π(A)=1/2. Thus the canonical shift fails the published strict-invariant definition of ergodicity.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 1,
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "cex-invariance-does-not-imply-reversibility",
+        "kind": "counterexample",
+        "title": "An invariant law need not be reversible",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-reversible-measure-and-detailed-balance",
+          "thm-time-reversal-of-a-stationary-markov-chain",
+          "lem-detailed-balance-implies-invariance"
+        ],
+        "statement": "The deterministic directed three-cycle has uniform invariant probability, yet detailed balance fails and its reversed kernel runs around the cycle in the opposite direction.",
+        "strategy": "Index states modulo three and set p(i,i+1)=1. Uniform mass is invariant because each state has one predecessor. For an oriented edge i→i+1, π(i)p(i,i+1)=1/3 but π(i+1)p(i+1,i)=0. The reverse formula gives p*(i,i−1)=1.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 3,
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "cex-positive-recurrence-without-aperiodicity-does-not-give-total-variation-convergence",
+        "kind": "counterexample",
+        "title": "Positive recurrence without aperiodicity does not imply total-variation convergence",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "lem-matrix-chapman-kolmogorov-equations",
+          "def-accessibility-communication-and-irreducibility",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "def-hitting-return-and-visit-times",
+          "def-positive-recurrent-and-null-recurrent-state",
+          "def-period-of-a-state",
+          "def-aperiodic-chain",
+          "def-total-variation-distance-for-probability-laws",
+          "lem-total-variation-half-l1-formula-on-a-countable-space",
+          "thm-cesaro-convergence-for-irreducible-positive-recurrent-chains"
+        ],
+        "statement": "The deterministic directed three-cycle is irreducible with return time three and uniform π, but ||p^n(0,·)−π||_TV=2/3 for every n; nevertheless its Cesaro laws converge to π.",
+        "strategy": "All three states are visited cyclically, so T_0^+=3 a.s. and the period is three. Each n-step law from 0 is a point mass, whose distance from uniform by the half-l1 formula is 2/3. Every three consecutive times visit each state once, proving the Cesaro limit and showing exactly which hypothesis ordinary-time convergence needs.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 5,
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

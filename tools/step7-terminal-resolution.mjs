@@ -3,7 +3,7 @@
 // paid Step-7 judge recheck.
 //
 // The ordinary closure remains judge -> Alpha adjudication -> repair ->
-// targeted rejudge. If that rejudge rejects, one independent Astra-medium Final
+// targeted rejudge. If that rejudge rejects, one independent Sol 6.1 high Final
 // Adjudicator per affected group adjudicates the rejection, accepts the current
 // repair or repairs it independently, then records the exact text/context here. Legacy owner or
 // session interventions remain parseable for concluded runs. This tool never
@@ -177,10 +177,10 @@ export function parseTerminalResolutions(path, { allowMissing = true } = {}) {
       errors.push(`${where}: owner resolution requires exact research evidence and rejected-item hash, without final-adjudicator metadata`);
     if (row?.resolved_by === 'final-adjudicator') {
       const fa = row?.final_adjudicator;
-      const expectedModel = previous || legacy ? MODELS.sol.id : MODELS.astra.id;
-      const expectedEffort = previous || legacy ? 'xhigh' : 'medium';
+      const expectedModels = previous || legacy ? [MODELS.sol.id] : [MODELS.sol61.id, MODELS.astra.id];
+      const expectedEffort = previous || legacy ? 'xhigh' : fa?.model === MODELS.sol61.id ? 'high' : 'medium';
       if (typeof fa?.group !== 'string' || !fa.group
-        || fa?.model !== expectedModel || fa?.effort !== expectedEffort
+        || !expectedModels.includes(fa?.model) || fa?.effort !== expectedEffort
         || !relativeResearchPath(fa?.queue_path)
         || !HASH.test(fa?.queue_sha256 ?? '')
         || !Number.isInteger(fa?.queue_position) || fa.queue_position < 1
@@ -189,7 +189,7 @@ export function parseTerminalResolutions(path, { allowMissing = true } = {}) {
         || !FA_SOURCE_STATUSES.has(fa?.source_verification)
         || !Array.isArray(fa?.authoritative_sources)
         || fa.authoritative_sources.some((url) => typeof url !== 'string' || !/^https?:\/\//.test(url))) {
-        errors.push(`${where}: final-adjudicator resolution requires group, ${expectedModel}/${expectedEffort} attestation, ordered queue evidence, source status, and authoritative_sources`);
+        errors.push(`${where}: final-adjudicator resolution requires group, ${expectedModels.join(' or ')}/${expectedEffort} attestation, ordered queue evidence, source status, and authoritative_sources`);
       } else if (fa.source_verification === 'verified' && !fa.authoritative_sources.length) {
         errors.push(`${where}: source_verification=verified requires at least one authoritative source URL`);
       }
@@ -537,8 +537,9 @@ function main() {
           const resultPath = join(root, 'research', `${run}-dispatch`,
             `final-adjudicator-${fa.dispatch_label}.result.json`);
           const dispatch = JSON.parse(readFileSync(resultPath, 'utf8'));
-          const expectedModel = row.version === TERMINAL_RESOLUTION_VERSION ? MODELS.astra.id : MODELS.sol.id;
-          const expectedEffort = row.version === TERMINAL_RESOLUTION_VERSION ? 'medium' : 'xhigh';
+          const expectedModel = fa.model;
+          const expectedEffort = row.version === TERMINAL_RESOLUTION_VERSION
+            ? expectedModel === MODELS.sol61.id ? 'high' : 'medium' : 'xhigh';
           if (dispatch.ok !== true || dispatch.role !== 'final-adjudicator'
             || dispatch.model !== expectedModel
             || dispatch.provider_effort !== expectedEffort || dispatch.requested_effort !== expectedEffort) {
@@ -629,8 +630,8 @@ function main() {
     }
     finalAdjudicator = {
       group,
-      model: MODELS.astra.id,
-      effort: 'medium',
+      model: MODELS.sol61.id,
+      effort: 'high',
       queue_path: queuePath,
       queue_sha256: queueSha256,
       queue_position: position + 1,

@@ -1,0 +1,253 @@
+{
+  "run": "frontier-37-owner-30",
+  "phase": "initial",
+  "round": 1,
+  "unit": "17",
+  "input_sha256": "5dc0a9d7c3f42b5c621a33c0b895506487aa517343c67149c8bfebd0a1c06728",
+  "decisions": [
+    {
+      "id": "lem-pcp-verifier-reduces-to-gap-max-three-sat",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "5e7a27e47a1d7449875e5e5b9fe969655928602151369f86a16581a965b1e07c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original step 2.1 inserted an empty clause for a rejecting coin with Q_sigma empty, then added two contradictory clauses without removing it; step 3.1 had no width-zero conversion. This is an allowed verifier execution and breaks the claimed total 3-CNF construction. Repaired with exclusive accept, no-query reject, and positive-query cases. Also corrected the q<3 width bound, soundness counting of clause occurrences, and rational-gap convention using lem-rat-embeds-dense. The Statement is byte-for-byte unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://theory.cs.princeton.edu/complexity/book.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-max-three-sat-has-no-ptas-unless-p-equals-np",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "025b52ffbe0029f6927e2fe7b9c85a49c8d60aea46beca6625cba54e9067ad65",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The supplier Statement has quantifiers for each language L there exists a fixed delta_L; it supplies no common delta for all languages. Original step 4.2 illegitimately reused a factor rho>1-delta from one reduction for every L. The PTAS part could choose epsilon per language, but the fixed-factor claim lacked its universal conclusion. Repaired by fixing the NP-complete 3-SAT reduction once and composing each NP language's many-one reduction with that threshold decider; no claim is weakened.",
+      "uncertain": false,
+      "source_urls": [
+        "https://theory.cs.princeton.edu/complexity/book.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-conditional-expectation-for-a-small-max-cut-instance",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "18a7e5216e7fbc0010292d529064fc694aacdaa65245f6a752e298046b3d70e7",
+      "outcome": "false_positive",
+      "reason": "The supplier Statement leaves ties unspecified, but its actual Proof step 3.1 selects bit 0 when E[X|a,0]>=E[X|a,1], and step 4.1 explicitly calls this the fixed tie rule. F2 accurately describes that cited algorithm. Direct calculation gives first-bit expectations 3/2, second-bit candidates 1 and 2, last-bit candidates 2 and 2, and returned placement (0,1,0) with cut size OPT=2. No item or metadata repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-pcp-verifier-reduces-to-gap-max-three-sat",
+      "disposition": "repaired",
+      "post_sha256": "cffd40a6f7e77b27526a742d95968e5a5ca01059a73a7e38f39b21b9eadc0216",
+      "review_context_sha256": "642a2c75522fded0e23a6adfaa74cff2b007b04cbdd882d6a612d24bfbb53105",
+      "reason": "Every accepting coin contributes satisfiable blocks; every rejecting coin contributes a falsified clause occurrence, including no-query rejection. Padding and the chain preserve satisfiability, R<=M<=KR includes q=0, and rational s yields delta=(1-s)/K>0. AC is inherited solely from the current PCP supplier. This is local review of my repair, not an independent audit.",
+      "uncertain": false,
+      "source_urls": [
+        "https://theory.cs.princeton.edu/complexity/book.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-max-three-sat-has-no-ptas-unless-p-equals-np",
+      "disposition": "repaired",
+      "post_sha256": "8f110478badb5d25b8bd03448059492c5c5f5d171746df27de99dd653ddd80e5",
+      "review_context_sha256": "ac620a8f11236445b4601e32d4d355f5a6080a8993c1c0ee9920dbe077021671",
+      "reason": "The fixed 3-SAT reduction has positive rational delta<1 and M>=1. A PTAS at epsilon=delta/2, or the stated factor rho, returns more than (1-delta)M clauses on yes inputs and at most that threshold on no inputs. Hardcoded rational arithmetic makes this a polynomial-time 3-SAT decider; NP-completeness and explicitly cited many-one composition give NP subset P, and the existing inclusion gives P=NP. This locally checks my repair and is not an independent audit.",
+      "uncertain": false,
+      "source_urls": [
+        "https://theory.cs.princeton.edu/complexity/book.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-conditional-expectation-for-a-small-max-cut-instance",
+      "disposition": "unaffected",
+      "post_sha256": "bb01ba0ad4833025df87dcaf944fdb0719e0589f54502be00faba7749631282e",
+      "review_context_sha256": "783a504756538ea344b287dce90216f33ed9d653832d1d1dea763881f8aa35e0",
+      "reason": "The supplier Statement leaves ties unspecified, but its actual Proof step 3.1 selects bit 0 when E[X|a,0]>=E[X|a,1], and step 4.1 explicitly calls this the fixed tie rule. F2 accurately describes that cited algorithm. Direct calculation gives first-bit expectations 3/2, second-bit candidates 1 and 2, last-bit candidates 2 and 2, and returned placement (0,1,0) with cut size OPT=2. No item or metadata repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "lem-pcp-verifier-reduces-to-gap-max-three-sat",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "finding": "The original step 2.1 inserted an empty clause for a rejecting coin with Q_sigma empty, then added two contradictory clauses without removing it; step 3.1 had no width-zero conversion. This is an allowed verifier execution and breaks the claimed total 3-CNF construction. Repaired with exclusive accept, no-query reject, and positive-query cases. Also corrected the q<3 width bound, soundness counting of clause occurrences, and rational-gap convention using lem-rat-embeds-dense. The Statement is byte-for-byte unchanged.",
+      "repair_status": "repaired",
+      "post_sha256": "cffd40a6f7e77b27526a742d95968e5a5ca01059a73a7e38f39b21b9eadc0216"
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "thm-max-three-sat-has-no-ptas-unless-p-equals-np",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "finding": "The supplier Statement has quantifiers for each language L there exists a fixed delta_L; it supplies no common delta for all languages. Original step 4.2 illegitimately reused a factor rho>1-delta from one reduction for every L. The PTAS part could choose epsilon per language, but the fixed-factor claim lacked its universal conclusion. Repaired by fixing the NP-complete 3-SAT reduction once and composing each NP language's many-one reduction with that threshold decider; no claim is weakened.",
+      "repair_status": "repaired",
+      "post_sha256": "8f110478badb5d25b8bd03448059492c5c5f5d171746df27de99dd653ddd80e5"
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "ex-conditional-expectation-for-a-small-max-cut-instance",
+      "outcome": "false_positive",
+      "finding": "The supplier Statement leaves ties unspecified, but its actual Proof step 3.1 selects bit 0 when E[X|a,0]>=E[X|a,1], and step 4.1 explicitly calls this the fixed tie rule. F2 accurately describes that cited algorithm. Direct calculation gives first-bit expectations 3/2, second-bit candidates 1 and 2, last-bit candidates 2 and 2, and returned placement (0,1,0) with cut size OPT=2. No item or metadata repair is needed.",
+      "repair_status": "unaffected",
+      "post_sha256": "bb01ba0ad4833025df87dcaf944fdb0719e0589f54502be00faba7749631282e"
+    }
+  ],
+  "repair_notes": {
+    "status": "All three rejected tuples resolved; two fatal repairs and one false positive. No unresolved mathematics, new items, affected item consumers, or published findings were discovered. Local checks are not independent acceptance or certification.",
+    "original_interfaces": {
+      "lem-pcp-verifier-reduces-to-gap-max-three-sat": "\nAssume the Axiom of Choice for the currently published PCP supplier proof\nroute. For every language $L$ in NP, the published perfect-completeness binary\nPCP verifier with $q=O(1)$ nonadaptive queries, $r=O(\\log n)$ fair random bits\nand fixed soundness $s<1$ gives a deterministic polynomial-time map\n$x\\mapsto F_x$ to a 3-CNF formula $F_x$ with $M\\ge1$ clauses and a fixed\n$\\delta>0$ such that $x\\in L$ implies\n$\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F_x)=M$, while $x\\notin L$ implies\n$\\operatorname{OPT}_{\\mathrm{Max3SAT}}(F_x)\\le(1-\\delta)M$.\n",
+      "thm-max-three-sat-has-no-ptas-unless-p-equals-np": "\nAssume the Axiom of Choice for the currently published PCP supplier proof\nroute. If Max-3SAT has a polynomial-time approximation scheme, then $P=NP$.\nMore precisely, for the fixed $\\delta>0$ of the preceding reduction, any\npolynomial-time algorithm with maximization factor $\\rho>1-\\delta$ would decide\nevery language in NP.\n"
+    },
+    "lem-pcp-verifier-reduces-to-gap-max-three-sat": {
+      "claim": "For each fixed NP language, a polynomial reduction produces M>=1 clauses with perfect completeness and a fixed positive rational gap; the statement is unchanged.",
+      "conventions": "Clauses count literal and clause occurrences, including repetitions; no-query rejection inserts only a fresh contradictory pair; the soundness bound is rationalized once per fixed verifier.",
+      "source_reading": "Author-hosted Arora\u2013Barak PDF: complete Theorem 18.13 equivalence and Lemma 18.15 proof, printed pp. 358\u2013360 (PDF pp. 373\u2013375, zero based), plus NP-complete anchor argument in \u00a718.2.1, printed pp. 355\u2013356. These support the general pattern; the exceptional zero-query cases are proved locally.",
+      "dependency_ids": [
+        "thm-pcp-theorem-np-equals-pcp-log-n-o-one",
+        "def-pcp-class-with-completeness-and-soundness",
+        "def-pcp-verifier-randomness-query-and-proof-length",
+        "thm-three-sat-is-np-complete",
+        "def-gap-problem-and-gap-preserving-reduction",
+        "def-axiom-of-choice",
+        "lem-rat-embeds-dense"
+      ],
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-pcp-verifier-reduces-to-gap-max-three-sat.md --json",
+          "exit_code": 0,
+          "result": "1 checked, 0 failed; an earlier phase-renumbering proposal was resolved before this pass."
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/lem-pcp-verifier-reduces-to-gap-max-three-sat.md",
+          "exit_code": 0,
+          "result": "All math spans parse in KaTeX and frontmatter parses in the renderer YAML parser."
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/frontier-37-owner-30-batch-17.proof-contracts.json --strict --items lem-pcp-verifier-reduces-to-gap-max-three-sat",
+          "exit_code": 0,
+          "result": "0 errors, 0 warnings, 1/1 checked."
+        },
+        {
+          "command": "Inline Python finite enumeration of the padding/chain formulas and q=0 branches",
+          "exit_code": 0,
+          "result": "10926 block assignments at widths 1\u20138 checked; explicit satisfying witnesses, no-query contradiction, and K bounds for q=0\u20138 passed. This finite check does not prove all widths."
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Repair the assigned fixed-factor theorem using the NP-complete 3-SAT anchor."
+    },
+    "ex-conditional-expectation-for-a-small-max-cut-instance": {
+      "claim": "The cited concrete conditional-expectation algorithm on K3 uses vertex order v1,v2,v3 and the tie-to-zero convention explicitly defined in its proof, returning (0,1,0), cut {{v1,v3},{v2}}, crossing edges v1v2,v2v3, optimum 2.",
+      "source_paths": [
+        "items/thm-conditional-expectation-derandomizes-max-cut-half-approximation.md: Proof steps 1.1, 3.1 and 4.1",
+        "items/thm-random-cut-has-expected-half-the-edges.md: Statement and complete Proof",
+        "items/def-optimization-problem-and-approximation-ratio.md: Definition"
+      ],
+      "source_reading": "No external source was needed or consulted for this familiar finite computation. The Statement quote in the contract does not specify a tie rule; the complete actual algorithm in the supplier proof does.",
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-conditional-expectation-for-a-small-max-cut-instance.md --json",
+          "exit_code": 0,
+          "result": "1 checked, 0 failed."
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/ex-conditional-expectation-for-a-small-max-cut-instance.md items/thm-max-three-sat-has-no-ptas-unless-p-equals-np.md library/computability-theory/approximation-algorithms-and-gap-reductions.md library/computability-theory/approximation-algorithms-and-gap-reductions-examples.md",
+          "exit_code": 0,
+          "result": "4 files: all math spans and YAML parse."
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/frontier-37-owner-30-batch-17.proof-contracts.json --strict --items ex-conditional-expectation-for-a-small-max-cut-instance",
+          "exit_code": 0,
+          "result": "0 errors, 0 warnings, 1/1 checked."
+        },
+        {
+          "command": "node tools/finite-smoke.mjs research/frontier-37-owner-30-batch-17.proof-contracts.json --items ex-conditional-expectation-for-a-small-max-cut-instance --json",
+          "exit_code": 0,
+          "result": "8 placements, 15 conditional prefixes, tie decisions, returned partition and optimum 2 checked."
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Complete the theorem contract update and final report; preserve this unchanged carrier and captured context."
+    },
+    "thm-max-three-sat-has-no-ptas-unless-p-equals-np": {
+      "status": "Local repair, contract synchronization, focused checks and review-context capture complete.",
+      "claim": "A PTAS implies P=NP; one fixed factor above the gap threshold of the 3-SAT reduction also decides every NP language by composition.",
+      "conventions": "Apply the PCP-to-3-CNF lemma once to the NP-complete 3-SAT language, use its constructed positive rational delta<1, and compose every B-to-3-SAT many-one reduction with that same threshold decider.",
+      "dependency_ids": [
+        "lem-pcp-verifier-reduces-to-gap-max-three-sat",
+        "thm-three-sat-is-np-complete",
+        "def-np-hard-and-np-complete",
+        "def-polynomial-time-many-one-reduction",
+        "def-p",
+        "prop-p-is-contained-in-np-intersection-conp",
+        "def-ptas-fptas-and-apx",
+        "def-gap-problem-and-gap-preserving-reduction",
+        "def-np-by-verifiers",
+        "def-axiom-of-choice"
+      ],
+      "source_reading": "The same complete author-hosted Arora\u2013Barak argument recorded for the lemma, especially \u00a718.2.1 and Theorem 18.13, explicitly uses one NP-complete 3-SAT anchor. No uniform language-independent gap is inferred from the local supplier Statement.",
+      "interface_change": {
+        "before": "More precisely, for the fixed delta>0 of the preceding reduction, any polynomial-time algorithm with maximization factor rho>1-delta would decide every language in NP.",
+        "after": "More precisely, fix the preceding reduction for the NP-complete language 3-SAT and its gap delta>0. Any polynomial-time algorithm with maximization factor rho>1-delta would decide every language in NP."
+      },
+      "direct_consumer_examination": {
+        "search": "rg -n thm-max-three-sat-has-no-ptas-unless-p-equals-np items library articles",
+        "item_consumers": [],
+        "page_uses": [
+          {
+            "path": "library/computability-theory/approximation-algorithms-and-gap-reductions.md",
+            "affected_use": "Page items list places this theorem after the verifier reduction; final paragraph claims that the two reductions show a PTAS for Max-3SAT or independent set would decide every NP language and force P=NP.",
+            "disposition": "unaffected",
+            "reason": "The theorem still proves exactly that PTAS consequence, with the same AC premise; the page makes no claim about one verifier gap shared by arbitrary languages."
+          }
+        ]
+      },
+      "unresolved_obligations": [],
+      "next_action": "Return this batch report to the controller; no worker, judge, gate, or certification was launched.",
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-max-three-sat-has-no-ptas-unless-p-equals-np.md --json",
+          "exit_code": 0,
+          "result": "1 checked, 0 failed. An earlier supplier-step locator was misparsed as a forward reference; the prose was corrected before this pass."
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/thm-max-three-sat-has-no-ptas-unless-p-equals-np.md (also checked together with the example and owning pages)",
+          "exit_code": 0,
+          "result": "KaTeX math and YAML parse."
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/frontier-37-owner-30-batch-17.proof-contracts.json --strict --items thm-max-three-sat-has-no-ptas-unless-p-equals-np",
+          "exit_code": 0,
+          "result": "0 errors, 0 warnings, 1/1 checked. An earlier unanchored boundary-evidence diagnostic was corrected to cite step 1.1 and F1."
+        }
+      ]
+    },
+    "focused_dependency_check": {
+      "command": "node tools/depcheck.mjs --items-file /tmp/prestige-step7-u17-focused-items.json --json (temporary array of the three assigned IDs; removed after use)",
+      "exit_code": 0,
+      "result": "0 errors; 141 global warnings. Focused item checks covered exactly the assigned IDs; global page metadata and cycle checks completed. Warnings report other items appearing on multiple pages and are outside this assignment."
+    },
+    "published_ledger_updates": "No published defects or affected published consumers were discovered; no published-ledger update is proposed.",
+    "final_integrity_checks": {
+      "result": "Exact rejected tuple coverage and one review per assigned item passed. All captured reviews still match current carriers and direct supplier interfaces; none was refreshed. Direct comparison confirmed the lemma Statement unchanged and the theorem Statement changed. The current dependency/reference graph reports zero direct item consumers of the theorem; owning page use was separately examined and remains sound. Repaired batch and aggregate contract rows agree. No judge stamp was present on either repaired draft carrier.",
+      "unresolved_obligations": []
+    }
+  },
+  "gate_resolutions": []
+}

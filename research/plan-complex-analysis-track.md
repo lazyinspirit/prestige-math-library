@@ -3653,17 +3653,23 @@ distributions.
 | `thm-logarithmic-energy-well-defined-and-lower-semicontinuous` | thm | Truncated kernels make energy representative-independent and lower semicontinuous under weak-* convergence. |
 | `thm-equilibrium-measure-existence-and-uniqueness` | thm | Every nonpolar compact set has a unique probability measure of minimal logarithmic energy. |
 | `thm-frostman-equilibrium-theorem` | thm | The equilibrium potential is at most $V_K$ in the plane and equals $V_K$ quasi-everywhere on $K$, with the polar exceptional set explicit. |
+| `prop-reciprocity-inequality-for-logarithmic-potential` | prop | For nonpolar compact $K$ and a compactly supported probability measure $\nu$, $\inf_K U^\nu\le V_K$, by exchanging logarithmic-potential integrals against the equilibrium measure and applying Frostman's upper bound. |
+| `def-chebyshev-constant-compact-set` | def | For nonempty compact $K$, define $t_n(K)$ as the infimum of the $K$-supremum norms of monic degree-$n$ polynomials and $\operatorname{cheb}(K)=\inf_{n\ge1}t_n(K)^{1/n}$; set the empty-set constant to zero. |
+| `lem-chebyshev-constant-is-submultiplicative-root-limit` | lem | Multiplication of near-minimizers gives $t_{m+n}\le t_mt_n$, and a complete zero/positive-case argument proves $t_n^{1/n}\to\operatorname{cheb}(K)$. |
+| `lem-monic-polynomial-capacity-lower-bound` | lem | Every monic degree-$n$ polynomial satisfies $\lVert p\rVert_K\ge\operatorname{cheb}(K)^n$ and $\lVert p\rVert_K\ge\operatorname{cap}(K)^n$; prove the latter using the normalized zero-counting measure and reciprocity. |
 | `def-polar-set-and-quasi-everywhere` | def | A polar set is contained in the $-\infty$ locus of a nonconstant subharmonic function, equivalently has logarithmic capacity zero in the compact/local formulation proved here. |
 | `thm-principle-of-descent-and-domination` | thm | Weak limits satisfy the lower-envelope inequality for logarithmic potentials, and the domination principle extends quasi-everywhere inequalities. |
 | `def-riesz-measure-subharmonic-function` | def | The Riesz measure $\mu_u=(2\pi)^{-1}\Delta u$ is defined distributionally and shown independent of test-function representatives. |
 | `thm-riesz-decomposition-subharmonic-plane` | thm | Locally, $u(z)=h(z)+\int\log\lvert z-w\rvert\,d\mu_u(w)$ for a harmonic $h$, with uniqueness after the kernel normalisation. |
 | `thm-green-function-from-equilibrium-potential` | thm | For the unbounded component of $\widehat{\mathbb C}\setminus K$, $g(z,\infty)=V_K-U^{\mu_K}(z)$ after the standard normalisation, quasi-everywhere on the boundary. |
-| `def-fekete-points-and-transfinite-diameter` | def | Define the $n$-point Vandermonde extremum and its limiting transfinite diameter with normalization independent of an ordering of the points. |
-| `thm-logarithmic-capacity-equals-transfinite-diameter` | thm | The energy capacity and transfinite diameter agree, via Fekete measures and the principle of descent. |
+| `def-fekete-points-and-transfinite-diameter` | def | Define the $n$-point Vandermonde extremum, its limiting transfinite diameter, and the monic polynomial $F_n(z)=\prod_j(z-z_j)$ of a Fekete tuple, independently of its ordering. |
+| `thm-logarithmic-capacity-equals-transfinite-diameter` | thm | Energy capacity, transfinite diameter and Chebyshev constant agree. Fekete polynomials are asymptotically extremal; their empirical measures converge to the equilibrium measure when capacity is positive, and $\lvert F_n(z)\rvert^{1/n}\to\exp(-U^{\mu_K}(z))$ uniformly on compact subsets of $\mathbb C\setminus K$. |
 
 Companion: capacity of a disc and interval; equilibrium measure on a circle;
 finite/countable polar sets; a Cantor-set capacity contrast; Riesz measure of
 $\log|f|$ as the zero divisor; Green function recovered from a conductor.
+Also include exact disk and interval monic extremal norms, disk Fekete tuples,
+and convergence of Chebyshev extremal-node measures to the arcsine measure.
 
 Sources and proof strategy: Saff, §§1--3 (“Transfinite diameter, logarithmic
 capacity, and Chebyshev constant,” “Harmonic, superharmonic and subharmonic
@@ -3797,9 +3803,17 @@ none.
 
 ## CA-NV-2. Logarithmic Derivative, Second Main Theorem and Defects
 
-Proposed id `nevanlinna-second-main-theorem-and-defects`. `requires`: CA-NV-1
-and the measure exceptional-set interface. CA-23 is an agreement seam, never
-a prerequisite.
+Proposed id `nevanlinna-second-main-theorem-and-defects`. `requires`: CA-NV-1,
+the measure exceptional-set interface,
+`the-riemann-sphere-and-mobius-transformations`, `bloch-schottky-and-picard`,
+`normal-families-and-montels-theorem`, `isolated-singularities-and-laurent-series`,
+`complex-power-series-and-analytic-functions`,
+`complex-differentiability-and-cauchy-riemann`,
+`the-complex-exponential-and-eulers-formula`, and
+`the-inverse-function-theorem-completed`. These published pages supply the
+target normalization, the independent classical comparison, and the
+Laurent/logarithm exterior-extension argument. The quantitative
+punctured-disc proof uses the exterior SMT developed here.
 
 | id | kind | one-line statement |
 |---|---|---|
@@ -3808,13 +3822,15 @@ a prerequisite.
 | `thm-nevanlinna-second-main-theorem` | thm | For distinct $a_1,\ldots,a_q\in\widehat{\mathbb C}$, the truncated counting functions satisfy $(q-2)T(r,f)\le\sum_j\overline N(r,a_j;f)+S(r,f)$. |
 | `def-nevanlinna-deficiency-and-ramification-index` | def | Define $\delta(a,f)$ and the ramification defect from asymptotic counting ratios, with values in $[0,1]$. |
 | `thm-nevanlinna-defect-relation` | thm | The sum of deficiencies of a nonconstant meromorphic function is at most $2$, with the ramification refinement stated separately. |
+| `thm-local-second-main-theorem-on-a-punctured-disc` | thm | Assume Countable Choice. Invert by $F(w)=f(z_0+\rho/w)$ and define normalized circular exterior proximity and counts based at $|w|=1$. Then $(q-2)T_{\rm ext}(R,F)\le\sum_j\overline N_{\rm ext}(R,a_j;F)+O(\log^+T_{\rm ext}+\log R)$ outside a set of finite linear measure in $R$; the puncture radius is exactly $s=\rho/R$ and the exceptional set is transformed with Jacobian $\rho/R^2$. |
 | `cor-nevanlinna-picard-theorems` | cor | A nonconstant meromorphic entire-plane function omits at most two sphere values, hence a nonconstant entire function omits at most one finite value; the punctured-disc form gives great Picard. |
 | `thm-nevanlinna-five-value-theorem` | thm | Two nonconstant meromorphic functions sharing five distinct values ignoring multiplicity are identical. |
 
 Companion: two omitted values for $e^z$ as a meromorphic map; deficiencies of
 elementary functions; the truncated-versus-full counting distinction; why the
 exceptional radii cannot simply be erased; sharpness of $q-2$; comparison with
-CA-23's normal-family proof.
+the independent normal-family proof; retain `ex-five-value-bound-is-sharp`
+as the four-shared-values counterexample alongside the six binding examples.
 
 Sources and proof strategy: Eremenko §§4--6 (“Gauss--Bonnet formula,” “Second
 main theorem: value distribution,” and the logarithmic-derivative/ramification
@@ -3825,6 +3841,24 @@ the logarithmic-derivative lemma as the hard analytic engine, then reduce the
 SMT to it through partial fractions and ramification counting. The error term
 and its finite-measure exceptional set appear in every dependent statement.
 Higher-dimensional Cartan--Nevanlinna theory is out of scope.
+
+For the punctured-disc theorem, Lund--Ye, *Nevanlinna theory of meromorphic
+functions on annuli* (2010), Definition A and Theorem A2, printed pp. 549 and
+552, provide the genuine exterior-domain logarithmic-derivative estimate.
+Derive normalized annular Jensen locally with its fixed inner-circle winding
+term $k_a\log R$, hence an $O(\log R)$ First Main Theorem error. The displayed
+source mean has a normalization ambiguity, so its First Main Theorem is used
+only to corroborate the boundary-error scale. Reproduce the partial-fraction
+and ramification proof using the exterior derivative estimate and an explicit
+Möbius target comparison; the plane SMT conclusion is not an exterior theorem.
+For Picard, prove that $T_{\rm ext}+C_0\log R$ is nondecreasing, fill exceptional
+radii using good radii in $[R,R+1]$, and split the zero-free exterior function's
+Laurent logarithm into an entire part and a part holomorphic at infinity.
+The published rational-characteristic criterion then gives extension.
+The Schottky exterior-extension lemma remains an independent proof. Tsuji
+covering-radius estimates and symmetric-annulus theorems do not supply this
+circular exterior growth bridge. Exact sources and supplier uses are recorded
+in `frontier-37-owner-30-scope-repair-nevanlinna.md`.
 
 Forward references: CA-23 later records the independent classical proof of
 Picard; that agreement is non-load-bearing.
@@ -3849,12 +3883,16 @@ Conceptual placement: after CA-RS-1 and CA-18. Proposed page id
 | `def-weierstrass-zeta-and-sigma-functions` | def | The Weierstrass $\zeta$ and $\sigma$ functions are the logarithmic primitive/product companions of $\wp$, with their quasi-periods stated explicitly. |
 | `thm-weierstrass-lattice-discriminant-is-nonzero` | thm | For a genuine lattice, $g_2(\Lambda)^3-27g_3(\Lambda)^2\ne0$; hence the associated projective cubic is smooth. |
 | `thm-complex-torus-weierstrass-cubic-isomorphism` | thm | $z\mapsto[X:Y:Z]=[\wp(z):\wp'(z):1]$ extends across $0$ to $[0:1:0]$ and identifies $\mathbb C/\Lambda$ biholomorphically with $Y^2Z=4X^3-g_2XZ^2-g_3Z^3$. |
+| `thm-elliptic-cubic-chord-tangent-group-law` | thm | Transport addition through the torus/cubic biholomorphism and prove that every line section sums to zero with intersection multiplicities, including tangents, vertical lines and the line at infinity; hence uniformization is a group isomorphism for the geometric chord-and-tangent law. |
 
 Companion: square and hexagonal lattices; oriented bases and $SL_2(\mathbb Z)$;
 a fundamental-parallelogram boundary translated away from zeros and poles;
 half-period values; the addition and duplication formulas; $\sigma$'s simple
 lattice zeros; degeneration when the discriminant vanishes. The last example
-is orientation only and cannot be cited.
+is orientation only and cannot be cited. Also include the rectangular real
+case with inverse elliptic integrals and Jacobi periods, the rank-one
+$\pi\cot(\pi z)$ uniformization of the punctured conic, and the canonical
+reduced lattice basis with its precise boundary and symmetry ambiguities.
 
 Sources and proof strategy: Ahlfors, *Complex Analysis*, 3rd ed., Ch. 7
 §§2.1--3.3, headings “The Period Module,” “Unimodular Transformations,” “The
@@ -3870,6 +3908,10 @@ principal parts and compact-torus Liouville, split every elliptic function into
 even and odd parts for the field theorem, prove nonvanishing of the
 discriminant before calling the cubic smooth, and check its point at infinity
 in a local coordinate. Arithmetic complex multiplication is out of scope.
+For the cubic group law, first transport the torus operation, then prove its
+agreement with the chord rule using the addition formula and differential
+equation. Establish tangent and infinity multiplicities rather than assuming
+the geometric law is already associative.
 
 Forward references: CA-MF-1 consumes this pair but is not used here; otherwise
 none.
@@ -5367,7 +5409,9 @@ they therefore belong to Phase 3 and do not create Phase-2 roots.
 ## E. Repaired planned enrichment and proof machinery
 
 All labels in this subsection name A pages; every corresponding `-examples`
-B page has the singleton A requirement and is a dependency leaf.  The exact
+B page requires its A page and is a dependency leaf. CA-EF-1's B page also
+requires `harmonic-functions-and-the-poisson-integral` for Schwarz reflection
+and `mittag-leffler-and-runges-theorem` for the cotangent expansion. The exact
 direct A requirements below supersede the informal ranges above.
 
 | pair | exact direct A requirements after external suppliers exist |
@@ -5377,8 +5421,8 @@ direct A requirements below supersede the informal ranges above.
 | CA-HP-1 `harmonic-hardy-classes-and-fatou-boundary-limits` | `harmonic-functions-and-the-poisson-integral`; CA-HM-1; `complex-lp-spaces-and-test-function-conventions`; `the-duality-of-lp-and-lq`; `density-separability-and-convolution-in-lp`; `the-maximal-function-and-lebesgue-differentiation`; `radon-measures-and-the-riesz-markov-kakutani-theorem`; `banach-alaoglu-goldstine-and-krein-milman`; `reflexivity-and-eberlein-smulian` |
 | CA-HP-2 `analytic-hardy-spaces-and-canonical-factorisation` | CA-HP-1; `the-argument-principle-and-rouche`; `infinite-products-and-weierstrass-factorisation`; `the-radon-nikodym-theorem-and-lebesgue-decomposition`; `complex-lp-spaces-and-test-function-conventions`; `orthonormal-bases-parseval-and-fourier-series` |
 | CA-NV-1 `jensen-theory-and-nevanlinnas-first-main-theorem` | `isolated-singularities-and-laurent-series`; `the-argument-principle-and-rouche`; `harmonic-functions-and-the-poisson-integral`; `the-lebesgue-integral-and-the-convergence-theorems` |
-| CA-NV-2 `nevanlinna-second-main-theorem-and-defects` | CA-NV-1; `measures-and-their-basic-properties`; `lebesgue-measure-on-euclidean-space` |
-| CA-EF-1 `elliptic-functions-and-complex-tori` | `the-winding-number-and-the-global-cauchy-theorem`; `isolated-singularities-and-laurent-series`; `the-argument-principle-and-rouche`; `infinite-products-and-weierstrass-factorisation`; CA-RS-1; `subspaces-products-and-quotients`; `covering-spaces-and-lifting` |
+| CA-NV-2 `nevanlinna-second-main-theorem-and-defects` | CA-NV-1; `measures-and-their-basic-properties`; `lebesgue-measure-on-euclidean-space`; `the-riemann-sphere-and-mobius-transformations`; `bloch-schottky-and-picard`; `normal-families-and-montels-theorem`; `isolated-singularities-and-laurent-series`; `complex-power-series-and-analytic-functions`; `complex-differentiability-and-cauchy-riemann`; `the-complex-exponential-and-eulers-formula`; `the-inverse-function-theorem-completed` |
+| CA-EF-1 `elliptic-functions-and-complex-tori` | `the-winding-number-and-the-global-cauchy-theorem`; `isolated-singularities-and-laurent-series`; `the-argument-principle-and-rouche`; `infinite-products-and-weierstrass-factorisation`; CA-RS-1; `subspaces-products-and-quotients`; `covering-spaces-and-lifting`; `orthonormal-bases-parseval-and-fourier-series`; `mittag-leffler-and-runges-theorem` |
 | CA-MF-1 `level-one-modular-forms-and-the-j-invariant` | CA-EF-1; `the-argument-principle-and-rouche`; `infinite-products-and-weierstrass-factorisation`; `the-riemann-zeta-function`; CA-RS-1; `group-actions-and-cayleys-theorem`; `subspaces-products-and-quotients` |
 | CA-RS-1 `riemann-surfaces-branched-maps-and-differentials` | `the-riemann-sphere-and-mobius-transformations`; `analytic-continuation-and-monodromy`; `covering-spaces-and-lifting`; `classification-of-covering-spaces`; topology's new `classification-of-compact-connected-surfaces` A page |
 | CA-RS-H `hodge-theory-on-compact-riemann-surfaces` | CA-RS-1; SC-5; `tensor-fields-exterior-algebra-and-differential-forms`; `the-exterior-derivative-and-cartan-calculus`; `integration-of-forms-and-the-general-stokes-theorem`; `riemannian-metrics-length-distance-and-volume`; `complex-lp-spaces-and-test-function-conventions`; `hilbert-space-geometry-and-riesz-representation`; `reflexivity-and-eberlein-smulian`; `rellich-kondrachov-and-sobolev-compactness`; `fredholm-elliptic-problems-and-the-elliptic-spectrum`; `interior-and-boundary-sobolev-elliptic-regularity` |
@@ -5705,7 +5749,8 @@ singleton A id. Category is `complex-analysis` throughout.
 
 The existing A inventory table under each of the nineteen original enrichment
 headings is binding in printed order. Its `kind` column expands as `def` ->
-`definition`, `thm` -> `theorem`, `lem` -> `lemma`, and `cor` -> `corollary`;
+`definition`, `thm` -> `theorem`, `lem` -> `lemma`, `cor` -> `corollary`, and
+`prop` -> `proposition`;
 its one-line-statement cell is the exact plan title. Apply these five changes,
 which are the only exceptions:
 
@@ -5763,6 +5808,8 @@ part of the splice and leaves no editorial title choice.
   `ex-green-function-on-a-slit-domain-by-conformal-transport`;
   `cex-green-function-pointwise-boundary-limit-at-an-irregular-puncture`.
 - CA-PT-1: `ex-logarithmic-capacity-of-disc-and-interval`;
+  `ex-chebyshev-extremal-polynomials-and-capacity`;
+  `ex-chebyshev-extremal-nodes-and-arcsine-measure`;
   `ex-equilibrium-measure-of-a-circle`; `ex-finite-and-countable-polar-sets`;
   `ex-cantor-sets-with-zero-and-positive-capacity`;
   `ex-riesz-measure-of-log-modulus-is-zero-divisor`;
@@ -5789,7 +5836,8 @@ part of the splice and leaves no editorial title choice.
   `ex-truncated-versus-full-nevanlinna-counting`;
   `cex-nevanlinna-error-bound-without-exceptional-radii`;
   `ex-sharpness-of-nevanlinna-q-minus-two`;
-  `ex-nevanlinna-and-normal-family-picard-proofs`.
+  `ex-nevanlinna-and-normal-family-picard-proofs`;
+  `ex-five-value-bound-is-sharp`.
 - CA-RS-1: `ex-basic-riemann-surface-atlases`;
   `ex-nonsingular-algebraic-curve-charts`;
   `ex-ramification-of-power-and-hyperelliptic-maps`;
@@ -5801,7 +5849,10 @@ part of the splice and leaves no editorial title choice.
   `ex-weierstrass-p-at-half-periods`;
   `ex-weierstrass-addition-and-duplication-formulas`;
   `ex-weierstrass-sigma-simple-lattice-zeros`;
-  `cex-singular-weierstrass-cubic-when-discriminant-vanishes`.
+  `cex-singular-weierstrass-cubic-when-discriminant-vanishes`;
+  `ex-rectangular-weierstrass-function-and-elliptic-integral`;
+  `ex-rank-one-cotangent-uniformization`;
+  `ex-canonical-basis-of-complex-lattice`.
 - CA-MF-1: `ex-standard-fundamental-domain-tessellation`;
   `ex-modular-elliptic-points-and-stabilizers`;
   `ex-fourier-coefficients-e4-e6-delta-and-j`;

@@ -37,9 +37,9 @@ When a run-local owner authoring direction exists, the Step1 Beta brief and
 generated per-batch task both name it as a binding input. If it is added after
 `plan`, run `refresh-tasks` before any Beta dispatch so materialized prompts do
 not omit it.
-Step7 runs batch Astra medium adjudicators, three Sol xhigh owner agents for all
+Step7 runs batch Sol 6.1 high adjudicators, three Sol 6.1 high owner agents for all
 relevant downstream repairs (including published items), then one stable
-orchestrator certification pass. Sol rejudgment, Astra adjudication, three-owner
+orchestrator certification pass. Sol 6.1 high rejudgment, Sol 6.1 high adjudication, three-owner
 downstream repair and recertification repeat until the latest round's unique
 fatal original-frontier count is strictly below 5% of the frozen original scope.
 All confirmed defects, including nonfatal defects, require repair. New downstream
@@ -97,7 +97,7 @@ original evidence, creates no model-success receipts, and runs current gates
 before fresh cross-group closure and judgment.
 
 The active model boundary is stage-owned; see WORKFLOW.md and tools/models.mjs.
-Step7 adjudicators, owner repair agents and item rejudgments use Sol xhigh.
+Step7 adjudicators, owner repair agents and item rejudgments use Sol 6.1 high.
 If a provider becomes unavailable during a run, the operator may place
 `.autopilot/<run>.profile-overrides.json` with version 1 and a `profiles` map
 from requested registered profile names to effective registered profile names.

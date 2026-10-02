@@ -1,0 +1,162 @@
+# Step 5a adjudication — group a
+
+Run `frontier-37-owner-30`; batches 2, 3, 4. This is local Alpha work; it does not judge, stamp, certify, or advance the engine. Current carriers were compared with the pre/post hash maps; original reader/refuter reports remain evidence.
+
+## Sources checked
+
+- J. S. Milne, *Algebraic Number Theory* v3.08, [PDF](https://www.jmilne.org/math/CourseNotes/ANT.pdf): Theorem 3.41 and proof, PDF pp. 63–64, states monogenic prime factorisation with polynomial factors lifted to the coefficient ring; Proposition 5.5 and Corollary 5.6, PDF p. 88, state bounded-conjugate finiteness and the root-of-unity criterion; Theorem 5.11 and proof, PDF p. 91, uses the valuation map and class-number powers; Proposition 6.2, PDF pp. 97–99, and Lemma 6.5, PDF p. 101, support the cyclotomic and coprime-discriminant interfaces; Example 8.18, PDF p. 144, identifies arithmetic Frobenius with the power map and its order.
+- Ben Green, *Additive Combinatorics*, Lecture 3 §3.7, [PDF](https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf), printed pp. 27–28: Theorem 3.3 gives the upper Minkowski second-theorem bound by a triangular centroid deformation. Its proof cautions that adapted lattice vectors need not be an integral lattice basis. The current lower bound is checked directly in its item.
+- Jerry Shurman, *Math 361 Ninth Lecture*, [PDF](https://people.reed.edu/~jerry/361/lectures/lec09.pdf), PDF pp. 5–7: finite Gauss-sum square and arithmetic Frobenius sign computations. These sources support the cited mathematics subject to the current items' exact hypotheses.
+
+## Ordered review checkpoint
+
+### Level 0
+
+- `lem-finitely-many-number-field-ideals-of-bounded-norm` (batch 2): for an ideal of norm m, additive Lagrange gives m O_K inside it; it is therefore the preimage of one of finitely many ideals of the finite ring O_K/mO_K. The B=1 endpoint works.
+- `lem-triangular-borel-maps-scale-euclidean-volume` (batch 2): each Borel coordinate shear preserves one-dimensional section lengths and each diagonal factor scales them by a_i; Tonelli/product identification gives the product, including infinite volume. Back substitution gives a Borel inverse. AC discharges the cited countable-choice measure interfaces.
+- `lem-algebraic-integer-is-a-unit-iff-norm-is-plus-or-minus-one` (batch 3): an integral basis makes multiplication an integer matrix; a unit has an integer inverse matrix, and determinant ±1 makes the adjugate an integer inverse. The zero element has norm zero and is excluded by either side.
+- `lem-deleted-row-minors-of-a-matrix-with-zero-column-sums` (batch 3): signed minors lie in the one-dimensional kernel of A transpose alongside the all-ones vector; full rank makes at least one minor nonzero. The m=1 case follows too.
+- `lem-discrete-subgroups-of-real-vector-spaces-are-lattices` (batch 3): isolation gives bounded finiteness by a finite coordinate grid; a maximal real-independent tuple gives a bounded coset parallelepiped, so its integer span has finite index; the subgroup-of-Z^r induction supplies a real-independent Z-basis. Dimension zero and the zero subgroup are handled.
+- `thm-product-formula-for-number-fields` (batch 3, touched): clearing denominators proves x=a/b with integral nonzero a,b. Ideal factorisation and norm multiplicativity make the finite factor the inverse of |N(x)|; real and complex embeddings give |N(x)|, with complex factors squared. The reader removed an unused F1 tag from step 1.1; the mathematical statement is unchanged and AC is explicit for the ideal-factorisation route.
+- `def-conductor-of-a-cyclotomic-field` (batch 4): f=n witnesses nonempty admissibility, and well-ordering gives a least positive index. Isomorphism of splitting fields preserves the admissible set; the definition does not assert an arbitrary abelian field is cyclotomic.
+- `lem-coprime-discriminant-compositum-integral-basis` (batch 4): the degree-product hypothesis provides product Q-bases and extension of embeddings; Cramer's rule gives denominator divisibility by both discriminants, so coprimality forces integral coefficients. The tensor-basis determinant gives d_KL=d_K^n d_L^m. Both hypotheses are essential in the cited Milne Lemma 6.5.
+- `lem-monogenic-prime-factorisation-by-polynomial-reduction` (batch 4, flagged): the current Statement chooses integer lifts of factors in F_p[t], making P_i=(p,g_i-tilde(alpha)) well typed. CRT gives the primes and residue degrees; the published choice-free integral-ideal factorisation plus local nilpotency indices gives the exponents. See finding `refuter:4:5` below.
+- `lem-prime-power-cyclotomic-integral-structure` (batch 4): p is a unit multiple of (1-zeta)^e, the discriminant of the power basis is ±p^N, and coefficient descent proves O_K∩p^{-1}Z[zeta]=Z[zeta], forcing index one. The p^a=2 endpoint yields K=Q and discriminant one.
+
+### Level 1
+
+- `def-successive-minima-of-a-convex-body-with-respect-to-a-lattice` (batch 2): compactness makes each dilate bounded and its lattice intersection finite; a ball about zero and a lattice basis give finite positive minima, with monotonicity from central symmetry and convexity. The $n\ge1$ body assumption prevents an empty index range.
+- `lem-archimedean-norm-bound` (batch 2): polar integration in each complex coordinate contributes $(\pi/2)u\,du$, real signs contribute $2^{r_1}$, and the weighted simplex integral gives $t^n/n!$; AM–GM on $r_1+2r_2$ nonnegative entries gives the norm bound. Zero real or complex blocks are covered by empty products.
+- `lem-full-lattice-fundamental-domain-and-bounded-points` (batch 2): integer parts produce unique coordinates in $(0,1]^n$, determinant scaling gives the covolume, and bounded inverse coordinates leave only finitely many integer tuples. The empty bounded set is treated.
+- `thm-ring-of-integers-and-ideals-are-full-lattices` (batch 2): an integral basis maps to a real basis by the nonzero discriminant. The subgroup-of-Z^n induction gives a basis for an integral ideal; its nonzero element contains a full-rank principal ideal, forcing rank n. Clearing one denominator transfers this to fractional ideals without arbitrary choice.
+- `lem-roots-of-unity-in-a-number-field-are-finite` (batch 3): each root of unity is integral with a minimal polynomial of degree at most [K:Q] dividing X^N−1, so all its conjugates have modulus one; bounded-conjugate polynomial finiteness and the root bound give a finite union.
+- `lem-unit-logarithms-lie-in-the-product-formula-hyperplane` (batch 3): a unit has zero finite valuations and norm of absolute value one; the product formula and positive archimedean moduli make the weighted logarithmic coordinate sum zero. The complex weight two matches the product formula.
+- `lem-galois-action-on-the-quadratic-gauss-sum` (batch 4): reindexing the finite sum by multiplication by $b$ gives the inverse Legendre symbol, equal to $(b/p)$ by multiplicativity. The hypothesis $p\nmid b$ licenses the permutation and inverse.
+- `thm-cyclotomic-ring-of-integers` (batch 4): prime-power integral structures combine by the coprime-discriminant compositum lemma; degree multiplicativity supplies its second hypothesis, and Bézout reconstructs $\zeta_n$ from the prime-power roots. $n=1$ is handled separately.
+- `thm-quadratic-gauss-sum-square` (batch 4): the substitution $t=su$ and the geometric-sum split at $u=-1$ give $\tau^2=p(-1/p)$; the first supplement gives $p^*$. The result determines the square and does not choose a sign of $\tau$.
+
+- `thm-kronecker-root-of-unity-criterion` (batch 3): an additional fatal proof error was found in F7/step 4.1. The old assertion that $m_{\alpha^m}$ divides $m_\alpha(X^m)$ is false: for $\alpha=2$ and $m=2$, $X-4$ does not divide $X^2-2$. The Statement remains true. The repair uses the existing simple-extension embedding theorem and restriction-fibre lemma: each root of $m_{\alpha^m}$ is $\sigma(\alpha)^m$ for an embedding $\sigma$ of $K$, hence has modulus one. Milne Proposition 5.5/Corollary 5.6 supports the power-finiteness argument. The item, batch-3 contract and merged contract were updated; reflow unchanged, precheck and render passed, strict selected proof-contract passed with zero errors or warnings. Closed defect `frontier-37-owner-30-5a-a-kronecker-power-conjugates`; risk review completed.
+
+### Level 2
+
+- `lem-blichfeldt-lattice-point-principle` (batch 2): assuming no pair differs by a lattice vector, translate the disjoint tile intersections back into the fundamental tile; they remain disjoint, and countable additivity bounds the original volume by the covolume. Strict inequality is essential, as the fundamental tile itself shows.
+- `lem-successive-minima-attainment-and-adapted-flag` (batch 2): countable choice selects dilates approaching each minimum; finite lattice intersection and closedness give attained vectors. A finite greedy enumeration gives a flag even with tied minima, and an interior point outside the earlier flag would occur below its minimum. The selected vectors need not be an integral basis.
+- `thm-covolume-of-an-ideal-lattice` (batch 2): an integral ideal basis has integer change-of-basis matrix in an O_K basis; its determinant is the additive index and ideal norm. The unscaled embedding determinant supplies the factor $2^{-r_2}\sqrt{|d_K|}$; the theorem explicitly limits the formula to integral ideals.
+- `lem-kernel-of-the-unit-logarithm-is-the-roots-of-unity` (batch 3): roots of unity are integral units and map to zero; conversely zero logarithms make every real and complex conjugate have modulus one, so the repaired Kronecker criterion applies. The finite roots-of-unity lemma identifies the finite torsion kernel.
+- `cor-total-ramification-in-a-prime-power-cyclotomic-field` (batch 4): the quotient by $(1-\zeta)$ is $\mathbb Z/(\Phi_{p^a}(1))=\mathbb F_p$, so this ideal is prime. Its $\varphi(p^a)$th power is $(p)$; any prime over p contains it and thus equals it. The $p^a=2$ case is Q.
+- `lem-arithmetic-frobenius-on-a-cyclotomic-field` (batch 4): factorisation modulo $\ell\nmid f$ gives distinct primes, so Frobenius exists. The reduced root of $\Phi_f$ retains order f, and comparing its Frobenius power with $\sigma_b$ forces $b\equiv\ell\pmod f$; $f=1$ is trivial.
+- `thm-discriminant-of-a-cyclotomic-field` (batch 4): coprime prime-power discriminants give the absolute value by the compositum formula; pairing complex embedding rows gives sign $(-1)^{\varphi(f)/2}$. The reduced-index condition excludes a lone factor 2, and f=1 is separate.
+- `thm-quadratic-subfield-of-a-prime-cyclotomic-field` (batch 4): $\tau_p^2=p^*$ is nonsquare rational, so it generates a quadratic field; cyclicity of $(\mathbb Z/p)^\times$ gives the unique index-two subgroup and hence unique quadratic intermediate field. At p=3 it is the full cyclotomic field.
+- `ex-quadratic-gauss-sum-for-five` (batch 4): with the standard root, $t=\zeta+\zeta^{-1}>0$ solves $t^2+t-1=0$, giving $\tau_5=1+2t=\sqrt5$; the action lemma makes its stabilizer the square classes {1,4}.
+- `ex-quadratic-gauss-sum-for-three` (batch 4): the standard complex root makes $\tau_3=2i\sin(\pi/3)$ with positive sine, and the square theorem fixes its magnitude, yielding $i\sqrt3$. Reversing the primitive root changes the sign.
+
+### Level 3
+
+- `lem-minkowski-successive-minima-volume-deformation` (batch 2): compact convex slices through interior points have positive relative volume; Tonelli makes centroids Borel and central symmetry makes them odd. The resulting triangular map scales volume by the product of minima. A hypothetical collision modulo $2\Lambda$, or nonzero lattice point in the image, gives an interior lattice vector with nonzero last adapted coordinate, contradicting the earlier-level flag. Convexity of the image is never asserted.
+- `thm-minkowski-convex-body-theorem` (batch 2): applying Blichfeldt to $C/2$ at strict volume yields distinct points whose difference is a nonzero lattice point of C by convexity and symmetry. The open unit cube shows why strictness matters.
+- `lem-logarithmic-unit-image-is-discrete` (batch 3): bounded logarithmic coordinates bound all conjugates of each preimage unit by a fixed exponential, so bounded-conjugate polynomial finiteness gives finitely many units and hence finitely many image points. The repaired Kronecker supplier is used only later for the kernel, not in this boundedness step.
+- `cor-first-supplement-via-cyclotomic-frobenius` (batch 4, flagged): current F3 states Euler's criterion as a congruence and bounds only its Legendre-symbol side. Frobenius sends $i$ to $i^q=(-1)^{(q-1)/2}i$; two signs congruent modulo odd q are equal. See `refuter:4:1`.
+- `cor-second-supplement-via-cyclotomic-frobenius` (batch 4, touched and flagged): with any primitive eighth root $t^2=2$, Frobenius's power map gives signs by q modulo 8; Euler's criterion compares that sign to $(2/q)$ after cancellation of nonzero $t$ modulo an odd q. The current Remark cites step 3.1 for the Legendre comparison. See `refuter:4:2`.
+- `thm-prime-factorisation-in-a-cyclotomic-field` (batch 4, flagged): reduction of $\Phi_{\ell^am}$ gives $\bar\Phi_m^{\varphi(\ell^a)}$ by induction and cancellation, and finite-field irreducible factors have degree $\operatorname{ord}_m(\ell)$. Monogenic factorisation uses explicit integer lifts in current F3 and step 4.1. The f=m=1 and unramified a=0 cases are stated. See `refuter:4:6`.
+- `thm-quadratic-frobenius-restriction-identity` (batch 4): the Gauss-sum action gives $(q/p)\tau$ and Euler's criterion applied to $\tau^2=p^*$ gives $(p^*/q)\tau$ modulo a prime over q. $q\ne p$ makes $\tau$ nonzero in the residue field, and odd q makes congruent signs equal.
+- `cex-gauss-sum-sign-without-a-complex-embedding` (batch 4): at p=3 the primitive roots $\zeta$ and $\zeta^2$ yield Gauss sums $\tau$ and $-\tau$, with $\tau^2=-3\ne0$. Their common square and generated field do not fix the sign.
+- `ex-quadratic-subfield-of-q-zeta-seven` (batch 4): p*=−7 at p=7; the quadratic-subfield theorem gives $\mathbb Q(\tau_7)=\mathbb Q(\sqrt{-7})$, independent of the primitive-root sign.
+
+### Level 4
+
+- `cor-minkowski-convex-body-theorem-at-equality` (batch 2): apply strict Minkowski to $(1+1/m)C$, select lattice points, and use finiteness in $2C$ plus closedness of C to pass to a nonzero limit. The open cube explains failure without closedness.
+- `lem-hermite-minkowski-bounded-primitive-integral-element` (batch 2): separate real and totally complex windows have volume strictly above the Minkowski threshold. Norm integrality makes one real embedding, or one complex conjugate pair, distinguishable from all remaining embeddings; the embedding-fibre count then forces the selected integral element to generate K. The imaginary quadratic case excludes a rational integer using its real-coordinate bound.
+- `thm-minkowski-second-theorem-on-successive-minima` (batch 2, touched): the lower bound uses the cross-polytope of adapted vectors, simplex volume $2^n/n!$, and the integer index determinant; the upper bound uses the centroid deformation with no collision modulo $2\Lambda$ and Blichfeldt. The reader corrected null overlaps of sign pieces and the measure supplier in F7; those corrections are mathematically necessary and sound.
+- `cor-cyclotomic-ramification-criterion` (batch 4): the common exponent is $\varphi(\ell^a)$, equal to one only at a=0 or the excluded reduced-index case $\ell=2,a=1$. Both directions follow, including f=1.
+- `cor-quadratic-reciprocity-via-frobenius` (batch 4): multiplicativity and the first supplement turn $(p^*/q)=(q/p)$ into the product formula; distinctness makes $(p/q)^2=1$. The argument does not use the published reciprocity theorem.
+- `thm-conductor-of-a-full-cyclotomic-field` (batch 4): reducing n of shape 2m with odd m preserves the field. If a reduced cyclotomic field embeds in another, inertia-group orders in the tower force $\varphi(p^{v_p(r)})\mid\varphi(p^{v_p(s)})$; strict growth on reduced exponents gives r|s and minimality. The n=2 and f=1 cases are explicit.
+- `ex-frobenius-restriction-for-p-five-q-three` (batch 4): at p=5,q=3 the two Legendre symbols are both −1, and the quadratic Frobenius identity sends the standard $\tau_5=\sqrt5$ to its negative, so the restriction is nontrivial.
+- `ex-second-supplement-from-q-zeta-eight` (batch 4, flagged twice): the current example fixes $\zeta=e^{\pi i/4}$, making $\zeta+\zeta^{-1}$ the positive square root of two. F2 now correctly states $\zeta^5=\zeta^4\zeta=-\zeta$. The four power-map signs are consistent with q modulo 8. See `refuter:4:3` and `refuter:4:4`.
+
+### Level 5
+
+- `thm-hermite-minkowski-finiteness` (batch 2): each eligible degree-n field with n≥2 has a primitive integral element with conjugates bounded by $\sqrt{B+2}$; only finitely many monic integer minimal polynomials can occur, and each defines at most one isomorphism class. The degree-one field is Q.
+- `thm-small-element-in-a-number-field-ideal` (batch 2): choose t so the archimedean region has exactly $2^n$ times the ideal-lattice covolume; equality Minkowski gives nonzero alpha in the integral ideal, and AM–GM gives the stated norm bound with the unscaled $2^{-r_2}$ convention.
+- `cex-minkowski-constants-change-under-scaled-embedding` (batch 2): in Q(i), the unscaled lattice Z² has covolume one and the scaled lattice $\sqrt2\,\mathbb Z^2$ has covolume two. The radius-6/5 disc has area strictly between the wrong threshold four and true threshold eight, yet contains no nonzero scaled-lattice point.
+- `thm-logarithmic-unit-image-is-a-full-lattice` (batch 3, touched): fixed-product boxes and discs have equality Minkowski volume, producing integral elements of norm at most A. Finitely many principal ideals of that norm let each element be a fixed generator times a unit. Varying two radii makes any nonconstant linear functional on H unbounded while generator contributions remain bounded, so units span H; discreteness then gives rank $r_1+r_2-1$. The reader corrected the absolute-growth wording in 7.2; the argument is sound.
+- `cor-unramified-prime-decomposition-in-a-cyclotomic-field` (batch 4): conductor f is reduced, so the a=0 case of prime factorisation gives e=1, residue degree $\operatorname{ord}_f(\ell)$, and $\varphi(f)/\operatorname{ord}_f(\ell)$ primes. The f=1 order convention gives one prime.
+
+### Level 6
+
+- `thm-minkowski-bound-for-ideal-classes` (batch 2): clear a denominator of the inverse class to obtain an integral ideal b, take a small nonzero beta in b, and form the integral ideal $(\beta)b^{-1}$. Norm multiplicativity cancels Nb and gives the bound in the original class, with no fractional-ideal norm formula.
+- `thm-dirichlet-unit-theorem` (batch 3): lift a finite Z-basis of the full logarithmic lattice to units; the kernel is precisely finite $\mu(K)$, so every unit has a unique root-of-unity times basis-power expression. The rank-zero case is an empty product.
+- `cor-complete-splitting-in-a-cyclotomic-field` (batch 4): for $\ell\nmid f$, the unramified residue degree is $\operatorname{ord}_f(\ell)$; complete splitting is exactly degree one, equivalent to $\ell\equiv1\pmod f$. The f=1 convention is coherent.
+- `ex-reduced-conductor-of-q-zeta-six` (batch 4): $\mathbb Q(\zeta_6)=\mathbb Q(\zeta_3)$ has conductor three; two is unramified and has order two modulo three, giving one degree-two prime. It directly tests the excluded index-6 ramification shortcut.
+
+### Level 7
+
+- `cor-class-group-generated-by-small-primes` (batch 2): factor a Minkowski-bounded integral representative; norm multiplicativity bounds each prime factor by the representative norm, and class multiplication gives the generators. An empty factorisation yields the principal class.
+- `cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one` (batch 2): norm at least one and the Minkowski bound imply $1\le c_n\sqrt{|d_K|}$. The displayed Bernoulli and π estimates show $c_n<1$ for n≥2, forcing |d_K|>1; degree one is excluded.
+- `thm-finiteness-of-the-number-field-class-group` (batch 2): the finite set of integral ideals of norm at most max(1,M_K) maps surjectively to the class group by the Minkowski bound. This proves finiteness without relying on finite generation alone.
+- `ex-class-group-from-small-prime-ideals` (batch 2): the reduction of $X^5-X-1$ modulo three has no factor of degree one or two, its resultant discriminant is squarefree 2869, and absence of roots modulo two and three rules out ideals of those norms. The signature gives M_K<4, so only norm one represents a class.
+- `ex-class-group-of-q-sqrt-minus-five` (batch 2): the quotient by $(2,1+\sqrt{-5})$ is F₂, its square is (2) by inclusion and equal norms, and the norm form excludes principality. The bound M_K<3 and uniqueness of a norm-two ideal leave exactly two classes.
+- `ex-class-group-of-q-sqrt-ten` (batch 2): the corrected quotient maps at two and three give exactly the listed ideals. Products $p_2^2=(2)$, $p_3p'_3=(3)$ and $p_2p_3=(4+\sqrt{10})$ identify their classes, while the norm equation is impossible modulo five. Since M_K<4, the group has exactly two classes. Closed defect `frontier-37-owner-30-5a-a-q-sqrt-ten-quotient-signs`; precheck, render and selected strict contract passed.
+- `ex-minkowski-bound-for-gaussian-integers` (batch 2): M_K=4/π<2, so every class has an ideal of norm one and is trivial; the Dedekind class-group criterion then gives PID. The unscaled complex embedding is used.
+- `cor-unit-ranks-by-number-field-signature` (batch 3): r₁+r₂−1=0 means signatures (1,0) or (0,1), giving Q or imaginary quadratic; real quadratic has signature (2,0), rank one and torsion {±1}. The proof does not claim all rank-one fields are real quadratic.
+- `def-fundamental-units` (batch 3): a finite basis of the logarithmic image has finite lifts to units, and the kernel μ(K) gives the equivalent unique product expression. The empty tuple handles rank zero; basis changes are unimodular.
+- `ex-arithmetic-of-q-zeta-five` (batch 4): f=5 gives d=125 and total ramification of five with e=4; ord₅(2)=4 gives one unramified degree-four prime, and 11≡1 gives four degree-one primes. The inertia statements match e.
+- `ex-prime-decomposition-in-q-zeta-eight` (batch 4): the discriminant formula gives 2⁸; the unit classes modulo eight have orders one for 1 and two for 3,5,7, producing respectively four degree-one or two degree-two primes.
+- `ex-prime-decomposition-in-q-zeta-twelve` (batch 4): the discriminant is 144; at two and three the factorisation parameters give e=f=2 and one prime each, while units modulo twelve have orders one or two, giving the stated unramified types.
+
+### Level 8
+
+- `cor-no-nontrivial-number-field-is-unramified-over-q` (batch 2): |d_K|>1 supplies a prime divisor. The proof also checks the published discriminant criterion locally: the reduced trace form is degenerate exactly when O_K/pO_K has a nilpotent prime-power factor, equivalent to ramification; finite residue fields are separable. This uses finite primes only.
+- `ex-discriminant-lower-bound` (batch 2): the degree-two constants are 1/2 and 2/π; Bernoulli bounds the ratio of the worst-case sequence $U_n$, making every $C_{n,r_2}<1$. An ideal norm at least one then forces |d_K|>1.
+- `def-number-field-regulator` (batch 3): fundamental logarithms form a real basis of H; their matrix has zero column sums, so all deleted-row minors agree in absolute value and are nonzero. The empty determinant is one in rank zero. Independence of the fundamental system is deferred to its theorem.
+- `thm-s-unit-theorem` (batch 3, flagged): the valuation map has kernel O_K× and image containing $h\mathbb Z^S$, because each prime class has hth power principal; the image is free of rank |S| and a finite-basis lift splits the sequence. The current step 8.1 explicitly lists AC-qualified F2–F5, including ideal factorisation and valuation additivity; finite local lifts use only finite choice. Milne Theorem 5.11, PDF p. 91, gives the same rank argument. See `refuter:3:1`.
+- `ex-real-quadratic-units-and-pell` (batch 3): norm ±1 identifies order units with Pell solutions; if negative Pell is solvable, the least negative unit squares to the least positive Pell unit, and otherwise all order units have norm one. For d=5 the maximal order has fundamental unit $(1+\sqrt5)/2$, while the smaller order has generator $2+\sqrt5=\varepsilon^3$ and norm-one Pell generator $\varepsilon^6$; their subgroup indices are distinguished.
+- `ex-units-in-a-real-cubic-field` (batch 3): triple-angle gives the stated cubic and three real root intervals; Vieta gives norms −1 and 1. The first two logarithmic coordinate sign ratios have opposite signs, proving real independence. An integer coordinate matrix against any fundamental system then gives finite index, without claiming these two units are fundamental.
+- `ex-units-of-q-and-imaginary-quadratic-fields` (batch 3): direct norm equations give ±1 in Q, four units in Z[i], and six powers of $(1+\sqrt{-3})/2$ in the Eisenstein ring; the signature corollary confirms rank zero.
+
+### Levels 9–10
+
+- `ex-no-everywhere-unramified-extension-of-q` (batch 2, level 9): the discriminant criterion makes being unramified at all finite primes equivalent to |d_K|=1; the earlier bound excludes this for degree greater than one, while Q is the necessary exception.
+- `thm-number-field-regulator-is-well-defined` (batch 3, level 9): zero column sums make all deleted minors equal in absolute value; two systems differ by a unimodular integer matrix, multiplying each determinant by ±1. Rank zero uses the empty determinant one, and nonzero rank gives positivity.
+- `cex-z-sqrt-d-units-need-not-equal-ok-units` (batch 3, level 9, touched): for d=5, the maximal order has $\varepsilon=(1+\sqrt5)/2$ and units ±εⁿ, while the Pell order units are ±ε³ⁿ. The quotient has index three; the norm-one Pell generator ε⁶ does not generate either full group. The reader's codomain and group distinction repairs are sound.
+- `ex-s-units-of-q` (batch 3, level 9): localisation at a finite prime set embeds in Q, and reduced denominators show that its units are exactly signed integer monomials in those primes. Unique prime factorisation gives the group isomorphism; the empty set gives ±1. The current S-unit theorem agrees after identifying the relevant prime ideals.
+- `ex-change-of-fundamental-units-preserves-regulator` (batch 3, level 10): the conjugate relations of $X^3-3X+1$ give the log columns $(a,b,c)$ and $(-c,-a,-b)$; the deleted minors are ±$(a^2+ab+b^2)$, approximately 0.84928745. A unimodular shear preserves their signed values and swapping columns reverses signs. The example explicitly says these two independent units are not proved fundamental, so this number need not equal the field regulator.
+- `ex-regulator-of-a-real-quadratic-field` (batch 3, level 10, touched): the fundamental unit gives log vector $(\log\varepsilon,-\log\varepsilon)$, so the deleted-row determinants are respectively negative and positive $\log\varepsilon$ and the regulator is their absolute value. The reader's d=5 distinction between maximal-order ε and the norm-one Pell generator ε⁶ is sound. I corrected the reversed determinant signs and Example wording; closed defect `frontier-37-owner-30-5a-a-regulator-deleted-row-signs`. Reflow unchanged; precheck, render and selected strict contract passed.
+
+## Routed decisions
+
+The companion decisions file records all 15 obligations with current carrier hashes and individual evidence. The original refuter severity was treated as evidence; a false auxiliary claim that left the stated theorem supported was classified nonfatal. Every confirmed finding has a closed defect-ledger row and `repair_confidence: 1`.
+
+| Obligation | Verdict | Closed defect IDs |
+| --- | --- | --- |
+| `touched:3:thm-product-formula-for-number-fields` | `accepted_repair` | `frontier-37-owner-30-5a-a-touched-3-product-formula-f1-tag` |
+| `refuter:4:5` | `confirmed_nonfatal` | `frontier-37-owner-30-5a-a-refuter-4-5` |
+| `refuter:4:1` | `confirmed_nonfatal` | `frontier-37-owner-30-5a-a-refuter-4-1` |
+| `touched:4:cor-second-supplement-via-cyclotomic-frobenius` | `amended_repair` | `frontier-37-owner-30-5a-a-touched-4-second-supplement-parity`, `frontier-37-owner-30-5a-a-refuter-4-2` |
+| `refuter:4:2` | `confirmed_nonfatal` | `frontier-37-owner-30-5a-a-refuter-4-2` |
+| `refuter:4:6` | `confirmed_nonfatal` | `frontier-37-owner-30-5a-a-refuter-4-6` |
+| `touched:2:thm-minkowski-second-theorem-on-successive-minima` | `accepted_repair` | `frontier-37-owner-30-5a-a-touched-2-minkowski-null-overlaps`, `frontier-37-owner-30-5a-a-touched-2-minkowski-measure-supplier` |
+| `refuter:4:3` | `confirmed_fatal` | `frontier-37-owner-30-5a-a-refuter-4-3` |
+| `refuter:4:4` | `confirmed_nonfatal` | `frontier-37-owner-30-5a-a-refuter-4-4` |
+| `touched:3:thm-logarithmic-unit-image-is-a-full-lattice` | `accepted_repair` | `frontier-37-owner-30-5a-a-touched-3-unit-lattice-absolute-growth` |
+| `refuter:3:1` | `confirmed_nonfatal` | `frontier-37-owner-30-5a-a-refuter-3-1` |
+| `touched:3:cex-z-sqrt-d-units-need-not-equal-ok-units` | `accepted_repair` | `frontier-37-owner-30-5a-a-touched-3-zsqrt5-codomain`, `frontier-37-owner-30-5a-a-touched-3-zsqrt5-group-distinction` |
+| `touched:3:ex-regulator-of-a-real-quadratic-field` | `amended_repair` | `frontier-37-owner-30-5a-a-touched-3-regulator-pell-generator`, `frontier-37-owner-30-5a-a-regulator-deleted-row-signs` |
+| `page:4:cyclotomic-arithmetic-and-reciprocity-via-frobenius` | `amended_repair` | `frontier-37-owner-30-5a-a-page-4-monogenic-supplier`, `frontier-37-owner-30-5a-a-page-4-frobenius-inputs`, `frontier-37-owner-30-5a-a-cyclotomic-page-discriminant-route` |
+| `page:3:dirichlets-unit-theorem-regulators-and-s-units` | `accepted_repair` | `frontier-37-owner-30-5a-a-page-3-choice-summary`, `frontier-37-owner-30-5a-a-page-3-sunit-saturation` |
+
+## Dependency and published review
+
+The monogenic lemma’s Statement now defines integer lifts of finite-field factors. Its direct item consumers are `lem-arithmetic-frobenius-on-a-cyclotomic-field` and `thm-prime-factorisation-in-a-cyclotomic-field`; both use the lifted notation in their current facts and proofs. The owning A-page summary is also aligned. No other direct reference consumer was found. The Kronecker, square-root-ten and regulator repairs changed proofs or example text, not an item Statement or Definition. No outside-group consumer requires 5b routing. No defective published supplier was established, so the published-consumer ledger was not changed; the existing batch-3 Kronecker-to-bounded-conjugates cross-batch row was rechecked against the repaired embedding argument and refreshed; no new edge was added.
+
+## Local checks
+
+- Risk reports without `--require-reviewed` were run for all three batch contracts before review. The final `--require-reviewed` runs passed with 28, 23 and 29 HIGH/CRITICAL items reviewed in batches 2, 3 and 4 respectively.
+- Reflow ran on all 14 changed or flagged item carriers; four were mechanically reflowed. Precheck passed 14/14 and rendercheck passed 14/14 items plus both touched A pages.
+- Strict proof-contract checks passed for all 31 batch-2 items and all 31 batch-4 items with no warnings; batch 3 passed 25/25 with one retained `shotgun-bracket` warning at S-unit proof 8.1. The four cited AC-qualified inputs are the ones used there. The merged contract passed its selected 14-item check with that same warning.
+- Refreshed the existing batch-3 cross-batch dependency row for the repaired Kronecker proof with `tools/frontier-dependency-ledger.mjs refresh --run frontier-37-owner-30`. All 15 decision hashes were checked against current carriers; every referenced defect row is closed with `repair_confidence: 1`.
+- A broader `depcheck` invocation returned two `published-unaudited` errors for `thm-gap-csp-is-np-hard` and `thm-pcp-theorem-np-equals-pcp-log-n-o-one`, outside this group. It is not a scoped Step-5 gate and no such item was edited here.
+- `defect-ledger validate --run frontier-37-owner-30` found no invalid group-a row after normalization, but returned 19 enum errors in group-i rows. Those rows are outside this dispatch; the generated ledger view was refreshed after the group-a rows were written.
+
+## Blockers
+
+No unresolved owned mathematical defect or escalation remains. The engine owns decision stamping and gate closure.

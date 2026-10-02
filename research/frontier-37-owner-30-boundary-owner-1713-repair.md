@@ -1,0 +1,22 @@
+# Exact Step5 boundary owner repair — frozen1713
+
+The immutable boundary-audit failure is `research/frontier-37-owner-30-step5-gate-failures-1713.json`. Its nine open clusters contain 134 candidate rows; 35 have stale item-content bindings and 99 existing reviews remain valid. Every one of those 35 current claim/case pairs was read substantively before a new review was written. The 35 were not inferred from the cluster headline.
+
+The original reviews—including historical Luna and other reviewer names—are preserved. Existing valid reviews are not renamed or reissued. Each replacement records its prior review, current source raw SHA-256, normalized itemHashGuard binding, canonical case/status/text row hash and a concrete mathematical reason. The new reviewer is accurately named owner-delegated Codex boundary review; no independent or Luna audit is claimed.
+
+## Exact new work
+
+- Batch16: induction-in-stages has five stale rows: empty, endpoints, degenerate and both iff directions. Identity cosets exclude empty quotient spaces; group inclusions are not interval endpoints; unitary equivalence is the theorem conclusion rather than an iff predicate. The degenerate disposition itself was wrong: equal subgroup stages and the zero representation are permitted. Its proposed row is now checked, supported by the positive-density construction 1.1, norm 2.1, range 3.1 and the same-group clause of its actual induction supplier. This is the only substantive owner contract-row replacement. Root was notified before its preparation.
+- Batch26: 20 stale iff rows on ten items. The current extension implication, analytic bounds, increment-existence conclusion, ramification identity, truncated exterior inequality, defect bounds, five-value implication, lacunary counterexample and exponential sharpness calculation contain no biconditional claim. Their concrete mathematical forms are distinguished in individual reviews.
+- Batch27: six stale reverse-iff rows on the cubic group law, duplication, sigma-zero example, nodal degeneration, elliptic divisor laws and Weierstrass differential equation. Identities of functions/quantities and a transported group law do not assert converses of their hypotheses.
+- Batch29: four stale reverse-iff rows on Oka--Weil and the three explicit dbar/Cousin examples. Approximation existence and the explicit numerical/realization assertions contain no converse claim.
+
+The owning helpers supplied eight additional stable corrected rows. Batch14 provided seven anchored Specht/Schur--Weyl rows; the actual definitions, single-box proof 7.1, filtration 1.2/3.1 and relevant removable-node/stabilizer suppliers were inspected. The zero ring, characteristic 2, last-row deletion, empty diagram and infinitesimal endomorphism expansion are handled as the rows state. Batch13 supplied the Toponogov degenerate row: its actual branches are 4.1 and 4.2, with the cut-point upper-support computation 5.1; the nonexistent 3.2 locator is gone. That item Statement and those actual proof blocks were checked solely for this boundary evidence. Batch13/14 sources and contracts were not edited.
+
+## Durable evidence and integration
+
+`research/frontier-37-owner-30-boundary-review-owner-1713.json` contains 43 exact row proposals: 35 frozen-row renewals plus the eight coordinated corrected rows. It includes current row payloads and all item/row bindings. Merge owning batch repairs first, then merge by item and boundary case, guarding the normalized item binding and canonical row hash. Do not replace other contract keys or other rows. No existing batch contract, central aggregate, item source, verification stamp or decision file was modified by this lane.
+
+A temporary exact-row fixture included the 134 frozen rows with 99 historical reviews retained, the 35 reviewed proposals, and the eight coordinated corrected rows. Its boundary-audit validation passes 142 rows with zero open template clusters and zero contradicted candidates; nine template clusters are fully upheld by bound reviews. `research/frontier-37-owner-30-boundary-review-owner-1713-validation.json` records the exact scope/result. This is a scoped local check, not a live gate attempt or whole-frontier review.
+
+Native Alpha writers were absent at entry. Content/row bindings were generated against the current stable owning contracts after the helpers declared their rows stable. Root owns central integration and gate closure.

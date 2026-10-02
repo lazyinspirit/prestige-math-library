@@ -1,0 +1,104 @@
+{
+  "run": "frontier-37-owner-30",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "27",
+  "input_sha256": "e05cdf19d5e313eca8bcdfe4dd966cdf4b0c59c46fd851eb9dff4ee3cbf9156e",
+  "decisions": [
+    {
+      "id": "ex-canonical-basis-of-complex-lattice",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "162823187a289b2fdc4a822565adce1ae1cbfaf129a6a799963dae97a9924865",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The displayed fixed-point equality omits (a-d)v from its imaginary part. For (a,b,c,d)=(0,1,-1,1) and tau=1/2+i sqrt(3)/2, the true quadratic tau^2-tau+1 is zero but the displayed imaginary part is sqrt(3)/2. This is a false algebraic equality used to obtain u, hence a logic defect. Replacing it by (2bu+a-d)v i justifies u=(d-a)/(2b) and v^2=(4-t^2)/(4b^2) without changing the claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-elliptic-function-for-a-lattice",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "39ab6a3cc429e23d3bd5b6ac53de164a5562c78f0d9925da50cb605a6bdcc01b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For f(z)=z one has f(z+omega)=f(z) for every z only when omega=0, so Per(f)={0} cannot contain a full lattice. The unconditional containment in the Definition is false (logic defect). Removed only that unconditional clause; the exact equivalence f is Lambda-elliptic iff Lambda is a subset of Per(f) retains the required hypothesis and all intended claims.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-canonical-basis-of-complex-lattice",
+      "disposition": "repaired",
+      "post_sha256": "3dca6cedec8aff64d5dec03ee43ad4c489ca86258e01dccc1c3374cbe9cb3be6",
+      "review_context_sha256": "092d050864928661c4cc054ab58c90c859ceb0ffaacf3e8d0a49463377eeb91c",
+      "reason": "Checked the entire verification: completing squares bounds integer denominator pairs, giving an attained maximum imaginary part; shears and inversion produce the specified half-open reduced region. The b=0 and b=1 boundary cases give uniqueness. The corrected fixed-point equation gives traces -1,0,1 and exactly the claimed 2,4,6 stabilizer counts. Also defined sigma=b/|b| explicitly and corrected the contract assertion that the reduced region was closed. Dependencies supply lattice orientation/basis changes (Definition and Remarks), complex coordinates/modulus laws, and floor; no AC or new prerequisite is needed. Precheck, rendercheck and strict scoped proof-contract checks passed. This is a local repair review, not an independent audit of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-elliptic-function-for-a-lattice",
+      "disposition": "repaired",
+      "post_sha256": "4413a0a239ef89d96ca23d8cdb0e6b76a80d654eb6320d5b408c7e7ba2894cfa",
+      "review_context_sha256": "847b61b37635ca71d77ec25c53a4e3a1e76aa20606a48abd0c73d611cb391e51",
+      "reason": "Verified Per(f) is a subgroup: 0 is a period, sums of periods preserve f, and substituting z-omega gives the inverse period. Lattice containment is exactly the stated ellipticity condition. The covering atlas supplies local inverse restrictions, so a periodic meromorphic plane function descends uniquely to a meromorphic torus function; surjectivity excludes the constant-infinity map on either side. Field closure uses meromorphic extension and denominators not identically zero. For nonzero f the zero and pole classes are closed isolated subsets of the compact torus, hence finite; zero is explicitly excluded from this divisor assertion. Clarified these three Remarks and corrected the contract containment evidence. The seven direct consumer uses inspected require already elliptic functions or independently established periodicity, so all remain sound under this correction. Precheck was not applicable to this definition (exit 0); rendering and strict scoped contract checks passed. Local repair review only, with no new independent audit claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "ex-boundary-free-fundamental-parallelogram",
+    "lem-weierstrass-p-degree-two-and-half-periods",
+    "thm-complex-torus-weierstrass-cubic-isomorphism",
+    "thm-elliptic-function-divisor-laws",
+    "thm-field-of-elliptic-functions-is-generated-by-p-and-p-prime",
+    "thm-weierstrass-p-differential-equation",
+    "thm-weierstrass-p-normal-convergence-and-periodicity"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "ex-canonical-basis-of-complex-lattice",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "finding": "The displayed fixed-point equality omits (a-d)v from its imaginary part. For (a,b,c,d)=(0,1,-1,1) and tau=1/2+i sqrt(3)/2, the true quadratic tau^2-tau+1 is zero but the displayed imaginary part is sqrt(3)/2. This is a false algebraic equality used to obtain u, hence a logic defect. Replacing it by (2bu+a-d)v i justifies u=(d-a)/(2b) and v^2=(4-t^2)/(4b^2) without changing the claim.",
+      "repair": "Corrected step 1.3 imaginary coefficient; synchronized contract derivation. Also corrected sigma notation and the nonfatal contract claim of closedness.",
+      "status": "locally_repaired_pending_engine_rejudgment",
+      "source_urls": [],
+      "familiar": true,
+      "uncertain": false
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "def-elliptic-function-for-a-lattice",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "finding": "For f(z)=z one has f(z+omega)=f(z) for every z only when omega=0, so Per(f)={0} cannot contain a full lattice. The unconditional containment in the Definition is false (logic defect). Removed only that unconditional clause; the exact equivalence f is Lambda-elliptic iff Lambda is a subset of Per(f) retains the required hypothesis and all intended claims.",
+      "repair": "Removed unconditional lattice containment; synchronized the empty-case contract. Also made the local covering restriction, nonzero denominator convention and closedness in divisor-finiteness reasoning explicit.",
+      "status": "locally_repaired_pending_engine_rejudgment",
+      "source_urls": [],
+      "familiar": true,
+      "uncertain": false
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed ex-canonical-basis-of-complex-lattice before editing the higher-level definition. Example interface unchanged byte-for-byte; there is no Statement or Definition section and no propagation event. Focused commands: node tools/tsx-run.mjs tools/precheck.mts items/ex-canonical-basis-of-complex-lattice.md (exit 0, 1 checked, 0 failing); node tools/rendercheck.mjs items/ex-canonical-basis-of-complex-lattice.md (exit 0, 1 file OK); node tools/proof-contract.mjs research/frontier-37-owner-30-batch-27.proof-contracts.json --strict --items ex-canonical-basis-of-complex-lattice --json (exit 0, ok:true, no errors or warnings). Contract writes used acquire/reread/edit/check/release. No unresolved mathematics for the completed example.",
+    "Completed def-elliptic-function-for-a-lattice. Exact original/current Definition comparison changes only the removal of \"containing Lambda\"; Statement absent. Remarks also clarify inverse local restrictions, denominators not identically zero, and closed isolated divisor classes. Focused commands: node tools/tsx-run.mjs tools/precheck.mts items/def-elliptic-function-for-a-lattice.md --json (exit 0, not-applicable, 0 checked); node tools/rendercheck.mjs items/def-elliptic-function-for-a-lattice.md (exit 0, 1 file OK); node tools/proof-contract.mjs research/frontier-37-owner-30-batch-27.proof-contracts.json --strict --items def-elliptic-function-for-a-lattice --json (exit 0, ok:true, no errors or warnings). Context hashes captured immediately after review, before any further item edits. All seven direct consumers are draft members of the frozen frontier; none uses the removed unconditional claim. No created prerequisite and no unresolved mathematics.",
+    "Direct consumer ex-boundary-free-fundamental-parallelogram; path items/ex-boundary-free-fundamental-parallelogram.md; exact affected clause: [F4] A $\\Lambda$-elliptic function is a meromorphic $f:\\mathbb C\\to\\widehat{\\mathbb C}$ with $f(z+\\lambda)=f(z)$ for all $z,\\lambda$, and a meromorphic function on $\\mathbb C$ is one holomorphic on the complement of its pole set, every point of which is a pole ([[def-elliptic-function-for-a-lattice]]). Affected use: Verification 1.3 and 2.1. Disposition: unchanged use remains sound. The Example quantifies over nonzero Lambda-elliptic f. Step 1.3 uses periodicity only for such f to translate its zero/pole set; step 2.1 then uses the already established finite divisor classes. No use of arbitrary meromorphic functions having lattice periods. Statement/Definition unchanged; no further hop and no consumer edit proposed.",
+    "Direct consumer lem-weierstrass-p-degree-two-and-half-periods; path items/lem-weierstrass-p-degree-two-and-half-periods.md; exact affected clause: [F4] $\\wp$ is a $\\Lambda$-elliptic function and is the pullback $\\wp=g\\circ\\pi$ of a unique meromorphic function $g:T_\\Lambda\\to\\widehat{\\mathbb C}$, the torus form; conversely a meromorphic $g$ on $T_\\Lambda$ pulls back to a $\\Lambda$-elliptic function ([[def-elliptic-function-for-a-lattice]]). Affected use: Statement torus form; Proof 1.1, 1.2, 1.3 and 1.5. Disposition: unchanged use remains sound. F3 independently supplies periodicity and meromorphicity of wp, so F4 legitimately descends it. These steps use only wp=bar-wp composed with pi and the quotient local charts; removal of unconditional containment leaves each equality valid. Statement/Definition unchanged; no further hop and no consumer edit proposed.",
+    "Direct consumer thm-complex-torus-weierstrass-cubic-isomorphism; path items/thm-complex-torus-weierstrass-cubic-isomorphism.md; exact affected clause: [F5] $\\wp$ is the pullback $\\wp=g\\circ\\pi$ of the meromorphic function $g=\\bar\\wp:T_\\Lambda\\to\\widehat{\\mathbb C}$ characterized by $g([z])=\\wp(z)$, and a meromorphic function on $T_\\Lambda$ pulls back to a $\\Lambda$-elliptic function; in particular a value of $\\wp$ depends only on the class of its argument, and $\\wp(z)=\\infty$ exactly for $z\\in\\Lambda$ ([[def-elliptic-function-for-a-lattice]]). Affected use: Proof 5.3 and the well-defined map in Statement (2). Disposition: unchanged use remains sound. F4 independently supplies the lattice periods and exact lattice pole set of wp and wp-prime. F5 uses descent for this elliptic wp; step 5.3 uses the pole location already supplied by F4. It never infers lattice periods for an arbitrary meromorphic function. Statement/Definition unchanged; no further hop and no consumer edit proposed.",
+    "Direct consumer thm-elliptic-function-divisor-laws; path items/thm-elliptic-function-divisor-laws.md; exact affected clause: [F2] $f:\\mathbb C\\to\\widehat{\\mathbb C}$ is meromorphic on the plane and satisfies $f(z+\\lambda)=f(z)$ for all $z\\in\\mathbb C$ and all $\\lambda\\in\\Lambda$, both sides being values in $\\widehat{\\mathbb C}$; in particular $z+\\lambda$ is a pole of $f$ exactly when $z$ is ([[def-elliptic-function-for-a-lattice]]). Affected use: Proof 1.4, 1.6, 2.4, 2.5; closing paragraph clause (4). Disposition: unchanged use remains sound. The Statement assumes f is nonconstant Lambda-elliptic. F2 supplies precisely that assumed periodicity to translate germs, cancel opposite-side integrals and bound the pole-free function. The closing promise about constants is unchanged by the Definition correction. Statement/Definition unchanged; no further hop and no consumer edit proposed.",
+    "Direct consumer thm-field-of-elliptic-functions-is-generated-by-p-and-p-prime; path items/thm-field-of-elliptic-functions-is-generated-by-p-and-p-prime.md; exact affected clause: [F1] A meromorphic $f:\\mathbb C\\to\\widehat{\\mathbb C}$ is $\\Lambda$-elliptic exactly when it is the pullback $f=g\\circ\\pi$ of a meromorphic function $g$ on $T_\\Lambda$, uniquely determined by $f$; the periodicity is $f(z+\\lambda)=f(z)$ with poles matched, and a meromorphic function is by convention never the constant map $\\infty$ ([[def-elliptic-function-for-a-lattice]], [[def-holomorphic-and-meromorphic-map-of-riemann-surfaces]]). The meromorphic functions on a connected plane domain form a field, so sums, products and quotients with nonzero denominator of meromorphic functions on $\\mathbb C$ are meromorphic again ([[cor-meromorphic-functions-on-a-domain-form-a-field]], [[def-meromorphic-function-complex-domain]]). Composites of holomorphic maps of Riemann surfaces are holomorphic, and a holomorphic map of Riemann surfaces is continuous. Affected use: Statement field pullback; Proof 1.1, 3.1, 4.1, 5.1, 6.1. Disposition: unchanged use remains sound. The field pullback and descent are applied only to Lambda-elliptic f and its even/odd parts. Step 1.1 checks their periodicity explicitly; step 5.1 checks that k/wp-prime is periodic. Nonzero meromorphic denominators are already supported by the published field supplier. No unconditional lattice-containment premise is used. Statement/Definition unchanged; no further hop and no consumer edit proposed.",
+    "Direct consumer thm-weierstrass-p-differential-equation; path items/thm-weierstrass-p-differential-equation.md; exact affected clause: [F5] A $\\Lambda$-elliptic function is a meromorphic function on $\\mathbb C$ with $f(z+\\lambda)=f(z)$ for all $z$ and all $\\lambda\\in\\Lambda$; constants are elliptic, and sums, products, constant multiples and quotients with nonvanishing denominator of $\\Lambda$-elliptic functions are again $\\Lambda$-elliptic ([[def-elliptic-function-for-a-lattice]]). Affected use: Proof 9.1. Disposition: unchanged use remains sound. Step 9.1 uses sums, products and constant multiples of already Lambda-elliptic wp and wp-prime to form F. This closure remains valid; the mentioned quotient condition in F5 is unused by this step and its narrower nowhere-zero interpretation was already sufficient. Statement/Definition unchanged; no further hop and no consumer edit proposed.",
+    "Direct consumer thm-weierstrass-p-normal-convergence-and-periodicity; path items/thm-weierstrass-p-normal-convergence-and-periodicity.md; exact affected clause: [F9] A $\\Lambda$-elliptic function is a meromorphic $f:\\mathbb C\\to\\widehat{\\mathbb C}$ with $f(z+\\lambda)=f(z)$ for all $z$ and all $\\lambda\\in\\Lambda$, poles corresponding under translation ([[def-elliptic-function-for-a-lattice]]). Affected use: Proof 6.2 and 7.1. Disposition: unchanged use remains sound. Step 6.2 uses the independently proved periodicity of wp-prime. Step 7.1 proves the periods of wp from its basis periods and the subgroup property, then invokes the definition. This uses the true unconditional subgroup property, never the deleted unconditional lattice containment. Statement/Definition unchanged; no further hop and no consumer edit proposed.",
+    "Owning page interface checked: library/complex-analysis/elliptic-functions-and-complex-tori.md develops doubly periodic meromorphic functions on a fixed full lattice and identifies their field through pullback; all occurrences retain the ellipticity hypothesis. The examples page reduction conventions agree with the unchanged Example. No page edit is needed. Search across items, library and articles found exactly the seven item consumers above and the owning A page; all seven are in the frozen frontier and draft. No outside or published consumer maintenance event was discovered, so no mathematical update to research/published-consumer-supplier-ledger.md is proposed.",
+    "Final supplementary checks: node tools/depcheck.mjs --items-file /tmp/step7-u27-items.json --json (exit 0; focused-items; 0 errors, 141 warnings in repository page metadata); node tools/fwdcheck.mjs --items-file /tmp/step7-u27-items.json --json (exit 0; focused-items; 0 errors, 0 warnings); node tools/extcheck.mjs --items-file /tmp/step7-u27-items.json --json (exit 0; output reports repository-wide totals, 0 errors and 40 warnings). These checks are local validation, not item judgments or central gate certification. No gate diagnostic was assigned; gate_resolutions is empty.",
+    "Completion: both exact assigned rejected tuples adjudicated and repaired; review-context hashes captured in order. No new items, altered published carriers, unreviewed consumer effect, source-reading claim or unresolved mathematical obligation. Shared ledger proposals are included for the controller; no shared ledger, original round input, judgment, certificate or round state was edited."
+  ]
+}

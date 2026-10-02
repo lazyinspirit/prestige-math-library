@@ -7,12 +7,9 @@ import { holdStep5 } from './step5-hold.mts';
 import { prepareStep5AdjudicationOrder } from '../../step5-adjudication-order.mjs';
 import { batchAdjudicator, step5Adjudicators } from '../../step5-adjudicators.mjs';
 
-// Step-5 lanes: readers and refuters Luna/max,
-// batch adjudicators Sol/high, and every 5b agent Sol/xhigh.
+// Step-5 readers, refuters, adjudicators and cross-group agents use Sol 6.1/high.
 // The live engine can reload this module while retaining an older models.mjs import.
-const LUNA_MAX = MODEL_PROFILE_NAMES.lunaMax ?? 'gpt-6-luna-max';
-const SOL_HIGH = MODEL_PROFILE_NAMES.solHigh;
-const SOL_XHIGH = MODEL_PROFILE_NAMES.solXHigh;
+const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
 
 /** Build Step 5 with the canonical gate helpers from mathlib.mts. */
 export function step5Stages(d: any) {
@@ -54,7 +51,7 @@ export function step5Stages(d: any) {
     {
       id: '5a-read',
       label: 'independent readers over authored content',
-      modelProfile: (plan: any) => plan.role === 'reader' ? LUNA_MAX : undefined,
+      modelProfile: (plan: any) => plan.role === 'reader' ? SOL61_HIGH : undefined,
       pipeline: 'read',
       role: 'reader',
       units: batches,
@@ -100,7 +97,7 @@ export function step5Stages(d: any) {
     {
       id: '5a-refute',
       label: 'read-only refuters over untouched, high-risk and page carriers',
-      modelProfile: (plan: any) => plan.role === 'refuter' ? LUNA_MAX : undefined,
+      modelProfile: (plan: any) => plan.role === 'refuter' ? SOL61_HIGH : undefined,
       pipeline: 'read',
       role: 'refuter',
       units: batches,
@@ -142,7 +139,7 @@ export function step5Stages(d: any) {
     {
       id: '5a-adjudicate',
       label: 'batch Alpha adjudication of reader repairs, refuter findings and pages',
-      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL_HIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL61_HIGH : undefined,
       pipeline: 'read',
       role: 'alpha',
       units: batches,
@@ -209,7 +206,7 @@ export function step5Stages(d: any) {
     {
       id: '5b-cross',
       label: 'lead Alpha cross-batch audit and final Step 5 closure',
-      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL_XHIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL61_HIGH : undefined,
       units: () => ['all'],
       pattern: resultPattern('alpha', '5b-[a-z-]+'),
       artifacts: (ctx: any) => [`research/${ctx.run}-alpha-5b.md`, `research/${ctx.run}-5b-verdicts.jsonl`],

@@ -5,19 +5,15 @@ title: "The Levi form and strict plurisubharmonicity"
 status: published
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
-deps: []
+deps: [rem-complex-euclidean-space-dictionary, def-wirtinger-operators-in-several-complex-variables]
 justified_by: []
 aliases: []
 landmark: false
 verification:
-  audited: 2026-08-28
+  audited: 2026-10-02
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   scraped: []
   references:
@@ -29,6 +25,14 @@ pipeline_run: null
 ---
 
 ## Definition
+
+Fix an integer $m\ge1$. In this Definition, use one-based aliases for the canonical coordinates of
+[[rem-complex-euclidean-space-dictionary]]: for $1\le j\le m$, the symbols
+$z_j$ and $v_j$ denote the canonical coordinate and vector component with
+index $j-1$. The derivatives $\partial_{z_j}$ and
+$\partial_{\overline z_j}$ denote the corresponding canonical Wirtinger
+operators of [[def-wirtinger-operators-in-several-complex-variables]] with
+index $j-1$; all derivatives below use these aliases.
 
 Let $\Omega\subseteq\mathbb C^m$ be open and let $u\in C^2(\Omega,\mathbb R)$.
 For $a\in\Omega$ and $v\in\mathbb C^m$, the **Levi form** of $u$ at $a$ in the

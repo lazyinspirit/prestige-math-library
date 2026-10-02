@@ -1,0 +1,188 @@
+[
+  {
+    "order": 723,
+    "id": "perfect-complexes-and-triangulated-grothendieck-groups",
+    "kind": "A",
+    "category": "homological-algebra",
+    "title": "Perfect Complexes and Triangulated Grothendieck Groups",
+    "companion": "perfect-complexes-and-triangulated-grothendieck-groups-examples",
+    "requires": [
+      "grothendieck-groups-and-graded-cartan-pairings",
+      "bounded-bimodule-complexes-and-derived-tensor"
+    ],
+    "items": [
+      {
+        "id": "def-perfect-complex-over-a-ring",
+        "kind": "definition",
+        "title": "Perfect complexes over a ring and its graded version",
+        "statement": "For a unital associative ring A, an object X of D(A-Mod) is perfect when it is isomorphic there to a bounded cochain complex of finitely generated projective left A-modules. Write D_perf(A) for the strictly full subcategory of these objects. For a unital graded k-algebra, the graded version uses D(GrMod_0(A)), bounded complexes of finite graded projective left modules, and degree-zero differentials. The cochain shift [1] and internal shift {1} are separate operations. A bounded complex of arbitrary modules is not thereby perfect.",
+        "deps": ["def-derived-category-of-an-abelian-category", "def-bounded-bounded-below-and-bounded-above-complex", "def-projective-module", "def-generated-cyclic-finitely-generated-and-free-modules", "def-finitely-generated-graded-projective-module", "def-graded-ring-module-bimodule-and-internal-shift"],
+        "strategy": "Define perfectness through an isomorphism in the derived localization, equivalently a zigzag of quasi-isomorphisms; do not assume a single chosen finite-projective representative is canonical. Explicitly use left modules and the repository's cochain shift X[1]^n=X^{n+1}; graded differentials preserve internal degree. The definition itself does not identify D_perf with the bounded derived category, which needs the later finite-resolution theorem. No choice principle is used.",
+        "proof_strategy": "not-applicable",
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"},
+        "sources": {"references": [{"title": "Stacks Project, More on Algebra, Definition 15.76.1", "url": "https://stacks.math.columbia.edu/tag/0656"}, {"title": "Weibel, The K-book, Chapter II, Example 9.7.5", "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"}, {"title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2c", "url": "https://arxiv.org/pdf/math/0006056"}]},
+        "axiom_audit": "choice-free definition",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-perfect-complexes-form-a-triangulated-subcategory",
+        "kind": "lemma",
+        "title": "Perfect complexes form an essentially small triangulated subcategory",
+        "statement": "For every unital associative ring A, D_perf(A) is an essentially small strictly full triangulated subcategory of D(A-Mod). The same holds for finite graded projective representatives inside D(GrMod_0(A)). Every derived-category morphism between bounded finite-projective representatives is represented by a chain map uniquely up to homotopy; its cone is again such a representative. These assertions require no global-dimension hypothesis.",
+        "deps": ["def-perfect-complex-over-a-ring", "def-homotopically-projective-bounded-above-complex", "prop-morphisms-from-a-homotopically-projective-complex-need-no-roof", "thm-the-derived-category-inherits-a-triangulated-structure", "def-projective-module", "thm-projective-module-characterizations", "thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules", "lem-graded-module-kernels-cokernels-and-biproducts-are-degreewise"],
+        "strategy": "For a bounded projective cochain complex P and an acyclic target E, nullhomotope a map P→E by descending from P's top nonzero degree: the obstruction at each degree lands in cycles of E and the projectivity lift through E^{n-1}→Z^n(E) exists. Only finitely many lifts are needed, so the DC-bearing bounded-above theorem is not invoked. Apply the published no-roof proposition to identify derived morphisms out of P with homotopy classes of chain maps. A cone of a map P→Q has terms Q^n⊕P^{n+1}, which remain finite projective, and shifts preserve that class; distinguished derived triangles are isomorphic to cone triangles, with rotation handling two-out-of-three. Prove essential smallness from idempotent matrices for summands of finite free modules (and finite sums of graded shifts), finite-support sequences of terms and differentials; no simultaneous choice of representatives is required. The graded argument uses degree-zero lifts in the abelian graded module category. This supplies the well-defined triangulated input for K0(D_perf).",
+        "proof_strategy": "direct",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [{"title": "Stacks Project, More on Algebra, Lemma 15.76.4", "url": "https://stacks.math.columbia.edu/tag/0656"}, {"title": "Weibel, The K-book, Chapter II, Example 9.7.5", "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"}]},
+        "axiom_audit": "choice-free: the bounded source requires finitely many projective lifts, unlike the published bounded-above DC construction",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-triangulated-grothendieck-group",
+        "kind": "definition",
+        "title": "Grothendieck group of an essentially small triangulated category",
+        "statement": "For an essentially small triangulated category T, let Iso(T) be the set of isomorphism classes and define K_0^tri(T) as the free abelian group on symbols [X] for Iso(T), modulo [Y]-[X]-[Z] for every distinguished triangle X→Y→Z→X[1]. The definition uses triangle relations rather than merely biproduct relations. In particular it applies to D_perf(A) by the preceding closure lemma and to D^b(C) under the standing derived-localization size convention.",
+        "deps": ["def-triangulated-category", "def-free-abelian-group", "def-derived-category-of-an-abelian-category"],
+        "strategy": "State the relation with the repository's cochain shift and triangle orientation, form the free group on isomorphism classes rather than a potentially proper class of objects, and use the published size convention for bounded derived categories. The quotient exists as a group by elementary presentation. Its shift and functorial properties are proved in the next lemma rather than asserted as part of the definition.",
+        "proof_strategy": "not-applicable",
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"},
+        "sources": {"references": [{"title": "Stacks Project, Derived Categories, Definition 13.28.1", "url": "https://stacks.math.columbia.edu/tag/0FCM"}, {"title": "Weibel, The K-book, Chapter II, Remark 9.2.3", "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"}]},
+        "axiom_audit": "choice-free presentation on a set of isomorphism classes",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-triangulated-k-zero-shifts-and-exact-functors",
+        "kind": "lemma",
+        "title": "Shift signs and exact-functor maps on triangulated K0",
+        "statement": "In K_0^tri(T), [0]=0 and [X[n]]=(-1)^n[X] for every integer n. An exact functor F:T→T' between essentially small triangulated categories induces a homomorphism F_* sending [X] to [F(X)]. Identity and composition are respected, and naturally isomorphic exact functors induce the same map. No coherence for a collection of functor isomorphisms is inferred from these group identities.",
+        "deps": ["def-triangulated-grothendieck-group", "def-triangulated-category", "def-exact-functor-between-triangulated-categories", "def-natural-isomorphism", "thm-grothendieck-group-universal-properties-and-functoriality"],
+        "strategy": "Use the identity triangle X→X→0 to derive [0]=0, rotate it with the prescribed sign to X→0→X[1] and obtain [X[1]]=-[X]; invert the shift for negative n. An exact functor sends each distinguished triangle to a distinguished triangle after its specified shift comparison, so its class map kills every presentation relation. This repeats the free-group/quotient argument in the published 19.3 universal-property theorem. Evaluate compositions and natural isomorphisms on generators. Do not infer coherent categorical action from equality of induced homomorphisms.",
+        "proof_strategy": "direct",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [{"title": "Stacks Project, Derived Categories, Definition 13.28.1 and Lemma 13.28.3", "url": "https://stacks.math.columbia.edu/tag/0FCM"}, {"title": "Weibel, The K-book, Chapter II, Theorem 9.2.2", "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"}]},
+        "axiom_audit": "choice-free: presentation relations and objectwise natural isomorphisms suffice",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-euler-class-of-a-bounded-projective-complex-is-homotopy-invariant",
+        "kind": "lemma",
+        "title": "Euler class of a bounded projective complex is derived invariant and triangle additive",
+        "statement": "Let A be any unital associative ring and let Proj_fg(A) be its essentially small additive category of finitely generated projective left modules. For a bounded complex P of such modules, χ(P)=Σ_n(-1)^n[P^n] in K_0^split(Proj_fg(A)). This class is unchanged by homotopy equivalence or quasi-isomorphism of bounded finite-projective complexes, depends only on the represented object of D_perf(A), and satisfies χ(Y)=χ(X)+χ(Z) for each distinguished triangle X→Y→Z→X[1] of perfect objects. The graded finite-projective analogue holds with degree-zero differentials and the graded split group.",
+        "deps": ["def-perfect-complex-over-a-ring", "lem-perfect-complexes-form-a-triangulated-subcategory", "def-split-grothendieck-group-of-an-additive-category", "prop-morphisms-from-a-homotopically-projective-complex-need-no-roof", "prop-cohomology-factors-through-the-derived-category", "thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic", "thm-the-derived-category-inherits-a-triangulated-structure", "thm-grothendieck-group-universal-properties-and-functoriality"],
+        "strategy": "First show Proj_fg(A) is an essentially small additive category: each object is the image of an idempotent matrix on some A^r, and finite sums stay finite projective. In an acyclic bounded finite-projective complex, descend from the highest nonzero term: each epimorphism onto the preceding projective cycle splits, making the next cycle finite projective. The split relations then cancel adjacent cycle classes in Σ(-1)^n[P^n], leaving zero. For a quasi-isomorphism f:P→Q, Cone(f)^n=Q^n⊕P^{n+1} is acyclic and finite projective, hence 0=χ(Cone(f))=χ(Q)-χ(P). The no-roof result from the preceding lemma represents any isomorphism of perfect objects by such a quasi-isomorphism; this proves well-definedness on D_perf. Represent any first arrow of a perfect triangle by a chain map P→Q and identify its third object with Cone(f), obtaining triangle additivity. Repeat with graded projective cycles and degree-zero split maps. The argument is finite and choice-free; it does not assert that an arbitrary bounded module complex has a projective Euler class.",
+        "proof_strategy": "direct",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [{"title": "Stacks Project, More on Algebra, Lemma 15.121.1", "url": "https://stacks.math.columbia.edu/tag/0FJG"}, {"title": "Weibel, The K-book, Chapter II, Proposition 7.5 and Corollary 7.5.1", "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"}]},
+        "axiom_audit": "choice-free: only finite splitting and finite cone calculations are used",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-perfect-complex-k-zero-agrees-with-projective-k-zero",
+        "kind": "theorem",
+        "title": "Triangle K0 of perfect complexes equals split K0 of finite projectives",
+        "statement": "For any unital associative ring A, degree-zero inclusion P↦P[0] induces an isomorphism K_0^split(Proj_fg(A))→K_0^tri(D_perf(A)). Its inverse sends a perfect object represented by a bounded finite-projective complex P to Σ_n(-1)^n[P^n]. The same comparison holds for finite graded projectives and graded perfect complexes with degree-zero maps. No finite global-dimension or Noetherian hypothesis is required.",
+        "deps": ["def-perfect-complex-over-a-ring", "lem-perfect-complexes-form-a-triangulated-subcategory", "def-triangulated-grothendieck-group", "lem-triangulated-k-zero-shifts-and-exact-functors", "lem-euler-class-of-a-bounded-projective-complex-is-homotopy-invariant", "def-split-grothendieck-group-of-an-additive-category", "def-brutal-truncation-of-a-complex", "thm-canonical-truncations-fit-a-distinguished-triangle", "thm-grothendieck-group-universal-properties-and-functoriality"],
+        "strategy": "A finite direct sum of projectives remains finite projective, and its degree-zero biproduct triangle makes P↦P[0] respect split K0 relations. The Euler lemma makes χ a well-defined homomorphism out of triangle K0 and gives χ(P[0])=[P]. For a bounded projective representative P, use the short exact sequences 0→σ_{≥n}P→σ_{≥n-1}P→P^{n-1}[-n+1]→0 of brutal truncations and the published short-exact-complex triangle; each truncation remains perfect. Induct from the top bound and use the shift-sign lemma to obtain [P]=Σ_n(-1)^n[P^n[0]]. Thus degree-zero inclusion followed by Euler and Euler followed by inclusion are identities. Repeat in the graded degree-zero category, retaining internal shifts as independent. The theorem never identifies projective K0 with G0 without the later finite-resolution hypothesis.",
+        "proof_strategy": "direct",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [{"title": "Stacks Project, More on Algebra, Lemma 15.121.2", "url": "https://stacks.math.columbia.edu/tag/0FJG"}, {"title": "Weibel, The K-book, Chapter II, Example 9.7.5 and Lemma 9.2.4", "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"}]},
+        "axiom_audit": "choice-free finite truncation and Euler argument",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-abelian-k-zero-agrees-with-bounded-derived-k-zero",
+        "kind": "theorem",
+        "title": "G0 of an abelian category equals triangle K0 of its bounded derived category",
+        "statement": "For every essentially small abelian category C, under the standing bounded-derived localization size convention, degree-zero inclusion induces an isomorphism G_0(C)→K_0^tri(D^b(C)). Its inverse is [X]↦Σ_n(-1)^n[H^n(X)]. It does not require enough projectives, enough injectives, Noetherianity or finite global dimension.",
+        "deps": ["def-grothendieck-group-of-an-essentially-small-abelian-category", "def-triangulated-grothendieck-group", "lem-triangulated-k-zero-shifts-and-exact-functors", "def-derived-category-of-an-abelian-category", "thm-the-derived-category-inherits-a-triangulated-structure", "thm-canonical-truncations-fit-a-distinguished-triangle", "prop-bounded-derived-localizations-embed-fully-faithfully", "thm-grothendieck-group-universal-properties-and-functoriality"],
+        "strategy": "A short exact sequence 0→A→B→C→0 gives the published distinguished triangle A[0]→B[0]→C[0], so degree-zero inclusion kills every G0 relation. For a triangle X→Y→Z, the derived long exact cohomology sequence has only finitely many nonzero terms. Split this finite exact sequence into successive image short exact sequences; alternating cancellation gives χ_H(Y)=χ_H(X)+χ_H(Z) in G0(C). Thus the alternating cohomology sum defines a triangle-K0 homomorphism and is unchanged by derived isomorphism. It returns [A] on A[0]. For any bounded X, iterate the canonical truncation triangles τ^{≤n-1}X→τ^{≤n}X→H^n(X)[-n] and use the shift-sign lemma to show [X]=Σ_n(-1)^n[H^n(X)[0]]. This is the other inverse. The bounded localization embedding and size convention make all groups and truncation triangles well defined. No projective replacement or choice principle is used.",
+        "proof_strategy": "direct",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [{"title": "Stacks Project, Derived Categories, Lemma 13.28.2", "url": "https://stacks.math.columbia.edu/tag/0FCM"}, {"title": "Weibel, The K-book, Chapter II, Theorem 9.2.2 and Example 9.7.4", "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"}]},
+        "axiom_audit": "choice-free finite long-exact-sequence and truncation argument",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-finite-projective-resolution-hypotheses-identify-perfect-and-bounded-derived-categories",
+        "kind": "theorem",
+        "title": "Finite left global dimension identifies perfect and bounded finite-module derived categories",
+        "statement": "Assume AC. Let A be a unital left Noetherian ring of finite left global dimension d. Then the exact inclusion of finitely generated left A-modules into all left A-modules induces an exact equivalence D^b(A-mod_fg)≃D_perf(A). Consequently the canonical Cartan map K_0^split(Proj_fg(A))→G_0(A-mod_fg), [P]↦[P], is an isomorphism through the two separate triangle-K0 comparisons. Neither comparison theorem by itself requires these ring hypotheses.",
+        "deps": ["def-axiom-of-choice", "thm-choice-implies-dependent-implies-countable-choice", "def-noetherian-ring", "thm-finitely-generated-modules-over-noetherian-rings-are-noetherian", "def-left-and-right-global-dimension-of-a-ring", "thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective", "lem-bounded-above-complexes-admit-projective-replacements", "thm-a-bounded-above-complex-of-projectives-is-homotopically-projective", "prop-morphisms-from-a-homotopically-projective-complex-need-no-roof", "def-perfect-complex-over-a-ring", "lem-perfect-complexes-form-a-triangulated-subcategory", "thm-perfect-complex-k-zero-agrees-with-projective-k-zero", "thm-abelian-k-zero-agrees-with-bounded-derived-k-zero"],
+        "strategy": "Left Noetherianity makes kernels of maps between finitely generated left modules finitely generated, so A-mod_fg is abelian and finite free modules give enough projectives. Apply the published bounded-above projective-replacement pullback construction to a bounded complex X, choosing finite free epimorphisms at each stage: its pullback targets remain finite because they are kernels or submodules of finite modules. AC implies the DC required by the published replacement and K-projectivity theorems; this is its exact use. Below the lowest nonzero term of X, the tail is a projective resolution of a finitely generated syzygy. Since every left module has projective dimension ≤d, apply the published syzygy theorem with n=max(1,d), so even d=0 uses a permitted positive index. The terminal syzygy is finite by Noetherianity and projective; replace the remaining tail by it, giving a bounded finite-projective quasi-isomorphic complex. For such representatives, the published no-roof proposition computes both Hom sets by the same homotopy classes of chain maps, since finite projectives are projective in A-mod_fg and in A-Mod. This proves full faithfulness; replacement proves essential surjectivity, and the perfect definition gives the target. Applying the two already-proved K0 comparisons identifies the Cartan map and its inverse. Do not generalize this identification to a singular or non-Noetherian ring.",
+        "proof_strategy": "direct",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [{"title": "Weibel, The K-book, Chapter II, Resolution Theorem 7.6 and Lemma 7.7.1", "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"}, {"title": "Stacks Project, More on Algebra, Lemma 15.76.3 and 15.76.7 (commutative comparison)", "url": "https://stacks.math.columbia.edu/tag/0656"}]},
+        "axiom_audit": "Assume AC to obtain DC for the published bounded-above replacement and K-projectivity theorems; the finite left-Noetherian and syzygy argument adds no stronger choice use",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-graded-tensor-equivalences-induce-laurent-linear-k-zero-actions",
+        "kind": "theorem",
+        "title": "Graded derived tensor equivalences induce Laurent-linear K0 and G0 maps",
+        "statement": "Let k be a field, and A,B finite-dimensional unital graded k-algebras. Let bounded graded (B,A)- and (A,B)-bimodule complexes F,G satisfy the precise two-sided projectivity and supplied homotopy-inverse hypotheses of the published derived-tensor equivalence theorem. Their exact tensor equivalences induce mutually inverse Z[v,v^{-1}]-linear maps on graded projective K_0 and on graded finite-module G_0, with v[M]=[M{1}]. In the published shift-orbit bases these maps are inverse matrices over Z[v,v^{-1}]. Any supplied natural-isomorphism relation between composites of such exact shift-compatible functors becomes an equality of these maps and matrices; this does not produce coherent comparison isomorphisms upstairs.",
+        "deps": ["thm-a-bounded-projective-bimodule-complex-defines-a-derived-tensor-functor", "thm-inverse-bimodule-complexes-give-derived-tensor-equivalences", "lem-graded-balanced-tensor-and-shift-isomorphisms", "def-graded-grothendieck-group-shift-module-and-cartan-map", "thm-graded-projective-and-simple-classes-have-shift-orbit-bases", "lem-triangulated-k-zero-shifts-and-exact-functors", "thm-perfect-complex-k-zero-agrees-with-projective-k-zero", "thm-abelian-k-zero-agrees-with-bounded-derived-k-zero"],
+        "strategy": "Use the published bimodule theorem to get exact inverse equivalences on K^b(proj^gr) and on graded bounded derived categories. Because A and B are finite-dimensional over k and F,G have finite graded projective left terms, each tensor of a finite-dimensional module with a bimodule term is finite-dimensional; the bounded tensor therefore restricts to D^b(fd graded modules), and the supplied inverse transformations restrict. The graded balanced shift isomorphism F⊗_A X{r}≅(F⊗_A X){r} is degree zero and natural. Apply the triangle-K0 exact-functor lemma; conjugate the resulting maps through the perfect/projective and abelian/bounded-derived K0 isomorphisms. The shift isomorphism proves v-linearity independently of the homological shift sign. The published shift-orbit basis theorem makes the maps representable by Laurent matrices; inverse functor isomorphisms give inverse matrices. For any further word relation, natural isomorphism gives equality on every class, but no coherence data for a categorical group action follows. Do not assert finite-dimensional output for arbitrary unbounded or infinite-dimensional inputs.",
+        "proof_strategy": "direct",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [{"title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §§2c and 2e.1", "url": "https://arxiv.org/pdf/math/0006056"}, {"title": "Stacks Project, Derived Categories, Lemma 13.28.3", "url": "https://stacks.math.columbia.edu/tag/0FCM"}, {"title": "Weibel, The K-book, Chapter II, Theorem 9.2.2", "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"}]},
+        "axiom_audit": "choice-free given the supplied inverse bimodule maps and homotopies; no coherent group action is inferred",
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 724,
+    "id": "perfect-complexes-and-triangulated-grothendieck-groups-examples",
+    "kind": "B",
+    "category": "homological-algebra",
+    "title": "Perfect Complexes and Triangulated Grothendieck Groups — Examples",
+    "companion": "perfect-complexes-and-triangulated-grothendieck-groups",
+    "requires": [
+      "perfect-complexes-and-triangulated-grothendieck-groups"
+    ],
+    "items": [
+      {
+        "id": "ex-homological-and-internal-shifts-on-k-zero",
+        "kind": "example",
+        "title": "Independent homological and internal shifts on graded K0",
+        "statement": "For a finite-dimensional graded algebra A and finite graded projective P, the perfect-complex triangle class satisfies [P[1]{2}]=-v^2[P] in K_0^tri(D_perf^gr(A)), hence in K_0^gr(A) under the projective comparison. Its image in G_0^gr(A) has the same formula. Here [1] is cochain shift and {2} is internal grading shift.",
+        "deps": ["lem-triangulated-k-zero-shifts-and-exact-functors", "thm-perfect-complex-k-zero-agrees-with-projective-k-zero", "def-graded-grothendieck-group-shift-module-and-cartan-map", "def-graded-ring-module-bimodule-and-internal-shift"],
+        "strategy": "Apply the triangle relation to the homological shift: [P[1]{2}]=-[P{2}]. The published graded K0 shift module identifies [P{2}]=v^2[P], and the graded perfect/projective comparison transports the equality to split K0. The Cartan map carries the same equality to graded G0. Check that the cochain differential of P[1] is zero because P sits in degree zero; the internal shift does not introduce a cochain sign. No finite-global-dimension assumption is needed.",
+        "proof_strategy": "direct",
+        "provenance": {"statement": "ai-generated", "proof": "ai-generated"},
+        "generation": {"role": "example"},
+        "sources": {"references": [{"title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §§2c and 2e.1", "url": "https://arxiv.org/pdf/math/0006056"}]},
+        "axiom_audit": "choice-free direct shift computation",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-dual-numbers-simple-is-not-perfect",
+        "kind": "example",
+        "title": "The simple module over dual numbers is not perfect",
+        "statement": "Assume AC for the published balanced-Tor comparison. Let k be a field, A=k[ε]/(ε^2), and S=A/(ε)≅k. The periodic free resolution ⋯→A --ε→ A --ε→ A→S→0 has kernel and image equal to (ε) at every positive stage. Therefore Tor_i^A(S,S)≅k for every i≥0, and S[0] is not a perfect object of D(A-Mod), although it is bounded with finite-dimensional cohomology.",
+        "deps": ["def-perfect-complex-over-a-ring", "lem-perfect-complexes-form-a-triangulated-subcategory", "def-axiom-of-choice", "thm-choice-implies-dependent-implies-countable-choice", "def-tor-by-resolving-the-left-module", "def-balanced-tor-bifunctor", "def-derived-tensor-product-in-the-bounded-above-setting", "prop-homology-of-the-derived-tensor-product-is-tor", "lem-bounded-above-flat-tensor-complexes-preserve-quasi-isomorphisms"],
+        "strategy": "Compute multiplication by ε on a+bε: ε(a+bε)=aε, so both kernel and image are the one-dimensional ideal (ε). This verifies every term and augmentation of the displayed periodic A-free resolution, including positive degrees. Tensor on the right with S=A/(ε); all ε-differentials vanish, giving H_i(S⊗_A Q)=S for each i≥0. This explicit homology calculation is choice-free. AC implies the DC needed to identify that specified-resolution homology with the published balanced Tor bifunctor and with derived-tensor cohomology. If S[0] were perfect, the finite-projective no-roof lemma represents its derived isomorphism by a quasi-isomorphism P→S from a bounded finite-projective P, giving a supplied projective replacement. Its tensor S⊗_A P has bounded support and hence zero H^{-i} for i sufficiently large, contradicting the Tor computation and the published derived-Tor identification. Do not infer perfection from boundedness or finite-dimensional cohomology alone.",
+        "proof_strategy": "contradiction",
+        "provenance": {"statement": "ai-generated", "proof": "ai-generated"},
+        "generation": {"role": "example"},
+        "sources": {"references": [{"title": "Stacks Project, More on Algebra, Definition 15.76.1", "url": "https://stacks.math.columbia.edu/tag/0656"}, {"title": "Weibel, The K-book, Chapter II, Example 9.7.5", "url": "https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.II.pdf"}]},
+        "axiom_audit": "AC is used only through AC→DC to invoke published balanced Tor and derived-Tor identification; the periodic resolution and its tensor homology are choice-free",
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-euler-class-of-a-two-term-cone",
+        "kind": "example",
+        "title": "Euler class of a two-term mapping cone",
+        "statement": "For a homomorphism f:P→Q of finitely generated projective left A-modules, regarded as degree-zero cochain complexes, Cone(f) has P in degree -1 and Q in degree 0. Hence [Cone(f)]=[Q[0]]-[P[0]] in K_0^tri(D_perf(A)) and χ(Cone(f))=[Q]-[P] in K_0^split(Proj_fg(A)). In particular the cone of right multiplication r_a:A→A, x↦xa, on the left regular module has Euler class zero for every a∈A, regardless of its kernel or cokernel.",
+        "deps": ["def-mapping-cone-of-a-chain-map", "lem-triangulated-k-zero-shifts-and-exact-functors", "lem-euler-class-of-a-bounded-projective-complex-is-homotopy-invariant", "thm-perfect-complex-k-zero-agrees-with-projective-k-zero"],
+        "strategy": "Reindex the published mapping-cone convention: Cone(f)^{-1}=P and Cone(f)^0=Q, with differential f, and zero elsewhere. The triangle P[0]→Q[0]→Cone(f)→P[1] directly gives the triangle-class formula. Independently compute χ(Cone(f))=(-1)^{-1}[P]+[Q]=[Q]-[P]; the comparison theorem identifies the two calculations. If P=Q=A and f=r_a is right multiplication by a, then r_a is left A-linear and the two projective terms cancel even if the cone is not acyclic. No assertion that the homology modules are projective is used.",
+        "proof_strategy": "direct",
+        "provenance": {"statement": "ai-generated", "proof": "ai-generated"},
+        "generation": {"role": "example"},
+        "sources": {"references": [{"title": "Stacks Project, More on Algebra, Lemma 15.121.1", "url": "https://stacks.math.columbia.edu/tag/0FJG"}, {"title": "Khovanov and Seidel, Quivers, Floer Cohomology, and Braid Group Actions, §2e.1", "url": "https://arxiv.org/pdf/math/0006056"}]},
+        "axiom_audit": "choice-free two-term cone computation",
+        "dependency_level": 4
+      }
+    ]
+  }
+]

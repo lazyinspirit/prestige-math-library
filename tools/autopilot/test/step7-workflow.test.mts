@@ -196,6 +196,28 @@ test('Luna Step-6 verdicts route only to Astra-medium Step-7 adjudicators',()=>{
     assert.doesNotThrow(()=>collect(f.root,run,'initial',1));
   }finally{f.cleanup();}
 });
+test('Sol 6.1 Step-6 verdicts require Sol 6.1 high Step-7 adjudicators',()=>{
+  const f=fixture();try{
+    const ledger=join(f.root,'research',`${run}-judge.jsonl`);
+    writeFileSync(ledger,readFileSync(ledger,'utf8').replaceAll(MODELS.sol.id,MODELS.sol61.id));
+    const pack=prepareAdjudication(f.root,run,'initial',1);
+    assert.equal(pack.judge_model,MODELS.sol61.id);
+    item(f.root,'thm-item-0','Repaired root proof.');
+    reports(f.root,pack,{},['thm-frontier-consumer']);
+    assert.doesNotThrow(()=>collect(f.root,run,'initial',1));
+    const owners=prepareImpact(f.root,run,'impact-initial',1);
+    reports(f.root,owners);
+    assert.doesNotThrow(()=>collect(f.root,run,'impact-initial',1));
+    assert.equal(advanceImpact(f.root,run,'impact-initial',1).complete,true);
+    certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
+    const receipt=judge(f.root,run,1,{contextHasher:contexts,runSweep:({ids,ledger}:any)=>{
+      for(const id of ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.sol61.id,...contexts(f.root,[id]).get(id),keep:true})+'\n');
+      return {status:0};
+    }});
+    assert.ok(receipt.verdicts.length>0);
+    assert.ok(receipt.verdicts.every((row:any)=>row.model===MODELS.sol61.id));
+  }finally{f.cleanup();}
+});
 function reports(root:string,pack:any,outcomes:any={},downstream:string[]=[]) {
   mkdirSync(join(root,'research',`${run}-dispatch`),{recursive:true});
   for(const unit of pack.units) {
@@ -206,7 +228,9 @@ function reports(root:string,pack:any,outcomes:any={},downstream:string[]=[]) {
       gate_resolutions:(pack.gateAssignments?.[unit]??[]).map((r:any)=>({index:r.index,...evidence}))});
     const role=pack.rejected?'alpha-adjudicate':'alpha-repair';
     const astra=role==='alpha-adjudicate'&&pack.judge_model===MODELS.luna.id;
-    json(join(root,'research',`${run}-dispatch`,`${role}-${workerLabel(pack.phase,pack.round,unit)}.result.json`),{run,role,label:workerLabel(pack.phase,pack.round,unit),covers:[unit],started_at:'2026-09-21T00:00:00Z',ended_at:'2026-09-21T23:59:59Z',ok:true,model:astra?MODELS.astra.id:MODELS.sol.id,provider_effort:astra?'medium':'xhigh'});
+    const sol61=existsSync(join(workflowDir(root,run),'step6-verdicts.json'))
+      && JSON.parse(readFileSync(join(workflowDir(root,run),'step6-verdicts.json'),'utf8')).some((row:any)=>row.model===MODELS.sol61.id);
+    json(join(root,'research',`${run}-dispatch`,`${role}-${workerLabel(pack.phase,pack.round,unit)}.result.json`),{run,role,label:workerLabel(pack.phase,pack.round,unit),covers:[unit],started_at:'2026-09-21T00:00:00Z',ended_at:'2026-09-21T23:59:59Z',ok:true,model:sol61?MODELS.sol61.id:astra?MODELS.astra.id:MODELS.sol.id,provider_effort:sol61?'high':astra?'medium':'xhigh'});
   }
 }
 function initial(root:string,ids:string[]) {
@@ -662,7 +686,7 @@ test('missing paid verdict and a metadata writer during central hashing fail clo
       const pack=initial(f.root,f.ids);reports(f.root,pack);
       if(mode==='missing-verdict'){
         certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
-        assert.throws(()=>judge(f.root,run,1,{contextHasher:contexts,runSweep:()=>({status:0})}),/missing current Sol verdict/);
+        assert.throws(()=>judge(f.root,run,1,{contextHasher:contexts,runSweep:()=>({status:0})}),/missing current gpt-6-sol verdict/);
         assert.equal(existsSync(join(workflowDir(f.root,run),'judge-1.json')),false);
       }else{
         const contextHasher=(root:string,ids:string[])=>{

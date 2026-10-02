@@ -1,0 +1,13 @@
+# Step 5b ledger enum owner repairs
+
+The actual first 5b gate event at **2026-10-01T20:25:14.082Z**, `step5-ledger-valid`, was read in `.autopilot/frontier-37-owner-30/events.jsonl`. It rejected 139 fields across 121 existing run rows, out of 355 run rows checked. This report uses that event, rather than an older blocker file.
+
+Prepared `research/frontier-37-owner-30-5b-ledger-enum-owner-patches.json`: **121 per-ID patches**, covering **121 location fields and 18 subclass fields**. Group j contributes 48 rejected rows; group d contributes 73. Each patch includes the exact old and new fields plus the original raw-line SHA-256. `ledger_enum_repair_provenance.original_fields` preserves every exact rejected location/subclass string. Root owns integration; the shared ledger was not edited.
+
+Canonical location types retain the original section: Remarks, Statements, Definitions, facts, proof/verification steps, and page prose/summary. The vague reader-carrier locations become the supported broad `statement-and-proof` locator; this does not invent a historical edit or a more specific line. Generic adjudication-correction loci and all eighteen invalid `adjudication-repair` subclasses were classified from their actual findings and the owning group-d report. Its level checkpoints identify omitted hypotheses, malformed notation, invalid inferences, coordinate typing, arithmetic, missing cases and overstrong statements. Group-j's owning report confirms its section and carrier locations. No mathematical findings were re-adjudicated and no new defect rows were invented.
+
+All finding/repair text, IDs, subjects, severity, disposition, references, source evidence and confidence remain unchanged. Provenance is added only for the enum repair. The scratch application preserves unaffected raw lines byte-for-byte and changes only the rejected fields plus that explicit provenance.
+
+Scratch-only validation of the patched current ledger reported **355 run rows checked, 0 errors**. The patch operation also checked that all non-target fields are identical and that the actual shared ledger SHA-256 remains unchanged. No live gate, retry, certification, generated-ledger refresh, source edit or additional review round was run. The scratch file was removed after validation.
+
+No unresolved classification uncertainty remains. For rows describing several distinct problems, the subclass names the primary documented error; the complete original finding and original catch-all subclass remain visible. Root should guard IDs/old values and apply these patches in one pass while preserving unaffected raw lines.

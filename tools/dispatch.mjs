@@ -28,15 +28,15 @@ import { resolveDispatchProfile } from './model-profile-overrides.mjs';
 import { lane, modelProfile } from './models.mjs';
 import { MAX_RUN_BATCHES, MAX_GROUPS } from './autopilot/src/capacity.mjs';
 
-// OWNER RULE (2026-09-20): every agent in the workflow auto-compacts its context
-// once it passes 250k tokens, at the earliest convenient point — the CLI
+// OWNER RULE (2026-10-01): every agent in the workflow auto-compacts its context
+// once it passes 500k tokens, at the earliest convenient point — the CLI
 // compacts at a turn boundary, which is the earliest point at which it can.
 // Applies to EVERY lane and provider, the DeepSeek lane included: its generated
 // model catalog carries `auto_compact_token_limit: null`, and this explicit `-c`
 // flag is what overrides that catalog value (config keys win over catalog
 // metadata). The briefs already require re-anchoring to the live item and its
 // dependencies after any compaction, which is what makes the rewind safe.
-const AUTO_COMPACT_TOKEN_LIMIT = 250_000;
+const AUTO_COMPACT_TOKEN_LIMIT = 500_000;
 
 // lane caps: how many of this role may run at once across every process.
 const ROLES = Object.freeze({
@@ -50,8 +50,8 @@ const ROLES = Object.freeze({
   // does instead: it asserts from memory.
   // One Beta or reader owns one batch. The pair ceiling permits one batch per
   // pair, so neither lane should add an artificial second wave.
-  beta:         { ...lane('agentic'), sandbox: 'workspace-write', cap: MAX_RUN_BATCHES, web: true, why: 'batch scaffolding and scoped later repairs; full run width' },
-  reader:       { ...lane('agentic'), sandbox: 'workspace-write', cap: MAX_RUN_BATCHES, web: true, why: 'independent step-5 audit of a foreign batch; full run width' },
+  beta:         { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'batch scaffolding and scoped later repairs; full run width' },
+  reader:       { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'independent step-5 audit of a foreign batch; full run width' },
   // `web: true` is a required capability. A Codex lane
   // without `tools.web_search` does not fail, it asserts from memory (the failure
   // this file records for the build lanes before 2026-08-11). The flag records
@@ -62,7 +62,7 @@ const ROLES = Object.freeze({
   //
   // Ten disjoint groups own at most three batches each. Shared-file stages
   // remain serial; lane capacity does not authorize overlapping writes.
-  alpha:        { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: MAX_GROUPS, web: true, why: 'Sol-high group Alpha, <=3 batches each; groups cover the full batch ceiling' },
+  alpha:        { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: MAX_GROUPS, web: true, why: 'Sol 6.1 high group Alpha, <=3 batches each; groups cover the full batch ceiling' },
   // Assignment is validated mechanically. All roles retain source access.
   'alpha-assign': { ...lane('partition'), sandbox: 'workspace-write', effort: 'high', cap: 1, why: 'batch partition for the group Alphas; output fully validated by alpha-groups.mjs' },
   // Step 3b selects DeepSeek-Flash-max for this pair-author lane; later stages
@@ -71,10 +71,10 @@ const ROLES = Object.freeze({
   // same-batch exclusion determine which authors may safely overlap.
   'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'pair authoring and pathway prose; full run width with stage ownership guards' },
   // Final reporting is read-only; source uncertainty still requires research.
-  'alpha-report': { ...lane('agentic'), sandbox: 'read-only', effort: 'xhigh', cap: 1, web: true, requiresTask: true, why: 'Step-9 interpretation of reconciled local evidence; read-only so final readiness remains current through close-out' },
+  'alpha-report': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: 1, web: true, requiresTask: true, why: 'Step-9 interpretation of reconciled local evidence; read-only so final readiness remains current through close-out' },
   // `alpha-adjudicate` — step 7 ONLY (owner, 2026-08-24). The Step-7 stage
-  // selects the Astra-medium profile; the role fallback remains Sol for
-  // historical dispatch receipts.
+  // selects the Sol 6.1 high profile, matching the current role default.
+  // Historical model identities remain in the registry for existing receipts.
   //
   // Step 7 is partitioned by the same group assignment, so this cap tracks the
   // nine group-Alpha lanes. A lower value would silently serialize disjoint
@@ -90,8 +90,8 @@ const ROLES = Object.freeze({
   // Step 7 is the sharpest role in the build: a `false_positive` adjudication
   // silently discards a real defect and no later gate re-examines it. It keeps
   // the highest effort supported by the active adjudication lane.
-  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: MAX_GROUPS, web: true, why: 'Step-7 logical adjudication and repair; stage profile selects Astra medium' },
-  'alpha-repair': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 3, web: true, requiresTask: true, why: 'Three Step-7 Sol xhigh owner agents repair all assigned downstream consumers, including published items, before centralized recertification' },
+  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: MAX_GROUPS, web: true, why: 'Step-7 logical adjudication and repair; stage profile selects Sol 6.1 high' },
+  'alpha-repair': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: 3, web: true, requiresTask: true, why: 'Three Step-7 owner agents repair all assigned downstream consumers, including published items, before centralized recertification; stage profile selects Sol 6.1 high' },
   // `final-adjudicator` — the independent Step-7 close after the owning group
   // Alpha's initial repair receives a rejecting Sol rejudge. It is
   // intentionally a fresh Astra conversation rather than a
@@ -101,8 +101,8 @@ const ROLES = Object.freeze({
   // mechanical rather than aspirational.
   'final-adjudicator': { ...lane('finalAdjudication'), sandbox: 'workspace-write', effort: 'medium', cap: MAX_GROUPS, web: true, requiresTask: true, why: 'Step-7 final adjudication after the one paid judge recheck; one independent Astra-medium agent per affected group, with authoritative web verification' },
   // `alpha-group-read` — the step-6 pass that reads a group's A/B pairs while the
-  // judges are still sweeping (owner, 2026-08-25). Step 6 applies the DeepSeek
-  // Flash max profile; the durable digest hands its findings to a fresh Sol xhigh
+  // judges are still sweeping (owner, 2026-08-25). Step 6 applies the Sol 6.1
+  // high profile; the durable digest hands its findings to a fresh Sol 6.1 high
   // adjudicator at Step 7.
   //
   // READ-ONLY IS THE POINT, NOT A PRECAUTION. Step 6 judges a frozen text; an
@@ -119,7 +119,7 @@ const ROLES = Object.freeze({
   // later Sol adjudicator starts fresh rather than replaying a long transcript.
   //
   // Read-only readers also consult authoritative web sources when unsure.
-  'alpha-group-read': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: MAX_GROUPS, why: 'DeepSeek-Flash-max step-6 whole-group read; one read-only lane per group, handed to step 7 by compact digest' },
+  'alpha-group-read': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: MAX_GROUPS, why: 'Sol 6.1 high step-6 whole-group read; one read-only lane per group, handed to step 7 by compact digest' },
   // `effort: 'high'` (owner, 2026-08-24) — the thinking level for this lane.
   refuter:      { ...lane('secondary'), sandbox: 'read-only', effort: 'high', cap: MAX_RUN_BATCHES, why: 'one independent read-only refuter per batch; returns evidence, never edits' },
 
@@ -147,7 +147,7 @@ const ROLES = Object.freeze({
   // scaffolder's brief is source research, and a lane without it does not fail —
   // it silently asserts from memory, which is the exact failure mode CLAUDE.md
   // records for the build lanes before 2026-08-11.
-  scaffolder:   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'xhigh', cap: 4, web: true, why: 'one per subject track; owns exactly one prose scaffold file' },
+  scaffolder:   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: 4, web: true, why: 'one per subject track; owns exactly one prose scaffold file' },
 
   // `mechanic` (owner, 2026-08-14): use the secondary lane for tasks
   // requiring less reasoning — work whose difficulty is bookkeeping rather
@@ -165,7 +165,7 @@ const ROLES = Object.freeze({
   //
   // So: mechanical, post-adjudication, non-judged work only. If a task needs a
   // mathematical decision, it is not this lane's.
-  mechanic:     { ...lane('agentic'), sandbox: 'workspace-write', effort: 'medium', cap: 4, why: 'bookkeeping after the judgment is made; never authors, never judged by its own lane' },
+  mechanic:     { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: 4, why: 'bookkeeping after the judgment is made; never authors, never judged by its own lane' },
 
   // THE STEP-9 VISUAL LANE IS GONE (owner, 2026-08-23). `sigma` (read-only
   // render adjudicator) and `tau` (repairer scoped to exact Sigma findings)

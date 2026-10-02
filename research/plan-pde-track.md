@@ -1017,7 +1017,10 @@ exists continuously or in an explicitly stated trace sense.
 
 **A page:** `poisson-problems-and-interior-harmonic-estimates`  
 **B page:** `poisson-problems-and-interior-harmonic-estimates-examples`  
-**Requires:** PDE-3--PDE-5; MT-11; the published multi-index/Taylor pages.
+**Requires:** PDE-3--PDE-5; MT-11; the published multi-index/Taylor pages;
+`analytic-majorants-and-the-cauchy-kovalevskaya-theorem`;
+`harmonic-functions-and-the-poisson-integral`. The B page additionally requires
+`tempered-distributions-and-the-fourier-transform` for its plane-wave calculation.
 
 ### A-page items, in dependency order
 
@@ -1363,7 +1366,9 @@ simultaneously consistent.
 **A page:** `smooth-approximation-and-sobolev-extension`  
 **B page:** `smooth-approximation-and-sobolev-extension-examples`  
 **Requires:** PDE-11; MT-15; the published locally finite partition-of-unity,
-distance-to-closed-set and $C^1$ coordinate-change items.
+distance-to-closed-set and $C^1$ coordinate-change items;
+`euclidean-surface-measure-divergence-and-green-identities` for the boundary
+chart and normal convention.
 
 ### A-page items, in dependency order
 
@@ -3457,14 +3462,14 @@ page and the existing conceptual anchor after which the row belongs.
 
 | A/B after | new stable ID (kind) and statement | statement | proof | rationale |
 |---|---|---|---|---|
-| A / ball Poisson kernel | `lem-ball-poisson-kernel-is-positive-and-normalised` (lemma) — For fixed interior $x$, $P_R(x,\cdot)>0$ and its boundary integral is one. | **L**, S:[T] Ch. 5 §4; [SO] §4.2 | **A**, P:constant boundary datum in the representation | Splits the probability-kernel facts used in comparison and convergence. |
-| A / boundary convergence | `lem-poisson-kernel-boundary-cap-and-complement-estimate` (lemma) — Near a boundary point, control the small cap by continuity and the complement by decay of the kernel. | **L**, S:[H] §2.6; [T] Ch. 5 §4 | **A**, P:source proof divided at the two regions | Exposes the nontrivial approximate-identity step. |
-| A / Dirichlet solution | `cor-uniform-boundary-convergence-of-ball-poisson-integrals` (corollary) — Continuous data on the compact sphere are recovered uniformly as the radial parameter tends to one. | **L**, S:[H] §2.6; [SO] §4.2 | **A**, P:cap estimate plus uniform continuity | Strengthens pointwise recovery by a cheap compactness consequence. |
-| A / harmonic estimates | `lem-interior-oscillation-controls-harmonic-gradient` (lemma) — Bound $\vert{}Du(x)\vert{}$ by $Cr^{-1}\operatorname{osc}_{B_r(x)}u$. | **L**, S:[H] §2.7; [SO] §4.3 | **A**, P:subtract a constant in the Poisson derivative estimate | Records the invariant form used in regularity iteration. |
-| A / Cauchy estimates | `cor-entire-harmonic-function-of-sublinear-growth-is-constant` (corollary) — If $\sup_{B_R}\vert{}u\vert{}=o(R)$, the expanding-ball gradient estimate gives $Du=0$. | **L**, S:[H] §2.7; [T] Ch. 5 §6 | **A**, P:interior estimate and $R\to\infty$ | Adds the natural growth boundary case without inventing a new method. |
-| A / harmonic compactness | `thm-locally-uniform-harmonic-convergence-is-c-infinity-local` (theorem) — Locally uniform convergence of harmonic functions implies convergence of every derivative on compact subsets. | **L**, S:[H] §2.7; [T] Ch. 5 §6 | **A**, P:Poisson derivative formula on nested balls | Separates derivative convergence from mere harmonicity of the limit. |
-| B / boundary data | `cex-poisson-integral-need-not-recover-discontinuous-data-at-the-jump` (counterexample) — Step data on a symmetric boundary converge at a jump to an averaged value rather than the assigned point value. | **L**, S:[T] Ch. 5 §4; [PJ] §11.1.4 | **A**, P:kernel symmetry calculation | Shows why the classical boundary theorem assumes continuity. |
-| B / exterior uniqueness | `cex-exterior-dirichlet-uniqueness-needs-growth-or-decay-control` (counterexample) — A nonzero harmonic function vanishing on a sphere supplies a second exterior solution when growth at infinity is unrestricted. | **L**, S:[T] Ch. 5 §5; [H] §2.5 | **A**, P:explicit radial harmonic function | Tests the infinity condition rather than the boundary regularity. |
+| A / ball Poisson kernel | `lem-ball-poisson-kernel-is-positive-and-normalised` (lemma) — For fixed interior $x$, $P_R(x,\cdot)>0$ and its boundary integral is one. | **L**, S:[T] §5.4, pp. 126--127, Lemma 5.23; Schmidt §2.8, pp. 44--50 | **A**, P:constant boundary datum in the representation | Splits the probability-kernel facts used in comparison and convergence. |
+| A / boundary convergence | `lem-poisson-kernel-boundary-cap-and-complement-estimate` (lemma) — Near a boundary point, control the small cap by continuity and the complement by decay of the kernel. | **L**, S:[T] §5.6, pp. 133--134, Theorem 5.25; Schmidt §2.8, pp. 49--50 | **A**, P:source proof divided at the two regions | Exposes the nontrivial approximate-identity step. |
+| A / Dirichlet solution | `cor-uniform-boundary-convergence-of-ball-poisson-integrals` (corollary) — Continuous data on the compact sphere are recovered uniformly as the radial parameter tends to one. | **L**, S:[T] §5.6, pp. 133--134; Schmidt §2.8, pp. 49--50 | **A**, P:cap estimate plus uniform continuity | Strengthens pointwise recovery by a cheap compactness consequence. |
+| A / harmonic estimates | `lem-interior-oscillation-controls-harmonic-gradient` (lemma) — Bound $\vert{}Du(x)\vert{}$ by $Cr^{-1}\operatorname{osc}_{B_r(x)}u$. | **L**, S:[H] §2.2, pp. 23--25; [SO] §4.2, pp. 60--61 | **A**, P:subtract a constant in the Poisson derivative estimate | Records the invariant form used in regularity iteration. |
+| A / Cauchy estimates | `cor-entire-harmonic-function-of-sublinear-growth-is-constant` (corollary) — If $\sup_{B_R}\vert{}u\vert{}=o(R)$, the expanding-ball gradient estimate gives $Du=0$. | **L**, S:[H] §2.2, pp. 23--25; [T] §5.1, p. 111 | **A**, P:interior estimate and $R\to\infty$ | Adds the natural growth boundary case without inventing a new method. |
+| A / harmonic compactness | `thm-locally-uniform-harmonic-convergence-is-c-infinity-local` (theorem) — Locally uniform convergence of harmonic functions implies convergence of every derivative on compact subsets. | **L**, S:[H] §2.2, pp. 23--25; [T] §5.1, p. 111 | **A**, P:Poisson derivative formula on nested balls | Separates derivative convergence from mere harmonicity of the limit. |
+| B / boundary data | `cex-poisson-integral-need-not-recover-discontinuous-data-at-the-jump` (counterexample) — Step data on a symmetric boundary converge at a jump to an averaged value rather than the assigned point value. | **L**, S:[PJ] §11.1.4, pp. 193--194, with local disc-kernel symmetry | **A**, P:kernel symmetry calculation | Shows why the classical boundary theorem assumes continuity. |
+| B / exterior uniqueness | `cex-exterior-dirichlet-uniqueness-needs-growth-or-decay-control` (counterexample) — A nonzero harmonic function vanishing on a sphere supplies a second exterior solution even when boundedness alone is imposed, without specifying the limit at infinity. | **L**, S:[H] §2.6.1, p. 33; Simon Lecture 4, pp. 36--39 | **A**, P:explicit radial harmonic function | Tests the infinity condition rather than the boundary regularity. |
 
 #### PDE-7 additions
 

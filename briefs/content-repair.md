@@ -1,6 +1,6 @@
 # Assigned content repair
 
-**Proof repair quality for item editors.** If this dispatch authorizes you to edit an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; omit repeated talking points, filler, and padding that add no mathematical content.
+**Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
 
 Repair only the items or contracts licensed by the task. Read CLAUDE.md,
 SCHEMA.md, current arguments and actual dependencies. Be honest about your

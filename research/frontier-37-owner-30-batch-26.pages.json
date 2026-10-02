@@ -1,0 +1,815 @@
+[
+  {
+    "order": 841,
+    "id": "nevanlinna-second-main-theorem-and-defects",
+    "kind": "A",
+    "category": "complex-analysis",
+    "title": "Nevanlinna's Second Main Theorem and Defects",
+    "companion": "nevanlinna-second-main-theorem-and-defects-examples",
+    "requires": [
+      "measures-and-their-basic-properties",
+      "lebesgue-measure-on-euclidean-space",
+      "jensen-theory-and-nevanlinnas-first-main-theorem",
+      "the-riemann-sphere-and-mobius-transformations",
+      "bloch-schottky-and-picard",
+      "normal-families-and-montels-theorem",
+      "isolated-singularities-and-laurent-series",
+      "complex-power-series-and-analytic-functions",
+      "complex-differentiability-and-cauchy-riemann",
+      "the-complex-exponential-and-eulers-formula",
+      "the-inverse-function-theorem-completed",
+      "product-measures-and-the-fubini-tonelli-theorems"
+    ],
+    "items": [
+      {
+        "id": "def-nevanlinna-exceptional-radius-notation",
+        "kind": "definition",
+        "title": "Nevanlinna exceptional-radius error notation",
+        "deps": [
+          "def-nevanlinna-counting-proximity-and-characteristic",
+          "def-order-of-growth-meromorphic-function",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice. For fixed nonconstant meromorphic f on C, S(r,f) denotes an error e(r) with |e(r)|<=C(log^+T(r,f)+log r) for r>=r0 outside a Lebesgue-measurable set E of finite linear measure. Different occurrences may have different E; a finite sum uses their union. A finite-order O(log r) estimate or rational O(1) estimate at every large r is asserted only when explicitly proved. No all-r bound is implicit.",
+        "proof_strategy": "Use published Lebesgue measure under Countable Choice to define finite linear measure; finite unions preserve finiteness. Specify diameter-one chordal T and the exact quantifiers C,r0,E. Treat S as a bound on a particular quantity, not as a formal function. Countable Choice is used only through the published complete-measure interface.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Eremenko, Lectures on Nevanlinna Theory",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf",
+              "locator": "§§4–6, printed pp. 6–14"
+            },
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-nevanlinna-truncated-and-ramification-counts",
+        "kind": "definition",
+        "title": "Truncated value and ramification counts",
+        "deps": [
+          "def-nevanlinna-counting-proximity-and-characteristic",
+          "thm-nevanlinna-quantities-well-defined",
+          "thm-zero-order-factorization-holomorphic-function",
+          "thm-pole-characterizations",
+          "thm-poles-meromorphic-function-are-discrete-and-countable",
+          "thm-isolated-zeros-holomorphic-function",
+          "thm-zero-complex-derivative-on-a-domain-implies-constant"
+        ],
+        "statement": "For a nonconstant meromorphic f and a sphere target a, bar n(r,a;f) counts distinct a-points in |z|<=r once and n_1(r,a;f) counts each with local degree m with weight m-1, including poles when a=infinity. Define bar N and N_1(r,a;f) using the same centre-regularized integral as N; then N=bar N+N_1(a). Let N_1(r,f) be the integrated count of all critical points of the sphere map f, weighted by local degree minus one.",
+        "proof_strategy": "Finite a-points and poles are discrete and locally finite by the published divisor results. Use the zero order of f-a for finite a and of 1/f for infinity. Integrate each finite weighted divisor sum including the central term to prove N=bar N+N_1(a). A nonconstant f has isolated derivative zeros away from poles.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Eremenko, Lectures on Nevanlinna Theory",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf",
+              "locator": "§§4–6, printed pp. 6–14"
+            },
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-borel-nevanlinna-growth-increment",
+        "kind": "lemma",
+        "title": "Finite-measure growth increment lemma",
+        "deps": [
+          "def-nevanlinna-exceptional-radius-notation",
+          "thm-rational-functions-characterized-by-logarithmic-characteristic",
+          "thm-ahlfors-shimizu-characteristic-identity",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-countable-choice",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-p-series-real-exponents"
+        ],
+        "statement": "Assume Countable Choice. If u:[r0,infinity)->[1,infinity) is continuous, nondecreasing and unbounded, then for every epsilon>0, u(r+u(r)^(-1-epsilon))<u(r)+1 outside a Lebesgue-measurable E of finite linear measure. This applies to u(r)=T(r,f) after increasing r0.",
+        "proof_strategy": "Let phi(t)=t^(-1-epsilon) and E be the closed failure set. Starting at the least failure radius r_j beyond the preceding interval, take the first r_j prime with u(r_j prime)=u(r_j)+1. Monotonicity gives r_j prime-r_j<=phi(u(r_j)); successive u(r_j) rise by at least one, so sum_j phi(u(r_1)+j-1)<infinity bounds the total covering length. The published Ahlfors-Shimizu identity gives continuity, monotonicity and unboundedness of T. The recursive least points are canonical; Countable Choice is carried for Lebesgue measure.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Eremenko, Lectures on Nevanlinna Theory",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf",
+              "locator": "§§4–6, printed pp. 6–14"
+            },
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nevanlinna-poisson-jensen-derivative-bound",
+        "kind": "lemma",
+        "title": "Separated-radius Poisson-Jensen derivative bound",
+        "deps": [
+          "thm-poisson-jensen-formula-meromorphic-function",
+          "def-nevanlinna-counting-proximity-and-characteristic",
+          "thm-nevanlinna-quantities-well-defined",
+          "thm-nevanlinna-first-main-theorem",
+          "thm-nevanlinna-characteristic-elementary-laws",
+          "thm-jensens-integral-inequality",
+          "thm-zero-order-factorization-holomorphic-function",
+          "thm-pole-characterizations"
+        ],
+        "statement": "For nonconstant meromorphic f, 2<=r<R and 0<alpha<1, the standard proximity m_0(r,f prime/f), the mean of log^+|f prime/f|, is bounded by C_{f,alpha}+C_alpha(log^+T(R,f)+log R+log^+(1/(R-r))). No limit R down to r is asserted.",
+        "proof_strategy": "Normalize f(0)=1 first. Differentiate Poisson-Jensen on |z|<s with r<s<R: f prime/f is a boundary integral plus zero/pole kernels; bound it by 4s T(s,f)/(s-r)^2+2 sum_{|c|<s}|z-c|^{-1}. Apply alpha-power angular means: (sum x_j)^alpha<=sum x_j^alpha and integral |re^{it}-c|^{-alpha}dt<=C_alpha r^{-alpha}. FMT and the integrated divisor counts bound the number of zeros and poles in |z|<s by C R T(R,f)/(R-s) plus a centre constant. Set s=(R+r)/2 and take logarithms by Jensen concavity. For f=c z^k h with h(0)=1 use f prime/f=k/z+h prime/h and characteristic laws to bound T(R,h) by T(R,f)+O_f(log R). Continue through divisor radii by angular integrability.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            },
+            {
+              "title": "I. Laine, Complex Analysis III lecture notes",
+              "url": "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf",
+              "locator": "§§5–6.1, printed pp. 35–43"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nevanlinna-ramification-counting-identity",
+        "kind": "lemma",
+        "title": "Ramification count from the derivative divisor",
+        "deps": [
+          "def-nevanlinna-truncated-and-ramification-counts",
+          "def-nevanlinna-counting-proximity-and-characteristic",
+          "thm-zero-order-factorization-holomorphic-function",
+          "thm-pole-characterizations",
+          "thm-nevanlinna-quantities-well-defined"
+        ],
+        "statement": "For nonconstant meromorphic f, N_1(r,f)=N(r,0;f prime)+2N(r,infinity;f)-N(r,infinity;f prime), including the centre regularizations. For every finite set A of distinct sphere targets, sum_{a in A}N_1(r,a;f)<=N_1(r,f).",
+        "proof_strategy": "At a finite a-point of degree m, the derivative has a zero of order m-1. At a pole of order m, f prime has a pole of order m+1, so 2m-(m+1)=m-1. Away from poles all derivative zeros are finite critical points. Equality of locally finite divisor weights yields the integrated identity including z=0. The selected target counts are disjoint subcounts of N_1(r,f).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Eremenko, Lectures on Nevanlinna Theory",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf",
+              "locator": "§§4–6, printed pp. 6–14"
+            },
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nevanlinna-logarithmic-derivative",
+        "kind": "lemma",
+        "title": "Nevanlinna lemma on the logarithmic derivative",
+        "deps": [
+          "def-nevanlinna-counting-proximity-and-characteristic",
+          "def-nevanlinna-exceptional-radius-notation",
+          "lem-borel-nevanlinna-growth-increment",
+          "lem-nevanlinna-poisson-jensen-derivative-bound",
+          "thm-ahlfors-shimizu-characteristic-identity",
+          "thm-nevanlinna-characteristic-elementary-laws",
+          "def-countable-choice",
+          "def-order-of-growth-meromorphic-function"
+        ],
+        "statement": "Assume Countable Choice. For nonconstant meromorphic f on C, m_0(r,f prime/f)=S(r,f), equivalently its normalized chordal proximity to infinity has the same bound. For finite-order f this is O_f(log r) for every sufficiently large r without exceptions. For rational f it is O_f(1) for every sufficiently large r.",
+        "proof_strategy": "Apply the separated-radius derivative bound. At finite order choose R=2r, so log T(2r,f)=O(log r). At infinite order apply the Borel increment lemma to u=T with epsilon=1 and R=r+T(r,f)^(-2); outside E, T(R,f)<T(r,f)+1, R<=2r, and log^+1/(R-r)=2log T(r,f). For rational f=P/Q, f prime/f=P prime/P-Q prime/Q is a finite sum of partial fractions O(1/r) on large circles. The chordal and standard proximity differ by at most (log 2)/2. Carry Countable Choice from the exceptional-set measure interface.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            },
+            {
+              "title": "I. Laine, Complex Analysis III lecture notes",
+              "url": "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf",
+              "locator": "§§5–6.1, printed pp. 35–43"
+            },
+            {
+              "title": "A. Eremenko, Lectures on Nevanlinna Theory",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf",
+              "locator": "§§4–6, printed pp. 6–14"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-nevanlinna-growth-dominates-logarithm",
+        "kind": "lemma",
+        "title": "Transcendental characteristic dominates logarithmic growth",
+        "deps": [
+          "thm-ahlfors-shimizu-characteristic-identity",
+          "thm-rational-functions-characterized-by-logarithmic-characteristic",
+          "def-nevanlinna-counting-proximity-and-characteristic"
+        ],
+        "statement": "For nonconstant transcendental meromorphic f on C, T(r,f)/log r tends to infinity. Therefore O(log^+T(r,f)+log r)=o(T(r,f)) outside the relevant exceptional set. For rational f of degree d>=1, T(r,f)=d log r+O(1), and O(1)=o(T).",
+        "proof_strategy": "Set x=log r. Ahlfors-Shimizu makes T(e^x,f)-C_f convex. If T(e^{x_n},f)/x_n remained bounded on an unbounded sequence, interpolation from a fixed x0 to x_n would give T(e^x,f)=O(x) for all x; the published rational characterization would force f rational. Since log T/T tends to zero as T tends to infinity, the S bound is o(T) for transcendental f. Use the published rational degree formula for the other case.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Eremenko, Lectures on Nevanlinna Theory",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf",
+              "locator": "§§4–6, printed pp. 6–14"
+            },
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-nevanlinna-second-main-theorem",
+        "kind": "theorem",
+        "title": "Nevanlinna Second Main Theorem with ramification and truncation",
+        "deps": [
+          "def-nevanlinna-counting-proximity-and-characteristic",
+          "def-nevanlinna-exceptional-radius-notation",
+          "def-nevanlinna-truncated-and-ramification-counts",
+          "lem-nevanlinna-logarithmic-derivative",
+          "lem-nevanlinna-ramification-counting-identity",
+          "thm-nevanlinna-first-main-theorem",
+          "thm-nevanlinna-characteristic-elementary-laws",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice. If f is nonconstant meromorphic on C and a_1,...,a_q are distinct sphere values, q>=3, then outside a set of finite linear measure: sum_j m(r,a_j;f)+N_1(r,f)<=2T(r,f)+S(r,f); equivalently (q-2)T(r,f)<=sum_j N(r,a_j;f)-N_1(r,f)+S(r,f); and consequently (q-2)T(r,f)<=sum_j bar N(r,a_j;f)+S(r,f). Finite-order errors are O(log r) for every large r; rational errors are O(1) for every large r.",
+        "proof_strategy": "For finite targets take H=sum_j1/(f-a_j). Its rational degree is q and its poles are precisely the a_j-divisors, so rational composition plus FMT gives m_0(H)=sum_j m_0(1/(f-a_j))+O(1). As f prime H=sum_j f prime/(f-a_j), the logarithmic derivative lemma makes m_0(f prime H)=S. Bound m_0(H)<=m_0(f prime H)+m_0(1/f prime)+O(1); FMT for 1/f prime and m_0(f prime)<=m_0(f)+m_0(f prime/f)+O(1), combined with the derivative-divisor identity, give sum_j m(a_j)+m(infinity)+N_1<=2T+S. Treat the affine constant-derivative case directly. Retain or drop the infinity term according to the chosen values. Substitute FMT including fixed centre constants; subtract selected ramification weights from the total to obtain bar N. For rational f every logarithmic derivative of f and f-a_j is O(1/r), making this proof O(1). Use finite-order derivative bound for the other all-r refinement.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            },
+            {
+              "title": "I. Laine, Complex Analysis III lecture notes",
+              "url": "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf",
+              "locator": "§§5–6.1, printed pp. 35–43"
+            },
+            {
+              "title": "A. Eremenko, Lectures on Nevanlinna Theory",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf",
+              "locator": "§§4–6, printed pp. 6–14"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-nevanlinna-deficiency-and-ramification-index",
+        "kind": "definition",
+        "title": "Nevanlinna deficiency and ramification index",
+        "deps": [
+          "def-nevanlinna-counting-proximity-and-characteristic",
+          "def-nevanlinna-truncated-and-ramification-counts",
+          "thm-nevanlinna-first-main-theorem",
+          "lem-nevanlinna-growth-dominates-logarithm"
+        ],
+        "statement": "For nonconstant meromorphic f and sphere target a, delta(a,f)=1-limsup_{r to infinity}N(r,a;f)/T(r,f)=liminf_{r to infinity}m(r,a;f)/T(r,f), while epsilon(a,f)=liminf_{r to infinity}N_1(r,a;f)/T(r,f). Each lies in [0,1]. An omitted value has delta=1. A sum over sphere values means the supremum of finite subsums, without selecting an enumeration.",
+        "proof_strategy": "FMT and T tending to infinity identify the two deficiency formulas. Since 0<=N_1(a)<=N(a)<=T+O(1) and m>=0, both indices lie in [0,1]. Define uncountable-index nonnegative sums by finite subsums; do not infer countability in this definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            },
+            {
+              "title": "I. Laine, Complex Analysis III lecture notes",
+              "url": "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf",
+              "locator": "§§5–6.1, printed pp. 35–43"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-nevanlinna-defect-relation",
+        "kind": "theorem",
+        "title": "Nevanlinna deficiency and ramification defect relations",
+        "deps": [
+          "def-nevanlinna-deficiency-and-ramification-index",
+          "thm-nevanlinna-second-main-theorem",
+          "lem-nevanlinna-growth-dominates-logarithm",
+          "thm-nevanlinna-first-main-theorem",
+          "def-countable-choice",
+          "lem-nevanlinna-ramification-counting-identity",
+          "thm-countable-union-of-countable"
+        ],
+        "statement": "Assume Countable Choice. For every nonconstant meromorphic f on C, sum_{a in sphere}(delta(a,f)+epsilon(a,f))<=2, and hence sum_a delta(a,f)<=2. Also delta(a,f)+epsilon(a,f)<=1 for each a, and the set where either index is positive is at most countable. Sums mean suprema of finite subsums.",
+        "proof_strategy": "From full SMT drop the nonnegative N_1(r,f)-sum_{a in A}N_1(r,a;f) to get sum_{a in A}(m(r,a;f)+N_1(r,a;f))<=2T+S for finite A. Divide by T and take liminf of each nonnegative summand; growth separation gives S/T->0 off E for transcendental f, and rational O(1)/T->0. Take the supremum over finite A. Since m+N_1(a)<=T+O(1), each combined index is <=1. Above any threshold 1/k there are at most 2k such values, giving countability by the union over k.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            },
+            {
+              "title": "I. Laine, Complex Analysis III lecture notes",
+              "url": "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf",
+              "locator": "§§5–6.1, printed pp. 35–43"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-nevanlinna-exterior-three-value-extension",
+        "kind": "lemma",
+        "title": "Three omitted values force exterior extension",
+        "deps": [
+          "thm-three-point-transitivity-mobius-transformations",
+          "thm-mobius-transformations-biholomorphic-sphere",
+          "thm-schottky-theorem",
+          "lem-cauchy-estimates-on-concentric-subdiscs",
+          "thm-rational-points-and-boxes-in-rn",
+          "thm-heine-borel-rn",
+          "thm-recursion",
+          "def-chordal-metric-riemann-sphere",
+          "thm-chordal-metric-induces-sphere-topology",
+          "thm-compact-implies-complete-and-totally-bounded",
+          "thm-extreme-value-metric",
+          "thm-chordal-limit-theorem-for-meromorphic-functions",
+          "thm-boundary-maximum-modulus-principle",
+          "thm-removable-singularity-characterizations",
+          "thm-pole-characterizations"
+        ],
+        "statement": "If g is meromorphic on |w|>R and omits three distinct sphere values on |w|>R_1 for some R_1>R, then g extends meromorphically across w=infinity.",
+        "proof_strategy": "Normalize the three omitted targets to 0, 1, and infinity by a Mobius transformation and invert w=1/z. For h holomorphic on a punctured disc omitting 0 and 1, rescale h on dyadic annuli to holomorphic maps h_n on a fixed annulus. Schottky's bound, applied locally to either h_n or its reciprocal according to the center value, and Cauchy estimates give uniform chordal equicontinuity on a compact band. At each point of an explicit rational dense set, extract a convergent subsequence by retaining the first ordered dyadic box containing infinitely many terms; diagonalize by recursion. Compactness of the band and equicontinuity upgrade convergence to chordally uniform convergence. The chordal limit theorem makes the limit either holomorphic or identically infinity. Consequently a selected sequence of shrinking circles has a uniform bound for h or for 1/h. The maximum modulus principle propagates that bound across every intervening annulus, so the removable-singularity or pole criterion extends h at zero. Undo both coordinate changes. All selections use deterministic least-index rules; no choice axiom is needed. The full source and detailed reconstruction are in research/frontier-37-owner-30-step1-nevanlinna-exterior-repair.md.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Eremenko, Lectures on Nevanlinna Theory",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf",
+              "locator": "§§4–6, printed pp. 6–14"
+            },
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            },
+            {
+              "title": "A. Simonic, The Ahlfors lemma and Picard's theorems",
+              "url": "https://arxiv.org/pdf/1506.07019v1",
+              "locator": "§5.3 Theorem 11 and §5.4 Theorems 13–14, printed pp. 13–15; the explicit choice-free diagonal extraction is reconstructed locally"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-local-second-main-theorem-on-a-punctured-disc",
+        "kind": "theorem",
+        "title": "The local Second Main Theorem on a punctured disc",
+        "deps": [
+          "def-nevanlinna-truncated-and-ramification-counts",
+          "def-nevanlinna-counting-proximity-and-characteristic",
+          "lem-nevanlinna-ramification-counting-identity",
+          "thm-nevanlinna-second-main-theorem",
+          "cor-argument-principle-counts-preimages",
+          "thm-argument-principle-as-image-winding-number",
+          "def-countable-choice",
+          "thm-three-point-transitivity-mobius-transformations",
+          "thm-mobius-transformations-biholomorphic-sphere",
+          "thm-poles-meromorphic-function-are-discrete-and-countable",
+          "thm-isolated-zeros-holomorphic-function",
+          "thm-identity-theorem-holomorphic-functions",
+          "thm-zero-complex-derivative-on-a-domain-implies-constant",
+          "lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "statement": "Assume Countable Choice. Let f be nonconstant meromorphic on 0<|z-z0|<r*, choose 0<rho<r* so the circle |z-z0|=rho contains no poles or preimages of the finitely many distinct targets a1,...,aq in the sphere, and put F(w)=f(z0+rho/w) for |w|>1. Define m_ext(R,infinity;F)=(1/(2 pi)) integral_0^{2 pi} log^+|F(Re^{i theta})| dtheta; N_ext(R,a;F)=integral_1^R n_ext(t,a;F) dt/t, where n_ext counts a-points in 1<|w|<=t with full multiplicity (poles for a=infinity); T_ext=m_ext(R,infinity)+N_ext(R,infinity), and bar N_ext uses each point once. There are C,R0 and a measurable E subset [R0,infinity) with finite linear measure such that for every R>=R0 outside E, (q-2)T_ext(R,F)<=sum_{j=1}^q bar N_ext(R,aj;F)+C(log^+T_ext(R,F)+log R). The exact local radius is s=rho/R; the image exceptional set {rho/R:R in E} has finite linear measure, bounded by rho R0^(-2)|E|.",
+        "proof_strategy": "Choose a target-regular radius rho and invert to the genuine one-sided exterior. Derive normalized annular Jensen with the fixed winding term, hence the exterior First Main Theorem with O(log R) error. Normalize all targets to finite c_j by a Mobius map and choose a common divisor-regular radius r1>1 for G, its targets and G′. Compare T_ext(G) with T_ext(F) using Jensen anchored at r1 and retain the finite O(log R) base change. Apply Lund--Ye A2 at r1: the source pole count based there is no greater than the count based at 1, and its unnormalized mean is exactly 2pi times the normalized mean; thus T1<=2pi T_ext. Shifts G-c_j have the same pole divisor and a bounded proximity difference. Take the finite union of exceptional sets. Reproduce the algebraic target-separation and local ramification calculation, convert the derivative term by annular Jensen at r1, and deduce the truncated exterior SMT. Transfer back through the two-sided O(log R) Mobius characteristic comparison. The CC-compatible published measurable-image and Lebesgue change-of-variables suppliers justify the exceptional-set image under s=rho/R and its stated measure bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Lund and Zhuan Ye, Nevanlinna theory of meromorphic functions on annuli",
+              "url": "https://www.sciengine.com/doi/pdf/f72880821c9e4c6197bdd1d8c0054a6e",
+              "locator": "Definition A, printed p. 549; Theorems A1 and A2, printed pp. 551-552; fixed-inner-radius O(log R) explanation, p. 551"
+            },
+            {
+              "title": "A. A. Kondratyuk, Meromorphic functions with several essential singularities",
+              "url": "https://arxiv.org/abs/0807.1247",
+              "locator": "Theorem 1, p. 10 and two-parameter Jensen/FMT discussion; source for annular Jensen context, not for SMT"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-nevanlinna-picard-theorems",
+        "kind": "corollary",
+        "title": "Little and Great Picard consequences of Nevanlinna theory",
+        "deps": [
+          "thm-nevanlinna-second-main-theorem",
+          "lem-nevanlinna-growth-dominates-logarithm",
+          "thm-local-second-main-theorem-on-a-punctured-disc",
+          "lem-nevanlinna-exterior-three-value-extension",
+          "thm-rational-functions-characterized-by-logarithmic-characteristic",
+          "thm-fundamental-theorem-of-algebra-liouville-proof",
+          "def-countable-choice",
+          "thm-laurent-expansion-annulus",
+          "thm-laurent-regular-principal-decomposition",
+          "thm-laurent-coefficient-formula-and-uniqueness",
+          "thm-termwise-differentiation-of-complex-power-series",
+          "lem-derived-complex-power-series-has-the-same-radius",
+          "thm-holomorphic-if-and-only-if-analytic",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-complex-exponential-surjects-onto-the-punctured-plane",
+          "thm-zero-derivative-on-connected-open-euclidean-set-iff-constant",
+          "thm-algebra-of-complex-derivatives",
+          "thm-chain-rule-for-complex-derivatives",
+          "thm-argument-principle-as-image-winding-number",
+          "thm-three-point-transitivity-mobius-transformations",
+          "thm-mobius-transformations-biholomorphic-sphere",
+          "def-nevanlinna-counting-proximity-and-characteristic",
+          "thm-ahlfors-shimizu-characteristic-identity",
+          "thm-poles-meromorphic-function-are-discrete-and-countable"
+        ],
+        "statement": "Assume Countable Choice. A nonconstant meromorphic function on C omits at most two sphere values, so a nonconstant entire function omits at most one finite value. If a meromorphic function has an isolated essential singularity at z0, every punctured neighborhood assumes every sphere value, with at most two exceptions, infinitely often; for a holomorphic punctured-disc function at most one finite value is exceptional.",
+        "proof_strategy": "For the plane claim, three omitted targets give T<=S by the plane SMT; growth separation contradicts this for transcendental f, while a nonconstant rational P/Q assumes every sphere value except possibly P(infinity)/Q(infinity) by the Fundamental Theorem of Algebra. An entire map already omits infinity. For the local claim, if three values occur only finitely often near z0, shrink the puncture to omit them and first apply a Mobius map sending those targets to 0,1,infinity. For g=M composed with f, choose rho and invert G(w)=g(z0+rho/w); the local exterior SMT applies directly to G with these three omitted targets, so T_ext<=C(log^+T_ext+log R) outside a finite-linear-measure set in R and T_ext=O(log R) on good radii. Annular Jensen and the fixed inner boundary term show that T_ext(R)+C0 log R is nondecreasing for a fixed C0. Since the exceptional set has tail measure below 1, each large R has a good Rprime in [R,R+1]; this transfers O(log R) to every large R. The normalized G is holomorphic and zero-free on the exterior. Choose its integer winding m on a regular inner circle; then W=G/w^m has winding zero and is holomorphic and nonzero on the exterior. Its logarithmic derivative W'/W has a Laurent expansion with zero coefficient of w^(-1), since that coefficient is (2 pi i)^(-1) times the inner-circle integral. The Laurent coefficient formula and uniqueness, annulus expansion, and regular/principal decomposition suppliers split this series into positive and negative powers; termwise integration gives a primitive H=H_++H_- on the exterior, with H_+ entire and H_- analytic at infinity. Thus W'=(H')W, and differentiation shows W exp(-H) has zero derivative; connectedness makes it a nonzero constant, whose logarithm exists by surjectivity of the complex exponential onto C*. Absorbing that constant into H gives G(w)=w^m exp(H_+(w)) Phi(w), Phi=exp(H_-). The exponential derivative supplier justifies this differentiation. The function u=w^m exp(H_+) is meromorphic on the plane and Phi is nonzero and holomorphic at infinity. If u is constant, G extends meromorphically at infinity directly. Otherwise T(r,u)=T_ext(r,G)+O(log r)=O(log r), since Phi and its reciprocal are bounded near infinity and the only possible pole of u is at the origin; the published nonconstant plane growth criterion makes u rational. In either case G extends meromorphically at infinity, contradicting essentiality. Independently, the Schottky/normal-family exterior lemma proves the same local omitted-value conclusion; that proof is retained as a separate comparison route, not substituted for the local SMT. CA-23 remains an agreement seam and is not consumed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Eremenko, Lectures on Nevanlinna Theory",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf",
+              "locator": "§§4–6, printed pp. 6–14"
+            },
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            },
+            {
+              "title": "I. Laine, Complex Analysis III lecture notes",
+              "url": "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf",
+              "locator": "§§5–6.1, printed pp. 35–43"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-nevanlinna-five-value-theorem",
+        "kind": "theorem",
+        "title": "Nevanlinna five-value uniqueness theorem",
+        "deps": [
+          "thm-nevanlinna-second-main-theorem",
+          "lem-nevanlinna-growth-dominates-logarithm",
+          "thm-nevanlinna-first-main-theorem",
+          "thm-nevanlinna-characteristic-elementary-laws",
+          "def-nevanlinna-truncated-and-ramification-counts",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice. If two nonconstant meromorphic functions f,g on C share five distinct sphere values ignoring multiplicity, meaning their preimage sets of each target agree, then f=g identically.",
+        "proof_strategy": "Choose a Möbius map whose pole lies outside the five targets so all transformed shared values are finite; rational composition changes each T by O(1). If h=f-g is nonzero, the sum C(r) of the five common reduced counts is at most N(r,0;h). For nonconstant h use FMT to get N(r,0;h)<=T(r,h)+O(1); for nonzero constant h the count is zero directly. In either case the characteristic sum law gives C(r)<=T(r,f)+T(r,g)+O(1). Apply truncated SMT to f and g on the common complement of their exceptional sets: 3(T_f+T_g)<=2C+S_f+S_g. Thus T_f+T_g<=S_f+S_g+O(1), impossible because each T diverges and each error is o(T): growth separation for transcendental maps and the rational O(1) refinement for rational maps. This does not consume the escalated local Picard corollary.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. Laine, Complex Analysis III lecture notes",
+              "url": "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf",
+              "locator": "§§5–6.1, printed pp. 35–43"
+            },
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 842,
+    "id": "nevanlinna-second-main-theorem-and-defects-examples",
+    "kind": "B",
+    "category": "complex-analysis",
+    "title": "Nevanlinna's Second Main Theorem and Defects: Examples and Counterexamples",
+    "companion": "nevanlinna-second-main-theorem-and-defects",
+    "requires": [
+      "nevanlinna-second-main-theorem-and-defects"
+    ],
+    "items": [
+      {
+        "id": "ex-nevanlinna-omitted-values-of-exponential",
+        "kind": "example",
+        "title": "Exponential omits two sphere values",
+        "deps": [
+          "def-countable-choice",
+          "thm-nevanlinna-first-main-theorem",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-complex-exponential-surjects-onto-the-punctured-plane",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ],
+        "statement": "Assume Countable Choice. The entire function f(z)=e^z omits 0 and, as a meromorphic sphere map, infinity. Every nonzero finite a is attained at the simple points b+2 pi i k, k in Z, for any fixed logarithm b of a. Thus 0 and infinity are exactly its omitted sphere values.",
+        "proof_strategy": "The exponential is nonzero and entire, so it omits 0 and infinity. Solving e^z=a gives z=b+2 pi i k, and the derivative e^z never vanishes, so all such points are simple. The omission claim is exact on the sphere; the deficiency calculations are carried in the companion elementary-defects item.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Eremenko, Lectures on Nevanlinna Theory",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf",
+              "locator": "§5, printed p. 9; plane omitted-value context"
+            },
+            {
+              "title": "I. Laine, Complex Analysis III lecture notes",
+              "url": "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf",
+              "locator": "§5, printed pp. 38-40; elementary value-distribution context"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "ex-nevanlinna-deficiencies-of-elementary-functions",
+        "kind": "example",
+        "title": "Deficiencies of the exponential and sine",
+        "deps": [
+          "thm-nevanlinna-defect-relation",
+          "def-nevanlinna-deficiency-and-ramification-index",
+          "def-nevanlinna-truncated-and-ramification-counts",
+          "def-nevanlinna-counting-proximity-and-characteristic",
+          "def-countable-choice",
+          "def-complex-trigonometric-and-hyperbolic-functions",
+          "cor-complex-trigonometric-and-hyperbolic-derivatives",
+          "thm-complex-sine-and-cosine-zero-sets",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-complex-exponential-surjects-onto-the-punctured-plane",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-fundamental-theorem-of-algebra-liouville-proof",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "cor-differentiable-implies-continuous"
+        ],
+        "statement": "Assume Countable Choice. For f(z)=e^z, T(r,f)=r/pi+O(1), delta(0,f)=delta(infinity,f)=1, and delta(a,f)=0 for every nonzero finite a. For f(z)=sin z, T(r,f)=2r/pi+o(r), delta(infinity,f)=1, every finite deficiency vanishes, epsilon(1,f)=epsilon(-1,f)=1/2, and all other ramification indices vanish; hence the combined defect sum for sine is 2.",
+        "proof_strategy": "For e^z, the circular mean of log^+|e^{re^{it}}| is r/pi and there are no poles; its nonzero a-points are simple arithmetic progressions, so FMT gives zero deficiency for each such a, while the omitted targets have deficiency one. For sine, split the circle into |Im z|>=sqrt(r) and its complement to obtain m_0(r,sin z)=2r/pi+o(r); there are no poles. For a != ±1 the two a-point progressions are simple and give N(r,a)=2r/pi+o(r), N_1(a)=0. At ±1 one progression consists of double points, giving N=2r/pi+o(r), N_1=r/pi+o(r). These counts yield the stated indices.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Eremenko, Lectures on Nevanlinna Theory",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf",
+              "locator": "§§4–6, printed pp. 6–14"
+            },
+            {
+              "title": "I. Laine, Complex Analysis III lecture notes",
+              "url": "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf",
+              "locator": "§§5–6.1, printed pp. 35–43"
+            },
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-truncated-versus-full-nevanlinna-counting",
+        "kind": "example",
+        "title": "Full and truncated counting differ for a power map",
+        "deps": [
+          "def-nevanlinna-truncated-and-ramification-counts",
+          "def-nevanlinna-counting-proximity-and-characteristic",
+          "thm-rational-functions-characterized-by-logarithmic-characteristic"
+        ],
+        "statement": "For f(z)=z^d, integer d>=2, and r>1: N(r,0;f)=d log r, bar N(r,0;f)=log r, N_1(r,0;f)=(d-1)log r and T(r,f)=d log r+O(1). Multiplicity cannot be silently erased from FMT or restored in the truncated SMT.",
+        "proof_strategy": "The unique zero at the centre has local degree d; apply each centre-regularized count directly. The published rational-degree characteristic law gives T=d log r+O(1). This calculation is choice-free.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            },
+            {
+              "title": "I. Laine, Complex Analysis III lecture notes",
+              "url": "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf",
+              "locator": "§§5–6.1, printed pp. 35–43"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "cex-nevanlinna-error-bound-without-exceptional-radii",
+        "kind": "counterexample",
+        "title": "Exceptional radii cannot be removed from the logarithmic-derivative estimate",
+        "deps": [
+          "def-nevanlinna-exceptional-radius-notation",
+          "thm-nevanlinna-characteristic-elementary-laws",
+          "def-nevanlinna-counting-proximity-and-characteristic",
+          "def-countable-choice",
+          "thm-weierstrass-m-test-for-complex-function-series",
+          "thm-termwise-differentiation-of-complex-power-series",
+          "cor-complex-power-series-sums-are-analytic"
+        ],
+        "statement": "Assume Countable Choice. There exists an entire function f of infinite order and radii r_n tending to infinity for which m_0(r_n,f prime/f) is not O(log^+T(r_n,f)+log r_n). Thus the exceptional-radius set in the logarithmic-derivative lemma cannot simply be erased.",
+        "proof_strategy": "Follow Goldberg-Ostrovskii Ch. 3 §1 pp. 93–94: let r_n=2^{n-1} and f=sum_n(z/r_n)^{lambda_n}, with rapidly increasing integer lambda_n. On |z|=r_n, earlier terms give T(r_n,f)<=O(n lambda_{n-1}), while the nth derivative term dominates and gives T(r_n,f prime)>=log lambda_n-O(n). Choose lambda_n recursively so log lambda_n dominates T(r_n,f), and use m_0(f prime/f)>=T(f prime)-T(f)-O(1). Compact convergence follows from the growth of r_n and lambda_n. The resulting quotient by log^+T+log r is unbounded.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Goldberg and I. Ostrovskii, Value Distribution of Meromorphic Functions",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/GOmainfile.pdf",
+              "locator": "Ch. 3 §§1–2, printed pp. 87–98; Ch. 4 §3, printed pp. 121–122"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-sharpness-of-nevanlinna-q-minus-two",
+        "kind": "example",
+        "title": "The coefficient q minus two is sharp",
+        "deps": [
+          "ex-nevanlinna-omitted-values-of-exponential",
+          "thm-nevanlinna-second-main-theorem",
+          "def-nevanlinna-counting-proximity-and-characteristic",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice. For f(z)=e^z and the three distinct targets {0,infinity,a}, where a is any nonzero finite value, T(r,f)=r/pi+O(1) and bar N(r,a;f)=r/pi+O(log r). Thus the q=3 truncated Second Main Theorem has asymptotic equality, so its coefficient q-2 cannot be increased.",
+        "proof_strategy": "The target 0 and infinity are omitted. The a-points are b+2 pi i k for a fixed logarithm b and are all simple. Counting and integrating this arithmetic progression gives bar N=N=r/pi+O(log r); the mean of log^+|e^{re^{it}}| is r/pi, and the normalized chordal characteristic differs by O(1). Hence both sides of the q=3 inequality have the same leading term.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Eremenko, Lectures on Nevanlinna Theory",
+              "url": "https://www.math.purdue.edu/~eremenko/dvi/weizmann.pdf",
+              "locator": "§5, printed p. 9; Second Main Theorem sharpness context"
+            },
+            {
+              "title": "I. Laine, Complex Analysis III lecture notes",
+              "url": "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf",
+              "locator": "§§5-6.1, printed pp. 38-43; truncated SMT and elementary examples"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-nevanlinna-and-normal-family-picard-proofs",
+        "kind": "example",
+        "title": "Nevanlinna and normal-family proofs of Great Picard",
+        "deps": [
+          "thm-local-second-main-theorem-on-a-punctured-disc",
+          "lem-nevanlinna-exterior-three-value-extension",
+          "cor-nevanlinna-picard-theorems",
+          "def-countable-choice",
+          "thm-poles-meromorphic-function-are-discrete-and-countable"
+        ],
+        "statement": "Assume Countable Choice. For a meromorphic function with an isolated essential singularity, the local exterior Second Main Theorem together with its O(log R) growth-to-extension argument, and independently the Schottky/normal-family exterior lemma, each rule out three values omitted on a sufficiently small punctured neighborhood. Therefore at most two sphere values can fail to occur infinitely often; for a holomorphic punctured-disc function infinity is already omitted, leaving at most one finite exception.",
+        "proof_strategy": "For the Nevanlinna route, invert the puncture, apply the local theorem with three omitted targets, solve T_ext<=C(log^+T_ext+log R) on good radii, fill all radii by the annular Poisson/Harnack estimate, and use the zero-free exterior Laurent-log factorization in the corollary to prove meromorphic extension. For the independent normal-family route, normalize the three values to 0,1,infinity and use Schottky bounds plus the explicit deterministic diagonal construction recorded in the exterior lemma. The two proofs share the conclusion but have distinct suppliers; no Tsuji-cover characteristic is substituted for the circular exterior characteristic.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Simonic, The Ahlfors lemma and Picard’s theorems",
+              "url": "https://arxiv.org/pdf/1506.07019v1",
+              "locator": "§5.3 Theorem 11, §5.4 Theorems 13-14, printed pp. 13-15; deterministic diagonal route reconstructed locally"
+            },
+            {
+              "title": "Mark Lund and Zhuan Ye, Nevanlinna theory of meromorphic functions on annuli",
+              "url": "https://www.sciengine.com/doi/pdf/f72880821c9e4c6197bdd1d8c0054a6e",
+              "locator": "Definition A and Theorems A1-A2, printed pp. 549, 551-552; exterior-characteristic route"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-five-value-bound-is-sharp",
+        "kind": "example",
+        "title": "Four shared values do not force equality",
+        "deps": [
+          "thm-nevanlinna-five-value-theorem",
+          "def-nevanlinna-truncated-and-ramification-counts",
+          "def-countable-choice",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-surjects-onto-the-punctured-plane"
+        ],
+        "statement": "Assume Countable Choice. The distinct nonconstant functions e^z and e^{-z} share 0,infinity,1,-1 ignoring multiplicity. Both omit 0 and infinity; their 1- and (-1)-point sets agree. Thus five is optimal.",
+        "proof_strategy": "Both are entire and nonzero. Solve e^z=e^{-z}=1 on 2pi i Z and e^z=e^{-z}=-1 on pi i(2Z+1). Evaluate at z=1 to show the maps differ. No multiplicity convention is suppressed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. Laine, Complex Analysis III lecture notes",
+              "url": "https://integraali.com/courses/lecture_notes/Laine_Complex_analysis_3_notes.pdf",
+              "locator": "§§5–6.1, printed pp. 35–43"
+            }
+          ]
+        },
+        "dependency_level": 5
+      }
+    ]
+  }
+]

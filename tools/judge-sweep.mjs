@@ -39,7 +39,7 @@ const contextCache = option('--context-cache') || (/-judge\.jsonl$/.test(ledger)
 if (!ledger || !cost || (!pagesArg && !itemsArg && !manifestsArg)) {
   console.error('usage: node tools/judge-sweep.mjs --ledger FILE --cost FILE '
     + '(--pages PAGE,... | --items ID,... | --manifests FILE,...) '
-    + '[--lineup sol|luna] [--effort low|medium|high|xhigh|max] [--models MODEL,...] [--limit N] [--run RUN]');
+    + '[--lineup sol|sol61|luna] [--effort low|medium|high|xhigh|max] [--models MODEL,...] [--limit N] [--run RUN]');
   process.exit(2);
 }
 if (manifestsArg && (pagesArg || itemsArg)) {
@@ -112,7 +112,7 @@ for (const result of await buildCurrentContextHashes(ids, { loader, cachePath: c
   currentHashes.set(result.id, { context: result.context, item: result.item });
 }
 
-const hardCaps = Object.freeze({ [MODELS.sol.id]: 27, [MODELS.luna.id]: 27 });
+const hardCaps = Object.freeze({ [MODELS.sol.id]: 27, [MODELS.sol61.id]: 27, [MODELS.luna.id]: 27 });
 const capFor = (model) => {
   const hard = hardCaps[model];
   if (!hard) throw new Error(`no concurrency cap configured for ${model}`);
