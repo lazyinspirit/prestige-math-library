@@ -1,5 +1,14 @@
 # Assigned content repair
 
+**Proof formatting when editing items:** Separate numbered steps and the first
+step after introductory prose with blank lines. Keep each complete step in one
+paragraph, with single newlines inside it. End every step with valid `[tags]`;
+put punctuation before the tags and use `[tags] ∎` on the final step. Preserve
+mathematics and references. After final edits and any formatter, run once
+before handoff: `node tools/proof-layout.mjs items/<id>.md ...`, batching all
+your changed item paths in one command.
+Read-only assignments report defects without editing.
+
 **Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
 
 Repair only the items or contracts licensed by the task. Read CLAUDE.md,

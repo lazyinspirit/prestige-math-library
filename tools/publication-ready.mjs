@@ -41,6 +41,8 @@ function protectedTreeReceipt() {
     receiptRel,
     `research/${run}-judge-context-hashes.json`,
     `research/${run}-step9-evidence.json`,
+    // Created by the final readiness gates, checked separately before commit.
+    `research/${run}-proof-layout.json`,
     `research/${run}-step9-report-integrity.json`,
     `research/${run}-step9-report.response.json`,
     `research/${run}-step9-report.md`,

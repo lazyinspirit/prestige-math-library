@@ -28,7 +28,7 @@ const run = opt('run');
 const checkOnly = argv.includes('--check');
 const finalReceipt = opt('final-receipt');
 if (!run || (checkOnly && finalReceipt)) {
-  console.error('usage: run-commit.mjs --run <run> [--check | --final-receipt research/<run>-dispatch/<tool-result.json>]');
+  console.error('usage: run-commit.mjs --run <run> [--require-proof-layout] [--check | --final-receipt research/<run>-dispatch/<tool-result.json>]');
   process.exit(2);
 }
 if (finalReceipt && (finalReceipt.startsWith('/') || finalReceipt.includes('..')
@@ -38,6 +38,18 @@ if (finalReceipt && (finalReceipt.startsWith('/') || finalReceipt.includes('..')
 }
 
 const git = (...args) => execFileSync('git', args, { cwd: REPO, encoding: 'utf8' });
+
+// The workflow requires both current gates BEFORE staging or writing a success
+// receipt. Gate-mode verification later cannot undo an invalid close-out commit.
+if (argv.includes('--require-proof-layout')) {
+  try {
+    const { verifyProofLayout } = await import('./proof-layout-receipt.mjs');
+    verifyProofLayout(run, REPO);
+  } catch (cause) {
+    console.error(`run-commit: refusing close-out: ${cause.message}`);
+    process.exit(1);
+  }
+}
 
 const branch = git('rev-parse', '--abbrev-ref', 'HEAD').trim();
 if (branch !== 'main') {

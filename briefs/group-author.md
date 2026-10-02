@@ -1,5 +1,14 @@
 # Step 3b — scaffold auditor and item author
 
+**Proof formatting when editing items:** Separate numbered steps and the first
+step after introductory prose with blank lines. Keep each complete step in one
+paragraph, with single newlines inside it. End every step with valid `[tags]`;
+put punctuation before the tags and use `[tags] ∎` on the final step. Preserve
+mathematics and references. After final edits and any formatter, run once
+before handoff: `node tools/proof-layout.mjs items/<id>.md ...`, batching all
+your changed item paths in one command.
+Read-only assignments report defects without editing.
+
 - **Ownership and inputs:** Own only the assigned A/B pairs; audit their scaffolds for authoring readiness, repair local gaps, and author every assigned item and page. Read CLAUDE.md, SCHEMA.md, designs, current manifests and coverage, Step 3a observations and decisions, named repair reports, relevant suppliers, and any owner authoring direction. Recheck applicable pre-splice findings against current inputs. Read sibling work when needed and preserve it in shared files. Thorough independent auditing follows in Steps 5–8.
 
 - **Dependency order and checkpoints:** Create the assigned report at entry with owned IDs and open obligations. Audit, author, check, and checkpoint one item at a time in ascending `dependency_level`, breaking ties by page order and item ID as listed in the dispatch task. Read the first item's exact suppliers and write it before surveying later items or tool implementations. Recompute labels and order after dependency changes; never justify an earlier item with a later one.

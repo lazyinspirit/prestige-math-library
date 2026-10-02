@@ -8,7 +8,7 @@
 
 4. **Mathematical integrity.** Before a fatal repair, understand the claim, proof, and actual dependencies. Helpers must check arguments independently, consult authoritative full texts when unsure, and report unresolved uncertainty. Never invent source reading, proof completion, confidence, or check results. Logical validity outranks prior acceptance, judges, and citations.
 
-5. **Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
+5. **Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible. Follow SCHEMA.md's proof paragraph and trailing-tag rules; after the last edit or formatter, run `node tools/proof-layout.mjs` on the explicit changed item paths.
 
 6. **Supervision and gates.** Check a live run every ten minutes; intervene for blockers or stages that fail to close. Outside the authorized Step-7 loop, every failed gate is owner-held. Repair every rejected item, finish related writing, wait for writers to drain, refresh invalidated evidence on stable content, then retry that same gate. Do not use `retry` to start an automatic repair wave.
 

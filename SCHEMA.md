@@ -124,8 +124,19 @@
 - Proof-like sections need `proof_strategy` in frontmatter and `**Given:**` in
   the checkable text. Write at least two `phase.step` numbered steps, with
   comma-separated justification tags at the end of steps and QED on the final
-  step. At least 70% of steps need valid trailing tags. Cite only earlier step
-  numbers. `**Proof technique:**` is an optional displayed paragraph.
+  step. Every numbered step needs valid trailing tags. Separate consecutive
+  steps with a blank line and keep each complete argument in one paragraph,
+  using single newlines within it. Put punctuation before `[tags]`; only `∎`
+  may follow the final group. Cite only earlier step numbers. Separate the
+  optional `**Proof technique:**` paragraph and other introductions from the
+  first step with a blank line. Notes after the final tagged QED may be prose.
+  Formatting example:
+
+  ```markdown
+  1.1 Establish the first claim, including its full argument. [F1]
+
+  1.2 Complete the argument using the earlier claim. [step 1.1] ∎
+  ```
 - Common tags include `given`, `F/A/L/C<n>`, `step p.q`, `algebra`, `choose`,
   `construct`, and strategy opener/discharge tags. The accepted vocabulary and
   strategy checks are in the app's `worker/src/precheck.ts`, called by
@@ -168,6 +179,10 @@
 - `tools/precheck.mts` checks proof format; `tools/rendercheck.mjs` checks YAML,
   math, and diagram rendering; `tools/pathcheck.mjs` checks category overviews
   and pathways.
+- `node tools/proof-layout.mjs items/<id>.md ...` checks step separation and
+  blue tags using the actual renderer. Run it after the final item edit or
+  formatter. Step 9 requires 100% of numbered rows to have valid blue chips;
+  the older line-based precheck's 70% threshold alone is insufficient.
 - `tools/content-policy.mjs` applies provenance, source, and generated-claim
   rules to an explicit run or audit scope. Other run gates and their commands
   are described in [WORKFLOW.md](WORKFLOW.md).

@@ -48,6 +48,20 @@
   item judgment, then frontier repair, rejudgment and the scoped gate.
 - Steps 8–9: certify changed draft items and impacts, then close contracts,
   pathways, readiness, the owner report and the run commit.
+- Step 9 readiness ends with `proof-step-separation` and `proof-blue-tags`.
+  They share one deterministic renderer pass and write
+  `research/RUN-proof-layout.json`. Scope includes every item on the run's A/B
+  pages, shared published items, and additional items changed since the first
+  run touch snapshot. Introductions and notes after the final tagged QED remain
+  prose; each numbered step must form one row with valid trailing blue tags.
+  Failure is an owner hold, with file, section, step, source line and reason.
+  Repair on stable content, refresh invalidated evidence, then retry readiness.
+  No automatic content edits or extra model dispatches run for these gates.
+  The owner report includes their counts. Closeout verifies content, scope,
+  checker and renderer hashes before committing and checks both gates again
+  without repeating rendering. Missing dependencies, zero checked steps and
+  stale receipts fail. Use `node tools/proof-layout.mjs items/<id>.md ...` for
+  focused checks after the last edit or formatter, rather than a corpus scan.
 - Check status every ten minutes. Let running workers finish; intervene for a blocker or
   a stage that fails to close. A pause stops new dispatches, while workers already
   running continue.

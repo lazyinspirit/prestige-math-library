@@ -2507,6 +2507,10 @@ export const stages = [
     // manifest, verdict, adjudication and terminal resolution for no added
     // assurance.
     gates: (ctx) => [...repoWide(ctx), levelCoverageGate(ctx), ledgerGate(ctx, { terminal: true }),
+      // Both gates share one actual renderer scan, cached on content and
+      // renderer/checker inputs. No new agent stage or repeated SSR pass.
+      gate('proof-step-separation', ['node', 'tools/proof-layout.mjs', '--run', ctx.run, '--write', '--gate', 'proof-step-separation']),
+      gate('proof-blue-tags', ['node', 'tools/proof-layout.mjs', '--run', ctx.run, '--write', '--gate', 'proof-blue-tags']),
       gate('publication-readiness', ['node', 'tools/publication-ready.mjs', '--run', ctx.run, '--verify'])],
   },
   // Reconcile the final receipts and append-only ledgers once.  The reporter
@@ -2579,12 +2583,14 @@ export const stages = [
       // commit contains its own coverage evidence and the engine must not add
       // a second, post-commit receipt.
       writeReceipt: false,
-      argv: ['node', 'tools/run-commit.mjs', '--run', ctx.run, '--final-receipt',
+      argv: ['node', 'tools/run-commit.mjs', '--run', ctx.run, '--require-proof-layout', '--final-receipt',
         `research/${ctx.run}-dispatch/tool-close-step9-v2.result.json`],
     }],
     gates: (ctx) => [
       // No liveness floor: zero obligation rows is a legitimately empty set.
       gate('obligations', ['node', 'tools/obligations.mjs', 'check', '--run', ctx.run, '--terminal']),
+      gate('proof-step-separation', ['node', 'tools/proof-layout.mjs', '--run', ctx.run, '--verify', '--gate', 'proof-step-separation']),
+      gate('proof-blue-tags', ['node', 'tools/proof-layout.mjs', '--run', ctx.run, '--verify', '--gate', 'proof-blue-tags']),
       // `9-readiness-v2` already ran repo-wide, level coverage, judge closure,
       // terminal ledger, and stamp validation, and its receipt sealed the tree
       // on which those gates ran. The later report baseline independently
@@ -2662,5 +2668,5 @@ for (const stage of stages) {
   }
 }
 
-export const workflowRevision = 'batch-step7-rounds-v2';
+export const workflowRevision = 'batch-step7-rounds-v3-proof-layout';
 export default { stages, batches, alphaGroups, workflowRevision };

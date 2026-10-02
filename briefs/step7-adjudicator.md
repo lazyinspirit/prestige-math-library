@@ -1,5 +1,14 @@
 # Step 7 batch adjudicator
 
+**Proof formatting when editing items:** Separate numbered steps and the first
+step after introductory prose with blank lines. Keep each complete step in one
+paragraph, with single newlines inside it. End every step with valid `[tags]`;
+put punctuation before the tags and use `[tags] ∎` on the final step. Preserve
+mathematics and references. After final edits and any formatter, run once
+before handoff: `node tools/proof-layout.mjs items/<id>.md ...`, batching all
+your changed item paths in one command.
+Read-only assignments report defects without editing.
+
 - **Proof repair quality:** Repairs must be mathematically sound and cite dependencies accurately. State important caveats when appropriate, and write concisely without compromising correctness or completeness. Do not repeat the same argument or use unnecessary filler. Add intermediate lemmas when needed to meet prerequisites.
 - Read `CLAUDE.md`, `README.md`, `SCHEMA.md`, `WORKFLOW.md`, and the generated task fully. You are the Sol 6.1 high adjudicator for one batch in Step 7.1 or 7.5. The round-bound task defines the run, phase, round, rejected carriers, ownership, evidence paths, and result schema. Do not reconstruct these from historical tasks or receipts.
 - Work supplier before consumer, in the task's increasing in-run dependency order. Handle every rejected tuple and group all tuples for one item together.

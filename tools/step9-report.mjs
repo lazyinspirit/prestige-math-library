@@ -14,6 +14,7 @@ import { fileURLToPath } from 'node:url';
 import { runScope, sha256, splitFrontmatter } from './step9-lib.mjs';
 import { resolveLineup } from './models.mjs';
 import { TERMINAL_REJUDGE_ROUNDS } from './step7-terminal-resolution.mjs';
+import { verifyProofLayout, proofLayoutPath } from './proof-layout-receipt.mjs';
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -94,6 +95,8 @@ function buildEvidence() {
   try { configuredModels = [...resolveLineup(closure.judge_lineup).models]; }
   catch (cause) { die(`judge closure names an invalid lineup (${cause.message})`); }
   const scope = runScope(run, root);
+  const layout = verifyProofLayout(run, root);
+  paths.proof_layout = proofLayoutPath(run, root);
   const items = scope.items.map((item) => {
     const { frontmatter } = splitFrontmatter(readFileSync(join(root, item.file), 'utf8'));
     return { ...item, kind: frontmatter.match(/^kind:\s*(\S+)\s*$/m)?.[1] ?? 'unknown' };
@@ -203,6 +206,7 @@ function buildEvidence() {
     },
     deferrals,
     verification: {
+      proof_layout: { items: layout.items.length, steps: layout.steps, gates: layout.gates, fingerprint: layout.fingerprint },
       judge_lineup: closure.judge_lineup ?? 'unknown',
       scope: closure.scope ?? items.length,
       verdicts_complete: closure.verdicts_complete ?? closure.pairs_complete ?? 0,
@@ -331,6 +335,7 @@ for (const row of evidence.deferrals.items) lines.push(`- Item \`${row.item}\` o
 lines.push('',
   '## Verification closure', '',
   `- Judge lineup: ${evidence.verification.judge_lineup}.`,
+  `- Proof layout: ${evidence.verification.proof_layout.items} items, ${evidence.verification.proof_layout.steps} steps; separation and blue tags both passed on current inputs.`,
   `- Current judge verdicts complete: ${evidence.verification.verdicts_complete}/${evidence.verification.scope}.`,
   `- Terminal resolutions after the ${TERMINAL_REJUDGE_ROUNDS}-rejudge cap: ${evidence.verification.terminal_resolutions.length}${evidence.verification.terminal_resolutions.length ? ` (${terminalByResolver}; items: ${evidence.verification.terminal_resolutions.map((row) => row.id).join(', ')})` : ''}.`,
   `- Judge closure: ${evidence.verification.closure_closed ? 'closed' : 'open'}; workflow-owned blockers: ${evidence.verification.workflow_owned_blockers}.`,

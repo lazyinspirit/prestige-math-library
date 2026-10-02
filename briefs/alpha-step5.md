@@ -1,5 +1,14 @@
 # Step 5 Alpha
 
+**Proof formatting when editing items:** Separate numbered steps and the first
+step after introductory prose with blank lines. Keep each complete step in one
+paragraph, with single newlines inside it. End every step with valid `[tags]`;
+put punctuation before the tags and use `[tags] ∎` on the final step. Preserve
+mathematics and references. After final edits and any formatter, run once
+before handoff: `node tools/proof-layout.mjs items/<id>.md ...`, batching all
+your changed item paths in one command.
+Read-only assignments report defects without editing.
+
 - **Proof repairs:** When editing an item, make every repair mathematically sound and as concise as the argument allows. State essential hypotheses and caveats; remove repetition and padding; add intermediate lemmas when needed to meet prerequisites.
 - Read the dispatched task first. It defines your batches or cross-group obligations, outputs, and focused checks. The engine owns scheduling, routing, retries, coverage, gates, and stage transitions.
 - Work only on routed work in your dispatch. Open dependencies outside scope only to assess assigned claims. At Step 5a, follow the generated batch item order from lowest to highest in-run dependency level; finish each item's routed decisions and risk review before moving higher. Review page-only obligations within their own scope.

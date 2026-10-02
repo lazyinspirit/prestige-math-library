@@ -7,6 +7,7 @@ import { tmpdir } from 'node:os';
 
 import { stages } from '../stages/mathlib.mts';
 import { runContentHash, runScope } from '../../step9-lib.mjs';
+import { writeProofLayout } from '../../proof-layout.mjs';
 
 const REPO = process.env.AUTOPILOT_TEST_REPO ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 const TOOL = join(REPO, 'tools', 'step9-report.mjs');
@@ -31,7 +32,7 @@ function fixture() {
     { item: 'future-theorem', page: 'page-a', reason: 'Its deep proof prerequisites remain unverified.' },
   ] }));
   writeFileSync(join(root, 'library', 'analysis', 'page-a.md'), '---\npage: page-a\nstatus: draft\nitems: [thm-a]\n---\nPage\n');
-  writeFileSync(join(root, 'items', 'thm-a.md'), '---\nid: thm-a\nkind: theorem\nstatus: draft\n---\nTheorem\n');
+  writeFileSync(join(root, 'items', 'thm-a.md'), '---\nid: thm-a\nkind: theorem\nstatus: draft\n---\n## Proof\n\n1.1 A fixture argument. [given]\n\n1.2 Its conclusion. [step 1.1] ∎\n');
   writeFileSync(join(root, 'research', 'demo-publication-readiness.json'), JSON.stringify({ run: 'demo',
     verdict: 'publishable-pending-owner-approval', workflow_owned_blockers: [], content_sha256: 'content',
     owner_actions_remaining: ['personal mathematical audit', 'deliberate status:published changes', 'push/deployment'] }));
@@ -82,10 +83,12 @@ test('Step 9 scopes indentationless page inventories and hashes their item conte
 test('Step 9 mechanically reconciles and renders every fatal row', () => {
   const root = fixture();
   try {
+    writeProofLayout('demo', root);
     let result = runTool(root, 'evidence');
     assert.equal(result.status, 0, result.stderr);
     const evidence = JSON.parse(readFileSync(join(root, 'research', 'demo-step9-evidence.json'), 'utf8'));
     assert.equal(evidence.defects.fatal_count, 2);
+    assert.equal(evidence.verification.proof_layout.steps, 2);
     assert.equal(evidence.deferrals.pairs[0].page, 'future-pair');
     assert.equal(evidence.deferrals.items[0].item, 'future-theorem');
     assert.equal(evidence.judges.configured_set_stats.complete_versions, 1);
@@ -112,6 +115,7 @@ test('Step 9 mechanically reconciles and renders every fatal row', () => {
     result = runTool(root, 'render');
     assert.equal(result.status, 0, result.stderr);
     const report = readFileSync(join(root, 'research', 'demo-step9-report.md'), 'utf8');
+    assert.match(report, /Proof layout: 1 items, 2 steps/);
     assert.equal((report.match(/demo-D001/g) ?? []).length, 1);
     assert.equal((report.match(/demo-D002/g) ?? []).length, 1);
     assert.match(report, /Deferred from this run[\s\S]*future-pair[\s\S]*future-theorem/);
@@ -134,6 +138,7 @@ test('Step 9 mechanically reconciles and renders every fatal row', () => {
 test('Step 9 refuses to report an active item as deferred', () => {
   const root = fixture();
   try {
+    writeProofLayout('demo', root);
     writeFileSync(join(root, 'research', 'demo-deferred-items.json'), JSON.stringify({ run: 'demo', deferred: [
       { item: 'thm-a', page: 'page-a', reason: 'This item is actually in the active scope.' },
     ] }));

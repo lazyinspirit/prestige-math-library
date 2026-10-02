@@ -35,6 +35,9 @@ function reflow(md: string): string {
   const head = md.slice(0, i + marker.length);
   const tail = md.slice(i + marker.length);
   const paras = tail.split("\n\n").map((para) => {
+    // Preserve Markdown math mode and code boundaries. Joining separate-line
+    // $$ delimiters makes display-only \tag fail in the actual renderer.
+    if (para.includes('$$') || /^\s*(?:```|~~~)/m.test(para)) return para;
     const merged: string[] = [];
     let buf: string[] = [];
     const flush = (): void => {

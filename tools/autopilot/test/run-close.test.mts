@@ -99,6 +99,7 @@ test('the close stage delegates its receipt to run-commit instead of creating a 
   const stage: any = stages.find((candidate: any) => candidate.id === '9-close-v2');
   const plan = stage.plan({ run: 'demo', repo: REPO })[0];
   assert.equal(plan.writeReceipt, false);
+  assert.ok(plan.argv.includes('--require-proof-layout'), 'verify both proof gates before writing a commit receipt or staging');
   assert.deepEqual(plan.argv.slice(-2), ['--final-receipt',
     'research/demo-dispatch/tool-close-step9-v2.result.json']);
 });

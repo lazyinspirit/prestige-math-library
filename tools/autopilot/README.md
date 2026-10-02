@@ -68,6 +68,10 @@ Step 9 includes any run-local `deferred-pairs.json` and `deferred-items.json`
 records in its sealed evidence packet. It rejects a deferred page or item that
 is still active in the run scope, and the rendered owner report names each
 documented deferral and its reason separately from the built inventory.
+Its final readiness gates check proof-step separation and 100% blue-tag
+coverage with one shared renderer pass. A hash-bound proof-layout receipt is
+included in report evidence and verified before the close-out commit. These
+are deterministic tools, with no additional agent stage or repeated render.
 
 Standalone stages can declare a read-only `route({ctx, outcome, failure})`
 callback and explicit `routeTargets`. The engine evaluates it only after the

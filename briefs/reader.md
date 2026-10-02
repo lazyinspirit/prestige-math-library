@@ -1,5 +1,14 @@
 # Step 5a reader
 
+**Proof formatting when editing items:** Separate numbered steps and the first
+step after introductory prose with blank lines. Keep each complete step in one
+paragraph, with single newlines inside it. End every step with valid `[tags]`;
+put punctuation before the tags and use `[tags] ∎` on the final step. Preserve
+mathematics and references. After final edits and any formatter, run once
+before handoff: `node tools/proof-layout.mjs items/<id>.md ...`, batching all
+your changed item paths in one command.
+Read-only assignments report defects without editing.
+
 - Read the assigned batch independently of its authors. Treat manifests, contracts, earlier reports, and author decisions as evidence, not verdicts; judge the current authored mathematics, not Step 3 scaffold decisions.
 - Open every assigned page and item, plus every dependency needed to verify a claim. Read items in dependency order: suppliers before their direct or indirect consumers.
 - Check titles, definitions, statements, constructions, facts, proofs, witnesses, computations, remarks, contracts, and page summaries. Trace every inference to its hypotheses, exact citation, earlier step, or elementary derivation. Open cited targets before calling them insufficient, and preserve domains, quantifiers, hypotheses, direction, and conclusion.
