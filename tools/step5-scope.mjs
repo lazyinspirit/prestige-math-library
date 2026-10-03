@@ -1165,6 +1165,58 @@ if (command === 'check') {
           const refuted = decision.route === 'flagged' ? currentDecision : prior?.route === 'flagged' ? prior : null;
           const repairedDecision = refuted === currentDecision ? prior : currentDecision;
           const refuterMatch = /^refuter:([1-9]\d*):([1-9]\d*)$/.exec(refuted?.obligation ?? '');
+          // Coarse defect classes can differ for one actual typing/inference
+          // error. Require two actual same-batch reader/refuter rows, an exact
+          // immutable observed carrier, and explicit mathematical equivalence.
+          const readerDecision = decision.route === 'reader' ? currentDecision : prior?.route === 'reader' ? prior : null;
+          const readerMatch = /^reader:([1-9]\d*):([1-9]\d*)$/.exec(readerDecision?.obligation ?? '');
+          let sharedReclassifiedFinding = false;
+          if (prior && prior.id === decision.id && explicitShared && readerMatch && refuterMatch
+            && readerMatch[1] === refuterMatch[1]
+            && readerDecision.verdict === refuted.verdict
+            && ['confirmed_fatal', 'confirmed_nonfatal'].includes(refuted.verdict)
+            && readerDecision.target?.defect !== refuted.target?.defect
+            && readerDecision.target?.severity === refuted.target?.severity
+            && sameObservedCarrier) {
+            const findingBatch = readerMatch[1];
+            const actualScope = scopes[findingBatch] ?? readJson(scopePath(findingBatch), 'reader/refuter scope');
+            const actualReader = actualScope.reader_findings?.find(row => row.obligation === readerDecision.obligation);
+            const actualRefuter = actualScope.refuter_findings?.find(row => row.obligation === refuted.obligation);
+            const { route: _readerRoute, ...readerTarget } = readerDecision.target ?? {};
+            const { route: _refuterRoute, ...refuterTarget } = refuted.target ?? {};
+            const postReader = readJson(hashPath(findingBatch, 'post'), 'post-reader snapshot');
+            const sharedRow = mine.find(row => row.defect_id === defectId);
+            const decisionRefPath = `research/${run}-alpha-${group.label}-5a-decisions.json`;
+            const referencesBoth = [readerDecision.obligation, refuted.obligation].every(obligation =>
+              Array.isArray(sharedRow?.adjudication_ref) && sharedRow.adjudication_ref.some(reference =>
+                reference?.path === decisionRefPath && reference.obligation === obligation));
+            const closedDisposition = ['fixed', 'narrowed', 'dropped',
+              ...(refuted.verdict === 'confirmed_nonfatal' ? ['nonfatal-recorded'] : [])];
+            const pageSubject = actualReader?.subject_type === 'page';
+            const observed = pageSubject ? postReader.page_hashes?.[decision.id] : postReader.hashes?.[decision.id];
+            const typedCarrier = pageSubject
+              ? (actualScope.page_manifest_post ?? []).includes(decision.id)
+                && (postReader.page_manifest ?? []).includes(decision.id)
+                && observed && typeof observed === 'object'
+                && ['file_sha256', 'manifest_sha256'].every(key => /^[a-f0-9]{64}$/.test(observed[key] ?? ''))
+              : actualReader?.subject_type === 'in-flight-item'
+                && (actualScope.manifest_post ?? []).includes(decision.id)
+                && (postReader.manifest ?? []).includes(decision.id)
+                && ['item_sha256', 'contract_sha256', 'manifest_sha256']
+                  .every(key => /^[a-f0-9]{64}$/.test(observed?.[key] ?? ''));
+            sharedReclassifiedFinding = actualScope.version === 2 && actualScope.run === run
+              && String(actualScope.batch) === findingBatch
+              && actualReader?.id === decision.id && actualRefuter?.id === decision.id
+              && hashValue(actualReader) === hashValue(readerTarget)
+              && hashValue(actualRefuter) === hashValue(refuterTarget)
+              && (actualScope.refuter_scope ?? []).includes(decision.id)
+              && sharedRow?.subject === decision.id && sharedRow.caught_at_stage === '5a-adjudicate'
+              && referencesBoth && closedDisposition.includes(sharedRow.disposition)
+              && (refuted.verdict === 'confirmed_fatal' ? sharedRow.severity === 'fatal' : sharedRow.severity !== 'fatal')
+              && hashSnapshotErrors(postReader, findingBatch, 'post').length === 0
+              && typedCarrier
+              && actualReader.observed_sha256 === hashValue(pageSubject ? pageCarrier(observed) : observed);
+          }
           const pageRepair = repairedDecision?.route === 'page';
           let sharedPostReaderRepair = false;
           if (prior && prior.id === decision.id && explicitShared && refuterMatch
@@ -1200,7 +1252,7 @@ if (command === 'check') {
               // repair decision retains its separate item-order anchor.
               && actualFinding.observed_sha256 === hashValue(pageRepair ? pageCarrier(observed) : observed);
           }
-          if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair && !sharedPostReaderRepair) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
+          if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair && !sharedPostReaderRepair && !sharedReclassifiedFinding) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
           if (!prior) referenced.set(defectId, {
             obligation: decision.obligation, id: decision.id, route: decision.route, verdict: decision.verdict, target,
             same_defect_as: decision.same_defect_as, same_defect_evidence: decision.same_defect_evidence,

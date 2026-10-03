@@ -258,6 +258,20 @@ refuter observation equals the unanchored post-reader page carrier hash
 current-page checks remain intact. Item repairs still require the immutable
 item inventory and all three item/contract/manifest hashes.
 
+Different coarse defect classifications may describe the same actual error.
+A reader and refuter in the same batch may share one closed row only when
+their exact scope rows name the same item or page, have equal severity and
+confirmed verdict, and bind the same immutable post-reader observed carrier.
+An explicit `same_defect_as` and at least 40 characters of concrete causal
+equivalence evidence remain mandatory in either iteration order. Page
+observations exclude `item_order`; item observations retain all three carrier
+hashes. Both original classifications and obligations remain unchanged, and
+all current verdict, severity, repair and ledger-disposition checks still apply.
+The closed row must also reference both exact obligations at their canonical
+decisions-file path and match the subject and Step5 stage; fatal/nonfatal
+severity and disposition must agree with the shared confirmed verdict.
+Matching subject or carrier alone does not establish that two defects are one.
+
 ### Carried Step3 graph prerequisite evidence
 
 The exact Step3-origin item
