@@ -362,13 +362,16 @@ The policy is exact and run-local:
 }
 ```
 
-Automatic ownership includes every selected page, its current items and category
-pathways, the scope ledger, canonical `research/plan-spec.json` and published
+Automatic ownership includes every selected page, its current items and existing
+category pathways, the scope ledger, canonical `research/plan-spec.json` and published
 supplier ledger, current published-repair claim targets with valid recorded repair
 evidence, and all Git-eligible `research/RUN-*` files and directories. It includes
 the policy and normal final `RUN-dispatch/tool-close-step9-v2.result.json`. Ignored
 raw dispatch logs and transcripts are never force-added or copied. Required
-carriers must exist and be eligible for Git; selected pathways cannot be omitted.
+carriers must exist and be eligible for Git; existing selected-category pathways
+cannot be omitted. Absent category pathways remain governed by the native pathway
+gates and are not authored during closeout. Present symbolic links, including
+dangling links, and other nonregular owned carriers remain errors.
 
 For an actual shared supporting change, add an exact object to `additional_paths`
 with `path`, raw `sha256`, a concrete `reason` (at least 20 characters), and

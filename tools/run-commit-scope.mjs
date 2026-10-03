@@ -232,10 +232,15 @@ function readScopePolicy(root, run) {
 function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingReceipt = false) {
   const { policyPath, policyText, policy, reviewedHook } = readScopePolicy(root, run);
   const selected = runScope(run, root);
+  // Pathway gates govern absent authored pathways. Closeout owns every
+  // existing selected-category carrier; lstat keeps dangling links present
+  // so the regular-path validation below rejects them rather than omitting them.
+  const pathways = selected.categories.map(category => 'library/' + category + '/_pathway.md')
+    .filter(path => lstatExists(join(root, path)));
   const required = new Set([policyPath, selected.ledger, 'research/plan-spec.json',
     'research/published-consumer-supplier-ledger.md',
     ...selected.pages.map(row => row.file), ...selected.items.map(row => row.file),
-    ...selected.categories.map(category => 'library/' + category + '/_pathway.md'),
+    ...pathways,
     ...['proof-layout.json', 'publication-readiness.json', 'step9-report-integrity.json',
       'step9-report.response.json', 'step9-report.md', 'step9-evidence.json',
       'pathway-closure.json', 'judge-closure.json'].map(name => 'research/' + run + '-' + name),
