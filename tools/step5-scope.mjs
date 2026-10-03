@@ -212,6 +212,9 @@ function pageCarrier(value, orderAnchor = null) {
 }
 
 function currentDecisionCarrier(decision, target, live) {
+  if (target?.subject_type === 'in-run-dependency') {
+    return producerCarrier(target.id, target.producer_batch);
+  }
   if (target?.subject_type === 'published-dependency') {
     const path = R('items', `${decision.id}.md`);
     return { item_sha256: existsSync(path) ? sha256(readFileSync(path)) : null };
@@ -319,6 +322,7 @@ function normalizeFindings(findings, batch, allowedSet, reportError, prefix) {
     if (prefix === 'reader') {
       normalized.subject_type = finding?.subject_type;
       normalized.consumer_id = finding?.consumer_id ?? null;
+      if (finding?.observed_source !== undefined) normalized.observed_source = finding.observed_source;
     }
     return normalized;
   });
@@ -369,6 +373,146 @@ function publishedDependencies(batchIds, allRunIds) {
     }
   }
   return owners;
+}
+
+/** Other current-run producers reachable through declared item prerequisites.
+ * Keep a concrete path; a run-wide inventory is not evidence of a dependency. */
+function inRunDependencies(batch, consumers, manifests = manifestItems()) {
+  const Y = yaml(), metadata = new Map(), producers = new Map(), result = new Map();
+  const claimed = claimedPublishedIds();
+  for (const [producer, ids] of Object.entries(manifests)) for (const id of ids) {
+    if (!producers.has(id)) producers.set(id, []);
+    producers.get(id).push(producer);
+  }
+  const itemFor = id => {
+    if (!metadata.has(id)) {
+      const path = R('items', `${id}.md`);
+      let item = null;
+      if (/^[a-z][a-z0-9-]*$/.test(id) && existsSync(path)) {
+        try { item = Y.parse(split(readFileSync(path, 'utf8')).fm) ?? {}; }
+        catch { /* Unreadable prerequisites cannot establish reachability. */ }
+      }
+      metadata.set(id, item);
+    }
+    return metadata.get(id);
+  };
+  for (const consumer of consumers) {
+    const queue = [[consumer]], seen = new Set();
+    while (queue.length) {
+      const path = queue.shift(), id = path.at(-1);
+      if (seen.has(id)) continue;
+      seen.add(id);
+      const item = itemFor(id);
+      if (!item) continue;
+      const deps = [...(Array.isArray(item.deps) ? item.deps : []),
+        ...(Array.isArray(item.justified_by) ? item.justified_by : [])];
+      for (const dep of deps) {
+        if (typeof dep !== 'string' || path.includes(dep)) continue;
+        const source = itemFor(dep), owners = producers.get(dep) ?? [];
+        if (!source || (!owners.length && source.status !== 'published' && !claimed.has(dep))) continue;
+        const next = [...path, dep];
+        if (owners.length === 1 && owners[0] !== batch
+          && source.status === 'draft' && source.pipeline_run === run) {
+          if (!result.has(dep)) result.set(dep, { producer_batch: owners[0], consumers: new Map() });
+          result.get(dep).consumers.set(consumer, next);
+        }
+        queue.push(next);
+      }
+    }
+  }
+  return result;
+}
+
+function findingDependencies(batch, consumers, findings, manifests = manifestItems()) {
+  const runIds = new Set(Object.values(manifests).flat()), assigned = new Set(consumers);
+  if (!findings.some(row => row?.subject_type === 'in-run-dependency'
+    || runIds.has(row?.id) && !assigned.has(row.id))) return new Map();
+  return inRunDependencies(batch, consumers, manifests);
+}
+
+function producerCarrier(id, producer) {
+  const owners = Object.entries(manifestItems()).filter(([, ids]) => ids.includes(id)).map(([batch]) => batch);
+  if (owners.length !== 1 || owners[0] !== String(producer)) return undefined;
+  const contractPath = R('research', `${run}-batch-${producer}.proof-contracts.json`);
+  if (!existsSync(contractPath) || !readJson(contractPath, `producer ${producer} proof contract`).contracts?.[id]
+    || !manifestMetadata(String(producer)).itemRows.has(id)) return undefined;
+  const carrier = liveFingerprints(String(producer)).items[id];
+  return carrier?.item_sha256 ? { producer_batch: String(producer), ...carrier } : undefined;
+}
+
+function bindInRunFinding(finding, batch, dependencies, reportError) {
+  const route = dependencies.get(finding.id), path = route?.consumers.get(finding.consumer_id);
+  if (!route || !path) { reportError(`${finding.obligation} must name an assigned consumer reaching another exact current-run draft producer`); return; }
+  const current = producerCarrier(finding.id, route.producer_batch);
+  const prePath = hashPath(route.producer_batch, 'pre');
+  const pre = readJson(prePath, `producer ${route.producer_batch} pre-reader snapshot`);
+  for (const message of hashSnapshotErrors(pre, route.producer_batch, 'pre')) reportError(`${finding.obligation} producer baseline: ${message}`);
+  const historical = pre.hashes?.[finding.id];
+  if (!current || !historical || historical.contract_sha256 === hashValue(null) || !['item_sha256', 'contract_sha256', 'manifest_sha256']
+    .every(key => /^[a-f0-9]{64}$/.test(historical[key] ?? ''))) {
+    reportError(`${finding.obligation} lacks exact current/pre-reader producer fingerprints`); return;
+  }
+  finding.producer_batch = route.producer_batch;
+  finding.dependency_path = path.map(id => ({ id, item_sha256: sha256(readFileSync(R('items', `${id}.md`))) }));
+  finding.producer_carrier_at_split = current;
+  finding.producer_pre_snapshot = {
+    path: `research/${run}-step5-hash-${route.producer_batch}-pre.json`,
+    sha256: sha256(readFileSync(prePath)), carrier: { producer_batch: route.producer_batch, ...historical },
+  };
+  // A pre-reader hash is a baseline, not proof that the reader observed those
+  // bytes. Never rebind a historical counterexample to corrected live bytes.
+  const observed = finding.observed_source;
+  if (observed !== undefined && (!observed || Object.keys(observed).some(key => !['snapshot', 'item_sha256'].includes(key))
+    || !['pre', 'current'].includes(observed.snapshot) || !/^[a-f0-9]{64}$/.test(observed.item_sha256 ?? ''))) {
+    reportError(`${finding.obligation} has malformed observed_source`); return;
+  }
+  const carrier = observed?.snapshot === 'pre' ? finding.producer_pre_snapshot.carrier : current;
+  if (observed && observed.item_sha256 !== carrier.item_sha256) reportError(`${finding.obligation} observed_source does not match its declared producer snapshot`);
+  finding.observation_basis = observed?.snapshot ?? 'unbound';
+  finding.observed_sha256 = observed ? hashValue(carrier) : null;
+}
+
+function validateInRunFinding(finding, batch, dependencies, reportError) {
+  if (finding.observed_source !== undefined && (!finding.observed_source
+    || Object.keys(finding.observed_source).some(key => !['snapshot', 'item_sha256'].includes(key))
+    || !['pre', 'current'].includes(finding.observed_source.snapshot)
+    || !/^[a-f0-9]{64}$/.test(finding.observed_source.item_sha256 ?? ''))) {
+    reportError(`${finding.obligation} has malformed observed_source`);
+  }
+  const expected = { obligation: finding.obligation, id: finding.id, consumer_id: finding.consumer_id };
+  bindInRunFinding(expected, batch, dependencies, reportError);
+  if (finding.producer_batch !== expected.producer_batch
+    || hashValue(finding.producer_pre_snapshot) !== hashValue(expected.producer_pre_snapshot)) {
+    reportError(`${finding.obligation} producer identity/immutable pre-reader snapshot changed`);
+  }
+  // Path bytes at split remain historical evidence; require its exact IDs and
+  // valid hashes, while independently rechecking current reachability.
+  const path = finding.dependency_path;
+  if (!Array.isArray(path) || path.length < 2 || path[0]?.id !== finding.consumer_id
+    || path.at(-1)?.id !== finding.id || !unique(path.map(row => row.id))
+    || path.some(row => !/^[a-z][a-z0-9-]*$/.test(row.id ?? '') || !/^[a-f0-9]{64}$/.test(row.item_sha256 ?? ''))) {
+    reportError(`${finding.obligation} has invalid frozen dependency path`);
+  }
+  const carrier = finding.producer_carrier_at_split;
+  if (carrier?.producer_batch !== finding.producer_batch || !['item_sha256', 'contract_sha256', 'manifest_sha256']
+    .every(key => /^[a-f0-9]{64}$/.test(carrier?.[key] ?? ''))) reportError(`${finding.obligation} has invalid split producer carrier`);
+  const observedCarrier = finding.observation_basis === 'pre' ? finding.producer_pre_snapshot?.carrier : carrier;
+  if (finding.observation_basis !== (finding.observed_source?.snapshot ?? 'unbound')
+    || (finding.observation_basis === 'unbound' ? finding.observed_sha256 !== null
+      : finding.observed_source?.item_sha256 !== observedCarrier?.item_sha256 || finding.observed_sha256 !== hashValue(observedCarrier))) {
+    reportError(`${finding.obligation} conflates original observation and current producer`);
+  }
+}
+
+function reportOnlyFinding(finding, refuter = false) {
+  const { observed_sha256: _observed, pre_sha256: _pre,
+    producer_batch: _producer, dependency_path: _path,
+    producer_carrier_at_split: _current, producer_pre_snapshot: _historical,
+    observation_basis: _basis, ...row } = finding;
+  if (refuter && finding.subject_type === 'in-run-dependency') {
+    delete row.subject_type; delete row.consumer_id; delete row.observed_source;
+  }
+  return row;
 }
 
 /** A claimed published repair is a frozen Step-5 obligation even if later
@@ -543,13 +687,15 @@ if (command === 'split') {
   if (typeof readerReport.coverage_note !== 'string' || !readerReport.coverage_note.trim()) readerError('coverage_note must be a nonempty string');
   const allRunIds = new Set(Object.values(manifestItems()).flat());
   const published = publishedDependencies(derived.manifestPost, allRunIds);
-  const readerAllowed = new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys()]);
+  const inRun = findingDependencies(batch, derived.manifestPost, Array.isArray(readerReport.findings) ? readerReport.findings : []);
+  const readerAllowed = new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys()]);
   const readerFindings = normalizeFindings(Array.isArray(readerReport.findings) ? readerReport.findings : [],
     batch, readerAllowed, readerError, 'reader');
   const live = liveFingerprints(batch);
   for (const finding of readerFindings) {
     const expectedType = derived.manifestPost.includes(finding.id) ? 'in-flight-item'
-      : derived.pageManifestPost.includes(finding.id) ? 'page' : 'published-dependency';
+      : derived.pageManifestPost.includes(finding.id) ? 'page'
+        : inRun.has(finding.id) ? 'in-run-dependency' : 'published-dependency';
     if (finding.subject_type !== expectedType) readerError(`${finding.obligation} must use subject_type ${expectedType}`);
     if (expectedType === 'published-dependency'
       && (!finding.consumer_id || !published.get(finding.id)?.has(finding.consumer_id))) {
@@ -558,6 +704,11 @@ if (command === 'split') {
     if (derived.touched.includes(finding.id) || derived.pagesTouched.includes(finding.id)) {
       readerError(`${finding.obligation} names changed carrier ${finding.id}; repaired work belongs in the touched route, not the open-findings artifact`);
     }
+    if (expectedType === 'in-run-dependency') {
+      bindInRunFinding(finding, batch, inRun, readerError);
+      continue;
+    }
+    if (finding.observed_source !== undefined) readerError(`${finding.obligation} observed_source is only supported for in-run-dependency`);
     const publishedText = expectedType === 'published-dependency' && existsSync(R('items', `${finding.id}.md`))
       ? readFileSync(R('items', `${finding.id}.md`), 'utf8') : null;
     const carrier = expectedType === 'in-flight-item' ? live.items[finding.id]
@@ -568,7 +719,8 @@ if (command === 'split') {
   }
   if (readerErrors.length) fail(`step5-scope: batch ${batch} reader findings invalid: ${readerErrors.join('; ')}`, 1);
   const refuterPages = [...derived.pageManifestPost].sort();
-  const refuterScope = [...new Set([...derived.untouched, ...highRisk, ...refuterPages])].sort();
+  const refuterScope = [...new Set([...derived.untouched, ...highRisk, ...refuterPages,
+    ...readerFindings.filter(row => row.subject_type === 'in-run-dependency').map(row => row.id)])].sort();
   const group = groups().byBatch[batch];
   if (!group) fail(`step5-scope: batch ${batch} has no Alpha group`);
   const scope = {
@@ -618,11 +770,22 @@ if (command === 'collect') {
 
   const openedSet = new Set(opened);
   const live = liveFingerprints(batch);
+  const inRun = findingDependencies(batch, scope.manifest_post ?? [], scope.reader_findings ?? []);
+  for (const finding of scope.reader_findings ?? []) if (finding.subject_type === 'in-run-dependency') {
+    validateInRunFinding(finding, batch, inRun, error);
+  }
   const refuterFindings = normalizeRefuterFindings(findings, batch, openedSet, error)
-    .map((finding) => ({
-      ...finding,
-      observed_sha256: hashValue(live.items[finding.id] ?? pageCarrier(live.pages[finding.id])),
-    }));
+    .map((finding) => {
+      const source = (scope.reader_findings ?? []).find(row => row.id === finding.id && row.subject_type === 'in-run-dependency');
+      if (source) {
+        const carrier = producerCarrier(source.id, source.producer_batch);
+        finding.subject_type = 'in-run-dependency';
+        finding.consumer_id = source.consumer_id;
+        finding.observed_source = { snapshot: 'current', item_sha256: carrier?.item_sha256 };
+        bindInRunFinding(finding, batch, inRun, error);
+      } else finding.observed_sha256 = hashValue(live.items[finding.id] ?? pageCarrier(live.pages[finding.id]));
+      return finding;
+    });
   if (errors.length) {
     for (const message of errors) console.error(`ERROR refuter-coverage: batch ${batch}: ${message}`);
     process.exit(1);
@@ -772,13 +935,18 @@ if (command === 'check') {
           const allRunIds = new Set(Object.values(manifests).flat());
           const published = preserveClaimedPublishedBindings(
             publishedDependencies(derived.manifestPost, allRunIds), scope);
+          const inRun = findingDependencies(batch, derived.manifestPost,
+            [...(Array.isArray(report.findings) ? report.findings : []), ...(scope.reader_findings ?? [])], manifests);
           const normalized = normalizeFindings(Array.isArray(report.findings) ? report.findings : [], batch,
-            new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys()]), reportError, 'reader');
-          const stored = (scope.reader_findings ?? []).map(({
-            observed_sha256: _observed, pre_sha256: _pre, ...finding
-          }) => finding);
+            new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys()]), reportError, 'reader');
+          const stored = (scope.reader_findings ?? []).map(finding => reportOnlyFinding(finding));
           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the routed obligations');
           for (const finding of scope.reader_findings ?? []) {
+            if (finding.subject_type === 'in-run-dependency') {
+              validateInRunFinding(finding, batch, inRun, reportError);
+              continue;
+            }
+            if (inRun.has(finding.id)) reportError(`${finding.obligation} must retain subject_type in-run-dependency`);
             if (!/^[a-f0-9]{64}$/.test(finding.observed_sha256 ?? '')) reportError(`${finding.obligation} has no valid observed carrier hash`);
             if (finding.subject_type === 'published-dependency'
               && !/^[a-f0-9]{64}$/.test(finding.pre_sha256 ?? '')) {
@@ -806,15 +974,21 @@ if (command === 'check') {
           if (!sameSet(opened, scope.opened ?? []) || notOpened.length) reportError('coverage no longer matches the collected scope');
           if (typeof report.coverage_note !== 'string' || !report.coverage_note.trim()) reportError('coverage_note is empty');
           const normalized = normalizeRefuterFindings(flagged, batch, new Set(opened), reportError);
-          const stored = (scope.refuter_findings ?? []).map(({ observed_sha256: _observed, ...finding }) => finding);
+          const stored = (scope.refuter_findings ?? []).map(finding => reportOnlyFinding(finding, true));
           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the collected obligations');
+          const inRun = findingDependencies(batch, scope.manifest_post ?? [], scope.reader_findings ?? [], manifests);
           for (const finding of scope.refuter_findings ?? []) {
+            if (finding.subject_type === 'in-run-dependency') {
+              validateInRunFinding(finding, batch, inRun, reportError);
+              continue;
+            }
             if (!/^[a-f0-9]{64}$/.test(finding.observed_sha256 ?? '')) reportError(`${finding.obligation} has no valid observed carrier hash`);
           }
           for (const message of reportErrors) error('refuter-invalid', `batch ${batch}: ${message}`);
         } catch (cause) { error('refuter-invalid', `batch ${batch} report is invalid JSON (${cause.message})`); }
       }
-      const expectedRefuterScope = [...new Set([...(scope.untouched ?? []), ...(scope.high_risk ?? []), ...derived.pageManifestPost])];
+      const expectedRefuterScope = [...new Set([...(scope.untouched ?? []), ...(scope.high_risk ?? []), ...derived.pageManifestPost,
+        ...(scope.reader_findings ?? []).filter(row => row.subject_type === 'in-run-dependency').map(row => row.id)])];
       if (!sameSet(scope.refuter_scope ?? [], expectedRefuterScope)) error('refuter-scope', `batch ${batch} refuter scope is stale`);
       if (!sameSet(scope.opened ?? [], scope.refuter_scope ?? [])) error('refuter-coverage', `batch ${batch} did not open every routed refuter item`);
       if ((scope.not_opened ?? []).length) error('refuter-incomplete', `batch ${batch} retains unopened items`);
@@ -902,6 +1076,15 @@ if (command === 'check') {
         const target = expected.get(decision.obligation);
         if (!target && !supplemental) { error('decision-extra', `${decision.obligation} is not owed to group ${group.label}`); continue; }
         if (target && (decision.id !== target.id || decision.route !== target.route)) error('decision-route', `[${target.id}] ${decision.obligation} has wrong id or route`);
+        if (target?.subject_type === 'in-run-dependency') {
+          if (decision.producer_batch !== target.producer_batch || decision.consumer_id !== target.consumer_id) {
+            error('decision-producer-binding', `${decision.obligation} must retain exact producer_batch and consumer_id`);
+          }
+          if (target.observation_basis === 'unbound' && (decision.historical_delta_unknown !== true
+            || typeof decision.owner_resolution !== 'string' || decision.owner_resolution.trim().length < 40)) {
+            error('decision-historical-observation', `${decision.obligation} has no original observed-byte binding; preserve historical_delta_unknown and explicit owner resolution/evidence`);
+          }
+        }
         if (supplemental) {
           if (decision.route !== 'gate') error('decision-route', `${decision.obligation} must use route gate`);
           if (!groupSubjects.has(decision.id)) error('decision-route', `${decision.obligation} names ${decision.id} outside group ${group.label}`);
@@ -958,9 +1141,27 @@ if (command === 'check') {
             && decision.causal_subject === prior.id
             && typeof decision.same_defect_evidence === 'string'
             && decision.same_defect_evidence.trim();
-          if (prior && !sharedFinding && !sharedCausalAddition) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
+          // One historical supplier defect may be the producer's reader
+          // repair and another batch's uneditable reader finding. Retain both
+          // obligations without manufacturing a second defect-ledger row.
+          const foreign = target?.subject_type === 'in-run-dependency' ? { target, verdict: decision.verdict }
+            : prior?.target?.subject_type === 'in-run-dependency' ? prior : null;
+          const producer = foreign && foreign.target === target ? prior : { target, route: decision.route, verdict: decision.verdict };
+          const explicitShared = prior && [
+            [decision.same_defect_as, prior.obligation, decision.same_defect_evidence],
+            [prior.same_defect_as, decision.obligation, prior.same_defect_evidence],
+          ].some(([reference, obligation, evidence]) => reference === obligation
+            && typeof evidence === 'string' && evidence.trim().length >= 40);
+          const sharedProducerRepair = prior && foreign && prior.id === decision.id && explicitShared
+            && producer?.target?.batch === foreign.target.producer_batch
+            && producer.route === 'touched' && ['accepted_repair', 'amended_repair'].includes(producer.verdict)
+            && ['confirmed_fatal', 'confirmed_nonfatal'].includes(foreign.verdict)
+            && hashValue(foreign.target.producer_pre_snapshot?.carrier) === hashValue({ producer_batch: foreign.target.producer_batch,
+              ...readJson(hashPath(foreign.target.producer_batch, 'pre'), 'producer pre-reader snapshot').hashes?.[foreign.target.id] });
+          if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
           if (!prior) referenced.set(defectId, {
             obligation: decision.obligation, id: decision.id, route: decision.route, verdict: decision.verdict, target,
+            same_defect_as: decision.same_defect_as, same_defect_evidence: decision.same_defect_evidence,
           });
           const row = mine.find((candidate) => candidate.defect_id === defectId);
           if (!row) { error('ledger-ref-missing', `[${decision.id}] ${decision.obligation} names absent ${defectId}`); continue; }

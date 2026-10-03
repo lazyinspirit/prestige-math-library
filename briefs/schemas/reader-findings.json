@@ -17,8 +17,18 @@
         "required": ["id", "subject_type", "consumer_id", "location", "defect", "evidence", "severity"],
         "properties": {
           "id": { "type": "string", "minLength": 1, "description": "Exact existing item ID or page ID of the defective subject. Do not invent a finding label; the routing tool assigns the finding's obligation ID." },
-          "subject_type": { "type": "string", "enum": ["in-flight-item", "page", "published-dependency"] },
-          "consumer_id": { "type": ["string", "null"], "minLength": 1, "description": "For a published dependency, the assigned item whose dependency closure reaches it; otherwise null." },
+          "subject_type": { "type": "string", "enum": ["in-flight-item", "page", "published-dependency", "in-run-dependency"] },
+          "consumer_id": { "type": ["string", "null"], "minLength": 1, "description": "For a published or another-batch current-run dependency, the exact assigned item whose deps/justified_by closure reaches it; otherwise null." },
+          "observed_source": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["snapshot", "item_sha256"],
+            "description": "Optional exact observed-byte binding for in-run-dependency only. pre means the producer's immutable pre-reader snapshot; current means the source bytes remain current at split. Omit if the original full-byte observation cannot be bound; never claim corrected current bytes were the old observed defect.",
+            "properties": {
+              "snapshot": { "type": "string", "enum": ["pre", "current"] },
+              "item_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+            }
+          },
           "location": { "type": "string", "minLength": 1 },
           "defect": {
             "type": "string",

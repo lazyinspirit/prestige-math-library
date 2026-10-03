@@ -8,7 +8,8 @@ export function prepareStep5AdjudicationOrder(root, run, group) {
   const ordered = orderedItems(runPages(root, run), { validateLabels: false });
   const owned = ordered.filter(row => batches.includes(row.batch));
   const byId = new Map(owned.map(row => [row.id, row]));
-  const routed = new Map(), otherWork = [];
+  const allById = new Map(ordered.map(row => [row.id, row]));
+  const routed = new Map(), dependencyWork = new Map(), otherWork = [];
   for (const batch of batches) {
     const path = join(root, 'research', `${run}-step5-scope-${batch}.json`);
     const scope = JSON.parse(readFileSync(path, 'utf8'));
@@ -25,17 +26,28 @@ export function prepareStep5AdjudicationOrder(root, run, group) {
     for (const id of scope.high_risk ?? []) add(id, 'risk review');
     for (const id of scope.pages_touched ?? []) add(id, 'page');
     if (scope.version === 3) for (const id of scope.pages ?? []) add(id, 'page');
-    for (const row of scope.reader_findings ?? []) add(row.id, row.obligation ?? 'reader');
-    for (const row of scope.refuter_findings ?? []) add(row.id, row.obligation ?? 'refuter');
+    const addFinding = row => {
+      if (row.subject_type !== 'in-run-dependency') return add(row.id, row.obligation ?? 'finding');
+      const producer = allById.get(row.id);
+      if (!producer || producer.batch !== row.producer_batch || producer.batch === batch) {
+        throw Error(`Step 5 foreign producer identity mismatch: ${row.obligation}`);
+      }
+      if (!dependencyWork.has(row.id)) dependencyWork.set(row.id, []);
+      dependencyWork.get(row.id).push(`${row.obligation}, consumer ${row.consumer_id}; read-only producer`);
+    };
+    for (const row of scope.reader_findings ?? []) addFinding(row);
+    for (const row of scope.refuter_findings ?? []) addFinding(row);
   }
-  const itemRows = owned.filter(row => routed.has(`${row.batch}:${row.id}`));
+  const itemRows = ordered.filter(row => routed.has(`${row.batch}:${row.id}`) || dependencyWork.has(row.id));
   const path = `research/${run}-alpha-${group.label}-5a-order.task.md`;
   const body = [
     `# Step 5a item order: adjudicator ${group.label}, run ${run}`,
     `Assigned batches: ${batches.join(', ')}. Read briefs/tasks/alpha-5a-adjudicate.md first.`,
     'Adjudicate and complete each routed item from lowest dependency level to highest within the dispatched batches. Finish all obligations and the risk review for an item before moving to a higher level. The scope files remain authoritative for exact decisions; this list does not add obligations.',
     'Items in order:',
-    ...(itemRows.length ? itemRows.map(row => `- level ${row.level}: batch ${row.batch}, ${row.id} — ${[...routed.get(`${row.batch}:${row.id}`)].join(', ')}`) : ['- none']),
+    ...(itemRows.length ? itemRows.map(row => `- level ${row.level}: batch ${row.batch}, ${row.id} — ${[
+      ...(routed.get(`${row.batch}:${row.id}`) ?? []), ...(dependencyWork.get(row.id) ?? []),
+    ].join(', ')}`) : ['- none']),
     'Other routed obligations (pages and published dependencies; review them as required by the scope):',
     ...(otherWork.length ? otherWork.map(row => `- ${row}`) : ['- none']),
   ].join('\n\n') + '\n';

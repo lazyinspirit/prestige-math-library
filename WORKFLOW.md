@@ -197,6 +197,132 @@ Restart the controller when selecting the run-local stage table.
   receipts record both profiles. Remove it after recovery. Restart the controller for
   configuration or imported registry changes; stage module changes hot-reload.
 
+## Step 5 findings in another current-run batch
+
+A reader may report a draft supplier outside its assigned batch using
+`subject_type: "in-run-dependency"` and the exact assigned `consumer_id` whose
+`deps`/`justified_by` closure reaches it. The splitter verifies unique producer
+ownership in the current run, actual prerequisite reachability, draft run
+identity, and current source, producer contract and manifest fingerprints.
+Another run's draft or an arbitrary run item cannot enter through this route.
+Producer membership does not certify its mathematics.
+
+The original `reader:BATCH:K` obligation stays with the consumer batch's Alpha;
+the producer remains outside its edit scope. Its source is added to the normal
+refuter scope for a read of current bytes. Collection retains the original
+reader evidence and fingerprints; a refuter flags only a defect present in the
+current source. The generated Alpha order includes the producer at its actual
+dependency level as read-only work. An unresolved current supplier defect must
+be escalated to its owner; normal producer and consumer proof acceptance still
+applies.
+
+Routing stores the immutable producer pre-reader snapshot separately from the
+current producer carrier. A reader may supply optional
+`observed_source: {snapshot: "pre" | "current", item_sha256: "<raw SHA-256>"}`
+only when those bytes actually bind its observation; the splitter checks that
+hash against the declared producer snapshot. Without a binding, the observation
+is explicitly `unbound`, with a null observed-carrier hash. A historical baseline
+is not relabeled as a full-byte observation, and corrected current bytes are not
+treated as the original defective source.
+
+Alpha decisions for this route retain `producer_batch` and `consumer_id`, decide
+the normal finding verdict and reference exactly one closed defect-ledger row.
+An unbound original observation additionally requires
+`historical_delta_unknown: true` and concrete `owner_resolution` evidence of at
+least 40 characters. This preserves historical uncertainty while requiring an
+independent current proof review; it does not waive the reader finding. A true
+historical defect repaired by the producer is not a false positive. If it is the
+same defect as the producer's accepted/amended reader repair, use exact
+`same_defect_as` and concrete `same_defect_evidence`; the gate verifies the
+producer and immutable baseline before permitting one ledger row to serve both
+obligations. Stamping binds decisions to the current producer item, contract and
+manifest, and Step5 closure freezes the existing routing and hash artifacts.
+
+## Scoped closeout with unrelated work present
+
+`tools/run-commit.mjs` retains its existing whole-tree behavior for runs without
+a closeout scope policy. To preserve unrelated staged changes and working files,
+the owner may create `research/RUN-closeout-scope.json` **before** Step 9 seals
+readiness and report integrity. This changes commit ownership only; mathematical,
+proof-layout, obligation, readiness and owner-report gates still apply. A missing
+tracked policy is an error, not a fallback to whole-tree staging.
+
+The policy is exact and run-local:
+
+```json
+{
+  "version": 1,
+  "run": "RUN",
+  "authorized_by": "owner",
+  "authorization": "Owner authorization for this run's scoped closeout.",
+  "additional_paths": []
+}
+```
+
+Automatic ownership includes every selected page, its current items and category
+pathways, the scope ledger, canonical `research/plan-spec.json` and published
+supplier ledger, current published-repair claim targets with valid recorded repair
+evidence, and all Git-eligible `research/RUN-*` files and directories. It includes
+the policy and normal final `RUN-dispatch/tool-close-step9-v2.result.json`. Ignored
+raw dispatch logs and transcripts are never force-added or copied. Required
+carriers must exist and be eligible for Git; selected pathways cannot be omitted.
+
+For an actual shared supporting change, add an exact object to `additional_paths`
+with `path`, raw `sha256`, a concrete `reason` (at least 20 characters), and
+`ownership_evidence`. The evidence must be current-run research JSON with `run`
+and an `owned_paths` array containing the same exact `path` and `sha256`. A null
+hash authorizes an absent, previously tracked deletion. Wildcards, directory
+allowlists, unsafe paths, symlinks and duplicate or redundant paths are refused.
+This is whole-file ownership: resolve unrelated edits within an owned file before
+authorizing it. The tool does not separate mixed hunks or infer ownership from a
+dirty status.
+
+Scoped closeout runs on main, stages literal NUL-delimited paths into a temporary
+index, and commits those paths with `git commit --only`. It then updates only
+owned entries in the real index. The existing final dispatch receipt records
+hashes and counts of the outside staged entries (including flags), outside HEAD
+entries, and outside working bytes and modes. Successful return and subsequent
+`run-commit --check` verify preservation and that every owned artifact is
+committed and current. Unrelated staged changes may remain staged. The receipt
+records a precommit baseline; it does not claim a postcommit check happened before
+the commit. No new late evidence file is created outside the dispatch directory.
+
+Preservation excludes Git metadata, `node_modules`, `.autopilot*` runtime, and
+the current run's operational dispatch `.log`/`.log.gz` files, which may append.
+Other ignored files remain in place and are included in outside byte checks.
+Executable commit, index or reference hooks, active clean/process filters,
+external fsmonitor helpers, unresolved conflicts, submodules, split indexes and
+redirected Git environments fail closed. No hook, filter or configuration is disabled. Non-UTF-8
+paths and unsupported index formats are also refused. Cross-scope renames and
+ambiguous cross-scope deletion/addition pairs require ownership reconciliation.
+
+The sole reviewed hook exception is the installed `post-commit` script whose
+exact source exits when `graphify-out` is absent. A policy may add this exact
+`reviewed_hook` object:
+
+```json
+{
+  "name": "post-commit",
+  "path": "/home/lazyinspirit/.config/git/hooks/post-commit",
+  "sha256": "a9cc684a69d83b0e6b88a43ec490ffb6cea46482c2b7df7ec9c9133914e5cb53",
+  "required_absent_path": "graphify-out"
+}
+```
+
+Only these fixed values and guard semantics are supported. The configured hook
+path, regular executable source hash and guard-path absence are verified before
+and after each index mutation and commit, and again at final verification. A
+changed source, path or newly present `graphify-out` fails closed. The normal
+hook executes as installed; no hook, filter or Git setting is replaced or
+disabled. Other active hooks remain refused.
+
+Drain mathematical, evidence and Git writers before the normal closeout stage.
+Concurrent changes are detected where checked; this is not an atomic transaction
+against external writers. A failure after Git creates the commit holds closeout
+and reports that the commit landed; the tool does not reset or discard work.
+After repair, rerun the ordinary engine gates on current carriers. Scoped
+closeout does not push, publish, change stages or revise the workflow.
+
 ## Guarded recovery
 
 - Before recovery, pause the run, let all workers finish, stop the controller

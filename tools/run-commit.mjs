@@ -17,7 +17,7 @@
 // back. NO Co-Authored-By trailers, ever (owner rule).
 
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, lstatSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -27,7 +27,7 @@ const opt = (n, d = null) => { const i = argv.indexOf(`--${n}`); return i >= 0 &
 const run = opt('run');
 const checkOnly = argv.includes('--check');
 const finalReceipt = opt('final-receipt');
-if (!run || (checkOnly && finalReceipt)) {
+if (!run || !/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(run) || (checkOnly && finalReceipt)) {
   console.error('usage: run-commit.mjs --run <run> [--require-proof-layout] [--check | --final-receipt research/<run>-dispatch/<tool-result.json>]');
   process.exit(2);
 }
@@ -55,6 +55,27 @@ const branch = git('rev-parse', '--abbrev-ref', 'HEAD').trim();
 if (branch !== 'main') {
   console.error(`run-commit: HEAD is on '${branch}', not main — a person moved it and a person moves it back. Refusing.`);
   process.exit(1);
+}
+
+// Opt-in only: the owner creates this policy before Step-9 protected-tree
+// baselines. A deleted tracked policy must not silently restore whole-tree
+// staging. Runs without a policy retain their existing closeout behavior.
+const scopePolicy = `research/${run}-closeout-scope.json`;
+let localPolicy = false;
+try { lstatSync(join(REPO, scopePolicy)); localPolicy = true; }
+catch (cause) { if (cause.code !== 'ENOENT') throw cause; }
+const indexedPolicy = git('ls-files', '--', scopePolicy).trim();
+const committedPolicy = git('ls-tree', '--name-only', 'HEAD', '--', scopePolicy).trim();
+if (localPolicy || indexedPolicy || committedPolicy) {
+  try {
+    const { scopedCloseout } = await import('./run-commit-scope.mjs');
+    scopedCloseout({ root: REPO, run, checkOnly, finalReceipt,
+      proofLayoutAlreadyChecked: argv.includes('--require-proof-layout') });
+  } catch (cause) {
+    console.error(`run-commit: refusing scoped close-out: ${cause.message}`);
+    process.exit(1);
+  }
+  process.exit(0);
 }
 
 let dirty = git('status', '--porcelain').split('\n').filter(Boolean);
