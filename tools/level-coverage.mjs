@@ -28,6 +28,7 @@ import { frontmatterList } from './frontmatter-list.mjs';
 import { loadStep7ClosureCertification, currentStep7Certification } from './step7-certification-consumer.mjs';
 import { adjudicationTypeResolver } from './step7-adjudication-compat.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
+import { parseFrontmatter, nested } from './content-policy-lib.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -129,13 +130,6 @@ function scalar(fm, key) {
   const match = fm.match(new RegExp(`^${key}:[ \\t]*(.*)$`, 'm'));
   return match ? match[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
 }
-function nested(fm, parent, child) {
-  const start = fm.search(new RegExp(`^${parent}:[ \\t]*(?:#.*)?$`, 'm'));
-  if (start < 0) return undefined;
-  const rest = fm.slice(start);
-  const match = rest.match(new RegExp(`^[ \\t]+${child}:[ \\t]*(.*)$`, 'm'));
-  return match ? match[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
-}
 function list(fm, key) { return frontmatterList(fm, key); }
 function option(flag) {
   const index = argv.indexOf(flag);
@@ -156,14 +150,19 @@ for (const file of readdirSync(join(REPO, 'items')).sort()) {
   if (!file.endsWith('.md')) continue;
   const source = readFileSync(join(REPO, 'items', file), 'utf8');
   const { fm, body } = split(source);
+  let metadata = {};
+  let frontmatterError;
+  try { metadata = parseFrontmatter(fm); }
+  catch (cause) { frontmatterError = cause.message; }
   const id = scalar(fm, 'id') ?? basename(file, '.md');
   items.set(id, {
     id,
     file: `items/${file}`,
     body,
+    frontmatterError,
     provenance: {
-      statement: nested(fm, 'provenance', 'statement'),
-      proof: nested(fm, 'provenance', 'proof'),
+      statement: nested(metadata, 'provenance', 'statement'),
+      proof: nested(metadata, 'provenance', 'proof'),
     },
     deps: list(fm, 'deps'),
     justified_by: list(fm, 'justified_by'),
@@ -225,8 +224,15 @@ for (const id of scope) {
   const item = items.get(resolve(id) ?? id);
   if (!item) error('scope-item-missing', `${id} is declared by a batch but has no item file`, id);
   else if (!judgeOnly) {
-    if (!item.provenance.statement || !item.provenance.proof)
+    if (item.frontmatterError)
+      error('item-frontmatter', `${item.file}: ${item.frontmatterError}`, item.id);
+    const { statement, proof } = item.provenance;
+    if (typeof statement !== 'string' || !statement.trim()
+      || typeof proof !== 'string' || !proof.trim())
       error('provenance-missing', `${item.file}: in-flight level coverage requires provenance.statement and provenance.proof`, item.id);
+    else if (!['ai-generated', 'ai-altered', 'literature-derived'].includes(statement)
+      || !['ai-generated', 'ai-altered', 'literature-derived', 'not-supplied', 'not-applicable'].includes(proof))
+      error('provenance-invalid', `${item.file}: provenance components must be valid schema strings`, item.id);
     // A final independent backstop for the future-scope policy: a dependency
     // consumes the target's claim, not its proof. Therefore an AI-generated
     // proof is immaterial here, but an AI-generated Statement/Construction is

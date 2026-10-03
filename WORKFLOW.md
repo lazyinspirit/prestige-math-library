@@ -48,6 +48,13 @@
   item judgment, then frontier repair, rejudgment and the scoped gate.
 - Steps 8–9: certify changed draft items and impacts, then close contracts,
   pathways, readiness, the owner report and the run commit.
+- Level coverage reads component provenance with the shared renderer YAML parser,
+  accepting both block and flow mappings. Scoped malformed frontmatter, missing
+  components, non-string values and values outside the schema enums remain errors;
+  AI-generated statements remain ineligible as future-build dependency targets.
+  A checker correction that leaves item and mathematical evidence bytes unchanged
+  needs the ordinary failed-gate retry, without rewriting items or reopening the
+  Step-8 suffix merely to restyle equivalent YAML.
 - Step 9 readiness ends with `proof-step-separation` and `proof-blue-tags`.
   They share one deterministic renderer pass and write
   `research/RUN-proof-layout.json`. Scope includes every item on the run's A/B
