@@ -29,7 +29,7 @@ are required.
 ## Automatic content updates
 
 The repository's `status: published` flags are authoritative. Both startup and
-refreshes include every currently published item; drafts are excluded. A stale
+refreshes include published mathematical items; drafts and physics are excluded. A stale
 live-site sitemap cannot delay an addition or prevent a deletion/unpublication.
 This view follows this checkout, which may be ahead of the deployed website.
 The server must be running and reading the checkout receiving publication edits.
@@ -141,7 +141,12 @@ to MP3 without musical edits. Recording licenses are independent of code license
 
 ## Architecture
 
-- `data.mjs` includes every published kind, resolves dependency aliases,
+- `math-boundary.mjs` admits only mathematical kinds and domains. Postulates,
+  experiments, physics theorems and thought experiments are excluded even if
+  mislabeled as mathematical. Reserved physics ID prefixes are excluded too.
+  A mathematical item whose known prerequisite, justification or forward-reference
+  chain reaches an excluded item is also excluded, with alias resolution.
+- `data.mjs` includes the eligible mathematical publication census, resolves dependency aliases,
   deduplicates prerequisites, preserves multiple category memberships and
   provides a category for items without a published home. Categories without
   metadata receive titles from their directory. In-progress pages without

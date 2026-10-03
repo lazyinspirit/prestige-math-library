@@ -1,57 +1,21 @@
-# Physics content contract
+# Mandatory physics instructions
 
-This is a physics-workspace assignment. Read SCHEMA.md, CLAUDE.md, and
-../PHYSICS-CONTENT-MODEL.md. The class-specific rules below override mathematical
-proof-only wording in the inherited task:
+Read `CLAUDE.md`, `SCHEMA.md`, and `../PHYSICS-CONTENT-MODEL.md`. Follow the assigned role and scope. These rules apply to every physics framework.
 
-- Use domain and library classifications, and dependency_roles on local items.
-- postulate (post-): explicit adopted assumption, sources and physical_scope;
-  review formulation, scope, sources, non_derivation. No proof required.
-- experiment (exp-): reported setup, procedure, observations, uncertainty,
-  interpretation and empirical_result. Review every field against retrieved
-  source text. Do not fabricate observations or prove measured outcomes.
-- physical-theorem (pthm-) and thought-experiment (texp-): identical complete
-  conditional proofs, explicit physical_scope, and inherited empirical_premises.
-- Mathematical items retain all ordinary mathematical proof obligations and
-  cannot depend on physics. Imported mathematical items and pages are read-only.
-- Nonproof item contracts use physics_review fields with verdict and concrete
-  evidence as specified in SCHEMA.md; do not create fictitious proof worksheets.
-- Relations (support/testing/motivation/replication/challenge) are not deps.
-- Changes to Postulate, experimental setup/procedure/observations/uncertainty/interpretation, physical_scope, or empirical qualifications change the public physical interface and require direct-consumer review. Proofs, citations, and audit stamps alone do not propagate.
-- Write only in this workspace. Never modify the root math engine, tools,
-  briefs, items, or library. Any genuine math supplier defect is an escalation.
+**Define, do not merely name.** Be as mathematically rigorous and explicit as possible. Before using a technical term, give its mathematical definition or identify an exact earlier definition and state its relevant content. Specify objects, domains, maps, regularity, hypotheses, and conventions. Use published, draft or planned mathematics suppliers with exact statements, hypotheses and honest proof status; complete remaining gaps locally.
 
-## Required experimental-evidence guidance
+**Example—classical EM:** write $\mathbf E,\mathbf B:\Omega\times I\to\mathbb R^3$, with spatial region $\Omega\subseteq\mathbb R^3$, time interval $I$, and stated regularity; at fixed time these are spatial vector fields. Specify units. Do not assume smoothness across point charges or surface sources; state exclusions or use an appropriate weak/distributional formulation. Likewise, define a worldline as a curve with specified domain and conditions, and a reference frame as a precise geometric object appropriate to the framework.
 
-Before authoring, reviewing, judging, or adjudicating physical content, read
-../PHYSICS-CONTENT-MODEL.md, especially "Statistical evidence and the double-slit
-example". Apply its author/judge/adjudicator instructions to every statistical
-claim. Separate theoretical distributions, finite observed data, and statistical
-inference. Finite agreement does not prove a physical framework, and a rare
-outcome or missing visible fringe does not automatically falsify one. Classical
-waves also interfere: identify the specific competing model and apparatus
-assumptions. Never invent sample sizes, uncertainties, p-values, or power.
-Confidence in a source review or conditional proof is not certainty that a theory
-is true. Carry sampling and measurement qualifications into downstream claims.
+**Evidence is statistical.** Separate predictions, observations, and inference. State preparation, apparatus assumptions, sampling model, uncertainty, and source limitations. Never invent measurements or statistical precision. Carry empirical qualifications into downstream conclusions.
+
+**Example—double slit:** each detection is localized; fringes concern the accumulated distribution. A finite sample can lack visible fringes with nonzero probability under ordinary coherent sampling models. Agreement does not prove quantum mechanics; missing fringes do not automatically falsify it. Test a specified competing model, not “all classical physics.” A p-value is not the probability that a theory is false. Classical waves also interfere, and reviewer confidence is not empirical certainty.
+
+Postulates are adopted assumptions; experiments report source-backed observations, not proofs. Physics theorems and thought experiments require complete conditional deductions. Use schema classifications, dependency roles, uncertainty records, and nonproof reviews. Keep evidence links separate from acyclic prerequisites. Mathematical items cannot depend on physics; imports and the root mathematics workspace are read-only. Physical public-interface changes require consumer review.
+
+Authors supply definitions and prerequisites; reviewers and adjudicators check them, source fidelity, and statistical qualifications. Reject undefined reasoning and fabricated certainty.
 
 ---
 
 # Step 5b — cross-batch audit and closure
 
-- Read `research/<run>-cross-group-edges.json`, the post-5a carriers, and every listed citing/cited item or structural change. An empty computed list is valid.
-- Follow `briefs/alpha-step5.md` for the review and repair standard. Logical validity is ground truth; sources and judges can err. Never pretend to understand something you do not; escalate uncertainty to the owner. Keep published content read-only and make only task-authorized repairs.
-- For a migrated run, read `research/<run>-checkpoint-import.json` and its source export. Treat original review attribution as historical, not a new review. Preserve the exact published-repair handoff in `research/<run>-step7-published-repairs.jsonl`; its later judgments remain owed.
-- If `research/<run>-merge-import.json` exists, read its source mappings and baseline origins. Preserve imported source-review evidence and exact pending Step 8 published-repair handoffs. The import is not a new mathematical verdict: review the combined cross-batch interfaces and impact obligations on current content, including later repairs recorded in the source handoffs.
-- Append one evidence-bearing, current-hash row per edge, forward reference, addition, removal, item, page, or gate outcome to `research/<run>-5b-verdicts.jsonl`. Use the exact kind and verdict vocabulary accepted by `tools/physics-support/cross-group-edges.mjs`. Edges use `accurate`, `repaired`, or `struck`; forward references use `orientation-reviewed`, `lemmas-added`, or `dropped`; gate outcomes use `confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`. Use the tool's accepted vocabulary for structural changes.
-- An `orientation-reviewed` forward reference may remain only as a non-load-bearing link in `Remarks` to an already-authored target on a strictly later planned page. Bind the current source-item hash, exact target-item hash, and an existing Markdown review under `research/` with its hash.
-- After edits, get a current carrier hash with `node tools/physics-support/cross-group-edges.mjs carrier --run <run> --id ITEM_ID`. Bind each verdict to the current carrier hash or hashes required for its kind, and provide its required evidence note.
-- For a fixed repository runtime incident on a foreign draft, keep the stable ledger subject in `id`, supply both `carrier_run` and `carrier_id`, and compute the hash under that actual owner run. Only closed `breaking-runtime`, `engine-stage`, or `stage-unowned` rows whose evidence names that draft qualify. This is a runtime receipt, not mathematical acceptance or authority to edit another agent's carrier.
-- Clean outcomes use `defect_ids: []`. Every repair, strike, drop, removal, or reversion must name one closed, uniquely owned `5b-cross` defect-ledger row. Restore a pre-existing removal before deciding it. A page addition, page removal, or reading-order change is an owner blocker unless the active task explicitly grants that authority.
-- A clean gate `false_positive` uses `defect_ids: []`; a confirmed gate defect names its originating gate and exactly one closed defect row with matching severity and disposition. Bind the outcome to the current subject hash.
-- For the full lead audit, close both impact windows with `tools/physics-support/impact-audit.mjs`:
-  - `--touches research/<run>-touches.json --from pre-author --to post-5a --receipt research/<run>-impact.json`
-  - `--touches research/<run>-touches.json --from post-5a --current --receipt research/<run>-impact-5b.json`
-- Record a reviewer even for an empty window. For each affected item, record the exact changed supplier, consumed clause, and justified disposition. Reuse historical review only after checking its attribution, current hashes, and coverage of current interface changes; never copy approvals blindly.
-- Preserve the original baseline. Record unresolved findings and published debt honestly; generic notes do not close a receipt. A narrowly assigned gate repair covers only its primary blocker, not unrelated impact candidates.
-- Write `research/<run>-alpha-5b.md` with the evidence, disposition, edits, and remaining blocker for each computed obligation.
-- The closure gates rederive edges, validate verdict currency and ledger ownership, and run the Step 5 gate battery.
+Before working, read `agent-reference/tasks/alpha-5b-edges.md` in full. It contains the mandatory role-specific duties, output contract, and restrictions; follow them together with the generated assignment.

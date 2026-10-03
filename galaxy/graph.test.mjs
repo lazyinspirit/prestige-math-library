@@ -6,6 +6,37 @@ import { join } from 'node:path';
 import { loadGraph } from './data.mjs';
 import { reachable } from './graph-utils.mjs';
 
+test('mathematical universe excludes physics kinds, domains and dependent alias chains', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'galaxy-boundary-'));
+  try {
+    await mkdir(join(root, 'items'));
+    for (const name of ['math', 'physics']) await mkdir(join(root, 'library', name), { recursive: true });
+    const put = (path, fm) => writeFile(join(root, path), `---\n${JSON.stringify(fm)}\n---\n`);
+    const rows = [
+      { id: 'def-safe', kind: 'definition' },
+      { id: 'thm-shared', kind: 'theorem', domain: 'mathematics', deps: ['def-safe'] },
+      ...['postulate', 'experiment', 'physics-theorem', 'thought-experiment', 'physical-theorem'].map((kind, i) => ({ id: `bad-${i}`, kind, domain: 'mathematics', aliases: [`physics-${i}`] })),
+      { id: 'def-physical', kind: 'definition', domain: 'physics' },
+      { id: 'pthm-disguised', kind: 'theorem', domain: 'mathematics' },
+      { id: 'thm-bad', kind: 'theorem', deps: ['physics-0'], aliases: ['bad-alias'] },
+      { id: 'thm-indirect', kind: 'theorem', deps: ['bad-alias'] },
+      { id: 'def-bad-formulation', kind: 'definition', justified_by: ['physics-1'] },
+      { id: 'thm-bad-forward', kind: 'theorem', forward_refs: ['physics-2'] },
+    ];
+    for (const row of rows) await put(`items/${row.id}.md`, { status: 'published', ...row });
+    await put('library/math/_category.md', { title: 'Mathematics', library: 'mathematics' });
+    await put('library/physics/_category.md', { title: 'Physics', library: 'physics' });
+    await put('library/math/main.md', { status: 'published', items: rows.map(row => row.id) });
+    await put('library/physics/shared.md', { status: 'published', items: ['thm-shared'] });
+    const graph = await loadGraph(root);
+    assert.deepEqual(graph.nodes.map(node => node.id).sort(), ['def-safe', 'thm-shared']);
+    assert.deepEqual(graph.nodes.find(node => node.id === 'thm-shared').categories, ['math']);
+    assert.deepEqual(graph.categories.map(category => category.id), ['math']);
+    assert.equal(graph.edges.length, 1);
+    assert.deepEqual(graph.unresolved, []);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('transitive highlights handle shared ancestors and cycles without including the source', () => {
   const prerequisites = [[], [0], [0, 1], [1, 2], [5], [4]];
   assert.deepEqual([...reachable(3, prerequisites)].sort(), [0, 1, 2]);

@@ -14,10 +14,10 @@ import { stages, workflowRevision } from '../stages/mathlib.mts';
 const source = { sources: { references: [{ title: 'Source', url: 'https://example.org/source' }] }, provenance: { statement: 'literature-derived', proof: 'not-applicable' } };
 const post = () => ({ id: 'post-state', kind: 'postulate', domain: 'physics', physical_scope: 'Ideal isolated systems', deps: [], body: '## Postulate\nThe stated assumption.', ...source });
 const exp = () => ({ id: 'exp-observation', kind: 'experiment', domain: 'physics', physical_scope: 'Specified apparatus', deps: [], body: ['Setup', 'Procedure', 'Observations', 'Uncertainty', 'Interpretation'].map(h => `## ${h}\nSource-backed account.`).join('\n'), empirical_result: { observation: 'Reported observation', uncertainty: 'Reported resolution', conditions: 'Calibration conditions', source_url: 'https://example.org/source' }, ...source });
-const physical = (kind = 'physical-theorem') => ({ id: kind === 'physical-theorem' ? 'pthm-result' : 'texp-result', kind, domain: 'physics', physical_scope: 'Conditional model', deps: ['post-state'], dependency_roles: { 'post-state': 'physical-assumption' }, proof_strategy: 'direct', body: '## Statement\nConditional conclusion.\n## Proof\nComplete argument.', ...source, provenance: { statement: 'literature-derived', proof: 'ai-altered' } });
+const physical = (kind = 'physics-theorem') => ({ id: kind === 'physics-theorem' ? 'pthm-result' : 'texp-result', kind, domain: 'physics', physical_scope: 'Conditional model', deps: ['post-state'], dependency_roles: { 'post-state': 'physical-assumption' }, proof_strategy: 'direct', body: '## Statement\nConditional conclusion.\n## Proof\nComplete argument.', ...source, provenance: { statement: 'literature-derived', proof: 'ai-altered' } });
 const math = () => ({ id: 'thm-math', kind: 'theorem', domain: 'mathematics', deps: [], body: '## Statement\nMathematical conclusion.' });
 const check = (items: any[], extra: any = {}) => validatePhysicsContent({ items, ...extra });
-test('physical theorem and thought experiment require identical complete proofs', () => {
+test('physics theorem and thought experiment require identical complete proofs', () => {
  for (const kind of PHYSICAL_PROOF_KINDS) {
   assert.deepEqual(check([post(), physical(kind)]), []);
   assert.ok(check([post(), { ...physical(kind), body: 'Only an imagined setup' }]).some(e => e.code === 'physical-proof'));
@@ -64,6 +64,10 @@ test('domain required except for verified legacy imports', () => {
  assert.deepEqual(check([m], { importedIds: new Set([m.id]) }), []);
 });
 test('physics kinds cannot masquerade as mathematics', () => assert.ok(check([{ ...post(), domain: 'mathematics' }]).some(e => e.code === 'physical-kind-domain')));
+test('physics-theorem is canonical and the retired physical-theorem kind is rejected', () => {
+ assert.deepEqual(check([post(), physical('physics-theorem')]), []);
+ assert.ok(check([post(), { ...physical(), kind: 'physical-theorem' }]).some(e => e.code === 'kind-prefix'));
+});
 test('experiment requires a matching empirical source and no observational proof', () => {
  const e: any = exp(); e.empirical_result.source_url = 'https://other.example/source';
  assert.ok(check([e]).some(e => e.code === 'empirical-source')); e.body += '\n## Proof\nInvented proof.';

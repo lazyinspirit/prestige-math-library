@@ -200,8 +200,8 @@ New kinds and ID prefixes:
 | Kind | Prefix | Body | Acceptance |
 |---|---|---|---|
 | postulate | post- | Postulate; explanatory prose | Sources, formulation, physical scope |
-| physical-theorem | pthm- | Statement; Facts & Assumptions; Proof | Complete conditional proof |
-| thought-experiment | texp- | Statement; Facts & Assumptions; Proof | Identical to physical-theorem |
+| physics-theorem | pthm- | Statement; Facts & Assumptions; Proof | Complete conditional proof |
+| thought-experiment | texp- | Statement; Facts & Assumptions; Proof | Identical to physics-theorem |
 | experiment | exp- | Setup; Procedure; Observations; Uncertainty; Interpretation | Reported source-backed empirical findings |
 
 Every locally authored item requires `domain: mathematics` or `domain: physics`.
@@ -224,7 +224,7 @@ Every local item annotates each `deps` entry in `dependency_roles` with one of:
 Mathematical items use only mathematical-premise. Postulates and experiments use
 physical suppliers operationally or for formulation, not as proofs of assumptions
 or measured outcomes. Experimental interpretation requiring a derivation belongs
-in a separate physical-theorem or thought-experiment.
+in a separate physics-theorem or thought-experiment.
 
 Every physical item states a nonempty `physical_scope`. The new kinds require
 source references with HTTP(S) URLs and source-backed statement provenance.

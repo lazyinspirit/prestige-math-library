@@ -8,12 +8,168 @@ Website integration and publication are separate work. Agent instructions remain
 
 ## Scope
 
-The intended categories are **Classical Electromagnetism** and **Quantum
-Mechanics**, both developed deeply from explicit first principles. Quantum
+The intended categories are **Non-relativistic Classical Mechanics**, **Classical
+Electromagnetism**, **Non-relativistic Quantum Mechanics**, **Special Relativity**, **General
+Relativity**, and **Thermodynamics**, together with **Fluid Dynamics**,
+**Relativistic Particle Mechanics**, **Einstein–Maxwell Models** (General
+Relativity with Classical Electromagnetism), **Quantum Field Theory including
+Quantum Electrodynamics**, **Classical Statistical Mechanics**, **Quantum
+Statistical Mechanics**, and **Thermodynamics and General Relativity**. Develop each deeply from explicit first principles
+within its stated framework. Quantum
 circuitry and quantum algorithms are deferred. Physical assumptions, empirical
 inputs, mathematical definitions, and derived conclusions must be distinguished.
 First-principles development does not mean deriving physical assumptions from
 mathematical axioms or deriving all physical quantities from a single framework.
+
+## Framework-local quantities, constants, and units
+
+Develop each physical framework under its own explicit postulates. Required
+cross-framework suppliers must be declared rather than silently imported.
+The owner chose not to introduce a shared category of physical quantities and
+units at this stage, or additional workflow mechanisms for cross-framework
+consistency. Handle these requirements through physics agent prompts and
+ordinary authoring, review, and adjudication. The mathematics workflow remains
+unchanged.
+
+Within each framework, authors must state:
+
+- The adopted formulation and postulates, and whether each introduced physical
+  quantity or constant is primitive (fundamental within that formulation) or
+  derived. For derived quantities, give the defining construction and its
+  prerequisites; do not treat this status as universal across theories.
+- Each quantity's mathematical type and physical meaning: scalar, vector,
+  tensor, operator, or another appropriate object. Specify its space and
+  transformation behavior where relevant, including frame or observer dependence.
+- The units and dimensions of quantities and constants, including scalar and
+  vector quantities. Specify the unit system, normalization conventions, and
+  any constants suppressed by natural-unit conventions.
+- The assumptions, approximation regime, and domain of validity of definitions
+  and physical results.
+
+An SI base quantity is not necessarily a primitive concept in a physical theory.
+Likewise, calling a quantity derived in a theory does not determine whether its
+unit is an SI base or derived unit. A quantity's name and units do not establish
+its physical meaning or identify it with a similarly named quantity in another
+framework.
+
+For example, classical electromagnetism alone does not generally derive particle
+mass; mass ordinarily enters as a parameter when electromagnetism is coupled to
+mechanics. Electromagnetic field energy can be derived within an appropriate
+formulation. Electric charge and vacuum permeability must have their roles
+specified in the chosen formulation and unit system rather than being declared
+universally fundamental. In modern SI, vacuum permeability's numerical value is
+experimentally determined, not exact.
+
+Judges and adjudicators must check these declarations, dimensional consistency,
+mathematical types, and the scope of the physical claims. They must not silently
+import another framework's assumptions or replace a classical quantity with a
+quantum operator merely because the symbols or units agree.
+
+When interactions between frameworks are developed, state the relevant
+identifications, coupling assumptions, correspondences, or limiting arguments
+explicitly, using the existing item classes and dependency rules. Matching units
+is necessary for such identifications but does not prove compatibility, reconcile
+different postulates, or guarantee a consistent combined theory. Keep unresolved
+connections and disagreements explicit rather than treating them as established
+prerequisites.
+
+## Current framework audit and integration requirements
+
+Category names are **Non-relativistic Classical Mechanics** and
+**Non-relativistic Quantum Mechanics**; cited textbook titles retain their
+original names. The owner requires full audits and expansion of these frameworks,
+Special/General Relativity, Classical Electromagnetism, and Thermodynamics.
+Definitions must be mathematically explicit and theorems fully justified. Every
+missing prerequisite must be supplied within its framework; an open contract is
+not completion. Expand important results and examples in depth and breadth.
+
+Classical Electromagnetism must now consume all relevant Special Relativity
+postulates and results through explicit dependencies and compatible conventions.
+This replaces the earlier deferral of that particular interaction. No additional
+unit/quantity consistency engine is required; content and review prompts carry
+these obligations. Pure mathematics still cannot depend on physical items.
+
+The seven new categories each receive a five-agent research/scaffolding team.
+Every member must use exact adequate existing prose-scaffold suppliers, make
+definitions mathematically explicit, fully justify asserted results, supply
+every missing prerequisite of those results, and ensure substantial breadth and
+depth. The new research records live in
+[extended-frameworks-2026-10-03](physics/research/extended-frameworks-2026-10-03/README.md).
+Known-open problems and formal approximation methods retain their actual status;
+they are not unproved dependencies of established claims or substitutes for
+missing mathematical arguments.
+
+## Mathematics suppliers, including unpublished plans
+
+Physics agents may use published mathematical results, unpublished mathematical
+items, and planned results in the mathematics library's prose scaffolds as
+prerequisite suppliers. The owner specifically highlights PDE, Fourier series,
+Lie theory, complex analysis, representation theory and algebraic geometry;
+the permission applies to all mathematical scaffold families. Mathematics remains
+a purely mathematical supplier, regardless of publication status.
+
+Record exact source paths/IDs, statements, hypotheses, proof status and consumer
+uses. Planned statements may be declared planning prerequisites before publication;
+this does not mark them proved, audited or published. Justify each consuming
+argument and distinguish verified mathematics from conditional reliance on a
+planned supplier. Supply remaining missing framework prerequisites locally. Root
+mathematics items, plans and engine remain unchanged by physics work. This source
+permission does not itself create production items or acceptance receipts.
+
+## Mathematical rigor and explicit definitions
+
+This rule applies to every physics framework, including classical mechanics,
+classical electromagnetism, quantum mechanics, general relativity, quantum field
+theory, quantum electrodynamics, and thermodynamics.
+
+Be as mathematically rigorous and explicit as possible. Every technical physical
+term must have an explicit mathematical definition available before its first
+use. State the underlying objects, spaces, maps, regularity, hypotheses, and
+conventions needed for the claim. Introduce the definition locally or cite an
+exact earlier supplier and make the relevant definition explicit in the
+exposition; a familiar name or textbook citation alone is insufficient. Once a
+term is defined, reuse that definition rather than duplicating it in every item.
+
+For example, do not use “frame of reference” or “worldline” as unexplained
+intuitions. Define them in the language of differential geometry appropriate to
+the framework. State the spacetime manifold and its adopted geometric structure.
+For a worldline, specify the curve's domain, regularity, parameter, and applicable
+constraints; a massive relativistic particle ordinarily has a future-directed
+timelike curve, while an ideal light ray uses a null curve under suitable
+assumptions. For a reference frame, specify whether the term denotes an adapted
+coordinate chart, an observer congruence, or a basis/tetrad field, and define that
+chosen object and its conditions. These objects are related but not interchangeable.
+Use the geometry appropriate to classical or relativistic assumptions; do not
+silently import Lorentzian structure into a nonrelativistic framework.
+
+Scaffolding and authoring agents must locate the necessary mathematical
+prerequisites in published/unpublished mathematics and its prose plans, or develop them locally with purely
+mathematical dependencies. An unfinished prerequisite remains an explicit open
+obligation. Readers, refuters, judges, and adjudicators must check definitions,
+well-definedness, hypotheses, types, and exact supplier uses, and flag undefined
+terms or informal reasoning where it conceals a necessary argument. Mathematical
+precision must preserve the distinction between adopted physical assumptions,
+conditional deductions, and uncertain empirical observations.
+
+## Concise physics agent instructions
+
+Physics worker briefs repeat the following compact instructions. Lengthy role
+duties remain mandatory in referenced `physics/agent-reference/` files. The
+500-word target applies to prompt templates, not assigned content or source text.
+
+Read `CLAUDE.md`, `SCHEMA.md`, and `../PHYSICS-CONTENT-MODEL.md`. Follow the assigned role and scope. These rules apply to every physics framework.
+
+**Define, do not merely name.** Be as mathematically rigorous and explicit as possible. Before using a technical term, give its mathematical definition or identify an exact earlier definition and state its relevant content. Specify objects, domains, maps, regularity, hypotheses, and conventions. Use published, draft or planned mathematics suppliers with exact statements, hypotheses and honest proof status; complete remaining gaps locally.
+
+**Example—classical EM:** write $\mathbf E,\mathbf B:\Omega\times I\to\mathbb R^3$, with spatial region $\Omega\subseteq\mathbb R^3$, time interval $I$, and stated regularity; at fixed time these are spatial vector fields. Specify units. Do not assume smoothness across point charges or surface sources; state exclusions or use an appropriate weak/distributional formulation. Likewise, define a worldline as a curve with specified domain and conditions, and a reference frame as a precise geometric object appropriate to the framework.
+
+**Evidence is statistical.** Separate predictions, observations, and inference. State preparation, apparatus assumptions, sampling model, uncertainty, and source limitations. Never invent measurements or statistical precision. Carry empirical qualifications into downstream conclusions.
+
+**Example—double slit:** each detection is localized; fringes concern the accumulated distribution. A finite sample can lack visible fringes with nonzero probability under ordinary coherent sampling models. Agreement does not prove quantum mechanics; missing fringes do not automatically falsify it. Test a specified competing model, not “all classical physics.” A p-value is not the probability that a theory is false. Classical waves also interfere, and reviewer confidence is not empirical certainty.
+
+Postulates are adopted assumptions; experiments report source-backed observations, not proofs. Physics theorems and thought experiments require complete conditional deductions. Use schema classifications, dependency roles, uncertainty records, and nonproof reviews. Keep evidence links separate from acyclic prerequisites. Mathematical items cannot depend on physics; imports and the root mathematics workspace are read-only. Physical public-interface changes require consumer review.
+
+Authors supply definitions and prerequisites; reviewers and adjudicators check them, source fidelity, and statistical qualifications. Reject undefined reasoning and fabricated certainty.
 
 ## Workflow engine separation
 
@@ -39,7 +195,7 @@ helpers. No content-authoring run has been started by this implementation.
 
 The physics engine may consume published mathematical results. Mathematical
 items remain mathematical wherever presented and must not acquire physical
-prerequisites. Postulates, physical theorems, thought experiments, and experiments
+prerequisites. Postulates, physics theorems, thought experiments, and experiments
 must be excluded from mathematics-library membership. Cross-library presentation
 uses the same canonical mathematical IDs. Because the unchanged mathematics
 tools scan their own content directories, the physics workspace consumes
@@ -61,11 +217,18 @@ Distinguish general framework assumptions from empirical laws and restricted
 model assumptions in the item's account. For example, a constitutive relation
 must state its regime of validity. A separate `law` kind has not been agreed.
 
-### Physical theorem
+### Physics theorem
 
-A physical theorem is a precise conclusion established by a complete argument
+The class was renamed from “physical theorem” to **physics theorem**. Its
+canonical kind is `physics-theorem`; existing `pthm-` identifiers remain stable.
+The retired kind is not an accepted alias. Mathematical views exclude all four
+physics-only classes, physics-domain definitions/examples/remarks, and mathematical
+consumers whose prerequisite closure reaches such items. Pure mathematics may
+still be shared by the two libraries.
+
+A physics theorem is a precise conclusion established by a complete argument
 from explicitly stated physical assumptions and mathematical material, possibly
-including empirical premises. The physics kind is `physical-theorem` (prefix `pthm-`).
+including empirical premises. The physics kind is `physics-theorem` (prefix `pthm-`).
 
 The standard of deduction is the same as for a mathematical theorem. The
 distinction records the physical premises and interpretation; it does not mean
@@ -78,7 +241,7 @@ scope. The conclusion inherits those qualifications. An exact conditional
 calculation must not turn uncertain observations into an unconditional exact
 claim about nature.
 
-An experiment may supply a physical theorem even when its findings are
+An experiment may supply a physics theorem even when its findings are
 statistical rather than certain. The empirical premise must identify the
 observed data or estimate, experimental conditions, statistical method and
 assumptions, and uncertainty. The deduction is conditional on that qualified
@@ -126,11 +289,11 @@ under stated assumptions. Its closest mathematical analogue is a constructed
 example or counterexample, or a setup used in a proof by contradiction.
 
 **Agreed classification:** `thought-experiment` (prefix `texp-`) is a distinct item kind
-that functions identically to `physical-theorem`. It must state a precise
+that functions identically to `physics-theorem`. It must state a precise
 conclusion and supply a complete argument from explicit premises. The distinction
 records its hypothetical setup and presentation, not a weaker standard of proof.
 It has the same dependency permissions, review and verification requirements,
-and handling of empirical uncertainty as a physical theorem. Both kinds are
+and handling of empirical uncertainty as a physics theorem. Both kinds are
 physical items and are excluded from the mathematics library and from the
 prerequisites of mathematical items.
 
@@ -158,7 +321,7 @@ explicit mathematical hypotheses and earlier results.
 
 Mathematical examples and counterexamples can contain proved claims while
 retaining their expository kinds. Similarly, thought-experiment presentation
-does not reduce the proof requirements of a physical theorem.
+does not reduce the proof requirements of a physics theorem.
 
 Pure mathematical justification does not depend on physical observations or
 physical postulates. A mathematical theorem may analyze a model motivated by
@@ -172,8 +335,8 @@ notation; in frontmatter, B would list A in its `deps`.
 
 These are permissible relationships, not automatic edges between every pair of
 items of these kinds. Each actual edge must identify a necessary prerequisite
-and its purpose. In this table, “Physical theorem” denotes either a
-`physical-theorem` or a `thought-experiment`, with identical rules in supplier
+and its purpose. In this table, “Physics theorem” denotes either a
+`physics-theorem` or a `thought-experiment`, with identical rules in supplier
 and consumer positions. In particular, either kind may depend on either kind,
 subject to acyclicity. “Mathematical material” groups mathematical axioms,
 definitions, and proved results; internal relationships retain their ordinary
@@ -183,23 +346,23 @@ meanings and do not imply that an axiom is proved from an earlier theorem.
 |---|
 | Mathematical material → Mathematical material: ordinary mathematical prerequisites. |
 | Mathematical material → Postulate: language needed to formulate it. |
-| Mathematical material → Physical theorem: definitions, assumptions, and proof tools. |
+| Mathematical material → Physics theorem: definitions, assumptions, and proof tools. |
 | Mathematical material → Experiment: setup, measurement, or analysis methods. |
 | Postulate → Postulate: prerequisite framework or terminology. |
-| Postulate → Physical theorem: physical premise. |
+| Postulate → Physics theorem: physical premise. |
 | Postulate → Experiment: design or apparatus-model assumption. |
-| Physical theorem → Postulate: prerequisite formulation or context, not proof of the postulate. |
-| Physical theorem → Physical theorem: previously established result. |
-| Physical theorem → Experiment: design, prediction, or apparatus analysis. |
+| Physics theorem → Postulate: prerequisite formulation or context, not proof of the postulate. |
+| Physics theorem → Physics theorem: previously established result. |
+| Physics theorem → Experiment: design, prediction, or apparatus analysis. |
 | Experiment → Postulate: operational definitions or measurement procedures, not deductive justification. |
-| Experiment → Physical theorem: explicitly stated empirical premise, including uncertainty and scope. |
+| Experiment → Physics theorem: explicitly stated empirical premise, including uncertainty and scope. |
 | Experiment → Experiment: preparation, calibration, or another required experimental result. |
 
 Some prerequisites support formulation or procedure rather than deduction.
 The physics schema records each local dependency in `dependency_roles`:
 `mathematical-premise`, `physical-assumption`, `physical-result`,
 `empirical-premise`, `operational-prerequisite`, or `formulation-prerequisite`.
-Physical theorems and thought experiments use `empirical_premises` to carry
+Physics theorems and thought experiments use `empirical_premises` to carry
 conditions and uncertainty through physical-result chains.
 
 ## Empirical and contextual relationships
@@ -209,12 +372,12 @@ uses `relations` with `supported_by`, `tested_by`, `motivated_by`, `replicates`,
 and `challenges` lists:
 
 - An experiment supports or constrains a postulate or physical model.
-- An experiment tests the physical applicability of a physical theorem's
+- An experiment tests the physical applicability of a physics theorem's
   prediction, including its auxiliary assumptions.
 - An experiment replicates, corroborates, or challenges another experiment's
   findings.
 - An experiment supports or constrains empirical premises used in a thought
-  experiment or physical theorem.
+  experiment or physics theorem.
 - A postulate, theorem, experiment, or thought experiment motivates another
   item without being required to formulate or establish it.
 - A thought experiment clarifies assumptions or exposes conceptual tensions;
@@ -225,7 +388,7 @@ the experiment's design. This is a legitimate cycle in the broader relationship
 network, not a circular derivation. Empirical support alone must not be encoded
 as an Experiment → Postulate prerequisite.
 
-An experiment has a logical role in a physical theorem only when a stated
+An experiment has a logical role in a physics theorem only when a stated
 empirical result is actually used as a premise. An experiment that merely tests
 the theorem belongs in the separate empirical relationship network.
 
@@ -349,7 +512,7 @@ models, analysis method, error rates, and selection or multiple-testing issues.
 Use published mathematical suppliers or develop the required mathematics locally.
 If a source omits these details, state the omission and limit the claim; do not
 manufacture counts, precision, independence, significance, or power. Put new
-conditional derivations in physical-theorem or thought-experiment items. Empirical
+conditional derivations in physics-theorem or thought-experiment items. Empirical
 support for a postulate remains a nonlogical relation.
 
 **Judges and refuters:** check whether the claimed result concerns a distribution,
@@ -357,7 +520,7 @@ an expectation, an individual outcome, or a finite-sample estimate. Reject a
 claim that finite data prove quantum mechanics, that any missing fringe falsifies
 it, or that interference rules out all classical physics. Check the specific
 alternative and auxiliary assumptions, actual source record, statistical method,
-and carried uncertainty. Physical theorem acceptance concerns a complete
+and carried uncertainty. Physics theorem acceptance concerns a complete
 conditional argument; experiment acceptance concerns faithful reporting and
 properly qualified interpretation.
 

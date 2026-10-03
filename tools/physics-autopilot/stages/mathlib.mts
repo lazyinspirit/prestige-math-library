@@ -2677,5 +2677,5 @@ for (const stage of stages) {
   ];
 }
 
-export const workflowRevision = 'physics-v1-class-aware-review';
+export const workflowRevision = 'physics-v2-physics-theorem';
 export default { stages, batches, alphaGroups, workflowRevision };

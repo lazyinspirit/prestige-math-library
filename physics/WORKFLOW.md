@@ -37,7 +37,7 @@ mathematical boundary, relation resolution, DAG, and class-specific structure.
 Steps 1–2 validate the plan; later stages validate authored content. Class-specific
 item contracts and judge instructions distinguish source reviews from proofs.
 Proof layout may have zero steps only when every scoped item is explicitly
-nonproof; it cannot waive missing proofs for physical theorems or thought experiments.
+nonproof; it cannot waive missing proofs for physics theorems or thought experiments.
 
 Use the same pause/resume/status/retry controls through the physics entrypoint.
 Outside the authorized Step-7 loop, gate failures remain owner-held. Publication
@@ -50,8 +50,9 @@ Website integration and publication of the physics view are separate work.
 This workflow builds and verifies physics content without altering math behavior.
 
 Physics worker prompts require reading ../PHYSICS-CONTENT-MODEL.md, including
-the statistical-evidence and double-slit section. Stateless judges receive that
-section directly in their context. Experiment contracts require a
+the statistical-evidence and double-slit section. Stateless judges receive the
+concise physics agent instructions, including the EM and double-slit examples,
+directly in their context. Experiment contracts require a
 statistical_inference review; qualitative sources must remain qualitative.
 
 Imports also pin the mathematics library's existing B-leaf legacy policy.
@@ -59,3 +60,14 @@ Nonlogical links in imported mathematical prose may refer back to unpublished
 mathematical context in the original library; those records are not imported as
 logical suppliers. New physics items must resolve their own references normally,
 and unpublished mathematical context cannot satisfy a physics prerequisite.
+
+Physics agents must also follow the mathematical-rigor and explicit-definitions
+section of ../PHYSICS-CONTENT-MODEL.md. Every worker brief includes this instruction;
+stateless physical judges receive its concise requirements directly. Define technical notions
+using the appropriate mathematical structures and supply missing prerequisites
+before accepting their consumers.
+
+Physics prompt templates target at most 500 words each. Longer role duties live
+in required `agent-reference/` files linked from the corresponding prompts.
+Generated assignments and evidence/source bundles are separate from this template
+limit; preserve their complete scope and contracts.

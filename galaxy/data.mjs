@@ -3,6 +3,7 @@ import { createRequire } from 'node:module';
 import { join, relative } from 'node:path';
 import { createHash } from 'node:crypto';
 import { downstreamCounts } from './dependency-counts.mjs';
+import { mathematicalItems } from './math-boundary.mjs';
 import { REPO, yamlCandidates } from '../tools/paths.mjs';
 
 const require = createRequire(import.meta.url);
@@ -15,7 +16,7 @@ const list = value => Array.isArray(value) ? value.filter(x => typeof x === 'str
 
 /** Snapshot exactly the published item census; never alter content or infer proof edges. */
 export async function loadGraph(root = REPO, publishedIds = null, cache = null) {
-  const items = [];
+  let items = [];
   const hashes = [], seen = new Set();
   const read = async path => {
     seen.add(path);
@@ -27,7 +28,7 @@ export async function loadGraph(root = REPO, publishedIds = null, cache = null) 
       const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
       if (!match && record?.fm.status === 'published') throw new Error(`Incomplete published header: ${path}`);
       const parsed = match ? parse(match[1]) ?? {} : {};
-      const fm = Object.fromEntries(['id', 'title', 'status', 'kind', 'deps', 'aliases', 'items', 'examples', 'landmark']
+      const fm = Object.fromEntries(['id', 'title', 'status', 'kind', 'domain', 'library', 'deps', 'justified_by', 'forward_refs', 'aliases', 'items', 'examples', 'landmark']
         .filter(key => key in parsed).map(key => [key, parsed[key]]));
       record = { stamp, fm, hash: createHash('sha256').update(raw).digest('hex') };
       cache?.set(path, record);
@@ -44,8 +45,9 @@ export async function loadGraph(root = REPO, publishedIds = null, cache = null) 
       const fm = await read(join(root, 'items', file));
       return { ...fm, id: fm.id ?? file.slice(0, -3) };
     }));
-    items.push(...batch.filter(fm => fm.status === 'published' && (!publishedIds || publishedIds.has(fm.id))));
+    items.push(...batch);
   }
+  items = mathematicalItems(items).filter(item => item.status === 'published' && (!publishedIds || publishedIds.has(item.id)));
   if (publishedIds) {
     const loaded = new Set(items.map(item => item.id));
     const missing = [...publishedIds].filter(id => !loaded.has(id));
@@ -64,11 +66,12 @@ export async function loadGraph(root = REPO, publishedIds = null, cache = null) 
       if (!entry.name.endsWith('.md')) continue;
       if (entry.name === '_category.md' && parts.length === 1) {
         const fm = await read(path);
-        categories.push({ id: parts[0], title: fm.title ?? parts[0] });
+        if (fm.library !== 'physics') categories.push({ id: parts[0], title: fm.title ?? parts[0] });
       }
       if (entry.name.startsWith('_')) continue;
       const page = await read(path);
-      if (page.status !== 'published') continue;
+      const category = parts.length ? await read(join(root, 'library', parts[0], '_category.md')).catch(() => ({})) : {};
+      if (page.status !== 'published' || page.library === 'physics' || category.library === 'physics') continue;
       for (const id of [...list(page.items), ...list(page.examples)]) {
         const i = resolve(id);
         if (i !== undefined) memberships[i].add(parts[0] ?? 'unassigned');

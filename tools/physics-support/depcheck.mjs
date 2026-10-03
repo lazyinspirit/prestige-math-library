@@ -64,7 +64,7 @@ const PREFIX_OF_KIND = {
   definition: 'def', theorem: 'thm', lemma: 'lem', proposition: 'prop',
   corollary: 'cor', example: 'ex', counterexample: 'cex',
   'false-statement': 'fs', remark: 'rem',
-  postulate: 'post', 'physical-theorem': 'pthm', experiment: 'exp', 'thought-experiment': 'texp',
+  postulate: 'post', 'physics-theorem': 'pthm', experiment: 'exp', 'thought-experiment': 'texp',
 };
 const AUTHORSHIP_VALUES = new Set(['ai-generated', 'ai-altered', 'literature-derived']);
 const PROOF_PROVENANCE_VALUES = new Set([...AUTHORSHIP_VALUES, 'not-supplied', 'not-applicable']);

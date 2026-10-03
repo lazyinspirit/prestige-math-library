@@ -4,9 +4,9 @@ import { join, basename } from 'node:path';
 import { parseFrontmatter, referenceUrls } from './content-policy-lib.mjs';
 import { splitFrontmatter, sectionText } from './facts-block.mjs';
 
-export const PHYSICS_PREFIXES = Object.freeze({ postulate: 'post', 'physical-theorem': 'pthm', experiment: 'exp', 'thought-experiment': 'texp' });
+export const PHYSICS_PREFIXES = Object.freeze({ postulate: 'post', 'physics-theorem': 'pthm', experiment: 'exp', 'thought-experiment': 'texp' });
 export const PHYSICS_KINDS = new Set(Object.keys(PHYSICS_PREFIXES));
-export const PHYSICAL_PROOF_KINDS = new Set(['physical-theorem', 'thought-experiment']);
+export const PHYSICAL_PROOF_KINDS = new Set(['physics-theorem', 'thought-experiment']);
 export const NONPROOF_KINDS = new Set(['postulate', 'experiment']);
 export const MATH_PREFIXES = Object.freeze({ definition: 'def', theorem: 'thm', lemma: 'lem', proposition: 'prop', corollary: 'cor', example: 'ex', counterexample: 'cex', 'false-statement': 'fs', remark: 'rem' });
 export const PREFIXES = { ...MATH_PREFIXES, ...PHYSICS_PREFIXES };
@@ -48,7 +48,7 @@ export function validatePhysicsContent({ items, pages = [], importedIds = new Se
     if (!['mathematics', 'physics'].includes(d)) error('domain-required', item.id, 'domain must be mathematics or physics; only recorded imports may omit it');
     if (!PREFIXES[item.kind] || !item.id?.startsWith(`${PREFIXES[item.kind]}-`)) error('kind-prefix', item.id, `invalid kind or prefix: ${item.kind}`);
     if (PHYSICS_KINDS.has(item.kind) && d !== 'physics') error('physical-kind-domain', item.id, `${item.kind} requires domain: physics`);
-    if (['theorem', 'lemma', 'proposition', 'corollary'].includes(item.kind) && d !== 'mathematics') error('mathematical-kind-domain', item.id, 'use physical-theorem or thought-experiment for physical conclusions');
+    if (['theorem', 'lemma', 'proposition', 'corollary'].includes(item.kind) && d !== 'mathematics') error('mathematical-kind-domain', item.id, 'use physics-theorem or thought-experiment for physical conclusions');
     for (const field of ['deps', 'justified_by', 'forward_refs', 'external_refs']) {
       if (item[field] !== undefined && !strings(item[field])) { error('edge-shape', item.id, `${field} must be an array of ids`); continue; }
       for (const id of item[field] ?? []) {
@@ -108,7 +108,7 @@ export function validatePhysicsContent({ items, pages = [], importedIds = new Se
     if (PHYSICAL_PROOF_KINDS.has(item.kind)) {
       if (!sectionText(item.body, 'Statement').trim() || !sectionText(item.body, 'Proof').trim() || !text(item.proof_strategy)) error('physical-proof', item.id, 'require Statement, Proof, and proof_strategy');
       if (['not-applicable', 'not-supplied', undefined].includes(item.provenance?.proof)) error('physical-proof-provenance', item.id, 'physical conclusions require proof provenance');
-      if (item.proved_here === false) error('physical-proof-omitted', item.id, 'physical theorem and thought experiment must have complete arguments');
+      if (item.proved_here === false) error('physical-proof-omitted', item.id, 'physics theorem and thought experiment must have complete arguments');
       if (item.status === 'published' && !item.verification?.audited && !object(item.verification?.verified)) error('physical-publication', item.id, 'publication requires proof audit');
     }
   }
