@@ -311,6 +311,20 @@ carriers and ID, as for the existing exact ball-lemma branch. This records
 owner provenance; it does not create native audit evidence or certify the
 source merely from file presence.
 
+When a later native Step-7 repair changes this exact graph lemma's proof and
+dependencies, its closed Step-5 owner receipt remains historical origin evidence.
+Provenance loading may validate that receipt against the frozen Step-5 closure,
+sealed post-5a item/manifest/contract hashes, and the identical Step-7 starting
+boundary. It also requires the original owner approval, hashed source evidence,
+per-item checks and direct-consumer guards, plus a genuine hash-bound native
+Step-7 adjudication/repair and certificate matching the current item. Only the
+obsolete dependency projection is read historically; current item/manifest
+dependency and source mirrors must still agree. Original Step-3 provenance and
+historical uncertainty remain unchanged. Initial Step-5 owner bootstrapping is
+still checked against live carriers; this later provenance path cannot create an
+origin, accept a stale current certification, rewrite a closed receipt, or replace
+current proof review and normal gates.
+
 ## Scoped closeout with unrelated work present
 
 `tools/run-commit.mjs` retains its existing whole-tree behavior for runs without

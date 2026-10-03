@@ -136,7 +136,105 @@ function ownerEvidenceTextForCurrentCarriers(root, run, step, id, hashes) {
   } catch { return ''; }
 }
 
-function ownerRecertification(root, run, step, id, hashes, authorResult, basis = null) {
+// The exact graph review is an origin attestation after Step 5 closes. A
+// subsequent, certified native Step-7 proof/dependency repair must not make us
+// rerun that historical bootstrap against the new manifest. The frozen closure
+// and next-stage boundary authenticate the old carriers; the native certificate
+// separately authenticates the current item. This is not a new bootstrap.
+function closedStep5GraphBootstrap(root, run, id, hashes, receipt, evidenceText) {
+  if (id !== 'lem-smooth-euclidean-hypersurface-graph-and-localization'
+    || receipt.basis !== 'initial-step5-current-graph-lemma-manifest-review'
+    || receipt.historical_delta_unknown !== true) return null;
+  try {
+    const closure = read(join(root, 'research', `${run}-step5-closure.json`));
+    const closedAt = Date.parse(closure.closed_at), attestedAt = Date.parse(receipt.at);
+    const closeResult = read(join(root, 'research', `${run}-dispatch`, 'tool-step5-close.result.json'));
+    if (closure.version !== 2 || closure.run !== run || closure.status !== 'closed'
+      || !Number.isFinite(closedAt) || !Number.isFinite(attestedAt) || attestedAt > closedAt
+      || closure.final_item_hashes?.[id] !== hashes.guard_sha256
+      || closeResult.run !== run || closeResult.role !== 'tool' || closeResult.label !== 'step5-close'
+      || closeResult.ok !== true || closeResult.written_by !== 'autopilot'
+      || !Array.isArray(closeResult.covers) || !closeResult.covers.includes('all')
+      || !Number.isFinite(Date.parse(closeResult.ended_at))
+      || Date.parse(closeResult.ended_at) < closedAt) return null;
+    const artifacts = Object.entries(closure.artifacts ?? {});
+    if (!artifacts.length || artifacts.some(([path, expected]) =>
+      !/^[a-f0-9]{64}$/.test(expected ?? '')
+      || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
+    const boundary = stageBaseline(root, run, 7), before = boundary.item_carriers?.[id];
+    if (!before || !Number.isFinite(Date.parse(boundary.at)) || Date.parse(boundary.at) < closedAt
+      || CARRIER_KEYS.some(key => before[key] !== hashes[key])) return null;
+    const frozenPath = `research/${run}-step5-hash-${safe(String(before.batch))}-post-5a.json`;
+    if (!closure.artifacts[frozenPath]) return null;
+    const frozen = read(researchFile(root, frozenPath)), carrier = frozen.hashes?.[id];
+    if (frozen.run !== run || String(frozen.batch) !== String(before.batch)
+      || frozen.label !== 'post-5a' || !carrier
+      || carrier.item_sha256 !== hashes.item_file_sha256
+      || carrier.manifest_sha256 !== hashes.manifest_sha256
+      || carrier.contract_sha256 !== hashes.contract_sha256) return null;
+    const decisionsPath = `research/${run}-alpha-batch-${safe(String(before.batch))}-5a-decisions.json`;
+    if (!closure.artifacts[decisionsPath]) return null;
+    const decisionsDocument = read(researchFile(root, decisionsPath));
+    const decisions = Array.isArray(decisionsDocument) ? decisionsDocument : decisionsDocument.decisions;
+    if (!Array.isArray(decisions) || !decisions.some(row => row.id === id
+      && row.subject_sha256 === hashes.step5_subject_sha256
+      && row.historical_delta_unknown === true && row.change_kind === 'current_content_review'
+      && row.verdict === 'reviewed_no_defect')) return null;
+    const certificate = read(join(root, 'research', `${run}-step7-v2`, 'certification.json'));
+    const { sha256, ...payload } = certificate;
+    const item = certificate.items?.find(row => row.id === id);
+    const text = readFileSync(join(root, 'items', `${safe(id)}.md`), 'utf8');
+    if (certificate.version !== 2 || certificate.run !== run || sha256 !== sha(JSON.stringify(payload))
+      || !item || item.guard_sha256 !== itemHashGuard(text)
+      || item.item_sha256 !== itemHashJudge(text) || item.guard_sha256 === hashes.guard_sha256)
+      return null;
+    const nativeEvidence = Object.entries(certificate.evidence ?? {});
+    if (!nativeEvidence.length || nativeEvidence.some(([path, expected]) =>
+      !/^[a-f0-9]{64}$/.test(expected ?? '')
+      || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
+    const nativeRepair = nativeEvidence.some(([path]) => {
+      if (!new RegExp(`/${run}-step7-v2/step7-v2-(initial|repeat)-r[1-9]\\d*-u[a-zA-Z0-9_-]+\\.json$`)
+        .test(resolve(root, path))) return false;
+      const report = read(researchFile(root, path));
+      const packPath = join(root, 'research', `${run}-step7-v2`, `${report.phase}-${report.round}.json`);
+      const dispatchPath = join(root, 'research', `${run}-dispatch`,
+        `alpha-adjudicate-step7-v2-${report.phase}-r${report.round}-u${report.unit}.result.json`);
+      const bound = file => nativeEvidence.some(([path, expected]) =>
+        resolve(root, path) === resolve(file) && expected === sha(readFileSync(file)));
+      if (report.run !== run || !['initial', 'repeat'].includes(report.phase)
+        || !Number.isInteger(report.round) || report.round < 1
+        || !bound(packPath) || !bound(dispatchPath)) return false;
+      const pack = read(packPath), dispatch = read(dispatchPath);
+      return pack.run === run && pack.phase === report.phase && pack.round === report.round
+        && pack.before?.[id] === hashes.guard_sha256
+        && dispatch.run === run && authorResultAllowed(7, dispatch)
+        && report.decisions?.some(decision => decision.id === id
+          && ['confirmed_fatal', 'confirmed_nonfatal'].includes(decision.outcome)
+          && decision.uncertain === false && pack.assignments?.[String(report.unit)]?.some(tuple =>
+            tuple.id === id && tuple.model === decision.model
+            && tuple.context_sha256 === decision.context_sha256))
+        && report.reviews?.some(review => review.id === id && review.disposition === 'repaired'
+          && review.post_sha256 === item.guard_sha256 && review.uncertain === false);
+    });
+    if (!nativeRepair) return null;
+    const evidence = step5ManifestRepairEvidence(evidenceText);
+    if (!evidence?.current_manifest_entry
+      || hashValue(evidence.current_manifest_entry) !== hashes.manifest_sha256) return null;
+    const live = inventory(root, run).find(row => row.id === id);
+    if (!live || live.page !== before.page || live.batch !== String(before.batch)
+      || !dependencyMetadataMirrorsItem(root, id, live.manifest_entry)
+      || !sourceMetadataMirrorsItem(root, id, live.manifest_entry)) return null;
+    // The old projection comes from hash-bound review evidence, never from a
+    // reconstructed item. Source/approval/check/direct-consumer guards remain
+    // unchanged; only its obsolete dependency list is read as historical.
+    return bootstrapStep5Author(root, run, id,
+      { ...live, manifest_entry: evidence.current_manifest_entry }, hashes, evidenceText,
+      { closedGraphOrigin: true });
+  } catch { return null; }
+}
+
+function ownerRecertification(root, run, step, id, hashes, authorResult, basis = null,
+  { historical = false } = {}) {
   const path = ownerRecertificationPath(root, run, step, id, hashes);
   if (!existsSync(path)) return null;
   const bytes = readFileSync(path, 'utf8');
@@ -147,7 +245,9 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
     ? readFileSync(evidencePath, 'utf8') : '';
   const liveRow = step === 5 ? inventory(root, run).find(row => row.id === id) : null;
   const step5Bootstrap = step === 5 && receipt.basis !== undefined && liveRow
-    ? bootstrapStep5Author(root, run, id, liveRow, hashes, evidenceText) : null;
+    ? bootstrapStep5Author(root, run, id, liveRow, hashes, evidenceText)
+      ?? (historical ? closedStep5GraphBootstrap(root, run, id, hashes, receipt, evidenceText) : null)
+    : null;
   if (receipt.version !== 1 || receipt.policy !== OWNER_RECERTIFICATION_POLICY
     || receipt.run !== run || receipt.step !== Number(step) || receipt.id !== id
     || receipt.owner !== true || (authorResult ? receipt.author_result !== authorResult
@@ -222,7 +322,8 @@ function bootstrapStep7Author(root, run, id, row, hashes) {
 // provenance. A successful Step-5 result supplies stage/batch context; the
 // hash-bound owner receipt, not that result, attests either late repair.
 const step5BootstrapContext = new Map();
-function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '') {
+function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '',
+  { closedGraphOrigin = false } = {}) {
   const key = `${root}\0${run}`;
   if (!step5BootstrapContext.has(key)) {
     step5BootstrapContext.set(key, {
@@ -247,7 +348,8 @@ function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '') {
     && before.manifest_sha256 === hashes.manifest_sha256;
   const manifestRepair = before.judge_sha256 !== hashes.judge_sha256
     && before.manifest_sha256 !== hashes.manifest_sha256
-    ? step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText) : null;
+    ? step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText,
+      { closedGraphOrigin }) : null;
   if (!contractOnly && !itemRepair && !manifestRepair) return null;
   const baselineAt = Date.parse(baseline.at);
   const eligible = context.authors.filter(author => {
@@ -340,7 +442,8 @@ function dependencyMetadataMirrorsItem(root, id, currentEntry) {
 // explicitly owner-authorized current-definition review is a separate branch:
 // it preserves the unknown historical delta and binds the current projection,
 // actual source evidence and direct consumers without inventing a preimage.
-function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText) {
+function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText,
+  { closedGraphOrigin = false } = {}) {
   const evidence = step5ManifestRepairEvidence(evidenceText);
   if (!evidence || evidence.version !== 1 || evidence.policy !== 'step5-manifest-repair-evidence-v1'
     || evidence.run !== run || evidence.step !== 5 || evidence.id !== id
@@ -402,7 +505,8 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       || !sameCanonical(evidence.review.direct_consumers, directConsumers)
       || !currentEntry || hashValue(currentEntry) !== hashes.manifest_sha256
       || !sameCanonical(currentEntry, row.manifest_entry)
-      || !sameCanonical(currentEntry.deps ?? [], fm.deps ?? [])
+      || (closedGraphOrigin ? !graphLemmaReview
+        : !sameCanonical(currentEntry.deps ?? [], fm.deps ?? []))
       || !sameCanonical(currentEntry.sources, fm.sources)
       || !Array.isArray(evidence.sources) || !evidence.sources.length) return null;
     const texts = [];
@@ -728,7 +832,8 @@ function provenanceRows(root, run, step, cache = new Map()) {
         throw Error(`${row.id}: invalid owner recertification provenance`);
     }
     if (step !== 3 && row.owner_recertification !== undefined) {
-      const marker = ownerRecertification(root, run, step, row.id, row, row.author_result);
+      const marker = ownerRecertification(root, run, step, row.id, row, row.author_result,
+        null, { historical: true });
       if (!marker || marker.path !== row.owner_recertification.path
         || marker.sha256 !== row.owner_recertification.sha256)
         throw Error(`${row.id}: invalid owner recertification provenance`);
