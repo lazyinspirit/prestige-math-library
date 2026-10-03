@@ -1158,10 +1158,42 @@ if (command === 'check') {
             && ['confirmed_fatal', 'confirmed_nonfatal'].includes(foreign.verdict)
             && hashValue(foreign.target.producer_pre_snapshot?.carrier) === hashValue({ producer_batch: foreign.target.producer_batch,
               ...readJson(hashPath(foreign.target.producer_batch, 'pre'), 'producer pre-reader snapshot').hashes?.[foreign.target.id] });
-          if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
+          // The refuter can independently flag the reader's post-reader
+          // carrier, then Alpha amends that same touched item. Keep both exact
+          // obligations for the one defect, in either decision iteration order.
+          const currentDecision = { ...decision, target };
+          const refuted = decision.route === 'flagged' ? currentDecision : prior?.route === 'flagged' ? prior : null;
+          const repairedDecision = refuted === currentDecision ? prior : currentDecision;
+          const refuterMatch = /^refuter:([1-9]\d*):([1-9]\d*)$/.exec(refuted?.obligation ?? '');
+          let sharedPostReaderRepair = false;
+          if (prior && prior.id === decision.id && explicitShared && refuterMatch
+            && ['confirmed_fatal', 'confirmed_nonfatal'].includes(refuted.verdict)
+            && repairedDecision?.route === 'touched'
+            && ['accepted_repair', 'amended_repair'].includes(repairedDecision.verdict)
+            && repairedDecision.repair_confidence === 1
+            && repairedDecision.target?.batch === refuterMatch[1]
+            && repairedDecision.obligation === `touched:${refuterMatch[1]}:${decision.id}`) {
+            const refuterBatch = refuterMatch[1];
+            const actualScope = scopes[refuterBatch] ?? readJson(scopePath(refuterBatch), 'refuter scope');
+            const actualFinding = actualScope.refuter_findings?.find(row => row.obligation === refuted.obligation);
+            const { route: _route, ...findingTarget } = refuted.target ?? {};
+            const postReader = readJson(hashPath(refuterBatch, 'post'), 'post-reader snapshot');
+            const observed = postReader.hashes?.[decision.id];
+            sharedPostReaderRepair = actualScope.version === 2 && actualScope.run === run
+              && String(actualScope.batch) === refuterBatch
+              && actualFinding?.id === decision.id
+              && hashValue(actualFinding) === hashValue(findingTarget)
+              && hashSnapshotErrors(postReader, refuterBatch, 'post').length === 0
+              && postReader.manifest.includes(decision.id)
+              && ['item_sha256', 'contract_sha256', 'manifest_sha256']
+                .every(key => /^[a-f0-9]{64}$/.test(observed?.[key] ?? ''))
+              && actualFinding.observed_sha256 === hashValue(observed);
+          }
+          if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair && !sharedPostReaderRepair) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
           if (!prior) referenced.set(defectId, {
             obligation: decision.obligation, id: decision.id, route: decision.route, verdict: decision.verdict, target,
             same_defect_as: decision.same_defect_as, same_defect_evidence: decision.same_defect_evidence,
+            repair_confidence: decision.repair_confidence,
           });
           const row = mine.find((candidate) => candidate.defect_id === defectId);
           if (!row) { error('ledger-ref-missing', `[${decision.id}] ${decision.obligation} names absent ${defectId}`); continue; }

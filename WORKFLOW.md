@@ -238,6 +238,37 @@ producer and immutable baseline before permitting one ledger row to serve both
 obligations. Stamping binds decisions to the current producer item, contract and
 manifest, and Step5 closure freezes the existing routing and hash artifacts.
 
+For a same-batch post-reader defect, a touched accepted/amended repair and its
+actual `refuter:BATCH:K` finding may reference the same closed ledger row.
+Both obligations remain required. The repair must have confidence one and the
+exact same item and batch; the refuter verdict must confirm fatal or nonfatal.
+An explicit `same_defect_as` and at least 40 characters of concrete
+`same_defect_evidence` must link the two decisions. The gate binds the finding
+to its exact scope row and verifies its observed composite carrier against the
+immutable post-reader snapshot. Existing current carrier, severity, repaired
+disposition and ledger checks still apply, in either decision iteration order.
+This is not a general duplicate-ledger exemption or source acceptance.
+
+### Carried Step3 graph prerequisite evidence
+
+The exact Step3-origin item
+`lem-smooth-euclidean-hypersurface-graph-and-localization` may use a
+`current-graph-lemma-manifest-review` evidence branch when its original
+manifest projection cannot be recovered. This remains a carried-origin
+refresh: the immutable Step3 origin, Step5 candidate-specific delta and real
+successful batch dispatch context are still required. Original commissioned
+items and new Step5 creation cannot use it.
+
+Evidence retains `historical_delta_unknown: true`, every current carrier
+hash, explicit current proof/supplier/direct-consumer review, exact
+current source/dependency mirrors and hashed source evidence. The owner
+approval link must bind the current run's historical checkpoint, its exact
+hash and the approved obligation for this item. Per-item successful precheck,
+rendercheck and strict proof-contract checks must bind the same current
+carriers and ID, as for the existing exact ball-lemma branch. This records
+owner provenance; it does not create native audit evidence or certify the
+source merely from file presence.
+
 ## Scoped closeout with unrelated work present
 
 `tools/run-commit.mjs` retains its existing whole-tree behavior for runs without
