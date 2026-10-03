@@ -12,6 +12,7 @@ import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { protectedEntryHash, runScope, sha256, splitFrontmatter } from './step9-lib.mjs';
 import { resolveLineup } from './models.mjs';
+import { parseFrontmatter } from './content-policy-lib.mjs';
 import { TERMINAL_REJUDGE_ROUNDS } from './step7-terminal-resolution.mjs';
 import { verifyProofLayout, proofLayoutPath } from './proof-layout-receipt.mjs';
 
@@ -98,7 +99,11 @@ function buildEvidence() {
   paths.proof_layout = proofLayoutPath(run, root);
   const items = scope.items.map((item) => {
     const { frontmatter } = splitFrontmatter(readFileSync(join(root, item.file), 'utf8'));
-    return { ...item, kind: frontmatter.match(/^kind:\s*(\S+)\s*$/m)?.[1] ?? 'unknown' };
+    let metadata;
+    try { metadata = parseFrontmatter(frontmatter); }
+    catch (cause) { die(`${item.file}: invalid frontmatter (${cause.message})`); }
+    if (typeof metadata.kind !== 'string' || !metadata.kind.trim()) die(`${item.file}: kind must be a nonempty YAML string`);
+    return { ...item, kind: metadata.kind };
   });
   const deferralPaths = {
     pairs: join(research, `${run}-deferred-pairs.json`),

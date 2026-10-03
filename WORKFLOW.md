@@ -52,6 +52,8 @@
   accepting both block and flow mappings. Scoped malformed frontmatter, missing
   components, non-string values and values outside the schema enums remain errors;
   AI-generated statements remain ineligible as future-build dependency targets.
+  Owner-report kind counts also decode YAML scalars, so quoted and plain
+  spellings of the same kind contribute to one count.
   A checker correction that leaves item and mathematical evidence bytes unchanged
   needs the ordinary failed-gate retry, without rewriting items or reopening the
   Step-8 suffix merely to restyle equivalent YAML.
