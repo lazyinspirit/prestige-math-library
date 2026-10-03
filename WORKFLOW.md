@@ -197,6 +197,25 @@ Restart the controller when selecting the run-local stage table.
   receipts record both profiles. Remove it after recovery. Restart the controller for
   configuration or imported registry changes; stage module changes hot-reload.
 
+## Step 5b impact windows
+
+The lead task and engine gates use `--direct-boundary` for both impact windows:
+`pre-author -> post-5a` and `post-5a -> current`. The tool includes direct logical
+consumers and direct citations of every changed public interface. Each
+independently changed consumer interface is also a source event. Review the
+actual consumed clause on current carriers; propagate farther when a necessary
+consumer repair changes that consumer's own Statement or Definition, and
+recompute the live window after that change. An unchanged consumer interface
+ends its propagation path.
+
+The active lead owns reviews and receipts. A receipt computed without the flag
+has a different scope and cannot satisfy the direct-boundary gate. Preserve
+completed mathematical evidence and genuine unresolved defects while preparing
+the exact current receipt; recomputed graph counts do not certify source claims,
+replace current-hash review, or erase independently changed consumer obligations.
+Both windows still need their reviewer and every required justified disposition,
+and the normal impact and closure gates remain unchanged.
+
 ## Step 5 findings in another current-run batch
 
 A reader may report a draft supplier outside its assigned batch using
