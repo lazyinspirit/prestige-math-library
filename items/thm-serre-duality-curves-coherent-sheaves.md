@@ -52,12 +52,7 @@ sources:
     - title: "MIT 18.725 Algebraic Geometry (Fall 2015) course notes, Lectures 24-25"
       url: "https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf"
 verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+  repair: research/frontier-38-owner-30-published-format-surface-thm-serre-duality-curves-coherent-sheaves-receipt.json
 ---
 
 ## Statement
@@ -126,22 +121,15 @@ first isomorphism is the vector-bundle duality of
 
 3.1 The evaluation map from all global sections is surjective by [F6]. Every global section is a $k$-linear combination of the $s_i$, with $k$ acting through $\mathcal O_C$; hence at each stalk the values of the $s_i$ generate $\mathcal F(n)$ over $\mathcal O_C$. Thus $\mathcal O_C^{\oplus N}\twoheadrightarrow\mathcal F(n)$, and after twisting by $L^{-n}$ there is a surjection $p:\mathcal E:=(L^{-n})^{\oplus N}\twoheadrightarrow\mathcal F$ with $\mathcal E$ finite locally free. [F6, step 2.1]
 
-4.1 Let $\mathcal E':=\ker p$. It is coherent by [F5], and as a subsheaf of $\mathcal E$ it is torsion-free; [F4] makes it finite locally free. We obtain a two-term finite locally free resolution for every coherent $\mathcal F$, including torsion sheaves:
-$$0\longrightarrow\mathcal E'\xrightarrow{\jmath}\mathcal E\xrightarrow{p}\mathcal F\longrightarrow0.$$
-[F4, F5, step 3.1]
+4.1 Let $\mathcal E':=\ker p$. It is coherent by [F5], and as a subsheaf of $\mathcal E$ it is torsion-free; [F4] makes it finite locally free. We obtain a two-term finite locally free resolution for every coherent $\mathcal F$, including torsion sheaves: $$0\longrightarrow\mathcal E'\xrightarrow{\jmath}\mathcal E\xrightarrow{p}\mathcal F\longrightarrow0.$$ [F4, F5, step 3.1]
 
-5.1 By [F9] and [F8], this short exact sequence gives the cohomology sequence below; it is exact at the final term because $H^2(C,\mathcal E')=0$. Every term is finite-dimensional by [F7]:
-$$0\to H^0(E')\to H^0(E)\to H^0(F)\xrightarrow{\delta_H}H^1(E')\to H^1(E)\to H^1(F)\to0,$$
-where $H^q(G)$ abbreviates $H^q(C,\mathcal G)$.
-[F7, F8, F9, step 4.1]
+5.1 By [F9] and [F8], this short exact sequence gives the cohomology sequence below; it is exact at the final term because $H^2(C,\mathcal E')=0$. Every term is finite-dimensional by [F7]: $$0\to H^0(E')\to H^0(E)\to H^0(F)\xrightarrow{\delta_H}H^1(E')\to H^1(E)\to H^1(F)\to0,$$ where $H^q(G)$ abbreviates $H^q(C,\mathcal G)$. [F7, F8, F9, step 4.1]
 
 5.2 With $\mathcal G=\omega_C$, the exact first-variable Ext sequence supplied by [F10] is $0\to\operatorname{Hom}(F,\omega_C)\to\operatorname{Hom}(E,\omega_C)\to\operatorname{Hom}(E',\omega_C)\xrightarrow{\delta_{\rm Ext}}\operatorname{Ext}^1(F,\omega_C)\to\operatorname{Ext}^1(E,\omega_C)\to\operatorname{Ext}^1(E',\omega_C)$. [F10, step 4.1]
 
 6.1 Dualizing the finite-dimensional cohomology tail $H^1(E')\to H^1(E)\to H^1(F)\to0$ gives $0\to H^1(F)^\ast\to H^1(E)^\ast\to H^1(E')^\ast$. The Ext sequence in 5.2 identifies $\operatorname{Hom}(F,\omega_C)$ with the kernel of $\operatorname{Hom}(E,\omega_C)\to\operatorname{Hom}(E',\omega_C)$. Naturality of $\Phi$ for both $p:E\to F$ and $\jmath:E'\to E$ identifies this kernel map with the dual cohomology kernel map; since $\Phi_E$ and $\Phi_{E'}$ are isomorphisms by step 1.4, the induced map on kernels, precisely $\Phi_F$, is an isomorphism. [F7, F10, step 1.4, step 5.1, step 5.2]
 
-6.2 Dualizing the cohomology sequence of 5.1 gives the exact row $H^1(E)^\ast\to H^1(E')^\ast\to H^0(F)^\ast\to H^0(E)^\ast\to H^0(E')^\ast$. Together with 5.2 the five-lemma diagram is the following; its vertical maps, in order, are $\Phi_E,\Phi_{E'},\Psi_F,\Psi_E,\Psi_{E'}$: [F7, F10, step 1.4, step 1.5, step 2.2, step 5.1, step 5.2]
-$$\begin{array}{ccccccccc}\operatorname{Hom}(E,\omega_C)&\to&\operatorname{Hom}(E',\omega_C)&\to&\operatorname{Ext}^1(F,\omega_C)&\to&\operatorname{Ext}^1(E,\omega_C)&\to&\operatorname{Ext}^1(E',\omega_C)\\\downarrow\Phi_E&&\downarrow\Phi_{E'}&&\downarrow\Psi_F&&\downarrow\Psi_E&&\downarrow\Psi_{E'}\\H^1(E)^\ast&\to&H^1(E')^\ast&\to&H^0(F)^\ast&\to&H^0(E)^\ast&\to&H^0(E')^\ast.\end{array}$$
-The square over $\operatorname{Hom}(E)\to\operatorname{Hom}(E')$ commutes by naturality of $\Phi$, and the squares over $\operatorname{Ext}^1(F)\to\operatorname{Ext}^1(E)\to\operatorname{Ext}^1(E')$ commute by naturality of $\Psi$. [F10, step 1.4, step 1.5]
+6.2 Dualizing the cohomology sequence of 5.1 gives the exact row $H^1(E)^\ast\to H^1(E')^\ast\to H^0(F)^\ast\to H^0(E)^\ast\to H^0(E')^\ast$. Together with 5.2 the five-lemma diagram is the following; its vertical maps, in order, are $\Phi_E,\Phi_{E'},\Psi_F,\Psi_E,\Psi_{E'}$: $$\begin{array}{ccccccccc}\operatorname{Hom}(E,\omega_C)&\to&\operatorname{Hom}(E',\omega_C)&\to&\operatorname{Ext}^1(F,\omega_C)&\to&\operatorname{Ext}^1(E,\omega_C)&\to&\operatorname{Ext}^1(E',\omega_C)\\\downarrow\Phi_E&&\downarrow\Phi_{E'}&&\downarrow\Psi_F&&\downarrow\Psi_E&&\downarrow\Psi_{E'}\\H^1(E)^\ast&\to&H^1(E')^\ast&\to&H^0(F)^\ast&\to&H^0(E)^\ast&\to&H^0(E')^\ast.\end{array}$$ The square over $\operatorname{Hom}(E)\to\operatorname{Hom}(E')$ commutes by naturality of $\Phi$, and the squares over $\operatorname{Ext}^1(F)\to\operatorname{Ext}^1(E)\to\operatorname{Ext}^1(E')$ commute by naturality of $\Psi$. [F7, F10, step 1.4, step 1.5, step 2.2, step 5.1, step 5.2, F10, step 1.4, step 1.5]
 
 6.3 Let $\alpha:E'\to\omega_C$ and $s:\mathcal O_C\to F$. In the injective resolution $\omega_C\to I^\bullet$, extend $j\alpha:E'\to I^0$ to $\widetilde\alpha:E\to I^0$, with $j:\omega_C\to I^0$ the coaugmentation. The connecting class $\delta_{\rm Ext}(\alpha)$ is represented by $d^0\widetilde\alpha:E\to I^1$, which vanishes on $E'$ and factors as $c\circ p$ for a cocycle $c:F\to I^1$. The pushout $P=(\omega_C\oplus E)/\{(\alpha(e'),-\jmath(e')):e'\in E'\}$ maps to $Q_c:=\{(x,z)\in F\oplus I^0:c(x)=d^0z\}$ by $[w,e]\mapsto(p(e),j(w)+\widetilde\alpha(e))$; this is well-defined and induces the identity on kernel $\omega_C$ and quotient $F$, so its Yoneda class is the cocycle class $\delta_{\rm Ext}(\alpha)$ with positive sign. Precomposition by $s$ sends $c$ to $c\circ s$, the cocycle of the pullback extension. Under [F11], this Yoneda class maps to the cohomology boundary of $1$: for an extension $0\to G\to P_s\to\mathcal O_C\to0$, extend $G\to I^0$ to $b:P_s\to I^0$; $d^0b$ factors through $\mathcal O_C$ and represents both the injective-resolution Ext class and, since $I^\bullet$ is flasque, the cohomology boundary. Thus the comparison introduces no sign. Naturality of the cohomology long exact sequence for the pushout diagram gives $\chi_{\omega_C}(\operatorname{Ext}^1(s,\omega_C)(\delta_{\rm Ext}(\alpha)))=H^1(\alpha)(\delta_H(s))$. Equivalently, local lifts $e_i$ of $s(1)$ give differences $e_j-e_i$; in $P$ these become $[0,e_j-e_i]=[\alpha(e_j-e_i),0]$, again with positive sign. Applying $t_C$ verifies the middle square. [F9, F10, F11, step 1.3, step 5.2]
 

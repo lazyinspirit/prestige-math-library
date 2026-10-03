@@ -1,0 +1,1788 @@
+{
+  "version": 1,
+  "scope": [
+    "cor-blowup-birational-integral-scheme",
+    "lem-blowup-lowers-contact-order",
+    "lem-blowup-multiplicity-euler-characteristic-drop",
+    "lem-plane-curve-multiplicity-transform-chart",
+    "rem-blowup-does-not-mean-delete-point",
+    "thm-blowup-closed-immersion-transform-universal",
+    "thm-blowup-effective-cartier-divisor-isomorphism",
+    "thm-blowup-separates-plane-curve-tangent-directions",
+    "thm-blowup-smooth-surface-point-charts",
+    "ex-blowup-rational-map-p1"
+  ],
+  "contracts": {
+    "cor-blowup-birational-integral-scheme": {
+      "risk": "low",
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-blowup-reduced-integral-under-domain-rees",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited from the relative Proj construction\n([[def-axiom-of-choice]]). Let $X$ be an integral scheme\n([[def-integral-scheme]]) and let $\\mathcal I$ be a nonzero quasi-coherent\nideal sheaf of finite type on $X$ ([[def-quasi-coherent-ideal-sheaf]]). Then\nthe blowup $\\operatorname{Bl}_{\\mathcal I}X$ of\n[[def-blowup-scheme-along-ideal]] is integral: the affine blowup algebras\n$A[I/a]$ are domains because $A$ is a domain and $a$ is nonzero, and they glue\nalong localisations. More generally, if $X$ is reduced then\n$\\operatorname{Bl}_{\\mathcal I}X$ is reduced, because the affine blowup\nalgebras of a reduced ring are reduced.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-blowup-isomorphism-off-center",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal I$ be a quasi-coherent ideal sheaf of finite type with zero scheme $Z$ and let $\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be the blowup. Then the restriction $\\pi\\colon\\pi^{-1}(X\\smallsetminus Z)\\to X\\smallsetminus Z$ is an isomorphism of schemes, with inverse characterized by the universal property applied to the identity of $X\\smallsetminus Z$ (where the inverse image of $Z$ is empty) and to the open immersion $\\pi^{-1}(X\\smallsetminus Z)\\hookrightarrow X$. Consequently $E=\\pi^{-1}(Z)$ is the complement of this open subscheme.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-birational-morphism-schemes",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field and let $X$ and $Y$ be integral $k$-schemes of finite type\n([[def-integral-scheme]], [[def-locally-finite-type-and-finite-type-morphism]]).\nLet $\\eta_X$ and $\\eta_Y$ be their generic points\n([[def-generic-point-irreducible-closed-subset]]) and let\n$$K(X)=\\mathcal O_{X,\\eta_X},\\qquad K(Y)=\\mathcal O_{Y,\\eta_Y}$$\nbe their function fields; by [[lem-integral-finite-type-scheme-function-field]]\nthese stalks are fields and are canonically identified with the fraction fields\nof the coordinate rings of every nonempty affine open of $X$, respectively\n$Y$.\n\nA morphism of $k$-schemes $f:X\\to Y$ is **birational** when\n\n1. $f(\\eta_X)=\\eta_Y$, and\n2. the map on stalks $\\mathcal O_{Y,\\eta_Y}\\to\\mathcal O_{X,\\eta_X}$ induced by\n   $f$ ([[def-morphism-of-schemes]]) is an isomorphism.\n\nConditions (1) and (2) are the form taken by the definition of a birational\nmorphism of schemes (Stacks Project, Definition 29.51.1, tag 01RO) for integral\nschemes: for such $X$ and $Y$ the generic points $\\eta_X$ and $\\eta_Y$ are the\ngeneric points of the unique irreducible components, and the local rings at\nthem are the function fields. Thus a birational morphism identifies the\nfunction field of $Y$ with the function field of $X$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-integral-scheme",
+          "source_section": "Definition",
+          "quote": "An **integral scheme** is a nonempty scheme that is reduced and whose\nunderlying topological space is irreducible. Equivalently, it is nonempty and\nevery nonempty affine open is the spectrum of a domain. The latter criterion is\nindependent of the chosen affine open cover.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-reduction-of-scheme",
+          "source_section": "Definition",
+          "quote": "For a scheme $X$, let $\\mathcal N_X$ be the ideal sheaf whose germs are the\nnilpotent elements of the local rings of $X$; equivalently, a section lies in\n$\\mathcal N_X(U)$ when it is locally nilpotent on $U$. The **reduction**\n$X_{\\mathrm{red}}$ is the closed subscheme with the same underlying topological\nspace and structure sheaf $\\mathcal O_X/\\mathcal N_X$. On\n$\\operatorname{Spec}A$ it is $\\operatorname{Spec}(A/\\sqrt{(0)})$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "claim": "The blowup is integral by [F1], so it is irreducible with a unique generic point and is nonempty; by [F2] the morphism $\\pi$ restricts to an isomorphism $\\pi^{-1}(X\\smallsetminus Z)\\cong X\\smallsetminus Z$, and by [F4] the open $X\\smallsetminus Z$ is nonempty and dense in the irreducible space $X$. [F1, F2, F4]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "d2",
+          "claim": "Consequently the fibre of $\\pi$ over the generic point $\\eta_X$ of $X$ is a single point: $\\eta_X\\in X\\smallsetminus Z$ because $Z\\ne X$ by [F4], and over the open $X\\smallsetminus Z$ the morphism $\\pi$ is an isomorphism, so $\\pi^{-1}(\\eta_X)$ consists of one point $\\xi$. [F2, F4, step 1.1]",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "d3",
+          "claim": "If every irreducible component of $Z$ has codimension at least two in $X$, then every point of codimension at most one lies in the open $X\\smallsetminus Z$: a point of codimension at most one has closure an irreducible closed subset of dimension at most one, which cannot be contained in a component of $Z$ of codimension at least two. Since $\\pi$ is an isomorphism over $X\\smallsetminus Z$ by [F2], ",
+          "step": "2.2",
+          "inputs": [
+            "1.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d4",
+          "claim": "The point $\\xi$ is the generic point of $\\operatorname{Bl}_{\\mathcal I}X$: the blowup is irreducible by step 1.1, so it has exactly one generic point, and a point of an irreducible scheme is generic exactly when it is not contained in any proper closed subset; since $\\xi$ lies over the generic point of $X$ and $\\pi$ is an isomorphism over the dense open $X\\smallsetminus Z$, $\\xi$ is not in $E=\\pi^",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d5",
+          "claim": "Steps 1.1, 3.1 and 2.2 prove all the assertions: $\\operatorname{Bl}_{\\mathcal I}X$ is integral, $\\pi$ is an isomorphism over the nonempty dense open $X\\smallsetminus Z$, the generic point of the blowup maps to the generic point of $X$ with an isomorphism of local rings, so $\\pi$ is birational, and the codimension hypothesis puts the non-isomorphism locus in codimension at least two. [step 1.1, ste",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Z=V(I) may be empty, namely I=O_X; then X minus Z = X is nonempty and pi is the identity, so birationality and integrality hold trivially, and the hypothesis I nonzero is still satisfied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the hypothesis that I is nonzero is exactly the boundary condition that rules out Z=X; the zero ideal would give Proj of O_X[t] over X, which is not the situation claimed here."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the claim is made for one integral scheme X and an arbitrary nonzero I, with no restriction on the number of generators; a principal I and a one-point center are included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: I need not be radical or generated by a nonzerodivisor and X need not be regular; the dense open over which pi is an isomorphism is X minus Z, which may miss all of the singular locus of the centre."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The corollary has no ordered, interval or limiting parameter; there are no endpoint cases to dispose of."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the Axiom of Choice is assumed, inherited from the blowup construction, and is used only through that supplier; no further selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no 'if and only if'; integrality of the blowup and birationality of pi are asserted jointly, so there is no forward direction of a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse direction to verify: the claim is a conjunction of one-way assertions about the blowup of an integral scheme along a nonzero ideal."
+        }
+      ]
+    },
+    "lem-blowup-lowers-contact-order": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-contact-order-regular-components",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field and let $S$ be a **regular surface** over $k$: a\nNoetherian scheme of dimension $2$ that is regular at every point, so that\neach local ring $\\mathcal O_{S,p}$ is a regular local ring of dimension two\n([[def-embedding-dimension-and-regular-local-ring]],\n[[def-noetherian-ring]], [[def-dimension-noetherian-topological-space]]).\n\nLet $Y,Z\\subseteq S$ be two distinct reduced curves, that is, distinct closed\nsubschemes of pure dimension one whose local rings have no nonzero nilpotents\n([[def-reduction-of-scheme]]), let $p\\in S$ be a closed point, and let\n$I_Y,I_Z\\subseteq\\mathcal O_{S,p}$ be the ideals of the two curve germs.\nAssume:\n\n1. $Y$ and $Z$ have no common irreducible component, so that $I_Z\\mathcal O_{Y,p}\\neq0$\n   whenever $\\mathcal O_{Y,p}\\neq0$;\n2. every irreducible component of $Y$ and of $Z$ that passes through $p$ is\n   regular at $p$ (a component not passing through $p$ is unconstrained).\n\nWrite $\\mathcal O_{Y,p}:=\\mathcal O_{S,p}/I_Y$ for the local ring of the curve\n$Y$ at $p$, a one-dimensional reduced Noetherian local ring, and let\n$I_Z\\mathcal O_{Y,p}$ be the image of the ideal of $Z$. The **contact order\nof $Y$ and $Z$ at $p$** is the length\n\n$$n_p(Y,Z):=\\operatorname{length}_{\\mathcal O_{Y,p}}\\bigl(\\mathcal O_{Y,p}/I_Z\\mathcal O_{Y,p}\\bigr),$$\n\nthe number of factors of a composition series\n([[def-composition-series-and-length-of-a-module]]); the zero module has\nlength $0$. The hypotheses above are exactly what makes this length finite:\nif $p\\notin Y$ then $\\mathcal O_{Y,p}=0$; if $p\\notin Z$ then\n$I_Z\\mathcal O_{Y,p}=\\mathcal O_{Y,p}$; and if $p\\in Y\\cap Z$, then by\nhypothesis 1 the ideal $I_Z\\mathcal O_{Y,p}$ is nonzero and, since\n$\\mathcal O_{Y,p}$ is one-dimensional and reduced, it is not contained in any\nminimal prime, so $\\mathcal O_{Y,p}/I_Z\\mathcal O_{Y,p}$ is a finite-length\nmodule supported at the closed point $p$.\n\nIn the situations used in this library the curve germs are cut out by single\nequations and the definition takes the following **local-equation form**.\nSuppose $y,z\\in\\mathcal O_{S,p}$ generate $I_Y$ and $I_Z$ (with $y=1$ if\n$p\\notin Y$ and $z=1$ if $p\\notin Z$). Then\n$\\mathcal O_{Y,p}=\\mathcal O_{S,p}/(y)$ and\n$I_Z\\mathcal O_{Y,p}=z\\mathcal O_{Y,p}$, so that\n\n$$n_p(Y,Z)=\\operatorname{length}_{\\mathcal O_{Y,p}}\\bigl(\\mathcal O_{Y,p}/z\\mathcal O_{Y,p}\\bigr).$$\n\nFor the curves used in this library the germs are given by such single\nequations: they are effective Cartier data, and two presentations of one\nprincipal ideal differ by a unit\n([[def-effective-cartier-divisor]], [[lem-cartier-divisor-local-equation-equivalence]],\n[[def-cartier-divisor]]). The definition has the following properties, which\nare the conventions used by its consumers. (a) It is independent of the chosen\nlocal equations: another equation of $Y$ is $y'=uy$ with\n$u\\in\\mathcal O_{S,p}^{\\times}$, so $\\mathcal O_{S,p}/(y')=\\mathcal O_{S,p}/(y)$,\nand another equation of $Z$ is $z'=vz$ with $v$ a unit, so\n$z'\\mathcal O_{Y,p}=z\\mathcal O_{Y,p}$. (b) It is independent of which curve\nis named first, because both lengths equal the common length of\n$\\mathcal O_{S,p}/(I_Y+I_Z)$, which is finite and agrees with its length over\neither quotient. (c) $n_p(Y,Z)=1$ if and only if $Y$ and $Z$ **meet\ntransversally at $p$**, meaning $p\\in Y\\cap Z$, each of $Y$ and $Z$ is regular\nat $p$, and their tangent lines are distinct one-dimensional subspaces of the\ntwo-dimensional $k(p)$-vector space\n$\\mathfrak m_p/\\mathfrak m_p^2$. Indeed, the length is one exactly when\n$I_Z\\mathcal O_{Y,p}$ is the maximal ideal of the one-dimensional local ring\n$\\mathcal O_{Y,p}$, so that this ring is a discrete valuation ring and the\nimage of a local equation of $Z$ is a uniformizer of it; this happens exactly\nwhen $\\mathcal O_{Y,p}$ is regular and the two tangent lines are distinct.\nIn particular, if either curve has two regular branches through $p$, its local\nring at $p$ is not a domain and hence not regular, its maximal ideal is not\nprincipal, and the local contact order is at least $2$ even when each pair of\nbranches crosses with distinct tangents.\n\nThe **total contact order** of $Y$ and $Z$ is the sum of the local contact\norders over all closed points of their intersection,\n$$n(Y,Z):=\\sum_{p\\in Y\\cap Z}n_p(Y,Z).$$\nSince $Y$ and $Z$ share no irreducible component, $Y\\cap Z$ has dimension\nzero and, being a closed subscheme of the Noetherian scheme $S$, has only\nfinitely many closed points; for distinct components the total contact order\nis therefore a finite nonnegative integer. The value $1$ is reserved for a\ngenuine transversal crossing of two regular curves.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-blowup-regular-surface-closed-point-regular",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $S$ be a regular finite-type $k$-scheme of pure dimension two, let $p$ be a closed point, put $\\kappa=\\kappa(p)$ and $r=[\\kappa:k]$, and let $\\pi\\colon S'=\\operatorname{Bl}_p S\\to S$ be the blowup of $S$ at $p$ with exceptional subscheme $E$. Then $S'$ is regular of pure dimension two, $E$ is an effective Cartier divisor canonically isomorphic to $\\mathbb P^1_\\kappa$, and $\\mathcal O_E(E)=\\mathcal O_{\\mathbb P^1_\\kappa}(-1)$. For $A=\\mathcal O_{S,p}$ and regular parameters $x,y$, the base change to $\\operatorname{Spec}A$ has charts $\\operatorname{Spec}A[T]/(xT-y)=\\operatorname{Spec}A[y/x]$ and $\\operatorname{Spec}A[U]/(yU-x)=\\operatorname{Spec}A[x/y]$, glued by inverting $T$ and $U$ with $U=T^{-1}$. Their local rings at the generic point of $E$ have dimension one and at its closed points dimension two. If $S$ is smooth over $k$ and $p$ is $k$-rational, $S'$ is smooth over $k$; literal affine-plane charts occur in the model $S=\\mathbb A^2_k$, $p=0$. No smoothness over an imperfect $k$ is asserted for a general inseparable closed point. Regularity is a property of these local rings and does not require a $\\kappa$-algebra structure on $S'$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-affine-blowup-algebra-properties",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a commutative ring, let $I\\subseteq A$ be an ideal and let\n$a\\in I$. Write $R(I)=\\bigoplus_{n\\ge0}I^nt^n\\subseteq A[t]$ for the Rees\nalgebra of $I$, graded by the degree of $t$\n([[def-rees-algebra-and-rees-module]],\n[[def-graded-ring-and-graded-module]]). The **affine blowup algebra** is\n\n$$A[I/a]:=\\bigl(R(I)\\bigr)_{(a)},$$\n\nthe degree-zero part of the localization of $R(I)$ at the multiplicative set\ngenerated by the degree-one element $at\\in It$\n([[def-multiplicative-subset-and-localisation]]). Then:\n\n1. the image of $a$ in $A[I/a]$ is a nonzerodivisor,\n   $IA[I/a]=aA[I/a]$, and $\\bigl(A[I/a]\\bigr)_a=A_a$;\n2. if $I=(a_0,\\dots,a_r)$ with $a=a_0$\n   ([[def-generated-and-principal-ideals]]), the homomorphism\n   $$A[x_1,\\dots,x_r]/(ax_i-a_i)\\longrightarrow A[I/a]$$ sending\n   $x_i\\mapsto a_i/a$ is surjective with kernel the $a$-power torsion;\n3. if $A$ is reduced then $A[I/a]$ is reduced; if $A$ is a domain and\n   $a\\neq0$ then $A[I/a]$ is a domain;\n4. the construction is independent of the generating set and of the\n   representative used for the homogeneous localization, up to canonical\n   $A$-algebra isomorphism.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-total-transform-strict-plus-exceptional-multiplicity",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a regular surface over a field $k$ and let $C\\subseteq S$ be a reduced curve (an effective Cartier divisor) with a closed point $p$ at which the multiplicity $m=\\operatorname{mult}_p(C)$ of a local equation is finite and positive. Let $\\pi\\colon S'\\to S$ be the blowup of the point $p$ with exceptional curve $E$ and let $C'$ be the strict transform of $C$. Then $\\pi^*C=C'+mE$ as effective Cartier divisors on $S'$; equivalently, the strict transform is defined by dividing a local equation of the total transform by the $m$-th power of an exceptional equation on each chart, and $C'$ meets $E$ in the $0$-cycle of degree $m$ cut out by the degree-$m$ leading form of a local equation of $C$ at $p$ (its degree over $\\kappa(p)$ is $m$; its degree over $k$ is $m[\\kappa(p):k]$ when this residue degree is finite).",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-hypersurface-smooth-iff-multiplicity-one",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $k$ be any field,\nlet $n\\ge1$ be finite, let $0\\ne f\\in k[X_1,\\ldots,X_n]$ be nonconstant,\nand let $a\\in k^n$ satisfy $f(a)=0$. Put\n$$X=\\operatorname{Spec}\\bigl(k[X_1,\\ldots,X_n]/(f)\\bigr),$$\nand let $x\\in X(k)$ be the point defined by evaluation at $a$. Then the\nstructure morphism $X\\to\\operatorname{Spec}k$ is smooth at $x$ if and only\nif $\\operatorname{mult}_a(f)=1$. Here \u201csmooth at $x$\u201d means that the structure\nmap is standard smooth at the corresponding prime after shrinking to an open\nneighborhood of $x$ ([[def-smooth-morphism-classical]],\n[[def-ag-standard-smooth-algebra]]). The equation is used with its actual\nscheme structure; no reducedness, perfectness, or characteristic assumption\nis imposed.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-effective-cartier-divisor",
+          "source_section": "Definition",
+          "quote": "A Cartier divisor $D$ on a scheme $X$ is **effective** if it has a\nlocal-equation representation $(U_i,f_i)$ as in\n[[def-cartier-divisor]] with\n$f_i\\in\\mathcal O_X(U_i)$ and with multiplication by the germ\n$(f_i)_x$ injective on $\\mathcal O_{X,x}$ for every $x\\in U_i$.\nThus each $f_i$ is a regular section in the precise sense of\n[[def-sheaf-total-quotient-rings]]; the condition uses injectivity of\nmultiplication, including exclusion of the zero germ on a nonzero stalk.\n\nThe condition is independent of the representation. On overlaps two\nCartier equations differ by a regular unit. Multiplication or division\nby such a unit preserves regularity as a section of $\\mathcal O_X$ and\npreserves injectivity of multiplication at every stalk. These local\nconditions remain true on refinements and descend by sheaf locality.\n\nThe local principal ideal sheaves $f_i\\mathcal O_{U_i}$ agree on\noverlaps because $f_i/f_j$ is a regular unit. We denote the resulting\nideal sheaf by $\\mathcal I_D$. The construction of its associated\nclosed subscheme is proved in\nthe subsequent closed-immersion theorem.\n\nA unit equation, in particular $f_i=1$, gives the zero Cartier divisor\nand the ideal sheaf $\\mathcal O_X$. Locally its quotient ring is the\nzero ring, so its vanishing subscheme is empty. The zero Cartier divisor\nis therefore the **empty effective divisor**. The empty scheme has\nonly this effective divisor.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-cartier-divisor",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a scheme and let $K_X$ be its sheaf of meromorphic functions, with\nthe injective structure map $\\mathcal O_X\\to K_X$\n([[def-sheaf-total-quotient-rings]], [[def-sheaf-on-topological-space]]). The\npresheaf\n$$U\\ \\longmapsto\\ K_X(U)^{\\times}/\\mathcal O_X(U)^{\\times}$$\nof abelian groups (units of the two sheaves of rings, the second embedded in\nthe first through the injective structure map) has a sheafification in the\nsense of [[def-sheafification]]; the resulting sheaf of abelian groups is\ndenoted\n$$K_X^{\\times}/\\mathcal O_X^{\\times}.$$\n\nA **Cartier divisor** on $X$ is a global section of $K_X^{\\times}/\\mathcal\nO_X^{\\times}$. The group of Cartier divisors is denoted\n$\\operatorname{CaDiv}(X)$; its law is induced by the group law of the quotient\nsheaf, so that the sum of two Cartier divisors is represented by the product\nof their local meromorphic equations, the zero element $0$ is the class of the\nconstant equation $1$, and the inverse of a divisor is represented by the\ninverted local equations.\n\nConcretely, a Cartier divisor can be described as follows. Let\n$\\mathcal U=\\{U_i\\}_{i\\in I}$ be an open cover of $X$ and let\n$f_i\\in K_X(U_i)^{\\times}$ be a meromorphic unit on $U_i$ for each $i$, with\n$$f_i/f_j\\ \\in\\ \\mathcal O_X(U_i\\cap U_j)^{\\times}\\qquad\\text{for all }i,j.$$\nThe images of the $f_i$ in\n$(K_X^{\\times}/\\mathcal O_X^{\\times})(U_i)$ agree on the overlaps\n$U_i\\cap U_j$ (their quotient becomes $1$ in the quotient group), so the sheaf\naxiom glues them to a global section, and a different choice of cover or of\nrepresentatives $f_i$ (that is, passing to a refinement and multiplying $f_i$\nby units of $\\mathcal O_X$ over the pieces) yields the same class. Conversely\nevery global section of the quotient sheaf is locally represented in this way,\nas the local-equation description of Cartier divisors on this page records.\n\nThe **principal** Cartier divisors are the Cartier divisors that are the\nimages of a global meromorphic unit under the canonical map\n$\\Gamma(X,K_X^{\\times})\\to\\Gamma(X,K_X^{\\times}/\\mathcal\nO_X^{\\times})$. They form a subgroup of $\\operatorname{CaDiv}(X)$; a Cartier\ndivisor is principal exactly when it admits a representation by a single\nglobal equation on $X$. The sign convention used on this page is that a\nCartier divisor with local equation $f$ records a zero of $f$ with positive\ncoefficient and a pole with negative coefficient; the convention is fixed\nonce and for all in the definition of the principal Cartier divisor of a\nmeromorphic unit.\n\nIf $X=\\varnothing$ then $\\mathcal O_X=K_X=0$, the quotient sheaf is the zero\nsheaf and $\\operatorname{CaDiv}(\\varnothing)=0$; if $X$ is the spectrum of a\nfield, then $K_X=\\mathcal O_X=\\kappa$ and again\n$\\operatorname{CaDiv}(X)=0$, consistently with the fact that a Cartier divisor\nmeasures the failure of a meromorphic unit to be a global unit.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "claim": "Since $A$ is a regular local ring of dimension two, it is a UFD, so the height-one prime ideals $I_Y,I_Z$ of the curve germs are principal; choose generators $y\\in I_Y$ and $z\\in I_Z$. Because $Y$ is regular at $p$, $y\\in\\mathfrak m\\smallsetminus\\mathfrak m^2$, and we extend it to a regular system of parameters $\\mathfrak m=(x,y)$; then $\\bar x$ generates the maximal ideal of the DVR $\\mathcal O_{",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5"
+          ]
+        },
+        {
+          "id": "d2",
+          "claim": "Write $\\ell_Y$ and $\\ell_Z$ for the leading forms of $y$ and $z$ in the symmetric algebra of $\\mathfrak m/\\mathfrak m^2$, so $\\ell_Y=y$ and $\\ell_Z=\\alpha x+\\beta y$ with $(\\alpha,\\beta)\\ne(0,0)$ by the regularity of $Z$ at $p$ in [F5]. Since $\\bar z=z(x,0)=\\alpha x+O(x^2)$ in the DVR $A/(y)$ with uniformizer $x$, the order is $n=1$ exactly when $\\alpha\\ne0$: the tangent directions of $Y$ and $Z$ ",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F1",
+            "F5"
+          ]
+        },
+        {
+          "id": "d3",
+          "claim": "Work in the first chart $\\operatorname{Spec}A[T]$, $T=y/x$, so $y=xT$ and $E=V(x)$; by [F2] and [F3] this chart contains the point of $E$ corresponding to the tangent direction cut out by $y$, namely $T=0$, and the other chart covers the remaining points, so the two charts together see all of $E$. By [F4] applied to $Y$ and $Z$, whose local equations have multiplicity one at $p$, one has $\\pi^*Y=Y",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "F2",
+            "F3",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "d4",
+          "claim": "If $n=1$, then $\\alpha\\ne0$ by step 2.1, so $h(0,0)=\\alpha\\ne0$: the strict transform $Z'$ does not pass through the point $Y'\\cap E=\\{T=0\\}$, and its intersection with $E$ is cut out by $\\ell_Z$ at the point of $E$ corresponding to the tangent direction of $Z$, which differs from that of $Y$ by step 2.1. Two distinct closed points of $E$ have disjoint open neighbourhoods, so on the open complemen",
+          "step": "4.1",
+          "inputs": [
+            "2.1",
+            "3.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "d5",
+          "claim": "If $n>1$, then $\\alpha=0$ and $\\beta\\ne0$, so $\\ell_Z=\\beta y$: both $Y'$ and $Z'$ meet $E$ at the single point $q$ corresponding to the common tangent direction cut out by $y$, namely $T=0$; and $h(x,0)=\\bar z/x=x^{n-1}u(x)$ for a unit $u$ of the DVR $A/(y)$, because $\\operatorname{ord}_x\\bar z=n$ by step 1.1. Since $h(0,T)=\\beta T$ is a nonzero linear form, $Z'$ is regular at $q$ by [F5], and $Y",
+          "step": "4.2",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "d6",
+          "claim": "Steps 4.1 and 4.2 prove the two assertions: for transverse branches ($n=1$) the strict transforms meet $E$ at distinct points and are disjoint near $E$, while for $n>1$ they meet at the common tangent direction with contact order $n-1$, every intersection with $E$ having order one. [step 4.1, step 4.2] \u220e",
+          "step": "5.1",
+          "inputs": [
+            "4.1",
+            "4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Y and Z are required to pass through the closed point p and to have contact order n>=1, so the empty-intersection case is excluded by hypothesis; the empty set of intersection points is not part of the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: n>=1 is assumed, so the zero-contact case (disjoint curves) is vacuous and excluded; step 2.1 tracks the multiplicity of the strict transform for n=1 as the boundary case that is also treated."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the case n=1 of transversal contact is included and is the base of the descent in step 2.1, where the strict transform simply separates the two branches."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the curves need only be regular at p and are allowed to be singular elsewhere; the total transform may have several branches through p, and the proof works with the local equation at p only."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement is local at one closed point and has no ordered or interval parameter; no endpoint case exists."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the Axiom of Choice is assumed, inherited from the blowup construction used to form S'; the choice of a regular system of parameters at p is canonical data of the local ring."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts an inequality/equality for the contact order after the blowup, not a biconditional, so there is no forward direction of an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted: the claim is a one-way statement comparing n_p(Y,Z) with the contact orders of the strict transforms."
+        }
+      ]
+    },
+    "lem-blowup-multiplicity-euler-characteristic-drop": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-total-transform-strict-plus-exceptional-multiplicity",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a regular surface over a field $k$ and let $C\\subseteq S$ be a reduced curve (an effective Cartier divisor) with a closed point $p$ at which the multiplicity $m=\\operatorname{mult}_p(C)$ of a local equation is finite and positive. Let $\\pi\\colon S'\\to S$ be the blowup of the point $p$ with exceptional curve $E$ and let $C'$ be the strict transform of $C$. Then $\\pi^*C=C'+mE$ as effective Cartier divisors on $S'$; equivalently, the strict transform is defined by dividing a local equation of the total transform by the $m$-th power of an exceptional equation on each chart, and $C'$ meets $E$ in the $0$-cycle of degree $m$ cut out by the degree-$m$ leading form of a local equation of $C$ at $p$ (its degree over $\\kappa(p)$ is $m$; its degree over $k$ is $m[\\kappa(p):k]$ when this residue degree is finite).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cartier-divisor",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a scheme and let $K_X$ be its sheaf of meromorphic functions, with\nthe injective structure map $\\mathcal O_X\\to K_X$\n([[def-sheaf-total-quotient-rings]], [[def-sheaf-on-topological-space]]). The\npresheaf\n$$U\\ \\longmapsto\\ K_X(U)^{\\times}/\\mathcal O_X(U)^{\\times}$$\nof abelian groups (units of the two sheaves of rings, the second embedded in\nthe first through the injective structure map) has a sheafification in the\nsense of [[def-sheafification]]; the resulting sheaf of abelian groups is\ndenoted\n$$K_X^{\\times}/\\mathcal O_X^{\\times}.$$\n\nA **Cartier divisor** on $X$ is a global section of $K_X^{\\times}/\\mathcal\nO_X^{\\times}$. The group of Cartier divisors is denoted\n$\\operatorname{CaDiv}(X)$; its law is induced by the group law of the quotient\nsheaf, so that the sum of two Cartier divisors is represented by the product\nof their local meromorphic equations, the zero element $0$ is the class of the\nconstant equation $1$, and the inverse of a divisor is represented by the\ninverted local equations.\n\nConcretely, a Cartier divisor can be described as follows. Let\n$\\mathcal U=\\{U_i\\}_{i\\in I}$ be an open cover of $X$ and let\n$f_i\\in K_X(U_i)^{\\times}$ be a meromorphic unit on $U_i$ for each $i$, with\n$$f_i/f_j\\ \\in\\ \\mathcal O_X(U_i\\cap U_j)^{\\times}\\qquad\\text{for all }i,j.$$\nThe images of the $f_i$ in\n$(K_X^{\\times}/\\mathcal O_X^{\\times})(U_i)$ agree on the overlaps\n$U_i\\cap U_j$ (their quotient becomes $1$ in the quotient group), so the sheaf\naxiom glues them to a global section, and a different choice of cover or of\nrepresentatives $f_i$ (that is, passing to a refinement and multiplying $f_i$\nby units of $\\mathcal O_X$ over the pieces) yields the same class. Conversely\nevery global section of the quotient sheaf is locally represented in this way,\nas the local-equation description of Cartier divisors on this page records.\n\nThe **principal** Cartier divisors are the Cartier divisors that are the\nimages of a global meromorphic unit under the canonical map\n$\\Gamma(X,K_X^{\\times})\\to\\Gamma(X,K_X^{\\times}/\\mathcal\nO_X^{\\times})$. They form a subgroup of $\\operatorname{CaDiv}(X)$; a Cartier\ndivisor is principal exactly when it admits a representation by a single\nglobal equation on $X$. The sign convention used on this page is that a\nCartier divisor with local equation $f$ records a zero of $f$ with positive\ncoefficient and a pole with negative coefficient; the convention is fixed\nonce and for all in the definition of the principal Cartier divisor of a\nmeromorphic unit.\n\nIf $X=\\varnothing$ then $\\mathcal O_X=K_X=0$, the quotient sheaf is the zero\nsheaf and $\\operatorname{CaDiv}(\\varnothing)=0$; if $X$ is the spectrum of a\nfield, then $K_X=\\mathcal O_X=\\kappa$ and again\n$\\operatorname{CaDiv}(X)=0$, consistently with the fact that a Cartier divisor\nmeasures the failure of a meromorphic unit to be a global unit.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-blowup-regular-surface-closed-point-regular",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $S$ be a regular finite-type $k$-scheme of pure dimension two, let $p$ be a closed point, put $\\kappa=\\kappa(p)$ and $r=[\\kappa:k]$, and let $\\pi\\colon S'=\\operatorname{Bl}_p S\\to S$ be the blowup of $S$ at $p$ with exceptional subscheme $E$. Then $S'$ is regular of pure dimension two, $E$ is an effective Cartier divisor canonically isomorphic to $\\mathbb P^1_\\kappa$, and $\\mathcal O_E(E)=\\mathcal O_{\\mathbb P^1_\\kappa}(-1)$. For $A=\\mathcal O_{S,p}$ and regular parameters $x,y$, the base change to $\\operatorname{Spec}A$ has charts $\\operatorname{Spec}A[T]/(xT-y)=\\operatorname{Spec}A[y/x]$ and $\\operatorname{Spec}A[U]/(yU-x)=\\operatorname{Spec}A[x/y]$, glued by inverting $T$ and $U$ with $U=T^{-1}$. Their local rings at the generic point of $E$ have dimension one and at its closed points dimension two. If $S$ is smooth over $k$ and $p$ is $k$-rational, $S'$ is smooth over $k$; literal affine-plane charts occur in the model $S=\\mathbb A^2_k$, $p=0$. No smoothness over an imperfect $k$ is asserted for a general inseparable closed point. Regularity is a property of these local rings and does not require a $\\kappa$-algebra structure on $S'$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-blowup-projective",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited from the relative Proj construction\n([[def-axiom-of-choice]]). Let $X$ be a scheme, let $\\mathcal I$ be a\nquasi-coherent ideal sheaf of finite type on $X$\n([[def-quasi-coherent-ideal-sheaf]]) and let\n$\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be the blowup of\n[[def-blowup-scheme-along-ideal]]. Then:\n\n1. $\\pi$ is locally H-projective on $X$: for every affine open\n   $U=\\operatorname{Spec}A$ with $\\mathcal I|_U=(f_0,\\dots,f_r)$, the pullback\n   of the graded surjection $A[x_0,\\dots,x_r]\\to R(\\mathcal I|_U)$,\n   $x_i\\mapsto f_it$, exhibits $\\pi^{-1}(U)$ as a closed subscheme of\n   $\\mathbb P^r_U$.\n2. If $\\mathcal I$ is generated as an $\\mathcal O_X$-module by finitely many\n   global sections $f_0,\\dots,f_r$\n   ([[def-globally-generated-sheaf]]), then the same surjection\n   $\\mathcal O_X[x_0,\\dots,x_r]\\to\\mathcal R(\\mathcal I)$ makes\n   $\\operatorname{Bl}_{\\mathcal I}X$ a closed subscheme of $\\mathbb P^r_X$\n   over $X$; in particular $\\pi$ is H-projective\n   ([[def-projective-morphism-pre-proj]]).\n3. In all cases $\\pi$ is proper, since properness is local on the base and each\n   $\\pi^{-1}(U)\\to U$ is H-projective hence proper.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-strict-transform-closed-subscheme",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, inherited from the relative Proj construction used\nby the blowup ([[def-axiom-of-choice]]). Let $X$ be a scheme, let $\\mathcal I$\nbe a quasi-coherent ideal sheaf of finite type\n([[def-quasi-coherent-ideal-sheaf]]), let\n$\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be the blowup of\n[[def-blowup-scheme-along-ideal]] with exceptional subscheme\n$E=\\pi^{-1}(Z)$ ([[def-exceptional-divisor-blowup]]), and let\n$Y\\hookrightarrow X$ be a closed subscheme\n([[def-closed-immersion-schemes]]) with scheme-theoretic inverse image\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$. Write\n$$U:=(Y\\times_X\\operatorname{Bl}_{\\mathcal I}X)\\smallsetminus E$$\nfor the open subscheme obtained by deleting $E$ from this inverse image, with\nits open immersion $j\\colon U\\to Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$.\n\nThe **strict transform** (or **proper transform**) of $Y$ is the\nscheme-theoretic closure of $U$ in $Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$,\nthat is, the scheme-theoretic image\n$Y':=\\overline{U}$ of $j$ ([[def-scheme-theoretic-image]]); when this image\nexists it is a closed subscheme $Y'\\hookrightarrow\nY\\times_X\\operatorname{Bl}_{\\mathcal I}X$ with structural morphism\n$Y'\\to Y$ the restriction of the projection. When\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$ is locally\nNoetherian and $j$ is quasi-compact, the closure exists and is computed by the\nkernel description of [[lem-schematic-closure-and-dense-agreement]]: writing\n$\\mathcal K:=\\ker\\bigl(\\mathcal O_{Y\\times_X\\operatorname{Bl}}\\to\nj_*\\mathcal O_U\\bigr)$, the closed subscheme $Z_{\\mathcal K}$ cut out by\n$\\mathcal K$ is $Y'$, and it is the smallest closed subscheme of\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$ through which $j$ factors.\n\n**Chartwise description.** The strict transform is determined by its\nrestriction to the standard affine charts of the blowup. Let\n$U_0=\\operatorname{Spec}A\\subseteq X$ be an affine open and let $a\\in\n\\Gamma(U_0,\\mathcal I)$; on the chart\n$\\operatorname{Spec}A[\\mathcal I/a]\\subseteq\\operatorname{Bl}_{\\mathcal I}X$\nthe exceptional subscheme is cut out by $a$ (this is the chart computation of\n[[def-blowup-scheme-along-ideal]] recorded in the affine presentation), the\ninverse image of $Y$ is cut out by the ideal $JA[\\mathcal I/a]$, where\n$J=\\Gamma(U_0,\\mathcal I_Y)$, and the strict transform meets the chart in the\nclosed subscheme defined by the **saturation**\n$$(JA[\\mathcal I/a]:a^\\infty)=\\bigl\\{f\\in A[\\mathcal I/a]:a^nf\\in JA[\\mathcal I/a]\\text{ for some }n\\ge0\\bigr\\},$$\nthe largest ideal of the chart ring containing $JA[\\mathcal I/a]$ whose\nlocalisation at $a$ equals the localisation of $JA[\\mathcal I/a]$.\nThese local closed subschemes agree on overlaps of charts: on the overlap of\nthe charts of $a$ and $b$ the elements $a$ and $b$ differ by a unit, so the two\nsaturations coincide, and after localising at $a$ the saturation becomes the\ninverse image ideal of $Y$ itself, matching the fact that the blowup is an\nisomorphism over $X\\smallsetminus Z$.\nHence the chartwise closed subschemes glue to a closed subscheme\n$Y'\\hookrightarrow Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$, and this glued\ndescription gives the strict transform even when the scheme-theoretic closure\nis not known to exist; where the closure exists the two agree, as the kernel\ndescription of [[lem-schematic-closure-and-dense-agreement]] identifies the\nclosure with the saturation on each chart on which the exceptional divisor is\nprincipal.\n\n**Reducedness.** If $Y$ is reduced, then $Y'$ is reduced. Indeed, on a chart\nas above the ring of the strict transform is\n$A[\\mathcal I/a]/(JA[\\mathcal I/a]:a^\\infty)$, and the saturation is by\nconstruction the kernel of the localisation\n$A[\\mathcal I/a]/(JA[\\mathcal I/a])\\to A[\\mathcal I/a][1/a]/(J)$, so this ring\nembeds into $\\bigl(A[\\mathcal I/a]/(J)\\bigr)[1/a]=(A/J)[1/a]$, which is reduced\nwhen $Y$ is; a subring of a reduced ring is reduced, and reducedness is local,\nso $Y'$ is reduced.\n\n**Iteration.** The construction applies verbatim to a blowup of\n$\\operatorname{Bl}_{\\mathcal I}X$ along any quasi-coherent ideal sheaf of\nfinite type on it: for a closed subscheme $W\\hookrightarrow\n\\operatorname{Bl}_{\\mathcal I}X$, its inverse image under a further blowup and\nthe deletion of that blowup's exceptional subscheme define the strict transform\nof $W$, and the chartwise saturation description is unchanged. In particular a\nstrict transform of a strict transform may be formed along a further blowup.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euler-characteristic-coherent-sheaf",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, inherited from the finiteness and vanishing\ncorollary cited below ([[def-axiom-of-choice]]). Let $k$ be a field\n([[def-field]]), let $X$ be a scheme proper over $k$\n([[def-proper-morphism]]), and let $\\mathcal F$ be a coherent\n$\\mathcal O_X$-module ([[def-coherent-module-scheme]]) with sheaf cohomology\ngroups $H^q(X,\\mathcal F)$ ([[def-sheaf-cohomology-derived-global-sections]]).\n\nBy [[cor-projective-cohomology-finite-dimensional-field]] each group\n$H^q(X,\\mathcal F)$ is a finite-dimensional $k$-vector space\n([[def-dimension]]) and only finitely many of the groups are nonzero: if $X$\nadmits a finite affine open cover with $n\\ge0$ members, then\n$H^q(X,\\mathcal F)=0$ for every $q\\ge n$. Consequently the alternating sum\n$$\\chi(X,\\mathcal F):=\\sum_{q\\ge0}(-1)^q\\dim_kH^q(X,\\mathcal F)$$\nhas only finitely many nonzero terms and defines an integer, the **Euler\ncharacteristic** of $\\mathcal F$ on $X$. Equivalently, for any finite affine\nopen cover of $X$ with $n$ members one has\n$$\\chi(X,\\mathcal F)=\\sum_{q=0}^{n-1}(-1)^q\\dim_kH^q(X,\\mathcal F),$$\nthe value being independent of the cover because the definition uses only the\ncohomology groups.\n\nIf $X=\\varnothing$ then all groups $H^q(X,\\mathcal F)$ vanish, the cover has\n$n=0$ members, and we set $\\chi(X,\\mathcal F)=0$; this is the empty sum in the\ndisplayed formula. The zero sheaf $\\mathcal F=0$ likewise has\n$\\chi(X,0)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-blowup-point-pushforward-vanishing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $S$ be a regular surface over a field $k$ (more generally a locally Noetherian scheme of dimension two whose local rings at the center are regular of dimension two) and let $p$ be a closed point with residue field $\\kappa(p)$. Let $\\pi\\colon S'\\to S$ be the blowup of $p$ with exceptional curve $E$. Then $\\pi_*\\mathcal O_{S'}=\\mathcal O_S$ and $R^q\\pi_*\\mathcal O_{S'}=0$ for every $q>0$. Moreover the same conclusions hold after composing finitely many point blowups.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-projection-formula-invertible-twist",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $f\\colon X\\to Y$ be a morphism of schemes, let\n$\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module and let $\\mathcal L$\nbe an invertible $\\mathcal O_Y$-module. Then the natural map\n\n$$R^qf_*(\\mathcal F)\\otimes_{\\mathcal O_Y}\\mathcal L\\longrightarrow R^qf_*\\bigl(\\mathcal F\\otimes_{\\mathcal O_X}f^*\\mathcal L\\bigr)$$\n\nis an isomorphism for every $q\\ge0$. In particular, if $X$ and $Y$ are proper\nover a field $k$ and $\\mathcal F$ is coherent, then the Euler characteristics\nsatisfy $\\chi(X,f^*\\mathcal L)=\\chi(Y,\\mathcal L)$ whenever\n$f_*\\mathcal O_X=\\mathcal O_Y$ and $R^qf_*\\mathcal O_X=0$ for $q>0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-leray-spectral-sequence-for-sheaf-cohomology",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $f:X\\to Y$ be a morphism of schemes (more\ngenerally a continuous map of topological spaces) and let $\\mathcal F$ be an\nabelian sheaf on $X$. Then there is a natural first-quadrant spectral sequence\n$$E_2^{p,q}=H^p\\bigl(Y,R^qf_*\\mathcal F\\bigr)\\Longrightarrow H^{p+q}(X,\\mathcal F),$$\nwith differentials of bidegree $(r,1-r)$, whose convergence is strong: for each\n$n$ the abutment $H^n(X,\\mathcal F)$ carries a finite decreasing filtration\n$0\\subseteq F^nH^n\\subseteq\\cdots\\subseteq F^0H^n=H^n(X,\\mathcal F)$ with\n$\\operatorname{gr}^pH^n\\cong E_\\infty^{p,n-p}$, and the edge maps are the natural\nmaps $H^n(Y,f_*\\mathcal F)\\to H^n(X,\\mathcal F)$ and\n$H^n(X,\\mathcal F)\\to H^0(Y,R^nf_*\\mathcal F)$.\n\nThe same spectral sequence holds for an $\\mathcal O_X$-module $\\mathcal F$ with\n$\\mathcal O$-module cohomology on the $E_2$-page, since over a\n$\\mathbb C$-scheme the structure sheaf is flat over the constant sheaf\n$\\mathbb Z$ and every $\\mathcal O_X$-injective resolution computes the same\nhigher direct images and cohomology as an abelian-sheaf injective resolution.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-twist-exact-sequence-effective-divisor",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a scheme, let $i:D\\hookrightarrow X$ be an effective Cartier divisor\nwith ideal sheaf $I_D$, so that $i$ is a closed immersion,\n$\\mathcal O_X(-D)=I_D$ is invertible and\n$0\\to\\mathcal O_X(-D)\\to\\mathcal O_X\\to i_*\\mathcal O_D\\to0$ is exact\n([[lem-effective-cartier-divisor-exact-sequence]]), and let $\\mathcal L$ be an\ninvertible $\\mathcal O_X$-module\n([[def-invertible-sheaf]]). Write\n$$\\mathcal L(-D)=\\mathcal L\\otimes_{\\mathcal O_X}\\mathcal O_X(-D),\\qquad \\mathcal L|_D=i^*\\mathcal L$$\nfor the twist of $\\mathcal L$ by $-D$ and the restriction of $\\mathcal L$ to\n$D$ ([[def-pullback-module-ringed-spaces]]). Then there is a short exact\nsequence of $\\mathcal O_X$-modules\n$$0\\longrightarrow\\mathcal L(-D)\\xrightarrow{\\ \\alpha\\ }\\mathcal L\\xrightarrow{\\ \\beta\\ }i_*(\\mathcal L|_D)\\longrightarrow0,$$\nwhere $\\alpha=\\operatorname{id}_{\\mathcal L}\\otimes(\\text{the inclusion }\nI_D\\subseteq\\mathcal O_X)$ and $\\beta$ is the tensor product of the quotient\nmap $\\mathcal O_X\\to i_*\\mathcal O_D$ with $\\operatorname{id}_{\\mathcal L}$,\ncomposed with the canonical isomorphism\n$\\mathcal L\\otimes_{\\mathcal O_X}i_*\\mathcal O_D\\cong i_*(\\mathcal L|_D)$\nconstructed in the proof. The twist $\\mathcal L(-D)$ is again invertible.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-effective-cartier-divisor-exact-sequence",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a scheme, let $D$ be an effective Cartier divisor on $X$ with\nclosed immersion $i:D\\hookrightarrow X$ and ideal sheaf $I_D$ as in\n[[thm-effective-cartier-divisor-closed-immersion]], and let\n$\\mathcal O_X(-D)$ be the associated invertible sheaf\n([[def-invertible-sheaf-of-cartier-divisor]]). Then there is a short exact\nsequence of $\\mathcal O_X$-modules\n$$0\\longrightarrow\\mathcal O_X(-D)\\longrightarrow\\mathcal O_X\\longrightarrow i_*\\mathcal O_D\\longrightarrow 0,$$\nwhere the first map is the inclusion $I_D\\subseteq\\mathcal O_X$ read through\nthe identification $\\mathcal O_X(-D)=I_D$, and the second is the surjection\n$\\mathcal O_X\\to i_*\\mathcal O_D$ defining the closed immersion\n([[def-closed-immersion-schemes]], [[def-exact-sequence-sheaves]]).",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-euler-characteristic-additive-short-exact",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited from the finiteness and long-exactness\nsuppliers cited below ([[def-axiom-of-choice]]). Let $k$ be a field\n([[def-field]]), let $X$ be a scheme proper over $k$\n([[def-proper-morphism]]), and let\n$$0\\longrightarrow\\mathcal F'\\xrightarrow{\\ \\alpha\\ }\\mathcal F\\xrightarrow{\\ \\beta\\ }\\mathcal F''\\longrightarrow0$$\nbe a short exact sequence of $\\mathcal O_X$-modules\n([[def-exact-sequence-sheaves]], [[def-module-on-ringed-space]]) in which the\nthree terms $\\mathcal F'$, $\\mathcal F$ and $\\mathcal F''$ are coherent\n([[def-coherent-module-scheme]]). Then\n$$\\chi(X,\\mathcal F)=\\chi(X,\\mathcal F')+\\chi(X,\\mathcal F''),$$\nwhere $\\chi$ is the Euler characteristic of\n[[def-euler-characteristic-coherent-sheaf]].\n\nThe empty source $X=\\varnothing$, the zero sheaf in any of the three\npositions, the degenerate cases in which one of the outer maps is an\nisomorphism and every field $k$ are included.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-closed-immersion-cohomology-pushforward",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $i:Z\\to X$ be a\nclosed immersion of schemes ([[def-closed-immersion-schemes]]) and let\n$\\mathcal F$ be a quasi-coherent $\\mathcal O_Z$-module\n([[def-quasi-coherent-module-scheme]]), with direct image $i_*\\mathcal F$\n([[def-direct-image-sheaf]], [[lem-direct-image-is-sheaf]]). Then for every\n$q\\ge0$ there is a canonical isomorphism\n$$H^q(Z,\\mathcal F)\\;\\cong\\;H^q(X,i_*\\mathcal F),$$\nwhere $H^q$ denotes sheaf cohomology\n([[def-sheaf-cohomology-derived-global-sections]]).\n\nIf in addition $X$ is locally Noetherian\n([[def-locally-noetherian-and-noetherian-scheme]]) and $\\mathcal F$ is\ncoherent ([[def-coherent-module-scheme]]), then $i_*\\mathcal F$ is a coherent\n$\\mathcal O_X$-module. The empty scheme, the zero module and the case\n$X=\\operatorname{Spec}A$ affine are included.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-exceptional-fiber-line-bundle-euler-characteristic",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field and let $\\kappa$ be a finite\nextension of $k$ of degree $r=[\\kappa:k]$. Let $E$ be a scheme isomorphic to\n$\\mathbb P^1_\\kappa$ over $\\kappa$, and let $M$ be an invertible sheaf on $E$.\nThen $H^q(E,M)=0$ for $q\\ge2$, and writing $d$ for the degree of $M$ over\n$\\kappa$ one has\n\n$$\\dim_kH^0(E,M)-\\dim_kH^1(E,M)=r(1+d),$$\n\nso the $k$-Euler characteristic of $M$ is $\\chi_k(E,M)=r(1+d)$. In particular\na line bundle of degree $-j$ on $E$ has Euler characteristic $r(1-j)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-normalization-defect-of-reduced-curve",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $k$ be a field and\nlet $C$ be a reduced curve of finite type over $k$: a $k$-scheme of finite\ntype with $C=C_{\\mathrm{red}}$ ([[def-reduction-of-scheme]]) and pure\ndimension one, proper over $k$ in the applications. Let\n\n$$\\nu\\colon\\widetilde C\\longrightarrow C$$\n\nbe the finite normalization of [[thm-normalization-reduced-curve-exists-finite]],\nand let\n\n$$\\mathcal Q_C:=\\operatorname{coker}\\bigl(\\mathcal O_C\\longrightarrow\\nu_*\\mathcal O_{\\widetilde C}\\bigr)$$\n\nbe the **normalization defect sheaf**, a coherent $\\mathcal O_C$-module\n([[def-coherent-module-scheme]]). The **normalization defect** of $C$ is\n\n$$\\delta_k(C):=\\dim_k H^0(C,\\mathcal Q_C),$$\n\nthe $k$-dimension of its space of global sections, a nonnegative integer.\n\nThe following comments record why the definition is meaningful. Since $\\nu$\nis finite, $\\nu_*\\mathcal O_{\\widetilde C}$ is a coherent\n$\\mathcal O_C$-module and so is its quotient $\\mathcal Q_C$; this is the\nfinite-pushforward case of [[thm-proper-pushforward-coherent]], and also\nfollows directly from the affine-local description of a finite morphism. The\nstalks of $\\mathcal Q_C$ vanish exactly at the points $p$ at which\n$\\mathcal O_{C,p}\\to(\\nu_*\\mathcal O_{\\widetilde C})_p$ is an isomorphism,\nso $\\mathcal Q_C$ is supported on the non-normal locus of $C$: a closed\nsubset of the Noetherian one-dimensional space $C$ containing no generic\npoint of $C$, because the local ring of the reduced curve $C$ at a generic\npoint is a field and hence normal. Such a closed set is a finite set of\nclosed points; componentwise this is the finiteness of\n[[lem-curve-closed-subsets-finite]]. Consequently $H^0(C,\\mathcal Q_C)$ is\nthe direct sum of the finitely many stalk contributions $\\mathcal Q_{C,p}$\nover the support of $\\mathcal Q_C$, each of which is a finite-dimensional\n$k$-vector space because $\\mathcal Q_{C,p}$ has finite length over the\nNoetherian local ring $\\mathcal O_{C,p}$ and the residue field\n$\\kappa(p)$ is finite over $k$. Thus $\\delta_k(C)$ is a well-defined\nnonnegative integer. When $C$ is proper over $k$, the same finiteness is the\nstatement of [[def-euler-characteristic-coherent-sheaf]] for the coherent\nsheaf $\\mathcal Q_C$.",
+          "uses": [
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-normalization-defect-euler-and-lengths",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field, let $C$ be a reduced proper\ncurve over $k$ with normalization $\\nu\\colon\\widetilde C\\to C$ and defect\nsheaf $\\mathcal Q_C$. Then: (1) $H^q(C,\\mathcal Q_C)=0$ for $q\\ge1$, so\n$\\delta_k(C)=\\chi_k(C,\\mathcal Q_C)=\\chi_k(\\mathcal O_{\\widetilde C})-\\chi_k(\\mathcal O_C)$\n(using additivity of the Euler characteristic in the normalization sequence\n$0\\to\\mathcal O_C\\to\\nu_*\\mathcal O_{\\widetilde C}\\to\\mathcal Q_C\\to0$ and\n$\\chi(C,\\nu_*\\mathcal O)=\\chi(\\widetilde C,\\mathcal O)$); (2)\n$\\delta_k(C)=\\sum$ over closed points $p$ of $[\\kappa(p):k]$ times the length\nof $\\mathcal Q_{C,p}$ over $\\mathcal O_{C,p}$, a finite sum over the finite\nnon-normal locus; (3) $\\delta_k(C)\\ge0$, and $\\delta_k(C)=0$ if and only if\n$C$ is regular, in which case the irreducible components of $C$ are disjoint\nand normal.",
+          "uses": [
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-normalization-unchanged-under-finite-birational-curve-map",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $f\\colon X\\to Y$ be a finite birational\nmorphism of reduced curves of finite type over a field $k$ (for instance the\nrestriction to a curve of a proper quasi-finite birational map; such a map is\nfinite in the applications by [[thm-proper-quasi-finite-is-finite]]). Then\n$f$ induces an isomorphism of normalizations $\\widetilde X\\to\\widetilde Y$\nover $Y$; equivalently, the normalizations of $X$ and $Y$ are canonically\nidentified with the same finite birational model of $Y$.",
+          "uses": [
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-proper-quasi-finite-is-finite",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Every proper quasi-finite morphism of schemes\n$f:X\\to S$ is finite ([[def-proper-morphism]],\n[[def-quasi-finite-morphism-schemes]], [[def-finite-morphism-schemes]]).\nNo Noetherian or nonemptiness hypothesis is imposed, and the assertion is\nlocal on the base.\n\nThis proof depends on the scheme-level Zariski Main factorization\n[[lem-scheme-zariski-main-factorization-quasi-finite]]. Its relative-normalization and finite-stage inputs are proved locally; the reduction from that factorization to finiteness is completed below.",
+          "uses": [
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-proper-source-to-separated-target-proper",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $f:X\\to S$ be proper and let $g:Y\\to S$ be\nseparated. Then every $S$-morphism $h:X\\to Y$ is proper. No Noetherian,\nreducedness or nonemptiness hypothesis is used, and the empty source is\nincluded.",
+          "uses": [
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-blowup-isomorphism-off-center",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal I$ be a quasi-coherent ideal sheaf of finite type with zero scheme $Z$ and let $\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be the blowup. Then the restriction $\\pi\\colon\\pi^{-1}(X\\smallsetminus Z)\\to X\\smallsetminus Z$ is an isomorphism of schemes, with inverse characterized by the universal property applied to the identity of $X\\smallsetminus Z$ (where the inverse image of $Z$ is empty) and to the open immersion $\\pi^{-1}(X\\smallsetminus Z)\\hookrightarrow X$. Consequently $E=\\pi^{-1}(Z)$ is the complement of this open subscheme.",
+          "uses": [
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "claim": "The curve $C$ is an effective Cartier divisor on the regular surface $S$, so [F1] gives the divisor identity $\\pi^*C=C'+mE$ and shows that $C'$ is again an effective Cartier divisor, meeting $E$ in a finite $0$-cycle of degree $m$ over $K$. By [F2] the exceptional curve is $E\\cong\\mathbb P^1_K$ with $\\mathcal O_E(E)\\cong\\mathcal O_{\\mathbb P^1_K}(-1)$, and by [F3] the schemes $S,S',C,C'$ are prope",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d2",
+          "claim": "For $j=0,1,\\dots,m$ put $\\mathcal L_j:=\\mathcal O_{S'}(-\\pi^*C+jE):=\\mathcal O_{S'}(-\\pi^*C)\\otimes\\mathcal O_{S'}(E)^{\\otimes j}$, an invertible sheaf with $\\mathcal L_m=\\mathcal O_{S'}(-C')$ by the divisor identity of step 1.1. For $j\\ge1$ apply the twisted sequence of [F6] on $S'$ to the effective Cartier divisor $E$ and the invertible sheaf $\\mathcal L_j$: since $\\mathcal L_j(-E)=\\mathcal L_{j",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "d3",
+          "claim": "Apply the untwisted sequence of [F6] to the effective Cartier divisor $C$ on $S$ and to the effective Cartier divisor $C'$ on $S'$, whose structure sheaves are coherent by step 1.1: $0\\to\\mathcal O_S(-C)\\to\\mathcal O_S\\to i_*\\mathcal O_C\\to0$ and $0\\to\\mathcal O_{S'}(-C')\\to\\mathcal O_{S'}\\to i'_*\\mathcal O_{C'}\\to0$. Additivity [F7] and the identification $H^q(C,\\mathcal O_C)\\cong H^q(S,i_*\\mathc",
+          "step": "2.2",
+          "inputs": [
+            "1.1",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "d4",
+          "claim": "The restriction $Q_j=\\mathcal L_j|_E$ is computed as follows. First, $\\mathcal O_{S'}(jE)|_E=\\mathcal O_E(E)^{\\otimes j}$ is isomorphic to $\\mathcal O_{\\mathbb P^1_K}(-j)$ by [F2]. Second, $(\\pi^*\\mathcal O_S(-C))|_E\\cong\\mathcal O_E$: the morphism $\\pi|_E\\colon E\\to S$ factors as $E\\to\\operatorname{Spec}K\\to S$, and the restriction of the invertible sheaf $\\mathcal O_S(-C)$ to the residue point i",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "F2",
+            "F9"
+          ]
+        },
+        {
+          "id": "d5",
+          "claim": "Summing the identities of step 2.1 over $j=1,\\dots,m$ and substituting step 3.1 gives $\\chi_k(S',\\mathcal L_m)-\\chi_k(S',\\mathcal L_0)=\\sum_{j=1}^mr(1-j)=-r\\binom{m}{2}$, that is, $\\chi_k(S',\\mathcal O_{S'}(-C'))=\\chi_k(S',\\pi^*\\mathcal O_S(-C))-r\\binom{m}{2}$ because $\\mathcal L_0=\\pi^*\\mathcal O_S(-C)$. [step 2.1, step 3.1, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "d6",
+          "claim": "By [F5] applied to the invertible sheaf $\\mathcal O_S(-C)$ the Euler characteristics agree: $\\chi_k(S',\\pi^*\\mathcal O_S(-C))=\\chi_k(S,\\mathcal O_S(-C))$, and likewise $\\chi_k(S',\\mathcal O_{S'})=\\chi_k(S',\\pi^*\\mathcal O_S)=\\chi_k(S,\\mathcal O_S)$. Combining with step 4.1, $\\chi_k(S',\\mathcal O_{S'}(-C'))=\\chi_k(S,\\mathcal O_S(-C))-r\\binom{m}{2}=\\chi_k(S',\\mathcal O_{S'})+\\chi_k(S,\\mathcal O_S(-C",
+          "step": "5.1",
+          "inputs": [
+            "4.1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "d7",
+          "claim": "Subtracting the two identities of step 2.2 and substituting step 5.1 yields $\\chi_k(\\mathcal O_{C'})-\\chi_k(\\mathcal O_C)=[\\chi_k(S',\\mathcal O_{S'})-\\chi_k(S',\\mathcal O_{S'}(-C'))]-[\\chi_k(S,\\mathcal O_S)-\\chi_k(S,\\mathcal O_S(-C))]=\\chi_k(S',\\mathcal O_{S'})-\\chi_k(S,\\mathcal O_S)+r\\binom{m}{2}=r\\binom{m}{2}$, since $\\chi_k(S',\\mathcal O_{S'})=\\chi_k(S,\\mathcal O_S)$. This proves $\\chi_k(\\mathc",
+          "step": "6.1",
+          "inputs": [
+            "1.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "id": "d8",
+          "claim": "The morphism $C'\\to C$ induced by $\\pi$ is proper: $C'$ is a closed subscheme of the proper $k$-scheme $S'$, hence proper over $k$, and $C$ is separated over $k$ as a closed subscheme of the separated scheme $S$; by [F10] a morphism from a proper $k$-scheme to a separated one is proper. It is quasi-finite: by [F11] it is an isomorphism over $C\\smallsetminus\\{p\\}$, and over $p$ its fibre is the fin",
+          "step": "7.1",
+          "inputs": [
+            "1.1",
+            "6.1",
+            "F10",
+            "F11"
+          ]
+        },
+        {
+          "id": "d9",
+          "claim": "By step 1.1 both $C$ and $C'$ are reduced proper curves over $k$, so [F10] computes their defects on the common normalization $\\widetilde C$: $\\delta_k(C)=\\chi_k(\\mathcal O_{\\widetilde C})-\\chi_k(\\mathcal O_C)$ and $\\delta_k(C')=\\chi_k(\\mathcal O_{\\widetilde C})-\\chi_k(\\mathcal O_{C'})$. Subtracting and using step 6.1, $\\delta_k(C')-\\delta_k(C)=\\chi_k(\\mathcal O_C)-\\chi_k(\\mathcal O_{C'})=-r\\binom",
+          "step": "8.1",
+          "inputs": [
+            "1.1",
+            "6.1",
+            "7.1",
+            "F10"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: C is a reduced curve and p a closed point of it, so the center is nonempty; the empty-centre case is not claimed, and the multiplicity m>=1 excludes the empty curve at p."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: m=1 is included and gives an unchanged Euler characteristic, the boundary value of the drop r*m(m-1)/2 = 0; the computation of the exceptional sequences also covers j=0 terms by vanishing."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the formula r*m(m-1)/2 is asserted for every m>=1 and the case m=1 (a regular point of C) yields no drop, as recorded in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: non-rational and inseparable closed points are allowed, with the residue degree r=[kappa(p):k] kept explicitly; C may be reducible and p may be a singular point."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The recurrence is a closed algebraic formula in m and r with no interval or limiting parameter, so there are no endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the Axiom of Choice is assumed, inherited from the relative-Proj, Euler-characteristic and normalization suppliers used in the proof; no additional selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts an identity for the defect drop, not a biconditional; there is no forward direction of an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted: the drop formula is one-way, and the vanishing/cohomology computations are internal to the proof."
+        }
+      ]
+    },
+    "lem-plane-curve-multiplicity-transform-chart": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multiplicity-hypersurface-point",
+          "source_section": "Definition",
+          "quote": "Let $k$ be any field, let $n\\in\\mathbb N$, put $P=k[X_1,\\ldots,X_n]$, and\nlet $a=(a_1,\\ldots,a_n)\\in k^n$. Suppose $0\\ne f\\in P$ and $f(a)=0$. Write\nthe unique finite homogeneous decomposition\n$$\nf(a_1+t_1,\\ldots,a_n+t_n)=\\sum_{j\\ge0}f_j(t_1,\\ldots,t_n),\n$$\nwhere $f_j$ is homogeneous of total degree $j$. The **multiplicity of the\nhypersurface equation $f$ at $a$**, denoted $\\operatorname{mult}_a(f)$, is\nthe least $j$ for which $f_j\\ne0$.\n\nLet $\\mathfrak m_a=(X_1-a_1,\\ldots,X_n-a_n)$ and\n$R=P_{\\mathfrak m_a}=\\mathcal O_{\\mathbb A^n_k,a}$, with maximal ideal\n$\\mathfrak m=\\mathfrak m_aR$. For $g\\in R$ of finite order, write\n$\\operatorname{ord}_{\\mathfrak m}(g)=d$ when\n$$g\\in\\mathfrak m^d\\setminus\\mathfrak m^{d+1}.$$\nThen $\\operatorname{mult}_a(f)=\\operatorname{ord}_{\\mathfrak m}(f)$.\nIn particular, replacing the local equation by $uf$ for a unit\n$u\\in R^\\times$ leaves its $\\mathfrak m$-adic order unchanged.\n\nThis is multiplicity of the equation, unchanged under a local unit. It is\nnot an invariant of the reduced support: for every integer $r\\ge1$,\n$\\operatorname{mult}_a(f^r)=r\\operatorname{mult}_a(f)$.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-blowup-plane-origin-incidence-equations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited from the Proj constructions used below\n([[def-axiom-of-choice]]). Let $B$ be a commutative ring with $1$,\n$X=\\operatorname{Spec}B[x,y]=\\mathbb A^2_B$ and $I=(x,y)\\subseteq B[x,y]$.\nWith homogeneous coordinates $u,v$ on $\\mathbb P^1_B$, the blowup\n$\\operatorname{Bl}_I X$ of [[def-blowup-scheme-along-ideal]] is\n$V(xv-yu)\\subseteq X\\times_B\\mathbb P^1_B$, and the projection is its\nstructural morphism. Its two standard charts are\n$\\operatorname{Spec}B[x,T]$ with $y=xT$ and $\\operatorname{Spec}B[y,U]$ with\n$x=yU$; their overlap inverts $T$ and $U$ with $TU=1$. The exceptional\nsubscheme is $V(x)$ and $V(y)$ respectively and is isomorphic to\n$\\mathbb P^1_B$. In particular this holds over any field $B=k$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-affine-blowup-standard-charts",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice as inherited from the Proj construction. Let $A$ be\na ring, $I=(f_0,\\dots,f_r)\\subseteq A$, $S=R(I)=\\bigoplus I^nt^n$ and\n$B_i=A[I/f_i]=\\bigl(S[(f_it)^{-1}]\\bigr)_0$. The standard opens\n$U_i=D_+(f_it)=\\operatorname{Spec}B_i$ cover\n$\\operatorname{Bl}_I\\operatorname{Spec}A$. Put\n$u_{ij}=(f_jt)/(f_it)$ in $B_i$. Then\n$U_i\\cap U_j=D(u_{ij})$ in $U_i$, with canonical $A$-algebra identifications\n$(B_i)_{u_{ij}}=S[(f_it)^{-1},(f_jt)^{-1}]_0=(B_j)_{u_{ji}}$. They send\n$f_l/f_i$ to $(f_l/f_j)/(f_i/f_j)$, and $u_{ij}$ to $u_{ji}^{-1}$. These\nidentifications satisfy the identity and cocycle conditions and preserve the\nstructural maps to $\\operatorname{Spec}A$. Different finite generating\nfamilies give compatible chart covers of the same canonical blowup; no\nbijection between the chart families is asserted. The formulas include zero\ndivisors and empty charts; nilpotent $f_i$ gives $B_i=0$. Localization at the\nbase element $f_j$ is generally smaller than this overlap and is not its\nformula.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-affine-blowup-algebra-properties",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a commutative ring, let $I\\subseteq A$ be an ideal and let\n$a\\in I$. Write $R(I)=\\bigoplus_{n\\ge0}I^nt^n\\subseteq A[t]$ for the Rees\nalgebra of $I$, graded by the degree of $t$\n([[def-rees-algebra-and-rees-module]],\n[[def-graded-ring-and-graded-module]]). The **affine blowup algebra** is\n\n$$A[I/a]:=\\bigl(R(I)\\bigr)_{(a)},$$\n\nthe degree-zero part of the localization of $R(I)$ at the multiplicative set\ngenerated by the degree-one element $at\\in It$\n([[def-multiplicative-subset-and-localisation]]). Then:\n\n1. the image of $a$ in $A[I/a]$ is a nonzerodivisor,\n   $IA[I/a]=aA[I/a]$, and $\\bigl(A[I/a]\\bigr)_a=A_a$;\n2. if $I=(a_0,\\dots,a_r)$ with $a=a_0$\n   ([[def-generated-and-principal-ideals]]), the homomorphism\n   $$A[x_1,\\dots,x_r]/(ax_i-a_i)\\longrightarrow A[I/a]$$ sending\n   $x_i\\mapsto a_i/a$ is surjective with kernel the $a$-power torsion;\n3. if $A$ is reduced then $A[I/a]$ is reduced; if $A$ is a domain and\n   $a\\neq0$ then $A[I/a]$ is a domain;\n4. the construction is independent of the generating set and of the\n   representative used for the homogeneous localization, up to canonical\n   $A$-algebra isomorphism.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-total-transform-strict-plus-exceptional-multiplicity",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a regular surface over a field $k$ and let $C\\subseteq S$ be a reduced curve (an effective Cartier divisor) with a closed point $p$ at which the multiplicity $m=\\operatorname{mult}_p(C)$ of a local equation is finite and positive. Let $\\pi\\colon S'\\to S$ be the blowup of the point $p$ with exceptional curve $E$ and let $C'$ be the strict transform of $C$. Then $\\pi^*C=C'+mE$ as effective Cartier divisors on $S'$; equivalently, the strict transform is defined by dividing a local equation of the total transform by the $m$-th power of an exceptional equation on each chart, and $C'$ meets $E$ in the $0$-cycle of degree $m$ cut out by the degree-$m$ leading form of a local equation of $C$ at $p$ (its degree over $\\kappa(p)$ is $m$; its degree over $k$ is $m[\\kappa(p):k]$ when this residue degree is finite).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-effective-cartier-divisor",
+          "source_section": "Definition",
+          "quote": "A Cartier divisor $D$ on a scheme $X$ is **effective** if it has a\nlocal-equation representation $(U_i,f_i)$ as in\n[[def-cartier-divisor]] with\n$f_i\\in\\mathcal O_X(U_i)$ and with multiplication by the germ\n$(f_i)_x$ injective on $\\mathcal O_{X,x}$ for every $x\\in U_i$.\nThus each $f_i$ is a regular section in the precise sense of\n[[def-sheaf-total-quotient-rings]]; the condition uses injectivity of\nmultiplication, including exclusion of the zero germ on a nonzero stalk.\n\nThe condition is independent of the representation. On overlaps two\nCartier equations differ by a regular unit. Multiplication or division\nby such a unit preserves regularity as a section of $\\mathcal O_X$ and\npreserves injectivity of multiplication at every stalk. These local\nconditions remain true on refinements and descend by sheaf locality.\n\nThe local principal ideal sheaves $f_i\\mathcal O_{U_i}$ agree on\noverlaps because $f_i/f_j$ is a regular unit. We denote the resulting\nideal sheaf by $\\mathcal I_D$. The construction of its associated\nclosed subscheme is proved in\nthe subsequent closed-immersion theorem.\n\nA unit equation, in particular $f_i=1$, gives the zero Cartier divisor\nand the ideal sheaf $\\mathcal O_X$. Locally its quotient ring is the\nzero ring, so its vanishing subscheme is empty. The zero Cartier divisor\nis therefore the **empty effective divisor**. The empty scheme has\nonly this effective divisor.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "claim": "Write the homogeneous decomposition of $f$ about the origin as $f=f_m+f_{m+1}+\\cdots$, with $f_m\\ne0$ the leading form by [F1]. Substituting $y=xs$ gives $f(x,xs)=\\sum_{d\\ge m}x^df_d(1,s)=x^m\\bigl(f_m(1,s)+xf_{m+1}(1,s)+x^2f_{m+2}(1,s)+\\cdots\\bigr)=x^mg(x,s)$, where $g(x,s):=\\sum_{d\\ge m}x^{d-m}f_d(1,s)\\in k[x,s]$. [F1]",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2",
+          "claim": "The constant term in $x$ of $g$ is $f_m(1,s)$, which is a nonzero polynomial: $f_d(1,s)=0$ identically would mean that $x^d$ divides $f_d$ for a form of degree $d$, hence $f_d=cx^d$, and then $f_d(1,s)=c\\ne0$; inductively, $f_m(1,s)$ is not the zero polynomial. Consequently $g(0,s)=f_m(1,s)\\ne0$, and the exact power of $x$ dividing $f(x,xs)$ is $m$; since $E=V(x)$ on this chart by [F3], the equati",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d3",
+          "claim": "By [F4] the total transform is $\\pi^*C=C'+mE$, and in the chart its local equation is the product of a local equation of $C'$ with the $m$-th power $x^m$ of the exceptional equation; by step 2.1 the local equation of the total transform is $x^mg$ with $x\\nmid g$, so the strict transform is cut out by $g=0$ in this chart, as claimed. The same computation with the roles of $x$ and $y$ interchanged, ",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "d4",
+          "claim": "For a point $q=(0,s_0)$ of $E$ in the first chart, the local equation $g$ of the strict transform satisfies $g\\equiv f_m(1,s)\\pmod x$, so its lowest-degree homogeneous part at $q$ is the lowest-degree part of the univariate polynomial $f_m(1,s)$ at $s_0$, of degree at most $m$; hence the multiplicity of the strict transform at $q$ is at most the degree of $f_m$, which is $m$. The same bound holds ",
+          "step": "3.2",
+          "inputs": [
+            "2.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "d5",
+          "claim": "Steps 3.1 and 3.2 prove the assertions: the strict transform equation in each chart is obtained from the total transform by dividing by the largest power of the exceptional equation, which is exactly $x^m$ in the first chart and $y^m$ in the second, with the leading form evaluated at $(1,s)$ (respectively $(u,1)$) as the value along $E$, and the strict transform has multiplicity at most $m$ at eve",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: f is a reduced local equation of a curve through the origin, so the curve is nonempty and m>=1; the empty curve and the empty centre are excluded by hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the factor x^m is removed from the total transform; the case m=0 (the origin not on the curve) is excluded by the hypothesis that the curve passes through 0, and the zero of g along the exceptional line is the contact boundary treated in the same step."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: m=1 is included; then f(x,xs)=x g(x,s) with g(0,s) nonzero, so the strict transform does not meet the exceptional line at smooth points of the curve."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: f is only required to be reduced through 0; it may be singular at other points and its leading form may be a power of a linear form, the multiple-branch case being exactly where g(0,s) has repeated roots."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The computation is at a single point with a local equation; there is no ordered or interval parameter with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is used: the chart coordinates (x,s) and the local equation f are fixed data, and the factorisation f(x,xs)=x^m g(x,s) is unique once f and the chart are fixed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement computes the strict-transform equation and its restriction to the exceptional line; it makes no biconditional assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse direction is asserted; the claim is an identity for the transformed equation together with its boundary behaviour."
+        }
+      ]
+    },
+    "rem-blowup-does-not-mean-delete-point": {
+      "risk": "low",
+      "kind": "remark",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement prose of the remark: the zero ideal I=0 gives Z=X and the blowup Proj_X O_X[t] = X; the remark's points about properness and the isomorphism locus remain valid and the case illustrates that no point of the center is deleted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement prose of the remark: the zero ideal is the extreme case of the discussion; all sections of the remark are stated for an arbitrary quasi-coherent ideal of finite type, including I=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement prose of the remark: a single point center Z={p} on a regular surface is the guiding example; the remark asserts pi is proper and an isomorphism off Z, with no neighbourhood of p on which pi is an isomorphism."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement prose of the remark: no regularity or reducedness of X or Z is assumed, and the center may be any closed subscheme V(I); the remark records that the blowup is a proper model, not a deletion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A remark with prose assertions has no ordered or interval parameter, so no endpoint case arises."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement prose of the remark: the Axiom of Choice is inherited from the projective blowup theorem [[thm-blowup-projective]] and the off-center lemma [[lem-blowup-isomorphism-off-center]] that the remark cites; it selects nothing further."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark contains no 'if and only if'; its items are separate one-way assertions about properness, the isomorphism locus and the exceptional subscheme."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse direction of a biconditional to check in a prose remark that lists properties of a blowup."
+        }
+      ]
+    },
+    "thm-blowup-closed-immersion-transform-universal": {
+      "risk": "low",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-strict-transform-closed-subscheme",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, inherited from the relative Proj construction used\nby the blowup ([[def-axiom-of-choice]]). Let $X$ be a scheme, let $\\mathcal I$\nbe a quasi-coherent ideal sheaf of finite type\n([[def-quasi-coherent-ideal-sheaf]]), let\n$\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be the blowup of\n[[def-blowup-scheme-along-ideal]] with exceptional subscheme\n$E=\\pi^{-1}(Z)$ ([[def-exceptional-divisor-blowup]]), and let\n$Y\\hookrightarrow X$ be a closed subscheme\n([[def-closed-immersion-schemes]]) with scheme-theoretic inverse image\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$. Write\n$$U:=(Y\\times_X\\operatorname{Bl}_{\\mathcal I}X)\\smallsetminus E$$\nfor the open subscheme obtained by deleting $E$ from this inverse image, with\nits open immersion $j\\colon U\\to Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$.\n\nThe **strict transform** (or **proper transform**) of $Y$ is the\nscheme-theoretic closure of $U$ in $Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$,\nthat is, the scheme-theoretic image\n$Y':=\\overline{U}$ of $j$ ([[def-scheme-theoretic-image]]); when this image\nexists it is a closed subscheme $Y'\\hookrightarrow\nY\\times_X\\operatorname{Bl}_{\\mathcal I}X$ with structural morphism\n$Y'\\to Y$ the restriction of the projection. When\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$ is locally\nNoetherian and $j$ is quasi-compact, the closure exists and is computed by the\nkernel description of [[lem-schematic-closure-and-dense-agreement]]: writing\n$\\mathcal K:=\\ker\\bigl(\\mathcal O_{Y\\times_X\\operatorname{Bl}}\\to\nj_*\\mathcal O_U\\bigr)$, the closed subscheme $Z_{\\mathcal K}$ cut out by\n$\\mathcal K$ is $Y'$, and it is the smallest closed subscheme of\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$ through which $j$ factors.\n\n**Chartwise description.** The strict transform is determined by its\nrestriction to the standard affine charts of the blowup. Let\n$U_0=\\operatorname{Spec}A\\subseteq X$ be an affine open and let $a\\in\n\\Gamma(U_0,\\mathcal I)$; on the chart\n$\\operatorname{Spec}A[\\mathcal I/a]\\subseteq\\operatorname{Bl}_{\\mathcal I}X$\nthe exceptional subscheme is cut out by $a$ (this is the chart computation of\n[[def-blowup-scheme-along-ideal]] recorded in the affine presentation), the\ninverse image of $Y$ is cut out by the ideal $JA[\\mathcal I/a]$, where\n$J=\\Gamma(U_0,\\mathcal I_Y)$, and the strict transform meets the chart in the\nclosed subscheme defined by the **saturation**\n$$(JA[\\mathcal I/a]:a^\\infty)=\\bigl\\{f\\in A[\\mathcal I/a]:a^nf\\in JA[\\mathcal I/a]\\text{ for some }n\\ge0\\bigr\\},$$\nthe largest ideal of the chart ring containing $JA[\\mathcal I/a]$ whose\nlocalisation at $a$ equals the localisation of $JA[\\mathcal I/a]$.\nThese local closed subschemes agree on overlaps of charts: on the overlap of\nthe charts of $a$ and $b$ the elements $a$ and $b$ differ by a unit, so the two\nsaturations coincide, and after localising at $a$ the saturation becomes the\ninverse image ideal of $Y$ itself, matching the fact that the blowup is an\nisomorphism over $X\\smallsetminus Z$.\nHence the chartwise closed subschemes glue to a closed subscheme\n$Y'\\hookrightarrow Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$, and this glued\ndescription gives the strict transform even when the scheme-theoretic closure\nis not known to exist; where the closure exists the two agree, as the kernel\ndescription of [[lem-schematic-closure-and-dense-agreement]] identifies the\nclosure with the saturation on each chart on which the exceptional divisor is\nprincipal.\n\n**Reducedness.** If $Y$ is reduced, then $Y'$ is reduced. Indeed, on a chart\nas above the ring of the strict transform is\n$A[\\mathcal I/a]/(JA[\\mathcal I/a]:a^\\infty)$, and the saturation is by\nconstruction the kernel of the localisation\n$A[\\mathcal I/a]/(JA[\\mathcal I/a])\\to A[\\mathcal I/a][1/a]/(J)$, so this ring\nembeds into $\\bigl(A[\\mathcal I/a]/(J)\\bigr)[1/a]=(A/J)[1/a]$, which is reduced\nwhen $Y$ is; a subring of a reduced ring is reduced, and reducedness is local,\nso $Y'$ is reduced.\n\n**Iteration.** The construction applies verbatim to a blowup of\n$\\operatorname{Bl}_{\\mathcal I}X$ along any quasi-coherent ideal sheaf of\nfinite type on it: for a closed subscheme $W\\hookrightarrow\n\\operatorname{Bl}_{\\mathcal I}X$, its inverse image under a further blowup and\nthe deletion of that blowup's exceptional subscheme define the strict transform\nof $W$, and the chartwise saturation description is unchanged. In particular a\nstrict transform of a strict transform may be formed along a further blowup.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-schematic-closure-and-dense-agreement",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $j:U\\to Y$ be a\nquasi-compact open immersion of schemes ([[def-open-immersion-schemes]],\n[[def-quasi-compact-and-quasi-separated-morphism]]) with $Y$ Noetherian\n([[def-locally-noetherian-and-noetherian-scheme]]), and put\n$$\\mathcal K:=\\ker\\bigl(\\mathcal O_Y\\longrightarrow j_*\\mathcal O_U\\bigr),$$\nthe kernel of the induced map of structure sheaves. Then:\n\n1. $\\mathcal K$ is an ideal sheaf on $Y$ ([[def-ideal-sheaf]]) and\n   quasi-coherent as an $\\mathcal O_Y$-module\n   ([[def-quasi-coherent-module-scheme]]);\n2. the closed subscheme $Z=Z_{\\mathcal K}$ determined by $\\mathcal K$, whose\n   underlying closed set is $V(\\mathcal K)=\\{y\\in Y:\\mathcal K_y\\neq\n   \\mathcal O_{Y,y}\\}$ and whose structure sheaf is\n   $(\\mathcal O_Y/\\mathcal K)|_{V(\\mathcal K)}$, is the schematic closure of\n   $U$ in $Y$, that is, the scheme-theoretic image of $j$\n   ([[def-scheme-theoretic-image]]): it is the smallest closed subscheme of $Y$\n   through which $j$ factors, and $j$ factors as $j=i\\circ j'$ with\n   $j':U\\to Z$ an open immersion and $i:Z\\to Y$ the closed immersion;\n3. $U$ is schematically dense in $Z$, meaning that\n   $\\mathcal O_Z\\to j'_*\\mathcal O_U$ is injective;\n4. if $T$ is a separated scheme ([[def-separated-morphism-schemes]]) and\n   $a,b:Z\\to T$ are morphisms with $a\\circ j'=b\\circ j'$, then $a=b$.\n\nSince every open subset of a Noetherian scheme is quasi-compact, the\nquasi-compactness hypothesis on $j$ is automatic under the Noetherian\nhypothesis on $Y$; it is retained from the statement. The empty cases\n$U=\\varnothing$ and $Y=\\varnothing$ are included.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-blowup-scheme-along-ideal",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as inherited from the relative Proj construction\n([[def-axiom-of-choice]]). Let $X$ be a scheme and let\n$\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent ideal sheaf of finite\ntype ([[def-quasi-coherent-ideal-sheaf]]), with zero scheme\n$Z=V(\\mathcal I)$, the closed subscheme of $X$ cut out by $\\mathcal I$. The\n**blowup of $X$ along $\\mathcal I$** (or **along $Z$**) is the $X$-scheme\n\n$$\\operatorname{Bl}_{\\mathcal I}X:=\\operatorname{Proj}_X\\mathcal R(\\mathcal I),$$\n\nthe relative Proj of [[def-relative-proj-quasi-coherent-graded-algebra]]\napplied to the Rees algebra sheaf\n$\\mathcal R(\\mathcal I)=\\bigoplus_{n\\ge0}\\mathcal I^n$ of\n[[def-rees-algebra-ideal-sheaf]], equipped with its structural morphism\n\n$$\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\longrightarrow X$$\n\nand its relative twists $\\mathcal O(n)$, $n\\in\\mathbb Z$, both as in\n[[def-relative-proj-quasi-coherent-graded-algebra]]. The notation records the\nideal sheaf $\\mathcal I$, not merely the closed subscheme $Z$; the finite type\nhypothesis is part of the definition because the later structural results for\nblowups (invertibility of the pullback of $\\mathcal I$, the exceptional\ndivisor, and base change) are proved under it.\n\nIn the affine case $X=\\operatorname{Spec}A$ with\n$\\mathcal I=\\widetilde I$ for an ideal $I\\subseteq A$, the Rees algebra sheaf\nis $\\mathcal R(\\mathcal I)\\cong\\widetilde{\\bigoplus_{n\\ge0}I^n}$\n([[def-rees-algebra-ideal-sheaf]]), and the absolute case of the relative Proj\nconstruction identifies $\\operatorname{Bl}_{\\mathcal I}X$ with the absolute\nProj of the Rees algebra $R(I)=\\bigoplus_{n\\ge0}I^nt^n$\n([[def-relative-proj-quasi-coherent-graded-algebra]]); the structural\nmorphism is then the Proj structural morphism to $\\operatorname{Spec}A$.\n\nThe exceptional subscheme of the blowup is denoted $E$ and is introduced\nseparately; no property of $E$ is assumed here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-quasi-coherent-ideal-sheaf",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), inherited from the\nassociated-sheaf existence theorem [[thm-associated-module-sheaf-exists]].\nAn ideal sheaf $\\mathcal I$ on $X$ is **quasi-coherent** if, for every affine\nopen $U=\\operatorname{Spec}A$, there is an ideal $I\\subseteq A$ such that\n$\\mathcal I|_U$ is the ideal sheaf associated to the $A$-module $I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-quasi-coherent-module-scheme",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a scheme ([[def-scheme]]) and let $\\mathcal F$ be a sheaf of\n$\\mathcal O_X$-modules ([[def-module-on-ringed-space]]). Recall that for a\ncommutative ring $A$ and an $A$-module $M$ the associated module sheaf\n$\\widetilde M$ on $\\operatorname{Spec}A$ is the sheaf of\n$\\mathcal O_{\\operatorname{Spec}A}$-modules whose sections on a distinguished\nopen $D(f)$ are $M_f$\n([[def-associated-sheaf-module-affine-scheme]]).\n\nThe module $\\mathcal F$ is **quasi-coherent** if every point $x\\in X$ has an\naffine open neighbourhood $U=\\operatorname{Spec}A\\subseteq X$ and an $A$-module\n$M$ such that\n\n$$\\mathcal F|_U\\;\\cong\\;\\widetilde M$$\n\nas sheaves of $\\mathcal O_U$-modules. A quasi-coherent sheaf of\n$\\mathcal O_X$-modules is also called a quasi-coherent module on $X$, and the\nfull subcategory of $\\mathcal O_X$-modules consisting of the quasi-coherent\nones is written $\\operatorname{QCoh}(X)$; morphisms in\n$\\operatorname{QCoh}(X)$ are all $\\mathcal O_X$-module morphisms between its\nobjects.\n\nImmediate consequences of the definition, used without further comment:\n\n- The condition is invariant under isomorphism: if $\\mathcal F\\cong\\mathcal G$\n  as $\\mathcal O_X$-modules and $\\mathcal F$ is quasi-coherent, then so is\n  $\\mathcal G$, because the isomorphism restricts over an affine open.\n- The condition is local on $X$: $\\mathcal F$ is quasi-coherent if and only if\n  there is an open cover $X=\\bigcup_{i\\in I}U_i$ such that each restriction\n  $\\mathcal F|_{U_i}$ is quasi-coherent. Indeed a point of an arbitrary open\n  subscheme $U\\subseteq X$ has an affine open neighbourhood inside $U$, and an\n  affine open subscheme of $X$ contained in $U$ is also an affine open\n  subscheme of $U$; conversely, every point of $U_i$ lies in an affine open of\n  $X$ inside $U_i$.\n- If $\\mathcal F$ is quasi-coherent and $V\\subseteq X$ is open, then\n  $\\mathcal F|_V$ is quasi-coherent, since $\\mathcal F|_V$ is again an\n  $\\mathcal O_V$-module and an affine open $U\\subseteq V$ is an affine open of\n  $X$.\n- On an affine scheme $X=\\operatorname{Spec}A$ the definition asks at each\n  point for an affine open neighbourhood on which $\\mathcal F$ is associated to\n  a module; it does not ask that $\\mathcal F$ itself be associated to a single\n  $A$-module. The affine comparison theorem on this page shows that on an\n  affine scheme the two conditions coincide.\n\nThe terminology follows the standard one: quasi-coherence is the local\naffine-module condition, and no finiteness, Noetherian or separatedness\nhypothesis is part of it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pullback-center-ideal-invertible",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited from the relative Proj construction\n([[def-axiom-of-choice]]). Let $\\mathcal I$ be a quasi-coherent ideal sheaf of\nfinite type on a scheme $X$ ([[def-quasi-coherent-ideal-sheaf]]), let\n$\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be its blowup and let\n$E=\\pi^{-1}(Z)$ be the exceptional subscheme, with the convention that\n$\\mathcal O(1)$ is the positive relative twist of the Rees algebra\n$\\mathcal R(\\mathcal I)$ and $\\mathcal O(-1):=\\mathcal O(1)^{\\vee}$. Then:\n\n1. $\\mathcal O(1)$ is invertible;\n2. the natural degree-one map $\\pi^*\\mathcal I\\to\\mathcal O(1)$ is surjective,\n   its image is the inverse image ideal\n   $\\mathcal I\\mathcal O_{\\operatorname{Bl}}$, and the induced map\n   $\\mathcal I\\mathcal O_{\\operatorname{Bl}}\\to\\mathcal O(1)$ of invertible\n   sheaves is an isomorphism;\n3. $\\mathcal I\\mathcal O_{\\operatorname{Bl}}$ is invertible and\n   $E=V(\\mathcal I\\mathcal O_{\\operatorname{Bl}})$ is an effective Cartier\n   divisor on $\\operatorname{Bl}_{\\mathcal I}X$, with\n   $\\mathcal O_{\\operatorname{Bl}}(-E)=\\mathcal I\\mathcal O_{\\operatorname{Bl}}\n   =\\mathcal O(1)$ and $\\mathcal O_{\\operatorname{Bl}}(E)=\\mathcal O(-1)$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-blowup-universal-property",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mathcal I$ be a quasi-coherent ideal sheaf of finite type on $X$ with zero scheme $Z$, and let $\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be the blowup. For every $X$-scheme $f\\colon Y\\to X$ such that the inverse image $f^{-1}(Z)$ is an effective Cartier divisor on $Y$, there is a unique $X$-morphism $Y\\to\\operatorname{Bl}_{\\mathcal I}X$. Equivalently, $\\operatorname{Bl}_{\\mathcal I}X$ is the final object of the category of $X$-schemes in which the inverse image of $Z$ is an effective Cartier divisor.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-affine-blowup-standard-charts",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice as inherited from the Proj construction. Let $A$ be\na ring, $I=(f_0,\\dots,f_r)\\subseteq A$, $S=R(I)=\\bigoplus I^nt^n$ and\n$B_i=A[I/f_i]=\\bigl(S[(f_it)^{-1}]\\bigr)_0$. The standard opens\n$U_i=D_+(f_it)=\\operatorname{Spec}B_i$ cover\n$\\operatorname{Bl}_I\\operatorname{Spec}A$. Put\n$u_{ij}=(f_jt)/(f_it)$ in $B_i$. Then\n$U_i\\cap U_j=D(u_{ij})$ in $U_i$, with canonical $A$-algebra identifications\n$(B_i)_{u_{ij}}=S[(f_it)^{-1},(f_jt)^{-1}]_0=(B_j)_{u_{ji}}$. They send\n$f_l/f_i$ to $(f_l/f_j)/(f_i/f_j)$, and $u_{ij}$ to $u_{ji}^{-1}$. These\nidentifications satisfy the identity and cocycle conditions and preserve the\nstructural maps to $\\operatorname{Spec}A$. Different finite generating\nfamilies give compatible chart covers of the same canonical blowup; no\nbijection between the chart families is asserted. The formulas include zero\ndivisors and empty charts; nilpotent $f_i$ gives $B_i=0$. Localization at the\nbase element $f_j$ is generally smaller than this overlap and is not its\nformula.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-affine-blowup-algebra-properties",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a commutative ring, let $I\\subseteq A$ be an ideal and let\n$a\\in I$. Write $R(I)=\\bigoplus_{n\\ge0}I^nt^n\\subseteq A[t]$ for the Rees\nalgebra of $I$, graded by the degree of $t$\n([[def-rees-algebra-and-rees-module]],\n[[def-graded-ring-and-graded-module]]). The **affine blowup algebra** is\n\n$$A[I/a]:=\\bigl(R(I)\\bigr)_{(a)},$$\n\nthe degree-zero part of the localization of $R(I)$ at the multiplicative set\ngenerated by the degree-one element $at\\in It$\n([[def-multiplicative-subset-and-localisation]]). Then:\n\n1. the image of $a$ in $A[I/a]$ is a nonzerodivisor,\n   $IA[I/a]=aA[I/a]$, and $\\bigl(A[I/a]\\bigr)_a=A_a$;\n2. if $I=(a_0,\\dots,a_r)$ with $a=a_0$\n   ([[def-generated-and-principal-ideals]]), the homomorphism\n   $$A[x_1,\\dots,x_r]/(ax_i-a_i)\\longrightarrow A[I/a]$$ sending\n   $x_i\\mapsto a_i/a$ is surjective with kernel the $a$-power torsion;\n3. if $A$ is reduced then $A[I/a]$ is reduced; if $A$ is a domain and\n   $a\\neq0$ then $A[I/a]$ is a domain;\n4. the construction is independent of the generating set and of the\n   representative used for the homogeneous localization, up to canonical\n   $A$-algebra isomorphism.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-closed-immersion-local-on-target",
+          "source_section": "Statement",
+          "quote": "Let $i:Z\\to X$ be a morphism of schemes and let $X=\\bigcup_{j}V_j$ be an open\ncover. Then $i$ is a closed immersion if and only if the restriction\n$i^{-1}(V_j)\\to V_j$ is a closed immersion for every $j$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-blowup-unique-up-to-unique-isomorphism",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal I$ be a quasi-coherent ideal sheaf of finite type with zero scheme $Z$. If $\\pi'\\colon Y\\to X$ is an $X$-scheme such that $Y$ carries the universal property of $\\operatorname{Bl}_{\\mathcal I}X$ (every $X$-scheme in which the inverse image of $Z$ is an effective Cartier divisor maps uniquely to $Y$ over $X$), then there is a unique $X$-isomorphism $Y\\to\\operatorname{Bl}_{\\mathcal I}X$. In particular any two models of the blowup are uniquely isomorphic over $X$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "claim": "By [F2] the inverse image ideal $\\mathcal J=\\mathcal I\\mathcal O_W$ is quasi-coherent of finite type with zero scheme $W\\times_XZ$, so the blowup $\\operatorname{Bl}_{\\mathcal J}W$ and its structural morphism $\\sigma\\colon\\operatorname{Bl}_{\\mathcal J}W\\to W$ are defined; composing with $W\\to X$ exhibits it as an $X$-scheme. By [F3] the inverse image of $Z$ on $\\operatorname{Bl}_{\\mathcal J}W$ is c",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d2",
+          "claim": "Chart computation. Let $\\operatorname{Spec}A\\subseteq X$ be affine with $I=(f_0,\\dots,f_r)$ and $W=\\operatorname{Spec}(A/K)$. Write $B_i=A[I/f_i]$ and $C_i=(A/K)[J/\\bar f_i]$, so that $\\operatorname{Spec}C_i$ is the chart of $\\operatorname{Bl}_{\\mathcal J}W$ over $\\operatorname{Spec}(A/K)$. The morphism $u$ on this chart is the $A$-algebra homomorphism $\\varphi_i\\colon B_i\\to C_i$ with $\\varphi_i(",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "d3",
+          "claim": "By step 2.1 the restriction of $u$ to the chart $\\operatorname{Spec}C_i$ is the closed immersion $\\operatorname{Spec}C_i\\hookrightarrow\\operatorname{Spec}B_i$ cut out by the saturation $(KB_i:f_i^\\infty)$, whose image is exactly the piece of $W'$ over $\\operatorname{Spec}A$ described in [F1]; since $\\operatorname{Spec}C_i$ is the full preimage of the chart of $\\operatorname{Bl}_{\\mathcal I}X$ unde",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "F1",
+            "F5"
+          ]
+        },
+        {
+          "id": "d4",
+          "claim": "Canonicity. The morphism $\\psi$ is the unique $X$-morphism from $\\operatorname{Bl}_{\\mathcal J}W$ to $\\operatorname{Bl}_{\\mathcal I}X$ provided by the universal property in [F3], and $\\sigma$ is the structural morphism of the blowup, so $u$ is determined by the data of the two blowups; conversely the inverse $W'\\to\\operatorname{Bl}_{\\mathcal J}W$ is the restriction of the projection of $W\\times_X\\",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "d5",
+          "claim": "Union statement. Suppose $W=W_1\\cup W_2$ is the scheme-theoretic union of two closed subschemes, so on an affine chart their ideals satisfy $K=K_1\\cap K_2$. The saturation of $K$ with respect to $f_i$ is the preimage of the ideal $KB_i[1/f_i]$ under $B_i\\to B_i[1/f_i]$ by [F4], and formation of preimages of ideals under a ring homomorphism commutes with finite intersections; hence $(KB_i:f_i^\\inft",
+          "step": "5.1",
+          "inputs": [
+            "2.1",
+            "F1",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the closed subscheme W may be empty or disjoint from Z; then J=I O_W is the unit ideal of W, the strict transform is empty, and the universal property is satisfied vacuously, which the statement includes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero ideal case W=X is included; then J=I, the strict transform of W is the blowup itself, and the factorization is the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: W may be a single closed point or a principal divisor; the statement is made for an arbitrary closed subscheme, so the one-point case is covered by the same construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: W need not be reduced or regular, and W may meet Z in a nonreduced scheme; J is defined as the inverse image ideal, and the scheme-theoretic closure is used for the strict transform."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no ordered or interval parameter; the closed subscheme W is arbitrary, so no endpoint case exists."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the Axiom of Choice is assumed, inherited from the blowup and strict-transform constructions; the factorization morphism is obtained from the universal property rather than chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts existence and uniqueness of a factorization through the strict transform; no 'if and only if' is present."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse direction to establish: the theorem is a universal property with existence and uniqueness assertions."
+        }
+      ]
+    },
+    "thm-blowup-effective-cartier-divisor-isomorphism": {
+      "risk": "low",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-effective-cartier-divisor",
+          "source_section": "Definition",
+          "quote": "A Cartier divisor $D$ on a scheme $X$ is **effective** if it has a\nlocal-equation representation $(U_i,f_i)$ as in\n[[def-cartier-divisor]] with\n$f_i\\in\\mathcal O_X(U_i)$ and with multiplication by the germ\n$(f_i)_x$ injective on $\\mathcal O_{X,x}$ for every $x\\in U_i$.\nThus each $f_i$ is a regular section in the precise sense of\n[[def-sheaf-total-quotient-rings]]; the condition uses injectivity of\nmultiplication, including exclusion of the zero germ on a nonzero stalk.\n\nThe condition is independent of the representation. On overlaps two\nCartier equations differ by a regular unit. Multiplication or division\nby such a unit preserves regularity as a section of $\\mathcal O_X$ and\npreserves injectivity of multiplication at every stalk. These local\nconditions remain true on refinements and descend by sheaf locality.\n\nThe local principal ideal sheaves $f_i\\mathcal O_{U_i}$ agree on\noverlaps because $f_i/f_j$ is a regular unit. We denote the resulting\nideal sheaf by $\\mathcal I_D$. The construction of its associated\nclosed subscheme is proved in\nthe subsequent closed-immersion theorem.\n\nA unit equation, in particular $f_i=1$, gives the zero Cartier divisor\nand the ideal sheaf $\\mathcal O_X$. Locally its quotient ring is the\nzero ring, so its vanishing subscheme is empty. The zero Cartier divisor\nis therefore the **empty effective divisor**. The empty scheme has\nonly this effective divisor.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cartier-divisor",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a scheme and let $K_X$ be its sheaf of meromorphic functions, with\nthe injective structure map $\\mathcal O_X\\to K_X$\n([[def-sheaf-total-quotient-rings]], [[def-sheaf-on-topological-space]]). The\npresheaf\n$$U\\ \\longmapsto\\ K_X(U)^{\\times}/\\mathcal O_X(U)^{\\times}$$\nof abelian groups (units of the two sheaves of rings, the second embedded in\nthe first through the injective structure map) has a sheafification in the\nsense of [[def-sheafification]]; the resulting sheaf of abelian groups is\ndenoted\n$$K_X^{\\times}/\\mathcal O_X^{\\times}.$$\n\nA **Cartier divisor** on $X$ is a global section of $K_X^{\\times}/\\mathcal\nO_X^{\\times}$. The group of Cartier divisors is denoted\n$\\operatorname{CaDiv}(X)$; its law is induced by the group law of the quotient\nsheaf, so that the sum of two Cartier divisors is represented by the product\nof their local meromorphic equations, the zero element $0$ is the class of the\nconstant equation $1$, and the inverse of a divisor is represented by the\ninverted local equations.\n\nConcretely, a Cartier divisor can be described as follows. Let\n$\\mathcal U=\\{U_i\\}_{i\\in I}$ be an open cover of $X$ and let\n$f_i\\in K_X(U_i)^{\\times}$ be a meromorphic unit on $U_i$ for each $i$, with\n$$f_i/f_j\\ \\in\\ \\mathcal O_X(U_i\\cap U_j)^{\\times}\\qquad\\text{for all }i,j.$$\nThe images of the $f_i$ in\n$(K_X^{\\times}/\\mathcal O_X^{\\times})(U_i)$ agree on the overlaps\n$U_i\\cap U_j$ (their quotient becomes $1$ in the quotient group), so the sheaf\naxiom glues them to a global section, and a different choice of cover or of\nrepresentatives $f_i$ (that is, passing to a refinement and multiplying $f_i$\nby units of $\\mathcal O_X$ over the pieces) yields the same class. Conversely\nevery global section of the quotient sheaf is locally represented in this way,\nas the local-equation description of Cartier divisors on this page records.\n\nThe **principal** Cartier divisors are the Cartier divisors that are the\nimages of a global meromorphic unit under the canonical map\n$\\Gamma(X,K_X^{\\times})\\to\\Gamma(X,K_X^{\\times}/\\mathcal\nO_X^{\\times})$. They form a subgroup of $\\operatorname{CaDiv}(X)$; a Cartier\ndivisor is principal exactly when it admits a representation by a single\nglobal equation on $X$. The sign convention used on this page is that a\nCartier divisor with local equation $f$ records a zero of $f$ with positive\ncoefficient and a pole with negative coefficient; the convention is fixed\nonce and for all in the definition of the principal Cartier divisor of a\nmeromorphic unit.\n\nIf $X=\\varnothing$ then $\\mathcal O_X=K_X=0$, the quotient sheaf is the zero\nsheaf and $\\operatorname{CaDiv}(\\varnothing)=0$; if $X$ is the spectrum of a\nfield, then $K_X=\\mathcal O_X=\\kappa$ and again\n$\\operatorname{CaDiv}(X)=0$, consistently with the fact that a Cartier divisor\nmeasures the failure of a meromorphic unit to be a global unit.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cartier-divisor-sheaf-invertible",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a scheme and let $D$ be a Cartier divisor on $X$, represented by\nmeromorphic units $f_i\\in\\mathcal K_X(U_i)^{\\times}$ with unit ratios on the\noverlaps ([[def-cartier-divisor]]), and let $\\mathcal O_X(D)$ be the\n$\\mathcal O_X$-submodule sheaf of $\\mathcal K_X$ of\n[[def-invertible-sheaf-of-cartier-divisor]]. Then $\\mathcal O_X(D)$ is an\ninvertible $\\mathcal O_X$-module ([[def-invertible-sheaf]]), and on each\n$U_i$ it is freely generated by $f_i^{-1}$, so that the map\n$\\mathcal O_{U_i}\\to\\mathcal O_X(D)|_{U_i}$, $a\\mapsto a f_i^{-1}$, is an\nisomorphism. If $X$ is integral ([[def-integral-scheme]]), then $\\mathcal K_X$\nis the constant sheaf with value the function field $K(X)$\n([[def-sheaf-total-quotient-rings]]), and $\\mathcal O_X(D)$ is a fractional\n$\\mathcal O_X$-subsheaf of $K(X)$: an $\\mathcal O_X$-submodule of the constant\nsheaf $K(X)$ which is locally of the form $g\\,\\mathcal O_X$ with\n$g\\in K(X)^{\\times}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-affine-blowup-standard-charts",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice as inherited from the Proj construction. Let $A$ be\na ring, $I=(f_0,\\dots,f_r)\\subseteq A$, $S=R(I)=\\bigoplus I^nt^n$ and\n$B_i=A[I/f_i]=\\bigl(S[(f_it)^{-1}]\\bigr)_0$. The standard opens\n$U_i=D_+(f_it)=\\operatorname{Spec}B_i$ cover\n$\\operatorname{Bl}_I\\operatorname{Spec}A$. Put\n$u_{ij}=(f_jt)/(f_it)$ in $B_i$. Then\n$U_i\\cap U_j=D(u_{ij})$ in $U_i$, with canonical $A$-algebra identifications\n$(B_i)_{u_{ij}}=S[(f_it)^{-1},(f_jt)^{-1}]_0=(B_j)_{u_{ji}}$. They send\n$f_l/f_i$ to $(f_l/f_j)/(f_i/f_j)$, and $u_{ij}$ to $u_{ji}^{-1}$. These\nidentifications satisfy the identity and cocycle conditions and preserve the\nstructural maps to $\\operatorname{Spec}A$. Different finite generating\nfamilies give compatible chart covers of the same canonical blowup; no\nbijection between the chart families is asserted. The formulas include zero\ndivisors and empty charts; nilpotent $f_i$ gives $B_i=0$. Localization at the\nbase element $f_j$ is generally smaller than this overlap and is not its\nformula.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-affine-blowup-algebra-properties",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a commutative ring, let $I\\subseteq A$ be an ideal and let\n$a\\in I$. Write $R(I)=\\bigoplus_{n\\ge0}I^nt^n\\subseteq A[t]$ for the Rees\nalgebra of $I$, graded by the degree of $t$\n([[def-rees-algebra-and-rees-module]],\n[[def-graded-ring-and-graded-module]]). The **affine blowup algebra** is\n\n$$A[I/a]:=\\bigl(R(I)\\bigr)_{(a)},$$\n\nthe degree-zero part of the localization of $R(I)$ at the multiplicative set\ngenerated by the degree-one element $at\\in It$\n([[def-multiplicative-subset-and-localisation]]). Then:\n\n1. the image of $a$ in $A[I/a]$ is a nonzerodivisor,\n   $IA[I/a]=aA[I/a]$, and $\\bigl(A[I/a]\\bigr)_a=A_a$;\n2. if $I=(a_0,\\dots,a_r)$ with $a=a_0$\n   ([[def-generated-and-principal-ideals]]), the homomorphism\n   $$A[x_1,\\dots,x_r]/(ax_i-a_i)\\longrightarrow A[I/a]$$ sending\n   $x_i\\mapsto a_i/a$ is surjective with kernel the $a$-power torsion;\n3. if $A$ is reduced then $A[I/a]$ is reduced; if $A$ is a domain and\n   $a\\neq0$ then $A[I/a]$ is a domain;\n4. the construction is independent of the generating set and of the\n   representative used for the homogeneous localization, up to canonical\n   $A$-algebra isomorphism.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-blowup-universal-property",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mathcal I$ be a quasi-coherent ideal sheaf of finite type on $X$ with zero scheme $Z$, and let $\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be the blowup. For every $X$-scheme $f\\colon Y\\to X$ such that the inverse image $f^{-1}(Z)$ is an effective Cartier divisor on $Y$, there is a unique $X$-morphism $Y\\to\\operatorname{Bl}_{\\mathcal I}X$. Equivalently, $\\operatorname{Bl}_{\\mathcal I}X$ is the final object of the category of $X$-schemes in which the inverse image of $Z$ is an effective Cartier divisor.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-blowup-unique-up-to-unique-isomorphism",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal I$ be a quasi-coherent ideal sheaf of finite type with zero scheme $Z$. If $\\pi'\\colon Y\\to X$ is an $X$-scheme such that $Y$ carries the universal property of $\\operatorname{Bl}_{\\mathcal I}X$ (every $X$-scheme in which the inverse image of $Z$ is an effective Cartier divisor maps uniquely to $Y$ over $X$), then there is a unique $X$-isomorphism $Y\\to\\operatorname{Bl}_{\\mathcal I}X$. In particular any two models of the blowup are uniquely isomorphic over $X$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "claim": "If $\\mathcal I$ is invertible then it is locally generated by a single element $f_i$ on an open cover $\\{U_i\\}$ and the generator is a nonzerodivisor by [F1], so the zero scheme $Z$ is an effective Cartier divisor with local equations $f_i$; conversely if $Z=V(\\mathcal I)$ is an effective Cartier divisor with local equations $f_i$, then $\\mathcal I|_{U_i}=(f_i)$ and [F2] exhibits $\\mathcal I$ as i",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d2",
+          "claim": "Suppose $\\mathcal I$ is invertible. On each affine open $U=\\operatorname{Spec}A$ with $\\mathcal I|_U=(f)$ and $f$ a nonzerodivisor, the single standard chart of the blowup is $\\operatorname{Spec}A[I/f]=\\operatorname{Spec}A=U$ by [F3], and it covers $\\operatorname{Bl}_IU=\\pi^{-1}(U)$; hence $\\pi^{-1}(U)\\to U$ is an isomorphism. [F3, step 1.1]",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "d3",
+          "claim": "The restriction $\\pi^{-1}(U)\\to U$ is an isomorphism for the members of an affine open cover of $X$ by step 2.1, and being an isomorphism is local on the target, so $\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ is an isomorphism; its inverse is characterized by the universal property [F4] applied to the identity of $X$, whose inverse image of $Z$ is the effective Cartier divisor $Z$ itself, so t",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "d4",
+          "claim": "In the affine case $X=\\operatorname{Spec}A$ and $\\mathcal I=\\widetilde I$ with $I=(f)$ for a nonzerodivisor $f$, step 2.1 with $U=X$ gives $\\operatorname{Bl}_I\\operatorname{Spec}A=\\operatorname{Spec}A[I/f]=\\operatorname{Spec}A$, as claimed. [F3, step 2.1]",
+          "step": "3.2",
+          "inputs": [
+            "2.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "d5",
+          "claim": "Steps 1.1, 3.1 and 3.2 prove the statement: invertible centers are exactly effective Cartier divisors, and the blowup along such an ideal sheaf is an isomorphism, computed on an affine chart as $\\operatorname{Spec}A[I/f]=\\operatorname{Spec}A$ when $I$ is generated by one nonzerodivisor. [step 1.1, step 3.1, step 3.2] \u220e",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the unit ideal I=O_X is invertible and gives Z=empty; the blowup is then an isomorphism, which is the empty-center case included in the theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: invertibility of I is the exact hypothesis; the zero ideal is not invertible on a nonempty scheme and is excluded, consistently with its blowup being X with Z=X."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the case of I generated by a single nonzerodivisor f on an affine open is displayed explicitly: the chart A[I/f] equals A."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: X need not be regular and Z need not be reduced; only invertibility of I is assumed, and the local generator f is a nonzerodivisor, including the empty-divisor case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem concerns an isomorphism of schemes with no ordered or interval parameter; no endpoint case exists."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the Axiom of Choice is assumed, inherited from the blowup construction; the isomorphism is canonical and no further object is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication from invertibility to being an isomorphism; the equivalence between invertible I and an effective Cartier divisor Z is stated as a dictionary, not as a claim to prove in two directions here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse direction of a biconditional is asserted in the theorem's conclusion."
+        }
+      ]
+    },
+    "thm-blowup-separates-plane-curve-tangent-directions": {
+      "risk": "low",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multiplicity-hypersurface-point",
+          "source_section": "Definition",
+          "quote": "Let $k$ be any field, let $n\\in\\mathbb N$, put $P=k[X_1,\\ldots,X_n]$, and\nlet $a=(a_1,\\ldots,a_n)\\in k^n$. Suppose $0\\ne f\\in P$ and $f(a)=0$. Write\nthe unique finite homogeneous decomposition\n$$\nf(a_1+t_1,\\ldots,a_n+t_n)=\\sum_{j\\ge0}f_j(t_1,\\ldots,t_n),\n$$\nwhere $f_j$ is homogeneous of total degree $j$. The **multiplicity of the\nhypersurface equation $f$ at $a$**, denoted $\\operatorname{mult}_a(f)$, is\nthe least $j$ for which $f_j\\ne0$.\n\nLet $\\mathfrak m_a=(X_1-a_1,\\ldots,X_n-a_n)$ and\n$R=P_{\\mathfrak m_a}=\\mathcal O_{\\mathbb A^n_k,a}$, with maximal ideal\n$\\mathfrak m=\\mathfrak m_aR$. For $g\\in R$ of finite order, write\n$\\operatorname{ord}_{\\mathfrak m}(g)=d$ when\n$$g\\in\\mathfrak m^d\\setminus\\mathfrak m^{d+1}.$$\nThen $\\operatorname{mult}_a(f)=\\operatorname{ord}_{\\mathfrak m}(f)$.\nIn particular, replacing the local equation by $uf$ for a unit\n$u\\in R^\\times$ leaves its $\\mathfrak m$-adic order unchanged.\n\nThis is multiplicity of the equation, unchanged under a local unit. It is\nnot an invariant of the reduced support: for every integer $r\\ge1$,\n$\\operatorname{mult}_a(f^r)=r\\operatorname{mult}_a(f)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-blowup-plane-origin-incidence-equations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited from the Proj constructions used below\n([[def-axiom-of-choice]]). Let $B$ be a commutative ring with $1$,\n$X=\\operatorname{Spec}B[x,y]=\\mathbb A^2_B$ and $I=(x,y)\\subseteq B[x,y]$.\nWith homogeneous coordinates $u,v$ on $\\mathbb P^1_B$, the blowup\n$\\operatorname{Bl}_I X$ of [[def-blowup-scheme-along-ideal]] is\n$V(xv-yu)\\subseteq X\\times_B\\mathbb P^1_B$, and the projection is its\nstructural morphism. Its two standard charts are\n$\\operatorname{Spec}B[x,T]$ with $y=xT$ and $\\operatorname{Spec}B[y,U]$ with\n$x=yU$; their overlap inverts $T$ and $U$ with $TU=1$. The exceptional\nsubscheme is $V(x)$ and $V(y)$ respectively and is isomorphic to\n$\\mathbb P^1_B$. In particular this holds over any field $B=k$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-plane-curve-multiplicity-transform-chart",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field, let $0$ be the origin of $\\mathbb A^2_k=\\operatorname{Spec}k[x,y]$\nand let $f\\in k[x,y]$ be a reduced local equation of a curve through $0$ of\nmultiplicity $m=\\operatorname{mult}_0(f)\\ge1$\n([[def-multiplicity-hypersurface-point]]). In the chart with coordinates\n$(x,s)$ where $y=xs$, the total transform equation is\n$f(x,xs)=x^mg(x,s)$ with $g(0,s)$ the leading form evaluated at $(1,s)$, and\nthe strict transform is defined by $g=0$; symmetrically in the other chart.\nIn particular the strict transform has multiplicity at most $m$ at any point\nof the exceptional curve $E$, and its equation is obtained from the total\ntransform by dividing by the largest power of the exceptional equation, which\nis exactly the $m$-th power.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-total-transform-strict-plus-exceptional-multiplicity",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a regular surface over a field $k$ and let $C\\subseteq S$ be a reduced curve (an effective Cartier divisor) with a closed point $p$ at which the multiplicity $m=\\operatorname{mult}_p(C)$ of a local equation is finite and positive. Let $\\pi\\colon S'\\to S$ be the blowup of the point $p$ with exceptional curve $E$ and let $C'$ be the strict transform of $C$. Then $\\pi^*C=C'+mE$ as effective Cartier divisors on $S'$; equivalently, the strict transform is defined by dividing a local equation of the total transform by the $m$-th power of an exceptional equation on each chart, and $C'$ meets $E$ in the $0$-cycle of degree $m$ cut out by the degree-$m$ leading form of a local equation of $C$ at $p$ (its degree over $\\kappa(p)$ is $m$; its degree over $k$ is $m[\\kappa(p):k]$ when this residue degree is finite).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-tangent-cone-initial-ideal-presentation",
+          "source_section": "Statement",
+          "quote": "Let $k$ be any field, $n\\in\\mathbb N$, $P=k[t_1,\\ldots,t_n]$, and\n$\\mathfrak q=(t_1,\\ldots,t_n)$. Let $I\\subseteq\\mathfrak q$,\n$A=P/I$, $X=\\operatorname{Spec}A$, and let $x$ be the rational origin, so\n$\\mathfrak m=\\mathfrak q/I$ and $A/\\mathfrak m=k$. For a nonzero polynomial\n$f=\\sum_d f_d$ decomposed into total-degree homogeneous parts, let $f_{\\min}$\nbe its lowest nonzero homogeneous part, and let\n$\\operatorname{in}_{\\mathfrak q}(I)$ be the ideal generated by all\n$f_{\\min}$ with $0\\ne f\\in I$. The canonical graded $k$-algebra map\n$$P/\\operatorname{in}_{\\mathfrak q}(I)\\longrightarrow\\operatorname{gr}_{\\mathfrak m_x}\\mathcal O_{X,x}$$\nsending each variable to its degree-one initial class, is an isomorphism.\nConsequently\n$$\\operatorname{Cone}_x(X)\\cong\\operatorname{Spec}\\bigl(P/\\operatorname{in}_{\\mathfrak q}(I)\\bigr).$$\nIf $I=(f)$ with $f\\ne0$, then\n$\\operatorname{in}_{\\mathfrak q}(I)=(f_{\\min})$. The initial forms of a\nchosen generating set for $I$ need not generate\n$\\operatorname{in}_{\\mathfrak q}(I)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-tangent-cone-point",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a locally Noetherian scheme and $x\\in X$. Write\n$A=\\mathcal O_{X,x}$, let $\\mathfrak m_x$ be its maximal ideal, and put\n$\\kappa(x)=A/\\mathfrak m_x$, as in [[def-zariski-cotangent-space-point]]. The\nassociated graded ring for the maximal-ideal filtration is\n$$\n\\operatorname{gr}_{\\mathfrak m_x}(A)=\\bigoplus_{n\\ge 0}\\mathfrak m_x^n/\\mathfrak m_x^{n+1}\n$$\nwith multiplication induced from $A$ ([[def-associated-graded-ring-and-module]]).\n\nFor every $n$, multiplication by $\\mathfrak m_x$ sends\n$\\mathfrak m_x^n$ into $\\mathfrak m_x^{n+1}$, so it acts trivially on the\ndegree-$n$ quotient. Thus the scalar action on each graded piece factors\ncanonically through $\\kappa(x)$, and the degree-zero piece is\n$A/\\mathfrak m_x=\\kappa(x)$. This makes the associated graded ring a graded\n$\\kappa(x)$-algebra without choosing a coefficient field in $A$.\n\nThe **scheme-theoretic tangent cone** of $X$ at $x$ is the affine\n$\\kappa(x)$-scheme\n$$\n\\operatorname{Cone}_x(X):=\\operatorname{Spec}\\!\\left(\\operatorname{gr}_{\\mathfrak m_x}(A)\\right)\\longrightarrow \\operatorname{Spec}\\kappa(x).\n$$\nWe use $\\operatorname{Cone}_x(X)$ to distinguish this scheme from the\ncotangent space denoted $C_xX$ in the preceding definition. Here `Spec` carries its affine scheme structure\n([[def-affine-scheme-spectrum]], [[def-affine-scheme]]), and the map to\n$\\operatorname{Spec}\\kappa(x)$ is the structure morphism of a scheme over\n$\\kappa(x)$ ([[def-scheme-over-base]]) induced by the degree-zero inclusion. The\ngrading is retained as part of the cone presentation. The reduction\n$(\\operatorname{Cone}_x(X))_{\\mathrm{red}}$ is a closed subscheme that can\ndiffer from $\\operatorname{Cone}_x(X)$;\nthe definition uses the full associated graded ring, without quotienting by\nits nilpotents ([[def-reduction-of-scheme]]).\n\nIf $A$ is already a field, then $\\mathfrak m_x=0$, every positive graded\npiece vanishes, and $\\operatorname{Cone}_x(X)=\\operatorname{Spec}\\kappa(x)$.\n\nFor the closed point $x=(\\epsilon)$ of the dual-numbers scheme\n$D_k=\\operatorname{Spec}(k[\\epsilon]/(\\epsilon^2))$\n([[def-dual-numbers-scheme]]), every element\n$a+b\\epsilon$ with $a\\ne0$ is a unit, so $\\mathcal O_{D_k,x}=k[\\epsilon]/(\\epsilon^2)$\nand $\\mathfrak m_x=(\\epsilon)$. Its associated graded pieces are $k$ in\ndegree $0$, $k\\epsilon$ in degree $1$, and zero in every degree $n\\ge2$;\nthe degree-one class squares to zero. Hence\n$$\n\\operatorname{gr}_{(\\epsilon)}\\mathcal O_{D_k,x}\\cong k[\\epsilon]/(\\epsilon^2),\\qquad \\operatorname{Cone}_x(D_k)\\cong D_k.\n$$\nThe nilradical is $(\\epsilon)$, so the reduction is $\\operatorname{Spec}k$.\nThus $\\operatorname{Cone}_x(D_k)$ and its reduction have the same one-point\ntopological space but different structure sheaves.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exceptional-divisor-normal-cone-proj",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited from the relative Proj construction\n([[def-axiom-of-choice]]). Let $Z=V(\\mathcal I)$ be a closed subscheme of a\nscheme $X$ cut out by a quasi-coherent ideal sheaf $\\mathcal I$ of finite type\n([[def-quasi-coherent-ideal-sheaf]]) and let $E=\\pi^{-1}(Z)$ be the exceptional\nsubscheme of the blowup $\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$\n([[def-exceptional-divisor-blowup]]). Then there is a canonical isomorphism of\n$Z$-schemes\n$$E\\longrightarrow\\operatorname{Proj}_Z\\Bigl(\\operatorname{gr}_{\\mathcal I}\\mathcal O_X\\Bigr)=\\operatorname{Proj}_Z\\Bigl(\\bigoplus_{n\\ge0}\\mathcal I^n/\\mathcal I^{n+1}\\Bigr),$$\nthe projectivized normal cone of $Z$ in $X$. On an affine chart\n$\\operatorname{Spec}A$ with $\\mathcal I=(f_0,\\dots,f_r)$, the fibre of $E$\nover a point $z$ of $Z$ is\n$\\operatorname{Proj}\\bigl(\\operatorname{gr}_I(A)\\otimes_{A/I}\\kappa(z)\\bigr)$,\nthe projectivized fibre of the normal cone (for a closed point center this is\nits projectivized tangent cone), and the closed immersion\n$E\\hookrightarrow\\operatorname{Bl}_{\\mathcal I}X$ identifies $E$ with the\ndivisor $V(a)$ in the chart $\\operatorname{Spec}A[I/a]$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-effective-cartier-divisor",
+          "source_section": "Definition",
+          "quote": "A Cartier divisor $D$ on a scheme $X$ is **effective** if it has a\nlocal-equation representation $(U_i,f_i)$ as in\n[[def-cartier-divisor]] with\n$f_i\\in\\mathcal O_X(U_i)$ and with multiplication by the germ\n$(f_i)_x$ injective on $\\mathcal O_{X,x}$ for every $x\\in U_i$.\nThus each $f_i$ is a regular section in the precise sense of\n[[def-sheaf-total-quotient-rings]]; the condition uses injectivity of\nmultiplication, including exclusion of the zero germ on a nonzero stalk.\n\nThe condition is independent of the representation. On overlaps two\nCartier equations differ by a regular unit. Multiplication or division\nby such a unit preserves regularity as a section of $\\mathcal O_X$ and\npreserves injectivity of multiplication at every stalk. These local\nconditions remain true on refinements and descend by sheaf locality.\n\nThe local principal ideal sheaves $f_i\\mathcal O_{U_i}$ agree on\noverlaps because $f_i/f_j$ is a regular unit. We denote the resulting\nideal sheaf by $\\mathcal I_D$. The construction of its associated\nclosed subscheme is proved in\nthe subsequent closed-immersion theorem.\n\nA unit equation, in particular $f_i=1$, gives the zero Cartier divisor\nand the ideal sheaf $\\mathcal O_X$. Locally its quotient ring is the\nzero ring, so its vanishing subscheme is empty. The zero Cartier divisor\nis therefore the **empty effective divisor**. The empty scheme has\nonly this effective divisor.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-standard-open-proj",
+          "source_section": "Definition",
+          "quote": "Let $S=\\bigoplus_{d\\ge0}S_d$ be a commutative nonnegatively graded ring with\nprojective spectrum $\\operatorname{Proj}S$ as in\n[[def-proj-graded-ring-points]]. For a homogeneous element $f\\in S_+$ of\npositive degree set\n$$D_+(f)=\\{\\mathfrak p\\in\\operatorname{Proj}S: f\\notin\\mathfrak p\\}.$$\nThese are the **standard opens** of $\\operatorname{Proj}S$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-projective-space-as-proj",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice as inherited from the affine-scheme constructions\nused to build $\\operatorname{Proj}$ and $\\mathbb P^n_A$\n([[def-axiom-of-choice]]). Fix a commutative ring $A$ and an integer $n\\ge0$,\nlet $S=A[x_0,\\dots,x_n]$ be graded by total degree with $\\deg x_i=1$, and let\n$\\mathbb P^n_A$ be the chart-glued projective space of\n[[def-relative-projective-space-standard-charts]], with standard charts\n$U_i=\\operatorname{Spec}A[x^{(i)}_\\ell:\\ell\\ne i]$ and transition\nisomorphisms $x^{(i)}_\\ell\\mapsto x^{(j)}_\\ell/x^{(j)}_i$,\n$x^{(i)}_j\\mapsto 1/x^{(j)}_i$ on $U_i\\cap U_j$.\n\nThen there is a canonical isomorphism of $\\operatorname{Spec}A$-schemes\n$$\\operatorname{Proj}S\\;\\cong\\;\\mathbb P^n_A,$$\nit is natural in $A$: for every ring homomorphism $A\\to B$ the diagram with the\nidentifications $\\operatorname{Proj}(A[x_0,\\dots,x_n])\\otimes_A B\\cong\n\\operatorname{Proj}(B[x_0,\\dots,x_n])$ and $\\mathbb P^n_B\\cong\n\\mathbb P^n_A\\times_{\\operatorname{Spec}A}\\operatorname{Spec}B$ commutes, and\nfor $n=0$ both sides are $\\operatorname{Spec}A$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-strict-transform-closed-subscheme",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, inherited from the relative Proj construction used\nby the blowup ([[def-axiom-of-choice]]). Let $X$ be a scheme, let $\\mathcal I$\nbe a quasi-coherent ideal sheaf of finite type\n([[def-quasi-coherent-ideal-sheaf]]), let\n$\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be the blowup of\n[[def-blowup-scheme-along-ideal]] with exceptional subscheme\n$E=\\pi^{-1}(Z)$ ([[def-exceptional-divisor-blowup]]), and let\n$Y\\hookrightarrow X$ be a closed subscheme\n([[def-closed-immersion-schemes]]) with scheme-theoretic inverse image\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$. Write\n$$U:=(Y\\times_X\\operatorname{Bl}_{\\mathcal I}X)\\smallsetminus E$$\nfor the open subscheme obtained by deleting $E$ from this inverse image, with\nits open immersion $j\\colon U\\to Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$.\n\nThe **strict transform** (or **proper transform**) of $Y$ is the\nscheme-theoretic closure of $U$ in $Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$,\nthat is, the scheme-theoretic image\n$Y':=\\overline{U}$ of $j$ ([[def-scheme-theoretic-image]]); when this image\nexists it is a closed subscheme $Y'\\hookrightarrow\nY\\times_X\\operatorname{Bl}_{\\mathcal I}X$ with structural morphism\n$Y'\\to Y$ the restriction of the projection. When\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$ is locally\nNoetherian and $j$ is quasi-compact, the closure exists and is computed by the\nkernel description of [[lem-schematic-closure-and-dense-agreement]]: writing\n$\\mathcal K:=\\ker\\bigl(\\mathcal O_{Y\\times_X\\operatorname{Bl}}\\to\nj_*\\mathcal O_U\\bigr)$, the closed subscheme $Z_{\\mathcal K}$ cut out by\n$\\mathcal K$ is $Y'$, and it is the smallest closed subscheme of\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$ through which $j$ factors.\n\n**Chartwise description.** The strict transform is determined by its\nrestriction to the standard affine charts of the blowup. Let\n$U_0=\\operatorname{Spec}A\\subseteq X$ be an affine open and let $a\\in\n\\Gamma(U_0,\\mathcal I)$; on the chart\n$\\operatorname{Spec}A[\\mathcal I/a]\\subseteq\\operatorname{Bl}_{\\mathcal I}X$\nthe exceptional subscheme is cut out by $a$ (this is the chart computation of\n[[def-blowup-scheme-along-ideal]] recorded in the affine presentation), the\ninverse image of $Y$ is cut out by the ideal $JA[\\mathcal I/a]$, where\n$J=\\Gamma(U_0,\\mathcal I_Y)$, and the strict transform meets the chart in the\nclosed subscheme defined by the **saturation**\n$$(JA[\\mathcal I/a]:a^\\infty)=\\bigl\\{f\\in A[\\mathcal I/a]:a^nf\\in JA[\\mathcal I/a]\\text{ for some }n\\ge0\\bigr\\},$$\nthe largest ideal of the chart ring containing $JA[\\mathcal I/a]$ whose\nlocalisation at $a$ equals the localisation of $JA[\\mathcal I/a]$.\nThese local closed subschemes agree on overlaps of charts: on the overlap of\nthe charts of $a$ and $b$ the elements $a$ and $b$ differ by a unit, so the two\nsaturations coincide, and after localising at $a$ the saturation becomes the\ninverse image ideal of $Y$ itself, matching the fact that the blowup is an\nisomorphism over $X\\smallsetminus Z$.\nHence the chartwise closed subschemes glue to a closed subscheme\n$Y'\\hookrightarrow Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$, and this glued\ndescription gives the strict transform even when the scheme-theoretic closure\nis not known to exist; where the closure exists the two agree, as the kernel\ndescription of [[lem-schematic-closure-and-dense-agreement]] identifies the\nclosure with the saturation on each chart on which the exceptional divisor is\nprincipal.\n\n**Reducedness.** If $Y$ is reduced, then $Y'$ is reduced. Indeed, on a chart\nas above the ring of the strict transform is\n$A[\\mathcal I/a]/(JA[\\mathcal I/a]:a^\\infty)$, and the saturation is by\nconstruction the kernel of the localisation\n$A[\\mathcal I/a]/(JA[\\mathcal I/a])\\to A[\\mathcal I/a][1/a]/(J)$, so this ring\nembeds into $\\bigl(A[\\mathcal I/a]/(J)\\bigr)[1/a]=(A/J)[1/a]$, which is reduced\nwhen $Y$ is; a subring of a reduced ring is reduced, and reducedness is local,\nso $Y'$ is reduced.\n\n**Iteration.** The construction applies verbatim to a blowup of\n$\\operatorname{Bl}_{\\mathcal I}X$ along any quasi-coherent ideal sheaf of\nfinite type on it: for a closed subscheme $W\\hookrightarrow\n\\operatorname{Bl}_{\\mathcal I}X$, its inverse image under a further blowup and\nthe deletion of that blowup's exceptional subscheme define the strict transform\nof $W$, and the chartwise saturation description is unchanged. In particular a\nstrict transform of a strict transform may be formed along a further blowup.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-contact-order-regular-components",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field and let $S$ be a **regular surface** over $k$: a\nNoetherian scheme of dimension $2$ that is regular at every point, so that\neach local ring $\\mathcal O_{S,p}$ is a regular local ring of dimension two\n([[def-embedding-dimension-and-regular-local-ring]],\n[[def-noetherian-ring]], [[def-dimension-noetherian-topological-space]]).\n\nLet $Y,Z\\subseteq S$ be two distinct reduced curves, that is, distinct closed\nsubschemes of pure dimension one whose local rings have no nonzero nilpotents\n([[def-reduction-of-scheme]]), let $p\\in S$ be a closed point, and let\n$I_Y,I_Z\\subseteq\\mathcal O_{S,p}$ be the ideals of the two curve germs.\nAssume:\n\n1. $Y$ and $Z$ have no common irreducible component, so that $I_Z\\mathcal O_{Y,p}\\neq0$\n   whenever $\\mathcal O_{Y,p}\\neq0$;\n2. every irreducible component of $Y$ and of $Z$ that passes through $p$ is\n   regular at $p$ (a component not passing through $p$ is unconstrained).\n\nWrite $\\mathcal O_{Y,p}:=\\mathcal O_{S,p}/I_Y$ for the local ring of the curve\n$Y$ at $p$, a one-dimensional reduced Noetherian local ring, and let\n$I_Z\\mathcal O_{Y,p}$ be the image of the ideal of $Z$. The **contact order\nof $Y$ and $Z$ at $p$** is the length\n\n$$n_p(Y,Z):=\\operatorname{length}_{\\mathcal O_{Y,p}}\\bigl(\\mathcal O_{Y,p}/I_Z\\mathcal O_{Y,p}\\bigr),$$\n\nthe number of factors of a composition series\n([[def-composition-series-and-length-of-a-module]]); the zero module has\nlength $0$. The hypotheses above are exactly what makes this length finite:\nif $p\\notin Y$ then $\\mathcal O_{Y,p}=0$; if $p\\notin Z$ then\n$I_Z\\mathcal O_{Y,p}=\\mathcal O_{Y,p}$; and if $p\\in Y\\cap Z$, then by\nhypothesis 1 the ideal $I_Z\\mathcal O_{Y,p}$ is nonzero and, since\n$\\mathcal O_{Y,p}$ is one-dimensional and reduced, it is not contained in any\nminimal prime, so $\\mathcal O_{Y,p}/I_Z\\mathcal O_{Y,p}$ is a finite-length\nmodule supported at the closed point $p$.\n\nIn the situations used in this library the curve germs are cut out by single\nequations and the definition takes the following **local-equation form**.\nSuppose $y,z\\in\\mathcal O_{S,p}$ generate $I_Y$ and $I_Z$ (with $y=1$ if\n$p\\notin Y$ and $z=1$ if $p\\notin Z$). Then\n$\\mathcal O_{Y,p}=\\mathcal O_{S,p}/(y)$ and\n$I_Z\\mathcal O_{Y,p}=z\\mathcal O_{Y,p}$, so that\n\n$$n_p(Y,Z)=\\operatorname{length}_{\\mathcal O_{Y,p}}\\bigl(\\mathcal O_{Y,p}/z\\mathcal O_{Y,p}\\bigr).$$\n\nFor the curves used in this library the germs are given by such single\nequations: they are effective Cartier data, and two presentations of one\nprincipal ideal differ by a unit\n([[def-effective-cartier-divisor]], [[lem-cartier-divisor-local-equation-equivalence]],\n[[def-cartier-divisor]]). The definition has the following properties, which\nare the conventions used by its consumers. (a) It is independent of the chosen\nlocal equations: another equation of $Y$ is $y'=uy$ with\n$u\\in\\mathcal O_{S,p}^{\\times}$, so $\\mathcal O_{S,p}/(y')=\\mathcal O_{S,p}/(y)$,\nand another equation of $Z$ is $z'=vz$ with $v$ a unit, so\n$z'\\mathcal O_{Y,p}=z\\mathcal O_{Y,p}$. (b) It is independent of which curve\nis named first, because both lengths equal the common length of\n$\\mathcal O_{S,p}/(I_Y+I_Z)$, which is finite and agrees with its length over\neither quotient. (c) $n_p(Y,Z)=1$ if and only if $Y$ and $Z$ **meet\ntransversally at $p$**, meaning $p\\in Y\\cap Z$, each of $Y$ and $Z$ is regular\nat $p$, and their tangent lines are distinct one-dimensional subspaces of the\ntwo-dimensional $k(p)$-vector space\n$\\mathfrak m_p/\\mathfrak m_p^2$. Indeed, the length is one exactly when\n$I_Z\\mathcal O_{Y,p}$ is the maximal ideal of the one-dimensional local ring\n$\\mathcal O_{Y,p}$, so that this ring is a discrete valuation ring and the\nimage of a local equation of $Z$ is a uniformizer of it; this happens exactly\nwhen $\\mathcal O_{Y,p}$ is regular and the two tangent lines are distinct.\nIn particular, if either curve has two regular branches through $p$, its local\nring at $p$ is not a domain and hence not regular, its maximal ideal is not\nprincipal, and the local contact order is at least $2$ even when each pair of\nbranches crosses with distinct tangents.\n\nThe **total contact order** of $Y$ and $Z$ is the sum of the local contact\norders over all closed points of their intersection,\n$$n(Y,Z):=\\sum_{p\\in Y\\cap Z}n_p(Y,Z).$$\nSince $Y$ and $Z$ share no irreducible component, $Y\\cap Z$ has dimension\nzero and, being a closed subscheme of the Noetherian scheme $S$, has only\nfinitely many closed points; for distinct components the total contact order\nis therefore a finite nonnegative integer. The value $1$ is reserved for a\ngenuine transversal crossing of two regular curves.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "claim": "Write $f=f_m+f_{m+1}+\\cdots$ as in [F1]. By [F2] the two charts cover $S'$ and meet in the locus $st=1$, and by [F3] the strict transform is cut out in them by the equations $g=0$ and $h=0$, where $g(0,s)=f_m(1,s)$ and $h(0,y)=f_m(t,1)$; thus $C'\\cap E$ is computed in the first chart by the pair of equations $x=0$, $g=0$ and in the second by $y=0$, $h=0$. [F1, F2, F3]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d2",
+          "claim": "In the first chart $C'\\cap E$ is $\\operatorname{Spec}k[s]/(g(0,s))=\\operatorname{Spec}k[s]/(f_m(1,s))$, and in the second chart it is $\\operatorname{Spec}k[t]/(f_m(t,1))$. These are exactly the standard charts $D_+(u)$ and $D_+(v)$ of the closed subscheme $Z=\\operatorname{Proj}\\bigl(k[U,V]/(f_m)\\bigr)\\subseteq\\mathbb P^1_k=\\operatorname{Proj}k[U,V]$: on $D_+(u)$ one has $s=v/u$ and the defining eq",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "d3",
+          "claim": "By [F5] the ring $k[U,V]/(f_m)$ is the tangent cone ring of $C$ at the origin, so $Z=\\operatorname{Proj}(\\operatorname{Cone}_0(C))$ is the projectivized tangent cone. Its closed points are the homogeneous prime ideals of $k[U,V]$ containing $f_m$ and not the irrelevant ideal, that is, the irreducible factors of $f_m$; writing $f_m=\\prod_ip_i^{s_i}$ with $p_i$ irreducible homogeneous of degree $d_i",
+          "step": "2.1",
+          "inputs": [
+            "1.2",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "d4",
+          "claim": "The underlying $0$-cycle of $C'\\cap E$ has total degree $m$ over $k$: by [F4] the intersection is the $0$-cycle of degree $m$ cut out by the leading form, the origin being $k$-rational. Equivalently, the degrees of the points $q_i$ weighted by the multiplicities $s_i$ add up to $m$, matching the computation in the two charts of step 1.2. [F4, step 2.1]",
+          "step": "3.1",
+          "inputs": [
+            "1.2",
+            "2.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "d5",
+          "claim": "Transversality in the squarefree case. Suppose $f_m$ is squarefree, so its irreducible factors occur with multiplicity one; this covers a node and a cusp with reduced tangent cone, where the leading form is a product of distinct linear or irreducible factors. Let $q$ be a closed point of $C'\\cap E$ lying in the first chart and let $p(s)$ be the corresponding irreducible factor of $f_m(1,s)$, which",
+          "step": "3.2",
+          "inputs": [
+            "1.2",
+            "2.1",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "d6",
+          "claim": "Steps 1.2, 2.1, 3.1 and 3.2 prove all the assertions: $C'\\cap E$ is the closed subscheme of $E=\\mathbb P^1_k$ cut out by the form $f_m(u,v)$, its closed points are the irreducible factors of $f_m$ with the corresponding multiplicities, the underlying $0$-cycle has total degree $m$ over $k$, the points are the tangent directions of $C$ at the origin with multiplicity over a splitting field, and for",
+          "step": "4.1",
+          "inputs": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the leading form f_m is nonzero of degree m>=1, so its zero subscheme in P^1 is nonempty and the intersection with E is nonempty; the empty case would be m=0, excluded by the hypothesis that the curve passes through the origin."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: a linear factor of f_m of multiplicity s contributes multiplicity s to the intersection cycle; the value s=0 (a tangent direction not appearing) is the complement of the support and is covered by the description."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: m=1 is included; then f_m is linear and the strict transform meets E in exactly one reduced point, the tangent direction of the smooth curve."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: f_m may be a power of an irreducible form (all branches sharing one tangent direction) and k need not be algebraically closed; the closed points of the cycle are described with residue degrees."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem concerns the fibre over a single point and the finite set of tangent directions; no ordered parameter or endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the Axiom of Choice is assumed, inherited from the blowup and Proj constructions; the tangent directions are read off the leading form rather than selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement describes the intersection scheme and its cycle; there is no biconditional, only a correspondence between factors and points with multiplicities."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted; the total degree m and the factor multiplicities are computed in the proof."
+        }
+      ]
+    },
+    "thm-blowup-smooth-surface-point-charts": {
+      "risk": "low",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smooth-morphism-schemes",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to S$ be a morphism of schemes, let $x\\in X$ and put $s=f(x)$.\nThe morphism $f$ is **smooth at $x$** when the following three conditions hold\nat $x$:\n\n1. $f$ is locally of finite presentation at $x$\n   ([[def-locally-finite-presentation-morphism]]);\n2. $f$ is flat at $x$ ([[def-flat-morphism-schemes]]);\n3. the scheme-theoretic fibre $X_s$ ([[def-geometric-fibre]]) is\n   geometrically regular at $x$, that is, for every field extension\n   $K/\\kappa(s)$ the local ring of $X_s\\times_{\\operatorname{Spec}\\kappa(s)}\n   \\operatorname{Spec}K$ at every point over $x$ is regular\n   ([[def-ag-geometrically-regular-algebra-and-fibre]]).\n\nThe morphism $f$ is **smooth** if it is smooth at every point of $X$. A\nmorphism with empty source is smooth vacuously, and no condition is imposed\nby an empty fibre: the pointwise clause of the definition is quantified over\nprimes of the fibre, of which there are none.\n\nSmoothness is a condition on the germ of $f$ at $x$, so it is preserved by\nrestricting the source to an open neighbourhood of $x$ and by shrinking the\ntarget to an open neighbourhood of $s$; affine-locally it becomes a condition\non a finitely presented ring map at a prime, and the equivalence with the\nformal lifting and Jacobian formulations is proved on this page, not assumed\nhere. Relative dimension is defined separately, and in relative dimension\nzero smoothness is equivalent to \u00e9taleness later on this page.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-embedding-dimension-and-regular-local-ring",
+          "source_section": "Definition",
+          "quote": "For a nonzero commutative Noetherian local ring $(R,\\mathfrak m,k)$, define $\\operatorname{edim}R=\\dim_k(\\mathfrak m/\\mathfrak m^2)$. The ring is **regular local** when $\\operatorname{edim}R=\\dim R$. The cotangent space is intrinsic, and is finite-dimensional because $\\mathfrak m$ is finitely generated.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). A regular local ring $R$ of dimension $d$ is a domain and Cohen\u2013Macaulay. For every regular system $(x_1,\\ldots,x_d)$, the tuple is $R$-regular and $R/(x_1,\\ldots,x_c)$ is regular local of dimension $d-c$ for all $0\\le c\\le d$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-regular-local-quotient-by-parameter-is-regular",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(R,\\mathfrak m,k)$ be regular local of dimension $d$, and let $x\\in\\mathfrak m\\setminus\\mathfrak m^2$. Then $R/(x)$ is regular local, of dimension and embedding dimension $d-1$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-localisations-of-regular-local-rings-are-regular",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]).\n\nEvery prime localization $R_{\\mathfrak p}$ of a regular local ring $R$ is regular, and $\\operatorname{edim}R_{\\mathfrak p}=\\operatorname{ht}\\mathfrak p$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-localisation-and-polynomial-extension-of-regular-rings",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Localizations and finite polynomial extensions of a commutative regular Noetherian ring are regular. Regularity can equivalently be tested at maximal ideals. For every nonzero such ring, $\\operatorname{gldim}R=\\dim R$, allowing infinity. More generally, for a finite module over any commutative Noetherian ring, projective dimension is the supremum of its prime-local projective dimensions. Dedekind domains and their finite polynomial extensions are regular.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-affine-blowup-standard-charts",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice as inherited from the Proj construction. Let $A$ be\na ring, $I=(f_0,\\dots,f_r)\\subseteq A$, $S=R(I)=\\bigoplus I^nt^n$ and\n$B_i=A[I/f_i]=\\bigl(S[(f_it)^{-1}]\\bigr)_0$. The standard opens\n$U_i=D_+(f_it)=\\operatorname{Spec}B_i$ cover\n$\\operatorname{Bl}_I\\operatorname{Spec}A$. Put\n$u_{ij}=(f_jt)/(f_it)$ in $B_i$. Then\n$U_i\\cap U_j=D(u_{ij})$ in $U_i$, with canonical $A$-algebra identifications\n$(B_i)_{u_{ij}}=S[(f_it)^{-1},(f_jt)^{-1}]_0=(B_j)_{u_{ji}}$. They send\n$f_l/f_i$ to $(f_l/f_j)/(f_i/f_j)$, and $u_{ij}$ to $u_{ji}^{-1}$. These\nidentifications satisfy the identity and cocycle conditions and preserve the\nstructural maps to $\\operatorname{Spec}A$. Different finite generating\nfamilies give compatible chart covers of the same canonical blowup; no\nbijection between the chart families is asserted. The formulas include zero\ndivisors and empty charts; nilpotent $f_i$ gives $B_i=0$. Localization at the\nbase element $f_j$ is generally smaller than this overlap and is not its\nformula.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-affine-blowup-algebra-properties",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a commutative ring, let $I\\subseteq A$ be an ideal and let\n$a\\in I$. Write $R(I)=\\bigoplus_{n\\ge0}I^nt^n\\subseteq A[t]$ for the Rees\nalgebra of $I$, graded by the degree of $t$\n([[def-rees-algebra-and-rees-module]],\n[[def-graded-ring-and-graded-module]]). The **affine blowup algebra** is\n\n$$A[I/a]:=\\bigl(R(I)\\bigr)_{(a)},$$\n\nthe degree-zero part of the localization of $R(I)$ at the multiplicative set\ngenerated by the degree-one element $at\\in It$\n([[def-multiplicative-subset-and-localisation]]). Then:\n\n1. the image of $a$ in $A[I/a]$ is a nonzerodivisor,\n   $IA[I/a]=aA[I/a]$, and $\\bigl(A[I/a]\\bigr)_a=A_a$;\n2. if $I=(a_0,\\dots,a_r)$ with $a=a_0$\n   ([[def-generated-and-principal-ideals]]), the homomorphism\n   $$A[x_1,\\dots,x_r]/(ax_i-a_i)\\longrightarrow A[I/a]$$ sending\n   $x_i\\mapsto a_i/a$ is surjective with kernel the $a$-power torsion;\n3. if $A$ is reduced then $A[I/a]$ is reduced; if $A$ is a domain and\n   $a\\neq0$ then $A[I/a]$ is a domain;\n4. the construction is independent of the generating set and of the\n   representative used for the homogeneous localization, up to canonical\n   $A$-algebra isomorphism.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-blowup-local-on-base-scheme",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice as inherited from the relative Proj construction.\nLet $j\\colon U\\to X$ be an open subscheme of a scheme $X$, let $\\mathcal I$ be\na quasi-coherent ideal sheaf on $X$ and let $\\mathcal I|_U$ be its\nrestriction. Then there is a canonical isomorphism of $U$-schemes\n$\\operatorname{Bl}_{\\mathcal I|_U}U\\to\\operatorname{Bl}_{\\mathcal I}X\\times_XU$,\nequivalently an isomorphism of the open subscheme $\\pi^{-1}(U)$ of\n$\\operatorname{Bl}_{\\mathcal I}X$ with\n$\\operatorname{Bl}_{\\mathcal I|_U}U$ over $U$; these isomorphisms are\ncompatible with inclusions of opens.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-gluing-affine-schemes",
+          "source_section": "Statement",
+          "quote": "Affine schemes equipped with open subschemes and isomorphisms on overlaps\nsatisfying the identity and cocycle conditions glue to a scheme, uniquely up to\nunique isomorphism; the given affine schemes become an open affine cover.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-standard-open-proj",
+          "source_section": "Definition",
+          "quote": "Let $S=\\bigoplus_{d\\ge0}S_d$ be a commutative nonnegatively graded ring with\nprojective spectrum $\\operatorname{Proj}S$ as in\n[[def-proj-graded-ring-points]]. For a homogeneous element $f\\in S_+$ of\npositive degree set\n$$D_+(f)=\\{\\mathfrak p\\in\\operatorname{Proj}S: f\\notin\\mathfrak p\\}.$$\nThese are the **standard opens** of $\\operatorname{Proj}S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-projective-space-as-proj",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice as inherited from the affine-scheme constructions\nused to build $\\operatorname{Proj}$ and $\\mathbb P^n_A$\n([[def-axiom-of-choice]]). Fix a commutative ring $A$ and an integer $n\\ge0$,\nlet $S=A[x_0,\\dots,x_n]$ be graded by total degree with $\\deg x_i=1$, and let\n$\\mathbb P^n_A$ be the chart-glued projective space of\n[[def-relative-projective-space-standard-charts]], with standard charts\n$U_i=\\operatorname{Spec}A[x^{(i)}_\\ell:\\ell\\ne i]$ and transition\nisomorphisms $x^{(i)}_\\ell\\mapsto x^{(j)}_\\ell/x^{(j)}_i$,\n$x^{(i)}_j\\mapsto 1/x^{(j)}_i$ on $U_i\\cap U_j$.\n\nThen there is a canonical isomorphism of $\\operatorname{Spec}A$-schemes\n$$\\operatorname{Proj}S\\;\\cong\\;\\mathbb P^n_A,$$\nit is natural in $A$: for every ring homomorphism $A\\to B$ the diagram with the\nidentifications $\\operatorname{Proj}(A[x_0,\\dots,x_n])\\otimes_A B\\cong\n\\operatorname{Proj}(B[x_0,\\dots,x_n])$ and $\\mathbb P^n_B\\cong\n\\mathbb P^n_A\\times_{\\operatorname{Spec}A}\\operatorname{Spec}B$ commutes, and\nfor $n=0$ both sides are $\\operatorname{Spec}A$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-blowup-regular-surface-closed-point-regular",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $S$ be a regular finite-type $k$-scheme of pure dimension two, let $p$ be a closed point, put $\\kappa=\\kappa(p)$ and $r=[\\kappa:k]$, and let $\\pi\\colon S'=\\operatorname{Bl}_p S\\to S$ be the blowup of $S$ at $p$ with exceptional subscheme $E$. Then $S'$ is regular of pure dimension two, $E$ is an effective Cartier divisor canonically isomorphic to $\\mathbb P^1_\\kappa$, and $\\mathcal O_E(E)=\\mathcal O_{\\mathbb P^1_\\kappa}(-1)$. For $A=\\mathcal O_{S,p}$ and regular parameters $x,y$, the base change to $\\operatorname{Spec}A$ has charts $\\operatorname{Spec}A[T]/(xT-y)=\\operatorname{Spec}A[y/x]$ and $\\operatorname{Spec}A[U]/(yU-x)=\\operatorname{Spec}A[x/y]$, glued by inverting $T$ and $U$ with $U=T^{-1}$. Their local rings at the generic point of $E$ have dimension one and at its closed points dimension two. If $S$ is smooth over $k$ and $p$ is $k$-rational, $S'$ is smooth over $k$; literal affine-plane charts occur in the model $S=\\mathbb A^2_k$, $p=0$. No smoothness over an imperfect $k$ is asserted for a general inseparable closed point. Regularity is a property of these local rings and does not require a $\\kappa$-algebra structure on $S'$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-affine-point-blowup-pushforward-vanishing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited from the Proj construction and from the\ncohomology suppliers ([[def-axiom-of-choice]]). Let $A$ be a commutative ring\nwith $1$, let $I=(x,y)\\subseteq A$ be an ideal generated by a regular sequence\n$(x,y)$ (for example $A$ a regular local ring of dimension two with parameters\n$x,y$), let $\\pi\\colon\\operatorname{Bl}_I\\operatorname{Spec}A\\to\n\\operatorname{Spec}A$ be the blowup of [[def-blowup-scheme-along-ideal]] and\nlet $E$ be its exceptional subscheme. Then the two standard charts\n$X_0=D_+(xt)$ and $X_1=D_+(yt)$ cover\n$\\operatorname{Bl}_I\\operatorname{Spec}A$, the ordered \u010cech complex of this\ntwo-element affine cover computes the cohomology of\n$\\mathcal O_{\\operatorname{Bl}_I\\operatorname{Spec}A}$\n([[thm-cech-computes-qc-cohomology-separated-scheme-affine-cover]]), and\n$$H^0\\bigl(\\operatorname{Bl}_I\\operatorname{Spec}A,\\mathcal O\\bigr)=A,\\quad H^1\\bigl(\\operatorname{Bl}_I\\operatorname{Spec}A,\\mathcal O\\bigr)=0,\\quad H^q\\bigl(\\operatorname{Bl}_I\\operatorname{Spec}A,\\mathcal O\\bigr)=0\\ \\ (q\\ge2).$$\nConsequently $\\pi_*\\mathcal O_{\\operatorname{Bl}_I\\operatorname{Spec}\nA}=\\mathcal O_{\\operatorname{Spec}A}$ and\n$R^q\\pi_*\\mathcal O_{\\operatorname{Bl}_I\\operatorname{Spec}A}=0$ for all\n$q>0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-blowup-plane-origin-incidence-equations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited from the Proj constructions used below\n([[def-axiom-of-choice]]). Let $B$ be a commutative ring with $1$,\n$X=\\operatorname{Spec}B[x,y]=\\mathbb A^2_B$ and $I=(x,y)\\subseteq B[x,y]$.\nWith homogeneous coordinates $u,v$ on $\\mathbb P^1_B$, the blowup\n$\\operatorname{Bl}_I X$ of [[def-blowup-scheme-along-ideal]] is\n$V(xv-yu)\\subseteq X\\times_B\\mathbb P^1_B$, and the projection is its\nstructural morphism. Its two standard charts are\n$\\operatorname{Spec}B[x,T]$ with $y=xT$ and $\\operatorname{Spec}B[y,U]$ with\n$x=yU$; their overlap inverts $T$ and $U$ with $TU=1$. The exceptional\nsubscheme is $V(x)$ and $V(y)$ respectively and is isomorphic to\n$\\mathbb P^1_B$. In particular this holds over any field $B=k$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-blowup-isomorphism-off-center",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal I$ be a quasi-coherent ideal sheaf of finite type with zero scheme $Z$ and let $\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be the blowup. Then the restriction $\\pi\\colon\\pi^{-1}(X\\smallsetminus Z)\\to X\\smallsetminus Z$ is an isomorphism of schemes, with inverse characterized by the universal property applied to the identity of $X\\smallsetminus Z$ (where the inverse image of $Z$ is empty) and to the open immersion $\\pi^{-1}(X\\smallsetminus Z)\\hookrightarrow X$. Consequently $E=\\pi^{-1}(Z)$ is the complement of this open subscheme.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "claim": "By [F1] the local ring $A=\\mathcal O_{S,p}$ is regular, and by [F2] it has dimension and embedding dimension two, so there are regular parameters $\\bar x,\\bar y$; lifting them along $R\\to R_{\\mathfrak m_p}=A$ and clearing denominators gives $x,y\\in R$ with these images, and the failure loci of the conditions below are closed subsets of the affine scheme $U$ not containing $p$, so $U$ may be shrunk",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "d2",
+          "claim": "Let $Z=V(xv-yu)\\subseteq U\\times_k\\mathbb P^1_k$. By [F7] the two charts of the projective factor give $Z\\cap\\{u\\ne0\\}=\\operatorname{Spec}R[T]/(xT-y)$ with $T=v/u$, and $Z\\cap\\{v\\ne0\\}=\\operatorname{Spec}R[U_1]/(yU_1-x)$ with $U_1=u/v$; on the overlap both $T$ and $U_1$ are invertible and $TU_1=1$, so $Z$ is obtained by gluing these two affine charts along $R[T,T^{-1}]/(xT-y)$. On the other hand, ",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F4",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "d3",
+          "claim": "By [F5] the restriction of the blowup of $S$ at $p$ to the open $U$ is $\\operatorname{Bl}_{(x,y)}U$, so step 2.1 identifies it with the incidence subscheme $V(xv-yu)$ and gives the two charts $\\operatorname{Spec}R[T]/(xT-y)=\\operatorname{Spec}R[y/x]$ and $\\operatorname{Spec}R[U_1]/(yU_1-x)=\\operatorname{Spec}R[x/y]$ with $TU_1=1$, the descriptions displayed in the statement. Base change to $\\opera",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "F5",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "d4",
+          "claim": "Smoothness and the local structure of $E$. Since $S$ is smooth over $k$ and $p$ is $k$-rational, [F8] gives that $\\operatorname{Bl}_pS$ is smooth over $k$ with exceptional curve $E\\cong\\mathbb P^1_k$ and $\\mathcal O_E(E)=\\mathcal O(-1)$, and that the local rings on $E$ have dimension one at its generic point and two at closed points. The two charts of step 3.1 are open subschemes of $\\operatorname",
+          "step": "4.1",
+          "inputs": [
+            "2.1",
+            "3.1",
+            "F1",
+            "F10",
+            "F11",
+            "F2",
+            "F3",
+            "F8"
+          ]
+        },
+        {
+          "id": "d5",
+          "claim": "Steps 1.1-4.1 prove the statement: a sufficiently small affine neighbourhood $U=\\operatorname{Spec}R$ with regular parameters $x,y$ generating the ideal of $p$ exists, over $U$ the blowup is the incidence subscheme $V(xv-yu)\\subseteq U\\times_k\\mathbb P^1_k$ with charts $\\operatorname{Spec}R[T]/(xT-y)=\\operatorname{Spec}R[y/x]$ and $\\operatorname{Spec}R[U_1]/(yU_1-x)=\\operatorname{Spec}R[x/y]$ glue",
+          "step": "5.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the theorem fixes a rational point p, so the centre is nonempty; the empty-centre case belongs to the effective-Cartier theorem and is not claimed here."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the ideal of p is the maximal ideal, not the zero ideal; the zero ideal is excluded because p is a point of S, and the displayed chart equations xv=yu encode the centre."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the case dim S=2 with one point blown up is the whole content; the two standard charts of the single blowup are computed, including the exceptional curve as one P^1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: S is required to be smooth over k and p k-rational; the choice of the affine chart and regular parameters x,y is available by definition of smoothness, and no characteristic or perfectness hypothesis is needed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement is local at one point with chart computations; there is no ordered or interval parameter with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the Axiom of Choice is assumed, inherited from the blowup construction and the regular-surface regularity theorem; the regular parameters x,y exist and the proof uses a chosen pair only through the resulting charts."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts smoothness, the identification E=P^1 and the degree of the conormal sheaf; no biconditional occurs."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse direction to check; the claims are existence and identification statements for the blowup charts."
+        }
+      ]
+    },
+    "ex-blowup-rational-map-p1": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: the base ideal is the maximal ideal (x,y) of the origin, so the centre is nonempty; the complement of the base locus where the rational map is defined is A^2 minus the origin, which is nonempty and dense."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: the fibre of the incidence model over the origin is computed as the full P^1, i.e. no condition is imposed; the zero-fibre boundary case is exactly the computation of E."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: one blowup suffices to resolve the indeterminacy, and the resolution is the projection of the incidence variety, so the 'one-step' case is the content."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: k is an arbitrary field and no characteristic hypothesis is used; the chart computations x=1 and y=1 cover all points of P^1 without a choice of representative."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no ordered or interval parameter; the two charts cover the projective line without endpoint issues."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: the Axiom of Choice is inherited from the base-ideal resolution corollary and the incidence lemma cited, and the proof selects nothing beyond standard charts."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example describes a rational map, its resolution and the identification of the exceptional curve; it asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse direction of an equivalence is asserted; the example's claims are identifications of the extended morphism and the exceptional fibre."
+        }
+      ]
+    }
+  }
+}

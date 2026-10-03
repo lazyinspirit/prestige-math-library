@@ -15,12 +15,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
-  audited: 2026-10-02
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+  repair: research/frontier-38-owner-30-published-format-misc-lem-first-variation-hinge-derivative-formula.receipt.json
 sources:
   scraped: []
   references:
@@ -75,21 +70,14 @@ to $o$ and $\dot\gamma(0)$ the unit direction from $p$ along the other leg).
 
 ## Proof
 
-1.1 The smooth family form. [F1, given]
-Apply [F1] to the variation $\alpha$ on the fixed interval $[0,L]$, which is smooth and hence has no corner terms. The central curve $\gamma=\alpha(0,\cdot)$ is an affinely parametrized geodesic with nowhere vanishing velocity, so $D_t\dot\gamma=0$ and $|\dot\gamma|$ is constant; its unit tangent $u=\dot\gamma/|\dot\gamma|$ therefore satisfies $D_tu=0$ on $[0,L]$. Hence each integrand $g(V,D_tu)$ in [F1] vanishes and the corner sum is empty, so the formula of part (a) follows. If each member is minimizing between its endpoints, then its length equals the distance of those endpoints, which is the stated interpretation. [F1, given]
+1.1 The smooth family form. Apply [F1] to the variation $\alpha$ on the fixed interval $[0,L]$, which is smooth and hence has no corner terms. The central curve $\gamma=\alpha(0,\cdot)$ is an affinely parametrized geodesic with nowhere vanishing velocity, so $D_t\dot\gamma=0$ and $|\dot\gamma|$ is constant; its unit tangent $u=\dot\gamma/|\dot\gamma|$ therefore satisfies $D_tu=0$ on $[0,L]$. Hence each integrand $g(V,D_tu)$ in [F1] vanishes and the corner sum is empty, so the formula of part (a) follows. If each member is minimizing between its endpoints, then its length equals the distance of those endpoints, which is the stated interpretation. [F1, given]
 
-1.2 The hinge setting and the smooth locus. [F2, given]
-Since $p\notin(\{o\}\cup\operatorname{Cut}(o))$ and [F2] makes $r_o$ smooth on the open complement of that set, there is $\delta>0$ with $\gamma(t)\notin\{o\}\cup\operatorname{Cut}(o)$ for every $t\in[0,\delta]$ (the curve $\gamma$ is continuous at $t=0$ with $\gamma(0)=p$). On $[0,\delta]$ the composition $t\mapsto r_o(\gamma(t))=d_g(o,\gamma(t))$ is smooth, hence its right derivative at $0$ exists and equals the ordinary derivative at $0$ of the restriction to $[0,\delta]$. [F2, given]
+1.2 The hinge setting and the smooth locus. Since $p\notin(\{o\}\cup\operatorname{Cut}(o))$ and [F2] makes $r_o$ smooth on the open complement of that set, there is $\delta>0$ with $\gamma(t)\notin\{o\}\cup\operatorname{Cut}(o)$ for every $t\in[0,\delta]$ (the curve $\gamma$ is continuous at $t=0$ with $\gamma(0)=p$). On $[0,\delta]$ the composition $t\mapsto r_o(\gamma(t))=d_g(o,\gamma(t))$ is smooth, hence its right derivative at $0$ exists and equals the ordinary derivative at $0$ of the restriction to $[0,\delta]$. [F2, given]
 
-1.3 The gradient at the terminal point. [F3, given]
-The segment $\sigma|_{[0,\rho]}$ is the minimizing radial segment from $o$ to $p$ in the unit direction $\dot\sigma(0)$, and $\rho>0$; by [F3] its terminal velocity is the unit radial gradient, $\operatorname{grad}r_o(p)=\dot\sigma(\rho)$ and $|\dot\sigma(\rho)|=1$. [F3, given]
+1.3 The gradient at the terminal point. The segment $\sigma|_{[0,\rho]}$ is the minimizing radial segment from $o$ to $p$ in the unit direction $\dot\sigma(0)$, and $\rho>0$; by [F3] its terminal velocity is the unit radial gradient, $\operatorname{grad}r_o(p)=\dot\sigma(\rho)$ and $|\dot\sigma(\rho)|=1$. [F3, given]
 
-2.1 Chain rule at the vertex. [F3, F4, step 1.2, step 1.3]
-By [F4] applied to $f=r_o$ and the curve $\gamma$ on $[0,\delta]$, $$\frac{d}{dt}d_g(o,\gamma(t))=g_{\gamma(t)}\bigl(\operatorname{grad}r_o(\gamma(t)),\dot\gamma(t)\bigr)$$ for $t\in(0,\delta]$, and evaluating the right-hand side at $t=0$ by continuity with step 1.3 gives $$\left.\frac{d}{dt}\right|_{0^+}d_g(o,\gamma(t))=g_p(\dot\sigma(\rho),\dot\gamma(0))=g_p(\dot\gamma(0),\dot\sigma(\rho)),$$ the metric being symmetric. [F3, F4, step 1.2, step 1.3]
+2.1 Chain rule at the vertex. By [F4] applied to $f=r_o$ and the curve $\gamma$ on $[0,\delta]$, $$\frac{d}{dt}d_g(o,\gamma(t))=g_{\gamma(t)}\bigl(\operatorname{grad}r_o(\gamma(t)),\dot\gamma(t)\bigr)$$ for $t\in(0,\delta]$, and evaluating the right-hand side at $t=0$ by continuity with step 1.3 gives $$\left.\frac{d}{dt}\right|_{0^+}d_g(o,\gamma(t))=g_p(\dot\sigma(\rho),\dot\gamma(0))=g_p(\dot\gamma(0),\dot\sigma(\rho)),$$ the metric being symmetric. [F3, F4, step 1.2, step 1.3]
 
-3.1 Identification with the included angle. [step 2.1]
-Both legs are unit speed, so $-\dot\sigma(\rho)$ and $\dot\gamma(0)$ are unit vectors; the angle $\theta\in[0,\pi]$ at the vertex between the direction back along the first leg and the direction along the second leg is defined by $\cos\theta=g_p(-\dot\sigma(\rho),\dot\gamma(0))=-g_p(\dot\sigma(\rho),\dot\gamma(0))$. Step 2.1 therefore reads $\frac{d}{dt}\big|_{0^+}d_g(o,\gamma(t))=-g_p(-\dot\sigma(\rho),\dot\gamma(0))=-\cos\theta$, which is the formula of part (b). Since the metric is positive definite, $|g_p(\dot\sigma(\rho),\dot\gamma(0))|\le1$, so the derivative lies in $[-1,1]$. This proves both parts. [step 2.1]
+3.1 Identification with the included angle. Both legs are unit speed, so $-\dot\sigma(\rho)$ and $\dot\gamma(0)$ are unit vectors; the angle $\theta\in[0,\pi]$ at the vertex between the direction back along the first leg and the direction along the second leg is defined by $\cos\theta=g_p(-\dot\sigma(\rho),\dot\gamma(0))=-g_p(\dot\sigma(\rho),\dot\gamma(0))$. Step 2.1 therefore reads $\frac{d}{dt}\big|_{0^+}d_g(o,\gamma(t))=-g_p(-\dot\sigma(\rho),\dot\gamma(0))=-\cos\theta$, which is the formula of part (b). Since the metric is positive definite, $|g_p(\dot\sigma(\rho),\dot\gamma(0))|\le1$, so the derivative lies in $[-1,1]$. This proves both parts. [step 2.1]
 
-4.1 Boundary and choice audit.
-The hypotheses $L>0$ and "velocity never vanishes" are exactly the regularity requirement of [F1]; $a>0$ and $\rho>0$ keep both legs nondegenerate, and $p\neq o$ with $p\notin\operatorname{Cut}(o)$ is exactly what makes $r_o$ smooth at $p$ in step 2.1 and the radial segment $\sigma$ minimizing in step 1.3. For $t=0$ the derivative is one-sided, as stated. In dimension one the hinge angle is $0$ or $\pi$ and the formula reads $\mp1$, consistent with the fact that the opposite-side distance is locally the sum or difference of lengths. No step divides by the hinge angle or by the length of the second leg, and no minimality of $\gamma$ is used. Exactly [A1] is inherited; no family is selected at any step.
-[A1, F1, F2, F3, F4, step 1.1, step 3.1] ∎
+4.1 Boundary and choice audit. The hypotheses $L>0$ and "velocity never vanishes" are exactly the regularity requirement of [F1]; $a>0$ and $\rho>0$ keep both legs nondegenerate, and $p\neq o$ with $p\notin\operatorname{Cut}(o)$ is exactly what makes $r_o$ smooth at $p$ in step 2.1 and the radial segment $\sigma$ minimizing in step 1.3. For $t=0$ the derivative is one-sided, as stated. In dimension one the hinge angle is $0$ or $\pi$ and the formula reads $\mp1$, consistent with the fact that the opposite-side distance is locally the sum or difference of lengths. No step divides by the hinge angle or by the length of the second leg, and no minimality of $\gamma$ is used. Exactly [A1] is inherited; no family is selected at any step. [A1, F1, F2, F3, F4, step 1.1, step 3.1] ∎

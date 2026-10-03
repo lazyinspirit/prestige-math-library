@@ -1,0 +1,110 @@
+{
+  "run": "frontier-38-owner-30",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "11",
+  "input_sha256": "76683c53ce1424708f1885949ec3b237fa2350f9172eebcc763287d7d67994b6",
+  "decisions": [
+    {
+      "id": "lem-direct-sums-and-tensor-products-of-finite-dimensional-unitary-representations",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "4896ce4d51bebf7f3dc21b19661c128acd9c4244ca82142dff115fd77638bdce",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Step 2.1 falsely extends the single-product coefficient identity to arbitrary tensor vectors. For the assigned T^2 example, c_{u,u}=zw+1; a factorization (az+b)(cw+d) would require ac=bd=1 and ad=bc=0, a contradiction. The statement correctly restricts the identity to elementary tensors. Repaired the proof by giving the finite double sum with alpha_a times conjugate(beta_b), leaving the statement intact.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-direct-sums-and-tensor-products-of-finite-dimensional-unitary-representations",
+      "disposition": "repaired",
+      "post_sha256": "e08d66eecb7b71e9c3203b908d73f63871631926ba29e2d987cd248e2061f641",
+      "review_context_sha256": "065b3da753784e9e8c4c1d92878a294cfcd6fcb9c1f6946397180768cc1a7dde",
+      "reason": "Checked all three statement clauses against the actual suppliers and first-variable-linear pairing. Tensor basis independence follows from balanced coordinate forms; the orthonormal tensor basis gives the unique positive pairing and completeness via finite coordinates. Inner-product preservation extends by sesquilinearity, with inverses supplied by the tensor action. Finite tensor expansions give strong continuity and the repaired double-sum coefficient formula. Direct sums and J pi J establish sums, the unit and conjugation without additional choice. The owning step-2.1 contract was updated under the shared-write lock; its strict focused check passed. This is a local mathematical repair, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "path": "research/defect-ledger.jsonl",
+      "operation": "append",
+      "row": {
+        "defect_id": "frontier-38-owner-30-step7-repeat-r1-u11-tensor-coefficient-extension",
+        "run": "frontier-38-owner-30",
+        "at": "2026-10-03T17:00:26.220054+00:00",
+        "class": "accuracy",
+        "subclass": "invalid-inference",
+        "severity": "fatal",
+        "location": "proof-step",
+        "subject": "lem-direct-sums-and-tensor-products-of-finite-dimensional-unitary-representations",
+        "caught_at_stage": "7.5-adjudicate",
+        "caught_by_role": "alpha-adjudicate",
+        "disposition": "fixed",
+        "repair_cost": "inline-fix",
+        "repair_confidence": 1,
+        "evidence": [
+          {
+            "path": "research/frontier-38-owner-30-step7-v2/step7-v2-repeat-r1-u11.json",
+            "note": "The original step 2.1 asserts single-product factorization for arbitrary tensor vectors, contradicted by c_{u,u}=zw+1 on T^2. The repaired proof gives the correct finite double sum, with conjugation in the second vector coefficients. All original statement clauses remain unchanged; local focused checks passed. This repair is not independently audited."
+          }
+        ],
+        "adjudication_ref": [
+          {
+            "path": "research/frontier-38-owner-30-step7-v2/step7-v2-repeat-r1-u11.json",
+            "obligation": "lem-direct-sums-and-tensor-products-of-finite-dimensional-unitary-representations:gpt-6.1-sol:4896ce4d51bebf7f3dc21b19661c128acd9c4244ca82142dff115fd77638bdce"
+          }
+        ],
+        "prevention": {
+          "kind": "brief",
+          "ref": "briefs/step7-adjudicator.md"
+        }
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_paths": [
+      "items/lem-direct-sums-and-tensor-products-of-finite-dimensional-unitary-representations.md",
+      "research/frontier-38-owner-30-batch-11.proof-contracts.json"
+    ],
+    "interface_change": false,
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-38-owner-30-batch-11.proof-contracts.json --strict --items lem-direct-sums-and-tensor-products-of-finite-dimensional-unitary-representations",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings; 1/1 item checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-direct-sums-and-tensor-products-of-finite-dimensional-unitary-representations.md",
+        "exit_code": 0,
+        "result": "PASS (direct); 1 checked, 0 failing."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-direct-sums-and-tensor-products-of-finite-dimensional-unitary-representations.md",
+        "exit_code": 0,
+        "result": "1 file checked; all math spans parse under real KaTeX and frontmatter parses under renderer YAML; no errors."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-direct-sums-and-tensor-products-of-finite-dimensional-unitary-representations.md",
+        "exit_code": 0,
+        "result": "1 item, 4 steps, 0 defects; run once after final item edits."
+      },
+      {
+        "command": "node tools/step7-workflow.mjs review-contexts --run frontier-38-owner-30 --items lem-direct-sums-and-tensor-products-of-finite-dimensional-unitary-representations",
+        "exit_code": 0,
+        "result": "Captured both review hashes immediately after completed mathematical review and owning-contract update; no later item edits."
+      }
+    ],
+    "unresolved_obligations": [],
+    "source_evidence": "F1-F7 checked against the repository supplier Statements/Definitions. External reference URLs were preserved but not consulted for this familiar finite-dimensional argument.",
+    "statement_comparison": "Compared the original and final Statement sections directly: byte-identical. The frozen statement_sha256 is also unchanged: f9e7add1fb67192453ae6a5c9b3529d6b74f5a33f3f1d5e55b6bfd4be71ba3ae. Only proof step 2.1 and its owning contract derivation changed; no consumer propagation is licensed.",
+    "published_findings": "No defect found in the actual published supplier clauses consumed by this repair. No published item or outside-frontier consumer was edited or adjudicated; no published-ledger update is proposed."
+  }
+}

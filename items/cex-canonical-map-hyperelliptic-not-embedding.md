@@ -31,6 +31,7 @@ sources:
     - title: "The Stacks Project, Algebraic Curves (tag 0BRV)"
       url: "https://stacks.math.columbia.edu/download/curves.pdf"
 verification:
+  repair: research/frontier-38-owner-30-published-hyperelliptic-replay-receipt.json
   audited: 2026-10-02
   precheck: pass
   judge:
@@ -108,50 +109,10 @@ would remain one after base extension, so the same conclusion holds over $k$.
 identifies the generic geometric fiber as two distinct points; it is not
 needed for the non-embedding argument.
 
-1.1 (Veronese factorization and nonembedding.)
-By [F1] and [F2], $L$ has degree two, $L^{\otimes(g-1)}\cong\omega_{C_{\bar k}}$,
-and the canonical map factors through $v_{g-1}\circ\varphi$. Its generic
-degree onto the rational normal image is two. If this composite were a closed
-immersion, the coordinate-ring surjections would make $\varphi$ a closed
-immersion into its Veronese image, which is isomorphic to the reduced scheme
-$\mathbf P^1_{\bar k}$. The map $\varphi$ is finite and surjective by [F1];
-[F4] then makes it an isomorphism, contradicting degree two. This proves the
-nonembedding without assuming separability.
-[F1, F2, F4]
+1.1 (Veronese factorization and nonembedding.) By [F1] and [F2], $L$ has degree two, $L^{\otimes(g-1)}\cong\omega_{C_{\bar k}}$, and the canonical map factors through $v_{g-1}\circ\varphi$. Its generic degree onto the rational normal image is two. If this composite were a closed immersion, the coordinate-ring surjections would make $\varphi$ a closed immersion into its Veronese image, which is isomorphic to the reduced scheme $\mathbf P^1_{\bar k}$. The map $\varphi$ is finite and surjective by [F1]; [F4] then makes it an isomorphism, contradicting degree two. This proves the nonembedding without assuming separability. [F1, F2, F4]
 
-1.2 (Generic geometric fiber.)
-To describe the generic geometric fiber, work over $\Omega=\bar k$.
-In characteristic different from two, a degree-two extension
-$\Omega(C)/\Omega(t)$ is separable. In characteristic two, a degree-two
-extension is either separable or purely inseparable. Suppose it were purely
-inseparable. Choose a generator $\alpha$ with
-$\alpha^2=h(t)\in\Omega(t)$, and write $h(t)=P(t)/Q(t)$ with
-$P,Q\in\Omega[t]$, $Q\ne0$. Since $\Omega$ is perfect, choose
-$P_0,Q_0\in\Omega[z]$ such that
-$P(z^2)=P_0(z)^2$ and $Q(z^2)=Q_0(z)^2$. The embedding
-$\Omega(t)\hookrightarrow\Omega(z)$, $t\mapsto z^2$, extends to
-$\Omega(C)$ by sending $\alpha$ to $P_0(z)/Q_0(z)$. Indeed, this
-element squares to $h(z^2)$, and $X^2-h(t)$ is irreducible because the
-extension is purely inseparable of degree two. The resulting field embedding
-has image of degree two over $\Omega(z^2)$; since
-$[\Omega(z):\Omega(z^2)]=2$, its image is all of $\Omega(z)$.
-Thus $C_{\bar k}$ is birational to $\mathbf P^1_{\bar k}$. Smooth proper
-birational curves are isomorphic, contradicting $g\ge2$ by [F5]. The degree-two map is
-therefore separable in characteristic two as well. Its generic geometric
-fiber consists of two distinct points, and the Veronese factorization
-identifies them under the canonical map. Special fibers may be ramified and
-need not have two distinct points.
-[F1, F2, F5]
+1.2 (Generic geometric fiber.) To describe the generic geometric fiber, work over $\Omega=\bar k$. In characteristic different from two, a degree-two extension $\Omega(C)/\Omega(t)$ is separable. In characteristic two, a degree-two extension is either separable or purely inseparable. Suppose it were purely inseparable. Choose a generator $\alpha$ with $\alpha^2=h(t)\in\Omega(t)$, and write $h(t)=P(t)/Q(t)$ with $P,Q\in\Omega[t]$, $Q\ne0$. Since $\Omega$ is perfect, choose $P_0,Q_0\in\Omega[z]$ such that $P(z^2)=P_0(z)^2$ and $Q(z^2)=Q_0(z)^2$. The embedding $\Omega(t)\hookrightarrow\Omega(z)$, $t\mapsto z^2$, extends to $\Omega(C)$ by sending $\alpha$ to $P_0(z)/Q_0(z)$. Indeed, this element squares to $h(z^2)$, and $X^2-h(t)$ is irreducible because the extension is purely inseparable of degree two. The resulting field embedding has image of degree two over $\Omega(z^2)$; since $[\Omega(z):\Omega(z^2)]=2$, its image is all of $\Omega(z)$. Thus $C_{\bar k}$ is birational to $\mathbf P^1_{\bar k}$. Smooth proper birational curves are isomorphic, contradicting $g\ge2$ by [F5]. The degree-two map is therefore separable in characteristic two as well. Its generic geometric fiber consists of two distinct points, and the Veronese factorization identifies them under the canonical map. Special fibers may be ramified and need not have two distinct points. [F1, F2, F5]
 
-2.1 (Numerical canonical data.)
-The canonical space has dimension $g$, the canonical bundle has degree
-$2g-2$, and it is globally generated. Since the canonical map is not a closed
-immersion by step 1.1, base-point-freeness and these numerical data alone do
-not imply the embedding conclusion.
-[F2, F3, step 1.1]
+2.1 (Numerical canonical data.) The canonical space has dimension $g$, the canonical bundle has degree $2g-2$, and it is globally generated. Since the canonical map is not a closed immersion by step 1.1, base-point-freeness and these numerical data alone do not imply the embedding conclusion. [F2, F3, step 1.1]
 
-2.2 (Genus two.)
-For $g=2$, the Veronese map in the factorization is the identity of
-$\mathbf P^1$. Thus after base extension the canonical map is the degree-two
-map $\varphi$ itself, not an embedding.
-[F2, step 1.1] ∎
+3.1 (Genus two.) For $g=2$, the Veronese map in the factorization is the identity of $\mathbf P^1$. Thus after base extension the canonical map is the degree-two map $\varphi$ itself, not an embedding. [F2, step 1.1] ∎

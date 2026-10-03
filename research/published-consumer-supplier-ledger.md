@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 0, U-C 1, A-R 1250, A-P 7. The
+Current classifications: U-P 0, U-C 1, A-R 1247, A-P 14. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -31380,10 +31380,10 @@ The supplier objects are already published: `def-projective-object`, `def-projec
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled IDs. Its current literal rows contain **3,518 unique
-item IDs**, all **3,518 currently published**.
+subsequently reconciled IDs. Its current literal rows contain **3,524 unique
+item IDs**, all **3,524 currently published**.
 The current item-file census contains **20,731 `status: published` items**;
-**17,213 published items remain outside this index**. These counts are a status census, not a claim
+**17,207 published items remain outside this index**. These counts are a status census, not a claim
 that outside-index items or entire dependency closures have been audited.
 The initial extraction also contained
 787 planned, draft, absent or noncanonical IDs, not published targets.
@@ -31393,11 +31393,11 @@ Supplier mappings and subsequent item-specific findings remain above.
 |---|---|---:|---|
 | U-P | Unaudited and potentially defective items | 0 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 1 | Confirmed mathematical or prerequisite defect; repair audit pending. |
-| A-R | Audited and repaired items | 1248 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 9 | Recorded direct review and an unresolved item-specific repair. |
+| A-R | Audited and repaired items | 1247 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
+| A-P | Audited items pending Phase 3 repair | 14 | Recorded direct review and an unresolved item-specific repair. |
 
 Bounded no-repair-needed dispositions appear below, outside these four active
-defect classes. The four queues currently contain 1,258 distinct items.
+defect classes. The four queues currently contain 1,262 distinct items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -33340,7 +33340,7 @@ owner's scan policy.
 | `lem-p-primary-character-value-congruence` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-07-receipts.jsonl` (`lem-p-primary-character-value-congruence`). No independent judge. |
 | `lem-projective-hypersurface-dimension-drop` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-01-receipts.jsonl` (`lem-projective-hypersurface-dimension-drop`). No independent judge. |
 | `lem-three-series-necessity-for-truncated-means-and-variances` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-01-receipts.jsonl` (`lem-three-series-necessity-for-truncated-means-and-variances`). No independent judge. |
-| `thm-affine-closed-immersions-quotient-rings` | A-P: published proof step 1.1 imports Stacks Tag `01IN`, whose `01IH` route uses later affine quasi-coherent equivalence. The in-run batch-5 `lem-closed-immersion-affine-quotient-and-base-change` offers a direct finite principal-cover proof route; verify it and repair this published proof before reviewing direct consumers. The batch-8 draft `thm-ample-powers-very-ample-proper-base` now uses the in-run lemma alone at [F9], so it is no longer a direct consumer of this published item. Earlier U-P impact review did not repair the published proof. Evidence: `research/frontier-36-complete-batch-7.notes.md`, current published proof, current batch-8 draft, and `research/up-1630-review/agent-04-receipts.jsonl`. |
+| `thm-affine-closed-immersions-quotient-rings` | A-R: full finite-cover proof inlined, later-page helper removed, item/page order cycles closed. Original statement and inherited axiom strength preserved. Latest local receipt research/frontier-38-owner-30-published-affine-closed-immersion-receipt-v2.json; canonical section frontier-38-owner-30:thm-affine-closed-immersions-quotient-rings:v2. Prior reasons/receipts retained; no renewed audit or judgment. |
 | `thm-arithmetical-hierarchy-is-strict` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-04-receipts.jsonl` (`thm-arithmetical-hierarchy-is-strict`). No independent judge. |
 | `thm-banach-series-criterion` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-04-receipts.jsonl` (`thm-banach-series-criterion`). No independent judge. |
 | `thm-mean-value-inequality` | U-P impact/finding resolved by bounded item and used-interface review; original reason retained in frozen index. Evidence: 2026-09-23 ten-agent U-P review: `research/up-1630-review/agent-08-receipts.jsonl` (`thm-mean-value-inequality`). No independent judge. |
@@ -33835,6 +33835,13 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `prop-highest-weight-of-the-dual-representation` | A-R; owner-authorized local proof repair, 2026-10-03. Correct nonzero proper submodule qualifier in irreducibility contradiction; all operative suppliers checked; full original ordinary-dual highest-weight formula retained. Currentguard 25c92d8fb9a3016384f8e4c65283956f9e1c3592f873c857a13c6ee77816bb36. Exact before, receipts, operative proof/prerequisites and consumer scope: research/frontier-38-owner-30-step5-misc-supplier-report.json. No new independent audit or judgment. |
+| `prop-relative-transversality-preserves-a-map-on-a-closed-good-region` | A-R; owner-authorized local proof repair, 2026-10-03. Repaired zero-set supplier closes the generalcutoff premise; inlineu/v construction proves A⊂W and closureW⊂V; full squared-cutoff parameter/Sard/fixed-neighbourhood homotopy proof qualified with unchanged AC_omega. Currentguard ff5fa97931760990bfb0df9cdeab7614bdaf86fa8e54cdc3f09345f38e8754be. Exact before, receipts, operative proof/prerequisites and consumer scope: research/frontier-38-owner-30-step5-misc-supplier-report.json. No new independent audit or judgment. |
+| `cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function` | A-R; owner-authorized local proof repair, 2026-10-03. Full positive diagonal-weight construction and uniform derivative-series proof now establishes C∞ at A as well as M minus A, with exactzero set and unchanged AC_omega. Currentguard c07603bf483e477086b5255a602a7e9e48259f26033038f125a565800816aa3a. Exact before, receipts, operative proof/prerequisites and consumer scope: research/frontier-38-owner-30-step5-misc-supplier-report.json. No new independent audit or judgment. |
+| `thm-strong-whitney-approximation-by-transverse-maps` | A-R; 2026-10-03 owner-authorized complete controlled-amplitude/tubular/parametric-Sard proof repairs the confirmed fatal circular density premise. Full noncompact strongC∞ density and closedembedded-target claim retained under exactly the approved explicit AC_omega premise; currentguard 6cbe8ccb6e3d85dedf9965454e2b071a526d9f1dae65ba5a263db93bcef47cbb. Both actualdirectconsumers checked; published densitycorollary has the same approvedpremise, draftnegative-dimension consumer retains its Statement and complete rank/perturbation/homotopy clauses. Historical fatal finding, originalguard db882f561a8b83157c9253fa7933668055b6653c3cf2d263c07fed6afc224c96 and originalraw49a9c25a713682aeb54d7d469d0e0e26b24cd64f058d5df6b6d61b8f67ed8b2c preserved in beforecarrier, originalAlpha evidence and closed defectrow. Root integrated both valid publishedrepairreceipts; no newaudit. Evidence research/frontier-38-owner-30-step5-whitney-report.json, research/frontier-38-owner-30-step5-whitney-resolution-decisions.json, ownercheckpoint whitney-countable-choice. |
+| `lem-euclidean-balls-have-positive-finite-lebesgue-measure` | A-P; current citation repair pending owner. 2026-10-03 Alpha batch-3 read-only complete proof review: Proof 2.1 cites undefined [L3] and [L4]; Facts define only L1,L2. The mathematical ball claim and cube bounds are sound for n>=1,r>0,CC. Required exact suppliers: thm-metric-open-set-algebra clause 1 and thm-borel-sets-are-lebesgue-measurable. Restore Facts L3/L4 (dependencies already declared), validate and retain Statement. Raw SHA-256 f422e2faeb4678f9e75c5989f6cdd577e61a8257386be598cd07e47743c7351e. Consumer ex-heat-lp-to-lq-time-exponent-is-forced-by-parabolic-scaling uses F5. Evidence research/frontier-38-owner-30-alpha-batch-3-5a.md, reader:3:1. Earlier A-R scope preserved: Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Made n≥1 explicit and supplied Borel measurability and positive finite cube bounds for Euclidean balls. Evidence: `research/ap-319-sol-repair/agent-07-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
+| `lem-largest-entry-of-a-standard-tableau-is-removable` | 2026-10-03, frontier-38-owner-30 Alpha batch-9: bounded full proof read finds a proof-layout defect only. Final step 4.1 ends with “∎ [step 3.1, L1]”, so QED precedes rather than follows the justification tags. The mathematical corner/removal argument is sound. Current raw SHA-256 61c6ad5ad93227225ad8e158b74bdbd19a070cc27c101e61764ef2b427fae2f3. Suppliers: def-young-tableau-standard-tableau-and-shape and def-removable-and-addable-nodes-of-a-partition; no missing mathematical supplier. Status A-P; formatting repair pending owner. Move QED after the trailing tags and run proof-layout/precheck; no Statement change or mathematical consumer repair. Evidence research/frontier-38-owner-30-alpha-batch-9-5a.md. Published carrier left read-only. |
+| `thm-smooth-dependence-of-ode-solutions-on-parameters` | A-R; owner-approved joint-smoothness correction and complete uniform existence/jet proof integrated. Seven actual direct consumers checked, exact stable-normal quote refreshed. Original fatal discontinuous-time finding preserved; closed as narrowed in the original defect row. Current guard57bbb8d9a841396bfe06718b06594fd4f5031e58bdaffa27b543e658d6abea35; evidence research/frontier-38-owner-30-published-ode-parameters.report.json and step5-ode-resolution-report.json. Local recorded repair, no new independent audit. |
 | `thm-erdos-hajnal-pach-pure-pair-theorem` | A-P, 2026-09-26 bounded owner source and item read: current [F1] repeats the entire external Erdős–Hajnal–Pach theorem; the two-step proof only transfers it to a floor bound. Chudnovsky survey Theorem 3.1 (PDF p. 5) verifies the claim but offers only a sketch of the required candidate-set induction. Defer local proof until a complete quantitative argument or exact proved supplier exists; no selected-run or direct published item consumer. Exact hash and scope: `research/frontier-35-ten-categories-eh-pach-step3-deferral-20260926.md`. No proof-completion verdict or new judge. |
 
 
@@ -34377,7 +34384,7 @@ The historical U-P300 scan’s 19 findings completed repair audit (7 A-R, 12 A-P
 | `cor-dfas-and-nfas-recognize-the-same-languages` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Rewired both directions to the now-published exact automata construction: the DFA-as-epsilon-NFA singleton invariant and subset DFA reachability invariant. The latter starts at epsilon closure, includes the empty subset, and proves language equality under the explicit NFA recognition definition. No Choice premise; statement unchanged. Evidence: `research/ap-319-sol-repair/agent-09-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
 | `cor-entire-harmonic-functions-with-bounded-gradient-are-affine` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Reserved maintenance; before snapshot saved. Added AC_omega because ball mean and continuous mean-value smoothness suppliers and bounded Liouville all require it. Each partial derivative is smooth harmonic and bounded by the gradient supremum, hence constant by Liouville; integrate the constant gradient along line segments. No direct item consumers, PDE page prose routed to root. Evidence: `research/ap-319-sol-repair/agent-08-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
 | `cor-every-closed-embedded-submanifold-has-a-smooth-neighbourhood-retraction` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. The original unconditional existence statement used the AC_omega-qualified ambient tubular-neighbourhood theorem in proof 1.1. Added countable choice to Statement/Given and a direct axiom dependency; the same retraction formula and closed embedded submanifold scope remain. Current item-reference graph has no descendants. Evidence: `research/ap-319-sol-repair/agent-01-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
-| `cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Frozen snapshot matched before owned edit. Added AC_omega premise/dependency to match countable cover and shrinking suppliers; proof handles empty complement and finite/empty shrinking and explicitly selects countably many bump functions. Evidence: `research/ap-319-sol-repair/agent-05-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
+
 | `cor-every-open-subset-of-a-manifold-is-the-cozero-set-of-a-smooth-function` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Immediate before snapshot preserved at research/ap-319-sol-repair/agent-05-before-maintenance/cor-every-open-subset-of-a-manifold-is-the-cozero-set-of-a-smooth-function.md. Propagated AC_omega from closed-zero-set supplier used on the complement. Evidence: `research/ap-319-sol-repair/agent-05-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
 | `cor-every-short-exact-sequence-of-smooth-vector-bundles-splits` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Explicit AC_omega premise now covers smooth-complement selection; its only former direct consumer now proves its counterexample independently. Evidence: `research/ap-319-sol-repair/agent-10-maintenance-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
 | `cor-every-smooth-vector-field-on-a-compact-manifold-is-complete` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Directly invokes AC_omega-stated compact-support completeness theorem. Added identical premise and exact axiom dependency; compact support follows from closed support in compact M. Four direct published item consumers searched; two already assume AC_omega and two require routed edits. One second-hop definition has an explanatory sentence to qualify. Evidence: `research/ap-319-sol-repair/agent-02-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
@@ -34538,7 +34545,6 @@ The historical U-P300 scan’s 19 findings completed repair audit (7 A-R, 12 A-P
 | `lem-derivatives-of-harmonic-functions-are-harmonic` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. The smooth-harmonic derivative clause remains choice-free. The distributional clause uses AC_omega-qualified Weyl, so qualified only that clause in Statement/Given and cited its exact premise. Both direct consumers quote only the unchanged smooth clause; the full two-node structural closure ends there. Evidence: `research/ap-319-sol-repair/agent-06-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
 | `lem-dominant-affine-image-contains-principal-open` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Frozen SHA matched. Shard04 independently accepted the current normalization-over-open supplier after its formerly draft affine dictionary/function-field prerequisites became published. Locally removed gratuitous Nullstellensatz premise: a nonzero coordinate-ring class is a nonzero polynomial function by I(Y), so D(a) is nonempty. Added exact AC declaration for lying over. Expanded finite residue-field argument into explicit evaluation of affine coordinate classes and verification f(x)=y, including relative dimension zero. Claim already stated AC and is unchanged. Evidence: `research/ap-319-sol-repair/agent-08-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
 | `lem-dyadic-fourier-coefficient-square-sum-bound-for-holder-functions` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Immediate before snapshot saved; exact current item compared with source and dependent interface. No historical audit stamp is claimed. Evidence: `research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
-| `lem-euclidean-balls-have-positive-finite-lebesgue-measure` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Made n≥1 explicit and supplied Borel measurability and positive finite cube bounds for Euclidean balls. Evidence: `research/ap-319-sol-repair/agent-07-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
 | `lem-every-manifold-has-a-compact-exhaustion` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Inherited AC_omega from countable coordinate-ball cover; least-index recursion is choice-free once cover exists, and empty manifold is handled. Evidence: `research/ap-319-sol-repair/agent-01-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
 | `lem-every-open-cover-of-a-manifold-has-a-countable-cover-by-relatively-compact-coordinate-balls-subordinate-to-it` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Declared AC_omega; use all eligible relatively compact coordinate balls, Lindelof countable subcover, then countable selection of containing cover members. Avoids arbitrary point-indexed choices. Current published/draft reverse dependency/reference graph was traced through 311 union descendants (251 live, 60 historical removed paths). Each row has exact incoming uses, claim evidence and a specific disposition; boundary partitions, atlas/null, compact integral/Stokes, degree, density, homotopy and tubular chains were reconciled against repaired suppliers and owner impact evidence. The S² cohomology example received a load-bearing choice-free integral citation repair; the noncompact Moser witness received compact-Jordan substitution from shard04. Evidence: `research/ap-319-sol-repair/agent-01-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
 | `lem-fibre-as-base-change-to-point-classical` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Replaced the old ambiguous fibre interface with the published classical set-theoretic fibre, affine Nullstellensatz, reduced-algebra and morphism dictionaries. Constructed the reduced closed fibre on affine charts, glued via local rings, and proved its pullback property for all classical prevariety test objects, including empty/reducible cases. Explicit inherited AC and separated-variety clause; original general locally affine conclusion retained. The chart-gluing paragraph now states the elementary localization/radical compatibility explicitly. Evidence: `research/ap-319-sol-repair/agent-03-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
@@ -34621,7 +34627,7 @@ The historical U-P300 scan’s 19 findings completed repair audit (7 A-R, 12 A-P
 | `prop-positive-compactly-supported-top-forms-have-positive-integral` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Exact current item, load-bearing published supplier clauses, original before snapshot and current/historical consumer graph assessed. No stale verification stamp claimed. Evidence: `research/ap-319-sol-repair/agent-04-maintenance-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
 | `prop-reduced-resolvent-identities-for-a-simple-eigenvalue` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Made invariance of ker(y*) under A-lambda I explicit from the left eigenvector relation. The restriction is injective because its kernel meets span(x) trivially, hence bijective in finite dimension; direct-sum inversion yields the identities and uniqueness. Evidence: `research/ap-319-sol-repair/agent-02-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
 | `prop-related-vector-fields-have-related-lie-brackets` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Under choice-free bracket closure, the F-related derivation intertwining identity is stable under commutators; no global derivation-representation theorem is used. Evidence: `research/ap-319-sol-repair/agent-10-maintenance-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
-| `prop-relative-transversality-preserves-a-map-on-a-closed-good-region` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Statement, Given and facts now carry AC_omega, matching both parametric-transversality and closed zero-set suppliers. The formerly circular perturbation-family supplier has now been fully repaired under AC_omega in `lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family`; all required choice premises are explicit. Evidence: `research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
+
 | `prop-restricted-duality-is-an-exact-involution-on-category-o` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Weightwise finite-dimensional dual exactness and biduality are choice-free; AC-qualified finite length lets the reversed simple filtration and qualified extension closure put D(M) in O. Simple factors and characters preserved. Evidence: `research/ap-319-sol-repair/agent-06-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
 | `prop-root-space-brackets-add-their-roots` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Retained arbitrary nilpotent self-normalizing Cartan scope. Added explicit AC so the Cartan=maximal-toral bridge applies before the finite root lemma identifies zero and absent weights; Jacobi bracket calculation remains valid. Evidence: `research/ap-319-sol-repair/agent-02-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
 | `prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact` | Bounded local mathematical repair review, 2026-09-23; no independent judge or whole-closure certification. Added AC_omega inherited from compact exhaustion at proof 1.1; critical locus closed and images of compact intersections remain compact. Evidence: `research/ap-319-sol-repair/agent-01-receipts.jsonl`; current consumer dispositions in `research/ap-319-sol-repair/final-report.md`. |
@@ -35924,3 +35930,555 @@ The prior proposal concerning `def-green-function-with-pole-at-infinity` is reco
 The existing separate-maintenance proposal for published `def-constant-sectional-curvature-and-space-form` is preserved: its Definition second paragraph says Countable Choice is used only through the geodesic-completeness supplier, while its first paragraph and the opening of `def-sectional-curvature` explicitly inherit Countable Choice through curvature symmetries. Direct current-clause comparison confirms this accounting inconsistency. Repair strategy: identify both sectional-curvature and geodesic-completeness interfaces without altering the geometric predicate or AC_omega premise. Status: outside this assigned draft lane; published carrier untouched, separate maintenance proposed, no audit or frontier gate obligation. This reconciles the existing proposal rather than opening a duplicate supplier-interface event.
 
 The guarded review reasons and actual focused checks are in `research/frontier-37-owner-30-step7-v2/step7-v2-impact-repeat-r1-u1.json`. No new item or consumer Statement/Definition was authored, so these local contract changes trigger no further propagation hop.
+
+<!-- local-published-repair:frontier-38-owner-30:thm-affine-closed-immersions-quotient-rings:begin -->
+### Local published proof repair — thm-affine-closed-immersions-quotient-rings
+
+Disposition A-R: replaced the imported Stacks 01IN/01IH route with a complete earlier finite principal-cover, nilpotent-unit affineness and localized-cokernel proof. Original Statement is byte-identical; existing ambient AC reachability is unchanged and its actual uses are now explicit. No Phase-2 supplier or new pair is required.
+
+Page-graph follow-up (2026-10-03): the repaired proof cited lem-affineness-from-unit-generating-global-sections, whose home page fibre-products-base-change-and-scheme-theoretic-fibres depends back on schemes-subschemes-and-morphisms-locally-of-finite-type, so depcheck/fwdcheck reported a page cycle. The proof now inlines the finite principal-cover equalizer argument in its own step 3.1 and cites thm-sheaf-equalizer-condition instead. That dependency edge to the fibre-products page is removed; the Statement is unchanged and no consumer interface changed.
+
+Current mathematical hash: e7bb39a4328edc42e9a08ae5fe05ead4ba6c5abc6509a3e6a0580cdbf9f58859. Before carrier: research/frontier-38-owner-30-published-affine-closed-immersion.before.md; pre-edit hash b9abf15d531c4a973d27758e9f3a94a9e6af2e2d6ca72bd978f06e1f8f87c9a6. Real ownership claim precedes the reapplied correction; original and corrected bytes are retained. Full mathematical review/source evidence: research/frontier-38-owner-30-published-affine-closed-immersion-review.md and -evidence.json.
+
+Two selected draft consumers, lem-closed-subgroup-scheme-valued-point-criterion and cex-alpha-p-mu-p-rational-points-do-not-detect-scheme, received truthful already-inherited AC annotations and matching manifest/contract entries; their statements did not change. Exact evidence: research/frontier-38-owner-30-choice-consumers-evidence.json. Other consumers have no new axiom reachability or Statement-change propagation.
+
+Focused precheck, real-renderer rendercheck and five-step proof-layout passed on current content after the ownership claim; the page-graph correction is confirmed by a clean depcheck/fwdcheck page graph. This records a bounded local correction, not a new whole-item audit, judge verdict or publication. Final draft recertification remains required.
+<!-- local-published-repair:frontier-38-owner-30:thm-affine-closed-immersions-quotient-rings:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:thm-affine-closed-immersions-quotient-rings:v2:begin -->
+### Local published proof repair v2 — thm-affine-closed-immersions-quotient-rings
+
+Disposition A-R. This supersedes the earlier local receipt while retaining it as history. The prior direct proof used a later-page affineness helper, causing a page-order cycle; that helper is now removed. The complete finite-cover affineness argument is inline: B-module sheaf equalizer, exact localization and finite products, actual affine intersections, localized section rings, unit-generating cover, and canonical-map inverse gluing. All nineteen direct suppliers are on earlier pages or precede this item on the same page. No item/page cycle remains in the actual graph check; remaining other-lane findings are recorded in the scoped evidence and are not waived.
+
+Original Statement remains unchanged, as do its existing ambient Choice assumptions. Current mathematical hash c8f6c6ba41257a27a7d51216ebc13519a53524f37286a3a588dd9db4833ff687. Original published before snapshot research/frontier-38-owner-30-published-affine-closed-immersion.before.md; pre-edit mathematical hash b9abf15d531c4a973d27758e9f3a94a9e6af2e2d6ca72bd978f06e1f8f87c9a6. Real ownership claim precedes the recorded repair; no new audit or judge verdict is claimed.
+
+Complete mathematical/source/order evidence: research/frontier-38-owner-30-published-affine-closed-immersion-inline-evidence.json and -review.md. Parent read the full current five-step proof. Final current precheck, real-renderer rendercheck and proof-layout pass after the last metadata edit. Canonical receipt research/frontier-38-owner-30-published-affine-closed-immersion-receipt-v2.json. The two previously corrected draft consumers retain their same statements and inherited Choice annotations; changed supplier hashes will be recertified centrally.
+<!-- local-published-repair:frontier-38-owner-30:thm-affine-closed-immersions-quotient-rings:v2:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:cor-diameter-rigidity-from-toponogov-under-a-sectional-lower-bound:format-v1:begin -->
+### cor-diameter-rigidity-from-toponogov-under-a-sectional-lower-bound: proof paragraph formatting
+
+- Published carrier read in full, including complete manifold, curvature, diameter and Countable Choice assumptions, the supplied Facts and all 16 numbered steps. This is a local formatting repair, not a new whole-item mathematical audit.
+- Joined the split numbered titles, their existing arguments and their existing standalone justification tags into single proof paragraphs. Mathematical non-whitespace content, Statement, Facts, sources and dependencies are identical to the preserved pre-edit file. No consumer interface changed.
+- Current content guard hash: b725485643ca8f4fc3b832dc96d9210a8ba4a47b843530e53de9a04a409107fe. Prior content guard hash: 8474af0511d31311c674f0d03b01b18d266e0b2541484b311d654e01c38ea364. Before raw hash: 8572743d33f2a85ed706a569c5c3c949c351b3745a38317c4a068f3d5a620aff.
+- Preserved carrier: research/frontier-38-owner-30-published-diameter-rigidity.before.md. Local repair receipt: research/frontier-38-owner-30-published-diameter-rigidity-receipt.json. Prior published audited metadata is retained in the before-file; the current verification block points only to the local repair receipt.
+- Focused explicit proof-layout: 1 item,16 steps,0 defects. Precheck:1 checked,0 failing. Real renderer:1 file,clean. These are local checks, not independent proof certification or a new audit/stamp.
+- No Statement or dependency change, so no consumer propagation is required. Root serializes this ledger evidence and the pre-edit ownership claim into the canonical carriers.
+<!-- local-published-repair:frontier-38-owner-30:cor-diameter-rigidity-from-toponogov-under-a-sectional-lower-bound:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold:format-v1:begin -->
+### cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold: proof paragraph formatting
+
+- Published claim, full proof, Facts, prerequisite interfaces and inherited Countable Choice read. This is a local format repair, not a new whole-item mathematical audit.
+- Formatting only: join split numbered titles, arguments and existing justification tags into complete proof paragraphs. Proof labels and every corresponding step reference were changed by the bijection {"2.3":"3.1","3.1":"4.1","4.1":"5.1","5.1":"6.1"}; inverse relabeling recovers the exact pre-edit mathematical text. No new justification tag, claim, dependency, source or choice assumption was introduced. After stripping verification, whitespace and reversing the explicit label map when present, all text is identical to the preserved published carrier.
+- Current content guard hash: 90aaeef2838c9d5968699ab3dd27b929b43e0e225a0d43f8e4d1ec5852826610; pre-edit guard hash: d91fe0d20699b99e9cb88a8cb14cd17c06a576cfab2864f6fc8931027e9a45c8; before raw hash: 32707b1299bf90fce27c96388cf89337ecc25187c40a23a37d383f0c96e5a1ac. Before carrier: research/frontier-38-owner-30-published-format-cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold.before.md.
+- Local receipt: research/frontier-38-owner-30-published-format-cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold-receipt.json. Prior verification metadata is preserved in the before-file; current verification points only to the repair receipt, without a new audit/stamp.
+- Final explicit proof-layout:1 item,9 steps,0 defects. Precheck:1 checked,0 failing. Real render:1 file,clean. These are local focused checks only.
+- Mathematical interface unchanged, so no consumer propagation is required. Root owns canonical ledger and ownership-claim integration.
+<!-- local-published-repair:frontier-38-owner-30:cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:lem-pullback-metric-on-a-cover-of-a-complete-manifold-is-complete:format-v1:begin -->
+### lem-pullback-metric-on-a-cover-of-a-complete-manifold-is-complete: proof paragraph formatting
+
+- Published claim, full proof, Facts, prerequisite interfaces and inherited Countable Choice read. This is a local format repair, not a new whole-item mathematical audit.
+- Formatting only: join split numbered titles, arguments and existing justification tags into complete proof paragraphs. No new justification tag, claim, dependency, source or choice assumption was introduced. After stripping verification, whitespace and reversing the explicit label map when present, all text is identical to the preserved published carrier.
+- Current content guard hash: bc4c6206fe530fc2473a9cb8a79021e901f73c204dd05991f1f2a35d36f9ae1f; pre-edit guard hash: 1a092309c6474b04698a4e1cc863d0935d2ad393de1c9ad83c2f78061fc6c06a; before raw hash: 9855933cb0806fde52c27d2e9040598118d971dd84e1e0f6919546ba5e8dbb5a. Before carrier: research/frontier-38-owner-30-published-format-lem-pullback-metric-on-a-cover-of-a-complete-manifold-is-complete.before.md.
+- Local receipt: research/frontier-38-owner-30-published-format-lem-pullback-metric-on-a-cover-of-a-complete-manifold-is-complete-receipt.json. Prior verification metadata is preserved in the before-file; current verification points only to the repair receipt, without a new audit/stamp.
+- Final explicit proof-layout:1 item,7 steps,0 defects. Precheck:1 checked,0 failing. Real render:1 file,clean. These are local focused checks only.
+- Mathematical interface unchanged, so no consumer propagation is required. Root owns canonical ledger and ownership-claim integration.
+<!-- local-published-repair:frontier-38-owner-30:lem-pullback-metric-on-a-cover-of-a-complete-manifold-is-complete:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:prop-flat-torus-model-geometry:format-v1:begin -->
+### prop-flat-torus-model-geometry: proof paragraph formatting
+
+- Published claim, full proof, Facts, prerequisite interfaces and inherited Countable Choice read. This is a local format repair, not a new whole-item mathematical audit.
+- Formatting only: join split numbered titles, arguments and existing justification tags into complete proof paragraphs. No new justification tag, claim, dependency, source or choice assumption was introduced. After stripping verification, whitespace and reversing the explicit label map when present, all text is identical to the preserved published carrier.
+- Current content guard hash: 689e9b8dea0fb9129b62f4cd4d010316141a1a1f49859595e0951a060775051b; pre-edit guard hash: 5f30a6ee8d1d90abcfe16aa067dc943bde744db515ca4b17f470383ccbe169ea; before raw hash: 719776aa80c358e8022ff39379fbcbc2cf4b509d37c4ee978189d0a77154e9f1. Before carrier: research/frontier-38-owner-30-published-format-prop-flat-torus-model-geometry.before.md.
+- Local receipt: research/frontier-38-owner-30-published-format-prop-flat-torus-model-geometry-receipt.json. Prior verification metadata is preserved in the before-file; current verification points only to the repair receipt, without a new audit/stamp.
+- Final explicit proof-layout:1 item,7 steps,0 defects. Precheck:1 checked,0 failing. Real render:1 file,clean. These are local focused checks only.
+- Mathematical interface unchanged, so no consumer propagation is required. Root owns canonical ledger and ownership-claim integration.
+<!-- local-published-repair:frontier-38-owner-30:prop-flat-torus-model-geometry:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:thm-a-complete-local-isometry-is-a-covering-map:format-v1:begin -->
+### thm-a-complete-local-isometry-is-a-covering-map: proof paragraph formatting
+
+- Published claim, full proof, Facts, prerequisite interfaces and inherited Countable Choice read. This is a local format repair, not a new whole-item mathematical audit.
+- Formatting only: join split numbered titles, arguments and existing justification tags into complete proof paragraphs. No new justification tag, claim, dependency, source or choice assumption was introduced. After stripping verification, whitespace and reversing the explicit label map when present, all text is identical to the preserved published carrier.
+- Current content guard hash: 625c4e3712ad8d20389f22e7a2a3fd8ea02671dca534fed5d950c8f5a9cf34da; pre-edit guard hash: 3ed69a2b7fbe1f2457161b6295aab2a1b95c73dc71aecb9ae4fb9152bcaaf2d2; before raw hash: 6b72e7fc419de6406cc444ecd3f881a7dec84bc07ab49f0a43f020e384a45395. Before carrier: research/frontier-38-owner-30-published-format-thm-a-complete-local-isometry-is-a-covering-map.before.md.
+- Local receipt: research/frontier-38-owner-30-published-format-thm-a-complete-local-isometry-is-a-covering-map-receipt.json. Prior verification metadata is preserved in the before-file; current verification points only to the repair receipt, without a new audit/stamp.
+- Final explicit proof-layout:1 item,8 steps,0 defects. Precheck:1 checked,0 failing. Real render:1 file,clean. These are local focused checks only.
+- Mathematical interface unchanged, so no consumer propagation is required. Root owns canonical ledger and ownership-claim integration.
+<!-- local-published-repair:frontier-38-owner-30:thm-a-complete-local-isometry-is-a-covering-map:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:ex-toponogov-comparison-on-a-round-sphere:format-v1:begin -->
+### ex-toponogov-comparison-on-a-round-sphere: proof paragraph formatting
+
+- Read the full published claim, Facts, dependencies, Choice assumptions and operative proof. Joined 7 numbered title/body/tag paragraphs; relocated 1 existing title tag groups, removing only duplicated justification references already present at the tail. No new tags.
+- Semantic comparison ignoring verification metadata, whitespace and justification tag placement is identical; every mathematical word, number and symbol is preserved. Statement/Example, Facts, sources, hypotheses and dependencies are byte-identical. No consumer interface changed.
+- Current content guard hash: 3179a2e36f83c5709e4bffb366f5c9a737fe2cf0a9412e72cfb0b9928581d011. Prior content guard hash: 7c59444eea55b34f6180b7c62d213d1f6808936e6b18e27b05326bfdb58aed65. Before raw hash: b3c89768c0c436ec67835e2e2f3c1484dca12431acde0d80646fc99ea77ee8a8.
+- Preserved carrier: research/frontier-38-owner-30-published-fourier-format-ex-toponogov-comparison-on-a-round-sphere.before.md. Receipt: research/frontier-38-owner-30-published-fourier-format-ex-toponogov-comparison-on-a-round-sphere-receipt.json. Prior audit metadata is preserved only in the before carrier; current verification points to local repair evidence, not a new audit.
+- Focused explicit proof-layout, precheck and real rendercheck each passed on the current carrier. Local check outputs: research/frontier-38-owner-30-published-fourier-format-ex-toponogov-comparison-on-a-round-sphere-checks.json.
+- Mathematical uncertainty: No additional mathematical uncertainty identified during this bounded formatting review; no new mathematical audit asserted.
+- Root integrates this private ledger evidence and ownership patch into canonical records.
+<!-- local-published-repair:frontier-38-owner-30:ex-toponogov-comparison-on-a-round-sphere:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:prop-half-space-model-geometry:format-v1:begin -->
+### prop-half-space-model-geometry: proof paragraph formatting
+
+- Read the full published claim, Facts, dependencies, Choice assumptions and operative proof. Joined 7 numbered title/body/tag paragraphs; relocated 5 existing title tag groups, removing only duplicated justification references already present at the tail. No new tags.
+- Semantic comparison ignoring verification metadata, whitespace and justification tag placement is identical; every mathematical word, number and symbol is preserved. Statement/Example, Facts, sources, hypotheses and dependencies are byte-identical. No consumer interface changed.
+- Current content guard hash: 8c41356091ee32cda4509ffdcd568946dc75ff21a4dd61ba6c5d243baa209af5. Prior content guard hash: 261be9bf59e5822c21df044d7219b4abd8a1346193a3982c541561b3a37ed039. Before raw hash: d772f0d58555232d3100843ffaaed03b789406eae196834b4fda537386e82902.
+- Preserved carrier: research/frontier-38-owner-30-published-fourier-format-prop-half-space-model-geometry.before.md. Receipt: research/frontier-38-owner-30-published-fourier-format-prop-half-space-model-geometry-receipt.json. Prior audit metadata is preserved only in the before carrier; current verification points to local repair evidence, not a new audit.
+- Focused explicit proof-layout, precheck and real rendercheck each passed on the current carrier. Local check outputs: research/frontier-38-owner-30-published-fourier-format-prop-half-space-model-geometry-checks.json.
+- Mathematical uncertainty: No additional mathematical uncertainty identified during this bounded formatting review; no new mathematical audit asserted.
+- Root integrates this private ledger evidence and ownership patch into canonical records.
+<!-- local-published-repair:frontier-38-owner-30:prop-half-space-model-geometry:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:prop-round-sphere-model-geometry:format-v1:begin -->
+### prop-round-sphere-model-geometry: proof paragraph formatting
+
+- Read the full published claim, Facts, dependencies, Choice assumptions and operative proof. Joined 9 numbered title/body/tag paragraphs; relocated 0 existing title tag groups, removing only duplicated justification references already present at the tail. No new tags.
+- Semantic comparison ignoring verification metadata, whitespace and justification tag placement is identical; every mathematical word, number and symbol is preserved. Statement/Example, Facts, sources, hypotheses and dependencies are byte-identical. No consumer interface changed.
+- Current content guard hash: f28386446413b0c213960cbea4d754729dd19e5b5593016a3a189accfa0a004a. Prior content guard hash: 5aefe4f7f5d3a0ef81e4ae435a126ab961f9132b42f44ce3fecadab574a390d6. Before raw hash: 6cfd1e6b3f04c8bc9741e45f9249ea77c72d8c90af531c0f14d56428069e5400.
+- Preserved carrier: research/frontier-38-owner-30-published-fourier-format-prop-round-sphere-model-geometry.before.md. Receipt: research/frontier-38-owner-30-published-fourier-format-prop-round-sphere-model-geometry-receipt.json. Prior audit metadata is preserved only in the before carrier; current verification points to local repair evidence, not a new audit.
+- Focused explicit proof-layout, precheck and real rendercheck each passed on the current carrier. Local check outputs: research/frontier-38-owner-30-published-fourier-format-prop-round-sphere-model-geometry-checks.json.
+- Mathematical uncertainty: Resolved reading error: HEAD, preserved before carrier and current Proof 7.1 all say linearly dependent (the before carrier wraps these words across a newline). No mathematical wording correction occurred; only formatting changed.
+- Root integrates this private ledger evidence and ownership patch into canonical records.
+<!-- local-published-repair:frontier-38-owner-30:prop-round-sphere-model-geometry:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:ex-equality-cases-as-diagnostics-for-all-comparison-signs:format-v1:begin -->
+### ex-equality-cases-as-diagnostics-for-all-comparison-signs: proof paragraph formatting
+
+- Read the full published claim, Facts, dependencies, Choice assumptions and operative proof. Joined 14 numbered title/body/tag paragraphs; relocated 10 existing title tag groups, removing only duplicated justification references already present at the tail. No new tags. Root authorized the label-only canonical stratification under the exact bijection recorded in the report; every step argument was compared exactly after that substitution, and the source-locator reference follows the same map.
+- Semantic comparison ignoring verification metadata, whitespace, justification tag placement and the verified proof-label bijection is identical; every mathematical word, number and symbol is preserved. Statement/Example, Facts, sources, hypotheses and dependencies are byte-identical. No consumer interface changed.
+- Current content guard hash: aaa3fc711f0d0d63f9f0ca83d0fed36ef4b784c36ce296ab53f50a3c930641f2. Prior content guard hash: 0fdad3d730465669d75e1f7deba1b60d4cace323b6735522eab33c83879c1003. Before raw hash: 846458592dbab3543588278215cc58cd8a751bbd7d07c9899bb7a617bc09a7b4.
+- Preserved carrier: research/frontier-38-owner-30-published-fourier-format-ex-equality-cases-as-diagnostics-for-all-comparison-signs.before.md. Receipt: research/frontier-38-owner-30-published-fourier-format-ex-equality-cases-as-diagnostics-for-all-comparison-signs-receipt.json. Prior audit metadata is preserved only in the before carrier; current verification points to local repair evidence, not a new audit.
+- Focused explicit proof-layout, precheck and real rendercheck each passed on the current carrier. Local check outputs: research/frontier-38-owner-30-published-fourier-format-ex-equality-cases-as-diagnostics-for-all-comparison-signs-checks.json.
+- Mathematical uncertainty: No additional mathematical uncertainty identified during this bounded formatting review; no new mathematical audit asserted.
+- Root integrates this private ledger evidence and ownership patch into canonical records.
+<!-- local-published-repair:frontier-38-owner-30:ex-equality-cases-as-diagnostics-for-all-comparison-signs:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:lem-abstract-residue-basic-properties:format-v1:begin -->
+### lem-abstract-residue-basic-properties: proof paragraph formatting
+
+Run: frontier-38-owner-30. Group: owner-jm-format.
+
+Formatting only: join numbered proof arguments, displays and existing trailing justification tags into single paragraphs; consistently renumber step labels and references to canonical dependency phases. Preserve every mathematical word, argument order, Statement, Facts, Choice, dependencies and sources; no tags added.
+
+Before carrier: `research/frontier-38-owner-30-published-abstract-residue-format.before.md` (raw SHA-256 `c16df0fd392e1908c63463149eb3d5ddccf858eec5e7323a60432aca37c1ad2b`, pre itemHashGuard `5f915f62871401e6f4237af62a4a918e3f0bf01e9ecbb9cc4690880f6b5d6085`). Authentic pre-edit private ownership claim: `research/frontier-38-owner-30-published-abstract-residue-format.ownership.patch.jsonl`, claimed at 2026-10-03T07:28:57.202Z.
+
+Current itemHashGuard: `b4257725deb4ce70b099f55369911427d865ace00a75dfc4f06b234efae4c6f5`. Local proof-layout, precheck and rendercheck passed on the current exact item path; their outputs and content bindings are in `research/frontier-38-owner-30-published-abstract-residue-format-receipt.json`. The prior audit is preserved in the before carrier; no new audit or judge stamp is asserted. Original mathematical interface and Choice are unchanged. Root must integrate this exact section and ownership patch into the canonical run evidence.
+<!-- local-published-repair:frontier-38-owner-30:lem-abstract-residue-basic-properties:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:lem-green-kernel-exists-after-removing-a-chart-disc:format-v1:begin -->
+### lem-green-kernel-exists-after-removing-a-chart-disc: proof paragraph formatting
+
+Run: frontier-38-owner-30. Group: owner-jm-format.
+
+Formatting only: join numbered proof arguments, displays and existing trailing justification tags into single paragraphs. Preserve every mathematical word, argument order, Statement, Facts, Choice, dependencies and sources; no tags added.
+
+Before carrier: `research/frontier-38-owner-30-published-green-chart-disc-format.before.md` (raw SHA-256 `c819e4a06d0aba904d11e3549c482eb3f19c477cced671b89c0546c20099c882`, pre itemHashGuard `9f73f6a16bbfc294ca77126db433eb5f675ccebd3a6c5582fa83a2766501e12e`). Authentic pre-edit private ownership claim: `research/frontier-38-owner-30-published-green-chart-disc-format.ownership.patch.jsonl`, claimed at 2026-10-03T07:30:35.295Z.
+
+Current itemHashGuard: `b2df15bf81d4165b1d83785740a7bc01732144c2a69d6ef82048298284c96dc5`. Local proof-layout, precheck and rendercheck passed on the current exact item path; their outputs and content bindings are in `research/frontier-38-owner-30-published-green-chart-disc-format-receipt.json`. The prior audit is preserved in the before carrier; no new audit or judge stamp is asserted. Original mathematical interface and Choice are unchanged. Root must integrate this exact section and ownership patch into the canonical run evidence.
+<!-- local-published-repair:frontier-38-owner-30:lem-green-kernel-exists-after-removing-a-chart-disc:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:def-sheaf-total-quotient-rings:format-v1:begin -->
+### def-sheaf-total-quotient-rings: published proof paragraph formatting
+
+- Read the full current claim, Facts, numbered proof and Choice declaration; checked the operative localization, sheaf, divisor and valuation suppliers applicable to this item. This repair changes paragraph layout only, not the mathematics or its assumptions.
+- Joined each split numbered paragraph and its existing justification tags. All mathematical non-whitespace characters, complete claim, Facts, dependencies, sources and Choice text equal the preserved before file; no consumer interface changed.
+- Current content guard hash: 4a5e5e8299701f04cc34ccac054793765df2c95126ac8cb0631f7cf89e747924. Prior content guard hash: a4231ead8bee6ce6c88dd63c64a01185ccae9fd72768f4d70f1a7393dad17bd7. Before raw hash: aa0b6d0fe3ef25fb673c537cc2224a6e6db1e16403a63b1355569590deee1aea.
+- Before file: research/frontier-38-owner-30-published-format-blowup-def-sheaf-total-quotient-rings.before.md. Local receipt: research/frontier-38-owner-30-published-format-blowup-def-sheaf-total-quotient-rings-receipt.json. Prior audit/judge metadata remains in the before file; current verification points only to the local repair receipt.
+- Precheck passes; real renderer passes; explicit last-edit proof-layout passes with 8 numbered steps and zero defects. These are scoped content checks, not a new mathematical audit or acceptance stamp.
+- Root serializes this canonical ledger patch and the private pre-edit ownership claim; no shared ledger, ownership or workflow state was written by this lane.
+<!-- local-published-repair:frontier-38-owner-30:def-sheaf-total-quotient-rings:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:lem-cartier-divisor-addition-tensor:format-v1:begin -->
+### lem-cartier-divisor-addition-tensor: published proof paragraph formatting
+
+- Read the full current claim, Facts, numbered proof and Choice declaration; checked the operative localization, sheaf, divisor and valuation suppliers applicable to this item. This repair changes paragraph layout only, not the mathematics or its assumptions.
+- Joined each split numbered paragraph and its existing justification tags. All mathematical non-whitespace characters, complete claim, Facts, dependencies, sources and Choice text equal the preserved before file; no consumer interface changed.
+- Current content guard hash: 41f44b52112c60315e177def8de015811818a894b82aa94a009ebcb611b4c37a. Prior content guard hash: 2c30044d1bb440a1867d56416ec3b43f9778431b32173d70250749506399ace0. Before raw hash: b5d615a022867da671e3f64ad786b1ecfdfec885c4f63632ce809e33c50db74a.
+- Before file: research/frontier-38-owner-30-published-format-blowup-lem-cartier-divisor-addition-tensor.before.md. Local receipt: research/frontier-38-owner-30-published-format-blowup-lem-cartier-divisor-addition-tensor-receipt.json. Prior audit/judge metadata remains in the before file; current verification points only to the local repair receipt.
+- Precheck passes; real renderer passes; explicit last-edit proof-layout passes with 5 numbered steps and zero defects. These are scoped content checks, not a new mathematical audit or acceptance stamp.
+- Root serializes this canonical ledger patch and the private pre-edit ownership claim; no shared ledger, ownership or workflow state was written by this lane.
+<!-- local-published-repair:frontier-38-owner-30:lem-cartier-divisor-addition-tensor:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:lem-cartier-divisor-local-equation-equivalence:format-v1:begin -->
+### lem-cartier-divisor-local-equation-equivalence: published proof paragraph formatting
+
+- Read the full current claim, Facts, numbered proof and Choice declaration; checked the operative localization, sheaf, divisor and valuation suppliers applicable to this item. This repair changes paragraph layout only, not the mathematics or its assumptions.
+- Joined each split numbered paragraph and its existing justification tags. All mathematical non-whitespace characters, complete claim, Facts, dependencies, sources and Choice text equal the preserved before file; no consumer interface changed.
+- Current content guard hash: a63b7aba4b82e3409801373adcfc444826c5a5da75b5cd87ef35ce59b9b32ecb. Prior content guard hash: b2dd324471a2691ad9d668abf21edb8f7279e79f23f0d06923e49b9e415d223d. Before raw hash: 6a8c4be7d51ee23814b65e948868a4ae34d88c016d4c2718c28601df2d93d2d9.
+- Before file: research/frontier-38-owner-30-published-format-blowup-lem-cartier-divisor-local-equation-equivalence.before.md. Local receipt: research/frontier-38-owner-30-published-format-blowup-lem-cartier-divisor-local-equation-equivalence-receipt.json. Prior audit/judge metadata remains in the before file; current verification points only to the local repair receipt.
+- Precheck passes; real renderer passes; explicit last-edit proof-layout passes with 8 numbered steps and zero defects. These are scoped content checks, not a new mathematical audit or acceptance stamp.
+- Root serializes this canonical ledger patch and the private pre-edit ownership claim; no shared ledger, ownership or workflow state was written by this lane.
+<!-- local-published-repair:frontier-38-owner-30:lem-cartier-divisor-local-equation-equivalence:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:lem-principal-weil-divisor-locally-finite:format-v1:begin -->
+### lem-principal-weil-divisor-locally-finite: published proof paragraph formatting
+
+- Read the full current claim, Facts, numbered proof and Choice declaration; checked the operative localization, sheaf, divisor and valuation suppliers applicable to this item. This repair changes paragraph layout only, not the mathematics or its assumptions.
+- Joined each split numbered paragraph and its existing justification tags. All mathematical non-whitespace characters, complete claim, Facts, dependencies, sources and Choice text equal the preserved before file; no consumer interface changed.
+- Current content guard hash: ec257158629e07b45f16c865a9b6b8c5258a0885f138432e0ec91deb9dd99108. Prior content guard hash: 863d0c0ead2e3b36145831a0ba6dc7778a05f9be6587755b99f0d6f9b0b1633e. Before raw hash: 34e93f8fe0cdb0c6e947ab21aa24000c8a13d1fc5f2b61bb715a30c7abae925c.
+- Before file: research/frontier-38-owner-30-published-format-blowup-lem-principal-weil-divisor-locally-finite.before.md. Local receipt: research/frontier-38-owner-30-published-format-blowup-lem-principal-weil-divisor-locally-finite-receipt.json. Prior audit/judge metadata remains in the before file; current verification points only to the local repair receipt.
+- Precheck passes; real renderer passes; explicit last-edit proof-layout passes with 3 numbered steps and zero defects. These are scoped content checks, not a new mathematical audit or acceptance stamp.
+- Root serializes this canonical ledger patch and the private pre-edit ownership claim; no shared ledger, ownership or workflow state was written by this lane.
+<!-- local-published-repair:frontier-38-owner-30:lem-principal-weil-divisor-locally-finite:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:thm-cartier-to-weil-divisor-normal-scheme:format-v1:begin -->
+### thm-cartier-to-weil-divisor-normal-scheme: published proof paragraph formatting
+
+- Read the full current claim, Facts, numbered proof and Choice declaration; checked the operative localization, sheaf, divisor and valuation suppliers applicable to this item. This repair changes paragraph layout only, not the mathematics or its assumptions.
+- Joined each split numbered paragraph and its existing justification tags. All mathematical non-whitespace characters, complete claim, Facts, dependencies, sources and Choice text equal the preserved before file; no consumer interface changed.
+- Current content guard hash: e304deaedbbd8966722a2f50a7ddbcdfa196689675df5ed0ea0470954d08d819. Prior content guard hash: 714670b56ee20ca66ab3f36e2cb2ccb31ac1e8af76dc6be5542fe2d3c930407d. Before raw hash: 9f09655ff4a79ea166a9bbf07ed9bd26e69165e2bb1952227ddc92d09b6ac733.
+- Before file: research/frontier-38-owner-30-published-format-blowup-thm-cartier-to-weil-divisor-normal-scheme.before.md. Local receipt: research/frontier-38-owner-30-published-format-blowup-thm-cartier-to-weil-divisor-normal-scheme-receipt.json. Prior audit/judge metadata remains in the before file; current verification points only to the local repair receipt.
+- Precheck passes; real renderer passes; explicit last-edit proof-layout passes with 6 numbered steps and zero defects. These are scoped content checks, not a new mathematical audit or acceptance stamp.
+- Root serializes this canonical ledger patch and the private pre-edit ownership claim; no shared ledger, ownership or workflow state was written by this lane.
+<!-- local-published-repair:frontier-38-owner-30:thm-cartier-to-weil-divisor-normal-scheme:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:lem-first-variation-hinge-derivative-formula:format-v1:begin -->
+### lem-first-variation-hinge-derivative-formula: proof paragraph formatting
+
+- Local recorded published repair after reading the full carrier, declared dependencies and inherited Choice; not a new mathematical audit.
+- Exact delta: Join original numbered proof titles, body paragraphs and existing trailing justification groups; move duplicate opening tags to the trailing groups. No mathematical prose change.
+- Statement, hypotheses, declared deps, Facts/Assumptions and source prose byte-preserved. Each original numbered mathematical argument preserved modulo its explicit label bijection, whitespace and justification-tag placement; no consumer propagation.
+- Current guard hash 6967969b5aa27bceede4ce09624e5ca85dab26684ff6efcc3fb123adcbbe6477; prior guard 5c0796bd6941b1cd0e539b26ef079590c7da8ec6d00b5b0e5b62238e613dbd73; before raw hash 0e3f4f1d8fbe29a061028b767dbd1df8ecc9bef346bd1b3d7986125fda322a80.
+- Before carrier: research/frontier-38-owner-30-published-format-misc-lem-first-variation-hinge-derivative-formula.before.md. Prior publication audit remains there; current verification.repair names research/frontier-38-owner-30-published-format-misc-lem-first-variation-hinge-derivative-formula.receipt.json.
+- Current explicit-path proof-layout, precheck and rendercheck all pass; outputs in receipt/report.
+- Canonical ownership and ledger integration remains assigned to root; these are private patch evidence.
+<!-- local-published-repair:frontier-38-owner-30:lem-first-variation-hinge-derivative-formula:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:lem-toponogov-distance-support-inequality:format-v1:begin -->
+### lem-toponogov-distance-support-inequality: proof paragraph formatting
+
+- Local recorded published repair after reading the full carrier, declared dependencies and inherited Choice; not a new mathematical audit.
+- Exact delta: Join original proof paragraphs and move duplicate opening justification tags to the original trailing tag groups; reorder independent proof steps and consistently relabel all affected step references. No mathematical prose change. Move the existing negative-minimum introduction before the existing conditional barrier construction; add its genuinely used step 2.2 as a trailing justification tag.
+- Statement, hypotheses, declared deps, Facts/Assumptions and source prose byte-preserved. Each original numbered mathematical argument preserved modulo its explicit label bijection, whitespace and justification-tag placement; no consumer propagation.
+- Current guard hash 54de30aee90946db17cf6e171e88d1b65bf69bef120b57e038476cde0a00fd35; prior guard e05caa0d38eb12faedb5095878620929f4d9fd7570f6fda3d2363856b889a54f; before raw hash fa56057ecf24e03febaec1eda18f6bdc3d28153374f20aa5660e0d35b040e222.
+- Before carrier: research/frontier-38-owner-30-published-format-misc-lem-toponogov-distance-support-inequality.before.md. Prior publication audit remains there; current verification.repair names research/frontier-38-owner-30-published-format-misc-lem-toponogov-distance-support-inequality.receipt.json.
+- Current explicit-path proof-layout, precheck and rendercheck all pass; outputs in receipt/report.
+- Canonical ownership and ledger integration remains assigned to root; these are private patch evidence.
+<!-- local-published-repair:frontier-38-owner-30:lem-toponogov-distance-support-inequality:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:prop-distance-between-corresponding-side-points-in-toponogov-comparison:format-v1:begin -->
+### prop-distance-between-corresponding-side-points-in-toponogov-comparison: proof paragraph formatting
+
+- Local recorded published repair after reading the full carrier, declared dependencies and inherited Choice; not a new mathematical audit.
+- Exact delta: Join original numbered proof titles, body paragraphs and existing trailing justification groups; move duplicate opening tags to the trailing groups. No mathematical prose change.
+- Statement, hypotheses, declared deps, Facts/Assumptions and source prose byte-preserved. Each original numbered mathematical argument preserved modulo its explicit label bijection, whitespace and justification-tag placement; no consumer propagation.
+- Current guard hash e9bdfb1390b894b6dc10200b34b35d89f5fe504606824efc74b069081b14d3af; prior guard 23be620f49884bf42a5b69ee7e2aee7a2cfb6f40aca768f129209d99c6f906df; before raw hash c550dce0d519dcbf972a9c79990c96dea148723834fc46fccc5ee3427e67407d.
+- Before carrier: research/frontier-38-owner-30-published-format-misc-prop-distance-between-corresponding-side-points-in-toponogov-comparison.before.md. Prior publication audit remains there; current verification.repair names research/frontier-38-owner-30-published-format-misc-prop-distance-between-corresponding-side-points-in-toponogov-comparison.receipt.json.
+- Current explicit-path proof-layout, precheck and rendercheck all pass; outputs in receipt/report.
+- Canonical ownership and ledger integration remains assigned to root; these are private patch evidence.
+<!-- local-published-repair:frontier-38-owner-30:prop-distance-between-corresponding-side-points-in-toponogov-comparison:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:prop-rigidity-in-rauch-comparison:format-v1:begin -->
+### prop-rigidity-in-rauch-comparison: proof paragraph formatting
+
+- Local recorded published repair after reading the full carrier, declared dependencies and inherited Choice; not a new mathematical audit.
+- Exact delta: Join original proof paragraphs and move duplicate opening justification tags to the original trailing tag groups; reorder independent proof steps and consistently relabel all affected step references. No mathematical prose change. Keep the independent Riccati differentiation branch before the index curvature conclusion to make the canonical proof phases explicit.
+- Statement, hypotheses, declared deps, Facts/Assumptions and source prose byte-preserved. Each original numbered mathematical argument preserved modulo its explicit label bijection, whitespace and justification-tag placement; no consumer propagation.
+- Current guard hash 575a07c672b7624ff4c7629261c08d80a71ed1964dc91688cfff9bf470bd1a71; prior guard acbb6962877bb477089653cd1ab52624a050ff8372b9f788d4151bcd856f3340; before raw hash 3c5027fd6c0aa9a61000f53e3281a4001a5f9b6bce85b9a95a7375488285be38.
+- Before carrier: research/frontier-38-owner-30-published-format-misc-prop-rigidity-in-rauch-comparison.before.md. Prior publication audit remains there; current verification.repair names research/frontier-38-owner-30-published-format-misc-prop-rigidity-in-rauch-comparison.receipt.json.
+- Current explicit-path proof-layout, precheck and rendercheck all pass; outputs in receipt/report.
+- Canonical ownership and ledger integration remains assigned to root; these are private patch evidence.
+<!-- local-published-repair:frontier-38-owner-30:prop-rigidity-in-rauch-comparison:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:thm-cheng-maximal-diameter-rigidity:format-v1:begin -->
+### thm-cheng-maximal-diameter-rigidity: proof paragraph formatting
+
+- Local recorded published repair after reading the full carrier, declared dependencies and inherited Choice; not a new mathematical audit.
+- Exact delta: Join original numbered proof titles, body paragraphs and existing trailing justification groups; move duplicate opening tags to the trailing groups. No mathematical prose change.
+- Statement, hypotheses, declared deps, Facts/Assumptions and source prose byte-preserved. Each original numbered mathematical argument preserved modulo its explicit label bijection, whitespace and justification-tag placement; no consumer propagation.
+- Current guard hash f7fd6404147a70ff300c91b702164057721c56ebbcc27e5ce818e142072b96dc; prior guard ec37544230dfe9bf02065eee8609b68f4dff14cebbcde3f0f7dd1d0fa7b36dcb; before raw hash 2dbcd1634deaaf58a9961fcbc00120f38291bd6439ad73b6778393437b2edfa3.
+- Before carrier: research/frontier-38-owner-30-published-format-misc-thm-cheng-maximal-diameter-rigidity.before.md. Prior publication audit remains there; current verification.repair names research/frontier-38-owner-30-published-format-misc-thm-cheng-maximal-diameter-rigidity.receipt.json.
+- Current explicit-path proof-layout, precheck and rendercheck all pass; outputs in receipt/report.
+- Canonical ownership and ledger integration remains assigned to root; these are private patch evidence.
+<!-- local-published-repair:frontier-38-owner-30:thm-cheng-maximal-diameter-rigidity:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:thm-toponogov-hinge-comparison:format-v1:begin -->
+### thm-toponogov-hinge-comparison: proof paragraph formatting
+
+- Local recorded published repair after reading the full carrier, declared dependencies and inherited Choice; not a new mathematical audit.
+- Exact delta: Join original numbered proof titles, body paragraphs and existing trailing justification groups; move duplicate opening tags to the trailing groups. No mathematical prose change.
+- Statement, hypotheses, declared deps, Facts/Assumptions and source prose byte-preserved. Each original numbered mathematical argument preserved modulo its explicit label bijection, whitespace and justification-tag placement; no consumer propagation.
+- Current guard hash dd67a73cde60211726a234d0668bf2c6aae5dbc53181c4722f6ed6048affa7c5; prior guard e779e319bd0bbd73d9686eceb589741c26281702838ba96bd576db3741b42614; before raw hash 34e8d8252b56dee21b614841b750abac8bdab63d8cc134b013ad7717797d6271.
+- Before carrier: research/frontier-38-owner-30-published-format-misc-thm-toponogov-hinge-comparison.before.md. Prior publication audit remains there; current verification.repair names research/frontier-38-owner-30-published-format-misc-thm-toponogov-hinge-comparison.receipt.json.
+- Current explicit-path proof-layout, precheck and rendercheck all pass; outputs in receipt/report.
+- Canonical ownership and ledger integration remains assigned to root; these are private patch evidence.
+<!-- local-published-repair:frontier-38-owner-30:thm-toponogov-hinge-comparison:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:thm-canonical-map-nonhyperelliptic-curve:format-v1:begin -->
+### thm-canonical-map-nonhyperelliptic-curve: proof paragraph formatting
+
+- Read the complete published claim, Facts, proof, dependencies and exact inherited Choice declaration. This is formatting maintenance, not a new whole-item mathematical audit.
+- Formatting only: join split numbered proof titles, bodies and displays into single paragraphs and collect their existing justification tags at the paragraph end. Preserve all mathematical non-whitespace text, numbered references, Statement, Facts, deps, sources, hypotheses and Choice; add no tags.
+- Current content guard hash: d4fd45cfc224a8367cea83bc347046ebf15f6e7f205c7fd4f30e21d22b7554f3. Prior content guard hash: da07720fa37fa26eb3fdea3fe977d057e149343c608e56d3e76733dd665124f2. Before raw hash: 7a2faff159007ed4b7a1aa37f5e4a5d5e43704186e188f3b76d41ae9bf027c49.
+- Preserved pre-edit carrier: research/frontier-38-owner-30-published-format-surface-thm-canonical-map-nonhyperelliptic-curve.before.md. Prior verification metadata is retained there; current verification points only to research/frontier-38-owner-30-published-format-surface-thm-canonical-map-nonhyperelliptic-curve-receipt.json.
+- Focused local precheck, real renderer and explicit changed-path proof-layout all pass. No new audit, published item gate, rejudgment or Statement change; no downstream interface propagation.
+- Root must serialize this exact ledger evidence and the private ownership patch into canonical carriers.
+<!-- local-published-repair:frontier-38-owner-30:thm-canonical-map-nonhyperelliptic-curve:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:thm-degree-two-g-plus-one-line-bundle-very-ample:format-v1:begin -->
+### thm-degree-two-g-plus-one-line-bundle-very-ample: proof paragraph formatting
+
+- Read the complete published claim, Facts, proof, dependencies and exact inherited Choice declaration. This is formatting maintenance, not a new whole-item mathematical audit.
+- Authorized presentation exception: informational preview in step3.3 changes only `step 5.1` to `step (5.1)`; its finite-morphism argument does not depend on the later application. All mathematical words are preserved; inverse-normalizing these parentheses preserves the exact semantic text. Formatting only: join split numbered proof titles, bodies and displays into single paragraphs and collect their existing justification tags at the paragraph end. Preserve mathematical text up to tag placement and the explicitly recorded preview punctuation, numbered references, Statement, Facts, deps, sources, hypotheses and Choice; add no tags.
+- Current content guard hash: 6ef53cdb0435a916623bded7b47db67c87e5039ab45f9a5cc84ea42d7d207ad9. Prior content guard hash: b4b206d05bdd20a6bec8f66d5c3727ac450d7d8836b371928a3a254fe876cff7. Before raw hash: e7980dd72494c2db8744af070077b0435b1cb0557635b4393a1f5b3354724642.
+- Preserved pre-edit carrier: research/frontier-38-owner-30-published-format-surface-thm-degree-two-g-plus-one-line-bundle-very-ample.before.md. Prior verification metadata is retained there; current verification points only to research/frontier-38-owner-30-published-format-surface-thm-degree-two-g-plus-one-line-bundle-very-ample-receipt.json.
+- Focused local precheck, real renderer and explicit changed-path proof-layout all pass. No new audit, published item gate, rejudgment or Statement change; no downstream interface propagation.
+- Root must serialize this exact ledger evidence and the private ownership patch into canonical carriers.
+<!-- local-published-repair:frontier-38-owner-30:thm-degree-two-g-plus-one-line-bundle-very-ample:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:thm-serre-duality-curves-coherent-sheaves:format-v1:begin -->
+### thm-serre-duality-curves-coherent-sheaves: proof paragraph formatting
+
+- Read the complete published claim, Facts, proof, dependencies and exact inherited Choice declaration. This is formatting maintenance, not a new whole-item mathematical audit.
+- Formatting only: join split numbered proof titles, bodies and displays into single paragraphs and collect their existing justification tags at the paragraph end. Preserve mathematical text up to tag placement and the explicitly recorded preview punctuation, numbered references, Statement, Facts, deps, sources, hypotheses and Choice; add no tags.
+- Current content guard hash: 815124ed6d6197cf13ec3d968f5c29faf58a03a13131ba0cdb5e1806d9c5655c. Prior content guard hash: d7fc9156c3edac44a35dd167e1734863fdb1a9e1adbb792fe3368f2e18888f3c. Before raw hash: 9c195e2fe42dfbcbd2c20b39c9ddef5766d72b7282a69d3687d4c76aafbca995.
+- Preserved pre-edit carrier: research/frontier-38-owner-30-published-format-surface-thm-serre-duality-curves-coherent-sheaves.before.md. Prior verification metadata is retained there; current verification points only to research/frontier-38-owner-30-published-format-surface-thm-serre-duality-curves-coherent-sheaves-receipt.json.
+- Focused local precheck, real renderer and explicit changed-path proof-layout all pass. No new audit, published item gate, rejudgment or Statement change; no downstream interface propagation.
+- Root must serialize this exact ledger evidence and the private ownership patch into canonical carriers.
+<!-- local-published-repair:frontier-38-owner-30:thm-serre-duality-curves-coherent-sheaves:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:ex-divisor-rational-function-projective-line:format-v1:begin -->
+### ex-divisor-rational-function-projective-line: Given-based proof-use clarification and formatting
+
+- Read the entire published claim, Facts, proof, deps, sources and operative Choice assumptions. Joined 6 split numbered bodies and their existing terminal tags; all mathematical words retained. Existing numeric reference tags were normalized to step references and labels/citations consistently renumbered without reordering paragraphs.
+- Statement/Example, dependencies, sources and hypotheses are unchanged. Arguments are identical after reversing consistent step-label/reference renumbering and ignoring tag formatting; this item adds the explicitly authorized Given-based F1 clarification; its supplied charts establish F1 without invoking the AC-qualified existence/twisting construction. No consumer propagation is triggered.
+- Prior audited metadata is preserved in research/frontier-38-owner-30-published-format-modular-ex-divisor-rational-function-projective-line.before.md; current verification points only to research/frontier-38-owner-30-published-format-modular-ex-divisor-rational-function-projective-line-receipt.json, a local repair receipt. No new audit/judge is claimed.
+- Current content guard hash: c9e8e65c1e525f32a86f4e9657c019ab5272d54c59cecde9c8a426af1201086b. Prior guard hash: e050130d70ffcdcffac4d7cb8ab162e2267f9ed3312aa3cfd39e07417c2ec140. Before raw SHA256: 83261ce9789fbbdd53c311deb25c7e61cc09f33286403d6932f8dee64829d0f0.
+- Focused explicit proof-layout, precheck and real rendercheck passed after the final edit; their exact per-item commands, outputs and hashes are in the receipt and private check files.
+- The initial AC-qualified chart-supplier concern is resolved by the explicit Given-based F1 clarification. All other operative direct supplier clauses are unconditional; the function-field supplier geometric-integrality clause requires AC but is unused. No full mathematical audit is claimed.
+- Root must serialize this exact ledger evidence and the private ownership patch into the canonical files; those files were not edited by this lane.
+<!-- local-published-repair:frontier-38-owner-30:ex-divisor-rational-function-projective-line:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:ex-effective-divisor-thickened-points-curve:format-v1:begin -->
+### ex-effective-divisor-thickened-points-curve: existing proof tags and paragraph formatting
+
+- Read the entire published claim, Facts, proof, deps, sources and operative Choice assumptions. Joined 5 split numbered bodies and their existing terminal tags; all mathematical words retained. Existing numeric reference tags were normalized to step references and labels/citations consistently renumbered without reordering paragraphs.
+- Statement/Example, dependencies, sources and hypotheses are unchanged. Arguments are identical after reversing consistent step-label/reference renumbering and ignoring tag formatting; no mathematical clarification or hypothesis change was made to this item. No consumer propagation is triggered.
+- Prior audited metadata is preserved in research/frontier-38-owner-30-published-format-modular-ex-effective-divisor-thickened-points-curve.before.md; current verification points only to research/frontier-38-owner-30-published-format-modular-ex-effective-divisor-thickened-points-curve-receipt.json, a local repair receipt. No new audit/judge is claimed.
+- Current content guard hash: ffb290058a69d3b97ffc36ef1563d4668a865dbb266b753bafa9191b04fd16a4. Prior guard hash: bfdac3f55f6aef4327a91530d58b6beaad2c2bae6c58a9bcd3e64a66fe3a70f6. Before raw SHA256: 8c275a613fd4f96889b312c1fdee2bbdbc2dcb5f6f0593cf76a5d028eea40ba6.
+- Focused explicit proof-layout, precheck and real rendercheck passed after the final edit; their exact per-item commands, outputs and hashes are in the receipt and private check files.
+- No mathematical uncertainty identified in this bounded formatting read; no whole-item proof audit is claimed.
+- Root must serialize this exact ledger evidence and the private ownership patch into the canonical files; those files were not edited by this lane.
+<!-- local-published-repair:frontier-38-owner-30:ex-effective-divisor-thickened-points-curve:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:ex-principal-divisor-degree-zero-p1:format-v1:begin -->
+### ex-principal-divisor-degree-zero-p1: existing proof tags and paragraph formatting
+
+- Read the entire published claim, Facts, proof, deps, sources and operative Choice assumptions. Joined 7 split numbered bodies and their existing terminal tags; all mathematical words retained. Existing numeric reference tags were normalized to step references and labels/citations consistently renumbered without reordering paragraphs.
+- Statement/Example, dependencies, sources and hypotheses are unchanged. Arguments are identical after reversing consistent step-label/reference renumbering and ignoring tag formatting; no mathematical clarification or hypothesis change was made to this item. No consumer propagation is triggered.
+- Prior audited metadata is preserved in research/frontier-38-owner-30-published-format-modular-ex-principal-divisor-degree-zero-p1.before.md; current verification points only to research/frontier-38-owner-30-published-format-modular-ex-principal-divisor-degree-zero-p1-receipt.json, a local repair receipt. No new audit/judge is claimed.
+- Current content guard hash: 189e357b148f08aa9aca6f2700f70853a847f901cd6c54a033832f0555edb88d. Prior guard hash: acbeaa197d6dbcbcc389a570abbd56aa718613185e49fb9b30de72a436c73045. Before raw SHA256: 7fc5d1872e83110989eda4c6688fa3e3db4d5af8c55cb21cd9c91c1b07d69069.
+- Focused explicit proof-layout, precheck and real rendercheck passed after the final edit; their exact per-item commands, outputs and hashes are in the receipt and private check files.
+- No mathematical uncertainty identified in this bounded formatting read; no whole-item proof audit is claimed.
+- Root must serialize this exact ledger evidence and the private ownership patch into the canonical files; those files were not edited by this lane.
+<!-- local-published-repair:frontier-38-owner-30:ex-principal-divisor-degree-zero-p1:format-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:lem-finite-flat-curve-fibre-degree:format-v1:begin -->
+### lem-finite-flat-curve-fibre-degree: local DVR factorization clarification and proof formatting
+
+- Read the entire published claim, Facts, proof, dependencies, sources and operative Choice assumptions. Joined the split numbered bodies and their terminal tags; normalized reference tags and consistently renumbered labels/citations without reordering paragraphs.
+- Root-authorized proof-only clarification at current step 5.1: replace the shadowed target coordinate u and undeclared -n with a declared local unit v_x and e_x=ord_x(f^{-1})=-ord_x(f)>0. The DVR quotient length and k-dimension now explicitly use e_x. This is a mathematical proof clarification plus formatting, not a formatting-only repair.
+- Exact before/after clause and inverse label-bijection comparison are in research/frontier-38-owner-30-published-format-modular-lem-finite-flat-curve-fibre-degree.report.json. All remaining mathematical text is unchanged. Statement, Given, dependencies, sources and exact AC hypothesis are unchanged; no consumer interface changes or propagation.
+- Prior audit preserved in research/frontier-38-owner-30-published-format-modular-lem-finite-flat-curve-fibre-degree.before.md; current verification points only to research/frontier-38-owner-30-published-format-modular-lem-finite-flat-curve-fibre-degree-receipt.json. No new audit or whole-item acceptance is claimed.
+- Current content guard hash: b275b014439ceab1b50b4d2823fac4197cba0a92a4336d8a30e84427b2f66c86. Prior guard hash: a87f3b5e3cfe25d8c7186a4d345115c61c72a9c44f9957c0db419a39a23afdf2. Before raw SHA256: 236dfba605cad666efc550030d503f5f523c5e2177b5b34918403766189cf819.
+- Focused explicit proof-layout, precheck and real rendercheck passed after the final proof edit; exact commands, outputs, timestamps and current hashes are in the private check files and receipt.
+- No unresolved mathematical uncertainty identified in this bounded proof clarification; no independent full audit claimed. Root owns canonical ledger and ownership integration.
+<!-- local-published-repair:frontier-38-owner-30:lem-finite-flat-curve-fibre-degree:format-v1:end -->
+
+<!-- physics-research:2026-10-03:stokes-curl-regularity:begin -->
+### thm-the-classical-stokes-theorem-for-a-c2-surface-patch: curl regularity wording
+
+- Found during the classical EM prose-scaffold supplier audit. Root checked the theorem's Statement/Facts/Proof and the exact curl and flux definitions; this is a localized check, not a fresh whole-library or transitive proof audit.
+- Proof 5.1 calls curl F a C¹ field, although the Statement assumes only F∈C¹. Its actual supplier `def-divergence-and-curl-of-a-c1-vector-field` guarantees continuous curl; `def-oriented-unit-normal-and-flux-of-a-surface-patch` requires only a continuous field.
+- Counterexample to the excess regularity claim: F(x,y,z)=(0,0,x|x|) is C¹ on R³, but curl F=(0,-2|x|,0) is not C¹ at x=0. This does not refute the Stokes identity.
+- Proposed repair: replace “C¹ field curl F” in Proof 5.1 by “continuous field curl F.” Statement, hypotheses, dependencies, flux identity and public interface need no change; a proof-only wording repair would not trigger statement-change consumer propagation.
+- Status: finding confirmed; repair not performed in this source-research task. Original mathematical item and pinned physics snapshot remain unchanged. Future mathematical maintenance must record its local checks and reconcile any changed import hash before a physics run.
+- Physics consumer scope: proposed classical EM differential/integral Maxwell equivalence uses continuity of curl or explicitly stronger regularity, not the excess C¹ assertion. Detailed map: `physics/research/first-principles-2026-10-03/classical-electromagnetism/scaffold/mathematics-audit.md`.
+<!-- physics-research:2026-10-03:stokes-curl-regularity:end -->
+
+
+## Published ODE time-regularity defect — 2026-10-03
+
+**Historical finding, now repaired under owner approval:** `thm-smooth-dependence-of-ode-solutions-on-parameters` is **A-P; open** after bounded defect-focused Step-5a review of its complete current carrier, actual initial-data supplier and IVP definition. Raw SHA-256: `e7265caa23fd189971e24dcfdc6aa70df7014bda016eb122c221b67c05f45752`; routed observed carrier SHA-256: `79f8764198ee0d1df02c993cfe24dc18c80d79b10a38f51e5b885ab96a68c14a`. Statement lines30–38 requires smoothness only in state/parameter and asserts a common local classical solution interval. The field F(t,x,λ)=1 at t=0 and 0 otherwise satisfies that hypothesis on R³ but admits no classical local solution through t=0: MVT forces constancy on each side; continuity makes the constants agree, contradicting derivative one at zero.
+
+Exact suppliers: `thm-smooth-dependence-of-solutions-on-initial-data` assumes a common solution map and therefore does not establish its existence; `def-first-order-ode-initial-value-problem-and-solution` requires the equation at every time on a nondegenerate local interval. Retrieved and read Wang, Banach Calculus, §4.1 and full §§4.3–4.4, printed pp.12–16, https://www.math.ntu.edu.tw/~dragon/Lecture%20Notes/Banach%20Calculus%202012.pdf: time/parameter augmentation preserves joint C^p; smooth-flow proof applies to that regime, not the stated discontinuous-time case.
+
+Owned draft consumer: `thm-stable-normal-bundle-is-independent-of-the-embedding`, Facts F2 / Proof2.1, supplies the jointly smooth field K(t,x)U, including local Euclidean extensions at boundary points. Its actual use meets the source hypotheses; no consumer edit is required. Other direct item references, inventoried for the owner without a mathematical verdict: `thm-a-flat-connection-admits-local-parallel-frames`, `prop-flat-connections-have-locally-path-independent-parallel-transport-on-a-coordinate-ball`, `ex-smooth-dependence-in-an-ode-with-a-parameter`, `lem-local-solvability-of-the-augmented-characteristic-ode`, `thm-the-double-has-a-well-defined-smooth-structure`, `thm-fundamental-theorem-for-nonautonomous-smooth-odes`. Page home: `euclidean-ordinary-differential-equations-with-smooth-dependence`.
+
+Repair strategy: owner assigns a surgical jointly smooth Statement hypothesis (or proves and states exact weaker joint-continuity assumptions), validates the augmentation/existence proof and each actual direct consumer use, then resolves the open escalation. No new frontier supplier or page is needed for the jointly smooth correction. Published content remains unchanged. Evidence: `research/frontier-38-owner-30-alpha-batch-14-5a.md`, decision `reader:14:1`, defect row `frontier-38-owner-30-5a-batch-14-ode-time-regularity`. This bounded audit does not certify the full published dependency closure.
+
+<!-- local-published-repair:frontier-38-owner-30:thm-smooth-dependence-of-ode-solutions-on-parameters:joint-smooth-v1:begin -->
+### thm-smooth-dependence-of-ode-solutions-on-parameters: approved joint-smooth ODE repair
+
+- The former state/parameter-only smoothness hypothesis permitted F(t,x,lambda)=1 at t=0 and0 otherwise. A classical solution would be constant on each side by MVT and continuous at0, hence have derivative0 at0, contradicting F=1 there. Reader14 and owner review independently verified this defect.
+- Owner approved the source-accurate joint C-infinity hypothesis in time,state,parameter at checkpoint ode-joint-smoothness, call_Dbi2Rbe3M3liBFn3bz1g2hZY item0. The original conclusions are retained verbatim; no new Choice assumption or gratuitous Statement strengthening.
+- Proof1.1 gives parameter augmentation. Proof2.1 establishes a uniform common compact interval from bounded derivatives and quantitative Picard–Lindelof before smooth-dependence is invoked. Proof3.1–4.1 supplies the legitimate common-interval variational/jet argument, including highest-component regularity and uniform jet existence. Proof5.1 supplies mixed time regularity and projects to the original solution.
+- Actual Wang full text retrieved/read: §§4.2–4.4, printed pp.13–16, raw PDF sha256 2ba93c81e99111b8225554fb22a8294cd76d14efc4b97103826b854ed4ca56d6. The source requires joint C^p and its augmentation preserves that condition. Hitchin was not freshly retrieved or credited as read.
+- All seven actual direct consumers were read; six published ones and the stable-normal draft use jointly smooth coefficients. The finite-strip parallel-transport use is applied separately on smooth strips. No consumer Statement needs change. Stable-normal belongs to Alpha14; quotes/evidence refresh is reserved for its existing writer/root after drain. Exact mapping is in research/frontier-38-owner-30-published-ode-parameters.consumer-updates.json.
+- Current content guard hash: 57bbb8d9a841396bfe06718b06594fd4f5031e58bdaffa27b543e658d6abea35. Prior guard hash: 89a98d506967e54ed895277ee511278a56366e1eca03dff811b532a359d262fd. Before raw hash: e7265caa23fd189971e24dcfdc6aa70df7014bda016eb122c221b67c05f45752. Preserved carrier: research/frontier-38-owner-30-published-ode-parameters.before.md. Local receipt: research/frontier-38-owner-30-published-ode-parameters-receipt.json.
+- Final explicit layout:1 item,5 steps,0 defects. Precheck:1 checked,0 failing. Real render:1 file,clean. These are local mathematical repair/check records, not a new published audit/judge stamp or independent whole-item certification. Current verification points only to this repair receipt; previous metadata is preserved in the before-file.
+- Root serializes the authentic private pre-edit ownership claim and this ledger evidence. No shared canonical ledger/claim, consumer item/contract, global plan/runtime or controller file was edited in this lane.
+<!-- local-published-repair:frontier-38-owner-30:thm-smooth-dependence-of-ode-solutions-on-parameters:joint-smooth-v1:end -->
+
+## Heat scaling supplier citation defect — frontier-38-owner-30, batch-3, 2026-10-03
+
+Published item `lem-euclidean-balls-have-positive-finite-lebesgue-measure` remains read-only at raw SHA-256 `f422e2faeb4678f9e75c5989f6cdd577e61a8257386be598cd07e47743c7351e`. Complete Proof 1.1–3.1 reviewed: cubes of side 2r/sqrt(n) and 2r give valid positive/finite bounds; metric openness and Borel measurability are true but Proof 2.1 cites undeclared facts [L3] and [L4]. Existing dependencies already include `thm-metric-open-set-algebra`, `thm-borel-sets-are-lebesgue-measurable`, `lem-metrics-on-rn` and `thm-lebesgue-measure-of-a-box-of-every-kind`. Under the already stated CC, the first supplier’s clause 1 gives openness and the second gives Lebesgue measurability. No missing mathematical result or new page is needed.
+
+Owned consumer: `ex-heat-lp-to-lq-time-exponent-is-forced-by-parabolic-scaling`, F5 and Verification 1.1/3.1, uses the valid unit-ball positive finite measure claim. Its local proof is sound; no consumer Statement change is required. Status A-P; unresolved published citation repair. Strategy: owner restores exact L3 and L4 Facts declarations, confirms their existing dependency links, and checks current publication evidence and proof layout. Preserve Statement and IDs. Routed through `reader:3:1`; evidence `research/frontier-38-owner-30-alpha-batch-3-5a.md`, defect `frontier-38-owner-30-5a-batch-3-published-ball-citations`. No claim of repair or workflow closure is made.
+
+## Batch-12 published density and cutoff prerequisites — 2026-10-03
+
+Full current-carrier evidence and exact owner routing: research/frontier-38-owner-30-alpha-batch-12-5a.md. The strong-density supplier has no declared prerequisites and assumes its assertion in F1; no local repair is authorized. Its strong-neighbourhood perturbation consumer is cor-negative-expected-dimension-generic-intersections-are-empty F3 and step 3.1. Hirsch Differential Topology Ch. 3 Theorems 2.1–2.2 and Lemma 2.3, pp. 74–77, https://people.dm.unipi.it/benedett/HIRSCH.pdf, give the external local/global proof. Required owner repair must establish the actual strong-topology and choice interface. Statement is not refuted.
+
+The known general zero-set proof debt is reconfirmed: local finiteness of shrinking sets on M minus A does not prove local finiteness at A, where the claimed smooth sum must be checked. Its actual suppliers are lem-every-open-cover-of-a-manifold-has-a-countable-cover-by-relatively-compact-coordinate-balls-subordinate-to-it, lem-a-countable-coordinate-ball-cover-has-a-countable-locally-finite-shrinking, lem-manifold-bump-for-a-compact-set-inside-an-open-set and thm-a-locally-finite-sum-of-smooth-functions-is-smooth; none in the written argument controls derivative convergence across A. The relative-transversality consumer uses it in L4 and step 1.1. Those two canonical rows reopen from A-R to A-P while retaining all previous bounded choice-repair evidence. The assigned homotopy invariance items now avoid the general zero-set supplier through an explicit time cutoff and the published submersive-family/parametric interfaces. Published carriers are unchanged; source proof debts stay open.
+
+## Batch-7 ordinary-dual proper-submodule omission — 2026-10-03
+
+`prop-highest-weight-of-the-dual-representation` (published, raw SHA-256 `55bcb6aef353d4e36ce6171eb139b09deb421ef4172afd40435ab24f7ffd2866`), Proof2.2 line66, assumes only `0 != W subseteq V(lambda)*` and then uses `W != V(lambda)*` to assert `dim W^perp > 0`. At W=V* this strict inequality is false. The irreducibility contradiction must start with a nonzero proper submodule. This is confirmed nonfatal proof-case debt; the ordinary-dual highest-weight formula remains correct. Status **A-P**, owner repair pending; published carrier unchanged.
+
+Exact suppliers: `prop-direct-sum-dual-hom-and-tensor-representations` supplies the negative dual action; `thm-highest-weight-classification-of-finite-dimensional-irreducible-representations` supplies irreducibility of V(lambda); `def-irreducible-completely-reducible-and-faithful-lie-algebra-representation` supplies the proper-submodule test. No new Phase-2 prerequisite is needed. Repair strategy: introduce `0 != W proper-subset V(lambda)*`, retaining the invariant-annihilator proof, then run focused formatting/render checks under owner authority.
+
+Assigned consumers `def-translation-functor-between-o-blocks`, `lem-finite-dimensional-tensors-reach-every-block-simple`, and `thm-translation-to-and-from-a-wall-on-standard-modules` use only irreducibility and the unchanged ordinary-dual highest weight `-w0 lambda`; their actual mathematical uses remain sound. Step5b/owner retains the published repair. Evidence: `research/frontier-38-owner-30-alpha-batch-7-5a.md`, obligation `reader:7:1`; closed nonfatal-recorded row `frontier-38-owner-30-5a-batch-7-reader-7-1`. This is bounded finding review, not a transitive audit or certification.
+
+<!-- physics-audit:2026-10-03:liouville-two-form-primitive:begin -->
+### thm-liouville-arnold-action-angle-theorem: inadequate two-form primitive supplier
+
+- Found by the non-relativistic classical mechanics audit. Root independently read the complete theorem and exact Poincare supplier statement/proof; this is a localized supplier-use check, not a new whole-library audit.
+- Facts F4 and Proof 5.2 invoke a primitive for the closed two-form tau=sigma*omega on a ball, citing `thm-poincare-lemma-for-star-shaped-domains`. That supplier proves closed C¹ vector fields/one-forms exact, not closed two-forms. Its interface supports Proof 5.1's one-form use, but cannot establish 5.2.
+- Repair strategy: supply a purely mathematical closed-two-form radial primitive lemma and cite it in F4/5.2; the smooth star-shaped-ball formula alpha_i(x)=integral_0^1 t sum_j x_j tau_ji(tx) dt gives d alpha=tau by the closed-coefficient identity and FTC. The local audit's E21 includes the complete calculation.
+- Consumer scope: local non-relativistic action-angle and adiabatic applications use the corrected implication, preserving proper-submersion/compact-connected-regular-fibre/Choice hypotheses. Existing mathematical direct consumers found: `prop-period-lattice-monodromy-obstructs-global-action-angle-coordinates` and `fs-liouville-arnold-gives-global-action-angle-coordinates-on-the-entire-manifold`; proof-only supplier correction would not change the Statement interface.
+- Status: finding confirmed; canonical theorem and pinned import not edited. Local replacement proof is in `physics/research/first-principles-2026-10-03/non-relativistic-classical-mechanics/scaffold/expansion-proofs.md`, E21/E22. Original repair and import reconciliation belong to later mathematical maintenance; no independent global acceptance claimed.
+<!-- physics-audit:2026-10-03:liouville-two-form-primitive:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:thm-strong-whitney-approximation-by-transverse-maps:whitney-v1:begin -->
+### thm-strong-whitney-approximation-by-transverse-maps: full strong Whitney density and Choice repair
+
+- Replace circular assumption of strong density by a complete controlled tubular perturbation and parametric Sard proof, including locally finite compact jet control for noncompact sources; add exactly the owner-approved AC_omega premise and actual proof dependencies.
+- Exact owner authorization: research/frontier-38-owner-30-step5-owner-checkpoints.json, whitney-countable-choice.
+- Statement delta: prepend the explicit Countable Choice assumption; every original mathematical claim and closed embedded target hypothesis retained.
+- Prior published guard db882f561a8b83157c9253fa7933668055b6653c3cf2d263c07fed6afc224c96; before raw 49a9c25a713682aeb54d7d469d0e0e26b24cd64f058d5df6b6d61b8f67ed8b2c; current guard 6cbe8ccb6e3d85dedf9965454e2b071a526d9f1dae65ba5a263db93bcef47cbb.
+- Preserved before carrier research/frontier-38-owner-30-step5-whitney-thm-strong-whitney-approximation-by-transverse-maps.before.md and private ownership claim recorded before any item mutation. Prior publication audit remains in before carrier; current verification.repair is research/frontier-38-owner-30-step5-whitney-thm-strong-whitney-approximation-by-transverse-maps.receipt.json. This is a local repair, not a new audit or judgment.
+- Full current supplier and both actual consumers read. Full authoritative Hirsch Ch.2§1 pp34–36 and Ch.3 Thm2.1–2.2/Lemma2.3 pp74–77 read as scanned pages; exact local proof and prerequisite evidence in research/frontier-38-owner-30-step5-whitney-report.json.
+- Explicit current-path proof-layout, precheck and rendercheck all pass, with commands/stdout/current hash in receipt.
+- Root owns integration of this private ledger patch and ownership claim into canonical records.
+<!-- local-published-repair:frontier-38-owner-30:thm-strong-whitney-approximation-by-transverse-maps:whitney-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:cor-transverse-maps-are-dense-in-the-strong-smooth-topology:whitney-v1:begin -->
+### cor-transverse-maps-are-dense-in-the-strong-smooth-topology: full strong Whitney density and Choice repair
+
+- Propagate exactly the approved AC_omega premise from the repaired Whitney supplier, with explicit dependency and proof bookkeeping; preserve the full strong-density conclusion.
+- Exact owner authorization: research/frontier-38-owner-30-step5-owner-checkpoints.json, whitney-countable-choice.
+- Statement delta: prepend the explicit Countable Choice assumption; every original mathematical claim and closed embedded target hypothesis retained.
+- Prior published guard 0a7cd062bdcc4987d47f695ea25b9478162d151f848852c64157fd9928cedbb2; before raw f9534c8633be182c6c8147470f89677c680cd444107f4d69e549ae2e1be9a6b4; current guard 98b7766877f2a2bf650bd7008f07e2e8e0cdb08b653b83cf4dd7b264f94f6c1d.
+- Preserved before carrier research/frontier-38-owner-30-step5-whitney-cor-transverse-maps-are-dense-in-the-strong-smooth-topology.before.md and private ownership claim recorded before any item mutation. Prior publication audit remains in before carrier; current verification.repair is research/frontier-38-owner-30-step5-whitney-cor-transverse-maps-are-dense-in-the-strong-smooth-topology.receipt.json. This is a local repair, not a new audit or judgment.
+- Full current supplier and both actual consumers read. Full authoritative Hirsch Ch.2§1 pp34–36 and Ch.3 Thm2.1–2.2/Lemma2.3 pp74–77 read as scanned pages; exact local proof and prerequisite evidence in research/frontier-38-owner-30-step5-whitney-report.json.
+- Explicit current-path proof-layout, precheck and rendercheck all pass, with commands/stdout/current hash in receipt.
+- Root owns integration of this private ledger patch and ownership claim into canonical records.
+<!-- local-published-repair:frontier-38-owner-30:cor-transverse-maps-are-dense-in-the-strong-smooth-topology:whitney-v1:end -->
+
+## Batch12 strong Whitney density: owner resolution
+
+Owner-approved repair now complete under explicit AC_omega, authorized at research/frontier-38-owner-30-step5-owner-checkpoints.json#whitney-countable-choice. The original fatal circular proof finding is upheld as a finding about the preserved pre-edit published carrier, not recast as a false positive. Full current supplier proof1.1–10.1 replaces the density assumption by a proved locally finite compact-jet amplitude construction, smooth tubular submersive family, and parametric Sard; full strongC∞ density including noncompact control retained. Read complete HirschCh2§1 pp34–36 and Ch3 Thm2.1–2.2/Lemma2.3 pp74–77 plus current load-bearing suppliers. All exact prior conclusions retained, with only approved AC_omega premise added to supplier and published density corollary. Current direct draftconsumer Statement/deps unchanged; F3/3.1 explicitly carry its already-stated AC_omega. Rank-count1.1–2.1 and fixedclosedembedded-target perturbation/homotopy clauses remain sound. Root independently read all10 supplier steps and qualified the actual interfaces/noncompact construction, integrated both published local-repair claim/ledger receipts through published-policy validation, integrated the exact draftcontract patch, and reports strictbatch12 25/25 pass. No new audit or judgment claimed. Current supplierguard 6cbe8ccb6e3d85dedf9965454e2b071a526d9f1dae65ba5a263db93bcef47cbb; draftconsumerguard ad849995cef89bf4f1c4082fe704baadc65e9fbb2230248db757c3dacc34e2c2. Exact proof/source/prerequisite/consumer/current-hash/check evidence: research/frontier-38-owner-30-step5-whitney-report.json and research/frontier-38-owner-30-step5-whitney-final-checks.json.
+
+Historical classification-row evidence, preserved verbatim:
+
+> | `thm-strong-whitney-approximation-by-transverse-maps` | A-P; 2026-10-03 Alpha batch-12 complete current carrier review confirms F1 assumes precisely the strong-density theorem being proved, with deps: [] and two instantiation steps. Consumer cor-negative-expected-dimension-generic-intersections-are-empty F3/3.1 remains escalated. Hirsch Ch. 3 pp. 74–77 supplies the external local/global proof, not a proved library supplier. Owner must author strong-neighbourhood density with topology and choice control. Current raw hash 49a9c25a713682aeb54d7d469d0e0e26b24cd64f058d5df6b6d61b8f67ed8b2c. Evidence research/frontier-38-owner-30-alpha-batch-12-5a.md, reader:12:3. Published carrier read-only. |
+
+## ODE source owner resolution
+
+The current approved repair is A-R; original conclusions are preserved, with joint smoothness stated and uniform existence proved before the common-interval smooth-dependence argument. Original classification row retained as historical evidence:
+
+> | `thm-smooth-dependence-of-ode-solutions-on-parameters` | A-P; open. Bounded complete-carrier/source review 2026-10-03 confirms missing time regularity in the Statement; discontinuous-time counterexample has no classical local solution. Existing initial-data supplier assumes a common flow. Owner should require joint smoothness, justify local existence, and check direct consumers. Exact hashes, supplier mapping and strategy in the dated published ODE section below; evidence research/frontier-38-owner-30-alpha-batch-14-5a.md, reader:14:1. Published item unchanged. |
+
+<!-- local-published-repair:frontier-38-owner-30-published-hyperelliptic-replay:begin -->
+### Authorized replay of the hyperelliptic proof-format correction
+
+- Item: cex-canonical-map-hyperelliptic-not-embedding; run frontier-38-owner-30; owner group owner-published-hyperelliptic-replay. Original Step3 formatting repair and later recording limitation remain preserved in the earlier private artifacts. No original pre-mutation ownership date is invented.
+- Owner explicitly authorized a normal formatting replay while controller paused and all workers drained. Actual current-before snapshot and restoration intent were recorded at 2026-10-03T10:33:22.376Z, before restoration. Authentic original carrier was restored at 2026-10-03T10:33:37.819Z; actual restored before file research/frontier-38-owner-30-published-hyperelliptic-replay-restored-before.md, raw 0becd619218a41995c649c1630522a2398e744758b2d37c82297ffe161ffa1e0, guard 3a341caac76e5ce97ec6cef77d8e049de78468a82b294aa878dbe36e7edcbde0.
+- A normal current-carrier private ownership claim was made at 2026-10-03T10:33:37.820Z, binding the actual restored guard 3a341caac76e5ce97ec6cef77d8e049de78468a82b294aa878dbe36e7edcbde0, before replay. It is a claim for this real replay, not a backdated claim for the earlier Step3 edit. Exact verified paragraph/tag joins and final2.2→3.1 numbering were reapplied at 2026-10-03T10:33:52.399Z. Final guard c1b864c95dc733b0ec2d4df1f270c1e3560f74c73181d0dd90e1d555933f10dd equals the prior formatted guard.
+- Full current counterexample and operative canonical-map supplier were reread. Normalized-whitespace bijection modulo that step label and identical mathematical-surface hashes prove Statement/Facts/deps/Choice/numerical claims and all proof text unchanged. Existing audit/precheck/judge fields are preserved; no new whole-item audit or judgment is asserted.
+- After the real replay claim, precheck PASS (1 checked,0 failing), rendercheck OK (1 file), actual-renderer layout1item4steps0defects. Exact dated commands/outputs: research/frontier-38-owner-30-published-hyperelliptic-replay-checks.json. Recorded local receipt: research/frontier-38-owner-30-published-hyperelliptic-replay-receipt.json. Canonical ownership/ledger integration is root-owned; this receipt uses the normal distinct pre/post guards and actual claim-before-replay ordering.
+<!-- local-published-repair:frontier-38-owner-30-published-hyperelliptic-replay:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:lem-euclidean-balls-have-positive-finite-lebesgue-measure:citations-v1:begin -->
+### lem-euclidean-balls-have-positive-finite-lebesgue-measure: missing proof-fact citations restored
+
+- Reader3:1 correctly found that published proof2.1 cited undefined L3/L4; this is a confirmed citation defect, not a false positive. The measure claim itself is true.
+- Full current proof and actual published openness/Borel/box/monotonicity suppliers read. Restored L3 from metric-open-set-algebra clause1 and the Euclidean metric lemma; restored L4 from Borel-implies-Lebesgue under the already stated Countable Choice. L5 explicitly supplies the already-used Lebesgue measure property and measure monotonicity, with two exact dependency additions.
+- The inner cube has volume (2r/sqrt(n))^n>0, the outer cube has volume (2r)^n<infinity, and measurable inclusions give the stated bounds. No change to Statement, radius/dimension range, original Countable Choice, source bibliography or consumer interface. Existing citations are supported and the conclusion tag is no longer duplicated.
+- Current guard hash: c8726dcb67cd5a8e8adec175b6f33d33de55f0b5dfb4319fa96f3d5bd2404df0; prior guard hash: 7b9bd44bfb1870dbea24d2423ec19c2714c1ebf48f767296c6b6aa1eea69b939; before raw hash: f422e2faeb4678f9e75c5989f6cdd577e61a8257386be598cd07e47743c7351e. Before carrier: research/frontier-38-owner-30-published-ball-citations.before.md; receipt: research/frontier-38-owner-30-published-ball-citations-receipt.json.
+- Authentic private ownership claim recorded before mutation; no prior canonical claim for this item existed in the active run. Previous publication verification is retained in the before-file; current verification is only the local repair receipt.
+- Final explicit layout:1 item,3 steps,0 defects. Precheck:1 checked,0 failing. Real renderer:1file clean. These are local focused repair checks, not a new whole-item audit/judge stamp or independent whole-closure certification. External Folland text was not newly fetched or claimed read; the repair uses the actual published library supplier proofs.
+- Statement unchanged, so no downstream Statement propagation is invented. Root serializes the ledger/ownership patches and exact reader3 decision/original defect-row closure. No shared canonical ledger, claim, Alpha decision, scope/control or source-acceptance file was edited by this lane.
+<!-- local-published-repair:frontier-38-owner-30:lem-euclidean-balls-have-positive-finite-lebesgue-measure:citations-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:prop-highest-weight-of-the-dual-representation:proof-v1:begin -->
+### prop-highest-weight-of-the-dual-representation: published proof debt repair
+
+- Proof2.2 now assumes a nonzero proper submodule W before applying the strict annihilator dimension inequality; this is the defining irreducibility contradiction. Statement, sources, dependencies and full Choice unchanged.
+- Prior guard 1b477726175239b8172e8ecc73d612516cae9d8051fa384a9074e5cba2bff9b4; before raw 55bcb6aef353d4e36ce6171eb139b09deb421ef4172afd40435ab24f7ffd2866; current guard 25c92d8fb9a3016384f8e4c65283956f9e1c3592f873c857a13c6ee77816bb36.
+- Exact before carrier research/frontier-38-owner-30-step5-misc-supplier-prop-highest-weight-of-the-dual-representation.before.md and private ownership claim preserved before mutation. Prior publication qualification retained in before carrier; current verification.repair research/frontier-38-owner-30-step5-misc-supplier-prop-highest-weight-of-the-dual-representation.receipt.json. No new audit or judgment.
+- Complete current proof and operative suppliers read; scope/evidence in research/frontier-38-owner-30-step5-misc-supplier-report.json. Statement and existing Choice unchanged.
+- Explicit-path proof-layout, precheck and rendercheck pass, commands/output/currenthash in receipt.
+- Canonical ownership/ledger integration remains root-owned; this is private patch evidence.
+<!-- local-published-repair:frontier-38-owner-30:prop-highest-weight-of-the-dual-representation:proof-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function:proof-v1:begin -->
+### cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function: published proof debt repair
+
+- Replace the unsupported global local-finiteness inference with explicit positive diagonal coefficients controlling all coordinate derivative words on a countable compact chart cover. M-test plus closed-interval derivative-limit induction proves global C∞ smoothness, including all points of A, and the exact zero set. Statement and AC_omega unchanged; actual convergence dependencies declared.
+- Prior guard c969a0d21718103b4baa521e36ac4a439f10d9fd2d6f79465afad32259823743; before raw e35e020965e67a42807c59488a7c38c4bb01ec613da70972acaf18f369cfa288; current guard c07603bf483e477086b5255a602a7e9e48259f26033038f125a565800816aa3a.
+- Exact before carrier research/frontier-38-owner-30-step5-misc-supplier-cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function.before.md and private ownership claim preserved before mutation. Prior publication qualification retained in before carrier; current verification.repair research/frontier-38-owner-30-step5-misc-supplier-cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function.receipt.json. No new audit or judgment.
+- Complete current proof and operative suppliers read; scope/evidence in research/frontier-38-owner-30-step5-misc-supplier-report.json. Statement and existing Choice unchanged.
+- Explicit-path proof-layout, precheck and rendercheck pass, commands/output/currenthash in receipt.
+- Canonical ownership/ledger integration remains root-owned; this is private patch evidence.
+<!-- local-published-repair:frontier-38-owner-30:cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function:proof-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:prop-relative-transversality-preserves-a-map-on-a-closed-good-region:proof-v1:begin -->
+### prop-relative-transversality-preserves-a-map-on-a-closed-good-region: published proof debt repair
+
+- Close the repaired zero-set prerequisite and prove neighbourhood shrinking inline from u vanishing exactly on A and v exactly outside V, with W={u<v} and closure W contained in V. Restate the actual parameter-submersion supplier; handle empty M before inferring dim N=0 from a zero-dimensional parameter ball. Retain the complete squared-cutoff/Sard/fixed-neighbourhood homotopy proof. Statement, dependencies and AC_omega unchanged.
+- Prior guard e64fa5119c737f6aa6cb6c2e2b64f31577babe29609502057346f381ba2aa1f1; before raw 1a8dea263569dd06f2251b72842c0bc568fdc73b34579baa80efd5c83e7b9ffe; current guard ff5fa97931760990bfb0df9cdeab7614bdaf86fa8e54cdc3f09345f38e8754be.
+- Exact before carrier research/frontier-38-owner-30-step5-misc-supplier-prop-relative-transversality-preserves-a-map-on-a-closed-good-region.before.md and private ownership claim preserved before mutation. Prior publication qualification retained in before carrier; current verification.repair research/frontier-38-owner-30-step5-misc-supplier-prop-relative-transversality-preserves-a-map-on-a-closed-good-region.receipt.json. No new audit or judgment.
+- Complete current proof and operative suppliers read; scope/evidence in research/frontier-38-owner-30-step5-misc-supplier-report.json. Statement and existing Choice unchanged.
+- Explicit-path proof-layout, precheck and rendercheck pass, commands/output/currenthash in receipt.
+- Canonical ownership/ledger integration remains root-owned; this is private patch evidence.
+<!-- local-published-repair:frontier-38-owner-30:prop-relative-transversality-preserves-a-map-on-a-closed-good-region:proof-v1:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:owner-step6-zero-divisor:thm-zero-divisor-theorem-on-plane-domains:begin -->
+### Plane-domain zero-divisor supplier — recorded local repair
+
+`thm-zero-divisor-theorem-on-plane-domains` now requires locally finite positive support and prescribes nonnegative finite orders, with order zero explicitly meaning nonvanishing. The owner approved this correction in `research/frontier-38-owner-30-step6-zero-divisor-owner-approval.json`. The full plane-domain realization theorem, all finite and empty supports, and exact multiplicities are retained. The complete product proof gives least rational-disc enumeration and unique nearest-complement-point selection, with no added operative Choice assumption. Lebl Theorem 8.2.7, pp. 205–206, and the relevant Weber entire-case proof were retrieved and read in full; see the private review report.
+
+Current canonical content SHA-256: `5f21fd1ec517c10b39a7408309e2f382bb16b13068e13610daf26c6b75bdf748`. Genuine published preimage and the pre-mutation `owner-step6-zero-divisor` claim bind the recorded repair receipt `research/frontier-38-owner-30-step6-zero-divisor-supplier-repair.json`. Actual final precheck, rendercheck, and proof-layout passed; proof-layout checked seven steps with zero defects. The formatter's phase normalization changed numbering and reordered two independent construction paragraphs without changing the mathematical argument. These checks and this repair are local evidence, not a new audit or judgment.
+
+All actual direct consumer applications were reviewed and remain valid: `cex-divergent-blaschke-sum` uses the compactly finite disc sequence 1-1/n with multiplicity one; `cor-meromorphic-functions-on-a-plane-domain-are-holomorphic-quotients` uses the locally finite pole set with positive finite pole orders. Their Statements require no change and propagation stops. At this supplier-recording point, the published corollary's explicit proof/fact clarification awaits its separate pre-mutation ownership claim; the draft Blaschke clarification remains frozen for the normal Step-7 maintenance lane. This block records the completed supplier correction only and does not claim those pending consumer edits have occurred.
+<!-- local-published-repair:frontier-38-owner-30:owner-step6-zero-divisor:thm-zero-divisor-theorem-on-plane-domains:end -->
+
+<!-- local-published-repair:frontier-38-owner-30:owner-step6-zero-divisor:cor-meromorphic-functions-on-a-plane-domain-are-holomorphic-quotients:begin -->
+### Meromorphic quotient direct consumer — recorded local repair
+
+`cor-meromorphic-functions-on-a-plane-domain-are-holomorphic-quotients` retains its Statement byte-for-byte. Fact L2 now cites the supplier's locally finite positive-support contract; step 1.1 proves applicability from the actual meromorphic definition: a holomorphy neighbourhood away from the pole set avoids every pole, and an isolated-pole neighbourhood meets the pole set only at that pole. The family of these open neighbourhoods gives a finite cover on each compact subset, proving local finiteness. Pole orders are positive finite integers. The existing local cancellation, removable extension, and quotient proof consequently apply on every plane domain. The Lebl locator is corrected to Corollary 8.2.8, printed p. 207, whose full statement and proof were retrieved and read.
+
+Current canonical content SHA-256: `a9b8e65ee9c5c309773b8c7f5a7ce4a574f24276b0e9f908e1a14c58f454ad5d`. The genuine audited published preimage and the separate pre-mutation `owner-step6-zero-divisor` claim bind `research/frontier-38-owner-30-step6-zero-divisor-corollary-repair.json`. Actual final precheck, rendercheck, and proof-layout passed; the latter checked three steps with zero defects. Stale audit and judge stamps were replaced by the recorded local repair pointer, and proof provenance is ai-altered to record the material local alteration. These checks record a local repair and do not constitute a new audit or judgment. This proof/fact/source clarification adds no Choice assumption and changes no Statement or Definition, so there is no farther consumer propagation.
+
+The other actual direct consumer, draft `cex-divergent-blaschke-sum`, remains unchanged at this recording point. Its multiplicity-one disc sequence satisfies the supplier's corrected support hypothesis; its explicit fact/proof clarification awaits root authorization in its owning batch lane. This block does not claim that pending draft edit has occurred.
+<!-- local-published-repair:frontier-38-owner-30:owner-step6-zero-divisor:cor-meromorphic-functions-on-a-plane-domain-are-holomorphic-quotients:end -->
+
+### Plane-domain supplier finding — complete direct-consumer closure
+
+The outside Step-6 finding for `thm-zero-divisor-theorem-on-plane-domains` is confirmed and corrected under the recorded owner approval. The original finding, counterexamples, severity, genuine native digest, full-text review and exact routing are retained in `research/frontier-38-owner-30-step6-zero-divisor-routing.json`. Both actual direct consumers now have the reviewed necessary applicability clarification: the published meromorphic quotient keeps its Statement; the draft Blaschke example keeps its Statement refuted. Their locally finite supports are proved on current content, and neither consumer changes its interface, so propagation stops. The canonical repair blocks above and the three bound receipts record local mathematical maintenance, not independent audits. The originating other-group alert is now recorded under the existing published dependency; all owned concerns and historical judgments remain.
+
+<!-- physics-extended-2026-10-03:residue-zero-winding:begin -->
+### Physics thermal-contour supplier finding — zero-winding poles
+
+- The Thermodynamics and General Relativity horizons agent and root read the complete current published `thm-residue-theorem-null-homologous-cycle` proof. Current source SHA-256: `9c6833dc297eac17b9ce9a3804a78445d9a839ff1b4ff29a1dfd572e36788fc8`. The theorem Statement is unchanged and valid; proof step 3.1 has a confirmed gap: A includes only poles with nonzero winding, so f need not be holomorphic on Ω\A when other poles remain.
+- Exact new consumer: the thermal contour development under `physics/research/extended-frameworks-2026-10-03/thermodynamics-and-general-relativity/workers/horizons-semiclassical/`. Its chosen strip has precisely its one enclosed pole, S=A. The restricted contour argument is supplied and read locally; no consumer relies on the faulty unrestricted holomorphy inference. This is research proof reading, not a new published audit.
+- General repair strategy: perform the homology comparison in Ω\S instead. Besides outside-Ω points and poles in A, explicitly handle p∈S\A: Γ has winding zero there by definition, and each chosen disc contains no pole other than its center, so every small-circle winding is also zero. Then f is genuinely holomorphic on Ω\S and the existing homology supplier applies. No Statement change is required.
+- Status: recorded confirmed published proof debt with complete local restricted consumer closure; no canonical mathematics item, verification stamp, engine receipt or existing source snapshot changed in this research assignment. Canonical repair and its focused checks are not claimed complete.
+<!-- physics-extended-2026-10-03:residue-zero-winding:end -->

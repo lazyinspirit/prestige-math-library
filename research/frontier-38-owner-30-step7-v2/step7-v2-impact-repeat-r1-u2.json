@@ -1,0 +1,119 @@
+{
+  "run": "frontier-38-owner-30",
+  "phase": "impact-repeat",
+  "round": 1,
+  "unit": "2",
+  "input_sha256": "c5c57f338be720a4f4b21492198fe2af946a7c80a76901e0dcea656abdd4e354",
+  "decisions": [],
+  "reviews": [
+    {
+      "id": "ex-blaschke-product-with-zeros-accumulating-at-one",
+      "disposition": "unaffected",
+      "post_sha256": "aa03e2315f4f06ce2d391380055c46bf299689bb716db190e920a18ae95f6af3",
+      "review_context_sha256": "74e14bbcf09e187cbd93ef8ca74c4e03f43c28b6cd126f1c5b682df20b92d9a1",
+      "reason": "F3 and Verification 3.1 already identify the supremum of the unrooted quadratic radial means as norm(B)^2. The bounded holomorphic product has unimodular almost-everywhere boundary values; dominated convergence gives mean limit 1, so the correct square root gives norm(B)=1. The supplier correction preserves this argument and all Example clauses. Only this consumer's stale F3 supplier quotation in the owning batch contract was replaced by the current Statement; the guarded item is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    },
+    {
+      "id": "thm-fatou-boundary-theorem-analytic-hardy-spaces",
+      "disposition": "unaffected",
+      "post_sha256": "7b0c911603a26b6f5722616515cf3a8730b8858ad65596f4561ac478b1d2b0c2",
+      "review_context_sha256": "6e04fd13535416670df7d6ed4423f31ca3e5907403ef88bba242428762b49801",
+      "reason": "F4 and Proof 3.1 use the rooted radial-norm definition correctly: the inequality integral |f_r|^p <= integral |f*|^p gives the Hardy norm bound after taking suprema and pth roots, with the reverse bound supplied by F1. Step 6.1 consistently identifies the boundary p-moment as norm(f)^p. The p<1 uniform-integrability argument, p=infinity weak-star argument and countable-choice regime are unchanged. Only the stale F4 supplier quotation in the owning batch contract was corrected; the guarded item is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    },
+    {
+      "id": "ex-boundary-vanishing-and-uniqueness",
+      "disposition": "unaffected",
+      "post_sha256": "673f96da4cd0be73e0ffc5e96d84695994b0b1c9096af6ca338847ea3241e9ae",
+      "review_context_sha256": "7d52d728c78f7f24256a877a1f6456c901332d8c81cbdec7635de8bb316147cd",
+      "reason": "F2 and Verification 1.1/2.1 use only the supplier's unchanged exponent containments and norm comparison. Closure under differences at the same exponent, including p<1, is supplied by the declared Hardy-space Definition, and log-integrability gives boundary uniqueness. Neither the vanishing argument nor the outer-function witness equates a Hardy norm with an unrooted mean. Only the stale F2 supplier quotation in the owning batch contract was corrected; the guarded item is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "Completed assigned mathematical impact reviews and three metadata-only quotation repairs.",
+    "assigned_items": [
+      "ex-blaschke-product-with-zeros-accumulating-at-one",
+      "thm-fatou-boundary-theorem-analytic-hardy-spaces",
+      "ex-boundary-vanishing-and-uniqueness"
+    ],
+    "supplier": "lem-hardy-radial-means-are-monotone",
+    "exact_interface_change": "The unrooted p-mean limit equals the pth power of the Hardy norm; rooted limit, monotonicity and exponent containment clauses remain unchanged.",
+    "source_paths": [
+      "items/lem-hardy-radial-means-are-monotone.md",
+      "items/def-analytic-hardy-space-disc.md",
+      "research/frontier-38-owner-30-batch-20.proof-contracts.json",
+      "items/thm-blaschke-product-boundary-values-and-zeros.md",
+      "items/lem-hardy-log-integrability-of-boundary-values.md",
+      "items/lem-poisson-jensen-inequality-hardy-functions.md",
+      "items/thm-nevanlinna-boundary-values-and-log-integrability.md",
+      "items/lem-bounded-holomorphic-disc-functions-have-fatou-limits-under-countable-choice.md",
+      "items/lem-outer-function-properties.md",
+      "items/ex-outer-function-with-prescribed-boundary-modulus.md"
+    ],
+    "source_urls": [],
+    "claims_examined": {
+      "ex-blaschke-product-with-zeros-accumulating-at-one": "F3 and Verification 3.1 already identify the quadratic mean limit as norm(B)^2; bounded convergence gives limit 1.",
+      "thm-fatou-boundary-theorem-analytic-hardy-spaces": "F4 and Proof 3.1 take the supremum of integral |f_r|^p and then its pth root; step 6.1 consistently uses the pth norm power.",
+      "ex-boundary-vanishing-and-uniqueness": "F2 and Verification 1.1/2.1 use unchanged containment and norm comparison; vector-space closure comes from the Hardy Definition including p<1."
+    },
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-38-owner-30-batch-20.proof-contracts.json --strict --items ex-blaschke-product-with-zeros-accumulating-at-one,thm-fatou-boundary-theorem-analytic-hardy-spaces,ex-boundary-vanishing-and-uniqueness",
+        "exit_code": 1,
+        "summary": "Exactly three stale radial-means citation quotations; no other errors or warnings in the assigned scope."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-38-owner-30-batch-20.proof-contracts.json --strict --items ex-blaschke-product-with-zeros-accumulating-at-one,thm-fatou-boundary-theorem-analytic-hardy-spaces,ex-boundary-vanishing-and-uniqueness",
+        "exit_code": 0,
+        "output": "proof-contract: 0 error(s), 0 warning(s), 3/3 item(s) checked\n"
+      },
+      {
+        "command": "node tools/step7-workflow.mjs review-contexts --run frontier-38-owner-30 --items ex-blaschke-product-with-zeros-accumulating-at-one,thm-fatou-boundary-theorem-analytic-hardy-spaces,ex-boundary-vanishing-and-uniqueness",
+        "exit_code": 0,
+        "summary": "Captured each post_sha256 and review_context_sha256 immediately upon completion of the stable mathematical reviews. All post guards equal the frozen before guards."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Handoff this completed owner report to the engine for collection and ordinary certification after all writers drain. Local checks do not replace the complete engine gate battery.",
+    "metadata_changes": {
+      "path": "research/frontier-38-owner-30-batch-20.proof-contracts.json",
+      "exact_scope": [
+        {
+          "id": "ex-blaschke-product-with-zeros-accumulating-at-one",
+          "fact": "F3"
+        },
+        {
+          "id": "thm-fatou-boundary-theorem-analytic-hardy-spaces",
+          "fact": "F4"
+        },
+        {
+          "id": "ex-boundary-vanishing-and-uniqueness",
+          "fact": "F2"
+        }
+      ],
+      "change": "Replace only each assigned radial-means supplier quote with its current complete Statement. Preserve citation uses, derivations, boundaries, risk reviews and all other owners' entries."
+    },
+    "source_reading": "Read current assigned items in full, the radial-means supplier and Hardy Definition in full, assigned owning-contract citations/derivations and boundary evidence, and the relevant Statement/Example sections of the supporting local suppliers listed above. Familiar standard mean, Poisson, dominated-convergence and Hardy-space arguments; no external source consultation or independent audit is claimed.",
+    "statement_comparison": "The old supplier Statement is retained verbatim in the three pre-edit contract quotations: its erroneous identification of the norm with the unrooted p-mean limit is replaced in the current supplier by the explicit pth-power formula. Rooted norm limit, radial monotonicity and exponent containments are unchanged. No assigned item bytes or Statement/Definition changed; no new supplier interface was authored.",
+    "choice_conventions": "Normalized Haar probability measure and the inherited countable-choice Hardy/circle conventions remain in force; no assumption or dependency was added or removed.",
+    "shared_lock": "Acquired and released step7-v2-impact-repeat-r1-u2; reread the current owning batch contract after acquisition, preserved concurrent owner changes, checked strict assigned scope and released promptly.",
+    "ledger_reconciliation": "The relevant norm-power proposal concerns the already-repaired supplier, not a new defect in these consumers. Its effect is reconciled by the three guarded consumer reviews and corrected citation quotes. The other adjudicator proposals name items outside this lane and are preserved without edits or new verdicts. No published/outside consumer finding arose in this assigned scope; no canonical published-ledger entry is required. Shared adjudication JSONL was not edited.",
+    "propagation": "No assigned Statement or Definition changed; downstream and creation inventories are empty. No additional consumers were promoted from citations or historical proposals.",
+    "proof_layout": "No item was edited or formatted, so there are no changed item paths requiring a final proof-layout invocation."
+  },
+  "ledger_updates": []
+}

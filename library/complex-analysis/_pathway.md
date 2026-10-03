@@ -36,6 +36,7 @@ parts:
       - the-dbar-complex-and-integral-solutions
       - hormander-estimates-and-the-levi-problem
       - analytic-hypersurfaces-and-local-parametrisation
+      - analytic-hardy-spaces-and-canonical-factorisation
       - bloch-schottky-and-picard
       - the-riemann-mapping-theorem
       - simply-connected-plane-domains
@@ -46,6 +47,7 @@ parts:
       - elliptic-functions-and-complex-tori
       - nevanlinna-second-main-theorem-and-defects
       - logarithmic-potential-capacity-and-riesz-decomposition
+      - level-one-modular-forms-and-the-j-invariant
 ---
 
 ## holomorphic-functions
@@ -58,17 +60,17 @@ term, and its derivatives recover its coefficients.
 
 ## contours-and-cauchy
 
-Contour integrals, Goursat and Cauchy turn local holomorphy into analyticity,
-derivative estimates, residues and zero-pole counting; Poisson, Dirichlet,
-Hardy-Fatou, Hartogs, pseudoconvexity, Runge-Mittag-Leffler, Gamma, Weierstrass
-and hypersurface parametrisation extend to boundary values, extension,
-approximation, principal parts and special functions; Montel, Schwarz-Pick,
-Bloch-Schottky-Picard, Riemann mapping, hyperbolic uniformization and elliptic
-functions complete the conformal side; simply-connected domains and analytic
-continuation globalise germs through periods, conjugates and monodromy. Green
-kernels and harmonic measure add conformal covariance; Poisson-Jensen yields
-Nevanlinna's first and second main theorems with defects; Bochner-Martinelli,
-Cauchy-Pompeiu and Hörmander solve $\bar\partial$: Dolbeault vanishing, Levi
-problem and Hartogs extension; logarithmic capacity and Riesz decomposition
-organise subharmonic functions; branched maps give genus and Riemann-Hurwitz;
-the zeta page applies Euler products, continuation and the functional equation.
+Contour integration, Goursat and Cauchy turn local holomorphy into analyticity,
+residues and zero-pole counting; Poisson, Dirichlet, subharmonic, Green and
+capacity add boundary values and conformal covariance. Fatou limits, Blaschke
+products and inner-outer factorisation give analytic Hardy spaces and
+Smirnov-Nevanlinna classes their canonical form; Hartogs, pseudoconvexity and
+Hörmander solve $\bar\partial$: Dolbeault vanishing, Levi problem, extension;
+Runge-Mittag-Leffler, Weierstrass, Gamma and hypersurfaces serve approximation,
+principal parts, special functions; Poisson-Jensen yields Nevanlinna's two main
+theorems with defects; Montel, Schwarz-Pick, Bloch-Schottky-Picard and Riemann
+mapping close the conformal side; simply-connected domains globalise germs by
+monodromy; Riemann surfaces, branched covers, uniformization follow; elliptic
+functions and modular forms give the valence formula, discriminant and
+j-invariant classification of tori; the zeta page applies Euler products,
+continuation, functional equation.

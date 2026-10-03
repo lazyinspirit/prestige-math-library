@@ -1,0 +1,2018 @@
+# Step 7 repair: impact-initial, round 1, unit 1
+
+Read briefs/step7-owner-repair.md.
+
+Frozen inputs: /home/lazyinspirit/Projects/prestige-math-library/research/frontier-38-owner-30-step7-v2/impact-initial-1.json.
+
+Write only your assigned frontier item files, their necessary owning contracts/metadata, and /home/lazyinspirit/Projects/prestige-math-library/research/frontier-38-owner-30-step7-v2/step7-v2-impact-initial-r1-u1.json.
+
+Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.
+
+SCOPE: repair only assigned draft frontier items. Published repairs have no item gate, rejudge or adjudication obligation; record their findings separately. Outside consumers are handled by consumer maintenance. Record affected uses without turning them into frontier blockers.
+
+You may create, fully author, and register a new item only to meet a genuine unsatisfied prerequisite of an assigned repair; explain its exact consuming proof step. No unrelated additions.
+
+Optional supporting_evidence is reserved for {"research/path/to/file": "64-character SHA-256 of exact file bytes"}. Put narrative evidence, check summaries and repair explanations in repair_notes, not supporting_evidence. Do not use invented paths or hashes.
+
+Use logical validity as ground truth. State uncertainty honestly. Consult authoritative sources when uncertain and check for errors in sources.
+
+Make repairs mathematically sound and cite dependencies accurately. State important caveats when appropriate; write concisely without compromising correctness or completeness; do not repeat arguments or add unnecessary filler.
+
+Repair confirmed defects fully. Only an actual ## Statement or ## Definition change triggers direct-consumer examination, whether the supplier is published or not. Compare sections directly. Proof-only, citation, dependency and metadata changes with unchanged statements do not propagate. Identify direct consumers and exact affected uses; never pre-expand through unchanged consumer statements.
+
+Examine assigned frontier consumers, not the whole library. Assignment requires examination, not an edit. Leave a sound consumer byte-for-byte unchanged with an item-specific explanation. Repair only an actual logical defect using the smallest sufficient edit; no stylistic or unrelated rewriting. Work supplier-before-consumer and reconcile only metadata actually invalidated. A reference is not automatic repair authority. Report direct downstream effects of statement changes, including outside consumers for separate maintenance.
+
+Return JSON {run:"frontier-38-owner-30",phase:"impact-initial",round:1,unit:"1",input_sha256:"ca2aaac66edda0362170fb5fa73c889f1452a938ebaa94ea8ab5852b3e69654c",decisions:[],reviews:[],created_items:[],downstream:[]}. Copy these exact identity values; a phase such as impact-repeat is not repeat. Each decision includes id,model,context_sha256,outcome,reason,uncertain:false,source_urls:[...],familiar:boolean. Each review includes id,disposition:"repaired"|"unaffected"|"authored",post_sha256,review_context_sha256,reason,uncertain:false,source_urls,familiar. Disposition describes the item carrier: if its itemHashGuard is unchanged from the assignment before hash, use unaffected even when you repaired a contract or page; retain those metadata repairs explicitly in the reason and metadata_repair_only:true. Never claim an item repair without an item change. All assigned and created items require a review; only a newly created item uses authored. Each created_items row includes id,kind,home_page,batch,consumers:[direct consumer IDs],reason,uncertain:false,source_urls,familiar. Reasons must explain actual logical checks (at least 40 characters). familiar:false requires authoritative source URLs actually consulted; never switch it to true merely to pass validation. Unresolved uncertainty blocks completion.
+
+Immediately after completing each mathematical review, before editing another supplier, run node tools/step7-workflow.mjs review-contexts --run frontier-38-owner-30 --items ID and copy its post_sha256 and review_context_sha256 into that review. You may batch ids reviewed on the same stable state. Never recompute an old review's context after a supplier edit without actually reviewing its effects again. The controller will schedule unresolved effects before certification.
+
+
+
+
+
+All three owner lanes run in parallel with disjoint item ownership. Follow the shared metadata lock protocol before necessary shared edits; reread under lock and release promptly. Reconcile assigned frontier ledger evidence, preserve outside findings as separate maintenance proposals, and never turn them into frontier repair or gate obligations. Do not write judge verdicts or shared adjudication JSONL. Record unresolved in-scope obligations honestly.
+
+Adjudicator ledger proposals requiring reconciliation:
+[
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "row": {
+      "defect_id": "frontier-38-owner-30-step7-initial-r1-u1-def-normal-point-and-normal-variety",
+      "run": "frontier-38-owner-30",
+      "at": "2026-10-03T15:35:35.161954+00:00",
+      "class": "accuracy",
+      "subclass": "dependency-citation",
+      "severity": "fatal",
+      "location": "definition",
+      "subject": "def-normal-point-and-normal-variety",
+      "caught_at_stage": "7.1-initial-adjudicate",
+      "caught_by_role": "alpha-adjudicate",
+      "disposition": "fixed",
+      "batch": "1",
+      "group": "batch-1",
+      "evidence": [
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u1.json",
+          "note": "The affine-local-ring supplier explicitly assumes AC, whereas the original Definition asserted its identification without AC or an alternative proof. The contract incorrectly treated consuming that identification as choice-free. Added the inherited assumption and dependency, identified the reduced-chart supplier, and cited the affine-chart criterion through justified_by; the pointwise normality predicate and component-crossing argument are preserved."
+        }
+      ],
+      "repair": "Local author repair review checked the affine germ/localization argument under its actual AC hypothesis and its principal-open version for reduced charts. Normality is integral closedness of a domain at each stalk. Prime and maximal localization equivalence is supplied by the affine-chart criterion. In a reduced Noetherian chart, finite minimal-prime separation gives ab=0 and a/1,b/1 nonzero at a component crossing. Empty normality is vacuous. All 13 direct consumers already assume AC in their Statement/Definition or Facts/Given, so their exact uses remain sound.",
+      "adjudication_ref": [
+        "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u1.json#decisions:def-normal-point-and-normal-variety:gpt-6.1-sol:e747c5c1f71be03296ef80473953d449f7ae776c319722ff55d8d81b4281ae0d"
+      ],
+      "pre_item_sha256": "0522d83435191d26a5ee3792f150ea73dafc5f56acff3298847279d7ddd7e238",
+      "post_item_sha256": "0d0dcbecaf89e7d0eee31682ae803b7fce4598335df3bc1c435f3cb96dde1614",
+      "post_item_hash_guard": "80918538eb4fdbdac1745c77269da214c7e8d1822de2807aa2eb1e139058524a",
+      "audit_status": "local author repair checked; independent rejudgment remains controller-owned"
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "row": {
+      "defect_id": "frontier-38-owner-30-step7-initial-r1-u1-def-conductor-normalization",
+      "run": "frontier-38-owner-30",
+      "at": "2026-10-03T15:35:35.161984+00:00",
+      "class": "accuracy",
+      "subclass": "false-claim",
+      "severity": "fatal",
+      "location": "definition",
+      "subject": "def-conductor-normalization",
+      "caught_at_stage": "7.1-initial-adjudicate",
+      "caught_by_role": "alpha-adjudicate",
+      "disposition": "fixed",
+      "batch": "1",
+      "group": "batch-1",
+      "evidence": [
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u1.json",
+          "note": "The original Compatibility paragraph quantified over every principal open and claimed A_f had an integral closure inside k(X). At f=0, A_f is the zero ring and cannot embed unitally in the nonzero field k(X), so that claim is undefined; the cited supplier requires nonzero f. The repair gives the field identification only for nonzero f and treats the empty open by zero localized rings and conductor ideals, preserving full sheaf compatibility."
+        }
+      ],
+      "repair": "Local author repair review checked the chartwise A subset B subset k(X) normalization interface, finite-generator denominator clearing for annihilator localization, nonzero principal opens and the f=0 zero-ring branch. Principal overlap refinements give the same conductor ideals in the shared normalized chart, so they glue. The finite quotient B/A vanishes locally exactly when B_m=A_m, equivalently when A_m is integrally closed; its support V(c) is the support of O_X/c. All three direct consumers use the unchanged conductor formula or quotient-support conclusion and remain sound.",
+      "adjudication_ref": [
+        "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u1.json#decisions:def-conductor-normalization:gpt-6.1-sol:466e92d3c176fda0109172201ecde7f3b4284f4e0abb1179075b29d4f77c90a1"
+      ],
+      "pre_item_sha256": "a0f3c2b962d2b60fdb2e8f16a3a7caf4f00da6a5a6807a1a11a5c3ef9950ded1",
+      "post_item_sha256": "d0ece2383db8ca9095073b2cbdc9c8d09dafa221624c356ec7a6b10ce7ec4842",
+      "post_item_hash_guard": "de719f1801b8f5ce7b7043c61ff7857c819e8654da4534f57e4f53f8a6ab2a78",
+      "audit_status": "local author repair checked; independent rejudgment remains controller-owned"
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "row": {
+      "defect_id": "frontier-38-owner-30-step7-initial-r1-u10-1",
+      "run": "frontier-38-owner-30",
+      "at": "2026-10-03T15:38:03.720137+00:00",
+      "class": "accuracy",
+      "subclass": "citation-missing",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "subject": "lem-compact-open-topology-on-a-discrete-domain-is-pointwise",
+      "caught_at_stage": "6-judge",
+      "caught_by_role": "judge-sol",
+      "disposition": "fixed",
+      "description": "F1 states the true ambient-cover equivalence but omits the lemma expressly required by def-compact-space. Step 1.1 instead uses singleton covers of the subspace K, so the actual finiteness proof and both topology inclusions are sound. Added the ambient compactness citation and dependency, its exact contract citation, and the owning manifest dependency.",
+      "repair": "The singleton cover proves compact discrete K finite intrinsically; S(K,V) is then a finite intersection of coordinate constraints, and compact singleton constraints give the converse inclusion. Restriction preserves equality for every function family, including empty domains or targets. F1 now cites the actual ambient-compactness interface. Statement and page claims are unchanged; strict focused proof-contract check passed with zero errors and warnings.",
+      "locator": "F1",
+      "adjudication_ref": [
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u10.json",
+          "id": "lem-compact-open-topology-on-a-discrete-domain-is-pointwise",
+          "model": "gpt-6.1-sol",
+          "context_sha256": "ba6774c414725300c82485ab7d10db9030a46d602c2eee3534ad460cdbefe7af",
+          "phase": "initial",
+          "round": 1,
+          "unit": "10"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "items/lem-compact-open-topology-on-a-discrete-domain-is-pointwise.md",
+          "post_sha256": "5021c922ddf493d2805dfdacbfc9c8d7c1964699ec113b289c3dbc6c566c6eb1"
+        },
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u10.json"
+        }
+      ],
+      "prevention": {
+        "kind": "brief",
+        "ref": "briefs/step7-adjudicator.md"
+      }
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "row": {
+      "defect_id": "frontier-38-owner-30-step7-initial-r1-u10-2",
+      "run": "frontier-38-owner-30",
+      "at": "2026-10-03T15:38:03.720137+00:00",
+      "class": "accuracy",
+      "subclass": "citation-missing",
+      "severity": "fatal",
+      "location": "proof-step",
+      "subject": "lem-dual-homomorphisms-are-continuous-and-functorial",
+      "caught_at_stage": "6-judge",
+      "caught_by_role": "judge-sol",
+      "disposition": "fixed",
+      "description": "Steps 2.1 and 4.1 take finite subcovers of L and delta0[L] from ambient open sets, but def-compact-space explicitly requires citing lem-compactness-of-a-subspace-is-ambient. This missing dependency supports essential compact-lift and inverse-continuity steps. Added that supplier and finite choice in F9, their step tags, and the ambient criterion for the finite-union argument in F8; the claims and AC hypothesis are preserved.",
+      "repair": "Pullback preimages are S(phi[K],V); the quotient is open, Hausdorff and locally compact by closedness of H and images of compact neighbourhoods. AC chooses lift triples; the indexed ambient criterion supplies finitely many indices and compact union K with L contained in q[K]. Descent is bijective onto the closed annihilator. A finite target cover gives W with delta0(l)W contained in V, and translated S(K,W) proves inverse continuity. Empty L and H=0 or H=G are covered. Only facts, proof citations and dependencies change.",
+      "locator": "2.1 and 4.1",
+      "adjudication_ref": [
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u10.json",
+          "id": "lem-dual-homomorphisms-are-continuous-and-functorial",
+          "model": "gpt-6.1-sol",
+          "context_sha256": "30b1628623a69d0fcf43ea0c61c88e2ffc606688b916c8a53807216206f80ef1",
+          "phase": "initial",
+          "round": 1,
+          "unit": "10"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "items/lem-dual-homomorphisms-are-continuous-and-functorial.md",
+          "post_sha256": "175ec31c1044b2960141d9e803cc0ff1c866d710e152af0c59e19410d1a4e790"
+        },
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u10.json"
+        }
+      ],
+      "prevention": {
+        "kind": "brief",
+        "ref": "briefs/step7-adjudicator.md"
+      }
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "row": {
+      "defect_id": "frontier-38-owner-30-step7-initial-r1-u10-3",
+      "run": "frontier-38-owner-30",
+      "at": "2026-10-03T15:38:03.720137+00:00",
+      "class": "accuracy",
+      "subclass": "ill-typed-construction",
+      "severity": "fatal",
+      "location": "proof-step",
+      "subject": "ex-pontryagin-dual-of-euclidean-space",
+      "caught_at_stage": "6-judge",
+      "caught_by_role": "judge-sol",
+      "disposition": "fixed",
+      "description": "The original step constructs (xi_1,...,xi_n), although def-p-norms-on-rn and lem-metrics-on-rn define vectors as functions on n with indices j<n. Thus xi_n was never supplied and xi_0 was omitted; that expression does not construct the claimed vector. Repaired F2 and steps 1.1-3.1 to use j<n and define xi(j)=xi_j. Added the actual standard-basis and inner-product suppliers instead of the unrelated group-power-law citation, and made the continuity-at-identity argument explicit.",
+      "repair": "The standard basis is indexed on n; each coordinate character has a unique real frequency, so j maps to xi_j defines a vector without Choice. Decomposition and exponential addition give the classification, and testing each coordinate proves uniqueness. For nonempty compact K the continuous norm has finite maximum R; Cauchy-Schwarz and delta=delta-prime/(R+1) give continuity, including R=0. If norm(eta)>=epsilon, x=eta/(2 norm(eta)^2) lies in the compact radius-1/(2 epsilon) ball and has phase 1/2, contradicting the radius-1 circle constraint. Translation gives continuity everywhere. The Example interface is unchanged.",
+      "locator": "1.1",
+      "adjudication_ref": [
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u10.json",
+          "id": "ex-pontryagin-dual-of-euclidean-space",
+          "model": "gpt-6.1-sol",
+          "context_sha256": "f33b6f35cbcfb4f763289755bbf499a4259aab48cc41873530514ee402bdf370",
+          "phase": "initial",
+          "round": 1,
+          "unit": "10"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "items/ex-pontryagin-dual-of-euclidean-space.md",
+          "post_sha256": "5eb86aa171fa6d6fd65907265ed0d3812f5dcc6447e0d7b72a1a7d61ac269bac"
+        },
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u10.json"
+        }
+      ],
+      "prevention": {
+        "kind": "brief",
+        "ref": "briefs/step7-adjudicator.md"
+      }
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-direct-sums-and-tensor-products-of-finite-dimensional-unitary-representations",
+    "severity": "fatal",
+    "defect_type": "dependency_citation",
+    "status": "repaired",
+    "reason": "F6 cites only a quotient-field definition, which does not supply conjugation or modulus. Replaced that dependency and contract quotation with lem-complex-conjugation-and-modulus-laws, whose Statement supplies the exact additive, multiplicative and modulus identities. The tensor basis proof, finite-sum continuity, and conjugate-linear isometry J give the claimed representations with the first-variable-linear pairing; the Statement is unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-an-l-two-class-invariant-in-modulus-under-all-translations-of-the-line-is-zero",
+    "severity": "nonfatal",
+    "status": "repaired",
+    "reason": "With the library convention n starts at zero, U_0=(-1/0,1/0) is undefined. Reindexed both occurrences to U_n=(-1/(n+1),1/(n+1)), retaining the same cofinal shrinking neighbourhood argument. For each fixed x the shift t=x gives g(x-z)=g(-z) a.e.; convolution is then an integrable constant, hence zero, and right approximate-identity convergence forces g=0. This local indexing defect is nonfatal: no new mathematical argument or weakened claim is required."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-compact-group-matrix-coefficients-separate-points",
+    "severity": "nonfatal",
+    "status": "repaired",
+    "reason": "F3 falsely states convolution for all continuous functions on an arbitrary G; f=g=1 on R makes the integral infinite. Every actual proof use is on compact K, where C(K)=C_c(K), so the cited convolution theorem applies. Restricted F3 to that compact case and removed unused general L2-convolution and norm claims. This is a nonfatal overstatement of a fact, not a gap in the separation argument: the symmetric cutoff gives psi(g)=0<psi(e), and spectral range orthogonality produces a finite-dimensional right-regular coefficient separating x and y."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "thm-uniform-peter-weyl-density",
+    "severity": "fatal",
+    "defect_type": "dependency_citation",
+    "status": "repaired",
+    "reason": "F2 omitted the normalized-Haar hypothesis of the point-separation lemma, and the original proof never obtained that measure. Added cor-normalized-haar-probability-on-a-compact-group as a direct dependency and F4, then equipped K with its probability before applying F2. The existing AC assumption supplies Haar existence. Unitality, self-adjointness and point separation now meet Stone-Weierstrass exactly; epsilon/2 approximation gives sup error < epsilon. The Statement and all consumer interfaces are unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "cor-parseval-and-fourier-inversion-for-compact-groups",
+    "severity": "fatal",
+    "defect_type": "dependency_citation",
+    "status": "repaired",
+    "reason": "The cited Bochner definition requires an integrable-simple approximation and explicitly defers the finite-norm-integral criterion; the commuting-map theorem assumes integrability rather than proving it. Added the actual published criterion and integral norm inequality to F2, deps and contract. The finite-dimensional operator-valued integrand has measurable matrix entries, hence strong simple approximations, and integrable norm |f|. Its entries give <pi(f)e_j,e_i>=<f,u_ij>/sqrt(d_pi), so the Hilbert-Schmidt square sum, arbitrary-index Parseval and finite-subset-net inversion follow. The Statement is unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-boundary-of-a-compact-one-manifold-has-even-cardinality",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "12",
+    "outcome": "confirmed_nonfatal",
+    "status": "closed",
+    "defect_type": null,
+    "reason": "F6 omitted the nonvanishing-derivative hypothesis (t cubed has no differentiable inverse at zero). This is nonfatal to the argument: step 1.1 explicitly has s prime = sqrt(h) > 0. F6 now states the positive-derivative condition, the inverse-derivative smoothness bootstrap, and the boundary local-extension justification. The maximal-extension and overlap proof then gives each compact component as a circle or closed interval; finite components give even boundary. Statement unchanged; no downstream interface event.",
+    "post_sha256": "9a99b10145d34e604fb7cb0880802034e1b8f7d7984c7e962c8d1172528544af",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "thm-oriented-intersection-number-is-homotopy-invariant",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "12",
+    "outcome": "confirmed_fatal",
+    "status": "closed",
+    "defect_type": "logic",
+    "reason": "Full-family and boundary-face transversality imply only endpoint transversality: F(t,theta)=t-1/2-cos(theta)/4 has nonzero time derivative and empty endpoint fibres, but its t=3/4 slice is tangent at theta=0. Corrected Statement and step 1.1 to name F_0,F_1. The compact oriented trace, opposite end signs, zero signed boundary, and fixed-endpoint perturbation in the mod-two supplier establish the unchanged endpoint equality and homotopy-class extension under AC_omega.",
+    "post_sha256": "9f340cd413bd32d23e1463e398bf70bdb3d61bd6e70ece948992b2ed03930405",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "ex-two-projective-lines-have-one-mod-two-intersection",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "12",
+    "outcome": "confirmed_nonfatal",
+    "status": "closed",
+    "defect_type": null,
+    "reason": "F3 omitted n >= 1 from the orientability supplier; RP^0 is an orientable point. Added that hypothesis. The proof uses only n=2, so the omission is nonfatal to this example: distinct planes have one common line, their sphere circles meet at two antipodal points with distinct tangents, and the local-diffeomorphism quotient gives one transverse intersection. Its parity is one and the homotopy obstruction follows under AC_omega. Example and all Statement/Definition interfaces unchanged.",
+    "post_sha256": "eb63c0e073954fd7d007ab6a4e53d4070cebe3d1b6bfe82b7d1c4e11ccf29e75",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "rem-properness-can-replace-compactness-only-when-the-intersection-trace-is-compact",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "12",
+    "outcome": "false_positive",
+    "status": "false_positive",
+    "defect_type": null,
+    "reason": "The rejection reads a Statement refuted as an asserted theorem. The companion counterexample explicitly disproves proper-endpoint invariance: F_t(x)=x-(1-t)x^2 has proper transverse slices, zeros 0 and 1/(1-t) for t<1 with signs + and -, but only zero 0 at t=1 with sign +. The escaping branch makes the combined trace noncompact. This directly supports the remark. Its sine-graph finiteness warning, compact-target properness criterion, compact-trace invariance criterion and separate source-boundary warning are correct. No edit is warranted.",
+    "post_sha256": "f56978fa8562b04af3c68ad90f6d684485a58c8e9b38d8ddf4a5e8006a7f1571",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "thm-intersection-number-under-factor-interchange",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "12",
+    "outcome": "confirmed_fatal",
+    "status": "closed",
+    "defect_type": "logic",
+    "reason": "Step 2.1 invoked transverse local signs for arbitrary submanifold inclusions: A=B=S^1 x {0} in T^2 has no direct tangent sum. Repaired the full nontransverse conclusion, without restricting it to transverse A,B: choose u transverse to B and v transverse to A; u x i_B and i_A x v are homotopic transverse maps against the closed oriented diagonal. A direct block determinant gives I(u x v,Delta)=(-1)^b I(u,v), and homotopy invariance plus the transverse swap gives the asserted (-1)^(ab) identity. Explicit boundaryless sources match the defining interface; AC_omega is stated only for the extension. No new prerequisite is needed and the later diagonal proposition is not cited, avoiding a cycle.",
+    "post_sha256": "b75b8f85f8be16c8ac4d61d7b0aafb75e326983de7a833ceb1192f057f9fde3a",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-collar-gluing-and-corner-smoothing-give-transitivity",
+    "outcome": "false_positive",
+    "reason": "Proposed dismissal of the exact initial-round-1 Sol rejection: the cited double proof 8.1–9.1 constructs the required collar-intertwining half-map, and its 7.1 cutoff localizes the construction to a prescribed neighbourhood of a clopen boundary part. No confirmed fatal or nonfatal defect remains from this tuple; retain its original rejected evidence and this proof-based explanation.",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "ex-thom-space-of-the-mobius-line-bundle",
+    "severity": "nonfatal",
+    "status": "repaired",
+    "finding": "The last comparison in step 2.1 confused the trivial line's Thom space Sigma(S1_+) with the unreduced suspension of S1. The disk/sphere product quotient collapses both boundary circles to the same point. The Mobius-band/projective-plane calculation and the Example remain correct, so this is a nonfatal ancillary error. Replaced the comparison by the exact formula supplied by prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product and corrected the same comparison on its owning examples page."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-based-homotopies-transverse-to-the-zero-section-give-normal-cobordisms",
+    "severity": "nonfatal",
+    "status": "repaired",
+    "finding": "F2 and its Statement-bound contract citation overclaimed auxiliary embedding/retraction conclusions: the cited Statement supplies only relative smoothing and homotopy. Those auxiliary data are explicitly constructed in the cited theorem's proof, so this is a nonfatal citation/interface defect rather than a missing mathematical existence argument. Repaired F2 to match its Statement and added F8 with direct dependencies on the proper Whitney embedding theorem and closed Euclidean submanifold retraction corollary. Step 2.1 now uses properness to obtain a closed embedded image and composes its smooth retraction with j inverse. Also corrected A1's omitted F1 normal-bundle choice use. The Statement is unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-the-standard-flower-is-a-deformation-retract-with-free-meridian-basis",
+    "outcome": "confirmed_fatal",
+    "defect_type": "logic",
+    "status": "repaired",
+    "reason": "The allowed q_i=1/2 gives tether y=1-2x, contradicting the asserted y<=1-4|x| at every small x>0. The separating collar is essential to the polygonal cut construction used for the retraction. Replaced the false estimate with y=1-|x|/|q_i|<=1-|x| for q_i!=0, handled the vertical tether separately, and chose width |x|/2 with 1-sqrt(1-x^2)<|x|/2. Radial evacuation, fixed-shore quotient descent, based tether-tree collapse and the reduced-word covering-tree argument establish all original clauses without AC.",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "15",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "9fde9c1e44760b2cd167ba4235c86f66d9e0a414724e87961aa4a66662969b02",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true,
+    "disposition": "repaired"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-a-based-self-map-of-the-punctured-disk-inducing-the-identity-on-pi-one-is-based-homotopic-to-the-identity",
+    "outcome": "confirmed_nonfatal",
+    "status": "repaired",
+    "reason": "The display title omitted the punctured-disk hypothesis, although the actual Statement and Given specify f:X->X with X=D^2 minus Q_n. A general based space need not be classified by pi_1. Restored the domain in the title. The based flower/wedge equivalences give g=afb with identity induced action; finitely many endpoint-fixed generator-loop homotopies glue to g~id, and ba~id transports this to f~id relative to d, including n=0. The logical statement and proof need no correction.",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "15",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "06f4bc7e72dda2cab1a87f920e632bd6a8fbfcba807d2af56da6b62dc595b96e",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true,
+    "disposition": "repaired"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-the-oriented-boundary-loop-represents-the-ordered-product-of-the-standard-meridians",
+    "outcome": "confirmed_fatal",
+    "defect_type": "dependency_citation",
+    "status": "repaired",
+    "reason": "Original F1 and its contract quote attributed a compact cut disk and its A/P decomposition to the flower Statement, which supplies only deformation retraction, a free basis, and higher-homotopy vanishing. That interface does not justify the endpoint-fixed path homotopy. Replaced F1 with the actual tether-tree claim and added the published finite polygonal-surgery supplier as F3. New step 1.1 proves the cut disk locally: tether-disjoint circle collars polygonize the boundaries, separated shores and root sectors form one simple polygon, and side coordinates identify the opened surface with its disk. Steps 2.1 and 3.1 compare the outer arc with the reversed complementary arc and trace positive inner circles in increasing tether order. Step 4.1 treats n=0 by a based straight-line contraction. No AC or additional item is needed.",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "15",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "04c081b29e72de1b63655d34958039c3a3267ae4fdcd91b037f636107b69feb5",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true,
+    "disposition": "repaired"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "cex-permuting-meridian-conjugacy-classes-without-fixing-the-boundary-word-is-not-artin",
+    "outcome": "confirmed_nonfatal",
+    "status": "repaired",
+    "reason": "The transposition computations prove only peripheral preservation without boundary preservation. Step 3.1 additionally asserted mutual independence without invoking or verifying the reverse witness. This is nonfatal to the stated counterexample, whose automorphism, reduced-word inequality and exclusion from the Artin image are correct. Added step 1.3: A(x_1)=x_1^{-1}, A(x_2)=x_1^2x_2, others fixed, has A^2=id and fixes delta; the exponent homomorphism h(x_1)=1, h(x_j)=0 distinguishes A(x_1) from every conjugate of a positive basis generator. Both nonimplications and the unchanged counterexample are now proved without AC.",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "15",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "d04105138339fac978d680446f33924aeb8d35b46666b7d10909cb58fc059dac",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true,
+    "disposition": "repaired"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "16",
+    "id": "lem-lkb-deleting-the-last-puncture-gives-a-saturated-absolute-homology-inclusion",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "e7834f63287cd6672ab5b7292f6e13e799742ca4f9a722045a60415e251a250b",
+    "outcome": "confirmed_fatal",
+    "disposition": "repaired",
+    "reason": "Proof 2.1 now identifies the actual geometric inclusion by commuting barred-grid and bigon quotient squares; kernel coordinates then prove injectivity and saturation. Statement unchanged.",
+    "uncertain": false,
+    "source_urls": [
+      "https://arxiv.org/pdf/math/0204057",
+      "https://msp.org/agt/2002/2-1/agt-v2-n1-p24-p.pdf"
+    ],
+    "familiar": false,
+    "defect_type": "logic"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "16",
+    "id": "lem-a-punctured-disk-mapping-class-fixing-all-standard-adjacent-edges-is-a-boundary-twist-power",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "49f9ccc47fd7d00a8ae37f824e2b31f5fb829e106ca8b63d22e53cfa7c8f43d8",
+    "outcome": "false_positive",
+    "disposition": "false_positive",
+    "reason": "The current supplier proof contains graph/face smoothing and supported bigon moves; the separately cited Farb–Margalit graph induction supplies compatibility. No defect confirmed.",
+    "uncertain": false,
+    "source_urls": [
+      "https://pagine.dm.unipi.it/~a019210/Farb%20Magalit_Primer%20on%20Teichmuller%20theory.pdf"
+    ],
+    "familiar": false
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "16",
+    "id": "lem-arcs-in-a-punctured-disk-have-disjointness-detecting-minimal-positions",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "2b585539fe1dc40006cfe22a6c902d4aabd340b38e531e66fe71390679dc72ed",
+    "outcome": "false_positive",
+    "disposition": "false_positive",
+    "reason": "The exact cited supplier proof steps establish smoothing, terminal sectors and actual-cover projection. The assigned proof extends them explicitly to a disjoint family and proper-obstacle avoidance.",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "16",
+    "id": "def-lexicographic-order-on-fork-noodle-deck-monomials",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "e7925d93fe404dc2c9fa3752bb5ad5a1fbb71eac00fff40ba7b100a733707ab9",
+    "outcome": "false_positive",
+    "disposition": "false_positive",
+    "reason": "The cited pairing supplier proof5.1 already supplies compact replacement, the scaled identity, finite prism comparison and cancellation in the Laurent domain.",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "16",
+    "id": "lem-extremal-fork-noodle-terms-have-one-sign-and-cannot-cancel",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "88a3d776621a6a8eb17acf122b953da87d8245f284e7755566b2687bd4e572cc",
+    "outcome": "confirmed_fatal",
+    "disposition": "repaired",
+    "reason": "Proof5.1 now holds the primed j point fixed and compares m_ij directly to m_jj, using a_kj-a_jj and global q-maximality; it no longer assumes m_ji is maximal. Statement unchanged.",
+    "uncertain": false,
+    "source_urls": [
+      "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+    ],
+    "familiar": false,
+    "defect_type": "logic"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "16",
+    "id": "lem-fork-detection-transports-to-arbitrary-boundary-crosscuts",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "2bd01adde7a0f0d9536a0ecb416a9acd4e96bec7a4667adf4dbc0b6d8275d3ba",
+    "outcome": "false_positive",
+    "disposition": "false_positive",
+    "reason": "The supplier proof5.1 establishes the scaled identity and proof6.1 local oriented intersection naturality, so the boundary-collar transport is justified on the exact absolute/end-stable arguments.",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/published-consumer-supplier-ledger.md",
+    "action": "no_update",
+    "reason": "No published defect or changed supplier interface was discovered in this assignment; no published item was edited or adjudicated.",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "def-oriented-link-in-s-three-and-ambient-isotopy",
+    "finding": "The closed ball and S^3 times I are not manifolds without boundary under def-smooth-manifold. Added local smooth-extension conventions across their boundary; links, orientations and equivalence are unchanged. Composition and inverse families remain smooth under this convention.",
+    "status": "repaired",
+    "severity": "nonfatal"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-free-homotopy-classes-of-loops-are-conjugacy-classes",
+    "finding": "F6 was incorrectly applied on two-dimensional rectangles although its supplier only treats subsets of R. Added explicit product-neighborhood estimates for jointly continuous addition and multiplication, then used composition, product coordinates and finite closed pasting. Both conjugacy directions and the statement are unchanged.",
+    "status": "repaired",
+    "severity": "nonfatal"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "def-markov-conjugation-and-stabilization-moves",
+    "finding": "Q^(n) differs from the first n points of Q^(n+1), so untouched geometric representatives cannot be glued to the prescribed target half twist. Replaced that assertion by the Artin word realized at Q^(n+1); its old generators fix the last target point. The algebraic inclusion and signed stabilizations are unchanged.",
+    "status": "repaired",
+    "severity": "nonfatal"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "def-planar-isotopy-of-link-diagrams",
+    "finding": "R3 preserves all three crossings, unlike R1 and R2. Corrected the descriptive sentence to distinguish rearrangement from creation/deletion. Planar isotopy still transports the decorated graph without changing any crossings.",
+    "status": "repaired",
+    "severity": "nonfatal"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-braid-isotopic-closed-braids-are-conjugate",
+    "finding": "The displayed inclusion-induced map lands in the closed-disk configuration group, as the actual supplier states. Corrected Phi to pi_1(C_n(D^2),[Q]); open-disk free homotopy is then transported through inclusion and inversion exactly as in proof 2.1. Also retained the countable-choice use for smooth models.",
+    "status": "repaired",
+    "severity": "nonfatal"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-a-smooth-isotopy-of-links-can-be-put-in-general-position",
+    "finding": "A stationary endpoint crossing gives a half-interval in the double-point locus, so the boundaryless claim is false. Stated the manifold-with-boundary conclusion with boundary exactly at times 0 and 1, and proved its smooth half-interval charts by constant collar extension. Interior event classification and finiteness are unchanged.",
+    "status": "repaired",
+    "severity": "fatal"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-braid-like-moves-can-be-moved-to-height-zero",
+    "finding": "Height zero does not imply a closed braid in the fixed planar chart: two unnested oppositely oriented circles give a counterexample. Added the existing sphere-isotopy/chart normalization prerequisite and explicitly allowed these link-preserving normalizations. Straightening retains the marked move arcs, so F2 is applied only to normalized closed-braid pictures.",
+    "status": "repaired",
+    "severity": "fatal"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-the-four-band-d-pair-case-is-a-markov-sequence",
+    "finding": "The stated cut placed c before d_new, which is incompatible with the chronological inverse Q_(c,d). Figure 8 third right panel instead has order (b,d_old,a,d_new,c). Corrected that order and tracked inverse cap (d_new,c) to (c,d_new), restoring the (a,c) box. The displayed beta, alpha and F13 algebraic comparison remain unchanged.",
+    "status": "repaired",
+    "severity": "nonfatal"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-reidemeister-moves-between-closed-braid-diagrams-factor-through-markov-moves",
+    "finding": "F4 states a whole-portion alternative without a bound on the four-band branch, so the original invocation did not justify decreasing H. The repair explicitly tracks insertions at the same peak Y, descending compatible valleys, height-one exchanges, and F7 descents from height H-1 followed by the four-band Markov comparison. It also applies F3 only after the repaired sphere/chart normalization.",
+    "status": "repaired",
+    "severity": "fatal"
+  },
+  {
+    "ledger": "research/published-consumer-supplier-ledger.md",
+    "action": "no_change",
+    "reason": "All direct item consumers of the five changed Statement/Definition sections are draft members of the frozen frontier. No potentially defective published consumer was identified; no outside maintenance or published repair is proposed.",
+    "item_ids": []
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "run": "frontier-38-owner-30",
+    "stage": "Step7",
+    "unit": "18",
+    "id": "def-outer-induction-product-for-symmetric-group-characters",
+    "outcome": "confirmed_nonfatal",
+    "disposition": "repaired",
+    "reason": "The published Young-subgroup Definition permits only a partition type; (1,2) and pairs with zero entries are not such types. The original explicit block actions nevertheless determine the correct subgroup in every degree, so this is a nonfatal terminology/interface defect. Replaced the unsupported type name by the subgroup preserving the two specified blocks, with explicit empty-block and label-shift conventions and the unique-restriction identification.",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true,
+    "post_sha256": "29f547d619a053cb3525b3ec8851d4f23e40173d691c2cae62a14d3a0acceb80",
+    "review_context_sha256": "083784648e5338c38ce875d571319af679e65725a137f819607d968616a94d59"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "run": "frontier-38-owner-30",
+    "stage": "Step7",
+    "unit": "18",
+    "id": "lem-frobenius-characteristic-preserves-outer-products",
+    "outcome": "confirmed_nonfatal",
+    "disposition": "repaired",
+    "reason": "F4 incorrectly attributes the rational power-sum basis to a corollary whose Statement asserts only Hall orthogonality. This is a confirmed nonfatal citation defect: F2 already cites the characteristic-map Definition, whose interface explicitly supplies that same basis, so the original mathematical argument has an available spanning prerequisite. Replaced F4 and its direct dependency by the actual published basis proposition and explained extension to a complex basis, the field used in step 4.1. Also repaired F5 to cite the corrected block-preserving subgroup definition.",
+    "uncertain": false,
+    "source_urls": [
+      "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+    ],
+    "familiar": true,
+    "post_sha256": "2f981d1a2c3e5330b843bf575da6a130ff2bf27ff14c8fbda36184276f023ed5",
+    "review_context_sha256": "1e67d9cdb8b8b5419f1bdac926d7d64533a4991abb74abfbf8b7719a11bc0ab8"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "19",
+    "id": "def-jucys-murphy-elements-of-the-symmetric-group-algebra",
+    "outcome": "confirmed_nonfatal",
+    "severity": "nonfatal",
+    "status": "closed",
+    "disposition": "repaired",
+    "reason": "The blanket noncentrality claim in Remarks is false: X_1=0 is central for every n and R, and R[S_2] is commutative. The Definition itself is correct. Repaired the remark with these exceptions and a direct noncentral example: for n>=3 and a nonzero coefficient ring, conjugation by (2 3) sends X_2=(1 2) to the distinct basis element (1 3). Added the actual group-ring algebra supplier and justified the subgroup and coefficient homomorphisms by bilinearity; no AC or division is needed.",
+    "evidence_path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u19.json",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "19",
+    "id": "lem-jucys-murphy-local-relations",
+    "outcome": "confirmed_nonfatal",
+    "severity": "nonfatal",
+    "status": "closed",
+    "disposition": "repaired",
+    "reason": "F1 omits k<=m: for n=2,m=1,k=2, X_2=(1 2) is not in Z[S_1]. This is a mis-scoped prerequisite, rather than a failure of the stated local identities: step 1.4 uses only X_i in Z[S_i] included in Z[S_(i+1)], and every other use has indices within S_n. Restored 1<=k<=m<=n and explained multiplicativity of coefficient base change. Independently checked the finite computations, adjacent commutation from subgroup-central T_i and T_(i+1), both equivalent forms, and arbitrary-ring transfer. Also corrected the two-permutation wording in step 1.3 and inaccurate contract boundary locators.",
+    "evidence_path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u19.json",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_adjudication",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "2",
+    "id": "lem-normalization-unchanged-under-finite-birational-curve-map",
+    "outcome": "confirmed_nonfatal",
+    "defect_type": null,
+    "reason": "The integral-only F7 did not specify birationality for reducible curves. Added the generic-point bijection and generic-stalk convention in Given, matching Stacks 01RO; verified finite component restrictions, the product integral-closure computation, and the common-field comparison. The claim and AC assumption are unchanged.",
+    "post_sha256": "caba8d23103c2409420c9662d18c932adc5af66942d4e6bf6cf5349563c7cbd8",
+    "audit_status": "local mathematical review and repair; no independent acceptance asserted"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_adjudication",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "2",
+    "id": "lem-projection-formula-invertible-twist",
+    "outcome": "confirmed_nonfatal",
+    "defect_type": null,
+    "reason": "F7 incorrectly attributed coherence to the Euler-characteristic definition. Separated that assertion into F9 with the actual coherent-module definition and the proper/finite-type Noetherian suppliers. Checked exact invertible tensor preserves injectives, the natural degree-zero projection map, resolution comparison, and the k-linear acyclic-image comparison; no extra assumptions on f are needed.",
+    "post_sha256": "d2ba597d3c90438d399f3d20a9e83b573c0115ddb49177a59933965ef9e95234",
+    "audit_status": "local mathematical review and repair; no independent acceptance asserted"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_adjudication",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "2",
+    "id": "lem-blowup-local-on-base-scheme",
+    "outcome": "false_positive",
+    "defect_type": null,
+    "reason": "The complete Definition of def-rees-algebra-ideal-sheaf ends by explicitly defining the Rees algebra and its relative Proj for any quasi-coherent ideal; thus F2 is licensed despite its opening finite-type specialization. The locality lemma also explicitly extends blowup notation in Remarks. Restriction commutes with ideal powers and direct sums, and the supplied relative-Proj theorem allows arbitrary quasi-coherent graded algebras, so all four steps are valid.",
+    "post_sha256": "54f10439cd3fa79885959ccee638b248a45925f5fa4307839a20cbd2b8453c8b",
+    "audit_status": "local mathematical review and repair; no independent acceptance asserted"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_adjudication",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "2",
+    "id": "lem-blowup-plane-origin-incidence-equations",
+    "outcome": "confirmed_nonfatal",
+    "defect_type": null,
+    "reason": "F4 was false for degree d>1: f/u has degree d-1, whereas the chart ideal is generated by f/u^d. Corrected the dehomogenization formula; its actual use has d=1, so the incidence proof remains valid. Made the zero-degree base case in the kernel induction explicit and cited the actual exceptional-subscheme definition. Checked the kernel induction over arbitrary B, both chart rings, reciprocal-ratio overlap, and P1_B exceptional gluing, including B=0.",
+    "post_sha256": "7a5ed848dc31fbf16184eed57963c866d8f6a7fbe1cc1bfba8926d3c887711c7",
+    "audit_status": "local mathematical review and repair; no independent acceptance asserted"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_adjudication",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "2",
+    "id": "lem-blowup-reduced-integral-under-domain-rees",
+    "outcome": "confirmed_nonfatal",
+    "defect_type": null,
+    "reason": "The spectrum definition is expressly topological and does not supply F4 as a scheme identification. Replaced it with the published principal-localization open-immersion lemma, whose Statement gives exactly that identification. Chart embeddings in A_a prove reducedness/domains; restricting each chart to its D(fi) gives the common off-center open, dense in every nonempty domain chart, proving global irreducibility. Zero ideals give empty reduced blowups and are excluded only from integrality. Also explicitly derived affine-local and subring reducedness from the reduction definition, instead of attributing them as supplied assertions.",
+    "post_sha256": "52f47042c6ccf2909b8cbf67bea74e7972f8072845d41e6839732e7c4a308cab",
+    "audit_status": "local mathematical review and repair; no independent acceptance asserted"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_adjudication",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "2",
+    "id": "def-strict-transform-closed-subscheme",
+    "outcome": "confirmed_fatal",
+    "defect_type": "dependency_citation",
+    "reason": "The cited closure lemma requires a Noetherian ambient scheme and did not establish the claimed kernel identification in the stated generality. Replaced that use with a complete chart argument: ker(C -> (C/H)_a)=(H:a^infinity), exact localization identifies the kernel sheaf on every principal refinement, the intrinsic kernels glue, and reverse inclusion of ideals proves minimality. The strict transform therefore exists without a Noetherian assumption; its saturation, reducedness and iteration interfaces are preserved. No new prerequisite is necessary.",
+    "post_sha256": "0b70f96795426c225d947c12837325d963e21ce987dbf6aa50b7a654a94809d5",
+    "audit_status": "local mathematical review and repair; no independent acceptance asserted"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_adjudication",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "2",
+    "id": "cor-blowup-unique-up-to-unique-isomorphism",
+    "outcome": "confirmed_nonfatal",
+    "defect_type": null,
+    "reason": "F3 incorrectly attributed the exceptional ideal to the construction definition, which explicitly postpones E. Restated F3 as the relative-Proj construction and used F2 alone for admissibility; F2 clause 3 actually identifies E with V(I O_Bl) as an effective Cartier divisor. The two universal properties give maps in both directions, and uniqueness of admissible endomorphisms makes both composites identities. The claim is unchanged.",
+    "post_sha256": "f17e9760f8a2be6c3b3fb79c432730635f764885c40b9df7b0c575e23813779a",
+    "audit_status": "local mathematical review and repair; no independent acceptance asserted"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_adjudication",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "2",
+    "id": "lem-blowup-isomorphism-off-center",
+    "outcome": "confirmed_fatal",
+    "defect_type": "logic",
+    "reason": "Step 2.1 falsely identified the entire ratio chart overlap with D(fi fj); for I=(x,y), Spec k[x,T,T^-1] contains x=0 points. Replaced it with gluing on the whole inverse image of each base overlap, where the structural map is an isomorphism by step 1.1. This also covers overlaps of different affine base neighborhoods. Corrected F3 to attribute the chart cover to F1 and removed an ill-typed inverse-image description in step 4.1. Verified chart containment over D(fi), both inverse identities, the universal-property characterization and the set-theoretic exceptional complement.",
+    "post_sha256": "6f65be4081e7da4f64e6008d269b4e4e627dbb62223229b6824390078e1353dd",
+    "audit_status": "local mathematical review and repair; no independent acceptance asserted"
+  },
+  {
+    "ledger": "research/published-consumer-supplier-ledger.md",
+    "action": "no_update",
+    "reason": "All 19 direct strict-transform consumers inspected are draft items in the frozen frontier; no changed published interface or potentially defective published consumer was found."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_outside_lane_owner_review",
+    "run": "frontier-38-owner-30",
+    "id": "lem-blowup-multiplicity-euler-characteristic-drop",
+    "affected_use": "F3: all these schemes are locally Noetherian of finite type over k, so their structure sheaves are coherent ([[def-euler-characteristic-coherent-sheaf]]).",
+    "invalidated_claim": "The claimed attribution to the Euler-characteristic definition does not supply coherence, just as in the assigned projection lemma. The mathematical conclusion is correct for finite-type k-schemes.",
+    "minimality": "Cite the actual coherent-module definition and finite-type Noetherian supplier for this deduction; preserve the Statement and the blowup invariant proof.",
+    "route": "frontier owner for its assigned lane; no edit by unit 2",
+    "status": "Unassigned citation discovery; no unit-2 adjudication or repair of this item.",
+    "uncertain": false
+  },
+  {
+    "ledger": "research/published-consumer-supplier-ledger.md",
+    "id": "thm-poisson-modification-preserves-subharmonicity-and-majorizes",
+    "status": "proposed_maintenance",
+    "reason": "Published proof step 2.1 bounds phi_1 and then asserts every M-h_n is nonnegative. For zero-indexed approximation u=0, phi_n=1/(n+1), M=1/2, one has M-h_0=-1/2. The proof works after taking M to bound phi_0 (or explicitly restricting to the tail n>=1). The theorem Statement remains sound; no published file was edited.",
+    "affected_use": "items/lem-hardy-radial-means-are-monotone.md [L2] and step 2.1 use harmonicity and majorization of the Poisson modification. Their continuous-data case is explicitly realized by H+1/(n+1); the published issue is an indexing omission in its general proof.",
+    "invalidated_claim": "The nonnegativity assertion for the zero-th term M-h_0 in published proof step 2.1 is not licensed by an upper bound for phi_1.",
+    "minimality": "Replace the bound on phi_1 by a bound on phi_0; no Statement change, new dependency, or downstream claim change is needed.",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "20",
+    "subject": "lem-hardy-radial-means-are-monotone",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "758349ac18854d0daf9ec2c25102891c8c3d1cb1a3da445319f776cd7b4c2344",
+    "outcome": "confirmed_nonfatal",
+    "severity": "nonfatal",
+    "disposition": "fixed",
+    "finding": "The unspecified boundary-approximation index inherited the zero-based convention, making 1/n undefined at zero. This is a nonfatal indexing defect: the continuous datum itself has a Poisson extension, and using phi_n=u+1/(n+1), n>=0, gives h_n=H+1/(n+1) and inf h_n=H. Also made the p<1 Jensen argument explicitly use convex -t^(p/q) with integrable input and composition, and supplied continuity at radius zero. The Statement is unchanged; no consumer propagation is required.",
+    "item_sha256": "1f241d72d39c794d9934329b46a55074432385e2c88d1c94bb10ee98c165b16a",
+    "adjudication_ref": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u20.json",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "20",
+    "subject": "def-blaschke-product",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "cc2be0e00ea9fe6e860c8af67659b94506d7e4bc2496da58e86d0da6f9b3140a",
+    "outcome": "false_positive",
+    "severity": null,
+    "disposition": "false_positive",
+    "finding": "False positive: the Definition explicitly supplies (a_n)_(n>=1), not a function with an additional zero-th term. Its sums, product, partial products and supplier thm-hardy-zero-set-blaschke-condition consistently use that positive-indexed domain; reindex f_k=b_(a_(k+1)), k>=0, to apply the normal-product theorem. The proposed a_0=0 is not a term of the supplied sequence. The compact summable-defect bound includes a=0 separately, ensures finitely many origin factors and gives the expected zeros. No item edit is warranted.",
+    "item_sha256": "e051caddecebcc077b4cb45f0c4d82e2b7f441d7f924af3fc09b94632e40189a",
+    "adjudication_ref": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u20.json",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "20",
+    "subject": "def-inner-singular-inner-and-outer-functions",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "7c6ba8be61201025cfd1bc3cbd82e2c72d75edcf79d439f58af6111a923e752d",
+    "outcome": "confirmed_fatal",
+    "severity": "fatal",
+    "disposition": "fixed",
+    "finding": "The arbitrary-holomorphic outer equivalence was attributed to lem-outer-function-properties(iv), which assumes h in Lp and g in Hp; neither is supplied in this Definition. The same mismatch affected its unconditional holomorphy assertion. This is a fatal dependency-citation gap at the declared unrestricted interface, not a false equivalence. Repaired by deriving the logarithmic kernel integral as a convergent power series for every L1 logarithmic datum, citing entire exponential and its modulus identity, and proving both equivalence directions directly using the constant-modulus quotient and published maximum principle. The Lp/Hardy and boundary conclusions remain cited only with their actual hypotheses; no claim is weakened.",
+    "item_sha256": "e0f2538fabc704e5509d5c8fe6e38125ca8228e9200a827e234d57be387c35ee",
+    "adjudication_ref": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u20.json",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true,
+    "defect_type": "dependency_citation"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "20",
+    "subject": "lem-outer-function-properties",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "aaa4f4eda421cc0c80a6e103681da2432de18ff7173c1b543e3fe2a2a4b242d7",
+    "outcome": "confirmed_nonfatal",
+    "severity": "nonfatal",
+    "disposition": "fixed",
+    "finding": "L3 omitted integrability of t, required by both cited Jensen interfaces. For t(s)=-1/s on (0,1), e^t is integrable but the real expectation of t is not defined. This is nonfatal for the lemma: its actual application t=p log h is integrable because log h is L1 and the fixed Poisson kernel is bounded; h^p is likewise integrable against that weight. Repaired L3 to state both weighted integrability hypotheses and step 2.1 to verify them explicitly, with a finite representative on null exceptional sets. Added direct entire-exponential and modulus-identity dependencies to license L2 and the modulus computation. All four Statement clauses are unchanged and their series, Jensen/Tonelli, CC boundary-limit and constant-quotient arguments remain valid.",
+    "item_sha256": "709663dba496f952b61599ec9f207152bbac0bde7eb52493f45f795168ba88da",
+    "adjudication_ref": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u20.json",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "def-divisor-power-sums-sigma-k",
+    "outcome": "confirmed_nonfatal",
+    "status": "repaired",
+    "reason": "The cited group exponent identities contain no order hypothesis or positivity conclusion. Replaced that citation by induction using d^0=1, d^{k+1}=d^k d and closure of positive integers under multiplication (thm-int-ordered-ring); addition preserves positivity of this nonempty finite sum. The defining formula, ranges n>=1 and k>=0, and integer-valued claim are unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "thm-q-expansion-principle-at-the-cusp",
+    "outcome": "confirmed_nonfatal",
+    "status": "repaired",
+    "reason": "F5 omitted the infinite-order alternative: the zero function cannot factor with g(a)!=0. Proof 3.1 already separates the constant case, so this is a nonfatal inaccurate fact rather than a failure of the asserted descent or decay. Qualified F5 by the locally zero alternative and aligned Proof 3.1 with it. Added thm-laurent-expansion-annulus to F6/deps for the Laurent-series existence used in Proof 4.1 and added its exact citation to the owning contract. Rotated local logs land in H by |q|<1; integer fibres and periodicity give descent and uniqueness; boundedness is equivalent to removability and yields O(q), including zero."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-gamma-2-is-torsion-free-and-has-no-elliptic-points",
+    "outcome": "confirmed_nonfatal",
+    "status": "repaired",
+    "reason": "The original title assigned freeness to Gamma(2), although -I is in that matrix group and fixes all of H. Retitled the lemma to name barGamma(2). The Statement and Proof already retain the scalar kernel: nontrivial projective torsion would force even trace zero, then bc=-a^2-1=2 mod 4 contradicts b,c even. Finite PSL2(Z) stabilisers then imply every Gamma(2) stabiliser is {+/-I}. The B-page correctly says barGamma(2) acts freely. This is a nonfatal title correction with unchanged Statement and Proof."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-level-one-cusp-chart-and-compactness",
+    "outcome": "confirmed_nonfatal",
+    "status": "repaired",
+    "reason": "For an intrinsic open cover of K=Dbar union {infinity}, a member around infinity contains K intersect B_N, not the ambient B_N. Rewrote Proof 2.1 intrinsically: this member covers the tail, traces of cover members form an intrinsic cover of L=Dbar intersect {Im tau<=N}, and Heine-Borel with the metric/topological compactness agreement gives finitely many more members. Added exact subspace and agreement suppliers and mirrored the derivation in the contract. The original geometric compactness argument is valid once the cover types are corrected, so this is nonfatal. The nonzero-c height bound gives the cusp chart and separates it from every interior orbit; finite interior charts and the nonzero exponential derivative supply the Riemann surface structure."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-discriminant-is-a-nonvanishing-cusp-form",
+    "outcome": "confirmed_nonfatal",
+    "status": "repaired",
+    "reason": "F1 incorrectly called M_12 closed under multiplication; two weight-12 forms multiply into weight 24. Its listed containments M_4 M_4 subset M_8, M_8 M_4 subset M_12 and M_6 M_6 subset M_12 were already correct and are exactly what Proof 1.1 uses. Replaced the erroneous phrase with the complex-vector-space property and weight addition. Checked E_4^3=1+720q+179280q^2 and E_6^2=1-1008q+220752q^2, giving Delta=q-24q^2. Nonnegative valence terms sum to 12/12-1=0, hence no interior zeros. The coefficient equations a+b=0 and 720a-1008b=0 prove independence, and dim M_12=2 gives the asserted basis. This is a nonfatal inaccurate fact with a sound proof and unchanged Statement."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "ex-modular-lambda-biholomorphism-onto-the-slit-plane",
+    "outcome": "confirmed_nonfatal",
+    "status": "repaired",
+    "reason": "F6 is false for disconnected covers: a permutation of sheets 2 and 3 in a trivial three-sheet cover fixes sheet 1. Its cited proposition explicitly assumes connected total space. Added that hypothesis and verified it in Proof 3.1 by straight segments in H. Each barGamma(2) element is a deck map; an arbitrary deck map agrees at a fixed point with one such element because fibres are Gamma(2)-orbits, hence agrees everywhere by connected-cover uniqueness. Thus the actual application was valid but its stated fact was overgeneralized, a nonfatal defect. Checked quotient bijectivity via labelled fibres and the degree-six rational identity (including repeated substitution values), strict-interior/weak-boundary height comparisons, and boundary substitutions x/(x-1)<0 and 1/x>1 with 0<x<1; reflection forces any real interior value into (0,1). Also declared def-modular-group-action-on-the-upper-half-plane, already cited in Given, to repair the scoped dependency warning."
+  },
+  {
+    "ledger": "research/published-consumer-supplier-ledger.md",
+    "updates": [],
+    "reason": "No new published defect found. The divisor-definition direct consumers are draft items with unchanged uses; no published Statement or Definition was edited."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-nonaffine-affine-and-finite-morphism-fppf-descent",
+    "outcome": "confirmed_nonfatal",
+    "status": "repaired",
+    "finding": "The infinite affine refinement counterexample is valid. The false last sentence is unused: quasi-compactness gives the finite subcover in 1.1; effective algebra descent and morphism descent identify X_U with Spec D, and faithful flat module descent proves finiteness. Replaced only that ancillary sentence; the Statement is unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-nonaffine-affine-group-faithful-representation",
+    "outcome": "confirmed_nonfatal",
+    "status": "repaired",
+    "finding": "The counterexample shows why finite type matters to the display title. The Statement already includes it, and step 2.1 uses finite algebra generators. Finite coefficient contractions give directed finite subcomodules; counit extraction shows matrix coefficients generate k[G], so the representation is a closed immersion even for nonreduced G. Qualified only the title; Statement and proof are unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-nonaffine-commutative-torsor-norm-map",
+    "outcome": "confirmed_fatal",
+    "defect_type": "dependency_citation",
+    "status": "repaired",
+    "finding": "F1 attributed existence of a Galois closure and the embedding count to an interface that states neither. Repaired with existing primitive-element, splitting-field existence and finite algebraic-generation suppliers: L=k(alpha), its separable degree-n minimal polynomial has a finite Galois splitting field, and evaluation at its n distinct roots gives all embeddings. The commutative sum of torsor trivializations is Galois invariant and descends, with no division by n. Statement unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-nonaffine-high-frobenius-smooth-image",
+    "outcome": "confirmed_fatal",
+    "defect_type": "dependency_citation",
+    "status": "repaired",
+    "finding": "The field-tests interface gives geometric-regularity descent, not smoothness equivalence. Added the smooth-morphism definition and Jacobian criterion, explicitly bridging local standard smoothness and checking finite presentation, k-flatness and geometrically regular fibres. The high-power image argument and finite-kernel calculation remain sound; Statement unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-nonaffine-centre-is-stable-jet-kernel",
+    "outcome": "confirmed_fatal",
+    "defect_type": "dependency_citation",
+    "status": "repaired",
+    "finding": "The cited jet theorem assumes scheme faithfulness, which conjugation need not satisfy. Replaced that unlicensed invocation with a direct construction and Noetherian stabilization, then coefficientwise Krull intersection and schematic density after arbitrary base change to identify the stable kernel with the centre. Nonreduced kernel parameters are retained. Statement unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "thm-nonaffine-pointed-group-to-abelian-variety-morphism-homomorphism",
+    "outcome": "confirmed_nonfatal",
+    "status": "repaired",
+    "finding": "The disconnected-group counterexample refutes the unrestricted title, while the Statement already requires smooth geometric integrality. Its defect map extends over the smooth anti-affine completion factor and rigidity kills it; faithful scalar extension descends the multiplication identity. Qualified the title and matching page prose, and corrected the contract claim about identity preservation by homomorphisms. Statement and proof unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties",
+    "outcome": "confirmed_fatal",
+    "defect_type": "dependency_citation",
+    "status": "repaired",
+    "finding": "The cited algebra theorem only composes locally standard smooth maps; F3 supplied no bridge from the fibre definition. Replaced it by the published scheme theorem using that definition. Specified fibres over algebraic closures of residue fields and geometric-regularity descent, with explicit closure and rational-point suppliers. The torsor kernel pair proves affine transfer, faithful pullback proves geometric reducedness of Q, and open connected fibres prove connected transfer. Statement unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-euler-characteristic-twist-integral-proper-curve",
+    "stage": "step7-initial-r1",
+    "severity": "nonfatal",
+    "disposition": "fixed",
+    "finding": "The local devissage criterion L3 omitted Supp(G) contained in Z, although both witnesses explicitly meet that hypothesis.",
+    "repair": "Restored support containment and identified the witness stalk at the generic point of Z in L3; preserved the Statement and full proof.",
+    "run": "frontier-38-owner-30",
+    "subject": "lem-euler-characteristic-twist-integral-proper-curve",
+    "class": "accuracy",
+    "location": "facts-block",
+    "caught_at_stage": "7.1-adjudicate",
+    "caught_by_role": "alpha-adjudicate",
+    "defect_id": "f38o30-step7-initial-r1-u26-support-containment",
+    "adjudication_ref": [
+      {
+        "file": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u26.json",
+        "obligation": "lem-euler-characteristic-twist-integral-proper-curve:gpt-6.1-sol:85f4ec13196c22aceaf9a410c89ca8637c7d8ad36e6849172c774d54e00ad62b"
+      }
+    ]
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "thm-surface-intersection-product-bilinear-and-symmetric",
+    "stage": "step7-initial-r1",
+    "severity": "nonfatal",
+    "disposition": "fixed",
+    "finding": "F7 incorrectly identified the choice-free Cartier/Picard dictionary as an AC supplier.",
+    "repair": "Replaced F7 with actual AC inheritance through F1-F5 and explicitly identified F6 as choice-free; retained the AC hypothesis and proof.",
+    "run": "frontier-38-owner-30",
+    "subject": "thm-surface-intersection-product-bilinear-and-symmetric",
+    "class": "accuracy",
+    "location": "facts-block",
+    "caught_at_stage": "7.1-adjudicate",
+    "caught_by_role": "alpha-adjudicate",
+    "defect_id": "f38o30-step7-initial-r1-u26-choice-accounting",
+    "adjudication_ref": [
+      {
+        "file": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u26.json",
+        "obligation": "thm-surface-intersection-product-bilinear-and-symmetric:gpt-6.1-sol:4ad385829411f159dd3e595e310097bf747cbc6b4e44fbc8fefe3acd359b8f2f"
+      }
+    ]
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-blowup-of-closed-point-of-regular-surface-is-regular",
+    "severity": "nonfatal",
+    "finding": "The title overpromised a rational exceptional curve at every closed point although the explicit local-dimension-one case gives a reduced Cartier point.",
+    "repair": "Conditioned the rational exceptional curve wording in the title on a two-dimensional local ring. Statement and Definition sections unchanged; no downstream event.",
+    "defect_id": "frontier-38-owner-30-step7-initial-r1-u27-N1",
+    "run": "frontier-38-owner-30",
+    "at": "2026-10-04",
+    "class": "accuracy",
+    "subclass": "false-or-overstrong-title",
+    "location": "title",
+    "subject": "lem-blowup-of-closed-point-of-regular-surface-is-regular",
+    "caught_at_stage": "7-adjudicate",
+    "caught_by_role": "group-alpha",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "audit_status": "Local repair reviewed by its editor; independent engine rejudgment and certification remain separate.",
+    "adjudication_ref": [
+      {
+        "ledger": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u27.json",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "73edaa9a7c73d2e4db5827f775713fd48ea585d884c82f88ab944d34c1c3cd60"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u27.json",
+        "anchor": "lem-blowup-of-closed-point-of-regular-surface-is-regular"
+      }
+    ],
+    "post_sha256": "6b5b4c1642bf42938ea8f61572a589350ae35ed1e99f68baedd7339e11df0452"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-intersection-multiplicity-drop-under-point-blowup",
+    "severity": "nonfatal",
+    "finding": "F1 says every ideal of a DVR is a power of its maximal ideal, omitting the required nonzero qualifier.",
+    "repair": "Inserted nonzero in F1. Both contact ideals in the proof are nonzero, so all applications remain sound. Statement and Definition sections unchanged.",
+    "defect_id": "frontier-38-owner-30-step7-initial-r1-u27-N2",
+    "run": "frontier-38-owner-30",
+    "at": "2026-10-04",
+    "class": "accuracy",
+    "subclass": "citation-inflated",
+    "location": "facts-block",
+    "subject": "lem-intersection-multiplicity-drop-under-point-blowup",
+    "caught_at_stage": "7-adjudicate",
+    "caught_by_role": "group-alpha",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "audit_status": "Local repair reviewed by its editor; independent engine rejudgment and certification remain separate.",
+    "adjudication_ref": [
+      {
+        "ledger": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u27.json",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "056860f926e3e30c69c33804215000818116d3401ce58865cbd3edf51d9844c9"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u27.json",
+        "anchor": "lem-intersection-multiplicity-drop-under-point-blowup"
+      }
+    ],
+    "post_sha256": "ca1ba1f7cb5c3bb5d043e05e1daa59efb6053d435b7706dd3f9b6853c3fe2d9c"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "rem-smooth-projective-locally-free-duality-is-the-ag-lie-special-case",
+    "stage": "step7-initial-round-1",
+    "severity": "fatal",
+    "defect_type": "logic",
+    "disposition": "repaired",
+    "reason": "The final sentence incorrectly extends sheaf Ext duality to arbitrary singular projective schemes. For X=Proj k[x,y,z]/(x^2,xy), its nilpotent ideal is a length-one skyscraper on L=(x=0), giving h^0(O_X)=2; the ambient resolution gives omega_X=O_L(-2), hence h^1(omega_X)=1. These cannot be dual. The coherent supplier requires pure dimension and Cohen–Macaulayness; general duality uses D_X. The missing hypothesis is a false mathematical assertion, classified as logic.",
+    "repair": "Qualified singular projective X by pure dimension d and Cohen–Macaulayness and stated the dualizing-complex caveat. The coherent supplier then gives Ext_X^{d-i}(F,omega_X)=H^i(X,F)^dual. Local freeness makes internal Hom exact, while Koszul Ext and conormal adjunction identify the canonical line. The normalized collapse inserts sigma_c once; Gysin compatibility identifies the transported counit trace and cup/evaluation pairing with the smooth theorem. AC and all existing dependencies remain. This is a local review of my repair, not an independent audit.",
+    "uncertain": false,
+    "source_urls": [
+      "https://stacks.math.columbia.edu/tag/0FVV",
+      "https://stacks.math.columbia.edu/tag/0FVZ",
+      "https://stacks.math.columbia.edu/tag/0FW0",
+      "https://stacks.math.columbia.edu/tag/0FVW"
+    ],
+    "familiar": false
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-hilbert-regularity-independent-of-ambient-dimension",
+    "outcome": "confirmed_fatal",
+    "defect_type": "dependency_citation",
+    "disposition": "repaired",
+    "reason": "Confirmed dependency_citation defect: F1 assigned field extension and descent to the regularity-propagation Statement, which supplies only vanishing, generation, and multiplication; these operations are essential to the all-fields conclusion. F2 also attributed positivity to a degree/support Statement that asserts only a nonzero leading coefficient; positivity is unused. Repair cites the existing proper-cohomology field-extension lemma directly, derives preservation/descent from its isomorphism, changes F2 to nonzero, and explicitly supplies Euler additivity and twist cohomology. The recursive claim and its Statement are unchanged.",
+    "uncertain": false,
+    "source_urls": [
+      "https://stacks.math.columbia.edu/tag/02KH",
+      "https://arxiv.org/pdf/math/0504590"
+    ],
+    "familiar": true,
+    "post_sha256": "81eae1be32db2187cb250ef11cbaece0578aadab4cc3315eab8d36fded07ddd8",
+    "source_rejection": {
+      "id": "lem-hilbert-regularity-independent-of-ambient-dimension",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "eeb526409c554d1b6d201c11772d30b65c88698bf90cb1bb84f449ef56d83dbd"
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "entry": {
+      "run": "frontier-38-owner-30",
+      "subject": "lem-heat-kernel-normalisation-scaling-and-derivatives",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "caught_at_stage": "7.1",
+      "caught_by_role": "alpha-adjudicate",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "efd1c8972bac02748a6cad2bde8089c617761dec7b58a8299caa8f4992311ba3",
+      "item_sha256": "4f8c9689d0cf070f70f24bc8ff5c048a7f2ecaf318325aab27d79eac71b49de7",
+      "finding": "F4 omitted the completed-product exceptional-null-set convention. This is nonfatal for step 1.1: exp(-|u|^2) is continuous, every section is measurable, and Tonelli factors its integral into n one-dimensional Gaussian integrals. Corrected F4 to use zero extensions on exceptional null sets and explained why the actual Gaussian sections require no modification. Checked unit mass, scaling, heat-equation signs, polynomial Gaussian derivative bounds and dominated Gaussian tails; Countable Choice remains explicit and Statement unchanged.",
+      "adjudication_ref": {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u3.json",
+        "id": "lem-heat-kernel-normalisation-scaling-and-derivatives",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "efd1c8972bac02748a6cad2bde8089c617761dec7b58a8299caa8f4992311ba3"
+      }
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "entry": {
+      "run": "frontier-38-owner-30",
+      "subject": "lem-first-and-second-moments-of-the-heat-kernel",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "caught_at_stage": "7.1",
+      "caught_by_role": "alpha-adjudicate",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "1eaf029a76e7a71e92de5f6b0506bd258f070c470bc2800b9a636d5deef0cd05",
+      "item_sha256": "b686c2077a2a21970bb744286956889169a63d50b2c6b3795149a30281421892",
+      "finding": "F4 overstated completed-product Fubini-Tonelli by omitting zero extensions of section integrals on exceptional measurable null sets. The actual continuous Gaussian and polynomial-Gaussian products have measurable sections everywhere, so the defect does not invalidate these moment calculations. Corrected F4 and made mixed absolute integrability explicit using |xi xj| <= (xi^2+xj^2)/2. Checked odd reflection, integration by parts with vanishing boundary term, diagonal value 2t and total 2nt, including n=1. Statement and Countable Choice unchanged.",
+      "adjudication_ref": {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u3.json",
+        "id": "lem-first-and-second-moments-of-the-heat-kernel",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "1eaf029a76e7a71e92de5f6b0506bd258f070c470bc2800b9a636d5deef0cd05"
+      }
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "entry": {
+      "run": "frontier-38-owner-30",
+      "subject": "lem-heat-kernel-semigroup-identity",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "caught_at_stage": "7.1",
+      "caught_by_role": "alpha-adjudicate",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "97d18955289ba810c96d35a0442c4e7ac8f4e32690ab616d1fca0a80210fbf19",
+      "item_sha256": "4bab4d9b3a8dda2ff09491c14fbf456ff3d8e3abdcf7a5cb5225b66774087190",
+      "finding": "F5 omitted the exceptional-null-set convention of completed-product Tonelli. The Gaussian in step 1.2 is continuous with measurable sections everywhere, so its factorization remains valid; corrected the fact without changing the Statement. Checked A=(t+s)/(4ts)>0, b=xs/(t+s), the completed-square constant -|x|^2/(4(t+s)), and the prefactor (4pi(t+s))^(-n/2). The C1 change-of-variables supplier covers the translation y=b+z with determinant one, and the finite Gaussian integral proves absolute convergence at every x.",
+      "adjudication_ref": {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u3.json",
+        "id": "lem-heat-kernel-semigroup-identity",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "97d18955289ba810c96d35a0442c4e7ac8f4e32690ab616d1fca0a80210fbf19"
+      }
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "entry": {
+      "run": "frontier-38-owner-30",
+      "subject": "ex-heat-evolution-of-affine-and-quadratic-polynomials",
+      "severity": "fatal",
+      "disposition": "fixed",
+      "caught_at_stage": "7.1",
+      "caught_by_role": "alpha-adjudicate",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "df9421bf1c8fd27812be386a1e92d3cabc4a82b036020644058b509b700c2507",
+      "item_sha256": "0d8442a7152e594b5d5b68fc7b9ed2215d7b2f047e830e7e29aa0627109d15e1",
+      "finding": "Confirmed fatal dependency-citation gap: the integral-invariance theorem assumes measure preservation, while the cited linear change-of-variables theorem does not cover translations. Added the existing translation-invariance theorem and derived that Tx(z)=x-z is a measurable measure-preserving involution by composing translation with reflection (absolute determinant one). Step 1.1 first proves q(z)=Gamma(z,t)P(x-z) integrable from the moment suppliers, then applies invariance to |q| and q, proving absolute convergence without circularity. Unit, linear, mixed quadratic and radial quadratic formulas all follow by finite expansion. Example, actual AC requirement and page contract unchanged.",
+      "adjudication_ref": {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u3.json",
+        "id": "ex-heat-evolution-of-affine-and-quadratic-polynomials",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "df9421bf1c8fd27812be386a1e92d3cabc4a82b036020644058b509b700c2507"
+      },
+      "defect_type": "dependency_citation"
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "entry": {
+      "run": "frontier-38-owner-30",
+      "subject": "ex-self-similar-heat-kernel-solution",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "caught_at_stage": "7.1",
+      "caught_by_role": "alpha-adjudicate",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "a1b2c7ceaa49feb5b0c12d98d82507b05e637fe4a2054c94cd9b62911612b8a8",
+      "item_sha256": "8af318f9e2830e15922955011fba6d47839e67d40ebd3a8cda0db79e49b41f9e",
+      "finding": "Step 2.1 correctly displayed the dilation invariance lambda^n u(lambda x,lambda^2 t)=u(x,t), but its final sentence falsely assigned amplitude lambda^n to the later-time profile. At x=0 and lambda=2 that profile has amplitude 2^(-n). This is nonfatal to the stated example, whose two equations and invariance under the compensated dilation are correct. Replaced the sentence with u(x,lambda^2 t)=lambda^(-n)u(x/lambda,t), recording spatial scale lambda and amplitude lambda^(-n). Checked heat equation, unit mass and positive-time semigroup, and preserved the Example exactly.",
+      "adjudication_ref": {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u3.json",
+        "id": "ex-self-similar-heat-kernel-solution",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "a1b2c7ceaa49feb5b0c12d98d82507b05e637fe4a2054c94cd9b62911612b8a8"
+      }
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "entry": {
+      "run": "frontier-38-owner-30",
+      "subject": "ex-heat-flow-of-an-indicator-function",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "caught_at_stage": "7.1",
+      "caught_by_role": "alpha-adjudicate",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "b190a1d6e4202b07ff853069da837f8d2dd41fa6aa063ffd36c054e00bfe588d",
+      "item_sha256": "a8cbbbbecf33a688fa375e1e8207880a20e5982fcdbf3c5b32ea4e218ac0a92e",
+      "finding": "F6 omitted that the primitive base point must lie in its interval, and also omitted the supplier interval nondegeneracy. Corrected it to an interval I with at least two elements and 0 in I. This is nonfatal for step 1.2, which applies it only to the smooth Gaussian density on R. Checked Phi(u)=1/2+integral_0^u phi, Phi prime positive, affine substitution with factor sqrt(2t), and the ordered Gaussian-tail difference. The interval indicator is in all finite Lp and Linfinity; a<b gives strict positivity and smoothness. Example unchanged.",
+      "adjudication_ref": {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u3.json",
+        "id": "ex-heat-flow-of-an-indicator-function",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "b190a1d6e4202b07ff853069da837f8d2dd41fa6aa063ffd36c054e00bfe588d"
+      }
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "entry": {
+      "run": "frontier-38-owner-30",
+      "subject": "cex-linfinity-approximate-identity-need-not-converge-in-supremum-norm",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "caught_at_stage": "7.1",
+      "caught_by_role": "alpha-adjudicate",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "f1312c74fe8580323e591caa42e13bad807b46c64b1b2454444f0e90be1abf95",
+      "item_sha256": "36efc014be1db46ea9686d6f05e9d5a7fa4cfcc1a30a6c8969bfe2fa1af81182",
+      "finding": "Step 1.2 used reciprocal indices without excluding k=0, although the canonical natural numbers contain 0; H_(1/0) is undefined. This is a nonfatal finite-index convention defect: the Lipschitz and uniform-Cauchy arguments establish the stated necessity using any positive times tending to zero. Replaced all six H_(1/k) and both H_(1/ell) occurrences with H_(1/(k+1)) and H_(1/(ell+1)). Checked continuous differences have equal supremum and essential supremum on R, real completeness gives a uniform limit and uniformly continuous representative, and both jump witnesses have errors on sets of positive measure. Finite-p convergence and the Statement refuted remain unchanged.",
+      "adjudication_ref": {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u3.json",
+        "id": "cex-linfinity-approximate-identity-need-not-converge-in-supremum-norm",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "f1312c74fe8580323e591caa42e13bad807b46c64b1b2454444f0e90be1abf95"
+      }
+    }
+  },
+  {
+    "ledger": "research/frontier-38-owner-30-defect-ledger.json",
+    "id": "lem-projective-modification-of-proper-integral-dvr-scheme",
+    "severity": "nonfatal",
+    "status": "repaired",
+    "finding": "The title omitted regularity from the codimension-one assertion, although the Statement and step 3.1 explicitly require it. Reduced diagonal closure and proper gluing give an integral projective modification; over each height-one regular local DVR, every affine chart meeting the closed fibre equals that DVR, and finite presentation spreads the isomorphism. Dominance gives torsion-free coordinate rings and flatness. Corrected only the title; the Statement and proof remain unchanged."
+  },
+  {
+    "ledger": "research/frontier-38-owner-30-defect-ledger.json",
+    "id": "lem-tame-dvr-inertia-and-abhyankar-ramification-killing",
+    "severity": "fatal",
+    "defect_type": "logic",
+    "status": "repaired",
+    "finding": "Confirmed a fatal proof gap: the final Statement covers every finite fraction-field extension of a complete trait, but old step 4.1 and F1 establish normalization finiteness only for separable extensions. Preserved the Statement and supplied steps 1.2 and 5.1. The separable normalization is finite and complete, with lifted Artinian idempotents forcing locality. Over that complete DVR the purely inseparable part has the explicit valuation w(x)=v_s(x^q)/q. Norm equivalence bounds its integral closure inside a finite lattice, proving finiteness; the discrete value group makes it a DVR, and finite-module completion gives completeness. Its residue field is finite, hence unchanged over an algebraically closed residue field."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "row": {
+      "defect_id": "frontier-38-owner-30-step7-initial-r1-u4-1",
+      "run": "frontier-38-owner-30",
+      "subject": "lem-coordinate-direction-form-of-the-slobodeckij-seminorm",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "caught_at_stage": "7.1-initial",
+      "caught_by_role": "alpha-adjudicate",
+      "location": "Proof step 1.3 and Facts F2-F4",
+      "evidence": "The quantified comparison in step 1.3 is false for an unbounded compactly supported kernel: in dimension one, phi(z)=|z|^(-1)1_{0<|z|<=1} and F=1 have an infinite Euclidean integral but finite sphere integral. This is nonfatal for the stated equivalence because its only applications are the bounded smooth densities rho and psi. Added boundedness and Borel measurability, the explicit bound M R^d/d, and exact uncompleted-Tonelli and translation-invariance suppliers; both comparisons remain valid for extended integrals.",
+      "adjudication_ref": {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u4.json",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "b9d392ee34c60c9ba56cf065734977ddb30d58a89fcb84287c00bf3afa0ee926"
+      },
+      "post_sha256": "57822852a645e4b091abd209943efeefb65c376d1bb3908bb50e91b91b0277bb",
+      "source_urls": [],
+      "familiar": true,
+      "uncertain": false
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "row": {
+      "defect_id": "frontier-38-owner-30-step7-initial-r1-u4-2",
+      "run": "frontier-38-owner-30",
+      "subject": "cex-boundary-point-values-are-not-defined-by-an-lp-class",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "caught_at_stage": "7.1-initial",
+      "caught_by_role": "alpha-adjudicate",
+      "location": "Facts F1 and Counterexample step 1.1",
+      "evidence": "F1 incorrectly infers Sobolev membership from almost-everywhere equality alone, and omits p-integrability from the Lp quotient. Repaired F1 to require an Lp class already in W^{k,p}, and made step 1.1 explicitly use the zero class, whose weak derivatives all vanish. The actual witnesses restrict identically to zero in the ball, so their common Sobolev trace is zero despite different boundary restrictions. The independent radial witness remains in L2 by the computed integrable (1-r)^(-1/2) bound and diverges toward every boundary point. This is a nonfatal overstatement of a fact, not a failed witness.",
+      "adjudication_ref": {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u4.json",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "c3085c633bc4e977cc7fc7f1f29c8f1cefe3f3fa3abe176b32c49f5cf803bf49"
+      },
+      "post_sha256": "5a9471c05fbbb173f8db338054c3cc9c489f197f8ca882fcb22988e53a32656d",
+      "source_urls": [],
+      "familiar": true,
+      "uncertain": false
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "row": {
+      "defect_id": "frontier-38-owner-30-step7-initial-r1-u4-3",
+      "run": "frontier-38-owner-30",
+      "subject": "rem-endpoint-and-rough-domain-trace-limitations",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "caught_at_stage": "7.1-initial",
+      "caught_by_role": "alpha-adjudicate",
+      "location": "Scope of the trace theory of this page, clause (ii)",
+      "evidence": "Clause (ii) inaccurately calls the published definition uniform: it specifies only local one-sided graphs and derivative bounds on compact patches, explicitly denying uniform chart constants. Replaced that wording by the exact local graph condition and explained that a finite shrunk cover yields domain-dependent bounds. Corrected the cusp explanation: the tip fails the graph condition, while individual arcs may be C1; the planar companion computation fails for alpha>p. The positive trace, sharp-range, right-inverse and kernel clauses match their actual suppliers; endpoint assertions remain explicitly attributed and unproved. This is a nonfatal scope-description defect, not an invalid trace theorem.",
+      "adjudication_ref": {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u4.json",
+        "model": "gpt-6.1-sol",
+        "context_sha256": "2a56c929b1efbdfe8c75c39223b976acead8523de1baa3748e796bd24be3442c"
+      },
+      "post_sha256": "73b723f92a4a0014a0c9378635cac4943b266045bb10923ba2b28c3f0b2aa119",
+      "source_urls": [
+        "https://hal.science/hal-01131162/file/short_gagliardo_20150205.pdf",
+        "https://sites.pitt.edu/~hajlasz/OriginalPublications/HajlaszM-Traces-JFunctAnal-143-1997-221-246.pdf",
+        "https://d-nb.info/1326531441/34",
+        "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+        "https://inmabb.criba.edu.ar/revuma/pdf/v50n1/v50n1a03.pdf"
+      ],
+      "familiar": false,
+      "uncertain": false
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "frontier-38-owner-30-step7-initial-r1-u5-def-calderon-zygmund-kernel-and-principal-value-operator",
+    "subject": "def-calderon-zygmund-kernel-and-principal-value-operator",
+    "stage": "Step7",
+    "severity": "fatal",
+    "defect_type": "logic",
+    "status": "closed",
+    "disposition": "repaired",
+    "finding": "Ordinary support is not invariant under changing an L2 representative on a null set: zero and the rational-point indicator give empty and full ordinary supports. Replaced it by the essential support already defined by the complex-Lp conventions supplier, so compact support and the off-support identity are class invariant; annular, Hormander and principal-value conditions are unchanged.",
+    "evidence_path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u5.json",
+    "review_post_sha256": "ed0d3bce837753316a83a672037aa9cbca54232f8cdd50ecbc048aba389e93be",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "frontier-38-owner-30-step7-initial-r1-u5-cex-calderon-zygmund-strong-lone-bound-fails",
+    "subject": "cex-calderon-zygmund-strong-lone-bound-fails",
+    "stage": "Step7",
+    "severity": "nonfatal",
+    "defect_type": null,
+    "status": "closed",
+    "disposition": "repaired",
+    "finding": "F1 falsely credited the interval-specific domination to the truncation definition. Step 1.1 independently establishes it using positive-part Lipschitzness inside the interval and a one-sign integral outside. F1 now states only the supplied Lp truncation interface and identifies step 1.1 as the bound’s proof. The Fubini/skew-adjoint argument identifies q with the L2 transform, and its 1/x lower tail excludes a compatible L1 extension.",
+    "evidence_path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u5.json",
+    "review_post_sha256": "e515e9d0ff01b3fca194f91e436fbb3e79ae8917f94ace5f4099a8b65e669eb8",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "frontier-38-owner-30-step7-initial-r1-u5-lem-dyadic-cubes-all-generations-partition-and-nesting",
+    "subject": "lem-dyadic-cubes-all-generations-partition-and-nesting",
+    "stage": "Step7",
+    "severity": "nonfatal",
+    "defect_type": null,
+    "status": "closed",
+    "disposition": "repaired",
+    "finding": "L2 and F5 asserted a signed side-product for arbitrary parameters, although (1,0] is empty with measure and volume zero rather than -1. Restricted L2’s formula to strictly ordered endpoints and F5 to weakly ordered endpoints, exactly as their suppliers state. Every dyadic side equals 2^-k>0, so the actual measure calculation, integer-block nesting and unique-upper-corner ancestry remain valid. Also removed F1’s attribution of the right-closed integer-part version, which step 1.1 proves from the cited floor theorem.",
+    "evidence_path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u5.json",
+    "review_post_sha256": "ae239213360ba09ae2141e24ff321d98b61991d5ede87aeff1eea0376a456fd6",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "frontier-38-owner-30-step7-initial-r1-u5-ex-riesz-transform-as-a-standard-calderon-zygmund-operator",
+    "subject": "ex-riesz-transform-as-a-standard-calderon-zygmund-operator",
+    "stage": "Step7",
+    "severity": "fatal",
+    "defect_type": "dependency_citation",
+    "status": "closed",
+    "disposition": "repaired",
+    "finding": "Steps 1.1-1.2 invoked standard-kernel status before establishing the base Hormander condition; the cited Holder-to-Hormander lemma assumes that status and cannot supply it from raw differences. Replaced the invocation with direct polar integration: C_n|h| integral_(|x|>=2|h|)|x|^(-n-1)dx=C_n|S^(n-1)|/2. Smoothness and annular size then establish base status before the standard definition is used. Skew adjointness and oddness still give the off-essential-support representation, with compact L2 inputs in L1 and separated test supports ensuring Fubini.",
+    "evidence_path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u5.json",
+    "review_post_sha256": "dd417864864e80cabfefb41cd2c1cbc7953751104f5e751ec97bf732ebde01bd",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "frontier-38-owner-30-step7-initial-r1-u5-thm-calderon-zygmund-operator-has-weak-type-one-one",
+    "subject": "thm-calderon-zygmund-operator-has-weak-type-one-one",
+    "stage": "Step7",
+    "severity": "nonfatal",
+    "defect_type": null,
+    "status": "closed",
+    "disposition": "repaired",
+    "finding": "F2 omitted the supplied bad-part lemma’s essential b_j in L2 hypothesis, incorrectly asserting Tb_j estimates for arbitrary L1 decompositions. This is nonfatal here because step 1.1 starts with f in L1 intersection L2 and proves square summability of the disjoint bad parts before applying the estimate. Added the qualification, justified the a.e. image-sum inequality via Chebyshev, and made the finite subsequential limit, Fatou application, linearity and compatible L1 extension explicit. Kernel bounds, dimensional constant and theorem Statement remain unchanged.",
+    "evidence_path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u5.json",
+    "review_post_sha256": "b8c356e9cdb1a347dd833eb871638990c3d87465be70c3b84789484a6f643d2e",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "frontier-38-owner-30-step7-initial-r1-u5-related-cor-riesz-transforms-are-bounded-on-lp",
+    "subject": "cor-riesz-transforms-are-bounded-on-lp",
+    "stage": "Step7",
+    "status": "open-owner-routing",
+    "finding": "Base Hormander status is inferred from a Holder-to-Hormander supplier that requires standard CZ status, while the standard definition already requires base CZ status. The claimed concrete kernel remains valid, but this cited prerequisite chain does not establish its missing integral condition.",
+    "affected_use": "1.1 The published estimates give exactly the size bound $|K_j(x)|\\le c_n|x|^{-n}$, the $\\delta=1$ first-difference bound $|K_j(x-h)-K_j(x)|\\le C_n|h||x|^{-(n+1)}$ in the regime $|h|\\le|x|/2$, and the vanishing of every spherical mean; in the notation of the standard Hölder definition this says that $K_j$ is a standard $1$-Hölder Calderón–Zygmund kernel with constant $A_2'=C_n$. [F1, F4, given]",
+    "minimality": "Owner should directly integrate the already proved raw first-difference bound with polar coordinates, before asserting base and standard kernel status; constants and statements can remain unchanged.",
+    "evidence_path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u5.json",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "frontier-38-owner-30-step7-initial-r1-u5-related-cor-hilbert-transform-is-bounded-on-lp",
+    "subject": "cor-hilbert-transform-is-bounded-on-lp",
+    "stage": "Step7",
+    "status": "open-owner-routing",
+    "finding": "Base Hormander status is inferred from a Holder-to-Hormander supplier that requires standard CZ status, while the standard definition already requires base CZ status. The claimed concrete kernel remains valid, but this cited prerequisite chain does not establish its missing integral condition.",
+    "affected_use": "2.1 Spherical cancellation and annular bound. On $S^0=\\{-1,1\\}$ the values of the odd kernel cancel: $\\int_{S^0}k(r\\omega)\\,d\\sigma(\\omega)=k(r)+k(-r)=0$ for every $r>0$; and for the annular integral, $\\int_{R\\le|x|\\le2R}|k(x)|\\,dx=\\frac1\\pi\\int_R^{2R}\\frac{2\\,dr}{r}=\\frac{2\\log2}{\\pi}$ for every $R>0$, so the annular condition holds with $A_1=2\\log2/\\pi$. Consequently, by [F3], $k$ is a Calderón–Zygmund kernel in the base sense with $A_1=2\\log2/\\pi$ and Hörmander constant $A_2=|S^0|2^{-1}A_2'=\\frac12\\cdot2\\cdot\\frac2\\pi=\\frac2\\pi$. [F3, step 1.1, algebra]",
+    "minimality": "Owner should directly integrate the already proved raw first-difference bound with polar coordinates, before asserting base and standard kernel status; constants and statements can remain unchanged.",
+    "evidence_path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u5.json",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "frontier-38-owner-30-step7-initial-r1-u5-related-ex-second-derivative-newtonian-kernels-fit-the-cz-framework",
+    "subject": "ex-second-derivative-newtonian-kernels-fit-the-cz-framework",
+    "stage": "Step7",
+    "status": "open-owner-routing",
+    "finding": "Base Hormander status is inferred from a Holder-to-Hormander supplier that requires standard CZ status, while the standard definition already requires base CZ status. The claimed concrete kernel remains valid, but this cited prerequisite chain does not establish its missing integral condition.",
+    "affected_use": "3.2 First-difference bound and kernel property: for $|x|\\ge2|y|>0$ the mean value theorem along the segment from $x-y$ to $x$, which stays in $\\{|z|\\ge|x|/2\\}$, together with step 2.1 gives $|k_{ij}(x-y)-k_{ij}(x)|\\le|y|\\sup_{|z|\\ge|x|/2}|\\nabla k_{ij}(z)|\\le2^{n+1}C_n|y||x|^{-n-1}$; so $k_{ij}$ is a standard $1$-Hölder kernel with constant $A_2'=2^{n+1}C_n$ and size constant $(1+n)\\omega_{n-1}^{-1}$, hence a Calderón–Zygmund kernel with annular constant $(1+n)\\omega_{n-1}^{-1}\\omega_{n-1}\\log2=(1+n)\\log2$ and finite Hörmander constant. [F4, step 1.1, step 2.1, algebra]",
+    "minimality": "Owner should directly integrate the already proved raw first-difference bound with polar coordinates, before asserting base and standard kernel status; constants and statements can remain unchanged.",
+    "evidence_path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u5.json",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true
+  },
+  {
+    "ledger": "research/published-consumer-supplier-ledger.md",
+    "action": "no_update",
+    "reason": "All 14 direct consumers of the changed Definition are draft frontier items, as verified by the current graph and frozen frontier. The three related findings also concern draft frontier items. No potentially defective published consumer was identified, and no published item or shared ledger was edited."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_repaired_defect",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "6",
+    "id": "lem-sphere-finite-graph-charts-and-surface-density",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "326aea0cffb6d8fbafa8b0b0512e6dd460c62c2b3f40d6bb6536d665e491d0de",
+    "severity": "fatal",
+    "defect_type": "dependency_citation",
+    "finding": "F3 falsely attributes smooth composition and square-root regularity to a theorem of first one-variable derivative rules. Added the one-variable chain rule and ordered-partial definition, proved square-root regularity by rationalization and coordinate-line induction, and exhibited ambient slice charts. The rank-one determinant, Hessian determinant and finite AComega partition are valid; the Statement is unchanged.",
+    "post_sha256": "0c90c44924e889a77e65692395bec739c7bbffa092cf5c26cf2d750bd1a330bb",
+    "status": "repaired_local_checks_passed",
+    "independent_review": false
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_repaired_defect",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "6",
+    "id": "def-fourier-restriction-and-adjoint-extension-operators",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "6625a2dfd7cc3917d5e4895a628ab6def71df8278dc5384a7ee6fbdcfd890e4f",
+    "severity": "fatal",
+    "defect_type": "logic",
+    "finding": "The all-L1 chain of inequalities used an L2 quotient norm without L2 membership; on S1 the density |theta|^(-3/4) is integrable but not square integrable. Split the universally valid L1 transform bound from the additional bound for g in L2, whose inclusion in L1 follows from Holder with the finite-measure constant function. Extension, linearity, uniform continuity, Schwartz restriction and the conditional meaning of R are preserved.",
+    "post_sha256": "a0f680c1b7eabd9e8f1b077db32d193748431113dfad29ac4c15a03742774580",
+    "status": "repaired_local_checks_passed",
+    "independent_review": false
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_repaired_defect",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "6",
+    "id": "lem-smooth-euclidean-hypersurface-graph-and-localization",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "860f1246133433e40e422cbfae4d108bfba962e3404b444aa47a97bb7b40d130",
+    "severity": "fatal",
+    "defect_type": "dependency_citation",
+    "finding": "F2 attributed the product rule to a total-derivative theorem that supplies only sums and scalar multiples. Added the actual one-variable product/quotient theorem and the partial/total bridges; step 1.1 derives Cr product, quotient and composition closure by coordinate-line induction before using the adjugate inverse bootstrap. Positive-square-root smoothness follows from that bootstrap on t squared. Slice-to-graph, normal invariance, self-adjointness and finite compact localization remain valid with the exact Statement unchanged.",
+    "post_sha256": "bcc4fd6fe4c67c21f4cd54a86b3962178b9479a80f455c4e513bb2f4ea1687f8",
+    "status": "repaired_local_checks_passed",
+    "independent_review": false
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_repaired_defect",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "6",
+    "id": "lem-stationary-phase-decay-for-spherical-surface-measure",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "f452cdc72b0d4358755ee354e15c74b6631245402cbd7a2e8a9163d9560a59ab",
+    "severity": "fatal",
+    "defect_type": "dependency_citation",
+    "finding": "The original proof applied a global stationary-phase interface to a phase defined only on the unit ball and explicitly dispensed with extension. Constructed a positive smooth radial derivative a and its primitive A so epsilon A(|y| squared) agrees on the amplitude support and has exactly one global critical point, with Hessian minus epsilon I. Zero extension makes amplitudes globally compact and smooth; adding and subtracting a bump meets the support-interior hypothesis. The finite sum and small-frequency decay claim are unchanged.",
+    "post_sha256": "b7bf39d3287165a66308bc356556fa7d4ff203fa60de40a1d402fa3649751a34",
+    "status": "repaired_local_checks_passed",
+    "independent_review": false
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_repaired_defect",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "6",
+    "id": "cex-fourier-restriction-is-not-defined-on-lp-equivalence-classes-pointwise",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "e48c3cf682e5a0963f3c476550323c9558b34be0f0b557b42429ebef40abb24b",
+    "severity": "fatal",
+    "defect_type": "logic",
+    "finding": "The null-sphere witness is valid: G equals the Schwartz transform ambient almost everywhere and differs by one on every sphere point. However the last step and explanatory ending asserted a bounded restriction extension for arbitrary 1<p<2 without a restriction estimate. Both now state the required bound explicitly and cite the exact conditional duality interface. The core refuted claim and witness remain intact; neither Hausdorff-Young nor density alone is used to infer restriction boundedness.",
+    "post_sha256": "b82930b0e3311c08f33f4e4ddf3cde0601b7b99e342e8ff0f1bfe532ca5234a6",
+    "status": "repaired_local_checks_passed",
+    "independent_review": false
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_repaired_defect",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "6",
+    "id": "thm-knapp-necessary-condition-for-spherical-ltwo-restriction",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "888a0f97c7083274b31b3772eaaaf5a2fb43965327eb0c25287e5fec9ad9ea65",
+    "severity": "fatal",
+    "defect_type": "dependency_citation",
+    "finding": "F3 used the existential concentration interface as though it guaranteed the prescribed numeric box. Chose a witness a_n from the actual Statement and set c_n=a_n/sqrt(n-1), explicitly proving tangential and normal containment. Cap measure and box volume yield the same exponent obstruction for every finite q; p=1 is automatic, finite p>1 follows by duality, and compact smooth norm tests rule out p=infinity. Replaced an unneeded monotone-cutoff assertion with monotone convergence on increasing balls. Statement unchanged. Additional confirmed citation defect: F4 cited integer-power laws for real exponents. Replaced that supplier with the real-power laws, explicit exponential/logarithm definitions and exponential limits. The p=infinity pairing now uses the finite cap measure and a Schwartz frequency cutoff, exactly matching the pairing interface.",
+    "post_sha256": "1197b558f26be9adfc04a67f5ed6ff4c79e93a4652afa5597f9c6c3abdee9287",
+    "status": "repaired_local_checks_passed",
+    "independent_review": false
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_repaired_defect",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "6",
+    "id": "cex-knapp-rules-out-extension-below-the-tomas-exponent",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "6f21fdffab1cd059bbfb9487330f8ff79bd47e2835650416d891830f62becc5e",
+    "severity": "fatal",
+    "defect_type": "dependency_citation",
+    "finding": "The original box constant was not guaranteed by the cited existential tube interface. Retained the cap witness and all exponent claims, chose its box constant from a positive witness a_n, and proved sqrt(n-1)c_n=a_n and c_n<=a_n at step 1.1. The volume remains a positive dimension-dependent multiple of delta^(-(n+1)), so the negative power forces divergence. Finite restriction exponents use the duality hypothesis correctly, and p=infinity uses the assigned Knapp theorem. Also replaced the unsupported attribution of the negative-real-power limit to the Knapp Statement with its explicit exponential/logarithm argument and exact suppliers.",
+    "post_sha256": "d68530c15981bc535918f9d489ca57aa4cb7595eaf67a4148180144c3b4b75f1",
+    "status": "repaired_local_checks_passed",
+    "independent_review": false
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "propose_closed_repaired_defect",
+    "run": "frontier-38-owner-30",
+    "phase": "initial",
+    "round": 1,
+    "unit": "6",
+    "id": "ex-knapp-cap-and-tube-volume-calculation",
+    "model": "gpt-6.1-sol",
+    "context_sha256": "901c89bf43aefe11f958ae03c347a35f5f8c08ddf7c36828cd95ecee2c6e9d8e",
+    "severity": "fatal",
+    "defect_type": "dependency_citation",
+    "finding": "The example fixed every 0<c<=1/(100sqrt(n-1)), whereas the cited Statement gives only an unspecified tube constant. Preserved that full range and derived its concentration directly: |x prime|<=delta^(-1)/100, |omega prime|<=sqrt(2)delta and |omega_n-1|<=delta squared yield |2pi x dot (omega-e_n)|<1/2. The cosine lower bound integrates to sigma(cap)/2. Exact cap integral, equator caveat at delta=1, box volume, norm powers and q=infinity lower bound remain valid.",
+    "post_sha256": "05a2b64947cd799094d4c6757b69a4112f9ab9e46d25920776717ebc27ab3b4b",
+    "status": "repaired_local_checks_passed",
+    "independent_review": false
+  },
+  {
+    "ledger": "research/published-consumer-supplier-ledger.md",
+    "action": "no_update",
+    "reason": "The changed operator Definition has nine current direct item consumers, all draft members of the frozen frontier. Their exact mathematical uses were inspected and remain sound. No potentially defective published or outside consumer was discovered in this supplier event."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "def-dot-action-facets-and-single-wall-translation-data",
+    "severity": "nonfatal",
+    "status": "repaired",
+    "finding": "Corrected the false subgroup inequality: S_mu=W_mu=W in rank one and S_mu is proper in higher rank. Real wall-sign conventions, the codimension-one datum, integral translating weight, and its dominant representative remain valid. Examined all four direct item consumers and the owning page; none uses the removed inequality."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "thm-category-o-has-enough-projectives",
+    "severity": "nonfatal",
+    "status": "repaired",
+    "finding": "Qualified extension closure by h-semisimplicity and removed unused length-additivity prose. The projective onto each simple splits off a cover in its linkage class. Along a finite composition series, lifting each top simple cover and adding the preceding epimorphism gives a surjection from a finite sum of covers. Zero uses the empty sum. Statement unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-hom-from-projectives-counts-simple-composition-factors",
+    "severity": "fatal",
+    "defect_type": "dependency_citation",
+    "status": "repaired",
+    "finding": "Jordan–Hölder now supplies series independence; concatenation proves additivity. Every map from the cover to a simple factors through its unique head; the cyclic highest line gives End(L)=C. Exact projective Hom and induction give finite-dimensional Hom and the composition-factor count. Statement unchanged; no new prerequisite item."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "lem-hom-to-costandards-counts-verma-flag-factors",
+    "severity": "fatal",
+    "defect_type": "dependency_citation",
+    "status": "repaired",
+    "finding": "Explicitly verified the long-exact theorem hypotheses: O is abelian with enough projectives and injectives, AC supplies resolutions on a set-sized skeleton, and AC implies DC. At each flag step the fourth and sixth Ext terms vanish, so the middle Ext term vanishes and Hom dimensions add. This proves both formulas for all labels. Statement unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "id": "cor-injectives-have-costandard-filtrations",
+    "severity": "fatal",
+    "defect_type": "dependency_citation",
+    "status": "repaired",
+    "finding": "The finite-length and abelian-category theorems now discharge the decomposition lemma hypotheses. Exact duality reverses each Verma flag into a costandard flag; BGG gives its multiplicities. Each indecomposable injective dualizes to a projective cover of its simple head. Concatenating the finite summand flags includes zero. Statement unchanged."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "proposed_append",
+    "defect_id": "frontier-38-owner-30-step7-initial-r1-u8-lem-bruhat-covers-are-reflection-covers",
+    "run": "frontier-38-owner-30",
+    "subject": "lem-bruhat-covers-are-reflection-covers",
+    "caught_at_stage": "7.1-adjudicate",
+    "caught_by_role": "alpha-adjudicate",
+    "severity": "nonfatal",
+    "disposition": "fixed",
+    "outcome": "confirmed_nonfatal",
+    "item_sha256": "539626b9476e84bd3e616de2bf98e9d8de79f53818244b8ff25a96b11e2383c3",
+    "reason": "F2 is false for negative roots (w=e, gamma=-alpha). Added gamma in Phi+; step 1.1 already chooses gamma positive, and the converse uses beta positive. Reflection conjugation, reduced-root uniqueness and the saturated-chain length argument prove the unchanged statement. No conclusion relied on the false negative-root extension.",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true,
+    "evidence": [
+      {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u8.json",
+        "anchor": "decisions/lem-bruhat-covers-are-reflection-covers"
+      }
+    ]
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "proposed_append",
+    "defect_id": "frontier-38-owner-30-step7-initial-r1-u8-lem-dominant-integral-dot-translates-embed-in-the-verma-module",
+    "run": "frontier-38-owner-30",
+    "subject": "lem-dominant-integral-dot-translates-embed-in-the-verma-module",
+    "caught_at_stage": "7.1-adjudicate",
+    "caught_by_role": "alpha-adjudicate",
+    "severity": "nonfatal",
+    "disposition": "fixed",
+    "outcome": "confirmed_nonfatal",
+    "item_sha256": "9dc480138503001012ce5564f4948a7fba0981f0becf8dfa35515a8d70d43861",
+    "reason": "F5 wrongly included negative roots; beta=-alpha and u=s_alpha contradict it. Restored beta in Phi+ and explicitly chose the positive representative of every reflection in F6 and step 1.2. The reduced-word induction pairs with the positive simple root; in each Bruhat descent, v_j inverse alpha_j is the negative of v_(j-1) inverse alpha_j and hence positive. Thus the arbitrary-positive-root embedding theorem applies at every step. One-dimensional Hom spaces and the universal property give unique singular-vector images and nested submodules. Removed the unused AC-dependent iff homomorphism criterion: the constructive embeddings prove the required forward implication without it. Statement is unchanged.",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true,
+    "evidence": [
+      {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u8.json",
+        "anchor": "decisions/lem-dominant-integral-dot-translates-embed-in-the-verma-module"
+      }
+    ]
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "proposed_append",
+    "defect_id": "frontier-38-owner-30-step7-initial-r1-u8-lem-bruhat-covers-give-unique-verma-embeddings",
+    "run": "frontier-38-owner-30",
+    "subject": "lem-bruhat-covers-give-unique-verma-embeddings",
+    "caught_at_stage": "7.1-adjudicate",
+    "caught_by_role": "alpha-adjudicate",
+    "severity": "fatal",
+    "disposition": "fixed",
+    "outcome": "confirmed_fatal",
+    "item_sha256": "1984dfcb4735d5f7facb1ef96f20cf49379e9d1771e6fd48c78ea931b98ea717",
+    "reason": "F1 attributed a simultaneous normalization to a supplier whose interface establishes nested images and one-dimensional Hom spaces. Proportionality alone cannot prove equality of abstract maps: scaling one diamond edge scales only one composite. Replaced that imported normalization by a local construction: fix j_w into M(lambda), j_e=id, and define iota_(u,v)=j_v inverse j_u for every comparable pair. Nested images make it well-defined, and j_y times either diamond composite equals j_x; injectivity of j_y proves equality. The final step proves all comparable triple compositions agree and explicitly records the dependence of abstract-copy normalization on j_w. The literal canonical-submodule inclusions and original Statement remain unchanged.",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true,
+    "evidence": [
+      {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u8.json",
+        "anchor": "decisions/lem-bruhat-covers-give-unique-verma-embeddings"
+      }
+    ],
+    "defect_type": "dependency_citation"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "proposed_append",
+    "defect_id": "frontier-38-owner-30-step7-initial-r1-u8-thm-weak-bgg-resolution",
+    "run": "frontier-38-owner-30",
+    "subject": "thm-weak-bgg-resolution",
+    "caught_at_stage": "7.1-adjudicate",
+    "caught_by_role": "alpha-adjudicate",
+    "severity": "fatal",
+    "disposition": "fixed",
+    "outcome": "confirmed_fatal",
+    "item_sha256": "cc3407b3a3fc2ee57e85c19c4f22f843e6003a3e7547d3fc8c84c82d41d3919a",
+    "reason": "The typed-cut Statement supplies filtration types, not exactness on all O-objects. Added thm-category-o-decomposes-by-generalized-central-character as the exact F3 prerequisite and direct dependency. Its Statement asserts exact projections, and its Proof 2.1 verifies surjectivity by lifting a character-component vector and taking the matching component of the lift. Thus projection preserves the tensored resolution; scalar central action fixes its final term. The type calculation is sound: a surviving pair gives u inverse nu=lambda+sum Pi_(u inverse w), whereas every finite-dimensional weight is below lambda; pointedness forces the sum empty, u=w and nu=w lambda. Extremal multiplicity one and regularity yield the stated type, including lambda=0 and rank zero. Statement unchanged; no new lemma is needed.",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true,
+    "evidence": [
+      {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u8.json",
+        "anchor": "decisions/thm-weak-bgg-resolution"
+      }
+    ],
+    "defect_type": "dependency_citation"
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "proposed_append",
+    "defect_id": "frontier-38-owner-30-step7-initial-r1-u8-lem-n-minus-coinvariants-map-injectively-into-the-kernel-of-the-differential",
+    "run": "frontier-38-owner-30",
+    "subject": "lem-n-minus-coinvariants-map-injectively-into-the-kernel-of-the-differential",
+    "caught_at_stage": "7.1-adjudicate",
+    "caught_by_role": "alpha-adjudicate",
+    "severity": "nonfatal",
+    "disposition": "fixed",
+    "outcome": "confirmed_nonfatal",
+    "item_sha256": "818301f35441fa1ca877ca5877937e6ab55c8fe15185e4046c1e0cc304cb9b0a",
+    "reason": "The old title said onto the kernel, exceeding the injectivity-only Statement and proof. Corrected the title to an injection into kernel coinvariants. PBW identifies one distinct-weight coinvariant generator per degree-(k+1) summand; every such generator has a nonzero differential component along a simple descent. Square-zero puts that image in ker d_k. The kernel-factor supplier proves its length bound by comparing finite Jordan-Holder multisets with the weak resolution, and the highest-weight-survival supplier proves nonvanishing modulo n-minus by finite-length induction. Its hypotheses apply with threshold k+1, so distinct-weight images are independent. For an empty next layer the zero domain is injective. No surjectivity is asserted or proved here; the page correctly reserves it for the later dimension count. Statement and proof unchanged.",
+    "uncertain": false,
+    "source_urls": [],
+    "familiar": true,
+    "evidence": [
+      {
+        "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u8.json",
+        "anchor": "decisions/lem-n-minus-coinvariants-map-injectively-into-the-kernel-of-the-differential"
+      }
+    ]
+  },
+  {
+    "ledger": "research/published-consumer-supplier-ledger.md",
+    "action": "no_update",
+    "reason": "No defective published consumer was found in this batch. All six assigned Statements are byte-preserved, so these proof, citation and title repairs trigger no supplier-interface propagation or outside-consumer maintenance."
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "row": {
+      "defect_id": "frontier-38-owner-30-step7-initial-r1-u9-1",
+      "run": "frontier-38-owner-30",
+      "at": "2026-10-03T16:25:13.511315+00:00",
+      "class": "accuracy",
+      "subclass": "invalid-inference",
+      "severity": "fatal",
+      "location": "proof-step",
+      "subject": "thm-robinson-schensted-correspondence",
+      "caught_at_stage": "6-judge",
+      "caught_by_role": "judge-sol",
+      "disposition": "fixed",
+      "description": "Step 2.1 establishes insertion after deletion, which alone does not imply injectivity. Step 3.1 omitted deletion after insertion. Added the missing direction of the existing inverse lemma to F4 and proved recovery of the original word by descending induction through the recording labels. No Statement change.",
+      "repair": "Checked both parts of the inverse lemma and its complete local proof, insertion standardness and entry preservation, recording standardness, and the largest-label corner lemma. F4 and step 3.1 now recover each original letter; step 2.1 restores arbitrary pairs and step 3.2 verifies the recovered alphabet. Intermediate tableaux explicitly use the distinct-alphabet convention. Empty n=0 is explicit. This is a local repair review, not an independent audit of the repair.",
+      "locator": "Proof 3.1 and F4",
+      "adjudication_ref": [
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json",
+          "id": "thm-robinson-schensted-correspondence",
+          "model": "gpt-6.1-sol",
+          "context_sha256": "15f393c8643d09c83bdcf9d62ed953869dbb9d9f7ddfce385c85aa5d879ef272",
+          "phase": "initial",
+          "round": 1,
+          "unit": "9"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "items/thm-robinson-schensted-correspondence.md",
+          "post_sha256": "cbb0a794244e2b48413d6fa4321f123b1751f0a503f1adc452cf913f46adb55a"
+        },
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json"
+        }
+      ],
+      "prevention": {
+        "kind": "brief",
+        "ref": "briefs/step7-adjudicator.md"
+      }
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "row": {
+      "defect_id": "frontier-38-owner-30-step7-initial-r1-u9-2",
+      "run": "frontier-38-owner-30",
+      "at": "2026-10-03T16:25:13.511315+00:00",
+      "class": "accuracy",
+      "subclass": "citation-misattributed",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "subject": "ex-empty-and-singleton-rsk-boundaries",
+      "caught_at_stage": "6-judge",
+      "caught_by_role": "judge-sol",
+      "disposition": "fixed",
+      "description": "L4 cites the hook-length theorem and hook definition for the general removal recursion, but their Statement/Definition interfaces do not supply that recursion. The boundary counts themselves are correct and already computed directly. Replaced the theorem citation in L4 by the existing removal-recursion lemma and declared the direct dependency; its n>=1 restriction and empty-tableau exception exactly match the example.",
+      "repair": "Read the removal-recursion lemma and its complete deletion/extension bijection proof, the hook definition and formula, and the repaired correspondence. Verified empty and singleton insertion directly, hook products 1, factorial values 1, absence of a removable empty node, and the single singleton corner. L4 now cites the exact recursion supplier; no Example, Statement, or Definition change and no choice use.",
+      "locator": "Facts L4",
+      "adjudication_ref": [
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json",
+          "id": "ex-empty-and-singleton-rsk-boundaries",
+          "model": "gpt-6.1-sol",
+          "context_sha256": "570c722a7506936b4a3ab33d5dbefb7a95214a518291f425ac9585c7acc73d60",
+          "phase": "initial",
+          "round": 1,
+          "unit": "9"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "items/ex-empty-and-singleton-rsk-boundaries.md",
+          "post_sha256": "56888115d9b0fa664260ea616d8f9b9fbb75313e0f1ecd1b06994a3686eba606"
+        },
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json"
+        }
+      ],
+      "prevention": {
+        "kind": "brief",
+        "ref": "briefs/step7-adjudicator.md"
+      }
+    }
+  },
+  {
+    "ledger": "research/defect-ledger.jsonl",
+    "action": "append",
+    "row": {
+      "defect_id": "frontier-38-owner-30-step7-initial-r1-u9-3",
+      "run": "frontier-38-owner-30",
+      "at": "2026-10-03T16:25:13.511315+00:00",
+      "class": "accuracy",
+      "subclass": "citation-inaccurate",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "subject": "ex-rsk-insertion-and-reverse-deletion",
+      "caught_at_stage": "6-judge",
+      "caught_by_role": "judge-sol",
+      "disposition": "fixed",
+      "description": "L3 incorrectly says reverse deletion moves downward, contradicting the supplied definition, which visits s,s-1,...,1. The concrete deletion computations in steps 5.1 and 6.1 already move upward and are correct. Corrected L3 and made both inverse directions explicit. Also repaired the compressed third insertion in 1.1: 1 bumps 4 in row 1, which bumps 6 in row 2 before 6 appends in row 3.",
+      "repair": "Manually checked the cycle-to-word conversion (6,4,1,2,5,3), all six insertion tableaux and recording positions, and each reverse deletion using the supplied row rules. The new boxes are (1,1),(2,1),(3,1),(1,2),(1,3),(2,2); deleting labels 6,...,1 expels 3,5,2,1,4,6 and restores each previous pair. Corrected only L3, the third insertion explanation, and proof provenance; the displayed Example is unchanged.",
+      "locator": "Facts L3; Verification 1.1",
+      "adjudication_ref": [
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json",
+          "id": "ex-rsk-insertion-and-reverse-deletion",
+          "model": "gpt-6.1-sol",
+          "context_sha256": "f1c80c61913abe4e36e0761054ed0f4cb739e6d3f4e8027713f7c6f8186327eb",
+          "phase": "initial",
+          "round": 1,
+          "unit": "9"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "items/ex-rsk-insertion-and-reverse-deletion.md",
+          "post_sha256": "29a197316f4c6e6e40b42b628b708148b23bfcece81501f9a41e6354b0772c52"
+        },
+        {
+          "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json"
+        }
+      ],
+      "prevention": {
+        "kind": "brief",
+        "ref": "briefs/step7-adjudicator.md"
+      }
+    }
+  }
+]
+
+For gate repair, also return gate_resolutions:[{index,reason,uncertain:false,source_urls:[],familiar:true}] for every diagnostic assigned to your unit, even when it names no item. Diagnose and repair its metadata or tool failure; an empty item assignment does not excuse a gate failure.
+
+Empty assignments return empty arrays. For every changed Statement/Definition, put every direct dependency/reference consumer in downstream, including consumers whose examined uses remain sound and consumers already covered by an assigned review. The array is an examination inventory, not a list of items to edit. Record each exact affected use and disposition in the report; proof-only intermediate repairs do not restart propagation. For a consumer absent from the dependency/reference graph, include downstream_uses:{ID:"exact affected mathematical use, at least 40 characters"}. Outside consumers go to separate maintenance.
+
+Assigned input:
+[
+  "lem-normality-local-on-affine-opens",
+  "thm-normalization-universal-property",
+  "def-normalization-affine-variety",
+  "def-unibranch-point-classical",
+  "ex-normal-affine-space",
+  "lem-conductor-ideal-common-ideal",
+  "ex-normalization-cusp",
+  "lem-finite-birational-to-normal-is-isomorphism",
+  "cex-bijective-birational-not-isomorphism-cusp-reprise",
+  "def-regular-oriented-link-diagram",
+  "def-oriented-reidemeister-moves",
+  "lem-each-oriented-reidemeister-move-is-realized-by-ambient-isotopy",
+  "lem-markov-moves-preserve-oriented-closure-isotopy",
+  "ex-a-markov-stabilization-preserves-the-unknot-closure",
+  "lem-every-oriented-link-admits-a-regular-projection",
+  "lem-a-smooth-isotopy-of-links-can-be-put-in-general-position",
+  "lem-a-generic-isotopy-of-links-has-only-reidemeister-singular-times",
+  "thm-oriented-reidemeister-equivalence-theorem",
+  "lem-braid-like-moves-can-be-moved-to-height-zero",
+  "lem-ordinary-exchange-moves-are-markov-sequences",
+  "lem-reducing-move-peaks-can-be-lowered-to-the-four-band-case",
+  "lem-compensated-band-kinks-decompose-into-ordinary-markov-moves",
+  "lem-band-exchanges-decompose-into-ordinary-markov-moves",
+  "lem-the-first-four-band-comparison-is-a-compensated-band-stabilization",
+  "lem-the-second-four-band-comparison-is-a-compensated-band-destabilization",
+  "lem-the-four-band-d-pair-case-is-a-markov-sequence",
+  "lem-reidemeister-moves-between-closed-braid-diagrams-factor-through-markov-moves",
+  "thm-markovs-closed-braid-equivalence-theorem",
+  "cex-conjugacy-alone-does-not-classify-braid-closures",
+  "lem-restriction-and-extension-estimates-are-dual",
+  "cex-fourier-restriction-is-not-defined-on-lp-equivalence-classes-pointwise",
+  "def-oriented-intersection-number",
+  "cex-geometric-cardinality-is-not-homotopy-invariant",
+  "lem-cap-wave-packet-has-dual-tube-concentration",
+  "cex-knapp-rules-out-extension-below-the-tomas-exponent",
+  "rem-properness-can-replace-compactness-only-when-the-intersection-trace-is-compact",
+  "cex-noncompact-intersections-can-escape-during-a-homotopy",
+  "cex-normal-not-smooth-quadric-cone"
+]
+
+

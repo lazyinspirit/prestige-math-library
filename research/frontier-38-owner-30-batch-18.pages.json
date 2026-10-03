@@ -1,0 +1,566 @@
+[
+  {
+    "order": 801,
+    "id": "frobenius-characteristic-and-the-symmetric-group-character-dictionary",
+    "kind": "A",
+    "category": "representation-theory",
+    "title": "Frobenius Characteristic and the Symmetric-Group Character Dictionary",
+    "companion": "frobenius-characteristic-and-the-symmetric-group-character-dictionary-examples",
+    "requires": [
+      "symmetric-functions-hall-inner-product-and-schur-bases",
+      "specht-modules-and-the-irreducibles-of-the-symmetric-group",
+      "characters-and-the-orthogonality-relations",
+      "the-branching-rule-and-the-young-graph"
+    ],
+    "items": [
+      {
+        "id": "def-graded-ordinary-representation-ring-of-symmetric-groups",
+        "kind": "definition",
+        "title": "The graded ordinary representation ring of the symmetric groups",
+        "deps": [
+          "def-virtual-character-and-character-ring-of-a-finite-group",
+          "def-finite-symmetric-group-and-permutation-notation"
+        ],
+        "statement": "For $n\\ge0$ let $R(S_n)$ be the character ring of the finite group $S_n$, the\n$\\mathbb Z$-span of its irreducible complex characters\n([[def-virtual-character-and-character-ring-of-a-finite-group]]), so that\n$R(S_0)=\\mathbb Z\\cdot\\mathbf 1$ for the trivial group $S_0=\\{1\\}$\n([[def-finite-symmetric-group-and-permutation-notation]]). The **graded\nordinary representation ring of the symmetric groups** is the direct sum\n\n$$R_S:=\\bigoplus_{n\\ge0}R(S_n),$$\n\nthe abelian group of finitely supported tuples $(f_n)_{n\\ge0}$ with\n$f_n\\in R(S_n)$ and componentwise addition; an element $f\\in R(S_n)$ is\n**homogeneous of degree** $n$, and the degree-$n$ component of an element\n$f=\\sum_nf_n$ of $R_S$ is $f_n$. This item defines only the graded abelian\ngroup and its degree decomposition: the multiplication used on $R_S$ is the\nouter induction product of\n[[def-outer-induction-product-for-symmetric-group-characters]], not the\ntensor-product multiplication inside a single $R(S_n)$, and no ring axioms for\nthe outer product are assumed here. We write\n\n$$R_{S,\\mathbb Q}:=\\mathbb Q\\otimes_{\\mathbb Z}R_S,\\qquad R_{S,\\mathbb C}:=\\mathbb C\\otimes_{\\mathbb Z}R_S$$\n\nfor the scalar extensions. No choice principle is used.",
+        "strategy": "Assemble the published character rings degreewise; elements have finite support by definition of the direct sum, so no completion or infinite sum is introduced. Distinguish the outer product from the internal tensor product in every later item.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, \u00a76 and \u00a716",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-outer-induction-product-for-symmetric-group-characters",
+        "kind": "definition",
+        "title": "The outer induction product of symmetric-group characters",
+        "deps": [
+          "def-graded-ordinary-representation-ring-of-symmetric-groups",
+          "def-induced-character-of-a-complex-representation",
+          "def-external-direct-product-of-groups",
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "def-tensor-product-of-complex-representations",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions"
+        ],
+        "statement": "For $m,n\\ge0$, $S_m$ is the symmetric group of $\\{1,\\dots,m\\}$,\nwith $S_0=\\{1\\}$\n([[def-young-subgroup-tabloid-and-permutation-module]]). Identify\n$S_m\\times S_n$ ([[def-external-direct-product-of-groups]]) with the subgroup\nof $S_{m+n}$ preserving each of the two blocks: the first factor acts on\n$\\{1,\\dots,m\\}$ and the second on $\\{m+1,\\dots,m+n\\}$, so that\n$(\\sigma,\\tau)$ acts as $\\sigma$ on the first block and as $\\tau$ on the\nsecond after shifting its labels by $m$. Either block may be empty; its\nsymmetric group is trivial. These actions give an injective homomorphism,\nand every permutation preserving the blocks has a unique pair of restrictions,\nso its image is exactly the stated subgroup. For honest characters $\\chi$ of $S_m$ and $\\psi$ of $S_n$, let\n$\\chi\\boxtimes\\psi$ be the character of $S_m\\times S_n$ on the tensor product\n$V\\otimes_{\\mathbb C}W$ of representations affording $\\chi$ and $\\psi$, with\n$(\\sigma,\\tau)\\cdot(v\\otimes w):=\\sigma v\\otimes\\tau w$, so that\n\n$$(\\chi\\boxtimes\\psi)(\\sigma,\\tau)=\\chi(\\sigma)\\psi(\\tau)$$\n\n([[def-tensor-product-of-complex-representations]],\n[[thm-characters-of-direct-sums-tensor-products-and-duals]]).\n\nEvery virtual character $f\\in R(S_m)$ is an integral combination\n$f=\\sum_ia_i\\chi_i$ of the irreducible characters $\\chi_i$ of $S_m$\n([[def-virtual-character-and-character-ring-of-a-finite-group]]), and the\ncoefficients $a_i$ are unique because the irreducible characters of a finite\ngroup are orthonormal, hence $\\mathbb Z$-linearly independent, in\n$\\mathrm{cf}(S_m)$\n([[thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions]]).\nSo for $f=\\sum_ia_i\\chi_i$ and $g=\\sum_jb_j\\psi_j$ we may set\n\n$$f\\boxtimes g:=\\sum_{i,j}a_ib_j\\,(\\chi_i\\boxtimes\\psi_j)\\in R(S_m\\times S_n),$$\n\nan integral combination of honest characters of $S_m\\times S_n$. Its value at\n$(\\sigma,\\tau)$ is $f(\\sigma)g(\\tau)$ by the displayed character formula,\nand uniqueness of the coefficients makes $f\\boxtimes g$ well defined. The assignment\nis $\\mathbb Z$-bilinear in $(f,g)$. The **outer induction product** is\n\n$$f\\circ g:=\\sum_{i,j}a_ib_j\\,\\operatorname{Ind}_{S_m\\times S_n}^{S_{m+n}}\\bigl(\\chi_i\\boxtimes\\psi_j\\bigr)\\in R(S_{m+n}),$$\n\nthe induction of honest characters in the sense of\n[[def-induced-character-of-a-complex-representation]]. The trivial character\nof $S_0$ is the unit of degree zero. This is the outer product, defined across\ndifferent symmetric groups; the same-rank tensor product $f\\cdot g$ on a single\n$R(S_n)$ is a different operation, and the two are never conflated. No choice\nprinciple is used.",
+        "strategy": "The external tensor product is a representation of the direct product because each factor acts on its own tensor slot; its character is the product of the two characters by [[thm-characters-of-direct-sums-tensor-products-and-duals]]. Bilinearity of the extension to virtual characters follows from additivity of characters and of induction. The explicit value formula for the induced character is supplied by [[thm-frobenius-formula-for-induced-characters]] and is used in [[lem-frobenius-characteristic-preserves-outer-products]]. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, \u00a76 and \u00a716",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-complete-homogeneous-expansion-in-power-sums",
+        "kind": "lemma",
+        "title": "Complete homogeneous functions expand in power sums with cycle-distribution coefficients",
+        "deps": [
+          "def-stable-graded-ring-of-symmetric-functions",
+          "thm-elementary-and-complete-families-freely-generate-the-stable-ring",
+          "def-power-sum-and-complete-homogeneous-symmetric-polynomials",
+          "prop-power-sums-form-a-rational-not-integral-stable-basis",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "cor-power-sums-are-orthogonal-for-the-hall-inner-product"
+        ],
+        "statement": "Work in $\\Lambda_{\\mathbb Q}=\\mathbb Q\\otimes_{\\mathbb Z}\\Lambda$. For a\npartition $\\rho$ write\n$m_i(\\rho):=\\#\\{j:\\rho_j=i\\}$ and\n$z_\\rho:=\\prod_{i\\ge1}i^{m_i(\\rho)}m_i(\\rho)!$\n([[def-partition-young-diagram-and-conjugate-partition]],\n[[def-power-sum-and-complete-homogeneous-symmetric-polynomials]]).\n\nFor partitions $\\lambda$ and $\\rho$ of the same integer, let $N(\\lambda,\\rho)$\nbe the number of ways to distribute the cycles of a permutation $w$ of cycle\ntype $\\rho$ among the $\\ell(\\lambda)$ rows, labelled $1,\\dots,\\ell(\\lambda)$,\nso that row $j$ receives cycles whose lengths sum to $\\lambda_j$. Cycles of\nequal length count as **distinct** here, because they are distinct cycles of\n$w$; equivalently,\n\n$$N(\\lambda,\\rho)=\\sum_{(m_i^{(j)})}\\ \\prod_{i\\ge1}\\frac{m_i(\\rho)!}{\\prod_j m_i^{(j)}!},$$\n\nthe sum over all matrices $(m_i^{(j)})$ of nonnegative integers with\n$\\sum_j m_i^{(j)}=m_i(\\rho)$ for every $i$ and\n$\\sum_i i\\,m_i^{(j)}=\\lambda_j$ for every $j$; each summand is the product\nover $i$ of the number of ways to assign the $m_i(\\rho)$ labelled cycles of\nlength $i$ to rows with the prescribed multiplicities $m_i^{(j)}$, so\n$N(\\lambda,\\rho)$ is a nonnegative integer. Then\n\n$$h_\\lambda=\\sum_{\\rho\\vdash|\\lambda|}N(\\lambda,\\rho)\\,\\frac{p_\\rho}{z_\\rho}\\qquad\\text{in }\\Lambda_{\\mathbb Q}.$$\n\nIn particular $h_d=\\sum_{\\rho\\vdash d}p_\\rho/z_\\rho$ for every $d\\ge0$.",
+        "strategy": "In finite rank $N$, the geometric-series identity $\\sum_{d\\ge0}h_d(x_1,\\dots,x_N)t^d=\\prod_{i=1}^N(1-x_it)^{-1}=\\exp\\bigl(\\sum_{k\\ge1}p_k(x_1,\\dots,x_N)t^k/k\\bigr)$ holds in $\\mathbb Z[x_1,\\dots,x_N]\\otimes\\mathbb Q[\\![t]\\!]$; expanding the exponential gives $h_d=\\sum_{\\rho\\vdash d}p_\\rho/z_\\rho$ at rank $N$, because the coefficient of $t^d$ collects one factor $p_k t^k/k$ per cycle and the multinomial factor $1/m_k!$ per cycle length. Every rank projection agrees and both sides are compatible under setting the last variable to zero, so the identity passes to the stable ring $\\Lambda_{\\mathbb Q}^d$ by [[def-stable-graded-ring-of-symmetric-functions]]. Multiplying the one-row identities for the parts $\\lambda_j$, expanding the finite product, and collecting the coefficient of $p_\\rho$ gives $$\\prod_j\\Bigl(\\sum_{\\rho^{(j)}\\vdash\\lambda_j}\\frac{p_{\\rho^{(j)}}}{z_{\\rho^{(j)}}}\\Bigr)=\\sum_\\rho \\frac{N(\\lambda,\\rho)}{z_\\rho}\\,p_\\rho,$$ using $z_\\rho/(\\prod_j z_{\\rho^{(j)}})=\\prod_i m_i(\\rho)!/(\\prod_j m_i^{(j)}!)$, which is exactly the number of ways to merge the row cycle-multisets with given type counts. The displayed $N(\\lambda,\\rho)$ therefore is the coefficient. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-frobenius-characteristic-map",
+        "kind": "definition",
+        "title": "The Frobenius characteristic map",
+        "deps": [
+          "def-class-function-and-the-space-of-complex-class-functions",
+          "prop-power-sums-form-a-rational-not-integral-stable-basis",
+          "cor-power-sums-are-orthogonal-for-the-hall-inner-product",
+          "thm-centralizer-cardinality-from-cycle-type",
+          "cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types",
+          "def-finite-symmetric-group-and-permutation-notation"
+        ],
+        "statement": "Fix $n\\ge0$ and let $\\mathrm{cf}(S_n)$ be the complex vector space of class\nfunctions on $S_n$\n([[def-class-function-and-the-space-of-complex-class-functions]]). For\n$f\\in\\mathrm{cf}(S_n)$ and a partition $\\rho\\vdash n$ let $f(\\rho)$ denote the\ncommon value of $f$ on permutations of cycle type $\\rho$, which is well defined\nbecause cycle type determines the conjugacy class\n([[cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types]]). Let\n\n$$z_\\rho:=\\prod_{i\\ge1}i^{m_i(\\rho)}m_i(\\rho)!,$$\n\nwhere $m_i(\\rho)$ is the number of parts of $\\rho$ equal to $i$; this is the\norder of the centralizer of an element of cycle type $\\rho$\n([[thm-centralizer-cardinality-from-cycle-type]]), so $z_\\rho$ is a positive\ninteger. The **Frobenius characteristic** of $f$ is\n\n$$\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}\\in\\Lambda_{\\mathbb C}^n,\\qquad \\Lambda_{\\mathbb C}:=\\mathbb C\\otimes_{\\mathbb Z}\\Lambda .$$\n\nThe sum is finite and well defined because $\\{p_\\rho:\\rho\\vdash n\\}$ is a\n$\\mathbb Q$-basis of $\\Lambda_{\\mathbb Q}^n$\n([[prop-power-sums-form-a-rational-not-integral-stable-basis]]); equivalently\nthe family $\\{p_\\rho/z_\\rho:\\rho\\vdash n\\}$ is a $\\mathbb Q$-basis of\n$\\Lambda_{\\mathbb Q}^n$ and is orthogonal for the Hall form, with\n$\\langle p_\\rho/z_\\rho,p_\\sigma/z_\\sigma\\rangle_H=\\delta_{\\rho\\sigma}/z_\\rho$\n([[cor-power-sums-are-orthogonal-for-the-hall-inner-product]]). The codomain is\n$\\Lambda_{\\mathbb C}$, not $\\Lambda_{\\mathbb Q}$: for an arbitrary complex class\nfunction the coefficients $f(\\rho)/z_\\rho$ are complex. If all values of $f$\nlie in $\\mathbb Q$, then $\\operatorname{ch}(f)\\in\\Lambda_{\\mathbb Q}^n$; the\ndictionary theorems proved later on this page show that every virtual character\nof $S_n$ is rational-valued, and in fact integral-valued, so that its\ncharacteristic lies in the integral lattice $\\Lambda^n$.\n\nWriting $\\mathrm{cf}_S:=\\bigoplus_{n\\ge0}\\mathrm{cf}(S_n)$, the map\n$\\operatorname{ch}:\\mathrm{cf}_S\\to\\Lambda_{\\mathbb C}$ is defined degreewise by\nthe displayed formula on each $\\mathrm{cf}(S_n)$. It is $\\mathbb C$-linear on\neach summand, because evaluation $f\\mapsto f(\\rho)$ and scalar multiplication\nare linear. Its restriction to the character ring\n$R_S=\\bigoplus_{n\\ge0}R(S_n)$ is the Frobenius characteristic dictionary\nstudied in the remaining items of this page. No choice principle is used.",
+        "strategy": "The codomain is $\\Lambda_{\\mathbb C}$, not $\\Lambda_{\\mathbb Q}$: for an arbitrary complex class function the coefficients $f(\\rho)/z_\\rho$ are complex. Rational-valued class functions land in $\\Lambda_{\\mathbb Q}$, and the integrality $\\operatorname{ch}(R(S_n))\\subseteq\\Lambda^n$ is a theorem proved later, never assumed. Evaluate on the conjugacy-class representatives indexed by cycle types.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, \u00a76 and \u00a716",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            },
+            {
+              "title": "Peter Webb, A Course in Finite Group Representation Theory, \u00a7\u00a73.2 and 4.3",
+              "url": "https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-frobenius-characteristic-is-an-isometry",
+        "kind": "lemma",
+        "title": "The Frobenius characteristic is an isometry",
+        "deps": [
+          "def-frobenius-characteristic-map",
+          "def-class-function-and-the-space-of-complex-class-functions",
+          "def-standard-inner-product-on-complex-class-functions",
+          "def-hall-inner-product-on-symmetric-functions",
+          "cor-power-sums-are-orthogonal-for-the-hall-inner-product",
+          "thm-centralizer-cardinality-from-cycle-type",
+          "thm-conjugacy-class-cardinality",
+          "cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types"
+        ],
+        "statement": "Extend the Hall form on $\\Lambda$ $\\mathbb Q$-bilinearly to\n$\\Lambda_{\\mathbb Q}$ and then sesquilinearly to\n$\\Lambda_{\\mathbb C}=\\mathbb C\\otimes_{\\mathbb Q}\\Lambda_{\\mathbb Q}$, linear\nin the first argument and conjugate-linear in the second, so that\n$\\langle p_\\rho,p_\\sigma\\rangle_H=\\delta_{\\rho\\sigma}z_\\rho$ for all\npartitions $\\rho,\\sigma$\n([[cor-power-sums-are-orthogonal-for-the-hall-inner-product]],\n[[def-hall-inner-product-on-symmetric-functions]]). For all\n$f,g\\in\\mathrm{cf}(S_n)$,\n\n$$\\langle\\operatorname{ch}(f),\\operatorname{ch}(g)\\rangle_H=\\langle f,g\\rangle_{S_n}=\\frac1{n!}\\sum_{w\\in S_n}f(w)\\overline{g(w)}.$$\n\nConsequently $\\operatorname{ch}$ is injective on $\\mathrm{cf}(S_n)$, and\n$\\langle f,f\\rangle_{S_n}=\\sum_{\\rho\\vdash n}|f(\\rho)|^2/z_\\rho\\ge0$ with\nequality if and only if $f=0$.",
+        "strategy": "Expand both characteristics in the basis $p_\\rho/z_\\rho$ and use $\\langle p_\\rho,p_\\sigma\\rangle_H=\\delta_{\\rho\\sigma}z_\\rho$: the left side is $\\sum_{\\rho}f(\\rho)\\overline{g(\\rho)}/z_\\rho$. Group the defining sum over group elements by conjugacy classes and use $|\\mathrm{Cl}(w)|=n!/z_\\rho$ ([[thm-conjugacy-class-cardinality]], [[thm-centralizer-cardinality-from-cycle-type]]) to obtain the same expression. Positive definiteness of the standard class-function inner product gives injectivity. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "Peter Webb, A Course in Finite Group Representation Theory, \u00a7\u00a73.2 and 4.3",
+              "url": "https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-characteristic-of-a-young-permutation-character-is-complete",
+        "kind": "lemma",
+        "title": "The characteristic of a Young permutation character is complete homogeneous",
+        "deps": [
+          "def-frobenius-characteristic-map",
+          "lem-young-permutation-module-is-induced-from-the-trivial-character",
+          "thm-character-of-a-permutation-representation-counts-fixed-points",
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "lem-complete-homogeneous-expansion-in-power-sums",
+          "thm-elementary-and-complete-families-freely-generate-the-stable-ring"
+        ],
+        "statement": "For every $n\\ge0$ and $\\lambda\\vdash n$, let $\\varphi^\\lambda$ be the character\nof the Young permutation module $M^\\lambda$, the permutation module on\n$\\lambda$-tabloids, so that $M^\\lambda\\cong\\operatorname{Ind}_{S_\\lambda}^{S_n}\\mathbf 1$\n([[lem-young-permutation-module-is-induced-from-the-trivial-character]],\n[[def-young-subgroup-tabloid-and-permutation-module]]). Then\n\n$$\\operatorname{ch}(\\varphi^\\lambda)=h_\\lambda\\in\\Lambda^n,$$\n\nthe product of the complete homogeneous symmetric functions of the parts of\n$\\lambda$.",
+        "strategy": "By [[thm-character-of-a-permutation-representation-counts-fixed-points]], $\\varphi^\\lambda(w)$ is the number of $\\lambda$-tabloids fixed by $w$. A tabloid is a partition of $\\{1,\\dots,n\\}$ into blocks of sizes $\\lambda_1,\\dots,\\lambda_k$ and is fixed by $w$ exactly when every block is $w$-invariant, equivalently a union of cycles of $w$; hence, for $w$ of cycle type $\\rho$, $\\varphi^\\lambda(w)=N(\\lambda,\\rho)$ in the notation of [[lem-complete-homogeneous-expansion-in-power-sums]], the number of ways to distribute the cycles of $w$ among the rows of $\\lambda$. Substituting $f=\\varphi^\\lambda$ into the definition of $\\operatorname{ch}$ and applying that expansion gives $\\operatorname{ch}(\\varphi^\\lambda)=\\sum_\\rho N(\\lambda,\\rho)p_\\rho/z_\\rho=h_\\lambda$. The case $n=0$ is $h_\\varnothing=1$. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, \u00a76 and \u00a716",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-frobenius-characteristic-preserves-outer-products",
+        "kind": "lemma",
+        "title": "The Frobenius characteristic preserves outer products",
+        "deps": [
+          "def-outer-induction-product-for-symmetric-group-characters",
+          "def-frobenius-characteristic-map",
+          "thm-frobenius-formula-for-induced-characters",
+          "prop-power-sums-form-a-rational-not-integral-stable-basis",
+          "thm-centralizer-cardinality-from-cycle-type",
+          "def-virtual-character-and-character-ring-of-a-finite-group"
+        ],
+        "statement": "For all $m,n\\ge0$ and all $f\\in R(S_m)$, $g\\in R(S_n)$,\n\n$$\\operatorname{ch}(f\\circ g)=\\operatorname{ch}(f)\\,\\operatorname{ch}(g)\\qquad\\text{in }\\Lambda_{\\mathbb C}^{m+n},$$\n\nwhere $\\circ$ is the outer induction product of\n[[def-outer-induction-product-for-symmetric-group-characters]] and the\nright-hand side is the algebra product in $\\Lambda_{\\mathbb C}$. If $f$ and\n$g$ are rational-valued, the identity holds in $\\Lambda_{\\mathbb Q}^{m+n}$.",
+        "strategy": "Reduce by bilinearity to honest characters and apply Frobenius induction to H=S_m x S_n preserving the consecutive blocks. The condition x^(-1)wx in H is equivalent to w-invariance of x({1,...,m}); each invariant subset has m!n! lifts. Group the subsets by cycle-type splits rho=mu uplus nu: each split has multiplicity product_i binom(m_i(rho),m_i(mu)). Multiplication of characteristics gives the same coefficient because this multiplicity equals z_rho/(z_mu z_nu). Use the rational power-sum basis proposition and scalar extension to compare coefficients over C, then extend to virtual characters and rational values by bilinearity. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "Peter Webb, A Course in Finite Group Representation Theory, \u00a7\u00a73.2 and 4.3",
+              "url": "https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-frobenius-characteristic-is-an-isometric-graded-ring-isomorphism",
+        "kind": "theorem",
+        "title": "The Frobenius characteristic is an isometric graded ring isomorphism",
+        "deps": [
+          "def-graded-ordinary-representation-ring-of-symmetric-groups",
+          "def-outer-induction-product-for-symmetric-group-characters",
+          "def-frobenius-characteristic-map",
+          "lem-frobenius-characteristic-is-an-isometry",
+          "lem-characteristic-of-a-young-permutation-character-is-complete",
+          "lem-frobenius-characteristic-preserves-outer-products",
+          "thm-elementary-and-complete-families-freely-generate-the-stable-ring",
+          "thm-youngs-rule-for-permutation-modules",
+          "lem-kostka-change-of-basis-is-dominance-unitriangular",
+          "def-virtual-character-and-character-ring-of-a-finite-group",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "cor-distinct-specht-modules-are-inequivalent",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order"
+        ],
+        "statement": "Restrict the characteristic map to the integral lattice\n$R_S=\\bigoplus_{n\\ge0}R(S_n)$ of\n[[def-graded-ordinary-representation-ring-of-symmetric-groups]]. Then\n\n$$\\operatorname{ch}:R_S\\longrightarrow\\Lambda$$\n\nis a degree-preserving $\\mathbb Z$-module isomorphism. It carries the outer\ninduction product $\\circ$ of\n[[def-outer-induction-product-for-symmetric-group-characters]] to\nmultiplication, $\\operatorname{ch}(f\\circ g)=\\operatorname{ch}(f)\\operatorname{ch}(g)$,\nand the unit (the trivial character of $S_0$) to $1$; consequently $R_S$ is a\ncommutative graded $\\mathbb Z$-algebra and $\\operatorname{ch}$ is an\nisomorphism of graded rings onto $\\Lambda$. With the sesquilinear Hall form,\n$\\operatorname{ch}$ is an isometry as in\n[[lem-frobenius-characteristic-is-an-isometry]]. After scalar extension,\n$\\operatorname{ch}\\otimes\\mathbb Q:R_{S,\\mathbb Q}\\to\\Lambda_{\\mathbb Q}$ and\n$\\operatorname{ch}\\otimes\\mathbb C:R_{S,\\mathbb C}\\to\\Lambda_{\\mathbb C}$ are\nisomorphisms. No choice principle is used.",
+        "strategy": "(1) Membership in $\\Lambda$: by Young's rule ([[thm-youngs-rule-for-permutation-modules]]) the permutation characters satisfy $\\varphi^\\mu=\\sum_\\lambda K_{\\lambda\\mu}\\chi^\\lambda$, and the Kostka matrix $(K_{\\lambda\\mu})$ is unitriangular in a linear extension of dominance with diagonal entries one ([[lem-kostka-change-of-basis-is-dominance-unitriangular]]); hence it is invertible over $\\mathbb Z$, the $\\varphi^\\mu$ form a $\\mathbb Z$-basis of $R(S_n)$, and $\\chi^\\lambda=\\sum_\\mu(K^{-1})_{\\lambda\\mu}\\varphi^\\mu$ with integral coefficients. Since $\\operatorname{ch}$ is $\\mathbb Z$-linear and $\\operatorname{ch}(\\varphi^\\mu)=h_\\mu\\in\\Lambda$ ([[lem-characteristic-of-a-young-permutation-character-is-complete]]), $\\operatorname{ch}(\\chi^\\lambda)\\in\\Lambda$ and $\\operatorname{ch}(R_S)\\subseteq\\Lambda$. (2) Surjectivity: the image contains every $h_\\mu$, and $\\{h_\\mu\\}$ is a $\\mathbb Z$-basis of $\\Lambda$ ([[thm-elementary-and-complete-families-freely-generate-the-stable-ring]]), so the image is all of $\\Lambda$. (3) Injectivity: if $\\operatorname{ch}(f)=0$ then $\\langle f,f\\rangle_{S_n}=\\langle\\operatorname{ch}(f),\\operatorname{ch}(f)\\rangle_H=0$, and the standard class-function form is positive definite, so $f=0$ ([[lem-frobenius-characteristic-is-an-isometry]]). (4) Multiplicativity is [[lem-frobenius-characteristic-preserves-outer-products]]; injectivity transports associativity, commutativity, distributivity and the unit from $\\Lambda$ to $R_S$, so $\\operatorname{ch}$ is a graded ring isomorphism. (5) Scalar extensions preserve the statement. No choice principle is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, \u00a76 and \u00a716",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+        "kind": "theorem",
+        "title": "The characteristic of a Specht character is a Schur function",
+        "deps": [
+          "def-frobenius-characteristic-map",
+          "lem-characteristic-of-a-young-permutation-character-is-complete",
+          "thm-youngs-rule-for-permutation-modules",
+          "lem-kostka-change-of-basis-is-dominance-unitriangular",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "def-semistandard-tableau-and-kostka-number",
+          "lem-complete-homogeneous-expansion-in-power-sums",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "cor-distinct-specht-modules-are-inequivalent",
+          "thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions",
+          "thm-schur-functions-form-an-orthonormal-integral-basis",
+          "def-stable-schur-function-by-bialternants",
+          "def-virtual-character-and-character-ring-of-a-finite-group"
+        ],
+        "statement": "For every $n\\ge0$ and every $\\lambda\\vdash n$, let $S^\\lambda$ be the complex\nSpecht module of shape $\\lambda$\n([[def-column-antisymmetrizer-polytabloid-and-specht-module]]) and $\\chi^\\lambda$\nits character, an irreducible character of $S_n$\n([[thm-complex-irreducibles-of-symmetric-groups-are-specht-modules]]). Then\n\n$$\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda\\in\\Lambda^n,$$\n\nthe stable Schur function of shape $\\lambda$\n([[def-stable-schur-function-by-bialternants]]). In particular $\\operatorname{ch}$\nmaps the $\\mathbb Z$-basis $\\{\\chi^\\lambda:\\lambda\\vdash n\\}$ of $R(S_n)$ to the\n$\\mathbb Z$-basis $\\{s_\\lambda:\\lambda\\vdash n\\}$ of $\\Lambda^n$, and all values\n$\\chi^\\lambda(\\rho)$ are integers.",
+        "strategy": "Fix $n$ and $\\mu\\vdash n$. Young's rule gives an isomorphism $M^\\mu\\cong\\bigoplus_{\\lambda\\vdash n}(S^\\lambda)^{\\oplus K_{\\lambda\\mu}}$ of $\\mathbb C S_n$-modules, where $K_{\\lambda\\mu}$ is the Kostka number ([[thm-youngs-rule-for-permutation-modules]], [[def-semistandard-tableau-and-kostka-number]]). Characters are additive on direct sums ([[thm-characters-of-direct-sums-tensor-products-and-duals]]), so $\\varphi^\\mu=\\sum_\\lambda K_{\\lambda\\mu}\\chi^\\lambda$, and $\\mathbb Z$-linearity of $\\operatorname{ch}$ together with [[lem-characteristic-of-a-young-permutation-character-is-complete]] gives $h_\\mu=\\sum_\\lambda K_{\\lambda\\mu}\\operatorname{ch}(\\chi^\\lambda)$. The Kostka change of basis gives $h_\\mu=\\sum_\\lambda K_{\\lambda\\mu}s_\\lambda$ with $(K_{\\lambda\\mu})$ unitriangular in a linear extension of dominance, hence invertible over $\\mathbb Z$ ([[lem-kostka-change-of-basis-is-dominance-unitriangular]]). Subtracting yields $\\sum_\\lambda K_{\\lambda\\mu}\\bigl(\\operatorname{ch}(\\chi^\\lambda)-s_\\lambda\\bigr)=0$; since the matrix is invertible over $\\mathbb Z$, $\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda$ for every $\\lambda$. This identifies the Specht and Schur labels; orthonormality alone would leave a permutation of labels undetermined. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, \u00a76 and \u00a716",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cor-irreducible-symmetric-group-character-values-are-power-sum-coefficients",
+        "kind": "corollary",
+        "title": "Irreducible symmetric-group character values are power-sum coefficients",
+        "deps": [
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "cor-power-sums-are-orthogonal-for-the-hall-inner-product",
+          "def-hall-inner-product-on-symmetric-functions",
+          "def-frobenius-characteristic-map"
+        ],
+        "statement": "For all $\\lambda,\\rho\\vdash n$,\n\n$$\\chi^\\lambda(\\rho)=\\langle s_\\lambda,p_\\rho\\rangle_H,$$\n\nthe coefficient of $p_\\rho/z_\\rho$ in the power-sum expansion of $s_\\lambda$.\nEquivalently,\n\n$$s_\\lambda=\\sum_{\\rho\\vdash n}\\chi^\\lambda(\\rho)\\,\\frac{p_\\rho}{z_\\rho}.$$",
+        "strategy": "By [[thm-frobenius-characteristic-sends-specht-characters-to-schur-functions]] and the definition of $\\operatorname{ch}$, $s_\\lambda=\\operatorname{ch}(\\chi^\\lambda)=\\sum_\\rho\\chi^\\lambda(\\rho)p_\\rho/z_\\rho$. Pairing with $p_\\rho$ and using $\\langle p_\\sigma,p_\\rho\\rangle_H=\\delta_{\\sigma\\rho}z_\\rho$ ([[cor-power-sums-are-orthogonal-for-the-hall-inner-product]]) gives $\\langle s_\\lambda,p_\\rho\\rangle_H=\\chi^\\lambda(\\rho)$. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "prop-sign-twist-corresponds-to-the-omega-involution",
+        "kind": "proposition",
+        "title": "Sign twist corresponds to the omega involution",
+        "deps": [
+          "def-frobenius-characteristic-map",
+          "prop-omega-conjugates-schur-functions",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "def-sign-representation-and-restriction-of-a-representation",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "cor-sign-from-disjoint-cycle-structure",
+          "thm-complex-representations-are-determined-by-their-characters",
+          "def-tensor-product-of-complex-representations",
+          "lem-frobenius-characteristic-is-an-isometry"
+        ],
+        "statement": "Let $\\operatorname{sgn}$ be the sign representation of $S_n$ and let $V$ be a\nfinite-dimensional complex representation of $S_n$ with character $\\chi_V$ and\ncharacteristic $F=\\operatorname{ch}(\\chi_V)$. Then\n\n$$\\operatorname{ch}(\\chi_{V\\otimes\\operatorname{sgn}})=\\omega(F),$$\n\nwhere $\\omega$ is the involutive algebra endomorphism of $\\Lambda$ with\n$\\omega(e_r)=h_r$, extended to $\\Lambda_{\\mathbb C}$ by complex linearity. In\nparticular, for every $\\lambda\\vdash n$,\n\n$$\\operatorname{ch}\\bigl(\\chi_{S^\\lambda\\otimes\\operatorname{sgn}}\\bigr)=\\omega(s_\\lambda)=s_{\\lambda'},$$\n\nso $S^\\lambda\\otimes\\operatorname{sgn}\\cong S^{\\lambda'}$ and\n$\\chi^{\\lambda'}(w)=(-1)^{n-\\ell(\\rho)}\\chi^\\lambda(w)$ on elements of cycle\ntype $\\rho$.",
+        "strategy": "For $w$ of cycle type $\\rho$, the tensor-product character gives $\\chi_{V\\otimes\\operatorname{sgn}}(w)=\\chi_V(w)\\operatorname{sgn}(w)$ ([[thm-characters-of-direct-sums-tensor-products-and-duals]], [[def-tensor-product-of-complex-representations]]), and $\\operatorname{sgn}(w)=(-1)^{n-\\ell(\\rho)}=\\prod_i(-1)^{\\rho_i-1}$ ([[cor-sign-from-disjoint-cycle-structure]]). Since $\\omega(p_\\rho)=\\prod_i(-1)^{\\rho_i-1}p_\\rho$ ([[prop-omega-conjugates-schur-functions]]), $$\\omega\\bigl(\\operatorname{ch}(\\chi_V)\\bigr)=\\sum_\\rho\\chi_V(\\rho)(-1)^{n-\\ell(\\rho)}\\frac{p_\\rho}{z_\\rho}=\\operatorname{ch}(\\chi_{V\\otimes\\operatorname{sgn}}).$$ For $V=S^\\lambda$, $\\omega(s_\\lambda)=s_{\\lambda'}$ and [[thm-frobenius-characteristic-sends-specht-characters-to-schur-functions]] identifies the result, so $S^\\lambda\\otimes\\operatorname{sgn}$ is a representation with character $\\chi^{\\lambda'}$; characters determine representations up to isomorphism ([[thm-complex-representations-are-determined-by-their-characters]]). No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, \u00a76 and \u00a716",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "prop-regular-character-has-characteristic-p-one-to-the-n",
+        "kind": "proposition",
+        "title": "The regular character has characteristic p_1^n",
+        "deps": [
+          "def-frobenius-characteristic-map",
+          "thm-character-of-the-regular-representation",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "thm-standard-polytabloid-basis",
+          "cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "cor-distinct-specht-modules-are-inequivalent",
+          "def-standard-inner-product-on-complex-class-functions"
+        ],
+        "statement": "Let $\\chi_{\\mathrm{reg}}$ be the regular character of $S_n$ and let\n$f^\\lambda:=\\dim_{\\mathbb C}S^\\lambda$, the number of standard\n$\\lambda$-tableaux ([[thm-standard-polytabloid-basis]]). Then\n\n$$\\operatorname{ch}(\\chi_{\\mathrm{reg}})=p_1^{\\,n},\\qquad\\text{and expanding in the Schur basis}\\qquad p_1^{\\,n}=\\sum_{\\lambda\\vdash n}f^\\lambda\\,s_\\lambda .$$",
+        "strategy": "By [[thm-character-of-the-regular-representation]], $\\chi_{\\mathrm{reg}}(1)=n!$ and $\\chi_{\\mathrm{reg}}(w)=0$ for $w\\ne1$; since $z_{(1^n)}=n!$, the definition of $\\operatorname{ch}$ gives $\\operatorname{ch}(\\chi_{\\mathrm{reg}})=n!\\,p_{1^n}/n!=p_1^{\\,n}$. The group algebra is a finite-dimensional complex representation of the finite group $S_n$ and is completely reducible by [[thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order]]; its irreducible summands are the Specht modules ([[thm-complex-irreducibles-of-symmetric-groups-are-specht-modules]], [[cor-distinct-specht-modules-are-inequivalent]]), and the multiplicity of $S^\\lambda$ is $\\langle\\chi_{\\mathrm{reg}},\\chi^\\lambda\\rangle=\\frac1{n!}n!\\,\\overline{\\chi^\\lambda(1)}=f^\\lambda$ ([[cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product]], [[def-standard-inner-product-on-complex-class-functions]]). Hence $\\chi_{\\mathrm{reg}}=\\sum_\\lambda f^\\lambda\\chi^\\lambda$, and applying $\\operatorname{ch}$ with [[thm-frobenius-characteristic-sends-specht-characters-to-schur-functions]] gives the displayed Schur expansion. This cross-checks the dictionary; it does not reprove the RSK sum-of-squares identity. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, \u00a76 and \u00a716",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      }
+    ]
+  },
+  {
+    "order": 802,
+    "id": "frobenius-characteristic-and-the-symmetric-group-character-dictionary-examples",
+    "kind": "B",
+    "category": "representation-theory",
+    "title": "Frobenius Characteristic and the Symmetric-Group Character Dictionary \u2014 Examples",
+    "companion": "frobenius-characteristic-and-the-symmetric-group-character-dictionary",
+    "requires": [
+      "frobenius-characteristic-and-the-symmetric-group-character-dictionary"
+    ],
+    "items": [
+      {
+        "id": "ex-frobenius-characteristic-dictionary-for-s3",
+        "kind": "example",
+        "title": "The Frobenius characteristic dictionary for S_3",
+        "deps": [
+          "cor-irreducible-symmetric-group-character-values-are-power-sum-coefficients",
+          "thm-standard-polytabloid-basis",
+          "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+          "lem-complete-homogeneous-expansion-in-power-sums",
+          "prop-omega-conjugates-schur-functions",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions"
+        ],
+        "statement": "For $n=3$, expand the three Schur functions $s_{(3)},s_{(2,1)},s_{(1,1,1)}$\nin the power-sum basis and recover the character table of $S_3$. The expansion\nis\n\n$$s_{(3)}=h_3=\\frac{p_1^3+3p_1p_2+2p_3}{6},\\qquad s_{(2,1)}=h_2h_1-h_3=\\frac{p_1^3-p_3}{3},\\qquad s_{(1,1,1)}=e_3=\\frac{p_1^3-3p_1p_2+2p_3}{6},$$\n\nso the coefficients of $p_\\rho/z_\\rho$ give the table, on cycle types\n$(1^3),(2,1),(3)$ respectively:\n\n$$\\chi^{(3)}=(1,1,1),\\qquad \\chi^{(2,1)}=(2,0,-1),\\qquad \\chi^{(1,1,1)}=(1,-1,1).$$\n\nThe degrees are $f^{(3)}=f^{(1,1,1)}=1$ and $f^{(2,1)}=2$, matching the number\nof standard tableaux, and the columns are orthogonal with\n$\\sum_\\lambda f^\\lambda\\chi^\\lambda(1)=1+4+1=6=|S_3|$.",
+        "strategy": "Use Jacobi\u2013Trudi $s_{(3)}=h_3$, $s_{(2,1)}=h_2h_1-h_3$ ([[thm-jacobi-trudi-and-dual-jacobi-trudi-identities]]) and dual Jacobi\u2013Trudi $s_{(1,1,1)}=e_3$, then substitute the one-row expansion $h_d=\\sum_{\\rho\\vdash d}p_\\rho/z_\\rho$ and $e_3=\\omega(h_3)$ ([[prop-omega-conjugates-schur-functions]], [[lem-complete-homogeneous-expansion-in-power-sums]]); note $z_{(1^3)}=6$, $z_{(2,1)}=2$, $z_{(3)}=3$. Reading the coefficients $\\chi^\\lambda(\\rho)=\\langle s_\\lambda,p_\\rho\\rangle$ ([[cor-irreducible-symmetric-group-character-values-are-power-sum-coefficients]]) yields the table; the dimensions $1,2,1$ come from [[thm-standard-polytabloid-basis]]. Check row orthogonality and the regular-character column as a consistency test.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, \u00a76 and \u00a716",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-young-permutation-characteristic-for-shape-two-one",
+        "kind": "example",
+        "title": "The Young permutation characteristic for shape (2,1)",
+        "deps": [
+          "lem-characteristic-of-a-young-permutation-character-is-complete",
+          "thm-youngs-rule-for-permutation-modules",
+          "lem-kostka-change-of-basis-is-dominance-unitriangular",
+          "def-semistandard-tableau-and-kostka-number",
+          "thm-character-of-a-permutation-representation-counts-fixed-points",
+          "ex-frobenius-characteristic-dictionary-for-s3",
+          "thm-elementary-and-complete-families-freely-generate-the-stable-ring"
+        ],
+        "statement": "For $S_3$, the Young permutation module $M^{(2,1)}$ has\n$\\operatorname{ch}(M^{(2,1)})=h_2h_1=s_{(3)}+s_{(2,1)}$, and its character\ntakes the values $(3,1,0)$ on cycle types $(1^3),(2,1),(3)$, decomposing as\n$\\chi^{(3)}+\\chi^{(2,1)}$; this agrees with Young's rule\n$M^{(2,1)}\\cong S^{(3)}\\oplus S^{(2,1)}$ and with the dictionary table.",
+        "strategy": "Directly, a permutation of cycle type $(1^3),(2,1),(3)$ fixes respectively $3,1,0$ of the three $(2,1)$-tabloids ([[thm-character-of-a-permutation-representation-counts-fixed-points]]), and substituting into the characteristic definition with the cycle-distribution coefficients reproduces $h_2h_1$ ([[lem-characteristic-of-a-young-permutation-character-is-complete]]). Independently, $h_{(2,1)}=\\sum_\\lambda K_{\\lambda,(2,1)}s_\\lambda$ and the only nonzero Kostka numbers are $K_{(3),(2,1)}=K_{(2,1),(2,1)}=1$ with $K_{(1,1,1),(2,1)}=0$ ([[lem-kostka-change-of-basis-is-dominance-unitriangular]], [[def-semistandard-tableau-and-kostka-number]]), so $h_2h_1=s_{(3)}+s_{(2,1)}$, matching the Young's-rule decomposition and the table of [[ex-frobenius-characteristic-dictionary-for-s3]].",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, \u00a76 and \u00a716",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-sign-twist-conjugates-the-s31-character",
+        "kind": "example",
+        "title": "Sign twist conjugates the (3,1) character of S_4",
+        "deps": [
+          "prop-sign-twist-corresponds-to-the-omega-involution",
+          "cor-irreducible-symmetric-group-character-values-are-power-sum-coefficients",
+          "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+          "lem-complete-homogeneous-expansion-in-power-sums",
+          "cor-sign-from-disjoint-cycle-structure",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "prop-omega-conjugates-schur-functions"
+        ],
+        "statement": "In $S_4$, the character $\\chi^{(3,1)}$ has values $(3,1,-1,0,-1)$ on the cycle\ntypes $(1^4),(2,1,1),(2,2),(3,1),(4)$, and multiplication by the sign\ncharacter, $\\operatorname{sgn}(\\rho)=(-1)^{4-\\ell(\\rho)}$, gives\n$(3,-1,-1,0,1)$, which are the values of $\\chi^{(2,1,1)}$. Thus\n$S^{(3,1)}\\otimes\\operatorname{sgn}\\cong S^{(2,1,1)}$, in agreement with\n$\\omega(s_{(3,1)})=s_{(2,1,1)}$.",
+        "strategy": "Expand $s_{(3,1)}=h_3h_1-h_4$ (Jacobi\u2013Trudi, [[thm-jacobi-trudi-and-dual-jacobi-trudi-identities]]) and $s_{(2,1,1)}=e_3e_1-e_4$ (dual Jacobi\u2013Trudi) in the power-sum basis using $h_d=\\sum_{\\rho\\vdash d}p_\\rho/z_\\rho$ and $e_4=\\omega(h_4)$ ([[lem-complete-homogeneous-expansion-in-power-sums]]), then read the coefficients $\\chi^\\lambda(\\rho)$ from [[cor-irreducible-symmetric-group-character-values-are-power-sum-coefficients]]. Check the two lists against each other using $\\operatorname{sgn}(\\rho)=(-1)^{4-\\ell(\\rho)}$ ([[cor-sign-from-disjoint-cycle-structure]]) and the involution rule of [[prop-sign-twist-corresponds-to-the-omega-involution]]; the character identity determines the module isomorphism.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, \u00a76 and \u00a716",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-outer-induction-is-not-the-kronecker-product",
+        "kind": "counterexample",
+        "title": "Outer induction is not the Kronecker product",
+        "deps": [
+          "def-outer-induction-product-for-symmetric-group-characters",
+          "lem-characteristic-of-a-young-permutation-character-is-complete",
+          "thm-frobenius-formula-for-induced-characters",
+          "def-tensor-product-of-complex-representations",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "def-frobenius-characteristic-map",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "lem-frobenius-characteristic-preserves-outer-products",
+          "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+          "prop-omega-conjugates-schur-functions",
+          "lem-complete-homogeneous-expansion-in-power-sums",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "cor-distinct-specht-modules-are-inequivalent",
+          "thm-complex-representations-are-determined-by-their-characters",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module"
+        ],
+        "statement": "The claim refuted is: *the outer induction product of two symmetric-group\ncharacters is the same operation as the Kronecker (tensor) product of two\nrepresentations of one symmetric group*, so that for $f,g\\in R(S_n)$ the outer\nproduct $f\\circ g\\in R(S_{2n})$ coincides with the tensor product $f\\cdot g\\in\nR(S_n)$. Take $n=1$ and let $\\mathbf 1_1$ be the trivial character of $S_1$.\nThe outer product $\\mathbf 1_1\\circ\\mathbf 1_1=\n\\operatorname{Ind}_{S_1\\times S_1}^{S_2}(\\mathbf 1_1\\boxtimes\\mathbf 1_1)$ is\nthe permutation character of $S_2$ on the two cosets of $S_1\\times S_1$, with\nvalues $(2,0)$ on the cycle types $(1^2),(2)$ and decomposition\n$\\chi^{(2)}+\\chi^{(1,1)}$; its characteristic is\n$p_1^2=s_{(2)}+s_{(1,1)}$. By contrast, the tensor product of two\nrepresentations of the single group $S_1$ has degree $1\\cdot1=1$ and remains a\nrepresentation of $S_1$. Hence the outer induced product and the same-rank\ntensor product are different operations: an outer coefficient such as\n$c^{(2)}_{(1),(1)}=1$ records a multiplicity for representations of\n$S_1\\times S_1$ inducing to $S_2$, not a tensor-product multiplicity for two\nrepresentations of one symmetric group.",
+        "strategy": "Compute the induced character directly: $S_2/(S_1\\times S_1)$ has two cosets and $\\operatorname{Ind}\\mathbf 1=\\mathbf 1_{S_2}+\\operatorname{sgn}$, giving values $(2,0)$ and characteristic $p_1\\cdot p_1=p_1^2=s_{(2)}+s_{(1,1)}$ via [[lem-characteristic-of-a-young-permutation-character-is-complete]], [[def-frobenius-characteristic-map]] and [[thm-frobenius-characteristic-sends-specht-characters-to-schur-functions]]; the value formula is a special case of [[thm-frobenius-formula-for-induced-characters]]. The tensor product $V\\otimes W$ of two $S_1$-representations is again a representation of $S_1$ ([[def-tensor-product-of-complex-representations]]) with character the product ([[thm-characters-of-direct-sums-tensor-products-and-duals]]), so it cannot equal an element of $R(S_2)$; the two products live in different graded pieces of $R_S$. The contrast is a degree and group mismatch, not an equality of coefficients.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Chapter I \u00a77 and (2.14\u2032)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      }
+    ]
+  }
+]

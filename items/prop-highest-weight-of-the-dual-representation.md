@@ -19,7 +19,7 @@ sources:
       locator: "§8.2, (8.6) and §8.4"
 proof_strategy: direct
 verification:
-  audited: 2026-09-22
+  repair: research/frontier-38-owner-30-step5-misc-supplier-prop-highest-weight-of-the-dual-representation.receipt.json
 ---
 
 ## Statement
@@ -63,7 +63,7 @@ $$-w_0(\lambda).$$
 
 2.1 Consequently the weights of $V(\lambda)^*$ are the negatives of the weights of $V(\lambda)$ by step 1.1, so the maximum weight of $V(\lambda)^*$ is $-w_0(\lambda)$, and it is a weight of $V(\lambda)^*$ because $w_0(\lambda)$ is a weight of $V(\lambda)$. [step 1.1, step 1.2]
 
-2.2 The module $V(\lambda)^*$ is irreducible: if $0\ne W\subseteq V(\lambda)^*$ is a submodule, its annihilator $W^\perp=\{v\in V(\lambda):\varphi(v)=0\text{ for all }\varphi\in W\}$ is a submodule of $V(\lambda)$, because for $\varphi\in W$ and $v\in W^\perp$ the dual action gives $\varphi(x\cdot v)=-(x\cdot\varphi)(v)=0$ since $x\cdot\varphi\in W$; since $W\ne V(\lambda)^*$ we have $\dim W^\perp=\dim V(\lambda)-\dim W>0$, so $W^\perp=V(\lambda)$ by irreducibility of $V(\lambda)$ from [L2], and hence $W=0$; thus the only nonzero submodule is the whole space. [L2, L6, step 1.1]
+2.2 The module $V(\lambda)^*$ is irreducible: if $0\ne W\subsetneq V(\lambda)^*$ is a proper submodule, its annihilator $W^\perp=\{v\in V(\lambda):\varphi(v)=0\text{ for all }\varphi\in W\}$ is a submodule of $V(\lambda)$, because for $\varphi\in W$ and $v\in W^\perp$ the dual action gives $\varphi(x\cdot v)=-(x\cdot\varphi)(v)=0$ since $x\cdot\varphi\in W$; since $W\ne V(\lambda)^*$ we have $\dim W^\perp=\dim V(\lambda)-\dim W>0$, so $W^\perp=V(\lambda)$ by irreducibility of $V(\lambda)$ from [L2], and hence $W=0$; thus the only nonzero submodule is the whole space. [L2, L6, step 1.1]
 
 3.1 The multiplicity of the weight $-w_0(\lambda)$ in $V(\lambda)^*$ is $\dim V(\lambda)_{w_0(\lambda)}=\dim V(\lambda)_\lambda=1$ by steps 1.1, [L3] and [L2]. [L2, L3, step 1.1, step 2.1]
 

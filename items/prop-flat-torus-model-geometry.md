@@ -41,8 +41,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: "Proposition 21.4 and Theorem 21.10, printed pp.543–547: quotient manifolds of free proper actions; Example 21.14, the torus"
 verification:
-  audited: 2026-10-02
-  precheck: pass
+  repair: research/frontier-38-owner-30-published-format-prop-flat-torus-model-geometry-receipt.json
 ---
 
 ## Statement
@@ -131,119 +130,16 @@ connected.
 
 ## Proof
 
-1.1 The quotient charts make $T^n$ a smooth $n$-manifold.
-For $u\in\mathbb R^n$ put $B_u:=u+(-1/2,1/2)^n$. The map $q$ is open: for open
-$W\subseteq\mathbb R^n$ one has
-$q^{-1}(q(W))=\bigcup_{m\in\mathbb Z^n}(W+m)$, which is open, so $q(W)$ is
-open by [F1]. The restriction $q|_{B_u}$ is injective: if $q(x)=q(y)$ with
-$x,y\in B_u$, then $x-y\in\mathbb Z^n$, while $|x^i-y^i|<1$ for every $i$, so
-$x=y$. An injective continuous open map is a homeomorphism onto its image,
-so $q(B_u)$ is an open set homeomorphic to the box $B_u$.
-If $x\in B_u$ and $y\in B_v$ satisfy $q(x)=q(y)$, then $x-y\in\mathbb Z^n$.
-For a fixed point of an overlap, write its two unique chart lifts as
-$x_0\in B_u$ and $y_0\in B_v$, and put $m=y_0-x_0\in\mathbb Z^n$. In the
-coordinates of $B_u$, the chart transition is $z\mapsto\varphi_v(q(z))$;
-the difference $\varphi_v(q(z))-z$ is a continuous function on the overlap
-with values in the discrete set $\mathbb Z^n$. It is therefore constant on a
-neighbourhood of $x_0$, where it equals $m$. Thus the transition is locally
-the translation $z\mapsto z+m$ at every overlap point, hence is smooth; the
-translation may differ on different connected pieces of the overlap. The
-charts $q(B_u)$ for all $u\in\mathbb R^n$ cover $T^n$, since every class
-$[x]$ has the representative $x\in B_x$, and any two of them are smoothly
-compatible. They therefore form a smooth atlas. Their domains are
-homeomorphic to open boxes, so every point has a Euclidean neighbourhood.
-[F1, given]
+1.1 The quotient charts make $T^n$ a smooth $n$-manifold. For $u\in\mathbb R^n$ put $B_u:=u+(-1/2,1/2)^n$. The map $q$ is open: for open $W\subseteq\mathbb R^n$ one has $q^{-1}(q(W))=\bigcup_{m\in\mathbb Z^n}(W+m)$, which is open, so $q(W)$ is open by [F1]. The restriction $q|_{B_u}$ is injective: if $q(x)=q(y)$ with $x,y\in B_u$, then $x-y\in\mathbb Z^n$, while $|x^i-y^i|<1$ for every $i$, so $x=y$. An injective continuous open map is a homeomorphism onto its image, so $q(B_u)$ is an open set homeomorphic to the box $B_u$. If $x\in B_u$ and $y\in B_v$ satisfy $q(x)=q(y)$, then $x-y\in\mathbb Z^n$. For a fixed point of an overlap, write its two unique chart lifts as $x_0\in B_u$ and $y_0\in B_v$, and put $m=y_0-x_0\in\mathbb Z^n$. In the coordinates of $B_u$, the chart transition is $z\mapsto\varphi_v(q(z))$; the difference $\varphi_v(q(z))-z$ is a continuous function on the overlap with values in the discrete set $\mathbb Z^n$. It is therefore constant on a neighbourhood of $x_0$, where it equals $m$. Thus the transition is locally the translation $z\mapsto z+m$ at every overlap point, hence is smooth; the translation may differ on different connected pieces of the overlap. The charts $q(B_u)$ for all $u\in\mathbb R^n$ cover $T^n$, since every class $[x]$ has the representative $x\in B_x$, and any two of them are smoothly compatible. They therefore form a smooth atlas. Their domains are homeomorphic to open boxes, so every point has a Euclidean neighbourhood. [F1, given]
 
-2.1 $T^n$ is a topological manifold, connected, and $q$ is a surjection.
-The map $q$ is surjective by definition of the quotient. It is Hausdorff: if
-$[x]\ne[y]$, only finitely many $m\in\mathbb Z^n$ satisfy
-$|x-y-m|\le|x-y|+1$, and none of them satisfies $x-y-m=0$, so
-$$\delta:=\min\{|x-y-m|:m\in\mathbb Z^n\}>0$$
-(the minimum over the finitely many small displacements is attained, and the
-remaining displacements are larger than $|x-y|+1$); the open sets $q(U)$ and
-$q(V)$ of step 1.1 for the balls $U,V$ of radius $\delta/3$ about $x$ and $y$
-are disjoint, because a common point would give $u\in U$, $w\in V$ with
-$u-w\in\mathbb Z^n$ and hence $|x-y-(u-w)|\le 2\delta/3<\delta$. It is second
-countable: the images under $q$ of the boxes with rational corners form a
-countable family of open sets, and for open $W\subseteq T^n$ and $[x]\in W$
-there is such a box $B$ with $x\in B\subseteq q^{-1}(W)$, so
-$[x]\in q(B)\subseteq W$. Together with step 1.1 this makes $T^n$ a
-topological $n$-manifold by [F1].
-Finally $\mathbb R^n$ is path connected, hence connected, by [F6], and $q$ is
-continuous and surjective, so $T^n$ is connected by [F6].
-[F1, F6, step 1.1]
+2.1 $T^n$ is a topological manifold, connected, and $q$ is a surjection. The map $q$ is surjective by definition of the quotient. It is Hausdorff: if $[x]\ne[y]$, only finitely many $m\in\mathbb Z^n$ satisfy $|x-y-m|\le|x-y|+1$, and none of them satisfies $x-y-m=0$, so $$\delta:=\min\{|x-y-m|:m\in\mathbb Z^n\}>0$$ (the minimum over the finitely many small displacements is attained, and the remaining displacements are larger than $|x-y|+1$); the open sets $q(U)$ and $q(V)$ of step 1.1 for the balls $U,V$ of radius $\delta/3$ about $x$ and $y$ are disjoint, because a common point would give $u\in U$, $w\in V$ with $u-w\in\mathbb Z^n$ and hence $|x-y-(u-w)|\le 2\delta/3<\delta$. It is second countable: the images under $q$ of the boxes with rational corners form a countable family of open sets, and for open $W\subseteq T^n$ and $[x]\in W$ there is such a box $B$ with $x\in B\subseteq q^{-1}(W)$, so $[x]\in q(B)\subseteq W$. Together with step 1.1 this makes $T^n$ a topological $n$-manifold by [F1]. Finally $\mathbb R^n$ is path connected, hence connected, by [F6], and $q$ is continuous and surjective, so $T^n$ is connected by [F6]. [F1, F6, step 1.1]
 
-2.2 The flat metric descends, and $q$ is a local isometry. [F1, F2, step 1.1]
-Define a symmetric $(0,2)$-tensor field $g$ on $T^n$ chartwise: on the chart
-$q(B_u)$ with inverse chart $\varphi=(q|_{B_u})^{-1}$, set
-$$g_y(\xi,\eta):=g_{\mathrm E}\bigl(d\varphi_y(\xi),d\varphi_y(\eta)\bigr),\qquad y\in q(B_u),\ \xi,\eta\in T_yT^n .$$
-On an overlap $q(B_u)\cap q(B_v)$ the two inverses differ by the integer
-translation of step 1.1, whose differential is the identity of $\mathbb R^n$
-and which preserves the Euclidean metric; hence the two definitions agree on
-the overlap and glue to a well-defined smooth tensor field. In every chart
-the matrix of $g$ is the identity, so $g$ is symmetric and positive definite
-and is a Riemannian metric by [F2]. Since each inverse chart is a local
-inverse of $q$ composed with a translation, the differential of $q$ is a
-linear isometry from $(\mathbb R^n,g_{\mathrm E})$ onto $(T_{[x]}T^n,g_{[x]})$
-at every point. The quotient charts also make $q$ a local diffeomorphism,
-so $q$ is a local isometry and $q^*g=\sum_i dx^i\otimes dx^i$.
-Any metric $g'$ with $q^*g'=g_{\mathrm E}$ equals $g$ because $dq_x$ is
-surjective for every $x\in\mathbb R^n$ and the equality
-$g'_{[x]}(dq_xu,dq_xw)=g_{\mathrm E}(u,w)=g_{[x]}(dq_xu,dq_xw)$ determines
-$g'$ on all pairs of tangent vectors. [F1, F2, step 1.1]
+2.2 The flat metric descends, and $q$ is a local isometry. [F1, F2, step 1.1] Define a symmetric $(0,2)$-tensor field $g$ on $T^n$ chartwise: on the chart $q(B_u)$ with inverse chart $\varphi=(q|_{B_u})^{-1}$, set $$g_y(\xi,\eta):=g_{\mathrm E}\bigl(d\varphi_y(\xi),d\varphi_y(\eta)\bigr),\qquad y\in q(B_u),\ \xi,\eta\in T_yT^n .$$ On an overlap $q(B_u)\cap q(B_v)$ the two inverses differ by the integer translation of step 1.1, whose differential is the identity of $\mathbb R^n$ and which preserves the Euclidean metric; hence the two definitions agree on the overlap and glue to a well-defined smooth tensor field. In every chart the matrix of $g$ is the identity, so $g$ is symmetric and positive definite and is a Riemannian metric by [F2]. Since each inverse chart is a local inverse of $q$ composed with a translation, the differential of $q$ is a linear isometry from $(\mathbb R^n,g_{\mathrm E})$ onto $(T_{[x]}T^n,g_{[x]})$ at every point. The quotient charts also make $q$ a local diffeomorphism, so $q$ is a local isometry and $q^*g=\sum_i dx^i\otimes dx^i$. Any metric $g'$ with $q^*g'=g_{\mathrm E}$ equals $g$ because $dq_x$ is surjective for every $x\in\mathbb R^n$ and the equality $g'_{[x]}(dq_xu,dq_xw)=g_{\mathrm E}(u,w)=g_{[x]}(dq_xu,dq_xw)$ determines $g'$ on all pairs of tangent vectors. [F1, F2, step 1.1]
 
-3.1 Completeness and geodesics. [F3, F4, step 2.2]
-Let $[x]\in T^n$ and $v\in T_{[x]}T^n$. Since $dq_x$ is surjective, choose
-$v_0\in\mathbb R^n$ with $dq_x(v_0)=v$. By [F3] the straight line
-$\sigma(t):=x+tv_0$ is the maximal geodesic of $\mathbb R^n$ with
-$\sigma(0)=x$, $\sigma'(0)=v_0$, and it is defined on all of $\mathbb R$. A
-local isometry sends geodesics to geodesics by [F3], so
-$\gamma(t):=q(\sigma(t))=[x+tv_0]$ is a geodesic of $(T^n,g)$ defined on all
-of $\mathbb R$, with $\gamma(0)=[x]$ and $\gamma'(0)=dq_x(v_0)=v$. By the
-uniqueness clause of [F3] it is the maximal geodesic of $(T^n,g)$ with initial
-datum $([x],v)$. Hence every maximal geodesic of $T^n$ is defined on all of
-$\mathbb R$, so $(T^n,g)$ is geodesically complete, and by Hopf–Rinow [F4] it
-is a complete metric space. [F3, F4, step 2.2]
+3.1 Completeness and geodesics. [F3, F4, step 2.2] Let $[x]\in T^n$ and $v\in T_{[x]}T^n$. Since $dq_x$ is surjective, choose $v_0\in\mathbb R^n$ with $dq_x(v_0)=v$. By [F3] the straight line $\sigma(t):=x+tv_0$ is the maximal geodesic of $\mathbb R^n$ with $\sigma(0)=x$, $\sigma'(0)=v_0$, and it is defined on all of $\mathbb R$. A local isometry sends geodesics to geodesics by [F3], so $\gamma(t):=q(\sigma(t))=[x+tv_0]$ is a geodesic of $(T^n,g)$ defined on all of $\mathbb R$, with $\gamma(0)=[x]$ and $\gamma'(0)=dq_x(v_0)=v$. By the uniqueness clause of [F3] it is the maximal geodesic of $(T^n,g)$ with initial datum $([x],v)$. Hence every maximal geodesic of $T^n$ is defined on all of $\mathbb R$, so $(T^n,g)$ is geodesically complete, and by Hopf–Rinow [F4] it is a complete metric space. [F3, F4, step 2.2]
 
-3.2 The torus is flat. [F5, step 2.2]
-In every quotient chart of step 1.1 the matrix of $g$ is the constant identity
-matrix. Its first derivatives vanish, so the Christoffel symbols of the chart
-vanish by [F5], and the coordinate curvature formula of [F5] gives
-$R=0$ at every point of the chart. The charts cover $T^n$, so the Riemann
-curvature four-tensor vanishes identically; by [F5] every sectional curvature
-$K$, being $\operatorname{Rm}(u,v,v,u)$ divided by the positive Gram
-determinant of an independent pair, vanishes. In dimension $n=1$ there is no
-tangent two-plane and the curvature assertion is vacuous, as it must be.
-[F5, step 2.2]
+3.2 The torus is flat. [F5, step 2.2] In every quotient chart of step 1.1 the matrix of $g$ is the constant identity matrix. Its first derivatives vanish, so the Christoffel symbols of the chart vanish by [F5], and the coordinate curvature formula of [F5] gives $R=0$ at every point of the chart. The charts cover $T^n$, so the Riemann curvature four-tensor vanishes identically; by [F5] every sectional curvature $K$, being $\operatorname{Rm}(u,v,v,u)$ divided by the positive Gram determinant of an independent pair, vanishes. In dimension $n=1$ there is no tangent two-plane and the curvature assertion is vacuous, as it must be. [F5, step 2.2]
 
-4.1 The exponential map, its formula and its failure of injectivity. [F3, step 3.1]
-The quotient chart $\varphi=(q|_{B_u})^{-1}$ identifies $T_{[x]}T^n$ with
-$\mathbb R^n$ by its differential $d\varphi_{[x]}$; under this identification
-the vector $v\in T_{[x]}T^n$ corresponds to
-$v_0:=d\varphi_{[x]}(v)\in\mathbb R^n$, and $dq_x(v_0)=v$. Step 3.1 shows that
-the maximal geodesic with initial datum $([x],v)$ is
-$t\mapsto q(x+tv_0)=[x+tv_0]$, defined on all of $\mathbb R$; evaluating at
-$t=1$ gives
-$$\exp_{[x]}(v)=\gamma_v(1)=[x+v_0],$$
-which in the coordinates of the chart is the formula $\exp_{[x]}(v)=[x+v]$
-recorded in the Statement. In particular the domain of $\exp_{[x]}$ is all of
-$T_{[x]}T^n$. Noninjectivity: $e_1\in\mathbb Z^n$ is nonzero because $n\ge1$,
-and $q(0)=[0]$ while $q(e_1)=[e_1]=[0]$, so
-$$\exp_{[x]}(0)=[x]=\exp_{[x]}(e_1)$$
-with $0\ne e_1$; hence the exponential map of the flat torus is not injective
-at any point. [F3, step 3.1]
+4.1 The exponential map, its formula and its failure of injectivity. [F3, step 3.1] The quotient chart $\varphi=(q|_{B_u})^{-1}$ identifies $T_{[x]}T^n$ with $\mathbb R^n$ by its differential $d\varphi_{[x]}$; under this identification the vector $v\in T_{[x]}T^n$ corresponds to $v_0:=d\varphi_{[x]}(v)\in\mathbb R^n$, and $dq_x(v_0)=v$. Step 3.1 shows that the maximal geodesic with initial datum $([x],v)$ is $t\mapsto q(x+tv_0)=[x+tv_0]$, defined on all of $\mathbb R$; evaluating at $t=1$ gives $$\exp_{[x]}(v)=\gamma_v(1)=[x+v_0],$$ which in the coordinates of the chart is the formula $\exp_{[x]}(v)=[x+v]$ recorded in the Statement. In particular the domain of $\exp_{[x]}$ is all of $T_{[x]}T^n$. Noninjectivity: $e_1\in\mathbb Z^n$ is nonzero because $n\ge1$, and $q(0)=[0]$ while $q(e_1)=[e_1]=[0]$, so $$\exp_{[x]}(0)=[x]=\exp_{[x]}(e_1)$$ with $0\ne e_1$; hence the exponential map of the flat torus is not injective at any point. [F3, step 3.1]
 
-5.1 Boundary cases and choice. [A1, F1, step 2.1, step 4.1]
-The case $n=1$ is the circle $\mathbb R/\mathbb Z$: the quotient charts are
-intervals, and for every initial vector $v\in T_{[x]}T^1\cong\mathbb R$ the
-geodesic is the constant-speed winding $t\mapsto[x+tv]$ on a circle of
-circumference one, with speed $|v|$; the paths $t\mapsto[x\pm t]$ are the
-unit-speed cases. The failure of injectivity is again produced by the nonzero
-lattice vector $e_1$. The degenerate velocity $v=0$ gives the constant
-geodesic through $[x]$ by step 3.1, and it is excluded as a witness of
-noninjectivity because $e_1\ne0$; the zero divisor in the metric is absent
-because the Euclidean metric is positive definite. The lattice $\mathbb Z^n$
-and its cosets are explicit, and no accumulation or limiting argument occurs;
-the only choice is the inherited $\mathrm{AC}_\omega$ of [A1], used through
-the maximal-geodesic theorem [F3] and Hopf–Rinow [F4] in step 3.1. [A1, F1,
-step 2.1, step 4.1] ∎
+5.1 Boundary cases and choice. [A1, F1, step 2.1, step 4.1] The case $n=1$ is the circle $\mathbb R/\mathbb Z$: the quotient charts are intervals, and for every initial vector $v\in T_{[x]}T^1\cong\mathbb R$ the geodesic is the constant-speed winding $t\mapsto[x+tv]$ on a circle of circumference one, with speed $|v|$; the paths $t\mapsto[x\pm t]$ are the unit-speed cases. The failure of injectivity is again produced by the nonzero lattice vector $e_1$. The degenerate velocity $v=0$ gives the constant geodesic through $[x]$ by step 3.1, and it is excluded as a witness of noninjectivity because $e_1\ne0$; the zero divisor in the metric is absent because the Euclidean metric is positive definite. The lattice $\mathbb Z^n$ and its cosets are explicit, and no accumulation or limiting argument occurs; the only choice is the inherited $\mathrm{AC}_\omega$ of [A1], used through the maximal-geodesic theorem [F3] and Hopf–Rinow [F4] in step 3.1. [A1, F1, step 2.1, step 4.1] ∎

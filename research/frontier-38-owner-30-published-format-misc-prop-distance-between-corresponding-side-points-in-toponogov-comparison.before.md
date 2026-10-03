@@ -1,0 +1,135 @@
+---
+id: prop-distance-between-corresponding-side-points-in-toponogov-comparison
+kind: proposition
+title: Distance between corresponding side points in toponogov comparison
+status: published
+origin: pipeline
+deps:
+  - thm-toponogov-triangle-comparison
+  - thm-toponogov-hinge-comparison
+  - def-comparison-triangle-in-the-two-dimensional-space-form
+  - thm-hopf-rinow
+  - thm-a-length-minimizing-piecewise-smooth-curve-is-a-constant-speed-geodesic-up-to-reparametrization
+  - def-countable-choice
+  - thm-existence-uniqueness-and-smooth-dependence-of-geodesics
+  - def-constant-sectional-curvature-and-space-form
+  - def-pointwise-norm-and-angle-from-a-riemannian-metric
+  - thm-riemannian-distance-is-a-metric
+  - lem-minimizing-along-a-geodesic-is-an-initial-interval-property
+  - def-principal-inverse-sine-and-cosine
+  - cor-trigonometric-parity-and-pythagorean-identity
+  - thm-quarter-turn-values-and-shift-formulas
+  - prop-round-sphere-model-geometry
+  - thm-higher-dimensional-spheres-are-simply-connected
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+proof_strategy: direct
+verification:
+  audited: 2026-10-02
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "U. Lang, Riemannian and Metric Geometry (lecture notes)"
+      url: https://people.math.ethz.ch/~lang/RG.pdf
+      locator: "Definition 5.7 (chord comparison), Lemma 5.9 and its proof (printed pp.66-67, PDF pp.70-71), with Lemma 5.2 (strict monotonicity of the model opposite side in the included angle) and Lemma 5.3 (Alexandrov's transfer)"
+    - title: "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry"
+      url: https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf
+      locator: "§6, printed pp.21-25: distance and angle comparison; the corresponding-point chord comparison is the metric form of the same barrier comparison"
+---
+
+## Statement
+
+Assume the inherited Axiom of Countable Choice $\mathrm{AC}_\omega$. Let
+$(M,g)$ be a complete, connected, boundaryless Riemannian manifold of
+dimension $n\ge2$ with sectional curvature $\ge k$ at every tangent
+two-plane, where $k\in\mathbb R$. Let $p,q,r\in M$ be joined by minimizing
+unit-speed geodesics $\sigma_1:[0,a]\to M$ from $p$ to $q$ and
+$\sigma_2:[0,b]\to M$ from $p$ to $r$, with $a,b>0$, and put
+$c:=d_g(q,r)>0$. Suppose the side lengths $(a,b,c)$ satisfy the strict
+triangle inequalities
+$$|a-b|<c<a+b,$$
+and, when $k>0$, also $a,b,c<\pi/\sqrt k$ and $a+b+c<2\pi/\sqrt k$. Let
+$(\bar p,\bar q,\bar r)$ be a comparison triangle in $M^2_k$ with ordered side
+lengths $(c,b,a)$, so that $d_k(\bar p,\bar q)=a$,
+$d_k(\bar p,\bar r)=b$ and $d_k(\bar q,\bar r)=c$ and let $\alpha\in(0,\pi)$ be its angle at $\bar p$. For
+$s\in[0,a]$ and $t\in[0,b]$ put
+$$u:=\sigma_1(s),\qquad v:=\sigma_2(t),$$
+and let $\bar u\in\bar p\bar q$ and $\bar v\in\bar p\bar r$ be the points at
+distances $s$ and $t$ from $\bar p$ on the two comparison sides. Then
+$$d_g(u,v)\ \ge\ d_k(\bar u,\bar v).$$
+
+Thus for a curvature lower bound, points at fixed fractions of two sides
+issuing from a common vertex are at least as far apart as the corresponding
+points of the constant-$k$ comparison triangle: the actual triangle is at
+least as thick as the model. The strict triangle inequalities and the
+$k>0$ bounds keep the model triangle nondegenerate; the endpoint choices
+$s=0$, $t=0$, $s=a$ and $t=b$ are included, and are settled in the proof.
+The statement is the chord comparison $(C_\kappa)$ of Lang, Definition 5.7,
+for the curvature-lower-bound convention $K\ge k$. No choice beyond the
+inherited $\mathrm{AC}_\omega$ is used.
+
+## Facts & Assumptions
+
+**Given:** The inherited $\mathrm{AC}_\omega$ of [A1]; the complete connected boundaryless Riemannian $n$-manifold $(M,g)$, $n\ge2$, with $K\ge k$ everywhere; the minimizing geodesics $\sigma_1,\sigma_2$ from the common point $p$ with lengths $a,b>0$ and endpoints $q,r$; the distance $c=d_g(q,r)>0$ with the strict triangle inequalities and the stated $k>0$ bounds; the comparison triangle $(\bar p,\bar q,\bar r)$ of $M^2_k$ with its angle $\alpha=\bar\alpha$ at $\bar p$; and the points $u,v$ with their corresponding points $\bar u,\bar v$.
+
+[A1] The countable-choice premise is the inherited $\mathrm{AC}_\omega$ ([[def-countable-choice]]), carried by the Hopf–Rinow, exponential and comparison-triangle suppliers below. The proof selects no family: the auxiliary minimizing geodesics it uses are obtained one at a time from the nonempty sets supplied by Hopf–Rinow.
+
+[F1] Comparison triangles and their angles ([[def-comparison-triangle-in-the-two-dimensional-space-form]], [[def-constant-sectional-curvature-and-space-form]], [[def-pointwise-norm-and-angle-from-a-riemannian-metric]], [[prop-round-sphere-model-geometry]], [[thm-higher-dimensional-spheres-are-simply-connected]]): $M^2_k$ is the complete, simply connected surface of constant sectional curvature $k$ — the round sphere of radius $1/\sqrt k$ and diameter $D_k:=\pi/\sqrt k$ when $k>0$, the Euclidean plane when $k=0$, a hyperbolic plane when $k<0$. A comparison triangle with side lengths $(A,B,C)$ is a labelled triple of points of $M^2_k$ together with its three minimizing geodesic sides realizing the distances; it exists, and is unique up to the isometries of $M^2_k$, whenever $A,B,C>0$ satisfy the strict triangle inequalities and, in the case $k>0$, also $A,B,C<D_k$ and $A+B+C<2D_k$. The comparison angle at a vertex is the angle between the two minimizing sides meeting there, in the sense of the stated angle definition: for unit tangent vectors $\xi,\eta$ at a point, $\cos\angle(\xi,\eta)=g(\xi,\eta)$; the comparison angles lie in $(0,\pi)$.
+
+[F2] Triangle comparison ([[thm-toponogov-triangle-comparison]]): let $x,y,z$ be three points of a complete connected boundaryless Riemannian manifold of dimension $\ge2$ with sectional curvature $\ge k$, joined by minimizing geodesic segments with side lengths $(A,B,C)$ that admit a comparison triangle in $M^2_k$ in the sense of [F1]. Then each actual vertex angle, between the two minimizing sides meeting there, is at least the corresponding comparison angle of the comparison triangle.
+
+[F3] Hinge comparison and the model opposite side ([[thm-toponogov-hinge-comparison]]): for fixed $A,B>0$, with $A,B<D_k$ when $k>0$, let $$m(A,B):=\begin{cases}\min\{A+B,\ 2\pi/\sqrt k-A-B\},&k>0,\\ A+B,&k\le0.\end{cases}$$ Then $c_k(A,B,\cdot):[0,\pi]\to[|A-B|,m(A,B)]$ is a continuous, strictly increasing bijection with endpoint values $c_k(A,B,0)=|A-B|$ and $c_k(A,B,\pi)=m(A,B)$; here $c_k(A,B,\theta)$ is, equivalently, the distance in $M^2_k$ between the endpoints of unit-speed geodesics of lengths $A$ and $B$ issuing from one point with included angle $\theta$, and this number is independent of the choices made. Moreover for fixed sides the model opposite side determines the included angle: two configurations in $M^2_k$ with the same two sides $A,B$ from a common vertex and opposite sides $C,C'\in[|A-B|,m(A,B)]$ have included angles $\theta,\theta'$ with $\operatorname{sign}(C'-C)=\operatorname{sign}(\theta'-\theta)$.
+
+[F4] Existence of minimizing segments ([[thm-hopf-rinow]], [[thm-riemannian-distance-is-a-metric]], [[lem-minimizing-along-a-geodesic-is-an-initial-interval-property]]): on a complete connected Riemannian manifold every two points are joined by a minimizing geodesic; the Riemannian distance is a metric, so the triangle inequality and the reverse triangle inequality hold; and the restriction of a minimizing unit-speed geodesic $\gamma:[0,L]\to M$ to a subinterval $[s,t]\subseteq[0,L]$ is again minimizing, because $d_g(\gamma(s),\gamma(t))\le t-s$ and a strict inequality would give $L=d_g(\gamma(0),\gamma(L))<s+(t-s)+(L-t)=L$ by the triangle inequality.
+
+[F5] Angles at a point and at an interior point of a segment ([[def-pointwise-norm-and-angle-from-a-riemannian-metric]], [[def-principal-inverse-sine-and-cosine]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-quarter-turn-values-and-shift-formulas]]): the angle between two nonzero tangent vectors $\xi,\eta$ at a point is the unique $\theta\in[0,\pi]$ with $\cos\theta=g(\xi,\eta)/(|\xi|\,|\eta|)$. The principal inverse cosine satisfies $\arccos(-x)=\pi-\arccos(x)$ for $x\in[-1,1]$: indeed $\cos(\pi-\arccos x)=-\cos(\arccos x)=-x$ by $\cos(y+\pi)=-\cos y$ and the parity of cosine, and $\pi-\arccos x\in[0,\pi]$, so the inverse-cosine identity applies. Consequently, if $W=\sigma_1(s)$ is an interior point of the minimizing geodesic $\sigma_1$ and $e$ is the unit tangent at $W$ of any minimizing geodesic from $W$ to a point $y\ne W$, then the angles between the segment $Wy$ and the two sub-segments $Wp$, $Wq$ of $\sigma_1$ satisfy $$\angle_W(p,y)+\angle_W(q,y)=\arccos\bigl(g(e,-u_1)\bigr)+\arccos\bigl(g(e,u_1)\bigr)=\pi,$$ where $u_1:=\sigma_1'(s)$ is the unit tangent of $\sigma_1$ at $W$.
+
+## Proof
+
+**Proof technique:** direct. Two auxiliary triangles at an interior point $W$ of one leg have comparison angles at $W$ summing to at most $\pi$; gluing their model configurations along the side $Wr$ and straightening the bent leg at $W$ is the model transfer (Lang, Lemma 5.3), which shows that the model angle at $p$ of the triple $(p,W,r)$ is at least the full comparison angle $\alpha$. The monotone model cosine law then gives the chord inequality of the model triangle, first for an interior point against the opposite endpoint, and then, applied to the wedge $(p,u,r)$, for two arbitrary points of the two legs.
+
+1.1 Setup and the model chord identification.
+Take the data of the statement. The triple $(\bar p,\bar q,\bar r)$ is a comparison triangle with $d_k(\bar p,\bar q)=a$, $d_k(\bar p,\bar r)=b$, $d_k(\bar q,\bar r)=c$, and $\alpha\in(0,\pi)$ is its angle at $\bar p$ [F1]. For $0<s\le a$ and $0<t\le b$ the points $\bar u,\bar v$ lie at distances $s,t$ from $\bar p$ on the minimizing comparison sides, and the included angle at $\bar p$ between $\bar p\bar u$ and $\bar p\bar v$ is $\alpha$; hence $$d_k(\bar u,\bar v)=c_k(s,t,\alpha)$$ by the independence of $c_k$ from the choices of the unit-speed geodesics [F3]. All distances that occur below are distances in $M^2_k$ when the model or its vertices are mentioned, and distances in $M$ otherwise; the letters $p,q,r,u,v$ always denote points of $M$ and their barred letters the corresponding comparison points.
+[given, F1]
+
+1.2 Trivial boundary cases.
+If $s=0$ then $u=p$ and $d_g(u,v)=d_g(p,v)=t=d_k(\bar p,\bar v)$, since $\sigma_2$ is a minimizing unit-speed geodesic and $\bar v$ lies at distance $t$ from $\bar p$ on the comparison side; the case $t=0$ is the same with the roles of the two legs interchanged. If $s=a$ and $t=b$ then $u=q$, $v=r$ and $d_g(u,v)=c=d_k(\bar q,\bar r)$. It remains to treat $0<s\le a$, $0<t\le b$ with $(s,t)\ne(a,b)$; this is done in steps 3.1, 4.1 and 4.2.
+[F4, F3]
+
+1.3 Model bookkeeping: configurations in $M^2_k$.
+Let $X,Y,Z\in M^2_k$ with $X\ne Y$ and $X\ne Z$; put $A:=d_k(X,Y)$, $B:=d_k(X,Z)$, $C:=d_k(Y,Z)$, and when $k>0$ assume $A,B<D_k$. Choose minimizing geodesics from $X$ to $Y$ and from $X$ to $Z$ (they exist since $M^2_k$ is complete [F1]) and let $\theta\in[0,\pi]$ be their included angle; by [F3] the endpoint distance is $C=c_k(A,B,\theta)$, so $\theta=c_k(A,B)^{-1}(C)$ depends only on $A,B,C$ and lies in $[0,\pi]$, and $\theta$ is the comparison angle at $X$ whenever the triple is nondegenerate in the sense of [F1]. Consequently, if two configurations of this kind have the same two sides $A,B$ from their common vertex, with opposite sides $C,C'$ and angles $\theta,\theta'$, then $\operatorname{sign}(C'-C)=\operatorname{sign}(\theta'-\theta)$, by strict monotonicity of $c_k(A,B,\cdot)$ [F3].
+[F1, F3]
+
+1.4 Arc bounds.
+For $u=\sigma_1(s)$ and $v=\sigma_2(t)$ with $s\in[0,a]$, $t\in[0,b]$, each distance between two of the five points $p,q,r,u,v$ is at most the length of either boundary arc joining the two points in the closed curve $\partial:=\sigma_1\cup\gamma_{qr}\cup\sigma_2^{-1}$ of total length $a+b+c$, where $\gamma_{qr}$ is a minimizing geodesic from $q$ to $r$ [F4]; the two arcs joining a given pair have total length $a+b+c$. Hence each of $$d_g(u,v),\qquad d_g(u,r),\qquad d_g(v,q)$$ is at most $\tfrac12(a+b+c)<D_k$ when $k>0$ [given]. Moreover the three pairwise arcs joining $u$, $v$ and $r$ partition $\partial$, so $$d_g(u,v)+d_g(v,r)+d_g(r,u)\le (s+t)+(b-t)+\bigl((a-s)+c\bigr)=a+b+c,$$ and the same partition argument, taking the arc from $u$ to $r$ through the vertex $q$ or the arc from $u$ to $v$ through $p$, gives $$d_g(u,p)+d_g(p,r)+d_g(r,u)\le a+b+c,\qquad d_g(u,q)+d_g(q,r)+d_g(r,u)\le a+b+c,$$ $$d_g(v,p)+d_g(p,u)+d_g(u,v)\le a+b+c,\qquad d_g(v,r)+d_g(r,u)+d_g(u,v)\le a+b+c.$$ In particular the auxiliary triangles $(u,p,r)$, $(u,q,r)$, $(u,v,r)$, $(v,p,u)$ and $(v,r,u)$ have all side lengths below $D_k$ when $k>0$ and perimeters below $2D_k$.
+[F4]
+
+1.5 Angles at an interior point of a leg.
+Let $W:=\sigma_1(s)$ with $0<s<a$, let $\gamma_0$ be a minimizing geodesic from $W$ to $r$ with unit tangent $e$ at $W$, and let $u_1:=\sigma_1'(s)$. The two sub-segments $Wp$ and $Wq$ of $\sigma_1$ have unit tangents $-u_1$ and $u_1$ at $W$, so by [F5] $$\angle_W(p,r)+\angle_W(q,r)=\arccos\bigl(g_W(e,-u_1)\bigr)+\arccos\bigl(g_W(e,u_1)\bigr)=\pi .$$ The same identity holds with the roles of the two legs interchanged: at an interior point of the second leg the two angles to $p$ and to $r$ along the chosen minimizing segment to the opposite endpoint sum to $\pi$.
+[F5]
+
+2.1 The model transfer.
+Claim. Let $p_*,w,z,y\in M^2_k$ with $w\ne p_*,z,y$, and let $\theta_1,\theta_2\in[0,\pi]$ be the angles at $w$ of the triples $(w,p_*,y)$ and $(w,z,y)$ in the sense of step 1.3. Suppose $\theta_1+\theta_2\le\pi$ and, when $k>0$, that the numbers $d_k(p_*,w)+d_k(w,z)$, $d_k(p_*,y)$, $d_k(w,y)$ and $d_k(w,z)$ are all below $D_k$. Let $p',z',y'\in M^2_k$ satisfy $$d_k(p',z')=d_k(p_*,w)+d_k(w,z),\qquad d_k(p',y')=d_k(p_*,y),\qquad d_k(z',y')=d_k(z,y),$$ and let $\alpha'$ be the angle at $p'$ of that triple, in the sense of step 1.3. Then $$\angle_{p_*}(w,y)\ \ge\ \alpha' .$$ Proof of the claim. Let $z_0$ be the point at distance $d_k(w,z)$ from $w$ on the geodesic ray from $p_*$ through $w$ continued beyond $w$; it exists because $M^2_k$ is complete and $d_k(p_*,w)+d_k(w,z)<D_k$ when $k>0$, so the radial geodesic through $w$ is minimizing up to that length [F1]. Then $d_k(p_*,z_0)=d_k(p_*,w)+d_k(w,z)$ and $d_k(w,z_0)=d_k(w,z)$. The ray $wz_0$ is the ray opposite to $wp_*$, so the angles at $w$ formed with the segment $wy$ satisfy $\theta_1+\angle_w(z_0,y)=\pi$ (step 1.3 applied to the triples $(w,p_*,y)$ and $(w,z_0,y)$, whose angles at $w$ are computed from the unit tangents of the two opposite rays); hence $$\pi-(\theta_1+\theta_2)=\angle_w(z_0,y)-\theta_2 .$$ First compare the triples $(w,z,y)$ and $(w,z_0,y)$: they have the same two sides $d_k(w,z)=d_k(w,z_0)$ and $d_k(w,y)$ from $w$, opposite sides $d_k(z,y)$ and $d_k(z_0,y)$, and angles at $w$ $\theta_2$ and $\angle_w(z_0,y)$; by step 1.3, $$\operatorname{sign}\bigl(d_k(z_0,y)-d_k(z,y)\bigr)=\operatorname{sign}\bigl(\angle_w(z_0,y)-\theta_2\bigr).$$ Second compare the triples $(p_*,z_0,y)$ and $(p',z',y')$: they have the same two sides $d_k(p_*,z_0)=d_k(p',z')$ and $d_k(p_*,y)=d_k(p',y')$ from their common vertices, opposite sides $d_k(z_0,y)$ and $d_k(z',y')=d_k(z,y)$, and angles at their vertices $\angle_{p_*}(z_0,y)$ and $\alpha'$; moreover the ray $p_*z_0$ is the ray $p_*w$, so $\angle_{p_*}(z_0,y)=\angle_{p_*}(w,y)$. By step 1.3, $$\operatorname{sign}\bigl(d_k(z_0,y)-d_k(z,y)\bigr)=\operatorname{sign}\bigl(\angle_{p_*}(w,y)-\alpha'\bigr).$$ Combining the two sign identities with the straight-angle identity gives $$\operatorname{sign}\bigl(\pi-(\theta_1+\theta_2)\bigr)=\operatorname{sign}\bigl(\angle_{p_*}(w,y)-\alpha'\bigr).$$ By hypothesis $\pi-(\theta_1+\theta_2)\ge0$, so $\angle_{p_*}(w,y)-\alpha'\ge0$, which is the claim.
+[F1, F3, step 1.3]
+
+3.1 The one-point claim.
+Claim. Fix $s$ with $0<s<a$, put $W:=\sigma_1(s)$, $u_1:=d_g(W,r)>0$, and let $\bar W$ be the point at distance $s$ from $\bar p$ on the comparison side $\bar p\bar q$. Then $$d_g(W,r)\ \ge\ d_k(\bar W,\bar r)=c_k(s,b,\alpha).$$ Proof of the claim. Choose a minimizing geodesic $\gamma_0$ from $W$ to $r$ [F4]. The triples $(W,p,r)$ and $(W,q,r)$ are triangles with minimizing sides: $Wp$ and $Wq$ are the restrictions of the minimizing geodesic $\sigma_1$ to $[0,s]$ and $[s,a]$ [F4], $pr=\sigma_2$ and $Wr=\gamma_0$ are minimizing, and $qr$ is the minimizing side of the given triangle. By step 1.4 their side lengths are below $D_k$ when $k>0$ and their perimeters are below $2D_k$; hence, whenever such a triple is nondegenerate, the triangle comparison [F2] applies to it and its angle at $W$ is at least its comparison angle at $W$. If an auxiliary triple is degenerate, its model angle at $W$ is either $0$ or $\pi$. When it is $0$, the inequality model angle $\le$ actual angle follows from nonnegativity of angles, without any equality assertion. When it is $\pi$, the side opposite $W$ equals the sum of the two sides meeting there. Concatenate the chosen minimizing unit-speed segments through $W$; their length equals the endpoint distance, so the concatenation minimizes. The nonzero-velocity clause of [[thm-a-length-minimizing-piecewise-smooth-curve-is-a-constant-speed-geodesic-up-to-reparametrization]] makes the incoming and outgoing unit velocities equal. The two outward velocities at $W$ are therefore opposite and the actual angle is $\pi$. This proves the required inequality for both $(W,p,r)$ and $(W,q,r)$, for every chosen minimizing $Wr$. Therefore in all cases $$\angle^{k}_W(p,r)+\angle^{k}_W(q,r)\ \le\ \angle_W(p,r)+\angle_W(q,r)=\pi,$$ where $\angle^{k}$ denotes the comparison angle at $W$ and the last equality is step 1.5. Now let $T_1$ be a model configuration in $M^2_k$ realizing the side lengths of $(W,p,r)$ and $T_2$ one realizing the side lengths of $(W,q,r)$; when the triples are nondegenerate these are their comparison triangles [F1], and in the degenerate case the configuration is the collinear one, which exists because the corresponding perimeter is below $2D_k$ when $k>0$. Place $T_1$ and $T_2$ on opposite sides of a common segment realizing the side $Wr$ and glue along it; this is possible because both configurations contain a side of length $u_1=d_g(W,r)$. The glued configuration has points $p_\#,W_\#,q_\#,r_\#$ with $$d_k(p_\#,W_\#)=s,\quad d_k(W_\#,q_\#)=a-s,\quad d_k(p_\#,r_\#)=b,\quad d_k(q_\#,r_\#)=c,\quad d_k(W_\#,r_\#)=u_1,$$ and the angle at $W_\#$ between the rays $W_\#p_\#$ and $W_\#q_\#$ equals the sum of the two comparison angles at $W$, hence is at most $\pi$. Apply the model transfer of step 2.1 with $$p_*:=p_\#,\qquad w:=W_\#,\qquad z:=q_\#,\qquad y:=r_\#,$$ whose hypotheses hold by the previous paragraph and step 1.4, and with the comparison triple $(p',z',y'):=(\bar p,\bar q,\bar r)$: indeed $d_k(p_\#,W_\#)+d_k(W_\#,q_\#)=s+(a-s)=a=d_k(\bar p,\bar q)$, $d_k(p_\#,r_\#)=b=d_k(\bar p,\bar r)$, $d_k(q_\#,r_\#)=c=d_k(\bar q,\bar r)$, and the angle at $\bar p$ of the comparison triangle is $\alpha$. The transfer gives $$\angle_{p_\#}(W_\#,r_\#)\ \ge\ \alpha.$$ By construction $(p_\#,W_\#,r_\#)$ is a configuration in $M^2_k$ with the side data $d_k(p_\#,W_\#)=s$, $d_k(p_\#,r_\#)=b$, $d_k(W_\#,r_\#)=u_1$; its angle at $p_\#$ is therefore, by step 1.3, the comparison angle of the triple $(p,W,r)$ at $p$, and [F3] gives $$u_1=c_k(s,b,\gamma)\qquad\text{with}\qquad \gamma:=\angle_{p_\#}(W_\#,r_\#)\ge\alpha,$$ while $d_k(\bar W,\bar r)=c_k(s,b,\alpha)$ by step 1.1. Since $c_k(s,b,\cdot)$ is nondecreasing [F3], $u_1\ge d_k(\bar W,\bar r)$, which is the claim.
+[F1, F2, F3, F4, step 1.4, step 1.5, step 2.1]
+
+4.1 The interior-interior case.
+Assume now $0<s<a$ and $0<t<b$, and put $u_1:=d_g(u,r)$ and $d:=d_g(u,v)$. These distances are positive. Indeed $u=r$ would give $b=s$ and $c=a-s$, contrary to the strict triangle inequality. If $u=v$, concatenate the prefix of $\sigma_1$ with the nonempty tail of $\sigma_2$. Since $s=t=d_g(p,u)$, this concatenation has length $b=d_g(p,r)$ and minimizes. The nonzero-velocity minimizer clause then makes its tangents match at $u$, and geodesic uniqueness makes $\sigma_1$ and $\sigma_2$ portions of the same geodesic. Their longer minimizing leg then gives $c=|a-b|$, again a contradiction. Step 3.1 applied to the interior point $u=\sigma_1(s)$ gives $$u_1\ \ge\ c_k(s,b,\alpha).$$ By step 1.4, $u_1\le\tfrac12(a+b+c)<D_k$ and $s+b+u_1\le a+b+c<2D_k$, so $u_1\in[|s-b|,m(s,b)]$ and the number $$\gamma_1:=c_k(s,b)^{-1}(u_1)\in[0,\pi]$$ is well defined by [F3], with $u_1=c_k(s,b,\gamma_1)$; the inequality above and strict monotonicity of $c_k(s,b,\cdot)$ give $\gamma_1\ge\alpha$. Similarly, by step 1.4 applied to the pair $(u,v)$, $$d\le\tfrac12(a+b+c)<D_k,\qquad s+t+d\le a+b+c<2D_k,\qquad (b-t)+u_1+d\le a+b+c<2D_k,$$ so the triples $(v,p,u)$ and $(v,r,u)$ have all side lengths below $D_k$ and perimeters below $2D_k$ when $k>0$, and $(b,s,u_1)$ admits a model configuration — the comparison triangle of the nondegenerate case or the collinear one — because $s,b,u_1<D_k$ and $s+b+u_1<2D_k$ [step 1.4]. Now repeat the argument of step 3.1 with the interior point $v$ of the leg $pr$ in place of $W$: the two auxiliary triangles $(v,p,u)$ and $(v,r,u)$ at $v$ have comparison angles at $v$ summing to at most $\pi=\angle_v(p,u)+\angle_v(r,u)$ (step 1.5 with the roles of the legs interchanged, and the same degenerate alternatives as in step 3.1), and gluing their model configurations along the side $vu$ produces a configuration with points $p^\sharp,v^\sharp,r^\sharp,u^\sharp$, $$d_k(p^\sharp,v^\sharp)=t,\quad d_k(v^\sharp,r^\sharp)=b-t,\quad d_k(p^\sharp,u^\sharp)=s,\quad d_k(r^\sharp,u^\sharp)=u_1,\quad d_k(v^\sharp,u^\sharp)=d,$$ whose angle at $v^\sharp$ between $v^\sharp p^\sharp$ and $v^\sharp r^\sharp$ is at most $\pi$; the model transfer of step 2.1, applied with $p_*:=p^\sharp$, $w:=v^\sharp$, $z:=r^\sharp$, $y:=u^\sharp$ and the comparison data $(b,s,u_1)$ giving the angle $\gamma_1$ at $p'$, yields $$\gamma_2:=\angle_{p^\sharp}(v^\sharp,u^\sharp)\ \ge\ \gamma_1 .$$ The configuration $(p^\sharp,v^\sharp,u^\sharp)$ has side data $d_k(p^\sharp,v^\sharp)=t$, $d_k(p^\sharp,u^\sharp)=s$, $d_k(v^\sharp,u^\sharp)=d$; by step 1.3 its angle $\gamma_2$ at $p^\sharp$ is the comparison angle of the triple $(p,v,u)$ at $p$, so [F3] gives $d=c_k(s,t,\gamma_2)$. Since $\gamma_2\ge\gamma_1\ge\alpha$ and $c_k(s,t,\cdot)$ is nondecreasing [F3], while $d_k(\bar u,\bar v)=c_k(s,t,\alpha)$ by step 1.1, $$d_g(u,v)=c_k(s,t,\gamma_2)\ \ge\ c_k(s,t,\alpha)=d_k(\bar u,\bar v).$$
+[step 1.3, step 1.4, step 2.1, step 3.1]
+
+4.2 The remaining boundary cases.
+It remains, by step 1.2, to treat $s=a$ with $0<t<b$, and $0<s<a$ with $t=b$. In the first case apply step 3.1 with the two legs interchanged — the hypotheses of the statement are symmetric in the labels $q,r$: with $W:=\sigma_2(t)$ an interior point of the leg $pr$ and opposite endpoint $u=q$, the same argument (interchanging $a$ and $b$, and $\sigma_1$ with $\sigma_2$) gives $d_g(v,q)\ge c_k(t,a,\alpha)$, where the comparison angle at $\bar p$ is still $\alpha$, and $c_k(t,a,\alpha)=d_k(\bar v,\bar q)$ by step 1.1 applied to the swapped sides. The second case is step 3.1 itself with $W=u$ and $t=b$, where $\bar v=\bar r$.
+[step 1.2, step 3.1]
+
+5.1 Audit of hypotheses, degeneracies and choice.
+The completeness and $K\ge k$ enter through Hopf–Rinow and through the triangle comparison [F2]; the lower bound is used only in that theorem's hypothesis, since every model-side estimate comes from the model cosine law [F3] and the model geometry [F1]. The strict triangle inequalities admit the original comparison triangle. Step 1.4 ensures the positive-curvature side and perimeter bounds for every auxiliary triple; triangle comparison applies to the nondegenerate triples and the minimizing-concatenation argument handles the degenerate ones. The endpoint cases $s\in\{0,a\}$ and $t\in\{0,b\}$ are treated in step 1.2, in step 4.2 and at the start of step 4.1; the degenerate auxiliary configurations are handled in steps 3.1 and 4.1 with the model angle values $0$ and $\pi$ of [F3], which are bounded above by the actual angles there; the case $k=0$ is the boundary case of the formulas and needs no extra hypothesis. No injectivity of the exponential map, no convexity of the distance function and no equality characterization in the comparison theorems are used, and no family of objects is selected: the only selections are single minimizing geodesics provided one at a time by Hopf–Rinow, so the inherited $\mathrm{AC}_\omega$ [A1] suffices. No converse implication is asserted, so no reverse case has to be checked.
+[A1, F1, F2, F3, F4, step 1.2, step 4.1, step 4.2] ∎
+
+## Source locator
+
+The chord comparison is Lang, *Riemannian and Metric Geometry*, Chapter 5, Definition 5.7 and Lemma 5.9 (printed pp. 66–67, PDF pp. 70–71): under $K\ge\kappa$, angle comparison on all subhinges of a hinge implies the chord comparison of corresponding points, the inequality $|uv|\ge|\bar u\bar v|$ proved here. Lemma 5.3 of the same chapter (Alexandrov's lemma, printed p. 65) is the transfer proved in step 2.1: the sign of $\pi$ minus the angle sum at the interior point equals the sign of the angle difference at the vertex; it is derived there from the monotone model cosine law, which is Lemma 5.2 of the source and is recorded as the bijection of [F3] from [[thm-toponogov-hinge-comparison]]. Every segment in a Riemannian manifold is balanced (Lang, p. 66), which is the straight-angle identity of step 1.5, used again in steps 3.1 and 4.1. Lang, *Riemannian and Metric Geometry*, Chapter 5, Definition 5.7 and Lemma 5.9 (printed pp.65–67, PDF pp.69–70), states the chord comparison for curvature at least κ. Eschenburg, *Comparison Theorems in Riemannian Geometry*, §6 (printed pp.21–25), proves the corresponding distance comparison in Theorem 6.1 and the angle comparison in Corollary 6.3.

@@ -1,0 +1,914 @@
+[
+  {
+    "order": 747,
+    "id": "lawrence-krammer-bigelow-and-linearity",
+    "kind": "A",
+    "category": "braid-groups",
+    "title": "Lawrence\u2013Krammer\u2013Bigelow Representations and Linearity",
+    "companion": "lawrence-krammer-bigelow-and-linearity-examples",
+    "requires": [
+      "ordered-and-unordered-configuration-spaces",
+      "braids-as-fundamental-groups-of-configuration-spaces",
+      "covering-spaces-and-lifting",
+      "singular-chains-and-singular-homology",
+      "modules-over-a-pid-and-canonical-forms",
+      "punctured-disks-mapping-classes-and-point-pushing",
+      "garside-structure-normal-forms-and-the-center",
+      "classification-of-compact-connected-surfaces",
+      "the-artin-action-on-a-free-group"
+    ],
+    "items": [
+      {
+        "id": "def-two-point-configuration-space-of-a-punctured-disk",
+        "kind": "definition",
+        "title": "The two-point configuration space of a punctured disk",
+        "deps": [
+          "def-unordered-configuration-space",
+          "def-boundary-fixed-mapping-class-group-of-a-punctured-disk"
+        ],
+        "statement": "Let\n$$D:=\\{z\\in\\mathbb C:|z|\\le 1\\},\\qquad \\operatorname{int}D:=\\{z\\in\\mathbb C:|z|<1\\},$$\nlet $n\\ge 1$, and let $P=\\{p_1,\\dots,p_n\\}\\subset\\operatorname{int}D$ be a set of\n$n$ distinct points, called **punctures**. Throughout the\nLawrence-Krammer-Bigelow page the punctures are normally taken on the real axis\nwith $-1<p_1<\\cdots<p_n<1$, as the standard configuration.\n\nThe **two-point configuration space of the punctured disk** is the unordered\nconfiguration space\n$$C:=C_2(D\\setminus P)=\\{\\{x,y\\}:x,y\\in D\\setminus P,\\ x\\ne y\\}$$\nof [[def-unordered-configuration-space]]. Its elements are written $\\{x,y\\}$\nfor the orbit of the ordered pair $(x,y)$. The **basepoint** is\n$$c_0:=\\{d_1,d_2\\},$$\nwhere $d_1,d_2\\in\\partial D$ are two distinct points of the lower arc of\n$\\partial D$, specified once and for all together with the standard\nconfiguration and with the following convention: $d_1$ lies to the left of\n$d_2$ and the arc of $\\partial D$ from $d_1$ to $d_2$ passing through $-i$ is\nthe **lower arc** used in every noodle construction on this page. Thus\n$c_0\\in C$ is a genuine basepoint.\n\n**Action of the boundary-fixed mapping class group.** Let\n$\\operatorname{Mod}(D,P;\\partial D)$ be the boundary-fixed mapping class group\nof [[def-boundary-fixed-mapping-class-group-of-a-punctured-disk]]: isotopy\nclasses relative to $\\partial D\\cup P$ of homeomorphisms $h:D\\to D$ with\n$h|_{\\partial D}=\\operatorname{id}$ and $h(P)=P$. Every such homeomorphism\nsends $D\\setminus P$ to itself, commutes with the interchange $(x,y)\\mapsto\n(y,x)$, and therefore induces a homeomorphism of $C$. Since $h$ fixes\n$\\partial D$ pointwise, it fixes $d_1$ and $d_2$ and hence fixes $c_0$.\nThese representative homeomorphisms act literally on $C$. An isotopy $h_t$\nrelative to the outer boundary and the marked set gives the continuous based\nhomotopy $\\{x,y\\}\\mapsto\\{h_t(x),h_t(y)\\}$, fixing $c_0$ throughout.\nThus mapping classes act on based homotopy classes of self-maps, and induce\nwell-defined actions on $\\pi_1(C,c_0)$ and homology; no literal action of a\nmapping class on the individual points of $C$ is asserted.\n\n**Elementary properties.** $C$ is path-connected and locally path-connected.\nIndeed, $D\\setminus P$ has disk neighborhoods at interior points and relative\nhalf-disk neighborhoods at boundary points; choose them small enough to miss\n$P$. It is not an open subset of the plane. Polygonal paths with finite\npuncture detours give path connectivity. To join two ordered configurations,\nchoose two distinct interior buffer points different from the four prescribed\nmobile positions and $P$. Move the first point to its buffer avoiding the\nstationary second point, then the second to its buffer avoiding the first;\nmove the first to its target and finally the second to its target, with the\nsame finite-point detours. The distinct buffer choices prevent an occupied\ntarget during each stage. Passing to unordered pairs gives path connectivity.\nLocal path-connectedness is inherited from\n$(D\\setminus P)^2$ through the two-to-one quotient map $(x,y)\\mapsto\\{x,y\\}$:\na small product neighbourhood of $(x,y)$ maps onto a neighbourhood of\n$\\{x,y\\}$, and the only non-injectivity is the interchange of the two\ncoordinates. These conventions fix the space, basepoint and action used by\nthe covering homomorphism and the LKB pairing below.",
+        "strategy": "Read $C$ through the unordered configuration space and fix the boundary base configuration and the induced $B_n$-action; these conventions control the covering homomorphism, the basepoint lift and the pairings below.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            },
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-lkb-two-variable-covering-homomorphism",
+        "kind": "definition",
+        "title": "The two-variable covering homomorphism",
+        "deps": [
+          "def-two-point-configuration-space-of-a-punctured-disk",
+          "def-based-loops-and-fundamental-group",
+          "def-braid-group-by-the-artin-presentation"
+        ],
+        "statement": "Let $C$ be the two-point configuration space of the punctured disk, with\nbasepoint $c_0=\\{d_1,d_2\\}$ and boundary-fixed action, of\n[[def-two-point-configuration-space-of-a-punctured-disk]]. Let\n$$\\mathbb Z^2=\\langle q\\rangle\\oplus\\langle t\\rangle$$\ndenote the free abelian group written multiplicatively with basis the two\nletters $q,t$.\n\n**The winding form.** Let $\\alpha$ be a loop in $C$ at $c_0$\n([[def-based-loops-and-fundamental-group]]). It can be written\n$\\alpha(s)=\\{\\alpha_1(s),\\alpha_2(s)\\}$ for continuous arcs $\\alpha_1,\\alpha_2$\nin $D\\setminus P$. The symmetric nonvanishing functions\n$$W(\\{x,y\\})=\\prod_{j=1}^{n}(x-p_j)(y-p_j),\\qquad V(\\{x,y\\})=(x-y)^2$$\ndefine closed loops $W\\circ\\alpha,V\\circ\\alpha$ in $\\mathbb C^*$ even\nwhen the mobile labels exchange. Define $a(\\alpha)$ and $b(\\alpha)$ as their\ninteger winding numbers, using continuous argument lifts on the compact\nparameter interval. For piecewise smooth tracks this is equivalently\n$$a(\\alpha)=\\frac{1}{2\\pi i}\\sum_{j=1}^{n}\\left(\\int_{\\alpha_1}\\frac{dz}{z-p_j}+\\int_{\\alpha_2}\\frac{dz}{z-p_j}\\right),\\qquad b(\\alpha)=\\frac{1}{\\pi i}\\int_{\\alpha_1-\\alpha_2}\\frac{dz}{z}.$$\nThe winding definition applies to arbitrary continuous loops; no differentiability\nof $\\alpha$ is presumed. The total puncture winding is $a$, and $b$ is the\nmutual half-twist exponent, even for returning labels and odd for exchanged\nlabels. A loop with one mobile point going positively around a single puncture\nin a small disk missing the other mobile point has $(a,b)=(1,0)$. Exchanging\nthe two mobile points by a positive half rotation in a small disk missing all\npunctures gives $(a,b)=(0,1)$. Join these local configurations to $c_0$ by the\nfinite-buffer paths of the configuration-space definition; conjugating the\nlocal loops does not alter winding numbers. Hence $\\Phi$ is surjective, with\nimages $q$ and $t$, including when $n=1$.\n\n**The exponent-sum form.** Ignoring the punctures turns $\\alpha$ into a loop in\nthe space of unordered pairs of points of the disk, hence into a braid in $B_2$\n([[def-braid-group-by-the-artin-presentation]]); let $b$ be its exponent of\n$\\sigma_1$. Adjoining the $n$ fixed punctures turns $\\alpha$ into a loop of\nunordered $(n+2)$-tuples in the disk; that loop is a braid in $B_{n+2}$, and\nthe exponent sum of that braid in the Artin generators $\\sigma_1,\\dots,\n\\sigma_{n+1}$ is written $b'$. Then $b'\\equiv b\\pmod 2$ and\n$$a=\\tfrac12(b'-b)\\in\\mathbb Z .$$\nEquivalently, the parity statement is the relation $b'=2a+b$: the $n$ fixed\npunctures are adjoined in pairs and the mutual half-twist of the two mobile\npoints contributes exactly the parity of $b$.\n\n**The homomorphism.** The **two-variable covering homomorphism** is\n$$\\Phi:\\pi_1(C,c_0)\\longrightarrow\\mathbb Z^2,\\qquad \\Phi(\\alpha)=q^{a}t^{b},\\qquad a=\\tfrac12\\bigl(b'(\\alpha)-b(\\alpha)\\bigr).$$\nIt is well defined and a homomorphism of groups: path-homotopy classes have\nwell-defined winding numbers and well-defined exponent sums, because the\ndefining relations of the Artin presentation preserve the exponent of each\ngenerator, and both $a$ and $b$ are additive under concatenation of loops,\nwhich is the product of [[def-based-loops-and-fundamental-group]]. Since the\nintegers $a$ and $b$ are determined by the class $[\\alpha]$, the formula\ndefines a map; additivity of winding numbers and of exponent sums gives\n$\\Phi([\\alpha][\\beta])=\\Phi([\\alpha])\\Phi([\\beta])$. The case $n=1$ is\nincluded, with $P=\\{p_1\\}$.\n\nThe cover classified by $\\ker\\Phi$ and the resulting LKB module are built from\nthis homomorphism on the same page; the variables $q$ and $t$ are the deck\ngenerators used there.",
+        "strategy": "Exponent sums are additive under concatenation and invariant under homotopy, and the parity of $b'-b$ is read off from the punctures adjoined in pairs; hence $a$ is an integer and $\\Phi$ is a homomorphism.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            },
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-lawrence-krammer-bigelow-cover",
+        "kind": "definition",
+        "title": "The Lawrence-Krammer-Bigelow cover",
+        "deps": [
+          "def-lkb-two-variable-covering-homomorphism",
+          "def-covering-map-and-evenly-covered-neighbourhoods"
+        ],
+        "statement": "Let $\\widetilde C$ be the connected covering space of $C$ with $\\pi_1(\\widetilde C,\\tilde c_0)=\\ker\\Phi$, and fix the lift $\\tilde c_0$ of $c_0$. Then $\\widetilde C\\to C$ is regular with deck group $\\mathbb Z^2$ generated by $q$ and $t$, and $H_2(\\widetilde C;\\mathbb Z)$ carries a $\\Lambda$-module structure, $\\Lambda=\\mathbb Z[q^{\\pm1},t^{\\pm1}]$, on which $q$ and $t$ act by deck translations.",
+        "strategy": "Take the connected cover classified by $\\ker\\Phi$; deck transformations identify with $\\pi_1(C,c_0)/\\ker\\Phi\\cong\\mathbb Z^2$, and the deck action makes absolute homology a $\\Lambda$-module.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            },
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-lkb-absolute-second-homology-module",
+        "kind": "definition",
+        "title": "The integral LKB module as absolute second homology",
+        "deps": [
+          "def-lawrence-krammer-bigelow-cover"
+        ],
+        "statement": "The integral Lawrence-Krammer-Bigelow module is the ordinary absolute homology $H_2(\\widetilde C;\\mathbb Z)$ with its $\\Lambda$-module structure. The relative groups $H_2(\\widetilde C,\\tilde\\nu)$ and $H_2(\\widetilde C,\\partial\\widetilde C\\cup\\tilde\\nu)$ are auxiliary pairing targets only; the representation is defined on this absolute module.",
+        "strategy": "Fix absolute singular homology as the representation module, explicitly refusing to substitute a relative or quotient module for it.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-lkb-relative-pairing-modules",
+        "kind": "definition",
+        "title": "The relative pairing modules as stabilized direct limits",
+        "deps": [
+          "def-lawrence-krammer-bigelow-cover",
+          "lem-lkb-small-end-neighbourhoods-stabilize-equivariantly"
+        ],
+        "statement": "For $\\varepsilon>0$ let $\\nu_\\varepsilon=\\{\\{x,y\\}\\in C:\\ |x-y|<\\varepsilon$ or $\\operatorname{dist}(x,P)<\\varepsilon$ or $\\operatorname{dist}(y,P)<\\varepsilon\\}$, and let $\\tilde\\nu_\\varepsilon$ be its preimage in $\\widetilde C$. The relative pairing modules are the stabilized direct limits $$H_2(\\widetilde C,\\tilde\\nu)=\\lim_{\\varepsilon\\to0}H_2(\\widetilde C,\\tilde\\nu_\\varepsilon),\\qquad H_2(\\widetilde C,\\partial\\widetilde C\\cup\\tilde\\nu)=\\lim_{\\varepsilon\\to0}H_2(\\widetilde C,\\partial\\widetilde C\\cup\\tilde\\nu_\\varepsilon),$$ taken along the unique inverse transition maps supplied by the stabilization lemma; both carry $\\Lambda$-module structures induced by the deck action.",
+        "strategy": "Use the equivariant stabilization of small end neighbourhoods to make the direct limit over decreasing radii canonical; the natural relative-homology maps run from small to large radii and the inverse maps of the stabilization lemma give the limit direction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-forks-noodles-and-their-lkb-intersection-pairing",
+        "kind": "definition",
+        "title": "Forks, noodles and the LKB intersection pairing",
+        "deps": [
+          "def-lkb-relative-pairing-modules",
+          "def-lkb-absolute-second-homology-module",
+          "def-two-point-configuration-space-of-a-punctured-disk"
+        ],
+        "statement": "A noodle is an embedded edge $N\\subset D$ with endpoints $d_1,d_2$, interior in $D\\setminus P$, oriented from $d_1$ to $d_2$. A fork is an embedded tree $F$ with vertices $d_1,p_i,p_j,z$ meeting $\\partial D$ in $d_1$ and $P$ in $p_i,p_j$, whose tine edge $T(F)$ is oriented so the handle lies to its right. For $x\\in H_2(\\widetilde C)$ and $y\\in H_2(\\widetilde C,\\partial\\widetilde C\\cup\\tilde\\nu)$ the LKB pairing is $$\\langle x,y\\rangle=\\sum_{a,b\\in\\mathbb Z}(x\\cdot q^{a}t^{b}y)\\,q^{a}t^{b}\\in\\Lambda,$$ where $\\cdot$ is the algebraic intersection number; the analogous pairing $\\langle\\cdot,\\cdot\\rangle'$ is defined on $H_2(\\widetilde C,\\tilde\\nu)\\times H_2(\\widetilde C,\\partial\\widetilde C)$. Both are $\\Lambda$-sesquilinear: $\\langle\\lambda x,y\\rangle=\\lambda\\langle x,y\\rangle=\\langle x,\\bar\\lambda y\\rangle$.",
+        "strategy": "Define the geometric objects and the monomial-weighted intersection pairing; the sesquilinearity is read off from the definitions. Relative targets are pairing targets only.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            },
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-a-multiple-of-a-fork-surface-has-a-closed-compact-replacement",
+        "kind": "lemma",
+        "title": "A multiple of a fork surface has a closed compact replacement",
+        "deps": [
+          "def-forks-noodles-and-their-lkb-intersection-pairing",
+          "def-lkb-absolute-second-homology-module",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "def-lkb-two-variable-covering-homomorphism",
+          "def-relative-singular-homology",
+          "thm-singular-chain-homotopy-formula"
+        ],
+        "statement": "For every fork $F$ there is a class in $H_2(\\widetilde C)$ represented by an\nimmersed closed surface $\\widetilde\\Sigma_2(F)$ that agrees with\n$(1-q)^2(1+qt)\\widetilde\\Sigma(F)$ outside a small neighbourhood of the two\ntine punctures. Consequently the paired intersection $\\langle N,F\\rangle$ is\nindependent of the escape-to-infinity behaviour of the non-compact surfaces\n$\\widetilde\\Sigma(N)$ and $\\widetilde\\Sigma(F)$.",
+        "strategy": "Apply the long exact sequence of the pair $(\\widetilde C,\\widetilde U)$ for the collision-or-puncture neighbourhood $U$ of the tine punctures; the relations $[a_1,a_2]=1$, $[a_1,b_1a_1b_1]=1$, $[a_2,b_2a_2b_2]=1$ in $\\pi_1(U)$ give $(1-q)^2(1+qt)[b]=0$ in $H_1(\\widetilde U)$, so $(1-q)^2(1+qt)[\\widetilde\\Sigma(F)]$ lifts from $H_2(\\widetilde C,\\widetilde U)$ to an absolute class.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            },
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-lkb-small-end-neighbourhoods-stabilize-equivariantly",
+        "kind": "lemma",
+        "title": "Equivariant stabilization of the LKB end neighbourhoods",
+        "deps": [],
+        "statement": "Let $D$ be the closed unit disk, $P=\\{p_1,\\ldots,p_n\\}\\subset\\operatorname{int}D$ a nonempty finite set, and $C$ the unordered configurations of two distinct points of $D\\setminus P$. Put\n$$f(\\{z_1,z_2\\})=\\min\\bigl(\\{|z_1-z_2|\\}\\cup\\{|z_k-p_i|:k=1,2,\\ 1\\le i\\le n\\}\\bigr),\\qquad\\nu_\\varepsilon=\\{f<\\varepsilon\\}.$$\nLet $\\partial C$ mean the configurations with at least one point on $\\partial D$. There is $\\varepsilon_0>0$ such that for $0<\\delta<\\varepsilon<\\varepsilon_0$ the identity inclusions of pairs\n$$j_{\\delta,\\varepsilon}:(C,\\nu_\\delta)\\longrightarrow(C,\\nu_\\varepsilon),\\qquad j^\\partial_{\\delta,\\varepsilon}:(C,\\partial C\\cup\\nu_\\delta)\\longrightarrow(C,\\partial C\\cup\\nu_\\varepsilon)$$\nare homotopy equivalences of pairs. Their lifts to any fixed regular covering of $C$ are deck-equivariant homotopy equivalences of pairs, after fixing a basepoint lift outside $\\nu_{2\\varepsilon_0}$.\n\nConsequently their induced relative-homology maps $i_{\\delta,\\varepsilon}$ and $i^\\partial_{\\delta,\\varepsilon}$ are isomorphisms in every degree. The maps toward zero are canonically\n$$k_{\\varepsilon,\\delta}=i_{\\delta,\\varepsilon}^{-1},\\qquad k^\\partial_{\\varepsilon,\\delta}=(i^\\partial_{\\delta,\\varepsilon})^{-1}.$$\nThey compose compatibly for decreasing radii, and their direct limits are canonically isomorphic to every sufficiently small relative group. This specifies the reversed transitions needed for a direct-limit convention at the collision and puncture ends; the original natural relative maps themselves run from small to large radii.",
+        "strategy": "Construct a Lipschitz vector field realizing the collision and puncture dilations, flow to a fixed smaller level, and use the resulting pair homotopies to produce explicit inverses; uniqueness of lifted homotopies makes the construction deck-equivariant.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-the-unordered-two-point-punctured-plane-has-an-equivariant-two-dimensional-cell-model",
+        "kind": "lemma",
+        "title": "An equivariant two-dimensional model for the LKB configuration space",
+        "deps": [
+          "def-unordered-configuration-space"
+        ],
+        "statement": "Let $p_1<\\cdots<p_n$ be real numbers, $n\\ge1$, and put\n$$M=\\{(z_1,z_2)\\in\\mathbb C^2:z_1,z_2\\notin\\{p_1,\\ldots,p_n\\},\\ z_1\\ne z_2\\}.$$\nCoordinate interchange $\\tau(z_1,z_2)=(z_2,z_1)$ admits an equivariant homotopy equivalence from $M$ to a finite two-dimensional CW complex. Its quotient is a model of the unordered configuration space $M/\\langle\\tau\\rangle$.\n\nAfter collapsing contractible cellular subcomplexes, the quotient has one vertex, edges $a_i,b_i$ ($1\\le i\\le n$), $c_i$ ($1\\le i\\le n+1$), and faces $A_{ij}$ ($i<j$), $B_{ir}$ ($1\\le i\\le n$, $1\\le r\\le3$), with attaching words\n$$\\partial A_{ij}=(b_i a_j)(a_j b_i)^{-1},\\qquad \\partial B_{i1}=(a_i c_{i+1})(c_i a_i)^{-1},$$\n$$\\partial B_{i2}=(c_{i+1}b_i)(c_i a_i)^{-1},\\qquad \\partial B_{i3}=(c_{i+1}b_i)(b_i c_i)^{-1}.$$\nThe homotopy equivalence lifts to any corresponding regular cover, commutes with its deck group, and preserves ordinary absolute homology. The same model applies to a closed punctured disk containing the punctures in its interior, up to homotopy equivalence preserving the winding character. No identification with end-relative homology is asserted.",
+        "strategy": "Compress real coordinates into a finite square, cellulate by the arrangement, take open face stars times local imaginary chambers as a finite good cover, use the thick-nerve theorem equivariantly, and collapse the barred staircase grid and bigons to reach the displayed two-complex.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Paoluzzi and Paris, A note on the Lawrence-Krammer-Bigelow representation, Algebr. Geom. Topol. 2 (2002) 499-518, sections 2-3",
+              "url": "https://msp.org/agt/2002/2-1/agt-v2-n1-p24-p.pdf"
+            },
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-lkb-lifted-absolute-cellular-boundary-and-fraction-field-rank",
+        "kind": "lemma",
+        "title": "The absolute LKB cellular boundary and fraction-field rank",
+        "deps": [
+          "lem-the-unordered-two-point-punctured-plane-has-an-equivariant-two-dimensional-cell-model",
+          "thm-cellular-homology-computes-singular-homology"
+        ],
+        "statement": "Let $C$ be the unordered configuration of two points in $\\mathbb C\\setminus\\{p_1,\\ldots,p_n\\}$, where $p_1<\\cdots<p_n$ and $n\\ge1$. Let $\\widetilde C$ be the regular cover determined by\n$$\\Phi(\\alpha)=q^{a(\\alpha)}t^{b(\\alpha)},$$\nwhere $a$ is the sum of the two mobile points' winding numbers around all punctures and $b$ is their mutual half-twist exponent. Write $\\Lambda=\\mathbb Z[q^{\\pm1},t^{\\pm1}]$ and $K=\\mathbb Q(q,t)$.\n\nIn the preceding two-dimensional model, the absolute covering chain groups have bases $a_i,b_i,c_i$ in degree one and $A_{ij},B_{ir}$ in degree two, with\n$$dA_{ij}=(q-1)(a_j-b_i),$$\n$$dB_{i1}=(1-t)a_i-c_i+q c_{i+1},\\qquad dB_{i2}=-ta_i+tb_i-c_i+c_{i+1},$$\n$$dB_{i3}=(t-1)b_i-qc_i+c_{i+1}.$$\nOrdinary absolute $H_2(\\widetilde C;\\mathbb Z)$ is the kernel of this differential. Its natural map to $K\\otimes_\\Lambda H_2(\\widetilde C;\\mathbb Z)$ is injective, and that vector space has dimension $\\binom n2$. These claims do not assert integral freeness or injection into end-relative homology.",
+        "strategy": "Identify $q$- and $t$-edges with the winding generators, lift the four attaching words by the prefix rule, compute the kernel over $K$ by a triangular coordinate argument and the integral cycles $E_{ij}$ with leading coordinate $S=(t-1)(qt+1)$, and use torsion-freeness of $\\Lambda$ over the free chain module for injectivity of localization.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Paoluzzi and Paris, A note on the Lawrence-Krammer-Bigelow representation, Algebr. Geom. Topol. 2 (2002) 499-518, sections 2-3",
+              "url": "https://msp.org/agt/2002/2-1/agt-v2-n1-p24-p.pdf"
+            },
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-lkb-deleting-the-last-puncture-gives-a-saturated-absolute-homology-inclusion",
+        "kind": "lemma",
+        "title": "The absolute LKB inclusion obtained by deleting the last puncture is saturated",
+        "deps": [
+          "lem-the-unordered-two-point-punctured-plane-has-an-equivariant-two-dimensional-cell-model",
+          "lem-lkb-lifted-absolute-cellular-boundary-and-fraction-field-rank"
+        ],
+        "statement": "Let $n\\ge2$, $p_1<\\cdots<p_n$, $C_n$ be the unordered two-point configuration in the $n$-punctured plane, and $C_{n-1}^{<}$ the configurations whose two points lie in $\\{z:\\operatorname{Re}z<p_n\\}\\setminus\\{p_1,\\ldots,p_{n-1}\\}$. Use the winding character and compatible lifts in both spaces, and put $H_m=H_2(\\widetilde C_m;\\mathbb Z)$, $\\Lambda=\\mathbb Z[q^{\\pm1},t^{\\pm1}]$, $K=\\mathbb Q(q,t)$.\n\nThe inclusion induces an injective map $H_{n-1}\\to H_n$. In the field extension of $H_n$, its image satisfies\n$$H_n\\cap\\bigl(K\\otimes_\\Lambda H_{n-1}\\bigr)=H_{n-1}.$$\nHere the smaller configuration is identified with the ordinary $(n-1)$-puncture model by a homeomorphism of its half-plane with the plane. Equivalently, an integral absolute class lying in the fraction-field span of classes supported in this smaller configuration already comes from its integral absolute homology. This is the support implication used in the integral LKB basis induction.",
+        "strategy": "Restrict the explicit cellulation to the half-plane, match the cellular complexes by name, and compare kernels of the restricted differentials; a class whose new-puncture coordinates vanish over $K$ has integral coordinates already zero, so it lies in the smaller integral kernel.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Paoluzzi and Paris, A note on the Lawrence-Krammer-Bigelow representation, Algebr. Geom. Topol. 2 (2002) 499-518, sections 2-3",
+              "url": "https://msp.org/agt/2002/2-1/agt-v2-n1-p24-p.pdf"
+            },
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-the-fork-noodle-pairing-is-well-defined-and-equivariant",
+        "kind": "lemma",
+        "title": "The fork-noodle pairing is well defined and equivariant",
+        "deps": [
+          "lem-a-multiple-of-a-fork-surface-has-a-closed-compact-replacement",
+          "def-forks-noodles-and-their-lkb-intersection-pairing",
+          "def-relative-singular-homology",
+          "def-singular-chain-complex-of-a-pair",
+          "thm-singular-chain-homotopy-formula",
+          "lem-int-cancellation",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "def-multiplicative-subset-and-localisation",
+          "thm-alexander-contractibility-of-the-boundary-fixed-disk-homeomorphism-group",
+          "def-lkb-two-variable-covering-homomorphism"
+        ],
+        "statement": "For $x\\in H_2(\\widetilde C)$ and $y\\in H_2(\\widetilde C,\\partial\\widetilde\nC\\cup\\tilde\\nu)$ the Laurent sum\n$\\langle x,y\\rangle=\\sum_{a,b\\in\\mathbb Z}(x\\cdot q^at^by)q^at^b$ has only\nfinitely many nonzero terms and depends only on the homology classes. It is\n$\\Lambda$-sesquilinear, and for every braid class $\\sigma\\in B_n$ one has\n$\\langle\\sigma x,\\sigma y\\rangle=\\langle x,y\\rangle$; the same statements hold\nfor $\\langle\\cdot,\\cdot\\rangle'$.",
+        "strategy": "Use the closed compact replacement to confine all intersections to a compact region, so the sum is finite and invariant under pushing intersections to infinity; naturality of the algebraic intersection number under the deck-equivariant homeomorphism action gives the equivariance, and bilinearity gives sesquilinearity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            },
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "def-lexicographic-order-on-fork-noodle-deck-monomials",
+        "kind": "definition",
+        "title": "The lexicographic order on fork-noodle deck monomials",
+        "deps": [
+          "def-forks-noodles-and-their-lkb-intersection-pairing",
+          "def-lkb-two-variable-covering-homomorphism"
+        ],
+        "statement": "Order the deck monomials $q^{a}t^{b}$ lexicographically by $(a,b)$, with the $q$-exponent compared first, so that $q^{a}t^{b}\\le q^{a'}t^{b'}$ iff $a<a'$, or $a=a'$ and $b\\le b'$. For a tine and a noodle in transverse position with intersection points $z_1,\\dots,z_l$ and parallel copies $z'_1,\\dots,z'_l$, the pair $(z_i,z'_j)$ carries the deck monomial $m_{i,j}=q^{a_{i,j}}t^{b_{i,j}}=\\Phi(\\delta_{i,j})$, and $m_{i,j}$ is maximal if $m_{i,j}\\ge m_{i',j'}$ for all pairs. The unsummed monomial-labelled intersections are kept distinct from the Laurent polynomial $\\langle N,F\\rangle$ obtained after cancellation.",
+        "strategy": "Fix the order and the monomial label of each intersection pair, distinguishing the geometric list of labelled intersections from the summed polynomial.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-extremal-fork-noodle-terms-have-one-sign-and-cannot-cancel",
+        "kind": "lemma",
+        "title": "Extremal fork-noodle terms have one sign and cannot cancel",
+        "deps": [
+          "def-lexicographic-order-on-fork-noodle-deck-monomials",
+          "lem-the-fork-noodle-pairing-is-well-defined-and-equivariant",
+          "lem-arcs-in-a-punctured-disk-have-disjointness-detecting-minimal-positions",
+          "def-axiom-of-choice",
+          "lem-jordan-schoenflies-extension-for-plane-curves"
+        ],
+        "statement": "Assume AC. Put the tine $T(F)$ and the noodle $N$ in transverse position with\nthe minimal number $l$ of intersection points, label the pairs by monomials\n$m_{i,j}=q^{a_{i,j}}t^{b_{i,j}}$ and signs\n$\\epsilon_{i,j}=-(-1)^{b_{i,i}+b_{j,j}+b_{i,j}}$. If $m_{i,j}$ is maximal\namong the monomials, then $m_{i,i}=m_{j,j}=m_{i,j}$, hence\n$\\epsilon_{i,j}=-(-1)^{b_{i,j}}$; consequently every term of the pairing\ncarrying a maximal monomial has the same sign and the maximal coefficient of\n$\\langle N,F\\rangle$ is nonzero.",
+        "strategy": "Lemma 2.1 of Bigelow gives $a_{i,j}=(a_{i,i}+a_{j,j})/2$, so maximality forces $a_{i,i}=a_{j,j}=a_{i,j}$; the winding-number comparison along the two arcs from $z'_i$ to $z'_j$ (with the modification when the arc passes through $z_i$) forces $b_{i,i}=b_{j,j}=b_{i,j}$, and the sign formula then gives one sign for all maximal terms. The minimal-position representative is supplied by the arc minimal-position lemma, whose proof carries AC.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-arcs-in-a-punctured-disk-have-disjointness-detecting-minimal-positions",
+        "kind": "lemma",
+        "title": "Minimal-position representatives and the arc bigon criterion",
+        "deps": [
+          "lem-jordan-schoenflies-extension-for-plane-curves",
+          "def-axiom-of-choice",
+          "lem-homotopic-simple-proper-arcs-in-the-punctured-disk-are-isotopic-relative-to-their-endpoints",
+          "thm-brouwer-fixed-point-theorem",
+          "thm-alexander-contractibility-of-the-boundary-fixed-disk-homeomorphism-group"
+        ],
+        "statement": "Assume AC. Let $D$ be the closed unit disk, $P\\subset\\operatorname{int}D$\nfinite, and $\\mathcal N$ a finite family of pairwise disjoint simple arcs in\n$D\\setminus P$ with endpoints on $\\partial D$ and interiors in\n$\\operatorname{int}D\\setminus P$. Let $T$ be a simple arc in $D\\setminus P$\nwith endpoints in $P\\cup\\partial D$ and interior in\n$\\operatorname{int}D\\setminus P$. Then:\n\n(i) $T$ is isotopic relative to its endpoints, through such arcs, to an arc\nmeeting every member of $\\mathcal N$ transversally with minimal total number of\nintersections;\n\n(ii) $T$ is isotopic relative to its endpoints to an arc disjoint from every\nmember of $\\mathcal N$ if and only if some (equivalently every) minimal-position\nrepresentative is disjoint from $\\mathcal N$;\n\n(iii) if this holds and $C\\subset D$ is a finite union of pairwise disjoint\nsimple proper arcs (with the endpoint convention below) disjoint from $T$ and from every member of $\\mathcal N$, then the\ndisjoining isotopy can be chosen with its moving part disjoint from $C$.",
+        "strategy": "Normalize proper arcs by the qualified relative graph/face construction; minimize finite interior counts. Extract clean actual-cover bigons, counting endpoint sectors separately as I=2A+C+E0 when a boundary endpoint is shared; terminate supported moves avoiding proper obstacles.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Farb and Margalit, A Primer on Mapping Class Groups, version 5.0 author draft, Proposition 1.7, section 1.2.7, Proposition 1.11",
+              "url": "https://web.archive.org/web/20111027114600id_/http://www.math.uchicago.edu/~margalit/mcg/mcgv50.pdf"
+            },
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-the-fork-noodle-pairing-detects-essential-intersections",
+        "kind": "lemma",
+        "title": "The fork-noodle pairing detects essential intersections",
+        "deps": [
+          "lem-extremal-fork-noodle-terms-have-one-sign-and-cannot-cancel",
+          "lem-arcs-in-a-punctured-disk-have-disjointness-detecting-minimal-positions",
+          "def-axiom-of-choice",
+          "lem-the-fork-noodle-pairing-is-well-defined-and-equivariant",
+          "def-lexicographic-order-on-fork-noodle-deck-monomials",
+          "def-forks-noodles-and-their-lkb-intersection-pairing"
+        ],
+        "statement": "Assume AC. Let $N$ be a noodle and $F$ a fork of\n[[def-forks-noodles-and-their-lkb-intersection-pairing]]. Then\n$$\\langle N,F\\rangle=0 \\quad\\Longleftrightarrow\\quad T(F)\\ \\text{can be isotoped relative to } \\partial D\\cup P \\text{ to an arc disjoint from } N .$$",
+        "strategy": "If a disjoint representative exists, the minimal-position representative is disjoint and the pairing is an empty sum. Conversely put the tine and noodle in minimal position; if intersections remain, the maximal-term lemma exhibits a nonzero coefficient of $\\langle N,F\\rangle$ with one sign, so the pairing does not vanish. Minimal positions are supplied by the AC-carrying arc minimal-position lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-fork-detection-transports-to-arbitrary-boundary-crosscuts",
+        "kind": "lemma",
+        "title": "Fork detection transports to arbitrary boundary crosscuts",
+        "deps": [
+          "lem-the-fork-noodle-pairing-detects-essential-intersections",
+          "lem-a-multiple-of-a-fork-surface-has-a-closed-compact-replacement",
+          "lem-the-fork-noodle-pairing-is-well-defined-and-equivariant",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. Let $F$ be a fork with compact absolute replacement $c_F$, and let $M$ be any simple proper crosscut of $D\\setminus P$ with two distinct endpoints on $\\partial D$. Choose the closing neighborhoods of $c_F$ disjoint from $M$. Its triangle of unordered pairs defines an end-stable boundary-relative class $y_M$, with any chosen lift. Then\n$$\\langle c_F,y_M\\rangle=0\\quad\\Longleftrightarrow\\quad T(F)\\text{ is isotopic relative to }P\\cup\\partial D\\text{ to an arc disjoint from }M.$$\nHere the pairing has an absolute first argument and an end-stable boundary-relative second argument. No pairing of two end-relative classes is asserted.",
+        "strategy": "Explicit outer-collar angular isotopy transports an arbitrary distinct boundary endpoint pair to the original noodle pair; compact absolute fork class is fixed, and the end-stable pairing differs only by a monomial unit.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "lem-an-lkb-kernel-braid-fixes-every-standard-adjacent-edge-up-to-isotopy",
+        "kind": "lemma",
+        "title": "An LKB kernel braid fixes every standard adjacent edge up to isotopy",
+        "deps": [
+          "lem-the-fork-noodle-pairing-detects-essential-intersections",
+          "def-lawrence-krammer-bigelow-representation",
+          "thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk",
+          "lem-arcs-in-a-punctured-disk-have-disjointness-detecting-minimal-positions",
+          "def-axiom-of-choice",
+          "lem-the-fork-noodle-pairing-is-well-defined-and-equivariant",
+          "thm-the-integral-lkb-module-is-free-of-rank-n-choose-two",
+          "def-lexicographic-order-on-fork-noodle-deck-monomials",
+          "lem-fork-detection-transports-to-arbitrary-boundary-crosscuts",
+          "lem-jordan-schoenflies-extension-for-plane-curves"
+        ],
+        "statement": "Assume AC. Fix the standard configuration: punctures\n$p_1<\\cdots<p_n$ on the real axis of the disk $D$, boundary points\n$d_1,d_2$ in the lower half-plane, standard edges\n$E_i=[p_i,p_{i+1}]$ for $1\\le i\\le n-1$, and standard noodles $N_j$ winding\naround $p_j$ and no other puncture, crossing the real axis twice. If a\nboundary-fixed homeomorphism $\\sigma$ of $(D,P)$ represents an element of the\nkernel of $\\rho_{\\mathrm{LKB}}$, then for every $i$ the arc $\\sigma(E_i)$ is\nisotopic relative to $\\partial D\\cup P$ to $E_i$; in particular $\\sigma$\nfixes each $E_i$ up to isotopy and preserves the labelling of the punctures.",
+        "strategy": "For the standard fork $F_i$ with tine $E_i$, the pairings $\\langle N_j,F_i\\rangle$ vanish for $j\\notin\\{i,i+1\\}$, and the Basic Lemma gives $\\langle N_j,\\sigma(F_i)\\rangle=0$; the Key Lemma then produces successive disjoining isotopies, kept away from edges and noodles already arranged, and the planar position of the standard configuration identifies the result with $E_i$ up to isotopy relative to $\\partial D\\cup P$. Kernel elements are read as boundary-fixed mapping classes through the published AC-dependent identification of the classical braid group with the mapping class group.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "lem-a-punctured-disk-mapping-class-fixing-all-standard-adjacent-edges-is-a-boundary-twist-power",
+        "kind": "lemma",
+        "title": "A mapping class fixing all standard adjacent edges is a boundary twist power",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-garside-half-twist-and-simple-positive-braid",
+          "def-boundary-fixed-mapping-class-group-of-a-punctured-disk",
+          "thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk",
+          "lem-homotopic-simple-proper-arcs-in-the-punctured-disk-are-isotopic-relative-to-their-endpoints",
+          "lem-jordan-schoenflies-extension-for-plane-curves",
+          "thm-alexander-contractibility-of-the-boundary-fixed-disk-homeomorphism-group"
+        ],
+        "statement": "Assume AC. If a boundary-fixed mapping class of the $n$-times punctured disk preserves every marked puncture label and\nfixes each standard adjacent edge $E_1,\\dots,E_{n-1}$ up to isotopy relative\nto $\\partial D\\cup P$, then it is isotopic to $(\\Delta^2)^k$ for some\n$k\\in\\mathbb Z$, where $\\Delta^2$ is the full twist, that is, the Dehn twist\nabout a curve parallel to $\\partial D$.",
+        "strategy": "Use the smooth relative isotopy extension lemma (stated over AC_omega and applied through the implication AC \u21d2 AC_omega) to ambient-isotope the representative so that it fixes $E_1\\cup\\cdots\\cup E_{n-1}$ pointwise; in the faithfulness application the kernel-braid lemma supplies the isotopies $\\sigma(E_i)\\simeq E_i$. A regular neighbourhood of that union is a once-bordered disk containing all punctures; Alexander-contract the representative there, and identify the complement, an annulus, with the mapping class group generated by its core twist, which is the full boundary twist.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            },
+            {
+              "title": "Farb and Margalit, A Primer on Mapping Class Groups, version 5.0 author draft, Proposition 1.7, section 1.2.7, Proposition 1.11",
+              "url": "https://web.archive.org/web/20111027114600id_/http://www.math.uchicago.edu/~margalit/mcg/mcgv50.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-the-full-boundary-twist-acts-on-lkb-by-the-scalar-q-to-two-n-t-squared",
+        "kind": "lemma",
+        "title": "The full boundary twist acts on LKB by the scalar q to two n t squared",
+        "deps": [
+          "def-lawrence-krammer-bigelow-representation",
+          "thm-the-integral-lkb-module-is-free-of-rank-n-choose-two",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. Let $\\Delta^2$ be the full twist of $B_n$ and let\n$\\rho_{\\mathrm{LKB}}$ be the representation of\n[[def-lawrence-krammer-bigelow-representation]]. Then the normalized lift of\n$\\Delta^2$ acts on the absolute module $H_2(\\widetilde C;\\mathbb Z)$ by the\nscalar $q^{2n}t^2$:\n$$\\rho_{\\mathrm{LKB}}(\\Delta^2)=q^{2n}t^2\\operatorname{id}, \\qquad \\rho_{\\mathrm{LKB}}(\\Delta^{2k})=q^{2nk}t^{2k}\\operatorname{id} \\ \\ (k\\in\\mathbb Z).$$\nFor $n\\ge2$, the scalar $q^{2nk}t^{2k}$ equals the identity of\n$\\mathrm{GL}_{\\binom n2}(\\Lambda)$ only for $k=0$. Equivalently, in Krammer's\nfraction-field model with basis $x_{ij}$ one has\n$\\Delta x_{n+1-j,n+1-i}=tq^{i+j-1}x_{ij}$, and applying this identity twice\nmultiplies every basis element by $t^2q^{2n}$. For $n=1$ the absolute module is zero and every scalar induces its identity; the detection clause is not asserted in that rank.",
+        "strategy": "Compute in the explicit matrix model over $K=\\mathbb Q(q,t)$: Lemma 3.2 of Krammer gives the action of the half twist on the basis $\\{x_{ij}\\}$, and two applications multiply each basis element by $t^2q^{2n}$; the identity is a matrix identity with entries in $\\Lambda$, so it holds integrally, and commutativity of the full twist transfers it to $\\rho_{\\mathrm{LKB}}$. The equivalent standard-fork computation of Bigelow gives $\\langle N_1,(\\Delta^2)^kF_1\\rangle=-q(q^{2n}t^2)^k$. The transfer from the algebraic model to rho_LKB uses the published AC-dependent identification of the classical braid group with the boundary-fixed mapping class group.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Krammer, Braid groups are linear, Ann. of Math. 155 (2002) 131-156, section 3 and Lemma 3.2; section 4",
+              "url": "https://arxiv.org/pdf/math/0405198"
+            },
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "def-lawrence-krammer-bigelow-representation",
+        "kind": "definition",
+        "title": "The Lawrence-Krammer-Bigelow representation",
+        "deps": [
+          "thm-the-integral-lkb-module-is-free-of-rank-n-choose-two",
+          "lem-braids-lift-to-the-lkb-cover-and-act-lambda-linearly",
+          "def-axiom-of-choice",
+          "lem-lkb-lifted-absolute-cellular-boundary-and-fraction-field-rank"
+        ],
+        "statement": "Assume AC. Let $D$ be the closed unit disk,\n$P=\\{p_1,\\dots,p_n\\}\\subset\\operatorname{int}D$ the puncture set in the\nstandard configuration, $C$ the unordered two-point configuration space of\n$D\\setminus P$ with its basepoint $c_0$, and $\\widetilde C\\to C$ the LKB cover\nwith basepoint lift $\\tilde c_0$, deck group\n$\\mathbb Z^2=\\langle q\\rangle\\oplus\\langle t\\rangle$ and coefficient ring\n$\\Lambda=\\mathbb Z[q^{\\pm1},t^{\\pm1}]$\n([[def-two-point-configuration-space-of-a-punctured-disk]],\n[[def-lawrence-krammer-bigelow-cover]]).\n\nBy [[thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk]]\nthe classical braid group $B_n$ is identified with the boundary-fixed mapping\nclass group $\\operatorname{Mod}(D,P;\\partial D)$: homeomorphisms of $D$ fixing\n$\\partial D$ pointwise and preserving $P$ setwise, modulo isotopy relative to\n$\\partial D\\cup P$. Let $[\\sigma]\\in B_n$ and let $\\sigma$ be a representative.\nBy [[lem-braids-lift-to-the-lkb-cover-and-act-lambda-linearly]] there is a\nunique lift $\\widetilde\\sigma$ of $\\sigma$ to $\\widetilde C$ fixing\n$\\tilde c_0$; it commutes with every deck transformation, and its induced\nautomorphism\n$$\\widetilde\\sigma_*:H_2(\\widetilde C;\\mathbb Z)\\longrightarrow H_2(\\widetilde C;\\mathbb Z)$$\nis $\\Lambda$-linear and invertible. The assignment\n$[\\sigma]\\mapsto\\widetilde\\sigma_*$ is independent of the representative and\nmultiplicative, so it defines a homomorphism\n$$B_n\\longrightarrow\\operatorname{Aut}_\\Lambda H_2(\\widetilde C;\\mathbb Z).$$\n\nThe **Lawrence-Krammer-Bigelow representation** is this homomorphism composed\nwith the matrix presentation of the target: fix once and for all the\n$\\Lambda$-basis $\\{v_{i,j}:1\\le i<j\\le n\\}$ of\n$H_2(\\widetilde C;\\mathbb Z)$ supplied for $n\\ge2$ by\n[[thm-the-integral-lkb-module-is-free-of-rank-n-choose-two]].\nFor $n=1$ the basis is empty and $H_2=0$: the absolute cellular rank and\nlocalization injection of [[lem-lkb-lifted-absolute-cellular-boundary-and-fraction-field-rank]]\ngive rank0 and therefore zero homology. They apply to the disk as well as the\nplane: choose a radial collar outside all punctures and compress its boundary\nstrictly inward by a strictly increasing radius map fixed below the collar.\nInterpolating that map with the identity keeps every two-point configuration\ncollision-free and gives inverse homotopies for interior inclusion. The\nhomotopy preserves puncture and mutual winding characters; the moving\nbasepoint is transported along its specified track. The open disk is\norientation-preservingly radially homeomorphic to the plane, taking real\npunctures to real punctures in the same order. This transfers the absolute\ncover calculation. Define\n$$\\rho_{\\mathrm{LKB}}:B_n\\longrightarrow \\mathrm{GL}_{\\binom n2}(\\Lambda),\\qquad \\rho_{\\mathrm{LKB}}([\\sigma])=\\text{the matrix of } \\widetilde\\sigma_* \\text{ in the basis } \\{v_{i,j}\\}.$$\nThus $\\rho_{\\mathrm{LKB}}$ is the action of $B_n$ on the absolute integral\nmodule $H_2(\\widetilde C;\\mathbb Z)$; the relative modules and the pairing are\nnot used in its definition, and the Axiom of Choice is used exactly in the\nidentification of $B_n$ with the boundary-fixed mapping class group, which\nsupplies the normalized lifts above.\n\nTwo caveats are part of the definition. First, the target is the integral\nmatrix group over $\\Lambda$; by\n[[thm-the-integral-lkb-module-is-free-of-rank-n-choose-two]] the basis\n$\\{v_{i,j}\\}$ is not related to Krammer's matrix basis by a $B_n$-equivariant $\\Lambda$-isomorphism when\n$n\\ge3$, and only the fraction-field models are identified. Second, the\nnormalization by the lift fixing $\\tilde c_0$ is essential: replacing it by\nanother lift multiplies $\\widetilde\\sigma_*$ by a deck transformation, i.e. by\na monomial $q^at^b$, so the matrix of $\\rho_{\\mathrm{LKB}}([\\sigma])$ below is\nthe one computed from this fixed normalization.",
+        "strategy": "Define the homomorphism on mapping classes by choosing normed lifts and using the lifting lemma; the integral basis theorem presents the target as matrices in a free module of rank $\\binom n2$. The domain is the classical braid group, read as the boundary-fixed mapping class group through the published AC-dependent identification.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            },
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "lem-braids-lift-to-the-lkb-cover-and-act-lambda-linearly",
+        "kind": "lemma",
+        "title": "Braids lift to the LKB cover and act Lambda-linearly",
+        "deps": [
+          "thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk",
+          "def-lkb-two-variable-covering-homomorphism",
+          "def-lawrence-krammer-bigelow-cover",
+          "def-axiom-of-choice",
+          "thm-covering-space-lifting-criterion",
+          "thm-homotopy-lifting-for-covering-maps",
+          "thm-alexander-contractibility-of-the-boundary-fixed-disk-homeomorphism-group",
+          "def-induced-homomorphism-on-fundamental-groups"
+        ],
+        "statement": "Assume AC. Every homeomorphism $\\sigma$ of $(D,P)$ inducing $\\sigma_*$ on\n$\\pi_1(C,c_0)$ satisfies $\\Phi\\circ\\sigma_*=\\Phi$; hence it has a unique lift\n$\\widetilde\\sigma$ fixing $\\tilde c_0$, which commutes with every deck\ntransformation, and the induced map $\\widetilde\\sigma_*$ on\n$H_2(\\widetilde C)$ is a $\\Lambda$-module automorphism. Composition of braid\nclasses corresponds to composition of these automorphisms, so\n$[\\sigma]\\mapsto\\widetilde\\sigma_*$ is a well-defined homomorphism.",
+        "strategy": "Both winding exponents in $\\Phi$ are invariant under a puncture-permuting homeomorphism, so the kernel is preserved; the unique lift fixing the basepoint lift exists, commutes with deck translations by uniqueness of lifted paths, and associativity of composition gives the homomorphism property. The identification of the classical braid group with the boundary-fixed mapping class group used to read braid classes as mapping classes is the published AC-dependent one.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-closed-lkb-basis-surfaces-have-the-three-required-topological-types-and-factors",
+        "kind": "lemma",
+        "title": "Closed LKB basis surfaces have the three required topological types and factors",
+        "deps": [
+          "def-lkb-relative-pairing-modules",
+          "lem-a-multiple-of-a-fork-surface-has-a-closed-compact-replacement",
+          "lem-the-fork-noodle-pairing-is-well-defined-and-equivariant"
+        ],
+        "statement": "For $1\\le i<j\\le n$ let $v'_{i,j}$ be the square or triangle of Bigelow\nsection 4.1: the square for the edges $[p_i,p_{i+1}]$, $[p_{j-1},p_j]$ when\n$j-i>2$; the square for $[p_i,p_{i+1}]$ and an edge from $p_{i-1}$ to $p_j$ in\nthe lower half-plane when $j-i=2$, $i>1$; the square for $[p_1,p_2]$,\n$[p_2,p_3]$ when $(i,j)=(1,3)$; and the triangle for $[p_i,p_{i+1}]$ when\n$j=i+1$. Then there is $v_{i,j}\\in H_2(\\widetilde C)$ whose image in\n$H_2(\\widetilde C,\\tilde\\nu)$ is $(1-q)^2(1+qt)(1-t)v'_{i,i+1}$ for\n$j=i+1$, $(1-q)^2(1+qt)v'_{1,3}$ for $(i,j)=(1,3)$, and $(1-q)^2v'_{i,j}$\notherwise; these are realized by the explicit genus three, genus two and\ngenus one closed surfaces. The pairings $\\langle v'_{i,j},x_{i,j}\\rangle'$\nare units of $\\Lambda$. For $2\\le i\\le n-2$, the off-diagonal pairing\n$\\langle v'_{i,i+2},x_{i-1,i+1}\\rangle'$ is a Laurent unit, whereas\n$\\langle v'_{i,i+2},x_{i,i+1}\\rangle'$ is a Laurent unit times $(1-t)$:\nit is nonzero but is not a unit.\nAll remaining pairings vanish, so the pairing matrix is\ntriangular with unit diagonal.",
+        "strategy": "For adjacent pairs, glue two copies of a twice-punctured torus by two annuli to obtain a genus three surface whose relative image is $(1-q)^2(1+qt)(1-t)$ times a triangle; for $(1,3)$, glue along the rotated boundary of a disk cut from a torus to obtain a genus two surface with factor $(1-q)^2(1+qt)$; for the generic square use two disjoint figure-eights on a torus for the factor $(1-q)^2$. Compute the remaining pairings by transverse projection: a single transverse intersection gives a unit and no intersection gives zero.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-fraction-field-coefficients-of-an-integral-lkb-class-are-laurent-polynomials",
+        "kind": "lemma",
+        "title": "Fraction-field coefficients of an integral LKB class are Laurent polynomials",
+        "deps": [
+          "lem-lkb-lifted-absolute-cellular-boundary-and-fraction-field-rank",
+          "lem-lkb-deleting-the-last-puncture-gives-a-saturated-absolute-homology-inclusion",
+          "lem-closed-lkb-basis-surfaces-have-the-three-required-topological-types-and-factors",
+          "lem-the-fork-noodle-pairing-is-well-defined-and-equivariant",
+          "lem-int-cancellation",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "def-multiplicative-subset-and-localisation"
+        ],
+        "statement": "Let $c_{i,j}\\in\\mathbb Q(q,t)$ for $1\\le i<j\\le n$ be such that\n$v=\\sum_{i<j}c_{i,j}v_{i,j}$ lies in $H_2(\\widetilde C;\\mathbb Z)$. Then\n$c_{i,j}\\in\\Lambda$ for all $i<j$; equivalently the closed surfaces $v_{i,j}$\nspan $H_2(\\widetilde C;\\mathbb Z)$ over $\\Lambda$.",
+        "strategy": "For $n=3$, pair $v$ against $x_{2,3}$, $x_{1,3}$ and $\\sigma_2x_{2,3}$ and use the divisibilities $x_{2,3}\\in(1-q)^2H_2(\\widetilde C,\\partial\\widetilde C\\cup\\tilde\\nu)$ and $x_{2,3}\\in(1-q)(1+qt)(1-t)H_2(\\widetilde C,\\partial\\widetilde C\\cup\\tilde\\nu)$ to show successively $(1+qt)(1-t)c_{2,3}\\in\\Lambda$, $(1-q)c_{2,3}\\in\\Lambda$, $c_{2,3}\\in\\Lambda$, and symmetrically $c_{1,2}\\in\\Lambda$, then reduce to $v=c_{1,3}v_{1,3}$ and use $\\sigma_2x_{2,3}$ and $x_{1,3}$. The divisibilities are proved by cutting a representing square into its eight pieces, listing orientations and deck displacements, and identifying each piece with a multiple of a triangle (Lemma 4.5) or a square (Lemma 4.6). For $n>3$, subtract the terms $c_{i,n}v_{i,n}$ and use the saturated inclusion of the $(n-1)$-puncture model to run the induction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-the-integral-lkb-module-is-free-of-rank-n-choose-two",
+        "kind": "theorem",
+        "title": "The integral LKB module is free of rank n choose two",
+        "deps": [
+          "lem-lkb-lifted-absolute-cellular-boundary-and-fraction-field-rank",
+          "lem-closed-lkb-basis-surfaces-have-the-three-required-topological-types-and-factors",
+          "lem-fraction-field-coefficients-of-an-integral-lkb-class-are-laurent-polynomials",
+          "def-lawrence-krammer-bigelow-cover",
+          "lem-int-cancellation",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "def-multiplicative-subset-and-localisation"
+        ],
+        "statement": "Let $n\\ge2$, let $\\Lambda=\\mathbb Z[q^{\\pm1},t^{\\pm1}]$ and let\n$\\widetilde C\\to C$ be the LKB cover of\n[[def-lawrence-krammer-bigelow-cover]]. Then $H_2(\\widetilde C;\\mathbb Z)$ is\na free $\\Lambda$-module of rank $\\binom n2$. Explicitly, the closed surfaces\n$v_{i,j}$ ($1\\le i<j\\le n$) of\n[[lem-closed-lkb-basis-surfaces-have-the-three-required-topological-types-and-factors]],\nwhose images in $H_2(\\widetilde C,\\partial\\widetilde C\\cup\\tilde\\nu)$ are\n$$(1-q)^2(1+qt)(1-t)v'_{i,i+1}\\ (j=i+1),\\qquad (1-q)^2(1+qt)v'_{1,3}\\ ((i,j)=(1,3)),\\qquad (1-q)^2v'_{i,j}\\ (\\text{otherwise}),$$\nform a $\\Lambda$-basis of $H_2(\\widetilde C;\\mathbb Z)$. Here $v'_{i,j}$ are\nthe relative squares and triangles of that lemma.\n\nFor $n\\ge3$ the integral module $H_2(\\widetilde C;\\mathbb Z)$ and Krammer's\nfree matrix module $V=\\bigoplus_{i<j}\\Lambda x_{i,j}$ are isomorphic only\nafter extending scalars to $\\mathbb Q(q,t)$; they are not isomorphic as $\\Lambda[B_n]$-modules (with the fixed parameter convention), although their underlying free $\\Lambda$-modules are isomorphic,\nand no integral identification of the two bases is asserted.",
+        "strategy": "Linear independence follows from the unit triangular pairing matrix; the rank and spanning follow from the fraction-field dimension bound together with the coefficient lemma. The explicit basis is the one described by Bigelow; the Krammer lattice comparison is only after extending scalars to $\\mathbb Q(q,t)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            },
+            {
+              "title": "Paoluzzi and Paris, A note on the Lawrence-Krammer-Bigelow representation, Algebr. Geom. Topol. 2 (2002) 499-518, sections 2-3",
+              "url": "https://msp.org/agt/2002/2-1/agt-v2-n1-p24-p.pdf"
+            },
+            {
+              "title": "Krammer, Braid groups are linear, Ann. of Math. 155 (2002) 131-156, section 3 and Lemma 3.2; section 4",
+              "url": "https://arxiv.org/pdf/math/0405198"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "thm-the-lawrence-krammer-bigelow-representation-is-faithful",
+        "kind": "theorem",
+        "title": "The Lawrence-Krammer-Bigelow representation is faithful",
+        "deps": [
+          "lem-an-lkb-kernel-braid-fixes-every-standard-adjacent-edge-up-to-isotopy",
+          "lem-a-punctured-disk-mapping-class-fixing-all-standard-adjacent-edges-is-a-boundary-twist-power",
+          "lem-the-full-boundary-twist-acts-on-lkb-by-the-scalar-q-to-two-n-t-squared",
+          "def-axiom-of-choice",
+          "def-lawrence-krammer-bigelow-representation"
+        ],
+        "statement": "Assume AC. The representation $\\rho_{\\mathrm{LKB}}$ of\n[[def-lawrence-krammer-bigelow-representation]] is faithful for every\n$n\\ge1$: if a boundary-fixed homeomorphism $\\sigma$ represents an element of\nthe kernel, then $\\sigma$ is isotopic relative to $\\partial D\\cup P$ to\n$(\\Delta^2)^k$ for some $k\\in\\mathbb Z$. For $n\\ge2$ the scalar value $q^{2n}t^2$ forces $k=0$; for $n=1$, $B_1$ is trivial.",
+        "strategy": "A kernel braid fixes every standard adjacent edge up to isotopy, hence is a power of the full boundary twist by the edge-fixing lemma. Its image is $(q^{2n}t^2)^k\\operatorname{id}$, which equals the identity only for $k=0$; this is Bigelow's complete topological closure and does not use any $\\pi_1$-triviality criterion. Kernel elements are boundary-fixed mapping classes through the published AC-dependent identification of the classical braid group with the mapping class group.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            },
+            {
+              "title": "Krammer, Braid groups are linear, Ann. of Math. 155 (2002) 131-156, section 3 and Lemma 3.2; section 4",
+              "url": "https://arxiv.org/pdf/math/0405198"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "cor-every-classical-braid-group-is-linear",
+        "kind": "corollary",
+        "title": "Every classical braid group is linear",
+        "deps": [
+          "thm-the-lawrence-krammer-bigelow-representation-is-faithful",
+          "thm-the-integral-lkb-module-is-free-of-rank-n-choose-two",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. For every $n\\ge1$ the representation\n$\\rho_{\\mathrm{LKB}}$ embeds $B_n$ into\n$\\mathrm{GL}_{\\binom n2}(\\Lambda)$, hence also into\n$\\mathrm{GL}_{\\binom n2}(\\mathbb Q(q,t))$; therefore every classical braid\ngroup is linear.",
+        "strategy": "Combine faithfulness with the free $\\Lambda$-basis of the target; extending scalars to the fraction field gives a faithful finite-dimensional linear representation over a field. The corollary is stated for the classical braid groups, identified with the boundary-fixed mapping class groups through the published AC-dependent theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            },
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            },
+            {
+              "title": "Krammer, Braid groups are linear, Ann. of Math. 155 (2002) 131-156, section 3 and Lemma 3.2; section 4",
+              "url": "https://arxiv.org/pdf/math/0405198"
+            }
+          ]
+        },
+        "dependency_level": 13
+      }
+    ]
+  },
+  {
+    "order": 748,
+    "id": "lawrence-krammer-bigelow-and-linearity-examples",
+    "kind": "B",
+    "category": "braid-groups",
+    "title": "Lawrence\u2013Krammer\u2013Bigelow Representations and Linearity \u2014 Examples",
+    "companion": "lawrence-krammer-bigelow-and-linearity",
+    "requires": [
+      "lawrence-krammer-bigelow-and-linearity"
+    ],
+    "items": [
+      {
+        "id": "ex-the-krammer-fraction-field-generator-matrices-for-b-three",
+        "kind": "example",
+        "title": "The Krammer fraction-field generator matrices for B three",
+        "deps": [
+          "def-lawrence-krammer-bigelow-representation",
+          "thm-the-integral-lkb-module-is-free-of-rank-n-choose-two"
+        ],
+        "statement": "For $n=3$ Krammer's fraction-field model of the\n[[def-lawrence-krammer-bigelow-representation]] is a free module with basis\n$x_{12},x_{13},x_{23}$ over $\\Lambda=\\mathbb Z[q^{\\pm1},t^{\\pm1}]$, on which\nthe generators act by the seven-case formula\n$$\\sigma_k x_{k,k+1}=tq^2x_{k,k+1};\\qquad \\sigma_k x_{ik}=(1-q)x_{ik}+q x_{i,k+1}\\ (i<k);$$\n$$\\sigma_k x_{i,k+1}=x_{ik}+tq^{k-i+1}(q-1)x_{k,k+1}\\ (i<k);$$\n$$\\sigma_k x_{kj}=tq(q-1)x_{k,k+1}+q x_{k+1,j}\\ (k+1<j);$$\n$$\\sigma_k x_{k+1,j}=x_{kj}+(1-q)x_{k+1,j}\\ (k+1<j);$$\n$$\\sigma_k x_{ij}=x_{ij}\\ (i<j<k\\ \\text{or}\\ k+1<i<j);\\qquad \\sigma_k x_{ij}=x_{ij}+tq^{k-i}(q-1)^2x_{k,k+1}\\ (i<k<k+1<j).$$\n\nThis example records the two resulting $3\\times3$ matrices over $\\Lambda$,\nchecks the braid relation by direct multiplication, and checks the full-twist\nvalue $q^{2n}t^2=q^6t^2$ at $n=3$. The model is a fraction-field model: by\n[[thm-the-integral-lkb-module-is-free-of-rank-n-choose-two]] it is not\nintegrally identified with the closed-surface basis $\\{v_{i,j}\\}$ when\n$n\\ge3$, and the parameter translation between Krammer's and Bigelow's\nconventions is $t_{\\mathrm{Krammer}}=-t_{\\mathrm{Bigelow}}$.",
+        "strategy": "Apply Krammer's stated action to the three basis vectors and record the resulting matrices; verify the two Artin relations by direct $3\\times3$ multiplication, and verify the full-twist scalar $q^{2n}t^2$ at $n=3$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Krammer, Braid groups are linear, Ann. of Math. 155 (2002) 131-156, section 3 and Lemma 3.2; section 4",
+              "url": "https://arxiv.org/pdf/math/0405198"
+            },
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "ex-a-fork-noodle-pairing-computation",
+        "kind": "example",
+        "title": "A fork-noodle pairing computation",
+        "deps": [
+          "def-forks-noodles-and-their-lkb-intersection-pairing",
+          "def-lexicographic-order-on-fork-noodle-deck-monomials"
+        ],
+        "statement": "Worked example: for an explicit noodle and fork, the example lists every intersection point $z_i$ of the tine with the noodle, the parallel points $z'_j$, the sign $\\epsilon_{i,j}=-(-1)^{b_{i,i}+b_{j,j}+b_{i,j}}$ and the deck monomial $m_{i,j}=q^{a_{i,j}}t^{b_{i,j}}$ of each pair, and assembles the resulting Laurent polynomial $\\langle N,F\\rangle$, exhibiting the cancellations among geometrically distinct terms.",
+        "strategy": "Choose a pair with few intersections, compute the arcs $\\delta_{i,j}$ and their $\\Phi$-values, tabulate the signs and monomials, and sum.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            },
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "cex-ordinary-intersection-number-alone-does-not-give-the-lkb-pairing",
+        "kind": "counterexample",
+        "title": "Ordinary intersection number alone does not give the LKB pairing",
+        "deps": [
+          "def-forks-noodles-and-their-lkb-intersection-pairing",
+          "def-lexicographic-order-on-fork-noodle-deck-monomials"
+        ],
+        "statement": "There are a noodle $N$ and fork $F$ whose projected surfaces in $C$ have total algebraic intersection number zero, while $\\langle N,F\\rangle\\ne0$ in $\\Lambda$: the geometrically cancelling intersections carry different deck monomials, so the Laurent polynomial does not cancel. Hence the LKB pairing is not a function of the ordinary intersection number alone.",
+        "strategy": "Take two transverse intersections of opposite sign lying over configuration points with different $\\Phi$-displacements; the two monomial-weighted terms $\\epsilon m$ do not cancel even though $\\epsilon_1+\\epsilon_2=0$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            },
+            {
+              "title": "Bigelow, The Lawrence-Krammer representation, arXiv:math/0204057v1, sections 2-4 (Theorem 4.1, Lemmas 4.2-4.6)",
+              "url": "https://arxiv.org/pdf/math/0204057"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "cex-a-linear-representation-need-not-be-faithful",
+        "kind": "counterexample",
+        "title": "A linear representation need not be faithful",
+        "deps": [
+          "cor-every-classical-braid-group-is-linear",
+          "def-braid-group-by-the-artin-presentation"
+        ],
+        "statement": "For $n\\ge2$ the endpoint-permutation homomorphism $B_n\\to S_n$ is a finite-dimensional linear representation over any field with nontrivial kernel (all pure braids), so admitting a finite-dimensional linear representation is strictly weaker than admitting a faithful one; this contrasts with [[cor-every-classical-braid-group-is-linear]], where faithfulness is the content.",
+        "strategy": "The permutation representation is linear of degree $n$ and its kernel is the pure braid subgroup, which is nontrivial for $n\\ge2$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bigelow, Braid groups are linear, J. Amer. Math. Soc. 14 (2001) 471-486, sections 1-3 and Theorem 4.1",
+              "url": "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
+            }
+          ]
+        },
+        "dependency_level": 14
+      }
+    ]
+  }
+]

@@ -1,0 +1,1054 @@
+[
+  {
+    "order": 545,
+    "id": "smooth-cobordism-relations-groups-and-rings",
+    "kind": "A",
+    "category": "differential-topology",
+    "title": "Smooth Cobordism Relations Groups and Rings",
+    "companion": "smooth-cobordism-relations-groups-and-rings-examples",
+    "requires": [
+      "manifolds-with-boundary-collars-and-orientations",
+      "orientations-poincare-lefschetz-and-alexander-duality",
+      "stiefel-whitney-and-euler-classes-by-universal-constructions",
+      "chern-and-pontryagin-classes-by-splitting-and-complexification",
+      "chern-weil-theory-and-characteristic-forms",
+      "rees-modules-artin-rees-and-hilbert-samuel-theory"
+    ],
+    "items": [
+      {
+        "id": "def-unoriented-smooth-cobordism-of-closed-manifolds",
+        "kind": "definition",
+        "title": "Unoriented smooth cobordism of closed manifolds",
+        "statement": "Fix $n\\ge0$. A (unoriented) bordism from a closed smooth $n$-manifold $M_0$ to a closed smooth $n$-manifold $M_1$ is data $(W,\\theta_0,\\theta_1)$ consisting of a compact smooth $(n+1)$-manifold $W$ with a decomposition $\\partial W=(\\partial W)_0\\sqcup(\\partial W)_1$ into open and closed boundary subsets, together with smooth embeddings $\\theta_0:[0,1)\\times M_0\\to W$ and $\\theta_1:(-1,0]\\times M_1\\to W$ onto open collar neighbourhoods of $(\\partial W)_0$ and $(\\partial W)_1$ with $\\theta_i(\\{0\\}\\times M_i)=(\\partial W)_i$. Closed $n$-manifolds $M_0$ and $M_1$ are cobordant if such data exist. The collar embeddings are part of the data, so that gluing may use supplied collars rather than fresh choices. Empty manifolds and $n=0$ are included; 'closed' means compact without boundary.",
+        "strategy": "Restate Freed's Definition 1.19 with collar embeddings included, fixing the boundary-part notation $(\\partial W)_0,(\\partial W)_1$ and the meaning of 'closed'. Record that only existence of the data is used for the relation, so reflexivity, symmetry and transitivity are argued from the given collars; no choice principle is used.",
+        "deps": [
+          "def-smooth-manifold",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-smooth-collar-of-a-manifold-boundary",
+          "def-smooth-immersion-and-embedding-for-manifolds-with-boundary",
+          "def-compact-space",
+          "thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Lecture 1, Bordism, Definition 1.19 and equations (1.20)-(1.21), printed pp.8-9"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, 2016)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf",
+              "locator": "Chapter 8 introduction and section 8.2, printed pp.237 and 243-247"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-oriented-smooth-cobordism",
+        "kind": "definition",
+        "title": "Oriented smooth cobordism",
+        "statement": "Let $M_0,M_1$ be closed oriented smooth $n$-manifolds. An oriented bordism from $M_0$ to $M_1$ is a bordism $(W,\\theta_0,\\theta_1)$ from $M_0$ to $M_1$ together with an orientation of $W$ such that the induced boundary orientation (outward-normal-first, as fixed on the manifolds-with-boundary page) on $(\\partial W)_0$ is the negative of the supplied orientation of $M_0$ and on $(\\partial W)_1$ is the supplied orientation of $M_1$. Equivalently, in the collar parametrization the embeddings $\\theta_0,\\theta_1$ are orientation-preserving for the product orientations of $[0,1)\\times M_0$ and $(-1,0]\\times M_1$, the intervals carrying their standard orientations. Oriented manifolds are oriented cobordant when such data exist. The opposite orientation of a manifold is written $-M$; the empty manifold carries its unique orientation.",
+        "strategy": "Fix the sign once through the outward-normal-first convention: the incoming face contributes $-M_0$ and the outgoing face $M_1$. Prove that the boundary-orientation formulation and the orientation-preserving-collar formulation agree by computing the product orientation of $[0,1)\\times M_0$ at $\\{0\\}\\times M_0$ against the induced boundary orientation. Record that orientation reversal acts pointwise on determinant rays, so $-M$ is well defined.",
+        "deps": [
+          "def-unoriented-smooth-cobordism-of-closed-manifolds",
+          "def-induced-boundary-orientation",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-orientation-preserving-parametrization",
+          "def-product-orientation",
+          "prop-boundary-orientation-is-independent-of-the-outward-vector-field",
+          "def-relative-fundamental-class-and-boundary-orientation"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Lecture 2, Oriented bordism, (2.20)-(2.22), printed pp.18-19"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Section 17, Oriented Cobordism definition, printed pp.200-202"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-cylinders-give-reflexivity-of-cobordism",
+        "kind": "lemma",
+        "title": "Cylinders give reflexivity of cobordism",
+        "statement": "For every closed smooth $n$-manifold $M$, the product $M\\times[0,1]$ with its\nproduct smooth structure and the collars\n$$\\theta_0:[0,1)\\times M\\to M\\times[0,1],\\quad \\theta_0(s,x)=(x,s),$$\n$$\\theta_1:(-1,0]\\times M\\to M\\times[0,1],\\quad \\theta_1(s,x)=(x,1+s),$$\nis a bordism from $M$ to $M$: take\n$(\\partial(M\\times[0,1]))_0=M\\times\\{0\\}$ and\n$(\\partial(M\\times[0,1]))_1=M\\times\\{1\\}$\n([[def-unoriented-smooth-cobordism-of-closed-manifolds]]).\n\nIf $(M,o)$ is oriented and $[0,1]$ carries its standard orientation, then with\nthe product orientation $o\\otimes dt$ of $M\\times[0,1]$ the induced boundary\norientation ([[def-induced-boundary-orientation]]) on $M\\times\\{0\\}$ is\n$(-1)^{n+1}o$ and that on $M\\times\\{1\\}$ is $(-1)^n o$; consequently\n$M\\times[0,1]$ oriented by $(-1)^n(o\\otimes dt)$ is an oriented bordism from\n$(M,o)$ to $(M,o)$ ([[def-oriented-smooth-cobordism]]). Hence $M$ is cobordant\nto itself in both theories.",
+        "strategy": "Construct the cylinder explicitly, identify its boundary and collars, and compute the two boundary orientations with the product-orientation rule (moving the outward normal past the $n$ tangent directions of the positive factor). The unoriented case is included. No choice is used.",
+        "deps": [
+          "def-unoriented-smooth-cobordism-of-closed-manifolds",
+          "def-oriented-smooth-cobordism",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "def-product-orientation",
+          "prop-boundary-orientation-of-a-product-when-at-most-one-factor-has-boundary",
+          "prop-boundary-orientation-is-independent-of-the-outward-vector-field",
+          "def-induced-boundary-orientation",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-smooth-immersion-and-embedding-for-manifolds-with-boundary",
+          "thm-finite-products-of-compact-spaces",
+          "cor-euclidean-closed-balls-and-spheres-are-compact"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Lemma 1.25 proof (reflexivity), printed p.10, and Figure 5/(2.22), printed pp.18-19"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, 2016)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf",
+              "locator": "Section 8.2, inverse from $\\partial(M\\times I)$, printed p.247"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-reversing-a-cobordism-gives-symmetry",
+        "kind": "lemma",
+        "title": "Reversing a cobordism gives symmetry",
+        "statement": "If $(W,\\theta_0,\\theta_1)$ is a bordism from $M_0$ to $M_1$, then swapping the two boundary parts and the two collar parametrizations yields a bordism from $M_1$ to $M_0$. In the oriented theory, if $W$ is an oriented bordism from $M_0$ to $M_1$, then the same manifold with the opposite orientation, again with the two boundary parts and collars interchanged, is an oriented bordism from $M_1$ to $M_0$: the induced boundary orientations match $-M_1$ on the incoming face and $M_0$ on the outgoing face.",
+        "strategy": "Give the dual bordism of Freed (Definition 1.22) in the unoriented case and its orientation-reversed form in the oriented case; recompute the boundary signs from outward-normal-first and check that the reversed orientation makes the swapped collars orientation-preserving. No choice is used.",
+        "deps": [
+          "def-unoriented-smooth-cobordism-of-closed-manifolds",
+          "def-oriented-smooth-cobordism",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-induced-boundary-orientation",
+          "prop-boundary-orientation-is-independent-of-the-outward-vector-field",
+          "def-orientation-preserving-parametrization",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-smooth-immersion-and-embedding-for-manifolds-with-boundary"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Definition 1.22, Remark 1.24 and (2.20)-(2.22), printed pp.9-10 and 18-19"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Lemma 17.2, symmetry, printed p.201"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-collar-gluing-and-corner-smoothing-give-transitivity",
+        "kind": "lemma",
+        "title": "Collar gluing and seam smoothing give transitivity",
+        "statement": "Let $(W_1,\\theta_0,\\theta_1)$ be a bordism from a closed smooth $n$-manifold\n$M_0$ to a closed smooth $n$-manifold $M_1$, and let\n$(W_2,\\theta'_0,\\theta'_1)$ be a bordism from $M_1$ to a closed smooth\n$n$-manifold $M_2$, with the same $M_1$ in both\n([[def-unoriented-smooth-cobordism-of-closed-manifolds]]). The outgoing collar\n$\\theta_1:(-1,0]\\times M_1\\to W_1$ of the first and the incoming collar\n$\\theta'_0:[0,1)\\times M_1\\to W_2$ of the second agree on $M_1\\times\\{0\\}$ after the seam identification and\ncombine to a bi-collar $M_1\\times(-1,1)\\to W_1\\cup_{M_1}W_2$; thereby they\ndefine a smooth structure on the glued space $W=W_1\\cup_{M_1}W_2$ making it a\ncompact smooth $(n+1)$-manifold with boundary whose seam $M_1$ is interior.\nThe structure is canonical for the given data: it is the maximal atlas\ngenerated by the two given smooth structures and the bi-collar, and, assuming $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), a change of\ncollar presentation changes it at most by a diffeomorphism fixed off a\nneighbourhood of the seam, by the collar-comparison argument in\n[[thm-the-double-has-a-well-defined-smooth-structure]]. The boundary\ndecomposes as $M_0\\sqcup M_2$, and the outer collars $\\theta_0$ and\n$\\theta'_1$ make $W$ a bordism from $M_0$ to $M_2$.\n\nIn the oriented theory, if both bordisms are oriented\n([[def-oriented-smooth-cobordism]]), the induced orientations on the common\nboundary component are opposite, the orientations glue to an orientation of\n$W$, and with that orientation $W$ is an oriented bordism from $M_0$ to $M_2$.\nThe glued bordism and transitivity use only the supplied collars and require\nno choice principle. The additional comparison of different collar systems\nuses $\\mathrm{AC}_\\omega$ through the cited comparison theorem.",
+        "strategy": "Build the bi-collar chart for the glued space from the given collar embeddings, verify compatibility of the two half-atlases across the seam, and check that the seam becomes interior. Identify the outer boundary faces and their induced orientations, and verify the orientation gluing using the opposite induced orientations on the common component; cite the published double construction as the model for seam smoothing.",
+        "deps": [
+          "def-unoriented-smooth-cobordism-of-closed-manifolds",
+          "def-oriented-smooth-cobordism",
+          "def-smooth-collar-of-a-manifold-boundary",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-smooth-manifold",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "def-smooth-immersion-and-embedding-for-manifolds-with-boundary",
+          "def-quotient-topology",
+          "thm-the-double-has-a-well-defined-smooth-structure",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "def-induced-boundary-orientation",
+          "prop-boundary-orientation-is-independent-of-the-outward-vector-field",
+          "prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure",
+          "thm-compactness-under-continuous-maps",
+          "lem-products-preserve-t0-t1-and-hausdorff",
+          "prop-second-countability-is-hereditary",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Lemma 1.25 and Exercise 1.26 (bicollaring), printed pp.9-10"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Lemma 17.2, transitivity using Collar Theorem 17.1, printed pp.200-201"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, 2016)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf",
+              "locator": "Section 8.2, gluing conventions, printed pp.246-247"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-smooth-cobordism-is-an-equivalence-relation",
+        "kind": "theorem",
+        "title": "Smooth cobordism is an equivalence relation",
+        "statement": "For every $n\\ge0$, unoriented cobordism of closed smooth $n$-manifolds\n([[def-unoriented-smooth-cobordism-of-closed-manifolds]]) and oriented\ncobordism of closed oriented smooth $n$-manifolds\n([[def-oriented-smooth-cobordism]]) are reflexive by cylinders, symmetric by\ndual bordisms (orientation-reversed in the oriented case), and transitive by\ncollar gluing. Restricted to any set $S$ of such manifolds in either theory,\ncobordism is therefore an equivalence relation\n([[def-equivalence-relation]]) and partitions $S$ into classes $[M]_S$.\nThe collection of manifolds on arbitrary underlying sets is not itself a set;\nglobal bordism sets and the notation $[M]$ use the bounded models introduced\nin the subsequent bordism-group definition. No choice principle is used,\nand no claim about diffeomorphism classification is made.",
+        "strategy": "Assemble the three lemmas and discharge the axioms of an equivalence relation; keep the two theories parallel and make no claim about diffeomorphism classification. No choice is used.",
+        "deps": [
+          "def-unoriented-smooth-cobordism-of-closed-manifolds",
+          "def-oriented-smooth-cobordism",
+          "lem-cylinders-give-reflexivity-of-cobordism",
+          "lem-reversing-a-cobordism-gives-symmetry",
+          "lem-collar-gluing-and-corner-smoothing-give-transitivity",
+          "def-equivalence-relation",
+          "def-compact-space",
+          "def-smooth-manifold"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Lemma 1.25 and (2.22), printed pp.10 and 18-19"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Lemma 17.2, printed pp.201-202"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Section 6.3, unoriented and oriented cobordism rings, electronic pp.117-118"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-null-cobordant-closed-manifold",
+        "kind": "definition",
+        "title": "Null-cobordant closed manifolds",
+        "statement": "A closed smooth $n$-manifold $M$ is null-cobordant if it is cobordant to the empty manifold; equivalently there is a bordism $W$ with $(\\partial W)_1=\\emptyset$ and $(\\partial W)_0$ identified with $M$, so that $M$ is the entire boundary of a compact $(n+1)$-manifold $W$ carrying a collar of all of $\\partial W$. In the oriented theory $M$ is null-cobordant if it is oriented cobordant to the empty oriented manifold; because the incoming face contributes the negative orientation, this says that $M$ occurs as the orientation opposite to the induced boundary of some compact oriented $W$, and reversing the orientation of $W$ presents $M$ as an induced boundary. The empty manifold is null-cobordant, and null-cobordism depends only on the cobordism class.",
+        "strategy": "Specialize the bordism definition to the empty outgoing boundary and translate between 'cobordant to empty' and 'is the whole boundary', keeping the orientation sign explicit and noting that it is absorbed by reversing $W$. No choice is used.",
+        "deps": [
+          "def-unoriented-smooth-cobordism-of-closed-manifolds",
+          "def-oriented-smooth-cobordism",
+          "thm-smooth-cobordism-is-an-equivalence-relation",
+          "def-smooth-collar-of-a-manifold-boundary",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "prop-components-of-a-topological-manifold-are-open-and-at-most-countable"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Null bordism discussion and Lemma 1.30, printed pp.10-11"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Definition 6.22 and the exponent-two remark, electronic pp.117-118"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "def-unoriented-and-oriented-bordism-groups",
+        "kind": "definition",
+        "title": "Unoriented and oriented bordism groups",
+        "statement": "Fix $n\\ge0$. By the cobordism equivalence relation\n([[thm-smooth-cobordism-is-an-equivalence-relation]]) the closed smooth\n$n$-manifolds are partitioned into cobordism classes\n([[def-unoriented-smooth-cobordism-of-closed-manifolds]]). Let\n$$\\Omega_n^{O}:=\\{\\,[M]\\;:\\;M\\ \\text{a closed smooth }n\\text{-manifold}\\,\\}$$\nbe the set of these classes in the bounded model convention below, and let\n$$\\Omega_n^{SO}:=\\{\\,[Q,o]\\;:\\;(Q,o)\\ \\text{a closed oriented smooth }n\\text{-manifold}\\,\\}$$\nbe the set of oriented cobordism classes\n([[def-oriented-smooth-cobordism]]).\n\n**Set-size convention.** For each $n$ use the set of all closed smooth\n$n$-manifold structures on subsets of $U_n=\\mathbb R^n\\times\\mathbb N$,\nand in the oriented theory include the orientation datum, before taking the\nquotient by cobordism. Every closed smooth $n$-manifold has such a model:\ncompactness gives a finite chart cover $(V_j,\\varphi_j)_{j<k}$, and the map\n$x\\mapsto(\\varphi_j(x),j)$, with $j$ the least index for which $x\\in V_j$,\nis injective into $U_n$. Transport the topology, maximal atlas, and supplied\norientation along this injection; its image is diffeomorphic to the original\nmanifold. This uses only a finite chart cover, not a choice of a model for every\nmanifold simultaneously. Two transported models are diffeomorphic, and a\ncylinder of [[lem-cylinders-give-reflexivity-of-cobordism]] with outgoing\ncollar composed with a diffeomorphism's inverse shows they are cobordant (orientation-preservingly in the oriented case). Thus $[M]$\nmeans the unique class of any such model. Products and disjoint unions are\nreturned to this set of models in the same way; their class is independent of\nthe transport.\n\n**The operation.** Disjoint union of manifolds defines operations\n$$[M]+[N]:=[M\\sqcup N]\\quad\\text{on }\\Omega_n^{O},\\qquad [Q,o]+[R,p]:=[Q\\sqcup R,\\,o\\sqcup p]\\quad\\text{on }\\Omega_n^{SO},$$\nwhere $o\\sqcup p$ is the orientation of the disjoint union whose restriction to\neach summand is the given orientation, and finite disjoint unions carry the transported component atlases\n([[prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds]]);\nfor summands with boundary the same construction uses half-space charts.\nFinite union preserves compactness and combines finitely many countable bases,\nso this boundary extension requires no countable choice.\nThe class of the empty $n$-manifold is the displayed **zero** $0$: it is\nnull-cobordant and is a two-sided identity for the operation, since\n$M\\sqcup\\varnothing$ is canonically diffeomorphic to $M$\n([[def-null-cobordant-closed-manifold]]).\n\n**Well-definedness.** The operations are independent of the chosen\nrepresentatives. If $W_i$ is a bordism from $M_i$ to $M_i'$ for $i=0,1$, then\nthe disjoint union $W_0\\sqcup W_1$ carries the canonical smooth structure of a\ncompact $(n+1)$-manifold with boundary\n$\\partial(W_0\\sqcup W_1)=(\\partial W_0)\\sqcup(\\partial W_1)$, the collars\n$\\theta_0^0\\sqcup\\theta_0^1$ and $\\theta_1^0\\sqcup\\theta_1^1$ are smooth\nembeddings onto collar neighbourhoods of the boundary parts, and the\ndecomposition of the boundary into the two parts is again open and closed;\nhence $W_0\\sqcup W_1$ is a bordism from $M_0\\sqcup M_1$ to\n$M_0'\\sqcup M_1'$. In the oriented case, orienting the disjoint union by the\ngiven orientations makes the disjoint union of the oriented bordisms an\noriented bordism between the disjoint unions, because the induced boundary\norientation is computed componentwise and each summand carries its required\nsign. Thus $[M_0\\sqcup M_1]=[M_0'\\sqcup M_1']$ whenever $[M_i]=[M_i']$, and\nsimilarly in the oriented theory. The class of a finite disjoint union is\ncomputed from the canonical smooth structure on disjoint unions; no further\nchoice is made.\n\n**Deferred axioms and the forgetful map.** That these operations satisfy the\ngroup axioms (associativity, commutativity, identity and inverses) is not\nasserted here: it is proved in the following theorem, together with the\nfiniteness of the inverse in the unoriented theory. The **forgetful map**\n$$\\Omega_n^{SO}\\longrightarrow\\Omega_n^{O},\\qquad [Q,o]\\longmapsto[Q],$$\nsends the oriented class of a closed oriented $n$-manifold to its underlying\nunoriented cobordism class; it is well defined because an oriented bordism\nbetween two oriented manifolds is in particular a bordism between their\nunderlying manifolds, so oriented cobordant manifolds are cobordant.",
+        "strategy": "Define the two sets of classes using the equivalence-relation theorem, define the operation by disjoint union, and state the empty class; defer all axioms to the following theorem rather than asserting them here. Use the published smooth-structure result for finite disjoint unions; no smooth structure is chosen afresh.",
+        "deps": [
+          "def-unoriented-smooth-cobordism-of-closed-manifolds",
+          "def-oriented-smooth-cobordism",
+          "def-null-cobordant-closed-manifold",
+          "thm-smooth-cobordism-is-an-equivalence-relation",
+          "prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds",
+          "def-compact-space",
+          "lem-cylinders-give-reflexivity-of-cobordism",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Page 10, $\\Omega_n$ and its pointed set structure; (1.35), printed pp.10-14"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Section 17, $U_n$ as an abelian group, printed p.201"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Definitions 6.22 and 6.24, electronic pp.117-118"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-disjoint-union-makes-bordism-classes-abelian-groups",
+        "kind": "theorem",
+        "title": "Disjoint union makes bordism classes abelian groups",
+        "statement": "For each $n\\ge0$, the operations $[M]+[N]=[M\\sqcup N]$ and\n$[Q,o]+[R,p]=[Q\\sqcup R,o\\sqcup p]$ make $(\\Omega_n^{O},+)$ and\n$(\\Omega_n^{SO},+)$ abelian groups\n([[def-unoriented-and-oriented-bordism-groups]], [[def-group]]). The operation\nis well defined: if $M_i$ is cobordant to $M_i'$ for $i=0,1$, the disjoint\nunions $M_0\\sqcup M_1$ and $M_0'\\sqcup M_1'$ are cobordant via the disjoint\nunion of the two bordisms. It is associative and commutative, the canonical\ndiffeomorphisms of finite disjoint unions identifying the two bracketings and\nthe two orders, and the class of the empty manifold is a two-sided identity.\nInverses: for every closed $M$, $[M]+[M]=0$ in $\\Omega_n^{O}$ because\n$M\\sqcup M$ is the boundary of $M\\times[0,1]$; for every closed oriented\n$(M,o)$, $[M,o]+[-M]=0$ in $\\Omega_n^{SO}$ because $M\\sqcup(-M)$ is the\nboundary of the cylinder with the appropriate orientation. No choice principle\nis used.",
+        "strategy": "Prove well-definedness from disjoint unions of bordisms; obtain associativity and commutativity from the canonical diffeomorphisms of finite disjoint unions; use the cylinder $M\\times[0,1]$ with its two boundary signs to produce the inverse in each theory, computing the oriented boundary as $M\\sqcup(-M)$. Cite the published smooth structure on finite disjoint unions.",
+        "deps": [
+          "def-unoriented-smooth-cobordism-of-closed-manifolds",
+          "def-oriented-smooth-cobordism",
+          "lem-cylinders-give-reflexivity-of-cobordism",
+          "thm-smooth-cobordism-is-an-equivalence-relation",
+          "def-null-cobordant-closed-manifold",
+          "def-unoriented-and-oriented-bordism-groups",
+          "prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds",
+          "prop-a-map-from-a-disjoint-union-is-smooth-iff-each-restriction-is-smooth",
+          "prop-boundary-orientation-of-a-product-when-at-most-one-factor-has-boundary",
+          "def-product-orientation",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "def-induced-boundary-orientation",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-group"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Lemma 1.30 and the paragraph before it, printed pp.10-11"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Section 17, $U_n$ is an abelian group under disjoint union, printed pp.201-202"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, 2016)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf",
+              "locator": "Section 8.2, the natural group structure and inverse, printed p.247"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Section 6.3, exponent two and disjoint-union addition, electronic pp.117-118"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-fundamental-class-of-a-boundary-pushes-forward-to-zero",
+        "kind": "lemma",
+        "title": "The fundamental class of a boundary pushes forward to zero",
+        "statement": "Let $W$ be a compact $R$-oriented $(n+1)$-manifold with boundary $M=\\partial W$, where $R$ is a commutative unital ring and $M$ carries the induced boundary orientation; for $R=\\mathbb F_2$ the canonical mod-two orientation may be used, so the statement applies to every compact smooth manifold. Let $i:M\\hookrightarrow W$ be the inclusion and $[M]\\in H_n(M;R)$ the fundamental class of the induced orientation. Then $i_*[M]=0$ in $H_n(W;R)$, and consequently $\\langle i^*\\alpha,[M]\\rangle=0$ for every $\\alpha\\in H^n(W;R)$. Empty boundary, dimension zero and disconnected manifolds are included, and no AC is used.",
+        "strategy": "Use the relative fundamental class: $\\partial[W,M]=[M]$ in $H_n(M;R)$, and exactness of the homology sequence of the pair $(W,M)$ at $H_n(M;R)$, which says that the image of the connector is the kernel of $i_*$. Hence $i_*[M]=i_*\\partial[W,M]=0$. Naturality of the Kronecker pairing converts the second assertion into the first.",
+        "deps": [
+          "def-relative-fundamental-class-and-boundary-orientation",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise",
+          "thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "def-kronecker-evaluation-pairing",
+          "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Proof of Theorem 4.9: the natural map sends $\\mu_B\\in H_{n+1}(B,M)$ to $\\mu_M$, printed pp.52-53"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, 2016)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf",
+              "locator": "Section 8.2, boundary-structure conventions, printed p.246"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-zero-dimensional-bordism-groups",
+        "kind": "proposition",
+        "title": "Zero-dimensional bordism groups",
+        "statement": "$\\Omega_0^{O}\\cong\\mathbb Z/2\\mathbb Z$, generated by the class of a one-point\nmanifold, the invariant being the parity of the cardinality of a finite set of\npoints; and $\\Omega_0^{SO}\\cong\\mathbb Z$, via the isomorphism\n$[M]\\mapsto\\sum_{x\\in M}\\epsilon_x$ that sends a positively oriented point to\n$+1$ and a negatively oriented point to $-1$, with generator the positively\noriented point. In particular a compact zero-manifold bounds a compact\none-manifold exactly when its signed count is zero in the oriented theory, and\nexactly when its cardinality is even in the unoriented theory\n([[def-unoriented-and-oriented-bordism-groups]],\n[[def-null-cobordant-closed-manifold]]). The proof is choice-free; it does not\nuse the classification of compact one-manifolds.",
+        "strategy": "Show that parity (respectively the signed count) is a cobordism invariant by applying the boundary-pushforward lemma with $n=0$ and $R=\\mathbb F_2$ (respectively $R=\\mathbb Z$): the zero-th singular homology of a compact one-manifold is free on its path components, so the vanishing of $i_*[M]$ says precisely that each component receives as many positive as negative boundary points, which for $R=\\mathbb F_2$ says each component receives an even number. Conversely, build an explicit bordism between any two finite point sets with equal invariant as a finite disjoint union of intervals and cylinders, using $[0,1]$ with its standard orientation for the pair of opposite signs and the cylinder for equal signs. Additivity and bijectivity follow from the explicit generators.",
+        "deps": [
+          "def-unoriented-smooth-cobordism-of-closed-manifolds",
+          "def-oriented-smooth-cobordism",
+          "thm-smooth-cobordism-is-an-equivalence-relation",
+          "def-null-cobordant-closed-manifold",
+          "def-unoriented-and-oriented-bordism-groups",
+          "thm-disjoint-union-makes-bordism-classes-abelian-groups",
+          "lem-fundamental-class-of-a-boundary-pushes-forward-to-zero",
+          "prop-zero-th-singular-homology-is-free-on-path-components",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise",
+          "def-induced-boundary-orientation",
+          "def-product-orientation",
+          "prop-boundary-orientation-of-a-product-when-at-most-one-factor-has-boundary",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-smooth-manifold",
+          "thm-euclidean-inverse-function-theorem",
+          "def-euclidean-upper-half-space-and-its-boundary",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-boundary-defining-function",
+          "prop-boundary-orientation-is-independent-of-the-outward-vector-field",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds",
+          "lem-finite-choice",
+          "def-group-homomorphism",
+          "def-group-isomorphism-and-automorphism"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Proposition 1.31, $\\Omega_0\\cong\\mathbb Z/2$, printed pp.11-12"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Page 203, $\\Omega_0\\cong\\mathbb Z$ via signed points"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Remark 6.26, $N_0=\\mathbb Z_2$ and $\\Omega_0=\\mathbb Z$, electronic p.118"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-product-boundary-formula-for-oriented-manifolds",
+        "kind": "lemma",
+        "title": "Product boundary formula for oriented manifolds",
+        "statement": "Let $W^m$ and $V^n$ be compact oriented smooth manifolds with at most one of\n$\\partial W,\\partial V$ nonempty (the corner-free case), and give $W\\times V$\nits product smooth structure\n([[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]])\nand product orientation ([[def-product-orientation]]). Then, up to a canonical\norientation-preserving diffeomorphism\n([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]],\n[[def-orientation-preserving-parametrization]]), the boundary\n$\\partial(W\\times V)$ with the outward-normal-first orientation\n([[def-induced-boundary-orientation]]) equals\n$$(\\partial W\\times V)\\;\\sqcup\\;(-1)^{m}\\,(W\\times\\partial V),$$\neach summand carrying the product orientation of the induced boundary\norientation of the factor and the supplied orientation of the other factor. In\nthe unoriented theory the same identity of smooth manifolds with boundary holds\nwithout signs. If both factors are closed then $W\\times V$ is closed. The case\nwhere both boundaries are nonempty produces corners at $\\partial W\\times\\partial\nV$ and is excluded.",
+        "strategy": "Reduce to the published product-boundary proposition, which computes the sign $(-1)^m$ by moving the outward normal of the boundary factor past the $m$ tangent directions of the other factor; restate it with the dimensions and the product-orientation convention used here. Record the excluded corner case explicitly.",
+        "deps": [
+          "prop-boundary-orientation-of-a-product-when-at-most-one-factor-has-boundary",
+          "def-product-orientation",
+          "def-induced-boundary-orientation",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-orientation-preserving-parametrization",
+          "thm-finite-products-of-compact-spaces",
+          "def-compact-space",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, 2016)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf",
+              "locator": "Section 8.2, boundary conventions for products and the identification $\\tau W|_{\\partial W}\\cong\\tau\\partial W\\oplus\\varepsilon^1$, printed p.246"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "(2.19)-(2.21) orientation of a Cartesian product, printed pp.18-19"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-cartesian-product-makes-bordism-a-graded-ring",
+        "kind": "theorem",
+        "title": "Cartesian product makes bordism a graded ring",
+        "statement": "For both theories set $[M]\\cdot[N]=[M\\times N]$. This is a well-defined\nbiadditive associative product $\\Omega_m\\times\\Omega_n\\to\\Omega_{m+n}$\ndistributing over disjoint union, and the class of a one-point manifold (positively oriented in the oriented theory) is a\ntwo-sided unit. Hence $\\Omega_*^{O}=\\bigoplus_n\\Omega_n^{O}$ is a nonnegatively\ngraded commutative ring ([[def-graded-ring-and-graded-module]],\n[[def-commutative-ring]]) with unit $[\\mathrm{pt}]$, and\n$\\Omega_*^{SO}=\\bigoplus_n\\Omega_n^{SO}$ carries an associative, biadditive,\nunital product with the same unit\n([[def-unoriented-and-oriented-bordism-groups]],\n[[thm-disjoint-union-makes-bordism-classes-abelian-groups]]).\n\nIn the oriented theory the product is graded-commutative: the canonical\ntransposition diffeomorphism $M\\times N\\to N\\times M$ has orientation sign\n$(-1)^{mn}$ for $m=\\dim M$, $n=\\dim N$, so\n$$[M][N]=(-1)^{mn}[N][M],$$\nthe Koszul sign rule; in the unoriented theory the product is commutative. The\nforgetful map $\\Omega_*^{SO}\\to\\Omega_*^{O}$ is a ring homomorphism. No choice\nprinciple is used.",
+        "strategy": "Well-definedness: if $W_1$ bounds $M_0$ to $M_1$ and $W_2$ bounds $N_0$ to $N_1$, restrict each to a closed factor and glue $(W_1\\times N_0)\\cup_{M_1\\times N_0}(M_1\\times W_2)$, which is corner-free because one factor of each piece is closed, using the collar-gluing lemma. Associativity and distributivity come from the canonical diffeomorphisms of products and disjoint unions; the unit is $[\\mathrm{pt}]$. For graded commutativity compute the effect of the transposition on the product orientation: interchanging an $m$-block and an $n$-block costs $(-1)^{mn}$ in the determinant line.",
+        "deps": [
+          "def-unoriented-smooth-cobordism-of-closed-manifolds",
+          "def-oriented-smooth-cobordism",
+          "lem-cylinders-give-reflexivity-of-cobordism",
+          "lem-collar-gluing-and-corner-smoothing-give-transitivity",
+          "thm-smooth-cobordism-is-an-equivalence-relation",
+          "def-null-cobordant-closed-manifold",
+          "def-unoriented-and-oriented-bordism-groups",
+          "thm-disjoint-union-makes-bordism-classes-abelian-groups",
+          "lem-product-boundary-formula-for-oriented-manifolds",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds",
+          "prop-a-map-from-a-disjoint-union-is-smooth-iff-each-restriction-is-smooth",
+          "def-product-orientation",
+          "def-induced-boundary-orientation",
+          "def-compact-space",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-graded-ring-and-graded-module",
+          "def-commutative-ring",
+          "def-ring-homomorphism"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Cartesian product and the ring structure, Definition 1.33 and (1.35), printed pp.12-14"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, 2016)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf",
+              "locator": "Theorem 8.2.11 and the products paragraph, printed pp.247-248"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Section 17, graded ring structure and graded commutativity, printed p.202"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Definitions 6.22 and 6.24, electronic pp.117-118"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "def-stiefel-whitney-number-of-a-closed-manifold",
+        "kind": "definition",
+        "title": "Stiefel-Whitney numbers of a closed manifold",
+        "statement": "Assume AC (used only through the Stiefel-Whitney class construction). Let $M$ be a closed smooth $n$-manifold, with tangent Stiefel-Whitney classes $w_i=w_i(TM)\\in H^i(M;\\mathbb F_2)$ and canonical mod-two fundamental class $[M]\\in H_n(M;\\mathbb F_2)$. For a monomial $w^{I}=w_1^{r_1}\\cdots w_n^{r_n}$ with $r_1+2r_2+\\cdots+nr_n=n$, the associated Stiefel-Whitney number is $w^{I}[M]=\\langle w^{I},[M]\\rangle\\in\\mathbb F_2$, the Kronecker evaluation. Monomials of total degree different from $n$ are assigned the value $0$. The Stiefel-Whitney numbers of $M$ are the values attached to all monomials of total degree $n$; they are diffeomorphism invariants and require no orientation.",
+        "strategy": "Define the numbers by evaluating the tangent Stiefel-Whitney monomials on the canonical mod-two fundamental class, invoking the fundamental-class and Kronecker-pairing interfaces and the admissibility of closed smooth manifolds for the class construction. Check the degree convention and that no orientation is needed because the canonical mod-two orientation always exists.",
+        "deps": [
+          "def-stiefel-whitney-classes-from-the-projective-bundle-relation",
+          "thm-naturality-of-stiefel-whitney-classes",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise",
+          "def-kronecker-evaluation-pairing",
+          "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives",
+          "lem-second-countable-smooth-manifolds-have-cw-homotopy-type",
+          "def-axiom-of-choice",
+          "def-smooth-manifold",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "prop-components-of-a-topological-manifold-are-open-and-at-most-countable",
+          "prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure",
+          "prop-topological-manifolds-are-locally-compact-and-locally-path-connected",
+          "thm-connected-and-locally-path-connected-implies-path-connected"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Section 4, Stiefel-Whitney numbers, printed pp.50-51"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Section 6.3, Stiefel-Whitney numbers $w_I(M)\\in\\mathbb Z_2$, electronic p.117"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "gate_repair_note": "Formal total degree is the exponent-weighted sum, not an iff inferred from membership of a possibly zero cohomology class; numbers and AC are unchanged."
+      },
+      {
+        "id": "def-pontryagin-number-of-a-closed-oriented-manifold",
+        "kind": "definition",
+        "title": "Pontryagin numbers of a closed oriented manifold",
+        "statement": "Assume AC ([[def-axiom-of-choice]]). The assumption is inherited from the\nPontryagin class construction and is used only there, through\n[[def-pontryagin-classes-by-complexification]] its CW-type transport below, and the admissibility supplied by\n[[lem-second-countable-smooth-manifolds-have-cw-homotopy-type]].\n\nLet $M$ be a closed oriented smooth manifold of dimension $4k$ for an integer\n$k\\ge0$, with orientation $o$. Its **fundamental class**\n$[M]\\in H_{4k}(M;\\mathbb Z)$ is the class determined by $o$\n([[def-fundamental-class-of-a-compact-oriented-manifold]]). Its **tangent\nPontryagin classes**, taken componentwise when $M$ is disconnected, are\n$$p_i \\;:=\\; p_i(TM)\\in H^{4i}(M;\\mathbb Z)\\qquad(i\\ge0),$$\nwith the conventions $p_0=1$ and $p_i=0$ whenever $2i>4k$.\n\n**Connected case.** If $M$ is connected, then $M$ is path-connected: a manifold\nis locally path-connected\n([[prop-topological-manifolds-are-locally-compact-and-locally-path-connected]])\nand a connected locally path-connected space is path-connected\n([[thm-connected-and-locally-path-connected-implies-path-connected]]). Hence\n$M$ is an admissible base for the characteristic-class construction: it is\nparacompact Hausdorff of CW homotopy type and its tangent bundle is a numerable\nsmooth finite-rank real bundle\n([[lem-second-countable-smooth-manifolds-have-cw-homotopy-type]]). For a\npartition $I=(i_1,\\dots,i_r)$ of $k$ with $i_j\\ge1$ (for $k=0$ the empty\npartition, with empty product $1$), the **$I$-th Pontryagin number** of $M$ is\n$$p_I[M] \\;:=\\; \\bigl\\langle\\, p_{i_1}\\cdots p_{i_r},\\,[M]\\,\\bigr\\rangle \\;\\in\\;\\mathbb Z,$$\nthe Kronecker evaluation of the cup product of the tangent Pontryagin classes\non the fundamental class ([[def-kronecker-evaluation-pairing]]); the value is\nwell defined on cohomology and homology classes by\n[[lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives]].\n\n**General closed oriented manifolds.** Let $M$ be an arbitrary closed oriented\nmanifold of dimension $4k$. By the componentwise statement for compact\nmanifolds, $M$ has finitely many connected components\n$M_1,\\dots,M_s$; each component is open\n([[prop-components-of-a-topological-manifold-are-open-and-at-most-countable]])\nand closed in the compact $M$, hence compact, carries the restricted smooth\nstructure as an open submanifold\n([[prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure]]),\nand carries the orientation restricted to it; the family of these restricted\norientations is the componentwise orientation of $o$\n([[prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise]]).\nEach $M_j$ is a closed oriented smooth $4k$-manifold and the connected case\nabove applies. We set\n$$p_I[M] \\;:=\\; \\sum_{j=1}^{s} p_I[M_j],$$\nthe sum of the componentwise Pontryagin numbers; for connected $M$ this is\nexactly the single evaluation displayed above. A manifold whose dimension is\nnot $4|I|$ is assigned the value $0$ by convention, and $p_I[M]$ for a\npartition $I$ with $i_j\\ge1$ never sees a class $p_i$ of index beyond the\ndimension.\n\nThe definition is independent of all choices: the complexification of $TM$ is\ndetermined up to canonical isomorphism, so the even Chern classes, hence the\nclasses $p_i$, are determined; the fundamental class is determined by the\norientation; and the Kronecker pairing descends through both quotients. The\nclasses $p_i(TM)$ do not depend on the orientation. Replacing $o$ by $-o$\nnegates the fundamental class on every component\n([[def-fundamental-class-of-a-compact-oriented-manifold]]) and therefore\nnegates every Pontryagin number, by linearity of the pairing in its second\nvariable ([[lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives]]).\n\n**Naturality and stability on CW-type bases.** The cited Pontryagin theorem\nis stated for path-connected CW complexes, whereas smooth manifolds here are\nonly known to have CW homotopy type. The needed extension is as follows.\nFor a numerable complex bundle $V$ over a path-connected paracompact Hausdorff\nCGWH base $B$ of CW type, choose homotopy inverse maps $h:K\\to B$ and\n$g:B\\to K$ with $K$ a path-connected CW complex. Homotopy invariance of\nbundle pullback gives $V\\cong g^*h^*V$\n([[thm-homotopy-invariance-of-vector-bundle-pullback]]).\nThe Chern naturality theorem permits a CW-type source and a CW target, so\n$c_j(V)=g^*c_j(h^*V)$\n([[thm-naturality-normalization-and-whitney-sum-for-chern-classes]],\n[[def-chern-classes-from-the-projective-bundle-relation]]).\nFor $f:B'\\to B$ between such bases,\n$f^*V\\cong(g\\circ f)^*h^*V$, so the same theorem with target $K$ gives\n$c_j(f^*V)=f^*c_j(V)$. Also\n$V\\oplus\\varepsilon^r\\cong g^*(h^*V\\oplus\\varepsilon^r)$;\nChern stability on $K$ and naturality along $g$ give\n$c_j(V\\oplus\\varepsilon^r)=c_j(V)$.\nComplexification commutes with pullback and adjoining trivial summands,\nas seen from their transition matrices. The formula\n$p_i(E)=(-1)^ic_{2i}(E_{\\mathbb C})$ therefore proves naturality and\nstability of Pontryagin classes on these CW-type bases too. For a finite\ndisjoint union define the classes componentwise: every singular simplex lies\nin one component, so cohomology is the finite product of the component rings,\nwith pullbacks and cup products computed componentwise. This also handles\nmaps whose different source components land in the same target component.\nFor the empty base all classes and evaluations have their unique zero values.\nAC is inherited by this transport from the stated bundle-homotopy and\ncharacteristic-class suppliers.\n\n**Behaviour under diffeomorphisms.** Let $F:M'\\to M$ be a diffeomorphism of\nclosed oriented $4k$-manifolds ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]).\nAssume first that $M'$ and $M$ are connected and that $F$ is\norientation-preserving ([[def-orientation-preserving-parametrization]]). The\ndifferential of $F$ identifies $TM'$ with the pullback $F^*TM$, so naturality\nof Pontryagin classes gives $p_i(TM')=F^*p_i(TM)$\n(by the CW-type derivation above).\nThe pushforward $F_*[M']$ restricts at every $y\\in M$ to the image under $dF$\nof the local generator of $o'$ at $F^{-1}(y)$, which is the local generator of\n$o$ at $y$ because $F$ is orientation-preserving; by the characterisation of\nthe fundamental class through its pointwise restrictions\n([[def-fundamental-class-of-a-compact-oriented-manifold]]) this means\n$F_*[M']=[M]$. Naturality of the Kronecker pairing\n([[lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives]])\ntherefore gives\n$$p_I[M']=\\langle p_I(TM'),[M']\\rangle=\\langle F^*p_I(TM),[M']\\rangle=\\langle p_I(TM),F_*[M']\\rangle=\\langle p_I(TM),[M]\\rangle=p_I[M].$$\nIf $F$ is orientation-reversing, the same computation gives local generators\nthat are negatives of those of $o$, so $F_*[M']=-[M]$ and $p_I[M']=-p_I[M]$.\nFor disconnected $M'$ and $M$ the argument applies to each component, and the\nsum of the componentwise numbers transforms accordingly. In particular a\nnonzero Pontryagin number obstructs the existence of an orientation-reversing\nself-diffeomorphism. No choice beyond the AC stated above is used.",
+        "strategy": "Define the numbers by evaluating products of Pontryagin classes on the integral fundamental class; record the degree and orientation conventions and the sign behaviour under orientation reversal, which will be used to check consistency with the boundary-vanishing proposition. Invoke admissibility of closed smooth manifolds for the class construction.",
+        "deps": [
+          "def-pontryagin-classes-by-complexification",
+          "thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "def-kronecker-evaluation-pairing",
+          "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives",
+          "lem-second-countable-smooth-manifolds-have-cw-homotopy-type",
+          "def-axiom-of-choice",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-orientation-preserving-parametrization",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise",
+          "prop-components-of-a-topological-manifold-are-open-and-at-most-countable",
+          "prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure",
+          "prop-topological-manifolds-are-locally-compact-and-locally-path-connected",
+          "thm-connected-and-locally-path-connected-implies-path-connected",
+          "thm-naturality-normalization-and-whitney-sum-for-chern-classes",
+          "thm-homotopy-invariance-of-vector-bundle-pullback",
+          "def-chern-classes-from-the-projective-bundle-relation"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Section 16, Pontryagin numbers, printed pp.185-187"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Section 6.3, Pontryagin numbers $p_J(M)\\in\\mathbb Z$, electronic p.117"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-boundary-stable-tangent-splits-off-a-trivial-line",
+        "kind": "lemma",
+        "title": "The boundary stable tangent bundle splits off a trivial line",
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used exactly through\nthe global inward vector field of\n[[thm-every-manifold-with-boundary-has-a-global-inward-pointing-vector-field-along-the-boundary]].\nLet $W$ be a smooth manifold with boundary $M=\\partial W$\n([[def-smooth-map-between-manifolds-with-boundary]]), let\n$i:M\\to W$ be the inclusion, which is a closed embedding of a smooth\n$n$-manifold ([[thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold]]),\nand let $X$ be a smooth vector field on a neighbourhood of $M$ in $W$ that is\ninward at every point of $M$\n([[def-inward-outward-and-boundary-tangent-vectors]]).\n\nThen the map\n$$\\Phi:TM\\oplus\\varepsilon^1\\longrightarrow TW|_M,\\qquad \\Phi(v,t)=di(v)+t\\,X|_M,$$\nis an isomorphism of smooth real vector bundles over $M$\n([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]],\n[[def-pullback-vector-bundle-and-pullback-section]]). Consequently\n$TW|_M\\cong TM\\oplus\\varepsilon^1$ and the normal line $TW|_M/TM$ is trivial.\nSince $\\mathrm{AC}_\\omega$ supplies such an $X$ for every smooth manifold with\nboundary, the splitting holds for every smooth manifold with boundary. In\nparticular the stabilization of $TM$ by one trivial line is identified with the\nrestriction $TW|_M$; this is the identification used by the characteristic\nnumber propositions of this page.",
+        "strategy": "Choose a smooth inward field along $M$ (published existence under $\\mathrm{AC}_\\omega$). At each boundary point the differential of the inclusion identifies $T_pM$ with the boundary-tangent hyperplane and $X(p)$ is transverse to it, so $\\Phi_p$ is a linear isomorphism; smoothness in the base follows because $di$ and $X$ are smooth bundle maps, and a fibrewise-linear bijection of smooth vector bundles over the identity is a bundle isomorphism. Identify the quotient line with the trivial span of $X$. No further choice is made.",
+        "deps": [
+          "thm-every-manifold-with-boundary-has-a-global-inward-pointing-vector-field-along-the-boundary",
+          "prop-tangent-space-of-the-boundary-is-the-boundary-tangent-hyperplane",
+          "def-inward-outward-and-boundary-tangent-vectors",
+          "thm-tangent-and-cotangent-bundles-extend-over-a-manifold-boundary",
+          "thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
+          "prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "def-countable-choice",
+          "def-pullback-vector-bundle-and-pullback-section"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Proof of Theorem 4.9, tangent restriction splitting by an outward normal, printed p.52; section 17, outward-normal-first orientation and Collar Theorem 17.1, printed p.200"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, 2016)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf",
+              "locator": "Section 8.2, $\\tau W|_{\\partial W}\\cong\\tau\\partial W\\oplus\\varepsilon^1$, printed p.246"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-boundaries-have-zero-stiefel-whitney-numbers",
+        "kind": "proposition",
+        "title": "Boundaries have zero Stiefel-Whitney numbers",
+        "statement": "Assume AC ([[def-axiom-of-choice]]), used only through the Stiefel-Whitney\nclass construction, its admissibility input, and the inward field used in\nthe boundary tangent splitting (which requires $\\mathrm{AC}_\\omega$). Let $M$ be a closed smooth\n$n$-manifold that is the boundary of a compact smooth $(n+1)$-manifold $W$,\nwith canonical mod-two fundamental class $[M]\\in H_n(M;\\mathbb F_2)$\n([[def-stiefel-whitney-number-of-a-closed-manifold]]) and inclusion\n$i:M\\hookrightarrow W$. Then\n$$w^{I}[M]=\\langle w^{I}(TM),[M]\\rangle=0$$\nfor every monomial $w^{I}=w_1^{r_1}\\cdots w_n^{r_n}$ of total degree $n$.\nHence every Stiefel-Whitney number of a closed boundary vanishes, and a closed\nmanifold with at least one nonzero Stiefel-Whitney number is not\nnull-cobordant ([[def-null-cobordant-closed-manifold]]).",
+        "strategy": "Restrict the tangent bundle of $W$ to $M$: naturality of Stiefel-Whitney classes gives $w(TM)=i^*w(TW)$, using the boundary splitting $TW|_M\\cong TM\\oplus\\varepsilon^1$ and the stability of the Whitney sum formula for the trivial summand. Naturality of the Kronecker pairing gives $\\langle i^*w^I(TW),[M]\\rangle=\\langle w^I(TW),i_*[M]\\rangle$, and the fundamental class of the boundary pushes forward to zero, so the number vanishes. Note that admissibility of $M$ for the class construction holds because $M$ is a closed smooth manifold.",
+        "deps": [
+          "def-null-cobordant-closed-manifold",
+          "def-stiefel-whitney-number-of-a-closed-manifold",
+          "lem-fundamental-class-of-a-boundary-pushes-forward-to-zero",
+          "lem-boundary-stable-tangent-splits-off-a-trivial-line",
+          "lem-second-countable-smooth-manifolds-have-cw-homotopy-type",
+          "thm-naturality-of-stiefel-whitney-classes",
+          "thm-whitney-sum-formula-for-stiefel-whitney-classes",
+          "def-stiefel-whitney-classes-from-the-projective-bundle-relation",
+          "def-kronecker-evaluation-pairing",
+          "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives",
+          "prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Theorem 4.9 with its proof, printed pp.52-53"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Section 6.3, Stiefel-Whitney numbers of a boundary, electronic p.117"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "prop-oriented-boundaries-have-zero-pontryagin-numbers",
+        "kind": "proposition",
+        "title": "Oriented boundaries have zero Pontryagin numbers",
+        "statement": "Assume AC ([[def-axiom-of-choice]]), used only through the Pontryagin class\nconstruction, CW-type transport, admissibility input, and the inward field\nused in the boundary tangent splitting (which requires $\\mathrm{AC}_\\omega$). Let $M$ be a closed oriented smooth\n$4k$-manifold that is the boundary of a compact oriented smooth\n$(4k+1)$-manifold $W$, in the orientation convention of the null-cobordism\ndefinition ([[def-null-cobordant-closed-manifold]]), with fundamental class\n$[M]\\in H_{4k}(M;\\mathbb Z)$ and inclusion $i:M\\hookrightarrow W$. Then\n$$p_I[M]=\\langle p_{i_1}\\cdots p_{i_r},[M]\\rangle=0$$\nfor every partition $I=(i_1,\\dots,i_r)$ of $k$. Hence a closed oriented\n$4k$-manifold with a nonzero Pontryagin number is not an oriented boundary.\nThe proof uses neither the signature nor the Hirzebruch signature theorem.",
+        "strategy": "Restrict the Pontryagin classes to $M$: naturality and stability of Pontryagin classes under adjoining a trivial line give $p(TM)=i^*p(TW)$ using the boundary splitting $TW|_M\\cong TM\\oplus\\varepsilon^1$. Naturality of the integral Kronecker pairing and the boundary-pushforward lemma turn the number into $\\langle p_I(TW),i_*[M]\\rangle=0$.",
+        "deps": [
+          "def-null-cobordant-closed-manifold",
+          "def-pontryagin-number-of-a-closed-oriented-manifold",
+          "lem-fundamental-class-of-a-boundary-pushes-forward-to-zero",
+          "lem-boundary-stable-tangent-splits-off-a-trivial-line",
+          "lem-second-countable-smooth-manifolds-have-cw-homotopy-type",
+          "def-pontryagin-classes-by-complexification",
+          "thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes",
+          "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives",
+          "def-kronecker-evaluation-pairing",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Section 16, boundary vanishing of Pontryagin numbers by the method of Section 4.9, printed pp.185-187; Lemma 17.3, printed p.202"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, 2016)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf",
+              "locator": "Section 8.2, printed pp.243-247"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "rem-bordism-groups-here-are-geometric-not-generalized-homology-constructions",
+        "kind": "remark",
+        "title": "Bordism groups here are geometric, not generalized homology constructions",
+        "statement": "The groups $\\Omega_n^{O}$ and $\\Omega_n^{SO}$ defined on this page are geometric: their elements are bordism classes of manifolds and their operation is disjoint union, with products given by Cartesian product. This page constructs no Thom spectrum, no ring spectrum, and no generalized homology theory; the identification of these groups with stable homotopy groups of Thom spectra (for instance $\\Omega_n^{O}\\cong\\pi_n(MO)$ and $\\Omega_n^{SO}\\cong\\pi_n(MSO)$), together with the Thom transversality theorem and the bordism homology axioms, belongs to algebraic topology and to later pages. The remark fixes the seam so that consumers do not read a spectrum-level claim into these definitions.",
+        "strategy": "Record the boundary between the geometric definitions of this page and the Thom-spectrum constructions of algebraic topology; cite the sources for the identification as the destination of that material without asserting it here.",
+        "deps": [
+          "def-unoriented-and-oriented-bordism-groups"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, 2016)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf",
+              "locator": "Section 8.4, bordism as a homology theory, printed pp.252-258"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Theorems 6.23 and 6.25 (Thom), electronic p.118"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Lecture 3, the Pontrjagin-Thom theorem, printed pp.25-28"
+            }
+          ]
+        },
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 546,
+    "id": "smooth-cobordism-relations-groups-and-rings-examples",
+    "kind": "B",
+    "category": "differential-topology",
+    "title": "Smooth Cobordism Relations Groups and Rings — Examples",
+    "companion": "smooth-cobordism-relations-groups-and-rings",
+    "requires": [
+      "smooth-cobordism-relations-groups-and-rings"
+    ],
+    "items": [
+      {
+        "id": "ex-a-circle-is-the-boundary-of-a-disk",
+        "kind": "example",
+        "title": "A circle is the boundary of a disk",
+        "statement": "The closed unit disk $D^2=\\overline B_2(0,1)\\subset\\mathbb R^2$ is a compact smooth surface with boundary $S^1$; with the orientation of $D^2$ induced from the standard orientation of $\\mathbb R^2$, its induced boundary orientation is the standard counterclockwise orientation of $S^1$. Consequently $S^1$ with that orientation is null-cobordant, so its class is zero in $\\Omega_1^{SO}$ and in $\\Omega_1^{O}$; the circle with the opposite orientation is the inverse of $S^1$ in $\\Omega_1^{SO}$.",
+        "strategy": "Construct $D^2$ as a smooth manifold with boundary using boundary-defining-function charts ($\\rho(x)=1-|x|^2$ with nonzero gradient on $S^1$) and the inverse function theorem, as in the published closed-ball example; compute the outward normal at $p\\in S^1$ as the radial direction and verify that outward-normal-first on $\\partial D^2$ is counterclockwise. Identify the resulting bordism from $S^1$ to the empty 1-manifold and read off null-cobordism.",
+        "deps": [
+          "def-oriented-smooth-cobordism",
+          "def-null-cobordant-closed-manifold",
+          "def-unoriented-and-oriented-bordism-groups",
+          "def-induced-boundary-orientation",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds",
+          "thm-euclidean-inverse-function-theorem",
+          "def-euclidean-upper-half-space-and-its-boundary",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-boundary-defining-function",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "def-euclidean-spheres-and-closed-balls",
+          "prop-boundary-defining-functions-exist-locally-and-detect-inward-vectors",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "thm-disjoint-union-makes-bordism-classes-abelian-groups",
+          "def-smooth-collar-of-a-manifold-boundary"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Figure 5 and Proposition 1.32, printed pp.11-12 and 18-19"
+            },
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Page 203, every compact 1-manifold bounds"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-two-unoriented-points-bound-an-interval",
+        "kind": "example",
+        "title": "Two unoriented points bound an interval",
+        "statement": "The closed interval $[-1,1]$ is a compact smooth one-manifold with boundary $\\{-1,1\\}$; hence the disjoint union of two points, as a closed zero-manifold, is null-cobordant and $[\\mathrm{pt}]+[\\mathrm{pt}]=0$ in $\\Omega_0^{O}$. Since a single point is not null-cobordant (its parity is odd), the class of the one-point manifold is the unique nonzero element of $\\Omega_0^{O}\\cong\\mathbb Z/2\\mathbb Z$. Thus every closed zero-manifold with an even number of points is null-cobordant.",
+        "strategy": "Exhibit the interval as a compact smooth one-manifold with boundary via the closed-ball model in $\\mathbb R^1$, compute that its two boundary points form a null-cobordant zero-manifold, and combine with the parity invariant of the zero-dimensional proposition to conclude that the point class is nonzero and self-inverse.",
+        "deps": [
+          "def-unoriented-smooth-cobordism-of-closed-manifolds",
+          "def-null-cobordant-closed-manifold",
+          "def-unoriented-and-oriented-bordism-groups",
+          "prop-zero-dimensional-bordism-groups",
+          "thm-disjoint-union-makes-bordism-classes-abelian-groups",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds",
+          "thm-euclidean-inverse-function-theorem",
+          "def-euclidean-upper-half-space-and-its-boundary",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-boundary-defining-function",
+          "def-induced-boundary-orientation",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-smooth-collar-of-a-manifold-boundary",
+          "def-smooth-immersion-and-embedding-for-manifolds-with-boundary"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Lemma 1.30 and Proposition 1.31, printed pp.10-12"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Section 6.3, $M\\cup M$ is the boundary of $M\\times I$ and $N_0=\\mathbb Z_2$, electronic pp.117-118"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-signed-points-give-the-oriented-zero-bordism-invariant",
+        "kind": "example",
+        "title": "Signed points give the oriented zero-bordism invariant",
+        "statement": "For a closed oriented zero-manifold $M=\\coprod_{x}\\{x\\}$ with signs $\\epsilon_x\\in\\{\\pm1\\}$ determined by the orientation, the integer $\\sum_{x}\\epsilon_x$ is unchanged by oriented cobordism, and the map $[M]\\mapsto\\sum_x\\epsilon_x$ is an isomorphism $\\Omega_0^{SO}\\to\\mathbb Z$. A positively oriented point is a generator, and the standard interval $[-1,1]$ realizes $[\\mathrm{pt}_+]+[\\mathrm{pt}_-]=0$ with the sign convention of the page, so $[\\mathrm{pt}_-]=-[\\mathrm{pt}_+]$. Consequently two finite oriented point sets are oriented cobordant exactly when their signed counts agree.",
+        "strategy": "Verify the invariant by exhibiting the oriented interval as a null-cobordism of one positive and one negative point and by additivity of the signed count under disjoint union; bijectivity follows from the explicit generator and the computation of the inverse. Use the product boundary orientation to fix the signs of the interval ends.",
+        "deps": [
+          "def-unoriented-smooth-cobordism-of-closed-manifolds",
+          "def-oriented-smooth-cobordism",
+          "def-null-cobordant-closed-manifold",
+          "def-unoriented-and-oriented-bordism-groups",
+          "thm-disjoint-union-makes-bordism-classes-abelian-groups",
+          "prop-zero-dimensional-bordism-groups",
+          "def-induced-boundary-orientation",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-product-orientation",
+          "prop-boundary-orientation-of-a-product-when-at-most-one-factor-has-boundary",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "def-euclidean-spheres-and-closed-balls",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "prop-boundary-orientation-is-independent-of-the-outward-vector-field",
+          "thm-euclidean-inverse-function-theorem",
+          "def-euclidean-upper-half-space-and-its-boundary",
+          "def-boundary-defining-function",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-smooth-collar-of-a-manifold-boundary"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Page 203, a compact oriented 0-manifold is a finite set of signed points and the signed sum is a complete cobordism invariant"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Figure 5, printed p.18; Proposition 1.31, printed pp.11-12"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-the-pair-of-pants-is-a-cobordism-realizing-addition-of-circles",
+        "kind": "example",
+        "title": "The pair of pants is a cobordism realizing addition of circles",
+        "statement": "Let $P=\\{(x,y)\\in\\mathbb R^2:\\|(x,y)\\|\\le2,\\ \\|(x,y)-(1,0)\\|\\ge1,\\ \\|(x,y)+(1,0)\\|\\ge1\\}$, the disk of radius $2$ with two disjoint open unit disks removed. Then $P$ is a compact oriented smooth surface with boundary three circles, and with the outward-normal-first orientation its boundary is $-(S^1_1\\sqcup S^1_2)\\sqcup S^1_3$ for a suitable pairing of the three boundary circles into incoming and outgoing parts (the labels depend on the chosen decomposition, and the reversed decomposition gives the same bordism read backwards). Hence $P$ is a bordism from two circles to one circle and exhibits in $\\Omega_1^{SO}$ the additive relation $[S^1_1]+[S^1_2]=[S^1_3]$; all three classes are zero by the preceding example, so the example illustrates disjoint-union addition rather than an independent invariant.",
+        "strategy": "Give $P$ its smooth structure as a regular region in the plane: each boundary point lies on exactly one of the three circles, where the defining function is smooth with nonzero gradient, so the closed-ball chart construction applies and $P$ is a compact manifold with boundary with boundary the three circles. Compute the induced boundary orientation of each circle (outer circle counterclockwise, the two inner circles clockwise for the standard plane orientation) and split the boundary into incoming and outgoing parts so that the oriented boundary is $-(S^1_1\\sqcup S^1_2)\\sqcup S^1_3$. Compactness follows from closedness in the compact disk of radius $2$.",
+        "deps": [
+          "def-oriented-smooth-cobordism",
+          "thm-smooth-cobordism-is-an-equivalence-relation",
+          "def-unoriented-and-oriented-bordism-groups",
+          "thm-disjoint-union-makes-bordism-classes-abelian-groups",
+          "ex-a-circle-is-the-boundary-of-a-disk",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-boundary-defining-function",
+          "prop-boundary-defining-functions-exist-locally-and-detect-inward-vectors",
+          "thm-euclidean-inverse-function-theorem",
+          "def-induced-boundary-orientation",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-euclidean-spheres-and-closed-balls",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "def-euclidean-upper-half-space-and-its-boundary",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-smooth-collar-of-a-manifold-boundary",
+          "def-smooth-immersion-and-embedding-for-manifolds-with-boundary",
+          "def-compact-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Disjoint union and the abelian group structure, printed pp.10-12"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, 2016)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf",
+              "locator": "Section 8.2, disjoint-union addition and products, printed pp.243-248"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "cex-real-projective-two-space-is-not-unoriented-null-cobordant",
+        "kind": "counterexample",
+        "title": "The real projective plane is not unoriented null-cobordant",
+        "statement": "It is false that the real projective plane is null-cobordant: there is no\ncompact smooth $3$-manifold whose boundary is $\\mathbb{RP}^2$, so not every\nclosed surface bounds. The counterexample computes the Stiefel-Whitney number\n$$w_1^{2}[\\mathbb{RP}^2]=\\langle w_1(T\\mathbb{RP}^2)^2,[\\mathbb{RP}^2]\\rangle=1$$\nand concludes that the class of $\\mathbb{RP}^2$ is a nonzero element of\n$\\Omega_2^{O}$ ([[def-unoriented-and-oriented-bordism-groups]]).",
+        "strategy": "Model $\\mathbb{RP}^2$ as the projectivization of the trivial rank-three real bundle over a point; the projective-bundle theorem then gives $H^*(\\mathbb{RP}^2;\\mathbb F_2)=\\mathbb F_2[x]/(x^3)$ with $x\\ne0$ in degree one. Admissibility of $\\mathbb{RP}^2$ for the class construction follows from its published finite CW structure, and its smooth tangent bundle is numerable by the admissibility lemma for smooth manifolds. Non-orientability of $\\mathbb{RP}^2$ and the classification of orientability by $w_1$ give $w_1(T\\mathbb{RP}^2)\\ne0$, hence $w_1=x$. Poincare duality over the field $\\mathbb F_2$ makes the cup pairing $H^1\\times H^1\\to H^2$, $\\langle a\\smile b,[\\mathbb{RP}^2]\\rangle$, nonsingular, so the evaluation $\\langle x^2,[\\mathbb{RP}^2]\\rangle$ is $1$ and the Stiefel-Whitney number is nonzero. Then invoke the boundary-vanishing proposition.",
+        "deps": [
+          "def-null-cobordant-closed-manifold",
+          "def-unoriented-and-oriented-bordism-groups",
+          "prop-boundaries-have-zero-stiefel-whitney-numbers",
+          "def-stiefel-whitney-number-of-a-closed-manifold",
+          "def-stiefel-whitney-classes-from-the-projective-bundle-relation",
+          "def-real-projective-bundle-and-tautological-line",
+          "def-tautological-degree-one-class-on-a-real-projective-bundle",
+          "thm-mod-two-real-projective-bundle-theorem",
+          "prop-first-stiefel-whitney-class-classifies-orientability",
+          "thm-oriented-atlases-and-continuous-tangent-space-orientations-are-equivalent-in-positive-dimension",
+          "ex-real-projective-space-is-orientable-exactly-in-odd-dimension",
+          "cor-poincare-duality-gives-a-nonsingular-cup-pairing",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise",
+          "def-kronecker-evaluation-pairing",
+          "lem-second-countable-smooth-manifolds-have-cw-homotopy-type",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes (original pagination)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "Page 51, $w_1(P^n)\\neq0$ and $w_1^n[P^n]\\neq0$ for even $n$; Theorem 4.9, printed pp.52-53"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Proposition 1.32, the independent proof that $\\mathbb{RP}^2$ does not bound, printed pp.11-12"
+            }
+          ]
+        },
+        "dependency_level": 6
+      }
+    ]
+  }
+]

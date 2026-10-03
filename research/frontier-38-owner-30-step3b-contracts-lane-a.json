@@ -1,0 +1,1107 @@
+{
+  "version": 1,
+  "scope": [
+    "def-contact-order-regular-components",
+    "lem-affine-blowup-algebra-properties",
+    "lem-exceptional-fiber-line-bundle-euler-characteristic",
+    "lem-projection-formula-invertible-twist",
+    "def-rees-algebra-ideal-sheaf",
+    "lem-regular-sequence-associated-graded-polynomial",
+    "thm-normalization-reduced-curve-exists-finite"
+  ],
+  "contracts": {
+    "def-contact-order-regular-components": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: if Y or Z is empty then O_{Y,p}=0 or the local equation of one curve is a unit at every p, so n_p=0 at every closed point and the total contact order, a sum over the possibly empty set of closed points of the intersection, is 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: n_p(Y,Z)=0 exactly when p is not in both curves, i.e. when one local equation is a unit in O_{Y,p}; the zero module has length 0 and the finiteness discussion of the Definition covers this case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the value 1 occurs exactly for a transversal crossing of two regular curves, and the Definition records that a curve with two regular branches through p gives at least 2 even when every branch pair crosses with distinct tangents."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the curves may be singular at p as long as every branch is regular there (a node is allowed); the Definition states that such a local ring is not a domain, its maximal ideal is not principal, and the local contact order is at least 2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition is pointwise at closed points of a surface and has no interval, ordering or parameter with endpoints; there are no endpoint cases to dispose of."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family is made: a local equation is chosen at one point only to present the length, and its independence up to a unit is built into the Definition; the Axiom of Choice is neither used nor assumed here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: if Y and Z meet transversally at p then a local equation of Z restricts to a uniformizer of the discrete valuation ring O_{Y,p}, so I_Z O_{Y,p} is the maximal ideal and the length is 1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: if the length is 1 then I_Z O_{Y,p} is the maximal ideal of the one-dimensional local ring O_{Y,p}, which is therefore regular, and the two tangent lines are distinct, so Y and Z meet transversally at p."
+        }
+      ]
+    },
+    "lem-affine-blowup-algebra-properties": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rees-algebra-and-rees-module",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring and $I\\subset R$ an ideal. The **Rees algebra** of\n$I$ is the graded subring\n$$ \\mathcal R(I):=\\bigoplus_{n\\ge0} I^nt^n\\subset R[t]. $$\nEquivalently, it is the graded ring whose degree-$n$ piece is $I^n$.\n\nLet $M$ be an $R$-module equipped with a descending filtration\n$$ M=M_0\\supseteq M_1\\supseteq M_2\\supseteq\\cdots $$\nsatisfying $IM_n\\subseteq M_{n+1}$ for every $n\\ge0$. The **Rees module** of\nthis filtration is\n$$ \\mathcal R(M_\\bullet):=\\bigoplus_{n\\ge0} M_nt^n\\subset M[t], $$\nviewed as a graded $\\mathcal R(I)$-module.\n\nFor the $I$-adic filtration $M_n=I^nM$, the quotient\n$$ \\mathcal R(M_\\bullet)/I\\mathcal R(M_\\bullet) $$\nis naturally $\\operatorname{gr}_I(M)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multiplicative-subset-and-localisation",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring. A subset $S\\subseteq R$ is **multiplicative** if $1\\in S$ and $s,t\\in S$ implies $st\\in S$.\n\nOn $R\\times S$, define\n$$ (r,s)\\sim(r',s')\\quad\\Longleftrightarrow\\quad u(rs'-r's)=0\\text{ for some }u\\in S. $$\nThe **localisation** of $R$ at $S$, denoted $S^{-1}R$, is the set of equivalence classes for this relation. The class of $(r,s)$ is written $r/s$, and its arithmetic is\n$$ \\frac r s+\\frac{r'}{s'}=\\frac{rs'+r's}{ss'},\\qquad \\frac r s\\frac{r'}{s'}=\\frac{rr'}{ss'}. $$\nThe **localisation map** is the ring homomorphism\n$$ \\lambda_S:R\\longrightarrow S^{-1}R,\\qquad r\\longmapsto r/1. $$\nEvery $s\\in S$ maps to a unit, with $(s/1)^{-1}=1/s$. The construction permits $0\\in S$; in that case the localisation is the zero ring.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "3.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-graded-ring-and-graded-module",
+          "source_section": "Definition",
+          "quote": "A **nonnegatively graded ring** is a commutative ring\n$$ S=\\bigoplus_{n\\ge 0} S_n $$\nsuch that $S_nS_m\\subseteq S_{n+m}$ for all $m,n\\ge 0$. An element of $S_n$ is\ncalled **homogeneous of degree $n$**.\n\nIf $S$ is graded, a **graded $S$-module** is an $S$-module\n$$ M=\\bigoplus_{n\\in\\mathbb Z} M_n $$\nwith $S_iM_j\\subseteq M_{i+j}$ for all $i\\ge 0$ and $j\\in\\mathbb Z$. An element\nof $M_j$ is homogeneous of degree $j$.\n\nFor an integer $a$, the **twist** $M(a)$ is the graded module with\n$$ M(a)_n=M_{n+a}. $$\nThus a homogeneous element of degree $n+a$ in $M$ is viewed as degree $n$ in\n$M(a)$.\n\nThe graded ring is **standard graded over $S_0$** when $S$ is generated as an\n$S_0$-algebra by finitely many degree-one elements.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-generated-and-principal-ideals",
+          "source_section": "Definition",
+          "quote": "The ideal generated by a subset and principal ideals.\n\nFor $S\\subseteq R$, define $(S)$ to be the intersection of all two-sided ideals\nof $R$ containing $S$.  This family is nonempty because it contains $R$, and\n[[lem-ideal-criterion-and-intersections]] shows that $(S)$ is an ideal.  For\n$a\\in R$, the ideal $(\\{a\\})$ is written $(a)$ and is called **principal**.",
+          "uses": [
+            "2.1",
+            "3.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "claim": "An element of the localization $R(I)_{at}$ is a class $z/(at)^n$ with $z\\in R(I)$ and $n\\ge0$; writing $z=\\sum_ib_it^i$, its degree-zero component is $b_nt^n/(at)^n$ with $b_n\\in I^n$. Hence the degree-zero part $D=(R(I))_{(a)}$ consists of the classes of $b\\,t^n/(at)^n$ with $n\\ge0$ and $b\\in I^n$, so that $A[I/a]=D$; for $b\\in I^n$, $c\\in I^m$ one has $b\\,t^n/(at)^n=c\\,t^m/(at)^m$ in $D$ if and ",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d2",
+          "claim": "The assignment $\\iota\\colon D\\to A_a$, $b\\,t^n/(at)^n\\mapsto b/a^n$, is a well-defined injective ring homomorphism: well-defined and injective because $b/a^n=c/a^m$ in $A_a$ holds exactly when $a^kb=a^{k'}c$ for suitable exponents, i.e. exactly under the equality criterion of step 1.1; compatible with addition because $(b\\,t^n)/(at)^n+(c\\,t^m)/(at)^m=(a^mb+a^nc)t^{n+m}/(at)^{n+m}$ and with multipl",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "d3",
+          "claim": "The element $a$ is invertible in $A_a$, hence a nonzerodivisor on $A_a$, hence a nonzerodivisor on the subring $B$; in particular the image of $a$ in $A[I/a]$ is a nonzerodivisor. Moreover $aB\\subseteq IB$ because $a\\in I$, and $IB\\subseteq aB$ because for $b\\in I$ and $c/a^n\\in B$ with $c\\in I^n$ one has $b\\cdot c/a^n=a\\cdot bc/a^{n+1}$ with $bc\\in I^{n+1}$; hence $IA[I/a]=aA[I/a]$. [F1, step 2.1",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "d4",
+          "claim": "The ring $A$ lies in $B$, since $c=ac/a$ for $c\\in A$ and $ac\\in I$; thus $A_a=A[1/a]\\subseteq B_a$, and the inclusion $B\\subseteq A_a$ induces $B_a\\subseteq(A_a)_a=A_a$. Hence $B_a=A_a$, that is, $\\bigl(A[I/a]\\bigr)_a=A_a$. [F2, step 2.1]",
+          "step": "3.2",
+          "inputs": [
+            "2.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d5",
+          "claim": "Let $\\varphi\\colon C=A[x_1,\\dots,x_r]/(ax_i-a_i)\\to B$ send $x_i$ to $a_i/a$. Its image contains $A$ and every $a_i/a$; since $I$ is generated by the $a_i$, every $b\\in I$ is a finite sum $\\sum_ic_ia_i$, whence $b/a=\\sum_ic_i(a_i/a)$ lies in the image; as the image is an $A$-subalgebra of $A_a$ containing all $b/a$ it contains $B$. So $\\varphi$ is surjective. [F4, step 2.1]",
+          "step": "3.3",
+          "inputs": [
+            "2.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "d6",
+          "claim": "If $A$ is reduced, then so is the localization $A_a$, and $B\\subseteq A_a$ is a subring of a reduced ring, hence reduced: if $x^N=0$ in $B$ then $x=0$ already in $A_a$. If $A$ is a domain and $a\\neq0$, then $A_a\\subseteq\\operatorname{Frac}(A)$ is a nonzero subring of a field (nonzero because $a\\cdot a^{-1}=1$ with $a\\neq0$), hence a domain, and so is its subring $B$. [F2, step 2.1]",
+          "step": "3.4",
+          "inputs": [
+            "2.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d7",
+          "claim": "Localizing $C$ at the multiplicative set generated by $a$ gives $C_a=A_a[x_1,\\dots,x_r]/(ax_i-a_i)$ in which $a$ is a unit and hence $x_i=a_ia^{-1}$; the $A_a$-algebra homomorphism $C_a\\to A_a$ sending $x_i\\mapsto a_i/a$ is therefore surjective and has zero kernel, because $C_a=A_a[x_i]/(x_i-a_ia^{-1})$ is generated over $A_a$ by the elements $x_i-a_ia^{-1}$ which map to $0$, so it is an isomorphi",
+          "step": "4.1",
+          "inputs": [
+            "3.3",
+            "F2"
+          ]
+        },
+        {
+          "id": "d8",
+          "claim": "The description $B=\\{b/a^n:n\\ge0,\\ b\\in I^n\\}$ of step 2.1 uses only the pair $(I,a)$: no generating family is chosen, and a class in $D$ is compared with another by the equality criterion of step 1.1, so the use of a particular fraction representative is immaterial. A finite generating family $I=(a_0,\\dots,a_r)$ with $a=a_0$ only produces the presentation $C$ of step 3.3, whose kernel is describe",
+          "step": "5.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.3",
+            "4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the zero ring A=0 is allowed; then A[I/a] is the zero ring, every part of the statement holds trivially, and the equality criterion of step 1.1 is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: the equality criterion is a^k(a^m b-a^n c)=0, which for a=0 holds for every pair; the localization is then the zero ring because 0 lies in the multiplicative set, as recorded in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1: the case I=(a) is included; then A[I/a] is the subalgebra of A_a generated by a/a, which is A itself embedded in A_a, and part (1) gives (A[I/a])_a=A_a."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.4: part (3) treats reducedness and the domain case explicitly, and a=0 gives the zero ring, which is reduced; the only excluded case is a=0 inside a domain, where the localization would be the zero ring and not a domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no ordering or interval parameter; the only distinguished value is a=0, disposed of under 'empty' and 'zero'."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is used: the generating family and the element a are fixed data, the localization is canonical, and the independence assertion (4) is proved by the identity of the subalgebra of A_a in step 5.1 rather than by selecting representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional occurs in the Statement: part (3) consists of one-way implications from hypotheses on A to conclusions on A[I/a], and parts (1), (2), (4) are assertions about the construction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse direction to check in the Statement; the only 'if and only if' in the item belongs to the internal equality criterion of step 1.1, which is proved in both directions there."
+        }
+      ]
+    },
+    "lem-exceptional-fiber-line-bundle-euler-characteristic": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sheaf-cohomology-derived-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Fix a topological space $X$, let\n$$\\Gamma(X,-):\\mathrm{Ab}(X)\\to\\mathbf{Ab}$$\nbe the additive left exact global-sections functor\n([[def-global-sections-functor-sheaves]]), and let $I$ be the supplied\nfunctorial injective resolution datum on $\\mathrm{Ab}(X)$ of\n[[thm-abelian-sheaves-have-enough-injectives]]: it assigns to every abelian\nsheaf $\\mathcal F$ one specific injective resolution\n$0\\to\\mathcal F\\to I^\\bullet(\\mathcal F)$\n([[def-right-derived-object-relative-to-injective-resolution-data]]).\n\nFor every $q\\ge0$ and every abelian sheaf $\\mathcal F$ on $X$ define the\n**$q$-th sheaf cohomology group of $\\mathcal F$** to be the right derived\nobject of $\\Gamma(X,-)$ relative to $I$:\n$$H^q(X,\\mathcal F):=R_I^q\\Gamma(X,\\mathcal F)=H^q\\bigl(\\Gamma(X,I^\\bullet(\\mathcal F)_{\\mathrm{del}})\\bigr),$$\nthe cohomology object of the complex\n$\\Gamma(X,I^0(\\mathcal F))\\to\\Gamma(X,I^1(\\mathcal F))\\to\\cdots$ of abelian\ngroups obtained from the deleted resolution\n([[def-deleted-resolution]], [[def-cohomology-object-of-a-cochain-complex]]).\nWe also set $H^q(X,\\mathcal F):=0$ for $q<0$.\n\nBecause $I$ is a fixed supplied datum, the group $H^q(X,\\mathcal F)$ is a\nspecific group for each pair $(X,\\mathcal F)$, and for a morphism\n$\\varphi:\\mathcal F\\to\\mathcal G$ of abelian sheaves we write\n$H^q(X,\\varphi):=R_I^q\\Gamma(X,\\varphi)$ for the induced map; it is the map on\ncohomology induced by $\\Gamma(X,-)$ applied to the cochain maps supplied with\nthe datum, and it is additive in $\\varphi$.\n\nIf $J$ is another supplied injective resolution datum on $\\mathrm{Ab}(X)$ then\n$R_I^q\\Gamma(X,-)$ and $R_J^q\\Gamma(X,-)$ are naturally isomorphic, so the\n$H^q(X,\\mathcal F)$ computed from $J$ agree with the ones above up to a\ncanonical natural isomorphism; the Axiom of Dependent Choice needed for that\ncomparison follows from AC\n([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]],\n[[thm-choice-implies-dependent-implies-countable-choice]]). The notation\n$H^q(X,\\mathcal F)$ therefore does not depend on the datum used, up to this\ncanonical isomorphism, and we call $q$ the **cohomological degree**.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-picard-projective-line-integers",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice as inherited from the divisor, degree and\ntwisting-sheaf suppliers. For every field $k$ the degree homomorphism\ninduces an isomorphism $\\operatorname{Pic}(\\mathbb P^1_k)\\to\\mathbb Z$.\nUnder it the class of the twisting sheaf $\\mathcal O_{\\mathbb P^1_k}(d)$\ncorresponds to $d$, so $[\\mathcal O(1)]$ is a generator, and every invertible\nsheaf on $\\mathbb P^1_k$ is isomorphic to $\\mathcal O_{\\mathbb P^1_k}(d)$ for\na unique integer $d$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cohomology-projective-space-twisting-sheaves",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $A$ be a commutative\nring with $1$ ([[def-commutative-ring]]), let $n\\ge0$, let $d\\in\\mathbb Z$ and\nlet $X=\\mathbb P^n_A\\cong\\operatorname{Proj}A[x_0,\\dots,x_n]$ be relative\nprojective space ([[def-relative-projective-space-standard-charts]],\n[[def-polynomial-ring-on-a-family-of-indeterminates]]), with twisting sheaf\n$\\mathcal O_X(d)$ ([[def-twisting-sheaf-proj]]) and cohomology\n$H^q(X,\\mathcal O_X(d))$. Then\n$$H^q(X,\\mathcal O_X(d))=0\\qquad\\text{unless }q=0\\text{ or }q=n.$$\nIf $n>0$, then $H^0(X,\\mathcal O_X(d))\\cong A[x_0,\\dots,x_n]_d$ when $d\\ge0$\nand $H^0(X,\\mathcal O_X(d))=0$ when $d<0$, where\n$A[x_0,\\dots,x_n]_d$ is the degree-$d$ graded piece\n([[def-graded-ring-and-graded-module]]); and $H^n(X,\\mathcal O_X(d))$ is the\nfree $A$-module on the Laurent monomials $x_0^{e_0}\\cdots x_n^{e_n}$ with\n$e_i<0$ for every $i$ and $\\sum_ie_i=d$, so that it is nonzero precisely when\n$d\\le-n-1$ and $A\\ne0$. For $n=0$ one has $\\mathbb P^0_A=\\operatorname{Spec}A$\nand $H^0(X,\\mathcal O_X(d))\\cong A$ for every $d\\in\\mathbb Z$, with all higher\ngroups zero. The zero ring $A=0$ is allowed: then $X=\\varnothing$ and all\ngroups are zero, in agreement with both displayed descriptions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euler-characteristic-coherent-sheaf",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, inherited from the finiteness and vanishing\ncorollary cited below ([[def-axiom-of-choice]]). Let $k$ be a field\n([[def-field]]), let $X$ be a scheme proper over $k$\n([[def-proper-morphism]]), and let $\\mathcal F$ be a coherent\n$\\mathcal O_X$-module ([[def-coherent-module-scheme]]) with sheaf cohomology\ngroups $H^q(X,\\mathcal F)$ ([[def-sheaf-cohomology-derived-global-sections]]).\n\nBy [[cor-projective-cohomology-finite-dimensional-field]] each group\n$H^q(X,\\mathcal F)$ is a finite-dimensional $k$-vector space\n([[def-dimension]]) and only finitely many of the groups are nonzero: if $X$\nadmits a finite affine open cover with $n\\ge0$ members, then\n$H^q(X,\\mathcal F)=0$ for every $q\\ge n$. Consequently the alternating sum\n$$\\chi(X,\\mathcal F):=\\sum_{q\\ge0}(-1)^q\\dim_kH^q(X,\\mathcal F)$$\nhas only finitely many nonzero terms and defines an integer, the **Euler\ncharacteristic** of $\\mathcal F$ on $X$. Equivalently, for any finite affine\nopen cover of $X$ with $n$ members one has\n$$\\chi(X,\\mathcal F)=\\sum_{q=0}^{n-1}(-1)^q\\dim_kH^q(X,\\mathcal F),$$\nthe value being independent of the cover because the definition uses only the\ncohomology groups.\n\nIf $X=\\varnothing$ then all groups $H^q(X,\\mathcal F)$ vanish, the cover has\n$n=0$ members, and we set $\\chi(X,\\mathcal F)=0$; this is the empty sum in the\ndisplayed formula. The zero sheaf $\\mathcal F=0$ likewise has\n$\\chi(X,0)=0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-projective-space-proper-over-base",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $S$ be a scheme and let $n\\ge0$. Then the\nstructure morphism\n$$\\pi:\\mathbb P^n_S\\longrightarrow S$$\nis proper. No Noetherian, field, reducedness or nonemptiness hypothesis is\nimposed on $S$, and the empty base is included.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-coherent-module-scheme",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a scheme and let $\\mathcal F$ be a quasi-coherent\n$\\mathcal O_X$-module ([[def-quasi-coherent-module-scheme]]) that is of finite\ntype ([[def-finite-type-finite-presentation-module-sheaf]]). Then $\\mathcal F$\nis **coherent** if for every open $U\\subseteq X$ and every morphism\n$$\\mathcal O_U^{\\,n}\\longrightarrow\\mathcal F|_U,\\qquad n\\ge0\\ \\text{finite},$$\nthe kernel sheaf $\\ker\\varphi$ is of finite type\n([[def-kernel-cokernel-image-sheaves]]).\n\nUnder the Axiom of Choice ([[def-axiom-of-choice]]), inherited from the\nassociated-sheaf existence theorem at the sheaf-kernel identification below,\nthe following affine test is equivalent to the definition. Since the\nconditions are local, it suffices to test affine opens\n$U=\\operatorname{Spec}A$ on which $\\mathcal F|_U\\cong\\widetilde M$ for a\nfinitely generated $A$-module $M$: then a morphism\n$\\mathcal O_U^n\\to\\widetilde M$ is given by an $A$-linear map\n$\\psi:A^n\\to M$ ([[def-finite-type-finite-presentation-module-sheaf]]) and, as\nlocalisation is exact ([[thm-localisation-of-modules-is-exact]]), the kernel\nsheaf has $\\ker\\varphi(D(f))=\\ker(\\psi)\\otimes_AA_f=\\ker(\\psi)_f$, so it is the\nassociated sheaf of the finitely generated module\n$\\ker\\psi$ precisely when that kernel is finitely generated\n([[thm-associated-module-sheaf-exists]]).\n\n*Finite presentation does not imply coherence under the same AC assumption.* Over a general base the\nkernel condition is a genuine additional hypothesis. Let $k$ be a field and let\n$$A=k[x,y_1,y_2,\\dots]/(xy_i,\\ y_iy_j\\ :\\ i,j\\ge1);$$\nthe classes of $1,x,x^2,\\dots,y_1,y_2,\\dots$ form a $k$-basis of $A$, so\n$A=k[x]\\oplus\\bigoplus_{i\\ge1}k[x]y_i$ as a $k[x]$-module, and\nmultiplication by $x$, viewed as an $A$-linear map $\\psi:A\\to A$, has kernel\n$\\ker\\psi=\\operatorname{Ann}_A(x)=\\bigoplus_{i\\ge1}k[x]y_i$, which is not\nfinitely generated as an $A$-module. The module $A$ is finitely presented, even\nfree of rank one, but the associated sheaf $\\widetilde A=\\mathcal O_X$ on\n$X=\\operatorname{Spec}A$ receives the morphism $\\mathcal O_X\\to\\mathcal O_X$\ncorresponding to $\\psi$ ([[def-finite-type-finite-presentation-module-sheaf]],\n[[thm-associated-module-sheaf-exists]]) whose kernel is the associated sheaf of\n$\\operatorname{Ann}_A(x)$ and is not of finite type. Hence $\\mathcal O_X$ is\nnot coherent on this $X$; finite presentation, and even local freeness of finite\nrank, do not by themselves imply coherence over an arbitrary base. The\nidentification of coherent with finite type is a theorem about locally\nNoetherian schemes, proved on this page; over a locally Noetherian scheme\nfinite locally free sheaves are therefore coherent.\n\n*Immediate consequences.* Coherence is local on $X$ and invariant under\nisomorphism; a coherent module is of finite type by definition; restrictions of\ncoherent modules to open subschemes are coherent; and the zero module is\ncoherent. On a locally Noetherian scheme the kernel condition is automatic for\nfinite-type quasi-coherent modules, and the theorem on this page proves the\nconverse direction: there, finite type and coherent coincide\n([[def-locally-noetherian-and-noetherian-scheme]]). Over a non-Noetherian ring\nthe two notions differ, as the $A=\\mathcal O_X$ example above shows, and the\nrelation-kernel condition must be checked; the remark on this page records that\nwarning.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "claim": "Fix a $\\kappa$-isomorphism $\\varphi\\colon E\\to\\mathbb P^1_\\kappa$ and set $N:=\\varphi_*M$, so that $N$ is an invertible sheaf on $\\mathbb P^1_\\kappa$ and $\\Gamma(E,M)=\\Gamma(\\mathbb P^1_\\kappa,N)$ by definition of the direct image. The direct image along an isomorphism is an exact equivalence of module categories with inverse $\\varphi^*$, so it preserves the global-section functors and their right",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2",
+          "claim": "By [F2] applied to the field $\\kappa$, the invertible sheaf $N$ on $\\mathbb P^1_\\kappa$ is isomorphic to $\\mathcal O_{\\mathbb P^1_\\kappa}(d)$ for a unique integer $d$, which we take as the definition of the degree $d$ of $M$ over $\\kappa$. [F2, step 1.1]",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d3",
+          "claim": "By [F3] with $A=\\kappa$ and $n=1$ the groups $H^q(\\mathbb P^1_\\kappa,\\mathcal O(d))$ vanish unless $q=0$ or $q=1$; the same description gives $H^0\\cong\\kappa[x,y]_d$, of dimension $h^0=d+1$ for $d\\ge0$ and $0$ for $d<0$, and $H^1$ free on the Laurent monomials $x^ey^f$ with $e,f<0$ and $e+f=d$, of dimension $h^1=-d-1$ for $d\\le-2$ and $0$ otherwise, so $h^0-h^1=1+d$. Since cohomology depends only ",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "d4",
+          "claim": "The structure morphism $E\\to\\operatorname{Spec}\\kappa$ makes $\\kappa\\to\\Gamma(E,\\mathcal O_E)$ a ring homomorphism, so each $H^q(E,M)$ is a $\\kappa$-vector space; for a $\\kappa$-vector space $V$ of dimension $h$ one has $\\dim_kV=rh$, because if $v_1,\\dots,v_h$ is a $\\kappa$-basis of $V$ and $\\mu_1,\\dots,\\mu_r$ is a $k$-basis of $\\kappa$, then the products $\\mu_jv_i$ span $V$ over $k$ and are $k$-i",
+          "step": "4.1",
+          "inputs": [
+            "3.1"
+          ]
+        },
+        {
+          "id": "d5",
+          "claim": "The scheme $E$ is proper over $\\kappa$ because it is $\\kappa$-isomorphic to $\\mathbb P^1_\\kappa$ and $\\mathbb P^1_S\\to S$ is proper for every $S$ [F5], and $M$ is coherent on the locally Noetherian scheme $E$ because it is invertible [F6]; thus the Euler characteristic of [F4], with base field $\\kappa$, is the alternating sum over the finitely many nonzero cohomology groups. By step 3.1 only the t",
+          "step": "5.1",
+          "inputs": [
+            "3.1",
+            "4.1",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "d6",
+          "claim": "If $\\varphi'$ is another $\\kappa$-isomorphism with associated integer $d'$, then step 5.1 applied to both gives $r(1+d)=\\chi_k(E,M)=r(1+d')$, and $r\\ge1$ because $\\kappa/k$ is a finite extension, so $d=d'$; thus the degree of $M$ over $\\kappa$ is well defined. For $d=-j$ the formula reads $\\chi_k(E,M)=r(1-j)$, which is the final assertion. [step 2.1, step 5.1] \u220e",
+          "step": "6.1",
+          "inputs": [
+            "2.1",
+            "5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a nonempty scheme E isomorphic to P^1_kappa and a line bundle M on it; no family or union is quantified over, so there is no empty object for the claim to degenerate into."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: the computation gives h^0=max(d+1,0) and h^1=max(-d-1,0), so d=-1 yields vanishing cohomology and Euler characteristic 0, while d=0 yields chi_k=r."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 6.1: the case r=1 (kappa=k) is included and reads chi_k(E,M)=1+d; the final clause with j=1 gives chi_k=0, and r>=1 always holds for a finite extension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 6.1: the extension kappa/k may be inseparable and E need not have a k-rational point; the proof uses only that r=[kappa:k] is the k-dimension of kappa, and no separability or perfectness is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The integer d is unrestricted and the formula r(1+d) is polynomial in it; the values d=-1 and d=0 are the only distinguished ones and are treated under 'zero' and 'one' rather than as endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the Axiom of Choice is assumed, inherited from the cohomology, Picard and Euler-characteristic suppliers, and is used only through them (injective resolution data and the Picard computation); no further selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no 'if and only if'; it asserts vanishing of higher cohomology, an identity of dimensions and a specialisation of the formula, so there is no forward direction of a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Correspondingly there is no reverse direction to check: the only equivalence in the item is the definition of the degree d through the unique integer classifying N, recorded in step 2.1."
+        }
+      ]
+    },
+    "lem-projection-formula-invertible-twist": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-higher-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $(f,f^\\sharp):(X,\\mathcal O_X)\\to(Y,\\mathcal O_Y)$ be a morphism of ringed\nspaces and let $\\mathcal F$ be an $\\mathcal O_X$-module\n([[def-module-on-ringed-space]]). The direct image presheaf\n$f_*\\mathcal F$ is defined on opens $V\\subseteq Y$ by\n$(f_*\\mathcal F)(V)=\\mathcal F(f^{-1}(V))$\n([[def-direct-image-sheaf]]); when $\\mathcal F$ is a sheaf of modules, this\npresheaf is again a sheaf of modules on $Y$\n([[lem-direct-image-is-sheaf]]), and for a morphism of ringed spaces it is an\n$\\mathcal O_Y$-module, because $f_*$ is right adjoint to the inverse image\nfunctor $f^*$ on modules ([[thm-pullback-pushforward-module-adjunction]]); a\nright adjoint is left exact and additive\n([[cor-a-right-adjoint-is-left-exact-and-a-left-adjoint-is-right-exact]]).\n\nFix the supplied functorial injective resolution datum $I$ on\n$\\mathrm{Mod}(\\mathcal O_X)$ of\n[[lem-ringed-space-module-sheaves-enough-injectives]]: it assigns to every\n$\\mathcal O_X$-module $\\mathcal F$ one specific injective resolution\n$0\\to\\mathcal F\\to I^0(\\mathcal F)\\to I^1(\\mathcal F)\\to\\cdots$\n([[def-injective-resolution-in-an-abelian-category]]) with deleted complex\n$I(\\mathcal F)_{\\mathrm{del}}$\n([[def-right-derived-object-relative-to-injective-resolution-data]]). For\nevery $q\\in\\mathbb Z$ define the **$q$-th higher direct image sheaf**\n\n$$R^qf_*\\mathcal F:=R_I^qf_*(\\mathcal F)=H^q\\bigl(f_*I(\\mathcal F)_{\\mathrm{del}}\\bigr),$$\n\nthe $q$-th right derived object of the additive left exact functor\n$f_*:\\mathrm{Mod}(\\mathcal O_X)\\to\\mathrm{Mod}(\\mathcal O_Y)$ relative to the\nfixed datum $I$ ([[def-right-derived-object-relative-to-injective-resolution-data]]),\nthe cohomology object being taken in the abelian category of\n$\\mathcal O_Y$-modules. We also keep the convention $R^qf_*\\mathcal F=0$ for\n$q<0$.\n\nBy the derived-object convention this makes $R^qf_*\\mathcal F$ a specific\n$\\mathcal O_Y$-module for every $\\mathcal F$ and $q$, depending on the fixed\ndatum $I$; in degree zero the left exactness of $f_*$ supplies a canonical\nnatural isomorphism $R^0f_*\\mathcal F\\xrightarrow{\\sim}f_*\\mathcal F$\n([[thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor]],\nwhich assumes the Axiom of Dependent Choice\n([[def-dependent-choice]])), so the $q=0$ term is the ordinary direct image.\nThe Axiom of Choice supplies the functorial injective resolution datum of\n$\\mathrm{Mod}(\\mathcal O_X)$ ([[def-axiom-of-choice]]) and implies the\nDependent Choice required by the cited degree-zero and comparison theorems\n([[thm-choice-implies-dependent-implies-countable-choice]]). If $J$ is any other supplied injective resolution\ndatum on $\\mathrm{Mod}(\\mathcal O_X)$, then the functors $R_I^qf_*$ and\n$R_J^qf_*$ are naturally isomorphic\n([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]]),\nso the higher direct image is independent of the resolution up to a canonical\ncomparison isomorphism.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pullback-pushforward-module-adjunction",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n(f,f^\\sharp):(X,\\mathcal O_X)\\longrightarrow(Y,\\mathcal O_Y)\n$$\nbe a morphism of ringed spaces, let $\\mathcal G$ be an $\\mathcal O_Y$-module,\nand let $\\mathcal F$ be an $\\mathcal O_X$-module. Then there is a natural\nbijection\n$$\\operatorname{Hom}_{\\mathcal O_X}(f^*\\mathcal G,\\mathcal F) \\cong \\operatorname{Hom}_{\\mathcal O_Y}(\\mathcal G,f_*\\mathcal F).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-invertible-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a scheme. An $\\mathcal O_X$-module $\\mathcal L$ is **invertible** if\nit is locally free of rank $1$\n([[def-locally-free-sheaf-finite-rank]]): every point $x\\in X$ has an open\nneighbourhood $U$ with\n$$\\mathcal L|_U\\;\\cong\\;\\mathcal O_U.$$\nEquivalently, $X$ is covered by open sets $U$ on which $\\mathcal L|_U$ admits a\ngenerator, that is, a section $s\\in\\mathcal L(U)$ such that the morphism\n$\\mathcal O_U\\to\\mathcal L|_U$, $a\\mapsto a\\cdot s|_U$, is an isomorphism. The\nstructure sheaf $\\mathcal O_X$ is invertible.\n\nSince local freeness of rank $1$ is a special case of local freeness of finite\nrank, an invertible sheaf is quasi-coherent, its rank function is the constant\nfunction $1$, the zero sheaf is not invertible on a nonempty scheme, and\nrestriction to an open subscheme preserves invertibility. The tensor product,\ninverse and dual of invertible sheaves are treated on this page; in particular\n$\\mathcal L^\\vee=\\mathcal H om_{\\mathcal O_X}(\\mathcal L,\\mathcal O_X)$ is again\ninvertible of rank one, and $\\mathcal L^\\vee\\otimes_{\\mathcal O_X}\\mathcal L$\nis canonically $\\mathcal O_X$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-locally-free-sheaf-finite-rank",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a scheme and let $\\mathcal E$ be a sheaf of $\\mathcal O_X$-modules\n([[def-module-on-ringed-space]]). For $r\\ge0$ write $\\mathcal O_X^r$ for the\nsheaf $U\\mapsto\\mathcal O_X(U)^r$ with componentwise restriction, so that\n$\\mathcal O_X^0=0$ and $\\mathcal O_X^1=\\mathcal O_X$.\n\n$\\mathcal E$ is **locally free of rank $r$ near $x\\in X$** if there is an open\nneighbourhood $U\\subseteq X$ of $x$ and an isomorphism of\n$\\mathcal O_U$-modules\n$$\\mathcal E|_U\\;\\cong\\;\\mathcal O_U^{\\,r}.$$\n$\\mathcal E$ is **locally free of finite rank** (or **finite locally free**) if\nevery point $x\\in X$ has such a neighbourhood with some rank $r=r(x)\\ge0$. It is\nthen **invertible** if $r(x)=1$ for every $x$, a notion recorded separately on\nthis page. A locally free sheaf is written with the rank function\n$r:X\\to\\mathbb N$ that its charts determine.\n\n*Well-definedness of the rank.* Suppose $\\mathcal E|_U\\cong\\mathcal O_U^r$ and\n$\\mathcal E|_V\\cong\\mathcal O_V^s$ with $x\\in U\\cap V$. Passing to stalks gives\nan isomorphism $(\\mathcal O_{X,x})^r\\cong(\\mathcal O_{X,x})^s$ of modules over\nthe local ring $\\mathcal O_{X,x}$, which is a nonzero commutative ring: for an\naffine open $\\operatorname{Spec}A\\ni x$ one has\n$\\mathcal O_{X,x}\\cong A_{\\mathfrak p_x}$ with\n$\\mathfrak p_x\\in\\operatorname{Spec}A$\n([[thm-stalk-structure-sheaf-prime-localization]]). A nonzero commutative ring\nhas invariant basis number\n([[thm-nonzero-commutative-rings-have-invariant-basis-number]],\n[[def-invariant-basis-number-and-rank-of-a-free-module]]), so $r=s$. Hence\n$r(x)$ is independent of the chart, and on each chart $U$ the function $r$ is\nconstant, so $r$ is locally constant on $X$; in particular it is constant on\nevery connected component of $X$ and is a locally constant\n$\\mathbb N$-valued function on $X$.\n\n*Immediate consequences.* If $\\mathcal E$ is locally free of rank $r$ on $X$,\nthen $\\mathcal E$ is quasi-coherent: on a chart\n$\\mathcal E|_U\\cong\\mathcal O_U^r=\\widetilde{A^r}$ with $A^r$ free, so the local\naffine-module condition of [[def-quasi-coherent-module-scheme]] holds. A\nlocally free sheaf of rank $0$ is the zero sheaf, since it vanishes on the\nmembers of an open cover; conversely the zero sheaf is locally free of rank\n$0$. The conditions are local on $X$ and invariant under isomorphism, and\nrestriction to an open subscheme preserves local freeness with the same rank\nfunction. A finite locally free sheaf need not have globally constant rank: the\nrank may jump between connected components, and only the existence of a rank at\neach point is required.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-higher-direct-image-affine-localization",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the Axiom of Dependent Choice, inherited from\nthe local-section formula and from \u010cech-to-cohomology comparison below. Let\n$f:X\\to S$ be a quasi-compact separated morphism of schemes\n([[def-quasi-compact-and-quasi-separated-morphism]],\n[[def-separated-morphism-schemes]]) and let $\\mathcal F$ be a quasi-coherent\n$\\mathcal O_X$-module ([[def-quasi-coherent-module-scheme]]). Then:\n\n1. for every $q\\ge0$ the higher direct image $R^qf_*\\mathcal F$\n   ([[def-higher-direct-image-sheaf]]) is a quasi-coherent $\\mathcal O_S$-module\n   ([[def-quasi-coherent-module-scheme]]);\n2. for every affine open $V=\\operatorname{Spec}A\\subseteq S$\n   ([[def-affine-scheme-spectrum]]) there is a canonical isomorphism of\n   $\\mathcal O_V$-modules\n   $$(R^qf_*\\mathcal F)|_V\\;\\cong\\;\\widetilde{H^q\\bigl(f^{-1}V,\\mathcal F|_{f^{-1}V}\\bigr)}$$\n   with the associated module sheaf\n   ([[def-associated-sheaf-module-affine-scheme]]) of the $A$-module\n   $H^q(f^{-1}V,\\mathcal F)$ ([[def-sheaf-cohomology-derived-global-sections]]);\n3. consequently, for every distinguished open $D(a)\\subseteq V$\n   ([[def-affine-scheme-spectrum]]) there is a canonical isomorphism\n   $$(R^qf_*\\mathcal F)(D(a))\\;\\cong\\;H^q\\bigl(f^{-1}V,\\mathcal F\\bigr)_a ,$$\n   the localisation at $a$ of the $A$-module $H^q(f^{-1}V,\\mathcal F)$\n   ([[lem-associated-sheaf-sections-basic-open]]).\n\nThe empty affine open $V=\\operatorname{Spec}0=\\varnothing$, the empty scheme\n$X=\\varnothing$, the zero sheaf $\\mathcal F=0$ and the degree $q=0$ are\nincluded; all statements are trivial on the empty open and in degree zero they\nsay that $f_*\\mathcal F$ is quasi-coherent and computed by global sections.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-leray-spectral-sequence-for-sheaf-cohomology",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $f:X\\to Y$ be a morphism of schemes (more\ngenerally a continuous map of topological spaces) and let $\\mathcal F$ be an\nabelian sheaf on $X$. Then there is a natural first-quadrant spectral sequence\n$$E_2^{p,q}=H^p\\bigl(Y,R^qf_*\\mathcal F\\bigr)\\Longrightarrow H^{p+q}(X,\\mathcal F),$$\nwith differentials of bidegree $(r,1-r)$, whose convergence is strong: for each\n$n$ the abutment $H^n(X,\\mathcal F)$ carries a finite decreasing filtration\n$0\\subseteq F^nH^n\\subseteq\\cdots\\subseteq F^0H^n=H^n(X,\\mathcal F)$ with\n$\\operatorname{gr}^pH^n\\cong E_\\infty^{p,n-p}$, and the edge maps are the natural\nmaps $H^n(Y,f_*\\mathcal F)\\to H^n(X,\\mathcal F)$ and\n$H^n(X,\\mathcal F)\\to H^0(Y,R^nf_*\\mathcal F)$.\n\nThe same spectral sequence holds for an $\\mathcal O_X$-module $\\mathcal F$ with\n$\\mathcal O$-module cohomology on the $E_2$-page, since over a\n$\\mathbb C$-scheme the structure sheaf is flat over the constant sheaf\n$\\mathbb Z$ and every $\\mathcal O_X$-injective resolution computes the same\nhigher direct images and cohomology as an abelian-sheaf injective resolution.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-euler-characteristic-coherent-sheaf",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, inherited from the finiteness and vanishing\ncorollary cited below ([[def-axiom-of-choice]]). Let $k$ be a field\n([[def-field]]), let $X$ be a scheme proper over $k$\n([[def-proper-morphism]]), and let $\\mathcal F$ be a coherent\n$\\mathcal O_X$-module ([[def-coherent-module-scheme]]) with sheaf cohomology\ngroups $H^q(X,\\mathcal F)$ ([[def-sheaf-cohomology-derived-global-sections]]).\n\nBy [[cor-projective-cohomology-finite-dimensional-field]] each group\n$H^q(X,\\mathcal F)$ is a finite-dimensional $k$-vector space\n([[def-dimension]]) and only finitely many of the groups are nonzero: if $X$\nadmits a finite affine open cover with $n\\ge0$ members, then\n$H^q(X,\\mathcal F)=0$ for every $q\\ge n$. Consequently the alternating sum\n$$\\chi(X,\\mathcal F):=\\sum_{q\\ge0}(-1)^q\\dim_kH^q(X,\\mathcal F)$$\nhas only finitely many nonzero terms and defines an integer, the **Euler\ncharacteristic** of $\\mathcal F$ on $X$. Equivalently, for any finite affine\nopen cover of $X$ with $n$ members one has\n$$\\chi(X,\\mathcal F)=\\sum_{q=0}^{n-1}(-1)^q\\dim_kH^q(X,\\mathcal F),$$\nthe value being independent of the cover because the definition uses only the\ncohomology groups.\n\nIf $X=\\varnothing$ then all groups $H^q(X,\\mathcal F)$ vanish, the cover has\n$n=0$ members, and we set $\\chi(X,\\mathcal F)=0$; this is the empty sum in the\ndisplayed formula. The zero sheaf $\\mathcal F=0$ likewise has\n$\\chi(X,0)=0$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-projective-cohomology-finite-dimensional-field",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited from the proper finiteness theorem and\nthe basis-extraction corollary cited below ([[def-axiom-of-choice]]). Let $k$\nbe a field ([[def-field]]), let $X$ be a scheme proper over $k$, that is, the\nstructure morphism $X\\to\\operatorname{Spec}k$ is proper\n([[def-proper-morphism]]), and let $\\mathcal F$ be a coherent $\\mathcal O_X$-module\n([[def-coherent-module-scheme]]). Then for every $q\\ge0$ the $k$-vector space\n$H^q(X,\\mathcal F)$ of sheaf cohomology\n([[def-sheaf-cohomology-derived-global-sections]]) is finite-dimensional over\n$k$ ([[def-dimension]]), and only finitely many of the groups $H^q(X,\\mathcal F)$\nare nonzero. More precisely, choose a finite affine open cover of $X$ with no\nempty members when $X\\ne\\varnothing$, and use the empty cover when\n$X=\\varnothing$. If $n$ is its number of members, then\n$H^q(X,\\mathcal F)=0$ for every $q\\ge n$, so the vanishing bound is the length\nof the cover and does not depend on $\\mathcal F$.\n\nThe empty source $X=\\varnothing$, the zero sheaf $\\mathcal F=0$, the degree\n$q=0$ and every field $k$ are included.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "claim": "For every $\\mathcal O_X$-module $\\mathcal G$ let $\\nu_{\\mathcal G}\\colon (f_*\\mathcal G)\\otimes_{\\mathcal O_Y}\\mathcal L\\to f_*(\\mathcal G\\otimes_{\\mathcal O_X}f^*\\mathcal L)$ be the $\\mathcal O_Y$-module map adjoint to the composite $f^*\\bigl((f_*\\mathcal G)\\otimes\\mathcal L\\bigr)\\cong f^*f_*\\mathcal G\\otimes f^*\\mathcal L\\xrightarrow{\\varepsilon_{\\mathcal G}\\otimes\\mathrm{id}}\\mathcal G\\otimes f",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d2",
+          "claim": "The construction of step 1.1 is compatible with restriction to an open subscheme $U\\subseteq Y$: both $f_*$ and $f^*$, the tensor product, and the adjunction restrict, so on $U$ the map for $(f|_U,\\mathcal F|_{f^{-1}U},\\mathcal L|_U)$ is the restriction of the map for $(f,\\mathcal F,\\mathcal L)$; in particular it suffices to prove that the map is an isomorphism over a cover of $Y$, because being a",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "d3",
+          "claim": "Let $U\\subseteq Y$ be an open set on which $\\mathcal L$ admits a generator, so that $\\mathcal L|_U\\cong\\mathcal O_U$ and $f^*\\mathcal L|_{f^{-1}U}\\cong\\mathcal O_{f^{-1}U}$ [F3]. Under these trivializations the canonical isomorphism $\\mathcal F\\otimes f^*\\mathcal L\\to\\mathcal F$ over $f^{-1}U$ identifies the target $R^qf_*(\\mathcal F\\otimes f^*\\mathcal L)|_U$ with $R^qf_*(\\mathcal F)|_U$ by the lo",
+          "step": "2.2",
+          "inputs": [
+            "1.1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "d4",
+          "claim": "The trivializing opens of an invertible sheaf cover $Y$, so step 2.2 shows that the natural map of step 1.1 is an isomorphism locally on $Y$; by step 2.1 it is an isomorphism $R^qf_*(\\mathcal F)\\otimes\\mathcal L\\xrightarrow{\\sim}R^qf_*(\\mathcal F\\otimes f^*\\mathcal L)$ for every $q\\ge0$. [F3, step 2.1, step 2.2]",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d5",
+          "claim": "For the final assertion take $\\mathcal F=\\mathcal O_X$, so that $f^*\\mathcal L=\\mathcal O_X\\otimes f^*\\mathcal L$ and step 3.1 gives $R^qf_*(f^*\\mathcal L)\\cong R^qf_*(\\mathcal O_X)\\otimes\\mathcal L$; by hypothesis $R^qf_*\\mathcal O_X=0$ for $q>0$ and $R^0f_*\\mathcal O_X=f_*\\mathcal O_X=\\mathcal O_Y$, so $R^qf_*(f^*\\mathcal L)=0$ for $q>0$ and $R^0f_*(f^*\\mathcal L)\\cong\\mathcal L$. [F1, step 3.1]",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "d6",
+          "claim": "By the Leray spectral sequence [F5] for $f$ and $f^*\\mathcal L$, whose $E_2$ page is $E_2^{pq}=H^p(Y,R^qf_*(f^*\\mathcal L))$, step 4.1 leaves only the row $q=0$, namely $E_2^{p0}=H^p(Y,\\mathcal L)$; hence the spectral sequence degenerates and the edge maps are isomorphisms $H^n(X,f^*\\mathcal L)\\cong H^n(Y,\\mathcal L)$ for every $n\\ge0$. [F5, step 4.1]",
+          "step": "5.1",
+          "inputs": [
+            "4.1",
+            "F5"
+          ]
+        },
+        {
+          "id": "d7",
+          "claim": "Both $X$ and $Y$ are proper over $k$, hence of finite type over the field $k$ and therefore locally Noetherian; the sheaves $\\mathcal O_X$, $f^*\\mathcal L$ and $\\mathcal L$ are invertible, hence locally free of finite rank, hence coherent, so [F7] and [F8] make the two Euler characteristics finite alternating sums of finite-dimensional $k$-vector spaces. By the termwise isomorphism of step 5.1 the",
+          "step": "6.1",
+          "inputs": [
+            "5.1",
+            "F3",
+            "F7",
+            "F8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1: the local trivialization argument ranges over a cover of Y and includes the empty open and the empty scheme; for X or Y empty both sides of the map are zero sheaves and the map is an isomorphism."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1: the zero sheaf F=0 gives R^qf_*(0)=0 and the map 0->0; in the final clause the hypothesis R^qf_*O_X=0 for q>0 is exactly the vanishing that leaves only the q=0 row of the Leray page."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1: the degree q=0 case is the classical projection formula f_*F\u2297L->f_*(F\u2297f^*L), and q=1 is included in the same local computation; both are isomorphisms over every trivializing open."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: L may be nontrivial on all of Y and the proof uses only local triviality of an invertible sheaf; the degenerate case L=O_Y makes f^*L=O_X and the map the identity of R^qf_*F."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The degree q>=0 is unbounded and the statement has no interval or ordered parameter; there is no endpoint hypothesis to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the Axiom of Choice is assumed and inherited from the injective-resolution and adjunction suppliers; the only choice in the argument is a trivializing cover of L, whose effect is removed by the locality of step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts an isomorphism and an equality of Euler characteristics; no biconditional occurs, so there is no forward direction of an equivalence to verify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Similarly there is no reverse direction: the final clause is a one-way implication from the vanishing hypotheses to the equality chi(X,f^*L)=chi(Y,L)."
+        }
+      ]
+    },
+    "def-rees-algebra-ideal-sheaf": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: on the empty scheme X the structure sheaf is the zero sheaf, every I^n=0 by the zero-ring convention, and R(I)=0 is quasi-coherent with the stated generation properties holding vacuously."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero ideal I=0 gives I^n=0 for n>=1 and R(I)=O_X concentrated in degree zero; property 3 still holds because R(I)_0=O_X is among the stated generators, and property 1 holds as O_X is quasi-coherent."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: I=O_X gives R(I)=O_X[t], the polynomial algebra in one degree-one variable, which is quasi-coherent and generated in degree one by property 3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: nothing beyond quasi-coherence and finite type of I is assumed; X may be nonreduced or empty, I may be the unit or the zero ideal, and the degreewise construction applies without change."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a graded construction with no interval, order or limiting parameter, so no endpoint case exists."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the Axiom of Choice is assumed and inherited from [[def-quasi-coherent-ideal-sheaf]] and [[lem-tensor-qc-modules-quasi-coherent]], which supply the quasi-coherence of the powers; the construction itself selects nothing, being degreewise I^n."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional claim of its own; the phrase 'i.e.' unpacks the convention R(I)_0=O_X, R(I)_1=I into the defining generation statement, which is not an equivalence needing two directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse implication to inspect: no 'if and only if' occurs in the Definition, whose content is the construction of R(I) and the stated degreewise properties."
+        }
+      ]
+    },
+    "lem-regular-sequence-associated-graded-polynomial": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-sequence-on-a-module",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring, let $M$ be an $R$-module, and let\n$\\mathbf x=(x_1,\\ldots,x_n)$ be a finite ordered sequence in $R$. The\nsequence is $M$-regular when $M/(x_1,\\ldots,x_{i-1})M\\ne0$ and\nmultiplication by $x_i$ is injective on it for every $i$, and\n$M/(\\mathbf x)M\\ne0$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-associated-graded-ring-and-module",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, let $I\\subset R$ be an ideal, and let $M$ be an\n$R$-module. The **associated graded ring** of the $I$-adic filtration is\n$$ \\operatorname{gr}_I(R):=\\bigoplus_{n\\ge0} I^n/I^{n+1}. $$\nMultiplication is induced by multiplication in $R$:\n$$ (a+I^{m+1})(b+I^{n+1})=ab+I^{m+n+1}. $$\n\nThe **associated graded module** is\n$$ \\operatorname{gr}_I(M):=\\bigoplus_{n\\ge0} I^nM/I^{n+1}M, $$\nviewed as a graded $\\operatorname{gr}_I(R)$-module by\n$$ (a+I^{m+1})(x+I^{n+1}M)=ax+I^{m+n+1}M. $$",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-generated-and-principal-ideals",
+          "source_section": "Definition",
+          "quote": "The ideal generated by a subset and principal ideals.\n\nFor $S\\subseteq R$, define $(S)$ to be the intersection of all two-sided ideals\nof $R$ containing $S$.  This family is nonempty because it contains $R$, and\n[[lem-ideal-criterion-and-intersections]] shows that $(S)$ is an ideal.  For\n$a\\in R$, the ideal $(\\{a\\})$ is written $(a)$ and is called **principal**.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "claim": "Every element of $J$ is an $R$-linear combination of the $f_i$, so every element of $J^n$ is a sum of $n$-fold products of such combinations, hence is an $R$-linear combination of the monomials $f^{I}=f_1^{i_1}\\cdots f_c^{i_c}$ with $|I|=i_1+\\cdots+i_c=n$; therefore those monomials generate $J^n$ as an $R$-module and their images generate $J^n/J^{n+1}$ over $R/J$, so the canonical map $\\varphi\\col",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d2",
+          "claim": "Let $J'=(f_1,\\dots,f_{c-1})$ and fix $n$. Grouping a homogeneous relation $\\sum_{|I|=n}a_If^{I}=0$ according to the exponent of $f_c$ writes it as $\\sum_{e=0}^{n}H_ef_c^e=0$ with $H_e=\\sum_{|I'|=n-e}a_{I',e}f^{I'}\\in(J')^{n-e}$, the primed multi-indices involving only $f_1,\\dots,f_{c-1}$. We prove by induction on $l\\in\\{0,\\dots,n\\}$: if $\\sum_{e=0}^{l}H_ef_c^e=0$ for elements $H_e\\in(J')^{n-e}$, t",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "d3",
+          "claim": "The truncated sequence $f_1,\\dots,f_{c-1}$ is again $R$-regular, so the inductive hypothesis on $c$ gives, in the coefficient form recorded in step 1.1 for the ideal $J'$, that a degree-$(n-l)$ monomial expression $\\sum_{|I'|=n-l}c_{I'}f^{I'}$ lying in $(J')^{n-l+1}$ has all $c_{I'}\\in J'$. Applying this to the expression $\\sum_{|I'|=n-l}f_c^la_{I',l}f^{I'}$, which equals $f_c^lH_l\\in(J')^{n-l+1}$",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "d4",
+          "claim": "Since $a_{I',l}\\in J'$ the element $\\sum_{|I'|=n-l}a_{I',l}f^{I'}$ lies in $(J')^{n-l+1}$ and so can be written as a degree-$(n-l+1)$ monomial expression $\\sum_{|I''|=n-l+1}b_{I'',l-1}f^{I''}$. Absorbing $f_c$ times this expression into the coefficient of $f_c^{l-1}$ gives a relation $\\sum_{e=0}^{l-1}\\tilde H_ef_c^e=0$ whose coefficients are $\\tilde a_{I'',l-1}=a_{I'',l-1}+f_cb_{I'',l-1}$ in degre",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "d5",
+          "claim": "Taking $l=n$ in step 2.1, every coefficient $a_I$ of the original homogeneous relation lies in $J$; by step 1.1 the map $\\varphi$ is therefore injective, hence an isomorphism of graded $R/J$-algebras. In degree one it identifies $(R/J)^c$ with $J/J^2$, so $J/J^2$ is free over $R/J$ on the classes of $f_1,\\dots,f_c$; and since $\\varphi$ maps the polynomial algebra onto the graded algebra generated ",
+          "step": "5.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1: the induction on the length of the sequence has the empty family as its base, where J=0, gr_J R=R=(R/J)[X] with no variables, and the coefficient statement is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: a vanishing relation sum a_I f^I=0 is exactly the zero case of the coefficient statement; the reduction subtracts a J-multiple of the monomials and the double induction of steps 3.1-4.1 proves all a_I lie in J."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 and step 4.1: the innermost induction starts at l=0 using the c-1 assertion, so the case of one term and the case c=1 with J/J^2 free of rank one are both included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 5.1: no Noetherian, domain, local or finiteness hypothesis is assumed; rings with nilpotents, non-Noetherian rings and zero divisors among the f_i are included as long as the sequence is regular, and the proof uses only truncation regularity and the nonzerodivisor f_c modulo J'."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement is purely algebraic and has no ordered or interval parameter; the only boundary values are c=0 and l=0, treated under 'empty' and 'one'."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used or assumed: all coefficients a_I are given elements of R, the b_I in the reduction of step 1.1 are supplied by the monomial generation of J^{n+1}, and the inductions select nothing."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no 'if and only if': it asserts that the canonical map is an isomorphism and records two consequences, so there is no forward direction of a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse direction to check; the two 'in particular' clauses are consequences of the isomorphism, not a converse implication."
+        }
+      ]
+    },
+    "thm-normalization-reduced-curve-exists-finite": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-normalization-glues-integral-finite-type-curves",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. It is inherited through the normality-locality\ncriterion and the finite-morphism criteria for finiteness and integrality used\nin the proof. Let $C$ be an integral separated finite-type curve over a field\n$k$ with function field $K=k(C)$, and let\n$C=U_1\\cup\\cdots\\cup U_n$ be a finite affine cover with\n$U_i=\\operatorname{Spec}(A_i)$. The integral closures $B_i$ of $A_i$ in $K$ are\nfinite $A_i$-modules and their formation commutes with principal localisation.\nOn each overlap $U_i\\cap U_j$, common principal-open refinements give\nidentifications of the corresponding localizations inside $K$, so the\n$\\operatorname{Spec}(B_i)$ glue over the overlaps to a scheme\n$C^{\\mathrm{nu}}$ and a morphism\n$\\nu:C^{\\mathrm{nu}}\\to C$. Then $C^{\\mathrm{nu}}$ is integral and normal, $\\nu$\nis finite, affine and birational, $k(C^{\\mathrm{nu}})=K$, and\n$(C^{\\mathrm{nu}},\\nu)$ is the normalization of $C$: it is initial among\nnormal integral schemes finite and birational over $C$, hence unique up to\nunique isomorphism over $C$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.3",
+            "3.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-integral-closure-finite-finite-type-domain-over-field",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field and let $A$ be a finite-type integral domain over $k$. Then\nthe integral closure of $A$ in $\\operatorname{Frac}(A)$ is a finite $A$-module.\nThe proof is a Noether-normalisation reduction to the polynomial theorem and\nuses no choice principle.",
+          "uses": [
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integral-closure-and-integrally-closed-domain",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a domain and let $A\\to B$ be a homomorphism into a commutative ring. The **integral closure of $A$ in $B$** is the set of elements of $B$ integral over $A$. When $K$ is a field extension of the field of fractions $\\operatorname{Frac}(A)$ of [[def-field-of-fractions]], the integral closure of $A$ in $K$ is often denoted $\\overline A$.\n\nThe domain $A$ is **integrally closed** when every element of $\\operatorname{Frac}(A)$ integral over $A$ already lies in $A$. Thus an integrally closed domain is one whose field of fractions contains no new elements integral over it.",
+          "uses": [
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-integral-closure-is-integrally-closed",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a domain, let $K$ be a field extension of $\\operatorname{Frac}(A)$, and let $\\overline A$ be the integral closure of $A$ in $K$. Then $\\overline A$ is an integrally closed domain.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-total-ring-of-fractions",
+          "source_section": "Definition",
+          "quote": "For a nonzero commutative ring $R$, let $S$ be the set of its nonzerodivisors, meaning elements whose multiplication maps on $R$ are injective. Its **total ring of fractions** is $Q(R)=S^{-1}R$. The set $S$ is multiplicative since composites of injective multiplication maps are injective. The natural map $R\\to Q(R)$ is injective: $a/1=0$ implies $sa=0$ for some $s\\in S$, hence $a=0$. Set $Q(0)=0$. For a domain this recovers the fraction field; for a ring with zero divisors it need not be a field.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-reduced-quotient-by-the-nilradical",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $N=\\operatorname{Nil}(R)$. Then $R/N$ is reduced. Moreover, if $\\varphi:R\\to A$ is a ring homomorphism to a reduced commutative ring $A$, then there is a unique ring homomorphism $\\overline\\varphi:R/N\\to A$ with $\\varphi=\\overline\\varphi\\circ\\pi$, where $\\pi:R\\to R/N$ is the quotient map.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-noetherian-ring-has-finitely-many-minimal-primes",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian commutative ring. Then $R$ has only finitely many minimal prime ideals.\n\nThis theorem inherits only the dependent-choice cost already recorded in the cited Noetherian-induction corollary.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-normal-noetherian-ring",
+          "source_section": "Definition",
+          "quote": "A commutative Noetherian ring $R$ is **normal** if every prime localization $R_{\\mathfrak p}$ is an integrally closed domain. This is a local condition and does not require $R$ itself to be a domain. The zero ring satisfies it vacuously. For a domain, integrally closed means that every element of its fraction field integral over it belongs to it.",
+          "uses": [
+            "3.1",
+            "3.4",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-height-one-localisation-of-normal-noetherian-domain-is-dvr",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian integrally closed domain, and let $\\mathfrak p$ be a\nprime ideal of height $1$. Then the localisation $R_{\\mathfrak p}$ is a\ndiscrete valuation ring.",
+          "uses": [
+            "3.4"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-finite-morphism-schemes",
+          "source_section": "Definition",
+          "quote": "A morphism of schemes $f:X\\to S$ is **finite** if, for every affine open\n$U=\\operatorname{Spec}A\\subseteq S$, its inverse image is affine,\n$f^{-1}(U)=\\operatorname{Spec}B$, and the induced $A$-algebra $B$ is\nmodule-finite over $A$ in the sense of\n[[def-finite-type-and-module-finite-algebras]]. The affineness language agrees\nwith [[def-affine-morphism-schemes]]. The zero ring is allowed, so an empty\ninverse image satisfies the condition.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-finite-morphism-integral-closed",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $f:X\\to S$ be a finite morphism of schemes.\nThen every ring map $A\\to B$ induced by $f$ on an affine chart\n$U=\\operatorname{Spec}A\\subseteq S$ with $f^{-1}(U)=\\operatorname{Spec}B$ is\nintegral. Moreover $f$ is universally closed: for every morphism $T\\to S$ the\nbase-changed projection $X\\times_ST\\to T$ is a closed map, so the image of\n$X\\times_ST$ and of every closed subset of it is closed in $|T|$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-quasi-coherent-module-scheme",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a scheme ([[def-scheme]]) and let $\\mathcal F$ be a sheaf of\n$\\mathcal O_X$-modules ([[def-module-on-ringed-space]]). Recall that for a\ncommutative ring $A$ and an $A$-module $M$ the associated module sheaf\n$\\widetilde M$ on $\\operatorname{Spec}A$ is the sheaf of\n$\\mathcal O_{\\operatorname{Spec}A}$-modules whose sections on a distinguished\nopen $D(f)$ are $M_f$\n([[def-associated-sheaf-module-affine-scheme]]).\n\nThe module $\\mathcal F$ is **quasi-coherent** if every point $x\\in X$ has an\naffine open neighbourhood $U=\\operatorname{Spec}A\\subseteq X$ and an $A$-module\n$M$ such that\n\n$$\\mathcal F|_U\\;\\cong\\;\\widetilde M$$\n\nas sheaves of $\\mathcal O_U$-modules. A quasi-coherent sheaf of\n$\\mathcal O_X$-modules is also called a quasi-coherent module on $X$, and the\nfull subcategory of $\\mathcal O_X$-modules consisting of the quasi-coherent\nones is written $\\operatorname{QCoh}(X)$; morphisms in\n$\\operatorname{QCoh}(X)$ are all $\\mathcal O_X$-module morphisms between its\nobjects.\n\nImmediate consequences of the definition, used without further comment:\n\n- The condition is invariant under isomorphism: if $\\mathcal F\\cong\\mathcal G$\n  as $\\mathcal O_X$-modules and $\\mathcal F$ is quasi-coherent, then so is\n  $\\mathcal G$, because the isomorphism restricts over an affine open.\n- The condition is local on $X$: $\\mathcal F$ is quasi-coherent if and only if\n  there is an open cover $X=\\bigcup_{i\\in I}U_i$ such that each restriction\n  $\\mathcal F|_{U_i}$ is quasi-coherent. Indeed a point of an arbitrary open\n  subscheme $U\\subseteq X$ has an affine open neighbourhood inside $U$, and an\n  affine open subscheme of $X$ contained in $U$ is also an affine open\n  subscheme of $U$; conversely, every point of $U_i$ lies in an affine open of\n  $X$ inside $U_i$.\n- If $\\mathcal F$ is quasi-coherent and $V\\subseteq X$ is open, then\n  $\\mathcal F|_V$ is quasi-coherent, since $\\mathcal F|_V$ is again an\n  $\\mathcal O_V$-module and an affine open $U\\subseteq V$ is an affine open of\n  $X$.\n- On an affine scheme $X=\\operatorname{Spec}A$ the definition asks at each\n  point for an affine open neighbourhood on which $\\mathcal F$ is associated to\n  a module; it does not ask that $\\mathcal F$ itself be associated to a single\n  $A$-module. The affine comparison theorem on this page shows that on an\n  affine scheme the two conditions coincide.\n\nThe terminology follows the standard one: quasi-coherence is the local\naffine-module condition, and no finiteness, Noetherian or separatedness\nhypothesis is part of it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-coherent-module-scheme",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a scheme and let $\\mathcal F$ be a quasi-coherent\n$\\mathcal O_X$-module ([[def-quasi-coherent-module-scheme]]) that is of finite\ntype ([[def-finite-type-finite-presentation-module-sheaf]]). Then $\\mathcal F$\nis **coherent** if for every open $U\\subseteq X$ and every morphism\n$$\\mathcal O_U^{\\,n}\\longrightarrow\\mathcal F|_U,\\qquad n\\ge0\\ \\text{finite},$$\nthe kernel sheaf $\\ker\\varphi$ is of finite type\n([[def-kernel-cokernel-image-sheaves]]).\n\nUnder the Axiom of Choice ([[def-axiom-of-choice]]), inherited from the\nassociated-sheaf existence theorem at the sheaf-kernel identification below,\nthe following affine test is equivalent to the definition. Since the\nconditions are local, it suffices to test affine opens\n$U=\\operatorname{Spec}A$ on which $\\mathcal F|_U\\cong\\widetilde M$ for a\nfinitely generated $A$-module $M$: then a morphism\n$\\mathcal O_U^n\\to\\widetilde M$ is given by an $A$-linear map\n$\\psi:A^n\\to M$ ([[def-finite-type-finite-presentation-module-sheaf]]) and, as\nlocalisation is exact ([[thm-localisation-of-modules-is-exact]]), the kernel\nsheaf has $\\ker\\varphi(D(f))=\\ker(\\psi)\\otimes_AA_f=\\ker(\\psi)_f$, so it is the\nassociated sheaf of the finitely generated module\n$\\ker\\psi$ precisely when that kernel is finitely generated\n([[thm-associated-module-sheaf-exists]]).\n\n*Finite presentation does not imply coherence under the same AC assumption.* Over a general base the\nkernel condition is a genuine additional hypothesis. Let $k$ be a field and let\n$$A=k[x,y_1,y_2,\\dots]/(xy_i,\\ y_iy_j\\ :\\ i,j\\ge1);$$\nthe classes of $1,x,x^2,\\dots,y_1,y_2,\\dots$ form a $k$-basis of $A$, so\n$A=k[x]\\oplus\\bigoplus_{i\\ge1}k[x]y_i$ as a $k[x]$-module, and\nmultiplication by $x$, viewed as an $A$-linear map $\\psi:A\\to A$, has kernel\n$\\ker\\psi=\\operatorname{Ann}_A(x)=\\bigoplus_{i\\ge1}k[x]y_i$, which is not\nfinitely generated as an $A$-module. The module $A$ is finitely presented, even\nfree of rank one, but the associated sheaf $\\widetilde A=\\mathcal O_X$ on\n$X=\\operatorname{Spec}A$ receives the morphism $\\mathcal O_X\\to\\mathcal O_X$\ncorresponding to $\\psi$ ([[def-finite-type-finite-presentation-module-sheaf]],\n[[thm-associated-module-sheaf-exists]]) whose kernel is the associated sheaf of\n$\\operatorname{Ann}_A(x)$ and is not of finite type. Hence $\\mathcal O_X$ is\nnot coherent on this $X$; finite presentation, and even local freeness of finite\nrank, do not by themselves imply coherence over an arbitrary base. The\nidentification of coherent with finite type is a theorem about locally\nNoetherian schemes, proved on this page; over a locally Noetherian scheme\nfinite locally free sheaves are therefore coherent.\n\n*Immediate consequences.* Coherence is local on $X$ and invariant under\nisomorphism; a coherent module is of finite type by definition; restrictions of\ncoherent modules to open subschemes are coherent; and the zero module is\ncoherent. On a locally Noetherian scheme the kernel condition is automatic for\nfinite-type quasi-coherent modules, and the theorem on this page proves the\nconverse direction: there, finite type and coherent coincide\n([[def-locally-noetherian-and-noetherian-scheme]]). Over a non-Noetherian ring\nthe two notions differ, as the $A=\\mathcal O_X$ example above shows, and the\nrelation-kernel condition must be checked; the remark on this page records that\nwarning.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-reduction-of-scheme",
+          "source_section": "Definition",
+          "quote": "For a scheme $X$, let $\\mathcal N_X$ be the ideal sheaf whose germs are the\nnilpotent elements of the local rings of $X$; equivalently, a section lies in\n$\\mathcal N_X(U)$ when it is locally nilpotent on $U$. The **reduction**\n$X_{\\mathrm{red}}$ is the closed subscheme with the same underlying topological\nspace and structure sheaf $\\mathcal O_X/\\mathcal N_X$. On\n$\\operatorname{Spec}A$ it is $\\operatorname{Spec}(A/\\sqrt{(0)})$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-integral-scheme",
+          "source_section": "Definition",
+          "quote": "An **integral scheme** is a nonempty scheme that is reduced and whose\nunderlying topological space is irreducible. Equivalently, it is nonempty and\nevery nonempty affine open is the spectrum of a domain. The latter criterion is\nindependent of the chosen affine open cover.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-irreducible-components-and-minimal-primes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a commutative ring.\n\n1. If $\\mathfrak p$ is a minimal prime ideal of $R$, then $V(\\mathfrak p)$ is an irreducible component of $\\operatorname{Spec}(R)$. 2. Every irreducible component of $\\operatorname{Spec}(R)$ is of the form $V(\\mathfrak p)$ for a unique minimal prime ideal $\\mathfrak p$.\n\nThus irreducible components of $\\operatorname{Spec}(R)$ correspond exactly to minimal prime ideals.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "cor-finite-type-algebra-over-a-principal-ideal-domain-is-noetherian",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a principal ideal domain ([[def-principal-ideal-domain]]) and let $A$\nbe a commutative $R$-algebra of finite type\n([[def-finite-type-and-module-finite-algebras]]). Then $A$ is a Noetherian ring.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). A nonzero Noetherian local ring of dimension one is regular if and only if it is a discrete valuation ring. Fields are excluded from the term DVR.",
+          "uses": [
+            "3.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "claim": "The scheme $C$ is Noetherian by [F13] and [F12], so it has finitely many irreducible components $C_1,\\dots,C_m$; each $C_i$, with its reduced induced structure, is integral of dimension one and finite type over $k$, and $C=\\bigcup_iC_i$ set-theoretically with reduced structure, while $\\mathcal O_C\\to\\prod_i\\mathcal O_{C_i}$ is injective by [F6] and [F11]. [F6, F11, F12, F13]",
+          "step": "1.1",
+          "inputs": [
+            "F11",
+            "F12",
+            "F13",
+            "F6"
+          ]
+        },
+        {
+          "id": "d2",
+          "claim": "For each $i$ apply [F1] to the integral finite-type curve $C_i$ and obtain its normalization $\\nu_i:C_i^{\\mathrm{nu}}\\to C_i$, finite, birational and initial, with $C_i^{\\mathrm{nu}}$ integral and normal. Set $C^{\\mathrm{nu}}:=\\bigsqcup_iC_i^{\\mathrm{nu}}$ and let $\\nu:C^{\\mathrm{nu}}\\to C$ be the composite of the $\\nu_i$ with the closed immersions $C_i\\hookrightarrow C$; it is finite because each",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F1",
+            "F9"
+          ]
+        },
+        {
+          "id": "d3",
+          "claim": "Over an affine chart $U=\\operatorname{Spec}A\\subseteq C$, put $A_i=A/\\mathfrak p_i$ for the minimal primes of $A$ and $B_i$ for the integral closure of $A_i$ in $\\operatorname{Frac}(A_i)$; then $U\\cap C_i=\\operatorname{Spec}A_i$, the preimage $\\nu_i^{-1}(U\\cap C_i)=\\operatorname{Spec}B_i$ by [F1] applied to the component, and therefore $\\nu^{-1}(U)=\\bigsqcup_i\\operatorname{Spec}B_i$ has $\\Gamma(\\n",
+          "step": "2.2",
+          "inputs": [
+            "1.1",
+            "F1",
+            "F2",
+            "F6"
+          ]
+        },
+        {
+          "id": "d4",
+          "claim": "$C^{\\mathrm{nu}}$ is normal and of dimension one: it is a finite disjoint union of the normal one-dimensional schemes $C_i^{\\mathrm{nu}}$, and normality is a local condition on the local rings [F7]. [F7, step 2.1]",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "F7"
+          ]
+        },
+        {
+          "id": "d5",
+          "claim": "The ring $B=\\prod_iB_i$ of step 2.2 is the integral closure of $A$ in $Q(A)$. Indeed $Q(A)\\cong\\prod_iQ(A_i)$: the map is injective because $A\\to\\prod_iA_i$ is injective and a nonzerodivisor of $A$ is a nonzerodivisor modulo every minimal prime [F6], and it is surjective because for elements $c_i/s_i\\in Q(A_i)$ with $s_i\\in A_i$ nonzerodivisors and lifts $\\tilde s_i\\in A$ the product $s=\\prod_i\\ti",
+          "step": "3.2",
+          "inputs": [
+            "2.2",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "d6",
+          "claim": "The morphism $\\nu$ is an isomorphism over the regular locus of $C$. At a point $x\\in C$ with $\\mathcal O_{C,x}$ regular, the local ring is a domain, so $x$ lies on exactly one irreducible component $C_i$; there $C$ agrees with $C_i$ on a neighbourhood of $x$, and $\\nu_i$ is an isomorphism over the regular locus of the integral curve $C_i$ [F1], so $\\nu$ is an isomorphism at $x$. [F1, step 2.1]",
+          "step": "3.3",
+          "inputs": [
+            "2.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "d7",
+          "claim": "The morphism $\\nu$ is birational on each irreducible component: the restriction of $\\nu$ over $C_i$ is $\\nu_i$, which by [F1] induces an isomorphism of function fields $k(C_i)\\to k(C_i^{\\mathrm{nu}})$; and $C^{\\mathrm{nu}}$ is regular of dimension one because every local ring of a normal one-dimensional Noetherian scheme is a discrete valuation ring or a field: at a point of $C_i^{\\mathrm{nu}}$ th",
+          "step": "3.4",
+          "inputs": [
+            "2.1",
+            "F1",
+            "F14",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "d8",
+          "claim": "Coherence: $\\nu$ is finite, hence affine, so $\\nu_*\\mathcal O_{C^{\\mathrm{nu}}}$ is a quasi-coherent $\\mathcal O_C$-module [F10]; on an affine chart $U=\\operatorname{Spec}A$ its sections are the finite $A$-module $B$ of step 2.2, so it is of finite type, and $C$ is locally Noetherian, so it is coherent by [F10]. Part (3) of the statement is exactly the description of step 2.2 and step 3.2. [F10, s",
+          "step": "4.1",
+          "inputs": [
+            "2.2",
+            "3.2",
+            "F10"
+          ]
+        },
+        {
+          "id": "d9",
+          "claim": "Uniqueness. Let $\\nu':C'\\to C$ be a finite morphism with $C'$ normal of dimension one whose restriction over each $C_i$ is birational onto $C_i$, and let $U=\\operatorname{Spec}A\\subseteq C$ be an affine open with $\\nu'^{-1}(U)=\\operatorname{Spec}D$. Then $D$ is a finite $A$-algebra, reduced and normal, and the birationality over the components identifies the total ring of fractions $Q(D)$ with $Q(",
+          "step": "5.1",
+          "inputs": [
+            "3.2",
+            "F3",
+            "F7",
+            "F9"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1: a reduced curve with no components is the empty scheme, and then C^nu is empty, nu is the empty morphism (finite), and the product over the empty family of components is the zero ring; the construction and all four claims are vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.2: the total ring of fractions decomposes as Q(A)=prod Q(A_i) for the minimal primes, and the determinant argument of step 3.2 identifies the zero module statements for A=0 with B=0; the zero ring case of the affine computation is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1: the case m=1, i.e. C integral, reduces the construction to the published integral normalization [F1], and step 5.1's uniqueness argument recovers its initiality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.3 and step 3.4: non-normal and multibranch points are exactly where nu fails to be an isomorphism; the proof allows inseparable residue fields and makes no separability or perfectness assumption, and purity of dimension one is the only dimension hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or ordered parameter; purity of dimension one is a hypothesis rather than an endpoint condition, so no endpoint case arises."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: the Axiom of Choice is assumed and inherited from the componentwise normalization [F1], the finite-morphism criteria [F9] and the normality-locality statement [F7]; it is used to invoke those suppliers, while the construction itself only takes products of integral closures."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no 'if and only if' of its own; the parenthetical equivalence between regularity and normality of the one-dimensional local rings is asserted in both directions inside part (1) as a description, not as a biconditional to be proved here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Correspondingly there is no reverse direction of a biconditional to check; parts (2)-(4) are one-way existence and uniqueness assertions about nu."
+        }
+      ]
+    }
+  }
+}

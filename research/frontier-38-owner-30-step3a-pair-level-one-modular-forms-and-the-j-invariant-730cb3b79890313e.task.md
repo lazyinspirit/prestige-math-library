@@ -1,0 +1,10 @@
+# step3a: A/B pair level-one-modular-forms-and-the-j-invariant
+
+- Run: frontier-38-owner-30
+- A page: level-one-modular-forms-and-the-j-invariant
+- B page: level-one-modular-forms-and-the-j-invariant-examples
+- Batches: 21
+- Own only this pair; preserve other pairs in shared batch files.
+- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.
+- Read current manifests, coverage, prose, plan and dependency records.
+- Write research/frontier-38-owner-30-step3a-pair-level-one-modular-forms-and-the-j-invariant.md.

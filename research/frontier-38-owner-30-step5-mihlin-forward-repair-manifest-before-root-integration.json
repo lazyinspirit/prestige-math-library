@@ -1,0 +1,1154 @@
+[
+  {
+    "order": 458.02605,
+    "id": "calderon-zygmund-decomposition-and-singular-integrals",
+    "kind": "A",
+    "category": "fourier-analysis",
+    "title": "Calderon Zygmund Decomposition and Singular Integrals",
+    "companion": "calderon-zygmund-decomposition-and-singular-integrals-examples",
+    "requires": [
+      "fourier-multipliers-and-sobolev-characterisations",
+      "hilbert-and-riesz-transforms",
+      "the-maximal-function-and-lebesgue-differentiation"
+    ],
+    "items": [
+      {
+        "id": "lem-marcinkiewicz-interpolation-from-weak-one-one-and-strong-two-two",
+        "kind": "lemma",
+        "title": "Marcinkiewicz interpolation from weak (1,1) and strong (2,2)",
+        "statement": "Let (X,μ) be a σ-finite measure space and let 1<p<2. Let T be a sublinear operator defined on L¹(X)+L²(X), of weak type (1,1) with constant A and strong type (2,2) with constant B. Then every f∈L^p(X) satisfies ‖Tf‖_p ≤ [p(2A/(p−1)+4B²/(2−p))]^{1/p}‖f‖_p.",
+        "deps": [
+          "def-distribution-function-of-absolute-value",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sublinear-operator-weak-and-strong-type-p-q",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "thm-layer-cake-formula-for-l-p-powers",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis",
+              "url": "https://math.aalto.fi/~jkkinnunen/files/harmonic_analysis.pdf",
+              "locator": "Chapter 2, Theorem 2.4 and proof, printed pp. 27–29"
+            },
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Theorem 1.3.2 and proof, printed pp. 33–36"
+            }
+          ]
+        },
+        "strategy": "Split f=f1+f2 at level t (f1=f on {|f|>t}, f2=f on {|f|≤t}); sublinearity gives {|Tf|>t}⊂{|Tf1|>t/2}∪{|Tf2|>t/2}; apply weak (1,1) to f1 and Chebyshev plus strong (2,2) to f2; integrate t^{p−1} over (0,∞), exchange by Tonelli, and evaluate the two inner integrals ∫_0^{|f|}(p−1)t^{p−2}dt and ∫_{|f|}^∞(2−p)t^{p−3}dt. Constants are explicit.",
+        "forward_refs": []
+      },
+      {
+        "id": "def-calderon-zygmund-kernel-and-principal-value-operator",
+        "kind": "definition",
+        "title": "Calderón–Zygmund kernels and their associated operators",
+        "statement": "Let n≥1. A Calderón–Zygmund kernel is a measurable k:ℝ^n\\{0}→ℂ, integrable on compact subsets of ℝ^n\\{0}, together with finite constants A₁,A₂ such that (i) sup_{R>0}∫_{R≤|x|≤2R}|k(x)|dx≤A₁, and (ii) sup_{y≠0}∫_{|x|≥2|y|}|k(x−y)−k(x)|dx≤A₂ (Hörmander's condition). A linear operator T:L²(ℝ^n)→L²(ℝ^n) with finite operator norm B is a Calderón–Zygmund operator with kernel k when Tf(x)=∫k(x−y)f(y)dy for a.e. x∉supp f, for every compactly supported f∈L²(ℝ^n). A principal-value distribution for k is a tempered distribution W that agrees with k on ℝ^n\\{0} and for which some sequence δ_j↓0 satisfies ⟨W,φ⟩=lim_j∫_{|x|≥δ_j}k(x)φ(x)dx for every φ∈S(ℝ^n). Neither the existence of a principal-value distribution nor a truncation limit is assumed, and T need not be convolution with such a W; only the off-support representation is used.",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-locally-integrable-function-on-r-n",
+          "def-schwartz-space-and-its-seminorms",
+          "def-tempered-distribution"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.3.2, conditions (5.3.4) and (5.3.12) and the setup (5.3.7)–(5.3.9), printed pp. 358–359"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "§2, Definitions 2.1 and 2.4, printed pp. 6–7"
+            }
+          ]
+        },
+        "strategy": "Fix the two kernel bounds on the annular and Hörmander scales and the off-support representation; record explicitly that the size condition is annular rather than pointwise and that no principal-value existence is part of the definition. The pointwise Hölder condition is a strictly stronger hypothesis recorded next, and its implication to (ii) is proved as a separate local lemma.",
+        "forward_refs": []
+      },
+      {
+        "id": "def-standard-holder-calderon-zygmund-kernel",
+        "kind": "definition",
+        "title": "Standard (Hölder) Calderón–Zygmund kernels",
+        "statement": "A Calderón–Zygmund kernel k is standard δ-Hölder, for some 0<δ≤1, with constant A₂'<∞ if |k(x−y)−k(x)|≤A₂'|y|^δ|x|^{−n−δ} whenever |x|≥2|y|>0. A Calderón–Zygmund operator is called a standard-kernel operator when its kernel is standard δ-Hölder. This pointwise condition is a sufficient hypothesis for the integral Hörmander condition of the base definition (proved as the next item); the converse is not claimed.",
+        "deps": [
+          "def-calderon-zygmund-kernel-and-principal-value-operator"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.3.2, conditions (5.3.10)–(5.3.12) and the comparison sentence, printed p. 359"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "§2, Definition 2.1 and Remarks 2.3, printed pp. 6–7"
+            }
+          ]
+        },
+        "strategy": "Record the pointwise first-difference estimate on the regime |x|≥2|y|>0 with the Hölder exponent δ∈(0,1] kept explicit; state only the implication proved next and make no claim that the converse holds.",
+        "forward_refs": []
+      },
+      {
+        "id": "lem-holder-cz-kernels-satisfy-hormander-cancellation",
+        "kind": "lemma",
+        "title": "Standard Hölder kernels satisfy the Hörmander condition",
+        "statement": "Assume Countable Choice. Every standard δ-Hölder Calderón–Zygmund kernel with constant A₂' is a Calderón–Zygmund kernel in the sense of the base definition, and its Hörmander constant may be taken to be A₂=|S^{n−1}|2^{−δ}δ^{−1}A₂'.",
+        "deps": [
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-countable-choice",
+          "def-standard-holder-calderon-zygmund-kernel",
+          "prop-measure-monotonicity",
+          "thm-polar-coordinates-formula-for-lebesgue-measure"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.3.2, comparison of (5.3.11) with (5.3.12), printed p. 359"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§3.8, footnote after (3.13): the smoothness condition implies the Hörmander condition, printed p. 11"
+            }
+          ]
+        },
+        "strategy": "Fix y≠0 and integrate the pointwise bound over {|x|≥2|y|}; polar coordinates and the substitution ρ=2|y|s give |S^{n−1}|∫_{2|y|}^∞ρ^{−1−δ}dρ =|S^{n−1}|(2|y|)^{−δ}/δ; multiply by A₂'|y|^δ.",
+        "forward_refs": []
+      },
+      {
+        "id": "def-dyadic-cube-in-rn-all-generations",
+        "kind": "definition",
+        "title": "Dyadic cubes of all generations in R^n",
+        "statement": "Fix n≥1. For k∈ℤ and a function m:n→ℤ, the dyadic cube of generation k and index m is the half-open box Q_{k,m}={x∈ℝ^n: m_i2^{−k}<x_i≤(m_i+1)2^{−k} for every i<n}; its side length is 2^{−k} and its volume is 2^{−kn}. Generations are indexed by all of ℤ, so cubes of side 2^{|k|}>1 occur for k<0. The cubes with k≥0 are exactly those of [[def-dyadic-cube-in-rn|the measure-theory generation-k convention]], which is bounded above by the unit cube and does not suffice for stopping-time decompositions at small heights; the all-generations family below is the grid used by the dyadic maximal function and the Calderón–Zygmund decomposition on this page.",
+        "deps": [
+          "def-dyadic-cube-in-rn",
+          "def-half-open-box",
+          "def-integer-power",
+          "def-integers",
+          "lem-power-laws",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.3.1, dyadic cube definition and nesting sentence preceding Theorem 5.3.1, printed p. 355"
+            },
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "ch. 1 §1.2, definition of D_k for k∈ℤ and the transfer of properties (2)–(5) of Remark 1.1, printed pp. 9–10"
+            }
+          ]
+        },
+        "strategy": "Fix the half-open convention (m_i2^{−k},(m_i+1)2^{−k}] matching the published dyadic-cube item, regard the generation index as an integer, and record explicitly that the published grid has k≥0 only. Pointwise reformulation: m_i<2^kx_i≤m_i+1. The following item proves the partition, volume and nesting facts for this larger family.",
+        "forward_refs": []
+      },
+      {
+        "id": "lem-dyadic-cubes-all-generations-partition-and-nesting",
+        "kind": "lemma",
+        "title": "All-generation dyadic cubes: partition, volume and nesting",
+        "statement": "Let $n\\ge1$ and use the all-generations dyadic cubes of\n[[def-dyadic-cube-in-rn-all-generations]]. Then:\n\n1. For every $k\\in\\mathbb Z$ the generation-$k$ dyadic cubes are pairwise\n   disjoint and cover $\\mathbb R^n$, and each has volume\n   $|Q_{k,m}|=2^{-kn}$.\n2. Every dyadic cube $Q$ of generation $k$ has, for each $j<k$, exactly one\n   ancestor dyadic cube of generation $j$ containing $Q$; in particular the\n   parent of $Q$ has generation $k-1$ and volume $2^n|Q|$.\n3. If dyadic cubes $Q,Q'$ of generations $k\\le k'$ intersect, then\n   $Q'\\subseteq Q$; consequently two dyadic cubes are either disjoint or one\n   contains the other, and cubes of one generation are equal or disjoint.",
+        "deps": [
+          "def-countable-choice",
+          "def-dyadic-cube-in-rn-all-generations",
+          "def-finite-sum",
+          "def-half-open-box",
+          "def-integer-power",
+          "def-integers",
+          "lem-finite-sum-laws",
+          "lem-integer-part",
+          "lem-nat-embeds-int",
+          "lem-power-laws",
+          "thm-int-ordered-ring",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.3.1, printed p. 355: dyadic cubes of all integer generations are disjoint or nested"
+            },
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis",
+              "url": "https://math.aalto.fi/~jkkinnun/files/harmonic_analysis.pdf",
+              "locator": "ch. 1 §1.2, printed pp. 9–10: C_k covers ℝ^n, pairwise disjointness, and properties (2)–(5) of Remark 1.1"
+            }
+          ]
+        },
+        "strategy": "Repeat the published generation-k argument with k,k'∈ℤ: reduce m_i<2^kx_i≤m_i+1 by the integer-part property (2^k>0 for every k∈ℤ), compute the volume as the product of the n equal side lengths 2^{−k}, and for (2)–(3) put d=k'−k≥0, M_i=m_i2^d and compare the coordinate intervals (a nested chain of integer intervals), using the integer order and power laws. All radii and indices are canonical, so no choice is used.",
+        "forward_refs": []
+      },
+      {
+        "id": "lem-maximal-dyadic-cubes-at-height-lambda",
+        "kind": "lemma",
+        "title": "Maximal dyadic cubes above a level",
+        "statement": "Let $f\\in L^1(\\mathbb R^n)$ and $\\lambda>0$, and let the dyadic cubes be the\nall-generations cubes of [[def-dyadic-cube-in-rn-all-generations]]. The dyadic\ncubes $Q$ with average $|Q|^{-1}\\int_Q|f|>\\lambda$ that are maximal under\ninclusion form a countable family of pairwise disjoint cubes; their union is\nexactly the dyadic maximal superlevel set $\\{M_df>\\lambda\\}$, where\n$$M_df(x)=\\sup\\Bigl\\{|Q|^{-1}\\int_Q|f|:Q\\text{ dyadic},\\ x\\in Q\\Bigr\\}$$\nover all generations; each such $Q$ satisfies\n$|Q|^{-1}\\int_Q|f|\\le2^n\\lambda$; and\n$\\sum_Q|Q|\\le\\lambda^{-1}\\|f\\|_1$.",
+        "deps": [
+          "def-countable",
+          "def-dyadic-cube-in-rn-all-generations",
+          "def-l-one-of-a-measure",
+          "def-nonnegative-extended-series",
+          "lem-dyadic-cubes-all-generations-partition-and-nesting",
+          "lem-subset-of-countable"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 3",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes3.pdf",
+              "locator": "§4, Proposition 4.3 and its proof, printed pp. 23–24"
+            },
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis",
+              "url": "https://math.aalto.fi/~jkkinnunen/files/harmonic_analysis.pdf",
+              "locator": "Chapter 1, Theorem 1.12, printed pp. 12–14"
+            },
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Theorem 5.3.1 and its proof, printed pp. 356–357"
+            }
+          ]
+        },
+        "strategy": "Call a cube bad if its average of |f| exceeds λ. Every bad cube satisfies |Q|<λ^{−1}‖f‖₁, so bad cubes have bounded side length; since ancestors are unique at each generation, the chain of bad ancestors of any bad cube is finite and has a coarsest member, which is maximal. Distinct maximal bad cubes are disjoint by the nesting property. If x lies in a maximal bad cube then M_d f(x)>λ; conversely a cube realizing an average above λ lies in a maximal bad cube containing x, so the union is exactly {M_d f>λ}. Each maximal bad cube has a good parent, whence the 2^nλ average bound; disjointness and the strict inequality against λ|Q| give Σ|Q|≤λ^{−1}‖f‖₁. The selection and the enumeration of the countable family are canonical, and no choice is used.",
+        "forward_refs": []
+      },
+      {
+        "id": "lem-radially-decreasing-kernels-are-dominated-by-the-maximal-function",
+        "kind": "lemma",
+        "title": "Radially decreasing kernels are dominated by the maximal function",
+        "statement": "Let $\\omega\\ge0$ be a measurable, radially nonincreasing, integrable function on\n$\\mathbb R^n$: that is, $\\omega(x)=\\omega(y)$ whenever $|x|=|y|$ and\n$\\omega(x)\\ge\\omega(y)$ whenever $|x|\\le|y|$. Let\n$f\\in L^1_{\\mathrm{loc}}(\\mathbb R^n)$. Then for every $x\\in\\mathbb R^n$,\n$$\\int_{\\mathbb R^n}|f(x-y)|\\,\\omega(y)\\,dy\\le\\|\\omega\\|_1\\,Mf(x),$$\nwhere $M$ is the centered Hardy–Littlewood maximal operator and both sides may be\n$+\\infty$.",
+        "deps": [
+          "def-centered-and-uncentered-hardy-littlewood-maximal-functions",
+          "def-countable-choice",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "prop-measure-monotonicity",
+          "thm-layer-cake-formula-for-l-p-powers",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Theorem 2.9 and its proof (decreasing-kernel domination), printed p. 5"
+            },
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Proof of Theorem 5.3.4, the step bounding the error term by M(f), printed pp. 364–365"
+            }
+          ]
+        },
+        "strategy": "Layer-cake ω(y)=∫_0^{ω(0)}1_{ω>s}(y)ds, and note that each superlevel set is a ball B(0,r_s) up to a Lebesgue-null subset of its boundary (radial monotonicity makes the superlevel sets unions of full spheres). Tonelli and ∫_{B(x,r_s)}|f|≤|B(x,r_s)|Mf(x) give the bound; the same layer-cake identity computes ‖ω‖₁=∫_0^∞|B(0,r_s)|ds. The radii are canonical suprema, so no choice is used.",
+        "forward_refs": []
+      },
+      {
+        "id": "lem-calderon-zygmund-decomposition-at-height-lambda",
+        "kind": "lemma",
+        "title": "Calderón–Zygmund decomposition at height λ",
+        "statement": "Assume Countable Choice. Let f∈L¹(ℝ^n) and λ>0. Then f=g+Σ_j b_j a.e., where the cubes Q_j are the maximal all-generation dyadic cubes of the previous item, b_j=(f−|Q_j|^{−1}∫_{Q_j}f)1_{Q_j} satisfies ∫b_j=0 and ‖b_j‖₁≤2^{n+1}λ|Q_j|, and g=f outside ⋃_jQ_j and g=|Q_j|^{−1}∫_{Q_j}f on Q_j satisfies ‖g‖₁≤‖f‖₁, |g|≤2^nλ a.e. and ‖g‖₂²≤2^nλ‖f‖₁; moreover Σ_j|Q_j|≤λ^{−1}‖f‖₁.",
+        "deps": [
+          "lem-maximal-dyadic-cubes-at-height-lambda",
+          "thm-almost-every-point-is-a-lebesgue-point",
+          "thm-differentiation-along-families-shrinking-nicely"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Theorem 5.3.1, printed pp. 355–357"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 3",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes3.pdf",
+              "locator": "§4, Proposition 4.3 and its proof, printed pp. 23–24"
+            },
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis",
+              "url": "https://math.aalto.fi/~jkkinnunen/files/harmonic_analysis.pdf",
+              "locator": "Chapter 1, Theorem 1.16, printed pp. 14–16"
+            }
+          ]
+        },
+        "strategy": "Use the maximal cubes of the previous item and set g,b_j as stated. On a bad cube the average bound of the previous item gives |g|≤2^nλ; off ⋃Q_j every dyadic cube through x is good, and the dyadic cubes through x shrink nicely to x, so the differentiation theorem gives |f(x)|≤λ a.e. there. The L¹ bound on b_j follows from the average bounds, and ‖g‖₂²≤‖g‖_∞‖g‖₁≤2^nλ‖f‖₁ from the pointwise and integral bounds on g.",
+        "forward_refs": []
+      },
+      {
+        "id": "lem-cz-good-part-has-controlled-ltwo-image",
+        "kind": "lemma",
+        "title": "The good part has controlled L² image",
+        "statement": "Assume Countable Choice. Let T be a Calderón–Zygmund operator with kernel constants A₁,A₂ and L² norm B, and let f=g+Σ_j b_j be the Calderón–Zygmund decomposition of f∈L¹(ℝ^n) at height λ>0. Then |{|Tg|>λ/2}|≤4B²2^nλ^{−1}‖f‖₁.",
+        "deps": [
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-countable-choice",
+          "lem-calderon-zygmund-decomposition-at-height-lambda",
+          "thm-chebyshev-markov-inequality-for-the-integral"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Proof of Theorem 5.3.3, treatment of the good part, printed pp. 360–362"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "Corollary 2.9, first term, printed p. 8"
+            }
+          ]
+        },
+        "strategy": "Chebyshev's inequality for |Tg|² gives |{|Tg|>λ/2}|≤(2/λ)²‖Tg‖₂²≤(2B/λ)²‖g‖₂², and ‖g‖₂²≤‖g‖_∞‖g‖₁≤2^nλ‖f‖₁ by the decomposition bounds.",
+        "forward_refs": []
+      },
+      {
+        "id": "lem-cz-bad-part-is-integrable-away-from-expanded-cubes",
+        "kind": "lemma",
+        "title": "The bad part is integrable away from expanded cubes",
+        "statement": "Let $T$ be a Calderón–Zygmund operator with kernel constants $A_1,A_2$\n([[def-calderon-zygmund-kernel-and-principal-value-operator]]), let $Q$ be a\ndyadic cube ([[def-dyadic-cube-in-rn-all-generations]]) with centre $c_Q$, and let\n$b_Q\\in L^2(\\mathbb R^n)$ be supported in $Q$ with $\\int b_Q=0$. If $Q^*$ is the\ncube concentric with $Q$ whose side length is $2\\sqrt n$ times the side length of\n$Q$, then\n$$\\int_{\\mathbb R^n\\setminus Q^*}|Tb_Q(x)|\\,dx\\le A_2\\|b_Q\\|_1.$$",
+        "deps": [
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-dyadic-cube-in-rn-all-generations",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Proof of Theorem 5.3.3: the cubes Q_j* of side 2√nℓ(Q_j) and the A₂ bound, printed pp. 362–363"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "Lemma 2.7 and its proof, printed pp. 7–8"
+            }
+          ]
+        },
+        "strategy": "For x∉Q* the off-support representation applies and ∫b_Q=0 gives Tb_Q(x)=∫_Q(k(x−y)−k(x−c_Q))b_Q(y)dy, using that b_Q is compactly supported and in L². The geometry x∉Q*, y∈Q gives |x−c_Q|≥2|y−c_Q| — this is why the dilation factor 2√n (not 3) is the smallest that works in every dimension — so the Hörmander bound integrates to A₂∫_Q|b_Q| after the Tonelli exchange. The Hörmander integral is applied with the origin shifted to c_Q, which the translation-invariant form of the condition permits.",
+        "forward_refs": []
+      },
+      {
+        "id": "thm-calderon-zygmund-operator-has-weak-type-one-one",
+        "kind": "theorem",
+        "title": "Calderón–Zygmund operators are of weak type (1,1)",
+        "statement": "Let $T$ be a Calderón–Zygmund operator with kernel constants $A_1,A_2$ and $L^2$\nnorm $B$. Then for every $f\\in L^1(\\mathbb R^n)$ and every $\\lambda>0$,\n$$|\\{|Tf|>\\lambda\\}|\\le C_n(A_2+B)\\lambda^{-1}\\|f\\|_1$$\nwith a dimensional constant $C_n$ independent of $T$, $f$ and $\\lambda$;\nequivalently, $T$ extends to a bounded operator\n$L^1(\\mathbb R^n)\\to L^{1,\\infty}(\\mathbb R^n)$.",
+        "deps": [
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-countable-choice",
+          "def-l-one-of-a-measure",
+          "def-sublinear-operator-weak-and-strong-type-p-q",
+          "lem-calderon-zygmund-decomposition-at-height-lambda",
+          "lem-cz-bad-part-is-integrable-away-from-expanded-cubes",
+          "lem-cz-good-part-has-controlled-ltwo-image",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Theorem 5.3.3, weak (1,1) part (5.3.13), and its proof, printed pp. 359–363"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "Corollary 2.9 and its proof, printed pp. 8–9"
+            }
+          ]
+        },
+        "strategy": "Apply the decomposition at height γλ and split |{|Tf|>λ}| by Tf=Tg+ΣTb_j; bound the good part with the L² estimate and Chebyshev; cover the enlarged cubes ⋃Q_j*; on the complement use the expanded-cube integrability and Chebyshev together with ‖b_j‖₁≤2^{n+1}γλ|Q_j|; choose γ small (a fixed multiple of A₂^{−1}) and sum Σ|Q_j|≤(γλ)^{−1}‖f‖₁.",
+        "forward_refs": []
+      },
+      {
+        "id": "lem-calderon-zygmund-lp-range-splits-into-interpolation-and-duality",
+        "kind": "lemma",
+        "title": "The Lp range: interpolation below two and adjoint duality above two",
+        "statement": "Let $T$ be a linear operator defined on $L^1(\\mathbb R^n)+L^2(\\mathbb R^n)$ that\nis bounded on $L^2(\\mathbb R^n)$ with norm $B$, let $T^*$ denote its adjoint with\nrespect to the $L^2$ pairing, and suppose that $T$ and $T^*$ both satisfy the\nweak $(1,1)$ bound $|\\{|Tf|>\\lambda\\}|\\le A\\lambda^{-1}\\|f\\|_1$ for every\n$f\\in L^1(\\mathbb R^n)$ and $\\lambda>0$ (and likewise for $T^*$). Then for every\n$1<p<\\infty$, $p\\ne2$, $T$ is bounded on $L^p(\\mathbb R^n)$: for $1<p<2$ the\noperator norm is at most\n$$C_p:=\\Bigl[p\\Bigl(\\frac{2A}{p-1}+\\frac{4B^2}{2-p}\\Bigr)\\Bigr]^{1/p},$$\nand for $2<p<\\infty$ it is at most $C_{p'}$, the same expression evaluated at the\nconjugate exponent $p'=p/(p-1)\\in(1,2)$.",
+        "deps": [
+          "thm-monotone-convergence",
+          "cor-l-p-norm-recovery-by-unit-l-q-pairings",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-hilbert-space-adjoint",
+          "def-l-one-of-a-measure",
+          "lem-marcinkiewicz-interpolation-from-weak-one-one-and-strong-two-two",
+          "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p",
+          "thm-complex-holder-minkowski-and-the-quotient-norm"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Theorem 5.3.3, the duality and interpolation argument for (5.3.14), printed pp. 362–363"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "Paragraph and Corollary 2.10 on interpolation, adjointness and duality, printed pp. 9–10"
+            },
+            {
+              "title": "Juha Kinnunen, Harmonic Analysis",
+              "url": "https://math.aalto.fi/~jkkinnunen/files/harmonic_analysis.pdf",
+              "locator": "Chapter 2, Theorem 2.4, printed pp. 27–29"
+            }
+          ]
+        },
+        "strategy": "For 1<p<2 apply the Marcinkiewicz interpolation lemma to T, using that f∈L^p∩L² splits at height t into f1∈L¹∩L² and f2∈L², that sublinearity gives the pointwise domination by |Tf1|+|Tf2|, and that the weak (1,1) hypothesis applies to f1 while the strong (2,2) hypothesis applies to f2. For 2<p<∞ apply the same lemma to T* at the conjugate exponent p'∈(1,2); the pairing identity ⟨Tf,g⟩=⟨f,T*g⟩ for f∈L^p∩L² and g∈L^{p'}∩L² together with the L^{p'} norm-recovery identity and the density of smooth compactly supported functions transfers the bound to T, and density of L^p∩L² in L^p gives the unique extension.",
+        "forward_refs": []
+      },
+      {
+        "id": "thm-calderon-zygmund-singular-integrals-are-bounded-on-lp",
+        "kind": "theorem",
+        "title": "Calderón–Zygmund operators are bounded on Lp",
+        "statement": "Let $T$ be a Calderón–Zygmund operator with kernel constants $A_1,A_2$ and $L^2$\nnorm $B$. Then for every $1<p<\\infty$, $T$ extends uniquely to a bounded operator\non $L^p(\\mathbb R^n)$ with\n$$\\|Tf\\|_p\\le C_{n,p}(A_2+B)\\max\\bigl(p,(p-1)^{-1}\\bigr)\\|f\\|_p,$$\nwhere $C_{n,p}$ depends only on $n$ and $p$.",
+        "deps": [
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-monotone-convergence",
+          "cor-l-p-norm-recovery-by-unit-l-q-pairings",
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-countable-choice",
+          "def-hilbert-space-adjoint",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sublinear-operator-weak-and-strong-type-p-q",
+          "lem-calderon-zygmund-lp-range-splits-into-interpolation-and-duality",
+          "thm-calderon-zygmund-operator-has-weak-type-one-one",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p",
+          "thm-layer-cake-formula-for-l-p-powers",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Theorem 5.3.3, (5.3.14), and its proof, printed pp. 359–363"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "Corollary 2.10, printed p. 9"
+            }
+          ]
+        },
+        "strategy": "The transposed kernel k*(x)=k(−x) satisfies the same size and Hörmander bounds with the same constants, and T* has L² norm B, so T* is again a Calderón–Zygmund operator. Apply the weak (1,1) theorem to T and to T*, then the interpolation-and-duality lemma to T and T*.",
+        "forward_refs": []
+      },
+      {
+        "id": "def-maximal-truncated-singular-integral",
+        "kind": "definition",
+        "title": "Maximal truncated singular integrals",
+        "statement": "Let k:ℝ^n\\{0}→ℂ be locally integrable off the origin with |k(x)|≤A₁|x|^{−n}. For 1≤p<∞, f∈L^p(ℝ^n) and 0<ε<N<∞ define the truncated and doubly truncated integrals T_εf(x)=∫_{|y|>ε}k(y)f(x−y)dy and T^{(ε,N)}f(x)=∫_{ε<|y|<N}k(y)f(x−y)dy, both absolutely convergent for every x, and the maximal truncated operators T^*f(x)=sup_{ε>0}|T_εf(x)| and T^{**}f(x)=sup_{0<ε<N<∞}|T^{(ε,N)}f(x)|, with values in [0,∞]. Under the pointwise size bound one has T^*f≤T^{**}f≤2T^*f pointwise, so the two are comparable. No upper truncation and no principal-value existence are asserted by the definition itself.",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "thm-complex-holder-minkowski-and-the-quotient-norm"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.3.4, definitions (5.3.15)–(5.3.18), printed pp. 362–364"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "§3.8, definitions preceding Theorem 3.8, printed p. 11"
+            }
+          ]
+        },
+        "strategy": "Define the truncations and their suprema from the kernel alone. Absolute convergence for f∈L^p follows from Hölder because k·1_{|·|>ε}∈L^{p'}; the doubly truncated form is used in the maximal weak (1,1) proof so that no principal-value limit is presupposed. The comparability T^*≤T^{**}≤2T^* uses T^{(ε,N)}=T_ε−T_N together with dominated convergence in N under the pointwise size bound.",
+        "forward_refs": []
+      },
+      {
+        "id": "lem-cotlar-inequality-for-maximal-truncations",
+        "kind": "lemma",
+        "title": "Cotlar's inequality for maximal truncations",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $k:\\mathbb R^n\\setminus\\{0\\}\\to\\mathbb C$ satisfy the pointwise size bound\n$|k(x)|\\le A_1|x|^{-n}$, the $\\delta$-Hölder smoothness bound\n$|k(x-y)-k(x)|\\le A_2'|y|^\\delta|x|^{-n-\\delta}$ for\n$|x|\\ge2|y|>0$ with $0<\\delta\\le1$, and the cancellation bound\n$\\sup_{0<r<R}|\\int_{r<|x|<R}k(x)\\,dx|\\le A_3$. Let $W$ be a principal-value\ndistribution extending $k$ ([[def-calderon-zygmund-kernel-and-principal-value-operator]])\nand let $T$ be the convolution operator with $W$, bounded on\n$L^2(\\mathbb R^n)$. Then for every $f\\in\\mathcal S(\\mathbb R^n)$ and almost\nevery $x$,\n$$T^*f(x)\\le M(Tf)(x)+C_{n,\\delta}(A_1+A_2'+A_3)Mf(x),$$\nwhere $M$ is the centered Hardy–Littlewood maximal operator of\n[[def-centered-and-uncentered-hardy-littlewood-maximal-functions]] and $T^*$ is\nthe maximal truncated operator of [[def-maximal-truncated-singular-integral]].",
+        "deps": [
+          "thm-exponential-beats-every-polynomial",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-centered-and-uncentered-hardy-littlewood-maximal-functions",
+          "def-convolution-of-a-tempered-distribution-with-a-schwartz-function",
+          "def-convolution-of-two-functions-on-rn",
+          "def-countable-choice",
+          "def-maximal-truncated-singular-integral",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "def-schwartz-space-and-its-seminorms",
+          "lem-radially-decreasing-kernels-are-dominated-by-the-maximal-function",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-tempered-convolution-is-smooth-with-polynomial-growth",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Theorem 5.3.4 (Cotlar's inequality) and its proof, printed pp. 364–365"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Theorem 3.8 (Cotlar's inequality) and its proof, printed pp. 11–12"
+            }
+          ]
+        },
+        "strategy": "Decompose the truncated kernel as K_ε=W*φ_ε+(K_ε−W*φ_ε) with a radially decreasing approximate identity φ_ε; the first term is pointwise bounded by ‖φ‖₁M(Tf), while the error kernel has an ε-uniform radially decreasing L¹ majorant ≲(1+|x|)^{−n−δ}, so the domination lemma gives the Mf term with constant C_{n,δ}(A₁+A₂'+A₃).",
+        "forward_refs": []
+      },
+      {
+        "id": "thm-maximal-truncations-are-weak-one-one-and-strong-lp",
+        "kind": "theorem",
+        "title": "Maximal truncations: weak (1,1) and strong Lp bounds",
+        "statement": "Let k and T be as in the Cotlar lemma: pointwise size A₁, standard δ-Hölder smoothness A₂', cancellation A₃, and L² norm B. Then T^* is of weak type (1,1), |{|T^*f|>λ}|≤C_n(A₁+A₂'+A₃+B)λ^{−1}‖f‖₁ for all f∈L¹(ℝ^n) and λ>0, and T^* is bounded on L^p(ℝ^n) for every 1<p<∞ with ‖T^*f‖_p≤C_{n,p}(A₁+A₂'+A₃+B)max(p,(p−1)^{−1})‖f‖_p.",
+        "deps": [
+          "cor-centered-hardy-littlewood-maximal-operator-is-l-p-bounded",
+          "cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences",
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-centered-and-uncentered-hardy-littlewood-maximal-functions",
+          "def-countable-choice",
+          "def-l-one-of-a-measure",
+          "def-maximal-truncated-singular-integral",
+          "def-standard-holder-calderon-zygmund-kernel",
+          "lem-calderon-zygmund-decomposition-at-height-lambda",
+          "lem-cotlar-inequality-for-maximal-truncations",
+          "lem-holder-cz-kernels-satisfy-hormander-cancellation",
+          "thm-calderon-zygmund-singular-integrals-are-bounded-on-lp",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "thm-hardy-littlewood-maximal-inequality-for-balls",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Theorem 5.3.5 and its proof, printed pp. 366–371, and Corollary 5.3.7, printed p. 371"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Remark 3.9(b) on the weak (1,1) criterion for maximal SIOs, printed p. 12"
+            }
+          ]
+        },
+        "strategy": "Cotlar's inequality dominates T^*, hence T^{**}, by M(Tf)+C(A₁+A₂'+A₃)Mf; with T bounded on L^p and M bounded on L^p this yields the strong L^p bounds. For the weak (1,1) bound apply the Calderón–Zygmund decomposition at height γλ, estimate the doubly truncated bad parts using the Hörmander condition supplied by the Hölder kernel, and use the L² bound of T^{**} obtained from Cotlar and the L² bound of M; the pointwise size bound gives T^*≤T^{**}.",
+        "forward_refs": []
+      },
+      {
+        "id": "cor-principal-value-truncations-converge-almost-everywhere",
+        "kind": "corollary",
+        "title": "Almost-everywhere convergence of principal-value truncations",
+        "statement": "Assume Countable Choice. Fix 1≤p<∞, let k and T be as in the maximal-truncation theorem, and let D⊆L^p(ℝ^n) be dense in L^p(ℝ^n) with lim_{ε↓0}T_εf(x) existing for almost every x for every f∈D. Then for every f∈L^p(ℝ^n) the limit lim_{ε↓0}T_εf(x) exists for almost every x. For the Hilbert and Riesz kernels, D=S(ℝ^n) satisfies the hypothesis by the published principal-value kernel formulas.",
+        "deps": [
+          "def-countable-choice",
+          "def-maximal-truncated-singular-integral",
+          "def-riesz-transforms-on-euclidean-space",
+          "def-truncated-hilbert-transform-and-principal-value",
+          "lem-hilbert-transform-has-signum-fourier-multiplier",
+          "lem-riesz-transform-principal-value-kernel-formula",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p",
+          "thm-maximal-truncations-are-weak-one-one-and-strong-lp"
+        ],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Theorem 2.7 (maximal bound plus dense-class convergence) and its proof, printed pp. 4–5"
+            },
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Corollary 5.3.6 and its proof, printed p. 371, and the cited Theorem 2.1.14"
+            }
+          ]
+        },
+        "strategy": "Oscillation argument at the fixed exponent p: for f∈L^p and g∈D the oscillation H(x)=limsup_{ε,θ↓0}|T_εf(x)−T_θf(x)| satisfies H≤2T^*(f−g) pointwise on the set where T_εg converges; for λ>0 the set {H>λ} is contained in {T^*(f−g)>λ/2}, whose measure is controlled by the weak (1,1) bound for p=1 and by Chebyshev together with the strong (p,p) bound for p>1; then let g→f in L^p. No convergence is claimed for a general CZ kernel without the dense-class hypothesis.",
+        "forward_refs": []
+      },
+      {
+        "id": "cor-hilbert-transform-is-bounded-on-lp",
+        "kind": "corollary",
+        "title": "The Hilbert transform is bounded on Lp",
+        "statement": "Assume Countable Choice. The Hilbert transform H extends uniquely to a bounded operator on L^p(ℝ) for every 1<p<∞, with norm bounded by a constant depending only on p.",
+        "deps": [
+          "cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity",
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-countable-choice",
+          "def-hilbert-space-adjoint",
+          "def-standard-holder-calderon-zygmund-kernel",
+          "def-truncated-hilbert-transform-and-principal-value",
+          "lem-holder-cz-kernels-satisfy-hormander-cancellation",
+          "lem-hilbert-transform-has-signum-fourier-multiplier",
+          "lem-hilbert-transform-is-skew-adjoint-on-ltwo",
+          "thm-calderon-zygmund-singular-integrals-are-bounded-on-lp"
+        ],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.1, kernel and multiplier, printed pp. 314–317; Theorem 5.3.3, printed pp. 359–363"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, Propositions 20.2 and 20.3, printed pp. 113–117"
+            }
+          ]
+        },
+        "strategy": "The kernel k(x)=1/(πx) has |k(x)|≤(1/π)|x|^{−1}, and the mean value theorem gives the δ=1 Hölder bound |k(x−y)−k(x)|≤C|y||x|^{−2} for |x|≥2|y|>0, so the Hölder-to-Hörmander lemma supplies the integral condition. The published multiplier and isometry items give the L² bound and the Schwartz-level principal-value formula. The off-support representation for compactly supported f∈L² is proved, not assumed: for φ∈C_c^∞ of the complement of supp f, skew-adjointness and the Schwartz formula identify ⟨Hf,φ⟩ with the absolutely convergent kernel pairing (Fubini over the compact support), so Hf agrees away from supp f with the kernel integral; this is the representation the base Calderón–Zygmund definition requires. Then the strict-range L^p theorem applies.",
+        "forward_refs": []
+      },
+      {
+        "id": "cor-riesz-transforms-are-bounded-on-lp",
+        "kind": "corollary",
+        "title": "The Riesz transforms are bounded on Lp",
+        "statement": "Assume Countable Choice. Let n≥1 and 1≤j≤n. The j-th Riesz transform R_j extends uniquely to a bounded operator on L^p(ℝ^n) for every 1<p<∞, with norm bounded by a constant depending only on n and p.",
+        "deps": [
+          "cor-riesz-transforms-are-ltwo-bounded",
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-countable-choice",
+          "def-hilbert-space-adjoint",
+          "def-riesz-transforms-on-euclidean-space",
+          "def-standard-holder-calderon-zygmund-kernel",
+          "lem-holder-cz-kernels-satisfy-hormander-cancellation",
+          "lem-riesz-transform-kernels-have-explicit-size-difference-and-spherical-cancellation-bounds",
+          "lem-riesz-transform-principal-value-kernel-formula",
+          "thm-calderon-zygmund-singular-integrals-are-bounded-on-lp",
+          "thm-plancherel"
+        ],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.4, Definition 5.1.13 and Proposition 5.1.14, printed pp. 324–327; Theorem 5.3.3, printed pp. 359–363"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, Proposition 20.3, printed pp. 113–117"
+            }
+          ]
+        },
+        "strategy": "The published Riesz kernel estimates give the size bound and the δ=1 first-difference bound for c_nx_j/|x|^{n+1}, and the multiplier definition gives the L² bound; the Hölder-to-Hörmander lemma supplies the integral condition. The Schwartz-level principal-value formula is published. The off-support representation for compactly supported f∈L² is proved from the multiplier definition: R_j*=−R_j because the symbol −iξ_j/|ξ| is purely imaginary, so for test functions supported off supp f the L² pairing is identified with the absolutely convergent kernel integral by Fubini; hence R_j is a Calderón–Zygmund operator and the strict-range L^p theorem applies.",
+        "forward_refs": []
+      },
+      {
+        "id": "lem-dyadic-mihlin-kernels-have-uniform-integral-hormander-control",
+        "kind": "lemma",
+        "title": "Dyadic Mihlin pieces: uniform L¹ and first-difference bounds",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $n\\ge1$, put\n$n_0:=\\lfloor n/2\\rfloor+1$, and let $\\chi\\in C_c^\\infty(\\mathbb R^n)$ be the\nsmooth step of [[lem-schwartz-cutoffs-from-the-standard-smooth-step]], with\n$0\\le\\chi\\le1$, $\\chi=1$ on $|\\xi|\\le1$ and $\\chi=0$ on $|\\xi|\\ge2$. Put\n$$\\zeta(\\xi):=\\chi(\\xi)-\\chi(2\\xi).$$\nThen $\\zeta$ is supported in the annulus $1/2\\le|\\xi|\\le2$, satisfies\n$0\\le\\zeta\\le1$, and $\\sum_{j\\in\\mathbb Z}\\zeta(2^{-j}\\xi)=1$ for every\n$\\xi\\ne0$. Let $m$ be a Mihlin symbol with constants $C_\\alpha$ as in\n[[def-mihlin-symbol-with-more-than-half-dimension-derivatives]], put\n$$m_j(\\xi):=m(\\xi)\\,\\zeta(2^{-j}\\xi),\\qquad K_j:=\\mathcal F^{-1}\\bigl(u_{m_j}\\bigr),$$\nwhere $u_{m_j}$ is the regular tempered distribution of $m_j$ and\n$\\mathcal F^{-1}$ is the inverse Fourier transform of\n[[def-fourier-transform-of-a-tempered-distribution]], and let $A$ be any finite\nquantity with $A\\ge\\max\\{\\|m\\|_\\infty,\\ \\max_{|\\alpha|\\le n_0}C_\\alpha\\}$. Then\n$K_j$ is (the regular distribution of) an $L^2$ function, and there is a\nconstant $C_n$, depending only on $n$ and on the fixed cutoff $\\chi$, such that\n$$\\sup_{j\\in\\mathbb Z}\\int_{\\mathbb R^n}|K_j(x)|\\,(1+2^j|x|)^{1/4}\\,dx\\le C_nA \\qquad (1)$$\nand\n$$\\sup_{j\\in\\mathbb Z}2^{-j}\\int_{\\mathbb R^n}|\\nabla K_j(x)|\\,(1+2^j|x|)^{1/4}\\,dx\\le C_nA. \\qquad (2)$$",
+        "deps": [
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "thm-differentiation-and-polynomial-multiplication-preserve-tempered-distributions",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice",
+          "def-fourier-transform-of-a-tempered-distribution",
+          "def-mihlin-symbol-with-more-than-half-dimension-derivatives",
+          "def-schwartz-space-and-its-seminorms",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "thm-plancherel"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Proof of Theorem 6.2.7, estimates (6.2.15) and (6.2.16) and derivation (6.2.17)–(6.2.19), printed pp. 446–447"
+            }
+          ]
+        },
+        "strategy": "Multiply and divide by (1+2^j|x|)^{n₀}, n₀=⌊n/2⌋+1, apply Cauchy–Schwarz with −2n₀+1/2<−n, expand (1+2^j|x|)^{n₀} in monomials, and use Plancherel plus Leibniz with the Mihlin bounds to obtain O(A2^{jn/2}2^{−j|γ|}) for each γ; the gradient estimate repeats the calculation with ζ_r(ξ)=ξ_rζ(ξ).",
+        "forward_refs": []
+      },
+      {
+        "id": "lem-mihlin-dyadic-pieces-sum-to-an-off-support-kernel-representation",
+        "kind": "lemma",
+        "title": "Dyadic Mihlin pieces sum to an off-support kernel representation",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). In the setting of\n[[lem-dyadic-mihlin-kernels-have-uniform-integral-hormander-control]] — $m$ a\nMihlin symbol with constants $C_\\alpha$\n([[def-mihlin-symbol-with-more-than-half-dimension-derivatives]]),\n$\\zeta$ the annulus cutoff with $\\sum_{j\\in\\mathbb Z}\\zeta(2^{-j}\\xi)=1$ for\n$\\xi\\ne0$, $m_j=m\\,\\zeta(2^{-j}\\cdot)$, $K_j=\\mathcal F^{-1}(u_{m_j})$ — the\nfollowing hold, with $W:=m^\\vee$ and $A\\ge\\max\\{\\|m\\|_\\infty,\\max_{|\\alpha|\\le n_0}C_\\alpha\\}$:\n\n1. $\\sum_{|j|\\le N}K_j\\to W$ in $\\mathcal S'(\\mathbb R^n)$ as $N\\to\\infty$;\n2. the series $\\sum_{j\\in\\mathbb Z}K_j(x)$ converges for almost every\n   $x\\in\\mathbb R^n\\setminus\\{0\\}$ to a function $k$ that coincides with $W$ on\n   $\\mathbb R^n\\setminus\\{0\\}$; and\n3. that function $k$ satisfies the annular size bound\n   $\\sup_{\\delta>0}\\int_{\\delta\\le|x|\\le2\\delta}|k(x)|\\,dx\\le C_nA$ and\n   Hörmander's condition\n   $\\sup_{y\\ne0}\\int_{|x|\\ge2|y|}|k(x-y)-k(x)|\\,dx\\le C_nA$.",
+        "deps": [
+          "thm-dominated-convergence",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-countable-choice",
+          "def-fourier-transform-of-a-tempered-distribution",
+          "def-mihlin-symbol-with-more-than-half-dimension-derivatives",
+          "lem-dyadic-mihlin-kernels-have-uniform-integral-hormander-control"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Proof of Theorem 6.2.7: the S' convergence, the a.e. convergence of ΣK_j and condition (6.2.20), printed pp. 447–449"
+            }
+          ]
+        },
+        "strategy": "Test the partial sums against Schwartz functions to get S' convergence to W; the L¹ bounds with weight (1+2^j|x|)^{±1/4} dominate the tails on |x|≥δ and |x|≤2δ separately, giving absolute convergence of ΣK_j off 0 and the annular size bound; split the Hörmander sum at 2^{−k}≈|y| and use the L¹ bound for j>k and the gradient bound with the mean value theorem for j≤k.",
+        "forward_refs": []
+      },
+      {
+        "id": "thm-mihlin-fourier-multiplier-theorem",
+        "kind": "theorem",
+        "title": "The Mihlin–Hörmander Fourier multiplier theorem",
+        "statement": "Let m be bounded on ℝ^n and satisfy |∂^αm(ξ)|≤C_α|ξ|^{−|α|} for every |α|≤⌊n/2⌋+1 and ξ≠0. Then m is an L^p Fourier multiplier for every 1<p<∞, and there is a constant C_n with ‖T_mf‖_p≤C_nmax(p,(p−1)^{−1})(A+‖m‖_∞)‖f‖_p for all f∈L^p(ℝ^n), where A is the Mihlin constant assembled from the C_α.",
+        "deps": [
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-convolution-of-a-tempered-distribution-with-a-schwartz-function",
+          "def-countable-choice",
+          "def-lp-fourier-multiplier-and-multiplier-norm",
+          "def-mihlin-symbol-with-more-than-half-dimension-derivatives",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "def-translation-invariant-fourier-multiplier-on-schwartz-space",
+          "lem-dyadic-mihlin-kernels-have-uniform-integral-hormander-control",
+          "lem-ltwo-fourier-multiplier-bound",
+          "lem-mihlin-dyadic-pieces-sum-to-an-off-support-kernel-representation",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-calderon-zygmund-singular-integrals-are-bounded-on-lp",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-fourier-transform-converts-allowed-tempered-convolutions-to-products",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-tempered-convolution-is-smooth-with-polynomial-growth"
+        ],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Theorem 6.2.7 and its proof, printed pp. 445–450"
+            },
+            {
+              "title": "Mark Williams, Notes on Harmonic Analysis",
+              "url": "https://markwilliams.web.unc.edu/wp-content/uploads/sites/19674/2022/01/notesonharmonicanalysisB.pdf",
+              "locator": "Theorem 3.13 (Mihlin multiplier theorem), printed p. 13"
+            }
+          ]
+        },
+        "strategy": "Boundedness of m gives the L² bound for T_m; the dyadic pieces produce a kernel k coinciding with m^∨ off 0 with annular size and Hörmander bounds, hence a Calderón–Zygmund kernel with T_m as its operator; apply the strict-range L^p theorem. No endpoint claim.",
+        "forward_refs": []
+      },
+      {
+        "id": "rem-calderon-zygmund-endpoints-are-weak-lone-and-bmo-not-strong-lone-or-linfinity",
+        "kind": "remark",
+        "title": "Endpoint targets: weak (1,1) here, L∞ to BMO later, never strong (1,1) or L∞",
+        "statement": "For an L²-bounded Calderón–Zygmund operator the two endpoint targets are the weak (1,1) estimate proved on this page and the L∞→BMO estimate that is the subject of the later BMO page of this track; neither a strong L¹ bound nor an L∞ bound is claimed here.",
+        "deps": [
+          "thm-calderon-zygmund-operator-has-weak-type-one-one",
+          "thm-calderon-zygmund-singular-integrals-are-bounded-on-lp"
+        ],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.3, weak (1,1) in Theorem 5.3.3 and the strict-range scope of (5.3.14), printed pp. 355–371"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "§3 on BMO as the endpoint substitute, printed p. 10"
+            }
+          ]
+        },
+        "strategy": "Roadmap only: point at the proved weak (1,1) estimate and at the later BMO page; state explicitly that no strong L¹ or L∞ conclusion is part of this page. No new mathematical assertion is made, so no proof section is required.",
+        "forward_refs": []
+      },
+      {
+        "id": "rem-mihlin-does-not-assert-strong-endpoint-bounds",
+        "kind": "remark",
+        "title": "The Mihlin theorem does not assert endpoint bounds",
+        "statement": "The Mihlin theorem proved here asserts strict-range L^p bounds only: it makes no strong L¹ and no L∞ claim, and the weak (1,1) bound of the maximal-truncation theorem is not upgraded to strong (1,1) by that theorem.",
+        "deps": [
+          "thm-maximal-truncations-are-weak-one-one-and-strong-lp",
+          "thm-mihlin-fourier-multiplier-theorem"
+        ],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Theorem 6.2.7, printed pp. 445–450 with its strict-range conclusion, and §5.3 for the weak endpoint"
+            }
+          ]
+        },
+        "strategy": "Scope remark only; it records that the theorem's hypothesis and conclusion are both strict-range.",
+        "forward_refs": []
+      }
+    ]
+  },
+  {
+    "order": 458.02606,
+    "id": "calderon-zygmund-decomposition-and-singular-integrals-examples",
+    "kind": "B",
+    "category": "fourier-analysis",
+    "title": "Calderon Zygmund Decomposition and Singular Integrals — Examples",
+    "companion": "calderon-zygmund-decomposition-and-singular-integrals",
+    "requires": [
+      "calderon-zygmund-decomposition-and-singular-integrals",
+      "fundamental-solutions-newtonian-potentials-and-green-functions"
+    ],
+    "items": [
+      {
+        "id": "ex-calderon-zygmund-decomposition-of-an-interval-indicator",
+        "kind": "example",
+        "title": "Calderón–Zygmund decomposition of an interval indicator",
+        "statement": "Assume Countable Choice. Take f=1_{(0,1]} on ℝ with the half-open all-generation dyadic grid (a,b] of [[def-dyadic-cube-in-rn-all-generations]] and λ=1/4. The unique maximal dyadic interval with average of |f| above λ is (0,2], whose average is 1/2=2λ; the bad part is b=(1/2)1_{(0,1]}−(1/2)1_{(1,2]} and the good part is g=(1/2)1_{(0,2]}, so |g|=2λ, ∫b=0 and Σ|Q|=2≤λ^{−1}‖f‖₁=4. The parent (0,4] of the maximal bad interval has average exactly λ and is therefore good, which is how the 2λ average bound is attained.",
+        "deps": [
+          "def-countable-choice",
+          "def-dyadic-cube-in-rn-all-generations",
+          "lem-calderon-zygmund-decomposition-at-height-lambda",
+          "lem-dyadic-cubes-all-generations-partition-and-nesting"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Theorem 5.3.1 scope, printed pp. 355–357; the computation is direct"
+            }
+          ]
+        },
+        "strategy": "Work in the half-open grid: a dyadic interval is (m2^{−k},(m+1)2^{−k}], so intervals of all generations occur. The interval (0,1] has average 1 and its parent (0,2] has average 1/2>λ, while the next ancestor (0,4] has average exactly λ and is good; every other dyadic interval meeting (0,2] has average 0 or fails to contain a subset of (0,2] of full measure, so (0,2] is the unique maximal bad interval. Read off b and g from the formulas in the decomposition lemma and check |g|=1/2=2λ, ∫b=0 and Σ|Q|=2≤λ^{−1}‖f‖₁=4. This is a finite verification of maximality, the 2^nλ bound and the parent-good property.",
+        "forward_refs": []
+      },
+      {
+        "id": "ex-riesz-transform-as-a-standard-calderon-zygmund-operator",
+        "kind": "example",
+        "title": "The Riesz kernel is a standard Calderón–Zygmund kernel",
+        "statement": "Assume Countable Choice. For n≥1 and 1≤j≤n the Riesz kernel K_j(x)=c_nx_j/|x|^{n+1} satisfies the pointwise size bound |K_j(x)|≤c_n|x|^{−n}, the δ=1 first-difference bound on |x|≥2|y|>0, and the zero spherical-mean estimate; the Riesz transform R_j is L²-bounded and the published principal-value formula identifies its truncations on Schwartz functions. Hence R_j is a standard-kernel Calderón–Zygmund operator in the sense of this page, and the strict-range L^p theorem applies to it.",
+        "deps": [
+          "cor-riesz-transforms-are-ltwo-bounded",
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-countable-choice",
+          "def-hilbert-space-adjoint",
+          "def-riesz-transforms-on-euclidean-space",
+          "def-standard-holder-calderon-zygmund-kernel",
+          "lem-holder-cz-kernels-satisfy-hormander-cancellation",
+          "lem-riesz-transform-kernels-have-explicit-size-difference-and-spherical-cancellation-bounds",
+          "lem-riesz-transform-principal-value-kernel-formula",
+          "thm-plancherel"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.4, Definition 5.1.13, Proposition 5.1.14 and the estimates in its proof, printed pp. 324–327"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, Proposition 20.3, printed pp. 113–117"
+            }
+          ]
+        },
+        "strategy": "Read off the three estimates from the published Riesz kernel lemma and match them to the size, δ=1 Hölder and cancellation hypotheses; the published L² corollary supplies the L² bound. The off-support representation is the same verification as in the A-page L^p corollary (skew-adjointness of the multiplier and Fubini against test functions supported off the support). The identity Σ_jR_j²=−I is not needed here.",
+        "forward_refs": []
+      },
+      {
+        "id": "cex-calderon-zygmund-strong-lone-bound-fails",
+        "kind": "counterexample",
+        "title": "Strong type (1,1) fails for the Hilbert transform",
+        "statement": "The interval indicator f=1_{(0,1]} lies in L¹(ℝ), but its Hilbert transform is Hf(x)=π^{−1}log|x/(x−1)| for x∉{0,1}, which is not integrable because |Hf(x)|≳1/|x| for large x. Hence the Hilbert transform has no compatible strong type (1,1) extension: there is no bounded L¹→L¹ extension agreeing with the L² Hilbert transform on L¹∩L². No weak (1,1) estimate is refuted here; the Hilbert transform is a Calderón–Zygmund operator and this page proves the weak endpoint instead.",
+        "deps": [
+          "cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-hilbert-space-adjoint",
+          "def-truncated-hilbert-transform-and-principal-value",
+          "lem-hilbert-transform-has-signum-fourier-multiplier",
+          "lem-hilbert-transform-is-skew-adjoint-on-ltwo",
+          "thm-dominated-convergence"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.1, Example 5.1.3 scope, printed pp. 314–317"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, computation of the interval transform, printed pp. 113–119"
+            }
+          ]
+        },
+        "strategy": "Use the published computation q=Hf=π^{−1}log|x/(x−1)| of the interval indicator. Since q(x)∼±1/(πx) as |x|→∞, q is not in L¹: ∫_{|x|≥R}|q|≳∫_{|x|≥R}dx/|x|=∞. A bounded L¹ extension T agreeing with the L² transform on L¹∩L² would make Tf an L¹ class equal a.e. to q, contradicting the failure of integrability. The contrast with the weak (1,1) bound is a pointer only and is not used in the refutation.",
+        "forward_refs": []
+      },
+      {
+        "id": "cex-calderon-zygmund-operators-need-not-map-linfinity-to-linfinity",
+        "kind": "counterexample",
+        "title": "Calderón–Zygmund operators need not map L∞ to L∞",
+        "statement": "The bounded function f=1_{(0,1]} has compatible Hilbert transform q(x)=π^{−1}log|x/(x−1)|, which is essentially unbounded near 0 and near 1: q(x)→−∞ as x→0 and q(x)→+∞ as x→1. Therefore no bounded L∞→L∞ extension agrees with the L² Hilbert transform on L∞∩L², and L∞ need not be mapped to L∞ by a Calderón–Zygmund operator. No BMO-valued endpoint estimate is refuted or asserted here.",
+        "deps": [
+          "cex-calderon-zygmund-strong-lone-bound-fails",
+          "def-truncated-hilbert-transform-and-principal-value"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.1.1 and Remark 5.1.9 on endpoint behaviour, printed pp. 314–322"
+            },
+            {
+              "title": "Richard S. Laugesen, Harmonic Analysis Lecture Notes",
+              "url": "https://arxiv.org/pdf/0903.3845",
+              "locator": "Chapter 20, interval transform, printed pp. 113–119"
+            }
+          ]
+        },
+        "strategy": "Read the logarithmic divergence off the same interval transform: as x→0⁺ the value π^{−1}log(x/(1−x))→−∞ and as x→1 the value diverges to +∞, so the a.e. defined transform is not essentially bounded; a bounded L∞ extension is impossible.",
+        "forward_refs": []
+      },
+      {
+        "id": "cex-size-without-cancellation-does-not-give-a-principal-value-operator",
+        "kind": "counterexample",
+        "title": "Size without cancellation does not give a principal value",
+        "statement": "Assume Countable Choice. The positive kernel k(x)=|x|^{−n} satisfies the pointwise size bound |k(x)|=|x|^{−n}, but its symmetric truncations diverge: for f=1_{B(0,1)} one has T_εf(0)=∫_{ε<|y|<1}|y|^{−n}dy=|S^{n−1}|log(1/ε)→∞ as ε↓0. Hence the pointwise size condition alone gives neither a principal-value distribution along this sequence nor a finite maximal truncated operator, and the Hörmander/cancellation hypothesis is not redundant.",
+        "deps": [
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-maximal-truncated-singular-integral",
+          "thm-polar-coordinates-formula-for-lebesgue-measure"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.3.2, conditions (5.3.4)–(5.3.12) and the role of cancellation, printed pp. 358–359"
+            },
+            {
+              "title": "Terence Tao, Math 247A Lecture Notes 4",
+              "url": "https://www.math.ucla.edu/~tao/247a.1.06f/notes4.pdf",
+              "locator": "Remark 2.5 on the logarithmic Schur-test divergence and the need for cancellation, printed p. 6"
+            }
+          ]
+        },
+        "strategy": "Evaluate the annular integral in polar coordinates: ∫_{ε<|y|<1}|y|^{−n}dy=|S^{n−1}|∫_ε^1r^{−1}dr=|S^{n−1}|log(1/ε), which diverges as ε↓0; compare with the convergence of the truncated kernel in L^{p'} used to define T_ε for kernels with size alone when the singular part is cut off, and record that the untruncated principal value fails.",
+        "forward_refs": []
+      },
+      {
+        "id": "ex-second-derivative-newtonian-kernels-fit-the-cz-framework",
+        "kind": "example",
+        "title": "Newtonian Hessian kernels fit the Calderón–Zygmund framework",
+        "statement": "Assume Countable Choice. Let n≥3 and let Γ be the Newtonian potential normalised by −ΔΓ=δ₀. The distributional Hessian satisfies ∂_{ij}Γ=p.v.∂_{ij}Γ−(δ_{ij}/n)δ₀, where the singular part is the principal value of the function k_{ij}(x)=∂_{ij}Γ(x)=σ_{n−1}^{−1}(nx_ix_j|x|^{−n−2}−δ_{ij}|x|^{−n}) on ℝ^n\\{0}, which is smooth and homogeneous of degree −n with |k_{ij}(x)|≤(1+n)σ_{n−1}^{−1}|x|^{−n}, first differences ≲|y||x|^{−n−1} on |x|≥2|y|>0, and zero spherical mean. Hence the singular part of the second derivatives of the Newtonian potential is a standard Calderón–Zygmund kernel after the local delta term is removed, and its principal-value operator is L²-bounded with symbol −ξ_iξ_j/|ξ|²+δ_{ij}/n.",
+        "deps": [
+          "cor-riesz-transforms-are-ltwo-bounded",
+          "def-calderon-zygmund-kernel-and-principal-value-operator",
+          "def-countable-choice",
+          "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+          "def-newtonian-potential",
+          "def-riesz-transforms-on-euclidean-space",
+          "def-standard-holder-calderon-zygmund-kernel",
+          "lem-holder-cz-kernels-satisfy-hormander-cancellation",
+          "lem-ltwo-fourier-multiplier-bound",
+          "thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions",
+          "thm-polar-coordinates-formula-for-lebesgue-measure"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations, revised 18 June 2014",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§2.7.1, Theorem 2.26 and its proof (second derivatives of the Newtonian potential), printed pp. 37–38"
+            },
+            {
+              "title": "Loukas Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "§5.2, homogeneous kernels with zero spherical mean, printed pp. 333–353"
+            }
+          ]
+        },
+        "strategy": "With Γ(x)=((n−2)σ_{n−1})^{−1}|x|^{2−n} (so that −ΔΓ=δ₀ by the published Newtonian-potential items), differentiate twice to get k_{ij}; check the size bound and the gradient bound (which gives the first-difference bound by the mean value theorem on |x|≥2|y|), and verify ∫_{S^{n−1}}(nω_iω_j−δ_{ij})dσ=0 via ∫ω_iω_jdσ=σ_{n−1}δ_{ij}/n. The local term is identified by summing the diagonal relation, which gives ΔΓ=−δ₀ and hence the coefficient −1/n; the p.v. operator is L²-bounded because its symbol is −ξ_iξ_j/|ξ|²+δ_{ij}/n, the symbol of R_iR_j+(δ_{ij}/n)I.",
+        "forward_refs": []
+      }
+    ]
+  }
+]

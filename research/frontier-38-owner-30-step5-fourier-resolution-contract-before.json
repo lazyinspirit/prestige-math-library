@@ -1,0 +1,554 @@
+{
+  "original_file": "research/frontier-38-owner-30-batch-6.proof-contracts.json",
+  "contracts": {
+    "cex-fourier-restriction-is-not-defined-on-lp-equivalence-classes-pointwise": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-hausdorff-young-for-the-euclidean-fourier-transform",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice, let $n\\ge1$, and let\n$\\widehat f(\\xi)=\\int_{\\mathbb R^n}f(x)e^{-2\\pi ix\\cdot\\xi}\\,dx$ be the\nintegral Fourier transform on $L^1(\\mathbb R^n;\\mathbb C)$. For $1\\le p\\le2$\nwith conjugate exponent $p'$, the transform extends compatibly to a\ncomplex-linear bounded map\n$$\\mathcal F_p:L^p(\\mathbb R^n;\\mathbb C)\\longrightarrow L^{p'}(\\mathbb R^n;\\mathbb C),\\qquad \\|\\mathcal F_pf\\|_{p'}\\le\\|f\\|_p .$$\nAt $p=1$ this map is the integral transform of\n[[thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions]],\nat $p=2$ it is the unitary Plancherel transform of [[thm-plancherel]], and on\n$L^1\\cap L^2$ the two interpretations agree almost everywhere\n([[thm-l-one-l-two-agreement-of-fourier-transform]]). For $1<p<2$ the\nextension agrees almost everywhere with the integral transform on its\nintersection with $L^1$ and with the Plancherel transform on its intersection\nwith $L^2$. No statement for $p>2$ and no pointwise representative identity is\nclaimed.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-lp-and-euclidean-test-function-conventions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A finite-valued function $f=u+iv:X\\to\\mathbb C$ is **measurable** when $u,v$ are real measurable functions. Write\n$$N_p(f)=\\begin{cases}\\left(\\int_X|f|^p\\,d\\mu\\right)^{1/p},&\\displaystyle\\int_X|f|^p\\,d\\mu<\\infty,\\\\+\\infty,&\\displaystyle\\int_X|f|^p\\,d\\mu=+\\infty,\\end{cases}\\quad(1\\le p<\\infty),\\qquad N_\\infty(f)=\\inf\\{M\\in[0,\\infty]:|f|\\le M\\text{ a.e.}\\}.$$\nThe finite case uses the real power; the infinite case is assigned directly,\nso $N_p(f)$ is defined for every measurable finite-valued complex $f$.\nThe infimum of the empty set of finite bounds is $\\infty$; equivalently allow $M=\\infty$. Define $\\mathcal L^p(\\mu;\\mathbb C)=\\{f:f\\text{ measurable},N_p(f)<\\infty\\}$ and its **set quotient** $L^p(\\mu;\\mathbb C)=\\mathcal L^p/\\!\\sim$, where $f\\sim g$ means $f=g$ a.e. This extends [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-essential-supremum-with-respect-to-a-measure]]. Norm and vector-space assertions are established separately.\n\nHere $|u+iv|=\\sqrt{u^2+v^2}$ and $\\overline{u+iv}=u-iv$ as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. These operations preserve measurability: $u^2+v^2$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and\n$$\\{|f|>a\\}=\\begin{cases}\\{u^2+v^2>a^2\\},&a\\ge0,\\\\X,&a<0.\\end{cases}$$\nThus [[thm-threshold-characterisations-of-real-and-extended-real-measurability]] applies. For $g=a+ib$, the formulas $fg=(ua-vb)+i(ub+va)$ and $\\overline f=u-iv$ prove the remaining claims by real arithmetic closure. Nonnegative powers are measurable because $\\{r^t>b\\}=\\{r>b^{1/t}\\}$ for $r\\ge0,t>0,b\\ge0$, with the negative thresholds automatic.\n\nA **finite simple** complex function has finite range and measurable fibers. Its **finite-measure support** condition is $\\mu(\\{s\\ne0\\})<\\infty$. This concerns the nonzero set, not compactness of its closure. The zero function is an admissible finite simple function, including when $X=\\varnothing$ or $\\mu(X)=0$.\n\nIntegration is componentwise: for integrable $f=u+iv$,\n$$\\int f\\,d\\mu=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$\nThis is the earlier convention of [[def-integrable-real-and-complex-functions-and-their-integrals]] and [[def-l-one-of-a-measure]]. The inequalities $|u|,|v|\\le|f|\\le|u|+|v|$ show that integrability of the modulus and integrability of both components are equivalent.\n\nFor $n\\ge1$, define complex $C_c(\\mathbb R^n)$, $C_0(\\mathbb R^n)$ and $C_c^\\infty(\\mathbb R^n)$ by requiring both components to lie in the corresponding real spaces ([[def-c-c-and-c-c-infinity-on-rn]], [[def-c-zero-on-rn]]). Derivatives are componentwise, with the multi-index and all-ordered-partials conventions of [[def-ck-and-multi-index-notation-in-several-variables]]. The union of the two compact component supports is compact. A measurable complex $f$ is **locally integrable** for Lebesgue measure if $\\int_K|f|<\\infty$ on every compact $K$. The component inequalities give the equivalent componentwise condition. By [[thm-heine-borel-rn]], closed bounded balls are compact and each compact set is bounded. Hence compact integrability implies integrability on every bounded open ball by restriction from its closure; conversely each compact set is contained in a bounded open ball. These prove both directions of the ball formulation.\n\nFor a topological $X$ with Borel sets contained in $\\mathcal A$, define\n$$\\operatorname{ess\\,supp}_\\mu f=X\\setminus\\bigcup\\{U:U\\text{ open and }f=0\\text{ a.e. on }U\\}.$$\nChanging $f$ on one measurable null set preserves the zero-a.e. property on every $U$, since the union of that set and the old exceptional set is null. Thus essential support depends only on the a.e. class. Ordinary support means $\\overline{\\{f\\ne0\\}}$ and can change with the representative.\n\nFor the following illustration assume [[def-countable-choice]]. For $f=\\mathbf1_{\\mathbb Q}$ on $\\mathbb R$, [[prop-countable-subsets-of-rn-are-lebesgue-null]] gives $f=0$ Lebesgue-a.e.; therefore $N_\\infty(f)=0$ and $\\operatorname{ess\\,supp}f=\\varnothing$, since $U=\\mathbb R$ occurs in the union. But [[lem-q-and-irrationals-dense-r]] gives $\\overline{\\{f\\ne0\\}}=\\mathbb R$. For the Dirac probability measure at zero ([[def-dirac-measure]], [[prop-dirac-measure-is-a-probability-measure]]), the bound $1$ holds everywhere and every $0\\le M<1$ fails on $\\{0\\}$, of measure one. Thus $N_{\\infty,\\delta_0}(f)=1$.\n\nThe raw $L^2$ pairing convention is $\\langle f,g\\rangle=\\int f\\overline g$, linear in the first variable. Its integrability and class invariance are obligations of the later pairing items. **Bilinear tests** instead use $\\int fs$, with no conjugation of $s$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$. With the complex smooth-function convention of [[def-complex-lp-and-euclidean-test-function-conventions]] and multi-indices of [[def-ck-and-multi-index-notation-in-several-variables]], define\n$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$\nThe zero multi-index gives $x^0=1$ and $\\partial^0f=f$. These are actual smooth functions, not equivalence classes. The notation $C_c^\\infty$ uses the support convention in [[def-c-c-and-c-c-infinity-on-rn]].\n\nPointwise differentiation is linear; thus $p_{\\alpha\\beta}(f+g)\\le p_{\\alpha\\beta}(f)+p_{\\alpha\\beta}(g)$ and $p_{\\alpha\\beta}(cf)=|c|p_{\\alpha\\beta}(f)$. In particular this set is a complex vector space and each $p_{\\alpha\\beta}$ is a seminorm. The zero function belongs to it. Since $p_{00}(f)=0$ forces $f(x)=0$ for every $x$, the family separates functions. No choice principle is needed.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-unit-sphere-is-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and let $n\\ge2$. The unit sphere $S^{n-1}$ satisfies $\\lambda_n(S^{n-1})=0$, where $\\lambda_n$ is $n$-dimensional Lebesgue measure. Proof route: apply the polar-coordinate formula to the Borel indicator of $S^{n-1}$; the inner integral vanishes unless $r=1$, so the double integral is zero because a single radius is a null set in $(0,\\infty)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to[0,+\\infty]$ is measurable and $\\int f\\,d\\mu<+\\infty$, then\n$f(x)<+\\infty$ for almost every $x$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The two representatives coincide almost everywhere. The function $\\mathbf 1_{S^{n-1}}$ is Borel measurable by [F2], and $G=\\widehat f+\\mathbf 1_{S^{n-1}}$ is measurable. Since $S^{n-1}$ is Lebesgue null by [F3], $G=\\widehat f$ almost everywhere. Hence $\\int|G|^{p'}=\\int|\\widehat f|^{p'}<\\infty$ (the transform of a Schwartz function is Schwartz, in particular integrable in every power), and $G$ belongs to $L^{p'}(\\mathbb R^n)$ and represents the same class as $\\widehat f$, namely $F=\\mathcal F_pf$: two almost-everywhere equal integrable functions define the same quotient class by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "The restrictions differ at every point of the sphere. By construction $G(\\omega)=\\widehat f(\\omega)+1$ for every $\\omega\\in S^{n-1}$, so the pointwise restrictions satisfy $G|_{S^{n-1}}=\\widehat f|_{S^{n-1}}+\\mathbf 1_{S^{n-1}}$. The difference is $1$ at every point of the nonempty sphere $S^{n-1}$, so the two restrictions are different functions on $S^{n-1}$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The refutation. Suppose that the pointwise restriction were well defined by the ambient $L^{p'}$ class, that is, that two representatives of one class always have equal restrictions to $S^{n-1}$. Steps 1.1 and 1.2 exhibit two representatives $\\widehat f$ and $G$ of the same class $F=\\mathcal F_pf$ whose restrictions differ everywhere on $S^{n-1}$; this contradicts the supposition. Therefore pointwise restriction is not well defined on $L^{p'}$ classes.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "The correct convention. The restriction operator $R_0$ of [[def-fourier-restriction-and-adjoint-extension-operators]] is defined on the actual functions $\\widehat f$ with $f\\in\\mathcal S(\\mathbb R^n)$, where the pointwise values exist, and a restriction estimate $R:L^p(\\mathbb R^n)\\to L^2(\\sigma)$ is then obtained only as the unique bounded extension of $R_0$ across a dense subspace; no pointwise restriction of a general ambient class is asserted.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Counterexample: the modification $G$ differs from $\\widehat f$ only on the null sphere, and the empty-set convention for that null set is immaterial."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Counterexample: $f$ is chosen nonzero, so both restrictions are nonzero; the zero modification would be trivial and is not used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Counterexample: $1<p<2$ is the stated range, and the construction is uniform in $p$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Counterexample: no regularity or nondegeneracy beyond $f\\in\\mathcal S$ and $n\\ge2$ is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Counterexample: no limiting parameter occurs; the two representatives and their restrictions are fixed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Counterexample: Countable Choice is declared for the Hausdorff-Young transform interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Counterexample: the item refutes a single well-definedness claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Counterexample: the item refutes a single well-definedness claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-6",
+        "notes": "Four counterexample steps and all six supplier interfaces reviewed. Under AComega, n>=2 and 1<p<2, Hausdorff-Young agrees a.e. with the Schwartz integral transform. G=Fhat+1_S is measurable and agrees ambient-a.e. with Fhat because S is null, while its restriction differs by one at every sphere point. Nonempty sphere makes the witness strict; no special nonzero Fourier value is required, and even zero data would work. The conclusion concerns arbitrary representatives, preserving the unique continuous representative convention on Schwartz data and the separately bounded restriction extension. Merz section 1 p.4 supports the obstruction. No current defect found. This reviews current mathematics only; the independent historical-delta disposition remains open."
+      }
+    },
+    "thm-stein-tomas-spherical-restriction-theorem": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-sphere-finite-graph-charts-and-surface-density",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and let $n\\ge2$. For each $i\\in\\{1,\\dots,n\\}$ and each sign $\\varepsilon\\in\\{\\pm1\\}$ the map $X_i^\\varepsilon(y)=(y_1,\\dots,y_{i-1},\\varepsilon\\sqrt{1-|y|^2},y_i,\\dots,y_{n-1})$, defined on the open unit ball $B\\subseteq\\mathbb R^{n-1}$, is a $C^\\infty$ graph chart onto the hemisphere $\\{\\varepsilon x_i>0\\}$, and the $2n$ hemispheres cover $S^{n-1}$. On such a chart the polar surface measure $\\sigma$ has Lebesgue density $\\sqrt{1+|\\nabla h|^2}=(1-|y|^2)^{-1/2}$, and the graphing function $h=\\varepsilon\\sqrt{1-|y|^2}$ satisfies $\\det D^2h=(-\\varepsilon)^{n-1}(1-|y|^2)^{-(n+1)/2}\\neq0$ on all of $B$. There exist finitely many nonnegative $C^\\infty$ functions $\\chi_1,\\dots,\\chi_m$ on $S^{n-1}$ with $\\sum_j\\chi_j=1$, each compactly supported in the image of one of these charts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-stein-tomas-tt-star-bound-from-fractional-integration",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $n\\ge2$ and let $U,h,a,\\mu$ be as in [[lem-graph-patch-extension-family-has-dispersive-and-ltwo-slice-bounds]], with $\\det D^2h\\neq0$ on $\\operatorname{supp}a$. Set $p=2(n+1)/(n+3)$, so that $p'=2(n+1)/(n-1)$ and $1/p-1/p'=2/(n+1)$. Then $\\|f*\\check\\mu\\|_{L^{p'}(\\mathbb R^n)}\\le C_a\\|f\\|_{L^p(\\mathbb R^n)}$ for every $f\\in\\mathcal S(\\mathbb R^n)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-graph-patch-extension-family-has-dispersive-and-ltwo-slice-bounds",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses and notation of [[lem-localized-curved-patch-measure-transform-decay]] ($U,h,a$ with $\\det D^2h\\neq0$ on $\\operatorname{supp}a$, and $\\mu$ the localized graph measure). Put $K(x',t)=\\check\\mu(x',t)=\\int e^{2\\pi i(x'\\cdot\\eta+th(\\eta))}a(\\eta)\\sqrt{1+|\\nabla h(\\eta)|^2}\\,d\\eta$ and $U(t)g(x')=\\int K(x'-y',t)g(y')\\,dy'$ for $g\\in\\mathcal S(\\mathbb R^{n-1})$. Then (i) $|K(x',t)|\\le C_a\\langle t\\rangle^{-(n-1)/2}$ and hence $\\|U(t)g\\|_\\infty\\le C_a\\langle t\\rangle^{-(n-1)/2}\\|g\\|_1$; (ii) the partial Fourier transform satisfies $\\widehat{K(\\cdot,t)}(\\xi')=e^{2\\pi ith(\\xi')}a(\\xi')\\sqrt{1+|\\nabla h(\\xi')|^2}$ for $\\xi'\\in U$ and zero outside, so $\\|U(t)g\\|_2\\le C_a\\|g\\|_2$ uniformly in $t$; (iii) for every $1\\le p\\le2$, $\\|U(t)g\\|_{p'}\\le C_a\\langle t\\rangle^{-(n-1)(1/p-1/2)}\\|g\\|_p$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tt-star-reduces-extension-to-convolution-with-surface-measure-transform",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\mu$ be a finite positive Borel measure on $\\mathbb R^n$, let $E_\\mu g=(g\\mu)^\\vee$ for $g\\in L^1(\\mu)\\cap L^2(\\mu)$, and let $E_\\mu^*F$ be the restriction of $\\widehat F$ to $\\operatorname{supp}\\mu$ for $F\\in\\mathcal S(\\mathbb R^n)$. Then $E_\\mu E_\\mu^*F=F*\\check\\mu$ for every $F\\in\\mathcal S(\\mathbb R^n)$, and for every $1\\le p\\le\\infty$, $\\|\\widehat F\\|_{L^2(\\mu)}^2=\\langle(\\widehat F\\mu)^\\vee,F\\rangle=\\langle F*\\check\\mu,F\\rangle\\le\\|F\\|_{L^p}\\|F*\\check\\mu\\|_{L^{p'}}$. In particular, for a compact hypersurface $S$ with surface measure $\\sigma$, a bound on $\\|F*\\check\\sigma\\|_{L^{p'}}$ bounds $\\|\\widehat F\\|_{L^2(\\sigma)}$.\n\nThe brackets here denote the absolutely convergent integral $\\langle H,F\\rangle=\\int H\\overline F\\,dx$, not a claim that $H\\in L^2(\\mathbb R^n)$. Positivity of $\\mu$ is essential to the squared-norm identity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-restriction-and-extension-estimates-are-dual",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and let $1<p<\\infty$ with conjugate exponent $p'$. For a compact hypersurface $S$ with surface measure $\\sigma$ and the operators $R_0,E$ of [[def-fourier-restriction-and-adjoint-extension-operators]] the following are equivalent: (a) there is $C<\\infty$ with $\\|\\widehat f\\|_{L^2(\\sigma)}\\le C\\|f\\|_{L^p}$ for all $f\\in\\mathcal S(\\mathbb R^n)$, so that $R_0$ has a unique bounded extension $R:L^p(\\mathbb R^n)\\to L^2(\\sigma)$; (b) there is $C<\\infty$ with $\\|Eg\\|_{L^{p'}(\\mathbb R^n)}\\le C\\|g\\|_{L^2(\\sigma)}$ for all $g\\in L^2(\\sigma)$. The least constants agree, and $E$ is the adjoint of $R$ under the $L^p$\u2013$L^{p\\prime}$ and $L^2(\\sigma)$ pairings: $\\int Eg\\,\\overline f\\,dx=\\int_Sg\\,\\overline{Rf}\\,d\\sigma$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-extension-of-a-bounded-map-from-a-dense-subspace",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $X$ be a normed space, let $D \\subseteq X$ be a dense normed subspace, let\n$Y$ be a Banach space, and let $T:D\\to Y$ be a bounded linear operator. Then\nthere is a unique bounded linear operator $\\widetilde T:X\\to Y$ such that\n\n$$\\widetilde T|_D = T,$$\n\nand $\\|\\widetilde T\\| = \\|T\\|$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-c-c-infinity-rn-is-dense-in-l-p-of-rn",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $1 \\le p < \\infty$. Then $C_c^\\infty(\\mathbb{R}^n)$ is dense in\n$L^p(\\mathbb{R}^n)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-lp-and-euclidean-test-function-conventions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A finite-valued function $f=u+iv:X\\to\\mathbb C$ is **measurable** when $u,v$ are real measurable functions. Write\n$$N_p(f)=\\begin{cases}\\left(\\int_X|f|^p\\,d\\mu\\right)^{1/p},&\\displaystyle\\int_X|f|^p\\,d\\mu<\\infty,\\\\+\\infty,&\\displaystyle\\int_X|f|^p\\,d\\mu=+\\infty,\\end{cases}\\quad(1\\le p<\\infty),\\qquad N_\\infty(f)=\\inf\\{M\\in[0,\\infty]:|f|\\le M\\text{ a.e.}\\}.$$\nThe finite case uses the real power; the infinite case is assigned directly,\nso $N_p(f)$ is defined for every measurable finite-valued complex $f$.\nThe infimum of the empty set of finite bounds is $\\infty$; equivalently allow $M=\\infty$. Define $\\mathcal L^p(\\mu;\\mathbb C)=\\{f:f\\text{ measurable},N_p(f)<\\infty\\}$ and its **set quotient** $L^p(\\mu;\\mathbb C)=\\mathcal L^p/\\!\\sim$, where $f\\sim g$ means $f=g$ a.e. This extends [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-essential-supremum-with-respect-to-a-measure]]. Norm and vector-space assertions are established separately.\n\nHere $|u+iv|=\\sqrt{u^2+v^2}$ and $\\overline{u+iv}=u-iv$ as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. These operations preserve measurability: $u^2+v^2$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and\n$$\\{|f|>a\\}=\\begin{cases}\\{u^2+v^2>a^2\\},&a\\ge0,\\\\X,&a<0.\\end{cases}$$\nThus [[thm-threshold-characterisations-of-real-and-extended-real-measurability]] applies. For $g=a+ib$, the formulas $fg=(ua-vb)+i(ub+va)$ and $\\overline f=u-iv$ prove the remaining claims by real arithmetic closure. Nonnegative powers are measurable because $\\{r^t>b\\}=\\{r>b^{1/t}\\}$ for $r\\ge0,t>0,b\\ge0$, with the negative thresholds automatic.\n\nA **finite simple** complex function has finite range and measurable fibers. Its **finite-measure support** condition is $\\mu(\\{s\\ne0\\})<\\infty$. This concerns the nonzero set, not compactness of its closure. The zero function is an admissible finite simple function, including when $X=\\varnothing$ or $\\mu(X)=0$.\n\nIntegration is componentwise: for integrable $f=u+iv$,\n$$\\int f\\,d\\mu=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$\nThis is the earlier convention of [[def-integrable-real-and-complex-functions-and-their-integrals]] and [[def-l-one-of-a-measure]]. The inequalities $|u|,|v|\\le|f|\\le|u|+|v|$ show that integrability of the modulus and integrability of both components are equivalent.\n\nFor $n\\ge1$, define complex $C_c(\\mathbb R^n)$, $C_0(\\mathbb R^n)$ and $C_c^\\infty(\\mathbb R^n)$ by requiring both components to lie in the corresponding real spaces ([[def-c-c-and-c-c-infinity-on-rn]], [[def-c-zero-on-rn]]). Derivatives are componentwise, with the multi-index and all-ordered-partials conventions of [[def-ck-and-multi-index-notation-in-several-variables]]. The union of the two compact component supports is compact. A measurable complex $f$ is **locally integrable** for Lebesgue measure if $\\int_K|f|<\\infty$ on every compact $K$. The component inequalities give the equivalent componentwise condition. By [[thm-heine-borel-rn]], closed bounded balls are compact and each compact set is bounded. Hence compact integrability implies integrability on every bounded open ball by restriction from its closure; conversely each compact set is contained in a bounded open ball. These prove both directions of the ball formulation.\n\nFor a topological $X$ with Borel sets contained in $\\mathcal A$, define\n$$\\operatorname{ess\\,supp}_\\mu f=X\\setminus\\bigcup\\{U:U\\text{ open and }f=0\\text{ a.e. on }U\\}.$$\nChanging $f$ on one measurable null set preserves the zero-a.e. property on every $U$, since the union of that set and the old exceptional set is null. Thus essential support depends only on the a.e. class. Ordinary support means $\\overline{\\{f\\ne0\\}}$ and can change with the representative.\n\nFor the following illustration assume [[def-countable-choice]]. For $f=\\mathbf1_{\\mathbb Q}$ on $\\mathbb R$, [[prop-countable-subsets-of-rn-are-lebesgue-null]] gives $f=0$ Lebesgue-a.e.; therefore $N_\\infty(f)=0$ and $\\operatorname{ess\\,supp}f=\\varnothing$, since $U=\\mathbb R$ occurs in the union. But [[lem-q-and-irrationals-dense-r]] gives $\\overline{\\{f\\ne0\\}}=\\mathbb R$. For the Dirac probability measure at zero ([[def-dirac-measure]], [[prop-dirac-measure-is-a-probability-measure]]), the bound $1$ holds everywhere and every $0\\le M<1$ fails on $\\{0\\}$, of measure one. Thus $N_{\\infty,\\delta_0}(f)=1$.\n\nThe raw $L^2$ pairing convention is $\\langle f,g\\rangle=\\int f\\overline g$, linear in the first variable. Its integrability and class invariance are obligations of the later pairing items. **Bilinear tests** instead use $\\int fs$, with no conjugation of $s$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For $f\\in L^1(\\mathbb R^n;\\mathbb C)$, $a,b\\in\\mathbb R^n$, and invertible real $n\\times n$ matrix $A$, put $\\tau_af(x)=f(x-a)$ and $M_bf(x)=e^{2\\pi ib\\cdot x}f(x)$. Then, at every frequency,\n$$\\widehat{\\tau_af}(\\xi)=e^{-2\\pi ia\\cdot\\xi}\\widehat f(\\xi),\\qquad\\widehat{M_bf}(\\xi)=\\widehat f(\\xi-b),\\qquad\\widehat{f\\circ A}(\\xi)=|\\det A|^{-1}\\widehat f(A^{-T}\\xi).$$\nAlso $\\widehat{f(-\\cdot)}(\\xi)=\\widehat f(-\\xi)$ and $\\widehat{\\overline f}(\\xi)=\\overline{\\widehat f(-\\xi)}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-linear-change-of-variables-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]) and let $T : \\mathbb{R}^n \\to \\mathbb{R}^n$ be linear\nwith matrix $A$ ([[def-linear-map]],\n[[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).\n\n1. **Invertible case.** If $\\det A \\ne 0$, then $T[E]$ is Lebesgue measurable for\n   every Lebesgue measurable $E$ and\n   $$\\lambda_n\\big(T[E]\\big) \\;=\\; |\\det A|\\;\\lambda_n(E),$$\n   both sides possibly $+\\infty$; the product is defined in\n   $\\overline{\\mathbb{R}}$ because $|\\det A| > 0$.\n2. **Singular case.** If $\\det A = 0$, then $T[E]$ is Lebesgue measurable with\n   $\\lambda_n(T[E]) = 0$ for **every** $E \\subseteq \\mathbb{R}^n$.\n\n**The singular clause is stated as nullity and not as a product.** When\n$\\det A = 0$ and $\\lambda_n(E) = +\\infty$ the expression\n$|\\det A|\\,\\lambda_n(E)$ is $0\\cdot(+\\infty)$, which [[def-extended-reals]]\nleaves undefined; writing the conclusion as $\\lambda_n(T[E]) = 0$ says the same\nthing wherever the product is defined and remains a statement where it is not.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-knapp-necessary-condition-for-spherical-ltwo-restriction",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice, let $n\\ge2$, and take $p,q\\in[1,\\infty]$. (a) If there is $C<\\infty$ with $\\|\\widehat f\\|_{L^2(\\sigma)}\\le C\\|f\\|_{L^p(\\mathbb R^n)}$ for all $f\\in\\mathcal S(\\mathbb R^n)$, then $p\\le2(n+1)/(n+3)$. Equivalently, if $E:L^2(S^{n-1})\\to L^q(\\mathbb R^n)$ satisfies $\\|Eg\\|_q\\le C\\|g\\|_{L^2(\\sigma)}$ for all $g\\in L^2(\\sigma)$, then $q\\ge2(n+1)/(n-1)$. (b) The necessity is exhibited by the cap data $g=\\mathbf 1_{C_\\delta}$ and the limit $\\delta\\downarrow0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conjugate-exponents",
+          "source_section": "Definition",
+          "quote": "Numbers $p,q \\in [1,\\infty]$ are **conjugate exponents** when\n\n$$\\frac1p+\\frac1q=1,$$\n\nwith the convention $1/\\infty:=0$. Thus the endpoint pairs $(1,\\infty)$ and\n$(\\infty,1)$ are conjugate, and if $1<p<\\infty$ then the conjugate of $p$ is\n\n$$q=\\frac{p}{p-1}.$$\n\nNo other endpoint pair is conjugate: $(1,1)$ gives $2$, while\n$(\\infty,\\infty)$ gives $0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For $f\\in L^1(\\mathbb R^n;\\mathbb C)$, $a,b\\in\\mathbb R^n$, and invertible real $n\\times n$ matrix $A$, put $\\tau_af(x)=f(x-a)$ and $M_bf(x)=e^{2\\pi ib\\cdot x}f(x)$. Then, at every frequency,\n$$\\widehat{\\tau_af}(\\xi)=e^{-2\\pi ia\\cdot\\xi}\\widehat f(\\xi),\\qquad\\widehat{M_bf}(\\xi)=\\widehat f(\\xi-b),\\qquad\\widehat{f\\circ A}(\\xi)=|\\det A|^{-1}\\widehat f(A^{-T}\\xi).$$\nAlso $\\widehat{f(-\\cdot)}(\\xi)=\\widehat f(-\\xi)$ and $\\widehat{\\overline f}(\\xi)=\\overline{\\widehat f(-\\xi)}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linear-change-of-variables-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]) and let $T : \\mathbb{R}^n \\to \\mathbb{R}^n$ be linear\nwith matrix $A$ ([[def-linear-map]],\n[[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).\n\n1. **Invertible case.** If $\\det A \\ne 0$, then $T[E]$ is Lebesgue measurable for\n   every Lebesgue measurable $E$ and\n   $$\\lambda_n\\big(T[E]\\big) \\;=\\; |\\det A|\\;\\lambda_n(E),$$\n   both sides possibly $+\\infty$; the product is defined in\n   $\\overline{\\mathbb{R}}$ because $|\\det A| > 0$.\n2. **Singular case.** If $\\det A = 0$, then $T[E]$ is Lebesgue measurable with\n   $\\lambda_n(T[E]) = 0$ for **every** $E \\subseteq \\mathbb{R}^n$.\n\n**The singular clause is stated as nullity and not as a product.** When\n$\\det A = 0$ and $\\lambda_n(E) = +\\infty$ the expression\n$|\\det A|\\,\\lambda_n(E)$ is $0\\cdot(+\\infty)$, which [[def-extended-reals]]\nleaves undefined; writing the conclusion as $\\lambda_n(T[E]) = 0$ says the same\nthing wherever the product is defined and remains a statement where it is not.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Summing the graph-patch bounds. Let $\\sigma=\\sum_j\\mu_j$ with $\\mu_j=\\chi_j\\sigma$ the finite chart localization of [F1]. For $f\\in\\mathcal S(\\mathbb R^n)$, rotate each patch to graph coordinates; orthogonal changes preserve Lebesgue norms and Schwartz space, and chart translations only modulate the data by a unit character. Thus [F2] applies in ambient coordinates. Now $\\check\\sigma=\\sum_j\\check\\mu_j$ and hence $f*\\check\\sigma=\\sum_jf*\\check\\mu_j$ as everywhere-defined bounded continuous functions. By [F2] and the triangle inequality for $L^{p_0'}$, $$\\Bigl\\|\\sum_jf*\\check\\mu_j\\Bigr\\|_{p_0'}\\le\\sum_j\\|f*\\check\\mu_j\\|_{p_0'}\\le\\Bigl(\\sum_jC_j\\Bigr)\\|f\\|_{p_0}=:C_n\\|f\\|_{p_0}.$$ This is the convolution bound at the endpoint.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The restriction bound at $p_0$. Applying the $TT^*$ identity [F3] to the sum of step 1.1, $$\\|\\widehat f\\|_{L^2(\\sigma)}^2=\\langle f*\\check\\sigma,f\\rangle\\le\\|f*\\check\\sigma\\|_{p_0'}\\|f\\|_{p_0}\\le C_n\\|f\\|_{p_0}^2,$$ so $\\|\\widehat f\\|_{L^2(\\sigma)}\\le C_n^{1/2}\\|f\\|_{p_0}$, which is (a).",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "By [F4], the endpoint restriction estimate gives $\\|Eg\\|_{q_0}\\le C_n^{1/2}\\|g\\|_2$. Also $\\|Eg\\|_\\infty\\le\\sigma(S^{n-1})^{1/2}\\|g\\|_2$ by the definition. Applying [F5] with $\\theta=q_0/q$ gives $\\|Eg\\|_q\\le(C_n^{1/2})^\\theta\\sigma(S^{n-1})^{(1-\\theta)/2}\\|g\\|_2$ for $q_0\\le q<\\infty$, and the supremum estimate gives $q=\\infty$. For $1<p\\le p_0$, duality gives the unique restriction extensions with the same norms. At $p=1$, $\\|R_0f\\|_2\\le\\sigma(S^{n-1})^{1/2}\\|f\\|_1$ directly; density and completeness give its unique extension. The pairing $\\int Eg\\overline f=\\int g\\overline{Rf}\\,d\\sigma$ extends from Schwartz tests by H\u00f6lder, also for $p=1$. Conversely, norm testing in $L^2(\\sigma)$ shows that each restriction norm is bounded by its extension norm; testing the extension against $L^1$ functions gives the reverse inequality at $p=1$. Thus the adjoint pairing and equality of norms hold throughout the asserted range.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Sharpness. By [F6], the existence of a restriction estimate at exponent $p$ forces $p\\le p_0$, and the existence of an $L^2(\\sigma)\\to L^q$ extension estimate forces $q\\ge q_0$; the Knapp cap family $g=\\mathbf 1_{C_\\delta}$ with $\\delta\\downarrow0$ exhibits both failures. This proves (c).",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "Conclusion. Steps 1.1\u20132.1 prove the endpoint restriction bound (a), step 3.1 gives the full range and the adjoint formulation (b), and step 4.1 records sharpness (c) from the Knapp necessary condition.",
+          "step": "5.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the zero function satisfies all three clauses with equality zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the frequency domain is all of $\\mathbb R^n$; the case of the zero function is included and trivial."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: $n=2$ is included and gives $p_0=6/5$, $q_0=6$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes the sphere; step 1.1 uses graph Hessian nondegeneracy, whose determinants are computed in the sphere-chart supplier and are not constant away from zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 proves q=infinity directly and p=1 by the integral transform estimate plus dense extension. The paired adjoint is a Banach dual pairing, not an ambient Hilbert adjoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is declared and inherited through the chart, endpoint and duality suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: part (a) at $p_0$ implies the extension bound at $q_0$ by duality, and the range follows by interpolation, as the statement records."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: the extension bound at $q_0$ implies the restriction estimate at $p_0$ by the same duality; sharpness in part (c) is the exact negation at the endpoint."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-6",
+        "notes": "All five steps and sixteen declared supplier interfaces reviewed. Sphere Hessians are nondegenerate throughout each chart, not constant there; finite nonnegative compact weights yield positive localizations. Orthogonal graph-coordinate transfers preserve norms. Finite patch convolution bounds and positive-measure TT* prove the endpoint; the elementary Lq0/Linfinity inequality supplies q>=q0 with theta=q0/q. Finite-p duality proves 1<p<=p0; p=1 uses its direct L1 transform bound and dense extension, with adjoint pairing extended by Holder. Norm testing against L1 gives equality of norms at p=1; zero g/S cases cause no division. The Knapp theorem includes p=infinity, so sharpness is valid for the stated [1,infinity] exponent domain. F4 now explicitly states the duality supplier range 1<p<infinity. Current claim is fully supported; Williams printed-page locator needs correction. This reviews current mathematics only; the independent historical-delta disposition remains open. Source locator corrected to the actual printed location: Theorem 11.1, printed p.71, Proposition 11.3, p.72, and \u00a711.3 proof, pp.73\u201374, equations (11.10)\u2013(11.17). Nonzero curvature is retained explicitly in the local statement."
+      }
+    },
+    "lem-unit-sphere-is-lebesgue-null": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n \\ge 1$,\nlet $S^{n-1} \\subseteq \\mathbb R^n$ be the unit sphere, and let $\\sigma$ be the\nset function of [[def-polar-surface-measure-on-the-unit-sphere]]. Then $\\sigma$\nis a finite Borel measure on $S^{n-1}$, and for every Borel measurable\n$f : \\mathbb R^n \\to [0,\\infty]$,\n$$\\int_{\\mathbb R^n} f(x)\\,d\\lambda_n(x) = \\int_0^\\infty \\int_{S^{n-1}} f(r\\omega) r^{n-1}\\,d\\sigma(\\omega)\\,dr.$$\nMoreover, $\\sigma$ is the unique Borel measure on $S^{n-1}$ with this\nproperty.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-polar-surface-measure-on-the-unit-sphere",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Fix $n \\ge 1$\nand write\n$$S^{n-1}:=\\{\\omega \\in \\mathbb R^n : |\\omega|=1\\}.$$\nLet\n$$\\Phi:\\mathbb R^n\\setminus\\{0\\}\\longrightarrow(0,\\infty)\\times S^{n-1},\\qquad \\Phi(x)=(|x|,x/|x|).$$\nThis map is continuous. If $E\\subseteq S^{n-1}$ is Borel, then\n$(0,1]\\times E$ is Borel and\n$$\\{r\\omega:\\omega\\in E,\\ 0<r\\le1\\}=\\Phi^{-1}((0,1]\\times E)$$\nis Borel in $\\mathbb R^n\\setminus\\{0\\}$ by\n[[thm-continuous-preimages-of-borel-sets-are-borel]], hence Borel in\n$\\mathbb R^n$ by [[thm-borel-sigma-algebra-of-a-subspace-is-the-trace]]. It is\ntherefore Lebesgue measurable by [[thm-borel-sets-are-lebesgue-measurable]].\nDefine\n$$\\sigma(E):=n\\,\\lambda_n(\\{r\\omega : \\omega \\in E,\\ 0<r\\le 1\\}).$$\n\nThe next theorem proves that this is a Borel measure on $S^{n-1}$ and that it\nis exactly the surface measure needed for polar coordinates.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple ([[def-nonnegative-simple-measurable-function]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let\n$f:X\\to[0,+\\infty]$ be measurable, and let $E\\in\\mathcal A$. Since\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]\nimplies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$**\nby\n$$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$\nwhere the integral on the right is the nonnegative Lebesgue integral of\n[[def-nonnegative-lebesgue-integral]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple ([[def-nonnegative-simple-measurable-function]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Every at most countable subset $E \\subseteq \\mathbb{R}^n$\n([[def-countable]]) is Lebesgue measurable with\n\n$$\\lambda_n(E) \\;=\\; 0,$$\n\nso $E$ is a $\\lambda_n$-null set ([[def-measure-null-set-and-almost-everywhere]]).\nIn particular every singleton is null, and on the real line the set\n$\\mathbb{Q}_{\\mathbb{R}}$ of rational reals ([[lem-rat-embeds-dense]]) satisfies\n$\\lambda_1(\\mathbb{Q}_{\\mathbb{R}}) = 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The section integral. Fix $r>0$. For every $\\omega\\in S^{n-1}$ one has $|r\\omega|=r$, so $r\\omega\\in S^{n-1}$ if and only if $r=1$. Hence $\\mathbf 1_{S^{n-1}}(r\\omega)=\\mathbf 1_{\\{1\\}}(r)$ for every $\\omega$, and by [F3] and [F1], $$\\int_{S^{n-1}}\\mathbf 1_{S^{n-1}}(r\\omega)\\,d\\sigma(\\omega)=\\int_{S^{n-1}}\\mathbf 1_{\\{1\\}}(r)\\,d\\sigma(\\omega)=\\mathbf 1_{\\{1\\}}(r)\\,\\sigma(S^{n-1}).$$ The factor $\\sigma(S^{n-1})$ is finite by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The polar integral. The function $f=\\mathbf 1_{S^{n-1}}$ is Borel and nonnegative by [F2], so the polar-coordinate formula [F1] applies and, with the section computation of step 1.1, $$\\lambda_n(S^{n-1})=\\int_{\\mathbb R^n}\\mathbf 1_{S^{n-1}}\\,d\\lambda_n=\\int_0^\\infty\\Bigl[\\int_{S^{n-1}}\\mathbf 1_{S^{n-1}}(r\\omega)\\,d\\sigma(\\omega)\\Bigr]r^{n-1}\\,dr=\\sigma(S^{n-1})\\int_0^\\infty\\mathbf 1_{\\{1\\}}(r)\\,r^{n-1}\\,dr.$$",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "1.1",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "The radial integral vanishes. The function $r\\mapsto\\mathbf 1_{\\{1\\}}(r)r^{n-1}$ is nonnegative, measurable and vanishes for every $r\\ne1$; the singleton $\\{1\\}$ is Lebesgue null in $(0,\\infty)$ by [F4], so the function vanishes almost everywhere. By [F5] its integral over $(0,\\infty)$ is $0$, and since $\\sigma(S^{n-1})<\\infty$ the right-hand side of step 2.1 is $\\sigma(S^{n-1})\\cdot0=0$. Therefore $\\lambda_n(S^{n-1})=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Conclusion. Steps 1.1\u20133.1 evaluate the polar-coordinate formula at $\\mathbf 1_{S^{n-1}}$ and prove $\\lambda_n(S^{n-1})=0$ for every $n\\ge2$; Countable Choice is inherited exactly from the polar-coordinate, sigma-finite Tonelli, null-set and integral-interface suppliers.",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "3.1",
+            "F1",
+            "F6",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the empty set is null; the sphere itself is nonempty for $n\\ge2$ and the argument applies to it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the inner integral vanishes except at the single radius $r=1$, which is a null set; the outer integral is therefore zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: $n=2$ is the circle case and the polar formula applies verbatim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: no regularity beyond the polar-coordinate formula is used, so degenerate slices cause no difficulty."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the radial integration has the exceptional endpoint $r=1$; the proof shows a single radius contributes zero measure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is declared for the polar-coordinate and sigma-finite Tonelli interfaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the item proves a single equality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the item proves a single equality, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-6",
+        "notes": "Reviewed all four proof steps and exact polar, singleton-nullity and indicator-integral supplier statements. The Borel indicator has radial section 1_{1}(r) sigma(S); sigma is finite, and the singleton radial integral vanishes. No infinite-times-zero ambiguity occurs. n>=2 and AComega meet all used interfaces. No current mathematical defect found; reader reports source-locator corrections rather than a changed polar proof. This reviews current mathematics only; the independent historical-delta disposition remains open."
+      }
+    }
+  }
+}

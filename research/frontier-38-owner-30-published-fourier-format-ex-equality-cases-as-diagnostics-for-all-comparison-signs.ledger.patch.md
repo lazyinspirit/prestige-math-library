@@ -1,0 +1,11 @@
+<!-- local-published-repair:frontier-38-owner-30:ex-equality-cases-as-diagnostics-for-all-comparison-signs:format-v1:begin -->
+### ex-equality-cases-as-diagnostics-for-all-comparison-signs: proof paragraph formatting
+
+- Read the full published claim, Facts, dependencies, Choice assumptions and operative proof. Joined 14 numbered title/body/tag paragraphs; relocated 10 existing title tag groups, removing only duplicated justification references already present at the tail. No new tags. Root authorized the label-only canonical stratification under the exact bijection recorded in the report; every step argument was compared exactly after that substitution, and the source-locator reference follows the same map.
+- Semantic comparison ignoring verification metadata, whitespace, justification tag placement and the verified proof-label bijection is identical; every mathematical word, number and symbol is preserved. Statement/Example, Facts, sources, hypotheses and dependencies are byte-identical. No consumer interface changed.
+- Current content guard hash: aaa3fc711f0d0d63f9f0ca83d0fed36ef4b784c36ce296ab53f50a3c930641f2. Prior content guard hash: 0fdad3d730465669d75e1f7deba1b60d4cace323b6735522eab33c83879c1003. Before raw hash: 846458592dbab3543588278215cc58cd8a751bbd7d07c9899bb7a617bc09a7b4.
+- Preserved carrier: research/frontier-38-owner-30-published-fourier-format-ex-equality-cases-as-diagnostics-for-all-comparison-signs.before.md. Receipt: research/frontier-38-owner-30-published-fourier-format-ex-equality-cases-as-diagnostics-for-all-comparison-signs-receipt.json. Prior audit metadata is preserved only in the before carrier; current verification points to local repair evidence, not a new audit.
+- Focused explicit proof-layout, precheck and real rendercheck each passed on the current carrier. Local check outputs: research/frontier-38-owner-30-published-fourier-format-ex-equality-cases-as-diagnostics-for-all-comparison-signs-checks.json.
+- Mathematical uncertainty: No additional mathematical uncertainty identified during this bounded formatting review; no new mathematical audit asserted.
+- Root integrates this private ledger evidence and ownership patch into canonical records.
+<!-- local-published-repair:frontier-38-owner-30:ex-equality-cases-as-diagnostics-for-all-comparison-signs:format-v1:end -->

@@ -1,0 +1,266 @@
+{
+  "run": "frontier-38-owner-30",
+  "phase": "initial",
+  "round": 1,
+  "unit": "9",
+  "input_sha256": "04631c851c21cc7346bc450d030f784cd29d0320411265cce0e01b96cd5fa59e",
+  "decisions": [
+    {
+      "id": "thm-robinson-schensted-correspondence",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "15f393c8643d09c83bdcf9d62ed953869dbb9d9f7ddfce385c85aa5d879ef272",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Step 2.1 establishes insertion after deletion, which alone does not imply injectivity. Step 3.1 omitted deletion after insertion. Added the missing direction of the existing inverse lemma to F4 and proved recovery of the original word by descending induction through the recording labels. No Statement change.",
+      "uncertain": false,
+      "source_urls": [
+        "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-empty-and-singleton-rsk-boundaries",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "570c722a7506936b4a3ab33d5dbefb7a95214a518291f425ac9585c7acc73d60",
+      "outcome": "confirmed_nonfatal",
+      "reason": "L4 cites the hook-length theorem and hook definition for the general removal recursion, but their Statement/Definition interfaces do not supply that recursion. The boundary counts themselves are correct and already computed directly. Replaced the theorem citation in L4 by the existing removal-recursion lemma and declared the direct dependency; its n>=1 restriction and empty-tableau exception exactly match the example.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-rsk-insertion-and-reverse-deletion",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "f1c80c61913abe4e36e0761054ed0f4cb739e6d3f4e8027713f7c6f8186327eb",
+      "outcome": "confirmed_nonfatal",
+      "reason": "L3 incorrectly says reverse deletion moves downward, contradicting the supplied definition, which visits s,s-1,...,1. The concrete deletion computations in steps 5.1 and 6.1 already move upward and are correct. Corrected L3 and made both inverse directions explicit. Also repaired the compressed third insertion in 1.1: 1 bumps 4 in row 1, which bumps 6 in row 2 before 6 appends in row 3.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-robinson-schensted-correspondence",
+      "disposition": "repaired",
+      "post_sha256": "cbb0a794244e2b48413d6fa4321f123b1751f0a503f1adc452cf913f46adb55a",
+      "review_context_sha256": "a8043228ee45b1ef384edf4589795a6ffca7f4803b7095b372b15d9cf3b2bf1e",
+      "reason": "Checked both parts of the inverse lemma and its complete local proof, insertion standardness and entry preservation, recording standardness, and the largest-label corner lemma. F4 and step 3.1 now recover each original letter; step 2.1 restores arbitrary pairs and step 3.2 verifies the recovered alphabet. Intermediate tableaux explicitly use the distinct-alphabet convention. Empty n=0 is explicit. This is a local repair review, not an independent audit of the repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-empty-and-singleton-rsk-boundaries",
+      "disposition": "repaired",
+      "post_sha256": "56888115d9b0fa664260ea616d8f9b9fbb75313e0f1ecd1b06994a3686eba606",
+      "review_context_sha256": "a3aad0f65b5ec1680dea9cadd9c08e09ba211aa29609da18d293aac669f5b4b4",
+      "reason": "Read the removal-recursion lemma and its complete deletion/extension bijection proof, the hook definition and formula, and the repaired correspondence. Verified empty and singleton insertion directly, hook products 1, factorial values 1, absence of a removable empty node, and the single singleton corner. L4 now cites the exact recursion supplier; no Example, Statement, or Definition change and no choice use.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-rsk-insertion-and-reverse-deletion",
+      "disposition": "repaired",
+      "post_sha256": "29a197316f4c6e6e40b42b628b708148b23bfcece81501f9a41e6354b0772c52",
+      "review_context_sha256": "26338a016a3512f7a3c8aa60f6aaa7f72c9e9bdc4de55a9c2c269b93c32602b3",
+      "reason": "Manually checked the cycle-to-word conversion (6,4,1,2,5,3), all six insertion tableaux and recording positions, and each reverse deletion using the supplied row rules. The new boxes are (1,1),(2,1),(3,1),(1,2),(1,3),(2,2); deleting labels 6,...,1 expels 3,5,2,1,4,6 and restores each previous pair. Corrected only L3, the third insertion explanation, and proof provenance; the displayed Example is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "frontier-38-owner-30-step7-initial-r1-u9-1",
+        "run": "frontier-38-owner-30",
+        "at": "2026-10-03T16:25:13.511315+00:00",
+        "class": "accuracy",
+        "subclass": "invalid-inference",
+        "severity": "fatal",
+        "location": "proof-step",
+        "subject": "thm-robinson-schensted-correspondence",
+        "caught_at_stage": "6-judge",
+        "caught_by_role": "judge-sol",
+        "disposition": "fixed",
+        "description": "Step 2.1 establishes insertion after deletion, which alone does not imply injectivity. Step 3.1 omitted deletion after insertion. Added the missing direction of the existing inverse lemma to F4 and proved recovery of the original word by descending induction through the recording labels. No Statement change.",
+        "repair": "Checked both parts of the inverse lemma and its complete local proof, insertion standardness and entry preservation, recording standardness, and the largest-label corner lemma. F4 and step 3.1 now recover each original letter; step 2.1 restores arbitrary pairs and step 3.2 verifies the recovered alphabet. Intermediate tableaux explicitly use the distinct-alphabet convention. Empty n=0 is explicit. This is a local repair review, not an independent audit of the repair.",
+        "locator": "Proof 3.1 and F4",
+        "adjudication_ref": [
+          {
+            "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json",
+            "id": "thm-robinson-schensted-correspondence",
+            "model": "gpt-6.1-sol",
+            "context_sha256": "15f393c8643d09c83bdcf9d62ed953869dbb9d9f7ddfce385c85aa5d879ef272",
+            "phase": "initial",
+            "round": 1,
+            "unit": "9"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "items/thm-robinson-schensted-correspondence.md",
+            "post_sha256": "cbb0a794244e2b48413d6fa4321f123b1751f0a503f1adc452cf913f46adb55a"
+          },
+          {
+            "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json"
+          }
+        ],
+        "prevention": {
+          "kind": "brief",
+          "ref": "briefs/step7-adjudicator.md"
+        }
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "frontier-38-owner-30-step7-initial-r1-u9-2",
+        "run": "frontier-38-owner-30",
+        "at": "2026-10-03T16:25:13.511315+00:00",
+        "class": "accuracy",
+        "subclass": "citation-misattributed",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "ex-empty-and-singleton-rsk-boundaries",
+        "caught_at_stage": "6-judge",
+        "caught_by_role": "judge-sol",
+        "disposition": "fixed",
+        "description": "L4 cites the hook-length theorem and hook definition for the general removal recursion, but their Statement/Definition interfaces do not supply that recursion. The boundary counts themselves are correct and already computed directly. Replaced the theorem citation in L4 by the existing removal-recursion lemma and declared the direct dependency; its n>=1 restriction and empty-tableau exception exactly match the example.",
+        "repair": "Read the removal-recursion lemma and its complete deletion/extension bijection proof, the hook definition and formula, and the repaired correspondence. Verified empty and singleton insertion directly, hook products 1, factorial values 1, absence of a removable empty node, and the single singleton corner. L4 now cites the exact recursion supplier; no Example, Statement, or Definition change and no choice use.",
+        "locator": "Facts L4",
+        "adjudication_ref": [
+          {
+            "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json",
+            "id": "ex-empty-and-singleton-rsk-boundaries",
+            "model": "gpt-6.1-sol",
+            "context_sha256": "570c722a7506936b4a3ab33d5dbefb7a95214a518291f425ac9585c7acc73d60",
+            "phase": "initial",
+            "round": 1,
+            "unit": "9"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "items/ex-empty-and-singleton-rsk-boundaries.md",
+            "post_sha256": "56888115d9b0fa664260ea616d8f9b9fbb75313e0f1ecd1b06994a3686eba606"
+          },
+          {
+            "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json"
+          }
+        ],
+        "prevention": {
+          "kind": "brief",
+          "ref": "briefs/step7-adjudicator.md"
+        }
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "frontier-38-owner-30-step7-initial-r1-u9-3",
+        "run": "frontier-38-owner-30",
+        "at": "2026-10-03T16:25:13.511315+00:00",
+        "class": "accuracy",
+        "subclass": "citation-inaccurate",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "ex-rsk-insertion-and-reverse-deletion",
+        "caught_at_stage": "6-judge",
+        "caught_by_role": "judge-sol",
+        "disposition": "fixed",
+        "description": "L3 incorrectly says reverse deletion moves downward, contradicting the supplied definition, which visits s,s-1,...,1. The concrete deletion computations in steps 5.1 and 6.1 already move upward and are correct. Corrected L3 and made both inverse directions explicit. Also repaired the compressed third insertion in 1.1: 1 bumps 4 in row 1, which bumps 6 in row 2 before 6 appends in row 3.",
+        "repair": "Manually checked the cycle-to-word conversion (6,4,1,2,5,3), all six insertion tableaux and recording positions, and each reverse deletion using the supplied row rules. The new boxes are (1,1),(2,1),(3,1),(1,2),(1,3),(2,2); deleting labels 6,...,1 expels 3,5,2,1,4,6 and restores each previous pair. Corrected only L3, the third insertion explanation, and proof provenance; the displayed Example is unchanged.",
+        "locator": "Facts L3; Verification 1.1",
+        "adjudication_ref": [
+          {
+            "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json",
+            "id": "ex-rsk-insertion-and-reverse-deletion",
+            "model": "gpt-6.1-sol",
+            "context_sha256": "f1c80c61913abe4e36e0761054ed0f4cb739e6d3f4e8027713f7c6f8186327eb",
+            "phase": "initial",
+            "round": 1,
+            "unit": "9"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "items/ex-rsk-insertion-and-reverse-deletion.md",
+            "post_sha256": "29a197316f4c6e6e40b42b628b708148b23bfcece81501f9a41e6354b0772c52"
+          },
+          {
+            "path": "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json"
+          }
+        ],
+        "prevention": {
+          "kind": "brief",
+          "ref": "briefs/step7-adjudicator.md"
+        }
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "completed": [
+      "thm-robinson-schensted-correspondence",
+      "ex-empty-and-singleton-rsk-boundaries",
+      "ex-rsk-insertion-and-reverse-deletion"
+    ],
+    "source_evidence": [
+      "Consulted Chan PDF printed pp. 29-30, Theorems 8.6-8.9. Theorem 8.7 states both inverse directions but gives only a brief row-induction proof; Theorem 8.9 contains a typographic second-identity error (its deletion input should be a pair). The repair relies on the fully read local inverse lemma proof, not on this typo."
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-robinson-schensted-correspondence.md items/ex-empty-and-singleton-rsk-boundaries.md items/ex-rsk-insertion-and-reverse-deletion.md",
+        "exit_code": 0,
+        "result": "3 checked, 0 failing. Initial run requested rephasing of theorem 3.1; repaired by explicitly citing the actual deletion well-definedness established in 2.1, then reran successfully."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-38-owner-30-batch-9.proof-contracts.json --strict --items thm-robinson-schensted-correspondence,ex-empty-and-singleton-rsk-boundaries,ex-rsk-insertion-and-reverse-deletion",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings; 3/3 checked."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-robinson-schensted-correspondence.md items/ex-empty-and-singleton-rsk-boundaries.md items/ex-rsk-insertion-and-reverse-deletion.md",
+        "exit_code": 0,
+        "result": "3 files; all math parses with real KaTeX and all frontmatter parses with renderer YAML parser."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-robinson-schensted-correspondence.md items/ex-empty-and-singleton-rsk-boundaries.md items/ex-rsk-insertion-and-reverse-deletion.md",
+        "exit_code": 0,
+        "result": "3 items, 21 steps, 0 defects; run after final item edit."
+      },
+      {
+        "command": "node tools/depcheck.mjs --items-file /tmp/step7-u9-items.json --json",
+        "exit_code": 0,
+        "result": "Focused item checks for all three IDs and global page/cycle checks: 0 errors, 141 global warnings; no dependency/citation error for the assigned items."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this report and handles independent rejudgment and certification.",
+    "owned_paths": [
+      "items/thm-robinson-schensted-correspondence.md",
+      "items/ex-empty-and-singleton-rsk-boundaries.md",
+      "items/ex-rsk-insertion-and-reverse-deletion.md",
+      "research/frontier-38-owner-30-batch-9.proof-contracts.json",
+      "research/frontier-38-owner-30-batch-9.pages.json",
+      "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json"
+    ],
+    "contract_and_metadata_repairs": "Regenerated citations and derivations only for assigned entries under the shared-write lock; corrected theorem empty/reverse boundary evidence; mirrored proof provenance for all three entries and the boundary example direct recursion dependency in the owning page manifest. Earlier independent risk_review records were preserved.",
+    "review_continuity": "After the theorem precheck repair, reviewed its step 3.1 use of step 2.1 and captured fresh theorem hashes immediately. Reexamined the boundary example L1/L2 and steps 1.1/1.2, and the worked example L4 and deletion conclusions: the theorem still supplies the same bijection and inverse, so both remain sound. Refreshed both example contexts only after that examination; their captured hashes were unchanged.",
+    "interfaces": "Compared the original and final Statement/Definition sections directly: the theorem Statement is unchanged and neither example has a Statement or Definition section. Both original Example sections are also unchanged. No new prerequisite item or interface was authored; adding the existing recursion citation is a dependency repair and does not propagate.",
+    "published_consumer_findings": [],
+    "published_ledger_updates": [],
+    "assumptions": "All procedures are finite and deterministic; no Axiom of Choice is used."
+  }
+}

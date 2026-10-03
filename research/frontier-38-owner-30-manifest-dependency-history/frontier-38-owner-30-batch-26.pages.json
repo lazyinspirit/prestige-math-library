@@ -1,0 +1,703 @@
+[
+  {
+    "order": 895,
+    "id": "intersection-products-on-smooth-projective-surfaces",
+    "kind": "A",
+    "category": "algebraic-geometry",
+    "title": "Intersection Products on Smooth Projective Surfaces",
+    "companion": "intersection-products-on-smooth-projective-surfaces-examples",
+    "requires": [
+      "quasi-coherent-and-coherent-sheaves-and-vector-bundles",
+      "proj-projective-schemes-twisting-sheaves-and-ampleness",
+      "cartier-and-weil-divisors-line-bundles-and-picard-groups",
+      "sheaf-cohomology-cech-cohomology-and-comparison",
+      "cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes",
+      "blowups-exceptional-divisors-and-strict-transforms"
+    ],
+    "items": [
+      {
+        "id": "def-degree-invertible-sheaf-proper-dimension-one",
+        "kind": "definition",
+        "title": "Degree of an invertible sheaf on a proper one-dimensional scheme",
+        "deps": [
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "def-axiom-of-choice",
+          "def-coherent-module-scheme",
+          "def-dimension-noetherian-topological-space",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-field",
+          "def-invertible-sheaf",
+          "def-locally-free-sheaf-finite-rank",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-proper-morphism",
+          "thm-coherent-sheaves-abelian-noetherian-scheme"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Euler-characteristic supplier. Let k be a field and let C be a proper k-scheme whose underlying Noetherian topological space has dimension at most one. For an invertible O_C-module L define deg_C(L) := chi(C,L) - chi(C,O_C) in Z, and for a locally free O_C-module E of finite constant rank n define deg_C(E) := chi(C,E) - n*chi(C,O_C). Both are well-defined integers, deg_C(O_C) = 0, and deg_C depends only on the isomorphism class of the sheaf. If C is empty every degree is zero. The structure sheaf, its dual and every invertible or locally free finite-rank module are coherent, so the Euler characteristic applies; the dimension bound is what makes the defining alternating sum finite.",
+        "strategy": "Assemble the definition from def-euler-characteristic-coherent-sheaf: on a proper k-scheme, coherent modules have finite-dimensional cohomology vanishing in high degrees, so the alternating sums are integers. Coherence of O_C, of invertible modules and of locally free finite-rank modules is read from def-coherent-module-scheme. Well-definedness on isomorphism classes is immediate because chi is an invariant of the isomorphism class; deg_C(O_C) = chi(C,O_C) - chi(C,O_C) = 0 and the empty case is the empty sum 0.",
+        "design_row": "AG-SURF-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project",
+              "url": "https://stacks.math.columbia.edu/tag/0AYQ",
+              "locator": "Definition 33.44.1 (tag 0AYR) and the surrounding discussion of deg(E) for locally free sheaves"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf",
+              "locator": "\u00a718.4, printed pp. 508-511: degree of a line bundle on a projective curve as the Euler-characteristic difference (Exercises 18.4.L-18.4.M and Remark 18.4.8)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-euler-characteristic-finite-support-twist-invariance",
+        "kind": "lemma",
+        "title": "Euler characteristic of a closed point, and invariance under an invertible twist",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-closed-immersion-schemes",
+          "def-coherent-module-scheme",
+          "def-dimension-noetherian-topological-space",
+          "def-direct-image-sheaf",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-extension-degree-and-finite-extension",
+          "def-field",
+          "def-invertible-sheaf",
+          "def-locally-free-sheaf-finite-rank",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-pullback-module-ringed-spaces",
+          "def-residue-field-scheme-point",
+          "def-sheaf-tensor-product",
+          "def-stalk-of-presheaf",
+          "def-topological-space",
+          "lem-closed-immersion-cohomology-pushforward",
+          "lem-closed-immersion-projection-formula-invertible",
+          "lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite",
+          "lem-stalk-inverse-image-sheaf",
+          "lem-stalk-tensor-product",
+          "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "thm-noetherian-topological-space-dimension-vanishing",
+          "thm-sheaf-morphism-isomorphism-stalkwise",
+          "thm-structure-sheaf-affine-scheme",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "thm-zero-sheaf-cohomology-global-sections"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Euler-characteristic supplier. Let k be a field, X a proper k-scheme, p in X a closed point with residue field kappa(p), and i: Spec kappa(p) -> X the corresponding closed immersion; write kappa(p) also for the structure sheaf of Spec kappa(p). Then kappa(p) is a coherent O_X-module via i_*, and for every invertible O_X-module L: (1) H^q(X, i_*kappa(p)) = 0 for every q >= 1 and chi(X, i_*kappa(p)) = [kappa(p):k], a finite integer; (2) i^*L is isomorphic to O_{Spec kappa(p)} and there is an isomorphism L (x) i_*kappa(p) isomorphic to i_*kappa(p); consequently chi(X, L (x) i_*kappa(p)) = chi(X, i_*kappa(p)) = [kappa(p):k].",
+        "strategy": "For (1): H^q(X, i_*kappa(p)) is H^q(Spec kappa(p), kappa(p)) by lem-closed-immersion-cohomology-pushforward, the space Spec kappa(p) is Noetherian of dimension zero, so all higher cohomology vanishes by thm-noetherian-topological-space-dimension-vanishing and H^0 = kappa(p) has k-dimension [kappa(p):k]; the residue degree is finite because X is of finite type over k (lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite). For (2): the stalk of i^*L at the unique point is L_p (x)_{O_{X,p}} kappa(p) = kappa(p) because an invertible module is free of rank one at the local ring, so i^*L is isomorphic to the structure sheaf of Spec kappa(p); then L (x) i_*kappa(p) is a skyscraper supported at p with stalk kappa(p), and the natural map to i_*kappa(p) is an isomorphism by the stalkwise criterion. Applying H^q(X, -) and (1) gives the stated invariance of the Euler characteristic; coherence of i_*kappa(p) is the closed-immersion pushforward clause. The Axiom of Choice is inherited from the Euler-characteristic and devissage suppliers; the argument itself makes no selection.",
+        "design_row": "AG-SURF-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project",
+              "url": "https://stacks.math.columbia.edu/tag/0BEI",
+              "locator": "Lemma 33.33.3 (tag 0AYT): for a coherent module of finite support the Euler characteristic is dim_k Gamma(X,F) and higher cohomology vanishes; Lemma 33.33.2 (tag 08AA) for additivity of chi"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf",
+              "locator": "\u00a720.1.1, printed pp. 574-575, and Exercise 20.1.A, p. 576: the one-point case of the intersection definition, where tensoring by an invertible sheaf is invisible on finite support"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-closed-immersion-projection-formula-invertible",
+        "kind": "lemma",
+        "title": "Projection formula for a closed immersion and an invertible sheaf",
+        "deps": [
+          "cor-change-of-rings-for-extension-of-scalars",
+          "def-axiom-of-choice",
+          "def-closed-immersion-schemes",
+          "def-coherent-module-scheme",
+          "def-direct-image-sheaf",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-invertible-sheaf",
+          "def-locally-free-sheaf-finite-rank",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-pullback-module-ringed-spaces",
+          "def-quasi-coherent-module-scheme",
+          "def-sheaf-tensor-product",
+          "def-stalk-of-presheaf",
+          "def-topological-space",
+          "lem-closed-immersion-cohomology-pushforward",
+          "lem-direct-image-is-sheaf",
+          "lem-pullback-qc-module-quasi-coherent",
+          "lem-stalk-inverse-image-sheaf",
+          "lem-stalk-tensor-product",
+          "lem-tensor-qc-modules-quasi-coherent",
+          "thm-associativity-of-balanced-tensor-products",
+          "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "thm-pullback-pushforward-module-adjunction",
+          "thm-sheaf-morphism-isomorphism-stalkwise",
+          "thm-unit-isomorphisms-for-module-tensor-products"
+        ],
+        "statement": "Let i: Z -> X be a closed immersion of schemes, L an invertible O_X-module and G a quasi-coherent O_Z-module. Then the canonical map L (x)_{O_X} i_*G -> i_*(i^*L (x)_{O_Z} G) is an isomorphism of O_X-modules. If moreover X is locally Noetherian and G is coherent, then both sides are coherent O_X-modules, and for every q >= 0 there is an isomorphism H^q(X, L (x) i_*G) = H^q(Z, i^*L (x) G); in particular chi(X, L (x) i_*G) = chi(Z, i^*L (x) G) whenever X is proper over a field. The Euler-characteristic and coherence clauses inherit the Axiom of Choice through the Euler-characteristic suppliers, while the stalkwise isomorphism itself is choice-free beyond the cited sheaf and tensor constructions.",
+        "strategy": "Check the canonical map on stalks and conclude by the stalkwise isomorphism criterion. At x not in Z both sides have zero stalk. At x in Z the stalk of i_*G is G_x, the stalk of i^*L is L_x (x)_{O_{X,x}} O_{Z,x}, so the two sides have stalk L_x (x)_{O_{X,x}} G_x and (L_x (x)_{O_{X,x}} O_{Z,x}) (x)_{O_{Z,x}} G_x, which agree by associativity of the tensor product and change of rings. The cohomological statement is the closed-immersion pushforward isomorphism applied to i^*L (x) G; coherence when X is locally Noetherian and G coherent is the pushforward clause of the closed-immersion result. The Axiom of Choice enters only through the Euler-characteristic and coherence suppliers used in the final clause; the stalk computation and the change-of-rings identification make no selection.",
+        "design_row": "AG-SURF-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project",
+              "url": "https://stacks.math.columbia.edu/tag/01E6",
+              "locator": "Cohomology, Section 20.54 (tag 01E6): the projection formula R f_*(F) (x) L -> R f_*(F (x) f^*L); the closed-immersion case is the local statement checked on stalks"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf",
+              "locator": "\u00a720.1.8 and Exercise 20.1.J, printed pp. 579-580: the projection formula for a proper morphism, specialized to a closed immersion"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-euler-characteristic-twist-integral-proper-curve",
+        "kind": "lemma",
+        "title": "Twisting a coherent sheaf by an invertible sheaf on an integral proper curve",
+        "deps": [
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "def-axiom-of-choice",
+          "def-coherent-module-scheme",
+          "def-degree-invertible-sheaf-proper-dimension-one",
+          "def-dimension-noetherian-topological-space",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-field",
+          "def-integral-scheme",
+          "def-invertible-sheaf",
+          "def-locally-free-sheaf-finite-rank",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-proper-morphism",
+          "def-sheaf-tensor-product",
+          "def-stalk-of-presheaf",
+          "def-support-module-sheaf",
+          "lem-coherent-devissage-one-generic-generator",
+          "lem-euler-characteristic-additive-short-exact",
+          "lem-euler-characteristic-finite-support-twist-invariance",
+          "lem-tensor-qc-modules-quasi-coherent",
+          "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-localisation-of-modules-is-exact",
+          "thm-rank-nullity",
+          "thm-unit-isomorphisms-for-module-tensor-products"
+        ],
+        "statement": "Assume the Axiom of Choice. Let k be a field and let X be an integral proper k-scheme whose underlying topological space has dimension one. Let L be an invertible O_X-module and F a coherent O_X-module; let xi be the generic point of X and let r := dim_{kappa(xi)} F_xi be the rank of F. Then chi(X, L (x) F) = r*deg_X(L) + chi(X, F), with deg_X as in def-degree-invertible-sheaf-proper-dimension-one.",
+        "strategy": "Devissage on the Noetherian scheme X, which is finite type hence Noetherian over the field. Consider the property P(F): 'chi(X, L (x) F) = r(F)*deg_X(L) + chi(X, F)'. P is additive in short exact sequences: tensoring with an invertible module is exact (stalks are free of rank one, thm-exactness-of-sheaves-stalkwise), chi is additive (lem-euler-characteristic-additive-short-exact) and the rank r is additive because the stalk at the generic point is a short exact sequence of kappa(xi)-vector spaces and dimension is additive; P(0) holds. The integral closed subschemes of the integral one-dimensional X are X and the closed points. For Z = X take G = O_X, for which P holds by the definition of deg_X(L) and r = 1. For a closed point Z = {p} take G = i_*kappa(p), for which r = 0 and P is exactly lem-euler-characteristic-finite-support-twist-invariance. lem-coherent-devissage-one-generic-generator now gives P(F) for every coherent F. Applying P with F invertible of rank one gives deg_X(L (x) F) = deg_X(L) + deg_X(F). The Axiom of Choice is inherited from the Euler-characteristic and devissage suppliers; the argument itself makes no selection.",
+        "design_row": "AG-SURF-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project",
+              "url": "https://stacks.math.columbia.edu/tag/0AYQ",
+              "locator": "Lemma 33.44.5 (tag 0AYV) with its devissage proof, and Lemma 33.44.7 (tag 0AYX)"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf",
+              "locator": "Exercise 18.4.L and its proof plan, printed pp. 510-511, and Exercise 20.1.E with hint, printed p. 576"
+            },
+            {
+              "title": "The Stacks Project",
+              "url": "https://stacks.math.columbia.edu/tag/01YD",
+              "locator": "Cohomology of Schemes, Section 30.12 (tags 01YD-01YH): the devissage lemma for coherent modules used as the local supplier"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cor-degree-additive-proper-curve",
+        "kind": "corollary",
+        "title": "Degree is additive on invertible sheaves over a proper curve",
+        "deps": [
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "def-axiom-of-choice",
+          "def-closed-immersion-schemes",
+          "def-coherent-module-scheme",
+          "def-degree-invertible-sheaf-proper-dimension-one",
+          "def-dimension-noetherian-topological-space",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-integral-scheme",
+          "def-invertible-sheaf",
+          "def-locally-free-sheaf-finite-rank",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-proper-morphism",
+          "def-support-module-sheaf",
+          "lem-closed-immersion-cohomology-pushforward",
+          "lem-closed-immersion-projection-formula-invertible",
+          "lem-coherent-devissage-one-generic-generator",
+          "lem-euler-characteristic-additive-short-exact",
+          "lem-euler-characteristic-finite-support-twist-invariance",
+          "lem-euler-characteristic-twist-integral-proper-curve",
+          "lem-invertible-sheaf-dual-tensor-inverse",
+          "lem-tensor-qc-modules-quasi-coherent",
+          "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-unit-isomorphisms-for-module-tensor-products"
+        ],
+        "statement": "Assume the Axiom of Choice. Let k be a field and let C be a proper k-scheme whose underlying topological space has dimension at most one. For all invertible O_C-modules L and M: (1) deg_C(L (x) M) = deg_C(L) + deg_C(M); (2) deg_C(L^vee) = -deg_C(L); (3) chi(C, L (x) M) - chi(C, L) - chi(C, M) + chi(C, O_C) = 0. The curve C need not be reduced, irreducible or normal; closed subschemes of proper k-schemes, in particular effective Cartier divisors on proper surfaces, are the intended instances.",
+        "strategy": "Apply lem-coherent-devissage-one-generic-generator to the property Q(F): 'chi(C,F) - chi(C,L (x) F) - chi(C,M (x) F) + chi(C,L (x) M (x) F) = 0'. Q is additive in short exact sequences because tensoring by invertible modules is exact and chi is additive; Q(0) holds. For an integral closed subscheme Z of C take G = i_*O_Z: if Z is a closed point then every twist of G is G by lem-euler-characteristic-finite-support-twist-invariance, so Q(G) = 0; if Z is one-dimensional then Z is an integral proper curve and lem-closed-immersion-projection-formula-invertible identifies Q_C(i_*O_Z) with Q_Z(O_Z, i^*L, i^*M), which is zero by lem-euler-characteristic-twist-integral-proper-curve applied on Z with F = i^*M of rank one. Devissage gives Q(O_C) = 0, i.e. chi(C,L (x) M) = chi(C,L) + chi(C,M) - chi(C,O_C), which by the definition of degree is (1). Part (2) follows from (1) with M = L^vee and L (x) L^vee = O_C, deg_C(O_C) = 0; part (3) is the displayed form of (1). The Axiom of Choice is inherited from the Euler-characteristic and devissage suppliers; the argument itself makes no selection.",
+        "design_row": "AG-SURF-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project",
+              "url": "https://stacks.math.columbia.edu/tag/0AYQ",
+              "locator": "Lemma 33.44.7 (tag 0AYX) in rank one, and Lemma 33.44.6 (tag 0AYW) for the reduction to the irreducible case"
+            },
+            {
+              "title": "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf",
+              "locator": "Exercise 18.4.M, printed p. 511, with Remark 18.4.8: degree is a homomorphism on Pic of a projective (equivalently proper) curve"
+            },
+            {
+              "title": "The Stacks Project",
+              "url": "https://stacks.math.columbia.edu/tag/01YD",
+              "locator": "Cohomology of Schemes, Section 30.12 (tags 01YD-01YH): devissage for coherent modules"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-divisor-intersection-number-on-smooth-projective-surface",
+        "kind": "definition",
+        "title": "Intersection numbers of Cartier divisors on a smooth projective surface",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-cartier-divisor",
+          "def-coherent-module-scheme",
+          "def-dimension-noetherian-topological-space",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-integral-scheme",
+          "def-invertible-sheaf",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-picard-group-scheme",
+          "def-projective-morphism-pre-proj",
+          "def-sheaf-tensor-product",
+          "def-smooth-morphism-to-field-classical",
+          "lem-cartier-divisor-addition-tensor",
+          "lem-invertible-sheaf-dual-tensor-inverse",
+          "thm-cartier-divisors-mod-principal-to-picard",
+          "thm-projective-morphism-proper"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Euler-characteristic supplier. Let k be a field and let X be an integral, regular, projective k-scheme of pure dimension 2 (a smooth projective surface over k is an instance: smoothness of X over k makes every local ring of X regular). For line bundles L and M on X define L . M := chi(X, O_X) - chi(X, L^vee) - chi(X, M^vee) + chi(X, L^vee (x) M^vee) in Z, and for Cartier divisors C and D on X define C . D := O_X(C) . O_X(D). Then: (1) the value depends only on the isomorphism classes of L and M, so the pairing is a map Pic(X) x Pic(X) -> Z; (2) L . M = M . L and L . O_X = O_X . L = 0; (3) if C' is linearly equivalent to C and D' to D then C' . D' = C . D.",
+        "strategy": "This is a definition: the four Euler characteristics are integers by the definition of chi on the proper k-scheme X, and L^vee, M^vee and L^vee (x) M^vee are invertible hence coherent. Symmetry and L . O_X = 0 are immediate from the displayed formula, and dependence only on isomorphism classes follows from functoriality of the dual and tensor product on Pic. For (3), linear equivalence gives O_X(C') isomorphic to O_X(C) and O_X(D') isomorphic to O_X(D) (thm-cartier-divisors-mod-principal-to-picard together with cartier-divisor-addition-tensor), and (1) applies.",
+        "design_row": "AG-SURF-1",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf",
+              "locator": "Definition 20.1.1, printed pp. 574-575 (the intersection product as the signed sum of Euler characteristics), Definition 20.1.2 and \u00a720.2.4, printed pp. 576 and 581"
+            },
+            {
+              "title": "The Stacks Project",
+              "url": "https://stacks.math.columbia.edu/tag/0BEL",
+              "locator": "Definition 33.45.3 (tag 0BEP) and Lemma 33.45.1 (tag 0BEM); for d = 2 with X of dimension two the coefficient of n1 n2 in chi(L^{n1} (x) M^{n2}) equals the displayed alternating sum"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-surface-intersection-product-bilinear-and-symmetric",
+        "kind": "theorem",
+        "title": "The surface intersection product is symmetric and bilinear",
+        "deps": [
+          "cor-degree-additive-proper-curve",
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "cor-minimal-prime-over-a-nonzerodivisor-has-height-one",
+          "cor-twist-exact-sequence-effective-divisor",
+          "def-ample-invertible-sheaf",
+          "def-axiom-of-choice",
+          "def-cartier-divisor",
+          "def-degree-invertible-sheaf-proper-dimension-one",
+          "def-dimension-noetherian-topological-space",
+          "def-divisor-intersection-number-on-smooth-projective-surface",
+          "def-effective-cartier-divisor",
+          "def-integral-scheme",
+          "def-invertible-sheaf",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-projective-morphism-pre-proj",
+          "def-section-zero-scheme-invertible-sheaf",
+          "def-sheaf-tensor-product",
+          "def-very-ample-invertible-sheaf-relative",
+          "lem-cartier-divisor-addition-tensor",
+          "lem-closed-immersion-projection-formula-invertible",
+          "lem-effective-cartier-divisor-exact-sequence",
+          "lem-euler-characteristic-additive-short-exact",
+          "lem-eventual-global-generation-coherent-twists",
+          "lem-global-section-effective-divisor",
+          "lem-invertible-sheaf-dual-tensor-inverse",
+          "lem-very-ample-implies-ample",
+          "thm-cartier-divisors-mod-principal-to-picard",
+          "thm-projective-morphism-proper"
+        ],
+        "statement": "Assume the Axiom of Choice. Let k be a field, let X be an integral regular projective surface over k, and let L, M, N be line bundles on X. Then (L (x) M) . N = L . N + M . N and L . (M (x) N) = L . M + L . N; consequently the intersection product is a symmetric Z-bilinear pairing Pic(X) x Pic(X) -> Z and L . O_X = 0. Equivalently, for Cartier divisors: (C + C') . D = C . D + C' . D, C . (D + D') = C . D + C . D', and C . D = D . C.",
+        "strategy": "Write Phi(C,D) for the defining value, symmetric in C and D. Step 1 (shift identity). Let H be an effective Cartier divisor and L any line bundle. The twisting exact sequences 0 -> O_X(-H) -> O_X -> i_*O_H -> 0 and 0 -> L(-H) -> L -> i_*(L|_H) -> 0 give chi(O_X) - chi(O_X(-H)) = chi(O_H) and chi(L) - chi(L(-H)) = chi(L|_H); applying the second to L = O_X(-C), O_X(-D), O_X(-C-D) and subtracting shows Phi(C, D+H) - Phi(C, D) - Phi(C, H) = -(chi(O_H) - chi(O_H(-C)) - chi(O_H(-D)) + chi(O_H(-C-D))). The bracket is zero by cor-degree-additive-proper-curve(3) applied to the proper curve H (an effective Cartier divisor on an integral surface is a proper scheme of dimension at most one by the principal ideal theorem). Hence Phi(C, D+H) = Phi(C, D) + Phi(C, H). Step 2 (effective additivity). If D2 is effective, Step 1 with H = D2 gives Phi(C, D1+D2) = Phi(C, D1) + Phi(C, D2) for every D1. Step 3 (general additivity). Every Cartier divisor is a difference of effective Cartier divisors: for m large the sheaf O_X(D) (x) O_X(1)^{m} is globally generated (lem-eventual-global-generation-coherent-twists, X projective over the Noetherian field k with O_X(1) ample); a nonzero global section is regular because X is integral, so by lem-global-section-effective-divisor its zero scheme E is an effective Cartier divisor with O_X(E) = O_X(D + mH0), where H0 is the effective Cartier divisor cut by a nonzero section of O_X(1). Writing D_i = E_i - F_i with F_i = m_i H0 and H := E1+E2+F1+F2, Step 1 applied to (D1+D2, H), to (D1, D2+H) and to (D2, H) yields Phi(C, D1+D2) + Phi(C, H) = Phi(C, D1+D2+H) = Phi(C, D1) + Phi(C, D2+H) = Phi(C, D1) + Phi(C, D2) + Phi(C, H); cancelling gives additivity in the second variable. Symmetry gives additivity in the first variable and Phi(C, 0) = 0, so Phi is Z-bilinear; translating to line bundles via the definition gives the statement.",
+        "design_row": "AG-SURF-1",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf",
+              "locator": "Proposition 20.1.3 with proof \u00a720.1.5 and Exercises 20.1.D-20.1.H, printed pp. 576-578; Exercise 16.2.F and 16.2.K on differences of very ample sheaves, printed pp. 458-462"
+            },
+            {
+              "title": "The Stacks Project",
+              "url": "https://stacks.math.columbia.edu/tag/0BEL",
+              "locator": "Lemma 33.45.5 (tag 0BER): additivity of the intersection number, proved from the numerical-polynomial lemma 33.45.1 (tag 0BEM)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-intersection-with-curve-as-degree-of-restriction",
+        "kind": "theorem",
+        "title": "Intersection with a curve is the degree of the restriction",
+        "deps": [
+          "cor-degree-additive-proper-curve",
+          "cor-minimal-prime-over-a-nonzerodivisor-has-height-one",
+          "cor-twist-exact-sequence-effective-divisor",
+          "def-axiom-of-choice",
+          "def-cartier-divisor",
+          "def-closed-immersion-schemes",
+          "def-degree-divisor-proper-curve",
+          "def-degree-invertible-sheaf-proper-dimension-one",
+          "def-dimension-noetherian-topological-space",
+          "def-divisor-intersection-number-on-smooth-projective-surface",
+          "def-effective-cartier-divisor",
+          "def-integral-scheme",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-proper-morphism",
+          "lem-closed-immersion-projection-formula-invertible",
+          "lem-effective-cartier-divisor-exact-sequence",
+          "lem-euler-characteristic-additive-short-exact",
+          "thm-cartier-weil-divisors-curves-agree",
+          "thm-euler-characteristic-degree-shift-curve"
+        ],
+        "statement": "Assume the Axiom of Choice. Let k be a field, X an integral regular projective surface over k, and let C and D be effective Cartier divisors on X, with associated line bundles O_X(C) and O_X(D). Then C . D = deg_C(O_X(D)|_C) = deg_D(O_X(C)|_D), where deg is the degree of def-degree-invertible-sheaf-proper-dimension-one on the proper curves C and D. More generally, if only C is effective, the first identity C . D = deg_C(O_X(D)|_C) holds for every Cartier divisor D on X, with deg_C taken on the curve C. If C is moreover a smooth proper geometrically integral curve, deg_C agrees with the closed-point divisor degree of def-degree-divisor-proper-curve on C. The empty curve case C = emptyset is included: both sides are then 0.",
+        "strategy": "The curve C is a proper k-scheme of dimension at most one (principal ideal theorem), so the degree is available. From 0 -> O_X(-C) -> O_X -> i_*O_C -> 0 one gets chi(O_X) - chi(O_X(-C)) = chi(O_C), and tensoring it with L^vee gives chi(L^vee) - chi(L^vee(-C)) = chi(L^vee|_C). Substituting into the definition of C . D = Phi(C, D) yields C . D = chi(O_C) - chi(L^vee|_C). By the definition of degree on C and cor-degree-additive-proper-curve(2) this is -deg_C(L^vee|_C) = deg_C(L|_C). Exchanging C and D (or using symmetry of the defining formula) gives D . C = deg_D(O_X(C)|_D), and the two right-hand sides therefore agree. The final clause is thm-euler-characteristic-degree-shift-curve, which identifies the chi-degree with the closed-point divisor degree on smooth proper geometrically integral curves.",
+        "design_row": "AG-SURF-1",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf",
+              "locator": "Exercise/Definition 20.2.A(a), printed pp. 580-581, and the discussion \u00a720.2.3-20.2.4, p. 581"
+            },
+            {
+              "title": "The Stacks Project",
+              "url": "https://stacks.math.columbia.edu/tag/0BEL",
+              "locator": "Lemma 33.45.8 (tag 0BEU): reduction of the intersection number to an effective Cartier divisor, and Lemma 33.45.12 (tag 0BEY): (L . Z) = deg(L|_Z) for a closed subscheme of dimension at most one"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-blowup-intersection-matrix-at-smooth-point",
+        "kind": "lemma",
+        "title": "The intersection matrix of a point blowup of a regular surface",
+        "deps": [
+          "cor-blowup-birational-integral-scheme",
+          "cor-degree-additive-proper-curve",
+          "cor-exceptional-divisor-smooth-center-normal-bundle",
+          "cor-twist-exact-sequence-effective-divisor",
+          "def-ample-invertible-sheaf",
+          "def-axiom-of-choice",
+          "def-blowup-fractional-ideal",
+          "def-blowup-scheme-along-ideal",
+          "def-cartier-divisor",
+          "def-degree-invertible-sheaf-proper-dimension-one",
+          "def-divisor-intersection-number-on-smooth-projective-surface",
+          "def-effective-cartier-divisor",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-exceptional-divisor-blowup",
+          "def-globally-generated-sheaf",
+          "def-integral-scheme",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-pullback-cartier-divisor",
+          "def-reduction-of-scheme",
+          "def-smooth-morphism-to-field-classical",
+          "def-strict-transform-closed-subscheme",
+          "def-total-transform-divisor",
+          "def-very-ample-invertible-sheaf-relative",
+          "lem-blowup-isomorphism-off-center",
+          "lem-blowup-point-pushforward-vanishing",
+          "lem-effective-cartier-divisor-exact-sequence",
+          "lem-eventual-global-generation-coherent-twists",
+          "lem-exceptional-curve-normal-bundle-minus-one",
+          "lem-exceptional-fiber-line-bundle-euler-characteristic",
+          "lem-projection-formula-invertible-twist",
+          "lem-pullback-cartier-divisor-line-bundle",
+          "lem-total-transform-strict-plus-exceptional-multiplicity",
+          "lem-very-ample-implies-ample",
+          "def-relative-proj-quasi-coherent-graded-algebra",
+          "thm-closed-subschemes-projective-space-homogeneous-ideals",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite",
+          "thm-blowup-projective",
+          "thm-blowup-regular-surface-closed-point-regular",
+          "thm-intersection-with-curve-as-degree-of-restriction",
+          "thm-surface-intersection-product-bilinear-and-symmetric"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $k$ be a field, let\n$X$ be an integral regular projective surface over $k$\n([[def-divisor-intersection-number-on-smooth-projective-surface]]), let\n$p\\in X$ be a closed point with residue field $\\kappa(p)$ and\n$r:=[\\kappa(p):k]$, let $\\pi:X'=\\operatorname{Bl}_pX\\to X$ be the blowup of $X$\nat $p$ ([[def-blowup-scheme-along-ideal]]) and let\n$E:=\\pi^{-1}(p)$ be the exceptional curve\n([[def-exceptional-divisor-blowup]]). Then:\n\n1. $X'$ is an integral regular projective surface over $k$, $E$ is an effective\n   Cartier divisor, $E$ is isomorphic to $\\mathbb P^1_{\\kappa(p)}$, and\n   $\\mathcal O_E(E)\\cong\\mathcal O_{\\mathbb P^1_{\\kappa(p)}}(-1)$; consequently\n   $E\\cdot E=-r$.\n2. For all Cartier divisors $D,D'$ on $X$\n   ([[def-cartier-divisor]]): $E\\cdot\\pi^*D=0$ and\n   $\\pi^*D\\cdot\\pi^*D'=D\\cdot D'$; in particular $(\\pi^*D)^2=D^2$.\n3. If $C$ is a reduced effective Cartier divisor on $X$ through $p$ with\n   multiplicity $m:=\\operatorname{mult}_p(C)\\ge1$\n   ([[def-effective-cartier-divisor]]) and strict transform $C'$\n   ([[def-strict-transform-closed-subscheme]]), then $\\pi^*C=C'+mE$,\n   $C'\\cdot E=mr$ and $C'\\cdot C'=C\\cdot C-m^2r$. If $p\\notin C$ then\n   $\\pi^*C=C'$ and $(C')^2=C^2$.",
+        "strategy": "1.1 The ideal $I$ of $p$ is a nonzero coherent ideal on the integral regular projective surface $X$. Thus the blowup is integral, regular and pure of dimension two; $E$ is effective Cartier, isomorphic to $\\mathbb P^1_{\\kappa(p)}$, with normal line bundle $\\mathcal O(-1)$. The residue degree $r$ is finite. To apply the intersection theory, we also verify absolute projectivity. Choose $X\\hookrightarrow\\mathbb P^n_k$ and its ample hyperplane bundle $H$. For some $s$, $I\\otimes L$, $L=H^{\\otimes s}$, is globally generated. A finite set of its global sections generates it: choose finitely many sections spanning each of finitely many affine neighborhoods, possible since $X$ is quasi-compact and the sheaf is of finite type. [F1, F2, F3]\n\n2.1 Put $S=\\bigoplus_{d\\ge0}I^d\\otimes L^{\\otimes d}$. The preceding sections yield a graded surjection $\\mathcal O_X[z_0,\\ldots,z_N]\\to S$, since $S$ is generated in degree one. Its relative Proj is canonically $X'$ by invertible rescaling; the twist need not be an ordinary ideal. Hence $X'$ is a closed subscheme of $\\mathbb P^N_X$. Base change of $X\\hookrightarrow\\mathbb P^n_k$ embeds the latter as a closed subscheme of $\\mathbb P^N_k\\times_k\\mathbb P^n_k$. [F3, step 1.1]\n\n3.1 The product has a closed Segre embedding into $\\mathbb P^{(N+1)(n+1)-1}_k$: its coordinates are $z_{ab}=u_av_b$, and the defining equations are all rank-one minors $z_{ab}z_{ij}-z_{aj}z_{ib}$. On $D_+(z_{ij})$, these equations identify its coordinate ring with the polynomial ring on $z_{aj}/z_{ij}$ ($a\\ne i$) and $z_{ib}/z_{ij}$ ($b\\ne j$); all other coordinates are their products. This is exactly the product of the affine charts $D_+(u_i)$ and $D_+(v_j)$, and the identifications respect their ratio transitions. They glue to the closed embedding. Thus $X'$ is projective over $k$, and all intersection and proper-cohomology hypotheses are satisfied. [F3, F7, step 2.1]\n\n4.1 By the exceptional-curve Euler formula, $\\chi_k(E,\\mathcal O_E)=r$ and $\\chi_k(E,\\mathcal O_E(E))=0$, so its degree over $k$ is $-r$. Restriction of the intersection product to the effective curve $E$ gives $E^2=-r$. For any Cartier divisor $D$ on $X$, $\\pi|_E$ factors through $\\operatorname{Spec}\\kappa(p)$, since the pulled-back point ideal vanishes on $E$. The restriction of $\\pi^*\\mathcal O_X(D)$ is therefore trivial. Its degree is zero, and the restriction formula gives $E\\cdot\\pi^*D=0$. This formula allows arbitrary $D$; only $E$ must be effective. [F1, F4, F6, F7, step 3.1]\n\n4.2 Pushforward vanishing and the projection formula give $\\chi(X',\\pi^*\\mathcal N)=\\chi(X,\\mathcal N)$ for every invertible $\\mathcal N$. Pullback respects tensor products and duals. Apply this equality to the four sheaves $\\mathcal O_X$, $\\mathcal O_X(D)^\\vee$, $\\mathcal O_X(D')^\\vee$, and their tensor product in the defining Euler-characteristic expression for intersection. The result is $\\pi^*D\\cdot\\pi^*D'=D\\cdot D'$, including the self-intersection case. [F5, F6, F7, step 3.1]\n\n5.1 For the reduced curve through $p$, the proved point formula gives $\\pi^*C=C'+mE$. Orthogonality and symmetry imply $0=E\\cdot C'+mE^2$, hence $C'\\cdot E=mr$. Bilinearity and step 4.2 give $C^2=(C'+mE)^2=(C')^2+2m^2r-m^2r$, so $(C')^2=C^2-m^2r$. If $p\\notin C$, a local equation is a unit near $p$; its pullback misses $E$, and the off-center isomorphism gives $\\pi^*C=C'$. The same pullback identity yields $(C')^2=C^2$. Choice enters only through the recorded suppliers. [F1, F6, F7, F8, step 4.1, step 4.2] \u220e",
+        "design_row": "AG-SURF-1",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            },
+            {
+              "title": "The Stacks Project, Divisors, Section 31.33 (tag 01OF)",
+              "url": "https://stacks.math.columbia.edu/tag/01OF"
+            },
+            {
+              "title": "The Stacks Project, More on Morphisms, Section 37.17 (tag 0H1G)",
+              "url": "https://stacks.math.columbia.edu/tag/0H1G"
+            }
+          ]
+        },
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 896,
+    "id": "intersection-products-on-smooth-projective-surfaces-examples",
+    "kind": "B",
+    "category": "algebraic-geometry",
+    "title": "Intersection Products on Smooth Projective Surfaces \u2014 Examples",
+    "companion": "intersection-products-on-smooth-projective-surfaces",
+    "requires": [
+      "intersection-products-on-smooth-projective-surfaces"
+    ],
+    "items": [
+      {
+        "id": "ex-intersection-pairing-on-p2",
+        "kind": "example",
+        "title": "The intersection pairing on the projective plane",
+        "deps": [
+          "cor-degree-additive-proper-curve",
+          "cor-twist-exact-sequence-effective-divisor",
+          "def-axiom-of-choice",
+          "def-degree-divisor-proper-curve",
+          "def-degree-invertible-sheaf-proper-dimension-one",
+          "def-divisor-intersection-number-on-smooth-projective-surface",
+          "def-effective-cartier-divisor",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-integral-scheme",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-relative-projective-space-standard-charts",
+          "def-section-zero-scheme-invertible-sheaf",
+          "def-twisting-sheaf-proj",
+          "lem-closed-immersion-projection-formula-invertible",
+          "lem-euler-characteristic-additive-short-exact",
+          "lem-global-section-effective-divisor",
+          "lem-invertible-sheaf-dual-tensor-inverse",
+          "thm-cohomology-projective-space-twisting-sheaves",
+          "thm-euler-characteristic-degree-shift-curve",
+          "thm-intersection-with-curve-as-degree-of-restriction",
+          "thm-projective-space-as-proj",
+          "thm-surface-intersection-product-bilinear-and-symmetric",
+          "thm-twisting-sheaf-invertible-standard-graded"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited through the Euler-characteristic and cohomology suppliers. Let k be a field and X = P^2_k with twisting sheaves O(d). Then O(d) . O(e) = de for all d,e in Z. Consequently the class l := O(1) of a line satisfies l . l = 1, and for nonzero homogeneous forms f, g of degrees d,e >= 1 with zero schemes C = Z(f), D = Z(g) and O(C) = O(d), O(D) = O(e) (effective Cartier divisors) one has C . D = de; in particular a line l has l . l = 1, a smooth conic C has C . C = 4, a line and a smooth conic meet with l . C = 2 = deg_l(O(2)|_l). All values lie in Z and agree with the restriction-degree theorem.",
+        "strategy": "By thm-cohomology-projective-space-twisting-sheaves, H^q(P^2_k, O(m)) vanishes except for q = 0 and q = 2, with h^0 = binom(m+2,2) for m >= 0 and h^2 = binom(-m-1,2) for m <= -3, so chi(O(m)) = binom(m+2,2) for every m in Z. The definition gives O(d) . O(e) = 1 - binom(2-d,2) - binom(2-e,2) + binom(2-d-e,2), a polynomial identity in d,e equal to de (check on the finitely many residue classes of d,e modulo which the second difference is constant, or expand). For a nonzero form f of degree d, lem-global-section-effective-divisor applied to the nonzero section f of O(d) (regular because P^2_k is integral) gives the effective Cartier divisor C = Z(f) with O(C) = O(d), so C . D = O(d) . O(e) = de. The line case l . l = 1 and the conic case C . C = 4 are the specializations d = e = 1 and d = e = 2, and l . C = 2 is checked independently against thm-intersection-with-curve-as-degree-of-restriction and the explicit cohomology of O(2) on P^1 (ex-cohomology-o-d-projective-line-all-d): deg_l(O(2)|_l) = chi(O(2)) - chi(O) = 3 - 1 = 2. The Axiom of Choice enters through the Euler-characteristic supplier and the published cohomology of twists on projective space; no further choice is made.",
+        "design_row": "AG-SURF-1",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf",
+              "locator": "\u00a720.2.5, printed p. 581 (recovering Bezout for plane curves from the intersection product) and Exercise 20.2.C, printed p. 582 (the P^1 x P^1 computation carried out analogously)"
+            },
+            {
+              "title": "The Stacks Project",
+              "url": "https://stacks.math.columbia.edu/tag/0BEL",
+              "locator": "Definition 33.45.3 (tag 0BEP) and Lemma 33.45.9 (tag 0BEV) with the projective-space computations taken from the published cohomology of twists"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-intersection-pairing-on-blowup-of-p2",
+        "kind": "example",
+        "title": "The intersection form of the blown-up projective plane",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-blowup-scheme-along-ideal",
+          "def-cartier-divisor",
+          "def-divisor-intersection-number-on-smooth-projective-surface",
+          "def-effective-cartier-divisor",
+          "def-exceptional-divisor-blowup",
+          "def-integral-scheme",
+          "def-pullback-cartier-divisor",
+          "def-strict-transform-closed-subscheme",
+          "def-total-transform-divisor",
+          "ex-intersection-pairing-on-p2",
+          "lem-blowup-intersection-matrix-at-smooth-point",
+          "lem-exceptional-curve-normal-bundle-minus-one",
+          "lem-pullback-cartier-divisor-line-bundle",
+          "lem-total-transform-strict-plus-exceptional-multiplicity",
+          "thm-intersection-with-curve-as-degree-of-restriction",
+          "thm-surface-intersection-product-bilinear-and-symmetric"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited through the Euler-characteristic and\nblowup suppliers ([[def-axiom-of-choice]]). Let $k$ be a field,\n$X=\\mathbb P^2_k$, let $p\\in X(k)$ be a $k$-rational point, let\n$\\pi:X'=\\operatorname{Bl}_pX\\to X$ be the blowup\n([[def-blowup-scheme-along-ideal]]), let $E=\\pi^{-1}(p)$ be the exceptional\ncurve ([[def-exceptional-divisor-blowup]]) and let\n$l:=\\pi^*\\mathcal O_X(1)$ in $\\operatorname{Pic}(X')$ (the pullback of the\nhyperplane class; it is also the strict transform of any line not passing\nthrough $p$). Then\n$$l\\cdot l=1,\\qquad l\\cdot E=0,\\qquad E\\cdot E=-1,$$\nso the intersection form on the sublattice $\\mathbb Zl+\\mathbb ZE$ of\n$\\operatorname{Pic}(X')$ has matrix\n$$\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\nMoreover the strict transform $m:=\\pi^*\\mathcal O(1)-E$ of a line through $p$\n([[def-strict-transform-closed-subscheme]]) satisfies $m=l-E$, $m\\cdot E=1$\nand $m\\cdot m=0$.",
+        "strategy": "**Given:** a field $k$, the plane $X=\\mathbb P^2_k$, a $k$-rational point $p$, the blowup $\\pi:X'=\\operatorname{Bl}_pX\\to X$, its exceptional curve $E$, the class $l=\\pi^*\\mathcal O_X(1)$, and a line $L$ through $p$.\n\n1.1 The blowup data. Since $p$ is $k$-rational, $r=1$; the surface $X'$ is integral regular projective and $E$ is an effective Cartier divisor isomorphic to $\\mathbb P^1_k$ with $\\mathcal O_E(E)\\cong\\mathcal O(-1)$, so the intersection product is defined on $X'$ and $E^2=-r=-1$; moreover $E\\cdot\\pi^*D=0$ and $\\pi^*D\\cdot\\pi^*D'=D\\cdot D'$ for all Cartier divisors $D,D'$ on $X$. [F2]\n\n1.2 $l\\cdot l=1$. Choose a line $L'$ on $X$; its class satisfies $[\\mathcal O_X(L')]=[\\mathcal O_X(1)]$, so $l\\cdot l=\\pi^*\\mathcal O_X(L')\\cdot\\pi^*\\mathcal O_X(L')=\\mathcal O_X(L')\\cdot\\mathcal O_X(L')=1$ by the pullback identity and the plane computation. [F1, F2, F3]\n\n1.3 $l\\cdot E=0$. With $D$ the Cartier divisor of any line on $X$, so that $\\pi^*D$ has class $l$, the orthogonality clause gives $E\\cdot\\pi^*D=0$, that is, $l\\cdot E=E\\cdot l=0$ by symmetry. [F2, F3]\n\n2.1 $E\\cdot E=-1$. This is the self-intersection formula of step 1.1 with $r=1$. [F2, step 1.1]\n\n3.1 The matrix. Steps 1.2, 1.3 and 2.1 give $l\\cdot l=1$, $l\\cdot E=0=E\\cdot l$ and $E\\cdot E=-1$; if $al+bE=0$ in $\\operatorname{Pic}(X\\prime)$, pairing with $l$ gives $a=0$ and pairing with $E$ gives $-b=0$. Thus these classes freely generate the stated sublattice; by bilinearity its Gram matrix of the sublattice $\\mathbb Zl+\\mathbb ZE$ in the basis $(l,E)$ is $\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$. [F1, step 1.2, step 1.3, step 2.1]\n\n3.2 The strict transform of a line through $p$. Let $L$ be a line through $p$ with strict transform $m$. The line is reduced and its multiplicity at $p$ is $1$, so $\\pi^*L=m+E$ and $m\\cdot E=1$ and $m\\cdot m=L\\cdot L-1=0$; equivalently, taking classes and using $\\mathcal O_{X'}(\\pi^*L)\\cong\\pi^*\\mathcal O_X(1)$, the class of $m$ is $l-E$, and bilinearity and steps 1.2\u20132.1 give $m\\cdot E=l\\cdot E-E\\cdot E=0+1=1$ and $m\\cdot m=l\\cdot l-2l\\cdot E+E\\cdot E=1-0-1=0$, in agreement. [F1, F2, F3, step 1.2, step 1.3, step 2.1]\n\n4.1 Conclusion and choice accounting. Steps 1.2, 1.3 and 2.1 give the matrix of the intersection form on $\\mathbb Zl+\\mathbb ZE$, and step 3.2 gives $m=l-E$, $m\\cdot E=1$, $m\\cdot m=0$ for the strict transform of a line through $p$. The Axiom of Choice enters through the suppliers recorded in [F4]; the point, the lines and the blowup are given data and no selection is made in the computations. [F4, step 3.1, step 3.2] \u220e",
+        "design_row": "AG-SURF-1",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf"
+            },
+            {
+              "title": "The Stacks Project, Varieties, Section 33.45 (Numerical intersections)",
+              "url": "https://stacks.math.columbia.edu/tag/0BEL"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "cex-intersection-pairing-needs-cartier-or-cycle-hypotheses",
+        "kind": "counterexample",
+        "title": "The intersection product needs Cartier or complementary-dimension hypotheses",
+        "deps": [
+          "cor-dimension-affine-and-projective-space",
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "cor-transcendence-degree-tower-additivity",
+          "def-axiom-of-choice",
+          "def-cartier-divisor",
+          "def-closed-immersion-schemes",
+          "def-coherent-module-scheme",
+          "def-dependent-choice",
+          "def-dimension-noetherian-topological-space",
+          "def-discrete-valuation-ring",
+          "def-divisor-intersection-number-on-smooth-projective-surface",
+          "def-effective-cartier-divisor",
+          "def-euler-characteristic-coherent-sheaf",
+          "def-graded-ring-and-graded-module",
+          "def-height-of-a-prime-ideal",
+          "def-integral-closure-and-integrally-closed-domain",
+          "def-integral-scheme",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-localisation-at-a-prime-ideal",
+          "def-localisation-of-a-module",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-normal-noetherian-ring",
+          "def-order-codimension-one-rational-function",
+          "def-projective-morphism-pre-proj",
+          "def-reduction-of-scheme",
+          "def-relative-projective-space-standard-charts",
+          "def-section-zero-scheme-invertible-sheaf",
+          "def-sheaf-total-quotient-rings",
+          "def-smooth-morphism-to-field-classical",
+          "def-weil-divisor-normal-noetherian-scheme",
+          "lem-field-is-noetherian",
+          "lem-global-section-effective-divisor",
+          "lem-noetherian-open-subsets-are-quasi-compact",
+          "lem-normal-domain-implies-s-two",
+          "lem-polynomial-algebras-over-fields-are-integrally-closed",
+          "lem-r-one-s-two-intersection-of-height-one-localisations",
+          "thm-affine-domain-dimension-transcendence-degree",
+          "thm-cartier-to-weil-divisor-normal-scheme",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-closed-subschemes-projective-space-homogeneous-ideals",
+          "thm-cohomology-projective-space-twisting-sheaves",
+          "thm-krull-principal-ideal-theorem",
+          "thm-noetherian-ring-quotients-and-localisations",
+          "thm-normality-is-local-for-domains",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "thm-projective-morphism-proper",
+          "thm-projective-space-as-proj",
+          "thm-regular-local-rings-are-normal"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited through the Euler-characteristic supplier. The claim refuted: (a) every effective prime divisor on a normal integral projective surface over a field is Cartier, so that its self-intersection is defined by the alternating-sum formula of def-divisor-intersection-number-on-smooth-projective-surface; and (b) for every smooth projective k-scheme X of dimension at least two and all effective Cartier divisors D, E on X, the scheme-theoretic intersection D cap E is finite and its length over k equals the alternating sum chi(X,O_X) - chi(X,O_X(-D)) - chi(X,O_X(-E)) + chi(X,O_X(-D-E)).",
+        "strategy": "(a) Let k be a field of characteristic different from 2 and let X = V_+(xy - z^2) in P^3_k be the projective quadric cone with vertex v = [0:0:0:1]. Its affine chart w = 1 is the affine cone Spec k[x,y,z]/(xy - z^2), which is normal and integral, and the published counterexample cex-weil-divisor-not-cartier-singular-cone proves that the prime divisor Z = V(x,z) (the ruling through the vertex) is not Cartier at the vertex: no neighbourhood of the vertex carries a Cartier divisor with associated Weil divisor [Z]. Normality and integrality are local, so X is a normal integral projective surface on which the effective prime divisor Z is not Cartier, and O_X(-Z) does not exist as an invertible sheaf; the definition therefore gives no value Z . Z. (b) Let k be algebraically closed, X = P^3_k, D = V(x_0) (a plane) and E = V(x_1) (another plane). The two divisors are effective Cartier, but D cap E = V(x_0,x_1) is a line, so no finite point count exists; the alternating sum with L = M = O(1) is chi(O) - 2 chi(O(-1)) + chi(O(-2)) = 1 - 0 + 0 = 1, a value unchanged if E is replaced by D, whose intersection with D is 2-dimensional. Hence the sum is not a count of points: the dimension hypothesis dim Supp F <= n in the definition cannot be dropped, and cycles must have complementary dimension for a length interpretation. The Axiom of Choice enters only through the Euler-characteristic supplier and the published counterexample; the two computations make no selection.",
+        "design_row": "AG-SURF-1",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ravi Vakil, The Rising Sea: Foundations of Algebraic Geometry, pre-publication version 2025-10-21",
+              "url": "https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf",
+              "locator": "\u00a720.1.1, printed pp. 574-575 (the warning dim Supp F <= n), and \u00a722.4.10, printed pp. 652-653: blowing up an effective Weil divisor which is not Cartier, with the local non-principality of (w,x)"
+            },
+            {
+              "title": "The Stacks Project",
+              "url": "https://stacks.math.columbia.edu/tag/0BEL",
+              "locator": "Definition 33.45.3 (tag 0BEP), whose hypothesis d = dim Z fixes the number of invertible sheaves to the dimension of the cycle"
+            }
+          ]
+        },
+        "dependency_level": 1
+      }
+    ]
+  }
+]

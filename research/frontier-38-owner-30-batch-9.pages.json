@@ -1,0 +1,936 @@
+[
+  {
+    "order": 510.051,
+    "id": "the-hook-length-formula-and-rsk-correspondence",
+    "kind": "A",
+    "category": "representation-theory",
+    "title": "The Hook Length Formula and Rsk Correspondence",
+    "companion": "the-hook-length-formula-and-rsk-correspondence-examples",
+    "requires": [
+      "young-diagrams-tableaux-and-permutation-modules",
+      "specht-modules-and-the-irreducibles-of-the-symmetric-group",
+      "the-branching-rule-and-the-young-graph"
+    ],
+    "items": [
+      {
+        "id": "def-hook-arm-leg-and-hook-length",
+        "kind": "definition",
+        "title": "Hook, arm, leg, and hook length of a box",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-removable-and-addable-nodes-of-a-partition",
+          "def-young-tableau-standard-tableau-and-shape"
+        ],
+        "statement": "Let $\\lambda\\vdash n$ with English Young diagram $[\\lambda]$ ([[def-partition-young-diagram-and-conjugate-partition]]) and let $x=(i,j)\\in[\\lambda]$. The **hook of $x$** is the set $$H(x):=\\{(i,j')\\in[\\lambda]:j'\\ge j\\}\\cup\\{(i',j)\\in[\\lambda]:i'\\ge i\\},$$ the union of the boxes of $[\\lambda]$ weakly to the right of $x$ in row $i$ and weakly below $x$ in column $j$; the box $x$ itself belongs to both parts and is counted once. The **arm** $\\operatorname{arm}(x)$ is the part in row $i$ strictly to the right of $x$, so $\\operatorname{arm}(x)=\\{(i,j'):j<j'\\le\\lambda_i\\}$; the **leg** $\\operatorname{leg}(x)$ is the part in column $j$ strictly below $x$, so $\\operatorname{leg}(x)=\\{(i',j):i<i'\\le\\lambda'_j\\}$. The **arm length** is $a(x):=\\lambda_i-j$, the **leg length** is $\\ell(x):=\\lambda'_j-i$, and the **hook length** is $$h(x):=a(x)+\\ell(x)+1=\\lambda_i-j+\\lambda'_j-i+1;$$ thus $H(x)$ has exactly $h(x)$ boxes. A box is removable in the sense of [[def-removable-and-addable-nodes-of-a-partition]] if and only if it is the last box of its row and of its column, i.e. if and only if $h(x)=1$; the empty partition has no boxes. Finally $P(\\lambda):=\\prod_{x\\in[\\lambda]}h(x)$ denotes the **hook product** of $\\lambda$, the empty product $P(\\varnothing)=1$ being part of the convention.",
+        "strategy": "Unpack the published English-diagram coordinates and the published row form of removable nodes. Every box of the hook lies in $[\\lambda]$ by the row/column description of the diagram; the arm has $\\lambda_i-j$ boxes and the leg has $\\lambda'_j-i$ boxes ([[def-partition-young-diagram-and-conjugate-partition]] defines $\\lambda'_j$ as the number of rows of length at least $j$, so the boxes of column $j$ below row $i$ are exactly rows $i+1,\\dots,\\lambda'_j$), and the three parts are disjoint except for the anchor, giving the count $h(x)=a(x)+\\ell(x)+1$. By [[def-removable-and-addable-nodes-of-a-partition]] a box $(i,\\lambda_i)$ is removable exactly when $\\lambda_i>\\lambda_{i+1}$, equivalently when no box lies immediately below it; combined with the row-end condition $j=\\lambda_i$ this is exactly $a(x)=\\ell(x)=0$, i.e. $h(x)=1$. This fixes the off-by-one convention used by the whole page. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.2, printed pp. 2-3: hook eta_x, arm, leg, hook/arm/leg lengths, and Proposition 1.4(i); read in the full 42-page text."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a77, printed p. 27: hook formula statement and the hook lengths h_{ij} of [lambda]; read in the full 40-page PDF text."
+            },
+            {
+              "title": "Pavel Etingof et al., Introduction to Representation Theory, MIT 18.712 Chapter 4 (OCW Chapter 4 file, 32 pp.)",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf",
+              "locator": "\u00a74.17, PDF pp. 17-18: the hook of (i,j) and its length h(i,j); read in the 32-page Chapter 4 file."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-standard-tableau-removal-recursion",
+        "kind": "lemma",
+        "title": "The removal recursion for standard tableaux",
+        "deps": [
+          "def-removable-and-addable-nodes-of-a-partition",
+          "def-young-tableau-standard-tableau-and-shape",
+          "lem-largest-entry-of-a-standard-tableau-is-removable"
+        ],
+        "statement": "For every $\\lambda\\vdash n$ the map that sends a standard $\\lambda$-tableau $t$ to the pair $(x,t^-)$, where $x$ is the box occupied by $n$ and $t^-$ is the restriction of $t$ to $[\\lambda]\\setminus\\{x\\}$, is a bijection from the set of standard $\\lambda$-tableaux onto the disjoint union, over the removable nodes $x\\in\\operatorname{Rem}(\\lambda)$, of the sets of standard $(\\lambda-x)$-tableaux. Consequently $$f^\\lambda=\\sum_{x\\in\\operatorname{Rem}(\\lambda)}f^{\\lambda-x}\\qquad(\\lambda\\vdash n),$$ with the convention $f^\\varnothing=1$; for $n=0$ both sides count the empty tableau.",
+        "strategy": "Well-definedness of the map is [[lem-largest-entry-of-a-standard-tableau-is-removable]]: the box of $n$ is removable and deleting it leaves a standard tableau of shape $\\lambda-x$. For the inverse, let $x\\in\\operatorname{Rem}(\\lambda)$ and let $t^-$ be a standard tableau of shape $\\lambda-x$; define $t$ by $t(x)=n$ and $t(y)=t^-(y)$ for $y\\ne x$. The diagram is $[\\lambda]$, and $t$ is a bijection $[\\lambda]\\to\\{1,\\dots,n\\}$; it is standard because the only new adjacent comparisons involve $x$ and its at most two neighbours in $[\\lambda]$, whose entries are $\\le n-1<n$, while all comparisons away from $x$ are those of $t^-$. The two constructions are visibly inverse, so the count follows by summing cardinalities over the disjoint ranges; the term $f^{\\varnothing}$ is the unique empty tableau. No choice is used (all sets are finite and the map is deterministic).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.4, printed p. 7: the bijection between standard lambda-tableaux and the union of the standard (lambda minus x)-tableaux, and the displayed recursion f^lambda = sum_{x in Rem(lambda)} f^{lambda minus x}; read in the full text."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "Chapter 7 opening, printed p. 27: the recalled recursion f^lambda = sum_i f^{lambda minus i} with the convention that non-partitions contribute zero; read in the full text."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-hook-product-change-under-corner-removal",
+        "kind": "lemma",
+        "title": "Removing a corner changes hooks only along its hook",
+        "deps": [
+          "def-hook-arm-leg-and-hook-length",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-removable-and-addable-nodes-of-a-partition"
+        ],
+        "statement": "Let $\\lambda\\vdash n$ with $n\\ge1$, let $x=(a,b)\\in\\operatorname{Rem}(\\lambda)$\nbe a removable node (so $b=\\lambda_a$ and $a=\\lambda'_b$, and the arm and leg\nof $x$ are empty), and let $\\mu:=\\lambda-x$. Put\n$$R_x:=\\{(a,j):1\\le j<b\\}\\cup\\{(i,b):1\\le i<a\\},$$\nthe boxes of $[\\mu]$ lying in row $a$ or in column $b$; these are exactly the\nboxes whose hook contains $x$. Then:\n\n1. $h_\\mu(y)=h_\\lambda(y)$ for every $y\\in[\\mu]\\setminus R_x$, and\n   $h_\\mu(y)=h_\\lambda(y)-1$ for every $y\\in R_x$; in particular every\n   $y\\in R_x$ has $h_\\lambda(y)\\ge2$.\n2. Consequently, with $P$ the hook product of\n   [[def-hook-arm-leg-and-hook-length]],\n\n$$\\frac{P(\\lambda)}{P(\\mu)}=\\prod_{y\\in R_x}\\frac{h_\\lambda(y)}{h_\\lambda(y)-1}.$$",
+        "strategy": "For a removable corner x=(a,b), its own arm and leg are empty. The affected set R_x consists of boxes left of x in row a and above x in column b: these are precisely the hooks containing x. Compare row length a and column height b after removal; each hook on R_x decreases by1, all other remaining hooks are unchanged, and each denominator is positive because these hooks originally had length at least2. Taking the finite hook product gives the stated ratio.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.4, printed pp. 7-9: the case distinction h^{(x)}_{i,j}=h_{i,j} except h^{(x)}_{a,1}=h_{a,1}-1 used in the induction proof of Lemma 1.11 and Theorem 1.13; read in the full text."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a77, printed p. 28: Theorem 7.3(b) and its hook-product manipulation; the same local hook reduction is behind Lemma 7.2 on the same pages."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-hook-product-branching-identity",
+        "kind": "lemma",
+        "title": "The hook-product ratios sum to the size",
+        "deps": [
+          "def-hook-arm-leg-and-hook-length",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "def-polynomial-evaluation-and-root",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-removable-and-addable-nodes-of-a-partition",
+          "lem-hook-product-change-under-corner-removal",
+          "prop-polynomial-degree-laws-over-a-commutative-ring",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ],
+        "statement": "Let $\\lambda\\vdash n$ and, for $x\\in\\operatorname{Rem}(\\lambda)$, let\n$$R(x):=\\prod_{y\\in R_x}\\frac{h_\\lambda(y)}{h_\\lambda(y)-1}$$\nbe the ratio $P(\\lambda)/P(\\lambda-x)$ of\n[[lem-hook-product-change-under-corner-removal]], where\n$R_x\\subseteq[\\lambda-x]$ is the set of boxes of row $a$ and column $b$ of\n$x=(a,b)$ and $h_\\lambda$ is the hook length of\n[[def-hook-arm-leg-and-hook-length]]. Then\n\n$$\\sum_{x\\in\\operatorname{Rem}(\\lambda)}R(x)=n,$$\n\nthe empty sum for $\\lambda=\\varnothing$ being $0$.",
+        "strategy": "Write $r$ for the number of parts and $h_{i,1}=\\lambda_i+r-i$ for the first-column hook lengths, so that $\\sum_{i=1}^r h_{i,1}=n+\\binom r2$. Step 1 (first-column form of $R$): if $x$ is the removable node of row $a$, then $R(x)=h_{a,1}\\prod_{i\\ne a}\\bigl(1+1/(h_{i,1}-h_{a,1})\\bigr)$. Proof: for $i<a$ the leg box $(i,\\lambda_a)$ has hook $h_{i,1}-h_{a,1}+1$; for the arm use the finite set identity $\\{h(a,1),\\dots,h(a,\\lambda_a)\\,\\}\\cup\\{h_{a,1}-h_{i,1}:i>a\\}=\\{1,\\dots,h_{a,1}\\}$ (the argument of Craven Lemma 1.11: these $\\lambda_a+(r-a)=h_{a,1}$ integers are pairwise distinct and lie in $[1,h_{a,1}]$, the only possible collision being ruled out by the comparison of leg lengths), which gives $\\prod_{j<\\lambda_a}h(a,j)/(h(a,j)-1)=h_{a,1}\\prod_{i>a}(d_i-1)/d_i$ with $d_i=h_{a,1}-h_{i,1}\\ge2$ for a corner row; the leg factors give the $i<a$ terms. Step 2: extend the sum over all rows: if row $a$ has no removable node then $h_{a,1}-h_{a+1,1}=1$ and the factor $1+1/(h_{a+1,1}-h_{a,1})=0$, so $\\sum_{x\\in\\operatorname{Rem}(\\lambda)}R(x)=\\sum_{a=1}^r h_{a,1}\\prod_{i\\ne a}(1+1/(h_{i,1}-h_{a,1}))$. Step 3 (elementary finite identity, after Craven Proposition 1.12): for any field $K$, any $r\\ge1$ and pairwise distinct $z_1,\\dots,z_r\\in K$, $$\\sum_{i=1}^r z_i\\prod_{j\\ne i}\\Bigl(1+\\frac1{z_j-z_i}\\Bigr)=\\sum_{i=1}^r z_i-\\binom r2.$$ Proof: let $Q(t)=\\prod_j(t-z_j)$ and $\\ell_i(t)=\\prod_{j\\ne i}(t-z_j)/(z_i-z_j)$; for $g\\in K[t]$ of degree $\\le r-1$ the polynomial $\\sum_i g(z_i)\\ell_i(t)$ has degree $\\le r-1$ and the same values as $g$ at the $r$ distinct points $z_i$, hence equals $g$ by [[thm-root-bound-for-polynomials-over-a-domain]], and comparing coefficients of $t^{r-1}$ gives $\\sum_i g(z_i)/\\prod_{j\\ne i}(z_i-z_j)=[t^{r-1}]g$. Apply this to $g(t)=tQ(t-1)-(t-r)Q(t)$: the $t^{r+1}$- and $t^r$-coefficients cancel, so $\\deg g\\le r-1$, and using $Q(t)=t^r-e_1t^{r-1}+e_2t^{r-2}-\\cdots$ and $Q(t-1)=\\prod(t-(z_j+1))$ one computes $[t^{r-1}]g=\\binom r2-e_1$ with $e_1=\\sum z_i$; since $Q(z_i)=0$ and $Q(z_i-1)/\\prod_{j\\ne i}(z_i-z_j)=-\\prod_{j\\ne i}(1+1/(z_j-z_i))$, the identity follows. Step 4: apply Step 3 with $z_i=h_{i,1}$ (distinct, strictly decreasing) and use $\\sum h_{i,1}=n+\\binom r2$ from Step 2 to obtain $n$. Sources: Craven Proposition 1.12 states the same finite identity (proved there by residues) and Craven Lemma 1.11 supplies the set identity; the local proof replaces the residue computation by the equivalent Lagrange-interpolation computation, recorded as an altered proof. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.4, printed pp. 8-10: Lemma 1.11 (hook product in first-column hooks, with the no-repetition proof) and Proposition 1.12 (the identity sum_i z_i prod_{j ne i}(1+1/(z_j-z_i)) = sum_i z_i - C(r,2), proved by residues); read in the full text."
+            },
+            {
+              "title": "Pavel Etingof et al., Introduction to Representation Theory, MIT 18.712 Chapter 4 (OCW Chapter 4 file, 32 pp.)",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf",
+              "locator": "\u00a74.17, PDF p. 18: the statement that deleting the first row inductively yields the hook product; read in the Chapter 4 file as a statement check on the same arithmetic."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-hook-length-formula",
+        "kind": "theorem",
+        "title": "The hook length formula",
+        "deps": [
+          "def-hook-arm-leg-and-hook-length",
+          "lem-hook-product-branching-identity",
+          "lem-hook-product-change-under-corner-removal",
+          "lem-standard-tableau-removal-recursion",
+          "thm-standard-polytabloid-basis"
+        ],
+        "statement": "For every $n\\ge0$ and every $\\lambda\\vdash n$, the number $f^\\lambda$ of standard $\\lambda$-tableaux is $$f^\\lambda=\\frac{n!}{\\prod_{x\\in[\\lambda]}h(x)},$$ the empty product for $\\lambda=\\varnothing$ being $1$, so that $f^\\varnothing=1$ and $f^\\lambda=1$ for $\\lambda=(n)$ and $\\lambda=(1^n)$. In particular, over $\\mathbb C$, $$\\dim_{\\mathbb C}S^\\lambda=\\frac{n!}{\\prod_{x\\in[\\lambda]}h(x)}$$ for the Specht module $S^\\lambda$, including $\\dim_{\\mathbb C}S^\\varnothing=1$.",
+        "strategy": "Strong induction on $n$. The case $n=0$ is the empty product and $f^\\varnothing=1$; the case $n=1$ has the single box with $h=1$. For $n\\ge2$, [[lem-standard-tableau-removal-recursion]] gives $f^\\lambda=\\sum_{x\\in\\operatorname{Rem}(\\lambda)}f^{\\lambda-x}$; by the induction hypothesis $f^{\\lambda-x}=(n-1)!/P(\\lambda-x)$, and [[lem-hook-product-change-under-corner-removal]] makes $P(\\lambda-x)=P(\\lambda)/R(x)$ with $R(x)$ as in [[lem-hook-product-branching-identity]]. Hence $$f^\\lambda=\\sum_x\\frac{(n-1)!\\,R(x)}{P(\\lambda)}=\\frac{(n-1)!}{P(\\lambda)}\\sum_xR(x)=\\frac{(n-1)!\\,n}{P(\\lambda)}=\\frac{n!}{P(\\lambda)},$$ the penultimate equality being the branching identity. The dimension statement is [[thm-standard-polytabloid-basis]], which identifies $\\dim_{\\mathbb C}S^\\lambda$ with $f^\\lambda$ (including the empty shape). No character theory, no Frobenius formula and no choice principle are used; the induction is over the finite set of partitions of $n$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.4, printed pp. 7-11: Lemma 1.11, Proposition 1.12, and Theorem 1.13 (Frame-Robinson-Thrall) with the completed removable-node induction; read in the full text."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a77, printed pp. 27-28: the hook formula f^lambda = n!/prod h_ij, stated as the chapter aim and proved there by the Young-Frobenius/determinant route (Theorem 7.3); read in the full text as a statement check."
+            },
+            {
+              "title": "Pavel Etingof et al., Introduction to Representation Theory, MIT 18.712 Chapter 4 (OCW Chapter 4 file, 32 pp.)",
+              "url": "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf",
+              "locator": "\u00a74.17, PDF p. 18: Theorem 4.53 (the hook length formula) with the first-row deletion induction; read in the Chapter 4 file as an independent statement check."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-row-insertion-and-bumping-route",
+        "kind": "definition",
+        "title": "Row insertion and the bumping route",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-young-tableau-standard-tableau-and-shape"
+        ],
+        "statement": "Let $T$ be a standard tableau whose entries are distinct real numbers and let $x\\in\\mathbb R$ be a number that is not an entry of $T$. The **row insertion** $T\\leftarrow x$ is the following procedure. Put $x_1:=x$ and consider row $1$. At row $i$: if row $i$ is empty or $x_i$ is larger than every entry of row $i$, append $x_i$ in a new box at the right end of row $i$ and stop; otherwise let $r_i$ be the position of the leftmost entry $y_i$ of row $i$ with $y_i>x_i$, replace that entry by $x_i$, put $x_{i+1}:=y_i$, and continue with row $i+1$. The procedure terminates: if $r_i$ is defined for a nonempty row $i$, then the row $i+1$, if nonempty, has length $<r_i$ or has its entry in position $r_i$ larger than $y_i$, so the position $r_{i+1}$ of the next replacement, when it exists, satisfies $r_{i+1}\\le r_i$; hence after at most $k+1$ row visits (where $k$ is the number of nonempty rows of $T$) the letter is appended. The output is a filling of $[\\operatorname{shape}(T)]\\cup\\{b\\}$ where the **new box** is $b=(s,r_s)$ with $r_s=\\lambda_s+1$ in the row $s$ in which the route stopped, or $b=(k+1,1)$ if a new row was opened. The sequence $(r_1,\\dots,r_s)$ is the **bumping route** and $x=x_1<x_2<\\dots<x_s$ are the **bumped letters** (the strict increase is [[lem-row-bumping-route-monotonicity]]). The procedure is deterministic, so $T\\leftarrow x$ is well defined; standardness of the output is not part of the definition.",
+        "strategy": "Define the deterministic leftmost-strictly-greater rule on finite increasing real-labelled tableaux, with comparison-preserving rank relabelling to the published standard convention. If the next row has a box at the preceding bump position, column strictness bounds its next replacement position by that position. If the row is shorter, either bumping or appending selects a position at most its length+1 and thus at most the preceding position. After the last occupied row the carried label appends in an empty row, proving finite termination; exactly one box is added. Knuth INSERT assertions I1\u2013I5, p712. No Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)",
+              "url": "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf",
+              "locator": "p. 180: definition of S <- x (row insertion) with the displacement and append rules; read in the complete 13-page article."
+            },
+            {
+              "title": "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727",
+              "url": "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf",
+              "locator": "\u00a72, printed pp. 711-712: the INSERT (x) algorithm I1-I5 with its asserted invariants; read in the full text."
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.5, printed p. 11: the row-insertion procedure (i)-(iii); read in the full text."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-row-bumping-route-monotonicity",
+        "kind": "lemma",
+        "title": "Row insertion preserves standardness and its route is monotone",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-removable-and-addable-nodes-of-a-partition",
+          "def-row-insertion-and-bumping-route",
+          "def-young-tableau-standard-tableau-and-shape"
+        ],
+        "statement": "Let $T$ be a standard tableau with distinct real entries and let $x\\notin T$ be a real number. With the notation of [[def-row-insertion-and-bumping-route]] for $T\\leftarrow x$: (i) the bumped letters strictly increase, $x=x_1<x_2<\\dots<x_s$, and the route positions weakly decrease, $r_1\\ge r_2\\ge\\dots\\ge r_s\\ge1$; (ii) the new box $b=(s,r_s)$ is an addable node of $[\\operatorname{shape}(T)]$, and $T\\leftarrow x$ is a standard tableau of shape $\\operatorname{shape}(T)+b$, whose entries are exactly the entries of $T$ together with $x$.",
+        "strategy": "The bumped values strictly increase by the leftmost-greater rule. If the lower row reaches the current bump column, its value there exceeds the carried label, bounding the next position; if shorter, either bump or append has position at most lower_length+1. At the final append, its column is at most a replaced column of the preceding row, so the preceding row is strictly longer than the old final row and the new box is addable. Check strict rows by the threshold and strict columns by the carried-value/position comparison; the entry multiset gains only the input. Finite rank relabelling handles distinct real alphabets. No Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)",
+              "url": "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf",
+              "locator": "p. 181: Lemma 1, that S <- x and x -> S are standard tableaux, with the full row/column comparison proof; read in the complete article."
+            },
+            {
+              "title": "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727",
+              "url": "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf",
+              "locator": "\u00a72, printed p. 712: the parenthesized invariants of I2-I5 asserting that the array remains a generalized Young tableau throughout; read in the full text."
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.5, printed p. 11: 'the process of row insertion definitely yields a partial tableau, and so P_n is a standard tableau'; read in the full text."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-robinson-schensted-recording-tableau-is-standard",
+        "kind": "lemma",
+        "title": "The recording tableau of row insertion is standard",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-removable-and-addable-nodes-of-a-partition",
+          "def-row-insertion-and-bumping-route",
+          "def-young-tableau-standard-tableau-and-shape",
+          "lem-row-bumping-route-monotonicity"
+        ],
+        "statement": "Let $w=(w_1,\\dots,w_N)$ be a word of pairwise distinct real numbers and define $P_0:=\\varnothing$, $P_k:=P_{k-1}\\leftarrow w_k$ for $1\\le k\\le N$ ([[def-row-insertion-and-bumping-route]]), and let $Q_k$ be the filling of $[\\operatorname{shape}(P_k)]$ that carries the label $k$ in the box added at step $k$ and the label $j$ in the box added at step $j$ for $j<k$ ([[lem-row-bumping-route-monotonicity]] guarantees that the added boxes are distinct and addable). Then every $Q_k$ is a standard tableau with entries $1,\\dots,k$ of the same shape as $P_k$; in particular $Q_N$ is a standard tableau of size $N$.",
+        "strategy": "Induction on $k$. The new box $b_k$ of $P_k$ is addable in $[\\operatorname{shape}(P_{k-1})]$ by [[lem-row-bumping-route-monotonicity]](ii), so it is a box at the end of its row and of its column of $[\\operatorname{shape}(P_k)]$; assigning to it the label $k$, which is larger than every existing label, keeps rows increasing (there is no box to its right in its row) and keeps columns increasing (no box below it in its column), while all earlier comparisons are unchanged. Hence $Q_k$ is standard. This is Schensted's Lemma 2 (printed p. 182); the explicit appeal to the addability of the new box isolates the well-definedness of the recording process. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)",
+              "url": "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf",
+              "locator": "p. 182: Lemma 2 (the Q-symbol is a standard tableau) with proof; read in the complete article."
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.5, printed p. 11: 'It is clear from what we have just said that Q_i is always standard'; read in the full text."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a78, printed p. 29: Theorem 8.2 that the pair produced by the insertion map consists of standard tableaux; read in the full text."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-reverse-row-deletion",
+        "kind": "definition",
+        "title": "Reverse row deletion from a removable box",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-removable-and-addable-nodes-of-a-partition",
+          "def-row-insertion-and-bumping-route",
+          "def-young-tableau-standard-tableau-and-shape"
+        ],
+        "statement": "Let $U$ be a standard tableau with distinct real entries and let $b=(s,t)$ be a removable node of $[\\operatorname{shape}(U)]$ (so $t=\\lambda_s$). The **reverse row deletion** $U-b$ is the following procedure. Set $i:=s$ and $x_{s+1}:=+\\infty$. While $i\\ge1$: let $j$ be the largest index with $1\\le j\\le\\lambda_i$ and $U(i,j)<x_{i+1}$ (for $i=s$ this is $j=\\lambda_s=t$, the box $b$), set $x_i:=U(i,j)$ and overwrite the entry of box $(i,j)$ by $x_{i+1}$ (for $i=s$ this empties the box $b$), and if $i=1$ stop, otherwise replace $i$ by $i-1$ and repeat. The index $j$ exists at every step: after a row $i+1$ has been processed, the entry $x_{i+1}$ came from the box $(i+1,j_{i+1})$, and the box $(i,j_{i+1})$ of the row above lies in the diagram and carries a strictly smaller entry, so the set is nonempty. The procedure terminates after exactly $s$ row visits; its result is the filling $V$ of $[\\operatorname{shape}(U)]\\setminus\\{b\\}$ obtained by the overwrites, and the expelled letter is $x_1$. We write $(V,x_1):=U-b$; $V$ is standard (see the strategy) and $x_1$ is not an entry of $V$.",
+        "strategy": "This is the DELETE(s,t) algorithm of Knuth (p. 713) restricted to standard tableaux; the deletion step D2 selects the largest entry below the carried letter, which is the leftmost-smaller reverse bump. Existence of $j$ is proved by the column strictness of $U$ as stated, and termination is clear because $i$ decreases. That $V$ is standard is Knuth's assertion D3-D4: the overwritten entry $x_{i+1}$ is larger than the entry to its left in row $i$ (by the choice of the largest $j$ with $U(i,j)<x_{i+1}$) and smaller than the entry to its right (by maximality), and it is larger than the entry above it and smaller than the entry below the displaced one; the column comparisons are preserved by the same argument as in insertion. The expelled letter $x_1$ is the entry of a box of $U$ and every other entry of $U$ survives with multiplicity one, so for a standard $U$ (distinct entries) $x_1$ does not occur in $V$. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727",
+              "url": "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf",
+              "locator": "\u00a72, printed p. 713: DELETE (s,t), steps D1-D5, with the asserted invariants and the remark that INSERT and DELETE are inverse; read in the full text."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a78, printed p. 29: Algorithm 8.4 (the deletion algorithm) and Example 8.5; read in the full text."
+            },
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.5, printed p. 12: the reverse procedure in the proof of Theorem 1.14 (find the box of n in Q, delete it, move up bumping back); read in the full text."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-row-insertion-and-reverse-deletion-are-inverse",
+        "kind": "lemma",
+        "title": "Row insertion and reverse deletion are two-sided inverses",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-reverse-row-deletion",
+          "def-row-insertion-and-bumping-route",
+          "def-young-tableau-standard-tableau-and-shape",
+          "lem-row-bumping-route-monotonicity"
+        ],
+        "statement": "Let $T$ be a standard tableau with distinct real entries, let $x\\notin T$, and let $U:=T\\leftarrow x$ with new box $b$. Then: (a) $U-b=(T,x)$. Conversely: (b) if $U$ is a standard tableau, $b$ a removable node of $[\\operatorname{shape}(U)]$ and $(V,x):=U-b$ the result of reverse deletion, then $x\\notin V$ and $V\\leftarrow x=U$ with new box $b$. Thus reverse deletion at the new box undoes insertion, and insertion undoes reverse deletion at any removable box.",
+        "strategy": "After insertion, row i at r_i has x_i<x_{i+1}; its entries left are smaller than x_i and right are unchanged old entries larger than x_{i+1}. Thus reverse deletion carrying x_{i+1} chooses r_i, restoring the old entry and carrying x_i upward. Conversely, after deletion the overwritten position j_i holds x_{i+1}>x_i, entries left are smaller than x_i, and entries right are larger than x_{i+1}. Reinsertion carries x_i into row i, bumps x_{i+1}, and reconstructs row i+1 next; the last row appends x_s at the removed corner. Explicit s=1 case. The expelled letter is absent from the remaining tableau because entries are distinct. Knuth INSERT/DELETE pp713\u2013714. No Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727",
+              "url": "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf",
+              "locator": "\u00a72, printed pp. 713-714: 'the deletion algorithm recomputes the sequences determined by the insertion algorithm, and it restores Y', and conversely INSERT restores every DELETE; read in the full text."
+            },
+            {
+              "title": "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)",
+              "url": "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf",
+              "locator": "pp. 182-183: Lemma 3, the recovery procedure showing that the pair (P-symbol, Q-symbol) determines the sequence; read in the complete article."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a78, printed p. 30: Theorem 8.7, that the deletion and insertion algorithms are inverse to each other, parts (a) and (b); read in the full text."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-robinson-schensted-correspondence",
+        "kind": "theorem",
+        "title": "The Robinson-Schensted correspondence",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-removable-and-addable-nodes-of-a-partition",
+          "def-reverse-row-deletion",
+          "def-row-insertion-and-bumping-route",
+          "def-young-tableau-standard-tableau-and-shape",
+          "lem-largest-entry-of-a-standard-tableau-is-removable",
+          "lem-robinson-schensted-recording-tableau-is-standard",
+          "lem-row-bumping-route-monotonicity",
+          "lem-row-insertion-and-reverse-deletion-are-inverse"
+        ],
+        "statement": "For $n\\ge0$ let $X_n$ be the set of words $(w_1,\\dots,w_n)$ of pairwise distinct real numbers with $\\{w_1,\\dots,w_n\\}=\\{1,2,\\dots,n\\}$ (the permutations of $\\{1,\\dots,n\\}$ written in one-line form). The **Robinson-Schensted map** $w\\mapsto(P(w),Q(w))$, where $P(w)$ is the iterated row insertion of $w_1,\\dots,w_n$ ([[def-row-insertion-and-bumping-route]]) and $Q(w)$ the recording tableau of [[lem-robinson-schensted-recording-tableau-is-standard]], is a bijection from $X_n$ onto the set of pairs $(P,Q)$ of standard tableaux of the same shape $\\lambda\\vdash n$. The inverse map sends a pair $(P,Q)$ to the word recovered by iterated reverse deletion: for $k=n,n-1,\\dots,1$, delete from the current insertion tableau the box occupied by the label $k$ in the current recording tableau (a removable node, by [[lem-largest-entry-of-a-standard-tableau-is-removable]] and [[lem-robinson-schensted-recording-tableau-is-standard]]), record the expelled letter as $w_k$, and continue with the two shrunken tableaux.",
+        "strategy": "Well-definedness: [[lem-row-bumping-route-monotonicity]] makes each $P_k$ standard of the correct shape, and [[lem-robinson-schensted-recording-tableau-is-standard]] makes $Q=Q(w)$ standard of the same shape as $P=P(w)$. The inverse is the algorithm of Schensted's Lemma 3 / Craven's Theorem 1.14: at step $k$ the current recording tableau is a standard tableau of size $k$ (each reverse deletion removes the largest label, and deleting the box of the largest entry of a standard tableau leaves a standard tableau, [[lem-largest-entry-of-a-standard-tableau-is-removable]]), so the box carrying $k$ is removable and reverse deletion applies; [[lem-row-insertion-and-reverse-deletion-are-inverse]] shows that re-inserting the expelled letters in the order $w_1,\\dots,w_n$ reconstructs the current insertion tableau and that the boxes added are exactly the recorded boxes, so the two maps are mutually inverse. Both sets are finite but the argument is constructive and does not compare cardinalities. No choice is used. Sources: Craven Theorem 1.14, Chan Theorem 8.9, Schensted Lemma 3, Martin Theorem 9.10.5.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.5, printed pp. 11-13: row insertion, the displayed P_i/Q_i example, the reversal procedure (i)-(iii), and Theorem 1.14; read in the full text."
+            },
+            {
+              "title": "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)",
+              "url": "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf",
+              "locator": "p. 182: Lemma 3, the one-to-one correspondence between sequences of distinct integers and pairs of standard tableaux, with the recovery procedure; read in the complete article."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a78, printed pp. 29-30: Theorems 8.6, 8.7 and 8.9 (the bijection S_n to pairs of standard tableaux); read in the full text."
+            },
+            {
+              "title": "Jeremy L. Martin, Lecture Notes on Algebraic Combinatorics (263 pp.)",
+              "url": "https://jeremymartinmath.github.io/CombinatoricsNotes.pdf",
+              "locator": "\u00a79.10, printed pp. 196-197: row insertion, the recovery argument, and Theorem 9.10.5; read in the full 263-page notes."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-first-row-insertion-basic-subsequences",
+        "kind": "lemma",
+        "title": "Basic subsequences of the first row",
+        "deps": [
+          "def-row-insertion-and-bumping-route",
+          "def-young-tableau-standard-tableau-and-shape",
+          "lem-row-bumping-route-monotonicity"
+        ],
+        "statement": "Let $w=(w_1,\\dots,w_N)$ be a word of pairwise distinct real numbers and let $P(w)$ be its insertion tableau. For $j\\ge1$ let $S_j$ be the list, in the order of insertion, of those letters which at the moment of their insertion are placed in position $j$ of the first row (a letter is in $S_j$ when, at its step, the first row of $P_k$ has length at least $j$ and its $j$-th entry is the inserted letter; equivalently the letters that pass through the $j$-th position of the first row). Then: (i) each $S_j$ is a strictly decreasing subsequence of $w$; (ii) for every $x\\in S_j$ with $j\\ge2$, the entry $y$ occupying position $j-1$ of the first row at the moment $x$ is inserted is a member of $S_{j-1}$ inserted earlier than $x$, and $y<x$. The lists $S_1,S_2,\\dots$ are the **basic subsequences** of $w$.",
+        "strategy": "A replacement at a fixed first-row position strictly decreases its occupant, giving the decreasing basic subsequences. For an input x placed at position j\u22652, every entry to its left is smaller than x by the leftmost-greater rule, or by the append condition if j is new; hence the preceding occupant y<x. That occupant was placed at j-1 by its own earlier insertion and never moved in the first row, so it belongs to S_(j-1). No Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)",
+              "url": "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf",
+              "locator": "pp. 183-184: the definition of basic subsequences, Lemma 4 (each basic subsequence is decreasing) and Lemma 5 (the predecessor in the previous basic subsequence), with proofs; read in the complete article."
+            },
+            {
+              "title": "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727",
+              "url": "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf",
+              "locator": "\u00a74, printed p. 718: the vertex-class description of the first row of P, with each class listed in decreasing bottom-line order; read in the full text as the equivalent formulation."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-column-insertion-for-distinct-letters",
+        "kind": "definition",
+        "title": "Column insertion",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-row-insertion-and-bumping-route",
+          "def-young-tableau-standard-tableau-and-shape",
+          "lem-row-bumping-route-monotonicity"
+        ],
+        "statement": "Let $T$ be a standard tableau with distinct real entries and let $x\\notin T$ be a real number. The **column insertion** $x\\to T$ is defined by the same rules as row insertion with rows replaced by columns: at column $i$, if column $i$ is empty or $x_i$ is larger than every entry of column $i$, append $x_i$ in a new box at the bottom of column $i$ and stop; otherwise let $y_i$ be the topmost entry of column $i$ that is larger than $x_i$, replace it by $x_i$, set $x_{i+1}:=y_i$, and continue with column $i+1$. Equivalently, $x\\to T=(T^{\\mathrm t}\\leftarrow x)^{\\mathrm t}$, where $T^{\\mathrm t}$ is the transposed tableau (a standard tableau of shape $[\\operatorname{shape}(T)']$, [[def-partition-young-diagram-and-conjugate-partition]]). The procedure terminates and $x\\to T$ is a standard tableau with entries those of $T$ together with $x$, of shape $[\\operatorname{shape}(T)]$ with one box added at the bottom of a column; the route positions weakly decrease from column to column.",
+        "strategy": "Transpose the definition of row insertion: the rows of $T^{\\mathrm t}$ are the columns of $T$ and vice versa, so [[def-row-insertion-and-bumping-route]] applied to $T^{\\mathrm t}$ and [[lem-row-bumping-route-monotonicity]] give termination, standardness and the placement of the new box (at the end of a row of $T^{\\mathrm t}$, which is the bottom of a column of $T$), after transposing back. No choice is used. Sources: Schensted's definition of $x\\to S$ (p. 180, 'replace the word row by column'), and Knuth's INSERT* (p. 720) for the same algorithm with weak inequalities.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)",
+              "url": "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf",
+              "locator": "p. 180: the definition of x -> S, obtained from S <- x by replacing 'row' by 'column'; read in the complete article."
+            },
+            {
+              "title": "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727",
+              "url": "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf",
+              "locator": "\u00a75, printed p. 720: the INSERT* (x) algorithm for dual tableaux and the note that it differs from INSERT by interchanging the inequalities; read in the full text."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-row-and-column-insertion-commute",
+        "kind": "lemma",
+        "title": "Row and column insertion commute",
+        "deps": [
+          "def-column-insertion-for-distinct-letters",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-row-insertion-and-bumping-route",
+          "def-young-tableau-standard-tableau-and-shape",
+          "lem-row-bumping-route-monotonicity"
+        ],
+        "statement": "Let $T$ be a standard tableau with distinct real entries and let $x\\ne y$ be real numbers not occurring in $T$. Then $$(x\\to T)\\leftarrow y\\;=\\;x\\to(T\\leftarrow y),$$ the equality being an equality of standard tableaux on the same diagram; equivalently, in the notation of the definitional relation $x\\to T=(T^{\\mathrm t}\\leftarrow x)^{\\mathrm t}$, row-inserting $y$ commutes with column-inserting $x$.",
+        "strategy": "Self-contained two-trail proof: label order excludes two common occupied boxes; monotone coordinates exclude an additional shared empty box. Every original occupied trail entry decreases under a slide, giving bump stability on disjoint paths and shared-path prefixes/suffixes. At an occupied common box S use Young-diagram order to show A adjacent left or J adjacent below, and I adjacent above or B adjacent right. For i<a this forces J directly below and gives labels i,s,a; for i>a it forces B directly right and gives a,i,s. Transpose to check the opposite insertion order. Treat input predecessors and empty successors explicitly; a common empty box yields min(i,a) at S and the other label directly below or right. No cited finite configuration analysis is a missing proof step.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)",
+              "url": "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf",
+              "locator": "pp. 183-187: Lemma 6, (x -> S) <- y = x -> (S <- y), with the largest-letter induction and the case enumeration of Figures 4-12; read in the complete article."
+            },
+            {
+              "title": "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727",
+              "url": "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf",
+              "locator": "\u00a76, printed p. 724: the relation P(v_n,...,v_1) = (P*(v_1,...,v_n))^t between row insertion of the reversed word and dual insertion; read in the full text as an independent check of the same identity."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-word-reversal-transposes-the-insertion-tableau",
+        "kind": "lemma",
+        "title": "Reversing a word transposes its insertion tableau",
+        "deps": [
+          "def-column-insertion-for-distinct-letters",
+          "def-row-insertion-and-bumping-route",
+          "def-young-tableau-standard-tableau-and-shape",
+          "lem-row-and-column-insertion-commute",
+          "lem-row-bumping-route-monotonicity"
+        ],
+        "statement": "Let $w=(w_1,\\dots,w_n)$ be a word of pairwise distinct real numbers and let $P(w_1,\\dots,w_n)$ denote the row-insertion tableau built by inserting $w_1,\\dots,w_n$ in this order. Then $$P(w_1,\\dots,w_n)=P(w_n,\\dots,w_1)^{\\mathrm t},$$ i.e. reversing the word transposes the insertion tableau. Equivalently, the first-letter column-insertion recursion $P(x_1,\\dots,x_n)=x_1\\to P(x_2,\\dots,x_n)$ holds for every word of distinct letters. There is no corresponding assertion for the recording tableau (Schensted's note).",
+        "strategy": "Step 1 (first-letter recursion): prove $P(x_1,\\dots,x_n)=x_1\\to P(x_2,\\dots,x_n)$ by induction on $n$, using [[lem-row-and-column-insertion-commute]]: for $n\\ge2$, $$x_1\\to P(x_2,\\dots,x_n)=x_1\\to\\bigl(P(x_2,\\dots,x_{n-1})\\leftarrow x_n\\bigr)=\\bigl(x_1\\to P(x_2,\\dots,x_{n-1})\\bigr)\\leftarrow x_n=P(x_1,\\dots,x_{n-1})\\leftarrow x_n=P(x_1,\\dots,x_n),$$ the third equality by the induction hypothesis and the base case being a single box. Step 2: using the definitional identity $(z\\to A)^{\\mathrm t}=A^{\\mathrm t}\\leftarrow z$, transpose Step 1 applied to the reversed word: $$P(w_n,\\dots,w_1)=w_n\\to P(w_{n-1},\\dots,w_1),$$ so by induction on $n$ (the induction hypothesis being $P(w_1,\\dots,w_{n-1})=P(w_{n-1},\\dots,w_1)^{\\mathrm t}$), $$P(w_n,\\dots,w_1)^{\\mathrm t}=\\bigl(w_n\\to P(w_1,\\dots,w_{n-1})^{\\mathrm t}\\bigr)^{\\mathrm t}=P(w_1,\\dots,w_{n-1})\\leftarrow w_n=P(w_1,\\dots,w_n).$$ This is Schensted's Lemma 7 (printed pp. 186-188) with the induction displayed. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)",
+              "url": "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf",
+              "locator": "pp. 186-188: Lemma 7, that the P-symbol of a sequence and of its reverse are transposes, with the inductive computation, and the note that it must not be assumed for Q-symbols; read in the complete article."
+            },
+            {
+              "title": "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727",
+              "url": "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf",
+              "locator": "\u00a76, printed p. 724: P(v_n,...,v_1) is the transpose of the dual insertion tableau of (v_1,...,v_n); read in the full text as an independent statement check."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-schensted-longest-increasing-and-decreasing-subsequence-theorem",
+        "kind": "theorem",
+        "title": "Schensted's longest increasing and decreasing subsequence theorem",
+        "deps": [
+          "def-row-insertion-and-bumping-route",
+          "def-young-tableau-standard-tableau-and-shape",
+          "lem-first-row-insertion-basic-subsequences",
+          "lem-robinson-schensted-recording-tableau-is-standard",
+          "lem-row-bumping-route-monotonicity",
+          "lem-word-reversal-transposes-the-insertion-tableau"
+        ],
+        "statement": "Let $w=(w_1,\\dots,w_N)$ be a word of pairwise distinct real numbers and let $P(w)$ be its insertion tableau, of shape $\\lambda$. Call a subsequence $w_{k_1},\\dots,w_{k_r}$ (with $k_1<\\dots<k_r$) increasing when $w_{k_1}<\\dots<w_{k_r}$ and decreasing when $w_{k_1}>\\dots>w_{k_r}$. Then the length of a longest increasing subsequence of $w$ equals the number $\\lambda_1$ of columns of $P(w)$, and the length of a longest decreasing subsequence equals the number $\\lambda'_1$ of rows of $P(w)$. For the empty word both longest lengths and both numbers are $0$.",
+        "strategy": "This is Schensted's Theorems 1 and 2 (printed pp. 183-188). Increasing case: the basic subsequences $S_1,S_2,\\dots,S_{\\lambda_1}$ of [[lem-first-row-insertion-basic-subsequences]] partition the letters, so an increasing subsequence meets each $S_j$ at most once (each $S_j$ is decreasing) and has length at most $\\lambda_1$; conversely, let $x_{\\lambda_1}$ be the last letter to occupy position $\\lambda_1$ of the first row, and for $j=\\lambda_1-1,\\dots,1$ let $x_j$ be the entry in position $j$ at the moment $x_{j+1}$ was inserted; by [[lem-first-row-insertion-basic-subsequences]](ii) each $x_j$ is inserted earlier than $x_{j+1}$ and $x_j<x_{j+1}$, so $x_1,\\dots,x_{\\lambda_1}$ is an increasing subsequence of length $\\lambda_1$. Decreasing case: apply the increasing case to the reversed word and use [[lem-word-reversal-transposes-the-insertion-tableau]], which turns increasing subsequences of the reversed word into decreasing subsequences of $w$ and the number of columns into the number of rows. The empty word has $P=\\varnothing$, where both numbers are $0$. No choice is used (the constructs are canonical). This theorem supplies the SYMR Plancherel tail bounds recorded in the plan.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)",
+              "url": "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf",
+              "locator": "pp. 183-188: Theorem 1 (columns = longest increasing subsequence) with Lemmas 4-5, and Theorem 2 (rows = longest decreasing subsequence) via Lemma 7; read in the complete article."
+            },
+            {
+              "title": "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727",
+              "url": "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf",
+              "locator": "\u00a74, printed p. 718: the corollary that the number of columns is the length of the longest nondecreasing subsequence of the bottom line; read in the full text as the weak-inequality counterpart."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a78, printed pp. 29-30: the insertion and deletion algorithms and the shape bookkeeping used in the subsequence statements; read in the full text."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-rsk-correspondence-for-two-line-arrays",
+        "kind": "theorem",
+        "title": "The RSK correspondence for two-line arrays",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-removable-and-addable-nodes-of-a-partition",
+          "def-reverse-row-deletion",
+          "def-row-insertion-and-bumping-route",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-young-tableau-standard-tableau-and-shape",
+          "lem-row-bumping-route-monotonicity",
+          "lem-row-insertion-and-reverse-deletion-are-inverse"
+        ],
+        "statement": "A **two-line array** is a pair of finite lists $(u;v)=((u_1,\\dots,u_N),(v_1,\\dots,v_N))$ of positive integers whose columns $(u_k,v_k)$ are in nondecreasing lexicographic order: $u_1\\le\\dots\\le u_N$, and $u_k=u_{k+1}$ implies $v_k\\le v_{k+1}$. Row insertion is extended to arbitrary (possibly repeated) letters by the same rule as [[def-row-insertion-and-bumping-route]]: replace the leftmost entry strictly greater than the inserted letter, or append if there is none, and similarly for reverse deletion from a removable box. (a) **Correspondence.** Starting from empty tableaux and performing, for $k=1,\\dots,N$, the insertion of $v_k$ and the writing of the label $u_k$ in the box added to the recording tableau (**construction A**), produces a pair $(P,Q)$ of semistandard tableaux ([[def-semistandard-tableau-and-kostka-number]]) of the same shape, with content$(P)$ the multiset of the $v_k$ and content$(Q)$ the multiset of the $u_k$. Conversely, starting from a pair $(P,Q)$ of semistandard tableaux of the same shape and performing, for $k=N,\\dots,1$, the deletion of the box of $Q$ containing the largest entry, chosen rightmost among ties, and reverse deletion of that box from $P$ (**construction B**), recovers the unique lexicographically ordered two-line array with those tableaux; the two constructions are inverse, and the correspondence is a bijection. (b) **Transpose interchange.** If $(u;v)$ corresponds to $(P,Q)$, then the lexicographically ordered rearrangement of the transposed array $(v;u)$ corresponds to $(Q,P)$. (c) If $u_k=k$ for all $k$ (so $Q$ is standard), the correspondence is the row-insertion correspondence between words $v=(v_1,\\dots,v_N)$ of positive integers and pairs $(P,Q)$ with $P$ semistandard and $Q$ standard of the same shape and content$(P)$ the multiset of letters of $v$.",
+        "strategy": "Prove the semistandard insertion and reverse deletion rules locally, including strict upper-column inequalities and deletion of one occurrence (not absence of all equal entries). Compare successive insertions with weakly ordered versus strictly reversed inputs; apply adjacent comparisons throughout each equal-label block, proving Q semistandard and rightmost-maximum inverse recovery. Define Knuth source-layer digraph and prove first-row class update by induction. The bump array consists of shifted class pairs and is lexicographically ordered. Coordinate swapping reverses each within-layer order; its shifted pairs are exactly the swapped original bump pairs as a multiset. Induct on the smaller bump array to obtain every row and transpose interchange. Explicit empty and word cases; finite canonical procedures, no Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727",
+              "url": "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf",
+              "locator": "\u00a7\u00a72-4, printed pp. 711-720: INSERT/DELETE on generalized tableaux, Theorem 1 (x<x' iff s>s' iff t>t'), constructions A and B and Theorem 2, the inversion digraph with Lemma 1, the second-order digraph construction, and Theorem 3 (A^T corresponds to (Q,P)); read in the complete article."
+            },
+            {
+              "title": "Jeremy L. Martin, Lecture Notes on Algebraic Combinatorics (263 pp.)",
+              "url": "https://jeremymartinmath.github.io/CombinatoricsNotes.pdf",
+              "locator": "\u00a79.10, printed pp. 198-200: generalized permutations (two-line arrays in lex order), the gRSK algorithm, the recovery argument and the bijection (9.22) with the Cauchy-kernel application; read in the full 263-page notes."
+            },
+            {
+              "title": "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)",
+              "url": "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf",
+              "locator": "Part II, printed pp. 189-190: the reduction of sequences with repetitions to distinct-letter sequences and the resulting semistandard tableaux; read in the complete article as the word-case special case."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-rsk-symmetry-under-inversion",
+        "kind": "corollary",
+        "title": "RSK interchanges the insertion and recording tableaux under inversion",
+        "deps": [
+          "def-finite-symmetric-group-and-permutation-notation",
+          "def-young-tableau-standard-tableau-and-shape",
+          "thm-robinson-schensted-correspondence",
+          "thm-rsk-correspondence-for-two-line-arrays"
+        ],
+        "statement": "Let $n\\ge0$ and let $w=(w_1,\\dots,w_n)$ be a permutation of $\\{1,\\dots,n\\}$ with RSK pair $(P(w),Q(w))$ ([[thm-robinson-schensted-correspondence]]). Let $w^{-1}=(p_1,\\dots,p_n)$ be the inverse permutation, where $p_i$ is the position of $i$ in $w$ (so $w_{p_i}=i$). Then $$P(w^{-1})=Q(w)\\quad\\text{and}\\quad Q(w^{-1})=P(w).$$ In particular, identifying $\\sigma\\in S_n$ with the word $(\\sigma(0)+1,\\dots,\\sigma(n-1)+1)$ via [[def-finite-symmetric-group-and-permutation-notation]], the RSK pair of $\\sigma^{-1}$ is $(Q,P)$.",
+        "strategy": "Realize the permutation as a two-line array in the sense of [[thm-rsk-correspondence-for-two-line-arrays]]: the array $((1,2,\\dots,n);(w_1,\\dots,w_n))$ is lexicographically ordered (the top line is strictly increasing), and construction A applied to it is exactly the Robinson-Schensted construction of [[thm-robinson-schensted-correspondence]]: it inserts $w_k$ and writes $k$ in the new box, so it corresponds to $(P(w),Q(w))$. The transposed array $(w_k;k)$ re-sorted lexicographically by its first line is $((1,2,\\dots,n);(p_1,\\dots,p_n))$, the two-line array of $w^{-1}$, because the column with top entry $i$ is $(i,p_i)$. By part (b) of [[thm-rsk-correspondence-for-two-line-arrays]] the transposed array corresponds to $(Q(w),P(w))$, and by the same identification construction A on it produces $(P(w^{-1}),Q(w^{-1}))$. Uniqueness of the RSK pair gives both displayed equalities. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727",
+              "url": "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf",
+              "locator": "\u00a74, printed p. 719: Theorem 3, that the transposed matrix corresponds to (Q,P), with the digraph proof; specialized here to permutation matrices; read in the complete article."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a78, printed p. 29: Remark 8.3, 'for sigma in S_n and ins(sigma)=(P,Q) one has ins(sigma^{-1})=(Q,P)', attributed there to Sagan Theorem 3.6.6; read in the full text as an independent statement check."
+            },
+            {
+              "title": "Jeremy L. Martin, Lecture Notes on Algebraic Combinatorics (263 pp.)",
+              "url": "https://jeremymartinmath.github.io/CombinatoricsNotes.pdf",
+              "locator": "\u00a79.10, printed p. 197: Proposition 9.10.9, RSK(w^{-1})=(Q,P) (statement only; the author states the proof is not given); read in the full 263-page notes as an independent statement check."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-sum-of-squares-of-standard-tableau-numbers",
+        "kind": "corollary",
+        "title": "The sum of squares of the standard tableau numbers",
+        "deps": [
+          "def-young-tableau-standard-tableau-and-shape",
+          "thm-robinson-schensted-correspondence"
+        ],
+        "statement": "For every $n\\ge0$, $$\\sum_{\\lambda\\vdash n}(f^\\lambda)^2=n!,$$ where $f^\\lambda$ is the number of standard $\\lambda$-tableaux and $f^\\varnothing=1$, $0!=1$.",
+        "strategy": "By [[thm-robinson-schensted-correspondence]] the permutations of $\\{1,\\dots,n\\}$ are in bijection with the pairs $(P,Q)$ of standard tableaux of the same shape; there are $n!$ permutations, and for fixed $\\lambda$ there are $f^\\lambda$ choices of $P$ and independently $f^\\lambda$ choices of $Q$. Summing over $\\lambda\\vdash n$ gives the identity. No choice is used. This is Craven Corollary 1.15, Chan Corollary 8.10 and Martin Corollary 9.10.6.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.5, printed p. 13: Corollary 1.15, sum_{lambda} (f^lambda)^2 = n!; read in the full text."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a78, printed p. 30: Corollary 8.10; read in the full text."
+            },
+            {
+              "title": "Jeremy L. Martin, Lecture Notes on Algebraic Combinatorics (263 pp.)",
+              "url": "https://jeremymartinmath.github.io/CombinatoricsNotes.pdf",
+              "locator": "\u00a79.10, printed p. 197: Corollary 9.10.6; read in the full 263-page notes."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-involutions-are-counted-by-standard-tableaux",
+        "kind": "corollary",
+        "title": "Involutions are counted by standard tableaux",
+        "deps": [
+          "cor-rsk-symmetry-under-inversion",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "def-young-tableau-standard-tableau-and-shape",
+          "thm-robinson-schensted-correspondence"
+        ],
+        "statement": "Let $w$ be a permutation of $\\{1,\\dots,n\\}$ with RSK pair $(P,Q)$. Then $w=w^{-1}$ if and only if $P=Q$. Consequently the map $w\\mapsto P(w)$ restricts to a bijection from the set of involutions of $\\{1,\\dots,n\\}$ onto the set of standard tableaux with $n$ boxes, and the number of involutions of $\\{1,\\dots,n\\}$ (equivalently, of $S_n$) equals $$\\sum_{\\lambda\\vdash n}f^\\lambda .$$",
+        "strategy": "If $w=w^{-1}$, then $(P,Q)=(P(w),Q(w))=(P(w^{-1}),Q(w^{-1}))=(Q(w),P(w))$ by [[cor-rsk-symmetry-under-inversion]], so $P=Q$. Conversely, if $P=Q$ then the inverse image $w$ of $(P,P)$ under the RSK bijection satisfies $P(w^{-1})=Q(w)=P=P(w)$ and $Q(w^{-1})=P(w)=Q(w)$, so $w$ and $w^{-1}$ have the same RSK pair; injectivity of the correspondence ([[thm-robinson-schensted-correspondence]]) gives $w^{-1}=w$. For the count: the involution $w$ maps to the standard tableau $P(w)$; the map is injective because $Q(w)=P(w)$ is determined by $P$, and surjective because the inverse image of $(P,P)$ is an involution by the converse direction. Hence the number of involutions is the number of standard tableaux with $n$ boxes, namely $\\sum_{\\lambda\\vdash n}f^\\lambda$ by definition of $f^\\lambda$. No choice is used. (Chan Remark 8.3 records the correspondence and the inequality $|\\{\\sigma:\\sigma^2=1\\}|\\le\\sum f^\\lambda$; the converse direction added here supplies the equality.)",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a78, printed p. 29: Remark 8.3, the correspondence between P=Q and permutations with sigma^2=1 (order at most two) and the bound by sum_lambda f^lambda; read in the full text."
+            },
+            {
+              "title": "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727",
+              "url": "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf",
+              "locator": "\u00a74, printed pp. 719-720: Theorem 4 and its proof, the symmetric-matrix specialization establishing the same P=Q principle for the symmetric case; read in the complete article as the neighbouring result."
+            },
+            {
+              "title": "Jeremy L. Martin, Lecture Notes on Algebraic Combinatorics (263 pp.)",
+              "url": "https://jeremymartinmath.github.io/CombinatoricsNotes.pdf",
+              "locator": "\u00a79.10, printed p. 197: Proposition 9.10.9's involution-count consequence i_n = sum_lambda f^lambda (statement only); read in the full 263-page notes as an independent statement check."
+            }
+          ]
+        },
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 510.052,
+    "id": "the-hook-length-formula-and-rsk-correspondence-examples",
+    "kind": "B",
+    "category": "representation-theory",
+    "title": "The Hook Length Formula and Rsk Correspondence \u2014 Examples",
+    "companion": "the-hook-length-formula-and-rsk-correspondence",
+    "requires": [
+      "the-hook-length-formula-and-rsk-correspondence"
+    ],
+    "items": [
+      {
+        "id": "ex-hook-table-for-shape-three-two-one",
+        "kind": "example",
+        "title": "Hook table for the shape (3,2,1)",
+        "deps": [
+          "def-hook-arm-leg-and-hook-length",
+          "lem-standard-tableau-removal-recursion",
+          "thm-hook-length-formula"
+        ],
+        "statement": "For $\\lambda=(3,2,1)\\vdash6$ the hook lengths $h(i,j)=\\lambda_i-j+\\lambda'_j-i+1$ are $$\\begin{array}{lll}5&3&1\\\\3&1&\\\\1&&\\end{array}$$ (rows of lengths $3,2,1$), with hook product $5\\cdot3\\cdot1\\cdot3\\cdot1\\cdot1=45$. The hook length formula gives $f^{(3,2,1)}=6!/45=720/45=16$. The removal recursion checks the value: $\\operatorname{Rem}((3,2,1))=\\{(1,3),(2,2),(3,1)\\}$, with removals $(2,2,1)$, $(3,1,1)$, $(3,2)$, and the same formula gives $f^{(2,2,1)}=5$, $f^{(3,1,1)}=6$, $f^{(3,2)}=5$, so $f^{(3,2,1)}=5+6+5=16$.",
+        "strategy": "Compute each hook from the definition using $\\lambda'=(3,2,1)$: $h(1,1)=5$, $h(1,2)=3$, $h(1,3)=1$, $h(2,1)=3$, $h(2,2)=1$, $h(3,1)=1$. Then apply [[thm-hook-length-formula]] and, for the check, [[lem-standard-tableau-removal-recursion]] together with the hook formula in size $5$: $f^{(2,2,1)}=120/24$, $f^{(3,1,1)}=120/20$, $f^{(3,2)}=120/24$. The verification lists the three removable corners and their removals. No choice is involved.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.4, printed pp. 7-11: hook-length table convention, the removal recursion and Theorem 1.13 used by the computation; read in the full text."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a77, printed pp. 27-28: the hook formula whose value is being verified; read in the full text."
+            },
+            {
+              "title": "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)",
+              "url": "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf",
+              "locator": "p. 180: the same kind of full hook-table computation (the 9-box example gives 168), used as a convention check; read in the complete article."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-hook-lengths-for-row-column-and-hook-shapes",
+        "kind": "example",
+        "title": "Hook lengths for one-row, one-column and hook shapes",
+        "deps": [
+          "def-hook-arm-leg-and-hook-length",
+          "thm-hook-length-formula"
+        ],
+        "statement": "Under the hook length formula: (i) for $\\lambda=(n)$ the hooks are $h(1,j)=n-j+1$ ($1\\le j\\le n$), the product is $n!$, and $f^{(n)}=1$; (ii) for $\\lambda=(1^n)$ the hooks are again $1,2,\\dots,n$, the product is $n!$, and $f^{(1^n)}=1$; (iii) for $n\\ge2$ and $\\lambda=(n-1,1)$ the hooks are $h(1,1)=n$, $h(1,j)=n-j$ for $2\\le j\\le n-1$, and $h(2,1)=1$, so the product is $n(n-2)!$ and $f^{(n-1,1)}=n!/(n(n-2)!)=n-1$. For $n=1$ the shape $(0,1)$ is not a partition; the smallest hook shape is $(2)$ for $n=2$, where $f^{(1,1)}=1$ agrees with $n-1=1$ computed in the one-column case.",
+        "strategy": "Read the hook lengths off the definition. For $(n)$, $\\lambda'=(1^n)$ so $h(1,j)=n-j+1$; for $(1^n)$ the same multiset arises from the symmetry of the hook length under conjugation ([[def-partition-young-diagram-and-conjugate-partition]]). For $(n-1,1)$ with $n\\ge3$ (and $n=2$ giving $(1,1)$), $\\lambda'=(2,1,1,\\dots,1)$ has $\\lambda'_1=2$, $\\lambda'_j=1$ for $j\\ge2$, so $h(1,1)=n$, $h(1,j)=n-j$ for $2\\le j\\le n-1$ and $h(2,1)=1$. Dividing by the products and applying [[thm-hook-length-formula]] gives the three values; the endpoints $n=0,1$ are handled by the conventions $f^\\varnothing=f^{(1)}=1$. No choice is involved.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.4, printed pp. 7-11: the hook table conventions and Theorem 1.13; read in the full text."
+            },
+            {
+              "title": "Jeremy L. Martin, Lecture Notes on Algebraic Combinatorics (263 pp.)",
+              "url": "https://jeremymartinmath.github.io/CombinatoricsNotes.pdf",
+              "locator": "\u00a79.10, printed p. 197: Examples 9.10.7-9.10.8 list f^(n) = f^(1^n) = 1 and f^(2,1) = 2 = n-1 for n = 3; read in the full 263-page notes as an independent check."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a77, printed p. 27: hook formula statement; read in the full text."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-rsk-insertion-and-reverse-deletion",
+        "kind": "example",
+        "title": "A complete RSK insertion and reverse deletion run",
+        "deps": [
+          "def-reverse-row-deletion",
+          "def-row-insertion-and-bumping-route",
+          "lem-robinson-schensted-recording-tableau-is-standard",
+          "lem-row-insertion-and-reverse-deletion-are-inverse",
+          "thm-robinson-schensted-correspondence"
+        ],
+        "statement": "Let $\\sigma$ be the permutation of $\\{1,\\dots,6\\}$ with $\\sigma=(1\\,6\\,3)(2\\,4)$, so its one-line form is the word $w=(6,4,1,2,5,3)$. Running row insertion gives $$P_1=\\begin{array}{l}6\\end{array},\\ P_2=\\begin{array}{l}4\\\\6\\end{array},\\ P_3=\\begin{array}{l}1\\\\4\\\\6\\end{array},\\ P_4=\\begin{array}{ll}1&2\\\\4&\\\\6&\\end{array},\\ P_5=\\begin{array}{lll}1&2&5\\\\4&&\\\\6&&\\end{array},\\ P_6=\\begin{array}{lll}1&2&3\\\\4&5&\\\\6&&\\end{array}$$ and the recording tableaux $$Q_1=\\begin{array}{l}1\\end{array},\\ Q_2=\\begin{array}{l}1\\\\2\\end{array},\\ Q_3=\\begin{array}{l}1\\\\2\\\\3\\end{array},\\ Q_4=\\begin{array}{ll}1&4\\\\2&\\\\3&\\end{array},\\ Q_5=\\begin{array}{lll}1&4&5\\\\2&&\\\\3&&\\end{array},\\ Q_6=\\begin{array}{lll}1&4&5\\\\2&6&\\\\3&&\\end{array}.$$ Reverse deletion from $(P_6,Q_6)$ in the order of the labels $6,5,4,3,2,1$ removes the boxes $(2,2),(1,3),(1,2),(3,1),(2,1),(1,1)$ and expels the letters $3,5,2,1,4,6$, which is $w$ read backwards, restoring $(\\varnothing,\\varnothing)$.",
+        "strategy": "Carry out the two algorithms explicitly. Insertions: $6$ creates the first row; $4$ displaces $6$ into a second row; $1$ displaces $4$, which displaces $6$ into a third row; $2$ is appended to the first row; $5$ is appended to the first row; $3$ displaces $5$, which is appended to the second row. The new box at each step carries the step label in $Q$, matching [[lem-robinson-schensted-recording-tableau-is-standard]]. Reverse deletion: at label $6$ the box is $(2,2)$, and the route replaces the $5$ there by $6$ and then the $3$ in $(1,3)$ by $5$, expelling $3$; at label $5$ the box $(1,3)$ is removed and expels $5$; at label $4$ the box $(1,2)$ expels $2$; at label $3$ the box $(3,1)$ starts a route $6\\to4\\to1$ expelling $1$; at label $2$ the box $(2,1)$ starts a route $6\\to4$ expelling $4$; at label $1$ the remaining box expels $6$. The expelled letters in this order are $3,5,2,1,4,6$, the reverse of $w$. This exhibits [[lem-row-insertion-and-reverse-deletion-are-inverse]] in both directions and verifies [[thm-robinson-schensted-correspondence]] on a non-involutive permutation. The displayed tableaux were recomputed independently; no choice is involved.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.5, printed p. 11: the displayed insertion example for sigma=(1,6,3)(2,4) with P_1,...,P_6 and Q_1,...,Q_6; read in the full text."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a78, printed p. 29: the deletion Algorithm 8.4 and Example 8.5; read in the full text."
+            },
+            {
+              "title": "Jeremy L. Martin, Lecture Notes on Algebraic Combinatorics (263 pp.)",
+              "url": "https://jeremymartinmath.github.io/CombinatoricsNotes.pdf",
+              "locator": "\u00a79.10, printed pp. 195-196: the worked RSK run for w = 57214836; read in the full 263-page notes as a second worked example check."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-rsk-for-involutions",
+        "kind": "example",
+        "title": "RSK pairs with P=Q for involutions",
+        "deps": [
+          "cor-involutions-are-counted-by-standard-tableaux",
+          "cor-rsk-symmetry-under-inversion",
+          "thm-robinson-schensted-correspondence"
+        ],
+        "statement": "For $w=(2,1,4,3)$ row insertion gives $$P=\\begin{array}{ll}1&3\\\\2&4\\end{array},\\qquad Q=\\begin{array}{ll}1&3\\\\2&4\\end{array},$$ so $P=Q$ as required for the involution $w=w^{-1}$. For $w=(3,2,1)$ one gets $P=Q=\\begin{array}{l}1\\\\2\\\\3\\end{array}$. The involution $(2,1,4,3)$ is not the identity, so $P=Q$ is not equivalent to $P$ being a single row; for $n=3$ the derivation $\\sum_{\\lambda\\vdash3}f^\\lambda=1+2+1=4$ matches the four involutions $\\mathrm{id},(1\\,2),(1\\,3),(2\\,3)$ (in one-line form $123$, $213$, $321$, $132$).",
+        "strategy": "Run the row insertion for the two words and record the new boxes; both give $P=Q$ because the words are involutions, as predicted by [[cor-rsk-symmetry-under-inversion]]: for $w=w^{-1}$ the RSK pair satisfies $(P,Q)=(Q,P)$. The count $4$ uses [[cor-involutions-are-counted-by-standard-tableaux]] and the values $f^{(3)}=f^{(1,1,1)}=1$, $f^{(2,1)}=2$. No choice is involved.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a78, printed p. 29: Remark 8.3, the P=Q characterization and the involution count; read in the full text."
+            },
+            {
+              "title": "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727",
+              "url": "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf",
+              "locator": "\u00a74, printed p. 719: Theorem 4, the symmetric-matrix specialization giving P=Q; read in the complete article as the symmetric counterpart."
+            },
+            {
+              "title": "Jeremy L. Martin, Lecture Notes on Algebraic Combinatorics (263 pp.)",
+              "url": "https://jeremymartinmath.github.io/CombinatoricsNotes.pdf",
+              "locator": "\u00a79.10, printed p. 197: the involution-count consequence of Proposition 9.10.9 (statement only); read in the full 263-page notes."
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-empty-and-singleton-rsk-boundaries",
+        "kind": "example",
+        "title": "The empty and singleton RSK boundaries",
+        "deps": [
+          "def-hook-arm-leg-and-hook-length",
+          "def-row-insertion-and-bumping-route",
+          "lem-standard-tableau-removal-recursion",
+          "thm-hook-length-formula",
+          "thm-robinson-schensted-correspondence"
+        ],
+        "statement": "For $n=0$: the only word in $X_0$ is the empty word, it corresponds to the\npair $(\\varnothing,\\varnothing)$ of empty tableaux, and the hook length formula\nreads $f^\\varnothing=0!/1=1$. For $n=1$: the only word is $(1)$; row insertion\ngives $P=[1]$ and the recording tableau $Q=[1]$, so $X_1$ corresponds to the\nsingle pair $([1],[1])$, and $f^{(1)}=1!/1=1$. At $n=0$ the removal recursion\nis not asserted, its index set $\\operatorname{Rem}(\\varnothing)=\\varnothing$\nbeing empty, and $f^\\varnothing=1$ is the convention; at $n=1$ it reads\n$f^{(1)}=f^\\varnothing$.",
+        "strategy": "Compute the empty and singleton insertion pairs directly; the empty hook product is1 and0!=1. At n=0 the standard-tableau removal recursion is not asserted (its removable-node set is empty), while the unique empty tableau fixes f_empty=1. At n=1 the single removable corner gives f_(1)=f_empty. These preserve the actual commissioned boundary values.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David A. Craven, Groups, Geometries and Representation Theory (Spring Term 2013 lecture notes, 42 pp.)",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/groupsgeomreptheory2013.pdf",
+              "locator": "\u00a71.4-1.5, printed pp. 7-13: the empty/inner conventions and Corollary 1.15 at n=0,1; read in the full text."
+            },
+            {
+              "title": "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)",
+              "url": "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf",
+              "locator": "p. 180: the empty tableau and the order-0/1 cases are within the standard-tableau and P-symbol conventions; read in the complete article."
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (Oxford Hilary Term 2011 lecture notes, 40 PDF pp.)",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf",
+              "locator": "\u00a7\u00a77-8, printed pp. 27-30: the empty-shape conventions in the hook and insertion statements; read in the full text."
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  }
+]

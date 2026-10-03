@@ -1,0 +1,2471 @@
+[
+  {
+    "order": 885,
+    "id": "nonaffine-algebraic-groups-barsotti-chevalley-and-abelian-varieties",
+    "kind": "A",
+    "category": "algebraic-geometry",
+    "title": "Nonaffine Algebraic Groups, Barsotti-Chevalley, and Abelian Varieties",
+    "companion": "nonaffine-algebraic-groups-barsotti-chevalley-and-abelian-varieties-examples",
+    "requires": [
+      "group-schemes-of-finite-type-over-a-field",
+      "finite-proper-and-projective-morphisms",
+      "proj-projective-schemes-twisting-sheaves-and-ampleness",
+      "riemann-surfaces-branched-maps-and-differentials",
+      "cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes",
+      "smooth-proper-curves-divisors-genus-and-ramification",
+      "normalization-finiteness-for-affine-domains",
+      "cartier-and-weil-divisors-line-bundles-and-picard-groups"
+    ],
+    "items": [
+      {
+        "id": "def-abelian-variety-over-a-field",
+        "kind": "definition",
+        "title": "Abelian varieties over a field",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-scheme-over-base",
+          "def-proper-morphism",
+          "def-smooth-morphism-schemes",
+          "def-geometrically-reduced-integral-connected-fibre",
+          "thm-ag-standard-smooth-geometric-regularity",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay"
+        ],
+        "statement": "Let $k$ be a field. A **group variety** over $k$ means a smooth separated finite-type $k$-scheme $G$ equipped with $k$-morphisms $m:G\\times_kG\\to G$, $i:G\\to G$, and $e:\\operatorname{Spec}k\\to G$ satisfying associativity, the two identity laws, and the two inverse laws as identities of scheme morphisms. A homomorphism respects these maps. A closed subgroup scheme is a closed subscheme on which these maps restrict; it is normal if conjugation factors through it. An **abelian variety** over $k$ is a proper geometrically connected group variety over $k$. This definition does not include projectivity as an assumption. Commutativity follows from [[prop-abelian-variety-commutativity-from-rigidity]]. The identity gives a $k$-rational point. Using AC for the referenced smoothness/regularity suppliers, smoothness and geometric connectedness imply geometric integrality: after any algebraically closed field extension the local rings are regular, so distinct irreducible components cannot meet; the finitely many irreducible components are therefore open and closed, and connectedness leaves exactly one. A **pseudo-abelian variety** is a smooth connected finite-type $k$-group scheme with no nontrivial smooth connected affine normal subgroup scheme. In this terminology connectedness is ordinary connectedness, not a replacement for properness. Over imperfect fields a pseudo-abelian variety need not be proper.",
+        "design_row": "AG-GRP-1",
+        "local_addition": false,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Definition 8.3 and Chapter 8",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Stacks Project, Definition 39.9.1",
+              "url": "https://stacks.math.columbia.edu/tag/0BF9"
+            }
+          ]
+        },
+        "justified_by": [
+          "prop-abelian-variety-commutativity-from-rigidity"
+        ],
+        "strategy": "Define group varieties, homomorphisms, closed subgroup schemes, abelian varieties and pseudo-abelian varieties over a field. Commutativity is recorded via the rigidity result, not assumed; geometric integrality of smooth connected groups is read through the cited regularity suppliers.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-proper-geometrically-integral-affine-scheme-is-point",
+        "kind": "lemma",
+        "title": "A proper geometrically integral affine scheme is a point",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-global-functions-proper-integral-variety",
+          "thm-global-sections-affine-scheme",
+          "thm-morphisms-into-affine-scheme-global-sections",
+          "def-abelian-variety-over-a-field"
+        ],
+        "statement": "Assume the Axiom of Choice. A proper geometrically integral affine finite-type $k$-scheme is $\\operatorname{Spec}k$. Every morphism from a proper geometrically integral finite-type $k$-scheme to an affine $k$-scheme factors through a $k$-rational point. In particular a positive-dimensional abelian variety is not affine.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Example 8.4 and Appendix A.75",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Stacks Project, Varieties, Lemma 33.9.3",
+              "url": "https://stacks.math.columbia.edu/tag/0BUG"
+            }
+          ]
+        },
+        "strategy": "Identify an affine proper geometrically integral X with Spec k using Gamma(X,O)=k and the global-sections dictionary, then factor arbitrary affine targets through the rational point; an affine abelian variety would be a point.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-holomorphic-rational-map-product-curves-algebraic",
+        "kind": "lemma",
+        "title": "A holomorphic extension of a rational map on a product of smooth complex curves is algebraic",
+        "deps": [
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "thm-identity-theorem-in-several-complex-variables",
+          "thm-ag-standard-smooth-geometric-regularity",
+          "def-axiom-of-choice",
+          "lem-nonsingular-complex-algebraic-curve-holomorphic-charts",
+          "thm-associated-graded-ring-of-a-regular-local-ring",
+          "thm-faithful-flatness-of-jacobson-adic-completion",
+          "thm-faithfully-flat-descent-vanishing",
+          "cor-holomorphic-functions-in-several-variables-are-smooth"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $C_1,C_2$ be smooth complex algebraic curves, and $Y$ a separated complex algebraic variety. Suppose a rational map $f:C_1\\times C_2\\dashrightarrow Y$ has an everywhere defined holomorphic extension on the associated complex manifolds. Then that extension is induced by a unique algebraic morphism $C_1\\times C_2\\to Y$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 10.97.3, faithful flatness of local completion",
+              "url": "https://stacks.math.columbia.edu/tag/0BNH"
+            },
+            {
+              "title": "Milne, Modular Functions and Modular Forms, Chapter 3, Proposition 3.12, p.47",
+              "url": "https://www.jmilne.org/math/CourseNotes/MF.pdf"
+            }
+          ]
+        },
+        "strategy": "Use algebraic local parameters on the product of curves and holomorphic expansion to produce algebraic coordinate functions on a neighbourhood, then conclude the holomorphic extension is induced by a morphism.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonaffine-effective-affine-algebra-descent",
+        "kind": "lemma",
+        "title": "Faithfully flat descent of modules and affine algebras is effective",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-faithfully-flat-descent-vanishing",
+          "thm-associativity-of-balanced-tensor-products",
+          "thm-affine-scheme-ring-anti-equivalence"
+        ],
+        "statement": "Assume the Axiom of Choice. For a faithfully flat ring map $A\\to B$, base change identifies $A$-modules with $B$-modules equipped with a descent isomorphism between their two pullbacks to $B\\otimes_AB$, satisfying the cocycle identity over the triple tensor product. The same is true for commutative unital algebras, when transport is an algebra isomorphism. Writing transport as $\\theta:N\\otimes_AB\\to B\\otimes_AN$, the descended module or algebra is $$D=\\{n\\in N:\\theta(n\\otimes1)=1\\otimes n\\},$$ and $B\\otimes_AD\\to N$, $b\\otimes d\\mapsto bd$, is an isomorphism respecting the datum.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Descent, Sections 35.3-35.5, faithful flat module descent",
+              "url": "https://stacks.math.columbia.edu/download/descent.pdf"
+            },
+            {
+              "title": "SGA1, Expose VIII, Sections 1-2, affine descent",
+              "url": "https://arxiv.org/pdf/math/0206203"
+            }
+          ]
+        },
+        "strategy": "Reduce faithfully flat module descent to an affine cover with a section, identify the descent data with the equalizer D, verify exactness by flat scalar extension, and transfer the conclusion to algebras.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonaffine-fppf-descent-of-scheme-morphisms",
+        "kind": "lemma",
+        "title": "Scheme morphisms satisfy fppf descent",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-faithfully-flat-descent-vanishing",
+          "thm-flat-finite-presentation-is-open",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-morphisms-into-affine-scheme-global-sections"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $p:X'\\to X$ be faithfully flat, quasi-compact, and locally of finite presentation. For any scheme $Z$, a morphism $f':X'\\to Z$ descends to a unique morphism $X\\to Z$ exactly when its two pullbacks to $X'\\times_XX'$ agree. Consequently represented scheme functors are sheaves for the fppf topology.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Descent, faithfully flat descent of morphisms",
+              "url": "https://stacks.math.columbia.edu/tag/023Q"
+            },
+            {
+              "title": "SGA3, Expose IV, represented sheaves and effective equivalence relations",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp4-13oct24.pdf"
+            }
+          ]
+        },
+        "strategy": "Check the equalizer sequence for the fppf cover, glue affine charts of the target, construct the descended morphism on an affine cover of the source, and conclude representable functors are fppf sheaves.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonaffine-affine-and-finite-morphism-fppf-descent",
+        "kind": "lemma",
+        "title": "Affineness and finiteness of morphisms descend under fppf base change",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-nonaffine-effective-affine-algebra-descent",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms",
+          "cor-faithfully-flat-descent-of-finite-generation",
+          "thm-affine-scheme-ring-anti-equivalence"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $p:S'\\to S$ be faithfully flat, quasi-compact, and locally of finite presentation, and $f:X\\to S$ a finite-type separated morphism of Noetherian schemes. If $X_{S'}\\to S'$ is affine, then $f$ is affine. If that base change is finite, then $f$ is finite.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "SGA1, Expose VIII, affine morphism and finite morphism descent",
+              "url": "https://arxiv.org/pdf/math/0206203"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), Appendix A.80 and Proposition 8.1",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Descend affineness by choosing an affine cover of the base change, applying effective algebra descent to the finite direct sum of coordinate rings, and checking finiteness of the descended algebra.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-affine-group-faithful-representation",
+        "kind": "lemma",
+        "title": "Affine group schemes have faithful finite-dimensional representations",
+        "deps": [
+          "def-abelian-variety-over-a-field"
+        ],
+        "statement": "Let $G$ be an affine finite-type group scheme over an arbitrary field $k$. Every right comodule over its coordinate Hopf algebra $A=k[G]$ is the filtered union of its finite-dimensional subcomodules. The right regular representation of $G$ on $A$ contains a finite-dimensional subrepresentation $V$ such that $G\\to\\operatorname{GL}(V)$ is a closed immersion. These assertions allow nonreduced $G$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Propositions 4.7/4.8 and Theorem 4.9, pp.86\u201387",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Use local finiteness of comodules to find finite-dimensional subcomodules, apply it to a generating list of the coordinate ring to get V containing all matrix coefficients, and conclude GL(V) -> G is a closed immersion.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-affine-nilpotent-thickening",
+        "kind": "lemma",
+        "title": "A nilpotent thickening of an affine scheme is affine",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-qc-sheaf-affine-higher-cohomology-vanishes",
+          "lem-extend-sections-from-nonvanishing-open",
+          "thm-morphisms-into-affine-scheme-global-sections"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $X$ be a Noetherian separated scheme and $Y\\hookrightarrow X$ a closed subscheme defined by a nilpotent quasi-coherent ideal. If $Y$ is affine, then $X$ is affine.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Schemes, affineness of nilpotent thickenings",
+              "url": "https://stacks.math.columbia.edu/download/schemes.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), Appendix A, nilpotent reductions",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "First treat the square-zero case via principal opens and lifted sections, then induct on the nilpotency index by successively thickening the affine subscheme.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonaffine-flat-hypersurface-slice",
+        "kind": "lemma",
+        "title": "Fibre-regular hypersurface cuts preserve flatness and produce finite image slices",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-krull-intersection-theorem",
+          "lem-ag-local-flatness-regular-parameters",
+          "thm-long-exact-tor-sequence-in-the-right-module-variable",
+          "thm-finiteness-of-associated-primes",
+          "lem-zero-divisor-annihilator-contained-in-associated-prime",
+          "lem-finite-prime-avoidance",
+          "lem-finite-presentation-image-constructible"
+        ],
+        "statement": "Assume the Axiom of Choice. For a flat local homomorphism $(A,\\mathfrak m)\\to(B,\\mathfrak n)$ of Noetherian local rings and $f\\in\\mathfrak n$, if $f$ acts injectively on $B/\\mathfrak mB$, then $f$ is a nonzero divisor on $B$ and $B/fB$ is $A$-flat. Consequently, let $X$ be an affine finite-type $k$-scheme, $Y,Z$ finite-type $k$-schemes, $u:Y\\to X$ and $v:Y\\to Z$ morphisms, and $z\\in v(Y)$ a closed point such that $v$ is flat at every point over $z$. There exists a closed subscheme $F\\subset X$ such that $u((u^{-1}F)_z)$ is finite and nonempty and $u^{-1}F\\to Z$ remains flat at all its points over $z$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "SGA3 V, Lemma 7.2; SGA1 IV, Corollary 5.7, printed p.99",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp5-13oct24.pdf"
+            }
+          ]
+        },
+        "strategy": "Use flatness to identify graded pieces of B/mB, cut the fibre image by a hypersurface slice with finite fibres, and iterate over finitely many associated points to obtain a finite flat slice.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonaffine-generic-quasisection-flat-groupoid",
+        "kind": "lemma",
+        "title": "A flat finite-type equivalence relation has generic saturated quasi-sections",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-nonaffine-flat-hypersurface-slice",
+          "lem-flat-locus-open-finitely-presented-algebra",
+          "cor-quasi-finite-locus-open-finite-type-algebra",
+          "lem-scheme-zariski-main-factorization-quasi-finite",
+          "thm-flat-finite-presentation-is-open",
+          "thm-faithfully-flat-descent-of-flatness",
+          "thm-proper-quasi-finite-is-finite",
+          "cor-finite-flat-noetherian-modules-are-projective",
+          "lem-nonaffine-affine-and-finite-morphism-fppf-descent",
+          "lem-finite-prime-avoidance"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $R\\rightrightarrows X$ be an equivalence-relation groupoid of finite type over $k$, with $X$ separated of finite type and both projections $s,t$ flat. There is a dense saturated open $W\\subset X$ which is a finite disjoint union of saturated opens $W_i$. For every $i$ there is a locally closed $U_i\\subset W_i$, contained in an affine subscheme of $X$, such that $t:s^{-1}(U_i)\\to W_i$ is finite locally free and surjective. The induced groupoid on $U_i$ has finite locally free projections. Every finite subset of $U_i$ lies in an affine open of $U_i$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "SGA3, Expose V, Sections 7-8",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp5-13oct24.pdf"
+            }
+          ]
+        },
+        "strategy": "Find flat quasi-finite loci that are invariant along the relation, cut by hypersurfaces to enforce finiteness, take the union over components, and iterate in the complement to get a dense finite disjoint union of saturated quasi-sectioned opens.",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-nonaffine-finite-flat-affine-equivalence-quotient",
+        "kind": "theorem",
+        "title": "Finite locally free affine equivalence relations have finite locally free scheme quotients",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms",
+          "thm-adjugate-identity-over-a-commutative-ring",
+          "thm-nakayama-lemma",
+          "cor-finite-flat-noetherian-modules-are-projective",
+          "thm-flatness-is-local",
+          "thm-faithfully-flat-descent-of-flatness",
+          "thm-faithfully-flat-descent-vanishing",
+          "thm-affine-fibre-product-tensor-ring"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $U=\\operatorname{Spec}A$ and $R=\\operatorname{Spec}B$ be affine finite-type schemes over a field $k$, with an equivalence-relation groupoid $(R\\rightrightarrows U)$ whose source and target maps $s,t$ are finite locally free. Put $$C=\\{a\\in A:s^*(a)=t^*(a)\\}.$$ Then $C$ is a finite-type $k$-algebra, $U\\to M=\\operatorname{Spec}C$ is finite locally free and onto, and the canonical map $R\\to U\\times_MU$ is an isomorphism. Moreover $M$ represents the fppf quotient sheaf $U/R$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Proposition 39.23.9 and Lemma 39.23.8",
+              "url": "https://stacks.math.columbia.edu/tag/03BM"
+            },
+            {
+              "title": "Stacks Project, Lemma 10.78.8, semilocal basis selection",
+              "url": "https://stacks.math.columbia.edu/tag/03C1"
+            },
+            {
+              "title": "SGA3, Expose V, Theorem 4.1 (affine case)",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp5-13oct24.pdf"
+            }
+          ]
+        },
+        "strategy": "Prove A is finite over the invariant ring C via characteristic polynomials and a semilocal basis argument over an infinite residue field, identify A tensor_C A with B through the groupoid identity, and descend to all local rings by faithful flatness.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-finite-relation-saturated-affine-neighbourhood",
+        "kind": "lemma",
+        "title": "Finite equivalence relations have saturated affine neighbourhoods around affine-contained orbits",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-nonaffine-finite-flat-affine-equivalence-quotient",
+          "lem-finite-prime-avoidance"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $R\\rightrightarrows X$ be a finite locally free equivalence-relation groupoid on a separated finite-type $k$-scheme. If an orbit is contained in an affine open $V\\subset X$, it is contained in a saturated affine open $W\\subset V$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "SGA3, Expose V, Section 5.b, saturated affine neighbourhood construction, pp.268-269",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp5-13oct24.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), Appendix B.18 saturated affine neighbourhood step",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Saturate around an affine orbit using closedness of s, then use the norm of a separating function to produce a saturated affine neighbourhood inside the given open.",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-nonaffine-finite-relation-quotient-with-affine-orbits",
+        "kind": "theorem",
+        "title": "Finite locally free equivalence quotients exist when orbits lie in affine opens",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-nonaffine-finite-relation-saturated-affine-neighbourhood",
+          "thm-nonaffine-finite-flat-affine-equivalence-quotient",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $R\\rightrightarrows X$ be a finite locally free equivalence-relation groupoid on a separated finite-type $k$-scheme. Suppose every orbit is contained in an affine open of $X$. Its fppf quotient is represented by a separated finite-type scheme $Y$, the quotient map $X\\to Y$ is finite locally free and onto, and $R=X\\times_YX$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "SGA3, Expose V, Theorem 4.1 and Section 5.b",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp5-13oct24.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), Appendix B.26",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Glue the affine quotient charts over saturated affine opens, verify finite local freeness, the kernel-pair identity and separatedness of the quotient.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-nonaffine-groupoid-quotient-from-quasisection",
+        "kind": "theorem",
+        "title": "A flat equivalence relation with a suitable quasi-section has a scheme quotient",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-nonaffine-finite-relation-quotient-with-affine-orbits",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms",
+          "thm-faithfully-flat-descent-of-flatness"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $R\\rightrightarrows X$ be a flat finite-type equivalence-relation groupoid on a separated finite-type $k$-scheme. Suppose a locally closed $U\\subset X$ satisfies: $V=s^{-1}(U)\\xrightarrow{t}X$ is finite locally free and onto, and every orbit of the induced relation $R_U\\rightrightarrows U$ lies in an affine open of $U$. Then $X/R$ is represented by a finite-type scheme $Y$; the quotient $q:X\\to Y$ is faithfully flat of finite presentation, and $R=X\\times_YX$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "SGA3, Expose V, Lemma 6.1, pp.270-272",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp5-13oct24.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), Appendix B.32",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Show the quotient of X by R equals that of U by R_U as fppf sheaves using local lifting along the quasi-section, then apply the finite-relation quotient theorem.",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-nonaffine-generic-scheme-quotient-flat-equivalence-relation",
+        "kind": "theorem",
+        "title": "A flat finite-type equivalence relation has a generic scheme quotient",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-nonaffine-generic-quasisection-flat-groupoid",
+          "thm-nonaffine-groupoid-quotient-from-quasisection"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $R\\rightrightarrows X$ be a flat finite-type equivalence-relation groupoid on a separated finite-type $k$-scheme. There is a dense saturated open $W\\subset X$ whose fppf quotient is a finite-type scheme $Y$. The quotient $q:W\\to Y$ is faithfully flat of finite presentation and $R_W\\cong W\\times_YW$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "SGA3, Expose V, Sections 7-8",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp5-13oct24.pdf"
+            }
+          ]
+        },
+        "strategy": "Take the generic quasi-section decomposition, form the disjoint union of the local finite-relation quotients, and verify the quotient map is faithfully flat of finite presentation with the asserted kernel pair.",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-nonaffine-finite-field-descent-scheme-with-affine-orbits",
+        "kind": "lemma",
+        "title": "Finite field descent is effective for schemes with affine-contained descent orbits",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-nonaffine-finite-relation-quotient-with-affine-orbits",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $K/k$ be a finite field extension, and let $Y$ be a separated finite-type $K$-scheme with a descent datum over $K\\otimes_kK$ satisfying its cocycle condition over $K\\otimes_kK\\otimes_kK$. Suppose every orbit of the resulting finite locally free equivalence relation on the underlying $k$-scheme $Y$ lies in an affine open. Then the datum descends to a separated finite-type $k$-scheme $Y_0$, with $Y\\cong Y_0\\times_kK$. Compatible morphisms descend uniquely. This includes inseparable extensions and their nonreduced tensor products.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "SGA3 VIA, 3.2.3; SGA1 VIII, 7.6",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp6A-13oct24.pdf"
+            }
+          ]
+        },
+        "strategy": "Turn the finite field descent datum into a finite locally free equivalence relation with affine orbits, then descend it through the quotient theorem.",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-nonaffine-group-scheme-normal-subgroup-quotient",
+        "kind": "theorem",
+        "title": "Normal subgroup quotients of finite-type group schemes exist as fppf scheme quotients",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "thm-nonaffine-generic-scheme-quotient-flat-equivalence-relation",
+          "lem-nonaffine-finite-field-descent-scheme-with-affine-orbits",
+          "lem-nonaffine-finite-relation-saturated-affine-neighbourhood",
+          "thm-nonaffine-finite-flat-affine-equivalence-quotient",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms",
+          "lem-nonaffine-affine-and-finite-morphism-fppf-descent",
+          "thm-faithfully-flat-descent-of-flatness",
+          "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+          "thm-regular-equals-smooth-over-perfect-field",
+          "thm-smooth-locus-open",
+          "lem-ag-geometric-regularity-field-tests",
+          "thm-existence-of-algebraic-closures",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "thm-ag-standard-smooth-geometric-regularity"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $G$ be a separated finite-type group scheme over a field $k$ and $H\\hookrightarrow G$ a closed normal subgroup scheme. The fppf sheafification of $T\\mapsto G(T)/H(T)$ is represented by a separated finite-type group scheme $Q=G/H$. The projection $q:G\\to Q$ is faithfully flat of finite presentation, its scheme-theoretic kernel is $H$, and $$G\\times_kH\\longrightarrow G\\times_QG,\\qquad(g,h)\\longmapsto(g,gh)$$ is an isomorphism. Thus $q$ is an $H$-torsor for the fppf topology. It is universal for homomorphisms killing $H$, and its formation commutes with field extension. If $G$ is connected, $Q$ is connected. If $G$ is smooth over $k$, $Q$ is smooth over $k$. If $H$ is smooth, $q$ is smooth. No reducedness or smoothness of $H$ is required for existence or for smoothness of $Q$ when $G$ is smooth.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "SGA3 VIA, Theorem 3.2 and proof 3.2.1-3.2.5; Milne Appendix B.35-B.37",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp6A-13oct24.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the right-coset relation, obtain generic quotients and then descend them over a finite extension; verify separatedness, affine neighbourhoods, the kernel pair and the group law on the quotient, and reducedness of the quotient for smooth G.",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-nonaffine-global-sections-flat-field-base-change",
+        "kind": "lemma",
+        "title": "Global sections commute with extension of scalars over a field",
+        "deps": [
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-global-sections-affine-scheme",
+          "def-separated-morphism-schemes"
+        ],
+        "statement": "Let $X$ be a quasi-compact separated scheme over a field $k$ and $R$ a $k$-algebra. Then the natural map $$\\Gamma(X,\\mathcal O_X)\\otimes_kR\\longrightarrow\\Gamma(X\\times_k\\operatorname{Spec}R,\\mathcal O)$$ is an isomorphism.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Cohomology of Schemes, flat base change for H0",
+              "url": "https://stacks.math.columbia.edu/tag/02KH"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), Appendix A, global sections and base extension",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose a finite affine cover whose intersections are affine and commute sections with flat field extension via the Cech sequence.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonaffine-group-monomorphism-closed-immersion",
+        "kind": "lemma",
+        "title": "Finite-type algebraic group monomorphisms are closed immersions",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-scheme-zariski-main-factorization-quasi-finite",
+          "lem-finite-presentation-image-constructible",
+          "lem-proper-source-to-separated-target-proper",
+          "thm-nakayama-lemma",
+          "lem-nonaffine-global-sections-flat-field-base-change",
+          "thm-existence-of-algebraic-closures",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form"
+        ],
+        "statement": "Assume the Axiom of Choice. A homomorphism of separated finite-type $k$-group schemes with trivial scheme-theoretic kernel is a closed immersion. More generally, the topological image of any such homomorphism is closed and its scheme-theoretic image is a closed subgroup scheme.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Proposition 2.7.1, p.19",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            },
+            {
+              "title": "SGA3, Expose VIA, 2.5.2",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp6A-13oct24.pdf"
+            }
+          ]
+        },
+        "strategy": "Identify the scheme-theoretic image, prove it is open and closed using translations over an algebraic closure, and show a finite monomorphism of affine charts is an isomorphism onto a closed subscheme; conclude the trivial-kernel case is a closed immersion.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-connected-group-geometrically-connected",
+        "kind": "lemma",
+        "title": "Connected finite-type groups are geometrically connected",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-global-sections-flat-field-base-change",
+          "thm-separable-closures-exist-and-are-isomorphic-over-the-base",
+          "thm-fundamental-theorem-of-finite-galois-theory",
+          "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+          "thm-regular-equals-smooth-over-perfect-field",
+          "thm-smooth-locus-open",
+          "lem-ag-geometric-regularity-field-tests",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form"
+        ],
+        "statement": "Assume the Axiom of Choice. A connected separated finite-type $k$-group scheme is geometrically connected. A smooth connected such group is geometrically integral. Every geometrically reduced finite-type $k$-group scheme is smooth.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "SGA3, Expose VIA, Section 2.4, identity components over fields",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp6A-13oct24.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), 1.28 and component results; Proposition 8.1",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Use Noetherian finiteness of the component decomposition after base change and translate a smooth point to the identity, obtaining geometric connectedness and integrality; geometrically reduced groups are smooth by the cotangent argument.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-subgroup-scheme-stabilizer-of-line",
+        "kind": "lemma",
+        "title": "Every subgroup scheme of an affine group is a line stabilizer",
+        "deps": [
+          "lem-nonaffine-affine-group-faithful-representation",
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian"
+        ],
+        "statement": "Let $G$ be an affine finite-type group scheme over a field $k$ and $H\\subseteq G$ any closed subgroup scheme. There is a finite-dimensional representation $V$ of $G$ and a line $L\\subseteq V$ whose scheme-theoretic stabilizer equals $H$: for every $k$-algebra $R$, $H(R)=\\{g\\in G(R):gL_R=L_R\\}$. No smoothness assumption is required.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Theorem 4.27 and Lemma 4.28, pp.94\u201395",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose a finite-dimensional right-regular subcomodule containing generators of the ideal of H, pass to a quotient W with H as its exact stabilizer, and take the exterior-power line of W.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-nonaffine-high-frobenius-smooth-image",
+        "kind": "lemma",
+        "title": "High relative Frobenius has smooth scheme-theoretic image",
+        "deps": [
+          "thm-existence-of-algebraic-closures",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+          "thm-regular-equals-smooth-over-perfect-field",
+          "thm-smooth-locus-open",
+          "lem-ag-geometric-regularity-field-tests"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $G$ be a separated finite-type group scheme over a field $k$ of characteristic $p>0$. For $n\\ge1$ put $G^{(n)}=G\\times_{\\operatorname{Spec}k,F_k^n}\\operatorname{Spec}k$. The relative Frobenius $F^n_{G/k}:G\\to G^{(n)}$ is finite and is a group homomorphism. For sufficiently large $n$, its scheme-theoretic image $H_n\\subset G^{(n)}$ is a smooth finite-type group scheme. If $G$ is connected then $H_n$ is connected. The kernel of $G\\to H_n$ is finite. This does not assert that the whole twist $G^{(n)}$ becomes smooth.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Lemma 2.9.1 and Proposition 2.9.2, pp. 26-27",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), Remark 3.30 and Theorem 8.28 (image correction required)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Compute relative Frobenius on affine charts, show its image is a subgroup scheme, and for large n prove the image is smooth using the dominance and regularity of the p^n-power map; transport connectedness and dimension.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-normal-subgroup-inverse-multiple-character",
+        "kind": "lemma",
+        "title": "A character of a normal subgroup admits an inverse multiple in a group representation",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-nonaffine-high-frobenius-smooth-image",
+          "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+          "thm-regular-equals-smooth-over-perfect-field",
+          "def-embedding-dimension-and-regular-local-ring",
+          "thm-regular-locus-is-open-variety",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form"
+        ],
+        "statement": "Assume AC. Let $k$ be algebraically closed, $G$ an affine finite-type $k$-group scheme and $H\\subset G$ a closed normal subgroup scheme. If a character $\\chi:H\\to\\mathbb G_m$ occurs in a finite-dimensional representation $V$ of $G$ (there is a nonzero vector spanning an $H$-stable line of character $\\chi$), then $\\chi^{-m}$ occurs in a finite-dimensional representation of $G$ for some integer $m>0$. Both $G$ and $H$ may be nonsmooth.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Theorem 3.23, Propositions 4.23\u20134.25, Lemma 5.16, pp.71,93\u201394,102\u2013103",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Use linear independence of characters and the weight-space decomposition of V under H; in characteristic p replace G by its high-Frobenius smooth image and use pure p-power vectors in a symmetric power.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-nonaffine-normal-subgroup-kernel-of-representation",
+        "kind": "lemma",
+        "title": "Every normal subgroup of an affine group is a representation kernel",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-nonaffine-subgroup-scheme-stabilizer-of-line",
+          "lem-nonaffine-normal-subgroup-inverse-multiple-character",
+          "thm-existence-of-algebraic-closures",
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian"
+        ],
+        "statement": "Assume AC. Over any field $k$, every closed normal subgroup scheme $N$ of an affine finite-type $k$-group scheme $G$ is the scheme-theoretic kernel of a finite-dimensional representation $G\\to\\operatorname{GL}(E)$. Neither group scheme is assumed smooth.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Corollary 4.29, Lemmas 5.15\u20135.17 and Proposition 5.18, pp.95,102\u2013103",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Realize N as the stabilizer of a line in a finite-dimensional representation, take top exterior powers to force N to act by scalars, and descend the construction from an algebraic closure by Galois-fixed data.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-nonaffine-affine-normal-group-quotient-affine",
+        "kind": "theorem",
+        "title": "Quotients of affine group schemes by normal subgroup schemes are affine",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-nonaffine-normal-subgroup-kernel-of-representation",
+          "thm-nonaffine-group-scheme-normal-subgroup-quotient",
+          "lem-nonaffine-group-monomorphism-closed-immersion"
+        ],
+        "statement": "Assume AC. Let $k$ be any field, $G$ an affine finite-type $k$-group scheme and $N\\subseteq G$ a closed normal subgroup scheme. The represented fppf quotient $G/N$ is an affine finite-type $k$-group scheme. Its projection is faithfully flat of finite presentation, has scheme-theoretic kernel $N$, and is an $N$-torsor. Neither $G$ nor $N$ is assumed smooth or reduced.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Proposition 5.18, p.103",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Realize N as the exact scheme-theoretic kernel of a representation G -> GL(E), factor the representation through Q = G/N, and observe that the induced closed immersion of Q into the affine GL(E) makes Q affine.",
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties",
+        "kind": "lemma",
+        "title": "Affine smooth and connected properties in exact sequences of algebraic groups",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-connected-group-geometrically-connected",
+          "lem-nonaffine-affine-and-finite-morphism-fppf-descent",
+          "thm-flat-finite-presentation-is-open",
+          "def-smooth-morphism-schemes",
+          "thm-ag-standard-smooth-base-change-composition",
+          "thm-nonaffine-affine-normal-group-quotient-affine"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $1\\to N\\to G\\xrightarrow{q}Q\\to1$ be an exact sequence of separated finite-type $k$-group schemes, meaning $q$ is faithfully flat of finite presentation and $N$ is its scheme-theoretic kernel. Then: - if $N,Q$ are affine, smooth, or connected, respectively, so is $G$; - if $G$ is affine, smooth, or connected, respectively, so is $Q$; - if $N$ is affine, then $q$ is affine; if $N$ is smooth, then $q$ is smooth.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Proposition 8.1 and references 1.62, 2.70, 5.29, 5.59, p.149",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Proposition 3.1.2",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Identify G x N with G x_Q G via the shear isomorphism, then transport affineness, smoothness and connectedness through fibres, quotients and field extensions, including dimension additivity.",
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-nonaffine-group-image-exact-quotient-properties",
+        "kind": "lemma",
+        "title": "Group images are exact kernel quotients and preserve affine smooth connected properties",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "thm-nonaffine-group-scheme-normal-subgroup-quotient",
+          "lem-nonaffine-group-monomorphism-closed-immersion",
+          "lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties"
+        ],
+        "statement": "Assume the Axiom of Choice. For a homomorphism $f:G\\to H$ of separated finite-type $k$-group schemes with scheme kernel $K$, its scheme-theoretic image $I$ is isomorphic to the represented fppf quotient $G/K$. The map $G\\to I$ is faithfully flat of finite presentation. If $G$ is affine, smooth, or connected, respectively, so is $I$. If $q:G\\to Q$ is an exact quotient and $N\\subset G$ a closed normal subgroup, the image of $N\\to Q$ is normal in $Q$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Chapters 5-6, isomorphism theorems; Proposition 8.1",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Sections 2.7-2.8",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Factor f through P = G/K, prove the factored map has trivial kernel and is a closed immersion by the monomorphism lemma, and transfer affineness, smoothness and connectedness to the image.",
+        "dependency_level": 9
+      },
+      {
+        "id": "lem-nonaffine-affine-normal-subgroup-products",
+        "kind": "lemma",
+        "title": "Products of smooth connected affine normal subgroups are in the same class",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-group-image-exact-quotient-properties",
+          "lem-nonaffine-connected-group-geometrically-connected"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $G$ be a separated finite-type $k$-group scheme, and $N_1,N_2$ smooth connected affine closed normal subgroups. The fppf product subgroup $N_1N_2\\subset G$, consisting of points which locally on an fppf cover are products of points of $N_1$ and $N_2$, is a smooth connected affine closed normal subgroup containing both.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Proposition 6.42 and Proposition 8.2, pp.127,149",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Lemma 3.1.4",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Use the semidirect product with underlying scheme N1 x N2 to represent the product, and use exact sequences to transfer smoothness, connectedness, affineness and normality.",
+        "dependency_level": 10
+      },
+      {
+        "id": "lem-nonaffine-ample-finite-type-projective-immersion",
+        "kind": "lemma",
+        "title": "An ample line bundle on a finite-type scheme gives a projective immersion",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-ample-invertible-sheaf",
+          "lem-extend-sections-from-nonvanishing-open",
+          "thm-line-bundle-sections-define-projective-map"
+        ],
+        "statement": "Assume the Axiom of Choice. A separated finite-type $k$-scheme with an ample invertible sheaf admits a locally closed immersion into some projective space over $k$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 37.49.1",
+              "url": "https://stacks.math.columbia.edu/tag/0B42"
+            },
+            {
+              "title": "Stacks Project, Properties, ampleness and section opens",
+              "url": "https://stacks.math.columbia.edu/tag/01Q3"
+            }
+          ]
+        },
+        "strategy": "Choose finitely many sections of a power of the ample bundle that generate it, and check that the associated morphism to projective space separates points and tangent vectors, so it is a locally closed immersion.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonaffine-ample-line-bundle-field-descent",
+        "kind": "lemma",
+        "title": "Ampleness of a given line bundle descends under field extension",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-serre-criterion-ampleness",
+          "lem-nonaffine-global-sections-flat-field-base-change",
+          "thm-faithfully-flat-descent-vanishing"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $X$ be a separated finite-type scheme over $k$, $L$ an invertible sheaf on $X$, and $K/k$ a field extension. If $L_K$ is ample on $X_K$, then $L$ is ample on $X$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Properties, ampleness under faithfully flat base change",
+              "url": "https://stacks.math.columbia.edu/tag/01Q3"
+            },
+            {
+              "title": "Stacks Project, Varieties, Lemma 33.15.1",
+              "url": "https://stacks.math.columbia.edu/download/varieties.pdf"
+            }
+          ]
+        },
+        "strategy": "Use that quasi-coherent cohomology commutes with flat field extension and Serre cohomological ampleness, then descend the vanishings to k.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-antiaffine-factor-rigidity",
+        "kind": "lemma",
+        "title": "Rigidity for an integral factor with only constant functions",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-nonaffine-global-sections-flat-field-base-change",
+          "thm-krull-intersection-theorem",
+          "thm-morphisms-into-affine-scheme-global-sections"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be algebraically closed and $X,Y$ integral separated finite-type $k$-schemes with rational points $x_0,y_0$. Suppose $\\Gamma(X,\\mathcal O_X)=k$. For every morphism $f:X\\times Y\\to Z$ to a separated finite-type $k$-scheme which is constant on $X\\times\\{y_0\\}$, one has $f=f(x_0,-)\\circ\\operatorname{pr}_Y$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Lemma 3.3.3, pp.31-32",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            },
+            {
+              "title": "Milne, Abelian Varieties, Chapter I, rigidity and group morphisms",
+              "url": "https://www.jmilne.org/math/CourseNotes/AV.pdf"
+            }
+          ]
+        },
+        "strategy": "Use nilpotent thickenings of the factors and the closed equalizer of f and the projection-composite: the equalizer contains a neighbourhood of X x {y0} and is closed, hence everything.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-faithful-fixed-point-jet-representation",
+        "kind": "lemma",
+        "title": "A scheme-faithful action fixing a point has a faithful finite jet representation",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-group-monomorphism-closed-immersion",
+          "thm-krull-intersection-theorem"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $G$ be a separated finite-type $k$-group scheme and $X$ a reduced irreducible separated finite-type $k$-scheme, with $P\\in X(k)$. Suppose $G$ acts scheme faithfully on $X$, or acts scheme faithfully by birational transformations, and the rational action's regular domain contains $G\\times\\{P\\}$ with constant restriction $P$ as a scheme morphism. Then $G$ has a faithful finite-dimensional representation on $\\mathcal O_{X,P}/\\mathfrak m_P^{n+1}$ for sufficiently large $n$, and is affine. Scheme faithfulness means that, for every test scheme, only the identity group point acts as the identity transformation; pointwise faithfulness on $k$-points is insufficient.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Proposition 8.9, p.150",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Proposition 3.1.6, pp.28-29",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            },
+            {
+              "title": "Brion-Samuel-Uma, Lectures, Proposition 2.3.2 rational-action adaptation",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/chennai.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the jets of X at P: faithfulness makes some jet representation have trivial scheme kernel, and the induced closed immersion into GL_n makes G affine.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-nonaffine-centre-is-stable-jet-kernel",
+        "kind": "lemma",
+        "title": "The centre is the stable kernel of conjugation on local jets",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-faithful-fixed-point-jet-representation"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $G$ be a smooth geometrically integral finite-type group scheme over $k$. Conjugation gives representations on $\\mathcal O_{G,e}/\\mathfrak m_e^{n+1}$. Their kernels stabilize for large $n$, and the stable kernel is the scheme-theoretic centre $Z(G)$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Proposition 8.10, p.150-151",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Proposition 3.1.6 and Corollary 3.1.7",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Conjugation acts on the identity jets; detect triviality of a subgroup acting identically on all jets and identify the stable kernel as the scheme-theoretic centre.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-nonaffine-characteristic-zero-group-smooth",
+        "kind": "lemma",
+        "title": "Every finite-type characteristic-zero group scheme is smooth",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-existence-of-algebraic-closures",
+          "lem-nonaffine-connected-group-geometrically-connected",
+          "lem-ag-geometric-regularity-field-tests",
+          "def-embedding-dimension-and-regular-local-ring",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay"
+        ],
+        "statement": "Assume AC. Every separated finite-type group scheme over a characteristic-zero field is smooth. No affineness, reducedness, or connectedness assumption is required.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 39.8.2, tag 047N (Cartier smoothness, without affineness)",
+              "url": "https://stacks.math.columbia.edu/tag/047N"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), Theorem 3.23 (local nilpotent calculation)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Compute the cotangent dimension of the complete local ring at the identity via the nilpotent multiplication on the second infinitesimal neighbourhood, proving regularity and hence smoothness in characteristic zero.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-nonempty-smooth-scheme-finite-separable-point",
+        "kind": "lemma",
+        "title": "A nonempty smooth scheme has a finite separable point",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-separable-closures-exist-and-are-isomorphic-over-the-base",
+          "thm-smooth-local-standard-form",
+          "thm-etale-morphisms-open-and-quasi-finite",
+          "lem-etale-residue-extensions-finite-separable",
+          "thm-finitely-generated-algebraic-extensions-are-finite"
+        ],
+        "statement": "Assume the Axiom of Choice. Every nonempty smooth finite-type scheme $X$ over a field $k$ has a closed point $P$ whose residue field is finite and separable over $k$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Lemma 8.22 separable-point step",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Lemma 4.2.3",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Extend scalars to a separable closure and use the standard smooth presentation at a closed point to obtain a finite separable residue field.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonaffine-finite-galois-descent-of-morphisms",
+        "kind": "lemma",
+        "title": "Finite Galois descent of morphisms of schemes",
+        "deps": [
+          "thm-fundamental-theorem-of-finite-galois-theory",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-morphisms-into-affine-scheme-global-sections"
+        ],
+        "statement": "Let $K/k$ be a finite Galois extension with group $\\Gamma$, and let $X$ and $Z$ be $k$-schemes. A $K$-morphism $f:X_K\\to Z_K$ descends to a unique $k$-morphism $X\\to Z$ if and only if it commutes with the canonical semilinear $\\Gamma$-actions.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Appendix A, Galois descent A.64-A.66",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Stacks Project, Descent, descent of morphisms of schemes",
+              "url": "https://stacks.math.columbia.edu/tag/023Q"
+            }
+          ]
+        },
+        "strategy": "Use the invariant identity (A tensor K)^Gamma = A and glue local descended morphisms on affine charts; descent holds exactly when the semilinear Gamma-actions commute.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonaffine-commutative-torsor-norm-map",
+        "kind": "lemma",
+        "title": "Norm map for a commutative torsor with a separable point",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-nonempty-smooth-scheme-finite-separable-point",
+          "lem-nonaffine-finite-galois-descent-of-morphisms",
+          "thm-finite-galois-extension-characterizations"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $G$ be a commutative separated finite-type $k$-group scheme and let $V$ be a $G$-torsor over $k$. Here a torsor means a faithfully flat finite-presentation $k$-scheme with an action written $v+g$ for which $(v,g)\\mapsto(v,v+g)$ is an isomorphism $V\\times_kG\\cong V\\times_kV$. Suppose that $V$ has a point $P$ with finite separable residue field $L/k$ of degree $n$. Then there is a $k$-morphism $\\phi:V\\to G$ with $$\\phi(v+g)=\\phi(v)+ng$$ as an identity of morphisms $V\\times_kG\\to G$. If $V$ is smooth and nonempty, such a point $P$ exists.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Lemma 8.22, p. 152",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Lemma 4.2.3, pp. 36-37",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Sum the conjugates of a point with finite separable residue field over a Galois extension using the commutative group law; Galois equivariance of the sum gives a k-rational point.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-rational-map-normal-to-proper-codimension-two",
+        "kind": "lemma",
+        "title": "A rational map from a normal variety to a proper variety extends in codimension one",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-valuative-criterion-properness",
+          "thm-height-one-localisation-of-normal-noetherian-domain-is-dvr",
+          "def-rational-map-integral-schemes"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $X$ be a normal integral finite-type $k$-scheme and $Y$ a proper finite-type $k$-scheme. The maximal domain of a rational map $f:X\\dashrightarrow Y$ contains every codimension-one point of $X$. Thus its closed complement has codimension at least two, if nonempty.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Abelian Varieties, Chapter I, Theorem 3.1, pp.16-17",
+              "url": "https://www.jmilne.org/math/CourseNotes/AV.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), 8.16, p.152",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the DVR at a codimension-one point and the valuative criterion for properness to extend the generic morphism across the divisor.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonaffine-divisorial-valuation-restriction-model",
+        "kind": "lemma",
+        "title": "A divisorial valuation restricts to a divisorial valuation or the trivial valuation",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-height-one-localisation-of-normal-noetherian-domain-is-dvr",
+          "lem-nonaffine-rational-map-normal-to-proper-codimension-two",
+          "thm-valuative-criterion-properness",
+          "thm-affine-domain-dimension-transcendence-degree",
+          "cor-transcendence-degree-tower-additivity",
+          "thm-projective-space-proper-over-base",
+          "thm-integral-closure-finite-finite-type-domain-over-field",
+          "lem-finite-normalization-compatible-with-principal-opens"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $X$ be a normal integral variety over an algebraically closed field $k$, $D\\subset X$ a prime divisor, $Y$ a proper integral variety, and $f:X\\dashrightarrow Y$ a dominant rational map. Identify $K=k(Y)\\subset L=k(X)$ by $f^\\#$. Let $v$ be the divisorial valuation of $D$ and $w=v|_{K^*}$. Either $w=0$ and $f|_D$ is dominant, or $w$ is a nontrivial discrete valuation with $\\operatorname{trdeg}_k\\kappa(w)=\\dim Y-1$. In the second case there is a proper normal variety $Y'$ and a proper birational morphism $Y'\\to Y$ such that the induced map $X\\dashrightarrow Y'$ is defined at the generic point of $D$ and maps $D$ dominantly onto a prime divisor of $Y'$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brion\u2013Samuel\u2013Uma, Lectures on the structure of algebraic groups, Lemma 2.3.5, pp.30\u201331",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/chennai.pdf"
+            }
+          ]
+        },
+        "strategy": "Restrict the divisorial valuation to the function field of the target, and use transcendence-degree inequalities to construct either dominance on D or a divisorial valuation model of the target.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-finite-field-descent-of-morphisms",
+        "kind": "lemma",
+        "title": "Morphisms descend under a finite field extension with the full descent identity",
+        "deps": [
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-morphisms-into-affine-scheme-global-sections"
+        ],
+        "statement": "Let $K/k$ be a finite field extension, not necessarily separable, and let $X,Z$ be $k$-schemes. A $K$-morphism $f:X_K\\to Z_K$ comes from a unique $k$-morphism $X\\to Z$ if and only if its two base extensions over $K\\otimes_kK$ agree under the canonical identifications. This is the full descent identity, not just invariance under automorphisms of $K/k$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Descent, descent of morphisms of schemes",
+              "url": "https://stacks.math.columbia.edu/tag/023Q"
+            },
+            {
+              "title": "SGA3, Expose VIA, 3.2.3 finite scalar descent",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp6A-13oct24.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the equalizer A -> A tensor K => A tensor K tensor K for arbitrary finite K/k, then glue the descended morphisms on affine charts; the full K tensor K identity is the exact cocycle condition.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonaffine-purely-inseparable-affine-proper-descent",
+        "kind": "lemma",
+        "title": "Affineness and properness descend under finite purely inseparable scalar extension",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-nonaffine-global-sections-flat-field-base-change",
+          "thm-faithfully-flat-descent-vanishing",
+          "def-proper-morphism",
+          "thm-morphisms-into-affine-scheme-global-sections"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $K/k$ be finite purely inseparable, and $X$ a separated finite-type $k$-scheme. If $X_K$ is affine, then $X$ is affine. If $X_K$ is proper over $K$, then $X$ is proper over $k$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Lemma 4.3.5 and Theorem 4.3.4",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            },
+            {
+              "title": "Stacks Project, Descent, properties of schemes under field extension",
+              "url": "https://stacks.math.columbia.edu/download/descent.pdf"
+            }
+          ]
+        },
+        "strategy": "Use that finite purely inseparable base change is finite faithfully flat and a universal homeomorphism; descends affineness via global sections and properness via the fpqc criterion.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-frobenius-power-ideal-subgroup-descent",
+        "kind": "lemma",
+        "title": "Purely inseparable subgroup descent by Frobenius power ideals",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-high-frobenius-smooth-image",
+          "lem-nonaffine-affine-nilpotent-thickening",
+          "lem-nonaffine-purely-inseparable-affine-proper-descent"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $G$ be a separated finite-type $k$-group scheme, and $K/k$ a finite purely inseparable extension of characteristic $p>0$. Let $H'\\subset G_K$ be a closed subgroup scheme. Choose $q=p^r$ with $K^q\\subset k$. There is a closed $k$-subgroup scheme $H\\subset G$ such that $H_K$ contains $H'$ as a nilpotent closed subscheme. If $H'$ is normal, affine, or connected, then $H$ has the respective property. Neither $H$ nor $H_K$ is asserted smooth.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Lemma 4.3.5, p. 40",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), Theorem 8.28, purely inseparable step, p.155",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Build H from q-th power ideals so that H_K contains H as a nilpotent thickening; use relative Frobenius inverse images and twists to keep normality, affineness and connectedness.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-nonaffine-geometric-properness-field-descent",
+        "kind": "lemma",
+        "title": "Properness over a field can be checked after field extension",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-proper-morphism",
+          "thm-properness-descent-fpqc"
+        ],
+        "statement": "Assume AC. Let $X$ be a separated finite-type scheme over a field $k$, and let $K/k$ be any field extension. Then $X$ is proper over $k$ if and only if $X_K$ is proper over $K$. In particular this can be checked over an algebraic closure, and applies to completeness of group varieties, where complete means proper. No algebraicity or separability of $K/k$ is required.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), proof of Theorem 8.26 and Appendix A.75, p.154",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Sections 4.2-4.3",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Apply the fpqc descent equivalence for properness to the flat surjective morphism Spec K -> Spec k.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonaffine-regular-local-picard-principal-localization",
+        "kind": "lemma",
+        "title": "Line bundles on a principal localization of a regular local ring are trivial",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-localisation-and-polynomial-extension-of-regular-rings",
+          "lem-finite-local-modules-admit-minimal-free-resolutions",
+          "thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective",
+          "thm-nakayama-lemma",
+          "thm-localisation-of-modules-is-exact"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $R$ be a regular local ring and $f\\in R$. Every invertible $R_f$-module is free of rank one.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 15.123.1, including corrected K0 argument",
+              "url": "https://stacks.math.columbia.edu/tag/0AFZ"
+            },
+            {
+              "title": "Stacks Project, Algebra, regular local finite free resolutions",
+              "url": "https://stacks.math.columbia.edu/tag/00O7"
+            }
+          ]
+        },
+        "strategy": "Use finite projective dimension and a minimal free resolution of the localization over the regular local ring to show every invertible module is free of rank one.",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-nonaffine-regular-local-ring-is-ufd",
+        "kind": "theorem",
+        "title": "Regular local rings are unique factorization domains",
+        "deps": [
+          "def-smooth-morphism-schemes",
+          "def-axiom-of-choice",
+          "lem-nonaffine-regular-local-picard-principal-localization",
+          "lem-regular-local-domain-induction",
+          "lem-regular-local-quotient-by-parameter-is-regular",
+          "cor-localisations-of-regular-local-rings-are-regular",
+          "thm-krull-principal-ideal-theorem",
+          "thm-flatness-is-local",
+          "cor-finite-flat-noetherian-modules-are-projective"
+        ],
+        "statement": "Assume the Axiom of Choice. Every regular local ring is a unique factorization domain. In particular every smooth finite-type scheme over a field is locally factorial.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 15.123.2",
+              "url": "https://stacks.math.columbia.edu/tag/0AG0"
+            },
+            {
+              "title": "Matsumura, Commutative Ring Theory, Theorem 20.3",
+              "url": "https://doi.org/10.1017/CBO9781139171762"
+            }
+          ]
+        },
+        "strategy": "Induct on dimension to prove every height-one prime is principal, then use factorization into irreducibles in a Noetherian domain to conclude unique factorization.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-group-target-rational-indeterminacy-divisors",
+        "kind": "lemma",
+        "title": "Indeterminacy of a rational map to a group is divisorial",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "thm-nonaffine-regular-local-ring-is-ufd",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "def-rational-map-integral-schemes"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be algebraically closed, $X$ a smooth integral finite-type $k$-scheme, and $H$ a separated finite-type $k$-group scheme. The complement of the maximal domain of a rational map $f:X\\dashrightarrow H$ is either empty or a finite union of prime divisors.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Abelian Varieties, Chapter I, Lemma 3.3, pp.17-18",
+              "url": "https://www.jmilne.org/math/CourseNotes/AV.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), 8.17, p.152",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Define Phi(x,y) = f(x) f(y)^{-1} on X x X; its indeterminacy equals the pole locus of finitely many coordinates and is a finite union of prime divisors.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-nonaffine-line-bundle-affine-space-parameter-constancy",
+        "kind": "lemma",
+        "title": "Line bundles over an affine-space parameter open come from the smooth factor",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-nonaffine-regular-local-ring-is-ufd",
+          "thm-line-bundle-rational-section-cartier-divisor",
+          "thm-cartier-weil-isomorphism-locally-factorial",
+          "thm-dimension-formula-for-affine-domains",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $X$ be a smooth geometrically integral finite-type $k$-scheme and $V\\subset\\mathbf A^d_k$ a nonempty open. Every invertible sheaf $M$ on $X\\times_kV$ is isomorphic to the pullback of an invertible sheaf $N$ on $X$. Consequently after any field extension its restrictions at all rational parameter points are isomorphic to that same base extension of $N$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 33.30.5, with its divisor pullback proof",
+              "url": "https://stacks.math.columbia.edu/tag/0BEH"
+            },
+            {
+              "title": "Stacks Project, Divisors, Lemmas 31.29.1 and 31.29.4",
+              "url": "https://stacks.math.columbia.edu/download/divisors.pdf"
+            }
+          ]
+        },
+        "strategy": "Represent the bundle by a divisor, close its components in X x A^d, and use codimension-one constancy of divisors on the A^d-fibres to write it as a pullback plus a principal divisor.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-nonaffine-rigidity-proper-geometrically-integral-factor",
+        "kind": "lemma",
+        "title": "Rigidity for a proper geometrically integral factor",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-global-functions-proper-integral-variety",
+          "lem-nonaffine-global-sections-flat-field-base-change",
+          "thm-proper-morphism-closed-image",
+          "thm-flat-finite-presentation-is-open",
+          "def-separated-morphism-schemes",
+          "thm-morphisms-into-affine-scheme-global-sections"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $X$ be a proper geometrically integral $k$-scheme of finite type, with $x_0\\in X(k)$. Let $Y$ be a connected finite-type $k$-scheme and $Z$ a separated finite-type $k$-scheme. If a $k$-morphism $f:X\\times_kY\\to Z$ is constant on $X\\times_k\\{y_0\\}$ for some $y_0\\in Y(k)$, then $$f=f(x_0,-)\\circ\\operatorname{pr}_Y.$$",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Abelian Varieties (2008), Chapter I, rigidity lemma",
+              "url": "https://www.jmilne.org/math/CourseNotes/AV.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Lemma 3.3.3",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Take the closed equalizer of f and its y0-slice; properness and geometric integrality of X make the equalizer open and closed, hence all of X x Y.",
+        "dependency_level": 1
+      },
+      {
+        "id": "prop-abelian-variety-commutativity-from-rigidity",
+        "kind": "proposition",
+        "title": "A proper geometrically connected group variety is commutative",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-rigidity-proper-geometrically-integral-factor"
+        ],
+        "statement": "Assume the Axiom of Choice. Every abelian variety over a field is commutative. More generally, if $A$ is an abelian variety and $H$ a connected separated finite-type $k$-group scheme, every group homomorphism $u:A\\to H$ has central image, scheme theoretically.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), 8.13 and 8.20",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Corollary 3.1.7",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "The commutator morphism c(a,h) = u(a) h u(a)^{-1} h^{-1} is constant on A x {e}, hence trivial by rigidity; applying it with H=A gives commutativity and centrality.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-nonaffine-smooth-affine-open-cartier-boundary",
+        "kind": "lemma",
+        "title": "An affine open in a smooth integral variety has Cartier boundary",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-nonaffine-regular-local-ring-is-ufd",
+          "thm-cartier-weil-isomorphism-locally-factorial",
+          "thm-morphisms-into-affine-scheme-global-sections",
+          "def-separated-morphism-schemes"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $X$ be a smooth integral separated finite-type $k$-scheme, and $U\\subset X$ a nonempty affine open. There is an effective Cartier divisor $D$ on $X$ with support $X\\setminus U$, so $X\\setminus D=U$. The empty divisor is allowed.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemmas 31.17.5 and 31.17.6",
+              "url": "https://stacks.math.columbia.edu/tag/0BCW"
+            },
+            {
+              "title": "Stacks Project, regular local factoriality",
+              "url": "https://stacks.math.columbia.edu/tag/0AG0"
+            }
+          ]
+        },
+        "strategy": "Use the UFD property at the generic points of the complement components to show they have codimension one, then sum the prime divisors to get an effective Cartier boundary.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-nonaffine-smooth-connected-group-has-ample-line-bundle",
+        "kind": "lemma",
+        "title": "A smooth geometrically integral algebraic group has an ample line bundle",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-smooth-affine-open-cartier-boundary",
+          "lem-nonaffine-line-bundle-affine-space-parameter-constancy",
+          "lem-nonaffine-ample-line-bundle-field-descent",
+          "thm-smooth-local-standard-form",
+          "thm-nonaffine-regular-local-ring-is-ufd",
+          "thm-cartier-weil-isomorphism-locally-factorial",
+          "cor-finite-flat-noetherian-modules-are-projective",
+          "thm-existence-of-algebraic-closures",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "def-ample-invertible-sheaf"
+        ],
+        "statement": "Assume the Axiom of Choice. A smooth geometrically integral separated finite-type group scheme $G$ over any field $k$ has an ample invertible sheaf.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 39.8.7, smooth connected case and etale divisor family construction",
+              "url": "https://stacks.math.columbia.edu/tag/0BF7"
+            },
+            {
+              "title": "Stacks Project, Lemma 33.30.5",
+              "url": "https://stacks.math.columbia.edu/tag/0BEH"
+            }
+          ]
+        },
+        "strategy": "Translate an affine open around by the group law; use a finite etale norm of a divisor to build a line bundle whose affine section locus covers the group, then conclude ampleness from the proper-immersion interface.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-abelian-variety-is-projective",
+        "kind": "theorem",
+        "title": "Every abelian variety over a field is projective",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-smooth-connected-group-has-ample-line-bundle",
+          "thm-ample-powers-very-ample-proper-base"
+        ],
+        "statement": "Assume the Axiom of Choice. Every abelian variety over every field is projective over that field. Neither perfectness of the field nor a polarization is an assumption.",
+        "design_row": "AG-GRP-1",
+        "local_addition": false,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 39.9.2, with 39.8.7 and 37.50.1",
+              "url": "https://stacks.math.columbia.edu/tag/0BFA"
+            },
+            {
+              "title": "Stacks Project, Lemma 37.50.1",
+              "url": "https://stacks.math.columbia.edu/tag/0B45"
+            }
+          ]
+        },
+        "strategy": "Apply the ample line bundle theorem to the smooth geometrically integral group and conclude projectivity from properness plus ampleness over the given field.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-nonaffine-theorem-of-the-cube-for-abelian-variety",
+        "kind": "lemma",
+        "title": "The theorem of the cube for an abelian variety",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-abelian-variety-over-a-field",
+          "prop-abelian-variety-commutativity-from-rigidity",
+          "thm-abelian-variety-is-projective",
+          "thm-global-functions-proper-integral-variety",
+          "thm-cech-computes-qc-cohomology-separated-scheme-affine-cover",
+          "lem-proper-flat-cohomology-perfect-complex",
+          "thm-faithful-flatness-of-jacobson-adic-completion",
+          "thm-cohomology-and-base-change"
+        ],
+        "statement": "Assume AC and DC. Let $A$ be an abelian variety over any field $k$, with identity $e$. On $A^3$, write $m_I(x_1,x_2,x_3)=\\sum_{i\\in I}x_i$. For every invertible sheaf $L$ on $A$ there is an isomorphism $$m_{123}^*L\\otimes m_1^*L\\otimes m_2^*L\\otimes m_3^*L\\cong m_{12}^*L\\otimes m_{13}^*L\\otimes m_{23}^*L.$$ More generally, an invertible sheaf $M$ on $A\\times A\\times A$ trivial on $e\\times A\\times A$ and $A\\times e\\times A$, and trivial on $A\\times A\\times\\{z\\}$ for one point $z$ of the third factor, is trivial. The triviality on the last fibre is over its residue field. The assertion includes arbitrary characteristic and imperfect fields.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Theorem 37.33.8 and Lemmas 37.33.1, 37.33.4, 37.33.6\u20137",
+              "url": "https://stacks.math.columbia.edu/tag/0BF4"
+            },
+            {
+              "title": "Stacks Project, Lemma 39.9.6",
+              "url": "https://stacks.math.columbia.edu/tag/0BFE"
+            }
+          ]
+        },
+        "strategy": "Show the triviality locus of M = m_123^*L tensor ... on A^3 is closed and open using cohomology and base change, and trivialize over the local rings by a finite projective complex; get the cube identity.",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-nonaffine-multiplication-pullback-symmetric-line-bundle",
+        "kind": "lemma",
+        "title": "Multiplication pulls back a symmetric line bundle to its square power",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-abelian-variety-over-a-field",
+          "prop-abelian-variety-commutativity-from-rigidity",
+          "lem-nonaffine-theorem-of-the-cube-for-abelian-variety"
+        ],
+        "statement": "Assume AC and DC. Let $A/k$ be an abelian variety over any field and $L$ an invertible sheaf on $A$. For every integer $n$, with $[n]:A\\to A$ denoting multiplication by $n$, there is an isomorphism $$[n]^*L\\cong L^{\\otimes n(n+1)/2}\\otimes([-1]^*L)^{\\otimes n(n-1)/2}.$$ In particular, if $L$ is symmetric, meaning $[-1]^*L\\cong L$, then $[n]^*L\\cong L^{\\otimes n^2}$. Negative tensor powers mean powers of the dual; these are isomorphisms of line bundles, without a claim of canonical trivialization at the identity.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 39.9.7",
+              "url": "https://stacks.math.columbia.edu/tag/0BFF"
+            }
+          ]
+        },
+        "strategy": "Derive the recurrence P_{r+1} tensor L^2 tensor P_{r-1} = P_2 tensor ... by pulling the cube theorem back along the diagonal map, induct on r, and handle negative n using [-1].",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-nonaffine-normal-completion-smooth-locus-antiaffine",
+        "kind": "lemma",
+        "title": "The smooth locus of a normal completion of a group has only constant functions",
+        "deps": [
+          "thm-serre-normality-criterion",
+          "def-axiom-of-choice",
+          "lem-nonaffine-smooth-connected-group-has-ample-line-bundle",
+          "lem-nonaffine-ample-finite-type-projective-immersion",
+          "thm-integral-closure-finite-finite-type-domain-over-field",
+          "lem-finite-normalization-compatible-with-principal-opens",
+          "thm-projective-space-proper-over-base",
+          "thm-height-one-localisation-of-normal-noetherian-domain-is-dvr",
+          "thm-regular-equals-smooth-over-perfect-field",
+          "lem-r-one-s-two-intersection-of-height-one-localisations",
+          "thm-global-functions-proper-integral-variety",
+          "thm-smooth-locus-open"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $G$ be a smooth integral algebraic group over an algebraically closed field $k$. There is a proper normal integral variety $\\overline G$ containing $G$ as a dense open. Its smooth locus $U$ contains $G$ and has $\\Gamma(U,\\mathcal O_U)=k$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, proof of Lemma 4.1.3, pp.34-35",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            },
+            {
+              "title": "Conrad, A modern proof of Chevalleys theorem, Lemma 2.2",
+              "url": "https://virtualmath1.stanford.edu/~conrad/papers/chev.pdf"
+            }
+          ]
+        },
+        "strategy": "Take the reduced closure of G in projective space and normalize it; the smooth locus contains G and has only constant functions because normal local rings of dimension at least two have no height-one poles.",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-nonaffine-maximal-smooth-connected-affine-normal-subgroup",
+        "kind": "theorem",
+        "title": "Every algebraic group has a largest smooth connected affine normal subgroup",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-affine-normal-subgroup-products",
+          "lem-nonaffine-connected-group-geometrically-connected",
+          "thm-nonaffine-group-scheme-normal-subgroup-quotient",
+          "lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties"
+        ],
+        "statement": "Assume the Axiom of Choice. Every separated finite-type $k$-group scheme $G$ has a largest smooth connected affine closed normal subgroup $N$. It contains every subgroup with these properties, not just one subgroup of maximal dimension. The quotient $G/N$ has no nontrivial smooth connected affine closed normal subgroup. Neither $G$ nor the field is assumed smooth or perfect for these assertions.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Proposition 8.2 and Proposition 6.42, p.149",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Lemma 3.1.4",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Choose among smooth connected affine normal subgroups one of maximal dimension; if the quotient had such a subgroup, its scheme-theoretic preimage would be a strictly larger one.",
+        "dependency_level": 11
+      },
+      {
+        "id": "lem-nonaffine-pseudo-abelian-separable-field-extension",
+        "kind": "lemma",
+        "title": "Pseudo-abelian varieties under separable algebraic extension",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "thm-nonaffine-maximal-smooth-connected-affine-normal-subgroup",
+          "lem-nonaffine-effective-affine-algebra-descent",
+          "lem-nonaffine-affine-and-finite-morphism-fppf-descent",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms",
+          "lem-ag-geometric-regularity-field-tests",
+          "thm-finite-galois-extension-characterizations",
+          "lem-nonaffine-connected-group-geometrically-connected",
+          "lem-trace-pairing-for-a-finite-separable-extension",
+          "thm-field-norm-and-trace-by-embeddings"
+        ],
+        "statement": "Assume AC. Let $G$ be a pseudo-abelian variety over a field $k$, and let $K/k$ be a separable algebraic extension, possibly infinite. Then $G_K$ is pseudo-abelian. Smoothness and connectedness are retained. No assertion for arbitrary inseparable extensions is made.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Proposition 8.5, p.149",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Sections 4.2-4.3",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Use finite Galois descent of subgroup ideals for finite separable extensions, then pass to the directed union for infinite separable extensions; no inseparable case is asserted.",
+        "dependency_level": 12
+      },
+      {
+        "id": "lem-nonaffine-rational-action-composition-domain",
+        "kind": "lemma",
+        "title": "Composition at points in the domain of a rational group action",
+        "deps": [
+          "def-axiom-of-choice",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "def-abelian-variety-over-a-field",
+          "def-rational-map-integral-schemes"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be algebraically closed, $G$ a smooth connected algebraic group, and $X$ an integral separated variety. A rational action means a rational map $\\alpha:G\\times X\\dashrightarrow X$ satisfying the action identities as rational maps, whose induced maps $\\alpha_g$ are birational automorphisms for every $g\\in G(k)$. Write $g\\cdot x$ only when the total map $\\alpha$ is defined at $(g,x)$. If $h\\cdot x$ and $g\\cdot(h\\cdot x)$ are defined, then $gh\\cdot x$ is defined and equals $g\\cdot(h\\cdot x)$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brion\u2013Samuel\u2013Uma, Lectures on the structure of algebraic groups, Lemma 2.3.3, p.29",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/chennai.pdf"
+            }
+          ]
+        },
+        "strategy": "Use integrality of products of varieties and the fibration structure of the multiplication map to show the composition of two rational maps is defined on a nonempty open.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nonaffine-rational-fixed-point-affineness",
+        "kind": "lemma",
+        "title": "A faithful rational action with a fixed point forces affineness",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-rational-action-composition-domain",
+          "lem-nonaffine-faithful-fixed-point-jet-representation",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be algebraically closed, $G$ a smooth algebraic group, and $X$ an integral separated $k$-variety. Suppose $G$ acts rationally and scheme-faithfully on $X$: for every test scheme, only the identity group point induces the identity birational transformation after base change. If some $x\\in X(k)$ satisfies $g\\cdot x=x$ on a dense open subset of $G$ where the total action is defined, then $G$ is affine. In particular this holds for the faithful rational action induced by left translation of a subgroup on a variety birational to its ambient group.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brion\u2013Samuel\u2013Uma, Lectures on the structure of algebraic groups, Proposition 2.3.2, pp.28\u201329",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/chennai.pdf"
+            }
+          ]
+        },
+        "strategy": "Enlarge the fixed open, use the orbit map and a faithful representation to embed G into GL_N, and conclude G is affine, with the disconnected case handled by the identity component.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-nonaffine-reduced-neutral-subgroup-over-perfect-field",
+        "kind": "lemma",
+        "title": "Reduced identity components over perfect fields",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "thm-ag-separating-transcendence-basis-perfect-field",
+          "lem-nonaffine-connected-group-geometrically-connected",
+          "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+          "thm-regular-equals-smooth-over-perfect-field",
+          "thm-smooth-locus-open",
+          "thm-primitive-element-theorem-for-finite-separable-extensions"
+        ],
+        "statement": "Assume AC. Let $k$ be perfect and $H$ a separated finite-type $k$-group scheme. Then $H_{\\mathrm{red}}$ is a smooth closed subgroup and $R=(H_{\\mathrm{red}})^0$ is a smooth geometrically integral connected closed subgroup with $\\dim R=\\dim H$. If $H$ is normal in a smooth finite-type group $G$, then $H_{\\mathrm{red}}$ and $R$ are normal in $G$. If $H$ is affine or proper, respectively, so are these subgroups. No smoothness or connectedness of $H$ is assumed.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), 1.39 and Theorems 8.24-8.26, pp.153-154",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Sections 4.2-4.3",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Show reducedness of finite-type algebras is preserved by field extension, so H_red is smooth; take the identity component and verify normality, affineness and properness transfer.",
+        "dependency_level": 2
+      },
+      {
+        "id": "prop-nonaffine-smooth-group-pseudo-abelian-quotient",
+        "kind": "proposition",
+        "title": "A smooth connected group has a unique affine-normal pseudo-abelian reduction",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "thm-nonaffine-maximal-smooth-connected-affine-normal-subgroup",
+          "lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties",
+          "lem-nonaffine-group-image-exact-quotient-properties",
+          "thm-nonaffine-group-scheme-normal-subgroup-quotient"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $G$ be a smooth connected separated finite-type group scheme over any field $k$. There is a unique smooth connected affine closed normal subgroup $N$ such that $G/N$ is pseudo-abelian. It is the largest smooth connected affine normal subgroup of $G$.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Proposition 8.6, p.150",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Milne, A Proof of the Barsotti-Chevalley Theorem, Proposition 1.5, pp.3-4",
+              "url": "https://arxiv.org/pdf/1311.6060"
+            }
+          ]
+        },
+        "strategy": "Use the maximal smooth connected affine normal subgroup N; by maximality the quotient has no nontrivial such subgroup, and uniqueness follows from the largest-subgroup property.",
+        "dependency_level": 12
+      },
+      {
+        "id": "thm-nonaffine-rosenlicht-dichotomy",
+        "kind": "theorem",
+        "title": "Rosenlicht dichotomy for smooth connected algebraic groups",
+        "deps": [
+          "lem-dimension-nonempty-open-subset",
+          "thm-krull-principal-ideal-theorem",
+          "lem-proper-geometrically-integral-affine-scheme-is-point",
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "prop-abelian-variety-commutativity-from-rigidity",
+          "lem-nonaffine-normal-completion-smooth-locus-antiaffine",
+          "lem-nonaffine-divisorial-valuation-restriction-model",
+          "lem-nonaffine-rational-action-composition-domain",
+          "lem-nonaffine-rational-fixed-point-affineness",
+          "thm-valuative-criterion-properness",
+          "thm-height-one-localisation-of-normal-noetherian-domain-is-dvr",
+          "thm-equivalent-characterisations-of-a-dvr",
+          "thm-integral-closure-finite-finite-type-domain-over-field",
+          "lem-finite-normalization-compatible-with-principal-opens",
+          "thm-projective-space-proper-over-base",
+          "thm-fibre-dimension-lower-bound",
+          "thm-chevalley-constructible-image-varieties",
+          "lem-constructible-dense-contains-open",
+          "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+          "thm-regular-equals-smooth-over-perfect-field",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be algebraically closed and $G$ a smooth connected algebraic group over $k$. Exactly one of the following holds: $G$ is proper (and is an abelian variety), or $G$ contains a smooth connected affine closed subgroup of positive dimension. Consequently every nonproper smooth algebraic group over $k$, including a disconnected one, contains such a subgroup in its identity component.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Brion\u2013Samuel\u2013Uma, Lectures on the structure of algebraic groups, Lemma 2.3.6, p.32; group-case boundary route from Proposition 2.3.4, pp.29\u201330",
+              "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/chennai.pdf"
+            }
+          ]
+        },
+        "strategy": "Construct a proper normal completion, use the boundary divisor and valuation argument to extend the translation action, and constructibly generate a positive-dimensional affine subgroup unless G is proper.",
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-nonaffine-rational-map-smooth-variety-to-abelian-variety-extends",
+        "kind": "theorem",
+        "title": "Rational maps from smooth varieties to abelian varieties extend",
+        "deps": [
+          "lem-nonaffine-finite-field-descent-of-morphisms",
+          "thm-existence-of-algebraic-closures",
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-rational-map-normal-to-proper-codimension-two",
+          "lem-nonaffine-group-target-rational-indeterminacy-divisors",
+          "thm-regular-local-rings-are-normal"
+        ],
+        "statement": "Assume the Axiom of Choice. Over every field, every rational map from a smooth integral finite-type variety to an abelian variety extends uniquely to a morphism on the whole variety.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Abelian Varieties, Chapter I, Theorem 3.2",
+              "url": "https://www.jmilne.org/math/CourseNotes/AV.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), 8.18, p.152",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Extend over the algebraically closed case using divisorial valuation models of the abelian target, then descend the resulting morphism by agreement of the two K tensor K base extensions.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-nonaffine-pointed-group-to-abelian-variety-morphism-homomorphism",
+        "kind": "theorem",
+        "title": "Pointed morphisms from smooth groups to abelian varieties are homomorphisms",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "prop-abelian-variety-commutativity-from-rigidity",
+          "lem-nonaffine-normal-completion-smooth-locus-antiaffine",
+          "lem-nonaffine-antiaffine-factor-rigidity",
+          "thm-nonaffine-rational-map-smooth-variety-to-abelian-variety-extends",
+          "thm-existence-of-algebraic-closures"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $G$ be a smooth geometrically integral group variety over a field $k$, and $A$ an abelian variety. Every $k$-morphism $f:G\\to A$ with $f(e_G)=e_A$ is a group homomorphism.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), 8.19, p.152",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Proposition 4.1.4(1)",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            },
+            {
+              "title": "Conrad, A modern proof of Chevalleys theorem, Lemma 2.2",
+              "url": "https://virtualmath1.stanford.edu/~conrad/papers/chev.pdf"
+            }
+          ]
+        },
+        "strategy": "The defect c(x,y) = f(xy) - f(x) - f(y) vanishes on G x {e} and {e} x G, and rigidity of the abelian target forces c to be trivial.",
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-nonaffine-abelian-multiplication-finite-faithfully-flat",
+        "kind": "theorem",
+        "title": "Nonzero multiplication on an abelian variety is finite and faithfully flat",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-abelian-variety-over-a-field",
+          "prop-abelian-variety-commutativity-from-rigidity",
+          "thm-abelian-variety-is-projective",
+          "lem-nonaffine-multiplication-pullback-symmetric-line-bundle",
+          "thm-segre-line-bundle-external-tensor",
+          "lem-very-ample-implies-ample",
+          "lem-ample-stable-positive-power",
+          "lem-ample-pullback-finite-morphism",
+          "thm-ample-powers-very-ample-proper-base",
+          "thm-global-functions-proper-integral-variety",
+          "lem-quasi-finite-morphism-fibre-characterization",
+          "thm-proper-quasi-finite-is-finite",
+          "cor-dimension-preserved-by-integral-extensions",
+          "thm-generic-flatness-morphisms",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "thm-finite-flat-modules-over-local-rings-are-free",
+          "thm-locally-free-locus-finite-presentation-open",
+          "thm-faithfully-flat-descent-of-flatness",
+          "thm-cech-computes-qc-cohomology-separated-scheme-affine-cover",
+          "lem-eventual-global-generation-coherent-twists",
+          "thm-hilbert-polynomial-coherent-sheaf",
+          "thm-hilbert-polynomial-degree-support-dimension",
+          "lem-euler-characteristic-additive-short-exact",
+          "lem-finite-morphism-affine",
+          "thm-flatness-criteria-by-injections-and-ideals",
+          "thm-affine-domain-dimension-transcendence-degree"
+        ],
+        "statement": "Assume AC and DC. Let $A$ be an abelian variety of dimension $g$ over any field $k$, and let $n$ be a nonzero integer. Then $[n]:A\\to A$ is finite, faithfully flat, and locally free of constant rank $|n|^{2g}$. Its scheme-theoretic kernel $A[n]=A\\times_{[n],A,e}\\operatorname{Spec}k$ is a finite locally free group scheme of rank $|n|^{2g}$. These statements hold when the characteristic divides $n$; the kernel need not be reduced. For every $k$-scheme $T$, each point of $A(T)$ is divisible by $n$ after a finite faithfully flat cover of $T$. Over an algebraically closed field the map on rational points is surjective.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stacks Project, Lemma 39.9.8 and Proposition 39.9.11(3),(5)",
+              "url": "https://stacks.math.columbia.edu/tag/0BFG"
+            }
+          ]
+        },
+        "strategy": "Use the symmetric ample bundle N = H tensor [-1]^*H: triviality of [n]^*N on the fibres makes [n] finite, and flatness, surjectivity and the rank |n|^{2g} follow by translation, generic flatness and Hilbert leading coefficients.",
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-nonaffine-rosenlicht-almost-complement",
+        "kind": "theorem",
+        "title": "Rosenlicht almost-complements to abelian subvarieties",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-connected-group-geometrically-connected",
+          "prop-abelian-variety-commutativity-from-rigidity",
+          "thm-nonaffine-group-scheme-normal-subgroup-quotient",
+          "lem-nonaffine-commutative-torsor-norm-map",
+          "thm-nonaffine-rational-map-smooth-variety-to-abelian-variety-extends",
+          "thm-nonaffine-pointed-group-to-abelian-variety-morphism-homomorphism",
+          "thm-nonaffine-abelian-multiplication-finite-faithfully-flat",
+          "lem-nonaffine-reduced-neutral-subgroup-over-perfect-field",
+          "lem-nonaffine-group-monomorphism-closed-immersion"
+        ],
+        "statement": "Assume AC and DC. Let $G$ be a smooth connected separated finite-type group scheme over any field $k$, and $A\\subseteq G$ an abelian subvariety. Then $A$ is central and there is a connected closed normal subgroup scheme $H\\subseteq G$ such that multiplication $A\\times H\\to G$ is a finite faithfully flat homomorphism. Its kernel is the finite group scheme $A\\cap H$, embedded by $a\\mapsto(a,a^{-1})$. In particular $G=A H$ as an fppf sheaf. If $k$ is perfect, $H$ can be chosen smooth. No uniqueness is asserted; over an imperfect field smoothness of $H$ is not asserted.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Proposition 8.23 and Theorem 8.24, p.153",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Sections 4.2-4.3",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Use the torsor structure of G over G/A and the commutator/norm construction to produce N with A x N -> G finite faithfully flat; over perfect fields replace the neutral part by its reduced subgroup.",
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-nonaffine-pseudo-abelian-perfect-field-is-complete",
+        "kind": "theorem",
+        "title": "Pseudo-abelian varieties over perfect fields are complete",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-pseudo-abelian-separable-field-extension",
+          "lem-nonaffine-geometric-properness-field-descent",
+          "lem-nonaffine-reduced-neutral-subgroup-over-perfect-field",
+          "thm-nonaffine-rosenlicht-dichotomy",
+          "thm-nonaffine-rosenlicht-almost-complement",
+          "lem-nonaffine-centre-is-stable-jet-kernel",
+          "thm-nonaffine-group-scheme-normal-subgroup-quotient",
+          "lem-nonaffine-group-monomorphism-closed-immersion",
+          "lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties",
+          "lem-nonaffine-connected-group-geometrically-connected"
+        ],
+        "statement": "Assume AC and DC. Every pseudo-abelian variety over a perfect field $k$ is complete, that is, proper over $k$, and hence is an abelian variety. Explicitly, a smooth connected separated finite-type $k$-group scheme with no nontrivial smooth connected affine normal subgroup is proper. Perfectness and smoothness are essential hypotheses of this assertion.",
+        "design_row": "AG-GRP-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Theorem 8.26, p.154",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Sections 4.2-4.3",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Extend scalars to an algebraic closure of the perfect field (separable), use jets to see G/Z affine and the reduced centre component A proper by the dichotomy, then apply the almost-complement and pseudo-abelianness to force H trivial.",
+        "dependency_level": 13
+      },
+      {
+        "id": "thm-barsotti-chevalley-perfect-field-group-variety",
+        "kind": "theorem",
+        "title": "Barsotti-Chevalley over a perfect field: unique smooth affine normal subgroup",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-abelian-variety-over-a-field",
+          "prop-abelian-variety-commutativity-from-rigidity",
+          "thm-abelian-variety-is-projective",
+          "prop-nonaffine-smooth-group-pseudo-abelian-quotient",
+          "thm-nonaffine-pseudo-abelian-perfect-field-is-complete",
+          "lem-nonaffine-connected-group-geometrically-connected",
+          "lem-proper-geometrically-integral-affine-scheme-is-point",
+          "thm-nonaffine-group-scheme-normal-subgroup-quotient"
+        ],
+        "statement": "Assume AC and DC. Let $k$ be perfect and let $G$ be a connected group variety over $k$, meaning a smooth connected separated finite-type $k$-group scheme. There is a unique smooth connected affine closed normal subgroup $N\\subset G$ such that $A=G/N$ is an abelian variety. The projection is faithfully flat of finite presentation, with scheme kernel $N$. Thus there is an exact sequence of fppf group sheaves $$1\\longrightarrow N\\longrightarrow G\\longrightarrow A\\longrightarrow1.$$ The quotient $A$ is commutative and projective. The subgroup $N$ is the largest smooth connected affine normal subgroup of $G$. Both perfectness and the group-variety hypothesis belong to this uniqueness assertion.",
+        "design_row": "AG-GRP-1",
+        "local_addition": false,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Proposition 8.6 and Theorems 8.26-8.27, pp.154-155",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Theorem 4.3.2 and Theorem 4.3.4 with Lemma 4.3.5",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            },
+            {
+              "title": "Conrad, A modern proof of Chevalley's theorem on algebraic groups, Theorem 1.1 and inseparable descent discussion",
+              "url": "https://virtualmath1.stanford.edu/~conrad/papers/chev.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply exact 8.6 for the largest smooth connected affine normal subgroup and exact 8.26 for completeness of the pseudo-abelian quotient; the abelian quotient is pseudo-abelian by the affine-point criterion, which gives uniqueness.",
+        "dependency_level": 14
+      },
+      {
+        "id": "thm-barsotti-chevalley-existence-over-arbitrary-field",
+        "kind": "theorem",
+        "title": "Barsotti-Chevalley existence over an arbitrary field, allowing nonsmooth affine kernel",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-abelian-variety-over-a-field",
+          "prop-abelian-variety-commutativity-from-rigidity",
+          "thm-abelian-variety-is-projective",
+          "thm-barsotti-chevalley-perfect-field-group-variety",
+          "lem-nonaffine-characteristic-zero-group-smooth",
+          "lem-nonaffine-high-frobenius-smooth-image",
+          "lem-nonaffine-frobenius-power-ideal-subgroup-descent",
+          "lem-nonaffine-affine-and-finite-morphism-fppf-descent",
+          "lem-nonaffine-geometric-properness-field-descent",
+          "lem-nonaffine-group-image-exact-quotient-properties",
+          "lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties",
+          "lem-nonaffine-connected-group-geometrically-connected",
+          "thm-nonaffine-group-scheme-normal-subgroup-quotient",
+          "thm-existence-of-algebraic-closures",
+          "def-proper-morphism"
+        ],
+        "statement": "Assume AC and DC. For every connected separated finite-type group scheme $G$ over any field $k$, there is a connected affine closed normal subgroup scheme $N\\subset G$ whose represented quotient $G/N$ is an abelian variety. The quotient projection is faithfully flat of finite presentation with scheme kernel $N$, so $$1\\longrightarrow N\\longrightarrow G\\longrightarrow G/N\\longrightarrow1$$ is exact as fppf group sheaves. The abelian quotient is commutative and projective. Neither smoothness of $G$ nor perfectness of $k$ is assumed. The subgroup $N$ is not asserted smooth, even when $G$ is smooth, and no uniqueness is asserted under these hypotheses.",
+        "design_row": "AG-GRP-1",
+        "local_addition": false,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Theorem 8.28, with its Frobenius-image correction, pp.154-155",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Theorem 4.3.2 and Theorem 4.3.4 with Lemma 4.3.5",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            },
+            {
+              "title": "Conrad, A modern proof of Chevalley's theorem on algebraic groups, Theorem 1.1 and inseparable descent discussion",
+              "url": "https://virtualmath1.stanford.edu/~conrad/papers/chev.pdf"
+            }
+          ]
+        },
+        "strategy": "Reduce smooth sources via the high-Frobenius smooth image and finite purely inseparable power-ideal descent of the affine kernel; characteristic zero is smooth already, and the composite G -> S -> A has connected affine kernel.",
+        "dependency_level": 15
+      }
+    ]
+  },
+  {
+    "order": 886,
+    "id": "nonaffine-algebraic-groups-barsotti-chevalley-and-abelian-varieties-examples",
+    "kind": "B",
+    "category": "algebraic-geometry",
+    "title": "Nonaffine Algebraic Groups, Barsotti-Chevalley, and Abelian Varieties \u2014 Examples",
+    "companion": "nonaffine-algebraic-groups-barsotti-chevalley-and-abelian-varieties",
+    "requires": [
+      "nonaffine-algebraic-groups-barsotti-chevalley-and-abelian-varieties",
+      "elliptic-functions-and-complex-tori"
+    ],
+    "items": [
+      {
+        "id": "ex-affine-extension-of-an-abelian-variety",
+        "kind": "example",
+        "title": "A split affine extension of an abelian variety",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-proper-geometrically-integral-affine-scheme-is-point",
+          "thm-affine-closed-immersions-quotient-rings",
+          "thm-fibre-products-of-schemes-exist",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $A$ be an abelian variety over $k$, and let $G=A\\times_k\\mathbf G_m$, where $\\mathbf G_m=\\operatorname{Spec}k[t,t^{-1}]$ with multiplication of invertible coordinates. Coordinatewise multiplication gives a split extension $$1\\longrightarrow\\mathbf G_m\\longrightarrow G\\xrightarrow{q}A\\longrightarrow1.$$ The kernel is an affine smooth connected normal subgroup scheme, and $A$ represents the fppf quotient sheaf $G/\\mathbf G_m$. If $\\dim A>0$, then $G$ is nonaffine. This example works over an arbitrary field; it does not assume the perfect-field uniqueness theorem.",
+        "design_row": "AG-GRP-1",
+        "local_addition": false,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Algebraic Groups (2022), Chapter 8 split affine-abelian extension framework",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            },
+            {
+              "title": "Brion, Some structure theorems for algebraic groups, Section 5.4",
+              "url": "https://arxiv.org/pdf/1509.03059"
+            }
+          ]
+        },
+        "strategy": "Verify the split extension A x G_m on every test scheme: coordinatewise multiplication, exact kernel and represented quotient, and nonaffineness because an affine G would force A affine, hence a point.",
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-elliptic-curve-as-nonaffine-algebraic-group",
+        "kind": "example",
+        "title": "A smooth Weierstrass elliptic cubic is a nonaffine algebraic group",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-abelian-variety-over-a-field",
+          "lem-nonaffine-holomorphic-rational-map-product-curves-algebraic",
+          "lem-proper-geometrically-integral-affine-scheme-is-point",
+          "thm-elliptic-cubic-chord-tangent-group-law",
+          "thm-complex-torus-weierstrass-cubic-isomorphism",
+          "thm-weierstrass-lattice-discriminant-is-nonzero",
+          "thm-projective-space-proper-over-base",
+          "thm-jacobian-criterion-smooth-morphism"
+        ],
+        "statement": "Assume the Axiom of Choice. For a full complex lattice $\\Lambda$, let $g_2,g_3$ be its Weierstrass invariants. The projective plane cubic $$E:\\quad Y^2Z=4X^3-g_2XZ^2-g_3Z^3,$$ with identity $O=[0:1:0]$ and the chord-tangent group law, is an abelian variety over $\\mathbf C$ and is not affine. Thus proper nonaffine algebraic groups already occur in dimension one.",
+        "design_row": "AG-GRP-1",
+        "local_addition": false,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Milne, Modular Functions and Modular Forms, Chapter 3, Proposition 3.12, p.47",
+              "url": "https://www.jmilne.org/math/CourseNotes/MF.pdf"
+            },
+            {
+              "title": "Milne, Algebraic Groups (2022), Chapter 8, abelian variety examples",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the algebraic chord-tangent group law and its holomorphic agreement with the torus to prove the Weierstrass cubic is a smooth proper group variety, hence an abelian variety that is not affine.",
+        "dependency_level": 2
+      }
+    ]
+  }
+]

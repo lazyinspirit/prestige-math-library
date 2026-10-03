@@ -1,0 +1,8 @@
+# Step 8 — changed-mathematics adjudication, `frontier-38-owner-30`
+
+- Act only on IDs in `research/frontier-38-owner-30-step8-changes.json`. Read their current rejection rows, item, dependencies, owning manifest, and proof contract. Match each adjudication by exact `(id, model, context_sha256)`.
+- Mathematical soundness and accurate citation of dependencies are non-negotiable. Logical validity is the ground truth. Never pretend to understand something you do not; consult authoritative sources if unsure, and escalate to the owner if you are genuinely uncertain.
+- Append each outcome with the pre-edit guard hash. A nonfatal or false-positive outcome changes no content. A confirmed fatal licenses one coherent repair, its ledger row, and only the associated contract, manifest, plan, or impact update. The engine rejudges that exact changed ID against the configured judge set.
+- If a repair changes an item's `## Statement` or `## Definition`, trace every direct dependency and reference consumer and check its actual use of the changed claim. Make only necessary, surgical repairs within this dispatch's authorized scope. For each affected consumer outside scope, record its invalidated use and minimal needed correction for downstream impact routing. Continue another hop only if a necessary repair changes that consumer's own Statement or Definition. A citation alone does not justify an edit.
+- For a contract-detector dispatch, correct the genuine contract or risk defect, or record why the detector is inapplicable.
+- Write `research/frontier-38-owner-30-alpha-step8-adjudicate.md` with every tuple, outcome, evidence, edit, and rejudge target. The mechanical stamp stage writes stamps.

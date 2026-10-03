@@ -2870,21 +2870,39 @@ unavailable source supports the replacement.
    contains examples/counterexamples only and supplies no later proof.
 
 9. **AV-7 (current unpublished prose promise; supplier correction,
-   2026-09-30).** CA-19 `normalization-finiteness-for-affine-domains` and CA-20
-   page `algebraic-zariski-main-for-quasi-finite-morphisms`, theorem
-   `thm-algebraic-zariski-main-localization`, are already published.
-   Use CA-19's finite integral-closure and principal-open localization items,
-   then glue the normal affine charts inside the common function field; use
-   CA-20's algebraic quasi-finite factorization, with the finite-type,
-   separated, quasi-compact and quasi-separated hypotheses stated. For the
-   scheme-level consumers, use published AV-17
-   `lem-scheme-zariski-main-factorization-quasi-finite` and
-   `thm-proper-quasi-finite-is-finite`. To obtain a smooth projective model of
-   a one-variable function field, take projective closure, normalize, use
-   finite-over-projective projectivity from AV-15/19, then use the published
-   DVR and perfect-field regular/smooth criteria; the complete local route is
-   given under AV-23. Do not retain the stale claim that CA-19/20 are future
-   supplier pairs or that projectivity has no published route.
+   2026-09-30; Frontier-38 local-bridge amendment, 2026-10-02).** CA-19
+   `normalization-finiteness-for-affine-domains` and CA-20 page
+   `algebraic-zariski-main-for-quasi-finite-morphisms`, theorem
+   `thm-algebraic-zariski-main-localization`, are already published. Use
+   CA-19's finite integral-closure and principal-open localization items and
+   CA-20's affine quasi-finite localization theorem, retaining its
+   finite-type, separated, quasi-compact/quasi-separated and AC hypotheses.
+   The 366.061 pair precedes AV-15/17/19; therefore its local A-page proof may
+   not cite their later projectivity or scheme-Zariski-Main items as suppliers.
+   Reproduce the global separated quasi-finite factorization locally and prove
+   proper quasi-finite finiteness from that factorization and properness; prove
+   the finite-over-projective curve step locally as well. The Frontier-38
+   helper is preparing three local bridge items for those seams. A fresh
+   full-text audit has confirmed that CA-20 alone handles affine source:
+   Milne, *Algebraic Geometry* (2025), Theorem 8.45 states general Zariski
+   Main, §8.48 gives only the affine-source case, and §8.49 treats affine
+   irreducible varieties; the general separated finite-type atlas gluing is
+   an additional argument (Milne cites Görtz--Wedhorn Theorem 12.83). A fresh
+   audit has now retrieved and read the complete Stacks §37.43 proof, tags
+   [02LQ, 03GW, 02LR, 05K0] and its cited auxiliaries, together with EGA IV4,
+   §§18.12.12--15, pp. 183--184. That treatment supplies the global theorem
+   under the exact separated finite-type quasi-finite hypotheses; its proof
+   imports étale finite-component splitting, compatibility of integral
+   closure with étale base change, and faithfully flat descent/trace. Those
+   interfaces and their item-level proof closures remain to be locally
+   registered on AV-7, without page edges to AV-15/17/19 or any later page.
+   The item/source matrix and local proof packets are still under audit, so
+   this does not clear the AV-7 gate yet. To obtain a smooth projective
+   model of a one-variable function field, take projective closure, normalize,
+   use the local finite-over-projective bridge, then the published DVR and
+   perfect-field regular/smooth criteria. Keep the perfectness hypothesis for
+   regular-to-smooth curves. Do not add a page edge to AV-15/17/19 or treat
+   their later items as earlier facts.
 
 10. **AV-8 (current unpublished prose promise; supplier correction,
     2026-09-30).** CA-21

@@ -1,0 +1,50 @@
+---
+id: ex-a-markov-stabilization-preserves-the-unknot-closure
+kind: example
+title: "A Markov stabilization preserves the unknot closure"
+status: draft
+origin: pipeline
+pipeline_run: frontier-38-owner-30
+deps: [lem-markov-moves-preserve-oriented-closure-isotopy,
+       def-markov-conjugation-and-stabilization-moves, def-closure-of-a-geometric-braid,
+       def-countable-choice]
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Birman and Brendle, Braids: A Survey, Handbook of Knot Theory chapter, author manuscript; section 2.2 and the stabilization figures, printed pp. 17-19"
+      url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
+    - title: "Traczyk, A new proof of Markov's braid theorem, Banach Center Publications 42 (1998), 409-419; section 1"
+      url: "https://web.archive.org/web/20231206161844if_/http://matwbn.icm.edu.pl/ksiazki/bcp/bcp42/bcp42127.pdf"
+    - title: "Ozsvath, Stipsicz and Szabo, Grid Homology for Knots and Links, AMS Surveys and Monographs 208 (2015); section 2.1, printed pp. 367-372"
+      url: "https://web.math.princeton.edu/~petero/GridHomologyBook.pdf"
+---
+
+## Example
+
+Assume $\mathrm{AC}_\omega$. The trivial braid $e\in B_1$ closes to the unknot, and both stabilizations
+$e\sigma_1$ and $e\sigma_1^{-1}$ in $B_2$ also close to the unknot; the explicit
+isotopies are the R1 unwinding of the added kink, one for each sign. Here the
+**unknot** is the closure of the trivial one-strand braid.
+
+## Facts & Assumptions
+
+**Given:** The trivial braid $e\in B_1$, its two stabilizations $e\sigma_1=e\sigma_1^{+}$, $e\sigma_1^{-1}\in B_2$ in the sense of [[def-markov-conjugation-and-stabilization-moves]], and the closure construction of [[def-closure-of-a-geometric-braid]].
+
+[F1] Stabilization adjoins one new strand on the right carrying the half twist $\sigma_1^{\pm1}$, so that the closure of $e\sigma_1^{\pm1}$ is obtained from the closure of $e$ by adjoining a kink on the new strand near the axis ([[def-markov-conjugation-and-stabilization-moves]], [[def-closure-of-a-geometric-braid]]).
+
+[F2] Assume $\mathrm{AC}_\omega$: a stabilization preserves the oriented closure up to equivalence, because the added strand differs from the trivial strand by a kink which is unwound by one Reidemeister I isotopy; both signs of the kink are covered by the two signs of the stabilization ([[lem-markov-moves-preserve-oriented-closure-isotopy]]).
+
+[F3] The trivial one-strand braid closes to a single circle about the axis, the round unknot, and the closure of a braid with one cycle of its endpoint permutation has one component ([[def-closure-of-a-geometric-braid]]).
+
+## Verification
+
+1.1 **The closures of the stabilizations.** By [F1] the closure of $e\sigma_1$ is the round unknot with one extra kink on the added strand, and the closure of $e\sigma_1^{-1}$ is the same picture with the opposite kink. Both closures are one-component links by [F3], since the endpoint permutation of each stabilization of $e$ is the transposition of the two strands. [F1, F3, algebra]
+
+2.1 **The R1 isotopies.** The explicit isotopy for the positive sign is the R1 move that pulls the kink straight inside a small ball neighbourhood of the kink, keeping the rest of the closed braid fixed; for the negative sign the mirror isotopy unrolls the opposite kink. In both cases the R1 move is realized by an ambient isotopy by [F2], so the closure of each stabilization is equivalent to the closure of the trivial braid, the unknot. [F2, step 1.1]
+
+3.1 **Conclusion.** Both stabilizations $e\sigma_1$ and $e\sigma_1^{-1}$ in $B_2$ close to the unknot, with the explicit R1 isotopies of the two signs; the example illustrates that stabilization preserves the closure in the simplest possible case. ∎ [F2, F3, step 1.1, step 2.1]

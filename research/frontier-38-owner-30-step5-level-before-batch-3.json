@@ -1,0 +1,1155 @@
+[
+  {
+    "order": 458.011,
+    "id": "the-heat-kernel-and-the-cauchy-problem",
+    "kind": "A",
+    "category": "pde",
+    "title": "The Heat Kernel and the Cauchy Problem",
+    "companion": "the-heat-kernel-and-the-cauchy-problem-examples",
+    "requires": [
+      "poisson-problems-and-interior-harmonic-estimates"
+    ],
+    "items": [
+      {
+        "id": "def-heat-equation-heat-operator-and-cauchy-problem",
+        "kind": "definition",
+        "title": "The heat operator, the heat equation, and the Cauchy problem",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-directional-and-partial-derivatives",
+          "def-elliptic-hyperbolic-and-parabolic-principal-symbols",
+          "def-laplacian-of-a-c2-function",
+          "def-linear-semilinear-quasilinear-and-fully-nonlinear-pde",
+          "def-partial-differential-operator-order-and-solution"
+        ],
+        "statement": "Let $n\\ge1$ and let $\\Omega\\subseteq\\mathbb R^{n+1}$ be open in the space-time variable $(x,t)\\in\\mathbb R^n\\times\\mathbb R$. The heat operator is $\\partial_t-\\Delta_x$, where $\\Delta_x$ is the Laplacian in the $n$ spatial coordinates; a classical solution of the heat equation on $\\Omega$ is a $u\\in C^2(\\Omega)$ with $\\partial_tu-\\Delta_xu=0$ on $\\Omega$, and the inhomogeneous equation is $\\partial_tu-\\Delta_xu=f$ for a prescribed source $f$. A Cauchy problem for the equation on a space-time domain consists of the equation together with initial data $u(\\cdot,0)=u_0$ prescribed on the time-zero slice; values prescribed on the lateral (spatial) boundary of the domain are boundary data. Initial and spatial boundary data are different sets of constraints and are not interchanged.",
+        "strategy": "Specialise the published scalar-PDE vocabulary to the linear second-order operator $\\partial_t-\\Delta_x$ on an open space-time domain: the time variable is the last coordinate, the spatial Laplacian is the published one of [[def-laplacian-of-a-c2-function]], and classical solutions are $C^2$. Its principal symbol is positive definite, so the published parabolic classification applies and separates this equation from the Laplace and wave equations. Initial data live on the $t=0$ slice, lateral boundary data on the spatial boundary. The definition itself uses no choice axiom.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.2, printed pp. 151–152, equation (6.32)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 5, §5.1, printed p. 127, equations (5.1)–(5.2)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§3.1.1, printed p. 99, equation (3.1.1)"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Definition 1.0.1, p. 1"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-heat-kernel",
+        "kind": "definition",
+        "title": "The heat kernel on $\\mathbb R^n$ and its causal extension",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-euclidean-inner-product",
+          "def-laplacian-of-a-c2-function",
+          "def-real-exponential-function-and-e",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-derivative-of-exponential"
+        ],
+        "statement": "For $n\\ge1$ and $t>0$ the heat kernel on $\\mathbb R^n$ is the function $$\\Gamma(x,t):=(4\\pi t)^{-n/2}\\exp\\!\\Bigl(-\\frac{|x|^2}{4t}\\Bigr),\\qquad x\\in\\mathbb R^n,$$ where $|x|^2=\\langle x,x\\rangle$ is the Euclidean square. It is positive and $C^\\infty$ on $\\mathbb R^n\\times(0,\\infty)$. Its causal extension is $\\Gamma(x,t)$ for $t>0$ and $\\Gamma(x,t):=0$ for $t\\le0$; the displayed formula is not evaluated at $t=0$ as a function value. The normalisation is fixed by the unit-mass identity of the next lemma, and the causal extension is used only as a locally integrable function or, after embedding, as a distribution.",
+        "strategy": "Unpack the formula: the Gaussian is a composite of the published real exponential with the quadratic form of [[def-euclidean-inner-product]], so it is $C^\\infty$ on the open set $t>0$ by the published closure of $C^k$ Euclidean maps under algebra and composition; positivity is immediate from the exponential. The $t\\le0$ clause is a definition, not a pointwise limit, and its distributional reading is discharged in [[thm-heat-kernel-is-the-causal-fundamental-solution]]. No choice axiom is needed for the definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 5.4, printed p. 130, formula (5.6)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "§6.2, printed p. 152, formula (6.36)"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Definition 1.0.1, p. 1, formula (1.0.2)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "formula (3.1.15), printed p. 103, and §3.2.4, printed p. 111, formula (3.2.24)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-heat-kernel-normalisation-scaling-and-derivatives",
+        "kind": "lemma",
+        "title": "Normalisation, parabolic scaling, heat equation and derivative bounds for the heat kernel",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-countable-choice",
+          "def-heat-kernel",
+          "def-l-one-approximate-identity-on-rn",
+          "thm-algebra-of-derivatives",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-chain-rule",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-derivative-of-exponential",
+          "thm-dominated-convergence",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "thm-exponential-beats-every-polynomial",
+          "thm-gaussian-integral",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-tonelli-and-fubini-for-completed-product-measures"
+        ],
+        "statement": "Assume Countable Choice and let $n\\ge1$. For every $t>0$: (i) $\\Gamma(\\cdot,t)>0$ and $\\int_{\\mathbb R^n}\\Gamma(x,t)\\,dx=1$; (ii) parabolic scaling: $\\Gamma(\\lambda x,\\lambda^2t)=\\lambda^{-n}\\Gamma(x,t)$ for every $\\lambda>0$ and $x\\in\\mathbb R^n$; (iii) $\\Gamma$ is $C^\\infty$ on $\\mathbb R^n\\times(0,\\infty)$ and solves the heat equation there, $\\partial_t\\Gamma(x,t)=\\Delta_x\\Gamma(x,t)$; (iv) for every multi-index $\\alpha$ there is $C_{n,\\alpha}<\\infty$ with $|D^\\alpha_x\\Gamma(x,t)|\\le C_{n,\\alpha}t^{-(|\\alpha|+n)/2}e^{-|x|^2/(8t)}$ for all $x\\in\\mathbb R^n$, $t>0$; in particular $\\|\\Gamma(\\cdot,t)\\|_1=1$ and $(\\Gamma(\\cdot,t))_{t>0}$ is an $L^1$ approximate identity on $\\mathbb R^n$.",
+        "strategy": "Unit mass: substitute $x=(4t)^{1/2}u$, factor the $n$-dimensional Gaussian into one-dimensional factors by Tonelli/Fubini and integrate with the published one-dimensional Gaussian integral; the same substitution gives (ii), which pins the $\\lambda$-dependence. Part (iii) is a coordinate computation with the published chain/product closure of $C^k$ Euclidean maps and Clairaut–Schwarz for the mixed second derivatives. Part (iv) follows from (ii) in the form $D^\\alpha\\Gamma(x,t)=t^{-(|\\alpha|+n)/2}(D^\\alpha\\Gamma)(x/\\sqrt t,1)$, the polynomial-times-Gaussian decay of the fixed profile $\\Gamma(\\cdot,1)$, and the elementary inequality that a Gaussian beats any polynomial. The approximate-identity clauses are (i), the unit $L^1$-bound, and the tail clause $\\int_{|x|>\\delta}\\Gamma(x,t)\\,dx\\to0$ as $t\\downarrow0^+$, read off from (ii). This carries the Countable Choice cost of the change-of-variables and product-measure theorems.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Lemma 1.0.1 and Lemma 1.0.2, pp. 1–3 (heat equation, unit mass, pointwise limits)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "printed p. 131, formulas (5.8)–(5.9) and smoothing discussion"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 152, formula (6.36) and the normalisation by Lemma 6.4"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§3.1.2, printed pp. 100–103, formulas (3.1.10)–(3.1.15), and §3.2.4, printed p. 111, formula (3.2.24)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-first-and-second-moments-of-the-heat-kernel",
+        "kind": "lemma",
+        "title": "First and second Gaussian heat-kernel moments",
+        "deps": [
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice",
+          "def-heat-kernel",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "thm-exponential-beats-every-polynomial",
+          "thm-gaussian-integral",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-integration-by-parts-with-interior-derivatives",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-tonelli-and-fubini-for-completed-product-measures"
+        ],
+        "statement": "Assume Countable Choice. For $n\\ge1$ and $t>0$, all first and second moments are absolutely integrable and $\\int x_i\\Gamma(x,t)\\,dx=0$, $\\int x_ix_j\\Gamma(x,t)\\,dx=2t\\delta_{ij}$. In particular $\\int |x|^2\\Gamma(x,t)\\,dx=2nt$.",
+        "strategy": "Factor the product Gaussian with Tonelli. Absolute integrability follows from polynomial times Gaussian decay. Oddness gives the first and off-diagonal moments. For the diagonal integrate $x^2e^{-x^2/(4t)}=-2tx(d/dx)e^{-x^2/(4t)}$ over $[-R,R]$ by parts, and let $R\\to\\infty$; the boundary term vanishes and the integral is $2t$ times the Gaussian mass. The remaining coordinates each have mass1.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§5.1.1–5.1.2, printed pp. 129–131, (5.6)–(5.9), Theorem 5.5"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Definition 1.0.1 and Lemma 1.0.2, pp. 1–2"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-gaussian-kernels-form-an-approximate-identity",
+        "kind": "lemma",
+        "title": "Gaussian kernels form an approximate identity",
+        "deps": [
+          "def-countable-choice",
+          "def-l-one-approximate-identity-on-rn",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-dominated-convergence",
+          "thm-linear-change-of-variables-for-lebesgue-measure"
+        ],
+        "statement": "Assume Countable Choice. For $n\\ge1$, the kernels $\\Gamma_t$ are positive with unit mass and $\\|\\Gamma_t\\|_1=1$. For every $\\delta>0$, $\\int_{|x|>\\delta}\\Gamma(x,t)\\,dx\\to0$ as $t\\downarrow0$. Thus they form an $L^1$ approximate identity.",
+        "strategy": "The original normalisation lemma supplies positivity and unit mass. Set $x=\\sqrt t z$; the tail is $\\int_{|z|>\\delta/\\sqrt t}\\Gamma(z,1)\\,dz$, which tends to0 by dominated convergence. These are exactly the published definition clauses; this separates a previously folded claim without deleting that clause from its original supplier.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§5.1.1–5.1.2, printed pp. 129–131, (5.6)–(5.9), Theorem 5.5"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Definition 1.0.1 and Lemma 1.0.2, pp. 1–2"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-heat-kernel-semigroup-identity",
+        "kind": "lemma",
+        "title": "The heat kernel semigroup identity $\\Gamma_t*\\Gamma_s=\\Gamma_{t+s}$",
+        "deps": [
+          "def-convolution-of-two-functions-on-rn",
+          "def-countable-choice",
+          "def-heat-kernel",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "thm-exponential-addition-formula",
+          "thm-gaussian-integral",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-tonelli-and-fubini-for-completed-product-measures"
+        ],
+        "statement": "Assume Countable Choice and let $n\\ge1$. For all $s,t>0$ the convolution $\\Gamma(\\cdot,t)*\\Gamma(\\cdot,s)$ converges absolutely at every $x\\in\\mathbb R^n$ and equals $\\Gamma(x,t+s)$; that is, $\\Gamma_t*\\Gamma_s=\\Gamma_{t+s}$ as functions on $\\mathbb R^n$.",
+        "strategy": "Write the convolution integrand as a product of Gaussians and complete the square in the integration variable $y$: the exponent becomes a perfect square in $y$ plus the cross term $-|x|^2/(4(t+s))$. The remaining Gaussian integral is evaluated with the published one-dimensional Gaussian integral and Tonelli/Fubini for the absolutely convergent integral. The prefactor $(4\\pi t)^{-n/2}(4\\pi s)^{-n/2}(4\\pi ts/(t+s))^{n/2}$ equals $(4\\pi(t+s))^{-n/2}$, which is the stated identity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "printed p. 130, formulas (5.5)–(5.6) obtained from the convolution theorem"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 152, formula (6.36) and convolution representation (6.35)"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Theorem 1.1, p. 5, formula (1.1.12)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-heat-kernel-is-the-causal-fundamental-solution",
+        "kind": "theorem",
+        "title": "The causal heat kernel is the fundamental solution of the heat operator",
+        "deps": [
+          "cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions",
+          "cor-mean-value-theorem",
+          "def-countable-choice",
+          "def-dirac-delta-and-its-derivatives",
+          "def-distribution",
+          "def-distributional-derivative",
+          "def-heat-kernel",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "def-test-function-space-d-of-an-open-set",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "thm-integration-by-parts-with-interior-derivatives",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "thm-tonelli-and-fubini-for-completed-product-measures"
+        ],
+        "statement": "Assume Countable Choice and let $n\\ge1$, and let $\\Gamma$ be the causal extension of the heat kernel. Then $\\Gamma\\in L^1_{\\mathrm{loc}}(\\mathbb R^{n+1})$, and its regular distribution $u_\\Gamma\\in\\mathcal D'(\\mathbb R^{n+1})$ satisfies $(\\partial_t-\\Delta)u_\\Gamma=\\delta_{(0,0)}$, that is, $$\\langle(\\partial_t-\\Delta)u_\\Gamma,\\varphi\\rangle=\\varphi(0,0)\\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\mathbb R^{n+1}),$$ so the causal extension is a fundamental solution of $\\partial_t-\\Delta$. Moreover $\\Gamma(\\cdot,t)\\to\\delta_0$ in $\\mathcal D'(\\mathbb R^n)$ as $t\\downarrow0^+$, that is, $\\int_{\\mathbb R^n}\\Gamma(x,t)\\varphi(x)\\,dx\\to\\varphi(0)$ for every $\\varphi\\in C_c^\\infty(\\mathbb R^n)$. The derivative $\\partial_t$ is the distributional derivative in the last space-time coordinate.",
+        "strategy": "Local integrability follows from unit mass and Tonelli on compact time slabs. For a compactly supported test $\\varphi$, first work at $t\\ge\\varepsilon>0$ and integrate by parts in time and twice in each spatial coordinate by scalar integration by parts and Fubini; compact support removes the spatial boundary terms, including for n=1. The identity $\\partial_t\\Gamma=\\Delta\\Gamma$ cancels the two interior terms on this truncated region, giving $-\\int_\\varepsilon^\\infty\\int\\Gamma(\\partial_t\\varphi+\\Delta\\varphi)=\\int\\Gamma(x,\\varepsilon)\\varphi(x,\\varepsilon)dx$. Only after cancellation let $\\varepsilon\\downarrow0$. The omitted slab on the LEFT has absolute value at most $\\varepsilon(\\|\\partial_t\\varphi\\|_\\infty+\\|\\Delta\\varphi\\|_\\infty)$ by unit mass. On the RIGHT replace $\\varphi(x,\\varepsilon)$ by $\\varphi(x,0)$ with error at most $\\varepsilon\\|\\partial_t\\varphi\\|_\\infty$, and apply the approximate identity at0 to get $\\varphi(0,0)$. Do not take separate dominated-convergence limits of $\\int\\partial_t\\Gamma\\varphi$ or $\\int\\Delta\\Gamma\\varphi$ near0: the crude $L^1$ bounds are of order1/t and not integrable. The weak Dirac limit is the same approximate-identity argument with a spatial test.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Lemma 1.0.3, Remark 1.0.4 and Proposition 1.0.4, pp. 2–3 (weak initial Dirac limit; the space-time causal identity is proved locally)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 151, §6.2 (fundamental solution, Fourier route)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "Remark 3.1.3, printed p. 102 (the initial value is the Dirac δ)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "printed p. 131: Γ(·,t) → δ in S′ as t → 0+ and Γ_t = ΔΓ"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-heat-evolution-of-initial-data",
+        "kind": "definition",
+        "title": "The heat evolution $H_t$ of initial data",
+        "deps": [
+          "def-convolution-of-two-functions-on-rn",
+          "def-countable-choice",
+          "def-heat-kernel",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "thm-young-convolution-inequality"
+        ],
+        "statement": "Assume Countable Choice, let $n\\ge1$ and $1\\le p\\le\\infty$, and let $\\Gamma$ be\nthe heat kernel of [[def-heat-kernel]], with $\\Gamma_t:=\\Gamma(\\cdot,t)$ the\n$L^1$ function of unit norm supplied by\n[[lem-heat-kernel-normalisation-scaling-and-derivatives]]. Convolution is that\nof [[def-convolution-of-two-functions-on-rn]], and $L^p$ means the class space\nof [[def-l-p-space-as-a-quotient-by-null-functions]].\n\nFor $t>0$ and $f\\in L^p(\\mathbb R^n)$ define $H_tf$ to be the $L^p$ class of\nthe function\n\n$$x\\longmapsto\\int_{\\mathbb R^n}\\Gamma(x-y,t)f(y)\\,dy.$$\n\nBy Young's convolution inequality [[thm-young-convolution-inequality]] applied\nwith the exponent triple $(p,1,p)$, which satisfies $1/p=1/p+1/1-1$, this\nconvolution is defined for almost every $x$ and belongs to $L^p$ with\n$\\|H_tf\\|_p\\le\\|\\Gamma_t\\|_1\\|f\\|_p=\\|f\\|_p$; hence $H_tf$ is a well-defined\nelement of $L^p$ satisfying the contraction bound. For $p=\\infty$ the integral\nconverges absolutely for every $x$ because\n$|\\Gamma(x-y,t)f(y)|\\le\\|f\\|_\\infty\\Gamma(x-y,t)$ almost everywhere in $y$, with\n$\\int\\Gamma(x-y,t)\\,dy=1$, so it defines a bounded representative with\n$\\|H_tf\\|_\\infty\\le\\|f\\|_\\infty$.\n\nThe value depends only on the class of $f$: if $f=f'$ almost everywhere then the\nnull set where they differ is carried by translation to a null set\n([[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]]),\nso at every $x$ the two $y$-integrands agree almost everywhere. Their absolute\nconvergence holds at the same points, and wherever they converge the integrals\nagree by [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]. Each\n$H_t$ is complex-linear on $L^p$, by linearity of the integral of each\nrepresentative.\n\nSet $H_0f:=f$, the identity operator on $L^p$; the singular kernel formula is\nnever evaluated at $t=0$.",
+        "strategy": "Young (p,1,p) gives the Lp class and contraction. For infinity the essential bound holds almost everywhere in the integration variable, and unit mass gives absolute convergence at every x. Equal representatives give equal integrable y-integrands wherever they converge. Define H0 as identity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 5, §5.1, printed pp. 127–131 (the convolution representation and its data classes)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 152, formula (6.37)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "Theorem 3.1.3, printed p. 103, formula (3.1.14)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time",
+        "kind": "lemma",
+        "title": "Spatial and time derivatives pass through heat convolution for positive time",
+        "deps": [
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-dominated-convergence",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge1$, $1\\le p\\le\\infty$, and $f\\in L^p(\\mathbb R^n)$ (bounded measurable data are included). The absolutely convergent representative $u(x,t)=\\int\\Gamma(x-y,t)f(y)\\,dy$ is $C^\\infty$ for $t>0$, and for every multi-index $\\alpha$ and $k\\ge0$, $D_x^\\alpha\\partial_t^ku=(D_x^\\alpha\\partial_t^k\\Gamma_t)*f$. Moreover $|D_x^\\alpha\\partial_t^k\\Gamma(x,t)|\\le C_{n,\\alpha,k}t^{-(n+|\\alpha|+2k)/2}e^{-|x|^2/(8t)}$. Domination is uniform on compact subsets $x\\in K$, $\\tau\\le t\\le T$ with $0<\\tau<T<\\infty$; $u_t=\\Delta u$.",
+        "strategy": "Use the smooth heat equation to write time derivatives as powers of the spatial Laplacian. Kernel Gaussian bounds put all derivatives in the conjugate Lp space, including the bounded endpoint. On compact positive-time intervals tau<=t<=T and bounded x, a single Gaussian majorant times |f| is integrable. Differentiate on open parameter intervals and use dominated convergence for joint continuity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§5.1.1–5.1.2, printed pp. 129–131, (5.6)–(5.9), Theorem 5.5"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Definition 1.0.1, p. 1, formula (1.0.2), and Theorem 1.1, p. 5"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-heat-cauchy-solution-for-bounded-continuous-data",
+        "kind": "theorem",
+        "title": "The heat Cauchy problem for bounded uniformly continuous data",
+        "deps": [
+          "cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time"
+        ],
+        "statement": "Assume Countable Choice and let $n\\ge1$, and let $u_0:\\mathbb R^n\\to\\mathbb C$ be bounded and uniformly continuous. Define $u(x,t):=\\int_{\\mathbb R^n}\\Gamma(x-y,t)u_0(y)\\,dy$ for $t>0$ and $u(x,0):=u_0(x)$. Then $u$ is $C^\\infty$ on $\\mathbb R^n\\times(0,\\infty)$, satisfies $\\partial_tu=\\Delta_xu$ there, is bounded with $\\|u(\\cdot,t)\\|_\\infty\\le\\|u_0\\|_\\infty$, and converges locally uniformly at the initial time: $\\sup_{x\\in K}|u(x,t)-u_0(x)|\\to0$ as $t\\downarrow0^+$ for every compact $K\\subseteq\\mathbb R^n$.",
+        "strategy": "Bound the convolution by unit mass. Apply the earlier positive-time derivative-passing lemma at p=infinity for smoothness and the heat equation. The bounded continuous approximate-identity corollary supplies local uniform initial recovery.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 5.5, printed pp. 130–131 (smoothness and $L^p$ convergence, with $p<\\infty$ for convergence)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem 6.9, printed p. 152 (bounded data: $C^\\infty((0,\\infty)\\times\\mathbb R^n)\\cap C([0,\\infty)\\times\\mathbb R^n)$)"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Theorem 1.1, pp. 5–7 (representation, smoothness, initial recovery, growth class)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-heat-cauchy-solution-for-lp-data",
+        "kind": "theorem",
+        "title": "The heat Cauchy problem for $L^p$ data",
+        "deps": [
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "lem-heat-kernel-semigroup-identity",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-young-convolution-inequality"
+        ],
+        "statement": "Assume Countable Choice, let $n\\ge1$ and $1\\le p<\\infty$. For every $f\\in L^p(\\mathbb R^n)$ the heat evolution of [[def-heat-evolution-of-initial-data]] satisfies: (i) $\\|H_tf-f\\|_p\\to0$ as $t\\downarrow0^+$; (ii) $\\|H_tf\\|_p\\le\\|f\\|_p$ for every $t>0$; (iii) the semigroup law $H_{t+s}=H_tH_s$ on $L^p$ for all $s,t\\ge0$, with $H_0$ the identity.",
+        "strategy": "(i) $\\Gamma(\\cdot,t)$ is an $L^1$ approximate identity by [[lem-heat-kernel-normalisation-scaling-and-derivatives]], so the published $L^p$ approximate-identity theorem gives strong convergence. (ii) is Young's inequality for the pair $(p,1,p)$. (iii) Tonelli/Fubini applied to $|f|$ gives $\\Gamma_t*(\\Gamma_s*f)=(\\Gamma_t*\\Gamma_s)*f$ almost everywhere, the triple integral being finite because $\\Gamma_t*\\Gamma_s=\\Gamma_{t+s}\\in L^1$ by [[lem-heat-kernel-semigroup-identity]] and Young bounds the result in $L^p$; then $\\Gamma_{t+s}*f=H_{t+s}f$. The case $t=0$ or $s=0$ is the operator identity $H_0=\\mathrm{id}$ from the definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 5.5, printed p. 131 (smoothness and $L^p$ convergence for $1\\le p<\\infty$)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem 6.9 and Corollary 6.10, printed pp. 152–153 (solution and conservation for integrable/bounded data)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "Theorem 3.1.3 and §3.2.4, printed pp. 103 and 111"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-uniqueness-of-lp-mild-heat-solutions-in-the-convolution-class",
+        "kind": "theorem",
+        "title": "Uniqueness of strongly continuous mild heat solutions",
+        "deps": [
+          "def-countable-choice",
+          "thm-heat-cauchy-solution-for-lp-data",
+          "thm-l-one-approximate-identities-converge-in-l-p"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge1$, $1\\le p<\\infty$, $T>0$, $u\\in C([0,T];L^p(\\mathbb R^n))$, $u(0)=f$, and $u(t)=H_{t-s}u(s)$ for every $0<s<t\\le T$. Then $u(t)=H_tf$ for all $0\\le t\\le T$. Hence the heat evolution is the unique solution in this class. This is uniqueness for the semigroup relation, not an unrestricted classical uniqueness assertion or a claim of strong continuity on all $L^\\infty$.",
+        "strategy": "Fix $t>0$ and $0<s<t$. By contraction and the semigroup law, $\\|u(t)-H_tf\\|_p=\\|H_{t-s}(u(s)-H_sf)\\|_p\\le\\|u(s)-f\\|_p+\\|f-H_sf\\|_p$. Both terms tend to0 as $s\\downarrow0$, by the given continuity and the published finite-p approximate identity result. Existence in $C([0,T];L^p)$ follows from continuity at0 and the semigroup law: right increments bounded by $\\|H_hf-f\\|_p$, left increments by the same quantity after applying $H_{t-h}$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§5.1.1–5.1.2, printed pp. 129–131, (5.6)–(5.9), Theorem 5.5"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Definition 1.0.1, p. 1, formula (1.0.2), and §1.1, pp. 4–5"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-heat-semigroup-derivative-at-zero-on-compactly-supported-smooth-data",
+        "kind": "lemma",
+        "title": "Heat generator at zero on compactly supported smooth data",
+        "deps": [
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "def-test-function-space-d-of-an-open-set",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time",
+          "thm-heat-cauchy-solution-for-lp-data",
+          "thm-heat-cauchy-solution-for-bounded-continuous-data",
+          "thm-integration-by-parts-with-interior-derivatives",
+          "thm-minkowski-integral-inequality",
+          "thm-newton-leibniz-with-interior-derivative"
+        ],
+        "statement": "Assume Countable Choice. For $n\\ge1$, $\\varphi\\in C_c^\\infty(\\mathbb R^n)$ and $1\\le p<\\infty$, $\\|(H_t\\varphi-\\varphi)/t-\\Delta\\varphi\\|_p\\to0$ as $t\\downarrow0$.",
+        "strategy": "Twice integrate by parts in each spatial coordinate to obtain d_s H_s phi=H_s Delta phi. Newton–Leibniz on [epsilon,t] and local uniform endpoint recovery of phi and Delta phi give the pointwise integral identity from zero. Joint positive-time smoothness supplies measurability; Minkowski and finite-p strong convergence show the averaged remainder tends to zero.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§5.1.1–5.1.2, printed pp. 129–131, (5.6)–(5.9), Theorem 5.5"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Definition 1.0.1, p. 1, formula (1.0.2), and §1.1, pp. 4–5"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-heat-flow-preserves-mass-and-positivity",
+        "kind": "corollary",
+        "title": "Mass conservation and positivity of the heat flow",
+        "deps": [
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "def-l-one-of-a-measure",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "statement": "Assume Countable Choice, let $n\\ge1$, and let $H_t$ be the heat evolution. (i) If $f\\in L^1(\\mathbb R^n)$ then $\\int_{\\mathbb R^n}H_tf(x)\\,dx=\\int_{\\mathbb R^n}f(x)\\,dx$ for every $t>0$. (ii) If $f\\in L^p(\\mathbb R^n)$, $1\\le p\\le\\infty$, satisfies $f\\ge0$ almost everywhere, then $H_tf\\ge0$ almost everywhere for every $t>0$.",
+        "strategy": "(i) Tonelli applied to the nonnegative integrand $|f(y)|\\Gamma(x-y,t)$ gives the iterated integral $\\int\\!\\int\\Gamma(x-y,t)|f(y)|\\,dy\\,dx=\\|f\\|_1<\\infty$; translation invariance of Lebesgue measure makes the inner integral $\\int\\Gamma(x-y,t)\\,dx=\\int\\Gamma=1$ for every $y$, so Fubini computes $\\int H_tf=\\int f$. (ii) The pointwise convolution of nonnegative measure-theoretic objects is nonnegative wherever it is finite, and the $L^p$ class of a nonnegative representative is nonnegative almost everywhere; the standard normalisation $H_t$ is linear so this is compatible with the definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Corollary 6.10(i), printed pp. 152–153, formula (6.39) (mass conservation)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 5.5 and §5.1.2, printed p. 131"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Definition 1.0.1 and Lemma 1.0.2, p. 1 (positive Gaussian and unit mass), and (1.0.8), p. 2"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-heat-flow-is-order-preserving-and-lp-contractive",
+        "kind": "corollary",
+        "title": "Monotonicity and $L^p$ contractivity of the heat flow",
+        "deps": [
+          "cor-heat-flow-preserves-mass-and-positivity",
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "thm-heat-cauchy-solution-for-lp-data",
+          "thm-young-convolution-inequality"
+        ],
+        "statement": "Assume Countable Choice, let $n\\ge1$ and $1\\le p\\le\\infty$. If $f,g\\in L^p(\\mathbb R^n)$ satisfy $f\\le g$ almost everywhere, then $H_tf\\le H_tg$ almost everywhere for every $t>0$; and $\\|H_tf\\|_p\\le\\|f\\|_p$ for every $f\\in L^p$ and every $t\\ge0$.",
+        "strategy": "Apply the positivity clause of [[cor-heat-flow-preserves-mass-and-positivity]] to $g-f\\ge0$ and use that $H_t$ is an $L^p$ linear operator (the pointwise convolution integral is linear where the integrals converge): $H_tg-H_tf$ is the class of $H_t(g-f)\\ge0$. The contraction is part (ii) of [[thm-heat-cauchy-solution-for-lp-data]] for $p<\\infty$ and Young's inequality with the pair $(\\infty,1)$ for $p=\\infty$; at $t=0$ it is the identity. All inequalities are almost-everywhere statements, as required for $L^p$ classes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 152, formula (6.38) and Problem 6.8, printed p. 153 (the sup/inf bounds and strictness)"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 5.5, printed pp. 130–131"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Theorem 1.1, printed pp. 5–7"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-lp-to-lq-heat-kernel-estimate",
+        "kind": "theorem",
+        "title": "$L^p$ to $L^q$ smoothing estimate for the heat flow",
+        "deps": [
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-young-convolution-inequality"
+        ],
+        "statement": "Assume Countable Choice, let $n\\ge1$ and $1\\le p\\le q\\le\\infty$, and let $Q\\in[1,\\infty]$ be determined by $\\frac1Q=1+\\frac1q-\\frac1p$. Then for every $f\\in L^p(\\mathbb R^n)$ and every $t>0$, $$\\|H_tf\\|_q\\le C_{n,p,q}\\,t^{-\\frac n2(\\frac1p-\\frac1q)}\\|f\\|_p,\\qquad C_{n,p,q}:=(4\\pi)^{-\\frac n2(\\frac1p-\\frac1q)}Q^{-\\frac{n}{2Q}},$$ with the endpoint $Q=\\infty$ (which occurs exactly at $p=1$, $q=\\infty$) read as $Q^{-n/(2Q)}\\to1$; for $p=q$ the constant is $1$ and the estimate is the contraction clause.",
+        "strategy": "Young's convolution inequality with exponents $(p,Q,q)$ gives $\\|\\Gamma_t*f\\|_q\\le\\|\\Gamma_t\\|_Q\\|f\\|_p$, and the scaling identity of [[lem-heat-kernel-normalisation-scaling-and-derivatives]] gives $\\|\\Gamma_t\\|_Q=t^{-n(1-1/Q)/2}\\|\\Gamma_1\\|_Q$. Substituting $x=\\sqrt{4}\\,u$ (or, equivalently, $x=\\sqrt{4t}\\,u$ in $\\Gamma_t$) and using the Gaussian integral evaluates $\\|\\Gamma_1\\|_Q=(4\\pi)^{-n(1-1/Q)/2}Q^{-n/(2Q)}$; since $1-1/Q=1/p-1/q$ this is exactly the stated constant. When $p=q$ we have $Q=1$, the constants collapse to $1$, and the estimate is Young with the pair $(p,1,p)$. The exponent range $1\\le p\\le q\\le\\infty$ is precisely the Young range for a single application; no interpolation is claimed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "printed p. 131 (the smoothing statement for $f\\in L^p$ derived from the explicit kernel)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 152, formula (6.40): $|u(t,x)|\\le(4\\pi t)^{-n/2}\\|f\\|_1$ (the $p=1$, $q=\\infty$ case)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§3.2.4, printed p. 111 (the $n$-dimensional kernel used in the scaling)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-spatial-derivative-estimates-for-heat-flow",
+        "kind": "theorem",
+        "title": "Spatial derivative estimates for the heat flow",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time",
+          "thm-lp-to-lq-heat-kernel-estimate",
+          "thm-young-convolution-inequality"
+        ],
+        "statement": "Assume Countable Choice, let $n\\ge1$, $1\\le p\\le q\\le\\infty$, and let $Q$ and the constants be as in [[thm-lp-to-lq-heat-kernel-estimate]]. For every multi-index $\\alpha$, every $f\\in L^p(\\mathbb R^n)$ and every $t>0$, the function $x\\mapsto\\int_{\\mathbb R^n}\\Gamma(x-y,t)f(y)\\,dy$ is $C^\\infty$ on $\\mathbb R^n$, with $D^\\alpha H_tf=(D^\\alpha\\Gamma(\\cdot,t))*f$ as an absolutely convergent integral, and $$\\|D^\\alpha H_tf\\|_q\\le C_{n,p,q,\\alpha}\\,t^{-\\frac{|\\alpha|}{2}-\\frac n2(\\frac1p-\\frac1q)}\\|f\\|_p,\\qquad C_{n,p,q,\\alpha}:=\\|D^\\alpha\\Gamma(\\cdot,1)\\|_Q<\\infty.$$",
+        "strategy": "The scaling identity gives $D^\\alpha\\Gamma_t(x)=t^{-(|\\alpha|+n)/2}(D^\\alpha\\Gamma)(x/\\sqrt t,1)$, hence $\\|D^\\alpha\\Gamma_t\\|_Q=t^{-|\\alpha|/2}t^{-n(1-1/Q)/2}\\|D^\\alpha\\Gamma_1\\|_Q$, and $\\|D^\\alpha\\Gamma_1\\|_Q<\\infty$ because $D^\\alpha\\Gamma_1$ is a polynomial times a Gaussian. Smoothness and the formula $D^\\alpha H_tf=(D^\\alpha\\Gamma_t)*f$ follow by differentiating under the integral sign: the domination needed is exactly the derivative bound of [[lem-heat-kernel-normalisation-scaling-and-derivatives]], uniformly on compact subintervals of $(0,\\infty)$, and Hölder's inequality makes the integral finite at every $x$. Young's inequality with exponents $(p,Q,q)$ then gives the estimate with the stated constant. Joint smoothness and the pointwise differentiation justification use [[lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time]] with compact x/time domination, before applying Young for the displayed norms.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 5.5, printed p. 131 (smoothness for $L^p$ data), and §5.1.1, printed pp. 129–130 (derivatives under the integral)"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "proof of Theorem 1.1, printed p. 6 (repeated differentiation under the integral in (1.1.17))"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 152 (the convolution representation differentiated)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-positive-time-spatial-analyticity-of-heat-kernel-solutions",
+        "kind": "theorem",
+        "title": "Spatial analyticity of heat flow at positive time",
+        "deps": [
+          "def-countable-choice",
+          "def-heat-kernel",
+          "def-factorial-and-falling-factorial",
+          "def-multivariable-power-series",
+          "def-real-analytic-germ-in-several-variables",
+          "def-real-exponential-function-and-e",
+          "lem-exponential-series-has-infinite-radius",
+          "lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time",
+          "thm-dominated-convergence",
+          "thm-exponential-addition-formula",
+          "thm-gaussian-integral",
+          "thm-holder-inequality-for-integrals",
+          "thm-power-series-define-holomorphic-functions-in-several-variables",
+          "thm-tonelli-and-fubini-for-completed-product-measures"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge1$, $1\\le p\\le\\infty$, $f\\in L^p(\\mathbb R^n)$, and $t>0$. Then $H_tf$ is real analytic on $\\mathbb R^n$ (for complex data the real and imaginary parts are real analytic). For every $r>0$ and multi-index $\\alpha$, $\\|D^\\alpha H_tf\\|_\\infty\\le\\alpha!r^{-|\\alpha|}M_{n,p,t,r}\\|f\\|_p$, where $M_{n,p,t,r}=\\|\\Gamma(\\cdot,t)\\exp(r\\sum_i|x_i|/(2t)+nr^2/(4t))\\|_{p\\prime}<\\infty$, $1/p+1/p\\prime=1$. The spatial Taylor series converges absolutely and equals $H_tf(x+h)$ for every real $h$, uniformly for $h$ in each compact box. In particular taking $r=\\sqrt t$ gives a factorial Gaussian derivative bound $C_{n,p}\\alpha!t^{-|\\alpha|/2-n/(2p)}\\|f\\|_p$.",
+        "strategy": "Expand the translated Gaussian exponential in canonically indexed coordinates i<n. Bound the sum of regrouped coefficient moduli by B_r, which is dominated by a fixed Gaussian times exp(3nr²/(4t)). Holder and Tonelli make the integrated coefficients summable on each closed box; DCT gives the representative expansion. The holomorphic power-series theorem identifies coefficients with derivatives. Arbitrary r gives entire real spatial Taylor expansions; r=sqrt(t) gives the factorial bound, with essential-supremum scaling at the conjugate infinity endpoint.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§5.2.2, printed p. 137 immediately after Proposition 5.14 (explicit spatial analyticity statement for $H^s$ data; the local Gaussian proof below supplies all $L^p$ data); (5.6), printed p. 130"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Definition 1.0.1, p. 1, formula (1.0.2)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-heat-equation-has-infinite-propagation-in-the-positive-kernel-class",
+        "kind": "corollary",
+        "title": "Infinite propagation speed for nonnegative heat data",
+        "deps": [
+          "cor-heat-flow-preserves-mass-and-positivity",
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "def-heat-kernel",
+          "def-l-one-of-a-measure",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "statement": "Assume Countable Choice and let $n\\ge1$. Let $f\\in L^1(\\mathbb R^n)$ satisfy $f\\ge0$ almost everywhere and $f\\ne0$. Then for every $t>0$ and every $x\\in\\mathbb R^n$ the everywhere-defined integral $H_tf(x)=\\int_{\\mathbb R^n}\\Gamma(x-y,t)f(y)\\,dy$ is strictly positive. In particular, if $f$ is compactly supported, nonnegative and nonzero, then the support of the solution at time $t$ is all of $\\mathbb R^n$ for every $t>0$.",
+        "strategy": "Let $A=\\{f>0\\}$. If $A$ had measure zero then $\\int f=0$, so $A$ has positive measure and $\\int f>0$ by the published zero-integral theorem. Fix $t>0$ and $x$. The integrand $\\Gamma(x-y,t)f(y)$ is nonnegative and is strictly positive for every $y\\in A$, because the Gaussian is everywhere positive; hence it is positive on a set of positive measure and its integral is strictly positive. The support statement follows because the pointwise value is positive at every point of space.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 152, note after formula (6.38): strict inequality for $t>0$ unless $g$ is constant, implying infinite propagation speed"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "Remark 3.1.6(c), printed p. 105: domain of dependence is the whole strip and the propagation speed is infinite"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Remark 1.1.4, printed p. 5: solutions spread over the entire space at any positive time"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "rem-heat-kernel-conventions-and-diffusivity",
+        "kind": "remark",
+        "title": "Diffusivity, rescaling, and the heat kernel compared with the Poisson kernels",
+        "deps": [
+          "def-heat-equation-heat-operator-and-cauchy-problem",
+          "def-heat-kernel",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-poisson-kernel-for-a-ball-in-rn",
+          "def-countable-choice",
+          "thm-poisson-kernel-and-bounded-dirichlet-problem-on-the-half-space"
+        ],
+        "statement": "With diffusivity parameter $\\kappa>0$, the equation $u_t-\\kappa\\Delta u=0$ is converted into the $\\kappa=1$ equation of this page by $v(x,t):=u(x,\\kappa t)$, and its kernel is $\\Gamma_\\kappa(x,t)=(4\\pi\\kappa t)^{-n/2}e^{-|x|^2/(4\\kappa t)}$; the kernel $\\Gamma$ of this page is the case $\\kappa=1$. The ball Poisson kernel $P_{R,a}(x,y)=(R^2-|x-a|^2)/(R\\omega_{n-1}|x-y|^n)$ of [[thm-poisson-kernel-for-a-ball-in-rn]] is a boundary-value kernel: its two slots are an interior point and a boundary point, it carries no time parameter, and its dependence on $x$ is not translation-invariant convolution, so it is not the heat kernel in other notation. A normal-time Poisson kernel on a half-space does generate a semigroup, but with generator $-\\sqrt{-\\Delta}$ rather than $\\Delta$, so the two one-parameter families are distinct; likewise the wave representation of a later page averages data on spheres of radius $ct$ instead of convolving with a positive kernel. A source's diffusivity normalisation must be matched before its kernel formula is quoted.",
+        "strategy": "The rescaling is the chain rule: $\\partial_tv(x,t)=\\kappa\\,\\partial_tu(x,\\kappa t)$ and $\\Delta_xv(x,t)=(\\Delta u)(x,\\kappa t)$, so $v_t=\\Delta v$ is equivalent to $u_t=\\kappa\\Delta u$. The comparison with the ball Poisson kernel is a statement about the two already-published objects and their normalisations: the ball kernel is not a convolution kernel in the interior variable and its normal-time analogue has the square-root generator, so it cannot be identified with $\\Gamma$. This is a recorded convention remark, not a proof, and it consumes no later-page material.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§3.1.1, printed p. 99, equation (3.1.1) with diffusivity $k$; §3.2.4, printed p. 111, formula (3.2.24); §9.1, printed pp. 281–284, (9.1.8)–(9.1.10), the three-dimensional spherical-mean representation"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Definition 1.0.1, p. 1 (diffusivity $D$ in the kernel)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 152, formula (6.36) (the $\\kappa=1$ normalisation adopted here)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 458.012,
+    "id": "the-heat-kernel-and-the-cauchy-problem-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "The Heat Kernel and the Cauchy Problem — Examples",
+    "companion": "the-heat-kernel-and-the-cauchy-problem",
+    "requires": [
+      "the-heat-kernel-and-the-cauchy-problem",
+      "weak-convergence-tightness-and-representation"
+    ],
+    "items": [
+      {
+        "id": "ex-gaussian-data-remain-gaussian-under-heat-flow",
+        "kind": "example",
+        "title": "Gaussian data remain Gaussian under the heat flow",
+        "deps": [
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "def-heat-kernel",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "lem-heat-kernel-semigroup-identity",
+          "lem-first-and-second-moments-of-the-heat-kernel"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge1$, $\\sigma>0$, and let\n$f(x)=(2\\pi\\sigma^2)^{-n/2}e^{-|x|^2/(2\\sigma^2)}$ be the density of the\ncentred Gaussian law with covariance $\\sigma^2I_n$. Then\n$f\\in L^1\\cap L^\\infty$ and for every $t>0$ the heat evolution is the centred\nGaussian density with covariance $(\\sigma^2+2t)I_n$,\n$$H_tf(x)=\\bigl(2\\pi(\\sigma^2+2t)\\bigr)^{-n/2}e^{-|x|^2/(2(\\sigma^2+2t))},\\qquad x\\in\\mathbb R^n.$$",
+        "strategy": "Under Countable Choice, identify f=Gamma_(sigma²/2), invoke the positive-time kernel semigroup identity, and apply the kernel moments at t+sigma²/2. Unit mass and the bounded Gaussian maximum give L1 and L-infinity membership.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "printed p. 130, formula (5.6) (the Gaussian kernel being convolved)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 152, formula (6.36)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§3.2.4, printed p. 111, formula (3.2.24)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-heat-flow-of-an-indicator-function",
+        "kind": "example",
+        "title": "The heat flow of an interval indicator is a difference of Gaussian tails",
+        "deps": [
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "def-heat-kernel",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-derivative-of-exponential",
+          "thm-gaussian-integral",
+          "thm-heat-cauchy-solution-for-lp-data",
+          "cor-primitives-of-a-continuous-function"
+        ],
+        "statement": "Assume Countable Choice. Let $n=1$ and let $f=\\mathbf 1_{(a,b)}$ for real $a<b$. Then\n$f\\in L^p(\\mathbb R)$ for every $1\\le p\\le\\infty$ and, for every $t>0$ and\n$x\\in\\mathbb R$,\n$$H_tf(x)=\\Phi\\!\\Bigl(\\frac{b-x}{\\sqrt{2t}}\\Bigr)-\\Phi\\!\\Bigl(\\frac{a-x}{\\sqrt{2t}}\\Bigr),$$\nwhere $\\Phi(u)=(2\\pi)^{-1/2}\\int_{-\\infty}^{u}e^{-s^2/2}\\,ds$ is the standard\nnormal distribution function. In particular $H_tf$ is $C^\\infty$ on\n$\\mathbb R$ and strictly positive at every point for every $t>0$, while $f$ is\ndiscontinuous.",
+        "strategy": "The indicator of an interval is bounded and measurable, hence in every $L^p$, and $H_tf$ is its heat evolution of [[thm-heat-cauchy-solution-for-lp-data]]. Substitute $y=x+\\sqrt{2t}\\,s$ in the convolution integral: $\\Gamma(x-y,t)\\,dy$ becomes $(2\\pi)^{-1/2}e^{-s^2/2}ds$ and the interval of integration becomes $((a-x)/\\sqrt{2t},(b-x)/\\sqrt{2t})$, which is the stated difference of Gaussian tails. $\\Phi$ is $C^\\infty$ with $\\Phi'=(2\\pi)^{-1/2}e^{-u^2/2}>0$ by the fundamental theorem of calculus, and $0<\\Phi(u)<1$ at every finite $u$; strict positivity everywhere is also the compactly supported case of the infinite-propagation corollary.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§3.1.2, printed p. 102, formula (3.1.12) (the error-function form of the cumulative solution, for the half-line indicator)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 152, formula (6.37)"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Theorem 1.1 and equation (1.1.12), pp. 5–6"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-self-similar-heat-kernel-solution",
+        "kind": "example",
+        "title": "The heat kernel is the self-similar solution with conserved mass",
+        "deps": [
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "def-heat-kernel",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "lem-heat-kernel-semigroup-identity"
+        ],
+        "statement": "Assume Countable Choice. Let $n\\ge1$ and $u(x,t):=\\Gamma(x,t)$ on\n$\\mathbb R^n\\times(0,\\infty)$. Then $u$ solves the heat equation and is\ninvariant under parabolic dilations with amplitude $\\lambda^n$:\n$$u(\\lambda x,\\lambda^2t)=\\lambda^{-n}u(x,t),\\quad\\text{equivalently}\\quad\\lambda^nu(\\lambda x,\\lambda^2t)=u(x,t),\\qquad\\lambda>0,$$\nand its total mass is conserved: $\\int_{\\mathbb R^n}u(x,t)\\,dx=1$ for every\n$t>0$.",
+        "strategy": "Direct substitution in the kernel formula for the scaling identity; the exponent $\\lambda^{-n}$ is exactly the one that keeps the total mass fixed, which is the content of the scaling clause of [[lem-heat-kernel-normalisation-scaling-and-derivatives]]. Mass conservation is the unit-mass clause of the same lemma, and solving the heat equation is its identity $\\partial_t\\Gamma=\\Delta\\Gamma$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "§3.1.2, printed pp. 99–101, formulas (3.1.4)–(3.1.6) (the similarity transformation and the mass normalisation)"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Lemma 2.0.2, printed pp. 7–8 (invariance of the heat equation under parabolic dilations)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 152, formula (6.36)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cex-linfinity-approximate-identity-need-not-converge-in-supremum-norm",
+        "kind": "counterexample",
+        "title": "The heat flow need not converge in supremum norm",
+        "deps": [
+          "cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions",
+          "cor-uniform-limit-uniformly-continuous",
+          "cor-mean-value-theorem",
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "def-heat-kernel",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+          "thm-heat-cauchy-solution-for-bounded-continuous-data",
+          "thm-heat-cauchy-solution-for-lp-data",
+          "thm-reals-cauchy-complete",
+          "thm-spatial-derivative-estimates-for-heat-flow"
+        ],
+        "statement": "Assuming Countable Choice, the claim that the $p=\\infty$ endpoint can be added to the $L^p$ convergence\ntheorem for the heat flow, that is: for every\n$f\\in L^\\infty(\\mathbb R)\\cap\\bigcap_{1\\le p<\\infty}L^p(\\mathbb R)$ one has\n$\\sup_{x\\in\\mathbb R}|H_tf(x)-f(x)|\\to0$ as $t\\downarrow0^+$. This fails even\nfor the simplest jump data, and locally uniform convergence on compact sets\ncontaining the jump fails as well. The same witnesses also obstruct convergence\nin the essential supremum norm: for $f=\\mathbf1_{[0,\\infty)}$ one has\n$H_tf(0)=1/2$ and $\\|H_tf-f\\|_\\infty\\ge1/2$; for\n$f_0=\\mathbf1_{[0,1)}$, which belongs to every finite $L^p$ and to $L^\\infty$,\none has $H_tf_0(0)<1/2$ and $\\|H_tf_0-f_0\\|_\\infty>1/2$ for every $t>0$. Thus the continuity hypothesis cannot be discarded;\nactual supremum convergence for bounded real data requires uniform continuity,\nand essential supremum convergence requires a uniformly continuous representative.",
+        "strategy": "Use the half-line indicator only as bounded data: evenness gives H_tf(0)=1/2; it is not in finite Lp. Use the bounded interval indicator for the intersection class, with H_tf_0(0)<1/2. Spatial smoothness gives continuity, extending each jump error to an interval of positive measure and proving the essential supremum bound. Finite-p convergence applies only to the interval datum. The derivative estimate for p=q=infinity and the mean value theorem make each H_tg uniformly continuous; uniform-limit preservation establishes the necessity qualification for actual sup convergence and a uniformly continuous representative for essential-sup convergence.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 5.5, printed p. 131 (the hypothesis $1\\le p<\\infty$ for $L^p$ convergence; the supremum-norm case is excluded)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Theorem 6.9, printed p. 152 (continuity assumed on all of $[0,\\infty)\\times\\mathbb R^n$)"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Definition 1.0.1 and Lemma 1.0.2, pp. 1–3 (explicit Gaussian and unit mass; indicator witnesses calculated locally)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-heat-equation-does-not-have-finite-propagation",
+        "kind": "counterexample",
+        "title": "The heat equation has no finite propagation speed",
+        "deps": [
+          "cor-heat-equation-has-infinite-propagation-in-the-positive-kernel-class",
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "def-heat-kernel",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable"
+        ],
+        "statement": "Let $n=1$ and let $f=\\mathbf 1_{[-1,1]}$, a nonzero nonnegative compactly supported $L^1$ function. Then for every $t>0$ the heat flow $H_tf$ is strictly positive at every $x\\in\\mathbb R$, so $\\operatorname{supp}(H_tf)=\\mathbb R$ for every $t>0$ although $\\operatorname{supp}f=[-1,1]$. Heat data therefore propagate with infinite speed, in contrast with the wave equation's finite speed of propagation.",
+        "strategy": "The indicator is a nonzero nonnegative element of $L^1$, so the infinite-propagation corollary applies: every point of space receives a strictly positive contribution from the everywhere-positive Gaussian at every positive time, and the support of the solution is the whole line immediately. This is a counterexample to finite propagation, not a new positivity proof.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 152, note after formula (6.38) (infinite propagation speed)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "Remark 3.1.6(c), printed p. 105 (domain of dependence and infinite propagation speed)"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Remark 1.1.4, printed p. 5"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-fourier-transform-of-the-heat-kernel",
+        "kind": "example",
+        "title": "The Fourier transform of the heat kernel",
+        "deps": [
+          "def-countable-choice",
+          "def-fourier-transform-on-l-one-of-rn",
+          "def-heat-kernel",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives"
+        ],
+        "statement": "Assume Countable Choice and let $n\\ge1$, and use the library's\n$2\\pi$-normalised transform\n$\\mathcal Ff(\\xi)=\\int_{\\mathbb R^n}f(x)e^{-2\\pi ix\\cdot\\xi}\\,dx$ of\n[[def-fourier-transform-on-l-one-of-rn]]. Then for every $t>0$ the heat kernel\n$\\Gamma_t$ of [[def-heat-kernel]] is the $L^1$ function with\n$$\\mathcal F\\Gamma_t(\\xi)=e^{-4\\pi^2t|\\xi|^2},\\qquad \\xi\\in\\mathbb R^n.$$\nIn the unnormalised convention\n$\\mathcal Gf(\\xi)=\\int_{\\mathbb R^n}f(x)e^{-ix\\cdot\\xi}\\,dx$ the same\ncomputation reads $\\mathcal G\\Gamma_t(\\xi)=e^{-t|\\xi|^2}$. The heat-flow multiplier\n$e^{-t|\\xi|^2}$ alone does not determine the forward normalization: Hunter\nuses $(2\\pi)^{-n}\\mathcal G$, whose transform of $\\Gamma_t$ is\n$(2\\pi)^{-n}e^{-t|\\xi|^2}$.",
+        "strategy": "Apply the library Gaussian transform with s=1/(4pi t); the prefactors cancel and the exponent becomes -4pi²t|xi|². The phase-only convention uses G Gamma_t(xi)=F Gamma_t(xi/(2pi)). Hunter uses (2pi)^(-n)G; a heat multiplier alone does not identify forward normalization.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 5.4, printed p. 129, formula (5.4) (heat multiplier); Definition 5.64, p. 168, (5.73), and Example 5.65, p. 169 (forward transform includes $(2\\pi)^{-n}$)"
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (2025 archived author manuscript, AMS Graduate Studies in Mathematics)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "printed p. 151, formulas (6.34)–(6.36) (the transform of the fundamental solution)"
+            },
+            {
+              "title": "Victor Ivrii, Partial Differential Equations (University of Toronto, 2018, CC BY-SA)",
+              "url": "https://www.math.toronto.edu/courses/apm346h1/20181/PDE-textbook/PDE-textbook.pdf",
+              "locator": "Remark 3.1.5, printed p. 103 (the same formulae recovered by Fourier transform)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-heat-evolution-of-affine-and-quadratic-polynomials",
+        "kind": "example",
+        "title": "Heat evolution of affine and quadratic polynomials",
+        "deps": [
+          "def-countable-choice",
+          "lem-first-and-second-moments-of-the-heat-kernel",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-linear-change-of-variables-for-lebesgue-measure"
+        ],
+        "statement": "Assume Countable Choice. For $n\\ge1$ and $t>0$, define the Gaussian moment integrals directly for these polynomial data. They converge absolutely and give $H_t1=1$, $H_ty_i=x_i$, $H_t(y_iy_j)=x_ix_j+2t\\delta_{ij}$, and $H_t|y|^2=|x|^2+2nt$. These integrals extend the convolution formula for this example; nonconstant polynomial data are not asserted to be in $L^p$ or bounded.",
+        "strategy": "Substitute $z=x-y$, expand the affine/quadratic expressions, and use unit mass, vanishing first moments and covariance $2tI$ from the A-page moment lemma. Absolute convergence follows from the same moment estimates; no duplication of the Gaussian moment proof.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§5.1.1–5.1.2, printed pp. 129–131, (5.6)–(5.9), Theorem 5.5"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Definition 1.0.1, p. 1, formula (1.0.2)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-heat-lp-to-lq-time-exponent-is-forced-by-parabolic-scaling",
+        "kind": "example",
+        "title": "The heat smoothing time exponent is forced by scaling",
+        "deps": [
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice",
+          "def-heat-evolution-of-initial-data",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+          "thm-lp-to-lq-heat-kernel-estimate",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "statement": "Assume Countable Choice. For $n\\ge1$ and $1\\le p\\le q\\le\\infty$, an estimate $\\|H_tf\\|_q\\le Ct^{-\\beta}\\|f\\|_p$ valid for every $t>0$ and every $f\\in L^p$ with a finite constant independent of $t,f$ requires $\\beta=\\frac n2(1/p-1/q)$. This asserts the necessary power, not the optimal Young constant.",
+        "strategy": "Choose a nonzero nonnegative indicator of the unit ball $f$. For $\\lambda>0$ put $f_\\lambda(x)=f(\\lambda x)$, so $\\|f_\\lambda\\|_p=\\lambda^{-n/p}\\|f\\|_p$ with1/infinity=0. Kernel scaling gives $H_{\\lambda^{-2}}f_\\lambda(x)=H_1f(\\lambda x)$ and its q norm is $\\lambda^{-n/q}\\|H_1f\\|_q$, a finite positive number times that factor. The proposed bound implies $0<\\|H_1f\\|_q/\\|f\\|_p\\le C\\lambda^{2\\beta-n(1/p-1/q)}$. Sending $\\lambda$ to0 or infinity forces the exponent to0.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§5.1.1–5.1.2, printed pp. 129–131, (5.6)–(5.9), Theorem 5.5"
+            },
+            {
+              "title": "Jared Speck, MIT 18.152 Introduction to Partial Differential Equations, Class Meeting #5: The Fundamental Solution for the Heat Equation (Fall 2011)",
+              "url": "https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/9acdeff6449529106ac254f7ada967da_MIT18_152F11_lec_05.pdf",
+              "locator": "Lemma 2.0.2, pp. 7–8 (parabolic dilation invariance), and Definition 1.0.1, p. 1"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  }
+]

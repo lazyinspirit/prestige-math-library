@@ -1,0 +1,2626 @@
+{
+  "version": 1,
+  "level": "frontier-38-owner-30",
+  "note": "Step-3b proof contracts for batch 18 (pair frobenius-characteristic-and-the-symmetric-group-character-dictionary / -examples), frontier-38-owner-30. Quotes are verbatim excerpts of the named source sections.",
+  "scope": [
+    "def-frobenius-characteristic-map",
+    "def-graded-ordinary-representation-ring-of-symmetric-groups",
+    "lem-complete-homogeneous-expansion-in-power-sums",
+    "def-outer-induction-product-for-symmetric-group-characters",
+    "lem-characteristic-of-a-young-permutation-character-is-complete",
+    "lem-frobenius-characteristic-is-an-isometry",
+    "lem-frobenius-characteristic-preserves-outer-products",
+    "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+    "cor-irreducible-symmetric-group-character-values-are-power-sum-coefficients",
+    "prop-regular-character-has-characteristic-p-one-to-the-n",
+    "prop-sign-twist-corresponds-to-the-omega-involution",
+    "thm-frobenius-characteristic-is-an-isometric-graded-ring-isomorphism",
+    "cex-outer-induction-is-not-the-kronecker-product",
+    "ex-frobenius-characteristic-dictionary-for-s3",
+    "ex-sign-twist-conjugates-the-s31-character",
+    "ex-young-permutation-characteristic-for-shape-two-one"
+  ],
+  "contracts": {
+    "def-frobenius-characteristic-map": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition covers the empty partition: for n=0 the only partition is the empty partition, p_empty=1 and z_empty=1, so the defining sum has the single term f(empty) and ch(f)=f(empty) is a complex number in Lambda_C^0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition is a sum of scalar multiples f(rho)p_rho/z_rho; the zero class function has f(rho)=0 at every cycle type, so ch(0)=0 in Lambda_C^n, and the zero of each degree is consistent with the degreewise definition on cf_S."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition fixes one normalization with no free parameter: z_rho is the centralizer order from [[thm-centralizer-cardinality-from-cycle-type]] and the coefficients are f(rho)/z_rho; for n=1 and the trivial class function, ch(1)=p_1/z_(1)=p_1 since z_(1)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition requires only rho|-n; z_rho is positive because it is a product of positive terms, so no division degenerates, and the family p_rho/z_rho is a Q-basis of Lambda_Q^n by [[prop-power-sums-form-a-rational-not-integral-stable-basis]], which makes the finite sum well defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition is stated for every n>=0, including the lower endpoint n=0 (handled by the empty case) and with no upper bound; n=0 gives ch: cf(S_0)=C -> Lambda_C^0=C, and no endpoint convention beyond p_empty=z_empty=1 is needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition states that no choice principle is used; its data are a finite sum over the finite set of partitions of n and the previously published basis, so no selection from a family of nonempty sets occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an iff statement: it defines a map and records the sufficient condition that rational-valued class functions land in Lambda_Q^n, with the converse direction belonging to the later dictionary theorems."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no converse: the claim that every virtual character of S_n is rational- and integral-valued is proved later on this page, not in the Definition."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18",
+        "notes": "Definition reviewed in full against its six direct dependency statements: complex class functions, rational power-sum basis, Hall orthogonality, cycle-type classes, centralizer cardinality and S_0 convention. Finite sum ch(f)=sum_rho f(rho)p_rho/z_rho is well typed in Lambda_C, with positive z_rho and no arbitrary choice. At n=0 it is the identity C\u2192C; ch(0)=0 and imaginary-valued functions remain in the complex codomain. Rational/integral virtual-character assertions are explicitly deferred to the later dictionary theorem. Macdonald (7.2), printed p. 113, has the same normalization. No defect found."
+      }
+    },
+    "def-graded-ordinary-representation-ring-of-symmetric-groups": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition includes the degree-zero component R(S_0)=Z*1 for the trivial group S_0 and the empty tuple of support; it defines R_S as the direct sum, so elements have finite support and no completion is introduced."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition defines R_S as an abelian group under componentwise addition, so the zero element is the finitely supported tuple of zeros, with every component the zero virtual character of R(S_n)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition records that R(S_0)=Z*1 and, in the accompanying item on the outer product, that the trivial character of S_0 is the unit; this item defines only the graded abelian group and assumes no ring axioms for the outer product."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition explicitly warns that the multiplication used on R_S is the outer induction product and not the tensor-product multiplication inside one R(S_n); the degenerate same-degree case is therefore excluded by definition from the intended multiplication."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition ranges over all n>=0 including the endpoint n=0 and the scalar extensions R_S,Q and R_S,C are defined by tensoring the whole graded direct sum."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition states that no choice principle is used; the character rings R(S_n) are published objects and the direct sum is defined by finite support."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition makes no iff claim; it introduces a graded abelian group and its degree decomposition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no converse; the ring structure under the outer product is proved in the isomorphism theorem of this page."
+        }
+      ]
+    },
+    "lem-complete-homogeneous-expansion-in-power-sums": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stable-graded-ring-of-symmetric-functions",
+          "source_section": "Definition",
+          "quote": "An element of $\\Lambda^d$ is a compatible sequence of homogeneous degree-$d$ symmetric polynomials, one in each rank.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-elementary-and-complete-families-freely-generate-the-stable-ring",
+          "source_section": "Statement",
+          "quote": "for every $d\\ge0$ the families $\\{e_\\lambda:\\lambda\\vdash d\\}$ and $\\{h_\\lambda:\\lambda\\vdash d\\}$ are $\\mathbb Z$-bases of $\\Lambda^d$.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-power-sum-and-complete-homogeneous-symmetric-polynomials",
+          "source_section": "Definition",
+          "quote": "For $k\\ge1$, the **$k$-th power-sum symmetric polynomial** is",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-power-sums-form-a-rational-not-integral-stable-basis",
+          "source_section": "Statement",
+          "quote": "for every $d\\ge0$, the family $\\{p_\\lambda:\\lambda\\vdash d\\}$ is a $\\mathbb Q$-basis of $\\Lambda_{\\mathbb Q}^d$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-partition-young-diagram-and-conjugate-partition",
+          "source_section": "Definition",
+          "quote": "A **partition of $n$** is a finite weakly decreasing sequence $\\lambda=(\\lambda_1,\\dots,\\lambda_k)$ of positive integers with $\\lambda_1+\\cdots+\\lambda_k=n$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d11",
+          "claim": "In Q[x_1,...,x_N][[t]], log and exp are inverse between 1+tQ[x][[t]] and tQ[x][[t]], and exp(A+B)=exp(A)exp(B). The geometric product is exp(sum_k p_k t^k/k); finite coefficient extraction yields h_d^(N)=sum_{rho|-d}p_rho^(N)/z_rho.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "d21",
+          "claim": "The defining finite polynomials specialize under setting added variables to zero (h_d has degree d and p_k degree k). Thus the identities at every rank give the stable identity in Lambda_Q^d.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d31",
+          "claim": "h_lambda factors as the product over rows of the one-row expansions.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "d41",
+          "claim": "List the row cycle lengths in decreasing order to reconstruct each partition rho^(j) from its multiplicities. Collecting the product coefficients gives N(lambda,rho)/z_rho, where equal-length cycles are distinct and each row is labelled.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "d51",
+          "claim": "The empty partition case and the one-row case h_d=sum_{rho|-d}p_rho/z_rho, completing the lemma.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 treats n=0: lambda=rho=empty, the empty product gives h_empty=1, z_empty=1 and N(empty,empty)=1, so both sides are 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If no matrix of nonnegative multiplicities satisfies the fixed row sums and cycle counts, N(lambda,rho)=0 (for example lambda=(1,1), rho=(2)). The definition requires equal total sizes; no extension to unequal sizes is asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 computes the one-row case lambda=(d): N((d),rho)=1 for every rho|-d, giving h_d=sum_{rho|-d}p_rho/z_rho; for d=1 this reads h_1=p_1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 allows k=0 (the empty partition) and arbitrary repeated parts; step 4.1 counts distributions of distinct cycles, so signatures with repeated equal parts are handled by the multinomial factors rather than by equality of cycles."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The identity is stated for every d>=0 and step 5.1 covers the lower endpoint d=0; there is no upper endpoint because Lambda is a direct sum of finite-rank free modules."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No step invokes a choice principle: the finite-rank generating-function computation, the compatibility argument and the finite coefficient comparison use only finite sums and the exhibited bases. The Statement covers the nonempty-choice case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a single expansion identity, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts no converse; the uniqueness of the coefficients is a property of the basis and is used, not proved as an iff clause."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18",
+        "notes": "Proof 1.1\u20135.1 and all six dependencies reviewed. The formal exponential is used in the commutative rational t-adic power-series ring, with zero-constant-term arguments and finite contributions at each coefficient; exp(A+B)=exp(A)exp(B), not additivity. Rank projections give homogeneous degree d identities; p_k has degree k. Multiplying the one-row identities and collecting multiplicity matrices gives N(lambda,rho)/z_rho, with labelled rows and distinct equal-length cycles. Each partition is reconstructed in decreasing order. Empty matrices/products give N(empty,empty)=z_empty=h_empty=1; impossible equal-size distributions give zero without extending N to unequal sizes. Macdonald (2.14\u2032) and its full proof, printed p. 25, agree. Pre/post item and contract hashes differ, while the current item equals post. The three reported proof corrections and corrected zero-boundary contract are sound; accepted without further item edits."
+      }
+    },
+    "def-outer-induction-product-for-symmetric-group-characters": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition includes the empty case m=n=0: the trivial character of S_0 is the unit, S_0 x S_0 is trivial and its outer product with itself is again the trivial character of S_0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the unique irreducible-character expansion of a zero virtual character has all coefficients0. Each external-product coefficient a_i b_j and each induced summand in the displayed definition is therefore0 when either input is0. This uses the actual bilinear finite-sum definition on characters, not evaluation on tensor vectors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition records that the trivial character of S_0 is the unit of degree zero and that for m=n=1 the construction produces a virtual character of R(S_2); no extra scalar normalization is introduced beyond the convention (chi boxtimes psi)(sigma,tau)=chi(sigma)psi(tau)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition treats the potentially degenerate case m=0 or n=0 by requiring the factors to act on their own blocks; the tensor product of a one-dimensional trivial space with a representation is identified with the representation, so the construction remains well defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition is stated for all m,n>=0 with no restriction on the degrees, including the endpoints m=0 and n=0; the sum defining f boxtimes g is finite because the decompositions of f and g are finite integral combinations."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition states that no choice principle is used; the coefficients of a virtual character are unique by the orthonormality of irreducible characters, so no choice of decomposition is required beyond the published basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an iff statement; it introduces a bilinear map and records its well-definedness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no converse claim; the multiplicativity of the characteristic on this product is proved in a separate lemma."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step7-v2-initial-r1-u18",
+        "notes": "Local Step-7 repair review: explicit consecutive-block action identifies the subgroup for every m,n>=0, with trivial symmetric groups for empty blocks and unique restrictions. Unsupported partition type (m,n) terminology removed. External tensor character, unique integral coefficients, bilinear induction and degree-zero unit are unchanged; no AC is used. This is a local review, not an independent audit."
+      }
+    },
+    "lem-characteristic-of-a-young-permutation-character-is-complete": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-young-permutation-module-is-induced-from-the-trivial-character",
+          "source_section": "Statement",
+          "quote": "the Young permutation module $M^\\lambda$ is isomorphic, as a complex representation of $S_n$, to the permutation representation of $S_n$ on the left coset set $S_n/S_\\lambda$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-character-of-a-permutation-representation-counts-fixed-points",
+          "source_section": "Statement",
+          "quote": "Then the character of $\\mathbb C^{(X)}$ is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-young-subgroup-tabloid-and-permutation-module",
+          "source_section": "Definition",
+          "quote": "The **standard Young subgroup** of type $\\lambda$ is",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complete-homogeneous-expansion-in-power-sums",
+          "source_section": "Statement",
+          "quote": "h_\\lambda=\\sum_{\\rho\\vdash|\\lambda|}N(\\lambda,\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-elementary-and-complete-families-freely-generate-the-stable-ring",
+          "source_section": "Statement",
+          "quote": "for every $d\\ge0$ the families $\\{e_\\lambda:\\lambda\\vdash d\\}$ and $\\{h_\\lambda:\\lambda\\vdash d\\}$ are $\\mathbb Z$-bases of $\\Lambda^d$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-frobenius-characteristic-map",
+          "source_section": "Definition",
+          "quote": "\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d11",
+          "claim": "The value of phi^lambda at w is the number of lambda-tabloids fixed by w.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "d21",
+          "claim": "A tabloid is fixed exactly when each row set at its labelled row index is w-invariant, including repeated row sizes. This is equivalent to each row being a union of cycles.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d31",
+          "claim": "The fixed-tabloid count is the number of distributions of the cycles of w among the labelled rows with total row lengths lambda_j, namely N(lambda,rho).",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "d41",
+          "claim": "Substituting the values into the definition of ch and using the expansion of h_lambda gives ch(phi^lambda)=h_lambda.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "d51",
+          "claim": "The case n=0 gives ch(phi^empty)=1=h_empty, completing the identity for all n and lambda.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 treats n=0: M^empty is the one-dimensional trivial module, N(empty,empty)=1 and h_empty=1, so ch(phi^empty)=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Each M^lambda has a nonempty tabloid basis. Its character may vanish on a cycle type precisely when no matching cycle distribution exists (steps 3.1\u20134.1); the empty shape gives the nonzero one-dimensional module, not the zero module."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, lambda=(1), the unique tabloid is fixed by the identity and N((1),(1))=1, so ch(phi^(1))=p_1=h_1 by steps 3.1 and 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Shapes lambda with repeated parts are covered in step 2.1 because the row blocks are labelled by row index, and cycles of equal length are distinct subsets of {1,...,n}, which is exactly the N(lambda,rho) convention of F4."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement ranges over all n>=0; step 5.1 covers the lower endpoint n=0, and there is no upper endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No step invokes a choice principle: the fixed-point count is finite and the identification of fixed tabloids with cycle distributions is canonical. The Statement covers the nonempty-choice case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is an identity of characteristics, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted; injectivity of ch on all class functions is the separate isometry lemma."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18",
+        "notes": "Proof 1.1\u20135.1 and all six direct suppliers checked. Fixed-point character counting applies to the finite tabloid set. Equality means equality at every labelled row index; invariance iff union of cycles follows in both directions by iterating the permutation on each row element. This is exactly N(lambda,rho) from the level-zero supplier, so substitution gives ch(phi^lambda)=h_lambda. Repeated row sizes do not permit row interchange; at shape (1,1) a transposition fixes neither tabloid. The empty shape has one tabloid and gives ch=1, while some nonempty-shape class values can be zero. No choice or extra prerequisite is used. Macdonald proof of (7.3), printed p. 114, agrees. Current item equals post and both item and contract changed; the local proof and boundary repairs preserve the Statement."
+      }
+    },
+    "lem-frobenius-characteristic-is-an-isometry": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-frobenius-characteristic-map",
+          "source_section": "Definition",
+          "quote": "\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-class-function-and-the-space-of-complex-class-functions",
+          "source_section": "Definition",
+          "quote": "A function $f:G\\to\\mathbb C$ is a **class function** when it is constant on every conjugacy class",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-inner-product-on-complex-class-functions",
+          "source_section": "Definition",
+          "quote": "\\langle\\varphi,\\psi\\rangle:=\\frac{1}{|G|}\\sum_{g\\in G}\\varphi(g)\\,\\overline{\\psi(g)}",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hall-inner-product-on-symmetric-functions",
+          "source_section": "Definition",
+          "quote": "The **Hall inner product** is the graded $\\mathbb Z$-bilinear form on the stable ring $\\Lambda$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-power-sums-are-orthogonal-for-the-hall-inner-product",
+          "source_section": "Statement",
+          "quote": "\\langle p_\\lambda,p_\\mu\\rangle_H=\\delta_{\\lambda\\mu}z_\\lambda.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-centralizer-cardinality-from-cycle-type",
+          "source_section": "Statement",
+          "quote": "|C_{S_n}(\\sigma)|=\\prod_{k=1}^n k^{c_k}c_k!.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types",
+          "source_section": "Statement",
+          "quote": "The conjugacy classes of $S_n$ are in bijection with the tuples of nonnegative integers $(c_1,\\ldots,c_n)$ satisfying",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-conjugacy-class-cardinality",
+          "source_section": "Statement",
+          "quote": "is a well-defined bijection. Consequently",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d11",
+          "claim": "The Hall form extends sesquilinearly to Lambda_C with <p_rho/z_rho,p_sigma/z_sigma>=delta/z_rho.",
+          "step": "1.1",
+          "inputs": [
+            "F4"
+          ]
+        },
+        {
+          "id": "d12",
+          "claim": "Grouping the standard inner product by conjugacy classes and using the class sizes n!/z_rho gives <f,g>=sum_rho f(rho)conj(g(rho))/z_rho.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "d21",
+          "claim": "Expanding both characteristics gives <ch(f),ch(g)>_H=sum_rho f(rho)conj(g(rho))/z_rho, equal to <f,g>.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d31",
+          "claim": "The isometry holds; positivity and <f,f>=sum|f(rho)|^2/z_rho give injectivity of ch on cf(S_n).",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For n=0 the only partition is empty, both sides read f(empty)conj(g(empty)) with z_empty=1, and step 1.2's sum over classes is the single term <f,g>=f(1)conj(g(1))."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 proves <f,f>=sum_rho|f(rho)|^2/z_rho>=0 with equality if and only if every f(rho)=0, which is the zero case used for injectivity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For the trivial character, the common squared norm is sum_{rho|-n}1/z_rho=1, since the conjugacy-class sizes n!/z_rho sum to n! (steps 1.2\u20132.1). It is not just the identity-class contribution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The sesquilinear extension of step 1.1 is well defined on the whole complexification because the Hall form is Q-bilinear on Lambda_Q and p_rho/z_rho is a Q-basis; the degenerate case z_rho=0 cannot occur since z_rho is a product of positive integers."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lemma is stated for every n>=0; the lower endpoint n=0 is the empty case and there is no upper endpoint. The Statement covers the endpoints case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used: the sesquilinear extension is defined on a Q-basis, and the two finite sums are computed by grouping over the finite set of cycle types. The Statement covers the nonempty-choice case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "If <f,f>_(S_n)=0, the positive summands |f(rho)|^2/z_rho in step 3.1 all vanish, so f=0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step3.1 states the norm formula as a finite sum of |f(rho)|^2/z_rho. If f=0, every term is0, proving this direction of equality iff f=0. The same step supplies the other direction using positive definiteness, and the isometry then gives injectivity."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18",
+        "notes": "Full Statement, facts and Proof 1.1\u20133.1 reviewed against its eight suppliers. The Hall form extends from Q bilinearity to first-slot-linear, second-slot-conjugate-linear form, so pairing normalized basis elements gives delta/z_rho. Class sizes n!/z_rho turn both inner products into sum f(rho)conj(g(rho))/z_rho. Positive z_rho gives norm zero\u21d2all values zero, and f=0\u21d2norm zero; injectivity follows without assuming rational character values. For n=0 both forms reduce to the usual C form, and testing f=i confirms conjugation is essential. The trivial character has norm 1 by summing all class masses, not solely the identity class. Macdonald printed p. 113 supports normalization; its bilinear convention is explicitly distinguished. Item hashes are unchanged pre/post/current, while the contract repair corrects the false unit evidence and supplies both norm-zero directions."
+      }
+    },
+    "lem-frobenius-characteristic-preserves-outer-products": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-outer-induction-product-for-symmetric-group-characters",
+          "source_section": "Definition",
+          "quote": "The **outer induction product** is",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-frobenius-characteristic-map",
+          "source_section": "Definition",
+          "quote": "\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-virtual-character-and-character-ring-of-a-finite-group",
+          "source_section": "Definition",
+          "quote": "A **virtual character** of $G$ is an integral linear combination of irreducible complex characters",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-frobenius-formula-for-induced-characters",
+          "source_section": "Statement",
+          "quote": "\\operatorname{Ind}_H^G\\chi(g) = \\frac1{|H|} \\sum_{\\substack{x\\in G\\\\x^{-1}gx\\in H}} \\chi(x^{-1}gx)",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-power-sums-form-a-rational-not-integral-stable-basis",
+          "source_section": "Statement",
+          "quote": "$\\mathbb Q$-basis of $\\Lambda_{\\mathbb Q}^d$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-outer-induction-product-for-symmetric-group-characters",
+          "source_section": "Definition",
+          "quote": "preserving each of the two blocks",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-centralizer-cardinality-from-cycle-type",
+          "source_section": "Statement",
+          "quote": "|C_{S_n}(\\sigma)|=\\prod_{k=1}^n k^{c_k}c_k!.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d11",
+          "claim": "Both sides are bilinear, so it suffices to prove the identity for honest characters.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d12",
+          "claim": "Frobenius' formula expresses the induced character value as an average over the x with x^{-1}wx in H.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "d21",
+          "claim": "The average is the sum over m-element w-invariant subsets A of chi(mu_A)psi(nu_A), because each such A occurs for exactly m!n! values of x.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "d31",
+          "claim": "Grouping invariant subsets by the split rho=mu uplus nu with |mu|=m gives the induced character value sum with multiplicities prod_i binom(m_i(rho),m_i(mu)).",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "d41",
+          "claim": "The split multiplicity equals z_rho/(z_mu z_nu); rational power-sum bases extend to complex bases, so equality of the coefficients proves equality in Lambda_C^(m+n).",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "d51",
+          "claim": "Bilinearity extends both multiplicativity and the cycle-split value formula to virtual f,g. Rational input values give rational induced values in that formula. ch(f) lies in degree m, ch(g) in degree n, and their product and ch(f composed with g) lie in Lambda_Q^(m+n).",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 and the bilinear reduction include m=0 or n=0: the empty invariant subset gives the trivial factor and ch of the trivial character of S_0 equals 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 is a bilinear reduction; the zero virtual character has all coefficients zero and both sides vanish, so the identity holds trivially in the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The unit case is included in step 5.1: the trivial character of S_0 has ch equal to 1 and composes with any g to give g; the normalization of z_rho is fixed, so no scalar ambiguity arises."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 counts m-element invariant subsets, allowing A=empty and A=all of {1,...,m+n}, the degenerate extremes, without special handling beyond mu=empty or nu=empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For m=0 or n=0 the block-preserving subgroup is the whole remaining symmetric group; steps 1.2\u20133.1 include empty/full invariant subsets and empty cycle partitions with p_empty=z_empty=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No step invokes a choice principle: the count over invariant subsets and the coefficient comparison are finite and explicit. The Statement covers the nonempty-choice case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a multiplicativity identity, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted; the identity is used in the direction stated only."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step7-v2-initial-r1-u18",
+        "notes": "Local Step-7 review of 1.1\u20135.1: honest external character permits Frobenius induction; each invariant m-subset has m!n! lifts. Splitting distinct cycles gives product-binomial multiplicities, equal to z_rho/(z_mu z_nu). The published power-sum basis proposition supplies F4, with scalar extension to C for complex coefficients. F5 now cites the explicit block subgroup in the outer-product definition, valid in zero degrees. Bilinearity and the split formula prove the rationality clause. Statement unchanged; no AC. Not an independent review of this repair."
+      }
+    },
+    "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-youngs-rule-for-permutation-modules",
+          "source_section": "Statement",
+          "quote": "**(Isomorphism type.)** $M^\\mu$ is completely reducible and there is an isomorphism of $\\mathbb C S_n$-modules",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-semistandard-tableau-and-kostka-number",
+          "source_section": "Definition",
+          "quote": "The **Kostka number** $K_{\\lambda,\\mu}$ is the number of semistandard tableaux of shape $\\lambda$ and content $\\mu$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "source_section": "Statement",
+          "quote": "$\\chi_{V\\oplus W}(g)=\\chi_V(g)+\\chi_W(g)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-frobenius-characteristic-map",
+          "source_section": "Definition",
+          "quote": "\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-virtual-character-and-character-ring-of-a-finite-group",
+          "source_section": "Definition",
+          "quote": "A **virtual character** of $G$ is an integral linear combination of irreducible complex characters",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-of-a-young-permutation-character-is-complete",
+          "source_section": "Statement",
+          "quote": "\\operatorname{ch}(\\varphi^\\lambda)=h_\\lambda\\in\\Lambda^n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-kostka-change-of-basis-is-dominance-unitriangular",
+          "source_section": "Statement",
+          "quote": "Moreover, $K_{\\lambda\\mu}=0$ unless $\\lambda\\unrhd\\mu$, and $K_{\\mu\\mu}=1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-schur-functions-form-an-orthonormal-integral-basis",
+          "source_section": "Statement",
+          "quote": "form a $\\mathbb Z$-basis of $\\Lambda^d$ and are orthonormal for the Hall form",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-complete-homogeneous-expansion-in-power-sums",
+          "source_section": "Statement",
+          "quote": "h_\\lambda=\\sum_{\\rho\\vdash|\\lambda|}N(\\lambda,\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "source_section": "Statement",
+          "quote": "form a complete irredundant list, up to isomorphism, of finite-dimensional irreducible complex $S_n$-representations",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-distinct-specht-modules-are-inequivalent",
+          "source_section": "Statement",
+          "quote": "If $\\lambda,\\mu\\vdash n$ and $S^\\lambda\\cong S^\\mu$ as complex $S_n$-representations, then $\\lambda=\\mu$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions",
+          "source_section": "Statement",
+          "quote": "form an orthonormal basis of the complex vector space $\\mathrm{cf}(G)$ of class functions on $G$",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d11",
+          "claim": "Taking characters in Young's rule gives phi^mu=sum_lambda K_{lambda mu} chi^lambda.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d21",
+          "claim": "Applying ch gives h_mu=sum_lambda K_{lambda mu} ch(chi^lambda).",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d31",
+          "claim": "With K rows lambda and columns mu, the difference equations are K^T(ch(chi)-s)=0. The integral inverse of K^T makes each difference zero.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "d41",
+          "claim": "h=K^T s, so s_lambda=sum_mu (K^-1)_{mu lambda} h_mu. Hence chi^lambda(rho)=sum_mu (K^-1)_{mu lambda}N(mu,rho) is an integer; these are the coefficients of p_rho/z_rho, while ordinary p_rho coefficients are chi^lambda(rho)/z_rho.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F8",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "d51",
+          "claim": "The Specht characters form the Z-basis of R(S_n) and ch carries it onto the Z-basis of Schur functions.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "F9",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For n=0 the only partition is empty; K_{empty,empty}=1, chi^empty is the trivial character and s_empty=1, so step 3.1 gives ch(chi^empty)=s_empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The comparison in step 3.1 is a homogeneous linear system; the zero vector ch(chi^lambda)-s_lambda is the unique solution because the Kostka matrix is invertible over Z."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For the partition lambda=(n) the Specht module is the trivial module, h_(n)=s_(n) and step 3.1 gives ch(chi^(n))=s_(n)=h_n, consistent with the unit of the dictionary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 allows K_{lambda mu}=0 (no summand) and step 4.1 uses the corrected N(mu,rho) counting distinct cycles, so repeated parts cause no degeneracy in the coefficients."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement ranges over all n>=0; the lower endpoint n=0 is the empty case and there is no upper endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used: the argument is finite linear algebra over Z with exhibited bases. The Statement covers the nonempty-choice case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an identity of characteristics plus basis statements, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted; the labelling comparison is one-directional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18",
+        "notes": "Proof 1.1\u20135.1, all fourteen dependencies and contract derivations/boundaries reviewed. Exact Young-rule supplier gives phi=K^T chi, and exact Kostka supplier gives h=K^T s in a smaller-to-larger dominance order. Applying ch and inverting K^T gives the same Specht label s_lambda; s_lambda=sum_mu (K^-1)_(mu,lambda) h_mu has the correct indices. Substituting integral cycle-distribution coefficients proves integrality of normalized p_rho/z_rho coefficients (character values), without incorrectly asserting ordinary p_rho coefficients integral. Complete irredundant Specht classification and Schur integral basis give the two claimed Z-bases. K_empty,empty=1 treats n=0; zeros in K and repeated parts are harmless. No AC is invoked. A degree-two check with K=[[1,0],[1,1]] gives s_(1,1)=h_1^2-h_2; the inverse row would give the false expression h_1^2. Macdonald (7.5)\u2013(7.8), printed p. 114, corroborate the dictionary and normalization. Current item equals post; repairs preserve the Statement."
+      }
+    },
+    "cor-irreducible-symmetric-group-character-values-are-power-sum-coefficients": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "source_section": "Statement",
+          "quote": "\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda\\in\\Lambda^n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-frobenius-characteristic-map",
+          "source_section": "Definition",
+          "quote": "\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hall-inner-product-on-symmetric-functions",
+          "source_section": "Definition",
+          "quote": "The **Hall inner product** is the graded $\\mathbb Z$-bilinear form on the stable ring $\\Lambda$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-power-sums-are-orthogonal-for-the-hall-inner-product",
+          "source_section": "Statement",
+          "quote": "\\langle p_\\lambda,p_\\mu\\rangle_H=\\delta_{\\lambda\\mu}z_\\lambda.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d11",
+          "claim": "Expanding ch(chi^lambda) gives s_lambda=sum_sigma chi^lambda(sigma)p_sigma/z_sigma.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d21",
+          "claim": "Pairing with p_rho gives <s_lambda,p_rho>=chi^lambda(rho).",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d31",
+          "claim": "The first display is step 2.1 and the second is the coefficient reading of step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For n=0, lambda=rho=empty and step 1.1 reads s_empty=chi^empty(empty)p_empty/z_empty with all conventions equal to 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The corollary is an identity for each pair (lambda,rho); the zero frequency case rho not a partition of n does not occur, and the coefficient vanishes automatically when chi^lambda(rho)=0, as in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps1.1 and2.1 read the trivial Specht character of shape(n) as value1 and coefficient1 in the normalized power-sum basis. For n>0 the ordinary coefficient of p_(n) is1/z_(n)=1/n, while the coefficient of p_(n)/z_(n) and the Hall pairing are1. The Statement includes n=0 with empty partition and unit coefficient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No degenerate parameter is present: n>=0 and lambda,rho range over partitions of n; z_rho>0 so the division in the basis p_rho/z_rho is defined. The Statement covers the degenerate case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement is for all n>=0; the lower endpoint n=0 is the empty case and there is no upper endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used: the computation is a finite coefficient comparison in an exhibited basis. The Statement covers the nonempty-choice case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Forward: step 2.1 derives chi^lambda(rho)=<s_lambda,p_rho> from the expansion of s_lambda."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Reverse: step 1.1 reads the same coefficient back as the coefficient of p_rho/z_rho, giving the equivalent second display."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18",
+        "notes": "Statement and Proof 1.1\u20133.1 checked against all four direct suppliers. Pairing the Specht characteristic with p_rho cancels z_rho and reads the coefficient of p_rho/z_rho, rather than the ordinary power-sum coefficient. Character values are integral by the completed Specht theorem. At n=0 both pairings and the normalized coefficient are 1; zero character values give zero coefficients. The equivalent displays imply each other by power-sum orthogonality and uniqueness of basis expansion. For the trivial positive-degree character the coefficient of p_(n) is 1/n, while its normalized coefficient is 1. Macdonald (7.7) is on printed p. 114, matching the repaired locator. Pre/post item and contract hashes differ and current item equals post; the Statement is unchanged."
+      }
+    },
+    "prop-regular-character-has-characteristic-p-one-to-the-n": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-frobenius-characteristic-map",
+          "source_section": "Definition",
+          "quote": "\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-character-of-the-regular-representation",
+          "source_section": "Statement",
+          "quote": "\\chi_{\\mathrm{reg}}(g)=\\begin{cases}|G|,&g=1,\\\\0,&g\\ne1.\\end{cases}",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "source_section": "Statement",
+          "quote": "Then there is a subrepresentation $U \\le V$ such that",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "source_section": "Statement",
+          "quote": "form a complete irredundant list, up to isomorphism, of finite-dimensional irreducible complex $S_n$-representations",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-distinct-specht-modules-are-inequivalent",
+          "source_section": "Statement",
+          "quote": "If $\\lambda,\\mu\\vdash n$ and $S^\\lambda\\cong S^\\mu$ as complex $S_n$-representations, then $\\lambda=\\mu$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product",
+          "source_section": "Statement",
+          "quote": "Then the multiplicity of $V_i$ in $V$ is",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-standard-inner-product-on-complex-class-functions",
+          "source_section": "Definition",
+          "quote": "\\langle\\varphi,\\psi\\rangle:=\\frac{1}{|G|}\\sum_{g\\in G}\\varphi(g)\\,\\overline{\\psi(g)}",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-standard-polytabloid-basis",
+          "source_section": "Statement",
+          "quote": "\\dim_{\\mathbb C}S^\\lambda=f^\\lambda",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "source_section": "Statement",
+          "quote": "\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda\\in\\Lambda^n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d11",
+          "claim": "The regular character is n! at 1 and 0 elsewhere, and z_(1^n)=n!.",
+          "step": "1.1",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "d12",
+          "claim": "The regular representation is completely reducible into Specht isotypic components, with multiplicities m_lambda=<chi_reg,chi^lambda>.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F2"
+          ]
+        },
+        {
+          "id": "d21",
+          "claim": "ch(chi_reg)=n! p_(1^n)/n!=p_1^n.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d22",
+          "claim": "Each multiplicity is f^lambda, hence chi_reg=sum_lambda f^lambda chi^lambda.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "d31",
+          "claim": "Applying ch gives p_1^n=sum_lambda f^lambda s_lambda.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F8",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For n=0, chi_reg is the trivial character of the trivial group, z_empty=1 and p_1^0=1=sum over the empty partition of f^empty s_empty; steps 2.1 and 3.1 are read with the empty product conventions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 records chi_reg(w)=0 for every w not the identity, and step 2.2's sum reduces to the identity term; the zero values away from 1 are the content of the regular character supplier."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the regular character of S_1 is the trivial character, ch(chi_reg)=p_1, and step 3.1 reads p_1=f^(1)s_(1)=s_(1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No degenerate parameter occurs; the only potential issue, division by z_(1^n), is resolved in step 1.1 where z_(1^n)=n! cancels the value n! at the identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The proposition is stated for every n>=0; the lower endpoint n=0 is the empty case, and there is no upper endpoint. The Statement covers the endpoints case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used: complete reducibility is Maschke's theorem over C and the multiplicities are computed by the published character inner product. The Statement covers the nonempty-choice case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition is an identity of characteristics with a Schur expansion, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted; the RSK sum-of-squares identity is explicitly not reproved."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18",
+        "notes": "Full Proof 1.1\u20133.1, facts, nine direct suppliers and contract reviewed. The finite regular-character supplier gives n! at identity and zero elsewhere, and z_(1^n)=n! yields ch(reg)=p_1^n. Maschke applies in characteristic zero to the finite-dimensional regular module; complete irredundant Specht classification and the character-inner-product multiplicity formula give m_lambda=conj(chi^lambda(1))=dim S^lambda=f^lambda. Applying the proved Specht dictionary gives the Schur expansion. Empty shape/S_0 gives p_1^0=1 and f^empty=1; n=1 gives p_1=s_(1). No unrestricted choice, circular dimension argument or RSK assumption occurs. Macdonald printed p. 114 gives the same expansion. No defect found; item and contract were untouched by the reader. No decision owed."
+      }
+    },
+    "prop-sign-twist-corresponds-to-the-omega-involution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-frobenius-characteristic-map",
+          "source_section": "Definition",
+          "quote": "\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "source_section": "Statement",
+          "quote": "$\\chi_{V\\otimes W}(g)=\\chi_V(g)\\,\\chi_W(g)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tensor-product-of-complex-representations",
+          "source_section": "Definition",
+          "quote": "**tensor product representation** $\\rho\\otimes\\sigma$ is the representation of $G$ on the complex tensor product",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-sign-representation-and-restriction-of-a-representation",
+          "source_section": "Definition",
+          "quote": "the **sign representation** over $k$ is the one-dimensional representation",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-sign-from-disjoint-cycle-structure",
+          "source_section": "Statement",
+          "quote": "A cycle of length $k$ has sign $(-1)^{k-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-omega-conjugates-schur-functions",
+          "source_section": "Statement",
+          "quote": "\\omega(h_r)=e_r,\\qquad \\omega(p_r)=(-1)^{r-1}p_r\\text{ in }\\Lambda_{\\mathbb Q}\\quad(r\\ge1),\\qquad \\omega(s_\\lambda)=s_{\\lambda'}",
+          "uses": [
+            "1.2",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "source_section": "Statement",
+          "quote": "\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda\\in\\Lambda^n",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-representations-are-determined-by-their-characters",
+          "source_section": "Statement",
+          "quote": "V\\cong W\\quad\\Longleftrightarrow\\quad\\chi_V=\\chi_W.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-frobenius-characteristic-is-an-isometry",
+          "source_section": "Statement",
+          "quote": "\\langle\\operatorname{ch}(f),\\operatorname{ch}(g)\\rangle_H=\\langle f,g\\rangle_{S_n}",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d11",
+          "claim": "The tensor-product character with the sign is chi_V(rho)(-1)^{n-ell(rho)} on cycle type rho.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d12",
+          "claim": "omega(p_rho)=(-1)^{n-ell(rho)}p_rho.",
+          "step": "1.2",
+          "inputs": [
+            "F4"
+          ]
+        },
+        {
+          "id": "d21",
+          "claim": "ch(chi_{V tensor sgn}) has p_rho-coefficient chi_V(rho)(-1)^{n-ell(rho)}/z_rho.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d22",
+          "claim": "omega(F) has the same p_rho-coefficient, so the two expansions agree.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "d31",
+          "claim": "Therefore ch(chi_{V tensor sgn})=omega(F) for every representation V.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "d41",
+          "claim": "For V=S^lambda this gives ch(chi_{S^lambda tensor sgn})=omega(s_lambda)=s_{lambda'}.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "d51",
+          "claim": "Injectivity of ch and characters determining representations give S^lambda tensor sgn isomorphic to S^{lambda'}, with the value identity",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Given allows n=0. Steps1.1 and1.2 have empty cycle product and exponent n-len(rho)=0, so the sign is1 and omega fixes constants. For a representation of S0 with arbitrary finite dimension d, steps2.1-3.1 preserve its characteristic d; the Specht specialization in step4.1 has d=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If V=0 then chi_V=0 and F=0; steps 2.1 and 2.2 give ch(0)=0=omega(0), so the zero representation is a consistent case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step1.1 tensors the one-dimensional trivial representation with sign, and steps2.1-3.1 identify its characteristic with omega(h_n)=e_n. Its input characteristic h_n follows from the normalized characteristic formula and one-row expansion; at n=0 both h0,e0 are1. No assertion that all positive-degree trivial characteristics are scalar1 is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The sign representation is one-dimensional, so V tensor sgn is again a finite-dimensional representation; the degenerate case of a nonfaithful V is covered since the argument only uses values of chi_V. The Statement covers the degenerate case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement is for every n>=0; the lower endpoint n=0 is the empty case and there is no upper endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used: omega is extended by linearity and the value computation is a finite sum over cycle types. The Statement covers the nonempty-choice case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The owned statement is an identity or isomorphism assertion, not an iff statement. Its injectivity and character-isomorphism uses are recorded in the derivations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The owned statement is an identity or isomorphism assertion, not an iff statement. Its injectivity and character-isomorphism uses are recorded in the derivations."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18",
+        "notes": "Full Proof 1.1\u20135.1, nine dependencies and contract checked. Tensor-character multiplication by sign gives (-1)^(n-ell(rho)), exactly omega(p_rho), so normalized coefficients agree. The supplied omega statement conjugates Schur labels; injectivity of ch and the finite-dimensional complex character-isomorphism iff then give S^lambda\u2297sgn\u2245S^(lambda-prime). Isomorphism\u21d2equal characters and equal characters\u21d2isomorphism both meet supplier hypotheses. Zero V gives zero; at n=0 V can have any finite dimension d and both characteristics equal d, while the Specht specialization has d=1. Trivial S_n has ch=h_n, and sign has e_n; only degree zero has h_0=e_0=1. No choice is used. Macdonald (2.13), printed p. 24, and \u00a77 Example 2, printed p. 116, exactly support the repaired source locator. Current item equals post, with reader source and contract corrections; Statement unchanged."
+      }
+    },
+    "thm-frobenius-characteristic-is-an-isometric-graded-ring-isomorphism": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-graded-ordinary-representation-ring-of-symmetric-groups",
+          "source_section": "Definition",
+          "quote": "R_S:=\\bigoplus_{n\\ge0}R(S_n),",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-outer-induction-product-for-symmetric-group-characters",
+          "source_section": "Definition",
+          "quote": "The **outer induction product** is",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-frobenius-characteristic-map",
+          "source_section": "Definition",
+          "quote": "\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-frobenius-characteristic-is-an-isometry",
+          "source_section": "Statement",
+          "quote": "\\langle\\operatorname{ch}(f),\\operatorname{ch}(g)\\rangle_H=\\langle f,g\\rangle_{S_n}",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-of-a-young-permutation-character-is-complete",
+          "source_section": "Statement",
+          "quote": "\\operatorname{ch}(\\varphi^\\lambda)=h_\\lambda\\in\\Lambda^n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-frobenius-characteristic-preserves-outer-products",
+          "source_section": "Statement",
+          "quote": "\\operatorname{ch}(f\\circ g)=\\operatorname{ch}(f)\\,\\operatorname{ch}(g)",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-elementary-and-complete-families-freely-generate-the-stable-ring",
+          "source_section": "Statement",
+          "quote": "for every $d\\ge0$ the families $\\{e_\\lambda:\\lambda\\vdash d\\}$ and $\\{h_\\lambda:\\lambda\\vdash d\\}$ are $\\mathbb Z$-bases of $\\Lambda^d$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-youngs-rule-for-permutation-modules",
+          "source_section": "Statement",
+          "quote": "**(Isomorphism type.)** $M^\\mu$ is completely reducible and there is an isomorphism of $\\mathbb C S_n$-modules",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "source_section": "Statement",
+          "quote": "$\\chi_{V\\oplus W}(g)=\\chi_V(g)+\\chi_W(g)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-kostka-change-of-basis-is-dominance-unitriangular",
+          "source_section": "Statement",
+          "quote": "Moreover, $K_{\\lambda\\mu}=0$ unless $\\lambda\\unrhd\\mu$, and $K_{\\mu\\mu}=1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "source_section": "Statement",
+          "quote": "Then there is a subrepresentation $U \\le V$ such that",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "source_section": "Statement",
+          "quote": "form a complete irredundant list, up to isomorphism, of finite-dimensional irreducible complex $S_n$-representations",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-distinct-specht-modules-are-inequivalent",
+          "source_section": "Statement",
+          "quote": "If $\\lambda,\\mu\\vdash n$ and $S^\\lambda\\cong S^\\mu$ as complex $S_n$-representations, then $\\lambda=\\mu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-virtual-character-and-character-ring-of-a-finite-group",
+          "source_section": "Definition",
+          "quote": "A **virtual character** of $G$ is an integral linear combination of irreducible complex characters",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "source_section": "Definition",
+          "quote": "The **column antisymmetrizer**, **polytabloid**, and **Specht space** are",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d11",
+          "claim": "Young's rule gives phi=K^T chi, so chi^lambda=sum_mu (K^-1)_{mu lambda}phi^mu. Applying ch gives an integral h-basis expansion and proves ch(R(S_n)) is contained in Lambda^n without assuming the ring axioms for the outer product.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F8",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "d12",
+          "claim": "ch is injective on R_S because each degree component is detected by the positive-definite isometry.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "d13",
+          "claim": "ch is multiplicative on homogeneous pieces and carries the unit to 1; bilinearity gives the general case.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "d21",
+          "claim": "The image contains the h-basis of Lambda, hence equals Lambda by step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d31",
+          "claim": "ch is a degree-preserving Z-isomorphism, multiplicative with unit, so R_S is a commutative graded ring and ch a graded ring isomorphism.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d41",
+          "claim": "Scalar extension of the Z-module isomorphism gives isomorphisms over Q and C.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At degree zero the map is R(S_0)=Z*1 -> Lambda^0=Z, 1 maps to 1 by step 1.3, and the empty partition conventions z_empty=p_empty=1 make the isometry and injectivity read correctly in step 1.2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the kernel of ch is zero; the zero element has all components zero and the unit statement in step 1.3 is the nonzero unit of the ring."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 records ch of the trivial character of S_0 equals 1, the unit of Lambda, and multiplicativity with the outer product is normalized accordingly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof never divides by a character degree or assumes S_n nontrivial; degrees n=0,1 are covered by the empty and unit conventions, and step 1.1 uses only the exhibited bases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All homogeneous degrees n>=0 are included, with degree zero checked in step 1.3. Tensoring in step 4.1 changes scalars, not the degree range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used: Young's rule, the integral Kostka inverse, the isometry and the h-basis are all published choice-free inputs. The Statement covers the nonempty-choice case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The owned statement is an identity or isomorphism assertion, not an iff statement. Its injectivity and character-isomorphism uses are recorded in the derivations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The owned statement is an identity or isomorphism assertion, not an iff statement. Its injectivity and character-isomorphism uses are recorded in the derivations."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18",
+        "notes": "Full Proof 1.1\u20134.1 and all fifteen dependencies reviewed. The proof establishes integral image independently of the later label theorem: phi=K^T chi gives chi^lambda=sum_mu (K^-1)_(mu,lambda) phi^mu, hence integral h-coordinates. Isometry gives degreewise injectivity; each h_mu is the characteristic of an actual Young permutation character, giving surjectivity. Finite support justifies the double sum for arbitrary elements. Multiplicativity and injectivity transport associativity, commutativity, distributivity and unit from Lambda; the Given uses a graded abelian group, without assuming the ring axioms. Tensoring a map and its inverse preserves isomorphism over Q and C; degree zero is Z\u2192Z with 1\u21921 and no completion occurs. The same-degree Hermitian isometry extends to the direct sum by orthogonality of distinct degrees. No arbitrary choice is needed. Macdonald (7.3) and full proof, printed pp. 113\u2013114, agree. Reader inverse-Kostka, premise and source corrections are accepted; Statement unchanged, current item equals post."
+      }
+    },
+    "cex-outer-induction-is-not-the-kronecker-product": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-outer-induction-product-for-symmetric-group-characters",
+          "source_section": "Definition",
+          "quote": "The **outer induction product** is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-frobenius-formula-for-induced-characters",
+          "source_section": "Statement",
+          "quote": "\\operatorname{Ind}_H^G\\chi(g) = \\frac1{|H|} \\sum_{\\substack{x\\in G\\\\x^{-1}gx\\in H}} \\chi(x^{-1}gx)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-frobenius-characteristic-map",
+          "source_section": "Definition",
+          "quote": "\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-frobenius-characteristic-preserves-outer-products",
+          "source_section": "Statement",
+          "quote": "\\operatorname{ch}(f\\circ g)=\\operatorname{ch}(f)\\,\\operatorname{ch}(g)",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "source_section": "Statement",
+          "quote": "\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda\\in\\Lambda^n",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "source_section": "Statement",
+          "quote": "form a complete irredundant list, up to isomorphism, of finite-dimensional irreducible complex $S_n$-representations",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-distinct-specht-modules-are-inequivalent",
+          "source_section": "Statement",
+          "quote": "If $\\lambda,\\mu\\vdash n$ and $S^\\lambda\\cong S^\\mu$ as complex $S_n$-representations, then $\\lambda=\\mu$.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "source_section": "Definition",
+          "quote": "The **column antisymmetrizer**, **polytabloid**, and **Specht space** are",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+          "source_section": "Statement",
+          "quote": "s_\\lambda=\\det\\bigl(h_{\\lambda_i-i+j}\\bigr)_{1\\le i,j\\le r}=\\det\\bigl(e_{\\lambda'_i-i+j}\\bigr)_{1\\le i,j\\le c}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-omega-conjugates-schur-functions",
+          "source_section": "Statement",
+          "quote": "\\omega(h_r)=e_r,\\qquad \\omega(p_r)=(-1)^{r-1}p_r\\text{ in }\\Lambda_{\\mathbb Q}\\quad(r\\ge1),\\qquad \\omega(s_\\lambda)=s_{\\lambda'}",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-complete-homogeneous-expansion-in-power-sums",
+          "source_section": "Statement",
+          "quote": "h_\\lambda=\\sum_{\\rho\\vdash|\\lambda|}N(\\lambda,\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-tensor-product-of-complex-representations",
+          "source_section": "Definition",
+          "quote": "**tensor product representation** $\\rho\\otimes\\sigma$ is the representation of $G$ on the complex tensor product",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "source_section": "Statement",
+          "quote": "$\\chi_{V\\otimes W}(g)=\\chi_V(g)\\,\\chi_W(g)$",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-complex-representations-are-determined-by-their-characters",
+          "source_section": "Statement",
+          "quote": "V\\cong W\\quad\\Longleftrightarrow\\quad\\chi_V=\\chi_W.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d11",
+          "claim": "The induced character of the trivial character of the trivial subgroup has values 2 at the identity and 0 at the transposition.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d12",
+          "claim": "ch of the trivial character of S_1 is p_1, so ch of the outer square is p_1^2.",
+          "step": "1.2",
+          "inputs": [
+            "F3"
+          ]
+        },
+        {
+          "id": "d13",
+          "claim": "h_2=(p_1^2+p_2)/2, e_2=(p_1^2-p_2)/2 and h_2+e_2=p_1^2.",
+          "step": "1.3",
+          "inputs": [
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "d14",
+          "claim": "The tensor product of the two one-dimensional trivial S_1 representations has dimension 1 and remains in homogeneous degree 1, with character value 1 at the identity.",
+          "step": "1.4",
+          "inputs": [
+            "F8"
+          ]
+        },
+        {
+          "id": "d21",
+          "claim": "Jacobi-Trudi gives s_(2)+s_(1,1)=h_2+e_2=p_1^2.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "d22",
+          "claim": "chi^(2)=(1,1) and chi^(1,1)=(1,-1) on the two cycle types of S_2.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "d31",
+          "claim": "ch(1_1 composed with 1_1)=p_1^2=s_(2)+s_(1,1).",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "d41",
+          "claim": "The induced character equals chi^(2)+chi^(1,1), so the induced module is S^(2) direct sum S^(1,1) and the outer coefficient is a multiplicity over S_2.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F9",
+            "step 1.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "d51",
+          "claim": "The outer product is a degree-2 element of R(S_2) while the Kronecker product of two S_1-representations is a degree-1 element of R(S_1); the operations differ.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.4",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The counterexample uses the smallest nonempty case m=n=1; the empty case is not needed because the refuted claim already fails there."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 nondegeneracy: the induced character value 0 at the transposition is exactly why the two operations cannot coincide; the zero value is used as evidence, not as an excluded case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The whole counterexample is the n=1 case: 1_1 composed with 1_1 has degree 2 and value 2 at the identity, while the tensor product of two trivial S_1-representations has degree 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The subgroup S_1 x S_1 is trivial, the degenerate extreme of the Young subgroup construction, and step 1.1 shows the construction still produces the well-defined character (2,0)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Counterexample fixes n=1: steps1.1 and1.4 produce respectively the S2 character(2,0) and the one-dimensional S1 character, and step5.1 concludes they differ. At n=0 both products reduce to the degree-zero unit by the defining outer/tensor operations, which does not invalidate the explicitly supplied n=1 witness."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used: the Frobenius sum ranges over the two elements of S_2 and all other computations are finite. The Statement covers the nonempty-choice case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes an identification claim rather than asserting an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted; the counterexample exhibits one failure of the claimed equality."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18",
+        "notes": "Full Statement refuted, Counterexample 1.1\u20135.1, fifteen suppliers and contract reviewed. For the chosen two one-dimensional trivial S_1 modules, induction from H={1} to S_2 gives values (2,0), while their same-group tensor has dimension and degree 1. Normalized coefficients and Jacobi\u2013Trudi give h_2+e_2=p_1^2=s_(2)+s_(1,1); both Specht characters (1,1) and (1,-1) yield the asserted decomposition, so the outer coefficient is a multiplicity after induction to S_2. Group domains and homogeneous degrees are kept explicit; n=0 is allowed for the family and the products then agree, without weakening the failure at n=1. No choice is used. Macdonald outer product pp. 112\u2013114 and internal product pp. 115\u2013116 support the source distinction. The repaired Statement qualifies the original witness without changing the commissioned counterexample; this B-page item has no dependency/reference consumer in the owned batch. Current item equals post. Reader witness, degree and locator corrections are accepted."
+      }
+    },
+    "ex-frobenius-characteristic-dictionary-for-s3": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+          "source_section": "Statement",
+          "quote": "s_\\lambda=\\det\\bigl(h_{\\lambda_i-i+j}\\bigr)_{1\\le i,j\\le r}=\\det\\bigl(e_{\\lambda'_i-i+j}\\bigr)_{1\\le i,j\\le c}",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-complete-homogeneous-expansion-in-power-sums",
+          "source_section": "Statement",
+          "quote": "h_\\lambda=\\sum_{\\rho\\vdash|\\lambda|}N(\\lambda,\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-omega-conjugates-schur-functions",
+          "source_section": "Statement",
+          "quote": "\\omega(h_r)=e_r,\\qquad \\omega(p_r)=(-1)^{r-1}p_r\\text{ in }\\Lambda_{\\mathbb Q}\\quad(r\\ge1),\\qquad \\omega(s_\\lambda)=s_{\\lambda'}",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "source_section": "Statement",
+          "quote": "\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda\\in\\Lambda^n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-irreducible-symmetric-group-character-values-are-power-sum-coefficients",
+          "source_section": "Statement",
+          "quote": "\\chi^\\lambda(\\rho)=\\langle s_\\lambda,p_\\rho\\rangle_H",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-standard-polytabloid-basis",
+          "source_section": "Statement",
+          "quote": "\\dim_{\\mathbb C}S^\\lambda=f^\\lambda",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d11",
+          "claim": "z_(1^3)=6, z_(2,1)=2, z_(3)=3 and hence h_1=p_1, h_2=(p_1^2+p_2)/2, h_3=(p_1^3+3p_1p_2+2p_3)/6.",
+          "step": "1.1",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "d12",
+          "claim": "s_(3)=h_3, s_(2,1)=h_2h_1-h_3 and s_(1,1,1)=e_3=omega(h_3).",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "d13",
+          "claim": "f^(3)=f^(1,1,1)=1 and f^(2,1)=2.",
+          "step": "1.3",
+          "inputs": [
+            "F5"
+          ]
+        },
+        {
+          "id": "d21",
+          "claim": "The three power-sum expansions displayed in the Example.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "d22",
+          "claim": "Reading the normalized coefficients of p_(1^3)/6, p_(2,1)/2 and p_(3)/3 gives the character rows (1,1,1), (2,0,-1), (1,-1,1).",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "d31",
+          "claim": "The identity-column sum is 6; weighted row squared norms are (1,1,1) and distinct weighted row products vanish. Column squared norms are (6,2,3)=z_rho and all distinct column products vanish.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a fixed-degree example at n=3; no empty-shape instance of the example is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step3_modular_scope_repair",
+            "reason": "The Example and Given fix the three partitions of3 and the three cycle types ofS3. Steps1.1-3.1 compute their specific Schur expansions and normalized character rows; step1.3 has Specht dimensions1,2,1, and step4.1 verifies the six-element character-table orthogonality. The empty partition has size0 and is not any of these degree-three inputs; a zero carrier would also have identity character0, unlike the displayed degrees. The unit h0 in the Jacobi-Trudi minor is a coefficient convention, not an empty-shape instance of this fixed table. Normalization has erased the fixed degree from the repeated row; its not_applicable empty-shape claim is true.",
+            "item_sha256": "8daeb75475b62a09bdfd3b0d12a2381c88020814fd041f7af7c4560a3da6d1e8",
+            "row_sha256": "045e64781d6aa8d63b43564d5a973b4305180a0791b21159dade120d31c92189"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero character value chi^(2,1)(2,1)=0 is computed in step 3.1 and used in the row and column checks of step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The degrees f^lambda are 1,2,1 by step 1.3 and the trivial and sign characters have values of modulus one, checked in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The partition (1,1,1) is the totally degenerate column shape; its Schur function is e_3=omega(h_3) by step 1.2 and is expanded correctly in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cycle type (1^3) is the lower endpoint of the dominance order on partitions of 3 and (3) the upper endpoint; both appear in the table of step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used: all computations are finite polynomial manipulations in Lambda_Q. The Statement covers the nonempty-choice case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a computation, not an iff assertion. Orthogonality is verified in step 4.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a computation, not an iff assertion. Orthogonality is verified in step 4.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18",
+        "notes": "Full Example, Verification 1.1\u20134.1, six supplier statements and contract reviewed. Jacobi\u2013Trudi and omega give (h_3,h_2h_1-h_3,e_3) and the displayed expansions; multiplying ordinary coefficients by z=(6,2,3) gives rows (1,1,1),(2,0,-1),(1,-1,1). Standard tableaux counts are 1,2,1: the middle shape has precisely the two choices for its upper-right entry after placing 1 in the upper-left. Exact rational arithmetic independently gives weighted row Gram I_3 and column Gram diag(6,2,3), with all off-diagonals zero, and identity-column sum 6. This validates the repaired normalized-coefficient wording and each row norm, as well as the added column check. Vanishing middle transposition value is included; this fixed n=3 example asserts no empty-degree instance. Macdonald (7.5)\u2013(7.7) gives the exact dictionary used. No AC. Item and contract changed pre/post, current item equals post; Example unchanged."
+      }
+    },
+    "ex-sign-twist-conjugates-the-s31-character": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+          "source_section": "Statement",
+          "quote": "s_\\lambda=\\det\\bigl(h_{\\lambda_i-i+j}\\bigr)_{1\\le i,j\\le r}=\\det\\bigl(e_{\\lambda'_i-i+j}\\bigr)_{1\\le i,j\\le c}",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-complete-homogeneous-expansion-in-power-sums",
+          "source_section": "Statement",
+          "quote": "h_\\lambda=\\sum_{\\rho\\vdash|\\lambda|}N(\\lambda,\\rho)\\,\\frac{p_\\rho}{z_\\rho}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-omega-conjugates-schur-functions",
+          "source_section": "Statement",
+          "quote": "\\omega(h_r)=e_r,\\qquad \\omega(p_r)=(-1)^{r-1}p_r\\text{ in }\\Lambda_{\\mathbb Q}\\quad(r\\ge1),\\qquad \\omega(s_\\lambda)=s_{\\lambda'}",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "source_section": "Statement",
+          "quote": "\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda\\in\\Lambda^n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-irreducible-symmetric-group-character-values-are-power-sum-coefficients",
+          "source_section": "Statement",
+          "quote": "\\chi^\\lambda(\\rho)=\\langle s_\\lambda,p_\\rho\\rangle_H",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-sign-from-disjoint-cycle-structure",
+          "source_section": "Statement",
+          "quote": "A cycle of length $k$ has sign $(-1)^{k-1}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-sign-twist-corresponds-to-the-omega-involution",
+          "source_section": "Statement",
+          "quote": "S^\\lambda\\otimes\\operatorname{sgn}\\cong S^{\\lambda'}",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d11",
+          "claim": "The centralizer orders of the five cycle types of S_4 are 24,4,8,3,4, giving the expansions of h_4 and e_4.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d12",
+          "claim": "s_(3,1)=h_3h_1-h_4 and s_(2,1,1)=e_3e_1-e_4.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "d21",
+          "claim": "The two power-sum expansions s_(3,1)=(p_1^4+2p_1^2p_2-p_2^2-2p_4)/8 and s_(2,1,1)=(p_1^4-2p_1^2p_2-p_2^2+2p_4)/8.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "d22",
+          "claim": "chi^(3,1)=(3,1,-1,0,-1) and chi^(2,1,1)=(3,-1,-1,0,1).",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "d31",
+          "claim": "Multiplying by the sign values turns chi^(3,1) into chi^(2,1,1), matching the module isomorphism S^(3,1) tensor sgn = S^(2,1,1) and omega(s_(3,1))=s_(2,1,1).",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a fixed-degree example at n=4; no empty-shape instance of the example is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step3_modular_scope_repair",
+            "reason": "Here the stated witness is the conjugate Specht pair(3,1) and(2,1,1), each with four boxes. Step2.1 gives their explicit degree-four power-sum polynomials; step3.1 gives identity values3 for both; step4.1 multiplies the five actual S4 cycle-type values by sign and verifies the module relation. Replacing either carrier by the zero representation would contradict that identity value and replacing its shape by the empty partition would change the symmetric-group degree. This example does not vary the degree or quantify over arbitrary representations; the general sign-twist supplier handles its own degree-zero case. Thus the original empty-shape exclusion is a correct fixed-witness disposition, not an omitted zero-module hypothesis.",
+            "item_sha256": "d85c9f7c260087381e7250796841e6bcd456aa3daee95f4758ecc4a44b1df408",
+            "row_sha256": "5a05d8e8b4a1a83c337159b224fa81ac0139bec751760cfec9b375d782ea5e18"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero entries chi^(3,1)(3,1)=0 and chi^(2,1,1)(3,1)=0 are computed in step 3.1 and are preserved by the sign multiplication."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 lists sign values (+1,-1,+1,+1,-1); at the identity this preserves the degree 3 of both characters."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The self-conjugate and single-column degenerate shapes are not the witness; the pair (3,1)/(2,1,1) is nondegenerate and illustrates the involution omega(s_lambda)=s_{lambda'}. The Statement covers the degenerate case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cycle types (1^4) and (4) are the endpoints of the dominance order on partitions of 4 and both appear with their computed values in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used: the computation is finite polynomial algebra in Lambda_Q. The Statement covers the nonempty-choice case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a verification of an identity, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted; the sign-twist isomorphism and character relation are used in step 4.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18",
+        "notes": "Full Example and Verification 1.1\u20134.1, seven direct suppliers and changed contract reviewed. For cycle types (1^4),(2,1,1),(2,2),(3,1),(4), z=(24,4,8,3,4). Jacobi\u2013Trudi yields s_(3,1)=h_3h_1-h_4 and the dual formula yields s_(2,1,1)=e_3e_1-e_4. Exact rational coefficient subtraction and normalization give (3,1,-1,0,-1); signs (1,-1,1,1,-1) give (3,-1,-1,0,1). Both expansions, module labels and dimensions therefore agree with the completed sign-twist supplier; the 3-cycle value remains zero. This is a fixed n=4 example, so an empty-shape instance is inapplicable. No AC. Macdonald (2.13) and (7.5)\u2013(7.7) support the sign and normalized-coefficient rules. Item hashes pre/post/current are identical; the contract-only boundary repair is accepted."
+      }
+    },
+    "ex-young-permutation-characteristic-for-shape-two-one": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-characteristic-of-a-young-permutation-character-is-complete",
+          "source_section": "Statement",
+          "quote": "\\operatorname{ch}(\\varphi^\\lambda)=h_\\lambda\\in\\Lambda^n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-elementary-and-complete-families-freely-generate-the-stable-ring",
+          "source_section": "Statement",
+          "quote": "for every $d\\ge0$ the families $\\{e_\\lambda:\\lambda\\vdash d\\}$ and $\\{h_\\lambda:\\lambda\\vdash d\\}$ are $\\mathbb Z$-bases of $\\Lambda^d$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-character-of-a-permutation-representation-counts-fixed-points",
+          "source_section": "Statement",
+          "quote": "Then the character of $\\mathbb C^{(X)}$ is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-youngs-rule-for-permutation-modules",
+          "source_section": "Statement",
+          "quote": "**(Isomorphism type.)** $M^\\mu$ is completely reducible and there is an isomorphism of $\\mathbb C S_n$-modules",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-semistandard-tableau-and-kostka-number",
+          "source_section": "Definition",
+          "quote": "The **Kostka number** $K_{\\lambda,\\mu}$ is the number of semistandard tableaux of shape $\\lambda$ and content $\\mu$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-kostka-change-of-basis-is-dominance-unitriangular",
+          "source_section": "Statement",
+          "quote": "Moreover, $K_{\\lambda\\mu}=0$ unless $\\lambda\\unrhd\\mu$, and $K_{\\mu\\mu}=1$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "ex-frobenius-characteristic-dictionary-for-s3",
+          "source_section": "Example",
+          "quote": "s_{(3)}=h_3=\\frac{p_1^3+3p_1p_2+2p_3}{6},\\qquad s_{(2,1)}=h_2h_1-h_3=\\frac{p_1^3-p_3}{3}",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d11",
+          "claim": "The character of M^(2,1) takes the values (3,1,0) on cycle types (1^3),(2,1),(3).",
+          "step": "1.1",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "d12",
+          "claim": "ch(phi^(2,1))=h_2h_1.",
+          "step": "1.2",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d13",
+          "claim": "The Kostka numbers are 1,1,0, so Young's rule gives M^(2,1) composed of S^(3) and S^(2,1).",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "d21",
+          "claim": "h_2h_1=(p_1^3+p_1p_2)/2=s_(3)+s_(2,1), matching ch(phi^(2,1)).",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "d22",
+          "claim": "chi^(3)+chi^(2,1)=(3,1,0), the values of phi^(2,1).",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d31",
+          "claim": "Both routes agree: the direct fixed-tabloid character and the Young's-rule decomposition match the dictionary expansion h_2h_1=s_(3)+s_(2,1).",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 1.3",
+            "step 2.1",
+            "step 2.2",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a fixed-degree example at n=3; no empty-shape instance of the example is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step3_modular_scope_repair",
+            "reason": "The supplied shape is specifically(2,1), not an arbitrary partition. Step1.1 explicitly lists all three tabloids, making its permutation module nonempty and of dimension3; step1.3 gives Kostka multiplicities1,1,0 and step3.1 the nonzero decomposition S(3) plus S(2,1). An empty shape belongs to degree0 and cannot replace this supplied Young module. There is an empty derived fixed-tabloid set for the three-cycle, but step1.1 explicitly proves its count0, and step2.2 checks the same zero character value; the existing zero row records that computation. Keeping empty-shape not_applicable therefore does not conceal the empty fixed-point set or permit substitution of a zero representation. Its proof route differs from both the irreducible S3 table and the S4 sign pair.",
+            "item_sha256": "26494c9e4d7baeda8c73f92321a670bb150ae51a14cf2cac5e3a754fa2799ae3",
+            "row_sha256": "045e64781d6aa8d63b43564d5a973b4305180a0791b21159dade120d31c92189"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The value 0 at the 3-cycle is computed directly in step 1.1 (no invariant 2-element subset) and matches chi^(3)(3)+chi^(2,1)(3)=1-1=0 in step 2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The identity value 3 is the permutation-module degree, equal to the number of (2,1)-tabloids, and equals 1+2 by steps 1.1, 1.3 and 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The shape (2,1) has distinct parts. Repetition occurs in content (2,1), which has two entries labelled 1: they may share a row but cannot share a column. The explicit tableaux in step 1.3 give Kostka numbers 1,1,0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cycle types (1^3) and (3) are the dominance endpoints on partitions of 3, and both are used in steps 1.1 and 2.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used: the tabloid list is finite and explicit and all expansions are finite polynomial identities. The Statement covers the nonempty-choice case with its exact hypotheses; none of them invokes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies two computations agree, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse claim is made; the agreement of the two routes is a consistency check."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18",
+        "notes": "Full Example, Verification 1.1\u20133.1, seven cited dependencies and contract reviewed after the S3 supplier. The three tabloids are indexed by their singleton second row. Identity fixes three, a transposition fixes one and a 3-cycle fixes none, giving (3,1,0). Explicit semistandard tableaux of content (2,1) give Kostka counts 1,1,0: repeated label 1 may share the length-two row but cannot share a column. Shape (2,1) itself has distinct parts. Young rule gives S^(3)\u2295S^(2,1); the completed S3 table gives the same character and h_2h_1=s_(3)+s_(2,1) by exact polynomial arithmetic. Fixed degree n=3 has no empty-shape instance; zero 3-cycle values and one-copy multiplicities are included. No AC is used. Macdonald proof of (7.3), printed p. 114, supplies ch(phi)=h. Item pre/post/current is unchanged and contract changed; the false repeated-part boundary was corrected without editing the sound Example."
+      }
+    }
+  }
+}

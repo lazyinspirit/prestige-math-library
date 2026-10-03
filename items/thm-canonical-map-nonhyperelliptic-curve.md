@@ -66,8 +66,7 @@ sources:
     - title: "MIT 18.725 Algebraic Geometry (Fall 2015) course notes, Lectures 24-25"
       url: "https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf"
 verification:
-  audited: 2026-10-02
-  precheck: pass
+  repair: research/frontier-38-owner-30-published-format-surface-thm-canonical-map-nonhyperelliptic-curve-receipt.json
 ---
 
 ## Statement
@@ -227,241 +226,28 @@ chart its defining ideal lies in every prime, hence in the nilradical zero.
 Work first over $\bar k$ for the point and tangent calculations. The
 conclusions about the canonical bundle and its sections transport by [F6].
 
-1.1 (No canonical base point.)
-Suppose a geometric point $p$ were a base
-point of $|K_C|$. Then $h^0(\omega_C(-p))=g$. By Serre duality [F1],
-$h^1(\mathcal O_C(p))=g$, and Riemann--Roch [F2] gives
-$l(p)=1+1-g+g=2$. Since $l(0)=1$, there is a nonconstant function with
-poles bounded by $p$. A nonconstant function on a proper curve has a pole,
-so its pole divisor has degree one. By [F7] it gives a degree-one map to
-$\mathbf P^1_{\bar k}$ and hence an isomorphism, contradicting $g\ge2$.
-Thus the canonical system is base-point-free over $\bar k$ and, by [F6],
-over $k$.
-[F1, F2, F4, F6, F7, F8]
+1.1 (No canonical base point.) Suppose a geometric point $p$ were a base point of $|K_C|$. Then $h^0(\omega_C(-p))=g$. By Serre duality [F1], $h^1(\mathcal O_C(p))=g$, and Riemann--Roch [F2] gives $l(p)=1+1-g+g=2$. Since $l(0)=1$, there is a nonconstant function with poles bounded by $p$. A nonconstant function on a proper curve has a pole, so its pole divisor has degree one. By [F7] it gives a degree-one map to $\mathbf P^1_{\bar k}$ and hence an isomorphism, contradicting $g\ge2$. Thus the canonical system is base-point-free over $\bar k$ and, by [F6], over $k$. [F1, F2, F4, F6, F7, F8]
 
-2.1 (Canonical map.)
-By [F3], the full canonical space has dimension $g$;
-by [F5] and step 1.1 its generating sections define
-$\phi_K:C\to\mathbf P^{g-1}_k$ with
-$\phi_K^*\mathcal O(1)\cong\omega_C$. The same construction identifies
-canonical divisors with hyperplane pullbacks. This proves assertion (1).
-[F3, F5, F8, step 1.1]
+2.1 (Canonical map.) By [F3], the full canonical space has dimension $g$; by [F5] and step 1.1 its generating sections define $\phi_K:C\to\mathbf P^{g-1}_k$ with $\phi_K^*\mathcal O(1)\cong\omega_C$. The same construction identifies canonical divisors with hyperplane pullbacks. This proves assertion (1). [F3, F5, F8, step 1.1]
 
-2.2 (Failure to separate points.)
-Over $\bar k$, let $p\ne q$ be geometric
-points. If the canonical sections fail to separate them, their evaluation
-map to the two one-dimensional fibers has rank one: each component is
-nonzero by base-point-freeness. Its kernel is
-$H^0(\omega_C(-p-q))$, so this space has dimension $g-1$. Duality [F1]
-gives $h^1(\mathcal O_C(p+q))=g-1$, and Riemann--Roch [F2] gives
-$h^0(\mathcal O_C(p+q))=2$.
-[F1, F2, F4, step 1.1]
+2.2 (Failure to separate points.) Over $\bar k$, let $p\ne q$ be geometric points. If the canonical sections fail to separate them, their evaluation map to the two one-dimensional fibers has rank one: each component is nonzero by base-point-freeness. Its kernel is $H^0(\omega_C(-p-q))$, so this space has dimension $g-1$. Duality [F1] gives $h^1(\mathcal O_C(p+q))=g-1$, and Riemann--Roch [F2] gives $h^0(\mathcal O_C(p+q))=2$. [F1, F2, F4, step 1.1]
 
-2.3 (Failure to separate a tangent.)
-At a geometric point $p$, the first-jet
-evaluation has target the two-dimensional restriction of $\omega_C$ to
-$2p$. Base-point-freeness makes its value component nonzero. If the tangent
-direction is not separated, this map has rank one, and its kernel
-$H^0(\omega_C(-2p))$ has dimension $g-1$. By [F1],
-$h^1(\mathcal O_C(2p))=h^0(\omega_C(-2p))=g-1$; Riemann--Roch [F2] then
-gives $h^0(\mathcal O_C(2p))=2$.
-[F1, F2, F4, step 1.1]
+2.3 (Failure to separate a tangent.) At a geometric point $p$, the first-jet evaluation has target the two-dimensional restriction of $\omega_C$ to $2p$. Base-point-freeness makes its value component nonzero. If the tangent direction is not separated, this map has rank one, and its kernel $H^0(\omega_C(-2p))$ has dimension $g-1$. By [F1], $h^1(\mathcal O_C(2p))=h^0(\omega_C(-2p))=g-1$; Riemann--Roch [F2] then gives $h^0(\mathcal O_C(2p))=2$. [F1, F2, F4, step 1.1]
 
-3.1 (The resulting degree-two map.)
-In either step 2.2 or 2.3, the resulting
-two-dimensional Riemann--Roch space contains a nonconstant function. Its
-pole divisor is bounded by the effective divisor of degree two used there.
-It cannot have degree zero, and degree one would make $C_{\bar k}$
-isomorphic to $\mathbf P^1_{\bar k}$ by [F7], contradicting $g\ge2$. Its
-pole divisor therefore has degree two, and [F7] gives a degree-two map to
-$\mathbf P^1_{\bar k}$. It follows that a geometrically nonhyperelliptic
-curve separates every pair of geometric points and every tangent direction.
-[F1, F2, F4, F7, step 2.2, step 2.3]
+3.1 (The resulting degree-two map.) In either step 2.2 or 2.3, the resulting two-dimensional Riemann--Roch space contains a nonconstant function. Its pole divisor is bounded by the effective divisor of degree two used there. It cannot have degree zero, and degree one would make $C_{\bar k}$ isomorphic to $\mathbf P^1_{\bar k}$ by [F7], contradicting $g\ge2$. Its pole divisor therefore has degree two, and [F7] gives a degree-two map to $\mathbf P^1_{\bar k}$. It follows that a geometrically nonhyperelliptic curve separates every pair of geometric points and every tangent direction. [F1, F2, F4, F7, step 2.2, step 2.3]
 
-3.2 (Properness and the generic fiber.)
-Assume $g\ge3$ and work over
-$\bar k$. The canonical map is nonconstant because
-$\deg\omega_C=2g-2>0$. Its target projective space is separated, so [F10]
-makes it proper. Let $Y$ be its scheme-theoretic image. The source and image
-are integral. Choose a standard projective chart containing the generic point
-of $Y$. Nonconstancy supplies a nonconstant affine coordinate ratio
-$h\in\bar k(Y)$ on that chart. The dominant map $C_{\bar k}\to Y$
-embeds function fields by [F13], so regard $h$ as a nonconstant element of
-$\bar k(C)$. Since $\bar k$ is
-algebraically closed in $\bar k(C)$ by [F16], this nonconstant $h$ is
-transcendental over $\bar k$. Thus
-$\operatorname{trdeg}_{\bar k}\bar k(Y)=1$: it is at least one from
-$h$, and at most one from the inclusion
-$\bar k(Y)\hookrightarrow\bar k(C)$. The affine-domain dimension formula
-in [F16] on the chart shows that $Y$ is an integral curve. The function
-field $\bar k(C)$ is finitely generated of transcendence degree one, so
-$\bar k(C)/\bar k(h)$ is algebraic and finitely generated, hence finite
-by [F17]. Since
-$\bar k(h)\subseteq\bar k(Y)\subseteq\bar k(C)$, the generic-fiber
-residue extension $\bar k(C)/\bar k(Y)$ is finite.
-The generic point of $C$ maps to the generic point of $Y$. No closed point
-of $C$ maps to that generic point, since the morphism is proper and
-therefore sends the closed singleton of a closed point to a closed subset.
-Thus the generic fiber has just the source generic point, which is isolated,
-with the finite residue extension just proved. For a closed point $y\in Y$,
-the fiber is a proper closed subset of $C$: it cannot contain the generic
-point, which maps to the generic point of $Y$. By [F12] its support is a
-finite set of closed points. For each such point $p$, both $\kappa(p)$
-and $\kappa(y)$ are finite over $\bar k$ by [F15], so
-$\kappa(p)/\kappa(y)$ is finite; the points of this finite fiber are
-isolated. Hence every point is isolated in its fiber with finite residue
-extension, and the published fiber criterion [F11] makes the canonical map
-quasi-finite. Proper plus quasi-finite makes it finite.
-[F10, F11, F12, F13, F15, F16, F17, step 2.1]
+3.2 (Properness and the generic fiber.) Assume $g\ge3$ and work over $\bar k$. The canonical map is nonconstant because $\deg\omega_C=2g-2>0$. Its target projective space is separated, so [F10] makes it proper. Let $Y$ be its scheme-theoretic image. The source and image are integral. Choose a standard projective chart containing the generic point of $Y$. Nonconstancy supplies a nonconstant affine coordinate ratio $h\in\bar k(Y)$ on that chart. The dominant map $C_{\bar k}\to Y$ embeds function fields by [F13], so regard $h$ as a nonconstant element of $\bar k(C)$. Since $\bar k$ is algebraically closed in $\bar k(C)$ by [F16], this nonconstant $h$ is transcendental over $\bar k$. Thus $\operatorname{trdeg}_{\bar k}\bar k(Y)=1$: it is at least one from $h$, and at most one from the inclusion $\bar k(Y)\hookrightarrow\bar k(C)$. The affine-domain dimension formula in [F16] on the chart shows that $Y$ is an integral curve. The function field $\bar k(C)$ is finitely generated of transcendence degree one, so $\bar k(C)/\bar k(h)$ is algebraic and finitely generated, hence finite by [F17]. Since $\bar k(h)\subseteq\bar k(Y)\subseteq\bar k(C)$, the generic-fiber residue extension $\bar k(C)/\bar k(Y)$ is finite. The generic point of $C$ maps to the generic point of $Y$. No closed point of $C$ maps to that generic point, since the morphism is proper and therefore sends the closed singleton of a closed point to a closed subset. Thus the generic fiber has just the source generic point, which is isolated, with the finite residue extension just proved. For a closed point $y\in Y$, the fiber is a proper closed subset of $C$: it cannot contain the generic point, which maps to the generic point of $Y$. By [F12] its support is a finite set of closed points. For each such point $p$, both $\kappa(p)$ and $\kappa(y)$ are finite over $\bar k$ by [F15], so $\kappa(p)/\kappa(y)$ is finite; the points of this finite fiber are isolated. Hence every point is isolated in its fiber with finite residue extension, and the published fiber criterion [F11] makes the canonical map quasi-finite. Proper plus quasi-finite makes it finite. [F10, F11, F12, F13, F15, F16, F17, step 2.1]
 
-3.3 (Canonical factorization.)
-Let $\phi:C\to\mathbf P^1_k$ be a degree-two map and
-$L=\phi^*\mathcal O(1)$. The $g$ monomials in
-$H^0(\mathbf P^1,\mathcal O(g-1))$ pull back to independent sections of
-$L^{\otimes(g-1)}$, so $h^0(L^{\otimes(g-1)})\ge g$. Its degree is $2g-2$.
-Riemann--Roch and Serre duality as in the proof of
-[[def-hyperelliptic-curve]] give
-$L^{\otimes(g-1)}\cong\omega_C$. The pulled-back monomials are therefore a
-basis of $H^0(C,\omega_C)$, and the canonical map is the Veronese
-factorization, up to projective coordinates. The same argument over $\bar k$
-applies to a geometric degree-two map even when its quotient does not descend
-to $\mathbf P^1_k$.
-[F1, F2, F3, F5, F6, F20, step 2.1]
+3.3 (Canonical factorization.) Let $\phi:C\to\mathbf P^1_k$ be a degree-two map and $L=\phi^*\mathcal O(1)$. The $g$ monomials in $H^0(\mathbf P^1,\mathcal O(g-1))$ pull back to independent sections of $L^{\otimes(g-1)}$, so $h^0(L^{\otimes(g-1)})\ge g$. Its degree is $2g-2$. Riemann--Roch and Serre duality as in the proof of [[def-hyperelliptic-curve]] give $L^{\otimes(g-1)}\cong\omega_C$. The pulled-back monomials are therefore a basis of $H^0(C,\omega_C)$, and the canonical map is the Veronese factorization, up to projective coordinates. The same argument over $\bar k$ applies to a geometric degree-two map even when its quotient does not descend to $\mathbf P^1_k$. [F1, F2, F3, F5, F6, F20, step 2.1]
 
-4.1 (Local closed-immersion argument over $\bar k$.)
-For the sufficient direction of assertion (2), assume $g\ge3$ and that
-$C_{\bar k}$ is geometrically nonhyperelliptic. By Step 3.1 the canonical map
-separates geometric points and tangent directions; Step 3.2 proves that it is
-finite.
-Let $Y$ be the
-scheme-theoretic image of $\phi_K$ in $\mathbf P^{g-1}_{\bar k}$.
-By Step 3.2, the map to the ambient projective space is finite. Cover $Y$ by
-opens $V=Y\cap W$, where $W=\operatorname{Spec}R$ ranges over the standard
-affine charts of the ambient projective space. Since $Y$ is closed, each
-$V=\operatorname{Spec}A$ is affine with $A$ a quotient of $R$. Since the map factors through
-the closed subscheme $Y$, its inverse image of $V$ is its inverse image
-of $W$, say $\operatorname{Spec}B$. Finiteness over $W$ gives finitely
-many $R$-module generators of $B$; the $R$-action factors through its
-quotient $A$, so these also generate $B$ over $A$. The
-scheme-theoretic-image property [F13] gives $A\hookrightarrow B$. At each
-closed point $y\in Y$, properness gives a
-point above it and point separation gives exactly one such point $p$. Let
-$B_y:=B\otimes_A A_y$. If $b_1,\dots,b_n$ generate $B$ over $A$, their
-images generate $B_y$ over $A_y$, so $B_y$ is finite over $A_y$;
-by [F19] the ring map is integral. Every maximal ideal of $B_y$ contracts
-to the maximal ideal of the local ring $A_y$, again by [F19]. Maximal ideals
-of $B_y$ are precisely the points of the fiber over $y$: conversely, a
-prime over the maximal ideal is maximal because its quotient is an integral
-domain integral over the residue field $A_y/\mathfrak m_{A_y}$, hence is a
-field. There is exactly one such point by point separation. Thus $B_y$ is
-local. If $\mathfrak q_y$
-is its unique maximal ideal, then
-$B_y=(B_y)_{\mathfrak q_y}=\mathcal O_{C_{\bar k},p}$; in particular this
-local ring is finite over $A_y$. The residue fields of $y$ and $p$ are
-$\bar k$. Tangent injectivity dualizes to a surjection
-$\mathfrak m_{A_y}/\mathfrak m_{A_y}^2\to
-\mathfrak m_{B_y}/\mathfrak m_{B_y}^2$. Hence
-$\mathfrak m_{B_y}=\mathfrak m_{A_y}B_y+\mathfrak m_{B_y}^2$.
-The module $\mathfrak m_{B_y}/\mathfrak m_{A_y}B_y$ is finite over the
-local ring $B_y$, so [F18] gives
-$\mathfrak m_{B_y}=\mathfrak m_{A_y}B_y$. Equality of residue fields now
-gives $B_y=A_y+\mathfrak m_{A_y}B_y$. The finite $A_y$-module
-$B_y/A_y$ is therefore equal to its product by $\mathfrak m_{A_y}$, so
-[F18] over $A_y$ gives $A_y=B_y$.
-For each affine $V=\operatorname{Spec}A$ in this cover, this proves that the
-cokernel of $A\hookrightarrow B$ vanishes after localization at every
-maximal ideal: maximal ideals are closed points because $A$ is of finite type
-over $\bar k$. A nonzero finite module has a maximal ideal in its support,
-so the cokernel is zero. Thus $A\to B$ is an isomorphism on every such
-affine, and $C_{\bar k}\to Y$ is an isomorphism. Since $Y$ is a closed
-subscheme, $\phi_{K,\bar k}$ is a closed immersion. This proves the local
-criterion directly from point and tangent separation; it does not invoke a
-degree-threshold very-ampleness result.
-[F13, F18, F19, step 3.1, step 3.2]
+4.1 (Local closed-immersion argument over $\bar k$.) For the sufficient direction of assertion (2), assume $g\ge3$ and that $C_{\bar k}$ is geometrically nonhyperelliptic. By Step 3.1 the canonical map separates geometric points and tangent directions; Step 3.2 proves that it is finite. Let $Y$ be the scheme-theoretic image of $\phi_K$ in $\mathbf P^{g-1}_{\bar k}$. By Step 3.2, the map to the ambient projective space is finite. Cover $Y$ by opens $V=Y\cap W$, where $W=\operatorname{Spec}R$ ranges over the standard affine charts of the ambient projective space. Since $Y$ is closed, each $V=\operatorname{Spec}A$ is affine with $A$ a quotient of $R$. Since the map factors through the closed subscheme $Y$, its inverse image of $V$ is its inverse image of $W$, say $\operatorname{Spec}B$. Finiteness over $W$ gives finitely many $R$-module generators of $B$; the $R$-action factors through its quotient $A$, so these also generate $B$ over $A$. The scheme-theoretic-image property [F13] gives $A\hookrightarrow B$. At each closed point $y\in Y$, properness gives a point above it and point separation gives exactly one such point $p$. Let $B_y:=B\otimes_A A_y$. If $b_1,\dots,b_n$ generate $B$ over $A$, their images generate $B_y$ over $A_y$, so $B_y$ is finite over $A_y$; by [F19] the ring map is integral. Every maximal ideal of $B_y$ contracts to the maximal ideal of the local ring $A_y$, again by [F19]. Maximal ideals of $B_y$ are precisely the points of the fiber over $y$: conversely, a prime over the maximal ideal is maximal because its quotient is an integral domain integral over the residue field $A_y/\mathfrak m_{A_y}$, hence is a field. There is exactly one such point by point separation. Thus $B_y$ is local. If $\mathfrak q_y$ is its unique maximal ideal, then $B_y=(B_y)_{\mathfrak q_y}=\mathcal O_{C_{\bar k},p}$; in particular this local ring is finite over $A_y$. The residue fields of $y$ and $p$ are $\bar k$. Tangent injectivity dualizes to a surjection $\mathfrak m_{A_y}/\mathfrak m_{A_y}^2\to \mathfrak m_{B_y}/\mathfrak m_{B_y}^2$. Hence $\mathfrak m_{B_y}=\mathfrak m_{A_y}B_y+\mathfrak m_{B_y}^2$. The module $\mathfrak m_{B_y}/\mathfrak m_{A_y}B_y$ is finite over the local ring $B_y$, so [F18] gives $\mathfrak m_{B_y}=\mathfrak m_{A_y}B_y$. Equality of residue fields now gives $B_y=A_y+\mathfrak m_{A_y}B_y$. The finite $A_y$-module $B_y/A_y$ is therefore equal to its product by $\mathfrak m_{A_y}$, so [F18] over $A_y$ gives $A_y=B_y$. For each affine $V=\operatorname{Spec}A$ in this cover, this proves that the cokernel of $A\hookrightarrow B$ vanishes after localization at every maximal ideal: maximal ideals are closed points because $A$ is of finite type over $\bar k$. A nonzero finite module has a maximal ideal in its support, so the cokernel is zero. Thus $A\to B$ is an isomorphism on every such affine, and $C_{\bar k}\to Y$ is an isomorphism. Since $Y$ is a closed subscheme, $\phi_{K,\bar k}$ is a closed immersion. This proves the local criterion directly from point and tangent separation; it does not invoke a degree-threshold very-ampleness result. [F13, F18, F19, step 3.1, step 3.2]
 
-4.2 (The factorization is not an embedding.)
-The Veronese map is a closed
-immersion. If its composite with $\phi$ were a closed immersion, then $\phi$
-would be a closed immersion into its Veronese image: on affine charts this
-follows by factoring the surjection of coordinate rings for the composite
-through the coordinate ring of the Veronese image. But $\phi$ is finite and
-surjective of degree two. A surjective closed immersion into
-$\mathbf P^1_{\bar k}$ is an isomorphism by [F20], since that target is
-reduced. This would force $\phi$ to have degree one, a contradiction. Thus
-the canonical map is not a closed immersion whenever $C$ is geometrically
-hyperelliptic. Its generic degree onto the rational normal curve is two. This
-gives the necessary geometric condition in assertion (2) without any
-separability assumption.
-[F1, F20, step 3.3]
+4.2 (The factorization is not an embedding.) The Veronese map is a closed immersion. If its composite with $\phi$ were a closed immersion, then $\phi$ would be a closed immersion into its Veronese image: on affine charts this follows by factoring the surjection of coordinate rings for the composite through the coordinate ring of the Veronese image. But $\phi$ is finite and surjective of degree two. A surjective closed immersion into $\mathbf P^1_{\bar k}$ is an isomorphism by [F20], since that target is reduced. This would force $\phi$ to have degree one, a contradiction. Thus the canonical map is not a closed immersion whenever $C$ is geometrically hyperelliptic. Its generic degree onto the rational normal curve is two. This gives the necessary geometric condition in assertion (2) without any separability assumption. [F1, F20, step 3.3]
 
+4.3 (Generic geometric fibers.) For completeness, every degree-two map from $C_{\bar k}$ with $g\ge2$ is separable, including in characteristic two. Only characteristic two needs proof. Put $\Omega=\bar k$ and let $\Omega(C)/\Omega(t)$ be the induced extension. If it were purely inseparable, choose $\alpha$ generating it with $\alpha^2=h(t)$ for $h\in\Omega(t)$ nonsquare. Write $h=P(t)/Q(t)$ with $P,Q\in\Omega[t]$. Because $\Omega$ is perfect, there are $P_0,Q_0\in\Omega[z]$ such that $P(z^2)=P_0(z)^2$ and $Q(z^2)=Q_0(z)^2$. Under the embedding $\Omega(t)\hookrightarrow\Omega(z)$ given by $t\mapsto z^2$, the element $\alpha$ can be sent to $P_0(z)/Q_0(z)$, whose square is $h(z^2)$. Irreducibility of $X^2-h$ makes this a field embedding $\Omega(C)\hookrightarrow\Omega(z)$. Both extensions over $\Omega(t)$ have degree two, so the image is all of $\Omega(z)$. Hence $C_{\bar k}$ is birational to $\mathbf P^1_{\bar k}$, and smooth proper birational curves are isomorphic; this contradicts $g\ge2$. Thus the degree-two extension is separable. Its geometric generic fiber consists of two distinct points, which the canonical map identifies through the Veronese factorization. [F6, F7, algebra, step 3.3]
 
-4.3 (Generic geometric fibers.)
-For completeness, every degree-two map from
-$C_{\bar k}$ with $g\ge2$ is separable, including in characteristic two.
-Only characteristic two needs proof. Put $\Omega=\bar k$ and let
-$\Omega(C)/\Omega(t)$ be the induced extension. If it were purely
-inseparable, choose $\alpha$ generating it with $\alpha^2=h(t)$ for
-$h\in\Omega(t)$ nonsquare. Write $h=P(t)/Q(t)$ with $P,Q\in\Omega[t]$.
-Because $\Omega$ is perfect, there are $P_0,Q_0\in\Omega[z]$ such that
-$P(z^2)=P_0(z)^2$ and $Q(z^2)=Q_0(z)^2$. Under the embedding
-$\Omega(t)\hookrightarrow\Omega(z)$ given by $t\mapsto z^2$, the element
-$\alpha$ can be sent to $P_0(z)/Q_0(z)$, whose square is $h(z^2)$.
-Irreducibility of $X^2-h$ makes this a field embedding
-$\Omega(C)\hookrightarrow\Omega(z)$. Both extensions over $\Omega(t)$ have
-degree two, so the image is all of $\Omega(z)$. Hence $C_{\bar k}$ is
-birational to $\mathbf P^1_{\bar k}$, and smooth proper birational curves
-are isomorphic; this contradicts $g\ge2$. Thus the degree-two extension is
-separable. Its geometric generic fiber consists of two distinct points,
-which the canonical map identifies through the Veronese factorization.
-[F6, F7, algebra, step 3.3]
+5.1 (Finiteness over $k$ and descent.) Under the same hypotheses, the canonical map over $k$ is proper, and the following fiber argument proves it quasi-finite, hence finite. Its scheme-theoretic image $Y$ is integral. Choose a standard projective chart containing its generic point. Nonconstancy supplies a nonconstant affine coordinate ratio $h\in k(Y)$. The dominant map $C\to Y$ embeds function fields by [F13], so regard $h$ as a nonconstant element of $k(C)$. Geometric integrality makes $h$ transcendental over $k$ by [F16]. The inclusion $k(Y)\hookrightarrow k(C)$ and the fact that $k(C)$ has transcendence degree one show that $k(Y)$ has transcendence degree one, so [F16] makes $Y$ an integral curve. Finite generation of $k(C)$ of transcendence degree one makes $k(C)/k(h)$, and therefore $k(C)/k(Y)$, finite. Thus the generic fiber is the single isolated generic point with finite residue extension. The generic point of $C$ maps to the generic point of $Y$, and properness keeps closed source points from mapping there: a proper map sends the closed singleton of a closed source point to a closed subset of the projective target, whereas the generic point of the integral curve $Y$ is not closed. Each closed fiber is a proper closed subset of $C$ with finite support by [F12], and its residue extensions are finite by [F15]. The fiber criterion and properness then give finiteness by [F11]. On each standard affine chart $U=\operatorname{Spec}A$ of $\mathbf P^{g-1}_k$, write $\phi_K^{-1}(U)=\operatorname{Spec}B$; finiteness makes $B$ a finite $A$-module. Its base change to $\bar k$ is the chart map of the closed immersion proved above, so $A\otimes_k\bar k\to B\otimes_k\bar k$ is surjective. The cokernel of $A\to B$ tensors to zero; since $\bar k/k$ is faithfully flat, that cokernel is zero. Therefore every chart map is surjective and $\phi_K$ is a closed immersion over $k$ by [F14]. This proves the sufficient direction of assertion (2). [F10, F11, F12, F13, F14, F15, F16, F17, step 3.2, step 4.1]
 
-5.1 (Finiteness over $k$ and descent.)
-Under the same hypotheses, the canonical map over $k$ is proper, and the
-following fiber argument proves it quasi-finite, hence finite. Its
-scheme-theoretic image $Y$ is integral. Choose a standard
-projective chart containing its generic point. Nonconstancy supplies a
-nonconstant affine coordinate ratio $h\in k(Y)$. The dominant map $C\to Y$
-embeds function fields by [F13], so regard $h$ as a nonconstant element of
-$k(C)$. Geometric integrality makes $h$
-transcendental over $k$ by [F16]. The inclusion $k(Y)\hookrightarrow
-k(C)$ and the fact that $k(C)$ has transcendence degree one show that
-$k(Y)$ has transcendence degree one, so [F16] makes $Y$ an integral
-curve. Finite generation of $k(C)$ of transcendence degree one makes
-$k(C)/k(h)$, and therefore $k(C)/k(Y)$, finite. Thus the generic
-fiber is the single isolated generic point with finite residue extension.
-The generic point of $C$ maps to the generic point of $Y$, and properness
-keeps closed source points from mapping there: a proper map sends the closed
-singleton of a closed source point to a closed subset of the projective
-target, whereas the generic point of the integral curve $Y$ is not closed.
-Each closed fiber is a proper closed subset of $C$ with finite support by
-[F12], and its residue extensions are finite by [F15]. The fiber criterion
-and properness then give finiteness by [F11].
-On each standard affine chart $U=\operatorname{Spec}A$ of
-$\mathbf P^{g-1}_k$, write $\phi_K^{-1}(U)=\operatorname{Spec}B$;
-finiteness makes $B$ a finite $A$-module. Its base change to $\bar k$
-is the chart map of the closed immersion proved above, so
-$A\otimes_k\bar k\to B\otimes_k\bar k$ is surjective. The cokernel of
-$A\to B$ tensors to zero; since $\bar k/k$ is faithfully flat, that
-cokernel is zero. Therefore every chart map is surjective and
-$\phi_K$ is a closed immersion over $k$ by [F14]. This proves the
-sufficient direction of assertion (2).
-[F10, F11, F12, F13, F14, F15, F16, F17, step 3.2, step 4.1]
+6.1 (The converse.) If $g=2$, the canonical map has target $\mathbf P^1_k$ and is nonconstant because $\deg\omega_C=2$. A closed immersion of a proper integral curve into $\mathbf P^1_k$ would have one-dimensional closed image, hence image all of $\mathbf P^1_k$, and would make $C\cong\mathbf P^1_k$, contradicting $g=2$. If $C_{\bar k}$ is geometrically hyperelliptic, step 4.2 shows that the base-changed canonical map is not a closed immersion; closed immersions remain closed after field extension. Thus a closed immersion forces $g\ge3$ and geometric nonhyperellipticity. Together with steps 3.1--3.2, 4.1--4.2, and 5.1, this proves assertion (2). [F3, F6, F14, F20, step 4.2, step 5.1]
 
-6.1 (The converse.)
-If $g=2$, the canonical map has target $\mathbf P^1_k$ and is nonconstant
-because $\deg\omega_C=2$. A closed immersion of a proper integral curve into
-$\mathbf P^1_k$ would have one-dimensional closed image, hence image all of
-$\mathbf P^1_k$, and would make $C\cong\mathbf P^1_k$, contradicting
-$g=2$. If $C_{\bar k}$ is geometrically hyperelliptic, step 4.2 shows that
-the base-changed canonical map is not a closed immersion; closed immersions
-remain closed after field extension. Thus a closed immersion forces $g\ge3$
-and geometric nonhyperellipticity. Together with steps 3.1--3.2, 4.1--4.2,
-and 5.1, this proves assertion (2).
-[F3, F6, F14, F20, step 4.2, step 5.1]
-
-7.1 (Conclusion.)
-Assertions (1)--(3) follow from steps 1.1--2.1, 3.1--3.3, 4.1--4.3, and 5.1--6.1.
-The Axiom of Choice enters through the cited duality, properness,
-finite-morphism, Nakayama, scheme-image, and descent suppliers; no additional
-choice is made in the point, tangent, or local-ring computations.
-[F9, step 1.1, step 2.1, step 3.1, step 3.2, step 3.3, step 4.1, step 4.2, step 4.3, step 5.1, step 6.1] ∎
+7.1 (Conclusion.) Assertions (1)--(3) follow from steps 1.1--2.1, 3.1--3.3, 4.1--4.3, and 5.1--6.1. The Axiom of Choice enters through the cited duality, properness, finite-morphism, Nakayama, scheme-image, and descent suppliers; no additional choice is made in the point, tangent, or local-ring computations. [F9, step 1.1, step 2.1, step 3.1, step 3.2, step 3.3, step 4.1, step 4.2, step 4.3, step 5.1, step 6.1] ∎

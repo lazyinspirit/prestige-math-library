@@ -7,18 +7,13 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-strong-whitney-approximation-by-transverse-maps]
+deps: [def-countable-choice, thm-strong-whitney-approximation-by-transverse-maps]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-01
+  repair: research/frontier-38-owner-30-step5-whitney-cor-transverse-maps-are-dense-in-the-strong-smooth-topology.receipt.json
 sources:
   scraped: []
   references:
@@ -28,18 +23,20 @@ sources:
 
 ## Statement
 
-For a fixed closed embedded submanifold $Z\subseteq N$, the smooth maps
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]). For a fixed closed embedded submanifold $Z\subseteq N$, the smooth maps
 $M\to N$ that are transverse to $Z$ are dense in the strong smooth topology.
 
 ## Facts & Assumptions
 
-**Given:** Smooth manifolds $M,N$ and a closed embedded submanifold $Z\subseteq N$.
+**Given:** $\mathrm{AC}_\omega$, smooth manifolds $M,N$ and a closed embedded submanifold $Z\subseteq N$.
 
-[L1] Every strong neighbourhood of a smooth map contains a transverse map ([[thm-strong-whitney-approximation-by-transverse-maps]]).
+[A1] Countable Choice is [[def-countable-choice]], inherited exactly through the transverse-approximation supplier; no additional family is chosen below.
+
+[L1] Under [A1], every strong neighbourhood of a smooth map contains a transverse map ([[thm-strong-whitney-approximation-by-transverse-maps]]).
 
 ## Proof
 **Proof technique:** direct.
 
-1.1 Let $f:M\to N$ be smooth and let $\mathcal U$ be any strong neighbourhood of $f$. By [L1], $\mathcal U$ contains a transverse smooth map. [L1, given]
+1.1 Let $f:M\to N$ be smooth and let $\mathcal U$ be any strong neighbourhood of $f$. By [L1], $\mathcal U$ contains a transverse smooth map. [A1, L1, given]
 
 2.1 Since this holds for every $f$ and every neighbourhood $\mathcal U$, the transverse maps are dense. [step 1.1] ∎

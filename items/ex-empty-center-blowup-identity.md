@@ -1,0 +1,98 @@
+---
+id: ex-empty-center-blowup-identity
+kind: example
+title: "Blowing up the empty center is the identity"
+status: draft
+origin: pipeline
+pipeline_run: frontier-38-owner-30
+deps:
+  - def-blowup-scheme-along-ideal
+  - thm-blowup-effective-cartier-divisor-isomorphism
+  - def-rees-algebra-ideal-sheaf
+  - thm-affine-blowup-standard-charts
+  - def-effective-cartier-divisor
+justified_by: []
+landmark: false
+proof_strategy: direct
+generation:
+  role: example
+provenance:
+  statement: ai-generated
+  proof: ai-altered
+sources:
+  references:
+    - title: "The Stacks Project, Commutative Algebra, Section 10.70 (Blow up algebras)"
+      url: "https://stacks.math.columbia.edu/tag/052P"
+      locator: "Definition 10.70.1 and the case I=R in Lemma 10.70.2 (tags 052Q, 07Z3)"
+    - title: "The Stacks Project, Divisors, Sections 31.33-31.36 (Blowing up; Strict transform; Admissible blowups; Blowing up and flatness)"
+      url: "https://stacks.math.columbia.edu/tag/01OF"
+      locator: "the first paragraph of the proof of Lemma 31.33.4 (the case Z=empty)"
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+---
+
+## Example
+
+Let $X$ be a scheme and let $\mathcal I=\mathcal O_X$ be the unit ideal sheaf,
+whose zero scheme $V(\mathcal O_X)$ is empty. Then the blowup is
+$\operatorname{Bl}_{\mathcal O_X}X=\operatorname{Proj}_X\mathcal R(\mathcal
+O_X)=\operatorname{Proj}_X\mathcal O_X[t]=X$: the relative Proj of the
+polynomial algebra in one degree-one variable is the base, and the structural
+morphism is the identity. Equivalently, the unit ideal is invertible and
+defines the empty effective Cartier divisor, so blowing up the empty center
+changes nothing.
+
+## Facts & Assumptions
+
+**Given:** A scheme $X$, the unit ideal sheaf $\mathcal I=\mathcal O_X$, and
+the blowup $\pi\colon\operatorname{Bl}_{\mathcal O_X}X\to X$ of
+[[def-blowup-scheme-along-ideal]].
+
+[A1] **Choice.** The Axiom of Choice is inherited from the relative Proj
+construction used to form the blowup; no further choice is used below.
+
+[F1] [[def-blowup-scheme-along-ideal]]: Let $X$ be a scheme and let
+$\mathcal I\subseteq\mathcal O_X$ be a quasi-coherent ideal sheaf of finite
+type, with zero scheme
+$Z=V(\mathcal I)$, the closed subscheme of $X$ cut out by $\mathcal I$. The
+blowup of $X$ along $\mathcal I$ is the $X$-scheme
+$\operatorname{Bl}_{\mathcal I}X:=\operatorname{Proj}_X\mathcal R(\mathcal I)$,
+the relative Proj of the Rees algebra sheaf
+$\mathcal R(\mathcal I)=\bigoplus_{n\ge0}\mathcal I^n$, with its structural
+morphism $\pi$ to $X$.
+
+[F2] [[def-rees-algebra-ideal-sheaf]]: The Rees algebra sheaf
+$\mathcal R(\mathcal I)=\bigoplus_{n\ge0}\mathcal I^n$ is a commutative graded
+$\mathcal O_X$-algebra with $\mathcal R(\mathcal I)_0=\mathcal O_X$ and
+$\mathcal R(\mathcal I)_1=\mathcal I$. If $U=\operatorname{Spec}A\subseteq X$
+is affine and $\mathcal I|_U=\widetilde I$ for an ideal $I\subseteq A$, then
+$\mathcal I^n|_U=\widetilde{I^n}$ for every $n\ge0$, and taking sections on
+$U$ gives the affine Rees algebra $\bigoplus_{n\ge0}I^nt^n$.
+
+[F3] [[thm-affine-blowup-standard-charts]]: Let $A$ be a ring,
+$I=(f_0,\dots,f_r)\subseteq A$, $S=R(I)=\bigoplus I^nt^n$ and
+$B_i=A[I/f_i]=\bigl(S[(f_it)^{-1}]\bigr)_0$. The standard opens
+$U_i=D_+(f_it)=\operatorname{Spec}B_i$ cover
+$\operatorname{Bl}_I\operatorname{Spec}A$.
+
+[F4] [[thm-blowup-effective-cartier-divisor-isomorphism]]: The blowup of a
+scheme along an invertible ideal sheaf, equivalently along an effective
+Cartier divisor, is the identity: its structural morphism is an isomorphism.
+
+[F5] [[def-effective-cartier-divisor]]: A unit equation, in particular
+$f_i=1$, gives the zero Cartier divisor with ideal sheaf $\mathcal O_X$; it is
+the **empty effective divisor**, and its vanishing subscheme is empty.
+
+## Verification
+
+1.1 Since $\mathcal I=\mathcal O_X$ is the unit ideal, $\mathcal I^n=\mathcal I\cdot\dots\cdot\mathcal I=\mathcal O_X$ for every $n\ge0$, so $\mathcal R(\mathcal O_X)=\bigoplus_{n\ge0}\mathcal O_X$. On an affine open $U=\operatorname{Spec}A\subseteq X$ the ideal is $\mathcal I|_U=\widetilde A$, and the affine Rees algebra is $\bigoplus_{n\ge0}A\cdot t^n=A[t]$ with $t$ of degree one, by [F2]; these identifications are compatible with restriction to smaller affine opens, so they glue to a canonical isomorphism $\mathcal R(\mathcal O_X)\cong\mathcal O_X[t]$ of graded $\mathcal O_X$-algebras, where $t$ is a degree-one generator. [F2]
+
+2.1 By the definition of the blowup, $\operatorname{Bl}_{\mathcal O_X}X=\operatorname{Proj}_X\mathcal R(\mathcal O_X)=\operatorname{Proj}_X\mathcal O_X[t]$, the relative Proj of the graded $\mathcal O_X$-algebra computed in step 1.1, with the structural morphism to $X$. [F1, step 1.1]
+
+2.2 The structural morphism $\operatorname{Proj}_X\mathcal O_X[t]\to X$ is an isomorphism. Indeed, let $U=\operatorname{Spec}A\subseteq X$ be an affine open and restrict to $U$, where the graded algebra is $A[t]$ with the unit ideal generated by the single element $f_0=1$; the generating family $(1)$ has one element, and [F3] gives the single standard chart $D_+(t)=\operatorname{Spec}B_0$ with $B_0=A[I/1]=(A[t][t^{-1}])_0=A$, since a degree-zero element of $A[t,t^{-1}]$ is its constant term. Its structure map to $\operatorname{Spec}A$ is the identity, the chart covers the blowup over $U$, and the identifications for different affine opens are the canonical restrictions of the same $t$, so they agree on overlaps and glue to an inverse of the structural morphism. [F3, step 1.1]
+
+3.1 Equivalently, $\mathcal O_X$ is invertible and the unit equation $1$ exhibits the center $V(\mathcal O_X)$ as the empty effective Cartier divisor with ideal sheaf $\mathcal O_X$ on every affine chart, so [F4] gives directly that the blowup is the identity. Combining with steps 2.1 and 2.2, $\operatorname{Bl}_{\mathcal O_X}X=\operatorname{Proj}_X\mathcal R(\mathcal O_X)=\operatorname{Proj}_X\mathcal O_X[t]=X$ and the structural morphism is the identity; the zero scheme $V(\mathcal O_X)$ is empty, so blowing up the empty center changes nothing. [F4, F5, step 2.1, step 2.2] ∎

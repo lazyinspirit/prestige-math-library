@@ -1,0 +1,10 @@
+<!-- local-published-repair:frontier-38-owner-30:cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold:format-v1:begin -->
+### cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold: proof paragraph formatting
+
+- Published claim, full proof, Facts, prerequisite interfaces and inherited Countable Choice read. This is a local format repair, not a new whole-item mathematical audit.
+- Formatting only: join split numbered titles, arguments and existing justification tags into complete proof paragraphs. Proof labels and every corresponding step reference were changed by the bijection {"2.3":"3.1","3.1":"4.1","4.1":"5.1","5.1":"6.1"}; inverse relabeling recovers the exact pre-edit mathematical text. No new justification tag, claim, dependency, source or choice assumption was introduced. After stripping verification, whitespace and reversing the explicit label map when present, all text is identical to the preserved published carrier.
+- Current content guard hash: 90aaeef2838c9d5968699ab3dd27b929b43e0e225a0d43f8e4d1ec5852826610; pre-edit guard hash: d91fe0d20699b99e9cb88a8cb14cd17c06a576cfab2864f6fc8931027e9a45c8; before raw hash: 32707b1299bf90fce27c96388cf89337ecc25187c40a23a37d383f0c96e5a1ac. Before carrier: research/frontier-38-owner-30-published-format-cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold.before.md.
+- Local receipt: research/frontier-38-owner-30-published-format-cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold-receipt.json. Prior verification metadata is preserved in the before-file; current verification points only to the repair receipt, without a new audit/stamp.
+- Final explicit proof-layout:1 item,9 steps,0 defects. Precheck:1 checked,0 failing. Real render:1 file,clean. These are local focused checks only.
+- Mathematical interface unchanged, so no consumer propagation is required. Root owns canonical ledger and ownership-claim integration.
+<!-- local-published-repair:frontier-38-owner-30:cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold:format-v1:end -->

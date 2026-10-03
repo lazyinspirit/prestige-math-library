@@ -67,8 +67,7 @@ sources:
     - title: "MIT 18.725 Algebraic Geometry (Fall 2015) course notes, Lectures 24-25"
       url: "https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf"
 verification:
-  audited: 2026-10-02
-  precheck: pass
+  repair: research/frontier-38-owner-30-published-format-surface-thm-degree-two-g-plus-one-line-bundle-very-ample-receipt.json
 ---
 
 ## Statement
@@ -242,171 +241,18 @@ function. ([[def-axiom-of-choice]])
 points and first jets, then prove the closed-immersion conclusion by finite
 local algebra and faithfully flat descent.
 
-1.1 (Set-up over $k$.) The high-degree formula and basepoint-free system apply. [F1, F3, F4, given]
-Write $d=\deg(L)$. Then $d\ge2g+1>2g-2$, so [F1] applies to $L$.
-Over $k$, the complete linear system is base-point-free and defines the proper
-morphism $f=\phi_L:C\to\mathbf P^{h^0(C,L)-1}_k$ with
-$f^*\mathcal O(1)\cong L$. No vanishing claim for twists by arbitrary
-$k$-closed points is needed. [F1, F3, F4, given]
+1.1 (Set-up over $k$.) The high-degree formula and basepoint-free system apply. Write $d=\deg(L)$. Then $d\ge2g+1>2g-2$, so [F1] applies to $L$. Over $k$, the complete linear system is base-point-free and defines the proper morphism $f=\phi_L:C\to\mathbf P^{h^0(C,L)-1}_k$ with $f^*\mathcal O(1)\cong L$. No vanishing claim for twists by arbitrary $k$-closed points is needed. [F1, F3, F4, given, F1, F3, F4, given]
 
-2.1 (Base change and degrees.) Put $K=\bar k$; degree, genus, and section dimensions are preserved. [F6, F7, step 1.1]
-Thus
-$\deg(L_K)=d$ even if closed residue extensions over $k$ are inseparable; by
-[F7], $g(C_K)=g$ and $h^0(C_K,L_K)=h^0(C,L)$. Every closed point of $C_K$ is
-$K$-rational. From this step on, the point, pair, and double-point twists are
-only by such geometric points, so each subtracts degree one (twice for a
-length-two divisor); the high-degree vanishing below is applied on $C_K$.
-[F6, F7, step 1.1]
+2.1 (Base change and degrees.) Put $K=\bar k$; degree, genus, and section dimensions are preserved. Thus $\deg(L_K)=d$ even if closed residue extensions over $k$ are inseparable; by [F7], $g(C_K)=g$ and $h^0(C_K,L_K)=h^0(C,L)$. Every closed point of $C_K$ is $K$-rational. From this step on, the point, pair, and double-point twists are only by such geometric points, so each subtracts degree one (twice for a length-two divisor); the high-degree vanishing below is applied on $C_K$. [F6, F7, step 1.1, F6, F7, step 1.1]
 
-3.1 (Separate distinct geometric points.) [F1, F2, step 2.1]
-Restriction onto $p+q$ is surjective.
-Let $p\ne q$ be closed points of $C_K$. By [F2], restriction to the effective
-divisor $p+q$ gives
-$0\to L_K(-p-q)\to L_K\to Q_{p+q}\to0$ with
-$H^0(Q_{p+q})=L_K|_p\oplus L_K|_q\cong K^2$. Its twist has degree
-$d-2\ge2g-1>2g-2$, so [F1] gives $H^1(C_K,L_K(-p-q))=0$. The long exact
-cohomology sequence therefore makes
-$H^0(C_K,L_K)\to H^0(Q_{p+q})$ surjective. Sections can take independently
-prescribed values at $p$ and $q$, so $f_K$ separates these points. [F1, F2,
-step 2.1]
+3.1 (Separate distinct geometric points.) Restriction onto $p+q$ is surjective. Let $p\ne q$ be closed points of $C_K$. By [F2], restriction to the effective divisor $p+q$ gives $0\to L_K(-p-q)\to L_K\to Q_{p+q}\to0$ with $H^0(Q_{p+q})=L_K|_p\oplus L_K|_q\cong K^2$. Its twist has degree $d-2\ge2g-1>2g-2$, so [F1] gives $H^1(C_K,L_K(-p-q))=0$. The long exact cohomology sequence therefore makes $H^0(C_K,L_K)\to H^0(Q_{p+q})$ surjective. Sections can take independently prescribed values at $p$ and $q$, so $f_K$ separates these points. [F1, F2, step 2.1, F1, F2, step 2.1]
 
-3.2 (Separate tangent directions.) [F1, F2, F5, step 2.1]
-Restriction to $2p$ separates the value and first jet.
-Let $p$ be a closed point of $C_K$, with
-uniformizer $t$ in the DVR $\mathcal O_{C_K,p}$, and choose a local frame $e$
-of $L_K$. By [F2], the double-point quotient
-$L_K/L_K(-2p)\cong L_{K,p}/t^2L_{K,p}$ has basis $e,te$. The restriction map
-on global sections is surjective: the twist has degree
-$d-2\ge2g-1>2g-2$, so $H^1(C_K,L_K(-2p))=0$ by [F1]. Choose global sections
-$s_0,s_1$ whose images are $e$ and $te$, respectively. Then $s_0$ is nonzero
-at $p$, and in the projective chart defined by $s_0$ the ratio satisfies
-$s_1/s_0\equiv t\pmod{t^2}$. Its differential at $p$ is nonzero, so the
-tangent map of $f_K$ is injective there. [F1, F2, F5, step 2.1]
+3.2 (Separate tangent directions.) Restriction to $2p$ separates the value and first jet. Let $p$ be a closed point of $C_K$, with uniformizer $t$ in the DVR $\mathcal O_{C_K,p}$, and choose a local frame $e$ of $L_K$. By [F2], the double-point quotient $L_K/L_K(-2p)\cong L_{K,p}/t^2L_{K,p}$ has basis $e,te$. The restriction map on global sections is surjective: the twist has degree $d-2\ge2g-1>2g-2$, so $H^1(C_K,L_K(-2p))=0$ by [F1]. Choose global sections $s_0,s_1$ whose images are $e$ and $te$, respectively. Then $s_0$ is nonzero at $p$, and in the projective chart defined by $s_0$ the ratio satisfies $s_1/s_0\equiv t\pmod{t^2}$. Its differential at $p$ is nonzero, so the tangent map of $f_K$ is injective there. [F1, F2, F5, step 2.1, F1, F2, F5, step 2.1]
 
-3.3 (Finiteness after base change; arbitrary-field route.)
-We prove the needed
-finiteness route for a map $g:X\to\mathbf P^r_F$ over any field $F$, where
-$X$ is a smooth proper integral curve and $M=g^*\mathcal O(1)$ has positive
-degree. It will apply to $f_K$ here and to $f$ over $k$ in step 5.1. By
-[[thm-base-point-free-linear-system-morphism]] and [F4], the map in each of
-these applications is proper and finite type. Its scheme-theoretic image
-$Y\hookrightarrow\mathbf P^r_F$ exists by [F9]. The scheme-image theorem
-shows that $g(X)$ is dense in $Y$: otherwise a nonempty open in $Y$ disjoint
-from $g(X)$ would restrict the scheme-theoretic image to the empty image of
-the empty source, contradicting that this open is nonempty. On every standard
-affine chart $V=\operatorname{Spec}R$ of projective space, the restriction of
-$Y$ is $\operatorname{Spec}(R/I)$, where
-$I=\ker(R\to\Gamma(g^{-1}V,\mathcal O_X))$. If the preimage is nonempty,
-it is an integral finite-type open of $X$, and its global functions embed in
-$F(X)$ by [F9]. Hence $I$ is prime. Thus $Y$ is reduced; its underlying
-space is the closure of the image of the irreducible space $X$, so $Y$ is
-irreducible and therefore integral.
-The image $Y$ cannot be a single point: in that case $g$ factors through
-$Y=\operatorname{Spec}E$ for a field $E$, the invertible sheaf
-$\mathcal O(1)|_Y$ is free of rank one over $E$, and its pullback $M$ is
-$\mathcal O_X$, contrary to $\deg(M)>0$. Choose a point of $Y$ other than
-its generic point and an affine open $\operatorname{Spec}A\subseteq Y$
-containing it. This open also contains the generic point; since $Y$ is
-integral, the chosen point corresponds to a nonzero prime of the finite-type
-domain $A$. Therefore $\dim A\ge1$, and [F9] gives
-$\operatorname{trdeg}_F F(Y)\ge1$. The same affine-domain dimension result
-shows $\operatorname{trdeg}_F F(X)=1$: choose a strict length-one chain
-$Z_0\subsetneq X$ of nonempty irreducible closed subsets and a point
-$x\in Z_0$. This point is nongeneric and hence closed by [F9]. In an affine
-neighborhood $\operatorname{Spec}B$ of $x$, its local DVR gives
-$\dim B\ge1$; any chain in this affine open remains strict after closure in
-$X$, so $\dim B\le1$. Dominance gives an injection $F(Y)\hookrightarrow
-F(X)$ on generic stalks, whence $\operatorname{trdeg}_F F(Y)=1$ as well.
-Take a standard projective affine chart containing the generic point of $Y$.
-Its coordinate ratios generate $F(Y)$, so at least one, say $h$, is
-transcendental over $F$. By [F9], $F(X)/F$ is finitely generated. Since
-$\operatorname{trdeg}_F F(X)=\operatorname{trdeg}_F F(h)=1$, each member of
-a finite generating list for $F(X)/F(h)$ is algebraic over $F(h)$; the
-finite-algebraic-generation theorem in [F9] gives $[F(X):F(h)]<\infty$.
-Thus $F(X)/F(Y)$ is finite, with no separability assumption.
-For the fibre criterion, every point of $X$ is generic or closed by [F9].
-If a closed point $x$ mapped to the generic point of $Y$, the field map
-$F(Y)\to\kappa(x)$ would embed a field of transcendence degree one into
-$\kappa(x)$, which is finite over $F$ by [F9]; this is impossible. The
-generic fibre therefore has the single point $\eta_X$. On affine
-neighborhoods $\operatorname{Spec}A\subseteq Y$ and
-$\operatorname{Spec}B\subseteq g^{-1}(\operatorname{Spec}A)$ of the generic
-points, the dominance map makes $A\to B$ injective and its coordinate ring
-is the localization $B\otimes_A F(Y)$, a domain with one prime, hence a
-field. Its fraction field
-is $F(X)$, so the generic fibre is $\operatorname{Spec}F(X)$, finite over
-$\operatorname{Spec}F(Y)$. For any nongeneric point $y\in Y$, the closed set
-$\overline{\{y\}}$ is proper; its preimage is a proper closed subset of $X$
-because $g(X)$ is dense in $Y$. By [F9] it is a finite set of closed
-points. In particular every closed-point fibre is finite; each point in it
-is isolated, and its residue extension over $\kappa(y)$ is finite because
-$\kappa(x)/F$ is finite and $\kappa(y)$ embeds in $\kappa(x)$. Thus every
-point of $X$ is isolated in its fibre with finite residue extension. The
-quasi-finite fibre criterion in [F9] makes $g$ quasi-finite, and proper plus
-quasi-finite is finite by [F8]. Applying this argument over $F=K$ proves
-that $f_K$ is finite. The field extensions above may be inseparable; only
-their finiteness is used.
-[F4, F6, F8, F9, step 2.1]
+3.3 (Finiteness after base change; arbitrary-field route.) We prove the needed finiteness route for a map $g:X\to\mathbf P^r_F$ over any field $F$, where $X$ is a smooth proper integral curve and $M=g^*\mathcal O(1)$ has positive degree. It will apply to $f_K$ here and to $f$ over $k$ in step (5.1). By [[thm-base-point-free-linear-system-morphism]] and [F4], the map in each of these applications is proper and finite type. Its scheme-theoretic image $Y\hookrightarrow\mathbf P^r_F$ exists by [F9]. The scheme-image theorem shows that $g(X)$ is dense in $Y$: otherwise a nonempty open in $Y$ disjoint from $g(X)$ would restrict the scheme-theoretic image to the empty image of the empty source, contradicting that this open is nonempty. On every standard affine chart $V=\operatorname{Spec}R$ of projective space, the restriction of $Y$ is $\operatorname{Spec}(R/I)$, where $I=\ker(R\to\Gamma(g^{-1}V,\mathcal O_X))$. If the preimage is nonempty, it is an integral finite-type open of $X$, and its global functions embed in $F(X)$ by [F9]. Hence $I$ is prime. Thus $Y$ is reduced; its underlying space is the closure of the image of the irreducible space $X$, so $Y$ is irreducible and therefore integral. The image $Y$ cannot be a single point: in that case $g$ factors through $Y=\operatorname{Spec}E$ for a field $E$, the invertible sheaf $\mathcal O(1)|_Y$ is free of rank one over $E$, and its pullback $M$ is $\mathcal O_X$, contrary to $\deg(M)>0$. Choose a point of $Y$ other than its generic point and an affine open $\operatorname{Spec}A\subseteq Y$ containing it. This open also contains the generic point; since $Y$ is integral, the chosen point corresponds to a nonzero prime of the finite-type domain $A$. Therefore $\dim A\ge1$, and [F9] gives $\operatorname{trdeg}_F F(Y)\ge1$. The same affine-domain dimension result shows $\operatorname{trdeg}_F F(X)=1$: choose a strict length-one chain $Z_0\subsetneq X$ of nonempty irreducible closed subsets and a point $x\in Z_0$. This point is nongeneric and hence closed by [F9]. In an affine neighborhood $\operatorname{Spec}B$ of $x$, its local DVR gives $\dim B\ge1$; any chain in this affine open remains strict after closure in $X$, so $\dim B\le1$. Dominance gives an injection $F(Y)\hookrightarrow F(X)$ on generic stalks, whence $\operatorname{trdeg}_F F(Y)=1$ as well. Take a standard projective affine chart containing the generic point of $Y$. Its coordinate ratios generate $F(Y)$, so at least one, say $h$, is transcendental over $F$. By [F9], $F(X)/F$ is finitely generated. Since $\operatorname{trdeg}_F F(X)=\operatorname{trdeg}_F F(h)=1$, each member of a finite generating list for $F(X)/F(h)$ is algebraic over $F(h)$; the finite-algebraic-generation theorem in [F9] gives $[F(X):F(h)]<\infty$. Thus $F(X)/F(Y)$ is finite, with no separability assumption. For the fibre criterion, every point of $X$ is generic or closed by [F9]. If a closed point $x$ mapped to the generic point of $Y$, the field map $F(Y)\to\kappa(x)$ would embed a field of transcendence degree one into $\kappa(x)$, which is finite over $F$ by [F9]; this is impossible. The generic fibre therefore has the single point $\eta_X$. On affine neighborhoods $\operatorname{Spec}A\subseteq Y$ and $\operatorname{Spec}B\subseteq g^{-1}(\operatorname{Spec}A)$ of the generic points, the dominance map makes $A\to B$ injective and its coordinate ring is the localization $B\otimes_A F(Y)$, a domain with one prime, hence a field. Its fraction field is $F(X)$, so the generic fibre is $\operatorname{Spec}F(X)$, finite over $\operatorname{Spec}F(Y)$. For any nongeneric point $y\in Y$, the closed set $\overline{\{y\}}$ is proper; its preimage is a proper closed subset of $X$ because $g(X)$ is dense in $Y$. By [F9] it is a finite set of closed points. In particular every closed-point fibre is finite; each point in it is isolated, and its residue extension over $\kappa(y)$ is finite because $\kappa(x)/F$ is finite and $\kappa(y)$ embeds in $\kappa(x)$. Thus every point of $X$ is isolated in its fibre with finite residue extension. The quasi-finite fibre criterion in [F9] makes $g$ quasi-finite, and proper plus quasi-finite is finite by [F8]. Applying this argument over $F=K$ proves that $f_K$ is finite. The field extensions above may be inseparable; only their finiteness is used. [F4, F6, F8, F9, step 2.1]
 
-4.1 (Local ring surjectivity over $K$.)
-We prove that $f_K$ is a closed immersion. Fix an affine chart
-$U=\operatorname{Spec}R\subseteq\mathbf P^{h^0(C,L)-1}_K$. Since $f_K$ is
-finite, its inverse image is affine, say $\operatorname{Spec}S$, with $S$
-finite over $R$. Let $A$ be the image of $R\to S$, so $A\hookrightarrow S$
-and $\operatorname{Spec}A$ is the scheme-theoretic image on this chart. Since
-$S$ is finite over $R$ and the $R$-action factors through $A$, the same module
-generators make $S$ finite over $A$. For a closed point
-$y\in\operatorname{Spec}A$, lying over gives at least one source point
-because $A\hookrightarrow S$ is integral, and separation in step 3.1 gives
-at most one; call the unique point $x$, with corresponding prime
-$\mathfrak n\subset S$. Write $\mathfrak m_y$ for the maximal ideal of $y$
-and $z$ for its corresponding closed point in the ambient chart $U$. Both
-residue fields are $K$. Set $S_y=S\otimes_A A_{\mathfrak m_y}$. Since $S$ is
-finite over $A$, $S_y$ is integral and finite over $A_{\mathfrak m_y}$; its
-maximal ideals correspond exactly to primes of $S$ over $\mathfrak m_y$.
-There is only $\mathfrak n$, so $S_y$ is local. It is therefore already its
-localization at that maximal ideal and equals
-$S_{\mathfrak n}=\mathcal O_{C_K,x}$. Localization preserves finite modules,
-so $B:=\mathcal O_{C_K,x}$ is finite over $A_{\mathfrak m_y}$.
-The tangent map at $x$ is injective by step 3.2; by [F5] its dual cotangent
-map is surjective. The local map
-$\mathcal O_{\mathbf P^r_K,z}\to A_{\mathfrak m_y}\to B$
-factors that cotangent map, so
-$\mathfrak m_{A_{\mathfrak m_y}}/\mathfrak m_{A_{\mathfrak m_y}}^2\to
-\mathfrak m_B/\mathfrak m_B^2$ is surjective. The latter space is one-dimensional
-because $B$ is a DVR. Hence some element of $\mathfrak m_{A_{\mathfrak m_y}}$
-maps to a uniformizer modulo $\mathfrak m_B^2$, and therefore
-$\mathfrak m_{A_{\mathfrak m_y}}B=\mathfrak m_B$. The residue fields agree,
-so $B=A_{\mathfrak m_y}+\mathfrak m_{A_{\mathfrak m_y}}B$. The finite
-$A_{\mathfrak m_y}$-module $B/A_{\mathfrak m_y}$ consequently satisfies
-$B/A_{\mathfrak m_y}=\mathfrak m_{A_{\mathfrak m_y}}(B/A_{\mathfrak m_y})$;
-Nakayama's lemma gives $B=A_{\mathfrak m_y}$.
-This holds at every closed point $y$. The finite cokernel $S/A$ must vanish:
-if nonzero, choose a nonzero element $s$ and, by [F8], a maximal ideal
-$\mathfrak m$ containing its proper annihilator. The localization $s/1$ is
-nonzero in $(S/A)_{\mathfrak m}$, since otherwise some $u\notin\mathfrak m$
-would annihilate $s$, contradicting $\operatorname{Ann}(s)\subseteq\mathfrak m$.
-This contradicts the local surjectivity just proved. Thus $R\to S$ is surjective
-on every affine chart. The affine quotient description in [F8] proves that
-$f_K$ is a closed immersion.
-[F5, F8, F11, step 3.1, step 3.2, step 3.3]
+4.1 (Local ring surjectivity over $K$.) We prove that $f_K$ is a closed immersion. Fix an affine chart $U=\operatorname{Spec}R\subseteq\mathbf P^{h^0(C,L)-1}_K$. Since $f_K$ is finite, its inverse image is affine, say $\operatorname{Spec}S$, with $S$ finite over $R$. Let $A$ be the image of $R\to S$, so $A\hookrightarrow S$ and $\operatorname{Spec}A$ is the scheme-theoretic image on this chart. Since $S$ is finite over $R$ and the $R$-action factors through $A$, the same module generators make $S$ finite over $A$. For a closed point $y\in\operatorname{Spec}A$, lying over gives at least one source point because $A\hookrightarrow S$ is integral, and separation in step 3.1 gives at most one; call the unique point $x$, with corresponding prime $\mathfrak n\subset S$. Write $\mathfrak m_y$ for the maximal ideal of $y$ and $z$ for its corresponding closed point in the ambient chart $U$. Both residue fields are $K$. Set $S_y=S\otimes_A A_{\mathfrak m_y}$. Since $S$ is finite over $A$, $S_y$ is integral and finite over $A_{\mathfrak m_y}$; its maximal ideals correspond exactly to primes of $S$ over $\mathfrak m_y$. There is only $\mathfrak n$, so $S_y$ is local. It is therefore already its localization at that maximal ideal and equals $S_{\mathfrak n}=\mathcal O_{C_K,x}$. Localization preserves finite modules, so $B:=\mathcal O_{C_K,x}$ is finite over $A_{\mathfrak m_y}$. The tangent map at $x$ is injective by step 3.2; by [F5] its dual cotangent map is surjective. The local map $\mathcal O_{\mathbf P^r_K,z}\to A_{\mathfrak m_y}\to B$ factors that cotangent map, so $\mathfrak m_{A_{\mathfrak m_y}}/\mathfrak m_{A_{\mathfrak m_y}}^2\to \mathfrak m_B/\mathfrak m_B^2$ is surjective. The latter space is one-dimensional because $B$ is a DVR. Hence some element of $\mathfrak m_{A_{\mathfrak m_y}}$ maps to a uniformizer modulo $\mathfrak m_B^2$, and therefore $\mathfrak m_{A_{\mathfrak m_y}}B=\mathfrak m_B$. The residue fields agree, so $B=A_{\mathfrak m_y}+\mathfrak m_{A_{\mathfrak m_y}}B$. The finite $A_{\mathfrak m_y}$-module $B/A_{\mathfrak m_y}$ consequently satisfies $B/A_{\mathfrak m_y}=\mathfrak m_{A_{\mathfrak m_y}}(B/A_{\mathfrak m_y})$; Nakayama's lemma gives $B=A_{\mathfrak m_y}$. This holds at every closed point $y$. The finite cokernel $S/A$ must vanish: if nonzero, choose a nonzero element $s$ and, by [F8], a maximal ideal $\mathfrak m$ containing its proper annihilator. The localization $s/1$ is nonzero in $(S/A)_{\mathfrak m}$, since otherwise some $u\notin\mathfrak m$ would annihilate $s$, contradicting $\operatorname{Ann}(s)\subseteq\mathfrak m$. This contradicts the local surjectivity just proved. Thus $R\to S$ is surjective on every affine chart. The affine quotient description in [F8] proves that $f_K$ is a closed immersion. [F5, F8, F11, step 3.1, step 3.2, step 3.3]
 
-5.1 (Descend the closed immersion.) [F4, F7, F8, F9, step 3.3, step 4.1]
-The arbitrary-field argument of step 3.3 applies to $f$ over $k$, so $f$ is
-proper quasi-finite and finite by [F8]. For an affine
-chart $\operatorname{Spec}R\subseteq\mathbf P^{h^0(C,L)-1}_k$, write its
-finite inverse image as $\operatorname{Spec}S$. The closed immersion $f_K$
-makes $R\otimes_kK\to S\otimes_kK$ surjective. By right exactness in [F7],
-the cokernel of $R\to S$ tensors to zero over $K$. A nonzero $k$-module
-contains a one-dimensional $k$-subspace whose injection remains injective
-after tensoring with the flat extension $K/k$, and that subspace becomes
-$K\ne0$; therefore the cokernel itself is zero. Thus $R\to S$ is surjective
-for every affine chart. The affine quotient criterion and target locality in
-[F8] show that $f$ is a closed immersion. [F4, F7, F8, step 4.1]
+5.1 (Descend the closed immersion.) The arbitrary-field argument of step 3.3 applies to $f$ over $k$, so $f$ is proper quasi-finite and finite by [F8]. For an affine chart $\operatorname{Spec}R\subseteq\mathbf P^{h^0(C,L)-1}_k$, write its finite inverse image as $\operatorname{Spec}S$. The closed immersion $f_K$ makes $R\otimes_kK\to S\otimes_kK$ surjective. By right exactness in [F7], the cokernel of $R\to S$ tensors to zero over $K$. A nonzero $k$-module contains a one-dimensional $k$-subspace whose injection remains injective after tensoring with the flat extension $K/k$, and that subspace becomes $K\ne0$; therefore the cokernel itself is zero. Thus $R\to S$ is surjective for every affine chart. The affine quotient criterion and target locality in [F8] show that $f$ is a closed immersion. [F4, F7, F8, F9, step 3.3, step 4.1, F4, F7, F8, step 4.1]
 
-6.1 (Very ampleness.) [F10, F11, step 5.1]
-Since $f^*\mathcal O(1)\cong L$, the closed immersion
-of step 5.1 exhibits $L$ as closed H-very ample relative to
-$\operatorname{Spec}k$ by [F10]. The Axiom of Choice [F11] is used through the
-stated suppliers, including the maximal-ideal step in 4.1; no choice is used
-to alter the degree or field scope. [F9, F10, F11, step 5.1] ∎
+6.1 (Very ampleness.) Since $f^*\mathcal O(1)\cong L$, the closed immersion of step 5.1 exhibits $L$ as closed H-very ample relative to $\operatorname{Spec}k$ by [F10]. The Axiom of Choice [F11] is used through the stated suppliers, including the maximal-ideal step in 4.1; no choice is used to alter the degree or field scope. [F10, F11, step 5.1, F9, F10, F11, step 5.1] ∎

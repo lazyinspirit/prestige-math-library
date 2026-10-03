@@ -33,11 +33,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
-  audited: 2026-10-02
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+  repair: research/frontier-38-owner-30-published-format-blowup-def-sheaf-total-quotient-rings-receipt.json
 sources:
   references:
     - title: "The Stacks Project, Divisors, §31.24 Definition 24.1 and §31.26 Lemma 26.3"
@@ -162,99 +158,18 @@ every stalk ([[thm-sheaf-morphism-isomorphism-stalkwise]]).
 
 ## Proof
 
-1.1 The sets $S_X(U)$ are multiplicative and restriction-compatible.
-Restriction preserves injectivity of multiplication at each retained stalk.
-At each stalk, multiplication by a product is the composite of the two
-multiplication maps; multiplication by $1$ is the identity. Therefore the
-localizations form the stated presheaf $P_X$.
-[F1]
+1.1 The sets $S_X(U)$ are multiplicative and restriction-compatible. Restriction preserves injectivity of multiplication at each retained stalk. At each stalk, multiplication by a product is the composite of the two multiplication maps; multiplication by $1$ is the identity. Therefore the localizations form the stated presheaf $P_X$. [F1]
 
-1.2 Every localization map $\mathcal O_X(U)\to P_X(U)$ is injective.
-If $s\in S_X(U)$ and $sa=0$, then multiplication by $s_x$ gives $a_x=0$
-for every $x\in U$. A germ is zero exactly when the section vanishes on
-some neighborhood, so $a$ vanishes locally everywhere and is zero by
-sheaf locality. The localization criterion in [F2] now gives the
-injectivity.
-[F1, F2, F3, F14]
+1.2 Every localization map $\mathcal O_X(U)\to P_X(U)$ is injective. If $s\in S_X(U)$ and $sa=0$, then multiplication by $s_x$ gives $a_x=0$ for every $x\in U$. A germ is zero exactly when the section vanishes on some neighborhood, so $a$ vanishes locally everywhere and is zero by sheaf locality. The localization criterion in [F2] now gives the injectivity. [F1, F2, F3, F14]
 
-1.3 An integral scheme has a unique generic point.
-Choose a nonempty affine open $V_0=\operatorname{Spec}A_0$. The ring $A_0$
-is a domain. Every nonempty open of $\operatorname{Spec}A_0$ contains a
-basic open $D(f)$ containing some prime; then $f\ne0$ and $(0)\in D(f)$.
-Thus $(0)$ is dense in $V_0$. Since $V_0$ is dense in irreducible $X$,
-the closure of this point in $X$ is $X$, giving a generic point $\eta$.
-Any generic point $\eta'$ belongs to every nonempty open, so $\eta'\in V_0$.
-If $\eta'$ corresponds to a nonzero prime $\mathfrak p$, choose
-$0\ne a\in\mathfrak p$. The nonempty
-open $D(a)$ contains $(0)$ and omits $\eta'$, contradicting density of
-$\{\eta'\}$. Hence $\eta$ is unique. In particular every nonempty open
-of $X$ contains $\eta$.
-[F4, F5, F7]
+1.3 An integral scheme has a unique generic point. Choose a nonempty affine open $V_0=\operatorname{Spec}A_0$. The ring $A_0$ is a domain. Every nonempty open of $\operatorname{Spec}A_0$ contains a basic open $D(f)$ containing some prime; then $f\ne0$ and $(0)\in D(f)$. Thus $(0)$ is dense in $V_0$. Since $V_0$ is dense in irreducible $X$, the closure of this point in $X$ is $X$, giving a generic point $\eta$. Any generic point $\eta'$ belongs to every nonempty open, so $\eta'\in V_0$. If $\eta'$ corresponds to a nonzero prime $\mathfrak p$, choose $0\ne a\in\mathfrak p$. The nonempty open $D(a)$ contains $(0)$ and omits $\eta'$, contradicting density of $\{\eta'\}$. Hence $\eta$ is unique. In particular every nonempty open of $X$ contains $\eta$. [F4, F5, F7]
 
-2.1 The sheaf map is injective on stalks and sections.
-If a germ represented by $a\in\mathcal O_X(U)$ maps to zero in $(P_X)_x$,
-then after shrinking to a neighborhood $V$ its image is zero in $P_X(V)$.
-Step 1.2 gives $a|_V=0$, so $(\mathcal O_X)_x\to(P_X)_x$ is injective.
-Sheafification preserves stalks, so the map to $\mathcal K_X$ is injective
-on every stalk. A section in its kernel has zero germ at every point,
-vanishes on a cover, and is zero by locality.
-[F2, F3, F14, F15, step 1.2]
+2.1 The sheaf map is injective on stalks and sections. If a germ represented by $a\in\mathcal O_X(U)$ maps to zero in $(P_X)_x$, then after shrinking to a neighborhood $V$ its image is zero in $P_X(V)$. Step 1.2 gives $a|_V=0$, so $(\mathcal O_X)_x\to(P_X)_x$ is injective. Sheafification preserves stalks, so the map to $\mathcal K_X$ is injective on every stalk. A section in its kernel has zero germ at every point, vanishes on a cover, and is zero by locality. [F2, F3, F14, F15, step 1.2]
 
-2.2 Each nonempty affine chart has $P_X(V)\cong K(X)$.
-Let $V=\operatorname{Spec}A$ be any nonempty affine chart. Choose the
-affine chart $V_0=\operatorname{Spec}A_0$ used in step 1.3.
-Its generic prime is $(0)$, so [F9, F10, F12] give
-$K(X)=\mathcal O_{X,\eta}\cong (A_0)_{(0)}=\operatorname{Frac}(A_0)$,
-a field. By step 1.3, $\eta\in V$; let $\mathfrak p$ be its prime in
-$A$. Then $A_{\mathfrak p}\cong\mathcal O_{X,\eta}$ is a field. If
-$\mathfrak p\ne(0)$, a nonzero element of $\mathfrak p$ stays nonzero
-in this localization because $A$ is a domain, so the maximal ideal
-$\mathfrak pA_{\mathfrak p}$ is nonzero, impossible for a field. Hence
-$\mathfrak p=(0)$ and [F9, F10, F12] give
-$K(X)=\mathcal O_{X,\eta}\cong A_{(0)}=\operatorname{Frac}(A)$.
-If $a\ne0$ in the domain $A$, then $a/1\ne0$ in each $A_{\mathfrak p}$:
-otherwise some $b\notin\mathfrak p$ would satisfy $ba=0$. Thus all
-nonzero elements of $A$ act injectively on every stalk in $V$. The zero
-element does not act injectively, since these stalks are nonzero local
-rings. Consequently $S_X(V)=A\setminus\{0\}$ and
-$P_X(V)=\operatorname{Frac}(A)$.
-[F2, F5, F8, F9, F10, F12, step 1.3]
+2.2 Each nonempty affine chart has $P_X(V)\cong K(X)$. Let $V=\operatorname{Spec}A$ be any nonempty affine chart. Choose the affine chart $V_0=\operatorname{Spec}A_0$ used in step 1.3. Its generic prime is $(0)$, so [F9, F10, F12] give $K(X)=\mathcal O_{X,\eta}\cong (A_0)_{(0)}=\operatorname{Frac}(A_0)$, a field. By step 1.3, $\eta\in V$; let $\mathfrak p$ be its prime in $A$. Then $A_{\mathfrak p}\cong\mathcal O_{X,\eta}$ is a field. If $\mathfrak p\ne(0)$, a nonzero element of $\mathfrak p$ stays nonzero in this localization because $A$ is a domain, so the maximal ideal $\mathfrak pA_{\mathfrak p}$ is nonzero, impossible for a field. Hence $\mathfrak p=(0)$ and [F9, F10, F12] give $K(X)=\mathcal O_{X,\eta}\cong A_{(0)}=\operatorname{Frac}(A)$. If $a\ne0$ in the domain $A$, then $a/1\ne0$ in each $A_{\mathfrak p}$: otherwise some $b\notin\mathfrak p$ would satisfy $ba=0$. Thus all nonzero elements of $A$ act injectively on every stalk in $V$. The zero element does not act injectively, since these stalks are nonzero local rings. Consequently $S_X(V)=A\setminus\{0\}$ and $P_X(V)=\operatorname{Frac}(A)$. [F2, F5, F8, F9, F10, F12, step 1.3]
 
-3.1 Generic evaluation embeds $\mathcal O_X(U)$ and identifies $S_X(U)$.
-For nonempty $U$, cover it by affine opens $V$.
-If a section maps to zero at $\eta$, its
-restriction to each $V$ is zero because $\Gamma(V,\mathcal O_X)$ embeds
-in its fraction field. Locality makes the section zero. A nonzero section
-cannot have zero germ at any point: that would make it zero on a nonempty
-neighborhood, which contains $\eta$ by step 1.3. Its germs are therefore
-nonzero in the domain stalks: on an affine neighborhood those stalks are
-localizations of a domain by [F9, F10], so they act injectively.
-Conversely, the zero section fails the injectivity condition at every point
-of nonempty $U$.
-[F3, F5, F8, F9, F10, F11, F13, F14, step 1.3, step 2.2]
+3.1 Generic evaluation embeds $\mathcal O_X(U)$ and identifies $S_X(U)$. For nonempty $U$, cover it by affine opens $V$. If a section maps to zero at $\eta$, its restriction to each $V$ is zero because $\Gamma(V,\mathcal O_X)$ embeds in its fraction field. Locality makes the section zero. A nonzero section cannot have zero germ at any point: that would make it zero on a nonempty neighborhood, which contains $\eta$ by step 1.3. Its germs are therefore nonzero in the domain stalks: on an affine neighborhood those stalks are localizations of a domain by [F9, F10], so they act injectively. Conversely, the zero section fails the injectivity condition at every point of nonempty $U$. [F3, F5, F8, F9, F10, F11, F13, F14, step 1.3, step 2.2]
 
-4.1 Generic evaluation sheafifies to a map $\mathcal K_X\to\underline{K(X)}$.
-For nonempty $U$, step 3.1 puts every denominator in $S_X(U)$ at a
-nonzero element of $K(X)$, so the localization universal property gives a
-ring map $P_X(U)\to K(X)$. Send each fraction to the constant locally
-constant function with that value. For $U=\varnothing$, the sheaf empty
-cover axiom gives $\mathcal O_X(\varnothing)=0$; hence
-$P_X(\varnothing)=0=\underline{K(X)}(\varnothing)$, and use the unique
-ring map between these zero rings. The maps commute with restrictions,
-including restriction to $\varnothing$, so they define a presheaf map
-$P_X\to\underline{K(X)}$. The sheafification universal property extends
-it to the stated map.
-[F2, F3, F16, F17, F18, step 3.1]
+4.1 Generic evaluation sheafifies to a map $\mathcal K_X\to\underline{K(X)}$. For nonempty $U$, step 3.1 puts every denominator in $S_X(U)$ at a nonzero element of $K(X)$, so the localization universal property gives a ring map $P_X(U)\to K(X)$. Send each fraction to the constant locally constant function with that value. For $U=\varnothing$, the sheaf empty cover axiom gives $\mathcal O_X(\varnothing)=0$; hence $P_X(\varnothing)=0=\underline{K(X)}(\varnothing)$, and use the unique ring map between these zero rings. The maps commute with restrictions, including restriction to $\varnothing$, so they define a presheaf map $P_X\to\underline{K(X)}$. The sheafification universal property extends it to the stated map. [F2, F3, F16, F17, F18, step 3.1]
 
-5.1 The resulting map is an isomorphism on stalks.
-Affine opens form a basis: inside an affine neighborhood, the basic opens
-refine any given neighborhood. On each nonempty affine open $V$, step 2.2
-identifies $P_X(V)\to K(X)$ with the canonical fraction-field
-isomorphism. These affine neighborhoods are cofinal at every point, so
-the map induces a bijection on every stalk. The target stalk is $K(X)$
-by the constant-sheaf description, and the source stalk agrees with that
-of $P_X$ by sheafification. The stalkwise isomorphism criterion completes
-the proof. Both sheaves have their unique empty-open section by the sheaf
-empty-cover axiom. Integrality is used only for the constant-function-field
-identification above.
-[F3, F6, F7, F15, F18, F19, step 2.2, step 4.1] ∎
+5.1 The resulting map is an isomorphism on stalks. Affine opens form a basis: inside an affine neighborhood, the basic opens refine any given neighborhood. On each nonempty affine open $V$, step 2.2 identifies $P_X(V)\to K(X)$ with the canonical fraction-field isomorphism. These affine neighborhoods are cofinal at every point, so the map induces a bijection on every stalk. The target stalk is $K(X)$ by the constant-sheaf description, and the source stalk agrees with that of $P_X$ by sheafification. The stalkwise isomorphism criterion completes the proof. Both sheaves have their unique empty-open section by the sheaf empty-cover axiom. Integrality is used only for the constant-function-field identification above. [F3, F6, F7, F15, F18, F19, step 2.2, step 4.1] ∎

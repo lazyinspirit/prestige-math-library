@@ -1,0 +1,939 @@
+[
+  {
+    "order": 529,
+    "id": "oriented-and-mod-two-intersection-numbers",
+    "kind": "A",
+    "category": "differential-topology",
+    "title": "Oriented and Mod Two Intersection Numbers",
+    "companion": "oriented-and-mod-two-intersection-numbers-examples",
+    "requires": [
+      "sard-theorem-and-transversality",
+      "whitney-embedding-tubular-neighbourhoods-and-approximation",
+      "manifolds-with-boundary-collars-and-orientations",
+      "integration-of-forms-and-the-general-stokes-theorem",
+      "the-de-rham-theorem-and-degree",
+      "orientations-poincare-lefschetz-and-alexander-duality",
+      "riemannian-metrics-length-distance-and-volume"
+    ],
+    "items": [
+      {
+        "id": "def-transverse-complementary-dimensional-intersection-set",
+        "kind": "definition",
+        "title": "Transverse complementary-dimensional intersection sets",
+        "deps": [
+          "def-transverse-smooth-maps",
+          "def-transverse-embedded-submanifolds",
+          "thm-transverse-fibre-product-theorem",
+          "cor-transverse-intersection-theorem",
+          "def-embedded-submanifold-and-slice-chart",
+          "thm-rank-nullity"
+        ],
+        "statement": "Let $M$ be a smooth $n$-manifold without boundary. Let $f:X\\to M$ and $g:Z\\to M$ be smooth maps from smooth manifolds of dimensions $x=\\dim X$ and $z=\\dim Z$ with $x+z=n$, and suppose $f$ and $g$ are transverse ([[def-transverse-smooth-maps]]). The **transverse intersection set** (fibre product) is $$X\\times_M Z:=\\{(a,b)\\in X\\times Z: f(a)=g(b)\\}$$ with the subspace topology. In the submanifold case, if $A^a$ and $B^b$ are transverse embedded submanifolds of $M$ ([[def-transverse-embedded-submanifolds]]) with $a+b=n$, the **transverse intersection set** is $A\\cap B$. Both constructions are $0$-dimensional embedded submanifolds: $X\\times_M Z$ by [[thm-transverse-fibre-product-theorem]] with $\\dim(X\\times_M Z)=x+z-n=0$, and $A\\cap B$ by [[cor-transverse-intersection-theorem]] with $\\dim(A\\cap B)=a+b-n=0$. At $(a,b)\\in X\\times_M Z$ the tangent space is the kernel of $(df_a,-dg_b):T_aX\\oplus T_bZ\\to T_{g(b)}M$, and at $p\\in A\\cap B$ it is $T_pA\\cap T_pB$; the empty set is an allowed value. The intersection set is not an intersection number: it is a set, and a number requires finiteness of the transverse intersection and a parity or orientation convention.",
+        "strategy": "Unpack the two published constructions. [[thm-transverse-fibre-product-theorem]] gives the fibre product as an embedded submanifold; transversality makes $(df_a,-dg_b)$ surjective onto $T_{f(a)}M$, and rank-nullity ([[thm-rank-nullity]]) gives its kernel dimension $x+z-n=0$, which is the displayed tangent description. The submanifold case is the inclusion case of the map version, with [[cor-transverse-intersection-theorem]] recording codimension additivity and $T_p(A\\cap B)=T_pA\\cap T_pB$. In the complementary case, ambient dimension minus the two source dimensions is zero, so both sets are zero-dimensional; emptiness is handled by the vacuous-transversality clause of [[def-transverse-embedded-submanifolds]]. The definition itself uses no orientation, no compactness and no choice axiom.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, printed pp. 77\u201378 (complementary dimension and finite transverse intersection); Ch. 3 \u00a73, printed p. 113 (map\u2013map transversality and the fibre-product reformulation)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a74, printed p. 20 (the setting of a compact source and a closed complementary submanifold)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-compact-transverse-complementary-intersections-are-finite",
+        "kind": "lemma",
+        "title": "Compact transverse complementary intersections are finite",
+        "deps": [
+          "def-transverse-complementary-dimensional-intersection-set",
+          "thm-continuity-characterisations-top",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "def-compact-space",
+          "def-subspace-topology-top",
+          "def-embedded-submanifold-and-slice-chart",
+          "thm-transverse-preimage-theorem"
+        ],
+        "statement": "Let $f:X^x\\to M^n$ be smooth with $X$ compact, let $Z\\subseteq M$ be a closed embedded submanifold, and suppose $f$ is transverse to $Z$ with $x+\\dim Z=n$. Then $f^{-1}(Z)$ is finite (possibly empty), so $\\#f^{-1}(Z)$ is a well-defined nonnegative integer. Likewise, if $A^a,B^b\\subseteq M$ are transverse embedded submanifolds of $M$ with $a+b=n$ and one of $A,B$ is compact while the other is closed, then $A\\cap B$ is finite. Both compactness of the relevant source and closedness of the other factor are used: a zero-dimensional manifold is discrete, and a compact discrete space is finite.",
+        "strategy": "**Proof technique:** direct, from discreteness and compactness.\n\n1.1 By [F1] the set $f^{-1}(Z)$ is a $0$-dimensional embedded submanifold of $X$, hence discrete in its subspace topology: each of its points has a slice chart in which it is the only point of the set in that chart. [F1, given]\n\n2.1 The set $f^{-1}(Z)$ is the preimage of the closed set $Z$ under the continuous map $f$, since smooth maps are continuous, hence closed in $X$ by [F2], hence compact by compactness of $X$ and [F3]. A compact discrete space is finite by [F4], so $\\#f^{-1}(Z)$ is a well-defined nonnegative integer; the empty case is included. [F2, F3, F4, step 1.1, given]\n\n3.1 For the submanifold case, apply the map case to the inclusion of the compact factor: if $A$ is compact and $B$ is closed in $M$, then the inclusion $i_A:A\\to M$ is smooth with $A$ compact, $i_A\\pitchfork B$ because $A\\pitchfork B$, and $i_A^{-1}(B)=A\\cap B$, so 2.1 gives that $A\\cap B$ is finite; the roles of $A$ and $B$ may be exchanged. No choice axiom is used. [step 2.1, given, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, printed pp. 77\u201378 (a compact source has a finite transverse fibre)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a71, printed pp. 7\u20138 (a regular preimage of a compact source is finite); \u00a74, printed p. 20"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-mod-two-intersection-number",
+        "kind": "definition",
+        "title": "The mod 2 intersection number",
+        "deps": [
+          "def-transverse-complementary-dimensional-intersection-set",
+          "lem-compact-transverse-complementary-intersections-are-finite",
+          "def-transverse-smooth-maps",
+          "def-transverse-embedded-submanifolds",
+          "thm-transversality-homotopy-theorem",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "def-countable-choice",
+          "def-integers-modulo-n",
+          "prop-the-diagonal-is-an-embedded-submanifold",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure"
+        ],
+        "justified_by": [
+          "thm-mod-two-intersection-number-is-homotopy-invariant"
+        ],
+        "statement": "Let $X$ be a compact smooth manifold without boundary, $M$ a smooth $n$-manifold, $Z\\subseteq M$ a closed embedded submanifold, and let $f:X\\to M$ be smooth and transverse to $Z$ with $\\dim X+\\dim Z=n$ ([[def-transverse-smooth-maps]], [[def-transverse-complementary-dimensional-intersection-set]]). The **mod 2 intersection number** is\n\n$$I_2(f,Z):=\\#f^{-1}(Z)\\bmod 2\\in\\mathbb Z/2\\mathbb Z,$$\n\nthe cardinality of the finite transverse intersection reduced modulo two ([[lem-compact-transverse-complementary-intersections-are-finite]], [[def-integers-modulo-n]]).\n\nFor an arbitrary smooth $g:X\\to M$ choose a smooth map $f$ homotopic to $g$ with $f\\pitchfork Z$ ([[thm-transversality-homotopy-theorem]], under Countable Choice; the homotopy is a smooth family in the sense of [[def-smooth-family-of-maps-and-evaluation-map]]) and define $I_2(g,Z):=I_2(f,Z)$. For compact complementary-dimensional transverse submanifolds $A,B\\subseteq M$, where one is compact and the other closed, $I_2(A,B):=I_2(i_A,B)$ with $i_A$ the inclusion ([[def-transverse-embedded-submanifolds]]). No orientability of $X$, $M$ or $Z$ is assumed; the count lives in $\\mathbb Z/2\\mathbb Z$. Well-definedness of the extension to arbitrary maps is established by [[thm-mod-two-intersection-number-is-homotopy-invariant]], not assumed here. Countable Choice is assumed for selecting transverse representatives and for the classification used to prove independence of that selection; the transverse finite count and the empty case (which contributes $0$) are choice-free.\n\nFor compact boundaryless sources $X,Z$ and complementary-dimensional smooth maps $f:X\\to M$, $g:Z\\to M$, set $I_2(f,g):=I_2(f\\times g,\\Delta_M)$. The diagonal is a closed embedded $n$-submanifold of $M\\times M$ ([[prop-the-diagonal-is-an-embedded-submanifold]]); closedness follows from Hausdorffness. Modulo its tangent diagonal, the differential of $f\\times g$ is $(v,w)\\mapsto df(v)-dg(w)$, so transversality is exactly that of $f,g$. In the transverse case this number is $\\#(X\\times_MZ)\\bmod2$. Homotopies of either or both maps give product homotopies, hence this number is invariant by the fixed-submanifold homotopy theorem. The arbitrary-map extension is under $\\mathrm{AC}_\\omega$ as above.",
+        "strategy": "Let $X$ be a compact smooth manifold without boundary, $M$ a smooth $n$-manifold, $Z\\subseteq M$ a closed embedded submanifold, and let $f:X\\to M$ be smooth and transverse to $Z$ with $\\dim X+\\dim Z=n$ ([[def-transverse-smooth-maps]], [[def-transverse-complementary-dimensional-intersection-set]]). The **mod 2 intersection number** is\n\n$$I_2(f,Z):=\\#f^{-1}(Z)\\bmod 2\\in\\mathbb Z/2\\mathbb Z,$$\n\nthe cardinality of the finite transverse intersection reduced modulo two ([[lem-compact-transverse-complementary-intersections-are-finite]], [[def-integers-modulo-n]]).\n\nFor an arbitrary smooth $g:X\\to M$ choose a smooth map $f$ homotopic to $g$ with $f\\pitchfork Z$ ([[thm-transversality-homotopy-theorem]], under Countable Choice; the homotopy is a smooth family in the sense of [[def-smooth-family-of-maps-and-evaluation-map]]) and define $I_2(g,Z):=I_2(f,Z)$. For compact complementary-dimensional transverse submanifolds $A,B\\subseteq M$, where one is compact and the other closed, $I_2(A,B):=I_2(i_A,B)$ with $i_A$ the inclusion ([[def-transverse-embedded-submanifolds]]). No orientability of $X$, $M$ or $Z$ is assumed; the count lives in $\\mathbb Z/2\\mathbb Z$. Well-definedness of the extension to arbitrary maps is established by [[thm-mod-two-intersection-number-is-homotopy-invariant]], not assumed here. Countable Choice is assumed for selecting transverse representatives and for the classification used to prove independence of that selection; the transverse finite count and the empty case (which contributes $0$) are choice-free.\n\nFor compact boundaryless sources $X,Z$ and complementary-dimensional smooth maps $f:X\\to M$, $g:Z\\to M$, set $I_2(f,g):=I_2(f\\times g,\\Delta_M)$. The diagonal is a closed embedded $n$-submanifold of $M\\times M$ ([[prop-the-diagonal-is-an-embedded-submanifold]]); closedness follows from Hausdorffness. Modulo its tangent diagonal, the differential of $f\\times g$ is $(v,w)\\mapsto df(v)-dg(w)$, so transversality is exactly that of $f,g$. In the transverse case this number is $\\#(X\\times_MZ)\\bmod2$. Homotopies of either or both maps give product homotopies, hence this number is invariant by the fixed-submanifold homotopy theorem. The arbitrary-map extension is under $\\mathrm{AC}_\\omega$ as above.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, printed pp. 78\u201379 (definition of $I_2(f,Z)$, extension by homotopy, submanifold case)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a74, printed pp. 20\u201325 (the parity count and its homotopy invariance)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-overlap-of-arc-length-parametrizations-of-a-one-manifold",
+        "kind": "lemma",
+        "title": "Overlap structure of arc-length parametrizations of a 1-manifold",
+        "deps": [
+          "def-riemannian-metric-and-riemannian-manifold",
+          "thm-every-smooth-manifold-admits-a-riemannian-metric",
+          "def-interval",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-smooth-manifold",
+          "thm-euclidean-inverse-function-theorem",
+          "def-countable-choice"
+        ],
+        "statement": "Let $(M,g)$ be a connected smooth Riemannian $1$-manifold (boundaries allowed; [[def-riemannian-metric-and-riemannian-manifold]]) and let $f:I\\to M$, $h:J\\to M$ be arc-length parametrizations: smooth maps carrying intervals $I,J\\subseteq\\mathbb R$ ([[def-interval]]) diffeomorphically onto open subsets of $M$ with velocity of $g$-length one at every point. Then $f(I)\\cap h(J)$ has at most two connected components. If it has exactly one, then $h^{-1}\\circ f$ extends to an affine map $L:\\mathbb R\\to\\mathbb R$ and $f$ and $h\\circ L$ glue to an arc-length parametrization of $f(I)\\cup h(J)$ over the interval $I\\cup L^{-1}(J)$. If it has two components, the two have the same slope and $M$ is diffeomorphic to the circle $S^1$.",
+        "strategy": "**Proof technique:** compare the affine segments of the transition graph.\n\n1.1 On $S=f^{-1}(h(J))$ put $\\varphi=h^{-1}\\circ f$. Differentiating $f=h\\circ\\varphi$ and taking lengths gives $|\\varphi'|=1$. On each component $D$ of $S$, continuity makes $\\varphi'$ constant, so $\\varphi(s)=\\varepsilon_Ds+c_D$, with $\\varepsilon_D=\\pm1$. The graph is closed in $I\\times J$: it is the inverse image of the diagonal of the Hausdorff manifold $M$ under $(f,h)$. Its segments are maximal intersections of their affine lines with $I\\times J$, since closedness and the local diffeomorphism property prevent a segment from stopping where both coordinates remain in the relative interiors of their intervals. Included interval endpoints are retained in this assertion. [F1, F2, F3, given, algebra]\n\n2.1 Each end of a segment therefore reaches an end of $I$ or $J$. At most one segment can reach any one of the four sides: two reaching an $I$-side would have overlapping $s$-projections, contradicting single-valuedness, and two reaching a $J$-side would have overlapping $t$-projections, contradicting injectivity. This includes unbounded ends, since two tails towards the same infinite end overlap. Every segment consumes two distinct sides, so there are at most two segments. With two segments their projections are disjoint on both axes; they must occupy opposite corners, joining left to top and bottom to right (slope $+1$), or left to bottom and top to right (slope $-1$). Thus their slopes agree. [F2, F3, step 1.1, algebra]\n\n2.2 If there is one component, extend its affine expression to $L:\\mathbb R\\to\\mathbb R$. Maximality of the segment gives $S=I\\cap L^{-1}(J)$. The union $I\\cup L^{-1}(J)$ is an interval, and $f$ and $h\\circ L$ agree on the overlap. Their glued map is smooth and unit-speed. If $f(s)=h(L(s'))$, then $s\\in S$ and injectivity of $h$ gives $L(s)=L(s')$, hence $s=s'$. On each open domain piece it is the given local diffeomorphism $f$ or $h\\circ L$, so the glued map is a diffeomorphism onto the open union, as required. [F2, F3, F4, step 1.1, construct]\n\n3.1 In the two-component case reflect a parameter if needed so both slopes are $+1$. The opposite-corner arrangement of 2.1 has $I=(a,d)$, transition expressions $s+p$ on $(a,b)$ and $s+q$ on $(c,d)$, and $J=(c+q,b+p)$, where $a<b\\le c<d$ and $d+q\\le a+p$. These endpoints are finite: $b,c$ lie inside $I$, while $a+p,d+q$ lie inside $J$. The endpoints of $I,J$ are excluded, since inclusion of one would equate a boundary point of one parametrization with an interior point of the other, by continuity of the transition and preservation of boundary under diffeomorphisms. Put $L=p-q>0$. On $\\mathbb R/L\\mathbb Z$ define $H([t])=f(a+t)$ for $0<t<d-a$ and $H([t])=h(a+q+t)$ for $d-a\\le t\\le L$, identifying $L$ with $0$. These cover the circle because $d-a\\le L$. At $t=d-a$ and $t=0$ the adjacent formulas agree in the $h$-chart with the same affine coordinate, so $H$ is smooth and unit-speed across both seams. [F2, F3, F4, step 2.1, construct]\n\n4.1 The first branch of $H$ parametrizes $f(I)$ injectively; the remaining arc parametrizes the part of $h(J)$ outside $f(I)$, including the two seams. The only identifications are the stated transition relations, so $H$ is injective and its image is $f(I)\\cup h(J)$. It is a local diffeomorphism, hence has open image; its compact image is closed in the Hausdorff $M$. Connectedness forces its image to be all of $M$, and the bijective local diffeomorphism $H$ proves $M\\cong S^1$. The given metric and parametrizations require no choice principle. [F2, F4, step 3.1, given] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Appendix: Classifying 1-manifolds, printed pp. 55\u201357 (the lemma on parametrizations by arc length, its two-component case and the construction of the circle diffeomorphism)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-boundary-of-a-compact-one-manifold-has-even-cardinality",
+        "kind": "lemma",
+        "title": "Boundary of a compact 1-manifold has even cardinality",
+        "deps": [
+          "lem-overlap-of-arc-length-parametrizations-of-a-one-manifold",
+          "thm-every-smooth-manifold-admits-a-riemannian-metric",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "prop-components-of-a-topological-manifold-are-open-and-at-most-countable",
+          "thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold",
+          "thm-euclidean-inverse-function-theorem",
+          "def-interval",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-compact-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $W$ be a compact smooth $1$-manifold, possibly with boundary (the empty manifold included). Then $W$ is diffeomorphic to a finite disjoint union of copies of the circle $S^1$ and of the closed interval $[0,1]$. Consequently the boundary $\\partial W$ is a finite set of even cardinality: every circle component contributes no boundary point and every interval component contributes exactly two, so $\\#\\partial W$ is twice the number of interval components of $W$. The classification neither assumes orientability nor compactness of the connected model; compactness is used only to finish with finitely many circles and closed intervals.",
+        "strategy": "**Proof technique:** direct, following Milnor's appendix: local arc-length parametrizations, a maximal extension, and the overlap lemma.\n\n1.1 Fix a Riemannian metric $g$ on $W$ by [F1] under [A1]. Near any $x\\in W$ choose a chart as in [F6]; in its coordinates the metric reads $h(t)\\,dt^2$ with $h>0$ smooth, and $s(t):=\\int_{t_0}^t\\sqrt{h}$ has $s'>0$, so by [F6] its inverse is smooth and $\\sigma\\mapsto(\\text{chart})^{-1}(s^{-1}(\\sigma))$ is a unit-speed reparametrization onto an open subset, i.e. an arc-length parametrization in the sense of [F7]. Hence every point of $W$ lies in an arc-length parametrization with some nondegenerate interval domain. [A1, F1, F6, F7, construct]\n\n2.1 First suppose $W$ is connected. Fix one such parametrization $f:I\\to W$ and let $\\mathcal E$ be the set of arc-length parametrizations extending $f$. If two members $h_1,h_2\\in\\mathcal E$ did not agree at some point of their common domain, then the overlap of their images would have two components (with one component, [F2] makes $h_2^{-1}\\circ h_1$ affine of slope $\\pm1$ on an interval containing $I$, where it is the identity, hence the identity everywhere on the overlap), and then [F2] gives $W\\cong S^1$. If $W\\not\\cong S^1$, all members of $\\mathcal E$ therefore agree on overlaps, and the union formula defines a single arc-length parametrization $f^*$: the affine one-component transition between any two extensions is the identity, so their domain overlap is exactly their image overlap and the union is injective. Thus it defines $f^*$ on the interval $I^*:=\\bigcup_{h\\in\\mathcal E}\\operatorname{dom}h$ extending every member; it is maximal by construction. [F2, step 1.1, construct]\n\n3.1 Let $f:I\\to W$ be maximal and suppose $f(I)\\neq W$. Since $f(I)$ is open and $W$ is connected, its boundary in $W$ is nonempty; pick $x\\in\\partial f(I)$, a limit point of $f(I)$ with $x\\notin f(I)$. By 1.1 choose an arc-length parametrization $h:J\\to W$ near $x$; it satisfies $h(J)\\cap f(I)\\neq\\varnothing$ and $h(J)\\not\\subseteq f(I)$. Applying [F2] to the pair $f,h$: if the overlap has two components then $W\\cong S^1$; if it has one component, [F2] exhibits an arc-length parametrization of $f(I)\\cup h(J)$ over $I\\cup L^{-1}(J)$ extending $f$, and this domain is strictly larger than $I$ because its image contains $x\\notin f(I)$; that contradicts maximality. Hence a maximal arc-length parametrization of a connected $W$ is onto, unless $W\\cong S^1$. [F2, step 1.1, step 2.1, algebra]\n\n4.1 If $W$ is connected and compact and $W\\not\\cong S^1$, then by 3.1 a maximal arc-length parametrization $f:I\\to W$ is a diffeomorphism; since $W$ is compact and $f$ is a homeomorphism, $I$ is a nondegenerate compact interval, hence diffeomorphic to $[0,1]$ by [F6], and $\\partial W$ consists of the two endpoints. Together with the circle alternative this gives: every connected compact smooth $1$-manifold is diffeomorphic to $S^1$ or to $[0,1]$. [step 3.1, F4, F6, given]\n\n5.1 For a general compact $W$ (the empty case included) the components are open by [F3] and cover the compact space $W$, so there are finitely many; each component is closed in $W$, hence compact, and with the restricted structure is a connected compact smooth $1$-manifold, so by 4.1 it is diffeomorphic to $S^1$ or to $[0,1]$. By [F4] the boundary $\\partial W$ is a closed $0$-dimensional embedded submanifold of $W$, hence a compact discrete space, hence finite by [F5]. Circle components contribute no boundary points and every interval component contributes exactly two, so $\\#\\partial W=2\\cdot\\#\\{\\text{interval components}\\}$ is even. [F3, F4, F5, step 4.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Appendix: Classifying 1-manifolds, printed pp. 56\u201357 (the classification theorem and the maximal arc-length argument); \u00a72, printed p. 14 (finite disjoint unions of circles and segments, with the parity consequence)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, printed pp. 77\u201379 (the parity of the boundary of a compact 1-manifold, used in the mod 2 invariance proof)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count",
+        "kind": "lemma",
+        "title": "Oriented boundary counts of a compact oriented 1-manifold cancel",
+        "deps": [
+          "lem-boundary-of-a-compact-one-manifold-has-even-cardinality",
+          "def-induced-boundary-orientation",
+          "prop-boundary-orientation-is-independent-of-the-outward-vector-field",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $W$ be a compact oriented smooth $1$-manifold and give $\\partial W$ the outward-normal-first orientation ([[def-induced-boundary-orientation]]). The boundary is a finite $0$-manifold, so its orientation at a boundary point $p$ is a sign $\\varepsilon(p)\\in\\{+1,-1\\}$; then $$\\sum_{p\\in\\partial W}\\varepsilon(p)=0.$$ On each closed-interval component the two boundary points carry opposite signs; circle components contribute nothing. With the standard orientation of $[a,b]$ the outward-normal-first convention gives $\\partial[a,b]=\\{b\\}-\\{a\\}$.",
+        "strategy": "**Proof technique:** direct, by computing the model components.\n\n1.1 A circle contributes no boundary points. On $[a,b]$ with $a<b$ and positive tangent direction $\\partial_t$, the outward vector is $+\\partial_t$ at $b$ and $-\\partial_t$ at $a$. The outward-normal-first determinant rule gives the point signs $+1$ at $b$ and $-1$ at $a$, so $\\partial[a,b]=\\{b\\}-\\{a\\}$ and their sum is zero. Reversing the interval orientation reverses both point signs and preserves their cancellation. [F2, F3, algebra]\n\n2.1 By [F1] write $W$ as a finite disjoint union of such model components. The given orientation of $W$ restricts to an orientation of each component, and the outward-normal-first boundary orientation is computed componentwise, because a boundary point lies in exactly one component and the outward vectors of the component and of $W$ agree there. Adding the finitely many contributions of 1.1 gives $\\sum_{p\\in\\partial W}\\varepsilon(p)=0$; a circle component contributes no boundary point, an interval component contributes exactly $+1$ and $-1$, and the empty manifold contributes nothing. [F1, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a75, printed pp. 28\u201329 (Lemma 1: for an arc $A$ of a compact 1-manifold, the two boundary signs sum to zero)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a73, printed p. 108 (the sum of the orientation numbers at the boundary of a compact oriented 1-manifold is zero)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-transverse-preimage-for-manifolds-with-boundary",
+        "kind": "theorem",
+        "title": "Transverse preimages for maps from manifolds with boundary",
+        "deps": [
+          "def-a-smooth-map-transverse-to-an-embedded-submanifold",
+          "thm-transverse-preimage-theorem",
+          "def-embedded-smooth-submanifold-with-boundary",
+          "def-neat-submanifold-of-a-manifold-with-boundary",
+          "thm-neat-submanifolds-have-boundary-adapted-slice-charts",
+          "thm-boundary-submanifolds-of-a-boundaryless-manifold-have-half-slice-charts",
+          "def-smooth-function-on-a-relatively-open-subset-of-a-half-space",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "def-countable-choice",
+          "def-embedded-submanifold-and-slice-chart",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "thm-euclidean-inverse-function-theorem"
+        ],
+        "statement": "Let $W$ be a smooth manifold with boundary, $N$ a smooth manifold without boundary, $Z\\subseteq N$ a closed embedded submanifold, and $F:W\\to N$ a smooth map. Suppose that at every $p\\in F^{-1}(Z)$ the differential is transverse to $Z$, $dF_p(T_pW)+T_{F(p)}Z=T_{F(p)}N$, and that the restriction $F|_{\\partial W}$ is transverse to $Z$. Then $F^{-1}(Z)$ is an embedded smooth submanifold with boundary of $W$ of dimension $\\dim W-\\operatorname{codim}Z$, with\n\n$$T_pF^{-1}(Z)=\\{v\\in T_pW:dF_p(v)\\in T_{F(p)}Z\\}$$\n\nand $F^{-1}(Z)\\cap\\partial W=(F|_{\\partial W})^{-1}(Z)$. If $\\dim W-\\operatorname{codim}Z\\ge1$, then $F^{-1}(Z)$ is neat and\n\n$$\\partial\\bigl(F^{-1}(Z)\\bigr)=F^{-1}(Z)\\cap\\partial W=(F|_{\\partial W})^{-1}(Z).$$\n\nIf $\\dim W=\\operatorname{codim}Z$, transversality of the boundary restriction forces $F^{-1}(Z)\\cap\\partial W=\\varnothing$: a space of dimension $\\dim W-1$ cannot surject onto the $\\operatorname{codim}Z$ normal directions. Thus the zero-dimensional preimage also has the asserted empty boundary. If $\\dim W<\\operatorname{codim}Z$, the preimage is empty by the same rank bound. These include the empty-preimage cases.",
+        "strategy": "**Proof technique:** reduce to a submersion identity in a half-space chart, then apply the inverse function theorem in the two cases.\n\n1.1 Fix $p\\in F^{-1}(Z)$ and put $z:=F(p)$; write $n:=\\dim W$ and $n':=\\dim N$. At a boundary point choose a boundary chart $x:U\\to x(U)\\subseteq\\mathbb H^n$ with $x(p)=0$; at an interior point use an ordinary Euclidean chart centred at $p$ and a slice chart $y:V\\to y(V)$ of $Z$ at $z$ with $y(z)=0$, and let $g$ be the last $c$ coordinates of $y$ on $V$. Then $G:=g\\circ F$ is defined near $p$ on a relatively open half-space set, and for $q$ near $p$ one has $G(q)=0$ exactly when $F(q)\\in Z$. At such a $q$ the differential $dG_q=dg_{F(q)}\\circ dF_q$ is surjective: $dg_{F(q)}$ is surjective with kernel $T_{F(q)}Z$, so its image of $dF_q(T_qW)$ is $(dF_q(T_qW)+T_{F(q)}Z)/T_{F(q)}Z=T_{F(q)}N/T_{F(q)}Z$, which is all of $\\mathbb R^c$ by [F2]. At boundary points, on the face $\\{x_n=0\\}$ the same computation with $T_q\\partial W$ in place of $T_qW$ is surjective by the transversality of $F|_{\\partial W}$. [F1, F2, F3, F6, given, algebra]\n\n2.1 (Interior points.) If $p\\in F^{-1}(Z)\\cap\\operatorname{int}W$, then $F|_{\\operatorname{int}W}$ is smooth and transverse to $Z$ on the boundaryless manifold $\\operatorname{int}W$, so [F4] shows that $F^{-1}(Z)\\cap\\operatorname{int}W$ is an embedded submanifold of $\\operatorname{int}W$ of codimension $c$ with the stated tangent space; in the chart $x$ this exhibits $F^{-1}(Z)$ near $p$ as a coordinate subspace $\\{x^{n-c+1}=\\dots=x^n=0\\}$ intersected with the chart, so $p$ is an interior point of $F^{-1}(Z)$. [F1, F4, step 1.1]\n\n2.2 (Boundary points.) If $p\\in F^{-1}(Z)\\cap\\partial W$, then in the coordinates of 1.1 the differential $dG_p:\\mathbb R^n\\to\\mathbb R^c$ is surjective and, by the face part of 1.1, its restriction to the face $\\mathbb R^{n-1}\\times\\{0\\}$ is surjective. Choose a set $A$ of $c$ coordinate directions inside the face on which the resulting square minor of $dG_p$ is invertible, let $B$ be the remaining $n-1-c$ face directions, and define $\\Phi:=(G,\\,x_B,\\,x_n)$ near $p$. Its differential is block triangular with invertible diagonal blocks, hence invertible; by [F6] the components extend smoothly to an open neighbourhood of $p$ in $\\mathbb R^n$, so the inverse function theorem makes $\\Phi$ a local diffeomorphism at $p$. Since $\\Phi$ has last coordinate $x_n$, it carries $\\{G=0,\\ x_n\\ge0\\}=F^{-1}(Z)$ near $p$ onto the relatively open subset $\\{0\\}\\times\\mathbb R^{n-1-c}\\times[0,\\infty)$ of the half-space $\\mathbb H^{n-c}$; therefore $F^{-1}(Z)$ is near $p$ an embedded $(n-c)$-dimensional submanifold with boundary, with boundary exactly $F^{-1}(Z)\\cap\\partial W$ and tangent space $\\{v\\in T_pW:dF_p(v)\\in T_zZ\\}$, and the chart $\\Phi$ simultaneously straightens the preimage and the face. [F1, F2, F3, F6, step 1.1, construct]\n\n3.1 (Assembly.) The charts produced in 2.1 and 2.2 cover $F^{-1}(Z)$; any two of them are restrictions of charts of $W$, so their transitions are restrictions of smooth half-space transitions and the induced structure is a smooth structure on $F^{-1}(Z)$ making it an embedded submanifold with boundary of $W$, of dimension $n-c=\\dim W-\\operatorname{codim}Z$, with the tangent formula and with interior $F^{-1}(Z)\\cap\\operatorname{int}W$ and boundary $F^{-1}(Z)\\cap\\partial W=(F|_{\\partial W})^{-1}(Z)$. If $n-c\\ge1$, the local model of 2.2 shows that the preimage is transverse to $\\partial W$ and meets it exactly in its boundary, so $F^{-1}(Z)$ is neat and $\\partial F^{-1}(Z)=F^{-1}(Z)\\cap\\partial W$; the charts of 2.2 are precisely the boundary-adapted slice charts of [F5]. If $n-c=0$, boundary points are impossible because the face differential would have rank $c=n$ on an $(n-1)$-dimensional space. The preimage is discrete, lies in the interior, and has empty boundary. If $n<c$, even the full differential cannot be surjective, so the preimage is empty. The construction uses the charts named at each point and no choice principle; the atlas of the preimage is the set of all charts so obtained. [F4, F5, step 2.1, step 2.2, given] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, printed pp. 78\u201379 (a transverse homotopy trace over $X\\times I$ is a 1-manifold with boundary)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a74, printed pp. 20\u201323 (the compact 1-manifold $F^{-1}(y)$ with boundary on the two copies of $M$); \u00a72, Lemma 4, printed pp. 13\u201314"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-mod-two-intersection-number-is-homotopy-invariant",
+        "kind": "theorem",
+        "title": "The mod 2 intersection number is homotopy invariant",
+        "deps": [
+          "def-transverse-complementary-dimensional-intersection-set",
+          "lem-compact-transverse-complementary-intersections-are-finite",
+          "def-mod-two-intersection-number",
+          "lem-boundary-of-a-compact-one-manifold-has-even-cardinality",
+          "thm-transverse-preimage-for-manifolds-with-boundary",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "thm-transversality-homotopy-theorem",
+          "thm-relative-whitney-approximation-for-manifold-valued-maps",
+          "def-countable-choice",
+          "def-integers-modulo-n",
+          "lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family",
+          "thm-parametric-transversality"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $X$ be a compact smooth manifold without boundary, $M$ a smooth $n$-manifold, $Z\\subseteq M$ a closed embedded submanifold, and $F:[0,1]\\times X\\to M$ a smooth family with $\\dim X+\\dim Z=n$. Assume $F$ is transverse to $Z$, including on the boundary faces $\\{0\\}\\times X$ and $\\{1\\}\\times X$ in the sense of [[thm-transverse-preimage-for-manifolds-with-boundary]]. Then the slice maps $F_0=F(0,\\cdot)$ and $F_1=F(1,\\cdot)$ are transverse to $Z$, $F^{-1}(Z)$ is a compact $1$-manifold with boundary $$\\partial F^{-1}(Z)=F_0^{-1}(Z)\\sqcup F_1^{-1}(Z),$$ and $$\\#F_0^{-1}(Z)\\equiv\\#F_1^{-1}(Z)\\pmod 2,\\qquad\\text{that is, } I_2(F_0,Z)=I_2(F_1,Z).$$ Consequently $I_2$ of arbitrary smooth maps is well defined and homotopy invariant, and for transverse representatives the geometric parity of the intersection is the invariant.",
+        "strategy": "**Proof technique:** direct, by counting the boundary of the compact trace.\n\n1.1 By [F1] and [F2] the trace $W:=F^{-1}(Z)$ is a compact embedded submanifold with boundary of $[0,1]\\times X$ of dimension $1$, with $\\partial W=F_0^{-1}(Z)\\sqcup F_1^{-1}(Z)$; compactness follows because $W$ is closed in the compact product $[0,1]\\times X$. In particular the two slice preimages are finite by [F3]. [F1, F2, F3, given]\n\n2.1 By [F4] the boundary of the compact $1$-manifold $W$ has even cardinality, so $\\#\\partial W=\\#F_0^{-1}(Z)+\\#F_1^{-1}(Z)$ is even. Reducing modulo two and using [F5] gives $\\#F_0^{-1}(Z)\\equiv\\#F_1^{-1}(Z)\\pmod 2$, that is, $I_2(F_0,Z)=I_2(F_1,Z)$ by [F3]. [F3, F4, F5, step 1.1, algebra]\n\n3.1 Given a continuous homotopy between transverse endpoints, reparametrize by a smooth function constant in end collars, extend constantly to $\\mathbb R\\times X$, and smooth it fixed on smaller closed end regions by [F6]. Call the smooth result $H$; it is constant at its transverse endpoints for $t\\le\\delta$ and $t\\ge1-\\delta$, for some $0<\\delta<1/2$. Take the submersive parameter family $\\mathcal H$ for $H$ from [F6], with centred ball $B$. Choose a smooth $\\lambda:\\mathbb R\\to[0,1]$ equal to $0$ outside $(\\delta/2,1-\\delta/2)$ and positive inside, and set $G((t,x),a)=\\mathcal H((t,x),\\lambda(t)^2a)$. Where $\\lambda>0$ the parameter derivative is surjective; where $\\lambda=0$, $d(\\lambda^2)=0$ and the source derivative is that of the already transverse endpoint map. Thus $G$ is transverse to $Z$. By parametric transversality choose a good $a\\in B$ (also when $B$ is zero-dimensional); its slice, restricted to $[0,1]\\times X$, is transverse and has the original endpoints. Applying 2.1 to this fixed-endpoint transverse homotopy proves equality of the parities of any homotopic transverse representatives. Representatives exist by [F6], so $I_2$ is well defined and homotopy invariant. For two compact-source maps, product homotopies and the diagonal definition give invariance under deformation of either or both factors. Countable Choice is inherited from the classification and approximation suppliers; the finite parity computation adds no choice. [F3, F4, F6, step 2.1, construct, choose, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, printed pp. 78\u201379 (Theorem: homotopic maps have equal $I_2$, proved by counting the boundary of a compact 1-manifold; Corollary: well-definedness for arbitrary maps)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a74, printed pp. 20\u201325 (Homotopy Lemma: $\\#f^{-1}(y)+\\#g^{-1}(y)$ is even, and the extension of $\\deg_2$)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-direct-sum-factor-swap-scales-oriented-bases-by-a-sign",
+        "kind": "lemma",
+        "title": "Swapping direct summands scales oriented bases by a sign",
+        "deps": [
+          "def-product-orientation",
+          "def-internal-direct-sum",
+          "def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space"
+        ],
+        "statement": "Let $U,W$ be oriented finite-dimensional real vector spaces, using determinant-line rays also in dimension zero, with dimensions $k,l$. The swap $s:U\\oplus W\\to W\\oplus U$, $s(u,w)=(w,u)$, has orientation sign $(-1)^{kl}$ for the written product orientations. If $V=U\\oplus W$ is an internal direct sum, the two orientations transported to $V$ by addition likewise differ by $(-1)^{kl}$.",
+        "strategy": "1.1 For positive-dimensional factors take positive bases $u,w$. The swap sends the domain's ordered basis $(u,w)$ to the list consisting first of the $U$-vectors in the second summand, then of the $W$-vectors in the first. Reordering that image to the codomain's positive list $(w,u)$ takes $kl$ transpositions, so its determinant sign is $(-1)^{kl}$. This is the exterior-algebra identity $w\\wedge u=(-1)^{kl}u\\wedge w$. [F1, F2, given, algebra]\n\n2.1 The same exterior identity applies to arbitrary positive determinant elements, including signed scalars for a zero-dimensional factor; if $k=0$ or $l=0$ its sign is $+1$. For an internal sum, the two addition maps satisfy $a_{W,U}\\circ s=a_{U,W}$, so transporting their product rays to $V$ gives the same comparison sign. Thus both statements hold in every dimension, and for $k=l=1$ the swap reverses orientation. [F1, F2, F3, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a73, printed p. 115 (the sign $(-1)^{(\\dim X)(\\dim Z)}$ computed by counting transpositions of basis elements)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-local-oriented-intersection-sign",
+        "kind": "definition",
+        "title": "The local oriented intersection sign",
+        "deps": [
+          "def-transverse-complementary-dimensional-intersection-set",
+          "def-transverse-linear-subspaces",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space",
+          "def-product-orientation",
+          "def-orientation-of-a-finite-dimensional-real-vector-space",
+          "def-transverse-embedded-submanifolds"
+        ],
+        "statement": "Let $M$ be an oriented smooth $n$-manifold and let $f:X^x\\to M$ and $g:Z^z\\to M$ be smooth maps from oriented smooth manifolds, with $x+z=n$ and $f,g$ transverse in the sense of [[def-transverse-smooth-maps]]. Let $a\\in X$, $b\\in Z$ satisfy $f(a)=g(b)=y$. Then $T_aX\\oplus T_bZ$ and $T_yM$ have the same dimension, and transversality says that\n\n$$(df_a,dg_b):T_aX\\oplus T_bZ\\longrightarrow T_yM,\\qquad (v,w)\\mapsto df_a(v)+dg_b(w),$$\n\nis surjective, hence a linear isomorphism ([[def-transverse-linear-subspaces]]); the sum is direct because the dimensions add up. The ordered direct sum $T_aX\\oplus T_bZ$ carries the product orientation with the first factor $T_aX$ and the second factor $T_bZ$ ([[def-product-orientation]]), and the three tangent spaces carry their manifold orientations ([[def-oriented-smooth-manifold-and-oriented-chart]]).\n\nThe **local oriented intersection sign** $\\varepsilon(a,b)\\in\\{+1,-1\\}$ is $+1$ when this isomorphism carries the product orientation of $T_aX\\oplus T_bZ$ to the orientation of $T_yM$, and $-1$ otherwise; equivalently it is the orientation sign of the induced isomorphism of determinant lines ([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]], [[def-orientation-of-a-finite-dimensional-real-vector-space]]).\n\nFor transverse oriented embedded submanifolds $A^a,B^b\\subseteq M$ with $a+b=n$ one takes $f$ and $g$ to be the inclusion maps ([[def-transverse-embedded-submanifolds]]); the sign at $p\\in A\\cap B$ then compares $T_pA\\oplus T_pB\\to T_pM$ with $A$ first. The empty intersection is allowed and carries no signs. In dimension zero the sign compares the two orientation rays directly, and for $x=z=n=0$ it is $\\varepsilon_X(a)\\varepsilon_Z(b)\\varepsilon_M(y)$, the product of the two source point signs and the ambient point sign. The factor order is part of the definition: with the two factors exchanged the signs are multiplied by $(-1)^{ab}$, exactly the graded-commutativity sign measured later on this page by the factor-interchange theorem. No compactness, closedness hypothesis or choice axiom is used in this local definition.",
+        "strategy": "Let $M$ be an oriented smooth $n$-manifold and let $f:X^x\\to M$ and $g:Z^z\\to M$ be smooth maps from oriented smooth manifolds, with $x+z=n$ and $f,g$ transverse in the sense of [[def-transverse-smooth-maps]]. Let $a\\in X$, $b\\in Z$ satisfy $f(a)=g(b)=y$. Then $T_aX\\oplus T_bZ$ and $T_yM$ have the same dimension, and transversality says that\n\n$$(df_a,dg_b):T_aX\\oplus T_bZ\\longrightarrow T_yM,\\qquad (v,w)\\mapsto df_a(v)+dg_b(w),$$\n\nis surjective, hence a linear isomorphism ([[def-transverse-linear-subspaces]]); the sum is direct because the dimensions add up. The ordered direct sum $T_aX\\oplus T_bZ$ carries the product orientation with the first factor $T_aX$ and the second factor $T_bZ$ ([[def-product-orientation]]), and the three tangent spaces carry their manifold orientations ([[def-oriented-smooth-manifold-and-oriented-chart]]).\n\nThe **local oriented intersection sign** $\\varepsilon(a,b)\\in\\{+1,-1\\}$ is $+1$ when this isomorphism carries the product orientation of $T_aX\\oplus T_bZ$ to the orientation of $T_yM$, and $-1$ otherwise; equivalently it is the orientation sign of the induced isomorphism of determinant lines ([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]], [[def-orientation-of-a-finite-dimensional-real-vector-space]]).\n\nFor transverse oriented embedded submanifolds $A^a,B^b\\subseteq M$ with $a+b=n$ one takes $f$ and $g$ to be the inclusion maps ([[def-transverse-embedded-submanifolds]]); the sign at $p\\in A\\cap B$ then compares $T_pA\\oplus T_pB\\to T_pM$ with $A$ first. The empty intersection is allowed and carries no signs. In dimension zero the sign compares the two orientation rays directly, and for $x=z=n=0$ it is $\\varepsilon_X(a)\\varepsilon_Z(b)\\varepsilon_M(y)$, the product of the two source point signs and the ambient point sign. The factor order is part of the definition: with the two factors exchanged the signs are multiplied by $(-1)^{ab}$, exactly the graded-commutativity sign measured later on this page by the factor-interchange theorem. No compactness, closedness hypothesis or choice axiom is used in this local definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a73, printed pp. 107\u2013108 and 112 (the orientation number at a point, the order of the two factors, and the submanifold case)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 15, pp. 47\u201348 (the orientation of $P\\cap Q$ induced by $TM=T(P\\cap Q)\\oplus N_P\\oplus N_Q$)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-oriented-intersection-number",
+        "kind": "definition",
+        "title": "The oriented intersection number",
+        "deps": [
+          "def-transverse-complementary-dimensional-intersection-set",
+          "lem-compact-transverse-complementary-intersections-are-finite",
+          "def-local-oriented-intersection-sign",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "thm-transversality-homotopy-theorem",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "def-countable-choice"
+        ],
+        "justified_by": [
+          "thm-oriented-intersection-number-is-homotopy-invariant"
+        ],
+        "statement": "Let $X$ be a compact oriented smooth $x$-manifold without boundary, let $M$ be an oriented smooth $n$-manifold without boundary, and let $Z\\subseteq M$ be a closed oriented embedded $z$-submanifold with $x+z=n$ ([[def-oriented-smooth-manifold-and-oriented-chart]]). For a smooth $f:X\\to M$ transverse to $Z$, the **oriented intersection number** is the finite sum\n\n$$I(f,Z):=\\sum_{p\\in f^{-1}(Z)}\\varepsilon(p)\\in\\mathbb Z,$$\n\nwith the local signs of [[def-local-oriented-intersection-sign]]; the sum is finite by [[lem-compact-transverse-complementary-intersections-are-finite]]. For an arbitrary smooth $g:X\\to M$, choose a transverse $f$ homotopic to $g$ ([[thm-transversality-homotopy-theorem]], under Countable Choice; the homotopy is a smooth family in the sense of [[def-smooth-family-of-maps-and-evaluation-map]]) and set $I(g,Z):=I(f,Z)$; independence of the choice is [[thm-oriented-intersection-number-is-homotopy-invariant]], not assumed here. For compact oriented complementary-dimensional submanifolds $A,B\\subseteq M$, where one is compact and the other closed, one sets $I(A,B):=I(i_A,B)$ with $i_A$ the inclusion, so the first factor is the submanifold $A$. If the source is not compact, or the target submanifold is not closed, the sum may fail to be finite or invariant; the safe extension by properness with compact trace is recorded in the remark on properness later on this page. Countable Choice is assumed for selecting transverse representatives and for the classification used to prove independence of that selection; the signs, the finite sum and the empty case (which contributes $0$) are choice-free.\n\nFor transverse maps $f:X^x\\to M$, $g:Z^z\\to M$ with compact oriented boundaryless sources and $x+z=\\dim M$, define $I(f,g)$ as the sum of the local signs of [[def-local-oriented-intersection-sign]] over $X\\times_MZ$. This set is closed in the compact product because $M$ is Hausdorff, and discrete by [[def-transverse-complementary-dimensional-intersection-set]], so the sum is finite. If $g$ is an inclusion this recovers $I(f,Z)$. Ambient compactness is unnecessary in either construction.",
+        "strategy": "Let $X$ be a compact oriented smooth $x$-manifold without boundary, let $M$ be an oriented smooth $n$-manifold without boundary, and let $Z\\subseteq M$ be a closed oriented embedded $z$-submanifold with $x+z=n$ ([[def-oriented-smooth-manifold-and-oriented-chart]]). For a smooth $f:X\\to M$ transverse to $Z$, the **oriented intersection number** is the finite sum\n\n$$I(f,Z):=\\sum_{p\\in f^{-1}(Z)}\\varepsilon(p)\\in\\mathbb Z,$$\n\nwith the local signs of [[def-local-oriented-intersection-sign]]; the sum is finite by [[lem-compact-transverse-complementary-intersections-are-finite]]. For an arbitrary smooth $g:X\\to M$, choose a transverse $f$ homotopic to $g$ ([[thm-transversality-homotopy-theorem]], under Countable Choice; the homotopy is a smooth family in the sense of [[def-smooth-family-of-maps-and-evaluation-map]]) and set $I(g,Z):=I(f,Z)$; independence of the choice is [[thm-oriented-intersection-number-is-homotopy-invariant]], not assumed here. For compact oriented complementary-dimensional submanifolds $A,B\\subseteq M$, where one is compact and the other closed, one sets $I(A,B):=I(i_A,B)$ with $i_A$ the inclusion, so the first factor is the submanifold $A$. If the source is not compact, or the target submanifold is not closed, the sum may fail to be finite or invariant; the safe extension by properness with compact trace is recorded in the remark on properness later on this page. Countable Choice is assumed for selecting transverse representatives and for the classification used to prove independence of that selection; the signs, the finite sum and the empty case (which contributes $0$) are choice-free.\n\nFor transverse maps $f:X^x\\to M$, $g:Z^z\\to M$ with compact oriented boundaryless sources and $x+z=\\dim M$, define $I(f,g)$ as the sum of the local signs of [[def-local-oriented-intersection-sign]] over $X\\times_MZ$. This set is closed in the compact product because $M$ is Hausdorff, and discrete by [[def-transverse-complementary-dimensional-intersection-set]], so the sum is finite. If $g$ is an inclusion this recovers $I(f,Z)$. Ambient compactness is unnecessary in either construction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a73, printed pp. 107\u2013108 and 112 (definition of $I(f,Z)$, the submanifold case, and the deformation convention)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a75, printed pp. 26\u201329 (oriented source and target, signs of $df_x$, and the extendability computation)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-preimage-orientation-agrees-with-the-local-intersection-sign",
+        "kind": "lemma",
+        "title": "Preimage orientation agrees with the local intersection sign",
+        "deps": [
+          "def-local-oriented-intersection-sign",
+          "def-transverse-complementary-dimensional-intersection-set",
+          "def-local-orientation-sign-of-a-regular-preimage",
+          "def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space",
+          "def-product-orientation",
+          "def-transverse-linear-subspaces",
+          "thm-transverse-preimage-theorem",
+          "thm-transverse-preimage-for-manifolds-with-boundary"
+        ],
+        "statement": "Let $f:Y\\to M$ be transverse to a closed oriented embedded submanifold $Z$, with $Y,M$ oriented, $M$ boundaryless, and, if $Y$ has boundary, $f|_{\\partial Y}$ transverse to $Z$. Orient $Q_y=T_{f(y)}M/T_{f(y)}Z$ by the **normal-first** determinant isomorphism $\\det Q_y\\otimes\\det T_{f(y)}Z\\cong\\det T_{f(y)}M$: quotient lifts precede the tangent determinant of $Z$. Orient $K_y=T_yf^{-1}(Z)$ by the **kernel-first** exact-sequence convention\n$$\\det T_yY\\cong\\det K_y\\otimes\\det Q_y,$$\nwhere $df$ induces the quotient map. In complementary dimensions $\\dim Y+\\dim Z=\\dim M$, the resulting point sign is the local oriented intersection sign. If $Z=\\{z\\}$ has positive point orientation, this sign is $\\operatorname{sgn}(df_y)$; reversing that point orientation reverses the intersection sign.",
+        "strategy": "1.1 For the normal-first isomorphism, wedge lifts of a quotient determinant before a tangent determinant of $Z$. Replacing a lift by a tangent vector changes the wedge by zero, so this is independent of lifts. Similarly wedging a kernel determinant before lifts of a quotient determinant defines the kernel-first exact-sequence isomorphism in the statement; it is independent of lifts and smooth in local adapted frames. The given rays therefore determine a unique smooth orientation of $K$. [F1, F2, given, construct]\n\n2.1 In complementary dimensions $K_y=0$. Take positive determinant elements $u$ of $T_yY$ and $w$ of $T_{f(y)}Z$. The sign $\\varepsilon$ of $(df_yu)\\wedge w$ relative to the ambient ray is exactly the local intersection sign. By the normal-first convention, $\\overline{df}_y(u)$ has sign $\\varepsilon$ relative to the quotient ray. In $\\det T_yY=\\det K_y\\otimes\\det Q_y$, the chosen scalar ray of $\\det K_y=\\mathbb R$ must therefore have sign $\\varepsilon$ too, so that the product ray is the given source ray. This is precisely the point orientation of the fibre. [F1, F2, F3, step 1.1, algebra]\n\n3.1 For a positively oriented point $Z$, the normal-first quotient ray is the ambient ray, so 2.1 gives $\\operatorname{sgn}(df_y)$ by [F4]. A negatively oriented point changes that quotient ray and hence the fibre sign. All computations use determinant elements rather than positive empty bases and therefore include dimension zero; no choice principle is needed. [F2, F4, step 2.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a73, printed pp. 107\u2013108 (the preimage orientation and its agreement with the direct-sum criterion, \u201cin that order\u201d)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a75, printed pp. 27\u201329 (the sign of $df_x$ at a regular preimage)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-oriented-boundary-of-an-intersection-trace-has-opposite-end-signs",
+        "kind": "lemma",
+        "title": "Oriented boundary of an intersection trace has opposite end signs",
+        "deps": [
+          "lem-boundary-of-a-compact-one-manifold-has-even-cardinality",
+          "lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count",
+          "def-local-oriented-intersection-sign",
+          "def-oriented-intersection-number",
+          "lem-preimage-orientation-agrees-with-the-local-intersection-sign",
+          "thm-transverse-preimage-for-manifolds-with-boundary",
+          "def-induced-boundary-orientation",
+          "prop-boundary-orientation-is-independent-of-the-outward-vector-field",
+          "prop-boundary-orientation-of-a-product-when-at-most-one-factor-has-boundary",
+          "def-product-orientation",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $X$ be a compact oriented boundaryless $x$-manifold, $M$ an oriented boundaryless $n$-manifold, $Z\\subseteq M$ a closed oriented $z$-submanifold with $x+z=n$, and $F:[0,1]\\times X\\to M$ a smooth family transverse to $Z$ (including on the boundary faces), with the same compact trace setup as the mod 2 homotopy-invariance theorem. Put $W:=F^{-1}(Z)$, oriented by the preimage convention of [[lem-preimage-orientation-agrees-with-the-local-intersection-sign]] from the product orientation of $[0,1]\\times X$, whose boundary orientation is $\\partial([0,1]\\times X)=\\{1\\}\\times X-\\{0\\}\\times X$ (outward-normal-first). Then $W$ is a compact oriented $1$-manifold with boundary $F_0^{-1}(Z)\\sqcup F_1^{-1}(Z)$, and with its outward-normal-first boundary orientation: a point $p\\in F_0^{-1}(Z)\\subseteq\\{0\\}\\times X$ receives the sign opposite to its local oriented intersection sign for $F_0$, while $p\\in F_1^{-1}(Z)$ receives the same sign as for $F_1$. Hence $$\\sum_{p\\in\\partial W}\\varepsilon_W(p)=I(F_1,Z)-I(F_0,Z),$$ where the right side uses [[def-oriented-intersection-number]].",
+        "strategy": "**Proof technique:** compute the orientation of the trace at a boundary point in a product basis.\n\n1.1 By [F2], $W$ is a compact neat $1$-manifold with boundary the finite disjoint union of the slice preimages. Orient it by [F3]: for a positive quotient determinant $q$ and any lift $\\ell$ to the ambient tangent, a nonzero kernel vector $\\tau$ is positive exactly when $\\tau\\wedge\\ell$ is in the ambient determinant ray. The normal-first quotient ray is the unique ray whose product with the tangent ray of $Z$ is the ambient ray of $M$. Thus this orientation is defined even when the quotient has dimension zero. [F1, F2, F3, given, construct]\n\n2.1 At an end point $p=(t,x)$ let $Q=T_{F(p)}M/T_{F(p)}Z$ with the normal-first orientation. The map $dF_t:T_xX\\to Q$ is an isomorphism, so $\\tau=\\partial_t+v\\in T_pW$ exists uniquely with $dF(\\tau)=0$ in $Q$. Its $t$-component is $1$. The shear replacing $\\partial_t$ by $\\tau$ preserves the product determinant, and the kernel-first orientation therefore assigns $\\tau$ the sign $\\varepsilon_{F_t}(p)$: in determinant elements $\\tau\\otimes dF_t(u)$ has the product ray exactly when the kernel ray has that sign. This argument includes $x=0$, where $u$ and the quotient orientation are signed scalars, rather than empty positive bases. The vector $\\tau$ points outward at $t=1$ and inward at $t=0$. Thus the outward-normal-first point sign is $-\\varepsilon_{F_0}(p)$ at the initial end and $+\\varepsilon_{F_1}(p)$ at the terminal end. [F1, F3, F4, step 1.1, algebra]\n\n3.1 Summing these point signs over the finite boundary gives $\\sum_{p\\in\\partial W}\\varepsilon_W(p)=I(F_1,Z)-I(F_0,Z)$ by [F4]. The left side vanishes by [F5]. The determinant comparison itself uses no choice; the boundary-count supplier uses the stated $\\mathrm{AC}_\\omega$. [F2, F4, F5, step 2.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a75, printed pp. 28\u201329 (Lemma 1: on each arc of $F^{-1}(y)$ the two boundary signs are $-1$ and $+1$)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a73, printed p. 108 (the sum of orientation numbers on $\\partial F^{-1}(Z)$ is zero, and $I(\\partial F,Z)=I(f_1,Z)-I(f_0,Z)$)"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-oriented-intersection-number-is-homotopy-invariant",
+        "kind": "theorem",
+        "title": "The oriented intersection number is homotopy invariant",
+        "deps": [
+          "lem-boundary-of-a-compact-one-manifold-has-even-cardinality",
+          "lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count",
+          "def-oriented-intersection-number",
+          "lem-preimage-orientation-agrees-with-the-local-intersection-sign",
+          "lem-oriented-boundary-of-an-intersection-trace-has-opposite-end-signs",
+          "thm-transverse-preimage-for-manifolds-with-boundary",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "thm-transversality-homotopy-theorem",
+          "def-countable-choice",
+          "thm-mod-two-intersection-number-is-homotopy-invariant"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $X$ be a compact oriented smooth manifold without boundary, $M$ an oriented smooth $n$-manifold without boundary, and $Z\\subseteq M$ a closed oriented embedded submanifold with $\\dim X+\\dim Z=n$. Let $F:[0,1]\\times X\\to M$ be a smooth family transverse to $Z$, including on the boundary faces. Then the endpoint slice maps $F_0,F_1$ are transverse to $Z$ and $$I(F_0,Z)=I(F_1,Z),$$ with the oriented intersection number of [[def-oriented-intersection-number]]. Consequently $I(\\cdot,Z)$ is well defined on homotopy classes of smooth maps $X\\to M$: any two transverse maps in the same homotopy class give the same number, and the definition extends to all smooth maps. Compactness of the source and closedness of $Z$ ensure a compact trace; compactness of $M$ is unnecessary; the safe proper extension is recorded in the remark on properness later on this page.",
+        "strategy": "**Proof technique:** direct; the trace's signed boundary count is computed twice.\n\n1.1 By [F1] the trace $W$ is a compact oriented $1$-manifold with boundary the disjoint union of the finite sets $F_0^{-1}(Z)$ and $F_1^{-1}(Z)$, and the endpoint slice maps $F_0,F_1$ are transverse to $Z$, so $I(F_0,Z)$ and $I(F_1,Z)$ are defined by [F4]. [F1, F4, given]\n\n2.1 By [F2] the sum of the outward-normal-first boundary signs of $W$ equals $I(F_1,Z)-I(F_0,Z)$; by [F3] that sum vanishes, because $W$ is a compact oriented $1$-manifold. Hence $I(F_1,Z)=I(F_0,Z)$. [F2, F3, step 1.1, algebra]\n\n3.1 For the extension to arbitrary smooth maps, let $g_0,g_1:X\\to M$ be transverse and homotopic; use the end-collar construction of [F5] to obtain a transverse homotopy fixed at those endpoints. Applying 2.1 to that trace gives $I(g_0,Z)=I(g_1,Z)$ whenever both are transverse; for an arbitrary smooth map one chooses a transverse representative by [F5], and the value is independent of the choice by the previous sentence, so the definition of [F4] is well posed on homotopy classes. Countable Choice is inherited through the classification and used for the approximation suppliers; the finite determinant and sum computations add no choice. [F2, F3, F4, F5, step 2.1, choose] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a73, printed p. 108 (homotopic maps have equal oriented intersection numbers, via the boundary of a compact oriented 1-manifold)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a75, printed pp. 28\u201329 (Lemma 1 and its use for homotopy invariance of degree)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-oriented-intersection-reduces-to-mod-two-intersection",
+        "kind": "corollary",
+        "title": "The oriented intersection number reduces to the mod 2 number",
+        "deps": [
+          "def-mod-two-intersection-number",
+          "thm-mod-two-intersection-number-is-homotopy-invariant",
+          "def-oriented-intersection-number",
+          "thm-oriented-intersection-number-is-homotopy-invariant",
+          "def-integers-modulo-n",
+          "def-countable-choice",
+          "thm-transversality-homotopy-theorem"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. In the common setting \u2014 $X$ compact oriented, $M$ closed oriented, $Z\\subseteq M$ closed oriented embedded, $\\dim X+\\dim Z=\\dim M$ \u2014 the oriented and mod 2 intersection numbers are related by reduction modulo two: $$I(f,Z)\\equiv I_2(f,Z)\\pmod 2$$ for every smooth $f:X\\to M$ for which either side is defined. In particular for compact oriented complementary submanifolds $A,B$, $I(A,B)\\equiv I_2(A,B)\\pmod 2$, and $I_2$ is defined even where no orientations exist.",
+        "strategy": "**Proof technique:** direct; reduce both sides to a common transverse representative.\n\n1.1 Choose a smooth map $\\tilde f$ homotopic to $f$ and transverse to $Z$; this is possible by the transversality homotopy theorem under [A1], and by [F1] and [F2] neither $I_2(f,Z)$ nor $I(f,Z)$ changes when $f$ is replaced by $\\tilde f$. Hence it suffices to prove the congruence for a transverse map, and Countable Choice is used exactly in this selection; the reduction for a transverse map below is choice-free. [A1, F1, F2, given]\n\n2.1 For a transverse $\\tilde f$ the fibre $\\tilde f^{-1}(Z)$ is finite, $I(\\tilde f,Z)=\\sum_p\\varepsilon(p)$ with $\\varepsilon(p)=+1$ or $-1$, and $I_2(\\tilde f,Z)=\\#\\tilde f^{-1}(Z)\\bmod 2$. Each local sign is congruent to $1$ modulo two by [F3], so $I(\\tilde f,Z)\\equiv\\#\\tilde f^{-1}(Z)\\equiv I_2(\\tilde f,Z)\\pmod 2$. [F1, F2, F3, step 1.1, algebra]\n\n3.1 For compact oriented complementary submanifolds $A,B$ the inclusion case gives $I(A,B)\\equiv I_2(A,B)$; the mod 2 number of the pair is defined without any orientability hypothesis, so parity remains available without orientations, although comparison with an integer count requires the oriented setting. [F1, F2, step 2.1] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, printed p. 79 and Ch. 3 \u00a73, printed p. 107 (the oriented count specializes to the parity count)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a74, printed p. 25 and \u00a75, printed p. 27 ($\\deg_2$ versus $\\deg$)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-intersection-number-under-factor-interchange",
+        "kind": "theorem",
+        "title": "Intersection number under factor interchange",
+        "deps": [
+          "def-oriented-intersection-number",
+          "thm-oriented-intersection-number-is-homotopy-invariant",
+          "lem-direct-sum-factor-swap-scales-oriented-bases-by-a-sign",
+          "def-product-orientation",
+          "def-transverse-smooth-maps",
+          "def-transverse-complementary-dimensional-intersection-set",
+          "def-compact-space",
+          "def-local-oriented-intersection-sign",
+          "prop-the-diagonal-is-an-embedded-submanifold",
+          "thm-transversality-homotopy-theorem",
+          "def-countable-choice"
+        ],
+        "statement": "Let $f:X^x\\to M^n$ and $g:Z^z\\to M^n$ be transverse smooth maps from compact oriented manifolds without boundary with $x+z=n$ into an oriented boundaryless manifold $M$. Then $$I(g,f)=(-1)^{xz}\\,I(f,g),$$ with the sign convention of [[def-local-oriented-intersection-sign]] (first factor first), and in particular the two intersection numbers differ exactly by the graded-commutativity sign. Under $\\mathrm{AC}_\\omega$ for transverse representatives and homotopy invariance, the same identity holds for compact oriented complementary-dimensional submanifolds $A^a,B^b\\subseteq M$ without boundary, whether or not they are transverse: $$I(B,A)=(-1)^{ab}\\,I(A,B).$$",
+        "strategy": "**Proof technique:** direct; compare the two ordered sums at each coincidence point.\n\n1.1 By [F1] the coincidence set is finite, so both sums $I(f,g)$ and $I(g,f)$ are finite sums over the same index set; this exhibits $I(f,g)$ for two maps as a finite sum of the local signs of [F2] and provides the map--map intersection numbers used in the statement. [F1, F2, F4, given]\n\n1.2 At a coincidence point $(a,b)$ with $f(a)=g(b)=y$, transversality and $x+z=n$ make $L=(df_a,dg_b):T_aX\\oplus T_bZ\\to T_yM$ an isomorphism. The corresponding isomorphism for $(g,f)$ is $L\\circ s^{-1}$, where $s$ swaps the source factors and has sign $(-1)^{xz}$ by [F3]. Hence $\\varepsilon_{(g,f)}(b,a)=(-1)^{xz}\\varepsilon_{(f,g)}(a,b)$, including signed determinant rays in dimension zero. [F2, F3, given, algebra]\n\n1.3 For any transverse pair $u:A^a\\to M$, $v:B^b\\to M$, the product map $u\\times v:A\\times B\\to M\\times M$ is transverse to $\\Delta_M$: the quotient $(r,s)\\mapsto r-s$ has kernel $T\\Delta_M$ and sends its derivative onto $du(TA)+dv(TB)=TM$. Its local intersection sign is $(-1)^b$ times that of $(u,v)$. Indeed in oriented determinant frames put $C=[du\\ dv]$; the derivative matrix for $(u\\times v,i_\\Delta)$ has columns $(du,0),(0,dv),(I,I)$. Subtract the bottom row block from the top. The resulting block lower triangular matrix has diagonal blocks $[du\\ {-dv}]$ and $I$. Its determinant sign is therefore $(-1)^b\\operatorname{sgn}\\det C$. In dimension zero the supplied point rays multiply the same comparisons, with $\\Delta_M$ carrying the ambient ray. Summing gives $I(u\\times v,\\Delta_M)=(-1)^bI(u,v)$. [F2, F3, F4, F5, algebra]\n\n2.1 The swap $(a,b)\\mapsto(b,a)$ identifies the two finite coincidence sets. Summing 1.2 gives $I(g,f)=(-1)^{xz}I(f,g)$. In particular this proves the submanifold identity when $A,B$ are transverse, by taking their inclusions. [F4, step 1.1, step 1.2, algebra]\n\n3.1 Now let $A,B$ be arbitrary compact oriented complementary-dimensional submanifolds without boundary. Under [F5] choose $u:A\\to M$ homotopic to $i_A$ and transverse to $B$, and $v:B\\to M$ homotopic to $i_B$ and transverse to $A$. By definition $I(A,B)=I(u,i_B)$ and $I(B,A)=I(v,i_A)$. The transverse maps $u\\times i_B$ and $i_A\\times v$ are homotopic to $i_A\\times i_B$, so [F5] applied to the closed oriented diagonal gives equality of their intersection numbers. By 1.3 this reads $(-1)^bI(u,i_B)=(-1)^bI(i_A,v)$. Applying 2.1 to the transverse pair $(i_A,v)$ gives $I(i_A,v)=(-1)^{ab}I(v,i_A)$, hence $I(B,A)=(-1)^{ab}I(A,B)$. Compactness of the source products and closedness of the diagonal supply finite counts; no transversality of the original inclusions is required. Countable Choice is used only for this homotopy-class extension; the finite transverse swap calculation is choice-free and includes $a=0$ or $b=0$ with sign $+1$. [F4, F5, step 2.1, step 1.3, choose, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a73, printed p. 115 (Proposition $I(f,g)=(-1)^{(\\dim X)(\\dim Z)}I(g,f)$ and its submanifold corollary)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "prop-two-map-intersection-as-a-diagonal-preimage",
+        "kind": "proposition",
+        "title": "Two-map intersection as a diagonal preimage",
+        "deps": [
+          "def-transverse-complementary-dimensional-intersection-set",
+          "def-local-oriented-intersection-sign",
+          "def-oriented-intersection-number",
+          "thm-intersection-number-under-factor-interchange",
+          "lem-direct-sum-factor-swap-scales-oriented-bases-by-a-sign",
+          "def-product-orientation",
+          "thm-transverse-fibre-product-theorem",
+          "prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold"
+        ],
+        "statement": "Let $f:X^x\\to M^n$ and $g:Z^z\\to M^n$ be smooth maps from compact oriented manifolds with $x+z=n$, into an oriented boundaryless manifold $M$, and let $\\Delta_M\\subset M\\times M$ be the diagonal oriented so that $M\\to\\Delta_M$, $y\\mapsto(y,y)$, is orientation preserving, $M\\times M$ carrying the product orientation. Then $f$ and $g$ are transverse if and only if $f\\times g:X\\times Z\\to M\\times M$ is transverse to $\\Delta_M$; the sets $\\{(a,b):f(a)=g(b)\\}$ and $(f\\times g)^{-1}(\\Delta_M)$ coincide. When these equivalent transversality conditions hold, $$I(f,g)=(-1)^{z}\\,I(f\\times g,\\Delta_M),$$ where $I(f\\times g,\\Delta_M)$ is the oriented intersection number of the map $f\\times g$ with the closed oriented submanifold $\\Delta_M$ in the sense of [[def-oriented-intersection-number]]. Reading the same computation with the factors exchanged, and using [[thm-intersection-number-under-factor-interchange]], gives $I(f,g)=(-1)^{x}I(i_\\Delta,f\\times g)$, where $i_\\Delta:\\Delta_M\\hookrightarrow M\\times M$ is the inclusion. Here the last expression denotes the finite transverse local-sign sum; this sum is meaningful even when $\\Delta_M$ is noncompact.",
+        "strategy": "**Proof technique:** direct; compare the two local signs by a block transposition.\n\n1.1 The identity $(f\\times g)^{-1}(\\Delta_M)=\\{(a,b):f(a)=g(b)\\}=X\\times_MZ$ is immediate from the definitions. At $(a,b)$ with $y=f(a)=g(b)$, put $U:=df_a(T_aX)$ and $W:=dg_b(T_bZ)$; the differential of $f\\times g$ has image $U\\times W$, and [F2] gives $T_{(y,y)}\\Delta_M=\\Delta_{T_yM}$. Then $d(f\\times g)_{(a,b)}$ is transverse to $\\Delta_M$ exactly when $U\\times W+\\Delta_{T_yM}=T_yM\\times T_yM$, the quotient map $(v,w)\\mapsto v-w$ has kernel $\\Delta_{T_yM}$ and sends $U\\times W$ onto $U+W$, so this is equivalent to $U+W=T_yM$, that is, to transversality of $f$ and $g$ at $(a,b)$. [F1, F2, F3, given, algebra]\n\n2.1 Assume the equivalent transversality conditions hold. At a coincidence write $A=df_a$ and $B=dg_b$ in supplied oriented determinant frames, and $C=[A\\ B]$. The local sign of $(f,g)$ is $\\operatorname{sgn}\\det C$. For $(f\\times g,\\Delta_M)$ the ordered derivative matrix in the ambient product frame has block columns $(A,0)$, $(0,B)$, $(I,I)$. Subtracting its top row block from the bottom and moving the final $n$ diagonal columns to the front gives the sign factor $(-1)^{n^2}=(-1)^n$ and bottom block $[-A\\ B]$, of determinant $(-1)^x\\det C$. Thus the original determinant has sign $(-1)^{n+x}\\operatorname{sgn}\\det C=(-1)^z\\operatorname{sgn}\\det C$. The determinant-ray calculation includes zero-dimensional source factors: their point signs multiply both comparisons equally, while the diagonal carries the ambient ray. [F3, F4, step 1.1, algebra]\n\n3.1 Summing 2.1 over the finite coincidence set gives $I(f,g)=(-1)^zI(f\\times g,\\Delta_M)$: the two sums are over the same finite index set, and $(-1)^z$ is a common factor. Exchanging the roles of the two maps and using the factor-interchange sign of [F5] gives $I(f,g)=(-1)^{x}I(i_\\Delta,f\\times g)$: the map--submanifold number $I(f\\times g,\\Delta_M)$ equals the map--map number $I(f\\times g,i_\\Delta)$ because the differential of the inclusion is the inclusion of $T\\Delta_M$, and the same pointwise block-swap calculation as [F5], of dimensions $n,n$, gives $I(i_\\Delta,f\\times g)=(-1)^{n\\cdot n}I(f\\times g,i_\\Delta)=(-1)^nI(f\\times g,\\Delta_M)$. This finite transverse sum is defined even if the diagonal is noncompact, since its coincidence set is exactly the finite preimage in the compact $X\\times Z$ with $n=x+z$. [F1, F4, F5, step 2.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a73, printed pp. 113\u2013114 (diagonal reformulation, the linear-algebra Lemma, and the Proposition $I(f,g)=(-1)^{\\dim Z}I(f\\times g,\\Delta)$)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 15, p. 48 (the sign $[P]\\cdot[Q]=(-1)^m[P\\times Q]\\cdot[\\Delta_M]$)"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-a-null-cobordant-cycle-has-zero-intersection-with-a-disjoint-boundary",
+        "kind": "corollary",
+        "title": "A cycle has zero algebraic intersection with a bounding cycle",
+        "deps": [
+          "lem-boundary-of-a-compact-one-manifold-has-even-cardinality",
+          "lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count",
+          "thm-transverse-preimage-for-manifolds-with-boundary",
+          "def-local-oriented-intersection-sign",
+          "def-oriented-intersection-number",
+          "lem-oriented-boundary-of-an-intersection-trace-has-opposite-end-signs",
+          "cor-oriented-intersection-reduces-to-mod-two-intersection",
+          "def-induced-boundary-orientation",
+          "def-transverse-embedded-submanifolds",
+          "def-embedded-smooth-submanifold-with-boundary",
+          "lem-direct-sum-factor-swap-scales-oriented-bases-by-a-sign",
+          "def-countable-choice",
+          "lem-preimage-orientation-agrees-with-the-local-intersection-sign",
+          "def-mod-two-intersection-number"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $M$ be a closed oriented $n$-manifold, $A^a\\subseteq M$ a closed oriented embedded submanifold, and $W^{b+1}\\subseteq M$ a compact oriented embedded submanifold with boundary, with $a+b=n$ and $B:=\\partial W$ oriented outward-normal-first. Assume the inclusion of $A$ is transverse to $W$ and to $\\partial W$. Then $$I(A,B)=0\\qquad\\text{and}\\qquad I_2(A,B)=0.$$ The same vanishing holds for the mod 2 number without orientability hypotheses, provided the intersection is transverse. The compactness of $W$ is essential: an extension over a noncompact trace, or an intersection escaping at infinity, need not preserve the count.",
+        "strategy": "**Proof technique:** direct; count the boundary of the compact oriented $1$-manifold $W\\cap A$.\n\n1.1 By [F1] the set $W\\cap A$ is a compact oriented $1$-manifold with boundary $A\\cap B$, oriented as in [F2]; its boundary is finite by [F4], so $A\\cap B$ is a finite transverse intersection and both $I(A,B)$ and $I_2(A,B)$ are defined. [F1, F2, F4, F5, given]\n\n2.1 At $p\\in A\\cap B$, the map $TB\\to Q$ is an isomorphism. Choose an outward vector $r$ tangent to $S$; its existence follows from neatness, and let $u$ be a positive determinant of $TB$. Then $(r,u)$ is positive for $TW$ by the boundary convention. The sign of $d i_B(u)$ in $Q$ is the local sign $\\varepsilon_{(B,A)}$, since quotient lifts precede $TA$. The kernel-first convention therefore assigns the outward $r$ that same sign in $TS$, so the boundary point sign is $\\varepsilon_{(B,A)}=(-1)^{ab}\\varepsilon_{(A,B)}$. This determinant-element argument also covers $b=0$. Summing over $\\partial S=A\\cap B$ gives $\\sum\\varepsilon_{\\partial S}=(-1)^{ab}I(A,B)$. The sum vanishes by [F4], hence $I(A,B)=0$. [F2, F3, F4, F5, step 1.1, algebra]\n\n3.1 Independently of orientations, [F4] says that the boundary of the compact $1$-manifold $W\\cap A$ has even cardinality; that boundary is $A\\cap B$ by [F1], so $\\#(A\\cap B)$ is even and $I_2(A,B)=0$ by [F5]. This mod 2 statement assumes no orientability of $A$, $W$ or $M$. [F1, F4, F5, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, printed p. 80 (Boundary Theorem: $X=\\partial W$ and $g$ extends implies $I_2(g,Z)=0$) and Ch. 3 \u00a73, printed p. 108 (the oriented version)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a75, printed p. 28 (Lemma 1)"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-negative-expected-dimension-generic-intersections-are-empty",
+        "kind": "corollary",
+        "title": "Negative expected dimension forces empty generic intersections",
+        "deps": [
+          "def-transverse-complementary-dimensional-intersection-set",
+          "def-transverse-smooth-maps",
+          "def-transverse-embedded-submanifolds",
+          "thm-transversality-homotopy-theorem",
+          "thm-strong-whitney-approximation-by-transverse-maps",
+          "def-countable-choice"
+        ],
+        "statement": "Let $f:X^x\\to M^n$ and $g:Z^z\\to M^n$ be smooth maps with $x+z<n$. If $f$ and $g$ are transverse, then $X\\times_MZ=\\varnothing$. In particular, if $A^a,B^b\\subseteq M^n$ are transverse embedded submanifolds with $a+b<n$, then $A\\cap B=\\varnothing$. For the perturbation conclusion assume $\\mathrm{AC}_\\omega$ and fix a **closed embedded** submanifold $Z\\subseteq M$ with $\\dim X+\\dim Z<n$. Every strong smooth neighbourhood of $f$ contains a map transverse to $Z$ ([[thm-strong-whitney-approximation-by-transverse-maps]]), hence disjoint from $Z$; a disjoint homotopic map is supplied by [[thm-transversality-homotopy-theorem]]. The cited approximation theorem concerns a fixed closed embedded submanifold, not an arbitrary map $g$.",
+        "strategy": "**Proof technique:** direct, by rank counting.\n\n1.1 Suppose there were $(a,b)$ with $f(a)=g(b)=y$. Then [F1] gives $T_yM=df_a(T_aX)+dg_b(T_bZ)$; the right side is the span of the images of vector spaces of dimensions $x$ and $z$, so its dimension is at most $x+z<n=\\dim T_yM$, a contradiction. Hence there are no pairs with $f(a)=g(b)$ and $X\\times_MZ=\\varnothing$. [F1, given, algebra]\n\n2.1 If $A^a,B^b\\subseteq M$ are transverse embedded submanifolds with $a+b<n$ and $p\\in A\\cap B$, then applying 1.1 to the two inclusion maps gives $T_pA+T_pB=T_pM$ with left side of dimension at most $a+b<n$, a contradiction; hence $A\\cap B=\\varnothing$. [F2, step 1.1, given, algebra]\n\n3.1 For the perturbation clause, let a strong neighbourhood of $f$ and a closed embedded $Z$ be given with $\\dim X+\\dim Z<n$; by [F3] the neighbourhood contains a smooth map transverse to $Z$, and by 1.1 that map misses $Z$, so after an arbitrarily small perturbation the intersection is empty; in the homotopy formulation the transverse representative is supplied by [F4]. The rank count itself uses no choice; $\\mathrm{AC}_\\omega$ is consumed exactly by the approximation and homotopy theorems. [F3, F4, step 1.1, step 2.1] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, printed p. 77 (complementary dimension and the discussion of intersections)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Problem 16, printed p. 54 (transversal intersection and $n+n'<m$ means the intersection is empty)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "rem-properness-can-replace-compactness-only-when-the-intersection-trace-is-compact",
+        "kind": "remark",
+        "title": "Properness can replace compactness only when the intersection trace is compact",
+        "deps": [
+          "def-mod-two-intersection-number",
+          "thm-mod-two-intersection-number-is-homotopy-invariant",
+          "def-oriented-intersection-number",
+          "thm-oriented-intersection-number-is-homotopy-invariant",
+          "thm-transverse-preimage-for-manifolds-with-boundary",
+          "thm-degree-is-invariant-under-proper-smooth-homotopy"
+        ],
+        "statement": "The compactness hypotheses of the definitions and invariance theorems on this page may be replaced by properness in exactly the places where the proofs use them. For complementary dimensions, if $X$ is a smooth boundaryless manifold and $f:X\\to M$ is proper with $Z\\subseteq M$ a compact embedded submanifold, properness makes $f^{-1}(Z)$ compact, and a transverse count over it is finite ([[thm-transverse-preimage-for-manifolds-with-boundary]] records the local structure that makes the counted set discrete). Properness alone is not enough when the target is not compact: the proper map $f:\\mathbb R\\to\\mathbb R^2$, $f(t)=(t,\\sin t)$, is transverse to the closed submanifold $Z=\\mathbb R\\times\\{0\\}$ and meets it in the infinite set $\\pi\\mathbb Z$, so its trace, though discrete, is not compact and the count is not finite. For a homotopy the same argument requires properness of the combined map $F:[0,1]\\times X\\to M$ when $Z$ is compact, or more generally compactness of the trace $F^{-1}(Z)$ itself: properness of the endpoint maps alone does not imply it, exactly as for the degree ([[thm-degree-is-invariant-under-proper-smooth-homotopy]]), and the safe formulation is that the relevant intersection trace $F^{-1}(Z)$ be compact.\n\nArbitrary noncompact homotopies do not preserve the count. The intersection points can escape to infinity, so that the compact $1$-manifold argument of [[thm-mod-two-intersection-number-is-homotopy-invariant]] and [[thm-oriented-intersection-number-is-homotopy-invariant]] has no compact boundary to count; the companion counterexample on the examples page exhibits the escape to infinity even with proper slices. Closedness of the target submanifold is likewise used rather than decorative, and the definitions of [[def-mod-two-intersection-number]] and [[def-oriented-intersection-number]] are stated for compact sources precisely so that this remark is a boundary case, not an implicit extension.\n\nBoundarylessness of $X$ is a separate requirement: with a source boundary, a compact trace can have additional boundary points on $[0,1]\\times\\partial X$, and the endpoint counts need not agree. This is not a failure of compactness. The trace and boundary counts use the inherited $\\mathrm{AC}_\\omega$ of their classification suppliers; the explicit finiteness and escape computations introduce no further choice.",
+        "strategy": "The compactness hypotheses of the definitions and invariance theorems on this page may be replaced by properness in exactly the places where the proofs use them. For complementary dimensions, if $X$ is a smooth boundaryless manifold and $f:X\\to M$ is proper with $Z\\subseteq M$ a compact embedded submanifold, properness makes $f^{-1}(Z)$ compact, and a transverse count over it is finite ([[thm-transverse-preimage-for-manifolds-with-boundary]] records the local structure that makes the counted set discrete). Properness alone is not enough when the target is not compact: the proper map $f:\\mathbb R\\to\\mathbb R^2$, $f(t)=(t,\\sin t)$, is transverse to the closed submanifold $Z=\\mathbb R\\times\\{0\\}$ and meets it in the infinite set $\\pi\\mathbb Z$, so its trace, though discrete, is not compact and the count is not finite. For a homotopy the same argument requires properness of the combined map $F:[0,1]\\times X\\to M$ when $Z$ is compact, or more generally compactness of the trace $F^{-1}(Z)$ itself: properness of the endpoint maps alone does not imply it, exactly as for the degree ([[thm-degree-is-invariant-under-proper-smooth-homotopy]]), and the safe formulation is that the relevant intersection trace $F^{-1}(Z)$ be compact.\n\nArbitrary noncompact homotopies do not preserve the count. The intersection points can escape to infinity, so that the compact $1$-manifold argument of [[thm-mod-two-intersection-number-is-homotopy-invariant]] and [[thm-oriented-intersection-number-is-homotopy-invariant]] has no compact boundary to count; the companion counterexample on the examples page exhibits the escape to infinity even with proper slices. Closedness of the target submanifold is likewise used rather than decorative, and the definitions of [[def-mod-two-intersection-number]] and [[def-oriented-intersection-number]] are stated for compact sources precisely so that this remark is a boundary case, not an implicit extension.\n\nBoundarylessness of $X$ is a separate requirement: with a source boundary, a compact trace can have additional boundary points on $[0,1]\\times\\partial X$, and the endpoint counts need not agree. This is not a failure of compactness. The trace and boundary counts use the inherited $\\mathrm{AC}_\\omega$ of their classification suppliers; the explicit finiteness and escape computations introduce no further choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, Exercise 13, printed p. 84 (invariance and the Boundary Theorem fail without closedness, compactness, or a compact trace)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a75, printed pp. 28\u201329 (the compact oriented trace argument)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 530,
+    "id": "oriented-and-mod-two-intersection-numbers-examples",
+    "kind": "B",
+    "category": "differential-topology",
+    "title": "Oriented and Mod Two Intersection Numbers \u2014 Examples",
+    "companion": "oriented-and-mod-two-intersection-numbers",
+    "requires": [
+      "oriented-and-mod-two-intersection-numbers",
+      "fibrations-fiber-bundles-and-homotopy-exact-sequences",
+      "geodesics-the-exponential-map-completeness-and-hopf-rinow"
+    ],
+    "items": [
+      {
+        "id": "ex-latitude-and-meridian-intersections-on-the-torus",
+        "kind": "example",
+        "title": "Latitude and meridian intersections on the torus",
+        "deps": [
+          "def-transverse-complementary-dimensional-intersection-set",
+          "def-mod-two-intersection-number",
+          "thm-mod-two-intersection-number-is-homotopy-invariant",
+          "def-local-oriented-intersection-sign",
+          "def-oriented-intersection-number",
+          "def-two-dimensional-torus",
+          "def-circle-as-real-line-mod-integers",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "def-product-orientation",
+          "thm-canonical-tangent-and-cotangent-splittings-for-products",
+          "thm-a-regular-level-set-is-an-embedded-submanifold"
+        ],
+        "statement": "Let $T^2=Q\\times Q$ with $Q=\\mathbb R/\\mathbb Z$ ([[def-two-dimensional-torus]]) carry the product smooth structure and product orientation ([[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]], [[def-product-orientation]]). Let $A:=Q\\times\\{[0]\\}$ be the latitude circle and $B:=\\{[0]\\}\\times Q$ the meridian circle, both embedded oriented circles cutting out by the coordinate projections ([[thm-a-regular-level-set-is-an-embedded-submanifold]]). They meet transversely in the single point $([0],[0])$; with the product orientation and the first-factor-first convention of [[def-local-oriented-intersection-sign]] the local sign is $+1$, so $I(A,B)=1$, while $I(B,A)=-1$; the mod 2 number is $I_2(A,B)=I_2(B,A)=1$ and can be computed without orientations. Perturbing $B$ to $B_\\varepsilon=\\{[t]\\}\\times Q$ for a fixed nonzero class $[t]$ leaves the mod 2 number equal to $1$ as long as the trace stays transverse to $A$.",
+        "strategy": "1.1 By [F2] the sets $A$ and $B$ are embedded circles, and $A\\cap B=\\{([0],[0])\\}$: a point of $A$ has second coordinate $[0]$, a point of $B$ has first coordinate $[0]$. At that point $T_pA=\\mathbb R\\partial_x$ and $T_pB=\\mathbb R\\partial_y$, and $(\\partial_x,\\partial_y)$ is the positive product frame, so $A$ and $B$ are transverse and the local sign is $+1$ by [F3]. Hence $I(A,B)=1$; with the factors exchanged the ordered basis $(\\partial_y,\\partial_x)$ is negative, so $I(B,A)=-1$. [F2, F3, given, algebra]\n\n2.1 The same computation counts mod two: the transverse intersection has one point, so $I_2(A,B)=I_2(B,A)=1$ by [F4], and no orientation hypothesis was used. For the perturbation, each $B_t:=\\{[t]\\}\\times Q$ with $t\\in\\mathbb R$ is again a meridian circle with $T_pB_t=\\mathbb R\\partial_y$ at its unique intersection point $([t],[0])$ with $A$, so the intersection is transverse with one point and $I_2(A,B_t)=1$ for every $t$; the explicit family $t\\mapsto\\{[t]\\}\\times Q$ thus has constant mod 2 count by this direct computation. Thus the example realizes the source's count $I_2=1$ and the sign asymmetry $I(A,B)=-I(B,A)$; no choice principle is used: the circles, the product structure and the perturbation are explicit, the perturbation count is computed directly for every $t$, without selecting a homotopy or applying classification. [F1, F4, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, printed p. 79, Figure 2-14 (two complementary circles on $S^1\\times S^1$ have $I_2=1$); Ch. 3 \u00a73, printed p. 112, Figure 3-10 (two circles on the torus with $I(X,Z)=-I(Z,X)$)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-two-projective-lines-have-one-mod-two-intersection",
+        "kind": "example",
+        "title": "Two projective lines have one mod 2 intersection",
+        "deps": [
+          "def-transverse-complementary-dimensional-intersection-set",
+          "def-mod-two-intersection-number",
+          "thm-mod-two-intersection-number-is-homotopy-invariant",
+          "ex-real-projective-space-from-affine-charts",
+          "ex-real-projective-space-cover-as-a-discrete-fiber-fibration",
+          "ex-real-projective-space-is-orientable-exactly-in-odd-dimension",
+          "ex-great-circles-as-round-sphere-geodesics",
+          "thm-a-regular-level-set-is-an-embedded-submanifold",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds",
+          "def-countable-choice"
+        ],
+        "statement": "Model the real projective plane as $\\mathbb{RP}^2=S^2/(x\\sim-x)$ with its quotient smooth structure ([[ex-real-projective-space-from-affine-charts]], [[ex-real-projective-space-cover-as-a-discrete-fiber-fibration]]). Two distinct projective lines are the images of two distinct great circles of $S^2$ ([[ex-great-circles-as-round-sphere-geodesics]]); they are embedded circles meeting transversely in exactly one point of $\\mathbb{RP}^2$, because two distinct great circles meet in exactly two antipodal points of $S^2$, which the quotient identifies. Since $\\mathbb{RP}^2$ is nonorientable ([[ex-real-projective-space-is-orientable-exactly-in-odd-dimension]]), no oriented intersection number of the two lines is available, but the mod 2 intersection number is defined and equals $I_2=1$; hence, under $\\mathrm{AC}_\\omega$ for homotopy invariance, the lines cannot be separated by deformation of either or both inclusion maps. This is the paradigm case showing why the parity theory exists.",
+        "strategy": "1.1 Distinct great circles $C_1,C_2$ are planes through the origin meeting the sphere, and distinct planes through the origin in $\\mathbb R^3$ meet in a line through the origin, which cuts $S^2$ in exactly two antipodal points; at such a point $p$ the tangent line $T_pC_i=p^\\perp\\cap P_i$ lies in $T_pS^2=p^\\perp$ and determines the plane $P_i$ as $\\operatorname{span}\\{p,T_pC_i\\}$, so the two tangent lines are distinct one-dimensional subspaces of the two-dimensional $T_pS^2$ and therefore span it, which is transversality. [F1, given, algebra]\n\n2.1 Each great circle is antipodally invariant. Its antipodal quotient is a circle, and the induced map $C_i/(\\pm1)\\to\\mathbb{RP}^2$ is injective. Since its source is compact and its target Hausdorff, it is a homeomorphism onto its image; in the local diffeomorphism charts of [F2] it is the embedded arc $C_i$, hence is a smooth embedding. Saturation of the two $C_i$ under the antipodal involution gives $q(C_1)\\cap q(C_2)=q(C_1\\cap C_2)$, a single point. The invertible differential of $q$ carries the two distinct tangent lines of 1.1 to distinct tangent lines in the quotient, preserving transversality. [F1, F2, step 1.1, algebra]\n\n3.1 By [F3] the projective plane is nonorientable, so no oriented intersection number of the two lines is defined. By [F4] the mod 2 intersection number is defined and equals the parity of the intersection, namely $1$; under the stated $\\mathrm{AC}_\\omega$, every homotopic pair of transverse representatives of the two projective lines meets an odd number of times, so the lines can never be deformed to disjoint positions. [F3, F4, step 2.1] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, printed pp. 77\u201380 (mod 2 intersection theory requires no orientability, illustrated on the M\u00f6bius band and the torus)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a74, printed pp. 20\u201325 (the mod 2 count and parity in nonoriented settings)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-degree-as-intersection-with-a-regular-value",
+        "kind": "example",
+        "title": "Degree as an intersection with a regular value",
+        "deps": [
+          "def-oriented-intersection-number",
+          "lem-preimage-orientation-agrees-with-the-local-intersection-sign",
+          "prop-two-map-intersection-as-a-diagonal-preimage",
+          "def-degree-of-a-proper-smooth-map-by-compact-support-cohomology",
+          "thm-regular-value-formula-for-degree",
+          "def-local-orientation-sign-of-a-regular-preimage",
+          "prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold",
+          "def-product-orientation"
+        ],
+        "statement": "Let $F:M^n\\to N^n$ be a proper smooth map between nonempty connected oriented boundaryless manifolds, and let $y\\in N$ be a regular value, with $\\{y\\}$ given the positive point orientation. The degree satisfies\n$$\\deg(F)=\\sum_{p\\in F^{-1}(y)}\\operatorname{sgn}(dF_p),$$\nthe finite transverse signed intersection count against $\\{y\\}$. If $M$ is compact this is $I(F,\\{y\\})$ in [[def-oriented-intersection-number]]; for noncompact $M$ the displayed finite count is the proper-map regular-value formula, without asserting the compact-source definition applies. If $M$ is compact, orient $\\Gamma_F$ by its parametrization $p\\mapsto(p,F(p))$ and $M\\times\\{y\\}$ by $M$ and the positive point; then\n$$\\deg(F)=I(M\\times\\{y\\},\\Gamma_F),\\qquad I(\\Gamma_F,M\\times\\{y\\})=(-1)^n\\deg(F).$$\nThe fibre precedes the graph, in the product-oriented $M\\times N$.",
+        "strategy": "1.1 Regularity makes $F$ transverse to $\\{y\\}$. Its finite signed count is the sum in [F1], since the local intersection signs against the positive point equal $\\operatorname{sgn}(dF_p)$ by [F2]. The sum is $\\deg(F)$; with compact $M$ the definition in [F2] names it $I(F,\\{y\\})$. Properness supplies finiteness even when $M$ is noncompact, but it does not enlarge that compact-source definition. [F1, F2, given, algebra]\n\n2.1 Assume $M$ compact. At $(p,y)$ a fibre tangent vector is $(u,0)$ and a graph tangent vector is $(v,dF_pv)$. The ordered derivative matrix for fibre first, graph second is $\\begin{pmatrix}I&I\\\\0&dF_p\\end{pmatrix}$, whose determinant has sign $\\operatorname{sgn}(dF_p)$ in the induced orientations. The determinant-line calculation also handles $n=0$: the two source point signs from $M$ cancel, leaving the ambient point sign of $M\\times N$, equal to $\\operatorname{sgn}(dF_p)$. The transverse intersection is exactly the finite regular fibre, so summing gives $I(M\\times\\{y\\},\\Gamma_F)=\\deg(F)$. Reversing the two $n$-blocks multiplies each sign by $(-1)^{n^2}=(-1)^n$. [F1, F2, F3, step 1.1, algebra]\n\n3.1 Write $s(p)=(p,F(p))$ and let $i$ include $M\\times\\{y\\}$. Their oriented parametrizations identify $I(s,i)$ with the graph-first count, so [F4] gives $I(s,i)=(-1)^nI(s\\times i,\\Delta_{M\\times N})$. This agrees with the opposite-order graph sign in 2.1, establishing compatibility of the degree and diagonal conventions. [F4, step 2.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a73, printed pp. 108\u2013109 (degree as $I(f,\\{y\\})$ and the regular-value computation)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 15, Corollary 143, pp. 49\u201350 (degree $=\\sum_{x\\in f^{-1}(p)}\\operatorname{sign}(x)$)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a75, printed pp. 26\u201327 (definition of $\\deg(f;y)$ as the signed sum)"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "cex-geometric-cardinality-is-not-homotopy-invariant",
+        "kind": "counterexample",
+        "title": "Geometric cardinality is not homotopy invariant",
+        "deps": [
+          "def-transverse-complementary-dimensional-intersection-set",
+          "def-mod-two-intersection-number",
+          "thm-mod-two-intersection-number-is-homotopy-invariant",
+          "def-local-oriented-intersection-sign",
+          "def-oriented-intersection-number",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds",
+          "def-circle-as-real-line-mod-integers",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "thm-oriented-intersection-number-is-homotopy-invariant",
+          "def-countable-choice"
+        ],
+        "statement": "The raw number of intersection points of transverse endpoint maps is a homotopy invariant, so the signed and mod 2 counts are not needed to detect its behaviour.",
+        "strategy": "**Proof technique:** compute the intersections and their signs for the explicit family.\n\n1.1 Write $\\theta=2\\pi u$ modulo $2\\pi$. For $(\\cos\\theta,s+\\sin\\theta)\\in A$ one needs $\\sin\\theta=-s$. For $0\\le s<1$ there are exactly two solutions, one with $\\cos\\theta>0$ and one with $\\cos\\theta<0$; for $s=1$ there is a single solution $[u]=[3/4]$, a tangency; for $s>1$ there is none. In particular the raw cardinality of $f_s^{-1}(A)$ is $2$ for $0\\le s<1$ and $0$ for $s>1$. [F1, F4, given, algebra]\n\n2.1 At a solution the ordered pair $(df_\\theta(1),(1,0))=((-\\sin\\theta,\\cos\\theta),(1,0))$ has determinant $-\\cos\\theta$ in the standard basis, so the local sign is $\\varepsilon=-\\operatorname{sgn}(\\cos\\theta)$ by [F2]. Hence at the two solutions of 1.1 the signs are $+1$ and $-1$, and both the signed count $I(f_s,A)$ and the parity count $I_2(f_s,A)$ are $0$ for every transverse slice; for $s>1$ the fibre is empty and both counts are again $0$. [F2, F3, step 1.1, algebra]\n\n3.1 The family $f_s$ is a smooth homotopy between $f_0$ and $f_2$, yet the raw cardinalities of the intersections are $2$ and $0$; hence geometric cardinality is not a homotopy invariant. The signed and parity counts, by contrast, are constant with value $0$ across the family and are compatible with the invariance asserted under the hypotheses of [F5]; the cardinality changes exactly at the tangency $s=1$, where the slice is not transverse. The full evaluation map remains transverse since its derivative in $s$ is $(0,1)$, which together with $T A$ spans $\\mathbb R^2$. [F4, F5, step 1.1, step 2.1] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, printed pp. 78\u201379 (two deformations with counts $2$ and $0$); Ch. 3 \u00a73, printed p. 109 (cancelling preimages)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-noncompact-intersections-can-escape-during-a-homotopy",
+        "kind": "counterexample",
+        "title": "Noncompact intersections can escape during a homotopy",
+        "deps": [
+          "def-mod-two-intersection-number",
+          "thm-mod-two-intersection-number-is-homotopy-invariant",
+          "def-oriented-intersection-number",
+          "thm-oriented-intersection-number-is-homotopy-invariant",
+          "rem-properness-can-replace-compactness-only-when-the-intersection-trace-is-compact",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "def-local-oriented-intersection-sign"
+        ],
+        "statement": "The transverse intersection count of a smooth homotopy is preserved whenever the endpoint maps are proper, even when the source is noncompact and the combined homotopy is not proper.",
+        "strategy": "1.1 For $t<1$, $F_t^{-1}(0)=\\{0,1/(1-t)\\}$ and $\\partial_xF_t$ is $+1$ at $0$ and $-1$ at $1/(1-t)$. At $t=1$, $F_1(x)=x$ has the single zero $0$ with derivative $+1$. Every slice is transverse at its zeros. The cardinalities change from $2$ to $1$, the signed counts from $0$ to $1$, and the parity counts from $0$ to $1$ as $t$ reaches $1$. [F1, F2, given, algebra]\n\n2.1 Every slice is proper. For $t<1$, $|x-(1-t)x^2|\\to\\infty$ as $|x|\\to\\infty$; for $t=1$, the map is the identity. Thus each preimage of a compact real set is closed and bounded, hence compact. The trace contains $\\{(1/(1-t),t):0\\le t<1\\}$, an unbounded branch whose intersection point escapes to $+\\infty$ as $t\\uparrow1$. Consequently $F^{-1}(\\{0\\})$ is noncompact and the combined map is not proper, although both endpoint maps, indeed all slices, are proper. This satisfies the refuted claim's hypotheses and disproves its conclusion. [F1, F3, step 1.1, algebra] \u220e\n\nThe arctangent family $G(x,t)=\\arctan x-t$ on $\\mathbb R\\times[0,2]$ gives another escape: its zero is $\\tan t$ for $t<\\pi/2$ and absent for $t\\ge\\pi/2$. It has compact individual regular fibres but improper endpoint maps, so it does not by itself refute the proper-endpoint assertion.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall, 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 2 \u00a74, Exercise 13, printed p. 84 (invariance fails without compactness of the source, closure of $Z$, or compactness of $W$)"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (Princeton University Press; complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a75, printed pp. 28\u201329 (the compact oriented trace argument; the polynomial witness here is explicit)"
+            }
+          ]
+        },
+        "dependency_level": 6
+      }
+    ]
+  }
+]

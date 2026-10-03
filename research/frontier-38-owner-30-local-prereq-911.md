@@ -1,0 +1,96 @@
+# AG-ET-1 local prerequisite packet — frontier-38-owner-30
+
+Updated 2026-10-03 (Australia/Sydney; check execution date 2026-10-02 UTC). Authorized scope: A911 `etale-covers-and-the-etale-fundamental-group` and B912 `etale-covers-and-the-etale-fundamental-group-examples`.
+
+**Disposition: all contracted claims and their local prerequisites are authored: 24 A items and 2 B items. No mandatory proof import remains unresolved in the local packet. Independent mathematical review and engine certification remain owed.** This supersedes the initial gap-only investigation. The selected pair and every contractual claim are retained. No plan, manifest, scope ledger, shared track, task, page placement or autopilot state was edited by this author. The orchestrator owns placement and integration.
+
+## Contract retained
+
+The exact original A targets now exist: `def-etale-fundamental-group-and-fibre-functor`, `thm-finite-etale-covers-equivalent-to-finite-continuous-pi1-sets`, and `thm-specialization-of-etale-pi1-under-geometric-hypotheses`. Both B targets exist and depend on the A packet. Classification is proved for arbitrary connected schemes, including the Noetherian and finite-type cases.
+
+The specialization consumer retains smoothness, properness, geometrically connected nonempty fibres and a locally Noetherian base; properness supplies finite type and the base supplies finite presentation. For $s_0\in\overline{\{s_1\}}$, it fixes algebraically closed geometric fibres and their geometric basepoints, with chosen geometric specialization and fibre-functor path data. The homomorphism goes **from the generalizing geometric fibre to the special geometric fibre**. It is surjective; residue characteristic zero gives a full isomorphism, and residue characteristic $p>0$ gives an isomorphism of maximal prime-to-$p$ quotients. Neither a pro-$\ell$ substitute nor a full characteristic-$p$ isomorphism is asserted. Changing basepoint paths gives the stated inner-conjugacy ambiguity; independence from unspecified geometric specialization data is not asserted.
+
+The consumer now uses the three concrete reduction suppliers written by the disjoint support author. The primary author read their complete arguments, checked their exact interfaces against the consuming steps, requested and checked removal of two forbidden cohomology-page edges, and replaced the uncreated aggregate dependency. This is local mathematical integration, not an independent whole-pair audit.
+
+## Locally written proof route
+
+1. **Descent and reconstruction.** Finite algebra/module presentation equivalence, finite locally free rank, split-cover/equalizer module and algebra descent, and full fpqc finite-étale descent are written with no Noetherian restriction on descent. The geometric fibre functor, connected Galois refinement by ordered distinct fibre points, finite group quotients, pointed inverse system, opposite deck-group convention, compactness, full faithfulness by graphs and essential surjectivity by contracted covers establish the classification. AC is explicit, including its exact inverse-limit compactness use.
+2. **Infinitesimal and affine complete lifting.** A separability idempotent obtained from the finite étale diagonal gives a displayed Hochschild contraction. An idempotent matrix lifts the underlying projective module, the contracted associator corrects multiplication, and vanishing symmetric derivations proves commutativity. This proves nilpotent finite-étale lifting locally. Compatible free bases and multiplication matrices prove the complete-local affine equivalence.
+3. **Full regular purity.** Punctured Hartogs is proved directly from a two-element regular sequence. For a complete regular local ring of dimension at least three, scalar Hartogs on all parameter thickenings and finite free kernel presentations give full faithfulness of vector-bundle maps. Dimension-two normalization is free by the depth/AB argument and its branch locus is excluded by the discriminant. Induction on dimension plus faithfully flat completion descent proves regular-local purity in arbitrary dimension and mixed characteristic. Localization at a minimal branch prime gives the finite-normal-cover purity theorem.
+4. **Proper nonprojective smooth-trait lifting.** Projective Čech finiteness and Serre vanishing are proved by monomial contraction, finite-twist presentations and descending induction. For a flat projective family over a complete DVR, bounded torsion in finite $H^1$ proves the needed $H^0$ completion comparison. Compatible formal vector bundles then have a two-term twisted presentation that algebraizes, and properness makes the resulting algebra locally free and étale everywhere. An explicit Chow construction supplies a projective integral modification; its codimension-one isomorphism is proved at a DVR. Pull a special cover to that modification, lift it projectively, normalize the regular original total space in the generic cover, and apply the local purity theorem. Agreement over a dense open of every normal special-fibre component recovers the original special cover. Graph lifting proves full faithfulness. **This establishes smooth proper complete-DVR lifting without assuming projectivity of the original family.** It does not claim general coherent Grothendieck existence for arbitrary singular proper schemes; that extra generality is not needed for the unchanged smooth-proper specialization theorem.
+5. **Surjectivity and tame extension.** With algebraically closed trait residue field, a connected special cover has connected total space and remains connected after every finite separable trait extension. A finite idempotent witness rules out geometric generic disconnection; the explicit profinite-set classification then gives surjectivity. Tame ramification killing is written by completion, a constructed henselian unramified DVR with separably closed residue, the equality of degree with ramification index times residue degree, and the Kummer uniformizer-root description. Adjoining a common prime-to-residue-characteristic root splits the required inertia and finite-étale descent supplies unramifiedness downstairs.
+
+## Integrated reduction packet and remaining review
+
+Root assigned the following disjoint A911 supports, which this primary author did not edit:
+
+- `lem-etale-specialization-trait-through-a-specialization`;
+- `lem-etale-specialization-proper-geometric-finite-etale-invariance`;
+- `lem-etale-specialization-geometric-basepoint-interface`.
+
+Their complete proofs were read on stable files and integrated into the strong specialization consumer. Trait existence includes the valuation blowup, an explicit Krull–Akizuki length argument, completion and a transfinite uniformizer-preserving residue extension. Geometric field invariance uses finite coefficient descent, a generically injective lacunary arc through a smooth rational parameter point, and the locally proved complete-DVR proper lifting. Its full-faithfulness proof now uses elementary geometric integrality and the irreducible-component incidence graph; the two initially proposed cohomology-page dependencies were removed. Purely inseparable field invariance is proved by nilpotent diagonal transport plus effective fpqc descent. The basepoint item gives the cover-functor formula, the path construction, inner-conjugacy qualification and compatibility under the same-residue trait extensions used in ramification killing.
+
+Exact separate source evidence and support-file checks are in `research/frontier-38-owner-30-local-prereq-911-trait-reduction.md`. For the primary source/interface review, the full current HTML proofs of Stacks Algebra tags 00P8, 00PE, 00PG and 00PH were additionally retrieved and read; the finite-module length bound, arbitrary-submodule extension and valuation-blowup/DVR consequences match the written trait proof. The uncreated aggregate `lem-geometric-specialization-reduction-to-complete-dvr` was removed from the consumer. Its [F1] now explicitly constructs common algebraically closed overfields to compare the trait fibres with the originally specified geometric fields, transports basepoints and chooses paths using the three concrete items. No missing item or unselected page dependency remains in the combined 26-item packet.
+
+Remaining action is independent mathematical review of this substantial new packet, followed by orchestrator placement, stable-content recertification and the normal engine gates. The original proper nonprojective and arbitrary-dimensional hypotheses are preserved. No scope narrowing or source-title-only acceptance was applied.
+
+## Sources actually retrieved and read
+
+- **SGA 1**, recomposed edition, <https://arxiv.org/pdf/math/0206203>: complete PDF retrieved (343 pages). Read the entire Exposé V §4 reconstruction, all stages (a)–(n), Theorem 4.1, §5 through Corollary 5.9; Exposé VIII §1 and the affine-algebra descent argument in §2; IX Proposition 1.9 and Theorem 1.10; X §1 through the proper homotopy argument and its explicit prerequisite discussion, X §2 through Corollary 2.4 and its limitations, and the complete X §3 proof through Theorem 3.8/Corollary 3.9. X Lemma 3.6 and the tame-inertia/Kummer application were reread for the local ramification item. SGA 1's recalled purity and existence imports were not passed off as proofs.
+- **SGA 2**, <https://arxiv.org/pdf/math/0511279>: complete PDF retrieved (216 pages); read Exposé X §§3.1–3.9 and the complete proof of Theorem 3.4(i), including Hartogs, completion descent, dimension-two AB/discriminant and parameter induction. This independently confirms the structure of the local regular-purity proof. The broader complete-intersection conclusion is not commissioned.
+- **EGA III, first part**, <https://www.numdam.org/item/PMIHES_1961__11__5_0.pdf>: complete PDF retrieved (164 pages); read the entire §5.1–§5.3 existence proof and §5.4.1–§5.4.4 through the finite-morphism algebraization consequence. The projective argument was read in full. The locally written flat-DVR proof avoids importing the entire general proper coherent theorem by using projective lifting, the explicitly reconstructed Chow modification, and purity.
+- **Stacks Project, Fundamental Groups of Schemes**, <https://stacks.math.columbia.edu/download/pione.pdf>: complete PDF retrieved (82 pages); read the full §3 reconstruction through Proposition 3.10, §§5–6 fibre-functor verification/classification, §9 complete-local/henselian proper-cover algebraization proofs, §§14–16 geometric/arithmetic comparison, proper homotopy and the complete construction/reduction of specialization maps, §§19–21 punctured-spectrum/purity proof, and complete §30 specialization proof. The geometric specialization reduction is now supplied by the three integrated local supports above.
+- **Stacks Project, Descent**, <https://stacks.math.columbia.edu/download/descent.pdf>: complete PDF retrieved (93 pages); read the equalizer/effectiveness proof and finite-generation/presentation/flatness/étale descent arguments in §4 (including Lemmas 4.19–4.22 and Theorems 4.25–4.26). The local faithfully flat split-cover proof is explicitly written.
+- **Stacks Project, Étale Morphisms**, <https://stacks.math.columbia.edu/download/etale.pdf>: complete PDF retrieved (31 pages); read Theorems 15.1–15.2 and the complete gluing/Jacobian lifting proof. The local alternate separability proof is supplied rather than citing that theorem as the construction.
+- **Stacks Project, Cohomology of Schemes**, <https://stacks.math.columbia.edu/download/coherent.pdf>: complete PDF retrieved (80 pages); read the full projective-twist Čech computation, §14.1 finite-twist/vanishing/finiteness argument, complete §18.1 Chow proof and remarks, and complete projective/proper existence and finite-algebra algebraization arguments in §§24–25, 27–28. Also read §25.2–25.3 bounded exceptional kernel/cokernel/double-adic correction to understand what the alternative proper route avoids.
+- **Stacks Project, Algebraic and Formal Geometry**, <https://stacks.math.columbia.edu/download/algebraization.pdf>: complete PDF retrieved (94 pages); read §15.1–15.6 full-faithfulness reductions, particularly the finite locally free kernel presentations and scalar-section comparison. The regular case is proved locally by the simpler explicit parameter/Hartogs argument.
+- **Milne, Lectures on Étale Cohomology**, <https://www.jmilne.org/math/CourseNotes/LEC.pdf>: complete PDF retrieved (202 pages); read §3 pp.26–29 and the Galois-cover/equalizer argument in §6 pp.42–46. **Milne §3 states classification without its complete proof and is not counted as closing the second proof-treatment gate.** SGA 1 plus the substantive Stacks proof supplies that independent treatment.
+
+All PDFs and extracted text are temporary files `/tmp/frontier-etale-*`; no transcript or credential is stored. These locators record the actual passages read, not a claim to have read every page of every retrieved volume.
+
+Retrieval failures were recovered within WORKFLOW's limit: Milne's initial request returned HTTP 406 and succeeded with a browser User-Agent; three guessed fundamental-group PDF names returned 404 before the tag's actual `pione.pdf` link was followed; guessed `formal.pdf`/`algebraic-geometry.pdf` names returned 404 before the actual `algebraization.pdf` link was read from the tag. EGA III and SGA 2 succeeded on their initial retrievals. No failed source retrieval is treated as mathematical evidence.
+
+## Local checks, exact scope and limitations
+
+After final integration and edits, all 26 paths below were checked together:
+
+- `node tools/tsx-run.mjs tools/precheck.mts <26 explicit paths>`: exit 0; **25 checked, 0 failing — all clean**. The definition is not applicable to the proof checker. Canonical step relabeling was adopted, and its unsupported textual ranges were manually reconciled against the actual proof order.
+- `node tools/rendercheck.mjs <26 explicit paths>`: exit 0; **OK — 26 files**, every math expression and frontmatter parsed under the actual renderer's KaTeX/YAML parsers.
+- The default `node tools/proof-layout.mjs <23 explicit primary-author paths>` invocation, before support integration, failed before rendering because the fallback TypeScript loader preserved JSX in `ItemBody.tsx` (`SyntaxError: Unexpected token '<'`). No pass is claimed for that default invocation and no shared tooling was changed.
+- The orchestrator supplied the read-only temporary app lookup `PRESTIGE_APP_DIR=/tmp/ag885-render-app`. Running **`PRESTIGE_APP_DIR=/tmp/ag885-render-app node tools/proof-layout.mjs <26 explicit paths>`**: exit 0; **26 items, 98 steps, 0 defects**. An initial shim pass exposed the counterexample's empty proof-like section; its construction/facts/proof headings were repaired before this final pass.
+- A read-only combined item/dependency inventory check found no missing supplier, no local dependency cycle, and no edge to an unselected page outside A911's declared closure. This inventory check is local inspection, not an engine gate or independent mathematical audit.
+
+No new page exceeds 100 items: combined authored placement is A24/B2. The strong specialization consumer has all mandatory local suppliers. No engine certification stamp, item gate, source-readiness decision or independent mathematical acceptance is invented.
+
+## Dependency-ordered authored inventory
+
+The following is the author's intended integration order. All A items precede both B items. Hashes are **raw file SHA-256 at this report revision**, not canonical engine hashes or audit certificates.
+
+| Page | Item | Raw SHA-256 |
+|---|---|---|
+| A911 | `lem-finite-etale-algebra-module-presentation-and-rank` | `98e223310e297a027d22784d7d90dd870a24dbd4450ef64864a2438f7325a6b3` |
+| A911 | `lem-faithfully-flat-effective-descent-of-modules-and-algebras` | `965fa991ccc1999ced5aabf102a4b0857ad7986d3f80a9618dd5020a097ac26e` |
+| A911 | `thm-effective-fpqc-descent-of-finite-etale-covers` | `1288a8d84867b8567a2993ef21e28ceedb3f66c75c9a198b9432f2bd080f66b1` |
+| A911 | `def-etale-fundamental-group-and-fibre-functor` | `123e178d7dd52cb7b3723dc314868554281d394ec13d72789c0646a462bc438e` |
+| A911 | `lem-finite-etale-galois-refinements-and-quotients` | `977f61081954909a198b70ef39dadc85ab4735d65152c1deb2e26a32a02f5cb7` |
+| A911 | `thm-finite-etale-covers-equivalent-to-finite-continuous-pi1-sets` | `8a11d67febfd86811fadbe72c032b606f7d46863f8368e3459f71ac668cb65e9` |
+| A911 | `lem-finite-etale-separability-and-hochschild-contraction` | `c04a79ec8c5bff0a7903e1dd59b957497582ed823785347d8009ed6a10bd1a6e` |
+| A911 | `thm-finite-etale-algebras-invariant-under-nilpotent-thickening` | `e4d8d1d0596e196858e0b30e782b30a40f4b94275477149d77394fd9dd8c214f` |
+| A911 | `lem-complete-local-finite-etale-algebra-lifting` | `544d73ed972d672edde40402f9f14c1761563b7364e88c9fa4313c9cfbc67d11` |
+| A911 | `lem-punctured-hartogs-and-flat-base-change-for-finite-projectives` | `803ff1080090f267999108b803c3601ce1d8d4227f32ee82a6cc9dd4f492ddb5` |
+| A911 | `lem-formal-full-faithfulness-on-regular-punctured-spectrum` | `d9613e173b0c07c65352cf57b0554dd73a6d983b0d0727f558f1d87844f74422` |
+| A911 | `lem-discriminant-detects-etaleness-of-finite-free-algebra` | `188387e320804783e618c2a7b4e9c6807aee538c3d277c3e649569766e221117` |
+| A911 | `thm-purity-for-finite-covers-of-regular-local-rings` | `429ea97c96ffef355e5ecacc6df1ba304c1b6d013e454250effb6c5f9919b2b5` |
+| A911 | `thm-purity-of-branch-locus-for-finite-normal-covers` | `04031df3a35a13d8604ea289a6595ad1c01ba75ca3c6eadd0826fc500a312d0f` |
+| A911 | `lem-projective-cech-finiteness-and-serre-vanishing-for-etale-lifting` | `ccb6dcc66f0961db622f36516b608b62ce67dcc86576afe97ca7ba091c5abdcb` |
+| A911 | `thm-projective-flat-dvr-finite-etale-cover-lifting` | `3971244cf51f8fd71baaab4eb8d5d5c6b2ae0b5d80362fedab17e1c522c2bc9a` |
+| A911 | `lem-projective-modification-of-proper-integral-dvr-scheme` | `56a27a347ef5b10fc5e67172bdd1e685ea5488bb5cd1931c6d0786faf530e226` |
+| A911 | `thm-proper-smooth-complete-dvr-finite-etale-cover-equivalence` | `73eb49a69729c85973be532b3748734ba7227a7ca698f607d003e9316c08d67a` |
+| A911 | `lem-smooth-proper-complete-dvr-geometric-generic-connectedness` | `9aaca49a95bb1c9ca1b0dc0f972888ea8f2b6ba8cdf7159e55f76426e8b50fd1` |
+| A911 | `lem-etale-specialization-trait-through-a-specialization` | `73f6a95c28b2374a61f581e392e4a495a9215709da555f2a9e59e3ab70d7b842` |
+| A911 | `lem-etale-specialization-proper-geometric-finite-etale-invariance` | `c279ea42a4ff8fa53c6f4aeb9ba78959aa48cf2740cf29c1b152870a98312526` |
+| A911 | `lem-etale-specialization-geometric-basepoint-interface` | `8d858a6d2b526c70a683bc5ee748cb7236cf230f76a68d3d9315ffe7f94a7f58` |
+| A911 | `lem-tame-dvr-inertia-and-abhyankar-ramification-killing` | `f958659d40a1f71a2c79e8fae7f105fe59fe5a0a966cfb3f97198f2a95c01c98` |
+| A911 | `thm-specialization-of-etale-pi1-under-geometric-hypotheses` | `07d6462b6c32ec49ce1ab7c388052e006c83b5af69a0d05148edf39ab4d567cd` |
+| B912 | `ex-etale-covers-of-gm` | `4b40be95816b7ce3ea11ac5284a47969cc846e31db55de675ba61014fd7ec15e` |
+| B912 | `cex-fundamental-group-depends-on-base-field` | `990ea9a7ec6e9d68971e66000f5f957ee0e61d3cd739b0e4bc764565e3390118` |

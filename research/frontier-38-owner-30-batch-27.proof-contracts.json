@@ -1,0 +1,2964 @@
+{
+  "version": 1,
+  "scope": [
+    "def-intersection-multiplicity-of-closed-subschemes",
+    "lem-intersection-multiplicity-drop-under-point-blowup",
+    "lem-point-blowup-of-integral-curve-is-finite",
+    "lem-normalization-factors-through-blowup-of-curve-point",
+    "lem-strict-blowup-increases-finite-normalization-subalgebra-at-singular-center",
+    "lem-increasing-sequence-of-coherent-subsheaves-stabilizes",
+    "thm-regularization-of-finite-normalization-curve-by-point-blowups",
+    "lem-regularization-of-curve-on-noetherian-ambient-by-point-blowups",
+    "lem-blowup-of-closed-point-of-regular-surface-is-regular",
+    "def-strict-normal-crossings-divisor",
+    "thm-separation-of-regular-curve-components-by-point-blowups",
+    "thm-embedded-snc-resolution-of-reduced-curve-on-regular-surface",
+    "ex-node-resolved-by-one-blowup",
+    "ex-cusp-resolution-and-delta-drop",
+    "cex-finite-normalization-does-not-make-the-curve-regular-before-blowups"
+  ],
+  "contracts": {
+    "def-intersection-multiplicity-of-closed-subschemes": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "the invariant is only introduced at a point p in Y cap Z; when the intersection is empty there is no point at which to take the local length, so this case is excluded by the Definition hypotheses"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "p in Y cap Z makes the local ring O_{Y cap Z,p} nonzero, so the length displayed in the Definition is at least 1 and the zero-length case does not occur (Definition)"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition and Remark R2 identify length one with transverse contact for two regular curve components on a regular surface; the integral-curve Definition itself does not assume the ambient surface regular."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement in the Definition requires the generic point of integral dimension-one Y not to lie in Z. Thus its contact locus Y cap Z has only closed points, and the Definition with Remark R1 proves finite positive local length at p. Remark R2 applies this zero-dimensional contact locus to strict transforms, rather than identifying it with the one-dimensional curve."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "there is no interval or limiting parameter: p ranges over the closed points of Y cap Z, a discrete set, so endpoint behaviour is not a separate case"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the Definition and its well-definedness Remark [R1] select nothing; the length is computed from the fixed local ring O_{X,p} using the cited nilpotent-maximal-ideal and length-additivity results"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the Definition introduces the symbol m_p(Y cap Z) by a displayed formula and asserts no biconditional, so there is no forward implication to discharge"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no converse is asserted; the alternative descriptions of the length in Remark [R1] are equivalent computations rather than a reverse implication of the definition"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read current Definition/R1/R2, reader and refuter evidence, all ten declared supplier Definition/Statement sections, and Stacks 0BI6 invariant/0BI5 context. Integral dim-one Y and generic-point exclusion make the intersection quotient zero-dimensional. Nilpotent maximal ideal filtration and finite residue-field factors prove finite length, with identical length after restriction to O_X,p. Empty intersection gives no invariant; p forces length >=1; Y contained in Z is excluded; length-one/transverse interpretation applies only to distinct regular curves on a regular surface. R2 contact-locus repair accepted; no choice or claim change. See alpha-batch-27-5a report."
+      }
+    },
+    "lem-intersection-multiplicity-drop-under-point-blowup": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "source_section": "Statement",
+          "quote": "A nonzero Noetherian local ring of dimension one is regular if and only if it is a discrete valuation ring.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-dvr-is-a-pid",
+          "source_section": "Statement",
+          "quote": "Every discrete valuation ring is a principal ideal domain.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-dvr-ideal-and-module-length",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a discrete valuation ring with uniformiser $\\pi$. Then for every integer $n\\ge0$, $$ \\ell_V(V/(\\pi^n))=n. $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-composition-series-and-length-of-a-module",
+          "source_section": "Definition",
+          "quote": "If such a series exists, the **length** $\\ell_R(M)$ is its number $n$ of factors; [[thm-jordan-holder-theorem-for-modules]] proves independence of the chosen series.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-intersection-multiplicity-of-closed-subschemes",
+          "source_section": "Definition",
+          "quote": "The **local intersection multiplicity of $Y$ and $Z$ at $p$** is $$m_p(Y\\cap Z):=\\operatorname{length}_{\\mathcal O_{X,p}}\\bigl(\\mathcal O_{Y\\cap Z,p}\\bigr),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "Put $A=\\mathcal O_{X,p}$ with maximal ideal $\\mathfrak m$, let $I=I_{Y,p}$ and $J=I_{Z,p}$ be the stalk ideals, so that $A/I=\\mathcal O_{Y,p}$ is a one-dimensional regular local ring and hence a discrete valuation ring with valuation $v$ [F1]. Choose $x_1\\in\\mathfrak m$ whose image $\\overline x_1\\in A/I$ is a uniformizer; then $\\mathfrak m=I+(x_1)$, because both sides are ideals contained in $\\mathfrak m$ and their images in the discrete valuation ring $A/I$ are equal to its maximal ideal. The image $J(A/I)$ is a nonzero ideal of the valuation ring, so $J(A/I)=(\\overline x_1^{\\,N})$ for a unique integer $N\\ge1$, and $N=\\min\\{v(\\overline g):g\\in J\\}$; pick $f\\in J$ with $v(\\overline f)=N$. By [F2], $N=\\ell_{A/I}(A/(I+J))=m_p(Y\\cap Z)$. All claims are local over $p$ and its unique preimage, and blowups commute with the flat base change $\\operatorname{Spec}A\\to X$ ([[thm-blowup-base-change-flat]]), and localizing the chart saturation $(JB):x_1^\\infty$ commutes with taking this schematic closure: a fraction lies in the localized saturation exactly when some power of $x_1$ carries it into the localized ideal. Thus we compute in the local model $\\operatorname{Bl}_{\\mathfrak m}(\\operatorname{Spec}A)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "The center ideal on $Y$ is $\\mathcal I_p\\mathcal O_Y$, whose stalk at $p$ is $\\mathfrak m(A/I)=(\\overline x_1)$; it is not the zero ideal $I\\mathcal O_Y$ defining $Y$ itself. It is the unit ideal away from $p$, and its generator at $p$ is a nonzerodivisor. Coherence allows the stalk generator to generate on a neighbourhood of $p$, so this ideal sheaf is invertible on $Y$. The strict transform of $Y$ is its blowup in this induced center ideal ([[thm-blowup-closed-immersion-transform-universal]]), and the blowup of an invertible ideal is an isomorphism ([[thm-blowup-effective-cartier-divisor-isomorphism]]). Hence $Y'\\to Y$ is an isomorphism and has exactly one point $q$ above $p$, with local ring $A/I$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "The $x_1$-chart of the local blowup is $B=A[\\mathfrak m/x_1]$. Mapping $y/x_1^n\\in B$ (with $y\\in\\mathfrak m^n$) to the unique element $\\overline a\\in A/I$ with $\\overline y=\\overline a\\,\\overline x_1^{\\,n}$ gives a well-defined $A$-algebra homomorphism $\\psi:B\\to A/I$: existence holds because $\\mathfrak m^n\\subseteq I+(x_1^n)$, uniqueness because $\\overline x_1$ is a nonzerodivisor of the domain $A/I$, and compatibility with the relations of the localisation holds because $x_1^k(x_1^m y-x_1^n y')=0$ implies $\\overline x_1^{\\,k+m+n}(\\psi(y/x_1^n)-\\psi(y'/x_1^m))=0$. The composite of $\\psi$ with the chart morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is the closed immersion $\\operatorname{Spec}(A/I)\\hookrightarrow\\operatorname{Spec}A$; since the pullback of $\\mathfrak m$ to $\\operatorname{Spec}(A/I)$ is the invertible ideal $(\\overline x_1)$, the universal property of the blowup gives a unique lift $\\operatorname{Spec}(A/I)\\to\\operatorname{Bl}_{\\mathfrak m}(\\operatorname{Spec}A)$, and this lift is the strict transform $Y'$ in the chart ([[thm-blowup-universal-property]], [[thm-affine-blowup-standard-charts]], [[lem-affine-blowup-algebra-properties]], [[def-strict-transform-closed-subscheme]]).",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "In the chart the exceptional subscheme is $V(x_1)$: the pulled back center ideal $\\mathfrak m\\mathcal O$ is generated by the nonzerodivisor $x_1$ and $E=V(\\mathfrak m\\mathcal O)$ ([[thm-pullback-center-ideal-invertible]], [[lem-affine-blowup-algebra-properties]]). Hence the scheme-theoretic intersection $Y'\\cap E$ is computed in the chart by $A/I\\otimes_BB/(x_1)=(A/I)/(\\overline x_1(A/I))=A/(I+(x_1))=A/\\mathfrak m=\\kappa(p)$; so $Y'\\cap E$ is a single reduced point $q$ with residue field $\\kappa(p)$ and $m_q(Y'\\cap E)=\\ell_{\\mathcal O_{X',q}}(\\kappa(q))=1$, proving claim 2.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4.2",
+          "claim": "The strict transform of $Z$ in the chart is cut out by the saturation $J'=(J B):x_1^\\infty$, the closure of $V(JB)$ on the open chart complement of $E$ ([[def-strict-transform-closed-subscheme]]); it contains $f/x_1$, because $x_1\\cdot(f/x_1)=f\\in JB$. Let $K=\\psi(J')\\subseteq A/I$ be the image, an ideal of the discrete valuation ring $A/I$ containing $\\psi(f/x_1)=\\overline f/\\overline x_1$, which has valuation $N-1$. If $q\\in Z'$, then the closed subscheme $Y'\\cap Z'$ of $Y'=\\operatorname{Spec}(A/I)$ contains the closed point $q$, so $K$ is a proper ideal contained in the maximal ideal $(\\overline x_1)$ and therefore $K=(\\overline x_1^{\\,j})$ for some $j\\ge1$; from $\\overline x_1^{\\,N-1}\\in K$ we get $j\\le N-1$, and hence $m_q(Y'\\cap Z')=\\ell_{A/I}(A/I/K)=j\\le N-1<N=m_p(Y\\cap Z)$ [F1], proving claim 3.",
+          "step": "4.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "D5.1",
+          "claim": "Finally, if $m_p(Y\\cap Z)=N=1$, then the element $\\overline f/\\overline x_1$ of step 4.2 is a unit, so $K$ is the unit ideal whenever $q\\in Z'$, a contradiction; hence $q\\notin Z'$, and since $q$ is the only point of $Y'$ over $p$ by step 2.1, the strict transforms $Y'$ and $Z'$ are disjoint over $p$. This completes claims 1-3 and the additional assertions.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 4.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "the hypothesis p in Y cap Z makes the intersection nonempty at p; the disjointness conclusion of step 5.1 is the case in which no point over p remains in the intersection"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the invariant N constructed in step 1.1 is at least 1 because J is a proper nonzero ideal of the DVR A/I, so m_p(Y cap Z) is never zero"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the minimal case N=1 is discharged in step 5.1: then f/x_1 is a unit and Y and Z are disjoint over p"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement requires regularity of O_Y,p. Step 2.1 uses the POINT center ideal I_p O_Y with stalk m(A/I) generated by a DVR uniformizer; the defining ideal I_Y has zero image and is not used as center."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "the multiplicity N is a positive integer rather than a real parameter, and its minimum N=1 is already treated in step 5.1"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses one uniformizer lift x_1 and one element f of minimal valuation; both are single selections, and [F3] records the remaining inherited AC from the blowup suppliers"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the Statement lists numbered assertions rather than a biconditional, so there is no forward direction of an equivalence to discharge"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no reverse implication is asserted; the final multiplicity-one clause is a direct consequence proved in step 5.1, not the converse of an equivalence"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read all six steps and all 17 suppliers, including current strict-transform saturation and intrinsic blowup interface. Read complete 0BI7 proof, 0BI6 invariant and 080E proof. Regular O_Y,p is a DVR; its nonzero contact ideal has minimal valuation N>=1. The induced point ideal is invertible on Y, giving Y'=Y and unique residue-preserving q. The chart map psi is well-defined despite ambient zero divisors; E pulls back to the DVR uniformizer. Saturation contains f/x, whose image has valuation N-1; if contact persists its length j satisfies 1<=j<=N-1. Thus N=1 forces disjointness, and E contact is length one. Explicit AC covers interfaces; no singular-source use is allowed. No defect."
+      }
+    },
+    "lem-point-blowup-of-integral-curve-is-finite": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-integral-scheme",
+          "source_section": "Definition",
+          "quote": "An **integral scheme** is a nonempty scheme that is reduced and whose underlying topological space is irreducible.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-locally-noetherian-and-noetherian-scheme",
+          "source_section": "Definition",
+          "quote": "A scheme is **locally Noetherian** if it has an affine open cover by spectra of Noetherian rings.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-noetherian-ring-quotients-and-localisations",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian commutative ring. Then 1. $R/I$ is Noetherian for every ideal $I$ of $R$ ([[def-quotient-ring]]), and 2. $S^{-1}R$ is Noetherian for every multiplicative subset $S\\subseteq R$ ([[def-multiplicative-subset-and-localisation]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-dimension-noetherian-topological-space",
+          "source_section": "Definition",
+          "quote": "For a Noetherian topological space $T$, define $\\dim T$ as the supremum of the lengths $s$ of strict chains $Z_0\\subsetneq\\cdots\\subsetneq Z_s$ of nonempty irreducible closed subsets of $T$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hilbert-samuel-function-and-polynomial",
+          "source_section": "Definition",
+          "quote": "The **Hilbert-Samuel function** of $(M,I)$ is $$ \\chi_{I,M}(n):=\\ell_R(M/I^{n+1}M)\\qquad (n\\ge0). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hilbert-samuel-dimension-theorem",
+          "source_section": "Statement",
+          "quote": "Let $(R,\\mathfrak m)$ be a Noetherian local ring, let $M\\neq0$ be a finite $R$-module, and let $I$ be an ideal of definition for $M$. Then the Hilbert-Samuel polynomial $P_{I,M}$ has degree $$ \\deg P_{I,M}=\\dim \\operatorname{Supp}(M). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-closed-subschemes-projective-space-homogeneous-ideals",
+          "source_section": "Statement",
+          "quote": "Every homogeneous ideal $I\\subseteq B$ determines a closed subscheme $$V_+(I)\\hookrightarrow\\mathbb P^n_A,$$ whose intersection with the chart $D_+(x_i)$ is $\\operatorname{Spec}\\bigl(B_{(x_i)}/I_{(x_i)}\\bigr)$, where $I_{(x_i)}=(I[x_i^{-1}])_0$; equivalently $V_+(I)=\\operatorname{Proj}(B/I)$ under the canonical closed immersion $\\operatorname{Proj}(B/I)\\to \\operatorname{Proj}B=\\mathbb P^n_A$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-projective-scheme-from-a-homogeneous-quotient",
+          "source_section": "Definition",
+          "quote": "The **projective spectrum** $\\operatorname{Proj}S$ has as its points the homogeneous prime ideals $\\mathfrak p\\subseteq S$ with $S_+\\nsubseteq\\mathfrak p$; equivalently $x_i\\notin\\mathfrak p$ for at least one $i$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-h0-projective-space-o-d-homogeneous-polynomials",
+          "source_section": "Statement",
+          "quote": "Then for $n>0$, $$H^0(X,\\mathcal O_X(d))\\cong A[x_0,\\dots,x_n]_d\\ \\ (d\\ge0),\\qquad H^0(X,\\mathcal O_X(d))=0\\ \\ (d<0),$$ where $A[x_0,\\dots,x_n]_d$ is the degree-$d$ graded piece of the polynomial ring",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-serre-vanishing",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a Noetherian commutative ring with $1$, let $X$ be a scheme projective over $A$ in the finite-dimensional H-projective convention ([[def-projective-morphism-pre-proj]]): the structure morphism $X\\to\\operatorname{Spec}A$ factors as a closed immersion $X\\hookrightarrow\\mathbb P^N_A$ followed by the projection, for some $N\\ge0$ ([[def-relative-projective-space-standard-charts]]). Let $L$ be an ample invertible $\\mathcal O_X$-module ([[def-ample-invertible-sheaf]], [[def-invertible-sheaf]]) and let $\\mathcal F$ be a coherent $\\mathcal O_X$-module ([[def-coherent-module-scheme]]). Then there is an integer $m_0$ such that $$H^q\\bigl(X,\\mathcal F\\otimes_{\\mathcal O_X}L^{\\otimes m}\\bigr)=0$$ for every $q>0$ and every integer $m\\ge m_0$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-function-sheaf-projective",
+          "source_section": "Definition",
+          "quote": "The **Hilbert function** of $\\mathcal F$ with respect to the fixed embedding is the function $$\\mathbb Z\\longrightarrow\\mathbb Z_{\\ge0},\\qquad m\\longmapsto h_{\\mathcal F}(m):=\\dim_kH^0(X,\\mathcal F(m)),$$ and the **Euler-characteristic function** of $\\mathcal F$ is the function $$\\mathbb Z\\longrightarrow\\mathbb Z,\\qquad m\\longmapsto P_{\\mathcal F}(m):=\\chi(X,\\mathcal F(m)).$$ **Relation between the two.** Writing $h^q_{\\mathcal F}(m)$ for $\\dim_kH^q(X,\\mathcal F(m))$, only finitely many of which are nonzero, the two functions are related by $$P_{\\mathcal F}(m)=\\sum_{q\\ge0}(-1)^qh^q_{\\mathcal F}(m)=h_{\\mathcal F}(m)-\\sum_{q>0}(-1)^{q-1}h^q_{\\mathcal F}(m).$$ In particular $P_{\\mathcal F}(m)=h_{\\mathcal F}(m)$ whenever the higher cohomology groups $H^q(X,\\mathcal F(m))$ with $q>0$ all vanish; the higher groups contribute to the Euler-characteristic function but not to the Hilbert function, and the definition imposes no vanishing of them at any particular $m$. **Hilbert polynomial.** If there is a polynomial $p\\in\\mathbb Q[t]$ with $$p(m)=P_{\\mathcal F}(m)\\qquad\\text{for every }m\\in\\mathbb Z,$$ then $p$ is called a **Hilbert polynomial** of $\\mathcal F$ with respect to the fixed embedding, and the notation $P_{\\mathcal F}(t)$ is also used for it once it is known to exist.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hilbert-polynomial-coherent-sheaf",
+          "source_section": "Statement",
+          "quote": "1. there is a unique polynomial $P_{\\mathcal F}(t)\\in\\mathbb Q[t]$ with $$P_{\\mathcal F}(m)=\\chi(X,\\mathcal F(m))\\qquad\\text{for every }m\\in\\mathbb Z;$$ 2. there is an integer $m_0$ such that $P_{\\mathcal F}(m)=h_{\\mathcal F}(m)$ for every integer $m\\ge m_0$;",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hilbert-polynomial-degree-support-dimension",
+          "source_section": "Statement",
+          "quote": "Then $$\\deg P_{\\mathcal F}=\\dim\\operatorname{Supp}\\mathcal F,$$ where the degree of the zero polynomial is $-\\infty$ and the dimension of the empty set is $-\\infty$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-projective-morphism-proper",
+          "source_section": "Statement",
+          "quote": "Every projective morphism in the finite-dimensional H-projective convention of this page is proper",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-proper-quasi-finite-is-finite",
+          "source_section": "Statement",
+          "quote": "Every proper quasi-finite morphism of schemes $f:X\\to S$ is finite",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-quasi-finite-morphism-schemes",
+          "source_section": "Definition",
+          "quote": "A morphism of schemes $f:X\\to S$ is **quasi-finite** if it is of finite type ([[def-locally-finite-type-and-finite-type-morphism]]) and, for every point $x\\in X$, there are affine neighbourhoods $U=\\operatorname{Spec}(B)$ of $x$ and $V=\\operatorname{Spec}(A)$ of $f(x)$ such that $f(U)\\subseteq V$ and the induced finite-type ring map $A\\to B$ is quasi-finite at the prime $\\mathfrak q\\subset B$ corresponding to $x$, in the sense of [[def-quasi-finite-at-a-prime-for-finite-type-algebras]].",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "source_section": "Statement",
+          "quote": "A nonzero Noetherian local ring of dimension one is regular if and only if it is a discrete valuation ring.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-equivalent-characterisations-of-a-dvr",
+          "source_section": "Statement",
+          "quote": "4. $R$ is a local principal ideal domain with nonzero maximal ideal.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "Put $\\mathcal I_p$ for the coherent ideal of the closed point. Multiplication gives a canonical graded surjection $\\operatorname{Sym}(\\mathcal I_p)\\twoheadrightarrow\\bigoplus_{n\\ge0}\\mathcal I_p^n$: it sends a degree-$n$ product of local sections to their product in $\\mathcal I_p^n$ ([[def-symmetric-algebra-qc-module]]). Relative Proj is constructed on affine base opens ([[def-relative-proj-quasi-coherent-graded-algebra]]). On each standard homogeneous open, the quotient map induces a surjection on degree-zero localized coordinate rings, hence a closed immersion. These maps come from the same graded quotient and glue to the global closed immersion $Y_1\\hookrightarrow\\operatorname{Proj}_Y\\operatorname{Sym}(\\mathcal I_p)$, the projective presentation asserted here. Locally the center has finitely many generators, so [[thm-blowup-projective]] gives local embeddings into finite-dimensional projective spaces; it also gives global properness, and finite type follows from those local embeddings. Away from $p$ the blowup is an isomorphism ([[lem-blowup-isomorphism-off-center]]), so every fibre away from $p$ is a single point. By [F1], $A=\\mathcal O_{Y,p}$ is a Noetherian local domain of dimension one.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "The fibre $E=\\beta^{-1}(p)$ is canonically $\\operatorname{Proj}_Z(\\operatorname{gr}_{\\mathfrak m_p}\\mathcal O_Y)$ over $Z=\\{p\\}=\\operatorname{Spec}\\kappa(p)$ ([[thm-exceptional-divisor-normal-cone-proj]]); over the one-point base $Z$ this is $\\operatorname{Proj}(S)$ with $S=\\operatorname{gr}_{\\mathfrak m}A=\\bigoplus_{n\\ge0}\\mathfrak m^n/\\mathfrak m^{n+1}$, a graded $\\kappa(p)$-algebra generated in degree one by the finite-dimensional space $\\mathfrak m/\\mathfrak m^2$. Fixing generators of $\\mathfrak m/\\mathfrak m^2$ presents $S$ as a quotient of a polynomial ring $\\kappa(p)[x_0,\\dots,x_r]$, so $E=V_+(I)=\\operatorname{Proj}(S)$ is a closed subscheme of $\\mathbb P^r_{\\kappa(p)}$ with $\\mathcal O_E(1)$ the restriction of the twisting sheaf ([F3]).",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "D2.2",
+          "claim": "Isomorphism criterion. If $\\beta$ is an isomorphism, then the pulled-back center ideal $\\mathfrak m_p\\mathcal O_{Y_1}$ is invertible ([[thm-pullback-center-ideal-invertible]]), and since an isomorphism identifies ideal sheaves and their invertibility, $\\mathfrak m_p$ itself is invertible; then $\\mathfrak m=\\mathfrak m_pA$ is generated by a nonzerodivisor, so $\\dim_\\kappa\\mathfrak m/\\mathfrak m^2=1=\\dim A$ and $A$ is regular by the definition of regularity ([[def-embedding-dimension-and-regular-local-ring]]). Conversely, if $A$ is regular, then $A$ is a discrete valuation ring by [F5] and $\\mathfrak m_p$ is generated by a uniformizer, which is a nonzerodivisor and generates the maximal ideal at $p$ while $\\mathfrak m_p$ is the unit ideal away from $p$; so $\\mathfrak m_p$ is invertible and the blowup of an invertible ideal is an isomorphism ([[thm-blowup-effective-cartier-divisor-isomorphism]]), with $\\beta_*\\mathcal O_{Y_1}=\\mathcal O_Y$. This proves the equivalence and the final clause.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "By [F2], $\\chi(n)$ agrees eventually with a polynomial $an+b$ of degree one. Since $\\chi(n)$ is nonnegative for every $n$ and $a\\ne0$, its leading coefficient $a$ is positive. For all sufficiently large $n$, the difference $\\chi(n)-\\chi(n-1)$ equals $a$; this difference is $\\ell_A(\\mathfrak m^n/\\mathfrak m^{n+1})=\\dim_{\\kappa(p)}S_n$, because the quotient is annihilated by $\\mathfrak m$. Thus the graded Hilbert function is eventually a positive constant $c=a\\in\\mathbb Z_{>0}$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "Write $P=\\kappa(p)[x_0,\\ldots,x_r]$, $S=P/I$, and $\\mathfrak b=P_+$. The ideal sheaf $\\mathcal I_E$ is coherent: on each standard affine chart it is a finite ideal in a Noetherian ring ([[def-coherent-module-scheme]]). By [F3], Serre vanishing applied to this ideal sheaf makes the global sections of $0\\to\\mathcal I_E(n)\\to\\mathcal O_{\\mathbb P^r}(n)\\to\\mathcal O_E(n)\\to0$ exact on the right for $n\\gg0$. The sections of the middle sheaf are $P_n$, and its kernel is $(I^{\\mathrm{sat}})_n$: a homogeneous polynomial represents a section of the ideal sheaf exactly when its fractions on every standard chart lie in the chart ideals, the saturation criterion of [[thm-closed-subschemes-projective-space-homogeneous-ideals]]. Thus $H^0(E,\\mathcal O_E(n))=P_n/(I^{\\mathrm{sat}})_n$ for large $n$. The polynomial ring $P$ is Noetherian ([[cor-finite-variable-polynomial-ring-noetherian]]), so the graded module $I^{\\mathrm{sat}}/I$ has finitely many homogeneous generators. Each is annihilated by some power of $\\mathfrak b$ by the definition of saturation; one common power $\\mathfrak b^N$ annihilates them all. If their degrees are at most $D$, then in degree $n\\ge D+N$ every coefficient multiplying such a generator has degree at least $N$ and lies in $\\mathfrak b^N$. Hence $(I^{\\mathrm{sat}}/I)_n=0$ for all such $n$. It follows that $H^0(E,\\mathcal O_E(n))=S_n$ eventually. By step 3.1 its dimension is the positive constant $c$, so the Hilbert polynomial of $\\mathcal O_E$ is the nonzero constant $c$. Its degree equals $\\dim E$ by [F3], giving $\\dim E=0$.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5.1",
+          "claim": "The space $E$ is a closed subscheme of the Noetherian space $\\mathbb P^r_{\\kappa(p)}$, hence is Noetherian of dimension zero by step 4.1, so it has finitely many points and all its local rings are zero-dimensional; as a closed subscheme of projective space $E$ is proper and of finite type over $\\kappa(p)$, so $E$ is quasi-finite over $\\kappa(p)$ and therefore finite over $\\kappa(p)$ by [F4]. Combined with step 1.1, where the fibre over every $q\\ne p$ is a single point, every fibre of $\\beta$ is finite with zero-dimensional local rings, so $\\beta$ is quasi-finite; as $\\beta$ is also proper by step 1.1, [F4] makes $\\beta$ finite. This proves the first part of the statement and the finiteness of the fibre over $p$.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "D6.1",
+          "claim": "All assertions are proved: $\\beta$ has the displayed closed immersion into $\\operatorname{Proj}_Y\\operatorname{Sym}(\\mathcal I_p)$, is locally H-projective, proper, finite type, finite, quasi-finite with fibre $\\operatorname{Proj}(\\operatorname{gr}_{\\mathfrak m_p}\\mathcal O_{Y,p})$ over $p$, an isomorphism over $Y\\setminus\\{p\\}$, and an isomorphism exactly when $\\mathcal O_{Y,p}$ is regular, and the fiber over $p$ is finite by step 5.1.",
+          "step": "6.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "step 5.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 shows the fibre over every q not equal to p is a single point by the isomorphism off centre, and step 2.1 describes the nonempty fibre over p; the empty-fibre case cannot occur"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1 computes dim E=0, the main zero-dimensional conclusion; the fibre is nonempty because p lies in the image of the proper morphism beta"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives one-point fibers away from p. Step 2.2 proves the regular-center criterion in both directions using the principal maximal ideal of the one-dimensional local ring."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the degenerate case of Y not integral or not Noetherian is excluded by hypothesis and is used essentially in step 2.1 (A a Noetherian local domain) and step 3.1 (Hilbert-Samuel degree one)"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "the Statement concerns a point centre and a fibre, with no interval or limiting parameter whose endpoints could require separate treatment"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "F6 carries inherited AC. Step 2.1 uses a finite generating set of the coherent point ideal; steps 3.1 and 4.1 prove the positive constant Hilbert polynomial and saturated-ideal comparison rather than relying on an unsupported Nakayama conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "the forward direction of the stated biconditional, beta an isomorphism implies O_{Y,p} regular, is proved in the first half of step 2.2 through invertibility of m_p O_{Y_1}"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "the reverse direction, O_{Y,p} regular implies beta is an isomorphism with beta_*O_{Y_1}=O_Y, is proved in the second half of step 2.2 using the DVR uniformizer"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read all seven steps and 31 supplier statements, continuing the truncated Hilbert/cohomology output through the complete required clauses. Read complete 0AB7 and 02LS proofs, previously read 0BI4/0AGQ. Checked Hilbert-Samuel polynomial degree one and positive leading coefficient; its difference is eventually positive constant. Finite-generation of I_sat/I gives a common irrelevant-ideal annihilating power and high-degree vanishing; Serre vanishing and homogeneous-ideal dictionary identify eventual S_n with H0(E,O_E(n)). Hence positive constant Hilbert polynomial implies nonempty zero-dimensional E; proper finite-type zero-dimensional fibre is finite, and proper plus quasi-finite makes beta finite. Center invertibility gives both directions of identity iff regular (dim-one DVR), including one-generator chart. Coherent Sym(I_p) presentation gives local H-projectivity without unsupported global P^N embedding. AC explicit. Accepted exact 0AB7 locator correction; no new defect. Alpha synchronized the owning batch manifest with the reviewed sources and corrected applicable Statement/strategy wording; current item mathematics is unchanged."
+      }
+    },
+    "lem-normalization-factors-through-blowup-of-curve-point": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-equivalent-characterisations-of-a-dvr",
+          "source_section": "Statement",
+          "quote": "3. $R$ is a one-dimensional Noetherian local integrally closed domain.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-serre-normality-criterion-two-directions",
+          "source_section": "Statement",
+          "quote": "A commutative Noetherian domain is normal if and only if it satisfies $(R_1)$ and $(S_2)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-normal-noetherian-ring",
+          "source_section": "Definition",
+          "quote": "A commutative Noetherian ring $R$ is **normal** if every prime localization $R_{\\mathfrak p}$ is an integrally closed domain.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-point-blowup-of-integral-curve-is-finite",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $Y$ be an integral\nNoetherian scheme of dimension one ([[def-integral-scheme]],\n[[def-dimension-noetherian-topological-space]]) and let $p\\in Y$ be a closed\npoint. Let $\\beta:Y_1=\\operatorname{Bl}_pY\\to Y$ be the blowup of $Y$ in $p$\n([[def-blowup-scheme-along-ideal]]). Then $\\beta$ is proper and of finite type, is locally H-projective, and admits the global closed immersion\n$Y_1\\hookrightarrow\\operatorname{Proj}_Y\\operatorname{Sym}(\\mathcal I_p)$\nfor the coherent center ideal $\\mathcal I_p$. The presenting sheaf $\\mathcal I_p$ is coherent and need not be locally free or globally generated. This does not assert a global H-projective immersion into $\\mathbb P^N_Y$ for a single integer $N$. It restricts to an isomorphism over\n$Y\\setminus\\{p\\}$; its fibre over $p$ is the projectivized associated graded\nscheme $\\operatorname{Proj}(\\operatorname{gr}_{\\mathfrak m_p}\\mathcal O_{Y,p})$\n([[thm-exceptional-divisor-normal-cone-proj]]), which is a finite scheme over\nthe residue field $\\kappa(p)$; consequently $\\beta$ is quasi-finite and\ntherefore finite. Moreover $\\beta$ is an isomorphism if and only if\n$\\mathcal O_{Y,p}$ is regular, equivalently if and only if the maximal ideal\n$\\mathfrak m_p$ is invertible; in the regular case\n$\\beta_*\\mathcal O_{Y_1}=\\mathcal O_Y$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-morphism-schemes",
+          "source_section": "Definition",
+          "quote": "A morphism of schemes $f:X\\to S$ is **finite** if, for every affine open $U=\\operatorname{Spec}A\\subseteq S$, its inverse image is affine, $f^{-1}(U)=\\operatorname{Spec}B$, and the induced $A$-algebra $B$ is module-finite over $A$ in the sense of [[def-finite-type-and-module-finite-algebras]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-coherent-module-scheme",
+          "source_section": "Definition",
+          "quote": "Then $\\mathcal F$ is **coherent** if for every open $U\\subseteq X$ and every morphism $$\\mathcal O_U^{\\,n}\\longrightarrow\\mathcal F|_U,\\qquad n\\ge0\\ \\text{finite},$$ the kernel sheaf $\\ker\\varphi$ is of finite type ([[def-kernel-cokernel-image-sheaves]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "source_section": "Statement",
+          "quote": "For every morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of coherent $\\mathcal O_X$-modules the kernel, image and cokernel of $\\varphi$ are coherent, and finite direct sums of coherent modules are coherent.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-blowup-universal-property",
+          "source_section": "Statement",
+          "quote": "For every $X$-scheme $f\\colon Y\\to X$ such that the inverse image $f^{-1}(Z)$ is an effective Cartier divisor on $Y$, there is a unique $X$-morphism $Y\\to\\operatorname{Bl}_{\\mathcal I}X$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-effective-cartier-divisor",
+          "source_section": "Definition",
+          "quote": "A Cartier divisor $D$ on a scheme $X$ is **effective** if it has a\nlocal-equation representation $(U_i,f_i)$ as in\n[[def-cartier-divisor]] with\n$f_i\\in\\mathcal O_X(U_i)$ and with multiplication by the germ\n$(f_i)_x$ injective on $\\mathcal O_{X,x}$ for every $x\\in U_i$.\nThus each $f_i$ is a regular section in the precise sense of\n[[def-sheaf-total-quotient-rings]]; the condition uses injectivity of\nmultiplication, including exclusion of the zero germ on a nonzero stalk.\n\nThe condition is independent of the representation. On overlaps two\nCartier equations differ by a regular unit. Multiplication or division\nby such a unit preserves regularity as a section of $\\mathcal O_X$ and\npreserves injectivity of multiplication at every stalk. These local\nconditions remain true on refinements and descend by sheaf locality.\n\nThe local principal ideal sheaves $f_i\\mathcal O_{U_i}$ agree on\noverlaps because $f_i/f_j$ is a regular unit. We denote the resulting\nideal sheaf by $\\mathcal I_D$. The construction of its associated\nclosed subscheme is proved in\nthe subsequent closed-immersion theorem.\n\nA unit equation, in particular $f_i=1$, gives the zero Cartier divisor\nand the ideal sheaf $\\mathcal O_X$. Locally its quotient ring is the\nzero ring, so its vanishing subscheme is empty. The zero Cartier divisor\nis therefore the **empty effective divisor**. The empty scheme has\nonly this effective divisor.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-blowup-birational-integral-scheme",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited from the blowup construction\n([[def-axiom-of-choice]]). Let $X$ be an integral scheme\n([[def-integral-scheme]]) and let $\\mathcal I$ be a nonzero quasi-coherent\nideal sheaf of finite type. Then $\\operatorname{Bl}_{\\mathcal I}X$ is integral\nand $\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ is birational: $\\pi$ is an\nisomorphism over the nonempty dense open $X\\smallsetminus Z$, and the generic\npoint of $\\operatorname{Bl}_{\\mathcal I}X$ maps to the generic point of $X$. If\nmoreover $X$ is normal and every irreducible component of $Z$ has codimension\nat least two, the blowup is an isomorphism in codimension one, i.e. over the\ncomplement of a closed subset of codimension at least two.",
+          "uses": [
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function",
+          "uses": [
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "The blowup $\\beta$ is finite and is an isomorphism over $Y\\setminus\\{p\\}$ by [F2]; in particular $\\beta$ is affine and $\\beta_*\\mathcal O_{Y_1}$ is a coherent $\\mathcal O_Y$-module. The scheme $Y^{\\nu}$ is normal of dimension one, so each of its local rings is a discrete valuation ring or a field by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "The normalization is integral with the same function field as $Y$. At a point $q$ above $p$, the map $\\mathcal O_{Y,p}\\to\\mathcal O_{Y^{\\nu},q}$ embeds both rings into that function field. The maximal ideal $\\mathfrak m_p$ contains a nonzero element, whose image remains nonzero; its extended ideal is proper because the map of local rings is local. The point $q$ is closed, since the fibre of the finite morphism $\\nu$ is zero-dimensional, and its normal local ring is therefore a DVR by step 1.1. Every nonzero ideal in a DVR is generated by a nonzerodivisor, so $\\mathfrak m_p\\mathcal O_{Y^{\\nu},q}$ is principal and invertible. At points not over $p$ the pullback center ideal is the unit ideal. This coherent ideal is thus locally invertible everywhere: local stalk generators extend to neighbourhoods, and the equality with the principal ideal holds after shrinking because its cokernel is coherent. Its inverse-image subscheme is an effective Cartier divisor.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "By the universal property [F3] applied to the center $\\{p\\}\\subseteq Y$ and the morphism $\\nu:Y^{\\nu}\\to Y$ (whose inverse image of $p$ is effective Cartier by step 2.1), there is a unique $Y$-morphism $\\nu_1:Y^{\\nu}\\to Y_1$ with $\\beta\\circ\\nu_1=\\nu$. This morphism is dominant: $\\nu$ is surjective and $\\beta$ is an isomorphism over $Y\\setminus\\{p\\}$, so $\\nu_1(Y^{\\nu})\\supseteq\\beta^{-1}(Y\\setminus\\{p\\})$, a nonempty open subset of the irreducible scheme $Y_1$ by [F4] and therefore dense.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "The morphism $\\nu_1$ is finite: over an affine open $U=\\operatorname{Spec}R\\subseteq Y$, write $Y_1|_U=\\operatorname{Spec}B$ and $Y^{\\nu}|_U=\\operatorname{Spec}C$ with $R\\to B$ and $R\\to C$ module-finite by [F2]; the factorization gives a ring map $B\\to C$, and since $C$ is a finitely generated $R$-module with $R\\subseteq B$ acting through $B\\to C$, the ring $C$ is a finitely generated $B$-module; hence $\\nu_1$ is affine with module-finite coordinate algebras, i.e. finite ([[def-finite-morphism-schemes]]).",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "D4.2",
+          "claim": "Finally, if $\\mathcal O_{Y,p}$ is regular, then $\\beta$ is an isomorphism by [F2], and under the identification $Y_1=Y$ the unique factorization $\\nu_1$ of $\\nu$ through the identity is $\\nu$ itself, by uniqueness in step 3.1; the two displayed clauses about the regular case follow.",
+          "step": "4.2",
+          "inputs": [
+            "F2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "D5.1",
+          "claim": "The morphism $\\nu_1$ is birational: $\\nu$ is an isomorphism over a dense open $V\\subseteq Y$ (birationality), and $\\beta$ is an isomorphism over $Y\\setminus\\{p\\}$ by [F2]; hence $\\nu_1$ is an isomorphism over the dense open $\\beta^{-1}(V\\setminus\\{p\\})$ of $Y_1$ (here $V\\setminus\\{p\\}$ is nonempty open in the one-dimensional irreducible scheme $Y$, hence dense). Since $Y_1$ is integral by [F4] and $Y^{\\nu}$ is normal, $\\nu_1$ is a finite birational morphism from a normal scheme onto the integral scheme $Y_1$. The affine coordinate ring $C$ of the source is the integral closure of the coordinate ring $B$ of $Y_1$ in their common function field: $C$ is integral over $B$ by finiteness, while every element integral over $B$ is also integral over $C$ and therefore belongs to the integrally closed ring $C$. Thus $\\nu_1$ is the normalization of $Y_1$.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 3.1",
+            "step 4.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "D6.1",
+          "claim": "On an affine chart $V=\\operatorname{Spec}B$ of the integral scheme $Y_1$, the inverse image under the finite birational normalization map is $\\operatorname{Spec}C$. The map $B\\to C$ is injective: localizing it at the generic point is the identified inclusion of the common function field, so any element in its kernel is zero in $\\operatorname{Frac}(B)$ and hence zero in the domain $B$. Thus $\\mathcal O_{Y_1}\\hookrightarrow\\nu_{1,*}\\mathcal O_{Y^{\\nu}}$. Applying the left exact pushforward along $\\beta$ gives $\\beta_*\\mathcal O_{Y_1}\\hookrightarrow\\nu_*\\mathcal O_{Y^{\\nu}}$. Coherence follows from finiteness over the Noetherian base, establishing the claimed coherent subalgebra.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 4.1",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "D7.1",
+          "claim": "Steps 1.1-6.1 and 4.2 prove: $\\beta$ is finite; $\\nu$ factors uniquely as $\\beta\\circ\\nu_1$ with $\\nu_1:Y^{\\nu}\\to Y_1$; $Y^{\\nu}$ is a normalization of $Y_1$; and $\\beta_*\\mathcal O_{Y_1}$ is a coherent $\\mathcal O_Y$-subalgebra of $\\nu_*\\mathcal O_{Y^{\\nu}}$, with the regular case giving $\\beta=\\operatorname{id}_Y$ and $\\nu_1=\\nu$ under $Y_1=Y$.",
+          "step": "7.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 4.1",
+            "step 5.1",
+            "step 6.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1 exhibits the nonempty open beta^{-1}(Y minus p) inside the irreducible Y_1, so dominance and the factorization are not vacuous"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the pulled-back center ideal is nonzero and proper at every point above p, and the unit ideal away from p. Zero-dimensional finite fibers are allowed; it is the normalization curve that has dimension one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 treats each point above the single center p: the nonzero proper ideal in its DVR is generated by a nonzerodivisor; outside that fiber it is the unit ideal."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the degenerate case of a non-finite normalization is excluded by hypothesis and is used in step 4.1, where module-finiteness of R to C is needed to make nu_1 finite"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "the Statement is about a closed point centre and a factorization, with no interval, boundary value or limiting parameter"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the only selection is the given normalization nu, as [F5] records; steps 2.1 and 3.1 select nothing further, the universal property supplying nu_1 uniquely"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the Statement asserts a factorization and a regular-case identification; it states no equivalence, so there is no forward direction of a biconditional"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no converse of a biconditional is asserted; the regular-case clause is the direct statement proved in step 4.2"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read all eight steps and all 15 supplier clauses; complete 0BI4/0BI5 proof passages already read. Finite normalization is assumed on the arbitrary Noetherian curve; finite-type field existence is only the stated example. Ynu is integral Noetherian, its points over p are closed with DVR local rings, and the pulled-back point ideal is nonzero proper there and unit elsewhere. Coherence extends stalk generators, making an effective Cartier inverse image, so universal property yields unique lift. On base affine opens R subset B subset C, R-finite C is also B-finite; finite birational normal source identifies C with integral closure of B and yields coherent pushforward inclusion. Regular-center identity checked; no new AC beyond supplied interfaces. No defect."
+      }
+    },
+    "lem-strict-blowup-increases-finite-normalization-subalgebra-at-singular-center": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-normalization-factors-through-blowup-of-curve-point",
+          "source_section": "Statement",
+          "quote": "Then $\\beta$ is finite, and $\\nu$ factors uniquely through $\\beta$: there is a unique $Y$-morphism $\\nu_1:Y^{\\nu}\\to Y_1$ with $\\beta\\circ\\nu_1=\\nu$. Consequently $Y^{\\nu}$ is also the normalization of $Y_1$, and the finite pushforward $\\beta_*\\mathcal O_{Y_1}$ is naturally a coherent $\\mathcal O_Y$-subalgebra of $\\nu_*\\mathcal O_{Y^{\\nu}}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-point-blowup-of-integral-curve-is-finite",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $Y$ be an integral\nNoetherian scheme of dimension one ([[def-integral-scheme]],\n[[def-dimension-noetherian-topological-space]]) and let $p\\in Y$ be a closed\npoint. Let $\\beta:Y_1=\\operatorname{Bl}_pY\\to Y$ be the blowup of $Y$ in $p$\n([[def-blowup-scheme-along-ideal]]). Then $\\beta$ is proper and of finite type, is locally H-projective, and admits the global closed immersion\n$Y_1\\hookrightarrow\\operatorname{Proj}_Y\\operatorname{Sym}(\\mathcal I_p)$\nfor the coherent center ideal $\\mathcal I_p$. The presenting sheaf $\\mathcal I_p$ is coherent and need not be locally free or globally generated. This does not assert a global H-projective immersion into $\\mathbb P^N_Y$ for a single integer $N$. It restricts to an isomorphism over\n$Y\\setminus\\{p\\}$; its fibre over $p$ is the projectivized associated graded\nscheme $\\operatorname{Proj}(\\operatorname{gr}_{\\mathfrak m_p}\\mathcal O_{Y,p})$\n([[thm-exceptional-divisor-normal-cone-proj]]), which is a finite scheme over\nthe residue field $\\kappa(p)$; consequently $\\beta$ is quasi-finite and\ntherefore finite. Moreover $\\beta$ is an isomorphism if and only if\n$\\mathcal O_{Y,p}$ is regular, equivalently if and only if the maximal ideal\n$\\mathfrak m_p$ is invertible; in the regular case\n$\\beta_*\\mathcal O_{Y_1}=\\mathcal O_Y$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-point-blowup-of-integral-curve-is-finite",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $Y$ be an integral\nNoetherian scheme of dimension one ([[def-integral-scheme]],\n[[def-dimension-noetherian-topological-space]]) and let $p\\in Y$ be a closed\npoint. Let $\\beta:Y_1=\\operatorname{Bl}_pY\\to Y$ be the blowup of $Y$ in $p$\n([[def-blowup-scheme-along-ideal]]). Then $\\beta$ is proper and of finite type, is locally H-projective, and admits the global closed immersion\n$Y_1\\hookrightarrow\\operatorname{Proj}_Y\\operatorname{Sym}(\\mathcal I_p)$\nfor the coherent center ideal $\\mathcal I_p$. The presenting sheaf $\\mathcal I_p$ is coherent and need not be locally free or globally generated. This does not assert a global H-projective immersion into $\\mathbb P^N_Y$ for a single integer $N$. It restricts to an isomorphism over\n$Y\\setminus\\{p\\}$; its fibre over $p$ is the projectivized associated graded\nscheme $\\operatorname{Proj}(\\operatorname{gr}_{\\mathfrak m_p}\\mathcal O_{Y,p})$\n([[thm-exceptional-divisor-normal-cone-proj]]), which is a finite scheme over\nthe residue field $\\kappa(p)$; consequently $\\beta$ is quasi-finite and\ntherefore finite. Moreover $\\beta$ is an isomorphism if and only if\n$\\mathcal O_{Y,p}$ is regular, equivalently if and only if the maximal ideal\n$\\mathfrak m_p$ is invertible; in the regular case\n$\\beta_*\\mathcal O_{Y_1}=\\mathcal O_Y$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-blowup-effective-cartier-divisor-isomorphism",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited from the blowup construction\n([[def-axiom-of-choice]]). Let $\\mathcal I$ be a quasi-coherent ideal sheaf of\nfinite type on a scheme $X$ that is invertible as an $\\mathcal O_X$-module\n([[def-invertible-sheaf]]) — equivalently, $Z=V(\\mathcal I)$ is an effective\nCartier divisor on $X$ ([[def-effective-cartier-divisor]],\n[[def-cartier-divisor]]). Then the blowup\n$\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ of\n[[def-blowup-scheme-along-ideal]] is an isomorphism. If $\\mathcal I$ is\ngenerated by a single nonzerodivisor $f$ on an affine open\n$U=\\operatorname{Spec}A$, then the blowup is\n$\\operatorname{Spec}A[I/f]=\\operatorname{Spec}A$ over $U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "source_section": "Statement",
+          "quote": "A nonzero Noetherian local ring of dimension one is regular if and only if it is a discrete valuation ring.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-coherent-module-scheme",
+          "source_section": "Definition",
+          "quote": "Then $\\mathcal F$ is **coherent** if for every open $U\\subseteq X$ and every morphism $$\\mathcal O_U^{\\,n}\\longrightarrow\\mathcal F|_U,\\qquad n\\ge0\\ \\text{finite},$$ the kernel sheaf $\\ker\\varphi$ is of finite type ([[def-kernel-cokernel-image-sheaves]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "source_section": "Statement",
+          "quote": "For every morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of coherent $\\mathcal O_X$-modules the kernel, image and cokernel of $\\varphi$ are coherent, and finite direct sums of coherent modules are coherent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-locally-noetherian-and-noetherian-scheme",
+          "source_section": "Definition",
+          "quote": "A scheme is **locally Noetherian** if it has an affine open cover by spectra of Noetherian rings.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-artinian-ring-characterisation-by-primes",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative Noetherian ring. Then $R$ is Artinian if and only if every prime ideal of $R$ is maximal.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-artinian-ring-has-finite-length",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring. Then $R$ is Artinian if and only if the regular module ${}_RR$ has finite length.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-composition-series-and-length-of-a-module",
+          "source_section": "Definition",
+          "quote": "If such a series exists, the **length** $\\ell_R(M)$ is its number $n$ of factors; [[thm-jordan-holder-theorem-for-modules]] proves independence of the chosen series.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-morphism-schemes",
+          "source_section": "Definition",
+          "quote": "A morphism of schemes $f:X\\to S$ is **finite** if, for every affine open $U=\\operatorname{Spec}A\\subseteq S$, its inverse image is affine, $f^{-1}(U)=\\operatorname{Spec}B$, and the induced $A$-algebra $B$ is module-finite over $A$ in the sense of [[def-finite-type-and-module-finite-algebras]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-localisation-of-modules-is-exact",
+          "source_section": "Statement",
+          "quote": "is a short exact sequence of $R$-modules, then $$ 0 \\longrightarrow S^{-1}M' \\xrightarrow{S^{-1}f} S^{-1}M \\xrightarrow{S^{-1}g} S^{-1}M'' \\longrightarrow 0 $$ is a short exact sequence of $S^{-1}R$-modules.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "By [F1] the inclusion $\\mathcal O_Y\\subseteq\\beta_*\\mathcal O_{Y_1}\\subseteq\\nu_*\\mathcal O_{Y^{\\nu}}$ holds as $\\mathcal O_Y$-algebras, and $\\beta_*\\mathcal O_{Y_1}$ is coherent. If the first inclusion were an equality, then the finite morphism $\\beta$ would satisfy $\\beta_*\\mathcal O_{Y_1}=\\mathcal O_Y$; on an affine chart $U=\\operatorname{Spec}R\\subseteq Y$ with $\\beta^{-1}(U)=\\operatorname{Spec}B$ this says that the image of the structure map $R\\to B$ generates $B$ as an $R$-module, so $B=R$ and $\\beta|_{\\beta^{-1}(U)}$ is an isomorphism; hence $\\beta$ would be an isomorphism. But $p$ is not a regular point, so $\\beta$ is not an isomorphism by [F2]. Therefore $\\mathcal O_Y\\subsetneq\\beta_*\\mathcal O_{Y_1}$: the inclusion is strict.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "The quotient $\\mathcal Q=\\beta_*\\mathcal O_{Y_1}/\\mathcal O_Y$ is coherent by [F3] and is nonzero by step 1.1. Away from $p$ the morphism $\\beta$ is an isomorphism, so $(\\beta_*\\mathcal O_{Y_1})_q=\\mathcal O_{Y,q}$ for every $q\\ne p$, and the stalk $\\mathcal Q_q=0$ there; hence the support of $\\mathcal Q$ is contained in the closed point $p$, and therefore equals $\\{p\\}$. By [F3] the stalk $\\mathcal Q_p$ has finite length over $\\mathcal O_{Y,p}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "This proves the first assertion. For the general step, argue by induction on $i$. At each stage $Y_{i-1}$ is an integral Noetherian one-dimensional scheme with a fixed finite normalization $\\nu_{i-1}:Y^{\\nu}\\to Y_{i-1}$: for $i-1=0$ this is $\\nu$; inductively, $Y_i$ is the blowup of the integral scheme $Y_{i-1}$ in a nonzero ideal, hence is integral ([[cor-blowup-birational-integral-scheme]]) and Noetherian, and [[lem-normalization-factors-through-blowup-of-curve-point]] shows that $Y^{\\nu}$ is a normalization of $Y_i$ as well. Let $\\beta_i:Y_i=\\operatorname{Bl}_{p_{i-1}}Y_{i-1}\\to Y_{i-1}$ be the blowup at a closed non-regular point $p_{i-1}$, so that by the already proved first assertion applied to $Y_{i-1}$ and $p_{i-1}$ the sequence of $\\mathcal O_{Y_{i-1}}$-modules $0\\to\\mathcal O_{Y_{i-1}}\\to(\\beta_i)_*\\mathcal O_{Y_i}\\to\\mathcal Q_i\\to0$ is exact with $\\mathcal Q_i\\ne0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "Push the short exact sequence of step 3.1 forward along the finite affine morphism $f_{i-1}$. By [F4] this gives $0\\to f_{i-1,*}\\mathcal O_{Y_{i-1}}\\to f_{i,*}\\mathcal O_{Y_i}\\to f_{i-1,*}\\mathcal Q_i\\to0$. This last sheaf is nonzero: choose an affine open $V=\\operatorname{Spec}R$ of $Y$ containing the image of the center. Its inverse image is affine, say $\\operatorname{Spec}B$, and $\\mathcal Q_i$ restricts there to a nonzero finite $B$-module $M$, because its nonzero center stalk lies on that open. The pushforward restricts to the same nonzero module $M$ viewed as an $R$-module. Restriction of scalars is faithful, so $f_{i-1,*}\\mathcal Q_i\\ne0$. Consequently the pushed-forward inclusion is strict. Both terms embed as coherent subalgebras in $\\nu_*\\mathcal O_{Y^{\\nu}}$ by the normalization factorization at each stage. No assertion that $\\mathcal Q_i$ is a sheaf on the reduced residue-field point is needed: its stalk may have nontrivial nilpotent maximal-ideal action.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5.1",
+          "claim": "Collecting: the inclusion $\\mathcal O_Y\\subsetneq\\beta_*\\mathcal O_{Y_1}$ is strict with quotient a nonzero coherent sheaf of finite length supported exactly at $p$, and every further point blowup at a closed non-regular center strictly increases the pushed-forward structure sheaf inside the fixed finite normalization $\\nu_*\\mathcal O_{Y^{\\nu}}$.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "the non-regular closed point p exists by hypothesis, and step 2.1 shows the quotient is nonzero and supported exactly at p, so the strict-increase assertion is not vacuous"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 excludes the zero-length quotient: Q is nonzero exactly because the inclusion of step 1.1 is strict"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the base case i=1 is step 1.1, and step 4.1 states explicitly that the base case of the induction is the already proved first assertion"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the degenerate case of a regular centre is excluded by hypothesis; it is exactly the hypothesis used in step 1.1 via [F2], since a regular centre would make beta an isomorphism instead of giving a strict inclusion"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "the induction runs over the discrete index i with no interval or limiting endpoint; the initial index is the base case handled in step 1.1"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the induction carries the fixed normalization nu and applies the proved statement at the chosen points; [F5] records that AC is inherited from the cited blowup, normalization and length suppliers"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the Statement is a strict-inclusion assertion plus an induction clause and contains no biconditional, so no forward equivalence direction arises"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no reverse implication is asserted; the if-and-only-if appearing in [F2] is quoted from a supplier and is not part of this item own claim"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read all five authored steps, reader/refuter evidence and all 17 suppliers. Checked retained 0BI4 strict non-isomorphism/stabilization proof against 0BI6, which is only the length invariant. Finite affine beta with equality of the natural structure algebra would be identity, contradicting the singular-center criterion. Its coherent quotient vanishes off p, is nonzero at p, and has finite length by a primary annihilator/Artinian quotient. Further finite affine pushforward is exact and faithful restriction of scalars, so strictness survives over Y. Integral Noetherian dim-one and same finite normalization persist. No residue-field annihilation of quotient is assumed; nontrivial nilpotent action is permitted. AC explicit. Accepted removal of erroneous 0BI6 intermediate-algebra locator; Statement/Proof unchanged. Alpha synchronized the owning batch manifest with the reviewed sources and corrected applicable Statement/strategy wording; current item mathematics is unchanged. Corrected the manifest strategy: exactness alone does not preserve strictness; finite-affine pushforward is faithful restriction of scalars, as proved in step 4.1."
+      }
+    },
+    "lem-increasing-sequence-of-coherent-subsheaves-stabilizes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-locally-noetherian-and-noetherian-scheme",
+          "source_section": "Definition",
+          "quote": "equivalently, it has a finite affine open cover by spectra of Noetherian rings.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "source_section": "Statement",
+          "quote": "A quasi-coherent $\\mathcal O_X$-module is coherent ([[def-coherent-module-scheme]]) if and only if it is of finite type ([[def-finite-type-finite-presentation-module-sheaf]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-type-finite-presentation-module-sheaf",
+          "source_section": "Definition",
+          "quote": "**Finite type.** $\\mathcal F$ is **of finite type** if every point $x\\in X$ has an affine open neighbourhood $U=\\operatorname{Spec}A$ together with an $A$-module $M$ and an isomorphism $\\mathcal F|_U\\cong\\widetilde M$ such that $M$ is finitely generated ([[def-finitely-presented-module-and-algebra]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-coherent-module-scheme",
+          "source_section": "Definition",
+          "quote": "Then $\\mathcal F$ is **coherent** if for every open $U\\subseteq X$ and every morphism $$\\mathcal O_U^{\\,n}\\longrightarrow\\mathcal F|_U,\\qquad n\\ge0\\ \\text{finite},$$ the kernel sheaf $\\ker\\varphi$ is of finite type ([[def-kernel-cokernel-image-sheaves]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-affine-quasi-coherent-equivalence",
+          "source_section": "Statement",
+          "quote": "Consequently $(-)^{\\sim}$ and $\\Gamma(X,-)$ are quasi-inverse equivalences $\\operatorname{Mod}_A\\simeq\\operatorname{QCoh}(X)$: the unit in (1) and the counit in (2) are natural isomorphisms, and $M\\mapsto\\widetilde M$ is an equivalence of categories.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-quasi-coherent-module-scheme",
+          "source_section": "Definition",
+          "quote": "The module $\\mathcal F$ is **quasi-coherent** if every point $x\\in X$ has an affine open neighbourhood $U=\\operatorname{Spec}A\\subseteq X$ and an $A$-module $M$ such that $$\\mathcal F|_U\\;\\cong\\;\\widetilde M$$ as sheaves of $\\mathcal O_U$-modules.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-modules-over-noetherian-rings-are-noetherian",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian commutative ring and let $M$ be a finitely generated $R$-module. Then $M$ is a Noetherian $R$-module.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-equivalent-characterizations-of-noetherian-modules",
+          "source_section": "Statement",
+          "quote": "Every ascending sequence $N_0\\subseteq N_1\\subseteq\\cdots$ of submodules eventually stabilizes (ACC).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-noetherian-module",
+          "source_section": "Definition",
+          "quote": "when every submodule of $M$ is finitely generated ([[def-generated-cyclic-finitely-generated-and-free-modules]]).",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "If $X=\\varnothing$ there is nothing to prove, so assume $X\\ne\\varnothing$. By [F1] fix a finite affine open cover $X=U_1\\cup\\cdots\\cup U_r$ with $U_i=\\operatorname{Spec}A_i$ and $A_i$ Noetherian; necessarily $r\\ge1$. This is a single existential instantiation of the cover granted by the definition of a Noetherian scheme, not a choice from an infinite family.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "Fix $i$. The restriction $\\mathcal F|_{U_i}$ is quasi-coherent, and it is of finite type because $\\mathcal F$ is coherent and the restriction of a coherent module to an open subscheme is coherent; by [F2] put $M_i:=\\Gamma(U_i,\\mathcal F)$, a finitely generated $A_i$-module. Each $\\mathcal F_n|_{U_i}$ is likewise a coherent, hence finite type, quasi-coherent subsheaf of $\\mathcal F|_{U_i}$, and $N_{i,n}:=\\Gamma(U_i,\\mathcal F_n)$ is a finitely generated $A_i$-submodule of $M_i$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "For $m\\le n$ the inclusion $\\mathcal F_m\\subseteq\\mathcal F_n$ induces, under the equivalence of [F3], an inclusion of $A_i$-modules $N_{i,m}\\subseteq N_{i,n}$; in particular $N_{i,1}\\subseteq N_{i,2}\\subseteq N_{i,3}\\subseteq\\cdots$ is an ascending sequence of submodules of $M_i$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "By [F4] the module $M_i$ is Noetherian, so the ascending sequence of step 3.1 stabilizes: there is an integer $s_i$ with $N_{i,n}=N_{i,s_i}$ for every $n\\ge s_i$. This holds for each fixed $i$ with no choice used.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "D5.1",
+          "claim": "Set $s:=\\max\\{s_1,\\dots,s_r\\}$, which exists because $r$ is finite. Let $n\\ge s$. For every $i$ we have $N_{i,n}=N_{i,s}$, both being $N_{i,s_i}$, so the quasi-coherent subsheaves $\\mathcal F_n|_{U_i}$ and $\\mathcal F_s|_{U_i}$ of $\\mathcal F|_{U_i}$ have the same module of sections and are therefore equal by [F3]. Equality of subsheaves of a quasi-coherent sheaf can be checked on the members of an open cover, and the $U_i$ cover $X$; hence $\\mathcal F_n=\\mathcal F_s$ for every $n\\ge s$, which is the asserted stabilization with $n_0=s$.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 disposes of X empty and then fixes a finite affine cover with r>=1; with no affine piece there is nothing to stabilize"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the ascending sequence is indexed from 1 in step 3.1 and the stabilization index is a maximum of positive indices in step 5.1; the zero module M_i is included and stabilizes at once in step 4.1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 allows the one-chart cover r=1, and step 5.1 then returns s=s_1; a sequence already constant at the first term is likewise covered"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the degenerate zero coherent module is included in step 2.1 and stabilizes without special treatment in step 4.1; no irreducibility or reducedness is assumed anywhere"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "the assertion is eventual stabilization for n>=1, not a limit at an endpoint of a parameter range, so there is no boundary value to examine"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 fixes a single finite affine cover and states in words that this is one existential instantiation; the remaining use of AC is inherited through the affine equivalence [F3], as the Statement records"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the Statement is the one-directional implication from an increasing sequence of coherent subsheaves to stabilization, with no converse asserted"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no reverse implication appears in the Statement, so there is no reverse case beyond the conditional actually proved"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read all five proof steps, reader/refuter evidence, all ten declared supplier statements and complete Stacks 0BI4/01Y8 arguments. On a finite Noetherian affine cover, coherent modules give finite Noetherian modules; inclusion-preserving affine equivalence and ACC stabilize each restriction. The maximum of finitely many indices gives global equality, including empty X, zero F, one affine chart and an initially constant chain. AC is inherited only through the stated quasi-coherent interfaces; module ACC forward direction and finite index choices add none. Confirmed fatal wrong 01X8 source target and replaced title/URL/locator with exact 01Y8. Mathematical claim/proof and contract citations remain unchanged. Alpha synchronized the owning batch manifest with the reviewed sources and corrected applicable Statement/strategy wording; current item mathematics is unchanged. Final reflow joined Facts/Given soft wraps only; all five proof steps and mathematics are unchanged."
+      }
+    },
+    "thm-regularization-of-finite-normalization-curve-by-point-blowups": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-point-blowup-of-integral-curve-is-finite",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $Y$ be an integral\nNoetherian scheme of dimension one ([[def-integral-scheme]],\n[[def-dimension-noetherian-topological-space]]) and let $p\\in Y$ be a closed\npoint. Let $\\beta:Y_1=\\operatorname{Bl}_pY\\to Y$ be the blowup of $Y$ in $p$\n([[def-blowup-scheme-along-ideal]]). Then $\\beta$ is proper and of finite type, is locally H-projective, and admits the global closed immersion\n$Y_1\\hookrightarrow\\operatorname{Proj}_Y\\operatorname{Sym}(\\mathcal I_p)$\nfor the coherent center ideal $\\mathcal I_p$. The presenting sheaf $\\mathcal I_p$ is coherent and need not be locally free or globally generated. This does not assert a global H-projective immersion into $\\mathbb P^N_Y$ for a single integer $N$. It restricts to an isomorphism over\n$Y\\setminus\\{p\\}$; its fibre over $p$ is the projectivized associated graded\nscheme $\\operatorname{Proj}(\\operatorname{gr}_{\\mathfrak m_p}\\mathcal O_{Y,p})$\n([[thm-exceptional-divisor-normal-cone-proj]]), which is a finite scheme over\nthe residue field $\\kappa(p)$; consequently $\\beta$ is quasi-finite and\ntherefore finite. Moreover $\\beta$ is an isomorphism if and only if\n$\\mathcal O_{Y,p}$ is regular, equivalently if and only if the maximal ideal\n$\\mathfrak m_p$ is invertible; in the regular case\n$\\beta_*\\mathcal O_{Y_1}=\\mathcal O_Y$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-normalization-factors-through-blowup-of-curve-point",
+          "source_section": "Statement",
+          "quote": "Then $\\beta$ is finite, and $\\nu$ factors uniquely through $\\beta$: there is a unique $Y$-morphism $\\nu_1:Y^{\\nu}\\to Y_1$ with $\\beta\\circ\\nu_1=\\nu$. Consequently $Y^{\\nu}$ is also the normalization of $Y_1$, and the finite pushforward $\\beta_*\\mathcal O_{Y_1}$ is naturally a coherent $\\mathcal O_Y$-subalgebra of $\\nu_*\\mathcal O_{Y^{\\nu}}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-strict-blowup-increases-finite-normalization-subalgebra-at-singular-center",
+          "source_section": "Statement",
+          "quote": "Then the natural inclusion of coherent $\\mathcal O_Y$-subalgebras $\\mathcal O_Y\\subseteq\\beta_*\\mathcal O_{Y_1}$ inside $\\nu_*\\mathcal O_{Y^{\\nu}}$ is strict: $\\beta_*\\mathcal O_{Y_1}$ strictly contains $\\mathcal O_Y$, and the quotient $\\beta_*\\mathcal O_{Y_1}/\\mathcal O_Y$ is a nonzero coherent sheaf of finite length supported exactly at $p$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-blowup-birational-integral-scheme",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited from the blowup construction\n([[def-axiom-of-choice]]). Let $X$ be an integral scheme\n([[def-integral-scheme]]) and let $\\mathcal I$ be a nonzero quasi-coherent\nideal sheaf of finite type. Then $\\operatorname{Bl}_{\\mathcal I}X$ is integral\nand $\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ is birational: $\\pi$ is an\nisomorphism over the nonempty dense open $X\\smallsetminus Z$, and the generic\npoint of $\\operatorname{Bl}_{\\mathcal I}X$ maps to the generic point of $X$. If\nmoreover $X$ is normal and every irreducible component of $Z$ has codimension\nat least two, the blowup is an isomorphism in codimension one, i.e. over the\ncomplement of a closed subset of codimension at least two.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-morphism-schemes",
+          "source_section": "Definition",
+          "quote": "A morphism of schemes $f:X\\to S$ is **finite** if, for every affine open $U=\\operatorname{Spec}A\\subseteq S$, its inverse image is affine, $f^{-1}(U)=\\operatorname{Spec}B$, and the induced $A$-algebra $B$ is module-finite over $A$ in the sense of [[def-finite-type-and-module-finite-algebras]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian commutative ring and let $A$ be a commutative $R$-algebra of finite type ([[def-finite-type-and-module-finite-algebras]]). Then $A$ is a Noetherian ring.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-dimension-preserved-by-integral-extensions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice.\n\nLet $A\\subseteq B$ be an injective integral extension of nonzero commutative rings. Then $\\dim A=\\dim B$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-chain-dimension-open-cover",
+          "source_section": "Statement",
+          "quote": "For every open cover $T=\\bigcup_{i\\in I}U_i$ of a Noetherian space, $\\dim T=\\sup_i\\dim U_i$, with empty supremum $-\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-increasing-sequence-of-coherent-subsheaves-stabilizes",
+          "source_section": "Statement",
+          "quote": "is an increasing sequence of coherent $\\mathcal O_X$-submodules of $\\mathcal F$, then the sequence stabilizes: there is an index $n_0$ with $\\mathcal F_n=\\mathcal F_{n_0}$ for every $n\\ge n_0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-coherent-module-scheme",
+          "source_section": "Definition",
+          "quote": "Then $\\mathcal F$ is **coherent** if for every open $U\\subseteq X$ and every morphism $$\\mathcal O_U^{\\,n}\\longrightarrow\\mathcal F|_U,\\qquad n\\ge0\\ \\text{finite},$$ the kernel sheaf $\\ker\\varphi$ is of finite type ([[def-kernel-cokernel-image-sheaves]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-integral-scheme",
+          "source_section": "Definition",
+          "quote": "An **integral scheme** is a nonempty scheme that is reduced and whose underlying topological space is irreducible.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-dimension-noetherian-topological-space",
+          "source_section": "Definition",
+          "quote": "For a Noetherian topological space $T$, define $\\dim T$ as the supremum of the lengths $s$ of strict chains $Z_0\\subsetneq\\cdots\\subsetneq Z_s$ of nonempty irreducible closed subsets of $T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-embedding-dimension-and-regular-local-ring",
+          "source_section": "Definition",
+          "quote": "The ring is **regular local** when $\\operatorname{edim}R=\\dim R$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "(Base of the recursion) Put $Y_0=Y$ and $f_0=\\operatorname{id}_Y$; then $Y_0$ is integral, Noetherian and one-dimensional, $\\nu:Y^{\\nu}\\to Y_0$ is a finite normalization and $f_0$ is finite. We construct, as long as the current curve is not regular, a point blowup at a non-regular closed point and keep the data of [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "(Existence of a suitable center) Suppose $Y_{i-1}$ is not regular. By [F5] some closed point $p_{i-1}\\in Y_{i-1}$ is not regular; choose it and let $\\beta_i:Y_i=\\operatorname{Bl}_{p_{i-1}}Y_{i-1}\\to Y_{i-1}$ be the blowup, with $f_i=f_{i-1}\\circ\\beta_i$. By [F1] the morphism $\\beta_i$ is finite, is not an isomorphism (the center is non-regular), and $Y^{\\nu}$ is a normalization of $Y_i$; by [F3] the scheme $Y_i$ is integral, Noetherian and one-dimensional, and $f_i$ is finite. By [F2] the inclusion $f_{i-1,*}\\mathcal O_{Y_{i-1}}\\subsetneq f_{i,*}\\mathcal O_{Y_i}$ is strict, both terms being coherent $\\mathcal O_Y$-subalgebras of $\\nu_*\\mathcal O_{Y^{\\nu}}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "(Termination) Suppose, for contradiction, that $Y_{i-1}$ is non-regular for every $i\\ge1$. Then step 2.1 can be iterated for all $i$, and it produces the infinite strictly increasing sequence $\\mathcal O_Y\\subsetneq f_{1,*}\\mathcal O_{Y_1}\\subsetneq f_{2,*}\\mathcal O_{Y_2}\\subsetneq\\cdots\\subseteq\\nu_*\\mathcal O_{Y^{\\nu}}$ of coherent $\\mathcal O_Y$-submodules of the coherent module $\\nu_*\\mathcal O_{Y^{\\nu}}$ over the Noetherian scheme $Y$. This contradicts stabilization [F4]. Hence there is an integer $n\\ge0$ with $Y_n$ regular.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "(Conclusion) The finite sequence $Y_n\\to Y_{n-1}\\to\\cdots\\to Y_1\\to Y$ consists of blowups in closed points, each center non-regular in the preceding curve, and ends at the regular curve $Y_n$; no morphism in it is an isomorphism by [F1], and the associated sequence of coherent subalgebras strictly increases at every step by [F2]. Conversely, stabilization of this sequence is precisely what forces the termination: a stabilized non-regular stage would admit one further strict increase, contradicting stabilization. This proves all assertions, including the empty sequence when $Y$ is already regular. No assertion is made for non-finite normalizations or in dimension greater than one.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "step 3.1",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.1 records that if Y is already regular the sequence may be taken empty with n=0, and the base data Y_0=Y are set in step 1.1"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the zero-th stage is the base of the recursion in step 1.1, with Y_0=Y, f_0=id and the given finite normalization nu"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "a single blowup is the case n=1, covered by step 2.1 with i=1 and closed in step 4.1 when Y_1 is already regular"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the degenerate case of a non-finite normalization is excluded by the Statement and noted in step 4.1; an already regular initial curve is the other degenerate case, giving the empty sequence"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "the recursion index is a finite discrete counter, not an interval or limiting parameter, so there are no endpoints to test"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1 chooses one non-regular closed point at each stage; [F6] records that this is the only selection and that AC is assumed, with termination forced by Noetherian stabilization in step 3.1"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the Statement asserts existence of a finite regularizing sequence and contains no biconditional, so no forward equivalence direction is an obligation"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the identification of termination with Noetherian stabilization in steps 3.1 and 4.1 is not a converse implication of a biconditional claim"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read all four steps, reader/refuter evidence, all 18 supplier clauses and complete 0BI4 argument (0AB7 finiteness source also checked). Finiteness/integrality/injective integral affine extensions preserve Noetherian dimension one and the same finite normalization. Nonclosed points are generic fields, so any nonregular stage has a nonregular closed center. AC authorizes recursive center choices. Each chosen singular blowup strictly enlarges the coherent structure subalgebra after finite pushforward; an infinite process contradicts the reviewed coherent stabilization lemma. All centers nonregular and all maps nonidentity; regular initial curve uses n=0. Neither nonfinite normalization nor higher-dimensional resolution is asserted. No defect."
+      }
+    },
+    "lem-regularization-of-curve-on-noetherian-ambient-by-point-blowups": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-regularization-of-finite-normalization-curve-by-point-blowups",
+          "source_section": "Statement",
+          "quote": "Then there exists a finite sequence $$Y_n\\longrightarrow Y_{n-1}\\longrightarrow\\cdots\\longrightarrow Y_1\\longrightarrow Y$$ of blowups in closed points such that $Y_n$ is regular.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-blowup-closed-immersion-transform-universal",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mathcal I$ be a quasi-coherent ideal sheaf\nof finite type on a scheme $X$\n([[def-quasi-coherent-ideal-sheaf]]), let\n$\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be the blowup of\n[[def-blowup-scheme-along-ideal]] with center $Z=V(\\mathcal I)$, and let\n$W\\hookrightarrow X$ be a closed subscheme\n([[def-closed-immersion-schemes]]). Write\n$\\mathcal J=\\mathcal I\\mathcal O_W$ for the inverse image ideal of\n$\\mathcal I$ in $W$; it is a quasi-coherent ideal sheaf of finite type, and\nit cuts out the scheme-theoretic intersection $W\\cap Z$. Then the strict\ntransform $W'$ of $W$ ([[def-strict-transform-closed-subscheme]]), the\nscheme-theoretic closure of $\\pi^{-1}(W\\smallsetminus Z)$ in\n$W\\times_X\\operatorname{Bl}_{\\mathcal I}X$, is canonically isomorphic over\n$W$ to the blowup $\\operatorname{Bl}_{\\mathcal J}W$; equivalently, $W'$ is\nthe blowup of $W$ along the closed subscheme $W\\cap Z$. On the standard\naffine charts $\\operatorname{Spec}A\\subseteq X$ with\n$\\mathcal I=(f_0,\\dots,f_r)$ and $W=\\operatorname{Spec}(A/K)$, the chart\n$\\operatorname{Spec}A[\\mathcal I/f_i]$ of the blowup meets $W'$ in\n$\\operatorname{Spec}\\Bigl(A[\\mathcal I/f_i]\\big/\\bigl(KA[\\mathcal I/f_i]:f_i^\\infty\\bigr)\\Bigr)$:\n$W'$ is cut out by the saturation of the pullback ideal of $W$ by the\nexceptional equation. Moreover the strict transform of a finite scheme-theoretic\nunion is the union of the strict transforms; in particular a finite\nunion of components is transformed componentwise.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-strict-transform-closed-subscheme",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, inherited from the relative Proj construction used\nby the blowup ([[def-axiom-of-choice]]). Let $X$ be a scheme, let $\\mathcal I$\nbe a quasi-coherent ideal sheaf of finite type\n([[def-quasi-coherent-ideal-sheaf]]), let\n$\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be the blowup of\n[[def-blowup-scheme-along-ideal]] with exceptional subscheme\n$E=\\pi^{-1}(Z)$ ([[def-exceptional-divisor-blowup]]), and let\n$Y\\hookrightarrow X$ be a closed subscheme\n([[def-closed-immersion-schemes]]) with scheme-theoretic inverse image\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$. Write\n$$U:=(Y\\times_X\\operatorname{Bl}_{\\mathcal I}X)\\smallsetminus E$$\nfor the open subscheme obtained by deleting $E$ from this inverse image, with\nits open immersion $j\\colon U\\to Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$.\n\nThe **strict transform** (or **proper transform**) of $Y$ is the\nscheme-theoretic closure of $U$ in $Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$,\nthat is, the scheme-theoretic image $Y':=\\overline U$ of $j$\n([[def-scheme-theoretic-image]]). This image exists for all the data above:\nthe kernel ideal sheaf\n$\\mathcal K=\\ker(\\mathcal O_{Y\\times_X\\operatorname{Bl}}\\to j_*\\mathcal O_U)$\nis quasi-coherent by the chart calculation below. The corresponding closed\nsubscheme exists by [[thm-qc-ideal-closed-subscheme-correspondence-complete]]\nand is the smallest closed subscheme through which $j$ factors. Its\nstructural map $Y'\\to Y$ is the restriction of the projection.\n\n**Chartwise description.** The strict transform is determined by its\nrestriction to the standard affine charts of the blowup. Let\n$U_0=\\operatorname{Spec}A\\subseteq X$ be an affine open and let $a\\in\n\\Gamma(U_0,\\mathcal I)$; on the chart\n$\\operatorname{Spec}A[\\mathcal I/a]\\subseteq\\operatorname{Bl}_{\\mathcal I}X$\nthe exceptional subscheme is cut out by $a$ by [[lem-affine-blowup-algebra-properties]] and\n[[def-exceptional-divisor-blowup]], the\ninverse image of $Y$ is cut out by the ideal $JA[\\mathcal I/a]$, where\n$J=\\Gamma(U_0,\\mathcal I_Y)$, and the strict transform meets the chart in the\nclosed subscheme defined by the **saturation**\n$$(JA[\\mathcal I/a]:a^\\infty)=\\bigl\\{f\\in A[\\mathcal I/a]:a^nf\\in JA[\\mathcal I/a]\\text{ for some }n\\ge0\\bigr\\},$$\nthe largest ideal of the chart ring containing $JA[\\mathcal I/a]$ whose\nlocalisation at $a$ equals the localisation of $JA[\\mathcal I/a]$.\nTo verify both existence and this description, put $C=A[\\mathcal I/a]$\nand $H=JC$. The inverse image of $Y$ on this chart is\n$\\operatorname{Spec}(C/H)$, and its intersection with $U$ is $D(a)$\n([[lem-spectrum-localization-open-immersion]]). The kernel of\n$C\\to(C/H)_a$ is precisely $(H:a^\\infty)$: a class becomes zero after\nlocalization exactly when some power of $a$ annihilates it. For every\n$g\\in C$, localization of this kernel at $g$ is the kernel of\n$C_g\\to(C/H)_{ag}$, by [[thm-localisation-of-modules-is-exact]]. Thus\n$\\mathcal K$ on $\\operatorname{Spec}(C/H)$ is the associated sheaf of\n$(H:a^\\infty)/H$, so it is quasi-coherent without any Noetherian hypothesis.\nThese kernels agree on chart overlaps, since they all consist of sections\nwhose restriction to $U$ is zero; equivalently the ratio transition of\n[[thm-affine-blowup-standard-charts]] makes $a$ and $b$ unit multiples.\nConsequently the chart subschemes glue to the closed subscheme cut out by\n$\\mathcal K$. Its ideal restricts to zero on $U$, so $j$ factors through it.\nAny other closed subscheme through which $j$ factors has ideal contained in\n$\\mathcal K$, and therefore contains this one. This proves that the glued\nsaturation construction is the scheme-theoretic closure in all cases,\nincluding an empty deleted open, whose closure is empty.\n\n**Reducedness.** If $Y$ is reduced, then $Y'$ is reduced. Indeed, on a chart\nas above the ring of the strict transform is\n$A[\\mathcal I/a]/(JA[\\mathcal I/a]:a^\\infty)$, and the saturation is by\nconstruction the kernel of the localisation\n$A[\\mathcal I/a]/(JA[\\mathcal I/a])\\to A[\\mathcal I/a][1/a]/(J)$, so this ring\nembeds into $\\bigl(A[\\mathcal I/a]/(J)\\bigr)[1/a]=(A/J)[1/a]$, which is reduced\nwhen $Y$ is; a subring of a reduced ring is reduced, and reducedness is local,\nso $Y'$ is reduced.\n\n**Iteration.** The construction applies verbatim to a blowup of\n$\\operatorname{Bl}_{\\mathcal I}X$ along any quasi-coherent ideal sheaf of\nfinite type on it: for a closed subscheme $W\\hookrightarrow\n\\operatorname{Bl}_{\\mathcal I}X$, its inverse image under a further blowup and\nthe deletion of that blowup's exceptional subscheme define the strict transform\nof $W$, and the chartwise saturation description is unchanged. In particular a\nstrict transform of a strict transform may be formed along a further blowup.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-locally-noetherian-and-noetherian-scheme",
+          "source_section": "Definition",
+          "quote": "A scheme is **locally Noetherian** if it has an affine open cover by spectra of\nNoetherian rings. It is **Noetherian** if it is locally Noetherian and\nquasi-compact; equivalently, it has a finite affine open cover by spectra of\nNoetherian rings.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-affine-blowup-standard-charts",
+          "source_section": "Statement",
+          "quote": "The standard opens $U_i=D_+(f_it)=\\operatorname{Spec}B_i$ cover $\\operatorname{Bl}_I\\operatorname{Spec}A$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian commutative ring and let $A$ be a commutative $R$-algebra of finite type ([[def-finite-type-and-module-finite-algebras]]). Then $A$ is a Noetherian ring.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-blowup-scheme-along-ideal",
+          "source_section": "Definition",
+          "quote": "The **blowup of $X$ along $\\mathcal I$** (or **along $Z$**) is the $X$-scheme $$\\operatorname{Bl}_{\\mathcal I}X:=\\operatorname{Proj}_X\\mathcal R(\\mathcal I),$$ the relative Proj of [[def-relative-proj-quasi-coherent-graded-algebra]] applied to the Rees algebra sheaf",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-integral-scheme",
+          "source_section": "Definition",
+          "quote": "An **integral scheme** is a nonempty scheme that is reduced and whose underlying topological space is irreducible.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-strict-transform-closed-subscheme",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, inherited from the relative Proj construction used\nby the blowup ([[def-axiom-of-choice]]). Let $X$ be a scheme, let $\\mathcal I$\nbe a quasi-coherent ideal sheaf of finite type\n([[def-quasi-coherent-ideal-sheaf]]), let\n$\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be the blowup of\n[[def-blowup-scheme-along-ideal]] with exceptional subscheme\n$E=\\pi^{-1}(Z)$ ([[def-exceptional-divisor-blowup]]), and let\n$Y\\hookrightarrow X$ be a closed subscheme\n([[def-closed-immersion-schemes]]) with scheme-theoretic inverse image\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$. Write\n$$U:=(Y\\times_X\\operatorname{Bl}_{\\mathcal I}X)\\smallsetminus E$$\nfor the open subscheme obtained by deleting $E$ from this inverse image, with\nits open immersion $j\\colon U\\to Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$.\n\nThe **strict transform** (or **proper transform**) of $Y$ is the\nscheme-theoretic closure of $U$ in $Y\\times_X\\operatorname{Bl}_{\\mathcal I}X$,\nthat is, the scheme-theoretic image $Y':=\\overline U$ of $j$\n([[def-scheme-theoretic-image]]). This image exists for all the data above:\nthe kernel ideal sheaf\n$\\mathcal K=\\ker(\\mathcal O_{Y\\times_X\\operatorname{Bl}}\\to j_*\\mathcal O_U)$\nis quasi-coherent by the chart calculation below. The corresponding closed\nsubscheme exists by [[thm-qc-ideal-closed-subscheme-correspondence-complete]]\nand is the smallest closed subscheme through which $j$ factors. Its\nstructural map $Y'\\to Y$ is the restriction of the projection.\n\n**Chartwise description.** The strict transform is determined by its\nrestriction to the standard affine charts of the blowup. Let\n$U_0=\\operatorname{Spec}A\\subseteq X$ be an affine open and let $a\\in\n\\Gamma(U_0,\\mathcal I)$; on the chart\n$\\operatorname{Spec}A[\\mathcal I/a]\\subseteq\\operatorname{Bl}_{\\mathcal I}X$\nthe exceptional subscheme is cut out by $a$ by [[lem-affine-blowup-algebra-properties]] and\n[[def-exceptional-divisor-blowup]], the\ninverse image of $Y$ is cut out by the ideal $JA[\\mathcal I/a]$, where\n$J=\\Gamma(U_0,\\mathcal I_Y)$, and the strict transform meets the chart in the\nclosed subscheme defined by the **saturation**\n$$(JA[\\mathcal I/a]:a^\\infty)=\\bigl\\{f\\in A[\\mathcal I/a]:a^nf\\in JA[\\mathcal I/a]\\text{ for some }n\\ge0\\bigr\\},$$\nthe largest ideal of the chart ring containing $JA[\\mathcal I/a]$ whose\nlocalisation at $a$ equals the localisation of $JA[\\mathcal I/a]$.\nTo verify both existence and this description, put $C=A[\\mathcal I/a]$\nand $H=JC$. The inverse image of $Y$ on this chart is\n$\\operatorname{Spec}(C/H)$, and its intersection with $U$ is $D(a)$\n([[lem-spectrum-localization-open-immersion]]). The kernel of\n$C\\to(C/H)_a$ is precisely $(H:a^\\infty)$: a class becomes zero after\nlocalization exactly when some power of $a$ annihilates it. For every\n$g\\in C$, localization of this kernel at $g$ is the kernel of\n$C_g\\to(C/H)_{ag}$, by [[thm-localisation-of-modules-is-exact]]. Thus\n$\\mathcal K$ on $\\operatorname{Spec}(C/H)$ is the associated sheaf of\n$(H:a^\\infty)/H$, so it is quasi-coherent without any Noetherian hypothesis.\nThese kernels agree on chart overlaps, since they all consist of sections\nwhose restriction to $U$ is zero; equivalently the ratio transition of\n[[thm-affine-blowup-standard-charts]] makes $a$ and $b$ unit multiples.\nConsequently the chart subschemes glue to the closed subscheme cut out by\n$\\mathcal K$. Its ideal restricts to zero on $U$, so $j$ factors through it.\nAny other closed subscheme through which $j$ factors has ideal contained in\n$\\mathcal K$, and therefore contains this one. This proves that the glued\nsaturation construction is the scheme-theoretic closure in all cases,\nincluding an empty deleted open, whose closure is empty.\n\n**Reducedness.** If $Y$ is reduced, then $Y'$ is reduced. Indeed, on a chart\nas above the ring of the strict transform is\n$A[\\mathcal I/a]/(JA[\\mathcal I/a]:a^\\infty)$, and the saturation is by\nconstruction the kernel of the localisation\n$A[\\mathcal I/a]/(JA[\\mathcal I/a])\\to A[\\mathcal I/a][1/a]/(J)$, so this ring\nembeds into $\\bigl(A[\\mathcal I/a]/(J)\\bigr)[1/a]=(A/J)[1/a]$, which is reduced\nwhen $Y$ is; a subring of a reduced ring is reduced, and reducedness is local,\nso $Y'$ is reduced.\n\n**Iteration.** The construction applies verbatim to a blowup of\n$\\operatorname{Bl}_{\\mathcal I}X$ along any quasi-coherent ideal sheaf of\nfinite type on it: for a closed subscheme $W\\hookrightarrow\n\\operatorname{Bl}_{\\mathcal I}X$, its inverse image under a further blowup and\nthe deletion of that blowup's exceptional subscheme define the strict transform\nof $W$, and the chartwise saturation description is unchanged. In particular a\nstrict transform of a strict transform may be formed along a further blowup.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "Apply [F1] to $Y$: this gives a finite sequence of closed points $y_0\\in Y_0=Y$, $y_1\\in Y_1,\\dots,y_{n-1}\\in Y_{n-1}$ with $Y_i=\\operatorname{Bl}_{y_{i-1}}Y_{i-1}$, each $y_{i-1}$ non-regular in $Y_{i-1}$, and $Y_n$ regular. Since $Y_{i-1}$ is integral of dimension one, each $y_{i-1}$ is a closed point of $Y_{i-1}$ ([[def-integral-scheme]]).",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "Define the ambient sequence by $X_0=X$ and, inductively, $X_i=\\operatorname{Bl}_{z_{i-1}}X_{i-1}$, where $z_{i-1}$ is the image of $y_{i-1}$ under the closed immersion $Y_{i-1}\\hookrightarrow X_{i-1}$ whose construction is the induction claim proved below. Each $z_{i-1}$ is a closed point of $X_{i-1}$ by [F4], and each $X_i$ is Noetherian by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "Claim: for every $i$ the strict transform of $Y$ in $X_i$ is canonically isomorphic over $Y$ to $Y_i$; in particular $Y_i$ embeds in $X_i$ as a closed subscheme, so the induction of step 2.1 is legitimate. For $i=0$ this is the identity $Y_0=Y$. Assume it for $i-1$. The blowup $X_i\\to X_{i-1}$ is the blowup at the point $z_{i-1}\\in Y_{i-1}\\subseteq X_{i-1}$; by [F2] the strict transform of $Y_{i-1}$ in $X_i$ is the blowup of $Y_{i-1}$ in the inverse image ideal of $z_{i-1}$, which is the maximal ideal of the point $y_{i-1}$, and this blowup is $\\operatorname{Bl}_{y_{i-1}}Y_{i-1}=Y_i$. Since strict transforms may be iterated (the strict transform of $Y$ in $X_i$ equals the strict transform of the strict transform $Y_{i-1}$ of $Y$ in $X_{i-1}$, by the saturation description of [F2]), the strict transform of $Y$ in $X_i$ is $Y_i$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "Taking $i=n$, the strict transform of $Y$ in $X_n$ is canonically $Y_n$, which is regular by step 1.1; hence the finite sequence of blowups in closed points constructed in step 2.1 has the required property, and by construction its centers are the images of the intrinsic centers, so the canonical identification of strict transforms with the intrinsic blowups holds at every stage. This proves both assertions.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 3.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "if Y is already regular the intrinsic sequence of [F1] is empty; step 4.1 allows n=0 and the construction of step 2.1 has no stages to perform"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the zero-th ambient stage X_0=X is defined in step 2.1 and the induction of step 3.1 starts from the identity strict transform Y_0=Y"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the one-blowup case is step 2.1 with i=1 together with step 3.1 with i=1, where the strict transform of Y in X_1 is Y_1 by construction"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 permit infinitely near centers, including points above an earlier center: every center is a closed point on the current embedded curve, not necessarily a distinct point of the original ambient scheme. No regularity, dimension, or field hypothesis on the original Noetherian ambient scheme is imposed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "the ambient sequence is indexed by a finite discrete counter, so there are no endpoint values of a continuous parameter to check"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the centres come from the already given intrinsic sequence of [F1]; step 2.1 makes no new selection, and [F5] records the AC inherited from the intrinsic sequence and blowup suppliers"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the Statement asserts existence of a regularizing ambient sequence and contains no biconditional"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no reverse implication is asserted; the canonical identification of strict transforms is a direct construction in step 3.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read all four steps and all ten actual supplier clauses; complete 0BI5 and 080E proofs checked. Intrinsic finite sequence has closed nonregular centers on integral Noetherian curves. Each curve embeds closed in its current ambient scheme, so centers stay closed and induce exactly the maximal point ideal on the curve. Simultaneous induction uses the strict-transform=intrinsic-blowup theorem to construct both embedding and next ambient blowup. Finite affine/standard chart covers preserve ambient Noetherianity; iteration yields exactly the regular final intrinsic curve, including n=0. No ambient regularity or field hypothesis is smuggled in; inherited AC stated. No defect."
+      }
+    },
+    "lem-blowup-of-closed-point-of-regular-surface-is-regular": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-regular-local-domain-induction",
+          "source_section": "Statement",
+          "quote": "Every regular local ring is an integral domain.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-nonaffine-regular-local-ring-is-ufd",
+          "source_section": "Statement",
+          "quote": "Every regular local ring is a unique factorization domain.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-localisation-and-polynomial-extension-of-regular-rings",
+          "source_section": "Statement",
+          "quote": "Localizations and finite polynomial extensions of a commutative regular Noetherian ring are regular.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-localisations-of-regular-local-rings-are-regular",
+          "source_section": "Statement",
+          "quote": "Every prime localization $R_{\\mathfrak p}$ of a regular local ring $R$ is regular",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-regular-local-quotient-by-parameter-is-regular",
+          "source_section": "Statement",
+          "quote": "Let $(R,\\mathfrak m,k)$ be regular local of dimension $d$, and let $x\\in\\mathfrak m\\setminus\\mathfrak m^2$. Then $R/(x)$ is regular local, of dimension and embedding dimension $d-1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-dimension-of-a-polynomial-ring-over-a-noetherian-ring",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian commutative ring of finite Krull dimension. Then $$ \\dim R[x]=\\dim R+1. $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-regular-system-of-parameters-equivalent-basis",
+          "source_section": "Statement",
+          "quote": "Let $(R,\\mathfrak m,k)$ be a nonzero Noetherian local ring of dimension $d$, and let $\\mathbf x=(x_1,\\ldots,x_d)\\in\\mathfrak m^d$. Then $\\mathbf x$ is a regular system of parameters if and only if its classes form a $k$-basis of $\\mathfrak m/\\mathfrak m^2$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-associated-graded-ring-of-a-regular-local-ring",
+          "source_section": "Statement",
+          "quote": "If $(R,\\mathfrak m,k)$ is regular local of dimension $d$, any cotangent basis induces a graded isomorphism $k[X_1,\\ldots,X_d]\\cong\\operatorname{gr}_{\\mathfrak m}R$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "source_section": "Statement",
+          "quote": "A nonzero Noetherian local ring of dimension one is regular if and only if it is a discrete valuation ring.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-embedding-dimension-and-regular-local-ring",
+          "source_section": "Definition",
+          "quote": "The ring is **regular local** when $\\operatorname{edim}R=\\dim R$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "Take a Noetherian affine neighbourhood $U=\\operatorname{Spec}R$ of $p$, with center ideal $\\mathfrak n$, and put $A=R_{\\mathfrak n}=\\mathcal O_{S,p}$. The blowup restricts to the blowup on $U$ ([[lem-blowup-local-on-base-scheme]]). Flat base change along $R\\to A$ identifies its further pullback with $\\operatorname{Bl}_{\\mathfrak m}\\operatorname{Spec}A$, where $\\mathfrak m=\\mathfrak nA$ ([[thm-blowup-base-change-flat]]). The local ring of any point above $p$ is unchanged by this localization, because every element of $R\\setminus\\mathfrak n$ is already a unit there. Thus regularity above $p$ can be checked over $A$. Its dimension is one or two: $p$ cannot be a zero-dimensional irreducible component of the pure two-dimensional regular scheme, and the dimension is at most two. The two dimensions are treated separately below.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "Suppose $\\dim A=2$ and choose regular parameters $x,y$ generating $\\mathfrak m$. The standard charts are $A[\\mathfrak m/x]$ and $A[\\mathfrak m/y]$ ([[thm-affine-blowup-standard-charts]]). By the power-torsion presentation of [[lem-affine-blowup-algebra-properties]], the first is the quotient of $B'=A[T]/(xT-y)$ by its $x$-power torsion. This torsion is zero. Indeed $A/(x)$ is a regular one-dimensional local domain and $y$ is nonzero modulo $x$ by [F1]. If $xg=(xT-y)h$ in $A[T]$, reduction modulo $x$ gives $\\overline y\\,\\overline h=0$ in the domain $(A/(x))[T]$, so $h=xh_1$; cancelling $x$ in the domain $A[T]$ gives $g=(xT-y)h_1$. Thus multiplication by $x$ is injective on $B'$, and $A[\\mathfrak m/x]=B'$. It is a domain because it embeds into $A[1/x]$. The other chart is symmetrically $A[U]/(yU-x)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2.2",
+          "claim": "In the case $\\dim A=1$, the one-dimensional regular local ring $A$ is a discrete valuation ring [F3], so $\\mathfrak m$ is principal generated by a uniformizer, the center ideal is invertible on a neighbourhood of $p$, and the blowup of an invertible ideal is an isomorphism: $\\pi$ is an isomorphism ([[thm-blowup-effective-cartier-divisor-isomorphism]]). Then $E=\\pi^{-1}(p)$ is the closed point $p$ with its reduced structure $\\operatorname{Spec}\\kappa(p)$, and it is an effective Cartier divisor.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "Consider a prime $Q$ of $B=A[T]/(xT-y)$ whose contraction $\\mathfrak q$ in $A$ is not $\\mathfrak m$. If $x\\notin\\mathfrak q$, the localized chart is $B\\otimes_AA_{\\mathfrak q}=A_{\\mathfrak q}$ by solving $T=y/x$. If $x\\in\\mathfrak q$, then $y\\notin\\mathfrak q$; in the localized chart $y=xT$ is a unit, so $x$ is a unit and the chart is $A_{\\mathfrak q}[1/x]$. In either case $B_Q$ is a localization of the regular ring $A_{\\mathfrak q}$ and is regular. This includes contraction $\\mathfrak q=(0)$, where the local ring is a field.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "cases",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3.2",
+          "claim": "For a prime $Q$ of $B$ over $\\mathfrak m$, its preimage $P$ in $C=A[T]$ is either $\\mathfrak mC$ or $(x,y,h(T))$, where $h$ lifts a monic irreducible polynomial of $\\kappa[T]$. The regular local ring $C_P$ has dimension two in the first case and three in the second: the prime chains $(0)\\subsetneq(x)\\subsetneq\\mathfrak mC$ and, in the second case, $\\mathfrak mC\\subsetneq P$ give the lower bounds, while the displayed two or three maximal-ideal generators give the upper bounds on dimension. Consequently $x,y$, or $x,y,h$, form a cotangent basis by [F1]. The class of $xT-y$ in $PC_P/(PC_P)^2$ is the residue of $T$ times the class of $x$ minus the class of $y$, and is nonzero because the coefficient of $y$ is $-1$. The parameter-quotient lemma therefore makes $B_Q=C_P/(xT-y)$ regular. Its dimension is one for $P=\\mathfrak mC$ (the generic point of the exceptional curve), and two for $P=(x,y,h)$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "Steps 3.1 and 3.2 prove regularity on the $x$-chart, and the symmetric proof proves it on the $y$-chart; step 1.1 transfers these local rings to all points above $p$. Away from $p$ the blowup is an isomorphism ([[lem-blowup-isomorphism-off-center]]), so $S'$ is regular everywhere. It is pure of dimension two as well. In the dimension-one case this follows from the identity in step 2.2. In the dimension-two case the local charts above $p$ are domains of dimension two: all their prime-local dimensions are at most two, and step 3.2 exhibits dimension-two closed local rings. The exceptional divisor is not an irreducible component, since its chart equation $x$ (or $y$) is a nonzerodivisor. Thus every component meeting the exceptional divisor is the strict transform of the corresponding component through $p$ and has dimension two; every other component is unchanged. The components of the original regular surface all have dimension two, so the same holds for $S'$. The dimension-one local ring at the generic point of $E$ does not contradict pure dimension two.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.2",
+            "step 3.1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "D5.1",
+          "claim": "The exceptional curve is effective Cartier: the pulled-back center ideal $\\mathcal I_p\\mathcal O_{S'}$ is invertible with nonzerodivisor local generators, and $E=V(\\mathcal I_p\\mathcal O_{S'})$ is the associated effective Cartier divisor ([[thm-pullback-center-ideal-invertible]]). In the case $\\dim A=2$, the normal cone theorem identifies $E$ with $\\operatorname{Proj}_{Z}(\\operatorname{gr}_{\\mathcal I_p}\\mathcal O_S)$ over $Z=\\{p\\}$ ([[thm-exceptional-divisor-normal-cone-proj]]); on the one-point scheme $Z=\\operatorname{Spec}\\kappa(p)$ its graded pieces are $\\mathfrak m^n/\\mathfrak m^{n+1}$, so $E\\cong\\operatorname{Proj}(\\operatorname{gr}_{\\mathfrak m}A)$ and [F2] gives $E\\cong\\operatorname{Proj}\\kappa(p)[X,Y]=\\mathbb P^1_{\\kappa(p)}$ over $\\kappa(p)$. In particular $E$ is a regular curve, so the blowup creates no new singular one-dimensional component.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "D6.1",
+          "claim": "Collecting: $S'$ is regular of pure dimension two and $E$ is effective Cartier by steps 4.1 and 5.1; in the two-dimensional case $E\\cong\\mathbb P^1_{\\kappa(p)}$ by step 5.1; in the one-dimensional case $\\pi$ is an isomorphism and $E=\\operatorname{Spec}\\kappa(p)$ by step 2.2; and $\\pi$ restricts to an isomorphism off $E$ by step 4.1. Only regularity of $S$ and of the local charts was used, never smoothness over a field, so no smoothness claim is made.",
+          "step": "6.1",
+          "inputs": [
+            "F4",
+            "step 4.1",
+            "step 5.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "the centre is the nonempty closed point p, and the proof covers the fibre over p in steps 1.1 and 5.1 and its complement in step 4.1, so no nonempty region is left unattended"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the zero-dimensional case of O_{S,p} does not occur for a closed point of a pure two-dimensional surface; the stated cases dim 2 and dim 1 are treated in steps 3.2, 5.1 and 2.2"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the one-dimensional centre case is step 2.2: A is a DVR, m is principal, pi is an isomorphism and E=Spec kappa(p) is effective Cartier"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement excludes nonregular or nonclosed centers; step1.1 reduces actual stalks by localization, step2.1 chooses parameters only in localdimensiontwo, and step2.2 handles localdimensionone."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "there is no interval or ordered parameter; the two dimensions in the Statement are separate cases proved in steps 2.2 and 5.1, not endpoints of a range"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step1.1 fixes one affine neighborhood and localization; step2.1 chooses two regular parameters only in dimensiontwo. AC is carried by F4, with no arbitrary affine-global parameter hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the Statement asserts regularity of S and the structure of E; it contains no biconditional, so no forward implication of an equivalence is an obligation"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no converse is asserted in the Statement; the two case clauses are proved directly in steps 2.2 and 5.1 rather than as halves of a biconditional"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read all eight steps, reader/refuter evidence and all 23 supplier statements. Checked 0AGQ statement/full proof and 0BIC context; regularity is independently proved here. Localization preserves local rings over p. In dimension two, reduction mod x proves absence of x-power torsion in A[T]/(xT-y); at exceptional primes xT-y has nonzero cotangent class, so parameter quotient is regular. Symmetric chart and off-center identity give regularity and pure dimension two. In dimension one the DVR point ideal is invertible globally (near p and unit off p), hence identity blowup; E is a reduced Cartier point. Exceptional Proj(gr_m A)=P1_kappa in dimension two. Explicit AC covers algebra/Proj interfaces, with no field-smoothness claim. No defect."
+      }
+    },
+    "def-strict-normal-crossings-divisor": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "clause (a) of the Definition is the empty case, no component through p; the final sentences record that the empty curve D=empty is SNC by (a)"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows zero components through a point and the unitideal local equation. Its Remarks restrict the dimensiontwo calculation to points ON D; dimensionone closedambientpoints off D remain in the zero-componentcase. The equivalent effectiveCartier description explicitly retains puredimensionone."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "clause (b) of the Definition is exactly the case of one regular component through p, with local equation a single nonzerodivisor parameter"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the Definition requires D reduced of pure dimension one; repeated or nonreduced components are excluded, and clause (c) requires two distinct components meeting with m_p=1"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "the Definition is pointwise on closed points of S; there is no order-theoretic or limiting endpoint to examine"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the opening sentence of the Definition declares AC only for the local factoriality input and the equivalence argument below; the pointwise clauses (a)-(c) involve no selection (Definition)"
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Definition and Remark R1 prove the local-ring equivalence at closed points on the pure one-dimensional support: one component has a parameter equation, and multiplicity-one intersections of two regular components give two independent parameters; no triple is allowed. Outside support the equation is a unit. The finite-subset formulation includes the required codimension."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Definition and Remark R1 read the unit, single-parameter and product-of-two-distinct-parameters equations back as zero, one, or two regular branches with reduced transverse intersection; the finite-subset codimension condition rules out triples on the dimension-two local support."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read complete Definition/R1-R3, reader/refuter evidence and all nine supplier statements. Checked Stacks 0BI9 Definition 41.21.1, complete 0BIA Lemma 41.21.2 proof and 0BIC resolution proof. Local factoriality under explicit AC makes radical pure curve ideals products of distinct height-one prime generators. A regular component equation is outside m^2; pair length one means its two equations generate m, giving independent parameters. This proves both local-equation and component/intersection characterizations; three components are forbidden. Closed-point tests suffice because other curve points are generic; empty/unit ideal, single component, crossings and nonsmooth regular components over imperfect fields are covered. Surface here is locally Noetherian; global finite resolution separately needs Noetherianity. No defect found."
+      }
+    },
+    "thm-separation-of-regular-curve-components-by-point-blowups": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-regularization-of-curve-on-noetherian-ambient-by-point-blowups",
+          "source_section": "Statement",
+          "quote": "Then there exists a finite sequence $$X_n\\longrightarrow X_{n-1}\\longrightarrow\\cdots\\longrightarrow X_1\\longrightarrow X$$ of blowups in closed points such that the strict transform of $Y$ in $X_n$ is a regular curve.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-intersection-multiplicity-drop-under-point-blowup",
+          "source_section": "Statement",
+          "quote": "Then: 1. $\\pi$ restricts to an isomorphism $Y'\\to Y$; 2. $Y'$ meets $E$ in exactly one point $q$, which is the unique point of $Y'$ over $p$, and $m_q(Y'\\cap E)=1$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-blowup-closed-immersion-transform-universal",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mathcal I$ be a quasi-coherent ideal sheaf\nof finite type on a scheme $X$\n([[def-quasi-coherent-ideal-sheaf]]), let\n$\\pi\\colon\\operatorname{Bl}_{\\mathcal I}X\\to X$ be the blowup of\n[[def-blowup-scheme-along-ideal]] with center $Z=V(\\mathcal I)$, and let\n$W\\hookrightarrow X$ be a closed subscheme\n([[def-closed-immersion-schemes]]). Write\n$\\mathcal J=\\mathcal I\\mathcal O_W$ for the inverse image ideal of\n$\\mathcal I$ in $W$; it is a quasi-coherent ideal sheaf of finite type, and\nit cuts out the scheme-theoretic intersection $W\\cap Z$. Then the strict\ntransform $W'$ of $W$ ([[def-strict-transform-closed-subscheme]]), the\nscheme-theoretic closure of $\\pi^{-1}(W\\smallsetminus Z)$ in\n$W\\times_X\\operatorname{Bl}_{\\mathcal I}X$, is canonically isomorphic over\n$W$ to the blowup $\\operatorname{Bl}_{\\mathcal J}W$; equivalently, $W'$ is\nthe blowup of $W$ along the closed subscheme $W\\cap Z$. On the standard\naffine charts $\\operatorname{Spec}A\\subseteq X$ with\n$\\mathcal I=(f_0,\\dots,f_r)$ and $W=\\operatorname{Spec}(A/K)$, the chart\n$\\operatorname{Spec}A[\\mathcal I/f_i]$ of the blowup meets $W'$ in\n$\\operatorname{Spec}\\Bigl(A[\\mathcal I/f_i]\\big/\\bigl(KA[\\mathcal I/f_i]:f_i^\\infty\\bigr)\\Bigr)$:\n$W'$ is cut out by the saturation of the pullback ideal of $W$ by the\nexceptional equation. Moreover the strict transform of a finite scheme-theoretic\nunion is the union of the strict transforms; in particular a finite\nunion of components is transformed componentwise.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-intersection-multiplicity-drop-under-point-blowup",
+          "source_section": "Statement",
+          "quote": "3. if $q$ also lies on $Z'$, then $m_q(Y'\\cap Z')<m_p(Y\\cap Z)$. In particular the blowup strictly decreases the intersection multiplicity at every point over $p$ where the strict transforms still meet, and if $m_p(Y\\cap Z)=1$ then $Y'$ and $Z'$ are disjoint over $p$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-intersection-multiplicity-of-closed-subschemes",
+          "source_section": "Definition",
+          "quote": "The **local intersection multiplicity of $Y$ and $Z$ at $p$** is $$m_p(Y\\cap Z):=\\operatorname{length}_{\\mathcal O_{X,p}}\\bigl(\\mathcal O_{Y\\cap Z,p}\\bigr),$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-integral-scheme",
+          "source_section": "Definition",
+          "quote": "An **integral scheme** is a nonempty scheme that is reduced and whose underlying topological space is irreducible.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-locally-noetherian-and-noetherian-scheme",
+          "source_section": "Definition",
+          "quote": "A scheme is **locally Noetherian** if it has an affine open cover by spectra of Noetherian rings.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-dimension-noetherian-topological-space",
+          "source_section": "Definition",
+          "quote": "For a Noetherian topological space $T$, define $\\dim T$ as the supremum of the lengths $s$ of strict chains $Z_0\\subsetneq\\cdots\\subsetneq Z_s$ of nonempty irreducible closed subsets of $T$. Thus a one-member chain has length zero. Set $\\dim\\varnothing=-\\infty$, and allow $\\dim T=+\\infty$. The supremum of an empty family of dimensions is $-\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "Apply [F1] successively to the strict transforms of $Y_1,\\ldots,Y_r$. These applications remain legitimate: a blowup centered away from another component leaves it unchanged; at a center on that component, its strict transform is its intrinsic point blowup ([[thm-blowup-closed-immersion-transform-universal]]), which is finite and retains the same finite normalization ([[lem-point-blowup-of-integral-curve-is-finite]], [[lem-normalization-factors-through-blowup-of-curve-point]]). Thus every not-yet-regularized component still satisfies the finite-normalization hypothesis of [F1]. During each later sequence, every already regular component stays regular by [F2]. Since there are finitely many components and each intrinsic regularization is finite, after finitely many ambient point blowups all strict transforms are regular integral curves. Rename these curves and the current ambient scheme $Y_1,\\ldots,Y_r$ and $X$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "(The multiplicity maximum) By [F4] each intersection $Y_i\\cap Y_j$ with $i\\ne j$ is a finite set of closed points, so the set of numbers $m_p(Y_i\\cap Y_j)$, over all pairs and all intersection points, is finite. If it is empty, the $Y_i$ are already pairwise disjoint and we are done. Otherwise let $n\\ge1$ be its maximum.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "(Phase $n\\ge2$: lowering the maximum) Suppose $n\\ge2$ and let $p_1,\\dots,p_s$ be the finitely many points at which the maximum $n$ is attained. Blow up these points one after another (each is a closed point of the current ambient scheme, and the strict transforms are updated). For each pair $(i,j)$ meeting at a blown-up point $p_t$, [F3] shows that every multiplicity of $Y_i'\\cap Y_j'$ over $p_t$ is strictly smaller than $n$; new intersections arise only with the exceptional curves of the blowups and have multiplicity $1$; and the local data at points that are not blown up are unchanged. Hence after these finitely many blowups either no pairwise intersection remains, in which case the curves are already disjoint and the process stops, or the maximum of the remaining pairwise multiplicities is strictly smaller than $n$. All strict transforms remain regular integral curves by [F2], and their pairwise intersections remain finite. Repeating this phase at most $n-1$ times, always lowering the current maximum, the process either stops with pairwise disjoint curves or reaches the case in which the maximum is $1$. Every phase consists of finitely many blowups, so the total number of blowups is finite.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "D3.2",
+          "claim": "(Phase $n=1$: separating the components) Assume the maximum of all pairwise multiplicities is $1$ and let $p_1,\\dots,p_s$ be the finitely many points lying in at least two of the curves. Blow up these points one after another. For each pair $(i,j)$ meeting at a point $p_t$ with $m_{p_t}(Y_i\\cap Y_j)=1$, the final clause of [F3] shows that $Y_i'$ and $Y_j'$ are disjoint over $p_t$; after the finitely many blowups of this phase, every pair of strict transforms meets over none of the points $p_t$. Since intersections can only occur at the $p_t$ (the strict transforms agree with the original curves away from the blown-up points), the final strict transforms $Y_i'$ are pairwise disjoint, and they remain regular curves by [F2].",
+          "step": "3.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "Combining steps 1.1, 3.1 and 3.2: first make all components regular, then lower the maximum pairwise multiplicity by finitely many point blowups until either no intersection remains or the maximum is $1$; in the latter case separate the remaining multiplicity-$1$ contacts by finitely many further point blowups. The composite is a finite sequence of blowups of $X$ at closed points whose final strict transforms are pairwise disjoint regular curves, which is the assertion.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 disposes of the case in which no pair of curves meets: the multiplicity set is empty and the curves are already pairwise disjoint"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the maximum multiplicity n is at least 1 by step 2.1 whenever the multiplicity set is nonempty; multiplicities are positive integers, so n=0 cannot occur"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the case n=1 is the second phase, discharged in step 3.2 by separating the finitely many contact points"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the degenerate case of coincident components is excluded by the hypothesis that the Y_i are pairwise distinct, and step 1.1 regularizes each strict transform while keeping them distinct"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "the phases run over a decreasing finite set of positive integer multiplicities, not over a continuous range with endpoints"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 3.1 and 3.2 choose the finitely many maximum-multiplicity or contact points at each stage; [F5] records that these finite choices are the only ones and that AC is assumed"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the Statement asserts existence of a separating sequence and contains no biconditional"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no converse implication is asserted; the two phases are constructive steps rather than halves of an equivalence"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read all five steps and all 12 actual supplier clauses, complete Stacks 0BI8 proof and previously checked 0BI7. Sequential regularization preserves integrality and finite normalization of other curves; regular ones stay unchanged intrinsically. Distinct integral dimension-one curves have no common generic point, hence their Noetherian intersections are finite closed sets. At each maximal-contact center every persisting pair decreases from <=n, others unchanged; exceptional contacts have length one. Blowing the finite set of maximum centers lowers n strictly until no contacts or n=1; final length-one phase removes all contacts. r=0 or 1 and empty contact set take the empty sequence as appropriate. AC inherited plus recursive choices explicitly allowed. No defect."
+      }
+    },
+    "thm-embedded-snc-resolution-of-reduced-curve-on-regular-surface": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-nonaffine-regular-local-ring-is-ufd",
+          "source_section": "Statement",
+          "quote": "Every regular local ring is a unique factorization domain.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-effective-cartier-divisor",
+          "source_section": "Definition",
+          "quote": "A Cartier divisor $D$ on a scheme $X$ is **effective** if it has a local-equation representation $(U_i,f_i)$ as in [[def-cartier-divisor]] with $f_i\\in\\mathcal O_X(U_i)$ and with multiplication by the germ $(f_i)_x$ injective on $\\mathcal O_{X,x}$ for every $x\\in U_i$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cartier-divisor",
+          "source_section": "Definition",
+          "quote": "A **Cartier divisor** on $X$ is a global section of $K_X^{\\times}/\\mathcal O_X^{\\times}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-strict-normal-crossings-divisor",
+          "source_section": "Definition",
+          "quote": "Then $D$ is a **strict normal crossings divisor** (an **SNC divisor**) on $S$ if at every closed point $p$ of $S$ one of the following holds",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-locally-noetherian-and-noetherian-scheme",
+          "source_section": "Definition",
+          "quote": "A scheme is **locally Noetherian** if it has an affine open cover by spectra of Noetherian rings.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-integral-scheme",
+          "source_section": "Definition",
+          "quote": "An **integral scheme** is a nonempty scheme that is reduced and whose underlying topological space is irreducible.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dimension-noetherian-topological-space",
+          "source_section": "Definition",
+          "quote": "For a Noetherian topological space $T$, define $\\dim T$ as the supremum of the lengths $s$ of strict chains $Z_0\\subsetneq\\cdots\\subsetneq Z_s$ of nonempty irreducible closed subsets of $T$. Thus a one-member chain has length zero. Set $\\dim\\varnothing=-\\infty$, and allow $\\dim T=+\\infty$. The supremum of an empty family of dimensions is $-\\infty$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-blowup-of-closed-point-of-regular-surface-is-regular",
+          "source_section": "Statement",
+          "quote": "Then $S'$ is regular of pure dimension two, and $E$ is an effective Cartier divisor on $S'$. Moreover: 1. if $\\dim\\mathcal O_{S,p}=2$, there is an isomorphism $E\\cong\\mathbb P^1_{\\kappa(p)}$ over $\\kappa(p)$;",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-intersection-multiplicity-drop-under-point-blowup",
+          "source_section": "Statement",
+          "quote": "Then: 1. $\\pi$ restricts to an isomorphism $Y'\\to Y$; 2. $Y'$ meets $E$ in exactly one point $q$, which is the unique point of $Y'$ over $p$, and $m_q(Y'\\cap E)=1$ ([[def-intersection-multiplicity-of-closed-subschemes]]); 3. if $q$ also lies on $Z'$, then $m_q(Y'\\cap Z')<m_p(Y\\cap Z)$. In particular the blowup strictly decreases the intersection multiplicity at every point over $p$ where the strict transforms still meet, and if $m_p(Y\\cap Z)=1$ then $Y'$ and $Z'$ are disjoint over $p$.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-intersection-multiplicity-of-closed-subschemes",
+          "source_section": "Definition",
+          "quote": "The **local intersection multiplicity of $Y$ and $Z$ at $p$** is $$m_p(Y\\cap Z):=\\operatorname{length}_{\\mathcal O_{X,p}}\\bigl(\\mathcal O_{Y\\cap Z,p}\\bigr),$$",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-separation-of-regular-curve-components-by-point-blowups",
+          "source_section": "Statement",
+          "quote": "Then there exists a finite sequence of blowups of $X$ at closed points such that the strict transforms $Y_i'$ in the final blowup are pairwise disjoint regular curves",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "By",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "Apply",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "At every stage the inverse image of $Z$ is effective Cartier. Locally its ideal is generated by the pullback of a nonzero local equation on a regular irreducible component of the surface. Each blowup chart embeds into the function field of that component ([[lem-affine-blowup-algebra-properties]]), so this pullback stays nonzero and is a nonzerodivisor in the regular local domain. Its ideal is thus the invertible ideal of an effective Cartier divisor ([[def-total-transform-divisor]]). Its support consists of the strict transforms of the original components and precisely the exceptional curves whose centers lie on the preceding total-transform support; the sequence of step 2.1 has this property. These components are all regular by step 2.1. The same Cartier and regularity conclusions remain true during the further point blowups below.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "Let $C_1,\\\\ldots,C_s$ be the finitely many regular components of the current support. Every intersection of two distinct components is a finite set of closed points: it is a zero-dimensional closed subscheme of either Noetherian integral curve. The finite set of contact multiplicities therefore has a maximum $M$, unless the components are already disjoint. If $M>1$, blow up each of the finitely many points where this maximum occurs. These centers have local ambient dimension two by the intersection argument in step 2.1. For each pair through a center,",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5.1",
+          "claim": "Suppose there is a closed point $p$ at which three or more components $C_1,\\\\dots,C_s$ ($s\\\\ge3$) of the current support meet. By step 4.1 all pairwise multiplicities $m_p(C_i\\\\cap C_j)$ equal $1$, and all components are regular curves, so",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "D6.1",
+          "claim": "In the terminal configuration the total transform $Z_n$ of $Z$ is an effective Cartier divisor by step 3.1; its support has only regular irreducible components by steps 2.1 and 3.1; and at every closed point either no component passes, exactly one regular component passes, or exactly two regular components pass and meet transversally in the sense $m_p=1$ of",
+          "step": "6.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "step 3.1",
+            "step 5.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 treats r=0, the case where Z has no irreducible component and is empty, as requiring nothing"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "at a closed point with no component of the support the local equation is the unit ideal, the r=0 case of the local-equation form recorded in [F1] and used in step 3.1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 6.1 allows exactly one regular component through a point, which is clause (b) of the SNC definition, and no further blowup is needed there"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1, 4.1 and 5.1 regularize components, remove tangencies and eliminate triple points. The resulting reduced support is SNC with regular components, but is not regular as a scheme at a double crossing."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "the blowup sequence is finite and discrete, so there are no endpoint values of a continuous parameter to examine"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "F6 carries AC; steps2.1,4.1,5.1 use finitelymany centers per stage. Step4.1 terminates by decreasing positiveintegermaximum, then step5.1 removes finitelymany triplepoints."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the Statement asserts existence of an SNC resolution and contains no biconditional"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no converse implication is asserted; the numbered assertions are proved directly in steps 2.1, 3.1 and 6.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read all six steps, reader/refuter evidence, all 18 supplier clauses, changed contract boundary/D6.1 and complete 0BIC/0BIA/0BIB proofs. Explicit Noetherian pure-dimension-two S gives finite original components; reduced curves are already Cartier by local UFD, so point-ideal principalization for arbitrary thickened subschemes is unnecessary. Intrinsic regularization/separation centers have ambient local dimension two; exceptional curves and later strict transforms are regular. Chart domain embeddings preserve nonzero Cartier equations. Finite pair contact maxima descend with new exceptional contacts exactly one; final finite triple-point removal creates no triples. Empty curve allowed, no smoothness or union-regularity conclusion. Accepted removal of false final-support regularity: k[u,v]_(u,v)/(uv) is SNC but has dimension one/cotangent dimension two. Direct reference/dependency search found only owned node, cusp and A page; inspected actual use, all require SNC plus regular components, not regular union. No outside impacted consumer. Alpha synchronized the owning batch manifest with the reviewed sources and corrected applicable Statement/strategy wording; current item mathematics is unchanged."
+      }
+    },
+    "ex-node-resolved-by-one-blowup": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-blowup-of-closed-point-of-regular-surface-is-regular",
+          "source_section": "Statement",
+          "quote": "Then $S'$ is regular of pure dimension two, and $E$ is an effective Cartier divisor on $S'$. Moreover: 1. if $\\dim\\mathcal O_{S,p}=2$, there is an isomorphism $E\\cong\\mathbb P^1_{\\kappa(p)}$ over $\\kappa(p)$;",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-normalization-reduced-curve-exists-finite",
+          "source_section": "Statement",
+          "quote": "Then there exists a finite morphism $\\nu\\colon C^{\\mathrm{nu}}\\to C$ with the following properties: 1. $C^{\\mathrm{nu}}$ is regular of dimension one (equivalently normal: all local rings are discrete valuation rings or fields); 2. $\\nu$ is an isomorphism over the regular locus of $C$ and is birational on each irreducible component; 3. on an affine chart $\\operatorname{Spec}A$ of $C$, $\\nu$ is the morphism corresponding to the integral closure of $A$ in its total ring of fractions; 4. $\\nu$ is unique up to a unique $C$-isomorphism, and $\\nu_*\\mathcal O_{C^{\\mathrm{nu}}}$ is a coherent $\\mathcal O_C$-module.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "source_section": "Statement",
+          "quote": "For every field $F$, the polynomial ring $F[x]$ is a unique factorisation domain.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-normal-noetherian-ring",
+          "source_section": "Definition",
+          "quote": "A commutative Noetherian ring $R$ is **normal** if every prime localization $R_{\\mathfrak p}$ is an integrally closed domain.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-strict-normal-crossings-divisor",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice for the local factoriality and the equivalence\nargument below ([[def-axiom-of-choice]]). Let $S$ be a **regular surface**: a\nlocally Noetherian scheme of pure dimension two all of whose local rings are\nregular ([[def-local-ring]], [[def-embedding-dimension-and-regular-local-ring]]).\nLet $D\\subseteq S$ be a **reduced curve**, that is, a reduced closed subscheme of\npure dimension one; equivalently, a reduced effective Cartier divisor on $S$ of pure dimension one\n([[def-effective-cartier-divisor]], [[def-cartier-divisor]]).\n\nThen $D$ is a **strict normal crossings divisor** (an **SNC divisor**) on $S$ if\nat every closed point $p$ of $S$ one of the following holds:\n\n(a) no irreducible component of $D$ passes through $p$;\n\n(b) exactly one irreducible component of $D$ passes through $p$, and it is\nregular at $p$;\n\n(c) exactly two irreducible components $Y_1,Y_2$ of $D$ pass through $p$, both\nare regular at $p$, and they meet **transversally** at $p$, that is,\n$m_p(Y_1\\cap Y_2)=1$\n([[def-intersection-multiplicity-of-closed-subschemes]]).\n\nEquivalently (Stacks, Lemma 41.21.2, in the locally Noetherian case): $D$ is\nreduced, every irreducible component of $D$ is a regular scheme, every nonempty\nscheme-theoretic intersection of two distinct irreducible components of $D$ is a\nregular scheme of dimension zero, and no three distinct irreducible components\nof $D$ meet at a point. The equivalent local equation form is: at every point\n$p\\in S$ the stalk ideal $I_{D,p}\\subseteq\\mathcal O_{S,p}$ is principal, with a\ngenerator of the form $x_1\\cdots x_r$ where $r\\ge0$ and $x_1,\\dots,x_r$ extend\nto a regular system of parameters of $\\mathcal O_{S,p}$ (for a closed point of\nthe surface, $0\\le r\\le2$; $r=0$ means the unit ideal).\n\nNo smoothness over a ground field is part of the definition; over a non-perfect\nfield the components are regular but need not be smooth. The empty curve\n$D=\\varnothing$ and a single regular component are SNC divisors by (a) and (b).",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "The parametrization of [F2] identifies $R=k[x,y]/(y^2-x^2(x+1))$ with $k[t^2-1,t(t^2-1)]$. Indeed every polynomial reduces uniquely to $a(x)+yb(x)$, and its image $a(t^2-1)+t(t^2-1)b(t^2-1)$ is zero only when both polynomials vanish: the first term has even powers of $t$, the second odd powers, and $k[t]$ is a domain. Thus $R$ is a domain, finite integral over $k[x]$, and has dimension one by [[cor-dimension-preserved-by-integral-extensions]]. At the origin the local maximal ideal has the independent classes of $x,y$ modulo its square, since the defining equation has no linear term; the embedding dimension is two, so this closed point of the integral curve is not regular. Elsewhere $x$ is invertible, because $x=0$ on the curve forces $y=0$; putting $t=y/x$ gives $R[1/x]=k[t,1/(t^2-1)]$, a localization of the regular affine line ([[thm-localisation-and-polynomial-extension-of-regular-rings]]). Therefore the origin is the unique singular point over every field of characteristic different from two, including characteristic three.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "The completed ambient local ring is the ring of formal power series in $x,y$: compatible residues modulo $(x,y)^n$ specify its coefficients, and denominators with nonzero constant term are inverted by formal geometric series. Construct the formal power series $u=1+\\sum_{n\\ge1}a_nx^n$ recursively by $u^2=1+x$. The coefficient equation gives $a_1=1/2$, and for each $n>1$ determines $a_n$ by $2a_n+\\sum_{1\\le i<n}a_i a_{n-i}=0$, so only powers of two need to be inverted. Thus this construction works in every allowed characteristic. In the ring of formal power series in $x$ and $y$, the equation factors as $(y-xu)(y+xu)$. Each factor has nonzero linear term $y-x$ or $y+x$, and its quotient is the formal power-series ring in $x$, a DVR with uniformizer $x$; thus it defines a regular formal branch; their ideal together is $(x,y)$ because two and $u$ are units. Hence the branches have distinct tangent directions and intersection length one. They are formal branches of the single integral global curve established in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "On the $x$-chart $y=xt$, the exceptional curve is $E=V(x)$ and the strict transform is $V(t^2-x-1)$, a regular curve with parameter $t$. Its exceptional intersection is $V(x,t^2-1)$, the two reduced points $t=1,-1$ because two is invertible; each has intersection length one. On the other chart $x=ys$, the strict-transform equation is $1-s^2-ys^3=0$. It makes $s$ invertible, since $s^2(1+ys)=1$, so this entire portion belongs to the overlap with the $x$-chart, where $t=1/s$. Thus the $x$-chart describes the entire strict transform, including all points above the origin, and its two transverse exceptional contacts are precisely the two formal tangent directions of step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "The strict transform is $\\mathbf A^1_k$ with $x=t^2-1$ and $y=t(t^2-1)$, so its map to $Z$ is the finite birational map of [F2]. The normality invoked there follows directly from the UFD assertion: for an integral reduced fraction $a/b$, a monic equation implies $b\\mid a^n$ after clearing denominators, and coprimality forces $b$ to be a unit. Hence the map is the normalization. The original curve has multiplicity two at the origin, from its lowest-degree term $y^2-x^2$; the strict transform is regular and has curve multiplicity one at each of the two points above the origin. The contact calculation of step 3.1 is direct and does not apply the regular-source multiplicity lemma to the singular original curve or to nonexistent global branch components.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5.1",
+          "claim": "By [F1] the surface $S_1$ is regular and $E$ is a regular curve. The support of the total transform of $Z$ is $Z'\\cup E$: two regular curves meeting exactly in the two points of step 3.1, each with multiplicity $1$. At every closed point at most two components pass, and when two pass they meet transversally, so by [F3] the support is a strict normal crossings divisor; therefore the resolution sequence of [[thm-embedded-snc-resolution-of-reduced-curve-on-regular-surface]] terminates after this single blowup, and no further blowups are needed.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "step 3.1",
+            "step 4.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 computes the singular locus to be the single point (0,0), and step 3.1 shows the strict transform meets E in exactly the two points t=plus/minus 1, so no intersection is empty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the origin (0,0) is the unique singular point in step 1.1 and no multiplicity is zero: step 3.1 computes multiplicity 1 at both points over the origin"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 5.1 terminates after exactly one blowup, with one strict transform Z and one exceptional curve E"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Only characteristic two is excluded. Step 2.1 constructs the formal square root by division by two; step 3.1 directly checks both charts and the two reduced exceptional contacts. The singular original curve does not meet the regular-source hypothesis of the drop lemma."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "the example is local at the origin and has no interval or limiting parameter with endpoints"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the only selection is the fixed chart y=xt in step 3.1; the Example declares AC for the cited blowup and normalization suppliers"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the Example asserts a one-blowup resolution and contains no biconditional"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no converse implication is asserted; the identification of Z with the normalization is a direct computation in step 4.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read all five Verification steps, Example/Facts, all 15 supplier clauses, relevant contract boundary and complete 0BI7/0BI8 source arguments. Node ring normal-form embedding is integral dim-one with unique singular origin; char3 is allowed. Formal sqrt(1+x) recursion divides only by 2, giving two regular formal branches with independent tangent directions and length-one mutual intersection; these are not global components of the integral curve. Both blowup charts prove whole A1 strict transform, with exceptional points t=+/-1 distinct and reduced, contact lengths one. Finite module generated by {1,t}, equal function field and UFD normality identify normalization. Total support consists of E and Z' with two transverse contacts, hence SNC; union need not be regular. Accepted correction removing use of regular-source contact-drop lemma on original node; current computations already supply needed contacts. AC and char not2 explicit. No Statement impact beyond valid supplier SNC correction. Alpha synchronized the owning batch manifest with the reviewed sources and corrected applicable Statement/strategy wording; current item mathematics is unchanged."
+      }
+    },
+    "ex-cusp-resolution-and-delta-drop": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-blowup-of-closed-point-of-regular-surface-is-regular",
+          "source_section": "Statement",
+          "quote": "Then $S'$ is regular of pure dimension two, and $E$ is an effective Cartier divisor on $S'$. Moreover: 1. if $\\dim\\mathcal O_{S,p}=2$, there is an isomorphism $E\\cong\\mathbb P^1_{\\kappa(p)}$ over $\\kappa(p)$;",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-strict-normal-crossings-divisor",
+          "source_section": "Definition",
+          "quote": "Then $D$ is a **strict normal crossings divisor** (an **SNC divisor**) on $S$ if at every closed point $p$ of $S$ one of the following holds",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-normalization-defect-of-reduced-curve",
+          "source_section": "Definition",
+          "quote": "The **normalization defect** of $C$ is $$\\delta_k(C):=\\dim_k H^0(C,\\mathcal Q_C),$$ the $k$-dimension of its space of global sections, a nonnegative integer.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-normalization-reduced-curve-exists-finite",
+          "source_section": "Statement",
+          "quote": "Then there exists a finite morphism $\\nu\\colon C^{\\mathrm{nu}}\\to C$ with the following properties: 1. $C^{\\mathrm{nu}}$ is regular of dimension one (equivalently normal: all local rings are discrete valuation rings or fields); 2. $\\nu$ is an isomorphism over the regular locus of $C$ and is birational on each irreducible component; 3. on an affine chart $\\operatorname{Spec}A$ of $C$, $\\nu$ is the morphism corresponding to the integral closure of $A$ in its total ring of fractions; 4. $\\nu$ is unique up to a unique $C$-isomorphism, and $\\nu_*\\mathcal O_{C^{\\mathrm{nu}}}$ is a coherent $\\mathcal O_C$-module.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-blowup-multiplicity-euler-characteristic-drop",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field, let $S$ be a regular surface\nproper over $k$ with an ample invertible sheaf, let $C\\subseteq S$ be a\nreduced curve (an effective Cartier divisor), let $p$ be a closed point of\n$S$ with residue degree $r=[\\kappa(p):k]$ and let\n$m=\\operatorname{ord}_{\\mathfrak m_p}(f)\\ge1$ be the order of a local\nequation $f$ of $C$ in $\\mathcal O_{S,p}$, namely\n$f\\in\\mathfrak m_p^m\\setminus\\mathfrak m_p^{m+1}$. This is the intrinsic\nmultiplicity, agreeing with [[def-multiplicity-hypersurface-point]] in its\naffine rational-point setting. Let\n$\\pi\\colon S'\\to S$ be the blowup of $p$ with exceptional curve $E$ and let\n$C'$ be the strict transform of $C$. Then\n$\\pi^*C=C'+mE$ as effective Cartier divisors on $S'$, and writing\n$\\chi_k(\\mathcal O_X):=\\chi_k(X,\\mathcal O_X)$ for the Euler characteristic\nof the structure sheaf ([[def-euler-characteristic-coherent-sheaf]]), one has\n$$\\chi_k(\\mathcal O_{C'})=\\chi_k(\\mathcal O_C)+r\\binom{m}{2}.$$\nConsequently, for the normalization defect\n$\\delta_k$ of [[def-normalization-defect-of-reduced-curve]],\n$$\\delta_k(C')=\\delta_k(C)-r\\binom{m}{2}.$$",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "source_section": "Statement",
+          "quote": "For every field $F$, the polynomial ring $F[x]$ is a unique factorisation domain.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "The parametrization identifies $R=k[x,y]/(y^2-x^3)$ with $k[t^2,t^3]$: modulo the monic relation every polynomial has the unique form $f(x)+yg(x)$, and its image $f(t^2)+t^3g(t^2)$ is zero only when both polynomials vanish, since their monomials have disjoint even and odd exponents. This ring is a domain, finite integral over $k[x]$ by its monic equation in $y$, and therefore has dimension one ([[cor-dimension-preserved-by-integral-extensions]]). At the origin its maximal ideal has the independent images of $x,y$ as a cotangent basis, because the relation has no linear term, so its embedding dimension is two and the point is not regular. Away from the origin, $x$ is invertible and $t=y/x$ gives $R[1/x]=k[t,t^{-1}]$, whose local rings are regular ([[thm-localisation-and-polynomial-extension-of-regular-rings]]). Thus the origin is the unique singular point.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D1.2",
+          "claim": "In the chart $y=xt$, the strict transform is $Z_1=V(t^2-x)$ and the exceptional curve is $E=V(x)$. The equation is linear in $x$, so this strict transform is regular. In the other chart $x=ys$, the strict-transform equation is $1-ys^3=0$, which forces $y$ and $s$ to be invertible; consequently that entire chart portion lies in the overlap with the first chart and adds no point above the origin. Thus the first chart describes the whole strict transform of the affine cusp. Its intersection with $E$ has coordinate ring $k[t]/(t^2)$, supported at $q=(0,0)$ and of length two, so $m_q(Z_1\\cap E)=2$. The curve $Z_1$ is regular and has curve multiplicity one at $q$, whereas the original cusp has multiplicity two because its lowest-degree equation is $y^2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "The strict transform is $\\mathbf A^1_k$, parametrized by $t$ with $x=t^2$ and $y=t^3$. The map $k[t^2,t^3]\\hookrightarrow k[t]$ is finite, because $1,t$ generate the latter as a module, and is birational, since $t=y/x$ in the fraction field. Its source is normal: by [F5] it is a UFD, and if a reduced fraction $a/b$ in its fraction field is integral, multiplying a monic integral equation by $b^n$ shows that $b$ divides $a^n$; coprimality forces $b$ to be a unit. Hence the finite birational parametrization is the normalization by [F3]. It is bijective on scheme points: it is an isomorphism where $x\\ne0$, and the fibre over the origin has support only $t=0$; there are no other points with $x=0$ on the cusp. This proves the claimed affine normalization and curve-multiplicity drop.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2.2",
+          "claim": "The contact of $Z_1$ with $E$ has multiplicity $2$, so the support is not yet SNC by [F2]. Blow up the point $q$ in the chart of step 1.2, writing $x=tu$: the strict transform of $Z_1=V(t^2-x)$ becomes $V(t^2-tu)=V(t(t-u))$, with strict transform $V(t-u)$; the strict transform of $E=V(x)$ becomes $V(u)$; and the new exceptional curve is $V(t)$. These are three distinct lines through the origin, meeting pairwise only there with multiplicity $1$ (their three tangent directions are distinct): a transverse triple point.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "Blow up that triple point. Each of the three lines is regular there, and pairwise they meet with multiplicity $1$, so the strict transform of each meets the new exceptional curve in its own point with multiplicity $1$ and the three strict transforms become pairwise disjoint over the blown-up point. The resulting support has regular components, and at every closed point at most two components pass, meeting transversally; hence it is a strict normal crossings divisor by [F2], reached after three point blowups in total.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "D3.2",
+          "claim": "The projective cubic $\\bar Z=V(Y^2Z-X^3)$ is regular away from its cusp. On the affine chart $Z=1$ outside the origin, $x$ is invertible and $t=y/x$ identifies the curve with $\\operatorname{Spec}k[t,t^{-1}]$. The only point at infinity is $[0:1:0]$; on the chart $Y=1$ its equation is $v-u^3=0$, whose coordinate ring is $k[u]$. Thus the defect is supported only at the cusp and is the module $k[t]/k[t^2,t^3]$, with basis the class of $t$. By [F3], its global section space has dimension one, so $\\delta_k(\\bar Z)=1$. The projective strict transform after the first blowup is regular at the cusp by step 1.2 and is unchanged elsewhere. Its map to $\\bar Z$ is the intrinsic point blowup ([[thm-blowup-closed-immersion-transform-universal]]), hence finite by [[lem-point-blowup-of-integral-curve-is-finite]]; it is birational and normal, so it is the normalization of $\\bar Z$ and has defect zero. Formula [F4] applies on $\\mathbb P^2_k$, a regular proper surface with ample $\\mathcal O(1)$, at the $k$-rational cusp with residue degree $r=1$ and multiplicity $m=2$. It gives $\\delta_k(\\bar Z')=1-1\\binom{2}{2}=0$, agreeing with the direct calculation.",
+          "step": "3.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "Collecting: one point blowup makes the strict transform the regular normalization of the cusp and drops the multiplicity at the point over the origin from $2$ to $1$; three point blowups make the total-transform support SNC. The example therefore realizes the regularization theorem after one step and the embedded SNC conclusion after finitely many, with the defect drop $\\delta_k=1\\to0$ confirming the formula $r\\,m(m-1)/2=1$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.2 computes that the strict transform Z_1 meets E in exactly one point q, so the intersection under consideration is nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the intersection scheme k[t]/(t^2) computed in step 1.2 is nonzero of length 2, so no multiplicity is zero; step 3.2 computes the defect values delta_k=1 and delta_k=0"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 computes the multiplicity drop from 2 to 1, and step 3.1 reaches SNC after three point blowups, the minimal sequence starting at one blowup"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example excludes characteristics 2 and 3. Step 1.1 proves the domain and singularity by monic normal forms and cotangent dimension, without a Jacobian assertion; step 1.2 computes the length-two intersection directly from k[t]/(t^2). No false division requirement is inferred from this computation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "no interval or limiting parameter occurs; the computations are at the single point q and at the origin of the affine chart"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 to 4.1 make no selection beyond the fixed charts; [F4] records the AC inherited from the cited normalization, blowup and defect suppliers"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the Example (and its delta-drop assertion) contains no biconditional, so there is no forward equivalence direction"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "no converse implication is asserted; the defect comparison is a direct computation in step 3.2"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read all seven Verification steps, Facts/Example, all 17 direct suppliers and complete current Euler-drop supplier proof; checked 14 additional Euler-prerequisite statements and 0BI7/0BI4 complete arguments. Cusp k[t^2,t^3] has unique singular origin and finite normalization k[t]. Both first charts and overlap prove entire A1 transform, exceptional contact k[t]/(t^2) length two, while curve multiplicity becomes one. Second blowup in t-chart gives three directions u=0,t=0,t-u=0; other chart adds no exceptional curve contact beyond overlap. Third blowup separates these directions into distinct length-one exceptional contacts. Projective infinity chart v=u^3 is regular; defect quotient has basis class t, delta=1. P2_k satisfies proper regular/ample assumptions and r=1,m=2, so Euler supplier gives delta'=0 and direct quotient agrees. AC and char not 2,3 explicit; no use of regular-source drop before initial cusp blowup. No defect."
+      }
+    },
+    "cex-finite-normalization-does-not-make-the-curve-regular-before-blowups": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-dimension-preserved-by-integral-extensions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice.\n\nLet $A\\subseteq B$ be an injective integral extension of nonzero commutative rings. Then $\\dim A=\\dim B$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field and let $n\\ge0$. Then $$ \\dim k[x_1,\\ldots,x_n]=n. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-embedding-dimension-and-regular-local-ring",
+          "source_section": "Definition",
+          "quote": "The ring is **regular local** when $\\operatorname{edim}R=\\dim R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "source_section": "Statement",
+          "quote": "A nonzero Noetherian local ring of dimension one is regular if and only if it is a discrete valuation ring.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-normalization-reduced-curve-exists-finite",
+          "source_section": "Statement",
+          "quote": "Then there exists a finite morphism $\\nu\\colon C^{\\mathrm{nu}}\\to C$ with the following properties: 1. $C^{\\mathrm{nu}}$ is regular of dimension one (equivalently normal: all local rings are discrete valuation rings or fields); 2. $\\nu$ is an isomorphism over the regular locus of $C$ and is birational on each irreducible component; 3. on an affine chart $\\operatorname{Spec}A$ of $C$, $\\nu$ is the morphism corresponding to the integral closure of $A$ in its total ring of fractions; 4. $\\nu$ is unique up to a unique $C$-isomorphism, and $\\nu_*\\mathcal O_{C^{\\mathrm{nu}}}$ is a coherent $\\mathcal O_C$-module.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "source_section": "Statement",
+          "quote": "For every field $F$, the polynomial ring $F[x]$ is a unique factorisation domain.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-normal-noetherian-ring",
+          "source_section": "Definition",
+          "quote": "For a domain, integrally closed means that every element of its fraction field integral over it belongs to it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integral-scheme",
+          "source_section": "Definition",
+          "quote": "An **integral scheme** is a nonempty scheme that is reduced and whose underlying topological space is irreducible.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "The point $p=(0,0)$ is a singular point of the cusp: at $p$ the local ring $R=\\\\mathcal O_{Z,p}$ has dimension one and embedding dimension two, hence is not regular by",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "D1.2",
+          "claim": "The morphism $\\\\nu:\\\\mathbf A^1_k\\\\to Z$, $t\\\\mapsto(t^2,t^3)$, is finite: the image $k[t^2,t^3]\\\\subseteq k[t]$ is a $k$-subalgebra over which $k[t]$ is generated as a module by $1$ and $t$ (because $t^2$ and $t^3$ lie in the subalgebra). It is birational: the induced map of fraction fields is $k(t^2,t^3)\\\\hookrightarrow k(t)$, an equality since $t=t^3/t^2$, and $\\\\nu$ is an isomorphism away from the origin with inverse $(x,y)\\\\mapsto y/x$. It is bijective on scheme points: it is an isomorphism on the complement of the origin by the displayed inverse, and its origin fibre has coordinate ring $k[t]/(t^2,t^3)$, supported at the single point $t=0$. Normality in",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "On the blowup chart $y=xt$, the strict transform has equation $t^2-x=0$, hence coordinate ring $k[t]$. On the other chart $x=ys$, its equation is $1-ys^3=0$, which makes $s$ and $y$ invertible; this portion lies in the overlap with the first chart. Thus the whole strict transform is the regular affine line and its map to $Z$ is $t\\\\mapsto(t^2,t^3)$, the normalization of step 1.2 ([[thm-affine-blowup-standard-charts]]).",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "The curve $Z$ therefore has finite normalization by step 1.2 and is not regular by step 1.1, so the false claim is refuted by the explicit witness $(Z,\\\\nu)$. Moreover $\\\\nu$ is a finite birational morphism which is not an isomorphism over the singular point: if it were an isomorphism at the origin, then $Z$ would be regular at the origin, contradicting step 1.1. Thus finite normalization is not a substitute for the blowup procedure: the regularization theorem requires point blowups, and step 2.1 shows explicitly that one point blowup makes its strict transform regular ([[thm-regularization-of-finite-normalization-curve-by-point-blowups]],",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "the singular locus of Z is computed in step 1.1 to be exactly the single point (0,0), so the counterexample is not vacuous"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the origin cotangent space of dimension two in a one-dimensional local ring; it does not rely on partial derivatives or claim that a coordinate-zero condition alone proves singularity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One witness curve Z has finite normalization; step 1.2 gives the module generating set {1,t}, which is not a free module basis, and step 2.1 computes that a single point blowup makes the strict transform regular."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Counterexample excludes characteristics 2 and 3 by hypothesis. Step 1.1 proves singularity by dimension and cotangent space, and step 1.2 proves bijectivity on all scheme points via the off-origin isomorphism and the origin fiber support, without a field-point cancellation argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "no interval or limiting parameter occurs; the only point singled out is the origin, and it is treated directly in step 1.1"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the only selection is the explicit witness (Z,nu) fixed in the Given data of the Counterexample; [F4] records the AC inherited from the normalization and blowup suppliers"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the refuted claim is not a biconditional, so there is no forward equivalence direction to discharge"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the counterexample refutes one assertion rather than proving a converse, so no reverse direction arises"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-27",
+        "notes": "Read all four authored steps, Facts, reader/refuter evidence, all 14 supplier clauses and current contract boundaries/citations/derivations. Rechecked 0BI4 versus 0BI7 hypotheses. Normal form embeds cusp ring in k[t], finite over k[t^2], giving integral dimension one with origin cotangent dimension two. k[t] is finite generated by {1,t}, which is not a module basis (t^3*1=t^2*t); fraction fields agree and normality follows from UFD denominator argument. Off-origin inverse and unique supported origin fibre verify bijection. Added chart computation gives x=t^2 on x-chart, while y-chart 1-y*s^3 makes s invertible and lies in overlap, hence entire transform is A1 regular after one blowup. Characteristic restrictions and inherited AC are stated. Accepted reader chart/citation/basis-contract repairs; no remaining defect. Alpha synchronized the owning batch manifest with the reviewed sources and corrected applicable Statement/strategy wording; current item mathematics is unchanged."
+      }
+    }
+  }
+}

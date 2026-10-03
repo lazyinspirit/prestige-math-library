@@ -1,0 +1,1282 @@
+[
+  {
+    "order": 510.011,
+    "id": "the-bgg-resolution",
+    "kind": "A",
+    "category": "lie-theory",
+    "title": "The Bgg Resolution",
+    "companion": "the-bgg-resolution-examples",
+    "requires": [
+      "homomorphisms-between-verma-modules-and-linkage",
+      "finite-weyl-invariants-bruhat-and-kostant-harmonics",
+      "chain-complexes-and-homology",
+      "category-o-finiteness-duality-and-blocks",
+      "tor-flatness-and-global-dimension"
+    ],
+    "items": [
+      {
+        "id": "lem-positive-root-pairings-of-a-dominant-integral-weight",
+        "kind": "lemma",
+        "title": "Positive coroot pairings of a dominant integral weight",
+        "statement": "Let $\\lambda\\in\\Lambda^+$ be a dominant integral weight and let $\\beta\\in\\Phi^+$. Then $\\langle\\lambda+\\rho,\\beta^\\vee\\rangle\\in\\mathbb Z_{>0}$; in particular $\\lambda+\\rho$ is regular, so the stabilizer of $\\lambda+\\rho$ in $W$ is trivial and $w\\circ\\lambda=w'\\circ\\lambda$ implies $w=w'$. Moreover the pairing is $W$-invariant: for all $w\\in W$, $\\langle w(\\lambda+\\rho),(w\\beta)^\\vee\\rangle=\\langle\\lambda+\\rho,\\beta^\\vee\\rangle$, and $\\langle w\\circ\\lambda+\\rho,(w\\beta)^\\vee\\rangle=\\langle\\lambda+\\rho,\\beta^\\vee\\rangle$. Finally every positive coroot is a nonnegative integral combination of the simple coroots, so integrality and positivity are read off on simple coroots and extended by $W$-invariance.",
+        "deps": [
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "def-weyl-vector-rho-for-a-chosen-positive-system",
+          "def-root-reflections-and-the-weyl-group-action",
+          "lem-finite-weyl-positive-roots-and-simple-reflections",
+          "thm-the-root-set-is-a-reduced-crystallographic-root-system",
+          "lem-finite-weyl-closed-chambers-and-stabilizers"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 3.1, pp. 9-10 and Sec. 5.3, p. 36",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "J. E. Humphreys, Introduction to Lie Algebras and Representation Theory, Sec. 13 (root systems), via the finite-Weyl conventions item",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-bruhat-covers-are-reflection-covers",
+        "kind": "lemma",
+        "title": "Bruhat covers are right multiplication by positive-root reflections",
+        "statement": "Let $x,y\\in W$ with $y\\lhd x$ a cover. Then there is a unique positive root $\\beta\\in\\Phi^+$ with $x=y s_\\beta$, and $\\ell(x)=\\ell(y)+1$. Conversely, if $\\beta\\in\\Phi^+$ and $\\ell(y s_\\beta)=\\ell(y)+1$, then $y s_\\beta\\rhd y$ is a cover. In the notation of the Bruhat graph the label $\\beta$ of the arrow $x\\to y$ is characterised by $s_\\beta=y^{-1}x$, and it is also the unique positive root $\\gamma$ with $y=x s_\\gamma$ and $\\ell(x s_\\gamma)=\\ell(x)-1$. The proof uses the standard sign criterion $\\ell(ws_\\gamma)<\\ell(w)\\iff w\\gamma<0$ together with the reflection-chain description of Bruhat order.",
+        "deps": [
+          "def-bruhat-order-on-a-finite-weyl-group",
+          "lem-finite-weyl-strong-exchange-and-deletion",
+          "def-root-reflections-and-the-weyl-group-action",
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 3.1, p. 9 (chain description of Bruhat order)",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "Hemelsoet-Voorhaar, A computer algorithm for the BGG resolution, arXiv:1911.00871, Sec. 2.2, pp. 4-5",
+              "url": "https://arxiv.org/pdf/1911.00871"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-bgg-bruhat-verma-sum-in-degree-k",
+        "kind": "definition",
+        "title": "The Bruhat graph and the BGG Verma sum in degree k",
+        "statement": "Fix a finite-dimensional complex semisimple Lie algebra $\\mathfrak g$ with Cartan subalgebra $\\mathfrak h$, positive Borel $\\mathfrak b=\\mathfrak h\\oplus\\mathfrak n^+$, positive system $\\Phi^+$, simple roots $\\alpha_1,\\dots,\\alpha_r$, Weyl group $W$ and $\\rho$. Let $\\Lambda^+$ be the dominant integral weights and let $\\lambda\\in\\Lambda^+$. Write $w\\circ\\lambda=w(\\lambda+\\rho)-\\rho$ for the dot action. The Bruhat graph has vertex set $W$; an arrow $x\\to y$ means that $y\\lhd x$ is a cover in Bruhat order, i.e. $y<x$ and $\\ell(x)=\\ell(y)+1$. Equivalently, by [[lem-bruhat-covers-are-reflection-covers]], $x=y s_\\beta$ for a unique $\\beta\\in\\Phi^+$. A square is a quadruple $(x,m_1,m_2,y)$ with $x\\rhd m_1$, $x\\rhd m_2$, $m_1\\rhd y$, $m_2\\rhd y$ and $m_1\\ne m_2$. For $0\\le k\\le|\\Phi^+|$ put $C_k(\\lambda)=\\bigoplus_{\\ell(w)=k}M(w\\circ\\lambda)$, the direct sum of Verma modules over the elements of $W$ of length $k$; each $C_k(\\lambda)$ is an object of $\\mathcal O$ ([[def-bgg-category-o]]) with a fixed direct-sum decomposition. The endpoints are $C_0(\\lambda)=M(\\lambda)$ and $C_{|\\Phi^+|}(\\lambda)=M(w_0\\circ\\lambda)$, where $w_0\\in W$ is the longest element; $C_k=0$ for $k>|\\Phi^+|$. Because $\\lambda+\\rho$ is regular ([[lem-positive-root-pairings-of-a-dominant-integral-weight]]), the weights $w\\circ\\lambda$ are pairwise distinct, so no two distinct summands are equal as labelled modules.",
+        "deps": [
+          "def-verma-module",
+          "def-bruhat-order-on-a-finite-weyl-group",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions",
+          "def-weyl-vector-rho-for-a-chosen-positive-system",
+          "def-bgg-category-o",
+          "def-integral-weyl-group-of-a-weight",
+          "thm-the-root-set-is-a-reduced-crystallographic-root-system",
+          "lem-finite-weyl-positive-roots-and-simple-reflections",
+          "lem-bruhat-covers-are-reflection-covers"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions (Columbia senior thesis, 2021), Part I Sec. 3.1-3.2, pp. 9-11 (printed pp. 9-11)",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ... BGG resolution, Trans. AMS 262 (1980), Sec. 10, p. 353",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-dominant-integral-dot-translates-embed-in-the-verma-module",
+        "kind": "lemma",
+        "title": "Dominant integral dot translates embed canonically in the Verma module",
+        "statement": "Let $\\lambda\\in\\Lambda^+$ and $w,w'\\in W$. Then $w\\circ\\lambda\\uparrow\\lambda$ in the strong linkage order, so $M(w\\circ\\lambda)$ embeds in $M(\\lambda)$; the image is the submodule generated by the (unique up to scalar) singular vector of weight $w\\circ\\lambda$ in $M(\\lambda)$. If $w\\ge w'$ in Bruhat order, then $M(w\\circ\\lambda)\\subseteq M(w'\\circ\\lambda)\\subseteq M(\\lambda)$, and the inclusion is the unique-up-to-scalar nonzero element of $\\operatorname{Hom}_{\\mathfrak g}(M(w\\circ\\lambda),M(w'\\circ\\lambda))\\cong\\mathbb C$.",
+        "deps": [
+          "lem-positive-root-pairings-of-a-dominant-integral-weight",
+          "lem-bruhat-covers-are-reflection-covers",
+          "thm-verma-embedding-for-an-arbitrary-positive-root",
+          "thm-verma-homomorphism-spaces-have-dimension-at-most-one",
+          "lem-a-nonzero-verma-homomorphism-is-injective",
+          "def-strong-linkage-order-on-weights",
+          "def-integral-weyl-group-of-a-weight",
+          "thm-strong-linkage-principle-for-verma-modules",
+          "lem-finite-weyl-strong-exchange-and-deletion",
+          "def-bruhat-order-on-a-finite-weyl-group",
+          "thm-universal-property-of-verma-modules"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 3.1-3.2, pp. 9-11",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Sec. 10, pp. 353-354; Sec. 2, Theorem 2.12",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-bruhat-covers-give-unique-verma-embeddings",
+        "kind": "lemma",
+        "title": "Bruhat covers give canonical Verma embeddings, and composites are inclusions",
+        "statement": "Let $\\lambda\\in\\Lambda^+$. For every arrow $x\\to y$ of the Bruhat graph (a cover $x\\rhd y$) the inclusion $\\iota_{x\\to y}\\colon M(x\\circ\\lambda)\\hookrightarrow M(y\\circ\\lambda)$ of [[lem-dominant-integral-dot-translates-embed-in-the-verma-module]] is the unique-up-to-scalar nonzero $\\mathfrak g$-homomorphism between these two Verma modules, and it is injective with image a proper submodule. If $x\\rhd m\\rhd y$ and $x\\rhd m'\\rhd y$ are two saturated paths, then the composites $\\iota_{m\\to y}\\circ\\iota_{x\\to m}$ and $\\iota_{m'\\to y}\\circ\\iota_{x\\to m'}$ are equal as maps $M(x\\circ\\lambda)\\to M(y\\circ\\lambda)$: both are the inclusion of the canonical submodule $M(x\\circ\\lambda)\\subseteq M(y\\circ\\lambda)\\subseteq M(\\lambda)$. In particular the system of inclusions is path-independent, and $\\iota_{y\\to z}\\circ\\iota_{x\\to y}=\\iota_{x\\to z}$ whenever $x\\rhd y\\rhd z$ and $x>z$ (length gap two).",
+        "deps": [
+          "lem-dominant-integral-dot-translates-embed-in-the-verma-module",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "thm-verma-homomorphism-spaces-have-dimension-at-most-one",
+          "lem-a-nonzero-verma-homomorphism-is-injective"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Sec. 10, p. 353 (choice of injections and induced maps $i_{ww'}$)",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            },
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 3.2, p. 10",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-bruhat-rank-two-intervals-are-diamonds",
+        "kind": "lemma",
+        "title": "Bruhat intervals of rank two are diamonds",
+        "statement": "Let $x,y\\in W$ with $y<x$ and $\\ell(x)=\\ell(y)+2$. Then the interval $\\{m:y<m<x\\}$ has exactly two elements $m_1\\ne m_2$; each satisfies $x\\rhd m_i\\rhd y$. Equivalently, the number of saturated chains $x\\rhd m\\rhd y$ is exactly $2$, and $[y,x]=\\{y,m_1,m_2,x\\}$.",
+        "deps": [
+          "def-bruhat-order-on-a-finite-weyl-group",
+          "lem-finite-weyl-strong-exchange-and-deletion",
+          "lem-finite-weyl-positive-roots-and-simple-reflections",
+          "lem-bruhat-covers-are-reflection-covers",
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hemelsoet-Voorhaar, A computer algorithm for the BGG resolution, arXiv:1911.00871, Prop. 2.2 and Lemma 2.4, pp. 3-4 (attributed to [BGG75])",
+              "url": "https://arxiv.org/pdf/1911.00871"
+            },
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Definition 10.3 and the first paragraph of the proof of Lemma 10.4, p. 354",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            },
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Lemma (10.3,10.4), p. 10",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-verma-type-of-a-module-with-a-standard-filtration",
+        "kind": "definition",
+        "title": "Type of a module with a Verma filtration",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). For $M\\in\\mathcal O$ a Verma filtration is a finite increasing filtration $0=M_0\\subseteq M_1\\subseteq\\cdots\\subseteq M_n=M$ by $\\mathfrak g$-submodules together with weights $\\psi_1,\\dots,\\psi_n$ such that $M_j/M_{j-1}\\cong M(\\psi_j)$. If such a filtration exists one says that $M$ is Verma-filtered and writes $\\operatorname{Typ}M=\\{\\psi_1,\\dots,\\psi_n\\}$, a finite set with multiplicity; the multiset is independent of the filtration because the Grothendieck group of the block has the standard classes as a basis ([[prop-the-grothendieck-group-of-o-has-simple-and-standard-bases]]) and characters of distinct Verma modules are linearly independent. Any finite direct sum of Verma modules is Verma-filtered with the evident type, and Verma-filteredness is preserved by tensoring with a finite-dimensional module ([[prop-tensoring-with-a-finite-dimensional-module-preserves-category-o]]).",
+        "deps": [
+          "def-verma-module",
+          "def-bgg-category-o",
+          "def-composition-series-and-composition-factors-of-an-object",
+          "def-grothendieck-group-and-character-of-category-o",
+          "prop-the-grothendieck-group-of-o-has-simple-and-standard-bases",
+          "prop-tensoring-with-a-finite-dimensional-module-preserves-category-o",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 4.2.2 (Definition of type), p. 22",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757), Corollary 20.5(i) and Exercise 20.6, pp. 101-102",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-induced-modules-from-finite-dimensional-b-modules-have-type-the-weights",
+        "kind": "lemma",
+        "title": "Induced modules from finite-dimensional B-modules have type their weights",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $N$ be a finite-dimensional $\\mathfrak b$-module which is $\\mathfrak h$-semisimple, with weight multiset $\\operatorname{Wt}N$. Then the induced module $U(\\mathfrak g)\\otimes_{U(\\mathfrak b)}N$ is Verma-filtered with $\\operatorname{Typ}\\bigl(U(\\mathfrak g)\\otimes_{U(\\mathfrak b)}N\\bigr)=\\operatorname{Wt}N$.",
+        "deps": [
+          "def-verma-type-of-a-module-with-a-standard-filtration",
+          "lem-finite-lie-triangularization-and-rank-one-complete-reducibility",
+          "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra",
+          "def-one-dimensional-borel-module-of-weight-lambda",
+          "thm-universal-property-of-verma-modules",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 5.1, Lemma 9.5 and Fact 9.3, pp. 29-30",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "Van Ekeren, Topics in representation theory (IMPA 2024), Sec. 29, pp. 122-123 (the complex $U(\\mathfrak g)\\otimes_{U(\\mathfrak b)}\\Lambda^n(\\mathfrak g/\\mathfrak b)$)",
+              "url": "https://w3.impa.br/~jethro/2024-0/georep.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-tensoring-a-verma-module-by-a-finite-dimensional-module-shifts-types",
+        "kind": "lemma",
+        "title": "Tensoring a Verma module by a finite-dimensional module shifts the type",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). Let $V$ be a finite-dimensional $\\mathfrak g$-module with weight multiset $\\operatorname{Wt}V$ and let $\\psi$ be a weight. Then $M(\\psi)\\otimes V$ is Verma-filtered with $\\operatorname{Typ}(M(\\psi)\\otimes V)=\\psi+\\operatorname{Wt}V=\\{\\psi+\\mu:\\mu\\in\\operatorname{Wt}V\\}$. Proof route: order a weight basis $v_1,\\dots,v_n$ of $V$ so that weights decrease; the $U(\\mathfrak n^-)$-submodules $N_k$ generated by $v_\\psi\\otimes v_1,\\dots,v_\\psi\\otimes v_k$ form a filtration with successive quotients $M(\\psi+\\lambda_k)$: each quotient is generated by a singular vector because $\\mathfrak n^+(v_\\psi\\otimes v_k)\\subseteq v_\\psi\\otimes\\operatorname{span}(v_1,\\dots,v_{k-1})$, and the PBW model $M(\\psi)\\cong U(\\mathfrak n^-)$ shows the graded pieces are free of rank one.",
+        "deps": [
+          "def-verma-type-of-a-module-with-a-standard-filtration",
+          "thm-pbw-model-of-a-verma-module",
+          "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra",
+          "lem-finite-lie-triangularization-and-rank-one-complete-reducibility",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 5.1, Lemma 9.10, pp. 31-33",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757), Corollary 20.5(i), p. 101",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-central-character-cuts-of-a-typed-module-are-typed",
+        "kind": "lemma",
+        "title": "Central-character cuts of a typed module are typed by the matching weights",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). Let $M\\in\\mathcal O$ be Verma-filtered with type $\\operatorname{Typ}M$, and for a central character $\\chi$ let $M_\\chi$ be the generalised central-character component ([[def-generalized-central-character-subcategory-of-o]]). Then $M_\\chi$ is Verma-filtered and $\\operatorname{Typ}M_\\chi=\\{\\psi\\in\\operatorname{Typ}M:\\chi_\\psi=\\chi\\}$, where $\\chi_\\psi$ is the central character of $M(\\psi)$. In particular, by the Harish-Chandra theorem in the form [[cor-central-characters-are-dot-weyl-orbits]], $\\operatorname{Typ}M_\\chi$ consists of the elements of $\\operatorname{Typ}M$ in the dot-Weyl orbit defining $\\chi$. Proof: the projection functor is exact and kills a Verma factor unless its central character matches.",
+        "deps": [
+          "def-verma-type-of-a-module-with-a-standard-filtration",
+          "def-generalized-central-character-subcategory-of-o",
+          "thm-category-o-decomposes-by-generalized-central-character",
+          "lem-generalized-central-character-submodules-are-direct-summands",
+          "cor-central-characters-are-dot-weyl-orbits",
+          "def-axiom-of-choice",
+          "lem-central-action-on-a-cyclic-highest-weight-module-is-scalar"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 5.1, Lemma 9.7, p. 31",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "Category-O supplier page: generalized central character decomposition",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-weight-subsets-with-equal-root-sums-are-unique",
+        "kind": "lemma",
+        "title": "Weight subsets with equal root sums are unique",
+        "statement": "Let $w\\in W$ and put $\\Pi_w=\\{\\alpha\\in\\Phi^+:w^{-1}\\alpha\\in\\Phi^-\\}$. Then $\\#\\Pi_w=\\ell(w)$, $w\\circ0=-\\sum_{\\alpha\\in\\Pi_w}\\alpha$, and for $\\rho$ the half-sum of positive roots $\\rho-w\\rho=\\sum_{\\alpha\\in\\Pi_w}\\alpha$. If $S\\subseteq\\Phi^+$ satisfies $\\sum_{\\alpha\\in S}\\alpha=\\sum_{\\alpha\\in\\Pi_w}\\alpha$, then $S=\\Pi_w$.",
+        "deps": [
+          "lem-finite-weyl-strong-exchange-and-deletion",
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions",
+          "def-weyl-vector-rho-for-a-chosen-positive-system",
+          "lem-rho-shift-intertwines-the-dot-and-ordinary-weyl-actions",
+          "def-root-reflections-and-the-weyl-group-action",
+          "lem-finite-weyl-positive-roots-and-simple-reflections"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 5.2, Lemma 9.6 and Fact 9.8, pp. 33-34",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Sec. 2, Lemma 2.10-2.11 and the length formula, pp. 340-342",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-standard-induced-resolution-of-the-trivial-module",
+        "kind": "definition",
+        "title": "The standard induced resolution of the trivial module",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Fix a finite-dimensional complex semisimple Lie algebra $\\mathfrak g$, a Cartan subalgebra $\\mathfrak h$, a positive Borel $\\mathfrak b=\\mathfrak h\\oplus\\mathfrak n^+$, the positive system $\\Phi^+$ and $\\mathfrak n^-$ as in [[thm-triangular-decomposition-from-a-chosen-positive-root-system]]. The quotient $\\mathfrak g/\\mathfrak b$ is a $\\mathfrak b$-module for the adjoint action; $\\mathfrak h$ acts with weights $\\Phi^-$. Projection along $\\mathfrak g=\\mathfrak n^-\\oplus\\mathfrak b$ identifies this quotient with $\\mathfrak n^-$ as an $\\mathfrak h$-module; its $\\mathfrak b$-action is $b\\cdot x=\\operatorname{pr}_{\\mathfrak n^-}[b,x]$, which need not vanish for $b\\in\\mathfrak n^+$. For $k\\ge0$ put\n\n$$B_k:=U(\\mathfrak g)\\otimes_{U(\\mathfrak b)}\\Lambda^k(\\mathfrak g/\\mathfrak b),$$\n\nthe $k$-th exterior power being taken over $\\mathbb C$ with the induced $\\mathfrak b$-action. Thus $B_0=U(\\mathfrak g)\\otimes_{U(\\mathfrak b)}\\mathbb C\\cong M(0)$, the Verma module of highest weight $0$ of [[def-verma-module]]. By [[thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra]] one has $U(\\mathfrak g)\\cong U(\\mathfrak n^-)\\otimes U(\\mathfrak b)$ as vector spaces, so\n\n$$B_k\\cong U(\\mathfrak n^-)\\otimes_{\\mathbb C}\\Lambda^k(\\mathfrak n^-)$$\n\nas $U(\\mathfrak n^-)$-modules; hence $B_k$ is a free $U(\\mathfrak n^-)$-module with $\\binom{|\\Phi^+|}{k}$ generators, and $B_k=0$ for $k>|\\Phi^+|$. Each $B_k$ is a finitely generated $\\mathfrak g$-module in the category $\\mathcal O$ of [[def-bgg-category-o]]: it is generated by the image of the finite-dimensional space $\\Lambda^k(\\mathfrak g/\\mathfrak b)$, it is $\\mathfrak h$-semisimple: a root-vector exterior basis has the finite multiset of weights $\\mu_S=\\sum_{\\beta\\in S}\\beta$ for subsets $S\\subseteq\\Phi^-$ with $\\#S=k$, with distinct subsets counted separately even when their sums coincide. For $k=0$ the empty subset has weight $0$. PBW negative-root monomials shift these weights by elements of $-Q^+$, so the weights of $B_k$ lie in the finite union $\\bigcup_{S\\subseteq\\Phi^-,\\,\\#S=k}(\\mu_S-Q^+)$, with finite-dimensional weight spaces by PBW. Raising a fixed weight by positive roots can reach only finitely many weights in that union: their simple-root coefficients are bounded above by the finitely many $\\mu$ and below by the starting weight. Hence the $U(\\mathfrak n^+)$-orbit of each weight vector is finite-dimensional, proving local finiteness.\n\nFor $k\\ge1$ define the differential $d_k\\colon B_k\\to B_{k-1}$ on elementary tensors by\n\n$$d_k(u\\otimes\\xi_1\\wedge\\cdots\\wedge\\xi_k)=\\sum_{i=1}^{k}(-1)^{i+1}u\\xi_i\\otimes\\xi_1\\wedge\\cdots\\widehat{\\xi_i}\\cdots\\wedge\\xi_k+\\sum_{1\\le i<j\\le k}(-1)^{i+j}u\\otimes\\overline{[\\xi_i,\\xi_j]}\\wedge\\xi_1\\wedge\\cdots\\widehat{\\xi_i}\\cdots\\widehat{\\xi_j}\\cdots\\wedge\\xi_k,$$\n\nwhere $\\xi_i\\in\\mathfrak g$ are representatives of elements of $\\mathfrak g/\\mathfrak b$ and the bar denotes the class in $\\mathfrak g/\\mathfrak b$. The balanced well-definedness, $\\mathfrak g$-linearity and square-zero identity are proved explicitly in [[thm-standard-induced-resolution-is-exact]]; the formula uses the actual quotient adjoint action above. Finally the counit $\\varepsilon\\colon U(\\mathfrak g)\\to\\mathbb C$ induces a well-defined map $d_0\\colon B_0\\to\\mathbb C$, $u\\otimes1\\mapsto\\varepsilon(u)$, because $\\varepsilon(u b)=0$ for $b\\in\\mathfrak b$ and $\\varepsilon(1)=1$; it is the augmentation of the complex $(B_\\bullet,d_\\bullet)$, a chain complex in the sense of [[def-chain-complex-in-an-abelian-category]].",
+        "deps": [
+          "def-verma-module",
+          "def-bgg-category-o",
+          "def-chain-complex-in-an-abelian-category",
+          "thm-triangular-decomposition-from-a-chosen-positive-root-system",
+          "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Van Ekeren, Topics in representation theory (IMPA 2024), Sec. 29, pp. 122-123 (definition and well-definedness of $D_\\bullet$)",
+              "url": "https://w3.impa.br/~jethro/2024-0/georep.pdf"
+            },
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 5, Theorem 9.1, p. 29",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": [
+          "thm-standard-induced-resolution-is-exact"
+        ]
+      },
+      {
+        "id": "thm-standard-induced-resolution-is-exact",
+        "kind": "theorem",
+        "title": "The standard induced complex is a resolution of the trivial module",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). The complex of [[def-standard-induced-resolution-of-the-trivial-module]] is exact in positive degrees, so $0\\to B_{|\\Phi^+|}\\to\\cdots\\to B_1\\to B_0\\to\\mathbb C\\to0$ is a resolution of the trivial $\\mathfrak g$-module.",
+        "deps": [
+          "def-standard-induced-resolution-of-the-trivial-module",
+          "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra",
+          "prop-associated-graded-of-the-pbw-filtration-is-commutative",
+          "def-pbw-filtration-by-tensor-degree-on-the-enveloping-algebra",
+          "thm-a-complex-is-exact-at-n-exactly-when-its-nth-homology-is-zero",
+          "lem-the-boundary-subobject-factors-through-the-cycle-subobject",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Van Ekeren, Topics in representation theory (IMPA 2024), Sec. 29, pp. 122-123 (exactness in the split case)",
+              "url": "https://w3.impa.br/~jethro/2024-0/georep.pdf"
+            },
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 5, Theorem 9.1, p. 29 (exactness stated; standard proof)",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-compatible-signs-exist-on-the-bruhat-graph",
+        "kind": "lemma",
+        "title": "Compatible signs exist on the Bruhat graph",
+        "statement": "There is a function $\\varepsilon$ from the set of arrows $x\\to y$ of the Bruhat graph to $\\{\\pm1\\}$ such that for every square $(x,m_1,m_2,y)$ the product of the four signs is $-1$: $\\varepsilon(x,m_1)\\varepsilon(m_1,y)\\varepsilon(x,m_2)\\varepsilon(m_2,y)=-1$. Consequently the two saturated paths of a rank-two interval always carry opposite total signs.",
+        "deps": [
+          "lem-bruhat-rank-two-intervals-are-diamonds",
+          "lem-bruhat-covers-are-reflection-covers",
+          "lem-finite-weyl-strong-exchange-and-deletion",
+          "lem-finite-weyl-positive-roots-and-simple-reflections",
+          "lem-finite-weyl-closed-chambers-and-stabilizers",
+          "def-bruhat-order-on-a-finite-weyl-group"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Lemma 10.4 and its proof, pp. 354-355",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            },
+            {
+              "title": "Hemelsoet-Voorhaar, A computer algorithm for the BGG resolution, arXiv:1911.00871, Sec. 4.2, pp. 8-9",
+              "url": "https://arxiv.org/pdf/1911.00871"
+            },
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Lemma (10.3,10.4) and footnote 11, p. 10 and p. 17",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-bgg-differential-from-signed-verma-maps",
+        "kind": "definition",
+        "title": "The BGG differential from signed Verma maps",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). Fix $\\lambda\\in\\Lambda^+$ and a compatible sign function $\\varepsilon$ as in [[lem-compatible-signs-exist-on-the-bruhat-graph]]. For $k\\ge1$ define $d_k\\colon C_k(\\lambda)\\to C_{k-1}(\\lambda)$ by requiring that on the summand $M(w\\circ\\lambda)$ of $C_k(\\lambda)$ with $\\ell(w)=k$ the component into the summand $M(w'\\circ\\lambda)$ of $C_{k-1}(\\lambda)$ is $\\varepsilon(w,w')\\,\\iota_{w\\to w'}$ when $w\\rhd w'$, and is $0$ otherwise; all other components are zero. Because the $\\iota_{w\\to w'}$ are $\\mathfrak g$-homomorphisms between finitely many summands and all but finitely many components vanish, $d_k$ is a well-defined $\\mathfrak g$-homomorphism of objects of $\\mathcal O$; it is a degree-$(-1)$ map of graded objects with $C_k=0$ outside $0\\le k\\le|\\Phi^+|$. Set $d_0=\\pi\\colon C_0(\\lambda)=M(\\lambda)\\twoheadrightarrow L(\\lambda)$, the canonical surjection of [[thm-verma-module-has-a-unique-simple-quotient]]. The maps $d_k$ are the differentials of the BGG complex; they depend on the chosen sign function only through the identity of the resulting complex up to isomorphism.",
+        "deps": [
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "lem-bruhat-covers-give-unique-verma-embeddings",
+          "lem-compatible-signs-exist-on-the-bruhat-graph",
+          "thm-verma-module-has-a-unique-simple-quotient",
+          "def-chain-complex-in-an-abelian-category",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Sec. 10, p. 355 (definition of $d_k$ and $\\eta$)",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            },
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 3.2, p. 11",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "prop-the-bgg-differential-squares-to-zero",
+        "kind": "proposition",
+        "title": "The BGG differential squares to zero",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). With the maps $d_k$ of [[def-bgg-differential-from-signed-verma-maps]], $d_{k-1}\\circ d_k=0$ for all $k\\ge2$; with $d_0$ included the augmented sequence is a complex of $\\mathfrak g$-modules $0\\to C_{|\\Phi^+|}\\to\\cdots\\to C_1\\to C_0\\to L(\\lambda)\\to0$. Proof: compute the $(w_1,w_4)$-component for $w_1\\in W_k$, $w_4\\in W_{k-2}$. It is the sum over $w_2\\in W_{k-1}$ of $\\varepsilon(w_1,w_2)\\varepsilon(w_2,w_4)$ times the composite of inclusions along $w_1\\rhd w_2\\rhd w_4$. If no such $w_2$ exists the entry is $0$. If such $w_2$ exists, [[lem-bruhat-rank-two-intervals-are-diamonds]] says there are exactly two, and by [[lem-bruhat-covers-give-unique-verma-embeddings]] the two composites are the same inclusion $M(w_1\\circ\\lambda)\\hookrightarrow M(w_4\\circ\\lambda)$; the two coefficients are $\\varepsilon(w_1,m_1)\\varepsilon(m_1,w_4)$ and $\\varepsilon(w_1,m_2)\\varepsilon(m_2,w_4)$, which are opposite by the square condition of [[lem-compatible-signs-exist-on-the-bruhat-graph]]. Hence the entry vanishes. The case $k=1$ (component into $L(\\lambda)$) vanishes because $\\pi$ kills the images of the inclusions $M(s_i\\circ\\lambda)\\subseteq M(\\lambda)=\\ker\\pi$.",
+        "deps": [
+          "def-bgg-differential-from-signed-verma-maps",
+          "lem-bruhat-rank-two-intervals-are-diamonds",
+          "lem-compatible-signs-exist-on-the-bruhat-graph",
+          "lem-bruhat-covers-give-unique-verma-embeddings",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "def-chain-complex-in-an-abelian-category",
+          "def-axiom-of-choice",
+          "thm-verma-module-has-a-unique-simple-quotient"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 4.1 Step 1, p. 14",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "Hemelsoet-Voorhaar, A computer algorithm for the BGG resolution, arXiv:1911.00871, Sec. 2.2 (solving $d^2=0$ square-wise), pp. 4-5",
+              "url": "https://arxiv.org/pdf/1911.00871"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-the-bgg-augmentation-has-image-the-simple-module",
+        "kind": "lemma",
+        "title": "The augmentation kernel is the sum of the simple-reflection Verma submodules",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). Let $\\lambda\\in\\Lambda^+$ and let $d_1\\colon \\bigoplus_{i}M(s_i\\circ\\lambda)\\to M(\\lambda)$ be the first BGG differential. Then $\\operatorname{im} d_1=\\sum_i M(s_i\\circ\\lambda)=\\ker\\pi$, where $\\pi\\colon M(\\lambda)\\twoheadrightarrow L(\\lambda)$ is the canonical surjection and $M(s_i\\circ\\lambda)\\subseteq M(\\lambda)$ is the canonical submodule generated by the singular vector $f_i^{\\langle\\lambda,\\alpha_i^\\vee\\rangle+1}v_\\lambda$ of [[lem-simple-root-singular-vector-in-a-verma-module]]. Consequently the augmented complex is exact at $C_0$ and $L(\\lambda)=\\operatorname{coker}(d_1)$. Proof route (Zhou's expansion of BGG): the quotient $M(\\lambda)/\\sum_i M(s_i\\circ\\lambda)$ is finite-dimensional because $M(\\lambda)\\cong U(\\mathfrak n^-)$ ([[thm-pbw-model-of-a-verma-module]]) and the PBW filtration identifies the quotient with a quotient of $U(\\mathfrak n^-)$ by the two-sided ideal generated by the powers $f_i^{\\langle\\lambda,\\alpha_i^\\vee\\rangle+1}$, whose symbol ideal contains all monomials of too large $f_i$-degree; the quotient is a finite-dimensional $\\mathfrak g$-module with a unique highest weight vector of weight $\\lambda$ ([[lem-a-proper-verma-submodule-misses-the-highest-weight-line]]), so complete reducibility ([[cor-every-finite-dimensional-representation-is-a-direct-sum-of-highest-weight-modules]]) and the classification [[thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights]] identify it with $L(\\lambda)$.",
+        "deps": [
+          "def-bgg-differential-from-signed-verma-maps",
+          "lem-dominant-integral-dot-translates-embed-in-the-verma-module",
+          "lem-bruhat-covers-give-unique-verma-embeddings",
+          "lem-simple-root-singular-vector-in-a-verma-module",
+          "thm-verma-module-has-a-unique-simple-quotient",
+          "lem-a-proper-verma-submodule-misses-the-highest-weight-line",
+          "lem-sum-of-all-proper-submodules-of-a-verma-module-is-proper",
+          "cor-every-finite-dimensional-representation-is-a-direct-sum-of-highest-weight-modules",
+          "thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights",
+          "thm-pbw-model-of-a-verma-module",
+          "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra",
+          "def-axiom-of-choice",
+          "def-dominant-integrable-highest-weight-cyclic-module",
+          "lem-simple-root-integrability-bounds-the-dominant-cyclic-module",
+          "lem-highest-weight-modules-have-weights-below-the-top-weight",
+          "lem-finite-weyl-positive-roots-and-simple-reflections",
+          "lem-positive-root-pairings-of-a-dominant-integral-weight",
+          "def-verma-module",
+          "thm-universal-property-of-verma-modules",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "def-weyl-vector-rho-for-a-chosen-positive-system"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 4.1 Step 2, pp. 15-17 (K8.27, K8.28a, K8.28b)",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Sec. 10, Lemma 10.1, p. 353",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-weak-bgg-base-case-for-the-trivial-module",
+        "kind": "lemma",
+        "title": "Weak BGG resolution of the trivial module",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $B_k$ be the standard induced complex of [[def-standard-induced-resolution-of-the-trivial-module]] and let $B_k^{\\chi_0}$ denote its generalised central-character component at the central character $\\chi_0$ of $M(0)$. Then $0\\to B_{|\\Phi^+|}^{\\chi_0}\\to\\cdots\\to B_1^{\\chi_0}\\to B_0^{\\chi_0}\\to\\mathbb C\\to0$ is a resolution of the trivial module by objects of $\\mathcal O$, and $\\operatorname{Typ}B_k^{\\chi_0}=\\{w\\circ0:\\ell(w)=k\\}$, each weight occurring once.",
+        "deps": [
+          "def-standard-induced-resolution-of-the-trivial-module",
+          "thm-standard-induced-resolution-is-exact",
+          "lem-induced-modules-from-finite-dimensional-b-modules-have-type-the-weights",
+          "lem-central-character-cuts-of-a-typed-module-are-typed",
+          "lem-weight-subsets-with-equal-root-sums-are-unique",
+          "cor-central-characters-are-dot-weyl-orbits",
+          "def-generalized-central-character-subcategory-of-o",
+          "thm-category-o-decomposes-by-generalized-central-character",
+          "lem-generalized-central-character-submodules-are-direct-summands",
+          "def-axiom-of-choice",
+          "lem-positive-root-pairings-of-a-dominant-integral-weight"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 5.2, pp. 33-34",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "Van Ekeren, Topics in representation theory (IMPA 2024), Sec. 29, pp. 123-124",
+              "url": "https://w3.impa.br/~jethro/2024-0/georep.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-weak-bgg-resolution",
+        "kind": "theorem",
+        "title": "Weak BGG resolution",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\lambda\\in\\Lambda^+$ and let $\\Pi_\\lambda=L(\\lambda)$ be the finite-dimensional simple module of highest weight $\\lambda$. Put $B_k(\\lambda)=\\bigl(B_k^{\\chi_0}\\otimes\\Pi_\\lambda\\bigr)^{\\chi_\\lambda}$, where $B_k^{\\chi_0}$ is the base-case complex of [[lem-weak-bgg-base-case-for-the-trivial-module]] and $\\chi_\\lambda$ is the central character of $M(\\lambda)$, the tensor product being over $\\mathbb C$ with diagonal $\\mathfrak g$-action and the superscript denoting the generalised central-character component of $\\chi_\\lambda$. Then\n\n$$0\\to B_{|\\Phi^+|}(\\lambda)\\to\\cdots\\to B_1(\\lambda)\\to B_0(\\lambda)\\to\\Pi_\\lambda\\to0$$\n\nis a resolution of $\\Pi_\\lambda$ by objects of $\\mathcal O$, and $\\operatorname{Typ}B_k(\\lambda)=\\{w\\circ\\lambda:\\ell(w)=k\\}$, each weight occurring once.",
+        "deps": [
+          "lem-weak-bgg-base-case-for-the-trivial-module",
+          "lem-tensoring-a-verma-module-by-a-finite-dimensional-module-shifts-types",
+          "lem-central-character-cuts-of-a-typed-module-are-typed",
+          "thm-category-o-decomposes-by-generalized-central-character",
+          "cor-central-characters-are-dot-weyl-orbits",
+          "lem-finite-semisimple-cartan-root-and-string-structure",
+          "lem-finite-weyl-closed-chambers-and-stabilizers",
+          "prop-tensoring-with-a-finite-dimensional-module-preserves-category-o",
+          "def-integral-dominant-and-strictly-dominant-weights",
+          "def-bgg-category-o",
+          "def-axiom-of-choice",
+          "lem-weight-subsets-with-equal-root-sums-are-unique",
+          "lem-positive-root-pairings-of-a-dominant-integral-weight",
+          "prop-weyl-orbit-of-the-highest-weight-gives-extremal-weights-with-multiplicity-one",
+          "lem-central-action-on-a-cyclic-highest-weight-module-is-scalar",
+          "def-verma-type-of-a-module-with-a-standard-filtration",
+          "lem-highest-weight-modules-have-weights-below-the-top-weight",
+          "lem-simple-reflections-preserve-weight-multiplicities"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 5.3, pp. 35-36",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Introduction p. 335 and Sec. 7 (BGG Theorem 9.9)",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            },
+            {
+              "title": "Van Ekeren, Topics in representation theory (IMPA 2024), Sec. 29, pp. 122-124",
+              "url": "https://w3.impa.br/~jethro/2024-0/georep.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-surjectivity-modulo-n-minus-for-free-weight-generated-modules",
+        "kind": "lemma",
+        "title": "Surjectivity modulo n-minus for free weight-generated modules (BGG 10.5)",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). Let $M,N\\in\\mathcal O$, suppose $M$ is free as a $U(\\mathfrak n^-)$-module with generators $v_1,\\dots,v_n$ that are weight vectors, and let $\\varphi\\colon M\\to N$ be a $U(\\mathfrak n^-)$-module map. Then $\\varphi$ is surjective if and only if the induced map $\\bar\\varphi\\colon M/\\mathfrak n^-M\\to N/\\mathfrak n^-N$ is surjective. Proof route: one direction is immediate; for the other, show by downward induction on the weight order that every weight vector of $N$ lies in $\\operatorname{im}\\varphi$. Since $N\\in\\mathcal O$ its weights lie in a finite union of cones $\\lambda_i-Q^+$; for a weight $\\mu$, write the class $\\bar u$ of $u\\in N_\\mu$ as $\\sum c_i\\bar\\varphi(v_i)$, which forces $\\operatorname{wt}\\varphi(v_i)=\\mu$ whenever $c_i\\ne0$; then $u-\\sum c_i\\varphi(v_i)\\in N_\\mu\\cap\\mathfrak n^-N=\\sum_{\\alpha\\in\\Phi^+}f_\\alpha N_{\\mu+\\alpha}$ lies in a sum of strictly higher weight spaces, which are contained in $\\operatorname{im}\\varphi$ by the induction hypothesis and the fact that $\\operatorname{im}\\varphi$ is a $U(\\mathfrak n^-)$-submodule.",
+        "deps": [
+          "def-bgg-category-o",
+          "thm-pbw-model-of-a-verma-module",
+          "prop-equivalent-support-description-of-category-o",
+          "thm-triangular-decomposition-from-a-chosen-positive-root-system",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 4.2.1 (BGG Lemma 10.5), pp. 18-20",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Sec. 7 (Prop. 7.1), pp. 345-348",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-jordan-holder-factors-of-verma-modules-lie-above-the-head",
+        "kind": "lemma",
+        "title": "Jordan-Holder factors of Verma modules dominate the head (BGG 8.12)",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\lambda\\in\\Lambda^+$ and $w\\in W$. If a simple module $L(\\mu)$ occurs in a composition series of $M(w\\circ\\lambda)$, then $\\mu=u\\circ\\lambda$ for some $u\\ge w$ in Bruhat order; moreover $L(w\\circ\\lambda)$ occurs exactly once. Consequently every composition factor of $M(w\\circ\\lambda)$ has length at least $\\ell(w)$.",
+        "deps": [
+          "thm-bgg-verma-homomorphism-criterion",
+          "thm-strong-linkage-principle-for-verma-modules",
+          "lem-a-verma-composition-factor-has-the-same-central-character",
+          "thm-simple-objects-of-category-o-are-highest-weight-modules",
+          "prop-verma-composition-multiplicities-are-finite",
+          "thm-verma-module-has-a-unique-simple-quotient",
+          "def-composition-series-and-composition-factors-of-an-object",
+          "thm-every-category-o-object-has-finite-length",
+          "def-bruhat-order-on-a-finite-weyl-group",
+          "def-axiom-of-choice",
+          "lem-positive-root-pairings-of-a-dominant-integral-weight",
+          "def-strong-linkage-order-on-weights",
+          "cor-central-characters-are-dot-weyl-orbits"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 4.2.2, Theorem 8.12, p. 22",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "P. Etingof, Representations of Lie Groups (18.757), Theorem 20.13, p. 104 (BGG theorem on composition factors)",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-kernel-generators-for-the-weak-bgg-complex",
+        "kind": "lemma",
+        "title": "Composition factors of the BGG kernel lie above the degree (BGG 10.6a)",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). Let $\\lambda\\in\\Lambda^+$ and let $d_k\\colon C_k(\\lambda)\\to C_{k-1}(\\lambda)$ be the BGG differential. If a simple module $L(\\mu)$ occurs in a composition series of $\\ker d_k$, then $\\mu=u\\circ\\lambda$ with $\\ell(u)\\ge k+1$. Equivalently, no composition factor of $\\ker d_k$ has the form $L(u\\circ\\lambda)$ with $\\ell(u)\\le k$. Proof route: $\\operatorname{JH}C_i=\\bigsqcup_{\\ell(w)=i}\\operatorname{JH}M(w\\circ\\lambda)$, and by the weak BGG resolution ([[thm-weak-bgg-resolution]]) the exact modules $B_i$ satisfy $\\operatorname{JH}B_i=\\operatorname{JH}C_i$; comparing the exact complex $B_\\bullet$ with the partially exact complex $C_\\bullet$ inductively, using additivity of Jordan-Holder factors on exact sequences, gives $\\operatorname{JH}\\ker d_k=\\operatorname{JH}d^{B}_{k+1}(B_{k+1})\\subseteq\\operatorname{JH}B_{k+1}=\\bigsqcup_{\\ell(w)=k+1}\\operatorname{JH}M(w\\circ\\lambda)$, and each such factor has length at least $k+1$ by [[lem-jordan-holder-factors-of-verma-modules-lie-above-the-head]].",
+        "deps": [
+          "def-bgg-differential-from-signed-verma-maps",
+          "thm-weak-bgg-resolution",
+          "lem-jordan-holder-factors-of-verma-modules-lie-above-the-head",
+          "def-composition-series-and-composition-factors-of-an-object",
+          "thm-every-category-o-object-has-finite-length",
+          "thm-category-o-is-abelian-and-extension-closed",
+          "def-axiom-of-choice",
+          "def-verma-type-of-a-module-with-a-standard-filtration",
+          "def-verma-module",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "def-chain-complex-in-an-abelian-category"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 4.2.2 (BGG Lemma 10.6a), pp. 22-25",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Sec. 9 and Sec. 10, pp. 349-354",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-nonzero-highest-weight-images-survive-modulo-n-minus",
+        "kind": "lemma",
+        "title": "Nonzero highest-weight images survive modulo n-minus (BGG 10.6b)",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\lambda\\in\\Lambda^+$, let $w_0\\in W$, and let $M\\in\\mathcal O$ be an object all of whose composition factors are of the form $L(u\\circ\\lambda)$ with $\\ell(u)\\ge\\ell(w_0)$. If $\\varphi\\colon M(w_0\\circ\\lambda)\\to M$ is a $\\mathfrak g$-homomorphism with $\\varphi(v)\\ne0$, where $v$ is a highest weight vector of $M(w_0\\circ\\lambda)$, then $\\varphi(v)\\notin\\mathfrak n^-M$; equivalently the class of $\\varphi(v)$ in $M/\\mathfrak n^-M$ is nonzero.",
+        "deps": [
+          "lem-jordan-holder-factors-of-verma-modules-lie-above-the-head",
+          "def-composition-series-and-composition-factors-of-an-object",
+          "thm-verma-module-has-a-unique-simple-quotient",
+          "lem-a-proper-verma-submodule-misses-the-highest-weight-line",
+          "prop-equivalent-support-description-of-category-o",
+          "prop-verma-composition-multiplicities-are-finite",
+          "def-axiom-of-choice",
+          "thm-every-category-o-object-has-finite-length",
+          "lem-positive-root-pairings-of-a-dominant-integral-weight",
+          "thm-simple-objects-of-category-o-are-highest-weight-modules",
+          "def-bgg-category-o"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 4.2.2 (BGG Lemma 10.6b), pp. 25-26",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Sec. 8 (Lemma 8.1), pp. 348-349",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-n-minus-coinvariants-map-injectively-into-the-kernel-of-the-differential",
+        "kind": "lemma",
+        "title": "The BGG differential induces an injection into kernel coinvariants (BGG 10.6)",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). Let $\\lambda\\in\\Lambda^+$ and let $d_{k+1}\\colon C_{k+1}(\\lambda)\\to C_k(\\lambda)$ be the BGG differential. Then the induced map $\\bar d_{k+1}\\colon C_{k+1}(\\lambda)/\\mathfrak n^-C_{k+1}(\\lambda)\\to\\ker d_k/\\mathfrak n^-\\ker d_k$ is injective. Proof route: $C_{k+1}=\\bigoplus_{\\ell(w)=k+1}U(\\mathfrak n^-)v_w$ is free with weight-vector generators $v_w$, so $C_{k+1}/\\mathfrak n^-C_{k+1}$ has basis the classes $\\bar v_w$ of distinct weights $w\\circ\\lambda$; since $\\bar d_{k+1}$ commutes with $\\mathfrak h$, it suffices to show $\\bar d_{k+1}(\\bar v_w)\\ne0$ for every $w\\in W_{k+1}$. This is [[lem-nonzero-highest-weight-images-survive-modulo-n-minus]] applied to $M=\\ker d_k$, whose composition factors have length at least $k+1$ by [[lem-kernel-generators-for-the-weak-bgg-complex]], using that $d_{k+1}(v_w)\\ne0$ because it is a sum of nonzero inclusions into the summands $M(w'\\circ\\lambda)$ with $w\\rhd w'$.",
+        "deps": [
+          "lem-bruhat-covers-give-unique-verma-embeddings",
+          "def-bgg-differential-from-signed-verma-maps",
+          "lem-surjectivity-modulo-n-minus-for-free-weight-generated-modules",
+          "lem-kernel-generators-for-the-weak-bgg-complex",
+          "lem-nonzero-highest-weight-images-survive-modulo-n-minus",
+          "thm-pbw-model-of-a-verma-module",
+          "def-axiom-of-choice",
+          "prop-the-bgg-differential-squares-to-zero",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "lem-positive-root-pairings-of-a-dominant-integral-weight",
+          "lem-finite-weyl-strong-exchange-and-deletion",
+          "def-bgg-category-o"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 4.2.2, pp. 22-24",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-verma-filtered-objects-are-acyclic-for-n-minus-coinvariants",
+        "kind": "lemma",
+        "title": "Verma-filtered objects are acyclic for n-minus coinvariants",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). Let $M\\in\\mathcal O$ be Verma-filtered. Then $\\operatorname{Tor}_j^{U(\\mathfrak n^-)}\\bigl(\\mathbb C,M\\bigr)=0$ for all $j>0$. In particular the coinvariant functor $M\\mapsto M/\\mathfrak n^-M=\\mathbb C\\otimes_{U(\\mathfrak n^-)}M$ is exact on Verma-filtered objects. Proof route: $M(\\psi)\\cong U(\\mathfrak n^-)$ as $U(\\mathfrak n^-)$-module ([[thm-pbw-model-of-a-verma-module]]) is free, hence $\\operatorname{Tor}_j(\\mathbb C,M(\\psi))=0$ for $j>0$; induct on the length of a Verma filtration using the long exact Tor sequence in the second variable ([[thm-long-exact-tor-sequence-in-the-left-module-variable]]) attached to $0\\to M_{i-1}\\to M_i\\to M_i/M_{i-1}\\to0$.",
+        "deps": [
+          "def-verma-type-of-a-module-with-a-standard-filtration",
+          "thm-pbw-model-of-a-verma-module",
+          "def-tor-by-resolving-the-left-module",
+          "thm-long-exact-tor-sequence-in-the-left-module-variable",
+          "prop-positive-tor-vanishes-when-the-resolved-variable-is-projective",
+          "def-axiom-of-choice"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 4.2.3 (the Tor computation), pp. 27-29",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-tor-with-the-trivial-module-is-computed-by-the-weak-bgg-resolution",
+        "kind": "lemma",
+        "title": "Tor with the trivial module is computed by the weak BGG resolution",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\lambda\\in\\Lambda^+$ and let $B_\\bullet(\\lambda)$ be the weak BGG resolution of [[thm-weak-bgg-resolution]], with $\\Pi_\\lambda=L(\\lambda)$. Then for every $k\\ge1$ the induced differential $B_k(\\lambda)/\\mathfrak n^-B_k(\\lambda)\\to B_{k-1}(\\lambda)/\\mathfrak n^-B_{k-1}(\\lambda)$ is zero, $\\operatorname{Wt}\\bigl(B_k(\\lambda)/\\mathfrak n^-B_k(\\lambda)\\bigr)=\\{w\\circ\\lambda:\\ell(w)=k\\}$ with each weight occurring once, and consequently\n\n$$\\operatorname{Tor}_k^{U(\\mathfrak n^-)}\\bigl(\\mathbb C,\\Pi_\\lambda\\bigr)\\cong B_k(\\lambda)/\\mathfrak n^-B_k(\\lambda)\\cong\\mathbb C^{|W_k|},$$\n\nwhere $W_k=\\{w\\in W:\\ell(w)=k\\}$. This is the dimension statement used by BGG in the form needed here.",
+        "deps": [
+          "thm-weak-bgg-resolution",
+          "lem-verma-filtered-objects-are-acyclic-for-n-minus-coinvariants",
+          "thm-long-exact-tor-sequence-in-the-left-module-variable",
+          "def-tor-by-resolving-the-left-module",
+          "prop-tor-zero-is-the-tensor-product-in-either-construction",
+          "lem-finite-weyl-strong-exchange-and-deletion",
+          "def-axiom-of-choice",
+          "thm-acyclic-resolution-theorem-for-left-derived-functors",
+          "def-f-acyclic-resolution",
+          "def-balanced-tor-bifunctor",
+          "cor-every-module-admits-a-projective-resolution",
+          "thm-pbw-model-of-a-verma-module",
+          "def-verma-type-of-a-module-with-a-standard-filtration",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "def-bgg-category-o",
+          "lem-positive-root-pairings-of-a-dominant-integral-weight",
+          "def-verma-module"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 5.4 (Bott's theorem) and Sec. 4.2.3, pp. 27-29 and 37",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Sec. 7, pp. 345-348",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-dimension-of-the-kernel-modulo-n-minus-equals-the-next-term",
+        "kind": "lemma",
+        "title": "Dimension of the kernel modulo n-minus equals the next term (BGG 10.7)",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). Let $\\lambda\\in\\Lambda^+$ and let $d_k\\colon C_k(\\lambda)\\to C_{k-1}(\\lambda)$ be the BGG differential. Then $\\ker d_k/\\mathfrak n^-\\ker d_k$ is finite-dimensional and $\\dim_{\\mathbb C}\\ker d_k/\\mathfrak n^-\\ker d_k=\\dim_{\\mathbb C}C_{k+1}(\\lambda)/\\mathfrak n^-C_{k+1}(\\lambda)=|W_{k+1}|$. Proof route: $C_{k+1}/\\mathfrak n^-C_{k+1}\\cong\\mathbb C^{|W_{k+1}|}$; $\\ker d_k\\subseteq C_k$ is an object of $\\mathcal O$ (a submodule of a finite-length object) and is finitely generated over $U(\\mathfrak n^-)$, so $\\ker d_k/\\mathfrak n^-\\ker d_k$ is finite-dimensional; extending the partially exact complex $C_{k+1}\\to C_k\\to\\dots\\to C_0\\to\\Pi_\\lambda$ by free $U(\\mathfrak n^-)$-modules and using [[lem-surjectivity-modulo-n-minus-for-free-weight-generated-modules]] and right-exactness of $\\otimes_{U(\\mathfrak n^-)}$ shows $\\ker d_k/\\mathfrak n^-\\ker d_k\\cong\\operatorname{Tor}_{k+1}^{U(\\mathfrak n^-)}(\\mathbb C,\\Pi_\\lambda)$; the dimension then equals $|W_{k+1}|$ by [[lem-tor-with-the-trivial-module-is-computed-by-the-weak-bgg-resolution]].",
+        "deps": [
+          "def-bgg-differential-from-signed-verma-maps",
+          "lem-surjectivity-modulo-n-minus-for-free-weight-generated-modules",
+          "lem-n-minus-coinvariants-map-injectively-into-the-kernel-of-the-differential",
+          "lem-tor-with-the-trivial-module-is-computed-by-the-weak-bgg-resolution",
+          "def-tor-by-resolving-the-left-module",
+          "thm-long-exact-tor-sequence-in-the-left-module-variable",
+          "cor-every-module-admits-a-projective-resolution",
+          "def-bgg-category-o",
+          "thm-every-category-o-object-has-finite-length",
+          "lem-finite-b-stable-generators-and-weight-flags-in-category-o",
+          "def-axiom-of-choice",
+          "def-balanced-tor-bifunctor",
+          "prop-tor-zero-is-the-tensor-product-in-either-construction",
+          "thm-pbw-model-of-a-verma-module",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "lem-positive-root-pairings-of-a-dominant-integral-weight",
+          "thm-category-o-is-abelian-and-extension-closed",
+          "lem-a-proper-verma-submodule-misses-the-highest-weight-line",
+          "thm-verma-module-has-a-unique-simple-quotient"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 4.2.3 (BGG Lemma 10.7), pp. 26-29",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Sec. 10, Lemma 10.5 and Corollary 10.6, pp. 354-356",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-bgg-resolution-of-a-finite-dimensional-simple-module",
+        "kind": "theorem",
+        "title": "The BGG resolution of a finite-dimensional simple module",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). Let $\\lambda\\in\\Lambda^+$. The BGG complex $C_\\bullet(\\lambda)$ with differentials $d_k$ is a resolution of $L(\\lambda)$ by Verma modules: $0\\to C_{|\\Phi^+|}(\\lambda)\\to\\cdots\\to C_1(\\lambda)\\to C_0(\\lambda)\\to L(\\lambda)\\to0$ is exact. Equivalently, $\\operatorname{coker}d_1=L(\\lambda)$ and $\\operatorname{im}d_{k+1}=\\ker d_k$ for all $k\\ge1$. Proof route: the sequence is a complex by [[prop-the-bgg-differential-squares-to-zero]] and is exact at $C_0$ by [[lem-the-bgg-augmentation-has-image-the-simple-module]]. Induct on $k$: assume exactness at $C_0,\\dots,C_{k-1}$. By [[lem-dimension-of-the-kernel-modulo-n-minus-equals-the-next-term]] the two finite-dimensional spaces $C_{k+1}/\\mathfrak n^-C_{k+1}$ and $\\ker d_k/\\mathfrak n^-\\ker d_k$ have equal dimension, and by [[lem-n-minus-coinvariants-map-injectively-into-the-kernel-of-the-differential]] the induced map $\\bar d_{k+1}$ is injective, hence an isomorphism; then [[lem-surjectivity-modulo-n-minus-for-free-weight-generated-modules]] applied to $C_{k+1}$ (free over $U(\\mathfrak n^-)$ with weight-vector generators) and $\\ker d_k$ shows $d_{k+1}$ maps $C_{k+1}$ onto $\\ker d_k$.",
+        "deps": [
+          "prop-the-bgg-differential-squares-to-zero",
+          "lem-the-bgg-augmentation-has-image-the-simple-module",
+          "lem-dimension-of-the-kernel-modulo-n-minus-equals-the-next-term",
+          "lem-n-minus-coinvariants-map-injectively-into-the-kernel-of-the-differential",
+          "lem-surjectivity-modulo-n-minus-for-free-weight-generated-modules",
+          "def-bgg-differential-from-signed-verma-maps",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "def-axiom-of-choice",
+          "thm-pbw-model-of-a-verma-module",
+          "lem-positive-root-pairings-of-a-dominant-integral-weight",
+          "def-bgg-category-o",
+          "lem-finite-weyl-strong-exchange-and-deletion"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 3.2 and Sec. 4.1 (Theorem BGG and its proof), pp. 11 and 14-18",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Sec. 10, Corollary 10.6, pp. 355-356",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            },
+            {
+              "title": "Hemelsoet-Voorhaar, A computer algorithm for the BGG resolution, arXiv:1911.00871, Theorem 2.5 and 2.6, p. 5",
+              "url": "https://arxiv.org/pdf/1911.00871"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-bgg-euler-character-identity",
+        "kind": "corollary",
+        "title": "The Euler-character identity for a finite-dimensional simple module",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). Let $\\lambda\\in\\Lambda^+$. In the Grothendieck group of the linkage block of $\\lambda$ ([[def-grothendieck-group-and-character-of-category-o]], [[prop-the-grothendieck-group-of-o-has-simple-and-standard-bases]]) the finite alternating sum of Verma classes equals the class of the simple module: $[L(\\lambda)]=\\sum_{w\\in W}(-1)^{\\ell(w)}[M(w\\circ\\lambda)]$. Equivalently, applying the character homomorphism and the Verma character $\\operatorname{ch}M(\\mu)=e^{\\mu}\\prod_{\\alpha\\in\\Phi^+}(1-e^{-\\alpha})^{-1}$ ([[prop-formal-character-of-a-verma-module]]), $\\operatorname{ch}L(\\lambda)=\\sum_{w\\in W}(-1)^{\\ell(w)}e^{w\\circ\\lambda}\\prod_{\\alpha\\in\\Phi^+}(1-e^{-\\alpha})^{-1}$, the Weyl numerator identity in the form needed by the Weyl character formula. Proof: an exact finite complex has vanishing alternating sum of classes.",
+        "deps": [
+          "thm-bgg-resolution-of-a-finite-dimensional-simple-module",
+          "def-grothendieck-group-and-character-of-category-o",
+          "prop-the-grothendieck-group-of-o-has-simple-and-standard-bases",
+          "prop-formal-character-of-a-verma-module",
+          "thm-central-character-summands-split-into-linkage-blocks",
+          "def-axiom-of-choice",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "prop-tensoring-with-a-finite-dimensional-module-preserves-category-o"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 3.3, pp. 11-13",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (18.755), Sec. 26.1 and Sec. 26.3 (Weyl character formula, Theorem 26.4), pp. 139-142",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "cor-bgg-resolution-has-length-the-number-of-positive-roots",
+        "kind": "corollary",
+        "title": "The BGG resolution has length the number of positive roots",
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $\\lambda\\in\\Lambda^+$ and let $w_0\\in W$ be the longest element. Then $\\ell(w_0)=|\\Phi^+|$ and $|\\{w\\in W:\\ell(w)=|\\Phi^+|\\}|=1$, the BGG complex $C_\\bullet(\\lambda)$ is concentrated in degrees $0\\le k\\le|\\Phi^+|$, the top term is $C_{|\\Phi^+|}(\\lambda)=M(w_0\\circ\\lambda)\\ne0$, and all higher terms vanish. Consequently the resolution has length $|\\Phi^+|$ and the last nonzero degree of the complex is $|\\Phi^+|$; in particular the alternating sum of [[cor-bgg-euler-character-identity]] is finite and has $|W|$ terms.",
+        "deps": [
+          "thm-bgg-resolution-of-a-finite-dimensional-simple-module",
+          "cor-bgg-euler-character-identity",
+          "lem-finite-weyl-strong-exchange-and-deletion",
+          "lem-finite-weyl-closed-chambers-and-stabilizers",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "def-axiom-of-choice",
+          "def-verma-module",
+          "thm-pbw-model-of-a-verma-module",
+          "lem-finite-weyl-positive-roots-and-simple-reflections"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 3.2, p. 11 ($\\ell(w_0)=|\\Phi^+|=\\dim\\mathfrak n^-$)",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "Hemelsoet-Voorhaar, A computer algorithm for the BGG resolution, arXiv:1911.00871, Sec. 2.1, p. 3",
+              "url": "https://arxiv.org/pdf/1911.00871"
+            }
+          ]
+        },
+        "dependency_level": 9
+      }
+    ]
+  },
+  {
+    "order": 510.012,
+    "id": "the-bgg-resolution-examples",
+    "kind": "B",
+    "category": "lie-theory",
+    "title": "The Bgg Resolution \u2014 Examples",
+    "companion": "the-bgg-resolution",
+    "requires": [
+      "the-bgg-resolution"
+    ],
+    "items": [
+      {
+        "id": "ex-the-sl2-bgg-resolution",
+        "kind": "example",
+        "title": "The BGG resolution for sl2",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). Let $\\mathfrak g=\\mathfrak{sl}_2$ with $W=\\{1,s\\}$, positive root $\\alpha$, $\\rho=\\alpha/2$ and $\\lambda=m\\omega$ with $m\\ge0$ dominant integral. Then $s\\circ\\lambda=-\\lambda-2\\rho=-(m+2)\\omega$ and the BGG resolution of [[thm-bgg-resolution-of-a-finite-dimensional-simple-module]] reads $0\\to M(-(m+2)\\omega)\\to M(m\\omega)\\to L(m\\omega)\\to0$, with the injection the canonical embedding of the Verma submodule generated by the singular vector $f^{m+1}v_\\lambda$ and the surjection the canonical projection. Both end degrees computed: $|\\Phi^+|=1$, $w_0=s$, $C_0=M(\\lambda)$, $C_1=M(s\\circ\\lambda)$. Verification: exactness at $C_1$ is injectivity of a nonzero Verma map, and exactness at $C_0$ is [[lem-the-bgg-augmentation-has-image-the-simple-module]]; the middle quotient $M(m\\omega)/M(-(m+2)\\omega)\\cong L(m\\omega)$ is the standard finite-dimensional quotient of dimension $m+1$.",
+        "deps": [
+          "thm-bgg-resolution-of-a-finite-dimensional-simple-module",
+          "lem-the-bgg-augmentation-has-image-the-simple-module",
+          "lem-bruhat-covers-give-unique-verma-embeddings",
+          "prop-simple-reflection-embedding-of-verma-modules",
+          "lem-simple-root-singular-vector-in-a-verma-module",
+          "cor-antidominant-verma-modules-are-simple",
+          "def-axiom-of-choice",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "def-bgg-differential-from-signed-verma-maps",
+          "def-weyl-vector-rho-for-a-chosen-positive-system",
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions",
+          "thm-finite-dimensional-representations-of-sl-two",
+          "lem-dominant-integral-dot-translates-embed-in-the-verma-module"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 3.2, p. 11 (rank-one case)",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "P. Etingof, Lie Groups and Lie Algebras II (18.755), Sec. 25 and Sec. 25.4, pp. 134-138 (Verma modules and U(n-) model)",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-the-a2-bgg-resolution-with-six-verma-summands",
+        "kind": "example",
+        "title": "The A2 BGG resolution with six Verma summands",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). Let $\\mathfrak g=\\mathfrak{sl}_3$ with simple roots $\\alpha_1,\\alpha_2$, $W=S_3=\\{e,s_1,s_2,s_1s_2,s_2s_1,w_0\\}$, and let $\\lambda\\in\\Lambda^+$ be dominant integral. The BGG complex has $C_0=M(\\lambda)$, $C_1=M(s_1\\circ\\lambda)\\oplus M(s_2\\circ\\lambda)$, $C_2=M(s_1s_2\\circ\\lambda)\\oplus M(s_2s_1\\circ\\lambda)$, $C_3=M(w_0\\circ\\lambda)$, with $d_1$ given by the two embeddings $M(s_i\\circ\\lambda)\\hookrightarrow M(\\lambda)$, $d_2$ given by the four cover embeddings ($s_1s_2\\rhd s_1$, $s_1s_2\\rhd s_2$, $s_2s_1\\rhd s_2$, $s_2s_1\\rhd s_1$) with compatible signs, and $d_3$ given by the two cover embeddings $w_0\\rhd s_1s_2$ and $w_0\\rhd s_2s_1$ with compatible signs. All Bruhat intervals of rank two are diamonds, so $d^2=0$ holds by the square condition; the complex is exact by [[thm-bgg-resolution-of-a-finite-dimensional-simple-module]]. Weights: $w\\circ\\lambda=w(\\lambda+\\rho)-\\rho$ are pairwise distinct and the listed embeddings are the canonical submodules inside $M(\\lambda)$.",
+        "deps": [
+          "thm-bgg-resolution-of-a-finite-dimensional-simple-module",
+          "def-bgg-differential-from-signed-verma-maps",
+          "lem-bruhat-covers-give-unique-verma-embeddings",
+          "lem-bruhat-rank-two-intervals-are-diamonds",
+          "lem-compatible-signs-exist-on-the-bruhat-graph",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "def-axiom-of-choice",
+          "prop-the-bgg-differential-squares-to-zero",
+          "lem-positive-root-pairings-of-a-dominant-integral-weight",
+          "lem-dominant-integral-dot-translates-embed-in-the-verma-module",
+          "lem-bruhat-covers-are-reflection-covers",
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions",
+          "lem-finite-weyl-positive-roots-and-simple-reflections"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 3.2 and Sec. 4.1, pp. 11 and 14",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "Hemelsoet-Voorhaar, A computer algorithm for the BGG resolution, arXiv:1911.00871, Sec. 2.2 (A2 diagram and signs), pp. 4-6",
+              "url": "https://arxiv.org/pdf/1911.00871"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-sign-cancellation-in-an-a2-bruhat-diamond",
+        "kind": "example",
+        "title": "Sign cancellation in an A2 Bruhat diamond",
+        "statement": "Assume the Axiom of Choice (def-axiom-of-choice). In the A2 setting of [[ex-the-a2-bgg-resolution-with-six-verma-summands]], the interval $[e,s_1s_2]$ has exactly two saturated paths $s_1s_2\\rhd s_1\\rhd e$ and $s_1s_2\\rhd s_2\\rhd e$, and the interval $[s_1,w_0]$ has exactly two saturated paths $w_0\\rhd s_1s_2\\rhd s_1$ and $w_0\\rhd s_2s_1\\rhd s_1$. In each case the two composites of canonical inclusions $M(x\\circ\\lambda)\\to M(y\\circ\\lambda)$ coincide, while the two products of signs are opposite, so the corresponding entry of $d^2$ vanishes: for the $(w_0,s_1)$-entry of $d_2d_1$ on the weight $s_1$ one computes $\\varepsilon(w_0,s_1s_2)\\varepsilon(s_1s_2,s_1)+\\varepsilon(w_0,s_2s_1)\\varepsilon(s_2s_1,s_1)=0$. This makes the cancellation mechanism of [[prop-the-bgg-differential-squares-to-zero]] explicit on the smallest non-abelian diamond.",
+        "deps": [
+          "prop-the-bgg-differential-squares-to-zero",
+          "lem-compatible-signs-exist-on-the-bruhat-graph",
+          "lem-bruhat-rank-two-intervals-are-diamonds",
+          "lem-bruhat-covers-give-unique-verma-embeddings",
+          "ex-the-a2-bgg-resolution-with-six-verma-summands",
+          "def-axiom-of-choice",
+          "def-bgg-differential-from-signed-verma-maps",
+          "lem-bruhat-covers-are-reflection-covers",
+          "def-bgg-bruhat-verma-sum-in-degree-k"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 4.1 Step 1, p. 14",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            },
+            {
+              "title": "Hemelsoet-Voorhaar, A computer algorithm for the BGG resolution, arXiv:1911.00871, Sec. 2.2 and Sec. 4.2, pp. 4-6 and 8-9",
+              "url": "https://arxiv.org/pdf/1911.00871"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "cex-unsigned-bruhat-edge-sums-need-not-square-to-zero",
+        "kind": "counterexample",
+        "title": "Unsigned Bruhat edge sums need not square to zero",
+        "statement": "With every sign taken to be $+1$, the differential $d_k^{\\mathrm{uns}}(x)=\\sum_{w'\\lhd w}\\iota_{w\\to w'}$ of the A2 complex satisfies $d^{\\mathrm{uns}}_1d^{\\mathrm{uns}}_2\\ne0$: the $(w_0,e)$-entry of $d_1d_2$ is the sum of the four composites along $w_0\\rhd s_1s_2\\rhd s_1\\rhd e$, $w_0\\rhd s_1s_2\\rhd s_2\\rhd e$, $w_0\\rhd s_2s_1\\rhd s_2\\rhd e$, $w_0\\rhd s_2s_1\\rhd s_1\\rhd e$, and each composite is the common inclusion $\\iota_{w_0\\to e}$ by path-independence inside the fixed ambient $M(\\lambda)$, so the entry equals $4\\,\\iota_{w_0\\to e}\\ne0$. Hence the unsigned sums do not form a complex, and the sign function of [[lem-compatible-signs-exist-on-the-bruhat-graph]] is structural, not cosmetic. (The statement is a direct two-path computation in the A2 Bruhat graph; no dependency may cite this counterexample.)",
+        "deps": [
+          "lem-compatible-signs-exist-on-the-bruhat-graph",
+          "lem-bruhat-covers-give-unique-verma-embeddings",
+          "lem-bruhat-rank-two-intervals-are-diamonds",
+          "def-bgg-differential-from-signed-verma-maps",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "lem-dominant-integral-dot-translates-embed-in-the-verma-module",
+          "def-bgg-category-o"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Direct computation in the A2 Bruhat graph, using the exactly-two-middles lemma (this row is ai-generated; no dependency may cite it)",
+              "url": "https://arxiv.org/pdf/1911.00871"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "cex-the-regular-bgg-complex-cannot-be-used-unchanged-at-a-singular-weight",
+        "kind": "counterexample",
+        "title": "The BGG complex cannot be used unchanged at a singular weight",
+        "statement": "Let $\\mathfrak g=\\mathfrak{sl}_2$ and $\\lambda=-\\rho=-\\omega$. Then $\\lambda+\\rho=0$ is fixed by $W$, so $w\\circ\\lambda=\\lambda$ for every $w\\in W$ and the dot-translates repeat. The 'complex' with $C_k=\\bigoplus_{\\ell(w)=k}M(w\\circ\\lambda)$ and signed inclusion maps is a complex (its square condition still holds formally), but it is not a resolution of $L(\\lambda)$: since $\\lambda$ is antidominant, $M(\\lambda)=L(\\lambda)$ is simple ([[cor-antidominant-verma-modules-are-simple]]), so exactness at $C_0$ would require $d_1=0$; however every map $M(\\lambda)\\to M(\\lambda)$ is a multiple of the identity by [[thm-verma-homomorphism-spaces-have-dimension-at-most-one]] and the differential is a nonzero signed sum of such maps, so $\\operatorname{im}d_1=M(\\lambda)\\ne0=\\ker(d_0)$. Thus $\\lambda\\in\\Lambda^+$ (equivalently $\\lambda+\\rho$ having trivial stabiliser, which holds automatically for dominant integral $\\lambda$) cannot be dropped; the counterexample protects the dominance hypothesis.",
+        "deps": [
+          "cor-antidominant-verma-modules-are-simple",
+          "cor-verma-irreducibility-criterion-from-shapovalov-determinants",
+          "thm-verma-homomorphism-spaces-have-dimension-at-most-one",
+          "lem-a-nonzero-verma-homomorphism-is-injective",
+          "def-bgg-differential-from-signed-verma-maps",
+          "def-bgg-bruhat-verma-sum-in-degree-k",
+          "def-weyl-vector-rho-for-a-chosen-positive-system",
+          "def-finite-weyl-root-system-lattice-and-chamber-conventions",
+          "thm-verma-module-has-a-unique-simple-quotient"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Rocha-Caridi, Splitting criteria ..., Sec. 10, p. 353 (the hypothesis $\\lambda\\in P^+$ in the construction)",
+              "url": "https://www.ams.org/journals/tran/1980-262-02/S0002-9947-1980-0586721-0/S0002-9947-1980-0586721-0.pdf"
+            },
+            {
+              "title": "Fan Zhou, The classical and the functorial BGG resolutions, Part I Sec. 3.2, p. 11 (requires $\\lambda\\in\\Lambda^+$)",
+              "url": "https://www.math.columbia.edu/~fanzhou/files/Thesis041921.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  }
+]

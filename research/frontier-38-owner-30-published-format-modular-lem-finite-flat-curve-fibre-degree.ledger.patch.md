@@ -1,0 +1,11 @@
+<!-- local-published-repair:frontier-38-owner-30:lem-finite-flat-curve-fibre-degree:format-v1:begin -->
+### lem-finite-flat-curve-fibre-degree: local DVR factorization clarification and proof formatting
+
+- Read the entire published claim, Facts, proof, dependencies, sources and operative Choice assumptions. Joined the split numbered bodies and their terminal tags; normalized reference tags and consistently renumbered labels/citations without reordering paragraphs.
+- Root-authorized proof-only clarification at current step 5.1: replace the shadowed target coordinate u and undeclared -n with a declared local unit v_x and e_x=ord_x(f^{-1})=-ord_x(f)>0. The DVR quotient length and k-dimension now explicitly use e_x. This is a mathematical proof clarification plus formatting, not a formatting-only repair.
+- Exact before/after clause and inverse label-bijection comparison are in research/frontier-38-owner-30-published-format-modular-lem-finite-flat-curve-fibre-degree.report.json. All remaining mathematical text is unchanged. Statement, Given, dependencies, sources and exact AC hypothesis are unchanged; no consumer interface changes or propagation.
+- Prior audit preserved in research/frontier-38-owner-30-published-format-modular-lem-finite-flat-curve-fibre-degree.before.md; current verification points only to research/frontier-38-owner-30-published-format-modular-lem-finite-flat-curve-fibre-degree-receipt.json. No new audit or whole-item acceptance is claimed.
+- Current content guard hash: b275b014439ceab1b50b4d2823fac4197cba0a92a4336d8a30e84427b2f66c86. Prior guard hash: a87f3b5e3cfe25d8c7186a4d345115c61c72a9c44f9957c0db419a39a23afdf2. Before raw SHA256: 236dfba605cad666efc550030d503f5f523c5e2177b5b34918403766189cf819.
+- Focused explicit proof-layout, precheck and real rendercheck passed after the final proof edit; exact commands, outputs, timestamps and current hashes are in the private check files and receipt.
+- No unresolved mathematical uncertainty identified in this bounded proof clarification; no independent full audit claimed. Root owns canonical ledger and ownership integration.
+<!-- local-published-repair:frontier-38-owner-30:lem-finite-flat-curve-fibre-degree:format-v1:end -->

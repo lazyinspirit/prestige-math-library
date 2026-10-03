@@ -1,0 +1,85 @@
+---
+id: thm-rsk-correspondence-for-two-line-arrays
+kind: theorem
+title: The RSK correspondence for two-line arrays
+status: draft
+origin: pipeline
+pipeline_run: frontier-38-owner-30
+deps: [def-partition-young-diagram-and-conjugate-partition, def-removable-and-addable-nodes-of-a-partition, def-reverse-row-deletion, def-row-insertion-and-bumping-route, def-semistandard-tableau-and-kostka-number, def-young-tableau-standard-tableau-and-shape, lem-row-bumping-route-monotonicity, lem-row-insertion-and-reverse-deletion-are-inverse]
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+sources:
+  references:
+    - title: "Donald E. Knuth, Permutations, Matrices, and Generalized Young Tableaux, Pacific Journal of Mathematics 34 (1970), 709-727"
+      url: "https://msp.org/pjm/1970/34-3/pjm-v34-n3-p09-s.pdf"
+      locator: "§§2-4, printed pp. 711-720: INSERT/DELETE on generalized tableaux; Theorem 1, p. 714, equation (2.8), x<=x' iff s>=s' iff t'>t; constructions A and B and Theorem 2; the inversion digraph with Lemma 1; the second-order digraph construction; and Theorem 3 (A^T corresponds to (Q,P))."
+    - title: "Jeremy L. Martin, Lecture Notes on Algebraic Combinatorics (263 pp.)"
+      url: "https://jeremymartinmath.github.io/CombinatoricsNotes.pdf"
+      locator: "§9.10, printed pp. 198-200: generalized permutations (two-line arrays in lex order), the gRSK algorithm, the recovery argument and the bijection (9.22); read in the full 263-page notes."
+    - title: "C. Schensted, Longest Increasing and Decreasing Subsequences, Canadian Journal of Mathematics 13 (1961), 179-191 (13 pp.)"
+      url: "https://sites.math.washington.edu/~billey/classes/561.fall.2019/articles/schensted.1961.pdf"
+      locator: "Part II, printed pp. 189-190: the reduction of sequences with repetitions to distinct-letter sequences and the resulting semistandard tableaux; read in the complete article as the word-case special case."
+---
+
+## Statement
+
+A **two-line array** is a pair of finite lists $(u;v)=((u_1,\dots,u_N),(v_1,\dots,v_N))$ of positive integers whose columns $(u_k,v_k)$ are in nondecreasing lexicographic order: $u_1\le\dots\le u_N$, and $u_k=u_{k+1}$ implies $v_k\le v_{k+1}$. Row insertion is extended to arbitrary (possibly repeated) letters by the same rule as [[def-row-insertion-and-bumping-route]]: replace the leftmost entry strictly greater than the inserted letter, or append if there is none, and similarly for reverse deletion from a removable box.
+
+1. **Correspondence.** Starting from empty tableaux and performing, for $k=1,\dots,N$, the insertion of $v_k$ and the writing of the label $u_k$ in the box added to the recording tableau (**construction A**), produces a pair $(P,Q)$ of semistandard tableaux ([[def-semistandard-tableau-and-kostka-number]]) of the same shape, with content$(P)$ the multiset of the $v_k$ and content$(Q)$ the multiset of the $u_k$. Conversely, starting from a pair $(P,Q)$ of semistandard tableaux of the same shape and performing, for $k=N,\dots,1$, the deletion of the box of $Q$ containing the largest entry, chosen rightmost among ties, and reverse deletion of that box from $P$ (**construction B**), recovers the unique lexicographically ordered two-line array with those tableaux; the two constructions are inverse, and the correspondence is a bijection.
+2. **Transpose interchange.** If $(u;v)$ corresponds to $(P,Q)$, then the lexicographically ordered rearrangement of the transposed array $(v;u)$ corresponds to $(Q,P)$.
+3. If $u_k=k$ for all $k$ (so $Q$ is standard), the correspondence is the row-insertion correspondence between words $v=(v_1,\dots,v_N)$ of positive integers and pairs $(P,Q)$ with $P$ semistandard and $Q$ standard of the same shape and content$(P)$ the multiset of letters of $v$.
+
+## Facts & Assumptions
+
+**Given:** A lexicographically ordered two-line array $(u;v)$ with $N$ columns, and the tableaux $P,Q$ produced by construction A.
+
+[F1] Row insertion with the leftmost-strictly-greater rule places one letter per visited row and adds exactly one box at the end of the final row; for a standard tableau with distinct entries its output is standard and the route letters strictly increase and positions weakly decrease ([[def-row-insertion-and-bumping-route]], [[lem-row-bumping-route-monotonicity]]).
+
+[F2] A semistandard tableau of shape $\lambda$ has weakly increasing rows and strictly increasing columns; content records the multiplicity of each entry, and $K_{\lambda,\mu}$ counts semistandard tableaux of content $\mu$; a filling with content $(1^n)$ is semistandard if and only if it is standard ([[def-semistandard-tableau-and-kostka-number]], [[def-young-tableau-standard-tableau-and-shape]]).
+
+[F3] Reverse deletion from a removable box of a standard tableau is defined, is inverse to row insertion in both directions, and its output is standard with the expelled letter removed from the entry set ([[def-reverse-row-deletion]], [[lem-row-insertion-and-reverse-deletion-are-inverse]]).
+
+[F4] A node $(i,\lambda_i+1)$ is addable for $\lambda$ if and only if $i=1$ or $\lambda_{i-1}>\lambda_i$; removable and addable nodes are the row-end nodes satisfying the corresponding strict inequality ([[def-removable-and-addable-nodes-of-a-partition]], [[def-partition-young-diagram-and-conjugate-partition]]).
+
+
+
+
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Extend row insertion to weak rows and strict columns using the stated leftmost-strictly-greater rule. Carried labels strictly increase whenever a bump occurs. Route positions weakly decrease: if the old entry $x_{i+1}$ at position $r_i$ of row $i$ has a box below it, that box has value $>x_{i+1}$ by column strictness, so the next leftmost-exceeding position is at most $r_i$; if no such box exists, the next row has length $<r_i$ and its bump or append position is again at most $r_i$. Only finitely many occupied rows can be visited, so the process terminates at an append box, which is addable: if it lies in row $s>1$, then $\lambda_s+1=r_s\le r_{s-1}\le\lambda_{s-1}$. Exactly one box is added and the entry multiset gains the inserted letter. [F1, F2, F4, given, algebra]
+
+1.2 Reverse deletion also works for semistandard tableaux. Remove a corner $(s,t)$ and carry its old value upward. If the carried value from row $i+1$ is $z$, choose the rightmost entry $a<z$ in row $i$ and replace it by $z$, carrying $a$ upward. Such an entry exists at the column of the just-removed or replaced cell in row $i+1$, by strictness of the column before that lower change; the chosen column is at least that lower column. The row remains weak, since entries left of the chosen cell are $\le a<z$ and entries to its right are $\ge z$. The upper neighbour is smaller than the old value $a<z$. Any remaining lower neighbour is larger than $z$: in the lower row the preceding reverse step replaced its carried value by a strictly larger value, and all entries to its right are at least that larger value; at the first removed corner there is no lower neighbour to its right. At the next upward replacement, the value placed above the current changed row is smaller than its carried $z$, so strictness is preserved throughout. Thus deletion terminates with a semistandard tableau and removes one occurrence of the expelled letter, which may still occur elsewhere. [F2, F3, F4, algebra]
+
+1.3 For transpose interchange define a directed graph on the labelled occurrences of pairs $(u,v)$: for unequal pairs draw an arc when both coordinates weakly increase, and order occurrences of an identical pair by their original occurrence index, drawing forward arcs between them. Lexicographic order is a topological order, so the graph is acyclic. Divide it into source layers $C_1,\dots,C_d$ by successively removing all sources. A vertex lies in $C_l$ exactly when the longest path ending there has $l-1$ arcs, by induction on a topological order. Within a layer the first coordinates strictly increase and the second strictly decrease when vertices are listed by first coordinate: equal coordinates or simultaneous weak increase would give an arc and different layers. Write $C_l=((u_{l1},v_{l1}),\dots,(u_{ln_l},v_{ln_l}))$ in that order. [given, algebra]
+
+2.1 The output is semistandard. At a replaced box in row $i$, left entries are $\le x_i$ and right entries are at least the old displaced value $x_{i+1}>x_i$. For its upper neighbour, if $r_i=r_{i-1}$ the new value above is $x_{i-1}<x_i$; if $r_i<r_{i-1}$, the unchanged entry above lies left of the previous leftmost-exceeding position and is $\le x_{i-1}<x_i$. Its lower neighbour is either the new carried value $x_{i+1}>x_i$ if the next bump is in that column, or an unchanged value exceeding the old displaced value by column strictness. The same upper-neighbour argument applies at the appended box, whose row has all prior entries $\le x_s$ and which has no box below. Hence rows stay weak and columns stay strict, including at equal input letters. [step 1.1, F2, algebra]
+
+2.2 These extended procedures are inverse. Along an insertion route, the resulting row has at its chosen position $x_i<x_{i+1}$, entries to the left $\le x_i$, and entries to the right $\ge x_{i+1}$; hence reverse deletion carrying $x_{i+1}$ chooses exactly that position and restores its old entry. Inducting upward from the appended box restores the input tableau. Conversely, a reverse step replacing $a$ by $z>a$ leaves all entries to its left $\le a$ and entries to its right $\ge z$, so reinserting $a$ chooses precisely that cell and bumps $z$. Inducting downward restores the original tableau and corner. This proves both directions without requiring the expelled value to disappear from the entry set. [step 1.1, step 1.2, F2, algebra]
+
+3.1 Compare successive insertions of $x\le x'$. On every common row, their carried values satisfy $x_i\le x'_i$ and their positions satisfy $r_i<r'_i$: after the first replacement, all entries up to $r_i$ are $\le x_i\le x'_i$, so the second bump or append is to its right. If both bump, the second displaced value is at least the first displaced value, by the old weak row order, proving the carried-value induction. The second insertion stops no lower than the first: at the first process's append row its own position would be to the right of that append, so it must append there if it has not already stopped. Its new column $t'$ is strictly larger than the first new column $t$: in the same row it appends one cell further right; in a higher row, that old row length is at least $t$ by addability of the first appended box, so its append column is at least $t+1$. [step 1.1, step 2.1, F2, F4, algebra]
+
+3.2 For successive $x>x'$, the carried values satisfy $x_i>x'_i$ and positions satisfy $r'_i\le r_i$ on common rows. At row $1$ the second process meets a value exceeding $x'$ at or before the first chosen position, whose new value is $x>x'$. If it bumps before that position, the bumped old value is $\le x_i<x_{i+1}$ by the first leftmost-exceeding choice; if at that position, it bumps $x_i<x_{i+1}$. This proves the strict carried-value induction. At the first append row the smaller carried value bumps an entry at or before that append instead of stopping, so the second insertion ends strictly lower. Its final column $t'$ is at most $t$, since its position in the first append row is at most $t$ and subsequent route positions weakly decrease. [step 1.1, step 2.1, F2, algebra]
+
+4.1 Construction A produces semistandard $P$ by step 2.1. Its contents and shape follow from step 1.1. The rows of $Q$ are weakly increasing because boxes are appended at row ends and the chronological labels $u_k$ weakly increase. A lower box in a column is created later, so its label is at least the upper label. All equal labels form a consecutive block of insertions, whose inputs $v_k$ weakly increase; step 3.1 makes their new columns strictly increase at every adjacent step, hence throughout that block. Equal labels therefore never share a column, and $Q$ has strictly increasing columns. Both contents and the common shape are as stated. [step 1.1, step 2.1, step 3.1, F2, given]
+
+4.2 Construction B is defined on any semistandard pair. A rightmost maximum entry of $Q$ has no cell to its right, since that would be a larger or an equal maximum further right, and no cell below, since columns are strict. It is thus removable. Maximum entries occupy distinct columns. Removing the rightmost one leaves semistandard $Q$, and step 1.2 allows reverse deletion in $P$ at the same corner. Repeating yields expelled letters $v_N,\dots,v_1$ and labels $u_N\ge\dots\ge u_1$. Step 2.2 ensures that forward reinsertion rebuilds the tableaux and chosen boxes. Within each equal-label deletion block the removed columns strictly decrease, so the rebuilding insertion columns strictly increase. The contrapositive of step 3.2 then gives $v_k\le v_{k+1}$ when $u_k=u_{k+1}$. The recovered array is therefore lexicographically ordered. [F2, F4, step 1.2, step 2.2, step 3.2, algebra]
+
+5.1 For a pair produced by A, its final label block has strictly increasing insertion columns by step 3.1; the last-created box is its rightmost maximum box. Step 2.2 recovers its last input letter, and induction recovers all columns, so $B\circ A$ is the identity. For an arbitrary pair, step 4.2 and the other inverse direction in step 2.2 give $A\circ B$ as the identity. Thus the first assertion is a bijection, including the empty array and empty pair, where no operation is performed. [step 2.2, step 3.1, step 4.2, given]
+
+5.2 The first row of $P$ consists of $v_{1n_1},\dots,v_{dn_d}$, and the first row of $Q$ of $u_{11},\dots,u_{d1}$. Moreover, the events which touch first-row position $l$ are exactly the successive vertices of $C_l$. Prove this simultaneously by induction on the array length. Adding the next lexicographic pair $(u,v)$ introduces no outgoing arc. A layer has a predecessor of that vertex exactly when its minimum second coordinate $v_{ln_l}$ is $\le v$; hence the vertex's layer is $r=1+\max\{l:v_{ln_l}\le v\}$, with empty maximum $0$. By the induction hypothesis these minima are the weakly increasing entries of the first row. Thus insertion of $v$ replaces exactly position $r$, or appends there if $r=d+1$. In an existing layer its first coordinate is strictly greater than the previous member's and its second strictly smaller, since it has no predecessor in that layer; it becomes that layer's last member. Appending a new layer writes its first label $u$ in row one of $Q$, while replacement changes no existing $Q$ label. This proves every assertion of the induction. [step 1.1, step 4.1, step 1.3, algebra]
+
+6.1 The first-row bumped pairs are exactly $(u_{l,i+1},v_{li})$ for $1\le i<n_l$, across all layers. They appear chronologically in lexicographic order: bumping labels $u$ weakly increase; within one equal-label input block step 3.1 makes first-row positions strictly increase, and the entries bumped at those successively rightward positions weakly increase, because earlier replacements in that block occur to their left. Consequently the lower rows of both tableaux are obtained by applying A to this bump array. Row two is its first row, since the labels are written precisely when that bumped letter's lower-row insertion appends. Repeat this procedure for each successive row. The bump array has $N-d<N$ columns whenever $N>0$, so the recursion terminates. [step 3.1, step 4.1, step 5.2, algebra]
+
+7.1 Swapping coordinates gives an isomorphism of the two initial graphs, using the same order for occurrences of identical pairs. The source layers are the same sets of occurrences, but their within-layer order reverses: the old second coordinates strictly decrease, so the swapped first coordinates increase in the reverse order. The first-row formulas of step 5.2 therefore swap $P$ and $Q$. More importantly, the shifted pairs from a layer of the swapped graph are $(v_{li},u_{l,i+1})$ for $i=n_l-1,\dots,1$, exactly the coordinate swaps, as a multiset, of the original bump pairs $(u_{l,i+1},v_{li})$. After lexicographic sorting their bump arrays are transposes of one another. Identical pairs can again be ordered correspondingly; changing the order of identical occurrences does not change the labelled array or insertion. Thus induction on $N$, using the smaller bump arrays in step 6.1, swaps every lower row as well. This proves that the transposed array corresponds to $(Q,P)$. [step 1.3, step 5.2, step 6.1, algebra]
+
+8.1 When $u_k=k$, all labels in $Q$ are distinct, and its semistandardness from step 4.1 makes it standard by [F2]. Construction A is precisely word insertion with chronological recording labels; the bijection of step 5.1 and transpose interchange of step 7.1 give all the commissioned assertions. No Choice is used: every procedure, maximum, ordering and induction here is finite and canonical, with identical pairs ordered by occurrence. [step 4.1, step 5.1, step 7.1, F2, given] ∎

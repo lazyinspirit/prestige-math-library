@@ -19,8 +19,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
-  audited: 2026-10-02
-  precheck: pass
+  repair: research/frontier-38-owner-30-published-format-lem-pullback-metric-on-a-cover-of-a-complete-manifold-is-complete-receipt.json
 sources:
   scraped: []
   references:
@@ -92,82 +91,16 @@ containing $0$ ([[thm-existence-uniqueness-and-smooth-dependence-of-geodesics]])
 
 ## Proof
 
-1.1 The pullback is a Riemannian metric and $\pi$ is a local isometry. [F1, given]
-Since $\pi$ is a local diffeomorphism, $d\pi_x$ is injective for every $x\in N$,
-so the radical $\ker d\pi_x$ of [F1] is trivial and [F1] makes $\pi^*g$ a
-Riemannian metric on $N$. By the definition of the pullback,
-$(\pi^*g)_x(v,w)=g_{\pi(x)}(d\pi_xv,d\pi_xw)$ for all $v,w\in T_xN$; since
-$\pi$ is also a local diffeomorphism, it is a local isometry from
-$(N,\pi^*g)$ to $(M,g)$ in the sense of [F2]. In dimension $n=0$ both
-manifolds have discrete points and the empty bilinear form is positive
-definite, so the claim holds vacuously; if $N$ is empty then so is $M$ (as
-$\pi$ is surjective), and both statements are vacuous. [F1, given]
+1.1 The pullback is a Riemannian metric and $\pi$ is a local isometry. [F1, given] Since $\pi$ is a local diffeomorphism, $d\pi_x$ is injective for every $x\in N$, so the radical $\ker d\pi_x$ of [F1] is trivial and [F1] makes $\pi^*g$ a Riemannian metric on $N$. By the definition of the pullback, $(\pi^*g)_x(v,w)=g_{\pi(x)}(d\pi_xv,d\pi_xw)$ for all $v,w\in T_xN$; since $\pi$ is also a local diffeomorphism, it is a local isometry from $(N,\pi^*g)$ to $(M,g)$ in the sense of [F2]. In dimension $n=0$ both manifolds have discrete points and the empty bilinear form is positive definite, so the claim holds vacuously; if $N$ is empty then so is $M$ (as $\pi$ is surjective), and both statements are vacuous. [F1, given]
 
-2.1 Geodesics of $N$ project to geodesics of $M$.
-Let $\gamma:I\to N$ be an affinely parametrized geodesic of $(N,\pi^*g)$ and
-put $\sigma:=\pi\circ\gamma$. Since $\pi$ is the identity map of the metric in
-the sense of step 1.1, [F2] applied to the field $W=\dot\gamma$ gives
-$$D_t^M\dot\sigma=D_t^M\bigl(d\pi_{\gamma(t)}\dot\gamma(t)\bigr)=d\pi_{\gamma(t)}\bigl(D_t^N\dot\gamma(t)\bigr)=0,$$
-so $\sigma$ is an affinely parametrized geodesic of $(M,g)$.
-[F2, step 1.1]
+2.1 Geodesics of $N$ project to geodesics of $M$. Let $\gamma:I\to N$ be an affinely parametrized geodesic of $(N,\pi^*g)$ and put $\sigma:=\pi\circ\gamma$. Since $\pi$ is the identity map of the metric in the sense of step 1.1, [F2] applied to the field $W=\dot\gamma$ gives $$D_t^M\dot\sigma=D_t^M\bigl(d\pi_{\gamma(t)}\dot\gamma(t)\bigr)=d\pi_{\gamma(t)}\bigl(D_t^N\dot\gamma(t)\bigr)=0,$$ so $\sigma$ is an affinely parametrized geodesic of $(M,g)$. [F2, step 1.1]
 
-3.1 Local lifts of geodesics are geodesics.
-Conversely, let $\sigma:J\to M$ be an affinely parametrized geodesic and let
-$\gamma:J\to N$ be a smooth curve with $\pi\circ\gamma=\sigma$. Applying [F2]
-to $W=\dot\gamma$ and using $D_t^M\dot\sigma=0$ gives
-$d\pi_{\gamma(t)}(D_t^N\dot\gamma(t))=D_t^M\dot\sigma(t)=0$ for all $t$; since
-$d\pi$ is injective at every point (step 1.1 and the local-diffeomorphism
-hypothesis), $D_t^N\dot\gamma=0$ and $\gamma$ is a geodesic of $(N,\pi^*g)$.
-In particular every path lift of a geodesic of $M$ is a geodesic of $N$.
-[F2, step 2.1]
+3.1 Local lifts of geodesics are geodesics. Conversely, let $\sigma:J\to M$ be an affinely parametrized geodesic and let $\gamma:J\to N$ be a smooth curve with $\pi\circ\gamma=\sigma$. Applying [F2] to $W=\dot\gamma$ and using $D_t^M\dot\sigma=0$ gives $d\pi_{\gamma(t)}(D_t^N\dot\gamma(t))=D_t^M\dot\sigma(t)=0$ for all $t$; since $d\pi$ is injective at every point (step 1.1 and the local-diffeomorphism hypothesis), $D_t^N\dot\gamma=0$ and $\gamma$ is a geodesic of $(N,\pi^*g)$. In particular every path lift of a geodesic of $M$ is a geodesic of $N$. [F2, step 2.1]
 
-4.1 Maximal geodesics of the complete base.
-Since $(M,g)$ is complete, [F4] and [F5] say that every maximal geodesic of
-$M$ is defined on all of $\mathbb R$: given $q\in M$ and $u\in T_qM$, the
-unique maximal geodesic with initial data $(q,u)$ — which exists by [F5] —
-has domain $\mathbb R$ by the equivalence of [F4] applied to the complete
-manifold. This is the only place where completeness of $M$ enters.
-[A1, F4, F5, step 3.1]
+4.1 Maximal geodesics of the complete base. Since $(M,g)$ is complete, [F4] and [F5] say that every maximal geodesic of $M$ is defined on all of $\mathbb R$: given $q\in M$ and $u\in T_qM$, the unique maximal geodesic with initial data $(q,u)$ — which exists by [F5] — has domain $\mathbb R$ by the equivalence of [F4] applied to the complete manifold. This is the only place where completeness of $M$ enters. [A1, F4, F5, step 3.1]
 
-5.1 Extending a maximal geodesic of $N$ to an $M$-geodesic on all of $\mathbb R$.
-Let $\gamma:I\to N$ be a maximal geodesic of $(N,\pi^*g)$; maximality is with
-respect to the maximal-geodesic convention of [F5], and $0\in I$ with $I$ an
-open interval. By step 2.1, $\sigma_0:=\pi\circ\gamma$ is a geodesic of $M$ on
-$I$; it is the restriction of the unique maximal $M$-geodesic $\sigma$ with the
-initial data $\sigma(0)=\pi(\gamma(0))$ and $\dot\sigma(0)=d\pi_{\gamma(0)}\dot\gamma(0)$,
-whose domain is $\mathbb R$ by step 4.1. Now lift the path $\sigma:\mathbb R\to M$
-through the covering $\pi$ with initial point $\gamma(0)$: by [F3] there is a
-unique path $\widetilde\gamma:\mathbb R\to N$ with
-$\pi\circ\widetilde\gamma=\sigma$ and
-$\widetilde\gamma(0)=\gamma(0)$.
-[F3, F5, step 4.1]
+5.1 Extending a maximal geodesic of $N$ to an $M$-geodesic on all of $\mathbb R$. Let $\gamma:I\to N$ be a maximal geodesic of $(N,\pi^*g)$; maximality is with respect to the maximal-geodesic convention of [F5], and $0\in I$ with $I$ an open interval. By step 2.1, $\sigma_0:=\pi\circ\gamma$ is a geodesic of $M$ on $I$; it is the restriction of the unique maximal $M$-geodesic $\sigma$ with the initial data $\sigma(0)=\pi(\gamma(0))$ and $\dot\sigma(0)=d\pi_{\gamma(0)}\dot\gamma(0)$, whose domain is $\mathbb R$ by step 4.1. Now lift the path $\sigma:\mathbb R\to M$ through the covering $\pi$ with initial point $\gamma(0)$: by [F3] there is a unique path $\widetilde\gamma:\mathbb R\to N$ with $\pi\circ\widetilde\gamma=\sigma$ and $\widetilde\gamma(0)=\gamma(0)$. [F3, F5, step 4.1]
 
-6.1 The lift is a geodesic agreeing with $\gamma$, so $N$ is geodesically complete.
-Since $\pi\circ\widetilde\gamma=\sigma$ is smooth and $\pi$ is a local
-diffeomorphism, $\widetilde\gamma$ is smooth; being a path lift of the geodesic
-$\sigma$, it is a geodesic of $(N,\pi^*g)$ by step 3.1. On the interval $I$ both
-$\widetilde\gamma$ and $\gamma$ are paths in $N$ covering the same path
-$\sigma|_I$ and both start at $\gamma(0)$; by the uniqueness clause of [F3],
-$\widetilde\gamma|_I=\gamma$. Hence the maximal geodesic $\gamma$ of $N$ is the
-restriction of the geodesic $\widetilde\gamma$ defined on $\mathbb R$, and by
-the maximality convention of [F5] its domain is $I=\mathbb R$. Therefore every
-maximal geodesic of $(N,\pi^*g)$ has domain $\mathbb R$: the manifold
-$(N,\pi^*g)$ is geodesically complete, and [F4] applied to the nonempty
-connected manifold $N$ makes it complete as a metric space. This proves both
-assertions.
-[F5, step 3.1, step 5.1]
+6.1 The lift is a geodesic agreeing with $\gamma$, so $N$ is geodesically complete. Since $\pi\circ\widetilde\gamma=\sigma$ is smooth and $\pi$ is a local diffeomorphism, $\widetilde\gamma$ is smooth; being a path lift of the geodesic $\sigma$, it is a geodesic of $(N,\pi^*g)$ by step 3.1. On the interval $I$ both $\widetilde\gamma$ and $\gamma$ are paths in $N$ covering the same path $\sigma|_I$ and both start at $\gamma(0)$; by the uniqueness clause of [F3], $\widetilde\gamma|_I=\gamma$. Hence the maximal geodesic $\gamma$ of $N$ is the restriction of the geodesic $\widetilde\gamma$ defined on $\mathbb R$, and by the maximality convention of [F5] its domain is $I=\mathbb R$. Therefore every maximal geodesic of $(N,\pi^*g)$ has domain $\mathbb R$: the manifold $(N,\pi^*g)$ is geodesically complete, and [F4] applied to the nonempty connected manifold $N$ makes it complete as a metric space. This proves both assertions. [F5, step 3.1, step 5.1]
 
-7.1 Boundary and choice audit.
-Every hypothesis is used where it is needed: the local-diffeomorphism
-hypothesis is exactly what makes $\pi^*g$ positive definite in step 1.1 and
-makes the projected covariant derivative vanish in step 3.1; surjectivity of
-$\pi$ keeps $N$ nonempty when $M$ is; and completeness of $M$ is used only in
-step 4.1 through Hopf–Rinow. The geodesic-completeness definition of [F5]
-includes the zero initial vector, and the zero vector case is also covered by
-steps 2.1 and 3.1 (constant geodesics project to constant geodesics and lift to
-constant geodesics). In dimension zero every constant map is a geodesic and
-both completeness notions hold, so the argument is a special case of the same
-steps. No step selects a family of curves: the unique lift is produced by [F3]
-and the unique maximal geodesic by [F5]. Exactly [A1] is inherited and no
-further choice is spent.
-[A1, F1, F2, F3, F4, F5, step 1.1, step 6.1] ∎
+7.1 Boundary and choice audit. Every hypothesis is used where it is needed: the local-diffeomorphism hypothesis is exactly what makes $\pi^*g$ positive definite in step 1.1 and makes the projected covariant derivative vanish in step 3.1; surjectivity of $\pi$ keeps $N$ nonempty when $M$ is; and completeness of $M$ is used only in step 4.1 through Hopf–Rinow. The geodesic-completeness definition of [F5] includes the zero initial vector, and the zero vector case is also covered by steps 2.1 and 3.1 (constant geodesics project to constant geodesics and lift to constant geodesics). In dimension zero every constant map is a geodesic and both completeness notions hold, so the argument is a special case of the same steps. No step selects a family of curves: the unique lift is produced by [F3] and the unique maximal geodesic by [F5]. Exactly [A1] is inherited and no further choice is spent. [A1, F1, F2, F3, F4, F5, step 1.1, step 6.1] ∎

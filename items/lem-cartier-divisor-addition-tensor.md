@@ -19,11 +19,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  audited: 2026-10-02
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-02
+  repair: research/frontier-38-owner-30-published-format-blowup-lem-cartier-divisor-addition-tensor-receipt.json
 sources:
   references:
     - title: "The Stacks Project, Divisors, Definition 31.15.1 and Lemma 31.15.5"
@@ -97,13 +93,9 @@ pairwise overlaps ([[def-sheaf-on-topological-space]]).
 
 1.2 **Dual of a local generator.** For each $i$ let $\lambda_i\in\mathcal H om_{\mathcal O_X}(\mathcal O_X(D),\mathcal O_X)(U_i)$ be the functional determined by $\lambda_i(f_i^{-1})=1$; it is a basis of the free rank-one $\mathcal O_{U_i}$-module $\mathcal O_X(D)^{\vee}|_{U_i}$ by [F3]. Hence $\mathcal O_X(D)^{\vee}|_{U_i}=\mathcal O_{U_i}\!\cdot\lambda_i$. [F2, F3]
 
-2.1 **The addition isomorphism.** For each $i$ there is a unique $\mathcal O_{U_i}$-linear isomorphism $\varphi_i:\mathcal O_X(D)\otimes\mathcal O_X(E)|_{U_i}\to\mathcal O_X(D+E)|_{U_i}$ sending $a\,(f_i^{-1}\otimes g_i^{-1})$ to $a\,(f_ig_i)^{-1}$, and the $\varphi_i$ agree on overlaps and glue to a global isomorphism $\varphi:\mathcal O_X(D)\otimes\mathcal O_X(E)\to\mathcal O_X(D+E)$ by [F5].
-Indeed, both sides are free of rank one on $U_i$, with the displayed generators. On an overlap $U_i\cap U_j$ write $u=f_i/f_j$ and $v=g_i/g_j$, units of $\mathcal O_X(U_i\cap U_j)$; then $f_i^{-1}\otimes g_i^{-1}=(uv)^{-1}\,(f_j^{-1}\otimes g_j^{-1})$ and $(f_ig_i)^{-1}=(uv)^{-1}\,(f_jg_j)^{-1}$, so the transition units of source and target coincide in the displayed trivialisations and $\varphi_i$, $\varphi_j$ agree on the overlap. Hence the $\varphi_i$ glue, and the glued map is an isomorphism because it is one on every chart.
-[F2, F3, F5, step 1.1]
+2.1 **The addition isomorphism.** For each $i$ there is a unique $\mathcal O_{U_i}$-linear isomorphism $\varphi_i:\mathcal O_X(D)\otimes\mathcal O_X(E)|_{U_i}\to\mathcal O_X(D+E)|_{U_i}$ sending $a\,(f_i^{-1}\otimes g_i^{-1})$ to $a\,(f_ig_i)^{-1}$, and the $\varphi_i$ agree on overlaps and glue to a global isomorphism $\varphi:\mathcal O_X(D)\otimes\mathcal O_X(E)\to\mathcal O_X(D+E)$ by [F5]. Indeed, both sides are free of rank one on $U_i$, with the displayed generators. On an overlap $U_i\cap U_j$ write $u=f_i/f_j$ and $v=g_i/g_j$, units of $\mathcal O_X(U_i\cap U_j)$; then $f_i^{-1}\otimes g_i^{-1}=(uv)^{-1}\,(f_j^{-1}\otimes g_j^{-1})$ and $(f_ig_i)^{-1}=(uv)^{-1}\,(f_jg_j)^{-1}$, so the transition units of source and target coincide in the displayed trivialisations and $\varphi_i$, $\varphi_j$ agree on the overlap. Hence the $\varphi_i$ glue, and the glued map is an isomorphism because it is one on every chart. [F2, F3, F5, step 1.1]
 
-2.2 **The inverse isomorphism.** There are unique $\mathcal O_{U_i}$-linear isomorphisms $\tau_i:\mathcal O_X(-D)|_{U_i}\to\mathcal O_X(D)^{\vee}|_{U_i}$ sending $a\,f_i$ to $a\,\lambda_i$, where $\lambda_i(f_i^{-1})=1$, and these $\tau_i$ agree on overlaps and glue by [F5] to an isomorphism $\tau:\mathcal O_X(-D)\to\mathcal O_X(D)^{\vee}$.
-Indeed, on $U_i\cap U_j$ write $f_i=uf_j$ with $u=f_i/f_j$ a unit; then the dual bases satisfy $\lambda_i=u\lambda_j$, because $\lambda_i(f_i^{-1})=\lambda_i(u^{-1}f_j^{-1})=1$ forces $\lambda_i=u\lambda_j$. Hence $a f_i=au f_j\mapsto au\lambda_j=a\lambda_i$, so $\tau_i$ and $\tau_j$ agree on the overlap, and $\tau$ is an isomorphism because each $\tau_i$ carries the basis $f_i$ of $\mathcal O_X(-D)|_{U_i}$ to the basis $\lambda_i$ of $\mathcal O_X(D)^{\vee}|_{U_i}$.
-[F2, F3, F5, step 1.2]
+2.2 **The inverse isomorphism.** There are unique $\mathcal O_{U_i}$-linear isomorphisms $\tau_i:\mathcal O_X(-D)|_{U_i}\to\mathcal O_X(D)^{\vee}|_{U_i}$ sending $a\,f_i$ to $a\,\lambda_i$, where $\lambda_i(f_i^{-1})=1$, and these $\tau_i$ agree on overlaps and glue by [F5] to an isomorphism $\tau:\mathcal O_X(-D)\to\mathcal O_X(D)^{\vee}$. Indeed, on $U_i\cap U_j$ write $f_i=uf_j$ with $u=f_i/f_j$ a unit; then the dual bases satisfy $\lambda_i=u\lambda_j$, because $\lambda_i(f_i^{-1})=\lambda_i(u^{-1}f_j^{-1})=1$ forces $\lambda_i=u\lambda_j$. Hence $a f_i=au f_j\mapsto au\lambda_j=a\lambda_i$, so $\tau_i$ and $\tau_j$ agree on the overlap, and $\tau$ is an isomorphism because each $\tau_i$ carries the basis $f_i$ of $\mathcal O_X(-D)|_{U_i}$ to the basis $\lambda_i$ of $\mathcal O_X(D)^{\vee}|_{U_i}$. [F2, F3, F5, step 1.2]
 
 3.1 **Conclusion.** There are canonical isomorphisms $\mathcal O_X(D+E)\cong\mathcal O_X(D)\otimes\mathcal O_X(E)$ and $\mathcal O_X(-D)\cong\mathcal O_X(D)^{\vee}$; the first is characterised by $(f_ig_i)^{-1}\mapsto f_i^{-1}\otimes g_i^{-1}$ and the second by $f_i\mapsto\lambda_i$ with $\lambda_i(f_i^{-1})=1$. The second is the canonical inverse of $\mathcal O_X(D)$ described by [F4]: combining it with the first for the pair $(D,-D)$ gives $\mathcal O_X(-D)\otimes\mathcal O_X(D)\cong\mathcal O_X(0)=\mathcal O_X$, the evaluation pairing. The construction uses only the given equations; no trivialisations are chosen and no choice principle is used. [F4, step 2.1, step 2.2] ∎
 

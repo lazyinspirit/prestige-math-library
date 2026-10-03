@@ -1,0 +1,1299 @@
+[
+  {
+    "order": 458.023,
+    "id": "sobolev-traces-and-zero-boundary-values",
+    "kind": "A",
+    "category": "pde",
+    "title": "Sobolev Traces and Zero Boundary Values",
+    "companion": "sobolev-traces-and-zero-boundary-values-examples",
+    "requires": [
+      "smooth-approximation-and-sobolev-extension"
+    ],
+    "items": [
+      {
+        "id": "lem-one-dimensional-sobolev-endpoint-estimate",
+        "kind": "lemma",
+        "title": "The one-dimensional endpoint estimate on a bounded interval",
+        "deps": [
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-holder-inequality-for-integrals",
+          "def-axiom-of-choice",
+          "thm-acl-characterisation-of-w-one-p"
+        ],
+        "statement": "Assume the Axiom of Choice through the ACL interface of [[thm-acl-characterisation-of-w-one-p]]. Let $I=(a,b)$ be a bounded open interval, $1\\le p<\\infty$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let $u\\in W^{1,p}(I;\\mathbb K)$ with weak derivative $u'$ and unique absolutely continuous representative $u^*$ ([[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]]). Then for every $0<\\varepsilon<b-a$: (i) if $1<p<\\infty$, $|u^*(a)|^p\\le 2^{p-1}\\bigl(\\varepsilon^{-1}\\int_a^{a+\\varepsilon}|u^*|^p+\\varepsilon^{p-1}\\int_a^{a+\\varepsilon}|u'|^p\\bigr)$, and the same inequality holds at $b$ with $(b-\\varepsilon,b)$; (ii) if $p=1$, $|u^*(a)|\\le\\varepsilon^{-1}\\int_a^{a+\\varepsilon}|u^*|+\\int_a^{a+\\varepsilon}|u'|$, and likewise at $b$. The endpoint values are those of the absolutely continuous representative and do not depend on the chosen representative of the class.",
+        "strategy": "For a.e. $t\\in(a,a+\\varepsilon)$ the absolutely continuous representative satisfies $u^*(a)-u^*(t)=-\\int_a^t u'$, hence $|u^*(a)|\\le|u^*(t)|+\\int_a^{a+\\varepsilon}|u'|$. For $p>1$ raise this to the $p$-th power with $|x+y|^p\\le 2^{p-1}(|x|^p+|y|^p)$, integrate in $t$ over $(a,a+\\varepsilon)$, divide by $\\varepsilon$, and bound $\\int_a^{a+\\varepsilon}\\bigl(\\int_a^{a+\\varepsilon}|u'|\\bigr)^p=\\varepsilon\\bigl(\\int_a^{a+\\varepsilon}|u'|\\bigr)^p\\le\\varepsilon^p\\int_a^{a+\\varepsilon}|u'|^p$ by Holder. For $p=1$ integrate the unsquared inequality. The capital-$C$ form used later is $\\varepsilon|u^*(a)|^p\\le C_p\\bigl(\\int_a^{a+\\varepsilon}|u^*|^p+\\varepsilon^p\\int_a^{a+\\varepsilon}|u'|^p\\bigr)$. The ACL and FTC interfaces carry the Axiom of Choice; no further choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Theorem 3.14 proof, Step 1, printed p. 63: the one-variable fundamental-theorem argument in the normal direction."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3, proof of Theorem 3.44, printed p. 72: the inequality $|f(x',0)|^p\\le p\\int_0^\\infty|f|^{p-1}|\\partial_nf|$, whose one-dimensional core is this estimate."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 9.2, Lemma 9.21 proof, printed p. 210: the normal-line fundamental-theorem step."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-trace-estimate-on-the-half-space",
+        "kind": "theorem",
+        "title": "The half-space trace estimate and the half-space trace operator",
+        "deps": [
+          "lem-one-dimensional-sobolev-endpoint-estimate",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-holder-inequality-for-integrals",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-smooth-up-to-the-boundary-density-on-smooth-domains",
+          "thm-completion-universal-property-for-bounded-linear-maps",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-axiom-of-choice",
+          "thm-acl-characterisation-of-w-one-p",
+          "thm-wkp-extension-from-a-half-space",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "thm-riesz-fischer-completeness-of-l-p"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $n\\ge2$, $d=n-1$, $1\\le p<\\infty$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let $H=\\{x=(x',x_n)\\in\\mathbb R^n:x_n>0\\}$ with $\\partial H=\\mathbb R^d\\times\\{0\\}$. (i) For every $u\\in C(\\overline H)\\cap W^{1,p}(H;\\mathbb K)$ with compact support, the classical boundary function $g=u(\\cdot,0)$ satisfies $|g(x')|^p\\le p\\int_0^\\infty|u(x',t)|^{p-1}\\,|\\partial_nu(x',t)|\\,dt$ for a.e. $x'\\in\\mathbb R^d$, hence $\\|g\\|_{L^p(\\mathbb R^d)}^p\\le p\\,\\|u\\|_{L^p(H)}^{p-1}\\|\\partial_nu\\|_{L^p(H)}\\le p\\,\\|u\\|_{W^{1,p}(H)}^p$. For every $h>0$ the strip form $h\\,|g(x')|^p\\le C_p\\bigl(\\int_0^h|u(x',t)|^pdt+h^p\\int_0^h|\\partial_nu(x',t)|^pdt\\bigr)$ holds for a.e. $x'$. (ii) There is a unique bounded linear operator $T_+:W^{1,p}(H;\\mathbb K)\\to L^p(\\mathbb R^d;\\mathbb K)$ with $T_+u=u(\\cdot,0)$ for every compactly supported $u\\in C(\\overline H)\\cap W^{1,p}(H)$, and $\\|T_+u\\|_{L^p(\\mathbb R^d)}\\le C(n,p)\\|u\\|_{W^{1,p}(H)}$; it is the unique bounded extension of classical restriction, and $T_+u$ depends only on the a.e. class of $u$.",
+        "strategy": "For (i), fix a representative continuous on $\\overline H$; for a.e. $x'$ the section $t\\mapsto u(x',t)$ is absolutely continuous on $(0,\\infty)$ by the ACL theorem, and since $u$ has compact support, $|g(x')|^p=-\\int_0^\\infty\\partial_t(|u(x',t)|^p)\\,dt=-p\\int_0^\\infty|u|^{p-2}\\operatorname{Re}(\\overline u\\,\\partial_nu)dt\\le p\\int_0^\\infty|u|^{p-1}|\\partial_nu|\\,dt$. Integrate in $x'$, apply Holder with exponents $p/(p-1)$ and $p$, and use $\\|\\partial_nu\\|_p\\le\\|u\\|_{W^{1,p}(H)}$. The strip form integrates the one-dimensional endpoint estimate [[lem-one-dimensional-sobolev-endpoint-estimate]] along the normal section. For (ii), classical restriction is defined on compactly supported smooth functions and is uniformly bounded by (i); that subspace is dense in $W^{1,p}(H)$ because a cutoff in $|x|$ reduces to the bounded domains $H\\cap B_R$, where [[thm-smooth-up-to-the-boundary-density-on-smooth-domains]] applies. Apply the bounded-extension property of a dense subspace ([[thm-completion-universal-property-for-bounded-linear-maps]]); uniqueness is immediate. The Axiom of Choice is carried through the density interface used to reach all classes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3, Section 3.9, Theorem 3.44 and its proof, printed pp. 71-73: the half-space trace operator and the display $|f(x',0)|^p\\le p\\int_0^\\infty|f|^{p-1}|\\partial_nf|dt$."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Section 3.7, Theorem 3.14, Steps 1-3, printed pp. 62-64: the flat-boundary estimate and the density extension."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter III, Section III.3.5, Theorem III.3.21 and its proof, printed pp. 76-77: flat half-space estimate via $\\int_{\\mathbb R^n_+}\\partial_n(|u|^p)$, then flattening and a partition of unity."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 9.2, Theorem 9.18 and its proof, printed pp. 208-209: the flat estimate after Gauss-Green."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+        "kind": "theorem",
+        "title": "The $L^p$ trace operator on a bounded $C^1$ domain",
+        "deps": [
+          "thm-trace-estimate-on-the-half-space",
+          "lem-c-k-boundary-flattening-preserves-wkp-locally",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "thm-smooth-up-to-the-boundary-density-on-smooth-domains",
+          "thm-completion-universal-property-for-bounded-linear-maps",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a bounded $C^1$ domain in the graph sense of [[def-bounded-c-k-domain-and-boundary-charts]], let $\\partial\\Omega$ carry the chart-independent surface measure of [[def-surface-integral-on-a-compact-c-one-hypersurface]] and [[lem-surface-integral-is-independent-of-c-one-boundary-charts]], let $1\\le p<\\infty$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then there is a unique bounded linear operator $T:W^{1,p}(\\Omega;\\mathbb K)\\to L^p(\\partial\\Omega;\\mathbb K)$ with $Tu=u|_{\\partial\\Omega}$ for every $u\\in C(\\overline\\Omega)\\cap W^{1,p}(\\Omega;\\mathbb K)$, and it satisfies $\\|Tu\\|_{L^p(\\partial\\Omega)}\\le C(\\Omega,p)\\|u\\|_{W^{1,p}(\\Omega)}$. On each boundary chart the operator is the flat half-space trace $T_+$ transported by the flattening diffeomorphism, and the chartwise definitions agree on overlaps; uniqueness holds because two bounded operators agreeing on the dense subspace $C(\\overline\\Omega)\\cap W^{1,p}(\\Omega)$ are equal.",
+        "strategy": "Choose the finite boundary atlas and the subordinate finite ambient partition $\\chi_j$ of [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], and write $u=\\sum_j\\chi_ju$ for $u\\in C(\\overline\\Omega)\\cap W^{1,p}(\\Omega)$. Every piece is supported in one chart; flattening it with the $C^1$ chart and [[lem-c-k-boundary-flattening-preserves-wkp-locally]] gives a compactly supported function in $W^{1,p}(H)$, to which the flat estimate of [[thm-trace-estimate-on-the-half-space]] applies. Summing the finitely many chartwise boundary $L^p$ norms gives the global bound because the transported boundary integrals agree up to the chart Jacobian ([[def-bounded-c-one-domain-boundary-charts-and-outward-normal]], [[lem-surface-integral-is-independent-of-c-one-boundary-charts]]). The classical restriction operator is therefore uniformly bounded on the dense subspace $C(\\overline\\Omega)\\cap W^{1,p}(\\Omega)$ ([[thm-smooth-up-to-the-boundary-density-on-smooth-domains]]) and extends uniquely to a bounded operator on $W^{1,p}(\\Omega)$ ([[thm-completion-universal-property-for-bounded-linear-maps]]). Well-definedness on classes: the boundary measure is chart independent and null sets in $\\Omega$ do not affect the boundary integrals. The Axiom of Choice is carried through the density and flattening interfaces; the finite cover and partition use no further choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 9.2, Theorem 9.18 and its proof, printed pp. 208-209: bounded trace operator on a bounded $C^1$ domain, reduction by a finite partition and boundary straightening."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Section 3.7, Theorem 3.14, Steps 2-3, printed pp. 63-64: curved boundary by a $C^1$ diffeomorphism, then a finite covering of the boundary."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter III, Section III.3.5, Theorem III.3.21, printed pp. 76-77: density and flattening argument for $\\partial\\Omega\\in C^1$."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3, Section 3.9, Theorem 3.44, printed pp. 71-73: the half-space model used on each chart."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-sobolev-trace-agrees-with-continuous-boundary-values",
+        "kind": "lemma",
+        "title": "The trace agrees with classical restriction for continuous Sobolev functions",
+        "deps": [
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\Omega$ be a bounded $C^1$ domain, $1\\le p<\\infty$, and let $u\\in W^{1,p}(\\Omega;\\mathbb K)$ admit a representative $\\tilde u\\in C(\\overline\\Omega;\\mathbb K)$. Then, with $T$ the trace operator of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]], $Tu=\\tilde u|_{\\partial\\Omega}$ in $L^p(\\partial\\Omega)$; in particular $Tu=0$ whenever such a representative vanishes on $\\partial\\Omega$. Two representatives continuous on $\\overline\\Omega$ of the same class have the same restriction to $\\partial\\Omega$.",
+        "strategy": "The class $u$ has the representative $\\tilde u\\in C(\\overline\\Omega)\\cap W^{1,p}(\\Omega)$, and the defining property of $T$ in [[thm-lp-trace-operator-on-a-bounded-c-one-domain]] is exactly that the trace of such a class is its classical restriction. If $\\tilde u$ vanishes on $\\partial\\Omega$, its classical restriction is the zero class of $L^p(\\partial\\Omega)$. The restriction of a function continuous on the compact set $\\overline\\Omega$ is determined by the function, so two such representatives agree on $\\partial\\Omega$. No choice beyond the cited trace interface is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 9.2, Theorem 9.18 statement, printed p. 209: $Tf=f|_{\\partial U}$ for continuous functions."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Section 3.7, Theorem 3.14, opening clause and Step 4, printed pp. 62-64."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter III, Section III.3.5, Theorem III.3.21(1), printed p. 76."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts",
+        "kind": "lemma",
+        "title": "The trace commutes with smooth cutoffs and is chart local",
+        "deps": [
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces",
+          "lem-sobolev-trace-agrees-with-continuous-boundary-values",
+          "thm-trace-estimate-on-the-half-space",
+          "lem-c-k-boundary-flattening-preserves-wkp-locally",
+          "thm-smooth-up-to-the-boundary-density-on-smooth-domains",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "def-axiom-of-choice",
+          "lem-weak-leibniz-rule-with-a-smooth-factor"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a\nbounded $C^1$ domain, $1\\le p<\\infty$, and let $T$ be the trace operator of\n[[thm-lp-trace-operator-on-a-bounded-c-one-domain]].\n\n(i) If $\\eta\\in C_c^\\infty(\\mathbb R^n;\\mathbb K)$, then\n$T(\\eta u)=(\\eta|_{\\partial\\Omega})\\,Tu$ in $L^p(\\partial\\Omega)$ for every\n$u\\in W^{1,p}(\\Omega;\\mathbb K)$, and\n$\\|T(\\eta u)\\|_{L^p(\\partial\\Omega)}\\le C_\\eta\\|u\\|_{W^{1,p}(\\Omega)}$.\n\n(ii) If $\\Omega'\\subseteq\\Omega$ is a bounded $C^1$ domain and\n$\\partial\\Omega\\cap\\partial\\Omega'$ is relatively open in $\\partial\\Omega$,\nthen $(Tu)|_{\\partial\\Omega\\cap\\partial\\Omega'}=T_{\\Omega'}(u|_{\\Omega'})$\na.e. for every $u\\in W^{1,p}(\\Omega)$, where $T_{\\Omega'}$ is the trace\noperator relative to $\\Omega'$; in particular the trace is local and\ncompatible with restrictions to subdomains.\n\n(iii) If a boundary chart $\\Phi$ flattens a neighbourhood of a boundary point,\nthen for $u$ supported in a compact ambient patch inside that chart the transported trace\nequals $T_+$ of the zero-extended flattened function after reflecting $t\\mapsto-t$ and the corresponding boundary $L^p$ norms\nagree up to the chart Jacobian.",
+        "strategy": "Density of ambient smooth restrictions and boundedness give multiplicativity and locality for bounded C1 subdomains. Localise approximants by a fixed ambient cutoff, flatten and reflect, extend across artificial chart edges using the support margin, and pass to the limit; C1 pullbacks need only be continuous Sobolev functions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "No. 1, definition (1.3) and the local-representation discussion on printed pp. 286-288: traces are computed chartwise and must agree on overlaps."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 9.2, proof of Lemma 9.21, printed p. 210: localisation by a partition of unity and compatibility of traces on the flattened pieces."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter III, Section III.3.5, proofs of Theorems III.3.21-III.3.22, printed pp. 76-77: flattening and a decomposition of unity."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-sobolev-gauss-green-formula-on-c-one-domains",
+        "kind": "theorem",
+        "title": "The Gauss-Green integration-by-parts formula with Sobolev traces",
+        "deps": [
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-classical-normal-derivative",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "lem-sobolev-trace-agrees-with-continuous-boundary-values",
+          "thm-smooth-up-to-the-boundary-density-on-smooth-domains",
+          "thm-holder-inequality-for-integrals",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a\nbounded $C^1$ domain, $1<p<\\infty$, $p'=p/(p-1)$,\n$u\\in W^{1,p}(\\Omega;\\mathbb K)$, $v\\in W^{1,p'}(\\Omega;\\mathbb K)$, and let\n$T$ be the trace of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]] with\n$\\nu$ the outward normal of\n[[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Then for\nevery $i=1,\\dots,n$,\n$$\\int_\\Omega u\\,\\partial_iv\\,dx=-\\int_\\Omega(\\partial_iu)v\\,dx+\\int_{\\partial\\Omega}(Tu)(Tv)\\,\\nu_i\\,dS,$$\nand all three integrals are finite. If $u,v\\in C^1(\\overline\\Omega)$, the\nboundary term is the classical $\\int_{\\partial\\Omega}uv\\,\\nu_i\\,dS$ of the\ndivergence theorem\n[[thm-divergence-theorem-for-bounded-c-one-euclidean-domains]] applied to the\nfield $uv\\,e_i$; if in addition $Tu=\\partial_\\nu w$ on $\\partial\\Omega$ for a specified $w\\in C^1(\\overline\\Omega)$, the boundary term is $\\int_{\\partial\\Omega}(\\partial_\\nu w)(Tv)\\nu_i\\,dS$. The normal derivative of [[def-classical-normal-derivative]] is defined on the boundary, and this extra identity is an assumption, not an interior substitution.",
+        "strategy": "For $u,v\\in C^1(\\overline\\Omega)$ the identity is the divergence theorem applied to the field $uv\\,e_i$ on the bounded $C^1$ domain. For general $u,v$ choose $u_k\\to u$ in $W^{1,p}(\\Omega)$ and $v_k\\to v$ in $W^{1,p'}(\\Omega)$ with $u_k,v_k$ restrictions of $C_c^\\infty(\\mathbb R^n)$ functions ([[thm-smooth-up-to-the-boundary-density-on-smooth-domains]]), so that $Tu_k\\to Tu$ and $Tv_k\\to Tv$ in the respective boundary $L^p$ spaces. The volume pairings converge by Holder, $\\int_\\Omega|u_k\\partial_iv_k-u\\partial_iv|\\le\\|u_k-u\\|_p\\|\\partial_iv_k\\|_{p'}+\\|u\\|_p\\|\\partial_iv_k-\\partial_iv\\|_{p'}\\to0$, and the boundary pairings converge by Holder on $\\partial\\Omega$ with exponents $p,p'$ ([[thm-holder-inequality-for-integrals]]), the boundary measure being finite. All boundary terms are in $L^1(\\partial\\Omega)$ since $Tu\\in L^p$ and $Tv\\in L^{p'}$. The Axiom of Choice is carried by the density and trace interfaces.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 9.2, Lemma 9.20 and its proof, printed p. 210: Gauss-Green and integration by parts for $W^{1,p}$ with boundary traces."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter III, Section III.3.5, proof of Theorem III.3.21, printed p. 77: integration by parts producing the boundary term."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Section 3.7, proof of Theorem 3.14, Step 1, printed p. 63: fundamental-theorem boundary calculation with a cutoff."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-kernel-of-the-trace-is-w-one-p-zero",
+        "kind": "theorem",
+        "title": "The kernel of the trace is the closure of the test functions",
+        "deps": [
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "lem-sobolev-trace-agrees-with-continuous-boundary-values",
+          "lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts",
+          "thm-sobolev-gauss-green-formula-on-c-one-domains",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-smooth-up-to-the-boundary-density-on-smooth-domains",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "lem-compact-support-zero-extension-in-wkp",
+          "lem-c-k-boundary-flattening-preserves-wkp-locally",
+          "lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-wkp-extension-from-a-half-space",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-holder-inequality-for-integrals",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "def-axiom-of-choice",
+          "lem-complex-translation-and-approximate-identity-interfaces",
+          "lem-weak-leibniz-rule-with-a-smooth-factor"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a bounded $C^1$ domain and $1\\le p<\\infty$. Then the kernel of the trace operator of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]] equals the zero-boundary Sobolev space: $\\{u\\in W^{1,p}(\\Omega):Tu=0\\}=W_0^{1,p}(\\Omega)$, the $W^{1,p}$-closure of $C_c^\\infty(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]]).",
+        "strategy": "Continuity proves the test-closure inclusion. For zero flat trace, direct integration on smooth approximants proves weak derivatives of zero extension. Translate inward and mollify inside the half-space. Localise before C1 pullback, then mollify each compact interior Sobolev pullback to obtain smooth tests. Treat the interior residual by bounded-domain compact support.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 9.2, Lemma 9.21 and its proof, printed p. 210: both inclusions, including the extension by zero and the translated mollification."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Section 3.7, Corollary 3.15, printed p. 64: the forward direction and the attribution of the converse to Evans."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter III, Section III.3.5, Theorem III.3.22, printed p. 77: the identity $W^{1,p}_0=\\{u:Tu=0\\}$."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3, Section 3.9, Theorem 3.44 statement, printed p. 72: $Tf=0$ if and only if $f\\in W^{1,p}_0$."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "def-fractional-slobodeckij-space-on-euclidean-space",
+        "kind": "definition",
+        "title": "The Gagliardo--Slobodeckij space on Euclidean space",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-nonnegative-lebesgue-integral",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice for the measure interfaces. Let $d\\ge1$, $0<s<1$, $1\\le p<\\infty$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. For a measurable $g:\\mathbb R^d\\to\\mathbb K$ put $[g]_{s,p}:=\\bigl(\\int_{\\mathbb R^d}\\int_{\\mathbb R^d}|g(x)-g(y)|^p|x-y|^{-d-sp}\\,dx\\,dy\\bigr)^{1/p}\\in[0,\\infty]$, with the integrand understood as $0$ on the diagonal $x=y$. The Gagliardo-Slobodeckij space is $W^{s,p}(\\mathbb R^d;\\mathbb K):=\\{g\\in L^p(\\mathbb R^d):[g]_{s,p}<\\infty\\}$, normed by $\\|g\\|_{W^{s,p}}:=\\|g\\|_{L^p}+[g]_{s,p}$. The seminorm and the space are meant to depend only on the almost-everywhere class; representative independence is recorded as the first clause of the well-definedness lemma on this page. On this page the exponent used is $s=\\theta:=1-1/p\\in(0,1)$, which is the trace exponent for $1<p<\\infty$.",
+        "strategy": "Unpack the double integral as an integral over the completed product measure on $\\mathbb R^d\\times\\mathbb R^d$ ([[thm-tonelli-and-fubini-for-completed-product-measures]]); the diagonal is a null set, so the convention is harmless, and the integral is a nonnegative extended integral of a measurable function ([[def-nonnegative-lebesgue-integral]]). Membership and norm are stated on classes ([[def-l-p-space-as-a-quotient-by-null-functions]]); representative independence is not assumed here but proved as the first clause of [[lem-slobodeckij-seminorm-is-well-defined]]. Only the countable-choice measure interfaces are used; the definition itself is choice free.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter V, Section V.1, printed pp. 96-97: definition of the seminorm $[f]_{W^{s,p}}$ and of the space $W^{s,p}$ with the sum norm."
+            },
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "No. 1, definition (1.3) and footnote 8 on printed pp. 288-289: the incremental-quotient norm on boundary functions and its equivalence with the double-integral form."
+            },
+            {
+              "title": "Maria Kampanou, Trace Theorems for Sobolev Spaces (master's thesis, National and Kapodistrian University of Athens, July 2018)",
+              "url": "https://pergamos.lib.uoa.gr/uoa/dl/object/2864871/file.pdf",
+              "locator": "Chapter 3, introductory definitions of the modular seminorm defining the boundary space, printed pp. 18-19."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-slobodeckij-seminorm-is-well-defined",
+        "kind": "lemma",
+        "title": "Well-definedness of the Slobodeckij seminorm and norm",
+        "deps": [
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "thm-minkowski-integral-inequality",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice. Let $d\\ge1$, $0<s<1$ and $1\\le p<\\infty$. (i) If $g=h$ almost everywhere then $[g]_{s,p}=[h]_{s,p}$ (both possibly infinite). (ii) The extended quantity $[\\cdot]_{s,p}$ is a seminorm: $[\\lambda g]_{s,p}=|\\lambda|[g]_{s,p}$ and $[f+g]_{s,p}\\le[f]_{s,p}+[g]_{s,p}$ for all measurable $f,g$. (iii) If $g\\in L^p(\\mathbb R^d)$ and $[g]_{s,p}=0$, then $g=0$ a.e.; hence $\\|\\cdot\\|_{W^{s,p}}$ is a norm and $W^{s,p}(\\mathbb R^d)$ is a vector space. On a set of finite measure the seminorm vanishes on constants, so it is only definite modulo constants there; adding the $L^p$ term removes that ambiguity, and on $\\mathbb R^d$ with $p<\\infty$ no nonzero constant is in $L^p$.",
+        "strategy": "(i) The difference $g-h$ vanishes outside a null set $N$; then $(g(x)-g(y))-(h(x)-h(y))=0$ whenever $x,y\\notin N$, and $(\\mathbb R^d\\times\\mathbb R^d)\\setminus(N\\times N)$ is null-complemented by Tonelli. (ii) Additivity of the integrand and Minkowski's integral inequality [[thm-minkowski-integral-inequality]] applied twice, first in $y$ and then in $x$, give the triangle inequality; homogeneity is immediate. (iii) If $[g]=0$ then $|g(x)-g(y)|^p=0$ for a.e. pair, hence by Fubini for a.e. $x$ for a.e. $y$; fix such an $x$ outside the exceptional set and conclude $g(y)=g(x)$ for a.e. $y$, so $g$ is a.e. constant; since $g\\in L^p$ and $\\mathbb R^d$ has infinite measure, the constant is $0$ ([[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]] gives the a.e.-zero conclusion after integrating $|g|^p$). Only countable-choice measure interfaces are used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter V, Section V.1, printed p. 96: seminorm properties and the remark that $[f]_{W^{s,p}}=0$ for constants, so the $L^p$ term is added."
+            },
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "No. 1 and the footnote on the equivalence of the local norms, printed pp. 286-289: the norm is taken on equivalence classes of boundary functions."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3, Section 3.9, printed p. 73: the range of the trace is described as a Besov space with the $L^p$ term included."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-coordinate-direction-form-of-the-slobodeckij-seminorm",
+        "kind": "lemma",
+        "title": "The coordinate-direction form of the Slobodeckij seminorm",
+        "deps": [
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice. Let $d\\ge1$, $0<s<1$, $1\\le p<\\infty$, and let $g$ be measurable. Then, with $e_1,\\dots,e_d$ the canonical basis, $[g]_{s,p}^p\\asymp_{d,p,s}\\sum_{i=1}^d\\int_0^\\infty h^{-1-sp}\\int_{\\mathbb R^d}|g(x+he_i)-g(x)|^p\\,dx\\,dh$, in the sense that both sides are finite simultaneously and the two quantities are comparable by constants depending only on $d,p,s$. For the trace exponent $s=\\theta=1-1/p$ the weight is $h^{-p}$, because $1+p\\theta=p$.",
+        "strategy": "Use a Borel representative and polar coordinates for extended nonnegative integrals. Telescope general increments along coordinate directions for one bound; average a pointwise triangle inequality against fixed compact smooth probability densities for the reverse bound, without integrating g itself.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "No. 1, the equivalence (1.3) of the boundary norm with the local incremental-quotient norms, printed pp. 288-289, and footnote 8 on their independence of the local system."
+            },
+            {
+              "title": "Maria Kampanou, Trace Theorems for Sobolev Spaces (master's thesis, National and Kapodistrian University of Athens, July 2018)",
+              "url": "https://pergamos.lib.uoa.gr/uoa/dl/object/2864871/file.pdf",
+              "locator": "Chapter 3, estimates (3.6)-(3.7), printed pp. 25-26: all lift and trace estimates are carried out in the coordinate-direction difference form."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter V, Section V.1, printed p. 96: the double-integral seminorm whose polar form is compared with directional differences."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-one-dimensional-hardy-inequality-on-the-half-line",
+        "kind": "lemma",
+        "title": "The Hardy inequality for the averaging operator on the half-line",
+        "deps": [
+          "thm-holder-inequality-for-integrals",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-minkowski-integral-inequality",
+          "thm-monotone-convergence-for-the-integral",
+          "def-nonnegative-lebesgue-integral",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice. Let $1<p<\\infty$ and let $f:(0,\\infty)\\to[0,\\infty]$ be measurable, with\n$Hf(t):=t^{-1}\\int_0^t f(s)\\,ds$. Then\n$$\\Bigl(\\int_0^\\infty\\bigl(Hf(t)\\bigr)^p\\,dt\\Bigr)^{1/p}\\le\\frac{p}{p-1}\\Bigl(\\int_0^\\infty f(s)^p\\,ds\\Bigr)^{1/p},$$\nequivalently\n$$\\int_0^\\infty t^{-p}\\Bigl(\\int_0^t f(s)\\,ds\\Bigr)^pdt\\le\\Bigl(\\frac{p}{p-1}\\Bigr)^p\\int_0^\\infty f(s)^p\\,ds,$$\nwhere both sides are extended nonnegative integrals and $+\\infty$ is allowed on\neither side. The constant $p/(p-1)$ is sharp: for every $c<p/(p-1)$ there is a\nmeasurable $f$ with $\\|Hf\\|_{L^p}>c\\|f\\|_{L^p}$. If $f$ is supported in\n$(0,T)$ for some $0<T<\\infty$, then the same inequality holds on $(0,T)$,\n$$\\int_0^T t^{-p}\\Bigl(\\int_0^t f(s)\\,ds\\Bigr)^pdt\\le\\Bigl(\\frac{p}{p-1}\\Bigr)^p\\int_0^T f(s)^p\\,ds,$$\nwith the same constant.",
+        "strategy": "Truncate monotonically to bounded compactly supported data, establish finite dual-test integral, bound the tail-dual operator by Minkowski, and obtain sharpness with t^(-1/p) on (1,R) and successive logarithmic limits. Restrict the full estimate for the interval case.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Petru Mironescu, Fine properties of functions: an introduction (Internet Archive capture of the HAL deposit cel-00747696)",
+              "url": "https://web.archive.org/web/20200319104529id_/https://hal.science/cel-00747696/document",
+              "locator": "Chapter 11, Section 11.2, steps (11.27)-(11.28) of the proof of Theorem 25(a), printed p. 78: Hardy's inequality in the radius variable for the double integral defining the trace norm."
+            },
+            {
+              "title": "Maria Kampanou, Trace Theorems for Sobolev Spaces (master's thesis, National and Kapodistrian University of Athens, July 2018)",
+              "url": "https://pergamos.lib.uoa.gr/uoa/dl/object/2864871/file.pdf",
+              "locator": "Chapter 5 (weighted estimates) as used in Chapter 3: the weighted Hardy operator $t^{-1}\\int_0^t f$ is bounded on $L^p(0,\\infty)$ with norm $p/(p-1)$."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Appendix A, Hardy-type inequalities used in Chapter 9: boundedness of the averaging operator on $L^p(0,\\infty)$ with constant $p/(p-1)$."
+            },
+            {
+              "title": "Petru Mironescu, Fine properties of functions: an introduction (author-hosted 89-page edition)",
+              "url": "https://math.univ-lyon1.fr/~mironescu/resources/introduction_fine_properties_functions_2005.pdf",
+              "locator": "Chapter 3, Theorem 3 and its complete proof, printed pp. 13-14, with r=p-1; Chapter 12, (12.27)-(12.29), printed p. 86."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-mean-zero-kernel-scale-estimate",
+        "kind": "lemma",
+        "title": "A scale integral estimate for mean-zero kernels",
+        "deps": [
+          "lem-coordinate-direction-form-of-the-slobodeckij-seminorm",
+          "lem-complex-translation-and-approximate-identity-interfaces",
+          "thm-holder-inequality-for-integrals",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "def-countable-choice",
+          "thm-minkowski-integral-inequality"
+        ],
+        "statement": "Assume Countable Choice. Let $d\\ge1$, $1<p<\\infty$, $\\theta=1-1/p$, and let $\\psi\\in C_c(\\mathbb R^d)$ with $\\int_{\\mathbb R^d}\\psi=0$. For $t>0$ put $\\psi_t(y)=t^{-d}\\psi(y/t)$. Then for every $g\\in L^p(\\mathbb R^d)$ and every $T>0$, $\\int_0^Tt^{-p}\\|g*\\psi_t\\|_{L^p(\\mathbb R^d)}^p\\,dt\\le C(d,p,\\psi)\\sum_{i=1}^d\\int_0^\\infty h^{-p}\\int_{\\mathbb R^d}|g(x+he_i)-g(x)|^p\\,dx\\,dh\\le C'(d,p,\\psi)\\,[g]_{\\theta,p}^p$, with $C'$ independent of $T$ and of $g$.",
+        "strategy": "Mean-zero subtraction and ball Holder reduce the convolution to nonnegative weighted increments. Tonelli with the indicator |y|\u2264c_psi t gives a tail weight |y|^(-d-p+1), including zero contribution beyond c_psi T. Use both directional-comparison bounds for the displayed chain.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Petru Mironescu, Fine properties of functions: an introduction (Internet Archive capture of the HAL deposit cel-00747696)",
+              "url": "https://web.archive.org/web/20200319104529id_/https://hal.science/cel-00747696/document",
+              "locator": "Chapter 11, Section 11.2, estimates (11.32)-(11.37), printed pp. 78-79: mean-zero kernels of scale $t$ are bounded by $Ct^{-d}$ on $B(0,t)$ and Holder is applied over the ball."
+            },
+            {
+              "title": "Maria Kampanou, Trace Theorems for Sobolev Spaces (master's thesis, National and Kapodistrian University of Athens, July 2018)",
+              "url": "https://pergamos.lib.uoa.gr/uoa/dl/object/2864871/file.pdf",
+              "locator": "Chapter 3, the estimates leading to (3.6)-(3.7), printed pp. 24-26: difference decomposition of a mean-zero scaled kernel, Tonelli, and the substitution in the normal variable."
+            },
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "No. 2-3, the constructions of the direct and inverse trace estimates on printed pp. 290-300: scaled convolution kernels with vanishing moments."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter V, Section V.2, printed pp. 98-100: scaled kernels and their difference form on the half-space."
+            },
+            {
+              "title": "Petru Mironescu, Fine properties of functions: an introduction (author-hosted 89-page edition)",
+              "url": "https://math.univ-lyon1.fr/~mironescu/resources/introduction_fine_properties_functions_2005.pdf",
+              "locator": "Chapter 12, Theorem 25(b), estimates (12.32)-(12.37), printed pp. 86-87."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-smooth-compactly-supported-functions-are-dense-in-slobodeckij-spaces",
+        "kind": "lemma",
+        "title": "Compactly supported smooth functions are dense in Slobodeckij spaces",
+        "deps": [
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "lem-slobodeckij-seminorm-is-well-defined",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "lem-complex-translation-and-approximate-identity-interfaces",
+          "thm-dominated-convergence",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "def-countable-choice",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "statement": "Assume Countable Choice. Let $d\\ge1$, $0<s<1$ and $1\\le p<\\infty$. Then $C_c^\\infty(\\mathbb R^d)$ is dense in $W^{s,p}(\\mathbb R^d)$: for every $g\\in W^{s,p}(\\mathbb R^d)$ and every $\\varepsilon>0$ there is $\\varphi\\in C_c^\\infty(\\mathbb R^d)$ with $\\|g-\\varphi\\|_{W^{s,p}}<\\varepsilon$.",
+        "strategy": "Truncate by Lipschitz cutoffs, separating the original seminorm difference from an error C R^(-sp)||g||_p^p. Translate the weighted increment as an Lp(R^(2d)) function. Probability Holder and approximate-identity bounds give compact smooth mollified approximants with the requested tolerance.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Petru Mironescu, Fine properties of functions: an introduction (Internet Archive capture of the HAL deposit cel-00747696)",
+              "url": "https://web.archive.org/web/20200319104529id_/https://hal.science/cel-00747696/document",
+              "locator": "Chapter 11, Lemma 26 and its proof, printed pp. 74-77: mollification $f_\\varepsilon=f*\\rho_\\varepsilon\\to f$ in $W^{s,p}$ for every $f\\in W^{s,p}$ and every $0<s<1$, $1\\le p<\\infty$."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter V, Sections V.1-V.2, printed pp. 96-100: the space is defined on $L^p$ classes and used through density and scaling arguments."
+            },
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "No. 2, approximation steps in the proof of Teorema [1.I], printed pp. 290-300: smooth functions with compact support are used as the dense class."
+            },
+            {
+              "title": "Petru Mironescu, Fine properties of functions: an introduction (author-hosted 89-page edition)",
+              "url": "https://math.univ-lyon1.fr/~mironescu/resources/introduction_fine_properties_functions_2005.pdf",
+              "locator": "Chapter 12, Lemma 26 and its complete proof (12.4)-(12.19), printed pp. 82-84."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-fractional-sobolev-space-on-a-compact-c-one-boundary",
+        "kind": "definition",
+        "title": "The fractional Sobolev space on a compact $C^1$ boundary",
+        "deps": [
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice and the boundary conventions of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a bounded $C^1$ domain, $0<s<1$ and $1\\le p<\\infty$. Fix a finite family of boundary charts $\\Phi_j:U_j\\to V_j$, whose restrictions parametrise $\\partial\\Omega\\cap U_j$ over open sets of $\\mathbb R^{n-1}$, and a subordinate finite ambient partition $\\chi_j$ ([[lem-finite-ambient-partitions-for-euclidean-boundary-integration]]). For a Borel function $g:\\partial\\Omega\\to\\mathbb K$ set $\\|g\\|_{W^{s,p}(\\partial\\Omega)}:=\\sum_j\\|(\\chi_jg)\\circ\\Phi_j^{-1}\\|_{W^{s,p}(\\mathbb R^{n-1})}$, where the chart representation is taken in graph coordinates. Then $W^{s,p}(\\partial\\Omega;\\mathbb K)$ is the set of $L^p(\\partial\\Omega)$ classes with finite norm. The definition is independent of the atlas and partition up to equivalent norms; the atlas-independence lemma on this page proves the invariance.",
+        "strategy": "Each chart contributes the Euclidean Slobodeckij norm of [[def-fractional-slobodeckij-space-on-euclidean-space]] applied to the local graph representation; the finite sum over the partition covers the compact boundary, and the surface-measure description of [[def-surface-integral-on-a-compact-c-one-hypersurface]] fixes which functions are a.e. equal on the boundary. Well-definedness on classes follows from the Euclidean representative independence, and atlas independence is proved separately in [[lem-fractional-boundary-norm-is-independent-of-atlas]]. Countable Choice is carried through the measure interfaces; the finitely many charts and the partition use no further choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter V, Section V.1, printed pp. 96-97: the local Slobodeckij norms are patched over the boundary through charts, with the trace-space interpretation."
+            },
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "No. 1, printed pp. 286-289: the boundary norm is defined through finitely many local representations and their incremental quotients."
+            },
+            {
+              "title": "Maria Kampanou, Trace Theorems for Sobolev Spaces (master's thesis, National and Kapodistrian University of Athens, July 2018)",
+              "url": "https://pergamos.lib.uoa.gr/uoa/dl/object/2864871/file.pdf",
+              "locator": "Chapter 3, Theorems 3.4-3.5 and their proofs, printed pp. 27-31: localisation on $C^l$ domains by finitely many charts and a partition of unity."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-fractional-boundary-norm-is-independent-of-atlas",
+        "kind": "lemma",
+        "title": "Chart independence of the fractional boundary norm",
+        "deps": [
+          "def-fractional-sobolev-space-on-a-compact-c-one-boundary",
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "cor-piecewise-c1-paths-have-additive-speed-integral-length",
+          "cor-chord-length-is-at-most-arc-length",
+          "def-countable-choice",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "lem-slobodeckij-seminorm-is-well-defined"
+        ],
+        "statement": "Assume Countable Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a bounded\n$C^1$ domain, $0<s<1$ and $1\\le p<\\infty$.\n\n(i) If $\\Psi:V\\to V'$ is a $C^1$ diffeomorphism between open subsets of\n$\\mathbb R^{d}$, $d\\ge1$, which is bi-Lipschitz and whose derivatives in both directions are bounded,\nthen for every measurable $u:V'\\to\\mathbb K$,\n$$\\|u\\circ\\Psi\\|_{W^{s,p}(V)}\\le C(\\Psi,s,p)\\,\\|u\\|_{W^{s,p}(V')}$$\nand symmetrically with $\\Psi^{-1}$; in particular the Slobodeckij norm\n$\\|\\cdot\\|_{W^{s,p}}$ of [[def-fractional-slobodeckij-space-on-euclidean-space]]\nis preserved up to equivalence by such coordinate changes. Here the norm on an open set uses the same double integral restricted to that set, with its $L^p$ term. Bounded derivatives alone on arbitrary open sets do not imply the bi-Lipschitz hypothesis.\n\n(ii) Consequently two finite boundary chart families with subordinate\npartitions, as in\n[[def-fractional-sobolev-space-on-a-compact-c-one-boundary]], define\nequivalent norms on $\\partial\\Omega$: the sum norms differ by multiplicative\nconstants depending only on the two atlases, the dimension and $s,p$, so\n$W^{s,p}(\\partial\\Omega)$ is well defined as a set and its topology is\natlas-independent.",
+        "strategy": "Assume global bi-Lipschitz bounds for the general coordinate-change assertion and change variables in both integral factors with bounded inverse Jacobians. For atlas overlaps obtain local bi-Lipschitz bounds on small balls, apply bounded Lipschitz multipliers and positive-support-margin zero extension, then sum finitely and reverse the atlases.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "No. 1, printed pp. 287-289 and footnote 6: bi-Lipschitz maps with bounded Jacobians induce norm equivalence, and the norm (1.3) is independent of the local system."
+            },
+            {
+              "title": "Maria Kampanou, Trace Theorems for Sobolev Spaces (master's thesis, National and Kapodistrian University of Athens, July 2018)",
+              "url": "https://pergamos.lib.uoa.gr/uoa/dl/object/2864871/file.pdf",
+              "locator": "Chapter 3, Theorems 3.4-3.5, printed pp. 27-31: chartwise norms patched over finitely many Lipschitz diffeomorphisms."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter V, Section V.1, printed pp. 96-97: the boundary case is treated through charts, with invariance under bi-Lipschitz changes of variables implicit in the trace-space definition."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-half-space-trace-has-the-fractional-slobodeckij-bound",
+        "kind": "lemma",
+        "title": "The half-space trace lies in the fractional Slobodeckij space",
+        "deps": [
+          "lem-coordinate-direction-form-of-the-slobodeckij-seminorm",
+          "lem-one-dimensional-hardy-inequality-on-the-half-line",
+          "thm-trace-estimate-on-the-half-space",
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "thm-smooth-up-to-the-boundary-density-on-smooth-domains",
+          "thm-holder-inequality-for-integrals",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-fatou-lemma",
+          "thm-wkp-extension-from-a-half-space",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $d\\ge1$, $1<p<\\infty$, $\\theta=1-1/p$, $H=\\mathbb R^d\\times(0,\\infty)$, and let $T_+$ be the half-space trace of [[thm-trace-estimate-on-the-half-space]]. Then for every $u\\in W^{1,p}(H)$ with $g=T_+u$, $[g]_{\\theta,p}^p\\le C(d,p)\\bigl(\\|u\\|_{L^p(H)}^p+\\|\\partial_nu\\|_{L^p(H)}^p\\bigr)\\le C(d,p)\\|u\\|_{W^{1,p}(H)}^p$; equivalently $T_+:W^{1,p}(H)\\to W^{\\theta,p}(\\mathbb R^d)$ is bounded. The estimate is invariant under the half-space scaling $(x',t)\\mapsto(rx',rt)$ in the sense that both sides scale with the same exponent.",
+        "strategy": "Prove the estimate first for $u\\in C_c^\\infty(\\mathbb R^n)$ (viewed on $\\overline H$) and write $f=u(\\cdot,0)$. By the triangle inequality, $|f(x'+h')-f(x')|\\le|f(x'+h')-u(x'+h'/2,|h'|/2)|+|f(x')-u(x'+h'/2,|h'|/2)|$. Substituting $x'+h'\\mapsto y'$ and then $h'\\mapsto-h'$ shows that the two terms have equal integrals, so it suffices to bound the second one. The Leibniz-Newton formula along the segment from $(x',0)$ to $(x'+h'/2,|h'|/2)$ bounds it by $\\int_0^{|h'|}|Du(x'+t(h'/|h'|),t)|dt$. Polar coordinates in $h'$ and Hardy's inequality [[lem-one-dimensional-hardy-inequality-on-the-half-line]] in the radius variable reduce the resulting expression to $\\int_{H}|Du|^p$, with the weight $|h'|^{-(n-1)-p(1-1/p)}$ supplied by the exponent identity $p-1=p\\theta$. For general $u\\in W^{1,p}(H)$ approximate by restrictions of $C_c^\\infty$ functions ([[thm-smooth-up-to-the-boundary-density-on-smooth-domains]]); the traces converge in $L^p$ and the estimate passes to the limit by Fatou along an a.e.-convergent subsequence. The Axiom of Choice is carried by the density interface.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Petru Mironescu, Fine properties of functions: an introduction (Internet Archive capture of the HAL deposit cel-00747696)",
+              "url": "https://web.archive.org/web/20200319104529id_/https://hal.science/cel-00747696/document",
+              "locator": "Chapter 11, Theorem 25(a) and estimates (11.21)-(11.29), printed pp. 77-78: mid-point splitting, polar coordinates, Hardy's inequality, and integration of the gradient."
+            },
+            {
+              "title": "Maria Kampanou, Trace Theorems for Sobolev Spaces (master's thesis, National and Kapodistrian University of Athens, July 2018)",
+              "url": "https://pergamos.lib.uoa.gr/uoa/dl/object/2864871/file.pdf",
+              "locator": "Chapter 3, Theorem 3.2 and estimates (3.1)-(3.3), printed pp. 19-22: the difference-quotient bound integrated against $h^{-p}dh$, followed by Fatou."
+            },
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "No. 2, first part of the proof of Teorema [1.I], printed pp. 290-297: the boundary estimate is proved by splitting increments in the normal and tangential directions."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter III, Section III.3.5, printed pp. 76-77 and Chapter V, Section V.2, printed pp. 97-100: the trace loss of $1/p$ derivatives and its difference-quotient form."
+            },
+            {
+              "title": "Petru Mironescu, Fine properties of functions: an introduction (author-hosted 89-page edition)",
+              "url": "https://math.univ-lyon1.fr/~mironescu/resources/introduction_fine_properties_functions_2005.pdf",
+              "locator": "Chapter 12, Theorem 25(a), complete proof (12.21)-(12.29), printed pp. 85-86."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-half-space-lift-by-normal-mollification",
+        "kind": "theorem",
+        "title": "A bounded right inverse of the half-space trace by normal mollification",
+        "deps": [
+          "lem-mean-zero-kernel-scale-estimate",
+          "lem-smooth-compactly-supported-functions-are-dense-in-slobodeckij-spaces",
+          "thm-trace-estimate-on-the-half-space",
+          "lem-sobolev-trace-agrees-with-continuous-boundary-values",
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "thm-completion-universal-property-for-bounded-linear-maps",
+          "lem-complex-translation-and-approximate-identity-interfaces",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $d\\ge1$, $1<p<\\infty$, $\\theta=1-1/p$. Fix\n$\\varphi\\in C_c^\\infty(\\mathbb R^d)$ with $\\int_{\\mathbb R^d}\\varphi=1$, put\n$\\varphi_t(y):=t^{-d}\\varphi(y/t)$ for $t>0$ and\n$\\psi:=-\\sum_i\\partial_i(y_i\\varphi)$, so that $\\int\\psi=0$ and\n$\\partial_t(g*\\varphi_t)=t^{-1}(g*\\psi_t)$; fix\n$\\eta\\in C_c^\\infty([0,\\infty))$ with $\\eta\\equiv1$ on $[0,1]$ and\n$\\eta\\equiv0$ on $[2,\\infty)$. For $g\\in W^{\\theta,p}(\\mathbb R^d)$ define\n$$R_+g(x,t):=\\eta(t)\\,(g*\\varphi_t)(x),\\qquad x\\in\\mathbb R^d,\\ t>0.$$\nThen $R_+g\\in W^{1,p}(\\mathbb R^d\\times(0,\\infty))$ with\n$$\\partial_t(R_+g)=\\eta'(t)(g*\\varphi_t)+\\eta(t)t^{-1}(g*\\psi_t),\\qquad \\partial_{x_i}(R_+g)=\\eta(t)(g*\\partial_i\\varphi_t),$$\nand $\\|R_+g\\|_{W^{1,p}}\\le C(d,p,\\varphi,\\eta)\\|g\\|_{W^{\\theta,p}(\\mathbb R^d)}$.\nMoreover $T_+(R_+g)=g$, so $R_+$ is a bounded linear right inverse of the\nhalf-space trace $T_+$.",
+        "strategy": "Differentiate the scaled kernel exactly; normal and tangential derivatives are t^(-1) times scaled mean-zero kernels. Their scale estimate and cutoff bounds control W1p. Fractional smooth density and Sobolev completeness identify the convolution limit and its derivatives; trace continuity gives the right-inverse identity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Petru Mironescu, Fine properties of functions: an introduction (Internet Archive capture of the HAL deposit cel-00747696)",
+              "url": "https://web.archive.org/web/20200319104529id_/https://hal.science/cel-00747696/document",
+              "locator": "Chapter 11, Theorem 25(b), Remark 12 and Corollary 17, printed pp. 77-79: the lift $v(x,t)=f*\\rho_{|t|}(x)$, $u=v\\phi(t)$ is linear, has trace $f$, and satisfies the inverse estimate."
+            },
+            {
+              "title": "Maria Kampanou, Trace Theorems for Sobolev Spaces (master's thesis, National and Kapodistrian University of Athens, July 2018)",
+              "url": "https://pergamos.lib.uoa.gr/uoa/dl/object/2864871/file.pdf",
+              "locator": "Chapter 3, Theorem 3.3 and estimates (3.4)-(3.7), printed pp. 23-26: the scaled-bump lift, its tangential and normal derivative estimates, and the exponential normal cutoff."
+            },
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "No. 3, construction of the extension in the proof of Teorema [1.I], printed pp. 290-300: the extension is built from local smoothed representatives."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter V, Section V.2, printed pp. 98-101: the scaled-kernel extension and the $p=2$ energy computation."
+            },
+            {
+              "title": "Petru Mironescu, Fine properties of functions: an introduction (author-hosted 89-page edition)",
+              "url": "https://math.univ-lyon1.fr/~mironescu/resources/introduction_fine_properties_functions_2005.pdf",
+              "locator": "Chapter 12, Theorem 25(b), complete proof (12.30)-(12.37) and Corollary 17, printed pp. 86-87."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-sharp-trace-theorem-for-w-one-p",
+        "kind": "theorem",
+        "title": "The sharp trace theorem: boundedness and range in the fractional space",
+        "deps": [
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "lem-half-space-trace-has-the-fractional-slobodeckij-bound",
+          "thm-half-space-lift-by-normal-mollification",
+          "def-fractional-sobolev-space-on-a-compact-c-one-boundary",
+          "lem-fractional-boundary-norm-is-independent-of-atlas",
+          "lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts",
+          "lem-coordinate-direction-form-of-the-slobodeckij-seminorm",
+          "lem-c-k-boundary-flattening-preserves-wkp-locally",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "thm-smooth-up-to-the-boundary-density-on-smooth-domains",
+          "thm-holder-inequality-for-integrals",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-axiom-of-choice",
+          "lem-weak-leibniz-rule-with-a-smooth-factor"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a bounded $C^1$ domain, $1<p<\\infty$ and $\\theta=1-1/p$, with $W^{\\theta,p}(\\partial\\Omega)$ as in [[def-fractional-sobolev-space-on-a-compact-c-one-boundary]]. Then the trace operator $T$ of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]] satisfies $\\|Tu\\|_{W^{\\theta,p}(\\partial\\Omega)}\\le C(\\Omega,p)\\|u\\|_{W^{1,p}(\\Omega)}$ for all $u\\in W^{1,p}(\\Omega)$, and it is onto: $T(W^{1,p}(\\Omega))=W^{\\theta,p}(\\partial\\Omega)$. For $p>1$ the range is a strict subset of $L^p(\\partial\\Omega)$, and the trace is not a compact operator into $W^{\\theta,p}(\\partial\\Omega)$.",
+        "strategy": "Localise the flat fractional estimate and patch normal-mollifier lifts for boundedness and onto. A chart-supported power singularity has finite Lp norm and divergent directional fractional integral, proving strictness. A normalised concentrating family has bounded W1p lifts, fractional traces bounded below and Lp traces tending to zero, proving noncompactness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Petru Mironescu, Fine properties of functions: an introduction (Internet Archive capture of the HAL deposit cel-00747696)",
+              "url": "https://web.archive.org/web/20200319104529id_/https://hal.science/cel-00747696/document",
+              "locator": "Chapter 11, Theorem 25 and Remark 12, printed pp. 77-79: boundedness, surjectivity and the existence of a linear bounded right inverse for $1<p<\\infty$; the strictness of the range."
+            },
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "Teoremi [1.I] and [1.II], printed pp. 289-290: necessary and sufficient conditions for a boundary function to be a trace, with the two-sided norm equivalence for $p>1$."
+            },
+            {
+              "title": "Maria Kampanou, Trace Theorems for Sobolev Spaces (master's thesis, National and Kapodistrian University of Athens, July 2018)",
+              "url": "https://pergamos.lib.uoa.gr/uoa/dl/object/2864871/file.pdf",
+              "locator": "Chapter 3, Theorems 3.2-3.3 and Theorems 3.4-3.5, printed pp. 19-31: the half-space case in full and the extension to $C^l$ domains by localisation and a partition of unity."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter V, Section V.2, printed pp. 97-101: the trace space is $W^{1-1/p,p}$ and every boundary function in that space has a $W^{1,p}$ extension."
+            },
+            {
+              "title": "Petru Mironescu, Fine properties of functions: an introduction (author-hosted 89-page edition)",
+              "url": "https://math.univ-lyon1.fr/~mironescu/resources/introduction_fine_properties_functions_2005.pdf",
+              "locator": "Chapter 12, Theorem 25(a)-(b), complete proof and Corollary 17, printed pp. 85-87."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-bounded-right-inverse-for-the-sobolev-trace",
+        "kind": "theorem",
+        "title": "A bounded right inverse of the trace, supported in a prescribed collar",
+        "deps": [
+          "thm-sharp-trace-theorem-for-w-one-p",
+          "thm-half-space-lift-by-normal-mollification",
+          "def-fractional-sobolev-space-on-a-compact-c-one-boundary",
+          "lem-fractional-boundary-norm-is-independent-of-atlas",
+          "lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts",
+          "lem-sobolev-pasting-across-an-overlap",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "lem-c-k-boundary-flattening-preserves-wkp-locally",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces",
+          "def-axiom-of-choice",
+          "lem-weak-leibniz-rule-with-a-smooth-factor"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a bounded $C^1$ domain, $1<p<\\infty$, $\\theta=1-1/p$, and let $T$ be the trace. Then there is a bounded linear operator $R:W^{\\theta,p}(\\partial\\Omega)\\to W^{1,p}(\\Omega)$ with $T\\circ R=\\mathrm{id}_{W^{\\theta,p}(\\partial\\Omega)}$ and $\\|Rg\\|_{W^{1,p}(\\Omega)}\\le C(\\Omega,p)\\|g\\|_{W^{\\theta,p}(\\partial\\Omega)}$. Moreover, for every open neighbourhood $U$ of $\\partial\\Omega$ in $\\mathbb R^n$ there is such an operator $R_U$ with the image contained in the classes vanishing a.e. outside $U$, and $\\|R_Ug\\|_{W^{1,p}(\\Omega)}\\le C(\\Omega,p,U)\\|g\\|_{W^{\\theta,p}(\\partial\\Omega)}$. The right inverse is not unique and no canonical choice is claimed.",
+        "strategy": "Choose finitely many charts and cutoffs in the prescribed collar. Lift each localised datum flat, pull back and sum; boundedness and trace multiplicativity give T R_U=id. Add a nonzero interior zero-trace bump multiplied by the surface-integral functional to exhibit distinct right inverses.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "Teorema [1.I], second half, printed p. 289: for $p>1$ every boundary function in the trace space is attained by a $W^{1,p}$ function with the stated norm bound."
+            },
+            {
+              "title": "Maria Kampanou, Trace Theorems for Sobolev Spaces (master's thesis, National and Kapodistrian University of Athens, July 2018)",
+              "url": "https://pergamos.lib.uoa.gr/uoa/dl/object/2864871/file.pdf",
+              "locator": "Chapter 3, Theorem 3.3 and Theorem 3.5, printed pp. 23-31: the lift and its patching on $C^l$ domains."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter V, Section V.2, printed pp. 98-101: scaled lifts on the half-space as the local model."
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-inhomogeneous-dirichlet-data-reduce-to-zero-trace",
+        "kind": "corollary",
+        "title": "Inhomogeneous Dirichlet data reduce to zero trace",
+        "deps": [
+          "thm-bounded-right-inverse-for-the-sobolev-trace",
+          "thm-kernel-of-the-trace-is-w-one-p-zero",
+          "thm-sharp-trace-theorem-for-w-one-p",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\Omega$ be a bounded $C^1$ domain, $1<p<\\infty$, $\\theta=1-1/p$, and let $R$ be the right inverse of [[thm-bounded-right-inverse-for-the-sobolev-trace]]. Then for every $g\\in W^{\\theta,p}(\\partial\\Omega)$ and every $u\\in W^{1,p}(\\Omega)$ with $Tu=g$ one has $u=Rg+v$ with $v\\in W_0^{1,p}(\\Omega)$, and conversely every such $u=Rg+v$ has trace $g$. If $g_0\\in L^p(\\partial\\Omega)\\setminus W^{\\theta,p}(\\partial\\Omega)$, a set nonempty for $p>1$, then no $u\\in W^{1,p}(\\Omega)$ satisfies $Tu=g_0$: the inhomogeneous problem is solvable exactly for data in the trace range, not for arbitrary boundary $L^p$ data.",
+        "strategy": "Compute $T(u-Rg)=Tu-T(Rg)=g-g=0$, so $v:=u-Rg$ lies in the kernel of $T$, which equals $W_0^{1,p}(\\Omega)$ by [[thm-kernel-of-the-trace-is-w-one-p-zero]]. Conversely, $T(Rg+v)=T(Rg)+Tv=g+0=g$. The final statement is the definition of the range of $T$ combined with the strictness clause of [[thm-sharp-trace-theorem-for-w-one-p]]. No choice beyond the cited interfaces is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "Teorema [1.I], printed p. 289: the range of the trace is exactly the boundary space, so data outside it are not attained."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 9.2, Lemmas 9.20-9.21, printed p. 210: decomposition of a function with prescribed trace by subtracting a lift with controlled zero-trace remainder."
+            },
+            {
+              "title": "Maria Kampanou, Trace Theorems for Sobolev Spaces (master's thesis, National and Kapodistrian University of Athens, July 2018)",
+              "url": "https://pergamos.lib.uoa.gr/uoa/dl/object/2864871/file.pdf",
+              "locator": "Chapter 3, Theorems 3.3 and 3.5, printed pp. 23-31: existence of the extension used in the reduction."
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "rem-endpoint-and-rough-domain-trace-limitations",
+        "kind": "remark",
+        "title": "Endpoint and rough-domain limitations of the trace theorems",
+        "deps": [
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "thm-sharp-trace-theorem-for-w-one-p",
+          "thm-bounded-right-inverse-for-the-sobolev-trace",
+          "thm-kernel-of-the-trace-is-w-one-p-zero",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Scope and limitations of the trace theory of this page. (i) The sharp range statement is proved for $1<p<\\infty$; at $p=1$ the trace operator $T:W^{1,1}(\\Omega)\\to L^1(\\partial\\Omega)$ is still bounded and onto, but $L^1(\\partial\\Omega)$ must not be renamed $W^{0,1}(\\partial\\Omega)$, and there is no bounded linear right inverse $L^1(\\partial\\Omega)\\to W^{1,1}(\\Omega)$; the $p=1$ surjectivity of Gagliardo and the nonexistence of a bounded linear extension are cited here, not proved on this page. (ii) The trace theorems use bounded $C^1$ domains with the local one-sided graph property of [[def-bounded-c-k-domain-and-boundary-charts]], without uniform constants across all charts or domains. Compact patches and a finite boundary cover give domain-dependent derivative bounds. Individual $C^1$ arcs do not suffice at an outward-cusp tip, where the local graph property fails. For the planar model $\\Omega_\\alpha=\\{(x,y):0<y<1, |x|<y^\\alpha\\}$ the companion concentrating sequence disproves the unweighted $W^{1,p}$ to boundary $L^p$ bound for $\\alpha>p$. Weighted estimates require their own hypotheses; neither necessity of weighting nor a universal cusp threshold is asserted. (iii) Gagliardo's original hypotheses are Lipschitz, not $C^1$, and the same statements hold for bounded Lipschitz domains with the Lipschitz boundary atlas; the $C^1$ version proved here is a special case, and no Lipschitz-domain strengthening beyond finite-dimensional Euclidean domains is claimed. (iv) The zero-boundary identification $\\ker T=W_0^{1,p}(\\Omega)$ is used only as a statement about the closure of $C_c^\\infty(\\Omega)$; no pointwise boundary parametrisation of an arbitrary Sobolev class is claimed.",
+        "strategy": "This is a scope remark: every assertion is either a proved statement of this page cited through the dependency list or an explicitly attributed classical fact recorded with its source in the reference list. The $p=1$ surjectivity is Gagliardo's Teorema [1.II] as reproved by Mironescu, and the absence of a bounded linear right inverse at $p=1$ is Peetre's theorem as quoted by Hajlasz and Martio. The outward-cusp limitation is documented by Zuppa and by the weighted-space literature he cites. No proof is supplied for the attributed endpoint facts, and no choice principle beyond the cited interfaces is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "Teorema [1.II] and no. 4, printed pp. 290 and 300-305: for $p=1$ the traces are exactly the summable boundary functions, and the $p=1$ range is not described by the $p>1$ space."
+            },
+            {
+              "title": "Petru Mironescu, Note on Gagliardo's theorem (fetch-verified Internet Archive capture of HAL hal-01131162v1), Annals of the University of Bucharest (Mathematical Series) 6 (LXIV) (2015), no. 1, 99-103",
+              "url": "https://web.archive.org/web/20240206144914id_/https://hal.science/hal-01131162/document",
+              "locator": "Abstract and Section 1, printed pp. 99-101: a complete proof that every $L^1$ function is the trace of a $W^{1,1}$ function on the half-space."
+            },
+            {
+              "title": "Piotr Hajlasz and Olli Martio, Traces of Sobolev functions on fractal type sets and characterization of extension domains, Journal of Functional Analysis 143 (1997), 221-246",
+              "url": "https://sites.pitt.edu/~hajlasz/OriginalPublications/HajlaszM-Traces-JFunctAnal-143-1997-221-246.pdf",
+              "locator": "Remarks after Theorem 10, part (4), printed p. 243: for $p=1$ the trace is onto $L^1$ but there is no bounded linear extension $L^1\\to W^{1,1}$, after Peetre."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3, Section 3.9, printed p. 73: for $p=1$ the trace is onto $L^1$; for $1<p<\\infty$ the range is a Besov space."
+            },
+            {
+              "title": "Carlos Zuppa, A compact trace theorem for domains with external cusps, Revista de la Union Matematica Argentina 50 (2009), no. 1",
+              "url": "https://www.scielo.org.ar/scielo.php?script=sci_arttext&pid=S0041-69322009000100003",
+              "locator": "Abstract and Section 1 (Condition A1, Theorems 2 and 4, Corollary 5): weighted estimates on external cusps and compactness under the stated below-threshold Condition A1."
+            }
+          ]
+        },
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 458.024,
+    "id": "sobolev-traces-and-zero-boundary-values-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Sobolev Traces and Zero Boundary Values \u2014 Examples",
+    "companion": "sobolev-traces-and-zero-boundary-values",
+    "requires": [
+      "sobolev-traces-and-zero-boundary-values",
+      "poisson-problems-and-interior-harmonic-estimates"
+    ],
+    "items": [
+      {
+        "id": "ex-trace-of-an-ac-sobolev-function-on-an-interval",
+        "kind": "example",
+        "title": "The trace of a one-dimensional Sobolev function is the pair of endpoint values",
+        "deps": [
+          "lem-one-dimensional-sobolev-endpoint-estimate",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-acl-characterisation-of-w-one-p",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "lem-compact-support-zero-extension-in-wkp",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "thm-holder-inequality-for-integrals",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $I=(a,b)$ be a bounded interval, $1\\le p<\\infty$\nand $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Identify the boundary\n$\\partial I=\\{a,b\\}$ with its counting measure, so that\n$L^p(\\partial I;\\mathbb K)=\\mathbb K^2$ with the norm\n$(|z_a|^p+|z_b|^p)^{1/p}$. For $u\\in W^{1,p}(I;\\mathbb K)$ let $u^*$ be its\nunique absolutely continuous representative\n([[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]])\nand define the **trace**\n$$Tu:=\\bigl(u^*(a),u^*(b)\\bigr)\\in\\mathbb K^2.$$\nThen $T:W^{1,p}(I;\\mathbb K)\\to\\mathbb K^2$ is a well-defined linear bounded\noperator depending only on the class of $u$; and\n$$u\\in W_0^{1,p}(I;\\mathbb K)\\quad\\Longleftrightarrow\\quad Tu=(0,0),$$\nwhere $W_0^{1,p}(I)$ is the $W^{1,p}$-closure of $C_c^\\infty(I)$\n([[def-wkp-zero-as-a-sobolev-closure]]). On $I=(0,1)$ the function\n$u(x)=x(1-x)$ has $u^*=u$, $Tu=(0,0)$ and lies in $W_0^{1,p}(0,1)$, while\n$u\\equiv1$ has $Tu=(1,1)\\ne0$ and lies outside $W_0^{1,p}(0,1)$.",
+        "strategy": "Bound the endpoint pair using the AC representative. For vanishing endpoints choose cutoffs with interior support and control their derivative error by the local integral of |u prime|^p. Zero extension and smooth approximation with tolerance adjusted to the multiplier norm yield tests. Trace continuity gives the converse.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 9.2, Theorem 9.18 and Corollary 9.19 with $n=1$: classical restriction extends to the two-point boundary, printed pp. 208-210."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3, Section 3.9, printed p. 73: in one dimension the trace is evaluated along the boundary and equals the absolutely continuous representative's endpoint values."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Section 3.7, the one-dimensional case of Theorem 3.14 and Corollary 3.15, printed pp. 62-64."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-trace-of-an-affine-function-on-a-ball",
+        "kind": "example",
+        "title": "The trace of an affine function on a ball is its classical restriction",
+        "deps": [
+          "lem-sobolev-trace-agrees-with-continuous-boundary-values",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "thm-sharp-trace-theorem-for-w-one-p",
+          "def-fractional-sobolev-space-on-a-compact-c-one-boundary",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "def-countable-choice",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $\\Omega=B_R(0)\\subset\\mathbb R^n$, $n\\ge2$, $1\\le p<\\infty$, $c\\in\\mathbb R^n$, $d\\in\\mathbb K$, and $u(x)=c\\cdot x+d$. Then $u\\in C^\\infty(\\overline\\Omega)\\cap W^{1,p}(\\Omega)$ and, by [[lem-sobolev-trace-agrees-with-continuous-boundary-values]], $Tu=(c\\cdot x+d)|_{\\partial\\Omega}$; moreover $Tu\\in W^{1-1/p,p}(\\partial\\Omega)$ with $\\|Tu\\|_{W^{1-1/p,p}(\\partial\\Omega)}\\le C(R,n,p)(|c|R+|d|)$ by [[thm-sharp-trace-theorem-for-w-one-p]]. On the circle $\\partial B_R(0)$, $\\|Tu\\|_{L^p(\\partial\\Omega)}^p=R^{n-1}\\int_{S^{n-1}}|c\\cdot R\\omega+d|^p d\\sigma(\\omega)$, which is the classical surface integral of [[def-surface-integral-on-a-compact-c-one-hypersurface]].",
+        "strategy": "The function is smooth up to the compact boundary, so its trace is its classical restriction by [[lem-sobolev-trace-agrees-with-continuous-boundary-values]] and its tangential derivatives are bounded by $|c|$; the fractional membership follows from [[thm-sharp-trace-theorem-for-w-one-p]] applied to the constant control $\\|u\\|_{W^{1,p}(B_R)}\\le C(R,n,p)(|c|R+|d|)$. The displayed $L^p$ value is the chart-integral formula for the sphere. The Axiom of Choice is carried by the trace interface used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 9.2, Theorem 9.18 statement, printed p. 209: $Tf=f|_{\\partial U}$ for continuous functions."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Section 3.7, Theorem 3.14, printed pp. 62-64: classical boundary values of continuous Sobolev functions."
+            },
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "Teorema [1.I], printed p. 289: the inverse estimate for traces of functions with controlled $W^{1,p}$ norm."
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "cex-boundary-point-values-are-not-defined-by-an-lp-class",
+        "kind": "counterexample",
+        "title": "Boundary point values are not a function of the interior $L^p$ class",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "lem-sobolev-trace-agrees-with-continuous-boundary-values",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. The following two claims are false. (1) On a bounded\n$C^1$ domain $\\Omega$, boundary values are a function of the interior class:\nfor every $L^p(\\Omega)$ class the pointwise boundary values of a\nrepresentative are determined by the class, so that classical restriction\nwould descend to $L^p(\\Omega)$. (2) Every $L^p(\\Omega)$ class is bounded near\n$\\partial\\Omega$, so that pointwise evaluation on $\\partial\\Omega$ could be\nrecovered from the interior class. In fact two functions with the same\ninterior class can have different classical boundary restrictions, and a\nsingle $L^2$ class can be unbounded on every neighbourhood of the boundary;\nthe Sobolev trace is defined on $W^{1,p}$ classes and does not assign a\ntrace to every $L^p$ class.",
+        "strategy": "The coincidence of the two classes is the definition of $L^p$ as a quotient by null functions ([[def-l-p-space-as-a-quotient-by-null-functions]]) and the fact that $\\partial\\Omega$ is a Lebesgue-null set with empty interior. The classical restrictions differ at every boundary point, since $\\tilde f|_{\\partial\\Omega}\\equiv1$. The trace of both classes vanishes because the defining clause of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]] gives $T$ applied to the continuous function $0$. The unbounded example is the standard $L^2$ function $(1-|x|)^{-1/4}$ on the unit ball, whose $L^2$ norm is finite while no neighbourhood of $\\partial\\Omega$ has a finite essential bound. No choice beyond Countable Choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Section 3.7, the opening example $(1-|x|)^{-1/4}\\in L^2(B)$ with infinite boundary values, printed p. 62."
+            },
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 9.2, Problems 9.19 and 9.22, printed p. 211: classical restriction on continuous functions is unbounded with respect to the $L^p(U)$ norm, so boundary values cannot be recovered from an $L^p$ class."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3, Section 3.9, printed pp. 71-72: the sequence $\\varphi_\\varepsilon(x)=e^{-x^2/\\varepsilon}$ with $\\|\\varphi_\\varepsilon\\|_{L^1}\\to0$ but $\\varphi_\\varepsilon(0)=1$."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-lp-boundary-data-need-not-lie-in-the-h-one-trace-range",
+        "kind": "counterexample",
+        "title": "A jump boundary datum is outside the trace range for $p\\ge2$",
+        "deps": [
+          "thm-sharp-trace-theorem-for-w-one-p",
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "def-fractional-sobolev-space-on-a-compact-c-one-boundary",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "lem-fractional-boundary-norm-is-independent-of-atlas"
+        ],
+        "statement": "Assume the Axiom of Choice. The claim that for $p\\ge2$ every boundary datum\n$g\\in L^p(\\partial\\Omega)$ on a bounded $C^1$ domain $\\Omega\\subset\\mathbb R^2$\nis the trace of some $u\\in W^{1,p}(\\Omega)$ is false. Let a boundary chart\ncontaining the closed straight segment $[0,1]$ strictly inside its patch be given and let $g=\\mathbf 1_{(0,1)}$\nbe the jump function on that segment, extended by zero. Then\n$g\\in L^p(\\partial\\Omega)$ for every $p$, but for every $2\\le p<\\infty$ one has\n$g\\notin W^{1-1/p,p}(\\partial\\Omega)$: the chart computation gives a divergent\nSlobodeckij seminorm, and by\n[[thm-sharp-trace-theorem-for-w-one-p]] no $u\\in W^{1,p}(\\Omega)$ has $Tu=g$.\nIn particular the Dirichlet datum is not arbitrary in $L^p(\\partial\\Omega)$,\nand the trace range depends on $p$: for $1<p<2$ the same jump function does\nbelong to $W^{1-1/p,p}(\\partial\\Omega)$ because $1-1/p<1/p$.",
+        "strategy": "Integrate both outside half-lines for the indicator of (0,1), obtaining (4/(p theta))\u222b_0^1 x^(-p theta)dx. Put the closed segment strictly inside a straight chart and transfer by cutoffs and atlas equivalence. The threshold p theta=p-1=1 separates finite and divergent seminorms.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3, Section 3.9, printed p. 73: for $1<p<\\infty$ the trace range is the Besov space $B^{1-1/p,p}$, which is not all of $L^p$."
+            },
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "Teorema [1.I], printed p. 289: the necessary and sufficient condition identifies the trace class with a strict subspace of $L^p(\\Gamma)$ for $p>1$."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter V, Section V.2, printed pp. 97-98: the boundary space has $1-1/p$ derivatives; $L^p$ boundary data are not automatically in it."
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-zero-trace-versus-zero-extension",
+        "kind": "example",
+        "title": "Zero trace, zero boundary values and zero extension agree on an interval",
+        "deps": [
+          "ex-trace-of-an-ac-sobolev-function-on-an-interval",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-acl-characterisation-of-w-one-p",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $I=(0,1)$, $1\\le p<\\infty$ and\n$u\\in W^{1,p}(I;\\mathbb K)$ with absolutely continuous representative $u^*$\n([[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]]),\nand let $T$ be the endpoint-pair trace of\n[[ex-trace-of-an-ac-sobolev-function-on-an-interval]]. The following four\nstatements are equivalent:\n\n(i) $Tu=0$;\n\n(ii) $u^*(0)=u^*(1)=0$;\n\n(iii) $u\\in W_0^{1,p}(I;\\mathbb K)$, the $W^{1,p}$-closure of\n$C_c^\\infty(I)$ ([[def-wkp-zero-as-a-sobolev-closure]]);\n\n(iv) the extension of $u$ by zero outside $I$ belongs to\n$W^{1,p}(\\mathbb R;\\mathbb K)$.\n\nFor $u(x)=x(1-x)$ all four hold: the zero extension is the continuous function\nequal to $x(1-x)$ on $[0,1]$ and to $0$ outside, with weak derivative $1-2x$ on\n$(0,1)$ and $0$ outside. For $u\\equiv1$ all four fail: $Tu=(1,1)\\ne0$, and the\nzero extension cannot belong to $W^{1,p}(\\mathbb R)$ by the implication proved\nin step 1.2 below.",
+        "strategy": "(i)$\\Leftrightarrow$(ii) is the one-dimensional trace identification of [[ex-trace-of-an-ac-sobolev-function-on-an-interval]]. (ii)$\\Leftrightarrow$(iv): the zero extension is absolutely continuous across the endpoints exactly when both endpoint values vanish, and then its derivative is the zero extension of $u'$, so the ACL characterisation [[thm-acl-characterisation-of-w-one-p]] gives membership in $W^{1,p}(\\mathbb R)$. (ii)$\\Rightarrow$(iii): cut off $u$ by a fixed interior cutoff $\\eta_\\delta$ equal to one on $[\\delta,1-\\delta]$; the endpoint vanishing gives $\\|u(1-\\eta_\\delta)\\|_{W^{1,p}(I)}\\to0$ because $|u(x)|\\le x^{1-1/p}\\|u'\\|_{L^p}$ near an endpoint, and the compactly supported pieces are approximated by test functions using [[lem-compact-support-zero-extension-in-wkp]] and mollification. (iii)$\\Rightarrow$(ii): test functions have both endpoint values zero and the endpoint pairing is continuous, so the property passes to the closure. The two concrete functions are checked by direct differentiation: $x(1-x)$ vanishes at both endpoints, while $\\mathbf 1_{(0,1)}$ has the displayed Dirac derivative by integration by parts against test functions (the companion PDE-12 counterexample records the computation). Countable Choice is carried by the ACL and extension interfaces.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Partial Differential Equations: From Classical to Modern (archived 2025 author manuscript)",
+              "url": "https://web.archive.org/web/20250324094647id_/https://www.mat.univie.ac.at/~gerald/ftp/book-pde/pde.pdf",
+              "locator": "Section 9.2, Lemma 9.21 and Problem 9.16, printed pp. 210-211: kernel of the trace equals $W^{1,p}_0$ and zero extension of $W^{1,p}_0$ classes."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (University of Illinois, complete 158-page graduate notes)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Chapter 3, Section 3.7, Corollary 3.15, printed p. 64: zero trace if and only if $W^{1,p}_0$."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (revised 18 June 2014, UC Davis, complete 242-page two-quarter notes)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Chapter 3, Section 3.9, Theorem 3.44, printed p. 72: the half-space case $Tf=0\\Leftrightarrow f\\in W^{k,p}_0$."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-trace-theorem-fails-on-a-standard-outward-cusp-without-domain-control",
+        "kind": "counterexample",
+        "title": "The trace estimate fails on an outward cusp above the critical sharpness",
+        "deps": [
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "def-bounded-linear-operator",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice. Let $1\\le p<\\infty$, let $\\alpha>p$, and put\n$$\\Omega_\\alpha:=\\{(x,y)\\in\\mathbb R^2:0<y<1,\\ |x|<y^\\alpha\\},$$\na bounded open set with an outward cusp at the origin whose boundary consists\nof the two $C^1$ arcs $x=\\pm y^\\alpha$ ($0<y<1$), the cusp point $(0,0)$, and the top segment\n$y=1$, $|x|\\le1$, and which carries finite surface measure. Then there is no\nbounded linear operator $S:W^{1,p}(\\Omega_\\alpha)\\to L^p(\\partial\\Omega_\\alpha)$\nthat agrees with classical restriction on $C^1(\\overline\\Omega_\\alpha)$: for\n$\\theta\\in C_c^\\infty(\\mathbb R)$ with $\\theta\\equiv1$ on $[-1,1]$ and\n$\\theta\\equiv0$ on $[2,\\infty)$ and $u_\\delta(x,y):=\\theta(y/\\delta)$ one has\n$u_\\delta\\in W^{1,p}(\\Omega_\\alpha)$ with\n$\\|u_\\delta\\|_{W^{1,p}(\\Omega_\\alpha)}^p\\le C\\,\\delta^{\\alpha+1-p}$ and\n$\\|u_\\delta|_{\\partial\\Omega_\\alpha}\\|_{L^p(\\partial\\Omega_\\alpha)}^p\\ge2\\delta$,\nso the ratio\n$\\|u_\\delta|_{\\partial\\Omega_\\alpha}\\|/\\|u_\\delta\\|_{W^{1,p}}$ diverges like\n$\\delta^{(p-\\alpha)/p}\\to\\infty$ as $\\delta\\downarrow0$. Consequently the\nhypothesis that $\\Omega$ is a bounded $C^1$ domain in the uniform graph sense\nof [[thm-lp-trace-operator-on-a-bounded-c-one-domain]] cannot be relaxed to\narbitrary bounded open sets whose boundary pieces are merely $C^1$ curves;\nthis witness refutes the unweighted estimate and asserts no weighted replacement theorem.",
+        "strategy": "For u_delta=theta(y/delta), compute interior norm power comparable to delta^(alpha+1-p) and regular-arc boundary norm power comparable to delta. A nonzero derivative subinterval gives the interior lower bound. The ratio delta^((p-alpha)/p) diverges for alpha>p, contradicting any bounded restriction extension. The cusp point needs no regular surface chart; no weighted replacement is asserted.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carlos Zuppa, A compact trace theorem for domains with external cusps, Revista de la Union Matematica Argentina 50 (2009), no. 1",
+              "url": "https://www.scielo.org.ar/scielo.php?script=sci_arttext&pid=S0041-69322009000100003",
+              "locator": "Abstract and Section 1 (Definition 1, Condition A1, Theorems 2 and 4, Corollary 5): weighted estimates on external cusps and compactness under the stated below-threshold Condition A1."
+            },
+            {
+              "title": "Emilio Gagliardo, Caratterizzazioni delle tracce sulla frontiera relative ad alcune classi di funzioni in $n$ variabili, Rend. Sem. Mat. Univ. Padova 27 (1957), 284-305",
+              "url": "https://www.numdam.org/item/RSMUP_1957__27__284_0.pdf",
+              "locator": "Teorema [1.I], printed pp. 288-290: the trace equivalence is stated for domains with uniformly Lipschitz local coordinate systems, the hypothesis that fails at an outward cusp."
+            },
+            {
+              "title": "Piotr Hajlasz and Olli Martio, Traces of Sobolev functions on fractal type sets and characterization of extension domains, Journal of Functional Analysis 143 (1997), 221-246",
+              "url": "https://sites.pitt.edu/~hajlasz/OriginalPublications/HajlaszM-Traces-JFunctAnal-143-1997-221-246.pdf",
+              "locator": "Section 2 and the remarks on domains with the $A(c)$ property, printed pp. 224-229: traces on non-Lipschitz sets require additional structure beyond the Euclidean boundary measure."
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-a-right-inverse-in-the-half-space-by-poisson-type-extension",
+        "kind": "example",
+        "title": "A Poisson-type extension and its local and global Sobolev traces",
+        "deps": [
+          "thm-trace-estimate-on-the-half-space",
+          "lem-sobolev-trace-agrees-with-continuous-boundary-values",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "thm-bounded-right-inverse-for-the-sobolev-trace",
+          "thm-fourier-inversion-on-schwartz-space",
+          "thm-plancherel",
+          "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "def-fourier-transform-on-l-one-of-rn",
+          "thm-poisson-kernel-and-bounded-dirichlet-problem-on-the-half-space",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-dominated-convergence",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "thm-l-one-l-two-agreement-of-fourier-transform"
+        ],
+        "statement": "Assume the Axiom of Choice, let $d\\ge1$ and use the $2\\pi$-normalised Fourier\ntransform. For $g\\in C_c^\\infty(\\mathbb R^d;\\mathbb K)$ define\n$$U(x,t):=\\int_{\\mathbb R^d}e^{2\\pi ix\\cdot\\xi}e^{-2\\pi t|\\xi|}\\widehat g(\\xi)\\,d\\xi,\\qquad x\\in\\mathbb R^d,\\ t\\ge0.$$\nThen $U$ is smooth on $\\mathbb R^d\\times[0,\\infty)$, bounded and harmonic on\n$H=\\mathbb R^d\\times(0,\\infty)$, extends the datum with $U(\\cdot,0)=g$, and\n$\\nabla U\\in L^2(H)$ with\n$$\\|\\nabla U\\|_{L^2(H)}^2=2\\pi\\int_{\\mathbb R^d}|\\xi|\\,|\\widehat g(\\xi)|^2\\,d\\xi<\\infty.$$\nThe classical boundary value is realised by the trace in two forms. (i) For\nevery $R>0$, choose $\\kappa_R\\in C_c^\\infty(\\mathbb R^d)$ equal to one on\n$B_R(0)$ and a smooth compact normal cutoff $\\eta$ equal to one near zero.\nThen $V_R(x,t)=\\kappa_R(x)\\eta(t)U(x,t)$ belongs to $W^{1,2}(H)$, is\ncontinuous with compact support in $\\overline H$, and\n$T_+V_R=\\kappa_Rg$, giving the boundary value on $B_R(0)$.\n(ii) If in\naddition $U\\in L^2(H)$ \u2014 which holds for every $g$ when $d\\ge2$, and for\n$d=1$ exactly when $\\int_{\\mathbb R}g=0$ \u2014 then $U\\in W^{1,2}(H)$ and\n$T_+U=g$ for the flat trace $T_+$ of\n[[thm-trace-estimate-on-the-half-space]]. For $d=1$ with\n$\\int_{\\mathbb R}g\\ne0$ one has $U\\notin L^2(H)$, so the half-space trace is\nnot defined on $U$ and (i) is the correct local form of the identity. This\nexhibits a Poisson-type right inverse of the half-space trace for smooth data satisfying the stated $L^2$ condition; the cutoff form\ngives a local lift for every smooth datum. It is an illustration only: it does not prove the general-$p$ right\ninverse of [[thm-bounded-right-inverse-for-the-sobolev-trace]].",
+        "strategy": "Differentiate the Fourier integral using Schwartz decay. Apply integral/L2 agreement and Plancherel to the L1\u2229L2 derivative symbols, sum and integrate to obtain 2 pi\u222b|xi||g hat|^2. Compact spatial/normal cutoffs give local traces. The global L2 norm equals (4 pi)^(-1)\u222b|g hat|^2/|xi|, finite for d\u22652 or d=1 with zero mean; under that condition cutoff convergence yields the global trace.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Armin Schikorra, Partial Differential Equations (University of Pittsburgh, version 4 December 2019)",
+              "url": "https://sites.pitt.edu/~armin/pde1_2019/pde_script.pdf",
+              "locator": "Chapter V, Section V.2, printed pp. 98-100: the harmonic extension of a boundary function and the identity $\\|DU\\|_{L^2}^2=\\|(-\\Delta)^{1/4}u\\|_{L^2}^2$ via Plancherel."
+            },
+            {
+              "title": "Maria Kampanou, Trace Theorems for Sobolev Spaces (master's thesis, National and Kapodistrian University of Athens, July 2018)",
+              "url": "https://pergamos.lib.uoa.gr/uoa/dl/object/2864871/file.pdf",
+              "locator": "Chapter 3, Theorem 3.3, printed pp. 23-26: an explicit scaled-kernel right inverse of the half-space trace; the Poisson kernel is the $p=2$ smooth model."
+            },
+            {
+              "title": "Petru Mironescu, Note on Gagliardo's theorem (fetch-verified Internet Archive capture of HAL hal-01131162v1), Annals of the University of Bucharest (Mathematical Series) 6 (LXIV) (2015), no. 1, 99-103",
+              "url": "https://web.archive.org/web/20240206144914id_/https://hal.science/hal-01131162/document",
+              "locator": "Section 1, printed pp. 99-101: the explicit construction in the endpoint case $p=1$, showing that the lift is a convolution against a scaled kernel rather than a pointwise formula."
+            }
+          ]
+        },
+        "dependency_level": 7
+      }
+    ]
+  }
+]

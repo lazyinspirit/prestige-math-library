@@ -1,0 +1,1710 @@
+{
+  "version": 1,
+  "level": "frontier-38-owner-30",
+  "scope": [
+    "def-dualizing-complex-on-projective-cm-scheme",
+    "lem-finite-closed-immersion-derived-coinduction-adjunction",
+    "lem-regular-quotient-dualizing-complex-and-biduality",
+    "lem-cm-quotient-of-regular-local-ring-ext-concentration",
+    "lem-projective-embedding-dualizing-complex-existence",
+    "lem-projective-space-derived-coherent-duality",
+    "lem-projective-dualizing-complex-trace-and-embedding-independence",
+    "lem-projective-pure-cm-dualizing-complex-concentration",
+    "thm-serre-duality-for-coherent-sheaves-on-projective-cm-scheme",
+    "rem-smooth-projective-locally-free-duality-is-the-ag-lie-special-case",
+    "rem-curve-residue-duality-is-the-dimension-one-case",
+    "ex-serre-duality-on-a-singular-projective-cm-curve",
+    "ex-serre-duality-on-a-smooth-projective-surface",
+    "cex-serre-duality-without-properness"
+  ],
+  "contracts": {
+    "def-dualizing-complex-on-projective-cm-scheme": {
+      "citations": [],
+      "derivations": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition names one scheme X, one complex, one trace and one integer d; it quantifies over no family, cover or index set. On the empty scheme the local conditions are vacuous and the zero complex satisfies them, so no separate empty-case obligation is created."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero complex is a dualizing complex exactly on the empty scheme: on a nonempty X the homothety map B -> RHom_B(0,0) = 0 is not an isomorphism. The definition has no proof obligation, and the zero sheaf is mentioned only through omega_X = H^{-d}(D_X)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No rank-one or cardinality-one claim is made: invertibility of omega_X is explicitly not asserted, and the definition records that a dualizing sheaf on a singular CM scheme need not be a line bundle."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition admits non-reduced, reducible and singular schemes; pure dimension is a hypothesis only of the final normalized-sheaf sentence, and the definition attaches no special behaviour to degenerate local rings."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no threshold or inequality: the shift convention H^a(K[b]) = H^{a+b}(K) is fixed for all integers b and a, and the local conditions are degree-free."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition postulates D_X and t_X rather than constructing them, and its conditions are isomorphism statements; no selection from nonempty sets occurs, so no Choice use is asserted here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states a conjunction of properties, not a biconditional to be proved in two directions; the evaluation isomorphisms are part of what a normalization is."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed: an arbitrary dualizing complex is not asserted unique or normalized, which the definition states by separating the local conditions from the normalized representation."
+        }
+      ],
+      "routine_steps": []
+    },
+    "lem-finite-closed-immersion-derived-coinduction-adjunction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ringed-space-module-sheaves-enough-injectives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, and let $(X,\\mathcal O_X)$ be a ringed space. Then\nthe abelian category $\\mathrm{Mod}(\\mathcal O_X)$ of $\\mathcal O_X$-modules has\nenough injectives: every $\\mathcal O_X$-module embeds into an injective\n$\\mathcal O_X$-module, and the functorial injective embedding supplied by the\nGrothendieck injective-embedding theorem for Grothendieck categories supplies,\nby iteration of cokernels, one specific injective resolution\n$$0\\to\\mathcal F\\to I^0(\\mathcal F)\\to I^1(\\mathcal F)\\to\\cdots$$\nto each $\\mathcal O_X$-module $\\mathcal F$ with no further selection\n([[def-injective-resolution-in-an-abelian-category]]). The Axiom of Choice\nenters exactly through that embedding theorem applied to\n$\\mathrm{Mod}(\\mathcal O_X)$; the category-theoretic verification below is\nchoice-free.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ext-is-hom-in-the-derived-category",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice. Let $M,N$ be objects of an abelian category and $n\\geq0$. With enough projectives and supplied projective resolutions, or with enough injectives and supplied injective resolutions, there is a natural isomorphism $\\operatorname{Ext}^n(M,N)\\cong\\operatorname{Hom}_{D(\\mathcal A)}(M[0],N[n])$. The Ext group is the classical construction relative to the supplied data. Either resolution hypothesis suffices; when both apply the two comparisons agree through the mixed Hom complex.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-bounded-below-complexes-admit-injective-replacements",
+          "source_section": "Statement",
+          "quote": "If $\\mathcal A$ has enough injectives and $X^n=0$ for $n<a$, there is a termwise monic quasi-isomorphism $j:X\\to I$ with each $I^n$ injective and $I^n=0$ for $n<a$. Assume DC for the successive objectwise choices, or supply the successive injective monomorphisms. If only $H^n(X)=0$ for $n<a$, a quasi-isomorphism to such an $I$ still exists, without the termwise-monic assertion.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-a-bounded-below-complex-of-injectives-is-homotopically-injective",
+          "source_section": "Statement",
+          "quote": "A bounded-below cochain complex $I$ of injective objects is K-injective. Assume dependent choice for the countable successive homotopy extensions, or supply those extensions as data.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-flasque-sheaves-acyclic",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, let $X$ be a topological space and let\n$\\mathcal F$ be a flasque sheaf of abelian groups on $X$\n([[def-flasque-sheaf]]). Then for every open subspace $U\\subseteq X$ and every\ninteger $q>0$,\n$$H^q(U,\\mathcal F|_U)=0,$$\nwhere $H^q(U,-)$ denotes sheaf cohomology on the space $U$\n([[def-sheaf-cohomology-derived-global-sections]]) computed with the global\nsections functor of $U$, and $\\mathcal F|_U$ is the restriction of $\\mathcal F$\nto $U$. Equivalently, every restriction $\\mathcal F|_U$ is $\\Gamma$-acyclic\n([[def-acyclic-sheaf-global-sections]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-extension-by-zero-adjunction-exactness",
+          "source_section": "Statement",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace.\n\n1. For every sheaf of abelian groups $\\mathcal F$ on $U$ and every sheaf of\n   abelian groups $\\mathcal G$ on $X$, there is a natural bijection\n   $$\\operatorname{Hom}_X(j_!\\mathcal F,\\mathcal G) \\cong \\operatorname{Hom}_U(\\mathcal F,j^{-1}\\mathcal G).$$\n2. The functor $j_!$ is exact on sheaves of abelian groups.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-closed-immersion-cohomology-pushforward",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $i:Z\\to X$ be a\nclosed immersion of schemes ([[def-closed-immersion-schemes]]) and let\n$\\mathcal F$ be a quasi-coherent $\\mathcal O_Z$-module\n([[def-quasi-coherent-module-scheme]]), with direct image $i_*\\mathcal F$\n([[def-direct-image-sheaf]], [[lem-direct-image-is-sheaf]]). Then for every\n$q\\ge0$ there is a canonical isomorphism\n$$H^q(Z,\\mathcal F)\\;\\cong\\;H^q(X,i_*\\mathcal F),$$\nwhere $H^q$ denotes sheaf cohomology\n([[def-sheaf-cohomology-derived-global-sections]]).\n\nIf in addition $X$ is locally Noetherian\n([[def-locally-noetherian-and-noetherian-scheme]]) and $\\mathcal F$ is\ncoherent ([[def-coherent-module-scheme]]), then $i_*\\mathcal F$ is a coherent\n$\\mathcal O_X$-module. The empty scheme, the zero module and the case\n$X=\\operatorname{Spec}A$ affine are included.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On rings the adjunction is explicit: a map $u:M\\to\\operatorname{Hom}_A(B,I)$ corresponds to $m\\mapsto u(m)(1)$, with inverse sending $v:M\\to I$ to $m\\mapsto(b\\mapsto v(bm))$. Restriction of scalars is exact, so its right adjoint sends injectives to injectives: applying $\\operatorname{Hom}_B(-,\\operatorname{Hom}_A(B,I))=\\operatorname{Hom}_A(-,I)$ to an exact sequence proves this directly. Resolve $G$ by a bounded below complex $I^\\bullet$ of injectives. Then $\\operatorname{Hom}_A(B,I^\\bullet)$ is bounded below and injective over $B$; the displayed degreewise Hom identity, including the usual total-complex signs, computes the derived adjunction. Bounded below injective complexes compute these derived Homs because maps from acyclic complexes are null-homotopic, constructed successively from the lowest nonzero target degree using injectivity. The adjunction is natural in both arguments.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a closed immersion, $i_*$ is exact on all module sheaves: at a point of $X$ its stalk is the original stalk, and outside $X$ the stalk vanishes. Its right adjoint is $i^bI=i^{-1}\\mathcal Hom_Y(i_*\\mathcal O_X,I)$, by the same evaluation formula, and the ideal defining $X$ annihilates this Hom. Since $i_*$ is exact and $i^b$ is its right adjoint, $i^b$ sends injectives to injectives: for injective $I$ the functor $\\operatorname{Hom}_{\\mathcal O_X}(-,i^bI)\\cong\\operatorname{Hom}_{\\mathcal O_Y}(i_*-,I)$ is a composition of the exact functor $i_*$ with the exact functor $\\operatorname{Hom}_{\\mathcal O_Y}(-,I)$. Restrictions of an injective module sheaf to an open subset remain injective, since extension by zero is exact and left adjoint to restriction. Applying the ringed-space adjunction on every open subset gives the internal Hom identity; applying it on all of $Y$ gives the global Hom identity. Injective resolutions now give the stated derived identities, and their counit is evaluation at $1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Extension by zero along a closed subset preserves flasque sheaves and is exact. Computing sheaf cohomology by flasque resolutions therefore identifies $R\\Gamma(Y,i_*K)$ with $R\\Gamma(X,K)$, first for sheaves and then for bounded complexes by totalizing their resolutions; this is the closed-immersion cohomology comparison of [F1], and the coherence of $i_*M$ for coherent $M$ is the same comparison read on an affine chart. AC enters through the resolution data; the adjunction formulas themselves involve no selections.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "construct"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The closed immersion may have X empty: then i_* is the zero functor, i^!G = 0, and the stalkwise exactness argument of step 2.1 is vacuous; step 3.1 reads RGamma(Y,0) = 0 = RGamma(X,0). No step assumes X nonempty, and the empty module case of step 1.1 is the zero object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For G = 0 both f^!G and the right-hand sides vanish, and the degreewise evaluation isomorphism of step 1.1 is the zero map between zero Hom complexes; the zero ideal case of step 2.1 (X = Y as closed subschemes) gives i^b = id."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The unit instance is evaluation at 1: in step 1.1 a map u: M -> Hom_A(B,I) is sent to m -> u(m)(1) with the explicit inverse, and step 2.1 records that the counit is evaluation at 1 in i_*O_X."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degenerate immersions are covered: if X = Y with ideal (0), i_* is the identity, i^b = id and the adjunction reduces to the identity; at points outside X the stalk of i_* vanishes, which is exactly the case handled by the stalk computation of step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The boundedness endpoints are handled explicitly: G in D^+ is replaced by a bounded-below injective complex in step 1.1, and the null-homotopy construction proceeds from its lowest nonzero target degree, so no claim is made for unbounded replacements."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC enters exactly through the injective resolutions and replacements of [F1] and the successive homotopy extensions of step 1.1, as the final sentence of step 3.1 records; the adjunction formulas themselves introduce no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction is the evaluation map m -> u(m)(1) of step 1.1, which the same step uses to identify Hom_B(-, Hom_A(B,I)) with Hom_A(-, I) and hence to show i^b preserves injectives."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction is the displayed inverse v -> (m -> (b -> v(bm))) of step 1.1, and step 2.1 applies the same evaluation formula on every open subset and on all of Y, giving both the internal and the global Hom identities."
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-28",
+        "notes": "Checked Proof 1.1\u20133.1 and every cited supplier statement: evaluation at 1 and b-action give the two inverse adjunction maps; exact restriction/i_* implies injective coinduction, with bounded-below K-injectives computing both Hom complexes. Open restriction preserves injectives by exact extension by zero (the same stalk construction carries the module action). Internal Hom is checked on opens; closed pushforward preserves flasques, so global sections agree. Zero module, empty closed immersion and identity map give the expected zero/identity comparisons. AC covers DC and supplied resolutions. Stacks 0A70 and 08XR Statements/Proofs independently confirm ring adjunction and injectivity; no derived full-faithfulness is claimed. No defect found."
+      }
+    },
+    "lem-regular-quotient-dualizing-complex-and-biduality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-localisation-and-polynomial-extension-of-regular-rings",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Localizations and finite polynomial extensions of a commutative regular Noetherian ring are regular. Regularity can equivalently be tested at maximal ideals. For every nonzero such ring, $\\operatorname{gldim}R=\\dim R$, allowing infinity. More generally, for a finite module over any commutative Noetherian ring, projective dimension is the supremum of its prime-local projective dimensions. Dedekind domains and their finite polynomial extensions are regular.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-global-dimension-is-detected-on-cyclic-modules",
+          "source_section": "Statement",
+          "quote": "For a unital ring $R$, its left global dimension equals $\\sup_I\\operatorname{pd}_R(R/I)$ over all left ideals $I$, and equals the supremum of the injective dimensions of all left modules. The equalities allow infinity; in the commutative Noetherian case the cyclic modules are finite.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-closed-immersion-derived-coinduction-adjunction",
+          "source_section": "Statement",
+          "quote": "Assume AC. For a finite homomorphism $A\\to B$ of Noetherian rings and $G\\in D^+(A)$, the complex $f^!G=R\\operatorname{Hom}_A(B,G)$ has its natural $B$-action and is right adjoint to restriction of scalars. For $M\\in D^b(B)$ there is a natural isomorphism\n$$R\\operatorname{Hom}_B(M,f^!G)\\cong R\\operatorname{Hom}_A(M,G).$$\nFor a closed immersion $i:X\\hookrightarrow Y$ of Noetherian schemes and $G\\in D^+(\\mathcal O_Y)$, set $i^!G=i^{-1}\\mathcal R\\!Hom_Y(i_*\\mathcal O_X,G)$ with its $\\mathcal O_X$-action. The analogous internal and global derived Hom adjunctions hold:\n$$i_*\\mathcal R\\!Hom_X(M,i^!G)\\cong\\mathcal R\\!Hom_Y(i_*M,G),\\qquad R\\operatorname{Hom}_X(M,i^!G)\\cong R\\operatorname{Hom}_Y(i_*M,G).$$\nThe counit $i_*i^!G\\to G$ is evaluation at $1$. Also $R\\Gamma(Y,i_*K)=R\\Gamma(X,K)$ for bounded coherent $K$. This is the finite-map adjunction needed for a projective embedding; it does not assert full faithfulness of $i_*$ on derived categories.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-dualizing-complex-on-projective-cm-scheme",
+          "source_section": "Definition",
+          "quote": "A dualizing complex on a Noetherian scheme $X$ is an object $D_X\\in D^b_{\\mathrm{Coh}}(X)$ such that, locally on affine open neighborhoods $U=\\operatorname{Spec}B$, its corresponding complex has finite injective dimension over $B$ and the homothety map $B\\to R\\operatorname{Hom}_B(D_X|_U,D_X|_U)$ is an isomorphism. Here $D^b_{\\mathrm{Coh}}$ means bounded complexes with coherent cohomology, $\\mathcal R\\!Hom$ denotes derived internal Hom, and $\\operatorname{Ext}_X^r(M,N)=\\operatorname{Hom}_{D(X)}(M,N[r])$ is **global** Ext, rather than a sheaf Ext.\n\nFor a projective scheme over a field $k$, a normalization over $k$ consists of a dualizing complex $D_X$ and a trace $t_X:R\\Gamma(X,D_X)\\to k$ for which the evaluation map induces natural isomorphisms\n$$\\operatorname{Hom}_{D(X)}(K,D_X[r])\\cong \\operatorname{Hom}_k(H^{-r}(X,K),k)$$\nfor all $K\\in D^b_{\\mathrm{Coh}}(X)$ and $r\\in\\mathbb Z$. For a pure $d$-dimensional Cohen\u2013Macaulay scheme (every local ring has depth equal to dimension), the normalized dualizing sheaf is $\\omega_X=\\mathcal H^{-d}(D_X)$. The local constructions on this page prove existence and $D_X\\cong\\omega_X[d]$; concentration is a conclusion, rather than an additional definition. The shift convention is $H^a(K[b])=H^{a+b}(K)$. Pure dimension means every irreducible component has dimension $d$. A dualizing sheaf on a singular CM scheme need not be invertible.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every finite $A$-module has a bounded resolution by finite projective modules: finite generation of each kernel follows from Noetherianity, and the $n$th syzygy is projective by the global-dimension bound. Bounded complexes with finite cohomology are perfect as well, by truncation triangles and cones of such resolutions. For a bounded finite-projective complex $P$, the ordinary termwise map $P\\to\\operatorname{Hom}_A(\\operatorname{Hom}_A(P,L[s]),L[s])$ is an isomorphism of complexes with the signed evaluation convention: the two shifts and the two factors of $L$ cancel. Thus $R\\operatorname{Hom}_A(-,L[s])$ has coherent biduality.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $L$ has a bounded injective resolution $I^\\bullet$. Applying $\\operatorname{Hom}_A(B,-)$ gives a bounded complex of injective $B$-modules by [F2], representing $D_B$. Its cohomology is finite over $A$, since $B$ has a finite projective resolution, and the $B$-action makes it finite over $B$. For bounded finite $B$-cohomology, the adjunction identifies the underlying $A$-complex of $\\mathbb D_B(M)$ with $R\\operatorname{Hom}_A(M,L[s])$, so it too has bounded finite cohomology.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply that adjunction twice. The underlying $A$-complex of $\\mathbb D_B\\mathbb D_B(M)$ becomes the ambient double dual in step 1.1. Under these adjunctions the canonical $B$-evaluation becomes the ambient evaluation: both send an element $m$ to the functional $\\varphi\\mapsto\\varphi(m)$, followed by evaluation at $1\\in B$; resolving gives the same signed identity for complexes. It is therefore a quasi-isomorphism after forgetting the $B$-action, hence a quasi-isomorphism over $B$. At $M=B$, the identification $\\mathbb D_B(B)=D_B$ shows that $B\\to R\\operatorname{Hom}_B(D_B,D_B)$ is precisely the homothety isomorphism. Together with step 2.1 this proves all conditions in [F3] and biduality. Finite projective resolutions show that derived Hom and evaluation commute with localization, so the construction agrees on intersections of affine charts. AC is used in the ambient global-dimension and resolution suppliers.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The identity ideal I = 0 is allowed: then B = A and step 2.1 sends L to D_B = L[s], while step 1.1 supplies the ambient double-duality isomorphism; no empty family or cover is formed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "M = 0 gives D_B(0) = 0 and the evaluation 0 -> 0 is the identity, the zero instance of step 3.1; the shift s = 0 and the free case B = A are also included in steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "M = B is the rank-one instance: step 3.1 identifies D_B(B) = D_B and shows that B -> RHom_B(D_B, D_B) is precisely the homothety isomorphism, one of the defining conditions of [F3]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No Cohen-Macaulay, dimension or reducedness hypothesis is imposed on B, and I may be maximal (B a field), non-radical or zero; the proof uses only regularity of A, finiteness of the map and steps 1.1-3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The shift s ranges over all integers with no threshold: boundedness of D_B is supplied by the bounded injective resolution of step 2.1, and step 1.1 covers bounded finite-projective complexes through truncation triangles."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is used for the ambient finite projective and injective resolutions of [F1] and the constructions of steps 1.1 and 2.1; the adjunction of [F2] then transfers the conclusion without further selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction is step 3.1: the canonical B-evaluation M -> D_B D_B(M) becomes the ambient evaluation after applying the adjunction twice, hence is a quasi-isomorphism."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction is the dualizing property itself: steps 1.1 and 2.1 verify finite injective dimension, finite cohomology and homothety for D_B in the sense of [F3], so the duality functor is an anti-equivalence and the inverse is the same construction applied to D_B(M)."
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-28",
+        "notes": "Read Proof 1.1\u20133.1, dualizing definition and exact regular-ring/global-dimension supplier statements. Finite-dimensional regular Noetherian A has bounded finite projective resolutions and L has finite injective dimension. Coinduction gives bounded injective B-complex and finite B-cohomology. Applying adjunction twice identifies canonical signed evaluation after forgetting B with ambient double evaluation; restriction detects quasi-isomorphisms. At M=B this is homothety. Finite resolutions commute with localization. Arbitrary s cancels under double dual; singular B is allowed, zero M is harmless, B=0 is expressly excluded. AC is retained. Stacks 0A7B, 0AX0 and 0A7C Statements/Proofs confirm the three conditions and quotient/biduality mechanisms. No defect found."
+      }
+    },
+    "lem-cm-quotient-of-regular-local-ring-ext-concentration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). A regular local ring $R$ of dimension $d$ is a domain and Cohen\u2013Macaulay. For every regular system $(x_1,\\ldots,x_d)$, the tuple is $R$-regular and $R/(x_1,\\ldots,x_c)$ is regular local of dimension $d-c$ for all $0\\le c\\le d$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-auslander-buchsbaum-serre-regularity-criterion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]).\n\nFor a nonzero Noetherian local ring $(R,\\mathfrak m,k)$ the following are equivalent: $R$ is regular; $\\operatorname{pd}_Rk<\\infty$; $\\operatorname{gldim}R<\\infty$; and every finite $R$-module has finite projective dimension. When these hold, $\\operatorname{gldim}R=\\operatorname{pd}_Rk=\\dim R$. A nonzero finite module over regular local $R$ is maximal Cohen\u2013Macaulay (depth $\\dim R$) if and only if it is free.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-auslander-buchsbaum-formula",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). For a nonzero finite module $M$ of finite projective dimension over a nonzero Noetherian local ring $R$, $\\operatorname{pd}_RM+\\operatorname{depth}_RM=\\operatorname{depth}R$. Consequently such an $M$ with $\\operatorname{depth}M=\\operatorname{depth}R$ is free.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-regular-element-exists-by-prime-avoidance",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice.\n\nLet $R$ be Noetherian, let $M\\ne0$ be a finite $R$-module, and let $I$ be an\nideal such that $IM\\ne M$. Then $I$ contains an $M$-regular element if and only if\n$$I\\nsubseteq\\mathfrak p\\qquad\\text{for every }\\mathfrak p\\in \\operatorname{Ass}_R(M).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-associated-primes-of-cohen-macaulay-module-have-full-dimension",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]).\n\nLet $(R,\\mathfrak m)$ be Noetherian local and let $0\\ne M$ be a finite\nCohen--Macaulay $R$-module of dimension $d$. For every\n$\\mathfrak p\\in\\operatorname{Ass}_R(M)$,\n$$\\dim(R/\\mathfrak p)=d.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-regular-quotients-and-cohen-macaulayness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]).\n\nLet $(R,\\mathfrak m)$ be Noetherian local, let $0\\ne M$ be finite, and let\n$x_1,\\ldots,x_r$ be both $M$-regular and an initial segment of a system of\nparameters for $M$. Then $M$ is Cohen--Macaulay if and only if\n$M/(x_1,\\ldots,x_r)M$ is Cohen--Macaulay.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dimension-formula-for-affine-domains",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field, let $A$ be a finite-type $k$-domain, and let $\\mathfrak p\\in\\operatorname{Spec}(A)$. Then\n$$ \\operatorname{ht}(\\mathfrak p)+\\operatorname{trdeg}_k\\operatorname{Frac}(A/\\mathfrak p)=\\operatorname{trdeg}_k\\operatorname{Frac}(A). $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-affine-domain-chain-dimension-formula-step",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field, let $A$ be a finite-type $k$-domain, and let $\\mathfrak p\\subseteq\\mathfrak q$ be prime ideals of $A$. Then\n$$ \\operatorname{ht}(\\mathfrak q/\\mathfrak p)+\\operatorname{trdeg}_k\\operatorname{Frac}(A/\\mathfrak q)=\\operatorname{trdeg}_k\\operatorname{Frac}(A/\\mathfrak p). $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-closed-immersion-derived-coinduction-adjunction",
+          "source_section": "Statement",
+          "quote": "Assume AC. For a finite homomorphism $A\\to B$ of Noetherian rings and $G\\in D^+(A)$, the complex $f^!G=R\\operatorname{Hom}_A(B,G)$ has its natural $B$-action and is right adjoint to restriction of scalars. For $M\\in D^b(B)$ there is a natural isomorphism\n$$R\\operatorname{Hom}_B(M,f^!G)\\cong R\\operatorname{Hom}_A(M,G).$$\nFor a closed immersion $i:X\\hookrightarrow Y$ of Noetherian schemes and $G\\in D^+(\\mathcal O_Y)$, set $i^!G=i^{-1}\\mathcal R\\!Hom_Y(i_*\\mathcal O_X,G)$ with its $\\mathcal O_X$-action. The analogous internal and global derived Hom adjunctions hold:\n$$i_*\\mathcal R\\!Hom_X(M,i^!G)\\cong\\mathcal R\\!Hom_Y(i_*M,G),\\qquad R\\operatorname{Hom}_X(M,i^!G)\\cong R\\operatorname{Hom}_Y(i_*M,G).$$\nThe counit $i_*i^!G\\to G$ is evaluation at $1$. Also $R\\Gamma(Y,i_*K)=R\\Gamma(X,K)$ for bounded coherent $K$. This is the finite-map adjunction needed for a projective embedding; it does not assert full faithfulness of $i_*$ on derived categories.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-minimal-support-primes-are-associated",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $R$ be a Noetherian commutative ring and let $M$ be a finitely generated\nleft $R$-module. If $\\mathfrak p$ is minimal in $\\operatorname{Supp}_R(M)$, then\n$$ \\mathfrak p \\in \\operatorname{Ass}_R(M). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dimension-and-parameters-for-modules",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(R,\\mathfrak m)$ be a Noetherian local ring and let $M\\neq0$ be a finite\n$R$-module. Put\n$$ d:=\\dim\\operatorname{Supp}(M). $$\nThen:\n\n1. $d$ is the least integer $r$ for which there exist $x_1,\\ldots,x_r\\in\\mathfrak m$\n   with $M/(x_1,\\ldots,x_r)M$ of finite length;\n2. whenever $x_1,\\ldots,x_d$ have this property, they form a system of\n   parameters for $M$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The quotient's depth over $R$ equals its depth over $B$, since multiplication by a sequence of elements and regularity are unchanged after passing to their images in $B$. Thus [F1] gives $\\operatorname{pd}_RB=N-d=c$, proving vanishing for $q>c$. By [F3], $\\operatorname{ht}I=c$: the dimension of $R/I$ is the maximum of the dimensions $R/\\mathfrak p$ for minimal primes $\\mathfrak p$ over $I$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Inductively maintain a regular tuple $f_1,\\ldots,f_j\\in I$ with $Q=R/(f_1,\\ldots,f_j)$ CM of dimension $N-j$; the case $j=0$ is [F1]. For $j<c$, every associated prime of $Q$, viewed in $R$, has quotient dimension $N-j$, hence height $j$ by [F3]. None contains $I$, whose height is $c>j$. Prime avoidance [F2] gives $f_{j+1}\\in I$ regular on $Q$. It avoids every minimal prime of $Q$ by [F5], so every prime containing $(f_1,\\ldots,f_{j+1})$ strictly contains a height-$j$ minimal prime and has height at least $j+1$. By [F3], $e=\\dim(Q/f_{j+1}Q)\\le N-j-1$. A parameter tuple of length $e$ on this nonzero quotient, supplied by [F5], lifts together with $f_{j+1}$ to a tuple with finite-length quotient on $Q$. The minimal-length assertion of [F5] gives $N-j\\le e+1$, hence $e=N-j-1$ and this lifted tuple is a system of parameters for $Q$. Thus $f_{j+1}$ is a regular parameter element, and [F2] makes the next quotient CM, completing the induction. All quotients are nonzero since the ideals lie in the maximal ideal. This constructs the length-$c$ regular sequence, including the empty tuple if $c=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $f$ is regular in a ring $Q$ and annihilates a $Q$-module $M$, the two-term resolution $[Q\\xrightarrow{f}Q]$ of $Q/fQ$ shows $R\\operatorname{Hom}_Q(Q/fQ,Q)\\cong(Q/fQ)[-1]$. Derived adjunction [F4] gives $\\operatorname{Ext}_Q^q(M,Q)=\\operatorname{Ext}_{Q/fQ}^{q-1}(M,Q/fQ)$. Apply this successively to the sequence in step 2.1, all of which annihilate $B$. The result is $\\operatorname{Ext}_R^q(B,R)=\\operatorname{Ext}_{R/(f_1,\\ldots,f_c)}^{q-c}(B,R/(f_1,\\ldots,f_c))=0$ for $q<c$, since negative Ext between modules vanishes. Along with step 1.1 this proves concentration. An invertible module over a local ring is free of rank one, so the same assertion holds for $L$. AC is inherited from the cited suppliers, including the derived adjunction [F4]; no complete-intersection assumption on $B$ was introduced.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For c=0 the induction in step 2.1 has no stages and chooses the empty regular tuple. At positive c each stage proves the chosen element is part of a system of parameters before applying the regular-quotient theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When c = 0 the hypothesis B = R/I CM of dimension d = N forces I = 0 in the domain R, so R/(f_1,...,f_c) = B = R and step 3.1 gives Ext^q_R(R,R) = 0 for q > 0 with Ext^0 = R, matching the statement for q != 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The minimal positive instance c = 1 is the single-element construction of step 2.1 together with the one-step shift of step 3.1: the surviving degree is q = c = 1 = N - d."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Non-radical and non-reduced I, and ideals I not generated by any regular sequence, are allowed; the statement records only that the constructed sequence lies inside I, and steps 1.1 and 3.1 use only pd_R B = c and the shift, so no complete-intersection hypothesis enters."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The two degree endpoints are separated: step 1.1 kills q > c through the projective-dimension bound, and step 3.1 kills q < c by shifting to a negative Ext group, leaving exactly q = c with no threshold left open."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited from the cited suppliers, including the derived adjunction [F4] used in step 3.1 and the prime-avoidance and associated-prime inputs of [F2]; no additional selection beyond those suppliers is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction of the concentration statement is the vanishing for q > c: step 1.1 derives pd_R B = N - d from Auslander-Buchsbaum and the finite global dimension of R."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction is the vanishing for q < c: step 3.1 iterates the principal-quotient shift over the regular sequence lying in I, landing in negative Ext degrees."
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-28",
+        "notes": "Read Proof 1.1\u20133.1 and exact statements of all ten published mathematical suppliers. Depth over R/B is identical; Auslander\u2013Buchsbaum gives pd B=N-d. Closed polynomial localization gives dim R/p=N-ht p. Induction excludes I from height-j associated primes, chooses a regular element, and establishes dim Q/fQ=N-j-1 using minimal support primes and the minimal parameter length before using the qualified regular-quotient theorem. Rees adjunction gives Ext_Q^q(B,Q)=Ext_(Q/f)^q-1(B,Q/f), including q=0 and empty sequence c=0. No complete-intersection claim is made. Local invertible L is rank-one free; B nonzero is essential and stated. AC supplies resolutions/prime-avoidance choices. Stacks 00N6 Statement/Proof independently checks the dimension-drop/parameter principle. Reader repair is mathematically complete; exact historical item preimage was recovered with its recorded SHA-256. Manifest suppliers/strategy and contract F1 use mapping were synchronized at adjudication."
+      }
+    },
+    "lem-projective-embedding-dualizing-complex-existence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-projective-morphism-pre-proj",
+          "source_section": "Definition",
+          "quote": "For an arbitrary base scheme $S$, a morphism $f:X\\to S$ is **projective on\nthis page** if for some integer $n\\ge0$ it factors over $S$ as\n$$X\\xrightarrow{i}\\mathbb P^n_S\\longrightarrow S,$$\nwhere $i$ is a closed immersion and the second arrow is the projection. The\nrelative projective space and its projection are those of\n[[def-relative-projective-space-standard-charts]], and closed immersion has\nthe meaning in [[def-closed-immersion-schemes]]. This is the finite-dimensional\nH-projective convention of Stacks Definition 29.44.1(2). That source's clause\n(1) separately uses a projective bundle $\\mathbb P(\\mathcal E)$; this page\ndoes not conflate the two conventions. The value $n=0$ is allowed, with\n$\\mathbb P^0_S\\cong S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-coherent-sheaf-finite-twisted-locally-free-resolution-projective-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field and $n\\ge0$, let\n$S=k[x_0,\\dots,x_n]$ be graded by total degree with $\\deg x_i=1$, let\n$\\mathbb P^n_k=\\operatorname{Proj}S$ with twisting sheaves\n$\\mathcal O(d)=\\widetilde{S(d)}$, and let $F$ be a coherent\n$\\mathcal O_{\\mathbb P^n_k}$-module. Then there is a finitely generated graded\n$S$-module $M$ with $\\widetilde M\\cong F$ and an exact sequence of graded\n$S$-modules with degree-preserving maps\n$$0\\longrightarrow F_{n+1}\\longrightarrow F_n\\longrightarrow\\cdots\\longrightarrow F_0\\longrightarrow M\\longrightarrow 0$$\nin which every $F_i$ is a finite direct sum of shifted free modules $S(d)$\nwith $d\\in\\mathbb Z$, and whose sheafification\n$$0\\longrightarrow\\widetilde F_{n+1}\\longrightarrow\\cdots\\longrightarrow\\widetilde F_0\\longrightarrow F\\longrightarrow 0$$\nis an exact sequence of $\\mathcal O_{\\mathbb P^n_k}$-modules in which every\n$\\widetilde F_i$ is a finite direct sum $\\bigoplus_j\\mathcal O(d_{ij})$ of\ntwisting sheaves. The resolution has length at most $n+1$: the displayed free\nterms $F_0,\\dots,F_{n+1}$ are finite direct sums of shifted free modules, any\nof them may be zero, a shorter resolution is allowed when it terminates\nearlier, and the truncation degree of $M$ is chosen so that $M$ is finitely\ngenerated and $\\widetilde M\\cong F$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-localisation-and-polynomial-extension-of-regular-rings",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Localizations and finite polynomial extensions of a commutative regular Noetherian ring are regular. Regularity can equivalently be tested at maximal ideals. For every nonzero such ring, $\\operatorname{gldim}R=\\dim R$, allowing infinity. More generally, for a finite module over any commutative Noetherian ring, projective dimension is the supremum of its prime-local projective dimensions. Dedekind domains and their finite polynomial extensions are regular.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-closed-immersion-derived-coinduction-adjunction",
+          "source_section": "Statement",
+          "quote": "Assume AC. For a finite homomorphism $A\\to B$ of Noetherian rings and $G\\in D^+(A)$, the complex $f^!G=R\\operatorname{Hom}_A(B,G)$ has its natural $B$-action and is right adjoint to restriction of scalars. For $M\\in D^b(B)$ there is a natural isomorphism\n$$R\\operatorname{Hom}_B(M,f^!G)\\cong R\\operatorname{Hom}_A(M,G).$$\nFor a closed immersion $i:X\\hookrightarrow Y$ of Noetherian schemes and $G\\in D^+(\\mathcal O_Y)$, set $i^!G=i^{-1}\\mathcal R\\!Hom_Y(i_*\\mathcal O_X,G)$ with its $\\mathcal O_X$-action. The analogous internal and global derived Hom adjunctions hold:\n$$i_*\\mathcal R\\!Hom_X(M,i^!G)\\cong\\mathcal R\\!Hom_Y(i_*M,G),\\qquad R\\operatorname{Hom}_X(M,i^!G)\\cong R\\operatorname{Hom}_Y(i_*M,G).$$\nThe counit $i_*i^!G\\to G$ is evaluation at $1$. Also $R\\Gamma(Y,i_*K)=R\\Gamma(X,K)$ for bounded coherent $K$. This is the finite-map adjunction needed for a projective embedding; it does not assert full faithfulness of $i_*$ on derived categories.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-regular-quotient-dualizing-complex-and-biduality",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $A$ be a regular Noetherian ring of finite dimension $n$, let $L$ be an invertible $A$-module, and let $B=A/I$ be nonzero. For any integer $s$,\n$$D_B=R\\operatorname{Hom}_A(B,L[s])$$\nis a dualizing complex over $B$. For $M\\in D^b_{\\mathrm{fin}}(B)$, $\\mathbb D_B(M)=R\\operatorname{Hom}_B(M,D_B)$ belongs to $D^b_{\\mathrm{fin}}(B)$ and the canonical evaluation $M\\to\\mathbb D_B\\mathbb D_B(M)$ is an isomorphism. These assertions localize, so apply to the affine restrictions of a regular closed projective embedding.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose the embedding in [F1]. Resolve $\\omega_P[N]$ by injective module sheaves and apply $i^b$ from [F3]. This constructs $D_i$ with its actual $\\mathcal O_X$-action, rather than treating an ambient locally free resolution as a complex of $\\mathcal O_X$-modules. On a standard chart $U=\\operatorname{Spec}A\\subset P$, $X\\cap U=\\operatorname{Spec}(A/I)$, and the derived complex corresponds to $R\\operatorname{Hom}_A(A/I,\\omega_P(U)[N])$; finite resolutions in [F2] verify this correspondence and its compatibility with localization.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The rings $A$ are regular of dimension $N$, and the restriction of $\\omega_P$ is invertible. Hence [F3] proves finite injective dimension, finite cohomology and homothety on $X\\cap U$. These affine opens cover $X$. The finite ambient resolutions [F2] bound the cohomology degrees uniformly, and their local Hom cohomology sheaves are coherent, so $D_i\\in D^b_{\\mathrm{Coh}}(X)$ and is dualizing in the sense of [[def-dualizing-complex-on-projective-cm-scheme]]. For any bounded coherent $K$, the same local argument gives bounded coherent duals and bidual evaluation is an isomorphism on this cover, hence globally. This proves existence and biduality before any use of duality on singular schemes. AC is used by the listed regularity and resolution suppliers.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "X may be empty: then D_i = 0, the local conditions are vacuous, and step 2.1 has no affine chart of X to check; the biduality statement has only K = 0 as an object of D^b_Coh(X)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "K = 0 gives D_i(0) = 0 and 0 = D_i D_i(0) in step 2.1; the zero chart quotient A/I = 0 corresponds to the case X cap U empty, in which the local complex of step 1.1 vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For i = id (X = P^N, I = 0) the construction gives D_i = omega_P[N] and step 2.1 applies the regular-quotient input with B = A; biduality reduces to the invertible-module double evaluation of step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singular, reducible and non-reduced X are allowed: the statement imposes no smoothness or CM hypothesis, and step 2.1 checks the dualizing conditions on arbitrary regular affine charts of projective space."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cohomological degrees of D_i are bounded uniformly: step 2.1 uses the finite ambient resolutions [F2] and their local Hom cohomology sheaves to place D_i in D^b_Coh(X), with no degree threshold assumed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is used through [F2] (finite twisted resolutions), [F3] (coinduction and regular-quotient duality) and the regularity suppliers; the passage to the inverse image in step 1.1 introduces no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Existence is the forward half: step 2.1 verifies finite injective dimension, finite coherent cohomology and the homothety isomorphism on the affine cover, so D_i is dualizing in the sense of the Definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Biduality is the reverse half: step 2.1 shows the canonical evaluation K -> D_i D_i(K) is an isomorphism on each chart and hence globally, and the same local argument supplies bounded coherent duals for every bounded coherent K."
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-28",
+        "notes": "Checked Proof 1.1\u20132.1 and every cited prerequisite in dependency order. Projectivity is the published finite-dimensional closed-embedding convention. Applying i^b to an injective ambient resolution supplies the O_X action; standard charts have regular polynomial A and quotient B, and finite ambient resolutions identify the sheaf construction with RHom_A(B,L[N]) and glue by localization. Uniform ambient resolution bounds give bounded coherent internal duals; local quotient homothety/biduality imply the global assertions by stalk detection. Empty X is vacuous, N=0 is allowed, and no smoothness/CM/perfectness on X is assumed. AC is inherited from injective and finite-projective resolutions. Stacks 0A7I Statement/Proof and 0FVV confirm existence, but this proof closes its inputs locally. No defect found."
+      }
+    },
+    "lem-projective-space-derived-coherent-duality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cohomology-projective-space-twisting-sheaves",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $A$ be a commutative\nring with $1$ ([[def-commutative-ring]]), let $n\\ge0$, let $d\\in\\mathbb Z$ and\nlet $X=\\mathbb P^n_A\\cong\\operatorname{Proj}A[x_0,\\dots,x_n]$ be relative\nprojective space ([[def-relative-projective-space-standard-charts]],\n[[def-polynomial-ring-on-a-family-of-indeterminates]]), with twisting sheaf\n$\\mathcal O_X(d)$ ([[def-twisting-sheaf-proj]]) and cohomology\n$H^q(X,\\mathcal O_X(d))$. Then\n$$H^q(X,\\mathcal O_X(d))=0\\qquad\\text{unless }q=0\\text{ or }q=n.$$\nIf $n>0$, then $H^0(X,\\mathcal O_X(d))\\cong A[x_0,\\dots,x_n]_d$ when $d\\ge0$\nand $H^0(X,\\mathcal O_X(d))=0$ when $d<0$, where\n$A[x_0,\\dots,x_n]_d$ is the degree-$d$ graded piece\n([[def-graded-ring-and-graded-module]]); and $H^n(X,\\mathcal O_X(d))$ is the\nfree $A$-module on the Laurent monomials $x_0^{e_0}\\cdots x_n^{e_n}$ with\n$e_i<0$ for every $i$ and $\\sum_ie_i=d$, so that it is nonzero precisely when\n$d\\le-n-1$ and $A\\ne0$. For $n=0$ one has $\\mathbb P^0_A=\\operatorname{Spec}A$\nand $H^0(X,\\mathcal O_X(d))\\cong A$ for every $d\\in\\mathbb Z$, with all higher\ngroups zero. The zero ring $A=0$ is allowed: then $X=\\varnothing$ and all\ngroups are zero, in agreement with both displayed descriptions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-serre-duality-projective-space-twisting-sheaves",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field, $n\\ge0$ and let\n$\\omega_{\\mathbb P^n}=\\mathcal O(-n-1)$ be the dualizing line bundle of\n$\\mathbb P^n_k$ with the Laurent-coefficient residue trace\n$$t_{\\mathbb P^n}:H^n(\\mathbb P^n_k,\\mathcal O(-n-1))\\longrightarrow k$$\nof [[def-smooth-projective-dualizing-line-bundle-and-trace]]. Then for every\ninteger $d$ and every $q\\in\\{0,\\dots,n\\}$ the evaluation pairing\n$$H^q(\\mathbb P^n_k,\\mathcal O(d))\\times H^{n-q}(\\mathbb P^n_k,\\mathcal O(-d-n-1))\\longrightarrow k,\\qquad (\\alpha,\\beta)\\longmapsto t_{\\mathbb P^n}(\\alpha\\cup\\beta),$$\nformed with the cup product for the multiplication pairing\n$\\mathcal O(d)\\otimes_{\\mathbb Z}\\mathcal O(-d-n-1)\\to\\mathcal O(-n-1)$, is a\nperfect pairing of $k$-vector spaces.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-projective-space-top-cohomology-residue-pairing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field and $n\\ge1$, and use the\nnotation and the cohomology computation of\n[[thm-cohomology-projective-space-twisting-sheaves]] for\n$\\mathbb P^n_k$ with its twisting sheaves $\\mathcal O(d)$. Then for every\n$d\\ge0$ the cup product of [[def-cup-product-sheaf-cohomology]] for the\nmultiplication pairing\n$\\mathcal O(d)\\otimes_{\\mathbb Z}\\mathcal O(-n-1-d)\\to\\mathcal O(-n-1)$\ncomposed with the coefficient isomorphism\n$$H^n(\\mathbb P^n_k,\\mathcal O(-n-1))\\xrightarrow{\\ \\sim\\ }k,\\qquad x_0^{-1}\\cdots x_n^{-1}\\longmapsto1,$$\nis a perfect $k$-bilinear pairing\n$$H^0(\\mathbb P^n_k,\\mathcal O(d))\\times H^n(\\mathbb P^n_k,\\mathcal O(-n-1-d))\\longrightarrow k,$$\nand it is compatible with multiplication by homogeneous polynomials: if $g$ is\na homogeneous polynomial of degree $\\delta\\ge0$ and the two cup products are taken\nwith the multiplication pairings $\\mathcal O(d)\\otimes\\mathcal O(\\delta)\\to\n\\mathcal O(d+\\delta)$ and $\\mathcal O(-n-1-d-\\delta)\\otimes\\mathcal O(\\delta)\n\\to\\mathcal O(-n-1-d)$, then for all $f\\in H^0(\\mathcal O(d))$ and\n$\\eta\\in H^n(\\mathcal O(-n-1-d-\\delta))$ one has\n$$\\langle g\\cdot f,\\eta\\rangle=\\langle f,g\\cdot\\eta\\rangle .$$\nFor $n=0$ the corresponding pairing $k\\times k\\to k$ is ordinary\nmultiplication under the identifications $\\mathcal O(d)\\cong\\mathcal O$ of\n$\\mathbb P^0_k=\\operatorname{Spec}k$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-coherent-sheaf-finite-twisted-locally-free-resolution-projective-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field and $n\\ge0$, let\n$S=k[x_0,\\dots,x_n]$ be graded by total degree with $\\deg x_i=1$, let\n$\\mathbb P^n_k=\\operatorname{Proj}S$ with twisting sheaves\n$\\mathcal O(d)=\\widetilde{S(d)}$, and let $F$ be a coherent\n$\\mathcal O_{\\mathbb P^n_k}$-module. Then there is a finitely generated graded\n$S$-module $M$ with $\\widetilde M\\cong F$ and an exact sequence of graded\n$S$-modules with degree-preserving maps\n$$0\\longrightarrow F_{n+1}\\longrightarrow F_n\\longrightarrow\\cdots\\longrightarrow F_0\\longrightarrow M\\longrightarrow 0$$\nin which every $F_i$ is a finite direct sum of shifted free modules $S(d)$\nwith $d\\in\\mathbb Z$, and whose sheafification\n$$0\\longrightarrow\\widetilde F_{n+1}\\longrightarrow\\cdots\\longrightarrow\\widetilde F_0\\longrightarrow F\\longrightarrow 0$$\nis an exact sequence of $\\mathcal O_{\\mathbb P^n_k}$-modules in which every\n$\\widetilde F_i$ is a finite direct sum $\\bigoplus_j\\mathcal O(d_{ij})$ of\ntwisting sheaves. The resolution has length at most $n+1$: the displayed free\nterms $F_0,\\dots,F_{n+1}$ are finite direct sums of shifted free modules, any\nof them may be zero, a shorter resolution is allowed when it terminates\nearlier, and the truncation degree of $M$ is chosen so that $M$ is finitely\ngenerated and $\\widetilde M\\cong F$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cup-product-sheaf-cohomology",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) and the standing\nsmallness or supplied cofinal-denominator hypothesis of\n[[def-derived-category-of-an-abelian-category]]. Let $X$ be a topological space\n([[def-topological-space]]), let $H^q(X,-)$ be sheaf cohomology computed from the\nsupplied functorial injective resolution datum\n([[def-sheaf-cohomology-derived-global-sections]]), let $\\mathbb Z_X$ be the\nconstant sheaf with value $\\mathbb Z$\n([[lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions]]), let\n$\\otimes^{\\mathbf L}_{\\mathbb Z}$ be the derived tensor product of abelian\nsheaves on the bounded-above derived category, with comparison\n$c_{\\mathcal F,\\mathcal G}:\\mathcal F\\otimes^{\\mathbf L}_{\\mathbb Z}\\mathcal G\n\\to\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G$, of clauses 2 and 4 of\n[[lem-derived-tensor-product-of-abelian-sheaves]], where\n$\\otimes_{\\mathbb Z}$ is the tensor product of abelian sheaves of\n[[def-tensor-product-of-abelian-sheaves]], and let\n$$\\alpha\\longmapsto\\tilde\\alpha:\\qquad H^p(X,\\mathcal F) \\xrightarrow{\\ \\sim\\ }\\operatorname{Hom}_{D(\\mathrm{Ab}(X))}\\bigl(\\mathbb Z_X[-p],\\mathcal F\\bigr)$$\nbe the canonical isomorphism of\n[[lem-sheaf-cohomology-classes-as-derived-morphisms]], so that $\\tilde\\alpha$ is\nthe morphism of $D(\\mathrm{Ab}(X))$ corresponding to a class\n$\\alpha\\in H^p(X,\\mathcal F)$; the representing morphism $\\tilde\\alpha$ is\nuniquely determined by $\\alpha$, and it is the morphism that the bijection\n$\\varphi\\mapsto\\varphi_X(1_X)$ of\n[[lem-morphisms-from-the-constant-sheaf-are-global-sections]] describes in\ndegree zero. Write $\\kappa(p,q):\\mathbb Z_X[-p-q]\\to\n\\mathbb Z_X[-p]\\otimes^{\\mathbf L}_{\\mathbb Z}\\mathbb Z_X[-q]$ for the canonical\nisomorphism of clause 2 of [[lem-koszul-coherence-for-derived-sheaf-tensor]].\n\nLet $\\mathcal F,\\mathcal G,\\mathcal H$ be abelian sheaves on $X$ and let\n$\\mu:\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G\\to\\mathcal H$ be a morphism of\nabelian sheaves, called a **tensor pairing**. For $p,q\\ge0$ the **cup product\nwith respect to $\\mu$** is the pairing\n$$\\cup_\\mu:\\quad H^p(X,\\mathcal F)\\times H^q(X,\\mathcal G)\\longrightarrow H^{p+q}(X,\\mathcal H)$$\nthat assigns to $\\alpha\\in H^p(X,\\mathcal F)$ and\n$\\beta\\in H^q(X,\\mathcal G)$ the class $\\alpha\\cup_\\mu\\beta$ corresponding,\nunder the isomorphism above taken in degree $p+q$ and for the sheaf\n$\\mathcal H$, to the composite\n$$\\mathbb Z_X[-p-q] \\xrightarrow{\\ \\kappa(p,q)\\ } \\mathbb Z_X[-p]\\otimes^{\\mathbf L}_{\\mathbb Z}\\mathbb Z_X[-q] \\xrightarrow{\\ \\tilde\\alpha\\otimes^{\\mathbf L}\\tilde\\beta\\ } \\mathcal F\\otimes^{\\mathbf L}_{\\mathbb Z}\\mathcal G \\xrightarrow{\\ c_{\\mathcal F,\\mathcal G}\\ } \\mathcal F\\otimes_{\\mathbb Z}\\mathcal G \\xrightarrow{\\ \\mu\\ } \\mathcal H$$\nin $D(\\mathrm{Ab}(X))$; here the second arrow is the derived tensor product of\nthe representing morphisms, which is defined because the derived tensor product\nof clause 2 of [[lem-derived-tensor-product-of-abelian-sheaves]] is a bifunctor\non $D^-(\\mathrm{Ab}(X))$, and the last two arrows are the comparison of clause 4\nof that lemma and the pairing $\\mu$.\n\nConventions and special cases.\n\n1. **(Sign convention.)** The identification $\\mathbb Z_X[-p-q]\\cong\n   \\mathbb Z_X[-p]\\otimes^{\\mathbf L}_{\\mathbb Z}\\mathbb Z_X[-q]$ used in the\n   definition is the one of the Stacks Project (footnote 3 to Section 31 of\n   Cohomology of Sheaves), realised here by the canonical isomorphism\n   $\\kappa(p,q)$ of clause 2 of\n   [[lem-koszul-coherence-for-derived-sheaf-tensor]]; the Koszul sign in the\n   symmetry of the tensor-product total complex is the one of clause 3 of\n   [[lem-koszul-structure-of-the-abelian-sheaf-tensor-product]], under which the\n   hidden sign of that footnote is $+1$. Thus no further sign is inserted by\n   this definition.\n2. **(Identity pairing.)** For $\\mu=\\operatorname{id}_{\\mathcal F\\otimes_{\\mathbb\n   Z}\\mathcal G}$ and $\\mathcal H=\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G$ the\n   cup product is a pairing $H^p(X,\\mathcal F)\\times\n   H^q(X,\\mathcal G)\\to H^{p+q}(X,\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G)$,\n   written $\\alpha\\cup\\beta$. In degree zero, $p=q=0$, the definition reduces to\n   the section pairing $a\\cup_\\mu b=\\mu_X(a\\otimes b)$, where the two\n   global sections first give a section $a\\otimes b$ of the tensor sheaf via\n   the canonical map $\\Gamma(X,\\mathcal F)\\otimes_{\\mathbb Z}\\Gamma(X,\\mathcal G)\\to\\Gamma(X,\\mathcal F\\otimes_{\\mathbb Z}\\mathcal G)$,\n   under $H^0(X,-)\\cong\\Gamma(X,-)$.\n3. **(Sheaves of rings.)** Let $\\mathcal R$ be an abelian sheaf on $X$ together\n   with a morphism $\\mu:\\mathcal R\\otimes_{\\mathbb Z}\\mathcal R\\to\\mathcal R$\n   that is associative, that is, $\\mu\\circ(\\mu\\otimes\\operatorname{id}) =\n   \\mu\\circ(\\operatorname{id}\\otimes\\mu)$ after the canonical associativity\n   identifications of the tensor product of abelian sheaves, and with a unit\n   section $1_{\\mathcal R}\\in\\Gamma(X,\\mathcal R)$ satisfying\n   $\\mu_U(s\\otimes 1_{\\mathcal R}|_U)=\\mu_U(1_{\\mathcal R}|_U\\otimes s)=s$ for every\n   open $U\\subseteq X$ and $s\\in\\mathcal R(U)$; when in addition\n   $\\mu\\circ\\sigma_{\\mathcal R,\\mathcal R}=\\mu$ for the symmetry\n   $\\sigma_{\\mathcal R,\\mathcal R}$ of clause 2 of\n   [[lem-koszul-structure-of-the-abelian-sheaf-tensor-product]] we call\n   $\\mathcal R$ commutative. Then $\\cup_\\mu$ is the multiplication of the graded\n   product on $H^*(X,\\mathcal R)=\\bigoplus_{q\\ge0}H^q(X,\\mathcal R)$ whose\n   associativity, unitality and graded commutativity, together with the\n   naturality of the cup product, are established by the cup-product theorem\n   below on this page; the tensor-product form $H^p(X,\\mathcal F)\\otimes_{\\mathbb\n   Z}H^q(X,\\mathcal G)\\to H^{p+q}(X,\\mathcal H)$ of $\\cup_\\mu$ is likewise\n   recorded there (its clause 1), since additivity in each variable is not\n   asserted by this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-yoneda-product-is-composition-in-the-derived-category",
+          "source_section": "Statement",
+          "quote": "Assume DC, set-sized extension classes, and enough projectives with supplied resolutions, or dually enough injectives with supplied resolutions. Normalize the image of a short extension to be its connecting arrow in the cone convention of this page, and the image of a higher extension to be the shifted composite of the connecting arrows of its short exact pieces. With this normalization the Yoneda-class bijection is $\\operatorname{YExt}^n(M,N)\\cong\\operatorname{Hom}_D(M,N[n])$ for $n\\geq1$. If $\\alpha\\in\\operatorname{YExt}^p(M,L)$ and $\\beta\\in\\operatorname{YExt}^q(L,N)$, their splice corresponds to $\\beta[p]\\alpha:M\\to N[p+q]$; degree-zero maps act by pullback and pushout, with identity units.\n\nIn particular, for $e:0\\to A\\to Z\\to B\\to0$ and $e':0\\to B\\xrightarrow u Z'\\to C\\to0$, the splice is zero in $\\operatorname{Ext}^2(C,A)$ if and only if there is an extension $0\\to A\\to W\\to Z'\\to0$ whose pullback along $u$ is $e$. Equivalently there is a commutative diagram of these two rows, with vertical maps $1_A,Z\\to W,u$, whose middle and right columns are $0\\to Z\\to W\\to C\\to0$ and $0\\to B\\to Z'\\to C\\to0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-long-exact-hom-sequences-of-a-distinguished-triangle",
+          "source_section": "Statement",
+          "quote": "For every $W$ and distinguished triangle $X\\to Y\\to Z\\to X[1]$, both\n$$\\cdots\\to\\mathcal T(W,X)\\to\\mathcal T(W,Y)\\to\\mathcal T(W,Z)\\to\\mathcal T(W,X[1])\\to\\cdots$$\nand the oppositely oriented sequence with $\\mathcal T(-,W)$ are exact.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-five-lemma-for-a-morphism-of-long-exact-sequences",
+          "source_section": "Statement",
+          "quote": "Let\n$$\\cdots \\to A_{n-1} \\to A_n \\to A_{n+1} \\to A_{n+2} \\to A_{n+3} \\to \\cdots$$\nand\n$$\\cdots \\to B_{n-1} \\to B_n \\to B_{n+1} \\to B_{n+2} \\to B_{n+3} \\to \\cdots$$\nbe long exact sequences in an abelian category, together with a morphism of\nthese sequences. If the four comparison maps at $A_{n-1},A_n,A_{n+2},A_{n+3}$\nare isomorphisms, then the comparison map $A_{n+1} \\to B_{n+1}$ is an\nisomorphism.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By the cohomology calculation [F1], $R\\Gamma(P,\\omega_P[N])$ has $k$ as its sole cohomology, in degree zero; the Laurent trace identifies it with $k$. Every coherent complex on $P$ is perfect: [F2] gives this for a sheaf, and finite truncation triangles give it for bounded coherent cohomology. Thus derived internal Hom and evaluation are computed locally by bounded finite locally free complexes. Compose the derived cup map and evaluation with the trace to obtain $R\\Gamma(\\mathcal R\\!Hom(K,\\omega_P[N]))\\otimes_k^{\\mathbf L}R\\Gamma(K)\\to k$. The tensor-Hom adjoint is the map in the statement. It is natural and respects triangles because it is induced by chain evaluation and the signed total-complex differential.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $K=\\mathcal O_P(m)$, the map on degree $a$ cohomology is precisely $H^{N+a}(P,\\mathcal O(-m-N-1))\\to H^{-a}(P,\\mathcal O(m))^\\vee$, which is an isomorphism in all degrees by [F1], including the zero groups outside their ranges. Hence the map is a quasi-isomorphism for twists and their finite direct sums and shifts. Both functors in the assertion take triangles to triangles contravariantly; exact duality of vector spaces makes the right-hand cohomology equal to the dual of the opposite-degree cohomology. The long exact sequences of [F3] and the five lemma [F3] extend the isomorphism across a cone. Apply this finitely many times to a resolution in [F2], then to truncation triangles of a bounded coherent complex. This proves the assertion for every $K$ and supplies compatibility with connecting maps. AC enters through [F2] and the derived-category and product suppliers.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma quantifies over a single complex K on the fixed nonempty projective space P = P^N_k; no union, cover or empty index set is formed, and P^N_k is nonempty for every N >= 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "K = 0 gives vanishing on both sides of the quasi-isomorphism of step 1.1, and the twist m = 0 is included in the all-degrees computation of step 2.1 for O_P(0) = O_P."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The structure-sheaf instance K = O_P is the case m = 0 of step 2.1, whose degree-a map is H^{N+a}(P, omega_P) -> H^{-a}(P, O_P)^v: it is the identity on k in degree a = 0 and zero elsewhere."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Arbitrary bounded coherent K is reached in step 2.1 through finite locally free resolutions and truncation triangles, with no smoothness, reducedness or locally free hypothesis on K; a complex with a single nonzero cohomology sheaf is the first case of that extension."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the map in every degree a, including the outer degrees in which both sides vanish, and step 1.1 fixes the signs for shifts so that the endpoints of a shifted complex behave correctly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC enters only through [F2] (finite twisted locally free resolutions) and the derived-category and product suppliers [F3]; the comparison map of step 1.1 is induced by evaluation and the fixed Laurent trace, with no further selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction is the twisting computation of step 2.1: for K = O_P(m) the degree-a map is the residue pairing H^{N+a}(P, O(-m-N-1)) -> H^{-a}(P, O(m))^v, an isomorphism by [F1]."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction is the extension along cones: step 2.1 uses that both functors take distinguished triangles to triangles contravariantly and applies the long exact sequences and five lemma of [F3] to conclude the isomorphism for the cone, then iterates over a resolution and truncations."
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-28",
+        "notes": "Checked Proof 1.1\u20132.1 and all eight cited supplier statements. Finite resolutions by sums of twists plus bounded truncation triangles generate the bounded coherent category; the actual chain evaluation/trace map is contravariant and compatible with cones, so five-lemma propagation applies. Degree a on a twist is H^(N+a)(O(-m-N-1)) paired with H^(-a)(O(m)), as required by [N]. Laurent pairing handles all degrees and N=0; zero K gives zero. AC is inherited from resolutions and cup/Ext suppliers. Stacks 0FVV(5), Proof and Yoneda note confirm the functorial shifted duality; no quotient-perfectness is used. No defect found."
+      }
+    },
+    "lem-projective-dualizing-complex-trace-and-embedding-independence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-projective-embedding-dualizing-complex-existence",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X$ be a projective scheme over a field $k$, and fix a closed embedding $i:X\\hookrightarrow P=\\mathbb P^N_k$. With $\\omega_P=\\mathcal O_P(-N-1)$, set\n$$D_i=i^!(\\omega_P[N]),\\qquad i_*D_i=\\mathcal R\\!Hom_P(i_*\\mathcal O_X,\\omega_P[N]).$$\nThen $D_i$ is a dualizing complex. For every $K\\in D^b_{\\mathrm{Coh}}(X)$, $\\mathbb D_i(K)=\\mathcal R\\!Hom_X(K,D_i)$ lies in $D^b_{\\mathrm{Coh}}(X)$ and canonical evaluation gives $K\\cong\\mathbb D_i\\mathbb D_i(K)$. No smoothness or CM hypothesis is needed here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-closed-immersion-derived-coinduction-adjunction",
+          "source_section": "Statement",
+          "quote": "Assume AC. For a finite homomorphism $A\\to B$ of Noetherian rings and $G\\in D^+(A)$, the complex $f^!G=R\\operatorname{Hom}_A(B,G)$ has its natural $B$-action and is right adjoint to restriction of scalars. For $M\\in D^b(B)$ there is a natural isomorphism\n$$R\\operatorname{Hom}_B(M,f^!G)\\cong R\\operatorname{Hom}_A(M,G).$$\nFor a closed immersion $i:X\\hookrightarrow Y$ of Noetherian schemes and $G\\in D^+(\\mathcal O_Y)$, set $i^!G=i^{-1}\\mathcal R\\!Hom_Y(i_*\\mathcal O_X,G)$ with its $\\mathcal O_X$-action. The analogous internal and global derived Hom adjunctions hold:\n$$i_*\\mathcal R\\!Hom_X(M,i^!G)\\cong\\mathcal R\\!Hom_Y(i_*M,G),\\qquad R\\operatorname{Hom}_X(M,i^!G)\\cong R\\operatorname{Hom}_Y(i_*M,G).$$\nThe counit $i_*i^!G\\to G$ is evaluation at $1$. Also $R\\Gamma(Y,i_*K)=R\\Gamma(X,K)$ for bounded coherent $K$. This is the finite-map adjunction needed for a projective embedding; it does not assert full faithfulness of $i_*$ on derived categories.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-projective-space-derived-coherent-duality",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $P=\\mathbb P^N_k$ and $\\omega_P=\\mathcal O_P(-N-1)$, with Laurent residue trace $t_P:H^N(P,\\omega_P)\\to k$. For all $K\\in D^b_{\\mathrm{Coh}}(P)$ evaluation followed by this trace gives a natural quasi-isomorphism\n$$R\\Gamma(P,\\mathcal R\\!Hom_P(K,\\omega_P[N]))\\longrightarrow R\\operatorname{Hom}_k(R\\Gamma(P,K),k).$$\nIn particular it holds in every degree, with the usual signs for shifts and distinguished triangles.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-yoneda-evaluation-bijection",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a locally small category, let $a$ be an object, and let\n$F:\\mathcal C\\to\\mathbf{Set}$ be a functor. Evaluation at the identity defines\na bijection\n\n$$E_{a,F}:\\operatorname{Nat}(\\mathcal C(a,-),F)\\longrightarrow F(a),\\qquad E_{a,F}(\\alpha)=\\alpha_a(1_a).$$\n\nIts inverse sends $x\\in F(a)$ to the natural transformation $\\alpha^x$ whose\ncomponent at $c$ is\n\n$$\\alpha^x_c:\\mathcal C(a,c)\\longrightarrow F(c),\\qquad \\alpha^x_c(f)=F(f)(x).$$\n\nThe explicit parametrization by the set $F(a)$ proves that the\nnatural-transformation collection in the display is a set. The construction\nmakes no choice from a family of nonempty sets.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The adjunction [F2] identifies $R\\operatorname{Hom}_X(K,D_i)$ with $R\\operatorname{Hom}_P(i_*K,\\omega_P[N])$. The pushforward $i_*K$ is bounded coherent, so [F3] identifies the latter with $R\\operatorname{Hom}_k(R\\Gamma(P,i_*K),k)$, which equals $R\\operatorname{Hom}_k(R\\Gamma(X,K),k)$ by [F2]. Cohomology in degree $r$ gives the displayed formula. The comparison is the evaluation pairing: for maps $\\alpha:K\\to D_i[r]$ and $\\beta:\\mathcal O_X\\to K[-r]$, adjunction takes $\\alpha$ to the ambient map followed by the counit. It takes $\\beta$ followed by $i_*\\mathcal O_X$ to the same ambient composition; pulling back the unit $\\mathcal O_P\\to i_*\\mathcal O_X$ makes the equality immediate by evaluation at $1$. Thus the paired scalar is $t_i(\\alpha[-r]\\circ\\beta)$, not merely an unspecified vector-space isomorphism.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $r=0$, each embedding gives a representation on $D^b_{\\mathrm{Coh}}(X)$ of the same contravariant functor $K\\mapsto\\operatorname{Hom}_k(H^0(X,K),k)$. Both representing objects lie in that category by [F1]. The Yoneda evaluation bijection [F3] supplies a unique isomorphism: evaluate the natural comparison at the first representing object on its identity, and do the reverse at the second; naturality says that the two composites are identities. The trace itself is recovered by evaluating the represented functional for a map $\\mathcal O_X\\to D_i$ at $1\\in H^0(X,\\mathcal O_X)$, so this isomorphism preserves it. Naturality under shifts then preserves every degree and triangle comparison. These unique isomorphisms compose transitively, proving independence of the embedding with its normalization; an unnormalized dualizing complex alone is not claimed to be uniquely isomorphic. AC is retained from [F1]\u2013[F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For X empty, or for K = 0, both sides of the displayed isomorphism are zero and the adjunction identities of step 1.1 are identities of zero complexes; the Yoneda comparison of step 2.1 then has a vacuous but consistent instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "K = 0 gives Hom_{D(X)}(0, D_i[r]) = 0 = Hom_k(0, k), and the pairing t_i(alpha[-r] o beta) of step 1.1 vanishes; the zero class is the degree-zero instance of the trace pairing."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "K = O_X recovers the trace itself: step 2.1 evaluates the represented functional for a map O_X -> D_i at 1 in H^0(X, O_X), which returns t_i, so the unit case fixes the normalization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degenerate X is allowed by the statement: steps 1.1 and 2.1 use only the adjunction, the projective-space duality and Yoneda, with no smoothness or reducedness assumption, and the uniqueness claim is confined to the normalized complex with its trace."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All integer shifts r occur in step 1.1 through the degree-r cohomology identification, and the r = 0 endpoint is where step 2.1 recovers the trace; no other threshold appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is retained from [F1]-[F3]; the Yoneda evaluation bijection of [F3] is choice-free by its own statement, so step 2.1 introduces no new selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction of the identifies-the-duality claim: step 2.1 evaluates the natural comparison at the first representing object on its identity and reads off the trace by evaluation at 1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction: step 2.1 does the same at the second representing object, and naturality says the two composites are identities; the isomorphisms compose transitively, which proves independence of the embedding."
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-28",
+        "notes": "Checked Proof 1.1\u20132.1 and every cited supplier statement, including the covariant Yoneda lemma applied to the opposite category. Closed-immersion adjunction plus ambient derived evaluation gives the actual natural global comparison, with degree r dual to H^(-r). Counit is evaluation at 1, so pairing is t_i(alpha[-r] beta). At r=0 the two coherent representing objects represent the same contravariant functor; evaluating on identities constructs inverse unique comparison maps. Evaluation at the unit recovers the trace on H^0(D_i); in D(k) a map to k is determined by this functional. Shifts preserve normalization, and comparisons compose transitively. Empty X/zero K and arbitrary shifts are compatible. Stacks 0FVV(5) and Yoneda footnote, and entire Remark 0FVW, confirm this normalization argument. AC retained. No uniqueness of an unnormalized complex or derived full-faithfulness is asserted. No defect found."
+      }
+    },
+    "lem-projective-pure-cm-dualizing-complex-concentration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-projective-embedding-dualizing-complex-existence",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X$ be a projective scheme over a field $k$, and fix a closed embedding $i:X\\hookrightarrow P=\\mathbb P^N_k$. With $\\omega_P=\\mathcal O_P(-N-1)$, set\n$$D_i=i^!(\\omega_P[N]),\\qquad i_*D_i=\\mathcal R\\!Hom_P(i_*\\mathcal O_X,\\omega_P[N]).$$\nThen $D_i$ is a dualizing complex. For every $K\\in D^b_{\\mathrm{Coh}}(X)$, $\\mathbb D_i(K)=\\mathcal R\\!Hom_X(K,D_i)$ lies in $D^b_{\\mathrm{Coh}}(X)$ and canonical evaluation gives $K\\cong\\mathbb D_i\\mathbb D_i(K)$. No smoothness or CM hypothesis is needed here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-projective-dualizing-complex-trace-and-embedding-independence",
+          "source_section": "Statement",
+          "quote": "Assume AC. For a projective scheme $X/k$ and a closed embedding $i:X\\hookrightarrow P=\\mathbb P^N_k$, the dualizing complex $D_i=i^!(\\omega_P[N])$ has a trace\n$$t_i:R\\Gamma(X,D_i)\\xrightarrow{\\mathrm{counit}}R\\Gamma(P,\\omega_P[N])\\xrightarrow{t_P}k.$$\nFor $K\\in D^b_{\\mathrm{Coh}}(X)$ this trace induces natural isomorphisms\n$$\\operatorname{Hom}_{D(X)}(K,D_i[r])\\cong\\operatorname{Hom}_k(H^{-r}(X,K),k)\\quad(r\\in\\mathbb Z),$$\nby composition with a class $\\mathcal O_X\\to K[-r]$ and $t_i$. Two embeddings give a unique isomorphism between their complexes which identifies these duality isomorphisms; it preserves the trace. Write the resulting normalized object as $D_X$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cm-quotient-of-regular-local-ring-ext-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $R$ be the localization of a polynomial ring over a field at a maximal ideal, of dimension $N$, and let $B=R/I\\ne0$ be Cohen\u2013Macaulay of dimension $d$. Put $c=N-d$. Then\n$$\\operatorname{Ext}_R^q(B,R)=0\\quad(q\\ne c).$$\nFor an invertible $R$-module $L$, the same holds with $L$ in place of $R$. The regular sequence used in the proof lies inside $I$; this does not claim that $I$ itself is generated by a regular sequence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-affine-local-dimension-residue-transcendence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field, let $A$ be\na finite-type $k$-algebra, and let $\\mathfrak q\\in\n\\operatorname{Spec}A$. If $\\dim_{\\mathfrak q}\\operatorname{Spec}A$\nmeans the infimum of the dimensions of open neighbourhoods\nof $\\mathfrak q$, then\n$$\\dim_{\\mathfrak q}\\operatorname{Spec}A=\\dim A_{\\mathfrak q}+\\operatorname{trdeg}_k\\kappa(\\mathfrak q).$$\nThis is the affine-point dimension formula used in Stacks\nLemma 10.116.3. The formula concerns the local dimension of\nthe fibre scheme, which differs from the dimension of its\nlocal ring at a nonclosed point.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited through the quasi-coherent interfaces\n([[def-axiom-of-choice]]). Let $X$ be a locally Noetherian scheme\n([[def-locally-noetherian-and-noetherian-scheme]]). Then:\n\n1. A quasi-coherent $\\mathcal O_X$-module is coherent\n   ([[def-coherent-module-scheme]]) if and only if it is of finite type\n   ([[def-finite-type-finite-presentation-module-sheaf]]).\n2. For every morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of coherent\n   $\\mathcal O_X$-modules the kernel, image and cokernel of $\\varphi$ are\n   coherent, and finite direct sums of coherent modules are coherent.\n3. Extensions: if $0\\to\\mathcal F\\to\\mathcal E\\to\\mathcal G\\to0$ is a short\n   exact sequence of quasi-coherent $\\mathcal O_X$-modules\n   ([[def-exact-sequence-sheaves]]) with $\\mathcal F$ and $\\mathcal G$\n   coherent, then $\\mathcal E$ is coherent. Thus $\\operatorname{Coh}(X)$ is\n   closed under extensions inside $\\operatorname{QCoh}(X)$.\n\nThe equivalence in (1) is the theorem's essential content: the relation\nkernel condition in the definition of coherence is automatic for finite type\nquasi-coherent modules over a locally Noetherian base, but not over an\narbitrary base.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-auslander-buchsbaum-formula",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). For a nonzero finite module $M$ of finite projective dimension over a nonzero Noetherian local ring $R$, $\\operatorname{pd}_RM+\\operatorname{depth}_RM=\\operatorname{depth}R$. Consequently such an $M$ with $\\operatorname{depth}M=\\operatorname{depth}R$ is free.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cohen-macaulayness-localises",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]).\n\nIf $M$ is a finite Cohen--Macaulay module over a Noetherian local ring $R$,\nthen $M_\\mathfrak p$ is Cohen--Macaulay over $R_\\mathfrak p$ for every\n$\\mathfrak p\\in\\operatorname{Supp}_R(M)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At a closed point $x\\in X$, its residue field is finite algebraic over $k$ by [[lem-finite-type-jacobson-residue-extension]], so [F3] gives $\\dim\\mathcal O_{X,x}=d$ and $\\dim\\mathcal O_{P,x}=N$. The local ring of $P$ is a localization of a polynomial chart. CM gives depth $d$ for the quotient. Hence [F2], with the local trivialization of $\\omega_P$, shows that $\\mathcal H^a(D_X)_x=0$ unless $a=(N-d)-N=-d$. Every cohomology sheaf is coherent by [F1]. A nonzero coherent sheaf on a finite-type scheme over a field has a closed point in its support: on an affine chart its support is the vanishing locus of its annihilator, and a maximal ideal of this quotient has finite algebraic residue field; such points are closed in the finite-type scheme. Thus the asserted vanishing at closed points proves vanishing everywhere. Canonical truncation gives $D_X\\cong\\omega_X[d]$, and the construction gives the ambient sheaf Ext formula.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At a closed point set $R=\\mathcal O_{P,x}$, $B=\\mathcal O_{X,x}$ and $c=N-d$. The proof of [F2] gives a finite free resolution of $B$ of length $c$. Dualizing it over $R$ gives an exact sequence $0\\to F_0^\\vee\\to\\cdots\\to F_c^\\vee\\to E\\to0$, where $E=\\operatorname{Ext}_R^c(B,R)$; for $c=0$ this means $E=B^\\vee$. Thus $\\operatorname{pd}_RE\\le c$. The module $E$ is nonzero: $R\\operatorname{Hom}_R(B,R)$ is nonzero, since if it vanished then the biduality $B\\cong R\\operatorname{Hom}_R(R\\operatorname{Hom}_R(B,R),R)$ of [F1] would give $B=0$, contrary to $B\\ne0$; and [F2] identifies this complex with $E[-c]$. It is annihilated by $I$, so its support has dimension at most $d$. By [F4], $\\operatorname{depth}_RE=N-\\operatorname{pd}_RE\\ge d$; depth is at most support dimension by [[cor-depth-of-a-finite-local-module-at-most-its-dimension]], so both equal $d$. Regularity over $R$ and over $B$ is measured by the same multiplication maps; hence $E$ is CM over $B$. Its localizations are CM by [F4], and every point specializes to a closed point, so $\\omega_X$ is CM everywhere. Finally at any point $y$, if $(\\omega_X)_y$ vanished then $(D_X)_y$ would vanish, contradicting the local homothety for nonzero $\\mathcal O_{X,y}$; therefore its support is all of $X$. AC is inherited through the dimension, resolution and CM suppliers.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If X is empty then every local ring statement is vacuous, the closed-point argument of step 1.1 has no point to test, and the conclusions D_X = omega_X[d], support X, and CM hold vacuously for the zero sheaf."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero cases are separated: K = 0 and the empty-scheme zero complex vanish on both sides, while for nonempty X step 2.1 shows E = Ext_R^c(B,R) is nonzero and the homothety at any point forces (omega_X)_y != 0, so omega_X is not the zero sheaf."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The rank/degree-one instances are c = 0 (X = P^N, where step 2.1 records E = B^v and omega_X is the invertible O_P(-N-1)) and d = 0 at the other extreme; both are read off from the same computation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singular and non-reduced X are included, and omega_X is not asserted invertible: step 2.1 proves it is CM of full support by the depth computation, exactly the degenerate behaviour the statement records."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The degree endpoints of the ambient range are handled in step 1.1: H^a(D_X)_x vanishes for every a != -d, including a = 0 and a = -N; step 2.1 pins the surviving degree to depth d = dim supp E."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited through [F1]-[F4] and the resolution, dimension and support suppliers; the closed point chosen in the support argument of step 1.1 is supplied by the stated AC and the Jacobson residue supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction is step 1.1: the local Ext concentration at every closed point, together with coherence and the existence of closed points in supports, gives the vanishing of all other cohomology sheaves."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction is the identification of the surviving sheaf: step 2.1 shows E is CM of dimension d and that its support is all of X, matching the ambient sheaf Ext formula i_*omega_X = Ext_P^{N-d}(i_*O_X, omega_P)."
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-28",
+        "notes": "Checked Proof 1.1\u20132.1 and all cited supplier statements. At closed points finite algebraic residue makes local dimensions d and N; CM quotient Ext concentrated at c=N-d appears in sheaf degree c-N=-d. Coherent supports on finite-type schemes meet closed points, so stalk vanishing proves global concentration and canonical truncation. Dual finite-free resolution of length c resolves E=Ext_R^c(B,R), giving pd_R E<=c; ambient biduality proves E nonzero. Auslander\u2013Buchsbaum and depth<=support dimension force depth/dimension d. Depth over quotient B is the same; CM localization spreads to all points. Local homothety excludes vanishing stalks, proving full support. c=0, d=0, empty X and non-geometrically-rational closed points cause no exception. Stacks 0FVZ Statement/Proof confirms concentration/CM/full support; AC retained. No defect found."
+      }
+    },
+    "thm-serre-duality-for-coherent-sheaves-on-projective-cm-scheme": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-projective-dualizing-complex-trace-and-embedding-independence",
+          "source_section": "Statement",
+          "quote": "Assume AC. For a projective scheme $X/k$ and a closed embedding $i:X\\hookrightarrow P=\\mathbb P^N_k$, the dualizing complex $D_i=i^!(\\omega_P[N])$ has a trace\n$$t_i:R\\Gamma(X,D_i)\\xrightarrow{\\mathrm{counit}}R\\Gamma(P,\\omega_P[N])\\xrightarrow{t_P}k.$$\nFor $K\\in D^b_{\\mathrm{Coh}}(X)$ this trace induces natural isomorphisms\n$$\\operatorname{Hom}_{D(X)}(K,D_i[r])\\cong\\operatorname{Hom}_k(H^{-r}(X,K),k)\\quad(r\\in\\mathbb Z),$$\nby composition with a class $\\mathcal O_X\\to K[-r]$ and $t_i$. Two embeddings give a unique isomorphism between their complexes which identifies these duality isomorphisms; it preserves the trace. Write the resulting normalized object as $D_X$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-projective-embedding-dualizing-complex-existence",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X$ be a projective scheme over a field $k$, and fix a closed embedding $i:X\\hookrightarrow P=\\mathbb P^N_k$. With $\\omega_P=\\mathcal O_P(-N-1)$, set\n$$D_i=i^!(\\omega_P[N]),\\qquad i_*D_i=\\mathcal R\\!Hom_P(i_*\\mathcal O_X,\\omega_P[N]).$$\nThen $D_i$ is a dualizing complex. For every $K\\in D^b_{\\mathrm{Coh}}(X)$, $\\mathbb D_i(K)=\\mathcal R\\!Hom_X(K,D_i)$ lies in $D^b_{\\mathrm{Coh}}(X)$ and canonical evaluation gives $K\\cong\\mathbb D_i\\mathbb D_i(K)$. No smoothness or CM hypothesis is needed here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-closed-immersion-derived-coinduction-adjunction",
+          "source_section": "Statement",
+          "quote": "Assume AC. For a finite homomorphism $A\\to B$ of Noetherian rings and $G\\in D^+(A)$, the complex $f^!G=R\\operatorname{Hom}_A(B,G)$ has its natural $B$-action and is right adjoint to restriction of scalars. For $M\\in D^b(B)$ there is a natural isomorphism\n$$R\\operatorname{Hom}_B(M,f^!G)\\cong R\\operatorname{Hom}_A(M,G).$$\nFor a closed immersion $i:X\\hookrightarrow Y$ of Noetherian schemes and $G\\in D^+(\\mathcal O_Y)$, set $i^!G=i^{-1}\\mathcal R\\!Hom_Y(i_*\\mathcal O_X,G)$ with its $\\mathcal O_X$-action. The analogous internal and global derived Hom adjunctions hold:\n$$i_*\\mathcal R\\!Hom_X(M,i^!G)\\cong\\mathcal R\\!Hom_Y(i_*M,G),\\qquad R\\operatorname{Hom}_X(M,i^!G)\\cong R\\operatorname{Hom}_Y(i_*M,G).$$\nThe counit $i_*i^!G\\to G$ is evaluation at $1$. Also $R\\Gamma(Y,i_*K)=R\\Gamma(X,K)$ for bounded coherent $K$. This is the finite-map adjunction needed for a projective embedding; it does not assert full faithfulness of $i_*$ on derived categories.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-projective-space-derived-coherent-duality",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $P=\\mathbb P^N_k$ and $\\omega_P=\\mathcal O_P(-N-1)$, with Laurent residue trace $t_P:H^N(P,\\omega_P)\\to k$. For all $K\\in D^b_{\\mathrm{Coh}}(P)$ evaluation followed by this trace gives a natural quasi-isomorphism\n$$R\\Gamma(P,\\mathcal R\\!Hom_P(K,\\omega_P[N]))\\longrightarrow R\\operatorname{Hom}_k(R\\Gamma(P,K),k).$$\nIn particular it holds in every degree, with the usual signs for shifts and distinguished triangles.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-projective-pure-cm-dualizing-complex-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ is projective over a field, Cohen\u2013Macaulay and pure of dimension $d$, its normalized dualizing complex has the canonical concentration\n$$D_X\\cong\\omega_X[d],\\qquad \\omega_X=\\mathcal H^{-d}(D_X).$$\nFor $i:X\\hookrightarrow\\mathbb P^N_k$,\n$$i_*\\omega_X=\\mathcal Ext_P^{N-d}(i_*\\mathcal O_X,\\omega_P).$$\nThe sheaf $\\omega_X$ is coherent, has support $X$, and is CM. It need not be a line bundle.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-injective-modules-flasque-and-ext-of-structure-sheaf",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(Y,\\mathcal O_Y)$ be a ringed space, let\n$H^q(Y,-)$ be sheaf cohomology computed from the supplied functorial injective\nresolution datum on $\\mathrm{Ab}(Y)$ of\n[[def-sheaf-cohomology-derived-global-sections]], and let\n$\\operatorname{Ext}^q_{\\mathcal O_Y}$ be the global sheaf Ext of\n[[def-sheaf-ext-for-coherent-modules]].\n\n1. Every injective $\\mathcal O_Y$-module $\\mathcal I$\n   ([[def-injective-object]]) is flasque as a sheaf of abelian groups\n   ([[def-flasque-sheaf]]): for all open subsets $U\\subseteq V\\subseteq Y$ the\n   restriction map $\\mathcal I(V)\\to\\mathcal I(U)$ is surjective.\n2. For every $\\mathcal O_Y$-module $\\mathcal G$ and every $q\\ge0$ there is a\n   canonical isomorphism\n   $$\\chi^q_{\\mathcal G}:\\operatorname{Ext}^q_{\\mathcal O_Y}(\\mathcal O_Y,\\mathcal G)\\xrightarrow{\\ \\sim\\ }H^q(Y,\\mathcal G),$$\n   natural in $\\mathcal G$; in degree zero it is the composite\n   $\\operatorname{Hom}_{\\mathcal O_Y}(\\mathcal O_Y,\\mathcal G)\\cong\\Gamma(Y,\\mathcal G)=H^0(Y,\\mathcal G)$\n   which sends a morphism to its value at the unit section.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-yoneda-product-is-composition-in-the-derived-category",
+          "source_section": "Statement",
+          "quote": "Assume DC, set-sized extension classes, and enough projectives with supplied resolutions, or dually enough injectives with supplied resolutions. Normalize the image of a short extension to be its connecting arrow in the cone convention of this page, and the image of a higher extension to be the shifted composite of the connecting arrows of its short exact pieces. With this normalization the Yoneda-class bijection is $\\operatorname{YExt}^n(M,N)\\cong\\operatorname{Hom}_D(M,N[n])$ for $n\\geq1$. If $\\alpha\\in\\operatorname{YExt}^p(M,L)$ and $\\beta\\in\\operatorname{YExt}^q(L,N)$, their splice corresponds to $\\beta[p]\\alpha:M\\to N[p+q]$; degree-zero maps act by pullback and pushout, with identity units.\n\nIn particular, for $e:0\\to A\\to Z\\to B\\to0$ and $e':0\\to B\\xrightarrow u Z'\\to C\\to0$, the splice is zero in $\\operatorname{Ext}^2(C,A)$ if and only if there is an extension $0\\to A\\to W\\to Z'\\to0$ whose pullback along $u$ is $e$. Equivalently there is a commutative diagram of these two rows, with vertical maps $1_A,Z\\to W,u$, whose middle and right columns are $0\\to Z\\to W\\to C\\to0$ and $0\\to B\\to Z'\\to C\\to0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-projective-coherent-cohomology-finite-and-vanishing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $A$ be a Noetherian\ncommutative ring, let $n\\ge0$, let $X=\\mathbb P^n_A$ with twisting sheaves\n$\\mathcal O_X(m)$ ([[def-twisting-sheaf-proj]],\n[[def-relative-projective-space-standard-charts]]) and let $\\mathcal G$ be a\ncoherent $\\mathcal O_X$-module ([[def-coherent-module-scheme]]). Then:\n\n1. $H^q(X,\\mathcal G)$ is a finite $A$-module for every $q\\ge0$;\n2. for every $q>0$ there is an integer $m_0=m_0(\\mathcal G,q)$ such that\n   $H^q(X,\\mathcal G(m))=0$ for all $m\\ge m_0$, where\n   $\\mathcal G(m)=\\mathcal G\\otimes_{\\mathcal O_X}\\mathcal O_X(m)$.\n\nThe same two conclusions hold for a closed subscheme\n$i:X\\hookrightarrow\\mathbb P^n_A$ and a coherent $\\mathcal O_X$-module\n$\\mathcal G$, with $\\mathcal O_X(1)=i^*\\mathcal O_{\\mathbb P^n_A}(1)$ and\n$\\mathcal G(m)=\\mathcal G\\otimes_{\\mathcal O_X}\\mathcal O_X(m)$. The zero\nmodule, the zero ring $A=0$ and the case $n=0$ are included.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cohomological-dimension-noetherian-scheme",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a separated\nNoetherian scheme ([[def-locally-noetherian-and-noetherian-scheme]]) whose\nunderlying topological space is Noetherian of dimension $\\dim X\\le d$ for an\ninteger $d\\ge0$ ([[def-noetherian-topological-space]],\n[[def-dimension-noetherian-topological-space]]); this is the finite Krull\ndimension $d$ of the design's finite-dimensional setting, the chain dimension\nof the underlying space being the dimension used throughout this page. Then\n$$H^q(X,\\mathcal F)=0$$\nfor every quasi-coherent $\\mathcal O_X$-module $\\mathcal F$\n([[def-quasi-coherent-module-scheme]]) and every integer $q>d$, where\n$H^q$ is sheaf cohomology ([[def-sheaf-cohomology-derived-global-sections]])\napplied to the underlying sheaf of abelian groups of $\\mathcal F$\n([[def-module-on-ringed-space]]). The empty scheme has no positive\ncohomology. Separation is retained from the design although it is not used:\nthe topological vanishing theorem quoted below needs only a Noetherian space\nof dimension at most $d$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] to $F$ with $r=-i$. Since $D_X=\\omega_X[d]$ by [F2], its left side becomes $\\operatorname{Hom}_{D(X)}(F,\\omega_X[d-i])=\\operatorname{Ext}_X^{d-i}(F,\\omega_X)$; its right side is $\\operatorname{Hom}_k(H^i(X,F),k)$. For $\\eta\\in H^i(X,F)$, [F3] represents it by $\\beta:\\mathcal O_X\\to F[i]$. A class $\\alpha:F\\to\\omega_X[d-i]$ pairs with it by $t_X(\\alpha[i]\\circ\\beta)$. This is the Yoneda composition of [F3] and is exactly the evaluation comparison proved in [F1]. Thus it is bilinear, natural in $F$, and compatible with shifts and connecting maps.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F4] to the closed subscheme $X\\hookrightarrow\\mathbb P^N_k$ supplied by a projective embedding: its finite-dimensionality clause gives that each $H^i(X,F)$ is a finite-dimensional $k$-vector space. The isomorphism in step 1.1 proves that the adjoint map from Ext to the dual of cohomology is an isomorphism. For a finite-dimensional space, evaluation into its double dual is an isomorphism, so the other adjoint map is an isomorphism as well. Outside $0\\le i\\le d$, cohomology vanishes by [F4] and the negative-degree convention; step 1.1 then proves the corresponding Ext vanishing. For bounded coherent $K$, retain the actual global derived comparison used in [F1]: closed-immersion adjunction gives $R\\operatorname{Hom}_X(K,D_X)\\cong R\\operatorname{Hom}_P(i_*K,\\omega_P[N])$, and the projective-space evaluation/trace map identifies the latter with $R\\operatorname{Hom}_k(R\\Gamma(P,i_*K),k)=R\\operatorname{Hom}_k(R\\Gamma(X,K),k)$. This comparison is an isomorphism in $D(k)$ induced by the same counit and trace, so its naturality and signs are those of [F1]. The biduality $K\\cong\\mathcal R\\!Hom_X(\\mathcal R\\!Hom_X(K,D_X),D_X)$ is the coherent biduality of the embedding construction [F1], valid after pushing into the ambient projective space, without imposing perfectness on $K$ over the singular scheme. AC enters through the cited resolution, derived-composition and cohomology suppliers.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For F = 0 every group in the pairing vanishes and the adjoint maps are the zero isomorphism; for X empty the statement is vacuous, and step 1.1 applies to the zero sheaf without modification."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero classes and the zero sheaf are covered: step 1.1 sends the zero class to the zero functional, and step 2.1 proves the Ext groups outside 0 <= i <= d vanish by [F4] and the negative-degree convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof 1.1\u20132.1 and the Statement imply: For F=O_X and i=0, the pairing identifies H^d(X,omega_X) with the dual of the finite-dimensional algebra H^0(X,O_X); it does not assume this algebra equals k. Evaluation at its unit recovers the trace. For two disjoint k-rational points (d=0), both groups are k^2 and the trace is the sum of the two coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singular, reducible and non-reduced X and non-locally-free, non-perfect sheaves F are the content: step 1.1 uses only bounded coherence of F, and step 2.1 explicitly avoids imposing perfectness on K over the singular scheme."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The degree endpoints i = 0 and i = d are part of the displayed pairing, and outside 0 <= i <= d step 2.1 proves both sides vanish; the substitution r = -i of step 1.1 covers every shift."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited from the cited resolution, derived-composition and cohomology suppliers, as the final sentence of step 2.1 records; the pairing itself is evaluation composed with the trace and selects nothing."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction is the isomorphism from Ext to the dual: step 1.1 exhibits it as evaluation and step 2.1 shows the adjoint map is an isomorphism because the two spaces are finite-dimensional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction is the dual form and biduality: step 2.1 uses double-dual evaluation for finite-dimensional spaces to get Ext = H^i(X,F)^v, and the complex form and biduality from the embedding construction of [F1]."
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-28",
+        "notes": "Checked Proof 1.1\u20132.1 and all cited suppliers after the level-4 concentration review. Substitute r=-i in the normalized trace representation; shift omega[d] yields global Ext^(d-i), and beta:O_X->F[i] followed by alpha[i] is exactly the Yoneda/trace pairing. Projectivity gives separated Noetherian X and finite-dimensional coherent cohomology, so duality in one adjoint implies duality in the other; endpoints and i outside [0,d] yield the required vanishings. Bounded K retains the actual closed-immersion/ambient derived map in D(k), and coherent biduality is internal rather than an assertion of singular perfectness. Empty X, zero F, d=0, disconnected and nonreduced X are allowed. In particular H^0(O_X) need not be k: two rational points give k\u00d7k and H^d(omega) is the dual of the entire finite algebra; trace is evaluation at its unit. AC is retained. Stacks 0FVZ(3\u20134), 0FVW and Vakil 29.3.14\u201315 confirm precisely these claims. Current theorem item is unchanged; the corrected boundary is sound."
+      }
+    },
+    "rem-smooth-projective-locally-free-duality-is-the-ag-lie-special-case": {
+      "citations": [],
+      "derivations": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The comparison statement is quantified over a smooth projective X of pure dimension d; for the empty scheme both pairings vanish and the specialization is vacuous, so the statement carries no separate empty-family obligation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero sheaf E = 0 is included: both RHom(0, omega_X) and 0^v tensor omega_X vanish, and the statement imposes no rank restriction beyond finite local freeness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The rank-one instance E = O_X is the statement's identification RHom(O_X, omega_X) = omega_X = O_X^v tensor omega_X; in dimension d = 0 both sides reduce to omega_X, the canonical bundle."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Remark statement's smooth specialization excludes singularities. Its singular contrast retains the coherent theorem's projective, pure d-dimensional Cohen\u2013Macaulay hypotheses; omega_X need not be invertible. Without Cohen\u2013Macaulayness the normalized dualizing complex need not be a shift of one sheaf, so the sheaf Ext formula is not asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The relevant cohomological range is unchanged by the specialization: outside 0 <= q <= n both sides of the locally free pairing vanish, and the statement asserts the recovery of the full AG-LIE pairing in that range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement retains the Axiom of Choice through the coherent theorem and the published AG-LIE theorem; no selection is made by the comparison itself."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Remark statement, especially its second paragraph, gives the following comparison: The coherent pairing becomes the published smooth pairing under the normalized canonical-line identification: multiply the Koszul/Hodge map by sigma_c=(-1)^(c(c+1)/2), as required by lem-regular-immersion-local-to-global-ext-collapse, then use the Gysin cup/evaluation compatibility."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Remark statement, especially its second paragraph, gives the following comparison: Finite local freeness gives RHom(E,omega_X)=E^dual tensor omega_X. The normalized collapse, including sigma_c exactly once, transports the counit trace to the published Gysin trace; its compatibility supplier supplies embedding independence."
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step7-v2-initial-r1-u28",
+        "notes": "Local Step-7 review of both Remark paragraphs and the current coherent theorem, smooth locally free theorem, Koszul Ext, conormal adjunction, normalized collapse and Gysin compatibility suppliers. Finite local freeness makes internal Hom exact and gives the stated Ext/cohomology comparison. The normalized collapse inserts sigma_c=(-1)^(c(c+1)/2) once, and the counit/Gysin comparison transports the same trace. The singular contrast now retains projectivity, pure dimension d and Cohen\u2013Macaulayness, exactly the coherent theorem's hypotheses. For X=Proj k[x,y,z]/(x^2,xy), the nilpotent ideal sheaf is a length-one skyscraper and H^0(O_X) has dimension 2; the resolution 0->O(-3)->O(-2)^2->O->O_X->0 gives omega_X=O_{x=0}(-2) and dim H^1(omega_X)=1, so the former unrestricted sheaf claim was false. Stacks 0FVV, 0FVZ and 0FW0 were consulted in full for the relevant statements and proofs. AC remains inherited. This is a local repair review, not an independent audit of the repair."
+      }
+    },
+    "rem-curve-residue-duality-is-the-dimension-one-case": {
+      "citations": [],
+      "derivations": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement is quantified over a projective pure CM curve C and a coherent F; the empty scheme is not a curve, and no empty family or cover is formed by the specialization."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "F = 0 makes both displayed groups zero; the trace normalization concerns the nonzero residue class dz/z, and the statement isolates that class rather than asserting anything about zero classes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The normalization is a one-dimensional statement: at a rational point the class dz/z maps to 1, and on each smooth connected component H^1(omega_C) is one-dimensional, which is how the point normalizations determine the trace."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singular curves are explicitly included by the statement, which also declines to identify the dualizing sheaf of a singular curve with ordinary rational differentials; the locally free replacement of global Ext is asserted only under finite local freeness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The dimension-one endpoints of the statement are the two displayed formulas: they are the i = 0 and i = 1 instances of the coherent theorem, and the sign convention is fixed at the point class."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is retained from the coherent theorem and the rational-point residue-normalization lemma; the statement introduces no selection beyond the algebraic closure used to place rational points on components."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Forward: the statement specializes the coherent theorem to d = 1 and identifies the first pairing with H^1(C,E) x H^0(C, E^v tensor Omega^1) for smooth C and vector bundles E."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Reverse: the statement identifies the trace normalization of the specialization with the local residue convention res(dz/z) = 1, proves compatibility with field extension, and descends the equality to k."
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-serre-duality-on-a-singular-projective-cm-curve": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-regular-quotients-and-cohen-macaulayness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]).\n\nLet $(R,\\mathfrak m)$ be Noetherian local, let $0\\ne M$ be finite, and let\n$x_1,\\ldots,x_r$ be both $M$-regular and an initial segment of a system of\nparameters for $M$. Then $M$ is Cohen--Macaulay if and only if\n$M/(x_1,\\ldots,x_r)M$ is Cohen--Macaulay.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-cohomology-projective-space-twisting-sheaves",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $A$ be a commutative\nring with $1$ ([[def-commutative-ring]]), let $n\\ge0$, let $d\\in\\mathbb Z$ and\nlet $X=\\mathbb P^n_A\\cong\\operatorname{Proj}A[x_0,\\dots,x_n]$ be relative\nprojective space ([[def-relative-projective-space-standard-charts]],\n[[def-polynomial-ring-on-a-family-of-indeterminates]]), with twisting sheaf\n$\\mathcal O_X(d)$ ([[def-twisting-sheaf-proj]]) and cohomology\n$H^q(X,\\mathcal O_X(d))$. Then\n$$H^q(X,\\mathcal O_X(d))=0\\qquad\\text{unless }q=0\\text{ or }q=n.$$\nIf $n>0$, then $H^0(X,\\mathcal O_X(d))\\cong A[x_0,\\dots,x_n]_d$ when $d\\ge0$\nand $H^0(X,\\mathcal O_X(d))=0$ when $d<0$, where\n$A[x_0,\\dots,x_n]_d$ is the degree-$d$ graded piece\n([[def-graded-ring-and-graded-module]]); and $H^n(X,\\mathcal O_X(d))$ is the\nfree $A$-module on the Laurent monomials $x_0^{e_0}\\cdots x_n^{e_n}$ with\n$e_i<0$ for every $i$ and $\\sum_ie_i=d$, so that it is nonzero precisely when\n$d\\le-n-1$ and $A\\ne0$. For $n=0$ one has $\\mathbb P^0_A=\\operatorname{Spec}A$\nand $H^0(X,\\mathcal O_X(d))\\cong A$ for every $d\\in\\mathbb Z$, with all higher\ngroups zero. The zero ring $A=0$ is allowed: then $X=\\varnothing$ and all\ngroups are zero, in agreement with both displayed descriptions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-projective-hypersurface-cohomology-sequence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice as inherited from the cited suppliers\n([[def-axiom-of-choice]]). Let $A$ be a commutative ring with $1$\n([[def-commutative-ring]]), let $n\\ge0$, let $B=A[x_0,\\dots,x_n]$ carry the\ntotal-degree grading ([[def-polynomial-ring-on-a-family-of-indeterminates]]),\nand let $f\\in B$ be homogeneous of degree $d>0$. Let\n$X=V_+(f)\\subseteq\\mathbb P^n_A$ be the closed subscheme cut out by $f$, with\nclosed immersion $i:X\\to\\mathbb P^n_A$ ([[def-closed-immersion-schemes]]); by\n[[thm-closed-subschemes-projective-space-homogeneous-ideals]] one has\n$X=\\operatorname{Proj}\\bigl(B/(f)\\bigr)$ and\n$X\\cap D_+(x_i)=\\operatorname{Spec}\\bigl(B_{(x_i)}/(f/x_i^d)\\bigr)$.\nAssume that for every $i$ the dehomogenisation $f/x_i^d$ is a nonzerodivisor of\nthe chart ring $B_{(x_i)}$; this hypothesis is automatic when $A=k$ is a field\nand $f\\ne0$.\n\nThen the multiplication-by-$f$ morphism of $\\mathcal O_{\\mathbb P^n_A}$-modules\n$\\mathcal O_{\\mathbb P^n_A}(-d)\\to\\mathcal O_{\\mathbb P^n_A}$\n([[def-twisting-sheaf-proj]]) together with the structure map\n$i^{\\sharp}:\\mathcal O_{\\mathbb P^n_A}\\to i_*\\mathcal O_X$ of the closed\nimmersion ([[def-direct-image-sheaf]]) forms a short exact sequence\n$$0\\to\\mathcal O_{\\mathbb P^n_A}(-d)\\xrightarrow{\\cdot f}\\mathcal O_{\\mathbb P^n_A}\\xrightarrow{i^{\\sharp}}i_*\\mathcal O_X\\to0,$$\nand hence, by the long exact sequence of sheaf cohomology\n([[def-sheaf-cohomology-derived-global-sections]],\n[[thm-long-exact-sequence-sheaf-cohomology]]), a long exact sequence\n$$\\cdots\\to H^q(\\mathbb P^n_A,\\mathcal O(-d))\\to H^q(\\mathbb P^n_A,\\mathcal O)\\to H^q(X,\\mathcal O_X)\\xrightarrow{\\partial^q}H^{q+1}(\\mathbb P^n_A,\\mathcal O(-d))\\to\\cdots,$$\nin which the middle terms are identified by\n$H^q(\\mathbb P^n_A,i_*\\mathcal O_X)\\cong H^q(X,\\mathcal O_X)$\n([[lem-closed-immersion-cohomology-pushforward]]). Substituting the explicit\ngroups of [[thm-cohomology-projective-space-twisting-sheaves]] this computes\nthe cohomology of $X$: for every $q\\ge1$ the connecting map is an isomorphism\n$$H^q(X,\\mathcal O_X)\\cong H^{q+1}(\\mathbb P^n_A,\\mathcal O(-d)),$$\nso $H^q(X,\\mathcal O_X)=0$ for every $q\\ge1$ with $q\\ne n-1$, while\n$$H^{n-1}(X,\\mathcal O_X)\\cong H^n(\\mathbb P^n_A,\\mathcal O(-d))\\qquad(n\\ge2)$$\nis the free $A$-module on the $(n+1)$-tuples $(e_0,\\dots,e_n)$ of negative\nintegers with $e_0+\\cdots+e_n=-d$. When moreover $A=k$ is a field and\n$f\\ne0$, the number of such tuples is $\\binom{d-1}{n}$\n([[cor-compositions-with-k-parts-are-counted-by-binomial-coefficients]],\n[[def-binomial-coefficient]]), so for $n\\ge2$ one has\n$\\dim_kH^{n-1}(X,\\mathcal O_X)=\\binom{d-1}{n}$, which is $0$ for $d\\le n$. For $n=1$ the top group occurs in degree zero and sits in the exact sequence displayed next; over a field its dimension is $d$, not $d-1$. In\ndegree zero the long exact sequence reads\n$$0\\to H^0(\\mathbb P^n_A,\\mathcal O(-d))\\to A\\to H^0(X,\\mathcal O_X)\\to H^1(\\mathbb P^n_A,\\mathcal O(-d))\\to0,$$\nwith $H^0(\\mathbb P^n_A,\\mathcal O(-d))=0$ for $n\\ge1$ and\n$H^0(\\mathbb P^n_A,\\mathcal O(-d))\\cong A$ for $n=0$, while\n$H^1(\\mathbb P^n_A,\\mathcal O(-d))=0$ for $n\\ne1$ and\n$H^1(\\mathbb P^1_A,\\mathcal O(-d))$ free on the $(d-1)$-element set of\nnegative pairs summing to $-d$ for $d\\ge2$. The zero ring, the empty\nhypersurface and nonreduced $X$ are included.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-flasque-sheaves-acyclic",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, let $X$ be a topological space and let\n$\\mathcal F$ be a flasque sheaf of abelian groups on $X$\n([[def-flasque-sheaf]]). Then for every open subspace $U\\subseteq X$ and every\ninteger $q>0$,\n$$H^q(U,\\mathcal F|_U)=0,$$\nwhere $H^q(U,-)$ denotes sheaf cohomology on the space $U$\n([[def-sheaf-cohomology-derived-global-sections]]) computed with the global\nsections functor of $U$, and $\\mathcal F|_U$ is the restriction of $\\mathcal F$\nto $U$. Equivalently, every restriction $\\mathcal F|_U$ is $\\Gamma$-acyclic\n([[def-acyclic-sheaf-global-sections]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-projective-pure-cm-dualizing-complex-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ is projective over a field, Cohen\u2013Macaulay and pure of dimension $d$, its normalized dualizing complex has the canonical concentration\n$$D_X\\cong\\omega_X[d],\\qquad \\omega_X=\\mathcal H^{-d}(D_X).$$\nFor $i:X\\hookrightarrow\\mathbb P^N_k$,\n$$i_*\\omega_X=\\mathcal Ext_P^{N-d}(i_*\\mathcal O_X,\\omega_P).$$\nThe sheaf $\\omega_X$ is coherent, has support $X$, and is CM. It need not be a line bundle.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-serre-duality-for-coherent-sheaves-on-projective-cm-scheme",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $k$ be a field and let $X$ be a projective, pure $d$-dimensional Cohen\u2013Macaulay $k$-scheme. Let $D_X=\\omega_X[d]$ be its normalized dualizing complex, and let $t_X:H^d(X,\\omega_X)\\to k$ be its trace. For every coherent sheaf $F$ and every integer $i$, composition followed by trace gives a natural perfect pairing of finite-dimensional vector spaces\n$$\\operatorname{Ext}_X^{d-i}(F,\\omega_X)\\times H^i(X,F)\\longrightarrow H^d(X,\\omega_X)\\xrightarrow{t_X}k.$$\nHere Ext is global Ext; negative Ext and negative sheaf cohomology are zero. Equivalently,\n$$\\operatorname{Ext}_X^{d-i}(F,\\omega_X)\\cong H^i(X,F)^\\vee.$$\nFor $K\\in D^b_{\\mathrm{Coh}}(X)$ the complex form \u2014 an isomorphism in $D(k)$ \u2014 is $R\\operatorname{Hom}_X(K,D_X)\\cong R\\operatorname{Hom}_k(R\\Gamma(X,K),k)$. Coherent derived biduality holds with respect to $D_X$, even when $F$ is not locally free or perfect on $X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dimension-and-parameters-for-modules",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(R,\\mathfrak m)$ be a Noetherian local ring and let $M\\neq0$ be a finite\n$R$-module. Put\n$$ d:=\\dim\\operatorname{Supp}(M). $$\nThen:\n\n1. $d$ is the least integer $r$ for which there exist $x_1,\\ldots,x_r\\in\\mathfrak m$\n   with $M/(x_1,\\ldots,x_r)M$ of finite length;\n2. whenever $x_1,\\ldots,x_d$ have this property, they form a system of\n   parameters for $M$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dimension-formula-for-affine-domains",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field, let $A$ be a finite-type $k$-domain, and let $\\mathfrak p\\in\\operatorname{Spec}(A)$. Then\n$$ \\operatorname{ht}(\\mathfrak p)+\\operatorname{trdeg}_k\\operatorname{Frac}(A/\\mathfrak p)=\\operatorname{trdeg}_k\\operatorname{Frac}(A). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-affine-domain-chain-dimension-formula-step",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field, let $A$ be a finite-type $k$-domain, and let $\\mathfrak p\\subseteq\\mathfrak q$ be prime ideals of $A$. Then\n$$ \\operatorname{ht}(\\mathfrak q/\\mathfrak p)+\\operatorname{trdeg}_k\\operatorname{Frac}(A/\\mathfrak q)=\\operatorname{trdeg}_k\\operatorname{Frac}(A/\\mathfrak p). $$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On $z=1$, the polynomial is $y^2-x^2(x+1)$. It is irreducible over $k(x)$ as a polynomial in $y$, since $x+1$ has odd valuation at $x=-1$ and hence is not a square; Gauss's lemma proves irreducibility in $k[x,y]$. The homogeneous polynomial is not divisible by $z$, and any homogeneous factorization would dehomogenize to a nontrivial factorization, so $C$ is integral and pure of dimension one. Its affine gradient vanishes at $(0,0)$ and its quadratic tangent cone is $y^2-x^2$, with two distinct lines. Thus $p$ is a node and $C$ is singular. In a regular ambient local ring along $C$, the nonzero hypersurface equation is regular and lowers dimension by one by [F3]. Lift a parameter tuple from the quotient and prepend the equation: [F3] makes this a parameter tuple of the ambient ring. The equation is therefore a regular parameter element, so [F1] makes $C$ CM.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The resolution $0\\to\\mathcal O_{\\mathbb P^2}(-3)\\xrightarrow{f}\\mathcal O_{\\mathbb P^2}\\to i_*\\mathcal O_C\\to0$ of [F1], dualized into $\\omega_{\\mathbb P^2}=\\mathcal O(-3)$, has cokernel $i_*\\mathcal O_C$ in degree one. Therefore [F2] gives $\\omega_C=\\mathcal O_C$. The same resolution and its long exact sequence [F1] give $H^0(C,\\mathcal O_C)=k$ and $H^1(C,\\mathcal O_C)=H^2(\\mathbb P^2,\\mathcal O(-3))=k$. The trace identifies the latter with $k$ and pairs it perfectly with the constants by [F2]. Finally $H^0(C,k_p)=k$ and $H^1(C,k_p)=0$, since a point sheaf has surjective restriction maps and is flasque, so [F1] applies. Apply [F2] with $d=1$ and $F=k_p$ to obtain the stated Ext and Hom groups. The example uses the A theorem for both pairings; singularity did not require a locally free hypothesis on $k_p$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example names a specific nonempty curve C and a point p of it; no union, cover or indexed family is formed, and the empty scheme is excluded by the curve hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero sheaf would give vanishing groups, while the example computes the specific nonzero coherent sheaves O_C and k_p; the zero values appear as H^0(C,k_p)=k, H^1(C,k_p)=0 and Hom_C(k_p, omega_C)=0 in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example exhibits one-dimensional spaces: H^0(C, omega_C) = k pairs with H^1(C, O_C) = k, and omega_C = O_C is a line bundle; step 2.1 computes both spaces as k."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singularity is the point of the example: step 1.1 verifies integrality, locates the node and shows C is CM as a hypersurface, and step 2.1 dualizes at the singular point without any locally free hypothesis on k_p."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For d = 1 the two degrees are computed in step 2.1: H^0 and H^1 of O_C, and the degree-zero and degree-one Ext groups of the node skyscraper."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited through the coherent theorem and the cohomology suppliers; the example performs no selection, its curve and point being given explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Forward: step 2.1 computes omega_C = O_C from the dualized structure sequence and identifies the trace pairing of H^1(C, O_C) with H^0(C, omega_C)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Reverse: applying the coherent theorem in both Ext degrees at k_p in step 2.1 gives Ext_C^1(k_p, omega_C) = k and Hom_C(k_p, omega_C) = 0, the two directions of the duality at a singular point."
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-28",
+        "notes": "Read Example and Verification 1.1\u20132.1 and exact suppliers. Characteristic zero makes the tangent lines y=\u00b1x distinct. x+1 has odd valuation, so the affine quadratic is irreducible over k(x); Gauss plus no z-factor makes the homogeneous cubic integral. The only singular point is (0,0): y=0 and x=0 or x=-1 on the curve, but derivative at x=-1 is nonzero; at infinity [0:1:0], derivative in z is 1. Local equation is a nonzerodivisor; affine-domain chain dimensions give a one-step dimension drop, and lifted quotient parameters justify the regular-parameter theorem at every point, including the generic point. Dualizing the cubic sequence into O(-3) gives Ext^1=O_C; the long exact sequence gives H^0=H^1=k. Node skyscraper is flasque with H^0=k and H^1=0, so the coherent theorem gives Ext^1=k and Hom=0, with no locally-free assumption. AC retained; Vakil 29.4.7\u20138/H and Stacks 0FVZ support the computations. Reader parameter-citation repair is accepted."
+      }
+    },
+    "ex-serre-duality-on-a-smooth-projective-surface": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-serre-duality-for-coherent-sheaves-on-projective-cm-scheme",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $k$ be a field and let $X$ be a projective, pure $d$-dimensional Cohen\u2013Macaulay $k$-scheme. Let $D_X=\\omega_X[d]$ be its normalized dualizing complex, and let $t_X:H^d(X,\\omega_X)\\to k$ be its trace. For every coherent sheaf $F$ and every integer $i$, composition followed by trace gives a natural perfect pairing of finite-dimensional vector spaces\n$$\\operatorname{Ext}_X^{d-i}(F,\\omega_X)\\times H^i(X,F)\\longrightarrow H^d(X,\\omega_X)\\xrightarrow{t_X}k.$$\nHere Ext is global Ext; negative Ext and negative sheaf cohomology are zero. Equivalently,\n$$\\operatorname{Ext}_X^{d-i}(F,\\omega_X)\\cong H^i(X,F)^\\vee.$$\nFor $K\\in D^b_{\\mathrm{Coh}}(X)$ the complex form \u2014 an isomorphism in $D(k)$ \u2014 is $R\\operatorname{Hom}_X(K,D_X)\\cong R\\operatorname{Hom}_k(R\\Gamma(X,K),k)$. Coherent derived biduality holds with respect to $D_X$, even when $F$ is not locally free or perfect on $X$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "rem-smooth-projective-locally-free-duality-is-the-ag-lie-special-case",
+          "source_section": "Remark",
+          "quote": "Under AC, if $X/k$ is smooth projective of pure dimension $d$, regular local rings make it CM. The regular-immersion Koszul calculation [[lem-regular-immersion-koszul-ext-sheaf]] and conormal adjunction [[lem-smooth-closed-subvariety-dualizing-line-bundle-adjunction]] identify the ambient sheaf Ext in the local CM packet with $\\bigwedge^d\\Omega^1_{X/k}$. Thus the normalized $\\omega_X$ is the canonical line bundle. For finite locally free $E$, $\\mathcal R\\!Hom(E,\\omega_X)=E^\\vee\\otimes\\omega_X$: locally a finite free module has exact Hom, so the positive sheaf Ext terms vanish, and taking derived global sections gives $\\operatorname{Ext}_X^{d-i}(E,\\omega_X)=H^{d-i}(X,E^\\vee\\otimes\\omega_X)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cohomology-projective-space-twisting-sheaves",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $A$ be a commutative\nring with $1$ ([[def-commutative-ring]]), let $n\\ge0$, let $d\\in\\mathbb Z$ and\nlet $X=\\mathbb P^n_A\\cong\\operatorname{Proj}A[x_0,\\dots,x_n]$ be relative\nprojective space ([[def-relative-projective-space-standard-charts]],\n[[def-polynomial-ring-on-a-family-of-indeterminates]]), with twisting sheaf\n$\\mathcal O_X(d)$ ([[def-twisting-sheaf-proj]]) and cohomology\n$H^q(X,\\mathcal O_X(d))$. Then\n$$H^q(X,\\mathcal O_X(d))=0\\qquad\\text{unless }q=0\\text{ or }q=n.$$\nIf $n>0$, then $H^0(X,\\mathcal O_X(d))\\cong A[x_0,\\dots,x_n]_d$ when $d\\ge0$\nand $H^0(X,\\mathcal O_X(d))=0$ when $d<0$, where\n$A[x_0,\\dots,x_n]_d$ is the degree-$d$ graded piece\n([[def-graded-ring-and-graded-module]]); and $H^n(X,\\mathcal O_X(d))$ is the\nfree $A$-module on the Laurent monomials $x_0^{e_0}\\cdots x_n^{e_n}$ with\n$e_i<0$ for every $i$ and $\\sum_ie_i=d$, so that it is nonzero precisely when\n$d\\le-n-1$ and $A\\ne0$. For $n=0$ one has $\\mathbb P^0_A=\\operatorname{Spec}A$\nand $H^0(X,\\mathcal O_X(d))\\cong A$ for every $d\\in\\mathbb Z$, with all higher\ngroups zero. The zero ring $A=0$ is allowed: then $X=\\varnothing$ and all\ngroups are zero, in agreement with both displayed descriptions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-projective-space-top-cohomology-residue-pairing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field and $n\\ge1$, and use the\nnotation and the cohomology computation of\n[[thm-cohomology-projective-space-twisting-sheaves]] for\n$\\mathbb P^n_k$ with its twisting sheaves $\\mathcal O(d)$. Then for every\n$d\\ge0$ the cup product of [[def-cup-product-sheaf-cohomology]] for the\nmultiplication pairing\n$\\mathcal O(d)\\otimes_{\\mathbb Z}\\mathcal O(-n-1-d)\\to\\mathcal O(-n-1)$\ncomposed with the coefficient isomorphism\n$$H^n(\\mathbb P^n_k,\\mathcal O(-n-1))\\xrightarrow{\\ \\sim\\ }k,\\qquad x_0^{-1}\\cdots x_n^{-1}\\longmapsto1,$$\nis a perfect $k$-bilinear pairing\n$$H^0(\\mathbb P^n_k,\\mathcal O(d))\\times H^n(\\mathbb P^n_k,\\mathcal O(-n-1-d))\\longrightarrow k,$$\nand it is compatible with multiplication by homogeneous polynomials: if $g$ is\na homogeneous polynomial of degree $\\delta\\ge0$ and the two cup products are taken\nwith the multiplication pairings $\\mathcal O(d)\\otimes\\mathcal O(\\delta)\\to\n\\mathcal O(d+\\delta)$ and $\\mathcal O(-n-1-d-\\delta)\\otimes\\mathcal O(\\delta)\n\\to\\mathcal O(-n-1-d)$, then for all $f\\in H^0(\\mathcal O(d))$ and\n$\\eta\\in H^n(\\mathcal O(-n-1-d-\\delta))$ one has\n$$\\langle g\\cdot f,\\eta\\rangle=\\langle f,g\\cdot\\eta\\rangle .$$\nFor $n=0$ the corresponding pairing $k\\times k\\to k$ is ordinary\nmultiplication under the identifications $\\mathcal O(d)\\cong\\mathcal O$ of\n$\\mathbb P^0_k=\\operatorname{Spec}k$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-flasque-sheaves-acyclic",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, let $X$ be a topological space and let\n$\\mathcal F$ be a flasque sheaf of abelian groups on $X$\n([[def-flasque-sheaf]]). Then for every open subspace $U\\subseteq X$ and every\ninteger $q>0$,\n$$H^q(U,\\mathcal F|_U)=0,$$\nwhere $H^q(U,-)$ denotes sheaf cohomology on the space $U$\n([[def-sheaf-cohomology-derived-global-sections]]) computed with the global\nsections functor of $U$, and $\\mathcal F|_U$ is the restriction of $\\mathcal F$\nto $U$. Equivalently, every restriction $\\mathcal F|_U$ is $\\Gamma$-acyclic\n([[def-acyclic-sheaf-global-sections]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The three affine charts are polynomial planes, so $X$ is smooth, projective and pure of dimension two. The smooth specialization in [F1] gives $\\omega_X=\\mathcal O(-3)$. A basis of $H^0(\\mathcal O(m))$ consists of $x_0^{a_0}x_1^{a_1}x_2^{a_2}$ with nonnegative exponents summing to $m$. By [F2], the dual basis of $H^2(\\mathcal O(-m-3))$ is $x_0^{-a_0-1}x_1^{-a_1-1}x_2^{-a_2-1}$. Multiplication followed by the coefficient of $(x_0x_1x_2)^{-1}$ gives the Kronecker pairing. This is the A theorem's $i=0$ pairing for $F=\\mathcal O(m)$ under the locally free Ext identification.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The point sheaf has $H^0=k$ and no higher cohomology, since it is flasque and [F2] applies. Applying the A theorem [F1] with $F=k_p$ in degrees $i=0,1,2$ gives respectively the stated Ext degree two, degree one, and degree zero groups. Thus the same surface theorem handles a coherent sheaf which is not locally free, as well as the twisting bundles. AC is inherited through [F1]\u2013[F2].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example works on the nonempty surface X = P^2_k with the nonzero sheaves O_X(m) and k_p; no family, cover or union with an empty member is formed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The case m = 0 gives H^0(O_X) = k paired with H^2(O_X(-3)) = k through the coefficient of (x_0 x_1 x_2)^{-1}, and step 2.1 computes the zero Ext groups of the point sheaf."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The rank/degree-one instances are m = 1 with three monomials, the invertible omega_X = O_X(-3), and the one-dimensional group Ext_X^2(k_p, omega_X) = k of step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example deliberately includes a sheaf that is not locally free: k_p is coherent with zero-dimensional support, and step 2.1 applies the theorem to it alongside the locally free twists."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The pairings are computed at the endpoints of d = 2: i = 0 for the twists in step 1.1 and i = 0, 1, 2 for the skyscraper in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited through the coherent theorem and the residue-pairing supplier; the monomial bases used in step 1.1 are finite and explicitly indexed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example exhibits a perfect pairing on twists of P2 and computes Ext groups of a rational skyscraper; it states no biconditional or criterion whose forward direction requires a separate proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Ext duality is used as a theorem to calculate the skyscraper groups in step 2.1, not as a converse hypothesis; no reverse implication or characterization is asserted in this surface example."
+        }
+      ],
+      "routine_steps": []
+    },
+    "cex-serre-duality-without-properness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-sheaf-affine-higher-cohomology-vanishes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X=\\operatorname{Spec}A$ be an affine scheme\n([[def-affine-scheme-spectrum]]) and let $\\mathcal F$ be a quasi-coherent\n$\\mathcal O_X$-module ([[def-quasi-coherent-module-scheme]]). Then\n$$H^q(X,\\mathcal F)=0$$\nfor every $q>0$, where $H^q$ is sheaf cohomology\n([[def-sheaf-cohomology-derived-global-sections]]). The empty affine scheme,\nthe zero ring and the zero module are included.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The scheme is smooth and pure of dimension one; its local rings are regular and hence CM. It is not proper: after base change to $\\mathbb A^1_x$, the closed subscheme $V(xt-1)\\subset\\mathbb A^1_x\\times\\mathbb A^1_t$ has image $D(x)$ under projection, which is not closed. Thus the structure map is not universally closed.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $H^1(X,F)=0$, whereas $\\operatorname{Ext}_X^0(F,\\omega_X)=\\Gamma(X,\\omega_X)=k[t]dt\\ne0$. The asserted formula in degree $i=1$ would equate these nonzero and zero spaces. This refutes it while retaining smoothness and CM. On an affine nonproper scheme a local dualizing complex still exists; it does not carry the proper global trace-duality representation of the A theorem. The counterexample uses the precise pairing refuted, with ordinary cohomology rather than a compact-support replacement.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample names the nonempty affine line, the structure sheaf O_X and the nonzero module Omega^1_{X/k}; no family, cover or union with an empty member is formed, and the witness subscheme V(xt - 1) is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero group is the witness: step 2.1 computes H^1(X, F) = 0 by affine vanishing, and this zero space is what the asserted degree-one formula would have to match against the nonzero Ext^0 group."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The instance is d = 1 with F = O_X: step 2.1 evaluates exactly the degree-one case of the refuted formula, where Ext_X^0(O_X, Omega^1) = Gamma(X, Omega^1) = k[t] dt."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No degeneracy of X arises, since X is smooth of dimension one; the failure is caused by non-properness, which step 1.1 witnesses by a base change whose projection image D(x) is not closed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The failing degree is the endpoint i = d = 1 of the formula, and step 2.1 uses only that degree; no lower degree or limiting threshold is invoked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes AC as inherited from its suppliers; the computation uses only affine vanishing [F1] and the identification Ext^0(O_X, omega_X) = Gamma(X, omega_X), with no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward failure suffices and is what step 2.1 proves: the asserted map would send the nonzero group Ext_X^0(F, omega_X) isomorphically onto the dual of H^1(X, F) = 0, which is impossible."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "No converse is claimed or needed: the counterexample refutes the universal formula with a single degree in which one side is nonzero and the other zero, retaining smoothness and pure dimension one."
+        }
+      ],
+      "routine_steps": []
+    }
+  }
+}

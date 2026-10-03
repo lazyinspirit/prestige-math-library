@@ -1,0 +1,877 @@
+[
+  {
+    "order": 510.06501,
+    "id": "character-groups-and-elementary-lca-duals",
+    "kind": "A",
+    "category": "fourier-analysis",
+    "title": "Character Groups and Elementary LCA Duals",
+    "companion": "character-groups-and-elementary-lca-duals-examples",
+    "requires": [
+      "uniform-spaces",
+      "subspaces-products-and-quotients",
+      "fourier-multipliers-and-sobolev-characterisations",
+      "haar-measure-existence-and-uniqueness",
+      "ascoli-arzela",
+      "the-fundamental-group-of-the-circle",
+      "covering-spaces-and-lifting",
+      "the-fundamental-group",
+      "free-modules-and-exact-sequences"
+    ],
+    "items": [
+      {
+        "id": "lem-unit-circle-is-a-compact-metrizable-topological-group",
+        "kind": "lemma",
+        "title": "The multiplicative unit circle is a compact metrizable topological abelian group",
+        "deps": [
+          "def-complex-exponential",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-real-exponential-function-and-e",
+          "thm-sine-and-cosine-derivatives",
+          "cor-differentiable-implies-continuous",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "prop-real-line-mod-integers-is-compact-and-path-connected",
+          "def-quotient-group",
+          "thm-quotient-universal-property",
+          "thm-compactness-under-continuous-maps",
+          "thm-metric-hausdorff-separation",
+          "def-homeomorphism-and-open-maps",
+          "def-subspace-topology-top",
+          "def-isometry-and-metric-embedding",
+          "thm-complex-numbers-are-the-real-coordinate-plane",
+          "def-complex-metric-convergence-and-continuity",
+          "def-metric-continuity",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-composition-of-continuous-functions",
+          "thm-product-universal-property",
+          "def-topological-group",
+          "def-continuous-map-top",
+          "thm-algebra-of-continuous-functions",
+          "def-product-topology"
+        ],
+        "statement": "Let $\\mathbb T:=\\{z\\in\\mathbb C:|z|=1\\}$ carry the subspace topology of $\\mathbb C$ and the multiplication of $\\mathbb C$, and let $\\varepsilon:\\mathbb R/\\mathbb Z\\to\\mathbb T$, $\\varepsilon([t]):=\\exp(2\\pi i t)$, for the published one-dimensional torus $\\mathbb R/\\mathbb Z$. Then $\\mathbb T$ is a compact metrizable topological abelian group, $\\varepsilon$ is an isomorphism of topological groups, and $|zw-z|=|w-1|$, $|z^{-1}-w^{-1}|=|z-w|$ for all $z,w\\in\\mathbb T$ with $|z|=1$.",
+        "strategy": "The complex exponential is continuous on $\\mathbb C$ and satisfies $\\exp(z+w)=\\exp z\\,\\exp w$, and it sends $t\\mapsto\\exp(2\\pi i t)$ into the unit circle with kernel $\\mathbb Z$ (cartesian form plus the zero sets of sine and cosine); the quotient universal property therefore induces a continuous bijection $\\mathbb R/\\mathbb Z\\to\\mathbb T$, which is a homeomorphism because $\\mathbb R/\\mathbb Z$ is compact and $\\mathbb T$ is Hausdorff. Multiplicativity makes it a group isomorphism. The unit circle is closed and bounded in $\\mathbb C\\cong\\mathbb R^2$, hence compact metrizable by Heine-Borel; the two displayed identities follow from $|z|=|w|=1$ by expanding $|zw-z|=|z||w-1|$ and $|z^{-1}-w^{-1}|=|z-w|$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-compact-open-topology-on-a-discrete-domain-is-pointwise",
+        "kind": "lemma",
+        "title": "On a discrete domain the compact-open topology is the topology of pointwise convergence",
+        "deps": [
+          "def-compact-open-topology-for-topological-domains",
+          "def-topology-of-pointwise-convergence",
+          "def-product-topology",
+          "def-standard-topologies",
+          "def-compact-space",
+          "def-subspace-topology-top",
+          "lem-compactness-of-a-subspace-is-ambient"
+        ],
+        "statement": "Let $X$ be a discrete topological space ([[def-standard-topologies]]) and $Y$ a\ntopological space. Every compact subset of $X$ is finite\n([[def-compact-space]]), and on $C(X,Y)$ the compact-open topology\n([[def-compact-open-topology-for-topological-domains]]) coincides with the\ntopology of pointwise convergence ([[def-topology-of-pointwise-convergence]]);\nhence on every $\\mathcal F\\subseteq C(X,Y)$ the compact-open subspace topology is\nthe subspace topology inherited from the product $Y^X$. In particular finite intersections of sets $\\{f:f(x)\\in V\\}$, with $x\\in X$ and $V\\subseteq Y$ open, form a basis; these are open-coordinate constraints, not requirements that a coordinate equal a prescribed value.",
+        "strategy": "A compact subset $K$ of a discrete space is covered by the open singletons, so it has a finite subcover. For finite $K$ the subbasic set $S(K,V)$ equals $\\bigcap_{x\\in K}\\{f:f(x)\\in V\\}$, and the pointwise topology has exactly these sets as a subbasis; hence the two topologies agree.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-circle-neighbourhood-arc-contains-no-nontrivial-subgroup",
+        "kind": "lemma",
+        "title": "The unit-circle arc $\\{z:|z-1|<1\\}$ contains no nontrivial subgroup",
+        "deps": [
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-complex-exponential",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "thm-double-angle-and-power-reduction-identities",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-sine-and-cosine-derivatives",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-integer-part",
+          "cor-archimedean-reciprocal",
+          "def-generated-subgroup",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-quotient-group"
+        ],
+        "statement": "Let $\\mathbb T$ be the multiplicative unit circle and $D:=\\{z\\in\\mathbb T:|z-1|<1\\}$. Every subgroup $H\\le\\mathbb T$ with $H\\subseteq D$ is trivial; equivalently, for every $z\\in\\mathbb T$, $z\\ne1$, some positive power $z^{n}$ lies outside $D$.",
+        "strategy": "If $z\\ne1$ satisfies $|z-1|<1$, write $z=\\exp(2\\pi i t)$ with $0<|t|<1/6$; replacing $z$ by $z^{-1}$ we may take $0<t<1/6$. For $n=\\lceil 1/(3t)\\rceil$ one gets $1/3\\le nt<1/2$, hence $|z^{n}-1|=2|\\sin(\\pi n t)|\\ge 2\\sin(\\pi/3)=\\sqrt3>1$; thus $z^{n}\\notin D$. Applying this to a nonidentity element of a subgroup contained in $D$ contradicts closure under powers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            },
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-pontryagin-dual-and-compact-open-topology",
+        "kind": "definition",
+        "title": "The Pontryagin dual with the compact-open topology",
+        "deps": [
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "def-topological-group",
+          "def-compact-open-topology-for-topological-domains",
+          "def-group-homomorphism",
+          "def-continuous-map-top",
+          "def-subspace-topology-top"
+        ],
+        "statement": "For an abelian topological group $G$ written additively, a **character** is a continuous group homomorphism $\\gamma:G\\to\\mathbb T$ into the multiplicative unit circle, and the **Pontryagin dual** is $\\widehat G:=\\operatorname{Hom}_{cts}(G,\\mathbb T)$ with pointwise multiplication and the compact-open topology as a subspace of $C(G,\\mathbb T)$ (subbasis $S(K,V)=\\{\\gamma:\\gamma(K)\\subseteq V\\}$ for compact $K\\subseteq G$ and open $V\\subseteq\\mathbb T$). The evaluation pairing is written $\\langle x,\\gamma\\rangle:=\\gamma(x)$. The dual is written multiplicatively; through the isomorphism $\\varepsilon$ of [[lem-unit-circle-is-a-compact-metrizable-topological-group]] it is identified with the group of continuous homomorphisms into the published circle $\\mathbb R/\\mathbb Z$.",
+        "strategy": "Definition only; no proof obligation. Fixes the target circle, the multiplicative notation on the dual, and the compact-open subbasis used by every later item.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-compact-open-character-group-operations-are-continuous",
+        "kind": "lemma",
+        "title": "The compact-open character group is a Hausdorff topological abelian group",
+        "deps": [
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "def-compact-open-topology-for-topological-domains",
+          "def-topological-group",
+          "def-hausdorff-space",
+          "def-group-homomorphism",
+          "def-kernel-and-image-of-group-homomorphism",
+          "def-subspace-topology-top",
+          "def-compact-space",
+          "thm-product-universal-property",
+          "thm-composition-of-continuous-functions",
+          "thm-metric-hausdorff-separation",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "statement": "Let $G$ be an abelian topological group. With pointwise multiplication and inversion, $\\widehat G$ is a Hausdorff topological abelian group. Explicitly, for $f,g\\in\\widehat G$, compact $K\\subseteq G$ and $\\varepsilon>0$, writing $B(z,r)$ for the Euclidean ball, $S(K,B(f,\\varepsilon/2))\\cdot S(K,B(g,\\varepsilon/2))\\subseteq S(K,B(fg,\\varepsilon))$ and $S(K,B(f,\\varepsilon))^{-1}\\subseteq S(K,B(f^{-1},\\varepsilon))$.",
+        "strategy": "Products and inverses of characters are characters because products of continuous maps are continuous and the target is abelian; the group axioms are inherited pointwise. For the displayed inclusions use $|f(x)|=|g(x)|=1$: $|f'(x)g'(x)-f(x)g(x)|\\le|g'(x)-g(x)|+|f'(x)-f(x)|$ and $|g'(x)^{-1}-g(x)^{-1}|=|g'(x)-g(x)|$. Hausdorffness: if $f\\ne g$, choose $x$ with $f(x)\\ne g(x)$ and disjoint open $V,W$ in the metric space $\\mathbb T$; then $S(\\{x\\},V)$ and $S(\\{x\\},W)$ are disjoint compact-open neighbourhoods. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            },
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-character-evaluation-pairing-is-jointly-continuous",
+        "kind": "lemma",
+        "title": "Evaluation of characters is jointly continuous",
+        "deps": [
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "def-locally-compact-space",
+          "lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure",
+          "lem-topological-group-translations-and-inversion",
+          "def-product-topology",
+          "def-continuous-map-top",
+          "def-subspace-topology-top",
+          "def-neighbourhood-top",
+          "def-compact-space",
+          "thm-compactness-under-continuous-maps",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "statement": "Let $G$ be a locally compact Hausdorff abelian group. The evaluation pairing $\\widehat G\\times G\\to\\mathbb T$, $(\\gamma,x)\\mapsto\\gamma(x)$, is continuous for the compact-open topology on $\\widehat G$ and the given topology on $G$.",
+        "strategy": "Fix $(\\gamma_0,x_0)$ and $\\varepsilon>0$. Choose a compact neighbourhood $K$ of $x_0$ (local compactness), so that $K-x_0$ is a compact neighbourhood of $0$. For $x\\in K$ and $\\gamma$ in the open set $S(\\{x_0\\},B(\\gamma_0(x_0),\\varepsilon/2))\\cap S(K-x_0,B(1,\\varepsilon/2))$ one has $\\gamma(x)=\\gamma(x_0)\\gamma(x-x_0)$ and hence $|\\gamma(x)-\\gamma_0(x_0)|\\le|\\gamma(x_0)-\\gamma_0(x_0)|+|\\gamma(x-x_0)-1|<\\varepsilon$, using $|\\gamma(x_0)|=1$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-pointwise-limits-of-characters-are-characters",
+        "kind": "lemma",
+        "title": "Pointwise limits of characters are characters",
+        "deps": [
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "lem-pointwise-closure-preserves-equicontinuity",
+          "def-equicontinuity-on-a-topological-domain-and-pointwise-relative-compactness",
+          "def-topology-of-pointwise-convergence",
+          "def-product-topology",
+          "def-standard-topologies",
+          "def-generated-subgroup",
+          "thm-closure-characterised-by-nets",
+          "def-directed-set-and-net",
+          "thm-product-universal-property",
+          "thm-composition-of-continuous-functions",
+          "thm-metric-hausdorff-separation",
+          "def-hausdorff-space",
+          "lem-compact-open-topology-on-a-discrete-domain-is-pointwise",
+          "def-continuous-map-top"
+        ],
+        "statement": "(1) A pointwise limit of group homomorphisms $G\\to\\mathbb T$ is a homomorphism;\nprecisely, $\\operatorname{Hom}(G,\\mathbb T)$ is closed in $\\mathbb T^{G}$ for\nthe topology of pointwise convergence\n([[def-topology-of-pointwise-convergence]],\n[[def-product-topology]]). (2) If a pointwise limit of continuous homomorphisms\nis taken along an equicontinuous family, then the limit is continuous, hence a\ncharacter. (3) If $G$ is discrete\n([[def-standard-topologies]]), then\n$\\widehat G=\\operatorname{Hom}(G,\\mathbb T)$ is closed in $\\mathbb T^{G}$ for\nthe product topology.",
+        "strategy": "(1) Pass the identity $\\gamma_j(x+y)=\\gamma_j(x)\\gamma_j(y)$ to the limit using continuity of multiplication in $\\mathbb T$. (2) The pointwise closure of an equicontinuous family consists of continuous maps. (3) On a discrete group every map is continuous, so $\\widehat G$ is the set of all homomorphisms, which is closed by (1) and the fact that a pointwise limit of maps in the closed set is already a homomorphism.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-dual-homomorphisms-are-continuous-and-functorial",
+        "kind": "lemma",
+        "title": "Dual homomorphisms: continuity, and the annihilator of a closed subgroup",
+        "deps": [
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-compact-open-character-group-operations-are-continuous",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "thm-quotient-universal-property",
+          "def-quotient-topology",
+          "def-quotient-group",
+          "lem-open-or-closed-surjection-is-quotient",
+          "cor-quotient-of-an-abelian-group-is-abelian",
+          "def-kernel-and-image-of-group-homomorphism",
+          "def-subspace-topology-top",
+          "def-homeomorphism-and-open-maps",
+          "def-group-homomorphism",
+          "def-axiom-of-choice",
+          "def-compact-space",
+          "thm-composition-of-continuous-functions",
+          "thm-compactness-under-continuous-maps",
+          "def-locally-compact-space",
+          "def-neighbourhood-top",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "def-hausdorff-space",
+          "def-topological-group",
+          "lem-topological-group-translations-and-inversion",
+          "def-product-topology",
+          "thm-product-universal-property",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "lem-finite-choice"
+        ],
+        "statement": "Assume the Axiom of Choice (used only in part (b), through the compact-lift theorem for closed subgroup quotients). (a) If $\\varphi:G\\to H$ is a continuous homomorphism of abelian topological groups, the pullback $\\widehat\\varphi:\\widehat H\\to\\widehat G$, $\\widehat\\varphi(\\gamma):=\\gamma\\circ\\varphi$, is a continuous group homomorphism. (b) If $H$ is a closed subgroup of a locally compact Hausdorff abelian group $G$ and $q:G\\to G/H$ is the quotient homomorphism, then $\\widehat q:\\widehat{G/H}\\to\\widehat G$ is a topological group isomorphism onto the annihilator $H^\\perp=\\{\\gamma\\in\\widehat G:\\gamma(h)=1\\ \\text{for all}\\ h\\in H\\}$, a closed subgroup of $\\widehat G$. No stronger claim is made for pullbacks along non-proper maps.",
+        "strategy": "(a) $\\widehat\\varphi^{-1}(S(K,V))=S(\\varphi(K),V)$ is open, and the map is a homomorphism pointwise. (b) A character of $G/H$ pulls back to a character of $G$ trivial on $H$, and conversely a character trivial on $H$ descends by the quotient universal property; the inverse is continuous at the identity because every compact subset of $G/H$ is contained in $q(K)$ for a compact $K\\subseteq G$ (compact lifts of closed subgroup quotients), and $\\gamma\\in S(K,V)$ then gives $\\widehat q^{-1}(\\gamma)\\in S(L,V)$; continuity at the identity suffices for a group homomorphism. $H^\\perp$ is closed because it is an intersection of the closed conditions $\\gamma\\mapsto\\gamma(h)=1$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-continuous-characters-of-the-real-line-are-exponentials",
+        "kind": "lemma",
+        "title": "Continuous characters of the real line are exponentials",
+        "deps": [
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "thm-real-line-covers-real-line-mod-integers",
+          "thm-covering-space-lifting-criterion",
+          "def-simply-connected",
+          "thm-convex-subsets-have-trivial-fundamental-group",
+          "cor-rn-is-polygonally-connected-and-locally-path-connected",
+          "thm-cauchy-functional-equation-regularity",
+          "def-lift-of-a-map-path-and-homotopy",
+          "def-path-connected",
+          "cor-connected-subsets-of-the-line",
+          "thm-continuous-image-of-a-connected-space",
+          "def-connected-space",
+          "def-continuous-map-top",
+          "lem-continuity-is-local-and-pastes",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-complex-exponential",
+          "thm-composition-of-continuous-functions",
+          "thm-algebra-of-continuous-functions",
+          "def-group-homomorphism"
+        ],
+        "statement": "Every continuous group homomorphism $\\varphi:\\mathbb R\\to\\mathbb T$ is $\\varphi(t)=\\exp(2\\pi i\\xi t)$ for a unique $\\xi\\in\\mathbb R$; conversely every such map is a continuous character of the additive line.",
+        "strategy": "Compose $\\varphi$ with the inverse of the isomorphism $\\varepsilon:\\mathbb R/\\mathbb Z\\to\\mathbb T$ and lift the resulting map through the universal covering $p:\\mathbb R\\to\\mathbb R/\\mathbb Z$; the lifting criterion applies because $\\mathbb R$ is path-connected, locally path-connected and simply connected, so its fundamental group is trivial. This gives a continuous $\\theta:\\mathbb R\\to\\mathbb R$ with $\\theta(0)=0$ and $\\varphi(t)=\\exp(2\\pi i\\theta(t))$. For fixed $t$ the continuous map $s\\mapsto\\theta(s+t)-\\theta(s)-\\theta(t)$ takes values in $\\mathbb Z$, hence is constant, and it vanishes at $s=0$; so $\\theta$ is additive and continuous, and the Cauchy-equation regularity theorem gives $\\theta(t)=\\xi t$ with $\\xi=\\theta(1)$. Uniqueness of $\\xi$ and the converse are immediate.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-dual-identity-neighbourhood-is-compact",
+        "kind": "lemma",
+        "title": "A compact identity neighbourhood in the dual",
+        "deps": [
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-pointwise-limits-of-characters-are-characters",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "cor-equicontinuous-families-into-a-compact-metric-target",
+          "thm-ascoli-arzela-sufficiency",
+          "lem-compact-open-and-pointwise-topologies-agree-on-an-equicontinuous-family",
+          "lem-pointwise-closure-preserves-equicontinuity",
+          "def-equicontinuity-on-a-topological-domain-and-pointwise-relative-compactness",
+          "def-compact-open-topology-for-topological-domains",
+          "def-topology-of-pointwise-convergence",
+          "def-locally-compact-space",
+          "lem-topological-group-translations-and-inversion",
+          "def-complex-metric-convergence-and-continuity",
+          "def-axiom-of-choice",
+          "thm-compact-iff-fip",
+          "def-finite-intersection-property",
+          "thm-closure-characterised-by-nets",
+          "def-directed-set-and-net",
+          "def-compact-space",
+          "thm-composition-of-continuous-functions",
+          "def-continuous-map-top",
+          "lem-circle-neighbourhood-arc-contains-no-nontrivial-subgroup"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $G$ be a locally\ncompact Hausdorff abelian group, $K\\subseteq G$ a symmetric compact\nneighbourhood of $0$, and $D:=\\{z\\in\\mathbb T:|z-1|\\le1/2\\}$. Then\n$N:=\\{\\gamma\\in\\widehat G:\\gamma[K]\\subseteq D\\}$ is equicontinuous\n([[def-equicontinuity-on-a-topological-domain-and-pointwise-relative-compactness]]),\nis compact in the compact-open topology of $C(G,\\mathbb T)$\n([[def-compact-open-topology-for-topological-domains]]), and is a neighbourhood\nof the identity character in $\\widehat G$.",
+        "strategy": "$N$ is a compact-open neighbourhood of $1$ since $1(K)=\\{1\\}\\subseteq D$. Equicontinuity: given $\\varepsilon>0$, choose $n$ with $\\pi/\\varepsilon+3\\le n$ and put $U:=\\{u\\in G:ku\\in K\\ \\text{for}\\ |k|\\le n\\}$, a neighbourhood of $0$; if $u\\in U$, $\\gamma\\in N$ and $|\\gamma(u)-1|\\ge\\varepsilon$, then a representative $t$ of the argument of $\\gamma(u)$ satisfies $|t|\\ge\\varepsilon/(2\\pi)$, and some $k\\le n$ has $kt\\in[1/2,2/3]$ modulo sign, so $|\\gamma(ku)-1|\\ge\\sqrt3>1/2$, contradicting $ku\\in K$; translate by $x_0$ for equicontinuity at $x_0$. Closedness: if $\\gamma_j\\in N$ converge pointwise to $\\gamma$, then $\\gamma$ is a character (the family is equicontinuous, and pointwise limits of homomorphisms are homomorphisms) with $\\gamma(K)\\subseteq D$ since $D$ is closed. Ascoli's sufficiency theorem (Choice) makes the compact-open closure of $N$ compact, and closedness identifies it with $N$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            },
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-dual-of-an-lca-group-is-locally-compact-abelian",
+        "kind": "theorem",
+        "title": "The dual of a locally compact abelian group is locally compact abelian",
+        "deps": [
+          "lem-dual-identity-neighbourhood-is-compact",
+          "lem-compact-open-character-group-operations-are-continuous",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "def-compact-open-topology-for-topological-domains",
+          "def-locally-compact-space",
+          "lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure",
+          "lem-topological-group-translations-and-inversion",
+          "def-hausdorff-space",
+          "def-neighbourhood-top",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "def-axiom-of-choice",
+          "thm-compactness-under-continuous-maps",
+          "thm-composition-of-continuous-functions"
+        ],
+        "statement": "Assume the Axiom of Choice. If $G$ is a locally compact Hausdorff abelian group, then $\\widehat G$ is a locally compact Hausdorff abelian topological group, and the sets $\\{\\gamma:\\gamma(K)\\subseteq V\\}$ with $K\\subseteq G$ compact and $V\\subseteq\\mathbb T$ open form a basis of neighbourhoods of the identity character.",
+        "strategy": "The compact neighbourhood $N$ of [[lem-dual-identity-neighbourhood-is-compact]] gives local compactness at the identity; translations by characters are homeomorphisms of the topological group $\\widehat G$, so every point has a compact neighbourhood. Hausdorffness and the topological-group axioms are [[lem-compact-open-character-group-operations-are-continuous]], and the stated sets are the defining compact-open subbasis around the identity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            },
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-compact-groups-have-discrete-duals-and-discrete-groups-have-compact-duals",
+        "kind": "theorem",
+        "title": "Compact groups have discrete duals and discrete groups have compact duals",
+        "deps": [
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-compact-open-character-group-operations-are-continuous",
+          "lem-circle-neighbourhood-arc-contains-no-nontrivial-subgroup",
+          "lem-compact-open-topology-on-a-discrete-domain-is-pointwise",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "thm-tychonoff",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "def-compact-space",
+          "def-product-topology",
+          "def-standard-topologies",
+          "def-topology-of-pointwise-convergence",
+          "lem-topological-group-translations-and-inversion",
+          "def-axiom-of-choice",
+          "def-subspace-topology-top",
+          "lem-pointwise-limits-of-characters-are-characters",
+          "def-continuous-map-top"
+        ],
+        "statement": "(1) If $G$ is a compact abelian topological group, then $\\widehat G$ is discrete.\n(2) If $G$ is a discrete abelian group, then, assuming the Axiom of Choice\n([[def-axiom-of-choice]]) used only through Tychonoff's theorem, $\\widehat G$ is\ncompact ([[def-compact-space]]).",
+        "strategy": "(1) For $G$ compact the set $S(G,D)$ with $D=\\{z:|z-1|<1\\}$ is an open neighbourhood of the identity in $\\widehat G$; if $\\gamma(G)\\subseteq D$ then the image subgroup $\\gamma(G)$ lies in the arc $D$, so it is trivial by the arc lemma and $\\gamma=1$. Thus $\\{1\\}$ is open, and translations (the dual is a topological group) make every point open. (2) For $G$ discrete the compact-open topology on $\\widehat G$ is the pointwise topology on the set of all homomorphisms $G\\to\\mathbb T$, a closed subset of the product $\\mathbb T^G$ by the pointwise-limit lemma; Tychonoff's theorem (Choice) makes $\\mathbb T^G$ compact, so $\\widehat G$ is compact.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-duals-of-finite-products-and-discrete-direct-sums",
+        "kind": "lemma",
+        "title": "Duals of finite products and of discrete direct sums",
+        "deps": [
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-compact-open-character-group-operations-are-continuous",
+          "thm-compact-groups-have-discrete-duals-and-discrete-groups-have-compact-duals",
+          "lem-dual-homomorphisms-are-continuous-and-functorial",
+          "lem-compact-open-topology-on-a-discrete-domain-is-pointwise",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "def-external-direct-product-of-groups",
+          "def-direct-sum-of-a-family-of-modules",
+          "thm-product-universal-property",
+          "thm-finite-products-of-compact-spaces",
+          "thm-tychonoff",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "def-product-topology",
+          "def-standard-topologies",
+          "def-subspace-topology-top",
+          "def-topological-group",
+          "def-homeomorphism-and-open-maps",
+          "thm-compactness-under-continuous-maps",
+          "def-axiom-of-choice",
+          "thm-composition-of-continuous-functions",
+          "def-neighbourhood-top",
+          "def-continuous-map-top"
+        ],
+        "statement": "(1) For locally compact Hausdorff abelian groups $G_{1},\\dots,G_{n}$ the map\n$$\\Phi:\\widehat{G_{1}}\\times\\cdots\\times\\widehat{G_{n}}\\to\\widehat{G_{1}\\times\\cdots\\times G_{n}},\\qquad \\Phi(\\gamma_{1},\\dots,\\gamma_{n})\\big((x_{1},\\dots,x_{n})\\big):=\\prod_{j}\\gamma_{j}(x_{j}),$$\nis an isomorphism of topological groups for the product topologies (choice-free,\nfinite $n$). (2) If $(G_{i})_{i\\in I}$ is a family of discrete abelian groups and\n$G=\\bigoplus_{i}G_{i}$ is their algebraic direct sum equipped with the discrete\ntopology ([[def-direct-sum-of-a-family-of-modules]]), then, assuming the Axiom\nof Choice ([[def-axiom-of-choice]]), $\\widehat G$ is topologically isomorphic to\nthe product $\\prod_{i}\\widehat{G_{i}}$ with the product topology. No claim is\nmade here about a direct sum carrying the subspace topology of the product of\nnon-discrete factors.",
+        "strategy": "(1) The displayed map is a bijective homomorphism (restrict a character to the coordinate axes for the inverse). Continuity at the identity: for compact $K\\subseteq G_1\\times G_2$ the projections $K_j$ are compact, and $\\Phi(S(K_1,V)\\times S(K_2,V))\\subseteq S(K,V\\cdot V)$ for every neighbourhood $V$ of $1$; openness: for a compact $K=(K_1\\cup\\{0\\})\\times(K_2\\cup\\{0\\})$ and $U=U_1\\cap U_2$ one has $S(K,U)\\subseteq\\Phi(S(K_1,U_1)\\times S(K_2,U_2))$. Iterate over $n$. (2) Restriction to the summands is a bijection onto the product of the duals; the compact-open topology on a discrete domain is coordinatewise convergence, and both sides are compact Hausdorff by the discreteness direction of [[thm-compact-groups-have-discrete-duals-and-discrete-groups-have-compact-duals]] and Tychonoff's theorem, so the continuous bijection is a homeomorphism.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 510.06502,
+    "id": "character-groups-and-elementary-lca-duals-examples",
+    "kind": "B",
+    "category": "fourier-analysis",
+    "title": "Character Groups and Elementary LCA Duals: Examples",
+    "companion": "character-groups-and-elementary-lca-duals",
+    "requires": [
+      "character-groups-and-elementary-lca-duals"
+    ],
+    "items": [
+      {
+        "id": "ex-pontryagin-dual-of-the-integers-is-the-circle",
+        "kind": "example",
+        "title": "The Pontryagin dual of $\\mathbb Z$ is the circle",
+        "deps": [
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "lem-compact-open-topology-on-a-discrete-domain-is-pointwise",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "thm-compact-groups-have-discrete-duals-and-discrete-groups-have-compact-duals",
+          "def-integers",
+          "def-standard-topologies",
+          "def-group-homomorphism",
+          "lem-group-power-laws",
+          "def-product-topology",
+          "def-subspace-topology-top",
+          "def-continuous-map-top",
+          "def-topology-of-pointwise-convergence",
+          "def-homeomorphism-and-open-maps",
+          "def-complex-integer-powers",
+          "thm-complex-numbers-form-a-field",
+          "thm-product-universal-property",
+          "thm-composition-of-continuous-functions"
+        ],
+        "statement": "The dual of the discrete additive group $\\mathbb Z$\n([[def-integers]], [[def-standard-topologies]]) is canonically isomorphic to\nthe multiplicative unit circle ([[lem-unit-circle-is-a-compact-metrizable-topological-group]]):\nthe map $z\\mapsto\\gamma_{z}$ with $\\gamma_{z}(n):=z^{n}$ is an isomorphism of\ntopological groups $\\mathbb T\\to\\widehat{\\mathbb Z}$. Under the identification\n$\\mathbb T\\cong\\mathbb R/\\mathbb Z$ this reads\n$\\widehat{\\mathbb Z}\\cong\\mathbb R/\\mathbb Z$.",
+        "strategy": "A homomorphism $\\mathbb Z\\to\\mathbb T$ is determined by $\\gamma(1)$, and every $z\\in\\mathbb T$ defines one by $\\gamma_z(n)=z^n$: the correspondence is a bijection and a group isomorphism. The domain is discrete, so the compact-open topology on the dual is the pointwise topology, i.e. the subspace topology from $\\mathbb T^{\\mathbb Z}$; $z\\mapsto\\gamma_z$ is continuous because each coordinate $z\\mapsto z^n$ is, and its inverse $\\gamma\\mapsto\\gamma(1)$ is an evaluation map, hence continuous. So the bijection is a homeomorphism.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-pontryagin-dual-of-the-circle-is-the-integers",
+        "kind": "example",
+        "title": "The Pontryagin dual of the circle is $\\mathbb Z$",
+        "deps": [
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "thm-compact-groups-have-discrete-duals-and-discrete-groups-have-compact-duals",
+          "lem-continuous-characters-of-the-real-line-are-exponentials",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-double-angle-and-power-reduction-identities",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-sine-and-cosine-derivatives",
+          "def-countable-choice",
+          "def-group-homomorphism",
+          "lem-group-power-laws",
+          "def-homeomorphism-and-open-maps",
+          "def-standard-topologies",
+          "def-continuous-map-top",
+          "thm-composition-of-continuous-functions",
+          "def-complex-metric-convergence-and-continuity"
+        ],
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Every\ncontinuous group homomorphism $\\chi:\\mathbb T\\to\\mathbb T$ is\n$\\chi(z)=z^{n}$ for a unique $n\\in\\mathbb Z$; consequently\n$n\\mapsto(z\\mapsto z^{n})$ is an isomorphism of topological groups\n$\\mathbb Z\\to\\widehat{\\mathbb T}$ (equivalently, the dual of the published\ncircle $\\mathbb R/\\mathbb Z$ is $\\mathbb Z$).",
+        "strategy": "Transport $\\chi$ along the isomorphism $\\varepsilon:\\mathbb R/\\mathbb Z\\to\\mathbb T$ to a character $f$ of the probability space $\\mathbb R/\\mathbb Z$; continuity on the compact circle gives $f\\in L^2$, and the published measure/Fourier theory is used under the stated countable choice. For the Fourier coefficients, substituting $x=y+h$ and using translation invariance of the Haar integral gives $\\widehat f(k)=f(h)e^{-2\\pi ikh}\\widehat f(k)$ for every $h$; since $|f|=1$ some coefficient is nonzero (otherwise the expansion of $f$ in the complete orthonormal system $(e_k)$ would give $f=0$), so $f(h)=e^{2\\pi ikh}$ for that $k$, that is $\\chi(z)=z^k$. Distinct $k$ give distinct characters and every $z\\mapsto z^k$ is a character. Both $\\mathbb Z$ and the dual of the compact circle are discrete, so the bijective homomorphism is a homeomorphism.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-pontryagin-dual-of-euclidean-space",
+        "kind": "example",
+        "title": "The Pontryagin dual of Euclidean space is Euclidean space",
+        "deps": [
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "lem-continuous-characters-of-the-real-line-are-exponentials",
+          "lem-duals-of-finite-products-and-discrete-direct-sums",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-compact-open-character-group-operations-are-continuous",
+          "def-product-topology",
+          "def-homeomorphism-and-open-maps",
+          "def-continuous-map-top",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-complex-metric-convergence-and-continuity",
+          "thm-algebra-of-continuous-functions",
+          "def-p-norms-on-rn",
+          "lem-metrics-on-rn",
+          "thm-heine-borel-rn",
+          "thm-compactness-under-continuous-maps",
+          "def-group-homomorphism",
+          "def-standard-topologies",
+          "thm-composition-of-continuous-functions",
+          "def-euclidean-inner-product",
+          "lem-standard-basis-of-f-n"
+        ],
+        "statement": "For $n\\ge1$ every continuous group homomorphism $\\varphi:\\mathbb R^n\\to\\mathbb T$ is $\\varphi(x)=\\exp(2\\pi i\\,\\xi\\cdot x)$ for a unique $\\xi\\in\\mathbb R^n$, and $\\xi\\mapsto\\varphi_\\xi$ is an isomorphism of topological groups $\\mathbb R^n\\to\\widehat{\\mathbb R^n}$.",
+        "strategy": "For $n=1$ this is the classification of continuous characters of the line. In general $\\varphi(x)=\\prod_j\\varphi(x_je_j)$ by multiplicativity, and each $t\\mapsto\\varphi(te_j)$ is a continuous character of $\\mathbb R$, hence equals $\\exp(2\\pi i\\xi_jt)$; this gives the stated form and uniqueness of $\\xi$, since testing on coordinate lines and using $t\\mapsto e^{2\\pi i((\\xi-\\xi')_jt)}=1$ for all $t$ forces $\\xi=\\xi'$. Continuity of $\\xi\\mapsto\\varphi_\\xi$ follows from $|e^{2\\pi i\\xi\\cdot x}-e^{2\\pi i\\xi'\\cdot x}|\\le2\\pi\\sup_{x\\in K}|x|\\,|\\xi-\\xi'|$ on compact $K$, and continuity of the inverse from the estimate $\\sup_{x\\in[0,1]^n}|\\varphi_\\eta(x)-1|=\\sup_{0\\le t\\le\\sum_j|\\eta_j|}|e^{2\\pi it}-1|\\ge4\\|\\eta\\|$ for $\\sum_j|\\eta_j|\\le1/2$ on the fixed compact cube $[0,1]^n$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35, printed pp. 134-140",
+              "url": "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-pontryagin-dual-of-a-finite-cyclic-group",
+        "kind": "example",
+        "title": "The Pontryagin dual of a finite cyclic group",
+        "deps": [
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "lem-compact-open-topology-on-a-discrete-domain-is-pointwise",
+          "def-pontryagin-dual-and-compact-open-topology",
+          "thm-compact-groups-have-discrete-duals-and-discrete-groups-have-compact-duals",
+          "thm-complex-nth-roots-and-roots-of-unity",
+          "def-integers-modulo-n",
+          "thm-integers-modulo-n-basic-algebra",
+          "def-standard-topologies",
+          "def-group-homomorphism",
+          "lem-group-power-laws",
+          "def-homeomorphism-and-open-maps",
+          "def-continuous-map-top",
+          "def-compact-space",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-sine-cosine-zero-sets-and-fundamental-period"
+        ],
+        "statement": "For $N\\ge1$ every continuous homomorphism $\\chi:\\mathbb Z/N\\mathbb Z\\to\\mathbb T$ is $\\chi([m])=\\exp(2\\pi i\\,km/N)$ for a unique $k\\in\\mathbb Z/N\\mathbb Z$, and $k\\mapsto\\chi_k$ is an isomorphism of topological groups $\\mathbb Z/N\\mathbb Z\\to\\widehat{\\mathbb Z/N\\mathbb Z}$ for the presented group; no generator of an abstract cyclic group is chosen.",
+        "strategy": "A character of $\\mathbb Z/N\\mathbb Z$ is determined by $\\zeta=\\chi([1])$ with $\\zeta^N=1$; writing $\\zeta=\\exp(2\\pi it)$ and using that $\\exp(2\\pi iu)=1$ exactly for integers $u$, the roots of unity are exactly $\\exp(2\\pi ik/N)$, $k=0,\\dots,N-1$. This gives a bijective homomorphism $\\mathbb Z/N\\mathbb Z\\to\\widehat{\\mathbb Z/N\\mathbb Z}$; the group $\\mathbb Z/N\\mathbb Z$ is compact, so its dual is discrete, and both sides are finite discrete, so the bijection is a homeomorphism.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)",
+              "url": "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
+            },
+            {
+              "title": "Manfred Einsiedler and Thomas Ward, Ergodic Theory with a View Towards Number Theory, Appendix C, printed pp. 429-439 (course-hosted full text)",
+              "url": "https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf"
+            }
+          ]
+        },
+        "design_row": "FR-15",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 4
+      }
+    ]
+  }
+]

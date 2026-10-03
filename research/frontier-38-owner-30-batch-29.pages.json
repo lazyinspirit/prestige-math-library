@@ -1,0 +1,949 @@
+[
+  {
+    "order": 905,
+    "id": "hilbert-functors-and-projective-hilbert-schemes",
+    "kind": "A",
+    "category": "scheme-theory",
+    "title": "Hilbert Functors and Projective Hilbert Schemes",
+    "companion": "hilbert-functors-and-projective-hilbert-schemes-examples",
+    "requires": [
+      "flat-smooth-and-etale-morphisms",
+      "quasi-coherent-and-coherent-sheaves-and-vector-bundles",
+      "proj-projective-schemes-twisting-sheaves-and-ampleness",
+      "cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes"
+    ],
+    "items": [
+      {
+        "id": "def-castelnuovo-mumford-regularity",
+        "kind": "definition",
+        "title": "Castelnuovo\\u2013Mumford regularity",
+        "deps": [
+          "def-axiom-of-choice"
+        ],
+        "statement": "For a coherent sheaf $F$ on $\\mathbb P^n_k$ and $m\\in\\mathbb Z$, $F$ is m-regular when $H^i(\\mathbb P^n_k,F(m-i))=0$ for every $i>0$, with twists by $\\mathcal O_{\\mathbb P^n}(1)$; cohomology vanishes above $n$, and $F=0$ and $n=0$ are included.",
+        "strategy": "Definition only; no proof obligation. Fixes the twist convention and the zero-sheaf case used by every later regularity argument.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-hilbert-regularity-propagation",
+        "kind": "lemma",
+        "title": "Regularity gives generation, multiplication, and vanishing",
+        "deps": [
+          "def-dependent-choice",
+          "def-castelnuovo-mumford-regularity",
+          "lem-proper-cohomology-field-extension",
+          "thm-serre-vanishing",
+          "thm-cohomology-projective-space-twisting-sheaves",
+          "thm-cohomological-dimension-projective-n-space",
+          "lem-eventual-global-generation-coherent-twists",
+          "thm-finiteness-of-associated-primes",
+          "thm-zero-divisors-on-a-module",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and DC. If a coherent $F$ on $\\mathbb P^n_k$ is m-regular, then $H^i(F(t))=0$ for $i>0$ and $t\\ge m-i$; for $t\\ge m$, $F(t)$ is globally generated and $H^0(\\mathcal O(1))\\otimes_k H^0(F(t))\\to H^0(F(t+1))$ is surjective. Valid over every field.",
+        "strategy": "Extend to an infinite field (vanishing, surjectivity and generation descend by faithful flatness), cut by a hyperplane avoiding the finitely many associated points, prove the vanishings by induction on n and then on the twist, and propagate section multiplication to generation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-hilbert-uniform-regularity-fixed-polynomial",
+        "kind": "lemma",
+        "title": "Uniform regularity for all quotients with a fixed Hilbert polynomial",
+        "deps": [
+          "def-dependent-choice",
+          "lem-hilbert-regularity-propagation",
+          "thm-hilbert-polynomial-coherent-sheaf",
+          "thm-serre-vanishing",
+          "thm-cohomology-projective-space-twisting-sheaves",
+          "lem-proper-cohomology-field-extension",
+          "thm-finiteness-of-associated-primes",
+          "thm-zero-divisors-on-a-module",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and DC. For fixed $n,p\\ge0$ and a numerical polynomial $Q$ there is an integer $R(n,p,Q)$, independent of the field, making every coherent subsheaf $K\\subseteq\\mathcal O^p_{\\mathbb P^n_k}$ with Hilbert polynomial $Q$ R-regular; hence one bound makes the kernel and quotient of every $\\mathcal O^p\\twoheadrightarrow F$ with polynomial $P$ regular over every field. The same holds for kernels and quotients of a fixed finite sum $E=\\bigoplus_j\\mathcal O(a_j)$.",
+        "strategy": "Induct on n with a hyperplane avoiding the associated points of K and $\\mathcal O^p/K$; the quotient polynomial is $\\Delta Q$. Compare $h^1$ across twists for strict decrease, bound $h^1(K(a))$ by $p\\binom{n+a}{n}-Q(a)$, set $R=a+B+1$, and reduce $E=\\bigoplus\\mathcal O(a_j)$ to $\\mathcal O^p$ by embedding summands via monomial powers of $x_0$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-hilbert-relative-regularity-and-base-change",
+        "kind": "lemma",
+        "title": "Relative regularity, generation, and arbitrary base change",
+        "deps": [
+          "lem-hilbert-regularity-propagation",
+          "lem-proper-flat-fp-cohomology-perfect-complex",
+          "thm-nakayama-lemma",
+          "cor-euler-characteristic-locally-constant-flat-proper-family",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and DC. For any scheme $T$, $\\pi:\\mathbb P^n_T\\to T$ and a finitely presented quasi-coherent $F$ flat over $T$ whose geometric fibres are all m-regular: for every $r\\ge m$, $R^i\\pi_*F(r)=0$ for $i>0$, $\\pi_*F(r)$ is finite locally free with formation commuting with every base change $T'\\to T$, evaluation $\\pi^*\\pi_*F(r)\\to F(r)$ is onto, and its rank is the fibre Hilbert polynomial at $r$. The analogous exact-sequence statements hold for base-flat finitely presented fibrewise m-regular $K,E,F$.",
+        "strategy": "Use the universal finite projective cohomology complex; over an affine base split off contractible pairs to leave a finite free degree-zero term, which computes $H^0$ after every base change and kills higher cohomology. Surjectivity of evaluation by Nakayama, and the kernel is base-flat by the Tor sequence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-hilbert-uniform-sections-after-flat-pullback",
+        "kind": "lemma",
+        "title": "A fixed presentation computes sections after every flat-family pullback",
+        "deps": [
+          "lem-hilbert-uniform-regularity-fixed-polynomial",
+          "lem-hilbert-relative-regularity-and-base-change",
+          "thm-serre-vanishing",
+          "lem-eventual-global-generation-coherent-twists",
+          "thm-hilbert-polynomial-coherent-sheaf",
+          "lem-filtered-colimit-flat-fp-sheaf-stage",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and DC. Let $A$ be Noetherian, $F$ coherent on $\\mathbb P^n_A$ with a presentation $E_1\\to E_0\\to F\\to 0$ by finite sums of twists, and $P$ fixed. There is $N$, depending only on the presentation and $P$, such that for every $A$-algebra $B$ with $F_B$ base-flat of fibre polynomial $P$ and every $r\\ge N$, $H^0(F(r))\\otimes_A B\\to H^0(F_B(r))$ is an isomorphism and both sides are finite locally free of rank $P(r)$ over $B$. The algebra $B$ need not be Noetherian; the successive presentation kernels are finitely presented and flat over $B$ with fibre polynomials $P_{E_0}-P$ and $P_{E_1}-P_{E_0}+P$.",
+        "strategy": "Descend flatness of the pullback to a Noetherian stage, identify the pulled-back presentation kernels, bound their regularity uniformly by the fixed polynomials, and identify $H^0(F(r))\\otimes B$ with the presentation cokernel; over the original Noetherian base only Serre vanishing is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-hilbert-rank-flattening-finite-module",
+        "kind": "lemma",
+        "title": "Scheme structure of a finite-module rank stratum",
+        "deps": [
+          "def-dependent-choice",
+          "thm-nakayama-lemma",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and DC. For a finitely presented module sheaf $M$ on a Noetherian scheme $S$ and $e\\ge0$, the functor of maps $g:T\\to S$ with $g^*M$ locally free of constant rank $e$ is represented by a locally closed subscheme $S_e\\hookrightarrow S$ for arbitrary test schemes $T$; its points are those with $\\dim_{\\kappa(s)}M_s=e$, and on a subscheme where this dimension is everywhere $e$ the rank stratum is closed with its full possibly nonreduced scheme structure.",
+        "strategy": "Cut out the open locus where the residue-field dimension is at most e (an open minor condition on a finite presentation), then impose the vanishing of the presentation matrix in a chosen surjection $\\mathcal O^e\\twoheadrightarrow M$; the universal vanishing ideals glue on overlaps.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-hilbert-universal-scheme-theoretic-flattening",
+        "kind": "lemma",
+        "title": "Universal scheme theoretic flattening by Hilbert polynomial",
+        "deps": [
+          "lem-hilbert-rank-flattening-finite-module",
+          "lem-hilbert-uniform-sections-after-flat-pullback",
+          "lem-hilbert-relative-regularity-and-base-change",
+          "thm-generic-flatness-morphisms",
+          "cor-euler-characteristic-locally-constant-flat-proper-family",
+          "lem-hilbert-uniform-regularity-fixed-polynomial",
+          "lem-generic-freeness-finite-type-algebra-module",
+          "thm-serre-vanishing",
+          "lem-graded-section-module-finite-projective",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and DC. For a coherent $F$ on $\\mathbb P^n_S$ with $S$ Noetherian only finitely many fibre Hilbert polynomials occur, and for each $P$ there is a locally closed subscheme $S_P\\hookrightarrow S$, empty if $P$ does not occur, with the universal property that for every scheme $T\\to S$, $F_T$ is flat over $T$ with every fibre of polynomial $P$ iff $T\\to S$ factors through $S_P$. Hence $\\coprod_P S_P\\to S$ universally represents all base changes making $F$ flat; no reduction of $S_P$ is implicit.",
+        "strategy": "Take a finite reduced generic-flatness partition, a common Serre-vanishing and section tail, intersect the rank loci of the section modules $M_N,\\dots,M_{N+n}$ at the values $P(N),\\dots,P(N+n)$, and impose the closed rank-$P(r)$ strata for all $r\\ge N$ (a finite sum on a Noetherian base); the converse factorization uses uniformly locally free section bundles.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-hilbert-family-vanishing-locus",
+        "kind": "lemma",
+        "title": "Universal vanishing locus for a map into a flat projective family",
+        "deps": [
+          "lem-proper-flat-fp-cohomology-perfect-complex",
+          "lem-eventual-global-generation-coherent-twists",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and DC. Let $f:X\\to S$ be projective of finite presentation with $S$ Noetherian, $E$ coherent, and $F$ coherent and flat over $S$. For a homomorphism $u:E\\to F$ there is a closed subscheme $V(u)\\subseteq S$ with the universal property that for every $T\\to S$, $u_T=0$ exactly when $T\\to S$ factors through $V(u)$; the condition concerns the whole homomorphism and includes nonreduced test schemes.",
+        "strategy": "Present $E$ by sums of invertible twists, use the universal finite projective cohomology complex for $E_j^\\vee\\otimes F$ to represent $\\operatorname{Hom}(E_j,F)$ by a linear scheme, and take the zero locus of the section of that linear scheme defined by $u$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-projective-morphism-coherent-bundle-convention",
+        "kind": "definition",
+        "title": "Projectivity via a coherent projective bundle",
+        "deps": [
+          "def-relatively-ample-invertible-sheaf",
+          "def-relative-proj-quasi-coherent-graded-algebra",
+          "def-projective-morphism-pre-proj"
+        ],
+        "statement": "On a locally Noetherian base $S$, projectivity means a global closed immersion $X\\hookrightarrow\\mathbb P_S(E)=\\operatorname{Proj}_S\\operatorname{Sym}E$ with $E$ coherent, not necessarily locally free and with no globally bounded number of generators. H-projectivity ($X\\hookrightarrow\\mathbb P^n_S$) is the special case $E=\\mathcal O_S^{n+1}$; no converse is asserted. A chosen relatively ample $L$ need not be the pullback of $\\mathcal O(1)$; that pullback gives an auxiliary relatively very ample bundle $M$. No quasi-compactness of $S$ is assumed.",
+        "strategy": "Definition only; fixes the coherent-projective-bundle convention used throughout the packet and separates it from the stronger H-projective convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitsure, Construction of Hilbert and Quot Schemes, Section 5: Notions of Projectivity",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-hilbert-euler-polynomial-for-ample-polarization",
+        "kind": "lemma",
+        "title": "Euler polynomial for an arbitrary ample polarization",
+        "deps": [
+          "thm-ample-powers-very-ample-proper-base",
+          "lem-serre-vanishing-induction-hyperplane",
+          "lem-ample-pullback-finite-morphism",
+          "lem-euler-characteristic-additive-short-exact",
+          "lem-proper-cohomology-field-extension",
+          "lem-support-dimension-preserved-field-extension",
+          "thm-serre-vanishing",
+          "thm-hilbert-polynomial-coherent-sheaf",
+          "def-axiom-of-choice",
+          "def-dependent-choice"
+        ],
+        "statement": "Assume AC and DC. For $X$ projective over a field $k$, $L$ ample invertible and $F$ coherent, there is a unique $P_{F,L}\\in\\mathbb Q[t]$ with $\\chi(X,F\\otimes L^{\\otimes r})=P_{F,L}(r)$ for every integer $r$, of degree at most $\\dim\\operatorname{Supp}F$ when $F\\ne0$; for large $r$ it equals $h^0$. Hence fibrewise eventual equality to a prescribed $P$ is equivalent to equality of the fibre Hilbert polynomial and, here, to the all-integer Euler-characteristic condition. Field extension preserves the polynomial, and no very-ampleness of $L$ is assumed.",
+        "strategy": "Choose consecutive very ample powers, cut with hyperplanes avoiding the associated points, derive the difference equation for $\\chi(F\\otimes L^r)$ from the two restriction sequences, and integrate it in the binomial basis; field extension invariance and Serre vanishing give both equivalences.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitsure, Section 1, Stratification by Hilbert Polynomials, page 4 (Euler polynomial; Snapper formulation)",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-hilbert-functor-of-flat-projective-subschemes",
+        "kind": "definition",
+        "title": "Hilbert functor of flat finitely presented projective families",
+        "deps": [
+          "lem-hilbert-euler-polynomial-for-ample-polarization",
+          "def-projective-morphism-coherent-bundle-convention",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Work with AC and DC. Fix a locally Noetherian $S$, possibly non-quasi-compact, a projective finitely presented $X\\to S$ in the coherent-projective-bundle convention and a relatively ample invertible $L$; tests are all $S$-schemes. $\\operatorname{Hilb}_{X/S}(T)$ consists of closed subschemes $Z\\hookrightarrow X_T$ of finite presentation whose structure sheaf is flat over $T$, taken as embedded subschemes with equality of ideal sheaves. For a numerical polynomial $P$, $\\operatorname{Hilb}^{P,L}_{X/S}$ consists of families satisfying the fibrewise eventual condition: for every geometric point $t$ there is $r_t$ with $\\chi(Z_t,L_t^{\\otimes r}|_{Z_t})=P(r)$ for all $r\\ge r_t$, equivalently eventual $h^0$ equal to $P$. Cutoffs may depend on the fibre; pullback is scheme-theoretic inverse image; the full functor allows varying polynomial on open and closed loci, and empty families and $P=0$ are allowed.",
+        "strategy": "Definition only. Membership is the fibrewise eventual Hilbert-polynomial condition; the proved arbitrary-ample Euler-polynomial supplier identifies it with the all-integer Euler form and with the fibre polynomial.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Section 1, Stratification by Hilbert Polynomials, page 4",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-hilbert-families-fpqc-descent",
+        "kind": "lemma",
+        "title": "Effective descent and base change of embedded Hilbert families",
+        "deps": [
+          "lem-hilbert-euler-polynomial-for-ample-polarization",
+          "def-hilbert-functor-of-flat-projective-subschemes",
+          "thm-faithfully-flat-descent-of-flatness",
+          "cor-faithfully-flat-descent-of-finite-generation",
+          "cor-euler-characteristic-locally-constant-flat-proper-family",
+          "lem-proper-cohomology-field-extension",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Under the conventions of the Hilbert-functor definition, the Hilbert functor and every fixed-polynomial subfunctor are fpqc sheaves: compatible closed families on an fpqc cover descend to a unique closed finitely presented flat family on the base, and arbitrary base change preserves membership and the polynomial. A family's polynomial is locally constant and its polynomial loci are open and closed.",
+        "strategy": "Descend modules along faithfully flat maps by equalizers of descent data, apply the descent to ideals and quotient algebras, descend finite presentation and flatness, and use local constancy of fibre Euler characteristics to get the open and closed polynomial loci.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-hilbert-relative-grassmannian-quotients",
+        "kind": "lemma",
+        "title": "Relative Grassmannian of finite locally free quotients",
+        "deps": [
+          "def-dependent-choice",
+          "thm-projective-bundle-represents-line-quotients",
+          "thm-relative-proj-base-change",
+          "lem-hilbert-family-vanishing-locus",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and DC. For a coherent sheaf $W$ on a locally Noetherian scheme $S$ and $e\\ge0$, rank-e locally free quotients of $W$ are represented by a projective finitely presented $S$-scheme $\\operatorname{Gr}_S(W,e)$ with universal quotient $U$, whose formation commutes with arbitrary base change. Its determinant $\\det U$ is relatively very ample and the Plücker map is a closed immersion into $\\mathbb P_S(\\bigwedge^e W)$; no local freeness or finite global generation of $W$ is assumed.",
+        "strategy": "Glue matrix charts for the free case, identify the Plücker closed immersion, then for coherent $W$ impose the finitely many presentation relations on each chart of the free-source Grassmannian; the universal quotients glue because their functors agree on overlaps.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-hilbert-projective-space-construction",
+        "kind": "lemma",
+        "title": "Construction of the fixed-polynomial Hilbert scheme of projective space",
+        "deps": [
+          "lem-hilbert-uniform-sections-after-flat-pullback",
+          "def-hilbert-functor-of-flat-projective-subschemes",
+          "lem-hilbert-uniform-regularity-fixed-polynomial",
+          "lem-hilbert-relative-regularity-and-base-change",
+          "lem-hilbert-relative-grassmannian-quotients",
+          "lem-hilbert-universal-scheme-theoretic-flattening",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and DC. For Noetherian $S$, $n\\ge0$ and fixed $P$, the functor $\\operatorname{Hilb}^{P,\\mathcal O(1)}_{\\mathbb P^n_S/S}$ on all $S$-schemes is represented by a locally closed finitely presented subscheme $H_P$ of one relative Grassmannian, with a universal closed flat finitely presented family; the Grassmannian map recovers every family scheme-theoretically from its quotient of sections in one uniformly fixed degree.",
+        "strategy": "Choose $r$ beyond the uniform regularity bound, associate to each family its rank-$P(r)$ quotient of $H^0(\\mathcal O(r))$, reconstruct the ideal on the Grassmannian by evaluating the universal kernel, and cut by the universal flattening stratum for polynomial $P$; the two constructions are inverse by the regularity generation statement.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-hilbert-valuative-flat-closure",
+        "kind": "lemma",
+        "title": "Flat schematic closure over an arbitrary valuation ring",
+        "deps": [
+          "lem-hilbert-uniform-regularity-fixed-polynomial",
+          "lem-hilbert-regularity-propagation",
+          "thm-nakayama-lemma",
+          "thm-closed-subschemes-projective-space-homogeneous-ideals",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and DC. For any valuation ring $R$ with fraction field $K$, every finitely presented closed $Z_K\\subseteq\\mathbb P^n_K$ with Hilbert polynomial $P$ has a unique flat closed finitely presented extension $Z_R\\subseteq\\mathbb P^n_R$ with polynomial $P$ on every fibre; it is the schematic closure. No discreteness or Noetherian hypothesis on $R$ is used.",
+        "strategy": "Intersect the saturated generic ideal with $R[x_0,\\dots,x_n]$ and use finite freeness of the graded pieces over a valuation ring; bound regularity uniformly, generate the ideal tail by one finite free degree and apply Nakayama, obtain flatness from the graded module, and prove uniqueness by torsion-freeness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-hilbert-proper-relative-ample-projectivity",
+        "kind": "lemma",
+        "title": "Properness and a relative ample line bundle give projectivity",
+        "deps": [
+          "thm-proper-pushforward-coherent",
+          "thm-ample-powers-very-ample-proper-base",
+          "thm-relative-proj-base-change",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and DC. If $q:Y\\to S$ is proper of finite type, $S$ is Noetherian and $A$ is invertible and relatively ample for $q$, then $Y$ admits a closed immersion into $\\mathbb P_S(E)=\\operatorname{Proj}_S\\operatorname{Sym}E$ for some coherent $E$ on $S$ (coherent-projective-bundle projectivity). If some $A^k$ has a finite list of global sections giving a closed immersion into $\\mathbb P^N_S$, the stronger H-projectivity conclusion holds; the first conclusion alone asserts no such finite list.",
+        "strategy": "On a finite affine cover choose a common very ample power by the ample-powers theorem, set $E=q_*A^k$, use the evaluation $q^*E\\to A^k$ and the chartwise closed-immersion argument; the image is closed by properness and separatedness of the projective bundle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-hilbert-regularity-independent-of-ambient-dimension",
+        "kind": "lemma",
+        "title": "A Hilbert polynomial bounds regularity independently of ambient dimension",
+        "deps": [
+          "lem-hilbert-regularity-propagation",
+          "lem-hilbert-uniform-regularity-fixed-polynomial",
+          "thm-hilbert-polynomial-degree-support-dimension",
+          "lem-proper-cohomology-field-extension",
+          "thm-hilbert-polynomial-coherent-sheaf",
+          "lem-euler-characteristic-additive-short-exact",
+          "thm-cohomology-projective-space-twisting-sheaves",
+          "thm-finiteness-of-associated-primes",
+          "thm-zero-divisors-on-a-module",
+          "def-axiom-of-choice",
+          "def-dependent-choice"
+        ],
+        "statement": "Assume AC and DC. For every numerical polynomial $P$ there is $b(P)\\ge0$ such that over every field and for all $n,p\\ge0$ the kernel and quotient of any coherent quotient $\\mathcal O^p_{\\mathbb P^n}\\twoheadrightarrow F$ with Hilbert polynomial $P$ are $b(P)$-regular, independently of $n$ and $p$. For realizable nonzero $P$ one may take $a=b(\\Delta P)$ and $b(P)=a+\\max(0,P(a))+1$, with $b(0)=0$; for unrealizable $P$ any bound works.",
+        "strategy": "Induct on $\\deg P$ with the recursive bound: the hyperplane restriction has polynomial $\\Delta P$, the sharp range handles $i\\ge2$, and $h^1(I(a))\\le P(a)$ after the ambient binomial terms cancel; then $a+B+1$ twists clear $H^1$ and field descent gives all fields.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Grothendieck, Les schémas de Hilbert, Bourbaki 221, Section 3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-hilbert-coherent-projective-bundle-construction",
+        "kind": "lemma",
+        "title": "Global Hilbert strata in a coherent projective bundle over a locally Noetherian base",
+        "deps": [
+          "def-hilbert-functor-of-flat-projective-subschemes",
+          "lem-hilbert-regularity-independent-of-ambient-dimension",
+          "lem-hilbert-relative-grassmannian-quotients",
+          "lem-hilbert-projective-space-construction",
+          "lem-hilbert-universal-scheme-theoretic-flattening",
+          "lem-hilbert-valuative-flat-closure",
+          "lem-hilbert-relative-regularity-and-base-change",
+          "lem-hilbert-uniform-sections-after-flat-pullback",
+          "thm-valuative-criterion-properness",
+          "thm-relative-proj-base-change",
+          "def-axiom-of-choice",
+          "def-dependent-choice"
+        ],
+        "statement": "Assume AC and DC. Let $S$ be locally Noetherian, possibly non-quasi-compact, and $E$ coherent on $S$; put $Y=\\mathbb P_S(E)$ with $M=\\mathcal O_Y(1)$. For every fixed $P$ the M-Hilbert functor with polynomial $P$ is represented on all $S$-schemes by a proper finitely presented scheme $H_P$ with a universal closed finitely presented flat family; polynomials with eventually negative values give the empty representative, and otherwise for $r$ large depending only on $P$ with $P(r)\\ge0$ there is a global closed immersion into $\\operatorname{Gr}_S(\\operatorname{Sym}^rE,P(r))$, hence into $\\mathbb P_S(\\bigwedge^{P(r)}\\operatorname{Sym}^rE)$, whose tautological pullback is globally relatively very ample. No bound on local generator numbers of $E$ and no quasi-compactness of $S$ is assumed.",
+        "strategy": "Work over Noetherian affine opens with the local embedding and the ambient-dimension-independent regularity bound, glue the local Grassmannian-cokernel constructions by their universal properties, and conclude properness and the closed Plücker embedding using the arbitrary-valuation flat closure.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Grothendieck, Les schémas de Hilbert, Bourbaki 221, Section 3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-hilbert-noetherian-base-fixed-polarization",
+        "kind": "lemma",
+        "title": "Fixed-polarization Hilbert construction over a Noetherian base",
+        "deps": [
+          "def-hilbert-functor-of-flat-projective-subschemes",
+          "lem-hilbert-projective-space-construction",
+          "lem-hilbert-family-vanishing-locus",
+          "lem-hilbert-valuative-flat-closure",
+          "lem-hilbert-proper-relative-ample-projectivity",
+          "lem-hilbert-families-fpqc-descent",
+          "lem-hilbert-relative-regularity-and-base-change",
+          "thm-valuative-criterion-properness",
+          "thm-ample-powers-very-ample-proper-base",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and DC. Let $S$ be Noetherian, $X\\to S$ projective of finite presentation, $L$ relatively ample and $P$ fixed. The fixed-polynomial Hilbert functor on all $S$-schemes is represented by a proper finitely presented scheme with a universal closed finitely presented flat family, and that scheme admits a closed immersion into a coherent projective bundle over $S$. A specified global $X\\hookrightarrow\\mathbb P^n_S$ inducing $L$ gives a global H-projective embedding of the representative.",
+        "strategy": "On affine base opens choose a power of $L$ giving an embedding and transfer to the substituted polynomial $Q(t)=P(dt)$ for the ambient polarization, cut the vanishing locus of the ideal of $X$ inside the ambient Hilbert scheme, glue by universal properties, prove properness by flat closure over arbitrary valuation rings, and obtain projectivity from the relatively ample section-determinant bundle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-hilbert-scheme-represents-projective-flat-families",
+        "kind": "theorem",
+        "title": "Projective Hilbert schemes represent all flat finitely presented families",
+        "deps": [
+          "def-hilbert-functor-of-flat-projective-subschemes",
+          "def-projective-morphism-coherent-bundle-convention",
+          "lem-hilbert-coherent-projective-bundle-construction",
+          "lem-hilbert-noetherian-base-fixed-polarization",
+          "lem-hilbert-family-vanishing-locus",
+          "lem-hilbert-families-fpqc-descent",
+          "thm-proper-pushforward-coherent",
+          "def-axiom-of-choice",
+          "def-dependent-choice"
+        ],
+        "statement": "Assume AC and DC. Let $S$ be locally Noetherian, possibly non-quasi-compact, $X\\to S$ projective of finite presentation in the coherent-projective-bundle convention and $L$ relatively ample. For every fixed polynomial $P$, the functor $\\operatorname{Hilb}^{P,L}_{X/S}$ is represented on all $S$-schemes by a proper finitely presented scheme $H^{P,L}_{X/S}$ admitting a global closed immersion into $\\mathbb P_S(E')$ for a coherent sheaf $E'$ on $S$, and carrying a universal closed finitely presented flat family $\\mathcal Z\\subseteq X\\times_SH^{P,L}_{X/S}$. If a specified global embedding $X\\hookrightarrow\\mathbb P^n_S$ induces $L$, the representative has a global closed embedding in one $\\mathbb P^N_S$ (H-projectivity). The full functor is represented by $H_{X/S}=\\coprod_PH^{P,L}_{X/S}$, which is locally of finite presentation and need not be proper, quasi-compact or of finite type. For every base change $S'\\to S$, including non-Noetherian $S'$, the pulled-back schemes and families represent the corresponding base-changed Hilbert functors on all $S'$-schemes.",
+        "strategy": "Restrict the ambient coherent-projective-bundle Hilbert scheme to $X$ by a universal vanishing locus, take the coproduct over polynomials for the full functor, cut the L-polynomial-$P$ locus, compare with the Noetherian-base representative on affine opens, and assemble a global relatively very ample line for the closed embedding; base change is the canonical Cartesian identification.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-universal-family-and-hilbert-polynomial-strata",
+        "kind": "lemma",
+        "title": "Universal family and open and closed Hilbert polynomial strata",
+        "deps": [
+          "thm-hilbert-scheme-represents-projective-flat-families",
+          "lem-hilbert-families-fpqc-descent",
+          "def-dependent-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Under the hypotheses of the main representation theorem there is a unique universal embedded family on the Hilbert scheme, and every family $Z\\subseteq X_T$ is the scheme-theoretic pullback of it along a unique classifying map. Its polynomial-$P$ locus is the inverse image of the open and closed stratum $H^{P,L}_{X/S}$. The representative of the full functor and its universal family are intrinsically independent of the chosen polarization (the stratum decomposition uses it), and all identifications are compatible with arbitrary base change.",
+        "strategy": "Apply the representing bijection to the identity to obtain the universal family, identify pullbacks by naturality, and use uniqueness of the representing object for polarization independence and base-change compatibility.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-hilbert-polynomial-finite-scheme-length",
+        "kind": "lemma",
+        "title": "The Hilbert polynomial of a finite scheme is its length",
+        "deps": [
+          "def-dependent-choice",
+          "thm-qc-sheaf-affine-higher-cohomology-vanishes",
+          "thm-nakayama-lemma",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and DC. For a finite scheme $Z$ over a field $k$ of length $d=\\dim_k\\Gamma(Z,\\mathcal O_Z)$ and any invertible sheaf $L$ on $Z$, $\\chi(Z,L^{\\otimes r})=d$ for every integer $r$; hence the Hilbert polynomial for every polarization is the constant $d$. Nonreduced schemes, non-rational closed points and the empty scheme are included.",
+        "strategy": "Decompose the finite coordinate algebra into Artinian local factors, where an invertible module is free of rank one; the affine scheme has vanishing higher cohomology, so the Euler characteristic is constantly the length.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nitin Nitsure, Construction of Hilbert and Quot Schemes, Sections 2–5",
+              "url": "https://arxiv.org/pdf/math/0504590"
+            },
+            {
+              "title": "Alexander Grothendieck, Les schémas de Hilbert, Bourbaki 221, Sections 2–3",
+              "url": "https://www.numdam.org/item/SB_1960-1961__6__249_0.pdf"
+            }
+          ]
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 0
+      }
+    ]
+  },
+  {
+    "order": 906,
+    "id": "hilbert-functors-and-projective-hilbert-schemes-examples",
+    "kind": "B",
+    "category": "scheme-theory",
+    "title": "Hilbert Functors and Projective Hilbert Schemes — Examples",
+    "companion": "hilbert-functors-and-projective-hilbert-schemes",
+    "requires": [
+      "hilbert-functors-and-projective-hilbert-schemes"
+    ],
+    "items": [
+      {
+        "id": "ex-hilbert-polynomial-of-finite-points-on-p1",
+        "kind": "example",
+        "title": "The Hilbert polynomial of finite points on the projective line",
+        "deps": [
+          "lem-hilbert-polynomial-finite-scheme-length",
+          "def-hilbert-functor-of-flat-projective-subschemes",
+          "lem-universal-family-and-hilbert-polynomial-strata",
+          "def-axiom-of-choice",
+          "def-dependent-choice"
+        ],
+        "statement": "For any field $k$, a finite closed subscheme $Z\\subseteq\\mathbb P^1_k$ of length $d$ has the constant Hilbert polynomial $P(r)=d$ for the usual polarization, including nonreduced points and points with nontrivial residue field. A family of such points lies in the constant-polynomial stratum exactly when it is flat and finitely presented as a Hilbert family.",
+        "strategy": "Apply the finite-scheme length lemma to every invertible twist, then identify the constant polynomial with the corresponding open and closed universal stratum and its classifying map.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": []
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 9
+      },
+      {
+        "id": "cex-fibrewise-subschemes-without-flatness-do-not-form-a-hilbert-family",
+        "kind": "counterexample",
+        "title": "Constant fibre polynomial does not give flatness over a nonreduced base",
+        "deps": [
+          "def-hilbert-functor-of-flat-projective-subschemes",
+          "lem-hilbert-universal-scheme-theoretic-flattening",
+          "def-axiom-of-choice",
+          "def-dependent-choice"
+        ],
+        "statement": "Refuted: every closed finitely presented subscheme of a projective family whose geometric fibres have one fixed Hilbert polynomial defines a member of that fixed-polynomial Hilbert functor. Counterexample: over $A=k[\\epsilon]/(\\epsilon^2)$, the subscheme $Z=V(X,\\epsilon)\\subseteq\\mathbb P^1_A$ has every fibre of polynomial 1 but its structure sheaf $k$ is not flat over $A$, so it is excluded; its flattening locus for polynomial one is the closed subscheme $\\epsilon=0$, with the same underlying point as the base but a different scheme structure.",
+        "strategy": "Compute the fibre algebra $A[x]/(x,\\epsilon)=k$ and its length, show nonflatness by applying $-\\otimes_Ak$ to $(\\epsilon)\\hookrightarrow A$, and identify the flattening stratum $\\epsilon=0$ via the local freeness criterion.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": []
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": false,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-hilbert-base-change-of-a-fat-point-family",
+        "kind": "example",
+        "title": "A flat fat-point family and its base changes",
+        "deps": [
+          "lem-hilbert-polynomial-finite-scheme-length",
+          "def-hilbert-functor-of-flat-projective-subschemes",
+          "lem-universal-family-and-hilbert-polynomial-strata",
+          "def-axiom-of-choice",
+          "def-dependent-choice"
+        ],
+        "statement": "Let $A=k[t]$ and $Z=V(X^2-tY^2)\\subseteq\\mathbb P^1_A$. Then $Z$ is a flat family of length two, and every base change, including a nonreduced base change, is the pullback of its classifying map to the constant-polynomial-two Hilbert stratum.",
+        "strategy": "On the chart $Y\\ne0$ the coordinate algebra is $A[x]/(x^2-t)$, free of rank two by division by a monic polynomial; the family is finitely presented and flat, and the universal property of the constant-polynomial stratum gives the pullback description for every $A$-algebra.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": []
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 9
+      },
+      {
+        "id": "ex-full-hilbert-functor-of-p1-has-infinitely-many-strata",
+        "kind": "example",
+        "title": "The full Hilbert functor need not be quasi-compact",
+        "deps": [
+          "thm-hilbert-scheme-represents-projective-flat-families",
+          "lem-hilbert-polynomial-finite-scheme-length",
+          "def-axiom-of-choice",
+          "def-dependent-choice"
+        ],
+        "statement": "For every field $k$ the full Hilbert scheme of $\\mathbb P^1_k$ is not quasi-compact: its fixed-polynomial pieces are projective, while there are infinitely many nonempty open and closed pieces, given for each $d\\ge1$ by a length-$d$ subscheme supported at one point.",
+        "strategy": "For each $d\\ge1$ exhibit the finitely presented length-$d$ subscheme $x^d=0$ on an affine chart, note flatness over $k$, and use the open and closed projective stratification to show that no finite subfamily of the infinite cover can cover the full Hilbert scheme.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": []
+        },
+        "design_row": "AG-MOD-1",
+        "local_addition": true,
+        "pipeline_run": "frontier-38-owner-30",
+        "origin": "pipeline",
+        "dependency_level": 8
+      }
+    ]
+  }
+]

@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "run": "frontier-38-owner-30",
+  "id": "thm-smooth-dependence-of-ode-solutions-on-parameters",
+  "status": "independently verified defect; proposed source-hypothesis repair prepared; approval and writer drain pending",
+  "write_scope": "Only this private research JSON. No item, published ledger/claim, contracts, pages, global plan/runtime or other source changed.",
+  "original_raw_sha256": "e7265caa23fd189971e24dcfdc6aa70df7014bda016eb122c221b67c05f45752",
+  "original_statement": "Let $F(t,x,\\lambda)$ be smooth in $(x,\\lambda)$ on an open time-state-parameter\ndomain. Near any base data $(t_0,x_0,\\lambda_0)$ there are a compact time\ninterval $I$ and a neighbourhood $W$ of $(x_0,\\lambda_0)$ such that, for every\n$(y,\\lambda)\\in W$, the solution of\n\n$$x'(t)=F(t,x(t),\\lambda),\\qquad x(t_0)=y,$$\n\nis defined on $I$, and the resulting solution map is smooth in the pair\n$(y,\\lambda)$.",
+  "counterexample": {
+    "domain": "R_time\u00d7R_state\u00d7R_parameter",
+    "field": "F(t,x,lambda)=1 if t=0, otherwise0",
+    "regularity": "For each fixed t this is constant, hence C\u221e, in(x,lambda), exactly the stated weak premise.",
+    "base": "(0,0,0)",
+    "proof": "A classical local solution has a nondegenerate interval around0. On each side of0 its derivative is0, so MVT makes it constant there. Differentiability at0 implies continuity, so both constants equal x(0), making it constant throughout a neighbourhood. Its derivative at0 is therefore0, contradicting the equation requiring1. This does not rely on failure of derivative continuity; no differentiable solution exists.",
+    "ivp_definition": "def-first-order-ode-initial-value-problem-and-solution requires the equation at every time, and a nondegenerate neighbourhood for local solutions.",
+    "confidence": "Certain."
+  },
+  "source_evidence": {
+    "url": "https://www.math.ntu.edu.tw/~dragon/Lecture%20Notes/Banach%20Calculus%202012.pdf",
+    "raw_sha256": "2ba93c81e99111b8225554fb22a8294cd76d14efc4b97103826b854ed4ca56d6",
+    "bytes": 191108,
+    "local_pdf": "/tmp/ode-owner-review/wang.pdf",
+    "local_text": "/tmp/ode-owner-review/wang.txt",
+    "full_text_retrieved": true,
+    "read_locators": "Complete \u00a7\u00a74.2\u20134.4, printed pp.13\u201316; \u00a74.3 explicitly says reduction preserves C^p; \u00a74.4 begins with a C^p vector field and proves flow regularity with IFT/variational bootstrap. \u00a74.1 context on p.12 also inspected.",
+    "conclusion": "Source supports joint smoothness, not merely fibrewise state/parameter smoothness for arbitrary time dependence.",
+    "other_source_limit": "Reader14 qualified Wang fetch independently reproduced. Hitchin archive was not freshly retrieved; no reading or theorem content claim made for that source."
+  },
+  "approval_proposal": {
+    "minimal_exact_statement": "Let $F(t,x,\\lambda)$ be jointly $C^\\infty$ in $(t,x,\\lambda)$ on an open time-state-parameter\ndomain. Near any base data $(t_0,x_0,\\lambda_0)$ there are a compact time\ninterval $I$ and a neighbourhood $W$ of $(x_0,\\lambda_0)$ such that, for every\n$(y,\\lambda)\\in W$, the solution of\n\n$$x'(t)=F(t,x(t),\\lambda),\\qquad x(t_0)=y,$$\n\nis defined on $I$, and the resulting solution map is smooth in the pair\n$(y,\\lambda)$.",
+    "requested_change": "Replace only the ambiguous/false smooth-in-state-and-parameter premise by joint C\u221e in time,state,parameter on the open domain. Preserve all original uniform local existence/smooth-data conclusions, finite-dimensional categories and absence of a new Choice premise. Proof/Facts explicitly derive uniform existence and joint flow regularity.",
+    "reason_approval_needed": "This is a genuine hypothesis correction to a published commissioned Statement, not formatting; parent explicitly holds interface edits pending precise owner approval.",
+    "consumer_impact": "All seven actual direct consumers use jointly smooth coefficient fields. No commissioned consumer claim needs weakening. Refresh exact changed citations and ordinary mathematical evidence only after their writers drain; repair any discovered true consumer gap in this same lane."
+  },
+  "complete_proposed_proof": [
+    {
+      "step": "1.1",
+      "claim": "Joint smoothness gives a uniform state-Lipschitz bound and uniform existence.",
+      "argument": "Put z=(x,lambda), z0=(x0,lambda0), and G(t,z)=(F(t,x,lambda),0) on the same open domain. Choose one closed convex time-state cylinder around(t0,z0) contained in D and a smaller cylinder with positive margins. Joint smoothness makes G and D_zG continuous there, so their norms have bounds M and L. Apply the exact published total-derivative mean-value inequality to the convex open state ball inside each closed-cylinder slice; its derivative operator norm bound makes G state-Lipschitz with common L. Uniform Picard\u2013Lindelof gives H>0 and a neighbourhood W0 of z0 on which every augmented IVP at t0 has a unique solution on[t0-H,t0+H] inside a single compact cylinder. No common solution interval is assumed without proof.",
+      "suppliers": [
+        "thm-mean-value-inequality-for-total-derivatives",
+        "thm-extreme-value-metric",
+        "cor-uniform-picard-lindelof-for-nearby-initial-values",
+        "thm-picard-lindelof-local-existence-and-uniqueness"
+      ]
+    },
+    {
+      "step": "1.2",
+      "claim": "Parameter augmentation is exactly equivalent to the original system.",
+      "argument": "The last m augmented coordinates have derivative0 and initial value lambda, hence are constant. The first n coordinates solve x\u2032=F(t,x,lambda), x(t0)=y; conversely any original solution with fixed lambda gives an augmented solution. Projection gives existence and uniqueness on the common interval for every(y,lambda) in W0.",
+      "suppliers": [
+        "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation"
+      ]
+    },
+    {
+      "step": "2.1",
+      "claim": "Smooth dependence applies after its actual common-interval premise has been established.",
+      "argument": "G is jointly smooth and in particular smooth in z. Apply the published initial-data theorem on the established compact interval to the augmented system, shrinking W0 to W as required. Its operative variational proof is valid here: all state derivatives of G are jointly continuous, compact cylinders bound them, and the C1 difference-quotient/Gronwall estimate is uniform in time. The first derivative solves A\u2032=D_zG(t,Z)A, A(t0)=Id. Higher derivatives form finite-dimensional jets X_r satisfying X_r\u2032=D_zG(t,X0)X_r+P_r(t,X0,...,X_{r-1}), X_r(t0)=0 for r>=2, with P_r the finite partition chain-rule polynomial. Each highest component is affine linear once lower components are fixed, so homogenization and the linear-matrix supplier give existence on the same compact interval. For all nearby full jet initial values, induction bounds the lower jet components on the already fixed compact interval; each next component solves an affine linear equation with bounded coefficients and forcing, so the linear-matrix/Gronwall estimate keeps it bounded on that same interval. Thus those enlarged IVPs genuinely share the interval, rather than presupposing an unproved existence premise. The C1 initial-data theorem applied to these jointly smooth jet systems gives C1 dependence of the entire jet (including the highest component); uniqueness identifies those components with actual derivatives obtained from the Volterra equation. Induction yields continuous state derivatives of every order, with local uniform time bounds. This uses the highest jet, not the invalid inference that the first component being C1 alone increases its order.",
+      "suppliers": [
+        "thm-smooth-dependence-of-solutions-on-initial-data",
+        "thm-c1-dependence-of-solutions-on-initial-data",
+        "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+        "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation"
+      ]
+    },
+    {
+      "step": "2.2",
+      "claim": "Time regularity and endpoints are controlled, and projection gives the commissioned conclusion.",
+      "argument": "The equation Z_t=G(t,Z), together with the continuous state jets from2.1 and joint smoothness of G, gives all mixed time/state derivatives by induction: state derivatives of Z_t are the chain-rule expressions in those jets; differentiating those expressions in time uses the jet equations. Thus Z is jointly smooth on(t0-H,t0+H)\u00d7W. Take h=H/2 and I=[t0-h,t0+h]; the solution map restricted to I has a jointly smooth extension to an open time neighbourhood, so endpoint smoothness is unambiguous. Project the first n components to obtain the original smooth dependence in(y,lambda). Joint time regularity is proved for actual consumers without asserting it merely from separate variable smoothness.",
+      "suppliers": [
+        "thm-smooth-dependence-of-solutions-on-initial-data",
+        "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation"
+      ]
+    }
+  ],
+  "proposed_exact_direct_deps": [
+    "thm-smooth-dependence-of-solutions-on-initial-data",
+    "cor-uniform-picard-lindelof-for-nearby-initial-values",
+    "thm-picard-lindelof-local-existence-and-uniqueness",
+    "thm-mean-value-inequality-for-total-derivatives",
+    "thm-extreme-value-metric",
+    "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+    "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+    "thm-c1-dependence-of-solutions-on-initial-data"
+  ],
+  "choice_evidence": "Chosen local finite-dimensional cylinder and finitely many bounds require no family selection. Picard iterates are a prescribed recursion from a fixed constant path, their limit is unique, and derivative jets are uniquely determined finite-dimensional IVPs. Actual supplied Picard/uniform/C1/smooth-initial/linear-matrix Statements do not assume AC or CC. No Choice assumption will be added. Deeper closure status is checked only as inventory, not blanket logical-foundation certification.",
+  "recursive_supplier_inventory": {
+    "root_suppliers": [
+      "cor-uniform-picard-lindelof-for-nearby-initial-values",
+      "thm-picard-lindelof-local-existence-and-uniqueness",
+      "thm-smooth-dependence-of-solutions-on-initial-data",
+      "thm-c1-dependence-of-solutions-on-initial-data",
+      "thm-continuous-dependence-of-odes-on-initial-data-and-parameters",
+      "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+      "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+      "thm-mean-value-inequality-for-total-derivatives",
+      "thm-extreme-value-metric",
+      "thm-heine-borel-rn"
+    ],
+    "visited": 519,
+    "missing": [],
+    "nonpublished": [],
+    "limit": "Existence/status closure only. Exact operative suppliers were opened as recorded; no independent full mathematical audit of all transitive items claimed."
+  },
+  "direct_consumers": [
+    {
+      "id": "thm-a-flat-connection-admits-local-parallel-frames",
+      "path": "items/thm-a-flat-connection-admits-local-parallel-frames.md",
+      "status": "published",
+      "frontmatter": true,
+      "body": true,
+      "argument": "Full proof read. Step1.1 transports a fixed basis along the coordinate radial path H(t,q)=p+t(q-p) inside a smooth bundle trivialization. Smooth connection coefficients composed with this jointly smooth path give a jointly smooth linear coefficient matrix in(t,q), so the corrected hypothesis holds. No consumer Statement change needed.",
+      "supplier_uses": [
+        "F4",
+        "1.1"
+      ],
+      "interval_issue": "Existence on the full radial [0,1] comes from the parallel-section supplier; local parameter smoothness patches along this compact interval by uniqueness.",
+      "raw_sha256": "0cb16289318f05130fcd34de677eb8f8f6edfedb8c5e2afe27cae24814debc9d"
+    },
+    {
+      "id": "prop-flat-connections-have-locally-path-independent-parallel-transport-on-a-coordinate-ball",
+      "path": "items/prop-flat-connections-have-locally-path-independent-parallel-transport-on-a-coordinate-ball.md",
+      "status": "published",
+      "frontmatter": true,
+      "body": true,
+      "argument": "Full proof read. Step1.1 uses coordinatewise linear interpolation H(s,t) of two piecewise smooth paths. After their common finite subdivision, H and the connection-coefficient linear ODE are jointly smooth on each rectangle (via smooth extensions at strip endpoints). Apply the corrected local theorem per strip and compose the finitely many endpoint maps; no theorem for a globally nonsmooth time field is needed.",
+      "supplier_uses": [
+        "F4",
+        "1.1"
+      ],
+      "interval_issue": "The parallel-section supplier supplies the entire path; smooth finite-strip dependence is glued by uniqueness. Need retain explicit strip qualification in any refreshed Facts.",
+      "raw_sha256": "07dcd7f5ed2b43d814033a65f753bd18469e0890efe1cd17d8f22cfbf120ce60"
+    },
+    {
+      "id": "ex-smooth-dependence-in-an-ode-with-a-parameter",
+      "path": "items/ex-smooth-dependence-in-an-ode-with-a-parameter.md",
+      "status": "published",
+      "frontmatter": true,
+      "body": true,
+      "argument": "Full example/verification read. F(t,x,lambda)=lambda*x is polynomial in all variables, and the explicit e^(lambda*t)*x0 verifies dependence directly. Corrected hypothesis holds globally.",
+      "supplier_uses": [
+        "L1",
+        "2.1"
+      ],
+      "raw_sha256": "254253c0ee5f89908e894b769d61d2ccbfde064aa547f1f80de7fb325b110b4b"
+    },
+    {
+      "id": "lem-local-solvability-of-the-augmented-characteristic-ode",
+      "path": "items/lem-local-solvability-of-the-augmented-characteristic-ode.md",
+      "status": "published",
+      "frontmatter": true,
+      "body": true,
+      "argument": "Full proof and defining characteristic-system interface read. G(X,Z)=(a(X,Z),b(X,Z)) is autonomous smooth, hence jointly smooth in time and state. The C1 initial strip y\u21a6(gamma(y),phi(y)) composes with the smooth initial-data solution map to give C1 in(s,y); joint time regularity is justified by the ODE and chain rule. No weakening or new Choice required.",
+      "supplier_uses": [
+        "2.1"
+      ],
+      "raw_sha256": "64e94f1b81f97b1a1197aa3033d8fec1e7dbeac4f8e0655bc10656bdb4bfc143"
+    },
+    {
+      "id": "thm-the-double-has-a-well-defined-smooth-structure",
+      "path": "items/thm-the-double-has-a-well-defined-smooth-structure.md",
+      "status": "published",
+      "frontmatter": true,
+      "body": true,
+      "argument": "Full nine-step proof read. Steps4.1\u20135.1 use X_s=(1-theta(s))X0+theta(s)X1 with smooth extended coordinate fields across the seam; the ODE time is independent of the smooth parameter s. Thus the coordinate RHS is jointly smooth on an open extension. Local widths and parameter interval are handled locally and finitely by compactness of[0,1]. Corrected hypothesis holds, including seam extensions.",
+      "supplier_uses": [
+        "F4",
+        "5.1"
+      ],
+      "raw_sha256": "f891775f0aa39b11c84dcf4f2bcb22708700570fd5db86fc403001560a4be728"
+    },
+    {
+      "id": "thm-fundamental-theorem-for-nonautonomous-smooth-odes",
+      "path": "items/thm-fundamental-theorem-for-nonautonomous-smooth-odes.md",
+      "status": "published",
+      "frontmatter": true,
+      "body": true,
+      "argument": "Full proof read. Given F smooth on an open time-state domain; autonomous augmentation(s,x)\u2032=(1,F(s,x)) is jointly smooth. Treat its initial(s0,x0) as state data; local uniqueness/common interval supplied by the autonomous theorem. Actual field excludes the discontinuous-time counterexample.",
+      "supplier_uses": [
+        "L2",
+        "2.1"
+      ],
+      "raw_sha256": "05c0d757e651a1388d35c89358a8bcb5311ee92b6e8b494d5a1712ee7d686c98"
+    },
+    {
+      "id": "thm-stable-normal-bundle-is-independent-of-the-embedding",
+      "path": "items/thm-stable-normal-bundle-is-independent-of-the-embedding.md",
+      "status": "draft",
+      "frontmatter": true,
+      "body": true,
+      "argument": "Reader14 full proof and current operative2.1 reviewed. K_t(x)=dotP_tP_t-P_tdotP_t is jointly smooth from the Gram/projection formula, and the matrix-state RHS K_t(x)U is jointly smooth in(t,U,x). Boundary charts explicitly extend coefficient formulas to an open Euclidean parameter/time neighbourhood, then restrict/glue by uniqueness. The global fixed-parameter matrix solution on[0,1] is separate from local parameter smoothness, so corrected hypothesis holds.",
+      "supplier_uses": [
+        "F2",
+        "2.1"
+      ],
+      "writer_collision": "Live alpha5a-batch14 adjudication may write this item or its batch14 contracts; require terminal/drained receipt before edits or quote refresh.",
+      "raw_sha256": "229c499dea8b42156847d0990f84787f4e05b87dfc5cdfae957ce071c5df61a7"
+    }
+  ],
+  "engine_collision": "At review time alpha5a-batch14 is active and may write the sole draft direct consumer/stable-normal contract. Numerous other reader/alpha/refuter workers remain active in the run. The six published direct consumers are not a current batch14 write scope; root must serialize published repair ownership and conditional downstream work after approval. No write should occur now.",
+  "remaining_uncertainty": "No uncertainty about falsity of the original Statement or truth of the proposed joint-smooth finite-dimensional theorem. Before implementation, finalize concise proof tags/quotes, verify exact highest-jet common-interval application, and recheck current consumer hashes/writer drainage. Generic weaker time regularity hypotheses are deliberately not proposed without a separate proof. No tests, judgments, audits or gates run."
+}

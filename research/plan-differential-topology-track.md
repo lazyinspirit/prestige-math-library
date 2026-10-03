@@ -1663,7 +1663,7 @@ codimension-one/sphere-leaf cases and are not promoted.
 | DT-13 | M Ch. 6, pp. 32--41 | GP Ch. 3 §§5, 7, pp. 132--150; Stanford Lectures 16--17, pp. 49--55 |
 | DT-14 | GP Ch. 3 §4, pp. 119--131 | Stanford Lecture 17, pp. 52--55; *Lectures on Fixed Point Theory* Lecture II, pp. 12--23 |
 | DT-15 | F Lectures 1--2, pp. 5--24 | MS Ch. 17, pp. 199--204 |
-| DT-16 | MS Ch. 18, pp. 205--218 | F Lectures 2--3 and 10, pp. 15--28, 86--91 |
+| DT-16 | MS Ch. 18, pp. 205--218; Stanford Math 215B Lectures 14--15, pp. 44--46; May Ch. 23 §5, pp. 194--196 | F Lectures 2--3 and 10, pp. 15--28, 86--91 |
 | DT-17 | F Lectures 2--3, pp. 15--28 | M Ch. 7, pp. 42--49; Ranicki §§6.1--6.2, pp. 109--116 |
 | DT-18 | F Lecture 2, pp. 20--24 | M Ch. 8, pp. 50--51; GP Ch. 3 §6, pp. 141--147 |
 | DT-19 | MS Chs. 16--18, pp. 183--218 | F Lectures 7--10, pp. 55--91; TW §§9--18, pp. 15--34 |
@@ -1786,7 +1786,7 @@ not cause duplicate items.
 | H079 | MS Ch. 18.3, “Regular values and transversality” — normal-preimage application | included | `prop-transverse-preimage-carries-a-pulled-back-normal-structure`, `lem-based-homotopies-transverse-to-the-zero-section-give-normal-cobordisms` |
 | H080 | MS Ch. 18.4, “The main theorem” — stable normal data | included | `def-stable-normal-bundle-of-a-compact-smooth-manifold`, `thm-stable-normal-bundle-is-independent-of-the-embedding` |
 | H081 | F Lecture 10, “Thom structures and collapse” | included | `def-pontryagin-thom-collapse-of-an-embedded-submanifold`, `lem-collapse-map-is-continuous-and-smooth-away-from-the-basepoint`, `lem-collapse-map-is-independent-of-tubular-neighbourhood-and-radius-up-to-based-homotopy` |
-| H082 | F named result, “Collapse and the Thom class” | included | `def-thom-class-and-thom-isomorphism-interface`, `prop-collapse-pullback-of-the-thom-class-is-the-poincare-dual`, `rem-thom-spectrum-construction-is-not-minted-in-dt` |
+| H082 | Stanford Math 215B Lectures 14--15, Theorems 138--139, pp. 44--46; May, *A Concise Course in Algebraic Topology*, Ch. 23 §5, pp. 194--196 | included | `def-thom-class-and-thom-isomorphism-interface`, `prop-collapse-pullback-of-the-thom-class-is-the-poincare-dual`, `rem-thom-spectrum-construction-is-not-minted-in-dt` |
 | H083 | F Lecture 2, “Framed bordism” | included | `def-framing-of-a-normal-bundle`, `def-framed-cobordism-of-embedded-submanifolds`, `lem-framed-cobordism-is-an-equivalence-relation` |
 | H084 | F Lecture 2, “The Pontrjagin--Thom construction” | included | `prop-a-framing-identifies-the-thom-target-with-a-sphere-smash-product`, `def-pontryagin-thom-map-of-a-framed-submanifold`, `lem-changing-framed-tube-data-changes-the-pontryagin-thom-map-by-based-homotopy` |
 | H085 | M Ch. 7, “Framed cobordism” | included | `def-framed-regular-preimage-of-a-map-to-a-sphere`, `lem-regular-value-choice-does-not-change-the-framed-cobordism-class`, `lem-homotopic-sphere-maps-have-framed-cobordant-regular-preimages` |

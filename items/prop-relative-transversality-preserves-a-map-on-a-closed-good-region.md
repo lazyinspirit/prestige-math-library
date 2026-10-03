@@ -22,12 +22,7 @@ sources:
     - title: "Marco Gualtieri, Topology I: Smooth Manifolds, Part 10, Theorem 3.29"
       url: "https://www.math.toronto.edu/mgualt/courses/17-1300/docs/17-1300-notes-10.pdf"
 verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (prop-relative-transversality-preserves-a-map-on-a-closed-good-region). No independent judge or whole-closure certification.
-    delegated_by: owner
+  repair: research/frontier-38-owner-30-step5-misc-supplier-prop-relative-transversality-preserves-a-map-on-a-closed-good-region.receipt.json
 ---
 
 ## Statement
@@ -42,7 +37,7 @@ homotopy agree with $f$ on a smaller neighbourhood of $A$.
 
 **Given:** $\mathrm{AC}_\omega$ and a smooth map $f:M\to N$ that is transverse to $Z$ on an open neighbourhood of a closed set $A\subseteq M$.
 
-[L2] A smooth map admits a finite-dimensional perturbation family whose evaluation map is a submersion ([[lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family]]).
+[L2] A smooth map admits a smooth finite-dimensional perturbation family $\mathcal F:M\times B\to N$, with $B$ an open ball centred at $0$, $\mathcal F_0=f$, and every parameter map $a\mapsto\mathcal F(p,a)$ a submersion; hence its evaluation map is a submersion ([[lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family]]).
 
 [L3] Under $\mathrm{AC}_\omega$, parametric transversality makes the nontransverse parameter set null, and a null subset of a positive-dimensional parameter ball has dense complement ([[thm-parametric-transversality]], [[prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold]]).
 
@@ -51,9 +46,9 @@ homotopy agree with $f$ on a smaller neighbourhood of $A$.
 ## Proof
 **Proof technique:** direct.
 
-1.1 Choose open sets $A\subseteq W$ with $\overline W\subseteq V$ inside the region where $f$ is already transverse to $Z$. By [L4], choose a smooth nonnegative function $\eta$ whose zero set is exactly $\overline W$, and put $\lambda:=\eta/(1+\eta)$. Then $0\le\lambda<1$ and its zero set is $\overline W$. [L4, given, choose, algebra]
+1.1 Let $V$ be the given open neighbourhood of $A$ on which $f$ is transverse. By [L4], choose smooth nonnegative functions $u,v$ with $u^{-1}(0)=A$ and $v^{-1}(0)=M\setminus V$. They have no common zero because $A\subseteq V$. Put $W:=\{p:u(p)<v(p)\}$. It is open and contains $A$, since on $A$ one has $u=0<v$. Continuity gives $\overline W\subseteq\{u\le v\}\subseteq V$: outside $V$ one has $v=0<u$, and the strict inequality persists in a neighbourhood disjoint from $W$. Thus the required smaller neighbourhood is constructed without an assumed global shrinking theorem. Apply [L4] to the closed set $\overline W$ to obtain a smooth nonnegative $\eta$ whose zero set is exactly $\overline W$, and put $\lambda:=\eta/(1+\eta)$. Then $0\le\lambda<1$ and its zero set is $\overline W$. [L4, given, choose, algebra]
 
-1.2 Let $\mathcal F:M\times B\to N$ be the perturbation family from [L2], where $B\subseteq\mathbb R^m$ and $\mathcal F_0=f$. If $m=0$, the submersion $\mathcal F_p:B\to N$ forces $N$ to be zero-dimensional. Every map into a zero-dimensional manifold is transverse to every embedded submanifold, so in this case take the perturbed map and homotopy to be constantly $f$. Hence assume $m\ge1$, and shrink $B$ to a ball centred at $0$. [L2, given]
+1.2 If $M=\varnothing$, the unique empty map and its empty homotopy are transverse and agree with $f$ everywhere, so the conclusion holds. Assume henceforth $M\ne\varnothing$. Let $\mathcal F:M\times B\to N$ be the perturbation family from [L2], where $B\subseteq\mathbb R^m$ and $\mathcal F_0=f$. If $m=0$, fix $p\in M$; the submersion $\mathcal F_p:B\to N$ forces $N$ to be zero-dimensional. Every map into a zero-dimensional manifold is transverse to every embedded submanifold, so in this case take the perturbed map and homotopy to be constantly $f$. Hence assume $m\ge1$, and shrink $B$ to a ball centred at $0$. [L2, given]
 
 2.1 Since $0\le\lambda<1$ and the centred ball $B$ is convex, $\lambda(p)^2a\in B$ for every $(p,a)\in M\times B$. Define $$\mathcal G(p,a):=\mathcal F\bigl(p,\lambda(p)^2a\bigr).$$ This is a smooth family with $\mathcal G_0=f$. [L2, step 1.1, step 1.2, construct]
 

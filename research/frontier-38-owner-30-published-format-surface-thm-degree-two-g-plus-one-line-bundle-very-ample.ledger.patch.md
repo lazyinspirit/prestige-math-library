@@ -1,0 +1,10 @@
+<!-- local-published-repair:frontier-38-owner-30:thm-degree-two-g-plus-one-line-bundle-very-ample:format-v1:begin -->
+### thm-degree-two-g-plus-one-line-bundle-very-ample: proof paragraph formatting
+
+- Read the complete published claim, Facts, proof, dependencies and exact inherited Choice declaration. This is formatting maintenance, not a new whole-item mathematical audit.
+- Authorized presentation exception: informational preview in step3.3 changes only `step 5.1` to `step (5.1)`; its finite-morphism argument does not depend on the later application. All mathematical words are preserved; inverse-normalizing these parentheses preserves the exact semantic text. Formatting only: join split numbered proof titles, bodies and displays into single paragraphs and collect their existing justification tags at the paragraph end. Preserve mathematical text up to tag placement and the explicitly recorded preview punctuation, numbered references, Statement, Facts, deps, sources, hypotheses and Choice; add no tags.
+- Current content guard hash: 6ef53cdb0435a916623bded7b47db67c87e5039ab45f9a5cc84ea42d7d207ad9. Prior content guard hash: b4b206d05bdd20a6bec8f66d5c3727ac450d7d8836b371928a3a254fe876cff7. Before raw hash: e7980dd72494c2db8744af070077b0435b1cb0557635b4393a1f5b3354724642.
+- Preserved pre-edit carrier: research/frontier-38-owner-30-published-format-surface-thm-degree-two-g-plus-one-line-bundle-very-ample.before.md. Prior verification metadata is retained there; current verification points only to research/frontier-38-owner-30-published-format-surface-thm-degree-two-g-plus-one-line-bundle-very-ample-receipt.json.
+- Focused local precheck, real renderer and explicit changed-path proof-layout all pass. No new audit, published item gate, rejudgment or Statement change; no downstream interface propagation.
+- Root must serialize this exact ledger evidence and the private ownership patch into canonical carriers.
+<!-- local-published-repair:frontier-38-owner-30:thm-degree-two-g-plus-one-line-bundle-very-ample:format-v1:end -->

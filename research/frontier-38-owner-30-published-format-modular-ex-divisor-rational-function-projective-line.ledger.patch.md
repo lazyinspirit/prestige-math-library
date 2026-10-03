@@ -1,0 +1,11 @@
+<!-- local-published-repair:frontier-38-owner-30:ex-divisor-rational-function-projective-line:format-v1:begin -->
+### ex-divisor-rational-function-projective-line: Given-based proof-use clarification and formatting
+
+- Read the entire published claim, Facts, proof, deps, sources and operative Choice assumptions. Joined 6 split numbered bodies and their existing terminal tags; all mathematical words retained. Existing numeric reference tags were normalized to step references and labels/citations consistently renumbered without reordering paragraphs.
+- Statement/Example, dependencies, sources and hypotheses are unchanged. Arguments are identical after reversing consistent step-label/reference renumbering and ignoring tag formatting; this item adds the explicitly authorized Given-based F1 clarification; its supplied charts establish F1 without invoking the AC-qualified existence/twisting construction. No consumer propagation is triggered.
+- Prior audited metadata is preserved in research/frontier-38-owner-30-published-format-modular-ex-divisor-rational-function-projective-line.before.md; current verification points only to research/frontier-38-owner-30-published-format-modular-ex-divisor-rational-function-projective-line-receipt.json, a local repair receipt. No new audit/judge is claimed.
+- Current content guard hash: c9e8e65c1e525f32a86f4e9657c019ab5272d54c59cecde9c8a426af1201086b. Prior guard hash: e050130d70ffcdcffac4d7cb8ab162e2267f9ed3312aa3cfd39e07417c2ec140. Before raw SHA256: 83261ce9789fbbdd53c311deb25c7e61cc09f33286403d6932f8dee64829d0f0.
+- Focused explicit proof-layout, precheck and real rendercheck passed after the final edit; their exact per-item commands, outputs and hashes are in the receipt and private check files.
+- The initial AC-qualified chart-supplier concern is resolved by the explicit Given-based F1 clarification. All other operative direct supplier clauses are unconditional; the function-field supplier geometric-integrality clause requires AC but is unused. No full mathematical audit is claimed.
+- Root must serialize this exact ledger evidence and the private ownership patch into the canonical files; those files were not edited by this lane.
+<!-- local-published-repair:frontier-38-owner-30:ex-divisor-rational-function-projective-line:format-v1:end -->

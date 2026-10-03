@@ -1,0 +1,440 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-closed-subgroup-scheme-valued-point-criterion",
+    "ex-additive-multiplicative-and-general-linear-group-schemes",
+    "cex-alpha-p-mu-p-rational-points-do-not-detect-scheme"
+  ],
+  "contracts": {
+    "lem-closed-subgroup-scheme-valued-point-criterion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-scheme-over-a-field",
+          "source_section": "Definition",
+          "quote": "The three structure morphisms give a group law on $G(T)$, naturally under precomposition in $T$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-morphism-and-closed-subgroup-scheme",
+          "source_section": "Definition",
+          "quote": "A **closed subgroup scheme** of $G$ is a closed immersion $j:H\\hookrightarrow G$ in the sense of [[def-closed-immersion-schemes]], where $H$ is a group scheme and $j$ is a morphism of group schemes. Its multiplication, identity, and inverse are the restrictions of those of $G$. A closed immersion is a monomorphism: a factorization through its subscheme, when it exists, is unique, since the map of sheaves onto the subscheme's structure sheaf is surjective.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-affine-closed-immersions-quotient-rings",
+          "source_section": "Statement",
+          "quote": "For a ring $A$, closed immersions $Z\\to\\operatorname{Spec}A$ are, up to unique isomorphism over $\\operatorname{Spec}A$, precisely the morphisms $\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}A$ for ideals $I\\subseteq A$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fibre-products-of-schemes-exist",
+          "source_section": "Statement",
+          "quote": "Every diagram $X\\to S\\leftarrow Y$ of schemes has a fibre product.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step 1.1",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ],
+          "claim": "Forward direction: if $H$ is a closed subgroup scheme, the functorial group law on $H(R)$ and the homomorphism $j$ make $H(R)$ a subgroup of $G(R)$ for every $R$. Reverse direction: from the hypothesis at $R=k$, the identity $e_G\\in G(k)$ lies in the subgroup $H(k)$ and therefore factors through the closed immersion $j$, giving $e_H:\\operatorname{Spec}k\\to H$."
+        },
+        {
+          "id": "step 2.1",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ],
+          "claim": "Over an affine chart $U=\\operatorname{Spec}R\\subseteq H\\times_kH$ the two projections are points $a,b\\in H(R)$; by hypothesis their product $ab\\in G(R)$ lies in $H(R)$, so $m_G\\circ(j\\times j)|_U$ factors through $H$. Factors on overlaps agree by uniqueness through the monomorphism $j$, so they glue to $m_H$ with $j\\circ m_H=m_G\\circ(j\\times j)$; the same chart argument with the inverse in $G(R)$ produces $i_H$ with $j\\circ i_H=i_G\\circ j$. All three factorizations use points over arbitrary affine charts, not field-valued points."
+        },
+        {
+          "id": "step 3.1",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ],
+          "claim": "Composing the associativity, identity and inverse identities of $G$ with $j$ exhibits them for the factors $m_H,i_H,e_H$; since $j$ is a monomorphism they hold in $H$. A finite affine cover $\\operatorname{Spec}A_i$ of the finite-type $G$ restricts to $\\operatorname{Spec}(A_i/I_i)$ by the quotient description of closed immersions, so $H$ is finite type over $k$ and is a closed subgroup scheme with these uniquely determined structure morphisms; the equivalent factorization criterion transfers along the same identities."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty closed subscheme is excluded on both sides in step 1.1: the test at $R=k$ forces the identity $e_G$ to factor through $H$, which the empty scheme does not admit, and $\\varnothing=H(k)$ is not a subgroup."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero ring $R=0$ contributes the one-point set on both sides; step 2.1 glues arbitrary affine charts and uses no nonemptiness of $R$, and $H(0)\\subseteq G(0)$ is trivially a subgroup, so the equivalence is unaffected."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial subgroup $H=e_G(\\operatorname{Spec}k)$ is covered: step 1.1 supplies $e_H$, steps 2.1 and 3.1 apply verbatim, and $H(R)=\\{e\\}$ is a subgroup of $G(R)$ for every $R$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nonreduced $H$ is in scope: neither the statement nor steps 1.1-3.1 assumes reducedness or smoothness, and step 2.1 tests points over arbitrary affine charts, including charts with nilpotents, so finite infinitesimal subschemes are detected."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no ordered index, interval or limiting parameter; there is no endpoint case to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is choice-free: affine charts are glued, and uniqueness of the factor through the monomorphism makes the outcome independent of the chosen chart family; no arbitrary family of nonempty sets is selected and the item declares no Choice dependency."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1, first direction: if $H$ is a closed subgroup scheme then $H(R)\\subseteq G(R)$ is a subgroup for every commutative unital $k$-algebra $R$, since the structure morphisms of $H$ give a group law and $j$ is a homomorphism."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 supplies the identity $e_H$ over $R=k$, step 2.1 factors multiplication and inverse through $H$ over affine charts, and step 3.1 transfers the group identities, proves $H$ is finite type and records uniqueness; the final sentence covers the equivalent factorization formulation."
+        }
+      ]
+    },
+    "ex-additive-multiplicative-and-general-linear-group-schemes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-scheme-over-a-field",
+          "source_section": "Definition",
+          "quote": "In particular for every commutative unital $k$-algebra $R$, $G(R)$ means $G(\\operatorname{Spec}R)$ and is a group, including for algebras with nilpotents.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-morphism-and-closed-subgroup-scheme",
+          "source_section": "Definition",
+          "quote": "A **morphism of $k$-group schemes** is a $k$-morphism $f:G\\to H$ satisfying $$f\\circ m_G=m_H\\circ(f\\times f),\\qquad f\\circ e_G=e_H,\\qquad i_H\\circ f=f\\circ i_G.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-affine-scheme-ring-anti-equivalence",
+          "source_section": "Statement",
+          "quote": "Consequently $A\\mapsto\\operatorname{Spec}A$ is a contravariant equivalence from commutative rings to affine schemes, with quasi-inverse global sections.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-affine-fibre-product-tensor-ring",
+          "source_section": "Statement",
+          "quote": "In the category of all schemes, $$\\operatorname{Spec}B\\times_{\\operatorname{Spec}A}\\operatorname{Spec}C\\cong\\operatorname{Spec}(B\\otimes_A C).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ring-matrix-arithmetic-laws",
+          "source_section": "Statement",
+          "quote": "$$A(BC)=(AB)C,\\qquad I_mA=A=AI_n,$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-inverse-matrix-by-adjugate",
+          "source_section": "Statement",
+          "quote": "$$A^{-1}=\\det(A)^{-1}\\operatorname{adj}(A).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step 1.1",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ],
+          "claim": "The comorphisms $x\\mapsto x\\otimes1+1\\otimes x$, $x\\mapsto0$, $x\\mapsto-x$ on $k[x]$ and $t\\mapsto t\\otimes t$, $t\\mapsto1$, $t\\mapsto t^{-1}$ on $k[t,t^{-1}]$ are algebra maps (each image of $t$ is a unit) and realize on $R$-points exactly the group operations of $(R,+)$ and $R^\\times$; the group-object identities hold as ring identities, hence as scheme morphisms."
+        },
+        {
+          "id": "step 1.2",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "construct",
+            "algebra"
+          ],
+          "claim": "On $\\operatorname{GL}_n$ the comultiplication $x_{ij}\\mapsto\\sum_l x_{il}\\otimes x_{lj}$ has determinant $(d\\otimes1)(1\\otimes d)$, a unit, so it extends to $k[x_{ij},d^{-1}]$; the counit $x_{ij}\\mapsto\\delta_{ij}$ has determinant one; and the antipode with entries $d^{-1}\\operatorname{adj}(X)$ is well defined with determinant the unit $d^{-1}$ because $X\\cdot d^{-1}\\operatorname{adj}(X)=I$. The localized points are exactly the matrices with unit determinant, equivalently the invertible matrices."
+        },
+        {
+          "id": "step 2.1",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ],
+          "claim": "Matrix associativity, the identity matrix and the two inverse identities verify every group identity on $\\operatorname{GL}_n(R)$, and on coordinate algebras with universal points they verify the scheme identities; the three coordinate algebras are finitely generated over $k$, so $\\mathbf G_a$, $\\mathbf G_m$ and $\\mathrm{GL}_n$ are finite-type group schemes with the displayed laws."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "No nonempty test algebra is required: step 1.1 evaluates at every commutative unital $R$, including the zero ring $R=0$ (the empty scheme test), where each point group is a singleton and the displayed maps are the unique ones."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero cases are the zero element of $(R,+)$ in step 1.1 ($x\\mapsto0$ is the identity) and the zero ring in the point descriptions; every displayed formula is a polynomial or localization identity that remains defined, so no division or invertibility beyond the shown units is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The boundary value $n=1$ is included in step 1.2: then $d=x_{11}$, $\\operatorname{adj}(X)=1$, inversion is $x_{11}\\mapsto d^{-1}$, and $\\mathrm{GL}_1=\\mathbf G_m$ with matching laws, so the matrix computation specializes correctly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.2 use only polynomial and localized-algebra identities, so $R$ may be nonreduced (nilpotents allowed) and the schemes may be nonreduced; the statement says exactly this and no reducedness or smoothness is invoked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim contains no ordered interval or limiting parameter; the single integer parameter is $n\\ge1$ and its least value is dispositioned under the one case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All structure maps are explicit formulas on finitely generated algebras; no choice principle is used and the item declares no Choice dependency."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies group-object formulas and point descriptions; it asserts no equivalence with two directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is stated or claimed in the example."
+        }
+      ]
+    },
+    "cex-alpha-p-mu-p-rational-points-do-not-detect-scheme": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-scheme-over-a-field",
+          "source_section": "Definition",
+          "quote": "A **group scheme of finite type over $k$** is a finite-type $k$-scheme $G$ with $k$-morphisms $$m:G\\times_kG\\to G,\\qquad e:\\operatorname{Spec}k\\to G,\\qquad i:G\\to G$$ satisfying the following identities of scheme morphisms.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-morphism-and-closed-subgroup-scheme",
+          "source_section": "Definition",
+          "quote": "A **closed subgroup scheme** of $G$ is a closed immersion $j:H\\hookrightarrow G$ in the sense of [[def-closed-immersion-schemes]], where $H$ is a group scheme and $j$ is a morphism of group schemes.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-closed-subgroup-scheme-valued-point-criterion",
+          "source_section": "Statement",
+          "quote": "Then $H$ has the unique induced structure of a closed subgroup scheme if and only if $H(R)\\subseteq G(R)$ is a subgroup for every commutative unital $k$-algebra $R$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "ex-additive-multiplicative-and-general-linear-group-schemes",
+          "source_section": "Example",
+          "quote": "For every commutative $k$-algebra $R$, their groups of points are respectively $(R,+)$, $R^\\times$, and the invertible $n\\times n$ matrices over $R$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-affine-scheme-ring-anti-equivalence",
+          "source_section": "Statement",
+          "quote": "Consequently $A\\mapsto\\operatorname{Spec}A$ is a contravariant equivalence from commutative rings to affine schemes, with quasi-inverse global sections.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-affine-fibre-product-tensor-ring",
+          "source_section": "Statement",
+          "quote": "In the category of all schemes, $$\\operatorname{Spec}B\\times_{\\operatorname{Spec}A}\\operatorname{Spec}C\\cong\\operatorname{Spec}(B\\otimes_A C).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step 1.1",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ],
+          "claim": "$\\alpha_p(R)=\\{a\\in R:a^p=0\\}$ is an additive subgroup because $(a+b)^p=a^p+b^p$ and $(-a)^p=-a^p$ in characteristic $p$, and $\\mu_p(R)=\\{u\\in R^\\times:u^p=1\\}$ is a multiplicative subgroup; the closed immersions into $\\mathbf G_a$ and $\\mathbf G_m$ therefore induce group laws. Each coordinate algebra has dimension $p$; the substitution $t=1+x$ identifies the underlying rings since $(1+x)^p-1=x^p$; over the field $k$ the equations $a^p=0$ and $(t-1)^p=0$ force $a=0$ and $t=1$, so both rational-point groups are singletons while the nonzero nilpotent classes $x$ and $t-1$ survive."
+        },
+        {
+          "id": "step 2.1",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ],
+          "claim": "A $k$-group-scheme homomorphism $f:\\alpha_p\\to\\mathbf G_m$ is a unit $g=\\sum_{j<p}c_jx^j$ with $g(0)=1$ and $g(x+y)=g(x)g(y)$ in $k[x,y]/(x^p,y^p)$. Comparing $x^{r-1}y$ coefficients for $1\\le r<p$ gives $rc_r=c_{r-1}c_1$, hence $c_r=c_1^r/r!$; comparing the $x^{p-1}y$ coefficient, zero on the left and $c_{p-1}c_1=c_1^p/(p-1)!$ on the right, forces $c_1^p=0$, hence $c_1=0$ and $g=1$ (the case $p=2$ included)."
+        },
+        {
+          "id": "step 3.1",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ],
+          "claim": "A group-scheme isomorphism $\\alpha_p\\cong\\mu_p$ composed with the closed subgroup inclusion $\\mu_p\\hookrightarrow\\mathbf G_m$ would give a homomorphism whose coordinate-ring pullback of $t$ is a nonconstant unit: an algebra isomorphism of the $p$-dimensional rings cannot send the nonzero class $t-1$ to $0$. This contradicts step 2.1, so no such isomorphism exists even though the underlying schemes are isomorphic and the rational-point groups are the singleton groups of step 1.1."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The quantifier over all commutative $k$-algebras in step 1.1 includes the zero ring $R=0$, where both point groups are singletons; the counterexample therefore needs no nonempty-algebra hypothesis, and the witness for nonisomorphism is the nonzero nilpotent coordinate class exhibited in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The coefficient comparison of step 2.1 takes place in $k[x,y]/(x^p,y^p)$ with $p\\ge2$, a nonzero algebra, and identifies the vanishing $c_1^p=0$ of the top coefficient; the zero element of the additive group does not detect the extra product term $x\\otimes x$ of $\\mu_p$ recorded in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The smallest prime case $p=2$ is covered explicitly in step 2.1: there the comparison of the $x^{p-1}y=xy$ coefficient forces $c_1^2=0$, and the trivial homomorphism case $g=1$ is the conclusion proved for every $p$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both group schemes are degenerate (nonreduced): $x^p=0$ in $k[x]/(x^p)$ and $(t-1)^p=0$ in $k[t]/(t^p-1)$ by step 1.1, and the refutation uses precisely these nilpotent-coordinate computations rather than reducedness."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no ordered interval or limiting parameter in the refutation; the only parameter is the prime $p$, whose least value is dispositioned under the one case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions and coefficient comparisons are explicit over the fixed field $k$; no choice principle is used and the item declares no Choice dependency."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement is a universal determination claim, not an equivalence; the forward reading (isomorphism $\\Rightarrow$ same rational points) is not the direction under attack, and no converse is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is stated; the single witness pair of steps 1.1-3.1 refutes the determination claim outright."
+        }
+      ]
+    }
+  }
+}

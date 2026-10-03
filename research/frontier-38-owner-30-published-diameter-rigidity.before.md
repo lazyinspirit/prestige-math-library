@@ -1,0 +1,209 @@
+---
+id: cor-diameter-rigidity-from-toponogov-under-a-sectional-lower-bound
+kind: corollary
+title: Diameter rigidity from toponogov under a sectional lower bound
+status: published
+origin: pipeline
+deps:
+  - prop-distance-between-corresponding-side-points-in-toponogov-comparison
+  - thm-toponogov-triangle-comparison
+  - thm-hopf-rinow
+  - thm-existence-of-normal-neighborhoods
+  - def-index-form-of-a-geodesic-segment
+  - thm-second-variation-formula-for-energy
+  - thm-existence-and-uniqueness-of-jacobi-fields-from-initial-data
+  - thm-differential-of-the-exponential-map-in-terms-of-jacobi-fields
+  - thm-gauss-lemma
+  - cor-polar-form-of-the-metric-in-normal-coordinates
+  - thm-existence-uniqueness-and-smooth-dependence-of-geodesics
+  - thm-metric-completion-unique
+  - prop-model-functions-solve-the-constant-curvature-jacobi-equation
+  - def-countable-choice
+  - def-comparison-triangle-in-the-two-dimensional-space-form
+  - def-comparison-sine-cosine-and-cotangent-functions
+  - def-constant-sectional-curvature-and-space-form
+  - def-sectional-curvature
+  - def-riemann-curvature-four-tensor
+  - thm-algebraic-symmetries-of-the-riemann-tensor
+  - thm-polarization-bijection-in-characteristic-not-two
+  - prop-round-sphere-model-geometry
+  - ex-the-round-sphere-has-positive-constant-sectional-curvature
+  - thm-a-length-minimizing-piecewise-smooth-curve-is-a-constant-speed-geodesic-up-to-reparametrization
+  - thm-exp-p-is-a-diffeomorphism-from-the-open-tangent-cut-domain-onto-m-minus-the-cut-locus-and-p
+  - def-cut-time-in-a-unit-tangent-direction
+  - def-cut-point-and-cut-locus-of-a-point
+  - thm-existence-and-uniqueness-of-parallel-sections
+  - prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume
+  - thm-the-differential-of-exp-p-at-zero-is-the-identity
+  - def-riemannian-isometry-and-local-isometry
+  - lem-local-isometries-send-geodesics-to-geodesics
+  - thm-finite-dimensional-isometry-characterisations
+  - def-linear-isometry-and-orthogonal-or-unitary-operator
+  - def-diffeomorphism-and-local-diffeomorphism-of-manifolds
+  - lem-punctured-rn-is-polygonally-connected
+  - def-polygonal-path-and-polygonal-connectedness
+  - thm-path-connected-implies-connected
+  - thm-continuous-image-of-a-connected-space
+  - thm-second-derivative-test
+  - thm-nonnegative-continuous-with-zero-integral-vanishes
+  - thm-ftc-second-part
+  - prop-length-energy-inequality-and-constant-speed-equality-case
+  - def-energy-of-a-piecewise-smooth-curve
+  - thm-algebra-of-limits
+  - thm-sine-and-cosine-derivatives
+  - cor-differentiable-implies-continuous
+  - def-principal-inverse-sine-and-cosine
+  - thm-differentiation-under-the-integral-sign
+  - thm-linearity-of-the-integral
+  - thm-monotonicity-of-the-integral
+  - thm-riemannian-distance-is-a-metric
+  - def-metric-bounded-diameter
+  - thm-extreme-value-metric
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+proof_strategy: direct
+verification:
+  audited: 2026-10-02
+  precheck: pass
+sources:
+  references:
+    - title: "U. Lang, Riemannian and Metric Geometry"
+      url: https://people.math.ethz.ch/~lang/RG.pdf
+      locator: "Chapter 5, Lemma 5.9 and Theorem 5.15, printed pp.67-70: chord and triangle comparison"
+    - title: "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry"
+      url: https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf
+      locator: "Section 6, printed pp.21-25: angle and distance comparison under a curvature lower bound; sections 12.6-12.7 discuss the equality case at maximal diameter"
+    - title: "U. Lang, Riemannian Geometry (lecture notes)"
+      url: https://people.math.ethz.ch/~lang/RG.pdf
+      locator: "Theorem 5.17 and its proof, printed p.71 (PDF p.75): the perimeter bound at maximal diameter. The recursive selection in that printed proof is replaced here by a strict-domain limit of Lemma 5.9, so that the inherited AC_omega suffices"
+---
+
+## Statement
+
+Assume the inherited Axiom of Countable Choice $\mathrm{AC}_\omega$
+([[def-countable-choice]]). Let $(M,g)$ be a complete, connected, boundaryless
+Riemannian manifold of dimension $n\ge2$, let $k>0$, and suppose that every
+tangent two-plane $\sigma$ satisfies $K(\sigma)\ge k$
+([[def-sectional-curvature]]) and that
+$$\operatorname{diam}(M,g)=\frac{\pi}{\sqrt k}.$$
+Then $M$ is isometric to the round $n$-sphere of sectional curvature $k$,
+that is, to $S^n_{1/\sqrt k}=\{x\in\mathbb R^{n+1}:|x|=1/\sqrt k\}$ with the
+metric induced from $\mathbb R^{n+1}$
+([[ex-the-round-sphere-has-positive-constant-sectional-curvature]]), by a
+Riemannian isometry ([[def-riemannian-isometry-and-local-isometry]]). No
+simple connectedness of $M$ is assumed, no choice beyond the inherited
+$\mathrm{AC}_\omega$ is used, and the proof is the sectional (Toponogov)
+route: the maximal-diameter equality is derived from the chord comparison
+plus nonnegativity of the index form, not from the Ricci-curvature
+Bishop-Gromov theorem.
+
+## Facts & Assumptions
+
+**Given:** The inherited $\mathrm{AC}_\omega$ of [A1]; a complete, connected, boundaryless Riemannian manifold $(M,g)$ of dimension $n\ge2$ with $K\ge k$ for a fixed real number $k>0$ and $\operatorname{diam}(M,g)=D:=\pi/\sqrt k$; the radius $R:=1/\sqrt k= D/\pi$; the round sphere $S^n_R$ with its pole $N$ and antipode $S=-N$; the model functions $\operatorname{sn}_k,\operatorname{cs}_k$; and the auxiliary maps $\Psi_1,\Psi_2,T,\Theta$ constructed below.
+
+[A1] The countable-choice premise is the inherited $\mathrm{AC}_\omega$ ([[def-countable-choice]]), carried by the Hopf-Rinow, cut-time, exponential, comparison-triangle and second-variation interfaces below. The proof selects no family: minimizing geodesics are obtained one at a time from nonempty sets supplied by Hopf-Rinow, and the parallel fields used in step 5.2 are produced one at a time from the parallel-section theorem.
+
+[F1] Hopf-Rinow, distance and diameter ([[thm-hopf-rinow]], [[thm-riemannian-distance-is-a-metric]], [[def-metric-bounded-diameter]]): for a nonempty complete connected boundaryless Riemannian manifold every two points are joined by a minimizing geodesic, and every closed bounded subset is compact; $d_g$ is a metric, so the triangle inequality and the Lipschitz bound $|d_g(x,y)-d_g(x,y')|\le d_g(y,y')$ hold; the diameter is the supremum of $d_g$ over pairs. Since $\operatorname{diam}(M,g)=D<\infty$, $M$ is closed in itself and bounded, hence compact.
+
+[F2] Extreme values ([[thm-extreme-value-metric]]): a continuous real function on a nonempty compact metric space attains a maximum and a minimum.
+
+[F3] Comparison triangles ([[def-comparison-triangle-in-the-two-dimensional-space-form]], [[def-constant-sectional-curvature-and-space-form]]): $M^2_k$ is the complete simply connected surface of constant curvature $k$; a comparison triangle with side lengths $(A,B,C)$ exists, and is unique up to isometries of $M^2_k$, when $A,B,C>0$ satisfy the strict triangle inequalities and, for $k>0$, also $A,B,C<\pi/\sqrt k$ and $A+B+C<2\pi/\sqrt k$; its angles lie in $(0,\pi)$ and are given by the model cosine law. For $k>0$ the law at a vertex with adjacent sides $B,C$ and opposite side $A$ reads $\cos(\sqrt k\,A)=\cos(\sqrt k\,B)\cos(\sqrt k\,C)+\sin(\sqrt k\,B)\sin(\sqrt k\,C)\cos\alpha$, which is the displayed formula solved for the opposite side.
+
+[F4] Chord comparison under a lower curvature bound ([[prop-distance-between-corresponding-side-points-in-toponogov-comparison]]): let $x,y,z$ be points of a complete connected boundaryless Riemannian manifold of dimension $\ge2$ with $K\ge k'$, joined by minimizing unit-speed geodesics from $x$ to $y$ and from $x$ to $z$ of lengths $C,B>0$, with $A:=d_g(y,z)>0$; suppose $|B-C|<A<B+C$ and, when $k'>0$, also $A,B,C<\pi/\sqrt{k'}$ and $A+B+C<2\pi/\sqrt{k'}$. Then for the corresponding points $u,v$ at distances $s\in[0,C]$ and $t\in[0,B]$ from $x$ on the two sides, and their model points $\bar u,\bar v$ of any comparison triangle in $M^2_{k'}$ with the ordered side lengths $(A,B,C)$, $$d_g(u,v)\ \ge\ d_{k'}(\bar u,\bar v).$$
+
+[F5] The model functions ([[def-comparison-sine-cosine-and-cotangent-functions]], [[prop-model-functions-solve-the-constant-curvature-jacobi-equation]]): for $k>0$ one has $\operatorname{sn}_k(t)=\sin(\sqrt k\,t)/\sqrt k$, $\operatorname{sn}_k''+k\operatorname{sn}_k=0$, $\operatorname{sn}_k(0)=0$, $\operatorname{sn}_k'(0)=1$, $\operatorname{sn}_k(t)>0$ for $0<t<\pi/\sqrt k$, and $\operatorname{sn}_k(\pi/\sqrt k)=0$.
+
+[F6] Angle sign convention: under a lower bound $K\ge k$ the actual angles of an admissible triangle are at least the model angles. This item is recorded here for the direction of the curvature inequality; the proof uses only the chord form [F4] and the comparison-triangle geometry of [F3].
+
+[F7] Length-minimizing curves ([[thm-a-length-minimizing-piecewise-smooth-curve-is-a-constant-speed-geodesic-up-to-reparametrization]]): a nonconstant piecewise smooth curve whose length equals the distance between its endpoints is, after arclength reparametrization, a smooth unbroken unit-speed geodesic; a zero-length minimizer is constant.
+
+[F8] Geodesic uniqueness and smooth dependence ([[thm-existence-uniqueness-and-smooth-dependence-of-geodesics]]): a geodesic is determined by its initial data $(x,v)$ on its maximal interval.
+
+[F9] The exponential map on the cut domain ([[thm-exp-p-is-a-diffeomorphism-from-the-open-tangent-cut-domain-onto-m-minus-the-cut-locus-and-p]], [[def-cut-time-in-a-unit-tangent-direction]], [[def-cut-point-and-cut-locus-of-a-point]]): with $D_p=\{tv:v\in S_pM,\ 0<t<c_p(v)\}$, the restriction $\exp_p|_{D_p}$ is a diffeomorphism onto $M\setminus(\{p\}\cup\operatorname{Cut}(p))$, and the cut point in direction $v$ is $\gamma_v(c_p(v))$.
+
+[F10] Energy, index form and second variation ([[def-index-form-of-a-geodesic-segment]], [[thm-second-variation-formula-for-energy]], [[def-energy-of-a-piecewise-smooth-curve]], [[prop-length-energy-inequality-and-constant-speed-equality-case]]): for a fixed-endpoint two-parameter variation of a geodesic $\gamma$ with variation fields $V,W$, the mixed energy derivative at the centre is $I_\gamma(V,W)=\int(g(D_tV,D_tW)-g(R(V,\dot\gamma)\dot\gamma,W))\,dt$ computed stripwise; and for every piecewise smooth curve $L(\gamma)^2\le 2(b-a)E(\gamma)$.
+
+[F11] Parallel normal fields and curvature operators ([[thm-existence-and-uniqueness-of-parallel-sections]], [[prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume]], [[def-riemann-curvature-four-tensor]], [[thm-algebraic-symmetries-of-the-riemann-tensor]], [[thm-polarization-bijection-in-characteristic-not-two]]): parallel transport preserves inner products, so a parallel field with $E(0)\perp\dot\gamma(0)$ and $|E(0)|=1$ stays unit and normal; and the endomorphism $W\mapsto R(W,T)T$ of $T^\perp$ is self-adjoint, so a self-adjoint endomorphism of a real inner product space whose diagonal quadratic form vanishes is zero (a symmetric bilinear form is determined by its diagonal in characteristic different from two).
+
+[F12] Jacobi fields and the differential of the exponential map ([[thm-existence-and-uniqueness-of-jacobi-fields-from-initial-data]], [[thm-differential-of-the-exponential-map-in-terms-of-jacobi-fields]], [[thm-the-differential-of-exp-p-at-zero-is-the-identity]], [[thm-gauss-lemma]], [[cor-polar-form-of-the-metric-in-normal-coordinates]]): for $u,w\in T_pM$ one has $d(\exp_p)_u(w)=J(1)$, where $J$ is the unique Jacobi field along $t\mapsto\exp_p(tu)$, $t\in[0,1]$, with $J(0)=0$, $D_tJ(0)=w$; $d(\exp_p)_0$ is the identity; in polar coordinates the metric splits as $dr^2+g_r$ with unit radial direction and no cross terms.
+
+[F13] The round sphere ([[prop-round-sphere-model-geometry]], [[ex-the-round-sphere-has-positive-constant-sectional-curvature]]): on $S^n_R$ the geodesic with initial data $(x,w)$, $w\ne0$, is $\gamma_{x,w}(t)=\cos(|w|t/R)x+(R/|w|)\sin(|w|t/R)w$; the distance is $d_g(x,y)=R\arccos(\langle x,y\rangle/R^2)$; the cut time is $\pi R$ in every unit direction and the cut locus of $x$ is $\{-x\}$; the sectional curvature is constantly $1/R^2=k$; and with pole $N$, $\exp_N(v)=\cos(|v|/R)N+(R/|v|)\sin(|v|/R)v$ for $v\ne0$, $\exp_N(\pi Ru)=-N=S$ for every unit $u$, $\exp_N$ is injective on $B_0(\pi R)$, and $T_xS^n_R=x^\perp$ with the ambient inner product.
+
+[F14] Local isometries and linear algebra ([[def-riemannian-isometry-and-local-isometry]], [[lem-local-isometries-send-geodesics-to-geodesics]], [[thm-finite-dimensional-isometry-characterisations]], [[def-linear-isometry-and-orthogonal-or-unitary-operator]], [[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]): a local isometry is a smooth local diffeomorphism whose differential is a linear isometry at each point, it carries geodesics to geodesics, and $F(\exp_x(sv))=\exp_{F(x)}(s\,dF_xv)$; a linear map of Euclidean spaces carrying an orthonormal basis to an orthonormal basis is orthogonal, and an orthogonal map of $\mathbb R^{n+1}$ restricts to an isometry of $S^n_R$; linear isometries $T_pM\to T_NS^n_R$ exist; a bijective local diffeomorphism of boundaryless manifolds of the same dimension is a diffeomorphism.
+
+[F15] Connectedness of the twice-punctured sphere ([[lem-punctured-rn-is-polygonally-connected]], [[def-polygonal-path-and-polygonal-connectedness]], [[thm-path-connected-implies-connected]], [[thm-continuous-image-of-a-connected-space]]): $\mathbb R^n\setminus\{0\}$ is polygonally connected for $n\ge2$, hence path-connected and connected; the punctured ball $B_0(\pi R)\setminus\{0\}$ is homeomorphic to $\mathbb R^n\setminus\{0\}$, hence also connected; and $P:=S^n_R\setminus\{N,S\}=\exp_N(B_0(\pi R)\setminus\{0\})$ is a continuous image of a connected set, hence connected.
+
+[F16] Calculus, limits and integrals ([[thm-algebra-of-limits]], [[thm-sine-and-cosine-derivatives]], [[cor-differentiable-implies-continuous]], [[def-principal-inverse-sine-and-cosine]], [[thm-second-derivative-test]], [[thm-nonnegative-continuous-with-zero-integral-vanishes]], [[thm-ftc-second-part]], [[thm-differentiation-under-the-integral-sign]], [[thm-linearity-of-the-integral]], [[thm-monotonicity-of-the-integral]]): sums, products, quotients with nonvanishing denominators and compositions of convergent sequences; sine and cosine are continuous; the principal arccosine is the continuous inverse of cosine on $[0,\pi]$, so $\arccos(-1)=\pi$ and $\arccos$ recovers an angle in $(0,\pi)$ from its cosine; an integral with a continuous integrand depending smoothly on a compact parameter depends smoothly on that parameter, and its derivative is computed by differentiating under the integral sign; a $C^2$ function with a local minimum at an interior point has nonnegative second derivative there (if the second derivative were negative the second-derivative test would give a strict local maximum); a continuous nonnegative function on $[a,b]$ with zero integral vanishes identically; the integral is monotone and linear in the integrand; and the fundamental theorem computes integrals of derivatives.
+
+## Proof
+
+**Proof technique:** direct. A strict-domain limit of the chord comparison [F4] bounds the perimeter of every minimizing triangle by $2D$; the distance-sum identity then forces every radial geodesic to be minimizing up to time $D$, and the index form tested on $\operatorname{sn}_k(t)E(t)$ forces every radial sectional curvature to be $k$. The exponential maps at the two diametral points are therefore isometries from the model ball onto the twice-punctured manifold, and the two model charts glue across the equator by the agreement lemma for local isometries, extended on the twice punctured round sphere by orthogonal maps.
+
+1.1 Diametral pair.
+By [F1], $M$ is compact: it is closed in itself and bounded, because $\operatorname{diam}(M,g)=D<\infty$. For $x\in M$ the function $y\mapsto d_g(x,y)$ is continuous on the nonempty compact space $M$, so [F2] makes $\Phi(x):=\max_{y\in M}d_g(x,y)$ finite and attained; the Lipschitz bound of [F1] gives $|\Phi(x)-\Phi(x')|\le d_g(x,x')$, so $\Phi$ is continuous, and $\sup_x\Phi(x)=\operatorname{diam}(M,g)$ because the diameter is the supremum over all pairs. By [F2] there is $p\in M$ with $\Phi(p)=D$, and applying [F2] once more gives $q\in M$ with $d_g(p,q)=\Phi(p)=D$. Thus $(p,q)$ is a diametral pair and $p\ne q$.
+[F1, F2]
+
+1.2 Model chord limit at the degenerate perimeter.
+Let $k_*>0$ and let $a,b,c>0$ satisfy the strict triangle inequalities with $a+b+c=2\pi/\sqrt{k_*}$; put $s:=(a-b+c)/2\in(0,c)$, which lies in $(0,c)$ exactly by $|a-b|<c<a+b$. For $0<k'<k_*$ each side is smaller than $\pi/\sqrt{k'}$ and the perimeter is smaller than $2\pi/\sqrt{k'}$: indeed $2a<a+b+c=2\pi/\sqrt{k_*}<2\pi/\sqrt{k'}$ and likewise for $b,c$, so the ordered side lengths $(a,b,c)$ admit a comparison triangle $(\bar x,\bar y,\bar z)$ in $M^2_{k'}$ by [F3]. Let $\bar u\in\bar x\bar y$ have $d_{k'}(\bar x,\bar u)=s$ and put $\beta(k'):=d_{k'}(\bar u,\bar z)$. Write $R':=1/\sqrt{k'}$. (i) The broken geodesic from $\bar u$ to $\bar x$ to $\bar z$ has length $s+b=(a+b+c)/2=:\Pi/2$, so $\beta(k')\le\Pi/2<\pi R'$; also $\bar u\ne\bar z$, because otherwise $\bar z$ would lie on the side $\bar x\bar y$ and the comparison angle of [F3] at $\bar x$, which lies in $(0,\pi)$, would be $0$ or $\pi$. Hence $0<\beta(k')/R'<\pi$. (ii) By [F3] the data $(s,b,\beta(k'))$ also satisfy the strict triangle inequalities and the required bounds, the perimeter being at most $2(s+b)$, and the angle at $\bar x$ between the geodesic directions toward $\bar u$ and $\bar z$ is the comparison angle $\bar\alpha(k')$ of the original triangle, because $\bar u$ lies on the side $\bar x\bar y$ and that angle is determined by the two initial directions. Applying the cosine law of [F3], solved for the opposite side, to the comparison triangle and to the configuration $(\bar x,\bar u,\bar z)$ gives $$\cos\frac{a}{R'}=\cos\frac{b}{R'}\cos\frac{c}{R'}+\sin\frac{b}{R'}\sin\frac{c}{R'}\cos\bar\alpha(k'),$$ $$\cos\frac{\beta(k')}{R'}=\cos\frac{s}{R'}\cos\frac{b}{R'}+\sin\frac{s}{R'}\sin\frac{b}{R'}\cos\bar\alpha(k').$$ Eliminating $\cos\bar\alpha(k')$ yields, for every $k'\in(0,k_*)$, $$\cos\frac{\beta(k')}{R'}=\cos\frac{s}{R'}\cos\frac{b}{R'}+\frac{\sin(s/R')}{\sin(c/R')}\Bigl(\cos\frac{a}{R'}-\cos\frac{b}{R'}\cos\frac{c}{R'}\Bigr).$$ (iii) Let $k'_m\in(0,k_*)$ increase to $k_*$. Then $R'_m\to R_*:=1/\sqrt{k_*}$ and $a/R'_m+b/R'_m+c/R'_m\to2\pi$, while $s/R'_m+b/R'_m\to(s+b)/R_*=(a+b+c)/(2R_*)=\pi$. Sine and cosine are continuous and the algebra of limits applies by [F16], with $\sin(c/R'_m)\to\sin(c/R_*)>0$, so $$s/R'_m\to\pi-b/R_*,\qquad a/R'_m\to2\pi-(b+c)/R_*;$$ using $\cos(\pi-x)=-\cos x$, $\sin(\pi-x)=\sin x$ and $\cos(2\pi-x)=\cos x$, the right-hand side of (ii) converges to $-\cos^2(b/R_*)-\sin^2(b/R_*)=-1$. (iv) By (i) and continuity of the principal arccosine in [F16], $$\beta(k'_m)/R'_m=\arccos\bigl(\cos(\beta(k'_m)/R'_m)\bigr)\longrightarrow\arccos(-1)=\pi,$$ so $\beta(k'_m)\to\pi R_*=(a+b+c)/2=\Pi/2$. Since $\beta(k')\le\Pi/2$ for every $k'<k_*$ by (i), the values $\beta(k')$ have supremum $\Pi/2$ over $k'<k_*$.
+[F3, F5, F16]
+
+1.3 Agreement lemma for local isometries.
+Let $U$ be a connected smooth manifold and let $F,G:U\to M'$ be local isometries into a Riemannian manifold $M'$ with $F(x_0)=G(x_0)$ and $dF_{x_0}=dG_{x_0}$ at some $x_0\in U$. Then $F=G$. Indeed, the set $A=\{x\in U:F(x)=G(x)\ \text{and}\ dF_x=dG_x\}$ is nonempty and closed by continuity of smooth maps and their differentials. It is open: for $x\in A$ put $y:=F(x)=G(x)$, use [[thm-existence-of-normal-neighborhoods]] to choose a sufficiently small normal domain $U_0\ni x$ in the common source metric; for $z=\exp_x(w)\in U_0$ with $w$ small, [F14] and the uniqueness part of [F8] give $F(z)=\exp_y(dF_xw)=\exp_y(dG_xw)=G(z)$, and the chain rule then gives $dF_z=dG_z$. Hence $A$ is nonempty, open and closed in the connected space $U$, so $A=U$.
+[F12, F14]
+
+2.1 Round-sphere local isometries extend to orthogonal maps.
+Let $U\subseteq S^n_R$ be a nonempty connected open subset and let $F:U\to S^n_R$ be a local isometry. Then $F=\hat U|_U$ for some orthogonal map $\hat U$ of $\mathbb R^{n+1}$. Indeed, fix $x_0\in U$ and an orthonormal basis $e_1,\dots,e_n$ of $T_{x_0}S^n_R=x_0^\perp$ [F13]; by [F14], $f_i:=dF_{x_0}(e_i)$ is an orthonormal basis of $T_{F(x_0)}S^n_R=F(x_0)^\perp$. The tuples $(x_0/R,e_1,\dots,e_n)$ and $(F(x_0)/R,f_1,\dots,f_n)$ are orthonormal bases of $\mathbb R^{n+1}$, so the linear map $\hat U$ carrying the first to the second is orthogonal by [F14]; it restricts to an isometry of $S^n_R$ with $\hat U(x_0)=F(x_0)$ and $d\hat U_{x_0}=dF_{x_0}$. By the agreement lemma 1.3, $F=\hat U|_U$.
+[F13, F14, step 1.3]
+
+2.2 Perimeter bound.
+Every triple $x,y,z\in M$ joined by minimizing geodesic segments satisfies $$d_g(x,y)+d_g(y,z)+d_g(z,x)\le 2D.$$ Suppose not, and let $P>2D$ be the perimeter. Each side is at most $D$, so the triple is nondegenerate: a degenerate triple (one side the sum of the other two) would have perimeter twice its largest side, at most $2D$. Put $a:=d_g(y,z)$, $b:=d_g(z,x)$, $c:=d_g(x,y)$, so that $P=a+b+c$ and $|a-b|<c<a+b$. Let $k_*:=(2\pi/P)^2$, so $P=2\pi/\sqrt{k_*}$ and $k_*<k$ because $P>2D=2\pi/\sqrt k$. Choose the point $q_0:=\sigma(s)$ on the minimizing geodesic $\sigma:[0,c]\to M$ from $x$ to $y$, where $s:=(a-b+c)/2\in(0,c)$, and a minimizing geodesic from $x$ to $z$, which exists by [F1]. For every $k'\in(0,k_*)$ the hypotheses of the chord comparison [F4] are met: $K\ge k>k'$, the side lengths satisfy the strict triangle inequalities, and each side is smaller than $\pi/\sqrt{k'}$ and the perimeter smaller than $2\pi/\sqrt{k'}$ as in step 1.2. Applying [F4] with the two legs of lengths $c$ and $b$ from $x$, the points $u=q_0$ at distance $s$ on the first leg and $v=z$ at the endpoint of the second, gives $d_g(q_0,z)\ge\beta(k')$, where $\beta(k')$ is the model chord of step 1.2. Hence $$d_g(q_0,z)\ \ge\ \sup_{k'<k_*}\beta(k')=\frac{P}{2}>D,$$ where the supremum was computed in step 1.2. This contradicts the definition of $D$ as the diameter, since $d_g(q_0,z)\le D$.
+[F4, F5, step 1.2]
+
+3.1 Distance-sum identity.
+For every $x\in M$, $$d_g(p,x)+d_g(x,q)=D.$$ The triangle inequality gives $d_g(p,x)+d_g(x,q)\ge d_g(p,q)=D$ by [F1] and step 1.1; applying the perimeter bound of step 2.2 to the triple $(p,x,q)$, whose pairs are joined by minimizing segments by [F1], gives $D+d_g(p,x)+d_g(x,q)\le2D$.
+[step 1.1, step 2.2, F1]
+
+4.1 Radial geodesics minimize up to time $D$.
+Let $\gamma:\mathbb R\to M$ be a unit-speed geodesic with $\gamma(0)=p$. Choose $0<\delta<D$ so that $\gamma|_{[0,\delta]}$ minimizes; such a $\delta$ exists because $c_p(\dot\gamma(0))>0$ by [F9]. Put $x=\gamma(\delta)$. Step 3.1 gives $d_g(x,q)=D-\delta$, and [F1] supplies a minimizing segment from $x$ to $q$. Its concatenation with $\gamma|_{[0,\delta]}$ has length $D=d_g(p,q)$, so [F7] makes it a smooth unit-speed geodesic. It agrees with $\gamma$ on $[0,\delta]$; geodesic uniqueness [F8] therefore identifies it with $\gamma$ on $[0,D]$. Thus $\gamma(D)=q$, and every subsegment of this minimizing path minimizes, giving $d_g(p,\gamma(t))=t$ and $d_g(\gamma(t),q)=D-t$ for $0\le t\le D$. The argument with $p$ and $q$ exchanged proves the symmetric assertion.
+[F1, F7, F8, F9, step 1.1, step 3.1]
+
+4.2 Uniqueness of minimizing segments from the two poles.
+Let $x\in M$ with $0<d_g(p,x)<D$, and let $\sigma:[0,t_0]\to M$ and $\tilde\sigma:[0,t_0]\to M$ be minimizing unit-speed geodesics from $p$ to $x$, where $t_0:=d_g(p,x)$. By [F1] there is a minimizing unit-speed geodesic $\tau:[0,D-t_0]\to M$ from $x$ to $q$; its length is $D-t_0=d_g(x,q)$ by step 3.1. Both concatenations $\sigma*\tau$ and $\tilde\sigma*\tau$ are piecewise smooth curves from $p$ to $q$ of length $t_0+(D-t_0)=D=d_g(p,q)$, hence minimizing; by [F7] each is, after arclength reparametrization, a smooth unbroken geodesic, so $\sigma'(t_0)=\tau'(0)=\tilde\sigma'(t_0)$. Now $\sigma$ and $\tilde\sigma$ are unit-speed geodesics with the same value and the same derivative at $t_0$, so [F8] forces $\sigma=\tilde\sigma$. The same argument with $p$ and $q$ interchanged, using step 3.1, gives uniqueness of the minimizing segments from $q$ to points at distance $<D$ from $q$.
+[F1, F7, F8, step 3.1]
+
+5.1 Cut time and the exponential map off the poles.
+For every unit $v\in S_pM$ the cut time is $c_p(v)=D$: step 4.1 gives $d_g(p,\gamma_v(t))=t$ for all $t\in[0,D]$, so $c_p(v)\ge D$, while $c_p(v)\le D$ because minimizing times are at most the diameter. Hence the cut point in every direction is $\gamma_v(D)=q$, the cut locus is $\operatorname{Cut}(p)=\{q\}$, and $D_p=\{tv:0<t<c_p(v)\}=B_0(D)\setminus\{0\}$. By [F9], $$\exp_p:B_0(D)\setminus\{0\}\longrightarrow M\setminus\{p,q\}$$ is a diffeomorphism onto, and the same holds with $p$ and $q$ interchanged, by the symmetric statement of step 4.1.
+[F9, step 4.1]
+
+5.2 Radial sectional curvature equals $k$.
+Fix a unit-speed geodesic $\gamma:[0,D]\to M$ from $p$, which minimizes by step 4.1, and a parallel unit normal field $E$ along $\gamma$, which exists by [F11]. Put $V(t):=\operatorname{sn}_k(t)E(t)$. Then $V(0)=V(D)=0$ by [F5], and $V$ is the variation field of a fixed-endpoint variation of $\gamma$: indeed $F(s,t):=\exp_{\gamma(t)}(sV(t))$ is defined for small $s$ and is smooth by [F8], its variational field at $s=0$ is $V$ because the differential of $\exp_{\gamma(t)}$ at $0$ is the identity [F12], and the endpoints are fixed because $V(0)=V(D)=0$. Write $e(s)$ for the energy of $t\mapsto F(s,t)$; then $e(0)=D/2$, because $\gamma$ has unit speed and length $D$. Every curve $t\mapsto F(s,t)$ joins $p$ to $q$, so its length is at least $d_g(p,q)=D$, and the length-energy inequality of [F10] gives $e(s)\ge L^2/(2D)\ge D/2=e(0)$: the geodesic $\gamma$, of unit speed and length $D$, minimizes energy among these curves. The function $e$ is $C^2$ near $0$, its derivative being computed by differentiating under the integral sign [F16] for the smooth family $F$ of [F8]; and $e'(0)=0$, because the difference quotients of $e(s)-e(0)\ge0$ are nonnegative for $s>0$ and nonpositive for $s<0$. Were $e''(0)<0$, the second-derivative test [F16] would make $0$ a strict local maximum, contradicting $e(s)\ge e(0)$; hence $e''(0)\ge0$. By the second-variation formula of [F10] applied to the fixed-endpoint two-parameter family $\tilde F(s,r,t):=F(s+r,t)$, whose energy is $e(s+r)$, the second derivative $e''(0)=\partial_s\partial_r E(\tilde F)|_{(0,0)}$ equals $I_\gamma(V,V)$; the endpoint-acceleration term vanishes because the endpoints are fixed. Hence, using $D_tV=\operatorname{sn}_k'E$, $\operatorname{sn}_k''=-k\operatorname{sn}_k$ [F5], the fundamental theorem [F16] and $V(0)=V(D)=0$, $$0\le I_\gamma(V,V)=\int_0^D\bigl(\operatorname{sn}_k'^2-K(\operatorname{span}(E,\dot\gamma))\operatorname{sn}_k^2\bigr)\,dt\le\int_0^D\bigl(\operatorname{sn}_k'^2-k\operatorname{sn}_k^2\bigr)\,dt=0,$$ where the middle inequality uses $K\ge k$ and $\operatorname{sn}_k^2\ge0$. Both endpoint inequalities are equalities, so the continuous nonnegative function $(K(\operatorname{span}(E,\dot\gamma))-k)\operatorname{sn}_k^2$ has zero integral over $[0,D]$ and vanishes identically by [F16]; since $\operatorname{sn}_k>0$ on $(0,D)$ by [F5], this gives $K(\operatorname{span}(E(t),\dot\gamma(t)))=k$ for every $t\in(0,D)$. Because the initial unit normal $E(0)$ was arbitrary, the same index argument gives this equality for every unit normal $W$ at time $t$; by homogeneity the quadratic form $W\mapsto g(R(W,\dot\gamma)\dot\gamma,W)$ equals $k|W|^2$ on $\dot\gamma(t)^\perp$; the operator $W\mapsto R(W,\dot\gamma)\dot\gamma$ is self-adjoint there by [F11], and a symmetric bilinear form is determined by its diagonal [F11], so $$R(W,\dot\gamma)\dot\gamma=k\,W\qquad\text{for every }W\perp\dot\gamma.$$
+[F5, F8, F10, F11, F12, F16, step 4.1]
+
+6.1 The exponential maps are diffeomorphisms from the model ball.
+We claim that $$\exp_p:B_0(D)\longrightarrow M\setminus\{q\},\qquad \exp_q:B_0(D)\longrightarrow M\setminus\{p\}$$ are diffeomorphisms onto. Surjectivity: for $x\ne q$ the identity of step 3.1 gives $d_g(p,x)=D-d_g(x,q)<D$, and [F1] supplies a minimizing geodesic from $p$ to $x$ whose initial vector $v$ satisfies $\exp_p(v)=x$ with $|v|=d_g(p,x)<D$. Injectivity on $B_0(D)$: if $\exp_p(v)=\exp_p(w)$ with $|v|=:t$, $|w|=:t'<D$, then step 4.1 gives $d_g(p,\exp_p(v))=t$ along the geodesic $s\mapsto\exp_p(sv/|v|)$, and likewise $d_g(p,\exp_p(w))=t'$, so $t=t'$; if $t>0$ the two unit-speed minimizing geodesics from $p$ to the common point agree by step 4.2, hence $v=w$, while $t=0$ gives $v=w=0$. Local triviality: at $0$ the differential of $\exp_p$ is invertible by [F12], and on $B_0(D)\setminus\{0\}$ the map is a diffeomorphism by step 5.1; a bijective local diffeomorphism of boundaryless manifolds of the same dimension is a diffeomorphism by [F14]. The statements for $\exp_q$ are identical with $p$ and $q$ interchanged, using steps 4.2 and 5.1.
+[F1, F9, F12, F14, step 3.1, step 4.1, step 4.2, step 5.1]
+
+6.2 The radial pullback metric is the model metric.
+Define the model metric $h_k$ on the open tangent ball $B_0(D)$ of a Euclidean space by declaring that at the origin $h_k$ is the ambient inner product, and that at $u=te$ with $t\in(0,D)$, $|e|=1$ and vectors $w=ae+w^\perp$, $w'=a'e+w'^\perp$ decomposed with $w^\perp,w'^\perp\perp e$, $$h_k(w,w')=aa'+\frac{\operatorname{sn}_k(t)^2}{t^2}\langle w^\perp,w'^\perp\rangle.$$ For the geodesic $\gamma(t)=\exp_p(te)$, along which the curvature operator $W\mapsto R(W,\dot\gamma)\dot\gamma$ equals $k$ on the normal bundle by step 5.2, the Gauss lemma and the Jacobi-field formula of [F12] give $$d(\exp_p)_u(w)=a\,\dot\gamma(t)+\frac{\operatorname{sn}_k(t)}{t}P_1w^\perp,$$ where $P_1$ is parallel transport along $s\mapsto\exp_p(su)$, $s\in[0,1]$. Indeed the tangential part is the radial derivative $d(\exp_p)_u(ae)=a\dot\gamma(t)$ by the Gauss lemma of [F12], while the normal part is $d(\exp_p)_u(w^\perp)=J(1)$ for the Jacobi field $J(s)=\frac{1}{t}\operatorname{sn}_k(ts)P_sw^\perp$, which satisfies $J(0)=0$, $D_sJ(0)=w^\perp$ and $D_s^2J=-t^2k\,J=-R(J,\dot\sigma)\dot\sigma$ by [F5], with $\sigma(s)=\exp_p(su)$; uniqueness of Jacobi fields [F12] identifies it. Since parallel transport preserves inner products and $\dot\gamma(t)\perp P_1w^\perp$ by [F11], $$g\bigl(d(\exp_p)_uw,d(\exp_p)_uw'\bigr)=aa'+\frac{\operatorname{sn}_k(t)^2}{t^2}\langle w^\perp,w'^\perp\rangle=h_k(w,w').$$ At the origin both sides are the inner product because $d(\exp_p)_0$ is the identity [F12]. Hence $\exp_p^*g=h_k$ on all of $B_0(D)$, and both sides are smooth Riemannian metrics there: $(exp_p^*g)$ is positive definite at the origin, where the differential is invertible [F12], and at every nonzero point by the displayed formula, in which $\operatorname{sn}_k(t)>0$ for $0<t<D$ by [F5]. Repeating step 5.2 for radial geodesics from $q$, which minimize by the symmetric statement of step 4.1, gives the same radial curvature equality there; the preceding Jacobi computation then gives $\exp_q^*g=h_k$ under a linear identification of $T_qM$ with the Euclidean model [F14]. For the round sphere, [F13] gives that $S^n_R$ has constant sectional curvature $k$ and that $\exp_N$ is injective on $B_0(\pi R)$ and surjective onto $S^n_R\setminus\{S\}$: for $x\ne S$ the distance formula gives $d_g(N,x)=R\arccos(\langle N,x\rangle/R^2)<\pi R$, and the geodesic formula realizes $x$ as $\exp_N$ of the initial vector of a minimizing geodesic from $N$. Repeating the displayed computation along the geodesics of $S^n_R$ with curvature operator $k$ gives $\exp_N^*g=h_k$ as well.
+[F5, F11, F12, F13, F14, step 4.1, step 5.2]
+
+7.1 The three exponential maps are isometries onto.
+By step 6.1, $\exp_p:B_0(D)\to M\setminus\{q\}$ is a diffeomorphism, and by step 6.2 its pullback metric is $h_k$; therefore $\exp_p$ is a Riemannian isometry from $(B_0(D),h_k)$ onto $(M\setminus\{q\},g)$ [F14]. The same two steps give that $\exp_q:(B_0(D),h_k)\to(M\setminus\{p\},g)$ is an isometry onto, and, together with the bijectivity in [F13], that $\exp_N:(B_0(\pi R),h_k)\to(S^n_R\setminus\{S\},g)$ is an isometry onto; note $D=\pi R$.
+[step 6.1, step 6.2, F13, F14]
+
+8.1 The two charts and the transition isometry.
+Choose linear isometries $L_1:T_pM\to T_NS^n_R$ and $L_2:T_qM\to T_NS^n_R$ identifying the copies of $h_k$, which exist by [F14], and define $$\Psi_1:=\exp_N\circ L_1\circ\exp_p^{-1},\qquad\Psi_2:=\exp_N\circ L_2\circ\exp_q^{-1}.$$ By step 7.1 the maps $\Psi_1:M\setminus\{q\}\to S^n_R\setminus\{S\}$ and $\Psi_2:M\setminus\{p\}\to S^n_R\setminus\{S\}$ are isometries onto. Since $\Psi_1(p)=\exp_N(0)=N=\Psi_2(q)$, both map $M\setminus\{p,q\}$ onto $P:=S^n_R\setminus\{N,S\}$, so the transition map $$T:=\Psi_2\circ\Psi_1^{-1}:P\longrightarrow P$$ is a well-defined isometry of $P$ onto itself. The set $P$ is connected by [F15].
+[step 7.1, F14, F15]
+
+9.1 The transition extends to an orthogonal map and swaps the poles.
+By step 2.1 applied to the local isometry $T$ on the connected open set $P$ of [F15], there is an orthogonal map $\hat U$ of $\mathbb R^{n+1}$ with $T=\hat U|_P$. We claim $$\hat U(N)=S,\qquad\hat U(S)=N.$$ Let $x\in P$ with $x\to N$. Then $\exp_N^{-1}(x)\to0$, because $\exp_N$ is a diffeomorphism from $B_0(\pi R)$ onto $S^n_R\setminus\{S\}$ with $\exp_N(0)=N$ [F13]; hence $\Psi_1^{-1}(x)=\exp_p(L_1^{-1}(\exp_N^{-1}(x)))\to\exp_p(0)=p$ by continuity of $L_1^{-1}$ and of $\exp_p$, which is smooth on all of $T_pM$ [F8]. For $z\in M\setminus\{p\}$ with $z\to p$, the vector $v_z:=\exp_q^{-1}(z)\in B_0(D)$ satisfies $|v_z|=d_g(q,z)$ because $\exp_q$ is an isometry by step 7.1, and $d_g(q,z)\to d_g(q,p)=D=\pi R$; so $|L_2v_z|\to\pi R$, and the explicit formula $\exp_N(w)=\cos(|w|/R)N+(R/|w|)\sin(|w|/R)w$ of [F13] gives $\Psi_2(z)=\exp_N(L_2v_z)\to-N=S$. Therefore $T(x)=\Psi_2(\Psi_1^{-1}(x))\to S$ as $x\to N$, and continuity of the linear map $\hat U$ yields $$\hat U(N)=\lim_{x\to N}\hat U(x)=\lim_{x\to N}T(x)=S.$$ Applying the same computation to $T^{-1}=\Psi_1\circ\Psi_2^{-1}=\hat U^{-1}|_P$, whose orthogonal extension is $\hat U^{-1}$, gives $\hat U^{-1}(N)=S$ and hence $\hat U(S)=N$.
+[step 2.1, step 8.1, F8, F13, F14, F16]
+
+10.1 Gluing to the global isometry.
+Define $\Theta:M\to S^n_R$ by $$\Theta(x)=\Psi_1(x)\ \ (x\ne q),\qquad\Theta(x)=\hat U^{-1}\bigl(\Psi_2(x)\bigr)\ \ (x\ne p).$$ The two formulas agree on $M\setminus\{p,q\}$: there $\Psi_2=T\circ\Psi_1=\hat U\circ\Psi_1$ by step 9.1, hence $\hat U^{-1}\Psi_2=\Psi_1$. So $\Theta$ is well defined. It is smooth: near any point different from $p$ and $q$ the first expression applies; near $p$, which differs from $q$, the first expression is a composition of smooth maps; and near $q$ the second expression $\hat U^{-1}\circ\Psi_2$ is a composition of smooth maps. Being locally one of the two isometries onto open sets, $\Theta$ is a local isometry [F14]. It is bijective: on $M\setminus\{q\}$ it equals $\Psi_1$, a bijection onto $S^n_R\setminus\{S\}$, while $$\Theta(q)=\hat U^{-1}\bigl(\Psi_2(q)\bigr)=\hat U^{-1}(N)=\hat U^{-1}\bigl(\hat U(S)\bigr)=S$$ by step 9.1, so $\Theta$ is onto; if $\Theta(x)=\Theta(y)=w$ with $w\ne S$, then $x,y\ne q$ and $\Psi_1(x)=w=\Psi_1(y)$ gives $x=y$; and if $w=S$ then $x=q=y$, because $\Psi_1$ takes values in $S^n_R\setminus\{S\}$ on $M\setminus\{q\}$. A bijective local isometry between boundaryless manifolds of the same dimension is a diffeomorphism whose pullback metric is the target metric [F14]; hence $\Theta^*g_{S^n_R}=g$ and $\Theta$ is a Riemannian isometry from $(M,g)$ onto the round sphere $S^n_R$ of curvature $1/R^2=k$. Scope and bookkeeping: the argument uses exactly the inherited $\mathrm{AC}_\omega$ of [A1]. Hopf-Rinow is invoked one pair at a time, parallel fields one at a time from [F11], and no family of geodesics, comparison triangles or normal directions is selected simultaneously. The alternative completion route recorded in the dependencies ([[thm-metric-completion-unique]]) is not used: a metric isometry of the completions would still have to be shown smooth at the two poles, and that smoothness is supplied here by the explicit two-chart gluing. The degenerate endpoint cases of the model chord (step 1.2, where $a+b+c=2\pi/\sqrt{k_*}$) and of the comparison triangles (step 2.2, nondegenerate triples only) are the only places where the strict side and perimeter bounds of [F3] and [F4] are used.
+[step 7.1, step 9.1, F14] ∎
+
+## Source locator
+
+J.-H. Eschenburg, *Comparison Theorems in Riemannian Geometry*, Section 6, printed pp.21-25, states the distance and angle comparisons in the lower-curvature convention. U. Lang, *Riemannian and Metric Geometry*, Lemma 5.9 and Theorem 5.15, printed pp.67-70, give chord and triangle comparison. Lang's Theorem 5.17, printed p.71, gives the endpoint/perimeter statement at maximal diameter; its proof selects new hinges recursively, so it is not used as an $\mathrm{AC}_\omega$-only argument here. Instead step 2.2 derives the perimeter bound from the strict-domain chord comparison by a real-parameter limit of a degenerate spherical model triangle. The index-form equality, polar-metric computation and two-chart gluing follow from the declared library suppliers.

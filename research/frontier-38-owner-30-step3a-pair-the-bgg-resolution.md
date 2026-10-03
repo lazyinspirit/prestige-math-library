@@ -1,0 +1,307 @@
+# Step 3a scope review — pair `the-bgg-resolution`
+
+- Run: `frontier-38-owner-30` (stage `3a-scope`), dispatch label
+  `step3a-pair-the-bgg-resolution-d7aab05fd95c2bf6`.
+- Role: alpha scope reviewer (not owner, not item author).
+- A page: `the-bgg-resolution` (batch 8, order 510.011, category `lie-theory`,
+  30 items).
+- B page: `the-bgg-resolution-examples` (batch 8, order 510.012, `requires`
+  only the A page, 5 items).
+- Date: 2026-10-03.
+- Decision: **`sufficient`**, recorded with the prescribed `record-scope`
+  command; receipt
+  `research/frontier-38-owner-30-step3a-review-the-bgg-resolution.json`.
+
+This review decides scope only. It is not an item approval, not a proof
+judgment, and not an owner record. No scaffold, manifest, coverage, item,
+design, plan or engine artifact was edited; the only writes are this report
+and the scope receipt.
+
+## 1. Inputs read (exact paths)
+
+- Design: `research/plan-representation-theory-lie-track.md` RL-6 —
+  section header L997, A-page role L999–1005, A inventory L1009–1020
+  (12 rows), B inventory L1026–1031 (5 rows); pair/companion row L787;
+  declared `requires` L814 (`RL-3; DG-31; HA-1 and HA-5`); per-pair source
+  matrix RL-6 row L1508; source registry rows L1479 (Zhou) and L1482 (BGG).
+- Binding direction: `research/frontier-38-owner-30-owner-authoring-direction.md`
+  L21 (pair 510.011/.012) and its local-prerequisite construction rule.
+- Contract: `research/plan-spec.json` rows for both page ids (orders
+  510.011/.012, empty planned item lists, A `requires` = 4 pages matching the
+  manifest).
+- Manifest: `research/frontier-38-owner-30-batch-8.pages.json`
+  (sha256 `d94bdda98920608e0010488339fd6b46fe89e6d9a70927b2be48b28c1520b7b0`;
+  A 30 + B 5 items). Coverage:
+  `research/frontier-38-owner-30-batch-8.coverage.json`
+  (sha256 `43ee8b7ed58a608a6e71e91f429928908719e84ca15b497427200e3158161253`).
+  Notes: `research/frontier-38-owner-30-batch-8.notes.md`. Cross-batch input:
+  `research/frontier-38-owner-30-batch-8.cross-batch-dependencies.json` = `[]`.
+- Drift record: `research/frontier-38-owner-30-alpha-step1-drift.md`
+  §`the-bgg-resolution` (verdict `drift-applied`, adding
+  `category-o-finiteness-duality-and-blocks` order 510.007 to the closure and
+  fixing the weak/strong route distinction).
+- Readiness: 35 Step-1 records `research/frontier-38-owner-30-step1-<id>.json`;
+  `node tools/step1-decisions.mjs check --run frontier-38-owner-30` reports
+  804/804 items ready, `closed: true`, empty work list (current content).
+- Published library: the 63 external supplier item files; the 12 library pages
+  hosting them; the 4 required A pages and their companions; consumer plan
+  rows 510.013 and 510.021.
+
+## 2. Design vs delivered inventory
+
+- All 12 RL-6 A ids and all 5 RL-6 B ids are present, checked id by id; no
+  design id is missing and the B page is exactly the design's five leaves.
+  A = 30 = 12 design rows + 18 local prerequisites; B = 5.
+- A kinds: 20 lemmas, 4 definitions, 3 theorems, 2 corollaries, 1 proposition.
+  B kinds: 3 examples, 2 counterexamples. Both pages are far below the
+  design's 60-item ceiling and the library cap of 100.
+- The 18 local additions are `lem-positive-root-pairings-of-a-dominant-integral-weight`,
+  `lem-bruhat-covers-are-reflection-covers`,
+  `lem-dominant-integral-dot-translates-embed-in-the-verma-module`,
+  `def-verma-type-of-a-module-with-a-standard-filtration`,
+  `lem-induced-modules-from-finite-dimensional-b-modules-have-type-the-weights`,
+  `lem-tensoring-a-verma-module-by-a-finite-dimensional-module-shifts-types`,
+  `lem-central-character-cuts-of-a-typed-module-are-typed`,
+  `lem-weight-subsets-with-equal-root-sums-are-unique`,
+  `def-standard-induced-resolution-of-the-trivial-module`,
+  `thm-standard-induced-resolution-is-exact`,
+  `lem-weak-bgg-base-case-for-the-trivial-module`,
+  `lem-surjectivity-modulo-n-minus-for-free-weight-generated-modules`,
+  `lem-jordan-holder-factors-of-verma-modules-lie-above-the-head`,
+  `lem-nonzero-highest-weight-images-survive-modulo-n-minus`,
+  `lem-n-minus-coinvariants-map-injectively-into-the-kernel-of-the-differential`,
+  `lem-verma-filtered-objects-are-acyclic-for-n-minus-coinvariants`,
+  `lem-tor-with-the-trivial-module-is-computed-by-the-weak-bgg-resolution`,
+  `lem-dimension-of-the-kernel-modulo-n-minus-equals-the-next-term`.
+  Every one has at least one direct in-pair consumer and every one of the 35
+  items is reachable from the 17 design rows along in-pair `deps` (no orphan
+  inventory). They close the source's actual route (relative standard complex
+  → central-character projection → nilpotent coinvariants/Tor dimension count
+  → strong resolution), not a scope expansion.
+- Statement-level deviations from design prose, all recorded in the batch
+  notes and scope-preserving:
+  1. `lem-kernel-generators-for-the-weak-bgg-complex`: the design prose said
+     "relations … generated by rank-two intersections"; the manifest instead
+     states the Jordan–Hölder support statement (no composition factor of
+     `ker d_k` has length ≤ k). This is the statement of the source lemma
+     (Zhou Lemma 10.6a) that the recorded exactness induction consumes; the
+     design's generator formulation is not claimed. The planned role
+     ("proof-sized input to positive-degree exactness") is preserved.
+  2. `thm-weak-bgg-resolution`: the design prose described "the signed Verma
+     complex is exact"; in the sources the term "weak BGG" denotes the
+     relative standard complex `U(g) ⊗_{U(b)} Λ^k(g/b)`. The manifest keeps
+     both exactness statements — the weak/standard one (item 18) and the
+     strong signed Verma one (item 27) — so no exactness content is lost; the
+     terminology mapping is recorded by the step-1 drift review.
+  3. `lem-bruhat-rank-two-intervals-are-diamonds` is sharpened from "zero or
+     two" to "exactly two" using an elementary existence half plus the
+     published upper bound. The upper-bound induction (BGG §11) is a proof
+     obligation for the author (see §7), not a scope gap.
+  4. `cex-the-regular-bgg-complex-cannot-be-used-unchanged-at-a-singular-weight`
+     is stated as failure of exactness at `C_0` for `sl_2`, `λ = -ρ`, rather
+     than the design's "nonminimal and nonexact"; the dominance-hypothesis
+     protection the design asked for is intact.
+
+## 3. Subject coverage (definitions, results, examples)
+
+The RL-6 A role is "decompose the resolution through Bruhat-edge maps, sign
+choices, `d²=0`, and exactness, so the Weyl formula in RL-7 is genuinely
+proved". The inventory covers each part:
+
+- Terms and graph: `def-bgg-bruhat-verma-sum-in-degree-k` (degree-`k` Verma
+  sums, `k` from 0 to `|Φ⁺|`, pairwise-distinct weight labels),
+  `lem-bruhat-covers-are-reflection-covers`, and
+  `lem-bruhat-covers-give-unique-verma-embeddings` (cover-compatible,
+  path-independent embeddings inside `M(λ)`).
+- Diamond combinatorics and signs: `lem-bruhat-rank-two-intervals-are-diamonds`
+  (exactly two saturated paths) and `lem-compatible-signs-exist-on-the-bruhat-graph`
+  (product −1 on every square), with the sign lemma carrying two published
+  routes (real-form normalisation via `lem-chevalley-basis-and-real-structure-constants`;
+  Dyer's reflection ordering cited).
+- Complex and exactness: `def-bgg-differential-from-signed-verma-maps`,
+  `prop-the-bgg-differential-squares-to-zero` (including the empty-interval
+  case), `lem-the-bgg-augmentation-has-image-the-simple-module` (degree-0
+  exactness via the simple-reflection submodules), then
+  `thm-weak-bgg-resolution` and the coinvariant/Tor package
+  (`lem-surjectivity-modulo-n-minus-for-free-weight-generated-modules`,
+  `lem-jordan-holder-factors-of-verma-modules-lie-above-the-head`,
+  `lem-nonzero-highest-weight-images-survive-modulo-n-minus`,
+  `lem-n-minus-coinvariants-map-injectively-into-the-kernel-of-the-differential`,
+  `lem-verma-filtered-objects-are-acyclic-for-n-minus-coinvariants`,
+  `lem-tor-with-the-trivial-module-is-computed-by-the-weak-bgg-resolution`,
+  `lem-dimension-of-the-kernel-modulo-n-minus-equals-the-next-term`)
+  feeding `thm-bgg-resolution-of-a-finite-dimensional-simple-module`.
+- Consequences and boundary to RL-7: `cor-bgg-euler-character-identity`
+  (numerator identity in the linkage-block Grothendieck group; the Weyl
+  formula itself is deliberately deferred to `weyl-character-and-multiplicity-formulas`,
+  matching the design and the two coverage rows marked `deferred` with that
+  destination), and `cor-bgg-resolution-has-length-the-number-of-positive-roots`
+  (length `|Φ⁺|`, top term `M(w₀∘λ)`, finite alternating sum with `|W|` terms).
+- B page: `ex-the-sl2-bgg-resolution`, `ex-the-a2-bgg-resolution-with-six-verma-summands`,
+  `ex-sign-cancellation-in-an-a2-bruhat-diamond`,
+  `cex-unsigned-bruhat-edge-sums-need-not-square-to-zero` (no-citation
+  provenance), `cex-the-regular-bgg-complex-cannot-be-used-unchanged-at-a-singular-weight`.
+  They are finite checks/hypothesis tests using A-page items, not duplicate
+  proofs.
+
+No topic promised by the design's A role, the twelve A rows, or the five B
+rows is absent, and no item is a placeholder. The design's own exclusions
+(Zhou Part II functorial machinery; Rocha-Caridi's splitting route; H-V's
+algorithm/cohomology applications; van Ekeren §30+) are recorded as
+`out-of-scope` rows with reasons; none is a commissioned result.
+
+## 4. Prerequisites and dependency scope
+
+- Item level: the two pages hold 240 dependency references, 93 distinct;
+  30 distinct resolve inside this pair (0 point at any other run pair, so the
+  pair is self-contained in-run), and 63 distinct are external. Every
+  external dep resolves to `items/<id>.md` with matching `id` and
+  `status: published` (0 mismatched, 0 absent). The full transitive closure
+  from the 35 items (2,131 nodes after following published suppliers' own
+  deps) contains no id absent from the published library, no planned-only id,
+  and no unknown id. `node tools/manifest-deps.mjs` reports 35 items, 0 errors.
+- Host pages of the 63 external suppliers, all `status: published`:
+  `category-o-finiteness-duality-and-blocks` (17),
+  `harish-chandra-isomorphism-casimir-and-central-characters` (15),
+  `finite-weyl-invariants-bruhat-and-kostant-harmonics` (7),
+  `homomorphisms-between-verma-modules-and-linkage` (6),
+  `verma-modules-and-shapovalov-forms` (5),
+  `tor-flatness-and-global-dimension` (4),
+  `chain-complexes-and-homology` (3),
+  `highest-weight-theory-for-complex-semisimple-lie-algebras` (2),
+  and one each on `projective-and-injective-resolutions`,
+  `relations-functions-and-quotients`,
+  `subobject-lattices-generators-and-the-grothendieck-axioms`, and
+  `real-forms-and-real-semisimple-lie-algebras`.
+- Page level: the A page requires the four published pages
+  (`homomorphisms-between-verma-modules-and-linkage`,
+  `finite-weyl-invariants-bruhat-and-kostant-harmonics`,
+  `chain-complexes-and-homology`,
+  `category-o-finiteness-duality-and-blocks`); the B page requires the A page.
+  The design's declared requires (RL-3; DG-31; HA-1 and HA-5) differ from the
+  manifest in that the step-1 drift review added
+  `category-o-finiteness-duality-and-blocks` (order 510.007, recorded in the
+  drift report); the design's HA-5
+  (`projective-and-injective-resolutions`) is transitively reached from the
+  four requires and its single consumed item
+  (`cor-every-module-admits-a-projective-resolution`) is published. Two
+  consumed host pages — `tor-flatness-and-global-dimension` and
+  `real-forms-and-real-semisimple-lie-algebras` — are not transitively reached
+  from the four declared requires; both are published, so this is a
+  page-contract/metadata note for the owner (Step-4 splice territory), not an
+  unmet prerequisite and not a reason for enrichment.
+- Consumers: no published item currently references any of the 35 ids
+  (recursive `grep -l` over `items/` = 0 matches, so no broken published
+  forward reference). The planned consumers `weyl-character-and-multiplicity-formulas`
+  (510.013) and `lie-algebra-cohomology-and-kostants-nilradical-theorem`
+  (510.021) declare `the-bgg-resolution` in `requires`; both are unbuilt
+  (empty planned item lists) and their named needs — the numerator identity
+  and the resolution length/Tor computation — are supplied by
+  `cor-bgg-euler-character-identity` and
+  `cor-bgg-resolution-has-length-the-number-of-positive-roots` /
+  `lem-tor-with-the-trivial-module-is-computed-by-the-weak-bgg-resolution`.
+- **Unmet prerequisites: none found.** No consuming planned item or result
+  requires a claim absent from both the published library and the current
+  scaffold, so no scaffold addition is proposed.
+- Published-supplier risk (reported for the owner; explicitly not a scope
+  gap). Four direct suppliers of this pair are on the canonical ledger's
+  ap-319 deferred list with the open Shapovalov-determinant obligation chain:
+  `thm-verma-embedding-for-an-arbitrary-positive-root` (consumed by
+  `lem-dominant-integral-dot-translates-embed-in-the-verma-module`),
+  `thm-bgg-verma-homomorphism-criterion` (items 3 and 20),
+  `thm-strong-linkage-principle-for-verma-modules` (items 3 and 20), and
+  `thm-central-character-summands-split-into-linkage-blocks` (item 28).
+  Exact evidence: `research/published-consumer-supplier-ledger.md` rows
+  L34341, L31494, L31492, L31493 ("Remaining obligation: Complete the four
+  local Shapovalov determinant obligations …"), and
+  `research/ap-319-sol-repair/final-report.md` §"Nine additional audited
+  suppliers/consumers remain deferred in the same general Lie-theory proof
+  chain". All four still carry `status: published`; the ledger records that no
+  claim/status was changed. Under the owner direction a published external
+  supplier satisfies the prerequisite, so this is a published-defect matter
+  for the owner's supplier-repair track, not a reason to enrich this pair;
+  it is recorded here because these four sit on this pair's critical path.
+
+## 5. Source coverage
+
+- A page: 4 sources, 46 harvested rows = 31 `included`, 9 `inline`,
+  1 `deferred`, 5 `out-of-scope` (each with a written reason: Zhou Part II;
+  Rocha-Caridi splitting theorem and Lemma 10.2; H-V applications/algorithm;
+  van Ekeren §30+). B page: 3 sources, 10 rows = 7 `included`, 2 `inline`,
+  1 `deferred`. Totals: 56 rows = 38 `included`, 11 `inline`, 2 `deferred`
+  (both to `weyl-character-and-multiplicity-formulas`), 5 `out-of-scope`.
+- Every load-bearing source result maps to an existing item id on these two
+  pages (weak BGG/standard complex, PBW/Koszul exactness, type computations,
+  Lemma 10.5–10.7 exactness machinery, Lemma 10.3/10.4 diamond and sign
+  lemmas, Lemma 9.5/9.7/9.10 type lemmas, rank-one/rank-two examples).
+- Fetch evidence on the current coverage file:
+  `node tools/source-fetch-check.mjs --coverage research/frontier-38-owner-30-batch-8.coverage.json`
+  (network-free check mode) → 7/7 fetch-verified, 7/7 resolved, 0 documented
+  drops. Stamps: Zhou Columbia thesis 771,641 B / 58 pp. / `4446de03a226c784`;
+  Rocha-Caridi Trans. AMS 262 (1980) 2,558,296 B / 32 pp. / `a03ff322f98f7250`;
+  Hemelsoet–Voorhaar arXiv:1911.00871 285,337 B / 22 pp. / `e9c4f88f1d178d0f`;
+  van Ekeren IMPA 2024 2,985,495 B / 141 pp. / `bdc18434832f4b99`;
+  Etingof 18.755 Spring 2024 4,247,073 B / 284 pp. / `ffb09776bafa3fa5`.
+- Independent check of the recorded source substitution (2026-10-03): the
+  design's Harvard Zhou URL is unavailable, and the Columbia thesis is the
+  same author's expanded treatment (fetch-verified above). The design's
+  second full treatment (BGG, pp. 21–64) I re-fetched from the
+  author-hosted URL (HTTP 200, 1,983,005 B, 44-page scan) and confirmed with
+  `mutool` that it has no usable text layer (≈10 extracted characters over
+  the first five pages), so the recorded substitution by Rocha-Caridi plus
+  van Ekeren (and H-V for the examples/signs) is justified; two independent
+  readable treatments exist on each page. The design's optional HumphO/E757
+  proof checks are not used, which the design permits (they are "further
+  proof check" rows, not required treatments).
+
+## 6. Mechanical checks actually run (2026-10-03, current content)
+
+| Check | Result |
+|---|---|
+| `node tools/manifest-deps.mjs research/frontier-38-owner-30-batch-8.pages.json` | 35 items, 0 normalized, 0 errors |
+| `node tools/coverage-checklist.mjs research/frontier-38-owner-30-batch-8.coverage.json --require-destination` | 2 pages, 56 rows, 0 errors, 0 warnings |
+| `node tools/source-fetch-check.mjs --coverage research/frontier-38-owner-30-batch-8.coverage.json` | 7/7 fetch-verified, 7/7 resolved, 0 drops |
+| `node tools/content-policy.mjs research/frontier-38-owner-30-batch-8.pages.json --manifest-only` | 35 items, 0 errors, 0 warnings |
+| `node tools/step1-decisions.mjs check --run frontier-38-owner-30` | 804/804 ready, closed, empty work list |
+| dependency closure audit (direct + transitive, published item files included) | 240 refs / 93 distinct / 63 external all published; 0 unknown, 0 planned-only, 0 cross-pair |
+| design-id audit | 17/17 design ids present; 18 local additions all consumed; no orphan |
+| published-consumer scan for the 35 pair ids (`grep -rIl` over `items/`) | 0 matches |
+
+Not run here: the engine-owned whole-run Step-3 gate and item-level audits;
+proof correctness is Step 3b/Step 5 territory.
+
+## 7. Residual uncertainty (inherited, authoring-level — not scope gaps)
+
+1. The weak-to-strong proof route (relative standard complex by PBW
+   filtration/Koszul contraction; central-character projection; the three
+   kernel/coinvariant lemmas; the `Tor` dimension count) is a proof obligation
+   recorded by the step-1 drift review and the batch notes; the pair contains
+   the items for it but the arguments are not authored at 3a.
+2. `lem-bruhat-rank-two-intervals-are-diamonds` uses the published BGG
+   upper bound (Zhou p. 10; H-V Prop. 2.2), whose induction (BGG §11) the
+   scaffolder did not reconstruct; the author must reproduce it from the
+   fetched treatments.
+3. `lem-compatible-signs-exist-on-the-bruhat-graph` records three published
+   routes but no closed-form signing was independently reproduced by the
+   scaffolder; the author must reproduce one (Rocha-Caridi Lemma 10.4 or the
+   equivalent).
+4. The four ap-319-deferred published suppliers in §4 remain an owner-visible
+   published-defect risk on this pair's critical path; no scaffold addition is
+   proposed because the suppliers are published and the local-prerequisite
+   rule is not triggered.
+5. This decision is bound to the current A+B manifest hash. Any later
+   item-list, title, statement or pair-membership change voids the receipt and
+   requires a fresh 3a decision.
+
+## 8. Decision
+
+`sufficient`: the scaffolded A/B pair carries every definition, result,
+example and counterexample the RL-6 design and this pair's library role
+require; its 18 local additions are documented prerequisites of the recorded
+proof route, each consumed and none an orphan; source coverage is at least
+two independent readable treatments per page with all load-bearing results
+disposed and all fetch stamps current; and every dependency resolves to
+published or in-run material, with no unmet prerequisite found. The
+step-4-level requires note and the published-supplier deferrals in §4 are
+flagged for the owner but do not warrant enrichment, merging, or a scope
+stop.
