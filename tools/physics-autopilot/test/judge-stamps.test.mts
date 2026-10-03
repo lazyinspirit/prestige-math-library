@@ -1,0 +1,404 @@
+import { spawnSync } from './fixture-process.mts';
+// apply-judge-stamps: the build route's stamp/verify contract, and the two
+// defects the frontier-15 publish surfaced.
+//
+// WHY. frontier-15 fully closed at 9-commit with every gate green and 0 of
+// 398 items carrying `verification.judge` — no stage owned the stamping act,
+// and when the owner ran the tool by hand it first refused the ledger (retired
+// Terra rows made a third lane under the exactly-two check) and then stamped
+// nothing (clause-(a)-only currency read every step-8-moved pair as unjudged).
+// The owner rewrote both (2026-08-17); these tests lock the rewrite, the
+// `--verify` gate mode built on it, and the `${current}` ReferenceError the
+// rewrite left in the audit-targeted evidence block.
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, utimesSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
+
+
+import { itemHashJudge } from '../../physics-support/item-hash.mjs';
+import { writeAuditorCreatedBaseline, certifyAuditorCreatedItems, loadAuditorCreatedCertifications } from '../../physics-support/auditor-created-items.mjs';
+import { JUDGE_LINEUPS, DEFAULT_LINEUP, MODELS } from '../../physics-support/models.mjs';
+
+const REPO: string = process.env.AUTOPILOT_TEST_REPO
+  ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
+const TOOL = join(REPO, 'tools/physics-support', 'apply-judge-stamps.mjs');
+// The CONFIGURED lineup, READ FROM THE REGISTRY rather than copied. This was a
+// literal `['gpt-6-sol', 'gpt-6-astra']` and it broke on
+// 2026-08-24 when the owner moved the judge lane to gpt-5.4 — a lane change is
+// the supported operation the registry exists to make cheap, and a test that
+// fails on it is just a fourth copy of the assignment. The lane has now swapped
+// four times and the property under test has not moved once, which is the whole
+// point: what is asserted below is that a complete configured-model pass stamps
+// and a rejection does not, however many models the active set contains.
+const LANES = [...JUDGE_LINEUPS[DEFAULT_LINEUP]];
+// Any model the registry knows that is NOT in the configured lineup: rows from
+// a retired lane must stay append-only evidence and never satisfy coverage.
+const RETIRED_LANE = Object.values(MODELS)
+  .map((m: any) => m.id).filter(id => id !== 'physics-content')
+  .find((id: string) => !LANES.includes(id)) as string;
+const STUB_CONTEXT = 'c'.repeat(64);
+const OTHER_CONTEXT = 'f'.repeat(64);
+
+const itemText = (id: string) =>
+  `---\nid: ${id}\nkind: lemma\ntitle: "t"\nstatus: draft\nverification:\n  precheck: pass\n---\n\nBody of ${id}.\n`;
+
+function fixture(ids: string[]) {
+  const dir = mkdtempSync(join(tmpdir(), 'stamps-'));
+  mkdirSync(join(dir, 'items'), { recursive: true });
+  mkdirSync(join(dir, 'tools'), { recursive: true }); mkdirSync(join(dir, 'tools/physics-support'), { recursive: true });
+  mkdirSync(join(dir, 'research'), { recursive: true });
+  // A stub pair-context builder. The lazy clause-(b) fast path means judge.mts
+  // is spawned only when recorded item hashes no longer match; all requested
+  // contexts must arrive in that one batch.
+  writeFileSync(join(dir, 'tools/physics-support', 'judge.mts'),
+    `import { appendFileSync } from 'node:fs'; const a=process.argv.slice(2); const ids=(a[a.indexOf('--context-hashes')+1]||'').split(',').filter(Boolean); appendFileSync('research/context-calls.jsonl', JSON.stringify(ids)+'\\n'); console.log(JSON.stringify({contexts:Object.fromEntries(ids.map(id=>[id,{context_sha256:'${STUB_CONTEXT}',item_sha256:'0'.repeat(64)}]))}));\n`);
+  for (const id of ids) writeFileSync(join(dir, 'items', `${id}.md`), itemText(id));
+  writeFileSync(join(dir, 'research', 'm.pages.json'),
+    JSON.stringify([{ id: 'page-a', items: ids.map((id) => ({ id })) }]));
+  return dir;
+}
+
+const ledgerRow = (id: string, model: string, keep: boolean | null, item: string, context = OTHER_CONTEXT) =>
+  JSON.stringify({ id, model, keep, context_sha256: context, item_sha256: item, at: '2026-08-17T00:00:00Z' });
+
+const writeLedger = (dir: string, lines: string[]) =>
+  writeFileSync(join(dir, 'research', 'judge.jsonl'), lines.join('\n') + '\n');
+
+const run = (dir: string, ...args: string[]) => spawnSync(process.execPath,
+  [TOOL, '--ledger', 'research/judge.jsonl', '--manifests', 'research/m.pages.json', ...args],
+  { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+
+test('apply stamps a current configured-model pass, ignores retired-lane rows, and verify closes over it', () => {
+  const dir = fixture(['itm-a']);
+  const h = itemHashJudge(readFileSync(join(dir, 'items', 'itm-a.md'), 'utf8'));
+  writeLedger(dir, [
+    ...LANES.map((model) => ledgerRow('itm-a', model, true, h)),
+    // the retired lane in the same ledger is append-only evidence, never an
+    // error and never a third-lane refusal
+    ledgerRow('itm-a', RETIRED_LANE, false, h),
+  ]);
+
+  let r = run(dir, '--verify');
+  assert.equal(r.status, 1, 'unstamped licensed pass fails the gate');
+  assert.match(r.stderr, /itm-a: the ledger licenses a judge pass/);
+  assert.match(r.stdout, /judge-stamps: 1 item\(s\) in scope/);
+
+  r = run(dir, '--apply', '--report', 'research/stamps.json');
+  assert.equal(r.status, 0, r.stderr);
+  const text = readFileSync(join(dir, 'items', 'itm-a.md'), 'utf8');
+  assert.ok(text.includes(`  judge:\n    model: "${LANES.join(' + ')}"\n    verdict: pass\n`));
+  const receipt = JSON.parse(readFileSync(join(dir, 'research', 'stamps.json'), 'utf8'));
+  assert.deepEqual(receipt.stamped.map((s: any) => s.id).filter(id => id !== 'physics-content'), ['itm-a']);
+
+  r = run(dir, '--verify');
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(r.stdout, /1 stamped current, 0 lane-rejected, 0 terminal manual, 0 recorded-not-proved, 0 problem\(s\)/);
+
+  // idempotent: a re-apply on the same day rewrites nothing
+  r = run(dir, '--apply', '--report', 'research/stamps.json');
+  assert.equal(r.status, 0);
+  const again = JSON.parse(readFileSync(join(dir, 'research', 'stamps.json'), 'utf8'));
+  assert.equal(again.stamped[0].changed, false);
+});
+
+test('final stamp verification excludes published repairs left in the manifest', () => {
+  const dir = fixture(['itm-draft', 'itm-published']);
+  try {
+    const draft = readFileSync(join(dir, 'items', 'itm-draft.md'), 'utf8');
+    const publishedPath = join(dir, 'items', 'itm-published.md');
+    writeFileSync(publishedPath, itemText('itm-published').replace('status: draft', 'status: published'));
+    writeLedger(dir, LANES.map((model) => ledgerRow('itm-draft', model, true, itemHashJudge(draft))));
+    let result = run(dir, '--apply', '--exclude-published');
+    assert.equal(result.status, 0, result.stderr);
+    result = run(dir, '--verify', '--exclude-published');
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /judge-stamps: 1 item\(s\) in scope/);
+    assert.equal(readFileSync(publishedPath, 'utf8').includes('  judge:'), false);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('--items stamps an explicitly certified subset without needing a manifest-wide pass', () => {
+  const dir = fixture(['itm-subset']);
+  const h = itemHashJudge(readFileSync(join(dir, 'items', 'itm-subset.md'), 'utf8'));
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-subset', model, true, h)));
+  const args = [TOOL, '--ledger', 'research/judge.jsonl', '--items', 'itm-subset'];
+  let result = spawnSync(process.execPath, [...args, '--apply'], { cwd: dir, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  result = spawnSync(process.execPath, [...args, '--verify'], { cwd: dir, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test('a current Step-8 auditor-created certification needs no judge stamp or ledger pass', () => {
+  const dir = fixture([]);
+  writeFileSync(join(dir, 'research/r-batch-1.pages.json'), JSON.stringify([{ id: 'page-a', items: [] }]));
+  writeAuditorCreatedBaseline(dir, 'r', 8);
+  writeFileSync(join(dir, 'items/lem-auditor-created.md'), itemText('lem-auditor-created'));
+  writeFileSync(join(dir, 'research/r-batch-1.pages.json'), JSON.stringify([{ id: 'page-a', items: [{ id: 'lem-auditor-created' }] }]));
+  mkdirSync(join(dir, 'research/r-dispatch'), { recursive: true });
+  writeFileSync(join(dir, 'research/r-dispatch/alpha-step8-lead.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha', label: 'step8-lead', ok: true, covers: ['1'],
+    started_at: '2000-01-01T00:00:00Z', ended_at: '2100-01-01T00:00:00Z',
+  }));
+  certifyAuditorCreatedItems(dir, 'r', 8);
+  const text = readFileSync(join(dir, 'items', 'lem-auditor-created.md'), 'utf8');
+  // Keep configured lanes present in the append-only ledger, but deliberately
+  // give this item no usable judge pass. Its separate receipt is the authority.
+  writeLedger(dir, LANES.map((model) => ledgerRow('unrelated', model, false, '0'.repeat(64))));
+  const result = spawnSync(process.execPath, [TOOL, '--ledger', 'research/judge.jsonl',
+    '--items', 'lem-auditor-created', '--run', 'r', '--auditor-certifications', 'research/r-step8-auditor-certifications.json', '--verify'],
+  { cwd: dir, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /1 auditor-created certified/);
+  assert.doesNotMatch(text, /^ {2}judge:/m);
+  writeFileSync(join(dir, 'research/r-batch-1.proof-contracts.json'), JSON.stringify({
+    contracts: { 'lem-auditor-created': { risk: 'high' } },
+  }));
+  const stale = spawnSync(process.execPath, [TOOL, '--ledger', 'research/judge.jsonl',
+    '--items', 'lem-auditor-created', '--run', 'r', '--auditor-certifications',
+    'research/r-step8-auditor-certifications.json', '--verify'], { cwd: dir, encoding: 'utf8' });
+  assert.equal(stale.status, 2);
+  assert.match(stale.stderr, /stale Step 8 auditor-created certification carriers/);
+});
+
+for (const stampInitially of [false, true]) for (const precheck of [false, true])
+test(`auditor certification survives judge-stamp add/remove, apply→verify→recertify (${stampInitially}/${precheck})`, t => {
+  const dir = fixture([]); t.after(() => rmSync(dir, { recursive: true, force: true }));
+  const manifest = join(dir, 'research/r-batch-1.pages.json');
+  writeFileSync(manifest, JSON.stringify([{ id: 'page-a', items: [] }]));
+  writeAuditorCreatedBaseline(dir, 'r', 8);
+  const id = 'lem-auditor-created', path = join(dir, `items/${id}.md`);
+  const plain = precheck ? itemText(id) : itemText(id).replace('verification:\n  precheck: pass\n', '');
+  const stamp = '  judge:\n    model: "old"\n    verdict: pass\n';
+  const stamped = precheck ? plain.replace('  precheck: pass\n', `  precheck: pass\n${stamp}`)
+    : plain.replace('status: draft\n', `status: draft\nverification:\n${stamp}`);
+  writeFileSync(path, stampInitially ? stamped : plain);
+  writeFileSync(manifest, JSON.stringify([{ id: 'page-a', items: [{ id }] }]));
+  const at = new Date('2025-01-01T00:00:05Z');
+  for (const file of [path, manifest]) utimesSync(file, at, at);
+  mkdirSync(join(dir, 'research/r-dispatch'), { recursive: true });
+  writeFileSync(join(dir, 'research/r-dispatch/author.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha', label: 'step8-lead', covers: ['1'], ok: true,
+    started_at: '2025-01-01T00:00:00Z', ended_at: '2025-01-01T00:00:10Z',
+  }));
+  const original = certifyAuditorCreatedItems(dir, 'r', 8);
+  const receiptPath = join(dir, 'research/r-step8-auditor-certifications.json');
+  writeLedger(dir, LANES.map(model => ledgerRow('unrelated', model, false, '0'.repeat(64))));
+  const check = (mode: string) => spawnSync(process.execPath, [TOOL, '--ledger', 'research/judge.jsonl',
+    '--items', id, '--run', 'r', '--auditor-certifications', receiptPath, mode], { cwd: dir, encoding: 'utf8' });
+  if (!stampInitially) writeFileSync(path, stamped);
+  assert.equal(loadAuditorCreatedCertifications(receiptPath).length, 1, 'adding the stamp leaves certification current');
+  let result = check('--apply'); assert.equal(result.status, 0, result.stderr);
+  assert.doesNotMatch(readFileSync(path, 'utf8'), /^ {2}judge:/m);
+  result = check('--verify'); assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(certifyAuditorCreatedItems(dir, 'r', 8).items, original.items,
+    'no post-author dispatch is needed, and historical V2 carrier evidence stays intact');
+  assert.equal(loadAuditorCreatedCertifications(receiptPath).length, 1);
+  writeFileSync(path, precheck ? plain.replace('precheck: pass', 'precheck: fail')
+    : plain.replace('status: draft\n', 'status: draft\nverification:\n  precheck: fail\n'));
+  assert.throws(() => loadAuditorCreatedCertifications(receiptPath), /stale/);
+  assert.throws(() => certifyAuditorCreatedItems(dir, 'r', 8), /no successful Step 8/);
+});
+
+test('apply creates verification for a definition with no precheck and preserves verdict currency', () => {
+  const dir = fixture(['def-no-precheck']);
+  const file = join(dir, 'items', 'def-no-precheck.md');
+  const definition = itemText('def-no-precheck').replace(
+    'verification:\n  precheck: pass\n',
+    'sources:\n  references: []\n',
+  );
+  writeFileSync(file, definition);
+  const h = itemHashJudge(definition);
+  writeLedger(dir, LANES.map((model) => ledgerRow('def-no-precheck', model, true, h)));
+
+  let result = run(dir, '--apply');
+  assert.equal(result.status, 0, result.stderr);
+  const stamped = readFileSync(file, 'utf8');
+  assert.match(stamped, /^verification:\n  judge:/m);
+  assert.equal(itemHashJudge(stamped), h,
+    'the stamp and its newly-created verification parent must both be hash-neutral');
+
+  result = run(dir, '--verify');
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test('apply creates verification when frontmatter has neither precheck nor sources', () => {
+  const dir = fixture(['itm-no-anchor']);
+  const file = join(dir, 'items', 'itm-no-anchor.md');
+  const unanchored = itemText('itm-no-anchor').replace('verification:\n  precheck: pass\n', '');
+  writeFileSync(file, unanchored);
+  const h = itemHashJudge(unanchored);
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-no-anchor', model, true, h)));
+
+  let result = run(dir, '--apply');
+  assert.equal(result.status, 0, result.stderr);
+  const stamped = readFileSync(file, 'utf8');
+  assert.match(stamped, /^verification:\n  judge:/m);
+  assert.equal(itemHashJudge(stamped), h,
+    'creating the verification parent immediately before the frontmatter end stays hash-neutral');
+
+  result = run(dir, '--verify');
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test('apply stamps an inline verification map without creating a duplicate key', () => {
+  const dir = fixture(['itm-inline']);
+  const file = join(dir, 'items', 'itm-inline.md');
+  const inline = itemText('itm-inline').replace(
+    'verification:\n  precheck: pass\n',
+    'verification: {precheck: pass}\n');
+  writeFileSync(file, inline);
+  const h = itemHashJudge(inline);
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-inline', model, true, h)));
+
+  let result = run(dir, '--apply');
+  assert.equal(result.status, 0, result.stderr);
+  const stamped = readFileSync(file, 'utf8');
+  assert.equal((stamped.match(/^verification:/gm) ?? []).length, 1);
+  assert.match(stamped, /^verification: \{precheck: pass, judge: \{/m);
+  assert.equal(itemHashJudge(stamped), h, 'the inline judge stamp is hash-neutral');
+
+  result = run(dir, '--verify');
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test('re-apply heals the duplicate verification shape written by the former fallback', () => {
+  const dir = fixture(['itm-inline-duplicate']);
+  const file = join(dir, 'items', 'itm-inline-duplicate.md');
+  const inline = itemText('itm-inline-duplicate').replace(
+    'verification:\n  precheck: pass\n',
+    'verification: {precheck: pass}\n');
+  const duplicated = inline.replace(
+    'verification: {precheck: pass}\n',
+    `verification: {precheck: pass}\nverification:\n  judge:\n    model: "${LANES.join(' + ')}"\n    verdict: pass\n    date: 2026-09-06\n`);
+  writeFileSync(file, duplicated);
+  const h = itemHashJudge(inline);
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-inline-duplicate', model, true, h)));
+
+  const result = run(dir, '--apply');
+  assert.equal(result.status, 0, result.stderr);
+  const healed = readFileSync(file, 'utf8');
+  assert.equal((healed.match(/^verification:/gm) ?? []).length, 1);
+  assert.equal(itemHashJudge(healed), h);
+});
+
+test('a lane rejection never stamps; a stale pass block fails verify and is stripped on apply', () => {
+  const dir = fixture(['itm-b']);
+  // seed the stale pass a rejection now contradicts
+  const seeded = itemText('itm-b').replace(
+    '  precheck: pass\n',
+    `  precheck: pass\n  judge:\n    model: "${LANES.join(' + ')}"\n    verdict: pass\n    date: 2026-08-01\n`);
+  writeFileSync(join(dir, 'items', 'itm-b.md'), seeded);
+  const h = itemHashJudge(seeded);
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-b', model, false, h)));
+
+  let r = run(dir, '--verify');
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /itm-b: a judge block sits on an item whose current verdict is a rejection/);
+
+  r = run(dir, '--apply', '--report', 'research/stamps.json');
+  assert.equal(r.status, 0, r.stderr);
+  assert.ok(!/ {2}judge:/.test(readFileSync(join(dir, 'items', 'itm-b.md'), 'utf8')),
+    'the contradicted pass block is stripped');
+  const receipt = JSON.parse(readFileSync(join(dir, 'research', 'stamps.json'), 'utf8'));
+  assert.equal(receipt.skipped[0].reason, 'lane-rejected');
+  assert.equal(receipt.skipped[0].stripped_stale_pass, true);
+
+  r = run(dir, '--verify');
+  assert.equal(r.status, 0, 'an honest lane-rejected skip passes the gate');
+  assert.match(r.stdout, /0 stamped current, 1 lane-rejected, 0 terminal manual, 0 recorded-not-proved, 0 problem\(s\)/);
+});
+
+test('recorded-not-proved material is never stamped and an old stamp is stripped', () => {
+  const dir = fixture(['itm-unproved']);
+  const seeded = itemText('itm-unproved')
+    .replace('status: draft\n', 'status: draft\nproved_here: false\n')
+    .replace('  precheck: pass\n',
+      `  precheck: n/a\n  judge:\n    model: "${LANES.join(' + ')}"\n    verdict: pass\n    date: 2026-08-01\n`);
+  writeFileSync(join(dir, 'items', 'itm-unproved.md'), seeded);
+  const h = itemHashJudge(seeded);
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-unproved', model, true, h)));
+
+  let r = run(dir, '--verify');
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /judge block sits on recorded-not-proved material/);
+
+  r = run(dir, '--apply', '--report', 'research/stamps.json');
+  assert.equal(r.status, 0, r.stderr);
+  assert.ok(!/ {2}judge:/.test(readFileSync(join(dir, 'items', 'itm-unproved.md'), 'utf8')),
+    'the misleading proof-pass stamp is stripped without touching the body');
+  const receipt = JSON.parse(readFileSync(join(dir, 'research', 'stamps.json'), 'utf8'));
+  assert.equal(receipt.skipped[0].reason, 'recorded-not-proved');
+  assert.equal(receipt.skipped[0].stripped_stale_pass, true);
+
+  r = run(dir, '--verify');
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(r.stdout, /1 recorded-not-proved, 0 problem\(s\)/);
+});
+
+test('clause (a) still reaches a pair-context match through the lazy spawn; a truly stale verdict is a gate failure', () => {
+  const dir = fixture(['itm-c', 'itm-d']);
+  const stale = '0'.repeat(64);
+  writeLedger(dir, [
+    // itm-c: item hash stale, but the recorded pair context equals the current
+    // one (the stub) — clause (a), reached only via the lazy judge.mts spawn
+    ...LANES.map((model) => ledgerRow('itm-c', model, true, stale, STUB_CONTEXT)),
+    // itm-d: neither clause holds
+    ...LANES.map((model) => ledgerRow('itm-d', model, true, stale, OTHER_CONTEXT)),
+  ]);
+
+  let r = run(dir, '--verify');
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /itm-c: the ledger licenses a judge pass/);
+  assert.match(r.stderr, /itm-d: no current configured-judge verdict/);
+  const calls = readFileSync(join(dir, 'research', 'context-calls.jsonl'), 'utf8').trim().split('\n');
+  assert.equal(calls.length, 1, 'all stale contexts are computed in one process');
+  assert.deepEqual(JSON.parse(calls[0]), ['itm-c', 'itm-d']);
+
+  r = run(dir, '--apply');
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(readFileSync(join(dir, 'items', 'itm-c.md'), 'utf8'), / {2}judge:/);
+  assert.ok(!/ {2}judge:/.test(readFileSync(join(dir, 'items', 'itm-d.md'), 'utf8')));
+
+  r = run(dir, '--verify');
+  assert.equal(r.status, 1, 'the currency defect on itm-d survives as the residue');
+  assert.match(r.stderr, /itm-d: no current configured-judge verdict/);
+  assert.ok(!/itm-c/.test(r.stderr));
+});
+
+test('the audit-targeted route writes the exact receipt evidence into the stamp', () => {
+  // Regression: the 2026-08-17 rewrite left `${current}` in the targeted
+  // evidence block after removing the variable — a ReferenceError the moment
+  // the route reached an eligible stamp.
+  const dir = fixture(['itm-e']);
+  const h = itemHashJudge(readFileSync(join(dir, 'items', 'itm-e.md'), 'utf8'));
+  const C = 'a'.repeat(64);
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-e', model, true, h, C)));
+  writeFileSync(join(dir, 'research', 'targets.json'), JSON.stringify({
+    version: 1, mode: 'published-audit-targeted-rejudge',
+    targets: [{ id: 'itm-e', context_sha256: C, item_sha256: h }],
+  }));
+
+  const r = spawnSync(process.execPath,
+    [TOOL, '--ledger', 'research/judge.jsonl', '--audit-targeted-rejudges', 'research/targets.json', '--apply'],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(r.status, 0, r.stderr);
+  const text = readFileSync(join(dir, 'items', 'itm-e.md'), 'utf8');
+  assert.match(text, /scope: published-audit-targeted/);
+  assert.match(text, new RegExp(`context_sha256: ${C}`));
+  assert.match(text, new RegExp(`item_sha256: ${h}`));
+});
+
+test('--verify is check-only and refuses --apply and the targeted route', () => {
+  const dir = fixture(['itm-f']);
+  writeLedger(dir, [ledgerRow('itm-f', LANES[0], true, '0'.repeat(64))]);
+  let r = run(dir, '--verify', '--apply');
+  assert.equal(r.status, 2);
+  r = spawnSync(process.execPath,
+    [TOOL, '--ledger', 'research/judge.jsonl', '--audit-targeted-rejudges', 'research/targets.json', '--verify'],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(r.status, 2);
+});

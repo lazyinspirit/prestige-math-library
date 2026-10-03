@@ -1,0 +1,134 @@
+# Physics content contract
+
+This is a physics-workspace assignment. Read SCHEMA.md, CLAUDE.md, and
+../PHYSICS-CONTENT-MODEL.md. The class-specific rules below override mathematical
+proof-only wording in the inherited task:
+
+- Use domain and library classifications, and dependency_roles on local items.
+- postulate (post-): explicit adopted assumption, sources and physical_scope;
+  review formulation, scope, sources, non_derivation. No proof required.
+- experiment (exp-): reported setup, procedure, observations, uncertainty,
+  interpretation and empirical_result. Review every field against retrieved
+  source text. Do not fabricate observations or prove measured outcomes.
+- physical-theorem (pthm-) and thought-experiment (texp-): identical complete
+  conditional proofs, explicit physical_scope, and inherited empirical_premises.
+- Mathematical items retain all ordinary mathematical proof obligations and
+  cannot depend on physics. Imported mathematical items and pages are read-only.
+- Nonproof item contracts use physics_review fields with verdict and concrete
+  evidence as specified in SCHEMA.md; do not create fictitious proof worksheets.
+- Relations (support/testing/motivation/replication/challenge) are not deps.
+- Changes to Postulate, experimental setup/procedure/observations/uncertainty/interpretation, physical_scope, or empirical qualifications change the public physical interface and require direct-consumer review. Proofs, citations, and audit stamps alone do not propagate.
+- Write only in this workspace. Never modify the root math engine, tools,
+  briefs, items, or library. Any genuine math supplier defect is an escalation.
+
+## Required experimental-evidence guidance
+
+Before authoring, reviewing, judging, or adjudicating physical content, read
+../PHYSICS-CONTENT-MODEL.md, especially "Statistical evidence and the double-slit
+example". Apply its author/judge/adjudicator instructions to every statistical
+claim. Separate theoretical distributions, finite observed data, and statistical
+inference. Finite agreement does not prove a physical framework, and a rare
+outcome or missing visible fringe does not automatically falsify one. Classical
+waves also interfere: identify the specific competing model and apparatus
+assumptions. Never invent sample sizes, uncertainties, p-values, or power.
+Confidence in a source review or conditional proof is not certainty that a theory
+is true. Carry sampling and measurement qualifications into downstream claims.
+
+---
+
+# Alpha
+
+**Proof formatting when editing items:** Separate numbered steps and the first
+step after introductory prose with blank lines. Keep each complete step in one
+paragraph, with single newlines inside it. End every step with valid `[tags]`;
+put punctuation before the tags and use `[tags] ∎` on the final step. Preserve
+mathematics and references. After final edits and any formatter, run once
+before handoff: `node tools/physics-support/proof-layout.mjs items/<id>.md ...`, batching all
+your changed item paths in one command.
+Read-only assignments report defects without editing.
+
+**Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
+
+For Step 3 onward, follow `briefs/tasks/frontier-dependency-ledger.md` within
+your write scope. Step 8's lead must refresh and read the unified frontier ledger.
+
+The task file is authoritative for the current cognitive job, scope, artifacts,
+schemas, and gates. Read it with [README.md](../README.md),
+[SCHEMA.md](../SCHEMA.md), and [WORKFLOW.md](../WORKFLOW.md) before acting.
+The engine owns routing, retries, coverage, gates, and stage transitions; do
+not take over any of those mechanical duties.
+
+`tools/physics-support/models.mjs` and `tools/physics-support/dispatch.mjs` own the active model, runner,
+effort, role capacity, sandbox, and configured judge set. Do not name or
+override a model or judge lineup in your work. Some Alpha dispatches are
+read-only; treat that as an absolute no-write boundary. In every dispatch, do
+not request permissions or try to obtain a broader execution mode. Record a
+blocker when the assigned work cannot be completed within the provided access.
+
+## Scope and ownership
+
+Use the `# This dispatch` identity and task to determine the work you own. For
+group work, `research/<run>-alpha-groups.json` is the assignment: it permits at
+most ten groups of at most three batches, and a group writes only its own
+artifacts and in-flight content. Read dependencies wherever needed to assess a
+claim, but route another group's defect through the task's alert or disposition
+path rather than repairing it yourself.
+
+Lead and special Alpha tasks may own level-wide artifacts; write only the
+artifacts named by those tasks. Never rename an established item id. Do not
+write judge verdicts or stamps. Published content, scope changes, deletion,
+and reading-order changes require the exact task-authorised protocol. Step-7
+adjudicators and all three owner repair agents may fully author new items only
+for genuine unmet prerequisites of assigned repairs. Use unique IDs and register
+each addition in the canonical registry/index, page, applicable manifest and
+contract. Resolve dependency and downstream effects before central certification
+and the complete gate battery. Otherwise report the issue without changing it.
+Current Step-7 dispatches also follow
+`step7-adjudicator.md` or `step7-owner-repair.md`; their tasks authorize assigned
+published downstream repairs across the whole library.
+
+At Steps 7 and 8, an item genuinely created and fully authored by an authorised
+auditor/adjudicator is a separate certification class. Do not manufacture a
+judge verdict or send that addition through a judge/audit-repair loop. After a
+successful dispatch, the engine verifies the immutable pre-stage inventory and
+binds a current auditor-created certification to the item. This does not widen
+write scope or waive content, dependency, source, rendering, proof-contract, or
+Step-7 task ownership rules. Existing-item edits still require ordinary
+current judge evidence.
+
+## Review and repair standard
+
+Logical validity is the ground truth; authoritative sources and judges can err.
+State uncertainty honestly and consult primary sources when unsure.
+Check the mathematical claim as written, not a charitable reconstruction.
+Trace inferences to stated hypotheses, earlier steps, an exact cited statement,
+or an elementary derivation. Preserve domains, quantifiers, hypotheses,
+direction, and conclusions when using a citation. Type-check expressions and
+test material boundary cases, including empty and zero cases, endpoints,
+choice scope, and both directions of an iff. Check titles, definitions,
+statements, facts, constructions, proofs, witnesses, computations, and page
+prose within the assigned task.
+
+A proof-step gap that a competent reader closes immediately is nonfatal polish.
+It never excuses a false or overstrong claim, definition, title, witness,
+computation, or citation. Do not manufacture findings, and do not retain a
+known defective claim merely because a repair is inconvenient. For a licensed
+repair, make the smallest coherent correction, preserve the content contract,
+and run the focused validation named by the task. A material rewrite invalidates
+its prior `verification.judge` record.
+
+## Judge and evidence discipline
+
+Judge coverage is current only for the model set and exact frozen context that
+`tools/physics-support/models.mjs` resolves; retained rows from a different set are evidence,
+not current coverage. Current Step-7 adjudication repairs every confirmed defect,
+including `confirmed_nonfatal`; `confirmed_fatal` additionally enters the fatal
+threshold count. A `false_positive` requires evidence without unnecessary edits.
+The task controls repair ownership, fresh downstream continuation and any
+required rejudge; never initiate a cycle independently.
+
+Write reports, decisions, and structured final responses exactly where and how
+the task requires. Use the prescribed append interface for shared JSONL
+ledgers. A schema-constrained final response must contain only the required JSON
+object. State exact evidence, changes, checks, and blockers; do not claim a gate
+passed unless you ran it.

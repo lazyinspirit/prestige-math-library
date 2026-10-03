@@ -1,0 +1,2681 @@
+// The stage specification for the prestige-math-library build, steps 1 -> 9.
+//
+// EVERYTHING DOMAIN-SPECIFIC LIVES HERE. The engine knows nothing about
+// mathematics, batches, Alphas or judges; it knows stages, units, coverage and
+// gates. Porting this pipeline to another project means writing another file
+// like this one, and porting it to another agent platform means changing one
+// command template in the config. That separation is the whole design.
+//
+// Each stage declares:
+//   units(ctx)          the units of work it owes           -> ['1','2',...]
+//   pattern             which result files belong to it     -> /^beta-batch-/
+//   labelFor(unit)      the dispatch label for a unit       (enables per-unit retry)
+//   plan(ctx, pending)  dispatch descriptors for what is missing
+//   gates(ctx)          commands that must pass before advancing
+//
+// A stage with no `plan` is a checkpoint: it advances when its artifacts appear,
+// whoever produced them. That is how a step done by hand, or by a tool rather
+// than an agent, still fits the machine.
+
+import { readdirSync, existsSync, readFileSync, writeFileSync, statSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { join } from 'node:path';
+import { itemHashGuard, shortHash } from '../../physics-support/item-hash.mjs';
+import { isPublishedItem } from '../../physics-support/published-repair-policy.mjs';
+import { loadAuditorCreatedCertifications } from '../../physics-support/auditor-created-items.mjs';
+import { certifyCompletedAuditorItems } from '../../physics-support/step3-auditor-items.mjs';
+import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
+import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
+import { loadStep3, scopeHash, itemHash, checkStep3 } from '../../physics-support/step3-decisions.mjs';
+import { step1Decision } from '../../physics-support/step1-decisions.mjs';
+import { dependencyLevels, orderedItems } from '../../physics-support/item-dependency-levels.mjs';
+import { scopedGateOutput } from '../src/repair-evidence.mts';
+import { holdStep1 } from './step1-hold.mts';
+import { yaml } from '../../physics-support/pathway-lib.mjs';
+
+// Version the composed Step-5 module independently. The executor watches both
+// files and re-imports this root when either changes; the query prevents Node's
+// ESM cache from retaining the old Step-5 closures in a live controller.
+const STEP5_MODULE_URL = new URL('./mathlib.step5.mts', import.meta.url);
+const STEP5_MODULE_STAT = statSync(STEP5_MODULE_URL);
+const { step5Stages } = await import(
+  `${STEP5_MODULE_URL.href}?v=${STEP5_MODULE_STAT.mtimeMs}:${STEP5_MODULE_STAT.size}`
+);
+const STEP7_MODULE_URL = new URL('./mathlib.step7.mts', import.meta.url);
+const STEP7_MODULE_STAT = statSync(STEP7_MODULE_URL);
+const { step7Stages } = await import(
+  `${STEP7_MODULE_URL.href}?v=${STEP7_MODULE_STAT.mtimeMs}:${STEP7_MODULE_STAT.size}`
+);
+
+const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
+// A live engine hot-reloads this stage module but retains its first models.mjs
+// import. The new profile name must also resolve in that already-running process.
+const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
+
+const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
+
+/** Batch numbers, read from disk rather than configured.
+ *  A run's batch count is a property of its planning output, and anything that
+ *  restates it in a second place will eventually disagree with it. */
+export function batches(ctx: any): string[] {
+  const dir = R(ctx, 'research');
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f: any) => f.startsWith(`${ctx.run}-batch-`) && f.endsWith('.pages.json'))
+    .map((f: any) => f.replace(`${ctx.run}-batch-`, '').replace('.pages.json', ''))
+    .filter((n: any) => /^\d+$/.test(n))
+    .sort((a: any, b: any) => Number(a) - Number(b));
+}
+
+/** Direct prerequisite batches induced by in-run page requirements. */
+function batchDependencies(ctx: any, unit: string): string[] {
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  const batchForPage = new Map<string, string>();
+  for (const page of snapshot.pages) batchForPage.set(page.id, String(page.batch));
+  const out = new Set<string>();
+  for (const page of snapshot.pages.filter((row: any) => String(row.batch) === String(unit))) {
+    for (const requirement of page.requires ?? []) {
+      const dependency = batchForPage.get(requirement);
+      if (dependency && dependency !== String(unit)) out.add(dependency);
+    }
+  }
+  return [...out].sort((a, b) => Number(a) - Number(b));
+}
+
+/** A scaffold supplier is releasable only after its populated manifest,
+ * coverage record, and every current item-readiness receipt exist. The item
+ * list is read dynamically because planning intentionally creates empty page
+ * shells before the Beta fills them. */
+const scaffoldSnapshots = new WeakMap<object, {
+  stamp: string;
+  snapshot: any;
+  levelCheck: ReturnType<typeof dependencyLevels>;
+  itemStamps: Map<string, string>;
+}>();
+
+function fileStamp(path: string): string {
+  try {
+    const stat = statSync(path, { bigint: true });
+    return `${stat.mtimeNs}:${stat.ctimeNs}:${stat.size}`;
+  } catch { return 'missing'; }
+}
+
+function scaffoldSnapshot(ctx: any) {
+  const dir = R(ctx, 'research');
+  const files = readdirSync(dir)
+    .filter((name: string) => name.startsWith(`${ctx.run}-batch-`)
+      && (name.endsWith('.pages.json') || name.endsWith('.coverage.json')))
+    .sort();
+  const stamp = [fileStamp(join(dir, 'plan-spec.json')),
+    ...files.map((name: string) => `${name}:${fileStamp(join(dir, name))}`)].join('|');
+  let cached = scaffoldSnapshots.get(ctx);
+  if (!cached || cached.stamp !== stamp) {
+    const snapshot = loadStep3(ctx.repo, ctx.run);
+    cached = { stamp, snapshot, levelCheck: dependencyLevels(snapshot.pages), itemStamps: new Map() };
+    scaffoldSnapshots.set(ctx, cached);
+  } else {
+    // Published and in-run item bodies can change without a manifest edit.
+    // Invalidate dependency bytes before checking the next unit in this same
+    // status pass; Step-1 receipt files themselves are read afresh below.
+    for (const [id, prior] of cached.itemStamps) {
+      if (fileStamp(R(ctx, 'items', `${id}.md`)) !== prior) {
+        cached.snapshot.cache.clear();
+        cached.itemStamps.clear();
+        break;
+      }
+    }
+  }
+  return cached;
+}
+
+function scaffoldArtifacts(ctx: any, unit: string): string[] {
+  const manifest = `research/${ctx.run}-batch-${unit}.pages.json`;
+  const out = [manifest, `research/${ctx.run}-batch-${unit}.coverage.json`];
+  let complete = true;
+  try {
+    const pages = JSON.parse(readFileSync(R(ctx, manifest), 'utf8'));
+    const cached = scaffoldSnapshot(ctx);
+    const { snapshot, levelCheck } = cached;
+    if (levelCheck.errors.some((error: string) => error.startsWith('dependency cycle:'))) complete = false;
+    if (!Array.isArray(pages) || !pages.length) complete = false;
+    for (const page of Array.isArray(pages) ? pages : []) {
+      if (!Array.isArray(page?.items) || !page.items.length) complete = false;
+      for (const item of Array.isArray(page?.items) ? page.items : []) {
+        if (typeof item?.id === 'string' && item.id) {
+          out.push(`research/${ctx.run}-step1-${item.id}.json`);
+          if (!step1Decision(snapshot, item.id).closed) complete = false;
+          if (item.dependency_level !== levelCheck.levels.get(item.id)) complete = false;
+        } else complete = false;
+      }
+    }
+    for (const id of snapshot.cache.keys()) {
+      if (!cached.itemStamps.has(id)) cached.itemStamps.set(id, fileStamp(R(ctx, 'items', `${id}.md`)));
+    }
+  } catch {
+    complete = false;
+  }
+  // Planning creates empty page shells. A successful Beta receipt and coverage
+  // file must not make that initial shell look complete and release consumers.
+  // This sentinel is intentionally never authored; the normal stalemate/hold
+  // path then reports the malformed or empty scaffold for owner resolution.
+  if (!complete) out.push(`research/${ctx.run}-batch-${unit}.scaffold-incomplete`);
+  return [...new Set(out)];
+}
+
+/** Durable group-author output for one batch.
+ *
+ * A proof-contract file alone is not an authoring receipt: a blocked author can
+ * truthfully emit an empty contract while writing none of the manifest's items
+ * or pages.  Read the already-validated batch manifest and require the corpus
+ * files as well, so artifact accounting cannot turn an empty authoring attempt
+ * into completed coverage. */
+export function authorArtifacts(ctx: any, unit: string): string[] {
+  const manifest = `research/${ctx.run}-batch-${unit}.pages.json`;
+  const out = [manifest, `research/${ctx.run}-batch-${unit}.proof-contracts.json`];
+  try {
+    const pages = JSON.parse(readFileSync(R(ctx, manifest), 'utf8'));
+    for (const page of Array.isArray(pages) ? pages : []) {
+      if (typeof page?.category === 'string' && typeof page?.id === 'string') {
+        out.push(`library/${page.category}/${page.id}.md`);
+      }
+      for (const item of Array.isArray(page?.items) ? page.items : []) {
+        if (typeof item?.id === 'string') out.push(`items/${item.id}.md`);
+      }
+    }
+  } catch {
+    // The manifest path remains in the result, and the manifest gates provide
+    // the precise parse/schema diagnostic.  Artifact accounting stays total.
+  }
+  return [...new Set(out)];
+}
+
+/** A pair author owes only its own pages and items, even in a shared batch. */
+export function pairAuthorArtifacts(ctx: any, unit: string): string[] {
+  const pair = loadStep3(ctx.repo, ctx.run).pairs.get(unit);
+  if (!pair) return [];
+  const out: string[] = [`research/${ctx.run}-step3b-pair-${unit}.md`];
+  for (const page of pair) {
+    out.push(`research/${ctx.run}-batch-${page.batch}.pages.json`);
+    out.push(`research/${ctx.run}-batch-${page.batch}.proof-contracts.json`);
+    if (typeof page.category === 'string') out.push(`library/${page.category}/${page.id}.md`);
+    for (const item of page.items ?? []) out.push(`items/${item.id}.md`);
+  }
+  return [...new Set(out)];
+}
+
+/**
+ * Group Alphas: one per <=3 batches, read from the assignment an agent made at
+ * stage `2-assign` and `tools/physics-support/alpha-groups.mjs` validated.
+ *
+ * WHY THIS IS NOT A CHUNK OF THE SORTED LIST ANY MORE. It used to be exactly
+ * that — `b.slice(i, i + 3)` — which is deterministic but not sound. On
+ * `frontier-14` it handed one Alpha linear-algebra + number-theory +
+ * category-theory, three unrelated subjects at once, while splitting topology's
+ * three batches across two different Alphas so neither could see the
+ * cross-references between its own pages. Minimising what crosses a group
+ * boundary is a judgment about mathematical relatedness; category is a strong
+ * proxy but does not settle the residual, because five categories over three
+ * Alphas forces somebody to pair two singletons.
+ *
+ * The fallback is the old positional chunking, used only before the assignment
+ * exists — `autopilot plan` and `doctor` both call this while `2-assign` is
+ * still ahead of them, and neither dispatches anything.
+ */
+export function alphaGroups(ctx: any, size = 3): Array<{ label: string; covers: string[] }> {
+  const assigned = readAlphaGroups(ctx);
+  if (assigned) return assigned;
+  const b = batches(ctx);
+  const out: any[] = [];
+  for (let i = 0; i < b.length; i += size) {
+    out.push({ label: String.fromCharCode(97 + out.length), covers: b.slice(i, i + size) });
+  }
+  return out;
+}
+
+/** The validated assignment, or null before `2-assign` has produced one. */
+function readAlphaGroups(ctx: any): Array<{ label: string; covers: string[] }> | null {
+  const p = join(ctx.repo, `research/${ctx.run}-alpha-groups.json`);
+  if (!existsSync(p)) return null;
+  try {
+    const raw = JSON.parse(readFileSync(p, 'utf8'));
+    const rows = Array.isArray(raw) ? raw : raw?.groups;
+    if (!Array.isArray(rows) || !rows.length) return null;
+    return rows.map((g: any) => ({ label: String(g.label), covers: (g.covers ?? []).map(String) }));
+  } catch { return null; }
+}
+
+/** The batches that must advance together at a group-Alpha stage.
+ *
+ *  One Alpha dispatch declares coverage of its whole group, so the group may not
+ *  start until every batch it will claim is finished at the previous stage —
+ *  otherwise its result file records work on a batch nobody has done.
+ *
+ *  READ THE ASSIGNMENT, NEVER THE FALLBACK. `alphaGroups` chunks positionally
+ *  until `2-assign` writes the real partition, and the two disagree — that is the
+ *  whole point of the stage. A cohort taken from the fallback would hold a batch
+ *  for the wrong siblings, so every stage using this sits AFTER the `2-assign`
+ *  barrier, and none of them is in a group that starts before it. */
+const alphaCohort = (ctx: any, u: string): string[] =>
+  alphaGroups(ctx).find((g: any) => g.covers.map(String).includes(String(u)))?.covers.map(String) ?? [String(u)];
+
+const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
+const extGate = () => gate('extcheck', ['node', 'tools/physics-support/extcheck.mjs']);
+
+/** Gates that apply to the whole repository, re-run at several stages because
+ *  authoring and repair both change items on disk.
+ *
+ *  `pendingAuditOk` belongs only to a bounded pre-certification window. The
+ *  caller must first validate the exact published-repair handoff; every other
+ *  repo-wide checkpoint keeps `published-unaudited` fatal. */
+const repoWide = (ctx, { pendingAuditOk = false }: { pendingAuditOk?: boolean } = {}) => [
+  gate('precheck', ['node', 'tools/physics-support/tsx-run.mjs', 'tools/physics-support/precheck.mts'], {
+    liveness: { pattern: /(\d+)\s+checked/.source, min: 1, unit: 'items checked' },
+  }),
+  gate('depcheck', ['node', 'tools/physics-support/depcheck.mjs', ...(pendingAuditOk ? ['--pending-audit-ok'] : [])]),
+  gate('fwdcheck', ['node', 'tools/physics-support/fwdcheck.mjs', '--quiet']),
+  extGate(),
+  gate('rendercheck', ['node', 'tools/physics-support/rendercheck.mjs']),
+  // gates.mjs listed these two as gates of record at steps 3/5/8/9 and
+  // 2/3/5/9; this table — the only one that runs — carried neither.
+  // prosecheck is the positional-claim class LEVELS.md calls "where 100% of
+  // this library's found defects live"; depsource is dep-to-page resolution.
+  // (citecheck stays advisory by design: it cannot exit nonzero, and an
+  // always-green gate is noise, not checking — readers run it by hand.)
+  gate('prosecheck', ['node', 'tools/physics-support/prosecheck.mjs']),
+  gate('depsource', ['node', 'tools/physics-support/depsource.mjs']),
+  // The category pages render an AUTHORED reading order (library/<cat>/_pathway.md),
+  // so nothing mechanical keeps it covering the corpus as levels land. This is
+  // that guarantee: a published page in no part fails here. `pathway-sync` runs
+  // in 9-pathway-sync-v2, ahead of the report Alpha, so the usual case is already
+  // repaired by the time this reads it.
+  gate('pathcheck', ['node', 'tools/physics-support/pathcheck.mjs']),
+  // Scope loss is invisible to every gate that reads current state, and the
+  // add/delete authority briefs/alpha.md grants runs through step 8 — so the
+  // planning scope ledger is re-checked at every repo-wide gate point, not only
+  // through step 3 (where it stopped when a scaffolded pair vanished anyway).
+  scopeGate(ctx),
+  // The judge sweep and level-coverage both expand pages into items — the
+  // sweep via plan-spec.json (spliced at step 4), closure via the batch
+  // manifests. An item an Alpha adds to a manifest after step 4 diverges the
+  // two scopes: it escapes the sweep or hard-stops closure. Verify fails on
+  // any divergence; the licensed remedy is splice-plan --batch <i> --update.
+  gate('splice-verify', ['node', 'tools/physics-support/splice-plan.mjs', '--run', ctx.run, '--verify']),
+];
+
+// `requireDestination` binds only where harvest rows are BORN (stage 1 and
+// the 3-recheck loop): a deferral written under the new contract must name a
+// resolvable destination — 86 of frontier-15's 168 declines named none and
+// the Craven hole reached step 8 when step 2 could have caught it. Later
+// re-verifications keep the base form so a run whose files predate the
+// contract (frontier-15's terminal battery included) is not flipped red
+// after its receipts closed. A destination that is PRESENT but resolves to
+// nothing fails in either form.
+const coverageGates = (ctx, { requireDestination = false } = {}) => batches(ctx).map((b: any) =>
+  gate(`coverage-${b}`, ['node', 'tools/physics-support/coverage-checklist.mjs', `research/${ctx.run}-batch-${b}.coverage.json`,
+    ...(requireDestination ? ['--require-destination'] : [])], {
+    liveness: { pattern: /(\d+)\s+harvested/.source, min: 1, unit: 'harvested results' },
+  }));
+
+/** Scaffold policy is a whole-level join. `content-policy --manifest-only`
+ *  still enforces the two-pair capacity separately for every manifest, but it
+ *  must see every in-flight manifest at once so a legal dependency on an
+ *  earlier page in another batch resolves as planned content. Running one
+ *  invocation per batch misclassifies that edge as missing until step 4 has
+ *  authored the target, creating a deadlock before the splice. */
+const manifestDepsGate = (ctx) => gate('manifest-deps', ['node', 'tools/physics-support/manifest-deps.mjs',
+  ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`)], {
+  liveness: { pattern: /manifest-deps: (\d+) item/.source, min: 1, unit: 'planned items' },
+});
+
+const policyGates = (ctx) => [
+  manifestDepsGate(ctx),
+  gate('content-policy-scaffold', ['node', 'tools/physics-support/content-policy.mjs',
+    '--manifest-only',
+    ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`)], {
+    liveness: { pattern: /(\d+)\s+scoped item/.source, min: 1, unit: 'scoped items' },
+  }),
+];
+
+/** Item mode — the other half of content-policy, and the only enforcement of
+ *  applied-iota notation, provenance ENUM validity (level-coverage checks
+ *  presence only), reader-visible source URLs, generated-claim containment and
+ *  the external_dependency record. `--manifest-only` guards all of that behind
+ *  `if (!manifestOnly)`, so a pipeline that only ever passes the flag performs
+ *  none of it — which is what this engine did until 2026-08-16. Scope comes
+ *  from the manifests, so the legacy corpus is not retro-flagged; runs only
+ *  after step 3, when the item files exist. */
+const policyItemGate = (ctx) => gate('content-policy-items', ['node', 'tools/physics-support/content-policy.mjs',
+  ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`)], {
+  liveness: { pattern: /(\d+)\s+scoped item/.source, min: 1, unit: 'scoped items' },
+});
+
+const planGate = () => gate('validate-plan', ['node', 'tools/physics-support/validate-plan.mjs', 'research/plan-spec.json']);
+
+/** The Step 1 drift review's teeth. The review is the `drift` unit of stage 1;
+ *  this is what makes its report load-bearing rather than decorative. Fails on
+ *  a missing report, an owed A page with no verdict, or any drift-blocked
+ *  verdict — a blocked edge is a reading-order question, owner-only, and the
+ *  run must stop at it rather than meet it at step 4 as `undeclared-prereq`. */
+const driftGate = (ctx) => gate('drift-review', ['node', 'tools/physics-support/drift-review-check.mjs', '--run', ctx.run], {
+  liveness: { pattern: /(\d+)\s+page\(s\) reviewed/.source, min: 1, unit: 'pages reviewed' },
+});
+
+const batchCoverages = (ctx: any) => batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.coverage.json`);
+
+/** Full-text fetchability — the complement of url-liveness. The sweep probes
+ *  HEADERS ONLY (a body download once reported a live 9.4 MB PDF as dead), so
+ *  a bot wall answering 200 with an interstitial body is invisible to it.
+ *  Owner instruction (2026-08-17): dead academic URLs are a normal case, and
+ *  Betas prove full text is fetchable per URL at step 1. The Beta stamps each
+ *  source at harvest time (`source-fetch-check --stamp`, per its brief); this
+ *  gate accepts each stamp or a validated Step 1 source-drop decision. */
+const fetchGate = (ctx) => gate('source-fetch-check', ['node', 'tools/physics-support/source-fetch-check.mjs',
+  '--coverage', batchCoverages(ctx).join(',')], {
+  liveness: { pattern: /(\d+)\/\d+ source\(s\) resolved/.source, min: 1, unit: 'sources resolved' },
+});
+
+/** MECHANICAL REPAIRS, keyed by the failing gate.
+ *
+ *  A repair in this table is a function of files on disk (plus, for the
+ *  stamp, the network fetch that reading the cited document requires anyway)
+ *  — the roles rule assigns those to code, never to a dispatch. Both
+ *  scaffold-side joins share the table: stage 1 for a failure at the scaffold
+ *  join, 3-recheck for one at the group join, because a source can die
+ *  between the two. Strictness lives in the tools themselves: a dead URL
+ *  with no archive snapshot, or a source that will not yield full text, exits
+ *  nonzero, the round is spent, and the blocker survives for the judgment
+ *  call (scouting a replacement source) that no table can make.
+ */
+// Absolute paths on purpose: the tools anchor RELATIVE paths to the library
+// REPO constant, not to cwd, so a repair running against any other ctx.repo
+// (a test fixture; a future second checkout) would silently read the wrong
+// tree. ctx.repo is the truth the engine already holds.
+// A gate may own SEVERAL mechanical repairs, run in order. `url-liveness` is
+// the case that needs it: recover from the archive first — RECOVER BEFORE
+// REPLACE is the standing rule — and only then retire what is still dead and
+// carries nothing the level would lose.
+export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[][]> = {
+  // A scaffold item with no dependency field means an empty list was omitted,
+  // not that mathematical judgment is needed. Normalize it before authoring so
+  // Step 8 never spends an Alpha call discovering missing plan evidence.
+  'manifest-deps': (ctx) => ['tools/physics-support/manifest-deps.mjs', '--write',
+    ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`)],
+  'url-liveness': (ctx) => [
+    // 1. dead citation with a recorded archive snapshot -> swap it in place
+    ['tools/physics-support/url-recover-apply.mjs',
+      '--liveness', R(ctx, 'research', `${ctx.run}-url-liveness.json`),
+      '--coverage', batchCoverages(ctx).map((f: string) => join(ctx.repo, f)).join(',')],
+    // 2. still dead, and every result on it independently backed by a live
+    //    source -> retire it, recorded. Without this the scouting order has no
+    //    disposition for a redundant dead source: there is nothing to replace
+    //    and no licence to remove, so a scout re-points the URL, fails, and
+    //    spends a round. frontier-16 spent three on one walled textbook whose
+    //    two results were backed by a second treatment the whole time.
+    //    A source carrying the LAST backing is never retired here — that stays
+    //    `backing-lost` and stays a scout's job.
+    ['tools/physics-support/source-backing.mjs',
+      '--coverage', batchCoverages(ctx).join(','),
+      '--liveness', `research/${ctx.run}-url-liveness.json`,
+      '--retire-redundant',
+      '--retired-record', `research/${ctx.run}-retired-sources.json`],
+  ],
+  // The drift review edited prerequisite edges/order, MINTED a prerequisite,
+  // or RESCOPED the run (owner, 2026-08-24) -> rewrite the batch manifests from
+  // the current spec and regenerate the ledger, task files and covers map. The
+  // Alpha decided; this is bookkeeping. Even an applied edge or reorder with
+  // the same pair set must sync, because generated Beta tasks quote those
+  // fields.
+  'drift-review': (ctx) => ['tools/physics-support/drift-apply.mjs', '--run', ctx.run],
+  // sources missing their full-text stamp -> fetch the bodies and stamp them
+  'source-fetch-check': (ctx) => ['tools/physics-support/source-fetch-check.mjs',
+    '--coverage', batchCoverages(ctx).map((f: string) => join(ctx.repo, f)).join(','), '--stamp'],
+  // Coverage repairs can retire or rewrite decline rows after an Alpha has
+  // already classified them. Removing decisions for declines that no longer
+  // exist is mechanical; any new or changed decline remains `pending` and the
+  // check still routes it back to an Alpha.
+  'scope-decisions': (ctx) => ['tools/physics-support/scope-decisions.mjs', 'refresh',
+    '--run', ctx.run, '--all', '--root', ctx.repo],
+  // withheld splice batches -> re-transcribe; exit 1 = edges still await the
+  // adjudicating Alpha (the residual the stage-4 hook routes)
+  'splice-refusals': (ctx) => ['tools/physics-support/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
+  // a judge lane that returned nulls (capacity refusal, a 429 boot stampede)
+  // -> re-run the sweep. The currency rule spends ONLY on items lacking a
+  // current boolean verdict, so a lane that answered is never re-billed:
+  // frontier-15's retry pended terra 392, terra 0.
+  'judge-closure': (ctx) => {
+    const ledger = JSON.parse(readFileSync(join(R(ctx, 'research'), `${ctx.run}-scope-ledger.json`), 'utf8'));
+    const aPages = ledger.pages.filter((p: any) => p.kind === 'A').map((p: any) => p.id);
+    return ['tools/physics-support/judge-sweep.mjs', '--run', ctx.run,
+      '--ledger', R(ctx, 'research', `${ctx.run}-judge.jsonl`),
+      '--cost', R(ctx, 'research', `${ctx.run}-judge-cost.jsonl`),
+      '--pages', aPages.join(',')];
+  },
+  // A Step-8 fatal repair changes the exact delta this receipt freezes. Refresh
+  // it synchronously before routing any independent cognitive residue, so the
+  // next closure pass judges the repaired bytes rather than a stale scope.
+  'step8-changes': (ctx) => step8ChangesRefreshArgv(ctx),
+  // the stalemate synthetic (covered, undispatched, artifact-incomplete) on
+  // stage 4 IS the withheld-splice shape — same repair
+  'stage-stalemate': (ctx) => ['tools/physics-support/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
+  // Object drift between the manifests and the plan — "same ids, N item
+  // object(s) changed" — is what the splice's REFRESH exists for, and the
+  // refresh is `--update`, which the tool accepts ONLY per batch:
+  // `(update && !batch)` is a usage error. The entry here was
+  // `--all --fail-on-refusal`, which treats a differing page as a hard error
+  // and refuses to overwrite, so it could never clear the very drift the gate
+  // reports. frontier-16 spent three rounds on it at step 3 after the 5a
+  // Alphas repaired items in four pages of batch 1.
+  //
+  // One `--update` per batch instead. A batch whose items already match is
+  // left alone, so this is idempotent over the ones that did not drift.
+  'splice-verify': (ctx) => batches(ctx).map((b: any) =>
+    ['tools/physics-support/splice-plan.mjs', '--run', ctx.run, '--batch', String(b), '--update']),
+  // a stale impact receipt is a disk function: recompute the window from the
+  // newest snapshot and add `pending` rows for new consumers. The pendings
+  // keep the gate red, which correctly routes the RESIDUAL to the
+  // impact-close Alpha — refreshing is mechanical, dispositioning is not.
+  'impact-receipt': (ctx) => ['tools/physics-support/impact-audit.mjs',
+    '--touches', join(ctx.repo, touchesPath(ctx)),
+    '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
+    '--direct-boundary',
+    '--refresh-receipt', R(ctx, 'research', `${ctx.run}-impact.json`)],
+  // the configured-judge ledger licenses stamps the frontmatter does not carry ->
+  // write them (and strip any pass block a current rejection contradicts).
+  // Stamping is a disk function of the ledger plus the current item text;
+  // the residue — an item no current verdict covers at closure — survives as
+  // the blocker. frontier-15 closed 398/398 in the ledger with 0 of 398
+  // items stamped, because no stage owned this act (owner, 2026-08-17).
+  'judge-stamps': (ctx) => ['tools/physics-support/apply-judge-stamps.mjs',
+    '--ledger', R(ctx, 'research', `${ctx.run}-judge.jsonl`),
+    '--exclude-published',
+    '--manifests', batches(ctx).map((b: any) => join(ctx.repo, 'research', `${ctx.run}-batch-${b}.pages.json`)).join(','),
+    '--terminal-resolutions', R(ctx, terminalResolutionsPath(ctx)),
+    ...auditorCertificationArgs(ctx),
+    '--apply', '--report', R(ctx, 'research', `${ctx.run}-judge-stamps.json`)],
+  // a dirty tree at 9-close-v2 means repairs landed after the close-out
+  // commit: commit again. Idempotent; refuses any branch but main.
+  'tree-clean': (ctx) => ['tools/physics-support/run-commit.mjs', '--run', ctx.run],
+};
+
+/** Newest snapshot label on disk, preferring the latest stage boundary. The
+ *  impact window always starts at pre-author; where it ENDS depends on how
+ *  far the run got, and hardcoding a label made the receipt permanently one
+ *  stage stale the moment a later stage edited anything. */
+const latestSnapshotLabel = (ctx: any): string => {
+  try {
+    const t = JSON.parse(readFileSync(join(ctx.repo, touchesPath(ctx)), 'utf8'));
+    const label = (t.snapshots ?? []).at(-1)?.label;
+    if (typeof label === 'string' && label) return label;
+  } catch { /* fall through */ }
+  return 'post-5a';
+};
+
+/** Open contract-quality ledger rows with an owning batch — the rr-005 shape:
+ *  worksheets only that batch's Beta can honestly rewrite. */
+const openContractRows = (ctx: any): any[] => {
+  try {
+    return readFileSync(join(ctx.repo, 'research', 'defect-ledger.jsonl'), 'utf8')
+      .split('\n').filter(Boolean).map((l) => JSON.parse(l))
+      .filter((r) => r.run === ctx.run && r.disposition === 'open'
+        && r.location === 'contract-row' && r.batch);
+  } catch { return []; }
+};
+
+/** A rework result is evidence for one exact set of still-open ledger rows, not
+ * for a batch forever. Any row edit (including a certifier's retained-open
+ * reason) changes the token and requires fresh owning-Beta work. */
+const contractReworkVersion = (rows: any[]): string => createHash('sha256')
+  .update(JSON.stringify([...rows].sort((a, b) => String(a.defect_id).localeCompare(String(b.defect_id)))))
+  .digest('hex').slice(0, 16);
+
+/** An unexpired quota/outage obligation for the given kind, as an outage
+ *  report the executor turns into a backoff clock. */
+const blockedObligation = (ctx: any, kind: string): { reason: string; retryAfterMs: number } | null => {
+  try {
+    const rows = readFileSync(join(ctx.repo, 'research', `${ctx.run}-obligations.jsonl`), 'utf8')
+      .split('\n').filter(Boolean).map((l) => JSON.parse(l));
+    for (const r of rows) {
+      if (r.kind !== kind || r.status !== 'open' || !r.unblock_at) continue;
+      const ms = new Date(r.unblock_at).getTime() - Date.now();
+      if (ms > 0) return { reason: `${r.id}: ${r.blocked_by ?? r.note} (unblocks ${r.unblock_at})`, retryAfterMs: ms };
+    }
+  } catch { /* no obligations file: nothing blocks */ }
+  return null;
+};
+
+/** A lane override recorded on the matching obligation row — how an owner
+ *  substitution travels: the row's `dispatch` carries role/brief/task (e.g.
+ *  Sol 5 standing in for a quota-locked Codex lane, owner 2026-08-17), and
+ *  the decision sits in the run's own artifacts rather than in code. */
+const obligationDispatch = (ctx: any, kind: string): any | null => {
+  try {
+    const rows = readFileSync(join(ctx.repo, 'research', `${ctx.run}-obligations.jsonl`), 'utf8')
+      .split('\n').filter(Boolean).map((l) => JSON.parse(l));
+    return rows.find((r) => r.kind === kind && r.status === 'open' && r.dispatch)?.dispatch ?? null;
+  } catch { return null; }
+};
+
+/** An external platform outage answering for a whole lane: an account session
+ *  limit ("You've hit your session limit · resets 12pm"), a provider-wide 429
+ *  or quota refusal. During one, a judge re-sweep is a guaranteed null — the
+ *  terra limit on frontier-15 burned both of 6-judge's repair rounds on
+ *  re-sweeps that could not have succeeded, and the stage exhausted into a
+ *  manual rounds-reset. Deliberately NOT matched: UNPARSEABLE (a prose verdict
+ *  re-spends on a round, correctly) and NO_CONTENT alone (Terra's account
+ *  fault answered that way for hours — an outage classifier that matches a
+ *  bare empty answer would wait forever on a lane that is dead, not busy).
+ *
+ *  THIS CLASSIFIER BECAME LOAD-BEARING ON 2026-08-23. It was written for a
+ *  second-lane outage while the agent lanes ran on a different account; the
+ *  owner has now moved every agent role AND the second judge lane onto one
+ *  Codex subscription, so a single "You've hit your session limit" answers for
+ *  the whole run rather than for one lane. `session limit` is matched and stays
+ *  matched. Do not narrow this pattern. */
+export const OUTAGE_SIGNATURE = /session limit|resets \d|rate.?limit|\b429\b|quota exceeded|overloaded/i;
+
+/** The judge-lane outage test: of the ledger rows written since `sinceIso`,
+ *  at least one is a null verdict and EVERY null carries the outage
+ *  signature. Returns the first such reason, or null. One non-outage null —
+ *  an unparseable verdict, a genuine tool fault — means a repair round is
+ *  the right spend after all. */
+export const judgeOutageSince = (ctx: any, sinceIso: string): string | null => {
+  let rows: any[];
+  try {
+    rows = readFileSync(R(ctx, 'research', `${ctx.run}-judge.jsonl`), 'utf8')
+      .trim().split('\n').filter(Boolean).map((l) => JSON.parse(l));
+  } catch { return null; }
+  const nulls = rows.filter((r) => r.keep === null && typeof r.at === 'string' && r.at >= sinceIso);
+  if (!nulls.length) return null;
+  const reasons = nulls.map((r) => String(r.reason ?? ''));
+  if (!reasons.every((why) => OUTAGE_SIGNATURE.test(why))) return null;
+  return reasons[0].replace(/\s+/g, ' ').slice(0, 160);
+};
+
+const OUTAGE_CLASSIFIERS: Record<string, (ctx: any, startedAt: string) => string | null> = {
+  'judge-closure': judgeOutageSince,
+};
+
+/** Run the table's repair for EVERY failing gate that has one — the primary
+ *  failure and every advisory one the same battery named.
+ *
+ *  WHY ALL OF THEM. The battery stops at its first failure and then runs the
+ *  rest read-only, so that one battery names every failure rather than one per
+ *  round. That is the whole point of `failure.advisory`. But the repair hook
+ *  read only `failure.id`, so a mechanical repair keyed to an ADVISORY gate was
+ *  never attempted: it sat starved behind whichever gate happened to fail
+ *  first, for as many rounds as the stage had.
+ *
+ *  On frontier-16 that cost the run. `url-liveness` failed on one unreachable
+ *  citation and `source-fetch-check` failed advisory on 28 sources across six
+ *  of seven pages. The 28 were the STAMPABLE case — `--stamp` fetches the
+ *  bodies and verifies them, deterministically, and the entry for it sits in
+ *  the table right here. It never ran once in five batteries and two repair
+ *  rounds, because a different gate was first. The run exhausted its rounds
+ *  and blocked with a repair it owned, untried.
+ *
+ *  A mechanical repair is deterministic, idempotent and cheap, and it runs in
+ *  THIS process rather than in a dispatched agent's sandbox — which is also
+ *  where the network is. There is no reason to ration them one per round.
+ *
+ *  'clean'      — every repair that ran exited 0; the battery re-verifies.
+ *  'outage'     — some repair's failures were all an external platform outage
+ *                 (`reason` carries the evidence); the hook returns it and the
+ *                 executor waits on a clock instead of spending a round.
+ *                 Classified BEFORE exit status is read: during an outage the
+ *                 tool itself runs fine while every call it made was refused.
+ *  'residual'   — a repair ran and left named failures (stderr carries
+ *                 `fetch-check-...: <page>: <url>` lines, or a bare URL); the
+ *                 caller may route the residue to a scouting dispatch.
+ *  'unhandled'  — no table entry for any of the failing gates. */
+export const mechanicalRepair = async ({ ctx, failure, excludeGateIds = [], judgeLineup = 'sol61', judgeEffort = 'high' }: any): Promise<{ outcome: string; stderr?: string; reason?: string; handledIds?: string[] }> => {
+  const excluded = new Set((excludeGateIds ?? []).map(String));
+  const failing = [failure, ...(failure?.advisory ?? [])].filter((f: any) => f?.id);
+  const handled = failing.filter((f: any) => !excluded.has(String(f.id)) && MECHANICAL_REPAIRS[f.id]);
+  if (!handled.length) return { outcome: 'unhandled' };
+
+  // A failed transport request is not evidence that a reviewed source is gone.
+  // Do not retire its coverage or launch a reharvest after the gate's retry.
+  if (handled.some((f: any) => f.id === 'url-liveness')) {
+    const path = R(ctx, 'research', `${ctx.run}-url-liveness.json`);
+    if (existsSync(path)) {
+      const dead = (JSON.parse(readFileSync(path, 'utf8')).rows ?? []).filter((r: any) => !r.ok);
+      if (dead.length && dead.every((r: any) => r.status === 0 &&
+        /curl: \((6|7|16|18|28|35|52|56)\)|ECONNRESET|ETIMEDOUT|EAI_AGAIN|socket hang up/i.test(r.error ?? ''))) {
+        return { outcome: 'outage', reason: `URL transport failure; preserve reviewed sources: ${dead.map((r: any) => r.url).join(', ')}` };
+      }
+    }
+  }
+
+  const { spawnSync } = await import('node:child_process');
+  const residues: string[] = [];
+  const handledIds: string[] = [];
+  for (const f of handled) {
+    const declared = MECHANICAL_REPAIRS[f.id](ctx);
+    // One gate may own several repairs, run in order, most-preferred first.
+    const commands: string[][] = Array.isArray(declared[0]) ? declared as string[][] : [declared as string[]];
+    const startedAt = new Date().toISOString();
+    let r: any = { status: 0, stderr: '', stdout: '' };
+    // EVERY step runs, and the LAST one decides. An earlier step leaving
+    // residue is not a failure of the chain — it is why the later steps exist.
+    // `url-liveness` is the shape: the archive swap exits 1 on a citation it
+    // cannot recover, and the retire step then removes it if nothing would be
+    // lost. Breaking on the first non-zero would skip the step that resolves
+    // the case, which is the starvation this whole loop was rewritten to end.
+    for (const argvTail of commands) {
+      r = spawnSync('node', f.id === 'judge-closure'
+        ? [...argvTail, '--lineup', judgeLineup, ...(judgeEffort ? ['--effort', judgeEffort] : [])]
+        : argvTail,
+        { cwd: ctx.repo, encoding: 'utf8' });
+    }
+    const classify = OUTAGE_CLASSIFIERS[f.id];
+    const directOutage = f.id === 'judge-closure' && r.status === 3
+      ? String(r.stderr || r.stdout || 'judge provider outage').replace(/\s+/g, ' ').slice(-300)
+      : null;
+    const reason = directOutage ?? (classify ? classify(ctx, startedAt) : null);
+    // An outage short-circuits: the round is refunded and the clock waited on,
+    // so running the remaining repairs against a platform that is refusing
+    // calls would spend work to learn what this already knows.
+    if (reason) return { outcome: 'outage', reason };
+    // Every repair is attempted even after one leaves residue. They are
+    // independent — a dead citation and an unstamped source are different
+    // defects on different rows — and stopping at the first would reinstate
+    // exactly the starvation this loop exists to end.
+    if (r.status !== 0) residues.push((r.stderr || r.stdout || '').trim());
+    else handledIds.push(f.id);
+  }
+  if (residues.length) return { outcome: 'residual', stderr: residues.join('\n'), handledIds };
+  return { outcome: 'clean', handledIds };
+};
+
+/** Owner instruction (2026-08-17): when a source cannot be fetched or
+ *  recovered mechanically, a BETA SCOUTS an alternate URL for the same
+ *  source — that judgment is the one step no table can make, and burning
+ *  repair rounds on it (the first live firing exhausted all three on a
+ *  2-page archive capture the full-text gate rightly refused) routes it to
+ *  a person when the design routes it to an agent. Parse the failing pages
+ *  out of the repair residue, map page -> owning batch via the scope
+ *  ledger, one scouting lane per batch. */
+/** Normalised for comparison: the same URL reaches us HTML-escaped in one
+ *  report and raw in another, and error text often carries trailing punctuation. */
+const sameUrl = (a: string, b: string) => {
+  const n = (u: string) => u.replace(/&amp;/g, '&').replace(/[.,;)\]]+$/, '').trim();
+  if (n(a) === n(b)) return true;
+  try {
+    const [x, y] = [new URL(n(a)), new URL(n(b))];
+    return x.host === y.host && x.pathname === y.pathname;
+  } catch { return false; }
+};
+
+/** Is this `validate-plan` failure the one class that is an EDGE DECISION?
+ *
+ *  That gate is repo-wide and fails for heterogeneous reasons — a cycle, a
+ *  forward reference, an unresolved id, a page over the 100-item ceiling — and
+ *  most are not anybody's edge to decide. Only `undeclared-prereq` is: an item
+ *  whose `deps` reach a page outside its own page's `requires` closure, settled
+ *  exactly as a splice refusal is (apply a backward edge the item genuinely
+ *  consumes, strike the dependency, block a forward one as owner-only).
+ *
+ *  ASK THE TOOL. `failure.why` is the gate's last line — for this gate, the
+ *  word "FAIL" — and `failure.output` is a truncated tail holding whichever
+ *  part of a long report happened to fit. Matching either decided this by which
+ *  lines landed in the slice, and on its first live firing that was a run of
+ *  `redundant-prereq` warnings and no dispatch at all.
+ *
+ *  Shared by every stage that gates on validate-plan: the class does not change
+ *  with the stage, and neither does who settles it. The 5a Alphas repair items
+ *  under their step-5 licence, so a repair can introduce one of these long
+ *  after step 4 — frontier-16 met exactly that, one edge, at step 3. */
+export const isEdgeDecision = async ({ ctx, failure }: any): Promise<boolean> => {
+  if (failure?.id !== 'validate-plan') return false;
+  const { spawnSync } = await import('node:child_process');
+  const v = spawnSync('node', ['tools/physics-support/validate-plan.mjs', 'research/plan-spec.json'],
+    { cwd: ctx.repo, encoding: 'utf8' });
+  return /undeclared-prereq/.test(`${v.stdout ?? ''}${v.stderr ?? ''}`);
+};
+
+/** The lane that settles an edge, wherever the failure surfaced. */
+export const dispatchEdgeAdjudication = ({ ctx, executor, stage, round }: any) => {
+  executor.start(stage, {
+    role: 'alpha',
+    label: `step4-adjudicate-${round}`,
+    job: 'adjudication',
+    covers: [],
+    brief: 'briefs/alpha.md',
+    task: [`research/${ctx.run}-alpha-step4.task.md`],
+    timeout: 3600,
+  });
+};
+
+export const dispatchSourceScouts = ({ ctx, executor, stage, round, stderr }: any) => {
+  const text = String(stderr ?? '');
+  const pages = new Set<string>([...text.matchAll(/fetch-check-[a-z-]+: ([a-z0-9-]+):/g)].map((m: any) => m[1]));
+
+  // A URL-LIVENESS FAILURE NAMES A URL, NOT A PAGE, and the router used to read
+  // only `source-fetch-check`'s format. `url-recover-apply` reports
+  // `ERROR recover-apply-unrecoverable: <url>` — recovery works on URLs, so
+  // there is no page id in the line — and the match above produced nothing, so
+  // `dispatchSourceScouts` returned false and the stage THREW. Both repair
+  // rounds burned on that throw and the run raised a blocker needing a person,
+  // for the one case this stage already has an automated answer to: the
+  // `beta-source-scout` task exists precisely to find a live URL for a source
+  // whose citation cannot be fetched, and its own text opens "dead with no
+  // usable archive copy".
+  //
+  // Mapping a URL back to its batch is mechanical and exact — the coverage
+  // files record which page cites which source — so it is code, not judgment.
+  // Which REPLACEMENT to pick stays the scout's judgment, which is the part
+  // that needed an agent all along.
+  const urls = [...new Set([...text.matchAll(/https?:\/\/[^\s"'<>]+/g)].map((m: any) => m[0]))];
+  if (urls.length) {
+    for (const b of batches(ctx)) {
+      const f = join(R(ctx, 'research'), `${ctx.run}-batch-${b}.coverage.json`);
+      if (!existsSync(f)) continue;
+      let cov: any;
+      try { cov = JSON.parse(readFileSync(f, 'utf8')); } catch { continue; }
+      for (const p of cov.pages ?? []) {
+        for (const s of p.sources ?? []) {
+          if (s?.url && urls.some((u: any) => sameUrl(u, s.url))) pages.add(p.page ?? p.id);
+        }
+      }
+    }
+  }
+
+  if (!pages.size) return false;
+  const ledger = JSON.parse(readFileSync(join(R(ctx, 'research'), `${ctx.run}-scope-ledger.json`), 'utf8'));
+  const batchOf = new Map(ledger.pages.map((p: any) => [p.id, String(p.batch)]));
+  const owed = [...new Set([...pages].map((p) => batchOf.get(p)).filter(Boolean))];
+  // WHICH TASK. A dead URL and a dead SOURCE are different jobs. Scouting looks
+  // for another way to reach the same document; re-harvesting accepts the
+  // document is gone and looks for a different treatment carrying the same
+  // results. `backing-lost` is the second, and it names authored results that
+  // would otherwise be deleted along with their source row — silently, since
+  // every other gate validates what is present.
+  const lostBacking = /backing-lost:/.test(text);
+  const task = lostBacking
+    ? [`research/${ctx.run}-beta-reharvest.task.md`, `research/${ctx.run}-beta-source-scout.task.md`]
+    : [`research/${ctx.run}-beta-source-scout.task.md`, `research/${ctx.run}-beta-fix.task.md`];
+  for (const b of owed) {
+    executor.start(stage, {
+      role: 'beta',
+      label: `${lostBacking ? 'reharvest' : 'source-scout'}-${round}-b${b}`,
+      job: 'scouting',
+      covers: [b],
+      brief: 'briefs/beta-scaffold.md',
+      task,
+      timeout: 3600,
+    });
+  }
+  return owed.length > 0;
+};
+
+/** Scope loss is invisible to every gate that reads the current state.
+ *
+ *  On frontier-14 a fully scaffolded A/B pair — 19 items, three verified
+ *  sources, complete contracts, reviewed by a group Alpha — was removed from
+ *  the manifest, the harvest and the contracts between step 3 and step 4, and
+ *  every gate stayed green. They validate what is IN the artifacts; none can
+ *  see a page that is no longer there. This one compares against what step 0
+ *  said the run owed. */
+const scopeGate = (ctx) => gate('manifest-integrity',
+  ['node', 'tools/physics-support/manifest-integrity.mjs', '--run', ctx.run]);
+
+const urlGate = (ctx) => gate('url-liveness', [
+  'node', 'tools/physics-support/url-sweep.mjs', '--coverage',
+  ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.coverage.json`),
+  '--out', `research/${ctx.run}-url-liveness.json`, '--recover', '--fail-on-dead',
+], {
+  // Documented drops are decisions, not live URLs. Empty selections still fail.
+  liveness: { pattern: /(\d+) citation decision\(s\)/.source, min: 1, unit: 'citation decisions' },
+});
+
+// A dead citation is a broken link; a dead SOURCE is missing mathematics. This
+// gate is the second question, and it is the only one that can see it: it maps
+// every authored result back to the sources that back it, and fails when a
+// result has none a reader can open. Without it the cheapest way past a dead
+// citation is to delete the source row — which deletes its `included` results
+// too, silently, because every other gate validates what is present.
+//
+// It runs AFTER `url-liveness`, whose artifact it reads, and writes the
+// re-harvest work list the scout is dispatched against.
+const backingGate = (ctx) => gate('source-backing', [
+  'node', 'tools/physics-support/source-backing.mjs',
+  '--coverage', batchCoverages(ctx).join(','),
+  '--liveness', `research/${ctx.run}-url-liveness.json`,
+  '--reharvest-plan', `research/${ctx.run}-reharvest-plan.json`,
+], {
+  // "0 results checked, all backed" is a coverage-selection defect, not a pass.
+  liveness: { pattern: /(\d+) authored result\(s\)/.source, min: 1, unit: 'authored results' },
+});
+
+// ---------------------------------------------------------------------------
+// THE QUALITY-CONTROL GATES, AND WHY THEY ARE HERE NOW
+//
+// This engine used to gate on fourteen tools. The library has sixty, and the
+// decisive ones — the proof contract, the finite smoke tests, the risk tiers,
+// the blast radius, the spine receipt, and above all `level-coverage` — were in
+// none of the thirteen stages. `level-coverage` did not appear anywhere in the
+// autopilot source at all.
+//
+// They were not skipped. They were run BY THE ALPHAS, by hand, and reported in
+// prose. frontier-14's step-7 report contains a "Gate state at hand-off" table
+// whose last row reads `level-coverage BLOCKED`. The engine never saw it, because
+// a markdown table is not an exit code. Step 8 ran, step 9 ran, and the build
+// reported done with two fatal defects open and its receipt gate red.
+//
+// A gate a model runs and describes is a description. A gate the engine runs is
+// a gate. Every signature below was read from the tool's own usage output, not
+// recalled — four of six invocations were invented last time this was written.
+// ---------------------------------------------------------------------------
+
+/** The merged contract path. One place, because two would disagree. */
+const contractsPath = (ctx) => `research/${ctx.run}-proof-contracts.json`;
+const touchesPath = (ctx) => `research/${ctx.run}-touches.json`;
+const closurePath = (ctx) => `research/${ctx.run}-judge-closure.json`;
+const terminalResolutionsPath = (ctx) => `research/${ctx.run}-step7-terminal-resolutions.jsonl`;
+const step8ChangesPath = (ctx) => `research/${ctx.run}-step8-changes.json`;
+const step8ChangesScopePath = (ctx) => `research/${ctx.run}-step8-changes.pages.json`;
+const step8ClosurePath = (ctx) => `research/${ctx.run}-step8-judge-closure.json`;
+const step8ScopeDeltaPath = (ctx) => `research/${ctx.run}-step8-scope-delta.json`;
+const step8ScopeReviewPath = (ctx) => `research/${ctx.run}-alpha-step8-review.md`;
+const step8ScopeRegisterPath = (ctx) => `research/${ctx.run}-alpha-step8.md`;
+const auditorCertificationsPath = (ctx, step: number) => `research/${ctx.run}-step${step}-auditor-certifications.json`;
+const auditorCertificationArgs = (ctx) => ['--run', ctx.run, '--auditor-certifications',
+  [7, 8].map(step => auditorCertificationsPath(ctx, step)).join(',')];
+const auditorCreatedGate = (ctx, step: 7 | 8) => gate(`step${step}-auditor-created-certifications`,
+  ['node', 'tools/physics-support/auditor-created-items.mjs', 'certify', '--run', ctx.run, '--step', String(step)]);
+
+function currentAuditorCreatedIds(ctx, step: 7 | 8): Set<string> {
+  const paths = [7, 8].filter(value => value <= step).map(value => R(ctx, auditorCertificationsPath(ctx, value)));
+  const rows = loadAuditorCreatedCertifications(paths, { root: ctx.repo, run: ctx.run, steps: [7, 8] });
+  return new Set(rows.filter(row => row.step === step).map(row => row.id));
+}
+
+const step8ChangesRefreshArgv = (ctx: any): string[] => ['tools/physics-support/step8-changes.mjs',
+  '--touches', touchesPath(ctx), '--baseline', 'post-step7',
+  '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
+  '--out', step8ChangesPath(ctx), '--scope-out', step8ChangesScopePath(ctx), '--root', ctx.repo];
+
+function writeStep8GateEnvelope({ ctx, stage, round, failures, mechanicalStderr = '' }: any): string {
+  const rel = `research/${ctx.run}-${stage.id}-gate-envelope-${round}.task.md`;
+  const envelope = {
+    version: 1, run: ctx.run, stage: stage.id, round,
+    failures: failures.map((entry: any) => ({
+      id: String(entry.id), stage: entry.stage ?? stage.id,
+      why: String(entry.why ?? ''), output: String(entry.output ?? ''),
+      named_ids: itemsFromGateFailure(entry),
+    })),
+    mechanical_residue: String(mechanicalStderr ?? ''),
+  };
+  writeFileSync(R(ctx, rel), [
+    `# Exact Step-8 gate envelope — round ${round}`,
+    '',
+    'The JSON envelope is the complete primary/advisory failure set assigned to this dispatch.',
+    'Adjudicate every entry; do not infer scope from whichever event happened to be logged last.',
+    '', '```json', JSON.stringify(envelope, null, 2), '```', '', '---', '',
+    readFileSync(R(ctx, 'briefs/tasks/alpha-step8-gate-adjudication.md'), 'utf8').trim(), '',
+  ].join('\n'));
+  return rel;
+}
+
+/** Step 8 cannot start its Alpha until the exact delta has been captured and
+ * every group decision file has been refreshed from that frozen comparison.
+ * The preparation command performs those two writes serially. */
+const step8ScopePrepared = (ctx): boolean => existsSync(R(ctx, step8ScopeDeltaPath(ctx)))
+  && alphaGroups(ctx).every((group) => existsSync(R(ctx,
+    `research/${ctx.run}-alpha-${group.label}-scope-decisions.json`)));
+
+/** The closure receipt the judge gate writes, or null before it has ever run.
+ *  Read fresh every time — it is rewritten by each gate run, and a cached copy
+ *  would name repairs that have since landed. */
+function readClosure(ctx): {
+  needs_rejudge: string[];
+  unadjudicated: string[];
+  unadjudicated_rows?: Array<{ id: string; model: string; context_sha256: string }>;
+  open_fatal: string[];
+  open_fatal_rows?: Array<{ id: string; model: string; context_sha256: string }>;
+  closed: boolean;
+} | null {
+  const p = R(ctx, closurePath(ctx));
+  if (!existsSync(p)) return null;
+  try { return JSON.parse(readFileSync(p, 'utf8')); } catch { return null; }
+}
+
+function readStep8Closure(ctx): ReturnType<typeof readClosure> {
+  const p = R(ctx, step8ClosurePath(ctx));
+  if (!existsSync(p)) return null;
+  try { return JSON.parse(readFileSync(p, 'utf8')); } catch { return null; }
+}
+
+/** Every mathematical item Step 8 created or modified after the Step-7
+ * baseline.  This is the exact certification boundary, not an agent claim. */
+function readStep8Changes(ctx): string[] {
+  try {
+    const receipt = JSON.parse(readFileSync(R(ctx, step8ChangesPath(ctx)), 'utf8'));
+    return Array.isArray(receipt?.items) ? receipt.items.filter((id: any) => typeof id === 'string') : [];
+  } catch { return []; }
+}
+
+/** Derive the same Step-8 delta before its receipt exists so the first judge
+ * dispatch already has the exact set. */
+function step8ChangesOnDisk(ctx): string[] {
+  // Certification errors are holds, not an empty mathematical change set.
+  const certified = currentAuditorCreatedIds(ctx, 8);
+  try {
+    const touches = JSON.parse(readFileSync(R(ctx, touchesPath(ctx)), 'utf8'));
+    const baseline = [...(touches.snapshots ?? [])].reverse().find((s: any) => s.label === 'post-step7');
+    if (!baseline?.hashes) return [];
+    return readdirSync(R(ctx, 'items')).filter((name) => name.endsWith('.md'))
+      .map((name) => name.slice(0, -3)).filter((id) => !certified.has(id) && !isPublishedItem(ctx.repo, id)).filter((id) => {
+        const hash = shortHash(itemHashGuard(readFileSync(R(ctx, 'items', `${id}.md`), 'utf8')));
+        return !(id in baseline.hashes) || baseline.hashes[id] !== hash;
+      }).sort();
+  } catch { return []; }
+}
+
+const step8ChangesGate = (ctx) => gate('step8-changes', ['node', 'tools/physics-support/step8-changes.mjs',
+  '--touches', touchesPath(ctx), '--baseline', 'post-step7',
+  '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
+  '--out', step8ChangesPath(ctx), '--scope-out', step8ChangesScopePath(ctx), '--check']);
+
+const step8ClosureGate = (ctx) => gate('step8-judge-closure', ['env', 'JUDGE_LINEUP=sol61', 'node', 'tools/physics-support/level-coverage.mjs',
+  '--judge-only', '--verify-current-context', '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
+  '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+  ...auditorCertificationArgs(ctx),
+  '--out', step8ClosurePath(ctx), step8ChangesScopePath(ctx)]);
+
+const scopeDecisionsGate = (ctx) => gate('scope-decisions', ['node', 'tools/physics-support/scope-decisions.mjs',
+  'check', '--run', ctx.run]);
+
+const step7GuardGate = (ctx) => gate('step7-guard', ['node', 'tools/physics-support/step7-guard.mjs',
+  '--touches', touchesPath(ctx), '--baseline', 'pre-step7-v2',
+  '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
+  '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+  '--scope', `research/${ctx.run}-step7-scope.json`,
+  '--auditor-certifications', auditorCertificationsPath(ctx, 7),
+  '--terminal-resolutions', terminalResolutionsPath(ctx),
+  '--owner-prerequisite-repairs', `research/${ctx.run}-step7-owner-prerequisite-repairs.jsonl`]);
+
+/** Item ids printed by the standard `ERROR code [item-id]:` gate grammar. */
+export function repairGateOutput(failure: any): string {
+  let text = String(failure?.output ?? '');
+  if (failure?.id === 'boundary-audit') {
+    if (text.trim().startsWith('{')) {
+      const report = JSON.parse(text);
+      // Only unresolved candidates. Reviewed/upheld rows remain in the full
+      // evidence artifact, never in a repair assignment.
+      return [
+        ...(report.templates ?? []).flatMap((cluster: any) =>
+          (cluster.rows ?? []).map((row: any) =>
+            `ERROR boundary-template [${row.id}]: ${JSON.stringify(row)}`)),
+        ...(report.contradicted ?? []).map((row: any) =>
+          `ERROR boundary-contradicted [${row.id}]: ${JSON.stringify(row)}`),
+      ].join('\n');
+    }
+    // Preserve compatibility with reports already captured by a live run.
+    text = text.split(/^TEMPLATE CANDIDATES UPHELD|^UPHELD BY REVIEW/m)[0];
+  }
+  // Dependency reports put warnings and the whole inventory before this
+  // section. Only the error section names repair subjects.
+  const section = text.match(/^\s*\d+ ERROR\(s\):\s*$/m);
+  if (section?.index !== undefined) text = text.slice(section.index);
+  // Risk reports list every passing item before their ERROR records. Those
+  // inventory rows are context, not repair subjects.
+  if (/^\s*ERROR\b/m.test(text)) {
+    const records = text.split(/(?=^(?:ERROR|WARN(?:ING)?|ORDINARY|MODERATE|HIGH|CRITICAL)\b)/m);
+    text = records.filter(record => /^\s*ERROR\b/.test(record)).join('');
+  }
+  return text.trim();
+}
+
+export function itemsFromGateFailure(failure: any): string[] {
+  const text = repairGateOutput(failure) || String(failure?.why ?? '');
+  const grammar = '[a-z][a-z0-9]*(?:-[a-z0-9]+){2,}';
+  const itemGrammar = '(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)+';
+  const itemSummaryIds = [...text.matchAll(/^\s*items:\s*(.*)$/gmi)]
+    .flatMap((m) => [...m[1].matchAll(new RegExp(itemGrammar, 'g'))].map((hit) => hit[0]));
+  const subjects = text.split('\n').flatMap(line => {
+    // A cited supplier is context, not the subject of this diagnostic.
+    const primary = /^\s*(?:ERROR|FAIL)\b[^\n]*?\[([a-z][a-z0-9-]+)\]/.exec(line)?.[1]
+      ?? /^\s*\[[a-z0-9-]+\]\s+items\/([a-z][a-z0-9-]+)\.md:/.exec(line)?.[1];
+    return primary && new RegExp(`^${itemGrammar}$`).test(primary) ? [primary] : [];
+  });
+  if (subjects.length) return [...new Set(subjects)];
+  return [...new Set([
+    ...[...text.matchAll(new RegExp(`\\[(${grammar})\\]`, 'g'))].map((m) => m[1]),
+    ...[...text.matchAll(new RegExp(`\\\`(${grammar})\\\``, 'g'))].map((m) => m[1]),
+    ...[...text.matchAll(new RegExp(`^\\s*(?:ERROR|FAIL)\\s+[a-z0-9-]+:\\s+(${grammar})(?=[:\\s])`, 'gmi'))].map((m) => m[1]),
+    ...[...text.matchAll(new RegExp(`items/(${grammar})\\.md`, 'g'))].map((m) => m[1]),
+    ...[...text.matchAll(new RegExp(`^\\s*(${itemGrammar})\\s+\\[[^\\]]+\\]`, 'gmi'))].map((m) => m[1]),
+    ...itemSummaryIds,
+  ])];
+}
+
+
+/** Stable dependency-first order, including dependencies through unqueued items. */
+export function dependencyFirst(ids: string[], dependencies: (id: string) => string[]): string[] {
+  const queued = new Set(ids);
+  const visiting = new Set<string>();
+  const visited = new Set<string>();
+  const ordered: string[] = [];
+  const visit = (id: string) => {
+    if (visited.has(id)) return;
+    if (visiting.has(id)) throw new Error(`Final-adjudicator dependency cycle at ${id}`);
+    visiting.add(id);
+    for (const dep of [...dependencies(id)].sort()) visit(dep);
+    visiting.delete(id);
+    visited.add(id);
+    if (queued.has(id)) ordered.push(id);
+  };
+  for (const id of [...queued].sort()) visit(id);
+  return ordered;
+}
+
+
+/** The group labels that own the given item ids, in assignment order.
+ *
+ *  Read from `<run>-step7-scope.json`, which `7-scope` renders mechanically
+ *  from the batch manifests and the validated group assignment. A repair round
+ *  uses this to send each open fatal back to the Alpha holding that batch's
+ *  conventions rather than to whichever lane is free.
+ *
+ *  An id the scope does not know — a step-8 build, or an item added after the
+ *  render — has no owner, and returning nothing for it would silently drop a
+ *  fatal defect. It falls to EVERY group instead: an Alpha told to repair an
+ *  item outside its batches declines and records a cross-group finding, which
+ *  the `step7-scope` gate then refuses to let the stage close over. Loud beats
+ *  lost.
+ *
+ *  A SINGLE `null` MEANS "no partition": the run has no group assignment yet, or
+ *  `7-scope` has not rendered. The caller then dispatches one whole-level Alpha,
+ *  which is what step 7 did before it was partitioned. This is the one case that
+ *  must never return an empty list — an empty list is a repair round that
+ *  dispatches nothing and reports a spent round, which is how an open fatal
+ *  reaches step 9.
+ */
+function step7Owners(ctx, ids: string[]): Array<string | null> {
+  const labels = alphaGroups(ctx).map((g: any) => String(g.label));
+  if (!labels.length) return [null];
+  const p = R(ctx, `research/${ctx.run}-step7-scope.json`);
+  if (!existsSync(p)) return labels;
+  let byItem: Record<string, string> = {};
+  try { byItem = JSON.parse(readFileSync(p, 'utf8'))?.by_item ?? {}; } catch { return labels; }
+  const owners = new Set<string>();
+  let unknown = false;
+  for (const id of ids) {
+    const g = byItem[id];
+    if (g) owners.add(g); else unknown = true;
+  }
+  if (unknown) return labels;
+  const hit = labels.filter((l) => owners.has(l));
+  return hit.length ? hit : [null];
+}
+
+/**
+ * Proof-obligation gates: merge the per-batch contracts, then check them.
+ *
+ * The merge is gate zero on purpose. `runGates` is sequential and stops at the
+ * first failure, so a merge that fails means the checks below it never claim to
+ * have passed over a stale file. Step 8 of frontier-14 re-merged to fold in a
+ * late batch and left `proof-contract --strict` red for the rest of the run.
+ *
+ * `--require-reviewed` is a RISK-REPORT flag, not a proof-contract one — read
+ * from `tools/physics-support/risk-report.mjs`'s usage line. It demands an Alpha `risk_review`
+ * disposition, which only exists after step 5, so it is off at step 3. Asking
+ * group authors for another role's record can never pass on a fresh level.
+ */
+const contractGates = (ctx, { reviewed = false }: { reviewed?: boolean } = {}) => {
+  const merged = contractsPath(ctx);
+  const perBatch = batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.proof-contracts.json`);
+  return [
+    gate('merge-contracts', ['node', 'tools/physics-support/merge-proof-contracts.mjs', '--level', ctx.run, merged, ...perBatch]),
+    gate('proof-contract', ['node', 'tools/physics-support/proof-contract.mjs', merged, '--strict']),
+    gate('finite-smoke', ['node', 'tools/physics-support/finite-smoke.mjs', merged]),
+    gate('risk-report', ['node', 'tools/physics-support/risk-report.mjs', merged, ...(reviewed ? ['--require-reviewed'] : [])]),
+    // A templated `not_applicable` boundary row is not a disposition. On
+    // frontier-13 two false template rows each hid a fatal defect, and on
+    // frontier-14 three did — three times out of three that anyone looked.
+    gate('boundary-audit', ['node', 'tools/physics-support/boundary-audit.mjs', merged,
+      '--fail-on-contradicted', '--fail-on-template', '--json']),
+    gate('citation-fidelity', ['node', 'tools/physics-support/citation-fidelity.mjs', merged, '--fail-on-missing-quote']),
+    // The gate that checks the gates. finite-smoke once reported "0 error(s), 0
+    // check(s)" for most of a run: a green tick over an empty scope.
+    gate('gate-liveness', ['node', 'tools/physics-support/gate-liveness.mjs', '--run', ctx.run,
+      '--contracts', merged,
+      '--checklists', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.coverage.json`).join(','),
+      '--min-checks', '1']),
+  ];
+};
+
+/** Current author gates for verified continuations, without invented Step-3 work. */
+export const authoredContentGates = (ctx: any) => [
+  ...repoWide(ctx), planGate(), policyItemGate(ctx),
+  ...contractGates(ctx, { reviewed: false }),
+];
+
+/** The defect ledger: whoever writes a disposition writes the row, and this
+ *  gate holds the two accountable to each other — every confirmed_fatal
+ *  adjudication owned by exactly one row (anti-double-count), step-5-caught
+ *  rows whenever a 5a report exists (the clause that stops the ledger being a
+ *  mirror of the adjudication file), and open rows agreeing with the closure
+ *  receipt (two blockers once lived only in markdown). */
+const ledgerGate = (ctx, { terminal = false } = {}) => gate('defect-ledger', ['node', 'tools/physics-support/defect-ledger.mjs', 'check',
+  '--run', ctx.run,
+  '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+  '--reader-decisions', `research/${ctx.run}-step7-alert-decisions.jsonl`,
+  '--closure', `research/${ctx.run}-judge-closure.json`,
+  // The terminal stage may not end with any open row; steps 8–9 tolerate a
+  // nonfatal one deliberately left open (step 8 owns the sweep that closes it).
+  ...(terminal ? ['--no-open'] : [])], {
+  liveness: { pattern: /(\d+) defect row\(s\) checked/.source, min: 1, unit: 'defect rows' },
+});
+
+/**
+ * Judge closure — the predicate that says whether the mathematics is signed off.
+ *
+ * Three questions, all answered against the text on disk right now: does every
+ * item have a current configured-judge verdict set, is every current rejection adjudicated, and
+ * is any adjudication `confirmed_fatal`. `--out` writes the ids in each class so
+ * the rejudge stage has something to dispatch from — frontier-14's step 7 named
+ * its 23 rejudge targets in a markdown table and the rejudge never ran, because
+ * nothing downstream could read a table.
+ *
+ * The allowances are per-stage and narrow:
+ *   step 6 — nothing is adjudicated yet, so rejections are expected;
+ *   step 7 — repairs legitimately void their own verdicts, and the next stage fixes
+ *            that; an unadjudicated rejection and an open fatal are NOT allowed.
+ *   after  — no allowances at all.
+ */
+const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, judgeLineup = 'sol61', excludePublished = true } = {}) =>
+  gate('judge-closure', ['env', `JUDGE_LINEUP=${judgeLineup}`, 'node', 'tools/physics-support/level-coverage.mjs',
+    '--judge-only', '--verify-current-context',
+    ...(excludePublished ? ['--exclude-published'] : []),
+    '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
+    '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+    ...auditorCertificationArgs(ctx),
+    '--terminal-resolutions', terminalResolutionsPath(ctx),
+    ...(allowUnadjudicated ? ['--allow-unadjudicated'] : []),
+    ...(pendingRejudge ? ['--allow-pending-rejudge'] : []),
+    '--out', closurePath(ctx),
+    ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`),
+  ], {
+    liveness: { pattern: /(\d+)\/(?:\d+) current pair/.source, min: 1, unit: 'judged pairs' },
+  });
+
+/** The whole-level receipt gate. The one frontier-14 never ran. */
+const levelCoverageGate = (ctx) => gate('level-coverage', ['env', 'JUDGE_LINEUP=sol61', 'node', 'tools/physics-support/level-coverage.mjs',
+  '--exclude-published',
+  '--contracts', contractsPath(ctx),
+  '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
+  '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+  ...auditorCertificationArgs(ctx),
+  '--terminal-resolutions', terminalResolutionsPath(ctx),
+  '--spine-receipt', `research/${ctx.run}-spine-audit.json`,
+  '--audit-receipt', `research/${ctx.run}-audit-coverage.json`,
+  '--verify-current-context',
+  ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`),
+], {
+  liveness: { pattern: /level-coverage: (\d+) item/.source, min: 1, unit: 'items' },
+});
+
+/** Blast radius, `pre-author -> post-5a`. Both endpoints are load-bearing:
+ *  a baseline taken after authoring makes the diff empty by construction
+ *  (hence `4-baseline` before step 3), and without an explicit `--to` the
+ *  tool diffs against the ledger's LAST snapshot — which at 5b time was
+ *  `pre-author` itself, so the gate diffed the baseline against itself and
+ *  confirmed "0 changed" over the whole level (hence `5a-baseline` before
+ *  5b). A second live `post-5a -> current` gate closes the lead Alpha's later
+ *  edits before Step 5 ends. */
+const impactGate = (ctx) => gate('impact-audit', ['node', 'tools/physics-support/impact-audit.mjs',
+  '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', 'post-5a',
+  '--direct-boundary',
+  '--receipt', `research/${ctx.run}-impact.json`,
+]);
+
+
+/**
+ * Build the result-file matcher from the dispatcher's own naming rule.
+ *
+ * `dispatch.mjs` writes `<role>-<label>.result.json` (its line 357). Thirteen
+ * stages hand-wrote a regex against that rule from memory, and they drifted:
+ * `/^alpha-step3-/` missed `alpha-alpha-step3-a.result.json`, produced when a
+ * caller's label already contains the role. The stage read 3/6 covered while a
+ * completed, ok:true result sat on disk.
+ *
+ * Deriving it removes the class. `role` and a label pattern are what a stage
+ * actually knows; the doubled `<role>-<role>-<label>` form and the
+ * `.result.json` suffix are the dispatcher's business, encoded once.
+ *
+ * The label pattern is anchored at both ends on purpose: without it,
+ * `batch-\d+` also matches `fix-batch-3`, and two stages count each other's work.
+ */
+const resultPattern = (role: string, labelSource: string): RegExp =>
+  new RegExp(`^${role}-(?:${role}-)?(?:${labelSource})\\.result\\.json$`);
+
+// ---------------------------------------------------------------------------
+// Scope, authoring, splicing and review are whole-frontier barriers.
+// Ownership is assigned by 2-assign; no reader starts while authors are active.
+// ---------------------------------------------------------------------------
+
+/** Each phase has its own receipts; old pair verdicts cannot clear item audits. */
+export function step3Plan(ctx: any, group: any, phase: 'scope' | 'final') {
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  const pairs = [...snapshot.pairs].filter(([, ps]: any) => group.covers.map(String).includes(String(ps[0].batch)));
+  const inputs = phase === 'scope'
+    ? pairs.map(([id]: any) => scopeHash(snapshot, id))
+    : [
+      ...pairs.flatMap(([, ps]: any) => ps.flatMap((p: any) => p.items.map((i: any) => itemHash(snapshot, i.id)))),
+      // Owner repair authority is itself an input to a Step-3 author call.
+      // Without it, a reopened escalation on unchanged incomplete bytes hashes
+      // to the already-finished label and the engine correctly refuses to
+      // repeat the identical call. Include both the readable direction and
+      // per-item owner receipts so a genuine reopen gets a distinct dispatch.
+      ...[
+        R(ctx, 'research', `${ctx.run}-owner-authoring-direction.md`),
+        ...pairs.flatMap(([, ps]: any) => ps.flatMap((p: any) => p.items.map((i: any) =>
+          R(ctx, 'research', `${ctx.run}-step3b-owner-${i.id}.json`)))),
+      ].filter(existsSync).map(path => readFileSync(path, 'utf8')),
+    ];
+  const key = createHash('sha256').update(JSON.stringify(inputs)).digest('hex').slice(0, 16);
+  const prefix = phase === 'scope' ? 'step3a' : 'step3b';
+  const label = `${prefix}-${group.label}-${key}`;
+  const task = `research/${ctx.run}-${label}.task.md`;
+  const itemOrder = phase === 'final' ? authorItemOrder(snapshot, pairs.map(([id]: any) => id)) : '';
+  const authorScope = phase === 'final' ? step3AuthorScopeNote() : '';
+  writeFileSync(R(ctx, task), `# ${prefix}: group ${group.label}\n\n- Run: ${ctx.run}\n- Batches: ${group.covers.join(', ')}\n- A pages: ${pairs.map(([id]: any) => id).join(', ')}\n- Read current manifests, coverage, prose, plan and dependency records.\n${authorScope}${itemOrder}- Write research/${ctx.run}-${prefix}-${group.label}.md.\n`);
+  return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
+    profile: DEEPSEEK_FLASH_MAX,
+    job: phase === 'scope' ? 'audit' : 'authoring', covers: group.covers,
+    brief: phase === 'scope' ? 'briefs/step3-scope.md' : 'briefs/group-author.md',
+    task, timeout: phase === 'scope' ? 10800 : 21600 };
+}
+
+function step3AuthorScopeNote(): string {
+  return '- Audit scaffolds for authoring readiness: hypotheses, sources, direct suppliers and proof route. Author every assigned item, including consumers with flagged unfinished suppliers; reconcile their actual proof uses and clear all required Step-3 gates before handoff. Thorough independent mathematical audit and systematic defect repair follow in Steps 5–8.\n';
+}
+
+function authorItemOrder(snapshot: any, pairIds: string[]): string {
+  const all = snapshot.pages.flatMap((page: any) => page.items ?? []);
+  // Historical completed runs predate scaffold labels. New runs are gated on
+  // them in Step 1; once any label exists, partial or stale labels fail closed.
+  if (!all.some((item: any) => item.dependency_level !== undefined)) return '';
+  const owned = new Set(pairIds.flatMap(id => (snapshot.pairs.get(id) ?? []).map((page: any) => page.id)));
+  const order = orderedItems(snapshot.pages).filter(row => owned.has(row.page));
+  return `- Audit and author in this exact dependency-level order (lower first; ties by page order and item ID):\n${order.map(row => `  ${row.level}. ${row.id} (${row.page})`).join('\n')}\n`;
+}
+
+/** Existing group dispatches keep their batch-sized identity through completion. */
+function legacyStep3(ctx: any): boolean {
+  const dir = R(ctx, 'research');
+  if (!existsSync(dir)) return false;
+  const task = new RegExp(`^${ctx.run}-step3[ab]-[a-z]-[a-f0-9]{16}\\.task\\.md$`);
+  return readdirSync(dir).some(f => task.test(f));
+}
+
+function step3Pairs(ctx: any): string[] {
+  if (!batches(ctx).length) return [];
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  // Manifest packing is affinity-based, so neither batch number nor JSON
+  // insertion order is a dependency order. Start lower planned pages first;
+  // the executor's explicit unit DAG supplies the actual readiness rule, while
+  // this stable order makes simultaneously ready authoring deterministic.
+  return [...snapshot.pairs.keys()].sort((a, b) => {
+    const ao = Number(snapshot.pairs.get(a)?.[0]?.order ?? 0);
+    const bo = Number(snapshot.pairs.get(b)?.[0]?.order ?? 0);
+    return ao - bo || a.localeCompare(b);
+  });
+}
+
+function pairBatches(ctx: any, unit: string, snapshot = loadStep3(ctx.repo, ctx.run)): string[] {
+  const pair = snapshot.pairs.get(unit) ?? [];
+  return [...new Set<string>(pair.map((p: any) => String(p.batch)))];
+}
+
+/** Direct in-run A/B-pair prerequisites to expose in author tasks.
+ * They are review inputs, not Step 3b dispatch barriers: the author writes
+ * every assigned item and flags unfinished suppliers for owner reconciliation. */
+function pairDependencies(snapshot: any, unit: string): string[] {
+  const pairForPage = new Map<string, string>();
+  for (const [id, pages] of snapshot.pairs) {
+    for (const page of pages as any[]) pairForPage.set(page.id, id);
+  }
+  const out = new Set<string>();
+  for (const page of snapshot.pairs.get(unit) ?? []) {
+    for (const requirement of page.requires ?? []) {
+      const dependency = pairForPage.get(requirement);
+      if (dependency && dependency !== unit) out.add(dependency);
+    }
+  }
+  return [...out].sort();
+}
+
+function pairAuthorCohort(ctx: any, unit: string): string[] {
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  const owned = new Set(pairBatches(ctx, unit, snapshot));
+  return step3Pairs(ctx).filter(id =>
+    pairBatches(ctx, id, snapshot).some(batch => owned.has(batch)));
+}
+
+/** Same briefs and model as a group dispatch; only its assigned work is narrowed. */
+export function step3PairPlan(ctx: any, unit: string, phase: 'scope' | 'final') {
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  const pair = snapshot.pairs.get(unit);
+  if (!pair) throw Error(`Unknown Step 3 pair ${unit}`);
+  const inputs = phase === 'scope' ? [scopeHash(snapshot, unit)] : [
+    ...pair.flatMap((p: any) => p.items.map((i: any) => itemHash(snapshot, i.id))),
+    ...[R(ctx, 'research', `${ctx.run}-owner-authoring-direction.md`),
+      ...pair.flatMap((p: any) => p.items.map((i: any) =>
+        R(ctx, 'research', `${ctx.run}-step3b-owner-${i.id}.json`)))
+    ].filter(existsSync).map(path => readFileSync(path, 'utf8')),
+  ];
+  const key = createHash('sha256').update(JSON.stringify(inputs)).digest('hex').slice(0, 16);
+  const prefix = phase === 'scope' ? 'step3a' : 'step3b';
+  const label = `${prefix}-pair-${unit}-${key}`;
+  const task = `research/${ctx.run}-${label}.task.md`;
+  const report = `research/${ctx.run}-${prefix}-pair-${unit}.md`;
+  const itemOrder = phase === 'final' ? authorItemOrder(snapshot, [unit]) : '';
+  const authorScope = phase === 'final' ? step3AuthorScopeNote() : '';
+  const directPairs = phase === 'final' ? pairDependencies(snapshot, unit) : [];
+  const prerequisiteNote = phase === 'final'
+    ? `- Direct in-run prerequisite pairs to inspect (they may still be unfinished): ${directPairs.length ? directPairs.join(', ') : 'none'}.\n- If an item supplier is not yet authored, flag its exact ID and consuming step in ${report}; author the assigned consumer anyway, then leave its decision escalated until the supplier and proof use are reconciled.\n`
+    : '';
+  writeFileSync(R(ctx, task), `# ${prefix}: A/B pair ${unit}\n\n- Run: ${ctx.run}\n- A page: ${unit}\n- B page: ${pair[1].id}\n- Batches: ${pairBatches(ctx, unit).join(', ')}\n- Own only this pair; preserve other pairs in shared batch files.\n- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.\n- Read current manifests, coverage, prose, plan and dependency records.\n${authorScope}${prerequisiteNote}${itemOrder}- Write ${report}.\n`);
+  return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
+    profile: DEEPSEEK_FLASH_MAX,
+    job: phase === 'scope' ? 'audit' : 'authoring', covers: [unit],
+    brief: phase === 'scope' ? 'briefs/step3-scope.md' : 'briefs/group-author.md',
+    task, timeout: phase === 'scope' ? 10800 : 21600 };
+}
+
+function pairPlans(ctx: any, pending: string[], phase: 'scope' | 'final') {
+  if (!pending.length || !batches(ctx).length) return [];
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  const selected: string[] = [], selectedBatches = new Set<string>();
+  for (const unit of pending) {
+    const owned = pairBatches(ctx, unit, snapshot);
+    if (phase === 'final' && owned.some(batch => selectedBatches.has(batch))) continue;
+    selected.push(unit);
+    if (phase === 'final') for (const batch of owned) selectedBatches.add(batch);
+  }
+  return selected.map(unit => step3PairPlan(ctx, unit, phase));
+}
+
+const step3Gate = (ctx: any, phase: 'scope' | 'final') => gate(
+  phase === 'scope' ? 'step3-scope' : 'step3-items',
+  ['node', 'tools/physics-support/step3-decisions.mjs', 'check', '--run', ctx.run, '--phase', phase]);
+
+async function step3Failure({ ctx, executor, stage, failure }: any, phase: 'scope' | 'final') {
+  // Artifact-incomplete recovery precedes the normal gate battery. Issue the
+  // completed authors' exact certifications before deciding who owes work;
+  // absent receipts must not turn their local additions into self-review jobs.
+  if (phase === 'final') {
+    try { certifyCompletedAuditorItems(ctx.repo, ctx.run); }
+    catch (error: any) { return { owner: { reason: `Step 3 certification failed: ${error.message}` } }; }
+  }
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  const result = checkStep3(snapshot, phase);
+  const held = result.work.filter((w: any) => w.owner);
+  if (held.length) return { owner: { reason: held.map((w: any) => w.reason).join('; ') } };
+  // A scope change during item repair needs an owner scope ruling, not another review loop.
+  if (phase === 'final' && result.work.some((w: any) => w.page))
+    return { owner: { reason: 'Scope changed after Step 3a; owner must record proceed for the current scope.' } };
+  if (result.closed)
+    return { owner: { reason: `Step 3 decisions are complete; resolve final mechanical gate ${failure.id} locally. No mathematical redispatch.` } };
+  const owed = new Set(result.work.map((w: any) => w.item
+    ? snapshot.pages.find((p: any) => p.items.some((i: any) => i.id === w.item))?.batch
+    : snapshot.pairs.get(w.page)?.[0].batch).filter(Boolean));
+  // The synthetic failure names only inactive, artifact-incomplete units. Do
+  // not sweep in an active sibling (or receipt-only work outside this failure).
+  const recoveryUnits = failure.id === 'stage-stalemate' ? new Set((failure.units ?? []).map(String)) : null;
+  let plans;
+  if (legacyStep3(ctx)) {
+    const groups = alphaGroups(ctx).filter(g => g.covers.some(b => owed.has(String(b))
+      && (!recoveryUnits || recoveryUnits.has(String(b)))));
+    plans = groups.map(g => step3Plan(ctx, g, phase));
+  } else {
+    const owedPairs = new Set(result.work.map((w: any) => [...snapshot.pairs].find(([id, pages]: any) =>
+      w.item ? pages.some((page: any) => page.items.some((item: any) => item.id === w.item))
+        : id === w.page || pages.some((page: any) => page.id === w.page))?.[0]).filter(Boolean));
+    plans = pairPlans(ctx, [...owedPairs].filter(id => !recoveryUnits || recoveryUnits.has(String(id))), phase);
+  }
+  if (!plans.length) return { owner: { reason: 'No dispatch owns the missing Step 3 decisions.' } };
+  const dir = R(ctx, 'research', `${ctx.run}-dispatch`);
+  const finished = existsSync(dir) ? readdirSync(dir).filter(f => f.endsWith('.result.json')).map(f => {
+    try { return JSON.parse(readFileSync(join(dir, f), 'utf8')).label; } catch { return null; }
+  }) : [];
+  if (plans.some(p => finished.includes(p.label)))
+    return { owner: { reason: 'Step 3 left decisions missing on unchanged inputs; resolve them without repeating the same call.' } };
+  for (const plan of plans) executor.start(stage, plan);
+}
+
+export const stages = [
+  // Drift review, mechanical materialization, then parallel construction and an owner-held gate.
+  {
+    id: '1-drift',
+    label: 'Step 1 — prerequisite-drift review',
+    units: () => ['drift'],
+    pattern: /^alpha-(?:alpha-)?drift-review\.result\.json$/,
+    labelFor: () => 'drift-review',
+    concurrency: 1,
+    artifacts: (ctx: any) => `research/${ctx.run}-alpha-step1-drift.md`,
+    plan: (ctx: any) => [{
+      role: 'alpha',
+      label: 'drift-review',
+      job: 'verification',
+      covers: ['drift'],
+      brief: 'briefs/alpha-drift.md',
+      task: [`research/${ctx.run}-alpha-step1-drift.task.md`],
+      timeout: 7200,
+    }],
+    gates: (ctx: any) => [
+      gate('drift-review', ['node', 'tools/physics-support/drift-review-check.mjs', '--run', ctx.run, '--before-apply']), planGate(),
+    ],
+    onHold: holdStep1,
+  },
+  {
+    id: '1-drift-apply',
+    label: 'materialize prerequisite-drift decisions (mechanical)',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'drift-apply'),
+    concurrency: 1,
+    plan: (ctx: any) => [{
+      role: 'tool', label: 'drift-apply', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/physics-support/drift-apply.mjs', '--run', ctx.run], timeout: 600,
+    }],
+    gates: (ctx: any) => [scopeGate(ctx), driftGate(ctx), planGate()],
+    onHold: holdStep1,
+  },
+  {
+    id: '1-scaffold',
+    label: 'Beta scaffolding',
+    modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'scaffolding'
+      ? DEEPSEEK_FLASH_MAX
+      : undefined,
+    units: (ctx: any) => batches(ctx),
+    unitPrerequisites: (ctx: any, unit: string) => batchDependencies(ctx, unit),
+    artifacts: (ctx: any, unit: string) => scaffoldArtifacts(ctx, unit),
+    // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
+    // `beta-fix-batch-3.result.json`, which belongs to a different stage.
+    pattern: /^beta-(?:beta-)?batch-\d+\.result\.json$/,
+    labelFor: (u) => `batch-${u}`,
+    concurrency: MAX_RUN_BATCHES,
+    plan: (ctx, pending) => pending.map((u: any) => ({
+      role: 'beta',
+      label: `batch-${u}`,
+      job: 'scaffolding',
+      covers: [u],
+      brief: 'briefs/beta-scaffold.md',
+      task: [`research/${ctx.run}-beta-${u}.task.md`, `research/${ctx.run}-beta-batch.task.md`],
+      timeout: 14400,
+    })),
+    gates: (ctx) => [
+      gate('step1-readiness', ['node', 'tools/physics-support/step1-decisions.mjs', 'check', '--run', ctx.run]),
+      gate('item-dependency-levels', ['node', 'tools/physics-support/item-dependency-levels.mjs', 'check', '--run', ctx.run]),
+      gate('step1-dependency-ledger', ['node', 'tools/physics-support/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run, '--require-reviewed']),
+      scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }),
+      ...policyGates(ctx), planGate(), extGate(), urlGate(ctx), backingGate(ctx), fetchGate(ctx),
+    ],
+    onHold: holdStep1,
+  },
+
+  // THE ORCHESTRATOR ROLE IS GONE (owner, 2026-08-16). Every judgment it used
+  // to make belongs to an Alpha; every transition between judgments belongs to
+  // the engine. The two are different things and conflating them is what put a
+  // model on the critical path in the first place.
+  //
+  // What the orchestrator used to do, and where it went:
+  //   batching, seam count, drift diff   -> `autopilot plan`, mechanical
+  //   adjudicating Beta recommendations  -> the step-3 Alpha, below
+  //   scope review and item decisions    -> Step 3a and Step 3b
+  //   running gates, keeping ledgers     -> the engine
+  //   deciding a stage is finished       -> the engine's coverage predicate
+  //   the step-9 owner report           -> a supervisor agent, last stage
+  // ASSIGN BATCHES TO ALPHAS BEFORE ANY ALPHA IS DISPATCHED (owner, 2026-08-16).
+  //
+  // This is a judgment, not a chunking: minimise what crosses a group boundary,
+  // and keep each Alpha inside one category wherever a category fits in one.
+  // It is NOT `dispatch-planning` — the engine still decides which units are
+  // uncovered and what to dispatch. This decides only how already-owed work is
+  // grouped, and `alpha-groups.mjs` checks every structural property of the
+  // answer rather than trusting it: full coverage, no duplicate batch, the lane
+  // and per-group caps, a stated rationale, and no avoidable category split.
+  {
+    id: '2-assign',
+    label: 'assign batches to group Alphas',
+    units: () => ['all'],
+    // THE SAME PATTERN-VS-ROLE DEFECT `7-adjudicate` CARRIED, found by the
+    // class guard in `test/step7-groups.test.mts` on 2026-08-25. The plan moved
+    // to role `alpha-assign` when that lane was introduced (2026-08-24) and this
+    // line did not, so a re-run would write
+    // `alpha-assign-assign.result.json` and match nothing — the stage would
+    // re-dispatch a completed partition forever. It has not bitten only because
+    // frontier-18's `2-assign` ran before the lane existed and its result file
+    // records role `alpha`.
+    //
+    // Both spellings are recognised deliberately: the new one because it is what
+    // the plan now produces, the old one because frontier-18's result is on disk
+    // under it and narrowing the pattern would reopen a barrier the run passed
+    // days ago. Not written through `resultPattern`, which takes one role.
+    pattern: /^alpha-(?:assign-)?assign\.result\.json$/,
+    artifacts: (ctx) => `research/${ctx.run}-alpha-groups.json`,
+    modelProfile: DEEPSEEK_FLASH_MAX,
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'alpha-assign',
+      label: 'assign',
+      job: 'partitioning',
+      covers: ['all'],
+      brief: 'briefs/alpha.md',
+      task: [`research/${ctx.run}-alpha-assign.task.md`, 'briefs/alpha-assign.md'],
+      timeout: 3600,
+    }],
+    gates: (ctx) => [gate('alpha-groups', ['node', 'tools/physics-support/alpha-groups.mjs', '--run', ctx.run], {
+      liveness: { pattern: /(\d+) group\(s\) over/.source, min: 1, unit: 'groups' },
+    })],
+  },
+
+  // Scope is a barrier: no author starts before all scope decisions clear.
+  {
+    id: '3a-scope',
+    label: 'Step 3a — scope review and owner decisions',
+    modelProfile: DEEPSEEK_FLASH_MAX,
+    role: 'alpha',
+    units: ctx => legacyStep3(ctx) ? batches(ctx) : step3Pairs(ctx),
+    pattern: ctx => resultPattern('alpha', legacyStep3(ctx)
+      ? 'step3a-[a-z]+-[a-f0-9]+' : 'step3a-pair-[a-z0-9-]+-[a-f0-9]+'),
+    concurrency: MAX_GROUPS,
+    plan: (ctx, pending) => legacyStep3(ctx)
+      ? alphaGroups(ctx).filter(g => g.covers.some(b => pending.includes(String(b))))
+        .map(g => step3Plan(ctx, g, 'scope'))
+      : pairPlans(ctx, pending, 'scope'),
+    gates: ctx => [scopeGate(ctx), step3Gate(ctx, 'scope')],
+    maxFixRounds: Infinity,
+    onGateFailure: args => step3Failure(args, 'scope'),
+  },
+  {
+    id: '3-baseline',
+    label: 'pre-authoring touch snapshot (mechanical)',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'snap-pre-author'),
+    artifacts: ctx => [touchesPath(ctx), `research/${ctx.run}-step3-auditor-baseline.json`],
+    concurrency: 1,
+    plan: ctx => [{ role: 'tool', label: 'snap-pre-author',
+      job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/physics-support/step3-baseline.mjs', '--run', ctx.run,
+        '--touches', touchesPath(ctx), '--label', 'pre-author'] }],
+    gatesWaived: 'The snapshot is the input to the authored-content impact check.',
+  },
+  {
+    id: '3b-author',
+    label: 'Step 3b — pair scaffold audit, repair and authoring',
+    modelProfile: DEEPSEEK_FLASH_MAX,
+    role: 'alpha-high',
+    units: ctx => legacyStep3(ctx) ? batches(ctx) : step3Pairs(ctx),
+    // The owner asked to author every pair in this run even when an in-run
+    // supplier is unfinished. Shared-batch exclusivity remains below; final
+    // item decisions and gates still require reconciled, proved suppliers.
+    exclusiveCohort: (ctx, u) => legacyStep3(ctx) ? alphaCohort(ctx, u) : pairAuthorCohort(ctx, u),
+    artifacts: (ctx, u) => legacyStep3(ctx) ? authorArtifacts(ctx, u) : pairAuthorArtifacts(ctx, u),
+    pattern: ctx => resultPattern('alpha-high', legacyStep3(ctx)
+      ? 'step3b-[a-z]+-[a-f0-9]+' : 'step3b-pair-[a-z0-9-]+-[a-f0-9]+'),
+    concurrency: MAX_RUN_BATCHES,
+    plan: (ctx, pending) => {
+      if (ctx.doctor && !legacyStep3(ctx)) {
+        // A restart may occur while Step 1 writers still own empty pair
+        // inventories. Step 3 cannot plan those pairs until scaffolding lands;
+        // the Step 1 gate enforces that boundary before this plan runs live.
+        try { return pairPlans(ctx, pending, 'final'); }
+        catch (error: any) {
+          if (/empty scaffold inventory/.test(String(error?.message ?? error))) return [];
+          throw error;
+        }
+      }
+      return legacyStep3(ctx)
+        ? alphaGroups(ctx).filter(g => g.covers.some(b => pending.includes(String(b))))
+          .map(g => step3Plan(ctx, g, 'final'))
+        : pairPlans(ctx, pending, 'final');
+    },
+    gates: ctx => [scopeGate(ctx),
+      ...(ctx.doctor || loadStep3(ctx.repo, ctx.run).pages.some((page: any) =>
+        page.items?.some((item: any) => item.dependency_level !== undefined))
+        ? [gate('item-dependency-levels', ['node', 'tools/physics-support/item-dependency-levels.mjs', 'check', '--run', ctx.run])]
+        : []),
+      // A successful scaffold auditor may create and fully author local supplier
+      // items. They are absent from the pre-author scaffold inventory and are
+      // certified mechanically as a distinct owner-authorized class before the
+      // ordinary Step 3 receipt gate. They do not enter a review/repair/author
+      // loop merely to review their own work (owner, 2026-09-12).
+      gate('auditor-created-certifications', ['node', 'tools/physics-support/step3-auditor-items.mjs',
+        'certify', '--run', ctx.run]),
+      step3Gate(ctx, 'final'),
+      // Authored IDs exist before Step 4 splices them into the plan. Scaffold
+      // mint checks would reject those IDs; item mode below checks their content.
+      ...coverageGates(ctx, { requireDestination: true }),
+      extGate(), manifestDepsGate(ctx), scopeDecisionsGate(ctx),
+      // A source already fetched and stamped can be cited while its live URL
+      // is temporarily unavailable. Step 5b checks URL liveness and backing
+      // after independent review; a dead link does not hold Step 3 authoring.
+      fetchGate(ctx),
+      ...repoWide(ctx).filter(g => g.id !== 'splice-verify'),
+      policyItemGate(ctx), ...contractGates(ctx, { reviewed: false })],
+    maxFixRounds: Infinity,
+    onGateFailure: args => step3Failure(args, 'final'),
+  },
+
+  // STEP 4 IS A CODE NODE (audit, 2026-08-16). It was dispatched to a lead
+  // Alpha, whose receipt recorded `item_ids_spliced`, `id_clash_check`,
+  // `size_check` and `validate_plan` — and whose output was byte-identical to
+  // the batch manifests. Transcription plus three mechanical gates, with no
+  // judgment in it.
+  //
+  // It also cost a whole A/B pair: a step-4 Alpha met a page marked `not ready`
+  // and resolved the deadlock by dropping it from the manifest.
+  //
+  // `splice-plan.mjs` refuses to guess. A `requires` disagreement, an existing
+  // item list that differs, an oversized page or a duplicate id all exit
+  // nonzero, and the engine raises a blocker for an Alpha to adjudicate — which
+  // is the cognitive half, kept separate from the mechanical one.
+  {
+    id: '4-splice',
+    label: 'splice ids into the plan (mechanical)',
+    units: batches,
+    // One dispatch, all batches: splice-plan is the single writer on
+    // plan-spec.json either way, and one per-batch dispatch per 30s poll tick
+    // cost ~3.5 minutes of wall clock for ~2 seconds of work. All-or-nothing
+    // inside the tool; the per-batch receipts are still owed per unit.
+    pattern: resultPattern('tool', 'splice-all'),
+    artifacts: (ctx, u) => `research/${ctx.run}-splice-${u}.json`,
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool',
+      label: 'splice-all',
+      job: 'bookkeeping-mechanical',
+      covers: batches(ctx),
+      argv: ['node', 'tools/physics-support/splice-plan.mjs', '--run', ctx.run, '--all'],
+    }],
+    // A `requires` refusal is the splice's correct OUTPUT, not its failure:
+    // the lane exits 0, clean batches splice, the refusing batch is withheld
+    // (no receipt, so its units stay open), and THIS gate holds the stage
+    // while the adjudicating Alpha decides each edge — the disposition
+    // CLAUDE.md assigns it ("the splice's refusal is what Alpha adjudicates").
+    // Before this, the lane exited 1 on a deterministic refusal, burned its
+    // three attempts on identical output, and the adjudication had no
+    // dispatch route.
+    gates: (ctx) => [
+      // No liveness floor: vacuity is impossible here — an absent artifact
+      // (the splice never ran) is exit 2, its own hard failure.
+      gate('splice-refusals', ['node', 'tools/physics-support/splice-plan.mjs', '--run', ctx.run, '--refusals-gate']),
+      scopeGate(ctx), planGate()],
+    maxFixRounds: 3,
+    // Round shape: a refusal failure (or the stalemate synthetic, which on
+    // this stage IS the withheld-splice shape) first re-runs the splice
+    // mechanically — after an adjudication that is all it takes, receipts
+    // land, and the battery greens. A residual exit means edges still await
+    // the decision, so the round dispatches the adjudicating Alpha; the next
+    // round's re-splice then transcribes what it decided. Three rounds:
+    // re-splice, adjudicate, re-splice.
+    // `validate-plan` IS this stage's business, and it used to fall straight
+    // through this hook. Its `undeclared-prereq` finding — an item whose `deps`
+    // reach a page outside its own page's `requires` closure — is precisely
+    // what the step-4 Alpha adjudicates: apply a backward edge the scaffold
+    // genuinely consumes, strike one it does not, block a forward one as a
+    // reading-order change. The task file has said so all along.
+    //
+    // frontier-16 spliced cleanly and `validate-plan` returned 23 of them
+    // across all 11 pages, four being the b-leaf class. The hook returned on
+    // the first line, three rounds were spent in ninety seconds dispatching
+    // nothing, and the run reported "this needs a person" for a decision the
+    // stage owns an Alpha to make. A gate with no route to its fixer does not
+    // read as unrouted — it reads as exhausted, which is a worse blocker
+    // because it looks like the repair was tried.
+    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
+      // ONLY the undeclared-prereq class, not every validate-plan failure.
+      // That gate is repo-wide and fails for heterogeneous reasons — a cycle,
+      // a forward reference, an unresolved id, a page over the 100-item
+      // ceiling — and most of them are not edge decisions at all. An Alpha
+      // handed a `size` violation under an edge-adjudication task would reach
+      // for the tool it was given and add an edge. Leaving the rest on the
+      // blocker path is the original design and it is right.
+      //
+      // ASK THE TOOL, don't read the failure text. `failure.why` is the gate's
+      // last line — for this gate, the word "FAIL" — and `failure.output` is a
+      // truncated tail that may hold any part of a long report. Matching
+      // either one decided this by whichever lines happened to land in the
+      // slice, which on the first live firing was a run of `redundant-prereq`
+      // warnings and no dispatch. `validate-plan` is fast and deterministic,
+      // so re-running it and reading all of its output is both cheaper and
+      // correct.
+      const edge = await isEdgeDecision({ ctx, failure });
+      if (!['splice-refusals', 'stage-stalemate'].includes(failure.id) && !edge) return;
+      // A re-splice cannot clear `undeclared-prereq`: the edges it names are
+      // induced by item `deps`, not declared by a manifest, so there is
+      // nothing for the transcriber to transcribe. Go straight to the Alpha.
+      if (!edge) {
+        const repair = await mechanicalRepair({ ctx, failure: { id: 'splice-refusals' } });
+        if (repair.outcome === 'clean') return;
+        if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
+      }
+      executor.start(stage, {
+        role: 'alpha',
+        label: `step4-adjudicate-${round}`,
+        job: 'adjudication',
+        // A stalemate is unit-scoped. Claim its withheld units while this
+        // repair is in flight so the executor's next 30-second scan does not
+        // mistake the same units for abandoned and launch another writer
+        // against this report. The Alpha receipt cannot satisfy 4-splice
+        // coverage because the stage pattern admits only tool/splice-all.
+        covers: failure.id === 'stage-stalemate' ? (failure.units ?? []).map(String) : [],
+        brief: 'briefs/alpha.md',
+        task: [`research/${ctx.run}-alpha-step4.task.md`],
+        timeout: 3600,
+      });
+    },
+  },
+
+  // Preserve Step 4's snapshot after splicing, without overwriting the
+  // pre-author baseline captured by 3-baseline. Impact includes authoring.
+  {
+    id: '4-baseline',
+    label: 'post-authoring touch snapshot (mechanical)',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'snap-post-author'),
+    artifacts: (ctx) => touchesPath(ctx),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool',
+      label: 'snap-post-author',
+      job: 'bookkeeping-mechanical',
+      covers: ['all'],
+      argv: ['node', 'tools/physics-support/touchlog.mjs', 'snap', touchesPath(ctx), 'post-author'],
+    }],
+    gatesWaived: 'A snapshot has nothing to check beyond its own existence, which `artifacts` '
+      + 'already requires; the snapshot is itself the input to the impact gate at step 5b.',
+  },
+
+
+  // Direct review follows Step 3 authoring and the mechanical Step 4 barrier.
+  ...step5Stages({
+    gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
+    impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
+  }),
+
+  // The group partition, rendered BEFORE the sweep so the step-6 readers have
+  // their scope. `7-scope` runs the same tool again after the sweep, when the
+  // rejection rows exist; the content half — pages, items, seams — is identical
+  // and is what the reading half needs.
+  {
+    id: '6-scope',
+    label: 'partition the level by group (mechanical)',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'step6-scope'),
+    artifacts: (ctx) => `research/${ctx.run}-step7-scope.json`,
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool',
+      label: 'step6-scope',
+      job: 'bookkeeping-mechanical',
+      covers: ['all'],
+      argv: ['node', 'tools/physics-support/step7-scope.mjs', 'render', '--run', ctx.run],
+    }],
+    gates: (ctx) => [
+      gate('step7-scope', ['node', 'tools/physics-support/step7-scope.mjs', 'check', '--run', ctx.run], {
+        liveness: { pattern: /(\d+) item\(s\) partitioned/.source, min: 1, unit: 'items partitioned' },
+      }),
+    ],
+  },
+
+  // THE SWEEP AND THE GROUP PRE-READS RUN TOGETHER (owner, 2026-08-25).
+  //
+  // "Step 7 group alpha agents can be spawned, assigned groups, and can start
+  // reading A/B pairs they are tasked to adjudicate. All of these can be done
+  // during step 6." They are units of ONE stage rather than two stages, because
+  // the engine overlaps units inside a stage and serialises stages: a separate
+  // reading stage in front of the sweep would cost its own wall-clock, which is
+  // the thing the owner's instruction removes.
+  //
+  // WHAT THE PRE-READ BUYS. Each group reads its own pairs while no verdict
+  // exists and writes a durable digest. Step 7 starts fresh from that digest,
+  // so it receives the useful mathematical findings without paying again for
+  // an entire Step-6 transcript.
+  // A concern recorded here was found with nobody pointing at it, so a judge
+  // rejection landing in the same place is two independent readings agreeing —
+  // evidence of a different quality from agreeing with a rejection you were
+  // handed.
+  //
+  // WHY THE PRE-READ IS READ-ONLY, at the kernel rather than in the prompt. Step
+  // 7 judges a frozen text. An edit landing mid-sweep voids verdicts already cast
+  // against the old bytes and leaves the level judged in two states with nothing
+  // on disk recording it. `alpha-group-read` carries `--sandbox read-only`; its
+  // digest reaches disk through `--result-artifact`, which the DISPATCHER writes.
+  //
+  // QUOTA. Eight high-context group-reader lanes may run concurrently with the
+  // judge sweep. A cap is a ceiling the engine may use, never a quota it must
+  // spend: if lanes start dying on a limit, lower
+  // `alpha-group-read`'s cap rather than re-spending the loop.
+  {
+    id: '6-judge',
+    label: 'one stateless judge per item, with whole-group readers alongside',
+    modelProfile: (plan: any) => plan.role === 'alpha-group-read'
+      ? SOL61_HIGH
+      : undefined,
+    // One unit for the sweep, one per group. The stage is done when the ledger
+    // is covered AND every group has a digest — which is what makes the reading
+    // a real obligation rather than a best-effort rider.
+    units: (ctx) => ['sweep', ...alphaGroups(ctx).map((g: any) => String(g.label))],
+    // Two result-file families in one stage, so the pattern is written out
+    // rather than derived: `resultPattern` takes one role. The group half is
+    // `<role>-<label>` with the label being the bare group letter, which is why
+    // the repair round below is labelled `read-again-*` — digits and the
+    // longer name keep it outside this pattern, so a re-read is never mistaken
+    // for the unit's own coverage.
+    pattern: /^(?:tool-judge-sweep|alpha-group-read-[a-z]+)\.result\.json$/,
+    // One judge-sweep controller plus one read-only lane for each of nine
+    // groups. The sweep's own item pool is independently bounded.
+    concurrency: MAX_GROUPS + 1,
+    // The judge sweep is a TOOL RUN, not an agent dispatch — judge-sweep.mjs
+    // owns its own lane pools, retry semantics and attestation. The A-page ids
+    // are computed here rather than in a shell sub-invocation: the first
+    // version nested three levels of quoting inside a `sh -c`, which is a
+    // defect waiting to happen in a stage that runs once, twelve hours into a
+    // build, unattended.
+    plan: (ctx, pendingUnits) => {
+      const plans: any[] = [];
+      if (pendingUnits.includes('sweep')) {
+        const aPages = [];
+        for (const b of batches(ctx)) {
+          const pj = JSON.parse(readFileSync(R(ctx, 'research', `${ctx.run}-batch-${b}.pages.json`), 'utf8'));
+          for (const p of pj) if (p.kind === 'A') aPages.push(p.id);
+        }
+        plans.push({
+          role: 'tool',
+          label: 'judge-sweep',
+          job: 'judgement',
+          covers: ['sweep'],
+          timeout: 43200,
+          // argv, so there is nothing to quote and nothing to parse. The engine
+          // writes the result record when this exits zero.
+          argv: ['node', 'tools/physics-support/judge-sweep.mjs', '--run', ctx.run,
+            '--lineup', 'sol61', '--effort', 'high',
+            '--ledger', `research/${ctx.run}-judge.jsonl`,
+            '--cost', `research/${ctx.run}-judge-cost.jsonl`,
+            '--pages', aPages.join(',')],
+        });
+      }
+      for (const g of alphaGroups(ctx)) {
+        if (!pendingUnits.includes(String(g.label))) continue;
+        plans.push({
+          role: 'alpha-group-read',
+          label: String(g.label),
+          job: 'audit',
+          covers: [String(g.label)],
+          brief: 'briefs/alpha.md',
+          task: [`research/${ctx.run}-alpha-${g.label}-step6-read.task.md`, 'briefs/tasks/alpha-step6-read.md'],
+          outputSchema: 'briefs/schemas/step7-context.json',
+          resultArtifact: `research/${ctx.run}-alpha-${g.label}-step7-context.json`,
+          timeout: 21600,
+        });
+      }
+      return plans;
+    },
+    // The sweep exiting zero says the tool ran. It does not say every item got a
+    // verdict from every configured model, and on frontier-14 it did not: the stage cleared
+    // on its own receipt and the level went forward with holes that only surfaced
+    // at the very end. Coverage of the LEDGER is the completion condition.
+    //
+    // Rejections are expected here — nothing has adjudicated anything yet — so
+    // they are warnings at this one stage and hard errors everywhere after.
+    //
+    // The digest gate is what stops the reading from being a formality: a schema
+    // -valid object with nothing in it exits zero, so the check is against the
+    // group's real size. It deliberately does NOT require a nonempty `concerns`
+    // list — a careful reading that finds nothing thin is a result, and failing
+    // it would teach the lane to manufacture concerns.
+    gates: (ctx) => [
+      closureGate(ctx, { allowUnadjudicated: true, judgeLineup: 'sol61', excludePublished: false }),
+      gate('step7-digests', ['node', 'tools/physics-support/step7-scope.mjs', 'digests', '--run', ctx.run], {
+        liveness: { pattern: /(\d+) item\(s\) opened/.source, min: 1, unit: 'items opened while reading' },
+      }),
+    ],
+    // A judge lane can die wholesale without a single verdict being wrong —
+    // frontier-15 lost all 392 Terra calls to a 429 boot stampede while
+    // Terra answered everything. The re-sweep is mechanical, and the
+    // currency rule makes it surgical: only null-verdict items spend. Two
+    // rounds; a lane that nulls twice is a platform problem for a person.
+    maxFixRounds: 2,
+    onGateFailure: async (args: any) => {
+      // A thin or missing digest is re-read, not reported. The dispatch that
+      // produced it exited zero, so unit coverage will not re-drive it on its
+      // own — this hook is the only route back.
+      if (args.failure.id === 'step7-digests') {
+        const text = `${args.failure.output ?? ''}\n${args.failure.why ?? ''}`;
+        const named = new Set([...text.matchAll(
+          /group\s+([a-z]+)(?=\s*:|\s+(?:pages_read|items_read|seams_checked|batches)\s*:)/gi,
+        )].map((m) => m[1].toLowerCase()));
+        const groups = alphaGroups(args.ctx);
+        const selected = groups.filter((g: any) => named.has(String(g.label)));
+        const retry = selected.length ? selected : groups;
+        for (const g of retry) {
+          const repairTask = `research/${args.ctx.run}-alpha-${g.label}-step6-repair-${args.round}.task.md`;
+          writeFileSync(R(args.ctx, repairTask), [
+            `# Step 6 digest correction — group ${g.label}`,
+            '',
+            `Read research/${args.ctx.run}-alpha-${g.label}-step6-read.task.md for the exact assigned scope.`,
+            `Inspect the existing research/${args.ctx.run}-alpha-${g.label}-step7-context.json and preserve supported findings.`,
+            'Correct the specific failures below. Reopen the relevant items and sources where evidence is missing; do not repeat a completed reading solely to remove an extra JSON field.',
+            'Return the complete corrected schema-constrained digest. Do not invent missing evidence or erase a substantive finding just to pass a gate.',
+            '',
+            '## Exact gate diagnostics',
+            '',
+            text,
+          ].join('\n') + '\n');
+          args.executor.start(args.stage, {
+            role: 'alpha-group-read',
+            // Not `<label>` alone: that matches the stage pattern, and a repair
+            // round must not be mistaken for the unit's own coverage.
+            label: `read-again-${g.label}-${args.round}`,
+            job: 'audit',
+            covers: [],
+            brief: 'briefs/alpha.md',
+            task: repairTask,
+            outputSchema: 'briefs/schemas/step7-context.json',
+            resultArtifact: `research/${args.ctx.run}-alpha-${g.label}-step7-context.json`,
+            timeout: 21600,
+          });
+        }
+        return;
+      }
+      if (args.failure.id !== 'judge-closure') return;
+      const r = await mechanicalRepair({ ctx: args.ctx, failure: { id: 'judge-closure' }, judgeLineup: 'sol61', judgeEffort: 'high' });
+      // A lane down to an account limit is not a failed repair: report the
+      // outage and the executor refunds the round and waits on a clock.
+      if (r.outcome === 'outage') return { outage: { reason: r.reason! } };
+    },
+  },
+
+  // The step-7 baseline, for the same reason as `4-baseline`: `step7-guard`
+  // compares every changed item against a snapshot taken BEFORE adjudication
+  // began. Taken afterwards it licenses whatever happened.
+  {
+    id: '7-baseline',
+    label: 'pre-adjudication touch snapshot (mechanical)',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'snap-pre-step7'),
+    artifacts: (ctx) => [touchesPath(ctx), `research/${ctx.run}-step7-auditor-baseline.json`],
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool',
+      label: 'snap-pre-step7',
+      job: 'bookkeeping-mechanical',
+      covers: ['all'],
+      argv: ['node', 'tools/physics-support/stage-touch-baseline.mjs', '--run', ctx.run, '--step', '7',
+        '--touches', touchesPath(ctx), '--label', 'pre-step7-v2'],
+    }],
+    gatesWaived: 'A snapshot has nothing to check beyond its own existence; it is the baseline '
+      + 'the step-7 guard measures the next stage against.',
+  },
+
+  ...step7Stages({ gate, repoWide, contractGates, ledgerGate, closureGate, auditorCreatedGate, step7GuardGate }),
+
+  {
+    id: '7-freeze',
+    label: 'freeze the closed Step-7 item state',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'snap-after-step7-close'),
+    artifacts: (ctx) => [touchesPath(ctx), `research/${ctx.run}-step8-auditor-baseline.json`],
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool', label: 'snap-after-step7-close', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/physics-support/stage-touch-baseline.mjs', '--run', ctx.run, '--step', '8',
+        '--touches', touchesPath(ctx), '--label', 'post-step7'],
+    }],
+    gatesWaived: 'The preceding complete Step-7 gate battery validated the stable certification and this immediately following '
+      + 'mechanical snapshot freezes that exact item state for Step 8; its artifact existence is required.',
+  },
+
+  {
+    id: '8-scope',
+    label: 'scope-denial delta review',
+    units: () => ['all'],
+    artifacts: step8ScopeReviewPath,
+    pattern: resultPattern('(?:alpha|tool)', 'step8-[a-z-]+'),
+    concurrency: 1,
+    // Step 3 stores one hash-bound decision per decline. Capture the delta
+    // before refreshing those receipts: old runs therefore review everything,
+    // while future runs spend Alpha time only where the row, page closure, or
+    // destination changed. Preparation and review are separate polls so the
+    // Alpha can never race the files that define its scope.
+    plan: (ctx, pending) => {
+      if (!pending.length) return [];
+      const restart = R(ctx, `research/${ctx.run}-step8-restart.json`);
+      if (existsSync(restart) && JSON.parse(readFileSync(restart, 'utf8')).controller_pid === process.pid)
+        throw new Error('Owner-requested controller restart at Step 8 is pending; no Step-8 work has launched');
+      if (!step8ScopePrepared(ctx)) return [{
+        role: 'tool', label: 'step8-scope-prepare', job: 'bookkeeping-mechanical', covers: [],
+        argv: ['node', 'tools/physics-support/scope-decisions.mjs', 'prepare', '--run', ctx.run,
+          '--out', step8ScopeDeltaPath(ctx)],
+      }];
+      return [{
+        role: 'alpha', label: 'step8-lead', job: 'audit', covers: ['all'], brief: "briefs/alpha.md",
+        task: `research/${ctx.run}-alpha-step8.task.md`, timeout: 14400,
+      }];
+    },
+    gates: (ctx) => [auditorCreatedGate(ctx, 8), scopeDecisionsGate(ctx), ...repoWide(ctx), ...contractGates(ctx, { reviewed: true }),
+      closureGate(ctx, { pendingRejudge: true }), ledgerGate(ctx)],
+  },
+
+  {
+    id: '8-scope-render',
+    label: 'render the closed scope-denial register',
+    units: () => ['all'],
+    artifacts: step8ScopeRegisterPath,
+    pattern: resultPattern('tool', 'step8-scope-render'),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool', label: 'step8-scope-render', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/physics-support/scope-decisions.mjs', 'render', '--run', ctx.run,
+        '--out', step8ScopeRegisterPath(ctx)],
+    }],
+    gates: (ctx) => [scopeDecisionsGate(ctx)],
+  },
+
+  {
+    id: '8-scope-freeze',
+    label: 'freeze the reviewed Step-8 scope state',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'step8-scope-freeze'),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool', label: 'step8-scope-freeze', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/physics-support/touchlog.mjs', 'snap', touchesPath(ctx), 'post-step8-scope'],
+    }],
+    gatesWaived: 'The preceding scope review and render stages are closed; this successful mechanical snapshot is the change boundary used by later impact checks.',
+  },
+
+  // EVERY STEP-8 MATHEMATICAL CHANGE RE-ENTERS CERTIFICATION.  The guarded hash
+  // delta includes both newly created items and edits to existing items.  Judge
+  // currency makes the latter just as important: a pass belongs to one frozen
+  // text, not to an id forever.  Only the exact changed set is swept.
+  {
+    id: '8-changes-judge',
+    label: 'certify Step 8 mathematical changes',
+    units: () => ['all'],
+    artifacts: (ctx) => [step8ChangesPath(ctx), step8ChangesScopePath(ctx)],
+    pattern: resultPattern('tool', 'step8-changes-index|step8-changes-judge'),
+    concurrency: 1,
+    plan: (ctx) => {
+      const ids = ctx.doctor ? [] : step8ChangesOnDisk(ctx);
+      return [{
+        role: 'tool',
+        label: 'step8-changes-index',
+        job: 'bookkeeping-mechanical',
+        covers: [],
+        argv: ['node', ...step8ChangesRefreshArgv(ctx)],
+      }, {
+        role: 'tool',
+        label: 'step8-changes-judge',
+        job: 'judgement',
+        covers: ['all'],
+        timeout: 43200,
+        argv: ids.length
+          ? ['node', 'tools/physics-support/judge-sweep.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+            '--cost', `research/${ctx.run}-judge-cost.jsonl`, '--items', ids.join(','),
+            '--lineup', 'sol61', '--effort', 'high']
+          : ['node', '-e', 'console.log("step8 changes: nothing to judge")'],
+      }];
+    },
+    gates: (ctx) => [auditorCreatedGate(ctx, 8), step8ChangesGate(ctx), ...repoWide(ctx),
+      ...contractGates(ctx, { reviewed: true }), step8ClosureGate(ctx), closureGate(ctx), ledgerGate(ctx)],
+    maxFixRounds: 3,
+    onGateFailure: async ({ ctx, executor, stage, round, prevRoundAt, failure }: any) => {
+      const failures = [failure, ...(failure?.advisory ?? [])].filter((entry: any) => entry?.id);
+      const closureFailure = failures.find((entry: any) => entry.id === 'judge-closure' || entry.id === 'step8-judge-closure');
+      if (closureFailure) {
+        const closure = closureFailure.id === 'step8-judge-closure' ? readStep8Closure(ctx) : readClosure(ctx);
+        const needsJudge = closure?.needs_rejudge ?? [];
+        if (needsJudge.length) {
+          const reason = prevRoundAt ? judgeOutageSince(ctx, prevRoundAt) : null;
+          if (reason) return { outage: { reason } };
+          executor.start(stage, {
+            role: 'tool', label: `step8-changes-rejudge-${round}`, job: 'judgement', covers: [], timeout: 43200,
+            argv: ['node', 'tools/physics-support/judge-sweep.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+              '--cost', `research/${ctx.run}-judge-cost.jsonl`, '--items', needsJudge.join(','),
+              '--lineup', 'sol61', '--effort', 'high'],
+          });
+          return;
+        }
+        const contested = [...new Set([...(closure?.unadjudicated ?? []), ...(closure?.open_fatal ?? [])])];
+        const changed = new Set(readStep8Changes(ctx));
+        const local = contested.filter((id) => changed.has(id));
+        if (local.length) {
+          executor.start(stage, {
+            role: 'alpha', label: `step8-changes-adjudicate-${round}`, job: 'adjudication', covers: [],
+            brief: 'briefs/alpha.md', task: `research/${ctx.run}-alpha-step8-adjudicate.task.md`, timeout: 21600,
+          });
+        }
+        const carried = contested.filter((id) => !changed.has(id));
+        for (const g of step7Owners(ctx, carried)) if (carried.length) {
+          executor.start(stage, {
+            role: 'alpha', label: g ? `step8-carried-adjudicate-${g}-${round}` : `step8-carried-adjudicate-${round}`,
+            job: 'adjudication', covers: [], brief: 'briefs/alpha.md',
+            task: g
+              ? [`research/${ctx.run}-alpha-${g}-step7-recovery.task.md`, 'briefs/tasks/alpha-step7-closure-recovery.md']
+              : 'briefs/tasks/alpha-step7-closure-recovery.md', timeout: 21600,
+          });
+        }
+        if (local.length || carried.length) return;
+      }
+
+      const mechanical = await mechanicalRepair({ ctx, failure, excludeGateIds: ['judge-closure'] });
+      if (mechanical.outcome === 'outage') return { outage: { reason: mechanical.reason! } };
+      // A closure failure with concrete stale/contested work returned through
+      // its narrow route above. Any other closure failure is still an
+      // unhandled nonmechanical finding and belongs in the general envelope.
+      const unhandled = failures.filter((entry: any) => !MECHANICAL_REPAIRS[entry.id]);
+      // A residual mechanical repair still needs judgment. A clean mechanical
+      // advisory must not hide an unrelated unhandled primary (or vice versa).
+      const routed = mechanical.outcome === 'residual'
+        ? failures
+        : unhandled;
+      if (!routed.length) return;
+      const envelopeTask = writeStep8GateEnvelope({
+        ctx, stage, round, failures: routed, mechanicalStderr: mechanical.stderr,
+      });
+      executor.start(stage, {
+        role: 'alpha', label: `step8-gate-adjudication-${round}`, job: 'adjudication', covers: [],
+        brief: 'briefs/alpha.md', task: [envelopeTask], timeout: 21600,
+      });
+    },
+  },
+
+  // Finish all mechanically discoverable run repairs before the final Step-8
+  // stamp and receipts.  An impact repair may change item mathematics; the
+  // change receipt is therefore refreshed and the exact stale pair follows the
+  // same narrow recovery path before this stage can close.
+  {
+    id: '8-close',
+    label: 'mechanical run closers',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'close-splice'),
+    concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'close-splice', job: 'bookkeeping-mechanical', covers: ['all'], timeout: 600,
+      argv: ['node', 'tools/physics-support/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'] }],
+    gates: (ctx) => [
+      auditorCreatedGate(ctx, 8),
+      manifestDepsGate(ctx),
+      gate('splice-verify', ['node', 'tools/physics-support/splice-plan.mjs', '--run', ctx.run, '--verify']),
+      gate('impact-receipt', ['node', 'tools/physics-support/impact-audit.mjs',
+        '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
+        '--direct-boundary',
+        '--receipt', `research/${ctx.run}-impact.json`]),
+      step8ChangesGate(ctx), step8ClosureGate(ctx), closureGate(ctx),
+    ],
+    maxFixRounds: 3,
+    onGateFailure: async ({ ctx, executor, stage, round, prevRoundAt, failure }: any) => {
+      if (failure.id === 'impact-receipt') {
+        await mechanicalRepair({ ctx, failure, excludeGateIds: ['judge-closure'] });
+        let pending = 0;
+        try {
+          const receipt = JSON.parse(readFileSync(R(ctx, `research/${ctx.run}-impact.json`), 'utf8'));
+          pending = (receipt.dispositions ?? []).filter((row: any) => !row?.status || row.status === 'pending').length;
+        } catch { pending = 1; }
+        if (pending) {
+          executor.start(stage, {
+            role: 'alpha', label: `impact-close-${round}`, job: 'adjudication', covers: [], brief: 'briefs/alpha.md',
+            task: 'briefs/tasks/alpha-impact-close.md', timeout: 7200,
+          });
+          executor.start(stage, {
+            role: 'tool', label: `impact-close-snapshot-${round}`, job: 'bookkeeping-mechanical', covers: [],
+            timeout: 7200,
+            argv: ['node', 'tools/physics-support/touchlog-after-result.mjs',
+              '--result', join(ctx.dispatchDir, `alpha-impact-close-${round}.result.json`),
+              '--touches', touchesPath(ctx), '--label', `post-step8-impact-round-${round}`],
+          });
+        }
+        return;
+      }
+      if (failure.id === 'step8-changes') {
+        executor.start(stage, {
+          role: 'tool', label: `step8-changes-refresh-${round}`, job: 'bookkeeping-mechanical', covers: [],
+          argv: ['node', ...step8ChangesRefreshArgv(ctx)],
+        });
+        return;
+      }
+      if (failure.id === 'judge-closure' || failure.id === 'step8-judge-closure') {
+        const closure = failure.id === 'step8-judge-closure' ? readStep8Closure(ctx) : readClosure(ctx);
+        const needsJudge = closure?.needs_rejudge ?? [];
+        if (needsJudge.length) {
+          const reason = prevRoundAt ? judgeOutageSince(ctx, prevRoundAt) : null;
+          if (reason) return { outage: { reason } };
+          executor.start(stage, {
+            role: 'tool', label: `step8-close-rejudge-${round}`, job: 'judgement', covers: [], timeout: 43200,
+            argv: ['node', 'tools/physics-support/judge-sweep.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+              '--cost', `research/${ctx.run}-judge-cost.jsonl`, '--items', needsJudge.join(','),
+              '--lineup', 'sol61', '--effort', 'high'],
+          });
+          return;
+        }
+        const contested = [...new Set([...(closure?.unadjudicated ?? []), ...(closure?.open_fatal ?? [])])];
+        const changed = new Set(readStep8Changes(ctx));
+        const local = contested.filter((id) => changed.has(id));
+        if (local.length) executor.start(stage, {
+          role: 'alpha', label: `step8-close-adjudicate-${round}`, job: 'adjudication', covers: [],
+          brief: 'briefs/alpha.md', task: `research/${ctx.run}-alpha-step8-adjudicate.task.md`, timeout: 21600,
+        });
+        const carried = contested.filter((id) => !changed.has(id));
+        for (const g of step7Owners(ctx, carried)) if (carried.length) executor.start(stage, {
+          role: 'alpha', label: g ? `step8-close-carried-${g}-${round}` : `step8-close-carried-${round}`,
+          job: 'adjudication', covers: [], brief: 'briefs/alpha.md',
+          task: g
+            ? [`research/${ctx.run}-alpha-${g}-step7-recovery.task.md`, 'briefs/tasks/alpha-step7-closure-recovery.md']
+            : 'briefs/tasks/alpha-step7-closure-recovery.md', timeout: 21600,
+        });
+        return;
+      }
+      const repair = await mechanicalRepair({ ctx, failure, excludeGateIds: ['judge-closure'] });
+      if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
+    },
+  },
+
+  // Stamp only after every Step-8 closer has finished changing mathematics.
+  // The stamp itself is excluded from guarded hashes, so it cannot make its own
+  // judge verdict stale.
+  {
+    id: '8-changes-stamp',
+    label: 'stamp certified Step 8 changes',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'step8-changes-stamp'),
+    concurrency: 1,
+    plan: (ctx) => {
+      const ids = readStep8Changes(ctx);
+      return [{ role: 'tool', label: 'step8-changes-stamp', job: 'bookkeeping-mechanical', covers: ['all'],
+        argv: ids.length
+          ? ['node', 'tools/physics-support/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+            '--items', ids.join(','), '--terminal-resolutions', terminalResolutionsPath(ctx),
+            ...auditorCertificationArgs(ctx),
+            '--apply', '--report', `research/${ctx.run}-step8-judge-stamps.json`]
+          : ['node', '-e', 'console.log("step8 changes: nothing to stamp")'] }];
+    },
+    gates: (ctx) => {
+      const ids = readStep8Changes(ctx);
+      return [step8ChangesGate(ctx), step8ClosureGate(ctx), closureGate(ctx),
+        ...(ids.length ? [gate('judge-stamps', ['node', 'tools/physics-support/apply-judge-stamps.mjs',
+          '--ledger', `research/${ctx.run}-judge.jsonl`, '--items', ids.join(','),
+          '--terminal-resolutions', terminalResolutionsPath(ctx), ...auditorCertificationArgs(ctx), '--verify'])] : [])];
+    },
+  },
+
+  // Whole-level receipts are deliberately last in Step 8.  They are cognitive
+  // attestations and lapse on later mathematical edits, so producing them
+  // before the impact closer or final Step-8 stamp caused guaranteed rework.
+  {
+    id: '8-receipt',
+    label: 'whole-level audit and spine receipts',
+    units: () => ['all'],
+    pattern: resultPattern('alpha', 'receipts'),
+    artifacts: (ctx) => [`research/${ctx.run}-audit-coverage.json`, `research/${ctx.run}-spine-audit.json`],
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'alpha',
+      label: 'receipts',
+      job: 'audit',
+      covers: ['all'],
+      brief: 'briefs/alpha.md',
+      task: [`research/${ctx.run}-alpha-receipts.task.md`, `research/${ctx.run}-alpha-step8.task.md`],
+      timeout: 14400,
+    }],
+    gates: (ctx) => [auditorCreatedGate(ctx, 8), manifestDepsGate(ctx), levelCoverageGate(ctx)],
+    maxFixRounds: 2,
+    onGateFailure: async (args: any) => {
+      const repair = await mechanicalRepair(args);
+      if (repair.outcome !== 'unhandled') {
+        if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
+        return;
+      }
+      const { ctx, executor, stage, round } = args;
+      const task = `research/${ctx.run}-receipts-fix-${round}.task.md`;
+      writeFileSync(R(ctx, task), [
+        readFileSync(R(ctx, 'briefs/tasks/alpha-receipts-repair.md'), 'utf8').trim(),
+        '', `Run: ${ctx.run}`, '', '## Failed checks', '',
+        repairGateOutput(args.failure), '',
+      ].join('\n'));
+      executor.start(stage, {
+        role: 'alpha', label: `receipts-fix-${round}`, job: 'audit', covers: [], brief: 'briefs/alpha.md',
+        task: [task], timeout: 14400,
+      });
+    },
+  },
+
+  {
+    id: '9-contract-close',
+    label: 'terminal contract and defect-ledger closure',
+    units: () => ['all'],
+    artifacts: () => 'research/DEFECT-LEDGER.md',
+    pattern: resultPattern('tool', 'step9-contract-close-v2'),
+    concurrency: 1,
+    plan: () => [{
+      role: 'tool',
+      label: 'step9-contract-close-v2',
+      job: 'bookkeeping-mechanical',
+      covers: ['all'],
+      argv: ['node', 'tools/physics-support/defect-ledger.mjs', 'render'],
+    }],
+    // This is an early terminal-ledger closer, not yet a final-text check:
+    // pathway placement, pathway prose, and stamps still follow.  Re-running
+    // repo-wide and level coverage here used a full pass on a tree later stages
+    // could immediately supersede.  `9-readiness-v2` owns the first full
+    // final-text validation, and the read-only report integrity receipt lets
+    // `9-close-v2` safely reuse it on an unchanged protected tree.
+    gates: (ctx) => [closureGate(ctx), ledgerGate(ctx, { terminal: true })],
+    // THE CONTRACT-REWORK LOOP (owner directive, 2026-08-17). `--no-open`
+    // red on a contract-quality row with an owning batch — the rr-005 shape —
+    // used to be a dead end: its recorded remedy is "the owning Beta rewrites
+    // the worksheets with its sources to hand", and no stage after authoring
+    // could dispatch a Beta. Round shape: rework by the OWNING Beta (contract
+    // files only, never item text — contracts are not judged, so no verdict
+    // is voided), then an Alpha certification that samples the rewritten rows
+    // and closes the ledger row in place; the gate re-verifies. A rework
+    // blocked by a lane quota is an OUTAGE with the obligation row's clock,
+    // not a burnt round — the engine re-fires it when the lane recovers.
+    maxFixRounds: 4,
+    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
+      if (failure.id !== 'defect-ledger') return;
+      const rows = openContractRows(ctx);
+      if (!rows.length) return;
+      const blocked = blockedObligation(ctx, 'contract-rework');
+      if (blocked) return { outage: { reason: blocked.reason, retryAfterMs: blocked.retryAfterMs } };
+      const batchesOwed = [...new Set(rows.map((r) => String(r.batch)))];
+      const dispatchDir = ctx.dispatchDir ?? join(ctx.repo, 'research', `${ctx.run}-dispatch`);
+      const versions = new Map(batchesOwed.map((b) => [b,
+        contractReworkVersion(rows.filter((row) => String(row.batch) === b))]));
+      const reworkDone = (b: string) => readdirSync(dispatchDir).some((f: string) => {
+        if (!f.includes('contract-rework') || !f.includes(`-b${b}-${versions.get(b)}`)
+          || !f.endsWith('.result.json')) return false;
+        try {
+          const result = JSON.parse(readFileSync(join(dispatchDir, f), 'utf8'));
+          return result.ok === true && result.run === ctx.run
+            && String(result.label ?? '').endsWith(`-b${b}-${versions.get(b)}`)
+            && Array.isArray(result.covers) && result.covers.map(String).includes(b);
+        } catch { return false; }
+      });
+      const pendingRework = batchesOwed.filter((b) => {
+        try { return !reworkDone(b); } catch { return true; }
+      });
+      if (pendingRework.length) {
+        // The chartered lane is the owning Beta; an obligation row's
+        // `dispatch` overrides it when the owner substituted a model (the
+        // substitution then lives in the run's artifacts, on the record).
+        const override = obligationDispatch(ctx, 'contract-rework');
+        for (const b of pendingRework) {
+          executor.start(stage, {
+            role: 'beta',
+            job: 'authoring',
+            brief: 'briefs/content-repair.md',
+            task: [`research/${ctx.run}-beta-contract-rework.task.md`],
+            timeout: 14400,
+            ...(override ?? {}),
+            // The batch is both prompt identity (`<i>`) and evidence identity.
+            // An obligation override may substitute a lane, never the work unit.
+            covers: [b],
+            label: `contract-rework-${round}-b${b}-${versions.get(b)}`,
+          });
+        }
+        return;
+      }
+      // Every owed batch has a rework result: certify. The certifying Alpha
+      // samples the rewritten rows against the items and closes (or keeps
+      // open, with why) the ledger row IN PLACE — no author certifies its
+      // own repair.
+      executor.start(stage, {
+        role: 'alpha',
+        label: `certify-rework-${round}`,
+        job: 'adjudication',
+        covers: [],
+        brief: 'briefs/alpha.md',
+        task: [`research/${ctx.run}-alpha-rework-certify.task.md`],
+        timeout: 7200,
+      });
+    },
+  },
+
+  // Step 9 is intentionally serial. Frontier 16's old report stage launched
+  // snapshot, pathway mutation and report writing together; the report could
+  // therefore read state that had not happened yet. Each transition below owns
+  // one durable artifact and the next stage cannot start without it.
+  {
+    id: '9-snapshot-v2', label: 'post-step8 touch snapshot', units: () => ['all'],
+    pattern: resultPattern('tool', 'snap-post-step8-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'snap-post-step8-v2', job: 'bookkeeping-mechanical',
+      covers: ['all'], argv: ['node', 'tools/physics-support/touchlog.mjs', 'snap', touchesPath(ctx), 'post-step8-v2'] }],
+    gatesWaived: 'This is the immutable endpoint used by later touch audits; successful execution is its receipt.',
+  },
+  {
+    id: '9-pathway-sync-v2', label: 'mechanical pathway placement', units: () => ['all'],
+    artifacts: (ctx) => `research/${ctx.run}-pathway.json`,
+    pattern: resultPattern('tool', 'pathway-sync-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'pathway-sync-v2', job: 'bookkeeping-mechanical',
+      covers: ['all'], argv: ['node', 'tools/physics-support/pathway-sync.mjs', '--run', ctx.run] }],
+    gates: (ctx) => [gate('pathcheck', ['node', 'tools/physics-support/pathcheck.mjs']), closureGate(ctx)],
+  },
+  {
+    id: '9-pathway-seed-v2', label: 'pathway prose obligations', units: () => ['all'],
+    artifacts: (ctx) => `research/${ctx.run}-pathway-closure.json`,
+    pattern: resultPattern('tool', 'pathway-seed-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'pathway-seed-v2', job: 'bookkeeping-mechanical',
+      covers: ['all'], argv: ['node', 'tools/physics-support/pathway-closure.mjs', 'seed', '--run', ctx.run] }],
+    gatesWaived: 'The seed deliberately contains pending cognitive prose obligations; the next stage is their hard gate.',
+  },
+  {
+    id: '9-pathway-author-v2', label: 'Lead Alpha pathway rewrite', units: () => ['all'],
+    artifacts: (ctx) => `research/${ctx.run}-pathway-closure.json`,
+    // Role `alpha-high` since 2026-08-24; the pattern still said `alpha`. No run
+    // has reached step 9 under the new lane, so there is no legacy result to
+    // keep matching and the correct single spelling is enough.
+    pattern: resultPattern('alpha-high', 'pathway-close-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'alpha-high', label: 'pathway-close-v2', job: 'authoring', covers: ['all'],
+      brief: 'briefs/alpha.md',
+      task: [`research/${ctx.run}-alpha-pathway.task.md`, 'briefs/tasks/alpha-pathway.md'], timeout: 10800 }],
+    gates: (ctx) => [
+      gate('pathway-closure', ['node', 'tools/physics-support/pathway-closure.mjs', 'check', '--run', ctx.run]),
+      gate('pathcheck', ['node', 'tools/physics-support/pathcheck.mjs']), gate('prosecheck', ['node', 'tools/physics-support/prosecheck.mjs']), closureGate(ctx),
+    ],
+  },
+  {
+    id: '9-stamps-v2', label: 'final judge stamps', units: () => ['all'],
+    artifacts: (ctx) => `research/${ctx.run}-judge-stamps.json`,
+    pattern: resultPattern('tool', 'judge-stamps-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'judge-stamps-v2', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/physics-support/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+        '--exclude-published',
+        '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
+        '--terminal-resolutions', terminalResolutionsPath(ctx),
+        ...auditorCertificationArgs(ctx),
+        '--apply', '--report', `research/${ctx.run}-judge-stamps.json`] }],
+    gates: (ctx) => [gate('judge-stamps', ['node', 'tools/physics-support/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+      '--exclude-published',
+      '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
+      '--terminal-resolutions', terminalResolutionsPath(ctx), ...auditorCertificationArgs(ctx), '--verify'], {
+      liveness: { pattern: /judge-stamps: (\d+) item\(s\) in scope/.source, min: 1, unit: 'items in scope' } }), closureGate(ctx)],
+  },
+  {
+    id: '9-readiness-v2', label: 'structured publication readiness', units: () => ['all'],
+    artifacts: (ctx) => `research/${ctx.run}-publication-readiness.json`,
+    pattern: resultPattern('tool', 'readiness-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'readiness-v2', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/physics-support/publication-ready.mjs', '--run', ctx.run, '--write'] }],
+    // Full level coverage already performs the configured-judge closure and
+    // writes its receipt. Running the judge-only scan beside it reread every
+    // manifest, verdict, adjudication and terminal resolution for no added
+    // assurance.
+    gates: (ctx) => [...repoWide(ctx), levelCoverageGate(ctx), ledgerGate(ctx, { terminal: true }),
+      // Both gates share one actual renderer scan, cached on content and
+      // renderer/checker inputs. No new agent stage or repeated SSR pass.
+      gate('proof-step-separation', ['node', 'tools/physics-support/proof-layout.mjs', '--run', ctx.run, '--write', '--gate', 'proof-step-separation']),
+      gate('proof-blue-tags', ['node', 'tools/physics-support/proof-layout.mjs', '--run', ctx.run, '--write', '--gate', 'proof-blue-tags']),
+      gate('publication-readiness', ['node', 'tools/physics-support/publication-ready.mjs', '--run', ctx.run, '--verify'])],
+  },
+  // Reconcile the final receipts and append-only ledgers once.  The reporter
+  // receives this compact evidence packet instead of re-running gates or
+  // reconstructing fatal counts from prose; the exhaustive defect table is
+  // rendered mechanically from it.
+  {
+    id: '9-evidence-v2', label: 'mechanically reconciled owner evidence', units: () => ['all'],
+    artifacts: (ctx) => `research/${ctx.run}-step9-evidence.json`,
+    pattern: resultPattern('tool', 'step9-evidence-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'step9-evidence-v2', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/physics-support/step9-report.mjs', 'evidence', '--run', ctx.run] }],
+    gates: (ctx) => [gate('step9-evidence', ['node', 'tools/physics-support/step9-report.mjs', 'check-evidence', '--run', ctx.run])],
+  },
+  // Freeze the validated mathematical tree before asking for prose.  The next
+  // agent is kernel-enforced read-only and returns JSON; this receipt catches an
+  // out-of-band mutation as a hard failure rather than trusting that instruction.
+  {
+    id: '9-report-baseline-v2', label: 'freeze validated tree before reporting', units: () => ['all'],
+    artifacts: (ctx) => `research/${ctx.run}-step9-report-integrity.json`,
+    pattern: resultPattern('tool', 'report-baseline-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'report-baseline-v2', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/physics-support/step9-report.mjs', 'snapshot', '--run', ctx.run] }],
+    gates: (ctx) => [gate('report-integrity', ['node', 'tools/physics-support/step9-report.mjs', 'check', '--run', ctx.run])],
+  },
+  {
+    id: '9-owner-report-v2', label: 'read-only evidence-bound owner report', units: () => ['all'],
+    artifacts: (ctx) => `research/${ctx.run}-step9-report.response.json`,
+    pattern: resultPattern('alpha-report', 'owner-report-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'alpha-report', label: 'owner-report-v2', job: 'reporting', covers: ['all'],
+      brief: 'briefs/alpha.md', task: `research/${ctx.run}-alpha-step9.task.md`, timeout: 10800,
+      outputSchema: 'briefs/schemas/step9-report.json', resultArtifact: `research/${ctx.run}-step9-report.response.json` }],
+    gates: (ctx) => [gate('step9-evidence', ['node', 'tools/physics-support/step9-report.mjs', 'check-evidence', '--run', ctx.run]),
+      gate('report-response', ['node', 'tools/physics-support/step9-report.mjs', 'check-response', '--run', ctx.run])],
+  },
+  {
+    id: '9-owner-report-render-v2', label: 'materialize owner report', units: () => ['all'],
+    artifacts: (ctx) => `research/${ctx.run}-step9-report.md`,
+    pattern: resultPattern('tool', 'owner-report-render-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'owner-report-render-v2', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/physics-support/step9-report.mjs', 'render', '--run', ctx.run] }],
+    gates: (ctx) => [
+      gate('report-integrity', ['node', 'tools/physics-support/step9-report.mjs', 'check', '--run', ctx.run]),
+      gate('publication-readiness', ['node', 'tools/physics-support/publication-ready.mjs', '--run', ctx.run, '--verify', '--require-report']),
+    ],
+  },
+
+  // THE CLOSE-OUT COMMIT — the new terminal stage (owner directive,
+  // 2026-08-17: everything on main, no worktrees, no branches; committing is
+  // the engine's job so a `git clean` cannot lose a run that exists only in
+  // the working tree — frontier-15 held 16 page files and 18 items
+  // uncommitted at its pause). PUSH and `status: published` remain owner
+  // acts; run-commit.mjs refuses any branch but main and never touches a
+  // status field. The obligations gate is the other half of full closure:
+  // externally-blocked work is rows with unblock clocks, and a `block`-tier
+  // row must be closed or owner-accepted before the run may end.
+  {
+    id: '9-close-v2',
+    label: 'close-out commit on main',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'close-step9-v2'),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool',
+      label: 'close-step9-v2',
+      job: 'bookkeeping-mechanical',
+      covers: ['all'],
+      timeout: 300,
+      // run-commit writes this final receipt before staging, so the one close
+      // commit contains its own coverage evidence and the engine must not add
+      // a second, post-commit receipt.
+      writeReceipt: false,
+      argv: ['node', 'tools/physics-support/run-commit.mjs', '--run', ctx.run, '--require-proof-layout', '--final-receipt',
+        `research/${ctx.run}-dispatch/tool-close-step9-v2.result.json`],
+    }],
+    gates: (ctx) => [
+      // No liveness floor: zero obligation rows is a legitimately empty set.
+      gate('obligations', ['node', 'tools/physics-support/obligations.mjs', 'check', '--run', ctx.run, '--terminal']),
+      gate('proof-step-separation', ['node', 'tools/physics-support/proof-layout.mjs', '--run', ctx.run, '--verify', '--gate', 'proof-step-separation']),
+      gate('proof-blue-tags', ['node', 'tools/physics-support/proof-layout.mjs', '--run', ctx.run, '--verify', '--gate', 'proof-blue-tags']),
+      // `9-readiness-v2` already ran repo-wide, level coverage, judge closure,
+      // terminal ledger, and stamp validation, and its receipt sealed the tree
+      // on which those gates ran. The later report baseline independently
+      // protects the evidence/report interval. Together their cheap hash checks
+      // prove the validated inputs remain current instead of paying the same
+      // full scan again. Any unexpected mutation is an honest hard stop.
+      gate('report-integrity', ['node', 'tools/physics-support/step9-report.mjs', 'check', '--run', ctx.run]),
+      gate('publication-readiness', ['node', 'tools/physics-support/publication-ready.mjs', '--run', ctx.run,
+        '--verify', '--require-report']),
+      // Last, so the commit the gate verifies includes the rendered report and
+      // any obligation closure written in a repair round.
+      gate('tree-clean', ['node', 'tools/physics-support/run-commit.mjs', '--run', ctx.run, '--check']),
+    ],
+    // The close command commits its own receipt, so a clean run passes on the
+    // first battery. Repair rounds remain for a real late obligation; a
+    // report-integrity mismatch is never auto-repaired because it signals an
+    // unexpected protected-tree mutation.
+    maxFixRounds: 3,
+    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
+      if (failure.id === 'tree-clean') {
+        const r = await mechanicalRepair({ ctx, failure });
+        if (r.outcome === 'outage') return { outage: { reason: r.reason! } };
+        return;
+      }
+      if (failure.id !== 'obligations') return;
+      // Due rows with a recorded dispatch re-fire themselves; rows still on
+      // their clock are an outage wait; anything else is genuinely the
+      // owner's (accept on the record) and the blocker says so.
+      let rows: any[] = [];
+      try {
+        rows = readFileSync(join(ctx.repo, 'research', `${ctx.run}-obligations.jsonl`), 'utf8')
+          .split('\n').filter(Boolean).map((l) => JSON.parse(l))
+          .filter((r) => r.tier === 'block' && r.status === 'open');
+      } catch { return; }
+      const due = rows.filter((r) => r.dispatch && (!r.unblock_at || new Date(r.unblock_at).getTime() <= Date.now()));
+      if (due.length) {
+        for (const r of due) {
+          executor.start(stage, {
+            covers: [], timeout: 14400,
+            ...r.dispatch,
+            label: `obligation-${r.id}-${round}`,
+          });
+        }
+        return;
+      }
+      const clocks = rows.map((r) => (r.unblock_at ? new Date(r.unblock_at).getTime() - Date.now() : 0)).filter((ms) => ms > 0);
+      if (clocks.length) {
+        return { outage: { reason: `${rows.length} obligation(s) on an unblock clock`, retryAfterMs: Math.min(...clocks) } };
+      }
+    },
+  },
+];
+
+// Owner-selected late-stage model boundary. Apply it at the
+// stage boundary so repair hooks and obligation re-dispatches cannot silently
+// fall back to their role's ordinary lane. Tool plans remain deterministic.
+for (const stage of stages) {
+  // Refresh the one frontier index at mutable joins, not frozen judge/stamp
+  // stages. Reviewers maintain batch-owned evidence; this merge is mechanical.
+  if (['3a-scope', '3b-author', '4-splice',
+    '5a-adjudicate', '5b-cross', '7.2-impact', '7.6-impact', '7.9-repair',
+    '8-scope', '8-close'].includes(stage.id)) {
+    const previousGates = stage.gates;
+    stage.gates = (ctx: any) => [gate('frontier-dependency-ledger',
+      ['node', 'tools/physics-support/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run,
+        ...(['3b-author', '8-scope', '8-close'].includes(stage.id) ? ['--require-reviewed'] : [])]),
+      ...(previousGates?.(ctx) ?? [])];
+  }
+  if (/^(?:8|9)-/.test(stage.id)) {
+    // Step 8 uses Sol 6.1 high; Step 9 keeps DeepSeek max. The stage boundary also
+    // covers repair hooks and obligation re-dispatches. Item judges are selected
+    // by the separate judge lineup.
+    const profile = stage.id.startsWith('8-') ? SOL61_HIGH : DEEPSEEK_FLASH_MAX;
+    stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined : profile;
+  }
+}
+
+for (const stage of stages) {
+  const existing = stage.gates;
+  delete stage.gatesWaived;
+  stage.gates = (ctx: any) => [
+    gate('physics-content', ['node', 'tools/physics-support/physics-check.mjs', ...(stage.id.startsWith('1') || stage.id.startsWith('2') ? ['--plan', 'research/plan-spec.json'] : [])]),
+    ...(typeof existing === 'function' ? existing(ctx) : existing ?? []),
+  ];
+}
+
+export const workflowRevision = 'physics-v1-class-aware-review';
+export default { stages, batches, alphaGroups, workflowRevision };

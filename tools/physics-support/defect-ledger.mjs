@@ -1,0 +1,683 @@
+#!/usr/bin/env node
+// defect-ledger — every defect this pipeline has ever produced, as rows.
+//
+// WHY THIS EXISTS. The pipeline's defect history lived in 28 append-only
+// adjudication ledgers (structured, but stage-blind: 7 of 3,920 rows carry a
+// stage), a dozen step-9 reports (rich, prose-only), reader/Alpha reports
+// with per-run numbering schemes, PREVENTIONS.md, 17 tool headers, and an
+// out-of-repo memory dir. Nothing could answer "what recurs", "what leaked
+// past step 5", or "which detector has ever actually been the catcher" — and
+// the one hand-maintained aggregate (BUILD-AUDIT-INDEX.md) was wrong by ~6x
+// on its own headline total (70 claimed; 412 counted). A row per defect turns
+// every one of those questions into a query, and the generated view cannot
+// disagree with its rows.
+//
+//   node tools/physics-support/defect-ledger.mjs append   --file rows.json [--ledger <path>] [--no-render]
+//   node tools/physics-support/defect-ledger.mjs validate [--run R] [--ledger <path>]
+//   node tools/physics-support/defect-ledger.mjs stats    [--by f1,f2] [--leakage] [--recurrence] [--coverage] [--run R] [--json]
+//   node tools/physics-support/defect-ledger.mjs render   [--out research/DEFECT-LEDGER.md]
+//   node tools/physics-support/defect-ledger.mjs check    --run R --adjudications <adj.jsonl> [--reader-decisions <decisions.jsonl>]
+//                                         [--closure <closure.json>]
+//                                         [--view research/DEFECT-LEDGER.md] [--no-open]
+//                                         [--frontier research/R-step7-v2/frontier.json]
+//
+// THE VIEW IS GENERATED, AND ITS HEADER SAYS SO. `research/DEFECT-LEDGER.md`
+// carries "GENERATED from … @ <hash> — do not edit", and until 2026-08-16
+// nothing kept that claim true: `render` was wired into no stage, so the first
+// append without a manual render made the header a false statement about the
+// file it names. That is BUILD-AUDIT-INDEX's 70-versus-412 drift, one level
+// down and self-inflicted.
+//
+// Two mechanisms, at the two ends:
+//   `append` re-renders the view in the same invocation, so the view can never
+//   lag an append at all (`--no-render` for bulk seeding);
+//   `check` recomputes the fingerprint and compares it with the header, so a
+//   hand-edited view, a hand-edited ledger and a `--no-render` append are all
+//   caught as `render-stale`.
+// The machine reads the jsonl; nothing ever reads the view's content beyond
+// that one header hash, and that asymmetry is deliberate.
+//
+// THE ROW. One row per DEFECT — two lanes finding one defect is ONE row with
+// two adjudication_ref entries. Mandatory fields are exactly what the
+// adjudicator knows at disposition time; `unknown` is a first-class value for
+// the optional stage fields, and an unknown that blocks the write is a reason
+// the row never gets written. `prevention: {kind: mechanical|brief|process|
+// none, ref}` is the field that turns the log into a control.
+
+import { readFileSync, writeFileSync, appendFileSync, existsSync, readdirSync, mkdirSync, rmSync, statSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { validateFrontier } from './step7-rounds.mjs';
+import { isPublishedItem } from './published-repair-policy.mjs';
+
+const STEP5_SCOPE_TOOL = fileURLToPath(new URL('./step5-scope.mjs', import.meta.url));
+const STEP5_CLOSE_TOOL = fileURLToPath(new URL('./step5-close.mjs', import.meta.url));
+
+const argv = process.argv.slice(2);
+const cmd = argv[0];
+const opt = (n, d = null) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : d; };
+/** Was the flag given at all, whatever `opt` made of its value? `opt` silently
+ *  returns the default for a bare flag and for one whose value is the next
+ *  flag, which is how `stats --by` printed nothing and exited 0. */
+const given = (n) => argv.includes(`--${n}`);
+const asJson = argv.includes('--json');
+const ledgerPath = opt('ledger', 'research/defect-ledger.jsonl');
+const lockPath = `${ledgerPath}.append-lock`;
+const lockWait = new Int32Array(new SharedArrayBuffer(4));
+
+/** Serialize the append and generated-view refresh. Step 5 group Alphas write
+ * concurrently; without one transaction, two unique-id checks can race and a
+ * slower renderer can publish a view that predates a completed append. */
+function acquireAppendLock(timeoutMs = 30_000) {
+  const started = Date.now();
+  for (;;) {
+    try {
+      mkdirSync(lockPath);
+      writeFileSync(join(lockPath, 'owner.json'), JSON.stringify({ pid: process.pid, at: new Date().toISOString() }));
+      return () => rmSync(lockPath, { recursive: true, force: true });
+    } catch (cause) {
+      if (cause?.code !== 'EEXIST') throw cause;
+      // Append+render normally takes milliseconds. A ten-minute lock is a dead
+      // writer; removing it is safer than making every future build permanent.
+      try {
+        if (Date.now() - statSync(lockPath).mtimeMs > 10 * 60_000) {
+          rmSync(lockPath, { recursive: true, force: true });
+          continue;
+        }
+      } catch { continue; }
+      if (Date.now() - started >= timeoutMs) throw new Error(`timed out waiting for ${lockPath}`);
+      Atomics.wait(lockWait, 0, 0, 50);
+    }
+  }
+}
+
+const STAGES = ['1-scaffold', '2-assign', '3a-scope', '3-baseline', '3b-author', '4-splice', '4-baseline',
+  '5a-prepare', '5a-adjudicate', '5a-baseline', '5b-edges', '5b-cross', '5b-close', '6-judge', '7-baseline',
+  '7-adjudicate', '7-rejudge', '8-scope', '8-receipt', '9-report',
+  'A0', 'A1', 'A2', 'A3', 'A4', 'A6', 'A7', 'A8', 'A9', 'A10',
+  'owner', 'escaped-to-publication', 'post-publication', 'unknown',
+  // Historical rows keep their original stage identity; these are not active
+  // engine aliases and never supply dispatch coverage for the new workflow.
+  '3b-audit', '3-review', '3-fix', '3-recheck', '5-author', '6a-read',
+  '6b-adjudicate', '6b-baseline', '6c-cross', '7-judge', '8-baseline',
+  '8-adjudicate', '8-rejudge', '9-scope', '9-receipt', '10-report'];
+const ENUMS = {
+  class: ['accuracy', 'richness', 'breaking-runtime', 'silent-runtime'],
+  subclass: [
+    // accuracy — the citation class splits four ways deliberately: inflated,
+    // truncated, missing and corrupted have four different detectors and four
+    // different fixes, and the collapsed `dependency_citation` hid truncation
+    // for a whole run.
+    'invalid-inference', 'citation-inaccurate', 'citation-inflated',
+    'citation-truncated', 'citation-missing',
+    'citation-misattributed', 'citation-corrupted', 'false-or-overstrong-statement',
+    'false-or-overstrong-title', 'missing-hypothesis', 'missing-choice-scope',
+    'invalid-witness', 'false-boundary-disposition', 'arithmetic-error',
+    'undefined-notation', 'ill-typed-claim', 'ill-typed-construction',
+    // Current Step-5 rows distinguish frontmatter schema failures from later
+    // contract drift, because the carrier defect is in the item metadata.
+    'frontmatter-schema',
+    // Legacy Step-5 spellings still present in current ledgers.
+    'false-claim', 'ill-formed', 'false-computation', 'contract-mismatch',
+    'overstrong-title-or-statement', 'invalid-refutation', 'missing-map',
+    'missing-case', 'unlicensed-inference', 'unsupported-inference',
+    'unsupported-universal-property', 'reader-repair', 'risk-review',
+    // richness
+    'scope-drop', 'scope-loss', 'false-decline', 'deferral-without-destination',
+    'thin-harvest', 'unsourced-locator',
+    // runtime
+    'gate-vacuous', 'gate-wrong-signature', 'dispatch-lost', 'artifact-overwritten',
+    'stage-unowned', 'scheduler-race', 'prompt-transcription', 'liveness-false-positive',
+    'read-only-role-asked-to-write',
+    'other'],
+  severity: ['fatal', 'nonfatal', 'polish'],
+  location: ['title', 'statement', 'definition', 'proof-step', 'facts-block', 'remark',
+    'page-prose', 'page-summary', 'contract-row', 'coverage-row', 'frontmatter',
+    'tool-code', 'engine-stage', 'brief', 'task-file'],
+  caught_at_stage: STAGES,
+  // Keep one role value per registered GPT judge lane so dispositions remain
+  // valid when the active GPT lineup changes.
+  caught_by_role: ['beta', 'reader', 'refuter', 'judge-terra', 'judge-sol', 'judge-gpt54',
+    'group-alpha', 'lead-alpha', 'final-adjudicator', 'orchestrator', 'owner', 'gate', 'detector', 'unknown'],
+  disposition: ['fixed', 'narrowed', 'deferred', 'dropped', 'open', 'false-positive', 'nonfatal-recorded'],
+};
+const OPTIONAL_ENUMS = {
+  introduced_at_stage: STAGES,
+  should_have_caught: STAGES,
+  repair_cost: ['none', 'inline-fix', 'repair+rejudge', 'rewrite', 'rescope',
+    'blocker', 'tool-change', 'run-restart', 'contract-sync',
+    // Step-5 rows recorded before the narrower `rescope` name stabilized.
+    'narrow-statement'],
+};
+const CURRENT_STEP5_LOCATION_EXACT = new Set([
+  // Current Step-5 evidence names section labels and contract loci directly.
+  'Definition',
+  'Statement',
+  'Remark',
+  'Definition opening sentence',
+  'Statement and Refutation',
+  'contract-row empty',
+  'proof-contract entry',
+  'statement-and-proof',
+  'title-and-statement',
+  // Frontier-27 touched-carrier rows use this lower-case locus for
+  // manifest-only carrier changes that left the item mathematics intact.
+  'manifest',
+]);
+const CURRENT_STEP5_LOCATION_RE = [
+  /^proof-step \d+(?:\.\d+)*$/,
+  /^proof-steps \d+(?:\.\d+)*-\d+(?:\.\d+)*$/,
+  /^verification step \d+(?:\.\d+)*$/,
+];
+const FRONTIER20_LEGACY_LOCATION_EXACT = new Set([
+  'carrier',
+  'definition-display',
+  'frontmatter-and-display-math',
+  'proof-display',
+  'refutation-step',
+  'scope-restoration',
+  'statement-and-proof',
+  'statement-display',
+  'title-and-proof-steps',
+]);
+const FRONTIER20_LEGACY_LOCATION_RE = [
+  /^proof-step \d+(?:\.\d+)*$/,
+  /^page prose paragraph \d+$/,
+];
+const FRONTIER29_VALIDATE_ONLY_LOCATION_EXACT = new Set([
+  // One current frontier-29 refuter-backed row uses the human-spaced form.
+  // Keep it validate-only so new appends stay on canonical `page-prose`.
+  'page prose',
+]);
+const FRONTIER20_LEGACY_OTHER_NOTE_IDS = new Set([
+  'f20-b-t3-01', 'f20-b-t3-02', 'f20-b-t3-03', 'f20-b-t3-05', 'f20-b-t3-06',
+  'f20-b-t3-08', 'f20-b-t3-09', 'f20-b-t3-10', 'f20-b-t9-01', 'f20-b-t9-02',
+  'f20-b-t9-03', 'f20-b-t9-04', 'f20-b-t9-05', 'f20-b-t9-06', 'f20-b-t9-07',
+  'f20-b-t9-08', 'f20-b-t9-09', 'f20-b-t9-10', 'f20-b-t9-11', 'f20-b-t9-12',
+  'f20-b-t9-14', 'f20-b-t9-15', 'f20-b-t9-16', 'f20-b-t9-17', 'f20-b-t9-19',
+  'f20-b-t9-21', 'f20-b-t9-25', 'f20-b-t9-27', 'f20-b-t9-29', 'f20-b-t9-30',
+  'f20-b-t9-31', 'f20-b-p9-02',
+]);
+const MANDATORY = ['defect_id', 'run', 'at', 'class', 'subclass', 'severity', 'location',
+  'subject', 'caught_at_stage', 'caught_by_role', 'disposition'];
+// The scalar fields `stats --by` can group on. Grouping on a field no row has
+// produces one bucket named "(none)" holding every row — a table that looks
+// like an answer and is not one, which is exactly what a typo used to yield.
+const GROUPABLE = [...MANDATORY, ...Object.keys(OPTIONAL_ENUMS),
+  'introduced_by_role', 'subclass_note', 'source', 'batch', 'orig_id',
+  'item_sha256', 'recurrence_of'].sort();
+
+function loadLedger(path = ledgerPath) {
+  if (!existsSync(path)) return [];
+  return readFileSync(path, 'utf8').split('\n').filter(Boolean).map((l, i) => {
+    try { return JSON.parse(l); } catch { return { __parse_error: `line ${i + 1}` }; }
+  });
+}
+
+function locationAllowed(row, {
+  allowFrontier20Legacy = true,
+  allowFrontier29ValidateOnly = true,
+} = {}) {
+  if (ENUMS.location.includes(row.location)) return true;
+  if (CURRENT_STEP5_LOCATION_EXACT.has(row.location)) return true;
+  if (CURRENT_STEP5_LOCATION_RE.some((re) => re.test(row.location))) return true;
+  if (allowFrontier29ValidateOnly
+    && row.run === 'frontier-29'
+    && FRONTIER29_VALIDATE_ONLY_LOCATION_EXACT.has(row.location)) return true;
+  if (!allowFrontier20Legacy || row.run !== 'frontier-20') return false;
+  return FRONTIER20_LEGACY_LOCATION_EXACT.has(row.location)
+    || FRONTIER20_LEGACY_LOCATION_RE.some((re) => re.test(row.location));
+}
+
+function fallbackSubclassNote(row, { allowFrontier20Legacy = true } = {}) {
+  if (typeof row.subclass_note === 'string' && row.subclass_note.trim()) return row.subclass_note.trim();
+  if (!allowFrontier20Legacy
+    || row.subclass !== 'other'
+    || row.run !== 'frontier-20'
+    || !FRONTIER20_LEGACY_OTHER_NOTE_IDS.has(row.defect_id)) return '';
+  if (!Array.isArray(row.evidence)) return '';
+  for (const entry of row.evidence) {
+    if (typeof entry?.note === 'string' && entry.note.trim()) return entry.note.trim();
+  }
+  return '';
+}
+
+function validateRow(row, ids, opts = {}) {
+  const errs = [];
+  if (row.__parse_error) return [`unparseable jsonl at ${row.__parse_error}`];
+  for (const f of MANDATORY) if (row[f] === undefined || row[f] === null || row[f] === '') errs.push(`${row.defect_id ?? '(no id)'}: missing ${f}`);
+  for (const [f, dom] of Object.entries(ENUMS)) if (row[f] !== undefined
+    && (f !== 'location' ? !dom.includes(row[f]) : !locationAllowed(row, opts))) {
+    errs.push(`${row.defect_id}: ${f} "${row[f]}" outside the closed enum`);
+  }
+  for (const [f, dom] of Object.entries(OPTIONAL_ENUMS)) if (row[f] !== undefined && !dom.includes(row[f])) errs.push(`${row.defect_id}: ${f} "${row[f]}" outside the closed enum`);
+  if (row.subclass === 'other' && !fallbackSubclassNote(row, opts)) errs.push(`${row.defect_id}: subclass "other" requires subclass_note`);
+  if (row.prevention && !['mechanical', 'brief', 'process', 'none'].includes(row.prevention.kind)) errs.push(`${row.defect_id}: prevention.kind invalid`);
+  if (row.adjudication_ref && !Array.isArray(row.adjudication_ref)) errs.push(`${row.defect_id}: adjudication_ref must be an array`);
+  if (row.evidence && row.evidence.some((e) => !e?.path)) errs.push(`${row.defect_id}: evidence entries need a path`);
+  if (row.defect_id) {
+    if (ids.has(row.defect_id)) errs.push(`duplicate defect_id ${row.defect_id}`);
+    ids.add(row.defect_id);
+  }
+  return errs;
+}
+
+function validate(rows, runFilter) {
+  const ids = new Set();
+  const errs = [];
+  for (const row of rows) {
+    if (runFilter && row.run !== runFilter) { if (row.defect_id) ids.add(row.defect_id); continue; }
+    errs.push(...validateRow(row, ids));
+  }
+  return errs;
+}
+
+/** Resolve append-only ownership corrections without deleting history.
+ *
+ * A correction row may supersede earlier rows for the same run and subject.
+ * The earlier rows remain part of the audit trail, but only the newest active
+ * row owns an adjudication. Requiring backward references prevents a row from
+ * hiding a future or unrelated defect. */
+function activeOwnershipRows(rows, errs) {
+  const seen = new Map();
+  const superseded = new Set();
+  for (const row of rows) {
+    if (row.supersedes !== undefined) {
+      if (!Array.isArray(row.supersedes) || !row.supersedes.length
+        || new Set(row.supersedes).size !== row.supersedes.length
+        || row.supersedes.some((id) => typeof id !== 'string' || !id)) {
+        errs.push(`${row.defect_id}: supersedes must be a nonempty array of unique defect ids`);
+      } else {
+        for (const id of row.supersedes) {
+          const prior = seen.get(id);
+          if (!prior) errs.push(`${row.defect_id}: supersedes ${id}, which is not an earlier ledger row`);
+          else if (prior.run !== row.run || prior.subject !== row.subject) {
+            errs.push(`${row.defect_id}: may supersede only an earlier row for the same run and subject`);
+          } else superseded.add(id);
+        }
+      }
+    }
+    if (row.defect_id) seen.set(row.defect_id, row);
+  }
+  return rows.filter((row) => !superseded.has(row.defect_id));
+}
+
+const filtered = (rows) => { const r = opt('run'); return r ? rows.filter((x) => x.run === r) : rows; };
+
+// ---------------------------------------------------------------------------
+// The generated view, and the ONE definition of its fingerprint.
+//
+// `render` stamps it into the header and `check` recomputes it. Two copies of a
+// hash rule drift — that is this repo's `item_sha256` defect — so there is one.
+const VIEW_DEFAULT = 'research/DEFECT-LEDGER.md';
+const VIEW_HEADER_RE = /^> GENERATED from `[^`]+` @ ([0-9a-f]{12}) by/m;
+
+/** sha256 of the ledger's bytes, first 12 hex. An absent ledger fingerprints as
+ *  the empty string, so a view rendered from nothing still has a checkable
+ *  header rather than an exemption. */
+function ledgerFingerprint(path = ledgerPath) {
+  return createHash('sha256')
+    .update(existsSync(path) ? readFileSync(path) : '')
+    .digest('hex').slice(0, 12);
+}
+
+/** The fingerprint the view CLAIMS it was generated from, or null when the view
+ *  is absent or its header has been removed. */
+function viewFingerprint(viewPath) {
+  if (!existsSync(viewPath)) return null;
+  return VIEW_HEADER_RE.exec(readFileSync(viewPath, 'utf8'))?.[1] ?? null;
+}
+
+function renderView(outPath) {
+  const rows = loadLedger().filter((r) => !r.__parse_error);
+  const sha = ledgerFingerprint();
+  const runs = [...new Set(rows.map((r) => r.run))].sort();
+  const count = (pred) => rows.filter(pred).length;
+  const lines = [];
+  lines.push(`# Defect ledger — generated view`);
+  lines.push('');
+  lines.push(`> GENERATED from \`${ledgerPath}\` @ ${sha} by \`tools/physics-support/defect-ledger.mjs render\` — do not edit.`);
+  lines.push('');
+  // The lead is outcomes, never a bare total: a raw defect count reads as a
+  // quality signal and is not one (judge-rejection-rates-mislead).
+  lines.push('## What the numbers mean, first');
+  lines.push('');
+  lines.push('| | |');
+  lines.push('|---|---|');
+  lines.push(`| defects caught before publication | ${count((r) => r.caught_at_stage !== 'escaped-to-publication' && r.caught_at_stage !== 'post-publication')} |`);
+  lines.push(`| now mechanically prevented | ${count((r) => r.prevention?.kind === 'mechanical')} |`);
+  lines.push(`| escaped to publication | ${count((r) => r.caught_at_stage === 'escaped-to-publication' || r.caught_at_stage === 'post-publication')} |`);
+  lines.push(`| still open | ${count((r) => r.disposition === 'open')} |`);
+  lines.push('');
+  for (const run of runs) {
+    const rr = rows.filter((r) => r.run === run);
+    lines.push(`## ${run} — ${rr.length} row(s)`);
+    lines.push('');
+    const table = {};
+    for (const r of rr) {
+      (table[r.subclass] ??= {})[r.caught_at_stage] = ((table[r.subclass] ?? {})[r.caught_at_stage] ?? 0) + 1;
+    }
+    const stages = [...new Set(rr.map((r) => r.caught_at_stage))].sort((a, b) => STAGES.indexOf(a) - STAGES.indexOf(b));
+    lines.push(`| subclass | ${stages.join(' | ')} |`);
+    lines.push(`|---|${stages.map(() => '---').join('|')}|`);
+    for (const [sub, cells] of Object.entries(table).sort((a, b) =>
+      Object.values(b[1]).reduce((x, y) => x + y, 0) - Object.values(a[1]).reduce((x, y) => x + y, 0))) {
+      lines.push(`| ${sub} | ${stages.map((s) => cells[s] ?? '').join(' | ')} |`);
+    }
+    lines.push('');
+  }
+  const open = rows.filter((r) => r.disposition === 'open');
+  if (open.length) {
+    lines.push('## Open');
+    lines.push('');
+    for (const r of open) lines.push(`- \`${r.defect_id}\` ${r.run} · ${r.subclass} · ${r.subject}`);
+    lines.push('');
+  }
+  writeFileSync(outPath, lines.join('\n'));
+  return rows.length;
+}
+
+// ---------------------------------------------------------------------------
+if (cmd === 'append') {
+  const file = opt('file');
+  if (!file) { console.error('append needs --file <rows.json> — never quote JSON through a shell'); process.exit(2); }
+  const incoming = JSON.parse(readFileSync(file, 'utf8'));
+  const rows = Array.isArray(incoming) ? incoming : [incoming];
+  const release = acquireAppendLock();
+  try {
+    const existing = loadLedger();
+    const ids = new Set(existing.map((r) => r.defect_id));
+    const errs = [];
+    for (const row of rows) errs.push(...validateRow(row, ids, {
+      allowFrontier20Legacy: false,
+      allowFrontier29ValidateOnly: false,
+    }));
+    if (errs.length) {
+      console.error(`defect-ledger: ${errs.length} invalid row(s); nothing appended`);
+      for (const e of errs) console.error(`  ${e}`);
+      process.exitCode = 1;
+    } else {
+      appendFileSync(ledgerPath, rows.map((r) => JSON.stringify(r)).join('\n') + '\n');
+      console.log(`defect-ledger: appended ${rows.length} row(s) to ${ledgerPath} (${existing.length + rows.length} total)`);
+      // The view fingerprint and append are one locked transaction. A second
+      // writer starts from the first writer's completed ledger and view.
+      if (!argv.includes('--no-render')) {
+        const viewPath = opt('out', VIEW_DEFAULT);
+        const n = renderView(viewPath);
+        console.log(`defect-ledger: re-rendered ${n} row(s) -> ${viewPath} @ ${ledgerFingerprint()}`);
+      }
+    }
+  } finally {
+    release();
+  }
+  process.exit(process.exitCode ?? 0);
+}
+
+if (cmd === 'validate') {
+  const rows = loadLedger();
+  const errs = validate(rows, opt('run'));
+  const n = filtered(rows).length;
+  if (errs.length) { for (const e of errs) console.error(`ERROR ${e}`); }
+  console.log(`defect-ledger: ${n} defect row(s) checked, ${errs.length} error(s)`);
+  process.exit(errs.length ? 1 : 0);
+}
+
+if (cmd === 'stats') {
+  const rows = filtered(loadLedger()).filter((r) => !r.__parse_error);
+  const out = {};
+  const by = opt('by');
+  // A bare `--by`, or a `--by` whose value is the next flag, printed nothing and
+  // exited 0 — the query silently became "no query", and a caller reading the
+  // exit code learned that everything was fine. An unknown field was worse: it
+  // grouped every row into one bucket named "(none)" and printed it as a result.
+  if (given('by') && !by) {
+    console.error('stats --by needs a comma-separated field list, e.g. --by subclass,caught_at_stage');
+    console.error(`valid fields: ${GROUPABLE.join(', ')}`);
+    process.exit(2);
+  }
+  if (by) {
+    const fields = by.split(',').map((f) => f.trim());
+    const unknown = fields.filter((f) => !GROUPABLE.includes(f));
+    if (unknown.length) {
+      console.error(`stats --by: unknown field(s) ${unknown.join(', ')}`);
+      console.error(`valid fields: ${GROUPABLE.join(', ')}`);
+      process.exit(2);
+    }
+    const table = {};
+    for (const r of rows) {
+      const key = fields.map((f) => r[f] ?? '(none)').join(' × ');
+      table[key] = (table[key] ?? 0) + 1;
+    }
+    out.by = Object.fromEntries(Object.entries(table).sort((a, b) => b[1] - a[1]));
+  }
+  if (argv.includes('--leakage')) {
+    // should_have_caught vs caught_at_stage — numerator AND denominator,
+    // always: a bare ratio cannot distinguish a healthier pipeline from a
+    // ledger that quietly stopped being written.
+    const leaked = rows.filter((r) => r.should_have_caught && r.should_have_caught !== 'unknown'
+      && r.caught_at_stage !== r.should_have_caught);
+    const denom = rows.filter((r) => r.should_have_caught && r.should_have_caught !== 'unknown');
+    out.leakage = {
+      leaked: leaked.length, of: denom.length,
+      pairs: leaked.reduce((acc, r) => {
+        const k = `${r.should_have_caught} -> ${r.caught_at_stage}`;
+        acc[k] = (acc[k] ?? 0) + 1; return acc;
+      }, {}),
+    };
+  }
+  if (argv.includes('--recurrence')) {
+    const byClass = {};
+    for (const r of rows) {
+      (byClass[r.subclass] ??= { runs: new Set(), mechanical: false }).runs.add(r.run);
+      if (r.prevention?.kind === 'mechanical') byClass[r.subclass].mechanical = true;
+    }
+    out.recurrence = Object.entries(byClass)
+      .filter(([, v]) => v.runs.size >= 2 && !v.mechanical)
+      .map(([subclass, v]) => ({ subclass, runs: [...v.runs].sort(),
+        note: 'present in 2+ runs with no mechanical prevention — a design input for the next run' }));
+  }
+  if (argv.includes('--coverage')) {
+    // A run with confirmed_fatal judge/reader adjudications and zero ledger rows is the
+    // ledger going stale — surfaced at the START of the next run via doctor.
+    const runsWithRows = new Set(loadLedger().map((r) => r.run));
+    const fatalByRun = new Map();
+    for (const dir of ['research', 'research/audit']) {
+      if (!existsSync(dir)) continue;
+      for (const f of readdirSync(dir).filter((x) => x.endsWith('-judge-adjudications.jsonl')
+        || x.endsWith('-step7-alert-decisions.jsonl'))) {
+        const run = f.replace(/-(?:judge-adjudications|step7-alert-decisions)\.jsonl$/, '');
+        const fatal = readFileSync(join(dir, f), 'utf8').split('\n')
+          .filter((l) => l.includes('"confirmed_fatal"')).length;
+        if (fatal) fatalByRun.set(run, (fatalByRun.get(run) ?? 0) + fatal);
+      }
+    }
+    const holes = [...fatalByRun.entries()]
+      .filter(([run]) => !runsWithRows.has(run))
+      .map(([run, confirmed_fatal]) => ({ run, confirmed_fatal }));
+    out.coverage = { runs_with_fatal_and_no_rows: holes };
+  }
+  console.log(asJson ? JSON.stringify(out, null, 2) : Object.entries(out).map(([k, v]) =>
+    `## ${k}\n${JSON.stringify(v, null, 2)}`).join('\n\n'));
+  process.exit(0);
+}
+
+if (cmd === 'render') {
+  const outPath = opt('out', VIEW_DEFAULT);
+  const n = renderView(outPath);
+  console.log(`defect-ledger: rendered ${n} row(s) -> ${outPath}`);
+  process.exit(0);
+}
+
+if (cmd === 'check') {
+  const run = opt('run');
+  const adjPath = opt('adjudications');
+  const readerDecisionsPath = opt('reader-decisions');
+  const closurePath = opt('closure');
+  if (!run || !adjPath) { console.error('check needs --run and --adjudications'); process.exit(2); }
+  const rows = loadLedger();
+  const runRows = rows.filter((r) => r.run === run);
+  const excluded = [];
+  let included = () => true;
+  if (given('frontier')) {
+    const path = opt('frontier');
+    if (!path) throw Error('--frontier requires the frozen frontier path');
+    const frontier = validateFrontier(JSON.parse(readFileSync(path, 'utf8')));
+    if (frontier.run !== run) throw Error('wrong run frontier');
+    const ids = new Set(frontier.ids);
+    const known = new Set(readdirSync('items').filter(name => name.endsWith('.md')).map(name => name.slice(0, -3)));
+    // Unknown/page/global subjects remain obligations. Only known outside
+    // item subjects are excluded; references to a supplier never own a row.
+    included = id => (ids.has(id) && !isPublishedItem(process.cwd(), id)) || !known.has(id);
+  }
+  const mine = runRows.filter(row => {
+    if (included(row.subject)) return true;
+    excluded.push({ kind: 'ledger-row', evidence: row }); return false;
+  });
+  const errs = validate(rows, run);
+  if (given('frontier')) for (const row of rows) if (row.__parse_error) errs.push(`unparseable jsonl at ${row.__parse_error}`);
+  // Structural corruption and invalid ownership history remain global.
+  const ownershipMine = activeOwnershipRows(runRows, errs).filter(row => included(row.subject));
+  const references = (r) => (r.adjudication_ref ?? []).filter((ref) => ref && typeof ref === 'object');
+
+  // (a) exact-hash bijection: every confirmed_fatal adjudication row appears in
+  // EXACTLY ONE ledger row's adjudication_ref — the anti-double-count clause.
+  if (!existsSync(adjPath)) { errs.push(`no adjudication ledger at ${adjPath}`); }
+  else {
+    const fatals = readFileSync(adjPath, 'utf8').split('\n').filter(Boolean)
+      .map((l) => { try { return JSON.parse(l); } catch { if (given('frontier')) errs.push(`unparseable adjudication JSON in ${adjPath}`); return null; } })
+      .filter((a) => a?.outcome === 'confirmed_fatal');
+    for (const a of fatals) {
+      if (!included(a.id)) { excluded.push({ kind: 'adjudication', evidence: a }); continue; }
+      // Current rows identify the exact model verdict and context. Two judges
+      // can find DIFFERENT defects on the same bytes, so item_sha256 alone is
+      // not an ownership key. Prefer exact structured references; fall back to
+      // old item-only references only when no exact owner exists, preserving
+      // pre-contract ledgers without letting them double-own a current row.
+      const sameItem = (r, ref) => a.item_sha256 ? ref.item_sha256 === a.item_sha256 : r.subject === a.id;
+      const exactOwners = ownershipMine.filter((r) => references(r).some((ref) => sameItem(r, ref)
+        && (!ref.id || ref.id === a.id)
+        && (!a.model || ref.model === a.model)
+        && (!a.context_sha256 || ref.context_sha256 === a.context_sha256)));
+      const legacyOwners = ownershipMine.filter((r) => references(r).some((ref) => sameItem(r, ref)
+        && (!ref.id || ref.id === a.id)
+        && (!ref.model || !ref.context_sha256)));
+      const owners = exactOwners.length ? exactOwners : legacyOwners;
+      if (owners.length === 0) errs.push(`confirmed_fatal on ${a.id} (${a.model ?? '?'}) has no ledger row — the defect the adjudicator confirmed was never recorded`);
+      if (owners.length > 1) errs.push(`confirmed_fatal on ${a.id} appears in ${owners.length} rows (${owners.map((o) => o.defect_id).join(', ')}) — one defect, one row`);
+    }
+  }
+
+  // Step-6 reader warnings may independently license fatal repairs. They use
+  // alert ids rather than judge tuples, but carry the same one-defect/one-row
+  // obligation and exact pre-edit item guard.
+  if (readerDecisionsPath && existsSync(readerDecisionsPath)) {
+    const fatals = readFileSync(readerDecisionsPath, 'utf8').split('\n').filter(Boolean)
+      .map((l) => { try { return JSON.parse(l); } catch { if (given('frontier')) errs.push(`unparseable reader-decision JSON in ${readerDecisionsPath}`); return null; } })
+      .filter((a) => a?.outcome === 'confirmed_fatal');
+    for (const a of fatals) {
+      if (!included(a.item)) { excluded.push({ kind: 'reader-decision', evidence: a }); continue; }
+      const owners = ownershipMine.filter((r) => references(r).some((ref) =>
+        ref.alert_id === a.alert_id && ref.item === a.item && ref.item_sha256 === a.item_sha256));
+      if (owners.length === 0) errs.push(`confirmed_fatal reader warning ${a.alert_id} on ${a.item} has no ledger row — the defect the adjudicator confirmed was never recorded`);
+      if (owners.length > 1) errs.push(`confirmed_fatal reader warning ${a.alert_id} on ${a.item} appears in ${owners.length} rows (${owners.map((o) => o.defect_id).join(', ')}) — one defect, one row`);
+    }
+  }
+
+  // (b) the generated view is current. Its header asserts which ledger bytes it
+  // was built from; recompute and compare. This is the only thing anything ever
+  // reads out of the view — the machine reads the jsonl — and it catches the
+  // window between an adjudication and its close, a `--no-render` append, and a
+  // hand-edit of a file whose own header forbids editing.
+  const viewPath = opt('view', VIEW_DEFAULT);
+  const stamped = viewFingerprint(viewPath);
+  const actual = ledgerFingerprint();
+  if (stamped === null) {
+    errs.push(`render-stale: ${viewPath} is missing or carries no GENERATED header — run \`node tools/physics-support/defect-ledger.mjs render\``);
+  } else if (stamped !== actual) {
+    errs.push(`render-stale: ${viewPath} was generated from ${stamped} but ${ledgerPath} is now ${actual} — run \`node tools/physics-support/defect-ledger.mjs render\``);
+  }
+
+  // (c) step-5 liveness: the 5a reports are the rows with no other mechanical
+  // source (78% of frontier-14's fatals lived only in prose). Without this
+  // clause the gate is satisfiable by mirroring the adjudication ledger.
+  const has5a = existsSync('research') && readdirSync('research').some((f) =>
+    f.startsWith(`${run}-alpha-`) && f.endsWith('-5a.md'));
+  if (has5a && !mine.some((r) => ['5a-adjudicate', '5b-cross'].includes(r.caught_at_stage))) {
+    errs.push('a 5a report exists but no ledger row is caught at preliminary/5a/5b — the step-5 body is the part no other artifact holds');
+  }
+
+  // (d) open-defect agreement with the closure receipt. FATAL rows only in the
+  // ledger→closure direction: the closure receipt's namespace is unrepaired
+  // fatal PROOF defects, and a nonfatal row deliberately left open — B41 on
+  // frontier-15 was a 503-ing archive snapshot whose 5a Alpha correctly
+  // recorded "re-sweep before publish; re-source only if still dead when the
+  // archive is demonstrably healthy" — is legitimate ledger state with no
+  // business in that receipt. The first version compared every open row and
+  // spent a step-7 repair round on the false positive. The reverse direction
+  // is unconditional as before, and clause (e) is the terminal backstop that
+  // keeps a nonfatal open row from surviving to publication.
+  if (closurePath && existsSync(closurePath)) {
+    const closure = JSON.parse(readFileSync(closurePath, 'utf8'));
+    const openFatal = new Set((closure.open_fatal ?? []).map(String).filter(id => {
+      if (included(id)) return true;
+      excluded.push({ kind: 'closure-open-fatal', evidence: id }); return false;
+    }));
+    for (const r of mine.filter((x) => x.disposition === 'open' && x.severity === 'fatal')) {
+      if (!openFatal.has(String(r.subject))) errs.push(`${r.defect_id} is open in the ledger but ${r.subject} is not open in the closure receipt — one of them is stale`);
+    }
+    for (const id of openFatal) {
+      if (!mine.some((r) => r.subject === id && r.disposition === 'open')) {
+        errs.push(`closure names ${id} open_fatal with no open ledger row — exactly how two blockers lived only in markdown`);
+      }
+    }
+  }
+
+  // (e) the terminal stage may not end with ANY open row, whatever its
+  // severity. `--no-open` is passed by the terminal 9-close gate alone: step 8 owns
+  // sweeping the run's open rows (closing each whose recorded condition is
+  // met, with evidence), so a row still open here is unfinished work the
+  // owner must see, not a waivable detail.
+  if (given('no-open')) {
+    for (const r of mine.filter((x) => x.disposition === 'open')) {
+      errs.push(`${r.defect_id} (${r.severity}) is still open at the terminal stage: ${r.subject} — close it with evidence or it ships open`);
+    }
+  }
+
+  // (f) New Step-5 runs carry exact routed decisions, not a fatal-count proxy.
+  // Re-run their mechanical closure here so a later ledger edit cannot break
+  // obligation ownership after Step 5 passed. Historical runs with no decision
+  // artifacts retain their evidence and are not retroactively failed.
+  {
+    let inResearch = [];
+    try { inResearch = readdirSync('research'); } catch { /* no research dir: nothing to cross-check */ }
+    const decisionFiles = inResearch.filter((x) => x.startsWith(`${run}-alpha-`) && x.endsWith('-5a-decisions.json'));
+    const reportFiles = inResearch.filter((x) => x.startsWith(`${run}-alpha-`) && x.endsWith('-5a.md'));
+    if (decisionFiles.length) {
+      for (const rf of reportFiles) {
+        const sibling = rf.replace(/-5a\.md$/, '-5a-decisions.json');
+        if (!decisionFiles.includes(sibling)) {
+          errs.push(`${rf} has no ${sibling} — every routed Step-5 group needs exact decisions`);
+        }
+      }
+      const frozenPath = join('research', `${run}-step5-closure.json`);
+      const closure = spawnSync(process.execPath,
+        existsSync(frozenPath)
+          ? [STEP5_CLOSE_TOOL, 'verify', '--root', process.cwd(), '--run', run]
+          : [STEP5_SCOPE_TOOL, 'check', '--root', process.cwd(), '--run', run, '--phase', 'final'],
+        { encoding: 'utf8', timeout: 120_000 });
+      if (closure.status !== 0) errs.push(`Step-5 routed decisions or frozen closure no longer close:\n${closure.stderr || closure.stdout}`);
+    } else if (reportFiles.length) {
+      console.log(`note: ${reportFiles.length} 5a report(s) predate exact -5a-decisions.json routing; retained as historical evidence`);
+    }
+  }
+
+  if (errs.length) for (const e of errs) console.error(`ERROR ${e}`);
+  if (given('frontier')) console.log(`Step 7 outside findings excluded, not passed: ${JSON.stringify(excluded)}`);
+  console.log(`defect-ledger: ${mine.length} defect row(s) checked for ${run}, ${errs.length} error(s)`);
+  process.exit(errs.length ? 1 : 0);
+}
+
+console.error('usage: node tools/physics-support/defect-ledger.mjs append|validate|stats|render|check …  (see header)');
+process.exit(2);

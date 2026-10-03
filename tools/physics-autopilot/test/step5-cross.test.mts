@@ -1,0 +1,379 @@
+import { spawnSync } from './fixture-process.mts';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+
+
+const REPO = join(import.meta.dirname, '..', '..', '..');
+const TOOL = join(REPO, 'tools/physics-support', 'cross-group-edges.mjs');
+const sha = (text: string | Buffer) => createHash('sha256').update(text).digest('hex');
+const canonical = (value: any): any => Array.isArray(value) ? value.map(canonical)
+  : value && typeof value === 'object'
+    ? Object.fromEntries(Object.keys(value).sort().map((key) => [key, canonical(value[key])]))
+    : value;
+const hashValue = (value: any) => sha(JSON.stringify(canonical(value)));
+
+function item(id: string, deps: string[] = [], forward: string[] = []) {
+  return `---\nid: ${id}\nstatus: draft\ndeps: [${deps.join(', ')}]\njustified_by: []\nforward_refs: [${forward.join(', ')}]\n---\n## Statement\n${id}.\n\n## Proof\n1.1 Done.\n`;
+}
+
+function fixture(edge = false) {
+  const root = mkdtempSync(join(tmpdir(), 'step5-cross-'));
+  for (const dir of ['research', 'items', 'library/test']) mkdirSync(join(root, dir), { recursive: true });
+  const items = { 'lem-source': item('lem-source', edge ? ['lem-target'] : []), 'lem-target': item('lem-target') };
+  for (const [id, text] of Object.entries(items)) writeFileSync(join(root, 'items', `${id}.md`), text);
+  for (const id of ['page-one', 'page-two']) writeFileSync(join(root, 'library/test', `${id}.md`), `---\npage: ${id}\n---\n`);
+  writeFileSync(join(root, 'research', 'r-batch-1.pages.json'), JSON.stringify([
+    { id: 'page-one', category: 'test', items: ['lem-source'] },
+  ]));
+  writeFileSync(join(root, 'research', 'r-batch-2.pages.json'), JSON.stringify([
+    { id: 'page-two', category: 'test', items: ['lem-target'] },
+  ]));
+  writeFileSync(join(root, 'research', 'r-alpha-groups.json'), JSON.stringify([
+    { label: 'a', covers: ['1', '2'] },
+  ]));
+  writeFileSync(join(root, 'research', 'plan-spec.json'), JSON.stringify({ pages: [
+    { id: 'page-one', order: 1, items: [{ id: 'lem-source' }] },
+    { id: 'page-two', order: 2, items: [{ id: 'lem-target' }] },
+  ] }));
+  for (const [batch, id, page] of [['1', 'lem-source', 'page-one'], ['2', 'lem-target', 'page-two']]) {
+    const pageMetadata = { id: page, category: 'test' };
+    const contract = {};
+    writeFileSync(join(root, 'research', `r-batch-${batch}.proof-contracts.json`), JSON.stringify({ contracts: { [id]: contract } }));
+    writeFileSync(join(root, 'research', `r-step5-hash-${batch}-post-5a.json`), JSON.stringify({
+      version: 2, run: 'r', batch, label: 'post-5a', manifest: [id],
+      hashes: { [id]: {
+        item_sha256: sha(readFileSync(join(root, 'items', `${id}.md`)),),
+        contract_sha256: hashValue(contract),
+        manifest_sha256: hashValue({ id, __step6_page_id: page }),
+      } },
+      page_manifest: [page], page_hashes: { [page]: {
+        file_sha256: sha(readFileSync(join(root, 'library/test', `${page}.md`)),),
+        manifest_sha256: hashValue(pageMetadata), item_order: [id],
+      } },
+    }));
+  }
+  const run = (command: string) => spawnSync(process.execPath,
+    [TOOL, command, '--run', 'r', '--root', root], { cwd: REPO, encoding: 'utf8', timeout: 60_000 });
+  const carrier = (id: string) => spawnSync(process.execPath,
+    [TOOL, 'carrier', '--run', 'r', '--id', id, '--root', root],
+    { cwd: REPO, encoding: 'utf8', timeout: 60_000 }).stdout.trim();
+  return { root, run, carrier };
+}
+
+test('scope snapshots and cross-group carriers share the historical hash schema', () => {
+  const fx = fixture();
+  try {
+    for (const batch of ['1', '2']) {
+      const result = spawnSync(process.execPath, [join(REPO, 'tools/physics-support/step5-scope.mjs'),
+        'hash', '--run', 'r', '--batch', batch, '--label', 'post-5a', '--root', fx.root],
+      { cwd: REPO, encoding: 'utf8' });
+      assert.equal(result.status, 0, result.stderr);
+    }
+    assert.equal(fx.run('list').status, 0);
+    const list = JSON.parse(readFileSync(join(fx.root, 'research/r-cross-group-edges.json'), 'utf8'));
+    assert.deepEqual(list.changes, []);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('5b lists same-group cross-batch edges and closes an exact current verdict', () => {
+  const fx = fixture(true);
+  try {
+    assert.equal(fx.run('list').status, 0);
+    const list = JSON.parse(readFileSync(join(fx.root, 'research', 'r-cross-group-edges.json'), 'utf8'));
+    assert.equal(list.edges.length, 1);
+    assert.equal(list.edges[0].from_group, 'a');
+    assert.equal(list.edges[0].to_group, 'a');
+    writeFileSync(join(fx.root, 'research', 'r-5b-verdicts.jsonl'), JSON.stringify({
+      kind: 'edge', from: 'lem-source', to: 'lem-target', verdict: 'accurate',
+      from_sha256: list.edges[0].from_sha256, to_sha256: list.edges[0].to_sha256,
+      defect_ids: [], note: 'Statement exactly licenses the use.',
+    }) + '\n');
+    const result = fx.run('check');
+    assert.equal(result.status, 0, result.stderr);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('5b retains an exact-hash orientation forward only while every target link stays in Remarks', () => {
+  const fx = fixture();
+  try {
+    const sourcePath = join(fx.root, 'items', 'lem-source.md');
+    const targetPath = join(fx.root, 'items', 'lem-target.md');
+    const evidencePath = join(fx.root, 'research', 'orientation-review.md');
+    const orientation = item('lem-source', [], ['lem-target']) + '\n## Remarks\nSee [[lem-target]] for an example.\n';
+    writeFileSync(sourcePath, orientation);
+    writeFileSync(evidencePath, 'Read the sole Remarks link and the target example.\n');
+    assert.equal(fx.run('list').status, 0);
+    const verdict = {
+      kind: 'forward', item: 'lem-source', target: 'lem-target', decision: 'orientation-reviewed',
+      item_sha256: sha(orientation), target_sha256: sha(readFileSync(targetPath)),
+      evidence: 'research/orientation-review.md', evidence_sha256: sha(readFileSync(evidencePath)),
+      defect_ids: [], note: 'The target is linked only in Remarks and supplies no premise to Statement or Proof.',
+    };
+    const verdictPath = join(fx.root, 'research', 'r-5b-verdicts.jsonl');
+    const changeVerdict = { kind: 'item', batch: '1', id: 'lem-source', verdict: 'accepted',
+      subject_sha256: fx.carrier('lem-source'), defect_ids: [],
+      note: 'The current item carrier and its orientation link were reviewed.' };
+    const saveVerdicts = () => {
+      changeVerdict.subject_sha256 = fx.carrier('lem-source');
+      writeFileSync(verdictPath, [verdict, changeVerdict].map((row) => JSON.stringify(row)).join('\n') + '\n');
+    };
+    saveVerdicts();
+    const initialCheck = fx.run('check');
+    assert.equal(initialCheck.status, 0, initialCheck.stderr);
+
+    const bearing = orientation.replace('## Statement\nlem-source.', '## Statement\nUses [[lem-target]].');
+    writeFileSync(sourcePath, bearing);
+    verdict.item_sha256 = sha(bearing);
+    saveVerdicts();
+    assert.match(fx.run('check').stderr, /forward-orientation-load-bearing/);
+
+    writeFileSync(sourcePath, orientation);
+    verdict.item_sha256 = sha(orientation);
+    writeFileSync(targetPath, item('lem-target') + '\nChanged target.\n');
+    saveVerdicts();
+    assert.match(fx.run('check').stderr, /forward-orientation-target-stale/);
+
+    verdict.target_sha256 = sha(readFileSync(targetPath));
+    writeFileSync(evidencePath, 'Changed review.\n');
+    saveVerdicts();
+    assert.match(fx.run('check').stderr, /forward-orientation-evidence-stale/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('5b requires verdicts for edges and forwards introduced after listing', () => {
+  const fx = fixture(false);
+  try {
+    assert.equal(fx.run('list').status, 0);
+    writeFileSync(join(fx.root, 'items', 'lem-source.md'), item('lem-source', ['lem-target'], ['later-result']));
+    let result = fx.run('check');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /edge-introduced-unverdicted/);
+    assert.match(result.stderr, /forward-introduced-undecided/);
+
+    const current = sha(readFileSync(join(fx.root, 'items', 'lem-source.md')));
+    const target = sha(readFileSync(join(fx.root, 'items', 'lem-target.md')));
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), JSON.stringify({
+      defect_id: 'r-S6-forward', run: 'r', subject: 'lem-source', caught_at_stage: '5b-cross', disposition: 'fixed',
+    }) + '\n');
+    writeFileSync(join(fx.root, 'research', 'r-5b-verdicts.jsonl'), [
+      { kind: 'edge', from: 'lem-source', to: 'lem-target', verdict: 'accurate', from_sha256: current, to_sha256: target, defect_ids: [], note: 'valid' },
+      { kind: 'forward', item: 'lem-source', target: 'later-result', decision: 'lemmas-added', item_sha256: current, defect_ids: ['r-S6-forward'], note: 'intermediate result added' },
+      { kind: 'item', batch: '1', id: 'lem-source', verdict: 'accepted', subject_sha256: fx.carrier('lem-source'), defect_ids: [], note: 'Current carrier verified with the edge and forward dispositions.' },
+    ].map((row) => JSON.stringify(row)).join('\n') + '\n');
+    // The decision is not applied until forward_refs is removed.
+    result = fx.run('check');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /forward-still-declared/);
+    writeFileSync(join(fx.root, 'items', 'lem-source.md'), item('lem-source', ['lem-target']));
+    const applied = sha(readFileSync(join(fx.root, 'items', 'lem-source.md')));
+    const verdicts = readFileSync(join(fx.root, 'research', 'r-5b-verdicts.jsonl'), 'utf8')
+      .trim().split('\n').map((line) => JSON.parse(line));
+    verdicts[0].from_sha256 = applied;
+    verdicts[1].item_sha256 = applied;
+    verdicts[2].subject_sha256 = fx.carrier('lem-source');
+    writeFileSync(join(fx.root, 'research', 'r-5b-verdicts.jsonl'), verdicts.map((row) => JSON.stringify(row)).join('\n') + '\n');
+    result = fx.run('check');
+    assert.equal(result.status, 0, result.stderr);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('5b rejects duplicate, unapplied, and stale edge verdicts', () => {
+  const fx = fixture(true);
+  try {
+    fx.run('list');
+    const list = JSON.parse(readFileSync(join(fx.root, 'research', 'r-cross-group-edges.json'), 'utf8'));
+    const row = { kind: 'edge', from: 'lem-source', to: 'lem-target', verdict: 'struck',
+      from_sha256: list.edges[0].from_sha256, to_sha256: list.edges[0].to_sha256,
+      defect_ids: ['r-S6-edge'], note: 'bad citation' };
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), JSON.stringify({
+      defect_id: 'r-S6-edge', run: 'r', subject: 'lem-source', caught_at_stage: '5b-cross', disposition: 'fixed',
+    }) + '\n');
+    writeFileSync(join(fx.root, 'research', 'r-5b-verdicts.jsonl'), `${JSON.stringify(row)}\n${JSON.stringify(row)}\n`);
+    const result = fx.run('check');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /verdict-duplicate/);
+    assert.match(result.stderr, /edge-strike-not-applied/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('5b cannot silently carry a proof-only edit past the post-5a boundary', () => {
+  const fx = fixture(false);
+  try {
+    assert.equal(fx.run('list').status, 0);
+    const itemPath = join(fx.root, 'items', 'lem-source.md');
+    writeFileSync(itemPath, readFileSync(itemPath, 'utf8') + '\nA clarified proof step.\n');
+    let result = fx.run('check');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /change-introduced-undecided: item \[lem-source\]/);
+
+    writeFileSync(join(fx.root, 'research', 'r-5b-verdicts.jsonl'), `${JSON.stringify({
+      kind: 'item', batch: '1', id: 'lem-source', verdict: 'accepted',
+      subject_sha256: fx.carrier('lem-source'), defect_ids: [],
+      note: 'The complete current proof and composite carrier were critically checked.',
+    })}\n`);
+    result = fx.run('check');
+    assert.equal(result.status, 0, result.stderr);
+
+    writeFileSync(itemPath, readFileSync(itemPath, 'utf8') + '\nA later unreviewed byte.\n');
+    result = fx.run('check');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /change-verdict-stale/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('5b does not require a gate verdict for a published repair', () => {
+  const fx = fixture(false);
+  try {
+    const published = 'lem-published-repair';
+    const publishedText = item(published).replace('status: draft', 'status: published');
+    writeFileSync(join(fx.root, 'items', `${published}.md`), publishedText);
+    writeFileSync(join(fx.root, 'research', 'r-step5-published-claims.jsonl'), `${JSON.stringify({
+      version: 1, run: 'r', id: published, group: 'a', pre_sha256: sha(publishedText),
+    })}\n`);
+    assert.equal(fx.run('list').status, 0);
+    writeFileSync(join(fx.root, 'items', `${published}.md`),
+      publishedText.replace(`${published}.`, 'Corrected published claim.'));
+    const carrier = spawnSync(process.execPath,
+      [TOOL, 'carrier', '--run', 'r', '--id', published, '--root', fx.root],
+      { cwd: REPO, encoding: 'utf8', timeout: 60_000 });
+    assert.notEqual(carrier.status, 0,
+      'published repairs cannot be gate carriers');
+    const result = fx.run('check');
+    assert.equal(result.status, 0, result.stderr);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('5b binds a repository-scoped engine-stage defect to its foreign current carrier', () => {
+  const fx = fixture(false);
+  try {
+    writeFileSync(join(fx.root, 'items', 'lem-foreign.md'), item('lem-foreign'));
+    writeFileSync(join(fx.root, 'research', 'foreign-batch-1.pages.json'), JSON.stringify([
+      { id: 'foreign-page', category: 'test', items: ['lem-foreign'] },
+    ]));
+    writeFileSync(join(fx.root, 'research', 'foreign-alpha-groups.json'), JSON.stringify([
+      { label: 'foreign-a', covers: ['1'] },
+    ]));
+    writeFileSync(join(fx.root, 'research', 'foreign-batch-1.proof-contracts.json'), JSON.stringify({
+      contracts: { 'lem-foreign': {} },
+    }));
+    assert.equal(fx.run('list').status, 0);
+    const foreignCarrier = spawnSync(process.execPath,
+      [TOOL, 'carrier', '--run', 'foreign', '--id', 'lem-foreign', '--root', fx.root],
+      { cwd: REPO, encoding: 'utf8', timeout: 60_000 }).stdout.trim();
+    const subject = '5b-cross unowned foreign precheck failure';
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), `${JSON.stringify({
+      defect_id: 'r-5b-unowned-precheck', run: 'r', location: 'engine-stage', subject,
+      caught_at_stage: '5b-cross', severity: 'fatal', disposition: 'fixed',
+      class: 'breaking-runtime', subclass: 'stage-unowned', evidence: [{ path: 'items/lem-foreign.md' }],
+    })}\n`);
+    writeFileSync(join(fx.root, 'research', 'r-5b-verdicts.jsonl'), `${JSON.stringify({
+      kind: 'gate', id: subject, gate: 'precheck', verdict: 'confirmed_fatal',
+      carrier_run: 'foreign', carrier_id: 'lem-foreign', subject_sha256: foreignCarrier,
+      defect_ids: ['r-5b-unowned-precheck'], note: 'The foreign current carrier contains the repaired gate target.',
+    })}\n`);
+    let result = fx.run('check');
+    assert.equal(result.status, 0, result.stderr);
+
+    writeFileSync(join(fx.root, 'items', 'lem-foreign.md'), item('lem-foreign') + '\nChanged after the verdict.\n');
+    result = fx.run('check');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /gate-verdict-stale/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('5b distinguishes page additions and removals and creates an empty verdict artifact', () => {
+  const fx = fixture(false);
+  try {
+    writeFileSync(join(fx.root, 'library/test', 'page-new.md'), '---\npage: page-new\n---\n');
+    writeFileSync(join(fx.root, 'research', 'r-batch-1.pages.json'), JSON.stringify([
+      { id: 'page-one', category: 'test', items: ['lem-source'] },
+      { id: 'page-new', category: 'test', items: [] },
+    ]));
+    writeFileSync(join(fx.root, 'research', 'r-batch-2.pages.json'), '[]');
+    assert.equal(fx.run('list').status, 0);
+    assert.equal(existsSync(join(fx.root, 'research', 'r-5b-verdicts.jsonl')), true);
+    const list = JSON.parse(readFileSync(join(fx.root, 'research', 'r-cross-group-edges.json'), 'utf8'));
+    assert.ok(list.changes.some((change: any) => change.kind === 'page-addition' && change.id === 'page-new'));
+    assert.ok(list.changes.some((change: any) => change.kind === 'page-removal' && change.id === 'page-two'));
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+function foreignRuntimeFixture() {
+  const fx = fixture(false);
+  const id = 'lem-peer-draft';
+  writeFileSync(join(fx.root, 'items', `${id}.md`), item(id));
+  writeFileSync(join(fx.root, 'research', 'peer-batch-1.pages.json'), JSON.stringify([
+    { id: 'peer-page', category: 'test', items: [{ id }] },
+  ]));
+  writeFileSync(join(fx.root, 'research', 'peer-alpha-groups.json'), JSON.stringify([{ label: 'a', covers: ['1'] }]));
+  writeFileSync(join(fx.root, 'research', 'peer-batch-1.proof-contracts.json'), JSON.stringify({ contracts: { [id]: { derivations: [] } } }));
+  const ledger = { defect_id: 'r-runtime-peer', run: 'r', subject: '5b-cross peer precheck incident',
+    caught_at_stage: '5b-cross', disposition: 'fixed', class: 'breaking-runtime', location: 'engine-stage',
+    subclass: 'stage-unowned', severity: 'fatal', evidence: [{ path: `items/${id}.md` }] };
+  const result = spawnSync(process.execPath,
+    [TOOL, 'carrier', '--run', 'peer', '--id', id, '--root', fx.root], { cwd: REPO, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  const verdict = { kind: 'gate', id: ledger.subject, gate: 'precheck', verdict: 'confirmed_fatal',
+    defect_ids: [ledger.defect_id], note: 'Exact canonical labels repaired; peer mathematical obligations remain with its author.',
+    carrier_run: 'peer', carrier_id: id, subject_sha256: result.stdout.trim() };
+  const save = () => {
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), `${JSON.stringify(ledger)}\n`);
+    writeFileSync(join(fx.root, 'research', 'r-5b-verdicts.jsonl'), `${JSON.stringify(verdict)}\n`);
+  };
+  assert.equal(fx.run('list').status, 0);
+  save();
+  return { ...fx, id, ledger, verdict, save };
+}
+
+test('5b binds a foreign runtime repair without inventing an in-run mathematical carrier', () => {
+  const fx = foreignRuntimeFixture();
+  try {
+    assert.equal(fx.run('check').status, 0);
+    const ordinary = { kind: 'gate', id: fx.id, gate: 'precheck', verdict: 'false_positive',
+      defect_ids: [], subject_sha256: fx.verdict.subject_sha256, note: 'Not authorized.' };
+    writeFileSync(join(fx.root, 'research/r-5b-verdicts.jsonl'), `${JSON.stringify(ordinary)}\n`);
+    const rejected = fx.run('check');
+    assert.notEqual(rejected.status, 0);
+    assert.match(rejected.stderr, /gate-subject-out-of-scope/);
+    assert.match(rejected.stderr, /defect-ledger-unowned/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+for (const changed of ['item', 'contract', 'manifest']) test(`foreign runtime receipt rejects changed ${changed} bytes`, () => {
+  const fx = foreignRuntimeFixture();
+  try {
+    if (changed === 'item') writeFileSync(join(fx.root, 'items', `${fx.id}.md`), item(fx.id) + '\nLater peer edit.\n');
+    if (changed === 'contract') writeFileSync(join(fx.root, 'research/peer-batch-1.proof-contracts.json'),
+      JSON.stringify({ contracts: { [fx.id]: { derivations: ['changed'] } } }));
+    if (changed === 'manifest') writeFileSync(join(fx.root, 'research/peer-batch-1.pages.json'),
+      JSON.stringify([{ id: 'peer-page', category: 'test', items: [{ id: fx.id, statement: 'changed' }] }]));
+    const result = fx.run('check');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /gate-verdict-stale/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+for (const bad of ['wrong-owner', 'own-run', 'open', 'mathematics', 'unbound-evidence', 'published', 'in-run-item', 'ambiguous-owner']) {
+  test(`foreign runtime receipt rejects ${bad}`, () => {
+    const fx = foreignRuntimeFixture();
+    try {
+      if (bad === 'wrong-owner') fx.verdict.carrier_run = 'missing';
+      if (bad === 'own-run') fx.verdict.carrier_run = 'r';
+      if (bad === 'open') fx.ledger.disposition = 'open';
+      if (bad === 'mathematics') fx.ledger.location = 'proof';
+      if (bad === 'unbound-evidence') fx.ledger.evidence = [];
+      if (bad === 'published') writeFileSync(join(fx.root, 'items', `${fx.id}.md`), item(fx.id).replace('status: draft', 'status: published'));
+      if (bad === 'in-run-item') fx.verdict.carrier_id = 'lem-source';
+      if (bad === 'ambiguous-owner') writeFileSync(join(fx.root, 'research/peer-batch-2.pages.json'),
+        JSON.stringify([{ id: 'other-peer-page', category: 'test', items: [{ id: fx.id }] }]));
+      fx.save();
+      const result = fx.run('check');
+      assert.notEqual(result.status, 0, bad);
+      assert.match(result.stderr, /gate-carrier-|gate-subject-out-of-scope|defect-ledger-disposition/);
+    } finally { rmSync(fx.root, { recursive: true, force: true }); }
+  });
+}

@@ -1,0 +1,430 @@
+#!/usr/bin/env node
+// gates.mjs — run the gates of record for one AUDIT step, deterministically.
+//
+//   node tools/physics-support/gates.mjs --audit --step <A0..A10> --run <wave> [--json] [--list]
+//   node tools/physics-support/gates.mjs --audit --list              # the whole table, no execution
+//
+// The BUILD table this file once carried is retired (2026-08-16): the build's
+// gates of record live in tools/physics-autopilot/stages/mathlib.mts and run through
+// the engine. Build mode refuses with that pointer.
+//
+// `--audit` selects the published-page retro-audit's table (AUDIT-WORKFLOW.md,
+// steps A0 to A10) instead of the build's. It is a second TABLE in this file,
+// deliberately not a second TOOL: two divergent copies of a gate list is exactly
+// how a gate stops running without anyone noticing. Everything below the table —
+// receipt checking, path expansion, exit codes, JSON — is shared.
+//
+// The audit table's artifacts live under `research/audit/` rather than
+// `research/`, and its coverage gate passes `--audit` to level-coverage.mjs,
+// which downgrades `ai-generated-statement-dependency` to a warning routed to
+// the genrisk disposition. Nothing else about the gates changes: the audit reads
+// the same corpus with the same tools.
+//
+// WHY. LEVELS.md names the gates for each step in prose, and the orchestrator has
+// been assembling those invocations by hand every time. That is fine while a
+// human is reading the output and remembering which of nineteen tools belongs to
+// step 5; it is not fine unattended, where "I ran the gates" has to mean exactly
+// one thing and be checkable afterwards. This is that one thing.
+//
+// TWO RULES THIS FILE KEEPS.
+//
+// 1. A GATE NEVER MODIFIES CONTENT. `reflow.mts`, `adopt-repair.mjs` and
+//    `merge-proof-contracts.mjs` all write, so none of them is a gate — they are
+//    repair or prepare actions the driver runs BEFORE this. What this checks, it
+//    only reads. That is what makes re-running it free and its verdict stable.
+//
+// 2. A GATE NEVER SPENDS. No judge call happens here. `judge-sweep.mjs` is an
+//    action with a bill attached; `level-coverage.mjs` is the receipt gate that
+//    checks what the sweep produced. Keeping them apart is what lets a driver
+//    re-gate a step after a crash without re-buying its verdicts.
+//
+// A MISSING RECEIPT IS A FAILURE, NOT A SKIP. If step 6's coverage gate has no
+// judge ledger to read, that is the single most dangerous thing an unattended run
+// could shrug at, so `needs` files are checked first and their absence fails the
+// step with `missing-receipt`.
+//
+// Exit 0 = every required gate passed. 1 = at least one failed. 2 = usage.
+
+import { existsSync, readdirSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { join } from 'node:path';
+import { REPO } from './paths.mjs';
+
+const argv = process.argv.slice(2);
+const asJson = argv.includes('--json');
+const listOnly = argv.includes('--list');
+const isAudit = argv.includes('--audit');
+/** Where this workflow's artifacts live. The audit keeps its own directory so a
+ *  wave and a level of the same number can never collide on a receipt name. */
+const DIR = isAudit ? 'research/audit' : 'research';
+const option = (name) => {
+  const index = argv.indexOf(name);
+  return index >= 0 ? argv[index + 1] : null;
+};
+const step = option('--step');
+const run = option('--run');
+
+/** A gate: a tool, its arguments, and whether the step fails without it.
+ *  `mts: true` routes through tsx-run.mjs. `needs` are files that must exist
+ *  before the gate can mean anything. */
+const g = (tool, args = [], { required = true, mts = false, needs = [], why = '' } = {}) =>
+  ({ tool, args, required, mts, needs, why });
+
+const MANIFESTS = '{manifests}';
+const CONTRACTS = '{dir}/{run}-proof-contracts.json';
+const TOUCHES = '{dir}/{run}-touches.json';
+const JUDGE_LEDGER = '{dir}/{run}-judge.jsonl';
+const ADJUDICATIONS = '{dir}/{run}-judge-adjudications.jsonl';
+const REJUDGE_TARGETS = '{dir}/{run}-rejudge-targets.json';
+const COVERAGE_RECEIPT = isAudit ? '{dir}/{run}-coverage.json' : '{dir}/{run}-audit-coverage.json';
+// The docs all name one shared `research/dependency-spine-audit.json`, but on
+// disk every receipt has been run-scoped, under two different spellings
+// (frontier-7-dependency-spine-audit.json, frontier-8-spine-audit.json). Accept
+// what exists rather than what was written down; the shared path stays last so a
+// run that adopts the documented layout still works.
+const SPINE_RECEIPT = '{spine}';
+// The owner-approved re-home receipt (ARCHITECTURE.md §3.11a), if this run has
+// one. It expands to `--rehomed <path>` when the file exists and to NOTHING when
+// it does not, so a run that re-homes nothing passes exactly the command line it
+// always passed. It is deliberately not in `needs`: a missing receipt means "no
+// re-home on this run", not "a required receipt is absent".
+const REHOMED = '{rehomed}';
+// The per-batch canonical-coverage checklists (owner, 2026-08-11). A missing one
+// is a MISSING RECEIPT, not a skip: the whole point of the omission gate is that
+// silence about what a source contains is the defect it catches.
+const CHECKLISTS = '{checklists}';
+
+// The base gates, run wherever content exists on disk. LEVELS.md §"The base
+// gates and future-scope closures" is the source; citecheck is advisory because
+// it is an explicitly heuristic mis-attribution screen that always exits 0.
+const BASE = () => [
+  g('precheck.mts', [], { mts: true, why: 'phase-proof format' }),
+  g('depcheck.mjs', [], { why: 'ids, kinds, cycles, page/publish state' }),
+  g('fwdcheck.mjs', [], { why: 'forward references' }),
+  g('extcheck.mjs', [], { why: 'the ‡ not-proved-here tier' }),
+  g('rendercheck.mjs', [], { why: 'defects visible only when rendered' }),
+  g('prosecheck.mjs', [], { why: 'the prose defect class' }),
+  g('citecheck.mjs', [], { required: false, why: 'mis-attribution heuristic (advisory)' }),
+  g('depsource.mjs', ['research/plan-spec.json'], { why: 'where each dep actually lives' }),
+];
+
+// The proof-obligation trio. All three read the MERGED contract, which
+// merge-proof-contracts.mjs must have written first — hence `needs`.
+//
+// `reviewed` is the caller's answer to "has Alpha had its turn yet?". A
+// `risk_review` is Alpha's disposition, written at A6 by the refuter pass the
+// risk tier routes; requiring one at A4 asks the Betas for a record only Alpha
+// may author — wave 4 halted there on six critical topology items whose reviews
+// were not yet due. So A4 computes the tiers and A6 requires the dispositions.
+const CONTRACT_TRIO = ({ reviewed = true } = {}) => [
+  g('proof-contract.mjs', [CONTRACTS, '--strict'], { needs: [CONTRACTS], why: 'obligation/citation/boundary worksheet' }),
+  g('finite-smoke.mjs', [CONTRACTS], { needs: [CONTRACTS], why: 'bounded countermodel search' }),
+  g('risk-report.mjs', reviewed ? [CONTRACTS, '--require-reviewed'] : [CONTRACTS],
+    { needs: [CONTRACTS], why: reviewed ? 'high/critical routing needs an Alpha risk_review' : 'tier computation only; the Alpha risk_review is due at A6' }),
+
+  // The trio above reports "0 error(s)" whether it examined 400 items or none.
+  // On frontier-13 finite-smoke printed "0 error(s), 0 check(s)" for most of
+  // the run, because a contract may REFERENCE a smoke check the registry does
+  // not DEFINE and every such reference silently resolves to nothing. Green,
+  // and empty. This asserts the scope the trio just claimed to check.
+  g('gate-liveness.mjs', ['--run', '{run}', '--contracts', CONTRACTS, '--checklists', CHECKLISTS],
+    { needs: [CONTRACTS], why: 'a gate that checked nothing is not a gate that passed' }),
+
+  // proof-contract --strict checks the eight boundary axes are PRESENT. It has
+  // never checked one is TRUE. On frontier-13, 2,169 of 3,144 rows were
+  // not_applicable with one rationale recurring 124 times, and two of those
+  // false rows each concealed a confirmed-fatal defect.
+  g('boundary-audit.mjs', [CONTRACTS], { required: false, needs: [CONTRACTS], why: 'advisory: templated and self-contradicting boundary dispositions' }),
+
+  // The largest confirmed-fatal class: an [F#] restatement claiming more than
+  // the item it cites. --fail-on-missing-quote is hard because a recorded
+  // verbatim quote that is absent from the source is not a judgement call.
+  g('citation-fidelity.mjs', [CONTRACTS, '--fail-on-missing-quote'],
+    { needs: [CONTRACTS], why: 'every recorded citation quote must exist in the item it cites' }),
+];
+
+const COVERAGE = () => g('level-coverage.mjs', [
+  '--contracts', CONTRACTS,
+  '--judge-ledger', JUDGE_LEDGER,
+  '--judge-adjudications', ADJUDICATIONS,
+  '--spine-receipt', SPINE_RECEIPT,
+  '--audit-receipt', COVERAGE_RECEIPT,
+  '--verify-current-context', MANIFESTS,
+], { needs: [CONTRACTS, JUDGE_LEDGER, COVERAGE_RECEIPT, SPINE_RECEIPT], why: 'the hard receipt gate' });
+
+// ---- the build table: RETIRED (2026-08-16) ---------------------------------
+//
+// The build's gates of record live in tools/physics-autopilot/stages/mathlib.mts and
+// run through the engine. This file carried a second, divergent build table
+// that nothing executed — the two disagreed by four tools, which is exactly
+// the failure the header above warns about. One table, one owner; the
+// retired copy is in git history.
+
+// ---- the audit table (AUDIT-WORKFLOW.md, A0 to A10) -------------------------
+//
+// A5 does not exist. The numbering is kept sparse deliberately so build-step
+// intuitions do not silently transfer to a workflow that does not author.
+
+const LEDGERS = '{ledgers}';
+
+const AUDIT_COVERAGE = () => g('level-coverage.mjs', [
+  '--audit',
+  '--contracts', CONTRACTS,
+  '--judge-ledger', JUDGE_LEDGER,
+  '--judge-adjudications', ADJUDICATIONS,
+  '--judge-targets', REJUDGE_TARGETS,
+  '--spine-receipt', SPINE_RECEIPT,
+  '--audit-receipt', COVERAGE_RECEIPT,
+  '--verify-current-context', MANIFESTS,
+], { needs: [CONTRACTS, JUDGE_LEDGER, ADJUDICATIONS, REJUDGE_TARGETS, SPINE_RECEIPT], why: 'whole-wave audit receipt plus targeted paired coverage for repaired items — runs AFTER A8' });
+
+const AUDIT_STEPS = {
+  // Scope generation and the pre-audit baseline. Recording a green suite here is
+  // what makes a later regression attributable to this wave rather than
+  // inherited — the wave-2 lesson, where six errors were wrongly blamed on A4
+  // until the same gate was re-run at the old commit.
+  A0: [
+    ...BASE(),
+    // `--audit` alongside `--manifest-only`: the audit manifest is a list of
+    // PUBLISHED ids, so the future-batch minting and reading-order checks are
+    // vacuous here and fired on every item until 2026-08-04. What remains is
+    // manifest shape, an id claimed by two batches, and a dangling deps target.
+    // The two-A/B-pair Beta capacity cap is deliberately NOT checked in audit
+    // scope — content-policy.mjs applies it to the Betas assigned inside a
+    // batch, not to the manifest, because an audit batch is a whole
+    // category-level. Splitting an over-cap manifest is an A0 action.
+    g('content-policy.mjs', ['--audit', MANIFESTS, '--manifest-only'], { needs: [MANIFESTS], why: 'manifest shape, duplicate claims and dangling dependency targets' }),
+  ],
+  // Betas are reading and proposing. Nothing of theirs is applied yet, and the
+  // contract is expected to be red: the Betas record truthful empty `uses` lists
+  // rather than inventing a proof step, so A2's contract errors are evidence,
+  // not failure. Advisory here, required at A4 once the repairs land.
+  A2: [
+    g('proof-contract.mjs', [CONTRACTS, '--strict'], { required: false, needs: [CONTRACTS], why: 'advisory: unapplied citation-uses findings are expected here' }),
+  ],
+  A3: [],  // Orchestrator adjudication of Beta proposals. Judgment, not a gate.
+  // A4 is the one step whose own correct output BASE()'s depcheck rejects: every
+  // materially repaired published item loses its obsolete `audited` stamp here,
+  // and no self-certification rule lets the repairing Beta put one back — only
+  // A6's independent reading may. So depcheck runs with `--pending-audit-ok`,
+  // which demotes exactly that one class to a warning and leaves every other
+  // depcheck error fatal. Wave 4, the first unattended run, is what surfaced it:
+  // 20 correctly-repaired items halted the driver at `published-unaudited`.
+  A4: [
+    ...BASE().filter((gate) => gate.tool !== 'depcheck.mjs'),
+    g('depcheck.mjs', ['--pending-audit-ok'], { why: 'ids, kinds, cycles, page/publish state; A4-created unaudited repairs are A6\'s to certify' }),
+    ...CONTRACT_TRIO({ reviewed: false }),
+    g('content-policy.mjs', ['--audit', LEDGERS, MANIFESTS], { needs: [MANIFESTS], why: 'every scoped item tagged, with a matching evidence-ledger row' }),
+    g('audit-manifest.mjs', [MANIFESTS], { needs: [MANIFESTS], why: 'the full relationship checklist' }),
+  ],
+  // Alpha's audit. `depcheck` reaching an EMPTY published-unaudited class is the
+  // load-bearing check: A4 removes the obsolete `audited` stamp from every
+  // materially repaired item, and only A6's independent reading may replace it.
+  A6: [
+    ...BASE(),
+    ...CONTRACT_TRIO(),
+    g('content-policy.mjs', ['--audit', LEDGERS, MANIFESTS], { needs: [MANIFESTS] }),
+    g('genrisk.mjs', ['--receipt', '{dir}/genrisk.json'], { needs: ['{dir}/genrisk.json'], why: 'one Alpha disposition per load-bearing generated seed' }),
+    g('impact-audit.mjs', ['--touches', TOUCHES, '--from', 'pre-A4', '--receipt', '{dir}/{run}-impact-audit.json'],
+      { needs: [TOUCHES, '{dir}/{run}-impact-audit.json'], why: 'every consumer of a changed interface dispositioned' }),
+  ],
+  // A7 is the sweep itself, which SPENDS. This gate only checks what it made.
+  // No coverage gate here: level-coverage needs adjudications that cannot exist
+  // until A8. Running it now reports one judge-adjudication-missing per
+  // unadjudicated rejection — useful arithmetic, not a passing gate.
+  A7: [],
+  A8: [
+    g('step7-guard.mjs', ['--touches', TOUCHES, '--baseline', 'pre-a8', '--adjudications', ADJUDICATIONS],
+      { needs: [TOUCHES, ADJUDICATIONS], why: 'R1 — A8 is fatal-only, hash-bound to the pre-edit text' }),
+    g('impact-audit.mjs', ['--touches', TOUCHES, '--from', 'pre-a8'], { needs: [TOUCHES] }),
+    AUDIT_COVERAGE(),
+  ],
+  A9: [
+    g('prosecheck.mjs', [], { why: 'position-contradiction: decidable, no judgement' }),
+    g('prosecheck.mjs', ['--warnings'], { required: false, why: 'scope-denial candidates for the sweep to read' }),
+  ],
+  A10: [
+    ...BASE(),
+    AUDIT_COVERAGE(),
+  ],
+};
+
+if (!isAudit) {
+  console.error('gates.mjs: the BUILD gate table is retired — the build\'s gates of record live in');
+  console.error('tools/physics-autopilot/stages/mathlib.mts and run through the engine (tools/physics-autopilot).');
+  console.error('This tool still serves the published-page audit:');
+  console.error('  node tools/physics-support/gates.mjs --audit --step A<n> --run <wave>   [--list] [--json]');
+  process.exit(2);
+}
+const TABLE = AUDIT_STEPS;
+
+const usage = (message) => {
+  if (message) console.error(`gates: ${message}`);
+  console.error('usage: node tools/physics-support/gates.mjs --step <0..10> --run <name> [--json]');
+  console.error('       node tools/physics-support/gates.mjs --audit --step <A0..A10> --run <wave> [--json]');
+  console.error('       node tools/physics-support/gates.mjs [--audit] --list');
+  process.exit(2);
+};
+
+// ---- the table, without running anything -----------------------------------
+
+if (listOnly) {
+  console.log(isAudit ? 'AUDIT table — AUDIT-WORKFLOW.md steps A0 to A10 (A5 does not exist)'
+                      : 'BUILD table — LEVELS.md steps 1 to 9');
+  for (const [number, gates] of Object.entries(TABLE)) {
+    console.log(`\nstep ${number}${gates.length ? '' : '  (no mechanical gate — judgment or agent work)'}`);
+    for (const gate of gates) {
+      console.log(`  ${gate.required ? ' ' : '~'} ${gate.tool.padEnd(22)} ${gate.why ?? ''}`);
+    }
+  }
+  console.log('\n  ~ = advisory, does not fail the step');
+  console.log(isAudit
+    ? '  A7 additionally requires judge-sweep.mjs to have RUN; that action spends and is not a gate.'
+    : '  Step 6 additionally requires judge-sweep.mjs to have RUN; that action spends and is not a gate.');
+  process.exit(0);
+}
+
+if (step === null) usage('--step is required');
+if (!Object.prototype.hasOwnProperty.call(TABLE, step)) usage(`--step must be one of ${Object.keys(TABLE).join(', ')}`);
+if (!run) usage('--run is required (the run name, e.g. frontier-10)');
+if (!/^[A-Za-z0-9._-]+$/.test(run)) usage('--run must be a plain run name, not a path');
+
+// ---- path expansion ---------------------------------------------------------
+
+/** Batch manifests for this run, discovered from disk rather than assumed. */
+const discover = (suffixPattern) => {
+  const dir = join(REPO, DIR);
+  const pattern = new RegExp(`^${run.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-.*${suffixPattern}$`);
+  try {
+    return readdirSync(dir).filter((name) => pattern.test(name)).sort().map((name) => `${DIR}/${name}`);
+  } catch { return []; }
+};
+
+const manifests = () => discover('\\.pages\\.json');
+
+/** Per-batch coverage checklists. The literal dot before `coverage` is what
+ *  keeps this from also matching the audit's `{run}-audit-coverage.json`
+ *  receipt, which is a different artifact with a hyphen in that position. */
+const checklists = () => discover('\\.coverage\\.json');
+
+/** Per-batch provenance ledgers, interleaved as `--ledger <file>` pairs, which
+ *  is the shape content-policy.mjs --audit expects. Discovered from disk: a
+ *  batch that produced no ledger must show up as a missing row, not as a
+ *  silently shorter command line. */
+const ledgerArgs = () => discover('\\.provenance\\.jsonl').flatMap((file) => ['--ledger', file]);
+
+/** The spine receipt, by whichever name this run actually uses. */
+const spineReceipt = () => {
+  const candidates = [
+    `${DIR}/${run}-spine-audit.json`,
+    `${DIR}/${run}-dependency-spine-audit.json`,
+    'research/dependency-spine-audit.json',
+  ];
+  return candidates.find((path) => existsSync(join(REPO, path))) ?? candidates[0];
+};
+
+/** `--rehomed <file>`, or nothing at all when this run re-homes nothing. */
+const rehomedArgs = () => {
+  const path = `${DIR}/${run}-rehomed.json`;
+  return existsSync(join(REPO, path)) ? ['--rehomed', path] : [];
+};
+
+const expand = (value) => {
+  if (value === MANIFESTS) return manifests();
+  if (value === LEDGERS) return ledgerArgs();
+  if (value === SPINE_RECEIPT) return [spineReceipt()];
+  if (value === REHOMED) return rehomedArgs();
+  if (value === CHECKLISTS) return checklists();
+  return [value.replaceAll('{run}', run).replaceAll('{dir}', DIR)];
+};
+const expandAll = (values) => values.flatMap(expand);
+
+// ---- run --------------------------------------------------------------------
+
+const results = [];
+const gates = TABLE[step];
+
+for (const gate of gates) {
+  const args = expandAll(gate.args);
+  const needs = expandAll(gate.needs);
+  const missing = needs.filter((path) => !existsSync(join(REPO, path)));
+  // A manifest glob that matched nothing is itself a missing receipt.
+  if (gate.needs.includes(MANIFESTS) && !manifests().length) missing.push('research/{run}-*.pages.json (no match)');
+  if (gate.needs.includes(CHECKLISTS) && !checklists().length) missing.push(`${DIR}/${run}-batch-*.coverage.json (no match)`);
+
+  if (missing.length) {
+    results.push({
+      tool: gate.tool, required: gate.required, status: gate.required ? 'fail' : 'warn',
+      code: 'missing-receipt', detail: `missing: ${missing.join(', ')}`, ms: 0,
+    });
+    continue;
+  }
+
+  const started = Date.now();
+  const command = gate.mts
+    ? [process.execPath, ['tools/physics-support/tsx-run.mjs', `tools/physics-support/${gate.tool}`, ...args]]
+    : [process.execPath, [`tools/physics-support/${gate.tool}`, ...args]];
+  const child = spawnSync(command[0], command[1], { cwd: REPO, encoding: 'utf8', timeout: 1_800_000 });
+  const ms = Date.now() - started;
+
+  const output = ((child.stdout ?? '') + (child.stderr ?? '')).trim();
+  const lines = output.split('\n');
+  // NEVER LET THE TAIL UNDERSTATE THE BLOCKER (measured five times on run `zfc`).
+  // `slice(-6)` shows the last six lines, and a caller who reads that as the
+  // whole failure undercounts the work: step 3's risk-report printed 6 of 60
+  // missing risk reviews, the step-5 coverage receipt printed 1 of 43
+  // unreconciled plan entries, and level-coverage printed 1 of 10 warnings. Each
+  // time a human or an agent briefed off the summary and planned against the
+  // wrong number. So the tail stays short, but it is now always accompanied by
+  // the true counts, taken from the FULL output.
+  const countOf = (re) => lines.filter((line) => re.test(line)).length;
+  const errorLines = countOf(/^\s*ERROR\b/);
+  const warnLines = countOf(/^\s*WARN\b/);
+  const hidden = Math.max(0, lines.length - 6);
+  const census = [
+    errorLines ? `${errorLines} ERROR line(s)` : '',
+    warnLines ? `${warnLines} WARN line(s)` : '',
+    hidden ? `${hidden} earlier line(s) not shown` : '',
+  ].filter(Boolean).join(', ');
+  const tail = [lines.slice(-6).join('\n'), census ? `[full output: ${census} — re-run the tool directly]` : '']
+    .filter(Boolean).join('\n');
+  if (child.error) {
+    results.push({ tool: gate.tool, required: gate.required, status: gate.required ? 'fail' : 'warn', code: 'spawn-error', detail: child.error.message, ms });
+  } else if (child.status === 0) {
+    results.push({ tool: gate.tool, required: gate.required, status: 'pass', code: null, detail: tail.split('\n').at(-1) ?? '', ms });
+  } else {
+    results.push({
+      tool: gate.tool, required: gate.required,
+      status: gate.required ? 'fail' : 'warn',
+      code: child.status === 2 ? 'usage-or-input' : 'gate-failed',
+      detail: tail, ms,
+    });
+  }
+}
+
+const failed = results.filter((r) => r.status === 'fail');
+const warned = results.filter((r) => r.status === 'warn');
+
+if (asJson) {
+  console.log(JSON.stringify({
+    // Audit steps are "A0".."A10", so Number() would report null for every one
+    // of them and a driver keying on it would silently lose the step identity.
+    step: isAudit ? step : Number(step), run, workflow: isAudit ? 'audit' : 'build',
+    summary: { gates: results.length, failed: failed.length, warned: warned.length },
+    results,
+  }, null, 2));
+} else {
+  console.log(`gates: step ${step}, run ${run} — ${results.length} gate(s)`);
+  if (!results.length) console.log('  (no mechanical gate at this step — judgment or agent work)');
+  for (const r of results) {
+    const mark = { pass: ' ok ', fail: 'FAIL', warn: 'warn' }[r.status];
+    console.log(`[${mark}] ${r.tool.padEnd(22)} ${String(r.ms).padStart(6)}ms  ${(r.detail ?? '').split('\n')[0]}`);
+    if (r.status !== 'pass' && (r.detail ?? '').includes('\n')) {
+      for (const line of r.detail.split('\n').slice(1)) console.log(`         ${line}`);
+    }
+  }
+  console.log(failed.length
+    ? `\nSTEP ${step} BLOCKED — ${failed.length} required gate(s) failed${warned.length ? `, ${warned.length} advisory` : ''}`
+    : `\nSTEP ${step} CLEAR${warned.length ? ` — ${warned.length} advisory warning(s)` : ''}`);
+}
+process.exit(failed.length ? 1 : 0);

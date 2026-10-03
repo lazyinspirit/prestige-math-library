@@ -1,0 +1,310 @@
+#!/usr/bin/env node
+import { realpathSync as physicsRealpath } from 'node:fs';
+// Snapshot the scaffold inventory before Step 3 authoring, then certify only
+// genuinely new items created by successful Step 3 auditor/author dispatches.
+// These receipts are a distinct owner-authorized class: they are neither an
+// independent review nor an owner repair, and they cannot certify an item that
+// already existed in the scaffold or on disk at the baseline.
+
+import { createHash } from 'node:crypto';
+import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { join, resolve, sep } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { itemHash, itemInputPaths, loadStep3, scopeHash } from './step3-decisions.mjs';
+import { authorResultAllowed, loadStep3AuditorProvenance } from './auditor-created-items.mjs';
+import { split, yaml } from './pathway-lib.mjs';
+
+const safe = value => {
+  if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('Invalid run or item ID');
+  return value;
+};
+const json = path => JSON.parse(readFileSync(path, 'utf8'));
+const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+// Baselines are immutable inventories, not provenance certifications. Keep their
+// v1 identity so existing runs can revalidate without moving the stage boundary.
+const BASELINE_POLICY = 'auditor-authored-step3-bypass-v1';
+const CERTIFICATION_POLICY = 'auditor-authored-step3-bypass-v2';
+export const auditorBaselinePath = (root, run) => join(root, 'research', `${safe(run)}-step3-auditor-baseline.json`);
+export const auditorCertificationsPath = (root, run) => join(root, 'research', `${safe(run)}-step3-auditor-certifications.json`);
+
+function snapshot(root, run) {
+  const s = loadStep3(root, run);
+  return {
+    version: 1,
+    run,
+    policy: BASELINE_POLICY,
+    items: [...s.items].map(([id, value]) => ({ id, page: value.page.id, batch: String(value.page.batch) }))
+      .sort((a, b) => a.id.localeCompare(b.id)),
+    scopes: [...s.pairs.keys()].map(page => ({ page, sha256: scopeHash(s, page) }))
+      .sort((a, b) => a.page.localeCompare(b.page)),
+    existing_item_files: readdirSync(join(root, 'items')).filter(f => f.endsWith('.md'))
+      .map(f => f.slice(0, -3)).sort(),
+  };
+}
+
+export function writeAuditorBaseline(root, run) {
+  safe(run);
+  const path = auditorBaselinePath(root, run);
+  const current = snapshot(root, run);
+  if (existsSync(path)) {
+    const prior = json(path);
+    const same = prior.version === current.version && prior.run === run && prior.policy === current.policy
+      && JSON.stringify(prior.items) === JSON.stringify(current.items)
+      && JSON.stringify(prior.scopes) === JSON.stringify(current.scopes)
+      && JSON.stringify(prior.existing_item_files) === JSON.stringify(current.existing_item_files);
+    if (!same) throw Error(`Refusing to move the Step 3 auditor baseline for ${run}`);
+    return { path, reused: true, items: current.items.length };
+  }
+  writeFileSync(path, JSON.stringify({ ...current, at: new Date().toISOString() }, null, 2) + '\n');
+  return { path, reused: false, items: current.items.length };
+}
+
+function successfulAuthorResults(root, run) {
+  const dir = join(root, 'research', `${run}-dispatch`);
+  const rows = [];
+  if (!existsSync(dir)) return rows;
+  for (const file of readdirSync(dir).filter(f => /^alpha-high-.*\.result\.json$/.test(f) && !f.includes('.attempt-'))) {
+    let row;
+    try { row = json(join(dir, file)); } catch { continue; }
+    if (row.run === run && authorResultAllowed(3, row)
+      && Array.isArray(row.covers) && Date.parse(row.started_at) <= Date.parse(row.ended_at)) rows.push(row);
+  }
+  return rows;
+}
+
+// A later owner repair can recertify an item that was genuinely auditor-created
+// before the immutable baseline. The original author result remains its origin
+// evidence; the current owner decision is a separate, hash-bound repair verdict.
+function currentOwnerRepair(s, id, dependencies, sha256) {
+  const path = join(s.root, 'research', `${s.run}-step3b-owner-${safe(id)}.json`);
+  if (!existsSync(path)) return null;
+  const row = json(path);
+  if (row.version !== 1 || row.run !== s.run || row.phase !== 'item'
+    || row.target !== id || row.owner !== true || row.decision !== 'repaired'
+    || row.sha256 !== sha256 || !Array.isArray(row.dependencies)
+    || JSON.stringify(row.dependencies) !== JSON.stringify(dependencies)
+    || !String(row.reason ?? '').trim()) return null;
+  const decided = Date.parse(row.at);
+  if (!Number.isFinite(decided) || itemInputPaths(s, id, dependencies)
+    .some(path => statSync(path).mtimeMs > decided)) return null;
+  return { sha256: digest(row), at: row.at };
+}
+
+// An ordinary Step-3b review can recertify a postbaseline addition after its
+// author window closes. It must be the current, independent, confidence-1
+// decision for the exact current hash and dependencies. The hash binds the
+// relevant shared-manifest entries, so only item-source mtimes must predate it.
+function currentOrdinaryReview(s, id, dependencies, sha256) {
+  const ownerPath = join(s.root, 'research', `${s.run}-step3b-owner-${safe(id)}.json`);
+  if (existsSync(ownerPath)) {
+    const owner = json(ownerPath);
+    if (owner.run === s.run && owner.phase === 'item' && owner.target === id
+      && owner.owner === true && owner.decision === 'hold') return null;
+  }
+  const path = join(s.root, 'research', `${s.run}-step3b-review-${safe(id)}.json`);
+  if (!existsSync(path)) return null;
+  const row = json(path);
+  if (row.version !== 1 || row.run !== s.run || row.phase !== 'item'
+    || row.target !== id || row.owner !== false
+    || !['accept', 'repaired'].includes(row.decision) || row.confidence !== 1
+    || row.sha256 !== sha256 || !Array.isArray(row.dependencies)
+    || JSON.stringify(row.dependencies) !== JSON.stringify(dependencies)
+    || !String(row.reason ?? '').trim()) return null;
+  const decided = Date.parse(row.at);
+  const itemRoot = join(s.root, 'items') + sep;
+  if (!Number.isFinite(decided) || itemInputPaths(s, id, dependencies)
+    .filter(path => path.startsWith(itemRoot) && path.endsWith('.md'))
+    .some(path => statSync(path).mtimeMs > decided)) return null;
+  return { sha256: digest(row), at: row.at };
+}
+
+export function certifyAuditorItems(root, run) {
+  return certify(root, run, false);
+}
+
+// Recovery runs before the whole-stage artifact barrier. Certify completed
+// authors without requiring unfinished siblings to have supplied their inputs.
+// This is not the final gate: deferred rows remain ordinary open obligations.
+export function certifyCompletedAuditorItems(root, run) {
+  return certify(root, run, true);
+}
+
+function certify(root, run, partial) {
+  safe(run);
+  const baselinePath = auditorBaselinePath(root, run);
+  if (!existsSync(baselinePath)) throw Error(`Missing Step 3 auditor baseline: ${baselinePath}`);
+  const baseline = json(baselinePath);
+  if (baseline.version !== 1 || baseline.run !== run || baseline.policy !== BASELINE_POLICY
+    || !Array.isArray(baseline.items) || !Array.isArray(baseline.scopes)
+    || !Array.isArray(baseline.existing_item_files))
+    throw Error('Invalid Step 3 auditor baseline');
+
+  const original = new Set(baseline.items.map(row => row.id));
+  const preexistingFiles = new Set(baseline.existing_item_files);
+  const s = loadStep3(root, run);
+  // A previously published item can be placed on a draft frontier page while
+  // its local prerequisites are repaired. It is a preexisting anchor, never an
+  // auditor-created item. Older library items may have no pipeline_run, so
+  // require the exact current-run owner re-home receipt for those legacy files.
+  const rehomedPath = join(root, 'research', `${safe(run)}-rehomed.json`);
+  const rehomed = new Map();
+  if (existsSync(rehomedPath)) {
+    const receipt = json(rehomedPath);
+    if (receipt.version !== 1 || receipt.run !== run || receipt.approved_by !== 'owner'
+      || !Array.isArray(receipt.items)) throw Error(`Invalid owner re-home receipt: ${rehomedPath}`);
+    for (const row of receipt.items) {
+      if (!row?.id || !row.from_page || !row.to_page || !String(row.reason ?? '').trim())
+        throw Error(`Invalid owner re-home entry: ${rehomedPath}`);
+      safe(row.id); safe(row.from_page); safe(row.to_page);
+      if (row.from_page === row.to_page || rehomed.has(row.id))
+        throw Error(`Invalid or duplicate owner re-home entry for ${row.id}`);
+      rehomed.set(row.id, row);
+    }
+  }
+  const publishedAnchor = (id, pageId) => {
+    if (!preexistingFiles.has(id)) return false;
+    const path = join(root, 'items', safe(id) + '.md');
+    if (!existsSync(path)) return false;
+    const fm = yaml().parse(split(readFileSync(path, 'utf8')).fm) ?? {};
+    if (fm.id !== id || fm.status !== 'published') return false;
+    if (typeof fm.pipeline_run === 'string' && fm.pipeline_run !== run) return true;
+    if (fm.pipeline_run !== undefined) return false;
+    return rehomed.get(id)?.to_page === pageId;
+  };
+  const additions = [...s.items].filter(([id, value]) =>
+    !original.has(id) && !publishedAnchor(id, value.page.id));
+  const results = successfulAuthorResults(root, run);
+  const certificationPath = auditorCertificationsPath(root, run);
+  let priorById = new Map(), priorReceipt;
+  if (existsSync(certificationPath)) {
+    try {
+      const prior = json(certificationPath);
+      if (prior.version === 1 && prior.run === run && prior.policy === CERTIFICATION_POLICY
+        && prior.baseline_sha256 === digest(baseline) && Array.isArray(prior.items)) {
+        loadStep3AuditorProvenance(root, run);
+        priorReceipt = prior;
+        priorById = new Map(prior.items.map(row => [row.id, row]));
+      }
+    } catch { /* replace only after all current inputs validate */ }
+  }
+  const certified = [], pending = [];
+  const defer = reason => {
+    if (!partial) throw Error(reason);
+    pending.push(reason);
+  };
+
+  for (const [id, value] of additions) {
+    if (preexistingFiles.has(id))
+      throw Error(`${id}: existed on disk before Step 3 and is not auditor-created`);
+    const itemPath = join(root, 'items', `${safe(id)}.md`);
+    if (!existsSync(itemPath)) {
+      defer(`${id}: auditor-created manifest item has no authored item file`);
+      continue;
+    }
+    const batch = String(value.page.batch);
+    const dependencies = [...new Set([...(value.item.deps ?? []), ...(value.item.justified_by ?? []),
+      ...(value.item.forward_refs ?? [])])].sort();
+    const sha256 = itemHash(s, id, dependencies);
+    const prior = priorById.get(id);
+    const priorCurrent = prior?.sha256 === sha256 && prior.page === value.page.id && prior.batch === batch
+      && JSON.stringify(prior.dependencies) === JSON.stringify(dependencies);
+    const pair = [...s.pairs].find(([, pages]) => pages.some(page => page.id === value.page.id))?.[0];
+    let author, ownerRecertification, reviewRecertification;
+    if (priorCurrent) {
+      author = { label: prior.author_result };
+      // A reused item hash is not permission to detach its owner repair from
+      // the provenance certificate. Also restore the binding if an older
+      // certifier pass accidentally dropped it from an otherwise current row.
+      ownerRecertification = currentOwnerRepair(s, id, dependencies, sha256);
+      if (prior.owner_recertification && !ownerRecertification) {
+        defer(`${id}: prior owner repair is no longer current`);
+        continue;
+      }
+      if (prior.review_recertification && !ownerRecertification) {
+        reviewRecertification = currentOrdinaryReview(s, id, dependencies, sha256);
+        if (!reviewRecertification) {
+          defer(`${id}: prior ordinary review is no longer current`);
+          continue;
+        }
+      }
+    }
+    else {
+      author = results.filter(row => row.label.startsWith('step3b-pair-')
+        ? Boolean(pair && row.label.startsWith(`step3b-pair-${pair}-`) && row.covers.includes(pair))
+        : row.covers.map(String).includes(batch))
+        .sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at)).at(-1);
+      const ended = Date.parse(author?.ended_at);
+      // A batch manifest is a shared carrier in both the legacy group and
+      // per-pair layouts. Later repairs can rewrite it without changing this
+      // item or any of its dependency files. The item hash binds the current
+      // per-item manifest entry; require the item's actual proof inputs to
+      // remain inside the successful author's write window.
+      const paths = itemInputPaths(s, id, dependencies).filter(path =>
+        !/-batch-\d+\.pages\.json$/.test(path));
+      if (!author || !Number.isFinite(ended)
+        || paths.some(path => statSync(path).mtimeMs > ended)) {
+        const originAuthorResult = prior?.author_result ?? author?.label;
+        ownerRecertification = originAuthorResult
+          ? currentOwnerRepair(s, id, dependencies, sha256) : null;
+        reviewRecertification = !ownerRecertification && originAuthorResult
+          ? currentOrdinaryReview(s, id, dependencies, sha256) : null;
+        if (!ownerRecertification && !reviewRecertification) {
+          defer(author ? `${id}: changed after its latest successful Step 3 auditor/author result`
+            : `${id}: no successful Step 3 auditor/author result covers batch ${batch} or pair ${pair}`);
+          continue;
+        }
+        author = { label: originAuthorResult };
+      }
+    }
+    certified.push({ id, page: value.page.id, batch, dependencies,
+      sha256, author_result: author.label,
+      ...(ownerRecertification ? { owner_recertification: ownerRecertification } : {}),
+      ...(reviewRecertification ? { review_recertification: reviewRecertification } : {}) });
+  }
+
+  const scopes = [];
+  for (const [page, pair] of s.pairs) {
+    const ids = certified.filter(row => pair.some(p => p.id === row.page)).map(row => row.id).sort();
+    const before = baseline.scopes.find(row => row.page === page);
+    const added = additions.filter(([, value]) => pair.some(p => p.id === value.page.id));
+    // Never let one completed addition approve an unfinished pair's scope delta.
+    if (ids.length && ids.length === added.length) {
+      if (!before?.sha256) throw Error(`${page}: missing pre-author scope hash`);
+      scopes.push({ page, additions: ids, baseline_sha256: before.sha256, sha256: scopeHash(s, page) });
+    }
+  }
+  const receipt = {
+    version: 1,
+    run,
+    policy: CERTIFICATION_POLICY,
+    baseline_sha256: digest(baseline),
+    at: new Date().toISOString(),
+    items: certified.sort((a, b) => a.id.localeCompare(b.id)),
+    scopes: scopes.sort((a, b) => a.page.localeCompare(b.page)),
+  };
+  // A blocked recovery tick may refresh diagnostics without changing any
+  // certified evidence. Preserve the original bytes, timestamp and file mtime.
+  if (priorReceipt && JSON.stringify(priorReceipt.items) === JSON.stringify(receipt.items)
+    && JSON.stringify(priorReceipt.scopes) === JSON.stringify(receipt.scopes))
+    return partial ? { ...priorReceipt, pending } : priorReceipt;
+  writeFileSync(certificationPath, JSON.stringify(receipt, null, 2) + '\n');
+  return partial ? { ...receipt, pending } : receipt;
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(physicsRealpath(resolve(process.argv[1]))).href) {
+  try {
+    const args = process.argv.slice(2), command = args[0];
+    const at = args.indexOf('--run'), run = at < 0 ? undefined : args[at + 1];
+    if (!run) throw Error('Usage: step3-auditor-items.mjs baseline|certify --run RUN');
+    if (command === 'baseline') {
+      const result = writeAuditorBaseline(process.cwd(), run);
+      console.log(`step3-auditor-baseline: ${result.items} scaffold item(s) ${result.reused ? 'reused' : 'recorded'}`);
+    } else if (command === 'certify') {
+      const result = certifyAuditorItems(process.cwd(), run);
+      console.log(`step3-auditor-certifications: ${result.items.length} auditor-created item(s) certified`);
+    } else throw Error('Usage: step3-auditor-items.mjs baseline|certify --run RUN');
+  } catch (error) {
+    console.error(error.message);
+    process.exitCode = 1;
+  }
+}

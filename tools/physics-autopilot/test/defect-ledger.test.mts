@@ -1,0 +1,548 @@
+import { spawnSync } from './fixture-process.mts';
+// The defect ledger's gate must be unsatisfiable by mirroring, and its rows
+// must be unable to double-count.
+//
+// WHY. The pipeline's defect history lived in prose (78% of frontier-14's
+// fatals exist only in reports), and its one hand-maintained aggregate was
+// wrong by ~6x. The ledger is only worth having if (a) every confirmed_fatal
+// adjudication maps to EXACTLY one row — two lanes on one defect is one
+// defect; (b) the check cannot be satisfied by copying the adjudication
+// ledger, which is why a 5a report demands step-5-caught rows; (c) an open
+// row and the closure receipt cannot silently disagree — two blockers once
+// lived only in markdown while the engine had no notion of an open fatal.
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
+
+import { createHash } from 'node:crypto';
+
+const REPO: string = process.env.AUTOPILOT_TEST_REPO
+  ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
+const TOOL = join(REPO, 'tools/physics-support', 'defect-ledger.mjs');
+
+const row = (over: object) => ({
+  defect_id: 'r9-D001', run: 'r9', at: '2026-08-16', class: 'accuracy',
+  subclass: 'citation-inflated', severity: 'fatal', location: 'facts-block',
+  subject: 'thm-x', caught_at_stage: '7-adjudicate', caught_by_role: 'judge-terra',
+  disposition: 'fixed', adjudication_ref: [{ ledger: 'adj', model: 'terra', item_sha256: 'abc' }],
+  ...over,
+});
+
+const fixture = (rows: object[], adj: object[], closure?: object) => {
+  const dir = mkdtempSync(join(tmpdir(), 'ledger-'));
+  mkdirSync(join(dir, 'research'), { recursive: true });
+  writeFileSync(join(dir, 'research', 'defect-ledger.jsonl'), rows.map((r) => JSON.stringify(r)).join('\n') + '\n');
+  writeFileSync(join(dir, 'adj.jsonl'), adj.map((r) => JSON.stringify(r)).join('\n') + '\n');
+  if (closure) writeFileSync(join(dir, 'closure.json'), JSON.stringify(closure));
+  // `check` now also verifies the generated view is current against these
+  // bytes, so a fixture with no view is stale by construction and every case
+  // below would fail for a reason that is not the clause it names. Staleness
+  // itself is covered in defect-ledger-render.test.mts.
+  spawnSync(process.execPath, [TOOL, 'render'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  return dir;
+};
+
+const check = (dir: string, extra: string[] = []) => spawnSync(process.execPath,
+  [TOOL, 'check', '--run', 'r9', '--adjudications', join(dir, 'adj.jsonl'), ...extra],
+  { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+
+const writeExactStep5 = (dir: string, decisions: object[]) => {
+  writeFileSync(join(dir, 'research', 'r9-alpha-groups.json'), JSON.stringify([
+    { label: 'a', covers: ['1'] },
+  ]));
+  writeFileSync(join(dir, 'research', 'r9-batch-1.pages.json'), JSON.stringify([
+    { id: 'p', category: 'test', items: ['thm-x'] },
+  ]));
+  const snapshot = (label: string, item: string) => ({
+    version: 2, run: 'r9', batch: '1', label, manifest: ['thm-x'],
+    hashes: { 'thm-x': { item_sha256: item, contract_sha256: 'contract' } },
+    page_manifest: ['p'], page_hashes: { p: 'page' },
+  });
+  writeFileSync(join(dir, 'research', 'r9-step5-hash-1-pre.json'), JSON.stringify(snapshot('pre', 'before')));
+  writeFileSync(join(dir, 'research', 'r9-step5-hash-1-post.json'), JSON.stringify(snapshot('post', 'after')));
+  const readerText = JSON.stringify({ batch: '1', findings: [], coverage_note: 'none' });
+  const refuterText = JSON.stringify({ batch: '1', opened: ['p'], not_opened: [], flagged: [], coverage_note: 'read page' });
+  writeFileSync(join(dir, 'research', 'r9-reader-findings-1.json'), readerText);
+  writeFileSync(join(dir, 'research', 'r9-refute-1.json'), refuterText);
+  const digest = (text: string) => createHash('sha256').update(text).digest('hex');
+  writeFileSync(join(dir, 'research', 'r9-step5-scope-1.json'), JSON.stringify({
+    version: 2, run: 'r9', batch: '1', group: 'a',
+    manifest_pre: ['thm-x'], manifest_post: ['thm-x'], added: [], removed: [],
+    page_manifest_pre: ['p'], page_manifest_post: ['p'], pages_added: [], pages_removed: [],
+    pages_touched: [], refuter_pages: ['p'], page_order_anchors: { p: [] },
+    touched: ['thm-x'], untouched: [], high_risk: [], refuter_scope: ['p'],
+    opened: ['p'], not_opened: [], flagged: [], refuter_findings: [], reader_findings: [],
+    reader_report_sha256: digest(readerText), refuter_report_sha256: digest(refuterText),
+  }));
+  writeFileSync(join(dir, 'research', 'r9-alpha-a-5a.md'), '# exact routed decisions');
+  writeFileSync(join(dir, 'research', 'r9-alpha-a-5a-decisions.json'), JSON.stringify({
+    version: 1, run: 'r9', group: 'a', decisions,
+  }));
+};
+
+test('a confirmed_fatal with no ledger row fails the check', () => {
+  const dir = fixture([], [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }]);
+  const r = check(dir);
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /never recorded/);
+});
+
+test('one adjudication owned by two rows is a double count', () => {
+  const dir = fixture(
+    [row({}), row({ defect_id: 'r9-D002' })],
+    [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }]);
+  const r = check(dir);
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /one defect, one row/);
+});
+
+test('a confirmed-fatal Step-6 reader warning has exactly one defect-ledger row', () => {
+  const decision = { alert_id: 's8a-reader-1', item: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' };
+  const missing = fixture([], []);
+  writeFileSync(join(missing, 'reader.jsonl'), `${JSON.stringify(decision)}\n`);
+  const absent = check(missing, ['--reader-decisions', join(missing, 'reader.jsonl')]);
+  assert.notEqual(absent.status, 0);
+  assert.match(absent.stderr, /reader warning .* never recorded/);
+
+  const exactRef = { alert_id: decision.alert_id, item: decision.item, item_sha256: decision.item_sha256 };
+  const exact = fixture([row({ adjudication_ref: [exactRef] })], []);
+  writeFileSync(join(exact, 'reader.jsonl'), `${JSON.stringify(decision)}\n`);
+  assert.equal(check(exact, ['--reader-decisions', join(exact, 'reader.jsonl')]).status, 0);
+
+  const duplicate = fixture([row({ adjudication_ref: [exactRef] }),
+    row({ defect_id: 'r9-D002', adjudication_ref: [exactRef] })], []);
+  writeFileSync(join(duplicate, 'reader.jsonl'), `${JSON.stringify(decision)}\n`);
+  const doubled = check(duplicate, ['--reader-decisions', join(duplicate, 'reader.jsonl')]);
+  assert.notEqual(doubled.status, 0);
+  assert.match(doubled.stderr, /one defect, one row/);
+
+  const corrected = fixture([row({ adjudication_ref: [exactRef] }),
+    row({ defect_id: 'r9-D002', adjudication_ref: [exactRef] }), row({
+    defect_id: 'r9-D003',
+    supersedes: ['r9-D001', 'r9-D002'],
+    adjudication_ref: [exactRef],
+  })], []);
+  writeFileSync(join(corrected, 'reader.jsonl'), `${JSON.stringify(decision)}\n`);
+  assert.equal(check(corrected, ['--reader-decisions', join(corrected, 'reader.jsonl')]).status, 0,
+    'an append-only correction leaves one active owner while preserving prior rows');
+});
+
+test('coverage reports a run whose only confirmed fatal came from a Step-6 reader', () => {
+  const dir = fixture([], []);
+  writeFileSync(join(dir, 'research', 'r9-step7-alert-decisions.jsonl'),
+    `${JSON.stringify({ alert_id: 's8a-reader-1', item: 'thm-x', outcome: 'confirmed_fatal' })}\n`);
+  const result = spawnSync(process.execPath, [TOOL, 'stats', '--coverage', '--json'],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).coverage.runs_with_fatal_and_no_rows,
+    [{ run: 'r9', confirmed_fatal: 1 }]);
+});
+
+test('two models may record different defects on the same item version', () => {
+  const context = 'ctx-1';
+  const terra = { id: 'thm-x', model: 'gpt-6-sol', context_sha256: context,
+    outcome: 'confirmed_fatal', item_sha256: 'abc' };
+  const gpt54 = { id: 'thm-x', model: 'gpt-5.4', context_sha256: context,
+    outcome: 'confirmed_fatal', item_sha256: 'abc' };
+  const dir = fixture([
+    row({ adjudication_ref: [gpt54] }),
+    row({ defect_id: 'r9-D002', subclass: 'false-or-overstrong-statement',
+      location: 'remark', caught_by_role: 'judge-terra', adjudication_ref: [terra] }),
+  ], [gpt54, terra]);
+  const r = check(dir);
+  assert.equal(r.status, 0, r.stderr);
+});
+
+test('mirroring the adjudication ledger cannot satisfy the check when a 5a report exists', () => {
+  const dir = fixture([row({})], [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }]);
+  writeFileSync(join(dir, 'research', 'r9-alpha-a-5a.md'), '# findings');
+  const r = check(dir);
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /step-5 body/);
+});
+
+test('an open row must agree with the closure receipt, both directions', () => {
+  const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
+  const agree = fixture([row({ disposition: 'open' })], adj, { open_fatal: ['thm-x'] });
+  assert.equal(check(agree, ['--closure', join(agree, 'closure.json')]).status, 0);
+  const ledgerOnly = fixture([row({ disposition: 'open' })], adj, { open_fatal: [] });
+  assert.match(check(ledgerOnly, ['--closure', join(ledgerOnly, 'closure.json')]).stderr, /stale/);
+  const closureOnly = fixture([row({})], adj, { open_fatal: ['thm-y'] });
+  assert.match(check(closureOnly, ['--closure', join(closureOnly, 'closure.json')]).stderr, /lived only in markdown/);
+});
+
+test('validate rejects an enum excursion and a noteless other', () => {
+  const dir = fixture([row({ subclass: 'vibes' }), row({ defect_id: 'r9-D002', subclass: 'other' })], []);
+  const r = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /outside the closed enum/);
+  assert.match(r.stderr, /requires subclass_note/);
+});
+
+test('validate accepts legacy step-5 location vocabulary when evidence already carries the note', () => {
+  const dir = fixture([
+    row({
+      defect_id: 'f20-b-t9-01',
+      run: 'frontier-20',
+      location: 'proof-step 3.1',
+      subclass: 'other',
+      evidence: [{ path: 'research/frontier-20-alpha-d-5a.md', note: 'Reader note already explains the repaired proof step.' }],
+    }),
+    row({
+      defect_id: 'f20-b-r9-03',
+      run: 'frontier-20',
+      location: 'statement-and-proof',
+      subclass: 'false-or-overstrong-statement',
+    }),
+    row({
+      defect_id: 'f20-b-t9-19',
+      run: 'frontier-20',
+      location: 'carrier',
+      subclass: 'other',
+      evidence: [{ path: 'research/frontier-20-alpha-b-5a.md', note: 'Whole-carrier reread closed the routed post-state on current disk.' }],
+    }),
+  ], []);
+  const r = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(r.status, 0, r.stderr);
+});
+
+test('validate accepts the current step-5 frontier-26 vocabulary already present on disk', () => {
+  const dir = fixture([
+    row({
+      defect_id: 'f26-b-t6-01',
+      run: 'frontier-26',
+      severity: 'nonfatal',
+      subclass: 'contract-mismatch',
+      location: 'proof-contract entry',
+      repair_cost: 'contract-sync',
+    }),
+    row({
+      defect_id: 'f26-b-t6-02',
+      run: 'frontier-26',
+      subclass: 'unsupported-inference',
+      location: 'proof-step 2.1',
+    }),
+    row({
+      defect_id: 'f26-b-t6-14',
+      run: 'frontier-26',
+      subclass: 'ill-typed-claim',
+      location: 'statement-and-proof',
+    }),
+    row({
+      defect_id: 'f26-b-t6-19',
+      run: 'frontier-26',
+      subclass: 'unsupported-universal-property',
+      location: 'statement-and-proof',
+    }),
+    row({
+      defect_id: 'f26-b-t7-01',
+      run: 'frontier-26',
+      location: 'Definition',
+    }),
+    row({
+      defect_id: 'f26-b-t9-01',
+      run: 'frontier-26',
+      severity: 'nonfatal',
+      location: 'Definition opening sentence',
+      subclass: 'undefined-notation',
+    }),
+    row({
+      defect_id: 'f26-b-t9-02',
+      run: 'frontier-26',
+      location: 'verification step 1.1',
+      subclass: 'arithmetic-error',
+    }),
+    row({
+      defect_id: 'f26-b-t9-04',
+      run: 'frontier-26',
+      severity: 'nonfatal',
+      location: 'proof-step 1.1',
+      subclass: 'invalid-inference',
+    }),
+    row({
+      defect_id: 'f26-b-read9-01',
+      run: 'frontier-26',
+      severity: 'nonfatal',
+      location: 'contract-row empty',
+      subclass: 'false-boundary-disposition',
+    }),
+    row({
+      defect_id: 'f26-b-ref7-01',
+      run: 'frontier-26',
+      location: 'Statement',
+      subclass: 'false-claim',
+    }),
+    row({
+      defect_id: 'f26-b-ref9-02',
+      run: 'frontier-26',
+      location: 'Statement and Refutation',
+      subclass: 'unlicensed-inference',
+    }),
+    row({
+      defect_id: 'f26-b-ref9-03',
+      run: 'frontier-26',
+      location: 'title-and-statement',
+      subclass: 'missing-hypothesis',
+    }),
+    row({
+      defect_id: 'f26-b-g9-01',
+      run: 'frontier-26',
+      severity: 'nonfatal',
+      location: 'proof-steps 1.1-2.1',
+      subclass: 'invalid-inference',
+    }),
+    row({
+      defect_id: 'f26-b-g9-02',
+      run: 'frontier-26',
+      severity: 'nonfatal',
+      location: 'proof-steps 1.1-3.1',
+      subclass: 'invalid-inference',
+    }),
+    row({
+      defect_id: 'f26-b-r9-01',
+      run: 'frontier-26',
+      location: 'Statement',
+      subclass: 'citation-inaccurate',
+    }),
+  ], []);
+  const r = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(r.status, 0, r.stderr);
+});
+
+test('validate accepts the current step-5 frontier-29 vocabulary already present on disk', () => {
+  const dir = fixture([
+    row({
+      defect_id: 'f29-b-t13-01',
+      run: 'frontier-29',
+      severity: 'nonfatal',
+      subclass: 'frontmatter-schema',
+      location: 'frontmatter',
+    }),
+    row({
+      defect_id: 'f29-b-r14-04',
+      run: 'frontier-29',
+      subject: 'presheaves-sheaves-stalks-and-sheafification-examples',
+      subclass: 'overstrong-title-or-statement',
+      location: 'page prose',
+    }),
+  ], []);
+  const r = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(r.status, 0, r.stderr);
+});
+
+test('validate still rejects malformed proof-step legacy locations', () => {
+  const dir = fixture([
+    row({
+      defect_id: 'f20-b-r9-01',
+      run: 'frontier-20',
+      location: 'proof-step nonsense',
+    }),
+  ], []);
+  const r = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /outside the closed enum/);
+});
+
+test('append accepts current step-5 detail vocabulary for new rows', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ledger-append-'));
+  mkdirSync(join(dir, 'research'), { recursive: true });
+  writeFileSync(join(dir, 'research', 'defect-ledger.jsonl'), '');
+  const incoming = [{
+    ...row({
+      defect_id: 'r9-D001',
+      run: 'frontier-26',
+      subclass: 'contract-mismatch',
+      severity: 'nonfatal',
+      location: 'proof-contract entry',
+      repair_cost: 'contract-sync',
+    }),
+  }, {
+    ...row({
+      defect_id: 'r9-D002',
+      run: 'frontier-26',
+      subclass: 'citation-inaccurate',
+      location: 'Statement',
+    }),
+  }, {
+    ...row({
+      defect_id: 'r9-D003',
+      run: 'frontier-29',
+      subclass: 'frontmatter-schema',
+      severity: 'nonfatal',
+      location: 'frontmatter',
+    }),
+  }];
+  writeFileSync(join(dir, 'rows.json'), JSON.stringify(incoming));
+  const appended = spawnSync(process.execPath, [TOOL, 'append', '--file', join(dir, 'rows.json')],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(appended.status, 0, appended.stderr);
+  const validated = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(validated.status, 0, validated.stderr);
+});
+
+test('append remains strict for new rows with validate-only location aliases or missing subclass_note', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ledger-append-'));
+  mkdirSync(join(dir, 'research'), { recursive: true });
+  writeFileSync(join(dir, 'research', 'defect-ledger.jsonl'), '');
+  const incoming = {
+    ...row({
+      defect_id: 'r9-D001',
+      run: 'frontier-29',
+      location: 'page prose',
+    }),
+  };
+  writeFileSync(join(dir, 'rows.json'), JSON.stringify(incoming));
+  const r = spawnSync(process.execPath, [TOOL, 'append', '--file', join(dir, 'rows.json')],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  const out = `${r.stdout}${r.stderr}`;
+  assert.notEqual(r.status, 0);
+  assert.match(out, /outside the closed enum/);
+});
+
+test('append remains strict for new frontier-20 legacy rows with missing subclass_note', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ledger-append-'));
+  mkdirSync(join(dir, 'research'), { recursive: true });
+  writeFileSync(join(dir, 'research', 'defect-ledger.jsonl'), '');
+  const incoming = {
+    ...row({
+      defect_id: 'r9-D001',
+      run: 'frontier-20',
+      subclass: 'other',
+      location: 'carrier',
+      evidence: [{ path: 'research/frontier-20-alpha-b-5a.md', note: 'Current carrier reread closes the routed state.' }],
+    }),
+  };
+  writeFileSync(join(dir, 'rows.json'), JSON.stringify(incoming));
+  const r = spawnSync(process.execPath, [TOOL, 'append', '--file', join(dir, 'rows.json')],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  const out = `${r.stdout}${r.stderr}`;
+  assert.notEqual(r.status, 0);
+  assert.match(out, /outside the closed enum/);
+  assert.match(out, /requires subclass_note/);
+});
+
+test('render leads with outcomes, never a bare total', () => {
+  const dir = fixture([row({}), row({ defect_id: 'r9-D002', subject: 'thm-y', caught_at_stage: '5a-adjudicate', prevention: { kind: 'mechanical', ref: 'tools/physics-support/x.mjs' } })], []);
+  const r = spawnSync(process.execPath, [TOOL, 'render', '--out', join(dir, 'view.md')],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(r.status, 0, r.stderr);
+  const view = String(spawnSync('cat', [join(dir, 'view.md')], { encoding: 'utf8' }).stdout);
+  assert.match(view, /GENERATED .* do not edit/);
+  assert.match(view, /caught before publication \| 2/);
+  assert.match(view, /mechanically prevented \| 1/);
+  assert.match(view, /escaped to publication \| 0/);
+});
+
+test('the check gate closes the ledger outside the bounded judge loop', async () => {
+  const mod = await import('../stages/mathlib.mts');
+  const ctx = { run: 'frontier-14', repo: REPO };
+  for (const id of ['7-preflight', '8-scope', '9-contract-close']) {
+    const st = mod.stages.find((s: any) => s.id === id);
+    const g = st.gates(ctx).find((x: any) => {
+      const argv = typeof x.argv === 'function' ? x.argv() : x.argv;
+      return argv.includes('tools/physics-support/defect-ledger.mjs');
+    });
+    assert.ok(g, `${id} never checks the defect ledger`);
+    assert.ok(g.liveness, `${id}: a ledger check over zero rows must not pass`);
+  }
+  for (const id of ['7-adjudicate', '7-rejudge']) {
+    const st = mod.stages.find((s: any) => s.id === id);
+    assert.ok(!st.gates(ctx).some((x: any) => {
+      const argv = typeof x.argv === 'function' ? x.argv() : x.argv;
+      return argv.includes('tools/physics-support/defect-ledger.mjs');
+    }), `${id}: ledger bookkeeping must not consume a mathematical adjudication/rejudge round`);
+  }
+});
+
+test('a nonfatal row deliberately left open does not contradict the closure receipt', () => {
+  // B41 on frontier-15: a 503-ing archive snapshot, adjudicated nonfatal and
+  // left open pending a pre-publish re-sweep. The closure receipt's namespace
+  // is unrepaired fatal PROOF defects; the first check compared EVERY open row
+  // against open_fatal and spent a step-7 repair round on the false positive.
+  const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
+  const dir = fixture(
+    [row({}), row({ defect_id: 'r9-D002', severity: 'nonfatal', class: 'richness', subclass: 'unsourced-locator', subject: 'rem-y, archive snapshot', disposition: 'open', adjudication_ref: ['Alpha-b 5a: nonfatal, left open for a pre-publish re-sweep'] })],
+    adj, { open_fatal: [] });
+  const r = check(dir, ['--closure', join(dir, 'closure.json')]);
+  assert.equal(r.status, 0, r.stderr);
+});
+
+test('a fatal open row still fails the closure cross-check', () => {
+  const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
+  const dir = fixture([row({ disposition: 'open' })], adj, { open_fatal: [] });
+  const r = check(dir, ['--closure', join(dir, 'closure.json')]);
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /stale/);
+});
+
+test('--no-open refuses ANY open row, whatever its severity', () => {
+  const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
+  const dir = fixture(
+    [row({}), row({ defect_id: 'r9-D002', severity: 'nonfatal', class: 'richness', subclass: 'unsourced-locator', subject: 'rem-y', disposition: 'open', adjudication_ref: ['Alpha-b 5a: nonfatal, left open for a pre-publish re-sweep'] })],
+    adj, { open_fatal: [] });
+  const r = check(dir, ['--closure', join(dir, 'closure.json'), '--no-open']);
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /still open at the terminal stage/);
+  assert.ok(!/one defect, one row/.test(r.stderr), 'the failure must be the open row alone');
+});
+
+test('exact 5a decisions close every routed obligation against its ledger row', () => {
+  const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
+  const dir = fixture([row({ caught_at_stage: '5a-adjudicate' })], adj, { open_fatal: [] });
+  writeExactStep5(dir, [{
+    obligation: 'touched:1:thm-x', id: 'thm-x', route: 'touched',
+    verdict: 'accepted_repair', defect_ids: ['r9-D001'], evidence: 'Proof checked.',
+    subject_sha256: 'a'.repeat(64),
+  }]);
+  const r = check(dir, ['--closure', join(dir, 'closure.json')]);
+  assert.equal(r.status, 0, r.stderr);
+});
+
+test('a routed obligation missing from 5a decisions fails exact closure', () => {
+  const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
+  const dir = fixture([row({ caught_at_stage: '5a-adjudicate' })], adj, { open_fatal: [] });
+  writeExactStep5(dir, []);
+  const r = check(dir, ['--closure', join(dir, 'closure.json')]);
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /Step-5 routed decisions or frozen closure no longer close/);
+  assert.match(r.stderr, /did not decide touched:1:thm-x/);
+});
+
+test('a report without its decisions sibling fails once exact routing is present', () => {
+  const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
+  const dir = fixture([row({ caught_at_stage: '5a-adjudicate' })], adj, { open_fatal: [] });
+  writeExactStep5(dir, [{
+    obligation: 'touched:1:thm-x', id: 'thm-x', route: 'touched',
+    verdict: 'accepted_repair', defect_ids: ['r9-D001'], evidence: 'Proof checked.',
+  }]);
+  writeFileSync(join(dir, 'research', 'r9-alpha-b-5a.md'), '# b');
+  const r = check(dir, ['--closure', join(dir, 'closure.json')]);
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /r9-alpha-b-5a\.md has no r9-alpha-b-5a-decisions\.json/);
+});
+
+test('a pre-contract run with 5a reports and no decisions files remains historical', () => {
+  const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
+  const dir = fixture([row({ caught_at_stage: '5a-adjudicate' })], adj, { open_fatal: [] });
+  writeFileSync(join(dir, 'research', 'r9-alpha-a-5a.md'), '# findings');
+  const r = check(dir, ['--closure', join(dir, 'closure.json')]);
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(r.stdout, /predate exact -5a-decisions\.json routing/);
+});
+
+test('only the terminal stage passes --no-open; earlier stages tolerate a deliberate open row', async () => {
+  const mod = await import('../stages/mathlib.mts');
+  const ctx = { run: 'frontier-14', repo: REPO };
+  for (const id of ['7-preflight', '8-scope', '9-contract-close']) {
+    const st = mod.stages.find((s: any) => s.id === id);
+    const g = st.gates(ctx).find((x: any) => {
+      const argv = typeof x.argv === 'function' ? x.argv() : x.argv;
+      return argv.includes('tools/physics-support/defect-ledger.mjs');
+    });
+    const argv = typeof g.argv === 'function' ? g.argv() : g.argv;
+    if (id === '9-contract-close') assert.ok(argv.includes('--no-open'), '9-contract-close is the no-open backstop');
+    else assert.ok(!argv.includes('--no-open'), `${id} must tolerate a nonfatal row left open for later work`);
+  }
+});

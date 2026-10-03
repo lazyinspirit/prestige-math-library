@@ -6,7 +6,9 @@
 
 - [CLAUDE.md](CLAUDE.md): instructions for agents working in this repository.
 - [SCHEMA.md](SCHEMA.md): format and validation rules for items and pages.
-- [WORKFLOW.md](WORKFLOW.md): build stages, run controls, and checks.
+- [WORKFLOW.md](WORKFLOW.md): mathematics build stages, run controls, and checks.
+- [PHYSICS-CONTENT-MODEL.md](PHYSICS-CONTENT-MODEL.md): physics item classes and dependency rules.
+- [physics/WORKFLOW.md](physics/WORKFLOW.md): the independent physics build workflow.
 - [articles/README.md](articles/README.md): format for narrative articles.
 
 ## Repository map

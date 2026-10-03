@@ -1,0 +1,412 @@
+// The domain, declared once.
+//
+// WHY THIS FILE EXISTS. The engine was written in plain JavaScript and every
+// object was whatever its literal happened to infer. Two of the four defects
+// found in the line-by-line audit are ones a type checker rejects outright:
+//
+//   .filter((p: any) => !p.exists)        // p is a string; `exists` is not a property
+//   prior.lastExitOk === false       // lastExitOk is boolean | null, and the
+//                                    // null case was the one that mattered
+//
+// Neither could be caught by a test, because both are about a shape rather than
+// a behaviour, and both looked correct in isolation. Declaring the shapes moves
+// that whole class from "found at 3am on a live run" to "found before the file
+// is saved".
+
+/** A unit of work a stage owes — a batch number, a page id, or 'all'. */
+export type Unit = string;
+
+/** Everything a stage is told about the run it is planning for. */
+export interface Ctx {
+  run: string;
+  repo: string;
+  dispatchDir: string;
+  coversMap?: Record<string, Unit[]>;
+  config?: Config;
+  /** Durable execution identity, initially 1; repeated stages must scope their
+   * labels, result matchers and artifacts to this number. */
+  stageRounds?: Record<string, number>;
+  /** Latest routed failure for each gate stage, retained through repeat resets. */
+  stageFailures?: Record<string, GateResult>;
+}
+
+/**
+ * One dispatch a stage wants to start.
+ *
+ * `job` is checked at dispatch: it must be a cognitive job, or end in
+ * `-mechanical` to declare that no model is involved.
+ */
+export interface Plan {
+  role: string;
+  /** Optional stage-selected model/provider profile. Role sandbox/caps remain
+   * unchanged; the repository dispatcher validates the named profile. */
+  profile?: string;
+  label: string;
+  job: string;
+  covers?: Unit[];
+  /** Path, or candidates tried in order — the first that exists wins. */
+  brief?: string | string[];
+  task?: string | string[];
+  /** Images attached to a Codex dispatch. Paths are resolved from the repo. */
+  images?: string[];
+  /** JSON Schema constraining the dispatched agent's final response. */
+  outputSchema?: string;
+  /** Repo-relative JSON artifact written mechanically from that final response. */
+  resultArtifact?: string;
+  /** A CODEX_HOME that survives the dispatch, so a later stage can resume the
+   *  conversation. Ordinary lanes leave this unset and get a throwaway home. */
+  sessionHome?: string;
+  /** Re-enter this codex conversation instead of starting a new one. The id
+   *  comes from the earlier dispatch's result record. */
+  resumeSession?: string;
+  /** An argv ARRAY. Never a command string: every attempt to parse one
+   *  produced a quoting defect. */
+  argv?: string[];
+  timeout?: number;
+  /** Set false when the command writes its own result record. */
+  writeReceipt?: boolean;
+}
+
+export interface Liveness {
+  /** Regex source with one capture group: the count of things examined. */
+  pattern: string;
+  min?: number;
+  unit?: string;
+}
+
+export interface Gate {
+  id: string;
+  argv: string[] | (() => string[]);
+  /** Paths that must exist for this gate to be meaningful. */
+  needs?: string[] | (() => string[]);
+  /** A gate reporting success over an empty scope is not a gate that passed. */
+  liveness?: Liveness;
+  required?: boolean;
+  /** Optional strict scope projection. Complete raw evidence remains on the result. */
+  projectResult?: (result: { code: number | null; stdout: string; stderr: string }) => any;
+}
+
+export interface GateResult {
+  id: string;
+  ok: boolean;
+  why?: string;
+  skipped?: boolean;
+  checked?: number;
+  code?: number | null;
+  output?: string;
+  rawOutput?: string;
+  rawCode?: number | null;
+  frontierScope?: { frontierSha256: string; mode: string; excluded: any[]; retained: any[]; global: any[] };
+  advisory?: Array<GateResult & { stage?: string }>;
+  /** Per-(gate,item) repair routing. Present only while a stage hook runs. */
+  liveItems?: string[];
+  exhaustedItems?: string[];
+}
+
+export interface Stage {
+  id: string;
+  label: string;
+  /** Explicit engine-controlled branch, evaluated after the full gate battery
+   * with all writers drained. A failed gate may route only through this opt-in
+   * API; ordinary stages retain the configured owner-hold policy. This callback
+   * must be read-only: the executor atomically records the transition itself. */
+  route?: (args: { ctx: Ctx; outcome: 'passed' | 'failed'; failure?: GateResult }) =>
+    { next: string } | null;
+  /** Every possible route target; validated before starting the workflow. */
+  routeTargets?: string[];
+  /**
+   * OVERLAP GROUP. A maximal run of CONSECUTIVE stages carrying the same
+   * `pipeline` name is executed with per-unit progression: a unit may be
+   * dispatched for stage k+1 as soon as ITS OWN work is finished at stage k,
+   * while other units are still at stage k.
+   *
+   * What this does NOT relax: gates. Every member stage's gates run at the
+   * GROUP EXIT, together, once, with nothing in flight — the level join. A
+   * gate never becomes per-unit, because a gate that silently narrows its
+   * scope is indistinguishable from a gate that passed.
+   *
+   * The stage barrier still applies between different groups and around every
+   * stage that declares no `pipeline`.
+   */
+  pipeline?: string;
+  /**
+   * The dispatcher lane this stage's plans use. REQUIRED on a pipelined stage
+   * and unused elsewhere: two stages of one group can be live at the same
+   * moment, and `concurrency` alone would then admit twice the lane's real
+   * cap (two alpha stages at 3 each = 6 Alphas against a dispatcher cap of 3).
+   * The group budget for a role is the largest `concurrency` any member
+   * declares for it — they mirror one cap, so the max IS the cap.
+   */
+  role?: string;
+  /** Model override applied to every matching primary and repair dispatch in
+   * this stage. A function may leave tool or unrelated role plans unchanged. */
+  modelProfile?: string | ((plan: Plan) => string | undefined);
+  /**
+   * Units that must advance TOGETHER, for a stage whose dispatch covers several
+   * at once. A group Alpha owns up to three batches and its single dispatch
+   * claims all of them, so it may not start until every batch it will cover is
+   * finished at the previous stage — otherwise it declares coverage of work
+   * that has not happened.
+   */
+  cohort?: (ctx: Ctx, u: Unit) => Unit[];
+  /** Units sharing output files. Ready subsets may advance independently, but
+   * no subset may dispatch while another member has a live writer here. */
+  exclusiveCohort?: (ctx: Ctx, u: Unit) => Unit[];
+  /** Direct prerequisites owed by this same stage. A unit cannot dispatch
+   * until every transitive prerequisite is artifact-complete and stable. */
+  unitPrerequisites?: (ctx: Ctx, u: Unit) => Unit[];
+  /** The units this stage owes. */
+  units?: (ctx: Ctx) => Unit[];
+  /** Which result files belong to this stage. Build it with `resultPattern`
+   *  rather than by hand — thirteen hand-written regexes drifted from the
+   *  dispatcher's naming rule. */
+  /** The result-file matcher may depend on run context when a migration must
+   *  recognise legacy evidence without letting that evidence cover a new run.
+   *  Resolve it before every coverage/adoption check; never cache one run's
+   *  compatibility matcher for another run. */
+  pattern: RegExp | ((ctx: Ctx) => RegExp);
+  labelFor?: (u: Unit) => string;
+  /** The file each unit owes. A result is not an artifact: a lane can exit zero
+   *  having written its output to the wrong path. */
+  artifacts?: (ctx: Ctx, u: Unit) => string | string[] | null;
+  concurrency?: number;
+  maxAttempts?: number;
+  fallbackCount?: number;
+  plan?: (ctx: Ctx, pending: Unit[]) => Plan[];
+  /** Dispatch ready item handoffs while the owning stage's workers wait. */
+  onProgress?: (args: { ctx: Ctx; executor: any; stage: Stage }) => void | Promise<void>;
+  gates?: (ctx: Ctx) => Gate[];
+  /** Why this stage needs no gate, and what checks it instead. A stage with no
+   *  gate cannot fail; saying so has to be deliberate. The terminal stage may
+   *  not waive — see `validateStages`. */
+  gatesWaived?: string;
+  escalate?: (args: { ctx: Ctx; units: Unit[]; executor: unknown }) => Promise<void> | void;
+  /**
+   * Turn a gate failure into repair work.
+   *
+   * This is the loop that closes a build. A gate says what is wrong; this hook
+   * dispatches whoever can fix it; the gate re-runs when the dispatches finish
+   * and either passes or names what is still wrong. Bounded by `maxFixRounds`,
+   * because a repair that never converges must become a blocker a person reads,
+   * not an infinite spend.
+   *
+   * A hook that returns `{ outage }` is saying its round FAILED FOR AN EXTERNAL
+   * REASON — every failure it produced carried a platform-outage signature (an
+   * account session limit, a provider-wide 429) — so no number of rounds could
+   * have succeeded. The executor refunds the round and retries on a clock
+   * instead: the cap exists to stop a non-converging repair, and an outage says
+   * nothing about convergence. `prevRoundAt` is the previous round's start
+   * instant (null on round 1), so a hook whose repair runs as an ASYNC dispatch
+   * can classify that round's failures at the next firing.
+   */
+  onGateFailure?: (args: { ctx: Ctx; failure: GateResult; executor: any; stage: Stage; round: number; prevRoundAt?: string | null }) => Promise<void | RepairReport> | void | RepairReport;
+  /** Report a gate failure or missing output for owner resolution; no repair dispatch or budget. */
+  onHold?: (args: { ctx: Ctx; failure: GateResult; stage: Stage }) =>
+    { owner: { reason: string } } | Promise<{ owner: { reason: string } }>;
+  /** Repair rounds allowed before a failing gate becomes a hard blocker.
+   * Infinity allows terminal adjudication instead of a numeric repair cap. */
+  maxFixRounds?: number;
+  /** The round cap is lifetime for this stage. An owner `retry` re-runs gates
+   *  after manual intervention but must not reset the counter or launch another
+   *  automatic repair/rejudge cycle. */
+  terminalFixBudget?: boolean;
+  /** TRIES EACH ITEM GETS AT EACH GATE (owner, 2026-08-25): "each item must
+   *  pass through the same gate within 3 tries, after which it becomes a
+   *  blocker and requires intervention".
+   *
+   *  Set this and the stage's repair budget stops being a single stage-wide
+   *  counter spent one gate per round, and becomes one counter per
+   *  (gate, item) pair. A round is spent while ANY named item still has tries
+   *  left; an item that burns its three is blocked BY NAME and stops
+   *  attracting repair, while its page-mates continue. The stage blocks only
+   *  when every item the failing gate names is exhausted.
+   *
+   *  Leave it unset to keep stage-wide `maxFixRounds` behaviour. */
+  perItemFixBudget?: number;
+  /** Repair every failure in this stage's battery in one ownership-aware wave. */
+  batchRepairs?: boolean;
+  /** Semantic inputs only; excludes dispatch logs and generated gate reports. */
+  repairFingerprint?: (ctx: Ctx) => string;
+}
+
+/** What a repair hook may report back about the round it just ran. */
+export interface RepairReport {
+  /** Hold without more dispatches until the owner changes the evidence. */
+  owner?: { reason: string };
+  /** The round's failures were all an external platform outage. `retryAfterMs`
+   *  overrides the executor's default backoff clock. */
+  outage?: { reason: string; retryAfterMs?: number };
+}
+
+export interface Config {
+  run: string;
+  repo: string;
+  stateDir: string;
+  dispatchDir: string;
+  stages?: string;
+  /** Stage-spec modules whose edits must hot-reload the active table. */
+  stagesWatch?: string[];
+  argv: string[];
+  concurrency?: number;
+  /** Absent means no global limit. The per-stage caps mirror the dispatcher's
+   *  own lane caps, which are the real constraint. */
+  globalConcurrency?: number;
+  maxAttempts?: number;
+  /** Production gate disposition. `owner` escalates immediately without
+   * invoking a stage repair hook or spending any repair budget.
+   * `owner-recertify` additionally requires repair and recertification of
+   * every rejected item before `retry` reruns the gate. */
+  gateFailurePolicy?: 'repair' | 'owner' | 'owner-recertify';
+  /** Minimum gap between non-DeepSeek process launches, in ms (default 3000).
+   *  Zero also disables DeepSeek pacing in test harnesses. */
+  dispatchStaggerMs?: number;
+  /** DeepSeek process-launch gap in ms (default 1000). */
+  deepseekDispatchStaggerMs?: number;
+  reportIntervalMin?: number;
+  pollSec?: number;
+  defaultTimeoutSec?: number;
+  coversMap?: Record<string, Unit[]>;
+  /** Shell command listing live dispatches, or false to disable adoption. */
+  adoptCommand?: string | false;
+  exitOnBlocked?: boolean;
+  blockedTickLimit?: number;
+}
+
+export interface DispatchRecord {
+  stage: string;
+  role: string;
+  label: string;
+  covers: Unit[];
+  /** The retry-policy counter. `State.recordDispatchStart` is the only thing
+   *  that increments it, and the owner's `retry` command is the only thing that
+   *  resets it. */
+  attempts: number;
+  /** `null` when the dispatch never recorded an end — the engine process died
+   *  while it was in flight. That case is why a retry cap must key on attempts,
+   *  not on exit status, and why `null` must never be read as "failed". */
+  lastExitOk: boolean | null;
+  startedAt: string | null;
+  endedAt: string | null;
+  /** The same number as `attempts`, stamped at start for the status line.
+   *  Written only by `recordDispatchStart`, from the value it computes, so the
+   *  two cannot disagree at the moment a dispatch begins. */
+  attempt: number;
+}
+
+export interface StageState {
+  enteredAt: string;
+  gatesPassedAt: string | null;
+  doneAt: string | null;
+  /** Repair-cycle identity. Bounded by maxFixRounds unless perItemFixBudget is set. */
+  fixRounds: number;
+  /** Set once the repair budget is spent, so the notice is given once. */
+  repairExhaustedAt?: string | null;
+  /** Set when a repair round reported an external outage: the hook stays
+   *  un-fired and no round is consumed until this instant passes. */
+  backoffUntil?: string | null;
+  /** Start instant of the most recent repair round, stamped before the hook
+   *  fires; the hook receives the PREVIOUS stamp as `prevRoundAt`. */
+  lastRepairAt?: string | null;
+  skipped?: boolean;
+  /** A routed failure is complete for scheduling, never a gate pass. */
+  routedTo?: string;
+}
+
+export interface Blocker {
+  stage: string;
+  message: string;
+  at: string;
+  /** Stable dedupe key; defaults to the message. Lets a message carry variable
+   *  text (counts, timeouts) without stacking near-duplicate blockers. */
+  key?: string;
+}
+
+export interface StateData {
+  workflowRevision?: string;
+  version: number;
+  run: string | null;
+  startedAt: string | null;
+  finishedAt: string | null;
+  stage: string | null;
+  dispatches: Record<string, DispatchRecord>;
+  stages: Record<string, StageState>;
+  stageRounds?: Record<string, number>;
+  transitions?: Array<{ from: string; to: string; round: number;
+    outcome: 'passed' | 'failed'; at: string; failure?: GateResult }>;
+  stageFailures?: Record<string, GateResult>;
+  blockers: Blocker[];
+  lastReportAt: string | null;
+  paused: boolean;
+  /** Owner-armed stop: pause once this stage is stamped complete, before any
+   *  dispatch for the stage that follows. Cleared when it fires, so a later
+   *  `resume` continues past the boundary. */
+  pauseAfter?: string | null;
+  /** PER-(GATE, ITEM) REPAIR ACCOUNTING (owner, 2026-08-25).
+   *
+   *  Key is `<gateId>\u0000<itemId>`, or `<gateId>\u0000*` for a gate whose
+   *  output names no item (validate-plan, manifest-integrity, splice-verify,
+   *  pathcheck, merge-contracts, gate-liveness are all plan- or level-scoped).
+   *  A counter increments only when that item is STILL named by that gate
+   *  after a completed battery, so an item repaired on the first pass never
+   *  reaches two.
+   *
+   *  Why this exists alongside `StageState.fixRounds`: the stage-wide budget
+   *  is consumed one GATE per round, because the battery stops at its first
+   *  failure. A level with four red gates therefore exhausted three rounds
+   *  before it exhausted the queue — frontier-18 did exactly that, twice — and
+   *  a single stubborn item could spend the whole level's budget. Opt in with
+   *  `Stage.perItemFixBudget`; stages that do not set it keep the old
+   *  accounting unchanged. */
+  gateAttempts?: Record<string, { n: number; stage: string; lastAt: string }>;
+}
+
+export interface StageStatus {
+  done: boolean;
+  unitsDone?: boolean;
+  gatesPassed?: boolean;
+  why: string;
+  missing: Unit[];
+  mode?: 'coverage' | 'count' | 'skip';
+}
+
+export interface RunningEntry {
+  label: string;
+  covers?: Unit[];
+  attempt?: number;
+  elapsed?: string;
+  external?: boolean;
+}
+
+export interface Snapshot {
+  run: string;
+  done: boolean;
+  paused: boolean;
+  stage: Stage | null;
+  stages: Array<{ id: string; label: string; done: boolean; why: string; current: boolean }>;
+  running: RunningEntry[];
+  blockers: Blocker[];
+  startedAt: string | null;
+  elapsed: string;
+  controlPath: string;
+}
+
+export interface InvokeResult {
+  ok: boolean;
+  code: number | null;
+  stdout?: string;
+  stderr?: string;
+  error: string | null;
+}
+
+export interface Adapter {
+  name: string;
+  describe: (vars: Record<string, unknown>) => string;
+  /** `timeoutMs` is enforced by the adapter (SIGTERM the process group, then
+   *  SIGKILL after `killGraceMs`); it resolves ok:false rather than hanging.
+   *  An adapter that ignores it recreates the hung-lane-forever failure. */
+  invoke: (vars: Record<string, unknown>,
+    opts?: { signal?: AbortSignal; timeoutMs?: number; killGraceMs?: number }) => Promise<InvokeResult>;
+}
+
+export type ControlCommand = 'pause' | 'resume' | 'skip' | 'retry' | 'stop' | 'report' | 'pause-at';
+export interface Control { command: ControlCommand | null; stage?: string; unit?: string; error?: string; }

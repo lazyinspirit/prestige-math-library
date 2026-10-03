@@ -1,0 +1,2243 @@
+// The engine. This is the part that used to be a person, and then briefly was
+// an LLM, and is now a loop.
+//
+// THE SHAPE OF THE WORK. A stage owes a set of units. Some are covered by
+// successful dispatches; the rest are pending. The engine dispatches the
+// pending ones up to a concurrency cap, waits, and when every unit is covered
+// it runs the stage's gates and moves on. That is the entire control plane, and
+// none of it needs a model: coverage is a set difference, and "is this stage
+// finished" is a predicate over files on disk.
+//
+// WHY NOT A MODEL. The previous design detected a transition and then paid an
+// agent to decide what to dispatch next. The agent read a stage table, followed
+// its instruction, and fired a command — a deterministic function, priced per
+// token and sampled. Worse, it could hallucinate a step, dispatch twice, or
+// summarise instead of acting, and the last of those is the failure that
+// actually happened, repeatedly. Determinism here is not an optimisation; it is
+// the correctness property.
+//
+// WHERE A MODEL STILL EARNS ITS PLACE. Two spots, both genuinely undecidable
+// from disk. A lane that died twice may be a transient or a real blocker, and
+// telling those apart means reading the log. A stage whose gates fail may need
+// a repair dispatch whose content depends on what failed. Both are `escalate`
+// hooks, both are optional, and the default for both is to stop and record —
+// never to guess.
+//
+// OVERLAP GROUPS, AND THE ONE THING THEY MAY NOT RELAX. Strict serial execution
+// makes the slowest unit of a stage the start time of every unit of the next
+// one: on a seven-batch level the slowest author (6h) gated all five readers
+// (4h), for hours of nothing happening. A maximal run of consecutive stages
+// sharing a `pipeline` name is therefore run with PER-UNIT progression — batch 3
+// may enter its reader while batch 5 is still authoring.
+//
+// What per-unit progression is allowed to depend on is deliberately tiny: that
+// unit's own coverage, and that unit's own declared artifact. NO GATE IS EVER
+// EVALUATED PER UNIT. Every member stage's gates run at the group exit,
+// together, once, with the group fully drained — the level join. This is not
+// timidity; a gate that quietly becomes per-batch when it needed level scope
+// reports success over a fraction of what it was asked to check, which is the
+// vacuous-gate class this engine already exists to prevent, wearing a green
+// tick. The cost is that a per-batch defect a level-wide gate would have found
+// is found one stage later than it used to be; the level join still finds it,
+// and it still blocks before the next barrier.
+
+import { existsSync, writeFileSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
+
+import { covered, pending, stageComplete } from './coverage.mts';
+import { identityPlaceholders } from './doctor.mts';
+import type { Config, Ctx, Stage, Plan, StageStatus, Snapshot, Adapter, Unit, RunningEntry, Gate, GateResult } from './types.mts';
+
+/** Default clock for an outage-refunded repair round. Long enough that a
+ *  session-limit window is not hammered, short enough that a lane back at
+ *  half past recovers the run before anyone notices it paused. */
+const OUTAGE_BACKOFF_MS = 20 * 60_000;
+import { runGates } from './gates.mts';
+import { takeCommand } from './control.mts';
+import { humanDuration } from './reporter.mts';
+import { assertCognitive } from './roles.mts';
+import { validateStages, formatProblems } from './spec.mts';
+import type { SpecProblem } from './spec.mts';
+import { makeExecAdapter, render } from './adapters/exec.mts';
+
+const sleep = (ms: number, signal?: AbortSignal) => new Promise<void>((resolve) => {
+  const t = setTimeout(resolve, ms);
+  signal?.addEventListener('abort', () => { clearTimeout(t); resolve(); }, { once: true });
+});
+
+/** Resolve a stage's result matcher for this run. Migration compatibility is
+ * run-specific: a legacy result may cover an introduced stage only when the
+ * run's hash-bound cutover receipt validates. */
+const stagePattern = (stage: Stage, ctx: Ctx): RegExp => {
+  const pattern = typeof stage.pattern === 'function' ? stage.pattern(ctx) : stage.pattern;
+  if (!(pattern instanceof RegExp)) throw new TypeError(`${stage.id}: pattern(ctx) did not return a RegExp`);
+  return pattern;
+};
+
+/** A durable gate pass licenses exactly the ordered prefix that produced it.
+ * Future stages may be edited freely, but changing that prefix would make the
+ * engine skip newly inserted work. Such a change needs an explicit migration. */
+export function completedPrefixProblem(
+  oldStages: Array<Pick<Stage, 'id'>>,
+  newStages: Array<Pick<Stage, 'id'>>,
+  stageState: Record<string, { gatesPassedAt?: string; doneAt?: string; routedTo?: string }> = {},
+): string | null {
+  const oldIds = oldStages.map((stage) => stage.id);
+  const newIds = newStages.map((stage) => stage.id);
+  for (const completedId of oldIds.filter((id) => stageState[id]?.gatesPassedAt || stageState[id]?.doneAt)) {
+    const oldIndex = oldIds.indexOf(completedId);
+    const newIndex = newIds.indexOf(completedId);
+    const oldPrefix = oldIds.slice(0, oldIndex + 1);
+    const newPrefix = newIndex < 0 ? [] : newIds.slice(0, newIndex + 1);
+    if (oldPrefix.length !== newPrefix.length || oldPrefix.some((id, index) => id !== newPrefix[index])) {
+      return completedId;
+    }
+  }
+  return null;
+}
+
+export class Executor {
+  config: Config;
+  stages: Stage[];
+  adapter: Adapter;
+  state: any;
+  reporter: any;
+  clock: { now(): number };
+  signal?: AbortSignal;
+  inflight: Map<string, { promise: Promise<unknown>; meta: any; startedAt: number }>;
+  stopped: boolean;
+  blockedTicks?: number;
+  specProblems: SpecProblem[];
+  stateVersion: number;
+  lastBattery: Map<string, { version: number; ok: boolean; dirFp: string }>;
+  stagesPath: string | null;
+  stagesWatch: string[];
+  stagesFingerprint: string;
+  _adoptStage?: string;
+  _announcedAdoption?: Set<string>;
+  _barrierFor?: string;
+  /** While a repair hook is constructing its response, start() collects every
+   * requested lane here. The complete set is preflighted before any member is
+   * launched, so a late bad sibling cannot race an early valid one. */
+  _repairStarts?: Array<{ stage: Stage; plan: Plan }>;
+  /** Serializes spawn decisions, without waiting for dispatched work to finish. */
+  spawnQueue: Promise<void>;
+  lastSpawnAt: number;
+
+  constructor({ config, stages, adapter, state, reporter, clock = Date, signal }:
+    { config: Config; stages: Stage[]; adapter: Adapter; state: any; reporter: any; clock?: { now(): number }; signal?: AbortSignal }) {
+    this.config = config;
+    this.stages = stages;
+    this.adapter = adapter;
+    this.state = state;
+    this.reporter = reporter;
+    this.clock = clock;
+    this.signal = signal;
+    /** dispatchKey -> { promise, meta, startedAt } */
+    this.inflight = new Map();
+    this.stopped = false;
+    // No dispatch has spawned yet, so the first one owes no wait.
+    this.spawnQueue = Promise.resolve();
+    this.lastSpawnAt = -Infinity;
+    // EVENT-DRIVEN RE-VERIFICATION. A blocked stage's battery used to re-run
+    // every tick against unchanged inputs: frontier-15 ran the 6-judge battery
+    // 29 times during one account outage, re-probing archive.org each pass.
+    // `stateVersion` counts state-changing events (a dispatch ends, a repair
+    // round runs, a control command lands, adoption reconciles); a battery
+    // that failed re-runs only when the version moves, the dispatch dir
+    // changes, or a backoff clock expires. A hand edit is made explicit with
+    // `autopilot retry`, which re-arms the battery; a wall-clock retry over
+    // byte-identical inputs only repeats deterministic work.
+    this.stateVersion = 0;
+    this.lastBattery = new Map();
+    // Hot-reload bookkeeping: the stage table and every declared module it
+    // composes. Watching only the root file leaves an edited imported stage
+    // module cached in the live process even if some unrelated root edit
+    // happens to trigger a reload.
+    this.stagesPath = (config as any).stagesPath ?? null;
+    this.stagesWatch = (config.stagesWatch?.length
+      ? config.stagesWatch
+      : (this.stagesPath ? [this.stagesPath] : [])).map(String);
+    this.stagesFingerprint = this.stageSourcesFingerprint();
+    // Validate the spec here rather than throwing: a bad stage table found by a
+    // running engine should be a visible blocker, not a crash the watchdog
+    // restarts into a loop at sixty-second intervals. `bin/autopilot` checks the
+    // same thing before starting, so this is the belt to that braces.
+    this.specProblems = validateStages(this.stages, this.ctx());
+  }
+
+  /** Something that can change a gate's verdict happened. */
+  bumpState(): void { this.stateVersion += 1; }
+
+  /** Cheap fingerprint of the dispatch dir, so a result file written by an
+   *  ADOPTED external process (which ends no engine child and bumps nothing)
+   *  still dirties the battery skip. Count plus newest mtime; any error is a
+   *  changing fingerprint, which fails safe into re-running the battery. */
+  dispatchDirFingerprint(): string {
+    try {
+      const dir = this.config.dispatchDir;
+      const files = readdirSync(dir).filter((f: string) => f.endsWith('.result.json'));
+      let newest = 0;
+      for (const f of files) { const m = statSync(join(dir, f)).mtimeMs; if (m > newest) newest = m; }
+      return `${files.length}:${newest}`;
+    } catch { return `err:${Date.now()}`; }
+  }
+
+  /** Stamp `endedAt` on dispatch records whose work finished OUTSIDE this
+   *  process — adopted after a restart, or recorded by a prior engine that
+   *  died mid-flight. Their result files are on disk; the record staying open
+   *  forever made every in-flight count a lie until someone checked disk by
+   *  hand (frontier-15 carried three such records all night). */
+  reconcileAdopted(): void {
+    const dispatches = this.state.data.dispatches ?? {};
+    let stamped = 0;
+    for (const [key, rec] of Object.entries(dispatches) as Array<[string, any]>) {
+      if (rec.endedAt || this.inflight.has(key)) continue;
+      const file = join(this.config.dispatchDir, `${rec.role}-${rec.label}.result.json`);
+      if (!existsSync(file)) continue;
+      try {
+        const result = JSON.parse(readFileSync(file, 'utf8'));
+        rec.endedAt = typeof result.ended_at === 'string' ? result.ended_at : new Date(statSync(file).mtimeMs).toISOString();
+        rec.lastExitOk = result.ok === true || result.exit_code === 0;
+        stamped += 1;
+      } catch { /* an unreadable result file is not this record's to guess at */ }
+    }
+    if (stamped) {
+      this.state.save();
+      this.bumpState();
+      this.reporter.notify('adopted-reconciled', `${stamped} dispatch record(s) stamped from result files on disk`);
+    }
+  }
+
+  /** Fingerprint every module that composes the stage table. Size is included
+   * because coarse-mtime filesystems can preserve an mtime across a quick edit. */
+  stageSourcesFingerprint(): string {
+    return this.stagesWatch.map((path) => {
+      try {
+        const stat = statSync(path);
+        return `${path}:${stat.mtimeMs}:${stat.size}`;
+      } catch { return `${path}:missing`; }
+    }).join('|');
+  }
+
+  /** Swap in an edited stage table at a tick boundary. A table that cannot
+   *  fail validation is never loaded — the running table stays, the refusal is
+   *  notified, and the edit can be fixed and saved again. Tools under
+   *  `tools/*.mjs` always loaded fresh per invocation; the stage table was the
+   *  one hot file that demanded a restart. */
+  async maybeReloadStages(): Promise<void> {
+    if (!this.stagesPath) return;
+    const fingerprint = this.stageSourcesFingerprint();
+    if (fingerprint === this.stagesFingerprint) return;
+    this.stagesFingerprint = fingerprint;
+    try {
+      const mod = await import(`${pathToFileURL(this.stagesPath).href}?v=${encodeURIComponent(fingerprint)}`);
+      const problems = validateStages(mod.stages, this.ctx());
+      if (problems.length) {
+        this.reporter.notify('stages-reload-refused',
+          `edited stage table failed validation and was NOT loaded:\n${formatProblems(problems)}`);
+        return;
+      }
+      // A durable gate pass is evidence about the stage order that produced it.
+      // Hot reload may edit future work, but it may not insert, remove or move a
+      // stage before anything already gate-complete: currentStage() would skip
+      // the completed successor without rerunning the new predecessor. Compare
+      // every completed prefix to the table currently driving this process.
+      const changedPrefix = completedPrefixProblem(this.stages, mod.stages, this.state.data.stages);
+      if (changedPrefix) {
+        this.reporter.notify('stages-reload-refused',
+          `edited stage table changes the immutable completed prefix ending at ${changedPrefix}; `
+          + 'record an explicit migration instead of making durable gate evidence skip new work');
+        return;
+      }
+      this.stages = mod.stages;
+      this.specProblems = [];
+      this.bumpState();
+      this.reporter.notify('stages-reloaded', `stage table reloaded from ${this.stagesPath}`);
+    } catch (err: any) {
+      this.reporter.notify('stages-reload-refused', `edited stage table failed to import and was NOT loaded — ${err?.message ?? err}`);
+    }
+  }
+
+  ctx(): Ctx {
+    return {
+      run: this.config.run,
+      repo: this.config.repo,
+      dispatchDir: this.config.dispatchDir,
+      coversMap: this.config.coversMap ?? {},
+      config: this.config,
+      stageRounds: { ...(this.state.data.stageRounds ?? {}) },
+      stageFailures: structuredClone(this.state.data.stageFailures ?? {}),
+    };
+  }
+
+  /** The first stage whose completion predicate is false. Everything before it
+   *  is done; everything after has not started. Recomputed from disk on every
+   *  tick, so an artifact appearing out of band (a hand-run dispatch, a manual
+   *  repair) is picked up without restarting the engine. */
+  currentStage(): { stage: Stage | null; status: StageStatus | null } {
+    const ctx = this.ctx();
+    for (const s of this.stages) {
+      const st = this.stageStatus(s, ctx);
+      if (!st.done) return { stage: s, status: st };
+    }
+    return { stage: null, status: null };
+  }
+
+  /**
+   * A stage is finished when its units are covered AND its gates have passed.
+   *
+   * Both halves are load-bearing and the second was missing. With completion
+   * defined as coverage alone, the moment the last unit landed the stage fell
+   * out of `currentStage()` and the engine advanced — so the gate block, which
+   * only runs for the CURRENT stage, was unreachable. Every gate in the
+   * pipeline silently never ran, and the run looked perfect.
+   *
+   * Recording `gatesPassedAt` in state rather than re-running gates each tick
+   * also makes the pass durable across a restart: gates are expensive, and
+   * re-running a repo-wide sweep on every poll would dominate the run.
+   */
+  stageStatus(stage: Stage, ctx: Ctx = this.ctx()): StageStatus {
+    if (this.state.data.stages[stage.id]?.skipped) {
+      return { done: true, unitsDone: true, gatesPassed: true, why: 'skipped by owner', missing: [], mode: 'skip' };
+    }
+    // A STAMPED STAGE IS NOT RE-DERIVED. `doneAt` is the durable record that
+    // this stage's coverage, artifacts and gates were checked and passed;
+    // re-deriving it re-walks every artifact predicate the stage paid for once,
+    // and `currentStage()` walks every finished stage before the live one on
+    // each tick. On a 27-pair run that re-ran Step 1's per-item readiness
+    // hashing — minutes of CPU per tick — to learn what the stamp already says.
+    if (this.state.data.stages[stage.id]?.doneAt) {
+      const stamped = this.state.data.stages[stage.id];
+      if (stamped.routedTo) return { done: true, unitsDone: true,
+        gatesPassed: Boolean(stamped.gatesPassedAt), why: `routed to ${stamped.routedTo}`,
+        missing: [], mode: 'coverage' };
+      return { done: true, unitsDone: true, gatesPassed: true, why: 'stamped complete', missing: [], mode: 'coverage' };
+    }
+    const owed = (stage.units ? stage.units(ctx) : []).map(String);
+    const units = stageComplete(ctx.dispatchDir, stagePattern(stage, ctx), owed, {
+      coversMap: ctx.coversMap,
+      fallbackCount: stage.fallbackCount ?? owed.length,
+    });
+
+    // A RESULT IS NOT AN ARTIFACT. `ok:true` says the process exited zero; it
+    // says nothing about whether the work landed where it was supposed to.
+    //
+    // frontier-14: reader-7 audited its batch correctly, exited zero, and wrote
+    // its report over reader-1's — because a copied task file carried the wrong
+    // output path. Coverage saw seven successful results and cleared the stage,
+    // with one report destroyed and another missing. The same shape as an
+    // earlier run's seven refuters that produced prompt files and no results.
+    //
+    // A stage may name the file each unit owes. If it does, the file must exist.
+    if (stage.artifacts) {
+      const absent = owed.filter((u: any) => {
+        const paths = [stage.artifacts(ctx, u)].flat().filter(Boolean);
+        return !paths.every((f: any) => existsSync(join(ctx.repo, f)));
+      });
+      if (absent.length) {
+        return {
+          ...units,
+          unitsDone: false,
+          gatesPassed: false,
+          done: false,
+          missing: absent,
+          why: `${units.why}; artifact missing for ${absent.join(', ')}`,
+        };
+      }
+    }
+    // A STAGE WITH NO GATE CANNOT FAIL.
+    //
+    // This line used to read `Boolean(stage.gates) && stage.gates(ctx).length > 0`,
+    // so a stage whose gate list came back empty — declared `() => []`, or built
+    // from a batch list that happened to be empty — was recorded as "gates
+    // passed". `9-report` declared exactly that, which is why frontier-14
+    // finished with its receipt gate red, two unrepaired fatal defects and
+    // sixteen unread rejections: the terminal stage had no way to say no.
+    //
+    // Now only an explicit `gatesWaived` reason exempts a stage. An empty list
+    // from a stage that declares gates is a vacuous gate, and is treated as NOT
+    // passed — the gate block below turns it into a blocker naming the stage.
+    const hasGates = Boolean(stage.gates) && !stage.gatesWaived;
+    const gatesPassed = !hasGates || Boolean(this.state.data.stages[stage.id]?.gatesPassedAt);
+    return {
+      ...units,
+      unitsDone: units.done,
+      gatesPassed,
+      done: units.done && gatesPassed,
+      why: units.done && !gatesPassed ? `${units.why}; gates not yet run` : units.why,
+    };
+  }
+
+  /**
+   * The overlap group `stage` belongs to: the maximal run of CONSECUTIVE stages
+   * carrying the same `pipeline` name, or `[stage]` for a stage with none.
+   *
+   * Maximal-and-consecutive is the whole definition, and it is why a pipeline
+   * name reused non-contiguously silently means two groups rather than one —
+   * `validateStages` refuses that outright rather than letting a table say
+   * something it does not mean.
+   */
+  pipelineGroup(stage: Stage): Stage[] {
+    if (!stage.pipeline) return [stage];
+    const i = this.stages.indexOf(stage);
+    if (i < 0) return [stage];
+    let a = i; let b = i;
+    while (a > 0 && this.stages[a - 1].pipeline === stage.pipeline) a -= 1;
+    while (b < this.stages.length - 1 && this.stages[b + 1].pipeline === stage.pipeline) b += 1;
+    return this.stages.slice(a, b + 1);
+  }
+
+  /**
+   * The units of `stage` that are FINISHED — covered by a successful dispatch
+   * and, where the stage names one, with their artifact on disk.
+   *
+   * This is `stageStatus` asked one unit at a time, and it carries the same
+   * "a result is not an artifact" rule: reader-7 exited zero having written its
+   * report over reader-1's, so coverage alone would let the next stage start on
+   * a deliverable that does not exist.
+   */
+  unitsComplete(stage: Stage, ctx: Ctx = this.ctx()): Set<Unit> {
+    const owed = (stage.units ? stage.units(ctx) : []).map(String);
+    if (this.state.data.stages[stage.id]?.skipped) return new Set(owed);
+    // Same durable answer `stageStatus` takes: a stamped stage's units were
+    // complete when it was stamped, and re-walking them re-pays their readiness
+    // hashing for a result already recorded.
+    if (this.state.data.stages[stage.id]?.doneAt) return new Set(owed);
+    const cov = covered(ctx.dispatchDir, stagePattern(stage, ctx), ctx.coversMap);
+    // A stage running in the legacy COUNT mode declares no coverage at all, so
+    // there is no per-unit answer to give. Fall back to the only thing that mode
+    // supports — the stage as a whole — rather than inventing a per-unit one.
+    if (!cov.size) {
+      const st = this.stageStatus(stage, ctx);
+      if (st.mode === 'count') return new Set(st.unitsDone ? owed : []);
+    }
+    const out = new Set<Unit>();
+    for (const u of owed) {
+      if (!cov.has(u)) continue;
+      if (stage.artifacts) {
+        const paths = [stage.artifacts(ctx, u)].flat().filter(Boolean);
+        if (!paths.every((f: any) => existsSync(join(ctx.repo, f)))) continue;
+      }
+      out.add(u);
+    }
+    return out;
+  }
+
+  /** Which of `candidates` may be dispatched at `stage`, given its predecessor
+   *  inside the same overlap group. A unit whose stage has no predecessor in the
+   *  group is ready by definition; the group's first stage is never held back.
+   *
+   *  `cohort` is what keeps a group Alpha honest: its one dispatch declares
+   *  coverage of three batches, so all three must be finished at the previous
+   *  stage or the coverage record would be a claim about work nobody did. */
+  readyUnits(stage: Stage, prev: Stage | null, ctx: Ctx, candidates: Unit[]): Unit[] {
+    if (!prev) return candidates;
+    const done = this.unitsComplete(prev, ctx);
+    // A successful earlier receipt must not release a batch still being
+    // repaired by a live writer (including a writer adopted after restart).
+    for (const dispatch of this.inflight.values()) {
+      if (dispatch.meta.stage === prev.id) {
+        for (const unit of dispatch.meta.covers) done.delete(String(unit));
+      }
+    }
+    for (const unit of this.adoptedUnits(prev)) done.delete(String(unit));
+    const owedPrev = new Set((prev.units ? prev.units(ctx) : []).map(String));
+    return candidates.filter((u: Unit) => {
+      const cohort = (stage.cohort ? stage.cohort(ctx, u) : [u]).map(String);
+      // A unit the predecessor does not owe cannot be waited for; only the ones
+      // it owes are evidence either way.
+      return cohort.every((c: string) => !owedPrev.has(c) || done.has(c));
+    });
+  }
+
+  /** Apply a stage's own dependency DAG to candidate units.
+   *
+   * Every transitive supplier must have successful coverage, all declared
+   * artifacts, and no live (or about-to-start) writer. The last condition also
+   * includes an exclusive cohort because a sibling writing a shared manifest
+   * makes the supplier bytes unstable. Building and validating the whole graph
+   * here prevents a cycle from degrading into a silent no-work tick. */
+  unitReadiness(stage: Stage, ctx: Ctx, candidates: Unit[], active = new Set<Unit>(),
+    writes = new Set<Unit>(), cohortWrites = writes): {
+      ready: Unit[]; problem: string | null; deferred?: boolean;
+    } {
+    if (!stage.unitPrerequisites) return { ready: candidates, problem: null };
+    try {
+      const owed = (stage.units ? stage.units(ctx) : []).map(String);
+      const owedSet = new Set(owed);
+      const dependencies = new Map<string, string[]>();
+      for (const unit of owed) {
+        const direct = [...new Set((stage.unitPrerequisites(ctx, unit) ?? []).map(String))].sort();
+        const unknown = direct.filter(dep => !owedSet.has(dep));
+        if (unknown.length) {
+          return { ready: [], problem: `${unit} names prerequisite(s) not owed by this stage: ${unknown.join(', ')}` };
+        }
+        dependencies.set(unit, direct);
+      }
+
+      const visiting = new Set<string>(), visited = new Set<string>(), trail: string[] = [];
+      const transitive = new Map<string, Set<string>>();
+      const visit = (unit: string): string | null => {
+        if (visited.has(unit)) return null;
+        if (visiting.has(unit)) {
+          const start = trail.indexOf(unit);
+          return `unit prerequisite cycle: ${[...trail.slice(Math.max(0, start)), unit].join(' -> ')}`;
+        }
+        visiting.add(unit); trail.push(unit);
+        const closure = new Set<string>();
+        for (const dependency of dependencies.get(unit) ?? []) {
+          const problem = visit(dependency);
+          if (problem) return problem;
+          closure.add(dependency);
+          for (const ancestor of transitive.get(dependency) ?? []) closure.add(ancestor);
+        }
+        trail.pop(); visiting.delete(unit); visited.add(unit); transitive.set(unit, closure);
+        return null;
+      };
+      for (const unit of owed) {
+        const problem = visit(unit);
+        if (problem) return { ready: [], problem };
+      }
+
+      const done = this.unitsComplete(stage, ctx);
+      const activeUnits = new Set([...active].map(String));
+      const writeUnits = new Set([...writes].map(String));
+      const cohortWriteUnits = new Set([...cohortWrites].map(String));
+      const stable = (unit: string, candidate: string): boolean => done.has(unit)
+        && !activeUnits.has(unit)
+        && !writeUnits.has(unit)
+        // A supplier and its consumer may intentionally share one batch file.
+        // Ignore the candidate's own write while rejecting every other writer
+        // in that supplier's exclusive cohort.
+        && !(stage.exclusiveCohort?.(ctx, unit) ?? []).some(other => {
+          const id = String(other);
+          return id !== candidate && (activeUnits.has(id) || cohortWriteUnits.has(id));
+        });
+      return {
+        ready: candidates.filter(unit => {
+          const candidate = String(unit);
+          if (activeUnits.has(candidate)) return false;
+          if ((stage.exclusiveCohort?.(ctx, candidate) ?? [])
+            .some(other => {
+              const id = String(other);
+              return id !== candidate && (activeUnits.has(id) || cohortWriteUnits.has(id));
+            })) return false;
+          return [...(transitive.get(candidate) ?? [])].every(dep => stable(dep, candidate));
+        }),
+        problem: null,
+      };
+    } catch (error: any) {
+      // Stage-owned manifests are currently written by agent processes, which
+      // means a reader can sample an empty or partial JSON file between the
+      // truncate and close.  If this stage has a live writer, defer the whole
+      // readiness decision for one tick and evaluate the finished bytes later.
+      // With no live writer the same exception is persistent input damage and
+      // must remain an owner-visible blocker.
+      if (active.size && error instanceof SyntaxError) return { ready: [], problem: null, deferred: true };
+      return { ready: [], problem: `unit prerequisite evaluation threw: ${error?.message ?? error}` };
+    }
+  }
+
+  snapshot(): Snapshot {
+    const ctx = this.ctx();
+    const { stage } = this.currentStage();
+    // Every unfinished member of the active overlap group is "current": with
+    // per-unit progression three of them can genuinely be running at once, and
+    // a status page naming only the first is the same lie as reporting nothing
+    // in flight. For a stage with no `pipeline` the group is itself, so this is
+    // the previous behaviour exactly.
+    const activeIds = new Set(stage ? this.pipelineGroup(stage).map((s: any) => s.id) : []);
+    const activeEnd = stage
+      ? Math.max(...this.stages.flatMap((s: any, index: number) => activeIds.has(s.id) ? [index] : []))
+      : this.stages.length - 1;
+    const stages = this.stages.map((s: any, index: number) => {
+      // A future stage cannot advance before the active group closes. Its
+      // artifact predicate can walk every item in the run, so evaluating all
+      // future stages for each status report starves queued dispatch launches
+      // on a large frontier. The owning stage is checked when it is reached.
+      if (stage && index > activeEnd && !this.state.data.stages[s.id]?.doneAt) {
+        return { id: s.id, label: s.label, done: false,
+          why: 'waiting for earlier stage', current: false };
+      }
+      try {
+        const st = this.stageStatus(s, ctx);
+        return { id: s.id, label: s.label, done: st.done, why: st.why, current: activeIds.has(s.id) && !st.done };
+      } catch (error: any) {
+        // Future-stage units can read artifacts that an active earlier-stage
+        // worker is replacing. A direct JSON write has a brief empty/partial
+        // window; reporting must not terminate the controller merely because
+        // it sampled that window. The owning stage's gates still reject a
+        // malformed final artifact before transition.
+        return {
+          id: s.id,
+          label: s.label,
+          done: false,
+          why: `status temporarily unavailable while inputs are changing: ${error?.message ?? error}`,
+          current: activeIds.has(s.id),
+        };
+      }
+    });
+    const running: RunningEntry[] = [...this.inflight.values()].map((d: any) => ({
+      label: d.meta.label,
+      covers: d.meta.covers,
+      attempt: d.meta.attempt,
+      elapsed: humanDuration(this.clock.now() - d.startedAt),
+    }));
+    // A `status` invocation is a DIFFERENT PROCESS from the engine and has an
+    // empty inflight map, so it reported "nothing running" while three agents
+    // were working. Reading that at 3am, the honest conclusion is that the run
+    // is stuck. Ask the operating system instead: live dispatches for this run
+    // are visible whether or not this process started them.
+    if (!running.length) {
+      const live = this.liveDispatchLabels();
+      for (const l of live) running.push({ label: l.label, covers: l.covers, attempt: 1, elapsed: '', external: true });
+    }
+    return {
+      run: this.config.run,
+      done: !stage,
+      paused: this.state.paused,
+      stage,
+      stages,
+      running,
+      blockers: this.state.data.blockers,
+      startedAt: this.state.data.startedAt,
+      elapsed: this.state.data.startedAt ? humanDuration(this.clock.now() - Date.parse(this.state.data.startedAt)) : '',
+      controlPath: `${this.config.stateDir}/control.json`,
+    };
+  }
+
+  /** First existing candidate path, or the last candidate when none exists —
+   *  so the caller's missing-file check names one concrete file. A stage may
+   *  offer several candidates for a brief or task (specific first, generic
+   *  fallback last); resolution lives HERE, on the one path every dispatch
+   *  crosses, because it used to live only in the plan-dispatch loop and the
+   *  repair hooks call start() directly: 3-recheck's scaffold-fix lanes
+   *  reached dispatch.mjs with a comma-joined candidate ARRAY as --task and
+   *  died on its usage check — twelve dispatches across three repair rounds,
+   *  then repair-exhausted, on frontier-15's first live repair firing. */
+  resolveInput(v: string | string[] | undefined, ctx: Ctx = this.ctx()): string | undefined {
+    if (!v) return v as undefined;
+    const cands = Array.isArray(v) ? v : [v];
+    return cands.find((c: any) => existsSync(join(ctx.repo, c))) ?? cands[cands.length - 1];
+  }
+
+  /** Render the one variable set shared by launch preflight and the real
+   * dispatch. Keeping this in one function prevents the dry run from testing a
+   * command different from the one that is subsequently spawned. */
+  planVars(stage: Stage, plan: Plan, attempt: number): Record<string, unknown> {
+    const unit = (plan.covers ?? []).length === 1 ? String(plan.covers![0]) : '';
+    const artifactPaths = stage.artifacts && unit
+      ? [stage.artifacts(this.ctx(), unit)].flat().filter(Boolean)
+      : [];
+    return {
+      role: plan.role, label: plan.label, run: this.config.run,
+      profile: plan.profile ?? (typeof stage.modelProfile === 'function'
+        ? stage.modelProfile(plan)
+        : stage.modelProfile) ?? '',
+      brief: plan.brief, task: plan.task,
+      covers: (plan.covers ?? []).join(','),
+      timeout: plan.timeout ?? this.config.defaultTimeoutSec ?? 14400,
+      unit,
+      artifact: artifactPaths[0] ?? '',
+      images: (plan.images ?? []).join(','),
+      outputSchema: plan.outputSchema ?? '',
+      resultArtifact: plan.resultArtifact ?? '',
+      sessionHome: plan.sessionHome ?? '',
+      resumeSession: plan.resumeSession ?? '',
+      attempt,
+    };
+  }
+
+  /** Validate the exact plan that is about to launch, without spending a model
+   * call or a retry attempt. Static doctor checks cannot render plans whose
+   * task files and group assignments are created by earlier stages; this is the
+   * boundary where every primary and repair-hook plan finally exists in full.
+   *
+   * For the repository dispatcher, `--dry-run` exercises its real role table,
+   * prompt assembly, task requirement, schema validation and output-path rules.
+   * Tool lanes receive the equivalent local checks and may not reintroduce a
+   * shell command bundle. Custom test/platform adapters remain supported: if
+   * config.argv does not name dispatch.mjs, only the platform-independent
+   * checks run. */
+  preflightPlan(stage: Stage, plan: Plan): string | null {
+    try {
+      plan.brief = this.resolveInput(plan.brief);
+      plan.task = this.resolveInput(plan.task);
+      const supplemental = [...(plan.images ?? []), plan.outputSchema].filter(Boolean) as string[];
+      const absent = [plan.brief, plan.task, ...supplemental]
+        .filter((f: any) => f && !existsSync(join(this.config.repo, f)));
+      if (absent.length) return `missing input file(s): ${absent.join(', ')}`;
+
+      for (const f of [plan.brief, plan.task]) {
+        if (!f) continue;
+        const bad = identityPlaceholders(readFileSync(join(this.config.repo, f), 'utf8'));
+        if (bad.length) return `${f} contains ${bad.join(', ')} — the engine never supplies n/k`;
+      }
+      assertCognitive(plan.job, { stage: stage.id, label: plan.label });
+
+      if (plan.argv !== undefined) {
+        if (!Array.isArray(plan.argv) || !plan.argv.length) return 'tool argv must be a nonempty array';
+        const executable = String(plan.argv[0]).replaceAll('\\', '/').split('/').at(-1)
+          ?.replace(/\.exe$/i, '');
+        const envTarget = executable === 'env'
+          ? plan.argv.slice(1).map(String)
+            .find((part) => !part.startsWith('-') && !/^[A-Za-z_][A-Za-z0-9_]*=/.test(part))
+          : null;
+        // `env -S 'bash -c ...'` carries the command and its arguments in one
+        // argv member. Inspect its first word as well as ordinary `env bash`
+        // and strip Windows' executable suffix so the ban is portable.
+        const envExecutable = envTarget?.trim().split(/\s+/)[0]
+          ?.replaceAll('\\', '/').split('/').at(-1)?.replace(/\.exe$/i, '');
+        if (['sh', 'bash'].includes(executable ?? '') || ['sh', 'bash'].includes(envExecutable ?? '')) {
+          return 'tool argv invokes a shell; use a typed argv tool or composite command';
+        }
+        if (plan.argv[0] === 'node' && String(plan.argv[1] ?? '').startsWith('tools/')
+          && !existsSync(join(this.config.repo, String(plan.argv[1])))) {
+          return `tool does not exist: ${plan.argv[1]}`;
+        }
+        return null;
+      }
+
+      const dispatcher = (this.config.argv ?? []).some((part: string) =>
+        String(part).replaceAll('\\', '/').endsWith('tools/physics-support/dispatch.mjs'));
+      if (!dispatcher) return null;
+      const key = `${stage.id}:${plan.label}`;
+      const nextAttempt = (this.state.dispatch(key)?.attempts ?? 0) + 1;
+      const parts = render([...this.config.argv, '--dry-run'], this.planVars(stage, plan, nextAttempt));
+      const attemptPositions = parts.flatMap((part, index) => part === '--attempt' ? [index] : []);
+      if (attemptPositions.length !== 1 || parts[attemptPositions[0] + 1] !== String(nextAttempt)) {
+        return `repository dispatcher must receive exact --attempt ${nextAttempt}; `
+          + 'keep "--attempt", "{attempt}" in config.argv so retries cannot overwrite evidence';
+      }
+      const [command, ...args] = parts;
+      const result = spawnSync(command, args, {
+        cwd: this.config.repo,
+        encoding: 'utf8',
+        timeout: 30_000,
+        maxBuffer: 4 * 1024 * 1024,
+      });
+      if (result.error) return `dispatcher dry-run could not launch: ${result.error.message}`;
+      if (result.status !== 0) {
+        const detail = String(result.stderr || result.stdout || `exit ${result.status}`)
+          .trim().replace(/\s+/g, ' ').slice(-1200);
+        return `dispatcher dry-run failed (exit ${result.status}): ${detail}`;
+      }
+      return null;
+    } catch (error: any) {
+      return `preflight threw: ${error?.message ?? error}`;
+    }
+  }
+
+  recordPlanPreflightBlocker(stage: Stage, plan: Plan, reason: string): void {
+    const message = `stage ${stage.id}: dispatch preflight failed for ${plan.role}/${plan.label} — ${reason}`;
+    const key = `dispatch-preflight:${plan.label}`;
+    const existing = this.state.data.blockers.find((blocker: any) =>
+      blocker.stage === stage.id && (blocker.key ?? blocker.message) === key);
+    if (existing) {
+      // The same lane can expose a different deterministic defect after the
+      // first is repaired. Keep one keyed blocker, but keep its diagnosis
+      // current rather than continuing to direct the operator at a fixed file.
+      if (existing.message !== message) {
+        existing.message = message;
+        existing.at = new Date().toISOString();
+        this.state.save();
+        this.reporter.notify('blocked', message, { stage: stage.id, label: plan.label, updated: true });
+      }
+    } else if (this.state.addBlocker(stage.id, message, key)) {
+      this.reporter.notify('blocked', message, { stage: stage.id, label: plan.label });
+    }
+  }
+
+  retirePlanPreflightBlockers(stage: Stage, plans: Plan[], { legacy = true } = {}): void {
+    const keys = new Set(plans.map((plan) => `dispatch-preflight:${plan.label}`));
+    const before = this.state.data.blockers.length;
+    this.state.data.blockers = this.state.data.blockers.filter((blocker: any) =>
+      blocker.stage !== stage.id
+      || (!keys.has(blocker.key)
+        && !(legacy && !String(blocker.key ?? '').startsWith('dispatch-preflight:')
+          && String(blocker.message).startsWith(`stage ${stage.id}: missing input file(s) —`))));
+    if (this.state.data.blockers.length !== before) {
+      this.state.save();
+      this.reporter.notify('unblocked', `${stage.id}: dispatch preflight blocker(s) cleared after a clean validation`);
+    }
+  }
+
+  recordUnitPrerequisiteBlocker(stage: Stage, problem: string): void {
+    const message = `stage ${stage.id}: invalid unit prerequisites — ${problem}`;
+    const key = `unit-prerequisites:${stage.id}`;
+    const existing = this.state.data.blockers.find((blocker: any) =>
+      blocker.stage === stage.id && (blocker.key ?? blocker.message) === key);
+    if (existing) {
+      if (existing.message !== message) {
+        existing.message = message;
+        existing.at = new Date().toISOString();
+        this.state.save();
+        this.reporter.notify('blocked', message, { stage: stage.id, updated: true });
+      }
+    } else if (this.state.addBlocker(stage.id, message, key)) {
+      this.reporter.notify('blocked', message, { stage: stage.id });
+    }
+  }
+
+  retireUnitPrerequisiteBlocker(stage: Stage): void {
+    const key = `unit-prerequisites:${stage.id}`;
+    const before = this.state.data.blockers.length;
+    this.state.data.blockers = this.state.data.blockers.filter((blocker: any) =>
+      blocker.stage !== stage.id || (blocker.key ?? blocker.message) !== key);
+    if (this.state.data.blockers.length !== before) {
+      this.state.save();
+      this.reporter.notify('unblocked', `${stage.id}: unit prerequisite graph is valid`);
+    }
+  }
+
+  /** Start one dispatch. Never awaited inline — the engine keeps ticking while
+   *  agents run, which is what allows a slow lane and a fast lane to overlap. */
+  start(stage: Stage, plan: Plan, { preflighted = false } = {}): boolean {
+    if (this._repairStarts) {
+      this._repairStarts.push({ stage, plan });
+      return true;
+    }
+    const key = `${stage.id}:${plan.label}`;
+    if (this.inflight.has(key)) return false;
+    // This remains on the direct start() path because repair hooks bypass the
+    // ordinary plan fan-out. Invalid plans block before recordDispatchStart, so
+    // configuration defects consume zero retry attempts.
+    if (!preflighted) {
+      const problem = this.preflightPlan(stage, plan);
+      if (problem) {
+        this.recordPlanPreflightBlocker(stage, plan, problem);
+        return false;
+      }
+      this.retirePlanPreflightBlockers(stage, [plan]);
+    }
+    // The attempt number is computed in ONE place, by recordDispatchStart, and
+    // read back from the record it wrote. Computing it here as well produced a
+    // second copy of the same quantity that the owner's `retry` command could
+    // desynchronise (`attempt: 2, attempts: 0`).
+    const meta: any = { stage: stage.id, role: plan.role, label: plan.label, covers: plan.covers ?? [] };
+    // Read the number back out of the record and carry it on `meta`, which is
+    // what the in-flight status line renders. One computation, three readers.
+    const attempt = this.state.recordDispatchStart(key, meta).attempt;
+    meta.attempt = attempt;
+    this.reporter.notify('dispatch', `${plan.role}/${plan.label}${plan.covers?.length ? ` covers ${plan.covers.join(',')}` : ''}${attempt > 1 ? ` (attempt ${attempt})` : ''}`, meta);
+
+    // The engine DERIVES the unit and the output path and injects them; the
+    // task file never transcribes either.
+    //
+    // dispatch.mjs has always substituted `--var k=v` into briefs and tasks
+    // (`prompt.replaceAll('<k>', v)`). Not using it is why a task file copied
+    // from batch 1 kept batch 1's OUTPUT PATH — reader-7 audited batch 7
+    // correctly and wrote its report over reader-1's, destroying eleven fatal
+    // findings. A path a template carries is a path that can be stale; a path
+    // the engine computes cannot be.
+    const vars = this.planVars(stage, plan, attempt);
+    // A stage may override the command entirely. Not every unit of work is an
+    // agent: the judge sweep is a tool run, and forcing it through the agent
+    // dispatcher would have produced a dispatch for a role that does not exist.
+    // The override goes through the same adapter WITH a logger, so the rendered
+    // command line lands in events.jsonl — a tool lane that failed used to
+    // leave no diagnostic artifact of any kind.
+    const adapter = plan.argv
+      ? makeExecAdapter({ argv: plan.argv, cwd: this.config.repo,
+        logger: (m: string) => this.reporter.event('exec', { label: plan.label, m }) })
+      : this.adapter;
+    // Count queued work as in flight immediately, then serialize actual process
+    // launches across stages. Reservation-time timers can all expire during a
+    // long synchronous manifest scan and wake in the same event-loop turn;
+    // measuring from the previous ACTUAL launch avoids that stampede. DeepSeek
+    // dispatches use the owner's one-second interval; other lanes retain three
+    // seconds. Test harnesses may disable pacing with dispatchStaggerMs: 0.
+    const staggerMs = String(vars.profile).startsWith('deepseek-')
+      ? (this.config.deepseekDispatchStaggerMs ?? (this.config.dispatchStaggerMs === 0 ? 0 : 1000))
+      : (this.config.dispatchStaggerMs ?? 3000);
+    const precedingSpawn = this.spawnQueue;
+    let releaseSpawn!: () => void;
+    this.spawnQueue = new Promise<void>((resolve) => { releaseSpawn = resolve; });
+
+    // The adapter enforces the timeout; `plan.timeout` used to be only a
+    // template variable, silently inert for every tool lane. The margin lets a
+    // dispatcher that enforces the same budget on its agent finish its own
+    // cleanup before the engine kills the group. The timeout clock starts when
+    // the process does, after the stagger — an agent must not be charged for
+    // time it spent queued.
+    const promise = precedingSpawn.then(async () => {
+      const waitMs = Math.max(0, this.lastSpawnAt + staggerMs - this.clock.now());
+      if (waitMs > 0) this.reporter.event('spawn-stagger', { label: plan.label, waitMs });
+      await sleep(waitMs, this.signal);
+      if (this.signal?.aborted) throw new Error('dispatch aborted before spawn');
+      this.lastSpawnAt = this.clock.now();
+      try {
+        return adapter.invoke(vars, { signal: this.signal, timeoutMs: (Number(vars.timeout) + 120) * 1000 });
+      } finally {
+        // Release the next launch now, not when this dispatch completes.
+        releaseSpawn();
+      }
+    }).catch((error) => {
+      releaseSpawn();
+      throw error;
+    })
+      .then((r) => {
+        // THE ENGINE WRITES THE RECEIPT, not the command.
+        //
+        // A stage whose work is a tool rather than an agent has no dispatcher to
+        // write a result record, so the command used to append one with a shell
+        // redirect. Two attempts at that failed: `echo` with embedded
+        // JSON.stringify lost its double quotes, and `node -e` inside `sh -c`
+        // broke on the tokenizer's lack of backslash-escape handling. Both
+        // produced an unparseable file, so coverage never counted the stage and
+        // the engine re-dispatched the sweep 33 times.
+        //
+        // Quoting JSON through a shell is a trap with no upside. The engine
+        // already knows the label, the covered units and the exit status; it can
+        // write the record itself, and it cannot get the quoting wrong.
+        if (r.ok && plan.writeReceipt !== false) {
+          const path = join(this.config.dispatchDir, `${plan.role}-${plan.label}.result.json`);
+          if (!existsSync(path)) {
+            try {
+              writeFileSync(path, JSON.stringify({
+                role: plan.role, label: plan.label, run: this.config.run,
+                covers: plan.covers ?? [], ok: true, written_by: 'autopilot',
+                ended_at: new Date().toISOString(),
+              }, null, 2) + '\n');
+              this.reporter.event('receipt', { label: plan.label, path });
+            } catch (err: any) {
+              this.reporter.notify('receipt-failed', `${plan.label}: could not write a result record — ${err?.message ?? err}`);
+            }
+          }
+        }
+        this.state.recordDispatchEnd(key, r.ok);
+        this.bumpState();
+        // A failed tool lane's stderr was read into memory and discarded; the
+        // tail rides the event so nine hours of judge sweep leave more than
+        // `exit=1` behind.
+        const tail = !r.ok && r.stderr ? ` :: ${String(r.stderr).slice(-400).replace(/\s+/g, ' ').trim()}` : '';
+        this.reporter.notify(r.ok ? 'dispatch-ok' : 'dispatch-failed',
+          `${plan.role}/${plan.label} exit=${r.code}${r.error ? ` (${r.error})` : ''}${tail}`, { key, ok: r.ok });
+        return r;
+      })
+      .catch((err: any) => {
+        this.state.recordDispatchEnd(key, false);
+        this.bumpState();
+        this.reporter.notify('dispatch-failed', `${plan.role}/${plan.label} threw: ${err?.message ?? err}`, { key });
+        return { ok: false, code: null, error: String(err?.message ?? err) };
+      })
+      .finally(() => { this.inflight.delete(key); });
+
+    this.inflight.set(key, { promise, meta, startedAt: this.clock.now() });
+    return true;
+  }
+
+  /** Validate a complete primary or repair fan-out before launching its first
+   * member. Duplicate labels are duplicate dispatch identities: allowing both
+   * would make the second silently lose the start() race and share evidence
+   * paths with the first. */
+  startMany(stage: Stage, plans: Plan[]): boolean {
+    if (!plans.length) return true;
+    const labelCounts = new Map<string, number>();
+    for (const plan of plans) labelCounts.set(plan.label, (labelCounts.get(plan.label) ?? 0) + 1);
+    const checked = plans.map((plan) => ({
+      plan,
+      reason: (labelCounts.get(plan.label) ?? 0) > 1
+        ? `duplicate label ${plan.label} appears ${labelCounts.get(plan.label)} times in one fan-out`
+        : this.preflightPlan(stage, plan),
+    }));
+    const valid = checked.filter((entry) => !entry.reason).map((entry) => entry.plan);
+    // A repaired sibling's stale keyed blocker is no longer true even when a
+    // different sibling remains invalid. Legacy all-fanout missing-file rows
+    // can only be retired safely once the complete set is clean.
+    this.retirePlanPreflightBlockers(stage, valid, { legacy: false });
+    const invalid = checked.filter((entry) => entry.reason);
+    if (invalid.length) {
+      for (const { plan, reason } of invalid) this.recordPlanPreflightBlocker(stage, plan, reason!);
+      return false;
+    }
+    this.retirePlanPreflightBlockers(stage, plans);
+
+    // Repair hooks arrive here after their direct `start` calls have been
+    // collected. Regard the whole proposed fan-out as imminent writes and
+    // defer any consumer whose transitive suppliers are not stable. This also
+    // prevents a supplier repair and its consumer repair from launching in the
+    // same wave even if an old success receipt still exists for the supplier.
+    let readyPlans = plans;
+    if (stage.unitPrerequisites) {
+      const active = new Set<Unit>([...this.inflight.values()]
+        .filter((row: any) => row.meta.stage === stage.id)
+        .flatMap((row: any) => row.meta.covers.map(String)));
+      for (const unit of this.adoptedUnits(stage)) active.add(String(unit));
+      const writes = new Set<Unit>(plans.flatMap(plan => (plan.covers ?? []).map(String)));
+      const graph = this.unitReadiness(stage, this.ctx(), [], active, writes, new Set());
+      if (graph.problem) {
+        this.recordUnitPrerequisiteBlocker(stage, graph.problem);
+        return false;
+      }
+      if (graph.deferred) return true;
+      const acceptedWrites = new Set<Unit>();
+      readyPlans = [];
+      for (const plan of plans) {
+        const covered = (plan.covers ?? []).map(String);
+        const readiness = this.unitReadiness(stage, this.ctx(), covered, active, writes, acceptedWrites);
+        if (readiness.problem) {
+          this.recordUnitPrerequisiteBlocker(stage, readiness.problem);
+          return false;
+        }
+        if (readiness.deferred) return true;
+        if (covered.length && !covered.every(unit => readiness.ready.map(String).includes(unit))) continue;
+        readyPlans.push(plan);
+        for (const unit of covered) acceptedWrites.add(unit);
+      }
+      this.retireUnitPrerequisiteBlocker(stage);
+    }
+    for (const plan of readyPlans) this.start(stage, plan, { preflighted: true });
+    return true;
+  }
+
+  /** Every live dispatch for this run, with its label and covered units. */
+  liveDispatchLabels(): Array<{ label: string; covers: Unit[] }> {
+    const cmd = this.config.adoptCommand;
+    if (cmd === false) return [];
+    const out: any[] = [];
+    try {
+      const r = spawnSync('sh', ['-c', cmd ?? "ps -eo pid,comm,args | awk '$2==\"node\" && /dispatch/'"], { encoding: 'utf8' });
+      for (const line of (r.stdout ?? '').split('\n')) {
+        if (!line.includes(`--run ${this.config.run}`)) continue;
+        const lm = /--label\s+([^\s]+)/.exec(line);
+        const cm = /--covers\s+([^\s]+)/.exec(line);
+        if (lm) out.push({ label: lm[1], covers: cm ? cm[1].split(',').filter(Boolean) : [] });
+      }
+    } catch { /* best effort */ }
+    return out;
+  }
+
+  /** Recovery dispatches may cover no primary units but still own live writes. */
+  hasAdoptedWork(stage: Stage): boolean {
+    if (this.adoptedUnits(stage).size) return true;
+    const mine = new Set([...this.inflight.values()].map((d: any) => d.meta.label));
+    return this.liveDispatchLabels().some(({ label }) =>
+      !mine.has(label) && Boolean(this.state.dispatch(`${stage.id}:${label}`)));
+  }
+
+  /** Units claimed by live dispatch processes this engine did not start.
+   *
+   *  Reads `--covers` off the command line of any running dispatch for this
+   *  run. The scan command is configurable because `ps` output is not portable;
+   *  a platform without it simply adopts nothing, which degrades to the old
+   *  duplicate-risk behaviour rather than to a crash. */
+  adoptedUnits(stage: Stage | null = null): Set<Unit> {
+    const cmd = this.config.adoptCommand;
+    if (cmd === false) return new Set();
+    const out = new Set<string>();
+    try {
+      const r = spawnSync('sh', ['-c', cmd ?? "ps -eo pid,comm,args | awk '$2==\"node\" && /dispatch/'"], { encoding: 'utf8' });
+      // Exclude our own children: they are already in `inflight`, and counting
+      // them as external makes the adoption notice fire on every tick for work
+      // this engine started.
+      const mine = new Set([...this.inflight.values()].map((d: any) => d.meta.label));
+      for (const line of (r.stdout ?? '').split('\n')) {
+        if (!line.includes(`--run ${this.config.run}`)) continue;
+        const lm = /--label\s+([^\s]+)/.exec(line);
+        if (lm && mine.has(lm[1])) continue;
+        // Belongs to this stage? The result file a dispatch will write is
+        // `<role>-<label>.result.json`, which is what the stage pattern matches.
+        if (stage?.pattern && lm) {
+          const rm = /--role\s+([^\s]+)/.exec(line);
+          const resultName = `${rm ? rm[1] : ''}-${lm[1]}.result.json`;
+          // Repair-hook labels need not match the primary result pattern.
+          // Their persisted dispatch key still identifies the owning stage.
+          if (!stagePattern(stage, this.ctx()).test(resultName)
+            && !this.state.dispatch(`${stage.id}:${lm[1]}`)) continue;
+        }
+        const m = /--covers\s+([^\s]+)/.exec(line);
+        if (!m) continue;
+        for (const u of m[1].split(',')) if (u.trim()) out.add(u.trim());
+      }
+    } catch { /* adoption is best-effort; never fatal */ }
+    return out;
+  }
+
+  /** Owner commands. Read, acted on, never awaited. */
+  handleControl(): void {
+    const cmd = takeCommand(this.config.stateDir);
+    if (!cmd) return;
+    if (cmd.error) { this.reporter.notify('control-error', cmd.error); return; }
+    // Any control command is a state-changing event: `retry` after a hand-edit
+    // is the documented way to re-arm a battery the event-driven skip would
+    // otherwise hold (UNATTENDED §signals).
+    this.bumpState();
+    switch (cmd.command) {
+      case 'pause':
+        this.state.paused = true;
+        this.reporter.notify('paused', 'owner paused the run; in-flight dispatches continue, nothing new starts');
+        break;
+      case 'resume':
+        this.state.paused = false;
+        this.reporter.notify('resumed', 'owner resumed the run');
+        break;
+      case 'stop':
+        this.stopped = true;
+        this.reporter.notify('stopping', 'owner stopped the run; in-flight dispatches are left to finish');
+        break;
+      case 'report':
+        this.reporter.report(this.snapshot(), { force: true });
+        break;
+      case 'pause-at': {
+        const id = cmd.stage;
+        if (!id || !this.stages.some((s: any) => s.id === id)) {
+          this.reporter.notify('control-error', `pause-at: unknown stage ${JSON.stringify(id)}`);
+          break;
+        }
+        this.state.data.pauseAfter = id;
+        this.state.save();
+        this.reporter.notify('pause-armed', `owner armed a pause for the end of ${id}`);
+        break;
+      }
+      case 'skip': {
+        const id = cmd.stage;
+        if (!id || !this.stages.some((s: any) => s.id === id)) {
+          this.reporter.notify('control-error', `skip: unknown stage ${JSON.stringify(id)}`);
+          break;
+        }
+        this.state.stage(id).skipped = true;
+        this.state.save();
+        this.reporter.notify('skipped', `owner skipped stage ${id}`);
+        break;
+      }
+      case 'retry': {
+        const unit = cmd.unit ? String(cmd.unit) : null;
+        let armed = 0;
+        let unfinished = 0;
+        for (const d of Object.values<any>(this.state.data.dispatches)) {
+          if (unit && !d.covers?.map(String).includes(unit)) continue;
+          // Only lanes that did NOT succeed: the notice always said "failed
+          // lanes" while the loop reset every lane's attempt history, so later
+          // status output misreported attempt counts on lanes that had
+          // succeeded.
+          //
+          // `lastExitOk === null` is UNKNOWN, not failed — the engine died
+          // while that dispatch was in flight, so nothing wrote its ending. It
+          // is re-armed, because "we do not know it succeeded" is the right
+          // reason to allow another try, but it is counted separately: calling
+          // an unfinished lane a failed one is the same misreport in a new
+          // place. Re-arming a lane whose work is in fact done is harmless —
+          // coverage is recomputed from the repo's artifacts, so its unit is
+          // already covered and nothing re-dispatches.
+          if (d.lastExitOk === true) continue;
+          if (d.lastExitOk === null) unfinished += 1;
+          d.attempts = 0;                       // let the retry policy fire again
+          d.attempt = 0;                        // and the status line agrees
+          armed += 1;
+        }
+        // `retry` also re-arms the REPAIR LOOP of every unfinished stage. The
+        // blocked-holding message has always pointed operators here ("autopilot
+        // retry to re-arm"), but until frontier-15's closure drive it reset
+        // only lane attempts — a stage whose rounds were burned by a since-
+        // fixed hook defect still needed a stop, hand surgery on state.json
+        // and a restart. Round budgets bound divergence; an operator's
+        // explicit retry after a fix is the opposite of divergence.
+        let repairArmed = 0;
+        for (const [stageId, st] of Object.entries<any>(this.state.data.stages)) {
+          if (st.doneAt) continue;
+          const stage = this.stages.find((candidate: Stage) => candidate.id === stageId);
+          // Step 7's one paid judge recheck is a lifetime ceiling. `retry` is
+          // still useful after the owner/session resolves the terminal blocker:
+          // it invalidates the battery cache and re-runs the gates, but it may
+          // not quietly buy another paid context.
+          if (stage?.terminalFixBudget) {
+            if (st.backoffUntil) {
+              delete st.backoffUntil;
+              repairArmed += 1;
+            }
+            continue;
+          }
+          if (st.fixRounds || st.repairExhaustedAt || st.backoffUntil) {
+            st.fixRounds = 0;
+            delete st.repairExhaustedAt;
+            delete st.backoffUntil;
+            repairArmed += 1;
+          }
+        }
+        // ...and the PER-(GATE, ITEM) counters, for the same reason. Without
+        // this an item that burned its three tries stays blocked by name
+        // forever, and `retry` — the documented way to re-arm a battery after
+        // a fix — would silently do nothing for the one budget that is
+        // per-item. Scoped to unfinished stages so a closed stage's history is
+        // left intact as evidence.
+        let itemsArmed = 0;
+        const doneStages = new Set(Object.entries(this.state.data.stages)
+          .filter(([, st]: any) => st.doneAt).map(([id]) => id));
+        for (const [k, rec] of Object.entries(this.state.data.gateAttempts ?? {})) {
+          if (doneStages.has((rec as any).stage)) continue;
+          delete this.state.data.gateAttempts![k];
+          itemsArmed += 1;
+        }
+        if (itemsArmed) {
+          this.state.data.blockers = this.state.data.blockers.filter((b: any) => !/^item:/.test(b.key ?? ''));
+        }
+        this.state.save();
+        const how = unfinished ? ` (${armed - unfinished} failed, ${unfinished} unfinished)` : '';
+        this.reporter.notify('retry-armed', unit
+          ? `owner armed a retry for unit ${unit} (${armed} lane(s))${how}`
+          : `owner armed a retry for ${armed} lane(s)${how}`
+            + `${repairArmed ? `; repair rounds re-armed on ${repairArmed} stage(s)` : ''}`
+            + `${itemsArmed ? `; ${itemsArmed} (gate, item) attempt counter(s) cleared` : ''}`);
+        break;
+      }
+      default: break;
+    }
+  }
+
+  /** One pass. Returns 'done' | 'working' | 'blocked' | 'stopped'. */
+  async tick(): Promise<'done' | 'working' | 'blocked' | 'stopped'> {
+    this.handleControl();
+    if (this.stopped) return 'stopped';
+    await this.maybeReloadStages();
+    this.reconcileAdopted();
+
+    // A spec that cannot be trusted must not drive a run. Reported every tick so
+    // it cannot be missed, and nothing is dispatched until it is fixed.
+    if (this.specProblems.length) {
+      const msg = `stage spec is invalid:\n${formatProblems(this.specProblems)}`;
+      if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
+        this.state.addBlocker('(spec)', msg);
+        this.reporter.notify('blocked', msg, { stage: '(spec)' });
+      }
+      this.reporter.report(this.snapshot(), { force: true });
+      return 'blocked';
+    }
+
+    const ctx = this.ctx();
+    const { stage } = this.currentStage();
+
+    // OWNER-ARMED PAUSE (owner, 2026-09-17). Fires before anything is
+    // dispatched for the stage that follows the armed one, so "pause after
+    // Step 3" cannot race the next fan-out. The marker clears itself; a later
+    // `resume` continues past the boundary.
+    const pauseAfter = this.state.data.pauseAfter;
+    if (pauseAfter) {
+      const armed = this.stages.find((s: any) => s.id === pauseAfter);
+      // A GATES-WAIVED STAGE NEVER CARRIES A `doneAt` STAMP. `runGroupGates`
+      // reaches its stamp loop only when the group has a non-empty gate list,
+      // so keying the pause on the stamp alone made `pause-at` silently never
+      // fire for stages like `5b-close`, and phase-2-remaining-27 slid straight
+      // from the end of Step 5 into the Step-6 judge fan-out. `stageStatus` is
+      // the engine's own definition of finished — units covered, artifacts on
+      // disk, gates passed — and answers the same question for both kinds of
+      // stage.
+      const complete = Boolean(armed) && this.stageStatus(armed, ctx).done;
+      if (complete) {
+        this.state.data.pauseAfter = null;
+        this.state.paused = true;
+        this.state.save();
+        this.reporter.notify('paused', `armed pause fired — ${pauseAfter} is complete; resume to continue`);
+      }
+    }
+
+    // A COMPLETED STAGE CANNOT HAVE A LIVE BLOCKER. Neither can a recovered
+    // dispatch unit: in an overlap group batch 3 can be repaired while batch 6
+    // is still reading, so waiting for the whole stage to finish leaves a false
+    // red blocker beside work that already has its replacement receipt.
+    // Anyone reading that row cannot distinguish it from a live problem.
+    if (this.state.data.blockers.length) {
+      const blockedStageIds = new Set(this.state.data.blockers.map((b: any) => b.stage));
+      const blockedStages = this.stages.filter((s: any) => blockedStageIds.has(s.id));
+      const doneIds = new Set(blockedStages.filter((s: any) => this.stageStatus(s, ctx).done).map((s: any) => s.id));
+      const completeByStage = new Map(blockedStages.map((s: any) => [s.id, this.unitsComplete(s, ctx)]));
+      const recoveredDispatch = (blocker: any) => {
+        const message = String(blocker.message ?? '');
+        const match = /\(covers ([^)]+)\)$/.exec(message)
+          ?? /stage-stalemate: unit\(s\) (.+?) covered but artifact-incomplete/.exec(message);
+        if (!match || match[1] === 'n/a') return false;
+        const done = completeByStage.get(blocker.stage);
+        const units = match[1].split(',').map((unit: string) => unit.trim()).filter(Boolean);
+        return Boolean(done && units.length && units.every((unit: string) => done.has(unit)));
+      };
+      const kept = this.state.data.blockers.filter((b: any) => !doneIds.has(b.stage) && !recoveredDispatch(b));
+      if (kept.length !== this.state.data.blockers.length) {
+        const n = this.state.data.blockers.length - kept.length;
+        this.state.data.blockers = kept;
+        this.state.save();
+        this.reporter.notify('unblocked', `retired ${n} blocker(s) whose stage or covered unit has since completed`);
+      }
+    }
+
+    if (!stage) {
+      this.reporter.report(this.snapshot(), { force: true });
+      return 'done';
+    }
+
+    this.state.stage(stage.id);
+    if (this.state.data.stage !== stage.id) {
+      this.state.data.stage = stage.id;
+      this.state.save();
+      this.reporter.notify('stage', `entering ${stage.id} — ${stage.label}`);
+    }
+
+    if (this.state.paused) {
+      this.reporter.report(this.snapshot());
+      return 'working';
+    }
+
+    // THE OVERLAP GROUP this stage belongs to. `[stage]` unless the table says
+    // otherwise, in which case everything below reads exactly as it did before.
+    const group = this.pipelineGroup(stage);
+    const groupIds = new Set(group.map((s: any) => s.id));
+    const groupKey = stage.pipeline ?? stage.id;
+
+    // THE STAGE BARRIER. Nothing starts while an earlier stage is still working.
+    //
+    // A stage cleared its coverage the moment its last result file appeared —
+    // but the process that wrote it could still be running, and often was. The
+    // gate block below already waits for `inflight` to drain; DISPATCH did not,
+    // so the engine would enter the next stage and start agents on top of live
+    // work from the previous one.
+    //
+    // On frontier-14 that was not theoretical. `6-judge`'s sweep was still
+    // running when `7-adjudicate` dispatched its Alpha. Every step-7 repair moved
+    // a pair's context hash, which re-armed the sweep on the item's untouched
+    // page-mates; the ledger grew from 676 rows to 773 DURING adjudication, 26 of
+    // 29 fresh rejections were on items step 7 never touched, and 8 items flipped
+    // pass to reject on byte-identical text from the same lane that had just
+    // passed them. The engine manufactured the noise it then had to adjudicate.
+    //
+    // Draining is cheap here — stages are hours long and the barrier costs
+    // seconds — and the alternative is two stages writing the same ledger.
+    //
+    // THE BARRIER IS NOW BETWEEN GROUPS, not between stages. Inside one group
+    // the overlap is the point, and the ledger race above cannot arise there:
+    // the stages that write a shared ledger — the judge sweep, the adjudicators,
+    // the cross-level audit, both snapshots — carry no `pipeline` and so are each
+    // their own group. Which stages may overlap is a claim the stage table makes
+    // and the engine obeys; the engine does not infer it.
+    const earlier = [...this.inflight.values()].filter((d: any) => !groupIds.has(d.meta.stage));
+    if (earlier.length) {
+      const labels = earlier.map((d: any) => `${d.meta.stage}/${d.meta.label}`);
+      if (this._barrierFor !== groupKey) {
+        this._barrierFor = groupKey;
+        this.reporter.notify('barrier',
+          `${stage.id} is ready but ${labels.length} dispatch(es) from an earlier stage are still running (${labels.join(', ')}); holding`);
+      }
+      this.reporter.report(this.snapshot());
+      return 'working';
+    }
+    this._barrierFor = undefined;
+
+    for (const member of group) {
+      if (this.state.data.stages[member.id]?.skipped) continue;
+      try { await member.onProgress?.({ ctx, executor: this, stage: member }); }
+      catch (error: any) {
+        const message = `${member.id}: item handoff failed: ${error.message}`;
+        if (this.state.addBlocker(member.id, message, 'item-handoff'))
+          this.reporter.notify('blocked', message, { stage: member.id });
+        return 'blocked';
+      }
+    }
+
+    // ONE LANE CAP FOR THE WHOLE GROUP.
+    //
+    // `concurrency` mirrors the dispatcher's per-role lane cap. Serially that is
+    // enough, because only one stage is ever live. In a group two stages using
+    // the SAME role can be live together — `1-scaffold` and `3-fix` are both
+    // Betas, `3-review` and `3-recheck` are both Alphas — and two stages at the
+    // role's cap is twice the role's cap. The dispatcher's own slot pool would
+    // absorb the excess by making the extra processes wait, so this is not a
+    // correctness fix; it stops the engine from parking idle node processes on a
+    // lane that cannot run them.
+    const roleBudget = (role: string): number => {
+      const caps = group.filter((s: any) => s.role === role)
+        .map((s: any) => s.concurrency ?? this.config.concurrency ?? 5);
+      return caps.length ? Math.max(...caps) : Infinity;
+    };
+
+    // PER-UNIT PROGRESSION. Each member of the group is offered the units whose
+    // own work is finished at the member before it; a member with nothing ready
+    // simply starts nothing this tick. Stage order, so the earliest work keeps
+    // flowing rather than starving behind a later stage.
+    for (const [i, member] of group.entries()) {
+      if (this.state.data.stages[member.id]?.skipped) continue;
+      if (this.stageStatus(member, ctx).unitsDone) continue;
+      const firstEntry = !this.state.data.stages[member.id];
+      this.state.stage(member.id);
+      if (firstEntry && member.id !== stage.id) {
+        this.reporter.notify('stage', `entering ${member.id} — ${member.label} (overlapping ${stage.id})`);
+      }
+      const outcome = await this.dispatchStage(member, ctx, {
+        prev: i > 0 ? group[i - 1] : null, groupKey, roleBudget,
+      });
+      if (outcome === 'blocked') return 'blocked';
+    }
+
+    // Give queued process launches a turn before synchronous join checks.
+    if (this.inflight.size) await sleep(0, this.signal);
+
+    // THE GROUP EXIT — the level join.
+    //
+    // Every member's units are covered, every dispatch has drained, and only now
+    // does any gate run: each member's own list, in stage order, once. A gate
+    // that a member declared over the whole level therefore still sees the whole
+    // level, which is the property per-unit progression is not allowed to cost.
+    const active = group.filter((s: any) => !this.state.data.stages[s.id]?.skipped);
+    const statuses = active.map((s: any) => ({ s, st: this.stageStatus(s, ctx) }));
+    const unitsAllDone = statuses.every(({ st }: any) => st.unitsDone);
+    const gatesPending = statuses.some(({ st }: any) => !st.gatesPassed);
+    const externalWork = !this.inflight.size
+      && active.some((s: Stage) => this.hasAdoptedWork(s));
+    if (unitsAllDone && gatesPending && !this.inflight.size && !externalWork) {
+      const outcome = await this.runGroupGates(statuses, ctx, group);
+      if (outcome !== 'ok') return outcome;
+    }
+
+    // NO SILENT STALEMATES.
+    //
+    // frontier-15's splice lane succeeded declaring covers 1-7 while
+    // withholding two batches' receipt artifacts: dispatch saw full coverage
+    // (nothing to start), the join saw missing artifacts (gates may not run),
+    // nothing was in flight — and the engine sat between the two predicates
+    // in silence, ticking and emitting nothing, for as long as nobody looked.
+    // A covered unit that is no longer running but is still artifact-incomplete
+    // can make no progress on its own. Detect that PER UNIT, even while a
+    // sibling is still working. Waiting for the whole overlap group to drain
+    // serialized every missing-contract recovery behind its slowest author.
+    // Active units are excluded so a receipt that lands just before process
+    // teardown is never mistaken for abandoned work.
+    //
+    // This routes through the same bounded repair loop as a gate failure
+    // (synthetic id `stage-stalemate`), and a stage with no handler for it gets
+    // a VISIBLE blocker.
+    if (!unitsAllDone) {
+      for (const { s, st } of statuses) {
+        if (st.unitsDone) continue;
+        const owed = (s.units ? s.units(ctx) : []).map(String);
+        const cov = covered(ctx.dispatchDir, stagePattern(s, ctx), ctx.coversMap);
+        const complete = this.unitsComplete(s, ctx);
+        const active = new Set([...this.inflight.values()]
+          .filter((d: any) => d.meta.stage === s.id)
+          .flatMap((d: any) => (d.meta.covers ?? []).map(String)));
+        for (const unit of this.adoptedUnits(s)) active.add(String(unit));
+        let missing = owed.filter((u: string) => cov.has(u) && !complete.has(u) && !active.has(u)
+          && !(s.exclusiveCohort?.(ctx, u) ?? []).some((other) => active.has(String(other))));
+        const readiness = this.unitReadiness(s, ctx, missing, active);
+        if (readiness.problem) {
+          this.recordUnitPrerequisiteBlocker(s, readiness.problem);
+          this.reporter.report(this.snapshot(), { force: true });
+          return 'blocked';
+        }
+        if (readiness.deferred) continue;
+        missing = readiness.ready;
+        if (!missing.length) continue;
+        const failure = { id: 'stage-stalemate', ok: false, units: missing,
+          why: `unit(s) ${missing.join(', ')} covered but artifact-incomplete and no longer running` };
+        const spent = await this.spendRepairRound(s, failure as any, ctx, `stalemate — ${failure.why}`);
+        if (spent === 'spent') return 'working';
+        if (spent === 'waiting') {
+          this.reporter.report(this.snapshot(), { force: true });
+          return 'blocked';
+        }
+        const msg = `stage ${s.id}: stalemate — ${failure.why}`;
+        if (this.state.addBlocker(s.id, msg, 'stalemate')) {
+          this.reporter.notify('blocked', msg, { stage: s.id });
+        }
+        this.reporter.report(this.snapshot(), { force: true });
+        return 'blocked';
+      }
+    }
+
+    this.reporter.report(this.snapshot(), { force: false });
+    return 'working';
+  }
+
+  /**
+   * Plan and start one stage's missing work. Extracted from `tick` unchanged in
+   * behaviour; `prev` and `roleBudget` are the only additions, and both are
+   * no-ops for a stage that is its own group.
+   */
+  async dispatchStage(stage: Stage, ctx: Ctx, { prev = null, groupKey = stage.id, roleBudget = () => Infinity }:
+    { prev?: Stage | null; groupKey?: string; roleBudget?: (role: string) => number } = {}): Promise<'ok' | 'blocked'> {
+    // Which units still need a successful dispatch.
+    const owed = (stage.units ? stage.units(ctx) : []).map(String);
+    const cov = covered(ctx.dispatchDir, stagePattern(stage, ctx), ctx.coversMap);
+    let need = pending(owed, cov);
+
+    // ...and, inside an overlap group, only those whose own work at the previous
+    // member is finished. `prev` is null for a stage that is its own group and
+    // for the first member of one, so this filter is the identity everywhere the
+    // table has not asked for overlap.
+    need = this.readyUnits(stage, prev, ctx, need);
+
+    // Do not re-dispatch a unit whose lane is already running — including one
+    // this engine did not start.
+    //
+    // ADOPTION. Taking over a run that is already in flight is the normal case,
+    // not an exotic one: a build started by hand, or by an earlier driver, has
+    // live agents at the moment of handover. Without this the engine sees an
+    // uncovered unit, cannot see the agent working on it, and dispatches a
+    // second one — two agents writing the same artifacts. The live process
+    // already declares `--covers`, so the information is there for the asking.
+    const runningUnits = new Set([...this.inflight.values()]
+      .filter((d: any) => d.meta.stage === stage.id)
+      .flatMap((d: any) => d.meta.covers.map(String)));
+    // Adoption must be scoped to THIS stage. A live dispatch covering unit 7
+    // for stage 5a says nothing about whether unit 7 is covered for stage preliminary —
+    // and treating it as coverage blocked a reader re-run behind an adjudicator
+    // that was already working on the same batch. Match the live label against
+    // the stage's own result pattern.
+    const adopted = new Set([...this.adoptedUnits(stage)]);
+    for (const u of adopted) runningUnits.add(u);
+    if (adopted.size) {
+      const news = [...adopted].filter((u: any) => need.includes(u));
+      // Reset per GROUP, and key the message by stage: the set exists only to
+      // avoid repeating one message, and keying it across the whole run made it
+      // grow without bound on a long build. Resetting it per stage instead would
+      // now clear it several times a tick, and the message would repeat forever.
+      if (this._adoptStage !== groupKey) { this._adoptStage = groupKey; this._announcedAdoption = new Set(); }
+      if (news.length && !this._announcedAdoption.has(`${stage.id}:${news.join(',')}`)) {
+        this._announcedAdoption.add(`${stage.id}:${news.join(',')}`);
+        this.reporter.notify('adopted', `unit(s) ${news.join(', ')} are already covered by a live external dispatch; not starting a second`);
+      }
+    }
+    // `exclusiveCohort` is stage-table code reading the run's manifests. A
+    // defect it exposes there — two batches minting one item id, a manifest
+    // half-written by a live author — must surface as an owner blocker, not as
+    // an unhandled throw that ends the engine in the middle of an authoring
+    // wave. On 2026-09-16 exactly that killed the controller mid-Step-3b.
+    try {
+      need = need.filter((u: any) => !runningUnits.has(u)
+        && !(stage.exclusiveCohort?.(ctx, u) ?? []).some((other) => runningUnits.has(String(other))));
+    } catch (error: any) {
+      const msg = `stage ${stage.id}: reading the exclusive cohort failed — ${error?.message ?? error}`;
+      if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
+        this.state.addBlocker(stage.id, msg);
+        this.reporter.notify('blocked', msg, { stage: stage.id });
+      }
+      this.reporter.report(this.snapshot(), { force: true });
+      return 'blocked';
+    }
+
+    // Apply same-stage dependency readiness to the full pending list before
+    // slot slicing. Otherwise blocked units at the head can starve a ready
+    // supplier or an independent branch later in the list.
+    const prerequisiteReadiness = this.unitReadiness(stage, ctx, need, runningUnits);
+    if (prerequisiteReadiness.problem) {
+      this.recordUnitPrerequisiteBlocker(stage, prerequisiteReadiness.problem);
+      this.reporter.report(this.snapshot(), { force: true });
+      return 'blocked';
+    }
+    if (prerequisiteReadiness.deferred) return 'ok';
+    need = prerequisiteReadiness.ready;
+    this.retireUnitPrerequisiteBlocker(stage);
+
+    // Retry policy: a unit whose lane failed gets `maxAttempts` tries, then
+    // becomes a blocker. Unbounded retry of a deterministically failing lane
+    // burns a budget silently; one retry catches the genuine transients.
+    const maxAttempts = stage.maxAttempts ?? this.config.maxAttempts ?? 2;
+
+    // Retry accounting is applied to PLANS, not to units, because the dispatch
+    // key is `${stage.id}:${plan.label}` and only the plan knows the label.
+    //
+    // It used to derive the key from `stage.labelFor(unit)`, which NINE of
+    // thirteen stages do not define — so `keyForUnit` returned null, `prior` was
+    // null, and the cap could not engage for any of them. That is the real
+    // reason frontier-14's judge sweep was re-dispatched 33 times: not the exit
+    // code, which is what I first "fixed", but that its stage had no `labelFor`
+    // and so had no retry accounting at all.
+    //
+    // Deriving the key from the plan removes the second source of truth.
+    // Fan out, respecting the cap.
+    // ONE CAP, and it is the real one.
+    //
+    // `stage.concurrency` mirrors the dispatcher's own lane cap for that role —
+    // batch lanes 30 and group lanes 10, verified against tools/physics-support/dispatch.mjs.
+    // Those are genuine constraints and the engine should
+    // respect them. HOW MANY may run is this arithmetic; HOW FAST they may boot
+    // is the per-spawn stagger in `start`, and the two are independent: raising
+    // a cap without spacing the spawns is what turns width into a stampede.
+    //
+    // A second, GLOBAL cap used to sit on top (stageCap * 2). That was my
+    // invention, not a constraint anything enforces, and it could only ever
+    // throttle work the dispatcher was willing to run. Removed: the engine
+    // should not impose a limit nobody asked for. Set `globalConcurrency` in
+    // config if a machine genuinely needs one.
+    //
+    // The group's ROLE budget sits alongside it, and only bites inside a
+    // pipeline: two stages of one group sharing a lane must not each fill it.
+    const stageCap = stage.concurrency ?? this.config.concurrency ?? 5;
+    const inStage = [...this.inflight.values()].filter((d: any) => d.meta.stage === stage.id).length;
+    const globalCap = this.config.globalConcurrency ?? Infinity;
+    const roleCap = stage.role ? roleBudget(stage.role) : Infinity;
+    const inRole = stage.role
+      ? [...this.inflight.values()].filter((d: any) => d.meta.role === stage.role).length
+      : 0;
+    const slots = Math.max(0, Math.min(stageCap - inStage, roleCap - inRole, globalCap - this.inflight.size));
+    if (need.length && slots > 0) {
+      let plans;
+      try {
+        plans = stage.plan(ctx, need.slice(0, slots));
+        // Drop any plan whose own dispatch key has exhausted its attempts.
+        const exhaustedPlans: any[] = [];
+        plans = plans.filter((p: any) => {
+          const prior = this.state.dispatch(`${stage.id}:${p.label}`);
+          if (prior && prior.attempts >= maxAttempts) { exhaustedPlans.push(p); return false; }
+          return true;
+        });
+        for (const p of exhaustedPlans) {
+          const msg = `stage ${stage.id}: ${p.label} failed ${maxAttempts}x (covers ${(p.covers ?? []).join(', ') || 'n/a'})`;
+          if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
+            this.state.addBlocker(stage.id, msg);
+            this.reporter.notify('blocked', msg, { stage: stage.id, label: p.label });
+            if (stage.escalate) await stage.escalate({ ctx, units: p.covers ?? [], executor: this });
+          }
+        }
+        if (!plans.length && exhaustedPlans.length && !this.inflight.size) {
+          this.reporter.report(this.snapshot(), { force: true });
+          return 'blocked';
+        }
+      } catch (err: any) {
+        // A stage spec that throws used to propagate out of tick(), out of
+        // run(), and exit the process — whereupon the watchdog restarted it and
+        // it threw again, forever, at sixty-second intervals. A bad spec is a
+        // blocker, not a crash loop.
+        const msg = `stage ${stage.id}: plan() threw — ${err?.message ?? err}`;
+        if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
+          this.state.addBlocker(stage.id, msg);
+          this.reporter.notify('blocked', msg, { stage: stage.id });
+        }
+        this.reporter.report(this.snapshot(), { force: true });
+        return 'blocked';
+      }
+
+      // Validate the WHOLE fan-out before starting its first member. A common
+      // role/schema/task defect must stop the fleet with zero model calls; if
+      // validation lived only inside start(), an earlier valid sibling could
+      // already be running when a later plan exposed the shared defect.
+      if (!this.startMany(stage, plans)) {
+        this.reporter.report(this.snapshot(), { force: true });
+        return 'blocked';
+      }
+    }
+    return 'ok';
+  }
+
+  /**
+   * THE LEVEL JOIN. Run every gate the group's members declare, in stage order,
+   * once, with nothing in flight — then stamp all of them.
+   *
+   * For a stage that is its own group this is the old per-stage gate block
+   * verbatim, including the vacuous-empty-list refusal, the repair loop and the
+   * blocker retirement. For a real group it is the property that makes per-unit
+   * progression safe: a repo-wide gate declared by ANY member still runs over
+   * the whole level, after all of it exists, before anything downstream starts.
+   *
+   * Exact duplicates are run once. `manifest-integrity` and `validate-plan` are
+   * declared by all four scaffold stages and `precheck` by two read stages; the
+   * same argv over the same disk in the same second cannot give two answers, and
+   * a member that declares a STRONGER variant (`risk-report --require-reviewed`)
+   * has a different argv and still runs on its own.
+   */
+  async runGroupGates(statuses: Array<{ s: Stage; st: StageStatus }>, ctx: Ctx, group: Stage[]): Promise<'ok' | 'working' | 'blocked'> {
+    if (this.inflight.size || this.liveDispatchLabels().length) return 'working';
+    const list: Gate[] = [];
+    const owners: Stage[] = [];
+    const seen = new Set<string>();
+    let n = 0;
+    for (const { s } of statuses) {
+      if (s.gatesWaived || !s.gates) continue;
+      if (this.state.data.stages[s.id]?.gatesPassedAt) continue;   // already stamped on an earlier pass
+      const gates = s.gates(ctx) ?? [];
+      // A STAGE THAT DECLARES GATES MUST HAVE GATES. An empty list here is a
+      // spec that says "check this" and supplies nothing to check with — the
+      // vacuous-gate shape. Blocking is the only honest response; passing it
+      // would be indistinguishable from having checked.
+      if (!gates.length) {
+        const msg = `stage ${s.id}: declares gates but produced an empty gate list — nothing was checked. `
+          + 'Either the gate builders returned nothing for this run, or the stage should declare `gatesWaived`.';
+        if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
+          this.state.addBlocker(s.id, msg);
+          this.reporter.notify('blocked', msg, { stage: s.id });
+        }
+        this.reporter.report(this.snapshot(), { force: true });
+        return 'blocked';
+      }
+      for (const g of gates) {
+        n += 1;
+        const key = Array.isArray(g.argv) ? `${g.id}\u0000${JSON.stringify(g.argv)}` : `${g.id}\u0000fn-${n}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        list.push(g);
+        owners.push(s);
+      }
+    }
+
+    if (list.length) {
+      const where = group.length > 1 ? `${group[0].id}..${group[group.length - 1].id}` : group[0].id;
+      // EVENT-DRIVEN RE-VERIFICATION. A battery that failed re-runs only when
+      // something that could change its verdict happened: a state event
+      // (dispatch end, repair round, control command, adoption), a new or
+      // changed result file from an EXTERNAL process, or an expired backoff
+      // clock. frontier-15 ran the 6-judge battery 29 times against unchanged
+      // inputs during one account outage, re-probing archive.org each pass.
+      // There is deliberately no clock-only backstop. Frontier-18 spent five
+      // hours re-running the same 22-gate Step-7 battery every 20 quiet ticks;
+      // deterministic tools over unchanged bytes cannot produce a new answer.
+      // A hand edit is re-armed by `autopilot retry`, and every engine-owned
+      // mutation below already bumps state or the dispatch-dir fingerprint.
+      const groupKey = statuses.map(({ s }: any) => s.id).join('+');
+      const last = this.lastBattery.get(groupKey);
+      const dirFp = this.dispatchDirFingerprint();
+      const backoffDue = statuses.some(({ s }: any) => {
+        const bu = this.state.data.stages[s.id]?.backoffUntil;
+        return bu && new Date(bu).getTime() <= Date.now();
+      });
+      if (last && !last.ok && last.version === this.stateVersion && last.dirFp === dirFp
+        && !backoffDue) return 'blocked';
+      const versionAtStart = this.stateVersion;
+      this.reporter.notify('gates', `${where}: running ${list.length} gate(s)`);
+      const { ok, results } = await runGates(list, { cwd: ctx.repo, signal: this.signal, logger: () => {} });
+      for (const r of results) this.reporter.event('gate', r);
+      this.lastBattery.set(groupKey, { version: versionAtStart, ok, dirFp });
+      if (!ok) {
+        // `runGates` appends one result per gate and stops at the first failure,
+        // so the failing gate is the last result and its owner is at the same
+        // index. Looking the owner up by gate id would pick the wrong stage the
+        // moment two members declare an id in common, which four of them do.
+        const bad = results[results.length - 1];
+        const stage = owners[results.length - 1] ?? group[0];
+        const msg = `stage ${stage.id}: gate ${bad.id} failed — ${bad.why}`;
+        // Dedupe by stage+gate, not by message: `bad.why` carries variable text
+        // (counts, ids, timeouts), and a gate failing the same way with a
+        // different number used to stack a fresh blocker each pass.
+        if (this.state.addBlocker(stage.id, msg, `gate:${bad.id}`)) {
+          this.reporter.notify('blocked', msg, { stage: stage.id, gate: bad.id });
+        }
+
+        // REPORT-ALL. The battery stops at the first failure and that failure
+        // alone keeps its authority — but the remaining gates now run in an
+        // ADVISORY pass so one battery names every failure it can reach. On
+        // frontier-15, defect-ledger and risk-report failed at the same
+        // 7-adjudicate join and were discovered SERIALLY: two repair
+        // round-trips and an engine restart where one battery could have named
+        // both. Advisory results feed the event log, a notify, and
+        // `failure.advisory` for hooks; they never pass a stage and never
+        // stamp anything.
+        const advisory: any[] = [];
+        {
+          let rest = list.slice(results.length);
+          let restOwners = owners.slice(results.length);
+          while (rest.length) {
+            const adv = await runGates(rest, { cwd: ctx.repo, signal: this.signal, logger: () => {} });
+            for (const r of adv.results) this.reporter.event('gate-advisory', r);
+            const failedAt = adv.results.findIndex((r: any) => !r.ok);
+            if (failedAt === -1) break;
+            const failure = adv.results[failedAt];
+            const owner = restOwners[failedAt] ?? stage;
+            advisory.push({ ...failure, stage: owner.id });
+            this.reporter.notify('gate-advisory',
+              `${owner.id}: gate ${failure.id} ALSO failing (advisory) — ${String(failure.why).slice(0, 200)}`);
+            rest = rest.slice(failedAt + 1);
+            restOwners = restOwners.slice(failedAt + 1);
+          }
+        }
+        (bad as any).advisory = advisory;
+        const routed = this.routeStage(stage, ctx, 'failed', bad);
+        if (routed) return routed;
+
+        // THE REPAIR LOOP.
+        //
+        // `onGateFailure` was declared, called, and implemented by no stage;
+        // `fixRounds` was initialised and never read. So the only thing a
+        // failing gate could ever do was hold. On frontier-14 that meant two
+        // confirmed-fatal proofs became a paragraph in a markdown report
+        // instead of an authoring dispatch, and the run went to step 9 with
+        // them open.
+        //
+        // The hook also could not have worked as written: it fired only when
+        // the blocker MESSAGE was new, and a gate that keeps failing the same
+        // way produces the same message every time. One round, then deadlock.
+        //
+        // It now fires whenever nothing is in flight and rounds remain, which
+        // is the actual condition for "there is repair work to start". The cap
+        // is what keeps a non-converging repair from spending forever: past it
+        // the gate still blocks, and a person reads the blocker.
+        //
+        // The hook belongs to the stage that DECLARED the failing gate, not to
+        // the group: a thin scaffold is `3-recheck`'s to re-open, whoever else
+        // was overlapping it.
+        const st = this.state.stage(stage.id);
+        const maxRounds = stage.maxFixRounds ?? 0;
+        const spent = await this.spendRepairRound(stage, bad, ctx, `gate ${bad.id} failed`);
+        if (spent === 'spent') {
+          // Dispatches started by the hook are in flight now; the gate re-runs
+          // once they drain, because `gatesPassedAt` is still unset.
+          return 'working';
+        }
+        if (spent === 'waiting' || spent === 'preflight-blocked') {
+          // An outage keeps its budget and waits on a clock. A deterministic
+          // launch blocker also keeps its budget. Both wait for the specific
+          // external change or explicit operator retry that makes progress safe.
+          this.reporter.report(this.snapshot(), { force: true });
+          return 'blocked';
+        }
+        // Said once, when the budget runs out — not on every tick thereafter.
+        if (stage.onGateFailure && maxRounds > 0 && !st.repairExhaustedAt) {
+          st.repairExhaustedAt = new Date().toISOString();
+          this.state.save();
+          this.reporter.notify('repair-exhausted',
+            `${stage.id}: ${maxRounds} repair round(s) did not clear gate ${bad.id}; this needs a person`);
+        }
+        this.reporter.report(this.snapshot(), { force: true });
+        return 'blocked';
+      }
+      // A gate that now passes retires its own blocker, so a transient does
+      // not leave a permanent scar on the status report.
+      const before = this.state.data.blockers.length;
+      const ownerIds = new Set(statuses.map(({ s }: any) => s.id));
+      this.state.data.blockers = this.state.data.blockers.filter((b: any) => !(ownerIds.has(b.stage)
+        && (/gate /.test(b.message) || b.key === `owner:${b.stage}`)));
+      if (this.state.data.blockers.length !== before) this.reporter.notify('unblocked', `${where}: gate blocker cleared on a later pass`);
+      this.reporter.notify('gates-ok', `${where}: all gates green`);
+    }
+
+    if (group.length === 1) {
+      const routed = this.routeStage(group[0], ctx, 'passed');
+      if (routed) return routed;
+    }
+    // The group clears as one. A member that waived its gates is stamped here
+    // too — it has been unit-complete since the join began.
+    for (const { s, st } of statuses) {
+      const ss = this.state.stage(s.id);
+      ss.gatesPassedAt = ss.gatesPassedAt ?? new Date().toISOString();
+      ss.doneAt = new Date().toISOString();
+      this.reporter.notify('stage-clear', `${s.id} cleared — ${st.why}`);
+    }
+    this.state.save();
+    return 'ok';
+  }
+
+  /** Commit a branch and its fresh execution identities in one state-file
+   * rename. A crash therefore sees either the old join or the complete branch. */
+  private routeStage(stage: Stage, ctx: Ctx, outcome: 'passed' | 'failed', failure?: GateResult): 'working' | 'blocked' | null {
+    if (!stage.route) return null;
+    try {
+      if (stage.pipeline || this.inflight.size || this.liveDispatchLabels().length)
+        throw new Error('routing requires a standalone stage and every writer drained');
+      const route = stage.route({ ctx, outcome, failure });
+      if (!route) return null;
+      if (!stage.routeTargets?.includes(route.next)) throw new Error(`undeclared route target ${route.next}`);
+      const from = this.stages.indexOf(stage), to = this.stages.findIndex(s => s.id === route.next);
+      if (to < 0) throw new Error(`unknown route target ${route.next}`);
+      const at = new Date().toISOString();
+      const data = structuredClone(this.state.data);
+      data.stageRounds ??= {};
+      data.transitions ??= [];
+      if (failure) {
+        data.stageFailures ??= {};
+        data.stageFailures[stage.id] = failure;
+      }
+      data.transitions.push({ from: stage.id, to: route.next, round: data.stageRounds[stage.id] ?? 1,
+        outcome, at, ...(failure ? { failure } : {}) });
+      if (to <= from) {
+        const receipts = existsSync(ctx.dispatchDir)
+          ? readdirSync(ctx.dispatchDir).filter(file => file.endsWith('.result.json')) : [];
+        for (const member of this.stages.slice(to, from + 1)) {
+          data.stageRounds[member.id] = (data.stageRounds[member.id] ?? 1) + 1;
+          const freshCtx = { ...ctx, stageRounds: data.stageRounds };
+          if (stagePattern(member, ctx).toString() === stagePattern(member, freshCtx).toString())
+            throw new Error(`${member.id}: repeated stage result pattern must change with stageRounds`);
+          if (receipts.some(file => stagePattern(member, ctx).test(file) && stagePattern(member, freshCtx).test(file)))
+            throw new Error(`${member.id}: new round result pattern still accepts old receipts`);
+          delete data.stages[member.id];
+        }
+      } else {
+        data.stages[stage.id] = { ...data.stages[stage.id], enteredAt: data.stages[stage.id]?.enteredAt ?? at,
+          fixRounds: data.stages[stage.id]?.fixRounds ?? 0, doneAt: at,
+          gatesPassedAt: outcome === 'passed' ? at : null, routedTo: route.next };
+        for (const member of this.stages.slice(from + 1, to)) {
+          data.stages[member.id] = { enteredAt: at, doneAt: at, gatesPassedAt: null,
+            fixRounds: 0, routedTo: route.next };
+        }
+      }
+      const affected = new Set(this.stages.slice(Math.min(from, to), Math.max(from, to) + 1).map(s => s.id));
+      data.blockers = data.blockers.filter((b: any) => !affected.has(b.stage));
+      data.stage = route.next;
+      data.finishedAt = null;
+      if (data.pauseAfter === stage.id) {
+        data.paused = true;
+        data.pauseAfter = null;
+      }
+      this.state.data = data;
+      this.state.save();
+      this.stateVersion++;
+      this.lastBattery.clear();
+      this._adoptStage = undefined;
+      this.reporter.notify('stage-route', `${stage.id} (${outcome}) → ${route.next}`);
+      return 'working';
+    } catch (error: any) {
+      this.state.addBlocker(stage.id, `${stage.id}: route refused — ${error.message}`, 'stage-route');
+      return 'blocked';
+    }
+  }
+
+  /** The dispatch key a unit would use, so the retry policy can find its prior
+   *  attempts. Stages whose labels are not unit-derived return null and simply
+   *  do not get per-unit retry accounting. */
+  /** @deprecated Retry accounting derives its key from the plan's own label,
+   *  which is what `start()` records. Keying it separately off `labelFor` gave
+   *  nine of thirteen stages no retry accounting at all. */
+  keyForUnit(stage: Stage, unit: Unit): string | null {
+    if (!stage.labelFor) return null;
+    return `${stage.id}:${stage.labelFor(unit)}`;
+  }
+
+  /**
+   * Spend one repair round on `stage`'s hook, honouring outage backoff.
+   *
+   *  'spent'   — a round ran; repair work may be in flight; re-verify later.
+   *  'waiting' — an earlier round reported an external outage and its clock
+   *              has not elapsed; the hook was not fired, no round consumed.
+   *  'none'    — no hook, or the round budget is exhausted.
+   *
+   * A hook that returns `{ outage }` gets its round REFUNDED and a clock set
+   * instead. During the terra account limit on frontier-15, every judge
+   * re-sweep was a guaranteed null yet each consumed a round, and 6-judge
+   * exhausted on work that could never have succeeded — the budget bounds
+   * divergence, and an outage is not divergence. Both round-spending sites
+   * (the gate-failure branch and the stalemate branch) go through here, so
+   * neither can drift back to burning rounds an outage already explains.
+   */
+  /**
+   * The item ids a gate's own output names.
+   *
+   * Every subject-scoped gate in this repo prints `ERROR <code> [<id>]:` —
+   * content-policy, proof-contract, finite-smoke, risk-report, boundary-audit
+   * and citation-fidelity all do. The bracket form is also used for CITATION
+   * labels (`[F1]`, `[L3]`, `[step 2.1]`), so the shape test is what separates
+   * them: a real id is lower-case kebab with at least three segments
+   * (`def-group`, `thm-zorn`, `compactness-page`). The line-anchored form
+   * includes page subjects; the closed item-prefix fallback finds item ids in
+   * older diagnostics without mistaking citation labels for subjects.
+   *
+   * Older plan and impact tools use either `  [code] <item>/page ...` or
+   * `ERROR code: ... <item>` rather than the canonical bracketed subject. Those
+   * concrete subjects still receive independent budgets. A genuinely level-
+   * scoped failure returns no id and is keyed on the gate alone.
+   */
+  static itemsNamedBy(failure: GateResult): string[] {
+    const text = `${failure?.output ?? ''}\n${failure?.why ?? ''}`;
+    const ids = new Set<string>();
+    const typed = /\b((?:def|thm|lem|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*)\b/g;
+    for (const line of text.split(/\r?\n/)) {
+      // Precheck emits FAIL/REPAIR headers, followed by indented proof text.
+      // Only the header owns a diagnostic; PASS rows and cited suppliers do not.
+      const precheck = /(?:^|-)precheck$/.test(failure.id ?? '')
+        ? /^(?:FAIL|REPAIR|REJECT) (?:.*\/)?items\/([a-z0-9]+(?:-[a-z0-9]+)+)\.md:/.exec(line)
+        : null;
+      if (precheck) { ids.add(precheck[1]); continue; }
+      if (/^\s{2}([a-z0-9]+(?:-[a-z0-9]+)+)\s+\([^)]*\.pages\.json\):/i.test(line)) {
+        ids.add(line.match(/^\s{2}([a-z0-9]+(?:-[a-z0-9]+)+)/i)![1]);
+        continue;
+      }
+      if (!/^ERROR\b|^\s*\[[a-z0-9-]+\]\s+/i.test(line)) continue;
+      const bracketed = line.match(/^ERROR [^\n]*?\[([a-z0-9]+(?:-[a-z0-9]+)+)\]/);
+      if (bracketed) { ids.add(bracketed[1]); continue; }
+      for (const match of line.matchAll(typed)) ids.add(match[1]);
+      for (const match of line.matchAll(/\bpage\s+([a-z0-9]+(?:-[a-z0-9]+)+)\b/gi)) ids.add(match[1]);
+      for (const match of line.matchAll(/\bbatch\s+\d+\s+([a-z0-9]+(?:-[a-z0-9]+)+)\s+declares\b/gi)) ids.add(match[1]);
+    }
+    return [...ids];
+  }
+
+  /** `gateAttempts` key. Step 5a and 5b are separate reviews, so neither may
+   * spend the other's allowance for the same gate and subject. */
+  private static attemptKey(stageId: string, gateId: string, item: string): string {
+    return `${stageId}\u0000${gateId}\u0000${item}`;
+  }
+
+  /**
+   * Charge one try to every item the failing gate names, and report which of
+   * them still have tries left.
+   *
+   * Owner, 2026-08-25: "each item must pass through the same gate within 3
+   * tries, after which it becomes a blocker and requires intervention". The
+   * counter increments per BATTERY, not per repair dispatch — an item repaired
+   * on the first pass is not named by the next battery and never reaches two,
+   * which is what makes three a real allowance rather than three ticks of a
+   * clock.
+   */
+  private chargeItems(stage: Stage, failure: GateResult, budget: number): { live: string[]; spent: string[] } {
+    const named = Executor.itemsNamedBy(failure);
+    // A gate that names nothing is still bounded — on the gate alone.
+    const keys = named.length ? named : ['*'];
+    this.state.data.gateAttempts ??= {};
+    const live: string[] = [], spent: string[] = [];
+    for (const item of keys) {
+      const k = Executor.attemptKey(stage.id, failure.id, item);
+      const rec = this.state.data.gateAttempts[k] ??= { n: 0, stage: stage.id, lastAt: '' };
+      rec.n += 1;
+      rec.stage = stage.id;
+      rec.lastAt = new Date().toISOString();
+      (rec.n > budget ? spent : live).push(item);
+    }
+    this.state.save();
+    for (const item of spent) {
+      const msg = item === '*'
+        ? `stage ${stage.id}: gate ${failure.id} failed ${budget}x and names no item — needs a person`
+        : `stage ${stage.id}: gate ${failure.id} failed ${budget}x on ${item} — needs a person`;
+      if (this.state.addBlocker(stage.id, msg, `item:${stage.id}:${failure.id}:${item}`)) {
+        this.reporter.notify('blocked', msg, { stage: stage.id, gate: failure.id, item });
+      }
+    }
+    return { live, spent };
+  }
+
+  private async spendRepairRound(stage: Stage, failure: GateResult, ctx: Ctx, describe: string): Promise<'spent' | 'waiting' | 'preflight-blocked' | 'none'> {
+    // The production math-library workflow is owner-terminal at every gate.
+    // This policy is checked before stage hooks and budget accounting, so a
+    // local `onGateFailure` implementation cannot accidentally launch another
+    // repair wave. Synthetic artifact stalemates use this same path.
+    const ownerRecertify = this.config.gateFailurePolicy === 'owner-recertify';
+    if (this.config.gateFailurePolicy === 'owner' || ownerRecertify || stage.onHold) {
+      let reason: string;
+      if (stage.onHold) {
+        try { reason = (await stage.onHold({ ctx, stage, failure })).owner.reason; }
+        catch (error: any) { reason = `hold report failed: ${error?.message ?? error}`; }
+      } else {
+        const detail = failure.why || failure.output || 'no gate diagnostic was emitted';
+        const advisory = (failure.advisory ?? []).map((row: any) =>
+          `${row.stage ?? stage.id}/${row.id}: ${row.why || row.output || 'failed'}`);
+        reason = [`${failure.id}: ${detail}`, ...advisory].join('; ');
+      }
+      const action = ownerRecertify
+        ? 'owner repair and recertification required; repair every rejected item, refresh all certifications invalidated by the repair, then retry the gate before transition'
+        : 'owner decision required';
+      const message = `stage ${stage.id}: ${action} — ${reason}`;
+      if (this.state.addBlocker(stage.id, message, `owner:${stage.id}`))
+        this.reporter.notify('owner-escalation', message);
+      this.state.save();
+      return 'waiting';
+    }
+    const st = this.state.stage(stage.id);
+    const maxRounds = stage.maxFixRounds ?? 0;
+    if (!stage.onGateFailure) return 'none';
+    // PER-ITEM BUDGET, when the stage opts in. `fixRounds` is still stamped so
+    // the report and the `retry` control keep working, but it no longer BOUNDS
+    // the stage — the (gate, item) counters do. A stage without
+    // `perItemFixBudget` is unchanged.
+    const perItem = stage.perItemFixBudget ?? 0;
+    const gateAttemptsBefore = perItem > 0
+      ? structuredClone(this.state.data.gateAttempts ?? {})
+      : null;
+    const blockerKeysBefore = new Set(this.state.data.blockers
+      .map((blocker: any) => blocker.key ?? blocker.message));
+    let repairFailure = failure;
+    const failures = stage.batchRepairs
+      ? [failure, ...(failure.advisory ?? []).filter((entry) => !entry.stage || entry.stage === stage.id)]
+      : [failure];
+    // Missing-output recovery has its own per-unit budget and may legitimately
+    // produce only one of several required artifacts in a pass.
+    const fingerprint = failure.id === 'stage-stalemate' ? undefined : stage.repairFingerprint?.(ctx);
+    const signature = JSON.stringify(failures.map(({ id, output, why }) => [id, output, why]));
+    const previous = (st as any).lastRepairInputs;
+    if (fingerprint && previous?.fingerprint === fingerprint && previous?.signature === signature) {
+      this.state.addBlocker(stage.id, `stage ${stage.id}: repair changed no relevant inputs and the same gate failures remain; inspect the detector or repair authority`, 'repair-no-progress');
+      return 'none';
+    }
+    if (perItem > 0) {
+      if (st.backoffUntil && new Date(st.backoffUntil).getTime() > Date.now()) return 'waiting';
+      const charged = failures.map((entry) => {
+        const { live, spent } = this.chargeItems(stage, entry, perItem);
+        return { ...entry, liveItems: live, exhaustedItems: spent };
+      });
+      const live = charged.flatMap((entry) => entry.liveItems);
+      const spent = charged.flatMap((entry) => entry.exhaustedItems);
+      repairFailure = { ...charged[0], advisory: stage.batchRepairs ? charged.slice(1) : failure.advisory };
+      // Every item this gate names has burned its tries: nothing left to try,
+      // and the blockers raised above name each one.
+      if (!live.length) {
+        // Stamped for the same reason the stage-wide path stamps it: the
+        // notice is given once, and `retry` clears it. The tick-level
+        // exhaustion notice is guarded on `maxRounds > 0`, which a per-item
+        // stage need not set, so this branch owns the message.
+        if (!st.repairExhaustedAt) {
+          st.repairExhaustedAt = new Date().toISOString();
+          this.state.save();
+          this.reporter.notify('repair-exhausted',
+            `${stage.id}: gate ${failure.id} — all ${spent.length} named item(s) exhausted ${perItem} tries; this needs a person`);
+        }
+        return 'none';
+      }
+      if (spent.length) {
+        this.reporter.notify('repair-partial',
+          `${stage.id}: gate ${failure.id} — ${spent.length} item(s) exhausted, continuing on ${live.length}`);
+      }
+    } else if (st.fixRounds >= maxRounds) return 'none';
+    if (st.backoffUntil) {
+      if (new Date(st.backoffUntil).getTime() > Date.now()) return 'waiting';
+      st.backoffUntil = null;
+      this.state.save();
+    }
+    const prevRoundAt = st.lastRepairAt ?? null;
+    st.fixRounds += 1;
+    st.lastRepairAt = new Date().toISOString();
+    this.state.save();
+    const budgetLabel = perItem > 0
+      ? `repair cycle ${st.fixRounds}; ${perItem} tries per gate/item`
+      : maxRounds === Infinity ? `terminal adjudication cycle ${st.fixRounds}`
+        : `repair round ${st.fixRounds}/${maxRounds}`;
+    this.reporter.notify('repair', `${stage.id}: ${describe}; starting ${budgetLabel}`);
+    let report: any;
+    let hookFailed = false;
+    this._repairStarts = [];
+    try {
+      report = await stage.onGateFailure({ ctx, failure: repairFailure, executor: this, stage, round: st.fixRounds, prevRoundAt });
+    } catch (err: any) {
+      hookFailed = true;
+      this.reporter.notify('repair-failed', `${stage.id}: repair round ${st.fixRounds} threw — ${err?.message ?? err}`);
+    }
+    const requestedStarts = this._repairStarts ?? [];
+    this._repairStarts = undefined;
+    if (report?.owner) {
+      st.fixRounds -= 1;
+      st.lastRepairAt = prevRoundAt;
+      if (gateAttemptsBefore) this.state.data.gateAttempts = gateAttemptsBefore;
+      const message = `stage ${stage.id}: owner decision required — ${report.owner.reason}`;
+      if (this.state.addBlocker(stage.id, message, `owner:${stage.id}`)) {
+        this.reporter.notify('owner-escalation', message);
+      }
+      this.state.save();
+      return 'waiting';
+    }
+    if (report?.outage) {
+      const waitMs = report.outage.retryAfterMs ?? OUTAGE_BACKOFF_MS;
+      st.fixRounds -= 1;
+      st.backoffUntil = new Date(Date.now() + waitMs).toISOString();
+      this.state.save();
+      this.reporter.notify('repair-outage',
+        `${stage.id}: repair hit an external outage — ${report.outage.reason}; ` +
+        `round refunded, retrying after ${Math.round(waitMs / 60_000)} min`);
+    } else if (!hookFailed && requestedStarts.length) {
+      const byStage = new Map<Stage, Plan[]>();
+      for (const request of requestedStarts) {
+        if (!byStage.has(request.stage)) byStage.set(request.stage, []);
+        byStage.get(request.stage)!.push(request.plan);
+      }
+      let clean = true;
+      for (const [requestedStage, plans] of byStage) {
+        if (!this.startMany(requestedStage, plans)) clean = false;
+      }
+      if (!clean) {
+        // The hook needed this round number to name its plans, but a
+        // deterministic launch defect is not a mathematical repair attempt.
+        // Restore both round and per-item budgets while keeping the exact
+        // dispatch-preflight blocker that tells the operator what to fix.
+        st.fixRounds -= 1;
+        st.lastRepairAt = prevRoundAt;
+        if (gateAttemptsBefore) this.state.data.gateAttempts = gateAttemptsBefore;
+        this.state.data.blockers = this.state.data.blockers.filter((blocker: any) => {
+          const key = blocker.key ?? blocker.message;
+          return blockerKeysBefore.has(key)
+            || !failures.some((entry) => String(key).startsWith(`item:${stage.id}:${entry.id}:`));
+        });
+        this.state.save();
+        this.reporter.notify('repair-preflight',
+          `${stage.id}: repair fan-out failed launch preflight; repair budget refunded until the named blocker is fixed`);
+        return 'preflight-blocked';
+      }
+    }
+    if (!hookFailed && !report?.outage && fingerprint) {
+      (st as any).lastRepairInputs = { fingerprint, signature };
+      this.state.save();
+    }
+    // A repair round is a state-changing event whatever it did — it ran tools,
+    // dispatched lanes, or set a clock — so the next battery must be live.
+    this.bumpState();
+    this.reporter.report(this.snapshot(), { force: true });
+    return 'spent';
+  }
+
+  async run({ pollMs = 15000, maxTicks = Infinity }: { pollMs?: number; maxTicks?: number } = {}): Promise<string> {
+    let ticks = 0;
+    for (;;) {
+      if (this.signal?.aborted) return 'aborted';
+      const version = this.stateVersion;
+      // A DATA DEFECT MUST NOT END THE RUN, ANYWHERE IN THE ITERATION.
+      //
+      // Manifests are written by live agent processes, so engine work can meet
+      // a truncated file or a transient duplicate item id minted by two
+      // authors at once. Guards at two call sites were not enough: on
+      // 2026-09-16 a duplicate killed a 49-hour build through `tick`, and on
+      // 2026-09-17 the SAME defect killed its successor through the post-tick
+      // `currentStage()` boundary check and through `snapshot()` inside the
+      // blocked report. The whole iteration is therefore guarded: a throw
+      // becomes an owner blocker, the loop waits out the poll interval and
+      // keeps running, and a repaired input plus `retry` resumes the run.
+      let r: 'done' | 'working' | 'blocked' | 'stopped';
+      try {
+        r = await this.tick();
+        if (r === 'done' || r === 'stopped') return r;
+        if (r === 'blocked') {
+          // A blocker is not the end of the run. The first live takeover blocked
+          // on a citation sweep hitting an HTTP/2 framing error against a host
+          // that had answered 200 twice that hour — and the engine exited, ending
+          // a build over a network blip. Keep ticking: a transient clears itself,
+          // an owner can `retry`, and a genuinely stuck run is reported every
+          // interval rather than silently dead.
+          this.blockedTicks = (this.blockedTicks ?? 0) + 1;
+          if (this.blockedTicks === 1 || this.blockedTicks % 20 === 0) {
+            this.reporter.notify('blocked-holding',
+              `still blocked after ${this.blockedTicks} tick(s); holding and re-checking. ` +
+              `\`autopilot retry\` to re-arm, \`autopilot stop\` to end.`);
+          }
+          if (this.config.exitOnBlocked && this.blockedTicks >= (this.config.blockedTickLimit ?? 40)) return 'blocked';
+        } else {
+          this.blockedTicks = 0;
+        }
+        // A tick-level parse error can occur while another live author is
+        // replacing a shared JSON file. Once a complete iteration succeeds,
+        // its engine-loop blocker is historical evidence in the event log,
+        // not an active obstruction. Keep substantive stage blockers intact.
+        if (r === 'working') {
+          const old = this.state.data.blockers.length;
+          this.state.data.blockers = this.state.data.blockers.filter((b: any) =>
+            !String(b.message ?? '').startsWith('engine loop threw — '));
+          if (this.state.data.blockers.length !== old) {
+            this.state.save();
+            this.reporter.notify('unblocked', `retired ${old - this.state.data.blockers.length} recovered engine-loop blocker(s)`);
+          }
+        }
+        ticks += 1;
+        if (ticks >= maxTicks) return 'working';
+        // Drain completed boundaries immediately; keep the polling fallback for
+        // controls and adopted processes, whose completion has no local promise.
+        if (r === 'working' && !this.state.paused
+          && (this.stateVersion !== version
+            || this.currentStage().stage?.id !== this.state.data.stage)) {
+          // Queued dispatches launch through timers. Yield between immediate
+          // state-change passes so synchronous artifact scans cannot starve
+          // those launches or adopted-worker result collection.
+          await sleep(0, this.signal);
+          continue;
+        }
+        const wait = new AbortController();
+        try {
+          await Promise.race([
+            sleep(pollMs, this.signal ? AbortSignal.any([this.signal, wait.signal]) : wait.signal),
+            ...[...this.inflight.values()].map(({ promise }) => promise),
+          ]);
+        } finally { wait.abort(); }
+      } catch (error: any) {
+        const msg = `engine loop threw — ${error?.message ?? error}`;
+        if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
+          this.state.addBlocker(this.state.data.stage ?? '(engine)', msg);
+        }
+        try { this.reporter.notify('tick-error', msg); } catch { /* reporting must not rethrow */ }
+        this.blockedTicks = (this.blockedTicks ?? 0) + 1;
+        // The iteration still counts: a harness with a tick budget must
+        // terminate even when every tick throws, and a bounded drive must not
+        // be turned into an unbounded one by a data defect.
+        ticks += 1;
+        if (ticks >= maxTicks) return 'working';
+        await sleep(Math.min(pollMs, 15_000), this.signal);
+      }
+    }
+  }
+}

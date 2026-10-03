@@ -1,0 +1,221 @@
+// Summarize the configured session-judge ledger for the Step-9 owner report.
+// The ledger keeps every verdict, while the agreement section compares the
+// latest usable verdict for each item/model after any targeted re-judging. A
+// later null on the same prompt cannot erase an earlier complete verdict; a
+// later true/false verdict always remains decisive.
+import { existsSync, readFileSync } from "node:fs";
+import { JUDGE_LINEUPS, DEFAULT_LINEUP } from "./models.mjs";
+import { adjudicationTypeResolver } from './step7-adjudication-compat.mjs';
+const adjudicationType = adjudicationTypeResolver(process.cwd());
+
+const argv = process.argv.slice(2);
+const ledger = argv[0];
+const adjudicationsFlag = argv.indexOf("--adjudications");
+const adjudicationsPath = adjudicationsFlag < 0 ? "" : argv[adjudicationsFlag + 1];
+if (!ledger || (adjudicationsFlag >= 0 && !adjudicationsPath)) {
+  console.error("usage: node tools/physics-support/judge-compare.mjs research/level<n>-judge.jsonl [--adjudications research/level<n>-judge-adjudications.jsonl]");
+  process.exit(2);
+}
+
+// JUDGE_LINEUP mirrors tools/physics-support/judge.mts, judge-sweep.mjs and level-coverage.mjs.
+// The lineup is resolved, never assumed; `lineup` is emitted so a saved report
+// says which configured models it actually compared.
+// THE COPY THAT USED TO LIVE HERE IS WHY tools/physics-support/models.mjs EXISTS. The
+// frontier-15 step-9 report was computed BY HAND because this table missed the
+// 2026-08-17 lane switch that judge.mts, judge-sweep.mjs, level-coverage.mjs and
+// run-wave.mjs all carried — the reporting tool was the one tool that could not
+// read the run it reports on. It now imports the registry, so it cannot fall
+// behind again, and tools/physics-autopilot/test/model-registry.test.mts guards the one
+// copy that remains by design (preflight.mjs, which must not import a tool it is
+// checking is runnable).
+const lineupName = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP;
+const models = JUDGE_LINEUPS[lineupName];
+if (!models) {
+  console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}; got ${lineupName}`);
+  process.exit(2);
+}
+const rows = readFileSync(ledger, "utf8").split("\n").filter(Boolean).map((line, index) => {
+  try {
+    const row = JSON.parse(line);
+    if (typeof row.id !== "string" || typeof row.model !== "string" || typeof row.keep !== "boolean" && row.keep !== null) {
+      throw new Error("requires id, model, and boolean-or-null keep");
+    }
+    return row;
+  } catch (error) {
+    console.error(`${ledger}:${index + 1}: invalid verdict record — ${String(error)}`);
+    process.exit(2);
+  }
+});
+
+const selected = rows.filter((row) => models.includes(row.model));
+const candidateKey = (row) => `${row.id}\u0000${row.model}\u0000${row.context_sha256}`;
+// A detection is a model rejection of one exact frozen context. Repeated
+// transport-safe ledger writes of that same verdict remain one candidate; a
+// later re-judge of changed text has a new context hash and is a new candidate.
+const rejectionCandidates = new Map();
+for (const row of selected) {
+  if (row.keep !== false || typeof row.context_sha256 !== "string" || !row.context_sha256) continue;
+  rejectionCandidates.set(candidateKey(row), row);
+}
+const perModel = Object.fromEntries(models.map((model) => {
+  const verdicts = selected.filter((row) => row.model === model);
+  return [model, {
+    calls: verdicts.length,
+    passes: verdicts.filter((row) => row.keep === true).length,
+    rejections: verdicts.filter((row) => row.keep === false).length,
+    nulls: verdicts.filter((row) => row.keep === null).length,
+    rejected_ids: [...new Set(verdicts.filter((row) => row.keep === false).map((row) => row.id))].sort(),
+  }];
+}));
+
+const latest = new Map();
+const history = new Map();
+for (const row of selected) {
+  const byModel = latest.get(row.id) ?? new Map();
+  byModel.set(row.model, row);
+  latest.set(row.id, byModel);
+  const histories = history.get(row.id) ?? new Map();
+  const modelRows = histories.get(row.model) ?? [];
+  modelRows.push(row);
+  histories.set(row.model, modelRows);
+  history.set(row.id, histories);
+}
+const latestAttemptAgreement = {
+  all_pass: [],
+  all_reject: [],
+  mixed: [],
+  incomplete_or_null: [],
+};
+const latestUsableVerdictAgreement = Object.fromEntries(
+  Object.keys(latestAttemptAgreement).map((key) => [key, []]),
+);
+const contextIntegrity = {
+  fully_attested_frozen_context: [],
+  mismatched_or_unattested_context: [],
+};
+const classify = (target, id, byModel) => {
+  const keeps = models.map((model) => byModel.get(model)?.keep);
+  if (keeps.some((keep) => typeof keep !== "boolean")) target.incomplete_or_null.push(id);
+  else if (keeps.every((keep) => keep === true)) target.all_pass.push(id);
+  else if (keeps.every((keep) => keep === false)) target.all_reject.push(id);
+  else target.mixed.push(id);
+};
+for (const [id, byModel] of latest) {
+  const contexts = models.map((model) => byModel.get(model)?.context_sha256);
+  if (contexts.every((context) => typeof context === "string" && context)
+    && new Set(contexts).size === 1) {
+    contextIntegrity.fully_attested_frozen_context.push(id);
+  } else {
+    contextIntegrity.mismatched_or_unattested_context.push(id);
+  }
+  classify(latestAttemptAgreement, id, byModel);
+  const usable = new Map();
+  for (const model of models) {
+    const modelRows = history.get(id)?.get(model) ?? [];
+    const raw = modelRows.at(-1);
+    const effective = raw?.keep === null && raw.context_sha256
+      ? [...modelRows].reverse().find((candidate) =>
+          typeof candidate.keep === "boolean" && candidate.context_sha256 === raw.context_sha256,
+        ) ?? raw
+      : raw;
+    usable.set(model, effective);
+  }
+  classify(latestUsableVerdictAgreement, id, usable);
+}
+for (const ids of Object.values(latestAttemptAgreement)) ids.sort();
+for (const ids of Object.values(latestUsableVerdictAgreement)) ids.sort();
+for (const ids of Object.values(contextIntegrity)) ids.sort();
+
+const emptyEffectiveness = () => Object.fromEntries(models.map((model) => [model, {
+  unique_rejection_candidates: [...rejectionCandidates.values()].filter((row) => row.model === model).length,
+  adjudicated_rejections: 0,
+  unadjudicated_rejections: [...rejectionCandidates.values()].filter((row) => row.model === model).length,
+  confirmed_fatal: 0,
+  fatal_logic: 0,
+  fatal_dependency_citation: 0,
+  fatal_other: 0,
+  fatal_unclassified: 0,
+  confirmed_nonfatal: 0,
+  false_positives: 0,
+  fatal_confirmation_rate: null,
+}]));
+
+let adjudicatedDetectionEffectiveness = {
+  adjudications: null,
+  status: "requires_adjudications",
+  interpretation: "Raw rejection counts are not a fatal-error effectiveness measure. Record one outcome for every model rejection, keyed by id, model, and context_sha256.",
+  models: emptyEffectiveness(),
+};
+
+if (adjudicationsPath) {
+  if (!existsSync(adjudicationsPath)) {
+    console.error(`${adjudicationsPath}: adjudications file does not exist`);
+    process.exit(2);
+  }
+  const outcomes = new Map();
+  for (const [index, line] of readFileSync(adjudicationsPath, "utf8").split("\n").filter(Boolean).entries()) {
+    let row;
+    try { row = JSON.parse(line); } catch {
+      console.error(`${adjudicationsPath}:${index + 1}: invalid JSON adjudication record`);
+      process.exit(2);
+    }
+    const validOutcome = ["confirmed_fatal", "confirmed_nonfatal", "false_positive"].includes(row.outcome);
+    const fatalType = adjudicationType(row);
+    const validFatalType = fatalType !== null;
+    if (
+      typeof row.id !== "string" || !models.includes(row.model) ||
+      typeof row.context_sha256 !== "string" || !row.context_sha256 || !validOutcome ||
+      (row.outcome === "confirmed_fatal" && !validFatalType)
+    ) {
+      console.error(`${adjudicationsPath}:${index + 1}: requires {id, model, context_sha256, outcome}; confirmed_fatal also requires defect_type logic, dependency_citation, or other`);
+      process.exit(2);
+    }
+    const key = candidateKey(row);
+    if (!rejectionCandidates.has(key)) {
+      console.error(`${adjudicationsPath}:${index + 1}: does not match a configured-model rejection in ${ledger}`);
+      process.exit(2);
+    }
+    // The final owner decision for a candidate is its last ledger entry.
+    outcomes.set(key, fatalType==='unclassified'?{...row,defect_type:fatalType}:row);
+  }
+  const modelsEffectiveness = emptyEffectiveness();
+  for (const [key, candidate] of rejectionCandidates) {
+    const stats = modelsEffectiveness[candidate.model];
+    const outcome = outcomes.get(key);
+    if (!outcome) continue;
+    stats.adjudicated_rejections += 1;
+    stats.unadjudicated_rejections -= 1;
+    if (outcome.outcome === "confirmed_fatal") {
+      stats.confirmed_fatal += 1;
+      if (outcome.defect_type === "logic") stats.fatal_logic += 1;
+      else if (outcome.defect_type === "dependency_citation") stats.fatal_dependency_citation += 1;
+      else if (outcome.defect_type === 'unclassified') stats.fatal_unclassified += 1;
+      else stats.fatal_other += 1;
+    } else if (outcome.outcome === "confirmed_nonfatal") {
+      stats.confirmed_nonfatal += 1;
+    } else {
+      stats.false_positives += 1;
+    }
+  }
+  for (const stats of Object.values(modelsEffectiveness)) {
+    stats.fatal_confirmation_rate = stats.adjudicated_rejections
+      ? stats.confirmed_fatal / stats.adjudicated_rejections
+      : null;
+  }
+  adjudicatedDetectionEffectiveness = {
+    adjudications: adjudicationsPath,
+    status: [...rejectionCandidates.keys()].every((key) => outcomes.has(key)) ? "complete" : "partial",
+    interpretation: "This compares precision among adjudicated rejection candidates. It cannot measure recall without an independently enumerated set of all fatal defects.",
+    models: modelsEffectiveness,
+  };
+}
+
+process.stdout.write(JSON.stringify({
+  ledger,
+  lineup: { name: lineupName, models },
+  models: perModel,
+  latest_attempt_agreement: latestAttemptAgreement,
+  latest_usable_verdict_agreement: latestUsableVerdictAgreement,
+  latest_context_integrity: contextIntegrity,
+  adjudicated_detection_effectiveness: adjudicatedDetectionEffectiveness,
+}, null, 2) + "\n");
