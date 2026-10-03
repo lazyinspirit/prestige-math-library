@@ -334,6 +334,13 @@ current proof review and normal gates.
 
 ## Scoped closeout with unrelated work present
 
+Step-9 readiness and report integrity seal physical files and exact symbolic-link
+target bytes with distinct file/link hash prefixes. They do not follow directory
+links or external targets; physically present targets are protected at their own
+paths. Dangling links are included without changing them. Changes to this hashing
+rule require normal readiness refresh and its complete gate battery, followed by
+a new report snapshot; old receipts are not rewritten as historical evidence.
+
 `tools/run-commit.mjs` retains its existing whole-tree behavior for runs without
 a closeout scope policy. To preserve unrelated staged changes and working files,
 the owner may create `research/RUN-closeout-scope.json` **before** Step 9 seals

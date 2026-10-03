@@ -14,7 +14,7 @@ import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { REPO } from './paths.mjs';
-import { runContentHash, runScope, sha256, splitFrontmatter } from './step9-lib.mjs';
+import { protectedEntryHash, runContentHash, runScope, sha256, splitFrontmatter } from './step9-lib.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : null; };
@@ -58,11 +58,11 @@ function protectedTreeReceipt() {
         || topLevel === '.autopilot' || topLevel.startsWith('.autopilot-')) continue;
       if (mutableAfterReadiness.has(rel) || rel.startsWith(dispatchPrefix)) continue;
       if (entry.isDirectory()) walk(absolute);
-      else if (entry.isFile()) files.push(rel);
+      else if (entry.isFile() || entry.isSymbolicLink()) files.push(rel);
     }
   };
   walk(root);
-  const rows = files.sort().map((file) => `${file}\0${sha256(readFileSync(join(root, file)))}`);
+  const rows = files.sort().map((file) => `${file}\0${protectedEntryHash(join(root, file))}`);
   return { protected_tree_files: rows.length, protected_tree_sha256: sha256(rows.join('\n')) };
 }
 

@@ -8,12 +8,23 @@
 // resolved from disk, exactly as the renderer sees them.
 
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, lstatSync, readFileSync, readlinkSync, readdirSync } from 'node:fs';
 import { basename, join, relative } from 'node:path';
 import { REPO } from './paths.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 
 export const sha256 = (value) => createHash('sha256').update(value).digest('hex');
+
+// Seal physical entries without following directory aliases or external targets.
+// Type prefixes also detect replacement of a link by a regular file.
+export function protectedEntryHash(path) {
+  const stat = lstatSync(path);
+  if (stat.isSymbolicLink()) return sha256(Buffer.concat([
+    Buffer.from('symlink\0'), readlinkSync(path, { encoding: 'buffer' }),
+  ]));
+  if (stat.isFile()) return sha256(Buffer.concat([Buffer.from('file\0'), readFileSync(path)]));
+  throw new Error(`unsupported protected tree entry: ${path}`);
+}
 
 export function splitFrontmatter(text) {
   const m = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(text);

@@ -7,11 +7,10 @@
 // every exhaustive count and fatal-defect row mechanically.  The reporter can
 // therefore be concise without gaining the power to omit or invent a defect.
 
-import { createHash } from 'node:crypto';
-import { existsSync, readdirSync, readFileSync, writeFileSync, statSync, mkdirSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync, lstatSync, mkdirSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { runScope, sha256, splitFrontmatter } from './step9-lib.mjs';
+import { protectedEntryHash, runScope, sha256, splitFrontmatter } from './step9-lib.mjs';
 import { resolveLineup } from './models.mjs';
 import { TERMINAL_REJUDGE_ROUNDS } from './step7-terminal-resolution.mjs';
 import { verifyProofLayout, proofLayoutPath } from './proof-layout-receipt.mjs';
@@ -267,13 +266,14 @@ function files(dir = root, out = []) {
     if (!rel || ignored.has(topLevel)
       || topLevel === '.autopilot' || topLevel.startsWith('.autopilot-')) continue;
     if (allowed.has(rel) || rel.startsWith(dispatchPrefix)) continue;
-    const stat = statSync(full);
-    if (stat.isDirectory()) files(full, out); else if (stat.isFile()) out.push(rel);
+    const stat = lstatSync(full);
+    if (stat.isDirectory()) files(full, out);
+    else if (stat.isFile() || stat.isSymbolicLink()) out.push(rel);
   }
   return out;
 }
 const tree = () => Object.fromEntries(files().sort().map((rel) => [rel,
-  createHash('sha256').update(readFileSync(join(root, rel))).digest('hex')]));
+  protectedEntryHash(join(root, rel))]));
 
 if (command === 'snapshot') {
   writeFileSync(integrityPath, `${JSON.stringify({ version: 1, run, protected_tree: tree() }, null, 2)}\n`);
