@@ -249,6 +249,15 @@ immutable post-reader snapshot. Existing current carrier, severity, repaired
 disposition and ledger checks still apply, in either decision iteration order.
 This is not a general duplicate-ledger exemption or source acceptance.
 
+The same rule admits a property-typed `page:BATCH:ID` accepted/amended repair
+with confidence one and an actual same-batch refuter finding. The page must be
+in the scope's changed-page and post-page inventories and the immutable
+snapshot's page inventory, with valid file and page-manifest hashes. The
+refuter observation equals the unanchored post-reader page carrier hash
+(excluding `item_order`); the repair decision's separate order-anchor and
+current-page checks remain intact. Item repairs still require the immutable
+item inventory and all three item/contract/manifest hashes.
+
 ### Carried Step3 graph prerequisite evidence
 
 The exact Step3-origin item

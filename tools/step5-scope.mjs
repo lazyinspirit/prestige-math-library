@@ -1159,35 +1159,46 @@ if (command === 'check') {
             && hashValue(foreign.target.producer_pre_snapshot?.carrier) === hashValue({ producer_batch: foreign.target.producer_batch,
               ...readJson(hashPath(foreign.target.producer_batch, 'pre'), 'producer pre-reader snapshot').hashes?.[foreign.target.id] });
           // The refuter can independently flag the reader's post-reader
-          // carrier, then Alpha amends that same touched item. Keep both exact
+          // carrier, then Alpha amends that same item or typed page. Keep both exact
           // obligations for the one defect, in either decision iteration order.
           const currentDecision = { ...decision, target };
           const refuted = decision.route === 'flagged' ? currentDecision : prior?.route === 'flagged' ? prior : null;
           const repairedDecision = refuted === currentDecision ? prior : currentDecision;
           const refuterMatch = /^refuter:([1-9]\d*):([1-9]\d*)$/.exec(refuted?.obligation ?? '');
+          const pageRepair = repairedDecision?.route === 'page';
           let sharedPostReaderRepair = false;
           if (prior && prior.id === decision.id && explicitShared && refuterMatch
             && ['confirmed_fatal', 'confirmed_nonfatal'].includes(refuted.verdict)
-            && repairedDecision?.route === 'touched'
+            && ['touched', 'page'].includes(repairedDecision?.route)
             && ['accepted_repair', 'amended_repair'].includes(repairedDecision.verdict)
             && repairedDecision.repair_confidence === 1
             && repairedDecision.target?.batch === refuterMatch[1]
-            && repairedDecision.obligation === `touched:${refuterMatch[1]}:${decision.id}`) {
+            && repairedDecision.obligation === `${pageRepair ? 'page' : 'touched'}:${refuterMatch[1]}:${decision.id}`) {
             const refuterBatch = refuterMatch[1];
             const actualScope = scopes[refuterBatch] ?? readJson(scopePath(refuterBatch), 'refuter scope');
             const actualFinding = actualScope.refuter_findings?.find(row => row.obligation === refuted.obligation);
             const { route: _route, ...findingTarget } = refuted.target ?? {};
             const postReader = readJson(hashPath(refuterBatch, 'post'), 'post-reader snapshot');
-            const observed = postReader.hashes?.[decision.id];
+            const observed = pageRepair ? postReader.page_hashes?.[decision.id] : postReader.hashes?.[decision.id];
+            const typedCarrier = pageRepair
+              ? (actualScope.pages_touched ?? []).includes(decision.id)
+                && (actualScope.page_manifest_post ?? []).includes(decision.id)
+                && (postReader.page_manifest ?? []).includes(decision.id)
+                && observed && typeof observed === 'object'
+                && ['file_sha256', 'manifest_sha256']
+                  .every(key => /^[a-f0-9]{64}$/.test(observed[key] ?? ''))
+              : (postReader.manifest ?? []).includes(decision.id)
+                && ['item_sha256', 'contract_sha256', 'manifest_sha256']
+                  .every(key => /^[a-f0-9]{64}$/.test(observed?.[key] ?? ''));
             sharedPostReaderRepair = actualScope.version === 2 && actualScope.run === run
               && String(actualScope.batch) === refuterBatch
               && actualFinding?.id === decision.id
               && hashValue(actualFinding) === hashValue(findingTarget)
               && hashSnapshotErrors(postReader, refuterBatch, 'post').length === 0
-              && postReader.manifest.includes(decision.id)
-              && ['item_sha256', 'contract_sha256', 'manifest_sha256']
-                .every(key => /^[a-f0-9]{64}$/.test(observed?.[key] ?? ''))
-              && actualFinding.observed_sha256 === hashValue(observed);
+              && typedCarrier
+              // Refuters use an unanchored page carrier, even when the page
+              // repair decision retains its separate item-order anchor.
+              && actualFinding.observed_sha256 === hashValue(pageRepair ? pageCarrier(observed) : observed);
           }
           if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair && !sharedPostReaderRepair) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
           if (!prior) referenced.set(defectId, {
