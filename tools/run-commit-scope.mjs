@@ -29,8 +29,8 @@ const inertHook = Object.freeze({
   required_absent_path: 'graphify-out',
 });
 
-function git(root, args, { input, env = {}, optional = false } = {}) {
-  const result = spawnSync('git', ['--literal-pathspecs', ...args], {
+function git(root, args, { input, env = {}, optional = false, literalPathspecs = true } = {}) {
+  const result = spawnSync('git', [...(literalPathspecs ? ['--literal-pathspecs'] : []), ...args], {
     cwd: root, env: { ...process.env, LC_ALL: 'C', ...env }, input,
     maxBuffer: 256 * 1024 * 1024,
   });
@@ -306,7 +306,10 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
     if (!owns(path)) throw Error('closeout: recorded path no longer belongs to this run: ' + path);
     regularPath(root, path, !required.has(path) || allowMissingReceipt && path === finalReceipt);
   }
-  const ignored = nul(git(root, ['check-ignore', '-z', '--stdin'], { input: pathsInput(paths), optional: true }) || Buffer.alloc(0));
+  // check-ignore reads exact filenames and rejects literal pathspec magic.
+  const ignored = nul(git(root, ['check-ignore', '-z', '--stdin'], {
+    input: pathsInput(paths), optional: true, literalPathspecs: false,
+  }) || Buffer.alloc(0));
   if (ignored.length) throw Error('closeout: required/authorized artifact is ignored by Git: ' + ignored[0]);
   return { policyPath, policySha256: sha256(policyText), paths, owns, inventory, reviewedHook,
     contextSha256: sha256(JSON.stringify({ selected, required: [...required].sort(),

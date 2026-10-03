@@ -372,6 +372,9 @@ carriers must exist and be eligible for Git; existing selected-category pathways
 cannot be omitted. Absent category pathways remain governed by the native pathway
 gates and are not authored during closeout. Present symbolic links, including
 dangling links, and other nonregular owned carriers remain errors.
+Ignore eligibility uses `git check-ignore` with exact NUL-separated filenames;
+its filename input does not accept Git's literal pathspec flag. Ignored owned
+carriers still fail closeout.
 
 For an actual shared supporting change, add an exact object to `additional_paths`
 with `path`, raw `sha256`, a concrete `reason` (at least 20 characters), and
