@@ -19,8 +19,8 @@
   node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts status --run RUN --state-dir .autopilot/RUN
   ```
 
-- `frontier --next` selects up to 30 A/B pairs by default; `plan` enforces a
-  30-pair cap. Both pages of each pair must have strictly more than 95% of their
+- `frontier --next` selects up to 35 A/B pairs by default; `plan` enforces a
+  35-pair cap. Both pages of each pair must have strictly more than 95% of their
   same-category prerequisites already published.
   `plan --pairs ID,ID` selects explicit A-page IDs. Explicit in-run prerequisites need
   `--allow-in-run-dependencies`; planning does not silently add missing suppliers.

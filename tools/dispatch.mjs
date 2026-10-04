@@ -60,14 +60,14 @@ const ROLES = Object.freeze({
   // counterexamples, both source work rather than recall — and because the Codex
   // return path reads it as a real switch.
   //
-  // Ten disjoint groups own at most three batches each. Shared-file stages
+  // Twelve disjoint groups own at most three batches each. Shared-file stages
   // remain serial; lane capacity does not authorize overlapping writes.
   alpha:        { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: MAX_GROUPS, web: true, why: 'Sol 6.1 high group Alpha, <=3 batches each; groups cover the full batch ceiling' },
   // Assignment is validated mechanically. All roles retain source access.
   'alpha-assign': { ...lane('partition'), sandbox: 'workspace-write', effort: 'high', cap: 1, why: 'batch partition for the group Alphas; output fully validated by alpha-groups.mjs' },
   // Step 3b selects DeepSeek-Flash-max for this pair-author lane; later stages
   // select their own explicit profile when reusing it for pathway prose.
-  // Pair authoring may fill the 30-pair run ceiling. Stage prerequisites and
+  // Pair authoring may fill the 35-pair run ceiling. Stage prerequisites and
   // same-batch exclusion determine which authors may safely overlap.
   'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'pair authoring and pathway prose; full run width with stage ownership guards' },
   // Final reporting is read-only; source uncertainty still requires research.

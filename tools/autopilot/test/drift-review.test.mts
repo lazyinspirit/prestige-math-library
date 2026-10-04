@@ -385,10 +385,10 @@ test('ordinary applied edges and reorders materialize instead of becoming a no-o
   rmSync(dir, { recursive: true, force: true });
 });
 
-test('drift rescope uses the shared 30-pair ceiling', () => {
+test('drift rescope uses the shared 35-pair ceiling', () => {
   const dir = mkdtempSync(join(tmpdir(), 'drift-cap-'));
   mkdirSync(join(dir, 'research'));
-  const pages = Array.from({ length: 31 }, (_, i) => {
+  const pages = Array.from({ length: 36 }, (_, i) => {
     const id = `prerequisite-${i + 1}`;
     return [
       { order: i * 2 + 1, id, kind: 'A', companion: `${id}-examples`, items: [] },
@@ -402,23 +402,23 @@ test('drift rescope uses the shared 30-pair ceiling', () => {
     `VERDICT: drift-rescoped — ${Array.from({ length: count }, (_, i) =>
       `prerequisite-${i + 1} (order ${i * 2 + 1})`).join(', ')}`,
   ].join('\n');
-  writeFileSync(join(dir, 'research', 'demo-alpha-step1-drift.md'), report(30));
+  writeFileSync(join(dir, 'research', 'demo-alpha-step1-drift.md'), report(35));
   const accepted = spawnSync(process.execPath, [APPLY, '--run', 'demo', '--dry-run'],
     { cwd: dir, encoding: 'utf8', timeout: 60_000 });
   assert.equal(accepted.status, 0, accepted.stderr);
-  assert.match(accepted.stdout, /would rescope demo onto 30 pair/);
+  assert.match(accepted.stdout, /would rescope demo onto 35 pair/);
 
-  writeFileSync(join(dir, 'research', 'demo-alpha-step1-drift.md'), report(31));
+  writeFileSync(join(dir, 'research', 'demo-alpha-step1-drift.md'), report(36));
   const rejected = spawnSync(process.execPath, [APPLY, '--run', 'demo', '--dry-run'],
     { cwd: dir, encoding: 'utf8', timeout: 60_000 });
   assert.equal(rejected.status, 1);
-  assert.match(rejected.stderr, /over the cap of 30/);
+  assert.match(rejected.stderr, /over the cap of 35/);
 
   const oversizedFlag = spawnSync(process.execPath,
-    [APPLY, '--run', 'demo', '--max-pairs', '31', '--dry-run'],
+    [APPLY, '--run', 'demo', '--max-pairs', '36', '--dry-run'],
     { cwd: dir, encoding: 'utf8', timeout: 60_000 });
   assert.equal(oversizedFlag.status, 2);
-  assert.match(oversizedFlag.stderr, /integer from 1 to 30/);
+  assert.match(oversizedFlag.stderr, /integer from 1 to 35/);
   rmSync(dir, { recursive: true, force: true });
 });
 
