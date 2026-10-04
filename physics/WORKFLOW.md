@@ -26,6 +26,23 @@ only reconcile refreshed suppliers outside an active run. Gate checks compare
 both the snapshots and originals to the pinned hashes. Imports remain canonical
 mathematical IDs, not independently authored copies.
 
+The Step-1 prerequisite-drift review uses the registered `gpt-6-luna-max`
+profile (GPT-6 Luna with max reasoning effort).
+
+The first physics prose-scaffold splice is recorded in
+`research/prose-scaffold-splice.json`. Its 13 `research/plan-*-track.md` design
+indexes connect canonical page IDs to the complete research prose, inventories
+and supplier ledgers. Like mathematics future tracks, planned A/B pages keep
+empty item arrays until scaffolding and authoring. The source inventories retain
+their exact claim scope and qualifications. Reproduce the mechanical splice with
+`python3 physics/research/splice-prose-scaffolds.py --write` from the repository
+root; it refuses to overwrite an independently changed plan.
+
+Use `frontier --next --max-pairs 10000` to list every currently eligible pair
+before the normal 30-pair run cap. Eligibility uses the engine's strictly
+greater-than-95% same-category publication rule; cross-category supplier edges
+remain declared and require ordinary Step-1 prerequisite resolution.
+
 Edit research/plan-spec.json to plan physical A/B pages and reference imported
 math pages through P entries. Each local category and plan page declares its
 library. Local mathematical suppliers may be authored during a physics run,

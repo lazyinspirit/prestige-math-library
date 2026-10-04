@@ -41,6 +41,13 @@ arguments, and open prerequisites; they are not production readiness receipts.
 The seven new five-agent teams and their scaffolds are indexed in
 [research/extended-frameworks-2026-10-03/](research/extended-frameworks-2026-10-03/README.md).
 
+Their future A/B pages and the first-principles frameworks have now been spliced
+into [research/plan-spec.json](research/plan-spec.json), with complete source
+links in the 13 `research/plan-*-track.md` design indexes. The
+[splice record](research/prose-scaffold-splice.json) preserves source hashes,
+proposed supplier homes and the geometry page split needed for acyclic ordering.
+Item inventories are populated during the ordinary physics build stages.
+
 The canonical proof-item kind is `physics-theorem`, with the existing `pthm-`
 prefix. `physical-theorem` is retired and rejected by current validators.
 The website separates the Math Library and Physics Library; research scaffolds

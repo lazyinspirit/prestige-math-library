@@ -1457,6 +1457,7 @@ export const stages = [
     pattern: /^alpha-(?:alpha-)?drift-review\.result\.json$/,
     labelFor: () => 'drift-review',
     concurrency: 1,
+    modelProfile: MODEL_PROFILE_NAMES.lunaMax,
     artifacts: (ctx: any) => `research/${ctx.run}-alpha-step1-drift.md`,
     plan: (ctx: any) => [{
       role: 'alpha',
