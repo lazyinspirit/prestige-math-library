@@ -2,7 +2,7 @@
 id: thm-finite-etale-covers-equivalent-to-finite-continuous-pi1-sets
 kind: theorem
 title: "Finite étale covers are equivalent to finite continuous étale fundamental group sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: thm-resolution-plane-curves-by-point-blowups
 kind: theorem
 title: "Resolution of reduced plane curves by point blowups and the delta recurrence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

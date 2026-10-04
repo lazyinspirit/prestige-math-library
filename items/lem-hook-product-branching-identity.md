@@ -2,7 +2,7 @@
 id: lem-hook-product-branching-identity
 kind: lemma
 title: The hook-product ratios sum to the size
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-hook-arm-leg-and-hook-length, def-partition-young-diagram-and-conjugate-partition, def-polynomial-degree-leading-coefficient-and-monic, def-polynomial-evaluation-and-root, def-polynomial-ring-over-a-commutative-ring, def-removable-and-addable-nodes-of-a-partition, lem-hook-product-change-under-corner-removal, prop-polynomial-degree-laws-over-a-commutative-ring, thm-root-bound-for-polynomials-over-a-domain]

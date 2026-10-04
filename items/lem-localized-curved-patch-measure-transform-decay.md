@@ -2,7 +2,7 @@
 id: lem-localized-curved-patch-measure-transform-decay
 kind: lemma
 title: Decay of a localized measure on a curved graph patch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

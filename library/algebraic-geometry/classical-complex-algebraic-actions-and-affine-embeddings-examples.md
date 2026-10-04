@@ -1,7 +1,7 @@
 ---
 page: classical-complex-algebraic-actions-and-affine-embeddings-examples
 title: "Classical Complex Algebraic Actions and Affine Embeddings — Examples"
-status: draft
+status: published
 requires: [classical-complex-algebraic-actions-and-affine-embeddings]
 items: []
 examples: [ex-torus-weights-and-affine-action,

@@ -2,7 +2,7 @@
 id: lem-collar-gluing-and-corner-smoothing-give-transitivity
 kind: lemma
 title: Collar gluing and seam smoothing give transitivity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

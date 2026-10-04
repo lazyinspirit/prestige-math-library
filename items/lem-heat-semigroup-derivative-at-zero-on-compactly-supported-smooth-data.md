@@ -2,7 +2,7 @@
 id: lem-heat-semigroup-derivative-at-zero-on-compactly-supported-smooth-data
 kind: lemma
 title: "Heat generator at zero on compactly supported smooth data"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

@@ -2,7 +2,7 @@
 id: thm-normalization-glues-variety
 kind: theorem
 title: Normalization of a classical variety by gluing affine normalizations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 3

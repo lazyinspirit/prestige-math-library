@@ -2,7 +2,7 @@
 id: ex-heat-flow-of-an-indicator-function
 kind: example
 title: "The heat flow of an interval indicator is a difference of Gaussian tails"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

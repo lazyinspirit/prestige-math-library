@@ -2,7 +2,7 @@
 id: ex-the-pair-of-pants-is-a-cobordism-realizing-addition-of-circles
 kind: example
 title: The pair of pants is a cobordism realizing addition of circles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

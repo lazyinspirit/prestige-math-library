@@ -2,7 +2,7 @@
 id: lem-hilbert-noetherian-base-fixed-polarization
 kind: lemma
 title: "Fixed-polarization Hilbert construction over a Noetherian base"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

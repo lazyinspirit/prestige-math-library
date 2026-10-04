@@ -2,7 +2,7 @@
 id: lem-a-standard-stem-arc-system-can-be-straightened-by-boundary-and-puncture-fixed-ambient-isotopy
 kind: lemma
 title: "A standard stem arc system can be straightened by a boundary- and puncture-fixed ambient isotopy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 3

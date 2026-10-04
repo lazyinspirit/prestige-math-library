@@ -2,7 +2,7 @@
 id: thm-singular-inner-function-properties
 kind: theorem
 title: "Properties of the singular functions $S_\\mu$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-poisson-integral-of-a-singular-circle-measure-has-zero-nontangential-limit, def-inner-singular-inner-and-outer-functions, def-poisson-kernel-on-the-disc, lem-poisson-kernel-properties-on-the-disc, def-poisson-integral-of-finite-boundary-measure, thm-fatou-nontangential-boundary-theorem-harmonic, lem-bounded-holomorphic-disc-functions-have-fatou-limits-under-countable-choice, thm-complex-power-series-converge-locally-uniformly, def-measure-concentrated-on-a-measurable-set, def-the-one-dimensional-torus-and-normalized-haar-integral, def-countable-choice, thm-local-maximum-modulus-principle, lem-finite-positive-circle-measures-have-lebesgue-decomposition-under-countable-choice, cor-second-countable-lch-locally-finite-borel-measures-are-regular, def-circle-maximal-function-and-nontangential-region, thm-dominated-convergence, def-complex-exponential]

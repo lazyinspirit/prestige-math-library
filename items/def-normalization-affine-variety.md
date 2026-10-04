@@ -2,7 +2,7 @@
 id: def-normalization-affine-variety
 kind: definition
 title: The normalization of an irreducible affine variety
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 1

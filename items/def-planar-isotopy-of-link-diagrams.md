@@ -2,7 +2,7 @@
 id: def-planar-isotopy-of-link-diagrams
 kind: definition
 title: "Planar isotopy of link diagrams"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-regular-oriented-link-diagram,

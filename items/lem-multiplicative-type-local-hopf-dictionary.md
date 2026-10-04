@@ -2,7 +2,7 @@
 id: lem-multiplicative-type-local-hopf-dictionary
 kind: lemma
 title: "The affine Hopf dictionary used for multiplicative type"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-block-projection-preserves-projectives
 kind: lemma
 title: "Exact projections onto linkage blocks preserve projectives"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

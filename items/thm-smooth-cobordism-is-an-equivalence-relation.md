@@ -2,7 +2,7 @@
 id: thm-smooth-cobordism-is-an-equivalence-relation
 kind: theorem
 title: Smooth cobordism is an equivalence relation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

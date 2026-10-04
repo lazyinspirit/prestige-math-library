@@ -2,7 +2,7 @@
 id: rem-the-general-fourier-restriction-problem
 kind: remark
 title: The general Fourier restriction problem remains open
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

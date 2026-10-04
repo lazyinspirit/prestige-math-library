@@ -1,7 +1,7 @@
 ---
 page: "fourier-restriction-and-the-stein-tomas-theorem-examples"
 title: "Fourier Restriction and the Stein–Tomas Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: ["cex-fourier-restriction-is-not-defined-on-lp-equivalence-classes-pointwise",
            "ex-knapp-cap-and-tube-volume-calculation",

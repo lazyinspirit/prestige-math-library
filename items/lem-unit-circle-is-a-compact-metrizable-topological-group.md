@@ -51,7 +51,7 @@ sources:
   - title: "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35 (printed pp. 134-140)"
     url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
     locator: "Section 34 introduction, printed pp. 134-135: modulus-one characters; Section 34D, printed pp. 137-138: pointwise group operations."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

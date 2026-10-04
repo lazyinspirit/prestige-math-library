@@ -2,7 +2,7 @@
 id: lem-single-wall-tensor-weight-exclusion
 kind: lemma
 title: "The single-wall tensor-weight exclusion lemma"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-central-characters-are-dot-weyl-orbits

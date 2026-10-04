@@ -2,7 +2,7 @@
 id: thm-separation-of-regular-curve-components-by-point-blowups
 kind: theorem
 title: Separation of finitely many curve components by point blowups
-status: draft
+status: published
 origin: pipeline
 deps: [lem-intersection-multiplicity-drop-under-point-blowup, lem-regularization-of-curve-on-noetherian-ambient-by-point-blowups, def-intersection-multiplicity-of-closed-subschemes, def-strict-transform-closed-subscheme, def-blowup-scheme-along-ideal, def-axiom-of-choice, thm-blowup-closed-immersion-transform-universal, def-integral-scheme, def-locally-noetherian-and-noetherian-scheme, def-dimension-noetherian-topological-space, lem-normalization-factors-through-blowup-of-curve-point, lem-point-blowup-of-integral-curve-is-finite]
 provenance:

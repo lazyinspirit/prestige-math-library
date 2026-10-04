@@ -2,7 +2,7 @@
 id: lem-maximal-dyadic-cubes-at-height-lambda
 kind: lemma
 title: "Maximal dyadic cubes above a level"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable, def-dyadic-cube-in-rn-all-generations, def-l-one-of-a-measure, def-nonnegative-extended-series, lem-dyadic-cubes-all-generations-partition-and-nesting, lem-subset-of-countable, def-countable-choice]

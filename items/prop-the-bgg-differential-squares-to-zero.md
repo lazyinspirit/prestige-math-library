@@ -2,7 +2,7 @@
 id: prop-the-bgg-differential-squares-to-zero
 kind: proposition
 title: The BGG differential squares to zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-bgg-differential-from-signed-verma-maps, lem-bruhat-rank-two-intervals-are-diamonds, lem-compatible-signs-exist-on-the-bruhat-graph, lem-bruhat-covers-give-unique-verma-embeddings, def-bgg-bruhat-verma-sum-in-degree-k, def-chain-complex-in-an-abelian-category, def-axiom-of-choice, thm-verma-module-has-a-unique-simple-quotient]

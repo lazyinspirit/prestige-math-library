@@ -2,7 +2,7 @@
 id: rem-normalization-not-resolution-higher-dimension
 kind: remark
 title: Normalization need not resolve singularities in dimension at least two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 3

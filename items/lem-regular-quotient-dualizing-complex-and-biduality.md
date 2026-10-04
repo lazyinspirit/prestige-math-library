@@ -2,7 +2,7 @@
 id: lem-regular-quotient-dualizing-complex-and-biduality
 kind: lemma
 title: "Dualizing complexes and coherent biduality for regular-ring quotients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-axiom-of-choice", "def-dualizing-complex-on-projective-cm-scheme", "lem-finite-closed-immersion-derived-coinduction-adjunction", "thm-localisation-and-polynomial-extension-of-regular-rings", "lem-global-dimension-is-detected-on-cyclic-modules"]

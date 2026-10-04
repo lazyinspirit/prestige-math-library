@@ -1,7 +1,7 @@
 ---
 page: analytic-hardy-spaces-and-canonical-factorisation
 title: "Analytic Hardy Spaces and Canonical Factorisation"
-status: draft
+status: published
 category: complex-analysis
 requires: [the-argument-principle-and-rouche, infinite-products-and-weierstrass-factorisation, the-radon-nikodym-theorem-and-lebesgue-decomposition, complex-lp-spaces-and-test-function-conventions, orthonormal-bases-parseval-and-fourier-series, harmonic-hardy-classes-and-fatou-boundary-limits, probability-spaces-random-variables-and-expectation]
 items:

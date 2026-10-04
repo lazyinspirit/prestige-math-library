@@ -2,7 +2,7 @@
 id: thm-markovs-closed-braid-equivalence-theorem
 kind: theorem
 title: "Markov's theorem for braid closures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-oriented-reidemeister-equivalence-theorem,

@@ -2,7 +2,7 @@
 id: ex-the-full-twist-acts-by-boundary-conjugation
 kind: example
 title: "The full twist acts by boundary conjugation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 6

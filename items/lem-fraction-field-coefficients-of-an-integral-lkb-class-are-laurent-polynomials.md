@@ -2,7 +2,7 @@
 id: lem-fraction-field-coefficients-of-an-integral-lkb-class-are-laurent-polynomials
 kind: lemma
 title: Fraction-field coefficients of an integral LKB class are Laurent polynomials
-status: draft
+status: published
 origin: pipeline
 deps: [lem-lkb-lifted-absolute-cellular-boundary-and-fraction-field-rank, lem-lkb-deleting-the-last-puncture-gives-a-saturated-absolute-homology-inclusion, lem-closed-lkb-basis-surfaces-have-the-three-required-topological-types-and-factors, lem-the-fork-noodle-pairing-is-well-defined-and-equivariant, lem-int-cancellation, cor-polynomial-ring-over-a-domain-is-a-domain, def-multiplicative-subset-and-localisation]
 justified_by: []

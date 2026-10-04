@@ -2,7 +2,7 @@
 id: lem-nonaffine-ample-line-bundle-field-descent
 kind: lemma
 title: "Ampleness of a given line bundle descends under field extension"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-serre-criterion-ampleness, lem-nonaffine-global-sections-flat-field-base-change, thm-faithfully-flat-descent-vanishing]
 provenance:

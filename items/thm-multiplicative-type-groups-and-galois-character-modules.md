@@ -2,7 +2,7 @@
 id: thm-multiplicative-type-groups-and-galois-character-modules
 kind: theorem
 title: "Multiplicative type groups and Galois character modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

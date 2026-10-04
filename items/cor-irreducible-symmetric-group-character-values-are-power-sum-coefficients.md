@@ -2,7 +2,7 @@
 id: cor-irreducible-symmetric-group-character-values-are-power-sum-coefficients
 kind: corollary
 title: "Irreducible symmetric-group character values are power-sum coefficients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

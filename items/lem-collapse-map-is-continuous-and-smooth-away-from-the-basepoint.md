@@ -2,7 +2,7 @@
 id: lem-collapse-map-is-continuous-and-smooth-away-from-the-basepoint
 kind: lemma
 title: "Continuity and smooth local representatives of collapse"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-pontryagin-thom-collapse-of-an-embedded-submanifold", "lem-continuity-is-local-and-pastes"]

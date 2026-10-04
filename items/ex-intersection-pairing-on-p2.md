@@ -2,7 +2,7 @@
 id: ex-intersection-pairing-on-p2
 kind: example
 title: "The intersection pairing on the projective plane"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

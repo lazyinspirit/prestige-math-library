@@ -2,7 +2,7 @@
 id: def-intersection-multiplicity-of-closed-subschemes
 kind: definition
 title: Intersection multiplicity of closed subschemes at a point
-status: draft
+status: published
 origin: pipeline
 deps: [def-locally-noetherian-and-noetherian-scheme, def-composition-series-and-length-of-a-module, def-local-ring, def-dimension-noetherian-topological-space, def-noetherian-module, def-scheme-theoretic-fibre, thm-nilradical-of-a-noetherian-ring-is-nilpotent, cor-length-is-additive-in-short-exact-sequences, def-noetherian-ring-and-module, def-integral-scheme]
 provenance:

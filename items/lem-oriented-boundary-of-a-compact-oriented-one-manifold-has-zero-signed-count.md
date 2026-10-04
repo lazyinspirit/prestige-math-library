@@ -2,7 +2,7 @@
 id: lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count
 kind: lemma
 title: "Oriented boundary counts of a compact oriented 1-manifold cancel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-boundary-of-a-compact-one-manifold-has-even-cardinality, def-induced-boundary-orientation, prop-boundary-orientation-is-independent-of-the-outward-vector-field, def-oriented-smooth-manifold-and-oriented-chart, def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space, def-countable-choice]

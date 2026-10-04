@@ -2,7 +2,7 @@
 id: lem-projective-pure-cm-dualizing-complex-concentration
 kind: lemma
 title: "Concentration of the projective dualizing complex on a pure CM scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-axiom-of-choice", "def-dualizing-complex-on-projective-cm-scheme", "lem-projective-embedding-dualizing-complex-existence", "lem-projective-dualizing-complex-trace-and-embedding-independence", "lem-cm-quotient-of-regular-local-ring-ext-concentration", "lem-affine-local-dimension-residue-transcendence", "thm-coherent-sheaves-abelian-noetherian-scheme", "thm-auslander-buchsbaum-formula", "cor-cohen-macaulayness-localises", "cor-depth-of-a-finite-local-module-at-most-its-dimension", "lem-finite-type-jacobson-residue-extension"]

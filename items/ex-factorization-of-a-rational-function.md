@@ -2,7 +2,7 @@
 id: ex-factorization-of-a-rational-function
 kind: example
 title: "Inner-outer factorization of a rational function with one interior zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-inner-outer-factorisation-hardy-space, def-inner-singular-inner-and-outer-functions, def-blaschke-product, thm-blaschke-product-boundary-values-and-zeros, lem-outer-function-properties, ex-outer-function-with-prescribed-boundary-modulus, def-unit-disc-upper-half-plane-and-blaschke-factor, thm-complex-polynomials-and-rational-functions-are-holomorphic, lem-complex-conjugation-and-modulus-laws, def-countable-choice]

@@ -2,7 +2,7 @@
 id: ex-blowup-ideal-power-same-proj
 kind: example
 title: "Blowing up I and I^2 give the same scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

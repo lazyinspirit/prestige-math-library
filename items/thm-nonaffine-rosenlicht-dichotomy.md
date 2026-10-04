@@ -2,7 +2,7 @@
 id: thm-nonaffine-rosenlicht-dichotomy
 kind: theorem
 title: "Rosenlicht dichotomy for smooth connected algebraic groups"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-dimension-nonempty-open-subset, thm-krull-principal-ideal-theorem, lem-proper-geometrically-integral-affine-scheme-is-point, def-axiom-of-choice, def-abelian-variety-over-a-field, prop-abelian-variety-commutativity-from-rigidity, lem-nonaffine-normal-completion-smooth-locus-antiaffine, lem-nonaffine-divisorial-valuation-restriction-model, lem-nonaffine-rational-action-composition-domain, lem-nonaffine-rational-fixed-point-affineness, thm-valuative-criterion-properness, thm-height-one-localisation-of-normal-noetherian-domain-is-dvr, thm-equivalent-characterisations-of-a-dvr, thm-integral-closure-finite-finite-type-domain-over-field, lem-finite-normalization-compatible-with-principal-opens, thm-projective-space-proper-over-base, thm-fibre-dimension-lower-bound, thm-chevalley-constructible-image-varieties, lem-constructible-dense-contains-open, thm-nonempty-regular-locus-reduced-variety-perfect-field, thm-regular-equals-smooth-over-perfect-field, cor-weak-nullstellensatz-algebraically-closed-coordinate-form]
 provenance:

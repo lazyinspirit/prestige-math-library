@@ -2,7 +2,7 @@
 id: thm-normalization-finite-birational-surjective
 kind: theorem
 title: Normalization is finite, surjective and birational
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 2

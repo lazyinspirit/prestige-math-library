@@ -2,7 +2,7 @@
 id: lem-extremal-fork-noodle-terms-have-one-sign-and-cannot-cancel
 kind: lemma
 title: Extremal fork-noodle terms have one sign and cannot cancel
-status: draft
+status: published
 origin: pipeline
 deps: [def-lexicographic-order-on-fork-noodle-deck-monomials, lem-the-fork-noodle-pairing-is-well-defined-and-equivariant, lem-arcs-in-a-punctured-disk-have-disjointness-detecting-minimal-positions, def-axiom-of-choice, lem-jordan-schoenflies-extension-for-plane-curves]
 justified_by: []

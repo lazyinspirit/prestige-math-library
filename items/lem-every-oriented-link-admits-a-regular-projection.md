@@ -2,7 +2,7 @@
 id: lem-every-oriented-link-admits-a-regular-projection
 kind: lemma
 title: "Existence of regular projections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-oriented-link-in-s-three-and-ambient-isotopy, def-regular-oriented-link-diagram,

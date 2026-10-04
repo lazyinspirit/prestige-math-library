@@ -2,7 +2,7 @@
 id: ex-a-fork-noodle-pairing-computation
 kind: example
 title: A fork-noodle pairing computation
-status: draft
+status: published
 origin: pipeline
 deps: [def-forks-noodles-and-their-lkb-intersection-pairing, def-lexicographic-order-on-fork-noodle-deck-monomials]
 justified_by: []

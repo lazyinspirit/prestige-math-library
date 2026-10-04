@@ -2,7 +2,7 @@
 id: "thm-coordinate-ring-of-affine-action-is-locally-finite"
 kind: "theorem"
 title: "The coordinate ring of an affine algebraic action is a locally finite rational module"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["prop-affine-algebraic-actions-coordinate-ring-coaction", "lem-complex-affine-group-comodule-local-finiteness", "def-rational-action-on-affine-variety", "def-axiom-of-choice"]
 provenance: {"statement": "literature-derived", "proof": "ai-altered"}

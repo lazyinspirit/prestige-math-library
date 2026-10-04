@@ -2,7 +2,7 @@
 id: lem-boundary-of-a-compact-one-manifold-has-even-cardinality
 kind: lemma
 title: "Boundary of a compact 1-manifold has even cardinality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-overlap-of-arc-length-parametrizations-of-a-one-manifold, thm-every-smooth-manifold-admits-a-riemannian-metric, def-riemannian-metric-and-riemannian-manifold, prop-components-of-a-topological-manifold-are-open-and-at-most-countable, thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold, thm-euclidean-inverse-function-theorem, def-interval, def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary, def-compact-space, def-countable-choice]

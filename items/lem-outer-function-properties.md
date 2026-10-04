@@ -2,7 +2,7 @@
 id: lem-outer-function-properties
 kind: lemma
 title: "Properties of outer functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable-choice, def-nevanlinna-class-on-the-disc, def-inner-singular-inner-and-outer-functions, def-analytic-hardy-space-disc, def-poisson-integral-of-finite-boundary-measure, def-poisson-kernel-on-the-disc, lem-poisson-kernel-properties-on-the-disc, thm-jensen-inequality-for-expectation, thm-jensens-integral-inequality, thm-complex-power-series-converge-locally-uniformly, thm-holomorphic-if-and-only-if-analytic, thm-fatou-nontangential-boundary-theorem-harmonic, thm-nevanlinna-boundary-values-and-log-integrability, thm-complex-holder-minkowski-and-the-quotient-norm, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-local-maximum-modulus-principle, def-the-one-dimensional-torus-and-normalized-haar-integral, def-complex-exponential, lem-complex-conjugation-and-modulus-laws, thm-complex-exponential-is-entire-with-derivative-itself, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]

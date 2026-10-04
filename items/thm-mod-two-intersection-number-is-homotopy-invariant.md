@@ -2,7 +2,7 @@
 id: thm-mod-two-intersection-number-is-homotopy-invariant
 kind: theorem
 title: "The mod 2 intersection number is homotopy invariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-transverse-complementary-dimensional-intersection-set, lem-compact-transverse-complementary-intersections-are-finite, def-mod-two-intersection-number, lem-boundary-of-a-compact-one-manifold-has-even-cardinality, thm-transverse-preimage-for-manifolds-with-boundary, def-smooth-family-of-maps-and-evaluation-map, prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure, thm-transversality-homotopy-theorem, thm-relative-whitney-approximation-for-manifold-valued-maps, def-countable-choice, def-integers-modulo-n, lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family, thm-parametric-transversality]

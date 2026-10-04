@@ -2,7 +2,7 @@
 id: ex-first-fourier-coefficients-of-e4-e6-delta-and-j
 kind: example
 title: "The first Fourier coefficients of E4, E6, Delta and j"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-eisenstein-series-are-modular-forms

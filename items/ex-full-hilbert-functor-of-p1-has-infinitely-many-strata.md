@@ -2,7 +2,7 @@
 id: ex-full-hilbert-functor-of-p1-has-infinitely-many-strata
 kind: example
 title: "The full Hilbert functor need not be quasi-compact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

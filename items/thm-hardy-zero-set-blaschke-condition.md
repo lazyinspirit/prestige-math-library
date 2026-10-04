@@ -2,7 +2,7 @@
 id: thm-hardy-zero-set-blaschke-condition
 kind: theorem
 title: "The zero set of a Hardy function satisfies the Blaschke condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-analytic-hardy-space-disc, lem-hardy-radial-means-are-monotone, thm-jensen-formula-on-a-disc, thm-jensens-integral-inequality, thm-jensen-inequality-for-expectation, thm-identity-theorem-holomorphic-functions, thm-taylor-expansion-holomorphic-function, thm-removable-singularity-characterizations, def-complex-differentiability-holomorphic-and-entire, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-monotone-convergence-for-the-integral]

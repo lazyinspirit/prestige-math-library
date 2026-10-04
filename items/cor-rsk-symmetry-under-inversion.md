@@ -2,7 +2,7 @@
 id: cor-rsk-symmetry-under-inversion
 kind: corollary
 title: RSK interchanges the insertion and recording tableaux under inversion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-finite-symmetric-group-and-permutation-notation, def-young-tableau-standard-tableau-and-shape, thm-robinson-schensted-correspondence, thm-rsk-correspondence-for-two-line-arrays]

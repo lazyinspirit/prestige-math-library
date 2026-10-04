@@ -39,7 +39,7 @@ sources:
       1953, Chapter VII, Sections 34-35 (printed pp. 134-140)
     url: https://people.math.harvard.edu/~shlomo/212a/loomis.pdf
     locator: "Sections 34C-34D give the dual-topology background; closedness in the pointwise product and the equicontinuity argument are proved here."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

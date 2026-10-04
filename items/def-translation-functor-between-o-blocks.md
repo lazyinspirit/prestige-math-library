@@ -2,7 +2,7 @@
 id: def-translation-functor-between-o-blocks
 kind: definition
 title: "Translation functors by tensoring and projection"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-central-characters-are-dot-weyl-orbits

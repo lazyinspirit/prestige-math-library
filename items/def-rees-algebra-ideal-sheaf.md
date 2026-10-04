@@ -2,7 +2,7 @@
 id: def-rees-algebra-ideal-sheaf
 kind: definition
 title: "Rees algebra sheaf of a finite type ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

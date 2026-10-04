@@ -2,7 +2,7 @@
 id: thm-abelian-variety-is-projective
 kind: theorem
 title: "Every abelian variety over a field is projective"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, lem-nonaffine-smooth-connected-group-has-ample-line-bundle, thm-ample-powers-very-ample-proper-base]
 provenance:

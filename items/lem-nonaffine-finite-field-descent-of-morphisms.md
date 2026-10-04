@@ -2,7 +2,7 @@
 id: lem-nonaffine-finite-field-descent-of-morphisms
 kind: lemma
 title: "Morphisms descend under a finite field extension with the full descent identity"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-affine-fibre-product-tensor-ring, thm-morphisms-into-affine-scheme-global-sections]
 provenance:

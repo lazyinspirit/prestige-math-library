@@ -2,7 +2,7 @@
 id: def-standard-meridians-of-a-punctured-disk
 kind: definition
 title: "Standard meridians of a punctured disk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-based-homotopies-transverse-to-the-zero-section-give-normal-cobordisms
 kind: lemma
 title: "Transverse based homotopies give normal cobordisms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["prop-transverse-preimage-carries-a-pulled-back-normal-structure", "thm-relative-whitney-approximation-for-manifold-valued-maps", "thm-relative-whitney-approximation-for-euclidean-valued-maps", "lem-manifold-bump-for-a-compact-set-inside-an-open-set", "lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family", "thm-parametric-transversality", "prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold", "lem-continuity-is-local-and-pastes", "thm-weak-whitney-proper-embedding-theorem", "cor-a-closed-euclidean-submanifold-has-a-smooth-neighbourhood-retraction", "def-axiom-of-choice"]

@@ -2,7 +2,7 @@
 id: thm-half-space-lift-by-normal-mollification
 kind: theorem
 title: "A bounded right inverse of the half-space trace by normal mollification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-mean-zero-kernel-scale-estimate, lem-smooth-compactly-supported-functions-are-dense-in-slobodeckij-spaces, thm-trace-estimate-on-the-half-space, lem-sobolev-trace-agrees-with-continuous-boundary-values, def-fractional-slobodeckij-space-on-euclidean-space, thm-sobolev-spaces-are-banach-spaces, thm-completion-universal-property-for-bounded-linear-maps, lem-complex-translation-and-approximate-identity-interfaces, def-countable-choice, def-axiom-of-choice]

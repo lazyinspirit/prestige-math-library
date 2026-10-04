@@ -2,7 +2,7 @@
 id: lem-heat-kernel-semigroup-identity
 kind: lemma
 title: "The heat kernel semigroup identity $\\Gamma_t*\\Gamma_s=\\Gamma_{t+s}$"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-convolution-of-two-functions-on-rn

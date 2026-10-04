@@ -39,7 +39,7 @@ sources:
       1953, Chapter VII, Sections 34-35 (printed pp. 134-140)
     url: https://people.math.harvard.edu/~shlomo/212a/loomis.pdf
     locator: "Section 35E, printed p. 140: the dual of the integer group is the circle."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

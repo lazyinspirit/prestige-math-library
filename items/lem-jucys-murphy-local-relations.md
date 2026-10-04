@@ -2,7 +2,7 @@
 id: lem-jucys-murphy-local-relations
 kind: lemma
 title: "Local relations between the Jucys-Murphy elements and adjacent transpositions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-jucys-murphy-elements-of-the-symmetric-group-algebra, thm-the-symmetric-group-has-the-coxeter-presentation, lem-conjugating-a-cycle-relabels-its-entries]

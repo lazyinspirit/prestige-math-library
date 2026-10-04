@@ -2,7 +2,7 @@
 id: lem-van-der-corput-oscillatory-integral-estimate
 kind: lemma
 title: Van der Corput oscillatory integral estimates in one dimension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

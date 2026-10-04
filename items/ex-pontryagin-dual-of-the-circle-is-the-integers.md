@@ -45,7 +45,7 @@ sources:
       1953, Chapter VII, Sections 34-35 (printed pp. 134-140)
     url: https://people.math.harvard.edu/~shlomo/212a/loomis.pdf
     locator: "Section 35D, printed p. 140: the dual of the quotient circle is the integer group."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

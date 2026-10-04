@@ -2,7 +2,7 @@
 id: cex-fibrewise-subschemes-without-flatness-do-not-form-a-hilbert-family
 kind: counterexample
 title: "Constant fibre polynomial does not give flatness over a nonreduced base"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

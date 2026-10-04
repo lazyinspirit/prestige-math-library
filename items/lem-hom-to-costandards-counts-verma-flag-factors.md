@@ -2,7 +2,7 @@
 id: lem-hom-to-costandards-counts-verma-flag-factors
 kind: lemma
 title: Hom to costandards counts Verma-flag factors
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

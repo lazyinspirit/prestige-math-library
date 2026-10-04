@@ -2,7 +2,7 @@
 id: ex-strict-transform-node-separates-branches
 kind: example
 title: "First blowup of the node y^2=x^3+x^2 separates its branches"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

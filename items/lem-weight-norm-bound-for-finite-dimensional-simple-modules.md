@@ -2,7 +2,7 @@
 id: lem-weight-norm-bound-for-finite-dimensional-simple-modules
 kind: lemma
 title: Weights of a finite-dimensional simple module lie in the norm ball
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

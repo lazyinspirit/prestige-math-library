@@ -2,7 +2,7 @@
 id: lem-a-based-self-map-of-the-punctured-disk-inducing-the-identity-on-pi-one-is-based-homotopic-to-the-identity
 kind: lemma
 title: "A based self-map of the punctured disk inducing the identity on the fundamental group is based-homotopic to the identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 2

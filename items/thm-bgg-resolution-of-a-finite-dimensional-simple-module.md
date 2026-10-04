@@ -2,7 +2,7 @@
 id: thm-bgg-resolution-of-a-finite-dimensional-simple-module
 kind: theorem
 title: The BGG resolution of a finite-dimensional simple module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [prop-the-bgg-differential-squares-to-zero, lem-the-bgg-augmentation-has-image-the-simple-module, lem-dimension-of-the-kernel-modulo-n-minus-equals-the-next-term, lem-n-minus-coinvariants-map-injectively-into-the-kernel-of-the-differential, lem-surjectivity-modulo-n-minus-for-free-weight-generated-modules, def-bgg-differential-from-signed-verma-maps, def-bgg-bruhat-verma-sum-in-degree-k, def-axiom-of-choice, thm-pbw-model-of-a-verma-module, lem-positive-root-pairings-of-a-dominant-integral-weight, def-bgg-category-o, lem-finite-weyl-strong-exchange-and-deletion]

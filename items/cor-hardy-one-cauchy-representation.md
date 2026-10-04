@@ -2,7 +2,7 @@
 id: cor-hardy-one-cauchy-representation
 kind: corollary
 title: "Cauchy representation of an $H^1$ function from its boundary values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-complex-circle-measures-have-finite-total-variation-under-countable-choice, def-countable-choice, thm-fatou-boundary-theorem-analytic-hardy-spaces, lem-finite-complex-circle-measures-are-determined-by-fourier-coefficients, thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation, thm-cauchy-integral-formula-circle, def-analytic-hardy-space-disc, def-the-one-dimensional-torus-and-normalized-haar-integral, def-poisson-integral-of-finite-boundary-measure]

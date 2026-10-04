@@ -2,7 +2,7 @@
 id: lem-free-homotopy-classes-of-loops-are-conjugacy-classes
 kind: lemma
 title: "Free homotopy classes of loops are conjugacy classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-based-loops-and-fundamental-group, def-conjugacy-class-and-centralizer,

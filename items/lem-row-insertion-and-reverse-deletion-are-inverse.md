@@ -2,7 +2,7 @@
 id: lem-row-insertion-and-reverse-deletion-are-inverse
 kind: lemma
 title: Row insertion and reverse deletion are inverse
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-partition-young-diagram-and-conjugate-partition, def-reverse-row-deletion, def-row-insertion-and-bumping-route, def-young-tableau-standard-tableau-and-shape, lem-row-bumping-route-monotonicity]

@@ -2,7 +2,7 @@
 id: def-fractional-sobolev-space-on-a-compact-c-one-boundary
 kind: definition
 title: "The fractional Sobolev space on a compact $C^1$ boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-fractional-slobodeckij-space-on-euclidean-space, def-bounded-c-one-domain-boundary-charts-and-outward-normal, def-bounded-c-k-domain-and-boundary-charts, def-surface-integral-on-a-compact-c-one-hypersurface, lem-finite-ambient-partitions-for-euclidean-boundary-integration, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice]

@@ -2,7 +2,7 @@
 id: thm-heat-cauchy-solution-for-lp-data
 kind: theorem
 title: "The heat Cauchy problem for $L^p$ data"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

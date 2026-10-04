@@ -2,7 +2,7 @@
 id: def-bgg-differential-from-signed-verma-maps
 kind: definition
 title: The BGG differential from signed Verma maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-bgg-bruhat-verma-sum-in-degree-k, lem-bruhat-covers-give-unique-verma-embeddings, lem-compatible-signs-exist-on-the-bruhat-graph, thm-verma-module-has-a-unique-simple-quotient, def-chain-complex-in-an-abelian-category, def-axiom-of-choice]

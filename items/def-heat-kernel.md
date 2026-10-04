@@ -2,7 +2,7 @@
 id: def-heat-kernel
 kind: definition
 title: "The heat kernel on $\\mathbb{R}^n$ and its causal extension"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-exponential-reciprocal-and-positivity

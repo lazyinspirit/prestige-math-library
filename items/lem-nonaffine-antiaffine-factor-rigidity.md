@@ -2,7 +2,7 @@
 id: lem-nonaffine-antiaffine-factor-rigidity
 kind: lemma
 title: "Rigidity for an integral factor with only constant functions"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-nonaffine-global-sections-flat-field-base-change, thm-krull-intersection-theorem, thm-morphisms-into-affine-scheme-global-sections]
 provenance:

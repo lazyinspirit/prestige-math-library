@@ -2,7 +2,7 @@
 id: ex-blaschke-product-with-zeros-accumulating-at-one
 kind: example
 title: "An infinite Blaschke product whose zeros accumulate at the boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-blaschke-product, thm-blaschke-product-boundary-values-and-zeros, thm-hardy-zero-set-blaschke-condition, thm-p-series-rational, def-analytic-hardy-space-disc, lem-hardy-radial-means-are-monotone, thm-dominated-convergence, def-the-one-dimensional-torus-and-normalized-haar-integral]

@@ -28,7 +28,7 @@ sources:
   - title: David A. Vogan, Review of Harmonic Analysis on Compact Groups (MIT lecture notes, 12 pp.)
     url: https://math.mit.edu/~dav/compactrev.pdf
     locator: §2.11 and (2.12), printed pp. 7–8
-status: draft
+status: published
 origin: pipeline
 ---
 ## Definition

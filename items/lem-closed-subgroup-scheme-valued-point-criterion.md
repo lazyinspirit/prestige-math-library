@@ -24,7 +24,7 @@ sources:
   - title: The Stacks Project, complete Groupoid Schemes chapter
     url: https://stacks.math.columbia.edu/download/groupoids.pdf
     locator: §4 Definitions4.1/4.3/4.5 and Lemmas4.2/4.4, tags022S/022T/047D/0G8L/047E, printed pp.4–5; full statement/proof text read.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

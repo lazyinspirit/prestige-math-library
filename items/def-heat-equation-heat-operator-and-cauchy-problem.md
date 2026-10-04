@@ -2,7 +2,7 @@
 id: def-heat-equation-heat-operator-and-cauchy-problem
 kind: definition
 title: "The heat operator, the heat equation, and the Cauchy problem"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-ck-and-multi-index-notation-in-several-variables

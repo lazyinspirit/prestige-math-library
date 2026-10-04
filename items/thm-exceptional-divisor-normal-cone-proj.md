@@ -2,7 +2,7 @@
 id: thm-exceptional-divisor-normal-cone-proj
 kind: theorem
 title: "The exceptional divisor is the projectivized normal cone"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

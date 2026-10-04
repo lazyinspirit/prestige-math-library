@@ -2,7 +2,7 @@
 id: lem-closed-immersion-projection-formula-invertible
 kind: lemma
 title: "Projection formula for a closed immersion and an invertible sheaf"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

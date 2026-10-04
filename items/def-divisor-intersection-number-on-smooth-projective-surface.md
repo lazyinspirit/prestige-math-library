@@ -2,7 +2,7 @@
 id: def-divisor-intersection-number-on-smooth-projective-surface
 kind: definition
 title: "Intersection numbers of Cartier divisors on a smooth projective surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

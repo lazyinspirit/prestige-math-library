@@ -2,7 +2,7 @@
 id: lem-blowup-independent-ideal-generators
 kind: lemma
 title: "The blowup is independent of chosen ideal generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: def-conductor-normalization
 kind: definition
 title: The conductor of a normalization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 4

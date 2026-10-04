@@ -2,7 +2,7 @@
 id: lem-nonaffine-affine-group-faithful-representation
 kind: lemma
 title: "Affine finite-type group schemes have faithful finite-dimensional representations"
-status: draft
+status: published
 origin: pipeline
 deps: [def-abelian-variety-over-a-field]
 provenance:

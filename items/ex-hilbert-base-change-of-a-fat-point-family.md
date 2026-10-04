@@ -2,7 +2,7 @@
 id: ex-hilbert-base-change-of-a-fat-point-family
 kind: example
 title: "A flat fat-point family and its base changes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

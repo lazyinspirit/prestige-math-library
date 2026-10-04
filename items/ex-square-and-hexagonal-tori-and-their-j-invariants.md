@@ -2,7 +2,7 @@
 id: ex-square-and-hexagonal-tori-and-their-j-invariants
 kind: example
 title: "The square and hexagonal tori have j-invariants 1728 and 0"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-j-invariant-classifies-complex-tori

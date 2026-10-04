@@ -2,7 +2,7 @@
 id: cex-a-linear-representation-need-not-be-faithful
 kind: counterexample
 title: A linear representation need not be faithful
-status: draft
+status: published
 origin: pipeline
 deps: [cor-every-classical-braid-group-is-linear, def-braid-group-by-the-artin-presentation]
 justified_by: []

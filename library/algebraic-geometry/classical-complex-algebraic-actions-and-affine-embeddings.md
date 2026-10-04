@@ -1,7 +1,7 @@
 ---
 page: classical-complex-algebraic-actions-and-affine-embeddings
 title: "Classical Complex Algebraic Actions and Affine Embeddings"
-status: draft
+status: published
 requires: [classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface,
            dimension-constructible-images-and-dimensions-of-fibres]
 items: [lem-classical-affine-algebraic-set-product-coordinate-ring,

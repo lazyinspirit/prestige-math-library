@@ -1,7 +1,7 @@
 ---
 page: the-artin-action-on-a-free-group-examples
 title: "The Artin Action on a Free Group — Examples"
-status: draft
+status: published
 requires: [the-artin-action-on-a-free-group]
 items: []
 examples: [ex-the-artin-action-of-the-b-three-generators,

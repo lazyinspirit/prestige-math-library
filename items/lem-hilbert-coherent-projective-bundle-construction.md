@@ -2,7 +2,7 @@
 id: lem-hilbert-coherent-projective-bundle-construction
 kind: lemma
 title: "Global Hilbert strata in a coherent projective bundle over a locally Noetherian base"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

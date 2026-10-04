@@ -2,7 +2,7 @@
 id: cex-different-unstabilized-normal-bundles-can-have-nonisomorphic-thom-data
 kind: counterexample
 title: "Embedding-dependent unstable normal Thom data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-stable-normal-bundle-of-a-compact-smooth-manifold", "thm-stable-normal-bundle-is-independent-of-the-embedding", "prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product"]

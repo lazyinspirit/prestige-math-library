@@ -2,7 +2,7 @@
 id: def-reducing-arc-and-yamada-vogel-reducing-move
 kind: definition
 title: "Defect regions, reducing arcs and the Yamada-Vogel reducing move"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-coherence-of-seifert-circles-and-the-height-of-a-diagram,

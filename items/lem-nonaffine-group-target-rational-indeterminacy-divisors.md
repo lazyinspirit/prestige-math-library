@@ -2,7 +2,7 @@
 id: lem-nonaffine-group-target-rational-indeterminacy-divisors
 kind: lemma
 title: "Indeterminacy of a rational map to a group is divisorial"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, thm-nonaffine-regular-local-ring-is-ufd, cor-weak-nullstellensatz-algebraically-closed-coordinate-form, def-rational-map-integral-schemes]
 provenance:

@@ -2,7 +2,7 @@
 id: thm-nonaffine-group-scheme-normal-subgroup-quotient
 kind: theorem
 title: "Normal subgroup quotients of finite-type group schemes exist as fppf scheme quotients"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, thm-nonaffine-generic-scheme-quotient-flat-equivalence-relation, lem-nonaffine-finite-field-descent-scheme-with-affine-orbits, lem-nonaffine-finite-relation-saturated-affine-neighbourhood, thm-nonaffine-finite-flat-affine-equivalence-quotient, lem-nonaffine-fppf-descent-of-scheme-morphisms, lem-nonaffine-affine-and-finite-morphism-fppf-descent, thm-faithfully-flat-descent-of-flatness, thm-nonempty-regular-locus-reduced-variety-perfect-field, thm-regular-equals-smooth-over-perfect-field, thm-smooth-locus-open, lem-ag-geometric-regularity-field-tests, thm-existence-of-algebraic-closures, cor-weak-nullstellensatz-algebraically-closed-coordinate-form, thm-ag-standard-smooth-geometric-regularity]
 provenance:

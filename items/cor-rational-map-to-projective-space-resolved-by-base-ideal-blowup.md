@@ -2,7 +2,7 @@
 id: cor-rational-map-to-projective-space-resolved-by-base-ideal-blowup
 kind: corollary
 title: "Blowing up the base ideal resolves a rational map to projective space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

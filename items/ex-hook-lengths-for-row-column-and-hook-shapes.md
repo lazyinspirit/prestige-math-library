@@ -2,7 +2,7 @@
 id: ex-hook-lengths-for-row-column-and-hook-shapes
 kind: example
 title: Hook lengths for one-row, one-column and hook shapes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-hook-arm-leg-and-hook-length, thm-hook-length-formula]

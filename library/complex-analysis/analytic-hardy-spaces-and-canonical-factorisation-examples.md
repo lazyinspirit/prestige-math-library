@@ -1,7 +1,7 @@
 ---
 page: analytic-hardy-spaces-and-canonical-factorisation-examples
 title: "Analytic Hardy Spaces and Canonical Factorisation: Examples and Counterexamples"
-status: draft
+status: published
 category: complex-analysis
 requires: [analytic-hardy-spaces-and-canonical-factorisation, mittag-leffler-and-runges-theorem]
 items: []

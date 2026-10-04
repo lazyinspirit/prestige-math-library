@@ -2,7 +2,7 @@
 id: thm-lp-to-lq-heat-kernel-estimate
 kind: theorem
 title: "$L^p$ to $L^q$ smoothing estimate for the heat flow"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

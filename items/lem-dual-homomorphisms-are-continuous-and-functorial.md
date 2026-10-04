@@ -48,7 +48,7 @@ sources:
     url: https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf
     locator: 'Appendix C.3, Theorem C.13: (G/H)^ is the annihilator of H under the
       dual of the quotient map.'
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

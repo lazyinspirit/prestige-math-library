@@ -2,7 +2,7 @@
 id: lem-affine-blowup-algebra-properties
 kind: lemma
 title: "Affine blowup algebras: normal form, nonzerodivisors, reducedness, domains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

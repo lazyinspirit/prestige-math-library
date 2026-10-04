@@ -2,7 +2,7 @@
 id: lem-nonaffine-finite-field-descent-scheme-with-affine-orbits
 kind: lemma
 title: "Finite field descent is effective for schemes with affine-contained descent orbits"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-nonaffine-finite-relation-quotient-with-affine-orbits, lem-nonaffine-fppf-descent-of-scheme-morphisms]
 provenance:

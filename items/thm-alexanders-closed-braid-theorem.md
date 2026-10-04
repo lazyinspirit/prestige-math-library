@@ -2,7 +2,7 @@
 id: thm-alexanders-closed-braid-theorem
 kind: theorem
 title: "Alexander's theorem: every link is a closed braid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-yamada-vogel-reducing-moves-lower-bad-seifert-circle-complexity,

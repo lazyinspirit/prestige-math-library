@@ -2,7 +2,7 @@
 id: def-continuous-galois-character-module
 kind: definition
 title: "Continuous Galois character modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-bruhat-rank-two-intervals-are-diamonds
 kind: lemma
 title: Bruhat intervals of rank two are diamonds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-bruhat-order-on-a-finite-weyl-group, lem-finite-weyl-strong-exchange-and-deletion, lem-finite-weyl-positive-roots-and-simple-reflections, lem-bruhat-covers-are-reflection-covers, def-finite-weyl-root-system-lattice-and-chamber-conventions]

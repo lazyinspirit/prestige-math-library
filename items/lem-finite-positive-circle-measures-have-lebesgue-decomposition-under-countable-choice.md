@@ -2,7 +2,7 @@
 id: lem-finite-positive-circle-measures-have-lebesgue-decomposition-under-countable-choice
 kind: lemma
 title: "Finite positive circle measures admit a Lebesgue decomposition under countable choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable-choice, def-the-one-dimensional-torus-and-normalized-haar-integral, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-riesz-representation-for-hilbert-space, cor-cauchy-schwarz-inequality-for-l-two, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-monotone-convergence-for-the-integral, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-restriction-of-a-measure, prop-restriction-is-a-measure, def-measure-concentrated-on-a-measurable-set]

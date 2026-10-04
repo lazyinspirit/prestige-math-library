@@ -2,7 +2,7 @@
 id: lem-nonaffine-pseudo-abelian-separable-field-extension
 kind: lemma
 title: "Pseudo-abelian varieties under separable algebraic extension"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, thm-nonaffine-maximal-smooth-connected-affine-normal-subgroup, lem-nonaffine-effective-affine-algebra-descent, lem-nonaffine-affine-and-finite-morphism-fppf-descent, lem-nonaffine-fppf-descent-of-scheme-morphisms, lem-ag-geometric-regularity-field-tests, thm-finite-galois-extension-characterizations, lem-nonaffine-connected-group-geometrically-connected, lem-trace-pairing-for-a-finite-separable-extension, thm-field-norm-and-trace-by-embeddings]
 provenance:

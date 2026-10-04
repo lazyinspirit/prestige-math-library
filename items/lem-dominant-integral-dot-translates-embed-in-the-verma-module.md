@@ -2,7 +2,7 @@
 id: lem-dominant-integral-dot-translates-embed-in-the-verma-module
 kind: lemma
 title: Dominant integral dot translates embed canonically in the Verma module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-positive-root-pairings-of-a-dominant-integral-weight, lem-bruhat-covers-are-reflection-covers, thm-verma-embedding-for-an-arbitrary-positive-root, thm-verma-homomorphism-spaces-have-dimension-at-most-one, lem-a-nonzero-verma-homomorphism-is-injective, def-strong-linkage-order-on-weights, def-integral-weyl-group-of-a-weight, thm-strong-linkage-principle-for-verma-modules, lem-finite-weyl-strong-exchange-and-deletion, def-bruhat-order-on-a-finite-weyl-group, thm-universal-property-of-verma-modules]

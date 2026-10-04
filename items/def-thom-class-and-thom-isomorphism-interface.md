@@ -2,7 +2,7 @@
 id: def-thom-class-and-thom-isomorphism-interface
 kind: definition
 title: "Thom class and Thom isomorphism: the AT interface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-thom-class-by-fiberwise-normalization", "thm-thom-isomorphism-for-oriented-vector-bundles", "thm-naturality-and-uniqueness-of-thom-classes", "def-disk-sphere-and-thom-space-of-a-metric-vector-bundle", "lem-thom-disk-sphere-quotient-identifies-relative-and-reduced-cohomology", "def-axiom-of-choice"]

@@ -2,7 +2,7 @@
 id: lem-normalization-isomorphism-over-normal-locus
 kind: lemma
 title: The normalization is an isomorphism over the normal locus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-etale-covers-of-gm
 kind: example
 title: "Kummer covers of the multiplicative group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

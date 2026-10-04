@@ -2,7 +2,7 @@
 id: thm-schensted-longest-increasing-and-decreasing-subsequence-theorem
 kind: theorem
 title: The Schensted theorem on longest increasing and decreasing subsequences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-row-insertion-and-bumping-route, def-young-tableau-standard-tableau-and-shape, lem-first-row-insertion-basic-subsequences, lem-robinson-schensted-recording-tableau-is-standard, lem-row-bumping-route-monotonicity, lem-word-reversal-transposes-the-insertion-tableau]

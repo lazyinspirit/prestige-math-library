@@ -2,7 +2,7 @@
 id: thm-finite-etale-algebras-invariant-under-nilpotent-thickening
 kind: theorem
 title: "Finite étale algebras lift uniquely through nilpotent thickenings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

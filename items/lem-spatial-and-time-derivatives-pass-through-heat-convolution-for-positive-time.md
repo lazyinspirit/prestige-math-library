@@ -2,7 +2,7 @@
 id: lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time
 kind: lemma
 title: "Spatial and time derivatives pass through heat convolution for positive time"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

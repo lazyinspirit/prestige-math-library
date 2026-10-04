@@ -2,7 +2,7 @@
 id: thm-blowup-smooth-surface-point-charts
 kind: theorem
 title: "Blowing up a rational point of a smooth surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

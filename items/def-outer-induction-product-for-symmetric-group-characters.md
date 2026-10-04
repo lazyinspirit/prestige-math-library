@@ -2,7 +2,7 @@
 id: def-outer-induction-product-for-symmetric-group-characters
 kind: definition
 title: "The outer induction product of symmetric-group characters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

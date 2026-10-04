@@ -2,7 +2,7 @@
 id: thm-normal-variety-regular-in-codimension-one
 kind: theorem
 title: A normal variety is regular in codimension one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 2

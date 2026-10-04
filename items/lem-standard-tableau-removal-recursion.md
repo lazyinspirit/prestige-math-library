@@ -2,7 +2,7 @@
 id: lem-standard-tableau-removal-recursion
 kind: lemma
 title: The removal recursion for standard tableaux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-removable-and-addable-nodes-of-a-partition, def-young-tableau-standard-tableau-and-shape, lem-largest-entry-of-a-standard-tableau-is-removable]

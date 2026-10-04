@@ -2,7 +2,7 @@
 id: ex-truncation-projectivity-does-not-mean-block-projectivity
 kind: example
 title: "The same Verma in two ambient categories"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

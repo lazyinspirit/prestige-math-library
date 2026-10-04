@@ -2,7 +2,7 @@
 id: lem-projective-dualizing-complex-trace-and-embedding-independence
 kind: lemma
 title: "Normalized trace and independence of a projective embedding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-axiom-of-choice", "def-dualizing-complex-on-projective-cm-scheme", "lem-finite-closed-immersion-derived-coinduction-adjunction", "lem-projective-embedding-dualizing-complex-existence", "lem-projective-space-derived-coherent-duality", "lem-yoneda-evaluation-bijection"]

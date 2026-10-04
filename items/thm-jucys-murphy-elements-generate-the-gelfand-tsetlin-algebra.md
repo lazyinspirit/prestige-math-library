@@ -2,7 +2,7 @@
 id: thm-jucys-murphy-elements-generate-the-gelfand-tsetlin-algebra
 kind: theorem
 title: "The Jucys-Murphy elements generate the Gelfand-Tsetlin algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-gelfand-tsetlin-algebra-is-the-diagonal-algebra-in-the-young-basis, thm-primitive-tableau-idempotents-by-jucys-murphy-interpolation, def-jucys-murphy-elements-of-the-symmetric-group-algebra, def-gelfand-tsetlin-algebra-for-the-symmetric-group-chain, thm-class-sums-form-a-basis-of-the-center-of-k-g, def-center-of-the-group-algebra]

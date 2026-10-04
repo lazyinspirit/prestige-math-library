@@ -2,7 +2,7 @@
 id: cor-heat-flow-is-order-preserving-and-lp-contractive
 kind: corollary
 title: "Monotonicity and $L^p$ contractivity of the heat flow"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-heat-flow-preserves-mass-and-positivity

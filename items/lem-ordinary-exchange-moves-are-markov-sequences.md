@@ -2,7 +2,7 @@
 id: lem-ordinary-exchange-moves-are-markov-sequences
 kind: lemma
 title: "Ordinary exchange moves are Markov sequences"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-braid-group-by-the-artin-presentation, def-markov-conjugation-and-stabilization-moves]

@@ -2,7 +2,7 @@
 id: def-pontryagin-thom-collapse-of-an-embedded-submanifold
 kind: definition
 title: "Pontryagin–Thom collapse with specified normal data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-disk-bundle-sphere-bundle-and-thom-space", "def-normal-and-conormal-bundles-of-an-embedded-submanifold", "lem-tubular-charts-realize-a-prescribed-normal-identification", "def-countable-choice"]

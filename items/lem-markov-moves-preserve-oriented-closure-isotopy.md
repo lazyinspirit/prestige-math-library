@@ -2,7 +2,7 @@
 id: lem-markov-moves-preserve-oriented-closure-isotopy
 kind: lemma
 title: "Markov moves preserve the oriented closure up to isotopy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-markov-conjugation-and-stabilization-moves, def-closure-of-a-geometric-braid,

@@ -2,7 +2,7 @@
 id: lem-av7-finite-morphism-projective-over-projective-base
 kind: lemma
 title: Finite morphisms over a projective variety over any field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 proof_strategy: direct

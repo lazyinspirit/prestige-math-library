@@ -2,7 +2,7 @@
 id: thm-jucys-murphy-joint-spectrum-is-the-set-of-tableau-content-vectors
 kind: theorem
 title: "The joint spectrum of the Jucys-Murphy elements is the set of tableau content vectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-transposition-class-sum-acts-on-a-specht-module-by-total-content, thm-gelfand-tsetlin-algebra-is-the-diagonal-algebra-in-the-young-basis, def-content-vector-of-a-standard-tableau, def-young-tableau-standard-tableau-and-shape, def-removable-and-addable-nodes-of-a-partition, lem-addable-nodes-of-a-partition-have-distinct-contents, cor-complex-specht-restriction-branching-rule, thm-complex-irreducibles-of-symmetric-groups-are-specht-modules, def-jucys-murphy-elements-of-the-symmetric-group-algebra, def-partition-young-diagram-and-conjugate-partition]

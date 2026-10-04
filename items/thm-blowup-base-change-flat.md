@@ -2,7 +2,7 @@
 id: thm-blowup-base-change-flat
 kind: theorem
 title: "Flat base change for blowups, and failure without flatness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

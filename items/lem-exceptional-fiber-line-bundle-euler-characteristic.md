@@ -2,7 +2,7 @@
 id: lem-exceptional-fiber-line-bundle-euler-characteristic
 kind: lemma
 title: "Euler characteristic of line bundles on a projective line over a finite field extension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: cex-lp-boundary-data-need-not-lie-in-the-h-one-trace-range
 kind: counterexample
 title: "A jump boundary datum is outside the trace range for $p\\ge2$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-sharp-trace-theorem-for-w-one-p, def-fractional-slobodeckij-space-on-euclidean-space, def-fractional-sobolev-space-on-a-compact-c-one-boundary, thm-tonelli-and-fubini-for-completed-product-measures, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-axiom-of-choice, lem-fractional-boundary-norm-is-independent-of-atlas]

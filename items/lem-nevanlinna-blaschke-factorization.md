@@ -2,7 +2,7 @@
 id: lem-nevanlinna-blaschke-factorization
 kind: lemma
 title: "Blaschke factorization of a Nevanlinna-class function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-nevanlinna-class-on-the-disc, lem-nevanlinna-sup-mean-criterion, thm-hardy-zero-set-blaschke-condition, def-blaschke-product, thm-blaschke-product-boundary-values-and-zeros, thm-removable-singularity-characterizations, thm-algebra-of-complex-derivatives, thm-monotone-convergence-for-the-integral, thm-mean-value-property-for-plane-harmonic-functions, def-mean-value-property-for-plane-functions, cor-holomorphic-mean-value-property, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-fatou-lemma, thm-jensen-formula-on-a-disc]

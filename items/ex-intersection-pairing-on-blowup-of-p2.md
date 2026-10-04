@@ -2,7 +2,7 @@
 id: ex-intersection-pairing-on-blowup-of-p2
 kind: example
 title: "The intersection form of the blown-up projective plane"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

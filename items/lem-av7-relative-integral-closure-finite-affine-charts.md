@@ -2,7 +2,7 @@
 id: lem-av7-relative-integral-closure-finite-affine-charts
 kind: lemma
 title: Finite relative integral-closure charts for classical quasi-finite morphisms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 proof_strategy: direct

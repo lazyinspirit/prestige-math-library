@@ -2,7 +2,7 @@
 id: lem-nonaffine-theorem-of-the-cube-for-abelian-variety
 kind: lemma
 title: "The theorem of the cube for an abelian variety"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-dependent-choice, def-abelian-variety-over-a-field, prop-abelian-variety-commutativity-from-rigidity, thm-abelian-variety-is-projective, thm-global-functions-proper-integral-variety, thm-cech-computes-qc-cohomology-separated-scheme-affine-cover, lem-proper-flat-cohomology-perfect-complex, thm-faithful-flatness-of-jacobson-adic-completion, thm-cohomology-and-base-change]
 provenance:

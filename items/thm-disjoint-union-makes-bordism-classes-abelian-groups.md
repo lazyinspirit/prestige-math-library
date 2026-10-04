@@ -2,7 +2,7 @@
 id: thm-disjoint-union-makes-bordism-classes-abelian-groups
 kind: theorem
 title: Disjoint union makes bordism classes abelian groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

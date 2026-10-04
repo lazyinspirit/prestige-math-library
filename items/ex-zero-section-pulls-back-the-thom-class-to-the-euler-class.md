@@ -2,7 +2,7 @@
 id: ex-zero-section-pulls-back-the-thom-class-to-the-euler-class
 kind: example
 title: "Zero-section pullback is the Euler class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-thom-class-and-thom-isomorphism-interface", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-axiom-of-choice"]

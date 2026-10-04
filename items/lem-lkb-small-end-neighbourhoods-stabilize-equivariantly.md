@@ -2,7 +2,7 @@
 id: lem-lkb-small-end-neighbourhoods-stabilize-equivariantly
 kind: lemma
 title: Equivariant stabilization of the LKB end neighbourhoods
-status: draft
+status: published
 origin: session
 deps: []
 dependency_level: undefined

@@ -2,7 +2,7 @@
 id: lem-block-interchanges-transport-arbitrary-braid-boxes
 kind: lemma
 title: "Block interchanges transport arbitrary braid boxes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-braid-group-by-the-artin-presentation]

@@ -2,7 +2,7 @@
 id: thm-blowup-effective-cartier-divisor-isomorphism
 kind: theorem
 title: "Blowing up an effective Cartier divisor does nothing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

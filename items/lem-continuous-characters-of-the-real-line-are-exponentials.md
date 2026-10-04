@@ -42,7 +42,7 @@ sources:
   - title: "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35 (printed pp. 134-140)"
     url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
     locator: "Section 35C: the characters of the additive line are the maps t -> exp(2 pi i xi t)."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

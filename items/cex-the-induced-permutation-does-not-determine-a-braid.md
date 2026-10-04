@@ -2,7 +2,7 @@
 id: cex-the-induced-permutation-does-not-determine-a-braid
 kind: counterexample
 title: "The induced permutation does not determine a braid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 6

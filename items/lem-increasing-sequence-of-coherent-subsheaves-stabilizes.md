@@ -2,7 +2,7 @@
 id: lem-increasing-sequence-of-coherent-subsheaves-stabilizes
 kind: lemma
 title: "Increasing sequences of coherent subsheaves of a coherent module on a Noetherian scheme stabilize"
-status: draft
+status: published
 origin: pipeline
 deps: [def-coherent-module-scheme, def-noetherian-module, def-locally-noetherian-and-noetherian-scheme, thm-affine-quasi-coherent-equivalence, def-quasi-coherent-module-scheme, thm-equivalent-characterizations-of-noetherian-modules, thm-coherent-sheaves-abelian-noetherian-scheme, def-finite-type-finite-presentation-module-sheaf, lem-finite-modules-over-noetherian-rings-are-noetherian, def-axiom-of-choice]
 provenance:

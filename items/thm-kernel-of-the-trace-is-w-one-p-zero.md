@@ -2,7 +2,7 @@
 id: thm-kernel-of-the-trace-is-w-one-p-zero
 kind: theorem
 title: "The kernel of the trace is the closure of the test functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-lp-trace-operator-on-a-bounded-c-one-domain, lem-sobolev-trace-agrees-with-continuous-boundary-values, lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts, thm-sobolev-gauss-green-formula-on-c-one-domains, def-wkp-zero-as-a-sobolev-closure, thm-smooth-up-to-the-boundary-density-on-smooth-domains, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, lem-compact-support-zero-extension-in-wkp, lem-c-k-boundary-flattening-preserves-wkp-locally, lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces, lem-finite-ambient-partitions-for-euclidean-boundary-integration, def-bounded-c-k-domain-and-boundary-charts, def-sobolev-space-wkp-and-its-norm, thm-wkp-extension-from-a-half-space, thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity, thm-tonelli-and-fubini-for-completed-product-measures, thm-holder-inequality-for-integrals, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, def-axiom-of-choice, lem-complex-translation-and-approximate-identity-interfaces, lem-weak-leibniz-rule-with-a-smooth-factor]

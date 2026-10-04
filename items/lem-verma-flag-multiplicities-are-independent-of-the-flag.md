@@ -2,7 +2,7 @@
 id: lem-verma-flag-multiplicities-are-independent-of-the-flag
 kind: lemma
 title: "Verma-flag multiplicities are independent of the flag"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

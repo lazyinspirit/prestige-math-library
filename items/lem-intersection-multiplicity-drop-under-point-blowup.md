@@ -2,7 +2,7 @@
 id: lem-intersection-multiplicity-drop-under-point-blowup
 kind: lemma
 title: A point blowup drops pairwise intersection multiplicity by at least one
-status: draft
+status: published
 origin: pipeline
 deps: [def-intersection-multiplicity-of-closed-subschemes, def-blowup-scheme-along-ideal, def-exceptional-divisor-blowup, def-strict-transform-closed-subscheme, thm-affine-blowup-standard-charts, lem-affine-blowup-algebra-properties, thm-blowup-closed-immersion-transform-universal, thm-blowup-effective-cartier-divisor-isomorphism, thm-one-dimensional-regular-local-rings-are-dvrs, def-composition-series-and-length-of-a-module, cor-length-is-additive-in-short-exact-sequences, def-axiom-of-choice, thm-dvr-ideal-and-module-length, cor-dvr-is-a-pid, thm-blowup-universal-property, thm-pullback-center-ideal-invertible, thm-blowup-base-change-flat]
 provenance:

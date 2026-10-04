@@ -2,7 +2,7 @@
 id: def-lawrence-krammer-bigelow-representation
 kind: definition
 title: The Lawrence-Krammer-Bigelow representation
-status: draft
+status: published
 origin: pipeline
 deps: [thm-the-integral-lkb-module-is-free-of-rank-n-choose-two, lem-braids-lift-to-the-lkb-cover-and-act-lambda-linearly, def-axiom-of-choice, lem-lkb-lifted-absolute-cellular-boundary-and-fraction-field-rank]
 justified_by: []

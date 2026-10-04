@@ -2,7 +2,7 @@
 id: lem-row-and-column-insertion-commute
 kind: lemma
 title: Row and column insertion commute
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-column-insertion-for-distinct-letters, def-partition-young-diagram-and-conjugate-partition, def-row-insertion-and-bumping-route, def-young-tableau-standard-tableau-and-shape, lem-row-bumping-route-monotonicity]

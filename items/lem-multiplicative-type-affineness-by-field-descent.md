@@ -2,7 +2,7 @@
 id: lem-multiplicative-type-affineness-by-field-descent
 kind: lemma
 title: "Affineness of a field form of a diagonalizable group"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

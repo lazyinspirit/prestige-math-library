@@ -2,7 +2,7 @@
 id: def-projective-morphism-coherent-bundle-convention
 kind: definition
 title: "Projectivity via a coherent projective bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

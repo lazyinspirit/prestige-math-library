@@ -2,7 +2,7 @@
 id: def-unibranch-point-classical
 kind: definition
 title: Unibranch points of a classical variety
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 4

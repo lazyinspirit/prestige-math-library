@@ -2,7 +2,7 @@
 id: ex-serre-duality-on-a-smooth-projective-surface
 kind: example
 title: "Surface duality for twists and a skyscraper on the projective plane"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-axiom-of-choice", "thm-serre-duality-for-coherent-sheaves-on-projective-cm-scheme", "rem-smooth-projective-locally-free-duality-is-the-ag-lie-special-case", "thm-cohomology-projective-space-twisting-sheaves", "lem-projective-space-top-cohomology-residue-pairing", "thm-flasque-sheaves-acyclic"]

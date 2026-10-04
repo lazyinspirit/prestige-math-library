@@ -2,7 +2,7 @@
 id: ex-degree-as-intersection-with-a-regular-value
 kind: example
 title: "Degree as an intersection with a regular value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-oriented-intersection-number, lem-preimage-orientation-agrees-with-the-local-intersection-sign, prop-two-map-intersection-as-a-diagonal-preimage, def-degree-of-a-proper-smooth-map-by-compact-support-cohomology, thm-regular-value-formula-for-degree, def-local-orientation-sign-of-a-regular-preimage, prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold, def-product-orientation]

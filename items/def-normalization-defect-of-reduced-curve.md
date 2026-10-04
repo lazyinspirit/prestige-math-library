@@ -2,7 +2,7 @@
 id: def-normalization-defect-of-reduced-curve
 kind: definition
 title: "Normalization defect delta of a reduced curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

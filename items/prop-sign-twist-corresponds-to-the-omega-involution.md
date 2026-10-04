@@ -2,7 +2,7 @@
 id: prop-sign-twist-corresponds-to-the-omega-involution
 kind: proposition
 title: "Sign twist corresponds to the omega involution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: ex-hook-table-for-shape-three-two-one
 kind: example
 title: Hook table for the shape (3,2,1)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-hook-arm-leg-and-hook-length, lem-standard-tableau-removal-recursion, thm-hook-length-formula]

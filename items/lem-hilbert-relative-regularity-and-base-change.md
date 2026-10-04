@@ -2,7 +2,7 @@
 id: lem-hilbert-relative-regularity-and-base-change
 kind: lemma
 title: "Relative regularity, generation, and arbitrary base change"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: cor-blowup-unique-up-to-unique-isomorphism
 kind: corollary
 title: "Uniqueness of the blowup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

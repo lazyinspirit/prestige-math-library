@@ -2,7 +2,7 @@
 id: lem-normality-local-on-affine-opens
 kind: lemma
 title: Normality is checked on affine open charts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 1

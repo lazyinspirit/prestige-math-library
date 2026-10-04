@@ -2,7 +2,7 @@
 id: thm-normal-functions-codimension-one-intersection
 kind: theorem
 title: Regular functions on a normal variety are cut out in codimension one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 2

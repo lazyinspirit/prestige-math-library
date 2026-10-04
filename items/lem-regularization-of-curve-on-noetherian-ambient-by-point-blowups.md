@@ -2,7 +2,7 @@
 id: lem-regularization-of-curve-on-noetherian-ambient-by-point-blowups
 kind: lemma
 title: Regularization of an integral curve on an arbitrary Noetherian ambient scheme
-status: draft
+status: published
 origin: pipeline
 deps: [thm-regularization-of-finite-normalization-curve-by-point-blowups, thm-blowup-closed-immersion-transform-universal, def-strict-transform-closed-subscheme, def-blowup-scheme-along-ideal, def-axiom-of-choice, thm-affine-blowup-standard-charts, cor-finite-type-algebra-over-noetherian-ring-is-noetherian, def-integral-scheme, def-embedding-dimension-and-regular-local-ring, def-locally-noetherian-and-noetherian-scheme]
 provenance:

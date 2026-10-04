@@ -1,7 +1,7 @@
 ---
 page: groups-of-multiplicative-type-and-arithmetic-tori-examples
 title: "Groups of Multiplicative Type and Arithmetic Tori — Examples"
-status: draft
+status: published
 requires:
   - groups-of-multiplicative-type-and-arithmetic-tori
   - flat-smooth-and-etale-morphisms

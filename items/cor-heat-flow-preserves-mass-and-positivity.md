@@ -2,7 +2,7 @@
 id: cor-heat-flow-preserves-mass-and-positivity
 kind: corollary
 title: "Mass conservation and positivity of the heat flow"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

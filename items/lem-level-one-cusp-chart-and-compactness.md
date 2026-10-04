@@ -2,7 +2,7 @@
 id: lem-level-one-cusp-chart-and-compactness
 kind: lemma
 title: "The cusp chart and compactness of X(1)"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-group-action-on-the-upper-half-plane

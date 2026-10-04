@@ -2,7 +2,7 @@
 id: lem-arcs-in-a-punctured-disk-have-disjointness-detecting-minimal-positions
 kind: lemma
 title: Minimal-position representatives and the arc bigon criterion
-status: draft
+status: published
 origin: pipeline
 deps: [lem-jordan-schoenflies-extension-for-plane-curves, def-axiom-of-choice, lem-homotopic-simple-proper-arcs-in-the-punctured-disk-are-isotopic-relative-to-their-endpoints, thm-brouwer-fixed-point-theorem, thm-alexander-contractibility-of-the-boundary-fixed-disk-homeomorphism-group]
 justified_by: []

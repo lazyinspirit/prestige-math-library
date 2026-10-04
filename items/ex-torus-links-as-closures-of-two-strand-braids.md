@@ -2,7 +2,7 @@
 id: ex-torus-links-as-closures-of-two-strand-braids
 kind: example
 title: "Torus links as closures of two-strand braids"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-closure-of-a-geometric-braid, def-elementary-geometric-half-twist,

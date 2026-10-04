@@ -2,7 +2,7 @@
 id: lem-finite-complex-circle-measures-are-determined-by-fourier-coefficients
 kind: lemma
 title: "Finite complex circle measures are determined by Fourier coefficients and Poisson integrals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable-choice, lem-complex-circle-measures-have-finite-total-variation-under-countable-choice, def-fourier-coefficients-and-trigonometric-polynomials, cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, def-poisson-kernel-on-the-disc, def-poisson-integral-of-finite-boundary-measure, lem-trigonometric-characters-are-orthonormal, def-the-one-dimensional-torus-and-normalized-haar-integral]

@@ -2,7 +2,7 @@
 id: lem-overlap-of-arc-length-parametrizations-of-a-one-manifold
 kind: lemma
 title: "Overlap structure of arc-length parametrizations of a 1-manifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-riemannian-metric-and-riemannian-manifold, thm-every-smooth-manifold-admits-a-riemannian-metric, def-interval, def-diffeomorphism-and-local-diffeomorphism-of-manifolds, def-smooth-manifold, thm-euclidean-inverse-function-theorem, def-countable-choice]

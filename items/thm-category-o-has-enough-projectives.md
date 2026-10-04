@@ -2,7 +2,7 @@
 id: thm-category-o-has-enough-projectives
 kind: theorem
 title: "Category O has enough projectives"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

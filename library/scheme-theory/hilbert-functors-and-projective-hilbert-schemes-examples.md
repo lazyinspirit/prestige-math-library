@@ -1,7 +1,7 @@
 ---
 page: hilbert-functors-and-projective-hilbert-schemes-examples
 title: "Hilbert Functors and Projective Hilbert Schemes — Examples"
-status: draft
+status: published
 requires: [hilbert-functors-and-projective-hilbert-schemes]
 items: []
 examples: [ex-hilbert-polynomial-of-finite-points-on-p1,

@@ -2,7 +2,7 @@
 id: thm-normalization-universal-property
 kind: theorem
 title: Universal property of the normalization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 4

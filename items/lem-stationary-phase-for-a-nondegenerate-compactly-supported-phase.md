@@ -2,7 +2,7 @@
 id: lem-stationary-phase-for-a-nondegenerate-compactly-supported-phase
 kind: lemma
 title: Stationary phase with a compactly supported amplitude
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

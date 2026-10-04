@@ -41,7 +41,7 @@ sources:
   - title: "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35 (printed pp. 134-140)"
     url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
     locator: "Section 34D, printed pp. 137-138, states local compactness of the character group. The compact equicontinuous identity neighbourhood is proved here using the published Ascoli theorem."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

@@ -2,7 +2,7 @@
 id: lem-nonaffine-centre-is-stable-jet-kernel
 kind: lemma
 title: "The centre is the stable kernel of conjugation on local jets"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, thm-krull-intersection-theorem]
 provenance:

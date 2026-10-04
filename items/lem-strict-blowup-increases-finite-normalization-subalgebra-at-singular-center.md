@@ -2,7 +2,7 @@
 id: lem-strict-blowup-increases-finite-normalization-subalgebra-at-singular-center
 kind: lemma
 title: Blowing up a non-regular point strictly increases the finite normalization subalgebra
-status: draft
+status: published
 origin: pipeline
 deps: [lem-normalization-factors-through-blowup-of-curve-point, lem-point-blowup-of-integral-curve-is-finite, def-blowup-scheme-along-ideal, thm-blowup-effective-cartier-divisor-isomorphism, thm-one-dimensional-regular-local-rings-are-dvrs, def-coherent-module-scheme, thm-coherent-sheaves-abelian-noetherian-scheme, def-locally-noetherian-and-noetherian-scheme, def-axiom-of-choice, def-intersection-multiplicity-of-closed-subschemes, def-strict-normal-crossings-divisor, thm-artinian-ring-characterisation-by-primes, thm-artinian-ring-has-finite-length, def-composition-series-and-length-of-a-module, def-finite-morphism-schemes, thm-localisation-of-modules-is-exact, cor-blowup-birational-integral-scheme]
 provenance:

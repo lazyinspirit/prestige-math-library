@@ -2,7 +2,7 @@
 id: thm-riesz-factorization-hardy-space
 kind: theorem
 title: "F. Riesz factorization of a Hardy-space function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-analytic-hardy-space-disc, lem-hardy-radial-means-are-monotone, thm-hardy-zero-set-blaschke-condition, def-blaschke-product, thm-blaschke-product-boundary-values-and-zeros, thm-removable-singularity-characterizations, thm-algebra-of-complex-derivatives, thm-monotone-convergence-for-the-integral, def-complex-differentiability-holomorphic-and-entire]

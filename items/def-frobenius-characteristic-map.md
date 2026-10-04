@@ -2,7 +2,7 @@
 id: def-frobenius-characteristic-map
 kind: definition
 title: "The Frobenius characteristic map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

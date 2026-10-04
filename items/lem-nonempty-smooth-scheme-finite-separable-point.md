@@ -2,7 +2,7 @@
 id: lem-nonempty-smooth-scheme-finite-separable-point
 kind: lemma
 title: "A nonempty smooth scheme has a finite separable point"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-separable-closures-exist-and-are-isomorphic-over-the-base, thm-smooth-local-standard-form, thm-etale-morphisms-open-and-quasi-finite, lem-etale-residue-extensions-finite-separable, thm-finitely-generated-algebraic-extensions-are-finite]
 provenance:

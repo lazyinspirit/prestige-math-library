@@ -2,7 +2,7 @@
 id: lem-mean-zero-kernel-scale-estimate
 kind: lemma
 title: "A scale integral estimate for mean-zero kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-coordinate-direction-form-of-the-slobodeckij-seminorm, lem-complex-translation-and-approximate-identity-interfaces, thm-holder-inequality-for-integrals, thm-tonelli-and-fubini-for-completed-product-measures, def-fractional-slobodeckij-space-on-euclidean-space, def-countable-choice, thm-minkowski-integral-inequality]

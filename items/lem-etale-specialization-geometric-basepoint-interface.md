@@ -2,7 +2,7 @@
 id: lem-etale-specialization-geometric-basepoint-interface
 kind: lemma
 title: "Trait specialization as a cover functor with geometric basepoint paths"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

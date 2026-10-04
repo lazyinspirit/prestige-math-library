@@ -2,7 +2,7 @@
 id: ex-blowup-principal-ideal-isomorphism
 kind: example
 title: "Blowing up a principal ideal of a nonzerodivisor does nothing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

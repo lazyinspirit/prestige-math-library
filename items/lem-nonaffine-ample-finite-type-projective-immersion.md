@@ -2,7 +2,7 @@
 id: lem-nonaffine-ample-finite-type-projective-immersion
 kind: lemma
 title: "An ample line bundle on a finite-type scheme gives a projective immersion"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-ample-invertible-sheaf, lem-extend-sections-from-nonvanishing-open, thm-line-bundle-sections-define-projective-map]
 provenance:

@@ -1,7 +1,7 @@
 ---
 page: the-bgg-resolution
 title: "The BGG Resolution"
-status: draft
+status: published
 requires: [homomorphisms-between-verma-modules-and-linkage, finite-weyl-invariants-bruhat-and-kostant-harmonics, chain-complexes-and-homology, category-o-finiteness-duality-and-blocks]
 items: [
   lem-positive-root-pairings-of-a-dominant-integral-weight,

@@ -2,7 +2,7 @@
 id: ex-total-versus-strict-transform-line-through-origin
 kind: example
 title: "Total and strict transform of a line through the origin"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

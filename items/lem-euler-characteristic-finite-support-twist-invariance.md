@@ -2,7 +2,7 @@
 id: lem-euler-characteristic-finite-support-twist-invariance
 kind: lemma
 title: "Euler characteristic of a closed point, and invariance under an invertible twist"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: fs-level-one-e2-is-a-weight-two-modular-form
 kind: false-statement
 title: "FALSE: the weight-two Eisenstein series E_2 is a modular form"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-e2-transformation-law

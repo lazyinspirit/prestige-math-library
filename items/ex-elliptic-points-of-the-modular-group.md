@@ -2,7 +2,7 @@
 id: ex-elliptic-points-of-the-modular-group
 kind: example
 title: "The elliptic points of the modular group and their images under j"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-standard-fundamental-domain-for-the-modular-group

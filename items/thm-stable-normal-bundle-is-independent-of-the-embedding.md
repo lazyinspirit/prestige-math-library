@@ -2,7 +2,7 @@
 id: thm-stable-normal-bundle-is-independent-of-the-embedding
 kind: theorem
 title: "Stable normal bundle is independent of the embedding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-stable-normal-bundle-of-a-compact-smooth-manifold", "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval", "thm-smooth-dependence-of-ode-solutions-on-parameters", "thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure", "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle", "def-countable-choice", "def-smooth-function-on-a-relatively-open-subset-of-a-half-space"]

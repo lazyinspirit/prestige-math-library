@@ -2,7 +2,7 @@
 id: thm-young-orthogonal-form-from-seminormal-rescaling
 kind: theorem
 title: "Young's orthogonal form from the seminormal rescaling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-young-seminormal-form-from-jucys-murphy-eigenlines, def-invariant-inner-product-on-a-tabloid-module, lem-specht-module-has-nondegenerate-self-pairing-in-characteristic-zero, def-column-antisymmetrizer-polytabloid-and-specht-module, thm-jucys-murphy-joint-spectrum-is-the-set-of-tableau-content-vectors, def-content-vector-of-a-standard-tableau]

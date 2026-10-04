@@ -2,7 +2,7 @@
 id: lem-sobolev-trace-agrees-with-continuous-boundary-values
 kind: lemma
 title: "The trace agrees with classical restriction for continuous Sobolev functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-lp-trace-operator-on-a-bounded-c-one-domain, def-bounded-c-k-domain-and-boundary-charts, def-surface-integral-on-a-compact-c-one-hypersurface, def-sobolev-space-wkp-and-its-norm, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, thm-lebesgue-measure-of-a-box-of-every-kind, def-axiom-of-choice]

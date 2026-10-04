@@ -2,7 +2,7 @@
 id: thm-symmetric-polynomials-in-jucys-murphy-elements-give-the-center
 kind: theorem
 title: "Symmetric polynomials in the Jucys-Murphy elements give exactly the centre"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-jucys-murphy-elements-generate-the-gelfand-tsetlin-algebra, thm-jucys-murphy-joint-spectrum-is-the-set-of-tableau-content-vectors, lem-a-partition-is-determined-by-its-multiset-of-node-contents, thm-class-sums-form-a-basis-of-the-center-of-k-g, thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field, cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars, def-elementary-symmetric-polynomials, def-symmetric-polynomial, def-power-sum-and-complete-homogeneous-symmetric-polynomials, cor-power-sums-generate-when-factorial-is-invertible, thm-newtons-identities, def-jucys-murphy-elements-of-the-symmetric-group-algebra, def-center-of-the-group-algebra]

@@ -2,7 +2,7 @@
 id: prop-collapse-pullback-of-the-thom-class-is-the-poincare-dual
 kind: proposition
 title: "Collapse pulls the Thom class back to the Poincaré dual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-pontryagin-thom-collapse-of-an-embedded-submanifold", "def-thom-class-and-thom-isomorphism-interface", "thm-poincare-duality-for-oriented-topological-manifolds", "def-fundamental-class-of-a-compact-oriented-manifold", "def-relative-cap-product", "prop-cap-product-naturality-and-projection-formula", "lem-cap-product-duality-is-an-isomorphism-on-euclidean-balls", "def-axiom-of-choice", "def-compactly-supported-singular-cohomology-of-a-locally-compact-space", "thm-excision-for-singular-cohomology", "thm-long-exact-sequence-of-a-pair-in-singular-cohomology", "thm-naturality-of-the-singular-cohomology-pair-sequence", "def-alexander-whitney-diagonal-approximation", "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses"]

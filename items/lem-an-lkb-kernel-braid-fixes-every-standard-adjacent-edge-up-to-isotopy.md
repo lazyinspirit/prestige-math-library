@@ -2,7 +2,7 @@
 id: lem-an-lkb-kernel-braid-fixes-every-standard-adjacent-edge-up-to-isotopy
 kind: lemma
 title: An LKB kernel braid fixes every standard adjacent edge up to isotopy
-status: draft
+status: published
 origin: pipeline
 deps: [lem-the-fork-noodle-pairing-detects-essential-intersections, def-lawrence-krammer-bigelow-representation, thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk, lem-arcs-in-a-punctured-disk-have-disjointness-detecting-minimal-positions, def-axiom-of-choice, lem-the-fork-noodle-pairing-is-well-defined-and-equivariant, thm-the-integral-lkb-module-is-free-of-rank-n-choose-two, def-lexicographic-order-on-fork-noodle-deck-monomials, lem-fork-detection-transports-to-arbitrary-boundary-crosscuts, lem-jordan-schoenflies-extension-for-plane-curves]
 justified_by: []

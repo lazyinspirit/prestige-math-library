@@ -2,7 +2,7 @@
 id: rem-calderon-zygmund-endpoints-are-weak-lone-and-bmo-not-strong-lone-or-linfinity
 kind: remark
 title: "Endpoint targets: weak (1,1) here, L∞ to BMO later; strong endpoints fail in general"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-calderon-zygmund-operator-has-weak-type-one-one, thm-calderon-zygmund-singular-integrals-are-bounded-on-lp, def-countable-choice]

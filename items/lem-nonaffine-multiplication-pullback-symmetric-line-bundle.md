@@ -2,7 +2,7 @@
 id: lem-nonaffine-multiplication-pullback-symmetric-line-bundle
 kind: lemma
 title: "Multiplication pulls back a symmetric line bundle to its square power"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-dependent-choice, def-abelian-variety-over-a-field, prop-abelian-variety-commutativity-from-rigidity, lem-nonaffine-theorem-of-the-cube-for-abelian-variety]
 provenance:

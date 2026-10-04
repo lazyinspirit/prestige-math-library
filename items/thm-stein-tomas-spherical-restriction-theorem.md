@@ -2,7 +2,7 @@
 id: thm-stein-tomas-spherical-restriction-theorem
 kind: theorem
 title: Stein-Tomas spherical restriction theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

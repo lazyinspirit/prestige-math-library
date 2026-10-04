@@ -2,7 +2,7 @@
 id: thm-the-artin-representation-is-faithful
 kind: theorem
 title: "The Artin representation is faithful"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 7

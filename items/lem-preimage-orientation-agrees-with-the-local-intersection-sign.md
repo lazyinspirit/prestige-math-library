@@ -2,7 +2,7 @@
 id: lem-preimage-orientation-agrees-with-the-local-intersection-sign
 kind: lemma
 title: "Preimage orientation agrees with the local intersection sign"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-local-oriented-intersection-sign, def-transverse-complementary-dimensional-intersection-set, def-local-orientation-sign-of-a-regular-preimage, def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space, def-product-orientation, def-transverse-linear-subspaces, thm-transverse-preimage-theorem, thm-transverse-preimage-for-manifolds-with-boundary]

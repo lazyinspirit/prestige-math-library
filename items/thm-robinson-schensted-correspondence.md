@@ -2,7 +2,7 @@
 id: thm-robinson-schensted-correspondence
 kind: theorem
 title: The Robinson-Schensted correspondence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-partition-young-diagram-and-conjugate-partition, def-removable-and-addable-nodes-of-a-partition, def-reverse-row-deletion, def-row-insertion-and-bumping-route, def-young-tableau-standard-tableau-and-shape, lem-largest-entry-of-a-standard-tableau-is-removable, lem-robinson-schensted-recording-tableau-is-standard, lem-row-bumping-route-monotonicity, lem-row-insertion-and-reverse-deletion-are-inverse]

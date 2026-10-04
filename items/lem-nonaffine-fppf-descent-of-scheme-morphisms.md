@@ -2,7 +2,7 @@
 id: lem-nonaffine-fppf-descent-of-scheme-morphisms
 kind: lemma
 title: "Scheme morphisms satisfy fppf descent"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-faithfully-flat-descent-vanishing, thm-flat-finite-presentation-is-open, thm-affine-fibre-product-tensor-ring, thm-morphisms-into-affine-scheme-global-sections]
 provenance:

@@ -2,7 +2,7 @@
 id: def-oriented-intersection-number
 kind: definition
 title: "The oriented intersection number"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-transverse-complementary-dimensional-intersection-set, lem-compact-transverse-complementary-intersections-are-finite, def-local-oriented-intersection-sign, def-oriented-smooth-manifold-and-oriented-chart, thm-transversality-homotopy-theorem, def-smooth-family-of-maps-and-evaluation-map, def-countable-choice]

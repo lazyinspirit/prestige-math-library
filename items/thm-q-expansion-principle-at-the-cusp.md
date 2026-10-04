@@ -2,7 +2,7 @@
 id: thm-q-expansion-principle-at-the-cusp
 kind: theorem
 title: "The q-expansion principle at the cusp"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-complex-exponential-is-entire-with-derivative-itself

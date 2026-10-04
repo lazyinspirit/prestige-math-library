@@ -2,7 +2,7 @@
 id: lem-fourier-pairing-for-a-finite-measure-and-schwartz-data
 kind: lemma
 title: Fourier pairing for a finite measure and Schwartz data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

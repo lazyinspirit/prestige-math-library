@@ -2,7 +2,7 @@
 id: ex-signed-points-give-the-oriented-zero-bordism-invariant
 kind: example
 title: Signed points give the oriented zero-bordism invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

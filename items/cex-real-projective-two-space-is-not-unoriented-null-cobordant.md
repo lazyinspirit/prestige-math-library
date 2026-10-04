@@ -2,7 +2,7 @@
 id: cex-real-projective-two-space-is-not-unoriented-null-cobordant
 kind: counterexample
 title: The real projective plane is not unoriented null-cobordant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

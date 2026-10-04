@@ -2,7 +2,7 @@
 id: def-multiplicative-type-coordinate-hopf-algebra
 kind: definition
 title: "Coordinate Hopf algebras for multiplicative type"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

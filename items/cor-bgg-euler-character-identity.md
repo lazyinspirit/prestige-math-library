@@ -2,7 +2,7 @@
 id: cor-bgg-euler-character-identity
 kind: corollary
 title: The Euler-character identity for a finite-dimensional simple module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-bgg-resolution-of-a-finite-dimensional-simple-module, def-grothendieck-group-and-character-of-category-o, prop-the-grothendieck-group-of-o-has-simple-and-standard-bases, prop-formal-character-of-a-verma-module, thm-central-character-summands-split-into-linkage-blocks, def-axiom-of-choice, def-bgg-bruhat-verma-sum-in-degree-k, prop-tensoring-with-a-finite-dimensional-module-preserves-category-o]

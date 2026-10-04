@@ -2,7 +2,7 @@
 id: lem-blowup-point-pushforward-vanishing
 kind: lemma
 title: "Pushforward and vanishing for point blowups on a surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

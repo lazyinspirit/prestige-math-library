@@ -2,7 +2,7 @@
 id: cex-fundamental-group-depends-on-base-field
 kind: counterexample
 title: "The étale fundamental group changes when the base field changes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

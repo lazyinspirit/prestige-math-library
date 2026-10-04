@@ -2,7 +2,7 @@
 id: cor-inhomogeneous-dirichlet-data-reduce-to-zero-trace
 kind: corollary
 title: "Inhomogeneous Dirichlet data reduce to zero trace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-bounded-right-inverse-for-the-sobolev-trace, thm-kernel-of-the-trace-is-w-one-p-zero, thm-sharp-trace-theorem-for-w-one-p, def-wkp-zero-as-a-sobolev-closure, def-axiom-of-choice]

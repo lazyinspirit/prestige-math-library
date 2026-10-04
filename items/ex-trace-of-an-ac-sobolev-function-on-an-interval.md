@@ -2,7 +2,7 @@
 id: ex-trace-of-an-ac-sobolev-function-on-an-interval
 kind: example
 title: "The trace of a one-dimensional Sobolev function is the pair of endpoint values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-one-dimensional-sobolev-endpoint-estimate, cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives, thm-acl-characterisation-of-w-one-p, def-sobolev-space-wkp-and-its-norm, def-wkp-zero-as-a-sobolev-closure, def-countable-choice, lem-weak-leibniz-rule-with-a-smooth-factor, lem-compact-support-zero-extension-in-wkp, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, thm-holder-inequality-for-integrals, def-axiom-of-choice]

@@ -1,7 +1,7 @@
 ---
 page: group-schemes-of-finite-type-over-a-field
 title: "Group Schemes of Finite Type over a Field"
-status: draft
+status: published
 requires: [affine-schemes-and-the-structure-sheaf,
            schemes-subschemes-and-morphisms-locally-of-finite-type,
            fibre-products-base-change-and-scheme-theoretic-fibres]

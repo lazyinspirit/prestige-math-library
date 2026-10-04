@@ -2,7 +2,7 @@
 id: ex-node-resolved-by-one-blowup
 kind: example
 title: A node is resolved by one point blowup
-status: draft
+status: published
 origin: pipeline
 deps: [thm-embedded-snc-resolution-of-reduced-curve-on-regular-surface, thm-regularization-of-finite-normalization-curve-by-point-blowups, lem-intersection-multiplicity-drop-under-point-blowup, lem-blowup-of-closed-point-of-regular-surface-is-regular, def-intersection-multiplicity-of-closed-subschemes, thm-normalization-reduced-curve-exists-finite, thm-polynomial-ring-over-a-field-is-a-ufd, def-normal-noetherian-ring, def-blowup-scheme-along-ideal, thm-affine-blowup-standard-charts, def-axiom-of-choice, def-strict-normal-crossings-divisor, cor-dimension-preserved-by-integral-extensions, def-embedding-dimension-and-regular-local-ring, thm-localisation-and-polynomial-extension-of-regular-rings]
 provenance:

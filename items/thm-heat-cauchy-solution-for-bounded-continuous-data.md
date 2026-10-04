@@ -2,7 +2,7 @@
 id: thm-heat-cauchy-solution-for-bounded-continuous-data
 kind: theorem
 title: "The heat Cauchy problem for bounded uniformly continuous data"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions

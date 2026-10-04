@@ -2,7 +2,7 @@
 id: lem-conductor-ideal-common-ideal
 kind: lemma
 title: The conductor is an ideal of both rings
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 5

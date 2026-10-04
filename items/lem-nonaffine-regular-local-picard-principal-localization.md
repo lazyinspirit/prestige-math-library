@@ -2,7 +2,7 @@
 id: lem-nonaffine-regular-local-picard-principal-localization
 kind: lemma
 title: "Line bundles on a principal localization of a regular local ring are trivial"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-localisation-and-polynomial-extension-of-regular-rings, lem-finite-local-modules-admit-minimal-free-resolutions, thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective, thm-nakayama-lemma, thm-localisation-of-modules-is-exact]
 provenance:

@@ -2,7 +2,7 @@
 id: lem-nonaffine-rational-fixed-point-affineness
 kind: lemma
 title: "A faithful rational action with a fixed point forces affineness"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, lem-nonaffine-rational-action-composition-domain, lem-nonaffine-faithful-fixed-point-jet-representation, cor-weak-nullstellensatz-algebraically-closed-coordinate-form]
 provenance:

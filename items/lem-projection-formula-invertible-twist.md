@@ -2,7 +2,7 @@
 id: lem-projection-formula-invertible-twist
 kind: lemma
 title: "Projection formula for invertible twists"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

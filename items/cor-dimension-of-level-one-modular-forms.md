@@ -2,7 +2,7 @@
 id: cor-dimension-of-level-one-modular-forms
 kind: corollary
 title: "The dimension of the space of level-one modular forms"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-level-one-valence-formula

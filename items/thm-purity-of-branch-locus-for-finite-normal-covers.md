@@ -2,7 +2,7 @@
 id: thm-purity-of-branch-locus-for-finite-normal-covers
 kind: theorem
 title: "A finite normal generically étale cover of a regular scheme is étale if unramified in codimension one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

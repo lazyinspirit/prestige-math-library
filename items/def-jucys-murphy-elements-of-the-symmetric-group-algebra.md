@@ -2,7 +2,7 @@
 id: def-jucys-murphy-elements-of-the-symmetric-group-algebra
 kind: definition
 title: "The Jucys-Murphy elements of the symmetric group algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-group-ring, thm-group-ring-is-a-unital-algebra-with-basis-g, def-symmetric-group, def-partition-young-diagram-and-conjugate-partition, def-restriction-and-extension-of-scalars]

@@ -1,7 +1,7 @@
 ---
 page: intersection-products-on-smooth-projective-surfaces-examples
 title: "Intersection Products on Smooth Projective Surfaces — Examples"
-status: draft
+status: published
 requires:
   - intersection-products-on-smooth-projective-surfaces
 items: []

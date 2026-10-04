@@ -2,7 +2,7 @@
 id: lem-blowup-isomorphism-off-center
 kind: lemma
 title: "The blowup is an isomorphism off the center"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

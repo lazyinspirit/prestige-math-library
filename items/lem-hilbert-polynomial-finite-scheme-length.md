@@ -2,7 +2,7 @@
 id: lem-hilbert-polynomial-finite-scheme-length
 kind: lemma
 title: "The Hilbert polynomial of a finite scheme is its length"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

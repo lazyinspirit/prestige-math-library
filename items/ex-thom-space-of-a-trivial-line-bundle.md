@@ -2,7 +2,7 @@
 id: ex-thom-space-of-a-trivial-line-bundle
 kind: example
 title: "Thom space of a trivial line bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product"]

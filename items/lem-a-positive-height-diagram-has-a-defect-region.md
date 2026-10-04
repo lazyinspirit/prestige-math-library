@@ -2,7 +2,7 @@
 id: lem-a-positive-height-diagram-has-a-defect-region
 kind: lemma
 title: "A positive-height diagram has a defect region"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-reducing-arc-and-yamada-vogel-reducing-move,

@@ -2,7 +2,7 @@
 id: lem-affine-blowup-chart-universal-property
 kind: lemma
 title: "Universal property of an affine blowup chart"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

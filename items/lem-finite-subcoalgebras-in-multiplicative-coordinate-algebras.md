@@ -2,7 +2,7 @@
 id: lem-finite-subcoalgebras-in-multiplicative-coordinate-algebras
 kind: lemma
 title: "Finite coalgebra pieces of a multiplicative coordinate algebra"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

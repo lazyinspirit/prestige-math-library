@@ -2,7 +2,7 @@
 id: ex-knapp-cap-and-tube-volume-calculation
 kind: example
 title: Knapp cap and dual tube volume calculation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

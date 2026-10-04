@@ -2,7 +2,7 @@
 id: lem-complete-local-finite-etale-algebra-lifting
 kind: lemma
 title: "Finite étale algebras over a complete local ring are determined by reduction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

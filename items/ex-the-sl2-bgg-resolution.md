@@ -2,7 +2,7 @@
 id: ex-the-sl2-bgg-resolution
 kind: example
 title: The BGG resolution for sl2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-bgg-resolution-of-a-finite-dimensional-simple-module, lem-the-bgg-augmentation-has-image-the-simple-module, lem-bruhat-covers-give-unique-verma-embeddings, prop-simple-reflection-embedding-of-verma-modules, lem-simple-root-singular-vector-in-a-verma-module, cor-antidominant-verma-modules-are-simple, def-axiom-of-choice, def-bgg-bruhat-verma-sum-in-degree-k, def-bgg-differential-from-signed-verma-maps, def-weyl-vector-rho-for-a-chosen-positive-system, def-finite-weyl-root-system-lattice-and-chamber-conventions, thm-finite-dimensional-representations-of-sl-two, lem-dominant-integral-dot-translates-embed-in-the-verma-module]

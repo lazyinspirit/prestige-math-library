@@ -2,7 +2,7 @@
 id: lem-e2-transformation-law
 kind: lemma
 title: "The transformation law of the weight-two Eisenstein series E_2"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-level-one-eisenstein-series

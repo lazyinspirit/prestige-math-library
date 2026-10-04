@@ -2,7 +2,7 @@
 id: lem-tensoring-a-verma-module-by-a-finite-dimensional-module-shifts-types
 kind: lemma
 title: Tensoring a Verma module by a finite-dimensional module shifts the type
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-verma-type-of-a-module-with-a-standard-filtration, thm-pbw-model-of-a-verma-module, thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra, lem-finite-lie-triangularization-and-rank-one-complete-reducibility, def-axiom-of-choice, thm-universal-property-of-verma-modules]

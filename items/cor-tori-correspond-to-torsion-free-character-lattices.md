@@ -2,7 +2,7 @@
 id: cor-tori-correspond-to-torsion-free-character-lattices
 kind: corollary
 title: "Tori correspond exactly to torsion-free character lattices"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

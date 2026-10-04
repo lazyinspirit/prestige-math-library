@@ -2,7 +2,7 @@
 id: def-peripheral-boundary-preserving-automorphism-of-f-n
 kind: definition
 title: "Peripheral-boundary-preserving automorphisms of F_n"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 1

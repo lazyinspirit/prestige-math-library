@@ -2,7 +2,7 @@
 id: lem-closed-lkb-basis-surfaces-have-the-three-required-topological-types-and-factors
 kind: lemma
 title: Closed LKB basis surfaces have the three required topological types and factors
-status: draft
+status: published
 origin: pipeline
 deps: [def-lkb-relative-pairing-modules, lem-a-multiple-of-a-fork-surface-has-a-closed-compact-replacement, lem-the-fork-noodle-pairing-is-well-defined-and-equivariant]
 justified_by: []

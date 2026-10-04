@@ -2,7 +2,7 @@
 id: rem-resolution-higher-dimension-not-claimed
 kind: remark
 title: "No inference to general resolution of singularities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

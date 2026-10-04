@@ -2,7 +2,7 @@
 id: thm-nonaffine-pseudo-abelian-perfect-field-is-complete
 kind: theorem
 title: "Pseudo-abelian varieties over perfect fields are complete"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-dependent-choice, def-abelian-variety-over-a-field, lem-nonaffine-pseudo-abelian-separable-field-extension, lem-nonaffine-geometric-properness-field-descent, lem-nonaffine-reduced-neutral-subgroup-over-perfect-field, thm-nonaffine-rosenlicht-dichotomy, thm-nonaffine-rosenlicht-almost-complement, lem-nonaffine-centre-is-stable-jet-kernel, thm-nonaffine-group-scheme-normal-subgroup-quotient, lem-nonaffine-group-monomorphism-closed-immersion, lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties, lem-nonaffine-connected-group-geometrically-connected]
 provenance:

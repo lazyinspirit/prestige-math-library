@@ -2,7 +2,7 @@
 id: def-total-transform-divisor
 kind: definition
 title: "Total transform of a Cartier divisor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

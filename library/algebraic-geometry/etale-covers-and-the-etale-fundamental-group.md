@@ -1,7 +1,7 @@
 ---
 page: etale-covers-and-the-etale-fundamental-group
 title: "Etale Covers and the Etale Fundamental Group"
-status: draft
+status: published
 requires:
 - affine-schemes-and-the-structure-sheaf
 - fibre-products-base-change-and-scheme-theoretic-fibres

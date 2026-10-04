@@ -1,7 +1,7 @@
 ---
 page: intersection-products-on-smooth-projective-surfaces
 title: "Intersection Products on Smooth Projective Surfaces"
-status: draft
+status: published
 requires:
   - quasi-coherent-and-coherent-sheaves-and-vector-bundles
   - proj-projective-schemes-twisting-sheaves-and-ampleness

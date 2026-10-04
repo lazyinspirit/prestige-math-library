@@ -2,7 +2,7 @@
 id: def-level-one-modular-form-and-cusp-form
 kind: definition
 title: "Level-one modular forms and cusp forms"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-group-action-on-the-upper-half-plane

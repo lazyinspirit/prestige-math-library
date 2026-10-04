@@ -2,7 +2,7 @@
 id: lem-surjectivity-modulo-n-minus-for-free-weight-generated-modules
 kind: lemma
 title: Surjectivity modulo n-minus for free weight-generated modules (BGG 10.5)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-bgg-category-o, thm-pbw-model-of-a-verma-module, prop-equivalent-support-description-of-category-o, thm-triangular-decomposition-from-a-chosen-positive-root-system, def-axiom-of-choice]

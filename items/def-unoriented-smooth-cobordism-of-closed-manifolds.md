@@ -2,7 +2,7 @@
 id: def-unoriented-smooth-cobordism-of-closed-manifolds
 kind: definition
 title: Unoriented smooth cobordism of closed manifolds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

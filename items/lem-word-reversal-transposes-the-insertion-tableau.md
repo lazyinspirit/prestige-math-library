@@ -2,7 +2,7 @@
 id: lem-word-reversal-transposes-the-insertion-tableau
 kind: lemma
 title: Reversing a word transposes its insertion tableau
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-column-insertion-for-distinct-letters, def-row-insertion-and-bumping-route, def-young-tableau-standard-tableau-and-shape, lem-row-and-column-insertion-commute, lem-row-bumping-route-monotonicity]

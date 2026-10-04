@@ -2,7 +2,7 @@
 id: lem-half-space-trace-has-the-fractional-slobodeckij-bound
 kind: lemma
 title: "The half-space trace lies in the fractional Slobodeckij space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-coordinate-direction-form-of-the-slobodeckij-seminorm, lem-one-dimensional-hardy-inequality-on-the-half-line, thm-trace-estimate-on-the-half-space, def-fractional-slobodeckij-space-on-euclidean-space, thm-smooth-up-to-the-boundary-density-on-smooth-domains, thm-holder-inequality-for-integrals, thm-tonelli-and-fubini-for-completed-product-measures, thm-fatou-lemma, thm-wkp-extension-from-a-half-space, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, def-axiom-of-choice]

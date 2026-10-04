@@ -2,7 +2,7 @@
 id: lem-smooth-relative-isotopy-extension-for-disk-arcs-with-puncture-endpoints
 kind: lemma
 title: "Smooth relative isotopy extension for disk arcs with puncture endpoints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 0

@@ -35,7 +35,7 @@ sources:
   - title: "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35 (printed pp. 134-140)"
     url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
     locator: "Section 34D: the dual of a locally compact abelian group is locally compact."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

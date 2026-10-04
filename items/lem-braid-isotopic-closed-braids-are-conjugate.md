@@ -2,7 +2,7 @@
 id: lem-braid-isotopic-closed-braids-are-conjugate
 kind: lemma
 title: "Braid-isotopic closed braids are conjugate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-closure-of-a-geometric-braid, lem-free-homotopy-classes-of-loops-are-conjugacy-classes,

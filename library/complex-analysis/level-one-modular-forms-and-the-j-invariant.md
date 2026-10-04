@@ -1,7 +1,7 @@
 ---
 page: level-one-modular-forms-and-the-j-invariant
 title: Level-One Modular Forms and the j-Invariant
-status: draft
+status: published
 requires: [the-argument-principle-and-rouche, infinite-products-and-weierstrass-factorisation, the-riemann-zeta-function, group-actions-and-cayleys-theorem, subspaces-products-and-quotients, elliptic-functions-and-complex-tori, riemann-surfaces-branched-maps-and-differentials]
 items: [def-modular-group-action-on-the-upper-half-plane, lem-modular-group-reduction-to-the-standard-domain, thm-standard-fundamental-domain-for-the-modular-group, lem-modular-quotient-local-charts, lem-level-one-cusp-chart-and-compactness, def-compactified-level-one-modular-curve, thm-q-expansion-principle-at-the-cusp, def-level-one-modular-form-and-cusp-form, lem-lattice-eisenstein-sums-converge, def-divisor-power-sums-sigma-k, def-level-one-eisenstein-series, lem-lipschitz-formula-for-the-lattice-sum, thm-eisenstein-series-are-modular-forms, lem-valence-boundary-arc-computation, thm-level-one-valence-formula, cor-zeros-of-e4-and-e6-at-the-elliptic-points, cor-dimension-of-level-one-modular-forms, lem-e2-transformation-law, lem-discriminant-is-a-nonvanishing-cusp-form, def-modular-discriminant-and-j-invariant, thm-ring-of-level-one-modular-forms, thm-j-invariant-classifies-complex-tori, thm-j-uniformizes-the-level-one-modular-curve, thm-jacobi-theta-triple-product, lem-jacobi-theta-transformation-laws, lem-jacobi-product-formula-for-the-discriminant, cor-integrality-of-the-j-invariant-fourier-coefficients]
 examples: []

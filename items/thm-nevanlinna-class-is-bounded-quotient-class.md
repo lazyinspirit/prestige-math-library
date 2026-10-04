@@ -2,7 +2,7 @@
 id: thm-nevanlinna-class-is-bounded-quotient-class
 kind: theorem
 title: "The Nevanlinna class is a bounded quotient class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-algebra-of-complex-derivatives, def-complex-exponential, thm-holomorphic-logarithms-homologically-simply-connected-domains, cor-holomorphic-functions-are-real-analytic-and-smooth, thm-c2-holomorphic-components-are-harmonic, def-nevanlinna-class-on-the-disc, def-analytic-hardy-space-disc, def-complex-differentiability-holomorphic-and-entire, def-plane-harmonic-function, def-harmonic-conjugate, prop-star-shaped-plane-domains-are-homologically-simply-connected, thm-harmonic-conjugate-on-homologically-simply-connected-domains]

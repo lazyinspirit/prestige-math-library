@@ -2,7 +2,7 @@
 id: lem-blowup-local-on-base-scheme
 kind: lemma
 title: "Blowups restrict to open subschemes of the base"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: lem-punctured-hartogs-and-flat-base-change-for-finite-projectives
 kind: lemma
 title: "Depth two gives Hartogs extension on a punctured affine spectrum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: lem-an-extremal-cancellation-shortens-an-artin-substitution
 kind: lemma
 title: "An extremal cancellation shortens an Artin substitution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 5

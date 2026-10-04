@@ -2,7 +2,7 @@
 id: def-transverse-complementary-dimensional-intersection-set
 kind: definition
 title: "Transverse complementary-dimensional intersection sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-transverse-smooth-maps, def-transverse-embedded-submanifolds, thm-transverse-fibre-product-theorem, cor-transverse-intersection-theorem, def-embedded-submanifold-and-slice-chart, thm-rank-nullity]

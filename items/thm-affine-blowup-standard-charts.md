@@ -2,7 +2,7 @@
 id: thm-affine-blowup-standard-charts
 kind: theorem
 title: "Affine blowup standard charts and overlaps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

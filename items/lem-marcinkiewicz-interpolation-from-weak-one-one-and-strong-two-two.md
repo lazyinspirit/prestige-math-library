@@ -2,7 +2,7 @@
 id: lem-marcinkiewicz-interpolation-from-weak-one-one-and-strong-two-two
 kind: lemma
 title: "Marcinkiewicz interpolation from weak (1,1) and strong (2,2)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-distribution-function-of-absolute-value, def-l-p-space-as-a-quotient-by-null-functions, def-sublinear-operator-weak-and-strong-type-p-q, thm-chebyshev-markov-inequality-for-the-integral, thm-layer-cake-formula-for-l-p-powers, thm-tonelli-theorem-for-sigma-finite-product-spaces]

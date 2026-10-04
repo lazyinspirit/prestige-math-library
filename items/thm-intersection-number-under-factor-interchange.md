@@ -2,7 +2,7 @@
 id: thm-intersection-number-under-factor-interchange
 kind: theorem
 title: "Intersection number under factor interchange"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-oriented-intersection-number, thm-oriented-intersection-number-is-homotopy-invariant, lem-direct-sum-factor-swap-scales-oriented-bases-by-a-sign, def-product-orientation, def-transverse-smooth-maps, def-transverse-complementary-dimensional-intersection-set, def-compact-space, def-local-oriented-intersection-sign, prop-the-diagonal-is-an-embedded-submanifold, thm-transversality-homotopy-theorem, def-countable-choice]

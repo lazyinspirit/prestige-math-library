@@ -2,7 +2,7 @@
 id: lem-compensated-band-kinks-decompose-into-ordinary-markov-moves
 kind: lemma
 title: "Compensated band kinks decompose into ordinary Markov moves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-block-interchanges-transport-arbitrary-braid-boxes,

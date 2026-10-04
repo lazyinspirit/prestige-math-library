@@ -2,7 +2,7 @@
 id: thm-normal-curve-is-nonsingular
 kind: theorem
 title: A normal curve over a perfect field is nonsingular
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 1

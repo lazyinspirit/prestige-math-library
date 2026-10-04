@@ -2,7 +2,7 @@
 id: lem-hilbert-proper-relative-ample-projectivity
 kind: lemma
 title: "Properness and a relative ample line bundle give projectivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: thm-specialization-of-etale-pi1-under-geometric-hypotheses
 kind: theorem
 title: "Smooth proper specialization of the étale fundamental group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

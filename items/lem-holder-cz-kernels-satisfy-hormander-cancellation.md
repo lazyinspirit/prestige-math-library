@@ -2,7 +2,7 @@
 id: lem-holder-cz-kernels-satisfy-hormander-cancellation
 kind: lemma
 title: "Standard Hölder kernels satisfy the Hörmander condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-calderon-zygmund-kernel-and-principal-value-operator, def-countable-choice, def-standard-holder-calderon-zygmund-kernel, prop-measure-monotonicity, thm-polar-coordinates-formula-for-lebesgue-measure]

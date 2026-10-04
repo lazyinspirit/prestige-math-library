@@ -2,7 +2,7 @@
 id: lem-the-full-boundary-twist-acts-on-lkb-by-the-scalar-q-to-two-n-t-squared
 kind: lemma
 title: The full boundary twist acts on LKB by the scalar q to two n t squared
-status: draft
+status: published
 origin: pipeline
 deps: [def-lawrence-krammer-bigelow-representation, thm-the-integral-lkb-module-is-free-of-rank-n-choose-two, def-axiom-of-choice]
 justified_by: []

@@ -2,7 +2,7 @@
 id: lem-av7-coprime-factorization-finite-component-neighbourhoods
 kind: lemma
 title: Finite fibre components after an elementary etale change
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 proof_strategy: direct

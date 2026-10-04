@@ -2,7 +2,7 @@
 id: thm-positive-time-spatial-analyticity-of-heat-kernel-solutions
 kind: theorem
 title: "Spatial analyticity of heat flow at positive time"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

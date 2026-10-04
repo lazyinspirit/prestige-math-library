@@ -2,7 +2,7 @@
 id: cor-bgg-resolution-has-length-the-number-of-positive-roots
 kind: corollary
 title: The BGG resolution has length the number of positive roots
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-bgg-resolution-of-a-finite-dimensional-simple-module, cor-bgg-euler-character-identity, lem-finite-weyl-strong-exchange-and-deletion, lem-finite-weyl-closed-chambers-and-stabilizers, def-bgg-bruhat-verma-sum-in-degree-k, def-axiom-of-choice, def-verma-module, thm-pbw-model-of-a-verma-module, lem-finite-weyl-positive-roots-and-simple-reflections]

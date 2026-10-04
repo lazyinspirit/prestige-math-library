@@ -2,7 +2,7 @@
 id: rem-restriction-estimates-and-the-missing-strichartz-interface
 kind: remark
 title: Restriction estimates and the missing Strichartz interface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

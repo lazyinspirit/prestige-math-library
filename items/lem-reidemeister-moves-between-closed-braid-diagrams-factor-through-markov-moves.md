@@ -2,7 +2,7 @@
 id: lem-reidemeister-moves-between-closed-braid-diagrams-factor-through-markov-moves
 kind: lemma
 title: "Reidemeister moves between closed braid diagrams factor through Markov moves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-non-braid-like-reidemeister-moves-are-generated-by-braid-like-moves-and-reductions,

@@ -2,7 +2,7 @@
 id: lem-point-blowup-of-integral-curve-is-finite
 kind: lemma
 title: "The blowup of a one-dimensional integral Noetherian scheme at a closed point is finite"
-status: draft
+status: published
 origin: pipeline
 deps: [def-blowup-scheme-along-ideal, def-exceptional-divisor-blowup, thm-blowup-projective, lem-blowup-isomorphism-off-center, thm-exceptional-divisor-normal-cone-proj, thm-proper-quasi-finite-is-finite, def-quasi-finite-morphism-schemes, thm-blowup-effective-cartier-divisor-isomorphism, thm-one-dimensional-regular-local-rings-are-dvrs, thm-hilbert-samuel-dimension-theorem, def-hilbert-samuel-function-and-polynomial, thm-hilbert-polynomial-degree-support-dimension, def-projective-scheme-from-a-homogeneous-quotient, def-integral-scheme, def-dimension-noetherian-topological-space, def-axiom-of-choice, thm-hilbert-polynomial-coherent-sheaf, def-hilbert-function-sheaf-projective, thm-closed-subschemes-projective-space-homogeneous-ideals, cor-h0-projective-space-o-d-homogeneous-polynomials, thm-serre-vanishing, thm-projective-morphism-proper, thm-equivalent-characterisations-of-a-dvr, def-locally-noetherian-and-noetherian-scheme, thm-noetherian-ring-quotients-and-localisations, thm-pullback-center-ideal-invertible, def-embedding-dimension-and-regular-local-ring, def-symmetric-algebra-qc-module, def-relative-proj-quasi-coherent-graded-algebra, cor-finite-variable-polynomial-ring-noetherian, def-coherent-module-scheme]
 provenance:

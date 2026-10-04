@@ -2,7 +2,7 @@
 id: ex-finite-blaschke-products
 kind: example
 title: "Finite Blaschke products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-blaschke-product, thm-blaschke-product-boundary-values-and-zeros, def-unit-disc-upper-half-plane-and-blaschke-factor, thm-local-maximum-modulus-principle, lem-complex-conjugation-and-modulus-laws, def-complex-conjugate-real-imaginary-part-and-modulus]

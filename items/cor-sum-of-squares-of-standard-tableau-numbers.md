@@ -2,7 +2,7 @@
 id: cor-sum-of-squares-of-standard-tableau-numbers
 kind: corollary
 title: The sum of squares of the standard tableau numbers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-young-tableau-standard-tableau-and-shape, thm-robinson-schensted-correspondence]

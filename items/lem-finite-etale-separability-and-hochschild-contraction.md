@@ -2,7 +2,7 @@
 id: lem-finite-etale-separability-and-hochschild-contraction
 kind: lemma
 title: "The diagonal of a finite étale algebra contracts its positive Hochschild cochains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

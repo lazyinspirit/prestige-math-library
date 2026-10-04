@@ -1,7 +1,7 @@
 ---
 page: projectives-standard-filtrations-and-bgg-reciprocity-examples
 title: "Projectives Standard Filtrations and Bgg Reciprocity — Examples"
-status: draft
+status: published
 requires:
   - projectives-standard-filtrations-and-bgg-reciprocity
 items: []

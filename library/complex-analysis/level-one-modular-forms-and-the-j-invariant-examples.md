@@ -1,7 +1,7 @@
 ---
 page: level-one-modular-forms-and-the-j-invariant-examples
 title: Level-One Modular Forms and the j-Invariant — Examples
-status: draft
+status: published
 requires: [level-one-modular-forms-and-the-j-invariant]
 items: []
 examples: [ex-standard-fundamental-domain-tessellation, ex-elliptic-points-of-the-modular-group, ex-first-fourier-coefficients-of-e4-e6-delta-and-j, ex-no-nonzero-odd-weight-level-one-modular-forms, ex-square-and-hexagonal-tori-and-their-j-invariants, def-principal-congruence-subgroup-gamma-2, lem-gamma-2-is-torsion-free-and-has-no-elliptic-points, def-modular-lambda-function, lem-lambda-transformation-laws, lem-lambda-fibres-are-gamma-2-orbits, lem-weierstrass-j-invariant-of-the-legendre-normal-form, ex-modular-lambda-biholomorphism-onto-the-slit-plane, fs-level-one-e2-is-a-weight-two-modular-form]

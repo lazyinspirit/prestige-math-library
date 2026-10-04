@@ -2,7 +2,7 @@
 id: lem-radially-decreasing-kernels-are-dominated-by-the-maximal-function
 kind: lemma
 title: "Radially decreasing kernels are dominated by the maximal function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-centered-and-uncentered-hardy-littlewood-maximal-functions, def-countable-choice, lem-euclidean-balls-have-positive-finite-lebesgue-measure, prop-measure-monotonicity, thm-layer-cake-formula-for-l-p-powers, thm-lebesgue-measure-under-dilations-and-reflections, thm-tonelli-theorem-for-sigma-finite-product-spaces]

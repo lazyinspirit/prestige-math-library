@@ -2,7 +2,7 @@
 id: def-dyadic-cube-in-rn-all-generations
 kind: definition
 title: "Dyadic cubes of all generations in R^n"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-dyadic-cube-in-rn, def-half-open-box, def-integer-power, def-integers, lem-power-laws, thm-lebesgue-measure-of-a-box-of-every-kind, def-countable-choice]

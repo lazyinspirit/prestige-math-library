@@ -2,7 +2,7 @@
 id: def-fractional-slobodeckij-space-on-euclidean-space
 kind: definition
 title: "The Gagliardo--Slobodeckij space on Euclidean space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-l-p-space-as-a-quotient-by-null-functions, def-nonnegative-lebesgue-integral, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, thm-tonelli-and-fubini-for-completed-product-measures, def-countable-choice]

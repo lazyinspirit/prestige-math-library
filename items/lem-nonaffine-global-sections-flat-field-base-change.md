@@ -2,7 +2,7 @@
 id: lem-nonaffine-global-sections-flat-field-base-change
 kind: lemma
 title: "Global sections commute with extension of scalars over a field"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-affine-fibre-product-tensor-ring, thm-global-sections-affine-scheme, def-separated-morphism-schemes]
 provenance:

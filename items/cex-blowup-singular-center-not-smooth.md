@@ -2,7 +2,7 @@
 id: cex-blowup-singular-center-not-smooth
 kind: counterexample
 title: "Blowing up a point on a singular surface need not be smooth"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

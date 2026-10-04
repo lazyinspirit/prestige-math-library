@@ -2,7 +2,7 @@
 id: rem-blowup-does-not-mean-delete-point
 kind: remark
 title: "Blowing up replaces the center by its projectivized normal directions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

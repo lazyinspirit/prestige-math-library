@@ -41,7 +41,7 @@ sources:
   - title: Terence Tao, 254A Notes 3 (author-hosted lecture notes, 2011)
     url: https://terrytao.wordpress.com/2011/09/27/254a-notes-3-haar-measure-and-the-peter-weyl-theorem/
     locator: Exercise22(i)–(iii), Fourier analysis on compact abelian groups
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

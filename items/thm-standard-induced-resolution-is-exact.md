@@ -2,7 +2,7 @@
 id: thm-standard-induced-resolution-is-exact
 kind: theorem
 title: The standard induced complex is a resolution of the trivial module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-standard-induced-resolution-of-the-trivial-module, thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra, prop-associated-graded-of-the-pbw-filtration-is-commutative, def-pbw-filtration-by-tensor-degree-on-the-enveloping-algebra, thm-a-complex-is-exact-at-n-exactly-when-its-nth-homology-is-zero, lem-the-boundary-subobject-factors-through-the-cycle-subobject, def-axiom-of-choice]

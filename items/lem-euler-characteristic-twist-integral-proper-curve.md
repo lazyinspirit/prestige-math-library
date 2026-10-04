@@ -2,7 +2,7 @@
 id: lem-euler-characteristic-twist-integral-proper-curve
 kind: lemma
 title: "Twisting a coherent sheaf by an invertible sheaf on an integral proper curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

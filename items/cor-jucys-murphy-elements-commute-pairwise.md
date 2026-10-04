@@ -2,7 +2,7 @@
 id: cor-jucys-murphy-elements-commute-pairwise
 kind: corollary
 title: "The Jucys-Murphy elements commute pairwise"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-jucys-murphy-elements-of-the-symmetric-group-algebra, lem-conjugating-a-cycle-relabels-its-entries]

@@ -2,7 +2,7 @@
 id: cex-conjugacy-alone-does-not-classify-braid-closures
 kind: counterexample
 title: "Conjugacy alone does not classify braid closures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-markovs-closed-braid-equivalence-theorem,

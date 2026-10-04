@@ -2,7 +2,7 @@
 id: def-local-oriented-intersection-sign
 kind: definition
 title: "The local oriented intersection sign"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-transverse-complementary-dimensional-intersection-set, def-transverse-linear-subspaces, def-oriented-smooth-manifold-and-oriented-chart, def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space, def-product-orientation, def-orientation-of-a-finite-dimensional-real-vector-space, def-transverse-embedded-submanifolds]

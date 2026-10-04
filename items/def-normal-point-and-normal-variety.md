@@ -2,7 +2,7 @@
 id: def-normal-point-and-normal-variety
 kind: definition
 title: Normal points and normal varieties
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 0

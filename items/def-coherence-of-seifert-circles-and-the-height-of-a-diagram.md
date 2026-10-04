@@ -2,7 +2,7 @@
 id: def-coherence-of-seifert-circles-and-the-height-of-a-diagram
 kind: definition
 title: "Coherence of Seifert circles and the height of a diagram"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-seifert-smoothing-and-seifert-circles-of-an-oriented-link-diagram,

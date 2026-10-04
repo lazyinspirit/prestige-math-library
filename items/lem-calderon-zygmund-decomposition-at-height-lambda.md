@@ -2,7 +2,7 @@
 id: lem-calderon-zygmund-decomposition-at-height-lambda
 kind: lemma
 title: "Calderón–Zygmund decomposition at height λ"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-maximal-dyadic-cubes-at-height-lambda, thm-almost-every-point-is-a-lebesgue-point, thm-differentiation-along-families-shrinking-nicely, def-countable-choice]

@@ -2,7 +2,7 @@
 id: lem-closure-depends-only-on-the-braid-isotopy-class
 kind: lemma
 title: "The closure depends only on the braid isotopy class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-closure-of-a-geometric-braid, def-braid-isotopy-relative-top-and-bottom,

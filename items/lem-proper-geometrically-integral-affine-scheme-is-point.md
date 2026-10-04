@@ -2,7 +2,7 @@
 id: lem-proper-geometrically-integral-affine-scheme-is-point
 kind: lemma
 title: "A proper geometrically integral affine scheme is a point"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-global-functions-proper-integral-variety, thm-global-sections-affine-scheme, thm-morphisms-into-affine-scheme-global-sections, def-abelian-variety-over-a-field]
 provenance:

@@ -2,7 +2,7 @@
 id: thm-artins-characterization-of-the-braid-subgroup-of-aut-f-n
 kind: theorem
 title: "Artin's characterization of the braid subgroup of Aut(F_n)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 8

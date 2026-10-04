@@ -2,7 +2,7 @@
 id: cor-rational-function-no-poles-codimension-one-regular
 kind: corollary
 title: A rational function with no codimension-one poles is regular
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 3

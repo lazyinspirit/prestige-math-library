@@ -2,7 +2,7 @@
 id: ex-seminormal-and-orthogonal-block-for-shape-two-one
 kind: example
 title: "The seminormal and orthogonal blocks for shape (2,1)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-young-seminormal-form-from-jucys-murphy-eigenlines, thm-young-orthogonal-form-from-seminormal-rescaling, def-content-vector-of-a-standard-tableau, def-young-tableau-standard-tableau-and-shape, thm-jucys-murphy-joint-spectrum-is-the-set-of-tableau-content-vectors]

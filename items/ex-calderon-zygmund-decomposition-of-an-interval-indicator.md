@@ -2,7 +2,7 @@
 id: ex-calderon-zygmund-decomposition-of-an-interval-indicator
 kind: example
 title: "Calderón–Zygmund decomposition of an interval indicator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable-choice, def-dyadic-cube-in-rn-all-generations, lem-calderon-zygmund-decomposition-at-height-lambda, lem-dyadic-cubes-all-generations-partition-and-nesting]

@@ -2,7 +2,7 @@
 id: lem-discriminant-is-a-nonvanishing-cusp-form
 kind: lemma
 title: "The discriminant is a nonvanishing cusp form of weight 12"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-eisenstein-series-are-modular-forms

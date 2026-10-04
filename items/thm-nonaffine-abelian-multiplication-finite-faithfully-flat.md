@@ -2,7 +2,7 @@
 id: thm-nonaffine-abelian-multiplication-finite-faithfully-flat
 kind: theorem
 title: "Nonzero multiplication on an abelian variety is finite and faithfully flat"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-dependent-choice, def-abelian-variety-over-a-field, prop-abelian-variety-commutativity-from-rigidity, thm-abelian-variety-is-projective, lem-nonaffine-multiplication-pullback-symmetric-line-bundle, thm-segre-line-bundle-external-tensor, lem-very-ample-implies-ample, lem-ample-stable-positive-power, lem-ample-pullback-finite-morphism, thm-ample-powers-very-ample-proper-base, thm-global-functions-proper-integral-variety, lem-quasi-finite-morphism-fibre-characterization, thm-proper-quasi-finite-is-finite, cor-dimension-preserved-by-integral-extensions, thm-generic-flatness-morphisms, cor-weak-nullstellensatz-algebraically-closed-coordinate-form, thm-finite-flat-modules-over-local-rings-are-free, thm-locally-free-locus-finite-presentation-open, thm-faithfully-flat-descent-of-flatness, thm-cech-computes-qc-cohomology-separated-scheme-affine-cover, lem-eventual-global-generation-coherent-twists, thm-hilbert-polynomial-coherent-sheaf, thm-hilbert-polynomial-degree-support-dimension, lem-euler-characteristic-additive-short-exact, lem-finite-morphism-affine, thm-flatness-criteria-by-injections-and-ideals, thm-affine-domain-dimension-transcendence-degree]
 provenance:

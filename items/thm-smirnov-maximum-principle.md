@@ -2,7 +2,7 @@
 id: thm-smirnov-maximum-principle
 kind: theorem
 title: "A maximum principle for the Smirnov class: $N^+\\cap L^p=H^p$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-smirnov-class-on-the-disc, thm-nevanlinna-boundary-values-and-log-integrability, thm-jensen-inequality-for-expectation, def-poisson-integral-of-finite-boundary-measure, thm-fatou-lemma, def-analytic-hardy-space-disc, lem-hardy-radial-means-are-monotone, def-countable-choice, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-inner-singular-inner-and-outer-functions, thm-singular-inner-function-properties, lem-bounded-holomorphic-disc-functions-have-fatou-limits-under-countable-choice]

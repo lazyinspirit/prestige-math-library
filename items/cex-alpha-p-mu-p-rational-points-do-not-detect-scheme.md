@@ -26,7 +26,7 @@ sources:
   - title: The Stacks Project, complete Groupoid Schemes chapter
     url: https://stacks.math.columbia.edu/download/groupoids.pdf
     locator: §5 Examples5.1–5.4, tags022U/040M/022V/022W, printed pp.5–6; all coordinate formulas and scheme-valued point descriptions read.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

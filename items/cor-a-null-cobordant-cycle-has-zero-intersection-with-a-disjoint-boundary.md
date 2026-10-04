@@ -2,7 +2,7 @@
 id: cor-a-null-cobordant-cycle-has-zero-intersection-with-a-disjoint-boundary
 kind: corollary
 title: "A cycle has zero algebraic intersection with a bounding cycle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-boundary-of-a-compact-one-manifold-has-even-cardinality, lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count, thm-transverse-preimage-for-manifolds-with-boundary, def-local-oriented-intersection-sign, def-oriented-intersection-number, lem-oriented-boundary-of-an-intersection-trace-has-opposite-end-signs, cor-oriented-intersection-reduces-to-mod-two-intersection, def-induced-boundary-orientation, def-transverse-embedded-submanifolds, def-embedded-smooth-submanifold-with-boundary, lem-direct-sum-factor-swap-scales-oriented-bases-by-a-sign, def-countable-choice, lem-preimage-orientation-agrees-with-the-local-intersection-sign, def-mod-two-intersection-number]

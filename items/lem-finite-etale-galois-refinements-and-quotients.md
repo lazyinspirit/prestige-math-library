@@ -2,7 +2,7 @@
 id: lem-finite-etale-galois-refinements-and-quotients
 kind: lemma
 title: "Finite étale covers admit connected Galois trivializations and subgroup quotients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: def-forks-noodles-and-their-lkb-intersection-pairing
 kind: definition
 title: Forks, noodles and the LKB intersection pairing
-status: draft
+status: published
 origin: pipeline
 deps: [def-lkb-relative-pairing-modules, def-lkb-absolute-second-homology-module, def-two-point-configuration-space-of-a-punctured-disk]
 justified_by: []

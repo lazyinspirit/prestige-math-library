@@ -2,7 +2,7 @@
 id: cor-normalization-resolves-singularities-of-curves
 kind: corollary
 title: Normalization resolves the singularities of a projective curve
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 2

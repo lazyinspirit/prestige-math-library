@@ -2,7 +2,7 @@
 id: "prop-affine-algebraic-actions-coordinate-ring-coaction"
 kind: "proposition"
 title: "Affine actions correspond to coordinate-ring coactions"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-rational-action-on-affine-variety", "lem-classical-affine-algebraic-set-product-coordinate-ring", "thm-classical-affine-morphisms-coordinate-ring-antiequivalence", "def-axiom-of-choice"]
 provenance: {"statement": "literature-derived", "proof": "ai-altered"}

@@ -2,7 +2,7 @@
 id: cor-exceptional-divisor-smooth-center-normal-bundle
 kind: corollary
 title: "Regular centers have projective-bundle exceptional divisors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

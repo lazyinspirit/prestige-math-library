@@ -2,7 +2,7 @@
 id: lem-maximal-verma-is-projective-in-a-finite-truncation
 kind: lemma
 title: "A maximal-label Verma is projective in its truncation"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

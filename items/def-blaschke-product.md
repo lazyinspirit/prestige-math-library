@@ -2,7 +2,7 @@
 id: def-blaschke-product
 kind: definition
 title: "Blaschke factors and Blaschke products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-unit-disc-upper-half-plane-and-blaschke-factor, thm-blaschke-factor-is-a-disc-automorphism, def-normal-convergence-of-holomorphic-products, thm-normal-convergence-of-holomorphic-products, thm-hardy-zero-set-blaschke-condition, def-complex-conjugate-real-imaginary-part-and-modulus, lem-complex-conjugation-and-modulus-laws]

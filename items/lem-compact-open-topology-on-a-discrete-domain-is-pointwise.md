@@ -26,7 +26,7 @@ sources:
       Number Theory, Appendix C (course-hosted full text)
     url: https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf
     locator: "Appendix C.3, Lemma C.7, printed p. 434: compactness of discrete duals. The pointwise-topology identification is proved here and appears in Dikranjan Example 7.1(2)."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

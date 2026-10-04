@@ -2,7 +2,7 @@
 id: lem-lambda-fibres-are-gamma-2-orbits
 kind: lemma
 title: "The fibres of lambda are exactly the Gamma(2)-orbits"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-lambda-function

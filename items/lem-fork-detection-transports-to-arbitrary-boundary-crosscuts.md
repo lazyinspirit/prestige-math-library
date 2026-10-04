@@ -2,7 +2,7 @@
 id: lem-fork-detection-transports-to-arbitrary-boundary-crosscuts
 kind: lemma
 title: Fork detection transports to arbitrary boundary crosscuts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-the-fork-noodle-pairing-detects-essential-intersections, lem-a-multiple-of-a-fork-surface-has-a-closed-compact-replacement, lem-the-fork-noodle-pairing-is-well-defined-and-equivariant, def-axiom-of-choice]

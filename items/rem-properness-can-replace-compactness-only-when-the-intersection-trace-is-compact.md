@@ -2,7 +2,7 @@
 id: rem-properness-can-replace-compactness-only-when-the-intersection-trace-is-compact
 kind: remark
 title: "Properness can replace compactness only when the intersection trace is compact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-mod-two-intersection-number, thm-mod-two-intersection-number-is-homotopy-invariant, def-oriented-intersection-number, thm-oriented-intersection-number-is-homotopy-invariant, thm-transverse-preimage-for-manifolds-with-boundary, thm-degree-is-invariant-under-proper-smooth-homotopy]

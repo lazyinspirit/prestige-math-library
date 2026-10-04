@@ -2,7 +2,7 @@
 id: prop-two-map-intersection-as-a-diagonal-preimage
 kind: proposition
 title: "Two-map intersection as a diagonal preimage"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-transverse-complementary-dimensional-intersection-set, def-local-oriented-intersection-sign, def-oriented-intersection-number, thm-intersection-number-under-factor-interchange, lem-direct-sum-factor-swap-scales-oriented-bases-by-a-sign, def-product-orientation, thm-transverse-fibre-product-theorem, prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold]

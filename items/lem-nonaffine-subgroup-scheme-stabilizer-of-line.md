@@ -2,7 +2,7 @@
 id: lem-nonaffine-subgroup-scheme-stabilizer-of-line
 kind: lemma
 title: "Every subgroup scheme of an affine group is a line stabilizer"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-nonaffine-affine-group-faithful-representation, cor-finite-type-algebra-over-noetherian-ring-is-noetherian]
 provenance:

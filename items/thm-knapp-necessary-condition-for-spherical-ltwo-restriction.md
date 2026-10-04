@@ -2,7 +2,7 @@
 id: thm-knapp-necessary-condition-for-spherical-ltwo-restriction
 kind: theorem
 title: Knapp necessary condition for spherical L2 restriction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

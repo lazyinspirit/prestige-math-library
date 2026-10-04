@@ -2,7 +2,7 @@
 id: lem-nonaffine-characteristic-zero-group-smooth
 kind: lemma
 title: "Every finite-type characteristic-zero group scheme is smooth"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-existence-of-algebraic-closures, lem-nonaffine-connected-group-geometrically-connected, lem-ag-geometric-regularity-field-tests, def-embedding-dimension-and-regular-local-ring, thm-regular-local-rings-are-domains-and-cohen-macaulay]
 provenance:

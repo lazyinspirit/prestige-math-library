@@ -2,7 +2,7 @@
 id: lem-finite-etale-algebra-module-presentation-and-rank
 kind: lemma
 title: "Finite étale algebras have finite locally free underlying modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

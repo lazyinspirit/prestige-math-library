@@ -2,7 +2,7 @@
 id: def-compactified-level-one-modular-curve
 kind: definition
 title: "The compactified level-one modular curve X(1)"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-group-action-on-the-upper-half-plane

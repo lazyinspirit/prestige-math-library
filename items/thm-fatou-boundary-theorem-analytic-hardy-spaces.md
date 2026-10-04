@@ -2,7 +2,7 @@
 id: thm-fatou-boundary-theorem-analytic-hardy-spaces
 kind: theorem
 title: "Fatou's boundary theorem for analytic Hardy spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-circle-maximal-weak-one-one, thm-poisson-nontangential-maximal-bound, def-circle-maximal-function-and-nontangential-region, thm-layer-cake-formula-for-l-p-powers, thm-monotone-convergence-for-the-integral, lem-complex-circle-measures-have-finite-total-variation-under-countable-choice, def-countable-choice, def-analytic-hardy-space-disc, lem-hardy-radial-means-are-monotone, thm-nevanlinna-boundary-values-and-log-integrability, lem-hardy-log-integrability-of-boundary-values, lem-poisson-jensen-inequality-hardy-functions, lem-bounded-holomorphic-disc-functions-have-fatou-limits-under-countable-choice, thm-jensen-inequality-for-expectation, thm-poisson-extension-lp-contraction-and-norm-limit, lem-poisson-kernel-properties-on-the-disc, def-poisson-integral-of-finite-boundary-measure, def-poisson-kernel-on-the-disc, thm-fatou-lemma, thm-dominated-convergence, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-complex-holder-minkowski-and-the-quotient-norm, thm-taylor-expansion-holomorphic-function, thm-complex-power-series-converge-locally-uniformly, def-fourier-coefficients-and-trigonometric-polynomials, lem-trigonometric-characters-are-orthonormal, thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation, lem-finite-complex-circle-measures-are-determined-by-fourier-coefficients]

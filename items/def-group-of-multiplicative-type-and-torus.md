@@ -2,7 +2,7 @@
 id: def-group-of-multiplicative-type-and-torus
 kind: definition
 title: "Groups of multiplicative type and tori"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

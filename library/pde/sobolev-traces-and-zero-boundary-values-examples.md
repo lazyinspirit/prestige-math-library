@@ -1,7 +1,7 @@
 ---
 page: sobolev-traces-and-zero-boundary-values-examples
 title: Sobolev Traces and Zero Boundary Values — Examples
-status: draft
+status: published
 items: []
 examples: ["ex-trace-of-an-ac-sobolev-function-on-an-interval", "ex-trace-of-an-affine-function-on-a-ball", "cex-boundary-point-values-are-not-defined-by-an-lp-class", "cex-lp-boundary-data-need-not-lie-in-the-h-one-trace-range", "ex-zero-trace-versus-zero-extension", "cex-trace-theorem-fails-on-a-standard-outward-cusp-without-domain-control", "ex-a-right-inverse-in-the-half-space-by-poisson-type-extension"]
 ---

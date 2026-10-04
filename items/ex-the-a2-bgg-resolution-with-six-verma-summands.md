@@ -2,7 +2,7 @@
 id: ex-the-a2-bgg-resolution-with-six-verma-summands
 kind: example
 title: The A2 BGG resolution with six Verma summands
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-bgg-resolution-of-a-finite-dimensional-simple-module, def-bgg-differential-from-signed-verma-maps, lem-bruhat-covers-give-unique-verma-embeddings, lem-bruhat-rank-two-intervals-are-diamonds, lem-compatible-signs-exist-on-the-bruhat-graph, def-bgg-bruhat-verma-sum-in-degree-k, def-axiom-of-choice, prop-the-bgg-differential-squares-to-zero, lem-positive-root-pairings-of-a-dominant-integral-weight, lem-dominant-integral-dot-translates-embed-in-the-verma-module, lem-bruhat-covers-are-reflection-covers, def-finite-weyl-root-system-lattice-and-chamber-conventions, lem-finite-weyl-positive-roots-and-simple-reflections]

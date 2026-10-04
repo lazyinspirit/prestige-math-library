@@ -2,7 +2,7 @@
 id: ex-sign-twist-conjugates-the-s31-character
 kind: example
 title: "Sign twist conjugates the $(3,1)$ character of $S_4$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: lem-central-character-cuts-of-a-typed-module-are-typed
 kind: lemma
 title: Central-character cuts of a typed module are typed by the matching weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-verma-type-of-a-module-with-a-standard-filtration, def-generalized-central-character-subcategory-of-o, thm-category-o-decomposes-by-generalized-central-character, lem-generalized-central-character-submodules-are-direct-summands, cor-central-characters-are-dot-weyl-orbits, def-axiom-of-choice, lem-central-action-on-a-cyclic-highest-weight-module-is-scalar]

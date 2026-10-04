@@ -2,7 +2,7 @@
 id: lem-tubular-charts-realize-a-prescribed-normal-identification
 kind: lemma
 title: "Compatible tubular charts realize a prescribed normal identification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold", "def-normal-and-conormal-bundles-of-an-embedded-submanifold", "cor-every-smooth-manifold-admits-a-riemannian-metric", "def-tangential-and-normal-projections-along-a-riemannian-submanifold", "prop-smoothness-of-a-bundle-map-is-equivalent-to-smooth-local-matrices", "prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism", "thm-chain-rule-for-differentials-of-smooth-maps", "def-countable-choice"]

@@ -2,7 +2,7 @@
 id: cor-bijective-birational-to-normal-isomorphism-under-finiteness
 kind: corollary
 title: Birational quasi-finite maps to normal targets are open immersions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 4

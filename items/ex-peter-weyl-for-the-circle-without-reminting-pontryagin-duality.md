@@ -35,7 +35,7 @@ sources:
   - title: Constantin Teleman, Representation Theory (Berkeley lecture notes, 60 pp.)
     url: https://math.berkeley.edu/~teleman/math/RepThry.pdf
     locator: §§19.13–19.14 (the complete list of irreducible characters of U(1) is $z\mapsto z^n$), printed pp. 44–45
-status: draft
+status: published
 origin: pipeline
 ---
 ## Example

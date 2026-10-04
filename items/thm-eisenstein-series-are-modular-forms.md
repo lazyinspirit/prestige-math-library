@@ -2,7 +2,7 @@
 id: thm-eisenstein-series-are-modular-forms
 kind: theorem
 title: "Eisenstein series are modular forms; their Fourier coefficients"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-group-action-on-the-upper-half-plane

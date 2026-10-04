@@ -2,7 +2,7 @@
 id: thm-hook-length-formula
 kind: theorem
 title: The hook length formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-hook-arm-leg-and-hook-length, lem-hook-product-branching-identity, lem-hook-product-change-under-corner-removal, lem-standard-tableau-removal-recursion, thm-standard-polytabloid-basis]

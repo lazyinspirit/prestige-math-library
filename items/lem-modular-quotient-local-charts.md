@@ -2,7 +2,7 @@
 id: lem-modular-quotient-local-charts
 kind: lemma
 title: "Local charts and the Riemann surface structure of a modular quotient"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-group-action-on-the-upper-half-plane

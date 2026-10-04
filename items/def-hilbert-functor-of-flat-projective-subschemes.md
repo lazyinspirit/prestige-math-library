@@ -2,7 +2,7 @@
 id: def-hilbert-functor-of-flat-projective-subschemes
 kind: definition
 title: "Hilbert functor of flat finitely presented projective families"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: lem-tt-star-reduces-extension-to-convolution-with-surface-measure-transform
 kind: lemma
 title: TT-star reduces extension to convolution with the surface-measure transform
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: lem-first-row-insertion-basic-subsequences
 kind: lemma
 title: Basic subsequences of the first row
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-row-insertion-and-bumping-route, def-young-tableau-standard-tableau-and-shape, lem-row-bumping-route-monotonicity]

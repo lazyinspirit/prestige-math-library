@@ -2,7 +2,7 @@
 id: thm-the-punctured-disk-fundamental-group-is-free-on-standard-meridians
 kind: theorem
 title: "The punctured-disk fundamental group is free on the standard meridians"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 2

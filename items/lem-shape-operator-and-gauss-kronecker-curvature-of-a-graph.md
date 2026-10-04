@@ -2,7 +2,7 @@
 id: lem-shape-operator-and-gauss-kronecker-curvature-of-a-graph
 kind: lemma
 title: Shape operator and Gauss-Kronecker curvature of a graph
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

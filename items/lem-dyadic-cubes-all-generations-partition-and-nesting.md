@@ -2,7 +2,7 @@
 id: lem-dyadic-cubes-all-generations-partition-and-nesting
 kind: lemma
 title: "All-generation dyadic cubes: partition, volume and nesting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable-choice, def-dyadic-cube-in-rn-all-generations, def-finite-sum, def-half-open-box, def-integer-power, def-integers, lem-finite-sum-laws, lem-integer-part, lem-nat-embeds-int, lem-power-laws, thm-int-ordered-ring, thm-lebesgue-measure-of-a-box-of-every-kind]

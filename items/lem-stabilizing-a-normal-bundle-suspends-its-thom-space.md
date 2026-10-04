@@ -2,7 +2,7 @@
 id: lem-stabilizing-a-normal-bundle-suspends-its-thom-space
 kind: lemma
 title: "Adding a trivial normal line suspends the Thom space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-disk-bundle-sphere-bundle-and-thom-space", "lem-compact-test-exponential-law-and-products-of-quotients"]

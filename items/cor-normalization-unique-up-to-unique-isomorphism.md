@@ -2,7 +2,7 @@
 id: cor-normalization-unique-up-to-unique-isomorphism
 kind: corollary
 title: The normalization is unique up to unique isomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 5

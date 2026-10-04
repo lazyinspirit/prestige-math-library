@@ -2,7 +2,7 @@
 id: lem-bruhat-covers-are-reflection-covers
 kind: lemma
 title: Bruhat covers are right multiplication by positive-root reflections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-bruhat-order-on-a-finite-weyl-group, lem-finite-weyl-strong-exchange-and-deletion, def-root-reflections-and-the-weyl-group-action, def-finite-weyl-root-system-lattice-and-chamber-conventions]

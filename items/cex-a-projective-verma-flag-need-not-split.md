@@ -2,7 +2,7 @@
 id: cex-a-projective-verma-flag-need-not-split
 kind: counterexample
 title: A projective Verma flag need not split
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

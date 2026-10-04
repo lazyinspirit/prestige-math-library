@@ -2,7 +2,7 @@
 id: cex-bijective-birational-not-isomorphism-cusp-reprise
 kind: counterexample
 title: The cusp normalization is bijective but not an isomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 7

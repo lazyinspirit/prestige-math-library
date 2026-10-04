@@ -2,7 +2,7 @@
 id: def-divisor-power-sums-sigma-k
 kind: definition
 title: "The divisor power sums $\\sigma_k$"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-divides-in-z

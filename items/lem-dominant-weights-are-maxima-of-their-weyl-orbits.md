@@ -2,7 +2,7 @@
 id: lem-dominant-weights-are-maxima-of-their-weyl-orbits
 kind: lemma
 title: "Dominant integral weights are maxima of their Weyl orbits"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

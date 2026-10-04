@@ -2,7 +2,7 @@
 id: thm-nonaffine-groupoid-quotient-from-quasisection
 kind: theorem
 title: "A flat equivalence relation with a suitable quasi-section has a scheme quotient"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-nonaffine-finite-relation-quotient-with-affine-orbits, lem-nonaffine-fppf-descent-of-scheme-morphisms, thm-faithfully-flat-descent-of-flatness]
 provenance:

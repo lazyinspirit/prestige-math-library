@@ -2,7 +2,7 @@
 id: thm-uniqueness-of-lp-mild-heat-solutions-in-the-convolution-class
 kind: theorem
 title: "Uniqueness of strongly continuous mild heat solutions"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

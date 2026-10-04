@@ -2,7 +2,7 @@
 id: def-verma-type-of-a-module-with-a-standard-filtration
 kind: definition
 title: Type of a module with a Verma filtration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-verma-module, def-bgg-category-o, def-composition-series-and-composition-factors-of-an-object, def-grothendieck-group-and-character-of-category-o, prop-the-grothendieck-group-of-o-has-simple-and-standard-bases, prop-tensoring-with-a-finite-dimensional-module-preserves-category-o, def-axiom-of-choice]

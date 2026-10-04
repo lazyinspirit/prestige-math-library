@@ -2,7 +2,7 @@
 id: lem-weierstrass-j-invariant-of-the-legendre-normal-form
 kind: lemma
 title: "The j-invariant of the Legendre normal form"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-lambda-function

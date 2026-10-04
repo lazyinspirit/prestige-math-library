@@ -2,7 +2,7 @@
 id: def-closure-of-a-geometric-braid
 kind: definition
 title: "The closure of a geometric braid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-geometric-braid-with-setwise-endpoints, def-circle-as-real-line-mod-integers,

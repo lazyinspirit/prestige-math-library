@@ -2,7 +2,7 @@
 id: cex-normal-not-smooth-quadric-cone
 kind: counterexample
 title: "A normal singular surface: the quadric cone"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 1

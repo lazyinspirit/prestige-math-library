@@ -2,7 +2,7 @@
 id: lem-valence-boundary-arc-computation
 kind: lemma
 title: "The boundary arc contribution in the valence computation"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-level-one-modular-form-and-cusp-form

@@ -35,7 +35,7 @@ sources:
   - title: Emmanuel Kowalski, An Introduction to the Representation Theory of Groups (author-hosted draft, 338 pp.)
     url: https://people.math.ethz.ch/~kowalski/representation-theory.pdf
     locator: Ch. 5 §5.4, printed pp. 230–236 (the general compact-group theory that the example applies)
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-nonaffine-reduced-neutral-subgroup-over-perfect-field
 kind: lemma
 title: "Reduced identity components over perfect fields"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, thm-ag-separating-transcendence-basis-perfect-field, lem-nonaffine-connected-group-geometrically-connected, thm-nonempty-regular-locus-reduced-variety-perfect-field, thm-regular-equals-smooth-over-perfect-field, thm-smooth-locus-open, thm-primitive-element-theorem-for-finite-separable-extensions]
 provenance:

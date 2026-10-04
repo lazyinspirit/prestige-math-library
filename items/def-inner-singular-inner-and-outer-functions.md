@@ -2,7 +2,7 @@
 id: def-inner-singular-inner-and-outer-functions
 kind: definition
 title: "Inner, singular inner and outer functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-bounded-holomorphic-disc-functions-have-fatou-limits-under-countable-choice, def-unit-disc-upper-half-plane-and-blaschke-factor, def-poisson-kernel-on-the-disc, def-poisson-integral-of-finite-boundary-measure, def-analytic-hardy-space-disc, def-blaschke-product, thm-blaschke-product-boundary-values-and-zeros, def-complex-exponential, def-complex-lp-and-euclidean-test-function-conventions, def-the-one-dimensional-torus-and-normalized-haar-integral, def-countable-choice, thm-complex-power-series-converge-locally-uniformly, thm-holomorphic-if-and-only-if-analytic, thm-complex-exponential-is-entire-with-derivative-itself, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-local-maximum-modulus-principle]

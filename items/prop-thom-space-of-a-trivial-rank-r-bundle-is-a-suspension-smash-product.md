@@ -2,7 +2,7 @@
 id: prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product
 kind: proposition
 title: "Trivial Thom spaces as suspension smash products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["prop-thom-space-of-zero-and-trivial-bundles", "def-disk-bundle-sphere-bundle-and-thom-space"]

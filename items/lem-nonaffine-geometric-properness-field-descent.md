@@ -2,7 +2,7 @@
 id: lem-nonaffine-geometric-properness-field-descent
 kind: lemma
 title: "Properness over a field can be checked after field extension"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-proper-morphism, thm-properness-descent-fpqc]
 provenance:

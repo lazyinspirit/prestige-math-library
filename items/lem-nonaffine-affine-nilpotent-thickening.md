@@ -2,7 +2,7 @@
 id: lem-nonaffine-affine-nilpotent-thickening
 kind: lemma
 title: "A nilpotent thickening of an affine scheme is affine"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-qc-sheaf-affine-higher-cohomology-vanishes, lem-extend-sections-from-nonvanishing-open, thm-morphisms-into-affine-scheme-global-sections]
 provenance:

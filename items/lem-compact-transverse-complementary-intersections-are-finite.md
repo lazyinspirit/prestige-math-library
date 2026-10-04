@@ -2,7 +2,7 @@
 id: lem-compact-transverse-complementary-intersections-are-finite
 kind: lemma
 title: "Compact transverse complementary intersections are finite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-transverse-complementary-dimensional-intersection-set, thm-continuity-characterisations-top, thm-closed-subspace-of-a-compact-space-is-compact, def-compact-space, def-subspace-topology-top, def-embedded-submanifold-and-slice-chart, thm-transverse-preimage-theorem]

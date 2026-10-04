@@ -2,7 +2,7 @@
 id: def-heat-evolution-of-initial-data
 kind: definition
 title: "The heat evolution $H_t$ of initial data"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-convolution-of-two-functions-on-rn

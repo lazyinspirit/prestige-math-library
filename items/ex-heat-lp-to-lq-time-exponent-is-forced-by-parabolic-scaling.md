@@ -2,7 +2,7 @@
 id: ex-heat-lp-to-lq-time-exponent-is-forced-by-parabolic-scaling
 kind: example
 title: "The heat smoothing time exponent is forced by scaling"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-c-one-change-of-variables-for-l-one-functions

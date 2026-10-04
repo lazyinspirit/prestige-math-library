@@ -1,7 +1,7 @@
 ---
 page: oriented-links-braid-closures-and-markov-equivalence
 title: "Oriented Links, Braid Closures, and Markov Equivalence"
-status: draft
+status: published
 requires: [geometric-braids-and-artin-generators,
             artin-presentation-completeness-and-braid-combing,
             manifolds-with-boundary-collars-and-orientations,

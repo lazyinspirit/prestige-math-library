@@ -2,7 +2,7 @@
 id: thm-frobenius-characteristic-sends-specht-characters-to-schur-functions
 kind: theorem
 title: "The characteristic of a Specht character is a Schur function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

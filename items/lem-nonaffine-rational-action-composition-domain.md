@@ -2,7 +2,7 @@
 id: lem-nonaffine-rational-action-composition-domain
 kind: lemma
 title: "Composition at points in the domain of a rational group action"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, cor-weak-nullstellensatz-algebraically-closed-coordinate-form, def-abelian-variety-over-a-field, def-rational-map-integral-schemes]
 provenance:

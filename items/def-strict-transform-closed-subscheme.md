@@ -2,7 +2,7 @@
 id: def-strict-transform-closed-subscheme
 kind: definition
 title: "Strict transform of a closed subscheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: lem-bounded-holomorphic-disc-functions-have-fatou-limits-under-countable-choice
 kind: lemma
 title: "Bounded holomorphic disc functions have Poisson boundary data and Fatou limits under countable choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-trigonometric-characters-are-orthonormal, lem-poisson-kernel-properties-on-the-disc, def-countable-choice, thm-taylor-expansion-holomorphic-function, thm-complex-power-series-converge-locally-uniformly, thm-parseval-identity-for-fourier-series, thm-riesz-fischer-for-fourier-coefficients, def-fourier-coefficients-and-trigonometric-polynomials, def-poisson-kernel-on-the-disc, def-poisson-integral-of-finite-boundary-measure, thm-fatou-nontangential-boundary-theorem-harmonic, thm-complex-holder-minkowski-and-the-quotient-norm, def-the-one-dimensional-torus-and-normalized-haar-integral]

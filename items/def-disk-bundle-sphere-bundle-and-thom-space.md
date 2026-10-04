@@ -2,7 +2,7 @@
 id: def-disk-bundle-sphere-bundle-and-thom-space
 kind: definition
 title: "Disk bundle, sphere bundle, and Thom space: the differential topology interface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-disk-sphere-and-thom-space-of-a-metric-vector-bundle"]

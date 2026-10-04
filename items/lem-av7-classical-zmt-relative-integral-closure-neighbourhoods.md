@@ -2,7 +2,7 @@
 id: lem-av7-classical-zmt-relative-integral-closure-neighbourhoods
 kind: lemma
 title: Classical Zariski Main from relative integral-closure neighbourhoods
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 proof_strategy: direct

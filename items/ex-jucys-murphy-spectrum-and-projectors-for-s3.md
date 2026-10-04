@@ -2,7 +2,7 @@
 id: ex-jucys-murphy-spectrum-and-projectors-for-s3
 kind: example
 title: "The Jucys-Murphy spectrum and projectors for S_3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-jucys-murphy-joint-spectrum-is-the-set-of-tableau-content-vectors, thm-primitive-tableau-idempotents-by-jucys-murphy-interpolation, def-content-vector-of-a-standard-tableau, def-jucys-murphy-elements-of-the-symmetric-group-algebra, thm-gelfand-tsetlin-algebra-is-the-diagonal-algebra-in-the-young-basis, def-removable-and-addable-nodes-of-a-partition, cex-ordinary-jucys-murphy-projection-formulas-do-not-survive-content-collision]

@@ -2,7 +2,7 @@
 id: thm-primitive-tableau-idempotents-by-jucys-murphy-interpolation
 kind: theorem
 title: "Primitive tableau idempotents by Jucys-Murphy interpolation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-jucys-murphy-joint-spectrum-is-the-set-of-tableau-content-vectors, thm-gelfand-tsetlin-algebra-is-the-diagonal-algebra-in-the-young-basis, lem-addable-nodes-of-a-partition-have-distinct-contents, def-removable-and-addable-nodes-of-a-partition, def-content-vector-of-a-standard-tableau, def-young-tableau-standard-tableau-and-shape, def-jucys-murphy-elements-of-the-symmetric-group-algebra]

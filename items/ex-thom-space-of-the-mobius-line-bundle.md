@@ -2,7 +2,7 @@
 id: ex-thom-space-of-the-mobius-line-bundle
 kind: example
 title: "Möbius line Thom space as a projective-plane quotient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-disk-bundle-sphere-bundle-and-thom-space", "prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product"]

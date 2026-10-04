@@ -2,7 +2,7 @@
 id: lem-av7-zero-dimensional-standard-smooth-local-tools
 kind: lemma
 title: Local algebra tools for elementary etale changes of classical varieties
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 proof_strategy: direct

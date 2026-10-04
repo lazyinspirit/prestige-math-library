@@ -2,7 +2,7 @@
 id: cor-involutions-are-counted-by-standard-tableaux
 kind: corollary
 title: Involutions are counted by standard tableaux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [cor-rsk-symmetry-under-inversion, def-finite-symmetric-group-and-permutation-notation, def-young-tableau-standard-tableau-and-shape, thm-robinson-schensted-correspondence]

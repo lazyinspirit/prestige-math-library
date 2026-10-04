@@ -2,7 +2,7 @@
 id: lem-the-fork-noodle-pairing-is-well-defined-and-equivariant
 kind: lemma
 title: The fork-noodle pairing is well defined and equivariant
-status: draft
+status: published
 origin: pipeline
 deps: [lem-a-multiple-of-a-fork-surface-has-a-closed-compact-replacement, def-forks-noodles-and-their-lkb-intersection-pairing, def-relative-singular-homology, def-singular-chain-complex-of-a-pair, thm-singular-chain-homotopy-formula, lem-int-cancellation, cor-polynomial-ring-over-a-domain-is-a-domain, def-multiplicative-subset-and-localisation, thm-alexander-contractibility-of-the-boundary-fixed-disk-homeomorphism-group, def-lkb-two-variable-covering-homomorphism]
 justified_by: []

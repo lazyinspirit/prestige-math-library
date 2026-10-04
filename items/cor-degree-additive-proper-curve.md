@@ -2,7 +2,7 @@
 id: cor-degree-additive-proper-curve
 kind: corollary
 title: "Degree is additive on invertible sheaves over a proper curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

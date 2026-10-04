@@ -2,7 +2,7 @@
 id: def-gelfand-tsetlin-algebra-for-the-symmetric-group-chain
 kind: definition
 title: "The Gelfand-Tsetlin algebra of the symmetric group chain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [cor-group-algebra-is-semisimple-when-char-k-does-not-divide-group-order, def-center-of-the-group-algebra, def-group-ring]

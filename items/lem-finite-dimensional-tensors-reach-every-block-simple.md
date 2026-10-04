@@ -2,7 +2,7 @@
 id: lem-finite-dimensional-tensors-reach-every-block-simple
 kind: lemma
 title: Finite-dimensional tensoring reaches every simple of a linkage class
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

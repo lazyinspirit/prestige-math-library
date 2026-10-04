@@ -2,7 +2,7 @@
 id: thm-oriented-intersection-number-is-homotopy-invariant
 kind: theorem
 title: "The oriented intersection number is homotopy invariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-boundary-of-a-compact-one-manifold-has-even-cardinality, lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count, def-oriented-intersection-number, lem-preimage-orientation-agrees-with-the-local-intersection-sign, lem-oriented-boundary-of-an-intersection-trace-has-opposite-end-signs, thm-transverse-preimage-for-manifolds-with-boundary, def-smooth-family-of-maps-and-evaluation-map, thm-transversality-homotopy-theorem, def-countable-choice, thm-mod-two-intersection-number-is-homotopy-invariant]

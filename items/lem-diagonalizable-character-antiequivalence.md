@@ -2,7 +2,7 @@
 id: lem-diagonalizable-character-antiequivalence
 kind: lemma
 title: "Split diagonalizable groups are dual to abelian groups"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

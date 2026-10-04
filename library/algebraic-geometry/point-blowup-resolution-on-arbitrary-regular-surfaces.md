@@ -1,7 +1,7 @@
 ---
 page: point-blowup-resolution-on-arbitrary-regular-surfaces
 title: "Point Blowup Resolution on Arbitrary Regular Surfaces"
-status: draft
+status: published
 requires: [blowups-exceptional-divisors-and-strict-transforms,
            normalization-finiteness-for-affine-domains,
            flat-smooth-and-etale-morphisms,

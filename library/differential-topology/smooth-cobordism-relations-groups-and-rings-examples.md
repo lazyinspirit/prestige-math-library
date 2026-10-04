@@ -1,7 +1,7 @@
 ---
 page: smooth-cobordism-relations-groups-and-rings-examples
 title: Smooth Cobordism Relations Groups and Rings — Examples
-status: draft
+status: published
 items: []
 examples: [ex-a-circle-is-the-boundary-of-a-disk, ex-two-unoriented-points-bound-an-interval, ex-signed-points-give-the-oriented-zero-bordism-invariant, ex-the-pair-of-pants-is-a-cobordism-realizing-addition-of-circles, cex-real-projective-two-space-is-not-unoriented-null-cobordant]
 ---

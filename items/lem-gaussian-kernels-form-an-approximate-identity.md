@@ -2,7 +2,7 @@
 id: lem-gaussian-kernels-form-an-approximate-identity
 kind: lemma
 title: "Gaussian kernels form an approximate identity"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

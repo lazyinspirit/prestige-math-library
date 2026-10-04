@@ -2,7 +2,7 @@
 id: def-abelian-variety-over-a-field
 kind: definition
 title: "Abelian varieties over a field"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-scheme-over-base, def-proper-morphism, def-smooth-morphism-schemes, def-geometrically-reduced-integral-connected-fibre, thm-ag-standard-smooth-geometric-regularity, thm-regular-local-rings-are-domains-and-cohen-macaulay]
 justified_by: [prop-abelian-variety-commutativity-from-rigidity]

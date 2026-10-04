@@ -2,7 +2,7 @@
 id: thm-inner-outer-factorisation-hardy-space
 kind: theorem
 title: "Inner-outer factorisation of a Hardy-space function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-axiom-of-choice, def-analytic-hardy-space-disc, thm-fatou-boundary-theorem-analytic-hardy-spaces, lem-hardy-log-integrability-of-boundary-values, lem-poisson-jensen-inequality-hardy-functions, thm-riesz-factorization-hardy-space, def-blaschke-product, thm-blaschke-product-boundary-values-and-zeros, def-inner-singular-inner-and-outer-functions, lem-outer-function-properties, thm-zero-free-inner-functions-are-singular-inner, thm-complex-power-series-converge-locally-uniformly, def-countable-choice, thm-local-maximum-modulus-principle]

@@ -2,7 +2,7 @@
 id: lem-jacobi-product-formula-for-the-discriminant
 kind: lemma
 title: "The Jacobi product formula for the discriminant"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-e2-transformation-law

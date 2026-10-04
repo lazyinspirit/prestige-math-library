@@ -2,7 +2,7 @@
 id: lem-projective-embedding-dualizing-complex-existence
 kind: lemma
 title: "Existence and biduality from a projective embedding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-axiom-of-choice", "def-dualizing-complex-on-projective-cm-scheme", "lem-finite-closed-immersion-derived-coinduction-adjunction", "lem-regular-quotient-dualizing-complex-and-biduality", "def-projective-morphism-pre-proj", "lem-coherent-sheaf-finite-twisted-locally-free-resolution-projective-space", "thm-localisation-and-polynomial-extension-of-regular-rings"]

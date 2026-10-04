@@ -2,7 +2,7 @@
 id: cor-projective-standard-labels-lie-above-the-head
 kind: corollary
 title: The triangular restriction on projective Verma flags
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

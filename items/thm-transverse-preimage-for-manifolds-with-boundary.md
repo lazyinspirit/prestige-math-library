@@ -2,7 +2,7 @@
 id: thm-transverse-preimage-for-manifolds-with-boundary
 kind: theorem
 title: "Transverse preimages for maps from manifolds with boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-a-smooth-map-transverse-to-an-embedded-submanifold, thm-transverse-preimage-theorem, def-embedded-smooth-submanifold-with-boundary, def-neat-submanifold-of-a-manifold-with-boundary, thm-neat-submanifolds-have-boundary-adapted-slice-charts, thm-boundary-submanifolds-of-a-boundaryless-manifold-have-half-slice-charts, def-smooth-function-on-a-relatively-open-subset-of-a-half-space, def-smooth-map-between-manifolds-with-boundary, def-countable-choice, def-embedded-submanifold-and-slice-chart, def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary, thm-euclidean-inverse-function-theorem]

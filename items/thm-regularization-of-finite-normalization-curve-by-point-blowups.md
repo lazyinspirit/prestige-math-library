@@ -2,7 +2,7 @@
 id: thm-regularization-of-finite-normalization-curve-by-point-blowups
 kind: theorem
 title: Regularization of a one-dimensional integral curve with finite normalization by point blowups
-status: draft
+status: published
 origin: pipeline
 deps: [lem-normalization-factors-through-blowup-of-curve-point, lem-strict-blowup-increases-finite-normalization-subalgebra-at-singular-center, lem-point-blowup-of-integral-curve-is-finite, lem-increasing-sequence-of-coherent-subsheaves-stabilizes, lem-blowup-reduced-integral-under-domain-rees, def-blowup-scheme-along-ideal, thm-one-dimensional-regular-local-rings-are-dvrs, def-coherent-module-scheme, def-integral-scheme, def-axiom-of-choice, cor-blowup-birational-integral-scheme, def-embedding-dimension-and-regular-local-ring, def-dimension-noetherian-topological-space, def-locally-noetherian-and-noetherian-scheme, cor-finite-type-algebra-over-noetherian-ring-is-noetherian, def-finite-morphism-schemes, cor-dimension-preserved-by-integral-extensions, lem-chain-dimension-open-cover]
 provenance:

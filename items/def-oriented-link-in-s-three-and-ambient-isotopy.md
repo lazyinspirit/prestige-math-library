@@ -2,7 +2,7 @@
 id: def-oriented-link-in-s-three-and-ambient-isotopy
 kind: definition
 title: "Oriented links in the three-sphere and ambient isotopy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-smooth-embedding, def-euclidean-spheres-and-closed-balls,

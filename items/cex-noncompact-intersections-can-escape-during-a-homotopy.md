@@ -2,7 +2,7 @@
 id: cex-noncompact-intersections-can-escape-during-a-homotopy
 kind: counterexample
 title: "Noncompact intersections can escape during a homotopy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-mod-two-intersection-number, thm-mod-two-intersection-number-is-homotopy-invariant, def-oriented-intersection-number, thm-oriented-intersection-number-is-homotopy-invariant, rem-properness-can-replace-compactness-only-when-the-intersection-trace-is-compact, ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds, def-smooth-family-of-maps-and-evaluation-map, def-local-oriented-intersection-sign]

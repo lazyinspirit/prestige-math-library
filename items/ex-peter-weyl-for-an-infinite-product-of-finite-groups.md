@@ -36,7 +36,7 @@ sources:
   - title: Constantin Teleman, Representation Theory (Berkeley lecture notes, 60 pp.)
     url: https://math.berkeley.edu/~teleman/math/RepThry.pdf
     locator: §22.6, printed p. 53 (irreducibles of a product of compact groups are tensor products)
-status: draft
+status: published
 origin: pipeline
 ---
 ## Example

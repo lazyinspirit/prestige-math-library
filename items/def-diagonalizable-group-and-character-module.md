@@ -2,7 +2,7 @@
 id: def-diagonalizable-group-and-character-module
 kind: definition
 title: "Diagonalizable groups and their character modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: thm-standard-fundamental-domain-for-the-modular-group
 kind: theorem
 title: "The standard fundamental domain, boundary identifications and elliptic stabilisers"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-group-action-on-the-upper-half-plane

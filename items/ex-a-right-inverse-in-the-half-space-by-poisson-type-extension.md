@@ -2,7 +2,7 @@
 id: ex-a-right-inverse-in-the-half-space-by-poisson-type-extension
 kind: example
 title: "A Poisson-type extension and its local and global Sobolev traces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-trace-estimate-on-the-half-space, lem-sobolev-trace-agrees-with-continuous-boundary-values, thm-lp-trace-operator-on-a-bounded-c-one-domain, thm-bounded-right-inverse-for-the-sobolev-trace, thm-fourier-inversion-on-schwartz-space, thm-plancherel, thm-fourier-transform-maps-schwartz-space-continuously-to-itself, def-fourier-transform-on-l-one-of-rn, thm-poisson-kernel-and-bounded-dirichlet-problem-on-the-half-space, def-bounded-c-k-domain-and-boundary-charts, thm-tonelli-and-fubini-for-completed-product-measures, thm-dominated-convergence, lem-weak-leibniz-rule-with-a-smooth-factor, def-countable-choice, def-axiom-of-choice, thm-l-one-l-two-agreement-of-fourier-transform]

@@ -2,7 +2,7 @@
 id: lem-dyadic-mihlin-kernels-have-uniform-integral-hormander-control
 kind: lemma
 title: "Dyadic Mihlin pieces: uniform L1 and first-difference bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-locally-integrable-functions-embed-in-distributions, thm-differentiation-and-polynomial-multiplication-preserve-tempered-distributions, thm-holder-inequality-for-integrals, def-countable-choice, def-fourier-transform-of-a-tempered-distribution, def-mihlin-symbol-with-more-than-half-dimension-derivatives, def-schwartz-space-and-its-seminorms, lem-schwartz-cutoffs-from-the-standard-smooth-step, thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions, thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms, thm-plancherel]

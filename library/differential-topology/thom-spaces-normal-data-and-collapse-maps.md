@@ -1,7 +1,7 @@
 ---
 page: thom-spaces-normal-data-and-collapse-maps
 title: Thom Spaces Normal Data and Collapse Maps
-status: draft
+status: published
 items: [def-disk-bundle-sphere-bundle-and-thom-space,
         lem-thom-space-is-independent-of-the-bundle-metric-up-to-canonical-homeomorphism,
         prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product,

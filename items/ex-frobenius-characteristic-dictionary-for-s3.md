@@ -2,7 +2,7 @@
 id: ex-frobenius-characteristic-dictionary-for-s3
 kind: example
 title: "The Frobenius characteristic dictionary for $S_3$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

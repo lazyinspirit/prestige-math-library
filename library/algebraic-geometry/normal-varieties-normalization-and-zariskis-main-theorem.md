@@ -1,7 +1,7 @@
 ---
 page: "normal-varieties-normalization-and-zariskis-main-theorem"
 title: "Normal Varieties, Normalization, and Zariski's Main Theorem"
-status: draft
+status: published
 items:
   - def-finite-morphism-classical-affine-local
   - def-normal-point-and-normal-variety

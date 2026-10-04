@@ -2,7 +2,7 @@
 id: thm-rsk-correspondence-for-two-line-arrays
 kind: theorem
 title: The RSK correspondence for two-line arrays
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-partition-young-diagram-and-conjugate-partition, def-removable-and-addable-nodes-of-a-partition, def-reverse-row-deletion, def-row-insertion-and-bumping-route, def-semistandard-tableau-and-kostka-number, def-young-tableau-standard-tableau-and-shape, lem-row-bumping-route-monotonicity, lem-row-insertion-and-reverse-deletion-are-inverse]

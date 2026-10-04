@@ -1,7 +1,7 @@
 ---
 page: "the-heat-kernel-and-the-cauchy-problem"
 title: "The Heat Kernel and the Cauchy Problem"
-status: draft
+status: published
 items: ["def-heat-equation-heat-operator-and-cauchy-problem", "def-heat-kernel", "lem-heat-kernel-normalisation-scaling-and-derivatives", "lem-first-and-second-moments-of-the-heat-kernel", "lem-gaussian-kernels-form-an-approximate-identity", "lem-heat-kernel-semigroup-identity", "thm-heat-kernel-is-the-causal-fundamental-solution", "def-heat-evolution-of-initial-data", "lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time", "thm-heat-cauchy-solution-for-bounded-continuous-data", "thm-heat-cauchy-solution-for-lp-data", "thm-uniqueness-of-lp-mild-heat-solutions-in-the-convolution-class", "lem-heat-semigroup-derivative-at-zero-on-compactly-supported-smooth-data", "cor-heat-flow-preserves-mass-and-positivity", "cor-heat-flow-is-order-preserving-and-lp-contractive", "thm-lp-to-lq-heat-kernel-estimate", "thm-spatial-derivative-estimates-for-heat-flow", "thm-positive-time-spatial-analyticity-of-heat-kernel-solutions", "cor-heat-equation-has-infinite-propagation-in-the-positive-kernel-class", "rem-heat-kernel-conventions-and-diffusivity"]
 examples: []
 ---

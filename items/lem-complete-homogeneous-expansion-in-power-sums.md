@@ -2,7 +2,7 @@
 id: lem-complete-homogeneous-expansion-in-power-sums
 kind: lemma
 title: "Complete homogeneous functions expand in power sums with cycle-distribution coefficients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

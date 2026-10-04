@@ -2,7 +2,7 @@
 id: rem-mihlin-does-not-assert-strong-endpoint-bounds
 kind: remark
 title: "Mihlin endpoints: weak (1,1), but no general strong endpoint bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable-choice, thm-mihlin-fourier-multiplier-theorem, thm-calderon-zygmund-operator-has-weak-type-one-one]

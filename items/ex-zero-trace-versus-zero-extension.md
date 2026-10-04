@@ -2,7 +2,7 @@
 id: ex-zero-trace-versus-zero-extension
 kind: example
 title: "Zero trace, zero boundary values and zero extension agree on an interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [ex-trace-of-an-ac-sobolev-function-on-an-interval, cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives, thm-acl-characterisation-of-w-one-p, def-wkp-zero-as-a-sobolev-closure, def-sobolev-space-wkp-and-its-norm, def-countable-choice, def-axiom-of-choice]

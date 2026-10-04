@@ -2,7 +2,7 @@
 id: cor-principal-value-truncations-converge-almost-everywhere
 kind: corollary
 title: "Almost-everywhere convergence of principal-value truncations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable-choice, def-maximal-truncated-singular-integral, def-riesz-transforms-on-euclidean-space, def-truncated-hilbert-transform-and-principal-value, lem-hilbert-transform-has-signum-fourier-multiplier, lem-riesz-transform-principal-value-kernel-formula, thm-chebyshev-markov-inequality-for-the-integral, thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p, thm-maximal-truncations-are-weak-one-one-and-strong-lp, cor-hilbert-transform-is-bounded-on-lp, cor-riesz-transforms-are-bounded-on-lp, lem-riesz-transform-kernels-have-explicit-size-difference-and-spherical-cancellation-bounds]

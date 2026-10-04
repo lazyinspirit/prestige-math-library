@@ -2,7 +2,7 @@
 id: thm-bgg-reciprocity
 kind: theorem
 title: BGG reciprocity
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

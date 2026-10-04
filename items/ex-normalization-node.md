@@ -2,7 +2,7 @@
 id: ex-normalization-node
 kind: example
 title: Normalizing the nodal plane curve
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 5

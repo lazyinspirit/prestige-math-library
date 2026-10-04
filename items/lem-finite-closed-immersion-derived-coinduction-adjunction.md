@@ -2,7 +2,7 @@
 id: lem-finite-closed-immersion-derived-coinduction-adjunction
 kind: lemma
 title: "Derived adjunction for finite rings and closed immersions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-axiom-of-choice", "lem-ringed-space-module-sheaves-enough-injectives", "thm-ext-is-hom-in-the-derived-category", "lem-bounded-below-complexes-admit-injective-replacements", "thm-a-bounded-below-complex-of-injectives-is-homotopically-injective", "thm-flasque-sheaves-acyclic", "lem-closed-immersion-cohomology-pushforward", "thm-extension-by-zero-adjunction-exactness"]

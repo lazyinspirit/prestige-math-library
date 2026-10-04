@@ -2,7 +2,7 @@
 id: lem-hilbert-regularity-propagation
 kind: lemma
 title: "Regularity gives generation, multiplication, and vanishing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

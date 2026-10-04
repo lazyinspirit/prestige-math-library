@@ -2,7 +2,7 @@
 id: lem-nonaffine-effective-affine-algebra-descent
 kind: lemma
 title: "Faithfully flat descent of modules and affine algebras is effective"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-faithfully-flat-descent-vanishing, thm-associativity-of-balanced-tensor-products, thm-affine-scheme-ring-anti-equivalence]
 provenance:

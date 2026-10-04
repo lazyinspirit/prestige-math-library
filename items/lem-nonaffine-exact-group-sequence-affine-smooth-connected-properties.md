@@ -2,7 +2,7 @@
 id: lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties
 kind: lemma
 title: "Affine smooth and connected properties in exact sequences of algebraic groups"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, lem-nonaffine-connected-group-geometrically-connected, lem-nonaffine-affine-and-finite-morphism-fppf-descent, thm-flat-finite-presentation-is-open, def-smooth-morphism-schemes, thm-smooth-morphisms-stable-base-change-composition, thm-nonaffine-affine-normal-group-quotient-affine, lem-ag-geometric-regularity-field-tests, thm-existence-of-algebraic-closures, cor-weak-nullstellensatz-algebraically-closed-coordinate-form]
 provenance:

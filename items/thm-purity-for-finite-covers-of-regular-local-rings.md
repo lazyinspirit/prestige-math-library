@@ -2,7 +2,7 @@
 id: thm-purity-for-finite-covers-of-regular-local-rings
 kind: theorem
 title: "Finite étale covers extend across the closed point of a regular local ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

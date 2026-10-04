@@ -2,7 +2,7 @@
 id: ex-blowup-affine-three-space-origin-exceptional-p2
 kind: example
 title: "Exceptional divisor of the blowup of A^3 at the origin is P^2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

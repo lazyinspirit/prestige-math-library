@@ -2,7 +2,7 @@
 id: cex-knapp-rules-out-extension-below-the-tomas-exponent
 kind: counterexample
 title: Knapp rules out extension below the Tomas exponent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

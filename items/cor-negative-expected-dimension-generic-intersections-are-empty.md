@@ -2,7 +2,7 @@
 id: cor-negative-expected-dimension-generic-intersections-are-empty
 kind: corollary
 title: "Negative expected dimension forces empty generic intersections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-transverse-complementary-dimensional-intersection-set, def-transverse-smooth-maps, def-transverse-embedded-submanifolds, thm-transversality-homotopy-theorem, thm-strong-whitney-approximation-by-transverse-maps, def-countable-choice]

@@ -2,7 +2,7 @@
 id: lem-the-four-band-d-pair-case-is-a-markov-sequence
 kind: lemma
 title: "The four-band case is a Markov sequence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-reducing-move-peaks-can-be-lowered-to-the-four-band-case,

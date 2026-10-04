@@ -2,7 +2,7 @@
 id: cor-stein-tomas-for-compact-hypersurfaces-with-nonzero-curvature
 kind: corollary
 title: Stein-Tomas for compact hypersurfaces with nonzero curvature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

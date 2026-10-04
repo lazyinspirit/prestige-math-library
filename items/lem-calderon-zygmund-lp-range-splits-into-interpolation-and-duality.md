@@ -2,7 +2,7 @@
 id: lem-calderon-zygmund-lp-range-splits-into-interpolation-and-duality
 kind: lemma
 title: "The Lp range: interpolation below two and adjoint duality above two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-monotone-convergence-for-the-integral, cor-l-p-norm-recovery-by-unit-l-q-pairings, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-hilbert-space-adjoint, def-l-one-of-a-measure, lem-marcinkiewicz-interpolation-from-weak-one-one-and-strong-two-two, thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p, thm-complex-holder-minkowski-and-the-quotient-norm]

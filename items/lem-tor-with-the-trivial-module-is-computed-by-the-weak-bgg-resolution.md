@@ -2,7 +2,7 @@
 id: lem-tor-with-the-trivial-module-is-computed-by-the-weak-bgg-resolution
 kind: lemma
 title: Tor with the trivial module is computed by the weak BGG resolution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-weak-bgg-resolution, lem-verma-filtered-objects-are-acyclic-for-n-minus-coinvariants, thm-long-exact-tor-sequence-in-the-left-module-variable, def-tor-by-resolving-the-left-module, prop-tor-zero-is-the-tensor-product-in-either-construction, lem-finite-weyl-strong-exchange-and-deletion, def-axiom-of-choice, thm-acyclic-resolution-theorem-for-left-derived-functors, def-f-acyclic-resolution, def-balanced-tor-bifunctor, cor-every-module-admits-a-projective-resolution, thm-pbw-model-of-a-verma-module, def-verma-type-of-a-module-with-a-standard-filtration, def-bgg-bruhat-verma-sum-in-degree-k, def-bgg-category-o, lem-positive-root-pairings-of-a-dominant-integral-weight, def-verma-module]

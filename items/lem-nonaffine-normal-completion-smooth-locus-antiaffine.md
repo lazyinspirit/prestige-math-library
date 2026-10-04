@@ -2,7 +2,7 @@
 id: lem-nonaffine-normal-completion-smooth-locus-antiaffine
 kind: lemma
 title: "The smooth locus of a normal completion of a group has only constant functions"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-serre-normality-criterion, def-axiom-of-choice, lem-nonaffine-smooth-connected-group-has-ample-line-bundle, lem-nonaffine-ample-finite-type-projective-immersion, thm-integral-closure-finite-finite-type-domain-over-field, lem-finite-normalization-compatible-with-principal-opens, thm-projective-space-proper-over-base, thm-height-one-localisation-of-normal-noetherian-domain-is-dvr, thm-regular-equals-smooth-over-perfect-field, lem-r-one-s-two-intersection-of-height-one-localisations, thm-global-functions-proper-integral-variety, thm-smooth-locus-open]
 provenance:

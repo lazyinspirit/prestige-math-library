@@ -2,7 +2,7 @@
 id: cex-permuting-meridian-conjugacy-classes-without-fixing-the-boundary-word-is-not-artin
 kind: counterexample
 title: "A conjugate-permuting automorphism that does not fix the boundary word is not in the braid image"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 7

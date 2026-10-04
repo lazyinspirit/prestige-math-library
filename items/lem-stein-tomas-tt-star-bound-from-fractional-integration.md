@@ -2,7 +2,7 @@
 id: lem-stein-tomas-tt-star-bound-from-fractional-integration
 kind: lemma
 title: Stein-Tomas TT-star bound from fractional integration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

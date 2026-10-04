@@ -2,7 +2,7 @@
 id: def-mod-two-intersection-number
 kind: definition
 title: "The mod 2 intersection number"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-transverse-complementary-dimensional-intersection-set, lem-compact-transverse-complementary-intersections-are-finite, def-transverse-smooth-maps, def-transverse-embedded-submanifolds, thm-transversality-homotopy-theorem, def-smooth-family-of-maps-and-evaluation-map, def-countable-choice, def-integers-modulo-n, prop-the-diagonal-is-an-embedded-submanifold, prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]

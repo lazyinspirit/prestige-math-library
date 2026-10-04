@@ -2,7 +2,7 @@
 id: lem-boundary-stable-tangent-splits-off-a-trivial-line
 kind: lemma
 title: The boundary stable tangent bundle splits off a trivial line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

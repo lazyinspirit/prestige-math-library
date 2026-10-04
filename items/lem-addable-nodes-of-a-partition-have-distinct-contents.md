@@ -2,7 +2,7 @@
 id: lem-addable-nodes-of-a-partition-have-distinct-contents
 kind: lemma
 title: "Distinct addable nodes of a partition have distinct contents"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-content-vector-of-a-standard-tableau, def-removable-and-addable-nodes-of-a-partition]

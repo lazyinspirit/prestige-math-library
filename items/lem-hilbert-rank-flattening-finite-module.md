@@ -2,7 +2,7 @@
 id: lem-hilbert-rank-flattening-finite-module
 kind: lemma
 title: "Scheme structure of a finite-module rank stratum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

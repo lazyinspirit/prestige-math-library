@@ -2,7 +2,7 @@
 id: lem-multiplicative-type-groups-split-separably
 kind: lemma
 title: "Multiplicative type groups split over a finite Galois extension"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

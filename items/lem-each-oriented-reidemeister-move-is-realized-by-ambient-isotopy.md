@@ -2,7 +2,7 @@
 id: lem-each-oriented-reidemeister-move-is-realized-by-ambient-isotopy
 kind: lemma
 title: "Each oriented Reidemeister move is realized by an ambient isotopy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-oriented-reidemeister-moves, def-oriented-link-in-s-three-and-ambient-isotopy,

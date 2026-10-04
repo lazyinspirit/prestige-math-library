@@ -2,7 +2,7 @@
 id: lem-nonaffine-line-bundle-affine-space-parameter-constancy
 kind: lemma
 title: "Line bundles over an affine-space parameter open come from the smooth factor"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-nonaffine-regular-local-ring-is-ufd, thm-line-bundle-rational-section-cartier-divisor, thm-cartier-weil-isomorphism-locally-factorial, thm-dimension-formula-for-affine-domains, lem-finite-variable-polynomial-rings-over-fields-are-ufds]
 provenance:

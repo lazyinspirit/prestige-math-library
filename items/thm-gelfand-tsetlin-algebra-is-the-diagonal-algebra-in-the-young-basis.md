@@ -2,7 +2,7 @@
 id: thm-gelfand-tsetlin-algebra-is-the-diagonal-algebra-in-the-young-basis
 kind: theorem
 title: "The Gelfand-Tsetlin algebra is the diagonal algebra of the Young basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-gelfand-tsetlin-algebra-for-the-symmetric-group-chain, thm-complex-irreducibles-of-symmetric-groups-are-specht-modules, cor-complex-specht-restriction-branching-rule, thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field, cor-group-algebra-is-semisimple-when-char-k-does-not-divide-group-order, thm-simple-modules-over-semisimple-rings, thm-class-sums-form-a-basis-of-the-center-of-k-g, def-jucys-murphy-elements-of-the-symmetric-group-algebra, lem-conjugating-a-cycle-relabels-its-entries]

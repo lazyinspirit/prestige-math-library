@@ -2,7 +2,7 @@
 id: lem-artin-automorphisms-permute-meridian-conjugacy-classes-and-fix-the-boundary-word
 kind: lemma
 title: "Artin automorphisms permute meridian conjugacy classes and fix the boundary word"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 6

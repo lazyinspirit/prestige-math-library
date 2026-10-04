@@ -2,7 +2,7 @@
 id: ex-bgg-reciprocity-matrix-for-sl2
 kind: example
 title: "The sl2 reciprocity matrices"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

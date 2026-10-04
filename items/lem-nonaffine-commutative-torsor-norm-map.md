@@ -2,7 +2,7 @@
 id: lem-nonaffine-commutative-torsor-norm-map
 kind: lemma
 title: "Norm map for a commutative torsor with a separable point"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-nonempty-smooth-scheme-finite-separable-point, lem-nonaffine-finite-galois-descent-of-morphisms, thm-finite-galois-extension-characterizations, thm-primitive-element-theorem-for-finite-separable-extensions, thm-splitting-fields-exist-for-nonzero-polynomials, thm-finitely-generated-algebraic-extensions-are-finite]
 provenance:

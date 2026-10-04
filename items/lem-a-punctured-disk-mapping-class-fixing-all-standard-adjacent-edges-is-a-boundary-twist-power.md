@@ -2,7 +2,7 @@
 id: lem-a-punctured-disk-mapping-class-fixing-all-standard-adjacent-edges-is-a-boundary-twist-power
 kind: lemma
 title: A mapping class fixing all standard adjacent edges is a boundary twist power
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-garside-half-twist-and-simple-positive-braid, def-boundary-fixed-mapping-class-group-of-a-punctured-disk, thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk, lem-homotopic-simple-proper-arcs-in-the-punctured-disk-are-isotopic-relative-to-their-endpoints, lem-jordan-schoenflies-extension-for-plane-curves, thm-alexander-contractibility-of-the-boundary-fixed-disk-homeomorphism-group]
 justified_by: []

@@ -2,7 +2,7 @@
 id: lem-smirnov-class-quotient-characterisation
 kind: lemma
 title: "The Smirnov class is the class of quotients by outer bounded functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-smirnov-class-on-the-disc, def-nevanlinna-class-on-the-disc, thm-nevanlinna-class-is-bounded-quotient-class, thm-nevanlinna-boundary-values-and-log-integrability, lem-poisson-jensen-inequality-hardy-functions, lem-outer-function-properties, def-inner-singular-inner-and-outer-functions, thm-harmonic-conjugate-on-homologically-simply-connected-domains, def-countable-choice, def-the-one-dimensional-torus-and-normalized-haar-integral]

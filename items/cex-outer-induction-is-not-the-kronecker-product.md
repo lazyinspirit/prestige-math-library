@@ -2,7 +2,7 @@
 id: cex-outer-induction-is-not-the-kronecker-product
 kind: counterexample
 title: "Outer induction is not the Kronecker product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

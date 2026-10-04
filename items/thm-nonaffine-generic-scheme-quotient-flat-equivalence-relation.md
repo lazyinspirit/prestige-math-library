@@ -2,7 +2,7 @@
 id: thm-nonaffine-generic-scheme-quotient-flat-equivalence-relation
 kind: theorem
 title: "A flat finite-type equivalence relation has a generic scheme quotient"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-nonaffine-generic-quasisection-flat-groupoid, thm-nonaffine-groupoid-quotient-from-quasisection]
 provenance:

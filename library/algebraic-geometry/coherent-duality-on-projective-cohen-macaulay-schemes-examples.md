@@ -1,7 +1,7 @@
 ---
 page: coherent-duality-on-projective-cohen-macaulay-schemes-examples
 title: "Coherent Duality on Projective Cohen-Macaulay Schemes — Examples"
-status: draft
+status: published
 requires: [coherent-duality-on-projective-cohen-macaulay-schemes]
 items: []
 examples:

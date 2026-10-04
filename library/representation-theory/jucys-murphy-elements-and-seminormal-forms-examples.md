@@ -1,7 +1,7 @@
 ---
 page: jucys-murphy-elements-and-seminormal-forms-examples
 title: "Jucys–Murphy Elements and Seminormal Forms — Examples"
-status: draft
+status: published
 requires: [jucys-murphy-elements-and-seminormal-forms]
 items: []
 examples:

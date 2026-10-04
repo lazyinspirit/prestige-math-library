@@ -2,7 +2,7 @@
 id: lem-blowup-of-closed-point-of-regular-surface-is-regular
 kind: lemma
 title: "Point blowups of regular surfaces stay regular, with rational exceptional curves at two-dimensional local rings"
-status: draft
+status: published
 origin: pipeline
 deps: [def-blowup-scheme-along-ideal, def-exceptional-divisor-blowup, thm-affine-blowup-standard-charts, lem-affine-blowup-algebra-properties, thm-exceptional-divisor-normal-cone-proj, thm-associated-graded-ring-of-a-regular-local-ring, def-embedding-dimension-and-regular-local-ring, thm-localisation-and-polynomial-extension-of-regular-rings, cor-localisations-of-regular-local-rings-are-regular, lem-blowup-isomorphism-off-center, thm-pullback-center-ideal-invertible, def-smooth-morphism-schemes, def-axiom-of-choice, thm-one-dimensional-regular-local-rings-are-dvrs, thm-blowup-effective-cartier-divisor-isomorphism, lem-regular-local-quotient-by-parameter-is-regular, lem-regular-local-domain-induction, thm-nonaffine-regular-local-ring-is-ufd, lem-blowup-local-on-base-scheme, def-integral-scheme, thm-dimension-of-a-polynomial-ring-over-a-noetherian-ring, lem-regular-system-of-parameters-equivalent-basis, thm-blowup-base-change-flat]
 provenance:

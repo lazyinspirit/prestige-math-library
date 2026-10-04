@@ -2,7 +2,7 @@
 id: lem-a-partition-is-determined-by-its-multiset-of-node-contents
 kind: lemma
 title: "A partition is determined by the multiset of its node contents"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-content-vector-of-a-standard-tableau, def-partition-young-diagram-and-conjugate-partition]

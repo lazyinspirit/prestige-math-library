@@ -2,7 +2,7 @@
 id: "thm-affine-algebraic-action-embeds-equivariantly-in-finite-dimensional-module"
 kind: "theorem"
 title: "Every complex affine algebraic action has a finite-dimensional equivariant closed embedding"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-rational-action-on-affine-variety", "thm-coordinate-ring-of-affine-action-is-locally-finite", "def-classical-affine-coordinate-ring", "thm-classical-affine-nullstellensatz-correspondence", "thm-classical-affine-morphisms-coordinate-ring-antiequivalence", "def-axiom-of-choice"]
 provenance: {"statement": "literature-derived", "proof": "ai-altered"}

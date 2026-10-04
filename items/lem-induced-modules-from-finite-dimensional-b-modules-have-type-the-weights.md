@@ -2,7 +2,7 @@
 id: lem-induced-modules-from-finite-dimensional-b-modules-have-type-the-weights
 kind: lemma
 title: Induced modules from finite-dimensional B-modules have type their weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-verma-type-of-a-module-with-a-standard-filtration, lem-finite-lie-triangularization-and-rank-one-complete-reducibility, thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra, def-one-dimensional-borel-module-of-weight-lambda, thm-universal-property-of-verma-modules, def-axiom-of-choice]

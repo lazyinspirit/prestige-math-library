@@ -2,7 +2,7 @@
 id: ex-collapse-map-of-an-equatorial-sphere
 kind: example
 title: "Explicit normal-framed collapse of an equatorial sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-pontryagin-thom-collapse-of-an-embedded-submanifold", "prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product"]

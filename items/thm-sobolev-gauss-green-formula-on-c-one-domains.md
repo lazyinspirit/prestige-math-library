@@ -2,7 +2,7 @@
 id: thm-sobolev-gauss-green-formula-on-c-one-domains
 kind: theorem
 title: "The Gauss-Green integration-by-parts formula with Sobolev traces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-lp-trace-operator-on-a-bounded-c-one-domain, thm-divergence-theorem-for-bounded-c-one-euclidean-domains, def-bounded-c-one-domain-boundary-charts-and-outward-normal, def-classical-normal-derivative, def-surface-integral-on-a-compact-c-one-hypersurface, lem-sobolev-trace-agrees-with-continuous-boundary-values, thm-smooth-up-to-the-boundary-density-on-smooth-domains, thm-holder-inequality-for-integrals, def-sobolev-space-wkp-and-its-norm, def-axiom-of-choice]

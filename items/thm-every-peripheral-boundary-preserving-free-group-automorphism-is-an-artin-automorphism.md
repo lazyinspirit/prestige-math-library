@@ -2,7 +2,7 @@
 id: thm-every-peripheral-boundary-preserving-free-group-automorphism-is-an-artin-automorphism
 kind: theorem
 title: "Every peripheral-boundary-preserving automorphism is an Artin automorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 6

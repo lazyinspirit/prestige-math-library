@@ -2,7 +2,7 @@
 id: lem-blowup-plane-origin-incidence-equations
 kind: lemma
 title: "The blowup of the plane at the origin as an incidence scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: thm-nonaffine-pointed-group-to-abelian-variety-morphism-homomorphism
 kind: theorem
 title: "Pointed morphisms from smooth geometrically integral groups to abelian varieties are homomorphisms"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, prop-abelian-variety-commutativity-from-rigidity, lem-nonaffine-normal-completion-smooth-locus-antiaffine, lem-nonaffine-antiaffine-factor-rigidity, thm-nonaffine-rational-map-smooth-variety-to-abelian-variety-extends, thm-existence-of-algebraic-closures]
 provenance:

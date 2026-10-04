@@ -2,7 +2,7 @@
 id: cor-every-classical-braid-group-is-linear
 kind: corollary
 title: Every classical braid group is linear
-status: draft
+status: published
 origin: pipeline
 deps: [thm-the-lawrence-krammer-bigelow-representation-is-faithful, thm-the-integral-lkb-module-is-free-of-rank-n-choose-two, def-axiom-of-choice]
 justified_by: []

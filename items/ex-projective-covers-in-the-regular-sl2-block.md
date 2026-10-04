@@ -2,7 +2,7 @@
 id: ex-projective-covers-in-the-regular-sl2-block
 kind: example
 title: The two projectives in the principal sl2 block
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

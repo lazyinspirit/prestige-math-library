@@ -2,7 +2,7 @@
 id: def-artin-automorphisms-of-the-free-group
 kind: definition
 title: "Artin automorphisms of the free group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 3

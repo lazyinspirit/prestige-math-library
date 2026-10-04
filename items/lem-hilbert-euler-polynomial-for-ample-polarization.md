@@ -2,7 +2,7 @@
 id: lem-hilbert-euler-polynomial-for-ample-polarization
 kind: lemma
 title: "Euler polynomial for an arbitrary ample polarization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

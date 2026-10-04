@@ -2,7 +2,7 @@
 id: ex-two-unoriented-points-bound-an-interval
 kind: example
 title: Two unoriented points bound an interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

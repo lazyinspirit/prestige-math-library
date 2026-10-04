@@ -2,7 +2,7 @@
 id: def-oriented-reidemeister-moves
 kind: definition
 title: "Oriented Reidemeister moves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-regular-oriented-link-diagram, def-planar-isotopy-of-link-diagrams]

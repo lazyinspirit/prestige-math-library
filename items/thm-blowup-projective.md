@@ -2,7 +2,7 @@
 id: thm-blowup-projective
 kind: theorem
 title: "Blowups of finite type ideals are locally H-projective, and proper"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

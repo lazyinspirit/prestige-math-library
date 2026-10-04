@@ -1,7 +1,7 @@
 ---
 page: oriented-and-mod-two-intersection-numbers
 title: Oriented and Mod Two Intersection Numbers
-status: draft
+status: published
 requires: [sard-theorem-and-transversality, whitney-embedding-tubular-neighbourhoods-and-approximation, manifolds-with-boundary-collars-and-orientations, integration-of-forms-and-the-general-stokes-theorem, the-de-rham-theorem-and-degree, orientations-poincare-lefschetz-and-alexander-duality]
 items: [def-transverse-complementary-dimensional-intersection-set, lem-compact-transverse-complementary-intersections-are-finite, def-mod-two-intersection-number, lem-overlap-of-arc-length-parametrizations-of-a-one-manifold, lem-boundary-of-a-compact-one-manifold-has-even-cardinality, lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count, thm-transverse-preimage-for-manifolds-with-boundary, thm-mod-two-intersection-number-is-homotopy-invariant, lem-direct-sum-factor-swap-scales-oriented-bases-by-a-sign, def-local-oriented-intersection-sign, def-oriented-intersection-number, lem-preimage-orientation-agrees-with-the-local-intersection-sign, lem-oriented-boundary-of-an-intersection-trace-has-opposite-end-signs, thm-oriented-intersection-number-is-homotopy-invariant, cor-oriented-intersection-reduces-to-mod-two-intersection, thm-intersection-number-under-factor-interchange, prop-two-map-intersection-as-a-diagonal-preimage, cor-a-null-cobordant-cycle-has-zero-intersection-with-a-disjoint-boundary, cor-negative-expected-dimension-generic-intersections-are-empty, rem-properness-can-replace-compactness-only-when-the-intersection-trace-is-compact]
 examples: []

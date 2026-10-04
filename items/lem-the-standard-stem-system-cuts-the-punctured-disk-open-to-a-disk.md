@@ -2,7 +2,7 @@
 id: lem-the-standard-stem-system-cuts-the-punctured-disk-open-to-a-disk
 kind: lemma
 title: "The standard stem system cuts the punctured disk open to a disk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 1

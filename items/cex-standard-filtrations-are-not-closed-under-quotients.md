@@ -2,7 +2,7 @@
 id: cex-standard-filtrations-are-not-closed-under-quotients
 kind: counterexample
 title: "Verma filtrations are not closed under quotients"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

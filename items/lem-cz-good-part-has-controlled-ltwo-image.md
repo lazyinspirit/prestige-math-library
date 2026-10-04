@@ -2,7 +2,7 @@
 id: lem-cz-good-part-has-controlled-ltwo-image
 kind: lemma
 title: "The good part has controlled L2 image"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-calderon-zygmund-kernel-and-principal-value-operator, def-countable-choice, lem-calderon-zygmund-decomposition-at-height-lambda, thm-chebyshev-markov-inequality-for-the-integral]

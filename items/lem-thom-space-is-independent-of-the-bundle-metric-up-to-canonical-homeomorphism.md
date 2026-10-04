@@ -2,7 +2,7 @@
 id: lem-thom-space-is-independent-of-the-bundle-metric-up-to-canonical-homeomorphism
 kind: lemma
 title: "Metric independence of the Thom space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-disk-bundle-sphere-bundle-and-thom-space", "def-disk-sphere-and-thom-space-of-a-metric-vector-bundle"]

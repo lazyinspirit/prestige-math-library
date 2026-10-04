@@ -2,7 +2,7 @@
 id: lem-cz-bad-part-is-integrable-away-from-expanded-cubes
 kind: lemma
 title: "The bad part is integrable away from expanded cubes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-calderon-zygmund-kernel-and-principal-value-operator, def-dyadic-cube-in-rn-all-generations, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-countable-choice]

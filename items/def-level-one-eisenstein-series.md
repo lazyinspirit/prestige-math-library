@@ -2,7 +2,7 @@
 id: def-level-one-eisenstein-series
 kind: definition
 title: "The level-one Eisenstein series E_k and the weight-two series E_2"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-group-action-on-the-upper-half-plane

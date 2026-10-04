@@ -2,7 +2,7 @@
 id: def-fourier-restriction-and-adjoint-extension-operators
 kind: definition
 title: Fourier restriction and adjoint extension operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

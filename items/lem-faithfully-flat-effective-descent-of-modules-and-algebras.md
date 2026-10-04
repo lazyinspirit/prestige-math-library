@@ -2,7 +2,7 @@
 id: lem-faithfully-flat-effective-descent-of-modules-and-algebras
 kind: lemma
 title: "Faithfully flat descent of modules and algebras is effective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

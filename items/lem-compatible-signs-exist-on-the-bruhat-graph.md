@@ -2,7 +2,7 @@
 id: lem-compatible-signs-exist-on-the-bruhat-graph
 kind: lemma
 title: Compatible signs exist on the Bruhat graph
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-bruhat-rank-two-intervals-are-diamonds, lem-bruhat-covers-are-reflection-covers, lem-finite-weyl-strong-exchange-and-deletion, lem-finite-weyl-positive-roots-and-simple-reflections, lem-finite-weyl-closed-chambers-and-stabilizers, def-bruhat-order-on-a-finite-weyl-group]

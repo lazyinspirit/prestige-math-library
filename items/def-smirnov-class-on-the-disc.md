@@ -2,7 +2,7 @@
 id: def-smirnov-class-on-the-disc
 kind: definition
 title: "The Smirnov class on the disc"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-inner-singular-inner-and-outer-functions, def-nevanlinna-class-on-the-disc, thm-nevanlinna-boundary-values-and-log-integrability, def-poisson-integral-of-finite-boundary-measure, lem-poisson-jensen-inequality-hardy-functions, def-analytic-hardy-space-disc, def-countable-choice]

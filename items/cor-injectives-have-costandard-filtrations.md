@@ -2,7 +2,7 @@
 id: cor-injectives-have-costandard-filtrations
 kind: corollary
 title: Injectives have costandard filtrations
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

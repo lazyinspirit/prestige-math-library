@@ -1,7 +1,7 @@
 ---
 page: the-hook-length-formula-and-rsk-correspondence
 title: "The Hook Length Formula and Rsk Correspondence"
-status: draft
+status: published
 items: [def-hook-arm-leg-and-hook-length, lem-standard-tableau-removal-recursion, lem-hook-product-change-under-corner-removal, lem-hook-product-branching-identity, thm-hook-length-formula, def-row-insertion-and-bumping-route, lem-row-bumping-route-monotonicity, lem-robinson-schensted-recording-tableau-is-standard, def-reverse-row-deletion, lem-row-insertion-and-reverse-deletion-are-inverse, thm-robinson-schensted-correspondence, lem-first-row-insertion-basic-subsequences, def-column-insertion-for-distinct-letters, lem-row-and-column-insertion-commute, lem-word-reversal-transposes-the-insertion-tableau, thm-schensted-longest-increasing-and-decreasing-subsequence-theorem, thm-rsk-correspondence-for-two-line-arrays, cor-rsk-symmetry-under-inversion, cor-sum-of-squares-of-standard-tableau-numbers, cor-involutions-are-counted-by-standard-tableaux]
 examples: []
 ---

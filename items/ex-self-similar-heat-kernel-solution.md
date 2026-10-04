@@ -2,7 +2,7 @@
 id: ex-self-similar-heat-kernel-solution
 kind: example
 title: "The heat kernel is a self-similar solution with conserved unit mass"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

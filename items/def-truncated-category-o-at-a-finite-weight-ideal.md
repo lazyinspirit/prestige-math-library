@@ -2,7 +2,7 @@
 id: def-truncated-category-o-at-a-finite-weight-ideal
 kind: definition
 title: Truncation at a finite downward-closed ideal of a linkage class
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

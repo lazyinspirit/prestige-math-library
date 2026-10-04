@@ -36,7 +36,7 @@ sources:
   - title: "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35 (printed pp. 134-140)"
     url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
     locator: "Sections 34C-34D, printed pp. 137-138: compact uniform convergence and continuity of pointwise group operations. Compact-open equivalence for arbitrary domains is proved here."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

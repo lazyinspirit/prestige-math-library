@@ -2,7 +2,7 @@
 id: def-nevanlinna-class-on-the-disc
 kind: definition
 title: "The Nevanlinna class on the disc"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-complex-differentiability-holomorphic-and-entire, def-analytic-hardy-space-disc, def-plane-subharmonic-function, thm-log-modulus-of-a-holomorphic-function-is-subharmonic, lem-nevanlinna-sup-mean-criterion, thm-mean-value-property-for-plane-harmonic-functions, def-the-one-dimensional-torus-and-normalized-haar-integral, def-countable-choice]

@@ -2,7 +2,7 @@
 id: lem-modular-group-reduction-to-the-standard-domain
 kind: lemma
 title: "Reduction of orbits to the standard domain"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-group-action-on-the-upper-half-plane

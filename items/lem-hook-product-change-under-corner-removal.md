@@ -2,7 +2,7 @@
 id: lem-hook-product-change-under-corner-removal
 kind: lemma
 title: Removing a corner changes hooks in its row and column
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-hook-arm-leg-and-hook-length, def-partition-young-diagram-and-conjugate-partition, def-removable-and-addable-nodes-of-a-partition]

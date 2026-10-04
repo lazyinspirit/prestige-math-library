@@ -2,7 +2,7 @@
 id: lem-smooth-compactly-supported-functions-are-dense-in-slobodeckij-spaces
 kind: lemma
 title: "Compactly supported smooth functions are dense in Slobodeckij spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-fractional-slobodeckij-space-on-euclidean-space, lem-slobodeckij-seminorm-is-well-defined, thm-l-one-approximate-identities-converge-in-l-p, thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity, lem-complex-translation-and-approximate-identity-interfaces, thm-dominated-convergence, thm-tonelli-and-fubini-for-completed-product-measures, thm-integrals-are-invariant-under-measure-preserving-maps, def-countable-choice, thm-polar-coordinates-formula-for-lebesgue-measure, thm-holder-inequality-for-integrals]

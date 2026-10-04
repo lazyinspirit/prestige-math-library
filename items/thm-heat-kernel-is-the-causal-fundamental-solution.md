@@ -2,7 +2,7 @@
 id: thm-heat-kernel-is-the-causal-fundamental-solution
 kind: theorem
 title: "The causal heat kernel is the fundamental solution of the heat operator"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions

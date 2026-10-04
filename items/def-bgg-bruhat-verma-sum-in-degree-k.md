@@ -2,7 +2,7 @@
 id: def-bgg-bruhat-verma-sum-in-degree-k
 kind: definition
 title: The Bruhat graph and the BGG Verma sum in degree k
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-verma-module, def-bruhat-order-on-a-finite-weyl-group, def-integral-dominant-and-strictly-dominant-weights, def-finite-weyl-root-system-lattice-and-chamber-conventions, def-weyl-vector-rho-for-a-chosen-positive-system, def-bgg-category-o, def-integral-weyl-group-of-a-weight, thm-the-root-set-is-a-reduced-crystallographic-root-system, lem-finite-weyl-positive-roots-and-simple-reflections, lem-bruhat-covers-are-reflection-covers, lem-positive-root-pairings-of-a-dominant-integral-weight, lem-finite-weyl-closed-chambers-and-stabilizers]

@@ -2,7 +2,7 @@
 id: lem-blowup-intersection-matrix-at-smooth-point
 kind: lemma
 title: "The intersection matrix of a point blowup of a regular surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

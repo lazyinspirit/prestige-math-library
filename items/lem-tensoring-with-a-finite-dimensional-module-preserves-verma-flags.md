@@ -2,7 +2,7 @@
 id: lem-tensoring-with-a-finite-dimensional-module-preserves-verma-flags
 kind: lemma
 title: "Finite-dimensional tensoring preserves Verma flags"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

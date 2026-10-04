@@ -2,7 +2,7 @@
 id: def-calderon-zygmund-kernel-and-principal-value-operator
 kind: definition
 title: "Calderón–Zygmund kernels and their associated operators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-complex-lp-and-euclidean-test-function-conventions, def-locally-integrable-function-on-r-n, def-schwartz-space-and-its-seminorms, def-tempered-distribution]

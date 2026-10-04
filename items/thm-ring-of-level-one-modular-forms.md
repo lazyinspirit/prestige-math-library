@@ -2,7 +2,7 @@
 id: thm-ring-of-level-one-modular-forms
 kind: theorem
 title: "The graded ring of level-one modular forms"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-dimension-of-level-one-modular-forms

@@ -1,7 +1,7 @@
 ---
 page: sobolev-traces-and-zero-boundary-values
 title: Sobolev Traces and Zero Boundary Values
-status: draft
+status: published
 items: ["lem-one-dimensional-sobolev-endpoint-estimate", "thm-trace-estimate-on-the-half-space", "thm-lp-trace-operator-on-a-bounded-c-one-domain", "lem-sobolev-trace-agrees-with-continuous-boundary-values", "lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts", "thm-sobolev-gauss-green-formula-on-c-one-domains", "thm-kernel-of-the-trace-is-w-one-p-zero", "def-fractional-slobodeckij-space-on-euclidean-space", "lem-slobodeckij-seminorm-is-well-defined", "lem-coordinate-direction-form-of-the-slobodeckij-seminorm", "lem-one-dimensional-hardy-inequality-on-the-half-line", "lem-mean-zero-kernel-scale-estimate", "lem-smooth-compactly-supported-functions-are-dense-in-slobodeckij-spaces", "def-fractional-sobolev-space-on-a-compact-c-one-boundary", "lem-fractional-boundary-norm-is-independent-of-atlas", "lem-half-space-trace-has-the-fractional-slobodeckij-bound", "thm-half-space-lift-by-normal-mollification", "thm-sharp-trace-theorem-for-w-one-p", "thm-bounded-right-inverse-for-the-sobolev-trace", "cor-inhomogeneous-dirichlet-data-reduce-to-zero-trace", "rem-endpoint-and-rough-domain-trace-limitations"]
 examples: []
 ---

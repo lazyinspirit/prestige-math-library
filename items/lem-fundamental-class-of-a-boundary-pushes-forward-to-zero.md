@@ -2,7 +2,7 @@
 id: lem-fundamental-class-of-a-boundary-pushes-forward-to-zero
 kind: lemma
 title: The fundamental class of a boundary pushes forward to zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

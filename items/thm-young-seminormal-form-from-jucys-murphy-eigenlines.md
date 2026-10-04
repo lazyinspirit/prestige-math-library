@@ -2,7 +2,7 @@
 id: thm-young-seminormal-form-from-jucys-murphy-eigenlines
 kind: theorem
 title: "Young's seminormal form from the Jucys-Murphy eigenlines"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-jucys-murphy-joint-spectrum-is-the-set-of-tableau-content-vectors, thm-gelfand-tsetlin-algebra-is-the-diagonal-algebra-in-the-young-basis, lem-jucys-murphy-local-relations, def-young-tableau-standard-tableau-and-shape, def-content-vector-of-a-standard-tableau, def-jucys-murphy-elements-of-the-symmetric-group-algebra, def-partition-young-diagram-and-conjugate-partition, lem-a-partition-is-determined-by-its-multiset-of-node-contents]

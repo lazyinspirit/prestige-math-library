@@ -2,7 +2,7 @@
 id: lem-the-second-four-band-comparison-is-a-compensated-band-destabilization
 kind: lemma
 title: "The second four-band comparison is a compensated band destabilization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-block-interchanges-transport-arbitrary-braid-boxes,

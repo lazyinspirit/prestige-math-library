@@ -2,7 +2,7 @@
 id: lem-nonaffine-flat-hypersurface-slice
 kind: lemma
 title: "Fibre-regular hypersurface cuts preserve flatness and produce finite image slices"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-krull-intersection-theorem, lem-ag-local-flatness-regular-parameters, thm-long-exact-tor-sequence-in-the-right-module-variable, thm-finiteness-of-associated-primes, lem-zero-divisor-annihilator-contained-in-associated-prime, lem-finite-prime-avoidance, lem-finite-presentation-image-constructible]
 provenance:

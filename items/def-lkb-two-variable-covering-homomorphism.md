@@ -2,7 +2,7 @@
 id: def-lkb-two-variable-covering-homomorphism
 kind: definition
 title: The two-variable covering homomorphism
-status: draft
+status: published
 origin: pipeline
 deps: [def-two-point-configuration-space-of-a-punctured-disk, def-based-loops-and-fundamental-group, def-braid-group-by-the-artin-presentation]
 justified_by: []

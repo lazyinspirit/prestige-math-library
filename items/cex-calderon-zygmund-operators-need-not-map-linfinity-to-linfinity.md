@@ -2,7 +2,7 @@
 id: cex-calderon-zygmund-operators-need-not-map-linfinity-to-linfinity
 kind: counterexample
 title: "Calderón–Zygmund operators need not map L∞ to L∞"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [cex-calderon-zygmund-strong-lone-bound-fails, def-truncated-hilbert-transform-and-principal-value, def-countable-choice]

@@ -2,7 +2,7 @@
 id: rem-thom-spectrum-construction-is-not-minted-in-dt
 kind: remark
 title: "Finite Thom spaces and the spectrum interface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["lem-stabilizing-a-normal-bundle-suspends-its-thom-space"]

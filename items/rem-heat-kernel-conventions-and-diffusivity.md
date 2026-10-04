@@ -2,7 +2,7 @@
 id: rem-heat-kernel-conventions-and-diffusivity
 kind: remark
 title: "Diffusivity, rescaling, and the heat kernel compared with the Poisson kernels"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-heat-equation-heat-operator-and-cauchy-problem

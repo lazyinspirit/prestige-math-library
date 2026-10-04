@@ -2,7 +2,7 @@
 id: prop-abelian-variety-commutativity-from-rigidity
 kind: proposition
 title: "A proper geometrically connected group variety is commutative"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, lem-nonaffine-rigidity-proper-geometrically-integral-factor]
 provenance:

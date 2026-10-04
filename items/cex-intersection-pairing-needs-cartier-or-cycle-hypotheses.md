@@ -2,7 +2,7 @@
 id: cex-intersection-pairing-needs-cartier-or-cycle-hypotheses
 kind: counterexample
 title: "The intersection product needs Cartier or complementary-dimension hypotheses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

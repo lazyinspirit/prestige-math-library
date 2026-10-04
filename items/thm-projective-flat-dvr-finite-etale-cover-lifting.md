@@ -2,7 +2,7 @@
 id: thm-projective-flat-dvr-finite-etale-cover-lifting
 kind: theorem
 title: "Finite étale covers of a projective flat family over a complete DVR lift uniquely"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

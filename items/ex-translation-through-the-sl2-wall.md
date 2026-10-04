@@ -2,7 +2,7 @@
 id: ex-translation-through-the-sl2-wall
 kind: example
 title: "Translation through the sl2 wall"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

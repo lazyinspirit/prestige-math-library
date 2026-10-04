@@ -1,7 +1,7 @@
 ---
 page: frobenius-characteristic-and-the-symmetric-group-character-dictionary
 title: "Frobenius Characteristic and the Symmetric-Group Character Dictionary"
-status: draft
+status: published
 requires:
   - symmetric-functions-hall-inner-product-and-schur-bases
   - specht-modules-and-the-irreducibles-of-the-symmetric-group

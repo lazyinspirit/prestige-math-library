@@ -2,7 +2,7 @@
 id: lem-cotlar-inequality-for-maximal-truncations
 kind: lemma
 title: "Cotlar's inequality for maximal truncations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-exponential-beats-every-polynomial, lem-euclidean-balls-have-positive-finite-lebesgue-measure, def-calderon-zygmund-kernel-and-principal-value-operator, def-centered-and-uncentered-hardy-littlewood-maximal-functions, def-convolution-of-a-tempered-distribution-with-a-schwartz-function, def-convolution-of-two-functions-on-rn, def-countable-choice, def-maximal-truncated-singular-integral, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, def-schwartz-space-and-its-seminorms, lem-radially-decreasing-kernels-are-dominated-by-the-maximal-function, prop-mollifier-families-are-l-one-approximate-identities, thm-tempered-convolution-is-smooth-with-polynomial-growth, thm-tonelli-theorem-for-sigma-finite-product-spaces]

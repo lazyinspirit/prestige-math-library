@@ -2,7 +2,7 @@
 id: cex-serre-duality-without-properness
 kind: counterexample
 title: "The affine line disproves the proper duality formula without properness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-axiom-of-choice", "thm-serre-duality-for-coherent-sheaves-on-projective-cm-scheme", "thm-qc-sheaf-affine-higher-cohomology-vanishes"]

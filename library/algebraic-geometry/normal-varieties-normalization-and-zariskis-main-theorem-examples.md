@@ -1,7 +1,7 @@
 ---
 page: "normal-varieties-normalization-and-zariskis-main-theorem-examples"
 title: "Normal Varieties, Normalization, and Zariski's Main Theorem — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-normal-not-smooth-quadric-cone

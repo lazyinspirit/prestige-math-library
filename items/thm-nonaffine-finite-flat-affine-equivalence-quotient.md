@@ -2,7 +2,7 @@
 id: thm-nonaffine-finite-flat-affine-equivalence-quotient
 kind: theorem
 title: "Finite locally free affine equivalence relations have finite locally free scheme quotients"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-nonaffine-fppf-descent-of-scheme-morphisms, thm-adjugate-identity-over-a-commutative-ring, thm-nakayama-lemma, cor-finite-flat-noetherian-modules-are-projective, thm-flatness-is-local, thm-faithfully-flat-descent-of-flatness, thm-faithfully-flat-descent-vanishing, thm-affine-fibre-product-tensor-ring]
 provenance:

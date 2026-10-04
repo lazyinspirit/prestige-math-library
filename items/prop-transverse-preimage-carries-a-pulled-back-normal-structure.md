@@ -2,7 +2,7 @@
 id: prop-transverse-preimage-carries-a-pulled-back-normal-structure
 kind: proposition
 title: "Transverse preimages carry the pulled-back normal structure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-disk-bundle-sphere-bundle-and-thom-space", "lem-transversality-is-equivalent-to-surjectivity-on-the-normal-quotient", "thm-transverse-preimage-theorem", "def-pullback-vector-bundle-and-pullback-section", "prop-normal-and-conormal-bundles-are-smooth-vector-bundles", "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space", "def-smooth-function-on-a-relatively-open-subset-of-a-half-space", "def-neat-submanifold-of-a-manifold-with-boundary", "def-countable-choice"]

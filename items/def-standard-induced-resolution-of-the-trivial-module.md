@@ -2,7 +2,7 @@
 id: def-standard-induced-resolution-of-the-trivial-module
 kind: definition
 title: The standard induced resolution of the trivial module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-verma-module, def-bgg-category-o, def-chain-complex-in-an-abelian-category, thm-triangular-decomposition-from-a-chosen-positive-root-system, thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra, def-axiom-of-choice]

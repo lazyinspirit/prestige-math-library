@@ -2,7 +2,7 @@
 id: def-lkb-relative-pairing-modules
 kind: definition
 title: The relative pairing modules as stabilized direct limits
-status: draft
+status: published
 origin: pipeline
 deps: [def-lawrence-krammer-bigelow-cover, lem-lkb-small-end-neighbourhoods-stabilize-equivariantly]
 justified_by: []

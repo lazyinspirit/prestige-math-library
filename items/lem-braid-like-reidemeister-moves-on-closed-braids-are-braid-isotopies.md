@@ -2,7 +2,7 @@
 id: lem-braid-like-reidemeister-moves-on-closed-braids-are-braid-isotopies
 kind: lemma
 title: "Braid-like Reidemeister moves on closed braids are braid isotopies"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-oriented-reidemeister-moves, def-closure-of-a-geometric-braid,

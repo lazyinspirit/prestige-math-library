@@ -2,7 +2,7 @@
 id: ex-two-projective-lines-have-one-mod-two-intersection
 kind: example
 title: "Two projective lines have one mod 2 intersection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-transverse-complementary-dimensional-intersection-set, def-mod-two-intersection-number, thm-mod-two-intersection-number-is-homotopy-invariant, ex-real-projective-space-from-affine-charts, ex-real-projective-space-cover-as-a-discrete-fiber-fibration, ex-real-projective-space-is-orientable-exactly-in-odd-dimension, ex-great-circles-as-round-sphere-geodesics, thm-a-regular-level-set-is-an-embedded-submanifold, ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds, def-countable-choice]

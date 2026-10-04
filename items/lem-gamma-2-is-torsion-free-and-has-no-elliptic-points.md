@@ -2,7 +2,7 @@
 id: lem-gamma-2-is-torsion-free-and-has-no-elliptic-points
 kind: lemma
 title: "The projective group $\\bar\\Gamma(2)$ is torsion-free and acts freely"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-principal-congruence-subgroup-gamma-2

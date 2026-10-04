@@ -2,7 +2,7 @@
 id: ex-affine-extension-of-an-abelian-variety
 kind: example
 title: "A split affine extension of an abelian variety"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, lem-proper-geometrically-integral-affine-scheme-is-point, thm-affine-closed-immersions-quotient-rings, thm-fibre-products-of-schemes-exist, lem-nonaffine-fppf-descent-of-scheme-morphisms]
 provenance:

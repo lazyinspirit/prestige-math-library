@@ -33,7 +33,7 @@ sources:
   - title: "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35 (printed pp. 134-140)"
     url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
     locator: "Sections 34C-34D give the dual-topology background; the arc argument is proved here and is supported by Dikranjan Example 7.1."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

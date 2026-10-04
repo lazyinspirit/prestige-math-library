@@ -1,7 +1,7 @@
 ---
 page: "the-heat-kernel-and-the-cauchy-problem-examples"
 title: "The Heat Kernel and the Cauchy Problem — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-gaussian-data-remain-gaussian-under-heat-flow", "ex-heat-flow-of-an-indicator-function", "ex-self-similar-heat-kernel-solution", "cex-linfinity-approximate-identity-need-not-converge-in-supremum-norm", "cex-heat-equation-does-not-have-finite-propagation", "ex-fourier-transform-of-the-heat-kernel", "ex-heat-evolution-of-affine-and-quadratic-polynomials", "ex-heat-lp-to-lq-time-exponent-is-forced-by-parabolic-scaling"]
 ---

@@ -2,7 +2,7 @@
 id: def-castelnuovo-mumford-regularity
 kind: definition
 title: "Castelnuovo\u2013Mumford regularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

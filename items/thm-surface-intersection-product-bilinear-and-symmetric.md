@@ -2,7 +2,7 @@
 id: thm-surface-intersection-product-bilinear-and-symmetric
 kind: theorem
 title: "The surface intersection product is symmetric and bilinear"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

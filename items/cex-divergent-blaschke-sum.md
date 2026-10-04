@@ -2,7 +2,7 @@
 id: cex-divergent-blaschke-sum
 kind: counterexample
 title: "A divergent Blaschke sum: no nonzero Hardy function has these zeros"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-blaschke-product, thm-blaschke-product-boundary-values-and-zeros, thm-hardy-zero-set-blaschke-condition, def-analytic-hardy-space-disc, thm-zero-divisor-theorem-on-plane-domains, thm-identity-theorem-holomorphic-functions, thm-p-series-rational, lem-complex-conjugation-and-modulus-laws]

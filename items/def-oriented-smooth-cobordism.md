@@ -2,7 +2,7 @@
 id: def-oriented-smooth-cobordism
 kind: definition
 title: Oriented smooth cobordism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

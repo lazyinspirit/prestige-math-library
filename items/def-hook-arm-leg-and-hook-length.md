@@ -2,7 +2,7 @@
 id: def-hook-arm-leg-and-hook-length
 kind: definition
 title: Hook, arm, leg, and hook length of a box
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-partition-young-diagram-and-conjugate-partition, def-removable-and-addable-nodes-of-a-partition, def-young-tableau-standard-tableau-and-shape]

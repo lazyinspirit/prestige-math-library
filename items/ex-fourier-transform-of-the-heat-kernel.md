@@ -2,7 +2,7 @@
 id: ex-fourier-transform-of-the-heat-kernel
 kind: example
 title: "The Fourier transform of the heat kernel"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

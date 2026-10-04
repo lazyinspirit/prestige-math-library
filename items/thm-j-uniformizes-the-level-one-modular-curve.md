@@ -2,7 +2,7 @@
 id: thm-j-uniformizes-the-level-one-modular-curve
 kind: theorem
 title: "The j-invariant uniformizes X(1)"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-discriminant-and-j-invariant

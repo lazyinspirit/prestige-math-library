@@ -2,7 +2,7 @@
 id: lem-smooth-euclidean-hypersurface-graph-and-localization
 kind: lemma
 title: Smooth Euclidean hypersurface graphs and compact localization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

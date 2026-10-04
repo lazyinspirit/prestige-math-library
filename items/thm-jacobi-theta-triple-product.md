@@ -2,7 +2,7 @@
 id: thm-jacobi-theta-triple-product
 kind: theorem
 title: "Jacobi theta triple product and nonvanishing of the theta constant"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-normal-convergence-of-holomorphic-products

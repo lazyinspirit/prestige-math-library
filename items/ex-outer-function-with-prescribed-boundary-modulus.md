@@ -2,7 +2,7 @@
 id: ex-outer-function-with-prescribed-boundary-modulus
 kind: example
 title: "An outer function with a prescribed power of a vanishing modulus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-inner-singular-inner-and-outer-functions, lem-outer-function-properties, def-the-one-dimensional-torus-and-normalized-haar-integral, def-poisson-kernel-on-the-disc, def-poisson-integral-of-finite-boundary-measure, lem-poisson-kernel-properties-on-the-disc, thm-complex-power-series-converge-locally-uniformly, thm-jensen-formula-on-a-disc, thm-dominated-convergence, def-complex-exponential, thm-complex-polynomials-and-rational-functions-are-holomorphic, def-analytic-hardy-space-disc, thm-holomorphic-logarithms-homologically-simply-connected-domains, prop-star-shaped-plane-domains-are-homologically-simply-connected, cor-holomorphic-logarithm-has-the-logarithmic-derivative, thm-taylor-expansion-holomorphic-function]

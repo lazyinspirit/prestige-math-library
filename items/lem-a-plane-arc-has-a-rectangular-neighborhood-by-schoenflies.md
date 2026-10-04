@@ -2,7 +2,7 @@
 id: lem-a-plane-arc-has-a-rectangular-neighborhood-by-schoenflies
 kind: lemma
 title: "Plane arc extension and rectangular neighborhoods"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 0

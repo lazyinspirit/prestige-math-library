@@ -2,7 +2,7 @@
 id: lem-dominant-norm-distance-comparison
 kind: lemma
 title: A dominant vector minimises its distance to a dominant weight
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

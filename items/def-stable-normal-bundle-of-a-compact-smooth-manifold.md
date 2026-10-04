@@ -2,7 +2,7 @@
 id: def-stable-normal-bundle-of-a-compact-smooth-manifold
 kind: definition
 title: "Stable normal bundle of a compact smooth manifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-normal-and-conormal-bundles-of-an-embedded-submanifold", "prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle", "def-countable-choice"]

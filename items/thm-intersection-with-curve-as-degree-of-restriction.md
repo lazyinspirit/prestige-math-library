@@ -2,7 +2,7 @@
 id: thm-intersection-with-curve-as-degree-of-restriction
 kind: theorem
 title: "Intersection with a curve is the degree of the restriction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

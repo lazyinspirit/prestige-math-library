@@ -2,7 +2,7 @@
 id: cex-unsigned-bruhat-edge-sums-need-not-square-to-zero
 kind: counterexample
 title: Unsigned Bruhat edge sums need not square to zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-compatible-signs-exist-on-the-bruhat-graph, lem-bruhat-covers-give-unique-verma-embeddings, lem-bruhat-rank-two-intervals-are-diamonds, def-bgg-differential-from-signed-verma-maps, def-bgg-bruhat-verma-sum-in-degree-k, lem-dominant-integral-dot-translates-embed-in-the-verma-module, def-bgg-category-o, def-axiom-of-choice]

@@ -2,7 +2,7 @@
 id: lem-hilbert-valuative-flat-closure
 kind: lemma
 title: "Flat schematic closure over an arbitrary valuation ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

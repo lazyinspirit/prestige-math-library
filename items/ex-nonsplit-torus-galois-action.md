@@ -2,7 +2,7 @@
 id: ex-nonsplit-torus-galois-action
 kind: example
 title: "A quadratic norm-one torus and its sign action"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

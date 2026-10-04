@@ -2,7 +2,7 @@
 id: def-analytic-hardy-space-disc
 kind: definition
 title: "Analytic Hardy spaces on the unit disc"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-complex-lp-and-euclidean-test-function-conventions, thm-complex-holder-minkowski-and-the-quotient-norm, def-complex-differentiability-holomorphic-and-entire, def-the-one-dimensional-torus-and-normalized-haar-integral, def-essential-supremum-with-respect-to-a-measure, def-unit-disc-upper-half-plane-and-blaschke-factor, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-countable-choice, thm-complex-polynomials-and-rational-functions-are-holomorphic, lem-geometric-sequence-null]

@@ -2,7 +2,7 @@
 id: prop-projective-covers-in-o-are-indecomposable-and-unique
 kind: proposition
 title: "Projective covers in O are indecomposable and unique"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

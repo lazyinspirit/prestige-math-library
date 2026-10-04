@@ -2,7 +2,7 @@
 id: lem-a-generic-isotopy-of-links-has-only-reidemeister-singular-times
 kind: lemma
 title: "Generic isotopies have only Reidemeister singular times"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-a-smooth-isotopy-of-links-can-be-put-in-general-position,

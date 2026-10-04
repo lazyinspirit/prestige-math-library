@@ -2,7 +2,7 @@
 id: lem-plane-curve-multiplicity-transform-chart
 kind: lemma
 title: "Strict-transform equation by removing the maximal exceptional power"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

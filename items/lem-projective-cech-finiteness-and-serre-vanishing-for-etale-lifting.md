@@ -2,7 +2,7 @@
 id: lem-projective-cech-finiteness-and-serre-vanishing-for-etale-lifting
 kind: lemma
 title: "Projective Čech finiteness and Serre vanishing for the étale lifting construction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

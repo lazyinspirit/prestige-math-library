@@ -2,7 +2,7 @@
 id: cex-ordinary-jucys-murphy-projection-formulas-do-not-survive-content-collision
 kind: counterexample
 title: "Ordinary Jucys-Murphy projection formulas do not survive content collision"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-primitive-tableau-idempotents-by-jucys-murphy-interpolation, def-content-vector-of-a-standard-tableau, def-removable-and-addable-nodes-of-a-partition, def-polytabloid-specht-module-over-an-arbitrary-field, def-finite-field-and-its-order, thm-existence-of-finite-fields]

@@ -2,7 +2,7 @@
 id: thm-pullback-center-ideal-invertible
 kind: theorem
 title: "The pulled-back center ideal is the relative twist; the exceptional divisor is Cartier"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

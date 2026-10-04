@@ -2,7 +2,7 @@
 id: thm-lp-trace-operator-on-a-bounded-c-one-domain
 kind: theorem
 title: "The $L^p$ trace operator on a bounded $C^1$ domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-trace-estimate-on-the-half-space, lem-c-k-boundary-flattening-preserves-wkp-locally, def-bounded-c-k-domain-and-boundary-charts, def-bounded-c-one-domain-boundary-charts-and-outward-normal, def-surface-integral-on-a-compact-c-one-hypersurface, lem-surface-integral-is-independent-of-c-one-boundary-charts, lem-finite-ambient-partitions-for-euclidean-boundary-integration, thm-smooth-up-to-the-boundary-density-on-smooth-domains, thm-completion-universal-property-for-bounded-linear-maps, thm-riesz-fischer-completeness-of-l-p, thm-sobolev-spaces-are-banach-spaces, lem-weak-leibniz-rule-with-a-smooth-factor, def-sobolev-space-wkp-and-its-norm, def-l-p-space-as-a-quotient-by-null-functions, def-axiom-of-choice]

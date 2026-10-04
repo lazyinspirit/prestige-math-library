@@ -2,7 +2,7 @@
 id: lem-two-disjoint-circles-in-s-two-cobound-an-annulus
 kind: lemma
 title: "Two disjoint circles in the two-sphere cobound an annulus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-jordan-brouwer-separation, lem-jordan-schoenflies-extension-for-plane-curves,

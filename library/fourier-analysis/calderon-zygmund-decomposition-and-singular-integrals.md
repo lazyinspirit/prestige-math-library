@@ -1,7 +1,7 @@
 ---
 page: calderon-zygmund-decomposition-and-singular-integrals
 title: "Calderón–Zygmund Decomposition and Singular Integrals"
-status: draft
+status: published
 requires:
   - fourier-multipliers-and-sobolev-characterisations
   - hilbert-and-riesz-transforms

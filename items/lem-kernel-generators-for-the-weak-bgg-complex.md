@@ -2,7 +2,7 @@
 id: lem-kernel-generators-for-the-weak-bgg-complex
 kind: lemma
 title: "Composition factors of the BGG kernel lie above the degree (BGG 10.6a)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-bgg-differential-from-signed-verma-maps, thm-weak-bgg-resolution, lem-jordan-holder-factors-of-verma-modules-lie-above-the-head, def-composition-series-and-composition-factors-of-an-object, thm-every-category-o-object-has-finite-length, thm-category-o-is-abelian-and-extension-closed, def-axiom-of-choice, def-verma-type-of-a-module-with-a-standard-filtration, def-verma-module, def-bgg-bruhat-verma-sum-in-degree-k, def-chain-complex-in-an-abelian-category]

@@ -2,7 +2,7 @@
 id: lem-the-oriented-boundary-loop-represents-the-ordered-product-of-the-standard-meridians
 kind: lemma
 title: "The oriented boundary loop represents the ordered product of the standard meridians"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 2

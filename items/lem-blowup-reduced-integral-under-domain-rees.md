@@ -2,7 +2,7 @@
 id: lem-blowup-reduced-integral-under-domain-rees
 kind: lemma
 title: "Integrality and reducedness of blowups from the Rees charts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

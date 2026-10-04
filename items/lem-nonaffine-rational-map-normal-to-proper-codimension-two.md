@@ -2,7 +2,7 @@
 id: lem-nonaffine-rational-map-normal-to-proper-codimension-two
 kind: lemma
 title: "A rational map from a normal variety to a proper variety extends in codimension one"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-valuative-criterion-properness, thm-height-one-localisation-of-normal-noetherian-domain-is-dvr, def-rational-map-integral-schemes]
 provenance:

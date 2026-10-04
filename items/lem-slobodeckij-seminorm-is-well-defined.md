@@ -2,7 +2,7 @@
 id: lem-slobodeckij-seminorm-is-well-defined
 kind: lemma
 title: "Well-definedness of the Slobodeckij seminorm and norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-fractional-slobodeckij-space-on-euclidean-space, thm-minkowski-integral-inequality, thm-tonelli-and-fubini-for-completed-product-measures, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, thm-lebesgue-measure-of-a-box-of-every-kind, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-complex-holder-minkowski-and-the-quotient-norm, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice]

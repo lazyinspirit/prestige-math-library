@@ -2,7 +2,7 @@
 id: prop-oriented-boundaries-have-zero-pontryagin-numbers
 kind: proposition
 title: Oriented boundaries have zero Pontryagin numbers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

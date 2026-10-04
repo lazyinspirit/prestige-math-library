@@ -2,7 +2,7 @@
 id: lem-blowup-separates-transverse-components
 kind: lemma
 title: "Blowing up a multiple point separates pairwise transverse components"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: lem-hilbert-uniform-sections-after-flat-pullback
 kind: lemma
 title: "A fixed presentation computes sections after every flat-family pullback"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

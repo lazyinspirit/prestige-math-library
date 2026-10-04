@@ -2,7 +2,7 @@
 id: lem-lkb-lifted-absolute-cellular-boundary-and-fraction-field-rank
 kind: lemma
 title: The absolute LKB cellular boundary and fraction-field rank
-status: draft
+status: published
 origin: session
 deps: [lem-the-unordered-two-point-punctured-plane-has-an-equivariant-two-dimensional-cell-model, thm-cellular-homology-computes-singular-homology]
 dependency_level: 1

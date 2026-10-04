@@ -2,7 +2,7 @@
 id: lem-etale-specialization-proper-geometric-finite-etale-invariance
 kind: lemma
 title: "Algebraically closed field extension preserves covers of a smooth proper scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

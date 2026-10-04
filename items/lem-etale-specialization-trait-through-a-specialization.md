@@ -2,7 +2,7 @@
 id: lem-etale-specialization-trait-through-a-specialization
 kind: lemma
 title: "A specialization is represented by a complete DVR trait"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: lem-a-boundary-fixed-punctured-disk-map-acting-trivially-on-pi-one-is-isotopic-to-the-identity
 kind: lemma
 title: "A boundary-fixed punctured-disk homeomorphism acting trivially on the fundamental group is isotopic to the identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 4

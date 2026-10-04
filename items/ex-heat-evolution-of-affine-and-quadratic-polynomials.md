@@ -2,7 +2,7 @@
 id: ex-heat-evolution-of-affine-and-quadratic-polynomials
 kind: example
 title: "Heat evolution of affine and quadratic polynomials"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

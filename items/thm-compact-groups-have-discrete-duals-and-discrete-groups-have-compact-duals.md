@@ -44,7 +44,7 @@ sources:
       1953, Chapter VII, Sections 34-35 (printed pp. 134-140)
     url: https://people.math.harvard.edu/~shlomo/212a/loomis.pdf
     locator: "Sections 34C-34D give the dual-topology background. The compact/discrete implications are proved here and stated in Dikranjan Example 7.1 and EW Lemma C.7."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

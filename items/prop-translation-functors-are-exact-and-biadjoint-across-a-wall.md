@@ -2,7 +2,7 @@
 id: prop-translation-functors-are-exact-and-biadjoint-across-a-wall
 kind: proposition
 title: "Translation functors are exact and biadjoint"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

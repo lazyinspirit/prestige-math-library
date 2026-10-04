@@ -2,7 +2,7 @@
 id: ex-sign-cancellation-in-an-a2-bruhat-diamond
 kind: example
 title: Sign cancellation in an A2 Bruhat diamond
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [prop-the-bgg-differential-squares-to-zero, lem-compatible-signs-exist-on-the-bruhat-graph, lem-bruhat-rank-two-intervals-are-diamonds, lem-bruhat-covers-give-unique-verma-embeddings, ex-the-a2-bgg-resolution-with-six-verma-summands, def-axiom-of-choice, def-bgg-differential-from-signed-verma-maps, lem-bruhat-covers-are-reflection-covers, def-bgg-bruhat-verma-sum-in-degree-k]

@@ -2,7 +2,7 @@
 id: lem-projective-space-derived-coherent-duality
 kind: lemma
 title: "Derived coherent duality on projective space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-axiom-of-choice", "lem-coherent-sheaf-finite-twisted-locally-free-resolution-projective-space", "thm-serre-duality-projective-space-twisting-sheaves", "lem-projective-space-top-cohomology-residue-pairing", "thm-cohomology-projective-space-twisting-sheaves", "def-cup-product-sheaf-cohomology", "prop-yoneda-product-is-composition-in-the-derived-category", "thm-long-exact-hom-sequences-of-a-distinguished-triangle", "thm-five-lemma-for-a-morphism-of-long-exact-sequences"]

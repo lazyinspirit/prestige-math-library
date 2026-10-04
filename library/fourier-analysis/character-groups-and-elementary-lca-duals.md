@@ -1,7 +1,7 @@
 ---
 page: character-groups-and-elementary-lca-duals
 title: "Character Groups and Elementary LCA Duals"
-status: draft
+status: published
 items: [lem-unit-circle-is-a-compact-metrizable-topological-group,
         lem-compact-open-topology-on-a-discrete-domain-is-pointwise,
         lem-circle-neighbourhood-arc-contains-no-nontrivial-subgroup,

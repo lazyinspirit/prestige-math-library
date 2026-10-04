@@ -33,7 +33,7 @@ sources:
   - title: Terence Tao, 254A Notes 3 (author-hosted lecture notes, 2011)
     url: https://terrytao.wordpress.com/2011/09/27/254a-notes-3-haar-measure-and-the-peter-weyl-theorem/
     locator: Theorem 6 (spectral theorem) and the proof of Theorem 7 (baby Peter-Weyl)
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

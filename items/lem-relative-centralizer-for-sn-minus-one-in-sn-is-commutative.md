@@ -2,7 +2,7 @@
 id: lem-relative-centralizer-for-sn-minus-one-in-sn-is-commutative
 kind: lemma
 title: "The centralizer of $\\mathbb C[S_{n-1}]$ in $\\mathbb C[S_n]$ is commutative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-symmetric-group-conjugation-to-inverse-within-the-preceding-group, thm-group-ring-is-a-unital-algebra-with-basis-g, def-symmetric-group, def-partition-young-diagram-and-conjugate-partition]

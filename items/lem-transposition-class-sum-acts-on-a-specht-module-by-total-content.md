@@ -2,7 +2,7 @@
 id: lem-transposition-class-sum-acts-on-a-specht-module-by-total-content
 kind: lemma
 title: "The transposition class sum acts on a complex Specht module by total content"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-partition-young-diagram-and-conjugate-partition, def-row-and-column-stabilizers-of-a-tableau, def-young-subgroup-tabloid-and-permutation-module, def-column-antisymmetrizer-polytabloid-and-specht-module, thm-complex-specht-modules-are-irreducible, cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars, def-character-of-a-complex-representation, prop-trace-is-linear]

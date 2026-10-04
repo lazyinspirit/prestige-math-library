@@ -2,7 +2,7 @@
 id: lem-braid-like-moves-can-be-moved-to-height-zero
 kind: lemma
 title: "Braid-like moves can be moved to height zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-non-braid-like-reidemeister-moves-are-generated-by-braid-like-moves-and-reductions,

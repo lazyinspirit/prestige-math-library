@@ -2,7 +2,7 @@
 id: lem-standard-costandard-hom-and-ext-vanishing
 kind: lemma
 title: "Standard-costandard Hom and Ext-one orthogonality"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-balanced-ext-bifunctor

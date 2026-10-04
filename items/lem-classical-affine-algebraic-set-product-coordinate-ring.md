@@ -2,7 +2,7 @@
 id: "lem-classical-affine-algebraic-set-product-coordinate-ring"
 kind: "lemma"
 title: "Products of affine algebraic sets have tensor-product coordinate rings"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-polynomial-functions-equal-coordinate-ring", "def-classical-affine-coordinate-ring"]
 provenance: {"statement": "literature-derived", "proof": "ai-altered"}

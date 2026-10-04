@@ -2,7 +2,7 @@
 id: prop-nonaffine-smooth-group-pseudo-abelian-quotient
 kind: proposition
 title: "A smooth connected group has a unique affine-normal pseudo-abelian reduction"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, thm-nonaffine-maximal-smooth-connected-affine-normal-subgroup, lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties, lem-nonaffine-group-image-exact-quotient-properties, thm-nonaffine-group-scheme-normal-subgroup-quotient]
 provenance:

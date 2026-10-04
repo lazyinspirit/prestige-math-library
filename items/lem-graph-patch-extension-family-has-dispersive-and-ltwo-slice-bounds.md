@@ -2,7 +2,7 @@
 id: lem-graph-patch-extension-family-has-dispersive-and-ltwo-slice-bounds
 kind: lemma
 title: 'Graph-patch extension family: dispersive and L2 slice bounds'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

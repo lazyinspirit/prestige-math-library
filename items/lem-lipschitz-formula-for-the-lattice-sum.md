@@ -2,7 +2,7 @@
 id: lem-lipschitz-formula-for-the-lattice-sum
 kind: lemma
 title: "The Lipschitz formula for the reciprocal-power sums"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-mittag-leffler-expansion-of-pi-cotangent

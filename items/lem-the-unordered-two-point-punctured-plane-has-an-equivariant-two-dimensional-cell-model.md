@@ -2,7 +2,7 @@
 id: lem-the-unordered-two-point-punctured-plane-has-an-equivariant-two-dimensional-cell-model
 kind: lemma
 title: An equivariant two-dimensional model for the LKB configuration space
-status: draft
+status: published
 origin: session
 deps: [def-unordered-configuration-space]
 dependency_level: 0

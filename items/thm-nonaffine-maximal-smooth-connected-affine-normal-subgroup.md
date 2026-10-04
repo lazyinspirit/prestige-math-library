@@ -2,7 +2,7 @@
 id: thm-nonaffine-maximal-smooth-connected-affine-normal-subgroup
 kind: theorem
 title: "Every algebraic group has a largest smooth connected affine normal subgroup"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, lem-nonaffine-affine-normal-subgroup-products, lem-nonaffine-connected-group-geometrically-connected, thm-nonaffine-group-scheme-normal-subgroup-quotient, lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties]
 provenance:

@@ -2,7 +2,7 @@
 id: ex-gaussian-data-remain-gaussian-under-heat-flow
 kind: example
 title: "Gaussian data remain Gaussian under the heat flow"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

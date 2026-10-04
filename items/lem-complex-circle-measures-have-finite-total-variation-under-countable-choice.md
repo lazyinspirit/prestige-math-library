@@ -2,7 +2,7 @@
 id: lem-complex-circle-measures-have-finite-total-variation-under-countable-choice
 kind: lemma
 title: "Complex circle measures have finite regular total variation under countable choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable-choice, def-complex-measure, def-total-variation-of-a-signed-or-complex-measure, lem-finite-choice, cor-second-countable-lch-locally-finite-borel-measures-are-regular, def-the-one-dimensional-torus-and-normalized-haar-integral]

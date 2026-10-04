@@ -2,7 +2,7 @@
 id: def-degree-invertible-sheaf-proper-dimension-one
 kind: definition
 title: "Degree of an invertible sheaf on a proper one-dimensional scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

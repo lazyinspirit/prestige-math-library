@@ -2,7 +2,7 @@
 id: ex-serre-duality-on-a-singular-projective-cm-curve
 kind: example
 title: "Coherent duality on a singular plane cubic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-axiom-of-choice", "thm-serre-duality-for-coherent-sheaves-on-projective-cm-scheme", "lem-projective-pure-cm-dualizing-complex-concentration", "thm-regular-quotients-and-cohen-macaulayness", "thm-cohomology-projective-space-twisting-sheaves", "lem-projective-hypersurface-cohomology-sequence", "thm-flasque-sheaves-acyclic", "thm-dimension-and-parameters-for-modules", "thm-dimension-formula-for-affine-domains", "lem-affine-domain-chain-dimension-formula-step"]

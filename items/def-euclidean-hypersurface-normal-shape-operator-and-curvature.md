@@ -2,7 +2,7 @@
 id: def-euclidean-hypersurface-normal-shape-operator-and-curvature
 kind: definition
 title: Euclidean hypersurface normals, shape operators and curvature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

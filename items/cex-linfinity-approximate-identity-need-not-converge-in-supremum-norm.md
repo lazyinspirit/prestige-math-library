@@ -2,7 +2,7 @@
 id: cex-linfinity-approximate-identity-need-not-converge-in-supremum-norm
 kind: counterexample
 title: "The heat flow need not converge in supremum norm"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions

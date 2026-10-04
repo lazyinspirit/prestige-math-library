@@ -2,7 +2,7 @@
 id: ex-rsk-for-involutions
 kind: example
 title: RSK pairs for two nonidentity involutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [cor-involutions-are-counted-by-standard-tableaux, cor-rsk-symmetry-under-inversion, thm-robinson-schensted-correspondence]

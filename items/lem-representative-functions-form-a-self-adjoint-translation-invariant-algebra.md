@@ -28,7 +28,7 @@ sources:
   - title: David A. Vogan, Review of Harmonic Analysis on Compact Groups (MIT lecture notes, 12 pp.)
     url: https://math.mit.edu/~dav/compactrev.pdf
     locator: (2.12) and the following paragraph, printed p. 8 (the K-finite functions form a subalgebra)
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

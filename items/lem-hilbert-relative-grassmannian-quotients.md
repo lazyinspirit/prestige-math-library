@@ -2,7 +2,7 @@
 id: lem-hilbert-relative-grassmannian-quotients
 kind: lemma
 title: "Relative Grassmannian of finite locally free quotients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

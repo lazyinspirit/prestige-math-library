@@ -2,7 +2,7 @@
 id: thm-serre-duality-for-coherent-sheaves-on-projective-cm-scheme
 kind: theorem
 title: "Serre duality for coherent sheaves on a projective Cohen\u2013Macaulay scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-axiom-of-choice", "def-dualizing-complex-on-projective-cm-scheme", "lem-projective-embedding-dualizing-complex-existence", "lem-projective-dualizing-complex-trace-and-embedding-independence", "lem-projective-pure-cm-dualizing-complex-concentration", "prop-yoneda-product-is-composition-in-the-derived-category", "lem-injective-modules-flasque-and-ext-of-structure-sheaf", "lem-projective-coherent-cohomology-finite-and-vanishing", "thm-cohomological-dimension-noetherian-scheme", "lem-finite-closed-immersion-derived-coinduction-adjunction", "lem-projective-space-derived-coherent-duality"]

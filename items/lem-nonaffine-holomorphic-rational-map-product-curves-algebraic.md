@@ -2,7 +2,7 @@
 id: lem-nonaffine-holomorphic-rational-map-product-curves-algebraic
 kind: lemma
 title: "A holomorphic extension of a rational map on a product of smooth complex curves is algebraic"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-weak-nullstellensatz-algebraically-closed-coordinate-form, thm-identity-theorem-in-several-complex-variables, thm-ag-standard-smooth-geometric-regularity, def-axiom-of-choice, lem-nonsingular-complex-algebraic-curve-holomorphic-charts, thm-associated-graded-ring-of-a-regular-local-ring, thm-faithful-flatness-of-jacobson-adic-completion, thm-faithfully-flat-descent-vanishing, cor-holomorphic-functions-in-several-variables-are-smooth]
 provenance:

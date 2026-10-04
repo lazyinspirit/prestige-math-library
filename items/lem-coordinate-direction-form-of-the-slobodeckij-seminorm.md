@@ -2,7 +2,7 @@
 id: lem-coordinate-direction-form-of-the-slobodeckij-seminorm
 kind: lemma
 title: "The coordinate-direction form of the Slobodeckij seminorm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-fractional-slobodeckij-space-on-euclidean-space, thm-polar-coordinates-formula-for-lebesgue-measure, thm-integrals-are-invariant-under-measure-preserving-maps, thm-tonelli-and-fubini-for-completed-product-measures, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, thm-holder-inequality-for-integrals, def-countable-choice]

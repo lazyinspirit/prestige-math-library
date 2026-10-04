@@ -2,7 +2,7 @@
 id: lem-nonaffine-finite-galois-descent-of-morphisms
 kind: lemma
 title: "Finite Galois descent of morphisms of schemes"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-fundamental-theorem-of-finite-galois-theory, thm-affine-fibre-product-tensor-ring, thm-morphisms-into-affine-scheme-global-sections]
 provenance:

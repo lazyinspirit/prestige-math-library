@@ -1,7 +1,7 @@
 ---
 page: frobenius-characteristic-and-the-symmetric-group-character-dictionary-examples
 title: "Frobenius Characteristic and the Symmetric-Group Character Dictionary — Examples"
-status: draft
+status: published
 requires: [frobenius-characteristic-and-the-symmetric-group-character-dictionary]
 items: []
 examples:

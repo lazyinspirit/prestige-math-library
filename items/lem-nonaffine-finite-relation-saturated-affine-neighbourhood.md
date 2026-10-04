@@ -2,7 +2,7 @@
 id: lem-nonaffine-finite-relation-saturated-affine-neighbourhood
 kind: lemma
 title: "Finite equivalence relations have saturated affine neighbourhoods around affine-contained orbits"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-nonaffine-finite-flat-affine-equivalence-quotient, lem-finite-prime-avoidance]
 provenance:

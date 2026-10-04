@@ -1,7 +1,7 @@
 ---
 page: projectives-standard-filtrations-and-bgg-reciprocity
 title: "Projectives Standard Filtrations and Bgg Reciprocity"
-status: draft
+status: published
 requires:
   - category-o-finiteness-duality-and-blocks
   - semisimple-lie-algebras-cohomology-and-levi-theory

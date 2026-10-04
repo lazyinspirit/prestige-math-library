@@ -2,7 +2,7 @@
 id: lem-verma-filtered-objects-are-acyclic-for-n-minus-coinvariants
 kind: lemma
 title: Verma-filtered objects are acyclic for n-minus coinvariants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-verma-type-of-a-module-with-a-standard-filtration, thm-pbw-model-of-a-verma-module, def-tor-by-resolving-the-left-module, thm-long-exact-tor-sequence-in-the-left-module-variable, prop-positive-tor-vanishes-when-the-resolved-variable-is-projective, def-axiom-of-choice]

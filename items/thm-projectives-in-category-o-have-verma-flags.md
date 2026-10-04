@@ -2,7 +2,7 @@
 id: thm-projectives-in-category-o-have-verma-flags
 kind: theorem
 title: "Projectives in category O have finite Verma flags"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

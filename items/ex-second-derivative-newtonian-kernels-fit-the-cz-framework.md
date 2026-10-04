@@ -2,7 +2,7 @@
 id: ex-second-derivative-newtonian-kernels-fit-the-cz-framework
 kind: example
 title: "Newtonian Hessian kernels fit the Calderón–Zygmund framework"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [cor-riesz-transforms-are-ltwo-bounded, def-calderon-zygmund-kernel-and-principal-value-operator, def-countable-choice, def-laplace-fundamental-solution-with-positive-minus-laplacian-sign, def-newtonian-potential, def-riesz-transforms-on-euclidean-space, def-standard-holder-calderon-zygmund-kernel, lem-ltwo-fourier-multiplier-bound, thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions, thm-polar-coordinates-formula-for-lebesgue-measure, thm-distributions-supported-at-one-point, thm-divergence-theorem-for-bounded-c-one-euclidean-domains, lem-euclidean-chart-measure-agrees-with-polar-surface-measure, thm-fourier-transform-converts-allowed-tempered-convolutions-to-products, def-hilbert-space-adjoint, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-locally-integrable-functions-embed-in-distributions]

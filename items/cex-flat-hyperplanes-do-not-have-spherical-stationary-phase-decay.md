@@ -2,7 +2,7 @@
 id: cex-flat-hyperplanes-do-not-have-spherical-stationary-phase-decay
 kind: counterexample
 title: Flat hyperplanes do not have spherical stationary-phase decay
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

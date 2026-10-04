@@ -2,7 +2,7 @@
 id: def-graded-ordinary-representation-ring-of-symmetric-groups
 kind: definition
 title: "The graded ordinary representation ring of the symmetric groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

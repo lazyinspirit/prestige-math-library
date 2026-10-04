@@ -1,7 +1,7 @@
 ---
 page: etale-covers-and-the-etale-fundamental-group-examples
 title: "Etale Covers and the Etale Fundamental Group — Examples"
-status: draft
+status: published
 requires:
 - etale-covers-and-the-etale-fundamental-group
 items: []

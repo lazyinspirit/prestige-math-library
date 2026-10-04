@@ -2,7 +2,7 @@
 id: lem-nonaffine-smooth-affine-open-cartier-boundary
 kind: lemma
 title: "An affine open in a smooth integral variety has Cartier boundary"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-nonaffine-regular-local-ring-is-ufd, thm-cartier-weil-isomorphism-locally-factorial, thm-morphisms-into-affine-scheme-global-sections, def-separated-morphism-schemes]
 provenance:

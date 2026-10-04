@@ -2,7 +2,7 @@
 id: cor-the-artin-action-solves-the-braid-word-problem
 kind: corollary
 title: "The Artin action solves the braid word problem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 8

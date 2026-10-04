@@ -2,7 +2,7 @@
 id: lem-characteristic-of-a-young-permutation-character-is-complete
 kind: lemma
 title: "The characteristic of a Young permutation character is complete homogeneous"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

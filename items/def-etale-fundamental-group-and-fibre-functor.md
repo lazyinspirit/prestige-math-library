@@ -2,7 +2,7 @@
 id: def-etale-fundamental-group-and-fibre-functor
 kind: definition
 title: "Geometric fibre functor and étale fundamental group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

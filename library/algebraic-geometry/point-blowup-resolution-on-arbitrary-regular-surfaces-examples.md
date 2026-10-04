@@ -1,7 +1,7 @@
 ---
 page: point-blowup-resolution-on-arbitrary-regular-surfaces-examples
 title: "Point Blowup Resolution on Arbitrary Regular Surfaces — Examples"
-status: draft
+status: published
 requires: [point-blowup-resolution-on-arbitrary-regular-surfaces]
 items: []
 examples: [cex-finite-normalization-does-not-make-the-curve-regular-before-blowups,

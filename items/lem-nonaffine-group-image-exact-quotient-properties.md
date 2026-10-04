@@ -2,7 +2,7 @@
 id: lem-nonaffine-group-image-exact-quotient-properties
 kind: lemma
 title: "Group images are exact kernel quotients and preserve affine smooth connected properties"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, thm-nonaffine-group-scheme-normal-subgroup-quotient, lem-nonaffine-group-monomorphism-closed-immersion, lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties]
 provenance:

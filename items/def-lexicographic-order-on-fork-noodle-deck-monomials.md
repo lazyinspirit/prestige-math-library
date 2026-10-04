@@ -2,7 +2,7 @@
 id: def-lexicographic-order-on-fork-noodle-deck-monomials
 kind: definition
 title: The lexicographic order on fork-noodle deck monomials
-status: draft
+status: published
 origin: pipeline
 deps: [def-forks-noodles-and-their-lkb-intersection-pairing, def-lkb-two-variable-covering-homomorphism]
 justified_by: []

@@ -2,7 +2,7 @@
 id: lem-blowup-power-of-ideal-same
 kind: lemma
 title: "Blowing up I and I^d agree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

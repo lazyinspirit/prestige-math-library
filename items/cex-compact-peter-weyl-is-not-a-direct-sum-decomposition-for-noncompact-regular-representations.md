@@ -38,7 +38,7 @@ sources:
   - title: Emmanuel Kowalski, An Introduction to the Representation Theory of Groups (author-hosted draft, 338 pp.)
     url: https://people.math.ethz.ch/~kowalski/representation-theory.pdf
     locator: "Ch. 3 §3.4.3, Example 3.4.15 (the regular representation of R contains no irreducible subrepresentation), printed p. 119; Ch. 7 §7.2, printed p. 287; §7.3 direct integrals (7.4), printed pp. 288–289"
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement refuted

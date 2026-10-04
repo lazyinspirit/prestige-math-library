@@ -2,7 +2,7 @@
 id: thm-frobenius-characteristic-is-an-isometric-graded-ring-isomorphism
 kind: theorem
 title: "The Frobenius characteristic is an isometric graded ring isomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: def-blowup-fractional-ideal
 kind: definition
 title: "Invariance of the blowup under invertible (fractional) rescaling of the ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

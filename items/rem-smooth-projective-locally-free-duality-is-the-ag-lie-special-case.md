@@ -2,7 +2,7 @@
 id: rem-smooth-projective-locally-free-duality-is-the-ag-lie-special-case
 kind: remark
 title: "The smooth projective locally free theorem is the special case"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-axiom-of-choice", "thm-serre-duality-for-coherent-sheaves-on-projective-cm-scheme", "thm-serre-duality-smooth-projective-variety-locally-free-sheaves", "lem-smooth-closed-subvariety-dualizing-line-bundle-adjunction", "lem-regular-immersion-koszul-ext-sheaf", "lem-regular-immersion-local-to-global-ext-collapse", "lem-smooth-projective-embedding-gysin-trace-compatibility"]

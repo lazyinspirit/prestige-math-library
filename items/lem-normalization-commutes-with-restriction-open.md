@@ -2,7 +2,7 @@
 id: lem-normalization-commutes-with-restriction-open
 kind: lemma
 title: Normalization commutes with restriction to an open subvariety
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 4

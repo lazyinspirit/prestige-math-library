@@ -2,7 +2,7 @@
 id: lem-sphere-finite-graph-charts-and-surface-density
 kind: lemma
 title: Sphere graph charts, surface density, and a finite partition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

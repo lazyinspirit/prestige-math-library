@@ -2,7 +2,7 @@
 id: thm-nonaffine-affine-normal-group-quotient-affine
 kind: theorem
 title: "Quotients of affine group schemes by normal subgroup schemes are affine"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-nonaffine-normal-subgroup-kernel-of-representation, thm-nonaffine-group-scheme-normal-subgroup-quotient, lem-nonaffine-group-monomorphism-closed-immersion]
 provenance:

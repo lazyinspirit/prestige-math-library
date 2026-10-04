@@ -2,7 +2,7 @@
 id: prop-regular-character-has-characteristic-p-one-to-the-n
 kind: proposition
 title: "The regular character has characteristic $p_1^n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

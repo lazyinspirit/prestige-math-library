@@ -2,7 +2,7 @@
 id: lem-braids-lift-to-the-lkb-cover-and-act-lambda-linearly
 kind: lemma
 title: Braids lift to the LKB cover and act Lambda-linearly
-status: draft
+status: published
 origin: pipeline
 deps: [thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk, def-lkb-two-variable-covering-homomorphism, def-lawrence-krammer-bigelow-cover, def-axiom-of-choice, thm-covering-space-lifting-criterion, thm-homotopy-lifting-for-covering-maps, thm-alexander-contractibility-of-the-boundary-fixed-disk-homeomorphism-group, def-induced-homomorphism-on-fundamental-groups]
 justified_by: []

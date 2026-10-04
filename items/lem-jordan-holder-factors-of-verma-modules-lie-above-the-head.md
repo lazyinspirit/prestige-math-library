@@ -2,7 +2,7 @@
 id: lem-jordan-holder-factors-of-verma-modules-lie-above-the-head
 kind: lemma
 title: Jordan-Holder factors of Verma modules dominate the head (BGG 8.12)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-bgg-verma-homomorphism-criterion, thm-strong-linkage-principle-for-verma-modules, lem-a-verma-composition-factor-has-the-same-central-character, thm-simple-objects-of-category-o-are-highest-weight-modules, prop-verma-composition-multiplicities-are-finite, thm-verma-module-has-a-unique-simple-quotient, def-composition-series-and-composition-factors-of-an-object, thm-every-category-o-object-has-finite-length, def-bruhat-order-on-a-finite-weyl-group, def-axiom-of-choice, lem-positive-root-pairings-of-a-dominant-integral-weight, def-strong-linkage-order-on-weights, cor-central-characters-are-dot-weyl-orbits, lem-finite-weyl-strong-exchange-and-deletion]

@@ -2,7 +2,7 @@
 id: ex-split-torus-character-lattice
 kind: example
 title: "The character lattice of a split torus"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

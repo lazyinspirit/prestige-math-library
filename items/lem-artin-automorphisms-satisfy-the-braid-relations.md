@@ -2,7 +2,7 @@
 id: lem-artin-automorphisms-satisfy-the-braid-relations
 kind: lemma
 title: "The Artin automorphisms satisfy the braid relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: prop-zero-dimensional-bordism-groups
 kind: proposition
 title: Zero-dimensional bordism groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

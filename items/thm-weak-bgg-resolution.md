@@ -2,7 +2,7 @@
 id: thm-weak-bgg-resolution
 kind: theorem
 title: Weak BGG resolution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-weak-bgg-base-case-for-the-trivial-module, lem-tensoring-a-verma-module-by-a-finite-dimensional-module-shifts-types, lem-central-character-cuts-of-a-typed-module-are-typed, thm-category-o-decomposes-by-generalized-central-character, cor-central-characters-are-dot-weyl-orbits, lem-finite-semisimple-cartan-root-and-string-structure, lem-finite-weyl-closed-chambers-and-stabilizers, prop-tensoring-with-a-finite-dimensional-module-preserves-category-o, def-integral-dominant-and-strictly-dominant-weights, def-bgg-category-o, def-axiom-of-choice, lem-weight-subsets-with-equal-root-sums-are-unique, lem-positive-root-pairings-of-a-dominant-integral-weight, prop-weyl-orbit-of-the-highest-weight-gives-extremal-weights-with-multiplicity-one, lem-central-action-on-a-cyclic-highest-weight-module-is-scalar, def-verma-type-of-a-module-with-a-standard-filtration, lem-highest-weight-modules-have-weights-below-the-top-weight, lem-simple-reflections-preserve-weight-multiplicities]

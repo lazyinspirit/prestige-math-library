@@ -2,7 +2,7 @@
 id: def-maximal-truncated-singular-integral
 kind: definition
 title: "Maximal truncated singular integrals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-complex-lp-and-euclidean-test-function-conventions, thm-complex-holder-minkowski-and-the-quotient-norm, def-countable-choice, thm-polar-coordinates-formula-for-lebesgue-measure, thm-dominated-convergence]

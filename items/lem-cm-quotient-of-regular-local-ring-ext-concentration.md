@@ -2,7 +2,7 @@
 id: lem-cm-quotient-of-regular-local-ring-ext-concentration
 kind: lemma
 title: "Ext concentration for a Cohen\u2013Macaulay quotient of a regular local ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-axiom-of-choice", "lem-finite-closed-immersion-derived-coinduction-adjunction", "thm-auslander-buchsbaum-formula", "thm-regular-local-rings-are-domains-and-cohen-macaulay", "thm-auslander-buchsbaum-serre-regularity-criterion", "lem-regular-element-exists-by-prime-avoidance", "lem-associated-primes-of-cohen-macaulay-module-have-full-dimension", "thm-regular-quotients-and-cohen-macaulayness", "thm-dimension-formula-for-affine-domains", "lem-affine-domain-chain-dimension-formula-step", "thm-minimal-support-primes-are-associated", "thm-dimension-and-parameters-for-modules"]

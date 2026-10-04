@@ -2,7 +2,7 @@
 id: def-blowup-scheme-along-ideal
 kind: definition
 title: "Blowup of a scheme along an ideal sheaf"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

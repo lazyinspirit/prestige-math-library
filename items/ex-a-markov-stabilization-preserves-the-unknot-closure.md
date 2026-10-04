@@ -2,7 +2,7 @@
 id: ex-a-markov-stabilization-preserves-the-unknot-closure
 kind: example
 title: "A Markov stabilization preserves the unknot closure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-markov-moves-preserve-oriented-closure-isotopy,

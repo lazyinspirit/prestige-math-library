@@ -2,7 +2,7 @@
 id: lem-finite-galois-descent-for-multiplicative-hopf-algebras
 kind: lemma
 title: "Finite Galois descent for the Hopf algebras of multiplicative type"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

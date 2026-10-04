@@ -2,7 +2,7 @@
 id: thm-blowup-regular-surface-closed-point-regular
 kind: theorem
 title: "Point blowups of regular surfaces stay regular, with rational exceptional fibre over the residue field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

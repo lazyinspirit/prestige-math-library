@@ -2,7 +2,7 @@
 id: lem-collapse-map-is-independent-of-tubular-neighbourhood-and-radius-up-to-based-homotopy
 kind: lemma
 title: "Collapse homotopy for a fixed normal identification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-pontryagin-thom-collapse-of-an-embedded-submanifold", "lem-collapse-map-is-continuous-and-smooth-away-from-the-basepoint", "lem-thom-space-is-independent-of-the-bundle-metric-up-to-canonical-homeomorphism"]

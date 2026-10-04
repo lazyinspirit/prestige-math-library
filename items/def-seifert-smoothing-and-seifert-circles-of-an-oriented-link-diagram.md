@@ -2,7 +2,7 @@
 id: def-seifert-smoothing-and-seifert-circles-of-an-oriented-link-diagram
 kind: definition
 title: "Seifert smoothing and Seifert circles of an oriented link diagram"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-regular-oriented-link-diagram, def-embedded-submanifold-and-slice-chart]

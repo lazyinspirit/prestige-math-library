@@ -2,7 +2,7 @@
 id: lem-lambda-transformation-laws
 kind: lemma
 title: "Transformation laws and S_3-action of the modular lambda function"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-lambda-function

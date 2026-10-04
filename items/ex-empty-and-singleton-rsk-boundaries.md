@@ -2,7 +2,7 @@
 id: ex-empty-and-singleton-rsk-boundaries
 kind: example
 title: Empty and singleton RSK boundaries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-hook-arm-leg-and-hook-length, def-row-insertion-and-bumping-route, lem-standard-tableau-removal-recursion, thm-hook-length-formula, thm-robinson-schensted-correspondence]

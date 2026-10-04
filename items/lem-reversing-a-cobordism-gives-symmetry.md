@@ -2,7 +2,7 @@
 id: lem-reversing-a-cobordism-gives-symmetry
 kind: lemma
 title: Reversing a cobordism gives symmetry
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

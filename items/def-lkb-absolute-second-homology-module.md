@@ -2,7 +2,7 @@
 id: def-lkb-absolute-second-homology-module
 kind: definition
 title: The integral LKB module as absolute second homology
-status: draft
+status: published
 origin: pipeline
 deps: [def-lawrence-krammer-bigelow-cover]
 justified_by: []

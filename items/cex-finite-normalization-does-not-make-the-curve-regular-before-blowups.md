@@ -2,7 +2,7 @@
 id: cex-finite-normalization-does-not-make-the-curve-regular-before-blowups
 kind: counterexample
 title: Finite normalization alone does not make a curve regular
-status: draft
+status: published
 origin: pipeline
 deps: [thm-regularization-of-finite-normalization-curve-by-point-blowups, lem-strict-blowup-increases-finite-normalization-subalgebra-at-singular-center, lem-point-blowup-of-integral-curve-is-finite, thm-normalization-reduced-curve-exists-finite, def-embedding-dimension-and-regular-local-ring, thm-one-dimensional-regular-local-rings-are-dvrs, def-axiom-of-choice, thm-polynomial-ring-over-a-field-is-a-ufd, def-normal-noetherian-ring, thm-affine-blowup-standard-charts, def-integral-scheme, cor-dimension-of-a-quotient-as-chains-above-an-ideal, cor-dimension-of-a-finite-polynomial-ring-over-a-field, cor-dimension-preserved-by-integral-extensions]
 provenance:

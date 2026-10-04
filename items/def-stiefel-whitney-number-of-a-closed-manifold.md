@@ -2,7 +2,7 @@
 id: def-stiefel-whitney-number-of-a-closed-manifold
 kind: definition
 title: Stiefel-Whitney numbers of a closed manifold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

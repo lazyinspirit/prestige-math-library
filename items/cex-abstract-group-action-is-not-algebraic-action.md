@@ -2,7 +2,7 @@
 id: "cex-abstract-group-action-is-not-algebraic-action"
 kind: "counterexample"
 title: "An abstract group action need not be an algebraic action"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-rational-action-on-affine-variety", "prop-affine-algebraic-actions-coordinate-ring-coaction", "thm-coordinate-ring-of-affine-action-is-locally-finite", "def-axiom-of-choice", "thm-classical-affine-global-regular-functions-coordinate-ring", "thm-classical-polynomial-functions-equal-coordinate-ring"]
 provenance: {"statement": "ai-generated", "proof": "ai-altered"}

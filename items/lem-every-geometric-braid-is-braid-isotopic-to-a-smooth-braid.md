@@ -2,7 +2,7 @@
 id: lem-every-geometric-braid-is-braid-isotopic-to-a-smooth-braid
 kind: lemma
 title: "Every geometric braid is braid-isotopic to a smooth braid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-geometric-braid-with-setwise-endpoints, def-braid-isotopy-relative-top-and-bottom,

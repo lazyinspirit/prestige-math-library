@@ -2,7 +2,7 @@
 id: thm-blowup-separates-plane-curve-tangent-directions
 kind: theorem
 title: "Strict transforms of plane curves record tangent directions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

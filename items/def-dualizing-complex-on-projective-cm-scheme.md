@@ -2,7 +2,7 @@
 id: def-dualizing-complex-on-projective-cm-scheme
 kind: definition
 title: "Dualizing complexes and the normalized dualizing sheaf on a projective CM scheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-derived-category-of-an-abelian-category", "def-sheaf-ext-for-coherent-modules", "def-cohen-macaulay-local-module-and-ring"]

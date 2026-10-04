@@ -2,7 +2,7 @@
 id: lem-n-minus-coinvariants-map-injectively-into-the-kernel-of-the-differential
 kind: lemma
 title: "The BGG differential induces an injection into kernel coinvariants (BGG 10.6)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-bruhat-covers-give-unique-verma-embeddings, def-bgg-differential-from-signed-verma-maps, lem-surjectivity-modulo-n-minus-for-free-weight-generated-modules, lem-kernel-generators-for-the-weak-bgg-complex, lem-nonzero-highest-weight-images-survive-modulo-n-minus, thm-pbw-model-of-a-verma-module, def-axiom-of-choice, prop-the-bgg-differential-squares-to-zero, def-bgg-bruhat-verma-sum-in-degree-k, lem-positive-root-pairings-of-a-dominant-integral-weight, lem-finite-weyl-strong-exchange-and-deletion, def-bgg-category-o]

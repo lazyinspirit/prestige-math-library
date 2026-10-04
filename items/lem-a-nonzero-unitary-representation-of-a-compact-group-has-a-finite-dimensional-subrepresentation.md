@@ -26,7 +26,7 @@ sources:
   - title: Emmanuel Kowalski, An Introduction to the Representation Theory of Groups (author-hosted draft, 338 pp.)
     url: https://people.math.ethz.ch/~kowalski/representation-theory.pdf
     locator: Lemma 5.4.7 and its proof, printed pp. 234–235
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

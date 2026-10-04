@@ -1,7 +1,7 @@
 ---
 page: peter-weyl-theory-for-general-compact-groups-examples
 title: "Peter Weyl Theory for General Compact Groups — Examples"
-status: draft
+status: published
 requires: [peter-weyl-theory-for-general-compact-groups]
 items: []
 examples:

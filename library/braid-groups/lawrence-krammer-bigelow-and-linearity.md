@@ -1,7 +1,7 @@
 ---
 page: lawrence-krammer-bigelow-and-linearity
 title: "Lawrence–Krammer–Bigelow Representations and Linearity"
-status: draft
+status: published
 requires: [ordered-and-unordered-configuration-spaces,
            braids-as-fundamental-groups-of-configuration-spaces,
            covering-spaces-and-lifting,

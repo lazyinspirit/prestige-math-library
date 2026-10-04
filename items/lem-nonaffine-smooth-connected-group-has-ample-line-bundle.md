@@ -2,7 +2,7 @@
 id: lem-nonaffine-smooth-connected-group-has-ample-line-bundle
 kind: lemma
 title: "A smooth geometrically integral algebraic group has an ample line bundle"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, lem-nonaffine-smooth-affine-open-cartier-boundary, lem-nonaffine-line-bundle-affine-space-parameter-constancy, lem-nonaffine-ample-line-bundle-field-descent, thm-smooth-local-standard-form, thm-nonaffine-regular-local-ring-is-ufd, thm-cartier-weil-isomorphism-locally-factorial, cor-finite-flat-noetherian-modules-are-projective, thm-existence-of-algebraic-closures, cor-weak-nullstellensatz-algebraically-closed-coordinate-form, def-ample-invertible-sheaf]
 provenance:

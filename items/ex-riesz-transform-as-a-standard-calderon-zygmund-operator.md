@@ -2,7 +2,7 @@
 id: ex-riesz-transform-as-a-standard-calderon-zygmund-operator
 kind: example
 title: "The Riesz kernel is a standard Calderón–Zygmund kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [cor-riesz-transforms-are-ltwo-bounded, def-calderon-zygmund-kernel-and-principal-value-operator, def-countable-choice, def-hilbert-space-adjoint, def-riesz-transforms-on-euclidean-space, def-standard-holder-calderon-zygmund-kernel, thm-polar-coordinates-formula-for-lebesgue-measure, lem-riesz-transform-kernels-have-explicit-size-difference-and-spherical-cancellation-bounds, lem-riesz-transform-principal-value-kernel-formula, thm-plancherel, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-locally-integrable-functions-embed-in-distributions]

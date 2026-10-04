@@ -2,7 +2,7 @@
 id: ex-alexanders-braiding-algorithm-on-a-small-diagram
 kind: example
 title: "The Yamada-Vogel algorithm on a small diagram"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-alexanders-closed-braid-theorem, lem-a-height-zero-diagram-represents-a-closed-braid,

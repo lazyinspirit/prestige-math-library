@@ -2,7 +2,7 @@
 id: lem-poisson-jensen-inequality-hardy-functions
 kind: lemma
 title: "Poisson-Jensen inequality for Hardy functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-nevanlinna-class-on-the-disc, def-countable-choice, def-analytic-hardy-space-disc, thm-nevanlinna-boundary-values-and-log-integrability, lem-hardy-log-integrability-of-boundary-values, def-unit-disc-upper-half-plane-and-blaschke-factor, thm-blaschke-factor-is-a-disc-automorphism, thm-jensen-formula-on-a-disc, thm-fatou-lemma, thm-dominated-convergence, def-poisson-kernel-on-the-disc, lem-poisson-kernel-properties-on-the-disc, def-inner-singular-inner-and-outer-functions, def-poisson-integral-of-finite-boundary-measure, lem-complex-conjugation-and-modulus-laws]

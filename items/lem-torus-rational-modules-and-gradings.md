@@ -2,7 +2,7 @@
 id: "lem-torus-rational-modules-and-gradings"
 kind: "lemma"
 title: "Torus rational modules and affine actions are lattice gradings"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-rational-action-on-affine-variety", "prop-affine-algebraic-actions-coordinate-ring-coaction", "def-classical-affine-coordinate-ring", "thm-classical-affine-nullstellensatz-correspondence", "def-axiom-of-choice"]
 provenance: {"statement": "literature-derived", "proof": "ai-altered"}

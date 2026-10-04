@@ -2,7 +2,7 @@
 id: lem-frobenius-characteristic-preserves-outer-products
 kind: lemma
 title: "The Frobenius characteristic preserves outer products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

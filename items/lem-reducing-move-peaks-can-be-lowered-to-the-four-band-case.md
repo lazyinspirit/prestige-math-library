@@ -2,7 +2,7 @@
 id: lem-reducing-move-peaks-can-be-lowered-to-the-four-band-case
 kind: lemma
 title: "Reducing-move peaks can be lowered to the four-band case"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-braid-like-moves-can-be-moved-to-height-zero,

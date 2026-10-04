@@ -2,7 +2,7 @@
 id: def-standard-holder-calderon-zygmund-kernel
 kind: definition
 title: "Standard (Hölder) Calderón–Zygmund kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-calderon-zygmund-kernel-and-principal-value-operator]

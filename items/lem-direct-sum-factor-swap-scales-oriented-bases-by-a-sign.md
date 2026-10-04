@@ -2,7 +2,7 @@
 id: lem-direct-sum-factor-swap-scales-oriented-bases-by-a-sign
 kind: lemma
 title: "Swapping direct summands scales oriented bases by a sign"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-product-orientation, def-internal-direct-sum, def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]

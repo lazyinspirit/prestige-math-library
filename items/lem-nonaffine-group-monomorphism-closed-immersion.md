@@ -2,7 +2,7 @@
 id: lem-nonaffine-group-monomorphism-closed-immersion
 kind: lemma
 title: "Finite-type algebraic group monomorphisms are closed immersions"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, lem-scheme-zariski-main-factorization-quasi-finite, lem-finite-presentation-image-constructible, lem-proper-source-to-separated-target-proper, thm-nakayama-lemma, lem-nonaffine-global-sections-flat-field-base-change, thm-existence-of-algebraic-closures, cor-weak-nullstellensatz-algebraically-closed-coordinate-form]
 provenance:

@@ -2,7 +2,7 @@
 id: ex-no-nonzero-odd-weight-level-one-modular-forms
 kind: example
 title: "There are no nonzero odd-weight level-one modular forms"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-level-one-modular-form-and-cusp-form

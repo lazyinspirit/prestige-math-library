@@ -2,7 +2,7 @@
 id: ex-blowup-affine-plane-origin-two-charts
 kind: example
 title: "Two charts of the blowup of the affine plane at the origin"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

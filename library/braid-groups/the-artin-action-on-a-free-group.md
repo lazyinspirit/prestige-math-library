@@ -1,7 +1,7 @@
 ---
 page: the-artin-action-on-a-free-group
 title: "The Artin Action on a Free Group"
-status: draft
+status: published
 requires: [punctured-disks-mapping-classes-and-point-pushing,
            free-groups-and-presentations,
            artin-presentation-completeness-and-braid-combing]

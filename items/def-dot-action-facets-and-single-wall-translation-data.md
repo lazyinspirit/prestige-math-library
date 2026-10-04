@@ -2,7 +2,7 @@
 id: def-dot-action-facets-and-single-wall-translation-data
 kind: definition
 title: Dot-Weyl facets and single-wall translation data
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

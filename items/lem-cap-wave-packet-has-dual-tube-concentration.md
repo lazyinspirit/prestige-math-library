@@ -2,7 +2,7 @@
 id: lem-cap-wave-packet-has-dual-tube-concentration
 kind: lemma
 title: Cap wave packets concentrate on the dual tube
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

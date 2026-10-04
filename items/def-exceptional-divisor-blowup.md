@@ -2,7 +2,7 @@
 id: def-exceptional-divisor-blowup
 kind: definition
 title: "Exceptional subscheme of a blowup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

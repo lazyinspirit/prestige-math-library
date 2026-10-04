@@ -2,7 +2,7 @@
 id: lem-artins-product-cancellation-dichotomy
 kind: lemma
 title: "Artin's product-cancellation dichotomy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 4

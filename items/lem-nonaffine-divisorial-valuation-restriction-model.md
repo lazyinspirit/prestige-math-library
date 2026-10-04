@@ -2,7 +2,7 @@
 id: lem-nonaffine-divisorial-valuation-restriction-model
 kind: lemma
 title: "A divisorial valuation restricts to a divisorial valuation or the trivial valuation"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-height-one-localisation-of-normal-noetherian-domain-is-dvr, lem-nonaffine-rational-map-normal-to-proper-codimension-two, thm-valuative-criterion-properness, thm-affine-domain-dimension-transcendence-degree, cor-transcendence-degree-tower-additivity, thm-projective-space-proper-over-base, thm-integral-closure-finite-finite-type-domain-over-field, lem-finite-normalization-compatible-with-principal-opens]
 provenance:

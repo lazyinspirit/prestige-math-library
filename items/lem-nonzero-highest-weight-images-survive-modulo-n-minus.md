@@ -2,7 +2,7 @@
 id: lem-nonzero-highest-weight-images-survive-modulo-n-minus
 kind: lemma
 title: Nonzero highest-weight images survive modulo n-minus (BGG 10.6b)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-jordan-holder-factors-of-verma-modules-lie-above-the-head, def-composition-series-and-composition-factors-of-an-object, thm-verma-module-has-a-unique-simple-quotient, lem-a-proper-verma-submodule-misses-the-highest-weight-line, prop-equivalent-support-description-of-category-o, prop-verma-composition-multiplicities-are-finite, def-axiom-of-choice, thm-every-category-o-object-has-finite-length, lem-positive-root-pairings-of-a-dominant-integral-weight, thm-simple-objects-of-category-o-are-highest-weight-modules, def-bgg-category-o]

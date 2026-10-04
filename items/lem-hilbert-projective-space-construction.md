@@ -2,7 +2,7 @@
 id: lem-hilbert-projective-space-construction
 kind: lemma
 title: "Construction of the fixed-polynomial Hilbert scheme of projective space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

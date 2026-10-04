@@ -2,7 +2,7 @@
 id: lem-a-smooth-isotopy-of-links-can-be-put-in-general-position
 kind: lemma
 title: "General-position isotopies of links"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-regular-oriented-link-diagram, lem-every-oriented-link-admits-a-regular-projection,

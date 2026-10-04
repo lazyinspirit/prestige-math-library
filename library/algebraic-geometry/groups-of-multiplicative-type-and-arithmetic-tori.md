@@ -1,7 +1,7 @@
 ---
 page: groups-of-multiplicative-type-and-arithmetic-tori
 title: "Groups of Multiplicative Type and Arithmetic Tori"
-status: draft
+status: published
 requires:
   - group-schemes-of-finite-type-over-a-field
   - the-galois-correspondence

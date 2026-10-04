@@ -2,7 +2,7 @@
 id: lem-nonaffine-rigidity-proper-geometrically-integral-factor
 kind: lemma
 title: "Rigidity for a proper geometrically integral factor"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-global-functions-proper-integral-variety, lem-nonaffine-global-sections-flat-field-base-change, thm-proper-morphism-closed-image, thm-flat-finite-presentation-is-open, def-separated-morphism-schemes, thm-morphisms-into-affine-scheme-global-sections]
 provenance:

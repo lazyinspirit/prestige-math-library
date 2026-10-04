@@ -28,7 +28,7 @@ sources:
   - title: Emmanuel Kowalski, An Introduction to the Representation Theory of Groups (author-hosted draft, 338 pp.)
     url: https://people.math.ethz.ch/~kowalski/representation-theory.pdf
     locator: Ch. 3 §3.4.3, Example 3.4.15, printed p. 119 (the step $|f(t)|=|f(0)|$ constant a.e.)
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

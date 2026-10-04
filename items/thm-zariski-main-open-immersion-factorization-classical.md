@@ -2,7 +2,7 @@
 id: thm-zariski-main-open-immersion-factorization-classical
 kind: theorem
 title: "Zariski's Main Theorem: open immersion followed by a finite morphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 3

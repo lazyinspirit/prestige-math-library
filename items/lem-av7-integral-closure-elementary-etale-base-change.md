@@ -2,7 +2,7 @@
 id: lem-av7-integral-closure-elementary-etale-base-change
 kind: lemma
 title: Relative integral closure under elementary etale change
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 proof_strategy: direct

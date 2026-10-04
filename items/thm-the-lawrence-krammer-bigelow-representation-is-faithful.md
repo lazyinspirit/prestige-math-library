@@ -2,7 +2,7 @@
 id: thm-the-lawrence-krammer-bigelow-representation-is-faithful
 kind: theorem
 title: The Lawrence-Krammer-Bigelow representation is faithful
-status: draft
+status: published
 origin: pipeline
 deps: [lem-an-lkb-kernel-braid-fixes-every-standard-adjacent-edge-up-to-isotopy, lem-a-punctured-disk-mapping-class-fixing-all-standard-adjacent-edges-is-a-boundary-twist-power, lem-the-full-boundary-twist-acts-on-lkb-by-the-scalar-q-to-two-n-t-squared, def-axiom-of-choice, def-lawrence-krammer-bigelow-representation]
 justified_by: []

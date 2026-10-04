@@ -2,7 +2,7 @@
 id: thm-nevanlinna-boundary-values-and-log-integrability
 kind: theorem
 title: "Boundary values and log-integrability of Nevanlinna-class functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-heine-borel-rn, cor-complex-differentiability-implies-continuity, def-countable-choice, def-nevanlinna-class-on-the-disc, thm-nevanlinna-class-is-bounded-quotient-class, lem-bounded-holomorphic-disc-functions-have-fatou-limits-under-countable-choice, thm-zero-order-factorization-holomorphic-function, thm-identity-theorem-holomorphic-functions, thm-isolated-zeros-holomorphic-function, thm-jensen-formula-on-a-disc, thm-fatou-lemma, def-the-one-dimensional-torus-and-normalized-haar-integral]

@@ -2,7 +2,7 @@
 id: ex-elliptic-curve-as-nonaffine-algebraic-group
 kind: example
 title: "A smooth Weierstrass elliptic cubic is a nonaffine algebraic group"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, lem-nonaffine-holomorphic-rational-map-product-curves-algebraic, lem-proper-geometrically-integral-affine-scheme-is-point, thm-elliptic-cubic-chord-tangent-group-law, thm-complex-torus-weierstrass-cubic-isomorphism, thm-weierstrass-lattice-discriminant-is-nonzero, thm-projective-space-proper-over-base, thm-jacobian-criterion-smooth-morphism]
 provenance:

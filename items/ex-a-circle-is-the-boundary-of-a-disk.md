@@ -2,7 +2,7 @@
 id: ex-a-circle-is-the-boundary-of-a-disk
 kind: example
 title: A circle is the boundary of a disk
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

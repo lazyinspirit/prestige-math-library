@@ -2,7 +2,7 @@
 id: def-modular-discriminant-and-j-invariant
 kind: definition
 title: "The modular discriminant and the j-invariant"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-discriminant-is-a-nonvanishing-cusp-form

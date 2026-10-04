@@ -2,7 +2,7 @@
 id: lem-projective-modification-of-proper-integral-dvr-scheme
 kind: lemma
 title: "Projective modification of a proper integral DVR-scheme, unchanged in codimension one when regular"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: thm-proper-smooth-complete-dvr-finite-etale-cover-equivalence
 kind: theorem
 title: "Finite étale covers of a smooth proper family over a complete DVR are determined by the closed fibre"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

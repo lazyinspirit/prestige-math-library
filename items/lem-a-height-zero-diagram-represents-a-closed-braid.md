@@ -2,7 +2,7 @@
 id: lem-a-height-zero-diagram-represents-a-closed-braid
 kind: lemma
 title: "A height-zero diagram represents a closed braid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-coherence-of-seifert-circles-and-the-height-of-a-diagram,

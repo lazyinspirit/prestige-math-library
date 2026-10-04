@@ -2,7 +2,7 @@
 id: lem-normalization-factors-through-blowup-of-curve-point
 kind: lemma
 title: The finite normalization of a curve factors through the blowup of a closed point
-status: draft
+status: published
 origin: pipeline
 deps: [lem-point-blowup-of-integral-curve-is-finite, thm-blowup-universal-property, def-blowup-scheme-along-ideal, thm-one-dimensional-regular-local-rings-are-dvrs, cor-serre-normality-criterion-two-directions, def-normal-noetherian-ring, def-coherent-module-scheme, thm-coherent-sheaves-abelian-noetherian-scheme, def-integral-scheme, def-axiom-of-choice, thm-equivalent-characterisations-of-a-dvr, cor-blowup-birational-integral-scheme, def-finite-morphism-schemes, thm-normalization-reduced-curve-exists-finite, def-effective-cartier-divisor]
 provenance:

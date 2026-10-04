@@ -2,7 +2,7 @@
 id: thm-sharp-trace-theorem-for-w-one-p
 kind: theorem
 title: "The sharp trace theorem: boundedness and range in the fractional space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-lp-trace-operator-on-a-bounded-c-one-domain, lem-half-space-trace-has-the-fractional-slobodeckij-bound, thm-half-space-lift-by-normal-mollification, def-fractional-sobolev-space-on-a-compact-c-one-boundary, lem-fractional-boundary-norm-is-independent-of-atlas, lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts, lem-coordinate-direction-form-of-the-slobodeckij-seminorm, lem-c-k-boundary-flattening-preserves-wkp-locally, lem-finite-ambient-partitions-for-euclidean-boundary-integration, thm-smooth-up-to-the-boundary-density-on-smooth-domains, thm-holder-inequality-for-integrals, def-sobolev-space-wkp-and-its-norm, def-axiom-of-choice, lem-weak-leibniz-rule-with-a-smooth-factor]

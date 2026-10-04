@@ -2,7 +2,7 @@
 id: ex-latitude-and-meridian-intersections-on-the-torus
 kind: example
 title: "Latitude and meridian intersections on the torus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-transverse-complementary-dimensional-intersection-set, def-mod-two-intersection-number, thm-mod-two-intersection-number-is-homotopy-invariant, def-local-oriented-intersection-sign, def-oriented-intersection-number, def-two-dimensional-torus, def-circle-as-real-line-mod-integers, prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure, def-product-orientation, thm-canonical-tangent-and-cotangent-splittings-for-products, thm-a-regular-level-set-is-an-embedded-submanifold]

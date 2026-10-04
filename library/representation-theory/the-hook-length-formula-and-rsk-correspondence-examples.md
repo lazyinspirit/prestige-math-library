@@ -1,7 +1,7 @@
 ---
 page: the-hook-length-formula-and-rsk-correspondence-examples
 title: "The Hook Length Formula and Rsk Correspondence — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-hook-table-for-shape-three-two-one, ex-hook-lengths-for-row-column-and-hook-shapes, ex-rsk-insertion-and-reverse-deletion, ex-rsk-for-involutions, ex-empty-and-singleton-rsk-boundaries]
 ---

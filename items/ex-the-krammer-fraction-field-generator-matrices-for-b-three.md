@@ -2,7 +2,7 @@
 id: ex-the-krammer-fraction-field-generator-matrices-for-b-three
 kind: example
 title: The Krammer fraction-field generator matrices for B three
-status: draft
+status: published
 origin: pipeline
 deps: [def-lawrence-krammer-bigelow-representation, thm-the-integral-lkb-module-is-free-of-rank-n-choose-two]
 justified_by: []

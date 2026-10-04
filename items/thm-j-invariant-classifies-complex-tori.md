@@ -2,7 +2,7 @@
 id: thm-j-invariant-classifies-complex-tori
 kind: theorem
 title: "The j-invariant classifies complex tori"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-discriminant-and-j-invariant

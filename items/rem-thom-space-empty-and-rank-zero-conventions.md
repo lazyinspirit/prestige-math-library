@@ -2,7 +2,7 @@
 id: rem-thom-space-empty-and-rank-zero-conventions
 kind: remark
 title: "Empty-base and rank-zero Thom conventions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: ["def-disk-bundle-sphere-bundle-and-thom-space", "prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product"]

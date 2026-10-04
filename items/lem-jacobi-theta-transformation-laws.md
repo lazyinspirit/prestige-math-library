@@ -2,7 +2,7 @@
 id: lem-jacobi-theta-transformation-laws
 kind: lemma
 title: "Transformation laws of the Jacobi theta function"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice

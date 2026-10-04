@@ -2,7 +2,7 @@
 id: ex-hilbert-polynomial-of-finite-points-on-p1
 kind: example
 title: "The Hilbert polynomial of finite points on the projective line"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

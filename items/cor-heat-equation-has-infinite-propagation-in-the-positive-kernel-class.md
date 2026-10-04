@@ -2,7 +2,7 @@
 id: cor-heat-equation-has-infinite-propagation-in-the-positive-kernel-class
 kind: corollary
 title: "Infinite propagation speed for nonnegative heat data"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-heat-flow-preserves-mass-and-positivity

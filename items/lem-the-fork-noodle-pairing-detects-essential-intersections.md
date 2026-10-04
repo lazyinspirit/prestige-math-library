@@ -2,7 +2,7 @@
 id: lem-the-fork-noodle-pairing-detects-essential-intersections
 kind: lemma
 title: The fork-noodle pairing detects essential intersections
-status: draft
+status: published
 origin: pipeline
 deps: [lem-extremal-fork-noodle-terms-have-one-sign-and-cannot-cancel, lem-arcs-in-a-punctured-disk-have-disjointness-detecting-minimal-positions, def-axiom-of-choice, lem-the-fork-noodle-pairing-is-well-defined-and-equivariant, def-lexicographic-order-on-fork-noodle-deck-monomials, def-forks-noodles-and-their-lkb-intersection-pairing]
 justified_by: []

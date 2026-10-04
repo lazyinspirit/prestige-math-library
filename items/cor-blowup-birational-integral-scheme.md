@@ -2,7 +2,7 @@
 id: cor-blowup-birational-integral-scheme
 kind: corollary
 title: "Blowing up a nonzero ideal on an integral scheme is birational"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

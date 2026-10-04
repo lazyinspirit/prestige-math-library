@@ -2,7 +2,7 @@
 id: ex-empty-center-blowup-identity
 kind: example
 title: "Blowing up the empty center is the identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

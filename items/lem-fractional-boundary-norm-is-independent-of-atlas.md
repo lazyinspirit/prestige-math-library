@@ -2,7 +2,7 @@
 id: lem-fractional-boundary-norm-is-independent-of-atlas
 kind: lemma
 title: "Chart independence of the fractional boundary norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-fractional-sobolev-space-on-a-compact-c-one-boundary, def-fractional-slobodeckij-space-on-euclidean-space, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, def-bounded-c-k-domain-and-boundary-charts, cor-piecewise-c1-paths-have-additive-speed-integral-length, cor-chord-length-is-at-most-arc-length, def-countable-choice, thm-polar-coordinates-formula-for-lebesgue-measure, lem-finite-ambient-partitions-for-euclidean-boundary-integration, lem-slobodeckij-seminorm-is-well-defined]

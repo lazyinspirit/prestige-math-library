@@ -2,7 +2,7 @@
 id: lem-affine-point-blowup-pushforward-vanishing
 kind: lemma
 title: "Pushforward and vanishing for an affine point blowup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

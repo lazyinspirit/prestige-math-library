@@ -2,7 +2,7 @@
 id: lem-first-and-second-moments-of-the-heat-kernel
 kind: lemma
 title: "First and second Gaussian heat-kernel moments"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-c-one-change-of-variables-for-l-one-functions

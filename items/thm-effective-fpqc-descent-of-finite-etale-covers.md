@@ -2,7 +2,7 @@
 id: thm-effective-fpqc-descent-of-finite-etale-covers
 kind: theorem
 title: "Finite étale covers descend effectively along fpqc covers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

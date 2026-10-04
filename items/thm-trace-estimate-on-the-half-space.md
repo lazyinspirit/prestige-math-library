@@ -2,7 +2,7 @@
 id: thm-trace-estimate-on-the-half-space
 kind: theorem
 title: "The half-space trace estimate and the half-space trace operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-one-dimensional-sobolev-endpoint-estimate, def-sobolev-space-wkp-and-its-norm, thm-holder-inequality-for-integrals, thm-tonelli-and-fubini-for-completed-product-measures, thm-smooth-up-to-the-boundary-density-on-smooth-domains, thm-completion-universal-property-for-bounded-linear-maps, def-l-p-space-as-a-quotient-by-null-functions, def-axiom-of-choice, thm-acl-characterisation-of-w-one-p, thm-wkp-extension-from-a-half-space, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, thm-sobolev-spaces-are-banach-spaces, thm-riesz-fischer-completeness-of-l-p]

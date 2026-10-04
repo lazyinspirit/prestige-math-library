@@ -2,7 +2,7 @@
 id: lem-nonaffine-purely-inseparable-affine-proper-descent
 kind: lemma
 title: "Affineness and properness descend under finite purely inseparable scalar extension"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-nonaffine-global-sections-flat-field-base-change, thm-faithfully-flat-descent-vanishing, def-proper-morphism, thm-morphisms-into-affine-scheme-global-sections]
 provenance:

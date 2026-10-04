@@ -2,7 +2,7 @@
 id: cex-trace-theorem-fails-on-a-standard-outward-cusp-without-domain-control
 kind: counterexample
 title: "The trace estimate fails on an outward cusp above the critical sharpness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-lp-trace-operator-on-a-bounded-c-one-domain, def-sobolev-space-wkp-and-its-norm, lem-classical-derivatives-are-weak-derivatives, thm-linear-change-of-variables-for-lebesgue-measure, def-surface-integral-on-a-compact-c-one-hypersurface, def-bounded-linear-operator, def-countable-choice]

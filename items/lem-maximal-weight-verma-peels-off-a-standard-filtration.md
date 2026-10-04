@@ -2,7 +2,7 @@
 id: lem-maximal-weight-verma-peels-off-a-standard-filtration
 kind: lemma
 title: "Peeling a maximal-weight Verma from a standard filtration"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

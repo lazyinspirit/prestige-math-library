@@ -2,7 +2,7 @@
 id: cor-zeros-of-e4-and-e6-at-the-elliptic-points
 kind: corollary
 title: "The zeros of E4 and E6 at the elliptic points"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-level-one-valence-formula

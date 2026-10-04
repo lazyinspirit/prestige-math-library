@@ -2,7 +2,7 @@
 id: lem-thom-disk-sphere-quotient-identifies-relative-and-reduced-cohomology
 kind: lemma
 title: "The Thom quotient identifies relative and reduced cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-disk-sphere-and-thom-space-of-a-metric-vector-bundle, def-relative-singular-cochain-complex, def-singular-cochain-complex-with-coefficients, thm-excision-for-singular-cohomology, thm-long-exact-sequence-of-a-pair-in-singular-cohomology, thm-naturality-of-the-singular-cohomology-pair-sequence, thm-homotopic-maps-induce-equal-maps-in-singular-cohomology, thm-five-lemma-for-modules, lem-interval-exponential-law-and-quotient-homotopies, lem-kification-compact-tests-and-finite-constructions]

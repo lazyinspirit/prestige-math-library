@@ -2,7 +2,7 @@
 id: rem-bordism-groups-here-are-geometric-not-generalized-homology-constructions
 kind: remark
 title: Bordism groups here are geometric, not generalized homology constructions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: lem-spherical-cap-and-dual-slab-scales
 kind: lemma
 title: Spherical cap and dual slab scales
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

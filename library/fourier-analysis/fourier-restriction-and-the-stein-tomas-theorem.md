@@ -1,7 +1,7 @@
 ---
 page: fourier-restriction-and-the-stein-tomas-theorem
 title: Fourier Restriction and the Stein–Tomas Theorem
-status: draft
+status: published
 items:
 - def-euclidean-hypersurface-normal-shape-operator-and-curvature
 - lem-smooth-euclidean-hypersurface-graph-and-localization

@@ -2,7 +2,7 @@
 id: cex-boundary-point-values-are-not-defined-by-an-lp-class
 kind: counterexample
 title: "Boundary point values are not a function of the interior $L^p$ class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-l-p-space-as-a-quotient-by-null-functions, thm-lp-trace-operator-on-a-bounded-c-one-domain, lem-sobolev-trace-agrees-with-continuous-boundary-values, def-sobolev-space-wkp-and-its-norm, def-countable-choice, thm-lebesgue-measure-of-a-box-of-every-kind, thm-polar-coordinates-formula-for-lebesgue-measure, def-axiom-of-choice]

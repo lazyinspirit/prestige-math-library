@@ -2,7 +2,7 @@
 id: lem-the-first-four-band-comparison-is-a-compensated-band-stabilization
 kind: lemma
 title: "The first four-band comparison is a compensated band stabilization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-block-interchanges-transport-arbitrary-braid-boxes,

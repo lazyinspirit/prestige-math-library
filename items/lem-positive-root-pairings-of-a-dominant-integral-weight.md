@@ -2,7 +2,7 @@
 id: lem-positive-root-pairings-of-a-dominant-integral-weight
 kind: lemma
 title: Positive coroot pairings of a dominant integral weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-finite-weyl-root-system-lattice-and-chamber-conventions, def-integral-dominant-and-strictly-dominant-weights, def-weyl-vector-rho-for-a-chosen-positive-system, def-root-reflections-and-the-weyl-group-action, lem-finite-weyl-positive-roots-and-simple-reflections, thm-the-root-set-is-a-reduced-crystallographic-root-system, lem-finite-weyl-closed-chambers-and-stabilizers]

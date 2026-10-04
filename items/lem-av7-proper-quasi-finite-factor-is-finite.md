@@ -2,7 +2,7 @@
 id: lem-av7-proper-quasi-finite-factor-is-finite
 kind: lemma
 title: Proper quasi-finite classical morphisms are finite
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 proof_strategy: direct

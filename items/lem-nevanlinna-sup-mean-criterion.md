@@ -2,7 +2,7 @@
 id: lem-nevanlinna-sup-mean-criterion
 kind: lemma
 title: "A harmonic majorant of log^+|F| exists exactly when the radial log^+ means are bounded"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-plane-subharmonic-function, thm-log-modulus-of-a-holomorphic-function-is-subharmonic, lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity, def-poisson-modification-of-a-subharmonic-function, thm-poisson-modification-preserves-subharmonicity-and-majorizes, def-poisson-integral-on-the-disc, def-poisson-integral-of-finite-boundary-measure, thm-maximum-and-minimum-principles-for-plane-harmonic-functions, thm-harnack-inequality-on-a-disc, thm-harnack-convergence-principle-for-plane-harmonic-functions, thm-mean-value-property-for-plane-harmonic-functions, def-mean-value-property-for-plane-functions, lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined, cor-c-one-change-of-variables-for-l-one-functions, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-poisson-integral-solves-the-disc-dirichlet-problem]

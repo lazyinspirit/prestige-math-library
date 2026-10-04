@@ -2,7 +2,7 @@
 id: lem-hom-from-projectives-counts-simple-composition-factors
 kind: lemma
 title: "Hom from a projective counts simple composition factors"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

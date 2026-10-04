@@ -2,7 +2,7 @@
 id: def-markov-conjugation-and-stabilization-moves
 kind: definition
 title: "Markov conjugation and stabilization moves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-closure-of-a-geometric-braid, def-braid-group-by-the-artin-presentation,

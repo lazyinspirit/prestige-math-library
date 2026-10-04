@@ -2,7 +2,7 @@
 id: cex-finite-fibres-not-finite-open-immersion
 kind: counterexample
 title: Finite fibres and an open immersion do not make a map finite
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 2

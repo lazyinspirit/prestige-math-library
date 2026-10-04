@@ -2,7 +2,7 @@
 id: ex-cusp-resolution-and-delta-drop
 kind: example
 title: "A cusp: one blowup, the normalization and the delta drop"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-embedded-snc-resolution-of-reduced-curve-on-regular-surface, thm-regularization-of-finite-normalization-curve-by-point-blowups, lem-intersection-multiplicity-drop-under-point-blowup, def-intersection-multiplicity-of-closed-subschemes, def-normalization-defect-of-reduced-curve, lem-blowup-multiplicity-euler-characteristic-drop, thm-normalization-reduced-curve-exists-finite, thm-affine-blowup-standard-charts, def-axiom-of-choice, lem-blowup-of-closed-point-of-regular-surface-is-regular, def-strict-normal-crossings-divisor, thm-polynomial-ring-over-a-field-is-a-ufd, lem-point-blowup-of-integral-curve-is-finite, thm-blowup-closed-immersion-transform-universal, cor-dimension-preserved-by-integral-extensions, def-embedding-dimension-and-regular-local-ring, thm-localisation-and-polynomial-extension-of-regular-rings]
 provenance:

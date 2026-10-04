@@ -2,7 +2,7 @@
 id: prop-boundaries-have-zero-stiefel-whitney-numbers
 kind: proposition
 title: Boundaries have zero Stiefel-Whitney numbers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

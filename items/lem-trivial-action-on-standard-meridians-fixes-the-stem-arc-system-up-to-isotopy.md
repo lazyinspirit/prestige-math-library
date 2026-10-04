@@ -2,7 +2,7 @@
 id: lem-trivial-action-on-standard-meridians-fixes-the-stem-arc-system-up-to-isotopy
 kind: lemma
 title: "Trivial action on the standard meridians fixes the punctures and the stem arcs up to homotopy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 3

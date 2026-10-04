@@ -2,7 +2,7 @@
 id: lem-normalization-unchanged-under-finite-birational-curve-map
 kind: lemma
 title: "Normalization is unchanged under finite birational maps of reduced curves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

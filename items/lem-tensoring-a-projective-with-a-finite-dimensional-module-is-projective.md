@@ -2,7 +2,7 @@
 id: lem-tensoring-a-projective-with-a-finite-dimensional-module-is-projective
 kind: lemma
 title: "Finite-dimensional tensoring preserves projectives in category O"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

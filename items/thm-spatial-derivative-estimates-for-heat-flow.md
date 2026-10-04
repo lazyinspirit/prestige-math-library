@@ -2,7 +2,7 @@
 id: thm-spatial-derivative-estimates-for-heat-flow
 kind: theorem
 title: "Spatial derivative estimates for the heat flow"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-ck-and-multi-index-notation-in-several-variables

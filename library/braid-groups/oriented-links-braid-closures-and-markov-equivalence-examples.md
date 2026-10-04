@@ -1,7 +1,7 @@
 ---
 page: oriented-links-braid-closures-and-markov-equivalence-examples
 title: "Oriented Links, Braid Closures, and Markov Equivalence — Examples"
-status: draft
+status: published
 requires: [oriented-links-braid-closures-and-markov-equivalence]
 items: []
 examples: [ex-torus-links-as-closures-of-two-strand-braids,

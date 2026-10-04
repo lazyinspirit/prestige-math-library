@@ -2,7 +2,7 @@
 id: lem-yamada-vogel-reducing-moves-lower-bad-seifert-circle-complexity
 kind: lemma
 title: "A reducing move lowers the height by one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-reducing-arc-and-yamada-vogel-reducing-move,

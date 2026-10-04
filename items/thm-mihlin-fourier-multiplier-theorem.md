@@ -2,7 +2,7 @@
 id: thm-mihlin-fourier-multiplier-theorem
 kind: theorem
 title: "The Mihlin–Hörmander Fourier multiplier theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-calderon-zygmund-kernel-and-principal-value-operator, def-convolution-of-a-tempered-distribution-with-a-schwartz-function, def-countable-choice, def-lp-fourier-multiplier-and-multiplier-norm, def-mihlin-symbol-with-more-than-half-dimension-derivatives, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, def-translation-invariant-fourier-multiplier-on-schwartz-space, lem-dyadic-mihlin-kernels-have-uniform-integral-hormander-control, lem-ltwo-fourier-multiplier-bound, lem-mihlin-dyadic-pieces-sum-to-an-off-support-kernel-representation, prop-mollifier-families-are-l-one-approximate-identities, thm-calderon-zygmund-singular-integrals-are-bounded-on-lp, thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, thm-fourier-transform-converts-allowed-tempered-convolutions-to-products, thm-l-one-approximate-identities-converge-in-l-p, thm-tempered-convolution-is-smooth-with-polynomial-growth, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-dominated-convergence, thm-locally-integrable-functions-embed-in-distributions]

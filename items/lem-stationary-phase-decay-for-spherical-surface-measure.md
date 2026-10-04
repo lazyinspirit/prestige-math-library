@@ -2,7 +2,7 @@
 id: lem-stationary-phase-decay-for-spherical-surface-measure
 kind: lemma
 title: Stationary-phase decay for spherical surface measure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

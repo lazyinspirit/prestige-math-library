@@ -2,7 +2,7 @@
 id: def-two-point-configuration-space-of-a-punctured-disk
 kind: definition
 title: The two-point configuration space of a punctured disk
-status: draft
+status: published
 origin: pipeline
 deps: [def-unordered-configuration-space, def-boundary-fixed-mapping-class-group-of-a-punctured-disk]
 justified_by: []

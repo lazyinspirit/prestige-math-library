@@ -2,7 +2,7 @@
 id: lem-a-smooth-isotopy-of-compact-embedded-submanifolds-extends-to-an-ambient-isotopy
 kind: lemma
 title: "A smooth isotopy of a compact manifold extends to an ambient isotopy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-smooth-embedding, def-smooth-partition-of-unity-on-a-manifold-with-boundary,

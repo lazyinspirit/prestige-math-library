@@ -2,7 +2,7 @@
 id: "lem-complex-affine-group-comodule-local-finiteness"
 kind: "lemma"
 title: "Every affine-group comodule is a union of finite-dimensional rational submodules"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-rational-action-on-affine-variety"]
 provenance: {"statement": "literature-derived", "proof": "ai-altered"}

@@ -2,7 +2,7 @@
 id: lem-dimension-of-the-kernel-modulo-n-minus-equals-the-next-term
 kind: lemma
 title: "Dimension of the kernel modulo n-minus equals the next term (BGG 10.7)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-bgg-differential-from-signed-verma-maps, lem-surjectivity-modulo-n-minus-for-free-weight-generated-modules, lem-n-minus-coinvariants-map-injectively-into-the-kernel-of-the-differential, lem-tor-with-the-trivial-module-is-computed-by-the-weak-bgg-resolution, def-tor-by-resolving-the-left-module, thm-long-exact-tor-sequence-in-the-left-module-variable, cor-every-module-admits-a-projective-resolution, def-bgg-category-o, thm-every-category-o-object-has-finite-length, lem-finite-b-stable-generators-and-weight-flags-in-category-o, def-axiom-of-choice, def-balanced-tor-bifunctor, prop-tor-zero-is-the-tensor-product-in-either-construction, thm-pbw-model-of-a-verma-module, def-bgg-bruhat-verma-sum-in-degree-k, lem-positive-root-pairings-of-a-dominant-integral-weight, thm-category-o-is-abelian-and-extension-closed, lem-a-proper-verma-submodule-misses-the-highest-weight-line, thm-verma-module-has-a-unique-simple-quotient]

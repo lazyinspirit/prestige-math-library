@@ -2,7 +2,7 @@
 id: thm-zero-free-inner-functions-are-singular-inner
 kind: theorem
 title: "Zero-free inner functions are unimodular multiples of singular inner functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-inner-singular-inner-and-outer-functions, def-analytic-hardy-space-disc, thm-singular-inner-function-properties, thm-harnack-convergence-positive-harmonic-functions, thm-harmonic-conjugate-on-homologically-simply-connected-domains, prop-star-shaped-plane-domains-are-homologically-simply-connected, def-measure-concentrated-on-a-measurable-set, def-blaschke-product, thm-hardy-zero-set-blaschke-condition, thm-blaschke-product-boundary-values-and-zeros, thm-riesz-factorization-hardy-space, thm-fatou-boundary-theorem-analytic-hardy-spaces, thm-local-maximum-modulus-principle, def-countable-choice, def-axiom-of-choice, def-plane-harmonic-function, thm-holomorphic-logarithms-homologically-simply-connected-domains, cor-holomorphic-functions-are-real-analytic-and-smooth, thm-c2-holomorphic-components-are-harmonic]

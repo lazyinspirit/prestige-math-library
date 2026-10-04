@@ -2,7 +2,7 @@
 id: lem-maximal-label-vectors-in-a-finite-truncation-are-singular
 kind: lemma
 title: "Weight-lambda vectors are singular at a maximal label"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

@@ -2,7 +2,7 @@
 id: lem-homotopic-simple-proper-arcs-in-the-punctured-disk-are-isotopic-relative-to-their-endpoints
 kind: lemma
 title: "Homotopic simple proper arcs in the punctured disk are isotopic relative to their endpoints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 2

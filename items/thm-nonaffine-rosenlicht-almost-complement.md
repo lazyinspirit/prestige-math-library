@@ -2,7 +2,7 @@
 id: thm-nonaffine-rosenlicht-almost-complement
 kind: theorem
 title: "Rosenlicht almost-complements to abelian subvarieties"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-dependent-choice, def-abelian-variety-over-a-field, lem-nonaffine-connected-group-geometrically-connected, prop-abelian-variety-commutativity-from-rigidity, thm-nonaffine-group-scheme-normal-subgroup-quotient, lem-nonaffine-commutative-torsor-norm-map, thm-nonaffine-rational-map-smooth-variety-to-abelian-variety-extends, thm-nonaffine-pointed-group-to-abelian-variety-morphism-homomorphism, thm-nonaffine-abelian-multiplication-finite-faithfully-flat, lem-nonaffine-reduced-neutral-subgroup-over-perfect-field, lem-nonaffine-group-monomorphism-closed-immersion]
 provenance:

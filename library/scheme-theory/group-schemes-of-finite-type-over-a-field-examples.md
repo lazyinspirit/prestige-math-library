@@ -1,7 +1,7 @@
 ---
 page: group-schemes-of-finite-type-over-a-field-examples
 title: "Group Schemes of Finite Type over a Field — Examples"
-status: draft
+status: published
 requires: [group-schemes-of-finite-type-over-a-field,
            determinants-of-matrices-over-a-commutative-ring]
 items: []

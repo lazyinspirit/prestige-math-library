@@ -2,7 +2,7 @@
 id: lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts
 kind: lemma
 title: "The trace commutes with smooth cutoffs and is chart local"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-lp-trace-operator-on-a-bounded-c-one-domain, lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces, lem-sobolev-trace-agrees-with-continuous-boundary-values, thm-trace-estimate-on-the-half-space, lem-c-k-boundary-flattening-preserves-wkp-locally, thm-smooth-up-to-the-boundary-density-on-smooth-domains, def-bounded-c-k-domain-and-boundary-charts, def-surface-integral-on-a-compact-c-one-hypersurface, def-axiom-of-choice, lem-weak-leibniz-rule-with-a-smooth-factor]

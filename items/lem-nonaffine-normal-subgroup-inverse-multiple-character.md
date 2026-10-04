@@ -2,7 +2,7 @@
 id: lem-nonaffine-normal-subgroup-inverse-multiple-character
 kind: lemma
 title: "A character of a normal subgroup admits an inverse multiple in a group representation"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-nonaffine-high-frobenius-smooth-image, thm-nonempty-regular-locus-reduced-variety-perfect-field, thm-regular-equals-smooth-over-perfect-field, def-embedding-dimension-and-regular-local-ring, thm-regular-locus-is-open-variety, thm-regular-local-rings-are-domains-and-cohen-macaulay, cor-weak-nullstellensatz-algebraically-closed-coordinate-form]
 provenance:

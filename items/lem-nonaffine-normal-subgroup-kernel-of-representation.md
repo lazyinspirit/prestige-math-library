@@ -2,7 +2,7 @@
 id: lem-nonaffine-normal-subgroup-kernel-of-representation
 kind: lemma
 title: "Every normal subgroup of an affine group is a representation kernel"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-nonaffine-subgroup-scheme-stabilizer-of-line, lem-nonaffine-normal-subgroup-inverse-multiple-character, thm-existence-of-algebraic-closures, cor-finite-type-algebra-over-noetherian-ring-is-noetherian]
 provenance:

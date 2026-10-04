@@ -2,7 +2,7 @@
 id: def-null-cobordant-closed-manifold
 kind: definition
 title: Null-cobordant closed manifolds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

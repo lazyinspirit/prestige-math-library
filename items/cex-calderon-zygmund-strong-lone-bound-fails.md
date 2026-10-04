@@ -2,7 +2,7 @@
 id: cex-calderon-zygmund-strong-lone-bound-fails
 kind: counterexample
 title: "Strong type (1,1) fails for the Hilbert transform"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-hilbert-space-adjoint, def-truncated-hilbert-transform-and-principal-value, lem-hilbert-transform-has-signum-fourier-multiplier, lem-hilbert-transform-is-skew-adjoint-on-ltwo, thm-dominated-convergence, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-locally-integrable-functions-embed-in-distributions]

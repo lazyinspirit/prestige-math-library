@@ -2,7 +2,7 @@
 id: lem-hardy-log-integrability-of-boundary-values
 kind: lemma
 title: "Log-integrability of the boundary values of a Hardy function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable-choice, def-analytic-hardy-space-disc, def-nevanlinna-class-on-the-disc, lem-nevanlinna-sup-mean-criterion, thm-nevanlinna-boundary-values-and-log-integrability, thm-fatou-lemma, def-the-one-dimensional-torus-and-normalized-haar-integral]

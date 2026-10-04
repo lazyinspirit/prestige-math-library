@@ -2,7 +2,7 @@
 id: lem-unit-sphere-is-lebesgue-null
 kind: lemma
 title: The unit sphere is Lebesgue null
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

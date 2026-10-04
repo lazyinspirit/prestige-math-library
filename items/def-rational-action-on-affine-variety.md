@@ -2,7 +2,7 @@
 id: "def-rational-action-on-affine-variety"
 kind: "definition"
 title: "Classical complex affine algebraic actions and rational modules"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-affine-coordinate-ring", "def-classical-affine-variety-morphism", "lem-classical-affine-algebraic-set-product-coordinate-ring"]
 provenance: {"statement": "literature-derived", "proof": "not-applicable"}

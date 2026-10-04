@@ -2,7 +2,7 @@
 id: lem-hilbert-regularity-independent-of-ambient-dimension
 kind: lemma
 title: "A Hilbert polynomial bounds regularity independently of ambient dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

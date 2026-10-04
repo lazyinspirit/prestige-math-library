@@ -2,7 +2,7 @@
 id: "ex-additive-translation-equivariant-parabola-embedding"
 kind: "example"
 title: "The additive translation action embeds equivariantly as a parabola"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-rational-action-on-affine-variety", "thm-coordinate-ring-of-affine-action-is-locally-finite", "thm-affine-algebraic-action-embeds-equivariantly-in-finite-dimensional-module", "def-axiom-of-choice"]
 provenance: {"statement": "ai-generated", "proof": "ai-altered"}

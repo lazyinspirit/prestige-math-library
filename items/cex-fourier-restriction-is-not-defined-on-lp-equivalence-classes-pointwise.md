@@ -2,7 +2,7 @@
 id: cex-fourier-restriction-is-not-defined-on-lp-equivalence-classes-pointwise
 kind: counterexample
 title: Pointwise restriction is not defined on Lp equivalence classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

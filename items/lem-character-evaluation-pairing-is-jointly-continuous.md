@@ -31,7 +31,7 @@ sources:
   - title: "Dikran D. Dikranjan, Introduction to Topological Groups (author lecture notes, Universita di Udine / Universidad Complutense de Madrid, 2007)"
     url: "http://www.mat.ucm.es/imi/documents/20062007_Dikran.pdf"
     locator: "Section 7.1 (printed pp. 46-47), the neighbourhood description of the compact-open topology used in the joint-continuity estimate."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

@@ -1,7 +1,7 @@
 ---
 page: oriented-and-mod-two-intersection-numbers-examples
 title: Oriented and Mod Two Intersection Numbers — Examples
-status: draft
+status: published
 requires: [oriented-and-mod-two-intersection-numbers]
 items: []
 examples: [ex-latitude-and-meridian-intersections-on-the-torus, ex-two-projective-lines-have-one-mod-two-intersection, ex-degree-as-intersection-with-a-regular-value, cex-geometric-cardinality-is-not-homotopy-invariant, cex-noncompact-intersections-can-escape-during-a-homotopy]

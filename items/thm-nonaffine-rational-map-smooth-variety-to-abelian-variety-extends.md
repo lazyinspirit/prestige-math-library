@@ -2,7 +2,7 @@
 id: thm-nonaffine-rational-map-smooth-variety-to-abelian-variety-extends
 kind: theorem
 title: "Rational maps from smooth varieties to abelian varieties extend"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-nonaffine-finite-field-descent-of-morphisms, thm-existence-of-algebraic-closures, def-axiom-of-choice, def-abelian-variety-over-a-field, lem-nonaffine-rational-map-normal-to-proper-codimension-two, lem-nonaffine-group-target-rational-indeterminacy-divisors, thm-regular-local-rings-are-normal]
 provenance:

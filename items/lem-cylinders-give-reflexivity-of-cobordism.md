@@ -2,7 +2,7 @@
 id: lem-cylinders-give-reflexivity-of-cobordism
 kind: lemma
 title: Cylinders give reflexivity of cobordism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: ex-elementary-jucys-murphy-class-sums-through-s4
 kind: example
 title: "Elementary Jucys-Murphy class sums through S_4"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-elementary-symmetric-jucys-evaluation-is-a-cycle-count-class-sum, def-jucys-murphy-elements-of-the-symmetric-group-algebra, def-elementary-symmetric-polynomials, def-permutation-support-disjoint-cycles-and-cycle-type]

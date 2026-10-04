@@ -2,7 +2,7 @@
 id: lem-bruhat-covers-give-unique-verma-embeddings
 kind: lemma
 title: Bruhat covers give canonical Verma embeddings, and composites are inclusions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-dominant-integral-dot-translates-embed-in-the-verma-module, def-bgg-bruhat-verma-sum-in-degree-k, thm-verma-homomorphism-spaces-have-dimension-at-most-one, lem-a-nonzero-verma-homomorphism-is-injective]

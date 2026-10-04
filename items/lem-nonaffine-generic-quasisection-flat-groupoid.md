@@ -2,7 +2,7 @@
 id: lem-nonaffine-generic-quasisection-flat-groupoid
 kind: lemma
 title: "A flat finite-type equivalence relation has generic saturated quasi-sections"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-nonaffine-flat-hypersurface-slice, lem-flat-locus-open-finitely-presented-algebra, cor-quasi-finite-locus-open-finite-type-algebra, lem-scheme-zariski-main-factorization-quasi-finite, thm-flat-finite-presentation-is-open, thm-faithfully-flat-descent-of-flatness, thm-proper-quasi-finite-is-finite, cor-finite-flat-noetherian-modules-are-projective, lem-nonaffine-affine-and-finite-morphism-fppf-descent, lem-finite-prime-avoidance]
 provenance:

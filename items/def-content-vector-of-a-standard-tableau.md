@@ -2,7 +2,7 @@
 id: def-content-vector-of-a-standard-tableau
 kind: definition
 title: "The content of a node and the content vector of a standard tableau"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-young-tableau-standard-tableau-and-shape, def-partition-young-diagram-and-conjugate-partition]

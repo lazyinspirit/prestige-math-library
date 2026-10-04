@@ -2,7 +2,7 @@
 id: lem-the-bgg-augmentation-has-image-the-simple-module
 kind: lemma
 title: The augmentation kernel is the sum of the simple-reflection Verma submodules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-bgg-differential-from-signed-verma-maps, lem-dominant-integral-dot-translates-embed-in-the-verma-module, lem-bruhat-covers-give-unique-verma-embeddings, lem-simple-root-singular-vector-in-a-verma-module, thm-verma-module-has-a-unique-simple-quotient, lem-a-proper-verma-submodule-misses-the-highest-weight-line, lem-sum-of-all-proper-submodules-of-a-verma-module-is-proper, cor-every-finite-dimensional-representation-is-a-direct-sum-of-highest-weight-modules, thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights, thm-pbw-model-of-a-verma-module, thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra, def-axiom-of-choice, def-dominant-integrable-highest-weight-cyclic-module, lem-simple-root-integrability-bounds-the-dominant-cyclic-module, lem-highest-weight-modules-have-weights-below-the-top-weight, lem-finite-weyl-positive-roots-and-simple-reflections, lem-positive-root-pairings-of-a-dominant-integral-weight, def-verma-module, thm-universal-property-of-verma-modules, def-bgg-bruhat-verma-sum-in-degree-k, def-weyl-vector-rho-for-a-chosen-positive-system]

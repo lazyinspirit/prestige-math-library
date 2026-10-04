@@ -2,7 +2,7 @@
 id: lem-nonaffine-frobenius-power-ideal-subgroup-descent
 kind: lemma
 title: "Purely inseparable subgroup descent by Frobenius power ideals"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, lem-nonaffine-high-frobenius-smooth-image, lem-nonaffine-affine-nilpotent-thickening, lem-nonaffine-purely-inseparable-affine-proper-descent]
 provenance:

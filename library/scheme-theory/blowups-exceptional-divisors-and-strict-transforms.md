@@ -1,7 +1,7 @@
 ---
 page: blowups-exceptional-divisors-and-strict-transforms
 title: "Blowups, Exceptional Divisors, and Strict Transforms"
-status: draft
+status: published
 requires: [fibre-products-base-change-and-scheme-theoretic-fibres, finite-proper-and-projective-morphisms, quasi-coherent-and-coherent-sheaves-and-vector-bundles, proj-projective-schemes-twisting-sheaves-and-ampleness, cartier-and-weil-divisors-line-bundles-and-picard-groups, rees-modules-artin-rees-and-hilbert-samuel-theory, normalization-finiteness-for-affine-domains, sheaf-cohomology-cech-cohomology-and-comparison, cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes, regular-local-rings-and-homological-dimension, flat-smooth-and-etale-morphisms, linear-independence-bases-and-dimension, tensor-products-of-modules, krull-dimension-and-height-theorems, koszul-complexes-and-regular-sequences]
 items:
   - def-rees-algebra-ideal-sheaf

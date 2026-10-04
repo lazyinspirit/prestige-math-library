@@ -2,7 +2,7 @@
 id: cex-mu-p-is-not-a-smooth-torus
 kind: counterexample
 title: "The multiplicative group scheme mu p is not a smooth torus"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

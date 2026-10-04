@@ -2,7 +2,7 @@
 id: def-modular-lambda-function
 kind: definition
 title: "The modular lambda function"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-complex-lattice-and-complex-torus

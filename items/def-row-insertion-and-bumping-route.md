@@ -2,7 +2,7 @@
 id: def-row-insertion-and-bumping-route
 kind: definition
 title: Row insertion and the bumping route
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-partition-young-diagram-and-conjugate-partition, def-young-tableau-standard-tableau-and-shape]

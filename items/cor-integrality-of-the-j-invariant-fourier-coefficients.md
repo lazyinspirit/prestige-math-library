@@ -2,7 +2,7 @@
 id: cor-integrality-of-the-j-invariant-fourier-coefficients
 kind: corollary
 title: "Integrality of the Fourier coefficients of the j-invariant"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-jacobi-product-formula-for-the-discriminant

@@ -2,7 +2,7 @@
 id: thm-normalization-reduced-curve-exists-finite
 kind: theorem
 title: "Normalization of a reduced curve is finite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

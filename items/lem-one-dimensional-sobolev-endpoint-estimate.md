@@ -2,7 +2,7 @@
 id: lem-one-dimensional-sobolev-endpoint-estimate
 kind: lemma
 title: "The one-dimensional endpoint estimate on a bounded interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives, def-sobolev-space-wkp-and-its-norm, thm-holder-inequality-for-integrals, def-axiom-of-choice, thm-acl-characterisation-of-w-one-p]

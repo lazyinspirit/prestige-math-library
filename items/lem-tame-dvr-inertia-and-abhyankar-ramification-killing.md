@@ -2,7 +2,7 @@
 id: lem-tame-dvr-inertia-and-abhyankar-ramification-killing
 kind: lemma
 title: "A root of the uniformizer kills the prime-to-residue-characteristic ramification required in specialization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

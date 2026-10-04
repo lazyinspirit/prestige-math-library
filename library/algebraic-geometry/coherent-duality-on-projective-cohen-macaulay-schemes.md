@@ -1,7 +1,7 @@
 ---
 page: coherent-duality-on-projective-cohen-macaulay-schemes
 title: "Coherent Duality on Projective Cohen-Macaulay Schemes"
-status: draft
+status: published
 requires: [quasi-coherent-and-coherent-sheaves-and-vector-bundles, proj-projective-schemes-twisting-sheaves-and-ampleness, sheaf-cohomology-cech-cohomology-and-comparison, cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes, derived-categories, ext-and-balanced-resolutions, smooth-projective-serre-duality-and-flag-variety-line-bundles]
 items:
   - def-dualizing-complex-on-projective-cm-scheme

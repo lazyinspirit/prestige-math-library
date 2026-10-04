@@ -2,7 +2,7 @@
 id: lem-acyclic-direct-image-cohomology-comparison
 kind: lemma
 title: "Cohomology comparison when higher direct images vanish"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

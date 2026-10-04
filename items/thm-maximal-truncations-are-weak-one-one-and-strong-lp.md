@@ -2,7 +2,7 @@
 id: thm-maximal-truncations-are-weak-one-one-and-strong-lp
 kind: theorem
 title: "Maximal truncations: weak (1,1) and strong Lp bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [cor-centered-hardy-littlewood-maximal-operator-is-l-p-bounded, cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences, def-calderon-zygmund-kernel-and-principal-value-operator, def-centered-and-uncentered-hardy-littlewood-maximal-functions, def-countable-choice, def-l-one-of-a-measure, def-maximal-truncated-singular-integral, def-standard-holder-calderon-zygmund-kernel, lem-calderon-zygmund-decomposition-at-height-lambda, lem-cotlar-inequality-for-maximal-truncations, lem-holder-cz-kernels-satisfy-hormander-cancellation, thm-calderon-zygmund-singular-integrals-are-bounded-on-lp, thm-chebyshev-markov-inequality-for-the-integral, thm-hardy-littlewood-maximal-inequality-for-balls, thm-lebesgue-measure-under-dilations-and-reflections, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-dominated-convergence, thm-fatou-lemma, thm-complex-holder-minkowski-and-the-quotient-norm, thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p]

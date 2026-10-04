@@ -2,7 +2,7 @@
 id: lem-hilbert-families-fpqc-descent
 kind: lemma
 title: "Effective descent and base change of embedded Hilbert families"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

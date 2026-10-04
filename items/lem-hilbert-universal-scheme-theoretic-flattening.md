@@ -2,7 +2,7 @@
 id: lem-hilbert-universal-scheme-theoretic-flattening
 kind: lemma
 title: "Universal scheme theoretic flattening by Hilbert polynomial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

@@ -2,7 +2,7 @@
 id: lem-poisson-integral-of-a-singular-circle-measure-has-zero-nontangential-limit
 kind: lemma
 title: "Singular circle measures have Poisson integral tending nontangentially to zero almost everywhere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable-choice, lem-circle-maximal-weak-one-one, def-the-one-dimensional-torus-and-normalized-haar-integral, def-circle-maximal-function-and-nontangential-region, thm-poisson-nontangential-maximal-bound, def-poisson-kernel-on-the-disc, def-poisson-integral-of-finite-boundary-measure, def-restriction-of-a-measure, prop-restriction-is-a-measure, cor-second-countable-lch-locally-finite-borel-measures-are-regular]

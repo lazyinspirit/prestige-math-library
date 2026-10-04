@@ -2,7 +2,7 @@
 id: ex-circle-stein-tomas-exponents
 kind: example
 title: The Stein-Tomas exponents on the circle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

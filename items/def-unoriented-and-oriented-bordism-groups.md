@@ -2,7 +2,7 @@
 id: def-unoriented-and-oriented-bordism-groups
 kind: definition
 title: Unoriented and oriented bordism groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

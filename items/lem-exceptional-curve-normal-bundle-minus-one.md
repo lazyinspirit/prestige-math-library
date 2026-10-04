@@ -2,7 +2,7 @@
 id: lem-exceptional-curve-normal-bundle-minus-one
 kind: lemma
 title: "The normal bundle of the exceptional curve is O(-1)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

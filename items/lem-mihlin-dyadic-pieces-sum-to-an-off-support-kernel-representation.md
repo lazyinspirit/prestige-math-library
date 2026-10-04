@@ -2,7 +2,7 @@
 id: lem-mihlin-dyadic-pieces-sum-to-an-off-support-kernel-representation
 kind: lemma
 title: "Dyadic Mihlin pieces sum to an off-support kernel representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-dominated-convergence, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-countable-choice, def-fourier-transform-of-a-tempered-distribution, def-mihlin-symbol-with-more-than-half-dimension-derivatives, lem-dyadic-mihlin-kernels-have-uniform-integral-hormander-control]

@@ -2,7 +2,7 @@
 id: cex-normalization-not-injective-node
 kind: counterexample
 title: Normalization of the node is two-to-one over the node
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: ex-the-artin-action-of-the-b-three-generators
 kind: example
 title: "The Artin action of the B_3 generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 4

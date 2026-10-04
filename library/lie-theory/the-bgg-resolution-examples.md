@@ -1,7 +1,7 @@
 ---
 page: the-bgg-resolution-examples
 title: "The BGG Resolution — Examples"
-status: draft
+status: published
 requires: [the-bgg-resolution]
 items: []
 examples: [

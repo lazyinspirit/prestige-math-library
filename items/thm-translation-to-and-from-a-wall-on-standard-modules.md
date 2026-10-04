@@ -2,7 +2,7 @@
 id: thm-translation-to-and-from-a-wall-on-standard-modules
 kind: theorem
 title: "Translation to and from a single wall on standard modules"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-central-characters-are-dot-weyl-orbits

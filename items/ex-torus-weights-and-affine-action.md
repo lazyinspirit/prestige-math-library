@@ -2,7 +2,7 @@
 id: "ex-torus-weights-and-affine-action"
 kind: "example"
 title: "Opposite weights on the affine plane and its coordinate ring"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-rational-action-on-affine-variety", "lem-torus-rational-modules-and-gradings", "thm-affine-algebraic-action-embeds-equivariantly-in-finite-dimensional-module", "def-axiom-of-choice"]
 provenance: {"statement": "ai-generated", "proof": "ai-altered"}

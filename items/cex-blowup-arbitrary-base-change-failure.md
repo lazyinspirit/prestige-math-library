@@ -2,7 +2,7 @@
 id: cex-blowup-arbitrary-base-change-failure
 kind: counterexample
 title: "Nonflat base change of a blowup can fail"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

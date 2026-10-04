@@ -2,7 +2,7 @@
 id: lem-weight-subsets-with-equal-root-sums-are-unique
 kind: lemma
 title: Weight subsets with equal root sums are unique
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-finite-weyl-strong-exchange-and-deletion, def-finite-weyl-root-system-lattice-and-chamber-conventions, def-weyl-vector-rho-for-a-chosen-positive-system, lem-rho-shift-intertwines-the-dot-and-ordinary-weyl-actions, def-root-reflections-and-the-weyl-group-action, lem-finite-weyl-positive-roots-and-simple-reflections]

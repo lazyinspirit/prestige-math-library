@@ -2,7 +2,7 @@
 id: ex-normalization-cusp
 kind: example
 title: Normalizing the cuspidal plane curve
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 6

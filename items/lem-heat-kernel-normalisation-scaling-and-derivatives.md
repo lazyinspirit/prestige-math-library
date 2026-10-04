@@ -2,7 +2,7 @@
 id: lem-heat-kernel-normalisation-scaling-and-derivatives
 kind: lemma
 title: "Normalisation, parabolic scaling, heat equation and derivative bounds for the heat kernel"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-ck-and-multi-index-notation-in-several-variables

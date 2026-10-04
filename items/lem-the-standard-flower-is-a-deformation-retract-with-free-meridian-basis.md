@@ -2,7 +2,7 @@
 id: lem-the-standard-flower-is-a-deformation-retract-with-free-meridian-basis
 kind: lemma
 title: "The standard flower is a deformation retract with free meridian basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 1

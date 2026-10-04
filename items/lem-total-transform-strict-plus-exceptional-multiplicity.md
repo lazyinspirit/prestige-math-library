@@ -2,7 +2,7 @@
 id: lem-total-transform-strict-plus-exceptional-multiplicity
 kind: lemma
 title: "Total transform equals strict transform plus multiplicity times the exceptional divisor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

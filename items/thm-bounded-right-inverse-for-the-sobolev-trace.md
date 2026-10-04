@@ -2,7 +2,7 @@
 id: thm-bounded-right-inverse-for-the-sobolev-trace
 kind: theorem
 title: "A bounded right inverse of the trace, supported in a prescribed collar"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-sharp-trace-theorem-for-w-one-p, thm-half-space-lift-by-normal-mollification, def-fractional-sobolev-space-on-a-compact-c-one-boundary, lem-fractional-boundary-norm-is-independent-of-atlas, lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts, lem-sobolev-pasting-across-an-overlap, lem-finite-ambient-partitions-for-euclidean-boundary-integration, lem-c-k-boundary-flattening-preserves-wkp-locally, thm-lp-trace-operator-on-a-bounded-c-one-domain, lem-bounded-restriction-and-cutoff-localisation-in-sobolev-spaces, def-axiom-of-choice, lem-weak-leibniz-rule-with-a-smooth-factor]

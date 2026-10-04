@@ -2,7 +2,7 @@
 id: lem-oriented-boundary-of-an-intersection-trace-has-opposite-end-signs
 kind: lemma
 title: "Oriented boundary of an intersection trace has opposite end signs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-boundary-of-a-compact-one-manifold-has-even-cardinality, lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count, def-local-oriented-intersection-sign, def-oriented-intersection-number, lem-preimage-orientation-agrees-with-the-local-intersection-sign, thm-transverse-preimage-for-manifolds-with-boundary, def-induced-boundary-orientation, prop-boundary-orientation-is-independent-of-the-outward-vector-field, prop-boundary-orientation-of-a-product-when-at-most-one-factor-has-boundary, def-product-orientation, def-smooth-family-of-maps-and-evaluation-map, def-countable-choice]

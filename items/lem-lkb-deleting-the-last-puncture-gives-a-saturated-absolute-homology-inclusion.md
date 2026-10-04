@@ -2,7 +2,7 @@
 id: lem-lkb-deleting-the-last-puncture-gives-a-saturated-absolute-homology-inclusion
 kind: lemma
 title: The absolute LKB inclusion obtained by deleting the last puncture is saturated
-status: draft
+status: published
 origin: session
 deps: [lem-the-unordered-two-point-punctured-plane-has-an-equivariant-two-dimensional-cell-model, lem-lkb-lifted-absolute-cellular-boundary-and-fraction-field-rank]
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-cartesian-product-makes-bordism-a-graded-ring
 kind: theorem
 title: Cartesian product makes bordism a graded ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

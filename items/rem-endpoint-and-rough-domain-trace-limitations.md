@@ -2,7 +2,7 @@
 id: rem-endpoint-and-rough-domain-trace-limitations
 kind: remark
 title: "Endpoint and rough-domain limitations of the trace theorems"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-lp-trace-operator-on-a-bounded-c-one-domain, thm-sharp-trace-theorem-for-w-one-p, thm-bounded-right-inverse-for-the-sobolev-trace, thm-kernel-of-the-trace-is-w-one-p-zero, def-bounded-c-k-domain-and-boundary-charts, def-axiom-of-choice]

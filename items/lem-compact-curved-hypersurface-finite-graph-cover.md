@@ -2,7 +2,7 @@
 id: lem-compact-curved-hypersurface-finite-graph-cover
 kind: lemma
 title: Compact curved hypersurfaces admit a finite curved graph cover
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

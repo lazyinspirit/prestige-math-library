@@ -2,7 +2,7 @@
 id: def-principal-congruence-subgroup-gamma-2
 kind: definition
 title: "The principal congruence subgroup Gamma(2)"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-group-action-on-the-upper-half-plane

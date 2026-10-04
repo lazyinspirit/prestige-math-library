@@ -2,7 +2,7 @@
 id: lem-hilbert-family-vanishing-locus
 kind: lemma
 title: "Universal vanishing locus for a map into a flat projective family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

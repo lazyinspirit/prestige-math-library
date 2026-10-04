@@ -2,7 +2,7 @@
 id: lem-lattice-eisenstein-sums-converge
 kind: lemma
 title: "Absolute convergence and holomorphy of the lattice Eisenstein sums"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-group-action-on-the-upper-half-plane

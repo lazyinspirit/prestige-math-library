@@ -2,7 +2,7 @@
 id: thm-nonaffine-regular-local-ring-is-ufd
 kind: theorem
 title: "Regular local rings are unique factorization domains"
-status: draft
+status: published
 origin: pipeline
 deps: [def-smooth-morphism-schemes, def-axiom-of-choice, lem-nonaffine-regular-local-picard-principal-localization, lem-regular-local-domain-induction, lem-regular-local-quotient-by-parameter-is-regular, cor-localisations-of-regular-local-rings-are-regular, thm-krull-principal-ideal-theorem, thm-flatness-is-local, cor-finite-flat-noetherian-modules-are-projective]
 provenance:

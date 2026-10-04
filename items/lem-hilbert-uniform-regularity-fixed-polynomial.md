@@ -2,7 +2,7 @@
 id: lem-hilbert-uniform-regularity-fixed-polynomial
 kind: lemma
 title: "Uniform regularity for all quotients with a fixed Hilbert polynomial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

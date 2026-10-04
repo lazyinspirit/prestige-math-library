@@ -2,7 +2,7 @@
 id: ex-modular-lambda-biholomorphism-onto-the-slit-plane
 kind: example
 title: "The modular lambda function: Y(2) biholomorphic to the twice-punctured plane, and the slit-plane quadrilateral"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-modular-lambda-function

@@ -2,7 +2,7 @@
 id: cex-a-verma-module-need-not-be-projective-in-the-whole-block
 kind: counterexample
 title: A Verma module need not be projective in its block
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

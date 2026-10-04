@@ -2,7 +2,7 @@
 id: def-strict-normal-crossings-divisor
 kind: definition
 title: Strict normal crossings divisor on a regular surface
-status: draft
+status: published
 origin: pipeline
 deps: [def-effective-cartier-divisor, def-cartier-divisor, def-intersection-multiplicity-of-closed-subschemes, def-embedding-dimension-and-regular-local-ring, def-local-ring, thm-nonaffine-regular-local-ring-is-ufd, lem-regular-local-quotient-by-parameter-is-regular, def-axiom-of-choice, def-dimension-noetherian-topological-space]
 provenance:

@@ -2,7 +2,7 @@
 id: ex-blowup-rational-map-p1
 kind: example
 title: "Resolving the rational map [x:y] at the origin"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

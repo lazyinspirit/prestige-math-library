@@ -2,7 +2,7 @@
 id: thm-elementary-symmetric-jucys-evaluation-is-a-cycle-count-class-sum
 kind: theorem
 title: "Elementary symmetric Jucys-Murphy evaluations are cycle-count class sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [cor-jucys-murphy-elements-commute-pairwise, def-jucys-murphy-elements-of-the-symmetric-group-algebra, def-elementary-symmetric-polynomials, def-permutation-support-disjoint-cycles-and-cycle-type, def-symmetric-group, thm-disjoint-cycle-decomposition]

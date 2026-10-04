@@ -2,7 +2,7 @@
 id: thm-oriented-reidemeister-equivalence-theorem
 kind: theorem
 title: "Reidemeister's theorem for oriented diagrams"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-each-oriented-reidemeister-move-is-realized-by-ambient-isotopy,

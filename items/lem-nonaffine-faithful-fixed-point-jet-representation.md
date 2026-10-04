@@ -2,7 +2,7 @@
 id: lem-nonaffine-faithful-fixed-point-jet-representation
 kind: lemma
 title: "A scheme-faithful action fixing a point has a faithful finite jet representation"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, lem-nonaffine-group-monomorphism-closed-immersion, thm-krull-intersection-theorem]
 provenance:

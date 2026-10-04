@@ -2,7 +2,7 @@
 id: thm-hilbert-scheme-represents-projective-flat-families
 kind: theorem
 title: "Projective Hilbert schemes represent all flat finitely presented families"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

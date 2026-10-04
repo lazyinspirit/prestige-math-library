@@ -2,7 +2,7 @@
 id: def-pontryagin-number-of-a-closed-oriented-manifold
 kind: definition
 title: Pontryagin numbers of a closed oriented manifold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

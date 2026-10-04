@@ -2,7 +2,7 @@
 id: lem-universal-family-and-hilbert-polynomial-strata
 kind: lemma
 title: "Universal family and open and closed Hilbert polynomial strata"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

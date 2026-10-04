@@ -2,7 +2,7 @@
 id: thm-barsotti-chevalley-existence-over-arbitrary-field
 kind: theorem
 title: "Barsotti-Chevalley existence over an arbitrary field, allowing nonsmooth affine kernel"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-dependent-choice, def-abelian-variety-over-a-field, prop-abelian-variety-commutativity-from-rigidity, thm-abelian-variety-is-projective, thm-barsotti-chevalley-perfect-field-group-variety, lem-nonaffine-characteristic-zero-group-smooth, lem-nonaffine-high-frobenius-smooth-image, lem-nonaffine-frobenius-power-ideal-subgroup-descent, lem-nonaffine-affine-and-finite-morphism-fppf-descent, lem-nonaffine-geometric-properness-field-descent, lem-nonaffine-group-image-exact-quotient-properties, lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties, lem-nonaffine-connected-group-geometrically-connected, thm-nonaffine-group-scheme-normal-subgroup-quotient, thm-existence-of-algebraic-closures, def-proper-morphism]
 provenance:

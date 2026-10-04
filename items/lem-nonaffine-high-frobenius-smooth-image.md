@@ -2,7 +2,7 @@
 id: lem-nonaffine-high-frobenius-smooth-image
 kind: lemma
 title: "High relative Frobenius has smooth scheme-theoretic image"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-existence-of-algebraic-closures, cor-weak-nullstellensatz-algebraically-closed-coordinate-form, def-axiom-of-choice, def-abelian-variety-over-a-field, thm-nonempty-regular-locus-reduced-variety-perfect-field, thm-regular-equals-smooth-over-perfect-field, thm-smooth-locus-open, lem-ag-geometric-regularity-field-tests, def-smooth-morphism-schemes, thm-jacobian-criterion-smooth-morphism]
 provenance:

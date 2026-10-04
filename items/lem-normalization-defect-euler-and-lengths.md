@@ -2,7 +2,7 @@
 id: lem-normalization-defect-euler-and-lengths
 kind: lemma
 title: "The normalization defect is an Euler characteristic and a weighted sum of local lengths"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

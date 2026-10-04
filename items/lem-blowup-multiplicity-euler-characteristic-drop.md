@@ -2,7 +2,7 @@
 id: lem-blowup-multiplicity-euler-characteristic-drop
 kind: lemma
 title: "Euler characteristic and normalization defect under a point blowup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

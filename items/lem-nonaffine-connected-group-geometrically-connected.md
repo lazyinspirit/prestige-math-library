@@ -2,7 +2,7 @@
 id: lem-nonaffine-connected-group-geometrically-connected
 kind: lemma
 title: "Connected finite-type groups are geometrically connected"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, lem-nonaffine-global-sections-flat-field-base-change, thm-separable-closures-exist-and-are-isomorphic-over-the-base, thm-fundamental-theorem-of-finite-galois-theory, thm-nonempty-regular-locus-reduced-variety-perfect-field, thm-regular-equals-smooth-over-perfect-field, thm-smooth-locus-open, lem-ag-geometric-regularity-field-tests, cor-weak-nullstellensatz-algebraically-closed-coordinate-form]
 provenance:

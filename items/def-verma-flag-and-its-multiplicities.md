@@ -2,7 +2,7 @@
 id: def-verma-flag-and-its-multiplicities
 kind: definition
 title: Finite Verma flags and their multiplicities
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

@@ -2,7 +2,7 @@
 id: ex-standard-fundamental-domain-tessellation
 kind: example
 title: "The standard fundamental domain tessellates the upper half-plane"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-standard-fundamental-domain-for-the-modular-group

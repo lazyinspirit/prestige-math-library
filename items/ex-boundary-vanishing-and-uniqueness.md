@@ -2,7 +2,7 @@
 id: ex-boundary-vanishing-and-uniqueness
 kind: example
 title: "Boundary vanishing of a nonzero Hardy function is confined to a null set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-fatou-boundary-theorem-analytic-hardy-spaces, lem-hardy-log-integrability-of-boundary-values, def-analytic-hardy-space-disc, thm-cauchy-integral-formula-circle, ex-outer-function-with-prescribed-boundary-modulus, lem-outer-function-properties, def-inner-singular-inner-and-outer-functions, def-the-one-dimensional-torus-and-normalized-haar-integral, def-complex-exponential, lem-hardy-radial-means-are-monotone, def-countable-choice]

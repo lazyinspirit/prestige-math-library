@@ -2,7 +2,7 @@
 id: lem-symmetric-group-conjugation-to-inverse-within-the-preceding-group
 kind: lemma
 title: "Every element of $S_n$ is inverted by an involution of $S_{n-1}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-conjugating-a-cycle-relabels-its-entries, thm-disjoint-cycle-decomposition, def-permutation-support-disjoint-cycles-and-cycle-type, def-symmetric-group, def-partition-young-diagram-and-conjugate-partition, lem-disjoint-cycles-commute]

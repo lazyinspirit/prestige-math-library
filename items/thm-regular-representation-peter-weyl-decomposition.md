@@ -34,7 +34,7 @@ sources:
   - title: Constantin Teleman, Representation Theory (Berkeley lecture notes, 60 pp.)
     url: https://math.berkeley.edu/~teleman/math/RepThry.pdf
     locator: §19.7, printed p. 43 ($L^2(G)$ is the Hilbert sum of $\operatorname{End}(V)$)
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

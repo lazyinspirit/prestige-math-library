@@ -1,7 +1,7 @@
 ---
 page: "nonaffine-algebraic-groups-barsotti-chevalley-and-abelian-varieties-examples"
 title: "Nonaffine Algebraic Groups, Barsotti-Chevalley, and Abelian Varieties — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-affine-extension-of-an-abelian-variety, ex-elliptic-curve-as-nonaffine-algebraic-group]
 ---

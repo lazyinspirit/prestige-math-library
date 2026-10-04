@@ -2,7 +2,7 @@
 id: ex-young-permutation-characteristic-for-shape-two-one
 kind: example
 title: "The Young permutation characteristic for shape $(2,1)$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

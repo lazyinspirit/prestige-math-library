@@ -2,7 +2,7 @@
 id: cex-size-without-cancellation-does-not-give-a-principal-value-operator
 kind: counterexample
 title: "Size without cancellation does not give a principal value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-calderon-zygmund-kernel-and-principal-value-operator, def-maximal-truncated-singular-integral, thm-polar-coordinates-formula-for-lebesgue-measure, def-countable-choice]

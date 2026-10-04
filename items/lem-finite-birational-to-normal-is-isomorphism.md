@@ -2,7 +2,7 @@
 id: lem-finite-birational-to-normal-is-isomorphism
 kind: lemma
 title: A finite birational morphism onto a normal variety is an isomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 1

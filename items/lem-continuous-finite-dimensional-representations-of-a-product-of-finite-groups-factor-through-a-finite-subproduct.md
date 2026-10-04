@@ -31,7 +31,7 @@ sources:
   - title: Constantin Teleman, Representation Theory (Berkeley lecture notes, 60 pp.)
     url: https://math.berkeley.edu/~teleman/math/RepThry.pdf
     locator: §22.6, printed p. 53 (representations of a product of compact groups)
-status: draft
+status: published
 origin: pipeline
 ---
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-analytic-poisson-integrals-have-vanishing-negative-coefficients
 kind: lemma
 title: "Analytic Poisson integrals are exactly the measures with vanishing negative coefficients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable-choice, lem-complex-circle-measures-have-finite-total-variation-under-countable-choice, def-poisson-integral-of-finite-boundary-measure, def-poisson-kernel-on-the-disc, lem-poisson-kernel-properties-on-the-disc, def-fourier-coefficients-and-trigonometric-polynomials, lem-trigonometric-characters-are-orthonormal, thm-complex-power-series-converge-locally-uniformly, thm-taylor-expansion-holomorphic-function, cor-complex-power-series-sums-are-analytic, thm-holomorphic-if-and-only-if-analytic, def-complex-differentiability-holomorphic-and-entire, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-dominated-convergence, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, def-analytic-hardy-space-disc]

@@ -2,7 +2,7 @@
 id: ex-trace-of-an-affine-function-on-a-ball
 kind: example
 title: "The trace of an affine function on a ball is its classical restriction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [lem-sobolev-trace-agrees-with-continuous-boundary-values, thm-lp-trace-operator-on-a-bounded-c-one-domain, thm-sharp-trace-theorem-for-w-one-p, def-fractional-sobolev-space-on-a-compact-c-one-boundary, def-surface-integral-on-a-compact-c-one-hypersurface, def-countable-choice, thm-lebesgue-measure-of-a-box-of-every-kind, def-axiom-of-choice]

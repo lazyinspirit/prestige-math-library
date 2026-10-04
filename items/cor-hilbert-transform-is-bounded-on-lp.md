@@ -2,7 +2,7 @@
 id: cor-hilbert-transform-is-bounded-on-lp
 kind: corollary
 title: "The Hilbert transform is bounded on Lp"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity, def-calderon-zygmund-kernel-and-principal-value-operator, def-countable-choice, def-hilbert-space-adjoint, def-standard-holder-calderon-zygmund-kernel, def-truncated-hilbert-transform-and-principal-value, lem-holder-cz-kernels-satisfy-hormander-cancellation, lem-hilbert-transform-has-signum-fourier-multiplier, lem-hilbert-transform-is-skew-adjoint-on-ltwo, thm-calderon-zygmund-singular-integrals-are-bounded-on-lp, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-locally-integrable-functions-embed-in-distributions, thm-polar-coordinates-formula-for-lebesgue-measure]

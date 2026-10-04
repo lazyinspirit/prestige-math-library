@@ -2,7 +2,7 @@
 id: lem-product-boundary-formula-for-oriented-manifolds
 kind: lemma
 title: Product boundary formula for oriented manifolds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

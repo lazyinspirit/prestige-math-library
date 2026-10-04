@@ -35,7 +35,7 @@ sources:
   - title: "Lynn H. Loomis, Introduction to Abstract Harmonic Analysis, D. Van Nostrand 1953, Chapter VII, Sections 34-35 (printed pp. 134-140)"
     url: "https://people.math.harvard.edu/~shlomo/212a/loomis.pdf"
     locator: "Sections 35D-35E, printed p. 140, give the circle/integer dual background; the finite cyclic root-of-unity computation is proved here."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

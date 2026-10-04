@@ -2,7 +2,7 @@
 id: def-lawrence-krammer-bigelow-cover
 kind: definition
 title: The Lawrence-Krammer-Bigelow cover
-status: draft
+status: published
 origin: pipeline
 deps: [def-lkb-two-variable-covering-homomorphism, def-covering-map-and-evenly-covered-neighbourhoods, thm-classification-of-connected-covering-spaces]
 justified_by: []

@@ -2,7 +2,7 @@
 id: cex-the-regular-bgg-complex-cannot-be-used-unchanged-at-a-singular-weight
 kind: counterexample
 title: The BGG complex cannot be used unchanged at a singular weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [cor-antidominant-verma-modules-are-simple, cor-verma-irreducibility-criterion-from-shapovalov-determinants, thm-verma-homomorphism-spaces-have-dimension-at-most-one, lem-a-nonzero-verma-homomorphism-is-injective, def-bgg-differential-from-signed-verma-maps, def-bgg-bruhat-verma-sum-in-degree-k, def-weyl-vector-rho-for-a-chosen-positive-system, def-finite-weyl-root-system-lattice-and-chamber-conventions, thm-verma-module-has-a-unique-simple-quotient]

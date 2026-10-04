@@ -1,7 +1,7 @@
 ---
 page: hilbert-functors-and-projective-hilbert-schemes
 title: "Hilbert Functors and Projective Hilbert Schemes"
-status: draft
+status: published
 requires: [flat-smooth-and-etale-morphisms,
            quasi-coherent-and-coherent-sheaves-and-vector-bundles,
            proj-projective-schemes-twisting-sheaves-and-ampleness,

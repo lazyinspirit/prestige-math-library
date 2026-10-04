@@ -1,7 +1,7 @@
 ---
 page: thom-spaces-normal-data-and-collapse-maps-examples
 title: Thom Spaces Normal Data and Collapse Maps — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-thom-space-of-a-trivial-line-bundle

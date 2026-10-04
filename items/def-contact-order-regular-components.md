@@ -2,7 +2,7 @@
 id: def-contact-order-regular-components
 kind: definition
 title: "Contact order of two regular components at a point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

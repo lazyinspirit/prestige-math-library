@@ -45,7 +45,7 @@ sources:
     url: https://people.math.harvard.edu/~shlomo/212a/loomis.pdf
     locator: 'Section 35A: the dual of a finite product of LCA groups is the product
       of the duals.'
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

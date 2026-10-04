@@ -1,7 +1,7 @@
 ---
 page: lawrence-krammer-bigelow-and-linearity-examples
 title: "Lawrence–Krammer–Bigelow Representations and Linearity — Examples"
-status: draft
+status: published
 requires: [lawrence-krammer-bigelow-and-linearity]
 items: []
 examples: [cex-ordinary-intersection-number-alone-does-not-give-the-lkb-pairing,

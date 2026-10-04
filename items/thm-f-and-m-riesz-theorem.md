@@ -2,7 +2,7 @@
 id: thm-f-and-m-riesz-theorem
 kind: theorem
 title: "The F. and M. Riesz theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable-choice, def-analytic-hardy-space-disc, thm-fatou-boundary-theorem-analytic-hardy-spaces, lem-analytic-poisson-integrals-have-vanishing-negative-coefficients, lem-complex-circle-measures-have-finite-total-variation-under-countable-choice, lem-finite-complex-circle-measures-are-determined-by-fourier-coefficients, thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation, def-fourier-coefficients-and-trigonometric-polynomials]

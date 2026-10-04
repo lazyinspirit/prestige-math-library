@@ -2,7 +2,7 @@
 id: ex-strict-transform-cusp-first-blowup
 kind: example
 title: "First blowup of the cusp y^2=x^3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

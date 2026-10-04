@@ -2,7 +2,7 @@
 id: lem-blowup-lowers-contact-order
 kind: lemma
 title: "A point blowup lowers pairwise contact order by one and separates transverse branches"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

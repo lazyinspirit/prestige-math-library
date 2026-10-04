@@ -2,7 +2,7 @@
 id: cex-ordinary-intersection-number-alone-does-not-give-the-lkb-pairing
 kind: counterexample
 title: Ordinary intersection number alone does not give the LKB pairing
-status: draft
+status: published
 origin: pipeline
 deps: [def-forks-noodles-and-their-lkb-intersection-pairing, def-lexicographic-order-on-fork-noodle-deck-monomials]
 justified_by: []

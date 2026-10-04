@@ -2,7 +2,7 @@
 id: prop-the-geometric-action-on-meridians-is-the-artin-representation
 kind: proposition
 title: "The geometric action on meridians is the Artin representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 6

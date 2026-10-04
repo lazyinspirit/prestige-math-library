@@ -2,7 +2,7 @@
 id: lem-nonaffine-affine-normal-subgroup-products
 kind: lemma
 title: "Products of smooth connected affine normal subgroups are in the same class"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-abelian-variety-over-a-field, lem-nonaffine-group-image-exact-quotient-properties, lem-nonaffine-connected-group-geometrically-connected]
 provenance:

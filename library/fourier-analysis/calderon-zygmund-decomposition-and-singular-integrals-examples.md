@@ -1,7 +1,7 @@
 ---
 page: calderon-zygmund-decomposition-and-singular-integrals-examples
 title: "Calderón–Zygmund Decomposition and Singular Integrals — Examples"
-status: draft
+status: published
 requires: [calderon-zygmund-decomposition-and-singular-integrals]
 items: []
 examples:

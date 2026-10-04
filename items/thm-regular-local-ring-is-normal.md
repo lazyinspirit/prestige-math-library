@@ -2,7 +2,7 @@
 id: thm-regular-local-ring-is-normal
 kind: theorem
 title: Regular varieties are normal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 1

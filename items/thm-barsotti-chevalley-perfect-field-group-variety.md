@@ -2,7 +2,7 @@
 id: thm-barsotti-chevalley-perfect-field-group-variety
 kind: theorem
 title: "Barsotti-Chevalley over a perfect field: unique smooth affine normal subgroup"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-dependent-choice, def-abelian-variety-over-a-field, prop-abelian-variety-commutativity-from-rigidity, thm-abelian-variety-is-projective, prop-nonaffine-smooth-group-pseudo-abelian-quotient, thm-nonaffine-pseudo-abelian-perfect-field-is-complete, lem-nonaffine-connected-group-geometrically-connected, lem-proper-geometrically-integral-affine-scheme-is-point, thm-nonaffine-group-scheme-normal-subgroup-quotient]
 provenance:

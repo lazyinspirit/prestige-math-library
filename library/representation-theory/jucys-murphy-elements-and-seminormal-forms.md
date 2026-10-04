@@ -1,7 +1,7 @@
 ---
 page: jucys-murphy-elements-and-seminormal-forms
 title: "Jucys–Murphy Elements and Seminormal Forms"
-status: draft
+status: published
 requires:
   - specht-modules-and-the-irreducibles-of-the-symmetric-group
   - the-branching-rule-and-the-young-graph

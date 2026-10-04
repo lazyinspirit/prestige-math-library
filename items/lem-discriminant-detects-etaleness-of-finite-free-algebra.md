@@ -2,7 +2,7 @@
 id: lem-discriminant-detects-etaleness-of-finite-free-algebra
 kind: lemma
 title: "The trace discriminant detects étaleness of a finite free algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

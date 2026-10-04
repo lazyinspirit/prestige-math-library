@@ -2,7 +2,7 @@
 id: thm-calderon-zygmund-singular-integrals-are-bounded-on-lp
 kind: theorem
 title: "Calderón–Zygmund operators are bounded on Lp"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-monotone-convergence-for-the-integral, cor-l-p-norm-recovery-by-unit-l-q-pairings, def-calderon-zygmund-kernel-and-principal-value-operator, def-countable-choice, def-hilbert-space-adjoint, def-l-p-space-as-a-quotient-by-null-functions, def-sublinear-operator-weak-and-strong-type-p-q, lem-calderon-zygmund-lp-range-splits-into-interpolation-and-duality, thm-calderon-zygmund-operator-has-weak-type-one-one, thm-chebyshev-markov-inequality-for-the-integral, thm-complex-holder-minkowski-and-the-quotient-norm, thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p, thm-layer-cake-formula-for-l-p-powers, thm-tonelli-theorem-for-sigma-finite-product-spaces]

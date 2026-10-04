@@ -2,7 +2,7 @@
 id: lem-hardy-radial-means-are-monotone
 kind: lemma
 title: "Radial p-means of a holomorphic function are nondecreasing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-analytic-hardy-space-disc, cor-modulus-powers-of-holomorphic-functions-are-subharmonic, cor-holomorphic-functions-are-real-analytic-and-smooth, def-poisson-modification-of-a-subharmonic-function, thm-poisson-modification-preserves-subharmonicity-and-majorizes, thm-poisson-integral-solves-the-disc-dirichlet-problem, def-poisson-kernel-on-the-disc, lem-poisson-kernel-properties-on-the-disc, def-poisson-integral-of-finite-boundary-measure, thm-mean-value-property-for-plane-harmonic-functions, def-mean-value-property-for-plane-functions, thm-jensen-inequality-for-expectation, cor-lyapunov-moment-inequality-on-a-probability-space, def-the-one-dimensional-torus-and-normalized-haar-integral]

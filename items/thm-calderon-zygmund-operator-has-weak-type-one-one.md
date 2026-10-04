@@ -2,7 +2,7 @@
 id: thm-calderon-zygmund-operator-has-weak-type-one-one
 kind: theorem
 title: "Calderón–Zygmund operators are of weak type (1,1)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-calderon-zygmund-kernel-and-principal-value-operator, def-countable-choice, def-l-one-of-a-measure, def-sublinear-operator-weak-and-strong-type-p-q, lem-calderon-zygmund-decomposition-at-height-lambda, lem-cz-bad-part-is-integrable-away-from-expanded-cubes, lem-cz-good-part-has-controlled-ltwo-image, thm-chebyshev-markov-inequality-for-the-integral, thm-lebesgue-measure-under-dilations-and-reflections, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fatou-lemma]

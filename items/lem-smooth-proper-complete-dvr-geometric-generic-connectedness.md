@@ -2,7 +2,7 @@
 id: lem-smooth-proper-complete-dvr-geometric-generic-connectedness
 kind: lemma
 title: "A connected special étale cover stays connected on the geometric generic fibre"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

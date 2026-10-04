@@ -2,7 +2,7 @@
 id: thm-blaschke-product-boundary-values-and-zeros
 kind: theorem
 title: "Boundary values and zeros of a Blaschke product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-countable-choice, def-blaschke-product, thm-normal-convergence-of-holomorphic-products, thm-hardy-zero-set-blaschke-condition, lem-hardy-radial-means-are-monotone, lem-bounded-holomorphic-disc-functions-have-fatou-limits-under-countable-choice, thm-c2-holomorphic-components-are-harmonic, def-plane-harmonic-function, cor-modulus-powers-of-holomorphic-functions-are-subharmonic, def-poisson-modification-of-a-subharmonic-function, thm-poisson-modification-preserves-subharmonicity-and-majorizes, thm-dominated-convergence, lem-poisson-kernel-properties-on-the-disc, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-nonnegative-integral-zero-iff-zero-almost-everywhere]

@@ -2,7 +2,7 @@
 id: def-braid-index-of-an-oriented-link
 kind: definition
 title: "The braid index of an oriented link"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-closure-of-a-geometric-braid, thm-alexanders-closed-braid-theorem,

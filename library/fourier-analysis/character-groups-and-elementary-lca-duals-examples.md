@@ -1,7 +1,7 @@
 ---
 page: character-groups-and-elementary-lca-duals-examples
 title: "Character Groups and Elementary LCA Duals — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-pontryagin-dual-of-the-circle-is-the-integers,
            ex-pontryagin-dual-of-the-integers-is-the-circle,

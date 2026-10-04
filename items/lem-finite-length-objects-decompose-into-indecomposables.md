@@ -2,7 +2,7 @@
 id: lem-finite-length-objects-decompose-into-indecomposables
 kind: lemma
 title: "Fitting decomposition in a finite-length abelian category"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-composition-series-and-composition-factors-of-an-object

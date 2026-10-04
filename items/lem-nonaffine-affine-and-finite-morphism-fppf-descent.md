@@ -2,7 +2,7 @@
 id: lem-nonaffine-affine-and-finite-morphism-fppf-descent
 kind: lemma
 title: "Affineness and finiteness of morphisms descend under fppf base change"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-nonaffine-effective-affine-algebra-descent, lem-nonaffine-fppf-descent-of-scheme-morphisms, cor-faithfully-flat-descent-of-finite-generation, thm-affine-scheme-ring-anti-equivalence]
 provenance:

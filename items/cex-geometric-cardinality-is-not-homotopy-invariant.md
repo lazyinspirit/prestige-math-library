@@ -2,7 +2,7 @@
 id: cex-geometric-cardinality-is-not-homotopy-invariant
 kind: counterexample
 title: "Geometric cardinality is not homotopy invariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-transverse-complementary-dimensional-intersection-set, def-mod-two-intersection-number, thm-mod-two-intersection-number-is-homotopy-invariant, def-local-oriented-intersection-sign, def-oriented-intersection-number, ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds, def-circle-as-real-line-mod-integers, def-smooth-family-of-maps-and-evaluation-map, thm-oriented-intersection-number-is-homotopy-invariant, def-countable-choice]

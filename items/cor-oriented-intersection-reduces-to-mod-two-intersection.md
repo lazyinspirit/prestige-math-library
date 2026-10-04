@@ -2,7 +2,7 @@
 id: cor-oriented-intersection-reduces-to-mod-two-intersection
 kind: corollary
 title: "The oriented intersection number reduces to the mod 2 number"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-mod-two-intersection-number, thm-mod-two-intersection-number-is-homotopy-invariant, def-oriented-intersection-number, thm-oriented-intersection-number-is-homotopy-invariant, def-integers-modulo-n, def-countable-choice, thm-transversality-homotopy-theorem]

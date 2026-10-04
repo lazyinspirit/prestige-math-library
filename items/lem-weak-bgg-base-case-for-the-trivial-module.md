@@ -2,7 +2,7 @@
 id: lem-weak-bgg-base-case-for-the-trivial-module
 kind: lemma
 title: Weak BGG resolution of the trivial module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [def-standard-induced-resolution-of-the-trivial-module, thm-standard-induced-resolution-is-exact, lem-induced-modules-from-finite-dimensional-b-modules-have-type-the-weights, lem-central-character-cuts-of-a-typed-module-are-typed, lem-weight-subsets-with-equal-root-sums-are-unique, cor-central-characters-are-dot-weyl-orbits, def-generalized-central-character-subcategory-of-o, thm-category-o-decomposes-by-generalized-central-character, lem-generalized-central-character-submodules-are-direct-summands, def-axiom-of-choice, lem-positive-root-pairings-of-a-dominant-integral-weight]

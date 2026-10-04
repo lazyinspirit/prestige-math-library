@@ -2,7 +2,7 @@
 id: lem-formal-full-faithfulness-on-regular-punctured-spectrum
 kind: lemma
 title: "Vector-bundle maps on a regular punctured spectrum are recovered from parameter thickenings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

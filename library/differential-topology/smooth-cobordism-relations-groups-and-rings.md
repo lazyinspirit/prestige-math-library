@@ -1,7 +1,7 @@
 ---
 page: smooth-cobordism-relations-groups-and-rings
 title: Smooth Cobordism Relations Groups and Rings
-status: draft
+status: published
 items: [def-unoriented-smooth-cobordism-of-closed-manifolds, def-oriented-smooth-cobordism, lem-cylinders-give-reflexivity-of-cobordism, lem-reversing-a-cobordism-gives-symmetry, lem-collar-gluing-and-corner-smoothing-give-transitivity, thm-smooth-cobordism-is-an-equivalence-relation, def-null-cobordant-closed-manifold, def-unoriented-and-oriented-bordism-groups, thm-disjoint-union-makes-bordism-classes-abelian-groups, lem-fundamental-class-of-a-boundary-pushes-forward-to-zero, prop-zero-dimensional-bordism-groups, lem-product-boundary-formula-for-oriented-manifolds, thm-cartesian-product-makes-bordism-a-graded-ring, def-stiefel-whitney-number-of-a-closed-manifold, def-pontryagin-number-of-a-closed-oriented-manifold, lem-boundary-stable-tangent-splits-off-a-trivial-line, prop-boundaries-have-zero-stiefel-whitney-numbers, prop-oriented-boundaries-have-zero-pontryagin-numbers, rem-bordism-groups-here-are-geometric-not-generalized-homology-constructions]
 examples: []
 ---

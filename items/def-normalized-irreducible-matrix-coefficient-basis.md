@@ -29,7 +29,7 @@ sources:
   - title: Constantin Teleman, Representation Theory (Berkeley lecture notes, 60 pp.)
     url: https://math.berkeley.edu/~teleman/math/RepThry.pdf
     locator: §19.7, printed p. 43 (inner product on End(V) scaled by dim V)
-status: draft
+status: published
 origin: pipeline
 ---
 ## Definition

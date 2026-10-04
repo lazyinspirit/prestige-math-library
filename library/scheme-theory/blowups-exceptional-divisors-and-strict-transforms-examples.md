@@ -1,7 +1,7 @@
 ---
 page: blowups-exceptional-divisors-and-strict-transforms-examples
 title: "Blowups, Exceptional Divisors, and Strict Transforms: Examples and Counterexamples"
-status: draft
+status: published
 requires: [blowups-exceptional-divisors-and-strict-transforms]
 items: []
 examples:

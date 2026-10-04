@@ -1,7 +1,7 @@
 ---
 page: peter-weyl-theory-for-general-compact-groups
 title: "Peter Weyl Theory for General Compact Groups"
-status: draft
+status: published
 requires: [haar-measure-existence-and-uniqueness, the-modular-function-and-l1-group-algebras, unitary-representations-positive-type-and-gns, complete-reducibility-for-compact-groups, stone-weierstrass-general, compact-operators-and-riesz-schauder-theory, compact-self-adjoint-hilbert-schmidt-and-trace-class-operators, character-groups-and-elementary-lca-duals]
 items:
   - def-unitary-dual-of-a-compact-group

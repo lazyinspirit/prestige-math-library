@@ -2,7 +2,7 @@
 id: lem-one-dimensional-hardy-inequality-on-the-half-line
 kind: lemma
 title: "The Hardy inequality for the averaging operator on the half-line"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps: [thm-holder-inequality-for-integrals, thm-tonelli-and-fubini-for-completed-product-measures, thm-minkowski-integral-inequality, thm-monotone-convergence-for-the-integral, def-nonnegative-lebesgue-integral, def-countable-choice]

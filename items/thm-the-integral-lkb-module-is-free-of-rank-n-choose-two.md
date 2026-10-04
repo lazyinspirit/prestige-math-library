@@ -2,7 +2,7 @@
 id: thm-the-integral-lkb-module-is-free-of-rank-n-choose-two
 kind: theorem
 title: The integral LKB module is free of rank n choose two
-status: draft
+status: published
 origin: pipeline
 deps: [lem-lkb-lifted-absolute-cellular-boundary-and-fraction-field-rank, lem-closed-lkb-basis-surfaces-have-the-three-required-topological-types-and-factors, lem-fraction-field-coefficients-of-an-integral-lkb-class-are-laurent-polynomials, def-lawrence-krammer-bigelow-cover, lem-int-cancellation, cor-polynomial-ring-over-a-domain-is-a-domain, def-multiplicative-subset-and-localisation]
 justified_by: []

@@ -2,7 +2,7 @@
 id: thm-nonaffine-finite-relation-quotient-with-affine-orbits
 kind: theorem
 title: "Finite locally free equivalence quotients exist when orbits lie in affine opens"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-nonaffine-finite-relation-saturated-affine-neighbourhood, thm-nonaffine-finite-flat-affine-equivalence-quotient, lem-nonaffine-fppf-descent-of-scheme-morphisms]
 provenance:

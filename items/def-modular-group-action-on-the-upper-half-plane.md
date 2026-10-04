@@ -2,7 +2,7 @@
 id: def-modular-group-action-on-the-upper-half-plane
 kind: definition
 title: "The modular group and its action on the upper half-plane"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-integers

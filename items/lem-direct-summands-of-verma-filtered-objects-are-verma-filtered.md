@@ -2,7 +2,7 @@
 id: lem-direct-summands-of-verma-filtered-objects-are-verma-filtered
 kind: lemma
 title: "Direct summands of Verma-filtered objects are Verma-filtered"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice

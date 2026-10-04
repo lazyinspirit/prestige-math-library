@@ -2,7 +2,7 @@
 id: thm-level-one-valence-formula
 kind: theorem
 title: "The level-one valence formula"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-standard-fundamental-domain-for-the-modular-group

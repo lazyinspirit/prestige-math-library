@@ -2,7 +2,7 @@
 id: thm-embedded-snc-resolution-of-reduced-curve-on-regular-surface
 kind: theorem
 title: Embedded strict-normal-crossings resolution of a reduced curve on a regular surface
-status: draft
+status: published
 origin: pipeline
 deps: [def-strict-normal-crossings-divisor, thm-separation-of-regular-curve-components-by-point-blowups, lem-intersection-multiplicity-drop-under-point-blowup, lem-blowup-of-closed-point-of-regular-surface-is-regular, lem-regularization-of-curve-on-noetherian-ambient-by-point-blowups, def-intersection-multiplicity-of-closed-subschemes, def-strict-transform-closed-subscheme, def-exceptional-divisor-blowup, def-effective-cartier-divisor, def-cartier-divisor, thm-pullback-center-ideal-invertible, thm-nonaffine-regular-local-ring-is-ufd, def-axiom-of-choice, def-total-transform-divisor, def-locally-noetherian-and-noetherian-scheme, def-integral-scheme, def-dimension-noetherian-topological-space, lem-affine-blowup-algebra-properties]
 provenance:

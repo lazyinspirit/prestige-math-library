@@ -2,7 +2,7 @@
 id: lem-restriction-and-extension-estimates-are-dual
 kind: lemma
 title: Restriction and extension estimates are dual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:

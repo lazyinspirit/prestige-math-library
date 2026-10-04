@@ -2,7 +2,7 @@
 id: cex-heat-equation-does-not-have-finite-propagation
 kind: counterexample
 title: "The heat equation has no finite propagation speed"
-status: draft
+status: published
 origin: pipeline
 deps:
   - cor-heat-equation-has-infinite-propagation-in-the-positive-kernel-class

@@ -2,7 +2,7 @@
 id: ex-conductor-cusp-semigroup
 kind: example
 title: The cusp conductor and its two semigroup-ring generators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 dependency_level: 7

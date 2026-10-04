@@ -2,7 +2,7 @@
 id: thm-blowup-closed-immersion-transform-universal
 kind: theorem
 title: "Strict transforms of closed subschemes are blowups of the subscheme"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-38-owner-30
 deps:
