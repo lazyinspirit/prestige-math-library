@@ -1,0 +1,137 @@
+#!/usr/bin/env python3
+"""Assemble this research dossier only; never invoke production workflow tools."""
+import pathlib,json,re,hashlib,collections
+HERE=pathlib.Path(__file__).resolve().parent; ROOT=HERE.parents[3]
+def read(p): return json.loads(p.read_text())
+def dump(p,obj): p.write_text(json.dumps(obj,indent=2,ensure_ascii=False)+'\n')
+branches=['foundations','gibbs-limits','dynamics-kinetics','examples']
+errors=[];sources={};aliases={};rows=[]
+for file in [HERE/'local-suppliers.json']+[HERE/'workers'/b/'supplier-map.json' for b in branches]:
+ if not file.exists():raise SystemExit('Missing stable supplier map '+str(file.relative_to(HERE)))
+ data=read(file);ss=data if isinstance(data,list) else data.get('suppliers',data.get('external_suppliers',[]))
+ for old in ss:
+  ids=[old['id']] if 'id' in old else old.get('supplier_ids_or_contracts',old.get('supplier_ids_or_explicit_contracts',[]))
+  if old.get('key'):aliases[old['key']]=ids
+  for sid in ids:
+   x=dict(old);x['id']=sid;x['domain']=x.get('domain','mathematics')
+   if (ROOT/'items'/f'{sid}.md').exists():x['path']='items/'+sid+'.md'
+   x['statement']=x.get('statement',x.get('statement_hypotheses',x.get('statement_and_hypotheses',x.get('exact_statement_and_hypotheses','Exact statement in cited worker contract'))))
+   x['hypotheses']=x.get('hypotheses',x.get('statement_hypotheses',x.get('statement_and_hypotheses',x.get('exact_statement_and_hypotheses','Exact named section hypotheses retained'))))
+   x['status']=x.get('status',x.get('proof_status','research only'))
+   x['reading_record']=str(file.relative_to(HERE));x['section']=x.get('section',x.get('module',x.get('locator','Statement and argument')))
+   if 'path' not in x:errors.append('Supplier path absent '+sid)
+   sources[sid]=x
+# Integrator contracts retain exact additional subinterfaces and leaf hashes,
+# rather than misassigning one grouped source-carrier hash to several files.
+for old in read(HERE/'local-suppliers.json')['suppliers']:
+ x=dict(old);x['reading_record']='local-suppliers.json';sources[x['id']]=x
+# Local authors own their arguments; canonical files fix one home and dependency order.
+def add(file,branch):
+ p=HERE/file
+ if not p.exists():raise SystemExit('Missing stable inventory '+file)
+ data=read(p);items=data if isinstance(data,list) else data['items']
+ for old in items:
+  x=dict(old);x['owner']=branch
+  ptr=x['proof_module'];mp,sep,a=ptr.partition('#')
+  if not sep:a=x.get('proof_section','')
+  x['proof_module']=str((pathlib.Path(file).parent/mp).as_posix())+'#'+a
+  x['status']=x.get('status',x.get('proof_status','proposed scoped research interface'))
+  deps=[]
+  for d in x.get('deps',[]):deps+=aliases.get(d,[d])
+  x['deps']=list(dict.fromkeys(deps))
+  if branch=='foundations':home='csm-phase-ensembles'
+  elif branch=='gibbs-limits':home='csm-continuum-limits' if a.lower().startswith(('g7','g8')) or any(s in x['id'] for s in ['stable-not-superstable','finite-range-attraction','bulk-field']) else 'csm-gibbs-lattice'
+  elif branch=='examples':
+   home='csm-fluctuations-countermodels' if a.lower().startswith(('e6','e7','e8')) else 'csm-exact-models'
+  elif branch=='local':home='csm-full-phase-local-equivalence'
+  else:
+   low=mp.lower()
+   if 'mean' in low or 'bbgky' in low:home='csm-mean-field-hierarchy'
+   elif 'collision' in low or 'moment' in low:home='csm-collision-transport'
+   elif 'stoch' in low or 'response' in low:home='csm-stochastic-response'
+   else:home='csm-hamiltonian-statistics'
+  side=x.get('side','B' if x['id'].startswith(('ex-','cex-','texp-')) or x.get('page','').endswith('-examples') else 'A')
+  x['side']=side;x['home']=home+('-examples' if side=='B' else '')
+  # Use local shared state language explicitly in model/preparation definitions.
+  shared={'def-csm-full-marked-model':['def-csm-stable-superstable-continuum-interaction'], 'post-csm-examples-ensemble-preparations':['post-csm-counting-and-physical-observables'], 'post-csm-interacting-equilibrium-gibbs':['post-csm-counting-and-physical-observables']}
+  x['deps']=list(dict.fromkeys(x['deps']+shared.get(x['id'],[])))
+  rows.append(x)
+for b in branches:add('workers/'+b+'/inventory.json',b)
+add('local-inventory.json','local')
+index={x['id']:x for x in rows}
+if len(index)!=len(rows):errors.append('Duplicate local ID')
+prefixes={'definition':'def-','lemma':'lem-','theorem':'thm-','proposition':'prop-','corollary':'cor-','postulate':'post-','physical-theorem':'pthm-','thought-experiment':'texp-','experiment':'exp-','example':'ex-','counterexample':'cex-','false-statement':'fs-','remark':'rem-'}
+for x in rows:
+ if not x['id'].startswith(prefixes.get(x['kind'],'invalid-')):errors.append('Kind/prefix '+x['id'])
+ if x['kind'] in ['lemma','theorem','proposition','corollary'] and x['domain']!='mathematics':errors.append('Mathematical class/domain '+x['id'])
+ if x['kind'] in ['postulate','physical-theorem','thought-experiment','experiment'] and x['domain']!='physics':errors.append('Physical class/domain '+x['id'])
+ if any((ROOT/base/f"{x['id']}.md").exists() for base in ['items','physics/items']):errors.append('Canonical ID collision '+x['id'])
+ for d in x['deps']:
+  if d not in index and d not in sources:
+   p=ROOT/'items'/f'{d}.md'
+   if p.exists():
+    t=p.read_text();status=re.search(r'^status:\s*(\S+)',t,re.M)
+    sources[d]=dict(id=d,domain='mathematics',path=str(p.relative_to(ROOT)),section='Statement/Definition and argument',statement='Exact checked item interface in worker proof/reading ledger',hypotheses='Exact canonical item hypotheses retained',status=status[1] if status else 'draft',reading_record='Worker source records; no blanket transitive reading claim')
+   else:errors.append('Unresolved '+d+' -> '+x['id'])
+ for d in x['deps']:
+  sup=index.get(d) or sources.get(d,{})
+  if x['domain']=='mathematics' and sup.get('domain')!='mathematics':errors.append('Mathematics boundary '+d+' -> '+x['id'])
+  if d in index and index[d]['side']=='B':errors.append('B leaf used '+d+' -> '+x['id'])
+ x['dependency_roles']={d:('mathematical-premise' if (index.get(d) or sources.get(d,{})).get('domain')=='mathematics' else 'formulation-prerequisite' if x['kind'] in ['definition','postulate'] else 'physical-assumption' if (index.get(d) or {}).get('kind')=='postulate' or d.startswith('post-') else 'physical-result') for d in x['deps']}
+ x['empirical_premises']=[]
+ if x['domain']=='physics':x['physical_scope']=x['scope']
+ pp,a=x['proof_module'].split('#',1);p=HERE/pp
+ if not p.exists():errors.append('Missing proof '+pp)
+ else:
+  token=a.split('/')[0].split('–')[0]
+  text=p.read_text()
+  if not re.search(r'^##+\s+'+re.escape(token)+r'(?:\s|[.\-—:]|$)',text,re.M|re.I) and not re.search(r'<a id=["\x27]'+re.escape(token)+r'["\x27]>',text,re.I):errors.append('Missing anchor '+x['proof_module'])
+  controls=sorted(set(ord(c) for c in text if ord(c)<32 and c not in '\n\t'))
+  if controls:errors.append('Proof control chars '+pp)
+def topo(nodes,depmap,priority=None):
+ result=[];left=set(nodes)
+ while left:
+  ready=sorted((n for n in left if not(set(depmap.get(n,[]))&left)),key=(lambda n:(priority.get(n,999),n)) if priority else None)
+  if not ready:errors.append('Cycle '+','.join(sorted(left)));break
+  if priority:ready=ready[:1]
+  result+=ready;left-=set(ready)
+ return result
+order=topo(index,{k:[d for d in x['deps'] if d in index] for k,x in index.items()})
+pages=collections.defaultdict(list)
+for k in order:pages[index[k]['home']].append(k)
+page_deps={p:sorted({index[d]['home'] for k in ids for d in index[k]['deps'] if d in index and index[d]['home']!=p}) for p,ids in pages.items()}
+for p in list(pages):
+ mate=p[:-9] if p.endswith('-examples') else p+'-examples'
+ if mate not in pages:pages[mate]=[];page_deps[mate]=[p] if mate.endswith('-examples') else []
+for p,ids in pages.items():
+ if len(ids)>100:errors.append('Cap '+p)
+ if p.endswith('-examples') and any(p in ds for ds in page_deps.values()):errors.append('B page used '+p)
+progress=['csm-phase-ensembles','csm-gibbs-lattice','csm-continuum-limits','csm-full-phase-local-equivalence','csm-hamiltonian-statistics','csm-mean-field-hierarchy','csm-collision-transport','csm-stochastic-response','csm-exact-models','csm-fluctuations-countermodels']
+priority={p:i for i,p in enumerate(progress)};priority.update({p+'-examples':len(progress)+i for i,p in enumerate(progress)})
+page_order=topo(pages,page_deps,priority)
+used=sorted({d for x in rows for d in x['deps'] if d in sources});external=[]
+for d in used:
+ x=sources[d];p=ROOT/x.get('path','NO_PATH')
+ if not p.exists():errors.append('Missing source path '+d)
+ else:
+  x['sha256_current']=hashlib.sha256(p.read_bytes()).hexdigest()
+  expected=x.get('sha256_at_inspection') or x.get('raw_sha256') or x.get('sha256')
+  if expected and expected!=x['sha256_current']:errors.append('Supplier changed since recorded reading '+d)
+ external.append(x)
+manifest=dict(research_only=True,date_utc='2026-10-03',date_local='2026-10-04',items=[index[k] for k in order],item_order=order,pages=[dict(page=p,side='B' if p.endswith('-examples') else 'A',library='physics',items=pages[p],deps=page_deps[p],companion=p[:-9] if p.endswith('-examples') else p+'-examples') for p in page_order],external_suppliers=external)
+dump(HERE/'paired-inventory.json',manifest)
+dump(HERE/'supplier-map.json',dict(external_suppliers=external,consumers={x['id']:x['deps'] for x in manifest['items']},source_finding='source-findings.md',source_records=[str((HERE/'workers'/b/'supplier-map.json').relative_to(HERE)) for b in branches],boundary='Mathematics original/imports and previous physics research read-only; planned permission does not confer proof status'))
+dump(HERE/'claim-coverage.json',dict(claims=[dict(id=x['id'],kind=x['kind'],domain=x['domain'],argument=x['proof_module'],scope=x['scope'],home=x['home'],status=x['status']) for x in manifest['items']],required_unresolved=errors,empirical_premises=[]))
+dump(HERE/'closure-ledger.json',dict(asserted_item_count=len(rows),required_unresolved=errors,completion_scope='All exact scoped claims have supplied local arguments or checked exact suppliers; author/integrator/peer research review only',full_phase_extension='C0-C7: actual interacting full total-energy shell, conditional spatial mark entropy and separately controlled specified local momentum moments; exact source SS/beta/differentiability/singleton/window assumptions',unconsumed_prospective=['Stability-alone arbitrary van Hove continuum upper theorem','General continuum Gibbs-minimizer to DLR converse/existence/uniqueness or liquid-gas phase diagram','Arbitrary ultrathin/exact total energy shells and nonunique phase selection','Uniform all-observable/growing-region/arbitrary unbounded marked ensemble limits','Generic Hamiltonian ergodicity or thermalization','Hard-sphere Boltzmann-Grad, general hydrodynamic/long-time kinetic and transport limits','Generic continuum cluster convergence or universal critical exponents','Quantum/semiclassical indistinguishability or negative-beta unbounded momentum ensembles']))
+report=dict(pass_check=not errors,errors=errors,items=len(rows),A_items=sum(x['side']=='A' for x in rows),B_items=sum(x['side']=='B' for x in rows),pages=len(pages),pairs=len(pages)//2,max_page_count=max(map(len,pages.values())),external_suppliers=len(external),checks=['exact ID resolution','item/page DAG','unique homes and same-page supplier order','B leaves','class/domain/prefix','mathematical boundary','canonical ID collision','100 A/B cap','proof paths/anchors/control characters','source path/current hashes','no fabricated empirical premise'],command='python3 '+str((HERE/'assemble-and-check.py').relative_to(ROOT)),qualification='Reproducible structural research checks; mathematical proof review is bounded collaborating local review, not independent acceptance or production gates')
+report['proof_sha256_current']={p:hashlib.sha256((HERE/p).read_bytes()).hexdigest() for p in sorted({x['proof_module'].split('#')[0] for x in rows}) if (HERE/p).exists()}
+dump(HERE/'structural-check.json',report)
+lines=['# Proposed paired pathway and inventory','','Research-only canonical supplier-first placement. B companions are leaves.','']
+for p in page_order:
+ if p.endswith('-examples'):continue
+ lines+=['## '+p,'','| Proposed item | Kind / domain | Exact argument |','|---|---|---|']
+ for k in pages[p]:
+  x=index[k];lines+=['| `'+k+'` — '+x['title']+' | '+x['kind']+' / '+x['domain']+' | `'+x['proof_module']+'` |']
+ lines+=['','B companion: `'+p+'-examples` ('+str(len(pages[p+'-examples']))+' leaf items).','']
+(HERE/'pathway-and-inventory.md').write_text('\n'.join(lines)+'\n')
+print(json.dumps(report,indent=2));raise SystemExit(0 if not errors else 1)

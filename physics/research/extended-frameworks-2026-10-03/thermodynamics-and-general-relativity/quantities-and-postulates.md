@@ -1,0 +1,54 @@
+# Thermodynamics–GR quantities and explicit physical adoptions
+
+Draft research2026-10-04. A local constitutive description, statistical preparation, stationary equilibrium condition, and semiclassical horizon identification are different physical premises. Mathematical well-definedness and deductions are supplied before their interpretation. The bridge does not impose an extensive global thermodynamic limit on gravity.
+
+<a id="framework-units"></a>
+## def-tgr-framework-units — geometry, observers and compatible quantities
+
+Model spacetime is an oriented time-oriented smooth Lorentz four-manifold (M,g), signature −+++, with its actual Levi–Civita connection. In length charts x⁰=ct all coordinates have metres and metric components are dimensionless; other coordinates transform component units by their Jacobians. An observer congruence is a specified smooth future timelike unit field u with g(u,u)=−1, whose actual local integral curves are its worldlines. A physical proper-time velocity is U=c u and a C² massive worldline has g(dγ/dτ,dγ/dτ)=−c², τ seconds. A local tetrad, adapted chart and congruence are separate objects; global rest slices require the appropriate integrability hypothesis. Proper temperature is attached to the specified local material rest state, not inferred for every moving thermometer from a universal temperature-boost formula.
+
+Primitive constants/parameters are c [m/s], G [m³ kg⁻¹ s⁻²] when gravity is dynamical, k_B [J/K] for statistical entropy calibration, and ℏ [J s] when a quantum branch is adopted. Modern SI fixes c,k_B,h=2πℏ numerically by definition; G and material/EOS parameters remain empirically calibrated inputs. Specified g, material constitution, constitutive state function, boundary/preparation, current model, ensemble and any reference Killing normalization are model inputs. Energy/pressure/temperature/chemical potentials become derived state functions in the adopted energy representation; no mass or equation of state is deduced from gravity alone.
+
+Local material variables are proper particle number density n>0 [m⁻³], proper entropy density s [J K⁻¹ m⁻³], specific volume v=1/n [m³ per particle] and entropy per particle σ=s/n [J/K]. Counts are dimensionless; these are particle rather than molar chemical potentials. A given e(v,σ) has J per particle and includes rest energy. Define ε=n e [J/m³], p=−∂_v e [J/m³], T=∂_σ e [K], μ=e+pv−Tσ [J], enthalpy density h_d=ε+p [J/m³] and enthalpy per particle h_b=(ε+p)/n [J]. Relativistic μ includes mc² when a rest particle mass m is specified; it must not be shifted by bare mass m in SI. An energy covector h_b u♭ has J; the corresponding mechanical momentum covector h_bu♭/c has kg m/s.
+
+Geometric particle and entropy currents J=nu and S=su (or the separately defined dissipative corrections) have m⁻³ and J K⁻¹ m⁻³ components in length coordinates. Physical flux currents are cJ and cS, with m⁻²s⁻¹ and J K⁻¹m⁻²s⁻¹. Geometric ∇·S has J K⁻¹m⁻⁴; c∇·S is entropy production per volume per second. Stress-energy Tᵃᵇ has J/m³ in length coordinates; it is a tensor rather than a coordinate-independent array of energy densities. Observer energy density is T(u,u). The local decomposition of heat flux, diffusion and viscous stress is frame-specific; particle-frame and energy-frame choices require the exact worker definitions.
+
+A stationary Killing vector ξ is specified on a domain where it is future timelike, with a chosen positive normalization at infinity or at a particular wall/observer. Its components are dimensionless in length coordinates and its flow parameter has metres. Put N=√(-g(ξ,ξ)), u_ξ=ξ/N. For supplied proper temperature T define T_ξ=NT; it is constant only after an actual stationary-equilibrium theorem. In such equilibrium denote the constant by T_K. A mechanical covector p [kg m/s] has E_local=−c p(u_ξ) and H_K=−c p(ξ)=N E_local [J]. A wave covector k [m⁻¹] instead gives −ℏc k(ξ). A stress Killing charge is ∫T(n_slice,ξ)dV [J], with finite-domain/side-flux or asymptotic convergence conditions. ξ→aξ rescales N,H_K,T_K by a>0, leaving proper T=T_K/N unchanged.
+
+The inverse-temperature vector is βᵃ=u_ξᵃ/(k_BT)=ξᵃ/(k_BT_K) [J⁻¹]; the scalar Gibbs inverse temperature β_K=1/(k_BT_K) is also J⁻¹ but is a different object. Heisenberg length-flow dynamics is α_λ(B)=exp(iλH_K/(ℏc))B exp(−iλH_K/(ℏc)); its KMS strip width is ℏcβ_K [m]. Physical-time flow uses t=λ/c and strip width ℏβ_K [s]. A photon detector frequency is local proper angular frequency [s⁻¹], not a coordinate inverse-length frequency without c conversion.
+
+For charged stationary matter, only after the actual global connection-symmetry/reference hypotheses are supplied define the gauge-compensated potential Φ_ξ [V] and energy H_K=−c p·ξ+qΦ_ξ, q[C]. In a stationary global gauge Φ_ξ=−c A·ξ with A components T m and canonical Π=p+qA. The chemical equilibrium quantity is μ_K=Nμ+qΦ_ξ [J]; changing the potential reference shifts μ_K correspondingly. A nonexact electric circulation can obstruct that global definition.
+
+A horizon generator χ is normalized explicitly. Geometric surface gravity κ_geom defined by ∇_χχ=κ_geomχ has m⁻¹; acceleration surface gravity κ_acc=c²κ_geom has m/s². Angular frequency Ω_phys [s⁻¹] differs from Ω_geom=Ω_phys/c [m⁻¹]. Area A has m², black-hole angular momentum J_BH has J s, electric charge Q has C and electrostatic work potential Φ has V. The Planck area ℓ_P²=Gℏ/c³ has m². Only in a specified supplied quantum/semiclassical model may T_K=ℏcκ_geom/(2πk_B)=ℏκ_acc/(2πc k_B) be asserted. Only after the separate thermodynamic identification may S_BH=k_BA/(4ℓ_P²)+offset [J/K] be inferred. Classical horizon identities alone supply neither calibration, as C2 proves.
+
+<a id="local-material"></a>
+## post-tgr-local-material-thermodynamics — restricted local equilibrium material
+
+Adopt a fixed-composition single material described, in its local rest frame and declared hydrodynamic/local-equilibrium regime, by a given C² function e on an open domain D⊂(0,∞)×R of (v,σ), with T=e_σ>0. A small comoving parcel with particle count N_p has energy N_p e(V/N_p,S/N_p), including rest energy, and entropy S=N_pσ. Its constitutive pressure and chemical potential are the derivative-defined p and μ above, with their operational mechanical/thermal meanings adopted in this restricted model. This local parcel assumption does not neglect or eliminate global gravitational interaction energy; it does not postulate additivity or homogeneity for an arbitrary gravitating system.
+
+The exact local Gibbs/Euler identities follow from the supplied mathematical state-function lemma, not from a claim that the EOS is universal. Specific convexity, positive compressibility, causal sound-speed bounds, conserved particle species, perfect versus dissipative stress, reaction laws and boundary conditions are additional explicit model hypotheses. Neither entropy maximization nor a quantum Gibbs representation is implied merely by local equilibrium. Prescribed versus self-consistent Einstein geometry is stated branch by branch. Local microscopic-to-fluid derivations are not assumed.
+
+Source formulation: Eric Gourgoulhon, *An introduction to relativistic hydrodynamics*, https://arxiv.org/pdf/gr-qc/0603009, §§4.3,5.3,6.1–6.3; complete carrier retrieved by the covariant specialist, actual relevant extracted PDF16–24 read by the coordinator. The source's local energy-density/Gibbs/enthalpy description is translated to particle SI units and e(v,σ), with rest chemical-energy shift restored as mc². Earlier thermodynamics principal entropy/energy-representation and explicit first-law scope in the read-only thermodynamics/scaffold/prose-scaffold.md supply compatible restricted context, not a global-gravity extensivity theorem.
+
+<a id="entropy-admissibility"></a>
+## post-tgr-local-entropy-admissibility — scoped local entropy current
+
+For a separately specified material/current/constitutive model in its declared smooth regime, adopt its supplied entropy current S and the local admissibility condition ∇ₐSᵃ≥0. The current and boundary/exchange data must be defined; the inequality is not a construction of an undefined constitutive model. Particular perfect or dissipative models can prove equality/nonnegativity from their adopted balances and coefficients. This local second-law formulation is a physical restriction, with Gourgoulhon’s covariant current normalization above and the explicitly imposed second-law condition in Paul Romatschke, *New Developments in Relativistic Viscous Hydrodynamics*, https://arxiv.org/pdf/0906.4787, §4.1 (actual extracted PDF3–11 read by the coordinator). That source’s kinetic/gradient motivation is not consumed as a universal microscopic H-theorem, and its note about absent experimental verification is retained as a source limitation. The adoption is not a theorem of geometry, a statistical thermalization result, an entropy-area identification or a generalized second law.
+
+<a id="finite-flux-physical"></a>
+## pthm-tgr-finite-entropy-balance — conditional finite worldtube conclusion
+
+**Given:** the declared local entropy-current model/admissibility postulate and the C0/C1 smooth spacelike rectangular slab hypotheses, with S in the displayed entropy-density units.
+
+1.1 The adopted inequality and exact C1 integration give the change of proper slice entropy plus net outward entropy flux equal to nonnegative integrated local production. C0 proves that the coordinate slice integral is the actual normal/proper-volume flux, so the statement is not about a bare coordinate component. Conversion x⁰=ct_phys gives the stated physical entropy-rate units. [given, C0, C1]
+
+1.2 If the declared boundary is entropy impermeable, its side contribution vanishes and the slice entropy is nondecreasing. If there is side exchange, only the full balance follows. No horizon area or quantum outside-region entropy was a premise; a global generalized-entropy statement requires those additional defined quantities and a complete new argument. [step 1.1, given] ∎
+
+<a id="finite-flux-example"></a>
+## B — entropy-impermeable finite region
+
+**Given:** the preceding finite entropy-balance theorem on its stated slab and a declared entropy-impermeable boundary.
+
+1.1 Boundary impermeability sets the side integral to zero. The theorem therefore gives S_slice(t₁)−S_slice(t₀)=∫Π vol_g≥0, with all quantities in J/K. This is a conditional prediction for the adopted material-current setup. [given, pthm-tgr-finite-entropy-balance]
+
+1.2 If production also vanishes throughout the slab, the same identity gives equal endpoint entropy. Neither case identifies that entropy with horizon area or quantum entropy. The separate mathematical open-current counterexample illustrates why the boundary premise matters; it is contextual rather than an upstream physical premise. No measured outcome or full Einstein–fluid existence result is asserted. [step 1.1, given] ∎

@@ -1,0 +1,112 @@
+# Superseded supplier survey history
+
+Current actual proof-use maps and read records are in mathematics-audit.md.
+
+# Current expansion audit supplement
+
+The older candidate survey below is historical, not the current closure claim.
+`expansion-supplier-reading.json` records the additionally inspected complete
+interfaces and immutable file hashes. In particular the Hölder Newtonian proof
+has now been read completely (cutoff/cancellation/uniform derivative limits and
+split Hölder estimate); smooth-source S1 supplies a shorter local upgrade too.
+The trace-lift/reduction files remain **draft**. New owner authorization allows
+adequate unpublished mathematical arguments, and their complete actual proofs
+were inspected; B4–B6 now close prescribed fractional-boundary weak Dirichlet,
+compatible Neumann and stationary transmission existence. Classical regularity
+is still a separate preserved obligation.
+Exact SR S0–S9 bodies and contract were read, including reconstruction signs,
+proper-time/force factors and finite-box flux scope. `sr-to-em-mapping.json`
+records actual consumer uses. Explicit algebra/graph checks are in
+`expansion-check-results.json`; they are local checks, not proof acceptance.
+Unread remote inherited graph nodes are not automatically mathematical gaps;
+only inadequate actual premise uses are. Broader unresolved claims remain in
+`../closure-ledger.json`; the whole audit is incomplete.
+
+# Mathematical supplier audit for the EM prose scaffold
+
+Scope: exact direct supplier inspection and a complete identified transitive candidate graph, not an independent proof audit or mathematical closure certificate. The repository originals and physics snapshots are read-only. [mathematical-supplier-records.json](mathematical-supplier-records.json) gives every exact ID, original/snapshot path, current publication status, pinned-hash agreement, extracted public statement/definition, dependencies and honest read flags. 41 direct IDs' full statements/definitions and present proofs were read in this session; the Hölder Newtonian regularity theorem was read only in part. The finalized graph has 1571 reachable canonical candidates and no missing file or pinned-byte discrepancy; many transitive proofs were **not read**. Exact graph presence and publication do not discharge those review obligations. Additional direct candidates below are also explicitly unread until inspected.
+
+The ID in each row means `items/<ID>.md` at repository root and the same read-only `physics/items/<ID>.md` snapshot; the JSON spells both paths. All 41 fully inspected direct candidates are currently `published` and match their pinned imports. A definition's proof-read field is false when no Proof section exists; its full Definition, explanatory well-definedness content and declared supplier list were read. A published verification stamp is not reused as a new EM audit receipt. No operational gate or import refresh was run.
+
+## Direct supplier statements, arguments, hypotheses and use
+
+| Exact published ID | Read scope / essential claim and hypotheses | Suitability / intended EM use |
+|---|---|---|
+| `def-ck-euclidean-maps-and-diffeomorphisms` | Full Definition. Componentwise Ck on open positive-dimensional Euclidean domains; smooth means all finite k. Diffeomorphisms require inverse Ck as well. | Field/source regularity; joint maps on Ω×I use dimension four. Does not assert regularity across singular support. |
+| `def-euclidean-inner-product` | Full Definition and local algebra. Dot product finite coordinate sum; norm positive square root; norm triangle is deferred to named Cauchy–Schwarz theorem. | E/B vector values, Euclidean lengths, squares, tensor coordinate contractions. Full norm theorem remains transitive audit obligation. |
+| `def-cross-product-in-r3` | Full coordinate Definition, right-handed standard basis. | Spatial Maxwell, axial B convention and Lorentz force. Transformation parity is proved locally by determinant/coordinates if used. |
+| `def-jacobian-matrix-and-gradient` | Full Definition. Jacobian is row-component partial matrix; gradient scalar coordinate partial vector. | Every gradient and tensor divergence convention; existence of total derivative is a separate supplier. |
+| `def-divergence-and-curl-of-a-c1-vector-field` | Full Definition. Open U, C1 fields; div sums ∂iFi, curl has stated cyclic signs. | Maxwell pointwise language. Coordinate wording does not replace the chosen spatial orientation when interpreting curl geometrically. |
+| `def-laplacian-of-a-c2-function` | Full Definition. C2 scalar/field, componentwise Δ=Σ∂i². | Poisson and component wave equations; not an arbitrary curved-space Laplacian. |
+| `thm-algebra-of-derivatives` | Full Statement/Facts/Proof. Relative derivative at a limit point; product rule through Carathéodory increment factor; quotient only where denominator nonzero. | Partial product rules along coordinate lines, energy derivatives, quotient/rational amplitudes. Does not give arbitrary multivariable differentiability itself. |
+| `thm-algebra-of-total-derivatives` | Full Statement/Proof. Totally differentiable common-domain maps; sum/scalar remainder estimate. | Linearity of fields/operators and tensor sums. |
+| `thm-chain-rule-for-total-derivatives` | Full Statement/Proof. Both total derivatives exist; compose linear maps; inner increment O(|h|) controls remainders. | Trajectory field evaluation, moving patch, kernel radial chain rules and boosts. |
+| `thm-clairaut-schwarz-mixed-partials` | Full Statement/Proof, reduction to named Peano mixed-partial theorem. C2 on open Euclidean set. | Spatial/time mixed commutation. Its underlying Peano proof not independently rechecked here. |
+| `thm-the-curl-of-a-gradient-vanishes` | Full Statement/Facts/Proof. C2 scalar; three mixed-partial cancellations. | Gauge invariance and homogeneous equations. Cannot use C1 potential as if curl grad always classically exists. |
+| `thm-the-divergence-of-a-curl-vanishes` | Full Statement/Facts/Proof. C2 field gives C1 curl and paired mixed-partial cancellation. | Continuity and Gauss-constraint propagation in smooth branch. |
+| `cor-the-curl-of-a-curl-of-a-c2-field` | Full Statement/Facts/Proof. C2 field; add/subtract diagonal derivative and commute mixed partials to obtain grad div−Δ. | Vacuum component wave equation and stress-related coordinate identities. |
+| `lem-the-divergence-and-curl-of-a-cross-product` | Full Statement/Facts/Proof. C1 F,G; component product expansion gives both identities. | Poynting and moving-surface transport; this requires only first field derivatives. |
+| `def-scalar-and-vector-line-integrals-along-piecewise-c1-paths` | Full Definition. Piecewise C1 curve, continuous integrand, finite partition; independence is supplied by `lem-line-integrals-are-independent-of-the-piecewise-c1-partition`, not presumed by membership. | Fixed/moving emf, circulation and work. Independence lemma is a transitive inspection obligation. |
+| `def-oriented-unit-normal-and-flux-of-a-surface-patch` | Full Definition. Regular parametrized compact patch; orientation ru×rv/|ru×rv|; continuous flux pulled back to parameter region. | Stokes orientations, magnetic/electric flux and interface signs. Surface geometric independence uses earlier suppliers. |
+| `def-bounded-c-one-domain-boundary-charts-and-outward-normal` | Full Definition. Nonempty bounded open domain, local C1 graph, interior on one side, outward normal; Ck(closure) means interior derivatives continuously extend, not necessarily ambient extension. Assumes ACω. | Finite-volume energy/charge balances and Green identities. Connectedness is not built in. |
+| `def-bounded-piecewise-c-one-euclidean-domain` | Full Definition. Supplied finite faces, compact surface-null edge set, actual side normals, finite gluing data; inherited ACω. | Boxes/pillboxes and finite-face balance. “Piecewise smooth” alone is inadequate. |
+| `thm-divergence-theorem-for-bounded-piecewise-c-one-domains` | Full Statement/Facts/Proof. C1 closure field, finite presentation, ACω; partition away from edges, small-gradient cutoff and dominated limit; internal face cancellation. | Maxwell integral forms and fixed-volume balances. Its cutoff/partition/Fubini/change-of-variable suppliers remain individually unreviewed transitives. |
+| `thm-the-classical-stokes-theorem-for-a-c2-surface-patch` | Full Statement/Facts/Proof. C2 patch over finite elementary Green region, C1 field on neighborhood; pullback identity and planar Green. | Enough for chosen fixed/moving patch scope. Proof step5 calls curl F “C1”; only continuity follows from C1 F. The flux identity needs continuity, so use the correct continuous-curl reading or require C2 F. Original was not edited; see finding below. |
+| `cor-classical-three-dimensional-stokes-theorem` | Full Statement/Facts/Proof. Compact smooth oriented embedded surface with boundary, smooth neighborhood field, ACω; differential-form Stokes and finite parameter identification. | Optional stronger smooth embedded surface scope. Do not silently downgrade field smoothness using this interface. |
+| `def-star-shaped-open-subset-of-rn` | Full Definition. Nonempty open U with chosen a and every segment a+t(x−a) in U. | Safe global scalar/vector potential construction. Simply connected is insufficient for vector potential in punctured R3. |
+| `thm-poincare-lemma-for-star-shaped-domains` | Full Statement/Facts/Proof. Closed C1 field on star-shaped U; radial integral produces C2 scalar potential by parameter differentiation and exact t derivative. | Static E potential; no claim on arbitrary global topology. |
+| `def-vector-potential-of-a-c1-vector-field` | Full Definition. Continuous B; C1 A with curl A=B. Nonuniqueness adds gradient under stated C2 hypothesis. | Define A before using it. It does not independently prove existence. |
+| `thm-a-divergence-free-c1-field-on-a-star-shaped-open-set-has-a-vector-potential` | Full Statement/Facts/Proof. C1 B, div B=0, star-shaped U; A=∫tB(a+t(x−a))×(x−a)dt, compact derivative continuity and curl identity. | Static/local magnetic potential. Joint spacetime smoothness extension is M05; published theorem gives only spatial C1. |
+| `def-test-function-space-d-of-an-open-set` | Full Definition. Cc∞ actual complex functions, support compact in open Ω; real restriction allowed, no conjugation in pairings. | Spacetime source distributions, delta sheets and weak equations. |
+| `def-distribution` | Full Definition. Continuous complex-linear functional for exact test topology. | Weak Maxwell; continuity not merely linearity. Test topology supplier remains a required transitive audit. |
+| `def-distributional-derivative` | Full Definition and well-definedness reasoning. Signed transpose of continuous test derivative, pairing bilinear, no choice for definition. | Delta/sheet calculus and linear weak Maxwell. Classical compatibility requires next theorem. |
+| `def-dirac-delta-and-its-derivatives` | Full Definition and fixed-support estimate. δa(ψ)=ψ(a), derivative gives signed test derivative. | Point source is not a pointwise spike; prescribed curve integration in M03. |
+| `def-regular-distribution-from-a-locally-integrable-function` | Full Definition. L1loc pairing well-defined; continuity/injectivity delegated to embedding theorem with ACω bookkeeping. | Piecewise fields/weak potentials. Cannot multiply arbitrary distributions for energy/self-force. |
+| `thm-distributional-differentiation-is-continuous-and-commutes` | Full Statement/Facts/Proof. ZF transpose composition and weak/strong continuity; Ck compatibility uses ACω for Riemann/Lebesgue comparison, compact cutoffs and box integration by parts. | Weak continuity, Gauss constraints, interface derivatives and point-current calculation. Carry inherited measure choice assumptions. |
+| `thm-minus-laplacian-of-the-fundamental-solution-is-dirac` | Full Statement/Facts/Proof. ACω, n≥2, locally integrable normalized kernel; annulus Green excision, unit inner flux, remainder bounds, test limit, translation. In n=3 Φ=1/(4πr), −ΔΦ=δ0. | Coulomb normalization and distributional point source. No wave fundamental solution is provided. |
+| `thm-newtonian-potential-solves-poisson-distributionally` | Full Statement/Facts/Proof read over two bounded outputs. ACω, compact L1 source; Borel representative, local kernel Tonelli/Fubini, almost-everywhere finiteness and test identity; smooth/harmonic off support. | ρ/ε0 scalar and μ0J component potentials. Does not assert C2 inside arbitrary L1 support. |
+| `thm-decay-of-the-newtonian-potential-of-compactly-supported-data` | Full Statement/Facts/Proof. ACω, n≥2, compact L1 source in BR, r>2R; radial mean-value bound, uniform O remainder and zero-total-source improvement. | Electrostatic infinity normalization and monopole estimate. M06 independently supplies the dipole remainder; differentiated/magnetic remainder needs more. |
+| `cor-first-green-identity-on-a-bounded-c-one-domain` | Full Statement/Facts/Proof. ACω, bounded C1 or supplied piecewise domain, real u C2 closure, v C1 closure; product-divergence calculation. | Finite-region electrostatic energy and uniqueness. Infinity limit requires separate decay estimates. |
+| `cor-second-green-identity-on-a-bounded-c-one-domain` | Full Statement/Facts/Proof. ACω, u,v C2 closure; subtract first identities, outward normals on holes included. | Kernel excision/Green representations; no existence inference. |
+| `cor-classical-dirichlet-and-poisson-problems-are-unique` | Full Statement/Facts/Proof. ACω, bounded connected C1 Ω, real C2 closure solutions with equal source and trace; Neumann difference constant and necessary integral compatibility. | Exact uniqueness branch. Exists-at-most-one or affine family is not existence. |
+| `cor-neumann-solutions-are-unique-modulo-componentwise-constants` | Full Statement/Facts/Proof. Bounded C1 Ω with finitely many components; energy argument per component, real/imag separate, n=1 interval branch. | Componentwise potential normalization, not one universal constant on a disconnected domain. |
+| `lem-neumann-compatibility-from-the-divergence-theorem` | Full Statement/Facts/Proof. Bounded C1, real C2 closure, n≥2 and ACω in Facts; f=−Δu,g=outward normal derivative gives ∫f=−∫g. | Compatibility necessary only. The compact Statement omits explicitly repeating ACω but cites conventions/Facts; consuming claim will state it directly. |
+| `thm-differentiation-under-the-integral-sign-on-a-compact-rectangle` | Full Statement/Facts/Proof. Continuous g,h, h interior parameter derivative continuous to compact endpoints; mean-value/uniform bound; one-sided endpoints. | Radial potentials and finite fixed integrations. Moving surfaces and improper/unbounded integrals need distinct hypotheses. |
+| `def-countable-choice` | Full Definition and Remarks. Indexed nonempty family choice; equivalent countable family form. | Carry ACω inherited by Lebesgue/surface/distribution compatibility interfaces. Do not confuse it with arbitrary AC; separation-model remarks are not used to prove EM. |
+
+## Exact additional candidates and unresolved gaps
+
+These candidates are identified by exact repository files; publication status and public claims are recorded in the machine appendix, but a file search or automatic extraction is **not** a claim of reading their statements/proofs. Their current suitability is OPEN inspection, even if published.
+
+| Needed mathematical function | Exact candidate(s), or absent exact candidate | Remaining obligation |
+|---|---|---|
+| Smooth bump/fundamental variation lemma | `lem-test-function-cutoffs-and-euclidean-localization`; `lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound` | Read complete proof/hypotheses, use compact support precisely; M17 supplies a local conditional proof. |
+| Exponential/phasor/trigonometric differentiation | `thm-complex-exponential-is-entire-with-derivative-itself`; `thm-derivative-of-exponential` | Read complete argument and select complex exponential convention before publishing wave/ODE examples. |
+| Newtonian Hölder interior upgrade | `thm-newtonian-potential-for-holder-data-is-classical` | Only partial proof read; compact Hölder data 0<α<1 and ACω, cancellation of singular Hessian, uniform limits and Hölder split estimate require full audit. Use weak/off-support scope until then. |
+| Particle ODE existence / linear circuit ODE | `thm-picard-lindelof-local-existence-and-uniqueness`; `thm-first-order-linear-ode-integrating-factor` | Read exact local Lipschitz/time domain and coefficient hypotheses. Explicit candidate solutions can be verified without claiming global nonlinear dynamics. |
+| Retarded implicit root derivatives | `thm-parametrized-implicit-function-theorem-with-higher-regularity`; `thm-euclidean-inverse-function-theorem` | Read exact regularity/invertible derivative and domain restrictions; M10 existence/root/delta treatment remains OPEN. |
+| Fourier transforms / inversion | `def-schwartz-space-and-its-seminorms`; `thm-fourier-inversion-on-schwartz-space`; `thm-l-two-fourier-inversion` | Read normalization, spaces and proofs. Neither inversion theorem proves causal wave Green/IVP existence; M09 remains OPEN. |
+| Spherical harmonic expansions | `def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis` and general Hilbert suppliers are candidates, not a found exact spherical theorem | M11 needs Legendre/harmonic basis, completeness, kernel convergence and differentiated remainder proofs. |
+| Boundary/transmission PDE existence | Relevant Sobolev/trace/Lax–Milgram candidates need an exact inspected chain, not just library presence | M12 remains OPEN; current inspected uniqueness does not close it. |
+| Guide/cavity spectral completeness | No inspected exact Maxwell H(curl) or guide spectral supplier | M13 remains OPEN; isolated rectangular sin/cos candidates can be checked locally. |
+| Causal dispersion/passivity | Fourier/complex-analysis candidates need exact inspected boundary/growth chain | M14 remains OPEN; causal convolution alone does not imply every dispersion formula. |
+| Radiation far-field error/flux limit | No inspected exact retarded asymptotic supplier | M15 remains OPEN; prove uniform-in-angle limits before power integrals. |
+| Experiment inference mathematics | Actual reports are not yet retrieved, so no particular likelihood/estimator/test can responsibly be selected | M16 remains OPEN. Qualitative account uses no invented statistics. |
+| Minkowski geometry/tensor algebra | M08 supplies finite-dimensional definitions, boost norm check and antisymmetry argument locally; general canonical multilinear suppliers in inherited graph need inspection | Local finite formulas are conditional mathematical arguments; arbitrary observer congruences/manifolds not covered. |
+| Variational Maxwell/action | M17 supplies compact polynomial field variation and fundamental lemma; source-free/compact boundary restrictions explicit | Particle-curve variation and Noether/global gauge theorem are separate OPEN or deferred obligations. |
+
+Every necessary mathematical role in the current physical inventory has either an explicit inspected direct supplier, a local M01–M08/M17 argument, or an OPEN contract M09–M16/the named extra candidate. Exact foundational suppliers below those interfaces are all mapped in the transitive candidate JSON, with not-read flags preserved. This is a route to reviewable closure, **not closure now**.
+
+## Published finding retained within write scope
+
+`thm-the-classical-stokes-theorem-for-a-c2-surface-patch`, Proof 5.1, says “the C1 field curl F,” although its hypotheses require only F C1. Curl F is continuous in that scope. The Statement/flux equality needs only continuity, so the overstatement can be removed without changing its stated theorem. This is a proof-only wording defect, not a demonstrated false public claim. Original/snapshot status: published, bytes unmodified. Proposed repair strategy for an authorized mathematical-maintenance agent: replace the unnecessary C1 adjective with continuous, inspect the relevant flux-definition dependency, run that item's appropriate local checks. No repair, receipt or independent audit is claimed by this scaffold. Root independently confirmed the finding, including the C1 field counterexample F=(0,0,x|x|), and recorded it as confirmed/unrepaired in the canonical root-owned `research/published-consumer-supplier-ledger.md`; original and snapshot remain unchanged. For this design use the continuous-flux reading or C2 F. No substantial defect in the inspected kernel/Green interfaces was established; unexamined transitives are uncertainty, not allegations of error.
+
+## Review sequence and open status
+
+1. Review elementary definitions/rules and all exact transitives before consumers; acknowledge ACω where inherited.
+2. Review M01–M08/M17 local arguments and inspected interfaces, including joint regularity, topology, flux signs and (-+++) convention.
+3. Complete M09 causal wave/Cauchy mathematics before Lorenz reachability or retarded existence; M10 before Liénard–Wiechert; M15 before controlled radiation powers.
+4. Complete M11–M14 only for promoted harmonic/boundary/spectral/dispersion branches, with specified function spaces and traces. Keep explicit candidate calculations distinct from generic existence/completeness claims.
+5. Retrieve primary experiments and then choose/statistically audit M16's actually needed procedure.
+
+The prerequisite DAG stays mathematical-to-mathematical within mathematical pages and supplier-to-consumer within physics. B examples cannot supply another page. Source-backed experiments or adopted field equations cannot prove a mathematical lemma. Current classification: **PARTIAL mathematical closure with explicit substantial open obligations and unreviewed transitive supplier proofs**. This design is complete as a prose scaffold only.

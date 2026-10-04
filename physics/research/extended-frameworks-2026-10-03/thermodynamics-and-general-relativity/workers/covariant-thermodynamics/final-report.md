@@ -1,0 +1,9 @@
+# Completed worker report
+
+2026-10-04. All 36 declared scoped contracts are supplied by CT0–CT9; the DAG and actual anchors are in inventory.json. The final local check passes on 16 homogeneous populated A/B pages. Source/proof records distinguish published carrier status, completed research arguments, draft heat carrier, physical adoptions and actual targeted source reading.
+
+The full supplier chain starts with smooth Lorentz/tensor/local-flow geometry, scalar local inversion, degree-one/Hessian calculus, Euclidean inverse theorem, and exact Schwartz Fourier/inversion/Plancherel. CT8 then constructs the actual constant-coefficient linear dynamics with k-derivative bounds, Schwartz decay, energy contraction, uniqueness and finite propagation. No physical postulate is a supplier of a mathematical item. All B items are leaves.
+
+Canonical consumers can use the stable IDs lem-tgr-local-gibbs-euler (CT1), lem-tgr-perfect-fluid-projection and lem-tgr-carter-circulation (CT2), lem-tgr-dissipative-entropy-identity (CT4), lem-tgr-bulk-relaxation-entropy and lem-tgr-bulk-linear-causality (CT5), lem-tgr-cattaneo-stability-causality (CT6), lem-tgr-radiation-state-balance (CT7), and lem-tgr-constant-linear-energy-causality (CT8). All exact model/post IDs are in the inventory. Radiation is a separately adopted entropy-only state with no conserved-number premise; Cattaneo is supported-rest effective thermal dynamics.
+
+The only nonlinear dissipative existence witness claimed is the explicitly verified homogeneous bulk relaxation solution. Generic nonlinear causal/stable dissipative-fluid existence, global gravitational additivity, horizon/GSL, microscopic coefficient derivation and quantitative empirical confirmation remain outside the stated contracts. Sources are not substitutes for those missing stronger theorems. Earlier dossier, production, import and engine content was left read-only. These local checks are not independent acceptance or publication.

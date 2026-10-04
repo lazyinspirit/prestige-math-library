@@ -1,0 +1,53 @@
+from pathlib import Path
+import json, math, hashlib
+b=Path(__file__).parent
+inv=json.loads((b/'paired-inventory.json').read_text());ext=json.loads((b/'supplier-map.json').read_text())
+items={r['id']:r for r in inv['items']};external={r['key'] for r in ext}
+assert len(items)==len(inv['items'])
+seen=set();active=set();order=[]
+def visit(k):
+ if k in external:return
+ assert k in items,k
+ if k in seen:return
+ assert k not in active,k
+ active.add(k)
+ for d in items[k]['deps']:
+  assert d in external or items[d]['side']!='B','B supplier '+d
+  visit(d)
+ active.remove(k);seen.add(k);order.append(k)
+for k in items:visit(k)
+for pair in inv['pairs']:
+ assert len(pair['a_items'])<=100 and len(pair['b_items'])<=100
+ for k in pair['a_items']:assert items[k]['side']=='A'
+ for k in pair['b_items']:assert items[k]['side']=='B'
+for r in items.values():
+ assert r['domain']=='physics' and r['scope'] and r['proof_module']
+ assert r['kind'] in ['example','physical-theorem']
+checks=[]
+try:
+ import sympy as s
+ r,mu,c=s.symbols('r mu c',positive=True);h=s.symbols('h',real=True)
+ V=(1-2*mu/r)*(c*c+h*h/r**2)
+ circ=mu*c*c*r*r/(r-3*mu)
+ assert s.simplify(s.diff(V,r).subs(h*h,circ))==0
+ assert s.simplify(s.diff(V,r,2).subs(h*h,circ)-2*mu*c*c*(r-6*mu)/(r**3*(r-3*mu)))==0
+ H=(1-2*mu/r)/r**2
+ assert s.simplify(H.subs(r,3*mu)-1/(27*mu*mu))==0
+ assert s.simplify(s.diff(H,r,2).subs(r,3*mu)+2/(81*mu**4))==0
+ checks.append('Exact SymPy circular potential derivatives and null critical maximum passed')
+except ImportError:
+ checks.append('SymPy unavailable: symbolic diagnostic not run')
+# Midpoint quadrature after endpoint-square substitution removes Coulomb root.
+# Dimensionless numerical diagnostics verify algebra; these are NOT measured data.
+for mass,cval,W,kappa,J in [(1.,2.,6.,.5,2.),(2.,3.,22.,1.,3.),(1.,1.,3.,.2,1.)]:
+ A=(W*W-mass*mass*cval**4)/cval**2;d=W*kappa/cval**2;C=J*J-kappa*kappa/cval**2
+ root=(-d+math.sqrt(d*d+C*A))/C
+ predicted=J/math.sqrt(C)*math.atan(math.sqrt(C*A)/d)
+ # u=root*(1-y^2), Q=root*y^2*(2d+C*root*(2-y^2)); no cancellation at root.
+ n=10000
+ value=sum(2*J*math.sqrt(root)/math.sqrt(2*d+C*root*(2-((i+.5)/n)**2))/n for i in range(n))
+ assert abs(value-predicted)<1e-7
+checks.append('Three deterministic dimensionless Coulomb quadrature/algebra comparisons passed; no empirical inference')
+receipt={'kind':'local-research-structural-and-algebra-diagnostic','items':len(items),'pairs':len(inv['pairs']),'topological_order':order,'checks':checks,'not_claimed':['independent mathematical certification','production gate','experimental evidence'],'artifact_sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in b.iterdir() if p.is_file() and p.name not in ['check-receipt.json']}}
+(b/'check-receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
+print(json.dumps({'items':len(items),'pairs':len(inv['pairs']),'checks':checks},indent=2))

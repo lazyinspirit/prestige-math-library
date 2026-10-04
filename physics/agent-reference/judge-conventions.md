@@ -1,0 +1,9 @@
+Library-specific conventions:
+
+**Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
+
+- Sequences are functions on $\mathbb N$, and $0\in\mathbb N$; sequence indices therefore start at zero. Naturals are von Neumann naturals, with successor $\sigma(n)=n\cup\{n\}$.
+- Older items may write the canonical embedding of a natural into a field as $\iota(k)$, for example $1/\iota(k)$. That notation is valid legacy content. New items may write $1/k$ directly; a bare $\iota$ for a basis inclusion in a universal property is unrelated and standard.
+- A definition may establish its own well-definedness inline or through `justified_by`.
+- A title that asserts more than the proof establishes is a defect, even when the Statement is correct.
+- A theorem may be proved again by a genuinely different route. Do not flag that as duplication; judge the item on its own proof and citations. An item presenting the same argument as an existing proof may be a defect.

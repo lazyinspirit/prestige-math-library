@@ -10,7 +10,7 @@ New modules:
   proof, experiment, and empirical-qualification checks.
 - physics-check.mjs: the mandatory stage and preplanning gate.
 - physics-imports.mjs: import and verify published mathematical snapshots.
-- physics-guidance.mjs: embeds the owner's double-slit/statistical-evidence guidance in stateless judge prompts.
+- physics-guidance.mjs: embeds the owner's concise mathematical-rigor and statistical-evidence instructions, with EM and double-slit examples, in stateless judge prompts.
 - physics-review.mjs: class-specific source-review contracts and judge guidance.
 
 Copied proof, provenance, dependency, planning, and publication tools retain

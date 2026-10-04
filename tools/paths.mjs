@@ -79,7 +79,13 @@ const globalTypeScriptRuntime = () => {
  * runtime; this executes the same source files and makes no external checkout
  * writable. */
 export const tsxLoader = () => {
-  const appLoader = join(WORKER_DIR ?? '', 'node_modules/tsx/dist/loader.mjs');
+  // The loader may be installed in the worker or in the web workspace; the
+  // application renderer (and therefore every SSR tool) is loaded through it,
+  // so a missing worker copy must not silently fall back to a loader that
+  // cannot resolve the web tsconfig path aliases.
+  const appLoader = [join(WORKER_DIR ?? '', 'node_modules/tsx/dist/loader.mjs'),
+    join(WEB_DIR ?? '', 'node_modules/tsx/dist/loader.mjs')]
+    .find(candidate => candidate && existsSync(candidate)) ?? '';
   if (WORKER_DIR && existsSync(appLoader)) return appLoader;
   const typescript = globalTypeScriptRuntime();
   if (typescript && existsSync(localTypeScriptRegister)) {

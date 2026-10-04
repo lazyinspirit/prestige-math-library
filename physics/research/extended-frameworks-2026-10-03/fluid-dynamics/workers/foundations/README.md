@@ -1,0 +1,9 @@
+# Fluid-foundations worker handoff
+
+Objective completed for the declared research contracts: explicit classical continuum kinematics and physical adoption, transport/contact/balances, conservative weak and jump forms, thermodynamic response/entropy cancellation, Newtonian/Fourier and selected non-Newtonian models. All work is confined to this worker directory; production/original/import content and engines remain read-only.
+
+Read foundation-proofs.md F00–F12 for definitions, full arguments and physical interpretation; inventory.json holds 48 proposed contracts and exact dependency roles; supplier-reading.md distinguishes actual complete relevant proof readings from inspected interface-only plans and unread stronger theorems; source-provenance.json records retained ignored raw sources and reading extent; closure-ledger.json maps the declared claims to their arguments. checkpoints are author review, not independent acceptance or production readiness.
+
+Run `python3 physics/research/extended-frameworks-2026-10-03/fluid-dynamics/workers/foundations/check-foundations.py` from repository root to reproduce local structural checks. It verifies exact argument anchors, dependency resolution and cycles, mathematical boundary, classification, B leaves and page caps; checks.json records artifact hashes and supplier-first order. `build-inventory.py` reproduces the inventory. No production item exists here, so production schema/precheck/render or proof-layout receipts are not claimed.
+
+Canonical integrating owner is /root/fluid_scaffold. Next action: consume mathematical FD-MF01–MF04 before corresponding physical FD-F01–F04; align physical source dispositions and cross-worker model/boundary definitions; retain pressure-multiplier/EOS distinction and the separate weak-balance adoption. Stronger global/rough/molecular/empirical material contracts listed in closure-ledger.json are contextual only, not unresolved prerequisites of these completed claims.

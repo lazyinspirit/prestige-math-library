@@ -1,0 +1,41 @@
+# Full marked-equivalence peer review
+
+2026-10-04. Root-assigned bounded peer read by CSM foundations specialist; this is not independent production acceptance or a fresh audit of every transitive source.
+
+## Actual scope read
+
+Read the complete stable coordinator `physics/research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md`, sections C0–C6, with SHA256 738dc6e37811ef51672dc7654fb374e69e26eba6ab4622642e804678c17c5167. Read actual full internal thermo L21,L23,L26,L30,L31 in `physics/research/first-principles-2026-10-03/thermodynamics/scaffold/ly-closure-developments.md` and M17,M27,M29 in `completed-developments.md`. These are completed restricted research proofs, with exact inherited source checks; no fresh reading of Georgii's full raw papers was claimed in this peer review. Read complete root item statements and proofs for `thm-kolmogorov-extension-for-standard-borel-coordinate-spaces`, `lem-finite-products-of-standard-borel-spaces-are-standard-borel`, and `thm-disintegration-of-a-joint-law-on-standard-borel-spaces`, all published with their recorded audits. Their admitted AC and standard-Borel hypotheses match the claimed extension/conditional interfaces. Explicit finite-N shell conditional densities actually suffice without conditioning on zero-probability events.
+
+## Findings and verification
+
+No substantive mathematical failure found in the asserted C0–C6 scope. No owned foundation supplier or consumer requires mathematical repair.
+
+C0 retains the source superstable/regular potential, periodic image convention, interior finite-entropy/energy attainable density, exact N_n/V_n→rho, beta>0, differentiable canonical limit and singleton supporting variational minimizer. Its Gaussian factors, dimensionless normalized-Poisson offset -1 and full activity rescaling are correct. A full kinetic-plus-potential uniform shell is distinct from a positional shell and from canonical product marks.
+
+C1 chain rule and finite block superadditivity are valid on each fixed count sector. The finite-density negative-part bounds justify log decompositions; position-dependent finite mark counts are then integrated by nonnegative Tonelli. The Pinsker derivation has the stated TV convention (supremum of event probability differences), with constant sqrt(D/2), and bounded-test differences use twice that TV. Pullback variational tests justify measurable restriction contraction. Root standard-Borel interfaces support measurability and the countable-cell marked lift.
+
+C2 full partition ratios plus fixed-neighbor beta limits yield total energy concentration at the derivative of F-1+rho log kappa. Its diagonal controlled window is constructed from fixed-window convergence, not an unjustified uniform limit. Stability bounds total kinetic energy on that window, guaranteeing finite reference volume and finite momentum moments at each n. The entropy estimate D_n/V_n→0 is correct; it does not assert global TV convergence.
+
+C3 positional marginal B_n has finite energy on shell support, finite relative entropy, exact torus translation invariance and uniform cell-square occupation bounds. The chain rule correctly gives a combined entropy-plus-energy inequality; using only small D(B_n||C_pos)/V_n would not alone give the result. The actual L21/L23/L30 proof permits the verified generic sequence B_n: independent block stationarization, entropy/count boundary comparison, empirical-energy identity, and lower semicontinuity yield the variational limit. Stability gives the common lower energy bound needed when passing the combined inequality. Local-tame count uniform integrability preserves rho, and singleton minimizer yields actual convergence for each source test.
+
+C4's mark partition is spatial conditional on the entire position configuration. Its measurable index sets vary with q and its zero-count sector contributes zero. Translation of q may reorder lexicographic labels, but that is a simultaneous measurable permutation, leaving product Gaussian reference and conditional KL invariant. Joint torus translation invariance therefore equalizes the averaged cell terms; the finite packing L_n/V_n→1/|Delta| gives vanishing local mark entropy. The contraction compares shell local law with the Gaussian lift of its own B_n marginal in TV. It does not imply TV convergence to the limiting marked law, since positional convergence is each-test local tame. The body correctly concludes convergence for every fixed bounded marked local test, then extends to count-tame tests using the shared count marginal and source UI. No fixed-label asymptotic is substituted for a spatial local result.
+
+C5 supplies the missing momentum-growth argument directly. For each specified g=K,p_i,p_i p_j both Gaussian tilts exist for small ±t; Gaussian polynomial domination gives centered log-mgf c_g(t)=O(t²). Conditional entropy positivity against the tilt bounds the centered local sum by [D_cell+N_Delta max c_g(±t)]/t. Averaging, using vanishing cell KL and exact intensity N_n|Delta|/V_n, and taking n→infinity before t→0 proves the stated kinetic/momentum/momentum-squared expectations. This does not rely on TV controlling unbounded functions, and does not claim arbitrary unbounded-mark convergence. No higher moment, singular-potential virial or growing-region result is inferred.
+
+C6 countermodels correctly show that energy concentration and vanishing relative entropy per particle separately fail to give a selected local law without the spatial/variational hypotheses.
+
+## Source terminology precision
+
+Nonblocking source wording issue reported to coordinator: L26 says alpha is a supergradient of F iff P(alpha)=F(rho)+alpha rho. With that supremum/chemical-parameter convention the actual supergradient is -alpha. The coordinator's equations use the correct equality, and no stated conclusion relies on the erroneous sign label. Recommended making P(alpha,beta)=F(rho,beta)+alpha rho explicit in C0 (equivalently -alpha is a supergradient of F) to eliminate ambiguity. Earlier suppliers are read-only; no original was edited. Owned finite-shell and finite-ensemble modules do not consume this sign label.
+
+## Retained limits
+
+The verdict retains periodic exact-N data, the precise superstable regular interaction, beta>0, interior attainable density, differentiability, singleton variational minimizer, and the constructed density window. No exact-surface/arbitrary narrower shell, all-phase uniqueness, DLR identification, Hamiltonian relaxation, complete trajectory model, continuum singular force theorem or empirical measurement is established. Actual momentum conclusions are the specified local sums and dimensions, with all fixed-region and moment qualifications retained.
+
+## Final bounded follow-up before CSM freeze
+
+2026-10-04. Read the current changed C0 in full, including the exact supporting equality P(alpha,beta)=F(rho,beta)+alpha rho and the corrected -alpha concave-supergradient note. This resolves the nonblocking source-terminology ambiguity; the source L26 itself remains read-only. Read new C7 in full: it explicitly adopts alternative full phase-space preparations, retains exact N, the periodic interaction, the constructed shrinking density window and every C0 hypothesis, and states each-fixed-local-test/count-tame convergence separately from the specifically proved C5 momentum sums. It retains uniqueness, disallows unrestricted unbounded/growing-region/exact-surface claims and infers no empirical precision. No substantive follow-up defect found.
+
+The current complete body SHA256 is 738dc6e37811ef51672dc7654fb374e69e26eba6ab4622642e804678c17c5167. Review extent is the original complete C0–C6 read recorded above, plus this bounded current-C0/C7 follow-up; coordinator reports C1–C6 mathematical arguments unchanged. This hash binds the final artifact rather than claiming a new source-wide audit.
+
+Owned F3 has also been clarified to use dimensionless numerical coordinates in a fixed energy unit for its auxiliary Gaussian/Gamma evaluation. Physical D(E) and momentum-moment formulas are unchanged. Re-ran build-records.py structural checks after the clarification; local DAG, dependency resolution, mathematics boundary, B leaves, proof anchors and A/B caps pass.

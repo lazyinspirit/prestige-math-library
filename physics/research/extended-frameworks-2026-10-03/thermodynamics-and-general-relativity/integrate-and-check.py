@@ -1,0 +1,197 @@
+#!/usr/bin/env python3
+"""Integrate Thermodynamics and general relativity research records; structural checks never certify proofs."""
+import hashlib,json,re,sys,subprocess
+from pathlib import Path
+import yaml
+B=Path(__file__).resolve().parent
+ROOT=B.parents[3]
+errors=[]
+records=[]
+inputs=[B/'integrator-inventory.json']+sorted((B/'workers').glob('*/inventory.json'))
+for p in inputs:
+    obj=json.loads(p.read_text()); rows=obj.get('records',obj.get('items',[]))
+    for source in rows:
+        r=dict(source);r['page']=r.get('page',r.get('pair'));r.setdefault('side','A')
+        r['origin_inventory']=str(p.relative_to(B));
+        if r['page'].endswith('-examples'):r['page']=r['page'][:-9];r['side']='B'
+        elif r['page'].endswith('B'):r['page']=r['page'][:-1];r['side']='B'
+        fp,sep,anchor=r['proof_module'].partition('#')
+        if not (B/fp).exists() and (p.parent/fp).exists():r['proof_module']=str((p.parent/fp).relative_to(B))+sep+anchor
+        r.setdefault('status','draft-research')
+        if r['domain']=='physics':
+            r.setdefault('physical_scope',r['scope']);r.setdefault('empirical_premises',[])
+        r.setdefault('proof_status','complete-local-argument' if r['kind'] in ['theorem','lemma','proposition','corollary','physics-theorem','thought-experiment','example','counterexample'] else 'definition-or-nonproof-record')
+        roles=r.setdefault('dependency_roles',{})
+        records.append(r)
+by={}
+for r in records:
+    if r['id'] in by:errors.append('duplicate '+r['id'])
+    by[r['id']]=r
+external={}
+research_suppliers={}
+def register(key,value,origin):
+    if not isinstance(value,dict):return
+    v=dict(value);v.setdefault('id',key);v.setdefault('domain','mathematics')
+    v.setdefault('status',v.get('publication_status',v.get('proof_status','research status as recorded by source')))
+    v.setdefault('exact_statement',v.get('statement',v.get('scope','Exact hypotheses in source proof module')))
+    v.setdefault('source_record',str(origin.relative_to(ROOT)))
+    if v.get('path'):research_suppliers[key]=v
+# Explicit current-worker source registers are controlling.
+for inv in inputs:
+    obj=json.loads(inv.read_text())
+    sup=obj.get('external_suppliers',{})
+    if isinstance(sup,dict):
+        for key,value in sup.items():register(key,value,inv)
+for sp in sorted((B/'workers').glob('*/*supplier*.json')):
+    obj=json.loads(sp.read_text())
+    def walk(o):
+        if isinstance(o,dict):
+            key=o.get('id',o.get('key'))
+            if key and o.get('path'):register(key,o,sp)
+            for k,v in o.items():
+                if isinstance(v,dict) and v.get('path'):register(k,v,sp)
+                walk(v)
+        elif isinstance(o,list):
+            for v in o:walk(v)
+    walk(obj)
+# Original research interfaces resolve by exact canonical inventory ID.
+prior=[ROOT/'physics/research/first-principles-2026-10-03',ROOT/'physics/research/extended-frameworks-2026-10-03/fluid-dynamics',ROOT/'physics/research/extended-frameworks-2026-10-03/relativistic-particle-mechanics',ROOT/'physics/research/extended-frameworks-2026-10-03/einstein-maxwell-models',ROOT/'physics/research/extended-frameworks-2026-10-03/quantum-field-theory',ROOT/'physics/research/extended-frameworks-2026-10-03/classical-statistical-mechanics',ROOT/'physics/research/extended-frameworks-2026-10-03/quantum-statistical-mechanics']
+for d in prior:
+    for ip in sorted(d.rglob('*inventory*.json')):
+        try:obj=json.loads(ip.read_text())
+        except Exception:continue
+        def priorwalk(o):
+            if isinstance(o,dict):
+                if o.get('id') and o.get('domain') and (o.get('proof_module') or isinstance(o.get('argument'),str)):
+                    v=dict(o);fp,sep,anchor=(v.get('proof_module') or v['argument']).partition('#');path=None
+                    if v.get('proof_file'):fp=v['proof_file'];anchor=v.get('proof_module',v.get('section',''))
+                    for par in [ip.parent,*ip.parents]:
+                        if (par/fp).exists():path=par/fp;break
+                    if path:
+                        v['path']=str(path.relative_to(ROOT));v['locator']=anchor or v.get('section','');v.setdefault('status','unpublished research interface');v['reading_status']='Source metadata indexed; actual proof reading recorded by consuming specialist'
+                        if v['id'] not in research_suppliers:register(v['id'],v,ip)
+                for v in o.values():priorwalk(v)
+            elif isinstance(o,list):
+                for v in o:priorwalk(v)
+        priorwalk(obj)
+aliases={}
+for key,v in research_suppliers.items():
+    if v.get('path','').startswith('items/') and (ROOT/v['path'].split('#')[0]).exists():aliases.setdefault(key,[Path(v['path'].split('#')[0]).stem])
+for r in records:
+    expanded=[]
+    for dep in r['deps']:expanded.extend(aliases.get(dep,[dep]))
+    r['deps']=list(dict.fromkeys(expanded))
+    old=r['dependency_roles'];r['dependency_roles']={d:old[d] for d in r['deps'] if d in old}
+for r in records:
+    for k in ['id','title','domain','kind','deps','proof_module','scope','page','side']:
+        if not r.get(k) and k!='deps':errors.append('missing '+k+' '+r['id'])
+    fp,_,anchor=r['proof_module'].partition('#')
+    path=B/fp
+    if not path.exists():
+        path=ROOT/fp
+    if not path.exists():errors.append('missing proof '+r['id']+' '+fp);continue
+    body=path.read_text()
+    if anchor and not (f'id="{anchor}"' in body or f"id='{anchor}'" in body):
+        slugs=[]
+        for line in body.splitlines():
+            if line.startswith('#'):
+                s=line.lstrip('# ').lower();s=re.sub(r'[^\w\- ]','',s);s=s.replace(' ','-');slugs.append(s)
+        if anchor not in slugs:errors.append('unresolved anchor '+r['id']+' '+anchor)
+    r['proof_module_sha256']=hashlib.sha256(path.read_bytes()).hexdigest()
+    for dep in r['deps']:
+        if dep in by:
+            d=by[dep]
+            if r['domain']=='mathematics' and d['domain']!='mathematics':errors.append('math physical edge '+dep+' '+r['id'])
+            if d['side']=='B' and (d['page']!=r['page'] or r['side']!='B'):errors.append('B consumed '+dep+' '+r['id'])
+            role='mathematical-premise' if d['domain']=='mathematics' else ('physical-assumption' if d['kind']=='postulate' else 'physical-result' if d['kind'] in ['physics-theorem','thought-experiment'] else 'formulation-prerequisite')
+        else:
+            p=ROOT/'items'/f'{dep}.md'
+            if not p.exists():p=ROOT/'physics'/'items'/f'{dep}.md'
+            if p.exists():
+                t=p.read_text();parts=t.split('---',2);meta=yaml.safe_load(parts[1]) if len(parts)>2 else {}
+                domain=meta.get('domain','mathematics');status=meta.get('status','draft')
+                if r['domain']=='mathematics' and domain!='mathematics':errors.append('external math physical edge '+dep+' '+r['id'])
+                statement=re.search(r'## (?:Statement|Definition)\n(.*?)(?=\n## |\Z)',t,re.S)
+                external.setdefault(dep,{'id':dep,'path':str(p.relative_to(ROOT)),'status':status,'domain':domain,'kind':meta.get('kind'),'exact_statement':statement.group(1).strip() if statement else 'Inspect source definition body','sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'reading_status':'status/statement extracted; actual proof-reading extent belongs to specialist supplier record','consumers':[]})['consumers'].append(r['id'])
+                role='mathematical-premise' if domain=='mathematics' else 'formulation-prerequisite'
+            else:
+                if dep in research_suppliers:
+                    v=dict(research_suppliers[dep]);v.setdefault('domain','mathematics');v.setdefault('consumers',[])
+                    path=ROOT/v['path'].split('#')[0]
+                    if not path.exists():errors.append('missing external research file '+dep)
+                    else:v['sha256']=hashlib.sha256(path.read_bytes()).hexdigest()
+                    external.setdefault(dep,v)['consumers'].append(r['id'])
+                    role='mathematical-premise' if v['domain']=='mathematics' else 'physical-assumption'
+                    if r['domain']=='mathematics' and v['domain']!='mathematics':errors.append('external research math physical '+dep)
+                else:errors.append('unresolved dependency '+dep+' '+r['id']);role='unresolved'
+        r['dependency_roles'].setdefault(dep,role)
+    if set(r['dependency_roles'])!=set(r['deps']):errors.append('role coverage '+r['id'])
+    if r['domain']=='mathematics' and r['kind'] in ['postulate','physics-theorem','thought-experiment','experiment']:errors.append('kind/domain '+r['id'])
+    if r['kind'] in ['theorem','lemma','proposition','corollary'] and r['domain']!='mathematics':errors.append('kind/domain '+r['id'])
+# Exact external original homes; research suppliers remain source-module interfaces.
+for e in external.values():e['home_kind']='research-proof-module' if e.get('path','').startswith('physics/research/') else 'canonical-root-item'
+for pagefile in sorted((ROOT/'library').glob('*/*.md')):
+    t=pagefile.read_text();parts=t.split('---',2)
+    if len(parts)<3:continue
+    try:m=yaml.safe_load(parts[1]) or {}
+    except Exception:continue
+    for id in list(m.get('items',[]) or [])+list(m.get('examples',[]) or []):
+        if id in external:
+            external[id].setdefault('original_page_homes',[]).append({'path':str(pagefile.relative_to(ROOT)),'page':m.get('page'),'is_B':pagefile.stem.endswith('-examples'),'status':m.get('status','draft')})
+for id,e in external.items():
+    homes=e.get('original_page_homes',[])
+    if homes and all(p['is_B'] for p in homes):errors.append('external B-only supplier '+id)
+# Stable supplier-first item order.
+ordered=[];active=set();done=set()
+def visit(id):
+    if id in active:errors.append('item cycle '+id);return
+    if id in done:return
+    active.add(id)
+    for dep in by[id]['deps']:
+        if dep in by:visit(dep)
+    active.remove(id);done.add(id);ordered.append(by[id])
+for id in by:visit(id)
+pages={}
+for r in ordered:
+    key=r['page'];p=pages.setdefault(key,{'pair':key,'library':r['domain'],'A':[],'B':[],'requires':[],'status':'draft-research','B_leaf':True})
+    if p['library']!=r['domain']:errors.append('mixed page '+key)
+    p[r['side']].append(r['id'])
+    for dep in r['deps']:
+        if dep in by and by[dep]['page']!=key:
+            dp=by[dep]['page']
+            if dp not in p['requires']:p['requires'].append(dp)
+for p in pages.values():
+    if not p['A'] or not p['B']:errors.append('unpopulated pair '+p['pair'])
+    for side in ['A','B']:
+        if len(p[side])>100:errors.append('cap '+p['pair']+' '+side)
+# Page DAG, topological pathway.
+porder=[];done=set();active=set()
+def pv(k):
+    if k in active:errors.append('page cycle '+k);return
+    if k in done:return
+    active.add(k)
+    for d in pages[k]['requires']:pv(d)
+    active.remove(k);done.add(k);porder.append(pages[k])
+for k in pages:pv(k)
+out={'status':'draft-research-not-production-certification','records':ordered,'pairs':porder,'external_suppliers':external}
+(B/'proposed-inventory.json').write_text(json.dumps(out,indent=2,ensure_ascii=False)+'\n')
+(B/'supplier-map.json').write_text(json.dumps({'status':'exact-direct-supplier-statuses-not-audits','external_item_suppliers':list(external.values()),'research_source_modules':[{'path':str(p.relative_to(B)),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'disposition':'actual reading extent/uses in supplier-dispositions.md and worker ledgers'} for p in sorted((B/'workers').glob('*/*.md'))]},indent=2,ensure_ascii=False)+'\n')
+claims=[{'id':r['id'],'kind':r['kind'],'domain':r['domain'],'scope':r['scope'],'home':r['page']+'-'+r['side'],'argument':r['proof_module'],'argument_sha256':r.get('proof_module_sha256'),'prerequisites':r['deps'],'status':r['proof_status']} for r in ordered]
+(B/'claim-coverage.json').write_text(json.dumps({'status':'local-argument-mapping-not-independent-review','claims':claims},indent=2,ensure_ascii=False)+'\n')
+raw_pdf_paths=list(B.rglob('*.pdf'))
+for raw in raw_pdf_paths:
+    if subprocess.run(['git','check-ignore','-q',str(raw)],cwd=ROOT).returncode!=0:errors.append('unignored raw source '+str(raw.relative_to(B)))
+summary={'status':'pass' if not errors else 'fail','checks':'IDs, exact argument files/anchors, deps, kind/domain, roles, DAGs, homogeneous pages, unique homes, B leaves, caps','input_inventories':[str(p.relative_to(B)) for p in inputs],'items':len(records),'A_items':sum(r['side']=='A' for r in records),'B_items':sum(r['side']=='B' for r in records),'pairs':len(pages),'max_A':max((len(p['A']) for p in pages.values()),default=0),'max_B':max((len(p['B']) for p in pages.values()),default=0),'external_suppliers':len(external),'raw_pdf_count':len(raw_pdf_paths),'errors':errors,'independent_review':False}
+(B/'structural-checks.json').write_text(json.dumps(summary,indent=2)+'\n')
+lines=['# Supplier-first Thermodynamics and general relativity A/B pathway','','All proposed pages are draft research. The order below is computed from actual dependency homes; every B companion is a leaf. Homogeneous mathematics helper pages are separate from physical model pages. Counts obey the 100-item A and B caps.','', '| Order | Pair | Library | A/B counts | Earlier A prerequisites |','|---|---|---|---|---|']
+for i,p in enumerate(porder,1):lines.append(f"| {i} | {p['pair']} | {p['library']} | {len(p['A'])}/{len(p['B'])} | {', '.join(p['requires']) or 'external or self-contained'} |")
+for p in porder:
+    lines += ['', '## '+p['pair'], '', 'A develops '+ '; '.join(by[id]['title'] for id in p['A'])+'.']
+    if p['B']:lines += ['', 'B applies or tests those interfaces with '+ '; '.join(by[id]['title'] for id in p['B'])+'. Its items are not suppliers of other pages.']
+    lines += ['', 'Exact statement hypotheses, argument locators, prerequisite roles and publication/proof status are recorded per item in proposed-inventory.json.']
+(B/'inventory-and-pathway.md').write_text('\n'.join(lines)+'\n')
+# The argument review is recorded prose evidence, not inferred from these structural tests.
+closure={'status':'research-local-argument-review; not-independent-acceptance','independent_review':False,'declared_interfaces':[{'id':r['id'],'scope':r['scope'],'argument':r['proof_module'],'prerequisites':r['deps'],'recorded_argument_status':r['proof_status']} for r in ordered],'structural_errors':errors,'remaining_prospective_scope_carrier':'closure-notes.md','review_and_reading_carrier':'supplier-dispositions.md','worker_closure_carriers':[str(p.relative_to(B)) for p in sorted((B/'workers').glob('*/closure-ledger.json'))]}
+(B/'closure-ledger.json').write_text(json.dumps(closure,indent=2,ensure_ascii=False)+'\n')
+print(json.dumps(summary))
+sys.exit(bool(errors))

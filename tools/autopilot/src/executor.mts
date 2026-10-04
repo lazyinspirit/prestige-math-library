@@ -1240,8 +1240,10 @@ export class Executor {
     // red blocker beside work that already has its replacement receipt.
     // Anyone reading that row cannot distinguish it from a live problem.
     if (this.state.data.blockers.length) {
-      const doneIds = new Set(this.stages.filter((s: any) => this.stageStatus(s, ctx).done).map((s: any) => s.id));
-      const completeByStage = new Map(this.stages.map((s: any) => [s.id, this.unitsComplete(s, ctx)]));
+      const blockedStageIds = new Set(this.state.data.blockers.map((b: any) => b.stage));
+      const blockedStages = this.stages.filter((s: any) => blockedStageIds.has(s.id));
+      const doneIds = new Set(blockedStages.filter((s: any) => this.stageStatus(s, ctx).done).map((s: any) => s.id));
+      const completeByStage = new Map(blockedStages.map((s: any) => [s.id, this.unitsComplete(s, ctx)]));
       const recoveredDispatch = (blocker: any) => {
         const message = String(blocker.message ?? '');
         const match = /\(covers ([^)]+)\)$/.exec(message)
@@ -1365,6 +1367,9 @@ export class Executor {
       });
       if (outcome === 'blocked') return 'blocked';
     }
+
+    // Give queued process launches a turn before synchronous join checks.
+    if (this.inflight.size) await sleep(0, this.signal);
 
     // THE GROUP EXIT — the level join.
     //
@@ -2205,7 +2210,13 @@ export class Executor {
         // controls and adopted processes, whose completion has no local promise.
         if (r === 'working' && !this.state.paused
           && (this.stateVersion !== version
-            || this.currentStage().stage?.id !== this.state.data.stage)) continue;
+            || this.currentStage().stage?.id !== this.state.data.stage)) {
+          // Queued dispatches launch through timers. Yield between immediate
+          // state-change passes so synchronous artifact scans cannot starve
+          // those launches or adopted-worker result collection.
+          await sleep(0, this.signal);
+          continue;
+        }
         const wait = new AbortController();
         try {
           await Promise.race([

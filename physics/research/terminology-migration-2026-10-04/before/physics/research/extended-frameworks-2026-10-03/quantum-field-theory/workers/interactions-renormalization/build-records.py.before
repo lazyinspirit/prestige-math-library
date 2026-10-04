@@ -1,0 +1,109 @@
+from pathlib import Path
+import json,hashlib
+b=Path(__file__).parent;r=[]
+def add(id,title,kind,deps,sec,scope,page,side='A',domain='mathematics'):
+ row=dict(id=id,title=title,domain=domain,kind=kind,deps=deps,roles={d:('physical-assumption' if d.startswith('post-') else 'physical-result' if d.startswith('pthm-') else 'formulation-prerequisite' if d=='def-qft-framework-units' else 'mathematical-premise') for d in deps},page=page,side=side,proof_module='workers/interactions-renormalization/proofs.md#'+sec,scope=scope,status='proposed-research',proof_status='defined' if kind=='definition' else 'source-and-scope-only' if kind in ['postulate','remark'] else 'complete-exact-argument')
+ if domain=='physics':row.update(physical_scope=scope,empirical_premises=[])
+ r.append(row)
+a='QFT-IR01';c='QFT-IR02';w='QFT-IR03';e='QFT-IR04';d='QFT-IR05';p='QFT-PIR01'
+add('def-qft-regulated-polynomial-hamiltonian','Finite-lattice polynomial Hamiltonian data','definition',['lem-l-two-with-the-integral-pairing-is-a-hilbert-space','def-axiom-of-choice'],'ir00','finiteN L2(RN), a_j>0, coercive real polynomial, exact field/mode regulator and scaled quantities',a)
+add('lem-qft-coercive-polynomial-form-domain','Coercive polynomial form completion and injection','lemma',['def-qft-regulated-polynomial-hamiltonian','thm-c-c-infinity-rn-is-dense-in-l-p-of-rn'],'ir01','Q completion injects into L2 with actual weak derivatives and weighted norm',a)
+add('lem-qft-cube-poincare-compact-form-inclusion','Cube mean estimate and compact form inclusion','lemma',['lem-qft-coercive-polynomial-form-domain'],'ir01','finiteN; explicit cube approximation and coercive tails, no generic Rellich shortcut',a)
+add('lem-qft-polynomial-positive-compact-resolvent','Positive injective compact polynomial form resolvent','lemma',['lem-qft-cube-poincare-compact-form-inclusion','thm-riesz-representation-for-hilbert-space'],'ir01','R:L2→Q→L2; variational identity, symmetry, positivity, dense range',a)
+add('thm-qft-self-adjoint-regulated-interaction','Self-adjoint unbounded polynomial interaction at fixed regulator','theorem',['lem-qft-polynomial-positive-compact-resolvent','thm-spectral-theorem-for-compact-self-adjoint-operators'],'ir02','spectral coefficient domain; extends differential polynomial onCc∞; compact resolvent; ground exists',a)
+add('thm-qft-regulated-global-unitary-evolution','Global unitary evolution at fixed finite regulator','theorem',['thm-qft-self-adjoint-regulated-interaction'],'ir02','spectral U(t); strong continuity; differentiation exactly onD(H); no cutoff-removal',a)
+add('lem-qft-hermite-oscillator-research-supplier','Exact Hermite oscillator research supplier','lemma',[],'ir02','NRQM M12 full Hermite/diagonal proof inspected, anisotropic finite-mode spectrum and exact domains',a)
+add('thm-qft-regulated-gibbs-trace','Finite-regulator interacting Gibbs trace normalization','theorem',['thm-qft-self-adjoint-regulated-interaction','lem-qft-hermite-oscillator-research-supplier','lem-nuclear-series-characterizes-trace-norm','thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues'],'ir02','explicit oscillator spectral comparison; β>0 trace finite; bounded expectations',a)
+add('lem-qft-regulated-ground-variational-bound','Ground spectral form variational bound','lemma',['thm-qft-self-adjoint-regulated-interaction'],'ir09','Q Bessel estimate gives infRayleigh=ground; no nondegeneracy hypothesis',a)
+add('ex-qft-quartic-ground-energy-bound','Controlled quartic oscillator ground-energy bound','example',['lem-qft-regulated-ground-variational-bound','lem-qft-hermite-oscillator-research-supplier'],'ir09','0≤Egλ−Eg0≤3aλ/(2m²); explicit Gaussian trial state',a,side='B')
+add('rem-qft-cutoff-vs-continuum-interaction','Fixed regulator is distinct from continuum interacting existence','remark',[],'ir08','finite operators do not prove4D continuum or infinite-volume convergence',a,side='B')
+add('def-qft-finite-euclidean-interacting-measure','Finite Euclidean quartic interacting measure','definition',[],'ir03','positive finite covariance; λ≥0; U quartic nonnegative; explicit Gaussian and normalized tilt',c)
+add('lem-qft-finite-gaussian-wick-moments','Finite Gaussian normalization and Wick moments','lemma',['def-qft-finite-euclidean-interacting-measure'],'ir03','square completion; all odd moments0; full pairing formula',c)
+add('thm-qft-finite-euclidean-polynomial-measure','Actual finite Euclidean polynomial measure and moments','theorem',['def-qft-finite-euclidean-interacting-measure'],'ir03','Z positivefinite, polynomial moments, one-sided parameter derivatives; no OS reconstruction',c)
+add('def-qft-finite-wick-normal-powers','Finite covariance Wick normal powers','definition',['lem-qft-finite-gaussian-wick-moments'],'ir03','generatingexp(tq−Ctt/2); explicit quartic subtraction',c)
+add('thm-qft-finite-asymptotic-wick-expansion','Finite interacting asymptotic Wick expansion with remainder','theorem',['thm-qft-finite-euclidean-polynomial-measure','lem-qft-finite-gaussian-wick-moments'],'ir03','every fixed order justified; M-dependent moment remainder; formal inverse Z',c)
+add('cex-qft-zero-dimensional-perturbation-radius-zero','An existing interacting measure has zero-radius perturbation series','counterexample',['thm-qft-finite-asymptotic-wick-expansion'],'ir03','Gaussian q4 moments coefficient ratio→∞, yetZλ finiteλ≥0',c,side='B')
+add('ex-qft-wick-quartic-coercivity','Explicit stability of a Wick-subtracted quartic','example',['def-qft-finite-wick-normal-powers','lem-qft-coercive-polynomial-form-domain'],'ir09','q4−6Cq2+3C2≥q4/2−15C2; constant shift gives quadratic coercivity',c,side='B')
+add('ex-qft-finite-wick-quadratic-pair','Finite Wick quadratic pairing','example',['def-qft-finite-wick-normal-powers'],'ir09','E(:q2::q2:)=2C²',c,side='B')
+add('def-qft-regular-polynomial-functional-algebra','Regular polynomial field functional algebra','definition',[],'ir04','smooth compact symmetric kernels; no diagonal local powers',w)
+add('lem-qft-tensor-test-function-density','Tensor-product tests are dense in smooth compact kernel topology','lemma',[],'ir04','periodic Fourier derivative tails plus product compact cutoffs',w)
+add('thm-qft-regular-wick-star-associativity','Regular Wick-star contractions are well defined and associative','theorem',['def-qft-regular-polynomial-functional-algebra','lem-qft-tensor-test-function-density','thm-tensor-product-distributions-and-iterated-pairings','lem-distribution-pairing-with-smooth-parameter-families'],'ir04','arbitrary prescribed continuous bidistributionW; finite contractions; involution if Hermitian',w)
+add('lem-qft-regular-normal-order-isomorphism','Regular normal-ordering change is an exact star isomorphism','lemma',['thm-qft-regular-wick-star-associativity'],'ir04','symmetricK; alphaK=exp(ηKδ²/2) mapsstarW tostarW+K',w)
+add('def-qft-regular-formal-time-ordering','Regular timeordered contraction coefficients','definition',['def-qft-regular-polynomial-functional-algebra','lem-qft-free-time-ordered-kernel'],'ir04causal','symmetricH, derivativecontractions smoothkernels, formalcouplingS',w)
+add('thm-qft-regular-formal-causal-factorization','All regular formal temporal causal-factorization coefficients','theorem',['thm-qft-regular-wick-star-associativity','def-qft-regular-formal-time-ordering','lem-qft-scalar-causal-commutator'],'ir04causal','H=W under causal support order via actual scalarH; groupcontractions; spacelike starlocality; no series convergence',w)
+add('thm-qft-bounded-regulator-dyson-factorization','Bounded regulated Dyson convergence and temporal factorization','theorem',[],'ir04','bounded stronglycontinuous selfadjointV; finiteintervalnormfactorial bound; no unboundedquartic Dyson convergence',w)
+add('ex-qft-regular-quadratic-star-product','Explicit regular quadratic Wick star product','example',['thm-qft-regular-wick-star-associativity'],'ir09','finite k0,1,2 contraction formula',w,side='B')
+add('rem-qft-local-wick-diagonal-obligation','Local Wick diagonal products need additional prerequisites','remark',[],'ir04causal','localphi4 is notregular functional; no hidden singularproduct/fullEG claim',w,side='B')
+add('def-qft-distribution-scaling-degree','Scaling degree and local extension space','definition',[],'ir05','distribution dilationrho^-nT(phi(./rho)); finite realdegree; point andsmoothpowerbound classes',e)
+add('lem-qft-test-frechet-uniform-scaling-order','Complete test Frechet space and uniform scaling order','lemma',['def-axiom-of-choice','thm-baire-category-for-complete-metric-spaces','def-qft-distribution-scaling-degree'],'ir05general','explicit complete metric plus Baire uniformorder onfixedannular support',e)
+add('thm-qft-finite-scaling-degree-extension','Every finite-scaling-degree punctured distribution has exact-degree extension','theorem',['lem-qft-test-frechet-uniform-scaling-order'],'ir05general','dyadiccutoff/Wjet construction; finite realδ; exactsd; full movingtest estimates',e)
+add('prop-qft-local-counterterm-jet-classification','Point-extension counterterms form a finite delta-jet space','proposition',['thm-qft-finite-scaling-degree-extension','thm-distributions-supported-at-one-point'],'ir05general','|alpha|≤floorδ−n; uniquenessδ<n; no arbitrarydistributionproduct claim',e)
+add('prop-qft-four-dimensional-log-scale-anomaly','Exact four-dimensional Euclidean logarithmic scale anomaly','proposition',['thm-qft-finite-scaling-degree-extension','prop-qft-local-counterterm-jet-classification'],'ir06','C0²|x|^-4; residue1/(8π²); Tμ−Tν=reslogμ/ν δ; nohomogeneousextension',e)
+add('ex-qft-unique-subcritical-extension','Subcritical singularity has a unique same-degree extension','example',['prop-qft-local-counterterm-jet-classification'],'ir05','|x|^-δ δ<n locallyintegrable; unique atallowed degree',e,side='B')
+add('def-qft-quartic-graph-power-counting','Finite quartic graph and superficial scaling conventions','definition',[],'ir07','connected graphV≥1 internalI externalE loopsL; stated propagator scaling only',d)
+add('prop-qft-quartic-superficial-degree','Quartic graph superficial degree from exact counting','proposition',['def-qft-quartic-graph-power-counting'],'ir07','4V=2I+E,L=I−V+1,ω=D+(D−4)V−(D−2)E/2; not convergence',d)
+add('prop-qft-scalar-engineering-dilation','Scalar engineering dimensions and tree-level dilation','proposition',[],'ir07','kinetic normalization gives[phi]=(D−2)/2,[gr]=D−r(D−2)/2; noquantumRGfixedpoint',d)
+add('ex-qft-four-point-one-loop-log-degree','A four-point quartic one-loop graph has logarithmic superficial degree','example',['prop-qft-quartic-superficial-degree','prop-qft-four-dimensional-log-scale-anomaly'],'ir07','V2 I2 E4 L1 D4 degree0; explicit Euclidean kernel extension separate',d,side='B')
+add('post-qft-regulated-polynomial-model','Adopted finite-regulator bosonic polynomial model','postulate',['def-qft-regulated-polynomial-hamiltonian','def-qft-framework-units'],'ir09','fixed finite lattice/mode data and coercive polynomial; does not assume unconstructed continuum representation',p,domain='physics')
+add('pthm-qft-regulated-interacting-model-evolution','Constructed regulated interacting model evolution','physical-theorem',['post-qft-regulated-polynomial-model','post-qft-constructed-model-and-measurement','thm-qft-self-adjoint-regulated-interaction','thm-qft-regulated-global-unitary-evolution'],'ir09','actual finiteN unboundedH and domains before physical interpretation; fixedcutoff global time',p,domain='physics')
+add('post-qft-regulated-equilibrium-state','Adopted finite-regulator equilibrium state','postulate',['post-qft-regulated-polynomial-model','thm-qft-regulated-gibbs-trace'],'ir09','T>0,β=1/kBT,chosen normalized Gibbs state only at fixed regulator',p,domain='physics')
+add('pthm-qft-regulated-equilibrium-predictions','Finite-regulator interacting Gibbs predictions','physical-theorem',['post-qft-regulated-equilibrium-state','post-qft-constructed-model-and-measurement','thm-qft-regulated-gibbs-trace'],'ir09','trace normalized boundedobservable expectations; no infinitevolumetrace',p,domain='physics')
+add('pthm-qft-quartic-model-energy-bound','Controlled quartic-model ground-energy bound','physical-theorem',['post-qft-regulated-polynomial-model','post-qft-constructed-model-and-measurement','lem-qft-regulated-ground-variational-bound','lem-qft-hermite-oscillator-research-supplier'],'ir09','displayed Gaussian bound multiplied byE*; model energy not observed result',p,domain='physics')
+add('ex-qft-one-mode-interacting-model','One-mode quartic model is a genuine constructed interacting example','example',['pthm-qft-regulated-interacting-model-evolution','pthm-qft-quartic-model-energy-bound'],'ir09','λ>0 actual infinite-dimensional Hilbert polynomial interaction; exact fixedregulator bounds',p,side='B',domain='physics')
+add('rem-qft-formal-renormalization-physical-status','Formal coefficient renormalization retains its exact status','remark',['prop-qft-four-dimensional-log-scale-anomaly'],'ir08','no scaleanomaly→measured beta function or formalseries→continuumexistence',p,side='B',domain='physics')
+external_math=['def-axiom-of-choice','lem-l-two-with-the-integral-pairing-is-a-hilbert-space','thm-c-c-infinity-rn-is-dense-in-l-p-of-rn','thm-riesz-representation-for-hilbert-space','thm-spectral-theorem-for-compact-self-adjoint-operators','thm-distributions-supported-at-one-point','thm-baire-category-for-complete-metric-spaces','lem-nuclear-series-characterizes-trace-norm','thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues','thm-tensor-product-distributions-and-iterated-pairings','lem-distribution-pairing-with-smooth-parameter-families','lem-qft-free-time-ordered-kernel','lem-qft-scalar-causal-commutator']
+external_physics=['def-qft-framework-units','post-qft-constructed-model-and-measurement']
+for x in r:
+ if x['domain']=='physics':x['sources']=[dict(title='David Tong, Quantum Field Theory, canonical quantization and scalar polynomial interactions; exact regulated operator proof here',url='https://www.damtp.cam.ac.uk/user/tong/qft/qft.pdf')]
+pages=[dict(page=pg,domain='physics' if pg==p else 'mathematics',A=[x['id'] for x in r if x['page']==pg and x['side']=='A'],B=[x['id'] for x in r if x['page']==pg and x['side']=='B'],B_leaf=True) for pg in [a,c,w,e,d,p]]
+(b/'inventory.json').write_text(json.dumps(dict(records=r,pages=pages,external_mathematics=external_math,external_physics=external_physics),indent=2)+'\n')
+src=[]
+for id in [i for i in external_math if not i.startswith('lem-qft-')]:
+ path=Path('items')/(id+'.md');txt=path.read_text();src.append(dict(id=id,path=str(path),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),status='published' if 'status: published' in txt else 'draft',reading_extent='current entire statement/definition and proof read; AC also read earlier in same thread; full transitive dependencies not reread',uses={'thm-riesz-representation-for-hilbert-space':['IR01 actual form resolver'],'thm-spectral-theorem-for-compact-self-adjoint-operators':['IR01/IR02 injective compactR eigenbasis'],'thm-distributions-supported-at-one-point':['IR05/IR05G finite delta jet ambiguity'],'thm-baire-category-for-complete-metric-spaces':['IR05G annular-test uniform-order proof; DC carried fromAC'],'lem-nuclear-series-characterizes-trace-norm':['IR02 traceclass from actual summable positive diagonal Gibbs nuclear series'],'thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues':['IR02 positive Gibbs trace equals summable weights'],'thm-tensor-product-distributions-and-iterated-pairings':['IR04/IR04C actual tensor contraction continuity/iterated pairing'],'lem-distribution-pairing-with-smooth-parameter-families':['IR04 contraction produces smooth remaining kernel; derivatives pass with common compact support']}.get(id,['IR00/IR01 exact L2/foundation interface']),independent_transitive_certification=False))
+path=Path('physics/research/first-principles-2026-10-03/non-relativistic-quantum-mechanics/scaffold/mathematical-prerequisites.md');src.append(dict(path=str(path),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),status='completed-research-proofs-not-production-acceptance',reading_extent='M12 and M14 entire actual arguments; M6 real-multiplier/Fourier/boundedpotential argument inspected via displayed lines43–49; other sections only targeted search context, not full reading',uses=['IR00 exact coordinate multiplier/momentum scope','IR02 complete Hermite and diagonal operator/Gibbs comparison','IR04 bounded Dyson proof'],unconsumed='M6 boundedpotential cannot construct our unboundedquartic; IR01 supplies missing form argument'))
+path=Path('physics/research/extended-frameworks-2026-10-03/quantum-field-theory/workers/free-fields/proof-modules.md');src.append(dict(path=str(path),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),status='completed-concurrent-research-suppliers',reading_extent='FF3/FF4 and FF9 full actual statements and arguments read; other free modules/transitive proofs not reread',ids=['lem-qft-free-time-ordered-kernel','lem-qft-scalar-causal-commutator'],uses=['IR04C actual symmetricHfuture restriction, W−Wt=−iΔfree, spacelike vanishing; no arbitrarypointproduct']))
+for file,title,url,extent,uses,fail in [
+ ('brunetti-fredenhagen','Brunetti and Fredenhagen, Microlocal analysis and interacting quantum field theories: renormalization on physical backgrounds','https://arxiv.org/pdf/math-ph/9903028','PDF pp22–27 fully displayed/read, including complete point-extension Theorems5.2/5.3 proofs pp23–25; source38pages retained, not whole manuscript read',['IR05G exact arbitraryfinite-scalingdegree point extension; Baire/movingtest/decomposition details supplied locally','IR06 logscaling origin context; no unexamined general microlocal/causalEG theorem consumed'],[]),
+ ('tong-qft','David Tong, Quantum Field Theory lecture notes','https://www.damtp.cam.ac.uk/user/tong/qft/qft.pdf','PDF pp27–31,53–56,62–65 fully read; printed pp21–25,47–50,56–59; canonical/operator formalism, interaction/engineering dimensions and complete displayed Wick induction; source155pages retained, not whole course read',['restricted canonical physicalmodel motivation','IR03/IR04 Wick calculations comparison','IR07 engineering dimensions; no source informal continuum pointproducts or convergence accepted'],['Initial curl failed TLS certificate chain validation; fitz had nofile following that failure','Recovered bycurl -k at same author URL, hashes retained; TLSidentity verification not claimed'])]:
+ path=b/'sources/raw'/f'{file}.pdf';src.append(dict(title=title,url=url,raw_path=str(path),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),retrieval='full PDF downloaded/extracted with installed fitz',reading_extent=extent,uses=uses,retrieval_failures=fail,license='No redistribution permission inferred; raw locally retained and ignored'))
+path=Path('physics/research/extended-frameworks-2026-10-03/quantum-field-theory/quantities-and-postulates.md')
+src.append(dict(path=str(path),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),status='current-coordinator-research-physical-definitions-and-adoption',reading_extent='entire file read',ids=external_physics,uses='IR08/IR09 physical wrappers: constructed-model premise only after actual Hamiltonian/domain/representation; no formalS continuum shortcut; four-dimensional scalar field normalizationm^-1'))
+src.append(dict(paths=['research/plan-pde-track.md','research/plan-fourier-analysis-track.md','research/plan-functional-analysis-track.md'],status='planned-prose-not-proof',reading_extent='summaries/targeted supplier searches already read in prior assignments in this thread; no whole-plan/fullbook reading claim',uses='exact spectral/Riesz/point-support/Baire suppliers read; missing form/compact/test estimates supplied locally'))
+(b/'sources-and-suppliers.json').write_text(json.dumps(src,indent=2)+'\n');(b/'sources/.gitignore').write_text('raw/\n')
+ids={x['id']:x for x in r};external=set(external_math+external_physics);color={}
+assert len(ids)==len(r)
+def visit(i):
+ assert color.get(i)!=1,i
+ if color.get(i)==2:return
+ color[i]=1
+ for dep in ids[i]['deps']:
+  assert dep in ids or dep in external,(i,dep)
+  if dep in ids:
+   assert ids[dep]['side']=='A',(i,dep)
+   if ids[i]['domain']=='mathematics':assert ids[dep]['domain']=='mathematics',(i,dep)
+   visit(dep)
+  elif ids[i]['domain']=='mathematics':assert dep in external_math
+ color[i]=2
+for i in ids:visit(i)
+proof=(b/'proofs.md').read_text()
+for x in r:assert 'id="'+x['proof_module'].split('#')[1]+'"' in proof,x['id']
+page_edges={}
+for x in r:
+ key=(x['page'],x['side']);page_edges.setdefault(key,set())
+ for dep in x['deps']:
+  if dep in ids:
+   target=(ids[dep]['page'],ids[dep]['side'])
+   if target!=key:page_edges[key].add(target)
+pc={}
+def pv(k):
+ assert pc.get(k)!=1,k
+ if pc.get(k)==2:return
+ pc[k]=1
+ for x in page_edges.get(k,[]):pv(x)
+ pc[k]=2
+for k in page_edges:pv(k)
+for pg in pages:
+ assert len(pg['A'])<100 and len(pg['B'])<100
+ assert all(ids[i]['domain']==pg['domain'] for i in pg['A']+pg['B'])
+report=dict(local_only=True,independent_acceptance=False,items=len(r),unique_ids=True,declared_deps_resolved=True,item_DAG=True,side_page_DAG=True,pure_math_boundary=True,homogeneous_pages=True,B_leaves=True,under100_each=True,anchors=True,page_counts={x['page']:{'A':len(x['A']),'B':len(x['B'])} for x in pages})
+(b/'structural-checks.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report))

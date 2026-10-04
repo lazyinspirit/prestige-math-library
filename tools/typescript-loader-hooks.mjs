@@ -22,6 +22,10 @@ export async function load(url, context, nextLoad) {
       module: ts.ModuleKind.ESNext,
       target: ts.ScriptTarget.ES2022,
       moduleResolution: ts.ModuleResolutionKind.Bundler,
+      // .tsx sources (the renderer components) need an explicit JSX emit;
+      // without it the untransformed JSX reaches Node and every SSR tool that
+      // loads the application renderer fails with "Unexpected token '<'".
+      jsx: ts.JsxEmit.ReactJSX,
       isolatedModules: true,
       sourceMap: false,
       inlineSourceMap: false,

@@ -1,0 +1,1 @@
+../workers/solutions/check-kn.py

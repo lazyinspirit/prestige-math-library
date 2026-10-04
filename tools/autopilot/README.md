@@ -12,6 +12,12 @@ operating contract and CLAUDE.md for agent instructions.
 - src/doctor.mts: command/task preflight.
 - src/state.mts and src/control.mts: durable state and controls.
 
+Blocker retirement evaluates completion only for stages named by current
+blockers. It uses the ordinary artifact and gate predicates for those stages;
+future-stage artifact scans must not delay queued worker launches.
+Immediate state-change passes yield to the event loop before the next scan,
+allowing queued dispatch timers to launch ready workers.
+
 Step1 scaffold batches declare their same-stage in-run prerequisites to the
 executor. Their consumers wait for artifact-complete, stable transitive
 suppliers. Step3 pair authors can start across batches while an in-run supplier

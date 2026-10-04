@@ -1,0 +1,85 @@
+{
+  "completed": [
+    "S01 Fourier embeddings/algebra/tame commutator and torus pressure",
+    "S01 given-solution difference energy before local theorem consumers",
+    "S02 periodic incompressible local smooth IVP and continuation",
+    "S03 positive-density smooth polytropic Euler IVP",
+    "S04 smooth stability, energy, local periodic inviscid limit, vorticity",
+    "S05 projected stationary weak Stokes existence",
+    "S06 conditional fixed-wall and exterior energy/uniqueness",
+    "S07 exact no-slip/shear/Poiseuille/Couette/compressible viscous shear",
+    "S08 exact linear acoustics and equation scaling",
+    "S09 global smooth 2D periodic Navier\u2013Stokes \u03bd>0",
+    "S10 rectangular no-slip Stokes velocity+Hminus1 pressure",
+    "PS01/PS02 conditional physical wrappers"
+  ],
+  "findings_repaired": [
+    {
+      "finding": "Periodic streamwise channel pressure \u2212Gx is not periodic",
+      "supplier": "S07",
+      "repair": "prescribe body acceleration G/\u03c1 and periodic constant pressure, or use infinite channel",
+      "affected_consumers": [
+        "ex-fd-periodic-poiseuille-body-force",
+        "ex-fd-adopted-poiseuille-couette"
+      ]
+    },
+    {
+      "finding": "Local uniqueness proof referred to stability item which depended on existence",
+      "supplier": "S01 given-solution energy lemma",
+      "repair": "proved uniqueness/stability before existence, explicit given solution class",
+      "affected_consumers": [
+        "thm-fd-smooth-periodic-incompressible-ivp",
+        "thm-fd-smooth-polytropic-euler-ivp",
+        "thm-fd-periodic-smooth-stability"
+      ]
+    },
+    {
+      "finding": "Stationary Stokes lacked actual pressure chain",
+      "supplier": "S10",
+      "repair": "continuous compact-test divergence inverse and Hminus1 pressure recovery",
+      "affected_consumers": [
+        "thm-fd-rectangular-no-slip-stokes-velocity-pressure"
+      ]
+    },
+    {
+      "finding": "Enstrophy bound alone did not close global 2D smoothness",
+      "supplier": "S09",
+      "repair": "critical lattice log estimate + integrated enstrophy coefficient + continuation",
+      "affected_consumers": [
+        "thm-fd-global-two-dimensional-periodic-navier-stokes",
+        "pthm-fd-two-dimensional-viscous-model-globality"
+      ]
+    }
+  ],
+  "genuinely_unresolved_if_required_by_canonical_scope": [
+    {
+      "claim": "General positive-density compressible viscous nonlinear smooth IVP",
+      "status": "missing-specialized-proof-chain, not-known-open-in-the-stated-local-positive-density-setting",
+      "consumed": false,
+      "needed": "precise strong-solution topology, coupled parabolic-hyperbolic iteration/estimates, coefficient/state hypotheses and continuation"
+    },
+    {
+      "claim": "Arbitrary-wall/exterior smooth incompressible IVP",
+      "status": "missing-specialized-proof-chain",
+      "consumed": false,
+      "needed": "wall-compatible Stokes evolution/pressure estimates; smooth boundary hypotheses; all-time-zero compatibility or appropriately weaker time-zero regularity"
+    },
+    {
+      "claim": "L2 Stokes pressure and full up-to-wall regularity",
+      "status": "stronger-unasserted-branch",
+      "consumed": false,
+      "needed": "L2\u2192H1_0 divergence right inverse/inf-sup estimate and boundary elliptic regularity; local theorem currently Hminus1 pressure"
+    },
+    {
+      "claim": "Global smooth 2D Euler",
+      "status": "stronger-unasserted-branch",
+      "consumed": false,
+      "needed": "inviscid high-order closure; \u03bd>0 proof loses enstrophy dissipation at \u03bd=0"
+    }
+  ],
+  "known_open_unconsumed": [
+    "3D unrestricted global smooth incompressible Navier\u2013Stokes",
+    "3D unrestricted global smooth Euler"
+  ],
+  "acceptance": "local reasoning/structural checks only, no independent audit or production receipt"
+}

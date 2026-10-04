@@ -1,0 +1,175 @@
+#!/usr/bin/env python3
+"""Research inventory assembly/check; does not call or modify production engines."""
+import json, pathlib, re, hashlib, collections
+HERE=pathlib.Path(__file__).resolve().parent
+ROOT=HERE.parents[3]
+def read(p): return json.loads(p.read_text())
+def dump(p,x): p.write_text(json.dumps(x,indent=2,ensure_ascii=False)+'\n')
+def objects(x):
+ if isinstance(x,list):
+  for v in x: yield from objects(v)
+ elif isinstance(x,dict):
+  if isinstance(x.get('id'),str): yield x
+  for k,v in x.items():
+   if isinstance(v,(dict,list)): yield from objects(v)
+sources={}
+# Exact existing research interfaces, retaining their status and section pointers.
+for family,f in [('relativity','expanded-item-inventory.json'),('classical-electromagnetism','proposed-inventory.json')]:
+ base=ROOT/'physics/research/first-principles-2026-10-03'/family
+ for x in objects(read(base/'scaffold'/f)):
+  ptr=x.get('completed_argument') or x.get('definition_contract') or x.get('argument')
+  if ptr:
+   p,_,anchor=ptr.partition('#'); p=base/p if p.startswith('scaffold/') else base/'scaffold'/p
+   sources[x['id']]={'id':x['id'],'domain':x.get('domain','mathematics'),'path':str(p.relative_to(ROOT)),'section':anchor or x.get('section'),'statement':x.get('statement',x.get('title','Exact existing interface')),'status':x.get('status',x.get('design_state','research only')),'inspection_evidence':'Worker/integrator supplier reading records; not an independent audit'}
+base=ROOT/'physics/research/first-principles-2026-10-03/relativity'
+for x in read(base/'sr-em-supplier-contract.json')['suppliers']:
+ sources[x['id']]={**x,'path':str((base/'scaffold/sr-supplier-proofs.md').relative_to(ROOT)),'status':'complete scoped research interface; not production'}
+# Geometry section labels are research contracts, not invented canonical item IDs.
+for x in read(HERE/'workers/geometry/supplier-contracts.json')['suppliers']:
+ label=x['label']
+ if (ROOT/'items'/f'{label}.md').exists(): continue
+ labels=[label]
+ m=re.fullmatch(r'([A-Z])(\d+)–(?:[A-Z])?(\d+)',label)
+ if m:labels=[m[1]+str(i) for i in range(int(m[2]),int(m[3])+1)]
+ for lab in labels:
+  sid='supplier-'+lab
+  domain='physics' if lab in ['S1','S5','S7','Q4'] or lab.startswith('E') else 'mathematics'
+  sources[sid]={'id':sid,'domain':domain,'path':x['path'],'section':lab,'statement':x['statement'],'hypotheses':x['hypotheses'],'status':x['proof_status'],'inspection_evidence':x['inspection']}
+sources['source-gr-local-proofs']={'id':'source-gr-local-proofs','domain':'mathematics','path':'physics/research/first-principles-2026-10-03/relativity/scaffold/gr-local-proofs.md','section':'G0-G2','statement':'Smooth Lorentz objects, metric derivative and local tetrad construction','status':'complete restricted research argument'}
+hs=HERE/'workers/hamiltonian/supplier-map.json'
+if hs.exists():
+ for x in read(hs).get('external_suppliers',[]):
+  sources[x['id']]={**x,'statement':x.get('statement',x.get('statement_and_hypotheses','Exact declared interface')),'inspection_evidence':'workers/hamiltonian/supplier-map.json actual statement and proof reading'}
+for sid,domain,section,statement in [
+ ('def-em-covariant-sign-conventions','physics','C1','SI smooth two-form F=dA where available; F0i=-Ei/c,Fij=epsilon B, positive q Lorentz coupling; signature (-+++),x0=ct'),
+ ('lem-em-particle-curve-variation','mathematics','V1','Finite interval C2 future timelike Minkowski curve, C2 covector A, real q and positive m,c: fixed-endpoint action variation equals -m U derivative plus qF coupling')]:
+ sources[sid]={'id':sid,'domain':domain,'path':'physics/research/first-principles-2026-10-03/classical-electromagnetism/scaffold/completed-expansion-arguments.md','section':section,'statement':statement,'hypotheses':'Exact '+section+' finite-domain smooth hypotheses','status':'complete restricted research argument; exact stable proposed ID, not production item','inspection_evidence':'Actual integrator and charge-spin complete C1/V1 readings'}
+# Example contract groups expand to their actual reusable suppliers.
+example_alias={}
+for x in read(HERE/'workers/examples/supplier-map.json'):
+ key=x['key']; ids=x.get('supplier_ids_or_explicit_contracts',[])
+ if key=='CS6':ids=['lem-rpm-flat-centroid-shift','lem-rpm-body-spin-size-bound']
+ if key=='CS02':ids=['pthm-rpm-external-charge-action-equivalence','pthm-rpm-charge-mass-shell']
+ if key=='CS3':ids=['post-rpm-bmt-dipole-model','pthm-rpm-bmt-constraints']
+ for sid in ids:
+  if sid.startswith('research-'):
+   sources[sid]={'id':sid,'domain':'mathematics' if key=='NRE2' else 'physics','path':x['path'],'section':x['locator'],'statement':x['exact_scope_and_hypotheses'],'status':x['status'],'inspection_evidence':'examples/supplier-map.json actual reading locator/hash'}
+ example_alias[key]=ids
+rows=[]
+def add(file,branch):
+ data=read(HERE/file); items=data if isinstance(data,list) else data['items']
+ for old in items:
+  x=dict(old); x['owner']=branch
+  ptr=x['proof_module']; p,sep,a=ptr.partition('#')
+  if not sep:a=x.get('proof_section','')
+  x['proof_module']=str((pathlib.Path(file).parent/p).as_posix())+'#'+a
+  x['status']=x.get('status',x.get('proof_status','research-only proposed interface'))
+  deps=[]
+  for d in x.get('deps',[]):
+   if branch=='examples' and d in example_alias:deps+=example_alias[d]
+   elif branch=='geometry' and re.fullmatch('[SGCQEH]\\d+',d):deps.append('supplier-'+d)
+   else:deps.append(d)
+  x['deps']=list(dict.fromkeys(deps))
+  anchor=a.upper()
+  if branch=='geometry':home='rpm-controlled-limits' if anchor.startswith('RP-G6') else 'rpm-geometry-actions'
+  elif branch=='dynamics':home='rpm-controlled-limits' if anchor.startswith(('D4','D5','D6')) else 'rpm-momentum-collisions'
+  elif branch=='charge-spin':
+   n=int(re.search(r'CS(\d+)',anchor)[1]);home='rpm-external-charge' if n<=2 else 'rpm-radiation-models' if n==7 else 'rpm-spin-finite-size'
+  elif branch=='examples':
+   n=int(re.search(r'X(\d+)',anchor)[1]);home='rpm-exact-flat-orbits' if n<=4 else 'rpm-spin-finite-size' if n==9 else 'rpm-curved-orbits-scattering'
+  else:
+   home=x.get('canonical_page','rpm-hamiltonian-constraints')
+   if any(w in (x['title']+' '+p).lower() for w in ['noether','poincar','hamilton–jacobi','hamilton-jacobi','moment map','coadjoint','symmetr']):home='rpm-symmetries-hamilton-jacobi'
+  if old.get('canonical_page'):home=old['canonical_page']
+  shared={'def-rpm-charge-spin-model':['def-rpm-spacetime-observer-and-worldline'], 'def-rpm-collision-objects':['def-rpm-mechanical-momentum-and-observer-energy'], 'def-rpm-h-background-and-model-quantities':['def-rpm-spacetime-observer-and-worldline'], 'thm-rpm-h-homogeneous-massive-shell':['def-rpm-spacetime-observer-and-worldline']}
+  x['deps']=list(dict.fromkeys(x['deps']+shared.get(x['id'],[])))
+  b=x.get('side')=='B' or str(x.get('page','')).startswith('B') or str(x.get('page','')).endswith('-examples') or x['id'].startswith(('ex-','cex-','texp-'))
+  x['home']=home+('-examples' if b else '');x['side']='B' if b else 'A';rows.append(x)
+add('workers/geometry/proposed-inventory.json','geometry')
+add('dynamics-inventory.json','dynamics')
+add('workers/charge-spin/inventory.json','charge-spin')
+add('workers/examples/paired-inventory.json','examples')
+hfiles=[HERE/'workers/hamiltonian/inventory.json',HERE/'workers/hamiltonian/proposed-inventory.json']
+h=next((p for p in hfiles if p.exists()),None)
+if h is None:raise SystemExit('Hamiltonian inventory not yet supplied')
+add(str(h.relative_to(HERE)),'hamiltonian')
+index={x['id']:x for x in rows}; errors=[]
+if len(index)!=len(rows):errors.append('Duplicate local IDs')
+prefixes={'definition':'def-','lemma':'lem-','theorem':'thm-','proposition':'prop-','corollary':'cor-','postulate':'post-','physics-theorem':'pthm-','thought-experiment':'texp-','example':'ex-','counterexample':'cex-','remark':'rem-','false-statement':'fs-'}
+for x in rows:
+ if not x['id'].startswith(prefixes.get(x['kind'],'invalid-')):errors.append('Kind/prefix mismatch '+x['id'])
+ if x['kind'] in ['postulate','physics-theorem','thought-experiment','experiment'] and x['domain']!='physics':errors.append('Physical class/domain mismatch '+x['id'])
+ if x['kind'] in ['lemma','theorem','proposition','corollary'] and x['domain']!='mathematics':errors.append('Mathematical class/domain mismatch '+x['id'])
+ if (ROOT/'items'/f"{x['id']}.md").exists() or (ROOT/'physics/items'/f"{x['id']}.md").exists():errors.append('Existing canonical ID collision '+x['id'])
+# Resolve actual root canonical items (publication/draft status is metadata, not proof invention).
+for x in rows:
+ for d in x['deps']:
+  if d not in index and d not in sources:
+   p=ROOT/'items'/f'{d}.md'
+   if p.exists():
+    t=p.read_text(); status=re.search(r'^status:\s*(\S+)',t,re.M)
+    sources[d]={'id':d,'domain':'mathematics','path':str(p.relative_to(ROOT)),'section':'Statement/Definition and Proof','status':status[1] if status else 'draft','statement':'Exact canonical item; statement/hypotheses/proof use in worker supplier record','sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'inspection_evidence':'Exact worker supplier ledger; no blanket transitive proof rereading claimed'}
+   else:errors.append('Unresolved supplier '+d+' for '+x['id'])
+# Kahn order supplies both claim order and home graph.
+def topo(nodes,depmap,preferred=None):
+ result=[]; remaining=set(nodes)
+ while remaining:
+  ready=sorted((n for n in remaining if not(set(depmap.get(n,[]))&remaining)),key=(lambda n:(preferred.get(n,999),n)) if preferred else None)
+  if not ready:errors.append('Cycle: '+', '.join(sorted(remaining)));break
+  if preferred:ready=ready[:1]
+  result+=ready;remaining-=set(ready)
+ return result
+order=topo(index,{k:[d for d in x['deps'] if d in index] for k,x in index.items()})
+for x in rows:
+ if x['domain']=='mathematics':
+  for d in x['deps']:
+   if (index.get(d) or sources.get(d,{})).get('domain')!='mathematics':errors.append('Mathematical boundary '+x['id']+' <- '+d)
+ for d in x['deps']:
+  if d in index and index[d]['side']=='B':errors.append('B supplier used '+d+' -> '+x['id'])
+ p=HERE/x['proof_module'].split('#')[0]
+ if not p.exists():errors.append('Missing proof module '+str(p))
+ else:
+  anchor=x['proof_module'].split('#',1)[1].split('–')[0].split('/')[0]
+  if not re.search(r'^##+\s+'+re.escape(anchor)+r'(?:\s|$)',p.read_text(),re.M|re.I):errors.append('Missing proof anchor '+x['proof_module'])
+ x['dependency_roles']={d:('mathematical-premise' if (index.get(d) or sources.get(d,{})).get('domain')=='mathematics' else 'formulation-prerequisite' if x['kind'] in ['definition','postulate'] else 'physical-assumption' if (index.get(d) or {}).get('kind')=='postulate' or d.startswith('post-') else 'physical-result') for d in x['deps']}
+ x['empirical_premises']=[]
+pages=collections.defaultdict(list)
+for k in order:pages[index[k]['home']].append(k)
+page_deps={p:sorted({index[d]['home'] for k in ids for d in index[k]['deps'] if d in index and index[d]['home']!=p}) for p,ids in pages.items()}
+progression=['rpm-geometry-actions','rpm-momentum-collisions','rpm-external-charge','rpm-hamiltonian-constraints','rpm-symmetries-hamilton-jacobi','rpm-spin-finite-size','rpm-exact-flat-orbits','rpm-curved-orbits-scattering','rpm-radiation-models','rpm-controlled-limits']
+priority={p:i for i,p in enumerate(progression)}
+priority.update({p+'-examples':len(progression)+i for i,p in enumerate(progression)})
+page_order=topo(pages,page_deps,priority)
+for p,ids in pages.items():
+ if len(ids)>100:errors.append('Cap exceeded '+p)
+ if p.endswith('-examples') and any(p in ds for ds in page_deps.values()):errors.append('B page used '+p)
+for p in list(pages):
+ mate=p[:-9] if p.endswith('-examples') else p+'-examples'
+ if mate not in pages:pages[mate]=[];page_deps[mate]=[p] if mate.endswith('-examples') else []
+# Add unused empty companions to placement order; no invented item filler.
+page_order=topo(pages,page_deps,priority)
+local_used={d for x in rows for d in x['deps'] if d in sources}
+external=[sources[d] for d in sorted(local_used)]
+for x in external:
+ p=ROOT/x['path']
+ if not p.exists():errors.append('Missing supplier path '+x['path'])
+ else:x['sha256_current']=hashlib.sha256(p.read_bytes()).hexdigest()
+manifest={'date':'2026-10-03','research_only':True,'items':[index[k] for k in order],'item_order':order,'pages':[{'page':p,'side':'B' if p.endswith('-examples') else 'A','library':'physics','items':pages[p],'deps':page_deps[p],'companion':p[:-9] if p.endswith('-examples') else p+'-examples'} for p in page_order],'external_suppliers':external,'scope':'Complete stated conditional local/model claims; prospective stronger claims are unconsumed'}
+dump(HERE/'paired-inventory.json',manifest)
+sp=HERE/'supplier-map.json'
+if sp.exists():
+ sm=read(sp);sm['canonical_external_suppliers']=external;sm['canonical_consumers']={x['id']:x['deps'] for x in manifest['items']};dump(sp,sm)
+dump(HERE/'claim-coverage.json',{'claims':[{'id':x['id'],'title':x['title'],'domain':x['domain'],'kind':x['kind'],'argument':x['proof_module'],'scope':x['scope'],'home':x['home'],'status':x['status']} for x in manifest['items']],'required_unresolved':[] if not errors else errors,'empirical_premises':[]})
+dump(HERE/'closure-ledger.json',{'date':'2026-10-03','asserted_items':len(rows),'required_unresolved':errors,'closure':'All asserted restricted claims have local complete arguments or exact checked suppliers; local author/integrator review only','unconsumed_prospective':['Unrestricted global forced worldline completeness','Singular coupled point-source Maxwell or Einstein wellposedness','Generic curved-spacetime global time gauge or smooth leaf quotient','Unrestricted body-stress derivation or uniform truncation convergence for MPD','Generic LAD-to-LL/global/long-time uniform convergence','Fixed-charge point limit and curved-tail self-force construction','Quantum spin correspondence without added model','Kerr/spin-gradient coupled orbital and J<=kappa/c Coulomb extensions'],'scope_boundaries':'These are stronger prospective developments, not hidden prerequisites of current claims.'})
+report={'pass':not errors,'errors':errors,'items':len(rows),'pages':len(pages),'pairs':len(pages)//2,'A_items':sum(x['side']=='A' for x in rows),'B_items':sum(x['side']=='B' for x in rows),'max_page_count':max(map(len,pages.values())),'external_suppliers':len(external),'checks':['exact ID resolution','item DAG','page DAG','unique homes','B leaves','mathematics/physics boundary','class/domain/prefix','canonical ID collision','100 cap on every A/B','proof module existence','supplier path/hash recording','empty empirical premise declarations'],'command':'python3 '+str((HERE/'assemble-and-check.py').relative_to(ROOT)),'limitations':'Structural research check plus collaborating local proof reading; not independent acceptance/production readiness.'}
+dump(HERE/'structural-check.json',report)
+text=['# Proposed paired pathway','', 'Research-only supplier-first placement. B companions are leaves; inventory is canonical.','']
+for p in page_order:
+ if p.endswith('-examples'):continue
+ text+=['## '+p,'', '| Proposed item | Kind / domain | Exact argument |','|---|---|---|']
+ for k in pages[p]:
+  x=index[k];text+=['| `'+k+'` — '+x['title']+' | '+x['kind']+' / '+x['domain']+' | `'+x['proof_module']+'` |']
+ text+=['','Companion: `'+p+'-examples` ('+str(len(pages[p+'-examples']))+' leaf items).','']
+(HERE/'pathway-and-inventory.md').write_text('\n'.join(text)+'\n')
+print(json.dumps(report,indent=2))
+raise SystemExit(0 if not errors else 1)

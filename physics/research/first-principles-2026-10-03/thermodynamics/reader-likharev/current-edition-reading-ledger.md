@@ -1,0 +1,26 @@
+# Current official edition contiguous personal reading ledger
+
+Version: Last edit May 15, 2026; SHA256 in author-retrieval.json. This records actual bounded tool-return reading, not extraction. Original historical adaptation/supplement record remains in reading-ledger.md.
+
+| PDF pages personally read | Printed pages | Scope and observations |
+|---|---|---|
+| 1–4 | Front matter 1–4 | Title, exact version, contents, Introductory Remarks; page4 intentionally blank. Separate supplement/test files not part of this volume. |
+| 5–28 | Chapter1 1–24 | All §§1.1–1.7, equations and footnotes; eighteen exercise statements. Read in chunks5,6–9,10–13,14–17,18–21,22–25,26–29. No truncation. Same conventions and third-law/entropy issues; new stability/throttling/magnetic capacity exercises. |
+| 29–72 | Chapter2 1–44 | All §§2.1–2.9, equations/footnotes,36 exercise statements. Chunks26–29,30–33,34–37,38–41,42–45,46–49,50–53,54–57,58–61,62–65,66–69,70–73. No truncation. Original restores microcanonical introduction and full Szilard/reversible-computation paragraphs; Gibbs exponent correct. Frequency/entropy/statistics assumptions remain limited. |
+| 73–106 | Chapter3 1–34 | All §§3.1–3.6, equations/footnotes,30 exercise statements. Chunks70–73,74–77,78–81,82–85,86–89,90–93,94–97,98–101,102–106. No truncation. Adds mixing-entropy measurement context, refines cluster exposition but does not supply convergence theorem; Sommerfeld sub-exponential tail assumption newly explicit. |
+
+| 107–142 | Chapter4 1–36 | All §§4.1–4.6, equations/footnotes,24 exercise statements. Chunks107–110,111–114,115–118,119–122,123–126,127–130,131–134,135–138,139–142. No truncation. Phase coexistence, Landau/order parameters, GL, Ising/mean field, transfer matrices/Monte Carlo/RG; finite-volume/phase selection and fluctuation hypotheses remain explicit obligations. Current t̃=(T−T_c)/T_c replaces the older adaptation's opposite-sign τ. |
+| 143–186 | Chapter5 1–44 | All substantive §§5.1–5.8 and exercise section (heading5.10, contents5.9), equations/footnotes,30 exercise statements. Chunks143–146,147–150,151–154,155–158,159–162,163–166,167–170,171–174,175–178,179–182,183–186. No truncation. Fluctuation constraints, stationary spectra/FDT, overdamped diffusion and underdamped Kramers, tunneling and OU; current source explicitly adds low-damping validity and turnover caveat. |
+| 187–224 | Chapter6 1–38 | All §§6.1–6.6, equations/footnotes,18 exercise statements. Chunks187–190,191–194,195–198,199–202,203–206,207–210,211–214,215–218,219–222,223–224. No truncation. Liouville/collision closure, Ohm/RTA, drift diffusion, semiconductor bands/doping/devices, coupled thermoelectric/Fourier transport. Probability-vs-number-vs-occupation normalization and open-circuit constraints need repair before downstream consumption. |
+
+**Completed:** all224 PDF pages personally read,2026-10-03 UTC, including4 front pages (page4 blank),220 chapter pages and156 exercise statements. Extraction calls returned complete bounded text; no substantive page was skipped. Exercises were not solved. There is no substantive internal appendix; external referenced EGP volumes/appendices, primary papers, supplemental solutions and tests were not read. Complete reading is not proof certification.
+
+## Formula recovery and actual visual inspection
+
+Legacy-font extraction may reorder fraction pieces or replace Greek symbols. Equations were read in context with their adjacent definitions and derivations; critical ambiguous signs, conjugation and dimensional expressions were compared with full-page rendered originals. Personally viewed page images: PDF32,48,101,123,134,146,172,176,177,181,209,218,219 (thirteen distinct pages; PDF172 re-inspected to correct the initial Gaussian comparison). Files `raw/formula-page-N.png` preserve these views. Other generated images59,122,178,182 were **not viewed**. The entire figure set was not individually visually inspected. No claim is made that every extracted glyph was independently reconciled or every formula is correct; report.md separates directly checked defects from conceptual/hypothesis gaps.
+
+Current-edition corrections relative to initial report: (2.65) Gibbs exponent and (5.185) OU variance are correct; (5.133) curvature is correct but (5.134) second Gaussian exponent remains wrong; §5.7 now has a damping validity bound/turnover warning; §3.3 now states a tail-growth restriction for Sommerfeld expansion. Defects in current density operator conjugation, field/free-energy concavity, derivatives, lifetime exponent, semiconductor units and SI Lorenz constant were checked in original images and recorded with locators. Historical report/ledger are retained, not silently rewritten as if complete coverage occurred earlier.
+
+## Coverage accounting
+
+The exact contiguous call sequence is1–5;6–9;10–13;14–17;18–21;22–25;26–29;30–33;34–37;38–41;42–45;46–49;50–53;54–57;58–61;62–65;66–69;70–73;74–77;78–81;82–85;86–89;90–93;94–97;98–101;102–106;107–110;111–114;115–118;119–122;123–126;127–130;131–134;135–138;139–142;143–146;147–150;151–154;155–158;159–162;163–166;167–170;171–174;175–178;179–182;183–186;187–190;191–194;195–198;199–202;203–206;207–210;211–214;215–218;219–222;223–224. These are actual read tool returns, not a claim inferred from automated extraction or file presence.

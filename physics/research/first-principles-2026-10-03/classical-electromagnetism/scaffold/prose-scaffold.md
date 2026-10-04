@@ -1,0 +1,147 @@
+# Classical electromagnetism: audited and expanded research scaffold
+
+2026-10-03. This is owner-authorized research prose, not production content,
+an engine manifest, independent acceptance or publication. All **217** exact
+declared proposal rows have explicit definition/formulation, full conditional
+argument/example verification or qualified primary-source nonproof accounts.
+The 177 original proposals are preserved; 40 proposals were added, with an
+additional scattering/optics pair, an expanded-analysis mathematics pair and
+two supplier-order mathematical splits.
+The exact scope and local-review status are in [closure-ledger.json](../closure-ledger.json).
+
+## Adopted formulation and explicit primitives
+
+Adopt classical vacuum Maxwell–Lorentz fields on the SR oriented affine
+Minkowski model; η=(-+++), x0=ct, covariant ε0123=+1 and raised ε0123=-1.
+A laboratory frame is a chosen oriented future inertial affine chart restricted
+to Ω×I, Ω⊂R³ open, I a real open interval. Its spatial rest space has a
+Euclidean metric. A massive worldline is future timelike C² with proper time
+from SR; a chart, observer n and congruence are distinct defined objects.
+
+E,B:Ω×I→R³ are real jointly C¹ in the classical Maxwell branch, C² where
+wave/mixed derivatives are used, and smooth in the smooth existence branches.
+ρ:Ω×I→R and J:Ω×I→R³ are frame densities, with j=(cρ,J) adopted as a
+vector. q is a scalar charge parameter, m>0 an external SR rest mass. Point
+and sheet sources use signed test-function distributions or excluded support;
+quadratic self-field products are not defined by weak Maxwell alone.
+
+Take c,μ0>0 and define ε0=1/(μ0c²). SI is retained explicitly: E in V/m,
+B in T, φ in V, A in T m, q in C, j in A/m², F in T, and stress-energy
+in J/m³. Current SI c and e defining values are exact; μ0 is measured and
+no obsolete exact μ0 value is copied. The unit definition does not quantize
+charge or derive mass within classical EM.
+
+The exact physical definitions/postulate contracts, including fields, sources,
+worldlines, boundaries, topology, matter rest observer, constitutive maps and
+operational experimental quantities, are [definition-contracts.md](definition-contracts.md).
+
+$$\operatorname{div}E=
+ho/\epsilon_0,\quad\operatorname{div}B=0,\quad\operatorname{curl}E=-\partial_tB,\quad\operatorname{curl}B=\mu_0J+c^{-2}\partial_tE.$$
+
+These are adopted physical postulates, with no magnetic-source branch.
+Particle coupling uses the actually inspected SR P=mU and
+d(γmv)/dt=q(E+v×B). Controlled low-speed expansions are proved; an exact
+unscoped Newtonian matter law is not silently substituted. The two-form is
+F_EM=dA where potentials exist, F_EM^0i=E_i/c,F_EM^ij=+εijkB_k.
+Maxwell divergence is ∂μF_EM^μν=-μ0jν and force is +qF_EM U.
+The optional SR example uses F_SR=-F_EM, explicitly mapped and confirmed.
+
+## Supplier-first proof and evidence artifacts
+
+- [Completed analysis/covariance/radiation arguments](completed-expansion-arguments.md): W1–W7,R1–R4,S1–S3,C1–C5,V1–V2,D1–D3,A1–A2,B1–B7,H1–H3,G1–G3,O1,P1–P3,U1–U2,E1–E3.
+- [Core conditional proofs](core-conditional-proofs.md): K1–K10 covers every remaining original physics theorem/thought-experiment branch.
+- [Physical worked examples](worked-example-verifications.md): X1–X8 covers every original companion example, with actual formulas and counterexamples.
+- [Mathematical examples](mathematical-example-verifications.md): all eight mathematical companions are pure mathematics.
+- [Exterior scattering](exterior-scattering-arguments.md): F1–F6 proves the smooth PEC vector boundary/scattering and exact scalar representation branches.
+- [SR exact-use map](sr-to-em-mapping.json) and [root mathematics exact-use map](root-math-to-em-mapping.json).
+- [Mathematical supplier reading](expansion-supplier-reading.json): actual 39 direct additional/current file reads/hashes; statuses and exact uses retained.
+- [Primary source fetch coverage](primary-source-coverage.json): actual mandatory full-body fetch stamps for the three empirical report carriers, with honest reading extents.
+
+## A/B inventories and source order
+
+Every A page supplies its consumers in exact dependency order. B pages remain
+cross-page leaves. [proposed-inventory.json](proposed-inventory.json) records
+all item IDs, dependencies/roles, levels, proof locators and page membership.
+No page exceeds 27 proposals, below the hard 100-item cap.
+
+| Pair | A page | A/B count | Subject |
+|---|---|---|---|
+| 01 | `em-primitives-and-postulates` | 10/2 | Primitives and postulates |
+| 02 | `em-maxwell-integral-and-constraints` | 6/2 | Integral Maxwell and constraints |
+| 03 | `em-electrostatics-in-vacuum` | 6/2 | Electrostatics in vacuum |
+| 04 | `em-electrostatic-boundaries-and-conductors` | 6/3 | Electrostatic boundaries and conductors |
+| 05 | `em-electrostatic-multipoles` | 5/2 | Electrostatic multipoles |
+| 06 | `em-magnetostatics-in-vacuum` | 6/3 | Magnetostatics in vacuum |
+| 07 | `em-material-response` | 7/3 | Material response and stationary interfaces |
+| 08 | `em-induction-and-circuit-limits` | 6/3 | Induction and circuit approximations |
+| 09 | `em-potentials-and-gauge` | 5/3 | Potentials and gauge |
+| 10 | `em-energy-momentum-and-angular-balance` | 6/1 | Energy momentum angular balance |
+| 11 | `em-vacuum-waves-and-polarization` | 7/4 | Vacuum waves and polarization |
+| 12 | `em-wave-interfaces-and-conductors` | 5/3 | Wave interfaces and conductors |
+| 13 | `em-waveguides-and-cavities` | 4/3 | Waveguides and cavities |
+| 14 | `em-retarded-fields-and-radiation` | 8/3 | Retarded fields and radiation |
+| 15 | `em-lorentz-covariant-formulation` | 5/2 | Lorentz covariant formulation |
+| 16 | `em-empirical-tests-and-scope` | 6/2 | Empirical tests and limitations |
+| 17 | `em-action-and-variational-formulation` | 5/2 | Alternative action formulation |
+| 18 | `em-scattering-and-scalar-diffraction` | 5/1 | Vector PEC scattering, dipole limits and controlled scalar diffraction |
+
+| Mathematical A page | A/B count |
+|---|---|
+| `em-elementary-mathematical-prerequisites` | 13/1 |
+| `em-minkowski-mathematical-prerequisites` | 3/1 |
+| `em-wave-equation-prerequisites` | 1/0 |
+| `em-boundary-and-spectral-prerequisites` | 3/1 |
+| `em-causal-response-and-radiation-prerequisites` | 2/1 |
+| `em-experiment-analysis-prerequisites` | 1/1 |
+| `em-variational-mathematical-prerequisites` | 2/1 |
+| `em-expanded-analysis-prerequisites` | 27/1 |
+| `em-causal-wave-kernel-prerequisites` | 4/0 |
+| `em-retarded-point-prerequisites` | 1/1 |
+
+## Scope carried through the arguments
+
+Static/Coulomb uniqueness includes boundary or decay data. Point energy
+divergence is a proved mathematical/conditional field result, not a mass proof.
+Potential existence has explicit local/star-shaped/topological hypotheses;
+gauge reachability is solved on stated domains/data, not inferred from invariance.
+Smooth all-space source/constraint Cauchy and retarded selection are proved
+separately, including retarded root existence and prescribed source history.
+
+Bounded smooth Dirichlet/compatible Neumann/transmission weak existence and
+classical regularity are supplied. Material interfaces are stationary with
+bounded one-sided traces unless a different support model is specified.
+Constant symmetric nondispersive stored energy, uniform Ohmic loss and causal
+integrable/polynomial-subtracted response are distinguished. Arbitrary nonlinear
+nonlocal/hysteretic response is not claimed from vacuum Maxwell.
+
+Rectangular and smooth closed PEC spectral energy classes are explicitly
+defined, with topology zero modes retained. The open longitudinal rectangular
+guide and constant-Ohmic modal branch use their actual Fourier/dissipative
+arguments. Smooth PEC monochromatic exterior scattering has nonvanishing
+outgoing Hankel DtN at every positive k, shifted coercivity, Fredholm surjectivity,
+coupled complementing boundary conditions and full divergence propagation.
+Nonsmooth/arbitrary dispersive tensor scattering is a prospective extension,
+not an established generic theorem substituted for the proved smooth branch.
+
+Radiation includes exact Liénard–Wiechert fields, controlled compact-source
+far-zone/dipole remainders, rest Larmor and relativistic emitted Liénard power,
+with emission/observation-time and moving-surface flux distinguished. Dipole/
+weak-field Thomson and adopted scalar diffraction branches carry their actual
+approximation/model conditions. Fully coupled singular self-force remains a
+nonproof scope remark, not a purported discharged physics theorem.
+
+Three primary accounts (Cavendish inverse-square null test, Faraday induction,
+Hertz wave propagation) report actual source observations and apparatus/
+calibration/sensitivity/uncertainty limitations. Corrupted OCR numbers are
+excluded. Qualitative sources do not acquire invented precision or sampling
+laws, and empirical agreement does not prove Maxwell or exact constants.
+
+## Actual checks and status
+
+The local symbolic/structure check passes for 217 unique IDs, all DAG levels,
+role completeness, mathematical-domain boundary, B-leaf placement and page caps.
+Stress divergence/trace/components, full TE/TM curls/divergences and outgoing
+Hankel ODE/modulus l=0,…,6 checks pass. Actual source-fetch-check --stamp
+reports 3/3 fetched carriers. These are local checks and source availability;
+root/SR local review is not independent acceptance. No engine transition or
+production publication was performed. See [audit-expansion-report.md](../audit-expansion-report.md).
