@@ -322,7 +322,7 @@ function normalizeFindings(findings, batch, allowedSet, reportError, prefix) {
     if (prefix === 'reader') {
       normalized.subject_type = finding?.subject_type;
       normalized.consumer_id = finding?.consumer_id ?? null;
-      if (finding?.observed_source !== undefined) normalized.observed_source = finding.observed_source;
+      if (finding?.observed_source != null) normalized.observed_source = finding.observed_source;
     }
     return normalized;
   });
