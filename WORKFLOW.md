@@ -195,6 +195,49 @@ and each split still needs its ordinary scope decision before additions can
 use auditor certification. Do not edit live engine state or move the baseline.
 
 
+### Step 3 owner-spawned creation origin
+
+A genuinely new local supplier written by an owner-spawned helper has a distinct
+origin receipt, registered with
+`node tools/step3-owner-creation.mjs register --run RUN --id ITEM --evidence research/JSON`.
+The registrar never edits the original Step 3 auditor baseline. It excludes IDs
+already in that inventory or its existing-file list, and refuses to replace an
+origin or reclassify an existing native creation certificate.
+
+The evidence JSON uses `version: 1`, `step: 3`,
+`policy: owner-spawned-step3-creation-v1`,
+`evidence_class: owner-spawned-creation`, exact `run`, `id`, `page`, string `batch`,
+`owner: true`, `owner_identity`, a distinct actual `author.identity` under
+`/root/...`, `attested_at`, `reason`, and `owner_held_escalation`.
+It binds both `baseline_sha256` (SHA-256 of `JSON.stringify` of the parsed original
+baseline) and `baseline_file_sha256` (original raw bytes).
+`step3OwnerCreationClaim(loadStep3(root, run), id)` supplies the exact current
+`page`, `batch`, `claim_sha256` and `item_file_sha256` fields. Claim identity binds
+the manifest's ID, kind, title and statement plus the authored Statement/Definition
+sections. Subsequent proof repairs need a fresh ordinary owner decision; changing
+the claim or home invalidates this origin and requires owner-held resolution.
+
+`author.timeline` must either contain `mode: known`, genuine `started_at` and
+`ended_at` after the baseline and before attestation, or `mode: unknown`,
+`after_baseline: true` and an explicit `reason`, with no invented timestamps.
+`sources` lists existing research files as `{ role, path, sha256 }` with roles
+`assignment`, `authorship` and `escalation`. Assignment evidence must identify the
+run, item, owner and actual author; authorship evidence must identify the run,
+item, author, claim hash and authored-byte hash; escalation evidence must identify
+the run and exact held escalation. Stale source bytes invalidate registration.
+No `author_result` field is accepted.
+
+Creation is origin only. The Step 3 certifier excludes a validated owner creation
+from auditor-created classification only after an ordinary current
+`recordStep3` owner `repaired` decision binds its current proof inputs and examined
+dependencies, including its declared manifest and authored dependencies. It emits
+no auditor item or scope certificate for that creation. Scope approval, native
+unit coverage and mathematical acceptance remain their ordinary obligations.
+All other additions retain native provenance checks. Late sibling supplier inputs
+may be owner-recertified when the item's own file is still in a genuine successful
+native author write window; a new helper or later own-proof edit cannot borrow an
+old result without surviving immutable native origin evidence.
+
 ## Controls
 
 - Current agent defaults and Step-5/6 review profiles use GPT-6.1 Sol at high

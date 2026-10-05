@@ -12,6 +12,7 @@ import { pathToFileURL } from 'node:url';
 import { itemHash, itemInputPaths, loadStep3, scopeHash } from './step3-decisions.mjs';
 import { authorResultAllowed, loadStep3AuditorProvenance } from './auditor-created-items.mjs';
 import { split, yaml } from './pathway-lib.mjs';
+import { loadStep3OwnerCreation, currentStep3OwnerCreationDecision } from './step3-owner-creation.mjs';
 
 const safe = value => {
   if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('Invalid run or item ID');
@@ -310,6 +311,14 @@ function certify(root, run, partial) {
   };
 
   for (const [id, value] of additions) {
+    const ownerCreation = loadStep3OwnerCreation(root, run, id, s);
+    if (ownerCreation) {
+      if (!currentStep3OwnerCreationDecision(s, id))
+        defer(`${id}: owner-created addition requires an ordinary current owner repaired decision with examined dependencies`);
+      // Origin does not confer an auditor item or scope certificate. This item
+      // remains subject to ordinary Step 3 decisions and native unit coverage.
+      continue;
+    }
     if (preexistingFiles.has(id))
       throw Error(`${id}: existed on disk before Step 3 and is not auditor-created`);
     const itemPath = join(root, 'items', `${safe(id)}.md`);
@@ -359,7 +368,17 @@ function certify(root, run, partial) {
         !/-batch-\d+\.pages\.json$/.test(path));
       if (!author || !Number.isFinite(ended)
         || paths.some(path => statSync(path).mtimeMs > ended)) {
-        const originAuthorResult = prior?.author_result ?? author?.label;
+        // A late owner/reviewer verdict establishes currency, not creation.
+        // A genuine native own-file write window can survive a late sibling
+        // supplier without an earlier whole-closure certificate. A late own
+        // proof edit/new helper cannot infer origin from an old covering result.
+        const ownWrittenAt = statSync(itemPath).mtimeMs;
+        const ownWindowAuthor = results.filter(row => row.label.startsWith('step3b-pair-')
+          ? Boolean(pair && row.label.startsWith(`step3b-pair-${pair}-`) && row.covers.includes(pair))
+          : row.covers.map(String).includes(batch)).filter(row =>
+            ownWrittenAt >= Date.parse(row.started_at) && ownWrittenAt <= Date.parse(row.ended_at))
+          .sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at)).at(-1);
+        const originAuthorResult = prior?.author_result ?? ownWindowAuthor?.label;
         ownerRecertification = originAuthorResult
           ? currentOwnerRepair(s, id, dependencies, sha256) : null;
         reviewRecertification = !ownerRecertification && originAuthorResult

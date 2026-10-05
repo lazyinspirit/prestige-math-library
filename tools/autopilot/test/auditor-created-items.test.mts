@@ -819,6 +819,17 @@ test('Step-3 first certification pairs original author provenance with a current
     started_at: '2025-01-01T00:00:00.000Z', ended_at: '2025-01-01T00:00:10.000Z',
   }));
 
+  assert.throws(() => certifyAuditorItems(root, 'r'), /changed after its latest successful Step 3/,
+    'a late owner-created file cannot borrow an old covering result as its origin');
+  // Establish genuine native creation in its own write window before testing
+  // later owner recertification against the immutable surviving native receipt.
+  utimesSync(itemPath, new Date('2025-01-01T00:00:05.000Z'), new Date('2025-01-01T00:00:05.000Z'));
+  certifyAuditorItems(root, 'r');
+  writeFileSync(itemPath, `${item(id)}\nLater owner proof repair.\n`);
+  utimesSync(itemPath, repairedAt, repairedAt);
+  recordStep3(root, { run: 'r', phase: 'item', page: undefined, item: id,
+    decision: 'repaired', dependencies: [], reason: 'Owner checked the later repaired proof.',
+    owner: true, confidence: undefined });
   const receipt = certifyAuditorItems(root, 'r');
   assert.equal(receipt.items.length, 1);
   assert.equal(receipt.items[0].author_result, authorLabel);
