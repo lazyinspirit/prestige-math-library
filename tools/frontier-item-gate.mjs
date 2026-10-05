@@ -14,11 +14,11 @@ const run = options.includes('--run') ? value('--run') : null;
 const tool = options.includes('--tool') ? value('--tool') : null;
 const positional = new Set(['precheck', 'rendercheck', 'prosecheck']);
 const selectors = new Set(['depcheck', 'fwdcheck', 'extcheck', 'depsource']);
-if (!/^[a-zA-Z0-9_-]+$/.test(run ?? '') || ![...positional, ...selectors, 'pathcheck'].includes(tool))
+if (!/^[a-zA-Z0-9_-]+$/.test(run ?? '') || ![...positional, ...selectors, 'pathcheck', 'validate-plan'].includes(tool))
   throw Error('Usage: frontier-item-gate.mjs --run RUN --tool TOOL [-- TOOL_ARGS]');
 if (toolArgs.includes('--items-file') || toolArgs.includes('--pages-file'))
   throw Error('The frontier supplies its own selectors');
-const allowedFlags = { precheck: ['--json'], rendercheck: ['--json', '--quiet'], prosecheck: ['--warnings', '--strict'], depcheck: ['--json', '--quiet', '--pending-audit-ok'], fwdcheck: ['--json', '--quiet'], extcheck: ['--json', '--quiet'], depsource: ['--json'], pathcheck: ['--json', '--quiet'] };
+const allowedFlags = { precheck: ['--json'], rendercheck: ['--json', '--quiet'], prosecheck: ['--warnings', '--strict'], depcheck: ['--json', '--quiet', '--pending-audit-ok'], fwdcheck: ['--json', '--quiet'], extcheck: ['--json', '--quiet'], depsource: ['--json'], pathcheck: ['--json', '--quiet'], 'validate-plan': [] };
 if (toolArgs.some(arg => !allowedFlags[tool].includes(arg))) throw Error('Unsupported frontier validator flag');
 const root = process.cwd();
 const manifests = readdirSync(join(root, 'research')).filter(name =>
@@ -30,7 +30,7 @@ const pages = manifests.flatMap(name => {
   return rows;
 });
 const ids = [...new Set(pages.flatMap(page => (page.items ?? []).map(item => typeof item === 'string' ? item : item.id)))].sort();
-if (!ids.length || ids.some(id => !/^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id ?? '')))
+if ((!ids.length && tool !== 'validate-plan') || ids.some(id => !/^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id ?? '')))
   throw Error(`Frontier ${run} has no valid populated item scope`);
 const selector = `research/${run}-frontier-gate-items.json`;
 const pageSelector = `research/${run}-frontier-gate-pages.json`;
@@ -45,6 +45,7 @@ const pageFiles = [...new Set(pages.map(page => `library/${page.category}/${page
 const script = `tools/${tool}${tool === 'precheck' ? '.mts' : '.mjs'}`;
 const command = tool === 'precheck' ? ['tools/tsx-run.mjs', script] : [script];
 if (positional.has(tool)) command.push(...itemFiles, ...(tool === 'precheck' ? [] : pageFiles), ...toolArgs);
+else if (tool === 'validate-plan') command.push('research/plan-spec.json', '--pages-file', pageSelector, ...toolArgs);
 else if (tool === 'pathcheck') command.push('--pages-file', pageSelector, ...toolArgs);
 else command.push('--items-file', selector, ...(tool === 'depsource' ? ['--run', run] : []), ...toolArgs);
 console.log(`frontier-item-gate: ${tool}; ${ids.length} item(s), ${pages.length} frontier page(s); run ${run}`);

@@ -329,7 +329,7 @@ const policyItemGate = (ctx) => gate('content-policy-items', ['node', 'tools/con
   liveness: { pattern: /(\d+)\s+scoped item/.source, min: 1, unit: 'scoped items' },
 });
 
-const planGate = () => gate('validate-plan', ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json']);
+const planGate = (ctx: any) => frontierItemGate(ctx, 'validate-plan', 'validate-plan');
 
 /** The Step 1 drift review's teeth. The review is the `drift` unit of stage 1;
  *  this is what makes its report load-bearing rather than decorative. Fails on
@@ -1128,7 +1128,7 @@ const contractGates = (ctx, { reviewed = false }: { reviewed?: boolean } = {}) =
 
 /** Current author gates for verified continuations, without invented Step-3 work. */
 export const authoredContentGates = (ctx: any) => [
-  ...repoWide(ctx), planGate(), policyItemGate(ctx),
+  ...repoWide(ctx), planGate(ctx), policyItemGate(ctx),
   ...contractGates(ctx, { reviewed: false }),
 ];
 
@@ -1447,7 +1447,7 @@ export const stages = [
       timeout: 7200,
     }],
     gates: (ctx: any) => [
-      gate('drift-review', ['node', 'tools/drift-review-check.mjs', '--run', ctx.run, '--before-apply']), planGate(),
+      gate('drift-review', ['node', 'tools/drift-review-check.mjs', '--run', ctx.run, '--before-apply']), planGate(ctx),
     ],
     onHold: holdStep1,
   },
@@ -1461,7 +1461,7 @@ export const stages = [
       role: 'tool', label: 'drift-apply', job: 'bookkeeping-mechanical', covers: ['all'],
       argv: ['node', 'tools/drift-apply.mjs', '--run', ctx.run], timeout: 600,
     }],
-    gates: (ctx: any) => [scopeGate(ctx), driftGate(ctx), planGate()],
+    gates: (ctx: any) => [scopeGate(ctx), driftGate(ctx), planGate(ctx)],
     onHold: holdStep1,
   },
   {
@@ -1492,7 +1492,7 @@ export const stages = [
       gate('item-dependency-levels', ['node', 'tools/item-dependency-levels.mjs', 'check', '--run', ctx.run]),
       gate('step1-dependency-ledger', ['node', 'tools/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run, '--require-reviewed']),
       scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }),
-      ...policyGates(ctx), planGate(), extGate(ctx), urlGate(ctx), backingGate(ctx), fetchGate(ctx),
+      ...policyGates(ctx), planGate(ctx), extGate(ctx), urlGate(ctx), backingGate(ctx), fetchGate(ctx),
     ],
     onHold: holdStep1,
   },
@@ -1684,7 +1684,7 @@ export const stages = [
       // No liveness floor: vacuity is impossible here — an absent artifact
       // (the splice never ran) is exit 2, its own hard failure.
       gate('splice-refusals', ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--refusals-gate']),
-      scopeGate(ctx), planGate()],
+      scopeGate(ctx), planGate(ctx)],
     maxFixRounds: 3,
     // Round shape: a refusal failure (or the stalemate synthetic, which on
     // this stage IS the withheld-splice shape) first re-runs the splice

@@ -345,7 +345,10 @@ suppliers but check selected subjects. Relevant prerequisite cycles still fail;
 unrelated items, page hygiene and cycles do not hold the frontier. Exact owner
 item hashes bind relevant planned interfaces; an unrelated rewrite of the shared
 plan file does not invalidate owner recertification by timestamp alone. Pathway checks
-select the run's pages and retain their prerequisite placements as context.
+select the run's pages and retain their prerequisite placements as context. Plan
+validation uses the same selected page scope, including before scaffold item
+lists are populated; it checks the frontier's declarations without gating
+unrelated plan entries.
 
 Bare validator commands retain their repository-wide behavior for explicit
 maintenance. Outside-frontier repairs have their own recorded local evidence;
