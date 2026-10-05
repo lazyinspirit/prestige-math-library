@@ -768,8 +768,9 @@ test('missing prerequisites can be escalated and forged receipt identities fail 
 test('final gate retains mechanical and cross-batch checks', t => {
   const f = fixture(t), s: any = stages.find(s => s.id === '3b-author');
   const ids = s.gates(f.ctx).map((g: any) => g.id);
-  for (const id of ['step3-items', 'manifest-deps', 'scope-decisions', 'url-liveness', 'frontier-dependency-ledger', 'proof-contract', 'rendercheck'])
+  for (const id of ['step3-items', 'manifest-deps', 'scope-decisions', 'source-fetch-check', 'frontier-dependency-ledger', 'proof-contract', 'rendercheck'])
     assert.ok(ids.includes(id), `${id} missing`);
+  assert.ok(stages.find(s => s.id === '5b-cross').gates(f.ctx).some(g => g.id === 'url-liveness'));
   assert.ok(!ids.includes('splice-verify'), 'the author barrier precedes the splice');
   assert.ok(stages.find(s => s.id === '4-splice').gates(f.ctx).some(g => g.id === 'validate-plan'));
   assert.ok(ids.some((id: string) => /coverage/.test(id)));
@@ -825,7 +826,7 @@ test('escalations, unchanged incomplete audits and final mechanical failures nev
 
 test('prompts require concise scope decisions and impartial sequential dependency audits', () => {
   const base = new URL('../../../briefs/', import.meta.url);
-  assert.match(readFileSync(new URL('step3-scope.md', base), 'utf8'), /owner alone decides/);
+  assert.match(readFileSync(new URL('step3-scope.md', base), 'utf8'), /Only the owner decides/);
   const audit = readFileSync(new URL('group-author.md', base), 'utf8');
-  for (const re of [/one item\s+at a time/, /impartial/, /honest/, /authoritative sources/, /published item/, /cross-batch/, /confidence 1/, /still needs authored content/, /entire library/, /pairs still being constructed/]) assert.match(audit, re);
+  for (const re of [/one item\s+at a time/, /never pretend to understand/, /authoritative sources/, /published library/, /cross-batch/, /confidence 1/, /author every assigned item/, /Read sibling work/, /sibling supplier is unfinished/]) assert.match(audit, re);
 });
