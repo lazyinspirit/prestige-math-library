@@ -751,6 +751,65 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         || (!log.includes(snapshotBytes.trim()) && !sectionsRead)) return null;
       const contract = contractEntry(join(root, 'research', `${run}-batch-${safe(row.batch)}.proof-contracts.json`), id);
       const { risk_review: review, ...mathematicalContract } = contract ?? {};
+      let nativeMathematicalContract = mathematicalContract;
+      let replayEvidence = evidence;
+      if (!evidence.owner_citation_replay && id === 'lem-tangential-maximal-function-norm-bound'
+        && hashes.contract_sha256 !== hashValue(contract)) {
+        // Preserve the old receipt as historical evidence after the live quote
+        // changes. Its exact unchanged evidence must be the linked predecessor
+        // of the new, current-carrier-bound owner replay.
+        const refresh = read(join(root, 'research', `${run}-step5b-owner-tangential-citation-provenance.json`));
+        const liveHashes = carrierHashes(root, run, row);
+        const priorEvidence = JSON.parse(linked(refresh.manifest_repair?.prior_owner_evidence));
+        if (CARRIER_KEYS.some(key => refresh.current_carriers?.[key] !== liveHashes[key])
+          || !sameCanonical(priorEvidence.manifest_repair, evidence)) return null;
+        replayEvidence = refresh.manifest_repair;
+      }
+      if (replayEvidence.owner_citation_replay) {
+        // One owner-authored literal mirror update, never a native reread of
+        // the current quote. Inverse replay must recover the sealed contract.
+        if (!nativeMirror || id !== 'lem-tangential-maximal-function-norm-bound'
+          || replayEvidence.owner_citation_replay.path !== `research/${run}-step5b-owner-maximal-mass-adjudication.json`)
+          return null;
+        const owner = JSON.parse(linked(replayEvidence.owner_citation_replay));
+        const source = 'def-radial-and-nontangential-maximal-functions-of-a-tempered-distribution';
+        const sourceText = readFileSync(join(root, 'items', `${source}.md`), 'utf8');
+        const sourceClaim = sourceText.match(/^## Definition\s*\r?\n([\s\S]*?)(?=^## |$(?![\s\S]))/m)?.[1]?.trim();
+        const changes = owner.quoteChanges;
+        const change = changes?.[0];
+        const quotes = mathematicalContract.citations?.filter(value => value.fact === 'F1' && value.source === source);
+        const consumer = owner.consumers?.find(value => value.id === id);
+        const priorBytes = linked(replayEvidence.prior_owner_receipt), prior = JSON.parse(priorBytes);
+        const priorEvidence = JSON.parse(linked(replayEvidence.prior_owner_evidence));
+        if (owner.run !== run || owner.owner !== 'root' || owner.id !== source
+          || owner.after_raw_sha256 !== sha(sourceText)
+          || owner.source_supplier !== 'lem-schwartz-dilations-preserve-schwartz-space'
+          || owner.supplier_raw_sha256 !== sha(readFileSync(join(root, 'items', `${owner.source_supplier}.md`), 'utf8'))
+          || changes?.length !== 1 || change.consumer !== id || change.fact !== 'F1'
+          || change.path !== `research/${run}-batch-${row.batch}.proof-contracts.json`
+          || typeof change.before !== 'string' || typeof change.after !== 'string'
+          || change.before === change.after || !change.before.includes(owner.before_paragraph)
+          || change.before.replace(owner.before_paragraph, owner.after_paragraph) !== change.after
+          || quotes?.length !== 1 || quotes[0].source_section !== 'Definition'
+          || quotes[0].quote !== change.after || change.after !== sourceClaim
+          || consumer?.raw_sha256 !== hashes.item_file_sha256
+          || reviewed.item_sha256 !== hashes.item_file_sha256
+          || !currentFm.deps?.includes('def-countable-choice')
+          || !currentStatement?.[1]?.trim().startsWith('Assume Countable Choice.')
+          || !/^\*\*Given:\*\* Countable Choice,/m.test(currentText)
+          || prior.policy !== OWNER_RECERTIFICATION_POLICY || prior.run !== run || prior.step !== 5
+          || prior.id !== id || prior.owner !== true
+          || prior.basis !== 'initial-step5-authenticated-native-input-manifest-mirror'
+          || prior.evidence !== replayEvidence.prior_owner_evidence.path
+          || prior.evidence_sha256 !== replayEvidence.prior_owner_evidence.sha256
+          || !sameCanonical(priorEvidence.manifest_repair?.native_review, native)
+          || !sameCanonical(priorEvidence.step3_origin, replayEvidence.step3_origin)) return null;
+        nativeMathematicalContract = structuredClone(mathematicalContract);
+        nativeMathematicalContract.citations.find(value => value.fact === 'F1' && value.source === source).quote = change.before;
+        if (prior.carriers.item_file_sha256 !== hashes.item_file_sha256
+          || prior.carriers.manifest_sha256 !== hashes.manifest_sha256
+          || prior.carriers.contract_sha256 !== hashValue({ ...nativeMathematicalContract, risk_review: review })) return null;
+      }
       if (ownerReviewSuffix && !review?.notes?.endsWith(ownerReviewSuffix)) return null;
       const nativeReviewNotes = ownerReviewSuffix ? review.notes.slice(0, -ownerReviewSuffix.length) : review?.notes;
       const decisionPath = `research/${run}-alpha-batch-${row.batch}-5a-decisions.json`;
@@ -787,7 +846,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       // The unchanged subject is the native claim and derivation contract.
       // Grand-maximal Facts normalization is a separate exact owner replay above;
       // the flag does not assert byte-identical current Facts or native authorship.
-      if (reviewed.contract_sha256 !== hashValue(mathematicalContract)
+      if (reviewed.contract_sha256 !== hashValue(nativeMathematicalContract)
         || decisions.run !== run || !['accepted_repair', 'amended_repair'].includes(decision?.verdict)
         || review?.status !== 'complete' || review.reviewer !== `alpha-batch-${row.batch}`
         || !String(review.notes ?? '').trim()
@@ -866,10 +925,14 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
   const priorPath = auditorCreatedCertificationsPath(root, run, step);
   const prior = existsSync(priorPath)
     ? provenanceRows(root, run, step).find(value => value.id === id) : null;
-  const bootstrap = !prior
+  const citationRefresh = step === 5 && id === 'lem-tangential-maximal-function-norm-bound'
+    && step5ManifestRepairEvidence(evidenceText)?.owner_citation_replay;
+  const bootstrap = !prior || citationRefresh
     ? step === 5 ? bootstrapStep5Author(root, run, id, row, hashes, evidenceText)
       : step === 7 ? bootstrapStep7Author(root, run, id, row, hashes) : null
     : null;
+  if (citationRefresh && bootstrap?.basis !== 'initial-step5-authenticated-native-input-manifest-mirror')
+    throw Error(`${id}: unauthenticated owner citation replay`);
   const creation = prior?.owner_creation ? ownerCreation(root, run, id, prior.owner_creation) : null;
   const authorResult = prior?.author_result ?? bootstrap?.result_file;
   if (!authorResult && !creation) throw Error(`${id}: no prior auditor-created certification to recertify or eligible Step ${step} owner bootstrap`);

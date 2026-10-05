@@ -249,7 +249,10 @@ function validateRow(row, ids, opts = {}) {
   const errs = [];
   if (row.__parse_error) return [`unparseable jsonl at ${row.__parse_error}`];
   for (const f of MANDATORY) if (row[f] === undefined || row[f] === null || row[f] === '') errs.push(`${row.defect_id ?? '(no id)'}: missing ${f}`);
+  // Retain superseded taxonomy as history, with every other check intact.
+  // All active ownership rows still use the unchanged closed taxonomy.
   for (const [f, dom] of Object.entries(ENUMS)) if (row[f] !== undefined
+    && !(opts.historicalTaxonomy && ['subclass', 'location'].includes(f))
     && (f !== 'location' ? !dom.includes(row[f]) : !locationAllowed(row, opts))) {
     errs.push(`${row.defect_id}: ${f} "${row[f]}" outside the closed enum`);
   }
@@ -268,9 +271,13 @@ function validateRow(row, ids, opts = {}) {
 function validate(rows, runFilter) {
   const ids = new Set();
   const errs = [];
+  // Check backward, same-run/subject linkage before selecting historical rows.
+  // Invalid supersedes remains a validation failure, never an exemption.
+  const selectedRows = runFilter ? rows.filter(row => row.run === runFilter) : rows;
+  const active = new Set(activeOwnershipRows(selectedRows, errs));
   for (const row of rows) {
     if (runFilter && row.run !== runFilter) { if (row.defect_id) ids.add(row.defect_id); continue; }
-    errs.push(...validateRow(row, ids));
+    errs.push(...validateRow(row, ids, { historicalTaxonomy: !active.has(row) }));
   }
   return errs;
 }

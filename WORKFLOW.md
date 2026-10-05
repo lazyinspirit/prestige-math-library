@@ -124,6 +124,10 @@
   Append-only ledger corrections retain superseded rows as history. Both ledger
   validation and Step-5 ownership/open-defect checks use the shared validated
   active ownership rows; historical references remain available for provenance.
+  Active rows retain the full closed ledger schema. Superseded rows retain
+  their original subclass and location labels as historical taxonomy; every
+  other field check and backward same-run/subject supersedes linkage remain
+  required for the selected run. New appends always require current canonical labels.
   A prior repair captured after correction, or one physical defect reported
   against distinct carriers, requires explicit owner evidence binding the exact
   obligations, ledger row, current raw bytes and native report hashes. A prior
@@ -237,6 +241,18 @@ the exact current receipt; recomputed graph counts do not certify source claims,
 replace current-hash review, or erase independently changed consumer obligations.
 Both windows still need their reviewer and every required justified disposition,
 and the normal impact and closure gates remain unchanged.
+
+Frontier impact gates and lead task commands use `tools/frontier-item-gate.mjs`
+with `--tool impact-audit`; it derives a nonempty `--items-file` selection from
+the current manifests before every call. Missing or empty scope fails. The tool
+loads the complete dependency and citation graph, keeps changed frontier items
+and changed external suppliers used by frontier consumers, and requires
+dispositions only for the selected consumers. Preserve earlier unscoped receipts
+as history when normalizing a scoped receipt; excluded pending rows are not
+mathematical passes; preserved outside dispositions, including pending rows,
+do not require status or note closure for this frontier gate. Required frontier
+dispositions still need justified review. Bare `tools/impact-audit.mjs` commands
+retain their full-corpus behavior for explicit maintenance.
 
 ## Step 5 findings in another current-run batch
 
@@ -385,6 +401,19 @@ requires the native-read current mathematical body, exact baseline/current
 projections and the root's complete-proof/current-contract adjudication. It
 records the owner's source/DC reconciliation, not invented native authorship.
 Neither branch authorizes original-item promotion or new creation.
+
+The tangential maximal norm lemma also admits one exact owner citation replay:
+the root's recorded Countable Choice qualification of the radial/nontangential
+Definition is mirrored in its F1 contract quote. The current literal quote and
+raw supplier hashes, unchanged native item, explicit Statement/Given choice
+premise, original owner receipt/evidence and Step3 origin are bound together.
+Inverse replay of only that quote must recover the sealed native mathematical
+contract and the prior contract including its unchanged native risk review.
+Historical loading of the old receipt uses that same replay only when its
+unchanged evidence is the hashed predecessor and every refreshed live carrier
+matches. The public refresh revalidates the carried native manifest basis.
+The current quote retains owner provenance; this refresh does not assert that
+the native reviewer read the later owner repair or author a new proof review.
 
 The dilation's public `owner-recertify --refresh-evidence` option refreshes
 only an authorized `accepted_repair` to `amended_repair` decision binding on

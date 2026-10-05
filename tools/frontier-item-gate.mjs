@@ -14,12 +14,31 @@ const run = options.includes('--run') ? value('--run') : null;
 const tool = options.includes('--tool') ? value('--tool') : null;
 const positional = new Set(['precheck', 'rendercheck', 'prosecheck']);
 const selectors = new Set(['depcheck', 'fwdcheck', 'extcheck', 'depsource']);
-if (!/^[a-zA-Z0-9_-]+$/.test(run ?? '') || ![...positional, ...selectors, 'pathcheck', 'validate-plan'].includes(tool))
+if (!/^[a-zA-Z0-9_-]+$/.test(run ?? '') || ![...positional, ...selectors, 'pathcheck', 'validate-plan', 'impact-audit'].includes(tool))
   throw Error('Usage: frontier-item-gate.mjs --run RUN --tool TOOL [-- TOOL_ARGS]');
 if (toolArgs.includes('--items-file') || toolArgs.includes('--pages-file'))
   throw Error('The frontier supplies its own selectors');
 const allowedFlags = { precheck: ['--json'], rendercheck: ['--json', '--quiet'], prosecheck: ['--warnings', '--strict'], depcheck: ['--json', '--quiet', '--pending-audit-ok'], fwdcheck: ['--json', '--quiet'], extcheck: ['--json', '--quiet'], depsource: ['--json'], pathcheck: ['--json', '--quiet'], 'validate-plan': [] };
-if (toolArgs.some(arg => !allowedFlags[tool].includes(arg))) throw Error('Unsupported frontier validator flag');
+if (tool === 'impact-audit') {
+  const switches = new Set(['--json', '--current', '--direct-boundary']);
+  const pairs = new Set(['--touches', '--from', '--to', '--receipt', '--template', '--refresh-receipt']);
+  const seen = new Set();
+  for (let index = 0; index < toolArgs.length; index++) {
+    const flag = toolArgs[index];
+    if (seen.has(flag) || (!switches.has(flag) && !pairs.has(flag)))
+      throw Error('Unsupported or repeated frontier impact flag');
+    seen.add(flag);
+    if (pairs.has(flag)) {
+      const argument = toolArgs[++index];
+      if (typeof argument !== 'string' || !argument.trim() || argument.startsWith('-'))
+        throw Error(`${flag} requires a value`);
+    }
+  }
+  if (!seen.has('--touches') || !seen.has('--from') || seen.has('--to') === seen.has('--current'))
+    throw Error('Frontier impact requires --touches, --from and exactly one of --to or --current');
+  if (['--receipt', '--template', '--refresh-receipt'].filter(flag => seen.has(flag)).length > 1)
+    throw Error('Use one frontier impact receipt mode');
+} else if (toolArgs.some(arg => !allowedFlags[tool].includes(arg))) throw Error('Unsupported frontier validator flag');
 const root = process.cwd();
 const manifests = readdirSync(join(root, 'research')).filter(name =>
   name.startsWith(`${run}-batch-`) && /^\d+\.pages\.json$/.test(name.slice(`${run}-batch-`.length))).sort();

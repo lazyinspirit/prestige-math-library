@@ -1205,7 +1205,7 @@ const levelCoverageGate = (ctx) => gate('level-coverage', ['env', 'JUDGE_LINEUP=
  *  confirmed "0 changed" over the whole level (hence `5a-baseline` before
  *  5b). A second live `post-5a -> current` gate closes the lead Alpha's later
  *  edits before Step 5 ends. */
-const impactGate = (ctx) => gate('impact-audit', ['node', 'tools/impact-audit.mjs',
+const impactGate = (ctx) => frontierItemGate(ctx, 'impact-audit', 'impact-audit', [
   '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', 'post-5a',
   '--direct-boundary',
   '--receipt', `research/${ctx.run}-impact.json`,

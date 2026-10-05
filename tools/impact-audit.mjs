@@ -15,6 +15,8 @@
 // consumers. --direct-boundary stops logical propagation after one dependency
 // edge: a consumer whose exported interface changes is separately a changed
 // source in this window (or in the next window after a later repair).
+// --items-file gates only selected consumers, retaining changed external
+// suppliers when the complete graph shows an actual selected consumer.
 
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
@@ -22,9 +24,13 @@ import { fileURLToPath } from 'node:url';
 import { itemHashGuard, itemSurfaceHash, shortHash } from './item-hash.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { logicalConsumers } from './impact-scope.mjs';
+import { parseItemScope, includesItem, unknownItems } from './item-scope.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
-const argv = process.argv.slice(2);
+let itemScope;
+try { itemScope = parseItemScope(process.argv.slice(2)); }
+catch (cause) { die(cause.message); }
+const argv = itemScope.args;
 const asJson = argv.includes('--json');
 const touchesPath = option('--touches');
 const fromLabel = option('--from');
@@ -80,7 +86,7 @@ if (!before.surfaces || !after.surfaces) {
   die('selected snapshots predate public-surface fingerprints; take a fresh baseline and post-repair snapshot with touchlog.mjs');
 }
 
-const changed = [...new Set([...Object.keys(before.surfaces), ...Object.keys(after.surfaces)])]
+const allChanged = [...new Set([...Object.keys(before.surfaces), ...Object.keys(after.surfaces)])]
   .filter((id) => before.surfaces[id] !== after.surfaces[id]).sort();
 
 const items = new Map();
@@ -102,6 +108,8 @@ for (const file of readdirSync(join(REPO, 'items')).sort()) {
   for (const alias of list(fm, 'aliases')) aliases.set(alias, id);
 }
 const resolve = (id) => items.has(id) ? id : aliases.get(id);
+const unknown = unknownItems(itemScope, items.keys());
+if (unknown.length) die(`item selection contains unknown item IDs: ${unknown.join(', ')}`);
 
 const reverseDeps = new Map();
 const directCitations = new Map();
@@ -131,19 +139,26 @@ for (const item of items.values()) {
 }
 
 const impacts = [];
-for (const source of changed) {
+for (const source of allChanged) {
   const logical = logicalConsumers(reverseDeps, source, { directBoundary });
   const citations = directCitations.get(source) ?? new Map();
   const required = new Set([...logical, ...citations.keys()]);
   required.delete(source);
+  // Keep the complete graph above as prerequisite context. An external
+  // changed supplier remains a source event when it actually reaches a
+  // selected consumer; unrelated source events cannot invalidate this scope.
+  const scopedRequired = [...required].filter((id) => includesItem(itemScope, id)).sort();
+  if (!includesItem(itemScope, source) && !scopedRequired.length) continue;
   impacts.push({
     source,
     source_exists: items.has(source),
-    logical_consumers: [...logical].sort(),
-    direct_citation_consumers: [...citations].map(([id, channels]) => ({ id, via: [...channels].sort() })).sort((a, b) => a.id.localeCompare(b.id)),
-    required_review: [...required].sort(),
+    logical_consumers: [...logical].filter((id) => includesItem(itemScope, id)).sort(),
+    direct_citation_consumers: [...citations].filter(([id]) => includesItem(itemScope, id))
+      .map(([id, channels]) => ({ id, via: [...channels].sort() })).sort((a, b) => a.id.localeCompare(b.id)),
+    required_review: scopedRequired,
   });
 }
+const changed = impacts.map((impact) => impact.source);
 const required = [...new Set(impacts.flatMap((impact) => impact.required_review))].sort();
 
 const template = {
@@ -222,6 +237,9 @@ if (receiptPath) {
         if (!entry || typeof entry.id !== 'string') { error('receipt-disposition-shape', `${receiptPath}: every disposition needs an item id`); continue; }
         if (dispositions.has(entry.id)) error('receipt-disposition-duplicate', `${receiptPath}: duplicate disposition for ${entry.id}`);
         dispositions.set(entry.id, entry);
+        // Out-of-frontier rows remain historical evidence, including genuine
+        // pending findings. Only current required consumers are gate subjects.
+        if (itemScope.selected !== null && !required.includes(entry.id)) continue;
         if (!['still-licensed', 'repaired', 'not-load-bearing'].includes(entry.status)) {
           error('receipt-disposition-status', `${receiptPath}: ${entry.id} has an invalid or unresolved status`);
         }
@@ -243,9 +261,10 @@ else {
   for (const entry of warnings) console.warn(`WARN ${entry.code}: ${entry.message}`);
   for (const entry of errors) console.error(`ERROR ${entry.code}: ${entry.message}`);
 }
-process.exit(errors.length ? 1 : 0);
+// Let large JSON and diagnostic writes drain before exiting.
+process.exitCode = errors.length ? 1 : 0;
 
 function usage() {
-  console.error('usage: node tools/impact-audit.mjs --touches <touches.json> --from <snapshot-label> [--to <snapshot-label>] [--direct-boundary] [--receipt <impact.json> | --template <impact.json>] [--json]');
+  console.error('usage: node tools/impact-audit.mjs --touches <touches.json> --from <snapshot-label> [--to <snapshot-label>] [--direct-boundary] [--items-file <items.json>] [--receipt <impact.json> | --template <impact.json>] [--json]');
   process.exit(2);
 }
