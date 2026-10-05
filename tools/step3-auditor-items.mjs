@@ -84,8 +84,12 @@ function currentOwnerRepair(s, id, dependencies, sha256) {
     || JSON.stringify(row.dependencies) !== JSON.stringify(dependencies)
     || !String(row.reason ?? '').trim()) return null;
   const decided = Date.parse(row.at);
+  // The exact item hash above already binds every relevant planned item and
+  // page interface. A rewrite elsewhere in the shared plan is not a change to
+  // this frontier's proof inputs and cannot invalidate its owner verdict.
+  const sharedPlan = join(s.root, 'research', 'plan-spec.json');
   if (!Number.isFinite(decided) || itemInputPaths(s, id, dependencies)
-    .some(path => statSync(path).mtimeMs > decided)) return null;
+    .some(path => path !== sharedPlan && statSync(path).mtimeMs > decided)) return null;
   return { sha256: digest(row), at: row.at };
 }
 

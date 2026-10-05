@@ -342,7 +342,9 @@ when manifests or items are missing. Precheck uses selected item files; render a
 prose checks also include the run's existing pages. Dependency, forward-reference,
 external-result and source-home validators load the full library to resolve
 suppliers but check selected subjects. Relevant prerequisite cycles still fail;
-unrelated items, page hygiene and cycles do not hold the frontier. Pathway checks
+unrelated items, page hygiene and cycles do not hold the frontier. Exact owner
+item hashes bind relevant planned interfaces; an unrelated rewrite of the shared
+plan file does not invalidate owner recertification by timestamp alone. Pathway checks
 select the run's pages and retain their prerequisite placements as context.
 
 Bare validator commands retain their repository-wide behavior for explicit
