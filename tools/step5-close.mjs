@@ -96,7 +96,7 @@ const checks = [
   ['cross-group-edges', ['tools/cross-group-edges.mjs', 'check', '--run', run]],
   ['step5-routing-final', ['tools/step5-scope.mjs', 'check', '--run', run, '--phase', 'final']],
   ['splice-verify', ['tools/splice-plan.mjs', '--run', run, '--verify']],
-  ['validate-plan', ['tools/validate-plan.mjs', 'research/plan-spec.json']],
+  ['validate-plan', ['tools/frontier-item-gate.mjs', '--run', run, '--tool', 'validate-plan']],
   ['defect-ledger', ['tools/defect-ledger.mjs', 'validate', '--run', run]],
 ];
 // The routing check is the expensive one: on phase-2-remaining-27's 1,032-item

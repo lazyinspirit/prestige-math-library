@@ -350,6 +350,9 @@ validation uses the same selected page scope, including before scaffold item
 lists are populated; it checks the frontier's declarations without gating
 unrelated plan entries.
 
+Step-5 closure and Step-9 pathway gates use the same frontier selectors.
+The scoped prose check includes existing pathways of selected categories.
+
 Bare validator commands retain their repository-wide behavior for explicit
 maintenance. Outside-frontier repairs have their own recorded local evidence;
 their publication audit or formatting is not a gate on this run.

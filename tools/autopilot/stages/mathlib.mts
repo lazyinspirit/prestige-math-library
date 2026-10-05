@@ -1774,7 +1774,7 @@ export const stages = [
 
   // Direct review follows Step 3 authoring and the mechanical Step 4 barrier.
   ...step5Stages({
-    gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
+    gate, planGate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
     impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
   }),
 
@@ -2433,7 +2433,7 @@ export const stages = [
     pattern: resultPattern('tool', 'pathway-sync-v2'), concurrency: 1,
     plan: (ctx) => [{ role: 'tool', label: 'pathway-sync-v2', job: 'bookkeeping-mechanical',
       covers: ['all'], argv: ['node', 'tools/pathway-sync.mjs', '--run', ctx.run] }],
-    gates: (ctx) => [gate('pathcheck', ['node', 'tools/pathcheck.mjs']), closureGate(ctx)],
+    gates: (ctx) => [frontierItemGate(ctx, 'pathcheck', 'pathcheck'), closureGate(ctx)],
   },
   {
     id: '9-pathway-seed-v2', label: 'pathway prose obligations', units: () => ['all'],
@@ -2455,7 +2455,7 @@ export const stages = [
       task: [`research/${ctx.run}-alpha-pathway.task.md`, 'briefs/tasks/alpha-pathway.md'], timeout: 10800 }],
     gates: (ctx) => [
       gate('pathway-closure', ['node', 'tools/pathway-closure.mjs', 'check', '--run', ctx.run]),
-      gate('pathcheck', ['node', 'tools/pathcheck.mjs']), gate('prosecheck', ['node', 'tools/prosecheck.mjs']), closureGate(ctx),
+      frontierItemGate(ctx, 'pathcheck', 'pathcheck'), frontierItemGate(ctx, 'prosecheck', 'prosecheck'), closureGate(ctx),
     ],
   },
   {

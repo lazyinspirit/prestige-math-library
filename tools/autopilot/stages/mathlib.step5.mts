@@ -14,7 +14,7 @@ const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
 /** Build Step 5 with the canonical gate helpers from mathlib.mts. */
 export function step5Stages(d: any) {
   const {
-    gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
+    gate, planGate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
     impactGate, batches, alphaGroups, resultPattern, touchesPath,
   } = d;
 
@@ -221,7 +221,7 @@ export function step5Stages(d: any) {
         gate('cross-group-edges', ['node', 'tools/cross-group-edges.mjs', 'check', '--run', ctx.run, '--reconcile-plan']),
         routingGate(ctx, 'final'),
         gate('step5-ledger-valid', ['node', 'tools/defect-ledger.mjs', 'validate', '--run', ctx.run]),
-        gate('validate-plan', ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json']),
+        planGate(ctx),
         // A 5a material repair of a published dependency loses its obsolete
         // audit record, but may need to remain published for unchanged
         // published consumers. `routingGate(final)` above validates that exact
