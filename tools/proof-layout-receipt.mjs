@@ -3,7 +3,6 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { REPO, WEB_DIR, precheckSource } from './paths.mjs';
 import { runScope, sha256 } from './step9-lib.mjs';
-import { itemHashGuard, shortHash } from './item-hash.mjs';
 import { LAYOUT_GATES } from './proof-layout-core.mjs';
 
 export const proofLayoutPath = (run, root = REPO) => join(root, 'research', `${run}-proof-layout.json`);
@@ -14,15 +13,14 @@ export function proofLayoutScope(run, root = REPO) {
   const touches = JSON.parse(readFileSync(join(root, touchFile), 'utf8'));
   if (!Array.isArray(touches.snapshots) || !touches.snapshots.length
     || touches.snapshots.some(s => !s.hashes || typeof s.hashes !== 'object')) throw Error('proof-layout: missing or malformed touch snapshots');
-  const ids = new Set(scope.items.map(i => i.id));
-  const first = touches.snapshots[0].hashes;
-  for (const s of touches.snapshots) {
-    for (const [id, hash] of Object.entries(s.hashes)) if (first[id] !== hash) ids.add(id);
-  }
-  // Catch late repairs and additions after the last touch snapshot as well.
-  for (const name of readdirSync(join(root, 'items')).filter(n => n.endsWith('.md'))) {
-    const id = name.slice(0, -3);
-    if (first[id] !== shortHash(itemHashGuard(readFileSync(join(root, 'items', name), 'utf8')))) ids.add(id);
+  const manifests = readdirSync(join(root, 'research')).filter(name =>
+    name.startsWith(`${run}-batch-`) && /^\d+\.pages\.json$/.test(name.slice(`${run}-batch-`.length))).sort();
+  if (!manifests.length) throw Error('proof-layout: missing frontier manifests');
+  const ids = new Set();
+  for (const name of manifests) {
+    const pages = JSON.parse(readFileSync(join(root, 'research', name), 'utf8'));
+    if (!Array.isArray(pages) || !pages.length) throw Error(`proof-layout: malformed manifest ${name}`);
+    for (const page of pages) for (const item of page.items ?? []) ids.add(typeof item === 'string' ? item : item.id);
   }
   const files = [...ids].sort().map(id => {
     if (!/^[a-z][a-z0-9-]*$/.test(id)) throw Error(`proof-layout: invalid item ID ${id}`);
@@ -32,7 +30,7 @@ export function proofLayoutScope(run, root = REPO) {
   });
   if (!files.length) throw Error('proof-layout: empty item scope');
   return { pages: scope.pages.map(p => ({ id: p.id, kind: p.kind, file: p.file, items: p.items })), files,
-    inputs: [...new Set([scope.ledger, touchFile, ...scope.pages.map(p => p.file), ...files])].sort() };
+    inputs: [...new Set([scope.ledger, touchFile, ...manifests.map(name => `research/${name}`), ...scope.pages.map(p => p.file), ...files])].sort() };
 }
 
 function sourceFiles(dir) {

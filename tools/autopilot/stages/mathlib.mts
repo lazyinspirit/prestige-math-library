@@ -688,7 +688,7 @@ const sameUrl = (a: string, b: string) => {
 
 /** Is this `validate-plan` failure the one class that is an EDGE DECISION?
  *
- *  That gate is repo-wide and fails for heterogeneous reasons — a cycle, a
+ *  That gate is frontier-scoped and fails for heterogeneous reasons — a cycle, a
  *  forward reference, an unresolved id, a page over the 100-item ceiling — and
  *  most are not anybody's edge to decide. Only `undeclared-prereq` is: an item
  *  whose `deps` reach a page outside its own page's `requires` closure, settled
@@ -708,7 +708,7 @@ const sameUrl = (a: string, b: string) => {
 export const isEdgeDecision = async ({ ctx, failure }: any): Promise<boolean> => {
   if (failure?.id !== 'validate-plan') return false;
   const { spawnSync } = await import('node:child_process');
-  const v = spawnSync('node', ['tools/validate-plan.mjs', 'research/plan-spec.json'],
+  const v = spawnSync('node', ['tools/frontier-item-gate.mjs', '--run', ctx.run, '--tool', 'validate-plan'],
     { cwd: ctx.repo, encoding: 'utf8' });
   return /undeclared-prereq/.test(`${v.stdout ?? ''}${v.stderr ?? ''}`);
 };
@@ -1709,7 +1709,7 @@ export const stages = [
     // because it looks like the repair was tried.
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
       // ONLY the undeclared-prereq class, not every validate-plan failure.
-      // That gate is repo-wide and fails for heterogeneous reasons — a cycle,
+      // That gate is frontier-scoped and fails for heterogeneous reasons — a cycle,
       // a forward reference, an unresolved id, a page over the 100-item
       // ceiling — and most of them are not edge decisions at all. An Alpha
       // handed a `size` violation under an edge-adjudication task would reach
