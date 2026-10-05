@@ -233,6 +233,15 @@ from auditor-created classification only after an ordinary current
 dependencies, including its declared manifest and authored dependencies. It emits
 no auditor item or scope certificate for that creation. Scope approval, native
 unit coverage and mathematical acceptance remain their ordinary obligations.
+Before `recordStep3` replaces an item-owner decision, it preserves the actual
+current receipt bytes under
+`research/RUN-step3b-owner-history-ITEM/JSON-DIGEST.json`. History is immutable and
+is captured only from the canonical current receipt; there is no retrospective
+history registrar. A prior native certificate may validate its historical repair
+marker against this archive while the next certification requires the ordinary
+current owner decision. An archived repair never substitutes for current
+acceptance, and native author-result validation remains mandatory.
+
 All other additions retain native provenance checks. Late sibling supplier inputs
 may be owner-recertified when the item's own file is still in a genuine successful
 native author write window; a new helper or later own-proof edit cannot borrow an

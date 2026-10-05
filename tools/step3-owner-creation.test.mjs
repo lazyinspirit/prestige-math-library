@@ -157,3 +157,55 @@ test('known timeline registration is immutable and checks the authored statement
   assert.throws(() => loadStep3OwnerCreation(f.root, 'r', 'lem-owner'), /stale owner creation claim/);
   assert.deepEqual(readFileSync(registered.path), bytes);
 });
+
+test('successive actual owner repairs preserve genuine native origin through append-only history', t => {
+  const f = fixture(t); f.native();
+  const original = certifyAuditorItems(f.root, 'r');
+  const id = 'lem-native', path = join(f.root, `items/${id}.md`);
+  assert.equal(original.items[0].owner_recertification, undefined);
+  const repair = n => {
+    f.write(`items/${id}.md`, `${item(id)}\nActual proof repair ${n}.\n`);
+    const at = new Date(`2025-01-01T00:00:${String(11 + n).padStart(2, '0')}Z`);
+    utimesSync(path, at, at);
+    f.decide(id);
+    return certifyAuditorItems(f.root, 'r');
+  };
+  const first = repair(1), firstOwner = readFileSync(join(f.root, `research/r-step3b-owner-${id}.json`));
+  const second = repair(2);
+  assert.equal(second.items[0].author_result, original.items[0].author_result);
+  assert.notEqual(second.items[0].sha256, first.items[0].sha256);
+  assert.notEqual(second.items[0].owner_recertification.sha256, first.items[0].owner_recertification.sha256);
+  const history = join(f.root, `research/r-step3b-owner-history-${id}/${first.items[0].owner_recertification.sha256}.json`);
+  assert.deepEqual(readFileSync(history), firstOwner);
+  assert.deepEqual(certifyAuditorItems(f.root, 'r').items, second.items);
+  assert.deepEqual(readFileSync(history), firstOwner);
+  const authorPath = join(f.root, 'research/r-dispatch/alpha-high-native.result.json');
+  const authorBytes = readFileSync(authorPath), author = JSON.parse(authorBytes);
+  for (const change of [{ ok: false }, { role: 'invented-owner-role' }, { label: 'forged-native-label' }]) {
+    writeFileSync(authorPath, JSON.stringify({ ...author, ...change }));
+    assert.throws(() => certifyAuditorItems(f.root, 'r'), /no successful Step 3/,
+      'historical owner evidence never substitutes for a genuine successful native author');
+  }
+  writeFileSync(authorPath, authorBytes);
+  // An unaudited next edit still fails, despite surviving native origin history.
+  f.write(`items/${id}.md`, `${item(id)}\nAn unaccepted later proof change.\n`);
+  assert.equal(itemDecision(loadStep3(f.root, 'r'), id).closed, false);
+  assert.throws(() => certifyAuditorItems(f.root, 'r'), /changed after its latest successful/);
+});
+
+test('owner history is strict historical evidence, never a substitute for the current decision', t => {
+  const f = fixture(t); f.native(); const id = 'lem-native';
+  certifyAuditorItems(f.root, 'r');
+  f.write(`items/${id}.md`, `${item(id)}\nOwner proof repair.\n`);
+  utimesSync(join(f.root, `items/${id}.md`), new Date('2025-01-01T00:00:12Z'), new Date('2025-01-01T00:00:12Z'));
+  f.decide(id); const certificate = certifyAuditorItems(f.root, 'r');
+  // A new ordinary receipt automatically captures the actual old current file.
+  recordStep3(f.root, { run: 'r', phase: 'item', item: id, owner: true, decision: 'repaired',
+    dependencies: [], reason: 'A second actual examination of the stable current proof.' });
+  rmSync(join(f.root, `research/r-step3b-owner-${id}.json`));
+  assert.equal(itemDecision(loadStep3(f.root, 'r'), id).closed, false);
+  assert.throws(() => certifyAuditorItems(f.root, 'r'), /prior owner repair is no longer current/);
+  const history = join(f.root, `research/r-step3b-owner-history-${id}/${certificate.items[0].owner_recertification.sha256}.json`);
+  f.write(history.replace(f.root + '/', ''), JSON.stringify({ ...JSON.parse(readFileSync(history)), reason: 'Forged replacement history.' }));
+  assert.throws(() => itemDecision(loadStep3(f.root, 'r'), id), /invalid historical owner receipt digest/);
+});

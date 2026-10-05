@@ -6,6 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { yaml } from './pathway-lib.mjs';
 import { loadStep3AuditorProvenance } from './auditor-created-items.mjs';
 import { ownerPairSplitScopes } from './step3-auditor-items.mjs';
+import { preserveStep3OwnerReceipt } from './step3-owner-history.mjs';
 
 const safe = s => {
   if (!/^[a-zA-Z0-9_-]+$/.test(s ?? '')) throw Error('Invalid run or target ID');
@@ -59,6 +60,9 @@ function auditorScopeCertification(s, id) {
 function auditorItemCertification(s, id) {
   const row = auditorCertifications(s)?.items.find(value => value.id === id);
   const live = s.items.get(id);
+  // Historical repair receipts prove native origin, never current acceptance.
+  // itemDecision handles a present current owner decision before this fallback.
+  if (row?.owner_recertification && !receipt(s, 'item', id, true)) return null;
   if (!row || !Array.isArray(row.dependencies) || row.page !== live?.page.id
     || row.batch !== String(live?.page.batch)) return null;
   return row.sha256 === itemHash(s, id, row.dependencies) ? row : null;
@@ -268,6 +272,7 @@ export function recordStep3(root, { run, phase, page, item, decision, reason, ow
     reason, ...(phase === 'item' ? { dependencies: [...new Set(dependencies)].sort() } : {}),
     ...(reopenedReview ? { reopens_review_sha256: hash(reopenedReview) } : {}),
     sha256: phase === 'scope' ? scopeHash(s, id) : itemHash(s, id, dependencies), at: new Date().toISOString() };
+  if (phase === 'item' && owner) preserveStep3OwnerReceipt(root, run, id);
   writeFileSync(file(root, run, phase === 'scope' ? '3a' : '3b', id, owner), JSON.stringify(row, null, 2) + '\n');
   return row;
 }

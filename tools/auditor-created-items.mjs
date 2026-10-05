@@ -12,6 +12,7 @@ import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { itemHashGuard, itemHashJudge } from './item-hash.mjs';
 import { split, yaml } from './pathway-lib.mjs';
+import { historicalStep3OwnerReceipt } from './step3-owner-history.mjs';
 
 const safe = (value, what = 'value') => {
   if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error(`Invalid ${what}`);
@@ -819,10 +820,8 @@ function provenanceRows(root, run, step, cache = new Map()) {
     })) throw Error(`${row.id}: missing successful Step ${step} author-result provenance`);
     if (step === 3 && row.owner_recertification !== undefined) {
       const marker = row.owner_recertification;
-      const ownerPath = join(root, 'research', `${run}-step3b-owner-${safe(row.id, 'item ID')}.json`);
-      if (!/^[a-f0-9]{64}$/.test(marker?.sha256 ?? '') || !existsSync(ownerPath))
-        throw Error(`${row.id}: missing owner recertification provenance`);
-      const owner = read(ownerPath);
+      const owner = historicalStep3OwnerReceipt(root, run, row.id, marker);
+      if (!owner) throw Error(`${row.id}: missing owner recertification provenance`);
       if (sha(JSON.stringify(owner)) !== marker.sha256 || owner.at !== marker.at
         || owner.version !== 1 || owner.run !== run || owner.phase !== 'item'
         || owner.target !== row.id || owner.owner !== true || owner.decision !== 'repaired'
