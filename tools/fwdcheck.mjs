@@ -116,16 +116,6 @@ for (const p of plan.pages) {
   for (const it of p.items ?? []) plannedHome.set(it.id, p.id);
 }
 
-// "Strictly later" is meaningless unless plan order is topological for
-// `requires`. validate-plan asserts this too; assert it here so fwdcheck is
-// sound standalone.
-for (const [pid, p] of planPage)
-  for (const r of p.requires) {
-    const q = planPage.get(r);
-    if (q && q.order >= p.order)
-      err('plan-order-broken', `plan order is not topological: ${pid} (#${p.order}) requires ${r} (#${q.order})`);
-  }
-
 /** level(p) = 1 + max(level of its prerequisites); published pages are 0. */
 const levelCache = new Map();
 function level(pid) {
@@ -183,23 +173,41 @@ const realPages = new Set();
     const { fm, body } = split(readFileSync(fp, 'utf8'));
     const pid = scalar(fm, 'page') ?? basename(e.name, '.md');
     realPages.add(pid);
-    pageBodies.push({ rel: fp.slice(REPO.length + 1), body });
+    pageBodies.push({ pid, rel: fp.slice(REPO.length + 1), body,
+      itemIds: [...list(fm, 'items'), ...list(fm, 'examples')],
+    });
     for (const id of [...list(fm, 'items'), ...list(fm, 'examples')])
       if (!actualHome.has(id)) actualHome.set(id, pid);
   }
 })(join(REPO, 'library'));
 
+const homeOf = (id) => actualHome.get(id) ?? plannedHome.get(id);
+const orderOf = (pid) => planPage.get(pid)?.order ?? Infinity;
+const selectedRoots = itemScope.selected === null ? [...items.keys()]
+  : [...itemScope.selected].filter(id => items.has(id));
+const selectedPages = new Set(itemScope.selected === null ? realPages
+  : [...selectedRoots.map(homeOf).filter(Boolean),
+    ...pageBodies.filter(p => p.itemIds.some(id => includesItem(itemScope, resolve(id))))
+      .map(p => p.pid)]);
+// "Strictly later" is meaningless unless plan order is topological for
+// `requires`. validate-plan asserts this too; assert it here so fwdcheck is
+// sound standalone.
+for (const [pid, p] of planPage)
+  if (itemScope.selected === null || selectedPages.has(pid)) for (const r of p.requires) {
+    const q = planPage.get(r);
+    if (q && q.order >= p.order)
+      err('plan-order-broken', `plan order is not topological: ${pid} (#${p.order}) requires ${r} (#${q.order})`);
+  }
+
+
 // Page prose may wikilink other PAGES as well as items, and page ids are not
 // item ids, so both namespaces count as resolved here.
-for (const { rel, body } of pageBodies)
-  for (const m of body.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)) {
+for (const { pid, rel, body } of pageBodies)
+  if (selectedPages.has(pid)) for (const m of body.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)) {
     const t = m[1].trim();
     if (resolve(t) || realPages.has(t) || planPage.has(t)) continue;
     warn('page-link-unresolved', `${rel}: wikilink [[${t}]] names neither an item nor a page; page prose cannot declare forward references, put it in an item's Remarks`);
   }
-
-const homeOf = (id) => actualHome.get(id) ?? plannedHome.get(id);
-const orderOf = (pid) => planPage.get(pid)?.order ?? Infinity;
 
 // ------------------------------------------------------------------- checks
 
@@ -230,8 +238,7 @@ for (const it of items.values()) {
     if (selectedItem && orderOf(th) <= orderOf(home))
       err('forward-not-later', `${it.file}: forward_refs "${t}" lives on ${th} (#${orderOf(th)}), which is NOT after ${home} (#${orderOf(home)}); this is a backward or lateral dependency`);
 
-    // The global item-cycle check must see every actual load-bearing edge, even
-    // in focused mode. Only the per-item diagnostics are filtered.
+    // Load the full graph so scoped consumers retain their prerequisite closure.
     if (bearing) loadBearingEdges.push({ from: it.id, to: t });
 
     const rec = { from: it.id, fromPage: home, to: t, toPage: th, toLevel: level(th), bearing };
@@ -342,10 +349,22 @@ const itemSucc = (id) => [
   ...(bearingFrom.get(id) ?? []),
 ].map(resolve).filter((x) => x && items.has(x));
 
-for (const comp of sccs([...items.keys()], itemSucc)) {
+function reachableContext(roots, succ) {
+  const context = new Map(roots), queue = [...context.keys()];
+  for (let i = 0; i < queue.length; i++) {
+    const node = queue[i];
+    for (const next of succ(node)) if (!context.has(next)) {
+      context.set(next, context.get(node));
+      queue.push(next);
+    }
+  }
+  return context;
+}
+const itemContext = reachableContext(selectedRoots.map(id => [id, id]), itemSucc);
+for (const comp of sccs(selectedRoots, itemSucc)) {
   const self = comp.length === 1 && itemSucc(comp[0]).includes(comp[0]);
   if (comp.length > 1 || self)
-    err('forward-cycle', `CIRCULAR (deps + load-bearing forward references): ${comp.slice().reverse().join(' -> ')} -> ${comp[comp.length - 1]}`);
+    err('forward-cycle', `${itemScope.selected === null ? '' : `${items.get(itemContext.get(comp[0])).file}: prerequisite cycle: `}CIRCULAR (deps + load-bearing forward references): ${comp.slice().reverse().join(' -> ')} -> ${comp[comp.length - 1]}`);
 }
 
 // PAGE level, deps edges together with ORIENTATION-ONLY forward edges. Load
@@ -369,9 +388,15 @@ for (const it of items.values()) {
   for (const t of it.forward)
     if (!it.loadBearingText.includes('[[' + t)) addEdge(homeOf(t), home);   // later -> earlier
 }
-for (const comp of sccs([...nodes], (v) => [...(edges.get(v) ?? [])]))
+const pageRoots = itemScope.selected === null ? [...nodes] : [...selectedPages];
+const pageSucc = v => [...(edges.get(v) ?? [])];
+const pageContext = reachableContext(pageRoots.map(pid => [pid, itemScope.selected === null ? pid
+  : selectedRoots.find(id => homeOf(id) === pid)
+    ?? pageBodies.find(p => p.pid === pid)?.itemIds.map(resolve).find(id => itemScope.selected.has(id))
+    ?? pid]), pageSucc);
+for (const comp of sccs(pageRoots, pageSucc))
   if (comp.length > 1)
-    err('stack-cycle', `CIRCULAR PAGES: ${comp.slice().reverse().join(' -> ')} -> ${comp[comp.length - 1]}`);
+    err('stack-cycle', `${itemScope.selected === null ? '' : `${items.get(pageContext.get(comp[0]))?.file ?? pageContext.get(comp[0])}: prerequisite page cycle: `}CIRCULAR PAGES: ${comp.slice().reverse().join(' -> ')} -> ${comp[comp.length - 1]}`);
 
 // ---------------------------------------------------------------- the ledger
 
@@ -427,35 +452,41 @@ if (writeLedger) {
 
 // ---------------------------------------------------------------------- report
 
+const reportOpen = open.filter(r => includesItem(itemScope, r.from));
+const reportClosed = closed.filter(r => includesItem(itemScope, r.from));
+const reportForwardDependent = [...forwardDependent].filter(([id]) => includesItem(itemScope, id));
+const reportBearing = loadBearingEdges.filter(r => includesItem(itemScope, r.from));
 const summary = {
   items: items.size,
-  openForwardRefs: open.length,
-  closedForwardRefs: closed.length,
-  loadBearing: loadBearingEdges.length,
-  restingOnLaterMaterial: forwardDependent.size,
+  openForwardRefs: reportOpen.length,
+  closedForwardRefs: reportClosed.length,
+  loadBearing: reportBearing.length,
+  restingOnLaterMaterial: reportForwardDependent.length,
   errors: errors.length,
   warnings: warns.length,
   ...(itemScope.selected === null ? { scope: 'full' } : {
     scope: 'focused-items', item_checks: [...itemScope.selected].sort(),
-    global_item_and_page_cycle_checks: 'complete',
+    page_checks: [...selectedPages].sort(),
+    prerequisite_item_cycle_checks: itemContext.size,
+    prerequisite_page_cycle_checks: pageContext.size,
   }),
 };
 
 if (asJson) {
-  console.log(JSON.stringify({ summary, open, closed, forwardDependent: [...forwardDependent], errors, warns }, null, 2));
+  console.log(JSON.stringify({ summary, open: reportOpen, closed: reportClosed, forwardDependent: reportForwardDependent, errors, warns }, null, 2));
 } else {
   if (!quiet) {
     console.log(itemScope.selected === null
       ? `fwdcheck: ${items.size} items, ${open.length} open forward reference(s), ${closed.length} closed, ${loadBearingEdges.length} load bearing`
-      : `fwdcheck: focused item checks for ${summary.item_checks.length} item(s); complete global dependency/forward graph checks cover ${items.size} items`);
-    if (open.length) {
+      : `fwdcheck: focused item checks for ${summary.item_checks.length} item(s); selected page and prerequisite dependency/forward graph checks cover ${itemContext.size} items and ${pageContext.size} pages`);
+    if (reportOpen.length) {
       console.log('\nopen forward references (target not authored yet):');
-      for (const r of open)
+      for (const r of reportOpen)
         console.log(`  ${r.from.padEnd(34)} -> ${r.to.padEnd(38)} closes on ${r.toPage} (level ${r.toLevel})${r.bearing ? '  [load bearing]' : ''}`);
     }
-    if (forwardDependent.size) {
-      console.log(`\n${forwardDependent.size} item(s) rest on later material and carry the forward marker:`);
-      for (const [id, how] of [...forwardDependent].sort()) console.log(`  ${id.padEnd(40)} ${how}`);
+    if (reportForwardDependent.length) {
+      console.log(`\n${reportForwardDependent.length} item(s) rest on later material and carry the forward marker:`);
+      for (const [id, how] of reportForwardDependent.slice().sort()) console.log(`  ${id.padEnd(40)} ${how}`);
     }
   }
   if (warns.length) {
@@ -469,7 +500,7 @@ if (asJson) {
   } else {
     console.log(itemScope.selected === null
       ? '\nOK — every forward reference is declared, points strictly forward, is closed by a planned later page, stays off the spine unless orientation only, and introduces no cycle.'
-      : '\nOK — selected item checks passed; complete global dependency/forward graph checks passed.');
+      : '\nOK — selected item/page checks and their prerequisite dependency/forward cycle checks passed.');
   }
 }
 

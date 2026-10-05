@@ -334,6 +334,21 @@ still checked against live carriers; this later provenance path cannot create an
 origin, accept a stale current certification, rewrite a closed receipt, or replace
 current proof review and normal gates.
 
+## Frontier validator scope
+
+Item gates select only the current run's manifest items. `tools/frontier-item-gate.mjs`
+derives the selection before each validator call; it never defaults to the corpus
+when manifests or items are missing. Precheck uses selected item files; render and
+prose checks also include the run's existing pages. Dependency, forward-reference,
+external-result and source-home validators load the full library to resolve
+suppliers but check selected subjects. Relevant prerequisite cycles still fail;
+unrelated items, page hygiene and cycles do not hold the frontier. Pathway checks
+select the run's pages and retain their prerequisite placements as context.
+
+Bare validator commands retain their repository-wide behavior for explicit
+maintenance. Outside-frontier repairs have their own recorded local evidence;
+their publication audit or formatting is not a gate on this run.
+
 ## Scoped closeout with unrelated work present
 
 Step-9 readiness and report integrity seal physical files and exact symbolic-link

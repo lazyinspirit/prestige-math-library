@@ -260,46 +260,25 @@ const alphaCohort = (ctx: any, u: string): string[] =>
   alphaGroups(ctx).find((g: any) => g.covers.map(String).includes(String(u)))?.covers.map(String) ?? [String(u)];
 
 const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
-const extGate = () => gate('extcheck', ['node', 'tools/extcheck.mjs']);
+const frontierItemGate = (ctx: any, id: string, tool: string, args: string[] = [], extra: any = {}) =>
+  gate(id, ['node', 'tools/frontier-item-gate.mjs', '--run', ctx.run, '--tool', tool, '--', ...args], extra);
+const extGate = (ctx: any) => frontierItemGate(ctx, 'extcheck', 'extcheck');
 
-/** Gates that apply to the whole repository, re-run at several stages because
- *  authoring and repair both change items on disk.
- *
- *  `pendingAuditOk` belongs only to a bounded pre-certification window. The
- *  caller must first validate the exact published-repair handoff; every other
- *  repo-wide checkpoint keeps `published-unaudited` fatal. */
+/** Item subjects belong only to the current frontier. Validators may load
+ * external suppliers to resolve prerequisites, but unrelated items cannot hold
+ * a frontier gate. The wrapper derives its exact scope from live manifests. */
 const repoWide = (ctx, { pendingAuditOk = false }: { pendingAuditOk?: boolean } = {}) => [
-  gate('precheck', ['node', 'tools/tsx-run.mjs', 'tools/precheck.mts'], {
+  frontierItemGate(ctx, 'precheck', 'precheck', [], {
     liveness: { pattern: /(\d+)\s+checked/.source, min: 1, unit: 'items checked' },
   }),
-  gate('depcheck', ['node', 'tools/depcheck.mjs', ...(pendingAuditOk ? ['--pending-audit-ok'] : [])]),
-  gate('fwdcheck', ['node', 'tools/fwdcheck.mjs', '--quiet']),
-  extGate(),
-  gate('rendercheck', ['node', 'tools/rendercheck.mjs']),
-  // gates.mjs listed these two as gates of record at steps 3/5/8/9 and
-  // 2/3/5/9; this table — the only one that runs — carried neither.
-  // prosecheck is the positional-claim class LEVELS.md calls "where 100% of
-  // this library's found defects live"; depsource is dep-to-page resolution.
-  // (citecheck stays advisory by design: it cannot exit nonzero, and an
-  // always-green gate is noise, not checking — readers run it by hand.)
-  gate('prosecheck', ['node', 'tools/prosecheck.mjs']),
-  gate('depsource', ['node', 'tools/depsource.mjs']),
-  // The category pages render an AUTHORED reading order (library/<cat>/_pathway.md),
-  // so nothing mechanical keeps it covering the corpus as levels land. This is
-  // that guarantee: a published page in no part fails here. `pathway-sync` runs
-  // in 9-pathway-sync-v2, ahead of the report Alpha, so the usual case is already
-  // repaired by the time this reads it.
-  gate('pathcheck', ['node', 'tools/pathcheck.mjs']),
-  // Scope loss is invisible to every gate that reads current state, and the
-  // add/delete authority briefs/alpha.md grants runs through step 8 — so the
-  // planning scope ledger is re-checked at every repo-wide gate point, not only
-  // through step 3 (where it stopped when a scaffolded pair vanished anyway).
+  frontierItemGate(ctx, 'depcheck', 'depcheck', pendingAuditOk ? ['--pending-audit-ok'] : []),
+  frontierItemGate(ctx, 'fwdcheck', 'fwdcheck', ['--quiet']),
+  extGate(ctx),
+  frontierItemGate(ctx, 'rendercheck', 'rendercheck'),
+  frontierItemGate(ctx, 'prosecheck', 'prosecheck'),
+  frontierItemGate(ctx, 'depsource', 'depsource'),
+  frontierItemGate(ctx, 'pathcheck', 'pathcheck'),
   scopeGate(ctx),
-  // The judge sweep and level-coverage both expand pages into items — the
-  // sweep via plan-spec.json (spliced at step 4), closure via the batch
-  // manifests. An item an Alpha adds to a manifest after step 4 diverges the
-  // two scopes: it escapes the sweep or hard-stops closure. Verify fails on
-  // any divergence; the licensed remedy is splice-plan --batch <i> --update.
   gate('splice-verify', ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--verify']),
 ];
 
@@ -1513,7 +1492,7 @@ export const stages = [
       gate('item-dependency-levels', ['node', 'tools/item-dependency-levels.mjs', 'check', '--run', ctx.run]),
       gate('step1-dependency-ledger', ['node', 'tools/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run, '--require-reviewed']),
       scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }),
-      ...policyGates(ctx), planGate(), extGate(), urlGate(ctx), backingGate(ctx), fetchGate(ctx),
+      ...policyGates(ctx), planGate(), extGate(ctx), urlGate(ctx), backingGate(ctx), fetchGate(ctx),
     ],
     onHold: holdStep1,
   },
@@ -1651,7 +1630,7 @@ export const stages = [
       // Authored IDs exist before Step 4 splices them into the plan. Scaffold
       // mint checks would reject those IDs; item mode below checks their content.
       ...coverageGates(ctx, { requireDestination: true }),
-      extGate(), manifestDepsGate(ctx), scopeDecisionsGate(ctx),
+      extGate(ctx), manifestDepsGate(ctx), scopeDecisionsGate(ctx),
       // A source already fetched and stamped can be cited while its live URL
       // is temporarily unavailable. Step 5b checks URL liveness and backing
       // after independent review; a dead link does not hold Step 3 authoring.
