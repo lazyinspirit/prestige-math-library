@@ -33,6 +33,7 @@ import { dependencyLevels, orderedItems } from '../../item-dependency-levels.mjs
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { holdStep1 } from './step1-hold.mts';
 import { yaml } from '../../pathway-lib.mjs';
+import { scopedGateArgv } from '../../frontier-gate-scope.mjs';
 
 // Version the composed Step-5 module independently. The executor watches both
 // files and re-imports this root when either changes; the query prevents Node's
@@ -261,36 +262,38 @@ const alphaCohort = (ctx: any, u: string): string[] =>
   alphaGroups(ctx).find((g: any) => g.covers.map(String).includes(String(u)))?.covers.map(String) ?? [String(u)];
 
 const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
-const extGate = () => gate('extcheck', ['node', 'tools/extcheck.mjs']);
+const frontierGate = (ctx: any, id: string, argv: string[], mode: string, extra: any = {}) =>
+  gate(id, scopedGateArgv(ctx, argv, mode), extra);
+const extGate = (ctx: any) => frontierGate(ctx, 'extcheck', ['node', 'tools/extcheck.mjs'], 'items');
 
-/** Gates that apply to the whole repository, re-run at several stages because
+/** Gates on current frontier subjects with complete prerequisite context, repeated because
  *  authoring and repair both change items on disk.
  *
  *  `pendingAuditOk` belongs only to a bounded pre-certification window. The
  *  caller must first validate the exact published-repair handoff; every other
  *  repo-wide checkpoint keeps `published-unaudited` fatal. */
 const repoWide = (ctx, { pendingAuditOk = false }: { pendingAuditOk?: boolean } = {}) => [
-  gate('precheck', ['node', 'tools/tsx-run.mjs', 'tools/precheck.mts'], {
+  frontierGate(ctx, 'precheck', ['node', 'tools/tsx-run.mjs', 'tools/precheck.mts'], 'itemFiles', {
     liveness: { pattern: /(\d+)\s+checked/.source, min: 1, unit: 'items checked' },
   }),
-  gate('depcheck', ['node', 'tools/depcheck.mjs', ...(pendingAuditOk ? ['--pending-audit-ok'] : [])]),
-  gate('fwdcheck', ['node', 'tools/fwdcheck.mjs', '--quiet']),
-  extGate(),
-  gate('rendercheck', ['node', 'tools/rendercheck.mjs']),
+  frontierGate(ctx, 'depcheck', ['node', 'tools/depcheck.mjs', ...(pendingAuditOk ? ['--pending-audit-ok'] : [])], 'items'),
+  frontierGate(ctx, 'fwdcheck', ['node', 'tools/fwdcheck.mjs', '--quiet'], 'items'),
+  extGate(ctx),
+  frontierGate(ctx, 'rendercheck', ['node', 'tools/rendercheck.mjs'], 'files'),
   // gates.mjs listed these two as gates of record at steps 3/5/8/9 and
   // 2/3/5/9; this table — the only one that runs — carried neither.
   // prosecheck is the positional-claim class LEVELS.md calls "where 100% of
   // this library's found defects live"; depsource is dep-to-page resolution.
   // (citecheck stays advisory by design: it cannot exit nonzero, and an
   // always-green gate is noise, not checking — readers run it by hand.)
-  gate('prosecheck', ['node', 'tools/prosecheck.mjs']),
-  gate('depsource', ['node', 'tools/depsource.mjs']),
+  frontierGate(ctx, 'prosecheck', ['node', 'tools/prosecheck.mjs'], 'files'),
+  frontierGate(ctx, 'depsource', ['node', 'tools/depsource.mjs'], 'items'),
   // The category pages render an AUTHORED reading order (library/<cat>/_pathway.md),
   // so nothing mechanical keeps it covering the corpus as levels land. This is
   // that guarantee: a published page in no part fails here. `pathway-sync` runs
   // in 9-pathway-sync-v2, ahead of the report Alpha, so the usual case is already
   // repaired by the time this reads it.
-  gate('pathcheck', ['node', 'tools/pathcheck.mjs']),
+  frontierGate(ctx, 'pathcheck', ['node', 'tools/pathcheck.mjs'], 'pages'),
   // Scope loss is invisible to every gate that reads current state, and the
   // add/delete authority briefs/alpha.md grants runs through step 8 — so the
   // planning scope ledger is re-checked at every repo-wide gate point, not only
@@ -1517,7 +1520,7 @@ export const stages = [
       gate('item-dependency-levels', ['node', 'tools/item-dependency-levels.mjs', 'check', '--run', ctx.run]),
       gate('step1-dependency-ledger', ['node', 'tools/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run, '--require-reviewed']),
       scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }),
-      ...policyGates(ctx), planGate(), extGate(), urlGate(ctx), backingGate(ctx), fetchGate(ctx),
+      ...policyGates(ctx), planGate(), extGate(ctx), urlGate(ctx), backingGate(ctx), fetchGate(ctx),
     ],
     onHold: holdStep1,
   },
@@ -1655,7 +1658,7 @@ export const stages = [
       // Authored IDs exist before Step 4 splices them into the plan. Scaffold
       // mint checks would reject those IDs; item mode below checks their content.
       ...coverageGates(ctx, { requireDestination: true }),
-      extGate(), manifestDepsGate(ctx), scopeDecisionsGate(ctx),
+      extGate(ctx), manifestDepsGate(ctx), scopeDecisionsGate(ctx),
       // A source already fetched and stamped can be cited while its live URL
       // is temporarily unavailable. Step 5b checks URL liveness and backing
       // after independent review; a dead link does not hold Step 3 authoring.
@@ -2458,7 +2461,7 @@ export const stages = [
     pattern: resultPattern('tool', 'pathway-sync-v2'), concurrency: 1,
     plan: (ctx) => [{ role: 'tool', label: 'pathway-sync-v2', job: 'bookkeeping-mechanical',
       covers: ['all'], argv: ['node', 'tools/pathway-sync.mjs', '--run', ctx.run] }],
-    gates: (ctx) => [gate('pathcheck', ['node', 'tools/pathcheck.mjs']), closureGate(ctx)],
+    gates: (ctx) => [frontierGate(ctx, 'pathcheck', ['node', 'tools/pathcheck.mjs'], 'pages'), closureGate(ctx)],
   },
   {
     id: '9-pathway-seed-v2', label: 'pathway prose obligations', units: () => ['all'],
@@ -2480,7 +2483,7 @@ export const stages = [
       task: [`research/${ctx.run}-alpha-pathway.task.md`, 'briefs/tasks/alpha-pathway.md'], timeout: 10800 }],
     gates: (ctx) => [
       gate('pathway-closure', ['node', 'tools/pathway-closure.mjs', 'check', '--run', ctx.run]),
-      gate('pathcheck', ['node', 'tools/pathcheck.mjs']), gate('prosecheck', ['node', 'tools/prosecheck.mjs']), closureGate(ctx),
+      frontierGate(ctx, 'pathcheck', ['node', 'tools/pathcheck.mjs'], 'pages'), frontierGate(ctx, 'prosecheck', ['node', 'tools/prosecheck.mjs'], 'files'), closureGate(ctx),
     ],
   },
   {

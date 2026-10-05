@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // extcheck.mjs — the "recorded but not proved here" gate.
 //
-//   node tools/extcheck.mjs [--ledger] [--json] [--quiet] [--repo DIR]
+//   node tools/extcheck.mjs [--ledger] [--json] [--quiet] [--repo DIR] [--items-file PATH]
 //
 // Owner instruction, 2026-07-25: the deferred results of DEFERRED.md (measure
 // theory, functional analysis, set theory beyond choice, algebraic topology, the
@@ -70,8 +70,11 @@ import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { parseItemScope, includesItem, unknownItems } from './item-scope.mjs';
 
-const args = process.argv.slice(2);
+const itemScope = parseItemScope(process.argv.slice(2));
+const args = itemScope.args;
+if (itemScope.selected && args.includes('--ledger')) throw Error('--ledger requires full-corpus scope');
 const argVal = (flag) => {
   const i = args.indexOf(flag);
   return i >= 0 ? args[i + 1] : undefined;
@@ -130,6 +133,8 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
   });
   for (const a of list(fm, 'aliases')) aliasTo.set(a, id);
 }
+for (const id of unknownItems(itemScope, items.keys()))
+  err('focus-item-unknown', `--items-file names unknown item "${id}"`);
 const resolve = (x) => (items.has(x) ? x : aliasTo.get(x));
 
 // ------------------------------------- Set Theory bootstrapping hard boundary
@@ -236,6 +241,7 @@ function deferredPath(id) {
 }
 
 for (const id of [...foundationsItems].sort()) {
+  if (!includesItem(itemScope, id)) continue;
   const path = deferredPath(id);
   if (path)
     err('foundations-deferred-dependency', `${items.get(id)?.file ?? `research/plan-spec.json#${id}`}: Foundations dependency path reaches Set Theory recorded-not-proved material: ${path.join(' -> ')}`);
@@ -244,7 +250,7 @@ for (const id of [...foundationsItems].sort()) {
 // -------------------------------------------------------- shape of an unproved item
 
 for (const it of items.values()) {
-  if (it.provedHere) continue;
+  if (!includesItem(itemScope, it.id) || it.provedHere) continue;
   if (it.kind !== 'remark')
     err('unproved-kind', `${it.file}: proved_here false but kind is "${it.kind}"; it states rather than establishes, so it must be a remark`);
   if (/\n## (Proof|Refutation)\b/.test(it.body))
@@ -260,6 +266,7 @@ for (const it of items.values()) {
 // ------------------------------------------------- shape of an external_refs entry
 
 for (const it of items.values()) {
+  if (!includesItem(itemScope, it.id)) continue;
   const deps = new Set(it.deps.map(resolve));
   for (const ref of it.externalRefs) {
     const r = resolve(ref);
@@ -333,14 +340,14 @@ for (const it of items.values()) {
 
 for (const [id, how] of rests) {
   const it = items.get(id);
-  if (it.status === 'published' && it.provedHere)
+  if (includesItem(itemScope, id) && it.status === 'published' && it.provedHere)
     warn('unproved-on-published', `${it.file} is PUBLISHED and rests (${how}) on material not proved in this library`);
 }
 
 // ---------------------------------------------------------------- the ledger
 
-const unproved = [...items.values()].filter((i) => !i.provedHere).map((i) => i.id).sort();
-const consequences = [...rests].filter(([id]) => items.get(id).provedHere).sort();
+const unproved = [...items.values()].filter((i) => includesItem(itemScope, i.id) && !i.provedHere).map((i) => i.id).sort();
+const consequences = [...rests].filter(([id]) => includesItem(itemScope, id) && items.get(id).provedHere).sort();
 
 if (writeLedger) {
   const lines = [
@@ -369,13 +376,13 @@ if (writeLedger) {
 
 // ---------------------------------------------------------------------- report
 
-const summary = { items: items.size, unproved: unproved.length, consequences: consequences.length, errors: errors.length, warnings: warns.length };
+const summary = { items: itemScope.selected?.size ?? items.size, unproved: unproved.length, consequences: consequences.length, errors: errors.length, warnings: warns.length };
 
 if (asJson) {
   console.log(JSON.stringify({ summary, unproved, consequences, errors, warns }, null, 2));
 } else {
   if (!quiet) {
-    console.log(`extcheck: ${items.size} items, ${unproved.length} recorded-not-proved, ${consequences.length} resting on them`);
+    console.log(`extcheck: ${summary.items} items, ${unproved.length} recorded-not-proved, ${consequences.length} resting on them`);
     if (consequences.length) {
       console.log('\nresults resting on material not proved here:');
       for (const [id, how] of consequences) console.log(`  ${id.padEnd(44)} ${how}`);

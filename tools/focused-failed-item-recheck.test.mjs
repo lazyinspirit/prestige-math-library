@@ -34,7 +34,7 @@ test('focused validators check only selected item-local errors and keep global c
     mkdirSync(join(root, 'tools'));
     mkdirSync(join(root, 'research'));
     mkdirSync(join(root, 'library', 'test'), { recursive: true });
-    for (const file of ['depcheck.mjs', 'fwdcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs'])
+    for (const file of ['depcheck.mjs', 'fwdcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'published-repair-policy.mjs', 'item-hash.mjs'])
       copyFileSync(join(HERE, file), join(root, 'tools', file));
     writeFileSync(join(root, 'research', 'b-leaf-legacy-allowlist.json'), JSON.stringify({ version: 1, edges: [] }));
     writeFileSync(join(root, 'research', 'plan-spec.json'), JSON.stringify({ pages: [

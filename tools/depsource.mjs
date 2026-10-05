@@ -2,7 +2,7 @@
 // depsource.mjs — classify every dependency in the PLANNED item scaffolds by
 // where its target actually lives.
 //
-//   node tools/depsource.mjs [research/plan-spec.json] [--page <id>] [--json]
+//   node tools/depsource.mjs [research/plan-spec.json] [--page <id>] [--json] [--items-file PATH]
 //
 // validate-plan.mjs already proves the planned stack is acyclic and forward-free
 // IN PLAN ORDER. This answers the different question the owner asked: can every
@@ -33,9 +33,11 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { parseItemScope, includesItem, unknownItems } from './item-scope.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
-const args = process.argv.slice(2);
+const itemScope = parseItemScope(process.argv.slice(2));
+const args = itemScope.args;
 const asJson = args.includes('--json');
 const pageFilter = args.includes('--page') ? args[args.indexOf('--page') + 1] : null;
 const specPath = args.find((a) => a.endsWith('.json')) ?? 'research/plan-spec.json';
@@ -50,6 +52,11 @@ for (const p of planned) {
     plannedOrder.set(it.id, p.order);
   }
 }
+
+for (const id of unknownItems(itemScope, plannedPageOf.keys()))
+  throw Error(`--items-file names unknown planned item "${id}"`);
+if (itemScope.selected && pageFilter && [...itemScope.selected].some(id => plannedPageOf.get(id).id !== pageFilter))
+  throw Error('--page excludes selected frontier items');
 
 // ---------------------------------------------------------------- authored side
 
@@ -120,7 +127,7 @@ const rows = [];
 for (const p of planned) {
   if (pageFilter && p.id !== pageFilter) continue;
   for (const it of p.items ?? [])
-    for (const d of it.deps ?? []) {
+    if (includesItem(itemScope, it.id)) for (const d of it.deps ?? []) {
       const c = classify(d, p);
       if (c) rows.push({ page: p.id, kind: p.kind, item: it.id, dep: d, ...c });
     }
@@ -145,6 +152,7 @@ const archWorklist = [];
 for (const p of planned) {
   if (pageFilter && p.id !== pageFilter) continue;
   for (const it of p.items ?? []) {
+    if (!includesItem(itemScope, it.id)) continue;
     const deps = it.deps ?? [];
     if (deps.includes(ARCH) && !ARCH_RECIP.some((d) => deps.includes(d)))
       archWorklist.push({ page: p.id, item: it.id, title: (it.title ?? '').slice(0, 70) });

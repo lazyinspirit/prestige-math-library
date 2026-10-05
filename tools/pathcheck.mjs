@@ -2,7 +2,7 @@
 // pathcheck.mjs — the gate on `library/<category>/_pathway.md`, the reading
 // order a category page renders.
 //
-//   node tools/pathcheck.mjs [--json] [--quiet] [<category> …]
+//   node tools/pathcheck.mjs [--json] [--quiet] [<category> …] [--pages-file PATH]
 //
 // WHY IT EXISTS. The category page used to open with a dependency flowchart of
 // every page in the group; at 83 pages that could not be read. It now opens
@@ -43,6 +43,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { REPO, categories, loadCorpus, readPathway, split } from './pathway-lib.mjs';
+import { parsePageScope, unknownItems } from './item-scope.mjs';
 
 // Categories that are DELIBERATELY without a pathway (owner, 2026-08-18). The ‡
 // tier is a register of results the library states and does not prove, so it
@@ -50,7 +51,8 @@ import { REPO, categories, loadCorpus, readPathway, split } from './pathway-lib.
 // them. Warning about it every run would be permanent noise.
 const NO_PATHWAY = new Set(['not-proved-here']);
 
-const argv = process.argv.slice(2);
+const pageScope = parsePageScope(process.argv.slice(2));
+const argv = pageScope.args;
 const asJson = argv.includes('--json');
 const quiet = argv.includes('--quiet');
 const only = new Set(argv.filter((a) => !a.startsWith('--')));
@@ -61,12 +63,19 @@ const err = (code, msg) => errors.push({ code, msg });
 const warn = (code, msg) => warns.push({ code, msg });
 
 const { pages, byPage, mainOf, restsOn } = loadCorpus();
+for (const id of unknownItems(pageScope, byPage.keys()))
+  err('focus-page-unknown', `--pages-file names unknown page "${id}"`);
+const selected = pageScope.selected === null ? null : new Set([...pageScope.selected].map(mainOf));
+const subject = page => selected === null || selected.has(mainOf(page));
+const selectedCategories = selected === null ? null : new Set([...selected].map(id => byPage.get(id)?.cat[0]).filter(Boolean));
+if (selectedCategories && only.size && [...selectedCategories].some(cat => !only.has(cat)))
+  throw Error('category arguments exclude selected frontier pages');
 
 let checked = 0;
-for (const cat of categories().filter((c) => !only.size || only.has(c))) {
+for (const cat of categories().filter((c) => (!only.size || only.has(c)) && (selectedCategories === null || selectedCategories.has(c)))) {
   const inCat = (status) => [...new Set(
     pages.filter((p) => p.cat[0] === cat && p.status === status).map((p) => mainOf(p.page)),
-  )].filter((s) => byPage.has(s));
+  )].filter((s) => byPage.has(s) && subject(s));
   const aPages = inCat('published');
   // A draft page is one the sync should already have placed, but it is not live
   // and a level in flight must not be blocked by it.
@@ -105,12 +114,18 @@ for (const cat of categories().filter((c) => !only.size || only.has(c))) {
 
   const partOf = new Map();
   pw.parts.forEach((part, i) => {
-    if (!part.pages.length) err('part-empty', `${rel}: part "${part.part}" lists no pages`);
-    if (part.pages.length === 1) warn('part-singleton', `${rel}: part "${part.part}" holds one page`);
-    if (!pw.briefs.has(part.part)) err('part-brief-missing', `${rel}: part "${part.part}" has no "## ${part.part}" section`);
+    const relevant = selected === null || part.pages.some(subject);
+    if (relevant && !part.pages.length) err('part-empty', `${rel}: part "${part.part}" lists no pages`);
+    if (relevant && part.pages.length === 1) warn('part-singleton', `${rel}: part "${part.part}" holds one page`);
+    if (relevant && !pw.briefs.has(part.part)) err('part-brief-missing', `${rel}: part "${part.part}" has no "## ${part.part}" section`);
     const words = (pw.briefs.get(part.part) ?? '').split(/\s+/).filter(Boolean).length;
-    if (words > 120) warn('brief-long', `${rel}: brief for "${part.part}" runs to ${words} words`);
+    if (relevant && words > 120) warn('brief-long', `${rel}: brief for "${part.part}" runs to ${words} words`);
     for (const page of part.pages) {
+      // Retain all valid placements as prerequisite context; diagnose only subjects.
+      if (!subject(page)) {
+        if (byPage.has(page) && byPage.get(page).cat[0] === cat && mainOf(page) === page && !partOf.has(page)) partOf.set(page, i);
+        continue;
+      }
       if (!byPage.has(page)) { err('part-page-missing', `${rel}: part "${part.part}" lists "${page}", which is not a page`); continue; }
       if (byPage.get(page).cat[0] !== cat) { err('part-page-foreign', `${rel}: part "${part.part}" lists "${page}", which lives in ${byPage.get(page).cat.join('/')}`); continue; }
       if (mainOf(page) !== page) { err('part-page-companion', `${rel}: part "${part.part}" lists the companion "${page}"; list "${mainOf(page)}" instead`); continue; }
@@ -120,7 +135,7 @@ for (const cat of categories().filter((c) => !only.size || only.has(c))) {
   });
 
   for (const slug of pw.briefs.keys())
-    if (!pw.parts.some((p) => p.part === slug)) err('brief-orphan', `${rel}: "## ${slug}" names no part`);
+    if (selected === null && !pw.parts.some((p) => p.part === slug)) err('brief-orphan', `${rel}: "## ${slug}" names no part`);
 
   for (const page of aPages)
     if (!partOf.has(page)) err('page-unplaced', `${rel}: published page "${page}" is in no part`);
@@ -132,7 +147,7 @@ for (const cat of categories().filter((c) => !only.size || only.has(c))) {
   // prerequisites by the time they arrive.
   const name = (i) => `${i + 1} (${pw.parts[i]?.part ?? '?'})`;
   for (const [page, i] of partOf)
-    for (const dep of restsOn(page)) {
+    if (subject(page)) for (const dep of restsOn(page)) {
       const j = partOf.get(dep);
       if (j === undefined || j <= i) continue;
       err('part-order', `${rel}: "${page}" is in part ${name(i)} but rests on "${dep}" in part ${name(j)}`);

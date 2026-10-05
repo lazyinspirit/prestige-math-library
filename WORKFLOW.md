@@ -42,6 +42,19 @@
 
 ## Supervise and clear gates
 
+The engine derives validator subjects from the current run's nonempty batch
+manifests. Precheck receives explicit item files; rendercheck and prosecheck
+receive those files and the manifest page files. Depcheck, fwdcheck, extcheck and
+depsource receive a nonempty `--items-file` selection; pathcheck receives a
+nonempty `--pages-file` selection (companions map to their main page). These
+opt-in validators still load the complete corpus for supplier resolution and
+relevant graph checks. Pathway placement of draft pages remains advisory.
+Unrelated items and pages are context rather than formatting, audit or repair
+subjects. Bare validator commands retain their historical whole-corpus behavior.
+Missing, malformed, empty or unknown selections fail closed. Selector JSON files
+are immutable and content-addressed in OS temporary storage; descriptors for
+future stages defer selection until execution and write no run state.
+
 - Steps 1–4: review drift and scaffold, assign groups, audit scaffolds and
   author, then splice the plan.
 - Steps 5–7: independent reader/refuter review and cross-group closure, frozen
