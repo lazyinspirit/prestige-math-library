@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url';
 import { split, yaml } from './pathway-lib.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { step5Escalations, externalContextReceipt } from './step5-escalations.mjs';
+import { activeOwnershipRows } from './defect-ownership.mjs';
 import { step5Adjudicators } from './step5-adjudicators.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 
@@ -1017,7 +1018,57 @@ if (command === 'check') {
       catch (cause) { error('ledger-invalid', cause.message); }
     }
     const mine = ledgerRows.filter((row) => row.run === run);
-    const earlyRows = mine.filter((row) => ['5a-adjudicate'].includes(row.caught_at_stage));
+    const ownershipErrors = [];
+    const activeMine = activeOwnershipRows(mine, ownershipErrors);
+    for (const message of ownershipErrors) error('ledger-invalid', message);
+    const earlyRows = activeMine.filter((row) => ['5a-adjudicate'].includes(row.caught_at_stage));
+    // Owner adjudications can bind one already-applied repair or one physical
+    // defect to distinct immutable observations. They never rewrite a finding.
+    const ownerEvidencePath = R('research', `${run}-step5-owner-repair-evidence.json`);
+    const ownerEvidence = existsSync(ownerEvidencePath)
+      ? readJson(ownerEvidencePath, 'owner repair evidence') : null;
+    const closedOwnerRepairs = new Set(['fixed', 'narrowed', 'dropped']);
+    const evidenceBinds = (entry, row) => {
+      if (ownerEvidence?.version !== 1 || ownerEvidence.run !== run
+        || !entry || entry.id !== row?.subject || entry.defect_id !== row?.defect_id
+        || entry.ledger_row_sha256 !== hashValue(row)
+        || !closedOwnerRepairs.has(row.disposition)
+        || typeof entry.reason !== 'string' || entry.reason.trim().length < 80
+        || typeof entry.current_path !== 'string' || !existsSync(R(entry.current_path))
+        || sha256(readFileSync(R(entry.current_path))) !== entry.current_raw_sha256
+        || !Array.isArray(entry.evidence) || !entry.evidence.length) return false;
+      return entry.evidence.every(ref => typeof ref?.path === 'string'
+        && existsSync(R(ref.path)) && /^[a-f0-9]{64}$/.test(ref.sha256 ?? '')
+        && sha256(readFileSync(R(ref.path))) === ref.sha256);
+    };
+    const ownerSharedDefect = (row, left, right) => (ownerEvidence?.shared_defects ?? []).some(entry =>
+      evidenceBinds(entry, row) && left.id === right.id && left.id === entry.id
+      && left.repair_confidence === 1 && right.repair_confidence === 1
+      && Array.isArray(entry.obligations)
+      && [left, right].some(value => typeof value.same_defect_evidence === 'string'
+        && value.same_defect_evidence.trim().length >= 40
+        && entry.obligations.some(binding => binding.obligation === value.same_defect_as))
+      && [left, right].every(value => entry.obligations.some(binding =>
+        binding.obligation === value.obligation && binding.target_sha256 === hashValue(value.target))));
+    const priorAppliedRepair = (decision, target, rows) => (ownerEvidence?.prior_applied_repairs ?? []).some(entry => {
+      const row = rows.find(value => value.defect_id === entry.defect_id);
+      if (!evidenceBinds(entry, row) || decision.repair_confidence !== 1
+        || entry.obligation !== decision.obligation || entry.target_sha256 !== hashValue(target)
+        || entry.after_raw_sha256 !== entry.current_raw_sha256
+        || entry.before_raw_sha256 === entry.after_raw_sha256
+        || !/^[a-f0-9]{64}$/.test(entry.before_raw_sha256 ?? '')
+        || typeof entry.before_literal !== 'string' || !entry.before_literal
+        || typeof entry.after_literal !== 'string' || !entry.after_literal) return false;
+      const original = entry.original_owner_artifact;
+      if (typeof original?.path !== 'string' || !existsSync(R(original.path))) return false;
+      const originalRaw = readFileSync(R(original.path), 'utf8');
+      if (sha256(originalRaw) !== original.sha256 || !originalRaw.includes(entry.before_raw_sha256)
+        || !originalRaw.includes(entry.after_raw_sha256)) return false;
+      try { if (JSON.parse(originalRaw).run !== run) return false; } catch { return false; }
+      const current = readFileSync(R(entry.current_path), 'utf8');
+      if (current.split(entry.after_literal).length !== 2) return false;
+      return sha256(current.replace(entry.after_literal, entry.before_literal)) === entry.before_raw_sha256;
+    });
     const referenced = new Map();
     const contextualDefects = new Set();
     const liveByBatch = new Map();
@@ -1285,7 +1336,9 @@ if (command === 'check') {
               // repair decision retains its separate item-order anchor.
               && actualFinding.observed_sha256 === hashValue(pageRepair ? pageCarrier(observed) : observed);
           }
-          if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair && !sharedPostReaderRepair && !sharedReclassifiedFinding) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
+          const sharedOwnerAdjudication = prior
+            && ownerSharedDefect(mine.find(row => row.defect_id === defectId), prior, { ...decision, target });
+          if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair && !sharedPostReaderRepair && !sharedReclassifiedFinding && !sharedOwnerAdjudication) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
           if (!prior) referenced.set(defectId, {
             obligation: decision.obligation, id: decision.id, route: decision.route, verdict: decision.verdict, target,
             same_defect_as: decision.same_defect_as, same_defect_evidence: decision.same_defect_evidence,
@@ -1366,7 +1419,8 @@ if (command === 'check') {
               }
             }
             if (target?.observed_sha256 && decisionRows.some((row) => repaired.has(row.disposition))
-              && currentSha === target.observed_sha256) {
+              && currentSha === target.observed_sha256
+              && !priorAppliedRepair(decision, target, decisionRows)) {
               error('decision-not-applied', `[${target.id}] ${decision.verdict} names a repaired defect but the carrier is unchanged`);
             }
           }
@@ -1386,7 +1440,7 @@ if (command === 'check') {
       }
     }
     if (phase === 'final') {
-      for (const row of mine.filter((entry) => ['5a-adjudicate', '5b-cross'].includes(entry.caught_at_stage)
+      for (const row of activeMine.filter((entry) => ['5a-adjudicate', '5b-cross'].includes(entry.caught_at_stage)
         && ['open', 'deferred'].includes(entry.disposition) && !contextualDefects.has(entry.defect_id))) {
         error('step5-open', `[${row.subject}] ${row.defect_id} remains ${row.disposition}`);
       }

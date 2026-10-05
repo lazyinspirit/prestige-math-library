@@ -116,6 +116,14 @@
   reviewed current touched/page carrier with `change_kind: current_content_review`.
   Record the unknown historical delta honestly; mathematical findings, risk reviews,
   ledger ownership and current content hashes still require normal closure.
+  Append-only ledger corrections retain superseded rows as history. Both ledger
+  validation and Step-5 ownership/open-defect checks use the shared validated
+  active ownership rows; historical references remain available for provenance.
+  A prior repair captured after correction, or one physical defect reported
+  against distinct carriers, requires explicit owner evidence binding the exact
+  obligations, ledger row, current raw bytes and native report hashes. A prior
+  repair must also reconstruct its authenticated before hash by the exact inverse
+  edit. Immutable reader/refuter observations remain unchanged.
 
 - Step 7 freezes `research/RUN-step7-v2/frontier.json`. Its adjudication, repair,
   rejudgment and item gates cover draft IDs in that frontier. Batch adjudicators resolve
