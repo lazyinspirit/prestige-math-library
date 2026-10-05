@@ -257,6 +257,7 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
     || (receipt.basis !== undefined && !(step === 5
       ? ['initial-step5-contract-only', 'initial-step5-item-repair',
         'initial-step5-source-metadata-repair', 'initial-step5-dependency-repair',
+        'initial-step5-authenticated-statement-source-mirror',
         'initial-step5-current-definition-manifest-review',
         'initial-step5-current-ball-lemma-manifest-review',
         'initial-step5-current-graph-lemma-manifest-review'].includes(receipt.basis)
@@ -368,8 +369,11 @@ function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '',
   if (existsSync(receiptPath)) {
     try { preferred = read(receiptPath).author_result; } catch { /* invalid receipt is checked below */ }
   }
-  const author = eligible.find(candidate => candidate.result_file === preferred)
+  const reviewedResult = manifestRepair === 'initial-step5-authenticated-statement-source-mirror'
+    ? step5ManifestRepairEvidence(evidenceText)?.native_review?.result_file : null;
+  const author = eligible.find(candidate => candidate.result_file === (reviewedResult ?? preferred))
     ?? eligible.at(-1);
+  if (reviewedResult && author?.result_file !== reviewedResult) return null;
   return author ? { ...author, basis: manifestRepair ?? (itemRepair
     ? 'initial-step5-item-repair' : 'initial-step5-contract-only') } : null;
 }
@@ -385,7 +389,9 @@ function step5EvidenceBindsCurrentCarriers(text, run, id, hashes) {
 
 function step5ManifestRepairEvidence(text) {
   const match = text.match(/```step5-manifest-repair\s*\r?\n([\s\S]*?)\r?\n```/);
-  if (!match) return null;
+  if (!match) {
+    try { const value = JSON.parse(text); return value.manifest_repair ?? null; } catch { return null; }
+  }
   try { return JSON.parse(match[1]); } catch { return null; }
 }
 
@@ -553,6 +559,85 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
     || !sameCanonical(currentEntry, row.manifest_entry)) return null;
 
   const kind = evidence.repair_kind;
+  if (kind === 'authenticated-statement-source-mirror') {
+    // This is an owner refresh of a genuine carried origin. The native result
+    // supplies review context, never authorship of the owner's receipt. Exact
+    // subject snapshots, rather than a sibling's shared-file mtime, establish
+    // that the reviewed mathematics and contract are still current.
+    try {
+      const baselineText = evidence.baseline_item_text;
+      const currentText = readFileSync(join(root, 'items', `${safe(id)}.md`), 'utf8');
+      if (typeof baselineText !== 'string' || sha(baselineText) !== before.item_file_sha256
+        || itemHashJudge(baselineText) !== before.judge_sha256) return null;
+      const section = text => text.match(/^## Statement\s*\r?\n([\s\S]*?)(?=^## |$(?![\s\S]))/m);
+      const oldStatement = section(baselineText), currentStatement = section(currentText);
+      if (!oldStatement || !currentStatement
+        || oldEntry.statement !== oldStatement[1].trim()
+        || currentEntry.statement !== currentStatement[1].trim()
+        || oldEntry.statement === currentEntry.statement
+        || baselineText.replace(oldStatement[0], '') !== currentText.replace(currentStatement[0], '')) return null;
+      const oldFm = yaml().parse(split(baselineText).fm) ?? {};
+      const currentFm = yaml().parse(split(currentText).fm) ?? {};
+      const withoutMirror = ({ statement: _statement, sources: _sources, ...entry }) => entry;
+      if (!sameCanonical(withoutMirror(oldEntry), withoutMirror(currentEntry))
+        || !sameCanonical(oldFm.sources, currentFm.sources)
+        || !sameCanonical(currentEntry.sources, currentFm.sources)) return null;
+      const native = evidence.native_review;
+      const linked = link => {
+        const bytes = readFileSync(researchFile(root, link?.path), 'utf8');
+        if (sha(bytes) !== link?.sha256) throw Error('Stale native review evidence');
+        return bytes;
+      };
+      const resultBytes = linked(native?.result), result = JSON.parse(resultBytes);
+      const resultPath = `research/${run}-dispatch/${native.result_file}`;
+      const started = Date.parse(result.started_at), ended = Date.parse(result.ended_at);
+      if (native.result.path !== resultPath || result.run !== run || !authorResultAllowed(5, result)
+        || !Number.isFinite(started) || !Number.isFinite(ended) || started > ended
+        || started < Date.parse(stageBaseline(root, run, 5).at)
+        || !result.covers.map(String).some(value => value === row.batch || value === 'all')) return null;
+      const log = linked(native.log);
+      if (resolve(root, native.log.path) !== resolve(result.log)) return null;
+      const snapshotBytes = linked(native.snapshot), snapshot = JSON.parse(snapshotBytes);
+      const reviewed = snapshot.hashes?.[id];
+      if (snapshot.run !== run || String(snapshot.batch) !== row.batch || snapshot.label !== 'post'
+        || reviewed?.item_sha256 !== hashes.item_file_sha256
+        || !log.includes(snapshotBytes.trim())) return null;
+      const contract = contractEntry(join(root, 'research', `${run}-batch-${safe(row.batch)}.proof-contracts.json`), id);
+      const { risk_review: review, ...mathematicalContract } = contract ?? {};
+      const decisionPath = `research/${run}-alpha-batch-${row.batch}-5a-decisions.json`;
+      if (native.decisions?.path !== decisionPath) return null;
+      const decisions = read(researchFile(root, decisionPath));
+      const ownDecisions = decisions.decisions?.filter(value => value.id === id && value.route === 'touched');
+      if (!Array.isArray(ownDecisions) || ownDecisions.length !== 1) return null;
+      const decision = ownDecisions[0];
+      // Only the subject's stable review fields authenticate this decision.
+      // Sibling edits and mechanical subject_sha256 stamps are not its review.
+      const decisionSubject = Object.fromEntries(['id', 'obligation', 'route',
+        'verdict', 'evidence', 'repair_confidence'].map(key => [key, decision[key]]));
+      if (decision.obligation !== `touched:${row.batch}:${id}`
+        || !Number.isFinite(decision.repair_confidence)
+        || !/^[a-f0-9]{64}$/.test(native.decisions.subject_sha256 ?? '')
+        || hashValue(decisionSubject) !== native.decisions.subject_sha256) return null;
+      // The native checkpoint adds only this exact review to the hash-proven
+      // post-reader contract. Shell quoting in the log is punctuation, not
+      // mathematical carrier evidence; the full snapshot binds the inputs.
+      const unquote = text => String(text).replace(/['"\\\s]/g, '');
+      const expectedReview = { status: 'complete', reviewer: `alpha-batch-${row.batch}`,
+        notes: decision?.evidence, evidence: [
+          { path: `items/${id}.md`, location: 'Current claim, facts and complete argument' },
+          { path: `research/${run}-reader-${row.batch}.md` },
+          { path: `research/${run}-refute-${row.batch}.json` },
+        ] };
+      if (reviewed.contract_sha256 !== hashValue(mathematicalContract)
+        || decisions.run !== run || !['accepted_repair', 'amended_repair'].includes(decision?.verdict)
+        || review?.status !== 'complete' || review.reviewer !== `alpha-batch-${row.batch}`
+        || !String(review.notes ?? '').trim() || decision.evidence !== review.notes
+        || !sameCanonical(review, expectedReview)
+        || !unquote(log).includes(unquote(`{"id":"${id}","note":"${review.notes}"`))
+        || evidence.review.native_reviewed_subject_unchanged !== true) return null;
+      return 'initial-step5-authenticated-statement-source-mirror';
+    } catch { return null; }
+  }
   if (kind === 'source-reference-fields') {
     const changes = sourceReferenceFieldChanges(oldEntry, currentEntry);
     const oldRefs = oldEntry.sources?.references, currentRefs = currentEntry.sources?.references;

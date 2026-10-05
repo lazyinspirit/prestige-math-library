@@ -334,6 +334,19 @@ still checked against live carriers; this later provenance path cannot create an
 origin, accept a stale current certification, rewrite a closed receipt, or replace
 current proof review and normal gates.
 
+### Authenticated carried Statement repairs
+
+An existing Step3 auditor-created item may use the Step5 owner recertification
+basis `initial-step5-authenticated-statement-source-mirror` for a verified
+Statement correction and synchronization of source fields already present in
+the item. Exact recovered pre-reader item/manifest bytes must match the sealed
+baseline; bytes outside Statement and actual item source metadata remain
+unchanged. Native input snapshots, unchanged subject contract apart from its
+exact native review, successful dispatch context and the stable subject review
+must bind current carriers. Sibling edits and mechanical decision stamps do not
+alter that evidence. The owner receipt remains an owner refresh, preserves the
+original Step3 origin and never invents native authorship or missing history.
+
 ## Frontier validator scope
 
 Item gates select only the current run's manifest items. `tools/frontier-item-gate.mjs`
@@ -352,6 +365,14 @@ unrelated plan entries.
 
 Step-5 closure and Step-9 pathway gates use the same frontier selectors.
 The scoped prose check includes existing pathways of selected categories.
+
+Step-5 published-dependency findings outside the manifest inventory may close
+only their owned consumer use through `context_accepted`. The root receipt binds
+the original finding, active adjudicator, actual current supplier/consumer
+mathematical hashes, literal consumed clause and consumer premises, complete
+prerequisite review and retained open maintenance finding. It does not certify
+or repair the published interface. Stamping and final routing retain this seal;
+changed used mathematics invalidates it. In-frontier suppliers cannot use it.
 
 Bare validator commands retain their repository-wide behavior for explicit
 maintenance. Outside-frontier repairs have their own recorded local evidence;

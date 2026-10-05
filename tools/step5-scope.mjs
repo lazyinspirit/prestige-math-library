@@ -18,7 +18,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { split, yaml } from './pathway-lib.mjs';
 import { itemHashGuard } from './item-hash.mjs';
-import { step5Escalations } from './step5-escalations.mjs';
+import { step5Escalations, externalContextReceipt } from './step5-escalations.mjs';
 import { step5Adjudicators } from './step5-adjudicators.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 
@@ -214,6 +214,12 @@ function pageCarrier(value, orderAnchor = null) {
 function currentDecisionCarrier(decision, target, live) {
   if (target?.subject_type === 'in-run-dependency') {
     return producerCarrier(target.id, target.producer_batch);
+  }
+  if (decision.verdict === 'context_accepted') {
+    const context = externalContextReceipt(ROOT, run, decision, target);
+    if (!context.valid) return undefined;
+    const path = R('items', `${decision.id}.md`);
+    return { item_sha256: sha256(readFileSync(path)), context_evidence: context.seal };
   }
   if (target?.subject_type === 'published-dependency') {
     const path = R('items', `${decision.id}.md`);
@@ -848,6 +854,11 @@ if (command === 'stamp') {
       const batch = target?.batch ?? group.covers.find((candidate) =>
         (manifests[candidate] ?? []).includes(decision.id)
         || (pages[candidate] ?? []).some((page) => page.id === decision.id));
+      if (decision.verdict === 'context_accepted') {
+        const context = externalContextReceipt(ROOT, run, decision, target, group.label);
+        if (!context.valid) fail(`group ${group.label} ${decision.obligation}: ${context.error}`, 1);
+        decision.context_evidence = context.seal;
+      }
       const carrier = currentDecisionCarrier(decision, target, live.get(batch));
       if (carrier === undefined) fail(`group ${group.label} decision ${decision.obligation ?? '(missing)'} has no current carrier`, 1);
       decision.subject_sha256 = hashValue(carrier);
@@ -1008,6 +1019,7 @@ if (command === 'check') {
     const mine = ledgerRows.filter((row) => row.run === run);
     const earlyRows = mine.filter((row) => ['5a-adjudicate'].includes(row.caught_at_stage));
     const referenced = new Map();
+    const contextualDefects = new Set();
     const liveByBatch = new Map();
     const contractsByBatch = new Map();
     const ownableSubjects = new Set();
@@ -1088,6 +1100,27 @@ if (command === 'check') {
         if (supplemental) {
           if (decision.route !== 'gate') error('decision-route', `${decision.obligation} must use route gate`);
           if (!groupSubjects.has(decision.id)) error('decision-route', `${decision.obligation} names ${decision.id} outside group ${group.label}`);
+        }
+        if (decision.verdict === 'context_accepted') {
+          const context = externalContextReceipt(ROOT, run, decision, target, group.label);
+          if (!target || !context.valid) {
+            error('decision-context-invalid', `${decision.obligation}: ${context.error ?? 'no owed target'}`);
+          } else {
+            if (typeof decision.evidence !== 'string' || !decision.evidence.trim()) {
+              error('decision-evidence', `${decision.obligation} has no evidence`);
+            }
+            if (hashValue(decision.context_evidence) !== hashValue(context.seal)) {
+              error('decision-context-stale', `${decision.obligation} context evidence needs current stamping`);
+            }
+            const carrier = currentDecisionCarrier(decision, target, null);
+            if (decision.subject_sha256 !== hashValue(carrier)) {
+              error('decision-context-stale', `${decision.obligation} context carrier changed`);
+            }
+            // Retain the original obligation and outside defect as context,
+            // with no claim that the published interface was fixed or false.
+            contextualDefects.add(context.defect_id);
+          }
+          continue;
         }
         const allowed = target?.direct ? ['accepted', 'repaired'] : ['touched', 'page'].includes(decision.route)
           ? ['accepted_repair', 'amended_repair', 'reverted_change', 'reviewed_no_defect']
@@ -1348,13 +1381,13 @@ if (command === 'check') {
     // Published repairs retain their optional provenance files, but those
     // files are not a Step-5 certification or gate obligation.
     for (const row of earlyRows) {
-      if (ownableSubjects.has(row.subject) && !referenced.has(row.defect_id)) {
+      if (ownableSubjects.has(row.subject) && !referenced.has(row.defect_id) && !contextualDefects.has(row.defect_id)) {
         error('ledger-unowned', `[${row.subject}] ${row.defect_id} has no 5a decision reference`);
       }
     }
     if (phase === 'final') {
       for (const row of mine.filter((entry) => ['5a-adjudicate', '5b-cross'].includes(entry.caught_at_stage)
-        && ['open', 'deferred'].includes(entry.disposition))) {
+        && ['open', 'deferred'].includes(entry.disposition) && !contextualDefects.has(entry.defect_id))) {
         error('step5-open', `[${row.subject}] ${row.defect_id} remains ${row.disposition}`);
       }
     }
