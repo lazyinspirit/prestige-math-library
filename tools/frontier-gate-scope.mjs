@@ -9,7 +9,7 @@ const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const itemId = /^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const hash = text => createHash('sha256').update(text).digest('hex');
 
-export function frontierGateScope(ctx) {
+export function frontierGateScope(ctx, { requireItemFiles = true } = {}) {
   if (!/^[a-zA-Z0-9_-]+$/.test(ctx.run ?? '')) throw Error('Invalid frontier run');
   const dir = join(ctx.repo, 'research');
   const manifests = readdirSync(dir).filter(name =>
@@ -28,7 +28,7 @@ export function frontierGateScope(ctx) {
       pageFiles.push(pageFile);
       for (const item of page.items) {
         if (!itemId.test(item?.id ?? '') || items.has(item.id)) throw Error(`Invalid or duplicate frontier item in ${name}`);
-        if (!existsSync(join(ctx.repo, 'items', `${item.id}.md`))) throw Error(`Missing frontier item ${item.id}`);
+        if (requireItemFiles && !existsSync(join(ctx.repo, 'items', `${item.id}.md`))) throw Error(`Missing frontier item ${item.id}`);
         items.add(item.id);
       }
     }
@@ -43,7 +43,7 @@ export function frontierGateScope(ctx) {
     if (!existsSync(path) || readFileSync(path, 'utf8') !== text) writeFileSync(path, text);
     return path;
   };
-  return { itemFiles: [...items].sort().map(id => `items/${id}.md`), pageFiles: pageFiles.sort(),
+  return { items, pages, itemFiles: [...items].sort().map(id => `items/${id}.md`), pageFiles: pageFiles.sort(),
     itemsFile: save('items', items), pagesFile: save('pages', pages) };
 }
 

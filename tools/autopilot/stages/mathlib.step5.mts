@@ -221,7 +221,7 @@ export function step5Stages(d: any) {
         gate('cross-group-edges', ['node', 'tools/cross-group-edges.mjs', 'check', '--run', ctx.run, '--reconcile-plan']),
         routingGate(ctx, 'final'),
         gate('step5-ledger-valid', ['node', 'tools/defect-ledger.mjs', 'validate', '--run', ctx.run]),
-        gate('validate-plan', ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json']),
+        gate('validate-plan', ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json', '--run', ctx.run]),
         // A 5a material repair of a published dependency loses its obsolete
         // audit record, but may need to remain published for unchanged
         // published consumers. `routingGate(final)` above validates that exact

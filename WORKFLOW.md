@@ -55,7 +55,14 @@ unrelated page defects, multi-home warnings and disconnected cycles are outside
 the battery. Its bare invocation continues to check the complete corpus.
 Depsource additionally receives `--run RUN`: validated current manifests overlay
 subject entries and current item homes before Step 4 splices the canonical plan.
-The full plan remains external supplier context. Missing/empty manifests,
+The full plan remains external supplier context. Validate-plan also receives
+`--run RUN`: page and item diagnostics concern manifest pages; reachable item,
+induced-page and declared-prerequisite cycles remain checked. External authored
+suppliers use their current item files and page homes, rather than obsolete
+planned dependency records. Definition `justified_by` discharges remain forward
+well-definedness checks, not logical prerequisite edges. Missing manifest pages
+or items in the selected plan fail closed, including before authoring when item
+files need not exist yet. Missing/empty manifests,
 unknown run subjects and unresolved dependencies remain failures. Pathway placement of draft pages remains advisory.
 Unrelated items and pages are context rather than formatting, audit or repair
 subjects. Bare validator commands retain their historical whole-corpus behavior.

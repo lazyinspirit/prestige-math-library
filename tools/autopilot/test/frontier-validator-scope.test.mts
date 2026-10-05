@@ -68,3 +68,18 @@ test('future descriptors can be inspected before manifests exist; execution fail
   const descriptor = stage.gates({ ...ctx, doctor: true }).find((g: any) => g.id === 'depcheck');
   assert.ok(argv(descriptor).includes('<current-run-manifest-selection>'));
 });
+
+// Every plan invocation, including later closure, uses the current run.
+test('all actual stage plan gates carry the run selector', t => {
+  const ctx = fixture(t);
+  let count = 0;
+  for (const stage of stages.filter(s => ['1-drift', '1-drift-apply', '1-scaffold', '4-splice', '5b-cross', '8-scope', '9-readiness-v2'].includes(s.id))) {
+    for (const gate of stage.gates?.(ctx) ?? []) {
+      if (gate.id !== 'validate-plan') continue;
+      count++;
+      const args = argv(gate);
+      assert.equal(args[args.indexOf('--run') + 1], ctx.run, stage.id);
+    }
+  }
+  assert.ok(count >= 5);
+});
