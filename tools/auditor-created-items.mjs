@@ -24,6 +24,22 @@ const canonical = value => Array.isArray(value) ? value.map(canonical)
     ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])]))
     : value;
 const hashValue = value => sha(JSON.stringify(canonical(value)) ?? 'undefined');
+function authorizedDilationDecisionRefresh(priorText, currentText) {
+  try {
+    const prior = JSON.parse(priorText), current = JSON.parse(currentText);
+    const before = prior.provenance?.native_decision_subject?.fields;
+    const after = current.provenance?.native_decision_subject?.fields;
+    const approval = current.manifest_repair?.owner_decision_refresh;
+    const withoutVerdict = ({ verdict: _verdict, ...fields }) => fields;
+    return before?.id === 'lem-schwartz-dilations-preserve-schwartz-space'
+      && after?.id === before.id && before.verdict === 'accepted_repair'
+      && after.verdict === 'amended_repair'
+      && sameCanonical(withoutVerdict(before), withoutVerdict(after))
+      && hashValue(before) === prior.manifest_repair?.native_review?.decisions?.subject_sha256
+      && hashValue(after) === current.manifest_repair?.native_review?.decisions?.subject_sha256
+      && approval?.owner === true && String(approval.reason ?? '').trim().length > 0;
+  } catch { return false; }
+}
 // Preserve v1 stage inventories; only provenance receipts need a new policy.
 const BASELINE_POLICY = 'auditor-created-stage-bypass-v1';
 const CERTIFICATION_POLICY = 'auditor-created-stage-bypass-v2';
@@ -35,8 +51,16 @@ export const auditorCreatedBaselinePath = (root, run, step) =>
   join(root, 'research', `${safe(run, 'run')}-step${safe(String(step), 'step')}-auditor-baseline.json`);
 export const auditorCreatedCertificationsPath = (root, run, step) =>
   join(root, 'research', `${safe(run, 'run')}-step${safe(String(step), 'step')}-auditor-certifications.json`);
-const ownerRecertificationPath = (root, run, step, id, hashes) =>
-  join(root, 'research', `${safe(run, 'run')}-step${safe(String(step), 'step')}-owner-recertification-${safe(id, 'item ID')}-${hashValue({ id, carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) }).slice(0, 16)}.json`);
+const ownerRecertificationPath = (root, run, step, id, hashes) => {
+  const stem = `${safe(run, 'run')}-step${safe(String(step), 'step')}-owner-recertification-${safe(id, 'item ID')}-${hashValue({ id, carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) }).slice(0, 16)}`;
+  const directory = join(root, 'research');
+  const refreshes = readdirSync(directory).filter(name => name.startsWith(`${stem}-refresh-`)
+    && /^[a-f0-9]{16}\.json$/.test(name.slice(`${stem}-refresh-`.length))).map(name => {
+    try { return { path: join(directory, name), at: Date.parse(read(join(directory, name)).at) }; }
+    catch { return null; }
+  }).filter(value => value && Number.isFinite(value.at)).sort((a, b) => b.at - a.at);
+  return refreshes[0]?.path ?? join(directory, `${stem}.json`);
+};
 
 // Owner-spawned creation is a separate attestation class, never a native result.
 const OWNER_CREATION_POLICY = 'owner-spawned-step5-creation-v1';
@@ -239,6 +263,21 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
   if (!existsSync(path)) return null;
   const bytes = readFileSync(path, 'utf8');
   const receipt = JSON.parse(bytes);
+  if (receipt.supersedes) {
+    const priorPath = researchFile(root, receipt.supersedes.path);
+    const priorBytes = readFileSync(priorPath, 'utf8'), prior = JSON.parse(priorBytes);
+    if (step !== 5 || id !== 'lem-schwartz-dilations-preserve-schwartz-space'
+      || receipt.basis !== 'initial-step5-authenticated-statement-source-mirror'
+      || sha(priorBytes) !== receipt.supersedes.sha256
+      || prior.owner !== true || prior.run !== run || prior.step !== step || prior.id !== id
+      || prior.author_result !== receipt.author_result || prior.basis !== receipt.basis
+      || CARRIER_KEYS.some(key => prior.carriers?.[key] !== receipt.carriers?.[key])
+      || !(Date.parse(prior.at) < Date.parse(receipt.at))
+      || sha(readFileSync(researchFile(root, prior.evidence), 'utf8')) !== prior.evidence_sha256
+      || !authorizedDilationDecisionRefresh(readFileSync(researchFile(root, prior.evidence), 'utf8'),
+        readFileSync(researchFile(root, receipt.evidence), 'utf8')))
+      throw Error(`${id}: invalid owner evidence refresh history`);
+  }
   const evidencePath = typeof receipt.evidence === 'string' ? resolve(root, receipt.evidence) : '';
   const researchRoot = resolve(root, 'research');
   const evidenceText = evidencePath.startsWith(`${researchRoot}/`) && existsSync(evidencePath)
@@ -258,6 +297,8 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
       ? ['initial-step5-contract-only', 'initial-step5-item-repair',
         'initial-step5-source-metadata-repair', 'initial-step5-dependency-repair',
         'initial-step5-authenticated-statement-source-mirror',
+        'initial-step5-owner-resolvent-projection-review',
+        'initial-step5-authenticated-native-input-manifest-mirror',
         'initial-step5-current-definition-manifest-review',
         'initial-step5-current-ball-lemma-manifest-review',
         'initial-step5-current-graph-lemma-manifest-review'].includes(receipt.basis)
@@ -369,7 +410,9 @@ function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '',
   if (existsSync(receiptPath)) {
     try { preferred = read(receiptPath).author_result; } catch { /* invalid receipt is checked below */ }
   }
-  const reviewedResult = manifestRepair === 'initial-step5-authenticated-statement-source-mirror'
+  const reviewedResult = ['initial-step5-authenticated-statement-source-mirror',
+    'initial-step5-owner-resolvent-projection-review',
+    'initial-step5-authenticated-native-input-manifest-mirror'].includes(manifestRepair)
     ? step5ManifestRepairEvidence(evidenceText)?.native_review?.result_file : null;
   const author = eligible.find(candidate => candidate.result_file === (reviewedResult ?? preferred))
     ?? eligible.at(-1);
@@ -559,7 +602,53 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
     || !sameCanonical(currentEntry, row.manifest_entry)) return null;
 
   const kind = evidence.repair_kind;
-  if (kind === 'authenticated-statement-source-mirror') {
+  if (kind === 'owner-resolvent-projection-review'
+    && id === 'cex-first-resolvent-estimate-does-not-give-hille-yosida-bound') {
+    // A finite owner adjudication of this actual typed-carrier repair. Native
+    // review context authenticates the unchanged current proof input; the
+    // owner explicitly owns subsequent contract and projection reconciliation.
+    try {
+      const approval = evidence.owner_adjudication;
+      const native = evidence.native_review;
+      const bound = link => {
+        const bytes = readFileSync(researchFile(root, link.path), 'utf8');
+        if (sha(bytes) !== link.sha256) throw Error('Unbound resolvent evidence');
+        return bytes;
+      };
+      const result = JSON.parse(bound(native.result));
+      const log = bound(native.log), snapshotBytes = bound(native.snapshot);
+      const snapshot = JSON.parse(snapshotBytes);
+      const text = readFileSync(join(root, 'items', `${safe(id)}.md`), 'utf8');
+      const { fm, body } = split(text), meta = yaml().parse(fm) ?? {};
+      const statement = body.match(/^## Statement refuted\s*\r?\n([\s\S]*?)(?=^## |$(?![\s\S]))/m)?.[1]?.trim();
+      const withoutProjection = ({ statement: _statement, deps: _deps, strategy: _strategy, ...entry }) => entry;
+      const decisionPath = `research/${run}-alpha-batch-${row.batch}-5a-decisions.json`;
+      const decisions = read(researchFile(root, decisionPath));
+      const decision = decisions.decisions?.find(value => value.id === id && value.route === 'touched');
+      const subject = Object.fromEntries(['id', 'obligation', 'route', 'verdict', 'evidence',
+        'repair_confidence'].map(key => [key, decision?.[key]]));
+      if (approval?.owner !== true || !String(approval.reason ?? '').trim()
+        || approval.current_complete_proof_and_contract_adjudicated !== true
+        || approval.native_authorship_of_owner_reconciliation !== false
+        || native.result.path !== `research/${run}-dispatch/${native.result_file}`
+        || result.run !== run || !authorResultAllowed(5, result)
+        || resolve(root, native.log.path) !== resolve(result.log)
+        || !result.covers.map(String).includes(row.batch)
+        || snapshot.run !== run || String(snapshot.batch) !== row.batch || snapshot.label !== 'post'
+        || !log.includes(body.trim())
+        || snapshot.hashes?.[id]?.item_sha256 !== hashes.item_file_sha256
+        || !sameCanonical(withoutProjection(oldEntry), withoutProjection(currentEntry))
+        || !sameCanonical(currentEntry.deps, meta.deps)
+        || !sameCanonical(currentEntry.sources, meta.sources)
+        || currentEntry.statement !== statement
+        || currentEntry.strategy !== body.match(/\*\*Proof technique:\*\*([^\n]+)/)?.[1]?.trim()
+        || decisions.run !== run || decision?.obligation !== `touched:${row.batch}:${id}`
+        || decision?.verdict !== 'amended_repair'
+        || hashValue(subject) !== native.decision_subject_sha256) return null;
+      return 'initial-step5-owner-resolvent-projection-review';
+    } catch { return null; }
+  }
+  if (['authenticated-statement-source-mirror', 'authenticated-native-input-manifest-mirror'].includes(kind)) {
     // This is an owner refresh of a genuine carried origin. The native result
     // supplies review context, never authorship of the owner's receipt. Exact
     // subject snapshots, rather than a sibling's shared-file mtime, establish
@@ -567,21 +656,45 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
     try {
       const baselineText = evidence.baseline_item_text;
       const currentText = readFileSync(join(root, 'items', `${safe(id)}.md`), 'utf8');
-      if (typeof baselineText !== 'string' || sha(baselineText) !== before.item_file_sha256
-        || itemHashJudge(baselineText) !== before.judge_sha256) return null;
+      const nativeMirror = kind === 'authenticated-native-input-manifest-mirror';
+      if (!nativeMirror && (typeof baselineText !== 'string' || sha(baselineText) !== before.item_file_sha256
+        || itemHashJudge(baselineText) !== before.judge_sha256)) return null;
       const section = text => text.match(/^## Statement\s*\r?\n([\s\S]*?)(?=^## |$(?![\s\S]))/m);
-      const oldStatement = section(baselineText), currentStatement = section(currentText);
-      if (!oldStatement || !currentStatement
+      const oldStatement = nativeMirror ? null : section(baselineText), currentStatement = section(currentText);
+      // proof-layout joins soft-wrapped Given/local-fact paragraphs. Admit
+      // precisely that presentation change while retaining paragraph breaks,
+      // mathematical tokens, frontmatter, and the entire Proof verbatim.
+      const normalizeFactsWrapping = text => text.replace(
+        /^## Facts & Assumptions\r?\n([\s\S]*?)(?=^## |$(?![\s\S]))/m,
+        (whole, facts) => whole.replace(facts, facts.split(/(\n{2,})/).map(paragraph =>
+          /^\n?(?:\*\*Given:\*\*|\[[LF]\d+\])/.test(paragraph)
+            ? paragraph.replace(/([^\n])\n(?=[^\n])/g, '$1 ') : paragraph).join('')));
+      if (!nativeMirror && (!oldStatement || !currentStatement
         || oldEntry.statement !== oldStatement[1].trim()
         || currentEntry.statement !== currentStatement[1].trim()
         || oldEntry.statement === currentEntry.statement
-        || baselineText.replace(oldStatement[0], '') !== currentText.replace(currentStatement[0], '')) return null;
-      const oldFm = yaml().parse(split(baselineText).fm) ?? {};
+        || normalizeFactsWrapping(baselineText.replace(oldStatement[0], ''))
+          !== normalizeFactsWrapping(currentText.replace(currentStatement[0], '')))) return null;
+      const oldFm = nativeMirror ? null : yaml().parse(split(baselineText).fm) ?? {};
       const currentFm = yaml().parse(split(currentText).fm) ?? {};
       const withoutMirror = ({ statement: _statement, sources: _sources, ...entry }) => entry;
-      if (!sameCanonical(withoutMirror(oldEntry), withoutMirror(currentEntry))
+      if (!nativeMirror && (!sameCanonical(withoutMirror(oldEntry), withoutMirror(currentEntry))
         || !sameCanonical(oldFm.sources, currentFm.sources)
-        || !sameCanonical(currentEntry.sources, currentFm.sources)) return null;
+        || !sameCanonical(currentEntry.sources, currentFm.sources))) return null;
+      if (nativeMirror) {
+        const mirrorKeys = ['title', 'deps', 'provenance', 'sources', 'dependency_level'];
+        if (Object.hasOwn(currentEntry, 'justified_by')) mirrorKeys.push('justified_by');
+        const withoutProjection = entry => Object.fromEntries(Object.entries(entry)
+          .filter(([key]) => ![...mirrorKeys, 'statement', 'strategy'].includes(key)));
+        const { body } = split(currentText);
+        const claim = body.match(/^## (?:Definition|Statement|Statement refuted|Example|Remark)\s*\r?\n([\s\S]*?)(?=^## |$(?![\s\S]))/m)?.[1]?.trim();
+        const strategy = body.match(/\*\*Proof technique:\*\*([^\n]+)/)?.[1]?.trim();
+        if (!sameCanonical(withoutProjection(oldEntry), withoutProjection(currentEntry))
+          || mirrorKeys.some(key => !sameCanonical(currentEntry[key], currentFm[key]))
+          || currentEntry.statement !== claim
+          || (currentEntry.strategy !== oldEntry.strategy && (!strategy || currentEntry.strategy !== strategy))
+          || evidence.owner_native_mirror_authorization?.owner !== true) return null;
+      }
       const native = evidence.native_review;
       const linked = link => {
         const bytes = readFileSync(researchFile(root, link?.path), 'utf8');
@@ -599,11 +712,47 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       if (resolve(root, native.log.path) !== resolve(result.log)) return null;
       const snapshotBytes = linked(native.snapshot), snapshot = JSON.parse(snapshotBytes);
       const reviewed = snapshot.hashes?.[id];
+      const literalRepair = nativeMirror && evidence.native_text_repair;
+      let grandMaximalTextMatches = false;
+      let ownerReviewSuffix = '';
+      if (id === 'lem-grand-maximal-function-is-dominated-by-the-tangential-maximal-function'
+        && typeof literalRepair?.before_item_text === 'string'
+        && sha(literalRepair.before_item_text) === reviewed?.item_sha256
+        && literalRepair.before_item_text.includes('\x0barphi')
+        && (log.includes("t=t.replace('\\x0barphi','\\\\varphi')")
+          || log.includes("t=t.replace('\\\\x0barphi','\\\\\\\\varphi')"))) {
+        const nativeText = literalRepair.before_item_text.replaceAll('\x0barphi', '\\varphi');
+        grandMaximalTextMatches = nativeText === currentText;
+        if (evidence.owner_refinement?.path === `research/${run}-step5-owner-grand-maximal-adjudication.json`) {
+          const owner = JSON.parse(linked(evidence.owner_refinement));
+          grandMaximalTextMatches = owner.run === run && owner.item === id
+            && owner.statement_changed === false && String(owner.owner_local_note ?? '').trim().length > 0
+            && sha(nativeText) === owner.before_source_sha256
+            && hashes.item_file_sha256 === owner.after_source_sha256
+            && typeof owner.before_F1 === 'string' && typeof owner.after_F1 === 'string'
+            && nativeText.includes(owner.before_F1)
+            && nativeText.replace(owner.before_F1, owner.after_F1) === currentText;
+          if (grandMaximalTextMatches) ownerReviewSuffix = ` ${owner.owner_local_note}`;
+        }
+      }
+      const nativeItemMatches = reviewed?.item_sha256 === hashes.item_file_sha256
+        || grandMaximalTextMatches;
+      const { fm: readFm, body: readBody } = split(currentText);
+      const readSections = [...readBody.matchAll(/^## ([^\n]+)\r?\n([\s\S]*?)(?=^## |$(?![\s\S]))/gm)];
+      const sectionsRead = nativeMirror && reviewed?.item_sha256 === hashes.item_file_sha256
+        && log.includes(readFm.trim())
+        && readSections.length >= 3
+        && readSections.some(match => match[1] === 'Facts & Assumptions')
+        && readSections.some(match => ['Proof', 'Verification'].includes(match[1]))
+        && readSections.every(match => match[2].trim().length > 0 && log.includes(match[2].trim()))
+        && log.includes(`${id} HEAD-pre false current-post true pre-post false`);
       if (snapshot.run !== run || String(snapshot.batch) !== row.batch || snapshot.label !== 'post'
-        || reviewed?.item_sha256 !== hashes.item_file_sha256
-        || !log.includes(snapshotBytes.trim())) return null;
+        || !nativeItemMatches
+        || (!log.includes(snapshotBytes.trim()) && !sectionsRead)) return null;
       const contract = contractEntry(join(root, 'research', `${run}-batch-${safe(row.batch)}.proof-contracts.json`), id);
       const { risk_review: review, ...mathematicalContract } = contract ?? {};
+      if (ownerReviewSuffix && !review?.notes?.endsWith(ownerReviewSuffix)) return null;
+      const nativeReviewNotes = ownerReviewSuffix ? review.notes.slice(0, -ownerReviewSuffix.length) : review?.notes;
       const decisionPath = `research/${run}-alpha-batch-${row.batch}-5a-decisions.json`;
       if (native.decisions?.path !== decisionPath) return null;
       const decisions = read(researchFile(root, decisionPath));
@@ -623,19 +772,33 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       // mathematical carrier evidence; the full snapshot binds the inputs.
       const unquote = text => String(text).replace(/['"\\\s]/g, '');
       const expectedReview = { status: 'complete', reviewer: `alpha-batch-${row.batch}`,
-        notes: decision?.evidence, evidence: [
+        notes: review?.notes, evidence: [
           { path: `items/${id}.md`, location: 'Current claim, facts and complete argument' },
           { path: `research/${run}-reader-${row.batch}.md` },
           { path: `research/${run}-refute-${row.batch}.json` },
         ] };
+      const batch6Review = nativeMirror && row.batch === '6'
+        && sameCanonical(review, { status: 'complete', reviewer: 'alpha-batch-6', notes: review?.notes })
+        && typeof native.note_prefix === 'string' && typeof native.note_suffix === 'string'
+        && nativeReviewNotes === native.note_prefix + native.note_suffix
+        && ['accepted_repair', 'amended_repair'].some(verdict => unquote(log).includes(unquote(
+          `python3 /tmp/alpha6-record.py touched:6:${id} ${id} ${verdict} '${native.note_prefix}`)))
+        && (!native.note_suffix || unquote(log).includes(unquote(native.note_suffix)));
+      // The unchanged subject is the native claim and derivation contract.
+      // Grand-maximal Facts normalization is a separate exact owner replay above;
+      // the flag does not assert byte-identical current Facts or native authorship.
       if (reviewed.contract_sha256 !== hashValue(mathematicalContract)
         || decisions.run !== run || !['accepted_repair', 'amended_repair'].includes(decision?.verdict)
         || review?.status !== 'complete' || review.reviewer !== `alpha-batch-${row.batch}`
-        || !String(review.notes ?? '').trim() || decision.evidence !== review.notes
-        || !sameCanonical(review, expectedReview)
-        || !unquote(log).includes(unquote(`{"id":"${id}","note":"${review.notes}"`))
+        || !String(review.notes ?? '').trim()
+        || (nativeMirror ? decision.evidence !== nativeReviewNotes + (evidence.owner_native_mirror_authorization?.decision_evidence_suffix ?? '')
+          : decision.evidence !== review.notes)
+        || (!sameCanonical(review, expectedReview) && !batch6Review)
+        || (!batch6Review && !['', 'accepted_repair', 'amended_repair', 'reviewed_no_defect'].some(verdict =>
+          unquote(log).includes(unquote(`{"id":"${id}",${verdict ? `"verdict":"${verdict}",` : ''}"note":"${nativeReviewNotes}"`))))
         || evidence.review.native_reviewed_subject_unchanged !== true) return null;
-      return 'initial-step5-authenticated-statement-source-mirror';
+      return nativeMirror ? 'initial-step5-authenticated-native-input-manifest-mirror'
+        : 'initial-step5-authenticated-statement-source-mirror';
     } catch { return null; }
   }
   if (kind === 'source-reference-fields') {
@@ -687,7 +850,8 @@ function sameExceptDependencyList(before, after, path = []) {
   return before === after;
 }
 
-export function recordOwnerRecertification(root, run, step, id, evidence, reason) {
+export function recordOwnerRecertification(root, run, step, id, evidence, reason,
+  { refreshEvidence = false } = {}) {
   step = Number(step);
   if (![5, 7, 8].includes(step)) throw Error('Owner recertification supports steps 5, 7, and 8');
   safe(run, 'run'); safe(id, 'item ID');
@@ -713,7 +877,28 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
     throw Error(`${id}: owner evidence must be a research file naming the item`);
   if (step === 5 && !step5EvidenceBindsCurrentCarriers(evidenceText, run, id, hashes))
     throw Error(`${id}: Step-5 owner evidence must name the active run and every exact current carrier hash`);
-  const path = ownerRecertificationPath(root, run, step, id, hashes);
+  let path = ownerRecertificationPath(root, run, step, id, hashes);
+  let supersedes;
+  if (refreshEvidence) {
+    if (step !== 5 || id !== 'lem-schwartz-dilations-preserve-schwartz-space'
+      || bootstrap?.basis !== 'initial-step5-authenticated-statement-source-mirror'
+      || !existsSync(path)) throw Error(`${id}: no eligible identical-carrier decision-binding refresh`);
+    const priorBytes = readFileSync(path, 'utf8'), priorReceipt = JSON.parse(priorBytes);
+    if (path.includes('-refresh-') && priorReceipt.evidence_sha256 === sha(evidenceText)) {
+      ownerRecertification(root, run, step, id, hashes, authorResult, bootstrap.basis);
+      return { path, reused: true };
+    }
+    if (priorReceipt.owner !== true || priorReceipt.run !== run || priorReceipt.step !== step
+      || priorReceipt.id !== id || priorReceipt.author_result !== authorResult
+      || priorReceipt.basis !== bootstrap.basis
+      || CARRIER_KEYS.some(key => priorReceipt.carriers?.[key] !== hashes[key])
+      || sha(readFileSync(researchFile(root, priorReceipt.evidence), 'utf8')) !== priorReceipt.evidence_sha256
+      || !authorizedDilationDecisionRefresh(readFileSync(researchFile(root, priorReceipt.evidence), 'utf8'), evidenceText))
+      throw Error(`${id}: refresh must preserve an authentic prior identical-carrier receipt`);
+    supersedes = { path: `research/${path.split('/').at(-1)}`, sha256: sha(priorBytes) };
+    const stem = path.split('-refresh-')[0].replace(/\.json$/, '');
+    path = `${stem}-refresh-${sha(evidenceText).slice(0, 16)}.json`;
+  }
   if (existsSync(path)) {
     ownerRecertification(root, run, step, id, hashes, authorResult, bootstrap?.basis ?? null);
     return { path, reused: true };
@@ -722,6 +907,7 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
     owner: true, at: new Date().toISOString(), reason: String(reason).trim(),
     evidence: `research/${evidencePath.split('/').at(-1)}`,
     evidence_sha256: sha(readFileSync(evidencePath, 'utf8')),
+    ...(supersedes ? { supersedes } : {}),
     ...(creation ? { owner_creation: creation.marker } : { author_result: authorResult }),
     ...(bootstrap ? { basis: bootstrap.basis,
       ...(['initial-step5-current-definition-manifest-review',
@@ -1141,7 +1327,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const args = process.argv.slice(2), command = args[0];
     const value = flag => { const at = args.indexOf(flag); return at < 0 ? undefined : args[at + 1]; };
     const run = value('--run'), step = Number(value('--step'));
-    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7|8; owner-create --run RUN --step 5 --id ITEM --evidence research/JSON; owner-recertify --run RUN --step 5|7|8 --id ITEM --evidence research/FILE --reason TEXT';
+    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7|8; owner-create --run RUN --step 5 --id ITEM --evidence research/JSON; owner-recertify --run RUN --step 5|7|8 --id ITEM --evidence research/FILE --reason TEXT [--refresh-evidence (identical-carrier dilation decision binding only)]';
     if (!run || ![5, 7, 8].includes(step)) throw Error(usage);
     const result = command === 'baseline'
       ? writeAuditorCreatedBaseline(process.cwd(), run, step)
@@ -1149,7 +1335,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
         : command === 'owner-create'
           ? recordOwnerCreation(process.cwd(), run, step, value('--id'), value('--evidence'))
         : command === 'owner-recertify'
-          ? recordOwnerRecertification(process.cwd(), run, step, value('--id'), value('--evidence'), value('--reason'))
+          ? recordOwnerRecertification(process.cwd(), run, step, value('--id'), value('--evidence'), value('--reason'),
+            { refreshEvidence: process.argv.includes('--refresh-evidence') })
           : null;
     if (!result) throw Error(usage);
     if (['owner-recertify', 'owner-create'].includes(command)) console.log(`step${step}-${command === 'owner-create' ? 'owner-creation' : 'owner-recertification'}: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);

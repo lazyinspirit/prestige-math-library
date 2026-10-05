@@ -349,11 +349,44 @@ basis `initial-step5-authenticated-statement-source-mirror` for a verified
 Statement correction and synchronization of source fields already present in
 the item. Exact recovered pre-reader item/manifest bytes must match the sealed
 baseline; bytes outside Statement and actual item source metadata remain
-unchanged. Native input snapshots, unchanged subject contract apart from its
+unchanged, apart from soft line wrapping within Given and local Facts paragraphs
+that preserves paragraph boundaries and mathematical text. The full Proof remains
+byte-identical. Native input snapshots, unchanged subject contract apart from its
 exact native review, successful dispatch context and the stable subject review
 must bind current carriers. Sibling edits and mechanical decision stamps do not
 alter that evidence. The owner receipt remains an owner refresh, preserves the
 original Step3 origin and never invents native authorship or missing history.
+
+`initial-step5-authenticated-native-input-manifest-mirror` handles a carried
+item whose manifest was synchronized with mathematics already reviewed by a
+successful native Step5 dispatch. The exact current raw item and mathematical
+contract must match that dispatch's post-reader inputs; the contract may add
+only its authenticated native review. Recovered baseline manifest projections
+must match the immutable boundary. Current claim, dependency, source and other
+metadata mirrors must match the actual item, and an altered strategy must match
+its proof technique. Native review notes and the stable subject decision digest
+are checked separately from sibling rows and mechanical stamps. A native log
+may authenticate its complete printed snapshot, or its exact raw frontmatter,
+claim, all Facts and full Proof/Verification sections together with the explicit
+subject input comparison. These are distinct forms of actual read evidence.
+
+Two finite owner reconciliations retain their actual authors. For the grand
+maximal domination lemma, the hash-proven native input is replayed through the
+logged literal vertical-tab repair, then the owner's recorded exact F1
+before/after supplier-alignment replacement. Its unchanged mathematical
+contract and separate native/owner review notes remain bound. For the first
+resolvent counterexample, `initial-step5-owner-resolvent-projection-review`
+requires the native-read current mathematical body, exact baseline/current
+projections and the root's complete-proof/current-contract adjudication. It
+records the owner's source/DC reconciliation, not invented native authorship.
+Neither branch authorizes original-item promotion or new creation.
+
+The dilation's public `owner-recertify --refresh-evidence` option refreshes
+only an authorized `accepted_repair` to `amended_repair` decision binding on
+identical carriers, preserving every other stable review field. It writes a
+new receipt with a hashed `supersedes` link and keeps the original receipt and
+evidence immutable. Normal certification selects and validates that current
+receipt. This option cannot replace mathematical content or erase history.
 
 ## Frontier validator scope
 
