@@ -34,6 +34,11 @@
 - `start` runs doctor before dispatch. Doctor checks command and task wiring, not
   mathematical correctness or provider quotas. A detached start writes
   `.autopilot/RUN/autopilot.log`.
+  On restart, doctor omits historical dispatch plans only for the matching
+  workflow's completed prefix: gated stages need durable gate/done stamps;
+  explicitly gate-waived stages need successful dispatch coverage and their
+  required artifacts on disk. Static stage, gate, command and task wiring checks
+  remain active. Later proof repairs need not recreate obsolete author plans.
 - Pass the same `--run` and `--state-dir` to every command. The default state directory
   is `.autopilot/`, and some older runs use it directly. Check the run name in
   `state.json` before controlling a run. `status` recomputes from disk. Historical

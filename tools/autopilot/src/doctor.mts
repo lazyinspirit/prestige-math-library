@@ -24,6 +24,7 @@ import { spawnSync } from 'node:child_process';
 import { validateStages } from './spec.mts';
 import { validateCodexOutputSchema } from '../../codex-output-schema.mjs';
 import { resolveLineup } from '../../models.mjs';
+import { stageComplete } from './coverage.mts';
 
 const flagsOf = (s: string): string[] => [...new Set(s.match(/--[a-z-]+/g) ?? [])];
 
@@ -36,8 +37,10 @@ export function identityPlaceholders(text: string): string[] {
   return found.filter((name) => name === 'n' || name === 'k').map((name) => `<${name}>`);
 }
 
-/** Only a matching durable, gate-passed prefix can omit historical plans.
+/** Only a matching durable, completed prefix can omit historical plans.
  * Later mathematical repairs may legitimately invalidate their old inputs.
+ * Explicitly gate-waived stages close by successful coverage and artifacts,
+ * exactly as in executor.stageStatus; the controller does not stamp them.
  * Invalid/missing state grants no exemption; doctor then checks every plan. */
 function completedPrefix(repo: string, run: string, stages: any[], config: any, workflowRevision?: string): Set<string> {
   const completed = new Set<string>();
@@ -56,8 +59,22 @@ function completedPrefix(repo: string, run: string, stages: any[], config: any, 
       const entered = Date.parse(stamp?.enteredAt), gates = Date.parse(stamp?.gatesPassedAt),
         done = Date.parse(stamp?.doneAt);
       if (!stamp || stamp.skipped || stamp.routedTo
-        || !Number.isFinite(entered) || !Number.isFinite(gates) || !Number.isFinite(done)
-        || entered < Date.parse(state.startedAt) || gates < entered || done < gates) break;
+        || !Number.isFinite(entered) || entered < Date.parse(state.startedAt)) break;
+      if (st.gatesWaived) {
+        // Resolve actual owed units on live disk, not synthetic doctor units.
+        // No plan() call is needed to establish this mechanical completion.
+        const ctx = { run, repo, dispatchDir: join(repo, 'research', `${run}-dispatch`),
+          config, coversMap: config.coversMap ?? {} } as any;
+        const owed = st.units(ctx).map(String);
+        const pattern = typeof st.pattern === 'function' ? st.pattern(ctx) : st.pattern;
+        if (!(pattern instanceof RegExp) || !stageComplete(ctx.dispatchDir, pattern, owed, {
+          coversMap: ctx.coversMap, fallbackCount: st.fallbackCount ?? owed.length,
+        }).done) break;
+        if (st.artifacts && !owed.every((unit: string) =>
+          [st.artifacts(ctx, unit)].flat().filter(Boolean).every((path: string) =>
+            existsSync(join(repo, path))))) break;
+      } else if (!Number.isFinite(gates) || !Number.isFinite(done)
+        || gates < entered || done < gates) break;
       completed.add(st.id);
     }
   } catch { /* unreadable state cannot authorize omitting any dynamic check */ }
