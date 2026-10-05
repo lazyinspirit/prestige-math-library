@@ -15,6 +15,8 @@ const safe = s => {
 const json = p => JSON.parse(readFileSync(p, 'utf8'));
 const hash = x => createHash('sha256').update(JSON.stringify(x)).digest('hex');
 const read = p => existsSync(p) ? json(p) : null;
+// Only genuine loader contexts may opt into a writer-drained stable pass.
+const loadedSnapshots = new WeakSet();
 const file = (root, run, stage, id, owner) => join(root, 'research',
   `${safe(run)}-step${stage}-${owner ? 'owner' : 'review'}-${safe(id)}.json`);
 function receipt(s, phase, id, owner) {
@@ -98,7 +100,9 @@ export function loadStep3(root, run) {
   const planned = new Map();
   for (const page of read(join(dir, 'plan-spec.json'))?.pages ?? [])
     for (const item of page.items ?? []) planned.set(item.id, { item, page });
-  return { root, run, pages, pairs, items, planned, cache: new Map() };
+  const snapshot = { root, run, pages, pairs, items, planned, cache: new Map() };
+  loadedSnapshots.add(snapshot);
+  return snapshot;
 }
 
 // Proof repairs do not reopen scope. Changed claims or inventory do.
@@ -241,9 +245,13 @@ export function checkStep3(s, phase) {
     closed: work.length === 0, work };
 }
 
-export function recordStep3(root, { run, phase, page, item, decision, reason, owner = false, confidence, dependencies }) {
+// Optional snapshot reuse is valid only for a stable, writer-drained pass. The
+// caller must re-load and check the complete current inventory before closure.
+export function recordStep3(root, { run, phase, page, item, decision, reason, owner = false, confidence, dependencies }, snapshot = undefined) {
   if (!reason?.trim()) throw Error('An evidence/reason is required');
-  const s = loadStep3(root, run), id = phase === 'scope' ? page : item;
+  if (snapshot !== undefined && (!loadedSnapshots.has(snapshot) || resolve(snapshot.root) !== resolve(root) || snapshot.run !== run))
+    throw Error('Stable Step 3 snapshot must be a loadStep3 context for the exact root and run');
+  const s = snapshot ?? loadStep3(root, run), id = phase === 'scope' ? page : item;
   if (!['scope', 'item'].includes(phase)) throw Error('phase must be scope or item');
   const allowed = phase === 'scope' ? owner ? ['proceed', 'merge', 'enrich'] : ['sufficient', 'insufficient']
     : owner ? ['repaired', 'hold', 'reopen'] : ['accept', 'repaired', 'escalate'];

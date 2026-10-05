@@ -233,6 +233,17 @@ from auditor-created classification only after an ordinary current
 dependencies, including its declared manifest and authored dependencies. It emits
 no auditor item or scope certificate for that creation. Scope approval, native
 unit coverage and mathematical acceptance remain their ordinary obligations.
+For a dependency-ordered pass after every writer drains, load one context with
+`const snapshot = loadStep3(root, run)` and pass it as the optional third argument
+`recordStep3(root, decision, snapshot)`. Only a genuine context for the exact root
+and run is accepted. This reuses manifest parsing and transitive input caches;
+ordinary two-argument calls still load fresh inputs and all receipt/history
+semantics are unchanged. Snapshot reuse assumes stable files: before issuing a
+certification bundle or attempting a gate, load a new context, compare the complete
+current inventory and all final item hashes/receipts, and require
+`checkStep3(fresh, 'final').closed`. Any midpass mutation requires a fresh complete
+pass; a cached snapshot is never evidence that current on-disk inputs passed.
+
 Before `recordStep3` replaces an item-owner decision, it preserves the actual
 current receipt bytes under
 `research/RUN-step3b-owner-history-ITEM/JSON-DIGEST.json`. History is immutable and
