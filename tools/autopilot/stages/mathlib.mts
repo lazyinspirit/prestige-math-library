@@ -49,6 +49,7 @@ const { step7Stages } = await import(
 );
 
 const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
+const LUNA_MAX = MODEL_PROFILE_NAMES.lunaMax;
 // A live engine hot-reloads this stage module but retains its first models.mjs
 // import. The new profile name must also resolve in that already-running process.
 const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
@@ -1296,11 +1297,13 @@ function step3AuthorScopeNote(): string {
 
 function authorItemOrder(snapshot: any, pairIds: string[]): string {
   const all = snapshot.pages.flatMap((page: any) => page.items ?? []);
-  // Historical completed runs predate scaffold labels. New runs are gated on
-  // them in Step 1; once any label exists, partial or stale labels fail closed.
+  // Historical completed runs predate scaffold labels. Task planning uses the
+  // current DAG: concurrent authors can change suppliers before consumers
+  // refresh their stored labels. The Step-1 and final author gates still check
+  // every stored label on stable content.
   if (!all.some((item: any) => item.dependency_level !== undefined)) return '';
   const owned = new Set(pairIds.flatMap(id => (snapshot.pairs.get(id) ?? []).map((page: any) => page.id)));
-  const order = orderedItems(snapshot.pages).filter(row => owned.has(row.page));
+  const order = orderedItems(snapshot.pages, { validateLabels: false }).filter(row => owned.has(row.page));
   return `- Audit and author in this exact dependency-level order (lower first; ties by page order and item ID):\n${order.map(row => `  ${row.level}. ${row.id} (${row.page})`).join('\n')}\n`;
 }
 
@@ -1453,6 +1456,7 @@ export const stages = [
   {
     id: '1-drift',
     label: 'Step 1 — prerequisite-drift review',
+    modelProfile: LUNA_MAX,
     units: () => ['drift'],
     pattern: /^alpha-(?:alpha-)?drift-review\.result\.json$/,
     labelFor: () => 'drift-review',
