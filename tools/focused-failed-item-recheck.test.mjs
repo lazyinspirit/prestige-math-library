@@ -28,7 +28,7 @@ function evidenceFor(root, { failed = ['lem-failed'], passed = ['lem-passed'] } 
   } }, retained_pass_inputs: { depcheck: retained } };
 }
 
-test('focused validators check only selected item-local errors and keep global cycles complete', () => {
+test('focused validators check only selected item-local errors and keep relevant prerequisite cycles complete', () => {
   const root = fixture();
   try {
     mkdirSync(join(root, 'tools'));
@@ -42,7 +42,7 @@ test('focused validators check only selected item-local errors and keep global c
       { id: 'page-b', order: 2, kind: 'A', requires: ['page-a'], items: ['thm-page-b'] },
     ] }));
     const item = (id, kind, deps = [], extra = '') => `---\nid: ${id}\nkind: ${kind}\nstatus: draft\ndeps: [${deps.join(', ')}]\n${extra}---\n## Statement\n\n${id}.\n`;
-    writeFileSync(join(root, 'items', 'lem-selected.md'), item('lem-selected', 'lemma', ['def-missing-selected'], 'forward_refs: [thm-later]\n'));
+    writeFileSync(join(root, 'items', 'lem-selected.md'), item('lem-selected', 'lemma', ['def-missing-selected', 'thm-page-a'], 'forward_refs: [thm-later]\n'));
     writeFileSync(join(root, 'items', 'lem-unselected.md'), item('lem-unselected', 'lemma', ['def-missing-unselected'], 'forward_refs: [thm-other-later]\n'));
     writeFileSync(join(root, 'items', 'thm-page-a.md'), item('thm-page-a', 'theorem', ['thm-page-b']));
     writeFileSync(join(root, 'items', 'thm-page-b.md'), item('thm-page-b', 'theorem', ['thm-page-a']));

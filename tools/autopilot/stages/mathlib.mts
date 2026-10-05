@@ -287,7 +287,7 @@ const repoWide = (ctx, { pendingAuditOk = false }: { pendingAuditOk?: boolean } 
   // (citecheck stays advisory by design: it cannot exit nonzero, and an
   // always-green gate is noise, not checking — readers run it by hand.)
   frontierGate(ctx, 'prosecheck', ['node', 'tools/prosecheck.mjs'], 'files'),
-  frontierGate(ctx, 'depsource', ['node', 'tools/depsource.mjs'], 'items'),
+  frontierGate(ctx, 'depsource', ['node', 'tools/depsource.mjs', '--run', ctx.run], 'items'),
   // The category pages render an AUTHORED reading order (library/<cat>/_pathway.md),
   // so nothing mechanical keeps it covering the corpus as levels land. This is
   // that guarantee: a published page in no part fails here. `pathway-sync` runs

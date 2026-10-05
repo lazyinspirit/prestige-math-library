@@ -2,7 +2,7 @@
 // depsource.mjs — classify every dependency in the PLANNED item scaffolds by
 // where its target actually lives.
 //
-//   node tools/depsource.mjs [research/plan-spec.json] [--page <id>] [--json] [--items-file PATH]
+//   node tools/depsource.mjs [research/plan-spec.json] [--page <id>] [--json] [--items-file PATH] [--run RUN]
 //
 // validate-plan.mjs already proves the planned stack is acyclic and forward-free
 // IN PLAN ORDER. This answers the different question the owner asked: can every
@@ -34,16 +34,34 @@ import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { parseItemScope, includesItem, unknownItems } from './item-scope.mjs';
+import { readRunManifestPages } from './run-manifest-pages.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const itemScope = parseItemScope(process.argv.slice(2));
-const args = itemScope.args;
+const args = [...itemScope.args];
+const runPositions = args.flatMap((arg, i) => arg === '--run' ? [i] : []);
+if (runPositions.length > 1) throw Error('--run may be specified once');
+const run = runPositions.length ? args[runPositions[0] + 1] : null;
+if (runPositions.length && (!run || run.startsWith('--') || itemScope.selected === null))
+  throw Error('--run requires a run identity and a nonempty --items-file selection');
+if (runPositions.length) args.splice(runPositions[0], 2);
 const asJson = args.includes('--json');
 const pageFilter = args.includes('--page') ? args[args.indexOf('--page') + 1] : null;
 const specPath = args.find((a) => a.endsWith('.json')) ?? 'research/plan-spec.json';
 
 const spec = JSON.parse(readFileSync(join(REPO, specPath), 'utf8'));
-const planned = spec.pages;
+const currentPages = run ? readRunManifestPages(REPO, run) : [];
+const currentItems = new Set(currentPages.flatMap(page => page.items.map(item => item.id)));
+if (run) for (const id of unknownItems(itemScope, currentItems))
+  throw Error(`--items-file names item "${id}" outside current run manifests`);
+// Preserve all external planned suppliers while current manifests own their
+// actual entries, order and homes before Step 4 splices the canonical plan.
+const planned = (spec.pages ?? []).map(page => ({ ...page, items: (page.items ?? []).filter(item => !currentItems.has(item.id)) }));
+for (const page of currentPages) {
+  const prior = planned.findIndex(value => value.id === page.id);
+  if (prior < 0) planned.push(page);
+  else planned[prior] = { ...planned[prior], ...page, items: [...planned[prior].items, ...page.items] };
+}
 const plannedPageOf = new Map(); // planned item id -> page
 const plannedOrder = new Map(); // planned item id -> page order
 for (const p of planned) {
@@ -85,6 +103,7 @@ for (const [id, it] of authored) for (const a of it.aliases) aliasTo.set(a, id);
 
 // home page of an authored item, and whether that page is published
 const homeOf = new Map();
+const authoredPages = new Map();
 (function walk(dir, cat) {
   if (!existsSync(dir)) return;
   for (const e of readdirSync(dir, { withFileTypes: true })) {
@@ -97,10 +116,16 @@ const homeOf = new Map();
       status: scalar(fm, 'status') ?? 'draft',
       path: [...cat, scalar(fm, 'page') ?? basename(e.name, '.md')].join('/'),
     };
+    authoredPages.set(page.id, page);
     for (const id of [...listOf(fm, 'items'), ...listOf(fm, 'examples')])
       if (!homeOf.has(id)) homeOf.set(id, page);
   }
 })(join(REPO, 'library'), []);
+for (const page of currentPages) {
+  const home = authoredPages.get(page.id) ?? { id: page.id, status: 'draft', path: `${page.category}/${page.id}` };
+  if (home.path !== `${page.category}/${page.id}`) throw Error(`Current manifest home disagrees with authored page ${page.id}`);
+  for (const item of page.items) homeOf.set(item.id, home);
+}
 
 // ------------------------------------------------------------------- classify
 

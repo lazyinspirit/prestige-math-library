@@ -12,7 +12,7 @@ function fixture(t) {
   const repo = mkdtempSync(join(tmpdir(), 'frontier-gates-test-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   for (const dir of ['tools', 'items', 'research', 'library/test']) mkdirSync(join(repo, dir), { recursive: true });
-  for (const file of ['extcheck.mjs', 'depsource.mjs', 'pathcheck.mjs', 'pathway-lib.mjs', 'paths.mjs', 'frontmatter-list.mjs', 'item-scope.mjs'])
+  for (const file of ['extcheck.mjs', 'depsource.mjs', 'pathcheck.mjs', 'pathway-lib.mjs', 'paths.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'run-manifest-pages.mjs', 'depcheck.mjs', 'facts-block.mjs', 'published-repair-policy.mjs', 'item-hash.mjs'])
     copyFileSync(join(tools, file), join(repo, 'tools', file));
   const write = (path, text) => writeFileSync(join(repo, path), text);
   const item = (id, deps = '[]', extra = '') => `---\nid: ${id}\nkind: theorem\nstatus: draft\ndeps: ${deps}\n${extra}---\n`;
@@ -27,6 +27,7 @@ function fixture(t) {
     { id: 'selected', category: 'test', order: 1, items: [{ id: 'thm-selected', deps: ['thm-supplier'] }] },
     { id: 'unrelated', category: 'test', order: 2, items: [{ id: 'thm-unrelated', deps: ['thm-missing'] }] },
   ] }));
+  write('research/b-leaf-legacy-allowlist.json', JSON.stringify({ version: 1, edges: [] }));
   write('items.json', JSON.stringify(['thm-selected']));
   write('pages.json', JSON.stringify(['selected']));
   const run = (tool, args = []) => spawnSync(process.execPath, [`tools/${tool}.mjs`, ...args], {
@@ -124,4 +125,76 @@ test('focused extcheck retains transitive Foundations boundary paths through out
   const errors = JSON.parse(result.stdout).errors;
   assert.deepEqual(errors.map(e => e.code), ['foundations-deferred-dependency']);
   assert.match(errors[0].msg, /thm-selected -> thm-supplier -> rem-deferred/);
+});
+
+
+test('depcheck excludes unrelated page hygiene, multi-home and disconnected cycles', t => {
+  const f = fixture(t);
+  f.write('items/thm-cycle-a.md', f.item('thm-cycle-a', '[thm-cycle-b]'));
+  f.write('items/thm-cycle-b.md', f.item('thm-cycle-b', '[thm-cycle-a]'));
+  f.write('library/test/cycle-a.md', '---\npage: cycle-a\nitems: [thm-cycle-a]\n---\n');
+  f.write('library/test/cycle-b.md', '---\npage: cycle-b\nitems: [thm-cycle-b]\n---\n');
+  f.write('library/test/unrelated.md', '---\npage: unrelated\ntitle: "bad\\alpha"\nstatus: published\nitems: [thm-unrelated, thm-unrelated, thm-absent]\n---\n');
+  const bare = f.run('depcheck', ['--json']);
+  assert.equal(bare.status, 1, bare.stderr);
+  assert.ok(JSON.parse(bare.stdout).errors.some(row => row.code === 'item-cycle'));
+  const focused = f.run('depcheck', ['--items-file', 'items.json', '--json']);
+  assert.equal(focused.status, 0, focused.stderr);
+  assert.deepEqual(JSON.parse(focused.stdout).errors, []);
+  assert.deepEqual(JSON.parse(focused.stdout).warns, []);
+  assert.deepEqual(JSON.parse(focused.stdout).summary.page_checks, ['selected']);
+});
+
+test('depcheck retains reachable supplier item/page cycles and B-page boundaries', t => {
+  const f = fixture(t);
+  f.write('items/thm-selected.md', f.item('thm-selected', '[thm-supplier]'));
+  f.write('items/thm-supplier.md', f.item('thm-supplier', '[thm-cycle-a]'));
+  f.write('items/thm-cycle-a.md', f.item('thm-cycle-a', '[thm-cycle-b]'));
+  f.write('items/thm-cycle-b.md', f.item('thm-cycle-b', '[thm-cycle-a]'));
+  f.write('library/test/cycle-a.md', '---\npage: cycle-a\nitems: [thm-cycle-a]\n---\n');
+  f.write('library/test/cycle-b.md', '---\npage: cycle-b\nitems: [thm-cycle-b]\n---\n');
+  let result = f.run('depcheck', ['--items-file', 'items.json', '--json']);
+  assert.equal(result.status, 1, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).errors.map(row => row.code).sort(), ['item-cycle', 'page-cycle']);
+  f.write('items/thm-cycle-b.md', f.item('thm-cycle-b'));
+  f.write('library/test/cycle-a.md', '---\npage: cycle-a-examples\nitems: [thm-cycle-a]\n---\n');
+  result = f.run('depcheck', ['--items-file', 'items.json', '--json']);
+  assert.equal(result.status, 1, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).errors.map(row => row.code), ['b-leaf-content']);
+  assert.match(JSON.parse(result.stdout).errors[0].msg, /thm-supplier/);
+});
+
+test('depsource run overlay accepts a current unspliced subject and current supplier homes', t => {
+  const f = fixture(t);
+  f.write('items/thm-added.md', f.item('thm-added'));
+  f.write('items.json', JSON.stringify(['thm-added']));
+  f.write('research/r-batch-1.pages.json', JSON.stringify([
+    { id: 'selected', kind: 'A', category: 'test', order: 1, items: [{ id: 'thm-added', deps: ['thm-supplier'] }] },
+    { id: 'supplier', kind: 'A', category: 'test', order: 2, items: [{ id: 'thm-supplier', deps: [] }] },
+  ]));
+  const legacy = f.run('depsource', ['--items-file', 'items.json', '--json']);
+  assert.equal(legacy.status, 1);
+  const overlay = f.run('depsource', ['--items-file', 'items.json', '--run', 'r', '--json']);
+  assert.equal(overlay.status, 0, overlay.stderr);
+  assert.deepEqual(JSON.parse(overlay.stdout).rows.map(row => [row.item, row.dep, row.where]), [['thm-added', 'thm-supplier', 'test/supplier']]);
+  const plan = JSON.parse(readFileSync(join(f.repo, 'research/plan-spec.json')));
+  plan.pages.push({ id: 'external-plan', order: 0, items: [{ id: 'thm-planned-outside', deps: [] }] });
+  f.write('research/plan-spec.json', JSON.stringify(plan));
+  f.write('research/r-batch-1.pages.json', JSON.stringify([
+    { id: 'selected', kind: 'A', category: 'test', order: 1, items: [{ id: 'thm-added', deps: ['thm-planned-outside'] }] },
+  ]));
+  const external = f.run('depsource', ['--items-file', 'items.json', '--run', 'r', '--json']);
+  assert.equal(external.status, 0, external.stderr);
+  assert.equal(JSON.parse(external.stdout).counts['planned-earlier'], 1);
+  f.write('research/r-batch-1.pages.json', JSON.stringify([
+    { id: 'selected', kind: 'A', category: 'test', order: 1, items: [{ id: 'thm-added', deps: ['thm-not-real'] }] },
+  ]));
+  const unresolved = f.run('depsource', ['--items-file', 'items.json', '--run', 'r', '--json']);
+  assert.equal(unresolved.status, 1, unresolved.stderr);
+  assert.equal(JSON.parse(unresolved.stdout).counts.unresolved, 1);
+  for (const rows of [[], [{ id: 'selected', kind: 'A', category: 'test', order: 1, items: [] }]]) {
+    f.write('research/r-batch-1.pages.json', JSON.stringify(rows));
+    assert.equal(f.run('depsource', ['--items-file', 'items.json', '--run', 'r']).status, 1);
+  }
+  assert.equal(f.run('depsource', ['--items-file', 'items.json', '--run', 'unknown']).status, 1);
 });

@@ -31,6 +31,7 @@ test('actual stage validators receive only current manifest subjects', t => {
     for (const tool of ['precheck', 'rendercheck', 'prosecheck', 'depcheck', 'fwdcheck', 'extcheck', 'depsource', 'pathcheck']) {
       const args = argv(gates.find((g: any) => g.id === tool));
       assert.ok(!args.includes('-e'), `${id}/${tool}: ${args}`);
+      if (tool === 'depsource') assert.equal(args[args.indexOf('--run') + 1], ctx.run);
       if (['precheck', 'rendercheck', 'prosecheck'].includes(tool)) {
         assert.ok(args.includes('items/thm-selected.md'));
         assert.ok(args.includes('items/ex-selected.md'));

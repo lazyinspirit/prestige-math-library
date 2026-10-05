@@ -187,8 +187,8 @@ const pages = [];  // {page, title, status, file, cat, items:[], examples:[]}
     if (!e.name.endsWith('.md') || e.name.startsWith('_')) continue;
     const rel = fp.slice(REPO.length + 1);
     const { fm } = split(readFileSync(fp, 'utf8'));
-    badEscapes(fm, rel);
     pages.push({
+      fm,
       page: scalar(fm, 'page') ?? basename(e.name, '.md'),
       title: scalar(fm, 'title'),
       status: scalar(fm, 'status'),
@@ -254,21 +254,39 @@ for (const it of items.values()) {
 
 const homeOf = new Map();  // itemId -> first page that lists it
 const homesOf = new Map(); // itemId -> every page that lists it
+for (const p of pages) for (const id of [...p.items, ...p.examples]) {
+  const r = resolve(id);
+  if (!r) continue;
+  if (!homesOf.has(r)) homesOf.set(r, new Set());
+  homesOf.get(r).add(p.page);
+  if (homeOf.has(r)) {
+    if (includesItem(itemScope, r)) warn('multi-home', `"${r}" appears on both ${homeOf.get(r)} and ${p.page}`);
+  } else homeOf.set(r, p.page);
+}
+const subjectPages = new Set(pages.filter(p => itemScope.selected === null
+  || [...p.items, ...p.examples].some(id => includesItem(itemScope, resolve(id)))).map(p => p.page));
 for (const p of pages) {
-  const all = [...p.items, ...p.examples];
+  if (!subjectPages.has(p.page)) continue;
+  badEscapes(p.fm, p.file);
   const seen = new Set();
-  for (const id of all) {
+  for (const id of [...p.items, ...p.examples]) {
     if (seen.has(id)) err('page-item-dup', `${p.file}: lists "${id}" twice`);
     seen.add(id);
     const r = resolve(id);
     if (!r) { err('page-item-missing', `${p.file}: lists "${id}", which is not an item`); continue; }
     if (p.status === 'published' && items.get(r).status !== 'published')
       err('draft-on-published-page', `${p.file} is published but lists non-published item "${r}"`);
-    if (!homesOf.has(r)) homesOf.set(r, new Set());
-    homesOf.get(r).add(p.page);
-    if (homeOf.has(r)) warn('multi-home', `"${r}" appears on both ${homeOf.get(r)} and ${p.page}`);
-    else homeOf.set(r, p.page);
   }
+}
+// Structural boundaries and item cycles apply to the selected prerequisite
+// closure. Supplier bodies are context, not unrelated audit/format subjects.
+const graphItems = new Set();
+const itemQueue = itemScope.selected === null ? [...items.keys()] : [...itemScope.selected];
+while (itemQueue.length) {
+  const id = resolve(itemQueue.pop());
+  if (!id || graphItems.has(id)) continue;
+  graphItems.add(id);
+  itemQueue.push(...items.get(id).deps, ...items.get(id).justified);
 }
 
 for (const it of items.values()) {
@@ -305,8 +323,7 @@ for (const p of pages) {
   for (const source of [...p.items, ...p.examples]) {
     const sourceId = resolve(source);
     if (!sourceId) continue;
-    // This is a repository metadata join, not a per-item proof scan. Keep it
-    // complete in focused mode along with page hygiene and the cycle checks.
+    if (!graphItems.has(sourceId)) continue;
     for (const dep of items.get(sourceId).deps) {
       const targetId = resolve(dep);
       const targetHomes = targetId && homesOf.get(targetId);
@@ -435,12 +452,12 @@ function reaches(from, to) {
 }
 
 for (const it of items.values())
-  for (const j of it.justified) {
+  if (graphItems.has(it.id)) for (const j of it.justified) {
     const r = resolve(j);
     if (r && !reaches(r, it.id))
       err('justification-backward', `${it.file}: justified_by "${j}", but "${j}" does not depend on "${it.id}" — it is a genuine prerequisite and belongs in deps`);
   }
-for (const comp of sccs([...items.keys()], itemSucc)) {
+for (const comp of sccs([...graphItems], itemSucc)) {
   const self = comp.length === 1 && itemSucc(comp[0]).includes(comp[0]);
   if (comp.length > 1 || self)
     err('item-cycle', `CIRCULAR: ${comp.slice().reverse().join(' -> ')} -> ${comp[comp.length - 1]}`);
@@ -466,7 +483,15 @@ function pageSucc(pid) {
   pageSuccCache.set(pid, arr);
   return arr;
 }
-for (const comp of sccs(pageIds, pageSucc))
+const graphPages = new Set();
+const pageQueue = itemScope.selected === null ? [...pageIds] : [...subjectPages];
+while (pageQueue.length) {
+  const id = pageQueue.pop();
+  if (graphPages.has(id)) continue;
+  graphPages.add(id);
+  pageQueue.push(...pageSucc(id));
+}
+for (const comp of sccs([...graphPages], pageSucc))
   if (comp.length > 1)
     err('page-cycle', `CIRCULAR PAGES: ${comp.slice().reverse().join(' -> ')} -> ${comp[comp.length - 1]}`);
 
@@ -480,7 +505,8 @@ const summary = {
   warnings: warns.length,
   ...(itemScope.selected === null ? { scope: 'full' } : {
     scope: 'focused-items', item_checks: [...itemScope.selected].sort(),
-    global_page_metadata_and_cycle_checks: 'complete',
+    page_checks: [...subjectPages].sort(),
+    dependency_closure_items: graphItems.size, dependency_closure_pages: graphPages.size,
   }),
 };
 
@@ -490,7 +516,7 @@ if (asJson) {
   if (!quiet) {
     console.log(itemScope.selected === null
       ? `depcheck: ${summary.items} items (${summary.published} published), ${summary.pages} pages`
-      : `depcheck: focused item checks for ${summary.item_checks.length} item(s); global page and cycle checks cover ${summary.items} items and ${summary.pages} pages`);
+      : `depcheck: focused item checks for ${summary.item_checks.length} item(s); dependency closure checks cover ${graphItems.size} items and ${graphPages.size} pages`);
     // topological depth per page, for eyeballing the reading order
     const depth = new Map();
     const deep = (p, seen = new Set()) => {
@@ -502,7 +528,7 @@ if (asJson) {
       return d;
     };
     console.log('\npage dependency depth (0 = no prerequisites):');
-    for (const p of [...pages].sort((a, b) => deep(a.page) - deep(b.page) || a.page.localeCompare(b.page)))
+    for (const p of pages.filter(p => graphPages.has(p.page)).sort((a, b) => deep(a.page) - deep(b.page) || a.page.localeCompare(b.page)))
       console.log(`  ${String(deep(p.page)).padStart(2)}  ${p.page.padEnd(46)} ${(p.items.length + p.examples.length).toString().padStart(3)} items  <- ${pageSucc(p.page).join(', ') || '(none)'}`);
   }
   if (warns.length) {
@@ -516,7 +542,7 @@ if (asJson) {
   } else {
     console.log(itemScope.selected === null
       ? '\nOK — no cycles, all references resolve, no draft items on published pages.'
-      : '\nOK — selected item checks passed; complete global page and cycle checks passed.');
+      : '\nOK — selected item checks passed; selected page metadata and dependency-closure cycle checks passed.');
   }
 }
 

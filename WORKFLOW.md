@@ -48,7 +48,15 @@ receive those files and the manifest page files. Depcheck, fwdcheck, extcheck an
 depsource receive a nonempty `--items-file` selection; pathcheck receives a
 nonempty `--pages-file` selection (companions map to their main page). These
 opt-in validators still load the complete corpus for supplier resolution and
-relevant graph checks. Pathway placement of draft pages remains advisory.
+relevant graph checks. Depcheck reports page hygiene only on pages containing
+selected subjects, checks structural B-page/discharge boundaries in their item
+prerequisite closure, and checks item/page cycles reachable from those roots;
+unrelated page defects, multi-home warnings and disconnected cycles are outside
+the battery. Its bare invocation continues to check the complete corpus.
+Depsource additionally receives `--run RUN`: validated current manifests overlay
+subject entries and current item homes before Step 4 splices the canonical plan.
+The full plan remains external supplier context. Missing/empty manifests,
+unknown run subjects and unresolved dependencies remain failures. Pathway placement of draft pages remains advisory.
 Unrelated items and pages are context rather than formatting, audit or repair
 subjects. Bare validator commands retain their historical whole-corpus behavior.
 Missing, malformed, empty or unknown selections fail closed. Selector JSON files
