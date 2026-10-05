@@ -164,6 +164,21 @@ Authors wait for the snapshot process to finish. Every existing gate still check
 the full frontier after writers drain; Step 4 waits for complete Step-3 closure.
 Restart the controller when selecting the run-local stage table.
 
+An explicitly owner-authorized Step-3 pair split preserves the immutable auditor
+baseline. After manifests settle and before dispatching either split author, call
+`registerOwnerPairSplit(root, run, { from_page, new_pages, authorization })` from
+`tools/step3-auditor-items.mjs`. Keep the original A/B identities in the retained
+pair; `new_pages` lists its A page and the new A page. Authorization supplies
+`owner: true`, `reason`, a research JSON `evidence` path and its raw-byte
+`evidence_sha256`. That evidence must contain version 1, the run, `owner: true`,
+`action: "step3-owner-pair-split"`, and the exact `from_page`, ordered `new_pages`
+and reason. The separate append-only `RUN-step3-owner-pair-splits.json` binds the
+immutable baseline, exact original item partition, and both pre-author scope
+hashes. It grants no scope review or item audit; original items remain original,
+and each split still needs its ordinary scope decision before additions can
+use auditor certification. Do not edit live engine state or move the baseline.
+
+
 ## Controls
 
 - Current agent defaults and Step-5/6 review profiles use GPT-6.1 Sol at high

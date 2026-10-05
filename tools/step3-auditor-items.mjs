@@ -6,7 +6,7 @@
 // already existed in the scaffold or on disk at the baseline.
 
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, realpathSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { itemHash, itemInputPaths, loadStep3, scopeHash } from './step3-decisions.mjs';
@@ -56,6 +56,123 @@ export function writeAuditorBaseline(root, run) {
   }
   writeFileSync(path, JSON.stringify({ ...current, at: new Date().toISOString() }, null, 2) + '\n');
   return { path, reused: false, items: current.items.length };
+}
+
+
+// Owner splits supplement the immutable inventory; they never reclassify an
+// original item as auditor-created or attest an independent mathematical audit.
+export const ownerPairSplitsPath = (root, run) => join(root, 'research', `${safe(run)}-step3-owner-pair-splits.json`);
+const bytesDigest = value => createHash('sha256').update(value).digest('hex');
+const sorted = values => [...values].sort();
+const equal = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+const SPLIT_POLICY = 'step3-owner-pair-splits-v1';
+
+function splitAuthorization(root, run, row) {
+  const auth = row.authorization;
+  if (auth?.owner !== true || !String(auth.reason ?? '').trim()
+    || typeof auth.evidence !== 'string' || !/^[a-f0-9]{64}$/.test(auth.evidence_sha256 ?? ''))
+    throw Error('Invalid owner pair split authorization');
+  const file = resolve(root, auth.evidence);
+  if (!existsSync(file) || !realpathSync(file).startsWith(realpathSync(join(root, 'research')) + sep))
+    throw Error('Owner pair split authorization evidence must be inside research');
+  const bytes = readFileSync(file);
+  if (bytesDigest(bytes) !== auth.evidence_sha256) throw Error('Stale owner pair split authorization evidence');
+  const evidence = JSON.parse(bytes.toString('utf8'));
+  if (evidence.version !== 1 || evidence.run !== run || evidence.owner !== true
+    || evidence.action !== 'step3-owner-pair-split' || evidence.from_page !== row.from_page
+    || !equal(evidence.new_pages, row.new_pages) || evidence.reason !== auth.reason)
+    throw Error('Owner pair split authorization evidence does not approve this exact split');
+}
+
+function validateSplit(root, run, baseline, s, row, { registering = false } = {}) {
+  if (!row || !Array.isArray(row.new_pages) || row.new_pages.length !== 2
+    || new Set(row.new_pages).size !== 2 || !row.new_pages.includes(row.from_page)
+    || !Array.isArray(row.original_pages) || row.original_pages.length !== 2
+    || row.original_pages[0] !== row.from_page || row.original_pages[1] === row.from_page
+    || !Array.isArray(row.items) || !Array.isArray(row.scopes)
+    || !Number.isFinite(Date.parse(row.at))) throw Error('Invalid owner pair split record');
+  [row.from_page, ...row.new_pages, ...row.original_pages].forEach(safe);
+  splitAuthorization(root, run, row);
+  const source = baseline.scopes.find(value => value.page === row.from_page);
+  if (!source || row.original_scope_sha256 !== source.sha256
+    || row.new_pages.some(page => page !== row.from_page && baseline.scopes.some(value => value.page === page)))
+    throw Error('Owner pair split cannot overwrite an existing baseline pair');
+  const original = baseline.items.filter(value => row.original_pages.includes(value.page));
+  if (!original.length || new Set(row.items.map(value => value.id)).size !== row.items.length
+    || !equal(sorted(original.map(value => value.id)), sorted(row.items.map(value => value.id))))
+    throw Error('Owner pair split must conserve every original item exactly once');
+  const pairs = row.new_pages.map(page => s.pairs.get(page));
+  if (pairs.some(pair => !pair) || pairs[0][1].id !== row.original_pages[1])
+    throw Error('Owner pair split must retain the original A/B pair identities');
+  const pages = new Set(pairs.flat().map(page => page.id));
+  for (const value of row.items) {
+    const live = s.items.get(value.id), prior = original.find(item => item.id === value.id);
+    if (!prior || value.original_page !== prior.page || value.original_batch !== prior.batch
+      || !live || !pages.has(value.page) || live.page.id !== value.page || String(live.page.batch) !== value.batch)
+      throw Error('Owner pair split item mapping changed');
+  }
+  // Existing original items outside the split must retain their assignments.
+  for (const prior of baseline.items.filter(value => !row.original_pages.includes(value.page))) {
+    const live = s.items.get(prior.id);
+    if (!live || live.page.id !== prior.page || String(live.page.batch) !== prior.batch)
+      throw Error('Owner pair split changed an unrelated original item');
+  }
+  if (registering && [...s.items].some(([id, value]) => pages.has(value.page.id)
+    && !original.some(prior => prior.id === id)))
+    throw Error('Owner pair split cannot register added item IDs');
+  if (row.scopes.length !== 2 || !equal(sorted(row.scopes.map(value => value.page)), sorted(row.new_pages))
+    || row.scopes.some(value => !/^[a-f0-9]{64}$/.test(value.sha256 ?? '')
+      || (registering && value.sha256 !== scopeHash(s, value.page))))
+    throw Error('Invalid owner pair split pre-author scope hashes');
+}
+
+export function ownerPairSplitScopes(root, run, baseline = json(auditorBaselinePath(root, run)), s = loadStep3(root, run)) {
+  const path = ownerPairSplitsPath(root, run);
+  if (!existsSync(path)) return [];
+  const supplement = json(path);
+  if (supplement.version !== 1 || supplement.run !== run || supplement.policy !== SPLIT_POLICY
+    || supplement.baseline_sha256 !== digest(baseline)
+    || supplement.baseline_file_sha256 !== bytesDigest(readFileSync(auditorBaselinePath(root, run)))
+    || !Array.isArray(supplement.splits)) throw Error('Invalid owner pair split immutable baseline binding');
+  const seen = new Set();
+  for (const row of supplement.splits) {
+    validateSplit(root, run, baseline, s, row);
+    for (const page of row.new_pages) {
+      if (seen.has(page)) throw Error('Duplicate owner pair split');
+      seen.add(page);
+    }
+  }
+  return supplement.splits.flatMap(row => row.scopes);
+}
+
+export function registerOwnerPairSplit(root, run, { from_page, new_pages, authorization }) {
+  safe(run); safe(from_page);
+  if (!Array.isArray(new_pages)) throw Error('Invalid owner pair split pages');
+  const baselinePath = auditorBaselinePath(root, run), baseline = json(baselinePath);
+  if (baseline.version !== 1 || baseline.run !== run || baseline.policy !== BASELINE_POLICY
+    || !Array.isArray(baseline.items) || !Array.isArray(baseline.scopes))
+    throw Error('Invalid Step 3 auditor baseline');
+  const s = loadStep3(root, run), retained = s.pairs.get(from_page);
+  if (!retained) throw Error('Missing retained owner split pair');
+  const original_pages = [from_page, retained[1].id];
+  const row = { from_page, new_pages: [...new_pages], original_pages, authorization,
+    at: new Date().toISOString(),
+    original_scope_sha256: baseline.scopes.find(value => value.page === from_page)?.sha256,
+    items: baseline.items.filter(value => original_pages.includes(value.page)).map(prior => {
+      const live = s.items.get(prior.id);
+      return { id: prior.id, original_page: prior.page, original_batch: prior.batch,
+        page: live?.page.id, batch: String(live?.page.batch) };
+    }).sort((a, b) => a.id.localeCompare(b.id)),
+    scopes: new_pages.map(page => ({ page, sha256: scopeHash(s, page) })).sort((a, b) => a.page.localeCompare(b.page)) };
+  validateSplit(root, run, baseline, s, row, { registering: true });
+  ownerPairSplitScopes(root, run, baseline, s);
+  const path = ownerPairSplitsPath(root, run);
+  const prior = existsSync(path) ? json(path) : { version: 1, run, policy: SPLIT_POLICY,
+    baseline_sha256: digest(baseline), baseline_file_sha256: bytesDigest(readFileSync(baselinePath)), splits: [] };
+  if (prior.splits.some(value => value.new_pages.some(page => new_pages.includes(page))))
+    throw Error('Refusing to replace an existing owner pair split');
+  writeFileSync(path, JSON.stringify({ ...prior, splits: [...prior.splits, row] }, null, 2) + '\n');
+  return { path, split: row };
 }
 
 function successfulAuthorResults(root, run) {
@@ -261,10 +378,11 @@ function certify(root, run, partial) {
       ...(reviewRecertification ? { review_recertification: reviewRecertification } : {}) });
   }
 
+  const splitScopes = ownerPairSplitScopes(root, run, baseline, s);
   const scopes = [];
   for (const [page, pair] of s.pairs) {
     const ids = certified.filter(row => pair.some(p => p.id === row.page)).map(row => row.id).sort();
-    const before = baseline.scopes.find(row => row.page === page);
+    const before = splitScopes.find(row => row.page === page) ?? baseline.scopes.find(row => row.page === page);
     const added = additions.filter(([, value]) => pair.some(p => p.id === value.page.id));
     // Never let one completed addition approve an unfinished pair's scope delta.
     if (ids.length && ids.length === added.length) {

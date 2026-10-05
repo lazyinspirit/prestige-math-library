@@ -5,6 +5,7 @@ import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { yaml } from './pathway-lib.mjs';
 import { loadStep3AuditorProvenance } from './auditor-created-items.mjs';
+import { ownerPairSplitScopes } from './step3-auditor-items.mjs';
 
 const safe = s => {
   if (!/^[a-zA-Z0-9_-]+$/.test(s ?? '')) throw Error('Invalid run or target ID');
@@ -35,13 +36,14 @@ function auditorCertifications(s) {
   if (row) {
     loadStep3AuditorProvenance(s.root, s.run);
     const baseline = read(join(s.root, 'research', `${s.run}-step3-auditor-baseline.json`));
+    const splitScopes = baseline ? ownerPairSplitScopes(s.root, s.run, baseline, s) : [];
     if (baseline?.version !== 1 || baseline.run !== s.run
       || baseline.policy !== 'auditor-authored-step3-bypass-v1'
       || !Array.isArray(baseline.items) || !Array.isArray(baseline.existing_item_files)
       || !Array.isArray(baseline.scopes) || row.baseline_sha256 !== hash(baseline)
       || row.items.some(item => baseline.items.some(original => original.id === item.id)
         || baseline.existing_item_files.includes(item.id))
-      || row.scopes.some(scope => !baseline.scopes.some(original => original.page === scope.page
+      || row.scopes.some(scope => !([...baseline.scopes, ...splitScopes]).some(original => original.page === scope.page
         && original.sha256 === scope.baseline_sha256)))
       throw Error('Invalid Step 3 auditor certification baseline/origin');
   }

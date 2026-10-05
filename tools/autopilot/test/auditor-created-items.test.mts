@@ -14,8 +14,8 @@ import {
   recordOwnerRecertification,
   recordOwnerCreation,
 } from '../../auditor-created-items.mjs';
-import { writeAuditorBaseline, certifyAuditorItems } from '../../step3-auditor-items.mjs';
-import { recordStep3 } from '../../step3-decisions.mjs';
+import { writeAuditorBaseline, certifyAuditorItems, registerOwnerPairSplit, ownerPairSplitScopes } from '../../step3-auditor-items.mjs';
+import { recordStep3, loadStep3, scopeHash, scopeDecision } from '../../step3-decisions.mjs';
 import { itemHashGuard, itemHashJudge } from '../../item-hash.mjs';
 
 const REPO = process.env.AUTOPILOT_TEST_REPO
@@ -949,7 +949,7 @@ test('judge closure requires full current carriers without fabricating a verdict
   copyFileSync(join(REPO, 'tools/level-coverage.mjs'), join(root, 'tools/level-coverage.mjs'));
   for (const module of ['models', 'judge-currency', 'step7-adjudication-compat', 'step7-terminal-resolution',
     'step7-certification-consumer', 'step7-workflow', 'step7-rounds', 'context-hash-pool',
-    'auditor-created-items', 'item-hash', 'frontmatter-list', 'published-repair-policy'])
+    'auditor-created-items', 'item-hash', 'frontmatter-list', 'published-repair-policy', 'content-policy-lib'])
     symlinkSync(join(REPO, `tools/${module}.mjs`), join(root, `tools/${module}.mjs`));
   const manifest = join(root, 'scope.pages.json');
   const ledger = join(root, 'judge.jsonl');
@@ -1449,4 +1449,108 @@ test('ball-lemma review rejects unsupported kinds, missing proof checks, unrevie
   other.payload.repair_kind = 'current-ball-lemma-manifest-review'; other.write();
   assert.throws(() => recordOwnerRecertification(other.root, 'r', 5, other.id, other.evidence,
     'Ball-lemma authorization cannot cover another subject'), /eligible Step 5 owner bootstrap/);
+});
+
+
+function splitFixture(t: any) {
+  const root = fixture();
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const path = join(root, 'research/r-batch-1.pages.json');
+  const pages = [
+    { id: 'page-a', kind: 'A', companion: 'page-b', items: [{ id: 'lem-base', deps: [] }, { id: 'lem-moved', deps: [] }] },
+    { id: 'page-b', kind: 'B', companion: 'page-a', items: [] },
+  ];
+  writeFileSync(path, JSON.stringify(pages));
+  writeAuditorBaseline(root, 'r');
+  const baselinePath = join(root, 'research/r-step3-auditor-baseline.json');
+  const baselineBytes = readFileSync(baselinePath, 'utf8');
+  const moved = pages[0].items.pop();
+  const current = [...pages, { id: 'page-c', kind: 'A', companion: 'page-d', items: [moved] },
+    { id: 'page-d', kind: 'B', companion: 'page-c', items: [] }];
+  const write = () => writeFileSync(path, JSON.stringify(current));
+  write();
+  const reason = 'Owner authorized conserving all items across the two pairs';
+  const evidence = 'research/split-authorization.json';
+  const bytes = JSON.stringify({ version: 1, run: 'r', owner: true, action: 'step3-owner-pair-split',
+    from_page: 'page-a', new_pages: ['page-a', 'page-c'], reason });
+  writeFileSync(join(root, evidence), bytes);
+  const input = { from_page: 'page-a', new_pages: ['page-a', 'page-c'],
+    authorization: { owner: true, reason, evidence, evidence_sha256: sha(bytes) } };
+  return { root, current, write, baselinePath, baselineBytes, input };
+}
+
+test('owner pair split supplements both scopes without moving the immutable inventory', t => {
+  const f = splitFixture(t);
+  const registered = registerOwnerPairSplit(f.root, 'r', f.input);
+  assert.deepEqual(registered.split.items.map((row: any) => row.id), ['lem-base', 'lem-moved']);
+  assert.equal(registered.split.items.find((row: any) => row.id === 'lem-moved').page, 'page-c');
+  assert.equal(readFileSync(f.baselinePath, 'utf8'), f.baselineBytes);
+  assert.deepEqual(ownerPairSplitScopes(f.root, 'r').map((row: any) => row.page), ['page-a', 'page-c']);
+  assert.throws(() => registerOwnerPairSplit(f.root, 'r', f.input), /replace an existing/);
+});
+
+test('owner pair split refuses losses, additions, fabricated authorization and baseline tampering', t => {
+  for (const mutate of [
+    (f: any) => { f.current[2].items = []; f.write(); },
+    (f: any) => { f.current[2].items.push({ id: 'lem-added', deps: [] }); f.write(); },
+    (f: any) => { f.current[0].items.push(f.current[2].items[0]); f.write(); },
+    (f: any) => { f.input.authorization.owner = false; },
+    (f: any) => { f.input.authorization.evidence_sha256 = '0'.repeat(64); },
+    (f: any) => { f.input.authorization.reason = 'Invented authorization'; },
+  ]) {
+    const f = splitFixture(t); mutate(f);
+    assert.throws(() => registerOwnerPairSplit(f.root, 'r', f.input));
+    assert.equal(readFileSync(f.baselinePath, 'utf8'), f.baselineBytes);
+  }
+  const f = splitFixture(t);
+  registerOwnerPairSplit(f.root, 'r', f.input);
+  writeFileSync(f.baselinePath, f.baselineBytes + '\n');
+  assert.throws(() => ownerPairSplitScopes(f.root, 'r'), /immutable baseline binding/);
+});
+
+test('new split pair certifies auditor additions while original items retain their evidence class', t => {
+  const f = splitFixture(t);
+  registerOwnerPairSplit(f.root, 'r', f.input);
+  const before = scopeHash(loadStep3(f.root, 'r'), 'page-c');
+  recordStep3(f.root, { run: 'r', phase: 'scope', page: 'page-c', owner: true,
+    decision: 'proceed', reason: 'Owner approved the split scope' });
+  f.current[2].items.push({ id: 'lem-added', deps: [] } as any);
+  f.current[0].items.push({ id: 'lem-added-retained', deps: [] }); f.write();
+  writeFileSync(join(f.root, 'items/lem-added.md'), item('lem-added'));
+  writeFileSync(join(f.root, 'items/lem-added-retained.md'), item('lem-added-retained'));
+  writeFileSync(join(f.root, 'research/r-dispatch/alpha-high-retained.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha-high', label: 'step3b-pair-page-a-0123456789abcdef', covers: ['page-a'], ok: true,
+    started_at: '2000-01-01T00:00:00Z', ended_at: '2100-01-01T00:00:00Z',
+  }));
+  writeFileSync(join(f.root, 'research/r-dispatch/alpha-high-split.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha-high', label: 'step3b-pair-page-c-0123456789abcdef', covers: ['page-c'], ok: true,
+    started_at: '2000-01-01T00:00:00Z', ended_at: '2100-01-01T00:00:00Z',
+  }));
+  const receipt = certifyAuditorItems(f.root, 'r');
+  assert.deepEqual(receipt.items.map((row: any) => row.id), ['lem-added', 'lem-added-retained']);
+  assert.equal(receipt.scopes.find((row: any) => row.page === 'page-c').baseline_sha256, before);
+  assert.equal(scopeDecision(loadStep3(f.root, 'r'), 'page-c').closed, true);
+  assert.equal(readFileSync(f.baselinePath, 'utf8'), f.baselineBytes);
+  f.current[2].items = f.current[2].items.filter((row: any) => row.id !== 'lem-moved'); f.write();
+  assert.throws(() => certifyAuditorItems(f.root, 'r'), /item mapping changed/);
+});
+
+
+test('registration permits unrelated author additions but rejects stealing another baseline pair item', t => {
+  for (const steal of [false, true]) {
+    const f = splitFixture(t);
+    const baseline: any = JSON.parse(f.baselineBytes);
+    baseline.items.push({ id: 'lem-unrelated', page: 'page-e', batch: '1' });
+    baseline.scopes.push({ page: 'page-e', sha256: '1'.repeat(64) });
+    writeFileSync(f.baselinePath, JSON.stringify(baseline));
+    f.current.push({ id: 'page-e', kind: 'A', companion: 'page-f', items: [
+      { id: 'lem-unrelated', deps: [] }, { id: 'lem-unrelated-added', deps: [] }] } as any,
+      { id: 'page-f', kind: 'B', companion: 'page-e', items: [] } as any);
+    if (steal) {
+      f.current[4].items.shift(); f.current[2].items.push({ id: 'lem-unrelated', deps: [] } as any);
+    }
+    f.write();
+    if (steal) assert.throws(() => registerOwnerPairSplit(f.root, 'r', f.input), /unrelated original item/);
+    else assert.equal(registerOwnerPairSplit(f.root, 'r', f.input).split.items.length, 2);
+  }
 });
