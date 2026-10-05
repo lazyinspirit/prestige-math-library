@@ -865,3 +865,79 @@ test('precheck diagnostic headers own retry subjects without PASS rows or proof 
     ['prop-foreign-labels', 'lem-foreign-gap', 'thm-rejected']);
   assert.deepEqual(Executor.itemsNamedBy({ id: 'other-gate', output } as any), []);
 });
+
+function producerRoutingFixture(marker?: string, duplicateOwner = false) {
+  const fx = fixture();
+  const producer = 'lem-run-producer', published = 'thm-transitive-published';
+  writeFileSync(join(fx.root, 'items', `${producer}.md`),
+    `---\nid: ${producer}\nstatus: draft\n${marker === undefined ? '' : `pipeline_run: ${marker}\n`}deps: [${published}]\n---\n## Statement\nProducer.\n\n## Proof\n1.1 Done.\n`);
+  writeFileSync(join(fx.root, 'items', `${published}.md`),
+    `---\nid: ${published}\nstatus: published\ndeps: []\n---\n## Statement\nSupplier.\n`);
+  const consumer = join(fx.root, 'items', 'lem-ordinary-item.md');
+  writeFileSync(consumer, readFileSync(consumer, 'utf8').replace('deps: []', `deps: [${producer}]`));
+  writeFileSync(join(fx.root, 'research', 'r-batch-2.pages.json'), JSON.stringify([
+    { id: 'p2', category: 'test', items: [producer] },
+  ]));
+  writeFileSync(join(fx.root, 'library/test/p2.md'), '---\npage: p2\n---\nProducer page.\n');
+  writeFileSync(join(fx.root, 'research', 'r-batch-2.proof-contracts.json'), JSON.stringify({ contracts: { [producer]: {} } }));
+  if (duplicateOwner) writeFileSync(join(fx.root, 'research', 'r-batch-3.pages.json'), JSON.stringify([
+    { id: 'p3', category: 'test', items: [producer] },
+  ]));
+  fx.run('hash', '--run', 'r', '--batch', '2', '--label', 'pre');
+  fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'pre');
+  fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'post');
+  const report = (target: string, type: string, consumerId = 'lem-ordinary-item') => {
+    writeFileSync(join(fx.root, 'research', 'r-reader-findings-1.json'), JSON.stringify({
+      batch: '1', coverage_note: 'Opened exact declared supplier path.', findings: [{
+        id: target, subject_type: type, consumer_id: consumerId,
+        location: 'Statement', defect: 'false-claim', evidence: 'Concrete counterexample in supplier.', severity: 'fatal',
+      }],
+    }));
+    return fx.attempt('split', '--run', 'r', '--batch', '1');
+  };
+  return { ...fx, producer, published, report };
+}
+
+for (const marker of [undefined, 'r']) test(`foreign producer routing accepts genuine manifest ownership with marker ${marker ?? 'absent'}`, () => {
+  const fx = producerRoutingFixture(marker);
+  try {
+    const result = fx.report(fx.producer, 'in-run-dependency');
+    assert.equal(result.status, 0, result.stderr);
+    const scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+    assert.equal(scope.reader_findings[0].producer_batch, '2');
+    assert.deepEqual(scope.reader_findings[0].dependency_path.map((row: any) => row.id), ['lem-ordinary-item', fx.producer]);
+    assert.equal(scope.reader_findings[0].observation_basis, 'unbound');
+    assert.equal(scope.reader_findings[0].observed_source, undefined);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('published closure traverses a genuine current-run draft producer without changing finding provenance', () => {
+  const fx = producerRoutingFixture();
+  try {
+    const result = fx.report(fx.published, 'published-dependency');
+    assert.equal(result.status, 0, result.stderr);
+    const scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+    assert.equal(scope.reader_findings[0].subject_type, 'published-dependency');
+    assert.equal(scope.reader_findings[0].consumer_id, 'lem-ordinary-item');
+    assert.equal(scope.reader_findings[0].producer_batch, undefined);
+    const badConsumer = fx.report(fx.published, 'published-dependency', 'cex-flagged-item');
+    assert.notEqual(badConsumer.status, 0);
+    assert.match(badConsumer.stderr, /assigned consumer/);
+    writeFileSync(join(fx.root, 'items', `${fx.published}.md`),
+      readFileSync(join(fx.root, 'items', `${fx.published}.md`), 'utf8').replace('status: published', 'status: draft'));
+    const outsideDraft = fx.report(fx.published, 'published-dependency');
+    assert.notEqual(outsideDraft.status, 0);
+    assert.match(outsideDraft.stderr, /out-of-scope/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+for (const variant of ['other-run', 'ambiguous']) test(`producer and transitive published routing reject ${variant} ownership`, () => {
+  const fx = producerRoutingFixture(variant === 'other-run' ? 'other-run' : undefined, variant === 'ambiguous');
+  try {
+    for (const [id, type] of [[fx.producer, 'in-run-dependency'], [fx.published, 'published-dependency']]) {
+      const result = fx.report(id, type);
+      assert.notEqual(result.status, 0);
+      assert.match(result.stderr, /out-of-scope/);
+    }
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});

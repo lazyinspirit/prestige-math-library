@@ -332,12 +332,30 @@ function normalizeRefuterFindings(findings, batch, openedSet, reportError) {
   return normalizeFindings(findings, batch, openedSet, reportError, 'refuter');
 }
 
+function manifestProducers(manifests = manifestItems()) {
+  const producers = new Map();
+  for (const [producer, ids] of Object.entries(manifests)) for (const id of ids) {
+    if (!producers.has(id)) producers.set(id, []);
+    producers.get(id).push(producer);
+  }
+  return producers;
+}
+
+// Current manifests establish ownership. Older locally authored draft carriers
+// need not contain pipeline_run, but a contradictory explicit marker must fail
+// closed rather than importing another run's draft into this run's closure.
+function currentRunDraft(item, owners) {
+  return owners.length === 1 && item?.status === 'draft'
+    && (item.pipeline_run === undefined || item.pipeline_run === run);
+}
+
 /** Exact published dependency closure reachable from each assigned consumer. */
 function publishedDependencies(batchIds, allRunIds) {
   const Y = yaml();
   const owners = new Map();
   const claimed = claimedPublishedIds();
   const itemMetadata = new Map();
+  const producers = manifestProducers();
   const metadataFor = (id) => {
     if (itemMetadata.has(id)) return itemMetadata.get(id);
     const path = R('items', `${id}.md`);
@@ -362,9 +380,15 @@ function publishedDependencies(batchIds, allRunIds) {
         ...(Array.isArray(item.justified_by) ? item.justified_by : [])]
         .filter((target) => typeof target === 'string');
       for (const target of dependencies) {
-        if (allRunIds.has(target)) continue;
         const targetItem = metadataFor(target);
         if (!targetItem) continue;
+        if (allRunIds.has(target)) {
+          // Run suppliers remain prerequisite context, never published finding
+          // subjects. Their genuine external published prerequisites are still
+          // reachable from the assigned consumer.
+          if (currentRunDraft(targetItem, producers.get(target) ?? [])) queue.push(target);
+          continue;
+        }
         if (targetItem.status !== 'published' && !claimed.has(target)) continue;
         if (!owners.has(target)) owners.set(target, new Set());
         owners.get(target).add(consumer);
@@ -378,12 +402,8 @@ function publishedDependencies(batchIds, allRunIds) {
 /** Other current-run producers reachable through declared item prerequisites.
  * Keep a concrete path; a run-wide inventory is not evidence of a dependency. */
 function inRunDependencies(batch, consumers, manifests = manifestItems()) {
-  const Y = yaml(), metadata = new Map(), producers = new Map(), result = new Map();
+  const Y = yaml(), metadata = new Map(), producers = manifestProducers(manifests), result = new Map();
   const claimed = claimedPublishedIds();
-  for (const [producer, ids] of Object.entries(manifests)) for (const id of ids) {
-    if (!producers.has(id)) producers.set(id, []);
-    producers.get(id).push(producer);
-  }
   const itemFor = id => {
     if (!metadata.has(id)) {
       const path = R('items', `${id}.md`);
@@ -410,9 +430,9 @@ function inRunDependencies(batch, consumers, manifests = manifestItems()) {
         if (typeof dep !== 'string' || path.includes(dep)) continue;
         const source = itemFor(dep), owners = producers.get(dep) ?? [];
         if (!source || (!owners.length && source.status !== 'published' && !claimed.has(dep))) continue;
+        if (owners.length && !currentRunDraft(source, owners)) continue;
         const next = [...path, dep];
-        if (owners.length === 1 && owners[0] !== batch
-          && source.status === 'draft' && source.pipeline_run === run) {
+        if (owners.length === 1 && owners[0] !== batch) {
           if (!result.has(dep)) result.set(dep, { producer_batch: owners[0], consumers: new Map() });
           result.get(dep).consumers.set(consumer, next);
         }

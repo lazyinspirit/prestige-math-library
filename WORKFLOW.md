@@ -344,6 +344,13 @@ identity, and current source, producer contract and manifest fingerprints.
 Another run's draft or an arbitrary run item cannot enter through this route.
 Producer membership does not certify its mathematics.
 
+Unique current-manifest ownership and draft status establish a producer's run
+identity even when an older carrier omits `pipeline_run`; an explicit marker
+naming another run is rejected. Ambiguous ownership is rejected as well.
+Published prerequisite discovery traverses these current-run draft suppliers
+as context, retaining their reachable published suppliers. This does not turn
+the draft producer into a published subject or admit an unclaimed outside draft.
+
 The original `reader:BATCH:K` obligation stays with the consumer batch's Alpha;
 the producer remains outside its edit scope. Its source is added to the normal
 refuter scope for a read of current bytes. Collection retains the original
