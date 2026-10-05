@@ -360,6 +360,8 @@ dependency level as read-only work. An unresolved current supplier defect must
 be escalated to its owner; normal producer and consumer proof acceptance still
 applies.
 
+Definition producers marked `proof: not-applicable` retain exact source and manifest fingerprints even when their numbered-proof contract is absent; its hash explicitly records `null`. This is routing evidence, not a proof waiver, and ordinary definition adjudication remains required. Other proof-bearing producers require a contract.
+
 Routing stores the immutable producer pre-reader snapshot separately from the
 current producer carrier. A reader may supply optional
 `observed_source: {snapshot: "pre" | "current", item_sha256: "<raw SHA-256>"}`

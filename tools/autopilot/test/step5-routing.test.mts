@@ -866,11 +866,11 @@ test('precheck diagnostic headers own retry subjects without PASS rows or proof 
   assert.deepEqual(Executor.itemsNamedBy({ id: 'other-gate', output } as any), []);
 });
 
-function producerRoutingFixture(marker?: string, duplicateOwner = false) {
+function producerRoutingFixture(marker?: string, duplicateOwner = false, contractlessKind?: string, proofMarker?: string) {
   const fx = fixture();
-  const producer = 'lem-run-producer', published = 'thm-transitive-published';
+  const producer = contractlessKind === 'definition' ? 'def-run-producer' : 'lem-run-producer', published = 'thm-transitive-published';
   writeFileSync(join(fx.root, 'items', `${producer}.md`),
-    `---\nid: ${producer}\nstatus: draft\n${marker === undefined ? '' : `pipeline_run: ${marker}\n`}deps: [${published}]\n---\n## Statement\nProducer.\n\n## Proof\n1.1 Done.\n`);
+    `---\nid: ${producer}\n${contractlessKind ? `kind: ${contractlessKind}\nprovenance:\n  proof: ${proofMarker ?? (contractlessKind === 'definition' ? 'not-applicable' : 'ai-altered')}\n` : ''}status: draft\n${marker === undefined ? '' : `pipeline_run: ${marker}\n`}deps: [${published}]\n---\n## Statement\nProducer.\n\n## Proof\n1.1 Done.\n`);
   writeFileSync(join(fx.root, 'items', `${published}.md`),
     `---\nid: ${published}\nstatus: published\ndeps: []\n---\n## Statement\nSupplier.\n`);
   const consumer = join(fx.root, 'items', 'lem-ordinary-item.md');
@@ -879,7 +879,7 @@ function producerRoutingFixture(marker?: string, duplicateOwner = false) {
     { id: 'p2', category: 'test', items: [producer] },
   ]));
   writeFileSync(join(fx.root, 'library/test/p2.md'), '---\npage: p2\n---\nProducer page.\n');
-  writeFileSync(join(fx.root, 'research', 'r-batch-2.proof-contracts.json'), JSON.stringify({ contracts: { [producer]: {} } }));
+  writeFileSync(join(fx.root, 'research', 'r-batch-2.proof-contracts.json'), JSON.stringify({ contracts: contractlessKind ? {} : { [producer]: {} } }));
   if (duplicateOwner) writeFileSync(join(fx.root, 'research', 'r-batch-3.pages.json'), JSON.stringify([
     { id: 'p3', category: 'test', items: [producer] },
   ]));
@@ -939,5 +939,30 @@ for (const variant of ['other-run', 'ambiguous']) test(`producer and transitive 
       assert.notEqual(result.status, 0);
       assert.match(result.stderr, /out-of-scope/);
     }
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+for (const [kind, proof, accepted] of [
+  ['definition', 'not-applicable', true],
+  ['definition', 'ai-altered', false],
+  ['lemma', 'ai-altered', false],
+] as const) test(`null-contract producer binding: ${kind}/${proof} ${accepted ? 'retains honest definition evidence' : 'fails closed'}`, () => {
+  const fx = producerRoutingFixture(undefined, false, kind, proof);
+  try {
+    const result = fx.report(fx.producer, 'in-run-dependency');
+    if (!accepted) {
+      assert.notEqual(result.status, 0);
+      assert.match(result.stderr, /lacks exact current\/pre-reader producer fingerprints/);
+      return;
+    }
+    assert.equal(result.status, 0, result.stderr);
+    const scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+    const finding = scope.reader_findings[0];
+    assert.match(finding.producer_carrier_at_split.item_sha256, /^[a-f0-9]{64}$/);
+    assert.match(finding.producer_carrier_at_split.manifest_sha256, /^[a-f0-9]{64}$/);
+    assert.equal(finding.producer_pre_snapshot.carrier.contract_sha256,
+      finding.producer_carrier_at_split.contract_sha256, 'both snapshots honestly record the missing definition proof contract');
+    assert.equal(finding.observation_basis, 'unbound');
+    assert.equal(finding.observed_sha256, null);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });

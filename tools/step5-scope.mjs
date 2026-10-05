@@ -450,12 +450,24 @@ function findingDependencies(batch, consumers, findings, manifests = manifestIte
   return inRunDependencies(batch, consumers, manifests);
 }
 
+// Definition carriers are exact source/manifest evidence even when there is no
+// numbered-proof contract. The null contract hash records that absence; it is
+// not a proof certificate and does not waive normal definition adjudication.
+function definitionWithoutProofContract(id) {
+  const path = R('items', `${id}.md`);
+  if (!existsSync(path)) return false;
+  try {
+    const item = yaml().parse(split(readFileSync(path, 'utf8')).fm) ?? {};
+    return item.kind === 'definition' && item.provenance?.proof === 'not-applicable';
+  } catch { return false; }
+}
+
 function producerCarrier(id, producer) {
   const owners = Object.entries(manifestItems()).filter(([, ids]) => ids.includes(id)).map(([batch]) => batch);
   if (owners.length !== 1 || owners[0] !== String(producer)) return undefined;
   const contractPath = R('research', `${run}-batch-${producer}.proof-contracts.json`);
-  if (!existsSync(contractPath) || !readJson(contractPath, `producer ${producer} proof contract`).contracts?.[id]
-    || !manifestMetadata(String(producer)).itemRows.has(id)) return undefined;
+  if (!existsSync(contractPath) || (!readJson(contractPath, `producer ${producer} proof contract`).contracts?.[id]
+    && !definitionWithoutProofContract(id)) || !manifestMetadata(String(producer)).itemRows.has(id)) return undefined;
   const carrier = liveFingerprints(String(producer)).items[id];
   return carrier?.item_sha256 ? { producer_batch: String(producer), ...carrier } : undefined;
 }
@@ -468,7 +480,7 @@ function bindInRunFinding(finding, batch, dependencies, reportError) {
   const pre = readJson(prePath, `producer ${route.producer_batch} pre-reader snapshot`);
   for (const message of hashSnapshotErrors(pre, route.producer_batch, 'pre')) reportError(`${finding.obligation} producer baseline: ${message}`);
   const historical = pre.hashes?.[finding.id];
-  if (!current || !historical || historical.contract_sha256 === hashValue(null) || !['item_sha256', 'contract_sha256', 'manifest_sha256']
+  if (!current || !historical || (historical.contract_sha256 === hashValue(null) && !definitionWithoutProofContract(finding.id)) || !['item_sha256', 'contract_sha256', 'manifest_sha256']
     .every(key => /^[a-f0-9]{64}$/.test(historical[key] ?? ''))) {
     reportError(`${finding.obligation} lacks exact current/pre-reader producer fingerprints`); return;
   }
