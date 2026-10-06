@@ -427,6 +427,18 @@ matches. The public refresh revalidates the carried native manifest basis.
 The current quote retains owner provenance; this refresh does not assert that
 the native reviewer read the later owner repair or author a new proof review.
 
+For `frontier-39-analysis-30`'s carried lacunary BMO example, the closed
+Step-5 owner manifest receipt remains historical origin evidence after the native
+Step-7 owner impact lane updates its sole L1 BMO Definition quotation. Historical
+loading requires the sealed Step-5 closure and post-5a carriers, identical Step-7
+starting boundary, unchanged current item and manifest, current Step-8 boundary,
+and a genuine hash-bound native metadata repair and current central Step-7
+item/context certification. Inverse replay of the single quotation printed in
+the authenticated native Step-5 log must recover the exact historical full and
+mathematical contracts; all original native review and decision checks still run
+against that recovered contract. The receipt and evidence remain immutable.
+This path does not refresh live mathematical evidence or create a new origin.
+
 The dilation's public `owner-recertify --refresh-evidence` option refreshes
 only an authorized `accepted_repair` to `amended_repair` decision binding on
 identical carriers, preserving every other stable review field. It writes a
