@@ -21,6 +21,19 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item read and recorded Step 7 mathematical repair review, including the used supplier interfaces; current mathematical content matches the bound evidence. The repair review is local and does not claim an independent audit of the repair."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-3.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-3.result.json
+      - research/frontier-38-owner-30-step5-hash-3-post-5a.json
+      - research/frontier-38-owner-30-alpha-batch-3-5a-decisions.json
+      - research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u3.json
+      - research/frontier-38-owner-30-dispatch/alpha-adjudicate-step7-v2-initial-r1-u3.result.json
   precheck: pass
 sources:
   references:

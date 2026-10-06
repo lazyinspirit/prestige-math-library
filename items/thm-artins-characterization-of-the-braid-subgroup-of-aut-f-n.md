@@ -14,6 +14,18 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-15.md"
+      - "research/frontier-38-owner-30-alpha-batch-15-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-15-post.json"
+    reviewed_raw_sha256: "3177ea8fde9cb694a6936b4b79c785a4949ca404282a0115cce1fb1841fe7af8"
+    content_sha256: "f550ccb5deb1256e03a52b8cbac7c616e89558d0c30dec0e9fe5bae98ec8f690"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass
@@ -58,8 +70,7 @@ for a unique braid $\beta$.
 
 2.1 *Equality of the two sets.* Steps 1.1 and 1.2 give $\operatorname{im}\rho=\{A\in\operatorname{Aut}(F_n): A\text{ is peripheral-boundary-preserving}\}.$ [step 1.1, step 1.2]
 
-
-3.1 *Conclusion.* Step 2.1 identifies the image with the set of peripheral-boundary-preserving automorphisms and step 1.3 shows that the representing braid is unique, which is the characterization of Artin. The necessity and sufficiency directions [F1] and [F2] are choice-free; AC is consumed exactly through the injectivity statement [F3], as declared in the statement. For $n\le1$ both $F_n$-automorphism conditions are checked directly on the trivial or infinite cyclic group and the same conclusions hold with the trivial braid group. [F1, F2, F3, step 2.1, step 1.3] ∎
+ 3.1 *Conclusion.* Step 2.1 identifies the image with the set of peripheral-boundary-preserving automorphisms and step 1.3 shows that the representing braid is unique, which is the characterization of Artin. The necessity and sufficiency directions [F1] and [F2] are choice-free; AC is consumed exactly through the injectivity statement [F3], as declared in the statement. For $n\le1$ both $F_n$-automorphism conditions are checked directly on the trivial or infinite cyclic group and the same conclusions hold with the trivial braid group. [F1, F2, F3, step 2.1, step 1.3] ∎
 
 ## Remarks
 

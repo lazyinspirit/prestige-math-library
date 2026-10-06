@@ -4,6 +4,21 @@ kind: definition
 title: "Inner, singular inner and outer functions"
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-03"
+    scope: "Cumulative whole-item verification: completed original Step5 full statement/definition and proof read plus the recorded later Step7 local mathematical corrections. Exact recovered original carrier and current post-correction carrier match recorded hashes; every substantive delta is covered by the cited correction reasoning. No independent audit of the local repairs and no new review round is claimed; supplier review is limited to interfaces used."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-20.md"
+      - "research/frontier-38-owner-30-alpha-batch-20-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-20-post-5a.json"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u20.json"
+    original_read_raw_sha256: "d0559b74d6228f04b5e48c8e433b46120c3d970593fa5ae809ea73af1df4b83e"
+    repair_post_guard_sha256: "e0f2538fabc704e5509d5c8fe6e38125ca8228e9200a827e234d57be387c35ee"
+    content_sha256: "fe97ec6e131a49145aed4a96afe8aab6912b080359e01258ea1955668e679a79"
 pipeline_run: frontier-38-owner-30
 deps: [lem-bounded-holomorphic-disc-functions-have-fatou-limits-under-countable-choice, def-unit-disc-upper-half-plane-and-blaschke-factor, def-poisson-kernel-on-the-disc, def-poisson-integral-of-finite-boundary-measure, def-analytic-hardy-space-disc, def-blaschke-product, thm-blaschke-product-boundary-values-and-zeros, def-complex-exponential, def-complex-lp-and-euclidean-test-function-conventions, def-the-one-dimensional-torus-and-normalized-haar-integral, def-countable-choice, thm-complex-power-series-converge-locally-uniformly, thm-holomorphic-if-and-only-if-analytic, thm-complex-exponential-is-entire-with-derivative-itself, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-local-maximum-modulus-principle]
 justified_by: [lem-outer-function-properties, thm-singular-inner-function-properties]

@@ -9,7 +9,33 @@ provenance: {"statement": "ai-generated", "proof": "ai-altered"}
 sources: {"references": [{"title": "Michel Brion, Introduction to actions of algebraic groups (2010)", "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf", "locator": "§1.1, Definitions 1.4, 1.6, 1.8, Lemma 1.5, Example 1.7 and Proposition 1.9; printed pp. 3–4"}, {"title": "Philippe Gille, Introduction to reductive group schemes over rings, full notes retrieved 2026-10-02", "url": "https://www.math.ens.psl.eu/~gille/prenotes/reductive.pdf", "locator": "§6, Proposition 6.0.5, pp. 25–27; Proposition 6.2.1, pp. 30–31; Theorem 6.3.1, p. 32"}, {"title": "J. S. Milne, Algebraic Groups (2022)", "url": "https://www.jmilne.org/math/Books/iAG2022.pdf", "locator": "§4(a) Remark 4.1, pp. 83–84; Proposition 4.7 and Corollary 4.8, p. 86; Theorem 12.12 and Remark 12.13, printed pp. 234–235"}]}
 generation: {"role": "counterexample"}
 proof_strategy: direct
-verification: {"precheck": "pass", judge: {model: "gpt-6.1-sol", verdict: pass, date: 2026-10-03}}
+verification:
+  precheck: pass
+  judge:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-03
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-03
+    scope: Recovered historical Step5 independent whole-item claim/body/proof read for cex-abstract-group-action-is-not-algebraic-action and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-23; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.
+    delegated_by: owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch
+    content_sha256: a58618d519e61659f6e7ce4210d837fcca613162da789f45daf2ab1d33abac56
+    evidence:
+      - research/frontier-38-owner-30-reader-23.md
+      - research/frontier-38-owner-30-reader-findings-23.json
+      - research/frontier-38-owner-30-dispatch/reader-reader-23.result.json
+      - research/frontier-38-owner-30-step5-hash-23-pre.json
+    historical_binding:
+      commit: d90f26208
+      file: items/cex-abstract-group-action-is-not-algebraic-action.md
+      historical_raw_sha256: 3e39ea3aa6bed7b684fa8c7a8dd23af19d7df1142431b8a0aa1e59f78c54f35d
+      transformations:
+        - remove only judge stamp using stripJudgeStamp
+        - publication changed status draft to published; verification metadata excluded from content hash
+      source_snapshot: sources and source locators included in the exact bound mathematical carrier
+      read_completed_at: 2026-10-03T08:25:40.626Z
 ---
 
 ## Statement refuted

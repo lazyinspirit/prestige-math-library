@@ -31,6 +31,18 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf"
       locator: "Exercise 19.2.B on locality and the discussion of blowing up a divisor, pp. 382-383"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post.json"
+    reviewed_raw_sha256: "3f3d3ff8c453699bc91492b0c144c4a99601cffddb05967da81f49d07272b97c"
+    content_sha256: "99c9b8b2cb8bf345ad2d17d637176beafab9771b99cb52fddf8f8b43feaa7f1f"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

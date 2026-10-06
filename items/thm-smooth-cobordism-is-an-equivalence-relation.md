@@ -19,6 +19,18 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-13.md"
+      - "research/frontier-38-owner-30-alpha-batch-13-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-13-post-5a.json"
+    reviewed_raw_sha256: "450beaad2ed5684a5bc26fdecd8c5099428319988bb8b41d03e20c91d42d8810"
+    content_sha256: "89bceaae003609896d5ae729c108ca6f7fc1a9c19c80edd29e418a0b28389a92"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

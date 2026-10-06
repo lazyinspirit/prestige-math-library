@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for lem-bounded-holomorphic-disc-functions-have-fatou-limits-under-countable-choice and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-20; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"ad6d6ca8e1fe5500823b73c4b3c658d710eeda8a344820eb16595c994f76a5fe","evidence":["research/frontier-38-owner-30-reader-20.md","research/frontier-38-owner-30-reader-findings-20.json","research/frontier-38-owner-30-dispatch/reader-reader-20.result.json","research/frontier-38-owner-30-step5-hash-20-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/lem-bounded-holomorphic-disc-functions-have-fatou-limits-under-countable-choice.md","historical_raw_sha256":"46af57b6abab88c017c9afc2b54eea2e0b71db8a9bca743d37d59a762ee33abc","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:34:44.642Z"}}
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

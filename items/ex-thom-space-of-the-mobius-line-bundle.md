@@ -8,6 +8,19 @@ pipeline_run: frontier-38-owner-30
 deps: ["def-disk-bundle-sphere-bundle-and-thom-space", "prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product"]
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item read and recorded Step 7 mathematical repair review, including the used supplier interfaces; current mathematical content matches the bound evidence. The repair review is local and does not claim an independent audit of the repair."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-14.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-14.result.json
+      - research/frontier-38-owner-30-step5-hash-14-post-5a.json
+      - research/frontier-38-owner-30-alpha-batch-14-5a-decisions.json
+      - research/frontier-38-owner-30-step7-v2/step7-v2-gate-r1-u1.json
+      - research/frontier-38-owner-30-dispatch/alpha-repair-step7-v2-gate-r1-u1.result.json
   precheck: pass
 provenance:
   statement: literature-derived

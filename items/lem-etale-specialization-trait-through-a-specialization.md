@@ -17,6 +17,7 @@ deps:
   - thm-krull-intersection-theorem
 proof_strategy: direct
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for lem-etale-specialization-trait-through-a-specialization and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-30; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"f6089a9d3d8e17e00dd6ce3ef9bcb561c0e071368d895ba4e890cff4a2434e1c","evidence":["research/frontier-38-owner-30-reader-30.md","research/frontier-38-owner-30-reader-findings-30.json","research/frontier-38-owner-30-dispatch/reader-reader-30.result.json","research/frontier-38-owner-30-step5-hash-30-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/lem-etale-specialization-trait-through-a-specialization.md","historical_raw_sha256":"73f6a95c28b2374a61f581e392e4a495a9215709da555f2a9e59e3ab70d7b842","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:36:51.819Z"}}
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

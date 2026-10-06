@@ -21,6 +21,12 @@ sources:
       url: "https://arxiv.org/pdf/math/0204057"
       locator: "Section 2.2, printed pp. 3-4: nu_epsilon, the relative modules and the two pairings, with sesquilinearity"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "completed-independent-mathematical-review"
+    date: 2026-10-03
+    scope: "Complete item claim and mathematical body read in delegated Step 5a reader; evidence: research/frontier-38-owner-30-reader-16.md; immutable carrier: research/frontier-38-owner-30-step5-hash-16-post.json; exact saved draft bytes in git d90f26208 match that carrier after exclusion of the later judge stamp. Current content matches the saved carrier except publication status and verification metadata. Source and supplier coverage is limited to the report."
+    delegated_by: "owner via tools/autopilot frontier-38-owner-30 reader-16 dispatch"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -27,6 +27,7 @@ provenance:
   proof: literature-derived
 proof_strategy: direct
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for ex-two-unoriented-points-bound-an-interval and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-13; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"d4528e32d3d381db1b4e7a023cd6e73219132b2025f72e36b6cfc9a599d0c861","evidence":["research/frontier-38-owner-30-reader-13.md","research/frontier-38-owner-30-reader-findings-13.json","research/frontier-38-owner-30-dispatch/reader-reader-13.result.json","research/frontier-38-owner-30-step5-hash-13-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/ex-two-unoriented-points-bound-an-interval.md","historical_raw_sha256":"d643fc79b7e65fb48abb0034b49babb229a7e0b34097552928086f64aa5415a9","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:41:26.500Z"}}
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

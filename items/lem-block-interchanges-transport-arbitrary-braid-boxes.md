@@ -13,6 +13,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for lem-block-interchanges-transport-arbitrary-braid-boxes and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-17; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"0cd569f8b47b2a0c12bd17e1883f22e6f10368f42f8762e217381225786ccd68","evidence":["research/frontier-38-owner-30-reader-17.md","research/frontier-38-owner-30-reader-findings-17.json","research/frontier-38-owner-30-dispatch/reader-reader-17.result.json","research/frontier-38-owner-30-step5-hash-17-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/lem-block-interchanges-transport-arbitrary-braid-boxes.md","historical_raw_sha256":"608107f4707005ac22d5a9cee57fcedb472485c1c53b6e6fe274f184d0aa278c","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T09:03:35.943Z"}}
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

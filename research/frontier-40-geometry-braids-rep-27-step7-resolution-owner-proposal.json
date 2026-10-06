@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "run": "frontier-40-geometry-braids-rep-27",
+  "phase": "step7-initial-owner-escalation",
+  "owner_task": "step7_resolution_escalation",
+  "created_at": "2026-10-05T20:55:14.608588+00:00",
+  "target": "prop-canonical-resolution-of-marked-ideals",
+  "status": "proposal-only; root adjudication and native integration pending",
+  "scope": "One targeted source/proof audit. No item, contract, manifest, report, ledger or engine file edited. No reviewers or judges launched.",
+  "source_reading": {
+    "url": "https://arxiv.org/pdf/math/0401401",
+    "title": "Jaroslaw Wlodarczyk, Simple Hironaka resolution in characteristic zero",
+    "edition": "28-page arXiv math/0401401v1 PDF, title-page date October 25, 2018; creation metadata October 26, 2018",
+    "retrieval_evidence": "Reused the existing full PDF and PyMuPDF extraction identified in u26 report source_reading. This task did not refetch the URL.",
+    "pdf_path": "/tmp/u26-wlodarczyk.pdf",
+    "pdf_bytes": 438468,
+    "pdf_sha256": "40ae1c6d294838c7dc820ea6e377b117f29700cab98b8998b3dec053c8f7d8fc",
+    "text_path": "/tmp/u26-wlodarczyk.txt",
+    "text_bytes": 121096,
+    "text_sha256": "d1dc4b894017f8bfcc030b69e8f377f6b68e3fd42c513803e923d9a4e3654cc0",
+    "read_extent": "Read all 1679 lines, covering pages 1–28 including introduction, all preliminaries, complete resolution algorithm, all conclusions and references. Inspected PDF with PyMuPDF to confirm 28 pages, title/arXiv identity, metadata and last-page references. Different extraction modes have different text hashes; no assertion of byte equality with a fresh extraction.",
+    "critical_passages": [
+      {
+        "location": "Proposition 3.0.8, p.16",
+        "evidence": "Explicitly asserts upper semicontinuous inv, nu, rho independently. The source assertion itself does not cure the branch-formula counterexample."
+      },
+      {
+        "location": "Step 1aa, p.17; Step 1ba, p.18",
+        "evidence": "Contained boundary strata and isolated codimension-one support components receive inv=(s,infinity,0,...), nu=0, rho=empty."
+      },
+      {
+        "location": "Step 1ab, p.17; Step 1bb, pp.18–19",
+        "evidence": "Ambient primary invariant prepends boundary count; nu and rho are inherited from the lower-dimensional restricted ideal."
+      },
+      {
+        "location": "Step 2a, p.20; summary §3.1, pp.21–22",
+        "evidence": "On companion support the primary invariant prepends residual order divided by marking; auxiliary invariants are copied from the companion. Successive assignment transfers values through unchanged points."
+      },
+      {
+        "location": "Step 2b, pp.20–21",
+        "evidence": "Monomial branch has constant primary zero, nu=ord(M)/mu and rho selected by inclusion-minimal threshold subsets. Chart exceptional exponent is sum_A(a)-mu<a_j."
+      },
+      {
+        "location": "§4.1–4.4, pp.24–25",
+        "evidence": "Functoriality, embedding prefixes and semilinear transport depend on equality of the branch data and invariant values. Galois descent uses canonical centers. Separate auxiliary semicontinuity is unnecessary to these comparisons."
+      },
+      {
+        "location": "§4.7, pp.25–26",
+        "evidence": "Modified mark-one monomial branch has primary priority 3/2 and uses monomial nu/rho on that primary stratum. Pair semicontinuity is compatible with this construction."
+      }
+    ]
+  },
+  "confirmed_objection": {
+    "input": "X=A^2_K, I=(x(x+y)), mu=1, E={V(x)}; K algebraically closed of characteristic zero",
+    "calculation": "M=(x), N=(x+y). Along V(x) minus the origin residual order is zero, so the monomial branch assigns primary zero, nu=1, rho={V(x)}. At the origin residual order is one; the companion (x+y,1) restricts in Step 1a to (y,1) on V(x), with empty restricted boundary. Its codimension-one branch assigns nu=0 and rho=empty. The origin primary is (1,1,1,0,infinity,0,...) in unencoded source coordinates and is strictly greater than primary zero.",
+    "failure": "The standalone loci {nu>=1} and {rho>empty} are V(x) minus the origin, not closed in support V(x) union V(x+y). Both original Definition(ii) and Proposition(1) overstate the displayed construction.",
+    "logical_limit": "This refutes standalone semicontinuity of the stated branch functions, not the abstract possibility of different auxiliary functions satisfying an existential theorem."
+  },
+  "recommended_interface": {
+    "decision": "Retain the source algorithm, its exact invariant values, rational encoding, center priority, pointwise descent, termination and functoriality. Correct independent auxiliary semicontinuity to lexicographic pair semicontinuity.",
+    "definition_ii_exact_replacement": "(ii) inv has finite range on each support and is upper semicontinuous there; the lexicographically ordered pairs (inv,nu) and (inv,rho) are also upper semicontinuous. Equivalently, nu and rho are upper semicontinuous on each level stratum {inv=a}.",
+    "nu_range_addendum": "The construction also gives finite ranges for nu and rho on each stage support. The definition may state this as well; rho is automatically finite because E_i is finite.",
+    "proposition_1_exact_replacement": "(1) there are successively defined invariants inv, nu and rho with the existing codomains and finite ranges on each support; inv and the lexicographic pairs (inv,nu), (inv,rho) are upper semicontinuous, equivalently the auxiliary functions are upper semicontinuous on each fixed-inv stratum.",
+    "retained_clauses": [
+      "regular support-contained SNC centers at max(inv,rho), as components of max inv",
+      "strict lexicographic descent of (inv,nu) at every surviving point above a center",
+      "all three invariant values unchanged away from centers",
+      "all three values commute with etale pullback up to omitted empty-center steps",
+      "source ambient-embedding primary prefixes and auxiliary equalities",
+      "smooth and semilinear functoriality, nonclosed-field descent, principalization and embedded/desingularization theorems"
+    ],
+    "why_richest_local_repair": "Pair upper semicontinuity explicitly retains closed superlevel sets for the exact center-ordering invariant and the exact descent-ordering invariant, rather than merely deleting the offending clause or retaining only primary semicontinuity. Neither the algorithm nor downstream theorem conclusions change."
+  },
+  "proof_repairs": [
+    {
+      "id": "prop-canonical-resolution-of-marked-ideals",
+      "location": "Proof opening; provenance.proof; Remarks",
+      "repair": "After owner adjudication and completed proof edits, remove the opening not-supplied caveat, set proof provenance to ai-altered, and replace the final unresolved-claim remark with the explicit counterexample explaining the corrected interface. Do not mark supplied before proof and consumers are integrated."
+    },
+    {
+      "id": "prop-canonical-resolution-of-marked-ideals",
+      "location": "Proof 5.1 primary assembly",
+      "repair": "Keep branchwise primary USC but replace any assertion that the fixed-leading-coordinate stratum is closed with a finite-range level-stratum closure argument. Such strata are locally closed, not generally closed."
+    },
+    {
+      "id": "prop-canonical-resolution-of-marked-ideals",
+      "location": "Proof 5.1 auxiliary induction",
+      "repair": "Prove nu and rho USC on each fixed-primary level stratum. In terminal infinity branches they are constant zero/empty. In monomial branches, nu is a finite sum of nonnegative boundary exponents divided by the mark, and rho superlevels are finite unions of boundary intersections indexed by eligible threshold subsets. In boundary or hypersurface reductions a fixed ambient primary tuple fixes both the leading coordinate and the entire lower-dimensional primary tail, so the induction hypothesis applies to the corresponding lower-primary level stratum. Maximal boundary pieces are disjoint on the relevant support; maximal-contact charts agree etale-locally; unchanged-lift transfer transports these relative-closed loci to earlier stages."
+    },
+    {
+      "id": "prop-canonical-resolution-of-marked-ideals",
+      "location": "Proof 5.1 finite range",
+      "repair": "State why inv and nu ranges are finite on each support: finite-type Noetherian ambient gives finitely many components/charts; only finitely many pass-start residual orders, boundary counts, monomial exponents and marks occur in each terminating recursive construction; each dimension reduction lowers dimension, so the tuple has uniformly bounded depth; each finite collection of lower-dimensional stage invariants has finite range by induction. E_i is finite, hence rho has finite range. This justifies level strata and maximum attainment; an infinite padded tail adds no new values."
+    },
+    {
+      "id": "prop-canonical-resolution-of-marked-ideals",
+      "location": "Proof 5.1 finite-stratum pair lemma",
+      "repair": "For f=inv with finite range, fix a attained value a and S_a={f=a}. Since {f>a} is a finite union of closed superlevels, S_a is locally closed in {f>=a}. If F={x in S_a:g(x)>=b} is closed in S_a, then closure(F) lies in {f>=a} and closure(F) intersect S_a=F. Thus closure(F) is contained in F union {f>a}, and {f>a} union F is closed. This set is the superlevel of (f,g) at (a,b). If a is unattained, it is simply {f>a}, again closed. Apply to g=nu and g=rho. This establishes full lex-pair USC from the stated stratum induction without using false standalone USC."
+    },
+    {
+      "id": "prop-canonical-resolution-of-marked-ideals",
+      "location": "Proof 1.4 monomial comparison",
+      "repair": "Make the already valid pointwise estimate explicit: at q mapping to p in the chosen center, choose a chart j in its minimal threshold subset A. Put b=sum_{D in A}a_D-mu<a_j. Every surviving old strict divisor through q lies over an old divisor through p, so ord_q(M_new)<=b+sum_{D through p,D!=j}a_D<ord_p(M_old). Divisors absent at q only reduce the sum. Hence nu strictly drops at every surviving support point above the center, including Cartier-center blowups, not just at generic points of replacement components."
+    },
+    {
+      "id": "prop-canonical-resolution-of-marked-ideals",
+      "location": "Proof 5.1 conclusion",
+      "repair": "Conclude all corrected Definition(i)–(iv) and Proposition(1)–(4) conditions, with closed maximal centers supplied by pair USC and branchwise regularity. The original obstruction is resolved by the corrected mathematically appropriate interface; do not claim standalone USC."
+    }
+  ],
+  "alternative_auxiliary_construction": {
+    "assessment": "No complete construction retaining both standalone auxiliary USC and all current branch formulas/center comparisons is established by the source or this audit. The exact existing formulas are conclusively incompatible with that stronger clause.",
+    "nu_alone_possible": "For a fixed finite resolution sequence, a different globally USC integer nu can be constructed backwards by nu_i(p)=1_{C_i}(p)+max({nu_{i+1}(q):q maps to p and remains in support} union {0}). Properness makes the fiber-maximum superlevels closed and adding the closed-center indicator preserves integer USC. This nu strictly drops above centers and is unchanged off them. This is an alternative future-dependent termination invariant, not the source nu, and does not repair rho.",
+    "rho_difficulty": "Changing rho to a primary-sensitive global envelope can alter its tie-breaking maxima inside a fixed primary stratum. Folding rho into primary inv can destroy the stated descent when inv stays equal and rho increases after a blowup; folding nu ahead of rho changes the monomial center priority. Constant rho would require replacing singular maximal-primary support loci with a different center-selecting primary invariant. Those are new constructions with additional proof and changed formula obligations.",
+    "selection": "Use the pair/stratum interface. This preserves all sound source functions and theorem conclusions with local proof and consumer corrections. This audit does not claim that every alternative stronger construction is impossible."
+  },
+  "direct_consumers": [
+    {
+      "id": "lem-order-semicontinuity-and-snc-strata",
+      "supplier": "definition",
+      "exact_use": "Definition listed as dependency; lemma proves ordinary order/count USC and finite tuples of individually USC functions. Statement(3) and proof already warn that branchwise assembly is separate.",
+      "repair": "No mathematical statement change required. Clarify only if useful that the proposition proves the piecewise primary and pairs by level-stratum induction; ordinary finite-tuple lemma alone cannot supply auxiliary USC."
+    },
+    {
+      "id": "lem-etale-commutativity-of-maximal-order-case",
+      "supplier": "definition and proposition",
+      "exact_use": "F1 branch reduction; F4 currently says invariants are USC and their maximal loci are centers; proof uses corresponding data, center comparisons and invariant equality.",
+      "repair": "Replace F4 with: inv and (inv,rho) have closed superlevel loci, and the centers are max(inv,rho); the pair (inv,nu) provides descent. Other proof and all invariant-equality statements remain sound."
+    },
+    {
+      "id": "lem-canonical-resolution-commutes-with-ambient-embeddings",
+      "supplier": "definition and proposition",
+      "exact_use": "Statement gives k constant primary prefixes and nu/rho equality; F3 and proof use identical intrinsic reductions and maxima.",
+      "repair": "No formula or conclusion change; retain existing auxiliary equalities. Corrected pair USC is preserved by constant prefixing."
+    },
+    {
+      "id": "lem-canonical-resolution-under-field-isomorphisms",
+      "supplier": "definition and proposition",
+      "exact_use": "F6 identifies reductions and max(inv,rho). F8 incorrectly asserts all algorithm invariants USC via order lemma; proof 3.1(e) uses F8 to transport maxima.",
+      "repair": "Replace F8 with the proposition as supplier for finite-range USC of inv and the two ordered pairs, alongside ordinary order/count USC from the order lemma. In 3.1(e), equality of all invariant values plus order preservation carries max(inv,rho) to its exact preimage; separate auxiliary USC is unnecessary. Native supplier-use evidence must assign this pair property to the proposition, not solely the order lemma."
+    },
+    {
+      "id": "lem-etale-commutativity-of-companion-step",
+      "supplier": "proposition",
+      "exact_use": "F1 companion and monomial reductions; proof transfers lower residual-stratum values and compares monomial rho/nu under pullback.",
+      "repair": "No statement/formula change; its uses concern intrinsic values, centers and monomial-stratum USC only."
+    },
+    {
+      "id": "lem-canonical-resolution-commutes-with-smooth-morphisms",
+      "supplier": "definition and proposition",
+      "exact_use": "F3 etale naturality, F5 centers determined by invariants; projection induction compares all branch functions.",
+      "repair": "No mathematical change; pair interface preserves every equality and center comparison."
+    },
+    {
+      "id": "lem-canonical-resolution-over-nonclosed-fields",
+      "supplier": "definition and proposition",
+      "exact_use": "F1 claims invariants satisfy Definition; proof 3.1 currently descends standalone closed superlevels of inv, nu and rho, which is invalid for the source functions.",
+      "repair": "In 3.1 descend the G-stable closed superlevels of inv, (inv,nu), and (inv,rho), using the existing ideal-descent argument. Finite ranges let their finite differences recover each primary level and its auxiliary level strata, hence uniquely reconstruct inv, nu and rho over K. On a fixed primary value a, pair thresholds (a,b) restricted to {inv=a} give {nu>=b} or {rho>=b} there. Thus auxiliary relative USC, full pair USC, maxima, descent and comparisons are preserved. Do not call the standalone auxiliary superlevels closed globally."
+    },
+    {
+      "id": "thm-principalization-of-ideals",
+      "supplier": "proposition",
+      "exact_use": "F1 resolves mark-one ideal to unit with regular SNC centers; F3 functoriality and embedding/semilinear comparisons.",
+      "repair": "No statement or proof change necessary; those supplied claims are retained."
+    },
+    {
+      "id": "thm-bravo-villamayor-full-transform",
+      "supplier": "proposition",
+      "exact_use": "F1 source Steps1–2; proof1.1 introduces 3/2 priority and explicitly does not use standalone auxiliary USC.",
+      "repair": "No statement or theorem weakening; pair USC applies to the modified primary level by its same monomial-stratum construction. Its checked finite extra branch and local ideal argument remain applicable."
+    }
+  ],
+  "remaining_uncertainty": [
+    "Confirmed objection and finite-stratum pair lemma are independently closed by explicit calculations. The recommended correction is a proposal, not a completed repository proof repair or independent audit result.",
+    "Root must personally adjudicate this exact objection and integrate after native writers drain, with Definition before proposition and changed-consumer proofs. Native contract, source-use and downstream evidence updates remain root-owned.",
+    "The stage-wide finite-range and unchanged-lift level-stratum proof must appear explicitly in the integrated proposition; the existing generic finite-lexicographic supplier by itself does not prove this piecewise claim.",
+    "No assertion is made that an independently USC rho preserving every current center can never be built; no such construction was proved in this bounded audit."
+  ],
+  "snapshot_sha256": {
+    "def-canonical-resolution-invariants": "d85be975543d22ccbb36b47d60b4ff95620e14e3c717e31dd0d6875517f37c15",
+    "prop-canonical-resolution-of-marked-ideals": "54336800c4a31726cf16b8d47d4d41249945671f0274011771bbeb55c8f5cd33",
+    "lem-order-semicontinuity-and-snc-strata": "3c448531903380f98cfa9919a2900da58c40dc331988d102fcaaee0f247af009",
+    "lem-etale-commutativity-of-maximal-order-case": "ca725c24bc6d3d1ea71b6cb5b503d911c8b6339c00b01f3d3b61cc3a1914d12a",
+    "lem-canonical-resolution-commutes-with-ambient-embeddings": "1b5e0375f1a740c06a1c102b3f89fc71ba76e94b9d7c282c85b343130d48bd37",
+    "lem-canonical-resolution-under-field-isomorphisms": "994c11f29e4c0eaae6dcc652efac3fb265979f287ee79c4848a7b62933f1a8f4",
+    "lem-etale-commutativity-of-companion-step": "efd9b9783a74a69c8d18e2b282f6f8534c5128b4a5ed689ae8b98133b81f46d4",
+    "lem-canonical-resolution-commutes-with-smooth-morphisms": "d5b0773696bb017029f5d0aa12fe59e4042dc0175f3729d700a2e94d0781ec4e",
+    "lem-canonical-resolution-over-nonclosed-fields": "29e4a63b56ac7384a93fed5bbcb3ed7152588d92cbd49186fc94a956566cf9dc",
+    "thm-principalization-of-ideals": "60c73418ef5bb6ea7c2cebd2b4b050b495ad172d71df49bc4ccd393f2d7307ce",
+    "thm-bravo-villamayor-full-transform": "e4aac817475486b95098aff99706bc1191688a66cdb49fec6f3f49e2e1083310"
+  },
+  "validation": "No item validators, tests, workflow transition or independent review were run; only targeted file/source inspection and mathematical calculations. This JSON is the only authored artifact."
+}

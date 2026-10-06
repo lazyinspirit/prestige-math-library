@@ -8,6 +8,17 @@ pipeline_run: frontier-38-owner-30
 deps: ["def-disk-bundle-sphere-bundle-and-thom-space", "def-disk-sphere-and-thom-space-of-a-metric-vector-bundle"]
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-14.md"
+      - "research/frontier-38-owner-30-alpha-batch-14-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-14-post-5a.json"
+    content_sha256: "7a5cf7b575d1f02f0debf1a9a1ccfc8c4cbfee37fc28b43c0a2333fc2eef23e9"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

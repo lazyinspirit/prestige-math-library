@@ -25,6 +25,17 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf"
       locator: "19.3 the blowup as Proj of the Rees algebra, pp. 383-387"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post-5a.json"
+    content_sha256: "f6c6397da820ccf83459621089f598f6b789900b31a12f6559b0aa8f76c4257d"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

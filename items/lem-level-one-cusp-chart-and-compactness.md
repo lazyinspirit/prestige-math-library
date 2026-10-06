@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-21.md"
+      - "research/frontier-38-owner-30-alpha-batch-21-5a.md"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u21.json"
+    content_sha256: "0d291d7a4e094d3f1ec79f44ad67b8ba6900a7c60082f1fdf3f44cb418dedb02"
 id: lem-level-one-cusp-chart-and-compactness
 kind: lemma
 title: "The cusp chart and compactness of X(1)"

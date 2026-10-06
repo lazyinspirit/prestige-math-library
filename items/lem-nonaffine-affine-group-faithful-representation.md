@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-24.md"
+      - "research/frontier-38-owner-30-alpha-batch-24-5a.md"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u24.json"
+    content_sha256: "b2f324b8470d5cc9933d2ac9279202a5a711689adcbb86c2b4ab7e2843862ac6"
 id: lem-nonaffine-affine-group-faithful-representation
 kind: lemma
 title: "Affine finite-type group schemes have faithful finite-dimensional representations"

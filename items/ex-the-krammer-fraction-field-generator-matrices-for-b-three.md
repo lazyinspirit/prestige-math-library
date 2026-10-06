@@ -21,6 +21,17 @@ sources:
       url: "https://arxiv.org/pdf/math/0204057"
       locator: "Section 4.2, printed pp. 12-13: the six-case Krammer-generation formula with the parameter translation, and the warning that the matrix model is only fraction-field isomorphic to H_2(C-tilde) for n>=3"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-16.md"
+      - "research/frontier-38-owner-30-alpha-batch-16-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-16-post-5a.json"
+    content_sha256: "65b4cb2ec42eb1b9d218c63af03c523dcef96167b2170f329148c0462b1c44b5"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

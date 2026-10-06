@@ -22,6 +22,12 @@ deps:
 - thm-complex-holder-minkowski-and-the-quotient-norm
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "historical complete Step5 reader; item lem-restriction-and-extension-estimates-are-dual; evidence research/frontier-38-owner-30-reader-6.md, research/frontier-38-owner-30-reader-findings-6.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
+    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
   precheck: pass
 provenance:
   statement: literature-derived

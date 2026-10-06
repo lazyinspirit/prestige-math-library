@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-5.md"
+      - "research/frontier-38-owner-30-alpha-batch-5-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-5-post-5a.json"
+    content_sha256: "d844f9fc608af031ac32f242faa4b495faa876e7fe7aced1214d74dc410fd4ef"
 id: lem-holder-cz-kernels-satisfy-hormander-cancellation
 kind: lemma
 title: "Standard Hölder kernels satisfy the Hörmander condition"

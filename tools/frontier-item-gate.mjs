@@ -68,7 +68,10 @@ if (positional.has(tool)) command.push(...itemFiles, ...(tool === 'precheck' ? [
 else if (tool === 'validate-plan') command.push('research/plan-spec.json', '--pages-file', pageSelector, ...toolArgs);
 else if (tool === 'pathcheck') command.push('--pages-file', pageSelector, ...toolArgs);
 else command.push('--items-file', selector, ...(tool === 'depsource' ? ['--run', run] : []), ...toolArgs);
-console.log(`frontier-item-gate: ${tool}; ${ids.length} item(s), ${pages.length} frontier page(s); run ${run}`);
+// JSON consumers require the validator's complete document on stdout. A banner
+// on either stream would invalidate the battery's strict JSON/runtime checks.
+if (!toolArgs.includes('--json'))
+  console.log(`frontier-item-gate: ${tool}; ${ids.length} item(s), ${pages.length} frontier page(s); run ${run}`);
 const result = spawnSync(process.execPath, command, { cwd: root, stdio: 'inherit' });
 if (result.error) throw result.error;
 process.exitCode = result.status ?? 1;

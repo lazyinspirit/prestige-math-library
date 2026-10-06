@@ -7,6 +7,13 @@ origin: session
 deps: [lem-the-unordered-two-point-punctured-plane-has-an-equivariant-two-dimensional-cell-model, lem-lkb-lifted-absolute-cellular-boundary-and-fraction-field-rank]
 dependency_level: 2
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: completed-cumulative-mathematical-review
+    date: 2026-10-03
+    scope: "Cumulative verification supported by existing completed mathematical readings. Original complete Step 5a reader evidence research/frontier-38-owner-30-reader-16.md, followed by completed Step 7 repair/adjudication reasoning research/frontier-38-owner-30-step7-v2/step7-v2-repeat-r1-u16.json, exact post_sha256 14d6ef3cc97b32baa30094dc4e576d8c5b31625f3f18579019963f08eea6a625 with publication status normalized back to draft. The later reasoning covers the substantive changes; its local repair/self-review qualifications remain applicable. This reconciliation adds no new mathematical review, independent post-repair audit, source reading or judge acceptance."
+    delegated_by: "owner via tools/autopilot frontier-38-owner-30 step7-v2-repeat-r1-u16 dispatch"
 sources:
   references:
     - title: Paoluzzi and Paris, A note on the Lawrence–Krammer–Bigelow representation, sections 2–3

@@ -4,6 +4,21 @@ kind: lemma
 title: Bruhat covers are right multiplication by positive-root reflections
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-03"
+    scope: "Cumulative whole-item verification: completed original Step5 full statement/definition and proof read plus the recorded later Step7 local mathematical corrections. Exact recovered original carrier and current post-correction carrier match recorded hashes; every substantive delta is covered by the cited correction reasoning. No independent audit of the local repairs and no new review round is claimed; supplier review is limited to interfaces used."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-8.md"
+      - "research/frontier-38-owner-30-alpha-batch-8-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-8-post-5a.json"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u8.json"
+    original_read_raw_sha256: "38c3655c7dcaa19c2eea6ba5723da67d4046db8737bde0d8397e6f667b419373"
+    repair_post_guard_sha256: "539626b9476e84bd3e616de2bf98e9d8de79f53818244b8ff25a96b11e2383c3"
+    content_sha256: "cb3ac74b6baa86daf522a98da7d27604a44b3d4400054bab24109e221cd235df"
 pipeline_run: frontier-38-owner-30
 deps: [def-bruhat-order-on-a-finite-weyl-group, lem-finite-weyl-strong-exchange-and-deletion, def-root-reflections-and-the-weyl-group-action, def-finite-weyl-root-system-lattice-and-chamber-conventions]
 proof_strategy: direct

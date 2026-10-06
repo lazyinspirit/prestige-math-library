@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-1.md"
+      - "research/frontier-38-owner-30-alpha-batch-1-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-1-post-5a.json"
+    content_sha256: "67be4e0cd113cbd027212c5480aa49eb2de2fcd46e0be370b393a02be10cd830"
 id: ex-conductor-cusp-semigroup
 kind: example
 title: The cusp conductor and its two semigroup-ring generators

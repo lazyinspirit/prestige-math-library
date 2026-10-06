@@ -1,0 +1,624 @@
+[
+  {
+    "order": 907,
+    "id": "algebraic-spaces-stacks-and-derived-algebraic-geometry-foundations",
+    "kind": "A",
+    "category": "scheme-theory",
+    "title": "Algebraic Spaces, Stacks, and Derived Algebraic Geometry Foundations",
+    "companion": "algebraic-spaces-stacks-and-derived-algebraic-geometry-foundations-examples",
+    "requires": [
+      "fibre-products-base-change-and-scheme-theoretic-fibres",
+      "finite-proper-and-projective-morphisms",
+      "kahler-differentials-conormal-sequences-and-infinitesimal-lifting",
+      "flat-smooth-and-etale-morphisms",
+      "algebraic-group-actions-orbits-stabilizers-and-controlled-quotients",
+      "derived-categories"
+    ],
+    "items": [
+      {
+        "id": "def-fppf-topology-on-schemes",
+        "kind": "definition",
+        "title": "Fppf coverings and the fppf site",
+        "statement": "Fix a base scheme $S$ ([[def-scheme]], [[def-scheme-over-base]]). An fppf covering of an $S$-scheme $T$ is a family $\\{T_i\\to T\\}_{i\\in I}$ of morphisms of $S$-schemes ([[def-morphism-of-schemes]]) such that each $T_i\\to T$ is flat ([[def-flat-morphism-schemes]]) and locally of finite presentation ([[def-locally-finite-presentation-morphism]]) and the images of $|T_i|\\to|T|$ cover $T$. The fppf site $(\\mathit{Sch}/S)_{fppf}$ is the category of $S$-schemes with the pretopology whose coverings are the fppf coverings. A Zariski open cover is an fppf covering ([[def-open-immersion-schemes]]); fppf coverings are stable under base change and under composition: if $\\{T_i\\to T\\}$ is fppf and $\\{T_{ij}\\to T_i\\}$ is fppf for every $i$, then $\\{T_{ij}\\to T\\}$ is fppf ([[def-fibre-product-schemes-universal-property]]). We work inside a fixed big fppf site of $S$-schemes; joint surjectivity is a topological condition and the index set need not be finite.",
+        "deps": [
+          "def-scheme",
+          "def-scheme-over-base",
+          "def-morphism-of-schemes",
+          "def-flat-morphism-schemes",
+          "def-locally-finite-presentation-morphism",
+          "def-open-immersion-schemes",
+          "def-fibre-product-schemes-universal-property"
+        ],
+        "strategy": "Definition with the standard stability checks, following Stacks, *Topologies on Schemes*, Section 34.7 (tags 021L, 021P, 021Q, 021R, 021S) and Vistoli, *Notes on Grothendieck topologies, fibered categories and descent theory*, Sections 2.3.1-2.3.2. Base change uses only the stability of flat and locally finitely presented morphisms; composition and refinements use Stacks Topologies Lemma 34.4.2. No choice principle enters the definition. The big-site conventions are those of [[def-scheme-over-base]]; nothing below depends on size questions beyond those conventions.",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-groupoid-in-schemes-and-etale-equivalence-relation",
+        "kind": "definition",
+        "title": "Groupoids in schemes, relations and etale equivalence relations",
+        "statement": "A groupoid in $S$-schemes is a tuple $(U,R,s,t,c,e,i)$ of $S$-schemes and morphisms $s,t\\colon R\\to U$ (source and target), $c\\colon R\\times_{s,U,t}R\\to R$ (composition), $e\\colon U\\to R$ (identity) and $i\\colon R\\to R$ (inverse) satisfying the usual identities of a small groupoid ([[def-morphism-of-schemes]], [[def-fibre-product-schemes-universal-property]], [[def-scheme-over-base]]). With $j=(t,s)\\colon R\\to U\\times_SU$, the groupoid is a relation when $j$ is a monomorphism ([[def-monomorphism-and-epimorphism]]); then $j$ presents $R$ as a reflexive, symmetric and transitive set-theoretic relation on $U$. An equivalence relation on $U$ over $S$ is a groupoid in $S$-schemes that is a relation. It is an etale equivalence relation when in addition $s$ and $t$ are etale ([[def-etale-morphism-schemes]]). For a morphism of $S$-schemes $g\\colon U'\\to U$ the restriction $R'=R|_{U'}$ is the base change $R\\times_{U\\times_SU}(U'\\times_SU')$ with source and target the two projections, equipped with the base-changed groupoid structure; restricting an equivalence relation gives an equivalence relation ([[def-equivalence-relation]] gives the underlying set-theoretic notion).",
+        "deps": [
+          "def-morphism-of-schemes",
+          "def-fibre-product-schemes-universal-property",
+          "def-scheme-over-base",
+          "def-monomorphism-and-epimorphism",
+          "def-equivalence-relation",
+          "def-etale-morphism-schemes",
+          "lem-etale-stable-base-change-composition"
+        ],
+        "strategy": "Definition and well-definedness checks following Stacks, *Groupoids*, Definition 39.3.1, Lemma 39.3.2 and Definition 39.9.1 (tags 022P, 022Q), and Stacks, *Algebraic Spaces*, Definition 65.9.2 (tag 02WS) for the etale case. A monomorphism $j\\colon R\\to U\\times_SU$ encodes a subfunctor of $U\\times_SU$, and the maps $s,t,c,e,i$ encode the relation operations and their axioms; the groupoid axioms are the usual commutativity of the standard diagrams. Vistoli Sections 3.4 and 3.5 give the same structure in fibred-category language. Etale morphisms are stable under base change (published [[lem-etale-stable-base-change-composition]]), so restrictions along etale morphisms of etale equivalence relations are etale equivalence relations; this is recorded separately as [[lem-etale-equivalence-relation-restriction]].",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-category-fibred-in-groupoids",
+        "kind": "definition",
+        "title": "Categories fibred in groupoids over a site",
+        "statement": "Let $\\mathcal C$ be a category ([[def-category]]). A functor $p:\\mathcal S\\to\\mathcal C$ is a category fibred in groupoids if every arrow $f:V\\to U$ and object $x$ over $U$ admits a cartesian arrow $\\varphi:y\\to x$ over $f$, and each fibre category $\\mathcal S_U$ is a groupoid ([[def-functor-and-contravariant-functor]], [[def-isomorphism-groupoid-and-connected-category]]). Here cartesian means: for any $g:W\\to V$, object $z$ over $W$ and arrow $\\psi:z\\to x$ with $p(\\psi)=fg$, there is a unique $\\chi:z\\to y$ over $g$ with $\\varphi\\chi=\\psi$. The fibre $\\mathcal S_U$ has objects over $U$ and morphisms over $\\mathrm{id}_U$. Equivalently every arrow of $\\mathcal S$ is cartesian and lifts exist for every $f,x$. A 1-morphism is a functor over $\\mathcal C$ (which automatically preserves cartesian arrows); a 2-morphism is a natural transformation over $\\mathcal C$ ([[def-natural-transformation]]). Such a 1-morphism is an equivalence precisely when it induces fully faithful essentially surjective functors on all fibres. These objects, functors and natural transformations form a strict 2-category: functor composition is strictly associative. Chosen pullback functors instead compose up to the canonical isomorphisms supplied by cartesian uniqueness; choosing a global cleavage may use AC and is not required by the definition.",
+        "deps": [
+          "def-category",
+          "def-functor-and-contravariant-functor",
+          "def-natural-transformation",
+          "def-isomorphism-groupoid-and-connected-category",
+          "def-opposite-category"
+        ],
+        "strategy": "Use Vistoli3.5 and3.21, with the full3.22 argument. If all arrows are cartesian and lifts exist, the category is fibred. Applying the universal property to an arrow over an identity gives a right inverse; that inverse also has a right inverse, so every vertical arrow is an isomorphism. Conversely, in a fibred category with groupoid fibres, any arrow $y\\to x$ factors through a cartesian lift $y'\\to x$ by a unique vertical arrow $y\\to y'$, which is an isomorphism; hence the original arrow is cartesian. Thus every base-preserving functor preserves cartesian arrows (Vistoli3.23). Full faithfulness on fibres plus cartesian factorization gives full faithfulness on each hom-set over a fixed base arrow; essential surjectivity fibrewise gives equivalence over the base. The definition requires neither a cleavage nor a simultaneous choice of pullbacks. Pseudofunctors arise only after choosing pullbacks, while the concrete functor 2-category has strict composition.",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-simplicial-object-and-simplicial-commutative-ring",
+        "kind": "definition",
+        "title": "Simplicial objects, simplicial commutative rings and homotopy groups",
+        "statement": "Let $\\Delta$ be the simplex category, with objects the finite nonempty ordered sets $[n]=\\{0<\\dots<n\\}$ and morphisms the order-preserving maps. A simplicial object in a category $\\mathcal C$ is a functor $\\Delta^{\\mathrm{op}}\\to\\mathcal C$ ([[def-category]], [[def-functor-and-contravariant-functor]]); a simplicial set is a simplicial object in sets, a simplicial commutative ring is a simplicial object in commutative rings ([[def-commutative-ring]]), and a simplicial module over a simplicial ring is a simplicial object in modules with compatible action. Face and degeneracy maps are the images of the maps $[n-1]\\to[n]$ that omit, respectively repeat, an index; they satisfy the usual simplicial identities. The Moore complex of a simplicial abelian group or module $M_\\bullet$ is the chain complex with $M_n$ in degree $n$ and differential $d_n=\\sum_{i=0}^n(-1)^id_i$ ([[def-chain-complex-in-an-abelian-category]]); its homology is written $\\pi_n(M_\\bullet)=H_n(M_\\bullet)$ ([[def-homology-object-of-a-chain-complex]]). For a simplicial commutative ring $A_\\bullet$ this defines $\\pi_n(A_\\bullet)$ for $n\\ge0$, with $\\pi_0(A_\\bullet)$ a commutative ring and each $\\pi_n(A_\\bullet)$ a $\\pi_0(A_\\bullet)$-module. A morphism of simplicial rings is a weak equivalence when it induces isomorphisms on all $\\pi_n$; the category of derived rings is the localization of simplicial commutative rings at weak equivalences ([[def-natural-transformation]]).",
+        "deps": [
+          "def-category",
+          "def-functor-and-contravariant-functor",
+          "def-natural-transformation",
+          "def-commutative-ring",
+          "def-ring-homomorphism",
+          "def-chain-complex-in-an-abelian-category",
+          "def-homology-object-of-a-chain-complex"
+        ],
+        "strategy": "Definitions with standard conventions, following Stacks, *Simplicial Methods*, Chapter 14 (simplex category 14.2, simplicial objects 14.3, homotopy groups 14.11-14.15, Dold-Kan 14.23-14.26) and Toen, *Derived algebraic geometry*, Sections 2.1-2.2. The identification of homotopy groups with homology of the Moore complex is the Dold-Kan normalization theorem; the local convention is to define $\\pi_n$ by the Moore complex, which agrees with the classical definition (Dold-Kan; Stacks Section 14.24, Theorem 14.24.3, tag 019G). The ring and module structures on $\\pi_*$ are immediate from the simplicial identities. No model-category machinery is introduced in the definition; weak equivalences are used only to state that later constructions are independent of choices up to canonical isomorphism.",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-fppf-sheaf-and-sheafification",
+        "kind": "definition",
+        "title": "Fppf sheaves of sets and sheafification",
+        "statement": "A presheaf of sets on $(\\mathit{Sch}/S)_{fppf}$ ([[def-fppf-topology-on-schemes]]) is a contravariant functor to the category of sets ([[def-presheaf-representable-functor-and-representation]], [[def-functor-and-contravariant-functor]]). It is an fppf sheaf when for every fppf covering $\\{T_i\\to T\\}$ the diagram $F(T)\\to\\prod_iF(T_i)\\rightrightarrows\\prod_{i,j}F(T_i\\times_TT_j)$ is an equalizer in sets ([[def-equivalence-relation]], [[def-fibre-product-schemes-universal-property]]); equivalently, restriction identifies $F(T)$ with the set of families $(s_i)$ whose two pullbacks to each $T_i\\times_TT_j$ agree. A morphism of presheaves is a natural transformation ([[def-natural-transformation]]). The sheafification of a presheaf $F$ is an fppf sheaf $F^{\\mathrm a}$ with a morphism $F\\to F^{\\mathrm a}$ such that every morphism $F\\to G$ with $G$ an fppf sheaf factors uniquely through $F\\to F^{\\mathrm a}$; it is unique up to unique isomorphism when it exists. Representable presheaves are fppf sheaves ([[lem-nonaffine-fppf-descent-of-scheme-morphisms]]), under the Axiom of Choice recorded there. All sheaves below are set-valued unless stated otherwise.",
+        "deps": [
+          "def-fppf-topology-on-schemes",
+          "def-presheaf-representable-functor-and-representation",
+          "def-functor-and-contravariant-functor",
+          "def-natural-transformation",
+          "def-equivalence-relation",
+          "def-fibre-product-schemes-universal-property",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms"
+        ],
+        "strategy": "Definitions and conventions; existence of the sheafification is proved separately as [[lem-fppf-sheafification-exists]]. The equalizer form of the sheaf condition is Stacks, *Sites and Sheaves*, Section 7.7 (tag 00VM) and Vistoli Section 2.3.3. That representable functors are fppf sheaves is the published [[lem-nonaffine-fppf-descent-of-scheme-morphisms]], which assumes AC. Sheafification preserves finite limits, used below only for fibre products and monomorphisms of sheaves; this follows from the explicit plus construction in [[lem-fppf-sheafification-exists]].",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-etale-equivalence-relation-restriction",
+        "kind": "lemma",
+        "title": "Restriction of an etale equivalence relation",
+        "statement": "Let $j\\colon R\\to U\\times_SU$ be an etale equivalence relation on $U$ over $S$ ([[def-groupoid-in-schemes-and-etale-equivalence-relation]]) and let $g\\colon U'\\to U$ be a morphism of $S$-schemes. Form the restriction $R'=R|_{U'}=R\\times_{U\\times_SU}(U'\\times_SU')$ with source and target the standard projections ([[def-fibre-product-schemes-universal-property]]). Then $j'\\colon R'\\to U'\\times_SU'$ is an equivalence relation on $U'$ over $S$; if $g$ is etale, then $j'$ is an etale equivalence relation. When $g$ is etale, each restricted source/target is a composition of a base change of $g$ and a base change of $s$ or $t$, hence etale.",
+        "deps": [
+          "def-groupoid-in-schemes-and-etale-equivalence-relation",
+          "def-etale-morphism-schemes",
+          "lem-etale-stable-base-change-composition",
+          "def-fibre-product-schemes-universal-property"
+        ],
+        "strategy": "Use the actual restriction $R'=U'\\times_{g,U,s}R\\times_{t,U,g}U'$. Its points are triples $(u'_1,r,u'_2)$ with $s(r)=g(u'_1)$ and $t(r)=g(u'_2)$. Its map to $U'\\times_SU'$ is a base change of the relation monomorphism. Identities, inverses and compositions restrict on both endpoints by the groupoid formulas, so it is an equivalence relation for any $g$. If $g$ is etale, the projection to either $U'$ factors through a base change of $g$ followed by a base change of $s$ or $t$; both factors are etale by [[lem-etale-stable-base-change-composition]]. This is exactly Stacks02WT and Groupoids3.3/18.1; restricting only one endpoint does not define a relation on $U'$.",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-descent-data-for-schemes",
+        "kind": "definition",
+        "title": "Descent data for schemes over an fppf covering",
+        "statement": "Let $\\{X_i\\to X\\}_{i\\in I}$ be an fppf covering of an $S$-scheme $X$ ([[def-fppf-topology-on-schemes]]) and put $X_{ij}=X_i\\times_XX_j$, $X_{ijk}=X_i\\times_XX_j\\times_XX_k$ ([[def-fibre-product-schemes-universal-property]]). A descent datum for schemes relative to this covering is a family of $X_i$-schemes $V_i\\to X_i$ together with isomorphisms $\\varphi_{ij}\\colon \\mathrm{pr}_{X_i}^*V_i\\to\\mathrm{pr}_{X_i}^*V_j$ over $X_{ij}$ satisfying the cocycle condition $\\varphi_{ik}=\\varphi_{jk}\\circ\\varphi_{ij}$ over $X_{ijk}$ ([[def-morphism-of-schemes]]). A morphism of descent data is a family of compatible $X_i$-morphisms. The datum is effective when there is an $X$-scheme $V$ with compatible isomorphisms $V\\times_XX_i\\cong V_i$ over $X_i$ for all $i$; effectiveness means precisely that the datum is in the essential image of the base-change functor.",
+        "deps": [
+          "def-fppf-topology-on-schemes",
+          "def-fibre-product-schemes-universal-property",
+          "def-morphism-of-schemes",
+          "def-scheme-over-base"
+        ],
+        "strategy": "Definition of Stacks, *Descent*, Definition 35.34.1 (tag 023U), specialized to the fppf coverings of [[def-fppf-topology-on-schemes]]; the same notion is Vistoli Section 4.1.2. The cocycle condition is the standard one; a refinement of the covering induces an equivalence of categories of descent data (Vistoli Section 4.1.4), although this functoriality is not used below. No effectiveness is asserted in the definition.",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-standard-resolution-of-a-ring-map",
+        "kind": "definition",
+        "title": "The standard simplicial resolution of a ring map",
+        "statement": "Let $A\\to B$ be a ring homomorphism ([[def-ring-homomorphism]]) and for a set $S$ let $A[S]$ denote the polynomial $A$-algebra on $S$ ([[def-polynomial-ring-on-a-family-of-indeterminates]]). The standard resolution of $B$ over $A$ is the augmented simplicial $A$-algebra $\\epsilon\\colon P_\\bullet\\to B$ with $P_0=A[B]$, $P_1=A[A[B]]$, and in general $P_n=A[P_{n-1}]$; the face and degeneracy maps are induced by the counit $A[\\;]\\to\\mathrm{id}$ and unit $\\mathrm{id}\\to A[\\;]$ of the free-forgetful adjunction, and the augmentation $\\epsilon$ is induced by the structure map $A[B]\\to B$ ([[def-simplicial-object-and-simplicial-commutative-ring]]). Each $P_n$ is a polynomial $A$-algebra, and the augmentation is a weak equivalence of simplicial rings.",
+        "deps": [
+          "def-simplicial-object-and-simplicial-commutative-ring",
+          "def-ring-homomorphism",
+          "def-polynomial-ring-on-a-family-of-indeterminates",
+          "def-kahler-differentials-algebra",
+          "def-derivation-algebra"
+        ],
+        "strategy": "Definition 92.3.1 of Stacks, *The Cotangent Complex* (tag 08PM), with the adjunction construction of Stacks, *Simplicial Methods*, Example 14.34.7 (tag 09CB, the standard simplicial object of an adjunction). Well-definedness: the face and degeneracy maps are the canonical unit/counit maps, and the simplicial identities are the standard triangle identities of the adjunction; the augmentation is a trivial Kan fibration on underlying simplicial sets (Stacks Lemma 92.4.1, tag 08PS) and hence a weak equivalence. The same construction is the simplicial resolution used by Toen Section 4.1.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-fppf-sheafification-exists",
+        "kind": "lemma",
+        "title": "Sheafification exists for the fppf site",
+        "statement": "Assume the Axiom of Choice. For every presheaf of sets $F$ on $(\\mathit{Sch}/S)_{fppf}$ ([[def-fppf-sheaf-and-sheafification]]) there is an fppf sheaf $F^{\\mathrm a}$ and a morphism $F\\to F^{\\mathrm a}$ satisfying the universal property of the sheafification; it is unique up to unique isomorphism, the unit is an isomorphism if $F$ is already a sheaf, and sheafification is functorial and commutes with finite limits of sheaves. It is computed by the two-step plus construction $F^{\\mathrm a}=F^{++}$ over the fppf pretopology ([[def-fppf-topology-on-schemes]]).",
+        "deps": [
+          "def-fppf-sheaf-and-sheafification",
+          "def-axiom-of-choice",
+          "def-presheaf-representable-functor-and-representation",
+          "def-natural-transformation",
+          "def-equivalence-relation",
+          "def-fppf-topology-on-schemes"
+        ],
+        "strategy": "Use the full two-plus argument of Stacks Sites and Sheaves7.10 (00WB,00WG,00WH), also Vistoli2.3.7. Define F+(T) as the filtered colimit of compatible families over covers and refinements. Every plus section is locally an old F-section. Equality is equality after common refinement. These descriptions prove F+ is separated; if F is separated they show compatible plus sections glue, hence F+ is a sheaf. Therefore F++ is always a sheaf. A map F to a sheaf G sends a compatible family to its unique glued G-section, giving the unique map F++ to G and its universal property. Filtered colimits of sets commute with finite limits, and common refinements of finitely many covers exist, so the plus construction and hence sheafification preserve finite limits. The unit is an isomorphism for a sheaf. The assertion that F to F+ is universal for all separated presheaves is not used (it is false). AC is used to select cover representatives and common refinements, on the fixed big site of [[def-fppf-topology-on-schemes]].",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-representable-morphism-of-presheaves",
+        "kind": "definition",
+        "title": "Representable morphisms of presheaves and fibrewise properties",
+        "statement": "Let $F$ and $G$ be presheaves of sets on $(\\mathit{Sch}/S)_{fppf}$ ([[def-fppf-sheaf-and-sheafification]]) and let $a\\colon F\\to G$ be a morphism of presheaves ([[def-natural-transformation]]). For a morphism $\\xi\\colon T\\to G$ from an $S$-scheme $T$ the fibre product $F\\times_{G,\\xi}T$ is the presheaf $T'\\mapsto\\{(x,\\varphi):x\\in F(T'),\\ \\varphi\\colon T'\\to T,\\ a(x)=\\xi\\circ\\varphi\\}$ ([[def-fibre-product-schemes-universal-property]]). We say $a$ is representable by schemes when for all $T,\\xi$ this fibre product is representable by a scheme ([[def-presheaf-representable-functor-and-representation]], [[def-morphism-of-schemes]]). If $\\mathcal P$ is a property of morphisms of schemes stable under base change, a representable morphism $a$ has property $\\mathcal P$ when every base change to a scheme has $\\mathcal P$; this defines representable etale, flat, surjective, open-immersion and closed-immersion morphisms ([[def-etale-morphism-schemes]], [[def-flat-morphism-schemes]], [[def-open-immersion-schemes]], [[def-closed-immersion-schemes]]). A representable morphism of sheaves is surjective when every section of $G$ lifts fppf-locally to $F$; an etale cover is a representable, etale, surjective morphism.",
+        "deps": [
+          "def-fppf-topology-on-schemes",
+          "def-fppf-sheaf-and-sheafification",
+          "def-natural-transformation",
+          "def-fibre-product-schemes-universal-property",
+          "def-presheaf-representable-functor-and-representation",
+          "def-morphism-of-schemes",
+          "def-etale-morphism-schemes",
+          "def-flat-morphism-schemes",
+          "def-open-immersion-schemes",
+          "def-closed-immersion-schemes"
+        ],
+        "strategy": "Definition following Stacks, *Algebraic Spaces*, Definition 65.3.1 and Definition 65.5.1 (tags 02W9, 025V), with the fibrewise convention of Stacks 65.5.2-65.5.4 and Vistoli Chapter 2. Representability and the property calculus are fibrewise: base change of a representable morphism along any morphism of presheaves is representable, and properties stable under base change pull back; composition is handled by the corresponding scheme lemmas. Surjectivity of a morphism of sheaves is the fppf-local lifting condition, which is equivalent to surjectivity of the induced morphism of sheaves (Stacks 65.5.5). No representability is asserted for arbitrary presheaf morphisms.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-effective-fppf-descent-separated-locally-quasi-finite",
+        "kind": "lemma",
+        "title": "Effective fppf descent for separated locally quasi-finite morphisms",
+        "statement": "Assume the Axiom of Choice inherited from the Zariski Main and descent suppliers. Let $S$ be a scheme and let $\\{X_i\\to X\\}$ be an fppf covering of an $S$-scheme $X$ ([[def-fppf-topology-on-schemes]]). If $(V_i/X_i,\\varphi_{ij})$ is a descent datum for schemes ([[def-descent-data-for-schemes]]) and each $V_i\\to X_i$ is separated ([[def-separated-morphism-schemes]]) and locally quasi-finite ([[def-quasi-finite-morphism-schemes]]), then the descent datum is effective: there is a scheme $V\\to X$, separated and locally quasi-finite over $X$, with compatible isomorphisms $V\\times_XX_i\\cong V_i$.",
+        "deps": [
+          "def-fppf-topology-on-schemes",
+          "def-descent-data-for-schemes",
+          "def-separated-morphism-schemes",
+          "def-quasi-finite-morphism-schemes",
+          "def-flat-morphism-schemes",
+          "def-locally-finite-presentation-morphism",
+          "def-fibre-product-schemes-universal-property",
+          "lem-scheme-zariski-main-factorization-quasi-finite",
+          "lem-faithfully-flat-effective-descent-of-modules-and-algebras",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms",
+          "thm-flat-finite-presentation-is-open",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Full Stacks02W8 proof, with its prerequisites reproduced using published suppliers rather than the earlier unsupported closed-graph gluing description. Reduce over affine target opens to a single flat surjective finitely presented affine cover $X=\\operatorname{Spec}A\\to\\operatorname{Spec}R$: finite affine refinements exist by openness and target quasi-compactness, and effectiveness glues by uniqueness of morphism descent. For every affine open $W^1\\subseteq V$, let $W$ be its saturation under the descent transport. Because $X/R$ is flat finitely presented, saturation is open; it is quasi-compact as the image of $W^1\\times_RX$, and is stable by the cocycle condition. Thus $W\\to X$ is separated quasi-finite (it has finite type since $W$ is quasi-compact and locally quasi-finite). By [[lem-scheme-zariski-main-factorization-quasi-finite]] over affine $X$, it is open in a finite affine $X$-scheme, hence quasi-affine. To descend this stable quasi-affine $W$, use its canonical affinization $Z=\\operatorname{Spec}\\Gamma(W,\\mathcal O_W)$. A finite affine cover of the separated $W$ has affine pairwise intersections; its equalizer description of global sections shows flat base change commutes with $\\Gamma(W,-)$. It also shows that for a finite basic-open cover of $W$ inside an affine ambient scheme, localizing $\\Gamma(W,\\mathcal O_W)$ at each defining function gives the coordinate ring of that basic open: finite denominators in the equalizer can be cleared. Hence $W\\to Z$ is a quasi-compact open immersion. The descent transport induces compatible algebra descent on $\\Gamma(W,\\mathcal O_W)$, effective by [[lem-faithfully-flat-effective-descent-of-modules-and-algebras]], giving an affine scheme $Z_0$ downstairs. The open $W\\subseteq (Z_0)_X$ is saturated, so its image $W_0$ is open under the flat finitely presented projection and its inverse image is exactly $W$; equality follows from the cocycle and the nonzero tensor product of residue fields over a common field. Thus $W_0$ descends $W$. The stable saturated opens cover $V$. Their intersections inherit the same descent, and the unique compatible open inclusions and transition isomorphisms descend by [[lem-nonaffine-fppf-descent-of-scheme-morphisms]], then glue the $W_0$ into a scheme descending $V$. This is the exact saturation/quasi-affine/effective-descent/gluing route of02W8, valid without Noetherian hypotheses. Separatedness and local quasi-finiteness descend by their affine diagonal and finite-type finite-fiber criteria on the cover. AC is inherited from Zariski Main, affine refinements and morphism descent.",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-descent-data-and-stack-in-groupoids",
+        "kind": "definition",
+        "title": "Descent data, prestacks and stacks in groupoids over the fppf site",
+        "statement": "Let $p\\colon\\mathcal S\\to(\\mathit{Sch}/S)_{fppf}$ be a category fibred in groupoids ([[def-category-fibred-in-groupoids]]) over the fppf site ([[def-fppf-topology-on-schemes]]). For an fppf covering $\\{T_i\\to T\\}$ write $T_{ij}=T_i\\times_TT_j$ and $T_{ijk}=T_i\\times_TT_j\\times_TT_k$. Descent data for a family of objects $x_i$ of $\\mathcal S_{T_i}$ is a family of isomorphisms $\\varphi_{ij}\\colon x_i|_{T_{ij}}\\to x_j|_{T_{ij}}$ in $\\mathcal S_{T_{ij}}$ satisfying the cocycle condition $\\varphi_{ik}=\\varphi_{jk}\\circ\\varphi_{ij}$ over $T_{ijk}$; with the evident morphisms these form a category $\\mathrm{DD}(\\{T_i\\to T\\},(x_i))$. The fibred category $\\mathcal S$ is a prestack when for all objects $x,y$ of $\\mathcal S_T$ the presheaf $U\\mapsto\\operatorname{Mor}_{\\mathcal S_U}(x|_U,y|_U)$ on $(\\mathit{Sch}/T)_{fppf}$ is an fppf sheaf ([[def-fppf-sheaf-and-sheafification]]). It is a stack in groupoids when it is a prestack and every descent datum of objects is effective: for every covering the base-change functor $\\mathcal S_T\\to\\mathrm{DD}(\\{T_i\\to T\\})$ is an equivalence of categories. A presheaf of sets $F$ whose values are fppf sheaves determines a stack in setoids $\\mathcal S_F$, with $\\mathcal S_F(T)$ the discrete groupoid on $F(T)$; in particular every $S$-scheme $X$ determines the stack in groupoids $\\mathcal S_X$ with fibre category over $T$ the discrete groupoid on $\\operatorname{Mor}_S(T,X)$ ([[def-presheaf-representable-functor-and-representation]]).",
+        "deps": [
+          "def-category-fibred-in-groupoids",
+          "def-fppf-topology-on-schemes",
+          "def-fppf-sheaf-and-sheafification",
+          "def-presheaf-representable-functor-and-representation",
+          "def-fibre-product-schemes-universal-property"
+        ],
+        "strategy": "Definition following Stacks, *Stacks*, Definitions 8.4.1 and 8.5.1 with Lemmas 8.4.6 and 8.5.2-8.5.6 (tags 0268, 02ZH, 02ZC, 02ZI), and Vistoli, Chapter 4, Definition 4.6 and Proposition 4.16. The equivalence between effectivity of descent data and the sieve-theoretic sheaf condition is Stacks Lemma 8.4.6; the Hom-presheaf formulation is the prestack condition. The example of a representable fibre category as a stack in setoids is Vistoli Section 3.4 and Example 3.47; it is used below to compare schemes with stacks. Conventions: 'stack' always means stack in groupoids over the fppf site; all fibre categories are groupoids by definition.",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-cotangent-complex-of-a-ring-map",
+        "kind": "definition",
+        "title": "The cotangent complex of a ring map",
+        "statement": "Let $A\\to B$ be a ring homomorphism and let $\\epsilon\\colon P_\\bullet\\to B$ be its standard resolution ([[def-standard-resolution-of-a-ring-map]]). The cotangent complex $L_{B/A}$ is the complex of $B$-modules associated to the simplicial $B$-module $\\Omega_{P_\\bullet/A}\\otimes_{P_\\bullet,\\epsilon}B$ ([[def-kahler-differentials-algebra]], [[def-derivation-algebra]]): in degree $n$ it is $\\Omega_{P_n/A}\\otimes_{P_n}B$, and the differential is the alternating sum of the face maps ([[def-shift-of-a-chain-complex]], [[def-chain-complex-in-an-abelian-category]]). It is well defined as a complex, without any choice: the standard resolution is explicitly constructed. A simplicial resolution of $B$ over $A$ is any augmented simplicial $A$-algebra $Q_\\bullet\\to B$ with each $Q_n$ a polynomial $A$-algebra and the augmentation a weak equivalence; the independence of $L_{B/A}$ from the chosen resolution is the comparison theorem proved below.",
+        "deps": [
+          "def-standard-resolution-of-a-ring-map",
+          "def-simplicial-object-and-simplicial-commutative-ring",
+          "def-kahler-differentials-algebra",
+          "def-derivation-algebra",
+          "def-shift-of-a-chain-complex",
+          "def-chain-complex-in-an-abelian-category",
+          "def-quasi-isomorphism"
+        ],
+        "strategy": "Definition 92.3.2 of Stacks, *The Cotangent Complex* (tag 08PN), following Illusie; the simplicial module is converted to a complex by the Moore-complex convention of [[def-simplicial-object-and-simplicial-commutative-ring]]. Because the definition uses the explicitly constructed standard resolution, its well-definedness is immediate and does not require any comparison theorem. The basic computations $H^0(L_{B/A})\\cong\\Omega_{B/A}$ and $L_{B/A}\\simeq\\Omega_{B/A}[0]$ for polynomial $B$ are recorded as [[lem-cotangent-complex-h0-and-polynomial-case]]; general resolution independence is the separate comparison statement below.",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-quotient-fppf-sheaf-of-a-pre-relation",
+        "kind": "definition",
+        "title": "The fppf quotient sheaf of a pre-relation",
+        "statement": "Let $S$ be a scheme and let $s,t\\colon R\\to U$ be morphisms of $S$-schemes ([[def-morphism-of-schemes]]). For an $S$-scheme $T$, let $\\sim_T$ be the equivalence relation on $U(T)$ generated by the pairs $(s(\\xi),t(\\xi))$ for $\\xi\\in R(T)$ ([[def-equivalence-relation]], [[def-fibre-product-schemes-universal-property]]). The relations are compatible with restriction, so $T\\mapsto U(T)/{\\sim_T}$ is a presheaf, the naive quotient presheaf $P_{U/R}$. The fppf quotient sheaf $U/R$ is its sheafification ([[def-fppf-sheaf-and-sheafification]], [[lem-fppf-sheafification-exists]]): the initial fppf sheaf receiving $P_{U/R}$. Its construction uses the Axiom of Choice. If $S=\\operatorname{Spec}k$ is a field and $G$ is a group scheme of finite type over $k$ ([[def-group-scheme-over-a-field]]) acting on a $k$-scheme $U$, one takes $R=G\\times_kU$ with $s$ the second projection and $t$ the action morphism and writes $U/G$; for $U=G$ and a closed subgroup scheme $H\\subseteq G$ ([[def-morphism-and-closed-subgroup-scheme]]) acting by right translation one takes $R=G\\times_kH$, $s(g,h)=g$, $t(g,h)=gh$, and writes $G/H$. The naive quotient and the quotient sheaf differ in general and no representability is asserted.",
+        "deps": [
+          "def-fppf-topology-on-schemes",
+          "def-fppf-sheaf-and-sheafification",
+          "lem-fppf-sheafification-exists",
+          "def-morphism-of-schemes",
+          "def-fibre-product-schemes-universal-property",
+          "def-equivalence-relation",
+          "def-axiom-of-choice",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme"
+        ],
+        "strategy": "Definition fixing the general-base convention. Over a field it agrees with the field-level [[def-quotient-sheaf-and-representable-quotient]] used by the algebraic-group-actions pair. Sheafification exists by [[lem-fppf-sheafification-exists]] under AC, with the universal property of [[def-fppf-sheaf-and-sheafification]]. The distinction between the naive quotient, the fppf quotient sheaf and a representing scheme is exactly the one recorded at field level in that pair; here only the sheaf property is used. Neither flatness nor surjectivity of $s,t$ is assumed in the definition.",
+        "dependency_level": 3
+      },
+      {
+        "id": "def-algebraic-space-as-fppf-sheaf",
+        "kind": "definition",
+        "title": "Algebraic spaces over a scheme, defined as fppf sheaves",
+        "statement": "An algebraic space over $S$ is a presheaf of sets $F$ on $(\\mathit{Sch}/S)_{fppf}$ ([[def-fppf-sheaf-and-sheafification]]) such that: (1) $F$ is an fppf sheaf; (2) the diagonal morphism $F\\to F\\times F$ is representable by schemes ([[def-representable-morphism-of-presheaves]]); (3) there exists an $S$-scheme $U$ and a morphism $h_U\\to F$ which is representable, etale and surjective ([[def-etale-morphism-schemes]], [[def-presheaf-representable-functor-and-representation]], [[def-scheme]]). A morphism of algebraic spaces over $S$ is a natural transformation of the underlying presheaves; algebraic spaces over $S$ form a full subcategory of the presheaves of sets on the fppf site. A scheme $X$ over $S$ gives an algebraic space $h_X$, and this is a full embedding. No separatedness, quasi-compactness, finiteness or Noetherian hypothesis is part of the definition.",
+        "deps": [
+          "def-fppf-sheaf-and-sheafification",
+          "def-representable-morphism-of-presheaves",
+          "def-etale-morphism-schemes",
+          "def-presheaf-representable-functor-and-representation",
+          "def-scheme",
+          "def-morphism-of-schemes"
+        ],
+        "strategy": "Definition 65.6.1 of Stacks, *Algebraic Spaces* (tag 025Y), exactly at the sheaf level: the diagonal condition makes morphisms from schemes and between algebraic spaces representable, and condition (3) supplies an etale scheme cover. The basic example that every scheme is an algebraic space is Stacks Lemma 65.6.2 (tag 025Z), recorded locally as [[lem-scheme-functor-is-algebraic-space]]. The definition deliberately does not identify $F$ with a quotient sheaf; that identification is a theorem proved later on this page, and the analogous statement fails for stacks (the counterexample on the companion page). The conventions of the site are those of [[def-fppf-topology-on-schemes]].",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-cotangent-complex-h0-and-polynomial-case",
+        "kind": "lemma",
+        "title": "The cotangent complex computes differentials in degree zero and for polynomial algebras",
+        "statement": "(1) For every ring homomorphism $A\\to B$ one has $H^0(L_{B/A})\\cong\\Omega_{B/A}$ ([[def-cotangent-complex-of-a-ring-map]], [[def-kahler-differentials-algebra]], [[thm-kahler-differentials-existence-presentation]], [[def-homology-object-of-a-chain-complex]]). (2) If $B$ is a polynomial $A$-algebra, then $L_{B/A}$ is quasi-isomorphic to $\\Omega_{B/A}$ placed in degree $0$ ([[def-quasi-isomorphism]]).",
+        "deps": [
+          "def-cotangent-complex-of-a-ring-map",
+          "def-standard-resolution-of-a-ring-map",
+          "def-kahler-differentials-algebra",
+          "thm-kahler-differentials-existence-presentation",
+          "def-homology-object-of-a-chain-complex",
+          "def-quasi-isomorphism"
+        ],
+        "strategy": "Proofs of Stacks, *The Cotangent Complex*, Lemma 92.4.5 (tag 08QF) and Lemma 92.4.7 (tag 08QH), read in full. (1) Direct calculation with the Moore complex of the standard resolution: the degree-zero part of $\\Omega_{P_\\bullet/A}\\otimes_{P_\\bullet}B$ maps onto $\\Omega_{B/A}$ and the cokernel description of $H^0$ identifies the two. (2) For a free polynomial $A$-algebra the identity is already a resolution; the higher simplicial terms contribute acyclic complexes by Stacks Lemma 92.4.6 (tag 08QG). The proofs use only the explicit standard resolution, the presentation of Kähler differentials and the Moore complex.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-cotangent-complex-resolution-independence",
+        "kind": "lemma",
+        "title": "Independence of the cotangent complex from the chosen simplicial resolution",
+        "statement": "Assume the Axiom of Choice for the published derived-tensor and resolution-comparison suppliers ([[def-axiom-of-choice]]). Let $A\\to B$ be a ring map. Let $P_\\bullet\\to B$ and $Q_\\bullet\\to B$ be polynomial simplicial $A$-algebra resolutions with augmentations that are trivial Kan fibrations of simplicial sets, in the sense of Stacks92.5.5; the standard resolution is one such resolution ([[def-standard-resolution-of-a-ring-map]], [[def-simplicial-object-and-simplicial-commutative-ring]]). Their complexes $\\Omega_{P_\\bullet/A}\\otimes_{P_\\bullet}B$ and $\\Omega_{Q_\\bullet/A}\\otimes_{Q_\\bullet}B$ have canonical identifications with $L_{B/A}$ in $D(B)$ ([[def-cotangent-complex-of-a-ring-map]], [[def-derived-category-of-an-abelian-category]], [[def-quasi-isomorphism]]); hence they are canonically isomorphic there. The canonical comparison is in the derived category and need not be a distinguished direct chain map between the two chosen complexes. For any commutative square of ordinary ring maps $A\\to B$, $A'\\to B'$, $A\\to A'$ and $B\\to B'$, functoriality gives a canonical comparison $L_{B/A}\\otimes_B^{\\mathbf L}B'\\to L_{B'/A'}$. If the square induces a quasi-isomorphism $B\\otimes_A^{\\mathbf L}A'\\to B'$, this comparison is an isomorphism in $D(B')$. Equivalently, for the ordinary pushout $B'=B\\otimes_AA'$, it suffices that $\\operatorname{Tor}_i^A(B,A')=0$ for all $i>0$; in particular flat $A\\to A'$ suffices. If one writes $B'=B\\otimes_A^{\\mathbf L}A'$, this ordinary-ring statement applies when that derived tensor product is concentrated in degree zero. There is also the valid same-target special case: for composable maps $A\\to A'\\to B$ such that the canonical map $B\\otimes_A^{\\mathbf L}A'\\to B$ is a quasi-isomorphism, $L_{B/A}\\cong L_{B/A'}$ in $D(B)$, for example for a localization $A'=S^{-1}A$ through which $A\\to B$ factors. Cohomology and degree shifts are those of [[def-homology-object-of-a-chain-complex]] and [[def-shift-of-a-chain-complex]]. Derived module tensor and its Tor test use [[def-derived-tensor-product-in-the-bounded-above-setting]] and [[prop-homology-of-the-derived-tensor-product-is-tor]]; AC implies the latter supplier's Dependent Choice assumption.",
+        "deps": [
+          "def-cotangent-complex-of-a-ring-map",
+          "def-standard-resolution-of-a-ring-map",
+          "def-simplicial-object-and-simplicial-commutative-ring",
+          "def-derived-category-of-an-abelian-category",
+          "def-quasi-isomorphism",
+          "def-homology-object-of-a-chain-complex",
+          "def-shift-of-a-chain-complex",
+          "def-axiom-of-choice",
+          "def-derived-tensor-product-in-the-bounded-above-setting",
+          "prop-homology-of-the-derived-tensor-product-is-tor"
+        ],
+        "strategy": "Source-verified but still ESCALATED for local proof closure. Stacks92.5.5 (08QI), printed9, defines polynomial resolutions by trivial Kan fibrations and proves their computation of $L_{B/A}$ through92.4.1-92.4.3 and the derived lower shriek $L\\pi_!$. Its equivalent quasi-isomorphism formulation assumes each polynomial term surjects to the discrete B; for a weak-equivalence augmentation the degree-zero map surjects through $\\pi_0$, and degeneracies supply the other termwise surjections. Thus this ordinary-ring Stacks route does not require an additional unproved assertion that every degreewise polynomial object is cofibrant. Canonical comparison is the isomorphism of each resolution model with $L\\pi_!(\\Omega_{\\mathcal O/A}\\otimes_{\\mathcal O}B)$, not a bare choice of arbitrary resolution maps. Full Stacks92.6, printed11-12, constructs functoriality from the commutative square using standard resolutions. Lemma92.6.2 (08QQ) proves the displayed tensor comparison when $B\\otimes_A^{\\mathbf L}A'\\to B'$ is a quasi-isomorphism: a polynomial resolution tensored with A' remains a resolution precisely under this hypothesis, and Kähler differential base change identifies the complexes; flatness of their free terms computes the derived module tensor. Lemma92.8.1 (08QZ), printed17-18, proves the separate composable-chain/same-target localization comparison and is not an unrestricted change-of-target formula. Remaining local prerequisites are the trivial-Kan-resolution computation, derived lower shriek and its comparison/base-change formalism, and the derived tensor/module infrastructure needed to justify these identifications. Those proofs and exact dependency interfaces are not yet scaffolded locally; no readiness is claimed. For genuinely derived rings the homotopical module/cotangent construction must additionally be supplied before the derived-scheme consumer can use it. Toën's survey states that extension but does not prove it. This is a truthful proof/prerequisite hold, not a claim that the corrected formulas fail. The bounded-above derived module tensor and Tor identification are available from the exact published suppliers named in the statement, under AC (hence DC), including their required projective replacements and comparison data. They do not by themselves supply derived ring/module-cotangent functoriality or the local Lpi! argument. Exact per-clause source proof audit: research/frontier-40-geometry-braids-rep-27-owner-group-actions/derived-blocker-map.json. The central unprovided local theorem is Cohomology on Sites39.7(08Q9), with actual projective representable-presheaf replacement construction and contractible cosimplicial evaluation; category/coefficient change requires39.6(08Q8) and39.8(08QA). Full source proofs are retrieved, but no local item supplies those exact interfaces. A finite helper packet fits the page cap; it has not yet been constructed/certified. This is the precise remaining hold.",
+        "dependency_level": 3
+      },
+      {
+        "id": "def-morphism-and-fibre-products-of-algebraic-spaces",
+        "kind": "definition",
+        "title": "Morphisms, products and fibre products of algebraic spaces",
+        "statement": "Morphisms of algebraic spaces over $S$ are the natural transformations of their underlying presheaves ([[def-algebraic-space-as-fppf-sheaf]]); the category of algebraic spaces over $S$ is a full subcategory of the presheaves on $(\\mathit{Sch}/S)_{fppf}$. For algebraic spaces $F,G,H$ and morphisms $F\\to H$, $G\\to H$, the fibre product of presheaves $F\\times_HG$ is computed by $(F\\times_HG)(T)=F(T)\\times_{H(T)}G(T)$ ([[def-fibre-product-schemes-universal-property]], [[def-presheaf-representable-functor-and-representation]]); it is again an algebraic space over $S$ and represents the fibre product in the category of algebraic spaces. In particular products $F\\times_SG$ and the diagonal $\\Delta\\colon F\\to F\\times_SF$ are algebraic spaces over $S$; the diagonal is representable by schemes, and a morphism of algebraic spaces is separated when its diagonal is a closed immersion, etale when it is representable etale, and so on ([[def-representable-morphism-of-presheaves]]).",
+        "deps": [
+          "def-algebraic-space-as-fppf-sheaf",
+          "def-representable-morphism-of-presheaves",
+          "def-fibre-product-schemes-universal-property",
+          "def-presheaf-representable-functor-and-representation",
+          "def-open-immersion-schemes",
+          "def-closed-immersion-schemes"
+        ],
+        "strategy": "Definitions and the existence of fibre products, following Stacks, *Algebraic Spaces*, Definition 65.6.3 (tag 0260), Lemma 65.7.1 (tag 02X0) and Lemmas 65.7.2-65.7.3 (tags 02X1, 02X2). Proof outline: the presheaf fibre product is a sheaf because finite limits of sheaves are computed pointwise and the sheaf condition is an equalizer condition; its diagonal is the fibre product of the diagonals and is representable because representability is stable under fibre products; an etale surjective cover of the product comes from covers of the two factors, using that etale surjective representable morphisms are stable under products (Stacks 65.5.7, tag 02WM). Only formal properties of representable morphisms are used.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-scheme-functor-is-algebraic-space",
+        "kind": "lemma",
+        "title": "Every representable functor is an algebraic space",
+        "statement": "Assume the Axiom of Choice inherited from the quotient/sheaf and descent suppliers. For every $S$-scheme $T$ the representable presheaf $h_T$ ([[def-presheaf-representable-functor-and-representation]]) is an algebraic space over $S$ ([[def-algebraic-space-as-fppf-sheaf]]): $h_T$ is an fppf sheaf, its diagonal $h_T\\to h_T\\times h_T=h_{T\\times_ST}$ is representable by schemes because $T\\times_ST$ is a scheme ([[thm-fibre-products-of-schemes-exist]]), and the identity $h_T\\to h_T$ is representable, etale and surjective. Consequently $T\\mapsto h_T$ embeds the category of $S$-schemes fully faithfully into the category of algebraic spaces over $S$.",
+        "deps": [
+          "def-fppf-sheaf-and-sheafification",
+          "def-representable-morphism-of-presheaves",
+          "def-algebraic-space-as-fppf-sheaf",
+          "def-presheaf-representable-functor-and-representation",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms",
+          "def-fibre-product-schemes-universal-property",
+          "thm-fibre-products-of-schemes-exist",
+          "def-etale-morphism-schemes",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Proof of Stacks, *Algebraic Spaces*, Lemma 65.6.2 (tag 025Z), read in full. The sheaf property is the published [[lem-nonaffine-fppf-descent-of-scheme-morphisms]]; representability of the diagonal reduces to the scheme $T\\times_ST$ and the identification $h_T\\times h_T=h_{T\\times_ST}$; the identity is etale and surjective. Full faithfulness is Yoneda. AC is inherited from the published descent lemma.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-quotient-sheaf-base-change-along-flat-lfp-map",
+        "kind": "lemma",
+        "title": "Flat locally finitely presented restrictions give open subquotients",
+        "statement": "Assume the Axiom of Choice inherited from the quotient-sheaf suppliers. Let $s,t:R\\to U$ be an equivalence relation over $S$ with $s,t$ surjective, flat and locally of finite presentation, and let $g:U'\\to U$ be flat and locally of finite presentation. Form $R'=R\\times_{U\\times_SU}(U'\\times_SU')$ ([[lem-etale-equivalence-relation-restriction]]). Then $U'/R'\\to U/R$ is representable by schemes and an open immersion. Its image is the open subquotient corresponding to the saturated open $W=t(s^{-1}(g(U')))\\subseteq U$. It is an isomorphism when $W=U$, in particular when $g$ is surjective. No isomorphism or surjectivity is asserted for arbitrary $g$. Here quotient sheaves are those of [[def-quotient-fppf-sheaf-of-a-pre-relation]], and flat/lfp have the meanings of [[def-flat-morphism-schemes]] and [[def-locally-finite-presentation-morphism]].",
+        "deps": [
+          "def-fppf-topology-on-schemes",
+          "def-fppf-sheaf-and-sheafification",
+          "lem-fppf-sheafification-exists",
+          "def-quotient-fppf-sheaf-of-a-pre-relation",
+          "def-groupoid-in-schemes-and-etale-equivalence-relation",
+          "lem-etale-equivalence-relation-restriction",
+          "def-flat-morphism-schemes",
+          "def-locally-finite-presentation-morphism",
+          "def-fibre-product-schemes-universal-property",
+          "lem-flat-morphisms-stable-base-change",
+          "def-equivalence-relation",
+          "thm-flat-finite-presentation-is-open",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Reproduce Stacks02WU exactly. Write $W^1=g(U')$ and $W=t(s^{-1}(W^1))$; these are open by [[thm-flat-finite-presentation-is-open]], and the equivalence relation makes $W$ saturated. The map $F'=U'/R'\\to F=U/R$ is injective: representatives from $U'$ with the same $F$-class become related fppf-locally, and the unique relation arrow with those two endpoints lies in $R'$. For $a:T\\to F$ choose fppf local representatives $a_j:T_j\\to U$. On overlaps the relation arrows identify the opens $a_j^{-1}(W)$, so these descend to a unique open $W_T\\subseteq T$: the union of their images is open, and saturation makes its inverse images exactly the prescribed opens. The restricted section over $W_T$ lifts locally to $U'$ using the fppf cover $W_j\\times_W s^{-1}(W^1)\\times_{W^1}U'\\to W_j$ (with $t$ used for the map to $W$). Thus $W_T$ represents $T\\times_FF'$. Conversely any local lift to $U'$ has its representative in $W$, hence factors through $W_T$. This proves the representable open immersion. If $W=U$, every $W_T=T$ and the map is an isomorphism; a surjective $g$ ensures this condition. In particular a surjective etale cover preserves the quotient, whereas an affine open inclusion merely supplies an open subquotient, as required by02WW. AC is inherited from sheafification and represented-sheaf suppliers.",
+        "dependency_level": 4
+      },
+      {
+        "id": "def-derived-scheme-and-cotangent-complex",
+        "kind": "definition",
+        "title": "Derived schemes and the cotangent complex of a morphism",
+        "statement": "Assume the Axiom of Choice inherited from the cotangent-comparison suppliers used in the cotangent portion ([[def-axiom-of-choice]]). A derived scheme is a pair $(X,\\mathcal O_X)$ consisting of a topological space X and a sheaf of simplicial commutative rings $\\mathcal O_X$ such that $(X,\\pi_0\\mathcal O_X)$ is a scheme and each $\\pi_i\\mathcal O_X$, $i>0$, is a quasi-coherent module on that scheme ([[def-simplicial-object-and-simplicial-commutative-ring]], [[def-scheme]], [[def-quasi-coherent-module-scheme]]). Morphisms are taken in the homotopical category of derived locally ringed spaces and induce local morphisms on truncations. A scheme embeds as the constant/discrete derived scheme via $i:\\mathit{Sch}\\to\\mathit{dSch}$. The truncation $t_0(X)=(X,\\pi_0\\mathcal O_X)$ is right adjoint to this fully faithful inclusion: $\\operatorname{Map}_{\\mathit{dSch}}(iY,X)\\simeq\\operatorname{Hom}_{\\mathit{Sch}}(Y,t_0X)$, with the right side discrete. The counit is the canonical morphism $j_X:i(t_0X)\\to X$. For a morphism of derived schemes $f:X\\to Y$, the cotangent complex $L_{X/Y}$ is a quasi-coherent derived $\\mathcal O_X$-module, obtained by gluing the affine derived cotangent complexes: on $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ for derived rings it is the B-module cotangent complex representing relative derived derivations. For discrete ordinary A and B this is the ordinary ring-map complex of [[def-cotangent-complex-of-a-ring-map]], whose resolution/base-change comparisons are commissioned in [[lem-cotangent-complex-resolution-independence]]. The derived pullback $j_X^*L_{X/Y}$ is a complex of $\\pi_0\\mathcal O_X$-modules on $t_0X$; it must be distinguished from the full derived $\\mathcal O_X$-module $L_{X/Y}$. Its homology and shifts use [[def-homology-object-of-a-chain-complex]] and [[def-shift-of-a-chain-complex]]. These constructions require genuine homotopical module and cotangent comparisons, not merely applying the ordinary-ring definition to non-discrete simplicial rings.",
+        "deps": [
+          "def-simplicial-object-and-simplicial-commutative-ring",
+          "def-cotangent-complex-of-a-ring-map",
+          "lem-cotangent-complex-resolution-independence",
+          "def-quasi-coherent-module-scheme",
+          "def-scheme",
+          "def-quasi-isomorphism",
+          "def-shift-of-a-chain-complex",
+          "def-homology-object-of-a-chain-complex",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Definition and corrected interface, with the full cotangent portion still ESCALATED. Independently read Toën Definition2.1, printed172 (PDF20), Definition2.5 and truncation discussion, printed185 (PDF33), and the quasi-coherent/cotangent module discussion, printed190-192 (PDF38-40). On derived rings the discrete inclusion has left adjoint $\\pi_0$; affine spectrum reverses arrows, so on schemes the inclusion is the left adjoint and t0 is the right adjoint. The sheafwise canonical map $\\mathcal O_X\\to\\pi_0\\mathcal O_X$ supplies $j_X:t_0X\\to X$. Maps from a derived ring to a discrete ring factor through its $\\pi_0$, giving the affine mapping equivalence; the local-ring condition and descent glue it over scheme charts. Toën's printed adjunction display should be read with this variance and its explicitly stated canonical map j. The full cotangent complex belongs to the quasi-coherent derived module category over X, not the module category of its truncation; pullback along j gives the separate complex on t0X. Ordinary discrete rings recover Stacks92.3.2, and the held comparison item supplies the intended ordinary Tor-independent base-change interface. The general derived cotangent construction requires homotopical modules, universal derived derivations, comparison of valid resolution models and localization/descent of their module complexes. These proofs and suppliers remain unprovided locally, and Toën's survey imports them rather than proves them. Both ordinary comparison and this genuinely derived extension/gluing must close before authoring this entire commissioned item; neither portion is deleted or silently replaced by the truncation alone. The full HAGII text has now been retrieved and its pertinent arguments independently read. Proposition1.2.1.2 constructs affine cotangents by three Quillen adjunctions under assumptions1.1.0.1-1.1.0.4; Section2.2.1 instantiates them for simplicial modules/algebras using imported model/monoidal results. Theorem1.3.7.2 proves quasi-coherent module descent using strictification and assumption1.3.2.2(3). No local supplier establishes those homotopical model/descent interfaces. Exact clause-by-clause source dependencies and helper-feasibility assessment are in research/frontier-40-geometry-braids-rep-27-owner-group-actions/derived-blocker-map.json. The hold is unprovided local foundational proof closure, not failed source retrieval.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-presentation-from-surjective-etale-map",
+        "kind": "lemma",
+        "title": "Surjective etale maps from schemes give presentations",
+        "statement": "Assume the Axiom of Choice inherited from the quotient/sheaf and descent suppliers. Let $F$ be an algebraic space over $S$ ([[def-algebraic-space-as-fppf-sheaf]]), let $U$ be an $S$-scheme and let $f\\colon U\\to F$ be representable, etale and surjective ([[def-representable-morphism-of-presheaves]], [[def-etale-morphism-schemes]]). Set $R=U\\times_FU$ ([[def-morphism-and-fibre-products-of-algebraic-spaces]]) and let $j=(t,s)\\colon R\\to U\\times_SU$ be induced by the two projections. Then: (1) $j$ is an equivalence relation on $U$ over $S$ ([[def-groupoid-in-schemes-and-etale-equivalence-relation]]); (2) the projections $s,t\\colon R\\to U$ are etale; (3) the diagram $R\\rightrightarrows U\\xrightarrow{f}F$ is a coequalizer in fppf sheaves, that is, $F\\cong U/R$ as fppf quotient sheaves ([[def-quotient-fppf-sheaf-of-a-pre-relation]]).",
+        "deps": [
+          "def-algebraic-space-as-fppf-sheaf",
+          "def-representable-morphism-of-presheaves",
+          "def-etale-morphism-schemes",
+          "def-morphism-and-fibre-products-of-algebraic-spaces",
+          "def-groupoid-in-schemes-and-etale-equivalence-relation",
+          "def-quotient-fppf-sheaf-of-a-pre-relation",
+          "lem-etale-stable-base-change-composition",
+          "def-fibre-product-schemes-universal-property",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Transcription of Stacks, *Algebraic Spaces*, Lemma 65.9.1 (tag 0262). Steps: (1) $j$ is the base change of the diagonal $F\\to F\\times F$ along the representable morphism $U\\times_SU\\to F\\times F$, hence a monomorphism, and the groupoid axioms are those of the kernel pair of $f$; (2) etale morphisms are stable under base change, so $s,t$ are etale (published [[lem-etale-stable-base-change-composition]]); (3) the coequalizer statement is checked on fppf sheaves: a section of $F$ over $T$ lifts fppf-locally to $U$ by surjectivity of $f$, and two local lifts agree exactly when their difference lies in $R=U\\times_FU$. No finiteness or separation hypotheses are used.",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-open-immersion-gluing-of-algebraic-spaces",
+        "kind": "lemma",
+        "title": "Gluing algebraic spaces along open subfunctors",
+        "statement": "Assume the Axiom of Choice inherited from the quotient/sheaf and descent suppliers. Let $F$ be a presheaf of sets on $(\\mathit{Sch}/S)_{fppf}$ ([[def-fppf-sheaf-and-sheafification]]). (1) If $\\{F_i\\}_{i\\in I}$ are algebraic spaces over $S$ ([[def-algebraic-space-as-fppf-sheaf]]) and the disjoint union of suitable etale scheme covers is representable by an $S$-scheme, then $\\coprod_iF_i$ is an algebraic space. (2) Assume $F$ is an fppf sheaf and there are subfunctors $F_i\\subseteq F$ such that each $F_i$ is an algebraic space, each inclusion $F_i\\to F$ is representable and an open immersion ([[def-representable-morphism-of-presheaves]], [[def-open-immersion-schemes]]), the induced map $\\coprod_iF_i\\to F$ is surjective as a morphism of sheaves, and $\\coprod_iF_i$ is an algebraic space. Then $F$ is an algebraic space over $S$.",
+        "deps": [
+          "def-fppf-sheaf-and-sheafification",
+          "def-algebraic-space-as-fppf-sheaf",
+          "def-representable-morphism-of-presheaves",
+          "def-morphism-and-fibre-products-of-algebraic-spaces",
+          "def-open-immersion-schemes",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Proofs of Stacks, *Algebraic Spaces*, Lemma 65.8.4 (tag 02WQ) and Lemma 65.8.5 (tag 02WR), read in full. (1) The sheaf condition, representability of the diagonal and an etale cover are checked componentwise; the size hypothesis makes the disjoint union of the chosen covers an object of the site. (2) For $T\\to F$ the fibre products $F_i\\times_FT$ are open subschemes $V_i\\subseteq T$; surjectivity of $\\coprod F_i\\to F$ makes the $V_i$ cover $T$ fppf-locally, and the diagonal of $F$ is obtained by gluing the representable diagonals of the $F_i$ along the open overlaps. Only the sheaf condition and the existence of fibre products of algebraic spaces ([[def-morphism-and-fibre-products-of-algebraic-spaces]]) are used; AC enters only through covers already present in the data.",
+        "dependency_level": 5
+      },
+      {
+        "id": "def-morphism-representable-by-algebraic-spaces",
+        "kind": "definition",
+        "title": "Morphisms representable by algebraic spaces",
+        "statement": "Let $F\\to G$ be a morphism of presheaves of sets on $(\\mathit{Sch}/S)_{fppf}$ ([[def-fppf-sheaf-and-sheafification]]). It is representable by algebraic spaces when for every $S$-scheme $T$ and every morphism $T\\to G$ the fibre product $F\\times_GT$ is an algebraic space over $S$ ([[def-algebraic-space-as-fppf-sheaf]], [[def-fibre-product-schemes-universal-property]]). This generalizes representability by schemes ([[def-representable-morphism-of-presheaves]]), and a property of morphisms of algebraic spaces stable under base change is attributed to such a morphism fibrewise. A 1-morphism of stacks in groupoids $f\\colon\\mathcal X\\to\\mathcal Y$ over $(\\mathit{Sch}/S)_{fppf}$ ([[def-descent-data-and-stack-in-groupoids]]) is representable by algebraic spaces when for every $S$-scheme $T$ and every 1-morphism $T\\to\\mathcal Y$ (equivalently, every object $x\\in\\mathcal Y_T$, by the 2-Yoneda lemma) the 2-fibre product $\\mathcal X\\times_{\\mathcal Y,T}$ is equivalent to the stack in setoids $\\mathcal S_Z$ of an algebraic space $Z$ over $T$ ([[def-morphism-and-fibre-products-of-algebraic-spaces]]). Smooth, etale, surjective and other fibrewise properties are then defined by base change.",
+        "deps": [
+          "def-fppf-sheaf-and-sheafification",
+          "def-representable-morphism-of-presheaves",
+          "def-algebraic-space-as-fppf-sheaf",
+          "def-fibre-product-schemes-universal-property",
+          "def-descent-data-and-stack-in-groupoids",
+          "def-morphism-and-fibre-products-of-algebraic-spaces",
+          "def-natural-transformation"
+        ],
+        "strategy": "Definition of Stacks, *Morphisms of Spaces* chapter, Definition 80.3.1 (tag 02YQ), for presheaves, and Stacks, *Properties of Algebraic Stacks*, Definition 101.3.1 and Lemma 101.3.1 (tag 04XR, 04YQ context), for stacks; Vistoli Sections 3.6 and 4.1.1 for representable fibred categories. The 2-Yoneda identification of 1-morphisms $T\\to\\mathcal Y$ with objects of $\\mathcal Y_T$ is Vistoli Section 3.6.2 / Stacks Categories Lemma 4.41; 2-fibre products of stacks in groupoids are stacks in groupoids (Stacks Lemma 8.4.7). The definition contains no smoothness or surjectivity.",
+        "dependency_level": 5
+      },
+      {
+        "id": "def-presentation-of-an-algebraic-space",
+        "kind": "definition",
+        "title": "Presentations of algebraic spaces",
+        "statement": "A presentation of an algebraic space $F$ over $S$ ([[def-algebraic-space-as-fppf-sheaf]]) is a pair consisting of an $S$-scheme $U$, an etale equivalence relation $j=(s,t)\\colon R\\to U\\times_SU$ on $U$ over $S$ ([[def-groupoid-in-schemes-and-etale-equivalence-relation]]) and a surjective etale morphism $U\\to F$ such that $R=U\\times_FU$, i.e. such that $j$ identifies $R$ with the kernel pair of $U\\to F$. By [[lem-presentation-from-surjective-etale-map]] every surjective etale morphism from a scheme to $F$ yields a presentation. A presentation is quasi-compact when $U$ is quasi-compact; it is separated, locally separated or locally quasi-finite when $j$ is respectively a closed immersion, an immersion or separated and locally quasi-finite, and these properties depend only on $F$ and not on the chosen presentation.",
+        "deps": [
+          "def-algebraic-space-as-fppf-sheaf",
+          "def-groupoid-in-schemes-and-etale-equivalence-relation",
+          "lem-presentation-from-surjective-etale-map",
+          "def-fibre-product-schemes-universal-property",
+          "def-closed-immersion-schemes"
+        ],
+        "strategy": "Definition following Stacks, *Algebraic Spaces*, Definition 65.9.3 (tag 0263). Existence for any surjective etale map from a scheme is [[lem-presentation-from-surjective-etale-map]]. The independence of the presentation for the listed conditions is Stacks Lemma 65.13.1 (tag 02X4) and Lemma 65.11.3; it is stated as a convention and is not used by the structure theorem of this page. The morphism $U\\to F$ is representable etale surjective by construction and $R$ is a scheme because the diagonal of $F$ is representable.",
+        "dependency_level": 6
+      },
+      {
+        "id": "def-algebraic-stack-and-inertia",
+        "kind": "definition",
+        "title": "Algebraic stacks and their inertia stacks",
+        "statement": "An algebraic stack (Artin stack) over $S$ is a stack in groupoids $\\mathcal X$ over $(\\mathit{Sch}/S)_{fppf}$ ([[def-descent-data-and-stack-in-groupoids]]) such that (1) the diagonal 1-morphism $\\Delta\\colon\\mathcal X\\to\\mathcal X\\times_S\\mathcal X$ is representable by algebraic spaces ([[def-morphism-representable-by-algebraic-spaces]]) and (2) there exist an $S$-scheme $U$ and a 1-morphism $\\mathcal S_U\\to\\mathcal X$ which is representable by algebraic spaces, surjective and smooth ([[def-smooth-morphism-schemes]]). Such a pair $(U,\\mathcal S_U\\to\\mathcal X)$ is called a presentation of $\\mathcal X$; the stack is Deligne-Mumford when a presentation with $\\mathcal S_U\\to\\mathcal X$ etale can be chosen ([[def-etale-morphism-schemes]]). The inertia stack $\\mathcal I_{\\mathcal X}$ is the category fibred in groupoids whose fibre category over $T$ has objects the pairs $(x,\\alpha)$ with $x\\in\\operatorname{Ob}(\\mathcal X_T)$ and $\\alpha\\in\\operatorname{Aut}_{\\mathcal X_T}(x)$, and morphisms $(x,\\alpha)\\to(y,\\beta)$ over $f\\colon T'\\to T$ given by morphisms $\\gamma\\colon f^*x\\to f^*y$ with $\\gamma\\alpha=\\beta\\gamma$; the projection $\\mathcal I_{\\mathcal X}\\to\\mathcal X$, $(x,\\alpha)\\mapsto x$, is a 1-morphism. For a 1-morphism $\\mathcal X\\to\\mathcal Y$ the relative inertia $\\mathcal I_{\\mathcal X/\\mathcal Y}$ imposes the additional condition that the automorphism map to the identity of the image; both are stacks in groupoids when $\\mathcal X,\\mathcal Y$ are ([[def-descent-data-and-stack-in-groupoids]]).",
+        "deps": [
+          "def-descent-data-and-stack-in-groupoids",
+          "def-morphism-representable-by-algebraic-spaces",
+          "def-smooth-morphism-schemes",
+          "def-etale-morphism-schemes",
+          "def-category-fibred-in-groupoids"
+        ],
+        "strategy": "Definition of Stacks, *Algebraic Stacks*, Definition 94.12.1 (section tag 026N), with the inertia stack from Stacks, *Stacks*, Section 8.7 (tags 036X, 036Y) and *Categories*, Section 4.34 (tag 04Z2). The explicit object-and-morphism description of the inertia is equivalent to the 2-fibre product $\\mathcal X\\times_{\\Delta,\\mathcal X\\times_S\\mathcal X,\\Delta}\\mathcal X$ (Stacks Categories Lemma 4.34.1, tag 034H); the inertia of a stack in groupoids is again a stack in groupoids (Stacks Lemma 8.7.1, tag 036Y). No separatedness or finiteness is assumed. Condition (2) is stated with a 1-morphism from the stack of a scheme; by the conventions of Stacks 94.10.11 this is equivalent to asking for the corresponding representable morphism to be smooth and surjective.",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-quotient-map-etale-when-quotient-is-algebraic-space",
+        "kind": "lemma",
+        "title": "Quotient maps of etale equivalence relations are etale surjective",
+        "statement": "Assume the Axiom of Choice inherited from the quotient-sheaf suppliers. Let $j=(s,t)\\colon R\\to U\\times_SU$ be an etale equivalence relation on an $S$-scheme $U$ over $S$ ([[def-groupoid-in-schemes-and-etale-equivalence-relation]]) and let $F=U/R$ be its fppf quotient sheaf ([[def-quotient-fppf-sheaf-of-a-pre-relation]]). If $F$ is an algebraic space over $S$ ([[def-algebraic-space-as-fppf-sheaf]]), then the canonical morphism $c\\colon U\\to F$ is representable, etale and surjective; hence $(U,R,U\\to F)$ is a presentation of $F$ ([[def-presentation-of-an-algebraic-space]]).",
+        "deps": [
+          "def-quotient-fppf-sheaf-of-a-pre-relation",
+          "def-groupoid-in-schemes-and-etale-equivalence-relation",
+          "def-algebraic-space-as-fppf-sheaf",
+          "def-presentation-of-an-algebraic-space",
+          "def-representable-morphism-of-presheaves",
+          "def-etale-morphism-schemes",
+          "def-axiom-of-choice",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms",
+          "thm-faithfully-flat-descent-of-flatness",
+          "thm-etale-equivalent-flat-unramified-fp",
+          "lem-differentials-base-change",
+          "lem-quotient-sheaf-base-change-along-flat-lfp-map"
+        ],
+        "strategy": "Exact Stacks02WV proof. Since $F$ is already an algebraic space, $U\\to F$ is representable: for a scheme $T\\to F$, the fiber $T\\times_FU$ is the base change of the representable diagonal of $F$ along $(a,c):T\\times_SU\\to F\\times F$. The quotient-sheaf definition supplies fppf local representatives $a_i:T_i\\to U$, and the equivalence-relation kernel pair is $U\\times_FU\\cong R$: equality in the quotient is fppf-local relatedness and unique arrows glue because $R$ is representable and $j$ is a monomorphism. Thus the fiber over $T_i$ is $T_i\\times_{a_i,U,t}R$, etale and surjective since $t$ is etale and has the identity section. Etaleness and surjectivity descend on the target fppf cover (affine-local finite presentation, flatness and zero differentials). No separatedness of $t$ is assumed or required here, and no separated locally quasi-finite effectivity theorem is invoked for this already representable fiber. Hence $U\\to F$ is etale surjective, with kernel pair $R$, giving the presentation.",
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-inertia-of-a-stack-in-setoids",
+        "kind": "lemma",
+        "title": "The inertia of a stack in setoids is trivial",
+        "statement": "Let $\\mathcal X$ be a stack in groupoids over $(\\mathit{Sch}/S)_{fppf}$ ([[def-descent-data-and-stack-in-groupoids]]) all of whose fibre categories are setoids, i.e. all automorphism groups are trivial. Then the projection $\\mathcal I_{\\mathcal X}\\to\\mathcal X$ from the inertia stack ([[def-algebraic-stack-and-inertia]]) is an equivalence of stacks in groupoids ([[def-category-fibred-in-groupoids]]); conversely, if this projection is an equivalence then every fibre category of $\\mathcal X$ is a setoid. In particular, for an algebraic space $Z$ over $S$ ([[def-algebraic-space-as-fppf-sheaf]]), the fibre category of $\\mathcal I_{\\mathcal S_Z}$ over $T$ is the discrete groupoid on $\\operatorname{Mor}_S(T,Z)$, so $\\mathcal I_{\\mathcal S_Z}\\cong\\mathcal S_Z$.",
+        "deps": [
+          "def-descent-data-and-stack-in-groupoids",
+          "def-algebraic-stack-and-inertia",
+          "def-category-fibred-in-groupoids",
+          "def-algebraic-space-as-fppf-sheaf"
+        ],
+        "strategy": "Elementary verification, following Stacks, *Stacks*, Lemma 8.7.1 (tag 036Y) and the comparison statement that algebraic spaces are exactly the algebraic stacks with trivial inertia (Stacks Lemma 101.5.1(3), tag 04SZ). A 1-morphism of stacks in groupoids is an equivalence iff it is fully faithful and essentially surjective on fibre categories; on fibre categories over $T$ the projection sends $(x,\\alpha)$ to $x$, with fibre over $x$ the set $\\operatorname{Aut}(x)$, and its morphism part is an isomorphism precisely when the automorphism part is determined by $\\gamma$. Hence the projection is an equivalence iff all automorphism groups are trivial. For a stack in setoids the only automorphism of each object is its identity; every morphism automatically commutes with these identities. Thus the projection is fully faithful and essentially surjective, hence an equivalence. A setoid may have distinct isomorphic objects and need not be literally discrete. For the particular stack attached to a sheaf, its fibers are discrete by construction, so the asserted discrete-groupoid identification is literal.",
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-affine-etale-equivalence-relation-quotient",
+        "kind": "lemma",
+        "title": "The quotient of an affine etale equivalence relation is an algebraic space",
+        "statement": "Assume the Axiom of Choice inherited from the quotient and descent suppliers. Let $S$ be a scheme, let $U$ be an affine $S$-scheme and let $j=(s,t)\\colon R\\to U\\times_SU$ be an etale equivalence relation on $U$ over $S$ ([[def-groupoid-in-schemes-and-etale-equivalence-relation]]). Then the fppf quotient sheaf $F=U/R$ ([[def-quotient-fppf-sheaf-of-a-pre-relation]]) is an algebraic space over $S$ ([[def-algebraic-space-as-fppf-sheaf]]) and $U\\to F$ is representable, etale and surjective.",
+        "deps": [
+          "def-quotient-fppf-sheaf-of-a-pre-relation",
+          "def-groupoid-in-schemes-and-etale-equivalence-relation",
+          "def-algebraic-space-as-fppf-sheaf",
+          "def-morphism-and-fibre-products-of-algebraic-spaces",
+          "def-presentation-of-an-algebraic-space",
+          "lem-etale-equivalence-relation-restriction",
+          "lem-quotient-sheaf-base-change-along-flat-lfp-map",
+          "lem-quotient-map-etale-when-quotient-is-algebraic-space",
+          "lem-effective-fppf-descent-separated-locally-quasi-finite",
+          "def-descent-data-for-schemes",
+          "def-separated-morphism-schemes",
+          "def-monomorphism-and-epimorphism",
+          "def-etale-morphism-schemes",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Proof of Stacks, *Algebraic Spaces*, Lemma 65.10.4 (tag 0265), read in full. Step 1: $j$ is a monomorphism, hence separated; $U$ affine makes $U\\times_SU$ separated and $R$ separated; $s,t$ are separated etale, the composition $R\\to U\\times_SU\\to U$ is locally of finite type, so $j$ is locally of finite type and, being a monomorphism, locally quasi-finite. Step 2: representability of $c\\colon U\\to F$: for $T\\to F$ choose an fppf covering $\\{T_i\\to T\\}$ and $a_i\\colon T_i\\to U$ as in the proofs of [[lem-quotient-sheaf-base-change-along-flat-lfp-map]] and [[lem-quotient-map-etale-when-quotient-is-algebraic-space]]; then $T_i\\times_T(T\\times_FU)\\cong T_i\\times_{a_i,U,t}R$, separated and locally quasi-finite over $T_i$, and the descent datum is effective by [[lem-effective-fppf-descent-separated-locally-quasi-finite]]. Step 3: etaleness and surjectivity of $U\\to F$ follow since its base changes are base changes of the etale surjective $t$. Step 4: representability of the diagonal $F\\to F\\times F$: the square with $R\\to U\\times_SU$ and the diagonal is cartesian, $U\\times_SU\\to F\\times F$ is representable etale surjective, and representability is fppf-local on the target, again by effectivity of descent for separated locally quasi-finite morphisms (the pullbacks of $j$ are separated and locally quasi-finite; $j$ itself need not be etale). The affine hypothesis is used only in Step 1 to obtain separatedness of $U\\times_SU$ and $R$. The open-subquotient lemma is used only for local representatives; no nonsurjective restriction is treated as preserving the whole quotient. AC is inherited from the exact descent suppliers.",
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-algebraic-space-from-etale-equivalence-relation",
+        "kind": "theorem",
+        "title": "Quotients of schemes by etale equivalence relations are algebraic spaces",
+        "statement": "Assume the Axiom of Choice inherited from the quotient and descent suppliers. Let $S$ be a scheme, let $U$ be an $S$-scheme and let $j=(s,t)\\colon R\\to U\\times_SU$ be an etale equivalence relation on $U$ over $S$ ([[def-groupoid-in-schemes-and-etale-equivalence-relation]]). Then the fppf quotient sheaf $U/R$ ([[def-quotient-fppf-sheaf-of-a-pre-relation]]) is an algebraic space over $S$ ([[def-algebraic-space-as-fppf-sheaf]]), and $U\\to U/R$ is representable, etale and surjective; consequently $(U,R,U\\to U/R)$ is a presentation of $U/R$ ([[def-presentation-of-an-algebraic-space]]).",
+        "deps": [
+          "def-fppf-topology-on-schemes",
+          "def-fppf-sheaf-and-sheafification",
+          "def-quotient-fppf-sheaf-of-a-pre-relation",
+          "def-groupoid-in-schemes-and-etale-equivalence-relation",
+          "def-representable-morphism-of-presheaves",
+          "def-algebraic-space-as-fppf-sheaf",
+          "def-morphism-and-fibre-products-of-algebraic-spaces",
+          "def-presentation-of-an-algebraic-space",
+          "lem-etale-equivalence-relation-restriction",
+          "lem-quotient-sheaf-base-change-along-flat-lfp-map",
+          "lem-quotient-map-etale-when-quotient-is-algebraic-space",
+          "lem-affine-etale-equivalence-relation-quotient",
+          "lem-open-immersion-gluing-of-algebraic-spaces",
+          "lem-effective-fppf-descent-separated-locally-quasi-finite",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Proof of Stacks, *Algebraic Spaces*, Theorem 65.10.5 (tag 02WW), read in full. Steps: (1) by [[lem-quotient-map-etale-when-quotient-is-algebraic-space]] it suffices to prove that $U/R$ is an algebraic space; (2) replacing $U$ by a surjective etale cover $U'\\to U$ does not change the quotient: the restriction $R'=R|_{U'}$ is an etale equivalence relation by [[lem-etale-equivalence-relation-restriction]] and $U/R\\cong U'/R'$ by [[lem-quotient-sheaf-base-change-along-flat-lfp-map]]; choosing $U'=\\coprod_iU_i$ with $U_i$ affine open reduces to the case where $U$ is a disjoint union of affine schemes; (3) for each $i$ the restriction $R_i$ is an etale equivalence relation, $F_i=U_i/R_i$ is an algebraic space with $U_i\\to F_i$ etale surjective by [[lem-affine-etale-equivalence-relation-quotient]], and the induced maps $F_i\\to F$ are representable open immersions by the open-subquotient clause, with $\\coprod_iF_i\\to F$ surjective ([[lem-quotient-sheaf-base-change-along-flat-lfp-map]]); (4) $\\coprod_iF_i$ is an algebraic space (part (1) of [[lem-open-immersion-gluing-of-algebraic-spaces]] with the covers $U_i$) and all hypotheses of part (2) hold, so $F$ is an algebraic space; (5) $U\\to U/R$ is representable etale surjective by [[lem-quotient-map-etale-when-quotient-is-algebraic-space]], and the presentation statement is the definition. The two uses of02WU are distinct: the first is a surjective etale covering and hence an isomorphism; each individual affine inclusion uses only the representable open immersion. Their images cover because the affine opens cover the original U. AC is inherited from sheafification and the corrected descent chain.",
+        "dependency_level": 9
+      }
+    ]
+  },
+  {
+    "order": 908,
+    "id": "algebraic-spaces-stacks-and-derived-algebraic-geometry-foundations-examples",
+    "kind": "B",
+    "category": "scheme-theory",
+    "title": "Algebraic Spaces, Stacks, and Derived Algebraic Geometry Foundations — Examples",
+    "companion": "algebraic-spaces-stacks-and-derived-algebraic-geometry-foundations",
+    "requires": [
+      "algebraic-spaces-stacks-and-derived-algebraic-geometry-foundations"
+    ],
+    "items": [
+      {
+        "id": "ex-scheme-as-algebraic-space",
+        "kind": "example",
+        "title": "The affine line is an algebraic space",
+        "statement": "Assume the Axiom of Choice inherited from the quotient/sheaf and descent suppliers. Let $k$ be a field and let $\\mathbb A^1_k=\\operatorname{Spec}k[x]$ ([[def-affine-scheme]], [[def-scheme-over-base]]). Then $\\mathbb A^1_k$ is an algebraic space over $k$ ([[def-algebraic-space-as-fppf-sheaf]]). A presentation is given by $U=\\mathbb A^1_k$, the diagonal equivalence relation $R=\\Delta(\\mathbb A^1_k)\\subseteq\\mathbb A^1_k\\times_k\\mathbb A^1_k$ with its two projections ([[def-groupoid-in-schemes-and-etale-equivalence-relation]]), and the identity $U\\to\\mathbb A^1_k$; more generally every $k$-scheme is an algebraic space ([[lem-scheme-functor-is-algebraic-space]]).",
+        "deps": [
+          "def-affine-scheme",
+          "def-scheme-over-base",
+          "def-algebraic-space-as-fppf-sheaf",
+          "def-groupoid-in-schemes-and-etale-equivalence-relation",
+          "lem-scheme-functor-is-algebraic-space",
+          "def-fibre-product-schemes-universal-property",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Verification: by [[lem-scheme-functor-is-algebraic-space]] the representable functor $h_{\\mathbb A^1}$ is an algebraic space. The diagonal relation $R=\\Delta(\\mathbb A^1)$ has $s,t$ equal to inverse isomorphisms onto $U$, so it is an etale equivalence relation; its quotient sheaf is $h_{\\mathbb A^1}$ because the relation is already the kernel pair of the identity, and the identity is etale and surjective. The example also records that the etale equivalence relation of a presentation need not be finite or separated over $U$.",
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-classifying-stack-of-a-finite-group",
+        "kind": "example",
+        "title": "The classifying stack of a finite group",
+        "statement": "Assume the Axiom of Choice inherited from the descent suppliers below. Let $k$ be a field and let $G$ be a finite group (for instance $G=\\mathbb Z/2$), viewed as the constant group scheme $G_k$ over $k$ ([[def-group-scheme-over-a-field]]), acting trivially on $\\operatorname{Spec}k$. Let $BG$ be the category fibred in groupoids over $(\\mathit{Sch}/k)_{fppf}$ ([[def-category-fibred-in-groupoids]], [[def-fppf-topology-on-schemes]]) whose fibre category over a $k$-scheme $T$ has as objects the right $G$-torsors over $T$ - fppf coverings $P\\to T$ with a right $G$-action such that $G_k\\times_kP\\to P\\times_TP$, $(g,p)\\mapsto(pg,p)$, is an isomorphism - and as morphisms the isomorphisms of torsors. Then $BG$ is a stack in groupoids over $(\\mathit{Sch}/k)_{fppf}$ ([[def-descent-data-and-stack-in-groupoids]]) and an algebraic stack over $k$ ([[def-algebraic-stack-and-inertia]]) with presentation $\\operatorname{Spec}k\\to BG$ given by the trivial torsor $G_k\\to\\operatorname{Spec}k$. For the trivial torsor $G_T$, the automorphism sheaf as a right $G$-torsor is $G_T$ by left multiplication. If $G$ is abelian, for every torsor $P$ over $T$ its automorphism sheaf is canonically $G_T$ by right translation, and the inertia stack satisfies $\\mathcal I_{BG}\\cong G_k\\times_kBG$; over the trivial torsor in $BG(\\operatorname{Spec}k)$ the inertia objects are the pairs (trivial torsor, $g$) with $g\\in G$.",
+        "deps": [
+          "def-category-fibred-in-groupoids",
+          "def-fppf-topology-on-schemes",
+          "def-descent-data-and-stack-in-groupoids",
+          "def-algebraic-stack-and-inertia",
+          "def-group-scheme-over-a-field",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms",
+          "def-etale-morphism-schemes",
+          "def-faithfully-flat-morphism-schemes",
+          "def-morphism-and-fibre-products-of-algebraic-spaces",
+          "thm-effective-fpqc-descent-of-finite-etale-covers",
+          "def-axiom-of-choice",
+          "thm-flat-finite-presentation-is-open",
+          "def-smooth-morphism-schemes"
+        ],
+        "strategy": "Verification over arbitrary test schemes, under the AC of the published descent suppliers. (1) A right torsor $P\\to T$ in the statement trivializes over its own fppf cover by the given kernel-pair isomorphism. Over an affine open of $T$, refine this cover by finitely many affine opens of $P$ whose images cover the target; flat lfp morphisms are open. Their disjoint union $V\\to T$ is an affine faithfully flat quasi-compact lfp refinement, and $P_V\\cong G_V$ is finite etale. Its canonical descent datum is effective by [[thm-effective-fpqc-descent-of-finite-etale-covers]]. The descended finite etale scheme represents the same fppf sheaf as $P$, since their compatible local isomorphisms glue by [[lem-nonaffine-fppf-descent-of-scheme-morphisms]]; Yoneda identifies it with $P$. Thus every such torsor is finite etale and surjective over $T$, without any Noetherian assumption. Pullbacks of torsors therefore exist. (2) For a family of torsors with cocycle-compatible isomorphisms, refine an arbitrary fppf covering over each affine target open by a finite affine covering. Apply the finite-etale descent theorem on the single resulting affine fpqc refinement. The $G$-actions descend as morphisms, and the kernel-pair isomorphism descends with its inverse by the represented-sheaf supplier; the resulting finite etale scheme is a torsor, with surjectivity detected on the cover. Uniqueness and descent of equivariant maps follow from the same suppliers and glue across target opens. Hence $BG$ is a stack in groupoids. (3) For two torsors $P,Q$ over any $T$, their common finite etale surjective cover $U=P\\times_TQ\\to T$ trivializes both. The equivariant Isom sheaf becomes $G_U$, with transition maps induced by the two torsor trivializations; these satisfy the cocycle identity. Effective finite-etale descent represents it by a finite etale $T$-scheme. This proves representability of the diagonal $BG\\to BG\\times BG$, because its base change along the pair $(P,Q)$ is precisely this Isom sheaf. (4) The trivial torsor defines $\\operatorname{Spec}k\\to BG$; its base change by the object $P/T$ is the scheme $P$, since an equivariant isomorphism from $G_{T'}$ to $P_{T'}$ is determined by the image of the identity. Step (1) proves that this base change is finite etale and surjective, hence smooth and surjective; etale is standard smooth of relative dimension zero. Thus the morphism is a presentation and $BG$ is algebraic for every finite group $G$. This uses target fpqc descent of finite etale covers, not smoothness being local on the source. (5) On a trivial right torsor, equivariant automorphisms are left multiplication by $G(T)$. For a general torsor the local identifications differ by conjugation; if $G$ is abelian the conjugation transitions are identities. Equivalently right translation by a section of $G_T$ gives a canonical automorphism. Therefore $\\operatorname{Aut}_G(P)\\cong G_T$ in the abelian case, naturally with respect to torsor isomorphisms, and $\\mathcal I_{BG}\\cong G_k\\times_kBG$. Arbitrary torsors over $k$ need not be trivial; the stated inertia calculation over the trivial torsor is sufficient for the counterexample.",
+        "dependency_level": 7
+      },
+      {
+        "id": "cex-quotient-stack-need-not-be-a-scheme",
+        "kind": "counterexample",
+        "title": "A quotient stack need not be a scheme",
+        "statement": "Assume the Axiom of Choice inherited from the quotient-sheaf and classifying-stack suppliers. Let $k$ be a field and let $G$ be a nontrivial finite group, viewed as the constant group scheme over $k$ ([[def-group-scheme-over-a-field]]); for instance $G=\\mathbb Z/2$. The classifying stack $BG$ of [[ex-classifying-stack-of-a-finite-group]] is an algebraic stack over $k$ ([[def-algebraic-stack-and-inertia]]) but is not equivalent to the stack $\\mathcal S_X$ of any $k$-scheme $X$ ([[def-scheme]], [[def-descent-data-and-stack-in-groupoids]]). In particular, the quotient stack of the trivial action of $G$ on $\\operatorname{Spec}k$ is not a scheme, although the corresponding fppf quotient sheaf ([[def-quotient-sheaf-and-representable-quotient]]) is the representable sheaf $h_{\\operatorname{Spec}k}$: the passage from quotient sheaves to quotient stacks genuinely enlarges the category.",
+        "deps": [
+          "ex-classifying-stack-of-a-finite-group",
+          "def-algebraic-stack-and-inertia",
+          "def-descent-data-and-stack-in-groupoids",
+          "def-scheme",
+          "def-quotient-sheaf-and-representable-quotient",
+          "def-presheaf-representable-functor-and-representation",
+          "lem-inertia-of-a-stack-in-setoids",
+          "def-category-fibred-in-groupoids",
+          "def-group-scheme-over-a-field",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Proof under the AC hypotheses of the two suppliers. For a $k$-scheme $X$, the fibre category of $\\mathcal S_X$ over $\\operatorname{Spec}k$ is the discrete groupoid on the set $X(k)=\\operatorname{Mor}_k(\\operatorname{Spec}k,X)$ ([[def-descent-data-and-stack-in-groupoids]]); in particular all its automorphism groups are trivial, and by [[lem-inertia-of-a-stack-in-setoids]] its inertia is itself. An equivalence of stacks in groupoids induces equivalences of fibre categories ([[def-category-fibred-in-groupoids]]), and a groupoid equivalent to a discrete groupoid has trivial automorphism groups. But the fibre category $BG(\\operatorname{Spec}k)$ contains the trivial torsor $G_k$, whose automorphism group is $G_k(k)\\cong G$ by the automorphism computation of [[ex-classifying-stack-of-a-finite-group]]; this group is nontrivial, a contradiction. Finally, for the trivial action the naive quotient presheaf of the pre-relation $G\\times_k\\operatorname{Spec}k\\rightrightarrows\\operatorname{Spec}k$ is already $h_{\\operatorname{Spec}k}$, so its fppf quotient sheaf is $h_{\\operatorname{Spec}k}$ ([[def-quotient-sheaf-and-representable-quotient]] is the field-level convention used for this comparison); the quotient stack is $BG$, which is not even a scheme. The example separates quotient sheaves, algebraic spaces and stacks.",
+        "dependency_level": 8
+      }
+    ]
+  }
+]

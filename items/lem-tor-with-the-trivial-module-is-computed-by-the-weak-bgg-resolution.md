@@ -11,6 +11,18 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-8.md"
+      - "research/frontier-38-owner-30-alpha-batch-8-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-8-post.json"
+    reviewed_raw_sha256: "8c05e60bbaf51abebcc45f4e32a7e8c005f5c5135364b11e553436678a1288b9"
+    content_sha256: "2a743b5334c01d8034c5b36753a0654863fe20ae7f5183bd54f3ed880cc3dd2d"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass
@@ -59,6 +71,4 @@ where $W_k=\{w\in W:\ell(w)=k\}$. This is the dimension statement used by BGG in
 
 3.1 For every $k\ge1$ the map $\bar d_k$ is zero. Indeed, its source has weights $\{w\circ\lambda:\ell(w)=k\}$ and its target has weights $\{w'\circ\lambda:\ell(w')=k-1\}$ by step 2.1, and these two sets are disjoint by the pairwise distinctness in [F2]; an $\mathfrak h$-equivariant map sends a weight vector of weight $\mu$ into the weight-$\mu$ space of the target, so every basis vector of the source maps to $0$. [F2, step 2.1, step 1.2]
 
-4.1 Consequently, for $k\ge1$, the degree-$k$ homology of $B_\bullet(\lambda)/\mathfrak n^-B_\bullet(\lambda)$ equals $B_k(\lambda)/\mathfrak n^-B_k(\lambda)$ (all incoming and outgoing induced differentials at degree $k$ vanish by step 3.1), so
-$$\operatorname{Tor}_k^{U(\mathfrak n^-)}(\mathbb C,\Pi_\lambda)\cong B_k(\lambda)/\mathfrak n^-B_k(\lambda)\cong\mathbb C^{|W_k|}$$
-by steps 1.3 and 2.1. The claims about the vanishing induced differential and the weight multiset are steps 3.1 and 2.1, and for $k>|\Phi^+|$ the module is zero by [F5]. [F5, step 2.1, step 1.3, step 3.1] ∎
+4.1 Consequently, for $k\ge1$, the degree-$k$ homology of $B_\bullet(\lambda)/\mathfrak n^-B_\bullet(\lambda)$ equals $B_k(\lambda)/\mathfrak n^-B_k(\lambda)$ (all incoming and outgoing induced differentials at degree $k$ vanish by step 3.1), so $$\operatorname{Tor}_k^{U(\mathfrak n^-)}(\mathbb C,\Pi_\lambda)\cong B_k(\lambda)/\mathfrak n^-B_k(\lambda)\cong\mathbb C^{|W_k|}$$ by steps 1.3 and 2.1. The claims about the vanishing induced differential and the weight multiset are steps 3.1 and 2.1, and for $k>|\Phi^+|$ the module is zero by [F5]. [F5, step 2.1, step 1.3, step 3.1] ∎ 

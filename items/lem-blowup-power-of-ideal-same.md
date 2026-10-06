@@ -31,6 +31,17 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/052P"
       locator: "Definition 10.70.1, the Rees algebra definition; Veronese invariance is supplied by lem-proj-veronese-invariance"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post-5a.json"
+    content_sha256: "d40703e62e71f835b939a30ec765370d8618df8984d4f1c6d64bbe43c45dc474"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

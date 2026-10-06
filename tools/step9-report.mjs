@@ -10,11 +10,13 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync, lstatSync, mkdirSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
 import { protectedEntryHash, runScope, sha256, splitFrontmatter } from './step9-lib.mjs';
 import { resolveLineup } from './models.mjs';
 import { parseFrontmatter } from './content-policy-lib.mjs';
 import { TERMINAL_REJUDGE_ROUNDS } from './step7-terminal-resolution.mjs';
 import { verifyProofLayout, proofLayoutPath } from './proof-layout-receipt.mjs';
+import { activeOwnershipRows } from './defect-ownership.mjs';
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -128,20 +130,40 @@ function buildEvidence() {
   }
 
   const defects = jsonLines(paths.defects).filter((row) => row.run === run);
+  // Use the ledger's canonical history/taxonomy validator and ownership
+  // semantics. A superseded open observation remains historical evidence;
+  // only a valid current ownership row can establish a present fatal blocker.
+  const validation = spawnSync(process.execPath, [join(root, 'tools/defect-ledger.mjs'), 'validate',
+    '--run', run, '--ledger', paths.defects], { cwd: root, encoding: 'utf8' });
+  if (validation.error || validation.status !== 0)
+    die(`fatal defect ledger validation failed: ${validation.error?.message ?? (validation.stderr || validation.stdout).trim()}`);
+  const ownershipErrors = [];
+  const activeDefects = new Set(activeOwnershipRows(defects, ownershipErrors));
+  if (ownershipErrors.length) die(`fatal defect ledger ownership invalid: ${ownershipErrors.join('; ')}`);
+  const activeFatalBlockers = [...activeDefects].filter(row => row.severity === 'fatal'
+    && (!row.defect_id || !row.subject || ['open', 'unknown'].includes(row.disposition)));
+  if (activeFatalBlockers.length) die(`fatal defect ledger contains an incomplete or open active row: ${activeFatalBlockers
+    .map(row => `${row.defect_id ?? '(missing id)'} (${row.subject ?? '(missing subject)'}): ${row.disposition ?? 'unknown'}`).join('; ')}`);
+  const supersededBy = new Map(defects.flatMap(row => (row.supersedes ?? []).map(id => [id, row.defect_id])));
+  const currentOwner = row => {
+    let id = row.defect_id;
+    while (supersededBy.has(id)) id = supersededBy.get(id);
+    return id;
+  };
   const fatal = defects.filter((row) => row.severity === 'fatal').map((row) => ({
     defect_id: String(row.defect_id ?? ''),
     subject: String(row.subject ?? ''),
     class: String(row.class ?? 'unknown'),
     subclass: String(row.subclass ?? 'unknown'),
     location: String(row.location ?? 'unknown'),
-    disposition: String(row.disposition ?? 'unknown'),
+    disposition: activeDefects.has(row) ? String(row.disposition ?? 'unknown')
+      : `${row.disposition ?? 'unknown'} (historical; superseded by ${currentOwner(row)})`,
     caught_at_stage: String(row.caught_at_stage ?? 'unknown'),
     caught_by_role: String(row.caught_by_role ?? 'unknown'),
     repair_cost: String(row.repair_cost ?? 'unknown'),
     recurrence_of: row.recurrence_of ? String(row.recurrence_of) : null,
     note: String(row.subclass_note ?? ''),
   })).sort((a, b) => a.defect_id.localeCompare(b.defect_id));
-  if (fatal.some((row) => !row.defect_id || !row.subject || ['open', 'unknown'].includes(row.disposition))) die('fatal defect ledger contains an incomplete or open row');
 
   const judgeRows = jsonLines(paths.judge);
   const latest = new Map();

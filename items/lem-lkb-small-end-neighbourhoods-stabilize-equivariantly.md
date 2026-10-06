@@ -8,6 +8,7 @@ deps: []
 dependency_level: undefined
 proof_strategy: direct
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for lem-lkb-small-end-neighbourhoods-stabilize-equivariantly and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-16; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"a493ce1ff0d835ae112bf1ca6cd2e87ff5d9ced5de84ffec29c257bbdebb5056","evidence":["research/frontier-38-owner-30-reader-16.md","research/frontier-38-owner-30-reader-findings-16.json","research/frontier-38-owner-30-dispatch/reader-reader-16.result.json","research/frontier-38-owner-30-step5-hash-16-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/lem-lkb-small-end-neighbourhoods-stabilize-equivariantly.md","historical_raw_sha256":"5caefdb9cdc2f5b0df8b05da6b970c8eec780877ba7c8ede8385d3a6439ffa49","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:46:55.326Z"}}
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

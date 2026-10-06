@@ -40,10 +40,9 @@ $$\left|\int_E f\,d\nu\right|\le \int_E |f|\,d|\nu|.$$
 
 **Proof technique:** direct.
 
-1.1 By [L1], choose complex simple functions $s_n$ with [L1, L2]
-$\int |f-s_n|\,d|\nu|\to0$ and $$\int f\,d\nu=\lim_n \int s_n\,d\nu.$$ Applying [L2] to $s_n-s_m$ shows that $(\int s_n\,d\nu)$ is Cauchy.
+1.1 By [L1], choose complex simple functions $s_n$ with [L1, L2] $\int |f-s_n|\,d|\nu|\to0$ and $$\int f\,d\nu=\lim_n \int s_n\,d\nu.$$ Applying [L2] to $s_n-s_m$ shows that $(\int s_n\,d\nu)$ is Cauchy. [L1, L2]
 
-2.1 By [L2], [L1, L2, step 1.1]
-$$\left|\int s_n\,d\nu\right|\le \int |s_n|\,d|\nu|\le \int |f|\,d|\nu|+\int |f-s_n|\,d|\nu|.$$ Letting $n\to\infty$ in step 1.1 yields $$\left|\int f\,d\nu\right|\le \int |f|\,d|\nu|.$$ Applying the same argument to $f\mathbf 1_E$ gives the measurable-subset version.
+2.1 By [L2], [L1, L2, step 1.1] $$\left|\int s_n\,d\nu\right|\le \int |s_n|\,d|\nu|\le \int |f|\,d|\nu|+\int |f-s_n|\,d|\nu|.$$ Letting $n\to\infty$ in step 1.1 yields $$\left|\int f\,d\nu\right|\le \int |f|\,d|\nu|.$$ Applying the same argument to $f\mathbf 1_E$ gives the measurable-subset version. [L2, L1, step 1.1]
 
-3.1 Step 2.1 proves both inequalities. [step 2.1] ∎
+3.1 Step 2.1 proves both inequalities. [step 2.1]. [step 2.1] ∎
+

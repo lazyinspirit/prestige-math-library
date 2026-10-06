@@ -8,7 +8,18 @@ deps: ["def-rational-action-on-affine-variety", "prop-affine-algebraic-actions-c
 provenance: {"statement": "literature-derived", "proof": "ai-altered"}
 sources: {"references": [{"title": "Michel Brion, Introduction to actions of algebraic groups (2010)", "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf", "locator": "§1.1, Definitions 1.4, 1.6, 1.8, Lemma 1.5, Example 1.7 and Proposition 1.9; printed pp. 3–4"}, {"title": "Philippe Gille, Introduction to reductive group schemes over rings, full notes retrieved 2026-10-02", "url": "https://www.math.ens.psl.eu/~gille/prenotes/reductive.pdf", "locator": "§6, Proposition 6.0.5, pp. 25–27; Proposition 6.2.1, pp. 30–31; Theorem 6.3.1, p. 32"}, {"title": "J. S. Milne, Algebraic Groups (2022)", "url": "https://www.jmilne.org/math/Books/iAG2022.pdf", "locator": "§4(a) Remark 4.1, pp. 83–84; Proposition 4.7 and Corollary 4.8, p. 86; Theorem 12.12 and Remark 12.13, printed pp. 234–235"}]}
 proof_strategy: direct
-verification: {"precheck": "pass", judge: {model: "gpt-6.1-sol", verdict: pass, date: 2026-10-03}}
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: completed-cumulative-mathematical-review
+    date: 2026-10-03
+    scope: "Cumulative verification supported by existing completed mathematical readings. Original complete Step 5a reader evidence research/frontier-38-owner-30-reader-23.md. Saved source: git d90f26208, items/lem-torus-rational-modules-and-gradings.md. Exact comparison establishes only publication-status serialization, verification, whitespace/display wrapping, step reordering/renumbering and justification-tag permutation differences; every proof paragraph and step reference has the recorded exact bijection in /tmp/frontier39-verification-result-2.json. No mathematical wording or premise changed. This reconciliation adds no new mathematical review, independent post-repair audit, source reading or judge acceptance."
+    delegated_by: "owner via tools/autopilot frontier-38-owner-30 reader-23 dispatch"
+  precheck: pass
+  judge:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
 ---
 
 ## Statement

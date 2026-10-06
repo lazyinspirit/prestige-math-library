@@ -17,6 +17,18 @@ deps:
   - thm-flat-quotients-preserve-short-exact-tensor-sequences
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-30.md"
+      - "research/frontier-38-owner-30-alpha-batch-30-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-30-post.json"
+    reviewed_raw_sha256: "247a3882d4c6acaf95695ad9e0be0c85188fcacdcb79819cda307e1a5ad81dd2"
+    content_sha256: "4a4455d681d1141651ded3538eeb17ffee4224f349512ad9c686a92715064510"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

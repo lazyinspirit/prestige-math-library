@@ -28,6 +28,17 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf"
       locator: "Exercise 19.3.B and 19.3.5, pp. 385-388"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u2.json"
+    content_sha256: "acff972a619ea9b24a726daaef33a4a7d9007158de6b58916e23630f074e2864"
   precheck: pass
 ---
 

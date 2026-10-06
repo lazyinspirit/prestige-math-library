@@ -72,6 +72,9 @@ export function projectFrontierGate(check, result, frontier, allIds) {
     // Widening candidates are advisory in this detector and cannot cause exit 1.
     if (!Array.isArray(document.widening)) malformed = true;
   } else if (check === 'depsource') {
+    // Selected-consumer scope errors are global adapter failures, independent
+    // of unresolved dependency rows; never exclude them with an outside item.
+    projected.errors = partition(Object.hasOwn(document, 'errors') ? document.errors : [], () => null);
     if (!Array.isArray(document.rows)) malformed = true;
     else {
       const errors = document.rows.filter(row => row?.verdict === 'unresolved');
@@ -103,6 +106,10 @@ export function frontierGateBattery(ctx, gates) {
     const argv = typeof gate.argv === 'function' ? gate.argv() : gate.argv;
     if (gate.id === 'defect-ledger') return { ...gate, argv: [...argv, '--frontier', path], projectResult: preserveRaw };
     if (native.has(gate.id)) {
+      // The manifest adapter already supplies a nonempty item/page selection.
+      // Appending paths after its `--` turns them into unsupported tool flags.
+      if (argv.some(arg => typeof arg === 'string' && /(?:^|\/)frontier-item-gate\.mjs$/.test(arg)))
+        return { ...gate, argv, projectResult: preserveRaw };
       const files = gateScope.ids.map(id => `items/${id}.md`);
       return { ...gate, argv: [...argv, ...files], needs: [...(typeof gate.needs === 'function' ? gate.needs() : gate.needs ?? []), ...files], projectResult: preserveRaw };
     }

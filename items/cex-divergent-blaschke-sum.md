@@ -11,6 +11,16 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical full authored item reading and acceptance restored through exact saved source/git carrier comparison. Original exact Step5 POST source recovered from alpha20 dispatch log raw SHA66162a255448eb0a698fc33c6b4a2e6ef3af08bd5cef5c88e60cfe2076c4ff9d. Later repair changes exactly F5 to compact-finite positive finite multiplicities/nonzero realization and3.1 to verify n<=1/(1-rho). Private Step6 report Every actual direct consumer paragraph1 expressly reads full remaining counterexample and checks new candidate. Candidate content hash matches closed carrier; root integration records reviewed argument. Statement refuted and all other proof rows unchanged. Current versus closed changes status only; no judge-only acceptance used. Local repair reviews retain their recorded limits; no new independent audit is claimed."
+    evidence:
+      - "research/frontier-38-owner-30-step6-zero-divisor-report.md"
+      - "research/frontier-38-owner-30-alpha-batch-20-5a.md"
+    content_sha256: "7a1943a5949c8df21580d00386c35cfc6956a8fac7e84d23c178c5890ee4397f"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

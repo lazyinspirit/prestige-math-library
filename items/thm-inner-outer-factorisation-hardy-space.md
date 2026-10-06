@@ -10,6 +10,13 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "historical complete Step5 reader; item thm-inner-outer-factorisation-hardy-space; evidence research/frontier-38-owner-30-reader-20.md, research/frontier-38-owner-30-reader-findings-20.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
+    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
 sources:
   references:
     - title: "J. B. Garnett, Bounded Analytic Functions, revised first edition, Chapter II §5, Corollary 5.7"

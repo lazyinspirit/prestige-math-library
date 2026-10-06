@@ -21,6 +21,17 @@ sources:
     - title: "Okounkov-Vershik, A New Approach to the Representation Theory of the Symmetric Groups, Selecta Math. (N.S.) 2 (1996) 581-605; complete arXiv repost math/0503040, section 5, printed pp. 19-22"
       url: "https://arxiv.org/pdf/math/0503040"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-19.md"
+      - "research/frontier-38-owner-30-alpha-batch-19-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-19-post-5a.json"
+    content_sha256: "c6b7133bc12aaa7d90ad81ee615b3279daf46d9e4da7eb451a862f9ef83f89b3"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

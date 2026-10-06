@@ -35,6 +35,17 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01OF"
       locator: "Definition 31.33.1 and Lemma 31.33.2; Section 31.34 strict transforms"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post-5a.json"
+    content_sha256: "20199b3a848d055c2adc2dbb27a0c973f9059ecdb782ce2a8a6052bb1ca679ae"
   precheck: pass
 ---
 

@@ -1,0 +1,583 @@
+[
+  {
+    "order": 875,
+    "id": "lie-algebras-and-infinitesimal-group-schemes",
+    "kind": "A",
+    "category": "scheme-theory",
+    "title": "Lie Algebras and Infinitesimal Group Schemes",
+    "companion": "lie-algebras-and-infinitesimal-group-schemes-examples",
+    "requires": [
+      "group-schemes-of-finite-type-over-a-field",
+      "affine-group-schemes-hopf-algebras-and-rational-representations",
+      "kahler-differentials-conormal-sequences-and-infinitesimal-lifting",
+      "zariski-tangent-spaces-regular-points-smoothness-and-bertini",
+      "linear-recurrences-and-rational-generating-functions",
+      "lie-algebra-representations-enveloping-algebras-and-pbw",
+      "flat-smooth-and-etale-morphisms"
+    ],
+    "items": [
+      {
+        "id": "def-lie-algebra-of-a-group-scheme",
+        "kind": "definition",
+        "title": "The Lie algebra of a group scheme",
+        "statement": "Let $k$ be a field and let $G$ be a group scheme of finite type over $k$ ([[def-group-scheme-over-a-field]]) with identity point $e=e_G\\in G(k)$. Let $\\mathfrak m_e=\\ker(\\varepsilon:\\mathcal O_{G,e}\\to k)$ be the maximal ideal of the local ring of $G$ at $e$ and let $T_{G/k,e}=\\operatorname{Hom}_k(\\mathfrak m_e/\\mathfrak m_e^2,k)$ be the tangent space of $G$ over $k$ at $e$ ([[def-relative-cotangent-space]], [[thm-cotangent-space-maximal-ideal-quotient]]). The **Lie algebra of $G$** is $\\operatorname{Lie}(G):=T_{G/k,e}$, written $\\mathfrak g=\\operatorname{Lie}(G)$. By [[thm-tangent-vectors-dual-numbers]] the tangent space is canonically the set of $k$-morphisms $\\tau:\\operatorname{Spec}k[\\varepsilon]/(\\varepsilon^2)\\to G$ whose composite with $\\varepsilon\\mapsto0$ is $e$, that is, $\\operatorname{Lie}(G)\\cong\\ker\\bigl(G(k[\\varepsilon])\\to G(k)\\bigr)$; for a commutative $k$-algebra $R$ one writes $\\operatorname{Lie}(G)(R):=\\ker\\bigl(G(R[\\varepsilon])\\to G(R)\\bigr)$ with $R[\\varepsilon]=R\\otimes_k k[\\varepsilon]$, and the elements are written $e^{\\varepsilon X}$. The vector-space structure, the naturality of these identifications and their agreement with the cotangent description are proved in [[lem-lie-algebra-tangent-space-and-functoriality]], which is the well-definedness statement for this definition. No affineness, reducedness, smoothness, or characteristic hypothesis is imposed, and $G$ need not be affine.",
+        "deps": [
+          "def-group-scheme-over-a-field",
+          "def-relative-cotangent-space",
+          "thm-tangent-vectors-dual-numbers",
+          "thm-cotangent-space-maximal-ideal-quotient",
+          "def-dual-numbers-scheme",
+          "def-residue-field-scheme-point",
+          "def-vector-space"
+        ],
+        "strategy": "Definition: take the tangent space at the identity as the Lie algebra and record the two descriptions (dual of the cotangent space, and dual-number points reducing to $e$) fixed by the published tangent-space theorems; the identity $e$ is a $k$-rational point, so those theorems apply. The vector-space structure and functoriality are deliberately not asserted here; they are the content of the referenced lemma.",
+        "justified_by": [
+          "lem-lie-algebra-tangent-space-and-functoriality"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 10 §10(b), 10.6 and display (56), printed pp. 188-189 (PDF 199-200): L(G) = ker(G(k[epsilon]) -> G(k)) = Hom_k(I_G/I_G^2, k)."
+            },
+            {
+              "title": "SGA 3, Expose II (M. Demazure), Fibres tangents - Algebres de Lie, corrected 14 October 2024 edition",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp2-14oct24.pdf",
+              "locator": "§3.9-3.11 and §4.1: Lie(G/S,M) as the kernel of the tangent morphism, with the adjoint operation."
+            },
+            {
+              "title": "The Stacks Project, Groupoid Schemes chapter",
+              "url": "https://stacks.math.columbia.edu/download/groupoids.pdf",
+              "locator": "Lemma 39.6.3 [047I] and Lemma 39.6.4 [0BF5], printed pp. 12-13: the tangent module at the identity and addition on tangent vectors."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "proof_strategy": "not-applicable"
+      },
+      {
+        "id": "lem-lie-algebra-tangent-space-and-functoriality",
+        "kind": "lemma",
+        "title": "The tangent space at the identity is a vector space, and Lie is a functor",
+        "statement": "Let $k$ be a field and let $G$ be a group scheme of finite type over $k$ with Lie algebra $\\mathfrak g=\\operatorname{Lie}(G)$ ([[def-lie-algebra-of-a-group-scheme]]). (a) For every commutative $k$-algebra $R$, the set $\\operatorname{Lie}(G)(R)=\\ker(G(R[\\varepsilon])\\to G(R))$ is an abelian group under the multiplication of $G(R[\\varepsilon])$; this multiplication is addition for a natural $R$-module structure on $\\operatorname{Lie}(G)(R)$, and there is a natural $R$-linear isomorphism $\\operatorname{Lie}(G)(R)\\cong\\mathfrak g\\otimes_kR$. In particular $\\mathfrak g$ is a finite-dimensional $k$-vector space, and the bijections of [[def-lie-algebra-of-a-group-scheme]] with $\\operatorname{Hom}_k(\\mathfrak m_e/\\mathfrak m_e^2,k)$ and with the dual-number points are isomorphisms of $k$-vector spaces. (b) A morphism $f:G\\to H$ of group schemes of finite type over $k$ induces a $k$-linear map $\\operatorname{Lie}(f):\\mathfrak g\\to\\mathfrak h$, with $\\operatorname{Lie}(\\operatorname{id})=\\operatorname{id}$ and $\\operatorname{Lie}(g\\circ f)=\\operatorname{Lie}(g)\\circ\\operatorname{Lie}(f)$, and $f_R(e^{\\varepsilon X})=e^{\\varepsilon\\operatorname{Lie}(f)_R(X)}$ for $X\\in\\operatorname{Lie}(G)(R)$. If $f$ is a closed immersion ([[def-closed-immersion-schemes]]) then $\\operatorname{Lie}(f)$ is injective. The proof makes only finite selections and uses no choice principle.",
+        "deps": [
+          "def-lie-algebra-of-a-group-scheme",
+          "def-group-scheme-over-a-field",
+          "thm-tangent-vectors-dual-numbers",
+          "thm-cotangent-space-maximal-ideal-quotient",
+          "lem-differentials-commute-base-change-schemes",
+          "def-relative-cotangent-space",
+          "def-dual-numbers-scheme",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-coproduct-property-of-tensor-products-of-commutative-algebras",
+          "def-closed-immersion-schemes",
+          "def-linear-map",
+          "thm-hom-tensor-adjunction-for-modules",
+          "lem-differential-of-morphism-via-cotangent-map",
+          "def-morphism-and-closed-subgroup-scheme",
+          "thm-fibre-products-of-schemes-exist",
+          "def-zariski-tangent-space-point",
+          "thm-steinitz-exchange",
+          "lem-dependent-iff-a-vector-lies-in-the-span-of-the-others",
+          "def-linear-basis",
+          "def-linear-independence",
+          "def-linear-combination-and-span",
+          "def-linear-isomorphism-and-invertible-linear-map"
+        ],
+        "strategy": "Direct. (a) The multiplication of $G(R[\\varepsilon])$ restricts to the kernel of the reduction; it is commutative because the induced map of tangent spaces in the first variable is the identity by $m\\circ(\\operatorname{id},e)=\\operatorname{id}$ and in the second by $m\\circ(e,\\operatorname{id})=\\operatorname{id}$, and the induced maps are additive, so $(X,Y)\\mapsto X+Y$. Scalar multiplication comes from the $k$-algebra endomorphism $\\varepsilon\\mapsto c\\varepsilon$ of $k[\\varepsilon]$ (functoriality in $R$). Base change to $R$ gives $\\operatorname{Lie}(G)(R)\\cong T_{G_R/R,e_R}\\cong\\operatorname{Lie}(G)\\otimes_kR$ by [[lem-differentials-commute-base-change-schemes]] together with the naturality in [[thm-tangent-vectors-dual-numbers]], and finite-dimensionality follows because $\\mathcal O_{G,e}$ is Noetherian, so $\\mathfrak m_e$ is finitely generated. (b) Functoriality is the naturality of the tangent-space identification, and the exponential identity is its dual-number form; a closed immersion is a monomorphism, so its map on dual-number points reducing to the identity is injective.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "10.11, 10.14 and 10.19, printed pp. 189-192 (PDF 200-203): e^{epsilon(X+X')} = e^{epsilon X}e^{epsilon X'}, functoriality f(e^{epsilon X}) = e^{epsilon Lie(f)X}, and g(R) = g tensor R."
+            },
+            {
+              "title": "SGA 3, Expose II (M. Demazure), Fibres tangents - Algebres de Lie, corrected 14 October 2024 edition",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp2-14oct24.pdf",
+              "locator": "§3.7, §3.9 and §4.1.B with note (50): functoriality of the tangent functor and injectivity on monomorphisms."
+            },
+            {
+              "title": "The Stacks Project, Groupoid Schemes chapter",
+              "url": "https://stacks.math.columbia.edu/download/groupoids.pdf",
+              "locator": "Lemma 39.6.4 [0BF5], printed p. 13: composition with the multiplication is addition of tangent vectors."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-adjoint-representation-of-an-affine-group-scheme",
+        "kind": "lemma",
+        "title": "The adjoint representation of an affine group scheme",
+        "statement": "Let $k$ be a field and let $G$ be an affine group scheme of finite type over $k$ with Lie algebra $\\mathfrak g=\\operatorname{Lie}(G)$ ([[def-lie-algebra-of-a-group-scheme]]). (a) For every commutative $k$-algebra $R$ and $x\\in G(R)$, conjugation $y\\mapsto xyx^{-1}$ in $G(R[\\varepsilon])$ restricts to an $R$-linear automorphism $\\operatorname{Ad}(x)$ of $\\operatorname{Lie}(G)(R)=\\mathfrak g\\otimes_kR$, and $x\\mapsto\\operatorname{Ad}(x)$ is a natural homomorphism of groups; under the identification $\\operatorname{Lie}(G)(R)\\cong\\mathfrak g\\otimes_kR$ it is a natural transformation $h_G\\to h_{\\operatorname{GL}_{\\mathfrak g}}$, hence a morphism of $k$-group schemes $\\operatorname{Ad}:G\\to\\operatorname{GL}_{\\mathfrak g}$, the **adjoint representation** of $G$. (b) For all $x\\in G(R)$ and $X\\in\\mathfrak g\\otimes_kR$ one has $x\\,e^{\\varepsilon X}\\,x^{-1}=e^{\\varepsilon\\operatorname{Ad}(x)X}$ in $G(R[\\varepsilon])$. (c) For a morphism $f:G\\to H$ of affine group schemes of finite type over $k$ and all $x\\in G(R)$ one has $\\operatorname{Ad}_H(f(x))\\circ\\operatorname{Lie}(f)=\\operatorname{Lie}(f)\\circ\\operatorname{Ad}_G(x)$; equivalently, $\\operatorname{Ad}$ is natural in $G$.",
+        "deps": [
+          "def-lie-algebra-of-a-group-scheme",
+          "lem-lie-algebra-tangent-space-and-functoriality",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring",
+          "thm-affine-schemes-determined-by-functor-of-points",
+          "thm-yoneda-lemma-is-natural-in-both-variables",
+          "def-linear-basis",
+          "def-linear-map",
+          "def-linear-isomorphism-and-invertible-linear-map",
+          "def-group-scheme-over-a-field",
+          "def-functor-of-points-affine-scheme"
+        ],
+        "strategy": "Conjugation by $x\\in G(R)$ is an automorphism of the group $G(R[\\varepsilon])$ that preserves the kernel $\\mathfrak g\\otimes_kR$, and clause (b) defines $\\operatorname{Ad}(x)X$; additivity and $R$-linearity in $X$ follow from the exponential identities of [[lem-lie-algebra-tangent-space-and-functoriality]] applied to the products, and multiplicativity and naturality in $R$ are immediate from the functoriality of the group law. Choosing a $k$-basis of $\\mathfrak g$ identifies $\\operatorname{GL}_{\\mathfrak g}$ with the general linear group scheme of [[lem-general-linear-group-scheme-and-its-coordinate-ring]], so the natural transformation is induced by a morphism of affine schemes by [[thm-affine-schemes-determined-by-functor-of-points]] and [[thm-yoneda-lemma-is-natural-in-both-variables]]. Clause (c) follows by applying the functoriality of the exponential correspondence to the identity of (b) and comparing at the identity of $H$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "10.18-10.21 and display (61), printed pp. 191-193 (PDF 202-204): the adjoint action, x e^{epsilon X} x^{-1} = e^{epsilon Ad(x)X}, and commutativity of the adjoint diagram."
+            },
+            {
+              "title": "SGA 3, Expose II (M. Demazure), Fibres tangents - Algebres de Lie, corrected 14 October 2024 edition",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp2-14oct24.pdf",
+              "locator": "Definition 4.1.A, Proposition 4.1.1 and Remarque 4.1.C, printed pp. 59-60: Ad(x)X = i^{-1}(s(x)i(X)s(x)^{-1}) and naturality in the group."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-lie-algebra-of-the-general-linear-group",
+        "kind": "lemma",
+        "title": "The Lie algebra of the general linear group",
+        "statement": "Let $k$ be a field and $n\\ge1$. Under the identification $\\operatorname{GL}_n=\\operatorname{Spec}k[x_{ij},d^{-1}]$ of [[lem-general-linear-group-scheme-and-its-coordinate-ring]], the tangent space at the identity is $\\operatorname{Lie}(\\operatorname{GL}_n)\\cong M_n(k)=\\mathfrak{gl}_n$, the isomorphism sending a matrix $X$ to the dual-number point $I_n+\\varepsilon X$; in particular $\\operatorname{Lie}(\\mathbf G_m)\\cong k$ for $n=1$, generated by the class of $x_{11}-1$ (equivalently of $t-1$). For matrices $X,Y$ the commutator of the lifts $I+\\varepsilon X$ and $I+\\varepsilon'Y$ in $\\operatorname{GL}_n\\bigl(k[t,t']/(t^2,t'^2)\\bigr)$ is $I+tt'(XY-YX)$, and the adjoint representation of [[lem-adjoint-representation-of-an-affine-group-scheme]] satisfies $\\operatorname{Ad}(A)X=AXA^{-1}$ for all commutative $k$-algebras $R$, $A\\in\\operatorname{GL}_n(R)$ and $X\\in M_n(R)$.",
+        "deps": [
+          "def-lie-algebra-of-a-group-scheme",
+          "lem-lie-algebra-tangent-space-and-functoriality",
+          "lem-adjoint-representation-of-an-affine-group-scheme",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring",
+          "thm-cotangent-space-maximal-ideal-quotient",
+          "def-relative-cotangent-space",
+          "def-linear-basis",
+          "thm-ring-matrix-arithmetic-laws",
+          "cor-inverse-matrix-by-adjugate",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-determinant-of-a-square-matrix",
+          "def-trace-of-a-square-matrix-over-a-commutative-ring"
+        ],
+        "strategy": "Compute in the coordinate ring $k[x_{ij},d^{-1}]$: the augmentation is $x_{ij}\\mapsto\\delta_{ij}$, so the augmentation ideal is generated by the elements $x_{ij}-\\delta_{ij}$ and their classes form a $k$-basis of $\\mathfrak m_e/\\mathfrak m_e^2$, while $d$ maps to a unit; this gives $\\operatorname{Lie}(\\operatorname{GL}_n)\\cong M_n(k)$ with inverse map $X\\mapsto I+\\varepsilon X$. Expanding the product $(I+\\varepsilon X)(I+\\varepsilon'Y)(I-\\varepsilon X)(I-\\varepsilon'Y)$ and using $\\varepsilon^2=(\\varepsilon')^2=0$ gives $I+\\varepsilon\\varepsilon'(XY-YX)$; the adjoint formula is the same conjugation computation on dual-number points.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "10.7 and display (57), printed p. 189 (PDF 200): L(GLn) = {I + A epsilon}, [A,B] = AB - BA as the epsilon^2 commutator."
+            },
+            {
+              "title": "SGA 3, Expose II (M. Demazure), Fibres tangents - Algebres de Lie, corrected 14 October 2024 edition",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp2-14oct24.pdf",
+              "locator": "Proposition 4.8, printed pp. 87-88: Ad(g)Y = g o Y o g^{-1} and [X,Y] = X o Y - Y o X for the automorphism group of a module."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-lie-bracket-and-adjoint-action-from-infinitesimals",
+        "kind": "theorem",
+        "title": "The Lie bracket from infinitesimals and the adjoint action",
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field and let $G$ be an affine group scheme of finite type over $k$ with Lie algebra $\\mathfrak g=\\operatorname{Lie}(G)$ and adjoint representation $\\operatorname{Ad}:G\\to\\operatorname{GL}_{\\mathfrak g}$ ([[lem-adjoint-representation-of-an-affine-group-scheme]]). (a) The differential $\\operatorname{ad}:=\\operatorname{Lie}(\\operatorname{Ad}):\\mathfrak g\\to\\operatorname{End}(\\mathfrak g)$ is $k$-linear and $[X,Y]:=\\operatorname{ad}(X)(Y)$ makes $\\mathfrak g$ a Lie algebra over $k$ ([[def-lie-algebra-over-a-field]]), with $\\operatorname{ad}(X)$ a derivation of $\\mathfrak g$ for every $X$ ([[def-derivation-of-a-lie-algebra]]). (b) The bracket is functorial: for a morphism $f:G\\to H$ of affine group schemes of finite type over $k$, the map $\\operatorname{Lie}(f):\\mathfrak g\\to\\mathfrak h$ is a homomorphism of Lie algebras. (c) For $X,Y\\in\\mathfrak g$, in $G\\bigl(k[t,t']/(t^2,t'^2)\\bigr)$ one has $e^{tX}e^{t'Y}e^{-tX}e^{-t'Y}=e^{tt'[X,Y]}$, where $X,Y$ are regarded in $\\mathfrak g\\otimes_kk[t,t']/(t^2,t'^2)$ through the two factors; equivalently, $[X,Y]$ is the unique element of $\\mathfrak g$ whose image under the ring map $k[\\varepsilon]\\to k[t,t']/(t^2,t'^2)$, $\\varepsilon\\mapsto tt'$, is the commutator of the two dual-number lifts. (d) If $G=\\operatorname{GL}_n$ then $[X,Y]=XY-YX$ under the identification $\\mathfrak g=\\mathfrak{gl}_n$ of [[lem-lie-algebra-of-the-general-linear-group]]. (e) A closed immersion of affine group schemes of finite type over $k$ induces an injective homomorphism of Lie algebras; consequently two bracket assignments on the Lie algebras of affine group schemes of finite type over $k$ which are functorial in $G$ and give the matrix commutator on $\\operatorname{GL}_n$ agree. The Axiom of Choice is used only in (e), through the faithful finite-dimensional representation theorem [[thm-affine-group-scheme-faithful-finite-dimensional-representation]].",
+        "deps": [
+          "def-coordinate-hopf-algebra-of-affine-group-scheme",
+          "def-lie-algebra-over-a-field",
+          "def-lie-algebra-of-a-group-scheme",
+          "lem-lie-algebra-tangent-space-and-functoriality",
+          "lem-adjoint-representation-of-an-affine-group-scheme",
+          "lem-lie-algebra-of-the-general-linear-group",
+          "thm-affine-group-scheme-faithful-finite-dimensional-representation",
+          "def-derivation-of-a-lie-algebra",
+          "def-axiom-of-choice",
+          "def-linear-map",
+          "thm-ring-matrix-arithmetic-laws",
+          "def-closed-immersion-schemes",
+          "def-linear-basis"
+        ],
+        "strategy": "Define $\\operatorname{ad}=\\operatorname{Lie}(\\operatorname{Ad})$ and $[X,Y]=\\operatorname{ad}(X)Y$. Clause (b) follows from the naturality of $\\operatorname{Ad}$ (clause (c) of the adjoint-representation lemma) and of $\\operatorname{Lie}$ by differentiating $\\operatorname{Ad}_H(f(x))\\operatorname{Lie}(f)=\\operatorname{Lie}(f)\\operatorname{Ad}_G(x)$ at the identity. Clause (c) follows from $x\\,e^{\\varepsilon Y}x^{-1}=e^{\\varepsilon\\operatorname{Ad}(x)Y}$ with $x=e^{tX}$ and $\\operatorname{Ad}(e^{tX})=\\operatorname{id}+t\\operatorname{ad}(X)$ modulo $t^2$, using additivity of the exponential correspondence. Antisymmetry is obtained from (c) by comparing the two commutators, which are inverse to each other; Jacobi follows by applying (b) to $\\operatorname{Ad}:G\\to\\operatorname{GL}_{\\mathfrak g}$ and using the matrix case (d): $\\operatorname{ad}([X,Y])=[\\operatorname{ad}X,\\operatorname{ad}Y]=\\operatorname{ad}X\\operatorname{ad}Y-\\operatorname{ad}Y\\operatorname{ad}X$, which applied to $Z$ is the Jacobi identity and shows $\\operatorname{ad}(X)\\in\\operatorname{Der}(\\mathfrak g)$. Clause (d) is [[lem-lie-algebra-of-the-general-linear-group]]. Clause (e): injectivity of $\\operatorname{Lie}$ on closed immersions is [[lem-lie-algebra-tangent-space-and-functoriality]], the faithful representation exists by [[thm-affine-group-scheme-faithful-finite-dimensional-representation]], and functoriality forces the bracket on $\\mathfrak g$ to be the pullback of the matrix commutator along an injection, hence determines it.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "10.20-10.23, printed pp. 192-194 (PDF 203-205): the bracket [x,y] = ad(x)y, its functoriality, uniqueness through faithful representations, and the GLn commutator."
+            },
+            {
+              "title": "SGA 3, Expose II (M. Demazure), Fibres tangents - Algebres de Lie, corrected 14 October 2024 edition",
+              "url": "https://webusers.imj-prg.fr/~patrick.polo/SGA3/Exp2-14oct24.pdf",
+              "locator": "Definition 4.7.2, 4.7.3 with note (79), Corollaire 4.8.1 and Scholie 4.9, printed pp. 85-88: the bracket via the commutator of lifts, functoriality, skew-symmetry and Jacobi."
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-invariant-differentials-of-a-group-scheme",
+        "kind": "lemma",
+        "title": "Invariant differentials and the cotangent space at the identity",
+        "statement": "Let $k$ be a field and let $G$ be a group scheme of finite type over $k$ with structure morphism $f:G\\to\\operatorname{Spec}k$ and identity $e:\\operatorname{Spec}k\\to G$. Then there is a canonical isomorphism of $\\mathcal O_G$-modules $\\Omega_{G/k}\\cong f^*e^*\\Omega_{G/k}$ (the module of invariant differentials), and $e^*\\Omega_{G/k}\\cong\\mathfrak m_e/\\mathfrak m_e^2$ is the cotangent space of $G$ at the identity. Consequently $\\Omega_{G/k}\\cong\\mathcal O_G\\otimes_k(\\mathfrak m_e/\\mathfrak m_e^2)$ is a free $\\mathcal O_G$-module of rank $\\dim_k\\operatorname{Lie}(G)$; moreover, for every $k$-rational point $x\\in G(k)$, left translation by $x$ identifies the cotangent space $\\Omega_{G/k}\\otimes_{\\mathcal O_{G,x}}\\kappa(x)$ with $\\mathfrak m_e/\\mathfrak m_e^2$.",
+        "deps": [
+          "def-group-scheme-over-a-field",
+          "def-sheaf-relative-differentials",
+          "lem-differentials-commute-base-change-schemes",
+          "def-relative-cotangent-space",
+          "thm-cotangent-space-maximal-ideal-quotient",
+          "def-pullback-module-ringed-spaces",
+          "thm-fibre-products-of-schemes-exist",
+          "lem-differential-of-morphism-via-cotangent-map",
+          "def-zariski-tangent-space-point"
+        ],
+        "strategy": "Follow the shearing-automorphism proof of Stacks 39.6.3, valid for group schemes over any base. View $G\\times_kG$ as a $G$-scheme through the second projection; by [[lem-differentials-commute-base-change-schemes]] applied to the base change of $G\\to\\operatorname{Spec}k$ along itself, $\\Omega_{G\\times_kG/G}\\cong\\operatorname{pr}_0^*\\Omega_{G/k}$ for the first projection $\\operatorname{pr}_0$. The shearing map $\\tau(g,h)=(m(g,h),h)$ is an automorphism of $G\\times_kG$ over the second projection, with inverse $(u,h)\\mapsto(m(u,i(h)),h)$ built from multiplication and inversion; pulling the base-change isomorphism back along $\\tau$ gives $m^*\\Omega_{G/k}\\cong\\operatorname{pr}_0^*\\Omega_{G/k}$, and pulling back along $(e\\circ f,\\operatorname{id}_G):G\\to G\\times_kG$ gives $\\Omega_{G/k}\\cong f^*e^*\\Omega_{G/k}$. The identification of $e^*\\Omega_{G/k}$ with $\\mathfrak m_e/\\mathfrak m_e^2$ is [[thm-cotangent-space-maximal-ideal-quotient]] at the $k$-rational point $e$, and freeness follows because a quasicoherent sheaf on $\\operatorname{Spec}k$ is a $k$-vector space.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Groupoid Schemes chapter",
+              "url": "https://stacks.math.columbia.edu/download/groupoids.pdf",
+              "locator": "Lemma 39.6.3 [047I], printed p. 12: Omega_{G/S} = f^*C_{S/G} = f^*e^*Omega_{G/S}, with the shearing-map proof."
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "10.6 and display (56) with the discussion of the augmentation ideal, printed pp. 188-189 (PDF 199-200)."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-differentials-generating-a-free-direct-summand-are-nonzerodivisors",
+        "kind": "lemma",
+        "title": "A differential generating a free direct summand is a nonzerodivisor",
+        "statement": "Assume the Axiom of Choice. Let $R\\to S$ be a homomorphism of commutative rings with $S$ a nonzero $\\mathbb Q$-algebra, and let $f\\in S$. Assume that there is an $S$-linear map $\\theta:\\Omega_{S/R}\\to S$ with $\\theta(\\mathrm df)=1$; equivalently, $S\\,\\mathrm df$ is freely generated by $\\mathrm df$ and $\\Omega_{S/R}=S\\,\\mathrm df\\oplus C$ for an $S$-submodule $C$ (then $\\theta$ is projection onto this free summand and $C=\\ker\\theta$). Then $f$ is not nilpotent, and if $S$ is a Noetherian local ring then $f$ is a nonzerodivisor. No finiteness of $S$ over $R$ is assumed. The Axiom of Choice is used only through the Krull intersection theorem in the nonzerodivisor statement.",
+        "deps": [
+          "def-derivation-algebra",
+          "def-kahler-differentials-algebra",
+          "thm-krull-intersection-theorem",
+          "def-local-ring",
+          "def-noetherian-ring",
+          "def-axiom-of-choice",
+          "thm-local-ring-unit-characterisations",
+          "def-jacobson-radical-of-a-ring"
+        ],
+        "strategy": "Define the $R$-derivation $D:S\\to S$ by $D(a)=\\theta(\\mathrm da)$; then $D(f)=1$ and $D(f^n)=nf^{n-1}$ by the Leibniz rule, so $f^n=0$ with $n>1$ minimal would give $nf^{n-1}=0$, contradicting minimality because $n$ is a unit of $S$. For the nonzerodivisor statement suppose $fa=0$; then $0=D(fa)=fD(a)+a$, so $a\\in(f)$, and if $a=f^nb$ then $0=D(f^{n+1}b)=(n+1)f^nb+f^{n+1}D(b)$ gives $a\\in(f^{n+1})$; the maximal ideal of a Noetherian local ring is contained in its Jacobson radical, so $\\bigcap_n(f^n)=0$ by [[thm-krull-intersection-theorem]], whence $a=0$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Commutative Algebra chapter",
+              "url": "https://stacks.math.columbia.edu/download/algebra.pdf",
+              "locator": "Lemma 10.140.6 [00TW]: if Omega_{S/R} = S df + C, then f is not nilpotent, and f is a nonzerodivisor when S is Noetherian local."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-free-differentials-imply-regular-in-characteristic-zero",
+        "kind": "lemma",
+        "title": "Free differentials imply regularity in characteristic zero",
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field of characteristic $0$, let $A$ be a finite-type $k$-algebra and let $\\mathfrak q\\in\\operatorname{Spec}A$. If $\\Omega_{A/k,\\mathfrak q}$ is a free $A_{\\mathfrak q}$-module, then $A_{\\mathfrak q}$ is a regular local ring. No bound on the rank and no smoothness of $A$ is assumed. (The statement fails in characteristic $p>0$: $A=k[t]/(t^p)$ at the origin has free rank-one differentials but a nonregular local ring.)",
+        "deps": [
+          "lem-differentials-generating-a-free-direct-summand-are-nonzerodivisors",
+          "lem-ag-separable-residue-cotangent-sequence",
+          "thm-nakayama-lemma",
+          "thm-quotient-and-lifting-regularity-across-a-regular-element",
+          "thm-conormal-exact-sequence-algebra",
+          "def-embedding-dimension-and-regular-local-ring",
+          "cor-minimal-generators-over-a-local-ring",
+          "cor-noetherian-modules-are-hopfian",
+          "def-finitely-generated-field-extension",
+          "thm-ag-separating-transcendence-basis-perfect-field",
+          "def-perfect-field",
+          "def-kahler-differentials-algebra",
+          "def-local-ring",
+          "def-axiom-of-choice",
+          "lem-differentials-localization",
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "lem-field-is-noetherian",
+          "thm-noetherian-ring-quotients-and-localisations",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "thm-dimension-at-most-embedding-dimension",
+          "thm-krull-intersection-theorem",
+          "def-ag-separating-transcendence-basis"
+        ],
+        "strategy": "Induction on $d=\\dim A_{\\mathfrak q}$ following Stacks 10.140.7. Put $R=A_{\\mathfrak q}$, $\\kappa=\\kappa(\\mathfrak q)$. Since $k$ has characteristic $0$ it is perfect, so by [[thm-ag-separating-transcendence-basis-perfect-field]] the finitely generated field extension $\\kappa/k$ is separably generated and the injection $\\mathfrak m/\\mathfrak m^2\\hookrightarrow\\Omega_{R/k}\\otimes_R\\kappa$ of [[lem-ag-separable-residue-cotangent-sequence]] is available. If $\\mathfrak m/\\mathfrak m^2=0$ then $R$ is a field and regular. Otherwise pick $f\\in\\mathfrak m$ with nonzero class; the injection makes the image of $\\mathrm df$ in $\\Omega_{R/k}/\\mathfrak m\\Omega_{R/k}$ nonzero, so by [[cor-minimal-generators-over-a-local-ring]] the element $\\mathrm df$ extends to a minimal generating set of the finite free module $\\Omega_{R/k}$, whose image in $\\Omega_{R/k}/\\mathfrak m\\Omega_{R/k}$ is a $\\kappa$-basis; a surjection of finite free $R$-modules of equal rank is injective because $R$ is Noetherian and a Noetherian module is Hopfian ([[cor-noetherian-modules-are-hopfian]]), so this generating set is a basis and there is an $R$-linear $\\theta$ with $\\theta(\\mathrm df)=1$. Then $f$ is a nonzerodivisor by [[lem-differentials-generating-a-free-direct-summand-are-nonzerodivisors]], and the conormal sequence $\\Omega_{R/k}\\otimes_R(R/fR)\\to\\Omega_{(R/fR)/k}\\to0$ of [[thm-conormal-exact-sequence-algebra]] exhibits $\\Omega_{(R/fR)/k}$ as free of rank one less; by [[thm-quotient-and-lifting-regularity-across-a-regular-element]] $\\dim R/fR=\\dim R-1$, so the induction hypothesis makes $R/fR$ regular, and the same item lifts regularity to $R$. The characteristic hypothesis enters only through the nonzerodivisor step.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Commutative Algebra chapter",
+              "url": "https://stacks.math.columbia.edu/download/algebra.pdf",
+              "locator": "Lemma 10.140.7 [00TX] with Lemmas 10.140.4 [00TU] and 10.140.6 [00TW]: over a field of characteristic 0, smoothness, freeness of the differentials and regularity of the local ring are equivalent at a prime."
+            },
+            {
+              "title": "The Stacks Project, Varieties chapter",
+              "url": "https://stacks.math.columbia.edu/download/varieties.pdf",
+              "locator": "Lemma 25.1 [04QN], printed p. 45: a scheme locally of finite type over a field of characteristic 0 with locally free differentials is smooth."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-smoothness-over-characteristic-zero-via-free-differentials",
+        "kind": "theorem",
+        "title": "Smoothness over a characteristic-zero field via free differentials",
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field of characteristic $0$ and let $X$ be a $k$-scheme locally of finite type ([[def-locally-finite-type-and-finite-type-morphism]]). If $\\Omega_{X/k}$ is locally free ([[def-sheaf-relative-differentials]]), then $X$ is smooth over $k$ ([[def-smooth-morphism-schemes]]). Conversely, if $X$ is smooth over $k$ then $\\Omega_{X/k}$ is locally free of finite rank ([[thm-differentials-smooth-locally-free]]); over a characteristic-zero field the two conditions are therefore equivalent. The Axiom of Choice is used through the cited regularity and Jacobian results.",
+        "deps": [
+          "lem-free-differentials-imply-regular-in-characteristic-zero",
+          "thm-ag-perfect-field-jacobian-regularity",
+          "thm-ag-standard-smooth-geometric-regularity",
+          "thm-differentials-smooth-locally-free",
+          "def-smooth-morphism-schemes",
+          "def-sheaf-relative-differentials",
+          "def-locally-finite-presentation-morphism",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "cor-finite-type-algebra-over-noetherian-ring-is-finitely-presented",
+          "def-ag-standard-smooth-algebra",
+          "def-perfect-field",
+          "def-axiom-of-choice",
+          "lem-sheaf-differentials-affine-compatibility",
+          "lem-field-is-noetherian",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect"
+        ],
+        "strategy": "Work at a point $x\\in X$ with an affine neighbourhood $\\operatorname{Spec}A$ of finite type over $k$ and prime $\\mathfrak q$; local freeness of $\\Omega_{X/k}$ makes $\\Omega_{A/k,\\mathfrak q}$ free, so $A_{\\mathfrak q}$ is regular by [[lem-free-differentials-imply-regular-in-characteristic-zero]]. Since a field of characteristic $0$ is perfect, clause 2 of [[thm-ag-perfect-field-jacobian-regularity]] gives $t\\notin\\mathfrak q$ with $A_t$ standard smooth over $k$ ([[def-ag-standard-smooth-algebra]]); by clause 1 of [[thm-ag-standard-smooth-geometric-regularity]] the structure morphism is flat at $\\mathfrak q$ with geometrically regular fibre. A finitely generated algebra over the Noetherian field $k$ is finitely presented by [[cor-finite-type-algebra-over-noetherian-ring-is-finitely-presented]], so $X\\to\\operatorname{Spec}k$ is locally of finite presentation and hence smooth at $x$ ([[def-smooth-morphism-schemes]]); as $x$ was arbitrary, $X$ is smooth. The converse is [[thm-differentials-smooth-locally-free]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Varieties chapter",
+              "url": "https://stacks.math.columbia.edu/download/varieties.pdf",
+              "locator": "Lemma 25.1 [04QN], printed p. 45: locally of finite type, locally free differentials and characteristic zero imply smoothness over the field."
+            },
+            {
+              "title": "The Stacks Project, Groupoid Schemes chapter",
+              "url": "https://stacks.math.columbia.edu/download/groupoids.pdf",
+              "locator": "Lemma 39.8.2 [047N], printed p. 14: Cartier's theorem for locally algebraic group schemes in characteristic zero."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-cartier-smoothness-for-affine-groups-in-characteristic-zero",
+        "kind": "theorem",
+        "title": "Cartier's theorem: affine group schemes in characteristic zero are smooth",
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field of characteristic $0$ and let $G$ be an affine group scheme of finite type over $k$ ([[def-group-scheme-over-a-field]]). Then the structure morphism $G\\to\\operatorname{Spec}k$ is smooth, that is, $G$ is a smooth group scheme over $k$ ([[def-smooth-morphism-schemes]]). In particular every local ring $\\mathcal O_{G,g}$ is regular and $G$ is reduced. No smoothness, reducedness or finiteness of $G$ beyond finite type is assumed, and the characteristic-zero hypothesis is essential: in characteristic $p>0$ the finite group schemes $\\alpha_p$ and $\\mu_p$ are not smooth.",
+        "deps": [
+          "lem-invariant-differentials-of-a-group-scheme",
+          "thm-smoothness-over-characteristic-zero-via-free-differentials",
+          "def-ag-geometrically-regular-algebra-and-fibre",
+          "lem-regular-local-domain-induction",
+          "def-group-scheme-over-a-field",
+          "def-smooth-morphism-schemes",
+          "def-axiom-of-choice",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-quotient-ring",
+          "def-principal-localisation"
+        ],
+        "strategy": "By [[lem-invariant-differentials-of-a-group-scheme]] the module $\\Omega_{G/k}$ is free, hence locally free; [[thm-smoothness-over-characteristic-zero-via-free-differentials]] then makes the locally finite type morphism $G\\to\\operatorname{Spec}k$ smooth. Smoothness at $g$ means the fibre over $\\kappa(\\operatorname{Spec}k)=k$, namely $G$ itself, is geometrically regular at $g$ ([[def-smooth-morphism-schemes]], [[def-ag-geometrically-regular-algebra-and-fibre]]), so applying the condition to the trivial field extension $k/k$ gives that $\\mathcal O_{G,g}$ is regular; a regular local ring is a domain ([[lem-regular-local-domain-induction]]), whence $G$ is reduced. Milne's independent Oort-style nilpotent proof (M22 Lemma 3.19, Lemma 3.20, Lemma 3.22 and Theorem 3.23) and Stacks 39.8.2 are recorded as alternative complete treatments in the coverage file; the local proof above is the one used. In positive characteristic $\\alpha_p$ has free differentials but a nonregular local ring, so the hypothesis cannot be dropped.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 3 §3(g), Lemmas 3.19-3.20, Lemma 3.22 and Theorem 3.23 (Cartier), printed pp. 69-71 (PDF 80-82); Ch. 1, Proposition 1.37, printed p. 18 (PDF 29)."
+            },
+            {
+              "title": "The Stacks Project, Groupoid Schemes chapter",
+              "url": "https://stacks.math.columbia.edu/download/groupoids.pdf",
+              "locator": "Lemma 39.8.2 [047N] with Lemma 39.6.3 [047I], printed pp. 12 and 14: free differentials and Cartier's theorem in characteristic zero."
+            },
+            {
+              "title": "The Stacks Project, Varieties chapter",
+              "url": "https://stacks.math.columbia.edu/download/varieties.pdf",
+              "locator": "Lemma 25.1 [04QN], printed p. 45: the characteristic-zero smoothness criterion."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 876,
+    "id": "lie-algebras-and-infinitesimal-group-schemes-examples",
+    "kind": "B",
+    "category": "scheme-theory",
+    "title": "Lie Algebras and Infinitesimal Group Schemes — Examples",
+    "companion": "lie-algebras-and-infinitesimal-group-schemes",
+    "requires": [
+      "lie-algebras-and-infinitesimal-group-schemes",
+      "lie-algebra-representations-enveloping-algebras-and-pbw",
+      "flat-smooth-and-etale-morphisms",
+      "zariski-tangent-spaces-regular-points-smoothness-and-bertini"
+    ],
+    "items": [
+      {
+        "id": "ex-additive-and-infinitesimal-group-schemes",
+        "kind": "example",
+        "title": "Additive and infinitesimal group schemes",
+        "statement": "Let $k$ be a field. (a) $\\mathbf G_a=\\operatorname{Spec}k[t]$ with comultiplication $\\Delta(t)=t\\otimes1+1\\otimes t$, counit $\\varepsilon(t)=0$ and antipode $S(t)=-t$ is a group scheme of finite type over $k$ with $\\mathbf G_a(R)=(R,+)$ for every commutative $k$-algebra $R$. (b) If $\\operatorname{char}k=p>0$, then $\\alpha_p=\\operatorname{Spec}k[t]/(t^p)$, with the comultiplication induced by that of $\\mathbf G_a$, is a closed subgroup scheme of $\\mathbf G_a$ with $\\alpha_p(R)=\\{a\\in R:a^p=0\\}$, and $\\mu_p=\\operatorname{Spec}k[t,t^{-1}]/(t^p-1)$, with the comultiplication of the multiplicative group scheme ([[lem-general-linear-group-scheme-and-its-coordinate-ring]]), is a closed subgroup scheme of $\\mathbf G_m$ with $\\mu_p(R)=\\{a\\in R^\\times:a^p=1\\}$. The coordinate rings of $\\alpha_p$ and $\\mu_p$ are isomorphic to $k[s]/(s^p)$ for $s=t$ respectively $s=t-1$, so both are finite nonreduced $k$-schemes of length $p$, while $\\mathbf G_a$ and $\\mathbf G_m$ are reduced.",
+        "deps": [
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-closed-immersion-schemes",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-affine-fibre-product-tensor-ring",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring",
+          "lem-hopf-ideal-kernels-and-quotients",
+          "lem-quotient-spectrum-map-is-a-closed-immersion",
+          "def-commutative-hopf-algebra-over-a-field",
+          "def-polynomial-ring-over-a-commutative-ring"
+        ],
+        "strategy": "Direct computations with the explicit algebra maps. On $k[t]$ the map $t\\mapsto t\\otimes1+1\\otimes t$ is a $k$-algebra homomorphism satisfying the coassociativity and counit identities, and $t\\mapsto-t$ is an antipode; on $k[t]/(t^p)$ it is well defined because $(t\\otimes1+1\\otimes t)^p=t^p\\otimes1+1\\otimes t^p$ in characteristic $p$ (all intermediate binomial coefficients are divisible by $p$), so $(t^p)$ is a Hopf ideal and [[lem-hopf-ideal-kernels-and-quotients]] gives the quotient Hopf structure; on $k[t,t^{-1}]/(t^p-1)$ the formulas $t\\mapsto t\\otimes t$ and $t\\mapsto t^{-1}$ are well defined because $t^p=1$ forces $(t\\otimes t)^p=1$. Group-object identities are checked on the algebra generators, and the point descriptions follow by evaluating the coordinate rings. The nonzero nilpotent $s$ exhibits nonreducedness and the length is $p$ because $1,s,\\dots,s^{p-1}$ is a $k$-basis.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 2 §2.1-2.5, printed pp. 39-41 and p. 44 (PDF 50-52 and 55): the additive and multiplicative groups and the group schemes alpha_{p^m}, mu_{p^m} with their coordinate rings."
+            },
+            {
+              "title": "The Stacks Project, Groupoid Schemes chapter",
+              "url": "https://stacks.math.columbia.edu/download/groupoids.pdf",
+              "locator": "§5, Examples 5.1-5.4 [022U, 040M, 022V, 022W], printed pp. 5-6: coordinate formulas for G_a, roots of unity, G_m and GL_n."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-lie-algebras-of-alpha-p-mu-p-and-gl-n",
+        "kind": "example",
+        "title": "Lie algebras of the additive, infinitesimal and general linear groups",
+        "statement": "Let $k$ be a field and let $\\operatorname{Lie}$ be as in [[def-lie-algebra-of-a-group-scheme]]. (a) $\\operatorname{Lie}(\\mathbf G_a)\\cong k$ and $\\operatorname{Lie}(\\mathbf G_m)\\cong k$, generated by the classes of $t$ and of $t-1$ in $\\mathfrak m_e/\\mathfrak m_e^2$; the bracket is zero because these groups are abelian, so the Lie algebras are the one-dimensional abelian Lie algebras. (b) If $\\operatorname{char}k=p>0$, then $\\operatorname{Lie}(\\alpha_p)\\cong k$ and $\\operatorname{Lie}(\\mu_p)\\cong k$ with the same generators, so there are isomorphisms of $k$-Lie algebras $\\operatorname{Lie}(\\alpha_p)\\cong\\operatorname{Lie}(\\mathbf G_a)$ and $\\operatorname{Lie}(\\mu_p)\\cong\\operatorname{Lie}(\\mathbf G_m)$. (c) $\\operatorname{Lie}(\\operatorname{GL}_n)=\\mathfrak{gl}_n=M_n(k)$, the isomorphism sending $X$ to $I+\\varepsilon X$, and $[X,Y]=XY-YX$ ([[lem-lie-algebra-of-the-general-linear-group]], [[thm-lie-bracket-and-adjoint-action-from-infinitesimals]]).",
+        "deps": [
+          "def-lie-algebra-of-a-group-scheme",
+          "def-lie-algebra-over-a-field",
+          "lem-lie-algebra-tangent-space-and-functoriality",
+          "thm-lie-bracket-and-adjoint-action-from-infinitesimals",
+          "lem-lie-algebra-of-the-general-linear-group",
+          "ex-additive-and-infinitesimal-group-schemes",
+          "thm-cotangent-space-maximal-ideal-quotient",
+          "def-relative-cotangent-space",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring"
+        ],
+        "strategy": "Compute the cotangent space at the identity from the coordinate rings. For $k[t]$ and $k[t,t^{-1}]$ the augmentation ideals are generated by $t$ respectively $t-1$, whose classes form a $k$-basis of $\\mathfrak m_e/\\mathfrak m_e^2$ ([[thm-cotangent-space-maximal-ideal-quotient]]). For $k[s]/(s^p)$ the same class is a basis: $s^p=0$ lies in $\\mathfrak m_e^2$ while $s$ does not, for $p\\ge2$. Every one-dimensional Lie algebra has zero bracket because $[X,X]=0$ and $X$ generates; this applies to $\\mathbf G_a$, $\\mathbf G_m$, $\\alpha_p$ and $\\mu_p$, all of which are commutative as group schemes, so functoriality of the bracket also gives zero directly. Clause (c) is [[lem-lie-algebra-of-the-general-linear-group]] together with clause (d) of [[thm-lie-bracket-and-adjoint-action-from-infinitesimals]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "10.6-10.11 and 10.20, printed pp. 188-192 (PDF 199-203): L(GLn), L(V_a), the additive group, and the adjoint action of GLn."
+            },
+            {
+              "title": "The Stacks Project, Groupoid Schemes chapter",
+              "url": "https://stacks.math.columbia.edu/download/groupoids.pdf",
+              "locator": "Lemma 39.6.4 [0BF5], printed p. 13: the tangent space of a group scheme with addition as multiplication."
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-lie-algebra-does-not-detect-nonsmooth-group-scheme",
+        "kind": "counterexample",
+        "title": "The Lie algebra does not detect nonsmooth group schemes",
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field of characteristic $p>0$. The closed subgroup scheme $\\alpha_p\\subseteq\\mathbf G_a$ of [[ex-additive-and-infinitesimal-group-schemes]] is a finite nonreduced group scheme of order $p$ over $k$ which is not smooth over $k$, whereas $\\mathbf G_a$ is smooth over $k$; nevertheless $\\operatorname{Lie}(\\alpha_p)\\cong\\operatorname{Lie}(\\mathbf G_a)$ as $k$-Lie algebras ([[ex-lie-algebras-of-alpha-p-mu-p-and-gl-n]]). The same contrast holds between $\\mu_p$ and $\\mathbf G_m$. Consequently the Lie algebra of a group scheme of finite type over a field does not determine smoothness, so it is not a complete invariant of the infinitesimal structure. The Axiom of Choice is used only through the cited regularity, domain and standard-smoothness suppliers.",
+        "deps": [
+          "ex-additive-and-infinitesimal-group-schemes",
+          "ex-lie-algebras-of-alpha-p-mu-p-and-gl-n",
+          "def-smooth-morphism-schemes",
+          "def-ag-geometrically-regular-algebra-and-fibre",
+          "def-regular-local-ring-geometric-point",
+          "lem-regular-local-domain-induction",
+          "def-ag-standard-smooth-algebra",
+          "thm-ag-standard-smooth-geometric-regularity",
+          "cor-finite-type-algebra-over-noetherian-ring-is-finitely-presented",
+          "def-locally-finite-presentation-morphism",
+          "def-group-scheme-over-a-field",
+          "def-axiom-of-choice",
+          "lem-field-is-noetherian"
+        ],
+        "strategy": "Non-smoothness of $\\alpha_p$: its coordinate ring $k[s]/(s^p)$ has the nonzero nilpotent $s$, so $\\alpha_p$ is finite of length $p$ and not reduced. If it were smooth at its origin, then the fibre condition in [[def-smooth-morphism-schemes]], applied with the trivial field extension $k/k$ as in [[def-ag-geometrically-regular-algebra-and-fibre]] and [[def-regular-local-ring-geometric-point]], would make the local ring $k[s]/(s^p)_{(s)}$ regular; a regular local ring is a domain by [[lem-regular-local-domain-induction]], contradicting $s\\ne0$ with $s^p=0$. Smoothness of $\\mathbf G_a$: $k[t]$ is standard smooth over $k$ ([[def-ag-standard-smooth-algebra]]) and is finitely presented over the Noetherian field $k$ ([[cor-finite-type-algebra-over-noetherian-ring-is-finitely-presented]]), so $\\mathbf G_a$ is smooth over $k$ by [[thm-ag-standard-smooth-geometric-regularity]] and [[def-smooth-morphism-schemes]]; the same argument applies to $\\mathbf G_m=k[t,t^{-1}]$. The isomorphism of Lie algebras is [[ex-lie-algebras-of-alpha-p-mu-p-and-gl-n]], and the $\\mu_p$ case is identical with $s=t-1$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 2 §2.5, printed p. 40 (PDF 51): alpha_{p^m} and mu_{p^m} are isomorphic as schemes but not as algebraic groups; Ch. 10, printed p. 191 (PDF 202): the remark Lie(alpha_p) = Lie(G_a)."
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

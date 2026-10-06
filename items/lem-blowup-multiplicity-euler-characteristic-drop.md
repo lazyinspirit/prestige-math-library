@@ -49,6 +49,19 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01OF"
       locator: "Lemma 31.33.4 and the section on blowing up and flatness, Section 31.36"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item read and recorded Step 7 mathematical repair review, including the used supplier interfaces; current mathematical content matches the bound evidence. The repair review is local and does not claim an independent audit of the repair."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-2.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-2.result.json
+      - research/frontier-38-owner-30-step5-hash-2-post-5a.json
+      - research/frontier-38-owner-30-alpha-batch-2-5a-decisions.json
+      - research/frontier-38-owner-30-step7-v2/step7-v2-impact-initial-r1-u3.json
+      - research/frontier-38-owner-30-dispatch/alpha-repair-step7-v2-impact-initial-r1-u3.result.json
   precheck: pass
 ---
 

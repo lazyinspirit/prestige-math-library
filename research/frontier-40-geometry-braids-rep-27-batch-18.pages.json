@@ -1,0 +1,1993 @@
+[
+  {
+    "order": 889,
+    "id": "unipotent-solvable-groups-and-borel-fixed-points",
+    "kind": "A",
+    "category": "algebraic-geometry",
+    "title": "Unipotent and Solvable Groups and Borel Fixed Points",
+    "companion": "unipotent-solvable-groups-and-borel-fixed-points-examples",
+    "requires": [
+      "group-schemes-of-finite-type-over-a-field",
+      "affine-group-schemes-hopf-algebras-and-rational-representations",
+      "algebraic-group-actions-orbits-stabilizers-and-controlled-quotients",
+      "groups-of-multiplicative-type-and-arithmetic-tori",
+      "finite-proper-and-projective-morphisms",
+      "quasi-coherent-and-coherent-sheaves-and-vector-bundles",
+      "nonaffine-algebraic-groups-barsotti-chevalley-and-abelian-varieties",
+      "proj-projective-schemes-twisting-sheaves-and-ampleness"
+    ],
+    "items": [
+      {
+        "id": "def-unipotent-algebraic-group",
+        "kind": "definition",
+        "title": "Unipotent algebraic groups and unipotent representations",
+        "deps": [
+          "def-linear-basis",
+          "def-affine-scheme",
+          "def-group-scheme-over-a-field",
+          "def-linear-subspace",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "def-vector-space",
+          "lem-finite-dimensional-subcomodules-contain-elements"
+        ],
+        "statement": "Let $k$ be a field and let $G$ be an affine algebraic group over $k$, that is, an affine group scheme of finite type over $k$ ([[def-affine-scheme]], [[def-group-scheme-over-a-field]]).\n\n**(a) Unipotent representations.** A finite-dimensional rational representation $(V,r,\\rho)$ of $G$ ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]], [[def-vector-space]]) is **unipotent** if there is a $k$-basis of $V$ ([[def-linear-basis]]) such that, for every commutative $k$-algebra $R$ and every $g\\in G(R)$, the operator $r_R(g)$ on $V\\otimes_kR$ is upper triangular with all diagonal entries equal to $1$ in the scalar-extended basis. Equivalently, by the comodule dictionary, $V$ is unipotent if and only if $V$ has a complete $G$-stable flag\n$$V=V_m\\supseteq V_{m-1}\\supseteq\\dots\\supseteq V_0=0$$\nwith $G$ acting trivially on each quotient $V_i/V_{i-1}$; the equivalence uses that a complete flag with trivial successive quotients is exactly a chain of subspaces in a basis as above, and conversely.\n\n**(b) Unipotent groups.** The group $G$ is **unipotent** if every nonzero rational representation of $G$ has a nonzero $G$-fixed vector, equivalently if every simple rational representation of $G$ is one-dimensional with trivial action. Because every rational representation is a union of finite-dimensional subrepresentations ([[lem-finite-dimensional-subcomodules-contain-elements]]), it suffices to test finite-dimensional representations: $G$ is unipotent if and only if every nonzero finite-dimensional rational representation has a nonzero fixed vector.\n\nNo smoothness, reducedness or connectedness of $G$ is imposed; the matrix formulation in (a) is written out because the group scheme $U_n$ of upper unitriangular matrices is introduced separately and is not used in the definition.",
+        "strategy": "Milne, Ch. 6 (6.45) and Ch. 14(b): the two formulations are equivalent because a nonzero representation contains a simple subrepresentation, and a simple representation with a nonzero fixed vector is the trivial one-dimensional representation. The fixed-vector condition is stated in comodule form via the published comodule dictionary. Both formulations are recorded because the criterion theorem uses the representation-theoretic one and the coconnectedness proof uses the comodule one.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Section 6.45, printed p. 135; Definition 14.2 and Proposition 14.3, printed pp. 279-280"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Definition 38, Proposition 39 and Corollaries 40-41, printed pp. 19-20 (smooth classical groups over algebraically closed fields)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-coconnected-hopf-algebra",
+        "kind": "definition",
+        "title": "Coconnected commutative Hopf algebras",
+        "deps": [
+          "def-commutative-hopf-algebra-over-a-field",
+          "def-linear-subspace",
+          "def-tensor-product-of-modules-by-generators-and-relations"
+        ],
+        "statement": "Let $k$ be a field and let $(A,\\Delta,\\varepsilon,S)$ be a commutative Hopf algebra over $k$ ([[def-commutative-hopf-algebra-over-a-field]]), with tensor products over $k$ ([[def-tensor-product-of-modules-by-generators-and-relations]]).\n\nThe Hopf algebra $A$ is **coconnected** if there is an increasing filtration\n$$C_0\\subseteq C_1\\subseteq C_2\\subseteq\\cdots$$\nof $A$ by $k$-linear subspaces ([[def-linear-subspace]]) with\n$$C_0=k\\cdot1_A,\\qquad \\bigcup_{r\\ge0}C_r=A,\\qquad \\Delta(C_r)\\subseteq\\sum_{i=0}^{r}C_i\\otimes_kC_{r-i}\\quad\\text{for all }r\\ge0.$$\nIn words: the filtration starts at the constants, exhausts $A$, and the comultiplication of an element of filtration degree $r$ lands in the sum of tensor products whose degrees add up to $r$.\n\nNo reducedness, finite generation or smoothness of $A$ is imposed, and no choice principle is used. The filtration is the condition dual to the existence of a group-like element generating the simple comodules; the first step is the constants because a unipotent group has no nontrivial characters.",
+        "strategy": "Definition record of Milne Definition 14.4. The filtration is exactly the condition dual to the existence of a single group-like element used in the proof of the triangular criterion; the definition deliberately allows the zero filtration step to be the constants, matching the fact that a unipotent group has no nontrivial characters.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Definition 14.4, printed p. 281"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Definition 15.4, printed p. 252"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-upper-unitriangular-group-scheme",
+        "kind": "definition",
+        "title": "The upper unitriangular group scheme U_n and its coordinate ring",
+        "deps": [
+          "def-linear-basis",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring",
+          "lem-closed-subgroup-scheme-valued-point-criterion",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring",
+          "thm-affine-closed-immersions-quotient-rings"
+        ],
+        "statement": "Let $k$ be a field and let $n\\ge1$. Let $\\mathrm{GL}_n$ be the general linear group scheme over $k$ with its coordinate ring $k[x_{ij},\\det^{-1}]$ ([[lem-general-linear-group-scheme-and-its-coordinate-ring]]) and let $T_n$, $D_n$, $U_n$ be the closed subschemes of $\\mathrm{GL}_n$ defined by the following equations on the matrix entries, cut out as quotients of the coordinate ring of $\\mathrm{GL}_n$ ([[thm-affine-closed-immersions-quotient-rings]]):\n\n- $T_n$: the **upper triangular** matrices, defined by $x_{ij}=0$ for $i>j$;\n- $D_n$: the **diagonal** matrices, defined by $x_{ij}=0$ for $i\\ne j$;\n- $U_n$: the **upper unitriangular** matrices, defined by $x_{ij}=0$ for $i>j$ and $x_{ii}=1$.\n\nThese are closed subgroup schemes of $\\mathrm{GL}_n$ ([[def-morphism-and-closed-subgroup-scheme]]), because for each of them the defining equations are stable under matrix multiplication, inverse and identity; equivalently, by the valued-point criterion ([[lem-closed-subgroup-scheme-valued-point-criterion]]), for every commutative unital $k$-algebra $R$ the $R$-points are the corresponding subgroups $T_n(R),D_n(R),U_n(R)$ of $\\mathrm{GL}_n(R)$, described by the same equations. In particular\n$$U_n(R)=\\{(\\alpha_{ij})\\in\\mathrm{GL}_n(R):\\alpha_{ij}=0\\ (i>j),\\ \\alpha_{ii}=1\\},$$\nthe group of upper unitriangular matrices, and $T_n=D_n\\ltimes U_n$ is the group of invertible upper triangular matrices, the semidirect product for the conjugation action of $D_n$ on $U_n$ ([[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]).\n\nThe coordinate ring of $U_n$ is $O(U_n)=k[X_{ij}\\mid1\\le i<j\\le n]$ with comultiplication\n$$\\Delta(X_{ij})=X_{ij}\\otimes1+1\\otimes X_{ij}+\\sum_{i<l<j}X_{il}\\otimes X_{lj},$$\ncounit $\\varepsilon(X_{ij})=0$ and antipode determined by the inverse of a unitriangular matrix; the displayed formula is the matrix multiplication formula restricted to unitriangular matrices and visibly preserves the polynomial ring, so $O(U_n)$ is a polynomial algebra on the $\\binom n2$ entries strictly above the diagonal ([[def-linear-basis]]).",
+        "strategy": "Milne, Ch. 2 \u00a72.2-2.5 and Ch. 6 equation (6.49). The coordinate ring is computed from the published coordinate ring of $\\mathrm{GL}_n$ by imposing the equations $x_{ij}=\\delta_{ij}$ for $i\\ge j$, using the affine closed-immersion/quotient-ring theorem; the displayed coproduct is the matrix multiplication formula restricted to unitriangular matrices, and it visibly preserves the polynomial ring. The semidirect product description of $T_n$ is matrix decomposition.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Sections 2.2-2.5, printed pp. 39-40; Example 6.49, printed pp. 136-137"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Example 8.46, printed pp. 137-138; Theorem 15.5, coproduct equation (103), printed p. 253"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-derived-subgroup-and-solvable-algebraic-group",
+        "kind": "definition",
+        "title": "The derived subgroup, the derived series and solvable algebraic groups",
+        "deps": [
+          "def-closed-immersion-schemes",
+          "def-fibre-product-schemes-universal-property",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-scheme-theoretic-image",
+          "thm-scheme-theoretic-image-quasi-compact-morphism"
+        ],
+        "statement": "Let $k$ be a field and let $G$ be an algebraic group over $k$, that is, a group scheme of finite type over $k$ ([[def-group-scheme-over-a-field]]), with multiplication $m$, inverse $i$ and identity section $e$.\n\nThe **commutator morphism** is\n$$c:G\\times_kG\\to G,\\qquad c(g,h)=g\\,h\\,g^{-1}h^{-1}.$$\nIt is a $k$-morphism: the map $(g,h)\\mapsto(g,h,g^{-1},h^{-1})$ is built from $i$ and the universal property of the fibre product ([[def-fibre-product-schemes-universal-property]]), and $c$ is obtained from it by iterated multiplication. For every $k$-algebra $R$, the induced map $G(R)\\times G(R)\\to G(R)$ is the group commutator.\n\nThe **derived subgroup** $DG$ is the smallest closed subgroup scheme $H\\subseteq G$ ([[def-morphism-and-closed-subgroup-scheme]]) through which $c$ factors, that is, such that $c$ equals the composite of a morphism $G\\times_kG\\to H$ with the inclusion $H\\hookrightarrow G$. Equivalently, $DG$ is the smallest closed subgroup scheme of $G$ containing the scheme-theoretic image of $c$ ([[def-scheme-theoretic-image]], [[thm-scheme-theoretic-image-quasi-compact-morphism]]). It exists: if $G$ is affine, closed subgroup schemes correspond to Hopf ideals of $O(G)$ and $c$ corresponds to a $k$-algebra map $\\Delta_c:O(G)\\to O(G)\\otimes_kO(G)$, and the Hopf ideals contained in $\\ker\\Delta_c$ are closed under sums, so their largest element cuts out $DG$; in general the closed subgroup schemes through which $c$ factors are closed under schematic intersection, their intersection is computed by the ideal sheaf generated by the defining ideal sheaves, and $G$ is Noetherian because it is of finite type over a field.\n\nThe **derived series** of $G$ is the sequence\n$$D^0G=G,\\qquad D^{i+1}G=D(D^iG)\\quad(i\\ge0),$$\nso each $D^iG$ is a closed subgroup scheme of $G$ for $i\\ge1$. The group $G$ is **solvable** if $D^nG=1$ for some $n\\ge0$, where $1$ denotes the trivial subgroup scheme, the image of the identity section $e$.\n\nA closed subgroup scheme $N\\subseteq G$ is **normal** if it is stable under the conjugation action of $G$ on itself: the morphism $G\\times_kN\\to G$, $(g,n)\\mapsto gng^{-1}$, factors through the inclusion $N\\hookrightarrow G$. For $k$-algebras $R$ this says exactly that $N(R)$ is a normal subgroup of $G(R)$. This is the sense of normality used throughout this page.",
+        "strategy": "Definition record following Milne Ch. 6(a)-(e). The existence of the smallest closed subgroup scheme through which the commutator morphism factors uses the affine anti-equivalence: for affine $G$ the closed subgroup schemes are the quotients of $O(G)$ by Hopf ideals (Milne 6.16-6.18), and the intersection of the corresponding ideals gives the smallest such closed subgroup. The scheme-theoretic image formalism supplies the same conclusion without affineness. Solvability is defined by termination of the derived series, so the definition does not presuppose that derived subgroups of smooth connected groups are smooth or connected; those properties are established separately.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 6 \u00a7\u00a76(a)-(e), Definition 6.16, Proposition 6.17, Proposition 6.18 and Corollary 6.19, printed pp. 129-131"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Sections 8(e)-(f), Definition 8.18, Proposition 8.20 and Corollary 8.21, printed pp. 130-133"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-trigonalizable-algebraic-group",
+        "kind": "definition",
+        "title": "Trigonalizable algebraic groups",
+        "deps": [
+          "def-affine-scheme",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "def-unipotent-algebraic-group"
+        ],
+        "statement": "Let $k$ be a field. An affine algebraic group $G$ over $k$ (an affine group scheme of finite type over $k$, [[def-affine-scheme]], [[def-group-scheme-over-a-field]]) is **trigonalizable** if every simple rational representation of $G$ ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]]) has dimension $1$ over $k$.\n\nEquivalently, by the criterion proved as [[lem-trigonalizable-iff-invariant-flags]], every finite-dimensional rational representation of $G$ admits a basis in which $G$ acts through upper triangular matrices, i.e. the representation is isomorphic to one factoring through the upper triangular group scheme $T_n$ of some $\\mathrm{GL}_n$.\n\nBoth unipotent groups ([[def-unipotent-algebraic-group]]) and diagonalizable groups are trigonalizable: for a unipotent group every simple representation is trivial of dimension one by definition, and for a diagonalizable group the character eigenspace decomposition exhibits every simple representation as one-dimensional. The formulation by simple representations is the one used in the induction proving Lie-Kolchin; the flag formulation is the one used to embed trigonalizable groups into $T_n$.",
+        "strategy": "Definition record of Milne Definition 16.1 together with the equivalence to the flag formulation recorded in the companion lemma. The formulation by simple representations is the one used in the induction proving Lie-Kolchin; the flag formulation is the one used to embed trigonalizable groups into $T_n$.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Definition 16.1 and the paragraph following it, printed p. 324"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-borel-subgroup-and-maximal-torus",
+        "kind": "definition",
+        "title": "Borel subgroups, maximal tori and Borel pairs",
+        "deps": [
+          "def-affine-scheme",
+          "def-derived-subgroup-and-solvable-algebraic-group",
+          "def-group-of-multiplicative-type-and-torus",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-smooth-morphism-schemes"
+        ],
+        "statement": "Let $k$ be a field and let $G$ be an affine algebraic group over $k$, that is, an affine group scheme of finite type over $k$ ([[def-affine-scheme]], [[def-group-scheme-over-a-field]]).\n\nA **torus** of $G$ is a closed subgroup scheme $T\\subseteq G$ ([[def-morphism-and-closed-subgroup-scheme]]) whose base extension to a separable closure of $k$ is isomorphic to $\\mathbf G_m^r$ for some integer $r\\ge0$; it is a **split torus** if that isomorphism is already defined over $k$ ([[def-group-of-multiplicative-type-and-torus]]). It is a **maximal torus** if it is maximal with respect to inclusion among the tori of $G$. Equivalently, $T$ is a closed subgroup that is geometrically a product of copies of $\\mathbf G_m$, and no strictly larger torus of $G$ contains it; for smooth connected affine groups, maximality is preserved by every field extension (Conrad, *Grothendieck\u2019s theorem on tori*, Corollary 1.3, printed p. 1).\n\nA **Borel subgroup** of a smooth $G$ is a smooth connected solvable closed subgroup scheme $B\\subseteq G$ whose base extension to an algebraic closure is maximal among smooth connected solvable closed subgroup schemes. Over an algebraically closed field this means exactly that $B$ is a maximal connected solvable subgroup variety, with its reduced smooth structure ([[def-derived-subgroup-and-solvable-algebraic-group]], [[def-smooth-morphism-schemes]]). Maximality here is among subgroup varieties, not arbitrary possibly infinitesimal subgroup schemes. A Borel subgroup need not be defined over a general field; existence and conjugacy are asserted below over an algebraically closed field.\n\nA **Borel pair** is a pair $(B,T)$ consisting of a Borel subgroup $B$ and a maximal torus $T$ with $T\\subseteq B$.\n\nOn this page Borel subgroups are used only for smooth $G$ ([[def-smooth-morphism-schemes]]); Borel subgroups are smooth by the subgroup-variety convention, and the existence and conjugacy theorems are proved later on this page. Maximal tori exist whenever $G$ has a torus, by maximizing dimension among tori, since a strict inclusion of tori increases dimension; the existence of a Borel subgroup containing a given torus is proved where it is used.",
+        "strategy": "Definition record of Milne Definition 17.6 and the paragraph following Definition 17.12, with the convention that tori are smooth groups of multiplicative type taken from the published groups-of-multiplicative-type page. Maximal tori and Borel subgroups exist by dimension considerations once the relevant classes are nonempty and closed under the operations used in the proofs; existence of Borel subgroups containing a given torus is proved where it is needed.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Definition 17.6 and Definition 17.12 with the following paragraph, printed pp. 354-356"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Section 2.2 (Definitions 43 and Proposition 45), pp. 20-25, and Sections 5.1-5.2 (Definitions 115 and 120), pp. 48-50"
+            },
+            {
+              "title": "Brian Conrad, Grothendieck\u2019s theorem on tori",
+              "url": "https://math.stanford.edu/~conrad/252Page/handouts/grthm.pdf",
+              "locator": "Corollary 1.3, printed p. 1 (smooth connected affine groups)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-crossed-homomorphism-and-hochschild-extension",
+        "kind": "definition",
+        "title": "Crossed homomorphisms, principal crossed homomorphisms and Hochschild extensions",
+        "deps": [
+          "def-affine-scheme",
+          "def-algebraic-group-action-and-scheme-theoretic-stabilizer",
+          "def-fibre-product-schemes-universal-property",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme"
+        ],
+        "statement": "Let $k$ be a field, let $G$ be an affine algebraic group over $k$ ([[def-affine-scheme]], [[def-group-scheme-over-a-field]]) and let $M$ be a commutative affine algebraic group over $k$ on which $G$ acts by group automorphisms, $\\cdot:G\\times_kM\\to M$ ([[def-algebraic-group-action-and-scheme-theoretic-stabilizer]]). Form the semidirect product $M\\rtimes G$, the $k$-group scheme whose $R$-points are the pairs $(m,g)\\in M(R)\\times G(R)$ with multiplication\n$$(m,g)(m',g')=(m+g\\cdot m',\\,gg');$$\nthe product is a group law because the action is by group automorphisms, and $M\\rtimes G$ is constructed from the given morphisms using fibre products ([[def-fibre-product-schemes-universal-property]]).\n\nA **crossed homomorphism** is a morphism of $k$-schemes $f:G\\to M$ such that\n$$f(xy)=f(x)+x\\cdot f(y)$$\nfor all $x,y\\in G(R)$ and all $k$-algebras $R$. It is **principal** if there is an element $m\\in M(k)$ with\n$$f(x)=x\\cdot m-m\\qquad\\text{for all }x\\in G(R),\\ R.$$\n\nThe assignments $x\\mapsto(f(x),x)$ and $(m,x)\\mapsto x$ identify sections $G\\to M\\rtimes G$ of the projection $M\\rtimes G\\to G$ with crossed homomorphisms: indeed $(f(x),x)(f(y),y)=(f(x)+x\\cdot f(y),xy)$, so multiplicativity of the section is exactly the displayed identity. Conjugating a section by $m\\in M(k)$ changes the corresponding crossed homomorphism by the principal crossed homomorphism $x\\mapsto x\\cdot m-m$; hence two sections are conjugate by an element of $M(k)$ if and only if their crossed homomorphisms differ by a principal one.\n\nAn **extension** of group functors $0\\to M\\to E\\to G\\to1$ is a sequence of group functors on $k$-algebras that is exact, with $E\\to G$ the given projection. Such an extension is a **Hochschild extension** if the projection $E\\to G$ admits a section as a map of set-valued functors. For a Hochschild extension the conjugation action of $G$ on $M$ induced by any such section is independent of the choice of section, and the equivalence classes of Hochschild extensions inducing a given action are classified by the second Hochschild cohomology group of [[def-hochschild-cohomology-of-algebraic-groups]].",
+        "strategy": "Definition record and elementary formalism of Milne \u00a7\u00a715(a),(c). The identity $f(xy)=f(x)+x\\cdot f(y)$ is exactly the homomorphism condition for the section $x\\mapsto(f(x),x)$ of $M\\rtimes G\\to G$, and conjugation of a section by $m\\in M(k)$ changes it by the principal crossed homomorphism $x\\mapsto x\\cdot m-m$. Hochschild extensions are introduced in the form needed for the splitting theorem; the classification by a second cohomology group is stated in the cohomology definition item and proved there.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Section 15(a) crossed homomorphisms and Section 15(c) Hochschild extensions, printed pp. 303-309"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Sections 16(a)-(c), printed pp. 269-274; Proposition 16.10, printed p. 274"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-unipotent-representation-criterion",
+        "kind": "lemma",
+        "title": "Unipotence is equivalent to unipotence of all finite-dimensional representations",
+        "deps": [
+          "def-affine-scheme",
+          "def-group-scheme-over-a-field",
+          "def-linear-subspace",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "def-unipotent-algebraic-group",
+          "def-upper-unitriangular-group-scheme",
+          "lem-representations-of-affine-group-schemes-are-comodules"
+        ],
+        "statement": "Let $k$ be a field and let $G$ be an affine algebraic group over $k$ ([[def-affine-scheme]], [[def-group-scheme-over-a-field]]). Then $G$ is unipotent ([[def-unipotent-algebraic-group]]) if and only if every finite-dimensional rational representation of $G$ ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]]) is unipotent. In particular, if $G$ is unipotent then every nonzero finite-dimensional rational representation admits a basis in which $G$ acts through the upper unitriangular group scheme $U_n$ of [[def-upper-unitriangular-group-scheme]], and the class of unipotent finite-dimensional representations is closed under subquotients, direct sums and tensor products.",
+        "strategy": "Milne Proposition 14.3. If $G$ is unipotent, take a composition series of a finite-dimensional representation; each simple quotient is trivial by the definition of unipotence, so the series is a flag with trivial successive quotients. Conversely a flag with trivial quotients has a nonzero fixed vector. The closure properties are immediate from the flag description.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Proposition 14.3 and Corollary 14.6, printed pp. 280-282"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.utoronto.ca/~herzig/lin-alg-groups13.pdf",
+              "locator": "Section 2.1, Proposition 39 and Corollaries 40-41, pp. 19-20"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-upper-unitriangular-coordinate-ring-is-coconnected",
+        "kind": "lemma",
+        "title": "Coconnected Hopf algebras: the coordinate ring of U_n and passage to quotients",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-coconnected-hopf-algebra",
+          "def-upper-unitriangular-group-scheme",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring",
+          "lem-hopf-ideal-kernels-and-quotients",
+          "thm-closed-subgroup-schemes-correspond-to-hopf-ideals"
+        ],
+        "statement": "Let $k$ be a field and $n\\ge1$. Then:\n\n(a) $O(U_n)=k[X_{ij}\\mid1\\le i<j\\le n]$ is a coconnected Hopf algebra: assigning weight $j-i$ to each generator $X_{ij}$ and letting $C_r$ be the span of the monomials of weight at most $r$ gives a filtration satisfying $\\Delta(C_r)\\subseteq\\sum_{i+j=r}C_i\\otimes_kC_j$;\n\n(b) if $A\\to B$ is a surjective morphism of commutative Hopf algebras over $k$ and $A$ is coconnected, then $B$ is coconnected;\n\n(c) assuming the Axiom of Choice ([[def-axiom-of-choice]]), if $H\\subseteq U_n$ is a closed subgroup scheme, then $O(H)$ is a quotient of $O(U_n)$ and hence coconnected.",
+        "strategy": "(a) is the computation in Milne 14.5(b): the displayed coproduct shows the filtration condition for the generators, and multiplicativity of $\\Delta$ propagates it by induction on weight. (b) the image of a filtration satisfying the coconnectedness condition still satisfies it. (c) a closed subgroup scheme of an affine group scheme has coordinate ring the quotient of $O(U_n)$ by a Hopf ideal, by the published closed-subgroup/Hopf-ideal correspondence and the Hopf-ideal quotient lemma.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Theorem 14.5(b) and its proof, printed pp. 281-282"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Theorem 15.5, implication (b) to (c), printed p. 253"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-coconnected-comodules-have-fixed-vectors",
+        "kind": "lemma",
+        "title": "Coconnected Hopf algebras give fixed vectors in every nonzero comodule",
+        "deps": [
+          "def-unipotent-algebraic-group",
+          "def-coconnected-hopf-algebra",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "lem-representations-of-affine-group-schemes-are-comodules"
+        ],
+        "statement": "Let $A$ be a coconnected commutative Hopf algebra over a field $k$, with filtration $C_0\\subseteq C_1\\subseteq\\dots$ as in [[def-coconnected-hopf-algebra]]. If $V\\ne0$ is an $A$-comodule with coaction $\\rho:V\\to V\\otimes_kA$, then $V$ has a nonzero vector $v$ with $\\rho(v)=v\\otimes1$.\n\nIn particular, if $G$ is an affine algebraic group over $k$ whose coordinate Hopf algebra $O(G)$ is coconnected, then every nonzero rational representation of $G$ has a nonzero fixed vector; that is, $G$ is unipotent in the sense of [[def-unipotent-algebraic-group]].",
+        "strategy": "Milne, Theorem 14.5(c)\\Rightarrow(a). Put $V_r=\\{v:\\rho(v)\\in V\\otimes C_r\\}$, so that $V=\\bigcup_rV_r$. If $V_0\\ne0$, a nonzero $v\\in V_0$ has $\\rho(v)=v'\\otimes1$ for some $v'$ and applying $\\varepsilon$ gives $v=v'$, so $v$ is fixed. If $V_r=0$ then $V_{r+1}=0$: the coassociativity identity $(\\mathrm{id}\\otimes\\Delta)\\rho=(\\rho\\otimes\\mathrm{id})\\rho$ maps $V_{r+1}$ into $V\\otimes A/C_r\\otimes A/C_r$, and the two maps $V\\to V\\otimes A/C_r$ and $V\\to(V\\otimes A/C_r)\\otimes A/C_r$ induced by $\\rho$ and $(\\rho\\otimes\\mathrm{id})\\rho$ are injective when $V_r=0$, forcing $V_{r+1}=0$. Hence $V_0\\ne0$ whenever $V\\ne0$.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Theorem 14.5(c) implies (a), printed p. 282"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Theorem 15.5, implication (c) to (a), printed p. 253"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-upper-unitriangular-central-series",
+        "kind": "lemma",
+        "title": "The central series of U_n with additive quotients",
+        "deps": [
+          "def-subgroup-commutator-and-lower-central-series",
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring",
+          "def-upper-unitriangular-group-scheme",
+          "thm-ring-matrix-arithmetic-laws"
+        ],
+        "statement": "Let $k$ be a field and $n\\ge1$, and let $U_n\\subseteq T_n\\subseteq\\mathrm{GL}_n$ be the upper unitriangular and upper triangular group schemes of [[def-upper-unitriangular-group-scheme]], with $T_n=D_n\\ltimes U_n$.\n\nOrder the pairs $(i,j)$ with $1\\le i<j\\le n$ by increasing $j-i$ (and arbitrarily, say by increasing $i$, within a fixed difference), and let $m=n(n-1)/2$. For $0\\le r\\le m$ let $U_n^{(r)}$ be the closed subgroup scheme of $U_n$ of matrices whose entries $x_{ij}$ vanish on the first $r$ pairs of the ordering; thus $U_n^{(0)}=U_n$ and $U_n^{(m)}=1$, and the $U_n^{(r)}$ are closed subgroup schemes of $U_n$ stable under conjugation by $T_n$.\n\nThen\n$$U_n=U_n^{(0)}\\supseteq U_n^{(1)}\\supseteq\\dots\\supseteq U_n^{(m)}=1$$\nis a central series of closed subgroup schemes of $U_n$ stable under $T_n$: $[U_n^{(r)},U_n]\\subseteq U_n^{(r+1)}$ for $0\\le r<m$, and each successive quotient $U_n^{(r)}/U_n^{(r+1)}$ is canonically isomorphic to $\\mathbf G_a$, the isomorphism being given by the coordinate $x_{ij}$ of the $(r+1)$-st pair. The diagonal torus $D_n$ acts on each quotient through the character $d\\mapsto d_id_j^{-1}$.",
+        "strategy": "Milne 6.49: enumerate the pairs $(i,j)$ by increasing $j-i$ and let $U_n^{(r)}$ be the subgroup of matrices whose entries vanish on the first $r$ pairs; matrix multiplication shows $[U_n^{(r)},U_n^{(s)}]\\subseteq U_n^{(r+s)}$ (the commutator of two entries contributes only to strictly later pairs), so the series is central with the last term trivial, and projection identifies each quotient with $k$ with group law addition, i.e. with $\\mathbf G_a$. $T_n$ acts linearly on each quotient through its diagonal quotient, which is the equivariance used by the structure theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Example 6.49, printed pp. 136-137; Theorem 16.21, printed pp. 330-331"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-unipotent-groups-have-central-series-with-subgroups-of-ga-quotients",
+        "kind": "theorem",
+        "title": "Unipotent groups have central series with quotients embedded in G_a",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-derived-subgroup-and-solvable-algebraic-group",
+          "lem-nonaffine-group-image-exact-quotient-properties",
+          "thm-nonaffine-affine-normal-group-quotient-affine",
+          "def-affine-scheme",
+          "def-group-scheme-over-a-field",
+          "def-subgroup-commutator-and-lower-central-series",
+          "lem-upper-unitriangular-central-series",
+          "thm-unipotent-group-triangular-criterion"
+        ],
+        "statement": "Assume the Axiom of Choice for the faithful triangular embedding and the affine kernel/image quotient suppliers ([[def-axiom-of-choice]]).\n\nLet $k$ be a field and let $G$ be an affine unipotent algebraic group over $k$ ([[def-affine-scheme]], [[def-group-scheme-over-a-field]]). Then there is a central series\n$$G=G_0\\supseteq G_1\\supseteq\\dots\\supseteq G_r=1$$\nof closed subgroup schemes of $G$ whose successive quotients are isomorphic to closed subgroup schemes of $\\mathbf G_a$. In particular every unipotent algebraic group is nilpotent and hence solvable.",
+        "strategy": "Milne Proposition 14.21. Embed $G$ as a closed subgroup of some $U_n$ (Theorem 14.5(b)), intersect $G$ with the central series of $U_n$ from 6.49, and use that the intersection of a central series with a subgroup is again a central series whose successive quotients embed into the quotients of the ambient series, hence into subgroups of $\\mathbf G_a$. A group with such a series is nilpotent and a fortiori solvable by the definitions of the lower central and derived series.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Proposition 14.21, printed pp. 284-285"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Section 2.1, Proposition 39 and Corollary 41, pp. 19-20"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-unipotent-group-triangular-criterion",
+        "kind": "theorem",
+        "title": "Unipotent groups are exactly the subgroups of some U_n, equivalently the groups with coconnected coordinate Hopf algebra",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-affine-scheme",
+          "def-coconnected-hopf-algebra",
+          "def-group-scheme-over-a-field",
+          "def-unipotent-algebraic-group",
+          "def-upper-unitriangular-group-scheme",
+          "lem-coconnected-comodules-have-fixed-vectors",
+          "lem-nonaffine-affine-group-faithful-representation",
+          "lem-nonaffine-group-monomorphism-closed-immersion",
+          "lem-unipotent-representation-criterion",
+          "lem-upper-unitriangular-coordinate-ring-is-coconnected",
+          "thm-closed-subgroup-schemes-correspond-to-hopf-ideals"
+        ],
+        "statement": "Let $k$ be a field and let $G$ be an affine algebraic group over $k$ (an affine group scheme of finite type over $k$, [[def-affine-scheme]], [[def-group-scheme-over-a-field]]). Consider the following conditions:\n\n(a) $G$ is unipotent ([[def-unipotent-algebraic-group]]);\n\n(b) $G$ is isomorphic to a closed subgroup scheme of the upper unitriangular group scheme $U_n$ for some $n\\ge1$ ([[def-upper-unitriangular-group-scheme]]);\n\n(c) the coordinate Hopf algebra $O(G)$ is coconnected ([[def-coconnected-hopf-algebra]]).\n\nWithout a choice assumption, (c) implies (a); more generally a surjective Hopf-algebra quotient of $O(U_n)$ is coconnected and therefore defines a unipotent group. Assuming the Axiom of Choice ([[def-axiom-of-choice]]), (a) implies (b), and the geometric closed-subgroup conversion in (b) implies (c), so all three conditions are equivalent; the same assumption makes them equivalent to existence of a faithful finite-dimensional unipotent rational representation. The exact uses of AC are the faithful-representation/closed-immersion suppliers constructing the triangular embedding in (a) implies (b), and the closed-subgroup/quotient-ring supplier in geometric (b) implies (c). The Hopf-quotient filtration argument and (c) implies (a) use no choice. No smoothness, connectedness or perfectness is assumed; in positive characteristic the infinitesimal group $\\alpha_p$ and the constant group $(\\mathbb Z/p\\mathbb Z)_k$ are unipotent groups that are non-smooth, respectively non-connected.",
+        "strategy": "(a)$\\Rightarrow$(b): every finite-dimensional representation of a unipotent group is unipotent (lem-unipotent-representation-criterion), so apply this to a faithful finite-dimensional representation, which exists by the published affine faithful-representation lemma, and read off a basis in which $G$ embeds in $U_n$. (b)$\\Rightarrow$(c): a closed subgroup of $U_n$ has coordinate ring a quotient of the coconnected Hopf algebra $O(U_n)$ (lem-upper-unitriangular-coordinate-ring-is-coconnected), hence is coconnected. (c)$\\Rightarrow$(a): every nonzero comodule of a coconnected Hopf algebra has a nonzero fixed vector (lem-coconnected-comodules-have-fixed-vectors), which is the definition of unipotence. The remaining equivalence with faithful unipotent representations is the same argument applied to a faithful representation. Milne's standing convention in Chapters 12-17 is that algebraic groups are affine; the hypothesis is stated explicitly here because the library's algebraic groups need not be affine.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Theorem 14.5, Proposition 14.3 and Corollary 14.6, printed pp. 280-282"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Proposition 39 and Corollary 40, printed pp. 19-20 (smooth classical specialization; no Hopf-coconnectedness claim)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces",
+        "kind": "lemma",
+        "title": "Representations of diagonalizable groups split into character eigenspaces",
+        "deps": [
+          "def-axiom-of-choice",
+          "cor-every-vector-space-has-a-basis",
+          "def-diagonalizable-group-and-character-module",
+          "def-linear-subspace",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "lem-representations-of-affine-group-schemes-are-comodules"
+        ],
+        "statement": "Let $k$ be a field and let $G$ be a diagonalizable group over $k$, so that $O(G)=k[M]$ for an abelian group $M$ with group-like basis $(e_m)_{m\\in M}$ ([[def-diagonalizable-group-and-character-module]]). Then every rational representation $(V,\\rho)$ of $G$ ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]]) decomposes as\n$$V=\\bigoplus_{\\chi\\in M}V_\\chi,\\qquad V_\\chi=\\{v\\in V:\\rho(v)=v\\otimes e_\\chi\\},$$\na direct sum over the characters $\\chi\\in X(G)=M$ of $G$ of the corresponding eigenspaces. The eigenspaces may have arbitrary multiplicities. The decomposition is choice-free and is inherited by subrepresentations, quotients and the middle terms of extensions. In finite dimension, choosing finite bases of the nonzero eigenspaces expresses a representation as a finite direct sum of one-dimensional character representations; in particular $G$ is linearly reductive. Assuming the Axiom of Choice ([[def-axiom-of-choice]]), the same character-line decomposition holds in arbitrary dimension by [[cor-every-vector-space-has-a-basis]]; only this last assertion uses arbitrary choice.",
+        "strategy": "Milne Theorem 12.12(a)$\\Leftrightarrow$(d), with the proof of (a)$\\Rightarrow$(b): write $\\rho(v)=\\sum_i v_i\\otimes e_i$ in the basis of group-like elements; comparing the two sides of the coassociativity identity shows $\\rho(v_i)=v_i\\otimes e_i$ and $v=\\sum_i\\varepsilon(e_i)v_i$, so the $v_i$ span $V$ by eigenvectors. The directness of the sum over distinct characters is the companion character-independence lemma.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Theorem 12.12 and its proof, printed pp. 234-235"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Section 2.2, Proposition 45, pp. 20-21"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-distinct-characters-are-linearly-independent",
+        "kind": "lemma",
+        "title": "Distinct characters are linearly independent and eigenspace sums are direct",
+        "deps": [
+          "def-affine-scheme",
+          "def-diagonalizable-group-and-character-module",
+          "def-linear-subspace",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme"
+        ],
+        "statement": "Let $k$ be a field and let $G=D_k(M)$ be a diagonalizable group over $k$ with coordinate ring $O(G)=k[M]$ and character group $M$ ([[def-diagonalizable-group-and-character-module]]). Distinct characters of $G$ are linearly independent as functions on $G$: if $\\chi_1,\\dots,\\chi_r\\in M$ are pairwise distinct and $c_1,\\dots,c_r\\in k$ satisfy $\\sum_ic_i\\chi_i=0$ as elements of $k[M]$, then $c_1=\\dots=c_r=0$.\n\nConsequently, if a rational representation $V$ of an affine algebraic group $G$ ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]]) over $k$ is written as a sum $V=\\sum_\\chi V_\\chi$ of eigenspaces for pairwise distinct characters $\\chi$, where $V_\\chi=\\{v\\in V:r_R(g)(v\\otimes1)=\\chi_R(g)(v\\otimes1)\\text{ for every }R\\text{ and }g\\in G(R)\\}$, then the sum is direct: every family $(v_\\chi)$ with $v_\\chi\\in V_\\chi$ and $\\sum_\\chi v_\\chi=0$ has $v_\\chi=0$ for all $\\chi$.",
+        "strategy": "Milne Corollary 4.24 and Theorem 4.25. A nontrivial linear relation among distinct characters, evaluated at $R$-points and compared in the basis of group-like elements of $k[M]$, forces the coefficients to vanish; the directness of an eigenspace sum follows by applying linear functionals to a minimal dependence relation and using the independence of the characters.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Corollary 4.24 and Theorem 4.25, printed pp. 93-94"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-unipotent-and-diagonalizable-intersection-is-trivial",
+        "kind": "lemma",
+        "title": "A subgroup that is both unipotent and diagonalizable is trivial",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-diagonalizable-group-and-character-module",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-unipotent-algebraic-group",
+          "def-group-of-multiplicative-type-and-torus",
+          "thm-multiplicative-type-groups-and-galois-character-modules",
+          "thm-unipotent-group-triangular-criterion"
+        ],
+        "statement": "Let $k$ be a field and let $G$ be an algebraic group over $k$. If a closed subgroup scheme $H\\subseteq G$ ([[def-morphism-and-closed-subgroup-scheme]]) is both unipotent ([[def-unipotent-algebraic-group]]) and diagonalizable ([[def-diagonalizable-group-and-character-module]]), then $H=1$. Assuming the Axiom of Choice ([[def-axiom-of-choice]]) for the geometric splitting and closed-subgroup conversion, consequently a torus contains no nontrivial unipotent closed subgroup, and the intersection of a unipotent subgroup with a torus is trivial. No smoothness of $H$ is assumed.",
+        "strategy": "Milne Corollary 14.17 and the proof of Corollary 14.16. If $H$ is diagonalizable, every representation of $H$ is a direct sum of one-dimensional character representations; if $H$ is also unipotent, every simple representation is trivial, so the decomposition forces every representation to be trivial. Applying this to a faithful representation (the regular representation suffices) shows $H=1$.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Corollaries 14.16-14.17, printed p. 284"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-derived-subgroup-properties",
+        "kind": "lemma",
+        "title": "Properties of the derived subgroup of an algebraic group",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-affine-scheme",
+          "def-derived-subgroup-and-solvable-algebraic-group",
+          "def-dimension-noetherian-topological-space",
+          "def-group-scheme-over-a-field",
+          "def-smooth-morphism-schemes",
+          "def-unipotent-algebraic-group",
+          "lem-nonaffine-connected-group-geometrically-connected",
+          "thm-nonaffine-group-scheme-normal-subgroup-quotient"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the cited smoothness, quotient and reduction suppliers ([[def-axiom-of-choice]]).\n\nLet $k$ be a field and let $G$ be an affine algebraic group over $k$ ([[def-affine-scheme]], [[def-group-scheme-over-a-field]]) with derived subgroup $DG$ as in [[def-derived-subgroup-and-solvable-algebraic-group]]. Then:\n\n(a) $DG$ is a closed normal characteristic subgroup scheme of $G$, and $G/DG$ is commutative;\n\n(b) if $G$ is smooth then $DG$ is smooth, and if $G$ is connected then $DG$ is connected;\n\n(c) every closed subgroup scheme $H\\subseteq G$ containing $DG$ is normal in $G$;\n\n(d) for every $k$-algebra $R$ the abstract derived subgroup $[G(R),G(R)]$ is contained in $(DG)(R)$, and if $G$ is smooth over an algebraically closed field $k$ then $(DG)(k)=[G(k),G(k)]$;\n\n(e) if $G$ is smooth, connected and solvable with $G\\ne1$, then $DG\\ne G$, so $\\dim DG<\\dim G$.",
+        "strategy": "Milne Corollary 6.19, Proposition 6.20 and Remark 6.21, together with the subgroup-generated-by-a-map formalism of Ch. 2. (a),(b): $DG$ is the image closure of an iterated multiplication of copies of $G\\times_kG$ under the commutator morphism; the image of a morphism between smooth (resp. connected) group schemes is again smooth (resp. connected), and the published exact-sequence and normal-subgroup product lemmas transfer these properties. (c) for $g\\in G(R)$, $h\\in H(R)$ one has $ghg^{-1}=[g,h]h$ with $[g,h]\\in(DG)(R)\\subseteq H(R)$ by (d), so $H$ is stable under conjugation by all $R$-points. (d) is Milne 6.19(c). (e) if $DG=G$ then the derived series of $G$ is constant, contradicting solvability; a proper closed smooth connected subgroup has strictly smaller dimension.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Definition 6.16, Propositions 6.17-6.18, Corollary 6.19 and Propositions 6.20-6.21, printed pp. 129-130; Section 2(h), printed pp. 53-56"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-trigonalizable-iff-invariant-flags",
+        "kind": "lemma",
+        "title": "Trigonalizable groups, invariant flags and embeddings into T_n",
+        "deps": [
+          "lem-distinct-characters-are-linearly-independent",
+          "def-axiom-of-choice",
+          "lem-finite-dimensional-subcomodules-contain-elements",
+          "lem-nonaffine-group-image-exact-quotient-properties",
+          "thm-nonaffine-affine-normal-group-quotient-affine",
+          "thm-multiplicative-type-groups-and-galois-character-modules",
+          "def-affine-scheme",
+          "def-diagonalizable-group-and-character-module",
+          "def-group-scheme-over-a-field",
+          "def-trigonalizable-algebraic-group",
+          "def-unipotent-algebraic-group",
+          "def-upper-unitriangular-group-scheme",
+          "lem-nonaffine-affine-group-faithful-representation",
+          "lem-nonaffine-group-monomorphism-closed-immersion",
+          "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces",
+          "thm-unipotent-group-triangular-criterion"
+        ],
+        "statement": "Let $k$ be a field and let $G$ be an affine algebraic group over $k$ ([[def-affine-scheme]], [[def-group-scheme-over-a-field]]). Consider the following conditions:\n\n(a) $G$ is trigonalizable ([[def-trigonalizable-algebraic-group]]);\n\n(b) every finite-dimensional rational representation of $G$ admits a basis in which $G$ acts through upper triangular matrices;\n\n(c) $G$ is isomorphic to a closed subgroup scheme of the upper triangular group scheme $T_n=D_n\\ltimes U_n$ for some $n$ ([[def-upper-unitriangular-group-scheme]]);\n\n(d) $G$ contains a normal unipotent closed subgroup $U$ ([[def-unipotent-algebraic-group]]) with $G/U$ diagonalizable ([[def-diagonalizable-group-and-character-module]]).\n\nWithout a choice assumption, (a) is equivalent to (b), (d) implies (a), and quotients of trigonalizable groups are trigonalizable. Assuming the Axiom of Choice ([[def-axiom-of-choice]]) for the faithful-embedding and geometric kernel/image suppliers, all four conditions are equivalent; closed subgroups are then trigonalizable, and trigonalizability is preserved by extension of the base field. Only these embedding and geometric-conversion routes use AC.",
+        "strategy": "Milne Proposition 16.2 and Corollary 16.3. (a)$\\Rightarrow$(b): induction on $\\dim V$ using a one-dimensional subrepresentation and the induced flag on $V/V_1$. (b)$\\Rightarrow$(c): apply (b) to a faithful finite-dimensional representation, whose existence is the published faithful-representation lemma, and use that every monomorphism of finite-type group schemes is a closed immersion. (c)$\\Rightarrow$(d): $U=U_n\\cap G$ is normal in $G$ and unipotent by the triangular criterion, and $G/U$ embeds in $D_n=T_n/U_n$. (d)$\\Rightarrow$(a): if $U$ is unipotent and normal, a nonzero representation has a nonzero $U$-fixed subspace, on which $G$ acts through $G/U$; diagonalizable groups have representations that are sums of one-dimensional characters, giving a one-dimensional subrepresentation.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Proposition 16.2 and Corollaries 16.3-16.4, printed pp. 324-325"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Proposition 119 (Lie-Kolchin), printed p. 50 (smooth connected solvable specialization only)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-smooth-finite-type-schemes-have-schematically-dense-rational-points",
+        "kind": "lemma",
+        "title": "Rational points of smooth finite-type schemes over a separably closed field are schematically dense",
+        "deps": [
+          "lem-regular-local-domain-induction",
+          "def-axiom-of-choice",
+          "def-closed-immersion-schemes",
+          "def-reduction-of-scheme",
+          "def-smooth-morphism-schemes",
+          "lem-closed-immersion-affine-quotient-and-base-change",
+          "lem-field-valued-points-of-schemes",
+          "lem-nonempty-smooth-scheme-finite-separable-point",
+          "thm-reduction-universal-property"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field with no nontrivial finite separable extension (for example a separably closed or algebraically closed field), let $X$ be a reduced finite-type $k$-scheme, and let $S\\subseteq X(k)$ be a subset. If $S$ is dense in the underlying topological space of $X$, then every closed subscheme $Z\\subseteq X$ with $Z(k)\\supseteq S$ equals $X$; in other words, $S$ is schematically dense in $X$.\n\nIn particular, if $X$ is smooth over $k$, then $X(k)$ is dense in $X$ and hence schematically dense in $X$. The reducedness hypothesis cannot be dropped: for $X=\\operatorname{Spec}k[\\varepsilon]/(\\varepsilon^2)$ the closed subscheme $Z=\\operatorname{Spec}k$ has the same underlying space and satisfies $Z(k)=X(k)$, but $Z\\ne X$.\n\nThe Axiom of Choice is used through the finite-separable-point lemma and the affine description of closed immersions.",
+        "strategy": "Milne Proposition 1.16 and Corollary 1.17, with the density of rational points supplied by the published finite-separable-point lemma. If $Z\\subseteq X$ is a closed subscheme with $Z(k)\\supseteq S$, then $|Z|$ is closed and contains the dense set $S$, so $|Z|=|X|$; as $X$ is reduced, a closed subscheme with full support equals $X$ (on an affine chart the ideal of $Z$ is contained in the nilradical, which is zero). For the density statement, a nonempty open subscheme $U$ of a smooth $X$ is smooth of finite type over $k$, so it contains a closed point with finite separable residue field; since $k$ has no nontrivial finite separable extension, that point is a $k$-point. Hence $X(k)$ is dense, and the first part applies. The Axiom of Choice is used only through the published finite-separable-point lemma (separable closures and etale charts).",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Sections 1.9-1.10, printed p. 9; Appendix A.48, printed p. 581 (density of separable-residue-field points in irreducible geometrically reduced schemes)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-closed-finite-index-subgroup-of-connected-group-points",
+        "kind": "lemma",
+        "title": "Closed finite-index subgroups of rational points of smooth connected groups over algebraically closed fields are the whole point group",
+        "deps": [
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "def-axiom-of-choice",
+          "def-dimension-noetherian-topological-space",
+          "def-irreducible-component-scheme",
+          "lem-nonaffine-connected-group-geometrically-connected",
+          "lem-smooth-finite-type-schemes-have-schematically-dense-rational-points"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be an algebraically closed field, let $G$ be a smooth connected algebraic group of finite type over $k$, and let $H\\subseteq G(k)$ be a subgroup that is closed for the Zariski topology on $G(k)$ and of finite index in $G(k)$. Then $H=G(k)$.\n\nThe connectedness hypothesis is used: for $G=\\mu_2$ over an algebraically closed field of characteristic $\\ne2$ the trivial subgroup $H=\\{1\\}$ of $G(k)=\\{\\pm1\\}$ is closed of index $2$ and $H\\ne G(k)$, because $\\mu_2$ is not connected. The Axiom of Choice is inherited from the connectedness and density suppliers.",
+        "strategy": "A smooth connected finite-type group over an algebraically closed field is irreducible (published lemma), and $G(k)$ is dense in the irreducible space $|G|$ by the smooth-density lemma, so $G(k)$ is irreducible as a topological space; for $g\\in G(k)$ left translation is a homeomorphism of $G(k)$ because it is induced by the automorphism $x\\mapsto gx$ of $G$ with inverse $x\\mapsto g^{-1}x$. Since $H$ is closed in $G(k)$ and each coset is its homeomorphic image, the finitely many distinct cosets of $H$ are disjoint nonempty closed subsets; if $H\\ne G(k)$, then $H$ together with the union of the remaining cosets exhibits $G(k)$ as the union of two disjoint nonempty closed subsets and contradicts irreducibility. The Axiom of Choice is inherited from the smooth-density and irreducibility suppliers.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Summary 1.36 and its use in the proof of Theorem 16.30, printed pp. 17 and 335"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-smooth-commutative-algebraic-groups-are-trigonalizable",
+        "kind": "proposition",
+        "title": "Smooth commutative affine algebraic groups over algebraically closed fields are trigonalizable",
+        "deps": [
+          "def-affine-scheme",
+          "def-axiom-of-choice",
+          "def-group-scheme-over-a-field",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "def-smooth-morphism-schemes",
+          "lem-smooth-finite-type-schemes-have-schematically-dense-rational-points",
+          "lem-trigonalizable-iff-invariant-flags",
+          "thm-simultaneous-triangularisation-of-commuting-operators"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be an algebraically closed field and let $G$ be a smooth commutative affine algebraic group of finite type over $k$ ([[def-affine-scheme]], [[def-smooth-morphism-schemes]]), together with a finite-dimensional rational representation on $V$ ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]]). Then there is a basis of $V$ for which $G$ acts through upper triangular matrices. In particular every smooth commutative affine algebraic group over an algebraically closed field is trigonalizable ([[def-group-scheme-over-a-field]], [[lem-trigonalizable-iff-invariant-flags]]).",
+        "strategy": "Milne Lemma 16.11 and Proposition 16.12. The images of $G(k)$ in $\\mathrm{GL}(V)$ form a commuting family of endomorphisms whose characteristic polynomials split over the algebraically closed field, so the published simultaneous triangularisation theorem gives a basis with $G(k)\\subseteq T_n(k)$. The intersection $G\\cap T_n$ is a closed subgroup scheme of $G$ whose $k$-points are all of $G(k)$; since $G$ is smooth over $k$, $G(k)$ is schematically dense in $G$, so $G\\cap T_n=G$ and $G\\subseteq T_n$ for that basis. Trigonalizability follows from the flag formulation of the companion lemma. The Axiom of Choice is inherited from the density-of-rational-points supplier.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Lemma 16.11 and Proposition 16.12, printed pp. 327-328"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Section 2.1, Proposition 37, pp. 19-20"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-lie-kolchin-for-smooth-connected-solvable-groups",
+        "kind": "theorem",
+        "title": "Lie-Kolchin: smooth connected solvable affine groups over algebraically closed fields are trigonalizable",
+        "deps": [
+          "def-affine-scheme",
+          "def-axiom-of-choice",
+          "def-derived-subgroup-and-solvable-algebraic-group",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-smooth-morphism-schemes",
+          "def-trigonalizable-algebraic-group",
+          "lem-closed-finite-index-subgroup-of-connected-group-points",
+          "lem-finite-dimensional-subcomodules-contain-elements",
+          "lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties",
+          "lem-derived-subgroup-properties",
+          "lem-distinct-characters-are-linearly-independent",
+          "lem-smooth-finite-type-schemes-have-schematically-dense-rational-points",
+          "lem-trigonalizable-iff-invariant-flags",
+          "prop-smooth-commutative-algebraic-groups-are-trigonalizable"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be an algebraically closed field and let $G$ be a smooth connected solvable affine algebraic group over $k$ ([[def-affine-scheme]], [[def-smooth-morphism-schemes]], [[def-derived-subgroup-and-solvable-algebraic-group]]). Then $G$ is trigonalizable: every simple rational representation of $G$ has dimension one, equivalently every finite-dimensional rational representation of $G$ admits a basis in which $G$ acts through upper triangular matrices ([[def-trigonalizable-algebraic-group]], [[lem-trigonalizable-iff-invariant-flags]]). The hypotheses smooth, connected, solvable and $k$ algebraically closed are all essential, and the theorem is not claimed over non-algebraically-closed fields.",
+        "strategy": "Milne Theorem 16.30 by induction on $\\dim G$. Let $V$ be a simple representation and suppose first that $G$ is noncommutative, so $N=DG$ is smooth connected normal with $\\dim N<\\dim G$ (lem-derived-subgroup-properties); by induction some character $\\chi$ of $N$ has nonzero eigenspace $V_\\chi\\ne0$. The sum $W=\\bigoplus V_\\psi$ of nonzero eigenspaces is direct, and the set of characters $\\psi$ with $V_\\psi\\ne0$ is finite; conjugation permutes it. The stabilizer in $G(k)$ of $V_\\chi$ is a closed subgroup of finite index, hence all of $G(k)$ by the connectedness lemma, so $G$ stabilizes $V_\\chi$. Since $V$ is simple, $V=V_\\chi$ and $N$ acts by scalars. Every element of $N(k)$ is a product of commutators of elements of $G(k)$ and hence acts with determinant one, so the character $\\chi$ takes values in the finite group of scalar norms; as $N$ is smooth and connected, $\\chi=1$. Then $G$ acts through the commutative group $G/N$, and the commutative case is the companion proposition. The commutative case itself is Milne 16.14 via 16.12. All uses of finite-index arguments are the companion lemma. The Axiom of Choice is inherited from the finite-index and density suppliers.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Theorem 16.30 and its proof, printed pp. 335-336, with Theorem 4.25, printed p. 93"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Proposition 119 (Lie-Kolchin), printed p. 50"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-complete-connected-scheme-to-affine-scheme-morphism-is-constant",
+        "kind": "lemma",
+        "title": "Morphisms from complete connected schemes to affine schemes are constant",
+        "deps": [
+          "def-affine-scheme",
+          "def-axiom-of-choice",
+          "def-complete-variety",
+          "def-integral-scheme",
+          "def-irreducible-component-scheme",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-noetherian-topological-space",
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-proper-morphism",
+          "cor-finite-type-algebra-over-noetherian-ring-is-noetherian",
+          "lem-closed-immersion-proper",
+          "lem-noetherian-space-has-finitely-many-irreducible-components",
+          "lem-proper-stable-composition",
+          "thm-global-functions-proper-integral-variety",
+          "thm-morphisms-into-affine-scheme-global-sections",
+          "thm-noetherian-ring-has-noetherian-spectrum"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field, let $Z$ be a nonempty complete connected reduced finite-type $k$-scheme, and let $Y$ be an affine $k$-scheme of finite type. Then every $k$-morphism $Z\\to Y$ is constant: its image is a single closed point of $Y$.\n\nIn particular, a nonempty complete connected reduced affine finite-type $k$-scheme is the spectrum of a finite field extension of $k$. Without the reducedness hypothesis the conclusion fails: $\\operatorname{Spec}k[\\varepsilon]/(\\varepsilon^2)$ is complete and connected but is not the spectrum of a field.\n\nThe Axiom of Choice is used through the finiteness statement for the irreducible components of a Noetherian space and through the global-functions theorem for proper integral schemes.",
+        "strategy": "Milne A.75(g). A morphism $Z\\to Y$ with $Y$ affine corresponds to a $k$-algebra map $O(Y)\\to O(Z)$; it suffices to show $O(Z)$ is a field (a finite extension of $k$) and that the structure map $O(Y)\\to O(Z)$ has image in the constants, which is the published global-functions-on-a-proper-integral-variety theorem applied to each integral component of $Z$. Distinct components of a connected scheme meet, so their constant images agree and the morphism is constant. Applying this to the identity morphism of a complete connected affine finite-type scheme shows it is a single point.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Appendix A.75(g), printed p. 587"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "A.114, Appendix A, printed p. 511"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-fixed-locus-and-normal-orbit-closure",
+        "kind": "lemma",
+        "title": "Fixed loci are closed and a normal subgroup fixing a point fixes the orbit closure",
+        "deps": [
+          "thm-scheme-theoretic-image-quasi-compact-morphism",
+          "prop-modules-over-a-field-are-projective-flat-and-injective",
+          "def-axiom-of-choice",
+          "def-algebraic-group-action-and-scheme-theoretic-stabilizer",
+          "def-scheme-theoretic-image",
+          "def-separated-scheme-over-base",
+          "lem-action-map-fibres-and-stabilizer-subscheme",
+          "lem-smooth-finite-type-schemes-have-schematically-dense-rational-points",
+          "thm-morphisms-agree-closed-equalizer-separated-target"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be an algebraically closed field, let $G$ be a smooth algebraic group of finite type over $k$ acting on a separated finite-type $k$-scheme $X$, let $H\\subseteq G$ be a smooth closed normal subgroup scheme, and let $y\\in X(k)$ be a point fixed by $H(k)$. Then:\n\n(a) the fixed $k$-points form a Zariski-closed subset of $X(k)$, namely the $k$-points of the closed subscheme obtained by intersecting the scheme-theoretic equalizers of $h:X\\to X$ and the identity for $h\\in H(k)$;\n\n(b) the reduced closure $Z$ of the $G$-orbit of $y$ is stable under $G$, and the action of $H$ on $Z$ is trivial as a scheme morphism;\n\n(c) for every $x\\in Z(k)$ that is fixed by $H(k)$, the scheme-theoretic stabilizer $G_x$ of $x$ contains $H$.\n\nThe Axiom of Choice is inherited from the orbit-map and stabilizer suppliers.",
+        "strategy": "(a) the fixed locus of a single $g\\in G(k)$ is the equalizer of $g$ and the identity, closed because $X$ is separated, and the fixed locus of $H(k)$ is the intersection over $h\\in H(k)$. (b) for $g\\in G(k)$ and $h\\in H(k)$, $hg\\cdot y=g(g^{-1}hg)\\cdot y=g\\cdot y$ by normality, so $H(k)$ fixes the orbit of $y$ pointwise; the set fixed by $H(k)$ is closed by (a), so it contains the closure $Z$, and $Z$ is $G(k)$-stable because $G(k)$ permutes the $H(k)$-fixed points; schematic density of $G(k)$ in $G$ and closedness of the transporter make $Z$ a $G$-stable subscheme. (c) $G_x$ is a closed subgroup scheme with $H(k)\\subseteq G_x(k)$; since $H$ is smooth over the algebraically closed field, $H(k)$ is schematically dense in $H$ and the closed subscheme $H\\cap G_x$ equals $H$. The Axiom of Choice is inherited from the orbit-map and stabilizer supplier.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Chapter 7 Sections 7(b)-(c), fixed-point subschemes and isotropy groups, printed pp. 138-140"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Section 9(a), printed pp. 139-140; Corollary 9.10, printed p. 143; Notes 18.8, printed p. 314"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-borel-fixed-point-for-complete-schemes",
+        "kind": "theorem",
+        "title": "Borel fixed point theorem for complete schemes",
+        "deps": [
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "lem-nonaffine-connected-group-geometrically-connected",
+          "def-affine-scheme",
+          "def-axiom-of-choice",
+          "def-borel-subgroup-and-maximal-torus",
+          "def-complete-variety",
+          "def-proper-morphism",
+          "def-smooth-morphism-schemes",
+          "lem-closed-immersion-proper",
+          "lem-complete-connected-scheme-to-affine-scheme-morphism-is-constant",
+          "lem-derived-subgroup-properties",
+          "lem-fixed-locus-and-normal-orbit-closure",
+          "lem-orbit-map-faithfully-flat-and-orbit-locally-closed",
+          "lem-orbit-map-fibres-and-stabilizer-dimension",
+          "lem-smooth-finite-type-schemes-have-schematically-dense-rational-points",
+          "prop-faithfully-flat-orbit-map-represents-coset-quotient",
+          "thm-homogeneous-space-for-smooth-affine-group",
+          "thm-nonaffine-affine-normal-group-quotient-affine",
+          "thm-reduction-universal-property"
+        ],
+        "statement": "Assume the Axiom of Choice where the geometric orbit and dimension suppliers use it. Let $k$ be a field, let $G$ be a smooth connected solvable affine algebraic group over $k$ ([[def-affine-scheme]], [[def-smooth-morphism-schemes]]), and let $X$ be a nonempty complete $k$-scheme of finite type ([[def-complete-variety]], [[def-proper-morphism]]) with a rational action of $G$. Then there is a point $x\\in X(k^{\\mathrm a})$ fixed by $G(k^{\\mathrm a})$. If $k$ is algebraically closed, the fixed point lies in $X(k)$.\n\nCompleteness and affineness are essential for this theorem: $\\mathbf G_a$ acting by translation on $\\mathbf A^1$ has no fixed point, while an elliptic curve acting on itself by translation is a smooth connected solvable nonaffine group acting on a complete scheme without a fixed point. Smoothness is used by the scheme-theoretic orbit proof below; no assertion that it is necessary for the stated geometric-point conclusion is made.",
+        "strategy": "Borel's original proof (Milne 2015, 18.4). Base change to an algebraic closure reduces to $k$ algebraically closed, and passing to $X_{\\mathrm{red}}$ reduces to $X$ reduced (the action restricts to the reduced subscheme because $G\\times_kX_{\\mathrm{red}}$ is reduced and the action map lands in the closed set $X_{\\mathrm{red}}$). Induct on $\\dim G$; the case $\\dim G=0$ is immediate. For $\\dim G>0$ put $N=DG$, which is smooth, connected, normal, solvable and of strictly smaller dimension; by induction there is $y\\in X(k)$ fixed by $N(k)$. Let $Z$ be the closure of the $G$-orbit of $y$: it is nonempty, complete, reduced, $G$-stable and fixed pointwise by $N(k)$. Among the $G$-orbits of $k$-points of $Z$ choose one of minimal dimension; its orbit subscheme $O_x$ is closed in $Z$ by the orbit-dimension lemma and hence complete. Because $G$ is smooth and $X$ is separated, the orbit map $G\\to O_x$ is faithfully flat, so $O_x$ represents the coset quotient $G/G_x$ by the orbit-map proposition, and $G/G_x$ is a separated finite-type scheme by the homogeneous-space theorem; because $x$ is fixed by $N(k)$ the stabilizer $G_x$ contains $N=DG$; a closed subgroup containing the derived subgroup is normal, so $G/G_x$ is an affine connected group scheme, and it is complete because $O_x$ is. A connected complete affine finite-type scheme is a single point, so $G_x=G$ and $x$ is fixed by $G(k)$. All quotient and representability steps use the published homogeneous-space theorem and the orbit lemma of the actions page.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Corollary 17.3 and the surrounding results, printed p. 353"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Corollary 18.4 and Notes 18.8 (the original induction), printed p. 314; Corollary 9.10, printed p. 143"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Section 5.2, Theorem 118 and its proof, pp. 49-50"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-flag-variety-of-a-vector-space",
+        "kind": "lemma",
+        "title": "The variety of complete flags of a finite-dimensional vector space is smooth projective",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-upper-unitriangular-central-series",
+          "cor-grassmannian-smooth-irreducible-dimension",
+          "cor-projective-variety-product-exists",
+          "def-algebraic-group-action-and-scheme-theoretic-stabilizer",
+          "def-derived-subgroup-and-solvable-algebraic-group",
+          "def-grassmannian-subspaces",
+          "def-plucker-coordinates",
+          "def-product-varieties-universal-property",
+          "def-projective-bundle-scheme",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "lem-closed-immersion-proper",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring",
+          "lem-grassmannian-standard-affine-charts",
+          "lem-plucker-map-well-defined-injective",
+          "thm-multihomogeneous-map-to-projective-space",
+          "thm-plucker-image-closed",
+          "thm-projective-space-proper-over-base",
+          "def-upper-unitriangular-group-scheme"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the projective product and properness suppliers ([[def-axiom-of-choice]]).\n\nLet $k$ be an algebraically closed field and let $V$ be a finite-dimensional $k$-vector space of dimension $n\\ge1$. The set $\\mathrm{Fl}(V)$ of complete flags\n$$0=V_0\\subset V_1\\subset\\dots\\subset V_n=V,\\qquad \\dim V_i=i,$$\ncarries the structure of a smooth projective classical $k$-variety: it is the closed subvariety of the product of Grassmannians $\\prod_{i=1}^{n-1}\\mathbf{Gr}_i(V)$ cut out by the incidence conditions $V_i\\subseteq V_{i+1}$, embedded in a product of projective spaces by Pl\u00fccker coordinates. The group $\\mathrm{GL}(V)$ acts transitively on $\\mathrm{Fl}(V)$, the stabilizer of a flag is a closed subgroup scheme of $\\mathrm{GL}(V)$, and the stabilizer of a complete flag is solvable.",
+        "strategy": "Milne 7.29-7.30. A complete flag is the same as a point of the closed incidence subvariety of the product of Grassmannians, cut out by the closed incidence conditions; products and closed subvarieties of projective varieties are projective by the published product and closed-immersion items, so $\\mathrm{Fl}(V)$ is complete and separated, and it is smooth because the incidence correspondences are smooth fibrations over Grassmannians with smooth fibres. Rank-one transitivity of $\\mathrm{GL}(V)$ on flags is elementary linear algebra (extend a basis adapted to the flag), and the stabilizer of a flag lies in the group of block upper triangular matrices intersected with the corresponding rank conditions, hence is solvable.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Propositions 7.29-7.30, printed p. 146 (flag functor and projective incidence construction)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-borel-subgroup-is-the-stabilizer-of-a-maximal-flag",
+        "kind": "lemma",
+        "title": "A Borel subgroup of maximal dimension is the stabilizer of a maximal flag",
+        "deps": [
+          "def-affine-scheme",
+          "def-axiom-of-choice",
+          "def-borel-subgroup-and-maximal-torus",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme",
+          "lem-flag-variety-of-a-vector-space",
+          "lem-nonaffine-subgroup-scheme-stabilizer-of-line",
+          "thm-lie-kolchin-for-smooth-connected-solvable-groups"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be an algebraically closed field, let $G$ be a smooth connected affine algebraic group over $k$ ([[def-affine-scheme]], [[def-group-scheme-over-a-field]]), and let $B\\subseteq G$ be a smooth closed connected solvable subgroup of the largest possible dimension among smooth connected solvable subgroup varieties ([[def-borel-subgroup-and-maximal-torus]], [[def-morphism-and-closed-subgroup-scheme]]). Then there is a finite-dimensional rational representation $V$ of $G$ and a maximal flag $F$ in $V$ such that $B$ is exactly the scheme-theoretic stabilizer of $F$. In particular $B$ is a Borel subgroup, and every smooth closed connected solvable subgroup of $G$ of the largest possible dimension among smooth connected solvable subgroup varieties is the scheme-theoretic stabilizer of a maximal flag in some finite-dimensional rational representation of $G$.",
+        "strategy": "Milne, first half of the proof of Theorem 17.9(a). Chevalley's line-stabilizer theorem realizes $B$ as the scheme-theoretic stabilizer in $G$ of a line $L$ in a finite-dimensional representation $V$. Since $B$ is solvable and connected, Lie-Kolchin gives a $B$-stable maximal flag in $V/L$; pulling back along $V\\to V/L$ and prepending $0\\subset L$ produces a maximal flag $F$ in $V$ that is $B$-stable, and because the first step of the flag is $L$, the stabilizer of $F$ is contained in the stabilizer of $L$, hence equals $B$. The Axiom of Choice is inherited from Chevalley's line-stabilizer theorem and from Lie-Kolchin.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Proof of Theorem 17.9(a), printed pp. 354-355"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-quotient-by-a-borel-subgroup-is-complete",
+        "kind": "theorem",
+        "title": "The quotient of a connected group by a Borel subgroup of maximal dimension is complete",
+        "deps": [
+          "lem-nonaffine-reduced-neutral-subgroup-over-perfect-field",
+          "def-affine-scheme",
+          "def-axiom-of-choice",
+          "def-borel-subgroup-and-maximal-torus",
+          "def-complete-variety",
+          "def-derived-subgroup-and-solvable-algebraic-group",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-proper-morphism",
+          "def-smooth-morphism-schemes",
+          "lem-borel-subgroup-is-the-stabilizer-of-a-maximal-flag",
+          "lem-closed-immersion-proper",
+          "lem-flag-variety-of-a-vector-space",
+          "lem-orbit-map-faithfully-flat-and-orbit-locally-closed",
+          "lem-orbit-map-fibres-and-stabilizer-dimension",
+          "lem-proper-stable-composition",
+          "prop-faithfully-flat-orbit-map-represents-coset-quotient",
+          "thm-homogeneous-space-for-smooth-affine-group",
+          "def-quotient-sheaf-and-representable-quotient"
+        ],
+        "statement": "Assume the Axiom of Choice where the orbit-dimension supplier uses it. Let $k$ be an algebraically closed field, let $G$ be a smooth connected affine algebraic group over $k$ ([[def-affine-scheme]], [[def-smooth-morphism-schemes]], [[def-group-scheme-over-a-field]]), and let $B\\subseteq G$ be a Borel subgroup of largest possible dimension ([[def-borel-subgroup-and-maximal-torus]]). Then the homogeneous space $G/B$ is complete: the orbit of the flag $F$ of [[lem-borel-subgroup-is-the-stabilizer-of-a-maximal-flag]] is a closed subvariety of the (complete) flag variety $\\mathrm{Fl}(V)$, and $G/B$ is isomorphic to that orbit.",
+        "strategy": "Milne, second half of the proof of Theorem 17.9(a). The stabilizer of a maximal flag in $V$ is a solvable subgroup scheme of $G$, so every such stabilizer has dimension at most $\\dim B$; hence the orbit $G\\cdot F\\subseteq\\mathrm{Fl}(V)$ has minimal possible dimension $\\dim G-\\dim B$ among flag orbits, and an orbit of minimal dimension is closed in its ambient variety by the orbit-dimension lemma. Since $\\mathrm{Fl}(V)$ is complete, the closed orbit $G\\cdot F$ is complete, and the orbit map exhibits $G\\cdot F\\cong G/B$ by the faithfully-flat orbit-map proposition and the homogeneous-space theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Theorem 17.9(a) and its proof, printed pp. 354-355"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Section 5.1, Proposition 112, Theorem 113 and Definition 115, pp. 48-49, and Section 5.2, Theorem 122, pp. 49-51"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-power-map-on-unipotent-groups-is-bijective",
+        "kind": "lemma",
+        "title": "Power maps with exponent prime to the characteristic are bijective on unipotent groups",
+        "deps": [
+          "def-axiom-of-choice",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "thm-nonaffine-group-scheme-normal-subgroup-quotient",
+          "def-unipotent-algebraic-group",
+          "lem-field-valued-points-of-schemes",
+          "thm-unipotent-groups-have-central-series-with-subgroups-of-ga-quotients"
+        ],
+        "statement": "Assume the Axiom of Choice for the field-point functor. Let $k$ be a field, let $U$ be an affine unipotent algebraic group over $k$, and let $e\\ge1$ be an integer with $e\\cdot1_k\\ne0$ (every positive integer in characteristic zero, and precisely those prime to $p$ in characteristic $p>0$). Then the map $x\\mapsto x^e$ is a bijection from $U(k^{\\mathrm a})$ to itself.",
+        "strategy": "Induct on the central-series length. Additive subgroup powers are bijective for e nonzero in k; geometric quotient points lift and central adjustment gives existence and uniqueness, without treating a noncommutative power map as a homomorphism.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Lemma 15.2 and its proof, printed p. 303, with Proposition 14.21, printed pp. 284-285"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-smooth-multiplicative-type-groups-are-generated-by-their-finite-subgroups",
+        "kind": "lemma",
+        "title": "A smooth group of multiplicative type is the only closed subscheme containing all its finite subgroups",
+        "deps": [
+          "cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules",
+          "cor-tori-correspond-to-torsion-free-character-lattices",
+          "def-axiom-of-choice",
+          "def-diagonalizable-group-and-character-module",
+          "def-reduction-of-scheme",
+          "def-smooth-morphism-schemes",
+          "lem-regular-local-domain-induction",
+          "lem-smooth-finite-type-schemes-have-schematically-dense-rational-points",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-multiplicative-type-groups-and-galois-character-modules"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be an algebraically closed field and let $G$ be a smooth algebraic group of multiplicative type over $k$, say $G=D(M)$ with $M$ finitely generated. Put $\\mathcal N_k=\\{n\\ge1:n\\cdot1_k\\ne0\\}$: this is all positive integers in characteristic zero and the positive integers prime to $p$ in characteristic $p>0$. For every integer $n\\ge1$ let $G_n=\\ker(n\\cdot:G\\to G)$ be the kernel of multiplication by $n$; it is a finite closed subgroup scheme. If $Z\\subseteq G$ is a closed subscheme with\n$$Z(k)\\supseteq\\bigcup_{n\\in\\mathcal N_k}G_n(k),$$\nthen $Z=G$.\n\nThe Axiom of Choice is inherited from the classification of groups of multiplicative type and from the schematically-dense-points lemma.",
+        "strategy": "Use the character decomposition into a torus and finite etale factor. N_k={n>=1:n.1_k!=0} includes all positive integers in characteristic zero. Common-multiple kernels contain every finite component; the infinite roots-of-unity Laurent grid is dense by coefficient induction. Smooth reducedness gives schematic density.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Proposition 12.3, printed p. 231; Theorem 12.32, printed p. 242"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Proposition 14.33, printed p. 237"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-crossed-homomorphisms-from-diagonalizable-to-unipotent-are-principal",
+        "kind": "proposition",
+        "title": "Smooth diagonalizable groups over algebraically closed fields have only principal cocycles into smooth commutative unipotent groups",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-crossed-homomorphism-and-hochschild-extension",
+          "def-diagonalizable-group-and-character-module",
+          "def-dimension-noetherian-topological-space",
+          "def-morphism-and-closed-subgroup-scheme",
+          "lem-power-map-on-unipotent-groups-is-bijective",
+          "lem-smooth-multiplicative-type-groups-are-generated-by-their-finite-subgroups"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be an algebraically closed field, let $G$ be a diagonalizable group variety over $k$ ([[def-diagonalizable-group-and-character-module]]) and let $M$ be a commutative unipotent group variety over $k$ equipped with an action of $G$ by group automorphisms ([[def-crossed-homomorphism-and-hochschild-extension]]). Put $\\mathcal N_k=\\{n\\ge1:n\\cdot1_k\\ne0\\}$, all positive integers in characteristic zero and those prime to $p$ in characteristic $p>0$. Then every crossed homomorphism $f:G\\to M$ is principal: there is $m\\in M(k)$ with\n$$f(x)=x\\cdot m-m\\qquad\\text{for all }x\\in G(k).$$",
+        "strategy": "For n>1 with n.1_k!=0 and x in Gn(k), average the cocycle and divide by en. The closed nonempty solution sets in M(k) stabilize along lcm indices cofinal in N_k, including all positive integers in characteristic zero. Their point m gives equality on the admissible torsion grid; the repaired smooth density lemma identifies the closed equalizer with G.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Proposition 15.3 and its proof, printed pp. 303-304"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Proposition 16.3, printed p. 270"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-hochschild-cohomology-of-algebraic-groups",
+        "kind": "definition",
+        "title": "Hochschild cohomology of algebraic groups and the classification of Hochschild extensions",
+        "deps": [
+          "def-crossed-homomorphism-and-hochschild-extension",
+          "def-group-scheme-over-a-field",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "def-tensor-product-of-modules-by-generators-and-relations"
+        ],
+        "statement": "Let $k$ be a field, let $G$ be an algebraic group over $k$ ([[def-group-scheme-over-a-field]]) and let $M$ be a $G$-module: a commutative group functor on $k$-algebras equipped with a left action of $G$ by group homomorphisms. A typical example is a rational representation of an affine $G$ viewed as a group functor ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]]).\n\nFor $n\\ge0$ put\n$$C^n(G,M)=\\operatorname{Nat}(G^n,M)=\\{\\text{natural transformations of set-valued functors }G^n\\to M\\},$$\nthe group of $n$-cochains, with pointwise addition. Here each cochain is a family of maps on algebra-valued points compatible with every base change, rather than an arbitrary function on one point set; for represented functors these are morphisms of schemes by Yoneda. With the convention $G^0=\\operatorname{Spec}k$ so that $C^0(G,M)=M(k)$. The **coboundary** $\\partial^n:C^n(G,M)\\to C^{n+1}(G,M)$ is\n$$(\\partial^nf)(g_1,\\dots,g_{n+1})=g_1\\cdot f(g_2,\\dots,g_{n+1})+\\sum_{i=1}^{n}(-1)^if(g_1,\\dots,g_ig_{i+1},\\dots,g_{n+1})+(-1)^{n+1}f(g_1,\\dots,g_n),$$\nevaluated functorially on $k$-algebras; one checks $\\partial^{n+1}\\partial^n=0$ by the usual alternating-sum cancellation, using functoriality of the $G$-action on $M$. The **Hochschild cohomology** of $G$ with coefficients in $M$ is\n$$H^n(G,M)=\\ker\\partial^n/\\operatorname{im}\\partial^{n-1},\\qquad \\operatorname{im}\\partial^{-1}:=0,$$\nso in particular $H^0(G,M)=M(k)^G$ is the group of $G$-invariant $k$-points, and $C^\\bullet(G,M)$ is a complex of abelian groups.\n\nAn exact sequence of $G$-modules $0\\to M'\\to M\\to M''\\to0$ gives a long exact sequence when its induced cochain maps $C^n(G,M)\\to C^n(G,M'')$ are surjective in every degree (for example when $M\\to M''$ has a section as a map of set-valued functors). Then the induced complexes form a short exact sequence, and the usual connecting-map construction gives\n$$\\dots\\to H^n(G,M')\\to H^n(G,M)\\to H^n(G,M'')\\xrightarrow{\\delta}H^{n+1}(G,M')\\to\\dots$$\n\nFor rational modules $V$, this surjectivity always holds for an exact sequence of representations: any $k$-linear splitting of the coefficient vector spaces is a natural map of their additive functors, and applying it to a cochain gives a lift (equivariance of that splitting is not required). If $G$ is affine with coordinate ring $A$, Yoneda gives $C^n(G,V^{\\mathrm a})=V\\otimes_kA^{\\otimes n}$, so degreewise exactness also follows directly from tensoring vector spaces over a field. These rational cochains commute with filtered unions of coefficient submodules, because each tensor is a finite sum. The rational-module statements on this page use this case.\n\nFor the second cohomology group the following classification holds ([[def-crossed-homomorphism-and-hochschild-extension]] for the terminology). Let $E(G,M)$ be the set of equivalence classes of Hochschild extensions $0\\to M\\to E\\to G\\to1$ inducing the given action of $G$ on $M$, two extensions being equivalent when they are isomorphic over $G$ by a map restricting to the identity on $M$. Then there is a canonical bijection\n$$E(G,M)\\ \\longrightarrow\\ H^2(G,M)$$\nsending the class of an extension with a section $s:G\\to E$ to the class of the $2$-cocycle\n$$f(g_1,g_2)=s(g_1)s(g_2)s(g_1g_2)^{-1}\\in M,$$\ni.e. the unique element with $s(g_1)s(g_2)=f(g_1,g_2)s(g_1g_2)$; the class of $f$ is independent of the choice of section, and a $2$-cocycle conversely determines an extension with the given action. This is Milne's Proposition 15.10; the definitions and the functoriality statements used here are the formal parts of Sections 15(b)-(c) of the cited source.",
+        "strategy": "Definition record and Milne Proposition 15.10. The coboundary is the standard one; functoriality and the long exact sequence are formal. For the classification, a section $s$ of a Hochschild extension turns the group law into a 2-cocycle by the displayed formula, the cohomology class is independent of the choice of section, and conversely a 2-cocycle defines an extension with the given action; the two constructions are inverse, exactly as in the classical theory of group extensions.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Sections 15(b)-(c), Propositions 15.9-15.10, printed pp. 304-309"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Sections 16(b)-(c), printed pp. 270-274; Proposition 16.10, printed p. 274"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-shapiro-lemma-and-induced-modules-are-acyclic",
+        "kind": "lemma",
+        "title": "Shapiro's lemma for the trivial subgroup and acyclicity of free comodules",
+        "deps": [
+          "def-affine-scheme",
+          "def-commutative-hopf-algebra-over-a-field",
+          "def-hochschild-cohomology-of-algebraic-groups",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme"
+        ],
+        "statement": "Let $k$ be a field and let $G$ be an affine algebraic group over $k$ with coordinate ring $A=O(G)$, a commutative Hopf algebra ([[def-affine-scheme]], [[def-commutative-hopf-algebra-over-a-field]]). For a $k$-vector space $V$ let $\\mathrm{Ind}^G(V)$ be the $G$-module whose $R$-points are the set $\\operatorname{Nat}(G_R,V_R^{\\mathrm a})$ of natural transformations on commutative $R$-algebras; equivalently, regular $V_R$-valued functions on $G_R$, with $G$ acting by $R$-points and $(g\\cdot\\varphi)(x)=\\varphi(xg)$; this is the induced module of the trivial subgroup of $G$. Then:\n\n**(a) Shapiro's lemma.** $H^n(G,\\mathrm{Ind}^G(V))=0$ for all $n\\ge1$, where $H^\\bullet$ is Hochschild cohomology ([[def-hochschild-cohomology-of-algebraic-groups]]).\n\n**(b) Free comodules are acyclic.** Equip $V\\otimes_kA$ with its free $A$-comodule structure $\\rho(v\\otimes a)=v\\otimes\\Delta(a)$, i.e. the comodule structure of [[def-rational-representation-and-comodule-of-an-affine-group-scheme]]. Then $\\mathrm{Ind}^G(V)\\cong(V\\otimes_kA)^{\\mathrm{a}}$ as $G$-modules, and consequently\n$$H^n(G,V\\otimes_kA)=0\\qquad\\text{for all }n\\ge1.$$\n\nThe pair report records that the general form of Shapiro's lemma for a subgroup $H\\subseteq G$, $H^n(G,\\mathrm{Ind}_H^GM)\\cong H^n(H,M)$, is part of the scaffolded claim but requires homological machinery beyond the present page and is therefore not stated here; only the trivial-subgroup case used by the later items is proved.",
+        "strategy": "Milne Proposition 15.4 and Proposition 15.12. The induced module is identified as a functor with $R\\mapsto\\mathrm{Nat}(h_{A_R},(M_a)_R)$ by Yoneda, and evaluating cochains at the identity gives the isomorphism of complexes computing $H^n(G,-)$ and $H^n(H,-)$. The free comodule $V\\otimes_kA$ is the induced module of the trivial $H$-module $V$ for $H=1$, so its positive cohomology vanishes by Shapiro's lemma.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Proposition 15.4 (Shapiro's lemma) and Proposition 15.12, printed pp. 305 and 310-311"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Proposition 16.4, printed pp. 271-272; Proposition 16.12, printed p. 276"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-linearly-reductive-iff-h1-vanishes",
+        "kind": "proposition",
+        "title": "Linear reductivity is equivalent to vanishing of first Hochschild cohomology",
+        "deps": [
+          "def-hochschild-cohomology-of-algebraic-groups",
+          "def-group-scheme-over-a-field"
+        ],
+        "statement": "Let $k$ be a field and let $G$ be an algebraic group over $k$. Then $G$ is linearly reductive (every finite-dimensional rational representation of $G$ is a direct sum of simple representations) if and only if $H^1(G,V)=0$ for every finite-dimensional rational representation $V$ of $G$.",
+        "strategy": "Milne Proposition 15.15. If $G$ is linearly reductive and $x\\in H^1(G,V)$, the coaction embeds $V$ in an acyclic free comodule $V_0\\otimes_kO(G)$, so $x$ dies in some finite-dimensional $W$ containing $V$ (Milne Lemma 15.14), and the split sequence $0\\to V\\to W\\to W/V\\to0$ kills $x$ via the long exact sequence. Conversely, given an exact sequence $0\\to V'\\to V\\to V''\\to0$ of finite-dimensional representations, the long exact sequence of the representation $\\mathrm{Hom}(V'',V')$ shows that $H^1(G,\\mathrm{Hom}(V'',V'))=0$ makes the identity of $V''$ lift to a $G$-equivariant splitting.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Lemma 15.14 and Propositions 15.15-15.16, printed pp. 311-312"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Lemma 16.14 and Proposition 16.15, printed p. 277"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-higher-hochschild-cohomology-vanishes-for-linearly-reductive-groups",
+        "kind": "proposition",
+        "title": "Higher Hochschild cohomology vanishes for linearly reductive groups",
+        "deps": [
+          "def-affine-scheme",
+          "def-hochschild-cohomology-of-algebraic-groups",
+          "lem-shapiro-lemma-and-induced-modules-are-acyclic",
+          "prop-linearly-reductive-iff-h1-vanishes"
+        ],
+        "statement": "Let $k$ be a field and let $G$ be a linearly reductive affine algebraic group over $k$ ([[def-affine-scheme]]): every finite-dimensional rational representation of $G$ is a direct sum of simple representations, equivalently $H^1(G,V)=0$ for every finite-dimensional representation $V$ ([[prop-linearly-reductive-iff-h1-vanishes]]). Then\n$$H^n(G,V)=0\\qquad\\text{for all }n\\ge1$$\nand for every rational representation $V$ of $G$, where $H^\\bullet$ is Hochschild cohomology ([[def-hochschild-cohomology-of-algebraic-groups]]).",
+        "strategy": "Milne Proposition 15.16. Since representations are directed unions of finite-dimensional subrepresentations and cohomology commutes with filtered colimits, it suffices to treat finite-dimensional $V$. Induct on $n$: an element $x\\in H^n(G,V)$ dies in some finite-dimensional $W\\supseteq V$ (Milne Lemma 15.14, which uses acyclicity of free comodules), hence lifts to $H^{n-1}(G,W/V)$, which vanishes by induction.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Lemma 15.14 and Propositions 15.15-15.16, printed pp. 311-312"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Lemma 16.14, printed p. 277; Proposition 16.16, printed pp. 277-278"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-multiplicative-type-groups-are-linearly-reductive",
+        "kind": "lemma",
+        "title": "Groups of multiplicative type are linearly reductive",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-group-of-multiplicative-type-and-torus",
+          "def-linear-subspace",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "def-semilinear-galois-action-on-a-scalar-extended-algebra",
+          "lem-galois-fixed-points-recover-a-finite-dimensional-scalar-extension",
+          "lem-multiplicative-type-groups-split-separably",
+          "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces",
+          "thm-multiplicative-type-groups-and-galois-character-modules"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field and let $G$ be a finite-type group scheme of multiplicative type over $k$ ([[def-group-of-multiplicative-type-and-torus]]). Then every rational representation of $G$ ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]]) is a direct sum of simple representations, and the simple representations are classified by the $\\Gamma_k$-orbits of the character group $X^*(G)$: $G$ is linearly reductive.",
+        "strategy": "Milne Theorem 12.30. Split $G$ by a finite Galois extension $K/k$: over $K$ the group is diagonalizable and its representations decompose into character eigenspaces; a representation of $G$ over $k$ is the same as a representation of $G_K$ equipped with a semilinear Galois action, and the eigenspace decomposition over $K$ descends to a direct sum over the Galois orbits of characters. The classification of simple objects follows by taking the induced representation of a character with its stabilizer field.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Theorem 12.30 and its proof, printed pp. 241-242"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Section 2.2, Proposition 45, pp. 20-21"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-ga-torsors-over-affine-schemes-are-trivial",
+        "kind": "lemma",
+        "title": "Torsors under the additive group over an affine scheme are trivial",
+        "deps": [
+          "def-affine-scheme",
+          "def-axiom-of-choice",
+          "def-faithfully-flat-morphism-schemes",
+          "def-open-immersion-schemes",
+          "def-locally-finite-presentation-morphism",
+          "def-quasi-compact-and-quasi-separated-morphism",
+          "lem-spectrum-of-a-finite-product-ring-is-a-disjoint-union",
+          "thm-affine-fibre-product-tensor-ring",
+          "prop-transitivity-of-flatness-under-change-of-rings",
+          "lem-nonaffine-fppf-descent-of-scheme-morphisms"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $R$ be a commutative ring and let $S=\\operatorname{Spec}R$. Let $\\mathbf G_a=\\operatorname{Spec}R[t]$ be the additive group scheme over $R$, with comultiplication $\\Delta(t)=t\\otimes1+1\\otimes t$, counit $\\varepsilon(t)=0$ and antipode $S(t)=-t$, so that $\\mathbf G_a(T)=\\mathcal O_T(T)$ as an additive group for every $S$-scheme $T$.\n\nA **$\\mathbf G_a$-torsor over $S$** is an $S$-scheme $\\pi:X\\to S$ that is faithfully flat and finitely presented, together with an action $\\alpha:\\mathbf G_a\\times_SX\\to X$ of $\\mathbf G_a$ on $X$ over $S$ such that the shear morphism\n$$\\sigma:\\mathbf G_a\\times_SX\\to X\\times_SX,\\qquad \\sigma(g,x)=(g\\cdot x,x)$$\nis an isomorphism. Then $X$ is **trivial**: there is an isomorphism $X\\cong\\mathbf G_a\\times_S S=\\mathbf A^1_R$ of $S$-schemes, and in particular $\\pi$ admits a section $S\\to X$.\n\nThe Axiom of Choice enters through the fppf descent of scheme morphisms used below.",
+        "strategy": "Refine the faithfully flat finitely presented torsor cover by a finite affine open cover U of X; its finite disjoint union is affine and remains faithfully flat, quasi-compact and locally finitely presented over S. The shear isomorphism gives an additive \u010cech 1-cocycle on U\u00d7_S U. Exactness of the faithfully flat Amitsur complex (Stacks tag 08WE, in the item source record) writes it as b_1-b_2. Translating the chosen U-section by b makes it agree on overlaps, so fppf descent of morphisms gives a section S\u2192X. The shear isomorphism then identifies X with Ga\u00d7S.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Example 2.68 and Example 2.72 with the surrounding paragraph on torsors, printed pp. 54-61"
+            },
+            {
+              "title": "The Stacks Project, Descent, Lemma 35.3.6 (exactness of the extended Amitsur complex)",
+              "url": "https://stacks.math.columbia.edu/tag/023M"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-extensions-of-multiplicative-type-groups-by-vector-groups-split",
+        "kind": "proposition",
+        "title": "Extensions of multiplicative-type groups by a one-dimensional vector group with a linear action split",
+        "deps": [
+          "thm-nonaffine-group-scheme-normal-subgroup-quotient",
+          "def-axiom-of-choice",
+          "def-affine-scheme",
+          "def-crossed-homomorphism-and-hochschild-extension",
+          "def-group-of-multiplicative-type-and-torus",
+          "def-hochschild-cohomology-of-algebraic-groups",
+          "def-smooth-morphism-schemes",
+          "lem-ga-torsors-over-affine-schemes-are-trivial",
+          "lem-multiplicative-type-groups-are-linearly-reductive",
+          "prop-higher-hochschild-cohomology-vanishes-for-linearly-reductive-groups"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field, let $G$ be an affine algebraic group of multiplicative type over $k$ ([[def-group-of-multiplicative-type-and-torus]], [[def-affine-scheme]]), and let\n$$0\\to U\\to E\\to G\\to1$$\nbe an extension of affine algebraic groups in which $U\\cong\\mathbf G_a$ and the induced action of $G$ on $U$ is linear (equivalently, $U$ is identified with $\\mathbf G_a$ on which $G$ acts through a character). Then the extension splits: $E\\cong U\\rtimes G$, and the projection admits a homomorphism of algebraic groups as a section.",
+        "strategy": "Milne Theorem 15.34(a) together with its proof via Theorem 15.31. The projection $E\\to G$ is a $\\mathbf G_a$-torsor, hence trivial over the affine base $G$ by the torsor-triviality lemma, so the extension is a Hochschild extension and its class lies in $H^2(G,\\mathbf G_a(\\chi))$. Since $G$ is of multiplicative type it is linearly reductive, so $H^n(G,V)=0$ for all $n\\ge1$ and every representation $V$, in particular $H^2(G,\\mathbf G_a(\\chi))=0$; by the classification of Hochschild extensions the class vanishes and $E\\cong U\\rtimes G$.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Proposition 15.31, printed p. 318; Theorem 15.34(a), printed pp. 319-320"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Proposition 16.38 and Theorem 16.41(a), printed pp. 285-286"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-trigonalizable-group-has-normal-series-with-vector-quotients",
+        "kind": "theorem",
+        "title": "Trigonalizable groups have a normal series with a multiplicative quotient and additive subgroup quotients",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-nonaffine-group-image-exact-quotient-properties",
+          "lem-unipotent-and-diagonalizable-intersection-is-trivial",
+          "def-affine-scheme",
+          "def-diagonalizable-group-and-character-module",
+          "def-group-of-multiplicative-type-and-torus",
+          "def-group-scheme-over-a-field",
+          "def-trigonalizable-algebraic-group",
+          "def-upper-unitriangular-group-scheme",
+          "lem-trigonalizable-iff-invariant-flags",
+          "lem-upper-unitriangular-central-series",
+          "thm-unipotent-group-triangular-criterion"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the faithful flag embedding and exact group-quotient suppliers ([[def-axiom-of-choice]]).\n\nLet $k$ be a field and let $G$ be a trigonalizable affine algebraic group over $k$ ([[def-trigonalizable-algebraic-group]], [[def-affine-scheme]], [[def-group-scheme-over-a-field]]). Then there is a normal series\n$$G\\supseteq G_0\\supseteq G_1\\supseteq\\dots\\supseteq G_r=1$$\nsuch that $G_0=G_u$ is the largest normal unipotent subgroup of $G$, the quotient $G/G_u$ is of multiplicative type ([[def-group-of-multiplicative-type-and-torus]]), and for each $i$ the quotient $G_i/G_{i+1}$ embeds $G/G_u$-equivariantly into $\\mathbf G_a$ with a linear action of $G/G_u$ (an action through the natural action of $\\mathbf G_m$ on $\\mathbf G_a$).",
+        "strategy": "Milne Theorem 16.21. Choose an embedding $G\\hookrightarrow T_n$, let $G_u=G\\cap U_n$, and note $G/G_u$ embeds in $D_n$. Intersect the central series of $U_n$ from 6.49 with $G$; each successive quotient is a closed subgroup of the corresponding additive quotient $\\mathbf G_a$, stable under the linear action of $D_n$, hence under $G/G_u$; dropping repetitions gives the required series.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Theorem 16.21 and Corollary 16.22, printed pp. 330-331"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Section 5.3, Proposition 127 and Lemma 128, pp. 52-53"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-dimension-one-smooth-connected-group-is-ga-or-gm",
+        "kind": "lemma",
+        "title": "One-dimensional smooth connected affine groups over perfect fields are additive groups or tori",
+        "deps": [
+          "def-axiom-of-choice",
+          "cor-tori-correspond-to-torsion-free-character-lattices",
+          "def-affine-scheme",
+          "def-dimension-noetherian-topological-space",
+          "def-group-of-multiplicative-type-and-torus",
+          "def-group-scheme-over-a-field",
+          "def-smooth-morphism-schemes",
+          "lem-nonaffine-connected-group-geometrically-connected",
+          "thm-unipotent-group-triangular-criterion"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the torus-splitting and geometric suppliers ([[def-axiom-of-choice]]).\n\nLet $k$ be a perfect field and let $G$ be a smooth connected affine algebraic group of dimension one over $k$ ([[def-affine-scheme]], [[def-smooth-morphism-schemes]], [[def-affine-scheme]]). Then either $G$ becomes isomorphic to $\\mathbf G_m$ over a finite separable extension of $k$, or it becomes isomorphic to $\\mathbf G_a$ over a finite purely inseparable extension of $k$. Over an algebraically closed field, $\\mathbf G_a$ and $\\mathbf G_m$ are the only connected affine group varieties of dimension one; an elliptic curve shows that affineness cannot be dropped.",
+        "strategy": "Milne Corollary 16.16. A smooth connected one-dimensional group is commutative (Milne 14.25), and the commutative structure theory provides a largest multiplicative-type subgroup $G_s$ with $G/G_s$ unipotent. Since $\\dim G=1$, either $G=G_s$, which is a one-dimensional torus and hence becomes $\\mathbf G_m$ after a finite separable extension, or $G=G_u$, a smooth connected one-dimensional unipotent group; such a group is a one-dimensional vector group and becomes $\\mathbf G_a$ after a finite purely inseparable extension. The commutative structure theory used here is Milne 16.13-16.15.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Proposition 14.25, printed p. 286; Corollary 14.53, printed p. 297; Theorem 16.13 and Corollaries 16.15-16.16, printed pp. 328-329"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Section 2.3, Theorem 58, p. 25, with Section 2.1, Proposition 37, pp. 19-20"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-smooth-trigonalizable-group-normal-series-refinement",
+        "kind": "lemma",
+        "title": "Unipotent radicals of smooth connected trigonalizable groups over perfect fields have normal G_a series",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-affine-scheme",
+          "lem-derived-subgroup-properties",
+          "def-group-of-multiplicative-type-and-torus",
+          "lem-unipotent-and-diagonalizable-intersection-is-trivial",
+          "def-group-scheme-over-a-field",
+          "def-smooth-morphism-schemes",
+          "lem-dimension-one-smooth-connected-group-is-ga-or-gm",
+          "lem-nonaffine-connected-group-geometrically-connected",
+          "lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties",
+          "lem-nonaffine-reduced-neutral-subgroup-over-perfect-field",
+          "thm-trigonalizable-group-has-normal-series-with-vector-quotients"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the cited smoothness, quotient and reduction suppliers ([[def-axiom-of-choice]]).\n\nLet $k$ be a perfect field and let $G$ be a smooth connected trigonalizable affine algebraic group over $k$ ([[def-smooth-morphism-schemes]], [[def-affine-scheme]], [[def-group-scheme-over-a-field]]). Then the series $G\\supseteq G_0=G_u\\supseteq\\cdots\\supseteq G_r=1$ of [[thm-trigonalizable-group-has-normal-series-with-vector-quotients]] can be chosen with every indexed term $G_i$ smooth and connected, normal in $G$, and every quotient $G_i/G_{i+1}$ isomorphic to $\\mathbf G_a$. The separate quotient $G/G_u$ remains of multiplicative type.",
+        "strategy": "Milne Corollary 16.22. Starting from the series of Theorem 16.21, replace each term by the identity component of its reduction, $(G_i)^0_{\\mathrm{red}}$; this is a smooth connected normal subgroup contained in $G_u$, and the quotient of consecutive terms is smooth, connected and of dimension at most one, so by the one-dimensional classification it is trivial or isomorphic to $\\mathbf G_a$. Dropping repetitions gives a series with the required properties. The connected-component and reducedness facts used are the published reduced-neutral-subgroup and connectedness lemmas.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Theorem16.13(b), Corollary16.15 and Corollary16.22, printed pp.328-329 and331"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Section 5.3, Proposition 127 and Lemma 128, pp. 52-53"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-central-ga-subgroup-of-smooth-connected-unipotent-group",
+        "kind": "lemma",
+        "title": "A nontrivial smooth connected unipotent group with split torus action over a perfect field has a stable central G_a",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-group-of-multiplicative-type-and-torus",
+          "lem-smooth-finite-type-schemes-have-schematically-dense-rational-points",
+          "def-subgroup-commutator-and-lower-central-series",
+          "def-trigonalizable-algebraic-group",
+          "lem-smooth-trigonalizable-group-normal-series-refinement",
+          "thm-unipotent-groups-have-central-series-with-subgroups-of-ga-quotients",
+          "def-unipotent-algebraic-group",
+          "lem-unipotent-and-diagonalizable-intersection-is-trivial",
+          "thm-trigonalizable-group-has-normal-series-with-vector-quotients"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the cited smoothness, quotient and reduction suppliers ([[def-axiom-of-choice]]).\n\nLet $k$ be a perfect field, let $U$ be a smooth connected unipotent algebraic group over $k$ ([[def-trigonalizable-algebraic-group]]), and let $T$ be a split torus acting on $U$ by group automorphisms ([[def-group-of-multiplicative-type-and-torus]]). If $U\\ne1$, there is a closed subgroup $N\\subseteq U$ that is central in $U$, stable under $T$, and isomorphic to $\\mathbf G_a$.",
+        "strategy": "Milne Corollary 16.23. Form the semidirect product $U\\rtimes T$, which is trigonalizable and smooth connected, and apply the refined normal series of the smooth trigonalizable structure theorem: let $N$ be the last nontrivial term of that series. It is contained in $U_n$ and, by construction from the central series of $U_n$ (6.49), the next term of that central series meets $U$ trivially, so $[N,U]\\subseteq[U_n,U^{(i)}]\\subseteq U^{(i+1)}\\cap U=1$: $N$ is central in $U$. It is stable under $T$ because the series is normal in the ambient group $U\\rtimes T$, and it is isomorphic to $\\mathbf G_a$.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Corollary 16.23, printed p. 331"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Section 5.3, Lemma 128, p. 53"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-trigonalizable-extensions-split-over-algebraically-closed-fields",
+        "kind": "theorem",
+        "title": "Splitting trigonalizable extensions: algebraically closed fields and two perfect-field cases",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-hochschild-cohomology-of-algebraic-groups",
+          "lem-derived-subgroup-properties",
+          "lem-ga-torsors-over-affine-schemes-are-trivial",
+          "lem-multiplicative-type-groups-are-linearly-reductive",
+          "lem-nonaffine-group-image-exact-quotient-properties",
+          "lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties",
+          "prop-higher-hochschild-cohomology-vanishes-for-linearly-reductive-groups",
+          "def-crossed-homomorphism-and-hochschild-extension",
+          "def-diagonalizable-group-and-character-module",
+          "def-group-of-multiplicative-type-and-torus",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-smooth-morphism-schemes",
+          "def-trigonalizable-algebraic-group",
+          "def-unipotent-algebraic-group",
+          "lem-smooth-trigonalizable-group-normal-series-refinement",
+          "lem-unipotent-and-diagonalizable-intersection-is-trivial",
+          "prop-crossed-homomorphisms-from-diagonalizable-to-unipotent-are-principal",
+          "prop-extensions-of-multiplicative-type-groups-by-vector-groups-split",
+          "thm-nonaffine-affine-normal-group-quotient-affine",
+          "thm-trigonalizable-group-has-normal-series-with-vector-quotients",
+          "thm-unipotent-group-triangular-criterion"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be a perfect field and let $G$ be a trigonalizable algebraic group over $k$ ([[def-trigonalizable-algebraic-group]]) with largest normal unipotent subgroup $G_u$ and diagonalizable quotient $G/G_u$ ([[def-group-of-multiplicative-type-and-torus]]). Then the extension $1\\to G_u\\to G\\to G/G_u\\to1$ splits in each of the following cases: (a) $k$ is algebraically closed; (b) $k$ is perfect and $G_u$ is smooth and connected; (c) $k$ is perfect and $G/G_u$ is connected. In particular a smooth connected trigonalizable group over an algebraically closed field is a semidirect product $G_u\\rtimes T$ for a maximal torus $T$, and all maximal tori are conjugate by an element of $G_u(k)$.",
+        "strategy": "Milne Theorem 16.26 and Theorem 16.27. Induct on the length of the smooth normal series of $G_u$ with $\\mathbf G_a$ quotients; let $N\\cong\\mathbf G_a$ be the last nonzero term, so that $G/N$ has the corresponding smaller quotient $G_u/N$. By induction the extension $1\\to G_u/N\\to G/N\\to G/G_u\\to1$ splits; pull back the $\\mathbf G_a$-torsor $G\\to G/N$ along that section to obtain an extension $1\\to N\\to G'\\to G/G_u\\to1$, on which $G/G_u$ acts linearly. This splits by the extension-splitting proposition, and combining the two sections splits the full extension. The conjugacy statement for two splittings $s,s'$ reduces to the difference of two sections, a crossed homomorphism $G/G_u\\to N$, which is principal by the companion proposition, so the sections are conjugate by an element of $N(k)\\subseteq G_u(k)$. The Axiom of Choice is inherited from the crossed-homomorphism and density suppliers.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Theorems 16.26-16.27; Theorem 15.34; primitive/Ore module equivalence 14.40-14.46 and perfect-field vector criterion 14.54; characteristic-zero vector criterion14.33, printed pp. 289, 292-297, 319-320 and 332-334"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Theorem 17.26, printed p. 298; Theorem 17.37(d), printed p. 302 (smooth connected case)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Theorem 130(iv) and its proof, printed pp. 53-56 (smooth connected classical case)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-maximal-diagonalizable-subgroups-of-trigonalizable-groups-are-conjugate",
+        "kind": "theorem",
+        "title": "Conjugacy of diagonalizable complements and maximal subgroups under smoothness hypotheses",
+        "deps": [
+          "lem-orbit-map-fibres-and-stabilizer-dimension",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "thm-jacobian-criterion-smooth-morphism",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "def-hochschild-cohomology-of-algebraic-groups",
+          "def-dimension-noetherian-topological-space",
+          "lem-derived-subgroup-properties",
+          "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces",
+          "lem-ga-torsors-over-affine-schemes-are-trivial",
+          "lem-multiplicative-type-groups-are-linearly-reductive",
+          "lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties",
+          "lem-nonaffine-group-image-exact-quotient-properties",
+          "lem-nonaffine-reduced-neutral-subgroup-over-perfect-field",
+          "lem-smooth-finite-type-schemes-have-schematically-dense-rational-points",
+          "lem-smooth-trigonalizable-group-normal-series-refinement",
+          "prop-higher-hochschild-cohomology-vanishes-for-linearly-reductive-groups",
+          "def-axiom-of-choice",
+          "def-crossed-homomorphism-and-hochschild-extension",
+          "def-diagonalizable-group-and-character-module",
+          "def-group-of-multiplicative-type-and-torus",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-trigonalizable-algebraic-group",
+          "lem-unipotent-and-diagonalizable-intersection-is-trivial",
+          "prop-crossed-homomorphisms-from-diagonalizable-to-unipotent-are-principal",
+          "thm-nonaffine-affine-normal-group-quotient-affine",
+          "thm-trigonalizable-extensions-split-over-algebraically-closed-fields",
+          "thm-trigonalizable-group-has-normal-series-with-vector-quotients",
+          "thm-unipotent-group-triangular-criterion",
+          "lem-diagonalizable-character-antiequivalence",
+          "thm-flat-finite-presentation-is-open"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be algebraically closed, let $G$ be a trigonalizable affine algebraic group ([[def-trigonalizable-algebraic-group]]), write $U=G_u$ for its largest normal unipotent subgroup, and let $q:G\\to D=G/U$ be its diagonalizable quotient. The extension has sections without any smoothness assumption ([[thm-trigonalizable-extensions-split-over-algebraically-closed-fields]]). Then:\n\n(a) If $D$ is smooth or $U$ is smooth and connected, any two sections $s_1,s_2:D\\to G$ are conjugate by some $u\\in U(k)$: $s_2=\\mathrm{inn}(u)\\circ s_1$.\n\n(b) If $U$ is smooth and connected, the maximal diagonalizable subgroup schemes of $G$ are exactly the section images $s(D)$ and are $U(k)$-conjugate. If only $D$ is assumed smooth, the analogous classification and conjugacy hold for maximal **smooth diagonalizable** subgroup schemes; nonsmooth diagonalizable subgroups need not lie in a section image.\n\n(c) If $G$ is smooth, possibly disconnected, then $D$ is smooth and $D^\\circ$ is a torus. The maximal tori of $G$ are exactly $s(D^\\circ)$ for full sections $s:D\\to G$ and are conjugate by $U^\\circ(k)\\subseteq U(k)$. If $G$ is also connected, $D=D^\\circ$, so these are the full section images.\n\nWhen both $D$ and $U$ are nonsmooth, section conjugacy can fail; and smoothness of $D$ alone does not give the classification of all maximal diagonalizable subgroup schemes. The explicit positive-characteristic counterexamples below establish both limitations. Finite diagonalizable factors are retained: a full section image need not be a torus.",
+        "strategy": "Milne Theorem 16.27. (a) Induct on the length of the smooth normal series of $G_u$; after adjusting by a section of $G/N$, the two sections of the pull-back $G'\\to D$ differ by a crossed homomorphism $D\\to N\\cong\\mathbf G_a$, which is principal by the companion proposition, so conjugation by an element of $N(k)$ identifies them. (b) A diagonalizable subgroup $S\\subseteq G$ meets $G_u$ trivially (the unipotent-and-diagonalizable intersection lemma), so $q|_S$ is injective, and maximality forces $q|_S$ to be an isomorphism onto $D$; the inverse is a section, and (a) gives conjugacy. (c) if $G$ is smooth, then $G_u$ is smooth connected and $D=G/G_u$ is a smooth connected diagonalizable group, i.e. a torus; conversely each $s(D)$ is smooth, connected and diagonalizable, hence a torus, and the maximality in (b) makes these exactly the maximal tori. The Axiom of Choice is inherited from the crossed-homomorphism and splitting suppliers.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Theorem16.27, interpreted with its required smoothness domains; Proposition15.3 and Theorem15.34; characteristic-zero vector criterion 14.33; primitive/Ore equivalence 14.40-14.46, division and freeness 14.50, and vector criterion 14.54, printed pp. 289, 292-297, 303-304, 319-320, 333-334"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Theorem 130, printed pp. 53-56; Proposition 133 and Corollary 134, printed pp. 56-57 (smooth connected classical specialization)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-maximal-tori-in-smooth-connected-solvable-groups-are-conjugate",
+        "kind": "theorem",
+        "title": "Maximal tori of a smooth connected solvable group are conjugate",
+        "deps": [
+          "lem-smooth-trigonalizable-group-normal-series-refinement",
+          "lem-nonaffine-group-image-exact-quotient-properties",
+          "def-affine-scheme",
+          "def-axiom-of-choice",
+          "def-borel-subgroup-and-maximal-torus",
+          "def-diagonalizable-group-and-character-module",
+          "def-group-of-multiplicative-type-and-torus",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-smooth-morphism-schemes",
+          "lem-unipotent-and-diagonalizable-intersection-is-trivial",
+          "thm-lie-kolchin-for-smooth-connected-solvable-groups",
+          "thm-maximal-diagonalizable-subgroups-of-trigonalizable-groups-are-conjugate",
+          "thm-trigonalizable-extensions-split-over-algebraically-closed-fields",
+          "thm-trigonalizable-group-has-normal-series-with-vector-quotients",
+          "thm-unipotent-group-triangular-criterion",
+          "def-dimension-noetherian-topological-space",
+          "thm-dimension-product-varieties",
+          "def-trigonalizable-algebraic-group"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be an algebraically closed field and let $G$ be a smooth connected solvable affine algebraic group over $k$ ([[def-affine-scheme]], [[def-smooth-morphism-schemes]], [[def-group-scheme-over-a-field]]). Let $G_u$ be the largest smooth connected normal unipotent subgroup of $G$ and let $T\\subseteq G$ be a maximal torus ([[def-borel-subgroup-and-maximal-torus]], [[def-group-of-multiplicative-type-and-torus]]). Then $G=G_u\\rtimes T$, every maximal torus of $G$ has dimension $\\dim G-\\dim G_u$, and any two maximal tori of $G$ are conjugate by an element of $G(k)$. Equivalently, every closed subgroup of multiplicative type of $G$ is conjugate into $T$.",
+        "strategy": "Milne Theorem 16.33(a)-(d) over $k$ algebraically closed, with the structure theory of the present page. $G$ is trigonalizable by Lie-Kolchin, so the splitting theorem applies and $G/G_u$ is a torus $D$ (the quotient is connected, smooth and of multiplicative type), and sections $D\\to G$ exist. A torus $T\\subseteq G$ meets $G_u$ trivially, so its image in $D$ is a subtorus of dimension $\\dim T\\le\\dim D$, while the image of a section is a torus of dimension $\\dim D$; hence maximal tori have dimension $\\dim D$, their images are all of $D$, and each is the image of a section. The conjugacy theorem for maximal diagonalizable subgroups of a trigonalizable group then conjugates any two of them by an element of $G_u(k)\\subseteq G(k)$. The Axiom of Choice is inherited from Lie-Kolchin and from the multiplicative-type suppliers.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Theorem 16.33(d) and its proof, printed pp. 336-337"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Section 5.3, Theorem 130(iii)-(iv), pp. 53-56, and Section 5.4, Theorem 136, pp. 56-58"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Theorem 17.37(d), printed p. 302"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-borel-and-maximal-torus-conjugacy-over-algebraically-closed-field",
+        "kind": "theorem",
+        "title": "Conjugacy of Borel subgroups and of maximal tori over an algebraically closed field",
+        "deps": [
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "def-axiom-of-choice",
+          "lem-smooth-finite-type-schemes-have-schematically-dense-rational-points",
+          "def-borel-subgroup-and-maximal-torus",
+          "def-complete-variety",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-proper-morphism",
+          "def-smooth-morphism-schemes",
+          "lem-orbit-map-faithfully-flat-and-orbit-locally-closed",
+          "prop-faithfully-flat-orbit-map-represents-coset-quotient",
+          "thm-borel-fixed-point-for-complete-schemes",
+          "thm-homogeneous-space-for-smooth-affine-group",
+          "thm-maximal-tori-in-smooth-connected-solvable-groups-are-conjugate",
+          "thm-quotient-by-a-borel-subgroup-is-complete",
+          "def-group-of-multiplicative-type-and-torus"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be an algebraically closed field and let $G$ be a connected affine group variety over $k$, i.e. a smooth connected affine algebraic group of finite type over $k$ ([[def-smooth-morphism-schemes]], [[def-group-scheme-over-a-field]]). Then: (a) for every Borel subgroup $B\\subseteq G$ the quotient $G/B$ is complete; (b) any two Borel subgroups of $G$ are conjugate by an element of $G(k)$; (c) any two maximal tori of $G$ are conjugate by an element of $G(k)$; (d) any two Borel pairs are conjugate. The assertions here are made under the stated smooth connected and algebraically closed hypotheses; no necessity claim for each hypothesis is made.",
+        "strategy": "Milne Theorems 17.9-17.10 (and 17.13 for Borel pairs). First prove (a) for a Borel subgroup $B_0$ of largest possible dimension, which is the quotient-completeness theorem; then (b): given Borel subgroups $B,B'$ with $B$ of largest possible dimension, let $B'$ act on the complete variety $G/B$ by left translation; the Borel fixed point theorem produces a fixed point $gB$, i.e. $B'gB=gB$, so $B'\\subseteq gBg^{-1}$ and maximality gives $B'=gBg^{-1}$. Hence every Borel subgroup is conjugate to $B_0$ and has the same dimension, so (a) holds for every Borel subgroup. (c) a maximal torus is contained in a Borel subgroup by a dimension-maximality argument, so $T\\subseteq B$ and $T'\\subseteq B'$; conjugating $B'$ to $B$ by (b) reduces to two maximal tori of the smooth connected solvable group $B$, which are conjugate by the solvable conjugacy theorem. (d) combines (b) and (c) with the conjugacy of maximal tori in the relevant Borel. The Axiom of Choice is inherited from the fixed-point and quotient-completeness theorems.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Theorems 17.9-17.10 and Proposition 17.13, printed pp. 354-356"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Theorem 122(ii), printed pp. 50-51; Theorem 136, printed p. 57; Proposition 149, printed p. 63 (Borel pairs)"
+            },
+            {
+              "title": "J. S. Milne, Algebraic Groups (v2.00, 20 December 2015 author-hosted preliminary edition)",
+              "url": "https://www.jmilne.org/math/CourseNotes/iAG200.pdf",
+              "locator": "Theorem 18.12, printed pp. 315-316; Theorem 18.14 and Proposition 18.17, printed p. 316"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 13,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 890,
+    "id": "unipotent-solvable-groups-and-borel-fixed-points-examples",
+    "kind": "B",
+    "category": "algebraic-geometry",
+    "title": "Unipotent and Solvable Groups and Borel Fixed Points \u2014 Examples",
+    "companion": "unipotent-solvable-groups-and-borel-fixed-points",
+    "requires": [
+      "unipotent-solvable-groups-and-borel-fixed-points",
+      "proj-projective-schemes-twisting-sheaves-and-ampleness"
+    ],
+    "items": [
+      {
+        "id": "ex-upper-triangular-unipotent-groups",
+        "kind": "example",
+        "title": "Upper unitriangular groups are unipotent, and the additive group is U_2",
+        "deps": [
+          "lem-upper-unitriangular-coordinate-ring-is-coconnected",
+          "lem-hopf-ideal-kernels-and-quotients",
+          "def-coconnected-hopf-algebra",
+          "def-unipotent-algebraic-group",
+          "def-upper-unitriangular-group-scheme",
+          "lem-upper-unitriangular-central-series",
+          "thm-unipotent-group-triangular-criterion"
+        ],
+        "statement": "Let $k$ be a field. The group scheme $U_n$ of upper unitriangular matrices ([[def-upper-unitriangular-group-scheme]]) is a smooth connected unipotent algebraic group over $k$: it is a closed subgroup of $U_n$ trivially, its coordinate ring $k[X_{ij}\\mid i<j]$ is coconnected by the weight filtration, and its central series has additive quotients ([[lem-upper-unitriangular-central-series]]).\n\nThe map\n$$a\\mapsto\\begin{pmatrix}1&a\\\\0&1\\end{pmatrix}$$\nis an isomorphism $\\mathbf G_a\\to U_2$, so $\\mathbf G_a$ is unipotent. In characteristic $p$, the subgroup schemes $\\alpha_p=\\operatorname{Spec}k[\\varepsilon]/(\\varepsilon^p)$ and $(\\mathbb Z/p\\mathbb Z)_k$ are unipotent closed subgroups of $\\mathbf G_a$ that are not smooth, respectively not connected, showing that unipotent groups need be neither smooth nor connected.",
+        "strategy": "Direct computation with the definitions: $U_n$ is a closed subgroup scheme of $\\mathrm{GL}_n$ by construction, so the triangular criterion gives unipotence, and independently its coordinate ring is coconnected by the weight filtration. The central series of the companion lemma gives the additive filtration. The identification of $U_2$ with $\\mathbf G_a$ is matrix multiplication; the infinitesimal and \u00e9tale subgroups are checked on $R$-points and via the coconnectedness of their coordinate rings $k[\\varepsilon]/(\\varepsilon^p)$ and $k^{\\mathbf Z/p\\mathbf Z}$, and the failure of smoothness (respectively connectedness) is read off from the coordinate rings.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Examples 14.13 and 14.19, printed pp. 283-284; Example 6.49, printed pp. 136-137"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-borel-fixed-point-on-projective-space",
+        "kind": "example",
+        "title": "Borel subgroups of GL_n are flag stabilizers and act on projective space with a fixed line",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-borel-subgroup-and-maximal-torus",
+          "def-complete-variety",
+          "def-projective-bundle-scheme",
+          "def-smooth-morphism-schemes",
+          "def-upper-unitriangular-group-scheme",
+          "lem-borel-subgroup-is-the-stabilizer-of-a-maximal-flag",
+          "lem-flag-variety-of-a-vector-space",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring",
+          "lem-orbit-map-faithfully-flat-and-orbit-locally-closed",
+          "lem-projective-space-action-from-linear-representation",
+          "prop-faithfully-flat-orbit-map-represents-coset-quotient",
+          "thm-borel-and-maximal-torus-conjugacy-over-algebraically-closed-field",
+          "thm-homogeneous-space-for-smooth-affine-group",
+          "thm-lie-kolchin-for-smooth-connected-solvable-groups",
+          "lem-upper-unitriangular-central-series"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be an algebraically closed field, let $V$ be a finite-dimensional $k$-vector space of dimension $n\\ge1$ and let $G=\\mathrm{GL}(V)$ ([[lem-general-linear-group-scheme-and-its-coordinate-ring]]). The Borel subgroups of $G$ are exactly the stabilizers of maximal flags in $V$, hence exactly the conjugates of the upper triangular group $T_n$, and each is a semidirect product $U_n\\rtimes D_n$ ([[def-upper-unitriangular-group-scheme]], [[def-borel-subgroup-and-maximal-torus]]). The group $T_n$ acts on the projective space of lines $\\mathbf P(V)$ with fixed line $\\langle e_1\\rangle$, and $\\mathrm{GL}(V)/T_n\\cong\\mathrm{Fl}(V)$, the complete flag variety, so the Borel fixed point theorem is visible here as the existence of a $T_n$-invariant line: the eigenvector corresponding to the first step of the flag.",
+        "strategy": "Milne Example 17.7 and Theorems 17.9-17.10. A Borel subgroup of $\\mathrm{GL}(V)$ is solvable, hence trigonalizable, so after choosing a basis it lies in $T_n$; maximality forces equality, so Borel subgroups are exactly the flag stabilizers, and $\\mathrm{GL}(V)(k)$ acts transitively on bases, so they are conjugate. The fixed line of $T_n$ in $\\mathbf P(V)$ is the first step of the standard flag. For the quotient identification, apply the smooth orbit-map lemma to $\\mathrm{GL}(V)$ acting on the separated finite-type flag variety at the standard $k$-flag: the orbit map is faithfully flat and locally of finite presentation, and transitivity makes the reduced orbit all of $\\mathrm{Fl}(V)$. The coset-quotient proposition then identifies this orbit with $\\mathrm{GL}(V)/T_n$. The Axiom of Choice is inherited from the quotient, orbit-map and projective-space action suppliers.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Example 17.7 and Theorems 17.9-17.10, printed pp. 354-355"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Introduction, printed p. 3; Remarks 121 and Theorem 122, printed pp. 50-51"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 14,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-borel-fixed-point-needs-completeness",
+        "kind": "counterexample",
+        "title": "The fixed point theorem fails without completeness: the additive group acts on the affine line by translations",
+        "deps": [
+          "def-affine-scheme",
+          "def-algebraic-group-action-and-scheme-theoretic-stabilizer",
+          "def-complete-variety",
+          "def-group-scheme-over-a-field",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-proper-morphism",
+          "def-unipotent-algebraic-group",
+          "ex-upper-triangular-unipotent-groups",
+          "thm-borel-fixed-point-for-complete-schemes",
+          "def-upper-unitriangular-group-scheme"
+        ],
+        "statement": "Over an algebraically closed field $k$, every nonempty finite-type $k$-scheme with an action of a smooth connected solvable affine algebraic group $G$ has a $k$-point fixed by $G(k)$. In other words, the completeness hypothesis in the Borel fixed point theorem ([[thm-borel-fixed-point-for-complete-schemes]]) can be dropped.\n\nThe witness is the following. Let $k$ be a field and let $X=\\mathbf A^1_k=\\operatorname{Spec}k[x]$ ([[def-polynomial-ring-over-a-commutative-ring]], [[def-affine-scheme]]), with the action of $\\mathbf G_a$ on $X$ given on $R$-points by $a\\cdot z=z+a$ (translation). Then $X$ is nonempty of finite type over $k$ with an action of the smooth connected unipotent group $\\mathbf G_a$ ([[def-unipotent-algebraic-group]], [[ex-upper-triangular-unipotent-groups]]), so $G=\\mathbf G_a$ is smooth connected solvable, but $X$ is not complete and the action has no fixed point: for every $z\\in X(k)$ and every $a\\ne0$ in $k$, $a\\cdot z\\ne z$. Hence the completeness hypothesis cannot be dropped, even for the smallest positive-dimensional smooth connected solvable group.",
+        "strategy": "Direct computation: translation by $a$ fixes $z$ precisely when $a=0$; the affine line is not complete because the structure morphism $\\mathbf A^1_k\\to\\operatorname{Spec}k$ fails the valuative criterion (the published counterexample of an affine line that is not proper), or because a complete connected affine scheme is a single point by the constant-morphism lemma, while $\\mathbf A^1_k$ is one-dimensional. The group $\\mathbf G_a=\\operatorname{Spec}k[t]$ with $\\Delta(t)=t\\otimes1+1\\otimes t$ is the additive group scheme, identified with $U_2$ by the first example of this page, and the action is algebraic because its graph is cut out by the equation $x_2=x_1+x_0$ in coordinates.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Corollary 17.3 and Theorem 17.4, printed p. 353; the affine-line translation witness is verified locally"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-3",
+        "local_addition": true,
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

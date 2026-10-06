@@ -8,6 +8,12 @@ pipeline_run: frontier-38-owner-30
 deps: ["def-stable-normal-bundle-of-a-compact-smooth-manifold", "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval", "thm-smooth-dependence-of-ode-solutions-on-parameters", "thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure", "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle", "def-countable-choice", "def-smooth-function-on-a-relatively-open-subset-of-a-half-space"]
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "historical complete Step5 reader; item thm-stable-normal-bundle-is-independent-of-the-embedding; evidence research/frontier-38-owner-30-reader-14.md, research/frontier-38-owner-30-reader-findings-14.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
+    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

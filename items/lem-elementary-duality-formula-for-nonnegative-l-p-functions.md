@@ -44,10 +44,11 @@ $$ \|F\|_p = \sup\left\{ \int Fg\,d\mu : g \ge 0,\ \|g\|_q \le 1 \right\}. $$
 
 **Proof technique:** direct.
 
-1.1 For every $g \ge 0$ with $\|g\|_q \le 1$, [L2] gives
-$$ \int Fg\,d\mu \le \|F\|_p\|g\|_q \le \|F\|_p. $$ So the displayed supremum is at most $\|F\|_p$. [L2, L3, given, algebra]
+1.1 For every $g \ge 0$ with $\|g\|_q \le 1$, [L2] gives $$ \int Fg\,d\mu \le \|F\|_p\|g\|_q \le \|F\|_p. $$ So the displayed supremum is at most $\|F\|_p$. [L2, L3, given, algebra]
 
 2.1 If $\|F\|_p = 0$, then $F=0$ almost everywhere. Step 1.1 bounds the supremum above by $0$, while the admissible choice $g=0$ gives value $0$, so the supremum is $0$. [L3, step 1.1, construct]
+
 2.2 If $\|F\|_p>0$, define $$ g := \frac{F^{p-1}}{\|F\|_p^{p/q}}. $$ Because $(p-1)q = p$, one has $$ \|g\|_q^q = \frac{\int F^{(p-1)q}\,d\mu}{\|F\|_p^p} = 1, $$ so $\|g\|_q=1$, and $$ \int Fg\,d\mu = \frac{\int F^p\,d\mu}{\|F\|_p^{p/q}} = \|F\|_p. $$ [L1, L3, step 1.1, algebra, construct]
 
 3.1 Step 1.1 gives the upper bound and steps 2.1–2.2 attain it in the two cases, so the supremum equals $\|F\|_p$. [step 1.1, step 2.1, step 2.2] ∎
+

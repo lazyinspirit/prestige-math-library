@@ -21,6 +21,17 @@ sources:
       url: "https://msp.org/agt/2002/2-1/agt-v2-n1-p24-p.pdf"
       locator: "Section 3, printed pp. 507-510: the absolute cellular complex and its integral basis"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-16.md"
+      - "research/frontier-38-owner-30-alpha-batch-16-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-16-post-5a.json"
+    content_sha256: "3fecb86165e2a8e25844bb05fefb56fb4273960953d87b1ed8b5f3216012d8e1"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -26,6 +26,12 @@ deps:
 - thm-determinant-of-transpose
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "historical completed Step7 repair full proof read (local repair; not an independent audit of repair); item lem-sphere-finite-graph-charts-and-surface-density; evidence research/frontier-38-owner-30-reader-6.md, research/frontier-38-owner-30-reader-findings-6.json, research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u6.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
+    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
   precheck: pass
 provenance:
   statement: literature-derived

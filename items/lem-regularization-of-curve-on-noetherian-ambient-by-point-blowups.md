@@ -4,6 +4,19 @@ kind: lemma
 title: Regularization of an integral curve on an arbitrary Noetherian ambient scheme
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-27.md"
+      - "research/frontier-38-owner-30-alpha-batch-27-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-27-post.json"
+    reviewed_raw_sha256: "50f99163159929a4ac377c62646c4329ff46c5a051f52f791881fc27f926c711"
+    content_sha256: "786216ea68ab348f04192844146e7b6e465040eaf3d57a5de6e4e1345ded9ea9"
 deps: [thm-regularization-of-finite-normalization-curve-by-point-blowups, thm-blowup-closed-immersion-transform-universal, def-strict-transform-closed-subscheme, def-blowup-scheme-along-ideal, def-axiom-of-choice, thm-affine-blowup-standard-charts, cor-finite-type-algebra-over-noetherian-ring-is-noetherian, def-integral-scheme, def-embedding-dimension-and-regular-local-ring, def-locally-noetherian-and-noetherian-scheme]
 provenance:
   statement: literature-derived

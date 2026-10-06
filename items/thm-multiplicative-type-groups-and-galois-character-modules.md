@@ -8,6 +8,17 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-25.md"
+      - "research/frontier-38-owner-30-alpha-batch-25-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-25-post-5a.json"
+    content_sha256: "01cfd92db32620e4ffd007106cb8c86ea15cdc2bd2da72c8d3c068c3bb517467"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

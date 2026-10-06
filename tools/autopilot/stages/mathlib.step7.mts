@@ -3,7 +3,13 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
-import { frontierGateBattery } from '../../step7-frontier-gate.mjs';
+
+// The battery adapter is also composed into live stage closures. Version its
+// import so a stage reload cannot retain descriptors from before an adapter edit.
+const FRONTIER_GATE_URL=new URL('../../step7-frontier-gate.mjs',import.meta.url),FRONTIER_GATE_STAT=statSync(FRONTIER_GATE_URL);
+const { frontierGateBattery } = await import(
+  `${FRONTIER_GATE_URL.href}?v=${FRONTIER_GATE_STAT.mtimeMs}:${FRONTIER_GATE_STAT.size}`
+);
 
 // The live controller has already cached the workflow's original ESM exports.
 // Version this composed dependency as the root stage loader does for Step 7.

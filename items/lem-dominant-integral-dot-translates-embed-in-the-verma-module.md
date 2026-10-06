@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-8.md"
+      - "research/frontier-38-owner-30-alpha-batch-8-5a.md"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u8.json"
+    content_sha256: "2f2e7ba8e67e50c2480518949120a1b46d05986b516590f7ebf204216786e5e8"
 id: lem-dominant-integral-dot-translates-embed-in-the-verma-module
 kind: lemma
 title: Dominant integral dot translates embed canonically in the Verma module

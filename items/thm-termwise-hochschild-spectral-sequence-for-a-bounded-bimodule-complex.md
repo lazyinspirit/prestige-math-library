@@ -21,7 +21,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Beliakova–Putyra–Wehrli, Quantum Link Homology via Trace Functor I, §3.8.6, printed p.38"
+    - title: "Beliakova–Putyra–Wehrli, Quantum Link Homology via Trace Functor I, §3.8.6, printed p.39"
       url: "https://arxiv.org/pdf/1605.03523"
       locator: "§3.8.6: the Hochschild complex of a complex of bimodules and the role of the two gradings."
     - title: "Charles A. Weibel, An Introduction to Homological Algebra, Chapter 5, §5.4–5.6, printed pp.133–143"

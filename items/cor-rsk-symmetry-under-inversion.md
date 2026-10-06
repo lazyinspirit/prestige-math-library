@@ -11,6 +11,12 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full item proof read and accepted exact subsequent delta; item cor-rsk-symmetry-under-inversion; evidence research/frontier-38-owner-30-reader-9.md, research/frontier-38-owner-30-impact.json, research/frontier-38-owner-30-batch-9.proof-contracts.json. Original source/coverage limitations retained; no recursive audit of all prerequisites or full bibliography claimed. Restored from completed 2026-10-03 evidence; no new audit or independent audit of local repair claimed."
+    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

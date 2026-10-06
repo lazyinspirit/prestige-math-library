@@ -8,6 +8,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for lem-finite-galois-descent-for-multiplicative-hopf-algebras and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-25; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"0453aba77a47072d4111b190a044a8288f8185353794ea8288716d134ffdf94d","evidence":["research/frontier-38-owner-30-reader-25.md","research/frontier-38-owner-30-reader-findings-25.json","research/frontier-38-owner-30-dispatch/reader-reader-25.result.json","research/frontier-38-owner-30-step5-hash-25-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/lem-finite-galois-descent-for-multiplicative-hopf-algebras.md","historical_raw_sha256":"fd01db3a6ffccb04e4e434a2376635a51dd7306a2f774e7dbb706dc2fe2f0fce","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:26:26.494Z"}}
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

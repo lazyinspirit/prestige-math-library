@@ -14,6 +14,16 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical full authored item reading and acceptance restored through exact saved source/git carrier comparison. Actual full item source extracted from adjudicator dispatch log lines7671 onward matches exact Step5 POST raw digest. Closed carrier adds only judge stamp. Every paragraph/number/reference is identical; publication additionally removes one extra blank line before3.1 and adds one leading space to3.1. All five proof rows retain their exact statements and trailing justification references. Local repair reviews retain their recorded limits; no new independent audit is claimed."
+    evidence:
+      - "research/frontier-38-owner-30-alpha-batch-15-5a.md"
+      - "research/frontier-38-owner-30-alpha-batch-15-5a.md"
+    content_sha256: "062d25b38506734fe90497d9a196c5ab15195e28d4a35a74e474d01fb646909d"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass
@@ -70,8 +80,7 @@ the same set are uniquely isomorphic over the set
 
 2.1 *Comparison.* The composite $i_*\circ\phi:F_n\to\pi_1(X,d)$ is a homomorphism with $x_i\mapsto i_*[x_i]=[x_i]$, since $i$ is the inclusion of the subspace containing the loops $x_i$. By the uniqueness clause of [F3] applied to $u$, $i_*\circ\phi=\widehat u$. Since $i_*$ and $\phi$ are bijections, $\widehat u$ is a group isomorphism. [step 1.1, step 1.2, F2, F3]
 
-
-3.1 *Conclusion.* Steps 1.1, 1.2 and 2.1 exhibit the isomorphism $\widehat u:F_n\to\pi_1(D^2\setminus Q_n,d)$ with $x_i\mapsto[x_i]$, and step 1.3 covers the empty case; hence $[x_1],\dots,[x_n]$ is a free basis of $\pi_1(D^2\setminus Q_n,d)$. [step 2.1, step 1.3] ∎
+ 3.1 *Conclusion.* Steps 1.1, 1.2 and 2.1 exhibit the isomorphism $\widehat u:F_n\to\pi_1(D^2\setminus Q_n,d)$ with $x_i\mapsto[x_i]$, and step 1.3 covers the empty case; hence $[x_1],\dots,[x_n]$ is a free basis of $\pi_1(D^2\setminus Q_n,d)$. [step 2.1, step 1.3] ∎
 
 ## Remarks
 

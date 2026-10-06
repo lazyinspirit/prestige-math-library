@@ -24,6 +24,18 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01OF"
       locator: "the local construction in the proof of Lemma 31.33.5 (universal property)"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post.json"
+    reviewed_raw_sha256: "81924011e98d7f9c762774dc26b0ffddd336e59346f393c38f06b0168613d178"
+    content_sha256: "7cc29fa4b56a77848e90ce595219dc5695ea492dc54f49ba7229f9f20e55e5a9"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

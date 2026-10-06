@@ -1,0 +1,1641 @@
+[
+  {
+    "order": 366.063,
+    "id": "plane-curves-local-intersection-multiplicity-and-bezout",
+    "kind": "A",
+    "category": "algebraic-geometry",
+    "title": "Plane Curves Local Intersection Multiplicity and Bezout",
+    "companion": "plane-curves-local-intersection-multiplicity-and-bezout-examples",
+    "requires": [
+      "normal-varieties-normalization-and-zariskis-main-theorem",
+      "homogeneous-resultants-and-projective-intersection-length",
+      "schemes-subschemes-and-morphisms-locally-of-finite-type",
+      "lattice-paths-and-catalan-numbers",
+      "finite-averaging-and-character-theory-prerequisites"
+    ],
+    "items": [
+      {
+        "id": "def-plane-projective-curve",
+        "kind": "definition",
+        "title": "Plane projective curves and their components",
+        "deps": [
+          "def-affine-algebraic-set",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice",
+          "def-degree-projective-hypersurface",
+          "def-graded-ring-and-graded-module",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-irreducible-topological-space-and-subset",
+          "def-monomials-multidegree-and-total-degree",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "def-polynomial-evaluation-and-root",
+          "def-projective-algebraic-set",
+          "def-projective-space-points",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-projective-hypersurface-affine-pieces",
+          "lem-projective-irreducibility-homogeneous-prime",
+          "lem-standard-projective-opens-are-affine-spaces",
+          "thm-polynomial-degree-of-a-product-over-a-domain",
+          "thm-projective-zariski-topology",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ],
+        "statement": "Fix an algebraically closed field $k$ def-algebraically-closed-field and $\\mathbf P^2=\\mathbf P^2_k$ def-projective-space-points. A **(plane) projective curve** is a closed subset $C=V(F)\\subseteq\\mathbf P^2$ given by a nonconstant square-free homogeneous form $F\\in k[x_0,x_1,x_2]$ def-homogeneous-polynomial-and-homogeneous-ideal, def-projective-algebraic-set, thm-projective-zariski-topology. Its **degree** is $\\deg F$ def-polynomial-degree-leading-coefficient-and-monic, and its **irreducible components** are the closed sets $V(h)$ for the distinct irreducible factors $h$ of $F$, each taken once. Thus every component is reduced and occurs with multiplicity one, $C$ may be reducible, and $C$ is nonempty. A closed set $V(F)$ with $F$ nonconstant and square-free is written $V(F)$, and we call $F$ a **defining form** of $C$; it is determined by $C$ only up to a nonzero scalar, since $V(\\lambda F)=V(F)$ for $\\lambda\\in k^\\times$.\n\nAn **affine plane curve** is $V(f)\\subseteq\\mathbf A^2$ for a nonconstant square-free $f\\in k[x,y]$ def-affine-algebraic-set, with its components defined by the irreducible factors of $f$ in the same way. On a standard chart $D_+(x_i)\\cong\\mathbf A^2$ the trace of a projective curve is the zero set of its dehomogenisation, which is an affine curve when the dehomogenisation is nonconstant and is empty when it is a nonzero constant: $C\\cap D_+(x_i)=V(f_i)$ for $f_i=F(x_0/x_i,x_1/x_i,1)$ after clearing denominators lem-projective-hypersurface-affine-pieces, lem-standard-projective-opens-are-affine-spaces.\n\n**Square-freeness and components.** The polynomial ring $k[x_0,x_1,x_2]$ is a unique factorisation domain lem-finite-variable-polynomial-rings-over-fields-are-ufds, so $F$ has a factorisation into pairwise nonassociate irreducibles, and each irreducible factor of a homogeneous form is homogeneous def-graded-ring-and-graded-module. Square-freeness of $F$ says that no irreducible factor is repeated: $F=c\\prod_{j}h_j$ with $c\\in k^\\times$ and the $h_j$ pairwise nonassociate irreducible homogeneous forms. The **irreducible components** of $C=V(F)$ are the curves $V(h_j)$, one for each distinct factor: the union of the $V(h_j)$ is $C$, each $V(h_j)$ is irreducible and the correspondence $h\\mapsto V(h)$ reverses divisibility, so up to units and order the list is determined by $F$ and its members are exactly the maximal irreducible closed subsets of $C$ def-irreducible-topological-space-and-subset, lem-projective-irreducibility-homogeneous-prime. Since every $h_j$ occurs exactly once, $C$ is reduced and no component carries an invisible multiplicity in its defining form.",
+        "strategy": "Transcribe the classical definitions through the published projective/affine interfaces. Square-freeness is recorded as a standing hypothesis so that the components are exactly the irreducible factors and the multiplicity of a component is never absorbed into the defining form.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-multiplicity-plane-curve-point",
+        "kind": "definition",
+        "title": "Multiplicity of a plane curve at a point",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-germ-and-local-ring-classical-variety",
+          "def-localisation-at-a-prime-ideal",
+          "def-monomials-multidegree-and-total-degree",
+          "def-morphism-classical-varieties",
+          "def-plane-projective-curve",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "def-polynomial-evaluation-and-root",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-projective-coordinate-morphisms-well-defined",
+          "lem-projective-hypersurface-affine-pieces",
+          "lem-standard-projective-opens-are-affine-spaces",
+          "thm-affine-morphisms-coordinate-ring-anti-equivalence",
+          "thm-local-ring-affine-variety-localization",
+          "thm-localisation-at-a-prime-is-local"
+        ],
+        "statement": "Let $C=V(F)\\subseteq\\mathbf P^2$ be a plane projective curve over the algebraically closed field $k$ def-plane-projective-curve and let $p\\in\\mathbf P^2$. Let $D_+(x_i)$ be a standard chart containing $p$, identified with $\\mathbf A^2$ by the ratio coordinates, and let $f$ be the dehomogenisation of $F$ in that chart lem-projective-hypersurface-affine-pieces, lem-standard-projective-opens-are-affine-spaces. Choosing affine coordinates $(u,v)$ of $\\mathbf A^2$ centred at $p$, expand the polynomial $f$ by total degree,\n\n$$ f=f_m+f_{m+1}+\\cdots+f_d,\\qquad f_j\\text{ homogeneous of degree }j,\\quad f_m\\ne0 .$$\n\nThe **multiplicity of $C$ at $p$** is\n\n$$ m_p(C):=m,$$\n\nthe least degree of a term in such a centred expansion; we call $f_m$ a **lowest-degree part** of a local equation of $C$ at $p$. For $p\\notin C$ set $m_p(C)=0$, and for $p\\in C$ the number $m=m_p(C)\\ge1$ is also characterised as\n\n$$ m_p(C)=\\max\\{\\,n\\ge0: f\\in\\mathfrak m_p^{\\,n}\\,\\},$$\n\nwhere $\\mathfrak m_p\\subseteq\\mathcal O_{\\mathbf P^2,p}$ is the maximal ideal of the local ring of the plane at $p$ and $f$ is any local equation of $C$ at $p$ def-germ-and-local-ring-classical-variety, thm-local-ring-affine-variety-localization, def-localisation-at-a-prime-ideal, thm-localisation-at-a-prime-is-local.",
+        "strategy": "Define the multiplicity by the order of vanishing of a local equation and prove chart- and coordinate-independence by transporting the expansion along the local-ring isomorphisms induced by affine coordinate changes. The product formula is the multiplicativity of the order of a product of power series in two variables.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "axiom_use": "No choice beyond that inherited from the cited local-ring and chart suppliers."
+      },
+      {
+        "id": "def-tangent-lines-plane-curve-point",
+        "kind": "definition",
+        "title": "Tangent cone and tangent lines at a point",
+        "deps": [
+          "cor-factor-theorem-over-a-commutative-ring",
+          "def-algebraically-closed-field",
+          "def-field",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-irreducible-and-prime-elements-in-a-domain",
+          "def-multiplicity-plane-curve-point",
+          "def-plane-projective-curve",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "def-polynomial-evaluation-and-root",
+          "def-zariski-tangent-space-point",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "thm-polynomial-degree-of-a-product-over-a-domain"
+        ],
+        "statement": "Let $C=V(F)$ be a plane projective curve, $p\\in C$, and $m=m_p(C)\\ge1$ with lowest-degree part $f_m$ in a centred chart. The **tangent cone** of $C$ at $p$ is the cone $V(f_m)$ in the tangent plane at $p$; a **tangent line** at $p$ is a line through $p$ whose linear form divides $f_m$, and its **multiplicity** $r_L\\ge1$ is the exponent with which that linear form occurs in the factorisation of $f_m$ into distinct linear forms. In particular $\\sum_L r_L=m_p(C)$: the number of tangent lines counted with multiplicity equals $m_p(C)$, and when $m_p(C)=1$ there is exactly one tangent line, of multiplicity one.",
+        "strategy": "Factor the binary form $f_m$ into linear forms, which is unique up to constants by the UFD and prime-factorisation interfaces, and record the multiplicities as exponents. The count $\\sum_Lr_L=m$ is additivity of degree over products of linear forms; the last clause follows because a nonzero linear form is the only possibility when $m=1$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-smooth-plane-curve-unique-tangent",
+        "kind": "lemma",
+        "title": "Multiplicity one characterises smooth points with a unique tangent",
+        "deps": [
+          "cor-minimal-prime-over-a-nonzerodivisor-has-height-one",
+          "cor-strong-nullstellensatz-two-inclusions",
+          "def-axiom-of-choice",
+          "def-field",
+          "def-germ-and-local-ring-classical-variety",
+          "def-irreducible-and-prime-elements-in-a-domain",
+          "def-krull-dimension-of-a-ring",
+          "def-local-ring",
+          "def-localisation-at-a-prime-ideal",
+          "def-multiplicity-plane-curve-point",
+          "def-plane-projective-curve",
+          "def-polynomial-evaluation-and-root",
+          "def-radical-of-an-ideal",
+          "def-singular-and-regular-loci-variety",
+          "def-tangent-lines-plane-curve-point",
+          "def-zariski-tangent-space-point",
+          "lem-a-binomial-coefficient-with-top-below-a-prime-is-nonzero-modulo-that-prime",
+          "lem-characteristic-divisibility-and-invertibility-of-a-natural-scalar-in-a-field",
+          "lem-local-intersection-length-finite",
+          "lem-projective-hypersurface-affine-pieces",
+          "thm-binomial-closed-formula",
+          "thm-binomial-theorem-over-a-commutative-ring",
+          "thm-characteristic-of-a-field-is-zero-or-prime",
+          "thm-jacobian-criterion-affine-variety",
+          "thm-local-ring-affine-variety-localization",
+          "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "statement": "Let $C=V(F)$ be a plane projective curve and $p\\in C$. The following are equivalent: (1) $m_p(C)=1$; (2) $p$ is a regular (smooth) point of $C$, that is, not all partial derivatives $\\partial F/\\partial x_i$ vanish at $p$, which is independent of the chart and of the defining form; (3) the tangent cone at $p$ is a single line of multiplicity one. If these hold, $C$ has exactly one tangent line at $p$, and the local ring $\\mathcal O_{C,p}$ is a regular local ring of dimension one. Points with $m_p(C)\\ge2$ are the singular points of $C$; the singular locus of a plane curve is a proper closed subset.",
+        "strategy": "Compare the order of vanishing of the local equation with the Jacobian criterion at a k-rational point of the chart: the lowest-degree part is linear exactly when some first partial derivative is nonzero, and the tangent line is its zero set. The unicity of the tangent line is the degree-one case of the tangent-line count.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "axiom_use": "No choice beyond that inherited from the Jacobian-criterion and classical-variety suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-local-intersection-length-finite",
+        "kind": "lemma",
+        "title": "Finite local length exactly when no common local branch",
+        "deps": [
+          "cor-affine-domain-maximal-ideal-height-equals-dimension",
+          "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+          "cor-finite-variable-polynomial-ring-noetherian",
+          "cor-height-plus-quotient-dimension-affine-domain",
+          "cor-localisation-dimension-does-not-increase",
+          "cor-minimal-prime-over-a-nonzerodivisor-has-height-one",
+          "cor-polynomial-ring-over-a-domain-is-a-domain",
+          "def-artinian-ring",
+          "def-axiom-of-choice",
+          "def-composition-series-and-length-of-a-module",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-field",
+          "def-height-of-a-prime-ideal",
+          "def-irreducible-and-prime-elements-in-a-domain",
+          "def-krull-dimension-of-a-ring",
+          "def-local-ring",
+          "def-localisation-at-a-prime-ideal",
+          "def-noetherian-ring",
+          "def-prime-and-maximal-ideals",
+          "def-radical-of-an-ideal",
+          "def-system-of-parameters-and-parameter-ideal",
+          "def-unique-factorisation-domain",
+          "lem-evaluation-ideal-is-maximal",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-parameter-ideal-equivalent-m-primary",
+          "thm-artinian-ring-characterisation-by-primes",
+          "thm-artinian-ring-has-finite-length",
+          "thm-artinian-ring-primes-are-maximal",
+          "thm-dimension-and-parameters-for-modules",
+          "thm-krull-height-theorem",
+          "thm-krull-principal-ideal-theorem",
+          "thm-localisation-at-a-prime-is-local",
+          "thm-noetherian-ring-quotients-and-localisations",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "thm-radical-as-intersection-of-primes",
+          "thm-support-and-annihilator-of-a-finite-module"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field, let $p\\in\\mathbf A^2(k)$, put $R=k[x,y]$, $\\mathfrak m=\\mathfrak m_p$, and $O=R_{\\mathfrak m}$, and let $f,g\\in\\mathfrak m$ be nonzero. Then the following are equivalent: (1) $(f,g)O$ is $\\mathfrak m$-primary; (2) $O/(f,g)O$ has finite length as an $O$-module; (3) $f$ and $g$ have no common irreducible factor $h\\in k[x,y]$ with $h(p)=0$, equivalently no height-one prime of $R$ contained in $\\mathfrak m$ contains $(f,g)$. If the conditions fail the length is infinite, and if they hold $(f,g)O$ is a parameter ideal of the two-dimensional regular local ring $O$, so $O/(f,g)O$ is a zero-dimensional local ring of finite length.",
+        "strategy": "If a height-one prime $\\mathfrak p\\subseteq\\mathfrak m$ contains $(f,g)$, then $\\mathfrak p=(h)$ with $h$ irreducible and $h(p)=0$ dividing both $f$ and $g$; conversely such an $h$ gives the height-one prime $(h)$. Otherwise every minimal prime over $(f,g)$ has height two, hence is $\\mathfrak m$, so $(f,g)O$ is $\\mathfrak m$-primary; then $O/(f,g)O$ is a Noetherian local ring of dimension zero, hence Artinian of finite length. Failure of primarity leaves a prime of dimension one in the support, which forces infinite length by the dimension-zero characterisation of finite length over a local ring.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Andreas Gathmann, Algebraic Geometry class notes (2002), Sections 6.1-6.2",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "axiom_use": "The height theorem, prime existence and the dimension counts use AC as declared by their published suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-local-intersection-multiplicity-plane-curves",
+        "kind": "definition",
+        "title": "Local intersection multiplicity of two plane curves",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-composition-series-and-length-of-a-module",
+          "def-germ-and-local-ring-classical-variety",
+          "def-local-ring",
+          "def-multiplicity-plane-curve-point",
+          "def-plane-projective-curve",
+          "lem-local-intersection-length-finite",
+          "thm-local-ring-affine-variety-localization"
+        ],
+        "statement": "Let $C=V(F)$ and $D=V(G)$ be plane projective curves over the algebraically closed field $k$ def-plane-projective-curve and let $p\\in\\mathbf P^2$. Assume $C$ and $D$ have **no common local component at $p$**: in local equations $f,g\\in\\mathcal O_{\\mathbf P^2,p}$ of $C$ and $D$ at $p$, no irreducible element of the local ring divides both $f$ and $g$ def-germ-and-local-ring-classical-variety, def-local-ring, thm-local-ring-affine-variety-localization. Then the **local intersection multiplicity** of $C$ and $D$ at $p$ is\n\n$$ I_p(C,D):=\\ell_{\\mathcal O_{\\mathbf P^2,p}}\\bigl(\\mathcal O_{\\mathbf P^2,p}/(f,g)\\bigr),$$\n\nthe length of the quotient of the local ring of the plane at $p$ by the ideal generated by local equations of the two curves def-composition-series-and-length-of-a-module. Under the Axiom of Choice, the quotient has finite length by the preceding lemma lem-local-intersection-length-finite, so $I_p(C,D)$ is a natural number. One writes $I_p(C,D)=\\infty$ when $C$ and $D$ share a local branch through $p$, and $I_p(C,D)=0$ when $p\\notin C\\cap D$. The value depends only on $C,D,p$, not on the chart or the equations chosen to compute it; this is the content of the invariance lemma lem-intersection-multiplicity-independent-equations-coordinates.",
+        "strategy": "Define the invariant by the length of the local quotient and record the finiteness supplied by the local-branch criterion. Well-definedness under a change of chart, coordinates or equations is the content of the next lemma, which is therefore declared as this definition's justification.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "MIT 18.725 Algebraic Geometry (Fall 2015) lecture notes, consolidated",
+              "url": "https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": [
+          "lem-intersection-multiplicity-independent-equations-coordinates"
+        ],
+        "axiom_use": "Inherited from the local-length supplier."
+      },
+      {
+        "id": "lem-intersection-multiplicity-independent-equations-coordinates",
+        "kind": "lemma",
+        "title": "Invariance of the local intersection multiplicity",
+        "deps": [
+          "cor-length-is-additive-in-short-exact-sequences",
+          "cor-localisation-is-unique-up-to-unique-isomorphism",
+          "def-axiom-of-choice",
+          "def-composition-series-and-length-of-a-module",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-morphism-to-projective-space-homogeneous-coordinates",
+          "def-multiplicity-plane-curve-point",
+          "def-plane-projective-curve",
+          "lem-local-intersection-length-finite",
+          "lem-projective-coordinate-morphisms-well-defined",
+          "lem-standard-projective-opens-are-affine-spaces",
+          "prop-iterated-localisation",
+          "thm-affine-morphisms-coordinate-ring-anti-equivalence",
+          "thm-local-ring-affine-variety-localization",
+          "thm-localisation-commutes-with-quotients",
+          "thm-universal-property-of-localisation"
+        ],
+        "statement": "Assume the Axiom of Choice. In the situation of the definition, $I_p(C,D)$ is unchanged when\n\n(a) the defining forms $F,G$ are multiplied by nonzero constants;\n(b) the local equations $f,g$ are replaced by any other generating pair of the ideal $(f,g)\\mathcal O_{\\mathbf P^2,p}$, in particular by $f+ag$ and $g$ or by units times $f,g$;\n(c) a different standard chart containing $p$, or an affine change of coordinates at $p$, is used for both curves;\n(d) a projective change of coordinates $A\\in\\mathrm{PGL}_3(k)$ is applied to $C$ and $D$ and $p$ is replaced by $A(p)$, so that $I_p(C,D)=I_{A(p)}(A(C),A(D))$.",
+        "strategy": "Each change induces an isomorphism of the local rings of the plane at the point concerned, or replaces the ideal by itself, or replaces the ideal by an isomorphic ideal under an isomorphism of local rings; length of a module is invariant under ring isomorphisms. Chart changes and projective coordinate changes are isomorphisms on the chart containing $p$, and localisations at corresponding primes compute the same local ring.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "axiom_use": "Isomorphism and localisation interfaces use AC only through their published suppliers; no new choice.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-intersection-multiplicity-basic-properties",
+        "kind": "theorem",
+        "title": "Symmetry, additivity and local nature of intersection multiplicity",
+        "deps": [
+          "cor-length-is-additive-in-short-exact-sequences",
+          "def-axiom-of-choice",
+          "def-composition-series-and-length-of-a-module",
+          "def-irreducible-and-prime-elements-in-a-domain",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-quotient-ring",
+          "def-unique-factorisation-domain",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-intersection-multiplicity-independent-equations-coordinates",
+          "lem-local-intersection-length-finite",
+          "prop-iterated-localisation",
+          "thm-localisation-commutes-with-quotients"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $C,D$ be plane projective curves over the algebraically closed field $k$ and let $p\\in\\mathbf P^2$, with all local intersection multiplicities below assumed finite. Then: (1) $I_p(C,D)=I_p(D,C)$; (2) $I_p(C,D)=0$ iff $p\\notin C\\cap D$, and $I_p(C,D)\\ge1$ iff $p\\in C\\cap D$; (3) if $V(F_1F_2)$ denotes the union curve and all three values are finite, then $I_p(C,V(G_1G_2))=I_p(C,V(G_1))+I_p(C,V(G_2))$; (4) $I_p(C,D)=I_p(C,V(G+AF))$ for every form $A$, so adding a multiple of a defining equation of $C$ to one of $D$ does not change the multiplicity; (5) $I_p(C,D)$ depends only on the local branches of $C$ and $D$ through $p$.",
+        "strategy": "Symmetry is commutativity of the quotient. Additivity comes from the exact sequence $0\\to O/(f,g_1)\\xrightarrow{\\cdot g_2}O/(f,g_1g_2)\\to O/(f,g_2)\\to0$ of local quotients, in which injectivity of multiplication by $g_2$ holds because $f$ and $g_2$ are coprime in the local UFD; length is additive in short exact sequences. Invariance under adding multiples is equality of the ideal $(f,g)=(f,g+af)$, and locality follows because the local ring sees only the branches through $p$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "MIT 18.725 Algebraic Geometry (Fall 2015) lecture notes, consolidated",
+              "url": "https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "axiom_use": "Additivity uses length additivity; no new choice.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-truncated-plane-local-length",
+        "kind": "lemma",
+        "title": "Lengths of truncated plane local rings",
+        "deps": [
+          "cor-length-is-additive-in-short-exact-sequences",
+          "def-binomial-coefficient",
+          "def-composition-series-and-length-of-a-module",
+          "def-dimension",
+          "def-field",
+          "def-local-ring",
+          "def-localisation-at-a-prime-ideal",
+          "def-monomials-multidegree-and-total-degree",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-quotient-ring",
+          "def-vector-space",
+          "lem-evaluation-ideal-is-maximal",
+          "lem-ring-units-form-a-group",
+          "prop-iterated-localisation",
+          "thm-localisation-at-a-prime-is-local",
+          "thm-localisation-commutes-with-quotients",
+          "thm-monotone-lattice-paths-in-a-rectangle-are-counted-by-a-binomial-coefficient"
+        ],
+        "statement": "Let $k$ be a field, $R=k[x,y]$, $\\mathfrak m=(x,y)$ and $O=R_{\\mathfrak m}$. For every integer $t\\ge0$ the natural map $R/\\mathfrak m^t\\to O/\\mathfrak m^tO$ is an isomorphism, and $\\ell_O(O/\\mathfrak m^tO)=\\dim_k(O/\\mathfrak m^tO)=\\binom{t+1}{2}=\\frac{t(t+1)}{2}$. The ring $O/\\mathfrak m^tO$ has a composition series whose factors are the one-dimensional $k$-vector spaces spanned by the monomials $x^iy^j$ with $i+j=t-1,t-2,\\dots,0$.",
+        "strategy": "The monomials of total degree less than $t$ form a k-basis, so the dimension is the number of monomials of degree at most $t-1$, which is a direct count; equivalently it is the number of lattice paths counted by the binomial supplier. Localisation at the maximal ideal is an isomorphism on the truncated quotient because everything outside the maximal ideal is a unit there, and the length over $O$ agrees with the dimension over $k$ because each successive graded piece is a simple one-dimensional module.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "local_addition": true,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tangent-cone-ideal-containment",
+        "kind": "lemma",
+        "title": "Coprime tangent cones force a power of the maximal ideal into the local ideal",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dimension",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-irreducible-and-prime-elements-in-a-domain",
+          "def-local-ring",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-monomials-multidegree-and-total-degree",
+          "def-multiplicity-plane-curve-point",
+          "def-polynomial-evaluation-and-root",
+          "def-prime-and-maximal-ideals",
+          "def-tangent-lines-plane-curve-point",
+          "def-vector-space",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-local-intersection-length-finite",
+          "lem-projective-hypersurface-affine-pieces",
+          "lem-truncated-plane-local-length",
+          "thm-associated-graded-ring-of-a-regular-local-ring",
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "thm-rank-nullity"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $O$ be the local ring of $\\mathbf A^2$ at the origin $p$ over an algebraically closed field $k$, with maximal ideal $\\mathfrak m$, and let $f,g\\in\\mathfrak m$ have orders $m=\\mathrm{ord}_p(f)$, $n=\\mathrm{ord}_p(g)$. If the lowest-degree forms $f^*$ and $g^*$ have no common factor in $k[x,y]$ (equivalently their zero sets meet only at the origin), then $\\mathfrak m^{t}\\subseteq(f,g)O$ for every $t\\ge m+n-1$. In particular $O/(f,g)O$ is a quotient of $O/\\mathfrak m^{m+n-1}$, and the quotient map $O/(f,g)\\twoheadrightarrow O/((f,g)+\\mathfrak m^t)$ is an isomorphism for $t\\ge m+n-1$.",
+        "strategy": "Fulton's containment step: write the tangent directions of $f$ and $g$ with their multiplicities and use the products of tangent linear forms to write every form of degree $t\\ge m+n-1$ in the ideal $(f,g)$ modulo terms of strictly higher degree; the higher-degree remainder is then absorbed because a suitable power of the maximal ideal lies in $(f,g)$, which is furnished by the Nullstellensatz applied to the ideal defining the two curves at the origin.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "local_addition": true,
+        "axiom_use": "Nullstellensatz and prime existence use AC through their published suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-plane-syzygy-truncation-injectivity",
+        "kind": "lemma",
+        "title": "The truncated multiplication map is injective exactly when the tangent cones are coprime",
+        "deps": [
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice",
+          "def-dimension",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-irreducible-and-prime-elements-in-a-domain",
+          "def-local-ring",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-multiplicity-plane-curve-point",
+          "def-tangent-lines-plane-curve-point",
+          "def-vector-space",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-tangent-cone-ideal-containment",
+          "lem-truncated-plane-local-length",
+          "thm-associated-graded-ring-of-a-regular-local-ring",
+          "thm-polynomial-degree-of-a-product-over-a-domain",
+          "thm-rank-nullity"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nLet $O$ be the local ring of $\\mathbf A^2$ at the origin over an algebraically closed field $k$, let $f,g\\in\\mathfrak m$ have orders $m,n\\ge1$, and define\n\n$$ \\bar\\psi:O/\\mathfrak m^{n}\\times O/\\mathfrak m^{m}\\longrightarrow O/\\mathfrak m^{m+n},\\qquad \\bar\\psi(A,B)=Af+Bg,$$\n\non representatives (the truncation of the $f$-coefficient is by the order of $g$, and conversely, so that both products land in $\\mathfrak m^{m+n}$). Then $\\bar\\psi$ is well defined and $k$-linear, and it is injective if and only if the lowest-degree forms $f^*$ and $g^*$ have no common factor in $k[x,y]$. If $f^*,g^*$ share a factor, the kernel is nonzero. In particular\n\n$$ \\dim_k\\operatorname{im}\\bar\\psi=\\dim_k(O/\\mathfrak m^{n})+\\dim_k(O/\\mathfrak m^{m}) $$\n\nexactly when the tangent cones are coprime.",
+        "strategy": "If $Af+Bg$ lies in $\\mathfrak m^{m+n}$ with $\\deg A<m$ or $\\deg B<n$, compare lowest-degree terms: $A^*f^*+B^*g^*=0$; coprimeness of the two forms then forces $A^*$ to be divisible by $g^*$, contradicting the degree bound unless $A^*=0$, and symmetrically. Conversely a common factor $h$ of the initial forms produces a nontrivial syzygy modulo $\\mathfrak m^{m+n}$. Well-definedness is that $f\\in\\mathfrak m^m$ and $g\\in\\mathfrak m^n$ kill the ambiguity of the representatives.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "local_addition": true,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-intersection-multiplicity-at-least-product-multiplicities",
+        "kind": "theorem",
+        "title": "Intersection multiplicity dominates the product of multiplicities, with equality for separated tangent cones",
+        "deps": [
+          "cor-every-local-ring-is-its-localisation-at-its-maximal-ideal",
+          "cor-length-is-additive-in-short-exact-sequences",
+          "def-axiom-of-choice",
+          "def-composition-series-and-length-of-a-module",
+          "def-dimension",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-local-ring",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-multiplicity-plane-curve-point",
+          "def-plane-projective-curve",
+          "def-radical-of-an-ideal",
+          "def-tangent-lines-plane-curve-point",
+          "def-vector-space",
+          "lem-local-intersection-length-finite",
+          "lem-plane-syzygy-truncation-injectivity",
+          "lem-tangent-cone-ideal-containment",
+          "lem-truncated-plane-local-length",
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "thm-localisation-commutes-with-quotients",
+          "thm-rank-nullity"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $C=V(F)$ and $D=V(G)$ be plane projective curves over the algebraically closed field $k$, let $p\\in C\\cap D$ be a point at which $C$ and $D$ have no common local component, and put $m=m_p(C)$, $n=m_p(D)$. Then $I_p(C,D)\\ge mn$, with equality if and only if $C$ and $D$ have no common tangent line at $p$, that is, the tangent cones of $C$ and $D$ at $p$ share no line.",
+        "strategy": "Work in the local ring $O$ at $p$ and truncate at the power $\\mathfrak m^{m+n}$. The surjection $O/(f,g)\\twoheadrightarrow O/((f,g)+\\mathfrak m^{m+n})$ is an isomorphism precisely when $\\mathfrak m^{m+n}\\subseteq(f,g)O$, which the containment lemma supplies whenever the tangent cones are coprime. The image of the truncated multiplication map $O/\\mathfrak m^m\\times O/\\mathfrak m^n\\to O/\\mathfrak m^{m+n}$, $(A,B)\\mapsto Af+Bg$, is $((f,g)+\\mathfrak m^{m+n})/\\mathfrak m^{m+n}$, and its dimension is the dimension of the domain minus the dimension of the kernel; the domain has length $\\binom{m+1}{2}+\\binom{n+1}{2}$, so subtracting from $\\binom{m+n+1}{2}$ leaves $mn$. Equality requires both the containment isomorphism and injectivity of the multiplication map, and the syzygy lemma identifies the latter with coprimality of the tangent forms.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "MIT 18.725 Algebraic Geometry (Fall 2015) lecture notes, consolidated",
+              "url": "https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "axiom_use": "Inherited from the local-length and height suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-transverse-smooth-curves-intersection-one",
+        "kind": "corollary",
+        "title": "Transversal smooth curves meet with multiplicity one",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-multiplicity-plane-curve-point",
+          "def-plane-projective-curve",
+          "def-tangent-lines-plane-curve-point",
+          "lem-smooth-plane-curve-unique-tangent",
+          "thm-intersection-multiplicity-at-least-product-multiplicities"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nLet $C,D$ be plane projective curves over the algebraically closed field $k$ meeting at $p$ transversally: both are smooth at $p$ and their tangent lines at $p$ are distinct. Then $m_p(C)=m_p(D)=1$ and $I_p(C,D)=1$. Conversely $I_p(C,D)=1$ forces $C$ and $D$ to be smooth at $p$ with distinct tangent lines.",
+        "strategy": "Apply the product inequality with $m=n=1$: transversal smooth points have separated tangent lines, so equality holds and $I_p=1$. For the converse, $I_p\\ge mn$ and $m,n\\ge1$ give $mn\\le I_p=1$, hence $m=n=1$; the equality case of the theorem then says the tangent lines are distinct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-intersection-with-line-order-of-vanishing",
+        "kind": "lemma",
+        "title": "Intersection with a line is the order of vanishing of the restricted equation",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-composition-series-and-length-of-a-module",
+          "def-discrete-valuation-ring",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-local-ring",
+          "def-morphism-to-projective-space-homogeneous-coordinates",
+          "def-multiplicity-plane-curve-point",
+          "def-plane-projective-curve",
+          "def-projective-space-points",
+          "def-uniformising-parameter",
+          "lem-local-intersection-length-finite",
+          "lem-standard-projective-opens-are-affine-spaces",
+          "thm-dvr-element-normal-form",
+          "thm-dvr-ideal-and-module-length",
+          "thm-localisation-commutes-with-quotients",
+          "thm-one-dimensional-regular-local-rings-are-dvrs"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $L=V(\\ell)\\subseteq\\mathbf P^2$ be a line, $C=V(F)$ a plane projective curve with $L\\not\\subseteq C$, and $p\\in L\\cap C$. Identify $L$ with $\\mathbf P^1$ and let $0\\ne F|_L\\in k[s,t]$ be the restriction of $F$ to $L$, a binary form of degree $\\deg F$ when $L$ is parametrised by linear forms. Then $I_p(C,L)$ equals the order of vanishing of $F|_L$ at the point of $\\mathbf P^1$ corresponding to $p$.",
+        "strategy": "On the line, the local ring $\\mathcal O_{L,p}$ is a discrete valuation ring and the restriction of a local equation of $L$ is a uniformiser; the quotient $\\mathcal O_{L,p}/(F|_L)$ has length equal to the valuation of $F|_L$, by the length formula in a DVR. The local ring of the line is the quotient of the plane local ring by the equation of the line, so this length is $I_p(C,L)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "axiom_use": "Inherited from DVR and localisation suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-resultant-homogeneous-polynomials",
+        "kind": "definition",
+        "title": "Resultant of two plane forms, viewed in one variable",
+        "deps": [
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-monomials-multidegree-and-total-degree",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "def-sylvester-resultant-of-binary-forms",
+          "lem-binary-resultant-scaling-specialization-and-dehomogenization",
+          "thm-binary-resultant-zero-iff-common-geometric-projective-root"
+        ],
+        "statement": "For homogeneous forms $F,G\\in k[x_0,x_1,x_2]$ of positive degrees $d,e$, regard them as polynomials in the variable $x_2$ with coefficients in $k[x_0,x_1]$ and form the Sylvester resultant $\\operatorname{Res}_{x_2}(F,G)\\in k[x_0,x_1]$, a binary form of degree $de$ whenever it is nonzero. For a point $(a,b)\\neq(0,0)$, the value $\\operatorname{Res}_{x_2}(F,G)(a,b)$ is the Sylvester resultant of the two specialised polynomials $F(a,b,x_2)$, $G(a,b,x_2)$ of nominated degrees $d,e$ over $k$; this is the only resultant interface used on this page.",
+        "strategy": "Transcribe the published resultant of binary forms into the three-variable setting by treating $x_2$ as the eliminated variable and $x_0,x_1$ as coefficients; scaling and specialisation are supplied by the binary resultant lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            },
+            {
+              "title": "Andreas Gathmann, Algebraic Geometry class notes (2002), Sections 6.1-6.2",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-resultant-detects-common-projective-point",
+        "kind": "lemma",
+        "title": "The resultant detects finitely many common projective points",
+        "deps": [
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-plane-projective-curve",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "def-projective-space-points",
+          "def-resultant-homogeneous-polynomials",
+          "def-sylvester-resultant-of-binary-forms",
+          "def-unique-factorisation-domain",
+          "lem-binary-resultant-scaling-specialization-and-dehomogenization",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-gauss-lemma-over-a-ufd",
+          "lem-standard-projective-opens-are-affine-spaces",
+          "thm-binary-resultant-zero-iff-common-geometric-projective-root",
+          "thm-projective-zariski-topology",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ],
+        "statement": "Let $F,G\\in k[x_0,x_1,x_2]$ be nonzero forms of positive degrees $d,e$ with no common factor, and suppose the point $[0:0:1]$ lies on neither $C=V(F)$ nor $D=V(G)$; equivalently the coefficients of $x_2^{d}$ in $F$ and of $x_2^{e}$ in $G$ are nonzero constants, so that $F(a,b,x_2)$ and $G(a,b,x_2)$ have exact degrees $d,e$ for every $(a,b)\\neq(0,0)$. Then $\\operatorname{Res}_{x_2}(F,G)\\in k[x_0,x_1]$ is a nonzero form of degree $de$, and for $(a,b)\\neq(0,0)$ one has $\\operatorname{Res}_{x_2}(F,G)(a,b)=0$ if and only if there is $c$ with $[a:b:c]\\in C\\cap D$. Consequently the projections $(x_0:x_1)$ of the common points of $C$ and $D$ are exactly the projective zeros of the resultant; over each such zero the fibre of common points is finite, of size at most $\\min(d,e)$ when counted without multiplicity. In particular $C\\cap D$ is finite.",
+        "strategy": "Specialise the binary resultant theorem to each $(a:b)\\in\\mathbf P^1$: under the hypothesis, the specialisations have exact degrees $d$ and $e$, so vanishing of the specialised resultant is equivalent to a common root, and a common root is exactly a common point of $C$ and $D$ above that projection. A vanishing resultant would force a common factor of $F$ and $G$ in $k[x_0,x_1][x_2]$ by the Sylvester/Gauss argument over the UFD $k[x_0,x_1]$; hence a nonzero form of degree $de$, which has finitely many zeros, and each zero has at most $\\min(d,e)$ preimages.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            },
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-bezout-no-common-component-finite-intersection",
+        "kind": "lemma",
+        "title": "Curves without a common component meet finitely often",
+        "deps": [
+          "cor-factor-theorem-over-a-commutative-ring",
+          "cor-no-common-component-projective-plane-intersection-is-zero-dimensional",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice",
+          "def-field",
+          "def-morphism-to-projective-space-homogeneous-coordinates",
+          "def-plane-projective-curve",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "def-polynomial-evaluation-and-root",
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "def-projective-space-points",
+          "def-resultant-homogeneous-polynomials",
+          "lem-a-nonzero-polynomial-in-several-variables-does-not-vanish-on-an-infinite-subring",
+          "lem-projective-coordinate-morphisms-well-defined",
+          "lem-projective-standard-chart-prime-and-local-ring-correspondence",
+          "lem-resultant-detects-common-projective-point",
+          "lem-zero-dimensional-projective-scheme-has-finite-local-charts",
+          "thm-polynomial-degree-of-a-product-over-a-domain",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $C=V(F)$ and $D=V(G)$ be plane projective curves over the algebraically closed field $k$ with no common component. Then $C\\cap D$ is nonempty and finite: after a projective change of coordinates putting $[0:0:1]$ on neither curve, the intersection points project onto the finitely many zeros of the nonzero resultant $\\operatorname{Res}_{x_2}(F,G)$, with finitely many points over each zero. Equivalently, it consists of the finitely many points corresponding to the points of the zero-dimensional projective scheme $X=\\operatorname{Proj}(k[x_0,x_1,x_2]/(F,G))$ ([[def-projective-scheme-from-a-homogeneous-quotient]]).",
+        "strategy": "Choose coordinates in general position so that neither curve passes through $[0:0:1]$, apply the resultant detection to see that the intersection projects to the finitely many zeros of a nonzero binary form of degree $de$, and use finiteness of the fibres. The scheme-theoretic description follows from the published zero-dimensionality and finite chart decomposition of $X$, whose points are the common zeros by the chart-prime correspondence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "axiom_use": "Inherited from the projective-scheme and resultant suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-bezout-global-length-degree-product",
+        "kind": "lemma",
+        "title": "Global length of a plane complete intersection equals the degree product",
+        "deps": [
+          "cor-projective-plane-bezout-length-form",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice",
+          "def-extension-degree-and-finite-extension",
+          "def-plane-projective-curve",
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "def-residue-field-scheme-point",
+          "def-total-length-of-a-zero-dimensional-projective-scheme",
+          "prop-algebraically-closed-splitting-and-finite-extension-criteria",
+          "thm-projective-plane-complete-intersection-total-length"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $C=V(F)$ and $D=V(G)$ be plane projective curves of degrees $d,e\\ge1$ over the algebraically closed field $k$ with no common component, and put $X=\\operatorname{Proj}(k[x_0,x_1,x_2]/(F,G))$. Then the total length of $X$ is $\\operatorname{len}_k(X)=de$, and since every point of $X$ is $k$-rational (the residue field is a finite extension of the algebraically closed field $k$) this reads $\\sum_{x\\in X}\\ell_{\\mathcal O_{X,x}}(\\mathcal O_{X,x})=de$.",
+        "strategy": "Specialise the published algebraic Bezout length form to the algebraically closed case. The first equality is the total-length theorem; the residue-degree weights are all one because a finite extension of an algebraically closed field is trivial.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Andreas Gathmann, Algebraic Geometry class notes (2002), Sections 6.1-6.2",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "axiom_use": "Inherited from the published length formula, which assumes AC.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-global-intersection-length-sum-local-lengths",
+        "kind": "lemma",
+        "title": "Global intersection length is the sum of the local multiplicities",
+        "deps": [
+          "cor-localisation-is-unique-up-to-unique-isomorphism",
+          "cor-no-common-component-projective-plane-intersection-is-zero-dimensional",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice",
+          "def-composition-series-and-length-of-a-module",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-plane-projective-curve",
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "def-residue-field-scheme-point",
+          "def-total-length-of-a-zero-dimensional-projective-scheme",
+          "lem-bezout-global-length-degree-product",
+          "lem-local-intersection-length-finite",
+          "lem-projective-standard-chart-prime-and-local-ring-correspondence",
+          "lem-zero-dimensional-projective-scheme-has-finite-local-charts",
+          "prop-algebraically-closed-splitting-and-finite-extension-criteria",
+          "thm-localisation-commutes-with-quotients",
+          "thm-projective-plane-complete-intersection-total-length",
+          "thm-universal-property-of-localisation"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $C=V(F)$, $D=V(G)$ be plane projective curves over the algebraically closed field $k$ with no common component, and put $X=\\operatorname{Proj}(k[x_0,x_1,x_2]/(F,G))$. For $p\\in C\\cap D$ let $x_p\\in X$ be the corresponding point. Then $\\mathcal O_{X,x_p}\\cong\\mathcal O_{\\mathbf P^2,p}/(f_p,g_p)$ for local equations $f_p,g_p$ of $C$ and $D$ at $p$, and consequently $$\\operatorname{len}_k(X)=\\sum_{p\\in C\\cap D}I_p(C,D).$$ In particular the local multiplicities are all finite and only finitely many points contribute.",
+        "strategy": "On a standard chart containing $p$, the chart ring of $X$ is $k[u,v]/(f,g)$ with $f,g$ the dehomogenised equations, and the local ring $\\mathcal O_{X,x_p}$ is its localisation at the prime of $p$; localisation commutes with the quotient, so this is the localisation of $k[u,v]$ at $p$ modulo $(f,g)$, which is exactly $\\mathcal O_{\\mathbf P^2,p}/(f_p,g_p)$. The total length is the finite weighted sum of the local lengths with all residue degrees one; substituting the identification gives the displayed sum.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Andreas Gathmann, Algebraic Geometry class notes (2002), Sections 6.1-6.2",
+              "url": "https://agag-gathmann.math.rptu.de/class/alggeom-2002/alggeom-2002.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "axiom_use": "Inherited from the projective-length suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-bezout-plane-curves",
+        "kind": "theorem",
+        "title": "Bezout's theorem for plane projective curves",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-plane-projective-curve",
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "lem-bezout-global-length-degree-product",
+          "lem-bezout-no-common-component-finite-intersection",
+          "lem-global-intersection-length-sum-local-lengths"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $C=V(F)$ and $D=V(G)$ be plane projective curves of degrees $d,e\\ge1$ over the algebraically closed field $k$, with no common component. Then $$\\sum_{p\\in C\\cap D}I_p(C,D)=de,$$ a finite sum over the finitely many intersection points, each term the local intersection multiplicity of the two curves.",
+        "strategy": "Combine the global length computation $\\operatorname{len}_k(X)=de$ with the identification of the global length with the sum of the local multiplicities. The intersection is finite by the no-common-component lemma, and every term is finite because having no common component excludes a shared local branch at each point.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "MIT 18.725 Algebraic Geometry (Fall 2015) lecture notes, consolidated",
+              "url": "https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-projective-plane-curves-meet",
+        "kind": "corollary",
+        "title": "Two plane projective curves meet",
+        "deps": [
+          "def-axiom-of-choice",
+          "cor-no-common-component-projective-plane-intersection-is-zero-dimensional",
+          "def-plane-projective-curve",
+          "lem-bezout-no-common-component-finite-intersection",
+          "lem-zero-dimensional-projective-scheme-has-finite-local-charts",
+          "thm-bezout-plane-curves",
+          "thm-intersection-multiplicity-basic-properties"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nLet $C,D$ be plane projective curves of positive degrees over the algebraically closed field $k$. If $C$ and $D$ have no common component they meet, and their local intersection multiplicities sum to $de\\ge1$; if they share a component they meet along that component. In all cases $C\\cap D\\neq\\varnothing$.",
+        "strategy": "With no common component, Bezout gives the sum of positive multiplicities $de\\ge1$, so at least one point occurs; the underlying scheme is nonempty by the published zero-dimensionality result. If they share a component, that component is contained in the intersection.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-local-parameter-smooth-plane-curve",
+        "kind": "definition",
+        "title": "Uniformising parameters at smooth points of a plane curve",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-discrete-valuation-ring",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-germ-and-local-ring-classical-variety",
+          "def-local-ring",
+          "def-singular-and-regular-loci-variety",
+          "def-uniformising-parameter",
+          "def-zariski-tangent-space-point",
+          "lem-smooth-plane-curve-unique-tangent",
+          "thm-dvr-element-normal-form",
+          "thm-local-ring-affine-variety-localization",
+          "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $C=V(F)$ be a plane projective curve over the algebraically closed field $k$ and let $p\\in C$ be a smooth point lem-smooth-plane-curve-unique-tangent, def-singular-and-regular-loci-variety. Then the local ring $\\mathcal O_{C,p}$ is a discrete valuation ring thm-one-dimensional-regular-local-rings-are-dvrs, def-local-ring, def-discrete-valuation-ring, def-germ-and-local-ring-classical-variety, thm-local-ring-affine-variety-localization.\n\nIts maximal ideal is generated by the image of any local equation $l$ of a line through $p$ that is not the tangent line to $C$ at $p$ thm-zariski-tangent-space-jacobian-kernel, def-zariski-tangent-space-point; such an $l$ is a **uniformising parameter** at $p$ def-uniformising-parameter, def-embedding-dimension-and-regular-local-ring. The associated valuation\n\n$$ \\operatorname{ord}_p\\colon \\operatorname{Frac}(\\mathcal O_{C,p})^\\times\\to\\mathbb Z $$\n\nis the **order of vanishing along $C$ at $p$**. Its domain is the fraction field of the local DVR, equivalently the function field of the unique irreducible component through the smooth point $p$; when $C$ is irreducible this is $k(C)$. On nonzero local germs, it is positive exactly for the nonzero rational functions on $C$ that vanish at $p$, vanishes exactly on the units of $\\mathcal O_{C,p}$, and for $n\\ge1$ the functions of order at least $n$ form the ideal $\\mathfrak m_p^n$ of $\\mathcal O_{C,p}$.",
+        "strategy": "The local ring of the curve at a smooth point is a one-dimensional regular local ring: regularity follows from the Jacobian criterion and the one-dimensionality from the principal-ideal description inside the two-dimensional local ring of the plane. A one-dimensional regular local ring is a DVR, and the image of a non-tangent line has nonzero linear part, so it generates the maximal ideal as uniformiser.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "axiom_use": "Inherited from DVR and Jacobian-criterion suppliers."
+      },
+      {
+        "id": "lem-local-intersection-as-vanishing-order-on-smooth-curve",
+        "kind": "lemma",
+        "title": "Intersection with a smooth curve is a vanishing order",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-composition-series-and-length-of-a-module",
+          "def-discrete-valuation-ring",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-local-parameter-smooth-plane-curve",
+          "def-uniformising-parameter",
+          "lem-local-intersection-length-finite",
+          "thm-dvr-element-normal-form",
+          "thm-dvr-ideal-and-module-length",
+          "thm-localisation-commutes-with-quotients"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $C$ be a plane projective curve smooth at $p$, and let $D$ be a plane projective curve whose local equation $g$ at $p$ does not vanish identically on $C$ (no common local component through $p$). Then $$I_p(C,D)=\\operatorname{ord}_{p}(g|_C),$$ the valuation of the image of $g$ in the discrete valuation ring $\\mathcal O_{C,p}$.",
+        "strategy": "The local ring of the curve is a DVR with uniformiser $t$, and the quotient $\\mathcal O_{C,p}/(g)$ has length equal to the valuation of $g$; the local ring of the plane modulo $(f,g)$ is the same quotient, because $\\mathcal O_{C,p}=\\mathcal O_{\\mathbf P^2,p}/(f)$ and length is unchanged when passing to the quotient by the equation of the curve.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "axiom_use": "Inherited from DVR suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-line-meets-degree-d-curve-counted-with-multiplicity",
+        "kind": "corollary",
+        "title": "A line meets a degree-d curve in d points counted with multiplicity",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-degree-projective-hypersurface",
+          "def-plane-projective-curve",
+          "def-projective-space-points",
+          "def-tangent-lines-plane-curve-point",
+          "lem-intersection-with-line-order-of-vanishing",
+          "lem-standard-projective-opens-are-affine-spaces",
+          "thm-bezout-plane-curves",
+          "thm-intersection-multiplicity-basic-properties",
+          "thm-polynomial-degree-of-a-product-over-a-domain"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nLet $L$ be a line and $C$ a plane projective curve of degree $d$ over the algebraically closed field $k$ with $L\\not\\subseteq C$. Then $L\\cap C$ consists of at most $d$ points and\n\n$$ \\sum_{p\\in L\\cap C}I_p(C,L)=d .$$\n\nEquivalently, if $F|_L$ is the restriction of a defining form of $C$ to $L\\cong\\mathbf P^1$, a nonzero binary form of degree $d$, then $I_p(C,L)$ is the multiplicity of the corresponding root of $F|_L$, and the roots counted with multiplicity exhaust $d$.",
+        "strategy": "Bezout with the line of degree one gives the sum $d$; the identification of each local intersection multiplicity with the order of vanishing of the restricted binary form is the intersection-with-a-line lemma. Hence the point count is at most $d$ and the multiplicities sum to $d$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-flex-and-bitangent-plane-curve",
+        "kind": "definition",
+        "title": "Flexes and bitangents defined by intersection multiplicity",
+        "deps": [
+          "cor-line-meets-degree-d-curve-counted-with-multiplicity",
+          "def-axiom-of-choice",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-local-parameter-smooth-plane-curve",
+          "def-plane-projective-curve",
+          "def-tangent-lines-plane-curve-point",
+          "lem-intersection-with-line-order-of-vanishing",
+          "lem-local-intersection-as-vanishing-order-on-smooth-curve",
+          "lem-smooth-plane-curve-unique-tangent"
+        ],
+        "statement": "Let $C\\subseteq\\mathbf P^2$ be a plane projective curve over the algebraically closed field $k$ def-plane-projective-curve.\n\nA smooth point $p\\in C$ is a **flex** of $C$ when its tangent line $T_pC$ is not a component of $C$ and satisfies\n\n$$ I_p(C,T_pC)\\ge3,$$\n\nand it is an **ordinary flex** when $I_p(C,T_pC)=3$. Here $T_pC$ is the unique tangent line at the smooth point $p$ lem-smooth-plane-curve-unique-tangent, def-tangent-lines-plane-curve-point, and the contact is measured by the local intersection multiplicity of the curve with its tangent line def-local-intersection-multiplicity-plane-curves.\n\nA line $L$ not contained in $C$ is a **bitangent** of $C$ when $L$ has at least two distinct contact points of multiplicity at least two, that is, there are $p\\neq q$ in $L\\cap C$ with $I_p(C,L)\\ge2$ and $I_q(C,L)\\ge2$. More generally, a line not contained in $C$ is a **multitangent** when the sum of the multiplicities at its contact points exceeds its number of contact points. No Plücker formula or duality statement is asserted.",
+        "strategy": "Define flexes and bitangents through local intersection multiplicities with the tangent line and with lines, using the smooth-point uniformiser to phrase the contact order as an order of vanishing. This records the notions used by the companion examples without importing Plücker or dual-curve machinery.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-tangent-line-flex-multiplicity",
+        "kind": "corollary",
+        "title": "Flexes are contacts of order at least three with the tangent line",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-flex-and-bitangent-plane-curve",
+          "def-local-parameter-smooth-plane-curve",
+          "def-plane-projective-curve",
+          "lem-intersection-with-line-order-of-vanishing",
+          "lem-local-intersection-as-vanishing-order-on-smooth-curve",
+          "lem-smooth-plane-curve-unique-tangent"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nLet $C$ be a plane projective curve over the algebraically closed field $k$ and let $p\\in C$ be a smooth point with tangent line $T=T_pC$. Then $p$ is a flex of $C$ if and only if $T$ is not a component of $C$ and the nonzero restriction to $T$ of a defining form of $C$ vanishes at $p$ to order at least three. Whenever $T$ is not a component,\n\n$$ I_p(C,T)=\\operatorname{ord}_p(F|_T).$$\n\nIn particular $p$ is an ordinary flex exactly when $I_p(C,T)=3$, and for a smooth conic or a line there are no flexes.",
+        "strategy": "Combine the definition of a flex with the identification of the intersection multiplicity with a curve smooth at $p$ as the order of vanishing of the restricted equation. For a conic the restricted binary form has degree two, so no point can have order three; a line has degree one.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-linear-system-plane-curves",
+        "kind": "definition",
+        "title": "Linear systems of plane curves and their base loci",
+        "deps": [
+          "def-algebraically-closed-field",
+          "def-binomial-coefficient",
+          "def-degree-projective-hypersurface",
+          "def-dimension",
+          "def-homogeneous-polynomial-and-homogeneous-ideal",
+          "def-linear-subspace",
+          "def-monomials-multidegree-and-total-degree",
+          "def-projective-algebraic-set",
+          "def-projective-space-points",
+          "def-vector-space",
+          "thm-projective-zariski-topology"
+        ],
+        "statement": "Work over a field $k$ with $\\mathbf P^2=\\mathbf P^2_k$ and the space $k[x_0,x_1,x_2]_d$ of degree-$d$ forms, a $k$-linear subspace of the polynomial ring def-homogeneous-polynomial-and-homogeneous-ideal and a vector space over $k$ def-vector-space.\n\nLet $d\\ge1$. A **linear system of plane curves of degree $d$** is a linear subspace $W\\subseteq k[x_0,x_1,x_2]_d$ def-linear-subspace together with the projectively indexed family of degree-$d$ equations and their zero sets\n\n$$ \\{V(F):0\\neq F\\in W\\},$$\n\nThe members are the nonzero forms modulo nonzero scalar multiplication, so their equation degree is $d$, with factor multiplicities retained in the equations. Their underlying zero sets are $V(F)=V_+((F))\\subseteq\\mathbf P^2$ is the projective zero set of the form $F$ def-projective-algebraic-set, def-degree-projective-hypersurface, def-projective-space-points. Its **dimension** is $\\dim_kW-1$, the projective dimension of the nonzero forms of $W$. Its **base locus** is the closed set\n\n$$ \\operatorname{Bs}W=\\bigcap_{0\\neq F\\in W}V(F),$$\n\nthe set of points lying on every member of the system; it is closed because it is an intersection of closed sets in the projective Zariski topology thm-projective-zariski-topology.\n\nA **pencil** is a linear system of dimension one, that is, a two-dimensional $W$. An **element** of the system is a projective equation $[F]$ with $0\\neq F\\in W$, together with its zero set. This degree-$d$ equation convention permits repeated factors. Under the reduced curve convention of this page, a square-free member has reduced degree $d$; a nonsquare-free member has the same zero set as its square-free part, whose reduced degree may be smaller. For example $W=\\langle x_0^2\\rangle$ is a degree-two equation system whose reduced support is a line of degree one. No multiplicity is assigned to the reduced support by this definition.\n\n**Two conventions.** First, membership is insensitive to scaling: for $\\lambda\\in k^\\times$ one has $V(\\lambda F)=V(F)$, and $\\lambda F\\in W$; likewise $F$ is a nonzero element of $W$ exactly when $\\lambda F$ is. So both the family of curves and the base locus depend on $W$ only through the projective point set $\\mathbf P(W)$, and the dimension $\\dim_kW-1$ is the dimension of that projective space. Second, the **subsystem of forms through a prescribed finite set** $S\\subseteq\\mathbf P^2$ is\n\n$$ W(-S)=\\{F\\in W:F(q)=0\\text{ for all }q\\in S\\},$$\n\na linear subspace of $W$; its elements are exactly the members of the system passing through every point of $S$. The basic example is $W=k[x_0,x_1,x_2]_d$ itself with $\\dim= \\binom{d+2}{2}-1$, whose base locus is empty, and its subsystem through a finite set $S$ of points with no three on a line in the case $d=1$.",
+        "strategy": "Transcribe the standard definition: linear systems are projective linear subspaces of the space of degree-d forms, with the base locus as the common zero set, and dimension as the projective dimension. Record that membership and base points are insensitive to multiplying a form by a nonzero constant.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-bezout-uniqueness-low-degree-interpolation",
+        "kind": "theorem",
+        "title": "Curves sharing too many points share a component",
+        "deps": [
+          "def-axiom-of-choice",
+          "cor-projective-plane-curves-meet",
+          "def-plane-projective-curve",
+          "thm-bezout-plane-curves",
+          "thm-intersection-multiplicity-basic-properties"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nLet $C,D$ be plane projective curves of degree $d\\ge1$ over the algebraically closed field $k$. If $C\\cap D$ contains more than $d^{2}$ distinct points, then $C$ and $D$ share a component. Equivalently, two distinct curves of degree at most $d$ cannot meet in more than $d^{2}$ distinct points without a common component.",
+        "strategy": "If the curves had no common component, Bezout would give $\\sum_pI_p(C,D)=d^{2}$, while each of the more than $d^{2}$ distinct intersection points contributes at least one to the sum, a contradiction. Hence a common component exists.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-projective-coordinate-invariance-bezout-sum",
+        "kind": "lemma",
+        "title": "Invariance of the Bezout sum under projective coordinate changes",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-morphism-to-projective-space-homogeneous-coordinates",
+          "def-plane-projective-curve",
+          "lem-intersection-multiplicity-independent-equations-coordinates",
+          "lem-projective-coordinate-morphisms-well-defined",
+          "thm-bezout-plane-curves"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nLet $C,D$ be plane projective curves of degrees $d,e$ over the algebraically closed field $k$ with no common component, and let $A\\in\\mathrm{PGL}_3(k)$ be a projective change of coordinates. Then $A(C)$ and $A(D)$ are plane curves of the same degrees with no common component and\n\n$$ \\sum_{p\\in C\\cap D}I_p(C,D)=\\sum_{q\\in A(C)\\cap A(D)}I_q(A(C),A(D)).$$\n\nMore precisely $I_p(C,D)=I_{A(p)}(A(C),A(D))$ for every $p$, so any convenient coordinate system may be used to compute the sum.",
+        "strategy": "A projective change of coordinates is an automorphism of $\\mathbf P^2$ inducing isomorphisms of the local rings at corresponding points and a bijection of the intersection sets; the local multiplicities are invariant, so the sums agree. This licenses normalising the coordinate system before computing a Bezout sum.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-pascal-bezout-obstruction-template",
+        "kind": "corollary",
+        "title": "The component-counting obstruction template for incidence arguments",
+        "deps": [
+          "def-axiom-of-choice",
+          "cor-projective-plane-curves-meet",
+          "def-plane-projective-curve",
+          "thm-bezout-plane-curves",
+          "thm-intersection-multiplicity-basic-properties"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nLet $C$ be a plane projective curve of degree $d$ and $E$ a plane projective curve of degree $f$ over the algebraically closed field $k$. If $C$ and $E$ have no common component then $E$ contains at most $df$ points of $C$, and any set of pairwise distinct points of $C$ on which $E$ is required to vanish must have at most $df$ elements. Consequently, in any incidence configuration in which curves of degrees $d$ and $f$ are forced to share more than $df$ distinct points, the two curves must share a component. This is the standard component-counting step behind Pascal- and Pappus-type applications, isolated here without minting a separate named incidence theorem.",
+        "strategy": "Each distinct common point contributes at least one to the Bezout sum, which equals $df$ when there is no common component; exceeding $df$ points therefore forces a component. The statement isolates that one-line argument as the reusable obstruction template.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "rem-bezout-needs-projective-algebraic-closure-multiplicity",
+        "kind": "remark",
+        "title": "Why Bezout needs projectivity, algebraic closure and multiplicity",
+        "deps": [
+          "cor-projective-plane-curves-meet",
+          "def-axiom-of-choice",
+          "def-plane-projective-curve",
+          "lem-bezout-no-common-component-finite-intersection",
+          "thm-bezout-plane-curves"
+        ],
+        "statement": "The equality $\\sum_pI_p(C,D)=de$ depends on all three of projectivity, algebraic closure and multiplicity.\n\n**(a) Projectivity.** If the curves are considered only in an affine chart, any intersection points on the line at infinity are missing, so the sum over affine points is at most $de$ and is strictly smaller precisely when there is an intersection at infinity; equivalently one must add the contributions at infinity. The companion counterexample exhibits two affine lines with no common affine point whose projective closures meet at $[0:0:1]$; the missing point at infinity accounts for the deficit, so the affine count $0$ is strictly less than $de=1$ cex-affine-bezout-misses-points-at-infinity.\n\n**(b) Algebraic closure.** If the ground field is not algebraically closed, the intersection scheme may have points whose residue field is a nontrivial finite extension and which are invisible to the $k$-points, so no multiplicity-weighted count of $k$-rational points can equal $de$ in general; the published Bezout theorem is stated over an algebraically closed field for exactly this reason thm-bezout-plane-curves, def-plane-projective-curve. The companion counterexample is the imaginary conic $V(x_0^2+x_1^2+x_2^2)$ with no real point on the line $V(x_1)$, while over the algebraic closure the two conjugate points contribute the full degree total cex-real-bezout-needs-algebraic-closure.\n\n**(c) Multiplicity.** If points are counted without multiplicity, a tangency between a line and a conic gives one point rather than two, and a shared tangent or a singular contact reduces the count below $de$; the local multiplicity is what repairs the count. The companion counterexample is the tangent line to a conic meeting it in a single point with $I_p=2$ cex-distinct-point-count-needs-multiplicity.\n\nProjectivity supplies completeness, algebraic closure makes all intersection points rational over the base field, and multiplicities encode the tangency and singularity defects; the general intersection is nonempty and finite precisely under the no-common-component hypothesis cor-projective-plane-curves-meet, lem-bezout-no-common-component-finite-intersection.",
+        "strategy": "Record the three hypotheses with the exact way each one is used and point to the companion counterexamples. No new proof obligation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "forward_refs": [
+          "cex-affine-bezout-misses-points-at-infinity",
+          "cex-real-bezout-needs-algebraic-closure",
+          "cex-distinct-point-count-needs-multiplicity"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 366.064,
+    "id": "plane-curves-local-intersection-multiplicity-and-bezout-examples",
+    "kind": "B",
+    "category": "algebraic-geometry",
+    "title": "Plane Curves Local Intersection Multiplicity and Bezout — Examples",
+    "companion": "plane-curves-local-intersection-multiplicity-and-bezout",
+    "requires": [
+      "plane-curves-local-intersection-multiplicity-and-bezout"
+    ],
+    "items": [
+      {
+        "id": "ex-line-conic-two-intersections",
+        "kind": "example",
+        "title": "A line and a conic meet in two points counted with multiplicity",
+        "deps": [
+          "cor-line-meets-degree-d-curve-counted-with-multiplicity",
+          "cor-transverse-smooth-curves-intersection-one",
+          "def-axiom-of-choice",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-plane-projective-curve",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-gauss-lemma-over-a-ufd",
+          "lem-intersection-with-line-order-of-vanishing"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nLet $C=V(x_0^2-x_1x_2)\\subseteq\\mathbf P^2$ over an algebraically closed field of characteristic not two and let $L=V(x_1-x_2)$. Then $L\\not\\subseteq C$ and $L\\cap C=\\{[1:1:1],[-1:1:1]\\}$; both intersections are transversal, so $I_p(C,L)=1$ at each point and the total is $2=\\deg C\\cdot\\deg L$.",
+        "strategy": "Substitute the line parametrisation $(s:t)\\mapsto(s:t:t)$ into the conic to obtain the binary quadratic $s^2-t^2$, whose two roots are simple; the order of vanishing interpretation gives multiplicity one at each root.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-tangent-line-conic-double-intersection",
+        "kind": "example",
+        "title": "A tangent line meets a conic with multiplicity two at one point",
+        "deps": [
+          "cor-line-meets-degree-d-curve-counted-with-multiplicity",
+          "def-axiom-of-choice",
+          "def-flex-and-bitangent-plane-curve",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-plane-projective-curve",
+          "def-tangent-lines-plane-curve-point",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-gauss-lemma-over-a-ufd",
+          "lem-intersection-with-line-order-of-vanishing",
+          "lem-smooth-plane-curve-unique-tangent"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nLet $C=V(x_0^2-x_1x_2)$ and let $L=V(x_1)$ be the tangent line to $C$ at $p=[0:0:1]$. Then $L\\cap C=\\{p\\}$ as a set, and substituting $x_1=0$ leaves the restriction $x_0^2$ with a double root at $p$, so $I_p(C,L)=2$ and the single point accounts for the full degree-two total.",
+        "strategy": "Restrict the conic equation to the line and compute the order of vanishing at the unique intersection; the restriction is a nonzero binary quadratic with a double root there.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-cusp-line-intersection-multiplicities",
+        "kind": "example",
+        "title": "Line multiplicities at a cusp",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-composition-series-and-length-of-a-module",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-multiplicity-plane-curve-point",
+          "def-plane-projective-curve",
+          "def-tangent-lines-plane-curve-point",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-gauss-lemma-over-a-ufd",
+          "lem-local-intersection-length-finite",
+          "thm-intersection-multiplicity-at-least-product-multiplicities"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nLet $C=V(y^2z-x^3)\\subseteq\\mathbf P^2$ be the cuspidal cubic at the cusp $p=[0:0:1]$, so $m_p(C)=2$ with double tangent line $T=V(y)$. Then\n\n$$ I_p(C,T)=3,\\qquad I_p(C,V(x))=2,$$\n\nand both values agree with the local lengths $\\ell\\bigl(k[x,y]_{(x,y)}/(y^2-x^3,y)\\bigr)=3$ and $\\ell\\bigl(k[x,y]_{(x,y)}/(y^2-x^3,x)\\bigr)=2$.",
+        "strategy": "Compute the two local quotients: modulo $y$ the equation becomes $x^3$, giving length three; modulo $x$ it becomes $y^2$, giving length two. The multiplicity bound $I_p\\ge2\\cdot1$ holds with strict inequality exactly where the tangent line is shared.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-node-line-intersection-branches",
+        "kind": "example",
+        "title": "Lines through a node and its two branches",
+        "deps": [
+          "cor-formal-series-over-a-field-is-a-local-domain",
+          "def-axiom-of-choice",
+          "def-composition-series-and-length-of-a-module",
+          "def-formal-power-series-and-coefficient-extraction",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-multiplicity-plane-curve-point",
+          "def-plane-projective-curve",
+          "def-tangent-lines-plane-curve-point",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-gauss-lemma-over-a-ufd",
+          "lem-local-intersection-length-finite",
+          "thm-bezout-plane-curves",
+          "thm-formal-power-series-ring-and-polynomial-embedding",
+          "thm-intersection-multiplicity-at-least-product-multiplicities"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nLet $C=V(y^2z-x^2(x+z))\\subseteq\\mathbf P^2$ be the nodal cubic over an algebraically closed field of characteristic not two, with node $p=[0:0:1]$. The tangent cone is $y^2-x^2$, so there are two distinct tangent lines $y=\\pm x$. A line through $p$ equal to one of the two tangent lines meets $C$ with multiplicity three at $p$; a line through $p$ distinct from both tangents, for instance $V(y)$, has $I_p(C,L)=2$; a line not through $p$ and not contained in $C$ meets $C$ in three points counted with multiplicity.",
+        "strategy": "Factor the affine equation $y^2-x^2(x+1)=(y-x\\sqrt{1+x})(y+x\\sqrt{1+x})$ in the completed local ring to exhibit the two smooth branches; intersection with a line is computed by the order of vanishing on each branch and added by the product formula.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-affine-bezout-misses-points-at-infinity",
+        "kind": "counterexample",
+        "title": "Bezout fails on the affine plane because points at infinity are missing",
+        "deps": [
+          "cor-line-meets-degree-d-curve-counted-with-multiplicity",
+          "def-axiom-of-choice",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-plane-projective-curve",
+          "def-projective-space-points",
+          "thm-bezout-plane-curves",
+          "thm-intersection-multiplicity-basic-properties"
+        ],
+        "statement": "False claim: for two plane curves of degrees $d,e$, the number of affine intersection points counted with multiplicity equals $de$.",
+        "strategy": "Compare the disjoint affine zero sets with the projective closures, which meet at $[0:0:1]$; the missing point at infinity accounts exactly for the degree deficit.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-real-bezout-needs-algebraic-closure",
+        "kind": "counterexample",
+        "title": "Bezout needs algebraic closure: an imaginary conic has no real point",
+        "deps": [
+          "cor-transverse-smooth-curves-intersection-one",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-ordered-field",
+          "def-plane-projective-curve",
+          "def-polynomial-evaluation-and-root",
+          "lem-smooth-plane-curve-unique-tangent",
+          "prop-algebraically-closed-splitting-and-finite-extension-criteria",
+          "thm-bezout-plane-curves",
+          "thm-complex-numbers-form-a-field",
+          "thm-fundamental-theorem-of-algebra-minimum-modulus-proof",
+          "thm-intersection-multiplicity-at-least-product-multiplicities",
+          "thm-intersection-multiplicity-basic-properties",
+          "thm-reals-ordered-field"
+        ],
+        "statement": "False claim: over an arbitrary field $k$, the degree identity $\\sum_pI_p=de$ holds for the $k$-rational intersection points of two plane curves.",
+        "strategy": "Exhibit the conic and line with no real intersection; the two intersection points are conjugate and non-rational, so they are invisible in the real projective plane while contributing to the complex count. This is the standard witness that algebraic closure cannot be dropped.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-distinct-point-count-needs-multiplicity",
+        "kind": "counterexample",
+        "title": "Counting distinct points is not enough: tangent contact",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-local-intersection-multiplicity-plane-curves",
+          "ex-tangent-line-conic-double-intersection",
+          "thm-bezout-plane-curves"
+        ],
+        "statement": "False claim: for two plane projective curves of degrees $d,e$ over an algebraically closed field, the number of distinct intersection points equals $de$.",
+        "strategy": "Cite the tangent-line conic example, where the unique intersection point has multiplicity two, and contrast the distinct-point count one with the multiplicity-weighted count two.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-common-component-bezout-sum-not-finite",
+        "kind": "counterexample",
+        "title": "A common component makes the intersection sum infinite",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-composition-series-and-length-of-a-module",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-plane-projective-curve",
+          "def-prime-and-maximal-ideals",
+          "lem-local-intersection-length-finite",
+          "thm-bezout-plane-curves"
+        ],
+        "statement": "False claim: Bezout's identity $\\sum_pI_p(C,D)=de$ holds for all pairs of plane curves, without the hypothesis that the curves have no common component.",
+        "strategy": "Exhibit the shared component and note that along it the local quotient surjects onto a one-dimensional curve quotient, forcing infinite length and undefined (infinite) local intersection multiplicity.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-two-plane-cubics-nine-points",
+        "kind": "example",
+        "title": "Two transverse cubics meet in nine points",
+        "deps": [
+          "cor-projective-plane-curves-meet",
+          "cor-transverse-smooth-curves-intersection-one",
+          "def-axiom-of-choice",
+          "def-local-intersection-multiplicity-plane-curves",
+          "def-plane-projective-curve",
+          "def-polynomial-evaluation-and-root",
+          "lem-bezout-no-common-component-finite-intersection",
+          "prop-algebraically-closed-splitting-and-finite-extension-criteria",
+          "thm-bezout-plane-curves"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nLet $k$ be algebraically closed of characteristic not three and let $C=V(x_0^3+x_1^3+x_2^3)$ and $D=V(x_0x_1x_2)$. Then $C\\cap D$ consists exactly of the nine points with one coordinate zero and the other two coordinates $a,b$ satisfying $a^3+b^3=0$; at each of them $C$ and $D$ are smooth with distinct tangent lines, so every local multiplicity is one and $\\sum_pI_p=9=3\\cdot3$, as Bezout requires. Under degeneration of the configuration the number of distinct points drops and the multiplicities concentrate at the contacts, as the cusp and node computations on this page show; here the count is exact and multiplicity-free.",
+        "strategy": "Check that the two cubics have no common component and that at each of the nine listed points both curves are smooth with distinct tangents, so each contributes multiplicity one and the total is nine, as Bezout requires.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-flex-cubic-contact-order-three",
+        "kind": "example",
+        "title": "A flex of a cubic has contact order three",
+        "deps": [
+          "cor-tangent-line-flex-multiplicity",
+          "def-axiom-of-choice",
+          "def-flex-and-bitangent-plane-curve",
+          "def-plane-projective-curve",
+          "def-tangent-lines-plane-curve-point",
+          "lem-local-intersection-as-vanishing-order-on-smooth-curve",
+          "lem-smooth-plane-curve-unique-tangent"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the cited local-length, smoothness or Bezout suppliers.\n\nFor the Fermat cubic $C=V(x_0^3+x_1^3+x_2^3)$ over an algebraically closed field of characteristic not three, the point $p=[1:-1:0]$ is a flex. Its tangent line is $T=V(x_0+x_1)$: substituting $x_0=-x_1$ into the equation gives $x_2^3$, so the restriction to $T$ has a triple root at $p$ and $I_p(C,T_pC)=3$.",
+        "strategy": "Parametrise the tangent line $x_0=-x_1$ by $(1:-1:t)$ and substitute into the cubic; the resulting binary cubic in $t$ is $t^3$, a root of order three at $p$, which is exactly the contact order by the flex criterion.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Fulton, Algebraic Curves: An Introduction to Algebraic Geometry (2008 electronic edition; Internet Archive copy of the author's PDF)",
+              "url": "https://web.archive.org/web/20240102232744id_/https://dept.math.lsa.umich.edu/~wfulton/CurveBook.pdf"
+            },
+            {
+              "title": "Michael Artin, MIT 18.721 Notes for a Course in Algebraic Geometry (January 26, 2022 version), Chapter 1",
+              "url": "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8,
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

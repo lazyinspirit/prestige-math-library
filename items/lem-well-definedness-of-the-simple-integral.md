@@ -40,13 +40,11 @@ then the two coefficient sums defining $\int s\,d\mu$ are equal. So
 
 **Proof technique:** direct.
 
-1.1 Complete both representations to partitions of $X$. [given, L1]
-Put $E_0=X\setminus\bigcup_{i=1}^mE_i$ and $F_0=X\setminus\bigcup_{j=1}^nF_j$, with coefficients $c_0=d_0=0$. Both are measurable. Adding these zero terms leaves the represented function and each coefficient sum unchanged, including when a complement has infinite measure, by the convention in [L1]. The augmented families $(E_i)_{i=0}^m$ and $(F_j)_{j=0}^n$ are finite measurable partitions of $X$.
+1.1 Complete both representations to partitions of $X$. [given, L1] Put $E_0=X\setminus\bigcup_{i=1}^mE_i$ and $F_0=X\setminus\bigcup_{j=1}^nF_j$, with coefficients $c_0=d_0=0$. Both are measurable. Adding these zero terms leaves the represented function and each coefficient sum unchanged, including when a complement has infinite measure, by the convention in [L1]. The augmented families $(E_i)_{i=0}^m$ and $(F_j)_{j=0}^n$ are finite measurable partitions of $X$. [given, L1]
 
-2.1 Refine the two partitions by their intersections. [step 1.1]
-For $0\le i\le m$ and $0\le j\le n$ set $G_{ij}=E_i\cap F_j$. These sets are measurable and pairwise disjoint, and $$E_i=\bigsqcup_{j=0}^nG_{ij},\qquad F_j=\bigsqcup_{i=0}^mG_{ij}.$$ On every nonempty $G_{ij}$ the two formulas give the same value of $s$, so $c_i=d_j$.
+2.1 Refine the two partitions by their intersections. [step 1.1] For $0\le i\le m$ and $0\le j\le n$ set $G_{ij}=E_i\cap F_j$. These sets are measurable and pairwise disjoint, and $$E_i=\bigsqcup_{j=0}^nG_{ij},\qquad F_j=\bigsqcup_{i=0}^mG_{ij}.$$ On every nonempty $G_{ij}$ the two formulas give the same value of $s$, so $c_i=d_j$. [step 1.1]
 
-3.1 Apply finite additivity and the nonnegative extended-real finite-sum rules. [L1, L2, step 2.1]
-They give $$\sum_{i=0}^m c_i\mu(E_i)=\sum_{i=0}^m\sum_{j=0}^n c_i\mu(G_{ij})=\sum_{i=0}^m\sum_{j=0}^n d_j\mu(G_{ij})=\sum_{j=0}^n d_j\mu(F_j).$$ For a zero coefficient, every product with an infinite measure is $0$ by [L1]; for a positive coefficient the usual extended-real distributivity applies. Thus no subtraction of infinities occurs.
+3.1 Apply finite additivity and the nonnegative extended-real finite-sum rules. [L1, L2, step 2.1] They give $$\sum_{i=0}^m c_i\mu(E_i)=\sum_{i=0}^m\sum_{j=0}^n c_i\mu(G_{ij})=\sum_{i=0}^m\sum_{j=0}^n d_j\mu(G_{ij})=\sum_{j=0}^n d_j\mu(F_j).$$ For a zero coefficient, every product with an infinite measure is $0$ by [L1]; for a positive coefficient the usual extended-real distributivity applies. Thus no subtraction of infinities occurs. [L1, L2, step 2.1]
 
 4.1 Removing the added zero terms from step 3.1 proves equality of the original coefficient sums. [step 1.1, step 3.1] ∎
+

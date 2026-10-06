@@ -35,6 +35,12 @@ sources:
       url: "https://math.mit.edu/~higgs/18.725_2015.pdf"
       locator: "Lecture 9, equations x_it_j=x_jt_i and the two charts, PDF p. 23"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "historical completed Step7 repair full proof read (local repair; not an independent audit of repair); item lem-blowup-plane-origin-incidence-equations; evidence research/frontier-38-owner-30-reader-2.md, research/frontier-38-owner-30-reader-findings-2.json, research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u2.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
+    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
   precheck: pass
 ---
 

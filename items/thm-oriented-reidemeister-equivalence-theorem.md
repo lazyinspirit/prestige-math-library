@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-17.md"
+      - "research/frontier-38-owner-30-alpha-batch-17-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-17-post-5a.json"
+    content_sha256: "a3818c1fd61a8622eb78cde8124019493ceef21d55bf6aa5933731ba267ada2e"
 id: thm-oriented-reidemeister-equivalence-theorem
 kind: theorem
 title: "Reidemeister's theorem for oriented diagrams"

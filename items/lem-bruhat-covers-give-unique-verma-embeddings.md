@@ -10,6 +10,13 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: completed-cumulative-mathematical-review
+    date: 2026-10-03
+    scope: "Cumulative verification supported by existing completed mathematical readings. Original complete Step 5a reader evidence research/frontier-38-owner-30-reader-8.md, followed by completed Step 7 repair/adjudication reasoning research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u8.json, exact post_sha256 1984dfcb4735d5f7facb1ef96f20cf49379e9d1771e6fd48c78ea931b98ea717 with publication status normalized back to draft. The later reasoning covers the substantive changes; its local repair/self-review qualifications remain applicable. This reconciliation adds no new mathematical review, independent post-repair audit, source reading or judge acceptance."
+    delegated_by: "owner via tools/autopilot frontier-38-owner-30 step7-v2-initial-r1-u8 dispatch"
 sources:
   references:
     - title: "A. Rocha-Caridi, Splitting criteria, Trans. AMS 262 (1980), Sec. 10, p. 353 (choice of injections)"

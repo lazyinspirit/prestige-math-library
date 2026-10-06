@@ -1,0 +1,967 @@
+{
+  "version": 1,
+  "run": "frontier-40-geometry-braids-rep-27",
+  "id": "cor-affine-scheme-quasi-compact",
+  "type": "targeted-owner-repair-evidence",
+  "independent_audit": false,
+  "scope": [
+    "items/cor-affine-scheme-quasi-compact.md"
+  ],
+  "before": {
+    "raw_sha256": "881e3b6042c2b8c67b44ee5df775a9c47ee532ee1cb83d5a1a56f1ef18fc54d2",
+    "canonical_content_sha256": "44c63e80fe9965815034fdc2de2d16054ad1dadd8ff36660de6e69df91ae0c00",
+    "raw_content": "---\nid: cor-affine-scheme-quasi-compact\nkind: corollary\ntitle: \"Every affine scheme is quasi-compact\"\nstatus: published\nprovenance:\n  statement: literature-derived\n  proof: ai-altered\ndeps: [def-affine-scheme, lem-basic-opens-quasi-compact]\nproof_strategy: direct\nverification:\n  audited: 2026-09-06\n  precheck: pass\n  judge: {model: \"gpt-5.6-terra\", verdict: pass, date: 2026-09-06}\nsources:\n  references:\n    - title: \"The Stacks Project, Lemma 26.5.1\"\n      url: \"https://stacks.math.columbia.edu/tag/01HR\"\n---\n## Statement\n\nEvery affine scheme is quasi-compact.\n\n## Facts & Assumptions\n\n**Given:** An affine scheme $X$.\n\n[F1] Every distinguished open of an affine spectrum is quasi-compact ([[lem-basic-opens-quasi-compact]]).\n\n## Proof\n\n**Proof technique:** direct.\n\n1.1 Choose an isomorphism $X\\cong\\operatorname{Spec}A$ from affineness. [given, choose]\n\n1.2 The whole spectrum is $D(1)$, which is quasi-compact by [F1]. [F1]\n\n2.1 Its homeomorphic copy $X$ is quasi-compact. [step 1.1, step 1.2] ∎  ",
+    "verification": {
+      "audited": "2026-09-06",
+      "precheck": "pass",
+      "judge": {
+        "model": "gpt-5.6-terra",
+        "verdict": "pass",
+        "date": "2026-09-06"
+      }
+    }
+  },
+  "status": "local-proof-repair-complete-parent-integration-pending",
+  "recorded_at": "2026-10-05T15:14:01.945907+00:00",
+  "reader_finding": "research/frontier-40-geometry-braids-rep-27-reader-findings-13.json",
+  "confirmed_defect": "The original unconditional Statement and Given applied lem-basic-opens-quasi-compact at D(1) despite its explicit AC assumption. The library supplies no choice-free replacement argument.",
+  "statement_change": {
+    "before": "Every affine scheme is quasi-compact.",
+    "after": "Assume the Axiom of Choice. Every affine scheme is quasi-compact.",
+    "scope_preserved": "Every affine scheme, including the empty spectrum of the zero ring; no ring, finiteness or separation restrictions added."
+  },
+  "supplier_audit": [
+    {
+      "id": "lem-basic-opens-quasi-compact",
+      "actual_assumption": "Statement and Given assume the Axiom of Choice. F2 invokes thm-prime-spectrum-is-compact under AC; proof transfers compactness from Spec(A_f).",
+      "use_in_repaired_subject": "Proof step 1.2 applies this lemma at f=1.",
+      "independent_read": "Full local item read."
+    },
+    {
+      "id": "thm-prime-spectrum-is-compact",
+      "actual_assumption": "Statement and Given assume the Axiom of Choice. Proof step 1.2 chooses a containing cover open and distinguished-open refinement for each prime; step 2.1 invokes AC-dependent unit-ideal detection.",
+      "independent_read": "Full local item read as source of the supplier AC assumption."
+    },
+    {
+      "id": "def-affine-scheme",
+      "actual_interface": "Affine X has a single ring A and locally-ringed-space isomorphism to Spec(A); selecting one witness is existential instantiation, so no additional choice use is required.",
+      "independent_read": "Full local Definition read."
+    }
+  ],
+  "repair_changes": [
+    "Added def-axiom-of-choice to deps.",
+    "Added AC to Statement and Given, and qualified F1 by AC.",
+    "Identified exact inherited AC use in proof step 1.2; preserved proof route.",
+    "Removed invalidated verification.audited and verification.judge; retained precheck after actual successful focused recheck."
+  ],
+  "audit_limit": "This evidence records one targeted local mathematical repair and focused format/render checks. It is not an independent whole-item audit, source-text certification, recertification receipt or gate decision. Cited literature was not reread because the local AC-dependent supplier suffices for this correction.",
+  "direct_consumer_enumeration_method": "Parsed deps frontmatter for every item file returned by rg -l for supplier ID; classified frontier membership against current RUN-batch-*.pages.json manifests. Inspected matching claim, Given, dependencies and supplier use locations. No complete consumer-proof or transitive audit claimed.",
+  "direct_consumers": [
+    {
+      "id": "cex-globally-generated-not-very-ample",
+      "path": "items/cex-globally-generated-not-very-ample.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "9b786376b4cae5325625039f0b50812aaf8e0d6ebe2869c418167c517e1017bd",
+      "claim_explicit_ac": false,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in Given and deps; claim-level propagation should be reviewed",
+      "supplier_occurrences": [
+        {
+          "line": 21,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 75,
+          "text": "[F2] A section of a sheaf on $X$ is the same as a compatible family of sections on the members of an open cover, and compatible local sections glue uniquely; the charts $U_0=D_+(x_0)$ and $U_1=D_+(x_1)$ are affine, hence quasi-compact, so their union $X$ is quasi-compact, and the structure morphism $X\\to\\operatorname{Spec}k$ is quasi-compact. ([[def-sheaf-on-topological-space]], [[cor-affine-scheme-quasi-compact]], [[thm-closed-subspace-of-a-compact-space-is-compact]], [[def-quasi-compact-and-quasi-separated-scheme]], [[def-quasi-compact-and-quasi-separated-morphism]])"
+        }
+      ]
+    },
+    {
+      "id": "cex-proper-finiteness-fails-noncoherent",
+      "path": "items/cex-proper-finiteness-fails-noncoherent.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "9efd06ec98ce2c4ecf7485112570ff6657217e3d383054702f093eebd4ba7c29",
+      "claim_explicit_ac": false,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in Given and deps; claim-level propagation should be reviewed",
+      "supplier_occurrences": [
+        {
+          "line": 9,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 100,
+          "text": "[F3] Quasi-compactness ([[cor-affine-scheme-quasi-compact]],"
+        }
+      ]
+    },
+    {
+      "id": "cex-pushforward-qc-needs-quasi-separated",
+      "path": "items/cex-pushforward-qc-needs-quasi-separated.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "2a937ab15c89207fabacd95b171c3b0f9eef91526a30c72f6973f586b834c0a8",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 34,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 188,
+          "text": "[[cor-affine-scheme-quasi-compact]],"
+        }
+      ]
+    },
+    {
+      "id": "cor-finite-morphism-proper",
+      "path": "items/cor-finite-morphism-proper.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "ca395c7393daf316ed1980bde654d25f244cc7c9fa6260e5ca8f7717b34b3fef",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 18,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 59,
+          "text": "[F6] Every affine scheme is quasi-compact. ([[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "ex-hopf-algebra-of-a-split-torus",
+      "path": "items/ex-hopf-algebra-of-a-split-torus.md",
+      "status": "draft",
+      "scope": "current-frontier",
+      "batch": 13,
+      "raw_sha256_at_inventory": "f7489253a65699a5c2ac228d42728bea2d42b6486fec78638d6cb79ad4519ba5",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 11,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 55,
+          "text": "[F5] Under AC, affine schemes are quasi-compact, so the spectrum of a finitely generated $k$-algebra is of finite type by its single affine chart. Both $A$ and $A/I$ are finitely generated, the latter by the images of the Laurent generators. ([[cor-affine-scheme-quasi-compact]], [[def-finite-type-and-module-finite-algebras]], [[def-locally-finite-type-and-finite-type-morphism]], [[def-axiom-of-choice]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-affine-finite-type-scheme-coordinate-ring-finitely-generated",
+      "path": "items/lem-affine-finite-type-scheme-coordinate-ring-finitely-generated.md",
+      "status": "draft",
+      "scope": "current-frontier",
+      "batch": 13,
+      "raw_sha256_at_inventory": "29ba124b59ac8f153fd228061f67589fc3c09fbc3ec5f141620d266c1802b7e9",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 18,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 49,
+          "text": "[F4] Under the assumed Axiom of Choice, every affine scheme is quasi-compact; the published proof uses the AC-dependent quasi-compactness of distinguished opens. ([[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-affine-morphism-local-on-target",
+      "path": "items/lem-affine-morphism-local-on-target.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "1965d80103bd1f59da44c279fe82d572f2e1cce1e20f1d660842ff5c1bc57c06",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 7,
+          "text": "deps: [\"def-affine-morphism-schemes\", \"lem-affineness-from-unit-generating-global-sections\", \"lem-spectrum-localization-open-immersion\", \"cor-affine-scheme-quasi-compact\", \"thm-proper-ideal-contained-in-maximal-ideal\", \"def-axiom-of-choice\"]"
+        },
+        {
+          "line": 39,
+          "text": "[F4] Every affine scheme is quasi-compact. ([[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-base-change-quasi-compact-morphisms",
+      "path": "items/lem-base-change-quasi-compact-morphisms.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "a14cba782fcd633932204de3bd4494fed392b6ab298b841b419e5b5ba8c2e9e1",
+      "claim_explicit_ac": false,
+      "given_explicit_ac": false,
+      "ac_dependency": false,
+      "obligation": "Current proof inherits AC from this supplier; add/propagate AC through claim, Given and deps or independently supply a complete alternative proof, then examine resulting consumers",
+      "supplier_occurrences": [
+        {
+          "line": 7,
+          "text": "deps: [\"def-quasi-compact-and-quasi-separated-morphism\", \"cor-affine-scheme-quasi-compact\", \"thm-fibre-products-of-schemes-exist\"]"
+        },
+        {
+          "line": 34,
+          "text": "[F2] Every affine scheme is quasi-compact. ([[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-closed-gluing-of-two-projective-three-spaces-is-proper",
+      "path": "items/lem-closed-gluing-of-two-projective-three-spaces-is-proper.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "de5a0cbf05eb078cf29a24b708dd9c3b0d6d0449113066fcf9a46d2341d045e9",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 38,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 131,
+          "text": "[F29] Every affine scheme is quasi-compact. ([[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-closed-immersion-affine-quotient-and-base-change",
+      "path": "items/lem-closed-immersion-affine-quotient-and-base-change.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "181af6a7d153589d45d6c2c889a1d2c028c80c03b5ad56407230010f118c21d9",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 19,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 77,
+          "text": "[F4] Every affine scheme is quasi-compact. ([[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-constructible-stable-generalisation-open",
+      "path": "items/lem-constructible-stable-generalisation-open.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "de7aa71e09d8cd4eac896e12ad597c64fcb993f2b03036b516255c4f95542cc4",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": false,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 14,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 112,
+          "text": "[[cor-affine-scheme-quasi-compact]],"
+        }
+      ]
+    },
+    {
+      "id": "lem-diagonal-quasi-compact-iff-quasi-separated",
+      "path": "items/lem-diagonal-quasi-compact-iff-quasi-separated.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "3b0599ac6589c84803610a8abe45afe53303b6d20168d2537ed49956ba3a24d2",
+      "claim_explicit_ac": false,
+      "given_explicit_ac": false,
+      "ac_dependency": false,
+      "obligation": "Current proof inherits AC from this supplier; add/propagate AC through claim, Given and deps or independently supply a complete alternative proof, then examine resulting consumers",
+      "supplier_occurrences": [
+        {
+          "line": 8,
+          "text": "deps: [def-quasi-compact-and-quasi-separated-morphism, def-quasi-compact-and-quasi-separated-scheme, def-scheme, thm-affine-fibre-product-tensor-ring, lem-fibre-product-open-restriction, cor-affine-scheme-quasi-compact, def-diagonal-morphism-scheme]"
+        },
+        {
+          "line": 49,
+          "text": "[F4] Every affine scheme is quasi-compact. ([[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-eventual-global-generation-coherent-twists",
+      "path": "items/lem-eventual-global-generation-coherent-twists.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "0d40ea709171802793fb4c6f773d04cc58daab2e823a3e56ed5a78554bea085a",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 22,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 96,
+          "text": "[[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-finite-morphism-affine",
+      "path": "items/lem-finite-morphism-affine.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "5d7d1024891b76bc824c939cf850592ceff430616ca49f36732ca04b6088915b",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 13,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 74,
+          "text": "[F5] Every affine scheme is quasi-compact, including the empty affine scheme ([[cor-affine-scheme-quasi-compact]])."
+        }
+      ]
+    },
+    {
+      "id": "lem-finite-type-local-on-source-and-target",
+      "path": "items/lem-finite-type-local-on-source-and-target.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "c2b45d25c07fe22f4340b74dedf2a8417d6b2355185b4dde3678d4e00bb15afe",
+      "claim_explicit_ac": false,
+      "given_explicit_ac": false,
+      "ac_dependency": false,
+      "obligation": "Current proof inherits AC from this supplier; add/propagate AC through claim, Given and deps or independently supply a complete alternative proof, then examine resulting consumers",
+      "supplier_occurrences": [
+        {
+          "line": 9,
+          "text": "deps: [def-locally-finite-type-and-finite-type-morphism, def-quasi-compact-and-quasi-separated-scheme, cor-affine-scheme-quasi-compact, lem-intersection-affine-opens-covered-principal-opens, def-finite-type-and-module-finite-algebras]"
+        }
+      ]
+    },
+    {
+      "id": "lem-fpqc-cover-submersive",
+      "path": "items/lem-fpqc-cover-submersive.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "1a58dd4262152eea6e7764ab03d9cb79635c806325bb8247aa950ca8ba885176",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 17,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 136,
+          "text": "([[cor-affine-scheme-quasi-compact]])."
+        }
+      ]
+    },
+    {
+      "id": "lem-fpqc-descent-properness-components",
+      "path": "items/lem-fpqc-descent-properness-components.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "45691b1f156e55834d42f648fb80b39ec9e64826177d12575df0b9da66f69c83",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 25,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 104,
+          "text": "subcover from each open cover. ([[cor-affine-scheme-quasi-compact]],"
+        }
+      ]
+    },
+    {
+      "id": "lem-general-linear-group-scheme-and-its-coordinate-ring",
+      "path": "items/lem-general-linear-group-scheme-and-its-coordinate-ring.md",
+      "status": "draft",
+      "scope": "current-frontier",
+      "batch": 13,
+      "raw_sha256_at_inventory": "f50246a782734d70653faa28f5e8865bc9b0e0f0faaf367d7250781730c01213",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": false,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 21,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 57,
+          "text": "[F4] Under the assumed Axiom of Choice ([[def-axiom-of-choice]]), for a finitely generated $k$-algebra $R$ the structure morphism $\\operatorname{Spec}R\\to\\operatorname{Spec}k$ is locally of finite type by its single affine chart, and it is quasi-compact because affine schemes are quasi-compact; hence it is of finite type. ([[def-locally-finite-type-and-finite-type-morphism]], [[def-finite-type-and-module-finite-algebras]], [[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-line-bundles-on-projective-three-space-restrict-by-degree",
+      "path": "items/lem-line-bundles-on-projective-three-space-restrict-by-degree.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "7c17de31bef7b62c0396451e82e464038500ffa2730da064102c9e1280ce97a4",
+      "claim_explicit_ac": false,
+      "given_explicit_ac": false,
+      "ac_dependency": false,
+      "obligation": "Current proof inherits AC from this supplier; add/propagate AC through claim, Given and deps or independently supply a complete alternative proof, then examine resulting consumers",
+      "supplier_occurrences": [
+        {
+          "line": 16,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 77,
+          "text": "[F7] Every affine scheme is quasi-compact ([[cor-affine-scheme-quasi-compact]])."
+        }
+      ]
+    },
+    {
+      "id": "lem-projective-space-finite-type-over-base",
+      "path": "items/lem-projective-space-finite-type-over-base.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "1f4dfb9187f74b7f4d672fde306c96c6ecd3d6c40918ce3ea8f9aa38fc7931c2",
+      "claim_explicit_ac": false,
+      "given_explicit_ac": false,
+      "ac_dependency": false,
+      "obligation": "Current proof inherits AC from this supplier; add/propagate AC through claim, Given and deps or independently supply a complete alternative proof, then examine resulting consumers",
+      "supplier_occurrences": [
+        {
+          "line": 13,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 52,
+          "text": "[F6] Every affine scheme is quasi-compact. ([[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-proper-cohomology-field-extension",
+      "path": "items/lem-proper-cohomology-field-extension.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "c75bbcc33580a5f59f28ab67a54d7523ccb3fad0868ac2989120ed04c343c8fb",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 9,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 101,
+          "text": "[F1] Properness unpacked: a proper morphism is separated, of finite type and universally closed; a morphism of finite type is quasi-compact; a quasi-compact morphism pulls quasi-compact open subsets back to quasi-compact open subsets; $\\operatorname{Spec}k$ is quasi-compact and affine opens form a basis of every scheme, so $X$ is quasi-compact and admits a finite affine open cover $U_0,\\dots,U_r$, the empty cover occurring exactly when $X=\\varnothing$. ([[def-proper-morphism]], [[def-locally-finite-type-and-finite-type-morphism]], [[def-quasi-compact-and-quasi-separated-morphism]], [[cor-affine-scheme-quasi-compact]], [[def-scheme]], [[def-affine-open-subscheme]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-proper-flat-cohomology-perfect-complex",
+      "path": "items/lem-proper-flat-cohomology-perfect-complex.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "7838b4211f5b9988bf80a2e1601ca05d2696a584a454d80df20369a5aa018dd1",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 20,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 132,
+          "text": "[F1] Properness unpacked: a proper morphism is separated, of finite type and universally closed; a morphism of finite type is quasi-compact; a quasi-compact morphism pulls quasi-compact open subsets back to quasi-compact open subsets; $\\operatorname{Spec}A$ is quasi-compact; and every point of a scheme has an affine open neighbourhood. Hence $X$ is quasi-compact and admits a finite affine open cover $U_0,\\dots,U_r$. ([[def-proper-morphism]], [[def-locally-finite-type-and-finite-type-morphism]], [[def-quasi-compact-and-quasi-separated-morphism]], [[cor-affine-scheme-quasi-compact]], [[def-scheme]], [[def-affine-open-subscheme]])"
+        },
+        {
+          "line": 148,
+          "text": "[F9] Base change of the geometry: for the ring map $A\\to A'$ put $S'=\\operatorname{Spec}A'$, $X_{A'}:=X\\times_{\\operatorname{Spec}A}S'$ with projection $p:X_{A'}\\to X$, and $\\mathcal F_{A'}:=p^*\\mathcal F$. For an open $U\\subseteq X$ the open subscheme $p^{-1}(U)$ represents $U\\times_{\\operatorname{Spec}A}S'$; for the affine open $U_I=\\operatorname{Spec}B_I$ this is $\\operatorname{Spec}(B_I\\otimes_AA')$, so the $p^{-1}(U_i)$ form a finite affine open cover of $X_{A'}$ and their intersections are $p^{-1}(U_I)$. Separatedness survives base change, so $X_{A'}\\to S'$ is separated, and it is quasi-compact; composing with the affine morphism $S'\\to\\operatorname{Spec}\\mathbb Z$ exhibits $X_{A'}$ as a quasi-compact separated scheme. ([[def-base-change-morphism-schemes]], [[def-pullback-module-ringed-spaces]], [[lem-fibre-product-open-restriction]], [[thm-affine-fibre-product-tensor-ring]], [[lem-separated-stable-under-base-change]], [[lem-separated-stable-under-composition]], [[cor-affine-schemes-separated]], [[lem-base-change-quasi-compact-morphisms]], [[cor-affine-scheme-quasi-compact]], [[def-quasi-compact-and-quasi-separated-scheme]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-proper-stable-composition",
+      "path": "items/lem-proper-stable-composition.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "7ca634c77682482b3921f0e88830bbef16daf130b9ceec97db7d8fc80163bcc1",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 18,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 84,
+          "text": "([[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-qcqs-structure-pushforward-affine-local",
+      "path": "items/lem-qcqs-structure-pushforward-affine-local.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "7b46e2f29be459a5cfab3f71e99dd6bc804ed2b70861bcd47f72a7141c91af20",
+      "claim_explicit_ac": false,
+      "given_explicit_ac": false,
+      "ac_dependency": false,
+      "obligation": "Current proof inherits AC from this supplier; add/propagate AC through claim, Given and deps or independently supply a complete alternative proof, then examine resulting consumers",
+      "supplier_occurrences": [
+        {
+          "line": 17,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 66,
+          "text": "[F2] Every affine scheme is quasi-compact ([[cor-affine-scheme-quasi-compact]])."
+        }
+      ]
+    },
+    {
+      "id": "lem-quasi-compact-immersion-boundary-specialization",
+      "path": "items/lem-quasi-compact-immersion-boundary-specialization.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "4b33753c04a551aa2b475a9b5c5e74a24fd6ccf0b50f836df089ae9e3ad18004",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 8,
+          "text": "deps: [def-locally-closed-immersion, def-quasi-compact-and-quasi-separated-morphism, def-quasi-compact-and-quasi-separated-scheme, def-scheme, def-morphism-affine-schemes-from-ring-map, def-principal-distinguished-subset-of-spectrum, cor-specialisation-order-is-prime-inclusion, cor-affine-scheme-quasi-compact, lem-base-change-quasi-compact-morphisms, thm-proper-ideal-contained-in-maximal-ideal, def-axiom-of-choice]"
+        },
+        {
+          "line": 44,
+          "text": "[F4] Every affine scheme is quasi-compact. ([[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-quasi-compact-scheme-image-specialization-closed",
+      "path": "items/lem-quasi-compact-scheme-image-specialization-closed.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "627399f08f49328286dbe6a239ecef35befff95d65e29a8c7974fb2af4d900c1",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 17,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 56,
+          "text": "[F2] Every affine scheme is quasi-compact. ([[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-universally-closed-valuative-existence-quasicompact",
+      "path": "items/lem-universally-closed-valuative-existence-quasicompact.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "d8963013f1374003a19c2f16d16a6a470a3857ba163445f3160738236b1a0348",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 8,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 132,
+          "text": "[F16] Every affine scheme is quasi-compact. ([[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "lem-vector-bundle-p1-maximal-line-quotient-locally-free",
+      "path": "items/lem-vector-bundle-p1-maximal-line-quotient-locally-free.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "01eeccad02a0c323494e6ddc2d4da241d95d08341e8cc3c385ef9a77cb512006",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": false,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 8,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 91,
+          "text": "[F8] Affine schemes are quasi-compact, so every open cover of $\\operatorname{Spec}A$ has a finite subcover ([[cor-affine-scheme-quasi-compact]], [[def-quasi-compact-and-quasi-separated-scheme]])."
+        }
+      ]
+    },
+    {
+      "id": "thm-affine-closed-immersions-quotient-rings",
+      "path": "items/thm-affine-closed-immersions-quotient-rings.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "ac0cf73f60e1386d8c72eca9e4a414d7b4bc30c30f7b836f35915a970fb729da",
+      "claim_explicit_ac": false,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in Given and deps; claim-level propagation should be reviewed",
+      "supplier_occurrences": [
+        {
+          "line": 9,
+          "text": "deps: [def-closed-immersion-schemes, def-affine-scheme, thm-affine-scheme-ring-anti-equivalence, def-axiom-of-choice, def-scheme, cor-affine-scheme-quasi-compact, thm-sheaf-equalizer-condition, lem-zariski-closed-set-axioms, def-principal-distinguished-subset-of-spectrum, lem-spectrum-localization-open-immersion, thm-proper-ideal-contained-in-maximal-ideal, cor-nilradical-as-intersection-of-primes, thm-morphisms-into-affine-scheme-global-sections, thm-sections-basic-open-affine-scheme, thm-stalk-structure-sheaf-prime-localization, thm-localisation-of-modules-is-exact, def-localisation-of-a-module, thm-exactness-of-sheaves-stalkwise, thm-prime-spectrum-of-a-quotient-bijection]"
+        },
+        {
+          "line": 28,
+          "text": "[F1] A closed immersion is a homeomorphism onto a closed subset with surjective structure-sheaf map; schemes have affine open neighbourhoods, and affine schemes are quasi-compact. ([[def-closed-immersion-schemes]], [[def-scheme]], [[def-affine-scheme]], [[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "thm-affine-group-schemes-hopf-algebra-antiequivalence",
+      "path": "items/thm-affine-group-schemes-hopf-algebra-antiequivalence.md",
+      "status": "draft",
+      "scope": "current-frontier",
+      "batch": 13,
+      "raw_sha256_at_inventory": "9f230ab8cf673582cb70e619b64714b3ad96b5b9cbb3bbc1c850ea51d2ad8ef3",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 16,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 56,
+          "text": "1.2 (Part (b), the group scheme.) Let $A$ be a finitely generated commutative Hopf algebra over $k$. By [F3] the maps $\\Delta,\\varepsilon,S$ have comorphisms $m=\\operatorname{Spec}\\Delta\\colon\\operatorname{Spec}A\\times_k\\operatorname{Spec}A\\to\\operatorname{Spec}A$, $e=\\operatorname{Spec}\\varepsilon\\colon\\operatorname{Spec}k\\to\\operatorname{Spec}A$ and $i=\\operatorname{Spec}S\\colon\\operatorname{Spec}A\\to\\operatorname{Spec}A$, using $\\operatorname{Spec}(A\\otimes_kA)\\cong\\operatorname{Spec}A\\times_k\\operatorname{Spec}A$. Reversing the argument of [[lem-coordinate-ring-of-affine-group-scheme-is-a-hopf-algebra]] turns the coassociativity, counit and antipode axioms into $m\\circ(m\\times\\operatorname{id})=m\\circ(\\operatorname{id}\\times m)$, $m\\circ(e\\times\\operatorname{id})=\\operatorname{id}=m\\circ(\\operatorname{id}\\times e)$ and $m\\circ(i,\\operatorname{id})=e\\circ p=m\\circ(\\operatorname{id},i)$, because the comorphism of $m\\times\\operatorname{id}$ is $\\Delta\\otimes\\operatorname{id}$ and $\\mathcal O$ is a functor; hence $\\operatorname{Spec}A$ is a group scheme over $k$. It is of finite type: the identity chart exhibits $k\\to A$ as finitely generated, and the structure morphism is quasi-compact because affine schemes are quasi-compact ([[cor-affine-scheme-quasi-compact]]). [F3, F4]"
+        }
+      ]
+    },
+    {
+      "id": "thm-affine-schemes-quasi-separated",
+      "path": "items/thm-affine-schemes-quasi-separated.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "9aadb35aab6817b7c14460a847f8ceac74507c7600ea014ff503b155c7e44bfa",
+      "claim_explicit_ac": false,
+      "given_explicit_ac": false,
+      "ac_dependency": false,
+      "obligation": "Current proof inherits AC from this supplier; add/propagate AC through claim, Given and deps or independently supply a complete alternative proof, then examine resulting consumers",
+      "supplier_occurrences": [
+        {
+          "line": 11,
+          "text": "deps: [def-quasi-compact-and-quasi-separated-scheme, cor-affine-scheme-quasi-compact, lem-basic-opens-quasi-compact, lem-intersection-affine-opens-covered-principal-opens]"
+        }
+      ]
+    },
+    {
+      "id": "thm-ag-standard-smooth-geometric-regularity",
+      "path": "items/thm-ag-standard-smooth-geometric-regularity.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "618005545e9b34a7b95c295cdb4f86ed7fd22bdce66b609c62dc5635b0e2e42c",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 7,
+          "text": "deps: [\"def-ag-standard-smooth-algebra\", \"def-ag-geometrically-regular-algebra-and-fibre\", \"def-finitely-presented-module-and-algebra\", \"cor-finite-type-algebra-over-noetherian-ring-is-finitely-presented\", \"def-axiom-of-choice\", \"def-regular-noetherian-ring\", \"lem-ag-standard-smooth-flatness\", \"lem-ag-standard-smooth-regular-geometric-fibres\", \"lem-ag-geometrically-regular-fibres-local-presentation\", \"lem-ag-geometric-regularity-field-tests\", \"prop-modules-over-a-field-are-projective-flat-and-injective\", \"thm-flatness-criteria-by-injections-and-ideals\", \"thm-local-criterion-for-zero-modules-and-maps\", \"thm-localisations-are-flat\", \"thm-localisation-of-modules-is-tensor-product\", \"cor-localisation-commutes-with-kernels-images-and-cokernels\", \"lem-localisation-preserves-injectivity\", \"prop-iterated-localisation\", \"cor-affine-scheme-quasi-compact\", \"cor-dimension-of-a-finite-polynomial-ring-over-a-field\", \"cor-affine-domain-maximal-ideal-height-equals-dimension\"]"
+        },
+        {
+          "line": 80,
+          "text": "[F14] [[cor-affine-scheme-quasi-compact]]: every affine scheme is quasi-compact, so $\\operatorname{Spec}S$ and $\\operatorname{Spec}A$ are quasi-compact, and a family of principal opens covering either of them has a finite subcover whose elements generate the unit ideal."
+        }
+      ]
+    },
+    {
+      "id": "thm-coherent-sheaves-abelian-noetherian-scheme",
+      "path": "items/thm-coherent-sheaves-abelian-noetherian-scheme.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "48ecd9b1faa3b1308f3be39287452cee29c94ac8c2ffe99112a8c2715510fd54",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": false,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 27,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 147,
+          "text": "[[cor-affine-scheme-quasi-compact]]): the distinguished opens $D(f)$ form a"
+        }
+      ]
+    },
+    {
+      "id": "thm-cohomological-dimension-projective-n-space",
+      "path": "items/thm-cohomological-dimension-projective-n-space.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "bb4af43ae7e2941b97aec88e95e50c34d672f27ee532830240ca0e5ef3a046b7",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 19,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 95,
+          "text": "scheme is quasi-compact ([[cor-affine-scheme-quasi-compact]],"
+        }
+      ]
+    },
+    {
+      "id": "thm-etale-over-algebraically-closed-field-discrete-smooth-points",
+      "path": "items/thm-etale-over-algebraically-closed-field-discrete-smooth-points.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "551d71dd296c4ad6e98196a503fb2d47d3448bc6949f7cfde91b5a634b439ba6",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": false,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 34,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 104,
+          "text": "[F9] For every scheme $S$, disjoint unions are coproducts of $S$-schemes: the components are open, carry their own structure sheaves, and maps out of the disjoint union are exactly the independent component maps ([[cor-product-schemes-over-base-exists]]). A finite morphism to an affine base has affine source: for $U=\\operatorname{Spec}A\\subseteq S$ the inverse image is $\\operatorname{Spec}B$ with $B$ a module-finite $A$-algebra ([[def-finite-morphism-schemes]]), and affine schemes are quasi-compact ([[cor-affine-scheme-quasi-compact]])."
+        }
+      ]
+    },
+    {
+      "id": "thm-pushforward-qc-under-qcqs-morphism",
+      "path": "items/thm-pushforward-qc-under-qcqs-morphism.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "6cf0b412a9d7d5ccc2d1a517add3e7c1a2fd0cb9742f80db8d95f85bb13da66b",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": false,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 27,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 88,
+          "text": "[[cor-affine-scheme-quasi-compact]], [[def-scheme]],"
+        }
+      ]
+    },
+    {
+      "id": "thm-qc-sheaf-affine-higher-cohomology-vanishes",
+      "path": "items/thm-qc-sheaf-affine-higher-cohomology-vanishes.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "74ba5d34d9f10bd60fbf1d24d4d87554c57c0ced26b4d8613e2a52ff14361611",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 14,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 58,
+          "text": "[F4] Every affine scheme is quasi-compact, so every open cover of a distinguished open in $\\operatorname{Spec}A$ has a finite refinement by distinguished opens. ([[cor-affine-scheme-quasi-compact]])"
+        }
+      ]
+    },
+    {
+      "id": "thm-serre-duality-projective-space-coherent-sheaves",
+      "path": "items/thm-serre-duality-projective-space-coherent-sheaves.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "3c5f6f089d7565a1e9a1f922712fa039aeffe4c1a1754fa54af706d3278ea323",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 43,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 130,
+          "text": "[F8] The scheme $X=\\mathbb P^n_k$ is projective over $k$ in the H-projective convention, the identity being the closed immersion $X\\hookrightarrow\\mathbb P^n_k$, and it is quasi-compact because the finitely many standard charts $U_0,\\dots,U_n$ are affine, hence quasi-compact, and cover it; the twisting sheaf $\\mathcal O(1)$ is ample on $X$, since the identity morphism is a quasi-compact immersion exhibiting $X$ as closed H-very ample relative to $\\operatorname{Spec}k$ with $\\mathcal O(1)\\cong\\operatorname{id}^*\\mathcal O(1)$, so that $\\mathcal O(1)$ is ample by [lem-very-ample-implies-ample]. Consequently for every coherent $\\mathcal O_X$-module $F$ there is $m_0$ such that $F\\otimes_{\\mathcal O_X}\\mathcal O(m)$ is globally generated for all $m\\ge m_0$, and global generation means that the evaluation map $\\Gamma(X,F(m))\\otimes_{\\mathbb Z}\\mathcal O_X\\to F(m)$, $f\\otimes g\\mapsto g\\cdot f|_U$, is surjective. ([[def-projective-morphism-pre-proj]], [[def-relative-projective-space-standard-charts]], [[cor-affine-scheme-quasi-compact]], [[def-very-ample-invertible-sheaf-relative]], [[lem-very-ample-implies-ample]], [[lem-eventual-global-generation-coherent-twists]], [[def-globally-generated-sheaf]])"
+        }
+      ]
+    },
+    {
+      "id": "thm-serre-finiteness-projective-cohomology",
+      "path": "items/thm-serre-finiteness-projective-cohomology.md",
+      "status": "published",
+      "scope": "outside-frontier",
+      "batch": null,
+      "raw_sha256_at_inventory": "de954477fbf588c4bab66704316c11952d001ae2f000979651dd479f4a931dee",
+      "claim_explicit_ac": true,
+      "given_explicit_ac": true,
+      "ac_dependency": true,
+      "obligation": "AC already declared in claim and deps; check supplier hash/contract evidence at stable integration",
+      "supplier_occurrences": [
+        {
+          "line": 9,
+          "text": "  - cor-affine-scheme-quasi-compact"
+        },
+        {
+          "line": 82,
+          "text": "[F1] Properness unpacked: a proper morphism is separated, of finite type and universally closed; a morphism of finite type is quasi-compact; a quasi-compact morphism pulls quasi-compact open subsets back to quasi-compact open subsets; $\\operatorname{Spec}A$ is quasi-compact; and every point of a scheme has an affine open neighbourhood, so affine opens form a basis. Hence $X$ is quasi-compact and has a finite affine open cover. For nonempty $X$, discard any empty members of such a cover and retain the resulting nonempty affine opens; for empty $X$, use the empty cover. Thus the chosen cover has no members in the empty case and at least one in the nonempty case. ([[def-proper-morphism]], [[def-locally-finite-type-and-finite-type-morphism]], [[def-quasi-compact-and-quasi-separated-morphism]], [[cor-affine-scheme-quasi-compact]], [[def-scheme]], [[def-affine-open-subscheme]])"
+        }
+      ]
+    }
+  ],
+  "consumer_summary": {
+    "total": 39,
+    "current_frontier": 4,
+    "outside_frontier": 35,
+    "outside_without_ac_claim_given_or_dep": [
+      "lem-base-change-quasi-compact-morphisms",
+      "lem-diagonal-quasi-compact-iff-quasi-separated",
+      "lem-finite-type-local-on-source-and-target",
+      "lem-line-bundles-on-projective-three-space-restrict-by-degree",
+      "lem-projective-space-finite-type-over-base",
+      "lem-qcqs-structure-pushforward-affine-local",
+      "thm-affine-schemes-quasi-separated"
+    ],
+    "outside_ac_in_given_only": [
+      "cex-globally-generated-not-very-ample",
+      "cex-proper-finiteness-fails-noncoherent",
+      "thm-affine-closed-immersions-quotient-rings"
+    ]
+  },
+  "parent_integration_obligations": [
+    "Integrate confirmed finding and exact statement delta into canonical published-consumer-supplier-ledger.md.",
+    "Current published subject has no current audit/judge stamp. Establish schema-authorized recorded-local-published-repair evidence using preserved before.raw_content as the authentic pre-edit carrier and actual Step5 ownership claim; do not invent a new whole-item audit.",
+    "Rehash/certify affected frontier prerequisite evidence only after active writers drain; four frontier direct consumers already carry explicit AC in claim and deps.",
+    "Review/repair outside consumers lacking AC declarations before treating their use as supplied; determine actual downstream statement impact in dependency order. No consumers were edited here."
+  ],
+  "after": {
+    "raw_sha256": "55b740bd1ec8ee6c90f671bfd0f9d74314e57c73ffbd571dc3d81299e56fb1ef",
+    "canonical_content_sha256": "ce6d3035a1c582b70465f0e164a583bc2882ea1ed76e4b3ea2f302e67b819502"
+  },
+  "local_checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cor-affine-scheme-quasi-compact.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects\n",
+      "checked_at": "2026-10-05T15:14:19.441Z",
+      "content_sha256": "ce6d3035a1c582b70465f0e164a583bc2882ea1ed76e4b3ea2f302e67b819502"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cor-affine-scheme-quasi-compact.md --json",
+      "exit_code": 0,
+      "output": "{\n  \"summary\": {\n    \"files\": 1,\n    \"checked\": 1,\n    \"failed\": 0\n  },\n  \"results\": [\n    {\n      \"file\": \"items/cor-affine-scheme-quasi-compact.md\",\n      \"item_id\": \"cor-affine-scheme-quasi-compact\",\n      \"status\": \"pass\",\n      \"strategy\": \"direct\"\n    }\n  ]\n}\n",
+      "checked_at": "2026-10-05T15:14:19.442Z",
+      "content_sha256": "ce6d3035a1c582b70465f0e164a583bc2882ea1ed76e4b3ea2f302e67b819502"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/cor-affine-scheme-quasi-compact.md --json",
+      "exit_code": 0,
+      "output": "{\n  \"errors\": [],\n  \"warnings\": [],\n  \"checked\": 1\n}\n",
+      "checked_at": "2026-10-05T15:14:19.442Z",
+      "content_sha256": "ce6d3035a1c582b70465f0e164a583bc2882ea1ed76e4b3ea2f302e67b819502"
+    }
+  ]
+}

@@ -21,6 +21,17 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/061M"
       locator: "Lemma 10.69.2 (tag 00LN), full double-induction proof; Definition 10.69.1"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post-5a.json"
+    content_sha256: "b175649535de6b17822f0a85ab74dccfd8bc00ea025b6a4ad3d97fae534b8a38"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

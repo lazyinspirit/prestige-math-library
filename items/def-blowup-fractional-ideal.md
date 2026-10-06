@@ -30,6 +30,18 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf"
       locator: "Exercise 19.4.G on nonreduced centers, p. 392, and the discussion of the blow-up of an ideal up to invertible rescaling"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post.json"
+    reviewed_raw_sha256: "5cd2918f14c724ded3b91d88585c4417ed4c64e9c24e1e87f96b529876cc66b1"
+    content_sha256: "50602967265eabd5823b06b39c0dc5dede3f83f7ed6613a494b5895575f2869b"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

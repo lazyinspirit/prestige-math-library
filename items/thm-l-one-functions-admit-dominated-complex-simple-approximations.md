@@ -46,14 +46,11 @@ there exists a sequence $(s_n)$ of complex simple functions such that:
 
 **Proof technique:** direct.
 
-1.1 Write $f=u+iv$ with $u=\operatorname{Re}f$ and $v=\operatorname{Im}f$. [L1, L2, L3]
-By [L1], the real functions $u$ and $v$ are measurable and satisfy $|u|\le |f|$ and $|v|\le |f|$, hence are integrable. By [L2] and [L3], the four functions $u^\pm$ and $v^\pm$ are nonnegative measurable.
+1.1 Write $f=u+iv$ with $u=\operatorname{Re}f$ and $v=\operatorname{Im}f$. [L1, L2, L3] By [L1], the real functions $u$ and $v$ are measurable and satisfy $|u|\le |f|$ and $|v|\le |f|$, hence are integrable. By [L2] and [L3], the four functions $u^\pm$ and $v^\pm$ are nonnegative measurable. [L1, L2, L3]
 
-2.1 Apply [L4] to choose increasing nonnegative simple functions [L2, L3, L4, step 1.1]
-$u_n^\pm\uparrow u^\pm$ and $v_n^\pm\uparrow v^\pm$. Put $$u_n:=u_n^+-u_n^-,\qquad v_n:=v_n^+-v_n^-,\qquad s_n:=u_n+iv_n.$$ Then each $s_n$ is a complex simple function, and $$|s_n|\le u_n^++u_n^-+v_n^++v_n^-\le |u|+|v|\le 2|f|.$$
+2.1 Apply [L4] to choose increasing nonnegative simple functions [L2, L3, L4, step 1.1] $u_n^\pm\uparrow u^\pm$ and $v_n^\pm\uparrow v^\pm$. Put $$u_n:=u_n^+-u_n^-,\qquad v_n:=v_n^+-v_n^-,\qquad s_n:=u_n+iv_n.$$ Then each $s_n$ is a complex simple function, and $$|s_n|\le u_n^++u_n^-+v_n^++v_n^-\le |u|+|v|\le 2|f|.$$ [L4, L2, L3, step 1.1]
 
-3.1 By [L5], the four increasing simple approximations in step 2.1 satisfy [L2, L5, step 2.1]
-$\int u_n^\pm\,d\mu\to\int u^\pm\,d\mu$ and $\int v_n^\pm\,d\mu\to\int v^\pm\,d\mu$. Therefore $$\int |u-u_n|\,d\mu=\int (u^+-u_n^+)\,d\mu+\int (u^--u_n^-)\,d\mu\to0,$$ and similarly $\int |v-v_n|\,d\mu\to0$. Hence $$\int |f-s_n|\,d\mu\le \int |u-u_n|\,d\mu+\int |v-v_n|\,d\mu\to0.$$
+3.1 By [L5], the four increasing simple approximations in step 2.1 satisfy [L2, L5, step 2.1] $\int u_n^\pm\,d\mu\to\int u^\pm\,d\mu$ and $\int v_n^\pm\,d\mu\to\int v^\pm\,d\mu$. Therefore $$\int |u-u_n|\,d\mu=\int (u^+-u_n^+)\,d\mu+\int (u^--u_n^-)\,d\mu\to0,$$ and similarly $\int |v-v_n|\,d\mu\to0$. Hence $$\int |f-s_n|\,d\mu\le \int |u-u_n|\,d\mu+\int |v-v_n|\,d\mu\to0.$$ [L5, L2, step 2.1]
 
-4.1 Steps 2.1 and 3.1 give the required dominated complex simple [step 2.1, step 3.1] ∎
-approximations.
+4.1 Steps 2.1 and 3.1 give the required dominated complex simple [step 2.1, step 3.1] ∎ approximations. [step 2.1, step 3.1]
+

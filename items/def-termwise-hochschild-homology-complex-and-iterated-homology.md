@@ -17,7 +17,7 @@ sources:
   references:
     - title: "Beliakova–Putyra–Wehrli, Quantum Link Homology via Trace Functor I, §§3.8.4–3.8.6, printed pp.37–39"
       url: "https://arxiv.org/pdf/1605.03523"
-      locator: "§3.8.6, printed p.38: $HH_\\bullet$ applied componentwise to a complex of bimodules, equation (3.44)."
+      locator: "§3.8.6, printed p.39: $HH_\\bullet$ applied componentwise to a complex of bimodules, equation (3.44)."
     - title: "Mikhail Khovanov, Triply-graded link homology and Hochschild homology of Soergel bimodules, printed pp.5–7"
       url: "https://arxiv.org/pdf/math/0510265"
       locator: "pp.6–7: the termwise Hochschild complex of a complex of graded bimodules and its three gradings."

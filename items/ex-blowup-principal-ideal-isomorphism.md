@@ -25,6 +25,18 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf"
       locator: "19.2.4 locally principal centers, p. 382"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post.json"
+    reviewed_raw_sha256: "214f11737712998f64f41b4a0d796a8683b888c14c955798717f57344484dc2c"
+    content_sha256: "7eacbb23707cf2d1c9bc6f6592e10e157045d972c2223fce3f04fe7d8b0bdb9a"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

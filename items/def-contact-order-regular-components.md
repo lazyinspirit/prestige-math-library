@@ -33,6 +33,17 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/0BI3"
       locator: "Section 54.15, equation 54.15.2.1 and Lemma 54.15.3: finite intersection length and its behavior under blowup"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-2.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-2.result.json
+      - research/frontier-38-owner-30-step5-hash-2-post-5a.json
+      - research/frontier-38-owner-30-alpha-batch-2-5a-decisions.json
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

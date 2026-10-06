@@ -1,0 +1,647 @@
+[
+  {
+    "order": 873,
+    "id": "affine-group-schemes-hopf-algebras-and-rational-representations",
+    "kind": "A",
+    "category": "scheme-theory",
+    "title": "Affine Group Schemes, Hopf Algebras, and Rational Representations",
+    "companion": "affine-group-schemes-hopf-algebras-and-rational-representations-examples",
+    "requires": [
+      "group-schemes-of-finite-type-over-a-field",
+      "affine-schemes-and-the-structure-sheaf",
+      "classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface"
+    ],
+    "items": [
+      {
+        "id": "def-commutative-hopf-algebra-over-a-field",
+        "kind": "definition",
+        "title": "Commutative Hopf algebras over a field",
+        "statement": "Let $k$ be a field. A **commutative Hopf algebra over $k$** is a commutative unital $k$-algebra $A$ together with $k$-algebra homomorphisms $\\Delta:A\\to A\\otimes_kA$, $\\varepsilon:A\\to k$ and $S:A\\to A$, called the comultiplication, the counit and the antipode, such that, with $m_A$ the multiplication and $u_A$ the unit of $A$ and with the canonical identifications $k\\otimes_kA\\cong A\\cong A\\otimes_kk$, the following hold: (1) $(\\operatorname{id}_A\\otimes\\Delta)\\Delta=(\\Delta\\otimes\\operatorname{id}_A)\\Delta$; (2) $(\\varepsilon\\otimes\\operatorname{id}_A)\\Delta=\\operatorname{id}_A=(\\operatorname{id}_A\\otimes\\varepsilon)\\Delta$; (3) $m_A(S\\otimes\\operatorname{id}_A)\\Delta=u_A\\varepsilon=m_A(\\operatorname{id}_A\\otimes S)\\Delta$. A **morphism of commutative Hopf algebras** $f:(A,\\Delta_A,\\varepsilon_A,S_A)\\to(B,\\Delta_B,\\varepsilon_B,S_B)$ is a $k$-algebra homomorphism ([[def-algebra-over-a-commutative-ring]]) with $(f\\otimes f)\\Delta_A=\\Delta_Bf$, $\\varepsilon_Bf=\\varepsilon_A$ and $fS_A=S_Bf$. The Hopf algebra is **finitely generated** if $A$ is a finitely generated $k$-algebra ([[def-finite-type-and-module-finite-algebras]]). Neither reducedness nor smoothness nor finite generation is imposed by the definition; the tensor product carries its algebra structure as the coproduct of commutative $k$-algebras ([[thm-coproduct-property-of-tensor-products-of-commutative-algebras]]).",
+        "deps": [
+          "def-algebra-over-a-commutative-ring",
+          "def-commutative-ring",
+          "def-field",
+          "def-finite-type-and-module-finite-algebras",
+          "def-ring-homomorphism",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-coproduct-property-of-tensor-products-of-commutative-algebras"
+        ],
+        "strategy": "Definition record adapted from Milne's Hopf algebras over a commutative ring to the case of a base field. The tensor product $A\\otimes_kA$ carries its algebra structure because it is the coproduct of $A$ with itself among commutative $k$-algebras, so all three structure maps are typed as $k$-algebra homomorphisms; the displayed identities are exactly diagrams (17)-(18) of Milne. Only the structure is introduced here: existence and uniqueness of $(\\varepsilon,S)$ for a given $\\Delta$ are deliberately not asserted, and Hopf morphisms are required to preserve all three structure maps so that later functorial statements need no separate automaticity theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 3 \u00a73(b), Definition 3.3 and paragraph 3.4, printed pp. 65-66 (PDF 76-77); display (17)-(18) and identity (19) read in full."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "September 26th lecture, Definition 14 and Remark 15, printed pp. 4-5; comultiplication, counit and antipode axioms read in full."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-affine-finite-type-scheme-coordinate-ring-finitely-generated",
+        "kind": "lemma",
+        "title": "An affine scheme of finite type over a field has a finitely generated coordinate ring",
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field ([[def-field]]) and let $X=\\operatorname{Spec}A$ be an affine $k$-scheme ([[def-affine-scheme]]). If $X\\to\\operatorname{Spec}k$ is of finite type ([[def-locally-finite-type-and-finite-type-morphism]]), then $A$ is a finitely generated $k$-algebra ([[def-finite-type-and-module-finite-algebras]]). Consequently the coordinate ring of a group scheme of finite type over $k$ ([[def-group-scheme-over-a-field]]) whose underlying scheme is affine is finitely generated. The Axiom of Choice is used for affine-chart quasi-compactness and to turn a finite distinguished-open cover into a unit-ideal relation ([[lem-spectrum-compactness-open-cover-to-unit-ideal]]); no other choice is made.",
+        "deps": [
+          "def-affine-scheme",
+          "def-axiom-of-choice",
+          "def-field",
+          "def-finite-type-and-module-finite-algebras",
+          "def-group-scheme-over-a-field",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-principal-distinguished-subset-of-spectrum",
+          "def-principal-localisation",
+          "cor-affine-scheme-quasi-compact",
+          "lem-distinguished-open-refinement-at-a-point",
+          "lem-spectrum-compactness-open-cover-to-unit-ideal",
+          "lem-spectrum-localization-open-immersion",
+          "thm-sections-basic-open-affine-scheme"
+        ],
+        "strategy": "Under AC, refine a finite affine finite-type chart cover to a finite distinguished-open cover. Each A_f is a finitely generated localization of a chart algebra. Adjoin the covering functions, the local generator numerators and the coefficients of a unit relation to a finite-generated subalgebra B. Clear denominators separately for each a in A and expand a sufficiently high power of the unit relation to obtain a in B. Affine-chart quasi-compactness and unit-ideal extraction use AC; the remaining choices are finite. An empty spectrum forces A=0.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Conventions and notation, printed p. 3 (PDF 14), and \u00a71.19, printed p. 12 (PDF 23): algebraic schemes are of finite type over $k$ and affine algebraic schemes are max-spectra of finitely generated algebras."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "October 27th lecture, Definition 115, printed p. 29: an affine group scheme is algebraic exactly when $k[G]$ is a finitely generated $k$-algebra."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-quotient-spectrum-map-is-a-closed-immersion",
+        "kind": "lemma",
+        "title": "A surjective ring map induces a closed immersion of affine spectra",
+        "statement": "Let $\\varphi:B\\to A$ be a surjective homomorphism of commutative unital rings and let $I=\\ker\\varphi$, so that $A\\cong B/I$. Then the induced morphism $\\operatorname{Spec}\\varphi:\\operatorname{Spec}A\\to\\operatorname{Spec}B$ is a closed immersion in the sense of [[def-closed-immersion-schemes]]: its underlying map is a homeomorphism onto the closed subset $V(I)$, and the map $\\mathcal O_{\\operatorname{Spec}B}\\to(\\operatorname{Spec}\\varphi)_*\\mathcal O_{\\operatorname{Spec}A}$ is surjective. No choice principle is used.",
+        "deps": [
+          "def-affine-scheme",
+          "def-closed-immersion-schemes",
+          "def-localisation-at-a-prime-ideal",
+          "def-morphism-affine-schemes-from-ring-map",
+          "lem-localisation-preserves-surjectivity",
+          "lem-quotient-spectrum-map-is-closed",
+          "thm-exactness-of-sheaves-stalkwise",
+          "thm-first-isomorphism-theorem-rings",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "thm-stalk-structure-sheaf-prime-localization"
+        ],
+        "strategy": "The first isomorphism theorem identifies $A$ with $B/I$ compatibly with $\\varphi$, so $\\operatorname{Spec}\\varphi$ is the quotient-spectrum map and its underlying map is a homeomorphism onto $V(I)$ by the prime-ideal quotient bijection. Surjectivity of a sheaf map is local and may be checked on stalks: on the distinguished open $D(b)$ the map is the localization $B_b\\to A_b=(B/I)_b$ of the surjection, hence surjective, and at a prime $\\mathfrak p\\supseteq I$ the stalk map is $B_{\\mathfrak p}\\to(B/I)_{\\mathfrak p}\\cong B_{\\mathfrak p}/IB_{\\mathfrak p}$, again surjective. Therefore the structure-sheaf map is surjective and the morphism is a closed immersion.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Appendix A \u00a7A(c), A.24 and A.26, printed pp. 574-575 (PDF 585-586): closed subschemes of an affine algebraic scheme are spectra of quotients and quotient maps are immersions."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "October 1st lecture, Definition 34, printed p. 11: a closed subscheme of an affine scheme is represented by a quotient of the coordinate algebra."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-general-linear-group-scheme-and-its-coordinate-ring",
+        "kind": "lemma",
+        "title": "The general linear group scheme and its coordinate ring",
+        "statement": "Assume the Axiom of Choice for the finite-type assertion. Let $k$ be a field, let $n\\ge1$, and put $d=\\det(x_{ij})\\in k[x_{ij}:1\\le i,j\\le n]$. Then $\\operatorname{GL}_n=\\operatorname{Spec}k[x_{ij},d^{-1}]$ is a group scheme of finite type over $k$ ([[def-group-scheme-over-a-field]]) whose structure comorphisms are\n$$\\Delta(x_{ij})=\\sum_{l=1}^{n}x_{il}\\otimes x_{lj},\\qquad\\varepsilon(x_{ij})=\\delta_{ij},\\qquad S(x_{ij})=\\text{the }(i,j)\\text{-entry of }d^{-1}\\operatorname{adj}(X),$$\nand for every commutative unital $k$-algebra $R$ the group $\\operatorname{GL}_n(R)$ is the group of invertible $n\\times n$ matrices over $R$. If $V$ is a $k$-vector space with basis $e_1,\\dots,e_n$, then the functor $R\\mapsto\\operatorname{Aut}_R(V\\otimes_kR)$ is naturally identified with $\\operatorname{GL}_n$. In particular $\\operatorname{GL}_1=\\mathbf G_m=\\operatorname{Spec}k[t,t^{-1}]$ is the multiplicative group scheme, with $\\Delta(t)=t\\otimes t$, $\\varepsilon(t)=1$ and $S(t)=t^{-1}$. For $V=0$ put $\\operatorname{GL}_0=\\operatorname{Spec}k$, with the trivial group structure and $\\operatorname{GL}_0(R)=\\operatorname{Aut}_R(0)=\\{1\\}$; its coordinate ring is $k$ and its matrix has no entries. The coordinate constructions and point identifications are choice-free; AC is used for affine quasi-compactness in the finite-type assertion.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-determinant-of-a-square-matrix",
+          "def-finite-type-and-module-finite-algebras",
+          "def-group-scheme-over-a-field",
+          "def-linear-basis",
+          "def-linear-isomorphism-and-invertible-linear-map",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-principal-localisation",
+          "def-ring-homomorphism",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-vector-space",
+          "cor-affine-scheme-quasi-compact",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "thm-adjugate-identity-over-a-commutative-ring",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-determinant-multiplicative",
+          "thm-ring-matrix-arithmetic-laws",
+          "thm-universal-property-of-localisation"
+        ],
+        "strategy": "Localize the polynomial matrix algebra at its determinant. The determinant images of the multiplication, identity and adjugate-inverse maps are units, so the maps extend uniquely. Matrix identities give both antipode identities and the group diagrams. Evaluation identifies points with invertible matrices for every test algebra. AC supplies finite type via affine quasi-compactness. The n=1 case gives G_m; GL_0=Spec k represents automorphisms of the zero space with no determinant invocation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 2 \u00a7\u00a72.2 and 2.8, printed pp. 40-41 (PDF 51-52): coordinate rings and group laws of $\\mathbf G_m$ and $\\operatorname{GL}_n$."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "October 1st lecture, Example 31(2)-(3), printed pp. 10-11: translation of $\\operatorname{GL}_n$ and $\\mathbf G_m$ into comultiplication formulas."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-coordinate-hopf-algebra-of-affine-group-scheme",
+        "kind": "definition",
+        "title": "The coordinate Hopf algebra of an affine group scheme",
+        "statement": "Let $k$ be a field and let $G$ be a group scheme of finite type over $k$ ([[def-group-scheme-over-a-field]]) whose underlying scheme is affine, say $G\\cong\\operatorname{Spec}A$ with $A=\\mathcal O(G)=\\Gamma(G,\\mathcal O_G)$ ([[thm-global-sections-affine-scheme]]); write $m:G\\times_kG\\to G$, $e:\\operatorname{Spec}k\\to G$ and $i:G\\to G$ for its multiplication, identity and inverse. Under the anti-equivalence between affine $k$-schemes and commutative $k$-algebras ([[thm-affine-scheme-ring-anti-equivalence]]) and the identification $\\mathcal O(G\\times_kG)\\cong A\\otimes_kA$ ([[thm-affine-fibre-product-tensor-ring]]), these morphisms correspond to $k$-algebra homomorphisms $\\Delta=\\mathcal O(m):A\\to A\\otimes_kA$, $\\varepsilon=\\mathcal O(e):A\\to k$ and $S=\\mathcal O(i):A\\to A$, called the comultiplication, the counit and the antipode of $G$. The three maps make $A$ a commutative Hopf algebra over $k$ in the sense of [[def-commutative-hopf-algebra-over-a-field]]; the verification is [[lem-coordinate-ring-of-affine-group-scheme-is-a-hopf-algebra]], and this definition fixes the construction and the notation. For a commutative unital $k$-algebra $R$, $g,g_1,g_2\\in G(R)$ and $f\\in A$ one has $(\\Delta f)(g_1,g_2)=f(g_1g_2)$, $\\varepsilon f=f(e)$ and $(Sf)(g)=f(g^{-1})$ under the evaluation pairing $G(R)\\times A\\to R$. A morphism $f:G\\to H$ of affine group schemes induces a $k$-algebra homomorphism $\\mathcal O(f):\\mathcal O(H)\\to\\mathcal O(G)$.",
+        "deps": [
+          "def-affine-scheme",
+          "def-commutative-hopf-algebra-over-a-field",
+          "def-group-scheme-over-a-field",
+          "def-morphism-affine-schemes-from-ring-map",
+          "def-morphism-and-closed-subgroup-scheme",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-global-sections-affine-scheme"
+        ],
+        "strategy": "Definition: read the three structure maps off the group operations through the contravariant global-sections functor. The target $\\mathcal O(G\\times_kG)$ is identified with $A\\otimes_kA$ by the published affine fibre-product theorem, so each comorphism is a $k$-algebra homomorphism; the Hopf axioms are not asserted here and are proved in the referenced lemma by diagram reversal. The displayed evaluation formulas record the meaning of $\\Delta$, $\\varepsilon$ and $S$ on $R$-points and are the form used by the examples.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 3 \u00a73(a)-(b), Proposition 3.1, Notation 3.2 and display (16), printed pp. 64-66 (PDF 75-77)."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "September 29th and October 1st lectures, Remark 28 and Remark 30, printed pp. 8-10."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": [
+          "lem-coordinate-ring-of-affine-group-scheme-is-a-hopf-algebra"
+        ]
+      },
+      {
+        "id": "lem-hopf-ideal-kernels-and-quotients",
+        "kind": "lemma",
+        "title": "Hopf ideals, kernels and quotients of commutative Hopf algebras",
+        "statement": "Let $k$ be a field. (a) If $f\\colon A\\to B$ is a morphism of commutative Hopf algebras over $k$ ([[def-commutative-hopf-algebra-over-a-field]]), then $\\ker f$ is a Hopf ideal of $A$, that is, an ideal $\\mathfrak a$ ([[def-left-right-and-two-sided-ideal]]) with $\\Delta(\\mathfrak a)\\subseteq A\\otimes\\mathfrak a+\\mathfrak a\\otimes A$, $\\varepsilon(\\mathfrak a)=0$ and $S(\\mathfrak a)\\subseteq\\mathfrak a$; and $f(A)$ is a Hopf subalgebra of $B$. (b) Conversely, for every Hopf ideal $\\mathfrak a\\subseteq A$ the quotient ring $A/\\mathfrak a$ ([[def-quotient-ring]]) carries a unique commutative Hopf algebra structure for which $A\\to A/\\mathfrak a$ is a morphism of Hopf algebras, and every Hopf algebra morphism $A\\to C$ whose kernel contains $\\mathfrak a$ factors uniquely through $A/\\mathfrak a$. (c) Every morphism $f\\colon A\\to B$ of Hopf algebras factors as $A\\twoheadrightarrow A/\\ker f\\cong f(A)\\hookrightarrow B$, uniquely up to a unique isomorphism. No choice principle is used.",
+        "deps": [
+          "def-commutative-hopf-algebra-over-a-field",
+          "def-field",
+          "def-left-right-and-two-sided-ideal",
+          "def-linear-basis",
+          "def-linear-combination-and-span",
+          "def-linear-independence",
+          "def-linear-subspace",
+          "def-quotient-ring",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-first-isomorphism-theorem-rings",
+          "thm-right-exactness-of-tensor-products",
+          "thm-universal-property-of-module-tensor-products"
+        ],
+        "strategy": "Derive the free-k bilinear tensor presentation from the universal property. Finite witnesses and finite basis extension prove coefficient extraction and tensor inclusions without infinite bases. Finite elimination proves kernel(f tensor f)=A tensor ker(f)+ker(f) tensor A. The Hopf maps descend to quotients, restrict to images, and preserve the quotient-image isomorphism; all factorization maps are unique.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 3 \u00a73(d), Definitions 3.8 and 3.10 and Propositions 3.9 and 3.11-3.14, printed pp. 67-68 (PDF 78-79)."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "October 1st lecture, Definition 35, printed p. 11; October 3rd lecture, Remark 40, printed p. 12."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-coordinate-ring-of-affine-group-scheme-is-a-hopf-algebra",
+        "kind": "lemma",
+        "title": "The coordinate ring of an affine group scheme is a commutative Hopf algebra",
+        "statement": "Let $k$ be a field, let $G$ be an affine group scheme of finite type over $k$, and let $(A,\\Delta,\\varepsilon,S)$ be its coordinate ring with the structure maps of [[def-coordinate-hopf-algebra-of-affine-group-scheme]]. Then $(A,\\Delta,\\varepsilon,S)$ is a commutative Hopf algebra over $k$ in the sense of [[def-commutative-hopf-algebra-over-a-field]]. Moreover, for every morphism $f:G\\to H$ of affine group schemes the induced map $\\mathcal O(f):\\mathcal O(H)\\to\\mathcal O(G)$ is a morphism of commutative Hopf algebras. No choice principle is used.",
+        "deps": [
+          "def-affine-scheme",
+          "def-commutative-hopf-algebra-over-a-field",
+          "def-coordinate-hopf-algebra-of-affine-group-scheme",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-affine-scheme-ring-anti-equivalence"
+        ],
+        "strategy": "Reverse the group-object diagrams of [[def-group-scheme-over-a-field]] under the contravariant global-sections equivalence. The associativity identity $m\\circ(m\\times\\operatorname{id})=m\\circ(\\operatorname{id}\\times m)$ transposes to coassociativity because $\\mathcal O(m\\times\\operatorname{id})=\\Delta\\otimes\\operatorname{id}$ and $\\mathcal O(\\operatorname{id}\\times m)=\\operatorname{id}\\otimes\\Delta$ under the canonical identification $\\mathcal O(G\\times G\\times G)=A\\otimes A\\otimes A$; the unit identities transpose to the counit identities using $\\mathcal O(\\operatorname{Spec}k)=k$ and $\\mathcal O(e)=\\varepsilon$; and the inverse identities transpose to the antipode identities with $\\mathcal O(i)=S$ and $\\mathcal O(p)=u_A$ for the structure map $p$. Since an equivalence reflects commutative diagrams, all three Hopf diagrams commute. For a group morphism $f$ the identities $f\\circ m_G=m_H\\circ(f\\times f)$, $f\\circ e_G=e_H$ and $i_H\\circ f=f\\circ i_G$ transpose to $(\\mathcal O(f)\\otimes\\mathcal O(f))\\Delta_H=\\Delta_G\\mathcal O(f)$, $\\varepsilon_G\\mathcal O(f)=\\varepsilon_H$ and $\\mathcal O(f)S_H=S_G\\mathcal O(f)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 3 \u00a73(b)-(c), diagrams (17)-(18) and Propositions 3.1 and 3.6, printed pp. 64-67 (PDF 75-78)."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "September 29th and October 1st lectures, proof sketch of Theorem 19 and Remarks 28 and 30, printed pp. 7-10."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+        "kind": "definition",
+        "title": "Rational representations and comodules of an affine group scheme",
+        "statement": "Let $k$ be a field, let $G$ be an affine group scheme of finite type over $k$ ([[def-group-scheme-over-a-field]]) with coordinate Hopf algebra $(A,\\Delta,\\varepsilon,S)$ ([[def-coordinate-hopf-algebra-of-affine-group-scheme]]), and let $V$ be a $k$-vector space ([[def-vector-space]]).\n\n(a) For a commutative unital $k$-algebra $R$ put $V_R=V\\otimes_kR$ and $\\operatorname{GL}_V(R)=\\operatorname{Aut}_R(V_R)$ ([[def-linear-isomorphism-and-invertible-linear-map]]); a **rational representation** of $G$ on $V$ is a morphism of group functors $r\\colon G\\to\\operatorname{GL}_V$, that is, a natural family of group homomorphisms $G(R)\\to\\operatorname{Aut}_R(V_R)$ in $R$. When $V$ is finite dimensional, a choice of basis identifies $\\operatorname{GL}_V$ with the group functor represented by the affine scheme $\\operatorname{GL}_n$ of [[lem-general-linear-group-scheme-and-its-coordinate-ring]], using $\\operatorname{GL}_0=\\operatorname{Spec}k$ when $V=0$. The identification uses its choice-free point formulas.\n\n(b) An **$A$-comodule structure** on $V$ is a $k$-linear map $\\rho\\colon V\\to V\\otimes_kA$ ([[def-linear-map]], [[def-tensor-product-of-modules-by-generators-and-relations]]) with\n$$(\\rho\\otimes\\operatorname{id}_A)\\rho=(\\operatorname{id}_V\\otimes\\Delta)\\rho,\\qquad(\\operatorname{id}_V\\otimes\\varepsilon)\\rho=\\operatorname{id}_V;$$\na subspace $W\\subseteq V$ is a **subcomodule** if $\\rho(W)\\subseteq W\\otimes_kA$ ([[def-linear-subspace]]).\n\n(c) The two notions correspond: a comodule structure $\\rho$ gives the representation by $r_R(g)(v\\otimes1)=(\\operatorname{id}_V\\otimes g)\\rho(v)$, extended $R$-linearly, and this assignment is a bijection onto the rational representations of $G$ on $V$ under which subcomodules correspond to subrepresentations; the proof is [[lem-representations-of-affine-group-schemes-are-comodules]].\n\n(d) The coaction $\\Delta\\colon A\\to A\\otimes_kA$ makes $A$ itself an $A$-comodule, the **regular representation** of $G$. A representation $r$ is **faithful** if every $r_R$ is injective.\n\nThe axioms in (b) are exactly the two comodule diagrams; no smoothness, reducedness or finite-dimensionality of $V$ is imposed, and a basis of $V$ is chosen only to name the matrix group $\\operatorname{GL}_n$.",
+        "deps": [
+          "def-commutative-hopf-algebra-over-a-field",
+          "def-coordinate-hopf-algebra-of-affine-group-scheme",
+          "def-group-scheme-over-a-field",
+          "def-linear-isomorphism-and-invertible-linear-map",
+          "def-linear-map",
+          "def-linear-subspace",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-vector-space",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring"
+        ],
+        "strategy": "Define natural group actions on V tensor R and right A-coactions by the coassociativity and counit diagrams. Defer their correspondence to the justification lemma. Name GL_V by a finite basis, with GL_0=Spec k for V=0, using the choice-free point construction; define regular coaction, subcomodules and faithfulness over every test algebra.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 4 \u00a74(a), printed pp. 83-85 (PDF 94-96), and \u00a74(c)-(d), printed pp. 86-88 (PDF 97-99)."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "October 22nd lecture, Definitions 103-105 and Remark 104, printed pp. 26-27; October 27th lecture, Definitions 107-108, printed pp. 27-28."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": [
+          "lem-representations-of-affine-group-schemes-are-comodules"
+        ]
+      },
+      {
+        "id": "thm-affine-group-schemes-hopf-algebra-antiequivalence",
+        "kind": "theorem",
+        "title": "Affine group schemes of finite type are antiequivalent to finitely generated commutative Hopf algebras",
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field. (a) The assignment $G\\mapsto(\\mathcal O(G),\\Delta,\\varepsilon,S)$ of [[def-coordinate-hopf-algebra-of-affine-group-scheme]] is a contravariant functor from affine group schemes of finite type over $k$ ([[def-group-scheme-over-a-field]]) to finitely generated commutative Hopf algebras over $k$ ([[def-commutative-hopf-algebra-over-a-field]]), and it is fully faithful. (b) A finitely generated commutative Hopf algebra $A$ over $k$ has $\\operatorname{Spec}A$ an affine group scheme of finite type over $k$ under the multiplication $\\operatorname{Spec}\\Delta\\colon\\operatorname{Spec}A\\times_k\\operatorname{Spec}A\\to\\operatorname{Spec}A$, the identity $\\operatorname{Spec}\\varepsilon$ and the inverse $\\operatorname{Spec}S$, and the two constructions are inverse on isomorphism classes. Hence $G\\mapsto\\mathcal O(G)$ restricts to an antiequivalence of categories between affine group schemes of finite type over $k$ and finitely generated commutative Hopf algebras over $k$, with quasi-inverse $A\\mapsto\\operatorname{Spec}A$. AC is used in (a) through [[lem-affine-finite-type-scheme-coordinate-ring-finitely-generated]] and in (b) for affine quasi-compactness; the diagram reversal and compatibility of morphisms are choice-free.",
+        "deps": [
+          "def-affine-scheme",
+          "def-axiom-of-choice",
+          "def-commutative-hopf-algebra-over-a-field",
+          "def-coordinate-hopf-algebra-of-affine-group-scheme",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme",
+          "cor-affine-scheme-quasi-compact",
+          "lem-affine-finite-type-scheme-coordinate-ring-finitely-generated",
+          "lem-coordinate-ring-of-affine-group-scheme-is-a-hopf-algebra",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-global-sections-affine-scheme"
+        ],
+        "strategy": "Pull back the group diagrams to obtain Hopf structures and reverse the construction using affine Spec/global sections and tensor products. AC supplies finite generation of an affine finite-type group and affine quasi-compactness for the spectrum of a finitely generated Hopf algebra. Restrict the affine Hom-set bijection to the three structure-preservation equations; the canonical round trips recover all structures, yielding explicit quasi-inverse functors.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 3 \u00a73(c), Propositions 3.1 and 3.6 and Corollary 3.7, printed pp. 64-67 (PDF 75-78)."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "September 26th and 29th lectures, Theorem 19, Remark 20 and the proof sketch, printed pp. 5-8."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-representations-of-affine-group-schemes-are-comodules",
+        "kind": "lemma",
+        "title": "Rational representations of an affine group scheme are comodules of its coordinate Hopf algebra",
+        "statement": "Let $k$ be a field, let $G$ be an affine group scheme of finite type over $k$ with coordinate Hopf algebra $A=\\mathcal O(G)$ ([[def-coordinate-hopf-algebra-of-affine-group-scheme]]), and let $V$ be a $k$-vector space. The construction of [[def-rational-representation-and-comodule-of-an-affine-group-scheme]] is a bijection, natural in $V$ and in $G$, between $A$-comodule structures $\\rho\\colon V\\to V\\otimes_kA$ and rational representations $r\\colon G\\to\\operatorname{GL}_V$, and it maps subcomodules to subrepresentations. If $V$ is finite dimensional with basis $e_1,\\dots,e_n$ and $\\rho(e_j)=\\sum_ie_i\\otimes a_{ij}$, then the matrix coefficients satisfy\n$$\\Delta(a_{ij})=\\sum_ka_{ik}\\otimes a_{kj},\\qquad\\varepsilon(a_{ij})=\\delta_{ij},$$\nand the comorphism of the associated morphism $G\\to\\operatorname{GL}_n$ is $x_{ij}\\mapsto a_{ij}$. No choice principle is used.",
+        "deps": [
+          "def-commutative-hopf-algebra-over-a-field",
+          "def-coordinate-hopf-algebra-of-affine-group-scheme",
+          "def-functor-of-points-affine-scheme",
+          "def-group-scheme-over-a-field",
+          "def-linear-basis",
+          "def-linear-isomorphism-and-invertible-linear-map",
+          "def-linear-map",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-vector-space",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-universal-property-of-module-tensor-products",
+          "thm-yoneda-lemma-is-natural-in-both-variables"
+        ],
+        "strategy": "Evaluate a coaction at algebra-valued points to obtain a natural group action. Conversely evaluate a representation at the universal identity point over A and use p1*p2=Delta and the counit point A to k to prove the comodule identities. Verify both constructions are inverse, and test subobjects and intertwiners at the universal point. Finite coordinate functionals give matrix coefficients; both antipode inverses make their determinant a unit. Treat V=0 using GL_0.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 4 \u00a74(a), Remark 4.1 and formulas (24)-(25), printed pp. 84-85 (PDF 95-96)."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "October 27th lecture, Remark 106 and Lemma 109, printed pp. 27-28."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-finite-dimensional-subcomodules-contain-elements",
+        "kind": "lemma",
+        "title": "Every element of a comodule lies in a finite-dimensional subcomodule",
+        "statement": "Let $k$ be a field, let $A$ be a commutative Hopf algebra over $k$ ([[def-commutative-hopf-algebra-over-a-field]]) and let $(M,\\rho)$ be an $A$-comodule ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]]). For every finite subset $S\\subseteq M$ there is a finite-dimensional subcomodule $N\\subseteq M$ with $S\\subseteq N$. Consequently $M$ is the directed union of its finite-dimensional subcomodules. No basis of $A$ and no choice principle is used.",
+        "deps": [
+          "def-commutative-hopf-algebra-over-a-field",
+          "def-field",
+          "def-linear-combination-and-span",
+          "def-linear-independence",
+          "def-linear-map",
+          "def-linear-subspace",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-vector-space",
+          "thm-right-exactness-of-tensor-products",
+          "thm-universal-property-of-module-tensor-products"
+        ],
+        "strategy": "Use the bilinear universal property and finite relation witnesses to compare independent tensor coefficients without choosing a basis of A. Write rho(m) with independent coefficients; the counit puts m in their vector span. Coassociativity, after quotienting by that finite span, shows stability. Finite sums treat finite subsets and directedness; the empty sum is the zero subcomodule.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 4 \u00a74(c), Proposition 4.7 and Corollary 4.8, printed p. 86 (PDF 97)."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "October 27th lecture, Definition 110, Theorem 111 and Remark 112, printed pp. 28-29."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-closed-subgroup-schemes-correspond-to-hopf-ideals",
+        "kind": "theorem",
+        "title": "Closed subgroup schemes of an affine group scheme correspond to Hopf ideals",
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field, let $G$ be an affine group scheme of finite type over $k$ ([[def-group-scheme-over-a-field]]) and let $A=\\mathcal O(G)$ be its coordinate Hopf algebra ([[def-coordinate-hopf-algebra-of-affine-group-scheme]]). Then $H\\mapsto\\ker(A\\to\\mathcal O(H))$ is a bijection from the set of closed subgroup schemes $H\\subseteq G$ ([[def-morphism-and-closed-subgroup-scheme]], [[def-closed-immersion-schemes]]) onto the set of Hopf ideals of $A$ ([[lem-hopf-ideal-kernels-and-quotients]]). Its inverse sends a Hopf ideal $\\mathfrak a$ to the closed subgroup scheme $\\operatorname{Spec}(A/\\mathfrak a)\\hookrightarrow G$, where $A/\\mathfrak a$ carries the quotient Hopf algebra structure. The bijection reverses inclusions: $H_1\\subseteq H_2$ if and only if $\\ker(A\\to\\mathcal O(H_1))\\supseteq\\ker(A\\to\\mathcal O(H_2))$. The Axiom of Choice is used for the finite-type antiequivalence and to identify every closed subscheme of the affine scheme $G$ with a quotient $\\operatorname{Spec}(A/\\mathfrak a)$ ([[thm-affine-closed-immersions-quotient-rings]]).",
+        "deps": [
+          "def-affine-scheme",
+          "def-axiom-of-choice",
+          "def-closed-immersion-schemes",
+          "def-commutative-hopf-algebra-over-a-field",
+          "def-coordinate-hopf-algebra-of-affine-group-scheme",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme",
+          "lem-hopf-ideal-kernels-and-quotients",
+          "lem-quotient-spectrum-map-is-a-closed-immersion",
+          "thm-affine-closed-immersions-quotient-rings",
+          "thm-affine-group-schemes-hopf-algebra-antiequivalence",
+          "thm-affine-scheme-ring-anti-equivalence"
+        ],
+        "strategy": "Under AC, present a closed subscheme of affine G as a quotient spectrum. A subgroup embedding induces a Hopf morphism and hence a Hopf-ideal kernel. Conversely a Hopf ideal gives a quotient finitely generated Hopf algebra, a finite-type group by antiequivalence, and a closed immersion by the ring surjection. Quotient uniqueness proves the two directions inverse, and quotient factorization reverses inclusions. AC is used for quotient recognition and finite-type antiequivalence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 3 \u00a73(e), Proposition 3.15, printed p. 68 (PDF 79)."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "October 1st lecture, Definition 36 and Proposition 37, printed pp. 11-12; October 3rd lecture, Remark 40, printed p. 12."
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-affine-group-scheme-faithful-finite-dimensional-representation",
+        "kind": "theorem",
+        "title": "A finitely generated affine group scheme has a faithful finite-dimensional representation",
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field and let $A$ be a finitely generated commutative Hopf algebra over $k$ ([[def-commutative-hopf-algebra-over-a-field]]); put $G=\\operatorname{Spec}A$, an affine group scheme of finite type over $k$ ([[def-group-scheme-over-a-field]]). Then there are a nonzero finite-dimensional $k$-vector space $V$ and a closed immersion of group schemes $G\\hookrightarrow\\operatorname{GL}_V$ ([[def-closed-immersion-schemes]]); choosing a basis identifies $\\operatorname{GL}_V$ with $\\operatorname{GL}_n$ over $k$. Equivalently, $G$ admits a faithful finite-dimensional rational representation, and one can be chosen as a subrepresentation of the regular representation $(A,\\Delta)$. Moreover the same conclusion holds for every affine group scheme of finite type over $k$; that form additionally uses [[lem-affine-finite-type-scheme-coordinate-ring-finitely-generated]]. AC supplies affine quasi-compactness for the finite-type scheme assertions; the finite-subcomodule construction and surjective coefficient-ring calculation are choice-free.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-closed-immersion-schemes",
+          "def-commutative-hopf-algebra-over-a-field",
+          "def-coordinate-hopf-algebra-of-affine-group-scheme",
+          "def-group-scheme-over-a-field",
+          "def-linear-basis",
+          "def-linear-isomorphism-and-invertible-linear-map",
+          "def-morphism-and-closed-subgroup-scheme",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-vector-space",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "lem-affine-finite-type-scheme-coordinate-ring-finitely-generated",
+          "lem-finite-dimensional-subcomodules-contain-elements",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring",
+          "lem-quotient-spectrum-map-is-a-closed-immersion",
+          "lem-representations-of-affine-group-schemes-are-comodules",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "thm-yoneda-lemma-is-natural-in-both-variables"
+        ],
+        "strategy": "Under AC recognize the affine group schemes as finite type. A finite-dimensional regular subcomodule containing 1 and algebra generators is nonzero because epsilon(1)=1. Choose a finite basis; both antipode identities invert the coefficient matrix. The counit identity e_j=sum epsilon(e_i)a_ij puts every generator in the coefficient-map image, proving surjectivity. Its spectrum map is a closed immersion and is injective on all algebra-valued points. The finite-subcomodule and coefficient calculations require no AC.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 4 \u00a74(c)-(d), Theorem 4.9, Corollary 4.10 and Remark 4.11, printed pp. 86-88 (PDF 97-99)."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "October 29th lecture, Theorem 117 with its proof, printed p. 29."
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 874,
+    "id": "affine-group-schemes-hopf-algebras-and-rational-representations-examples",
+    "kind": "B",
+    "category": "scheme-theory",
+    "title": "Affine Group Schemes, Hopf Algebras, and Rational Representations \u2014 Examples",
+    "companion": "affine-group-schemes-hopf-algebras-and-rational-representations",
+    "requires": [
+      "affine-group-schemes-hopf-algebras-and-rational-representations"
+    ],
+    "items": [
+      {
+        "id": "ex-hopf-algebra-of-a-split-torus",
+        "kind": "example",
+        "title": "The Hopf algebra of a split torus and its root-of-unity subgroups",
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field, let $n\\ge1$ and let $T=\\mathbf G_m^n=\\operatorname{Spec}k[t_1^{\\pm1},\\dots,t_n^{\\pm1}]$ be the split torus of rank $n$, a product of copies of the multiplicative group scheme of [[lem-general-linear-group-scheme-and-its-coordinate-ring]]. Then the coordinate Hopf algebra of $T$ ([[def-coordinate-hopf-algebra-of-affine-group-scheme]]) is given on the Laurent generators by\n$$\\Delta(t_i)=t_i\\otimes t_i,\\qquad\\varepsilon(t_i)=1,\\qquad S(t_i)=t_i^{-1}\\qquad(1\\le i\\le n),$$\nextended by multiplicativity; the $t_i$ are units, and $T(R)=(R^\\times)^n$ with pointwise multiplication for every commutative unital $k$-algebra $R$. For integers $r_1,\\dots,r_n\\ge1$ the ideal generated by $t_1^{r_1}-1,\\dots,t_n^{r_n}-1$ is a Hopf ideal ([[lem-hopf-ideal-kernels-and-quotients]]) and defines the closed subgroup scheme $\\mu_{r_1}\\times\\cdots\\times\\mu_{r_n}\\subseteq T$, where $\\mu_r(R)=\\{a\\in R^\\times:a^r=1\\}$. In characteristic $p>0$ the scheme $\\mu_p$ has coordinate ring $k[t]/(t-1)^p$, which is nonreduced, so it is not determined by its $k$-points.",
+        "deps": [
+          "def-axiom-of-choice",
+          "cor-affine-scheme-quasi-compact",
+          "def-finite-type-and-module-finite-algebras",
+          "def-locally-finite-type-and-finite-type-morphism",
+          "def-commutative-hopf-algebra-over-a-field",
+          "def-coordinate-hopf-algebra-of-affine-group-scheme",
+          "def-group-scheme-over-a-field",
+          "def-morphism-and-closed-subgroup-scheme",
+          "lem-hopf-ideal-kernels-and-quotients",
+          "lem-coordinate-ring-of-affine-group-scheme-is-a-hopf-algebra",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring",
+          "lem-quotient-spectrum-map-is-a-closed-immersion",
+          "prop-p-power-roots-of-unity-in-characteristic-p",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-affine-scheme-ring-anti-equivalence"
+        ],
+        "strategy": "Tensor the Laurent coordinate rings and compute the grouplike structure maps. Check Delta, epsilon and S on every t_i^r_i-1, giving a Hopf ideal and quotient closed subgroup. AC and finite generation supply finite type for the torus and quotient. In characteristic p, t^p-1=(t-1)^p gives a nonzero nilpotent although field-valued points are trivial.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 2 \u00a7\u00a72.1-2.5, printed pp. 39-41 (PDF 50-52), and Ch. 3 \u00a73(b), printed pp. 65-66 (PDF 76-77)."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "September 26th and October 1st lectures, Examples 11, 16 and 31, printed pp. 4-5 and 10-11."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-rational-representation-from-a-comodule",
+        "kind": "example",
+        "title": "A rational representation of the multiplicative group from a graded comodule",
+        "statement": "Assume the Axiom of Choice for the finite-type construction of $\\mathbf G_m$. Let $k$ be a field, let $G=\\mathbf G_m=\\operatorname{Spec}k[t,t^{-1}]$ and let $V$ be a finite-dimensional $k$-vector space with a direct-sum decomposition $V=\\bigoplus_{m\\in\\mathbb Z}V_m$ into weight spaces (all but finitely many zero). Then\n$$\\rho\\colon V\\to V\\otimes_kk[t,t^{-1}],\\qquad\\rho(v)=\\sum_mv_m\\otimes t^m\\quad\\text{for }v=\\sum_mv_m,\\ v_m\\in V_m,$$\nis a comodule structure on $V$ over the coordinate Hopf algebra ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]]), and the corresponding rational representation ([[lem-representations-of-affine-group-schemes-are-comodules]]) is the homomorphism $r_R\\colon R^\\times\\to\\operatorname{GL}_R(V\\otimes_kR)$ whose action on $V_m\\otimes_kR$ is multiplication by the scalar $g^m$. Conversely, every comodule structure on $V$ arises in this way: putting $V_m=\\{v:\\rho(v)=v\\otimes t^m\\}$ gives $\\rho(V_m)\\subseteq V_m\\otimes k[t,t^{-1}]$ and $V=\\bigoplus_mV_m$. If $e_1,\\dots,e_n$ is a basis of weight vectors, the associated comorphism $\\mathcal O(\\operatorname{GL}_n)\\to k[t,t^{-1}]$ sends $x_{ij}$ to $\\delta_{ij}t^{m_i}$, and the matrix coefficients satisfy the identities of [[lem-representations-of-affine-group-schemes-are-comodules]].",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-coordinate-hopf-algebra-of-affine-group-scheme",
+          "def-linear-basis",
+          "def-linear-map",
+          "def-linear-subspace",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-vector-space",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring",
+          "lem-representations-of-affine-group-schemes-are-comodules"
+        ],
+        "strategy": "Check the two coaction identities for a finite weight decomposition. Conversely extract Laurent coefficients with explicit coefficient maps: coassociativity makes them weight vectors, the counit proves spanning and coefficient comparison proves directness. A finite basis has finite total weight support. Evaluate units to obtain g^m on each weight space, diagonal coefficient matrices, and the separate GL_0 case. AC is inherited only for finite-type recognition of G_m.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 4 \u00a74(a) and \u00a74(e), printed pp. 83-85 and 88-89 (PDF 94-96 and 99-100)."
+            },
+            {
+              "title": "J. Swanson (notes), J. Pevtsova (lecturer), Algebraic Groups Lecture Notes, University of Washington, Fall 2014",
+              "url": "https://www.jpswanson.org/notes/alggroups.pdf",
+              "locator": "October 22nd and 27th lectures, Definitions 103-108 and Lemma 109, printed pp. 26-28."
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

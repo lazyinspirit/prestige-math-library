@@ -1,0 +1,1175 @@
+[
+  {
+    "order": 757,
+    "id": "categorical-braid-actions-and-decategorification",
+    "kind": "A",
+    "category": "braid-groups",
+    "title": "Categorical Braid Actions and Decategorification",
+    "companion": "categorical-braid-actions-and-decategorification-examples",
+    "requires": [
+      "graded-quiver-algebras-and-derived-tensor-functors",
+      "geometric-braids-and-artin-generators",
+      "the-burau-representations",
+      "grothendieck-groups-and-graded-cartan-pairings",
+      "perfect-complexes-and-triangulated-grothendieck-groups",
+      "punctured-disks-mapping-classes-and-point-pushing",
+      "homological-gaussian-elimination",
+      "lawrence-krammer-bigelow-and-linearity"
+    ],
+    "items": [
+      {
+        "id": "def-weak-action-of-a-group-on-a-category",
+        "kind": "definition",
+        "title": "Weak action of a group on a category",
+        "deps": [
+          "def-group-action",
+          "def-category",
+          "def-functor-and-contravariant-functor",
+          "def-natural-isomorphism"
+        ],
+        "statement": "Let $G$ be a group with unit $1$ ([[def-group-action]]) and $Q$ a category\n([[def-category]]). A **weak action** of $G$ on $Q$ is a choice of a functor\n$$F_g\\colon Q\\to Q\\qquad(g\\in G)$$\nfor every element of $G$ ([[def-functor-and-contravariant-functor]]) such that\n\n1. $F_1$ is the identity functor of $Q$, and\n2. for all $f,g\\in G$ the functors $F_{fg}$ and $F_fF_g$ are isomorphic, that\n   is, there exists a natural isomorphism between them\n   ([[def-natural-isomorphism]]).\n\nNo isomorphisms $F_{fg}\\cong F_fF_g$ are chosen, they are not required to be\ncompatible with the associativity of $G$, and no pentagon is imposed: the\ndefinition records only that such isomorphisms exist. This is Definition 2.6 of\nthe source, stated there for a group and a category with the same comments.\n\n**Normalized coherent actions.** In the identity-unit normalization, the action\nis **coherent**, or a genuine $2$-action, when isomorphisms\n$$\\mu_{f,g}\\colon F_fF_g\\longrightarrow F_{fg}\\qquad(f,g\\in G)$$\nare chosen so that $\\mu_{1,g}=\\mathrm{id}_{F_g}$, $\\mu_{f,1}=\\mathrm{id}_{F_f}$\nand the two composites\n$$F_fF_gF_h\\xrightarrow{\\ \\mu_{f,g}F_h\\ }F_{fg}F_h\\xrightarrow{\\ \\mu_{fg,h}\\ }F_{fgh}, \\qquad F_fF_gF_h\\xrightarrow{\\ F_f\\mu_{g,h}\\ }F_fF_{gh}\\xrightarrow{\\ \\mu_{f,gh}\\ }F_{fgh}$$\nagree, the associativity (pentagon) condition. This is the normalized special\ncase of a strong monoidal action. In the general definition, the unit\nconstraint is a chosen natural isomorphism $u:F_1\\Rightarrow\\operatorname{Id}_Q$;\nwhen $F_1=\\operatorname{Id}_Q$, the unit triangles read\n$\\mu_{f,1}=F_fu$ and $\\mu_{1,g}=uF_g$, and need not be identity maps. No\nstrictification to the normalized case is asserted. A coherent action with $F_1=\\operatorname{Id}_Q$ is in particular a weak\naction after forgetting its chosen compositors. For a general coherent action\nwith only $u:F_1\\Rightarrow\\operatorname{Id}_Q$, first replace the identity\ncomponent of the functor assignment by $\\operatorname{Id}_Q$; the unit\nisomorphism and the compositors then supply the pairwise isomorphisms required\nby the weak definition. This replacement asserts no strictification of the\ncoherence data.\n\n**Standing convention.** The whole page uses \"weak\" in the sense of this\ndefinition and never silently substitutes a coherent action: whenever a\ncompositor or pentagon argument would be needed, the weakness of the available\ndata is stated.\n\n**Terminology.** The functors $F_g$ are the *components* of the weak action,\nthe assignment $g\\mapsto F_g$ is its *functor assignment*, and a weak action is\ndetermined by the functor assignment with its prescribed identity component\ntogether with the existence of the pairwise isomorphisms in condition 2. We do\nnot distinguish two weak actions that are naturally isomorphic componentwise.",
+        "strategy": "Define weak action by the fixed identity component and existence of pairwise isomorphisms, without choosing compositors. Label the identity-unit coherent-action equations as a normalized special case, state the general unit-constraint form, and do not claim strictification.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Definition 2.6",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Definition 2.6, printed p. 14; remark after Proposition 2.7, printed p. 14"
+            },
+            {
+              "title": "Mikhail Khovanov and Richard Thomas, Braid cobordisms, triangulated categories, and flag varieties, Homology Homotopy Appl. 9 (2007) 19-94 (arXiv:math/0609335v2), Section 1 (weak action versus genuine action)",
+              "url": "https://arxiv.org/pdf/math/0609335",
+              "locator": "Section 1 (Introduction), arXiv PDF pp. 2-8 (the table of contents is p. 1); definition of a weak action and the associativity constraint (1.1) on arXiv PDF p. 2"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": [],
+        "forward_refs": [
+          "cex-ks-weak-actions-do-not-supply-pentagon-coherence-data"
+        ]
+      },
+      {
+        "id": "def-faithful-weak-categorical-action",
+        "kind": "definition",
+        "title": "Faithful weak action",
+        "deps": [
+          "def-weak-action-of-a-group-on-a-category",
+          "def-natural-isomorphism",
+          "def-group-action"
+        ],
+        "statement": "A weak action $(F_g)_{g\\in G}$ of a group $G$ on a category $Q$ is **faithful** if for every $g\\ne 1$ the functor $F_g$ is not isomorphic to the identity functor of $Q$, that is, there is no natural isomorphism $F_g\\cong\\operatorname{Id}_Q$. Faithfulness is a property of the functor assignment itself; it says nothing about the induced action on any Grothendieck group or other invariant, and in particular a group element may act nontrivially on $Q$ while inducing the identity on $K_0$.",
+        "strategy": "Definition after Proposition 2.7 of the source; no proof obligation beyond the natural-isomorphism reading of \"not isomorphic to the identity functor\".",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, after Proposition 2.7",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Text after Proposition 2.7, printed p. 14"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": [],
+        "forward_refs": [
+          "cex-equal-actions-on-k-zero-do-not-imply-isomorphic-derived-autoequivalences"
+        ]
+      },
+      {
+        "id": "def-curves-and-geometric-intersection-numbers-on-the-marked-disk",
+        "kind": "definition",
+        "title": "Curves and geometric intersection numbers on the marked disk",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-boundary-fixed-mapping-class-group-of-a-punctured-disk",
+          "def-geometric-braid-with-setwise-endpoints",
+          "def-smooth-embedding",
+          "def-embedded-smooth-submanifold-with-boundary",
+          "def-interval",
+          "def-euclidean-spheres-and-closed-balls",
+          "def-subspace-topology-top"
+        ],
+        "statement": "Let\n$$D:=\\{\\,z\\in\\mathbb C:|z|\\le1\\,\\},\\qquad \\partial D:=\\{\\,z\\in\\mathbb C:|z|=1\\,\\},\\qquad D^\\circ:=D\\setminus\\partial D,$$\nthe closed unit disk with its subspace topology from $\\mathbb C\\cong\\mathbb R^2$\n([[def-euclidean-spheres-and-closed-balls]], [[def-subspace-topology-top]]), and\nfix once and for all a set $\\Delta\\subset D^\\circ$ of $m+1\\ge2$ marked points\nwith the induced topology. Fix also an orientation of $D$, namely the standard\none. Write $G:=\\pi_0\\operatorname{Diff}(D,\\partial D;\\Delta)$ for the\nboundary-fixed mapping class group of the punctured disk of\n[[def-boundary-fixed-mapping-class-group-of-a-punctured-disk]], in its smooth version, whose elements\nare isotopy classes of diffeomorphisms of $D$ fixing $\\partial D$ pointwise and\npermuting $\\Delta$ setwise. The cited item defines the homeomorphism\nversion; the smooth configuration-space comparison used here is\nKhovanov–Seidel, Section 3b, equation (3.1), printed p. 19.\n\n**Curves.** A **curve** in $(D,\\Delta)$ is a subset $c\\subseteq D$ of one of the\nfollowing two kinds.\n\n1. A **simple closed curve** $c\\subset D^\\circ\\setminus\\Delta$ which is\n   *essential*, that is, not contractible in $D^\\circ\\setminus\\Delta$; it is the\n   image of an embedding $S^1\\hookrightarrow D^\\circ\\setminus\\Delta$\n   ([[def-smooth-embedding]]).\n2. An **arc**: the image of an embedding $\\gamma\\colon[0,1]\\to D$\n   ([[def-interval]], [[def-smooth-embedding]]) which is transverse to\n   $\\partial D$, meets the boundary and the marked set exactly in its endpoints,\n   $$\\gamma^{-1}(\\partial D\\cup\\Delta)=\\{0,1\\},$$\n   and whose interior lies in $D^\\circ\\setminus\\Delta$. The unoriented image is\n   the curve; a curve may meet $\\Delta$ in one or both of its endpoints, may\n   meet $\\partial D$ in one or both of them, and may have both endpoints in\n   $\\Delta$, both on $\\partial D$, or one of each. Arcs are thus embedded smooth\n   submanifolds with boundary of $D$ ([[def-embedded-smooth-submanifold-with-boundary]]).\n\nCurves are unoriented: $c$ and its image under any orientation-reversing\nreparametrization are the same curve. Two curves $c_0,c_1$ are **isotopic**,\nwritten $c_0\\simeq c_1$, when one can be deformed into the other by an isotopy\nin $\\operatorname{Diff}(D,\\partial D;\\Delta)$; endpoints on $\\partial D$ may not\nmove during an isotopy. Isotopy of curves is the orbit relation for the identity component of\n$\\operatorname{Diff}(D,\\partial D;\\Delta)$. The full mapping class group $G$\nacts on these isotopy classes and may carry one class to a different class.\n\n**Minimal intersection.** Let $c_0,c_1$ be curves. They are in **minimal\nintersection** when (i) they intersect transversally, (ii) $c_0\\cap c_1\\cap\\partial D=\\varnothing$,\nand (iii) the following disk formulation of the bigon condition holds: for any two points\n$z_-\\ne z_+$ of $c_0\\cap c_1$ that do not both lie in $\\Delta$, and arcs\n$\\alpha_0\\subseteq c_0$, $\\alpha_1\\subseteq c_1$ with endpoints $z_-,z_+$ and\n$\\alpha_0\\cap\\alpha_1=\\{z_-,z_+\\}$, the open Jordan disk $K$ enclosed by\n$\\alpha_0\\cup\\alpha_1$ contains a marked point. Other portions of the curves\nmay lie in $K$; it need not be a component of $D\\setminus(c_0\\cup c_1)$.\nThus a transverse interior crossing contributing a removable bigon is\nforbidden, and a pair of arcs with common endpoints in $\\Delta$ is allowed to\nbound a marked-free disk only when the two arcs share *both* endpoints.\n\n**Existence of minimal representatives.** Given curves $c_0,c_1$ with\n$c_0\\cap c_1\\cap\\partial D=\\varnothing$ there is a curve $c_1'\\simeq c_1$ in\nminimal intersection with $c_0$: first perturb $c_1$ into transverse position\nwith distinct endpoint germs, giving finitely many intersections. If\nthe disk condition fails, an innermost marked-free bigon can be removed by\npushing $c_1$ across it, with support near the bigon and fixing the marked\npoints and the boundary (the bigon removal of Khovanov–Seidel, Section 3a);\nas each such move decreases the finite number $|c_0\\cap c_1|$ of intersection\npoints, the process terminates. In the case $c_0\\cap c_1\\cap\\partial D\\ne\\varnothing$\none first applies the flow extension below.\n\n**Choice scope for geometric intersection numbers.** Assume AC\n([[def-axiom-of-choice]]) for the representative-independence, isotopy\ninvariance and auxiliary-choice independence of $I$ supplied by\n[[lem-geometric-intersection-numbers-are-isotopy-invariants]]. That supplier\nretains AC for its topological relative-arc inputs. The definitions of the\nmarked disk, curves, isotopy and minimal intersection, and the finite\nperturbation and bigon-removal construction above do not invoke that input.\n\n**The geometric intersection number.** Under this assumption, let $c_0,c_1$ be curves with\n$c_0\\cap c_1\\cap\\partial D=\\varnothing$, and choose a minimal-intersection\nrepresentative $c_1'\\simeq c_1$ of $c_1$. The **geometric intersection number**\nis the half-integer\n$$I(c_0,c_1):=|(c_0\\cap c_1')\\setminus\\Delta|+\\tfrac12\\,|c_0\\cap c_1'\\cap\\Delta|, \\qquad I(c_0,c_1)\\in\\tfrac12\\mathbb Z,$$\nexcept in the exceptional case that $c_0,c_1$ are simple closed curves with\n$c_0\\simeq c_1$, where one sets $I(c_0,c_1):=2$. Interior intersection points\ncount once and common marked endpoints count one half, so that in particular\n$I(b_i,b_i)=1$ for an arc $b_i$ joining two marked points. Isotopic arcs have the same endpoint\nset, since an isotopy fixes every marked point and every boundary point. The number is independent of\nthe chosen representative $c_1'$: this is proved in\n[[lem-geometric-intersection-numbers-are-isotopy-invariants]], together with\nthe invariance of $I$ under isotopies of both arguments. The value is finite\nbecause two curves in minimal intersection meet in finitely many points after a\nsmall perturbation, the arcs involved being compact.\n\n**The flow extension.** The definition above requires\n$c_0\\cap c_1\\cap\\partial D=\\varnothing$. For the source's $I$ on arbitrary pairs\none fixes a nonvanishing smooth vector field on $\\partial D$ which is positively\noriented with respect to the fixed orientation, extends it to a smooth vector\nfield $Z$ on $D$ which vanishes on $\\Delta$, and lets $(f_t)$ be the\nflow of $Z$. For $t>0$ small enough that the endpoints of $c_0$ on $\\partial D$\nare moved along $\\partial D$ past no endpoint of $c_1$, set\n$$I(c_0,c_1):=I(c_0^+,c_1),\\qquad c_0^+:=f_t(c_0).$$\nThis extension is independent of the auxiliary choices by the isotopy\ninvariance proved in [[lem-geometric-intersection-numbers-are-isotopy-invariants]];\nit depends on the orientation of $D$ and is **not symmetric**, since it removes\nthe common boundary endpoints of $c_0$ with $c_1$ by pushing $c_0$ off them.\n\n**Standing conventions.** Under the stated AC hypothesis, throughout this page $I$ always denotes this\nhalf-integer valued function of isotopy classes of curves, with the exceptional\nvalue $2$ for isotopic simple closed curves, and with the flow extension\nwhenever a pair meets on $\\partial D$. The basic arcs $b_0,\\dots,b_m$ fixed in\n[[def-basic-arcs-admissible-curves-and-normal-form]] form a chain: $b_0$ joins\na fixed boundary point to the first marked point, and $b_i$ for $1\\le i\\le m$\njoins the $(i-1)$st marked point to the $i$th marked point, and all\nvalues $I(b_j,c)$ quoted on this page are computed in that fixed picture, whose\ndata are fixed there once and for all.",
+        "strategy": "Use the smooth curve conventions and finite perturbation/bigon elimination of KS Section 3a. Retain AC exactly for representative independence, isotopy invariance and auxiliary-choice independence supplied by lem-geometric-intersection-numbers-are-isotopy-invariants, whose topological relative-arc inputs assume AC. Weighted counts, exceptional I=2 and positive boundary flow are preserved; the primitive curve and minimal-position definitions and finite construction do not use that input.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Section 3a",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Section 3a, printed pp. 17-19 (curves, minimal intersection, the number I, the flow extension)"
+            },
+            {
+              "title": "Benson Farb and Dan Margalit, A Primer on Mapping Class Groups, version 5.0 author draft, Chapter 1 (bigon criterion and isotopy extension)",
+              "url": "https://web.archive.org/web/20111027114600id_/http://www.math.uchicago.edu/~margalit/mcg/mcgv50.pdf",
+              "locator": "Proposition 1.7 (bigon criterion), Section 1.2.7 (isotopy extension), printed pp. 31-38 and 43-44"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": [
+          "lem-geometric-intersection-numbers-are-isotopy-invariants"
+        ]
+      },
+      {
+        "id": "lem-geometric-intersection-numbers-are-isotopy-invariants",
+        "kind": "lemma",
+        "title": "Geometric intersection numbers are isotopy invariants",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-curves-and-geometric-intersection-numbers-on-the-marked-disk",
+          "lem-homotopic-simple-proper-arcs-in-the-punctured-disk-are-isotopic-relative-to-their-endpoints",
+          "lem-arcs-in-a-punctured-disk-have-disjointness-detecting-minimal-positions",
+          "def-boundary-fixed-mapping-class-group-of-a-punctured-disk"
+        ],
+        "statement": "Assume AC. For curves $c_0,c_1$ in $(D,\\Delta)$ the number $I(c_0,c_1)$ does not depend on the chosen minimal-intersection representative $c_1'$ of $c_1$, and if $c_i'$ is isotopic to $c_i$ for $i=0,1$ then $I(c_0',c_1')=I(c_0,c_1)$. Consequently $I$ is an invariant of isotopy classes of curves, and it is computed in the source's picture as well as in any curve system obtained from it by an ambient isotopy.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *The exceptional cases.* First suppose the pair has no common boundary endpoint and $c_0\\simeq c_1$. For closed curves the prescribed value is $2$, independently of representatives. For arcs, boundary-fixed isotopy preserves their endpoint set, so the absence of common boundary endpoints forces both endpoints to lie in $\\Delta$. The two relative minimal models in [L4] have just these two common marked endpoints, giving $I=1$. These conclusions depend only on the isotopy classes. [L1, L4]\n\n1.2 *Other minimal representatives give the same count.* Suppose $c_0\\not\\simeq c_1$ and let $c_1',c_1''$ be minimal representatives of the class of $c_1$ relative to $c_0$, with no boundary intersection. The relative comparison in [L4] gives an ambient isotopy fixing $c_0$ setwise and carrying $c_1'$ to $c_1''$. Its endpoint map bijects their intersections with $c_0$ and preserves $\\Delta$. Thus both the ordinary and marked intersection counts agree, and so do their weighted sums. Together with step 1.1 this proves representative independence whenever there is no common boundary endpoint. The arc comparison uses the stated AC-dependent relative-isotopy inputs; it does not assert that the disjointness lemma alone proves this stronger relative comparison. [L2, L3, L4, L5, step 1.1]\n\n2.1 *Isotopy invariance away from boundary intersections.* An endpoint map $F$ of an identity-component ambient isotopy carrying $c_0$ to $c_0'$ carries a minimal representative $c_1'$ to a minimal representative of the same class of $c_1$. Simultaneous transport preserves both counts. If the pair is isotopic and closed, both values instead equal the prescribed $2$; otherwise the weighted formula applies. Hence $I(c_0',c_1)=I(c_0,c_1)$ by step 1.2. Representative independence gives invariance in the second argument as well. [L1, L5, step 1.1, step 1.2]\n\n3.1 *The boundary push is independent of its small positive choice.* Each boundary endpoint is moved a short distance in the positive direction, so the pushed endpoints are disjoint from the original endpoint set and their cyclic order is independent of sufficiently small time and of the chosen positive boundary field. For two such pushes there is a boundary isotopy fixing the endpoints of $c_1$, carrying the pushed endpoints to each other within the same complementary boundary intervals. Extend it over a thin collar and then compare the two pushed arcs by the flow interpolation; this produces an ambient isotopy preserving $c_1$ setwise and $\\Delta$, with the same cyclic endpoint order throughout. Simultaneous transport and the relative minimal comparison of step 1.2 show that their weighted intersection counts agree. This comparison allows the pushed boundary endpoints to move; it does not treat the positive flow itself as an isotopy fixing the boundary pointwise. [L1, L4, L5, step 1.2]\n\n4.1 *Invariance with the boundary convention.* A boundary-fixed ambient map $F$ carrying $c_0$ to an isotopic curve transports a positive boundary field $Z$ to the positive boundary field $F_*Z$ and conjugates their flows. It therefore transports the pushed pair and all minimal intersection counts. The boundary independence of step 3.1 permits replacing $F_*Z$ by the chosen field. The same argument transports both curves simultaneously; representative independence then allows the two arguments to vary separately. Thus the asserted invariance holds also when there are common boundary endpoints. [L5, step 2.1, step 3.1]\n\n5.1 *Conclusion.* The ordinary weighted formula, the exceptional closed value, and the positive-boundary extension all define numbers independent of minimal representatives and invariant under the stated isotopies. The AC-dependent arc inputs retain the hypothesis in the Statement; the finite counts and explicit collar comparison require no additional choice. [step 1.1, step 1.2, step 2.1, step 4.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Lemmas 3.2 and 3.3 and the definition of I",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Lemmas 3.2 and 3.3 and the discussion around Figure 5, printed pp. 18-20 (quoting [10, Expose III, Proposition III.12])"
+            },
+            {
+              "title": "Benson Farb and Dan Margalit, A Primer on Mapping Class Groups, version 5.0 author draft, Chapter 1",
+              "url": "https://web.archive.org/web/20111027114600id_/http://www.math.uchicago.edu/~margalit/mcg/mcgv50.pdf",
+              "locator": "Proposition 1.7 (bigon criterion), Proposition 1.10 (isotopy versus homotopy), Proposition 1.11 (extension of isotopies), printed pp. 31-38"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-basic-arcs-admissible-curves-and-normal-form",
+        "kind": "definition",
+        "title": "Basic arcs, admissible curves and the standard normal form",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk",
+          "thm-the-artin-presentation-is-complete-for-geometric-braids",
+          "def-curves-and-geometric-intersection-numbers-on-the-marked-disk",
+          "def-boundary-fixed-mapping-class-group-of-a-punctured-disk",
+          "def-elementary-geometric-half-twist",
+          "lem-a-smooth-finite-disk-arc-system-isotopy-extends-relative-boundary-and-marked-points"
+        ],
+        "statement": "Let $(D,\\Delta)$ be the marked disk of\n[[def-curves-and-geometric-intersection-numbers-on-the-marked-disk]] with\n$m+1\\ge2$ marked points, and let\n$G=\\pi_0\\operatorname{Diff}(D,\\partial D;\\Delta)$ be its boundary-fixed mapping\nclass group ([[def-boundary-fixed-mapping-class-group-of-a-punctured-disk]]).\nWrite $\\mathcal D:=\\operatorname{Diff}(D,\\partial D;\\Delta)$ for the actual diffeomorphism group, so $G=\\pi_0(\\mathcal D)$. Actual curve images below use members of $\\mathcal D$, and mapping classes act on curve-isotopy classes. All curves below are curves in $(D,\\Delta)$ in the sense of that definition.\n\n**Basic sets.** Fix the boundary endpoint $d$ of the standard drawn chain of source Figure 2, and label its marked points $q_0,\\ldots,q_m$ along that chain. The standard basic arcs are $b_0$ from $d$ to $q_0$ and $b_i$ from $q_{i-1}$ to $q_i$ for $1\\le i\\le m$. Their interiors are pairwise disjoint and avoid $\\Delta\\cup\\partial D$; consecutive arcs meet only at their common marked endpoint, and all other arcs are disjoint. A **basic set of curves** is an actual image of this fixed chain under a member of $\\mathcal D$. The marked labels are transported with it. Under AC, the preferred identification of the Artin-presentation group\n$B_{m+1}$ with $G$ sends $\\sigma_i$ to the half twist about $b_i$,\n$1\\le i\\le m$. Presentation completeness is supplied by\n[[thm-the-artin-presentation-is-complete-for-geometric-braids]]; the\ngeometric-to-topological comparison is\n[[thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk]].\nFor the smooth group $G$ used here, use the smooth configuration-space\ncomparison and generator convention of Khovanov–Seidel, Section 3b,\nequation (3.1) and Figure 6, printed pp. 19–20\n([[def-axiom-of-choice]], [[def-elementary-geometric-half-twist]]).\n**Admissible curves.** A curve $c$ is **admissible** if $c=f(b_i)$ for some\n$f\\in\\mathcal D$ and some $i$, that is, if it lies in the $\\mathcal D$-orbit of the actual basic set.\nThe endpoints of an admissible curve lie in $\\Delta\\cup(b_0\\cap\\partial D)$, and\nconversely every arc with such endpoints is admissible; $G$ acts on the set of\nisotopy classes of admissible curves.\n\n**Vertical curves and normal form.** Fix arcs $d_0,\\dots,d_m$ as in Figure 11,\npairwise disjoint embedded arcs dividing $D$ into regions\n$D_0,D_1,\\dots,D_{m+1}$ in that order, chosen so that $d_k$ meets the spine in\nthe prescribed way of the standard picture. An admissible curve $c$ is in\n**normal form** if it has minimal intersection with every $d_k$. Every\nadmissible curve can be isotoped into normal form, and the normal form is unique\nup to isotopy preserving each $d_k$ setwise and fixing the marked points and $\\partial D$ (the source's Lemma 3.15);\nconsequently the combinatorial data below are invariants of the isotopy class\nof $c$.\n\n**Crossings, segments, strings.** For an admissible curve $c$ in normal form\nput\n$$\\operatorname{cr}(c):=c\\cap(d_0\\cup\\dots\\cup d_m),$$\nthe set of **crossings** of $c$; a crossing lying on $d_k$ is a\n**$k$-crossing**. The connected components of $c\\cap D_k$ are the **segments**\nof $c$; a segment is **essential** when both its endpoints are crossings, and\n**inessential** otherwise (it then ends at a point of $\\Delta\\cup\\partial D$).\nThe connected components of $c\\cap(D_k\\cup D_{k+1})$, for $0\\le k\\le m$ with\n$D_{m+1}$ interpreted as the region across $d_m$ in the standard picture, are\nthe **$k$-strings** of $c$; write $\\operatorname{st}(c,k)$ for their set. By the\nuniqueness of normal form, the number and relative position of the segments and\nof the strings are invariants of $c$.\n\n**String types.** Up to isotopy of $D_k\\cup D_{k+1}$ fixing the boundary arcs\nand the marked points, each $k$-string belongs to one of the following families or exceptional types.\nFor $1\\le k<m$ there are five infinite families\n$$\\mathrm I_u,\\ \\mathrm{II}_u,\\ \\mathrm{II}'_u,\\ \\mathrm{III}_u,\\ \\mathrm{III}'_u\\qquad(u\\in\\mathbb Z)$$\nand five exceptional types $\\mathrm{IV},\\mathrm{IV}',\\mathrm V,\\mathrm V',\\mathrm{VI}$\n(Figures 15-16); the type $\\mathrm I_{u+1}$ is obtained from $\\mathrm I_u$ by\napplying the half twist about $b_k$, and likewise for the other families. For\n$k=m$ the list consists of the two families $\\mathrm{II}_u,\\mathrm{III}_u$ and\nthe two exceptional types $\\mathrm V,\\mathrm{VI}$ (Figure 17), and for $k=0$ of\nthe five exceptional types $\\mathrm{VII},\\mathrm{VIII},\\mathrm{IX},\\mathrm X,\\mathrm{XI}$\n(Figure 18). The members $u=0$ of the families and the exceptional types are the\ndrawn models of those figures; each type is an isotopy class of arcs in\n$D_k\\cup D_{k+1}$ with the prescribed endpoints on $d_{k-1},d_k,d_{k+1}$ and\n$\\Delta\\cup\\partial D$.\n\n**Segments types.** A segment of $c\\cap D_k$ for $1\\le k\\le m$ is, up to the\nanalogous isotopy, of one of the six types labelled $1,1',2,2',3,3'$ of\nFigure 12; for $k=m+1$ there are the two types analogous to $2$ and $3$\n(Figure 13), and for $k=0$ the single type of Figure 14. The essential\nsegments are precisely those of type $1,1',2,2'$; the basic curves\n$b_0,\\dots,b_m$ themselves have no essential segments.\n\n**The nested twists.** Fix the pairwise disjoint nested curves $l_0,\\ldots,l_{m-1}$ of Figure 7. The disk bounded by $l_j$ contains exactly the suffix of marked points $\\{q_j,\\ldots,q_m\\}$. Choose a small closed annular neighbourhood of $l_j$, disjoint from all marks and from the other support annuli; among the basic arcs it meets only $b_j$, in one transverse crossing. Let $\\tau_j$ be a positive Dehn twist supported in that annulus. Its class lies in $G$, the classes commute by disjoint support, and the chosen representative fixes every $b_k$ with $k\\ne j$. They generate the standard twist subgroup used in the detector lemma below.\n**Standing convention.** All the data above — the basic set $b_0,\\dots,b_m$,\nthe vertical curves $d_0,\\dots,d_m$, the regions $D_0,\\dots,D_{m+1}$ and the\nnested curves $l_0,\\dots,l_{m-1}$ — are fixed once and for all in the standard\npicture, and every statement invoking them names this fixed picture. When a\nstatement is applied to an arbitrary basic set, it is transported by an actual diffeomorphism\nin $\\mathcal D$ carrying the standard basic set to the given one; the transport is\npart of the statement.",
+        "strategy": "Transcribe the source's Sections 3b and 3e. The existence and uniqueness claims for normal form are the source's Lemma 3.15 and its surrounding discussion; the classification into finitely many segment and string types is the content of Figures 12-18, recorded here as definitional data with the finite verifications for the displayed models to be carried out by explicit analytic curves. No global choice is used: the spine and the vertical curves are exhibited, and each admissibility statement names its witnessing element of $G$. The braid dictionary uses Artin-presentation completeness and the explicit smooth configuration-space comparison in KS equation (3.1), p. 19, not the homeomorphism supplier alone.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Sections 3b and 3e",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Section 3b (basic sets, admissible curves, Figures 6-7), printed pp. 19-21; Section 3e (vertical curves, normal form, types, Figures 11-18), printed pp. 26-33"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "lem-standard-twists-fix-the-complementary-basic-arcs-and-commute",
+        "kind": "lemma",
+        "title": "The standard twists commute and fix the complementary basic arcs",
+        "statement": "In the standard picture of the basic arcs $b_0,\\dots,b_m$ and the nested curves\n$l_0,\\dots,l_{m-1}$ of\n[[def-basic-arcs-admissible-curves-and-normal-form]], let $\\tau_j$ be the\npositive Dehn twist about $l_j$ and let $G$ be the boundary-fixed mapping class\ngroup. Then the twists commute,\n$$[\\tau_i,\\tau_j]=1\\qquad\\text{in }G\\text{ for all }i,j,$$\nand\n$$\\tau_j(b_k)\\simeq b_k\\qquad\\text{for all }k\\ne j.$$\nConsequently $\\tau_j$ induces the identity on every $b_k$ with $k\\ne j$, and\nfor any integers $e_0,\\dots,e_{m-1}$ and any $j$ one has\n$$\\Bigl(\\prod_{i=0}^{m-1}\\tau_i^{e_i}\\Bigr)(b_j)\\simeq\\tau_j^{e_j}(b_j).$$",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *Commutation.* Choose representatives $T_i,T_j$ of $\\tau_i,\\tau_j$ supported in closed annular neighbourhoods of $l_i,l_j$; since $l_i\\cap l_j=\\varnothing$ and the annuli can be chosen disjoint and contained in $D^\\circ\\setminus\\Delta$ [L1], the composites $T_iT_j$ and $T_jT_i$ agree: on the support of $T_i$ the map $T_j$ is the identity, and conversely. Hence $[\\tau_i,\\tau_j]=1$ in $G$ for all $i,j$, including $i=j$. [L1, L3]\n\n1.2 *The twists fix the complementary arcs.* If $k\\ne j$, the fixed basic arc $b_k$ is disjoint from the chosen supporting annulus of $\\tau_j$ by [L1]: for $k<j$ it lies outside the enclosed suffix disk, and for $k>j$ it lies inside that disk away from its boundary. Thus the chosen representative is the identity on $b_k$, and $\\tau_j(b_k)\\simeq b_k$. [L1, L2]\n\n2.1 *The composite clause.* Let $e_0,\\dots,e_{m-1}\\in\\mathbb Z$ and fix $j$. For $i\\ne j$ the twist $\\tau_i$ fixes $b_j$ up to isotopy by step 1.2; by induction on the number of factors and the commutation of step 1.1, $\\bigl(\\prod_{i\\ne j}\\tau_i^{e_i}\\bigr)(b_j)\\simeq b_j$ and the factors can be moved past $\\tau_j^{e_j}$ with the identities $\\tau_i\\tau_j=\\tau_j\\tau_i$; hence $\\bigl(\\prod_i\\tau_i^{e_i}\\bigr)(b_j)\\simeq\\tau_j^{e_j}(b_j)$. [step 1.1, step 1.2]\n\n3.1 *Conclusion.* The nested twists commute, fix the complementary basic arcs, and their composites act on $b_j$ through $\\tau_j^{e_j}$ alone. No choice principle is used; all incidences are finite checks in the fixed standard picture. [step 1.1, step 1.2, step 2.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, proof of Lemma 3.6 and Figure 7",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Figure 7 and the proof of Lemma 3.6, printed pp. 20-21"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "deps": [
+          "def-basic-arcs-admissible-curves-and-normal-form",
+          "lem-geometric-intersection-numbers-are-isotopy-invariants",
+          "def-curves-and-geometric-intersection-numbers-on-the-marked-disk",
+          "def-boundary-fixed-mapping-class-group-of-a-punctured-disk"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-standard-disk-twists-generate-a-free-abelian-subgroup",
+        "kind": "lemma",
+        "title": "The standard nested twists generate a free abelian subgroup",
+        "statement": "The subgroup $\\langle[\\tau_0],\\dots,[\\tau_{m-1}]\\rangle$ of $G$ generated by the classes of the standard nested twists is free abelian of rank $m$; equivalently, if $\\prod_{j=0}^{m-1}\\tau_j^{e_j}$ is isotopic to the identity in $G$, then $e_0=\\dots=e_{m-1}=0$.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *Pair windings detect the twist exponents.* For $0\\le k<m$, follow the pair $(q_k,q_m)$ during an unmarked isotopy from the identity to $\\tau_j$, and take the winding of their nonzero difference. In the standard circular model of [L2], if $j\\le k$ both points are inside the rotating disk and their difference makes one full turn, giving $1$. If $j>k$, only $q_m$ moves, and its path lies in a disk not containing $q_k$, so the difference loop has winding zero. Concatenation gives pair winding $\\sum_{j=0}^{k}e_j$ for the standard unmarked isotopy to $\\prod_j\\tau_j^{e_j}$; negative exponents reverse the corresponding paths. [L2, L3]\n\n2.1 *A relation has zero pair windings.* Suppose that product is isotopic to the identity relative to the boundary and the marked set. Append that marked isotopy to the unmarked isotopy in step 1.1; the marks are constant on the appended part, so it does not change the pair windings. This produces a loop $f_t$ in the group of boundary-fixed homeomorphisms of the unmarked unit disk. It contracts by the explicit Alexander formula $A_s(f)(x)=s f(x/s)$ for $|x|\\le s$, $A_s(f)(x)=x$ for $|x|\\ge s$, and $A_0(f)=\\mathrm{id}$. The two formulas agree on $|x|=s$ because $f$ fixes the boundary; each $A_s(f)$ is a homeomorphism, and continuity at $s=0$ follows from $|A_s(f)(x)-x|\\le2s$. Applying this contraction to the loop $f_t$ gives a homotopy of each pair's nonzero difference loop to the constant loop. Thus every winding from step 1.1 is zero. [L3, step 1.1]\n\n3.1 *The triangular equations force all exponents to vanish.* For $k=0$ the zero-winding equation is $e_0=0$. For each $1\\le k<m$, subtract the equation for $k-1$ from that for $k$ to obtain $e_k=0$. Hence the only relation among the commuting twists is the trivial exponent vector. [step 1.1, step 2.1, algebra]\n\n4.1 *Conclusion.* Commutation [L1] defines a surjective homomorphism $\\mathbb Z^m$ onto the generated subgroup, and step 3.1 proves it is injective. Thus that subgroup is free abelian of rank $m$, including $m=1$, when the single pair winding detects $\\tau_0$. The proof uses explicit isotopies and finitely many windings and requires no choice axiom. [L1, step 3.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, proof of Lemma 3.6",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Proof of Lemma 3.6, printed p. 21 (the tau_j generate a free abelian subgroup of rank m)"
+            },
+            {
+              "title": "Benson Farb and Dan Margalit, A Primer on Mapping Class Groups, version 5.0 author draft, Proposition 3.2 with proof",
+              "url": "https://web.archive.org/web/20111027114600id_/http://www.math.uchicago.edu/~margalit/mcg/mcgv50.pdf",
+              "locator": "Proposition 3.2 and its proof, printed pp. 72-74 (i(T_a^k(b),b)=|k| i(a,b)^2)"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "deps": [
+          "cor-geometric-unit-circle-has-fundamental-group-z",
+          "def-basic-arcs-admissible-curves-and-normal-form",
+          "lem-standard-twists-fix-the-complementary-basic-arcs-and-commute",
+          "lem-geometric-intersection-numbers-are-isotopy-invariants",
+          "def-curves-and-geometric-intersection-numbers-on-the-marked-disk"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-khovanov-seidel-bigraded-cover-and-bigraded-curves",
+        "kind": "definition",
+        "title": "The Z^2 cover of the projectivized tangent bundle and bigraded curves",
+        "deps": [
+          "thm-covering-space-lifting-criterion",
+          "thm-uniqueness-of-lifts-from-a-connected-space",
+          "thm-homotopy-lifting-for-covering-maps",
+          "def-axiom-of-choice",
+          "def-curves-and-geometric-intersection-numbers-on-the-marked-disk",
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "def-deck-transformation-and-deck-group",
+          "thm-classification-of-connected-covering-spaces",
+          "thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk",
+          "thm-the-artin-presentation-is-complete-for-geometric-braids"
+        ],
+        "statement": "**The braid action is used only through the mapping class group.** Assume the\nAxiom of Choice ([[def-axiom-of-choice]]), used here only to pass between braid\nclasses and boundary-fixed mapping classes of the punctured disk, so that the\nbraid group acts on bigraded curves through\n$G=\\pi_0\\operatorname{Diff}(D,\\partial D;\\Delta)$ via Artin presentation completeness\n[[thm-the-artin-presentation-is-complete-for-geometric-braids]] and the smooth\nconfiguration-space comparison of Khovanov–Seidel, Section 3b, equation (3.1),\nprinted p. 19. The corresponding topological comparison uses\n[[thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk]]\nand AC. Everything\nelse in this definition — the cover, its deck group and the preferred lifts — is\nproduced by the covering-space classification and the lifting criterion and is\nchoice-free.\n\nLet $(D,\\Delta)$ be the marked disk of\n[[def-curves-and-geometric-intersection-numbers-on-the-marked-disk]], and let\n$$D\\setminus\\Delta\\subseteq\\mathbb C$$\ncarry its subspace topology. Write\n$$P:=\\mathbf P\\bigl(T(D\\setminus\\Delta)\\bigr)$$\nfor the real projectivization of the tangent bundle, the space of tangent lines\n$T_zc$ of curves at unmarked points; the embedding $D\\subset\\mathbb C$\ntrivializes $TD$, so $P$ is identified with $(\\mathbb C^*/\\mathbb R^\\times)\\times(D\\setminus\\Delta)$\nand is a smooth manifold of real dimension $3$ with boundary. Fix once and for all a\npolynomial $h\\in\\mathbb C[z]$ with simple zeros exactly at the points of\n$\\Delta$ (for instance $h(z)=\\prod_{a\\in\\Delta}(z-a)$), and define\n$$\\delta_P\\colon P\\longrightarrow(\\mathbb C^*/\\mathbb R_{>0})\\times(\\mathbb C^*/\\mathbb R_{>0}), \\qquad \\delta_P(\\zeta,z):=\\bigl(h(z)^{-2}\\zeta^2,\\,-h(z)\\bigr).$$\nThis is well defined: $\\zeta$ is a class modulo real scalars, so $\\zeta^2$ is a\nclass modulo positive real scalars and $h(z)^{-2}\\zeta^2$ likewise, and both\ncoordinates are nonzero because $\\zeta\\ne0$ and $h(z)\\ne0$ on $D\\setminus\\Delta$.\n\n**The cover.** Let\n$$\\exp\\colon\\mathbb R^2\\longrightarrow(\\mathbb C^*/\\mathbb R_{>0})^2,\\qquad \\exp(\\xi_1,\\xi_2):=(e^{2\\pi i\\xi_1},e^{2\\pi i\\xi_2}),$$\nthe universal covering of the two-torus\n$(\\mathbb C^*/\\mathbb R_{>0})^2$; it is a regular covering with deck group\n$\\mathbb Z^2$ acting by translation ([[def-covering-map-and-evenly-covered-neighbourhoods]],\n[[def-deck-transformation-and-deck-group]],\n[[thm-classification-of-connected-covering-spaces]]). Define\n$$\\widetilde P:=\\bigl\\{(x,p)\\in\\mathbb R^2\\times P:\\exp(x)=\\delta_P(p)\\bigr\\}$$\nwith the subspace topology and the projection $\\widetilde\\pi(x,p):=p$. Then\n$\\widetilde\\pi:\\widetilde P\\to P$ is a covering map with deck group $\\mathbb Z^2$\nacting by\n$$\\chi(r_1,r_2)(x,p):=(x+(r_1,r_2),\\,p),$$\nthe pullback of the universal covering along $\\delta_P$. This is the source's\n$\\mathbb Z^2$-cover of $P$.\n\n**Bigradings and bigraded curves.** For a curve $c$ (unoriented, as in\n[[def-curves-and-geometric-intersection-numbers-on-the-marked-disk]]) the\ncanonical section is\n$$s_c\\colon c\\setminus\\Delta\\longrightarrow P,\\qquad s_c(z):=T_zc .$$\nIt is well defined because a curve meets $\\Delta$ in at most its two endpoints,\nso $T_zc$ exists for every $z\\in c\\setminus\\Delta$, and it is continuous. A\n**bigrading** of $c$ is a continuous lift\n$$\\widetilde c\\colon c\\setminus\\Delta\\longrightarrow\\widetilde P,\\qquad \\widetilde\\pi\\circ\\widetilde c=s_c,$$\nof the canonical section. Pairs $(c,\\widetilde c)$ consisting of a curve and a\nbigrading are **bigraded curves**; we often write $\\widetilde c$ in place of\n$(c,\\widetilde c)$. A curve need not admit a bigrading — the obstruction for\nsimple closed curves is computed by the source — and precisely the arcs admit bigradings. An arc with its marked endpoints removed is contractible, so its tangent section lifts. A simple closed curve enclosing $k\\ge1$ marked points has tangent-section monodromy $\\pm(2-2k,k)\\ne0$: the tangent makes one full turn and $h$ winds $k$ times, so the two coordinates of $\\delta_P$ wind $2-2k$ and $k$. Hence its tangent section cannot lift (Khovanov--Seidel, Lemma 3.12, printed p. 24). The bigradings of any fixed arc form a $\\mathbb Z^2$-torsor by uniqueness of path lifting, and are acted on by the deck group $\\chi$:\n$$\\chi(r_1,r_2)\\widetilde c:=\\chi(r_1,r_2)\\circ\\widetilde c .$$\n\n**The diffeomorphism and mapping-class actions.** Let $\\mathcal D:=\\operatorname{Diff}(D,\\partial D;\\Delta)$ be the actual orientation-preserving diffeomorphism group; its component group is the mapping class group $G$ used in the marked-disk Definition. For $f\\in\\mathcal D$, the derivative induces $P\\to P$, $[v]\\mapsto[Df(v)]$. It preserves the monodromy homomorphism: a fibre loop maps to a fibre loop of degree one, and a positively oriented puncture loop maps to the corresponding loop about the permuted puncture. No extra fibre winding occurs because $Df:D\\to\\mathrm{GL}^+(2,\\mathbb R)$ is defined on the whole disk, so its restriction to any loop in $D$ is null-homotopic. The monodromy images of a fibre generator and a puncture generator are $(1,0)$ and $(-2,1)$; they generate $\\mathbb Z^2$, so the pullback cover is connected and its deck group is exactly $\\mathbb Z^2$.\n\nThere is a unique deck-equivariant preferred lift $\\widetilde f$ fixing every point of the fibre over one chosen boundary tangent line $T_z\\partial D$. This base tangent line is fixed by the derivative, so the lifting criterion gives the based lift ([[thm-covering-space-lifting-criterion]]), and monodromy preservation makes it deck-equivariant. Along the connected boundary tangent section the derivative is the identity; lifting its paths shows that $\\widetilde f$ fixes every fibre over every $T_w\\partial D$. Uniqueness of based lifts ([[thm-uniqueness-of-lifts-from-a-connected-space]]) gives $\\widetilde{fg}=\\widetilde f\\widetilde g$. The action on bigraded curves is parametrization-aware: the bigrading of $f(c)$ at $f(z)$ is $\\widetilde f(\\widetilde c(z))$. An isotopy of actual diffeomorphisms lifts from the identity by homotopy lifting ([[thm-homotopy-lifting-for-covering-maps]]) and hence carries bigraded curves through bigraded isotopies; therefore the action on bigraded isotopy classes descends to $G=\\pi_0(\\mathcal D)$.\n**Isotopy.** A **bigraded isotopy** between bigraded curves\n$(\\widetilde c_0,\\widetilde c_1)$ is an isotopy $c_t$ of curves, together with\na continuous family of lifts $\\widetilde c_t$ through bigraded curves; the deck\naction and the $\\mathcal D$-action take bigraded isotopy classes to bigraded isotopy\nclasses. Two bigraded curves are **isotopic** when such a family exists, and\nisotopy relates only bigradings of curves in the same curve-isotopy class.",
+        "strategy": "Transcribe the source's Section 3d, first sentence through the definition of isotopy, in the concrete pullback form; record that the covering exists by the classification of covering spaces, that the deck group is $\\mathbb Z^2$, and that the preferred lift of $f$ exists uniquely by the lifting criterion and the homotopy lifting property. Keep the trivialization and the polynomial $h$ explicit so that all objects are sets. The cover, its deck group and the preferred lifts are produced by the covering-space classification and the lifting criterion and are choice-free; AC is used only for the braid-to-mapping-class identification. The braid dictionary uses Artin-presentation completeness and the explicit smooth configuration-space comparison in KS equation (3.1), p. 19, not the homeomorphism supplier alone.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Section 3d",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Section 3d, printed pp. 23-24 (the Z^2-cover, the map delta_P, bigradings, the preferred lifts)"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "def-khovanov-seidel-bigrading-cover-and-local-intersection-indices",
+        "kind": "definition",
+        "title": "Local indices and bigraded intersection numbers",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-khovanov-seidel-bigraded-cover-and-bigraded-curves",
+          "def-curves-and-geometric-intersection-numbers-on-the-marked-disk",
+          "def-the-laurent-polynomial-ring",
+          "lem-geometric-intersection-numbers-are-isotopy-invariants"
+        ],
+        "statement": "Assume AC ([[def-axiom-of-choice]]) for the supplied representative-independence\nand isotopy-invariance assertions for $I$ used in (B1) and the proof below.\nThe local-index construction and finite Laurent sums require no additional choice.\n\nWork in the situation of\n[[def-khovanov-seidel-bigraded-cover-and-bigraded-curves]]: $(D,\\Delta)$ is the\nmarked disk, $P$ the projectivized tangent bundle and\n$\\widetilde\\pi\\colon\\widetilde P\\to P$ the $\\mathbb Z^2$-cover with deck action\n$\\chi$. Let $\\widetilde c_0,\\widetilde c_1$ be bigraded curves meeting\ntransversally at a point $z\\in D^\\circ\\setminus\\partial D$; $z$ may or may not\nlie in $\\Delta$.\n\n**The local index.** Fix a small circle $l\\subset D\\setminus\\Delta$ around $z$\nand an embedded arc $\\alpha\\colon[0,1]\\to l$ moving clockwise around $l$ with\n$\\alpha^{-1}(c_0)=\\{0\\}$ and $\\alpha^{-1}(c_1)=\\{1\\}$, and choose a smooth path\n$$\\pi\\colon[0,1]\\longrightarrow P,\\qquad \\pi(t)\\in P_{\\alpha(t)},$$\nover $\\alpha$ from $T_{\\alpha(0)}c_0$ to $T_{\\alpha(1)}c_1$ which is never\ntangent to $\\alpha$, that is, $\\pi(t)\\ne T_{\\alpha(t)}l$ for all $t$. Lift\n$\\pi$ to a path $\\widetilde\\pi\\colon[0,1]\\to\\widetilde P$ with\n$\\widetilde\\pi(0)=\\widetilde c_0(\\alpha(0))$; then necessarily\n$\\widetilde c_1(\\alpha(1))=\\chi(\\mu_1,\\mu_2)\\widetilde\\pi(1)$ for a unique\n$(\\mu_1,\\mu_2)\\in\\mathbb Z^2$. The **local index** is\n$$\\mu^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1;z):=(\\mu_1,\\mu_2)\\in\\mathbb Z^2 .$$\nIt is independent of the choices of $l$, of the admissible $\\alpha$, of the\npath $\\pi$ and of the chosen lift, by the proof below.\n\n**The bigraded intersection number.** Let $\\widetilde c_0,\\widetilde c_1$ be\nbigraded curves with $c_0\\cap c_1\\cap\\partial D=\\varnothing$. Choose a curve\n$c_1'\\simeq c_1$ in minimal intersection with $c_0$; by the free deck action on bigraded isotopy classes\n(Khovanov--Seidel, Lemma 3.13, printed p. 24), there is a unique bigrading $\\widetilde c_1'$ of $c_1'$ with\n$\\widetilde c_1'\\simeq\\widetilde c_1$ (the deck group acts freely on bigradings\nof a fixed curve, and a fixed bigrading transported along an isotopy determines the\nresulting bigraded isotopy class). Put\n$$I^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1):= (1+q_1^{-1}q_2)\\!\\!\\sum_{z\\in(c_0\\cap c_1')\\setminus\\Delta}\\!\\!q_1^{\\mu_1(z)}q_2^{\\mu_2(z)} +\\!\\!\\sum_{z\\in c_0\\cap c_1'\\cap\\Delta}\\!\\!q_1^{\\mu_1(z)}q_2^{\\mu_2(z)}\\in \\mathbb Z[q_1^{\\pm1},q_2^{\\pm1}],$$\nwhere $(\\mu_1(z),\\mu_2(z))=\\mu^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1';z)$\nand the coefficients lie in the two-variable Laurent polynomial ring\n[[def-the-laurent-polynomial-ring]] (iterated once; its monomials\n$q_1^{r_1}q_2^{r_2}$, $r_1,r_2\\in\\mathbb Z$, are units). The number\n$I^{\\mathrm{bigr}}$ is a Laurent polynomial: the intersection $c_0\\cap c_1'$ is\nfinite and the sum is finite. For curves with\n$c_0\\cap c_1\\cap\\partial D\\ne\\varnothing$ the number is extended by the positive\nboundary flow: take the flow $(f_t)$ of the boundary vector field, lift it to a\nflow $(\\widetilde f_t)$ on $\\widetilde P$ with $\\widetilde f_0=\\mathrm{id}$, and\nset\n$$I^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1):= I^{\\mathrm{bigr}}\\bigl(\\widetilde f_t(\\widetilde c_0),\\widetilde c_1\\bigr) \\qquad(t>0\\text{ small}).$$\n\n**Properties.** The following hold, and the first four are proved below.\n\n- **(B1)** Setting $q_1=q_2=1$ and dividing by two recovers the ordinary\n  geometric intersection number: $I^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1)|_{q_1=q_2=1}=2I(c_0,c_1)$\n  ([[def-curves-and-geometric-intersection-numbers-on-the-marked-disk]]).\n- **(B2)** $I^{\\mathrm{bigr}}(\\widetilde f(\\widetilde c_0),\\widetilde f(\\widetilde c_1))=I^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1)$\n  for every actual $f\\in\\mathcal D=\\operatorname{Diff}(D,\\partial D;\\Delta)$, with $\\widetilde f$ the preferred lift; equivalently this holds for the induced mapping-class action on bigraded isotopy classes.\n- **(B3)** $I^{\\mathrm{bigr}}(\\widetilde c_0,\\chi(r_1,r_2)\\widetilde c_1)=q_1^{r_1}q_2^{r_2}I^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1)$\n  and $I^{\\mathrm{bigr}}(\\chi(-r_1,-r_2)\\widetilde c_0,\\widetilde c_1)=q_1^{r_1}q_2^{r_2}I^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1)$.\n- **(B4)** If $c_0\\cap c_1\\cap\\partial D=\\varnothing$ and\n  $I^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1)=\\sum a_{r_1,r_2}q_1^{r_1}q_2^{r_2}$,\n  then $I^{\\mathrm{bigr}}(\\widetilde c_1,\\widetilde c_0)=\\sum a_{r_1,r_2}q_1^{-r_1}q_2^{1-r_2}$.\n- $I^{\\mathrm{bigr}}$ is independent of the choices of $c_1'$ and\n  $\\widetilde c_1'$ and is an invariant of the isotopy classes of\n  $(\\widetilde c_0,\\widetilde c_1)$.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *The local index is well defined.* For a fixed clockwise arc $\\alpha$, trivialize the projective tangent bundle along $\\alpha$ so that its circle tangent line is a fixed forbidden point of $\\mathbb RP^1$. The allowed fibre is $\\mathbb RP^1\\setminus\\{\\text{point}\\}\\cong\\mathbb R$, so any two admissible paths with the prescribed endpoint tangent lines are homotopic through admissible paths relative to endpoints. Homotopy lifting then gives the same lifted endpoint and index. Shrinking the small circle and straightening the two curve germs yields homotopic data, so the index is independent of these choices. At a marked endpoint there is one clockwise sector. At an unmarked crossing there are two sectors; in the straight-line model a half-turn identifies them and acts trivially on projective tangent lines. Their base-path comparison is contained in an unmarked disk and their fibre paths agree, so they have identical monodromy after transporting the curve bigradings through the disk. Thus the two admissible sectors give the same index. These are the local models of Khovanov--Seidel printed p. 25, Figure 10. [L1, L4]\n\n1.2 *Properties (B3) and (B4).* For (B3), replacing $\\widetilde c_1$ by $\\chi(r_1,r_2)\\widetilde c_1$ adds $(r_1,r_2)$ to the endpoint of the lifted path, so by the definition of the local index and the deck action each $\\mu^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1;z)$ is replaced by $\\mu^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1;z)+(r_1,r_2)$, and the displayed sum is multiplied by $q_1^{r_1}q_2^{r_2}$ by [L3]; the second identity is the same computation with the roles of the two arguments exchanged. For (B4), assume minimal intersection and let $z$ be an intersection point; exchanging the two arguments reverses the direction of the arc $\\alpha$ around $l$, so the local indices satisfy $\\mu^{\\mathrm{bigr}}(\\widetilde c_1,\\widetilde c_0;z)=(1,0)-\\mu^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1;z)$ when $z\\notin\\Delta$ and $(0,1)-\\mu^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1;z)$ when $z\\in\\Delta$, since reversing the direction adds the deck element corresponding to one full turn of the tangent line along the small circle, which is $(1,0)$ in the interior case and $(0,1)$ at a marked point; the interior contribution of $z$ to $I^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1)$ is $(1+q_1^{-1}q_2)q_1^{a}q_2^{b}$ with $(a,b)=\\mu^{\\mathrm{bigr}}(\\widetilde c_0,\\widetilde c_1;z)$, while the contribution of the same point to $I^{\\mathrm{bigr}}(\\widetilde c_1,\\widetilde c_0)$ is $(1+q_1^{-1}q_2)q_1^{1-a}q_2^{-b}=q_1^{1-a}q_2^{-b}+q_1^{-a}q_2^{1-b}$, which is the sum of the two monomials obtained from the contributions of the original summand by applying the transformation $F(q_1,q_2)\\mapsto q_2F(q_1^{-1},q_2^{-1})$; summing over the finitely many points (and treating marked endpoints the same way without the $(1+q_1^{-1}q_2)$ factor) gives the stated reversal rule. [L1, L3]\n\n2.1 *B1, B2 and independence of minimal representatives.* Bigraded curves are arcs, by the obstruction computation in [L1]; there is no bigraded simple-closed-curve exceptional case. Setting $q_1=q_2=1$ makes each unmarked contribution $2$ and each marked-endpoint contribution $1$, so [L2] gives B1. For nonisotopic arcs, the relative minimal-position comparison of [L5] supplies an isotopy fixing $c_0$ setwise between minimal representatives. Lift that isotopy; its returned bigrading on $c_0$ equals the original by the free deck action on isotopy classes ([L5]), so it transports every local index unchanged. For isotopic arcs with no common boundary endpoint, both endpoints are marked; the isotopic-minimal-position statement of [L5] (Figure 5) reduces to the two small push-offs of the same arc. For a small self push-off with the transported bigrading, the two marked-end indices are $(0,0)$ and $(0,1)$. To compute them, straighten the arc near an endpoint $q$ and write $h(z)=(z-q)a(z)$ with $a$ nonvanishing on the small disk. In the clockwise sector the radial tangent and $z-q$ rotate together, so the first coordinate $h(z)^{-2}\\zeta^2$ has zero winding. At one endpoint the clockwise comparison is the short sector, giving index $(0,0)$; at the other it differs from the bigrading transport by one clockwise full turn, giving endpoint index $(0,1)$ because $\\mu$ compares the curve lift to the path lift. The other push-off exchanges the two ends. Thus a relative deck shift $(r_1,r_2)$ gives total contribution $q_1^{r_1}q_2^{r_2}(1+q_2)$. This also satisfies the reversal identity of step 1.2 and agrees with the source type-VI table in [L5]. Thus the two choices agree. This proves independence and bigraded isotopy invariance. For B2, an orientation-preserving diffeomorphism maps the small circle and clockwise sector to admissible local data after deformation; its deck-equivariant lift sends the endpoint relation defining the index to the identical relation, and preserves marked/unmarked points and minimal intersection. Hence it preserves each summand. The boundary-flow extension is compatible with these arguments: two sufficiently small positive pushes are joined by a flow interval with no endpoint passing, and transporting a field by a boundary-fixed diffeomorphism preserves its positive direction. Its lift starts at the identity, so no deck ambiguity occurs. [L1, L2, L3, L5, step 1.1, step 1.2]\n\n3.1 *Conclusion.* The local index and the bigraded intersection number are well defined functions of the choices of bigradings and their isotopy classes, with the properties (B1)–(B4), and the definition is meaningful for all bigraded curves; no choice principle beyond that already recorded in the cover is used. [step 1.1, step 1.2, step 2.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Section 3d",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Section 3d, printed pp. 24-26 (local indices, I^bigr and properties (B1)-(B4))"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-bigradings-of-curves-exist-and-are-unique-up-to-the-deck-action",
+        "kind": "lemma",
+        "title": "Existence and rigidity of bigradings",
+        "deps": [
+          "def-khovanov-seidel-bigraded-cover-and-bigraded-curves",
+          "def-curves-and-geometric-intersection-numbers-on-the-marked-disk",
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "def-deck-transformation-and-deck-group",
+          "thm-covering-space-lifting-criterion",
+          "thm-homotopy-lifting-for-covering-maps"
+        ],
+        "statement": "A curve $c$ admits a bigrading if and only if $c$ is not a simple closed curve; when it does, any two bigradings differ by a unique element of the deck group $\\mathbb Z^2$, and moreover the $\\mathbb Z^2$-action on isotopy classes of bigraded curves is free, and a bigraded curve is never isotopic to a nontrivially shifted copy of itself. Consequently a bigrading of a non-closed curve is unique up to the deck action, and isotopies of curves lift uniquely to isotopies of bigraded curves once one bigrading is fixed.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *Non-closed curves admit bigradings.* If $c$ is an arc, its underlying parameter interval with the marked endpoints removed is contractible [L3], in particular simply connected and locally path connected; the pullback of the covering $\\widetilde P$ along $s_c$ is then trivial by the classification of coverings over a simply connected base, so it admits a section, which is exactly a bigrading of $c$. [L1, L2, L3]\n\n1.2 *Simple closed curves do not admit bigradings.* Let $c$ be a simple closed curve. By Jordan's theorem it bounds a disk $E\\subset D$; since $c$ is essential in $D^\\circ\\setminus\\Delta$, $E$ contains at least one marked point, say $k\\ge1$ of them. A bigrading would give a section of the pullback covering over $c$, hence a trivialization of the restriction of $\\widetilde P$ to $c$, which is impossible because the cohomology class classifying $\\widetilde P$ pairs with the class $[c]$ as $\\pm(2-2k,k)\\ne(0,0)$ by [L4]. Hence no bigrading exists. [L2, L4]\n\n1.3 *Uniqueness up to the deck action.* Suppose $c$ admits bigradings $\\widetilde c$ and $\\widetilde c'$. Both are lifts of the same section $s_c$ over the connected base $c\\setminus\\Delta$ [L3], so $\\widetilde c'(z)=\\chi(\\delta(z))\\widetilde c(z)$ for a continuous function $\\delta\\colon c\\setminus\\Delta\\to\\mathbb Z^2$; since $\\mathbb Z^2$ is discrete this function is locally constant, and since $c\\setminus\\Delta$ is connected it is constant, say $\\delta\\equiv(r_1,r_2)$. Thus $\\widetilde c'=\\chi(r_1,r_2)\\widetilde c$, and $(r_1,r_2)$ is unique because $\\chi$ acts freely on each fibre. [L1, L2, L3]\n\n1.4 *Freeness on isotopy classes.* Parametrize the given bigraded isotopy by smooth embedded arcs $\\gamma_t:[0,1]\\to D$, choosing the parametrizations so that $\\gamma_1=\\gamma_0$; this is possible by interpolating the increasing reparametrization of the returned arc. The base and tangent-line traces at each unmarked parameter value are therefore closed loops. If the arc has a boundary endpoint, that endpoint is fixed, and its tangent line stays transverse to the boundary throughout the isotopy. Its projective tangent trace lies in $\\mathbb RP^1$ minus the boundary tangent line, a contractible interval; its base trace is constant. Hence its cover monodromy is zero. If both endpoints are distinct marks $q_0,q_1$, the loops $\\kappa_s(t)=\\gamma_t(s)$ for $0<s<1$ are freely homotopic as $s$ varies, and thus have the same winding about every mark. Near $q_0$ all windings except the one about $q_0$ vanish, while near $q_1$ all except the one about $q_1$ vanish. Comparing these tuples shows that every winding is zero. For small $s>0$, $\\kappa_s(t)-q_0=s\\gamma_t'(0)+o(s)$ uniformly in $t$, so the nonzero vector loop $\\gamma_t'(0)$ also has winding zero; the tangent-line trace at $\\gamma_t(s)$ converges to its projectivization, and thus has zero fibre winding. The two coordinates of the covering monodromy in [L4] are consequently zero. The deck shift is constant along the connected arc, so in both endpoint cases $(r_1,r_2)=0$. This is the endpoint comparison of Khovanov--Seidel Lemma bigrading-isotopy, printed p. 24, with the tangent contribution made explicit. [L1, L2, L3, L4]\n\n2.1 *Conclusion.* A bigrading exists exactly for non-closed curves (steps 1.1, 1.2) and is unique up to a unique deck element (step 1.3); the deck action on isotopy classes is free (step 1.4). Since isotopy liftings, when they exist, are unique by the same argument as step 1.3 applied along the isotopy, the final assertions follow. No choice principle is used beyond the constructions already recorded in the cover. [step 1.1, step 1.2, step 1.3, step 1.4] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Lemmas 3.12 and 3.13",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Lemmas 3.12 and 3.13 with their proofs, printed pp. 24-25"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-the-preferred-lift-of-a-half-twist-shifts-the-bigrading",
+        "kind": "lemma",
+        "title": "The preferred lift of a half twist shifts the bigrading by chi(-1,1)",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-basic-arcs-admissible-curves-and-normal-form",
+          "def-elementary-geometric-half-twist",
+          "def-curves-and-geometric-intersection-numbers-on-the-marked-disk",
+          "def-khovanov-seidel-bigraded-cover-and-bigraded-curves",
+          "lem-bigradings-of-curves-exist-and-are-unique-up-to-the-deck-action",
+          "def-khovanov-seidel-bigrading-cover-and-local-intersection-indices"
+        ],
+        "statement": "Let $c$ be a curve joining two marked points, $\\tau$ the half twist along $c$\n(the elementary geometric half twist of [[def-elementary-geometric-half-twist]], supported in a regular neighbourhood of\n$c$), and $\\widetilde\\tau$ its preferred lift to the cover $\\widetilde P$ of\n[[def-khovanov-seidel-bigraded-cover-and-bigraded-curves]]. Then\n$$\\widetilde\\tau(\\widetilde c)=\\chi(-1,1)\\widetilde c$$\nfor every bigrading $\\widetilde c$ of $c$. For the following bigraded intersection-number consequence, assume AC\n([[def-axiom-of-choice]]) as inherited from its well-definedness suppliers.\nIn particular, for $1\\le k\\le m$ and a basic arc of\n[[def-basic-arcs-admissible-curves-and-normal-form]]\n$\\widetilde b_k$ and its preferred half-twisted image one has\n$$I^{\\mathrm{bigr}}\\bigl(\\widetilde b_k,\\widetilde\\tau_k(\\widetilde c)\\bigr) =(q_1^{-1}q_2)\\,I^{\\mathrm{bigr}}(\\widetilde b_k,\\widetilde c),$$\nthe factor responsible for the shift $u\\mapsto u+1$ in the string tables.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *The deck element exists and is unique.* Since $\\tau(c)=c$, the preferred lift sends the bigrading $\\widetilde c$ of $c$ to a bigrading $\\widetilde\\tau(\\widetilde c)$ of the same curve $c$; by [L2] there is a unique $(r_1,r_2)\\in\\mathbb Z^2$ with $\\widetilde\\tau(\\widetilde c)=\\chi(r_1,r_2)\\widetilde c$, and it is independent of the chosen bigrading because the deck group is abelian and acts freely. The whole content of the lemma is the computation of $(r_1,r_2)$. [L1, L2]\n\n1.2 *The test loop in $P$ and its class.* Use the standard rotational half-twist representative along $c$, conjugated from a round support disk; its midpoint is its unique fixed point on $c$, its derivative there is $-I$, and it is the identity near $\\partial D$. Choose the standard embedded path $\\beta:[0,1]\\to D\\setminus\\Delta$ from the boundary to that midpoint, as in source Figure 9, with nonzero endpoint tangents. Let $\\pi\\colon[0,2]\\to P$ be the closed path $\\pi(t):=\\mathbb R\\beta'(t)\\ \\ (0\\le t\\le1),\\qquad \\pi(t):=D\\tau\\bigl(\\mathbb R\\beta'(2-t)\\bigr)\\ \\ (1\\le t\\le2),$ where $\\mathbb R v$ denotes the tangent line spanned by $v$; the two halves match at $t=1$ because $D\\tau=-I$ at the midpoint fixes every projective tangent line, and the endpoint lines at the boundary match because $\\tau$ is the identity nearby, and $\\pi$ is a loop in $P$. For this standard path, the source's Figure 9 computation gives $[\\pi]=-[\\mathbb RP^1\\times\\mathrm{point}]-[\\mathrm{point}\\times\\lambda_z]$ for one endpoint $z$ of $c$; this is the literature calculation in Khovanov--Seidel Lemma half-twist, printed pp. 24--25. Transport by the support-disk coordinates preserves its value under the covering class because all positive puncture loops have monodromy $(-2,1)$. [L1]\n\n\n2.1 *The value of the deck element.* By the definition of the local index and the preferred lift, the deck element $(r_1,r_2)$ comparing $\\widetilde\\tau(\\widetilde c)$ with $\\widetilde c$ is obtained by evaluating the classifying class $C$ on the loop of tangent lines swept by the preferred lift of $\\tau$ along $c$, which is the class $[\\pi]$ of step 1.2; hence $(r_1,r_2)=-C([\\pi])=C([\\mathbb RP^1\\times\\text{point}])+C([\\text{point}\\times\\lambda_z])=(1,0)+(-2,1)=(-1,1)$. This proves the main formula. [step 1.1, step 1.2]\n\n3.1 *The consequence for the string tables.* The half twist $\\tau_k$ along $b_k$ is the preferred lift acting on bigraded curves, so by [L3] and the main formula $I^{\\mathrm{bigr}}\\bigl(\\widetilde b_k,\\widetilde\\tau_k(\\widetilde c)\\bigr) =I^{\\mathrm{bigr}}\\bigl(\\widetilde\\tau_k^{-1}\\widetilde b_k,\\widetilde c\\bigr) =I^{\\mathrm{bigr}}\\bigl(\\chi(1,-1)\\widetilde b_k,\\widetilde c\\bigr) =(q_1^{-1}q_2)I^{\\mathrm{bigr}}\\bigl(\\widetilde b_k,\\widetilde c\\bigr),$ where the first equality uses the invariance of $I^{\\mathrm{bigr}}$ under the preferred lifts and the second uses that $\\widetilde\\tau_k^{-1}$ acts on $\\widetilde b_k$ by $\\chi(1,-1)$ by the main formula applied at index $k$. Applied to a $k$-string, this is the factor $(q_1^{-1}q_2)^u$ of the source's table. For other representatives of the same half-twist class, the same identities hold on bigraded isotopy classes by the homotopy-lifting and freeness suppliers. No choice principle is used beyond the covering construction already recorded. [step 2.1, L3] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Lemma 3.14",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Lemma 3.14 with its proof and Figure 9, printed p. 24"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-normal-form-string-types-and-their-geometric-intersection-contributions",
+        "kind": "lemma",
+        "title": "String types and their contributions to geometric intersection numbers",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-basic-arcs-admissible-curves-and-normal-form",
+          "lem-geometric-intersection-numbers-are-isotopy-invariants",
+          "def-curves-and-geometric-intersection-numbers-on-the-marked-disk"
+        ],
+        "statement": "Assume AC ([[def-axiom-of-choice]]) for the supplied well-definedness and\nisotopy invariance of geometric intersection numbers.\n\nLet $c$ be an admissible curve in normal form with respect to a basic system and\nthe vertical curves, and fix $0\\le k\\le m$\n([[def-basic-arcs-admissible-curves-and-normal-form]]). Then the ordinary\ngeometric intersection number $I(b_k,c)$ is the sum, over the $k$-strings of\n$c$, of the following contributions:\n\n- for $k>0$: a $k$-string of type $\\mathrm I$, $\\mathrm{II}$, $\\mathrm{II}'$ or\n  $\\mathrm{VI}$ contributes $1$; one of type $\\mathrm{III}$ or\n  $\\mathrm{III}'$ contributes $1/2$; all other types contribute $0$;\n- for $k=0$: the types $\\mathrm{VII},\\mathrm{VIII},\\mathrm{IX},\\mathrm X,\\mathrm{XI}$\n  contribute $0,1,1/2,1,1/2$ respectively.\n\nFor an integer-indexed family with $k>0$, applying the half twist about $b_k$ to a string type $u$ shifts the type index\nby one, $u\\mapsto u+1$, so together with the base contributions the table\ndetermines $I(b_k,c)$ completely.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *Reduction to the string models.* The fixed basic arc $b_k$ is contained in $D_k\\cup D_{k+1}$, with its unique dividing-arc crossing on $d_k$. Use the source's relative minimal-position construction, fixing all $d_i$ for $i\\ne k$ SETWISE: remove innermost removable bigons within the two-region union, allowing the string ends to slide along its dividing boundary. The resulting model realizes the source lower bound for every string simultaneously (KS proof of the string-contribution lemma, printed pp. 29–31). For $k=0$, make the prescribed small positive boundary push first; its cyclic endpoint order is unchanged during this local comparison. The weighted intersection count of the resulting minimal model is consequently the sum of the individual model counts, not an alleged additivity of $I$ under arbitrary isotopies. [L1, L2, L3]\n\n2.1 *The contributions of the individual types.* For each of the finite types, the source's Figures 15-18 exhibit the string and its position relative to $b_k$, and the count is a finite local computation: a type $\\mathrm I$, $\\mathrm{II}$ or $\\mathrm{II}'$ string crosses $b_k$ once, while type $\\mathrm{VI}$ is the basic arc itself and its minimal push-off has two common marked endpoints, a type $\\mathrm{III}$ or $\\mathrm{III}'$ string has exactly one marked endpoint in common with $b_k$ and no interior crossing, and the types $\\mathrm{IV},\\mathrm{IV}',\\mathrm V,\\mathrm V'$ are disjoint from $b_k$; correspondingly the contributions are $1$, $1/2$ and $0$ by the half-weight convention. For $k=0$ the five exceptional types give the listed values $0,1,1/2,1,1/2$. Each case is a local picture: the explicit isotopy of step 1.1 attains the displayed lower bound because it removes all other intersections with $b_k$. [step 1.1, L2, L3]\n\n3.1 *The shift of the index.* For $k>0$ and an integer-indexed family, [L1] says the half twist $t_k$ maps the set of $k$-strings of $c$ bijectively onto those of $t_k(c)$ and maps the type $u$ to the type $u+1$ by definition of the families [L3]; the contribution table is therefore indexed by the integer $u$ with the fixed base values of step 2.1, and $t_k$ fixes $b_k$ setwise. Simultaneous transport preserves the weighted intersection count, so $I(b_k,t_k(c))=I(b_k,c)$; hence the base values apply to every integer $u$, positive or negative. Summing these values and the exceptional contributions determines $I(b_k,c)$. [step 2.1, L1, L3]\n\n4.1 *Conclusion.* $I(b_k,c)$ is the sum of the contributions of its $k$-strings as displayed, and the type shift by the half twist is $u\\mapsto u+1$; no choice principle is used, the verification being a finite case check in the fixed standard picture. [step 1.1, step 2.1, step 3.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Lemma 3.18",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Lemma 3.18 with its outline of proof, printed pp. 29-31; Figures 15-18"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers",
+        "kind": "lemma",
+        "title": "Bigraded string types and their contributions to I^{bigr}",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-khovanov-seidel-bigrading-cover-and-local-intersection-indices",
+          "def-basic-arcs-admissible-curves-and-normal-form",
+          "lem-the-preferred-lift-of-a-half-twist-shifts-the-bigrading",
+          "lem-normal-form-string-types-and-their-geometric-intersection-contributions",
+          "lem-bigradings-of-curves-exist-and-are-unique-up-to-the-deck-action"
+        ],
+        "statement": "Assume AC ([[def-axiom-of-choice]]) for the supplied well-definedness and\nisotopy invariance of ordinary and bigraded intersection numbers.\n\nFix bigradings $\\widetilde b_k,\\widetilde d_k$ of the basic arcs and vertical\ncurves normalized by\n$$I^{\\mathrm{bigr}}(\\widetilde d_k,\\widetilde b_k)=1+q_1^{-1}q_2, \\qquad I^{\\mathrm{bigr}}(\\widetilde b_k,\\widetilde b_{k+1})=1 \\qquad(0\\le k\\le m\\text{ in the first equation},\\ 0\\le k<m\\text{ in the second}),$$\nwhich determine the bigradings uniquely up to an overall shift\n$\\chi(r_1,r_2)$. For every admissible bigraded curve $\\widetilde c$ in normal form the bigraded\nintersection number $I^{\\mathrm{bigr}}(\\widetilde b_k,\\widetilde c)$ is computed\nby summing the contributions of the bigraded $k$-strings of $\\widetilde c$\naccording to the following table: for $k>0$,\n$$I_0(0,0)\\mapsto q_1+q_2,\\quad \\mathrm{II}_0(0,0)\\mapsto q_1+q_2,\\quad \\mathrm{II}'_0(0,0)\\mapsto 1+q_1q_2^{-1},\\quad \\mathrm{III}_0(0,0)\\mapsto q_2,\\quad \\mathrm{III}'_0(0,0)\\mapsto1,$$\nthe exceptional types $\\mathrm{IV},\\mathrm{IV}',\\mathrm V,\\mathrm V'$ all\ncontribute $0$, and $\\mathrm{VI}(0,0)$ contributes $1+q_2$; a general type\n$\\mathrm I_u(r_1,r_2)$ (and likewise for the other families) contributes the\nvalue of its $u=0$ member multiplied by $q_1^{r_1}q_2^{r_2}(q_1^{-1}q_2)^u$;\nfor $k=0$ the zero-parameter types\n$\\mathrm{VII}(0,0),\\mathrm{VIII}(0,0),\\mathrm{IX}(0,0),\\mathrm X(0,0),\\mathrm{XI}(0,0)$\ncontribute $0$, $q_1q_2^{-1}+1$, $1$, $q_1q_2^{-1}+1$, $1$ respectively;\na type with parameters $(r_1,r_2)$ has this value multiplied by\n$q_1^{r_1}q_2^{r_2}$. In particular, $\\mathrm{VI}(r_1,r_2)$ means\n$\\chi(r_1,r_2)\\widetilde b_k$ and $\\mathrm{XI}(r_1,r_2)$ means\n$\\chi(r_1,r_2)\\widetilde b_0$, as in the source’s printed p. 32.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *Normalization.* Each $d_k,b_k$ pair has one interior crossing, so its bigraded value is a monomial times $1+q_1^{-1}q_2$; each defined adjacent pair $b_k,b_{k+1}$ has one common marked endpoint, so its value is a monomial. Choose the bigrading of $b_0$, then successively shift $b_{k+1}$ to make each adjacent monomial $1$, and finally shift each $d_k$ to make its crossing monomial $1$. Deck freeness makes these relative shifts unique. All simultaneous shifts of both families cancel in the relative indices and preserve these equations; hence the only ambiguity is a common overall shift. A shift of $\\widetilde c$ alone multiplies its contributions by the stated monomial. At $q_1=q_2=1$ the normalizations are $2=2I(d_k,b_k)$ and $1=2I(b_k,b_{k+1})$, consistent with the ordinary half weights. [L1, L2, L3]\n\n1.2 *The tables at the base parameters.* Put each string into the relative minimal model used in the ordinary contribution lemma. The clockwise local-index paths in the decorated Figures 12–18 give, for $k>0$, an interior index $(1,0)$ for $\\mathrm I_0,\\mathrm{II}_0$, an interior index $(1,-1)$ for $\\mathrm{II}'_0$, and a marked-end index $(0,1)$ for $\\mathrm{III}_0$ and $(0,0)$ for $\\mathrm{III}'_0$. The types $\\mathrm{IV},\\mathrm{IV}',\\mathrm V,\\mathrm V'$ are disjoint from $b_k$. Multiplying interior monomials by $1+q_1^{-1}q_2$ gives $q_1+q_2,q_1+q_2,1+q_1q_2^{-1}$; the single marked-end monomials give $q_2,1$. For $\\mathrm{VI}(0,0)=\\widetilde b_k$, a minimal self push-off has marked-end indices $(0,0),(0,1)$, hence value $1+q_2$. For $k=0$, the positive boundary push gives no intersection for $\\mathrm{VII}$, an interior index $(1,-1)$ for $\\mathrm{VIII},\\mathrm X$, and a marked-end index $(0,0)$ for $\\mathrm{IX},\\mathrm{XI}$, yielding $0,1+q_1q_2^{-1},1,1+q_1q_2^{-1},1$. These are the local-index readings in the source’s bigraded string table; the ordinary relative minimal-position construction assigns each intersection to its string and realizes all model counts simultaneously. [L2, L4]\n\n2.1 *The family index and deck parameters.* Write $C(\\widetilde b_k,\\widetilde g)$ for the local contribution of a bigraded $k$-string. Transporting its local-index paths by the preferred half twist and using [L3] gives $C(\\widetilde b_k,\\widetilde t_k\\widetilde g)=C(\\widetilde t_k^{-1}\\widetilde b_k,\\widetilde g)=C(\\chi(1,-1)\\widetilde b_k,\\widetilde g)=(q_1^{-1}q_2)C(\\widetilde b_k,\\widetilde g)$. Normalization after twisting preserves these local contributions. By [L4], an integer-indexed type with index $u$ is the $u$-th preferred half-twist iterate of its zero-index member; iteration gives $(q_1^{-1}q_2)^u$, also for negative $u$ by inverting the monomial. The deck parameters add $q_1^{r_1}q_2^{r_2}$ by [L3]. Thus every indexed family has the claimed factor, including the shorter list for $k=m$. Exceptional types and $k=0$ types have only the deck factor. This uses the shift of the fixed $b_k$, not a deck-shift assertion about $\\widetilde g$. [step 1.2, L3, L4]\n\n3.1 *Conclusion.* The bigraded intersection number $I^{\\mathrm{bigr}}(\\widetilde b_k,\\widetilde c)$ is the sum over the bigraded $k$-strings of the contributions of the table, and the two normalizing equations determine the two families of bigradings up to an overall deck shift. AC is inherited for the supplied intersection-number invariance; the normalization and finite table calculations require no additional choice. [A1, step 1.1, step 1.2, step 2.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Lemma 3.20",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Lemma 3.20 with its proof, printed pp. 32-33"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-khovanov-seidel-generator-complexes-are-mutually-inverse",
+        "kind": "lemma",
+        "title": "The generator complexes are mutually inverse",
+        "deps": [
+          "def-khovanov-seidel-positive-and-negative-twist-complexes",
+          "thm-khovanov-seidel-u-functors-satisfy-temperley-lieb-relations",
+          "thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex",
+          "def-invertible-differential-block-and-schur-complement-reduction",
+          "def-signed-totalization-of-graded-a-m-bimodule-actions",
+          "lem-bounded-two-sided-projective-a-m-bimodule-complexes-act-on-c-m",
+          "def-khovanov-seidel-beta-and-gamma-bimodule-maps",
+          "def-complex-homotopy-and-contractibility-in-an-additive-category",
+          "lem-graded-balanced-tensor-and-shift-isomorphisms",
+          "lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis",
+          "def-two-sided-projective-khovanov-seidel-bimodule-functors"
+        ],
+        "statement": "Fix $m\\ge1$ and let $R_i=[U_i\\xrightarrow{\\beta_i}A_m]$ and\n$R_i^{-1}=[A_m\\xrightarrow{\\gamma_i}U_i\\{-1\\}]$ be the positive and negative twist\ncomplexes of [[def-khovanov-seidel-positive-and-negative-twist-complexes]], with\n$U_i$ in homological degree $-1$ and $A_m$ in degree $0$ in the first complex and\n$A_m$ in degree $0$ and $U_i\\{-1\\}$ in degree $1$ in the second. Then for every\n$1\\le i\\le m$ there are homotopy equivalences of complexes of graded\n$(A_m,A_m)$-bimodules\n$$R_i\\otimes_{A_m}R_i^{-1}\\;\\simeq\\;A_m\\;\\simeq\\;R_i^{-1}\\otimes_{A_m}R_i,$$\nwhere $A_m$ denotes the diagonal bimodule concentrated in homological degree\n$0$; they become isomorphisms in $C_m$ and induce isomorphisms of endofunctors\n$$R_iR_i^{-1}\\cong\\operatorname{Id}_{C_m}\\cong R_i^{-1}R_i .$$\nIn particular $R_i^{-1}$ is a two-sided inverse of $R_i$ on $C_m$, and both are\nequivalences of $C_m$.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *The middle corner and the module $Q$.* By [L3] and the tensor-unit and associativity isomorphisms of [L4] the graded abelian group $Q:={}_iP\\otimes_{A_m}P_i$ is free with basis $u_1=e_i\\otimes e_i$ in degree $0$ and $u_2=(i|i-1|i)\\otimes e_i$ in degree $1$, so that $Q=\\mathbb Zu_1\\oplus\\mathbb Zu_2$; by [L5] and [L4] the terms of the totalization $N:=R_i\\otimes_{A_m}R_i^{-1}$ are $N^{-1}\\cong U_i$, $N^{0}\\cong A_m\\oplus(P_i\\otimes_{\\mathbb Z}Q\\otimes_{\\mathbb Z}{}_iP\\{-1\\})$ and $N^{1}\\cong U_i\\{-1\\}$. [L3, L4, L5]\n\n2.1 *The two maps of the source's square.* Define the $A_m$-bimodule maps $\\tau\\colon U_i\\to P_i\\otimes_{\\mathbb Z}Q\\otimes_{\\mathbb Z}{}_iP\\{-1\\}$ and $\\delta\\colon P_i\\otimes_{\\mathbb Z}Q\\otimes_{\\mathbb Z}{}_iP\\{-1\\}\\to U_i\\{-1\\}$ by $\\tau(x\\otimes y):=x\\otimes u_1\\otimes(i|i-1|i)y+x\\otimes u_2\\otimes y$, $\\delta(x\\otimes u_1\\otimes y):=x\\otimes y$ and $\\delta(x\\otimes u_2\\otimes y):=x(i|i-1|i)\\otimes y$; both are bilinear because multiplication is, and both are degree zero: in the shifted middle object the $u_1$ and $u_2$ components have degrees $\\deg x+\\deg y-1$ and $\\deg x+\\deg y$, respectively, matching the degrees of their images $x\\otimes y$ and $x(i|i-1|i)\\otimes y$ in $U_i\\{-1\\}$. Each summand in $\\tau(x\\otimes y)$ has degree $\\deg x+\\deg y$; the natural balanced identification gives differentials $(\\beta_i,-\\tau)$ and $(\\gamma_i,\\delta)$. Negating the middle $P_i\\otimes Q\\otimes{}_iP\\{-1\\}$ coordinate gives the source’s signed chart, in which the differentials read $\\partial^{-1}=\\beta_i+\\tau$, $\\partial^{-1}(u)=(\\beta_i(u),\\tau(u))$, and $\\partial^{0}=(\\gamma_i,-\\delta)$, $\\partial^{0}(a,z)=\\gamma_i(a)-\\delta(z)$, the source's anticommutative square of Section 2 with the sign on $\\delta$, and $\\partial^{0}\\partial^{-1}=0$ is the automatic square-zero condition of the totalization [L5]. [L5, step 1.1, L1]\n\n3.1 *The splitting of $N^{0}$.* Let $\\xi(a)$ be the image of $\\gamma_i(a)=\\sum_jx_j\\otimes y_j$ under $x\\otimes y\\mapsto x\\otimes u_1\\otimes y$, so that $\\delta\\xi(a)=\\sum_jx_j\\otimes y_j=\\gamma_i(a)$ because $\\delta$ removes the middle $u_1$; write $W:=P_i\\otimes_{\\mathbb Z}\\mathbb Zu_1\\otimes_{\\mathbb Z}{}_iP\\{-1\\}$ for the $u_1$-component and define $\\Psi(a,w,u):=(a+\\beta_i(u),\\,\\xi(a)+w+\\tau(u))$. The map $\\Psi\\colon A_m\\oplus W\\oplus U_i\\to N^{0}$ is an isomorphism of graded bimodules: its inverse sends $(a',z)$ to $u:=\\tau_2^{-1}(z_2)$, $a:=a'-\\beta_i(u)$, $w:=z_1-\\xi_1(a)-\\tau_1(u)$, where $z=z_1+z_2$ decomposes along the $u_1$- and $u_2$-components, $\\tau_2$ denotes the injective $u_2$-component $x\\otimes y\\mapsto x\\otimes u_2\\otimes y$ of $\\tau$, and the subscript $1$ denotes the $u_1$-component; these four maps are well defined and degree zero. Consequently $N^{0}$ is the direct sum of $\\partial^{-1}(U_i)=\\{(\\beta_i(u),\\tau(u))\\}$, the graph $T_0^{0}:=\\{(a,\\xi(a)):a\\in A_m\\}$ and the $u_1$-component $T_1^{0}:=\\{(0,w):w\\in W\\}$, while $N^{-1}=U_i$ and $N^{1}=U_i\\{-1\\}$. [step 2.1]\n\n4.1 *$N$ splits as a direct sum of three subcomplexes.* Put $T_{-1}:=[U_i\\xrightarrow{\\partial^{-1}}\\partial^{-1}(U_i)]$, $T_0:=\\{(a,\\xi(a)):a\\in A_m\\}$ concentrated in degree $0$, and $T_1:=[W\\xrightarrow{-\\delta}U_i\\{-1\\}]$, with differentials the restrictions of $\\partial^{-1}$ and $\\partial^{0}$; these are subcomplexes of $N$ because $\\partial^{0}\\partial^{-1}=0$ on $U_i$ by step 2.1, $\\partial^{0}(a,\\xi(a))=\\gamma_i(a)-\\delta\\xi(a)=0$ by step 3.1 and $\\partial^{0}(0,w)=-\\delta(w)$, and by the direct sum decomposition of step 3.1 the objects of $N$ are the degreewise direct sums $N^{j}=T_{-1}^{j}\\oplus T_0^{j}\\oplus T_1^{j}$. Hence $N=T_{-1}\\oplus T_0\\oplus T_1$ as complexes of graded bimodules, and $a\\mapsto(a,\\xi(a))$ identifies $T_0$ with the diagonal bimodule $A_m$ concentrated in degree $0$. [step 2.1, step 3.1]\n\n5.1 *The two outer summands are contractible.* The restriction $\\partial^{-1}:U_i\\to\\partial^{-1}(U_i)$ is surjective by construction and injective because $\\tau$ is injective (its $u_2$-component $\\tau_2$ alone is already injective, as observed in step 3.1); hence it is an isomorphism, and $T_{-1}$ is a two-term complex with invertible differential, contractible by [L6]. The restriction $-\\delta:W\\to U_i\\{-1\\}$ is an isomorphism, with inverse $x\\otimes y\\mapsto -x\\otimes u_1\\otimes y$, so $T_1$ is contractible by [L6] as well. [L6, step 4.1]\n\n6.1 *The first homotopy equivalence.* By steps 4.1 and 5.1 the complex $N$ is the direct sum of $T_0\\cong A_m$ with two contractible complexes; a finite direct sum of contractible complexes is contractible, the contracting homotopy of a biproduct being the biproduct of the given homotopies, so the projection $N\\to T_0\\cong A_m$ and the inclusion $T_0\\to N$ are inverse homotopy equivalences. This proves $R_i\\otimes_{A_m}R_i^{-1}\\simeq A_m$, and since the action of a complex with two-sided finite graded projective terms on $C_m$ is well defined on homotopy classes [L2], these maps induce natural isomorphisms $R_iR_i^{-1}\\cong\\operatorname{Id}_{C_m}$. [L2, step 4.1, step 5.1]\n\n7.1 *The opposite order.* Write $c_i=(i|i-1|i)$. The middle corner in $N'=R_i^{-1}\\otimes_{A_m}R_i$ is again $Q={}_iP\\otimes_{A_m}P_i$, not the oppositely typed tensor $P_i\\otimes_{A_m}{}_iP$. Its terms are $U_i$ in degree $-1$, $A_m\\oplus(P_i\\otimes Q\\otimes{}_iP\\{-1\\})$ in degree $0$, and $U_i\\{-1\\}$ in degree $1$. Define $$\\tau'(x\\otimes y)=xc_i\\otimes u_1\\otimes y+x\\otimes u_2\\otimes y,$$ $$\\delta'(x\\otimes u_1\\otimes y)=x\\otimes y,\\qquad\\delta'(x\\otimes u_2\\otimes y)=x\\otimes c_i y.$$ These formulas are obtained by inserting $\\gamma_i$ on the left and multiplying on the right in the tensor totalization; in particular $\\partial'^{-1}=(\\beta_i,\\tau')$ and $\\partial'^0=(\\gamma_i,-\\delta')$. They are bimodule-linear and homogeneous, and their composite is zero by [L5]. The $u_2$-component of $\\tau'$ is the identity under its shift identification, while $\\delta'$ is the identity from the $u_1$-component to $U_i\\{-1\\}$. With $\\xi'$ given by inserting $u_1$ in $\\gamma_i(a)$, one has $\\delta'\\xi'=\\gamma_i$. Hence the same explicit coordinate map $\\Psi'(a,w,u)=(a+\\beta_i(u),\\xi'(a)+w+\\tau'(u))$ and its componentwise inverse from step 3.1 split $N'$ into its diagonal $A_m$ and two identity-pivot pairs. Their inverse differentials are the contracting homotopies, proving $R_i^{-1}\\otimes_{A_m}R_i\\simeq A_m$. Applying the action as in step 6.1 gives the opposite functor identity. [L5, L1, L3, L4, L6, step 3.1, step 6.1, algebra]\n\n8.1 *Conclusion.* The complexes $R_i$ and $R_i^{-1}$ are mutually inverse up to the homotopy equivalences of steps 6.1 and 7.1, hence are inverse isomorphisms in $C_m$ and induce two-sided inverse functor isomorphisms on $C_m$; in particular both are equivalences of $C_m$. No choice principle is used, all the identifications being explicit finite formulas. [step 6.1, step 7.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Proposition 2.4",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Proposition 2.4 with its proof, printed pp. 11-13"
+            },
+            {
+              "title": "Dror Bar-Natan, Fast Khovanov homology computations, Section 4 (Gaussian elimination)",
+              "url": "https://www.math.utoronto.ca/~drorbn/papers/FastKh/FastKh.pdf",
+              "locator": "Section 4, printed pp. 4-5"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-khovanov-seidel-complexes-satisfy-far-commutativity",
+        "kind": "lemma",
+        "title": "Far commutativity of the generator complexes",
+        "deps": [
+          "def-khovanov-seidel-positive-and-negative-twist-complexes",
+          "thm-khovanov-seidel-u-functors-satisfy-temperley-lieb-relations",
+          "lem-bounded-two-sided-projective-a-m-bimodule-complexes-act-on-c-m",
+          "def-signed-totalization-of-graded-a-m-bimodule-actions",
+          "lem-graded-balanced-tensor-and-shift-isomorphisms",
+          "def-khovanov-seidel-beta-and-gamma-bimodule-maps"
+        ],
+        "statement": "If $|i-j|>1$ then there is an isomorphism of complexes of graded $(A_m,A_m)$-bimodules $R_i\\otimes_{A_m}R_j\\simeq R_j\\otimes_{A_m}R_i$, hence an isomorphism of functors $R_iR_j\\cong R_jR_i$ on $C_m$.",
+        "strategy": "Tensoring the two-term complexes gives two complexes with the same four graded pieces; the off-diagonal differentials vanish because they are built from $U_i\\otimes_{A_m}U_j$, which is zero by the orthogonality clause of the Temperley-Lieb relations, and the remaining differentials coincide up to the canonical symmetry of the tensor product. This is the source's Theorem 2.5, equation (2.10).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Theorem 2.5 and equation (2.10)",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Theorem 2.5 and equation (2.10), printed pp. 13-14"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-khovanov-seidel-complexes-satisfy-the-three-term-braid-relation",
+        "kind": "lemma",
+        "title": "The three-term braid relation",
+        "deps": [
+          "lem-khovanov-seidel-complexes-satisfy-far-commutativity",
+          "def-khovanov-seidel-positive-and-negative-twist-complexes",
+          "lem-khovanov-seidel-generator-complexes-are-mutually-inverse",
+          "thm-khovanov-seidel-u-functors-satisfy-temperley-lieb-relations",
+          "thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex",
+          "def-signed-totalization-of-graded-a-m-bimodule-actions",
+          "lem-graded-balanced-tensor-and-shift-isomorphisms",
+          "def-khovanov-seidel-beta-and-gamma-bimodule-maps",
+          "lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis"
+        ],
+        "statement": "Fix $m\\ge1$, let $R_i,R_{i+1}$ be the positive twist complexes of\n[[def-khovanov-seidel-positive-and-negative-twist-complexes]], and use the\nbalanced totalization of\n[[def-signed-totalization-of-graded-a-m-bimodule-actions]]. For $1\\le i\\le m-1$\nthere is a homotopy equivalence of complexes of graded $(A_m,A_m)$-bimodules\n$$R_i\\otimes_{A_m}R_{i+1}\\otimes_{A_m}R_i\\;\\simeq\\;R_{i+1}\\otimes_{A_m}R_i\\otimes_{A_m}R_{i+1},$$\nhence an isomorphism of endofunctors of $C_m$\n$$R_iR_{i+1}R_i\\cong R_{i+1}R_iR_{i+1}.$$\nTogether with the far-commutativity lemma\n[[lem-khovanov-seidel-complexes-satisfy-far-commutativity]] and the inverse-pair\nlemma [[lem-khovanov-seidel-generator-complexes-are-mutually-inverse]], this is\nthe braid relation for the generators of the action.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *The two relations are equivalent.* Assume first $R_iR_{i+1}R_i\\cong R_{i+1}R_iR_{i+1}$, that is, an isomorphism in the homotopy category of tensor complexes. Composing on the right with $R_i^{-1}$ and using the inverse-pair lemma [L2] to cancel $R_iR_i^{-1}\\simeq A_m$ at the two ends of both sides gives $R_iR_{i+1}\\simeq R_{i+1}R_iR_{i+1}R_i^{-1}$; composing on the left with $R_{i+1}^{-1}$ and cancelling $R_{i+1}^{-1}R_{i+1}\\simeq A_m$ gives $R_{i+1}^{-1}R_iR_{i+1}\\simeq R_iR_{i+1}R_i^{-1}$. Conversely the same two cancellations applied to this isomorphism recover the braid relation. Hence it suffices to prove the displayed symmetric relation, which is the symmetric relation displayed in the source's proof. [L2]\n\n2.1 *Normal form of the left-hand side.* By [L3] and the definition of the cone, tensoring the two-term complex $R_i=[U_i\\to A_m]$ with the complex $R_{i+1}$ inside the triple tensor exhibits $R_{i+1}^{-1}R_iR_{i+1}$ as the cone of the chain map $g\\colon R_{i+1}^{-1}\\otimes_{A_m}U_i\\otimes_{A_m}R_{i+1}\\to R_{i+1}^{-1}\\otimes_{A_m}R_{i+1}$ induced by $\\beta_i$, with all identifications canonical. The target splits as $A_m\\oplus(\\text{acyclic})$ by [L2] applied at $i+1$, and splitting off the contractible summand [L4] leaves the cone of the induced map to $A_m$. Using the corner computations [L5] one obtains the isomorphisms of complexes $R_{i+1}^{-1}\\otimes_{A_m}P_i\\cong[P_i\\xrightarrow{(i|i+1)}P_{i+1}]$ and ${}_iP\\otimes_{A_m}R_{i+1}\\cong[{}_{i+1}P\\xrightarrow{(i|i+1)}{}_iP]$, with $P_i$, respectively ${}_iP$, placed in degree $0$; these are the two displays in the source's proof. Tensoring the left $(A_m,\\mathbb Z)$ and right $(\\mathbb Z,A_m)$ complexes over $\\mathbb Z$ and using [L5] for the outer corners $e_iA_me_i$ and $e_{i+1}A_me_{i+1}$ gives the four-term complex $C=[0\\to P_i\\otimes_{\\mathbb Z}{}_{i+1}P\\xrightarrow{\\partial^{-1}}(P_i\\otimes_{\\mathbb Z}{}_iP)\\oplus(P_{i+1}\\otimes_{\\mathbb Z}{}_{i+1}P)\\xrightarrow{\\partial^{0}}P_{i+1}\\otimes_{\\mathbb Z}{}_iP\\to0]$ with terms in homological degrees $-1,0,1$, together with a chain map $e\\colon C\\to A_m$ concentrated in degree $0$, so that the left-hand side of step 1.1 is homotopy equivalent to the cone of $e$. [step 1.1, L2, L3, L4, L5]\n\n3.1 *The normal complex and its chain map.* Put $a=(i|i+1)$, a degree-zero forward arrow. In the complex $C$ of step 2.1 the differentials, after the indicated corner identifications, are\n$$\\partial^{-1}(x\\otimes y)=(x\\otimes a y,\\ xa\\otimes y),\\qquad \\partial^0(u,v)=\\ell_a(u)-r_a(v),$$\nwhere $\\ell_a(x\\otimes y)=xa\\otimes y$ on $U_i$ and $r_a(x'\\otimes y')=x'\\otimes a y'$ on $U_{i+1}$. All path endpoints match these modules, and the two products in $\\partial^0\\partial^{-1}$ cancel. A degree-zero map $e:U_i\\oplus U_{i+1}\\to A_m$ is determined by $e(e_i\\otimes e_i)=a_1e_i$ and $e(e_{i+1}\\otimes e_{i+1})=a_2e_{i+1}$, since the degree-zero corner $e_jA_me_j$ is $\\mathbb Ze_j$. Evaluating $e\\partial^{-1}$ on $e_i\\otimes e_{i+1}$ gives $(a_1+a_2)a$, so the chain-map condition is $a_1+a_2=0$. [L1, L3, L5, step 2.1, algebra]\n\n4.1 *Why the coefficient is a unit.* The cone of $e$ is an invertible bimodule complex by [L2], with explicit inverse homotopies that remain valid after reduction modulo any prime $p$. Over $k=\\mathbb F_p$, the degree-zero centre of $A_m\\otimes k$ is $k$: commuting with the vertex idempotents removes every off-diagonal forward-arrow term, and a diagonal element $\\sum_j b_j e_j$ commutes with each nonzero adjacent arrow only if $b_j=b_{j+1}$. Thus the degree-zero endomorphism ring of the unit bimodule complex is $k$, with no nontrivial idempotent. Tensoring with an invertible object is an equivalence of the homotopy category, so it transports the endomorphism ring of the cone to that of the unit; the cone cannot split into two nonzero homotopy summands. If $p$ divides $a_1$, then $a_2=-a_1$ also vanishes modulo $p$ and the cone is $A_m\\otimes k\\oplus C_k[1]$. The second summand is nonzero in the homotopy category: tensor $C_k$ on both outer sides with $(A_m/J)\\otimes k$, where $J$ is the arrow ideal. Its arrow differentials become zero and its nonzero vertex tensor terms remain nonzero. An additive tensor functor preserves a contracting homotopy, so this zero-differential complex proves that $C_k$ was not contractible. This contradicts the preceding indecomposability. Hence no prime divides $a_1$, so $a_1=\\pm1$; if $a_1=0$, any prime gives the same contradiction. Changing the sign of the target $A_m$ if necessary yields $a_1=1$, $a_2=-1$. This is the precise connected-algebra argument behind the source's characteristic-$p$ normalization, rather than a false assertion about all equivalences of categories. [L1, L2, L5, step 3.1, algebra]\n\n5.1 *The second conjugate.* For $R_iR_{i+1}R_i^{-1}$, the two corner complexes are $[P_i\\to P_{i+1}]$ in degrees $-1,0$ and $[{}_{i+1}P\\to{}_iP]$ in degrees $0,1$, with the same forward-arrow maps. Their tensor over $\\mathbb Z$ has the same terms as $C$. Its initial differential has signs $(-,+)$ and its final differential signs $(+,+)$; the degreewise sign maps $1$, $\\operatorname{diag}(-1,1)$ and $-1$ identify it with the $C$ of step 3.1. The target inverse-pair complex again cancels to $A_m$, giving the cone of a degree-zero map $f:C\\to A_m$. Its values are $b_1e_i,b_2e_{i+1}$, the chain condition gives $b_1+b_2=0$, and step 4.1 applies to this invertible conjugate as well, so after the target sign normalization $b_1=1,b_2=-1$. Consequently $f=e$ on both cyclic summands and hence everywhere. The two cones are isomorphic, and the inverse cancellations of step 1.1 give the full triple braid relation. [L1, L2, L3, L4, L5, step 1.1, step 2.1, step 3.1, step 4.1, algebra]\n\n6.1 *Conclusion.* The two triple tensor complexes are homotopy equivalent, so in the homotopy category $C_m$ the three-term braid relation holds; passing to the induced functors gives $R_iR_{i+1}R_i\\cong R_{i+1}R_iR_{i+1}$. The identifications used are canonical, and no choice principle is used. [step 5.1, L3] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Theorem 2.5, equations (2.11)-(2.13)",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Theorem 2.5 and its proof, printed pp. 13-14"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-khovanov-seidel-complex-of-a-braid-word",
+        "kind": "definition",
+        "title": "The complex of a braid word",
+        "deps": [
+          "def-khovanov-seidel-positive-and-negative-twist-complexes",
+          "lem-bounded-two-sided-projective-a-m-bimodule-complexes-act-on-c-m",
+          "def-signed-totalization-of-graded-a-m-bimodule-actions",
+          "def-khovanov-seidel-beta-and-gamma-bimodule-maps",
+          "lem-graded-balanced-tensor-and-shift-isomorphisms",
+          "thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules",
+          "thm-a-direct-summand-of-a-projective-is-projective"
+        ],
+        "statement": "Fix $m\\ge1$ and let $R_i,R_i^{-1}$ be the twist complexes of\n[[def-khovanov-seidel-positive-and-negative-twist-complexes]], built from\n$\\beta_i,\\gamma_i$ of [[def-khovanov-seidel-beta-and-gamma-bimodule-maps]] and\nacting on $C_m=K^b(\\operatorname{proj}^{gr}A_m)$. Fix a word\n$$\\sigma=\\tau_1\\tau_2\\cdots\\tau_k,\\qquad \\tau_\\ell\\in\\{\\sigma_i^{\\pm1}:1\\le i\\le m\\},$$\nin the Artin generators and their inverses, and put\n$$R_{\\sigma_i}:=R_i,\\qquad R_{\\sigma_i^{-1}}:=R_i^{-1},\\qquad R_{1}:=A_m,$$\nthe last being the diagonal bimodule $A_m$ concentrated in homological degree\n$0$. The **complex of the word** $\\sigma$ is the iterated signed totalization\n$$R_\\sigma:=R_{\\tau_1}\\otimes_{A_m}R_{\\tau_2}\\otimes_{A_m}\\cdots\\otimes_{A_m}R_{\\tau_k}$$\nof [[def-signed-totalization-of-graded-a-m-bimodule-actions]], and $R_\\sigma$\nalso denotes the endofunctor\n$$R_\\sigma\\colon C_m\\to C_m,\\qquad M\\mapsto R_\\sigma\\otimes_{A_m}M .$$\n\n**Claims.** (i) $R_\\sigma$ is a bounded complex of graded $(A_m,A_m)$-bimodules\neach of whose terms is finitely generated graded projective as a left\n$A_m$-module and as a right $A_m$-module; (ii) consequently the functor\n$R_\\sigma\\otimes_{A_m}-$ is an exact additive endofunctor of $C_m$ carrying\ndistinguished triangles to distinguished triangles and agreeing with the derived\ntensor product through the identity replacements, by\n[[lem-bounded-two-sided-projective-a-m-bimodule-complexes-act-on-c-m]]. These\ntwo claims are verified below. The definition fixes the complex attached to the\nchosen word; that different words for the same braid give isomorphic functors\nis the content of the weak action theorem below and is **not** asserted here.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *Tensor products of two-sided finite graded projectives are again two-sided finite graded projectives.* Let $M,N$ be graded $(A_m,A_m)$-bimodules finite graded projective on each side. To prove left projectivity, split $N$ as a left module by degree-zero left $A_m$-linear maps $i:N\\to\\bigoplus_jA_m\\{r_j\\}$ and $p:\\bigoplus_jA_m\\{r_j\\}\\to N$ with $pi=1$. The maps $1_M\\otimes i$ and $1_M\\otimes p$ are well-defined over $A_m$ and left $A_m$-linear for the action on $M$; they exhibit $M\\otimes_{A_m}N$ as a left-module summand of $\\bigoplus_jM\\{r_j\\}$ by [L2]. Thus it is finite graded projective on the left by [L1]. To prove right projectivity, split $M$ as a right module and apply $-\\otimes_{A_m}N$; the resulting right-linear maps exhibit the tensor product as a summand of finitely many shifts of the right-projective module $N$. No splitting is assumed bimodule-linear, and each is tensored on its valid balanced side. [L1, L2]\n\n2.1 *The totalization of two complexes in $\\mathcal P$ lies in $\\mathcal P$, and is bounded.* Let $R,S\\in\\mathcal P$. Every term of $R\\otimes_{A_m}S$ is a finite direct sum of modules $R^p\\otimes_{A_m}S^q$ with $p+q=n$; each summand is two-sided finite graded projective by step 1.1, and a finite direct sum of such is again such by [L1]. By [L3] the totalization is a complex of graded bimodules, and it is bounded because only finitely many pairs $(p,q)$ with $p+q=n$ occur and $R,S$ each have finitely many nonzero terms. [step 1.1, L3]\n\n3.1 *The claim for $k\\le1$, and the induction step.* For $k=0$ the complex $R_1=A_m$ is a single copy of the diagonal bimodule in degree $0$, which is finite graded projective on both sides, so $R_1\\in\\mathcal P$. For $k=1$ the factors are $R_i$ or $R_i^{-1}$, which lie in $\\mathcal P$ by [L4]; and in general, if $R_{\\tau_1}\\otimes\\cdots\\otimes R_{\\tau_{\\ell}}\\in\\mathcal P$ then tensoring with the next factor, which lies in $\\mathcal P$ by [L4], stays in $\\mathcal P$ by step 2.1; hence by induction on $k$ the complex $R_\\sigma$ lies in $\\mathcal P$ for every word. Associativity of the iterated totalization up to canonical isomorphism, which is what makes the notation $R_{\\tau_1}\\otimes\\cdots\\otimes R_{\\tau_k}$ unambiguous, is part of [L3]. [step 2.1, L3, L4]\n\n4.1 *The functor properties.* By step 3.1 the complex $R_\\sigma$ satisfies the hypothesis of [L5], so $R_\\sigma\\otimes_{A_m}-$ is a well-defined additive endofunctor of $C_m$, exact for the triangulations and carrying distinguished triangles to distinguished triangles, and it agrees with the derived tensor product through the identity replacements. [step 3.1, L5]\n\n5.1 *Conclusion and scope.* The complex $R_\\sigma$ attached to a word $\\sigma$ is a bounded complex of graded $(A_m,A_m)$-bimodules with two-sided finite graded projective terms by step 3.1, and its action on $C_m$ is an exact triangulated endofunctor agreeing with derived tensor by step 4.1. The construction depends on the chosen word: nothing here compares $R_\\sigma$ for different words representing the same braid, and no choice principle is used, the tensor products and shifts being explicit and finite. [step 3.1, step 4.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Definition 2.6 and the following paragraph",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Definition 2.6 and the paragraph defining R_sigma, printed p. 14"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-khovanov-seidel-complexes-give-a-weak-derived-braid-action",
+        "kind": "theorem",
+        "title": "The Khovanov-Seidel complexes give a weak derived braid action",
+        "deps": [
+          "def-weak-action-of-a-group-on-a-category",
+          "def-khovanov-seidel-complex-of-a-braid-word",
+          "lem-khovanov-seidel-generator-complexes-are-mutually-inverse",
+          "lem-khovanov-seidel-complexes-satisfy-far-commutativity",
+          "lem-khovanov-seidel-complexes-satisfy-the-three-term-braid-relation",
+          "def-group-presentation",
+          "thm-von-dyck",
+          "def-braid-group-by-the-artin-presentation",
+          "def-signed-totalization-of-graded-a-m-bimodule-actions"
+        ],
+        "statement": "Fix $m\\ge1$ and let $C_m=K^b(\\operatorname{proj}^{gr}A_m)$ be the bounded\nhomotopy category of finite graded projective left $A_m$-modules. Choose a\nsigned word $t(\\beta)$ representing each $\\beta\\in B_{m+1}$, with $t(1)$ the\nempty word, and let $G_\\beta=R_{t(\\beta)}$ be its complex from\n[[def-khovanov-seidel-complex-of-a-braid-word]]. Define $F_1=\\operatorname{Id}_{C_m}$\nand $F_\\beta=G_\\beta\\otimes_{A_m}-$ for $\\beta\\ne1$. Then the assignment\n$$\\beta\\longmapsto F_\\beta$$\ndefines a weak action of the braid group $B_{m+1}$\n([[def-braid-group-by-the-artin-presentation]]) on $C_m$ in the sense of\n[[def-weak-action-of-a-group-on-a-category]]:\n\n1. $F_1=\\operatorname{Id}_{C_m}$ exactly;\n2. every $F_\\beta$ is an equivalence of $C_m$, and\n3. for all $\\beta,\\gamma\\in B_{m+1}$ the functors $F_{\\beta\\gamma}$ and\n   $F_\\beta F_\\gamma$ are naturally isomorphic.\n\nExplicitly, for any two words presenting the same element, a chosen finite\nsequence of defining relation moves gives an explicit homotopy equivalence\nbetween their complexes, so the action is well defined up to isomorphism by\nthe presentation of $B_{m+1}$. No independence of that chosen sequence is asserted. No coherence of the isomorphisms\nis claimed: the action is weak and is not asserted to be a genuine $2$-action.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *Every $F_\\beta$ is an equivalence.* For $\\beta\\ne1$, [L1] makes $G_\\beta\\otimes_{A_m}-$ an endofunctor of $C_m$, and the generator inverse relations of [L2], applied factor by factor with tensor associativity, identify its composites with the functor of the literal reversed inverse word as the identity; the empty-word functor is canonically the identity by [L6]. Thus $F_\\beta$ is an equivalence with inverse the functor of that literal inverse word, up to the canonical unit identification. For $\\beta=1$ the claim holds by the definition $F_1=\\operatorname{Id}$. [L1, L2, L6]\n\n1.2 *The defining relations hold up to natural isomorphism.* The inverse-cancellation relation is [L2], far commutativity is [L3], and the three-term Artin relation is [L4]; for each of these the two functors are respectively naturally isomorphic, and the isomorphisms are compatible with concatenation of words because both sides are computed by the same balanced tensor product of the word complexes [L1]. [L2, L3, L4]\n\n2.1 *Well-definedness on braid words.* Let $\\sigma=\\tau_1\\cdots\\tau_k$ be a word and let $\\sigma'$ be obtained from it by one of the elementary moves of [L5]: inserting or deleting $\\sigma_i^{\\pm1}\\sigma_i^{\\mp1}$, commuting two far-apart letters, or replacing $\\sigma_i\\sigma_{i+1}\\sigma_i$ by $\\sigma_{i+1}\\sigma_i\\sigma_{i+1}$. Each move replaces $R_\\sigma$ by a naturally isomorphic functor by step 1.2, since the tensor product identifies the segments of the word and the isomorphisms compose; by induction on the number of moves, any two words presenting the same element of $B_{m+1}$ yield naturally isomorphic functors. Hence the assignment $\\beta\\mapsto F_\\beta$ is well defined up to natural isomorphism on the presented group, with $F_1$ represented by the identity functor rather than merely by an isomorphic empty-word functor. [step 1.2, L1, L5, L6]\n\n3.1 *The weak-action axioms.* By definition $F_1=\\operatorname{Id}_{C_m}$. If $\\beta,\\gamma\\ne1$, concatenating their chosen words gives $G_\\beta\\otimes_{A_m}G_\\gamma\\simeq G_{\\beta\\gamma}$ up to the natural isomorphism of step 2.1; tensoring with an input complex gives $F_\\beta F_\\gamma\\cong F_{\\beta\\gamma}$, using [L6] when $\\beta\\gamma=1$. If one of $\\beta,\\gamma$ is $1$, the corresponding composite is identified with the other functor by the canonical tensor unit isomorphism (and is literally composition with $\\operatorname{Id}$ on the functor side). Thus the weak-action unit and pairwise-isomorphism conditions hold. No compositors satisfying a pentagon are produced or claimed. [step 2.1, L1, L6]\n\n4.1 *Conclusion.* The functors $F_\\beta$ define a weak action of $B_{m+1}$ on $C_m$: the assignment is well defined up to natural isomorphism on words for the same braid (step 2.1), every value is an equivalence (step 1.1), and the identity functor is assigned exactly to $1$ with the pairwise isomorphisms supplied in step 3.1. No coherence upgrade is claimed. [step 1.1, step 2.1, step 3.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Proposition 2.7",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Proposition 2.7, printed p. 14"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-khovanov-seidel-path-ideal",
+        "kind": "definition",
+        "title": "The Khovanov-Seidel path ideal",
+        "deps": [
+          "def-khovanov-seidel-type-a-quiver-algebra",
+          "lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis",
+          "def-generated-and-principal-ideals",
+          "def-quotient-ring"
+        ],
+        "statement": "Fix $m\\ge1$ and let $A_m$ be the Khovanov–Seidel type A algebra of\n[[def-khovanov-seidel-type-a-quiver-algebra]], with its internal grading\n$$\\deg e_i=0,\\qquad \\deg(i|i+1)=0,\\qquad \\deg(i+1|i)=1$$\non vertices and arrows, extended to paths additively, and with vertex\nidempotents $e_0,\\dots,e_m$ and unit $1=e_0+\\cdots+e_m$. Let\n$$J\\subseteq A_m$$\nbe the two-sided ideal generated by the classes of all arrows $(i|i\\pm1)$\n([[def-generated-and-principal-ideals]]); it is the smallest two-sided ideal\ncontaining every arrow, and it is computed in the proof below.\n\n**Claims.** $J$ is homogeneous for the internal degree; $J$ is spanned as a\n$\\mathbb Z$-module by the classes of all paths of length at least one, and\n$J^2$ is spanned by the returns $(i|i-1|i)$, so that $J^3=0$; and the quotient\nring of [[def-quotient-ring]] satisfies\n$$A_m/J\\cong\\mathbb Z^{m+1}$$\nthrough the vertex idempotents, the isomorphism sending the class of $e_i$ to\nthe $i$-th standard basis vector. In particular the quotient module\n$A_m/J\\cong\\mathbb Z^{m+1}$ is concentrated on the vertex idempotents.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *$J$ is spanned by the paths of length at least one, and is homogeneous.* Write $B_{\\ge1}$ for the set of basis elements of [L1] that are arrows or returns, and $P_{\\ge1}$ for the $\\mathbb Z$-span of all paths of length at least one. Every generator of $J$ lies in $P_{\\ge1}$, and $P_{\\ge1}$ is closed under left and right multiplication by $A_m$: the product of a path of length at least one with any path is either $0$ or a concatenation of length at least one, and multiplication is bilinear; hence $J\\subseteq P_{\\ge1}$ by minimality of the generated ideal. Conversely every path of length at least one is a product of arrows, hence lies in $J$ because a product of arrows belongs to $J$ and $J$ is closed under multiplication; so $P_{\\ge1}\\subseteq J$, and $P_{\\ge1}=J$. Every basis element of $B_{\\ge1}$ is homogeneous by [L2], so $J$, the span of the basis elements of $B_{\\ge1}$, is homogeneous: it is the direct sum of its intersections with the homogeneous components of $A_m$. [L1, L2, L3]\n\n2.1 *$J^2$ is spanned by the returns, and $J^3=0$.* By step 1.1 it suffices to compute products of two basis elements of $B_{\\ge1}$ and of three such elements. A concatenation of two paths of length at least one has length at least two, and by [L1] the only nonzero classes of length at least two in $A_m$ are the returns $(i|i-1|i)$ for $1\\le i\\le m$ (equal to $(i|i+1|i)$ only for $i<m$), each of which is a product $(i|i-1)(i-1|i)$ of two arrows; hence $J^2$ is spanned by the returns. A concatenation of three paths of length at least one is a path of length at least three, which vanishes in $A_m$ by [L1], so $J^3=0$. [step 1.1, L1]\n\n3.1 *The quotient is $\\mathbb Z^{m+1}$.* The assignment $\\psi_0(e_i):=u_i$ for the standard basis vectors $u_0,\\dots,u_m$ of $\\mathbb Z^{m+1}$ and $\\psi_0(b):=0$ for every non-vertex basis element $b$ of [L1] is a unital ring homomorphism: on the multiplication table of [L1] one checks that a product of two basis elements, when nonzero, is either a vertex (and the product of the corresponding idempotents is $\\delta_{ij}e_i$, matching $u_iu_j=\\delta_{ij}u_i$) or a non-vertex basis path (whose image and whose factors' product of images are both $0$ unless both factors are vertices), and paths of length at least three vanish on both sides; bilinearity extends the check to $A_m$. Since $\\psi_0$ kills every arrow, it kills $J$, so by [L4] it factors uniquely as $\\psi_0=\\psi\\pi$ with $\\psi:A_m/J\\to\\mathbb Z^{m+1}$ a unital ring homomorphism. Let $\\varphi:\\mathbb Z^{m+1}\\to A_m/J$, $\\varphi(a_0,\\dots,a_m):=\\sum_ia_i[e_i]$, where $[e_i]=\\pi(e_i)$; the classes $[e_i]$ are orthogonal idempotents with $\\sum_i[e_i]=1$ because $\\pi$ is a unital ring homomorphism, so $\\varphi$ is a unital ring homomorphism, and $\\psi\\varphi=\\mathrm{id}$ since $\\psi([e_i])=u_i$. Conversely $\\varphi\\psi([b])=[b]$ for every basis element $b$ of [L1]: for a vertex this is immediate, and for a non-vertex element both sides are $0$ because $\\psi$ kills it; hence $\\varphi\\psi=\\mathrm{id}_{A_m/J}$ and $A_m/J\\cong\\mathbb Z^{m+1}$. [step 2.1, L1, L4]\n\n4.1 *Conclusion.* The ideal $J$ generated by the arrows is homogeneous and consists of the paths of length at least one, its square is spanned by the returns and its cube vanishes, and the quotient is $\\mathbb Z^{m+1}$ on the vertex idempotents, all by steps 1.1–3.1. No choice principle is used. [step 1.1, step 2.1, step 3.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Section 1b",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Section 1b, printed pp. 3-4 (grading, relations and the 4m+1-element basis of A_m)"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-finite-graded-projective-a-m-modules-are-sums-of-shifted-vertex-projectives",
+        "kind": "lemma",
+        "title": "Finite graded projectives are sums of shifted vertex projectives",
+        "deps": [
+          "def-khovanov-seidel-path-ideal",
+          "def-graded-khovanov-seidel-module-category-and-projectives",
+          "def-vertex-khovanov-seidel-modules",
+          "thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules",
+          "cor-submodules-of-finite-free-pid-modules-are-free",
+          "lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis",
+          "thm-a-direct-summand-of-a-projective-is-projective"
+        ],
+        "statement": "Fix $m\\ge1$ and let $A_m$ be the Khovanov–Seidel type A algebra with vertex\nprojectives $P_i=A_me_i$, $0\\le i\\le m$\n([[def-graded-khovanov-seidel-module-category-and-projectives]],\n[[def-vertex-khovanov-seidel-modules]]). Every finitely generated graded\nprojective left $A_m$-module $P$ is isomorphic, as a graded module, to a finite\ndirect sum\n$$P\\cong\\bigoplus_{i=0}^{m}\\ \\bigoplus_{r\\in\\mathbb Z}P_i\\{r\\}^{\\oplus a_{i,r}}$$\nof internal shifts of the vertex projectives, with multiplicities\n$a_{i,r}\\in\\mathbb N$ zero for all but finitely many pairs $(i,r)$; the\nmultiplicities are uniquely determined by $P$. Equivalently, the shifted modules $P_i\\{r\\}$ are the indecomposable objects,\nand their classes $[P_i\\{r\\}]$, $0\\le i\\le m$, $r\\in\\mathbb Z$, form a free\nabelian basis of the split Grothendieck group of finite graded projectives,\nwith no relations among distinct pairs.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *$P/JP$ is a finite free graded abelian group.* By [L2] there is a degree-zero isomorphism $P\\oplus Q\\cong F:=A_m\\{r_1\\}\\oplus\\cdots\\oplus A_m\\{r_n\\}$ for some finitely generated graded projective $Q$. Applying $(A_m/J)\\otimes_{A_m}-=\\mathbb Z^{m+1}\\otimes_{A_m}-$ degreewise gives a degree-zero isomorphism of graded $\\mathbb Z^{m+1}$-modules $P/JP\\oplus Q/JQ\\cong F/JF\\cong(\\mathbb Z^{m+1})\\{r_1\\}\\oplus\\cdots\\oplus(\\mathbb Z^{m+1})\\{r_n\\}$; in particular $P/JP$ is a direct summand, as a graded abelian group, of the finite free graded abelian group $F/JF$ whose homogeneous components are finite free $\\mathbb Z$-modules. By [L3] each graded component $(P/JP)_d$ is a finitely generated torsion-free, hence free, $\\mathbb Z$-module, and $P/JP$ has a homogeneous $\\mathbb Z$-basis. [L1, L2, L3]\n\n2.1 *The vertex decomposition of $P/JP$.* Since $J$ acts as $0$ on $P/JP$, the latter is a graded module over $A_m/J\\cong\\bigoplus_i\\mathbb Ze_i$: the projections $e_i$ are orthogonal idempotents with sum $1$ [L5], so as a graded abelian group $P/JP=\\bigoplus_i e_i(P/JP)$, and a homogeneous basis of $P/JP$ is the disjoint union of homogeneous bases of the graded free abelian groups $e_i(P/JP)$. Write $a_{i,r}$ for the rank of the degree-$r$ part $(e_i(P/JP))_r$ of the $i$-th summand; the $a_{i,r}$ are the multiplicities of the Cartesian basis of [L3] and are zero for all but finitely many $(i,r)$. [step 1.1, L1, L5]\n\n3.1 *A surjection from the proposed direct sum.* Choose, for every $i$ and $r$, a homogeneous $\\mathbb Z$-basis $\\{[x_{i,r,s}]\\}_{s=1}^{a_{i,r}}$ of the degree-$r$ part of $e_i(P/JP)$ and lift each $x_{i,r,s}$ to a homogeneous element $\\widehat x_{i,r,s}\\in P$ of degree $r$ that lies in $e_iP$; since $P=\\bigoplus_ie_iP$ this is possible component by component. The lifts assemble into a degree-zero $A_m$-linear map $\\varphi\\colon F':=\\bigoplus_{i,r}P_i\\{r\\}^{\\oplus a_{i,r}}\\to P$ with $\\varphi(e_i\\otimes 1_{r,s})=\\widehat x_{i,r,s}$, the map on a summand being $ae_i\\mapsto a\\widehat x_{i,r,s}$. This is well defined because $\\widehat x_{i,r,s}=e_i\\widehat x_{i,r,s}$, so $ae_i=0$ implies $a\\widehat x_{i,r,s}=0$. Reducing modulo $J$ gives the isomorphism $F'/JF'\\to P/JP$ determined by the chosen bases, because $P_i/JP_i\\cong\\mathbb Z$ is concentrated at the vertex $i$ and $J$ kills the generators; hence $\\varphi$ is surjective by the nilpotent Nakayama argument: if $C:=\\operatorname{coker}\\varphi$ then $C=JC$, so $C=J^3C=0$ because $J^3=0$. [step 2.1, L1, L4, L5]\n\n3.2 *Uniqueness of the multiplicities.* Suppose $\\bigoplus_{i,r}P_i\\{r\\}^{a_{i,r}}\\cong\\bigoplus_{i,r}P_i\\{r\\}^{b_{i,r}}$, and reduce modulo $J$: since $P_i/JP_i\\cong\\mathbb Z$ placed at internal degree $0$ with the vertex $i$ acting by $1$, an isomorphism of the direct sums induces, for every $i$ and $r$, an isomorphism of graded abelian groups between the degree-$r$ parts of the $i$-th vertex components, which are the free abelian groups of ranks $a_{i,r}$ and $b_{i,r}$; hence $a_{i,r}=b_{i,r}$. [step 2.1, L1, L5]\n\n4.1 *The surjection splits, and is an isomorphism.* The module $P$ is projective, so the surjection $\\varphi$ splits: there is a degree-zero $A_m$-linear $\\psi:P\\to F'$ with $\\varphi\\psi=\\mathrm{id}_P$, and then $F'\\cong P\\oplus K$ with $K:=\\ker\\varphi$ a direct summand of $F'$, hence finitely generated graded projective by [L4]. Applying $(A_m/J)\\otimes_{A_m}-$ to $F'\\cong P\\oplus K$ and comparing with the isomorphism $F'/JF'\\cong P/JP$ of step 3.1 gives $K/JK=0$, so $K=JK=J^2K=J^3K=0$; hence $\\varphi$ is injective and therefore an isomorphism $F'\\cong P$. [step 3.1, L1, L4]\n\n5.1 *Conclusion.* Every finitely generated graded projective $P$ is isomorphic to $\\bigoplus_{i,r}P_i\\{r\\}^{\\oplus a_{i,r}}$ by step 4.1, the multiplicities are finite in number by step 2.1 and unique by step 3.2. Equivalently, the comparison with the split Grothendieck group sends the class of such a sum to the finite sum $\\sum a_{i,r}[P_i\\{r\\}]$, so the classes $[P_i\\{r\\}]$ are linearly independent over $\\mathbb Z$ by step 3.2, and each $P_i$ is indecomposable: for $i=0$ its endomorphism ring is $e_0A_me_0=\\mathbb Z e_0$, whose only idempotents are $0,1$. For $1\\le i\\le m$ the corner is $e_iA_me_i=\\mathbb Ze_i\\oplus\\mathbb Z(i|i-1|i)$ with $(i|i-1|i)^2=0$, an idempotent $a+br$ satisfies $a^2=a$ and $b(2a-1)=0$ in $\\mathbb Z$, so only $a=b=0$ and $a=1,b=0$ occur, and a decomposition $P_i=X\\oplus Y$ would give a nontrivial idempotent. No choice principle is used: all bases are finite and chosen explicitly from the finitely many graded pieces. [step 4.1, step 3.2] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Sections 1b and 2e.1",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Section 1b (the 4m+1 path basis), printed pp. 3-4; Section 2e.1 (indecomposable projectives P_i{k}), printed pp. 14-15"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-graded-grothendieck-group-of-a-m-is-free-on-the-shifted-vertex-projectives",
+        "kind": "lemma",
+        "title": "The graded Grothendieck group is free on the vertex-projective classes",
+        "deps": [
+          "def-graded-grothendieck-group-of-a-m-perfect-complexes",
+          "lem-finite-graded-projective-a-m-modules-are-sums-of-shifted-vertex-projectives",
+          "thm-perfect-complex-k-zero-agrees-with-projective-k-zero",
+          "def-split-grothendieck-group-of-an-additive-category",
+          "lem-homological-and-internal-shifts-on-khovanov-seidel-k-zero",
+          "lem-bounded-finite-projective-model-for-khovanov-seidel-modules",
+          "def-bounded-projective-homotopy-category-for-a-m",
+          "def-triangulated-k-zero-of-khovanov-seidel-projectives"
+        ],
+        "statement": "The graded Grothendieck group $G(A_m)=K_0(C_m)$ is a free $\\mathbb Z[q,q^{-1}]$-module with basis the classes $[P_0],[P_1],\\dots,[P_m]$. Equivalently, the comparison isomorphism $K_0(C_m)\\cong K_0^{\\mathrm{split}}(\\operatorname{proj}^{gr}A_m)$ sends $[X]$ for a bounded complex $X$ of finite graded projectives to its Euler class $\\sum_n(-1)^n[X^n]$, and the latter group is free abelian on the classes $[P_i\\{r\\}]$; the internal-shift rule $[P_i\\{r\\}]=q^r[P_i]$ then identifies it with $\\bigoplus_{i=0}^m\\mathbb Z[q,q^{-1}][P_i]$.",
+        "strategy": "The bounded projective comparison theorem of the source gives an exact fully faithful $C_m\\to D^b(A_m\\text{-mod})$ and a finite projective replacement for every bounded complex; since $A_m$ has finite homological dimension, $D^b(A_m\\text{-mod})=D_{\\mathrm{perf}}(A_m)$ and the comparison carries the distinguished triangles of $C_m$ to those of the perfect derived category, so $K_0(C_m)\\cong K_0^{\\mathrm{tri}}(D_{\\mathrm{perf}}(A_m))$. The published comparison theorem for perfect complexes over a ring identifies this with $K_0^{\\mathrm{split}}$ of finite graded projectives, whose free basis is supplied by the decomposition lemma; the internal-shift lemma computes the $\\mathbb Z[q,q^{-1}]$-action on the basis. No finite-dimensional-field-algebra theorem is used: $A_m$ is an integral algebra handled by the explicit classification.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Section 2e.1",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Section 2e.1, printed pp. 14-15 (K(A_m-mod) free of rank m+1 on the [P_i])"
+            },
+            {
+              "title": "The Stacks Project, More on Algebra, Lemma 15.121.2 (K_0 of perfect complexes versus split K_0 of finite projectives)",
+              "url": "https://stacks.math.columbia.edu/tag/0FJG",
+              "locator": "More on Algebra, Lemma 15.121.2 (tag 0FJG): K_0(D_perf(R)) = K_0(R)"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-graded-grothendieck-group-of-a-m-perfect-complexes",
+        "kind": "definition",
+        "title": "The graded Grothendieck group of A_m",
+        "deps": [
+          "def-triangulated-k-zero-of-khovanov-seidel-projectives",
+          "def-triangulated-grothendieck-group",
+          "thm-perfect-complex-k-zero-agrees-with-projective-k-zero",
+          "lem-homological-and-internal-shifts-on-khovanov-seidel-k-zero",
+          "def-bounded-projective-homotopy-category-for-a-m",
+          "def-perfect-complex-over-a-ring",
+          "lem-bounded-finite-projective-model-for-khovanov-seidel-modules"
+        ],
+        "statement": "Fix $m\\ge1$. The **graded Grothendieck group** of $A_m$ is the triangulated Grothendieck group $$G(A_m):=K_0(C_m)=K_0^{\\mathrm{tri}}\\bigl(K^b(\\operatorname{proj}^{gr}A_m)\\bigr)$$ of the bounded homotopy category of finite graded projective left $A_m$-modules, formed from the distinguished triangles of $C_m$ with the relation $[Y]=[X]+[Z]$ for $X\\to Y\\to Z\\to X[1]$. Its classes satisfy $[X\\oplus Y]=[X]+[Y]$, $[X[1]]=-[X]$ and $[X\\{r\\}]=q^r[X]$; the internal shift makes $G(A_m)$ a module over $\\mathbb Z[q,q^{-1}]$, and the exact fully faithful comparison $C_m\\to D_{\\mathrm{perf}}(A_m)$ identifies $G(A_m)$ with the Grothendieck group of graded perfect complexes. This is emphatically the triangulated $K_0$ of projective complexes and **not** the short-exact $G_0$ of the abelian category of all finitely generated graded $A_m$-modules; no structure theorem for finite-dimensional algebras over a field is applied to the integral algebra $A_m$, and no identification of $G_0$ with $G(A_m)$ is claimed.",
+        "strategy": "The definition instantiates the published triangulated Grothendieck group at the triangulated category $C_m$; the three class rules are the published shift lemmas, and the comparison with perfect complexes is the published bounded-projective comparison together with finite homological dimension. The scope paragraph records the two standing warnings of the source's Section 2e.1.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Section 2e.1",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Section 2e.1, printed pp. 14-15 (K(A_m-mod), the action of {1} and of U_i and R_i)"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "prop-khovanov-seidel-decategorification-is-the-unreduced-burau-action",
+        "kind": "proposition",
+        "title": "Decategorification is the unreduced Burau action",
+        "deps": [
+          "thm-khovanov-seidel-complexes-give-a-weak-derived-braid-action",
+          "lem-graded-grothendieck-group-of-a-m-is-free-on-the-shifted-vertex-projectives",
+          "def-graded-grothendieck-group-of-a-m-perfect-complexes",
+          "def-khovanov-seidel-positive-and-negative-twist-complexes",
+          "thm-khovanov-seidel-u-functors-satisfy-temperley-lieb-relations",
+          "def-unreduced-burau-matrices",
+          "def-triangulated-k-zero-of-khovanov-seidel-projectives",
+          "lem-homological-and-internal-shifts-on-khovanov-seidel-k-zero",
+          "lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis"
+        ],
+        "statement": "Each $X\\in C_m$ has a class $[X]\\in G(A_m)$, and $[R_\\sigma\\otimes_{A_m}-]$ depends only on $\\sigma\\in B_{m+1}$, so the action of the previous theorem induces a representation of $B_{m+1}$ by $\\mathbb Z[q,q^{-1}]$-linear maps on $G(A_m)$. On the basis $[P_0],\\dots,[P_m]$ of the freeness lemma the generators act by $$[R_i][P_i]=-q[P_i],\\qquad [R_i][P_{i+1}]=[P_{i+1}]-[P_i],\\qquad [R_i][P_{i-1}]=[P_{i-1}]-q[P_i],\\qquad [R_i][P_j]=[P_j]\\ \\ (|i-j|>1),$$ with the terms $[P_{i+1}]$, $[P_{i-1}]$ omitted when the index leaves $\\{0,\\dots,m\\}$. Moreover, let $C$ be the $(m+1)\\times(m+1)$ matrix over $\\mathbb Z[q,q^{-1}]$ with $C_{r,r}=C_{r,r+1}=(-q)^{m-r}$ for $0\\le r\\le m-1$ and $C_{m,m}=1$, all other entries zero. Then $C$ is invertible and $$C\\,[R_i]\\,C^{-1}=B_i\\big|_{t=q}$$ for every $i$, where $B_1,\\dots,B_m$ are the unreduced Burau matrices of the Burau page in their column-vector convention with parameter $t$. Consequently, after the explicit change of basis $C$ and the parameter identification $q=t$, the decategorified action is exactly the unreduced Burau representation of $B_{m+1}$; no identification is left implicit, and the comparison uses the same generator indexing and word order as the Burau matrices.",
+        "strategy": "The class of the twist is computed from the distinguished triangle $U_i\\to A_m\\to R_i\\to U_i[1]$ of the twist-complex definition: since $[X[1]]=-[X]$ in $G(A_m)$, one gets $[R_i]=[A_m]-[U_i]$. On the basis, $U_i\\otimes_{A_m}P_j\\cong P_i\\otimes_{\\mathbb Z}e_iA_me_j$ by the corner computation proved inside the Temperley-Lieb theorem, and the corner basis $e_iA_me_i=\\mathbb Ze_i\\oplus\\mathbb Z(i|i-1|i)$, $e_iA_me_{i\\pm1}=\\mathbb Z(i|i\\pm1)$ with the internal degrees computed there gives $[U_i][P_i]=[P_i]+q[P_i]$, $[U_i][P_{i+1}]=[P_i]$, $[U_i][P_{i-1}]=q[P_i]$ and $[U_i][P_j]=0$ for $|i-j|>1$. Subtracting from $[P_j]$ gives the four displayed formulas. The intertwining identity $CA_i=B_iC$ is then a finite matrix check on the generators performed entrywise in $\\mathbb Z[q,q^{-1}]$: for each $i$ only the rows and columns $i-1,i,i+1$ meet, the powers $(-q)^{m-r}$ telescope, and the identity holds; $C$ is upper triangular with unit diagonal entries, hence invertible.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Section 2e.1",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Section 2e.1 and Proposition 2.8, printed pp. 14-15"
+            },
+            {
+              "title": "Joan S. Birman and Tara E. Brendle, Braids: A Survey, Section 4.2",
+              "url": "https://www.math.columbia.edu/~jb/Handbook-21.pdf",
+              "locator": "Section 4.2, author manuscript pp. 46-47 (the unreduced Burau matrix convention)"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-khovanov-seidel-complex-of-an-admissible-bigraded-curve",
+        "kind": "definition",
+        "title": "The complex of an admissible bigraded curve",
+        "deps": [
+          "def-khovanov-seidel-bigraded-cover-and-bigraded-curves",
+          "def-khovanov-seidel-bigrading-cover-and-local-intersection-indices",
+          "def-basic-arcs-admissible-curves-and-normal-form",
+          "lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers",
+          "def-graded-khovanov-seidel-module-category-and-projectives",
+          "lem-bigradings-of-curves-exist-and-are-unique-up-to-the-deck-action",
+          "lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis"
+        ],
+        "statement": "Fix the normalized bigradings $\\widetilde d_i,\\widetilde b_i$ of\n[[lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers]].\nLet $\\widetilde c$ be an admissible bigraded curve in normal form with respect\nto the fixed basic set and vertical curves\n([[def-basic-arcs-admissible-curves-and-normal-form]]), with crossing set\n$\\operatorname{cr}(\\widetilde c)$ and local index $(x_1,x_2):=\\mu^{\\mathrm{bigr}}(\\widetilde d_{x_0},\\widetilde c;x)\\in\\mathbb Z^2$ at\neach crossing $x$; here $x_0$ denotes the index of the vertical curve $d_{x_0}$\ncontaining $x$, so that $x\\in d_{x_0}$, and for a crossing of the underlying\ncurve $c$ the local index of the bigrading is interpreted through the\nidentification of the crossings of $\\widetilde c$ with those of $c$\n([[def-khovanov-seidel-bigrading-cover-and-local-intersection-indices]]). Put\n$$P(x):=P_{x_0}[-x_1]\\{x_2\\}\\in C_m,\\qquad L(\\widetilde c):=\\bigoplus_{x\\in\\operatorname{cr}(\\widetilde c)}P(x),$$\nthe direct sum of shifted vertex projectives indexed by the crossings, where\n$P_{x_0}=A_me_{x_0}$ is the vertex projective of\n[[def-graded-khovanov-seidel-module-category-and-projectives]] and the two\nshifts are the homological shift $[-x_1]$ and the internal shift $\\{x_2\\}$.\n\n**The differential.** For crossings $x,y$ which are the two endpoints of an\nessential segment of $c$ and satisfy $y_1=x_1+1$, define the component\n$$\\partial_{yx}\\colon P(x)\\longrightarrow P(y)$$\nby the following rules, right multiplication meaning the left $A_m$-linear map $A_me_i\\to A_me_j$, $u\\mapsto ua$, for $a\\in e_iA_me_j$:\n\n1. if $x_0=y_0$ (in which case $x_2=y_2+1$), then $\\partial_{yx}$ is the right\n   multiplication by the return $(x_0|x_0-1|x_0)$ when $x_0>0$, and is the zero map when $x_0=0$ (the return $(0|1|0)$ vanishes);\n2. if $x_0=y_0\\pm1$, then $\\partial_{yx}$ is the right multiplication by the\n   arrow $(x_0|y_0)$, which is $(x_0|x_0-1)$ or $(x_0|x_0+1)$;\n3. otherwise $\\partial_{yx}:=0$.\n\nPut $\\partial:=\\sum_{x,y}\\partial_{yx}$. For a bigraded $k$-string\n$\\widetilde g$ of $\\widetilde c$ the same formulas applied to the crossings and\nessential segments of $g$ define an object $L(\\widetilde g)$ with its\ndifferential, and the underlying graded module of $L(\\widetilde g)$ is an\nabelian subgroup of $L(\\widetilde c)$.\n\n**Claims.** $(L(\\widetilde c),\\partial)$ is a bounded complex of finitely\ngenerated graded projective left $A_m$-modules with a differential that is\ndegree zero for the internal grading, hence an object of\n$C_m=K^b(\\operatorname{proj}^{gr}A_m)$; the object is bounded because there are\nfinitely many crossings; and the deck action translates into the shift rule\n$$L(\\chi(r_1,r_2)\\widetilde c)\\cong L(\\widetilde c)[-r_1]\\{r_2\\}$$\nby the degreewise sign identification described in the proof. These claims are proved below.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *The composites of two differential components vanish.* Let $x,y,z$ be crossings with $\\partial_{yx}\\neq0\\neq\\partial_{zy}$, so that $y_1=x_1+1$, $z_1=y_1+1$ and the pairs $(x,y)$, $(y,z)$ are endpoints of essential segments; the composite is right multiplication by the concatenation of the two path labels. If either label is a return, its length is at least three, so it vanishes by [L2]. If both labels are arrows and $x_0\\ne z_0$, they form a monotone length-two path, which also vanishes. The remaining case would have $x_0=z_0=y_0\\pm1$. Both segments would then lie in the same region between these adjacent dividing curves and approach $y$ from the same side of $d_{y_0}$. This contradicts transversality at the crossing $y$, where the two branches of the embedded curve lie on opposite sides of $d_{y_0}$. Thus no such consecutive arrow return occurs, and every composite is zero. Summing the components gives $\\partial^2=0$. [L1, L2]\n\n1.2 *The shift rule.* Under $\\chi(r_1,r_2)$ the local index of each crossing $x$ becomes $(x_1+r_1,x_2+r_2)$ by [L4], and the crossing data (which crossings are joined by essential segments, and the segment types) are unchanged because the deck action changes only the bigrading, not the underlying curve or its normal form; the source retains the same path entries, while the homological shift $[-r_1]$ multiplies the target differential by $(-1)^{r_1}$. Map the summand indexed by $x$ by $(-1)^{r_1x_1}$ times the identity. For a nonzero entry $x\\to y$ one has $y_1=x_1+1$, so the target differential followed by the source sign agrees with the target sign followed by the source differential. These invertible sign maps give the claimed chain isomorphism. An identity on every summand would fail for odd $r_1$. [L1, L3, L4]\n\n2.1 *The differential is degree zero and the terms are finite graded projective.* For a component given by right multiplication by a path $a\\in e_{x_0}A_me_{y_0}$ of internal degree $\\delta$, an element of underlying degree $d$ has source shifted degree $d+x_2$ and target shifted degree $d+\\delta+y_2$. The segment tables in [L1] give $\\delta=x_2-y_2$: a return has $\\delta=1$, an ascending arrow has $\\delta=0$, and a descending arrow has $\\delta=1$. Thus both degrees agree. The map is left $A_m$-linear because $(bu)a=b(ua)$, and its image lies in $A_me_{y_0}$ because $a=e_{x_0}ae_{y_0}$; no right-module structure on $A_me_{x_0}$ is assumed. Homological degree rises from $x_1$ to $y_1=x_1+1$. Each term is a shifted finite graded vertex projective, and there are finitely many crossings; together with step 1.1 this gives a bounded complex of the required bidegree. [step 1.1, L1, L3]\n\n3.1 *Conclusion.* $(L(\\widetilde c),\\partial)$ is a bounded complex of finite graded projectives with a degree-zero differential, so it defines an object of $C_m$, and the deck action acts by the shift $[-r_1]\\{r_2\\}$. No choice principle is used; the verifications are finite checks over the segment types. [step 1.1, step 2.1, step 1.2] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Section 4a",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Section 4a, formula (4.1) and Lemma 4.1, printed pp. 33-36"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-the-khovanov-seidel-curve-complex-is-a-complex-and-is-invariant-under-normal-form-moves",
+        "kind": "lemma",
+        "title": "The curve complex is invariant under normal-form moves",
+        "deps": [
+          "def-complex-homotopy-and-contractibility-in-an-additive-category",
+          "def-khovanov-seidel-complex-of-an-admissible-bigraded-curve",
+          "lem-bigradings-of-curves-exist-and-are-unique-up-to-the-deck-action",
+          "lem-normal-form-string-types-and-their-geometric-intersection-contributions",
+          "def-basic-arcs-admissible-curves-and-normal-form"
+        ],
+        "statement": "Let $\\widetilde c,\\widetilde c'$ be admissible bigraded curves that are\nisotopic and both in normal form with respect to the fixed vertical curves\n([[def-basic-arcs-admissible-curves-and-normal-form]]), and let\n$L(\\widetilde c),L(\\widetilde c')$ be the complexes of\n[[def-khovanov-seidel-complex-of-an-admissible-bigraded-curve]]. Then\n$$L(\\widetilde c)\\cong L(\\widetilde c')\\qquad\\text{in }C_m .$$\nMore precisely, $L(\\widetilde c)$ is a complex and the relative isotopy between two normal-form representatives identifies their crossings, essential-segment types and local indices. The resulting permutation of identically shifted projective summands is an explicit chain isomorphism, with the inverse crossing correspondence as inverse; its mapping cone has an explicit contracting homotopy. Stretching or folding the drawn presentation of this same indexed complex changes only its presentation. A half twist is a braid action, not an isotopy move asserted to preserve $L$. The shift rule\n$L(\\chi(r_1,r_2)\\widetilde c)\\cong L(\\widetilde c)[-r_1]\\{r_2\\}$ is compatible with these identifications.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *The complex and shift.* The square-zero verification is [L1], already proved for the actual essential-segment/path rules of the current definition. A deck shift changes each crossing index by $(r_1,r_2)$, so every summand changes by $[-r_1]\\{r_2\\}$. The source keeps its path entries, while the homological shift changes their sign by $(-1)^{r_1}$; the supplier’s sign map $(-1)^{r_1x_1}$ on the summand indexed by $x$ gives the stated chain isomorphism. [L1]\n\n1.2 *The crossing correspondence.* Use [L2] to transport $\\widetilde c$ to $\\widetilde c'$, preserving the dividing curves setwise. A crossing with $d_i$ moves along $d_i$ and retains its index $i$, its two local indices by [L3], and the types and orientations of its incident essential segments. Thus its source and target summands are the identical shifted projective. Define $\\Phi$ on that summand to be the identity into the summand indexed by the transported crossing; define $\\Psi$ by the inverse correspondence. Every differential entry is multiplication by the same path before and after transport, so $\\Phi d=d'\\Phi$, $\\Psi d'=d\\Psi$, and $\\Psi\\Phi=\\mathrm{id}$, $\\Phi\\Psi=\\mathrm{id}$. No arbitrary overall deck shift is introduced for isotopic bigraded representatives. [L1, L2, L3]\n\n2.1 *Explicit cone contraction.* In the degree-increasing convention the mapping cone of $\\Phi$ is $L(\\widetilde c')^n\\oplus L(\\widetilde c)^{n+1}$ with differential $D(y,x)=(d'y+\\Phi x,-dx)$. Define $h(y,x)=(0,\\Psi y)$. Then $Dh+hD=(y,-d\\Psi y+\\Psi d'y+x)=(y,x)$ by the chain-map identity. Hence the cone is contractible, and in particular the two complexes are isomorphic in $C_m$; the displayed maps are stronger than merely homotopy inverses. [L4, step 1.2, algebra]\n\n3.1 *Presentations and conclusion.* Stretching the curve drawing, grouping the indexed summands into columns, and folding arrows into a complex leave precisely the same summands and differential entries, so their comparisons are the corresponding reindexing chain isomorphisms of step 1.2. Inessential end segments carry no pair of crossing modules and are omitted in the construction, not cancelled through a fabricated identity pivot. Half twists have their separate generator action. The isotopy isomorphism and deck-shift rule therefore prove the full claimed invariance and compatibility without additional choice. [step 1.1, step 1.2, step 2.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Lemma 4.1 and the folded-diagram discussion",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Formula (4.1), Lemma 4.1, Lemma 4.2 and Figures 19-23, printed pp. 33-36"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-khovanov-seidel-curve-complexes-intertwine-the-braid-generators",
+        "kind": "lemma",
+        "title": "Curve complexes intertwine the braid generators",
+        "deps": [
+          "def-khovanov-seidel-complex-of-an-admissible-bigraded-curve",
+          "def-basic-arcs-admissible-curves-and-normal-form",
+          "def-axiom-of-choice",
+          "lem-the-khovanov-seidel-curve-complex-is-a-complex-and-is-invariant-under-normal-form-moves",
+          "def-khovanov-seidel-positive-and-negative-twist-complexes",
+          "lem-khovanov-seidel-generator-complexes-are-mutually-inverse",
+          "def-khovanov-seidel-complex-of-a-braid-word",
+          "def-elementary-geometric-half-twist",
+          "thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk",
+          "thm-khovanov-seidel-u-functors-satisfy-temperley-lieb-relations",
+          "def-signed-totalization-of-graded-a-m-bimodule-actions"
+        ],
+        "statement": "Assume AC, used only for the induction over braid words, which reads a braid as\na boundary-fixed mapping class acting on bigraded curves\n([[def-basic-arcs-admissible-curves-and-normal-form]], with its Artin completeness and smooth comparison);\neach local intertwining isomorphism is a finite computation. For every\n$1\\le k\\le m$ and every admissible bigraded curve $\\widetilde c$ there is an\nisomorphism in $C_m$\n$$R_k\\otimes_{A_m}L(\\widetilde c)\\cong L(\\widetilde\\tau_k\\widetilde c),$$\nwhere $\\widetilde\\tau_k$ is the preferred lift of the half twist along $b_k$\nacting on bigraded curves; the inverse-generator analogue\n$R_k^{-1}\\otimes_{A_m}L(\\widetilde c)\\cong L(\\widetilde\\tau_k^{-1}\\widetilde c)$\nholds as well. Consequently, for every braid $\\sigma$ presented by a word,\n$$R_\\sigma L(\\widetilde c)\\cong L(\\sigma\\widetilde c) \\qquad\\text{and, for }\\widetilde c=\\widetilde b_j,\\qquad R_\\sigma P_j\\cong L(\\sigma\\widetilde b_j),$$\nthe last isomorphism using $L(\\widetilde b_j)\\cong P_j$ for the normalized\nbigradings of the basic arcs.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *Decomposition into $k$-strings.* Let $\\widetilde c$ be an admissible bigraded curve in normal form and fix $k$. The direct sum decomposition of the graded module $L(\\widetilde c)$ into its summands $P(x)$ over crossings restricts, over the subsets of crossings lying in a single $k$-string $\\widetilde g$, to a direct sum decomposition $L(\\widetilde c)=\\bigoplus_{\\widetilde g\\in\\operatorname{st}(\\widetilde c,k)}L(\\widetilde g)\\oplus(\\text{crossings with }|x_0-k|>1)$. Applying $U_k$, all summands $P(x)$ with $|x_0-k|>1$ die by [L2], and for a composable pair of crossings in different $k$-strings the induced map $U_k\\partial_{yx}$ is zero: either one of the two crossings has $|x_0-k|>1$, or both lie on $d_{k\\pm1}$ and the differential is right multiplication by $(x_0|k|x_0)$, which $U_k$ kills [L2]; hence $U_kL(\\widetilde c)\\cong\\bigoplus_{\\widetilde g}U_kL(\\widetilde g)$ as complexes. [L2, L3]\n\n2.1 *The local intertwiners.* For each of the finitely many types of bigraded $k$-strings the source's case-by-case computation (the local lemmas and Cases 1-5 of the proof) writes $R_kL(\\widetilde g)$ as $L(\\widetilde\\tau_k\\widetilde g)$ plus contractible two-term summands with explicit contracting homotopies: for a string $\\widetilde g$ of type $\\mathrm{VI}$ this is the computation $R_kP_k\\simeq P_k[1]\\{1\\}$; for the types $\\mathrm{IV},\\mathrm{IV}',\\mathrm V,\\mathrm V'$ the summand $U_kL(\\widetilde g)$ is acyclic; for the types $\\mathrm I,\\mathrm{II},\\mathrm{II}',\\mathrm{III},\\mathrm{III}'$ the complex $U_kL(\\widetilde g)$ splits off acyclic complexes and the central folding is isomorphic to $L(\\widetilde\\tau_k\\widetilde g)$ after the indicated sign isomorphisms, as displayed in the source comparisons [F1]. Those comparisons are relative to the outside complement $\\nabla$. In particular, the type-II$_0$ comparison sends $(x,y,z,w)$ to $(x,-y-z(k-1|k),z,-w)$ and negates the entire attached right tail (printed p. 43); it is not simply an identity on all outside summands. Composing these relative homotopy equivalences string by string, and step 1.1 gives $R_kL(\\widetilde c)\\cong L(\\widetilde\\tau_k\\widetilde c)$. [step 1.1, L1, L2, L4, L5, F1]\n\n3.1 *The inverse-generator analogue.* Apply step 2.1 to $\\widetilde\\tau_k^{-1}\\widetilde c$: it gives $R_kL(\\widetilde\\tau_k^{-1}\\widetilde c)\\cong L(\\widetilde c)$. Tensor with $R_k^{-1}$ and use $R_k^{-1}R_k\\cong\\operatorname{Id}$ from [L7]. Thus $L(\\widetilde\\tau_k^{-1}\\widetilde c)\\cong R_k^{-1}L(\\widetilde c)$. No additional inverse case computation is needed. [step 2.1, L7]\n\n4.1 *Induction over braid words.* Let $\\sigma$ be a word. By [L6] the functor $R_\\sigma$ is the composite of the factors; inducting over the length of the word using steps 2.1 and 3.1 (and the composition of the induced natural isomorphisms) gives $R_\\sigma L(\\widetilde c)\\cong L(\\sigma\\widetilde c)$ for the action of the braid on bigraded curves through the preferred lifts, which is well defined by the braid/mapping-class dictionary and uses AC exactly there. Applying this to $\\widetilde c=\\widetilde b_j$ and using that the basic arc has no essential segments, so that $L(\\widetilde b_j)$ is a single summand $P_{b_j}=P_j$ for the normalized bigradings, gives $R_\\sigma P_j\\cong L(\\sigma\\widetilde b_j)$. [step 2.1, step 3.1, L6]\n\n5.1 *Conclusion.* The generator complexes intertwine the half-twist action on bigraded curves, and consequently the braid-word complexes intertwine the braid action; the last isomorphism identifies $R_\\sigma P_j$ with the complex of the twisted basic arc. The local computations are finite and AC is used only in the final word induction. [step 4.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Proposition 4.4 and Corollary 4.8",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Proposition 4.4 with its case-by-case proof, Lemmas 4.5-4.7, printed pp. 37-44; Corollary 4.8, printed p. 44"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-khovanov-seidel-homs-compute-bigraded-arc-intersections",
+        "kind": "theorem",
+        "title": "Homs compute bigraded arc intersections",
+        "deps": [
+          "lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis",
+          "thm-khovanov-seidel-complexes-give-a-weak-derived-braid-action",
+          "def-graded-khovanov-seidel-module-category-and-projectives",
+          "def-basic-arcs-admissible-curves-and-normal-form",
+          "def-axiom-of-choice",
+          "lem-khovanov-seidel-curve-complexes-intertwine-the-braid-generators",
+          "def-khovanov-seidel-complex-of-a-braid-word",
+          "def-khovanov-seidel-bigrading-cover-and-local-intersection-indices",
+          "lem-bigraded-string-type-contributions-to-bigraded-intersection-numbers",
+          "lem-bigradings-of-curves-exist-and-are-unique-up-to-the-deck-action",
+          "thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk",
+          "thm-hom-in-the-homotopy-category-is-zero-degree-homology-of-the-hom-complex",
+          "def-khovanov-seidel-complex-of-an-admissible-bigraded-curve",
+          "lem-the-khovanov-seidel-curve-complex-is-a-complex-and-is-invariant-under-normal-form-moves"
+        ],
+        "statement": "Assume AC, inherited from the representative-independence and isotopy invariance\nof intersection numbers ([[def-khovanov-seidel-bigrading-cover-and-local-intersection-indices]])\nand used to interpret $\\sigma\\in B_{m+1}$ as a boundary-fixed\nmapping class acting on bigraded curves\n([[def-basic-arcs-admissible-curves-and-normal-form]], with its Artin completeness and smooth comparison);\nthe graded Hom and Poincaré-polynomial computation is finite. For all\n$\\sigma,\\tau\\in B_{m+1}$, all $s_1,s_2\\in\\mathbb Z$ and all $0\\le k,j\\le m$ the\nabelian group\n$$\\operatorname{Hom}_{C_m}\\bigl(R_\\tau P_k,\\,R_\\sigma P_j[s_1]\\{-s_2\\}\\bigr)$$\nis free, and its Poincaré polynomial satisfies\n$$\\sum_{s_1,s_2}\\operatorname{rk}\\operatorname{Hom}_{C_m}\\bigl(R_\\tau P_k,R_\\sigma P_j[s_1]\\{-s_2\\}\\bigr)q_1^{s_1}q_2^{s_2} =I^{\\mathrm{bigr}}\\bigl(\\widetilde f_\\tau(\\widetilde b_k),\\widetilde f_\\sigma(\\widetilde b_j)\\bigr),$$\nwhere $\\widetilde f_\\sigma$ is the preferred lift of the boundary-fixed mapping\nclass representing $\\sigma$ under the isomorphism $B_{m+1}\\cong G$, acting on\nthe normalized bigradings of the basic arcs. In particular, specializing\n$q_1=q_2=1$ gives\n$$I^{\\mathrm{bigr}}(\\ldots)\\big|_{q_1=q_2=1}=2\\,I(\\cdot,\\cdot),$$\nso the ranks at $q_1=q_2=1$ recover twice the ordinary geometric intersection\nnumbers of the source's curves.",
+        "strategy": "**Proof technique:** source-supported direct reduction.\n\n1.1 *Reduction to the first untwisted arc.* Apply the inverse equivalence $R_{\\tau^{-1}}$ to both arguments of each shifted Hom. The weak action identifies the second image with $R_{\\tau^{-1}\\sigma}P_j$. Apply the corresponding inverse preferred lift to both geometric arcs; [L4] gives the same reduction of their intersection polynomial. It therefore suffices to compare $\\operatorname{Hom}(P_k,L(\\widetilde c)[s_1]\\{-s_2\\})$ and $I^{\\mathrm{bigr}}(\\widetilde b_k,\\widetilde c)$, with $\\widetilde c=\\widetilde f_{\\tau^{-1}\\sigma}\\widetilde b_j$ by [L1], a bigraded basic-arc image. [L1, L4, L6]\n\n1.2 *The correct string decomposition.* Compute these groups as homology of the Hom complex by [L3]. The corner basis [L5] kills summands farther than one vertex from $k$, while retaining adjacent arrows and the self return. For different $k$-strings the remaining connecting differential acts by a length-three product or a forbidden return at the exterior vertex, hence is zero, as the source string-splitting calculation in [F1] proves. Thus for every pair of shifts the Hom group is the finite direct sum of the string Hom groups. [L2, L3, L5, F1]\n\n1.3 *Base diagrams, integer twists and freeness.* The source local theorem [F1] computes the BASE diagrams, then extends by deck shifts and integer half twists. For example its $\\mathrm I_0$ Hom complex reduces to $0\\to\\mathbb Z\\{1\\}\\xrightarrow{0}\\mathbb Z\\to0$, giving $q_1+q_2$ and free groups. The four exceptional zero-contribution types have acyclic Hom complexes; the other base types give the full table of [L4], with type VI checked directly in [F1]. The source's parameter reduction multiplies the table by the stated monomial, without claiming an arbitrary winding string has at most three terms. Crucially [F1] asserts freeness of the actual string HOMOLOGY groups; that property is not inferred from the chain groups alone. [L2, L3, L4, F1]\n\n2.1 *The polynomial and all shifts.* Summing the string polynomials of step 1.3 gives $I^{\\mathrm{bigr}}(\\widetilde b_k,\\widetilde c)$ by [L4], while step 1.2 identifies each coefficient with the rank of the corresponding shifted Hom group. A finite direct sum of the free string Hom groups is free. Step 1.1 now returns the original $\\sigma,\\tau$ and both geometric images, proving the claimed full Poincaré formula and freeness for every shift. [step 1.1, step 1.2, step 1.3, L4, F1]\n\n3.1 *Specialization and conclusion.* Property (B1) of [L4] evaluates the polynomial at $q_1=q_2=1$ as twice the ordinary intersection number. The equivalence reduction, correctly retained corner Homs, exact source string theorem and coefficient-wise freeness prove all claimed conclusions. AC is inherited through the braid/mapping-class dictionary and the supplied representative-independence and isotopy invariance of intersection numbers; the finite string groups add no choice requirement. [step 2.1, L4] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Section 4c, Proposition 4.9 and Theorem 1.1",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Proposition 4.9, Lemmas 4.10-4.12 and Theorem 1.1, printed pp. 44-47"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-khovanov-seidel-basic-arcs-detect-the-identity-braid",
+        "kind": "lemma",
+        "title": "The basic arcs detect the identity braid",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk",
+          "def-basic-arcs-admissible-curves-and-normal-form",
+          "lem-geometric-intersection-numbers-are-isotopy-invariants",
+          "lem-standard-twists-fix-the-complementary-basic-arcs-and-commute",
+          "lem-standard-disk-twists-generate-a-free-abelian-subgroup",
+          "lem-normal-form-string-types-and-their-geometric-intersection-contributions"
+        ],
+        "statement": "Assume AC for the supplied well-definedness and isotopy invariance of geometric\nintersection numbers, including the normal-form contribution table, and to\nmove between the boundary-fixed mapping class $f$ and its braid class\n(the Artin-to-smooth dictionary of [[def-basic-arcs-admissible-curves-and-normal-form]],\nincluding presentation completeness; the topological comparison is\n[[thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk]]). Let\n$b_0,\\dots,b_m$ be a basic set of curves in $(D,\\Delta)$ and let $f\\in G$ be a\nboundary-fixed mapping class. If\n$$I(b_j,f(b_k))=I(b_j,f^2(b_k))=I(b_j,b_k)\\qquad\\text{for all }0\\le j,k\\le m,$$\nthen $[f]=1$ in $G$. Both iterates are required: the hypothesis on $f$ alone\nonly forces $f$ to act on the basic arcs as a product of the standard twists,\nand the second iterate together with the freeness of the twist subgroup is what\nkills the exponents.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *A preliminary identification.* Suppose $g\\in G$ satisfies $g(b_k)\\simeq b_k$ for all $k$. Then $[g]=1$ by [L2], and in particular $g(b_k)$ is isotopic to $b_k$ for every $k$ and the intersection table of $g$ with the basic set is the identity table. [L1, L2]\n\n1.2 *The intersection table determines the action on the basic curves.* Let $c$ be admissible and suppose $I(b_j,c)=I(b_j,b_k)$ for all $j$. For $k<m$, [L3] gives $c\\simeq\\tau_k^{\\nu}(b_k)$ for an integer $\\nu\\in\\{-1,0,1\\}$, with $\\nu\\le0$ when $k=0$; for $k=m$, it gives $c\\simeq b_m$ directly. Consequently, applying this to $c=f(b_k)$ for each $k$ separately, there are integers $\\nu_0\\in\\{-1,0\\}$ and $\\nu_1,\\dots,\\nu_{m-1}\\in\\{-1,0,1\\}$ with $f(b_k)\\simeq\\tau_k^{\\nu_k}(b_k)\\quad(0\\le k\\le m-1),\\qquad f(b_m)\\simeq b_m .$ [L3]\n\n2.1 *An explicit model for $f$.* Let $g:=\\tau_0^{\\nu_0}\\tau_1^{\\nu_1}\\cdots\\tau_{m-1}^{\\nu_{m-1}}\\in G$. Since the twists commute and $\\tau_j$ fixes the complementary basic arcs by [L4], one has $g(b_k)\\simeq\\tau_k^{\\nu_k}(b_k)$ for $k\\le m-1$ and $g(b_m)\\simeq b_m$; comparing with step 1.2, $f(b_k)\\simeq g(b_k)$ for every $k$. Applying step 1.1 to $g^{-1}f$, which fixes each $b_k$ up to isotopy, gives $[f]=[g]$. [step 1.1, step 1.2, L4]\n\n3.1 *The same for the square, and comparison of exponents.* Applying the same argument to $f^2$, whose intersection table with the basic set is also the identity table by hypothesis, produces integers $\\mu_0\\in\\{-1,0\\}$ and $\\mu_1,\\dots,\\mu_{m-1}\\in\\{-1,0,1\\}$ with $f^2\\simeq\\tau_0^{\\mu_0}\\cdots\\tau_{m-1}^{\\mu_{m-1}}.$ Since $[f]=[g]$, one has $[f^2]=[g]^2=\\prod_j\\tau_j^{2\\nu_j}$, and therefore $\\prod_{j=0}^{m-1}\\tau_j^{2\\nu_j-\\mu_j}\\simeq 1 .$ [step 2.1, L4]\n\n4.1 *Freeness kills the exponents.* By the freeness of the twist subgroup [L4], the relation $\\prod_j\\tau_j^{2\\nu_j-\\mu_j}\\simeq1$ forces $2\\nu_j=\\mu_j$ for every $j$. Since each $\\mu_j$ lies in $\\{-1,0,1\\}$ and each $2\\nu_j$ is even, the only possibility is $\\nu_j=\\mu_j=0$ for all $j$; hence $[f]=[g]=1$, as required. [step 3.1, L4]\n\n5.1 *Conclusion.* The identity intersection table for $f$ and $f^2$ forces $[f]=1$. AC is inherited through the braid/mapping-class dictionary and the supplied well-definedness and isotopy invariance of geometric intersection numbers used in [L1] and [L3]; the local counts and exponent bookkeeping are finite. [L1, L3, step 4.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Lemmas 3.4-3.6",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Lemmas 3.4, 3.5 and 3.6 with their proofs, printed pp. 19-21"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-the-khovanov-seidel-weak-braid-action-is-faithful",
+        "kind": "theorem",
+        "title": "The Khovanov-Seidel weak braid action is faithful",
+        "deps": [
+          "def-khovanov-seidel-bigrading-cover-and-local-intersection-indices",
+          "def-axiom-of-choice",
+          "def-basic-arcs-admissible-curves-and-normal-form",
+          "def-faithful-weak-categorical-action",
+          "thm-khovanov-seidel-homs-compute-bigraded-arc-intersections",
+          "lem-khovanov-seidel-basic-arcs-detect-the-identity-braid",
+          "thm-khovanov-seidel-complexes-give-a-weak-derived-braid-action",
+          "thm-braid-group-is-the-boundary-fixed-mapping-class-group-of-the-punctured-disk"
+        ],
+        "statement": "Assume AC, inherited from the braid-to-mapping-class dictionary used in the Hom\ntheorem and the detector, and from the supplied representative-independence\nand isotopy invariance of intersection numbers. For every $m\\ge1$ the weak action of $B_{m+1}$ on\n$C_m$ given by the complexes $R_\\sigma$\n([[thm-khovanov-seidel-complexes-give-a-weak-derived-braid-action]]) is\nfaithful ([[def-faithful-weak-categorical-action]]): if\n$R_\\sigma\\cong\\operatorname{Id}_{C_m}$ for a braid $\\sigma$, then $\\sigma=1$.\nEquivalently, no nontrivial braid acts by the identity functor, although\nnontrivial braids may act trivially on the Grothendieck group $G(A_m)$.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *The Hom-table of $R_\\sigma$ is the identity table.* Suppose $R_\\sigma\\cong\\operatorname{Id}_{C_m}$. Then for all $j,k$ and all shifts $s_1,s_2$ the induced isomorphism gives $\\operatorname{Hom}_{C_m}\\bigl(P_k,R_\\sigma P_j[s_1]\\{-s_2\\}\\bigr)\\cong\\operatorname{Hom}_{C_m}\\bigl(P_k,P_j[s_1]\\{-s_2\\}\\bigr).$ By the Hom theorem [L1] applied with $\\tau=1$ on the left and $\\sigma=1$ on the right, taking Poincaré polynomials gives $I^{\\mathrm{bigr}}\\bigl(\\widetilde b_k,\\sigma\\widetilde b_j\\bigr)=I^{\\mathrm{bigr}}\\bigl(\\widetilde b_k,\\widetilde b_j\\bigr) \\qquad\\text{for all }j,k .$ [L1]\n\n2.1 *The same for the square.* The weak-action relation $R_{\\sigma^2}\\cong R_\\sigma R_\\sigma$ gives $R_{\\sigma^2}\\cong\\operatorname{Id}_{C_m}$ as well; hence the same argument yields $I^{\\mathrm{bigr}}\\bigl(\\widetilde b_k,\\sigma^2\\widetilde b_j\\bigr)=I^{\\mathrm{bigr}}\\bigl(\\widetilde b_k,\\widetilde b_j\\bigr) \\qquad\\text{for all }j,k .$ [step 1.1, L1]\n\n3.1 *Specialization to the ordinary intersection table.* Setting $q_1=q_2=1$ in the identities of steps 1.1 and 2.1 and using [L3] gives $I(b_k,f_\\sigma(b_j))=I(b_k,b_j),\\qquad I(b_k,f_\\sigma^2(b_j))=I(b_k,b_j) \\qquad\\text{for all }j,k,$ where $f_\\sigma$ is the boundary-fixed mapping class of $\\sigma$ [L4]. [step 1.1, step 2.1, L3, L4]\n\n4.1 *The detector concludes.* The two families of equalities of step 3.1 are exactly the hypotheses of the detector lemma [L2] for $f=f_\\sigma$; hence $[f_\\sigma]=1$ in $G$, and by [L4] $\\sigma=1$ in $B_{m+1}$. This proves faithfulness. [step 3.1, L2, L4]\n\n5.1 *Conclusion.* No nontrivial braid acts by the identity functor: the identity of the Hom tables forces the identity of the mapping class, by the two-iterate hypothesis of the detector. The contrast with the Grothendieck group is displayed by the decategorification proposition and the companion counterexample. AC is inherited through the Hom theorem and the detector, which use $B_{m+1}\\cong G$, and through the supplied representative-independence and isotopy invariance of intersection numbers in [L3]. [step 4.1, L1, L2, L3] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Corollary 1.2",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Corollary 1.2 and the final paragraph of Section 4c, printed pp. 5 and 47"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-a-nontrivial-five-strand-braid-lies-in-the-burau-kernel",
+        "kind": "lemma",
+        "title": "A nontrivial five-strand braid lies in the Burau kernel",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-unreduced-burau-matrices",
+          "prop-reduced-and-unreduced-burau-representations-have-the-same-kernel",
+          "def-braid-group-by-the-artin-presentation",
+          "def-boundary-fixed-mapping-class-group-of-a-punctured-disk",
+          "def-elementary-geometric-half-twist",
+          "def-burau-infinite-cyclic-cover",
+          "thm-topological-and-matrix-burau-representations-agree",
+          "lem-homotopic-simple-proper-arcs-in-the-punctured-disk-are-isotopic-relative-to-their-endpoints",
+          "def-curves-and-geometric-intersection-numbers-on-the-marked-disk",
+          "def-artin-automorphisms-of-the-free-group",
+          "def-the-artin-representation-on-a-free-group",
+          "thm-reduced-words-form-the-free-group",
+          "lem-unreduced-burau-matrices-satisfy-the-artin-relations"
+        ],
+        "statement": "Assume AC, inherited from the topological definition of the Burau\nrepresentations and from the reduced/unreduced same-kernel transfer. There\nexists a nontrivial element of $B_5$ that acts trivially in the unreduced Burau\nrepresentation $\\rho^{\\mathrm{mat}}_5$ of\n[[def-unreduced-burau-matrices]]. Explicitly, let $\\alpha,\\beta$ be the two\nembedded arcs on the five-punctured disk displayed in Figure 3 of the source,\nusing the standard Artin labels fixed by its straightening words on p. 403,\nwith $\\alpha$ joining the marked points $q_2$ and $q_4$ and $\\beta$ joining the\nboundary basepoint $p_0$ to the marked point $q_3$, and put\n$$\\psi:=[T_\\alpha,T_\\beta]=T_\\alpha^{-1}T_\\beta^{-1}T_\\alpha T_\\beta,$$\nthe commutator of the clockwise half Dehn twist $T_\\alpha$ about the boundary of a regular\nneighbourhood of $\\alpha$ (whose induced permutation exchanges $q_2$ and $q_4$) with the\nfull boundary-arc twist $T_\\beta$ about the boundary of a regular neighbourhood of\n$\\beta\\cup\\partial D$. Then $\\psi\\ne1$ in $B_5$ and\n$\\rho^{\\mathrm{mat}}_5(\\psi)=I_5$. This is the explicit kernel element used by\nthe counterexample on the companion page; it is not an instance of\n$\\Delta^{2k}$. The boundary-arc twist uses the boundary-relative convention\nof Bigelow, Section 2; changing its representative by a central boundary full\ntwist leaves this commutator unchanged.",
+        "strategy": "Use the exact conjugate-twist words on Bigelow p.403 in clockwise generators s_i=σ_i^-1. Preserve the fifty-term Figure3 intersection cancellation. Direct integral Laurent block calculations show the half-twist matrix I+uv commutes with the boundary-arc twist using its t^-1 eigen-relations on u and v. A complete deterministic free-word substitution certificate distinguishes the two twist orders on x1, proving nontriviality without a faithfulness theorem. Their noncommutation proves essential arc intersection; transfer to reduced homology excludes boundary full-twist powers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen J. Bigelow, The Burau representation is not faithful for n=5, Geometry & Topology 3 (1999) 397-404",
+              "url": "https://arxiv.org/pdf/math/9904100",
+              "locator": "Full text pp. 397-404; Figure 3 on p. 402 and its explicit conjugate-twist words on p. 403"
+            },
+            {
+              "title": "Joan S. Birman and Tara E. Brendle, Braids: A Survey, Sections 4.2 and 4.4",
+              "url": "https://www.math.columbia.edu/~jb/Handbook-21.pdf",
+              "locator": "Sections 4.2 (author manuscript pp. 46-47) and 4.4 (pp. 52-53): the unreduced Burau matrix convention, the sum-zero reduced Burau subrepresentation and its topological interpretation"
+            }
+          ]
+        },
+        "dependency_level": 11,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 758,
+    "id": "categorical-braid-actions-and-decategorification-examples",
+    "kind": "B",
+    "category": "braid-groups",
+    "title": "Categorical Braid Actions and Decategorification — Examples",
+    "companion": "categorical-braid-actions-and-decategorification",
+    "requires": [
+      "categorical-braid-actions-and-decategorification"
+    ],
+    "items": [
+      {
+        "id": "ex-cancelling-a-generator-with-its-inverse-categorical-twist",
+        "kind": "example",
+        "title": "Cancelling a generator with its inverse categorical twist",
+        "deps": [
+          "lem-khovanov-seidel-generator-complexes-are-mutually-inverse",
+          "def-khovanov-seidel-positive-and-negative-twist-complexes",
+          "def-signed-totalization-of-graded-a-m-bimodule-actions",
+          "def-khovanov-seidel-beta-and-gamma-bimodule-maps",
+          "thm-homological-gaussian-elimination-splits-off-a-contractible-two-term-complex"
+        ],
+        "statement": "Fix $m\\ge1$ and $1\\le i\\le m$, and let\n$$R_i=[\\,U_i\\xrightarrow{\\ \\beta_i\\ }A_m\\,],\\qquad R_i^{-1}=[\\,A_m\\xrightarrow{\\ \\gamma_i\\ }U_i\\{-1\\}\\,]$$\nbe the twist complexes of\n[[def-khovanov-seidel-positive-and-negative-twist-complexes]], with $U_i$ in\nhomological degree $-1$ and $A_m$ in degree $0$ in the first complex, and $A_m$\nin degree $0$ and $U_i\\{-1\\}$ in degree $1$ in the second. The totalization\n$N:=R_i\\otimes_{A_m}R_i^{-1}$ of\n[[def-signed-totalization-of-graded-a-m-bimodule-actions]] is **not** the\ndiagonal bimodule. Its three nonzero terms are\n$$N^{-1}=U_i\\otimes_{A_m}A_m\\cong U_i,\\qquad N^{0}=\\bigl(U_i\\otimes_{A_m}U_i\\{-1\\}\\bigr)\\oplus\\bigl(A_m\\otimes_{A_m}A_m\\bigr)\\cong \\bigl(U_i\\otimes_{A_m}U_i\\{-1\\}\\bigr)\\oplus A_m,\\qquad N^{1}=A_m\\otimes_{A_m}U_i\\{-1\\}\\cong U_i\\{-1\\},$$\nso, counted with multiplicity, the tensor complex has the four terms\n$U_i$ in degree $-1$, then $U_i\\otimes_{A_m}U_i\\{-1\\}$ and $A_m$ in degree $0$,\nthen $U_i\\{-1\\}$ in degree $1$: it is not concentrated in degree $0$. Writing\n$Q:={}_iP\\otimes_{A_m}P_i=\\mathbb Zu_1\\oplus\\mathbb Zu_2$ with\n$u_1=e_i\\otimes e_i$ in degree $0$ and $u_2=(i|i-1|i)\\otimes e_i$ in degree $1$,\nthe differentials become the source's maps\n$$\\partial^{-1}=(\\tau,\\beta_i),\\qquad \\partial^{0}(z,a)=\\gamma_i(a)-\\delta(z), \\qquad \\tau(x\\otimes y)=x\\otimes u_1\\otimes(i|i-1|i)y+x\\otimes u_2\\otimes y,$$\n$$\\delta(x\\otimes u_1\\otimes y)=x\\otimes y,\\qquad \\delta(x\\otimes u_2\\otimes y)=x(i|i-1|i)\\otimes y ,$$\nwhere the middle tensor coordinate is the negative of the natural balanced\nidentification with $P_i\\otimes_{\\mathbb Z}Q\\otimes_{\\mathbb Z}{}_iP\\{-1\\}$.\nThis sign change converts the natural totalization maps $(-\\tau,\\beta_i)$\nand $(\\delta,\\gamma_i)$ to the source’s displayed chart. The source's splitting\nof this totalization is\n$$N\\;\\cong\\;T_{-1}\\oplus A_m\\oplus T_1,$$\nwhere $A_m$ is the diagonal bimodule in degree $0$, and $T_{-1},T_1$ are the two\ntwo-term complexes\n$$T_{-1}=[\\,U_i\\xrightarrow{\\ \\partial^{-1}\\ }\\partial^{-1}(U_i)\\,], \\qquad T_1=[\\,P_i\\otimes_{\\mathbb Z}\\mathbb Zu_1\\otimes_{\\mathbb Z}{}_iP\\{-1\\}\\xrightarrow{\\ -\\delta\\ }U_i\\{-1\\}\\,],$$\nwhose differentials are invertible; $T_{-1}$ and $T_1$ are therefore\ncontractible, with contracting homotopies the inverses $(\\partial^{-1})^{-1}$\nand $x\\otimes y\\mapsto -x\\otimes u_1\\otimes y$ of the displayed differentials.\nThus the inverse pair cancels up to homotopy, not on the nose: the two\ncontractible summands are the visible cost of the cancellation. The same holds\nwith the factors in the opposite order.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 *The four terms and their degrees.* By [L4] the terms of $N=R_i\\otimes_{A_m}R_i^{-1}$ are the direct sums over $p+q=n$ of $R_i^p\\otimes_{A_m}(R_i^{-1})^q$; the nonzero pairs are $(p,q)=(-1,0),(0,0),(-1,1),(0,1)$, giving the terms $U_i$, $A_m$, $U_i\\otimes_{A_m}U_i\\{-1\\}$ and $U_i\\{-1\\}$ in homological degrees $-1,0,0,1$ as displayed, with the two degree-$0$ summands ordered as $U_i\\otimes_{A_m}U_i\\{-1\\}$ and $A_m$; the tensor-unit isomorphisms of [L4] identify the first and last with $U_i$ and $U_i\\{-1\\}$. This corrects the term count: there are four terms counted with multiplicity, not three $A_m$'s. [L1, L4]\n\n2.1 *The differentials.* After negating the natural identification of $U_i\\otimes_{A_m}U_i\\{-1\\}$ with $P_i\\otimes_{\\mathbb Z}Q\\otimes_{\\mathbb Z}{}_iP\\{-1\\}$ and the tensor-unit identifications, the Koszul-signed differentials of [L4] take the form $\\partial^{-1}(u)=(\\tau(u),\\beta_i(u))$ and $\\partial^{0}(z,a)=\\gamma_i(a)-\\delta(z)$ with the maps $\\tau,\\delta$ of the display: the component into $A_m$ is $\\beta_i$, the component into the middle bimodule is $\\tau$, and the component out of $A_m$ is $\\gamma_i$, while the component out of the middle is $-\\delta$ after this coordinate change. Before that change the Koszul rule gives $(-\\tau,\\beta_i)$ and $(\\delta,\\gamma_i)$, as required. [step 1.1, L3, L4]\n\n3.1 *The two contractible summands.* The $u_2$ component of $\\tau$ is the identity on $U_i$, so $\\partial^{-1}$ is injective and its restriction to its image is an isomorphism with inverse the $u_2$-coefficient projection on the middle summand, so $T_{-1}$ is contractible with contracting homotopy $(\\partial^{-1})^{-1}$ by [L5]; the restriction $-\\delta\\colon P_i\\otimes\\mathbb Zu_1\\otimes{}_iP\\{-1\\}\\to U_i\\{-1\\}$ is an isomorphism with inverse $x\\otimes y\\mapsto -x\\otimes u_1\\otimes y$, so $T_1$ is contractible by [L5]. The map $a\\mapsto(\\xi(a),a)$ identifies the remaining graph in degree $0$ with $A_m$ with zero differential, because $\\partial^{0}(\\xi(a),a)=\\gamma_i(a)-\\delta\\xi(a)=0$. [step 2.1, L3, L5]\n\n4.1 *Conclusion of the example.* By the direct sum decomposition of the generator lemma [L2], $N\\cong T_{-1}\\oplus A_m\\oplus T_1$; by step 3.1 the outer summands are contractible, so $N$ is homotopy equivalent to the diagonal bimodule and $R_iR_i^{-1}\\cong\\operatorname{Id}_{C_m}$, while $N$ itself is a four-term complex and not equal to $A_m$; the same argument applies to $R_i^{-1}\\otimes_{A_m}R_i$. The two contractible summands are exactly the cancellation cost, and their contracting homotopies are the displayed inverses. [step 3.1, L2] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Proposition 2.4",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Proposition 2.4 and its proof, printed pp. 11-13 (the complex N, the square (2.8) and the splitting N = T_{-1} + T_0 + T_1)"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-decategorifying-a-khovanov-seidel-generator",
+        "kind": "example",
+        "title": "Decategorifying a generator on the vertex-projective basis",
+        "deps": [
+          "prop-khovanov-seidel-decategorification-is-the-unreduced-burau-action",
+          "lem-graded-grothendieck-group-of-a-m-is-free-on-the-shifted-vertex-projectives",
+          "def-unreduced-burau-matrices",
+          "def-graded-grothendieck-group-of-a-m-perfect-complexes"
+        ],
+        "statement": "Take $m=2$. By\n[[lem-graded-grothendieck-group-of-a-m-is-free-on-the-shifted-vertex-projectives]]\nthe group $G(A_2)$ is free over $\\mathbb Z[q,q^{-1}]$ on the basis\n$[P_0],[P_1],[P_2]$. By\n[[prop-khovanov-seidel-decategorification-is-the-unreduced-burau-action]] the\noperator $[R_1]$ acts on coefficient column vectors in the ordered basis\n$([P_0],[P_1],[P_2])$ by\n$$[R_1]=\\begin{pmatrix}1&0&0\\\\-q&-q&-1\\\\0&0&1\\end{pmatrix},$$\nwhose columns are the images of $[P_0],[P_1],[P_2]$: the first column is\n$[P_0]-q[P_1]$, the second $-q[P_1]$, and the third $[P_2]-[P_1]$. The matrix\n$$C=\\begin{pmatrix}q^2&q^2&0\\\\0&-q&-q\\\\0&0&1\\end{pmatrix}$$\nis invertible over $\\mathbb Z[q,q^{-1}]$ (it is upper triangular with diagonal\nentries $q^2,-q,1$, all units) and\n$$C\\,[R_1]\\,C^{-1}=B_1,$$\nwhere\n$$B_1=\\begin{pmatrix}1-t&t&0\\\\1&0&0\\\\0&0&1\\end{pmatrix}$$\nis the first unreduced Burau matrix at $t=q$, in the column-vector convention of\n[[def-unreduced-burau-matrices]]. In the Burau coordinates $z=Cv$, the standard coordinate vectors satisfy\n$e_0\\mapsto(1-q)e_0+e_1$, $e_1\\mapsto qe_0$, and $e_2\\mapsto e_2$.\nThe displayed vertex-projective formulas describe the original basis before\nthis change of coordinates. The example records the\nconventions: $q=t$, matrices act on column vectors, and the generator $\\sigma_i$\nis the one that moves the vertex classes $i-1,i,i+1$.",
+        "strategy": "Compute the four cases of the displayed action from $[R_i]=[A_m]-[U_i]$ and the corner formulas, then multiply the three matrices out; this is the $m=2$ instance of the previous proposition, included so the convention can be read off without repeating the general matrix.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Section 2e.1",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Section 2e.1, printed pp. 14-15 (the displayed action of the generators)"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-equal-actions-on-k-zero-do-not-imply-isomorphic-derived-autoequivalences",
+        "kind": "counterexample",
+        "title": "Equal actions on K_0 do not imply isomorphic derived autoequivalences",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-the-khovanov-seidel-weak-braid-action-is-faithful",
+          "prop-khovanov-seidel-decategorification-is-the-unreduced-burau-action",
+          "lem-a-nontrivial-five-strand-braid-lies-in-the-burau-kernel",
+          "def-graded-grothendieck-group-of-a-m-perfect-complexes",
+          "def-unreduced-burau-matrices"
+        ],
+        "statement": "Assume AC, inherited from the kernel lemma and the faithfulness theorem it consumes. Take $m=4$, so that the braid group is $B_5$, and let $\\psi\\in B_5$ be the nontrivial braid with $\\rho^{\\mathrm{mat}}_5(\\psi)=I_5$ supplied by the five-strand kernel lemma. Then the endofunctor $R_\\psi$ of $C_4$ is not isomorphic to the identity functor, by the faithfulness theorem for the Khovanov-Seidel weak action, while its induced map on the graded Grothendieck group $G(A_4)$ is the identity: the decategorification proposition identifies the action on $G(A_4)$ with the unreduced Burau matrices at $t=q$, and $\\psi$ acts there by the identity matrix. Hence the abelian-group invariant $K_0$ does not detect the difference: the natural map from derived autoequivalences to $K_0$-operators has a nontrivial kernel. This refutes the statement that an exact autoequivalence acting trivially on the Grothendieck group is isomorphic to the identity functor.",
+        "strategy": "The element $\\psi$ exists and is nontrivial by the kernel lemma, and its induced action on $G(A_4)$ is trivial by the decategorification proposition, which computes the $G$-action in the unreduced Burau basis. Faithfulness of the weak action gives $R_\\psi\\not\\cong\\mathrm{Id}$. The two statements combine to the displayed failure of injectivity of the decategorification map on autoequivalences; note that the categorical action is faithful precisely while its decategorification is not, which is the point of the example. AC is inherited from the two consumed results; no additional choice is made.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Corollary 1.2 and Section 2e.1",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Corollary 1.2, printed p. 5, with its proof on p. 47; Section 2e.1, printed pp. 14-15"
+            },
+            {
+              "title": "Stephen J. Bigelow, The Burau representation is not faithful for n=5, Geometry & Topology 3 (1999) 397-404",
+              "url": "https://arxiv.org/pdf/math/9904100",
+              "locator": "Theorems 1.2 and 1.4, printed pp. 397-399"
+            }
+          ]
+        },
+        "dependency_level": 12,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-ks-weak-actions-do-not-supply-pentagon-coherence-data",
+        "kind": "counterexample",
+        "title": "Weak actions do not supply pentagon coherence data",
+        "deps": [
+          "def-weak-action-of-a-group-on-a-category",
+          "def-natural-isomorphism",
+          "def-functor-and-contravariant-functor",
+          "def-category",
+          "prop-modules-and-homomorphisms-form-category-rmod",
+          "def-left-and-right-modules"
+        ],
+        "statement": "Let $G=\\mathbb Z/2\\times\\mathbb Z/2$ with generators $a,b$, let $Q$ be the category of complex vector spaces, and let $F_g=\\operatorname{Id}_Q$ for every $g\\in G$, so that $F_fF_g=F_{fg}$ on the nose for all pairs. Choose the pairwise isomorphisms $\\mu_{f,g}\\colon F_fF_g\\to F_{fg}$ to be the scalars $\\mu_{a,b}=-1$ and $\\mu_{f,g}=1$ for all other pairs $(f,g)$ with $f,g\\ne1$. Then $F_fF_g\\cong F_{fg}$ for every pair, so the data satisfy the letter of the weak-action definition, but the associativity (pentagon) diagram for $(f,g,h)=(a,a,b)$ does not commute: its two composites differ by the scalar $\\mu_{a,b}/\\mu_{a,ab}\\mu_{1,b}=(-1)/1=-1$. Consequently the pairwise isomorphisms of a weak action need not be usable as coherence data, and in particular the Khovanov-Seidel action of this page must not be assumed coherent without further argument. This refutes the statement that pairwise invertible comparisons in the sense of the weak-action definition automatically satisfy the pentagon.",
+        "strategy": "Compute the two composites of the pentagon at $(a,a,b)$ in the one-object skeletal model: all functors are identities, so a natural transformation is a single scalar and composition of natural transformations is multiplication; the two sides evaluate to $\\mu_{a,a}\\mu_{1,b}=1$ and $\\mu_{a,b}\\mu_{a,ab}=-1$, which differ in $\\mathbb C^{\\times}$. The example shows the failure is not a presentational artifact of choosing functors that are merely isomorphic: even chosen isomorphisms can violate the pentagon.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mikhail Khovanov and Paul Seidel, Quivers, Floer Cohomology, and Braid Group Actions, J. Amer. Math. Soc. 15 (2002) 203-271, Definition 2.6 and the discussion after Proposition 2.7",
+              "url": "https://arxiv.org/pdf/math/0006056",
+              "locator": "Definition 2.6 and the remarks following it, printed p. 14"
+            },
+            {
+              "title": "Mikhail Khovanov and Richard Thomas, Braid cobordisms, triangulated categories, and flag varieties, Homology Homotopy Appl. 9 (2007) 19-94 (arXiv:math/0609335v2), Section 1 (weak action versus genuine action)",
+              "url": "https://arxiv.org/pdf/math/0609335",
+              "locator": "Section 1 (Introduction), arXiv PDF pp. 2-8 (the table of contents is p. 1); associativity constraint (1.1) for a genuine action on arXiv PDF p. 2"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

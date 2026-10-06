@@ -24,6 +24,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for def-stiefel-whitney-number-of-a-closed-manifold and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-13; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"b1c3fa52f576a41ed7bb536b42c9271343f2d45a13167e4089bcc6732728470e","evidence":["research/frontier-38-owner-30-reader-13.md","research/frontier-38-owner-30-reader-findings-13.json","research/frontier-38-owner-30-dispatch/reader-reader-13.result.json","research/frontier-38-owner-30-step5-hash-13-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/def-stiefel-whitney-number-of-a-closed-manifold.md","historical_raw_sha256":"5bf0705902fd21882e9b9afe382381e83ce268bd47c3079ca4fbcb9551b4a2bc","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:41:26.500Z"}}
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

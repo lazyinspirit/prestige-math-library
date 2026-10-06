@@ -42,11 +42,9 @@ Let $f,g:X\to[0,+\infty]$ be measurable and let $c\ge0$.
 
 **Proof technique:** direct.
 
-1.1 If $f\le g$, every simple minorant of $f$ is also a simple minorant of $g$. [L1, given]
-Taking suprema in [L1] gives $\int f\,d\mu\le\int g\,d\mu$.
+1.1 If $f\le g$, every simple minorant of $f$ is also a simple minorant of $g$. Taking suprema in [L1] gives $\int f\,d\mu\le\int g\,d\mu$. [L1, given]
 
-1.2 The zero function has just one nonnegative simple minorant: itself. [L1, L2, L3]
-Its simple integral is $0$ by [L3], so [L1] gives integral $0$ for the zero function, even on a space of infinite measure.
+1.2 The zero function has just one nonnegative simple minorant: itself. [L1, L2, L3] Its simple integral is $0$ by [L3], so [L1] gives integral $0$ for the zero function, even on a space of infinite measure. [L1, L2, L3]
 
-1.3 For $c>0$, multiplication by $c$ bijects simple minorants of $f$ with those of $cf$. [L1, given, algebra]
-The inverse divides by $c$ and preserves nonnegativity and simplicity. By [L2] and [L3], the corresponding simple integrals differ by the factor $c$. Multiplication by a positive finite real commutes with the supremum in $[0,+\infty]$, including when that supremum is infinite. Hence $\int cf\,d\mu=c\int f\,d\mu$. Together with steps 1.1 and 1.2, this proves both clauses. ∎
+2.1 For $c>0$, multiplication by $c$ bijects simple minorants of $f$ with those of $cf$. The inverse divides by $c$ and preserves nonnegativity and simplicity. By [L2] and [L3], the corresponding simple integrals differ by the factor $c$. Multiplication by a positive finite real commutes with the supremum in $[0,+\infty]$, including when that supremum is infinite. Hence $\int cf\,d\mu=c\int f\,d\mu$. Together with steps 1.1 and 1.2, this proves both clauses. [L1, given, algebra, L2, L3] ∎
+

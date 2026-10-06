@@ -80,19 +80,9 @@ composite is an element of $\operatorname{Hom}_D(\underline x,\underline y)$. Th
 
 1.4 Spanning: this is the imported content of [F5]: every morphism between Bott–Samelson objects is congruent modulo the lower-term ideal to an $R$-linear combination of double leaves, and induction on the maximum width of a graph descends through the lower terms, so the double leaves span $\operatorname{Hom}_D(\underline x,\underline y)$ over $R$. [F5]
 
-1.5 Linear independence: the independent-family clause of the imported
-double-leaves theorem [F4] applies to the exact category $D$ of [F1]. Its
-localization proof uses the upper-triangular double-leaf calculation of [F6]
-on pairs of source and target subsequences; a calculation for source light
-leaves alone would not establish independence of their composites. Thus the
-double leaves indexed in step 1.1 are linearly independent over $R$. [F1, F4,
-F6, step 1.1]
+2.1 Linear independence: the independent-family clause of the imported double-leaves theorem [F4] applies to the exact category $D$ of [F1]. Its localization proof uses the upper-triangular double-leaf calculation of [F6] on pairs of source and target subsequences; a calculation for source light leaves alone would not establish independence of their composites. Thus the double leaves indexed in step 1.1 are linearly independent over $R$. [F1, F4, F6, step 1.1]
 
-2.1 Freeness: by step 1.4 the finite family of double leaves spans the
-graded left $R$-module $\operatorname{Hom}_D(\underline x,\underline y)$, and
-by step 1.5 it is linearly independent. It is therefore a homogeneous free
-basis. The degree of each basis element is $d(e)+d(f)$ by step 1.2, so its
-graded rank is the stated finite sum of Laurent monomials. [step 1.2,
-step 1.4, step 1.5]
+3.1 Freeness: by step 1.4 the finite family of double leaves spans the graded left $R$-module $\operatorname{Hom}_D(\underline x,\underline y)$, and by step 2.1 it is linearly independent. It is therefore a homogeneous free basis. The degree of each basis element is $d(e)+d(f)$ by step 1.2, so its graded rank is the stated finite sum of Laurent monomials. [step 1.2, step 1.4, step 2.1]
 
-3.1 Conclusion: by steps 1.5, 2.1 and 1.4 the double leaves form a homogeneous free left $R$-basis of $\operatorname{Hom}_D(\underline x,\underline y)$, which is claim (1); claim (2) is step 1.3 together with the same argument in the case $\underline y=\emptyset$, which is the flipped-leaves clause of the imported basis theorem [F4]; claim (3) is the existence of a finite free basis in each target degree, the graded rank being the sum of the monomials $v^{d}$ over the indexing pairs. ∎ [F4, step 1.3, step 2.1, step 1.4]
+4.1 Conclusion: by steps 1.5, 2.1 and 1.4 the double leaves form a homogeneous free left $R$-basis of $\operatorname{Hom}_D(\underline x,\underline y)$, which is claim (1); claim (2) is step 1.3 together with the same argument in the case $\underline y=\emptyset$, which is the flipped-leaves clause of the imported basis theorem [F4]; claim (3) is the existence of a finite free basis in each target degree, the graded rank being the sum of the monomials $v^{d}$ over the indexing pairs. ∎ [F4, step 1.3, step 3.1, step 1.4]
+

@@ -44,25 +44,11 @@ $g : X \to \overline{\mathbb{R}}$ such that $f=g$ almost everywhere.
 
 **Proof technique:** direct.
 
-1.1 By [L1], choose simple $\overline{\mathcal{A}_0}$-measurable functions [L1, choose]
-$s_k : X \to \mathbb{R}$ with $|s_k| \le |f|$ and $s_k(x) \to f(x)$ for every $x \in X$. Write the canonical representation of $s_k$ as
+1.1 By [L1], choose simple $\overline{\mathcal{A}_0}$-measurable functions [L1, choose] $s_k : X \to \mathbb{R}$ with $|s_k| \le |f|$ and $s_k(x) \to f(x)$ for every $x \in X$. Write the canonical representation of $s_k$ as $$s_k = \sum_{j=1}^{m_k} c_{k,j}\,\mathbf{1}_{E_{k,j}},$$ where the $E_{k,j}$ are pairwise disjoint completed measurable level sets. [L1, choose]
 
-$$s_k = \sum_{j=1}^{m_k} c_{k,j}\,\mathbf{1}_{E_{k,j}},$$
+1.2 For each pair $(k,j)$, apply [L2] to $E_{k,j}$ and choose [L2, L3, choose] $A_{k,j} \in \mathcal{A}_0$ together with a completed null set $N_{k,j}$ such that $E_{k,j} = A_{k,j} \cup M_{k,j}$ with $M_{k,j} \subseteq N_{k,j}$. Because $A_{k,j} \subseteq E_{k,j}$, the sets $A_{k,j}$ remain pairwise disjoint. Define $$t_k := \sum_{j=1}^{m_k} c_{k,j}\,\mathbf{1}_{A_{k,j}}.$$ Then each $t_k$ is $\mathcal{A}_0$-measurable and simple. Let $N := \bigcup_{k,j} N_{k,j}$. By [L3], $N$ is a completed measurable null set, and for every $x \notin N$ one has $t_k(x)=s_k(x)$ for all $k$. [L2, L3, choose]
 
-where the $E_{k,j}$ are pairwise disjoint completed measurable level sets. [L1, choose]
+2.1 Define [step 1.1, step 1.2, L4] $$g := \limsup_{k \to \infty} t_k.$$ By [L4], the function $g$ is $\mathcal{A}_0$-measurable. If $x \notin N$, then step 1.2 gives $t_k(x)=s_k(x)$ for every $k$, and step 1.1 gives $s_k(x)\to f(x)$, so $g(x)=\limsup_k t_k(x)=\lim_k s_k(x)=f(x)$. Hence $g=f$ on $X \setminus N$. [step 1.1, step 1.2, L4]
 
-1.2 For each pair $(k,j)$, apply [L2] to $E_{k,j}$ and choose [L2, L3, choose]
-$A_{k,j} \in \mathcal{A}_0$ together with a completed null set $N_{k,j}$ such that $E_{k,j} = A_{k,j} \cup M_{k,j}$ with $M_{k,j} \subseteq N_{k,j}$. Because $A_{k,j} \subseteq E_{k,j}$, the sets $A_{k,j}$ remain pairwise disjoint. Define
+3.1 The null set $N$ is measurable in the completion by [L3], so step 2.1 says [step 2.1, L3] exactly that $f=g$ almost everywhere. Since $g$ is $\mathcal{A}_0$-measurable, it is the required base-measurable representative. [step 2.1, L3] ∎
 
-$$t_k := \sum_{j=1}^{m_k} c_{k,j}\,\mathbf{1}_{A_{k,j}}.$$
-
-Then each $t_k$ is $\mathcal{A}_0$-measurable and simple. Let $N := \bigcup_{k,j} N_{k,j}$. By [L3], $N$ is a completed measurable null set, and for every $x \notin N$ one has $t_k(x)=s_k(x)$ for all $k$. [L2, L3, choose]
-
-2.1 Define [step 1.1, step 1.2, L4]
-
-$$g := \limsup_{k \to \infty} t_k.$$
-
-By [L4], the function $g$ is $\mathcal{A}_0$-measurable. If $x \notin N$, then step 1.2 gives $t_k(x)=s_k(x)$ for every $k$, and step 1.1 gives $s_k(x)\to f(x)$, so $g(x)=\limsup_k t_k(x)=\lim_k s_k(x)=f(x)$. Hence $g=f$ on $X \setminus N$. [step 1.1, step 1.2, L4]
-
-3.1 The null set $N$ is measurable in the completion by [L3], so step 2.1 says [step 2.1, L3]
-exactly that $f=g$ almost everywhere. Since $g$ is $\mathcal{A}_0$-measurable, it is the required base-measurable representative. [step 2.1, L3] ∎

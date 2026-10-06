@@ -8,6 +8,18 @@ pipeline_run: frontier-38-owner-30
 deps: ["prop-transverse-preimage-carries-a-pulled-back-normal-structure", "thm-relative-whitney-approximation-for-manifold-valued-maps", "thm-relative-whitney-approximation-for-euclidean-valued-maps", "lem-manifold-bump-for-a-compact-set-inside-an-open-set", "lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family", "thm-parametric-transversality", "prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold", "lem-continuity-is-local-and-pastes", "thm-weak-whitney-proper-embedding-theorem", "cor-a-closed-euclidean-submanifold-has-a-smooth-neighbourhood-retraction", "def-axiom-of-choice"]
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item read and recorded Step 7 mathematical repair review, including the used supplier interfaces; current mathematical content matches the bound evidence. The repair review is local and does not claim an independent audit of the repair."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-14.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-14.result.json
+      - research/frontier-38-owner-30-step5-hash-14-post-5a.json
+      - research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u14.json
+      - research/frontier-38-owner-30-dispatch/alpha-adjudicate-step7-v2-initial-r1-u14.result.json
   precheck: pass
 provenance:
   statement: literature-derived

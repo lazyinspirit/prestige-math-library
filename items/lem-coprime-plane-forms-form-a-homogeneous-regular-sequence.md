@@ -14,11 +14,7 @@ landmark: true
 short: "coprime plane forms are a regular sequence"
 proof_strategy: direct
 verification:
-  audited: 2026-09-27
-  judge:
-    model: "gpt-6-sol"
-    verdict: pass
-    date: 2026-09-27
+  precheck: pass
 sources:
   scraped: []
   references:
@@ -63,7 +59,7 @@ elements ([[lem-finite-variable-polynomial-rings-over-fields-are-ufds]]).
 
 1.2 A nonconstant element $h\in S$ divides both $F$ and $G$ if and only if some irreducible element $p\in S$ divides both: given such $h$, factor $h$ into irreducibles using [L1]; every irreducible factor is a nonzero nonunit, hence nonconstant, since the constants of $S$ are $0$ and the units of $k$; conversely an irreducible common divisor is a common nonconstant factor by [L5]. [L1, L5, algebra]
 
-1.3 Suppose no irreducible element divides both $F$ and $G$, and let $G,H\in S$ with $GH\in(F)$, that is, $F\mid GH$. Write $F=u\,p_1^{a_1}\cdots p_r^{a_r}$ with $u$ a unit and the $p_i$ irreducible, using [L1] and $F\ne0$; no $p_i$ divides $G$, and $p_i\mid GH$, so $p_i\mid H$ for every $i$ because $p_i$ is prime by [L1]; hence $F\mid H$ and $H\in(F)$. Therefore multiplication by $G$ is injective on $S/(F)$. [L1, algebra]
+1.3 Suppose no irreducible element divides both $F$ and $G$, and let $H\in S$ satisfy $GH\in(F)$, that is, $F\mid GH$. Write $F=u\,p_1^{a_1}\cdots p_r^{a_r}$ with $u$ a unit, pairwise nonassociate irreducibles $p_i$, and $a_i\ge1$, using [L1]; no $p_i$ divides $G$. If $H=0$, then $F\mid H$ immediately. Otherwise, for each $i$, $p_i^{a_i}\mid GH$ forces $p_i^{a_i}\mid H$ by finite induction on the exponent: the exponent-zero case is immediate; for $a\ge1$, write $GH=p_i^aQ$, use primality and $p_i\nmid G$ to write $H=p_iH_1$, and cancel the nonzero $p_i$ in the domain to get $GH_1=p_i^{a-1}Q$. The preceding exponent case gives $p_i^{a-1}\mid H_1$, hence $p_i^a\mid H$. Uniqueness of factorisation now shows that the factorisation of $H$ contains each $p_i$ at least $a_i$ times, so $F\mid H$ and $H\in(F)$. Therefore multiplication by $G$ is injective on $S/(F)$. [L1, L3, L5, algebra]
 
 1.4 Both $F$ and $G$ are nonzero homogeneous of positive degree, so by [L4] every monomial of $F$ and of $G$ lies in $\mathfrak m=(x_0,x_1,x_2)$; hence $(F,G)\subseteq\mathfrak m$, which is a proper ideal, and $S/(F,G)\ne0$. [L4]
 

@@ -2,7 +2,7 @@
 // depsource.mjs — classify every dependency in the PLANNED item scaffolds by
 // where its target actually lives.
 //
-//   node tools/depsource.mjs [research/plan-spec.json] [--page <id>] [--json]
+//   node tools/depsource.mjs [research/plan-spec.json] [--page <id>] [--json] [--items-file PATH] [--run RUN]
 //
 // validate-plan.mjs already proves the planned stack is acyclic and forward-free
 // IN PLAN ORDER. This answers the different question the owner asked: can every
@@ -33,15 +33,36 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { includesItem, parseItemScope, unknownItems } from './item-scope.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
-const args = process.argv.slice(2);
+const itemScope = parseItemScope(process.argv.slice(2));
+const args = itemScope.args;
 const asJson = args.includes('--json');
 const pageFilter = args.includes('--page') ? args[args.indexOf('--page') + 1] : null;
+const run = args.includes('--run') ? args[args.indexOf('--run') + 1] : null;
+if (args.includes('--run') && !/^[a-zA-Z0-9_-]+$/.test(run ?? ''))
+  throw new Error('--run requires a valid run ID');
 const specPath = args.find((a) => a.endsWith('.json')) ?? 'research/plan-spec.json';
 
 const spec = JSON.parse(readFileSync(join(REPO, specPath), 'utf8'));
-const planned = spec.pages;
+// Load every scaffold/home before selecting consumers: unselected suppliers
+// remain available, including run additions not yet spliced into plan-spec.
+const planned = [...spec.pages];
+const runPages = [];
+if (run) {
+  const runFiles = readdirSync(join(REPO, 'research')).filter((f) =>
+    new RegExp(`^${run}-batch-\\d+\\.pages\\.json$`).test(f)).sort();
+  if (!runFiles.length) throw new Error(`No run manifests found for ${run}`);
+  for (const file of runFiles) {
+    for (const page of JSON.parse(readFileSync(join(REPO, 'research', file), 'utf8'))) {
+      runPages.push(page);
+      const old = planned.findIndex((p) => p.id === page.id);
+      if (old >= 0) planned[old] = page;
+      else planned.push(page);
+    }
+  }
+}
 const plannedPageOf = new Map(); // planned item id -> page
 const plannedOrder = new Map(); // planned item id -> page order
 for (const p of planned) {
@@ -95,6 +116,15 @@ const homeOf = new Map();
   }
 })(join(REPO, 'library'), []);
 
+// Run manifests supply authoritative homes before splice; all outside homes
+// remain available when resolving selected consumers' prerequisites.
+for (const page of runPages)
+  for (const item of page.items ?? [])
+    homeOf.set(item.id, {
+      id: page.id, status: page.status ?? 'draft',
+      path: `${page.category}/${page.id}`,
+    });
+
 // ------------------------------------------------------------------- classify
 
 const resolve = (d) => (authored.has(d) ? d : aliasTo.get(d));
@@ -116,15 +146,26 @@ function classify(dep, fromPage) {
     : { verdict: 'planned-later', where: `${pp.id} (order ${pp.order})` };
 }
 
+const scopeErrors = unknownItems(itemScope, plannedPageOf.keys()).map((id) => ({
+  code: 'focus-item-unknown',
+  msg: `--items-file names item \"${id}\" absent from the loaded scaffolds; use --run RUN for unspliced run items`,
+}));
 const rows = [];
+let checkedConsumers = 0;
 for (const p of planned) {
   if (pageFilter && p.id !== pageFilter) continue;
-  for (const it of p.items ?? [])
+  for (const it of p.items ?? []) {
+    if (!includesItem(itemScope, it.id)) continue;
+    checkedConsumers++;
     for (const d of it.deps ?? []) {
       const c = classify(d, p);
       if (c) rows.push({ page: p.id, kind: p.kind, item: it.id, dep: d, ...c });
     }
+  }
 }
+
+if (itemScope.selected !== null && checkedConsumers === 0 && scopeErrors.length === 0)
+  scopeErrors.push({ code: 'focus-empty', msg: 'No selected consumer remains after the page filter' });
 
 // ------------------------------------------- reciprocal-Archimedean worklist
 //
@@ -145,6 +186,7 @@ const archWorklist = [];
 for (const p of planned) {
   if (pageFilter && p.id !== pageFilter) continue;
   for (const it of p.items ?? []) {
+    if (!includesItem(itemScope, it.id)) continue;
     const deps = it.deps ?? [];
     if (deps.includes(ARCH) && !ARCH_RECIP.some((d) => deps.includes(d)))
       archWorklist.push({ page: p.id, item: it.id, title: (it.title ?? '').slice(0, 70) });
@@ -164,9 +206,13 @@ const counts = Object.fromEntries(
 );
 
 if (asJson) {
-  console.log(JSON.stringify({ counts, rows }, null, 2));
+  console.log(JSON.stringify(itemScope.selected === null ? { counts, rows }
+    : { counts, rows, checked_consumers: checkedConsumers, errors: scopeErrors }, null, 2));
 } else {
-  const pagesWithItems = planned.filter((p) => (p.items ?? []).length).length;
+  const pagesWithItems = itemScope.selected === null
+    ? planned.filter((p) => (p.items ?? []).length).length
+    : planned.filter((p) => (!pageFilter || p.id === pageFilter)
+      && (p.items ?? []).some((it) => includesItem(itemScope, it.id))).length;
   console.log(`${rows.length} external dependencies across ${pagesWithItems} scaffolded page(s)\n`);
   for (const [v, n] of Object.entries(counts)) console.log(`  ${v.padEnd(16)} ${n}`);
 
@@ -189,13 +235,15 @@ if (asJson) {
     for (const w of archWorklist) console.log(`  ${w.page} :: ${w.item}\n      ${w.title}`);
   }
 
+  for (const error of scopeErrors) console.log(`  [${error.code}] ${error.msg}`);
+  if (itemScope.selected !== null) console.log(`\nSelected consumer coverage: ${checkedConsumers}/${itemScope.selected.size}`);
   const unpublished = rows.filter((r) => r.verdict !== 'published' && r.verdict !== 'planned-earlier');
   console.log(
-    `\n${counts.unresolved === 0 ? 'OK' : 'FAIL'} — ${counts.unresolved} unresolved; ` +
+    `\n${counts.unresolved === 0 && scopeErrors.length === 0 ? 'OK' : 'FAIL'} — ${counts.unresolved} unresolved; ` +
       `${counts.published} dep(s) link to a published page, ${counts.planned_earlier ?? counts['planned-earlier']} to an earlier planned page, ` +
       `${unpublished.length} to neither.`,
   );
 }
 
 // Let piped report output drain before Node exits.
-process.exitCode = counts.unresolved === 0 ? 0 : 1;
+process.exitCode = counts.unresolved === 0 && scopeErrors.length === 0 ? 0 : 1;

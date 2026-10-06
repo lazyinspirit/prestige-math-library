@@ -19,6 +19,20 @@ deps:
 - lem-restriction-and-extension-estimates-are-dual
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-03"
+    scope: "Cumulative whole-item verification: completed original Step5 full statement/definition and proof read plus the recorded later Step7 local mathematical corrections. Exact recovered original carrier and current post-correction carrier match recorded hashes; every substantive delta is covered by the cited correction reasoning. No independent audit of the local repairs and no new review round is claimed; supplier review is limited to interfaces used."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-6.md"
+      - "research/frontier-38-owner-30-alpha-batch-6-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-6-post-5a.json"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u6.json"
+    original_read_raw_sha256: "2cde9683a15fe47cf27fe2df3be6e92178ce26f30e7dc4ab30a8e2f35914643a"
+    repair_post_guard_sha256: "d68530c15981bc535918f9d489ca57aa4cb7595eaf67a4148180144c3b4b75f1"
+    content_sha256: "7f6d850ed0f6385cb82d180a1960fd32cf30d70d531c1e38fd6f543633f626f8"
   precheck: pass
 provenance:
   statement: literature-derived

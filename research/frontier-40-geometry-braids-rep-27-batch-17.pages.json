@@ -1,0 +1,913 @@
+[
+  {
+    "order": 885,
+    "id": "projective-git-from-linearized-line-bundles",
+    "kind": "A",
+    "category": "algebraic-geometry",
+    "title": "Projective GIT from Linearized Line Bundles",
+    "companion": "projective-git-from-linearized-line-bundles-examples",
+    "requires": [
+      "reductive-affine-invariant-theory-and-geometric-quotients",
+      "quasi-coherent-and-coherent-sheaves-and-vector-bundles",
+      "proj-projective-schemes-twisting-sheaves-and-ampleness",
+      "cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes"
+    ],
+    "items": [
+      {
+        "id": "def-g-linearization-of-an-invertible-sheaf",
+        "kind": "definition",
+        "title": "G-linearizations of invertible sheaves on a complex G-variety",
+        "statement": "Let $G$ be a complex affine algebraic group acting algebraically on a classical complex variety $X$ ([[def-rational-action-on-affine-variety]], [[def-classical-algebraic-prevariety-regular-maps-and-varieties]]), and let $L$ be an invertible sheaf on $X$ with total space $p:L\\to X$ ([[def-invertible-sheaf]]), the projection being a morphism of locally ringed spaces ([[def-morphism-locally-ringed-spaces]]). Write $\\sigma:G\\times X\\to X$ for the action.\n\nA **$G$-linearization** of $L$ is a $G$-action $m:G\\times L\\to L$ on the total space such that\n\n- $p(m(g,\\ell))=g\\,p(\\ell)$ for all $g\\in G$, $\\ell\\in L$, and\n- for every $g\\in G$ and $x\\in X$ the fibre map $L_x\\to L_{gx}$, $\\ell\\mapsto g\\ell$, is $\\mathbb C$-linear.\n\nA **$G$-linearized invertible sheaf** is an invertible sheaf together with a linearization; the pair is written $(L,m)$. Equivalently, a linearization is an isomorphism $\\varphi:\\sigma^*L\\to \\mathrm{pr}_2^*L$ of sheaves on $G\\times X$ satisfying the cocycle identity\n\n$$\\mathrm{pr}_{23}^*\\varphi\\circ(\\mathrm{id}_G\\times\\sigma)^*\\varphi=(m_G\\times\\mathrm{id}_X)^*\\varphi,$$\n\nwhere $m_G:G\\times G\\to G$ is the multiplication; at $(g,h,x)$ both sides map the fibre $L_{ghx}$ to $L_x$. The isomorphism $\\varphi$ sends a vector over $gx$ to its translate by $g^{-1}$ over $x$, so its inverse recovers the action on total spaces.\n\nFor any character $\\chi:G\\to\\mathbf G_m=\\mathbb C^\\times$ the **twist** $(L,m)_\\chi$ multiplies the fibre action by $\\chi(g)$ and is again a linearization of the same invertible sheaf. In particular linearizations are not unique, the trivial action admits the trivial linearization of $\\mathcal O_X$ and its twists, and for a finite-dimensional rational $G$-module $V$ the induced action on the tautological line bundle linearizes $\\mathcal O_{\\mathbf P(V)}(-1)$, and its dual linearizes $\\mathcal O_{\\mathbf P(V)}(1)$.\n\nThe two main theorems of this page always assume that a linearization is given; no general existence of linearizations is claimed here, and the recorded external existence theorem is [[rem-linearization-existence-outside-this-pair]].",
+        "deps": [
+          "def-rational-action-on-affine-variety",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-invertible-sheaf",
+          "def-morphism-locally-ringed-spaces"
+        ],
+        "strategy": "Definition record following Brion Definition 1.33 (printed p. 12) and Newstead \u00a73.5, with the cocycle formulation of Mumford's convention as used in Dolgachev's book; the twist-by-character and the projective-space example are recorded because the companion page uses them, and the non-existence warning is Brion's remark after Lemma 1.34 (recorded, not used as a hypothesis anywhere). The equivalence of the total-space form with the cocycle form is the standard identification $G\\times L\\cong\\sigma^*L$: a $G$-action on $L$ covering $\\sigma$ with linear fibres, trivialized over $G\\times X$ and restricted to $\\{e\\}\\times X$, gives the descent datum, and the two group identities give the cocycle and the projection conditions. No linearization-existence theorem is imported or asserted by this item.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "Section 1.3, Definitions 1.28, 1.30, 1.33, Lemma 1.34, Propositions 1.29, 1.31 and 1.35, Examples 1.32, printed pp. 10-13 (PDF pp. 11-14)"
+            },
+            {
+              "title": "P. E. Newstead, Geometric Invariant Theory, lecture notes, CIMAT Guanajuato 2006 (CEL/HAL; archived copy)",
+              "url": "https://web.archive.org/web/20231019082211id_/https://cel.hal.science/cel-00392098/file/newstead_notes.pdf",
+              "locator": "Lecture 1 Sections 1.3-1.4, Lecture 3 Sections 3.2-3.5 (linearisation of a line bundle, Theorem 3.4), Example 3.3 and Example 4.1"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Sections 5.1-5.5 (linearisations, remarks on twisting by characters), Remark 5.20"
+            },
+            {
+              "title": "I. Dolgachev, Lectures on Invariant Theory, London Mathematical Society Lecture Note Series 296, Cambridge University Press, 2003",
+              "url": "https://www.math.ens.psl.eu/~benoist/refs/Dolgachev.pdf",
+              "locator": "Chapters 7.1 (G-linearization of a line bundle, printed pp. 103-105) and 8.1 (printed p. 115)"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-proj-of-finitely-generated-graded-algebra-is-projective",
+        "kind": "lemma",
+        "title": "Proj of a finitely generated graded algebra is projective",
+        "statement": "Assume AC inherited from the Proj construction. Let $S=\\bigoplus_{n\\ge0}S_n$ be a finitely generated graded commutative $\\mathbb C$-algebra with $S_0=\\mathbb C$ and every $S_n$ finite-dimensional, and suppose $S$ is generated as a $\\mathbb C$-algebra by homogeneous elements $f_1,\\dots,f_N$ of positive degrees $d_1,\\dots,d_N$; put $L=\\operatorname{lcm}(d_1,\\dots,d_N)$ (with $L=1$ when $N=0$) and $d=kL$ with $k=\\max(1,N-1)$.\n\nThen the Veronese subalgebra $S^{(d)}=\\bigoplus_{j\\ge0}S_{dj}$ is generated in degree one by $S_d$: every element of $S^{(d)}$ is a polynomial in elements of the finite-dimensional space $S_d$. Consequently, if $S_d\\ne0$, choosing a $\\mathbb C$-basis $g_0,\\dots,g_M$ of $S_d$ and the induced graded surjection $B=\\mathbb C[x_0,\\dots,x_M]\\to S^{(d)}$, $x_i\\mapsto g_i$, the canonical isomorphism $\\operatorname{Proj}S\\cong\\operatorname{Proj}S^{(d)}$ exhibits $\\operatorname{Proj}S$ as a closed subscheme of the projective space $\\mathbf P^M_{\\mathbb C}=\\operatorname{Proj}B$ of finite type over $\\mathbb C$, and $\\mathcal O(1)$ pulls back to $\\mathcal O_{S^{(d)}}(1)$.\n\nIf $S_+=0$, then $S=\\mathbb C$; and if $S_d=0$, degree-one generation makes $S^{(d)}=\\mathbb C$. In either case $\\operatorname{Proj}S=\\varnothing$ is the closed subscheme $V_+(x_0)$ of $\\mathbf P^0_{\\mathbb C}$, so the conclusion holds vacuously in that case as well.",
+        "deps": [
+          "def-proj-graded-ring-points",
+          "lem-standard-opens-proj-affine",
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "lem-proj-veronese-invariance",
+          "thm-projective-space-as-proj",
+          "thm-closed-subschemes-projective-space-homogeneous-ideals",
+          "def-graded-ring-and-graded-module",
+          "def-finite-type-and-module-finite-algebras",
+          "def-twisting-sheaf-proj",
+          "def-associated-sheaf-graded-module-proj",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Let $f_1,\\dots,f_N$ generate $S$ with $\\deg f_i=d_i>0$, let $L=\\operatorname{lcm}(d_i)$ and $d=kL$ with $k=\\max(1,N-1)$. The scaffold claim that every common multiple works is false (see the counterexample in the Remarks), and the proof establishes generation in degree one for this $d$ by a minimal-counterexample argument: a monomial of degree $md$, $m\\ge2$, that is not a product of $m$ monomials of degree $d$ has no sub-vector of degree $kL$; a maximal family of $L$-blocks then leaves a leftover $u$ of degree at least $NL$ with $u_i<L/d_i$ for every $i$, which bounds its degree by $NL-\\sum_i d_i<NL$, a contradiction. A basis of $S_d$ gives a graded surjection from a polynomial ring, and the standard Proj dictionary ([[thm-projective-space-as-proj]], [[thm-closed-subschemes-projective-space-homogeneous-ideals]], [[def-twisting-sheaf-proj]], [[def-associated-sheaf-graded-module-proj]]) together with Veronese invariance ([[lem-proj-veronese-invariance]]) exhibits $\\operatorname{Proj}S$ as a closed subscheme of a projective space with $\\mathcal O(1)$ pulling back to $\\mathcal O_{S^{(d)}}(1)$. The argument is the corrected form of the generation step in Hoskins' proof of Theorem 5.3.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Proof of Theorem 5.3 (the reduction from arbitrary homogeneous generators to a Veronese subalgebra generated in degree one)"
+            },
+            {
+              "title": "I. Dolgachev, Lectures on Invariant Theory, London Mathematical Society Lecture Note Series 296, Cambridge University Press, 2003",
+              "url": "https://www.math.ens.psl.eu/~benoist/refs/Dolgachev.pdf",
+              "locator": "Chapter 8.1-8.2, the construction of Proj R(X,L)^G and its projectivity, printed pp. 115-121"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "rem-linearization-existence-outside-this-pair",
+        "kind": "remark",
+        "title": "Recorded: linearization existence is outside this pair",
+        "statement": "Recorded external result, not proved here: let $G$ be a connected complex linear algebraic group acting algebraically on a normal complex $G$-variety $X$, and let $L$ be an invertible sheaf on $X$. Then some positive power $L^{\\otimes n}$ with $n\\ge1$ admits a $G$-linearization; moreover there is a finite covering $p:G'\\to G$ of algebraic groups such that $L$ itself admits a $G'$-linearization (Brion, remark after Lemma 1.34, printed p. 12, citing Knop-Kraft-Luna-Vust). Brion also records that the natural action of $\\mathrm{PGL}(V)$ on $\\mathbf P(V)$ does not linearize $\\mathcal O_{\\mathbf P(V)}(1)$. This pair neither proves nor uses the existence result: every theorem on this page assumes that a linearization of $L$ is given, and the connectedness and normality hypotheses are exactly the ones recorded in the source. In particular no item of this pair asserts that an arbitrary ample invertible sheaf admits a linearization, with or without passing to a positive power.",
+        "deps": [],
+        "strategy": "Recorded source boundary, not a proof prerequisite. The statement is Brion's remark, whose proof is not given in the source (it cites Knop-Kraft-Luna-Vust for the positive-power and finite-covering statements); no local proof is attempted because the result lies outside the commissioned inventory and is needed by no item. The main theorems of this pair retain the linearization as an explicit hypothesis and use no step that constructs one.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "Section 1.3, remark after Lemma 1.34, printed p. 12 (PDF p. 13)"
+            }
+          ]
+        },
+        "proved_here": false,
+        "verification": {
+          "precheck": "n/a"
+        },
+        "external_dependency": {
+          "source_url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+          "exact_statement": "Brion, printed p. 12, after Lemma 1.34: 'But given a connected linear algebraic group G, and a line bundle L on a normal G-variety X, some positive power L^n admits a linearization; also, there exists a finite covering p: G' -> G of algebraic groups such that L admits a G'-linearization (see [6]). [6] = F. Knop, H. Kraft, D. Luna and T. Vust, Local properties of algebraic group actions, DMV Seminar Band 13 (1989), 63-76.' The same page records that O(1) on P(V) does not admit a PGL(V)-linearization.",
+          "local_proof_attempt": "No local proof is attempted. The positive-power and finite-covering statements depend on Knop-Kraft-Luna-Vust's local-properties theory, which was not read; the PGL example is recorded from the same source. Both are outside the item inventory of this pair and are not consumed by any proof on the page.",
+          "necessity": "The design requires that any theorem supplying a linearization after taking a power be stated separately with its normality and connectedness hypotheses, and that the pair not imply every projective action comes with the needed linearization. Recording the exact external statement here satisfies that requirement without importing unproved external theory into the proofs, all of which assume a linearization outright."
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-linearizations-powers-and-equivariant-section-ring",
+        "kind": "lemma",
+        "title": "Linearizations of tensor powers and the equivariant section ring",
+        "statement": "For the projective constant-function conclusions in (ii) and (iii), assume AC inherited from [[thm-global-regular-functions-projective-variety]]; the remaining conclusions use no choice principle. Let $L$ be a $G$-linearized invertible sheaf on a classical complex $G$-variety $X$ ([[def-g-linearization-of-an-invertible-sheaf]]). Then:\n\n(i) for every $n\\ge0$ the tensor power $L^{\\otimes n}$ (with $L^{\\otimes0}=\\mathcal O_X$) carries an induced $G$-linearization, functorial in $L$, and the canonical multiplication isomorphisms $L^{\\otimes r}\\otimes L^{\\otimes s}\\to L^{\\otimes(r+s)}$ are $G$-equivariant;\n\n(ii) each space of global sections $\\Gamma(X,L^{\\otimes n})$ carries the linear action $(g\\cdot\\sigma)(x)=g\\,\\sigma(g^{-1}x)$, is a rational $G$-module ([[def-rational-action-on-affine-variety]]), and restriction to a $G$-stable open subset is $G$-equivariant; the constant functions in $\\Gamma(X,\\mathcal O_X)$ are fixed by $G$, and if $X$ is projective and irreducible then $\\Gamma(X,\\mathcal O_X)=\\mathbb C$;\n\n(iii) the direct sum $R(X,L)=\\bigoplus_{n\\ge0}\\Gamma(X,L^{\\otimes n})$ is a graded commutative $\\mathbb C$-algebra with $G$ acting by graded algebra automorphisms, so that $R(X,L)$ is a graded rational $G$-algebra with degree-zero part $\\Gamma(X,\\mathcal O_X)$; if $X$ is projective and irreducible this part is $\\mathbb C$;\n\n(iv) for global sections $\\sigma\\in\\Gamma(X,L^{\\otimes r})$ and $\\tau\\in\\Gamma(X,L^{\\otimes s})$ one has $X_{\\sigma\\otimes\\tau}=X_\\sigma\\cap X_\\tau$, and for a $G$-invariant section $\\sigma$ and every $k\\ge1$ one has $X_{\\sigma^{\\otimes k}}=X_\\sigma$, where $\\sigma^{\\otimes k}\\in\\Gamma(X,L^{\\otimes kr})$.",
+        "deps": [
+          "thm-global-regular-functions-projective-variety",
+          "def-axiom-of-choice",
+          "def-g-linearization-of-an-invertible-sheaf",
+          "def-rational-action-on-affine-variety",
+          "def-invertible-sheaf",
+          "lem-invertible-sheaf-dual-tensor-inverse",
+          "def-quasi-coherent-module-scheme",
+          "lem-section-nonvanishing-affine-intersection",
+          "lem-classical-affine-algebraic-set-product-coordinate-ring",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties"
+        ],
+        "strategy": "Parts (i)-(ii) are Brion Lemma 1.34 (printed p. 12) and Hoskins Lemma 5.19 with its proof: the linearization identifies $G\\times L$ with $\\sigma^*L$, sections pull back and restrict along the projection, and the K\u00fcnneth identification $\\Gamma(G\\times X,\\mathcal O_G\\boxtimes L)\\cong\\mathcal O(G)\\otimes\\Gamma(X,L)$ exhibits the coaction; a pulled-back section lies in the finite-dimensional span of the coefficient functions appearing in its coaction, which gives rational local finiteness. Part (iii) is the standard graded tensor-algebra structure of the section ring using the multiplication maps of (i) and the invertible-sheaf tensor identities ([[lem-invertible-sheaf-dual-tensor-inverse]]); the $G$-action preserves degrees because it is induced from a linearization of each power, and compatibility of multiplication with restriction is [[def-quasi-coherent-module-scheme]] applied in the classical register. Part (iv) is immediate from the definitions of nonvanishing loci, with [[lem-section-nonvanishing-affine-intersection]] for $X_{\\sigma\\otimes\\tau}=X_\\sigma\\cap X_\\tau$ and the canonical trivialization of the linearization to see that $g$ maps $(L^{\\otimes r})_x$ isomorphically to $(L^{\\otimes r})_{gx}$; the identity $X_{\\sigma^k}=X_\\sigma$ holds because $\\sigma^k$ is a power of a nonvanishing function in local trivializations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "Lemma 1.34 and the preceding definitions, printed p. 12 (PDF p. 13)"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Lemma 5.19 with proof, Remark 5.20"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-good-and-geometric-quotients-for-group-actions",
+        "kind": "definition",
+        "title": "Good and geometric quotients for group actions",
+        "statement": "Assume AC inherited from the quotient suppliers. Let $G$ be a complex affine algebraic group acting algebraically on a classical complex variety $X$ ([[def-rational-action-on-affine-variety]]) and let $Y$ be a $\\mathbb C$-scheme ([[def-locally-ringed-space]]). For the scheme, affine and sheaf clauses below, $X$ denotes its associated reduced finite-type complex scheme, obtained by gluing spectra of its affine coordinate rings; the algebraic action is interpreted on that scheme. Its complex closed points recover the classical variety ([[def-classical-algebraic-prevariety-regular-maps-and-varieties]], [[lem-classical-points-inside-affine-scheme]]). Closed invariant subsets refer to underlying closed subsets with their reduced induced schemes. A morphism $\\pi:X\\to Y$ of $\\mathbb C$-schemes, that is, a morphism of locally ringed spaces commuting with the structure morphisms to $\\operatorname{Spec}\\mathbb C$ ([[def-morphism-locally-ringed-spaces]]), is a **good quotient** of the action if:\n\n(i) $\\pi$ is $G$-invariant and surjective;\n\n(ii) $\\pi$ is affine, i.e. $\\pi^{-1}(U)$ is an affine scheme for every affine open $U\\subseteq Y$;\n\n(iii) for every open $U\\subseteq Y$ the pullback $\\mathcal O_Y(U)\\to\\mathcal O_X(\\pi^{-1}U)^G$ is an isomorphism onto the $G$-invariant functions;\n\n(iv) for every closed $G$-stable $Z\\subseteq X$ the image $\\pi(Z)$ is closed in $Y$; and\n\n(v) for disjoint closed $G$-stable $Z_1,Z_2\\subseteq X$ one has $\\pi(Z_1)\\cap\\pi(Z_2)=\\varnothing$.\n\nIt is a **geometric quotient** if in addition for every $y\\in Y(\\mathbb C)$, the complex points of its fibre $\\pi^{-1}(y)$ form exactly one $G(\\mathbb C)$-orbit. The fibre condition is stated on complex closed points; it does not identify all scheme points with classical points.\n\nThe definition deliberately separates the good-quotient assertions, which the two main theorems of this page prove for the projective GIT quotient, from the orbit-space assertion, which holds only on the stable locus.",
+        "deps": [
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "lem-classical-points-inside-affine-scheme",
+          "def-categorical-and-geometric-quotients-of-classical-varieties",
+          "def-rational-action-on-affine-variety",
+          "def-locally-ringed-space",
+          "def-morphism-locally-ringed-spaces",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Definition record. The universal property of clause (iii) is standard: an invariant morphism to an affine target factors through the invariant functions, and localizing on affine targets gives all targets; uniqueness follows from surjectivity. Closedness and disjointness are the separation properties of affine quotients, which are proved in the affine theory ([[thm-invariant-ring-finite-generation-and-affine-categorical-quotient]](iv)) and glue to the global statement. The definition deliberately separates the good-quotient assertions (which the two main theorems prove) from the orbit-space assertion (which holds only on the stable locus).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. E. Newstead, Geometric Invariant Theory, lecture notes, CIMAT Guanajuato 2006 (CEL/HAL; archived copy)",
+              "url": "https://web.archive.org/web/20231019082211id_/https://cel.hal.science/cel-00392098/file/newstead_notes.pdf",
+              "locator": "Lecture 1, Sections 1.3-1.4 (good and geometric quotients, Theorem 1.6, Theorem 1.12) and Lecture 3, Sections 3.2-3.5"
+            },
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "Section 1.3, Definitions 1.28 and 1.30 and Theorem 1.24, printed pp. 11-12"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Sections 3.3-3.5 (good and geometric quotients, Remark 3.34, Theorem 4.30)"
+            },
+            {
+              "title": "I. Dolgachev, Lectures on Invariant Theory, London Mathematical Society Lecture Note Series 296, Cambridge University Press, 2003",
+              "url": "https://www.math.ens.psl.eu/~benoist/refs/Dolgachev.pdf",
+              "locator": "Chapter 6.1, printed pp. 91-95"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "def-invariant-section-ring-and-projective-git-quotient",
+        "kind": "definition",
+        "title": "The invariant section ring and the projective GIT quotient",
+        "statement": "Assume the Axiom of Choice inherited from the Proj construction. Let $G$ be a complex affine algebraic group acting algebraically on a complex projective variety $X$, let $L$ be an ample $G$-linearized invertible sheaf ([[def-g-linearization-of-an-invertible-sheaf]], [[def-ample-invertible-sheaf]]), and let $R(X,L)=\\bigoplus_{n\\ge0}\\Gamma(X,L^{\\otimes n})$ be its graded section ring ([[lem-linearizations-powers-and-equivariant-section-ring]]). Write\n$$R(X,L)^G=\\bigoplus_{n\\ge0}\\Gamma(X,L^{\\otimes n})^G$$\nfor the graded subalgebra of $G$-invariant sections.\n\nThe **projective GIT quotient of $X$ by $G$ with respect to $L$** is the $\\mathbb C$-scheme\n$$X/\\!/_L G:=\\operatorname{Proj}R(X,L)^G$$\n([[def-proj-graded-ring-points]], [[thm-proj-structure-sheaf-scheme]]), the Proj of the graded invariant subalgebra.\n\nFor a homogeneous invariant section $f\\in\\Gamma(X,L^{\\otimes d})^G$ with $d\\ge1$ write $D_+(f)=\\operatorname{Spec}(R(X,L)^G)_{(f)}\\subseteq X/\\!/_L G$ for the standard open chart of $\\operatorname{Proj}$, and $X_f=\\{x\\in X:f(x)\\ne0\\}$ for the nonvanishing locus of $f$.\n\nThe construction is recorded together with the given linearization and the ample sheaf $L$; replacing $L$ by a positive tensor power does not change the Proj ([[lem-proj-veronese-invariance]]).",
+        "deps": [
+          "lem-linearizations-powers-and-equivariant-section-ring",
+          "def-g-linearization-of-an-invertible-sheaf",
+          "lem-proj-veronese-invariance",
+          "def-proj-graded-ring-points",
+          "thm-proj-structure-sheaf-scheme",
+          "def-ample-invertible-sheaf",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Definition record. The gcd-graded structure and the algebra of invariants are A2(iii); the Proj construction is the published scheme-theoretic Proj over the field $\\mathbb C$ with its standard charts ([[lem-standard-opens-proj-affine]]); the axiom of choice enters only through that Proj construction and is inherited by the later theorems. The definition deliberately does not assert that $R(X,L)^G$ is finitely generated or that $X/\\!/_L G$ is of finite type; finite generation and projectivity are proved in [[thm-linear-action-projective-git-quotient]] in the linear case and transported to the ample case in [[thm-projective-git-quotient-from-invariant-section-ring]]. The quotient genuinely depends on the chosen linearization; this is recorded in [[def-g-linearization-of-an-invertible-sheaf]] and demonstrated on the companion page.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "Section 1.3, Proposition 1.29 and its proof, printed p. 11; Proposition 1.35, printed p. 12"
+            },
+            {
+              "title": "P. E. Newstead, Geometric Invariant Theory, lecture notes, CIMAT Guanajuato 2006 (CEL/HAL; archived copy)",
+              "url": "https://web.archive.org/web/20231019082211id_/https://cel.hal.science/cel-00392098/file/newstead_notes.pdf",
+              "locator": "Lecture 3, Sections 3.2-3.5, in particular Theorem 3.4 and the definition preceding it"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Definition 5.2 and Theorem 5.3"
+            },
+            {
+              "title": "I. Dolgachev, Lectures on Invariant Theory, London Mathematical Society Lecture Note Series 296, Cambridge University Press, 2003",
+              "url": "https://www.math.ens.psl.eu/~benoist/refs/Dolgachev.pdf",
+              "locator": "Chapter 8.1-8.2, printed pp. 115-121"
+            }
+          ]
+        },
+        "axiom_use": "AC is inherited only from the Proj construction; the invariant ring and the standard charts use no further choice.",
+        "dependency_level": 2,
+        "justified_by": [],
+        "forward_refs": [
+          "cex-semistable-locus-depends-on-linearization",
+          "ex-gm-on-projective-line-with-two-linearizations"
+        ]
+      },
+      {
+        "id": "lem-ample-linearization-power-equivariant-embedding",
+        "kind": "lemma",
+        "title": "An ample linearization embeds equivariantly after a positive power",
+        "statement": "Assume AC as inherited from the projective and ample-sheaf suppliers. Let $G$ be a complex affine algebraic group acting algebraically on a complex projective variety $X$ ([[def-projective-variety-classical]]), and let $L$ be an ample $G$-linearized invertible sheaf ([[def-g-linearization-of-an-invertible-sheaf]], [[def-ample-invertible-sheaf]]). Then there exist $m\\ge1$, a finite-dimensional rational $G$-module $V$, and a $G$-equivariant closed immersion $i:X\\hookrightarrow\\mathbf P(V)$ with $i^*\\mathcal O(1)\\cong L^{\\otimes m}$ as $G$-linearized invertible sheaves. Moreover $i$ can be taken to be the morphism defined by the complete linear system $|L^{\\otimes m}|$.",
+        "deps": [
+          "cor-projective-cohomology-finite-dimensional-field",
+          "lem-proper-source-to-separated-target-proper",
+          "def-g-linearization-of-an-invertible-sheaf",
+          "lem-linearizations-powers-and-equivariant-section-ring",
+          "thm-ample-powers-very-ample-proper-base",
+          "thm-line-bundle-sections-define-projective-map",
+          "thm-projective-map-line-bundle-data-equivalence",
+          "def-globally-generated-sheaf",
+          "def-ample-invertible-sheaf",
+          "def-projective-variety-classical",
+          "def-rational-action-on-affine-variety",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Choose $m$ such that $L^{\\otimes m}$ is closed $H$-very ample by [[thm-ample-powers-very-ample-proper-base]] applied to $X\\to\\operatorname{Spec}\\mathbb C$ (proper of finite type over the Noetherian base) and absolute ampleness; the resulting morphism to $\\mathbf P(V)$ with $V=\\Gamma(X,L^{\\otimes m})^*$ is the map of [[thm-line-bundle-sections-define-projective-map]], with pullback of $\\mathcal O(1)$ isomorphic to $L^{\\otimes m}$ and the line-bundle data matching [[thm-projective-map-line-bundle-data-equivalence]]. Equivariance: by [[lem-linearizations-powers-and-equivariant-section-ring]] the module $\\Gamma(X,L^{\\otimes m})$ is rational, the evaluation map $\\Gamma(X,L^{\\otimes m})\\otimes\\mathcal O_X\\to L^{\\otimes m}$ is $G$-equivariant, and $G$ acts on $\\mathbf P(V)$ through the dual representation; hence the morphism induced by the complete linear system is $G$-equivariant. This is Hoskins Remark 5.20 and the reduction used by Brion before Proposition 1.35 (printed p. 12). No claim is made for $L$ itself.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "Section 1.3, the reduction before Proposition 1.35, printed p. 12"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Remark 5.20"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-good-quotient-local-on-target",
+        "kind": "lemma",
+        "title": "Good quotients are local on the target and are categorical quotients",
+        "statement": "Assume AC inherited from the quotient suppliers. Let $G$ act on a classical complex variety $X$, viewed through its associated reduced finite-type complex scheme for scheme clauses, and let $\\pi:X\\to Y$ be a $G$-invariant morphism to a $\\mathbb C$-scheme ([[def-good-and-geometric-quotients-for-group-actions]]).\n\n(i) If $Y=\\bigcup_iU_i$ is an open cover such that each restriction $\\pi^{-1}(U_i)\\to U_i$ is a good quotient of the action of $G$ on $\\pi^{-1}(U_i)$, then $\\pi$ is a good quotient; the analogous statement holds for the geometric-quotient property.\n\n(ii) A good quotient has the categorical universal factorization property for invariant morphisms to classical varieties viewed as their associated schemes. It is a geometric quotient if and only if its fibres on complex closed points are exactly the $G(\\mathbb C)$-orbits.",
+        "deps": [
+          "cor-closed-points-dense-in-affine-spectra",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "thm-morphisms-agree-closed-equalizer-separated-target",
+          "thm-affine-fibre-product-tensor-ring",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "def-good-and-geometric-quotients-for-group-actions",
+          "def-categorical-and-geometric-quotients-of-classical-varieties",
+          "def-rational-action-on-affine-variety",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-locally-ringed-space",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Newstead \u00a71.4 and \u00a73.3 (good quotient $=$ affine morphism plus clauses (i)-(v); Proposition 1.11), with Hoskins Remark 3.34 for locality. Clause (iii) of the definition is a sheaf-theoretic condition and therefore glues; affineness of $\\pi$ is local on the target; closedness of images and disjointness of images of closed invariant subsets are local on the target because a subset of $Y$ is closed iff its traces on the $U_i$ are closed and the restrictions are surjective. For the categorical property, given a $G$-invariant $h:X\\to Z$ with $Z$ a classical variety, cover $Z$ by affine charts; on each chart the coordinate functions pull back to invariant functions on the corresponding open subset of $Y$ and descend uniquely by clause (iii), and the descended local maps agree on overlaps by the uniqueness of descent for regular functions; surjectivity gives uniqueness of the factorization. This is Newstead Corollary 1.7/Proposition 1.11(i) (whose proof is in his Tata notes). The geometric criterion is Newstead Corollary 1.9/Hoskins Proposition 1.11(iii): if the fibres are orbits, then the quotient is an orbit space, and conversely an orbit-space good quotient has orbit fibres.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. E. Newstead, Geometric Invariant Theory, lecture notes, CIMAT Guanajuato 2006 (CEL/HAL; archived copy)",
+              "url": "https://web.archive.org/web/20231019082211id_/https://cel.hal.science/cel-00392098/file/newstead_notes.pdf",
+              "locator": "Lecture 1, Section 1.4 (Proposition 1.11 and its corollaries) and Lecture 3, Section 3.3"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Remark 3.34 and Proposition 3.14"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-semistable-and-stable-points-for-a-linearization",
+        "kind": "definition",
+        "title": "Semistable and stable points for a linearization",
+        "statement": "Let $G$ be a complex reductive affine algebraic group ([[def-reductive-and-linearly-reductive-over-c]]) acting algebraically on a complex projective variety $X$ ([[def-projective-variety-classical]], [[def-rational-action-on-affine-variety]]), and let $L$ be an ample $G$-linearized invertible sheaf ([[def-g-linearization-of-an-invertible-sheaf]]).\n\nA point $x\\in X$ is **semistable with respect to $L$** if there exist $n\\ge1$ and $\\sigma\\in\\Gamma(X,L^{\\otimes n})^G$ with $\\sigma(x)\\ne0$. The set of such points is written $X^{ss}(L)$, and its complement $X^{us}(L)=X\\smallsetminus X^{ss}(L)$ is the **unstable locus**.\n\nA point $x\\in X^{ss}(L)$ is **stable with respect to $L$** if its orbit $Gx$ is closed in $X^{ss}(L)$ and its stabilizer $G_x$ is finite. The set of stable points is written $X^s(L)$.\n\nThese definitions agree with the embedded definitions for a $G$-equivariant closed immersion $X\\hookrightarrow\\mathbf P(V)$ with $L^{\\otimes m}\\cong\\mathcal O(1)|_X$ as $G$-linearized invertible sheaves: $X^{ss}(L)=X\\cap\\mathbf P(V)^{ss}$ and $X^s(L)=X\\cap\\mathbf P(V)^s$, where semistability in $\\mathbf P(V)$ is the nonvanishing of a positive-degree invariant homogeneous form ([[def-homogeneous-coordinate-ring]], [[def-affine-cone-projective-set]]) and stability adds closedness of the orbit in the semistable locus and finiteness of the stabilizer; this equivalence is asserted here and proved in the two main theorems of this page.\n\nBy construction $X^{ss}(L)$ and $X^s(L)$ are $G$-stable subsets of $X$. The definition itself claims no openness, nonemptiness or finiteness of either locus.",
+        "deps": [
+          "def-g-linearization-of-an-invertible-sheaf",
+          "lem-linearizations-powers-and-equivariant-section-ring",
+          "def-invariant-section-ring-and-projective-git-quotient",
+          "def-projective-variety-classical",
+          "def-dimension-classical-variety",
+          "def-rational-action-on-affine-variety",
+          "def-reductive-and-linearly-reductive-over-c",
+          "def-homogeneous-coordinate-ring",
+          "def-affine-cone-projective-set"
+        ],
+        "strategy": "Definition record following Brion Definitions 1.28 and 1.30 (printed p. 11) and Newstead's definitions in \u00a71.4 and \u00a73.5; Newstead additionally requires $X_\\sigma$ affine in the definition of semistability, which is automatic in the projective ample setting by [[lem-ample-invariant-section-charts-are-affine]]. The embedded form is Brion Proposition 1.35's displayed identities; the passage from invariant sections of $\\mathcal O_X(n)$ on a closed $G$-stable $X\\subseteq\\mathbf P(V)$ to restrictions of invariant homogeneous forms uses that the restriction $\\mathbb C[V]^G_n\\to\\Gamma(X,\\mathcal O_X(n))^G$ is surjective ([[lem-reynolds-operator-and-invariant-subring-properties]]), which is proved in [[thm-linear-action-projective-git-quotient]]. Finiteness of $G_x$ is equivalent to $\\dim G_x=0$ because $G_x$ is a closed subgroup of $G$ ([[def-dimension-classical-variety]]).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "Definitions 1.28 and 1.30, Proposition 1.35, printed pp. 11-12"
+            },
+            {
+              "title": "P. E. Newstead, Geometric Invariant Theory, lecture notes, CIMAT Guanajuato 2006 (CEL/HAL; archived copy)",
+              "url": "https://web.archive.org/web/20231019082211id_/https://cel.hal.science/cel-00392098/file/newstead_notes.pdf",
+              "locator": "Lecture 1, Section 1.4 and Lecture 3, Sections 3.4-3.5"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Definitions 5.2, 5.4, 5.12 and Example 5.8"
+            },
+            {
+              "title": "I. Dolgachev, Lectures on Invariant Theory, London Mathematical Society Lecture Note Series 296, Cambridge University Press, 2003",
+              "url": "https://www.math.ens.psl.eu/~benoist/refs/Dolgachev.pdf",
+              "locator": "Chapter 8.1, printed p. 115"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": [],
+        "forward_refs": [
+          "cex-semistable-locus-depends-on-linearization",
+          "ex-gm-on-projective-line-with-two-linearizations"
+        ]
+      },
+      {
+        "id": "lem-graded-invariants-of-localization-at-an-invariant-element",
+        "kind": "lemma",
+        "title": "Invariants of a localization at an invariant element",
+        "statement": "Assume AC inherited from the Reynolds-operator suppliers. Let $G$ be a complex reductive affine algebraic group acting rationally on a commutative $\\mathbb C$-algebra $A$ by algebra automorphisms, with Reynolds operator $R_A:A\\to A^G$ ([[thm-complete-reducibility-and-reynolds-operator-for-complex-reductive-group]]). Suppose $A=\\bigoplus_{n\\in\\mathbb Z}A_n$ is graded and $G$ acts by graded algebra automorphisms, with $R_A$ preserving degrees. Then for every homogeneous $f\\in A^G$ one has $(A_f)^G=(A^G)_f$ compatibly with the grading, and consequently $((A_f)_0)^G=(A^G)_{(f)}$, where $(A^G)_{(f)}=((A^G)_f)_0$ is the degree-zero part of the localization.",
+        "deps": [
+          "thm-complete-reducibility-and-reynolds-operator-for-complex-reductive-group",
+          "lem-reynolds-operator-and-invariant-subring-properties",
+          "def-rational-action-on-affine-variety",
+          "def-graded-ring-and-graded-module",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Define the localized operator $\\widetilde R(a/f^n):=R_A(a)/f^n$ on $A_f$; it is well defined because $f$ is invariant and $R_A$ is $A^G$-linear and idempotent with image $A^G$ ([[lem-reynolds-operator-and-invariant-subring-properties]](a)): if $a/f^n=b/f^m$ in $A_f$, then $f^ma=f^nb$, and applying $R_A$ gives $f^mR_A(a)=R_A(f^ma)=R_A(f^nb)=f^nR_A(b)$, so $R_A(a)/f^n=R_A(b)/f^m$. The operator $\\widetilde R$ is $(A^G)_f$-linear and idempotent with image $(A^G)_f$, and it fixes a fraction exactly when that fraction is $G$-invariant; hence $(A_f)^G=(A^G)_f$, the reverse inclusion being immediate. Because $R_A$ preserves the grading and $f$ is homogeneous, the identity respects the $\\mathbb Z$-grading and restricts to degree zero, giving $((A_f)_0)^G=((A^G)_f)_0=(A^G)_{(f)}$. This is the localization computation used by Newstead in \u00a73.2(iii) and by Hoskins in the proof of Theorem 5.3.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. E. Newstead, Geometric Invariant Theory, lecture notes, CIMAT Guanajuato 2006 (CEL/HAL; archived copy)",
+              "url": "https://web.archive.org/web/20231019082211id_/https://cel.hal.science/cel-00392098/file/newstead_notes.pdf",
+              "locator": "Lecture 3, Section 3.2(iii) and the proof of Theorem 3.4"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "The proof of Theorem 5.3 (localization computation for the affine charts)"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-ample-invariant-section-charts-are-affine",
+        "kind": "lemma",
+        "title": "Nonvanishing charts of sections of an ample linearization are affine",
+        "statement": "Assume AC inherited from the embedding suppliers. Let $X$ be a complex projective variety, let $L$ be an ample $G$-linearized invertible sheaf, and let $\\sigma\\in\\Gamma(X,L^{\\otimes n})$ be a global section with $n\\ge1$. Then the nonvanishing locus $X_\\sigma=\\{x\\in X:\\sigma(x)\\ne0\\}$ is an affine open subset of $X$; if $\\sigma$ is $G$-invariant, then $X_\\sigma$ is $G$-stable. Consequently the charts $X_\\sigma$, for $\\sigma\\in\\Gamma(X,L^{\\otimes n})^G$ and $n\\ge1$, form an open cover of $X^{ss}(L)$ by affine $G$-stable subsets. Here, for any complex affine algebraic group $G$, $X^{ss}(L)$ denotes the union of these invariant nonvanishing loci; for reductive $G$ this agrees with [[def-semistable-and-stable-points-for-a-linearization]].",
+        "deps": [
+          "def-semistable-and-stable-points-for-a-linearization",
+          "thm-serre-vanishing",
+          "lem-linearizations-powers-and-equivariant-section-ring",
+          "lem-ample-linearization-power-equivariant-embedding",
+          "lem-standard-opens-proj-affine",
+          "def-projective-scheme-from-a-homogeneous-quotient",
+          "thm-closed-subschemes-projective-space-homogeneous-ideals",
+          "def-ample-invertible-sheaf",
+          "def-projective-variety-classical",
+          "lem-section-nonvanishing-affine-intersection",
+          "def-axiom-of-choice",
+          "thm-coherent-sheaves-abelian-noetherian-scheme",
+          "lem-closed-immersion-cohomology-pushforward",
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "thm-cohomology-projective-space-twisting-sheaves"
+        ],
+        "strategy": "Choose an equivariant very ample power L^m and embed X in P(V). By Serre vanishing for the coherent ideal sheaf, the twisted ideal exact sequence makes restriction of forms onto H0(X,O_X(nq)) surjective for sufficiently large q. Lift sigma^{mq} to a homogeneous form F. Positive powers have the same nonvanishing locus, so X_sigma=X intersect D_+(F), a closed subscheme of an affine chart. Invariance gives G-stability; these charts cover their invariant-section union for every affine G, agreeing with the supplied semistable definition when G is reductive. No restriction-surjectivity in every degree is assumed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "Section 1.3, the charts used in the proof of Proposition 1.35, printed p. 12"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Lemma 5.19 and the proof of Theorem 5.3"
+            },
+            {
+              "title": "I. Dolgachev, Lectures on Invariant Theory, London Mathematical Society Lecture Note Series 296, Cambridge University Press, 2003",
+              "url": "https://www.math.ens.psl.eu/~benoist/refs/Dolgachev.pdf",
+              "locator": "Chapter 8.1, printed pp. 115-117"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-section-ring-of-ample-line-bundle-finitely-generated",
+        "kind": "lemma",
+        "title": "The section ring of an ample invertible sheaf is finitely generated",
+        "statement": "Assume AC as inherited from the projective and sheaf-cohomology suppliers. Let $X$ be a projective scheme over $\\mathbb C$ and $L$ an ample invertible sheaf on $X$. Then the section ring $R(X,L)=\\bigoplus_{n\\ge0}\\Gamma(X,L^{\\otimes n})$ is a finitely generated graded $\\mathbb C$-algebra, hence a Noetherian ring.",
+        "deps": [
+          "def-ample-invertible-sheaf",
+          "lem-ample-linearization-power-equivariant-embedding",
+          "lem-graded-section-module-finite-projective",
+          "thm-ample-powers-very-ample-proper-base",
+          "thm-line-bundle-sections-define-projective-map",
+          "thm-closed-subschemes-projective-space-homogeneous-ideals",
+          "def-globally-generated-sheaf",
+          "cor-projective-cohomology-finite-dimensional-field",
+          "thm-hilbert-basis-theorem",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Choose $m\\ge1$ with $L^{\\otimes m}$ closed very ample ([[thm-ample-powers-very-ample-proper-base]]), giving a closed immersion $i:X\\hookrightarrow\\mathbf P^N_{\\mathbb C}$ with $i^*\\mathcal O(1)\\cong L^{\\otimes m}$ ([[thm-line-bundle-sections-define-projective-map]]); write $S=\\mathbb C[x_0,\\dots,x_N]$. The graded ring $R(X,L^{\\otimes m})=\\bigoplus_k\\Gamma(X,L^{\\otimes mk})$ is a graded quotient of $S$, because restriction of global sections is surjective in every degree (the degree-$k$ part of the homogeneous coordinate ring of a closed subscheme is a quotient of $S_k$; [[thm-closed-subschemes-projective-space-homogeneous-ideals]]), so it is finitely generated over $\\mathbb C$. For $0\\le j<m$ put $M_j=\\bigoplus_k\\Gamma(X,L^{\\otimes(mk+j)})$. Under the embedding, $M_j$ is the graded module $\\bigoplus_kH^0(\\mathbf P^N,i_*(L^{\\otimes j})(k))$ of the coherent sheaf $i_*(L^{\\otimes j})$, so [[lem-graded-section-module-finite-projective]] makes each tail of $M_j$ a finitely generated $S$-module; a graded module with a finitely generated tail is finitely generated, and the $S$-module structure factors through the surjection $S\\to R(X,L^{\\otimes m})$, so each $M_j$ is a finite module over the finitely generated $\\mathbb C$-algebra $R(X,L^{\\otimes m})$. Finally $R(X,L)=\\bigoplus_{j=0}^{m-1}M_j$ is a finite module over a finitely generated $\\mathbb C$-algebra, hence a finitely generated $\\mathbb C$-algebra. The argument uses only the published finite-generation statement for twisted coherent sections and the standard saturation description of closed subschemes of projective space.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "The proof of Theorem 5.3 (finite generation of the section ring)"
+            },
+            {
+              "title": "P. E. Newstead, Geometric Invariant Theory, lecture notes, CIMAT Guanajuato 2006 (CEL/HAL; archived copy)",
+              "url": "https://web.archive.org/web/20231019082211id_/https://cel.hal.science/cel-00392098/file/newstead_notes.pdf",
+              "locator": "Lecture 3, Section 3.4 (finite generation of the graded ring of sections)"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-invariants-of-finitely-generated-graded-rational-algebra-are-finitely-generated",
+        "kind": "lemma",
+        "title": "Graded invariants of a finitely generated rational G-algebra are finitely generated",
+        "statement": "Assume AC inherited from the invariant-theory suppliers. Let $G$ be a complex reductive affine algebraic group and let $A=\\bigoplus_{n\\ge0}A_n$ be a finitely generated graded commutative $\\mathbb C$-algebra with $A_0=\\mathbb C$, equipped with a rational action of $G$ by graded algebra automorphisms ([[def-rational-action-on-affine-variety]]). Then the graded invariant subalgebra $A^G=\\bigoplus_{n\\ge0}A_n^G$ is a finitely generated $\\mathbb C$-algebra.",
+        "deps": [
+          "lem-invariant-ring-of-finite-dimensional-module-is-finitely-generated",
+          "lem-reynolds-operator-and-invariant-subring-properties",
+          "def-rational-action-on-affine-variety",
+          "def-graded-ring-and-graded-module",
+          "def-finite-type-and-module-finite-algebras",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Choose homogeneous $\\mathbb C$-algebra generators $a_1,\\dots,a_r$ of $A$. Local finiteness of the rational action puts each $a_i$ in a finite-dimensional $G$-stable subspace, so $W=\\operatorname{span}(G\\cdot\\{a_1,\\dots,a_r\\})$ is a finite-dimensional graded rational $G$-module whose elements generate $A$ as a $\\mathbb C$-algebra; stability of $W$ makes the natural graded $G$-algebra surjection $\\operatorname{Sym}(W)\\to A$ equivariant. By the graded form of [[lem-reynolds-operator-and-invariant-subring-properties]](c),(d) the induced map $\\operatorname{Sym}(W)^G\\to A^G$ is surjective, and $\\operatorname{Sym}(W)^G\\cong\\mathbb C[W^*]^G$ is finitely generated by [[lem-invariant-ring-of-finite-dimensional-module-is-finitely-generated]]. Hence $A^G$ is a quotient of a finitely generated $\\mathbb C$-algebra. This is Nagata's theorem in the graded form used by Brion in the proof of Theorem 1.24 and by Hoskins in \u00a74.3-\u00a75.4.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Sections 4.3-5.4 (Nagata's theorem and its graded use)"
+            },
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "The proof of Theorem 1.24 (finite generation of invariant rings)"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-affine-chart-quotients-for-invariant-sections",
+        "kind": "lemma",
+        "title": "Affine chart quotients for invariant sections of a linear action",
+        "statement": "Assume AC inherited from the invariant-theory and quotient suppliers. Let $G$ be a complex reductive affine algebraic group, $V$ a finite-dimensional rational $G$-module, $X\\subseteq\\mathbf P(V)$ a $G$-stable closed projective algebraic set with homogeneous coordinate ring $R=R(X)=\\mathbb C[V]/I(\\widetilde X)$ ([[def-homogeneous-coordinate-ring]], [[def-affine-cone-projective-set]]), and let $f\\in R^G$ be homogeneous of positive degree. Then: (i) the nonvanishing locus $X_f\\subseteq X$ is affine and $G$-stable; (ii) $\\mathcal O(X_f)^G=(R^G)_{(f)}$, the degree-zero part of the localization of the invariant ring; (iii) the affine quotient morphism $\\pi_f:X_f\\to D_+(f)=\\operatorname{Spec}(R^G)_{(f)}$ corresponding to the inclusion $\\mathcal O(X_f)^G\\subseteq\\mathcal O(X_f)$ is a good quotient of the $G$-action on $X_f$ ([[def-good-and-geometric-quotients-for-group-actions]]), with $\\pi_f^{-1}(D_+(f))=X_f$; (iv) the morphisms $\\pi_f$ for varying $f$ are compatible on overlaps $D_+(fg)=D_+(f)\\cap D_+(g)$, in the sense that $\\pi_f$ and $\\pi_g$ both restrict to the affine quotient of $X_{fg}$.",
+        "deps": [
+          "thm-complete-reducibility-and-reynolds-operator-for-complex-reductive-group",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "thm-affine-fibre-product-tensor-ring",
+          "lem-graded-invariants-of-localization-at-an-invariant-element",
+          "lem-ample-invariant-section-charts-are-affine",
+          "lem-invariants-of-finitely-generated-graded-rational-algebra-are-finitely-generated",
+          "def-good-and-geometric-quotients-for-group-actions",
+          "thm-invariant-ring-finite-generation-and-affine-categorical-quotient",
+          "lem-proj-associated-sheaf-basic-sections",
+          "def-associated-sheaf-graded-module-proj",
+          "lem-standard-opens-proj-affine",
+          "def-categorical-and-geometric-quotients-of-classical-varieties",
+          "def-projective-variety-classical",
+          "def-finite-type-and-module-finite-algebras",
+          "lem-reynolds-operator-and-invariant-subring-properties",
+          "def-homogeneous-coordinate-ring",
+          "def-affine-cone-projective-set",
+          "lem-positively-graded-noetherian-algebra-is-finitely-generated",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Affineness and stability are the very-ample case of [[lem-ample-invariant-section-charts-are-affine]] (applied to $L=\\mathcal O(1)|_X$; note $L$ is very ample and hence ample). For (ii), $\\mathcal O(X_f)=R_{(f)}$ by [[lem-proj-associated-sheaf-basic-sections]] and [[def-associated-sheaf-graded-module-proj]], so [[lem-graded-invariants-of-localization-at-an-invariant-element]] gives $\\mathcal O(X_f)^G=(R_{(f)})^G=((R_f)_0)^G=((R^G)_f)_0=(R^G)_{(f)}$. Finite generation of $\\mathcal O(X_f)^G$: $R$ is a graded quotient of $\\mathbb C[V]$ by a $G$-stable ideal, hence $R^G$ is a quotient of $\\mathbb C[V]^G$ ([[lem-reynolds-operator-and-invariant-subring-properties]](c)) and is finitely generated by [[lem-invariant-ring-of-finite-dimensional-module-is-finitely-generated]]; the degree-zero part of a localization of a finitely generated graded algebra is finitely generated (graded Nakayama, [[lem-positively-graded-noetherian-algebra-is-finitely-generated]] applied to the localized graded algebra). The affine quotient $X_f\\to\\operatorname{Spec}\\mathcal O(X_f)^G$ is the categorical quotient of [[thm-invariant-ring-finite-generation-and-affine-categorical-quotient]], and clauses (i)-(v) of the good-quotient definition hold: (i),(ii) are surjectivity and the categorical morphism, (iii) is the defining property of $\\operatorname{Spec}\\mathcal O(X_f)^G$, and (iv),(v) are clauses (iv) and (v) of that theorem ([[def-categorical-and-geometric-quotients-of-classical-varieties]] for the categorical-universality convention). Compatibility (iv) is functoriality of localization and of the affine quotient; the standard chart $D_+(f)$ maps isomorphically to $\\operatorname{Spec}(R^G)_{(f)}$ by [[lem-standard-opens-proj-affine]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. E. Newstead, Geometric Invariant Theory, lecture notes, CIMAT Guanajuato 2006 (CEL/HAL; archived copy)",
+              "url": "https://web.archive.org/web/20231019082211id_/https://cel.hal.science/cel-00392098/file/newstead_notes.pdf",
+              "locator": "Lecture 3, Sections 3.2 and 3.4 (the affine charts and their quotients)"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "The proof of Theorem 5.3 (computation of O(X_f)^G and the affine chart quotients)"
+            },
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "The proof of Proposition 1.35, printed p. 12"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-linear-action-projective-git-quotient",
+        "kind": "theorem",
+        "title": "Projective GIT quotient for a linear action",
+        "statement": "Assume AC inherited from the affine invariant-theory and quotient suppliers. Let $G$ be a complex reductive affine algebraic group, $V$ a finite-dimensional rational $G$-module, $X\\subseteq\\mathbf P(V)$ a $G$-stable closed projective algebraic set, $R=R(X)$ its homogeneous coordinate ring ([[def-homogeneous-coordinate-ring]], [[def-affine-cone-projective-set]]), and $L=\\mathcal O(1)|_X$. Put\n$$X^{ss}=X\\smallsetminus V_+(R^G_+)=\\{x\\in X:\\exists f\\in R^G_{>0},\\ f(x)\\ne0\\}$$\nand $X^s=\\{x\\in X^{ss}:Gx\\text{ is closed in }X^{ss}\\text{ and }G_x\\text{ is finite}\\}$ ([[def-semistable-and-stable-points-for-a-linearization]]). Then:\n\n(i) $R^G$ is a finitely generated graded $\\mathbb C$-algebra with $(R^G)_0=\\mathbb C$ when $X\\ne\\varnothing$ (and $R^G=0$ when $X=\\varnothing$), and $Y:=\\operatorname{Proj}R^G$ is a projective $\\mathbb C$-scheme of finite type;\n\n(ii) $X^{ss}$ and $X^s$ are open $G$-stable subsets of $X$, and $X^{ss}$ is the union of the affine $G$-stable charts $X_f$ for $f\\in R^G_{>0}$;\n\n(iii) the chart morphisms of [[lem-affine-chart-quotients-for-invariant-sections]] glue to a $G$-invariant morphism $\\pi:X^{ss}\\to Y$ that is a good quotient in the sense of [[def-good-and-geometric-quotients-for-group-actions]]; $\\pi$ is surjective, $\\mathcal O_Y\\cong(\\pi_*\\mathcal O_{X^{ss}})^G$, and for $x_1,x_2\\in X^{ss}$ one has $\\pi(x_1)=\\pi(x_2)$ if and only if $\\overline{Gx_1}\\cap\\overline{Gx_2}\\cap X^{ss}\\ne\\varnothing$;\n\n(iv) $Y^s:=\\pi(X^s)$ is open in $Y$, $X^s=\\pi^{-1}(Y^s)$, and $\\pi:X^s\\to Y^s$ is a geometric quotient; a point $x\\in X^{ss}$ is stable if and only if $G_x$ is finite and $Gx$ is closed in $X^{ss}$, equivalently if and only if $G_x$ is finite and $x$ lies in a chart $X_f$, $f\\in R^G_{>0}$, in which all $G$-orbits are closed; and if $X^s=X^{ss}$ then $\\pi$ is a geometric quotient of $X^{ss}$.",
+        "deps": [
+          "def-invariant-section-ring-and-projective-git-quotient",
+          "def-semistable-and-stable-points-for-a-linearization",
+          "def-good-and-geometric-quotients-for-group-actions",
+          "lem-graded-invariants-of-localization-at-an-invariant-element",
+          "lem-good-quotient-local-on-target",
+          "lem-ample-invariant-section-charts-are-affine",
+          "lem-proj-of-finitely-generated-graded-algebra-is-projective",
+          "lem-affine-chart-quotients-for-invariant-sections",
+          "thm-invariant-ring-finite-generation-and-affine-categorical-quotient",
+          "thm-stable-locus-geometric-quotient",
+          "lem-stabilizer-dimension-semicontinuity",
+          "lem-orbit-dimension-and-closed-orbits-for-complex-group-actions",
+          "lem-reynolds-operator-and-invariant-subring-properties",
+          "lem-invariant-ring-of-finite-dimensional-module-is-finitely-generated",
+          "lem-invariants-of-finitely-generated-graded-rational-algebra-are-finitely-generated",
+          "def-stable-points-of-an-affine-action",
+          "def-categorical-and-geometric-quotients-of-classical-varieties",
+          "def-homogeneous-coordinate-ring",
+          "def-affine-cone-projective-set",
+          "def-standard-open-proj",
+          "def-proj-graded-ring-points",
+          "lem-proj-associated-sheaf-basic-sections",
+          "lem-standard-opens-proj-affine",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-rational-action-on-affine-variety",
+          "def-dimension-classical-variety",
+          "def-axiom-of-choice",
+          "lem-separation-of-disjoint-closed-invariant-subsets-by-an-invariant"
+        ],
+        "strategy": "This is the linear-action case of the projective GIT theorem, proved by Newstead in Theorem 1.12/\u00a73.4, by Brion in Propositions 1.29 and 1.31, and by Hoskins in Theorems 5.3 and 5.6. (i)-(iii): $R^G$ is a finitely generated graded algebra by [[lem-invariants-of-finitely-generated-graded-rational-algebra-are-finitely-generated]], so [[lem-proj-of-finitely-generated-graded-algebra-is-projective]] makes $Y$ projective of finite type; the charts $X_f$ of invariant forms are affine and stable by [[lem-ample-invariant-section-charts-are-affine]] and carry good quotients $\\pi_f$ by [[lem-affine-chart-quotients-for-invariant-sections]]; gluing them and locality ([[lem-good-quotient-local-on-target]]) gives the good quotient $\\pi$, and the fibre description follows from the unique closed orbit in each affine fibre together with continuity. (iv) The union $X_c$ of the charts $X_f$ on which all orbits are closed is open, and $X^s=X_c\\cap\\{\\dim G_x=0\\}$: a stable point admits an invariant function on a chart separating it from the positive-dimensional-stabilizer locus, using clause (v) of the affine good quotient; conversely a chart point with zero-dimensional stabilizer has all its orbits of dimension $\\dim G$, so a non-closed orbit would produce a smaller-dimensional limit orbit, impossible by [[lem-stabilizer-dimension-semicontinuity]] and [[lem-orbit-dimension-and-closed-orbits-for-complex-group-actions]]. The affine quotients on the closed charts are geometric because every fibre is a single orbit; gluing and removing the closed image of the complement of the finite-stabilizer locus (clause (iv) of the good quotient) gives the open $Y^s$ and the geometric quotient $X^s\\to Y^s$. No Hilbert-Mumford criterion is used anywhere; the loci are read off from invariant sections and orbit closures only.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. E. Newstead, Geometric Invariant Theory, lecture notes, CIMAT Guanajuato 2006 (CEL/HAL; archived copy)",
+              "url": "https://web.archive.org/web/20231019082211id_/https://cel.hal.science/cel-00392098/file/newstead_notes.pdf",
+              "locator": "Theorem 1.12 and its proof in Sections 3.3-3.4; Theorem 1.6; Example 3.3"
+            },
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "Propositions 1.29 and 1.31 and their proofs, printed pp. 11-12"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Theorems 5.3 and 5.6 with proofs; Corollary 5.14"
+            },
+            {
+              "title": "I. Dolgachev, Lectures on Invariant Theory, London Mathematical Society Lecture Note Series 296, Cambridge University Press, 2003",
+              "url": "https://www.math.ens.psl.eu/~benoist/refs/Dolgachev.pdf",
+              "locator": "Theorem 8.1 with proof, printed pp. 118-120"
+            }
+          ]
+        },
+        "axiom_use": "AC is inherited from the affine invariant-theory suppliers (finite generation, Reynolds operator, orbit dimension) and from the Proj construction; the gluing argument itself is choice free.",
+        "dependency_level": 9,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-projective-git-quotient-from-invariant-section-ring",
+        "kind": "theorem",
+        "title": "The projective GIT quotient from the invariant section ring",
+        "statement": "Assume AC inherited from the invariant-theory, Proj and ample-sheaf suppliers. Let $G$ be a complex reductive affine algebraic group acting algebraically on a complex projective variety $X$ ([[def-projective-variety-classical]]), and let $L$ be an ample $G$-linearized invertible sheaf ([[def-g-linearization-of-an-invertible-sheaf]], [[def-ample-invertible-sheaf]]). Let $R(X,L)=\\bigoplus_{n\\ge0}\\Gamma(X,L^{\\otimes n})$ and let $R(X,L)^G$ be its graded invariant subalgebra. Then:\n\n(i) $R(X,L)^G$ is a finitely generated graded $\\mathbb C$-algebra and the GIT quotient $Y=X/\\!/_LG=\\operatorname{Proj}R(X,L)^G$ is a projective $\\mathbb C$-scheme of finite type;\n\n(ii) the semistable locus $X^{ss}(L)$ ([[def-semistable-and-stable-points-for-a-linearization]]) is the union of the affine $G$-stable charts $X_\\sigma$ over $\\sigma\\in\\Gamma(X,L^{\\otimes n})^G$, $n\\ge1$, and is open in $X$; for every $m\\ge1$ one has $X^{ss}(L)=X^{ss}(L^{\\otimes m})$ and $X^s(L)=X^s(L^{\\otimes m})$, and the Veronese isomorphism $\\operatorname{Proj}R(X,L)^G\\cong\\operatorname{Proj}R(X,L^{\\otimes m})^G$ identifies the two quotient data;\n\n(iii) the chart morphisms glue to a $G$-invariant morphism $\\pi:X^{ss}(L)\\to Y$ that is a good quotient in the sense of [[def-good-and-geometric-quotients-for-group-actions]]; in particular $\\mathcal O_Y\\cong(\\pi_*\\mathcal O_{X^{ss}(L)})^G$, $\\pi$ is surjective, closed $G$-stable subsets have closed images, and disjoint closed $G$-stable subsets have disjoint images;\n\n(iv) if $m\\ge1$ and $i:X\\hookrightarrow\\mathbf P(V)$ is a $G$-equivariant closed immersion with $i^*\\mathcal O(1)\\cong L^{\\otimes m}$ as $G$-linearized invertible sheaves ([[lem-ample-linearization-power-equivariant-embedding]]), then $X^{ss}(L)=X\\cap\\mathbf P(V)^{ss}$ and $X^s(L)=X\\cap\\mathbf P(V)^s$ for the linear action, so the definitions of [[def-semistable-and-stable-points-for-a-linearization]] agree with the embedded ones;\n\n(v) no linearization of an arbitrary ample invertible sheaf is constructed or assumed possible, and no Hilbert--Mumford criterion is used or claimed.",
+        "deps": [
+          "def-good-and-geometric-quotients-for-group-actions",
+          "def-homogeneous-coordinate-ring",
+          "lem-reynolds-operator-and-invariant-subring-properties",
+          "lem-graded-invariants-of-localization-at-an-invariant-element",
+          "lem-affine-chart-quotients-for-invariant-sections",
+          "def-invariant-section-ring-and-projective-git-quotient",
+          "def-semistable-and-stable-points-for-a-linearization",
+          "lem-ample-linearization-power-equivariant-embedding",
+          "lem-good-quotient-local-on-target",
+          "lem-ample-invariant-section-charts-are-affine",
+          "lem-section-ring-of-ample-line-bundle-finitely-generated",
+          "lem-invariants-of-finitely-generated-graded-rational-algebra-are-finitely-generated",
+          "lem-proj-of-finitely-generated-graded-algebra-is-projective",
+          "thm-linear-action-projective-git-quotient",
+          "lem-ample-stable-positive-power",
+          "thm-ample-powers-very-ample-proper-base",
+          "lem-proj-veronese-invariance",
+          "def-g-linearization-of-an-invertible-sheaf",
+          "def-ample-invertible-sheaf",
+          "def-projective-variety-classical",
+          "def-rational-action-on-affine-variety",
+          "def-axiom-of-choice",
+          "lem-graded-section-module-finite-projective",
+          "cor-projective-cohomology-finite-dimensional-field",
+          "lem-extend-sections-from-nonvanishing-open"
+        ],
+        "strategy": "Choose $m\\ge1$ and a $G$-equivariant closed immersion $i:X\\hookrightarrow\\mathbf P(V)$ with $i^*\\mathcal O(1)\\cong L^{\\otimes m}$ ([[lem-ample-linearization-power-equivariant-embedding]]). The Veronese subalgebra identity $(R(X,L)^G)^{(m)}=R(X,L^{\\otimes m})^G$ and [[lem-proj-veronese-invariance]] identify $Y=\\operatorname{Proj}R(X,L)^G$ with $\\operatorname{Proj}R(X,L^{\\otimes m})^G$, which is a projective $\\mathbb C$-scheme of finite type by the linear-action theorem [[thm-linear-action-projective-git-quotient]] applied to the image of $X$; finite generation of $R(X,L)^G$ is [[lem-section-ring-of-ample-line-bundle-finitely-generated]] plus [[lem-invariants-of-finitely-generated-graded-rational-algebra-are-finitely-generated]]. The equality of semistable loci under positive powers uses $X_\\sigma=X_{\\sigma^m}$ ([[lem-linearizations-powers-and-equivariant-section-ring]](iv)): every invariant section of a power of $L^{\\otimes m}$ is an invariant section of a power of $L$, and conversely $\\sigma^m$ has the same nonvanishing locus, so the two sets of charts coincide; stability is unchanged because it is defined by closedness of the orbit in the semistable locus and finiteness of the stabilizer, both of which are independent of the power. The chart morphisms are [[lem-affine-chart-quotients-for-invariant-sections]] applied to the very ample linearization $L^{\\otimes m}$ after identifying $X$ with $i(X)$, with affineness of the charts from [[lem-ample-invariant-section-charts-are-affine]]; locality on the target ([[lem-good-quotient-local-on-target]]) glues them into the good quotient. The embedded description (iv) is Brion Proposition 1.35 and Newstead's Example 3.3 together with the paragraph preceding Theorem 3.4. No linearization-existence theorem and no Hilbert-Mumford criterion is imported; the linearization remains an explicit hypothesis.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "Proposition 1.35 and the reduction preceding it, printed p. 12"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Theorems 5.3 and 5.6, Remark 5.26"
+            },
+            {
+              "title": "P. E. Newstead, Geometric Invariant Theory, lecture notes, CIMAT Guanajuato 2006 (CEL/HAL; archived copy)",
+              "url": "https://web.archive.org/web/20231019082211id_/https://cel.hal.science/cel-00392098/file/newstead_notes.pdf",
+              "locator": "Example 3.3, Theorem 3.4 and Section 3.5"
+            },
+            {
+              "title": "I. Dolgachev, Lectures on Invariant Theory, London Mathematical Society Lecture Note Series 296, Cambridge University Press, 2003",
+              "url": "https://www.math.ens.psl.eu/~benoist/refs/Dolgachev.pdf",
+              "locator": "Theorem 8.1 and Proposition 8.1 with proofs, printed pp. 118-121"
+            }
+          ]
+        },
+        "axiom_use": "AC is inherited from the finite-generation, Reynolds and Proj suppliers; the power reduction and gluing are choice free.",
+        "dependency_level": 10,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-good-and-geometric-quotient-on-stable-locus",
+        "kind": "theorem",
+        "title": "Good and geometric quotient on the stable locus",
+        "statement": "Assume AC inherited from the named suppliers. In the setting of [[thm-projective-git-quotient-from-invariant-section-ring]] let $X^s(L)=\\{x\\in X^{ss}(L):Gx\\text{ is closed in }X^{ss}(L),\\ G_x\\text{ is finite}\\}$, and let $\\pi:X^{ss}(L)\\to Y=\\operatorname{Proj}R(X,L)^G$ be the good quotient. Then: (i) $X^s(L)$ is open and $G$-stable in $X$, $Y^s:=\\pi(X^s(L))$ is open in $Y$, and $X^s(L)=\\pi^{-1}(Y^s)$; (ii) $\\pi:X^s(L)\\to Y^s$ is a geometric quotient: its fibres are exactly the $G$-orbits in $X^s(L)$, and $\\mathcal O_{Y^s}\\cong(\\pi_*\\mathcal O_{X^s(L)})^G$; (iii) for every $m\\ge1$ the identification $X^{ss}(L)=X^{ss}(L^{\\otimes m})$ carries $X^s(L)$ onto $X^s(L^{\\otimes m})$, and the two geometric quotients are identified by the Veronese isomorphism; (iv) the stable locus admits the invariant-chart description: $x\\in X^s(L)$ if and only if $G_x$ is finite and there exist $m\\ge1$ and $\\sigma\\in\\Gamma(X,L^{\\otimes m})^G$ with $\\sigma(x)\\ne0$ and the action of $G$ on the affine chart $X_\\sigma$ having all orbits closed; (v) if $X^s(L)=X^{ss}(L)$ then $\\pi$ itself is a geometric quotient of $X^{ss}(L)$.",
+        "deps": [
+          "def-semistable-and-stable-points-for-a-linearization",
+          "def-good-and-geometric-quotients-for-group-actions",
+          "lem-ample-invariant-section-charts-are-affine",
+          "lem-affine-chart-quotients-for-invariant-sections",
+          "lem-ample-linearization-power-equivariant-embedding",
+          "lem-reynolds-operator-and-invariant-subring-properties",
+          "thm-linear-action-projective-git-quotient",
+          "thm-projective-git-quotient-from-invariant-section-ring",
+          "lem-proj-veronese-invariance",
+          "def-rational-action-on-affine-variety",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Transfer the stable-locus theorem for the linear action ([[thm-linear-action-projective-git-quotient]]) along the $G$-equivariant very ample power $i:X\\hookrightarrow\\mathbf P(V)$ with $i^*\\mathcal O(1)\\cong L^{\\otimes m}$ of [[lem-ample-linearization-power-equivariant-embedding]], using the identification of the semistable and stable loci and of the quotient data from [[thm-projective-git-quotient-from-invariant-section-ring]](ii),(iv) and the Veronese isomorphism ([[lem-proj-veronese-invariance]]). Charts of invariant sections correspond under $i$ to charts of invariant forms with restriction on invariants surjective ([[lem-ample-invariant-section-charts-are-affine]], [[lem-reynolds-operator-and-invariant-subring-properties]]), so the chart description (iv) of stability is exactly the transported linear-action chart description; openness of $X^s$, openness of $Y^s$, the identity $X^s=\\pi^{-1}(Y^s)$ and the geometric quotient on the stable locus are transported verbatim, and (v) is the transported case $X^s=X^{ss}$ of the linear-action theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. E. Newstead, Geometric Invariant Theory, lecture notes, CIMAT Guanajuato 2006 (CEL/HAL; archived copy)",
+              "url": "https://web.archive.org/web/20231019082211id_/https://cel.hal.science/cel-00392098/file/newstead_notes.pdf",
+              "locator": "Lemma 1.10, Theorem 1.12(iv) and Sections 3.4-3.5"
+            },
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "Proposition 1.35, printed p. 12"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Lemma 5.5, Theorem 5.6 with its proof"
+            },
+            {
+              "title": "I. Dolgachev, Lectures on Invariant Theory, London Mathematical Society Lecture Note Series 296, Cambridge University Press, 2003",
+              "url": "https://www.math.ens.psl.eu/~benoist/refs/Dolgachev.pdf",
+              "locator": "Theorem 8.1 with proof, printed pp. 118-120"
+            }
+          ]
+        },
+        "axiom_use": "AC is inherited from the affine stable-locus and semicontinuity suppliers.",
+        "dependency_level": 11,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 886,
+    "id": "projective-git-from-linearized-line-bundles-examples",
+    "kind": "B",
+    "category": "algebraic-geometry",
+    "title": "Projective GIT from Linearized Line Bundles \u2014 Examples",
+    "companion": "projective-git-from-linearized-line-bundles",
+    "requires": [
+      "projective-git-from-linearized-line-bundles"
+    ],
+    "items": [
+      {
+        "id": "cex-semistable-locus-depends-on-linearization",
+        "kind": "counterexample",
+        "title": "The semistable locus depends on the linearization, not only on the sheaf",
+        "statement": "The assertion 'for a fixed projective action of a reductive group $G$ on a projective variety $X$ and a fixed ample invertible sheaf $L$, the semistable locus $X^{ss}(L)$ depends only on $X$, $G$ and the isomorphism class of $L$' is false. Counterexample: let $X=\\mathbf P^0=\\operatorname{Proj}\\mathbb C[t]$ be the one-point projective variety, let $G=\\mathbf G_m$ act trivially on $X$, and let $L=\\mathcal O_X$ be the trivial (ample) invertible sheaf. With the trivial linearization $L_0$, every global section of every $L_0^{\\otimes n}$ is invariant and nonvanishing, so $X^{ss}(L_0)=X$, $X^s(L_0)=\\varnothing$ (the stabilizer is all of $G$) and $X/\\!/_{L_0}G=\\operatorname{Proj}\\mathbb C[t]=X$. With the linearization twisted by the nontrivial character $\\chi(t)=t$, the induced action on $\\Gamma(X,L^{\\otimes n})=\\mathbb C$ is multiplication by $\\chi^n$, so there is no nonzero invariant section in positive degree: $X^{ss}(L_\\chi)=\\varnothing$ and $X/\\!/_{L_\\chi}G=\\operatorname{Proj}\\mathbb C=\\varnothing$. Thus two linearizations of the same ample invertible sheaf on the same one-point variety with the same group action give the empty and the nonempty semistable locus, and the empty and one-point quotient; (semi)stability genuinely depends on the linearization.",
+        "deps": [
+          "def-g-linearization-of-an-invertible-sheaf",
+          "def-invariant-section-ring-and-projective-git-quotient",
+          "def-semistable-and-stable-points-for-a-linearization",
+          "def-proj-graded-ring-points",
+          "def-projective-variety-classical",
+          "def-ample-invertible-sheaf",
+          "def-dimension-classical-variety"
+        ],
+        "strategy": "On the one-point scheme the invertible sheaf $\\mathcal O(1)$ of $\\operatorname{Proj}\\mathbb C[t]$ is trivial and $\\Gamma(X,\\mathcal O(n))=\\mathbb C$ for every $n\\ge0$; a linearization is an action of $G$ on the total space covering the trivial action, hence given by a character, and it acts on $\\Gamma(X,\\mathcal O(n))$ by $\\chi^n$. For $\\chi=1$ all sections are invariant; the homogeneous prime $(0)$ of $\\operatorname{Proj}\\mathbb C[t]$ does not contain $t$, so $t$ does not vanish at the point and the point is semistable, while its stabilizer is $G$, so it is not stable. For a nontrivial character $\\chi^n\\ne1$ for every $n\\ge1$, all positive-degree invariants vanish, the semistable locus is empty, and $\\operatorname{Proj}$ of the degree-zero ring $\\mathbb C$ is the empty scheme ([[def-proj-graded-ring-points]]). This is the test prescribed by the AG-ACT-4 design boundary checks and the same twist computation as [[ex-gm-on-projective-line-with-two-linearizations]]; it shows that the linearization hypothesis in [[def-semistable-and-stable-points-for-a-linearization]] is part of the data and cannot be replaced by the isomorphism class of $L$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. E. Newstead, Geometric Invariant Theory, lecture notes, CIMAT Guanajuato 2006 (CEL/HAL; archived copy)",
+              "url": "https://web.archive.org/web/20231019082211id_/https://cel.hal.science/cel-00392098/file/newstead_notes.pdf",
+              "locator": "Lecture 3, Sections 3.4-3.5 (dependence of (semi)stability on the linearisation); Example 4.1"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Remark 5.20 (twisting a linearisation by a character) and Example 5.8"
+            },
+            {
+              "title": "I. Dolgachev, Lectures on Invariant Theory, London Mathematical Society Lecture Note Series 296, Cambridge University Press, 2003",
+              "url": "https://www.math.ens.psl.eu/~benoist/refs/Dolgachev.pdf",
+              "locator": "Chapters 7.1 and 8.1, printed pp. 103-105 and 115-121"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-gm-on-projective-line-with-two-linearizations",
+        "kind": "example",
+        "title": "GIT quotients of the projective line for different linearizations",
+        "statement": "Assume AC inherited from the Proj, cohomology and quotient suppliers ([[def-axiom-of-choice]]); the explicit weight and orbit computations make no additional choice.\n\nLet $G=\\mathbf G_m=\\mathbb C^\\times$ act on $X=\\mathbf P^1=\\mathbf P(\\mathbb C e_0\\oplus\\mathbb C e_1)$ by $t\\cdot[e_0:e_1]=[t^{-1}e_0:te_1]$, so that the fixed points are $[1:0]$ and $[0:1]$, and let $L=\\mathcal O_{\\mathbf P^1}(1)$ with the standard linearization $L_0$ for which the monomial $e_0^ie_1^{n-i}$ is an eigenvector of weight $2i-n$ in $\\Gamma(X,L^{\\otimes n})$ ([[def-g-linearization-of-an-invertible-sheaf]]). Then:\n\n(i) for $L_0$ the invariant sections are the multiples of $(e_0e_1)^{n/2}$ for even $n$, so $X^{ss}(L_0)=X^s(L_0)=\\{[e_0:e_1]:e_0e_1\\ne0\\}\\cong\\mathbf G_m$; the action on this locus is transitive with finite stabilizer $\\mu_2=\\{t\\in\\mathbf G_m:t^2=1\\}$ at every point, so every orbit is closed there, and $X/\\!/_{L_0}G$ is a one-point scheme, so the quotient is a geometric quotient onto a point ([[thm-good-and-geometric-quotient-on-stable-locus]]);\n\n(ii) for the twist $L_+=L_0\\otimes\\chi$ by the character $\\chi(t)=t$ the invariant sections of $L_+^{\\otimes n}$ are the multiples of $e_1^n$, so $X^{ss}(L_+)=\\{e_1\\ne0\\}\\cong\\mathbb A^1$ and $X^s(L_+)=\\varnothing$: the fixed point $[0:1]$ has stabilizer $G$ and lies in the closure of every other orbit, so the good quotient $X^{ss}(L_+)\\to\\operatorname{Proj}\\mathbb C[e_1]$ collapses the affine line to a point and is not geometric;\n\n(iii) for the twist $L_-=L_0\\otimes\\chi^{-1}$ the roles of the two charts are exchanged: $X^{ss}(L_-)=\\{e_0\\ne0\\}\\cong\\mathbb A^1$, $X^s(L_-)=\\varnothing$; for $k\\in\\mathbb Z$ with $|k|\\ge2$ the twist $L_0\\otimes\\chi^k$ has no nonzero invariant section of positive degree, so $X^{ss}=\\varnothing$ and the GIT quotient is the empty scheme;\n\n(iv) all these linearizations have the same underlying ample invertible sheaf $\\mathcal O(1)$ and the same action on $X$, so the example shows the dependence of $(X^{ss},X^s,\\pi)$ on the linearization alone; the standard case with $n=1$ is the computation of Newstead's Example 4.1 (stated there for $n\\ge2$; for $n=1$ the same argument gives $(\\mathbf P^n)^{ss}=(\\mathbf P^n)^s\\cong\\mathbb C^n\\smallsetminus\\{0\\}$ and quotient $\\mathbf P^{n-1}$, which for $n=1$ is a point) and of Hoskins' Example 5.8 with $n=1$.",
+        "deps": [
+          "def-g-linearization-of-an-invertible-sheaf",
+          "def-invariant-section-ring-and-projective-git-quotient",
+          "def-semistable-and-stable-points-for-a-linearization",
+          "thm-projective-git-quotient-from-invariant-section-ring",
+          "thm-good-and-geometric-quotient-on-stable-locus",
+          "def-projective-variety-classical",
+          "def-twisting-sheaf-proj",
+          "def-ample-invertible-sheaf",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Assume AC inherited from Proj, cohomology and quotient suppliers. Polynomial sections have monomial weight 2i-n+kn under the twist chi^k. For k=0, the invariant generator e0e1 has degree 2, the nonvanishing locus is C*, the action is transitive and stabilizers are mu2. For k=+1 or -1 the invariant generator is e1 or e0, the semistable chart is A1, and its fixed point lies in the closure of each nonfixed orbit. Thus the stable locus is empty and the one-point good quotient is not geometric. For |k|>=2 all positive-degree weights have one sign, so no positive invariant survives and Proj C is empty. Every one-variable invariant Proj is Spec C on its unique standard chart. No numerical stability criterion or extra choice is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. E. Newstead, Geometric Invariant Theory, lecture notes, CIMAT Guanajuato 2006 (CEL/HAL; archived copy)",
+              "url": "https://web.archive.org/web/20231019082211id_/https://cel.hal.science/cel-00392098/file/newstead_notes.pdf",
+              "locator": "Example 4.1 and Section 3.5 (linearisations of O(1) on P^n)"
+            },
+            {
+              "title": "Victoria Hoskins, Moduli Problems and Geometric Invariant Theory, FU Berlin lecture notes (2015/16)",
+              "url": "https://userpage.fu-berlin.de/hoskins/M15_Lecture_notes.pdf",
+              "locator": "Example 5.8; Example 5.18(2) (twisting by a character)"
+            },
+            {
+              "title": "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22",
+              "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf",
+              "locator": "Example 1.32(2), printed p. 11 (the standard linearization)"
+            },
+            {
+              "title": "I. Dolgachev, Lectures on Invariant Theory, London Mathematical Society Lecture Note Series 296, Cambridge University Press, 2003",
+              "url": "https://www.math.ens.psl.eu/~benoist/refs/Dolgachev.pdf",
+              "locator": "Examples 8.1-8.4, printed pp. 121-124"
+            }
+          ]
+        },
+        "dependency_level": 12,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

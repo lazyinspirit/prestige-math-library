@@ -8,6 +8,17 @@ pipeline_run: frontier-38-owner-30
 deps: ["def-thom-class-and-thom-isomorphism-interface", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-axiom-of-choice"]
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-14.md"
+      - "research/frontier-38-owner-30-alpha-batch-14-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-14-post-5a.json"
+    content_sha256: "1e2f8bcceb83c3a45c22d4de257b4982bfbfeb3a45fc71d1c1e702b6d70ed6ad"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

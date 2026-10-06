@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-11.md"
+      - "research/frontier-38-owner-30-alpha-batch-11-5a.md"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u11.json"
+    content_sha256: "c7618b200dfd12a3382fd422f9db15d5a5e5f3fa7748fe54d9557d6457a4f843"
 id: lem-compact-group-matrix-coefficients-separate-points
 kind: lemma
 title: Matrix coefficients of finite-dimensional representations separate points of a compact group

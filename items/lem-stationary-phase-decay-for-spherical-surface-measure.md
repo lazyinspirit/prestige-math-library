@@ -21,6 +21,12 @@ deps:
 - def-partition-of-unity-subordinate-to-a-cover
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: completed-cumulative-mathematical-review
+    date: 2026-10-03
+    scope: "Cumulative verification supported by existing completed mathematical readings. Original complete Step 5a reader evidence research/frontier-38-owner-30-reader-6.md, followed by completed Step 7 repair/adjudication reasoning research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u6.json, exact post_sha256 b7bf39d3287165a66308bc356556fa7d4ff203fa60de40a1d402fa3649751a34 with publication status normalized back to draft. The later reasoning covers the substantive changes; its local repair/self-review qualifications remain applicable. This reconciliation adds no new mathematical review, independent post-repair audit, source reading or judge acceptance."
+    delegated_by: "owner via tools/autopilot frontier-38-owner-30 step7-v2-initial-r1-u6 dispatch"
   precheck: pass
 provenance:
   statement: literature-derived

@@ -14,6 +14,17 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-1.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-1.result.json
+      - research/frontier-38-owner-30-step5-hash-1-post-5a.json
+      - research/frontier-38-owner-30-alpha-batch-1-5a-decisions.json
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

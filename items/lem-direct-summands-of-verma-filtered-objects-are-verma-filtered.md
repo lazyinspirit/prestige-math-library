@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for lem-direct-summands-of-verma-filtered-objects-are-verma-filtered and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-7; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"3e4d75681c9ac53870189e252202c2d91e3e10ccc5bc665c7364d8517f76aafe","evidence":["research/frontier-38-owner-30-reader-7.md","research/frontier-38-owner-30-reader-findings-7.json","research/frontier-38-owner-30-dispatch/reader-reader-7.result.json","research/frontier-38-owner-30-step5-hash-7-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/lem-direct-summands-of-verma-filtered-objects-are-verma-filtered.md","historical_raw_sha256":"d7d742eedc97f5ca6ba4a27b615ef3fe766c176eed4b4193bc28e02f3640a989","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:44:13.402Z"}}
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

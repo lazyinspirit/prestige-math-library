@@ -29,6 +29,17 @@ deps:
 - thm-euclidean-heine-borel-pseudocompactness-and-extreme-values
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-6.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-6.result.json
+      - research/frontier-38-owner-30-step5-hash-6-post-5a.json
+      - research/frontier-38-owner-30-alpha-batch-6-5a-decisions.json
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

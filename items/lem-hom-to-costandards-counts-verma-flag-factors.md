@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-7.md"
+      - "research/frontier-38-owner-30-alpha-batch-7-5a.md"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u7.json"
+    content_sha256: "131c46a53a97031b3d41fcf03738eb61a34dfaa928515ffb86a8fb3317e82c6e"
 id: lem-hom-to-costandards-counts-verma-flag-factors
 kind: lemma
 title: Hom to costandards counts Verma-flag factors

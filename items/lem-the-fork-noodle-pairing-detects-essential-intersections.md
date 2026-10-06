@@ -21,6 +21,17 @@ sources:
       url: "https://www.math.utah.edu/~margalit/primer/"
       locator: "Chapter 1, Proposition 1.7 (bigon criterion), printed pp. 30-34"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-16.md"
+      - "research/frontier-38-owner-30-alpha-batch-16-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-16-post-5a.json"
+    content_sha256: "303badcb8b4a083929bc577445150035c0e6566022575a832f328c67e4c03b00"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

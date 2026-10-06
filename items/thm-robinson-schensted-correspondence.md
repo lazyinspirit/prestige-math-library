@@ -4,6 +4,21 @@ kind: theorem
 title: The Robinson-Schensted correspondence
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-03"
+    scope: "Cumulative whole-item verification: completed original Step5 full statement/definition and proof read plus the recorded later Step7 local mathematical corrections. Exact recovered original carrier and current post-correction carrier match recorded hashes; every substantive delta is covered by the cited correction reasoning. No independent audit of the local repairs and no new review round is claimed; supplier review is limited to interfaces used."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-9.md"
+      - "research/frontier-38-owner-30-alpha-batch-9-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-9-post-5a.json"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u9.json"
+    original_read_raw_sha256: "9e5bd69edf2c6aadc6b5775b333f49760560fa4039316c230cf408e9dd40430a"
+    repair_post_guard_sha256: "cbb0a794244e2b48413d6fa4321f123b1751f0a503f1adc452cf913f46adb55a"
+    content_sha256: "9d054359ad60cd5d01bbe1c3431e5586a04cf714aa7b3fdc7492e5a3b41739b2"
 pipeline_run: frontier-38-owner-30
 deps: [def-partition-young-diagram-and-conjugate-partition, def-removable-and-addable-nodes-of-a-partition, def-reverse-row-deletion, def-row-insertion-and-bumping-route, def-young-tableau-standard-tableau-and-shape, lem-largest-entry-of-a-standard-tableau-is-removable, lem-robinson-schensted-recording-tableau-is-standard, lem-row-bumping-route-monotonicity, lem-row-insertion-and-reverse-deletion-are-inverse]
 proof_strategy: direct

@@ -24,6 +24,12 @@ sources:
       url: "https://ocw.mit.edu/courses/18-725-algebraic-geometry-fall-2015/ec341c7a2524e5dba7c3e939f322613a_MIT18_725F15_notes.pdf"
       locator: "Lecture 9, blowup as closure of the graph of the rational map to P^{n-1}, PDF p. 23"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "completed-independent-mathematical-review"
+    date: 2026-10-03
+    scope: "Complete item claim and mathematical body read in delegated Step 5a reader; evidence: research/frontier-38-owner-30-reader-2.md; immutable carrier: research/frontier-38-owner-30-step5-hash-2-post.json; exact saved draft bytes in git d90f26208 match that carrier after exclusion of the later judge stamp. Current content matches the saved carrier except publication status and verification metadata. Source and supplier coverage is limited to the report."
+    delegated_by: "owner via tools/autopilot frontier-38-owner-30 reader-2 dispatch"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

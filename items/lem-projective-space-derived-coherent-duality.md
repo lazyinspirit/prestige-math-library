@@ -11,6 +11,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "completed-independent-mathematical-review"
+    date: 2026-10-03
+    scope: "Complete item claim and mathematical body read in delegated Step 5a reader; evidence: research/frontier-38-owner-30-reader-28.md; immutable carrier: research/frontier-38-owner-30-step5-hash-28-post.json; exact saved draft bytes in git d90f26208 match that carrier after exclusion of the later judge stamp. Current content matches the saved carrier except publication status and verification metadata. Source and supplier coverage is limited to the report."
+    delegated_by: "owner via tools/autopilot frontier-38-owner-30 reader-28 dispatch"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

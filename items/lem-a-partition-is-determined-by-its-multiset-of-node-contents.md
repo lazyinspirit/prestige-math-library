@@ -21,6 +21,17 @@ sources:
     - title: "Mathas-Soriano, Seminormal Forms and Gram Determinants for Cellular Algebras, J. reine angew. Math. 619 (2008) 141-173; arXiv:math/0604108, section 2, printed pp. 4-8"
       url: "https://arxiv.org/pdf/math/0604108"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-19.md"
+      - "research/frontier-38-owner-30-alpha-batch-19-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-19-post-5a.json"
+    content_sha256: "2555f43efd3649e4f6118586106461648a9d1d674916a5759e9712715890e358"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

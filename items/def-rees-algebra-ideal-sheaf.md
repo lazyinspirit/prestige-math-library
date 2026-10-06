@@ -25,6 +25,18 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf"
       locator: "Chapter 19 introduction and section 19.3, pp. 383-387"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post.json"
+    reviewed_raw_sha256: "ee944bf0edbb7636dfdd8290baebb19238968ecdf3956816d5e88d9c1a4e2e4f"
+    content_sha256: "cc4489648f1338115020eb5a2bf7636a7e04b32c8cd72abffdd9759233d54785"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

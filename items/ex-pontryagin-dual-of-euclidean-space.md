@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-10.md"
+      - "research/frontier-38-owner-30-alpha-batch-10-5a.md"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u10.json"
+    content_sha256: "becc47e9e8466e190619b5d71d408772c66d3a2e8f80959d264f94130e15d06a"
 id: ex-pontryagin-dual-of-euclidean-space
 kind: example
 title: "The Pontryagin dual of Euclidean space is Euclidean space"

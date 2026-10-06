@@ -369,9 +369,14 @@ function publishedDependencies(batchIds, allRunIds) {
         ...(Array.isArray(item.justified_by) ? item.justified_by : [])]
         .filter((target) => typeof target === 'string');
       for (const target of dependencies) {
-        if (allRunIds.has(target)) continue;
         const targetItem = metadataFor(target);
         if (!targetItem) continue;
+        // Current-manifest prerequisites are traversal context, never
+        // published subjects; their real edges may reach published suppliers.
+        if (allRunIds.has(target)) {
+          queue.push(target);
+          continue;
+        }
         if (targetItem.status !== 'published' && !claimed.has(target)) continue;
         if (!owners.has(target)) owners.set(target, new Set());
         owners.get(target).add(consumer);

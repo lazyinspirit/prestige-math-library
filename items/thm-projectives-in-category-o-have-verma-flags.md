@@ -19,6 +19,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for thm-projectives-in-category-o-have-verma-flags and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-7; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"1e22f59947abf12cb7591a0a853665069be1fde83210a5232f6ea01e548c7ffc","evidence":["research/frontier-38-owner-30-reader-7.md","research/frontier-38-owner-30-reader-findings-7.json","research/frontier-38-owner-30-dispatch/reader-reader-7.result.json","research/frontier-38-owner-30-step5-hash-7-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/thm-projectives-in-category-o-have-verma-flags.md","historical_raw_sha256":"78d329eee18142b672bf4cdefc5dac85a464d088991fc31734b932bfd8c867f7","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:44:13.402Z"}}
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

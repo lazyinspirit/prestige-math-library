@@ -1,0 +1,665 @@
+[
+  {
+    "order": 913,
+    "id": "birational-morphisms-contractions-and-surface-singularities",
+    "kind": "A",
+    "category": "algebraic-geometry",
+    "title": "Birational Morphisms, Contractions, and Surface Singularities",
+    "companion": "birational-morphisms-contractions-and-surface-singularities-examples",
+    "requires": [
+      "normal-varieties-normalization-and-zariskis-main-theorem",
+      "finite-proper-and-projective-morphisms",
+      "intersection-products-on-smooth-projective-surfaces",
+      "point-blowup-resolution-on-arbitrary-regular-surfaces"
+    ],
+    "items": [
+      {
+        "id": "def-exceptional-curve-and-contraction",
+        "kind": "definition",
+        "title": "Exceptional curves of the first kind and their contractions",
+        "deps": [
+          "cor-picard-projective-line-integers",
+          "def-axiom-of-choice",
+          "def-cartier-divisor",
+          "def-closed-immersion-schemes",
+          "def-degree-invertible-sheaf-proper-dimension-one",
+          "def-divisor-intersection-number-on-smooth-projective-surface",
+          "def-effective-cartier-divisor",
+          "def-integral-scheme",
+          "def-invertible-sheaf",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-projective-morphism-pre-proj",
+          "lem-uniqueness-of-twists-on-the-projective-line",
+          "thm-intersection-with-curve-as-degree-of-restriction"
+        ],
+        "statement": "Assume the Axiom of Choice where it is inherited from the degree and intersection suppliers below.\nLet $X$ be a Noetherian scheme.\n\n**(a) Exceptional curves of the first kind.** A closed subscheme $E\\subseteq X$ is an *exceptional curve of the first kind* if it is an effective Cartier divisor on $X$ ([[def-effective-cartier-divisor]]), there is a field $\\kappa$ and an isomorphism $\\mathbb P^1_\\kappa\\to E$ of schemes, and the normal sheaf $\\mathcal N_{E/X}=\\mathcal O_X(E)|_E$ (equivalently the conormal sheaf $\\mathcal O_X(-E)|_E$, [[def-invertible-sheaf-of-cartier-divisor]]) pulls back under that isomorphism to $\\mathcal O_{\\mathbb P^1_\\kappa}(-1)$.\n\n**(b) Contractions.** Let $E\\subseteq X$ be an exceptional curve of the first kind. A *contraction of $E$* is a proper morphism $b\\colon X\\to X'$ such that $X'$ is Noetherian, there is a closed point $x'\\in X'$ with $\\mathcal O_{X',x'}$ regular of dimension $2$, and $X$ together with $b$ is the blowup of $X'$ at $x'$ ([[def-blowup-scheme-along-ideal]]). Thus a contraction is exactly, up to unique isomorphism over $X$, the inverse of the blowing up of a regular point of a surface.\n\n**(c) Contraction notation.** If $f\\colon X\\to Y$ is a morphism of schemes and $E\\subseteq X$ is an integral curve, we say $E$ is *contracted by $f$* if $f(E)$ is a single point of $Y$.\n\n**(d) Dictionary on a regular projective surface.** Let $k$ be a field, $X$ an integral regular projective surface over $k$ ([[def-divisor-intersection-number-on-smooth-projective-surface]]), and $E\\subseteq X$ an integral curve with function field $\\kappa(E)$. Then $E$ is an exceptional curve of the first kind if and only if $E\\cong\\mathbb P^1_{\\kappa(E)}$ and $E\\cdot E=-1$, where $E\\cdot E$ is the intersection number of [[def-divisor-intersection-number-on-smooth-projective-surface]]. Indeed, on the one hand $E\\cdot E=\\deg_E\\mathcal O_X(E)|_E$ ([[thm-intersection-with-curve-as-degree-of-restriction]]) and $\\deg_E$ is additive on inverse bundles ([[cor-degree-additive-proper-curve]]); on the other hand every invertible sheaf on $\\mathbb P^1_\\kappa$ is $\\mathcal O(d)$ for a unique $d$ ([[cor-picard-projective-line-integers]], [[lem-uniqueness-of-twists-on-the-projective-line]]), and $\\deg\\mathcal O(d)=d$ for the degree of [[def-degree-invertible-sheaf-proper-dimension-one]]. The equivalence uses only the degree, so it is also valid when $\\kappa(E)\\neq k$.",
+        "strategy": "Definition assembly from the listed suppliers; no proof obligation. Part (d) unwinds the degree of an invertible sheaf on $E$, the classification of invertible sheaves on the projective line by degree, and the identification $E\\cdot E=\\deg_E\\mathcal O_X(E)|_E$.",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.16 (Contracting exceptional curves)",
+              "url": "https://stacks.math.columbia.edu/tag/0C2I"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Lemma 54.3.1 (Blowing up a regular surface at a point)",
+              "url": "https://stacks.math.columbia.edu/tag/0AGQ"
+            },
+            {
+              "title": "Olivier Debarre, Introduction to Mori Theory (M2 course notes, 2016 version)",
+              "url": "https://www.math.ens.psl.eu/~debarre/M2.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-universal-property-of-a-contraction",
+        "kind": "lemma",
+        "title": "Universal property and uniqueness of a contraction",
+        "deps": [
+          "cor-blowup-unique-up-to-unique-isomorphism",
+          "def-axiom-of-choice",
+          "def-exceptional-curve-and-contraction",
+          "def-proper-morphism",
+          "lem-blowup-isomorphism-off-center",
+          "lem-blowup-point-pushforward-vanishing",
+          "thm-blowup-projective",
+          "thm-proper-morphism-closed-image"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the blowup suppliers. Let $X$ be a Noetherian scheme,\n$E\\subseteq X$ an exceptional curve of the first kind and $b\\colon X\\to X'$ a contraction of $E$\n([[def-exceptional-curve-and-contraction]]). Write $x'=b(E)\\in X'$. Then:\n\n1. $b$ is proper, surjective and closed; $b\\colon X\\to X'$ is a topological quotient map identifying $X'$ with the quotient of $X$ obtained by collapsing $E$ to $x'$; the canonical map $\\mathcal O_{X'}\\to b_*\\mathcal O_X$ is an isomorphism and $R^1b_*\\mathcal O_X=0$.\n2. (Universal property) For every morphism $\\varphi\\colon X\\to Y$ of schemes with $\\varphi(E)$ a single point there is a unique morphism $\\varphi'\\colon X'\\to Y$ with $\\varphi=\\varphi'\\circ b$.\n3. (Uniqueness) If $b_i\\colon X\\to X_i'$, $i=1,2$, are contractions of $E$, there is a unique isomorphism $X_1'\\to X_2'$ compatible with $b_1$ and $b_2$.\n\nConsequently a contraction of $E$, when it exists, is unique and is characterized by the universal property.",
+        "strategy": "By definition $b$ is the blowup of the regular point $x'$; such a blowup is proper, an isomorphism off the center, and its exceptional curve is $E$ ([[thm-blowup-projective]], [[lem-blowup-isomorphism-off-center]]). A proper surjective morphism whose target is obtained by collapsing one fibre is submersive, so $X'$ carries the quotient topology; [[lem-blowup-point-pushforward-vanishing]] gives $\\mathcal O_{X'}\\cong b_*\\mathcal O_X$ and $R^1b_*\\mathcal O_X=0$ for point blowups, hence for the contraction. For (2) define $\\varphi'$ on the quotient topologically and use the adjunction between $b^{-1}$ and $b_*$: the map $\\varphi^\\sharp\\colon \\varphi^{-1}\\mathcal O_Y\\to\\mathcal O_X$ is adjoint to a map $(\\varphi')^{-1}\\mathcal O_Y\\to b_*\\mathcal O_X=\\mathcal O_{X'}$; locality at $b(E)$ is checked by noting that a function vanishing at $\\varphi(E)$ pulls back to a function vanishing on $E$, hence vanishes at $x'$. Part (3) is immediate from (2) applied in both directions, and lands in the definition of contraction as a blowup up to unique isomorphism ([[cor-blowup-unique-up-to-unique-isomorphism]]).",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.16 (Contracting exceptional curves)",
+              "url": "https://stacks.math.columbia.edu/tag/0C2I"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Lemma 54.3.1 (Blowing up a regular surface at a point)",
+              "url": "https://stacks.math.columbia.edu/tag/0AGQ"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-blowing-up-a-regular-point-is-a-contraction",
+        "kind": "lemma",
+        "title": "Blowing up a regular point is a contraction",
+        "deps": [
+          "cor-blowup-birational-integral-scheme",
+          "def-axiom-of-choice",
+          "def-blowup-scheme-along-ideal",
+          "def-exceptional-curve-and-contraction",
+          "def-integral-scheme",
+          "lem-blowup-isomorphism-off-center",
+          "lem-exceptional-curve-normal-bundle-minus-one",
+          "thm-blowup-regular-surface-closed-point-regular",
+          "thm-pullback-center-ideal-invertible"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field, let $S$ be an integral regular finite-type $k$-scheme of pure dimension two, let $p\\in S$ be a closed point, let $\\pi\\colon S'=\\operatorname{Bl}_pS\\to S$ be the blowup of $S$ at $p$ and let $E=\\pi^{-1}(p)$ be its exceptional curve. Then $S'$ is an integral regular finite-type $k$-scheme of pure dimension two, $E$ is an exceptional curve of the first kind on $S'$ ([[def-exceptional-curve-and-contraction]]), and $\\pi$ is a contraction of $E$. Moreover $\\pi$ restricts to an isomorphism $S'\\setminus E\\to S\\setminus\\{p\\}$.\n\nConversely, if $b\\colon X\\to X'$ is a contraction of an exceptional curve of the first kind, then $b$ is, up to unique isomorphism over $X$, the blowing up of a closed point of $X'$ with regular two-dimensional local ring.",
+        "strategy": "Regularity, purity of dimension two and integrality of $S'$ are [[thm-blowup-regular-surface-closed-point-regular]] and [[cor-blowup-birational-integral-scheme]]; the exceptional curve is an effective Cartier divisor isomorphic to $\\mathbb P^1_{\\kappa(p)}$ with normal bundle $\\mathcal O(-1)$ by [[lem-exceptional-curve-normal-bundle-minus-one]] and [[thm-pullback-center-ideal-invertible]]; the blowup is an isomorphism off the center by [[lem-blowup-isomorphism-off-center]]. So $\\pi$ satisfies the definition of a contraction, and the converse half is the definition (b) of a contraction read backwards, with uniqueness from [[lem-universal-property-of-a-contraction]].",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Lemma 54.3.1 (Blowing up a regular surface at a point)",
+              "url": "https://stacks.math.columbia.edu/tag/0AGQ"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.16 (Contracting exceptional curves)",
+              "url": "https://stacks.math.columbia.edu/tag/0C2I"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Chapter 54 (complete chapter PDF)",
+              "url": "https://stacks.math.columbia.edu/download/resolve.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces",
+        "kind": "lemma",
+        "title": "Fibres of a proper birational morphism of regular surfaces",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-birational-morphism-schemes",
+          "def-dimension-noetherian-topological-space",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-etale-locus-morphism",
+          "def-integral-scheme",
+          "def-locally-noetherian-and-noetherian-scheme",
+          "def-proper-morphism",
+          "def-quasi-finite-morphism-schemes",
+          "def-smooth-morphism-schemes",
+          "lem-finite-birational-to-normal-is-isomorphism",
+          "lem-proper-fibres-proper",
+          "thm-one-dimensional-regular-local-rings-are-dvrs",
+          "thm-proper-quasi-finite-is-finite"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field, let $X$ and $Y$ be integral regular finite-type $k$-schemes of pure dimension two, let $f\\colon X\\to Y$ be a proper birational morphism and let $y\\in Y$ be a closed point. Put $F=f^{-1}(y)$. Then:\n\n1. $F$ is a proper $\\kappa(y)$-scheme with $\\dim F\\le 1$.\n2. If $\\dim F=1$, then $F$ has finitely many irreducible components $C_1,\\dots,C_r$; each, with its reduced induced structure, is an integral proper curve over $\\kappa(y)$ ([[def-integral-scheme]], [[lem-proper-fibres-proper]]); and each $C_i$ contains a closed point $x_i$ with $x_i\\notin C_j$ for every $j\\neq i$.\n3. For every generic point $\\xi$ of a one-dimensional component of $F$ the local ring $\\mathcal O_{X,\\xi}$ is a discrete valuation ring, and $f^\\sharp$ identifies the function field of $Y$ with the function field of $X$.\n4. The set $N(f)$ of integral curves $C\\subseteq X$ with $\\dim f(C)=0$ is finite. More precisely, the non-\u00e9tale locus $Z\\subseteq X$ of $f$ ([[def-etale-locus-morphism]]) is closed and not all of $X$, every contracted curve is contained in $Z$, and $N(f)$ is at most the number of irreducible components of $Z$.\n5. If $f$ is not an isomorphism, then $N(f)>0$. Equivalently, if every fibre of $f$ is finite, then $f$ is an isomorphism.",
+        "strategy": "(1) is properness of fibres ([[lem-proper-fibres-proper]]) together with the dimension bound: a two-dimensional component of $F$ would be dense in the integral surface $X$, forcing $f$ constant, contrary to birationality. (2) Noetherianity gives finitely many components; closed points of a finite-type $\\kappa(y)$-scheme are dense, so a component minus the finitely many closed points where it meets the other components still contains a closed point. (3) $X$ is regular of pure dimension two, so the local ring at a codimension-one point is a one-dimensional regular local ring, hence a discrete valuation ring ([[thm-one-dimensional-regular-local-rings-are-dvrs]]); the function-field statement is part of birationality ([[def-birational-morphism-schemes]]). (4) A contracted curve is not quasi-finite over $Y$ at its generic point, so $f$ is not \u00e9tale there; the \u00e9tale locus is open and contains the generic point of $X$ because $f$ is birational, and a Noetherian space has finitely many irreducible components. (5) If all fibres are finite, $f$ is quasi-finite and proper, hence finite ([[thm-proper-quasi-finite-is-finite]]); a finite birational morphism onto the normal scheme $Y$ is an isomorphism ([[lem-finite-birational-to-normal-is-isomorphism]]).",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.7 (Vanishing)",
+              "url": "https://stacks.math.columbia.edu/tag/0AX7"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Chapter 54 (complete chapter PDF)",
+              "url": "https://stacks.math.columbia.edu/download/resolve.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-existence-of-a-fibre-cutter",
+        "kind": "lemma",
+        "title": "A function cutting the components of a special fibre",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-local-ring",
+          "def-stalk-of-presheaf",
+          "lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$, $X$, $Y$, $f\\colon X\\to Y$ and $y\\in Y$ be as in\n[[lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces]], and assume $\\dim f^{-1}(y)=1$\nwith components $C_1,\\dots,C_r$. Then there exists a nonzero element $u\\in\\mathcal O_{Y,y}$ such that for every\n$i$ there is a closed point $x_i\\in C_i$ with $x_i\\notin C_j$ for $j\\neq i$ and a factorization\n$u=g_ih_i$ in $\\mathcal O_{X,x_i}$ under the local homomorphism $f^\\sharp\\colon \\mathcal O_{Y,y}\\to\\mathcal O_{X,x_i}$\nin which $g_i\\in\\mathfrak m_{X,x_i}$ maps to a nonzero element of $\\mathcal O_{C_i,x_i}$ and $h_i\\in\\mathcal O_{X,x_i}$.",
+        "strategy": "Choose $x_i$ as in part (2) of the fibre-components lemma and choose any $g_i\\in\\mathfrak m_{X,x_i}$ whose image in $\\mathcal O_{C_i,x_i}$ is nonzero. Since $f$ is birational, the fraction field of $X$ is the fraction field of $Y$ (part (3) of the same lemma), so $g_i=a_i/b_i$ with $a_i,b_i\\in\\mathcal O_{Y,y}$; set $u=\\prod_j a_j$. In $\\mathcal O_{X,x_i}$ this gives $u=g_i\\cdot h_i$ with $h_i=b_i\\prod_{j\\neq i}a_j$, and $g_i$ still maps to a nonzero element of $\\mathcal O_{C_i,x_i}$.",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.7 (Vanishing)",
+              "url": "https://stacks.math.columbia.edu/tag/0AX7"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-effective-cartier-divisor-has-no-embedded-associated-primes",
+        "kind": "lemma",
+        "title": "Effective Cartier divisors on a regular scheme have no embedded associated points",
+        "deps": [
+          "cor-cohen-macaulay-modules-have-no-embedded-associated-primes",
+          "cor-regular-quotient-cohen-macaulay-equivalence",
+          "def-associated-prime-of-a-module",
+          "def-axiom-of-choice",
+          "def-cohen-macaulay-local-module-and-ring",
+          "def-effective-cartier-divisor",
+          "def-local-ring"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $X$ be a regular locally Noetherian scheme and let $Z\\subseteq X$ be an\neffective Cartier divisor. Then every local ring $\\mathcal O_{Z,z}$ is Cohen--Macaulay, of dimension\n$\\dim\\mathcal O_{X,z}-1$. In particular $Z$ has no embedded associated points: if $s\\in\\Gamma(Z,\\mathcal O_Z)$\nvanishes at the generic point of every irreducible component of $Z$, then $s=0$.",
+        "strategy": "At $z\\in Z$ choose a local equation $t$ of $Z$; it is a nonzerodivisor in the regular local ring $\\mathcal O_{X,z}$, and $\\mathcal O_{Z,z}=\\mathcal O_{X,z}/(t)$ has dimension $\\dim\\mathcal O_{X,z}-1$. The quotient of a Cohen--Macaulay local ring by a nonzerodivisor is Cohen--Macaulay ([[cor-regular-quotient-cohen-macaulay-equivalence]]), and $\\mathcal O_{X,z}$ is Cohen--Macaulay because it is regular ([[def-cohen-macaulay-local-module-and-ring]]). Cohen--Macaulay modules have no embedded associated primes ([[cor-cohen-macaulay-modules-have-no-embedded-associated-primes]]); hence the associated primes of $\\mathcal O_Z$ are the generic points of the components, and a section vanishing there is zero ([[def-associated-prime-of-a-module]]).",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.7 (Vanishing)",
+              "url": "https://stacks.math.columbia.edu/tag/0AX7"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonzero-section-vanishing-at-a-point-has-positive-degree",
+        "kind": "lemma",
+        "title": "A nonzero section vanishing at a point forces positive degree",
+        "deps": [
+          "cor-degree-zero-line-bundle-section-trivial",
+          "cor-negative-degree-no-sections-rr",
+          "def-axiom-of-choice",
+          "def-degree-invertible-sheaf-proper-dimension-one",
+          "def-integral-scheme",
+          "def-invertible-sheaf"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field, let $C$ be an integral proper $k$-scheme of dimension one and\nlet $\\mathcal L$ be an invertible $\\mathcal O_C$-module with a nonzero global section $s\\in\\Gamma(C,\\mathcal L)$.\nIf $s$ vanishes at some closed point of $C$, then $\\deg_C(\\mathcal L)>0$ for the degree of\n[[def-degree-invertible-sheaf-proper-dimension-one]].",
+        "strategy": "If $\\deg_C\\mathcal L<0$, then $\\Gamma(C,\\mathcal L)=0$ ([[cor-negative-degree-no-sections-rr]]), contradicting $s\\neq0$. If $\\deg_C\\mathcal L=0$, then a nonzero section is nowhere vanishing and trivializes $\\mathcal L$ ([[cor-degree-zero-line-bundle-section-trivial]]), contradicting the assumed zero at a closed point. Hence $\\deg_C\\mathcal L>0$.",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.7 (Vanishing)",
+              "url": "https://stacks.math.columbia.edu/tag/0AX7"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-positive-conormal-degree-of-a-fibre-divisor",
+        "kind": "lemma",
+        "title": "A divisor supported in a special fibre has positive conormal degree on some component",
+        "deps": [
+          "def-associated-prime-of-a-module",
+          "def-axiom-of-choice",
+          "def-degree-invertible-sheaf-proper-dimension-one",
+          "def-effective-cartier-divisor",
+          "def-invertible-sheaf-of-cartier-divisor",
+          "def-local-ring",
+          "def-stalk-of-presheaf",
+          "lem-effective-cartier-divisor-has-no-embedded-associated-primes",
+          "lem-existence-of-a-fibre-cutter",
+          "lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces",
+          "lem-nonzero-section-vanishing-at-a-point-has-positive-degree",
+          "thm-one-dimensional-regular-local-rings-are-dvrs"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$, $X$, $Y$, $f\\colon X\\to Y$ and $y\\in Y$ be as in\n[[lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces]], and let $Z\\subseteq X$ be a\nnonzero effective Cartier divisor with $Z\\subseteq f^{-1}(y)$ set-theoretically. Then there exists an\nirreducible component $C$ of $Z$ with $\\deg_C\\bigl(\\mathcal O_X(-Z)|_C\\bigr)>0$; that is, the conormal sheaf\n$\\mathcal O_X(-Z)|_Z$ has a component of positive degree.",
+        "strategy": "This mirrors the proof of Stacks, Lemma 54.7.4, with the base $\\operatorname{Spec}(\\mathcal O_{Y,y})$ kept implicit. Write the one-dimensional components of $f^{-1}(y)$ as $C_1,\\dots,C_r$ and let $Z=\\sum_i d_iC_i$ with $d_i\\ge0$. Choose $u=g_ih_i$ as in [[lem-existence-of-a-fibre-cutter]] and let $e_i>0$ be the valuation of $u$ at the generic point $\\xi_i$ of $C_i$ (a discrete valuation ring, [[thm-one-dimensional-regular-local-rings-are-dvrs]]). Choose $i$ with $d_i/e_i$ maximal; replacing $u$ by $u^{d_i}$ and $Z$ by $e_iZ$ preserves the statement up to multiplying the degree by $e_i$, and we may therefore assume $u$ vanishes at $\\xi_j$ with order exactly $d_j$ for every $j$. Then the image of $u$ in $\\Gamma(Z,\\mathcal O_Z)$ vanishes at the generic point of every component of $Z$, so it is zero by [[lem-effective-cartier-divisor-has-no-embedded-associated-primes]]; hence $u$ lies in the ideal sheaf $\\mathcal O_X(-Z)$ and defines a global section $s_i$ of $\\mathcal O_X(-Z)|_{C_i}$ that generates the stalk at $\\xi_i$. By construction $u\\in\\mathfrak m_{X,x_i}$, so $s_i$ vanishes at the closed point $x_i$; [[lem-nonzero-section-vanishing-at-a-point-has-positive-degree]] gives $\\deg_{C_i}\\mathcal O_X(-Z)|_{C_i}>0$.",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.7 (Vanishing)",
+              "url": "https://stacks.math.columbia.edu/tag/0AX7"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-negativity-for-exceptional-curves-on-smooth-surfaces",
+        "kind": "theorem",
+        "title": "Negativity of contracted curves on regular surfaces",
+        "deps": [
+          "cor-degree-additive-proper-curve",
+          "def-axiom-of-choice",
+          "def-cartier-divisor",
+          "def-degree-invertible-sheaf-proper-dimension-one",
+          "def-divisor-intersection-number-on-smooth-projective-surface",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-integral-scheme",
+          "def-projective-morphism-pre-proj",
+          "lem-positive-conormal-degree-of-a-fibre-divisor",
+          "thm-intersection-with-curve-as-degree-of-restriction",
+          "thm-nonaffine-regular-local-ring-is-ufd"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Euler-characteristic and intersection suppliers. Let $k$ be a\nfield, let $X$ be an integral regular projective surface over $k$\n([[def-divisor-intersection-number-on-smooth-projective-surface]]), let $Y$ be an integral regular finite-type\n$k$-scheme of pure dimension two, let $f\\colon X\\to Y$ be a proper birational morphism and let $E\\subseteq X$\nbe an integral curve with $f(E)$ a single closed point $y\\in Y$. Then:\n\n1. $E$ is an effective Cartier divisor on $X$;\n2. $\\deg_E\\bigl(\\mathcal O_X(-E)|_E\\bigr)>0$, that is, the conormal sheaf of $E$ in $X$ has positive degree on $E$; and\n3. $E\\cdot E<0$; equivalently the normal bundle $\\mathcal O_X(E)|_E$ has negative degree.\n\nNo similar statement is proved here for curves not contracted by a birational morphism, and no negative definiteness of the full intersection matrix of a reducible exceptional divisor is claimed.",
+        "strategy": "At every point of $X$ the local ring is a regular local ring, hence a UFD ([[thm-nonaffine-regular-local-ring-is-ufd]]); the height-one prime defining the integral curve $E$ is therefore locally principal, so $E$ is an effective Cartier divisor. This proves (1). Part (2) is [[lem-positive-conormal-degree-of-a-fibre-divisor]] applied to $Z=E$, whose only component is $E$; note $E\\subseteq f^{-1}(y)$ set-theoretically. For (3) use $E\\cdot E=\\deg_E\\mathcal O_X(E)|_E$ ([[thm-intersection-with-curve-as-degree-of-restriction]]) and additivity of degrees on inverse bundles ([[cor-degree-additive-proper-curve]]): $\\deg_E\\mathcal O_X(E)|_E+\\deg_E\\mathcal O_X(-E)|_E=0$, so (2) gives $E\\cdot E<0$.",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.7 (Vanishing)",
+              "url": "https://stacks.math.columbia.edu/tag/0AX7"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Chapter 54 (complete chapter PDF)",
+              "url": "https://stacks.math.columbia.edu/download/resolve.pdf"
+            },
+            {
+              "title": "Olivier Debarre, Introduction to Mori Theory (M2 course notes, 2016 version)",
+              "url": "https://www.math.ens.psl.eu/~debarre/M2.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-birational-surface-morphism-factors-through-blowup-at-a-non-isomorphism-point",
+        "kind": "lemma",
+        "title": "A birational morphism of regular surfaces factors through the blowup of a point where its inverse is undefined",
+        "deps": [
+          "cor-blowup-birational-integral-scheme",
+          "cor-blowup-unique-up-to-unique-isomorphism",
+          "def-axiom-of-choice",
+          "def-birational-morphism-schemes",
+          "def-domain-of-definition-rational-map",
+          "def-embedding-dimension-and-regular-local-ring",
+          "def-etale-locus-morphism",
+          "def-proper-morphism",
+          "def-rational-map-integral-schemes",
+          "def-smooth-morphism-schemes",
+          "lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces",
+          "lem-nonaffine-rational-map-normal-to-proper-codimension-two",
+          "thm-blowup-regular-surface-closed-point-regular",
+          "thm-blowup-universal-property"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field, let $X$ and $Y$ be integral regular finite-type $k$-schemes of\npure dimension two that are proper over $k$, and let $f\\colon X\\to Y$ be a birational morphism. Let $y\\in Y$ be a\nclosed point at which the inverse rational map $f^{-1}\\colon Y\\dashrightarrow X$ is not defined\n([[def-rational-map-integral-schemes]], [[def-domain-of-definition-rational-map]]). Then $f$ factors through the\nblowup $b\\colon \\operatorname{Bl}_yY\\to Y$: there is a unique $k$-morphism $g\\colon X\\to\\operatorname{Bl}_yY$ with\n$b\\circ g=f$. Equivalently, the ideal $f^{-1}\\mathfrak m_y\\cdot\\mathcal O_X$ is invertible.",
+        "strategy": "The argument is the local part of Debarre's proof of the factorization theorem (Theorem 5.20), with the blowup charts of Stacks 54.3 and the codimension-one extension of rational maps. Set $\\widetilde Y=\\operatorname{Bl}_yY$ with exceptional curve $E$, and let $\\varphi=\\varepsilon^{-1}\\circ f\\colon X\\dashrightarrow\\widetilde Y$ be the lift of $f$ over $X\\setminus f^{-1}(y)$; since $\\widetilde Y$ is proper over $k$, $\\varphi$ is defined at every codimension-one point of the normal surface $X$ ([[lem-nonaffine-rational-map-normal-to-proper-codimension-two]]). Suppose $\\varphi$ is not a morphism and let $x\\in X$ be a point where it is undefined. Then $x\\in f^{-1}(y)$, and there is an integral curve $C\\subseteq f^{-1}(y)$ through $x$. Let $\\psi=\\varphi^{-1}\\colon\\widetilde Y\\dashrightarrow X$; since $\\varphi$ is undefined at $x$, $\\psi$ contracts an integral curve of $\\widetilde Y$ to $x$, and because $X$ is proper and $\\psi$ is a morphism over $\\widetilde Y\\setminus E\\cong Y\\setminus\\{y\\}$, that curve is $E$. Pick a closed point $\\widetilde y\\in E$ at which $\\psi$ is defined, and consider the local homomorphisms of two-dimensional regular local rings $\\mathcal O_{Y,y}\\to\\mathcal O_{X,x}\\to\\mathcal O_{\\widetilde Y,\\widetilde y}\\subseteq K(X)$. Choose a regular system of parameters $(t,v)$ at $\\widetilde y$ such that $E$ is defined by $v$ and with $u=tv$ a regular system of parameters of $\\mathcal O_{Y,y}$; let $w\\in\\mathfrak m_{X,x}$ be a local equation of the reduced curve $C$. Since $f(C)=\\{y\\}$, the pullbacks of $u$ and $v$ vanish on $C$, so $u,v\\in(w)$, say $u=wa$, $v=wb$. As $v\\notin\\mathfrak m_{\\widetilde Y,\\widetilde y}^2$ we get $b\\notin\\mathfrak m_{X,x}$, hence $b$ is a unit and $t=u/v=a/b\\in\\mathcal O_{X,x}$; and $t\\in\\mathfrak m_{\\widetilde Y,\\widetilde y}$ forces $t\\in\\mathfrak m_{X,x}$. But $\\psi$ contracts $E$ to $x$, so $\\psi^\\sharp\\mathfrak m_{X,x}\\subseteq(v)$, giving $v\\mid t$, which contradicts that $(t,v)$ is a regular system of parameters. Hence $\\varphi$ is a morphism $g\\colon X\\to\\widetilde Y$; since $g^\\sharp\\mathfrak m_y$ is then invertible (its zero scheme is $E$), $g$ factors $f$ through $b$ by the universal property of the blowup ([[thm-blowup-universal-property]]), and uniqueness of $g$ follows from $b$ being an epimorphism (it is a blowup and [[cor-blowup-birational-integral-scheme]]).",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.17 (Factorization birational maps)",
+              "url": "https://stacks.math.columbia.edu/tag/0C5Q"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Lemma 54.3.1 (Blowing up a regular surface at a point)",
+              "url": "https://stacks.math.columbia.edu/tag/0AGQ"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Lemma 54.4.3 (Rational maps dominated by quadratic transformations)",
+              "url": "https://stacks.math.columbia.edu/tag/0C5H"
+            },
+            {
+              "title": "Olivier Debarre, Introduction to Mori Theory (M2 course notes, 2016 version)",
+              "url": "https://www.math.ens.psl.eu/~debarre/M2.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-contracted-curve-count-decreases-under-a-point-blowup-factorization",
+        "kind": "lemma",
+        "title": "The number of contracted curves drops by one after factoring through a point blowup",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-finite-morphism-schemes",
+          "def-proper-morphism",
+          "def-quasi-finite-morphism-schemes",
+          "lem-birational-surface-morphism-factors-through-blowup-at-a-non-isomorphism-point",
+          "lem-blowing-up-a-regular-point-is-a-contraction",
+          "lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces",
+          "lem-finite-birational-to-normal-is-isomorphism",
+          "thm-proper-quasi-finite-is-finite"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$, $X$, $Y$ and $f\\colon X\\to Y$ be as in\n[[lem-birational-surface-morphism-factors-through-blowup-at-a-non-isomorphism-point]], and let $N(f)$ be the\nnumber of integral curves of $X$ contracted by $f$, a nonnegative integer by\n[[lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces]]. Let $y\\in Y$ be a closed point\nsuch that $f$ factors through the blowup $b\\colon Y'=\\operatorname{Bl}_yY\\to Y$, say $f=b\\circ g$ with\n$g\\colon X\\to Y'$ the factorization of the previous lemma. Then $g$ is again a birational morphism of integral\nregular proper surfaces over $k$, and $N(g)=N(f)-1$.",
+        "strategy": "The exceptional curve $E$ of $b$ is an integral curve over $\\kappa(y)$ (Stacks 54.3.1, realized on this page by [[lem-blowing-up-a-regular-point-is-a-contraction]]); $g$ is proper, birational and regular by the same suppliers, and $b$ is an isomorphism over $Y\\setminus\\{y\\}$. Exactly one component $C_0$ of $f^{-1}(y)$ dominates $E$: because $g$ is birational, its generic fibre over the generic point of $E$ is a single point, so at most one component dominates $E$, and surjectivity of $g$ forces exactly one. Every other one-dimensional component of a fibre of $f$ over $y$ lies in a fibre of $g$ over a point of $E$, and every contracted curve of $g$ is a contracted curve of $f$ different from $C_0$; conversely a curve contracted by $f$ either is $C_0$ or is contracted by $g$. Hence the two sets differ by $C_0$ alone and the count drops by one.",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.17 (Factorization birational maps)",
+              "url": "https://stacks.math.columbia.edu/tag/0C5Q"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Chapter 54 (complete chapter PDF)",
+              "url": "https://stacks.math.columbia.edu/download/resolve.pdf"
+            },
+            {
+              "title": "Olivier Debarre, Introduction to Mori Theory (M2 course notes, 2016 version)",
+              "url": "https://www.math.ens.psl.eu/~debarre/M2.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-factorization-of-birational-morphisms-of-smooth-surfaces",
+        "kind": "theorem",
+        "title": "Factorization of birational morphisms of regular surfaces into point blowups",
+        "deps": [
+          "cor-blowup-birational-integral-scheme",
+          "def-axiom-of-choice",
+          "def-birational-morphism-schemes",
+          "def-etale-locus-morphism",
+          "def-proper-morphism",
+          "def-quasi-finite-morphism-schemes",
+          "def-smooth-morphism-schemes",
+          "lem-birational-surface-morphism-factors-through-blowup-at-a-non-isomorphism-point",
+          "lem-blowing-up-a-regular-point-is-a-contraction",
+          "lem-contracted-curve-count-decreases-under-a-point-blowup-factorization",
+          "lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces",
+          "lem-finite-birational-to-normal-is-isomorphism",
+          "thm-blowup-regular-surface-closed-point-regular",
+          "thm-proper-quasi-finite-is-finite"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field and let $X$ and $Y$ be integral regular finite-type $k$-schemes\nof pure dimension two that are proper over $k$ (for instance smooth projective surfaces over $k$). Then every\nbirational morphism $f\\colon X\\to Y$ is a composition of blowups at closed points and an isomorphism: there are\nschemes $X_0=Y,X_1,\\dots,X_n$ with $X_n\\cong X$ over $Y$, closed points $y_{i-1}\\in X_{i-1}$ with\n$\\mathcal O_{X_{i-1},y_{i-1}}$ regular of dimension two, and morphisms $X_i=\\operatorname{Bl}_{y_{i-1}}X_{i-1}\n\\to X_{i-1}$ whose composition $X\\to Y$ is $f$ up to the isomorphism $X\\cong X_n$.\n\nEquivalently, every proper birational morphism of such surfaces is, up to isomorphism, a composition of\ncontractions of exceptional curves of the first kind ([[def-exceptional-curve-and-contraction]]).",
+        "strategy": "Induct on the nonnegative integer $N(f)$ of [[lem-fibre-components-of-a-proper-birational-morphism-of-regular-surfaces]]. If $f$ is an isomorphism there is nothing to prove; otherwise $N(f)>0$ by part (5) of that lemma. A morphism that is a local isomorphism at every point of $X$ is quasi-finite, hence finite because it is proper ([[thm-proper-quasi-finite-is-finite]]), hence an isomorphism because it is birational onto the normal surface $Y$ ([[lem-finite-birational-to-normal-is-isomorphism]]); so if $f$ is not an isomorphism there is a point $x_0\\in X$ at which $f$ is not a local isomorphism. Put $y_0=f(x_0)$. If $f^{-1}$ were defined at $y_0$, then $f^{-1}\\circ f=f$ would be an isomorphism in a neighbourhood of $x_0$; hence $f^{-1}$ is not defined at $y_0$. By [[lem-birational-surface-morphism-factors-through-blowup-at-a-non-isomorphism-point]] we can write $f=b\\circ g$ with $b\\colon\\operatorname{Bl}_{y_0}Y\\to Y$ the point blowup; the source and target of $g$ are again integral regular proper surfaces over $k$, and $N(g)=N(f)-1$ by [[lem-contracted-curve-count-decreases-under-a-point-blowup-factorization]]. Apply the induction hypothesis to $g$ and compose with $b$.",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.17 (Factorization birational maps)",
+              "url": "https://stacks.math.columbia.edu/tag/0C5Q"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Lemma 54.4.3 (Rational maps dominated by quadratic transformations)",
+              "url": "https://stacks.math.columbia.edu/tag/0C5H"
+            },
+            {
+              "title": "Olivier Debarre, Introduction to Mori Theory (M2 course notes, 2016 version)",
+              "url": "https://www.math.ens.psl.eu/~debarre/M2.pdf"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Chapter 54 (complete chapter PDF)",
+              "url": "https://stacks.math.columbia.edu/download/resolve.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-resolution-of-normal-surface-singularities",
+        "kind": "theorem",
+        "title": "Resolution of normal surface singularities",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-birational-morphism-schemes",
+          "def-normal-point-and-normal-variety",
+          "def-proper-morphism",
+          "thm-embedded-snc-resolution-of-reduced-curve-on-regular-surface",
+          "thm-factorization-of-birational-morphisms-of-smooth-surfaces",
+          "thm-normalization-glues-variety"
+        ],
+        "statement": "Let $Y$ be a two-dimensional integral Noetherian scheme. Then the following are equivalent:\n(1) there exists an alteration $X\\to Y$ with $X$ regular; (2) there exists a resolution of singularities of $Y$,\ni.e. a proper birational morphism $\\pi\\colon X\\to Y$ with $X$ regular ([[def-proper-morphism]],\n[[def-birational-morphism-schemes]]); (3) $Y$ has a resolution of singularities by normalized blowups at closed\npoints; (4) the normalization $Y^{\\nu}\\to Y$ is finite, $Y^{\\nu}$ has only finitely many singular points\n$y_1,\\dots,y_m$, and each completed local ring $\\widehat{\\mathcal O_{Y^{\\nu},y_i}}$ is normal. In particular\nevery integral surface of finite type over a field has a resolution of singularities, obtained by a finite\nsequence of normalized blowups at closed points.\n\n**Status: ESCALATED at Step 1.** The statement is Stacks Project, Theorem 54.14.5 (after Lipman). Its only\nknown complete proofs (Lipman's papers; Stacks Chapter 54, following Artin's exposition) pass through\nGrauert--Riemenschneider vanishing, boundedness of $H^1$ over normal modifications, rational singularities,\nthe explicit resolution of rational double points, and formal-arc arguments. None of that machinery exists in\nthe corpus, and reproducing it here would exceed this page's item budget by a wide margin; it is better placed\nin a dedicated predecessor pair. The item is retained with its promised scope and recorded as an escalation\nrather than weakened.",
+        "strategy": "ESCALATED. Complete local closure requires the Lipman/Stacks Chapter 54 development (Grauert--Riemenschneider vanishing, boundedness and reduction to rational singularities, rational double point resolution, formal arcs, base change to completions). The source is retrieved and inspected (Stacks, Theorem 54.14.5, following Lipman 1978), but its prerequisite chain is not available in the corpus and would not fit on this page; a dedicated predecessor pair is required. See the batch notes for the exact proposed placement.",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Chapter 54 (complete chapter PDF)",
+              "url": "https://stacks.math.columbia.edu/download/resolve.pdf"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.16 (Contracting exceptional curves)",
+              "url": "https://stacks.math.columbia.edu/tag/0C2I"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.7 (Vanishing)",
+              "url": "https://stacks.math.columbia.edu/tag/0AX7"
+            },
+            {
+              "title": "Joseph Lipman, Introduction to resolution of singularities, Proc. Sympos. Pure Math. 29 (1975), 187-230",
+              "url": "https://www.math.purdue.edu/~jlipman/papers-older/%5B1975%5D%20Introduction%20to%20resolution%20of%20singularities.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "rem-surface-contraction-and-resolution-scope-boundaries",
+        "kind": "remark",
+        "title": "What this page does and does not prove about contractions and resolution",
+        "deps": [
+          "def-exceptional-curve-and-contraction",
+          "thm-factorization-of-birational-morphisms-of-smooth-surfaces",
+          "thm-negativity-for-exceptional-curves-on-smooth-surfaces"
+        ],
+        "statement": "This page proves the definition and universal property of contractions\n([[def-exceptional-curve-and-contraction]], [[lem-universal-property-of-a-contraction]]), that point blowups of\nregular surfaces are contractions ([[lem-blowing-up-a-regular-point-is-a-contraction]]), the negativity of\ncontracted curves ([[thm-negativity-for-exceptional-curves-on-smooth-surfaces]]), and the factorization of\nbirational morphisms of regular surfaces into point blowups\n([[thm-factorization-of-birational-morphisms-of-smooth-surfaces]]).\n\nThe following are deliberately **not** claimed here. (a) Castelnuovo's criterion in the existence direction:\nthat every exceptional curve of the first kind on a proper regular surface over a field admits a contraction.\nOnly the definition, the uniqueness and the blowup direction are proved; the existence theorem needs Stein\nfactorization and formal-functions arguments that are not in the corpus. (b) Negative definiteness of the full\nintersection matrix of a reducible exceptional divisor; only the negativity of each contracted irreducible\ncurve is proved. (c) Resolution of normal surface singularities: the general theorem is recorded as an open\nescalation (see the batch notes and the escalated item), not proved on this page. (d) Any resolution statement\nin dimension at least three, and any positive-characteristic resolution statement beyond what the escalated\nitem records.",
+        "strategy": "A scope remark; no proof is required. The listed positive items and their statements are the evidence for the first paragraph, and the cited sources (Stacks Chapter 54, Debarre's notes) delimit the unproved parts.",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Chapter 54 (complete chapter PDF)",
+              "url": "https://stacks.math.columbia.edu/download/resolve.pdf"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.16 (Contracting exceptional curves)",
+              "url": "https://stacks.math.columbia.edu/tag/0C2I"
+            },
+            {
+              "title": "Olivier Debarre, Introduction to Mori Theory (M2 course notes, 2016 version)",
+              "url": "https://www.math.ens.psl.eu/~debarre/M2.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 914,
+    "id": "birational-morphisms-contractions-and-surface-singularities-examples",
+    "kind": "B",
+    "category": "algebraic-geometry",
+    "title": "Birational Morphisms, Contractions, and Surface Singularities \u2014 Examples",
+    "companion": "birational-morphisms-contractions-and-surface-singularities",
+    "requires": [
+      "birational-morphisms-contractions-and-surface-singularities"
+    ],
+    "items": [
+      {
+        "id": "ex-blowup-of-a-smooth-point",
+        "kind": "example",
+        "title": "Blowing up a smooth point: charts, exceptional curve, and contraction",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-exceptional-curve-and-contraction",
+          "lem-blowing-up-a-regular-point-is-a-contraction",
+          "lem-blowup-intersection-matrix-at-smooth-point",
+          "lem-blowup-isomorphism-off-center",
+          "lem-exceptional-curve-normal-bundle-minus-one",
+          "thm-blowup-regular-surface-closed-point-regular",
+          "thm-blowup-smooth-surface-point-charts",
+          "thm-intersection-with-curve-as-degree-of-restriction"
+        ],
+        "statement": "Let $k$ be a field, let $S$ be an integral regular finite-type $k$-scheme of pure dimension two, and let\n$p\\in S$ be a $k$-rational closed point. Let $\\pi\\colon S'=\\operatorname{Bl}_pS\\to S$ be the blowup of $p$,\nwith exceptional curve $E=\\pi^{-1}(p)$.\n\n1. **Charts.** Over an affine neighbourhood $\\operatorname{Spec}A$ of $p$ with regular parameters $x,y$, the\nblowup is $\\operatorname{Spec}A[y/x]\\cup\\operatorname{Spec}A[x/y]$ inside $A$-charts, glued by inverting $T$\nand $U=T^{-1}$ ([[thm-blowup-smooth-surface-point-charts]]).\n2. **Exceptional curve.** $E\\cong\\mathbb P^1_k$ is an effective Cartier divisor on the regular surface $S'$,\n$\\mathcal O_E(E)\\cong\\mathcal O_{\\mathbb P^1_k}(-1)$ and $E\\cdot E=-1$\n([[thm-blowup-regular-surface-closed-point-regular]], [[lem-exceptional-curve-normal-bundle-minus-one]],\n[[lem-blowup-intersection-matrix-at-smooth-point]]). Hence $E$ is an exceptional curve of the first kind and\n$\\pi$ is a contraction of $E$ ([[lem-blowing-up-a-regular-point-is-a-contraction]]).\n3. **One-step factorization.** If $S$ is projective over $k$, then $\\pi$ is a birational morphism of regular\nprojective surfaces which is an isomorphism over $S\\setminus\\{p\\}$, so its factorization into point blowups\nconsists of the single blowup $\\pi$ itself ([[lem-blowing-up-a-regular-point-is-a-contraction]]), and no further\nblowup is needed.\n\nFor comparison, the companion counterexample page records that normalization of a non-normal surface with a\none-dimensional singular locus is not a point blowup, so the contraction language is genuinely restricted to\nregular sources.\n",
+        "strategy": "Parts 1 and 2 collect the published point-blowup dictionary: the two standard charts glue along $A[y/x,y/x^{-1}]$, the exceptional curve is the projectivized normal direction and is Cartier, and its normal bundle is $\\mathcal O(-1)$, so its self-intersection is $\\deg\\mathcal O(-1)=-1$. Part 3 is the definition of the factorization plus the fact that the blowup is an isomorphism off the center. No new claim beyond the published suppliers is made.",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Lemma 54.3.1 (Blowing up a regular surface at a point)",
+              "url": "https://stacks.math.columbia.edu/tag/0AGQ"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Section 54.16 (Contracting exceptional curves)",
+              "url": "https://stacks.math.columbia.edu/tag/0C2I"
+            },
+            {
+              "title": "Olivier Debarre, Introduction to Mori Theory (M2 course notes, 2016 version)",
+              "url": "https://www.math.ens.psl.eu/~debarre/M2.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-normalization-is-not-a-blowup",
+        "kind": "counterexample",
+        "title": "Normalization of a non-normal surface is not a point blowup",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-birational-morphism-schemes",
+          "def-effective-cartier-divisor",
+          "def-finite-morphism-schemes",
+          "def-normal-point-and-normal-variety",
+          "def-normalization-affine-variety",
+          "lem-blowup-isomorphism-off-center",
+          "lem-polynomial-algebras-over-fields-are-integrally-closed",
+          "thm-normalization-finite-birational-surjective",
+          "thm-normalization-universal-property"
+        ],
+        "statement": "Let $k$ be a field of characteristic $\\neq2$ and let\n$S=\\operatorname{Spec}k[x,y,z]/(x^2-y^2z)\\subseteq\\mathbb A^3_k$ be the Whitney umbrella. Then:\n\n1. $S$ is an integral surface whose singular locus is the whole $z$-axis\n$x=y=0$; in particular $S$ is not normal and is not regular in codimension one.\n2. The normalization is the finite birational morphism\n$\\nu\\colon\\mathbb A^2_k=\\operatorname{Spec}k[u,y]\\to S$, $x\\mapsto yu$, $y\\mapsto y$, $z\\mapsto u^2$; it is an\nisomorphism exactly over $\\{y\\neq0\\}$ and is two-to-one over each point $x=y=0, z\\neq0$ of the $z$-axis.\n3. Consequently $\\nu$ is not a point blowup of $S$, not a finite composition of point blowups of $S$, and not\nany proper modification of $S$ that is an isomorphism over the complement of a finite set of points: every\npoint blowup of a scheme is an isomorphism over the complement of the blown-up point, hence a composition of\npoint blowups is an isomorphism over the complement of a finite set, whereas $\\nu$ is not an isomorphism over\nthe complement of the $z$-axis.\n\nThus in the factorization theorem the regularity of the source cannot be replaced by normality, and\nnormalization is a genuinely different operation from blowing up.",
+        "strategy": "1. The polynomial $x^2-y^2z$ is irreducible (it is a degree-two polynomial in $x$ whose constant term $-y^2z$ is not a square in $k[y,z]$); the singular locus is cut out by the partial derivatives $(2x,-2yz,-y^2)$, i.e. by $x=y=0$. 2. The displayed map is well defined because $(yu)^2-y^2(u^2)=0$; it is finite ($u^2=z$, so $k[u,y]$ is generated over the image by $u$), birational (same fraction field, since $u=x/y$), and its target ring is a polynomial ring, hence normal ([[lem-polynomial-algebras-over-fields-are-integrally-closed]]), so by [[thm-normalization-finite-birational-surjective]] and [[thm-normalization-universal-property]] it is the normalization. Preimages of $(0,0,z_0)$ with $z_0\\neq0$ are the two points $u=\\pm\\sqrt{z_0},y=0$, and over $y\\neq0$ the map is an isomorphism with inverse $u=x/y$. 3. Use [[lem-blowup-isomorphism-off-center]]: a point blowup is an isomorphism off the center, so the composite of finitely many point blowups is an isomorphism over the complement of the (finite) set of images of the centers; the complement of the $z$-axis is not such a complement.",
+        "design_row": "AG-BIR-1",
+        "local_addition": true,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Resolution of Singular Algebraic Varieties (Clay Mathematics Proceedings 20, lecture series)",
+              "url": "https://www.claymath.org/library/proceedings/cmip20.pdf"
+            },
+            {
+              "title": "The Stacks Project, Resolution of Surfaces, Lemma 54.3.1 (Blowing up a regular surface at a point)",
+              "url": "https://stacks.math.columbia.edu/tag/0AGQ"
+            },
+            {
+              "title": "Olivier Debarre, Introduction to Mori Theory (M2 course notes, 2016 version)",
+              "url": "https://www.math.ens.psl.eu/~debarre/M2.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      }
+    ]
+  }
+]

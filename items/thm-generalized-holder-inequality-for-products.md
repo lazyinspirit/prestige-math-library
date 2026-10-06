@@ -50,14 +50,11 @@ $$\|fg\|_r\le\|f\|_p\|g\|_q.$$
 
 **Proof technique:** Raise $|fg|$ to the $r$-th power and apply Holder to $|f|^r$ and $|g|^r$ with conjugate exponents $p/r$ and $q/r$.
 
-1.1 If $r=\infty$, then $1/p=1/q=0$, so $p=q=\infty$ by [L2]. Hence [L2, L3, L4, given]
-$$|fg|\le\|f\|_\infty\|g\|_\infty$$ almost everywhere, and taking essential suprema gives $$\|fg\|_\infty\le\|f\|_\infty\|g\|_\infty.$$
+1.1 If $r=\infty$, then $1/p=1/q=0$, so $p=q=\infty$ by [L2]. Hence $$|fg|\le\|f\|_\infty\|g\|_\infty$$ almost everywhere, and taking essential suprema gives $$\|fg\|_\infty\le\|f\|_\infty\|g\|_\infty.$$. [L2, L3, L4, given]
 
-1.2 If $p=\infty$ and $r<\infty$, then $q=r$. The pointwise bound and the definition of $\|g\|_r$ give [L2, L3, L4, given]
-$$\|fg\|_r^r\le\|f\|_\infty^r\|g\|_r^r.$$ Indeed, [L4] gives $|f|\le\|f\|_\infty$ almost everywhere, so $|fg|^r\le\|f\|_\infty^r|g|^r$ almost everywhere. Taking $r$-th roots yields the claim. The case $q=\infty$ is symmetric.
+1.2 If $p=\infty$ and $r<\infty$, then $q=r$. The pointwise bound and the definition of $\|g\|_r$ give $$\|fg\|_r^r\le\|f\|_\infty^r\|g\|_r^r.$$ Indeed, [L4] gives $|f|\le\|f\|_\infty$ almost everywhere, so $|fg|^r\le\|f\|_\infty^r|g|^r$ almost everywhere. Taking $r$-th roots yields the claim. The case $q=\infty$ is symmetric. [L2, L3, L4, given]
 
-1.3 Assume now that $r<\infty$ and $p,q<\infty$. Then [L1, L2, L3, given, algebra]
-$$1=\frac rp+\frac rq,$$ so the exponents $p/r$ and $q/r$ are conjugate. Because $|f|^r\in\mathcal L^{p/r}(\mu)$ and $|g|^r\in\mathcal L^{q/r}(\mu)$, [L1] applied to these two functions gives $$\int |fg|^r\,d\mu\le\left(\int |f|^p\,d\mu\right)^{r/p}\left(\int |g|^q\,d\mu\right)^{r/q}=\|f\|_p^r\|g\|_q^r.$$
+1.3 Assume now that $r<\infty$ and $p,q<\infty$. Then $$1=\frac rp+\frac rq,$$ so the exponents $p/r$ and $q/r$ are conjugate. Because $|f|^r\in\mathcal L^{p/r}(\mu)$ and $|g|^r\in\mathcal L^{q/r}(\mu)$, [L1] applied to these two functions gives $$\int |fg|^r\,d\mu\le\left(\int |f|^p\,d\mu\right)^{r/p}\left(\int |g|^q\,d\mu\right)^{r/q}=\|f\|_p^r\|g\|_q^r.$$. [L1, L2, L3, given, algebra]
 
-2.1 Step 1.1 covers $r=\infty$, step 1.2 covers the one-infinite endpoint cases, and step 1.3 covers the fully finite case. [step 1.1, step 1.2, step 1.3]
-In each case $\|fg\|_r\le\|f\|_p\|g\|_q$, so $fg$ lies in the stated $r$-space. ∎
+2.1 Step 1.1 covers $r=\infty$, step 1.2 covers the one-infinite endpoint cases, and step 1.3 covers the fully finite case. [step 1.1, step 1.2, step 1.3] In each case $\|fg\|_r\le\|f\|_p\|g\|_q$, so $fg$ lies in the stated $r$-space. [step 1.1, step 1.2, step 1.3] ∎
+

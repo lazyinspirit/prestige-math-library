@@ -17,6 +17,20 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-03"
+    scope: "Cumulative whole-item verification: completed original Step5 full statement/definition and proof read plus the recorded later Step7 local mathematical corrections. Exact recovered original carrier and current post-correction carrier match recorded hashes; every substantive delta is covered by the cited correction reasoning. No independent audit of the local repairs and no new review round is claimed; supplier review is limited to interfaces used."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-6.md"
+      - "research/frontier-38-owner-30-alpha-batch-6-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-6-post-5a.json"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u6.json"
+    original_read_raw_sha256: "e94cf4b7d66fc74aa121bb3cd8ed3558fd9615e0f3e1e7fd777958102eeee1dc"
+    repair_post_guard_sha256: "05a2b64947cd799094d4c6757b69a4112f9ab9e46d25920776717ebc27ab3b4b"
+    content_sha256: "a6a0818d6b6c39d230d9ca501a65ad3e9582c23b1bed71eea23a9c082a8d64bb"
   precheck: pass
 provenance:
   statement: ai-generated

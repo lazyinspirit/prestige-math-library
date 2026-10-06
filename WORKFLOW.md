@@ -147,7 +147,42 @@
   require repair. The complete scoped gate then repeats repair, recertification and the
   same battery until green. Outside findings remain recorded and excluded from frontier
   item gates; global, runtime and unknown failures still block. Step 7.9 and its
-  continuations cannot add items.
+  continuations cannot add items. Collection and stable snapshot guards select
+  frozen-frontier subjects while retaining full graph and hash context for their
+  external suppliers; unrelated edits are excluded, and changed relevant supplier
+  interfaces still require actual frontier-consumer review. A held initial or repeat
+  owner-impact gate validates the final closed aggregate after all continuation
+  passes, including their bound evidence, current subject and prerequisite guards,
+  and latest required consumer reviews. Earlier pass collections remain immutable
+  historical snapshots; legitimate later repairs do not make them gate snapshots.
+  Manifest-scoped validator adapters retain their own explicit file selections;
+  the battery does not append item paths as validator flags. JSON-mode adapters
+  emit only validator JSON, and dependency-selector errors remain global blockers.
+  Ledger closure agreement and the terminal open-defect check use validated
+  active ownership rows; superseded rows remain immutable historical evidence.
+  A held initial or repeat
+  collection may load `research/RUN-step7-v2/PHASE-ROUND-owner-supplement.json`
+  only after native writers drain: explicit root authority, the exact uncertain
+  blocker, frozen rejection, native report and successful dispatch must be sealed.
+  Root reviews cover only that blocker, necessary existing frontier Definition
+  suppliers and actual direct consumers, with current item and context hashes and
+  full-text source review. Native bytes remain historical evidence; the supplement
+  cannot change verdicts, defect classification, confidence requirements or scope.
+- Step 8 derives both its changed-item receipt and initial judge dispatch from
+  the same owning-run manifest selector and immutable post-Step-7 baseline.
+  Subjects are the frozen frontier and legitimate owned additions; missing or
+  multiply owned subjects block. Unrelated work remains advisory context and is
+  excluded from this run's judgments, stamps and receipt-currency comparison.
+  A guarded owner recovery may add consumer verdict-currency targets named by
+  the current native closure and sealed owner authorization. Those targets must
+  be owned by the run and remain separate from its mathematical change receipt.
+- Step 9 readiness seals owned content and workflow evidence, substantive
+  supplier and formal proof context, relevant page homes/prerequisites, and
+  validation code/configuration. Shared plan and ledger carriers use relevant
+  record projections; bare navigation links protect identity and home resolution.
+  Unrelated runs' content and ledger appends do not invalidate this seal. Native
+  global/runtime gates still block, and later report outputs remain separately
+  checked. Complete documentation and code-hash updates before writing readiness.
 - Empty Step-7 batch adjudication assignments in the initial or repeat pack
   close through a tool lane bound to that exact run, phase, round, unit and pack
   hash. The report records mechanical zero-work closure with no mathematical
@@ -199,6 +234,11 @@ fixes reach live gate descriptors without changing the recovery cap or stage ord
   effort. DeepSeek V4.1 Flash max assignments remain explicit. Legacy Sol and
   Luna registry entries preserve historical evidence; new default judges use
   the `sol61` lineup at high effort. Running workers retain their launch settings.
+
+- A run-local stage table may reduce dispatch concurrency and set the existing
+  `JUDGE_CONCURRENCY_GPT_6_1_SOL` cap for its native judge tools after a recorded
+  HTTP 429 outage. Keep the model, effort, coverage and successful evidence;
+  let active workers finish before a bounded native retry.
 
 - All agent lanes use `model_auto_compact_token_limit=500000` with scope `total`.
   The dispatcher and judge pass this explicitly for isolated Codex homes;
@@ -275,6 +315,11 @@ ownership in the current run, actual prerequisite reachability, draft run
 identity, and current source, producer contract and manifest fingerprints.
 Another run's draft or an arbitrary run item cannot enter through this route.
 Producer membership does not certify its mathematics.
+
+Published-dependency routing follows actual `deps`/`justified_by` edges through
+readable current-manifest prerequisites as context. These run items are never
+recorded as published subjects; only reachable published or claimed suppliers
+enter that route. Drafts outside the current manifests do not extend its closure.
 
 The original `reader:BATCH:K` obligation stays with the consumer batch's Alpha;
 the producer remains outside its edit scope. Its source is added to the normal
@@ -509,6 +554,12 @@ their publication audit or formatting is not a gate on this run.
 
 ## Scoped closeout with unrelated work present
 
+Step-9 evidence validates the canonical defect-ledger history and supersession
+links before checking active fatal obligations. Validly superseded observations
+remain visible in the fatal-defect table, labelled historical with their current
+owner; they do not become current blockers. Active open or incomplete fatal
+rows and invalid ownership links still fail evidence generation.
+
 Step-9 readiness and report integrity seal physical files and exact symbolic-link
 target bytes with distinct file/link hash prefixes. They do not follow directory
 links or external targets; physically present targets are protected at their own
@@ -634,7 +685,7 @@ closeout does not push, publish, change stages or revise the workflow.
 
   It archives Step-5 receipts and generated artifacts, preserves Steps 6–7, and arms a
   pause after `5b-close` by default.
-- **Fatal finding after Step 7:** Use `recover-step8` only with explicit owner
+- **Mathematical repair after Step 7:** Use `recover-step8` only with explicit owner
   authorization, after repairing its named items and before Step 9 dispatches. Its
   version-1 JSON needs `run`, a unique `recovery_id`, `baseline:"post-step7"`,
   `authorized_by:"owner"`, the owner's `authorization` text, nonempty `required_targets`
@@ -645,7 +696,9 @@ closeout does not push, publish, change stages or revise the workflow.
   node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts recover-step8 --run RUN --state-dir .autopilot/RUN --authorization AUTH.json
   ```
 
-  The command checks the changed-item allowlist against the `post-step7` snapshot,
+  The command uses the same owning-run change selector to check the repair
+  allowlist against the `post-step7` snapshot; unrelated changes are not recovery
+  subjects. It requires a paused run, a stopped controller and drained writers,
   archives the Step-8 suffix receipts, and leaves the run paused. Step-7 history remains
   intact.
 - **Historical checkpoint migration:** The current migration accepts only a verified

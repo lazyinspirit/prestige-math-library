@@ -17,6 +17,17 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-3.md"
+      - "research/frontier-38-owner-30-alpha-batch-3-5a.md"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u3.json"
+    content_sha256: "00492a5ed7abb6a2945d49edf256d629c4af5d0c8741f3ef86055717fa78e6c8"
   precheck: pass
 sources:
   references:

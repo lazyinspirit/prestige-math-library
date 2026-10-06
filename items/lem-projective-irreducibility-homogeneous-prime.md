@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-projective-algebraic-set, def-homogeneous-polynomial-and-homogeneous-ideal, cor-strong-nullstellensatz-two-inclusions, def-axiom-of-choice]
+deps: [def-projective-algebraic-set, def-homogeneous-polynomial-and-homogeneous-ideal, cor-strong-nullstellensatz-two-inclusions, thm-root-bound-for-polynomials-over-a-domain, def-axiom-of-choice]
 proof_strategy: direct
 sources:
   scraped: []
@@ -18,12 +18,6 @@ sources:
       url: "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
 verification:
   precheck: pass
-  verified:
-    model: "gpt-6-astra"
-    verdict: pass
-    date: 2026-09-08
-    scope: "Local prerequisite and proof repair; not independent judging or whole-closure certification."
-    delegated_by: "Owner-requested UC-73 audit"
 ---
 
 ## Statement
@@ -42,9 +36,11 @@ nonempty projective algebraic sets.
 
 [F1] Under AC, the affine strong Nullstellensatz gives $I(V(J))=\sqrt J$ for every polynomial ideal $J$ ([[cor-strong-nullstellensatz-two-inclusions]]).
 
+[F2] [[thm-root-bound-for-polynomials-over-a-domain]]: a nonzero polynomial of degree $N$ over an integral domain has at most $N$ distinct roots.
+
 ## Proof
 
-1.1 Let $C$ consist of zero and all nonzero representatives of points of $X$. Every homogeneous polynomial vanishing on $X$ vanishes on $C$. Conversely, write a polynomial vanishing on $C$ as $P=\sum_dP_d$ with each $P_d$ homogeneous. For a representative $a$ of a point of $X$ and every $\lambda\in k$, one has $0=P(\lambda a)=\sum_d\lambda^dP_d(a)$. Since the algebraically closed field $k$ is infinite, each $P_d(a)$ is zero. Thus all homogeneous components of $P$ lie in $I_+(X)$, and $I(C)=I_+(X)$. [given, algebra]
+1.1 Let $C$ consist of zero and all nonzero representatives of points of $X$. Every homogeneous polynomial vanishing on $X$ vanishes on $C$. Conversely, write a polynomial vanishing on $C$ as $P=\sum_dP_d$ with each $P_d$ homogeneous. For a representative $a$ of a point of $X$ and every $\lambda\in k$, one has $0=P(\lambda a)=\sum_d\lambda^dP_d(a)$. The field $k$ is infinite: if it were finite, the nonconstant polynomial $\prod_{b\in k}(T-b)+1$ would take the value $1$ at every element of $k$, contradicting algebraic closedness. The polynomial $\sum_dT^dP_d(a)$ therefore has infinitely many roots; by [F2] it is zero, so each coefficient $P_d(a)$ is zero. Thus all homogeneous components of $P$ lie in $I_+(X)$, and $I(C)=I_+(X)$. [given, F2, algebra]
 
 1.2 Suppose $X$ is irreducible and homogeneous $F,G$ satisfy $FG\in I_+(X)$. Then $X\subseteq V_+(F)\cup V_+(G)$, so irreducibility gives $F\in I_+(X)$ or $G\in I_+(X)$. A homogeneous ideal is prime exactly when this test holds for homogeneous elements: in the graded quotient, the product of two nonzero elements has nonzero component at the sum of their lowest nonzero degrees. Here the ideal is proper since $X$ is nonempty. Thus $I_+(X)$ is prime. [given, algebra]
 

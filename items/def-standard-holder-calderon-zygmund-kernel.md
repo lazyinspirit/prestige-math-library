@@ -4,6 +4,19 @@ kind: definition
 title: "Standard (Hölder) Calderón–Zygmund kernels"
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-5.md"
+      - "research/frontier-38-owner-30-alpha-batch-5-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-5-post.json"
+    reviewed_raw_sha256: "c9c179f2f6fdb80195605342cd7d51df9b7b46ad5d73ff089ecfa02685fc2f4a"
+    content_sha256: "0b3d98175082bcbf4c096021e03d764196128af657ca802ca31ff2f891d5fcb1"
 pipeline_run: frontier-38-owner-30
 deps: [def-calderon-zygmund-kernel-and-principal-value-operator]
 provenance:

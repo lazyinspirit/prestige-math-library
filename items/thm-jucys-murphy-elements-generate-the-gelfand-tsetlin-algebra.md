@@ -21,6 +21,17 @@ sources:
     - title: "Garsia, Young Seminormal Representation, Murphy Elements and Content Evaluations, UCSD lecture notes (2003), Theorems 3.4-3.5, printed pp. 22-24"
       url: "https://www.math.ucsd.edu/~garsia/somepapers/Youngseminormal.pdf"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-19.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-19.result.json
+      - research/frontier-38-owner-30-step5-hash-19-post-5a.json
+      - research/frontier-38-owner-30-alpha-batch-19-5a-decisions.json
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -35,6 +35,23 @@ const requireValue=(condition,message)=>{if(!condition)throw Error(message);};
 const verifyEvidence=evidence=>{for(const [p,hash]of Object.entries(evidence??{}))requireValue(existsSync(p)&&digest(readFileSync(p,'utf8'))===hash,`Step 7 evidence changed: ${p}`);};
 const rawHashes=root=>Object.fromEntries(readLibraryItems(root).map(row=>[row.id,row.sha256]));
 const creationId=/^(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
+function subjectScope(pack,created=[]) {
+  if(pack.repair_scope!=='frontier')return null;
+  requireValue(Array.isArray(pack.frontier_ids)&&pack.frontier_ids.length>0,'missing nonempty frozen frontier scope');
+  return new Set([...pack.frontier_ids,...created]);
+}
+// Keep full snapshots and the full graph. Only subjects and their actual
+// prerequisite carriers can invalidate this run's stable collection boundary.
+function prerequisiteScope(items,subjects) {
+  const graph=new Map(items.map(row=>[row.id,row])),aliases=new Map();
+  for(const row of items)for(const alias of row.aliases??[])if(!graph.has(alias))aliases.set(alias,row.id);
+  const seen=new Set(),queue=[...subjects];
+  for(let index=0;index<queue.length;index++){
+    const id=aliases.get(queue[index])??queue[index];if(seen.has(id))continue;seen.add(id);
+    const row=graph.get(id);queue.push(...(row?.deps??[]),...(row?.references??[]));
+  }
+  return seen;
+}
 function gateFrontier(root,run) {
   const path=join(workflowDir(root,run),'frontier.json');
   const frontier=existsSync(path)?read(path):initialize(root,run);
@@ -323,8 +340,103 @@ function writeTasks(root,pack,mode) {
   }
 }
 
-export function validateReports(pack,reports,now,{root=null}={}) {
+export const ownerSupplementPath=(root,run,phase,round)=>join(workflowDir(root,run),`${phase}-${round}-owner-supplement.json`);
+const ownerSupplementSeal=Symbol('validated-root-owner-supplement');
+function loadOwnerSupplement(root,pack,reports,current,items) {
+  const path=ownerSupplementPath(root,pack.run,pack.phase,pack.round);if(!existsSync(path))return null;
+  const row=read(path),unit=String(row.unit),native=reports.find(report=>String(report.unit)===unit);
+  requireValue(row.version===1&&row.run===pack.run&&row.phase===pack.phase&&row.round===pack.round
+    &&['initial','repeat'].includes(pack.phase)&&pack.rejected&&pack.repair_scope==='frontier'
+    &&row.pack_sha256===digest(pack)&&native?.completion==='blocked','invalid owner supplement identity or native blocker');
+  requireValue(row.authorized_by==='owner'&&row.reviewed_by==='root'
+    &&typeof row.authorization==='string'&&row.authorization.trim().length>=40,'owner supplement requires explicit root authority');
+  const nativePath=workerReport(root,pack.run,pack.phase,pack.round,unit);
+  const dispatchPath=join(root,'research',`${pack.run}-dispatch`,`alpha-adjudicate-${workerLabel(pack.phase,pack.round,unit)}.result.json`);
+  const evidence={[path]:digest(readFileSync(path,'utf8'))};
+  for(const [binding,expected] of [[row.original_report,nativePath],[row.dispatch,dispatchPath]]){
+    requireValue(binding?.path===expected&&/^[a-f0-9]{64}$/.test(binding.sha256??''),'owner supplement native binding mismatch');
+    evidence[expected]=binding.sha256;
+  }
+  const supporting=row.supporting_evidence;
+  requireValue(supporting&&typeof supporting==='object'&&!Array.isArray(supporting)&&Object.keys(supporting).length>0,'owner supplement needs source evidence');
+  for(const [p,hash]of Object.entries(supporting))requireValue(resolve(p).startsWith(resolve(root,'research')+'/')&&/^[a-f0-9]{64}$/.test(hash)
+    &&(!Object.hasOwn(evidence,p)||evidence[p]===hash),'invalid owner supplement supporting evidence');
+  Object.assign(evidence,supporting);verifyEvidence(evidence);
+  const dispatch=read(dispatchPath),state=read(join(root,'.autopilot',pack.run,'state.json'));
+  const stage=pack.phase==='initial'?'7.1-adjudicate':'7.5-adjudicate';
+  requireValue(state.run===pack.run&&state.stage===stage
+    &&state.blockers?.some(value=>value.stage===stage&&value.key==='gate:step7-wave-evidence')
+    &&Object.values(state.dispatches??{}).every(value=>!value.startedAt||Boolean(value.endedAt)),
+    'owner supplement requires the held native collection gate and drained writers');
+  requireValue(dispatch.ok===true&&dispatch.run===pack.run&&dispatch.role==='alpha-adjudicate'
+    &&dispatch.label===workerLabel(pack.phase,pack.round,unit)
+    &&Number.isFinite(Date.parse(dispatch.ended_at))&&Number.isFinite(Date.parse(row.completed_at))
+    &&Date.parse(row.completed_at)>=Date.parse(dispatch.ended_at),'owner supplement predates native worker completion');
+  const rejected=pack.assignments[unit]?.find(value=>key(value)===key(row.rejection??{}));
+  const blocker=native.blockers?.find(value=>value.id===rejected?.id&&value.uncertain===true);
+  const oldReview=native.reviews?.find(value=>value.id===rejected?.id),oldDecision=native.decisions?.find(value=>key(value)===key(rejected??{}));
+  requireValue(rejected&&blocker&&row.blocker_sha256===digest(blocker)&&oldReview?.uncertain===true
+    &&native.blockers.length===1
+    &&oldDecision?.uncertain===false&&['confirmed_fatal','confirmed_nonfatal'].includes(oldDecision.outcome),
+    'owner supplement must bind an exact uncertain native blocker and confirmed frozen rejection');
+  requireValue(Array.isArray(row.scope)&&row.scope.length>0&&Array.isArray(row.reviews)&&Array.isArray(row.decisions)
+    &&row.decisions.length===1&&Array.isArray(row.source_reading)&&row.source_reading.length>0,
+    'malformed owner supplement review scope');
+  requireValue(row.source_reading.every(value=>/^https:\/\//.test(value.url??'')&&value.full_text_reviewed===true
+    &&typeof value.reason==='string'&&value.reason.trim().length>=40
+    &&typeof value.read_extent==='string'&&value.read_extent.trim().length>=40),
+    'owner supplement requires actual complete relevant proof review with an explicit full-text read extent');
+  const frontier=gateFrontier(root,pack.run),byId=new Map(items.map(value=>[value.id,value])),ids=new Set();
+  for(const value of row.scope)requireValue(value&&frontier.has(value.id)&&pack.before[value.id]&&byId.has(value.id),
+    'owner supplement can only review existing draft frozen-frontier subjects');
+  const primary=row.scope.filter(value=>value.role==='blocker');
+  requireValue(primary.length===1&&primary[0].id===rejected.id,'owner supplement blocker scope mismatch');
+  const prerequisites=row.scope.filter(value=>value.role==='prerequisite');
+  for(const value of prerequisites)requireValue(value.id!==rejected.id&&itemKind(root,value.id)==='definition'
+    &&discoverDownstream({items,repairedIds:[value.id]}).some(impact=>impact.id===rejected.id),
+    'owner supplement prerequisite is not a necessary direct definition supplier');
+  const suppliers=new Set([rejected.id,...prerequisites.map(value=>value.id)]);
+  const direct=discoverDownstream({items,repairedIds:[...suppliers]});
+  for(const value of row.scope){
+    requireValue(value&&frontier.has(value.id)&&pack.before[value.id]&&byId.has(value.id)&&!ids.has(value.id)
+      &&typeof value.reason==='string'&&value.reason.trim().length>=40,'invalid owner supplement scope subject');
+    ids.add(value.id);
+    if(value.role==='direct-consumer')requireValue(suppliers.has(value.supplier)
+      &&direct.some(impact=>impact.id===value.id&&impact.suppliers.includes(value.supplier))
+      &&typeof value.consumed_clause==='string'&&value.consumed_clause.trim().length>=40,'owner supplement consumer lacks an actual direct supplier use');
+    else requireValue(['blocker','prerequisite'].includes(value.role),'unknown owner supplement scope role');
+  }
+  for(const id of ids){
+    const nativeRows=reports.flatMap(report=>report.reviews??[]).filter(value=>value.id===id);
+    const assigned=Object.values(pack.assignments).flat().some(value=>value.id===id);
+    requireValue(nativeRows.length===(assigned?1:0),`owner supplement cannot supply missing or duplicate native history: ${id}`);
+    if(id!==rejected.id)for(const review of nativeRows)requireValue(evidenceText(review),`owner supplement cannot waive another uncertain native review: ${id}`);
+  }
+  const contexts=reviewContexts(items),seen=new Set(),judgeContexts=currentHashesMany(root,[...ids]);
+  const reviewedSources=new Set(row.source_reading.map(value=>value.url));
+  for(const review of row.reviews){
+    const now=judgeContexts.get(review.id);
+    requireValue(ids.has(review.id)&&!seen.has(review.id)&&review.reviewed_by==='root'&&evidenceText(review)
+      &&review.source_urls.length>0&&review.source_urls.every(url=>reviewedSources.has(url))
+      &&['repaired','unaffected'].includes(review.disposition)&&contexts.matches(review,current)
+      &&now?.item_sha256===review.item_sha256&&now?.context_sha256===review.context_sha256,
+      `invalid current root owner review: ${review.id}`);seen.add(review.id);
+  }
+  requireValue(seen.size===ids.size,'missing root owner review for supplement scope');
+  const decision=row.decisions[0];
+  requireValue(key(decision)===key(rejected)&&decision.outcome===oldDecision.outcome
+    &&decision.defect_type===oldDecision.defect_type&&decision.reviewed_by==='root'&&evidenceText(decision)
+    &&decision.source_urls.length>0&&decision.source_urls.every(url=>reviewedSources.has(url)),
+    'owner supplement cannot replace the frozen verdict or confirmed defect classification');
+  return {...row,ids,evidence,path,[ownerSupplementSeal]:true};
+}
+
+export function validateReports(pack,reports,now,{root=null,ownerSupplement=null}={}) {
   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
+  requireValue(!ownerSupplement||(root&&ownerSupplement[ownerSupplementSeal]===true
+    &&ownerSupplement.pack_sha256===digest(pack)),'owner supplement must pass native guarded loading');
+  const ownerReviews=new Map((ownerSupplement?.reviews??[]).map(row=>[row.id,row]));
+  const ownerDecisions=new Map((ownerSupplement?.decisions??[]).map(row=>[key(row),row]));
   for(const unit of pack.units) {
     const report=reports.find(r=>String(r.unit)===unit);
     if(!report||report.run!==pack.run||report.phase!==pack.phase||report.round!==pack.round||report.input_sha256!==digest(pack)) { errors.push(`missing or mismatched report ${unit}`);continue; }
@@ -342,14 +454,15 @@ export function validateReports(pack,reports,now,{root=null}={}) {
       creations.add(row.id);creatorById.set(row.id,{unit,row,assigned,report});createdItems.push(row);
     }
     const ids=new Set([...assigned,...creations]),seen=new Set();
-    for(const row of report.reviews??[]) {
+    for(const row of (report.reviews??[]).filter(row=>!ownerReviews.has(row.id))) {
       const dispositions=creations.has(row.id)?['authored']:['repaired','unaffected'];
       if(!ids.has(row.id)||seen.has(row.id)||!evidenceText(row)||!dispositions.includes(row.disposition)||row.post_sha256!==now[row.id]||!/^[a-f0-9]{64}$/.test(row.review_context_sha256??'')) errors.push(`invalid review ${unit}/${row.id}`);
       seen.add(row.id);reviews.push(row);
     }
-    for(const id of ids)if(!seen.has(id))errors.push(`missing review ${unit}/${id}`);
+    for(const id of ids)if(!seen.has(id)&&!ownerReviews.has(id))errors.push(`missing review ${unit}/${id}`);
     const expected=new Map((pack.rejected?pack.assignments[unit]:[]).map(row=>[key(row),row])),decided=new Set();
-    for(const row of report.decisions??[]) {
+    for(const nativeRow of report.decisions??[]) {
+      const row=ownerDecisions.get(key(nativeRow))??nativeRow;
       if(!expected.has(key(row))||decided.has(key(row))||!evidenceText(row)||!['confirmed_fatal','confirmed_nonfatal','false_positive'].includes(row.outcome)) errors.push(`invalid adjudication ${unit}/${row.id}`);
       if(pack.adjudicationSchemaVersion===1&&row.outcome==='confirmed_fatal'&&!FATAL_TYPES.includes(row.defect_type))errors.push(`missing or invalid fatal defect_type ${unit}/${row.id}`);
       decided.add(key(row));decisions.push(row);
@@ -364,14 +477,15 @@ export function validateReports(pack,reports,now,{root=null}={}) {
     for(const index of gateExpected)if(!gateSeen.has(index))errors.push(`missing gate resolution ${unit}/${index}`);
   }
   if(reports.length!==pack.units.length)errors.push('unexpected or duplicate reports');
-  const changed=diff(pack.before,now);
+  reviews.push(...ownerReviews.values());
+  const scoped=subjectScope(pack,[...creatorById.keys()]);
+  const changed=diff(pack.before,now).filter(id=>!scoped||scoped.has(id));
   for(const id of changed) {
-    if(pack.repair_scope==='frontier'&&!pack.frontier_ids?.includes(id)&&pack.before[id])errors.push(`out-of-frontier consumer cannot be repaired by Step 7: ${id}`);
     const created=creatorById.get(id),review=reviews.find(r=>r.id===id&&r.disposition===(created?'authored':'repaired'));
     if(!now[id]||!review||(!created&&!pack.before[id]))errors.push(`unlicensed or unreviewed change ${id}`);
-    if(pack.rejected&&!created&&!decisions.some(r=>r.id===id&&['confirmed_fatal','confirmed_nonfatal'].includes(r.outcome)))errors.push(`change without confirmed adjudication ${id}`);
+    if(pack.rejected&&!created&&!ownerReviews.has(id)&&!decisions.some(r=>r.id===id&&['confirmed_fatal','confirmed_nonfatal'].includes(r.outcome)))errors.push(`change without confirmed adjudication ${id}`);
   }
-  for(const id of Object.keys(pack.before))if(!now[id])errors.push(`unlicensed deletion ${id}`);
+  for(const id of Object.keys(pack.before))if((!scoped||scoped.has(id))&&!now[id])errors.push(`unlicensed deletion ${id}`);
   for(const id of creatorById.keys())if(!changed.includes(id))errors.push(`claimed creation without new item ${id}`);
   for(const row of decisions)if(['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)&&!changed.includes(row.id))errors.push(`confirmed defect not repaired ${row.id}`);
   for(const row of reviews)if(['repaired','authored'].includes(row.disposition)&&!changed.includes(row.id))errors.push(`claimed repair or authorship without change ${row.id}`);
@@ -407,11 +521,26 @@ export function validateReports(pack,reports,now,{root=null}={}) {
 }
 
 export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
+  // The controller joins all owner passes before this gate. Their individual
+  // collections are historical snapshots; later assigned repairs may replace
+  // them. Validate the completed aggregate, never rewrite the earlier receipts.
+  if(!deferImpactClosure&&['impact-initial','impact-repeat','gate'].includes(phase)
+    &&existsSync(impactProgressPath(root,run,phase,round))
+    &&read(impactProgressPath(root,run,phase,round)).complete)
+    return verifyCompletedImpact(root,run,phase,round);
   const collectedPath=join(workflowDir(root,run),`${phase}-${round}-collected.json`);
-  if(existsSync(collectedPath)){const prior=read(collectedPath);verifyEvidence(prior.evidence);syncMaintenance(root,run,prior.statement_events??[]);return prior;}
+  if(existsSync(collectedPath)){
+    const prior=read(collectedPath);verifyEvidence(prior.evidence);
+    if(!deferImpactClosure){
+      const scoped=prerequisiteScope(readLibraryItems(root),[...gateFrontier(root,run),...(prior.created_items??[]).map(row=>row.id)]);
+      for(const id of diff(prior.post,hashes(root)).filter(id=>scoped.has(id)))throw Error(`writer changed relevant content after collection: ${id}`);
+    }
+    syncMaintenance(root,run,prior.statement_events??[]);return prior;
+  }
   const pack=readPack(root,run,phase,round);
   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
-  const current=hashes(root),reported={...current};
+  const current=hashes(root),reported={...current},items=readLibraryItems(root);
+  const ownerSupplement=loadOwnerSupplement(root,pack,reports,current,items);
   if(deferImpactClosure) {
     requireValue(!pack.rejected,'only owner waves can defer impact closure');
     // Archive the carriers workers actually reviewed. Later edits are queued
@@ -419,9 +548,10 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     const assigned=new Set(Object.values(pack.assignments).flat());
     for(const row of reports.flatMap(report=>report.reviews??[]))if(assigned.has(row.id)&&/^[a-f0-9]{64}$/.test(row.post_sha256??''))reported[row.id]=row.post_sha256;
   }
-  const result=validateReports(pack,reports,reported,{root});
+  const result=validateReports(pack,reports,reported,{root,ownerSupplement});
   if(result.errors.length)throw Error(result.errors.join('\n'));
   const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
+  Object.assign(evidence,ownerSupplement?.evidence??{});
   verifyEvidence(evidence);
   const creationAuthors=new Map();
   for(const unit of pack.units) {
@@ -467,19 +597,46 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     for(const row of reports.find(value=>String(value.unit)===unit)?.created_items??[])creationAuthors.set(row.id,basename(dispatch));
   }
   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
-  receipt.restated=restatedIds(pack,diff(pack.before,current),statementHashes(root));
+  if(ownerSupplement){
+    receipt.owner_supplement=ownerSupplement.path;
+    receipt.native_reviews=reports.flatMap(report=>report.reviews).filter(row=>ownerSupplement.ids.has(row.id));
+    receipt.native_decisions=reports.flatMap(report=>report.decisions).filter(row=>key(row)===key(ownerSupplement.rejection));
+    receipt.native_downstream=[...receipt.downstream];
+    receipt.native_ledger_updates=receipt.ledger_updates;
+    receipt.ledger_updates_origin='native-worker-historical-proposals';
+    receipt.owner_resolution={reviewed_by:'root',status:'owner-repair-reviewed',id:ownerSupplement.rejection.id,
+      rejection:ownerSupplement.rejection,decision:ownerSupplement.decisions[0],completed_at:ownerSupplement.completed_at,
+      supplement:ownerSupplement.path,supplement_sha256:evidence[ownerSupplement.path],
+      reviewed_ids:[...ownerSupplement.ids],supporting_evidence:ownerSupplement.supporting_evidence};
+  }
+  receipt.restated=restatedIds(pack,result.changed,statementHashes(root));
   const afterStatements=statementHashes(root);
   receipt.statement_events=receipt.restated.filter(id=>pack.before_statements?.[id]||!pack.before[id]).map(id=>({id,before_statement_sha256:pack.before_statements?.[id]??statementHash(''),after_statement_sha256:afterStatements[id]}));
   if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length)receipt.downstream=[];
   const frontier=gateFrontier(root,run);
-  const direct=discoverDownstream({items:readLibraryItems(root),repairedIds:receipt.restated});
+  // Outside edits are context, not Step-7 repair subjects. Relevant supplier
+  // interface changes still route their actual frontier consumers for review.
+  const closure=prerequisiteScope(items,frontier);
+  receipt.external_supplier_changes=diff(pack.before,current).filter(id=>!frontier.has(id)&&closure.has(id));
+  receipt.external_supplier_restatements=restatedIds(pack,receipt.external_supplier_changes,afterStatements).filter(id=>current[id]);
+  receipt.external_supplier_impacts=discoverDownstream({items,repairedIds:receipt.external_supplier_restatements}).filter(row=>frontier.has(row.id));
+  const direct=discoverDownstream({items,repairedIds:receipt.restated});
   const required=direct.filter(row=>frontier.has(row.id));
+  if(ownerSupplement){
+    // The root has examined these exact current consumers, including a
+    // rejected blocker that consumes its newly corrected Definition. Preserve
+    // the native inventory separately rather than attributing later reads to it.
+    receipt.owner_downstream=required.filter(row=>ownerSupplement.ids.has(row.id)).map(row=>row.id);
+    receipt.downstream=[...new Set([...receipt.downstream,...receipt.owner_downstream])];
+    receipt.owner_resolution.examined_downstream=receipt.owner_downstream;
+  }
   const discoveries=receipt.downstream.filter(id=>!frontier.has(id)&&!direct.some(row=>row.id===id)&&!receipt.restated.includes(id));
   const uses=Object.assign({},...reports.map(row=>row.downstream_uses??{}));
   if(receipt.statement_events.length)for(const id of discoveries)requireValue(typeof uses[id]==='string'&&uses[id].trim().length>=40,`missing exact downstream use for outside consumer: ${id}`);
   if(discoveries.length)for(const event of receipt.statement_events)Object.assign(event,{consumer_ids:discoveries,discovery_evidence:Object.fromEntries(discoveries.map(id=>[id,uses[id]]))});
   receipt.inventory_missing=required.filter(row=>!receipt.downstream.includes(row.id)).map(row=>row.id);
   if(!deferImpactClosure)for(const id of receipt.inventory_missing)requireValue(false,`missing downstream inventory: ${id}`);
+  receipt.downstream=[...new Set([...receipt.downstream,...receipt.external_supplier_impacts.map(row=>row.id)])];
   // Merge compatibility evidence once, bound to the actual frozen rejection.
   // Never invent a judge verdict or re-label adjudication as an independent pass.
   const ledger=join(root,'research',`${run}-judge-adjudications.jsonl`), existing=lines(ledger);
@@ -508,14 +665,15 @@ export function impactWork(root,run,phase,round) {
 export const maintenanceLabel=(phase,round,id,lane)=>`consumer-maintenance-${phase}-r${round}-${id}-lane-${lane}`;
 export const maintenancePack=(root,run,id)=>read(join(root,'research',`${run}-consumer-maintenance`,`${id}.json`));
 
-export function assertImpactProgress(packs,pending,current) {
+export function assertImpactProgress(packs,pending,current,{items=null}={}) {
   const targets=[...new Set(pending)].sort();
   for(const pack of packs) {
     // Pre-statement-policy assignments may legitimately need one migration
     // pass with the new review context. Do not mistake that for a repeat.
     if(!pack.before_statements)continue;
     const previous=[...new Set(Object.values(pack.assignments).flat())].sort();
-    if(JSON.stringify(previous)===JSON.stringify(targets)&&diff(pack.before,current).length===0)
+    const scoped=items?prerequisiteScope(items,targets):subjectScope(pack);
+    if(JSON.stringify(previous)===JSON.stringify(targets)&&diff(pack.before,current).filter(id=>!scoped||scoped.has(id)).length===0)
       throw Error(`Step 7 no-progress hold: ${pack.phase} already assigned the same ${targets.length} pending item(s) at this exact content state. Resolve stale/missing review evidence or the repair oscillation before retry; no duplicate owner wave was launched.`);
   }
 }
@@ -557,7 +715,8 @@ export function advanceImpact(root,run,phase,round) {
   const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root),items=readLibraryItems(root);
   const maintenance=maintenanceStatus(root,run),maintenanceIds=new Set(progress.work_order.filter(row=>row.kind==='maintenance').map(row=>row.id));
   const maintenanceChanges=maintenance.completed_changes.filter(row=>maintenanceIds.has(row.pack));
-  const changed=diff(base.before,current),rawSeeds=[...new Set([...(base.seeds??[]),...completed.flatMap(receipt=>receipt.restated??receipt.changed),...maintenanceChanges.filter(row=>row.before_statement_sha256!==row.after_statement_sha256).map(row=>row.id)])];
+  const frontier=gateFrontier(root,run);
+  const changed=diff(base.before,current).filter(id=>frontier.has(id)),rawSeeds=[...new Set([...(base.seeds??[]),...completed.flatMap(receipt=>receipt.restated??receipt.changed),...maintenanceChanges.filter(row=>row.before_statement_sha256!==row.after_statement_sha256).map(row=>row.id)])];
   const maintenanceRestatements=new Set(maintenanceChanges.filter(row=>row.before_statement_sha256!==row.after_statement_sha256).map(row=>row.id));
   const returned=maintenance.frontier_events.filter(row=>maintenanceRestatements.has(row.id)).map(row=>row.consumer_id);
   const scope=impactTargets(root,run,phase,items,rawSeeds,[...completed.flatMap(receipt=>receipt.downstream??[]),...returned]);
@@ -581,7 +740,7 @@ export function advanceImpact(root,run,phase,round) {
   const snapshots=new Map([sourceReceipt,...completed].filter(Boolean).flatMap(receipt=>receipt.reviews.map(row=>[row.id,receipt.post])));
   const pending=[...required].filter(id=>!contexts.matches(reviews.get(id)??sourceReviews.get(id),current,snapshots.get(id))).sort();
   if(pending.length) {
-    assertImpactProgress(progress.passes.map(pass=>readPack(root,run,pass,round)),pending,current);
+    assertImpactProgress(progress.passes.map(pass=>readPack(root,run,pass,round)),pending,current,{items});
     const nextPhase=nextImpactPhase(phase,progress);
     const assignments={'1':[],'2':[],'3':[]};
     const {order,cycles}=orderImpacts(items,pending);
@@ -605,6 +764,42 @@ export function advanceImpact(root,run,phase,round) {
   frozen(join(workflowDir(root,run),`${phase}-${round}-closed.json`),receipt);
   progress.complete=true;atomic(path,progress);
   return {complete:true,phase,round,passes:progress.passes};
+}
+
+export function verifyCompletedImpact(root,run,phase,round) {
+  requireValue(['impact-initial','impact-repeat','gate'].includes(phase),'invalid completed owner phase');
+  const progress=read(impactProgressPath(root,run,phase,round));
+  requireValue(progress.run===run&&progress.phase===phase&&progress.round===round
+    &&progress.complete===true&&Array.isArray(progress.passes)&&progress.passes.length>0,
+    'owner impact continuation is not complete');
+  const dir=workflowDir(root,run),result=read(join(dir,`${phase}-${round}-closed.json`));
+  requireValue(result.run===run&&result.phase===phase&&result.round===round
+    &&Array.isArray(result.errors)&&result.errors.length===0,'invalid completed owner collection');
+  verifyEvidence(result.evidence);
+  const passes=progress.passes.map(pass=>{
+    const path=join(dir,`${pass}-${round}-collected.json`);
+    requireValue(result.evidence[path]===digest(readFileSync(path,'utf8')),
+      `completed owner collection does not bind pass: ${pass}`);
+    const receipt=read(path);verifyEvidence(receipt.evidence);return receipt;
+  });
+  const items=readLibraryItems(root),frontier=gateFrontier(root,run),current=hashes(root);
+  const stable=prerequisiteScope(items,[...frontier,...(result.created_items??[]).map(row=>row.id)]);
+  for(const id of diff(result.post,current).filter(id=>stable.has(id)))
+    throw Error(`writer changed relevant content after completed owner collection: ${id}`);
+  const source=phase==='impact-initial'?'initial':phase==='impact-repeat'?'repeat':null;
+  const sourceReceipt=source?read(join(dir,`${source}-${round}-collected.json`)):null;
+  if(sourceReceipt)verifyEvidence(sourceReceipt.evidence);
+  const reviews=new Map([...(sourceReceipt?.reviews??[]),...result.reviews].map(row=>[row.id,row]));
+  const snapshots=new Map([sourceReceipt,...passes].filter(Boolean)
+    .flatMap(receipt=>receipt.reviews.map(row=>[row.id,receipt.post])));
+  const base=readPack(root,run,progress.repairBasePhase??phase,round);
+  const scope=impactTargets(root,run,phase,items,result.restated??base.seeds??[],result.downstream??[]);
+  const required=new Set([...progress.passes.flatMap(pass=>Object.values(readPack(root,run,pass,round).assignments).flat()),
+    ...scope.targets,...result.changed,...(sourceReceipt?.reviews??[]).map(row=>row.id)]);
+  const contexts=reviewContexts(items);
+  for(const id of required)if(frontier.has(id))requireValue(contexts.matches(reviews.get(id),current,snapshots.get(id)),
+    `completed owner collection lacks current review: ${id}`);
+  return result;
 }
 
 function orderImpacts(items,targets) {
@@ -708,9 +903,10 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const priorItems=new Map((prior?.items??[]).filter(row=>certifiedScope(row.id)).map(row=>[row.id,row]));
   const progress=read(impactProgressPath(root,run,phase,round));
   const impactPack=readPack(root,run,progress.repairBasePhase??phase,round);
-  // Every writer's final report must still describe its actual final carrier.
-  // This also rejects post-collection edits before certification can be minted.
-  for(const id of diff(result.post,current))requireValue(false,`writer changed content after collection: ${id}`);
+  // Stable subjects retain all external prerequisite carriers as context;
+  // unrelated writers cannot turn their own content into this run's subjects.
+  const library=readLibraryItems(root),stable=prerequisiteScope(library,[...eligible,...createdIds]);
+  for(const id of diff(result.post,current).filter(id=>stable.has(id)))requireValue(false,`writer changed relevant content after collection: ${id}`);
   // Certification covers an examination of every discovered consumer. A
   // consumer may remain unchanged when sound; only logically necessary owner
   // repairs belong in `changed`.
@@ -722,7 +918,13 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const ids=[...new Set([...changed,...reviewed.keys(),...priorItems.keys()])].sort();
   const contexts=contextHasher(root,ids); // One corpus read, after every writer drains.
   for(const id of ids)requireValue(contexts.has(id),`missing certification context: ${id}`);
-  if(JSON.stringify(rawBefore)!==JSON.stringify(rawHashes(root)))throw Error('item writer overlapped certification');
+  const reviewContextsNow=reviewContexts(library);
+  for(const [id,row]of reviewed){
+    if(row.reviewed_by==='root')requireValue(reviewContextsNow.matches(row,current)
+      &&contexts.get(id)?.item_sha256===row.item_sha256&&contexts.get(id)?.context_sha256===row.context_sha256,
+      `stale root owner review context before certification: ${id}`);
+  }
+  if(diff(rawBefore,rawHashes(root)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped certification');
   const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence};
   for(const name of ['frontier.json','baseline.json','step6-verdicts.json',`${phase}-${round}-closed.json`,`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
   const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??priorItems.get(id)?.reason}));

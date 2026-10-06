@@ -42,13 +42,11 @@ $\nu=\nu^+-\nu^-$. Then for every measurable $E$:
 
 **Proof technique:** direct.
 
-1.1 Let $(E_n)$ be a countable measurable partition of $E$. Using [L2] and the [L1, L2]
-triangle inequality, $$|\nu(E_n)|=|\nu^+(E_n)-\nu^-(E_n)|\le \nu^+(E_n)+\nu^-(E_n)$$ for each $n$. Summing and using countable additivity of the positive measures $\nu^+$ and $\nu^-$ gives $$\sum_n |\nu(E_n)|\le \nu^+(E)+\nu^-(E).$$ Hence [L1] yields $|\nu|(E)\le \nu^+(E)+\nu^-(E)$.
+1.1 Let $(E_n)$ be a countable measurable partition of $E$. Using [L2] and the [L1, L2] triangle inequality, $$|\nu(E_n)|=|\nu^+(E_n)-\nu^-(E_n)|\le \nu^+(E_n)+\nu^-(E_n)$$ for each $n$. Summing and using countable additivity of the positive measures $\nu^+$ and $\nu^-$ gives $$\sum_n |\nu(E_n)|\le \nu^+(E)+\nu^-(E).$$ Hence [L1] yields $|\nu|(E)\le \nu^+(E)+\nu^-(E)$. [L2, L1]
 
-2.1 The two-piece partition $E=(E\cap P)\sqcup(E\cap N)$ from [L2] gives [L1, L2, step 1.1]
-$$|\nu(E\cap P)|+|\nu(E\cap N)|=\nu^+(E)+\nu^-(E).$$ Therefore $|\nu|(E)\ge \nu^+(E)+\nu^-(E)$, and together with step 1.1 this proves equality. Because this equality is already realized by a finite partition, finite partitions suffice for signed measures.
+2.1 The two-piece partition $E=(E\cap P)\sqcup(E\cap N)$ from [L2] gives [L1, L2, step 1.1] $$|\nu(E\cap P)|+|\nu(E\cap N)|=\nu^+(E)+\nu^-(E).$$ Therefore $|\nu|(E)\ge \nu^+(E)+\nu^-(E)$, and together with step 1.1 this proves equality. Because this equality is already realized by a finite partition, finite partitions suffice for signed measures. [L2, L1, step 1.1]
 
-3.1 If $F\subseteq E$ is measurable, then [L2] gives [L2, step 2.1]
-$$\nu(F)=\nu^+(F)-\nu^-(F)\le \nu^+(F)\le \nu^+(E),$$ so $\sup_{F\subseteq E}\nu(F)\le \nu^+(E)$. Taking $F=E\cap P$ gives equality: $\nu(F)=\nu^+(E)$. The same argument with $E\cap N$ gives $$\inf_{F\subseteq E}\nu(F)=-\nu^-(E).$$
+3.1 If $F\subseteq E$ is measurable, then [L2] gives [L2, step 2.1] $$\nu(F)=\nu^+(F)-\nu^-(F)\le \nu^+(F)\le \nu^+(E),$$ so $\sup_{F\subseteq E}\nu(F)\le \nu^+(E)$. Taking $F=E\cap P$ gives equality: $\nu(F)=\nu^+(E)$. The same argument with $E\cap N$ gives $$\inf_{F\subseteq E}\nu(F)=-\nu^-(E).$$ [L2, step 2.1]
 
 4.1 Steps 2.1 and 3.1 prove all four displayed formulas. [step 2.1, step 3.1] ∎
+

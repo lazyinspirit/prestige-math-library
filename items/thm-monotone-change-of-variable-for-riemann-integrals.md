@@ -56,12 +56,11 @@ Flat subintervals of $\phi$ are allowed.
 
 **Proof technique:** direct.
 
-1.1 Assume first that $\phi$ is nondecreasing, and let $0\le h\le M$. [L1]
-For a partition $P=\{t_i\}$ of $[c,d]$, transport its points through $\phi$ and delete repeated image points. If $U_i,u_i$ are the supremum and infimum of $\phi'$ on $[t_{i-1},t_i]$, the mean value theorem gives $$u_i\Delta t_i\le \phi(t_i)-\phi(t_{i-1})\le U_i\Delta t_i.$$ On a flat interval the image increment is zero and $\phi'=0$ in its interior, so its contribution may be discarded.
+1.1 Assume first that $\phi$ is nondecreasing, and let $0\le h\le M$. [L1] For a partition $P=\{t_i\}$ of $[c,d]$, transport its points through $\phi$ and delete repeated image points. If $U_i,u_i$ are the supremum and infimum of $\phi'$ on $[t_{i-1},t_i]$, the mean value theorem gives $$u_i\Delta t_i\le \phi(t_i)-\phi(t_{i-1})\le U_i\Delta t_i.$$ On a flat interval the image increment is zero and $\phi'=0$ in its interior, so its contribution may be discarded. [L1]
 
-2.1 Compare the upper sum of $h$ on the transported partition with the upper sum of $(h\circ\phi)\phi'$ on $P$. [step 1.1, L2, L4]
-On each nonflat interval the two relevant suprema differ, after multiplication by $\Delta t_i$, by at most $M(U_i-u_i)\Delta t_i$; the identical estimate holds for lower sums. Hence each pair of corresponding sums differs by at most $$M\sum_i(U_i-u_i)\Delta t_i.$$ Because $\phi'$ is integrable, refinements can make this error arbitrarily small. Taking upper and lower integrals therefore gives $$\overline{\int_a^b}h=\overline{\int_c^d}(h\circ\phi)\phi',\qquad \underline{\int_a^b}h=\underline{\int_c^d}(h\circ\phi)\phi'.$$ Thus one nonnegative function is integrable exactly when the other is, and their integrals then agree.
+2.1 Compare the upper sum of $h$ on the transported partition with the upper sum of $(h\circ\phi)\phi'$ on $P$. [step 1.1, L2, L4] On each nonflat interval the two relevant suprema differ, after multiplication by $\Delta t_i$, by at most $M(U_i-u_i)\Delta t_i$; the identical estimate holds for lower sums. Hence each pair of corresponding sums differs by at most $$M\sum_i(U_i-u_i)\Delta t_i.$$ Because $\phi'$ is integrable, refinements can make this error arbitrarily small. Taking upper and lower integrals therefore gives $$\overline{\int_a^b}h=\overline{\int_c^d}(h\circ\phi)\phi',\qquad \underline{\int_a^b}h=\underline{\int_c^d}(h\circ\phi)\phi'.$$ Thus one nonnegative function is integrable exactly when the other is, and their integrals then agree. [step 1.1, L2, L4]
 
 3.1 For a general bounded $f$, choose $M$ with $f+M\ge0$. Since $\phi'$ is integrable and $\int_c^d\phi'=\phi(d)-\phi(c)=b-a$, applying step 2.1 to $f+M$ and subtracting the constant term proves both the integrability equivalence and the integral identity for $f$. [step 2.1, L3, L5]
 
 4.1 If $\phi$ is nonincreasing, reverse the source orientation and apply steps 1.1–3.1 to the resulting nondecreasing parametrization. The sign reversal is exactly removed by $|\phi'|$ and the oriented-integral convention. [step 1.1, step 2.1, step 3.1] ∎
+

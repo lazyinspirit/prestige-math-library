@@ -18,6 +18,12 @@ sources:
       url: "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
       locator: "Section 2.1, printed pp. 475-476: explicit computation of the pairing from the intersections z_i, z'_j, the monomials m_{i,j} and the signs epsilon_{i,j}"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "historical complete Step5 reader plus completed current item adjudication proof read; item ex-a-fork-noodle-pairing-computation; evidence research/frontier-38-owner-30-reader-16.md, research/frontier-38-owner-30-reader-findings-16.json, research/frontier-38-owner-30-alpha-batch-16-5a-decisions.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
+    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

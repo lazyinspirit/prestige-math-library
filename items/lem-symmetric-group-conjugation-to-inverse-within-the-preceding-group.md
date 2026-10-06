@@ -21,6 +21,17 @@ sources:
     - title: "K. Conrad, Conjugacy Classes (cycle conjugation), as cited by the published cycle-conjugation lemma"
       url: "https://kconrad.math.uconn.edu/blurbs/grouptheory/conjclass.pdf"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-19.md"
+      - "research/frontier-38-owner-30-alpha-batch-19-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-19-post-5a.json"
+    content_sha256: "ade888a0d0332f4d2f563af917d059832e7d2d384167a9b17ac6bc33360ee0ed"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -1,4 +1,18 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item read and recorded Step 7 mathematical repair review, including the used supplier interfaces; current mathematical content matches the bound evidence. The repair review is local and does not claim an independent audit of the repair."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-4.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-4.result.json
+      - research/frontier-38-owner-30-step5-hash-4-post-5a.json
+      - research/frontier-38-owner-30-alpha-batch-4-5a-decisions.json
+      - research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u4.json
+      - research/frontier-38-owner-30-dispatch/alpha-adjudicate-step7-v2-initial-r1-u4.result.json
 id: rem-endpoint-and-rough-domain-trace-limitations
 kind: remark
 title: "Endpoint and rough-domain limitations of the trace theorems"

@@ -4,6 +4,21 @@ kind: lemma
 title: "A based self-map of the punctured disk inducing the identity on the fundamental group is based-homotopic to the identity"
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-03"
+    scope: "Cumulative whole-item verification: completed original Step5 full statement/definition and proof read plus the recorded later Step7 local mathematical corrections. Exact recovered original carrier and current post-correction carrier match recorded hashes; every substantive delta is covered by the cited correction reasoning. No independent audit of the local repairs and no new review round is claimed; supplier review is limited to interfaces used."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-15.md"
+      - "research/frontier-38-owner-30-alpha-batch-15-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-15-post-5a.json"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u15.json"
+    original_read_raw_sha256: "c535e92a8256b97e56c13c20692d4763c6dfdfc91fe500d5d44510b3eeec5781"
+    repair_post_guard_sha256: "92003034c33279a16bcd27a5994bb4c078934ded39fd87bffa897e4190f5d070"
+    content_sha256: "8720815caeee4d648a8e10c85ffaf063af31ff60180c9ad1ebcbe86cfcdca6be"
 pipeline_run: frontier-38-owner-30
 dependency_level: 2
 deps: [lem-the-standard-flower-is-a-deformation-retract-with-free-meridian-basis, def-homotopy-relative-and-path-homotopy, thm-induced-fundamental-group-map-functoriality, def-wedge-of-pointed-spaces, def-based-loops-and-fundamental-group, def-free-group, prop-retracts-inject-fundamental-groups, lem-cw-quotients-and-collapse-of-a-contractible-subcomplex]

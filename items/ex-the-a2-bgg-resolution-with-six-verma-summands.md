@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for ex-the-a2-bgg-resolution-with-six-verma-summands and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-8; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"35f48f58310433372bec40afb2e348fdb434d1d3d25d35134587f546266b593f","evidence":["research/frontier-38-owner-30-reader-8.md","research/frontier-38-owner-30-reader-findings-8.json","research/frontier-38-owner-30-dispatch/reader-reader-8.result.json","research/frontier-38-owner-30-step5-hash-8-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/ex-the-a2-bgg-resolution-with-six-verma-summands.md","historical_raw_sha256":"88cb8f256daf52be22e535c27c4eed8481c4a286990df83b40f74dc987f84dd5","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:35:41.081Z"}}
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

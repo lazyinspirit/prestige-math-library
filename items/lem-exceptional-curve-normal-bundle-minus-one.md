@@ -31,6 +31,18 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01OF"
       locator: "Lemma 31.33.4(3) O_{X'}(-1)=O_{X'}(E)"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post.json"
+    reviewed_raw_sha256: "5a31a4e5f90fa2c242972ccc855e49f83ad74bccfe5d32070540a1d396a342df"
+    content_sha256: "b5cf47d89b4118e88900d7e2e6e141134acc50bf358c443db31fb93a3db12853"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

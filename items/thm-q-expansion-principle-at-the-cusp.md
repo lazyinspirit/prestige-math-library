@@ -4,6 +4,21 @@ kind: theorem
 title: "The q-expansion principle at the cusp"
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-03"
+    scope: "Cumulative whole-item verification: completed original Step5 full statement/definition and proof read plus the recorded later Step7 local mathematical corrections. Exact recovered original carrier and current post-correction carrier match recorded hashes; every substantive delta is covered by the cited correction reasoning. No independent audit of the local repairs and no new review round is claimed; supplier review is limited to interfaces used."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-21.md"
+      - "research/frontier-38-owner-30-alpha-batch-21-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-21-post-5a.json"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u21.json"
+    original_read_raw_sha256: "cf9e6e81db61fa1fb1ba1de7e3c98ed95800a09f739c49be5ef9284261a28558"
+    repair_post_guard_sha256: "3532ec68164731f6bdeed38f7a8a933bab3c40896d5859de2ce1dda60fc78258"
+    content_sha256: "61fadbea0a7cd3e2881e435da1112ee89d965ed1fa725d2d47261e9388347fdf"
 deps:
   - thm-complex-exponential-is-entire-with-derivative-itself
   - thm-complex-exponential-addition-and-real-extension

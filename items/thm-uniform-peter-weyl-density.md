@@ -13,6 +13,13 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: completed-cumulative-mathematical-review
+    date: 2026-10-03
+    scope: "Cumulative verification supported by existing completed mathematical readings. Original complete Step 5a reader evidence research/frontier-38-owner-30-reader-11.md, followed by completed Step 7 repair/adjudication reasoning research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u11.json, exact post_sha256 9cc6259d2f94a6469067968a6e844efbc558b2b8dcb23280fb759de9683db740 with publication status normalized back to draft. The later reasoning covers the substantive changes; its local repair/self-review qualifications remain applicable. This reconciliation adds no new mathematical review, independent post-repair audit, source reading or judge acceptance."
+    delegated_by: "owner via tools/autopilot frontier-38-owner-30 step7-v2-initial-r1-u11 dispatch"
 sources:
   references:
   - title: Emmanuel Kowalski, An Introduction to the Representation Theory of Groups (author-hosted draft, 338 pp.)

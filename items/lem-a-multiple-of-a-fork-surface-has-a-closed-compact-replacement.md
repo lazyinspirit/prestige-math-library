@@ -21,6 +21,12 @@ sources:
       url: "https://arxiv.org/pdf/math/0204057"
       locator: "Sections 3.3–3.4, printed pp. 7–9: explicit closed surfaces; the relative-exact-sequence Basic Lemma proof used here is Bigelow 2001, section 2.3, pp. 477–479"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full item proof read and accepted exact subsequent delta; item lem-a-multiple-of-a-fork-surface-has-a-closed-compact-replacement; evidence research/frontier-38-owner-30-reader-16.md, research/frontier-38-owner-30-step5-lkb-resolution-current-carriers/lem-a-multiple-of-a-fork-surface-has-a-closed-compact-replacement.md, research/frontier-38-owner-30-step5-lkb-resolution-evidence.json, research/frontier-38-owner-30-alpha-batch-16-5a-decisions.json. Original source/coverage limitations retained; no recursive audit of all prerequisites or full bibliography claimed. Restored from completed 2026-10-03 evidence; no new audit or independent audit of local repair claimed."
+    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

@@ -59,4 +59,4 @@ graded ranks.
 
 4.1 Consistency with the support flags: the two summands $B_s\{-1\}$ and $B_s\{1\}$ have $\Delta$-flag quotients $R_s\{0\},R\{-2\}$ and $R_s\{2\},R\{0\}$ respectively, whose union $R_s\{0\},R_s\{2\},R\{-2\},R\{0\}$ is the multiset in [F3]; hence the abstract decomposition of step 3.1 realizes the flag computation, and the two summands are the $\alpha$-divisible and the $\alpha$-free part of the middle factor. [F3, step 3.1]
 
-5.1 Non-isomorphism and freeness: $B_s\{-1\}$ and $B_s\{1\}$ differ by the shift $\{2\}$, and the graded rank of $B_s\{k\}$ as a left $R$-module is $v^{-1+k}+v^{1+k}$, so the two summands have different graded ranks and are not isomorphic; both are free of rank two on each side while $B_s\otimes_RB_s$ is free of rank four, matching step 3.1. ∎ [F3, step 3.1]
+5.1 Non-isomorphism and freeness: $B_s\{-1\}$ and $B_s\{1\}$ differ by the shift $\{2\}$, and the graded rank of $B_s\{k\}$ as a left $R$-module is $v^{-1+k}+v^{1+k}$, so the two summands have different graded ranks and are not isomorphic; both are free of rank two on each side while $B_s\otimes_RB_s$ is free of rank four, matching step 3.1. [F3, step 3.1] ∎

@@ -42,12 +42,7 @@ and $s_k(x) \to f(x)$ for every $x \in X$.
 
 **Proof technique:** direct.
 
-1.1 By [L2], the functions $f^+$ and $f^-$ are measurable and nonnegative. Applying [L1, L2, L3]
-[L3] to them gives simple functions $u_k \uparrow f^+$ and $v_k \uparrow f^-$. [L1, L2, L3]
+1.1 By [L2], the functions $f^+$ and $f^-$ are measurable and nonnegative. Applying [L1, L2, L3] [L3] to them gives simple functions $u_k \uparrow f^+$ and $v_k \uparrow f^-$. [L1, L2, L3]. [L2, L1, L3]
 
-2.1 Put $s_k := u_k - v_k$. Because $u_k$ and $v_k$ are simple, $s_k$ is a [step 1.1, L1]
-simple real-valued function. At each point, [L1] makes at least one of $u_k$ and $v_k$ equal to $0$, so
+2.1 Put $s_k := u_k - v_k$. Because $u_k$ and $v_k$ are simple, $s_k$ is a [step 1.1, L1] simple real-valued function. At each point, [L1] makes at least one of $u_k$ and $v_k$ equal to $0$, so $$|s_k| = u_k + v_k \le f^+ + f^- = |f|.$$ Also $s_k \to f^+ - f^- = f$ pointwise because $u_k \to f^+$ and $v_k \to f^-$. [step 1.1, L1]. [step 1.1, L1] ∎
 
-$$|s_k| = u_k + v_k \le f^+ + f^- = |f|.$$
-
-Also $s_k \to f^+ - f^- = f$ pointwise because $u_k \to f^+$ and $v_k \to f^-$. [step 1.1, L1] ∎

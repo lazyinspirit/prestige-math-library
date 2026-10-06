@@ -21,6 +21,18 @@ sources:
       url: "https://doi.org/10.1007/978-0-387-68548-9"
       locator: "Chapter 1: the Artin presentation and the endpoint permutation homomorphism B_n -> S_n with kernel the pure braid group"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-16.md"
+      - "research/frontier-38-owner-30-alpha-batch-16-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-16-post.json"
+    reviewed_raw_sha256: "c7d9af24915f3ea92a868454624b80cf516b5831858dd63d2593cf7af661e9b9"
+    content_sha256: "a718be45f01e92a2d9eda121683dd3fe77d5c86a77ab288c1a148ac901828ccb"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

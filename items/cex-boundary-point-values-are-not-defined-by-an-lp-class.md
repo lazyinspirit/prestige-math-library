@@ -4,6 +4,21 @@ kind: counterexample
 title: "Boundary point values are not a function of the interior $L^p$ class"
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-03"
+    scope: "Cumulative whole-item verification: completed original Step5 full statement/definition and proof read plus the recorded later Step7 local mathematical corrections. Exact recovered original carrier and current post-correction carrier match recorded hashes; every substantive delta is covered by the cited correction reasoning. No independent audit of the local repairs and no new review round is claimed; supplier review is limited to interfaces used."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-4.md"
+      - "research/frontier-38-owner-30-alpha-batch-4-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-4-post-5a.json"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u4.json"
+    original_read_raw_sha256: "17995dc652ace49ee9f9e6df5b2c9c9ecd62cc50ffb51cf100670f21979d2bac"
+    repair_post_guard_sha256: "5a9471c05fbbb173f8db338054c3cc9c489f197f8ca882fcb22988e53a32656d"
+    content_sha256: "7010efa33bd82aad61a7b6e245ba71f1ba6af9e59faedf6f21f928b2e5bd4948"
 pipeline_run: frontier-38-owner-30
 deps: [def-l-p-space-as-a-quotient-by-null-functions, thm-lp-trace-operator-on-a-bounded-c-one-domain, lem-sobolev-trace-agrees-with-continuous-boundary-values, def-sobolev-space-wkp-and-its-norm, def-countable-choice, thm-lebesgue-measure-of-a-box-of-every-kind, thm-polar-coordinates-formula-for-lebesgue-measure, def-axiom-of-choice]
 provenance:

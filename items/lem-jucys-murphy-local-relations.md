@@ -23,6 +23,12 @@ sources:
     - title: "Michael Muger, Tensor Categories: A Selective Guided Tour, section 4 (Coxeter presentation of the symmetric group)"
       url: "https://arxiv.org/pdf/0804.3587"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: completed-cumulative-mathematical-review
+    date: 2026-10-03
+    scope: "Cumulative verification supported by existing completed mathematical readings. Original complete Step 5a reader evidence research/frontier-38-owner-30-reader-19.md, followed by completed Step 7 repair/adjudication reasoning research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u19.json, exact post_sha256 998d4c18141b631666eee1a4b58c51fc9d24d3b895472c499726a9407e967eb3 with publication status normalized back to draft. The later reasoning covers the substantive changes; its local repair/self-review qualifications remain applicable. This reconciliation adds no new mathematical review, independent post-repair audit, source reading or judge acceptance."
+    delegated_by: "owner via tools/autopilot frontier-38-owner-30 step7-v2-initial-r1-u19 dispatch"
   precheck: pass
 ---
 

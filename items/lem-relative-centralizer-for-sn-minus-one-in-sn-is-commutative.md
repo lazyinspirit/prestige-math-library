@@ -19,6 +19,17 @@ sources:
     - title: "Okounkov-Vershik, A New Approach to the Representation Theory of the Symmetric Groups, Selecta Math. (N.S.) 2 (1996) 581-605; complete arXiv repost math/0503040, Theorem 2.1 and its complete coefficient-inversion proof, printed pp. 9-10"
       url: "https://arxiv.org/pdf/math/0503040"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-19.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-19.result.json
+      - research/frontier-38-owner-30-step5-hash-19-post-5a.json
+      - research/frontier-38-owner-30-alpha-batch-19-5a-decisions.json
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

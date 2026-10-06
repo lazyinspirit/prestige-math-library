@@ -1,0 +1,82 @@
+---
+page: abelian-varieties-base-change-and-arithmetic-models
+title: "Abelian Varieties, Base Change, and Arithmetic Models"
+status: draft
+items:
+  - def-group-scheme-over-a-scheme
+  - lem-finite-etale-lifting-over-complete-dvr
+  - def-s-dense-open-and-s-rational-map
+  - lem-normal-noetherian-domain-intersection-of-height-one-localizations
+  - def-neron-model-and-mapping-property
+  - thm-plane-cubic-chord-tangent-group-law
+  - lem-arith-affine-commutative-prime-to-characteristic-torsion-bound
+  - lem-arith-strict-henselization-and-smooth-sections
+  - lem-arith-finite-cartier-duality-and-exactness
+  - def-abelian-scheme
+  - lem-s-rational-map-descends-along-faithfully-flat-smooth-maps
+  - lem-rational-map-to-affine-target-indeterminacy-pure-codimension-one
+  - lem-neron-model-uniqueness-etale-base-change-and-local-nature
+  - lem-two-torsion-and-uniqueness-of-plane-cubic-group-law
+  - def-arith-tate-module-and-inertia
+  - lem-arith-strict-henselian-etale-sections
+  - lem-arith-smooth-group-identity-component-open
+  - lem-arith-dilatations-and-defect-of-smoothness
+  - lem-arith-affine-codimension-one-neighbourhood-and-divisors
+  - lem-abelian-scheme-base-change-and-products
+  - thm-weil-extension-rational-map-into-group-scheme
+  - def-good-reduction-and-abelian-scheme-model
+  - def-rigidified-relative-picard-functor-and-dual-abelian-variety
+  - lem-abelian-scheme-universal-structure-sheaf-sections
+  - lem-arith-prime-to-characteristic-multiplication-etale
+  - lem-arith-finite-permissible-smoothening
+  - cor-extension-of-k-morphisms-into-abelian-schemes
+  - lem-theorem-of-the-square-and-mumford-homomorphism
+  - lem-abelian-scheme-fibrewise-constant-morphism-rigidity
+  - lem-arith-field-prime-to-characteristic-torsion-and-tate-module
+  - lem-arith-projective-weak-model-and-rational-mapping
+  - lem-arith-rigidified-line-bundle-descent
+  - lem-abelian-scheme-fibres-commutative-and-pointed-morphisms
+  - def-polarization-of-an-abelian-variety
+  - lem-arith-special-fibre-torsion-growth-detects-properness
+  - lem-arith-invariant-volume-and-finite-minimal-models
+  - lem-arith-cube-derived-square-over-dvr
+  - lem-arith-hilbert-divisor-charts-and-picard-diagonal
+  - lem-multiplication-by-n-on-abelian-scheme
+  - thm-abelian-scheme-is-the-neron-model-of-its-generic-fibre
+  - lem-arith-separated-minimal-model-and-translations
+  - lem-arith-group-model-with-abelian-generic-fibre-quasiprojective
+  - lem-arith-picard-representation-by-generic-quotient-and-translates
+  - cor-good-reduction-admits-a-neron-model
+  - lem-good-reduction-stable-under-base-change
+  - lem-arith-connected-smooth-quasiprojective-model-proper-special-fibre
+  - lem-arith-abelian-scheme-torsion-specialization-unramified
+  - lem-arith-birational-group-law-from-minimal-model
+  - lem-arith-coherent-kunneth-and-proper-image-dual
+  - lem-arith-strictification-of-dvr-birational-group-law
+  - lem-arith-dual-and-poincare-bundle-finite-field-descent
+  - lem-arith-strict-law-translation-and-graph-calculus
+  - lem-arith-homogeneous-bundle-vanishing-and-mumford-surjectivity
+  - lem-arith-separated-translate-gluing
+  - lem-arith-dual-isogeny-kernel-and-abelian-biduality
+  - lem-arith-theta-extension-splitting-and-isotropic-descent
+  - lem-arith-poincare-cohomology-at-the-identity
+  - lem-arith-finite-translate-group-completion
+  - lem-arith-symmetric-homomorphism-is-a-mumford-map
+  - lem-arith-mumford-map-degree-is-euler-characteristic-square
+  - lem-arith-effective-ample-pair-and-group-descent
+  - lem-arith-polarization-and-picard-twist-ampleness
+  - thm-abelian-variety-dual-and-polarization
+  - lem-arith-full-minimal-model-embedding
+  - thm-neron-model-existence-in-stated-class
+  - thm-arith-neron-ogg-shafarevich-prime-to-residue-characteristic
+  - thm-good-reduction-and-smooth-proper-base-change
+examples: []
+requires:
+  - nonaffine-algebraic-groups-barsotti-chevalley-and-abelian-varieties
+  - groups-of-multiplicative-type-and-arithmetic-tori
+  - coherent-duality-on-projective-cohen-macaulay-schemes
+  - cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes
+  - hilbert-functors-and-projective-hilbert-schemes
+---
+
+This page develops the theory of abelian varieties over a field together with their arithmetic models over a discrete valuation ring. It constructs the dual abelian variety and the Poincare bundle, develops theta groups, Mumford maps and polarizations with their square degrees, and then builds the Neron model of an abelian variety over an arbitrary discrete valuation ring, proving the Neron-Ogg-Shafarevich criterion in residue characteristics prime to the torsion prime and good reduction, conditional coherent cohomology base change, and prime-to-residue-characteristic torsion specialization for abelian schemes.

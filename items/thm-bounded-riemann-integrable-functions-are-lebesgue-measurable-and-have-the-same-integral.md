@@ -56,14 +56,11 @@ and measurability of $f$ itself is then a completeness statement.
 
 **Proof technique:** direct.
 
-1.1 By [L1], choose bounded Borel functions $\varphi,\psi$ on $[a,b]$ with [L1, L2]
-$\varphi\le f\le\psi$ and both integrals equal to $I$. Then $0\le \psi-\varphi$ and $$\int_{[a,b]}(\psi-\varphi)\,d\lambda_1=0.$$ So [L2] gives $\psi=\varphi$ almost everywhere. Since $\varphi\le f\le\psi$, the same null set yields $f=\varphi$ almost everywhere.
+1.1 By [L1], choose bounded Borel functions $\varphi,\psi$ on $[a,b]$ with [L1, L2] $\varphi\le f\le\psi$ and both integrals equal to $I$. Then $0\le \psi-\varphi$ and $$\int_{[a,b]}(\psi-\varphi)\,d\lambda_1=0.$$ So [L2] gives $\psi=\varphi$ almost everywhere. Since $\varphi\le f\le\psi$, the same null set yields $f=\varphi$ almost everywhere. [L1, L2]
 
-2.1 By [L4], the measure space $(\mathbb R,\mathcal L(\mathbb R),\lambda_1)$ is [step 1.1, L3, L4]
-complete. The function $\varphi$ is measurable because it is Borel, so [L3] applied to step 1.1 shows that $f$ is Lebesgue measurable.
+2.1 By [L4], the measure space $(\mathbb R,\mathcal L(\mathbb R),\lambda_1)$ is [step 1.1, L3, L4] complete. The function $\varphi$ is measurable because it is Borel, so [L3] applied to step 1.1 shows that $f$ is Lebesgue measurable. [L4, step 1.1, L3]
 
-3.1 The constant function $B\chi_{[a,b]}$ is a nonnegative simple measurable [step 2.1, L1, L6, L7]
-function, and [L6] together with [L7] gives $$\int_{[a,b]} B\chi_{[a,b]}\,d\lambda_1 = B(b-a)<+\infty.$$ Since step 2.1 makes $|f|$ measurable and $|f|\le B\chi_{[a,b]}$, [L6] yields $$\int_{[a,b]}|f|\,d\lambda_1<+\infty.$$ Hence $f$ is Lebesgue integrable on $[a,b]$. The same estimate applies to $\varphi$, because [L1] gives $|\varphi|\le B$.
+3.1 The constant function $B\chi_{[a,b]}$ is a nonnegative simple measurable [step 2.1, L1, L6, L7] function, and [L6] together with [L7] gives $$\int_{[a,b]} B\chi_{[a,b]}\,d\lambda_1 = B(b-a)<+\infty.$$ Since step 2.1 makes $|f|$ measurable and $|f|\le B\chi_{[a,b]}$, [L6] yields $$\int_{[a,b]}|f|\,d\lambda_1<+\infty.$$ Hence $f$ is Lebesgue integrable on $[a,b]$. The same estimate applies to $\varphi$, because [L1] gives $|\varphi|\le B$. [step 2.1, L1, L6, L7]
 
-4.1 Steps 1.1 and 3.1 show that $f$ and $\varphi$ are integrable and agree [step 1.1, step 3.1, L1, L5]
-almost everywhere. Taking the measurable set $A=[a,b]$ in [L5] gives $$\int_{[a,b]} f\,d\lambda_1=\int_{[a,b]}\varphi\,d\lambda_1.$$ By [L1], the right-hand side is $I=\int_a^b f(x)\,dx$. So the Lebesgue and Riemann integrals of $f$ agree. ∎
+4.1 Steps 1.1 and 3.1 show that $f$ and $\varphi$ are integrable and agree [step 1.1, step 3.1, L1, L5] almost everywhere. Taking the measurable set $A=[a,b]$ in [L5] gives $$\int_{[a,b]} f\,d\lambda_1=\int_{[a,b]}\varphi\,d\lambda_1.$$ By [L1], the right-hand side is $I=\int_a^b f(x)\,dx$. So the Lebesgue and Riemann integrals of $f$ agree. [step 1.1, step 3.1, L1, L5] ∎
+

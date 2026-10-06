@@ -31,6 +31,18 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf"
       locator: "Exercises 19.2.A-B, p. 382; discussion after Theorem 19.3.2, pp. 385-387"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post.json"
+    reviewed_raw_sha256: "92ed41fd35996d959c4ba300027bf6f5424c808cc4eac8622ea752e7a9c2a4d7"
+    content_sha256: "4cafa1cf1c90342b1b9f3c70ba19f1a6bf1c9ae3cec6496674a38ce4ba4b83fc"
   precheck: pass
 ---
 

@@ -10,7 +10,8 @@ import {
 } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { basename, join, resolve } from 'node:path';
-import { itemHashGuard, shortHash } from '../../item-hash.mjs';
+import { spawnSync } from 'node:child_process';
+import { validateFrontier } from '../../step7-rounds.mjs';
 
 const REOPEN = ['8-changes-judge', '8-close', '8-changes-stamp', '8-receipt'] as const;
 const sha256 = (data: string | Buffer): string => createHash('sha256').update(data).digest('hex');
@@ -79,14 +80,32 @@ export function recoverStep8({
   if (!baseline?.hashes) fail('post-step7 snapshot is missing');
   for (const id of required) if (!(id in baseline.hashes)) fail(`required target absent from post-step7 snapshot: ${id}`);
 
-  // The canonical Step-8 index performs the full guarded-hash comparison when
-  // the reopened stage runs. This early comparison only enforces the recovery
-  // allowlist before any old success receipt is archived.
-  const changed = readdirSync(join(repo, 'items')).filter((name) => name.endsWith('.md'))
-    .map((name) => name.slice(0, -3)).filter((id) => {
-      const hash = shortHash(itemHashGuard(readFileSync(join(repo, 'items', `${id}.md`), 'utf8')));
-      return !(id in baseline.hashes) || baseline.hashes[id] !== hash;
-    }).sort();
+  // Enforce the allowlist against the same owned guarded delta the reopened
+  // native index will certify. Other runs' edits are advisory, never accepted
+  // subjects of this recovery. The selector's --list mode writes no receipt.
+  const root = resolve(repo);
+  const frontier = validateFrontier(json(join(root, 'research', `${run}-step7-v2`, 'frontier.json')));
+  if (frontier.run !== run || !frontier.batches.length
+    || frontier.batches.some((batch: any) => !/^\d+$/.test(String(batch.id))))
+    fail('invalid owning frontier batch inventory');
+  const manifests = frontier.batches.map((batch: any) =>
+    join(root, 'research', `${run}-batch-${batch.id}.pages.json`));
+  const selected = spawnSync(process.execPath, [join(root, 'tools', 'step8-changes.mjs'),
+    '--touches', join(root, 'research', `${run}-touches.json`), '--baseline', 'post-step7',
+    '--manifests', manifests.join(','), '--out', join(root, 'research', `${run}-step8-changes.json`),
+    '--scope-out', join(root, 'research', `${run}-step8-changes.pages.json`), '--root', root, '--list'],
+    { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+  if (selected.error) fail(`owning change selector failed: ${selected.error.message}`);
+  if (selected.status !== 0 || selected.stderr.trim())
+    fail(`owning change selector failed: ${selected.stderr.trim() || selected.stdout.trim()}`);
+  let delta: any;
+  try { delta = JSON.parse(selected.stdout); }
+  catch { fail('owning change selector returned unreadable JSON'); }
+  if (delta.run !== run || delta.baseline !== 'post-step7' || delta.frontier_sha256 !== frontier.sha256
+    || !Array.isArray(delta.created) || !Array.isArray(delta.modified)
+    || [...delta.created, ...delta.modified].some((id: any) => typeof id !== 'string'))
+    fail('owning change selector returned an invalid scope');
+  const changed = [...new Set<string>([...delta.created, ...delta.modified])].sort();
   const outside = changed.filter((id) => !allowed.has(id));
   if (outside.length) fail(`changed item(s) outside authorization: ${outside.join(', ')}`);
   const unchangedRequired = [...required].filter((id) => !changed.includes(id));

@@ -29,6 +29,17 @@ deps:
 - lem-smooth-euclidean-hypersurface-graph-and-localization
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-6.md"
+      - "research/frontier-38-owner-30-alpha-batch-6-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-6-post-5a.json"
+    content_sha256: "68ed589327762f73855c0e80b776aa97c2da3ca90cebcc09b81ccdfbb725a446"
   precheck: pass
 provenance:
   statement: literature-derived

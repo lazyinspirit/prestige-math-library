@@ -140,7 +140,9 @@
 - Common tags include `given`, `F/A/L/C<n>`, `step p.q`, `algebra`, `choose`,
   `construct`, and strategy opener/discharge tags. The accepted vocabulary and
   strategy checks are in the app's `worker/src/precheck.ts`, called by
-  `tools/precheck.mts`. Adopt any repair it proposes before recording a pass.
+  `tools/precheck.mts`. The wrapper checks declarations and every proof section;
+  source notes, bibliography and editorial remarks after the last proof section
+  are outside the phase proof. Adopt any repair it proposes before recording a pass.
 - Use `$...$` for inline math and `$$...$$` for display math. A display formula
   must occupy one source line between delimiters; put delimiters on separate
   lines when display-only KaTeX features such as `\tag` or `CD` are needed.

@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for lem-the-bgg-augmentation-has-image-the-simple-module and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-8; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"34135118a6c750b15cf2d310333c4804928b0c08c7d845dcd538783b7966283c","evidence":["research/frontier-38-owner-30-reader-8.md","research/frontier-38-owner-30-reader-findings-8.json","research/frontier-38-owner-30-dispatch/reader-reader-8.result.json","research/frontier-38-owner-30-step5-hash-8-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/lem-the-bgg-augmentation-has-image-the-simple-module.md","historical_raw_sha256":"073b481f643bf975c351037edc1f25d3ed2491cc9c3697d0d7b34ca77c81e6e8","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:35:41.081Z"}}
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

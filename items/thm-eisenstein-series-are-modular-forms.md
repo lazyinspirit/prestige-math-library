@@ -4,6 +4,19 @@ kind: theorem
 title: "Eisenstein series are modular forms; their Fourier coefficients"
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-21.md"
+      - "research/frontier-38-owner-30-alpha-batch-21-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-21-post.json"
+    reviewed_raw_sha256: "762816afa0455b4d8d18c88623e31f93bf7537e8aba5dff29af19c2e02bfc6f0"
+    content_sha256: "e8670a50fa0265e2b83f9be8698a070c286f513ae5b1043fce54010f95e21893"
 deps:
   - def-modular-group-action-on-the-upper-half-plane
   - def-level-one-modular-form-and-cusp-form

@@ -30,6 +30,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "historical complete Step5 reader plus completed current item adjudication proof read; item ex-signed-points-give-the-oriented-zero-bordism-invariant; evidence research/frontier-38-owner-30-reader-13.md, research/frontier-38-owner-30-reader-findings-13.json, research/frontier-38-owner-30-alpha-batch-13-5a-decisions.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
+    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

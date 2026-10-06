@@ -14,6 +14,16 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical full authored item reading and acceptance restored through exact saved source/git carrier comparison. Actual full item source extracted from adjudicator dispatch log lines12138 onward matches exact Step5 POST raw digest. Every prose paragraph, formula and reference is byte-identical to closed carrier; only body heading Normalization versus resolution became Remarks and verification.judge was added. Publication changes status only. Local repair reviews retain their recorded limits; no new independent audit is claimed."
+    evidence:
+      - "research/frontier-38-owner-30-alpha-batch-1-5a-decisions.json"
+      - "research/frontier-38-owner-30-alpha-batch-1-5a.md"
+    content_sha256: "6195e46e35d195b8295f09c3a4dd21361b01823310df064c8c85b2f8ba0bed6b"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

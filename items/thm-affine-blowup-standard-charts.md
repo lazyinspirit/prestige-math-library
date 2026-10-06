@@ -34,6 +34,17 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/01M3"
       locator: "Lemma 27.8.1 (degree-zero localization on overlaps), Lemmas 27.8.6-7 (affine standard opens), Lemma 27.8.10 (structural morphism)"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post-5a.json"
+    content_sha256: "35f3ac4480eef26d28050cd0a3a2f10f2629b043bd2d22a6430f3f42add34fdb"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

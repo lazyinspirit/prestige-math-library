@@ -56,7 +56,12 @@ $\operatorname{End}_{R\text{-}R}(R)=R$ is generated in degree $0$.
 ## Proof
 
 1.1 Reduction to the imported instance: by [F3] every object of $\mathrm{SBim}_n$ is a direct summand of a finite direct sum of shifts of Bott–Samelson bimodules, so it lies in the additive closure $\operatorname{add}\mathcal B$ and, by [F3] again, in $F_\Delta\cap F_\nabla$ with intrinsic multiplicities; both sides of the displayed formula are additive in each variable, because the multiplicities are additive over the layers of a support flag and the graded rank is additive over direct sums. It therefore suffices to invoke the imported identity [F2] for the pair $(M,N)$, which is the instance $M\in F_\Delta$, $N\in\operatorname{add}\mathcal B$ (the dual instance $M\in\operatorname{add}\mathcal B$, $N\in F_\nabla$ gives the same displayed expression and the same conclusion). [F2, F3]
+
 1.2 Freeness and rank: [F2] gives that $\operatorname{Hom}_{R\text{-}R}(M,N)$ is a graded free $R$-module of rank $\sum_{x,d,e}(M:\Delta_x(d))(N:\nabla_x(e))v^{d-e}$, the multiplicities being the intrinsic ones of [F3]; in particular $\operatorname{Hom}(M,M)$ is free of the same rank with $M=N$. [F2, F3]
+
 1.3 Consistency with the locally proved special case: for $M$ a Bott–Samelson bimodule the same formula is [F1], and the two agree because [F3] identifies the multiplicities used in [F2] with the multiplicities of the support flags of $M$ and $N$; [F3]'s localization input, the rank identities of [[lem-type-a-top-support-layers-are-controlled-by-reflection-localization]], exhibits the top layer of each flag as the corresponding hom space. [F1, F3]
+
 2.1 Hecke normalization: expanding the two characters by [F4] and using the bilinearity of the standard pairing with $\langle\widetilde T_x,\widetilde T_y\rangle=\delta_{xy}$ gives $\langle h_\Delta(M),h_\nabla(N)\rangle=\sum_{x,d,e}(M:\Delta_x(d))(N:\nabla_x(e))v^{d-e}$, which is the displayed rank, so the graded rank is the standard pairing of the two characters. [F4, step 1.2]
+
 3.1 Unit: for $M=N=R$ the two flags have the single quotient $\Delta_e(0)=\nabla_e(0)=R$, so the formula gives rank $v^0=1$ and $h_\Delta(R)=h_\nabla(R)=\widetilde T_e=1$, and $\operatorname{End}_{R\text{-}R}(R)=R$ is generated in degree $0$; the general case is [F2] together with the identification of step 2.1. ∎ [F2, step 1.2, step 2.1]
+

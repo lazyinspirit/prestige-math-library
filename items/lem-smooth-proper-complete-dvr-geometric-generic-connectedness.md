@@ -19,6 +19,18 @@ deps:
   - thm-regular-local-rings-are-normal
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-30.md"
+      - "research/frontier-38-owner-30-alpha-batch-30-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-30-post.json"
+    reviewed_raw_sha256: "5f4edb8b2fb590dd2b042e8b3979d5906581285138460e4e54a5480eeba81d9c"
+    content_sha256: "60503f3b4361d25699519ffa29b503281a96e1786e294f01ebffd4dcbd51f7cb"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

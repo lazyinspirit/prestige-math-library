@@ -48,8 +48,7 @@ $$|f|^2=c\,|g|^2\qquad\mu\text{-almost everywhere}.$$
 
 **Proof technique:** Specialize Holder to $p=q=2$, and inherit the equality clause from the strict-exponent equality theorem.
 
-1.1 The exponent $2$ is conjugate to itself, so [L1] with $p=q=2$ gives [L1]
-$$\int |fg|\,d\mu\le\|f\|_2\|g\|_2.$$
+1.1 The exponent $2$ is conjugate to itself, so [L1] with $p=q=2$ gives [L1] $$\int |fg|\,d\mu\le\|f\|_2\|g\|_2.$$ [L1]
 
-2.1 Because $2>1$, the equality clause is exactly the specialization of [L2] to [L2, step 1.1]
-$p=q=2$. ∎
+2.1 Because $2>1$, the equality clause is exactly the specialization of [L2] to [L2, step 1.1] $p=q=2$. [L2, step 1.1] ∎
+

@@ -21,6 +21,17 @@ deps:
 - thm-riemann-stieltjes-linearity-and-additivity
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-6.md"
+      - "research/frontier-38-owner-30-alpha-batch-6-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-6-post-5a.json"
+    content_sha256: "1393cfc0f237eb4d68edfe959c0af33a55446f5aabf2317e930c909462876158"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -30,6 +30,18 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf"
       locator: "19.2 proper transform; 19.4.3 computation of total and proper transforms, pp. 389-390"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post.json"
+    reviewed_raw_sha256: "8575093042026f8022a4a4629fc41a6963389e1aa2c34a0dbcd7dc9838dfadca"
+    content_sha256: "4a4a2d4c5888ada0cd5a66236829f3aed300f25c78b223c5caad975b236cd1b9"
   precheck: n/a
 ---
 

@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-17.md"
+      - "research/frontier-38-owner-30-alpha-batch-17-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-17-post-5a.json"
+    content_sha256: "25a1800f49735e8665e63f487793d14eb4e42301f850dde9c6bfec6ea88d93a6"
 id: ex-a-markov-stabilization-preserves-the-unknot-closure
 kind: example
 title: "A Markov stabilization preserves the unknot closure"

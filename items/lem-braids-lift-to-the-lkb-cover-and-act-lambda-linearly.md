@@ -21,6 +21,17 @@ sources:
       url: "https://arxiv.org/pdf/math/0204057"
       locator: "Section 2.1, printed p. 3: the same lifting statement and the Lambda-module automorphism f_* of H_2(C-tilde)"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-16.md"
+      - "research/frontier-38-owner-30-alpha-batch-16-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-16-post-5a.json"
+    content_sha256: "557cb5aa9d640ad6da2051bf3214e45280a88146477ab3575c5a60c57b0e6cb1"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

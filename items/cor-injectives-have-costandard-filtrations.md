@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-7.md"
+      - "research/frontier-38-owner-30-alpha-batch-7-5a.md"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u7.json"
+    content_sha256: "ac5c473fef6d1d61fd568ce1d94d1b3196fa9d127f09fec5c0cc655939d220a2"
 id: cor-injectives-have-costandard-filtrations
 kind: corollary
 title: Injectives have costandard filtrations

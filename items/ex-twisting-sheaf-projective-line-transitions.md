@@ -60,5 +60,5 @@ local generators of the invertible sheaf $\mathcal O(n)$
 
 2.1 The overlap. On the overlap $D_+(x_0x_1)$ the ring is $k[t,t^{-1}]$ with $t=x_1/x_0$, so $x_1=tx_0$ and therefore $x_1^{\,n}=t^{\,n}x_0^{\,n}$ holds in the localisation of $S$ at $x_0x_1$ for every integer $n$, positive or negative; under the identifications of step 1.1 this is precisely the frame relation $$e_1=t^{\,n}e_0$$ on $U_0\cap U_1$. [F1, F2, step 1.1, algebra]
 
-3.1 Conclusion. The frame section $e_i$ is nowhere vanishing on $U_i$, and the transition relation $e_1=t^ne_0$ is exactly the change of frame of the invertible sheaf $\mathcal O(n)$ from the $0$-chart to the $1$-chart: for $n=0$ both frames are the constant function $1$ and the relation is $e_1=e_0$; for $n=1$ it is $e_1=te_0$; for $n=-1$ it is $e_1=t^{-1}e_0$ with $t^{-1}=x_0/x_1$ the coordinate on $U_1$. [F2, F3, step 1.1, step 2.1, cases: n=0 and negative n]
-\qed
+3.1 Conclusion. The frame section $e_i$ is nowhere vanishing on $U_i$, and the transition relation $e_1=t^ne_0$ is exactly the change of frame of the invertible sheaf $\mathcal O(n)$ from the $0$-chart to the $1$-chart: for $n=0$ both frames are the constant function $1$ and the relation is $e_1=e_0$; for $n=1$ it is $e_1=te_0$; for $n=-1$ it is $e_1=t^{-1}e_0$ with $t^{-1}=x_0/x_1$ the coordinate on $U_1$. [F2, F3, step 1.1, step 2.1, cases: n=0 and negative n] \qed [F2, F3, step 1.1, step 2.1, cases: n=0 and negative n]
+

@@ -8,6 +8,17 @@ deps: [def-unordered-configuration-space]
 dependency_level: 0
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-16.md"
+      - "research/frontier-38-owner-30-alpha-batch-16-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-16-post-5a.json"
+    content_sha256: "a1bb396455627e0e6d2571b22a427e4d1286096590cd07a9720e3074c1f20cb9"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

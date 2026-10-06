@@ -24,6 +24,18 @@ sources:
       url: "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
       locator: "Section 3.2, printed p. 482, final paragraph: <N_1,F> = -q and <N,(Delta^2)^k(F)> = -q(q^{2n}t^2)^k in the source's sign convention"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-16.md"
+      - "research/frontier-38-owner-30-alpha-batch-16-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-16-post.json"
+    reviewed_raw_sha256: "5ea9656fa438bb11006672f4ad5ff16bc12ff49aa77209bc7f4e5a7c9fc82c0c"
+    content_sha256: "05e064b6816c686903e571471db53a8d720421944b9ed4e0d4eadcc7dddebd8a"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

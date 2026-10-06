@@ -1,0 +1,1635 @@
+[
+  {
+    "order": 891,
+    "id": "split-reductive-root-systems-bruhat-cells-and-parabolics",
+    "kind": "A",
+    "category": "algebraic-geometry",
+    "title": "Split Reductive Root Systems, Bruhat Cells, and Parabolics",
+    "companion": "split-reductive-root-systems-bruhat-cells-and-parabolics-examples",
+    "requires": [
+      "group-schemes-of-finite-type-over-a-field",
+      "affine-group-schemes-hopf-algebras-and-rational-representations",
+      "lie-algebras-and-infinitesimal-group-schemes",
+      "groups-of-multiplicative-type-and-arithmetic-tori",
+      "unipotent-solvable-groups-and-borel-fixed-points",
+      "algebraic-group-actions-orbits-stabilizers-and-controlled-quotients",
+      "nonaffine-algebraic-groups-barsotti-chevalley-and-abelian-varieties",
+      "root-systems-dynkin-diagrams-and-cartan-killing-classification"
+    ],
+    "items": [
+      {
+        "id": "def-radical-and-unipotent-radical-of-an-algebraic-group",
+        "kind": "definition",
+        "title": "Radical, unipotent radical, semisimple and reductive algebraic groups",
+        "deps": [
+          "def-group-scheme-over-a-field",
+          "def-derived-subgroup-and-solvable-algebraic-group",
+          "def-unipotent-algebraic-group",
+          "def-rational-representation-and-comodule-of-an-affine-group-scheme",
+          "def-borel-subgroup-and-maximal-torus"
+        ],
+        "statement": "Let $k$ be a field and let $G$ be a smooth connected affine algebraic group of finite type over $k$ ([[def-group-scheme-over-a-field]]). Its **radical** $R(G)$ is the largest smooth connected normal solvable closed subgroup scheme, and its **unipotent radical** $R_u(G)$ is the largest smooth connected normal unipotent closed subgroup scheme ([[def-derived-subgroup-and-solvable-algebraic-group]], [[def-unipotent-algebraic-group]]). These are subgroup varieties: arbitrary infinitesimal normal subgroups are not included in the maximization. One has $R_u(G)\\subseteq R(G)$, because unipotent groups are solvable.\n\nThe group is **semisimple** if $R(G_{k^{\\mathrm a}})=1$, and **reductive** if $R_u(G_{k^{\\mathrm a}})=1$. The smoothness, connectedness and affineness requirements are part of these terms. Over a perfect field, and in particular an algebraically closed field, reductivity is equivalent to $R_u(G)=1$. Over an imperfect field the condition $R_u(G)=1$ alone is weaker; such a smooth connected affine group is called **pseudo-reductive**, and pseudo-reductivity does not imply reductivity.\n\nFormation of both radicals commutes with separable algebraic field extensions (Milne Propositions 19.1 and 19.9). Consequently, if $k$ is perfect, $R_u(G)_{k^{\\mathrm a}}=R_u(G_{k^{\\mathrm a}})$ and the analogous equality holds for $R(G)$. These equalities are not asserted for general purely inseparable extensions. The geometric definition of reductivity is retained precisely to handle that distinction.\n\nThe **rank** of $G$ is the dimension of a maximal torus ([[def-borel-subgroup-and-maximal-torus]]), and its **semisimple rank** here is the rank of the smooth connected affine quotient $G/R(G)$. Maximal tori exist, remain maximal under field extension, and are geometrically conjugate, so their dimensions are independent of the choice. If $k$ is perfect, $G/R(G)$ is semisimple; this also holds over every field when $G$ is reductive, because then $R(G)$ is the largest central torus and commutes with every base extension ([[lem-reductive-center-radical-and-semisimple-quotient]]). No assertion that $G/R(G)$ is geometrically semisimple for every nonreductive $G$ over an imperfect field is made.\n\nThe largest-subgroup property gives uniqueness. Existence follows by taking products of smooth connected normal subgroups with the relevant property: such products are again smooth connected normal, and remain solvable, respectively unipotent; a strict increase of a connected subgroup variety increases dimension, so a finite product attains the maximum dimension and contains every such subgroup. Over an algebraically closed field the radical is also the reduced identity component of the intersection of all Borel subgroups, as proved in [[thm-solvable-subgroups-and-the-radical-as-borel-intersection]]. All representation-theoretic statements below concern affine groups, so the rational-representation/comodule dictionary applies ([[def-rational-representation-and-comodule-of-an-affine-group-scheme]]).",
+        "strategy": "Record the provided core objects and constructions from the current Definition. Supplemental structural assertions carry exactly the local AC qualifications displayed there; the formal core retains its stated choice scope.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 6 (6.44)-(6.47), printed pp. 135-137 (geometric definitions of radical, unipotent radical, semisimple, reductive and pseudo-reductive); Ch. 19 (19.20)-(19.22)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": false,
+        "dependency_level": 5,
+        "justified_by": [
+          "thm-solvable-subgroups-and-the-radical-as-borel-intersection",
+          "lem-reductive-center-radical-and-semisimple-quotient"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-character-and-cocharacter-lattices-of-a-split-torus",
+        "kind": "lemma",
+        "title": "Character and cocharacter lattices of a split torus",
+        "deps": [
+          "def-group-of-multiplicative-type-and-torus",
+          "def-diagonalizable-group-and-character-module",
+          "lem-diagonalizable-character-antiequivalence"
+        ],
+        "statement": "Let $T$ be a split torus over $k$, so that $T\\cong D_k(M)$ for a free abelian group $M$ of finite rank ([[def-group-of-multiplicative-type-and-torus]], [[def-diagonalizable-group-and-character-module]]). Then the character group $X(T)=\\operatorname{Hom}_k(T,\\mathbf G_m)$ is canonically isomorphic to $M$, the cocharacter group $X_*(T)=\\operatorname{Hom}_k(\\mathbf G_m,T)$ is canonically isomorphic to the dual lattice $M^\\vee=\\operatorname{Hom}(M,\\mathbb Z)$, and the pairing $X(T)\\times X_*(T)\\to\\mathbb Z$, $(\\chi,\\lambda)\\mapsto\\langle\\chi,\\lambda\\rangle$, defined by $\\chi\\circ\\lambda\\in\\operatorname{Hom}_k(\\mathbf G_m,\\mathbf G_m)=\\mathbb Z$, is a perfect $\\mathbb Z$-bilinear pairing identifying $X_*(T)$ with $X(T)^\\vee$. Both lattices are free of finite rank equal to $\\dim T$, and the identifications and the pairing commute with extension of scalars. In particular $X(T)\\otimes_{\\mathbb Z}\\mathbb Q$ and $X_*(T)\\otimes_{\\mathbb Z}\\mathbb Q$ are $\\mathbb Q$-vector spaces in perfect duality.",
+        "strategy": "Apply the diagonalizable anti-equivalence [[lem-diagonalizable-character-antiequivalence]]: $X(D_k(M))=M$ and $\\operatorname{Hom}_k(D_k(N),D_k(M))=\\operatorname{Hom}(M,N)$, so $X_*(T)=\\operatorname{Hom}_k(\\mathbf G_m,T)=\\operatorname{Hom}(M,\\mathbb Z)$. The pairing is the composite character, and it lands in $\\operatorname{Hom}_k(\\mathbf G_m,\\mathbf G_m)=\\mathbb Z$; nondegeneracy is biduality for free lattices. Choice-free.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 12 (12.7)-(12.8) and (12.11)-(12.12); Appendix C (C.3)-(C.5)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S6.5, Definitions 177"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-split-reductive-algebraic-group",
+        "kind": "definition",
+        "title": "Split reductive groups",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-diagonalizable-character-antiequivalence",
+          "def-radical-and-unipotent-radical-of-an-algebraic-group",
+          "def-group-of-multiplicative-type-and-torus",
+          "def-borel-subgroup-and-maximal-torus",
+          "lem-maximal-tori-extension-conjugacy-and-derived-group",
+          "lem-character-and-cocharacter-lattices-of-a-split-torus",
+          "lem-adjoint-representation-of-an-affine-group-scheme",
+          "thm-lie-bracket-and-adjoint-action-from-infinitesimals",
+          "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces"
+        ],
+        "statement": "A **split reductive group** over $k$ is a pair $(G,T)$ consisting of a reductive algebraic group $G$ over $k$ ([[def-radical-and-unipotent-radical-of-an-algebraic-group]]) and a maximal torus $T\\subseteq G$ that is split, i.e. isomorphic over $k$ to $\\mathbf G_m^r$ for some $r$ ([[def-group-of-multiplicative-type-and-torus]], [[def-borel-subgroup-and-maximal-torus]]). \n\nThe following supplemental existence and field-invariance facts assume the Axiom of Choice ([[def-axiom-of-choice]]) through their cited suppliers. Since maximal tori exist, any torus lies in one, and maximality is preserved by field extension ([[lem-maximal-tori-extension-conjugacy-and-derived-group]]), the rank $\\dim T$ and the semisimple rank $\\operatorname{rk}(G/R(G))$ are well defined. A homomorphism of split reductive groups $(G,T)\\to(G',T')$ is a homomorphism of algebraic groups carrying $T$ into $T'$. Because $G$ is affine of finite type, the adjoint representation $\\operatorname{Ad}:G\\to\\operatorname{GL}_{\\mathfrak g}$ ([[lem-adjoint-representation-of-an-affine-group-scheme]], [[thm-lie-bracket-and-adjoint-action-from-infinitesimals]]) restricts to a rational representation of $T$ on $\\mathfrak g=\\operatorname{Lie}(G)$, to which the eigenspace decomposition of diagonalizable groups applies ([[lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces]]). We write $X=X(T)$, $X^\\vee=X_*(T)$ for the lattices of [[lem-character-and-cocharacter-lattices-of-a-split-torus]]. Every reductive group splits over a finite separable extension of the base field; the split hypothesis is kept throughout.\n\nUnder this same assumption, the rank of $(G,T)$ is the common dimension of its maximal tori and the semisimple rank is the rank of the semisimple quotient $G/R(G)$; both are additive invariants of the pair. The split hypothesis is exactly the requirement that the character lattice $X(T)$ be a free $\\mathbb Z$-module with trivial Galois action, which is why the root datum of $(G,T)$ is defined over $k$ rather than only over a finite extension. A homomorphism of split reductive groups need not carry $T$ isomorphically onto $T'$; the induced map on character lattices is then only a homomorphism. An isogeny carrying $T$ onto $T'$ induces an injective character-lattice map with finite cokernel, by the split character anti-equivalence ([[lem-diagonalizable-character-antiequivalence]]); it need not induce an isomorphism even if the two groups have the same abstract root datum. For example, the isogeny $t\\mapsto t^p$ of $\\mathbf G_m$ in characteristic $p$ induces multiplication by $p$ on its character lattice $\\mathbb Z$.",
+        "strategy": "Record the provided core objects and constructions from the current Definition. Supplemental structural assertions carry exactly the local AC qualifications displayed there; the formal core retains its stated choice scope.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Definitions 19.20 and 19.22, printed pp. 401-403; Ch. 17 (17.82)-(17.85); Ch. 10 (10.20)-(10.24)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S6.1-S6.2, pp. 66-74; S6.5 Definitions 177"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "S4.1, in particular the definition of a reductive group scheme and Theorem 4.1.4"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 19,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-reductive-center-radical-and-semisimple-quotient",
+        "kind": "lemma",
+        "title": "Centre, radical and semisimple quotient of a reductive group",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-split-reductive-algebraic-group",
+          "def-radical-and-unipotent-radical-of-an-algebraic-group",
+          "thm-maximal-tori-in-smooth-connected-solvable-groups-are-conjugate",
+          "lem-derived-subgroup-properties",
+          "def-derived-subgroup-and-solvable-algebraic-group",
+          "thm-nonaffine-affine-normal-group-quotient-affine",
+          "lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties",
+          "lem-nonaffine-group-image-exact-quotient-properties",
+          "lem-nonaffine-reduced-neutral-subgroup-over-perfect-field",
+          "lem-maximal-tori-extension-conjugacy-and-derived-group",
+          "thm-chevalley-centralizer-radical-and-reductive-centralizers",
+          "thm-multiplicative-type-groups-and-galois-character-modules",
+          "lem-diagonalizable-character-antiequivalence",
+          "def-group-of-multiplicative-type-and-torus",
+          "lem-nonaffine-affine-group-faithful-representation",
+          "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $G$ be a reductive algebraic group over $k$ ([[def-split-reductive-algebraic-group]]) and let $T$ be a maximal torus of $G$. Then: (a) $Z(G)\\subseteq T$ for every maximal torus $T$, and $Z(G)$ is of multiplicative type ([[def-group-of-multiplicative-type-and-torus]]); (b) $R(G)=Z(G)_t$ is the largest subtorus of $Z(G)$ (not the full possibly nonreduced neutral component), its formation commutes with every extension of the base field, and the quotient $G/R(G)$ is semisimple; (c) $G/Z(G)$ has trivial centre; (d) the semisimple rank of $G$ equals $\\operatorname{rk}G-\\dim Z(G)$; (e) with $G'$ the derived subgroup ([[def-derived-subgroup-and-solvable-algebraic-group]]), $Z(G)_t\\cap G'$ is finite, $G=Z(G)_t\\cdot G'$ and the multiplication map $Z(G)_t\\times G'\\to G$ is surjective with finite kernel, and $G'$ is semisimple; (f) $G$ is semisimple iff $R(G)=1$ iff $Z(G)$ is finite. The quotient $G/R(G)$ is the represented normal affine quotient ([[thm-nonaffine-affine-normal-group-quotient-affine]]); it is smooth and connected by [[lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties]].",
+        "strategy": "Direct proof on the current carrier: 1.1, 1.2, 2.1, 2.2, 3.1, 4.1, 4.2, 5.1; By [F3], $C_G(T)=T$ for every maximal torus, and the scheme centre lies in each such centralizer. Hence $Z(G)\\subseteq T$. By [F4] the centre is of multiplicative type, proving (a). Its largest torus $Z(G)_t$ is central, smooth connected normal and solvable, so lies in $R(G)$. Conversely pass to algebraic closure. The unipotent radical of the smooth connected solvable group $R(G)_{k^{\\mathrm a}}$ is characteristic there and normal in $G_{k^{\\mathrm a}}$: conjugation preserves it on points by uniqueness, and smoothness makes this pointwise inclu",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 12 (12.22), (12.29), (12.37)-(12.38), (12.46); Ch. 17 (17.61)-(17.62); Ch. 19 (19.10)-(19.12) and (19.21)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S6.1, Proposition 153 and Corollary 158, pp. 66-68"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 20,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-lie-functor-exactness-fixed-points-and-generation",
+        "kind": "lemma",
+        "title": "The Lie functor: exactness, fixed points and generation",
+        "deps": [
+          "def-lie-algebra-of-a-group-scheme",
+          "lem-lie-algebra-tangent-space-and-functoriality",
+          "lem-adjoint-representation-of-an-affine-group-scheme",
+          "def-closed-immersion-schemes"
+        ],
+        "statement": "Let $G$ be an algebraic group over $k$ with Lie algebra $\\mathfrak g$ ([[def-lie-algebra-of-a-group-scheme]]), and let $H,H_1,H_2$ be algebraic subgroups. (a) For a finite inverse system $(G_i)$ of algebraic groups, $\\operatorname{Lie}(\\varprojlim G_i)\\cong\\varprojlim\\operatorname{Lie}(G_i)$; in particular $\\operatorname{Lie}$ is left exact on exact sequences and $\\operatorname{Lie}(H_1\\times_G H_2)=\\operatorname{Lie}(H_1)\\times_{\\operatorname{Lie}(G)}\\operatorname{Lie}(H_2)$, so if $H_1,H_2\\subseteq G$ then $\\operatorname{Lie}(H_1\\cap H_2)=\\operatorname{Lie}(H_1)\\cap\\operatorname{Lie}(H_2)$ ([[lem-lie-algebra-tangent-space-and-functoriality]]). (b) If $\\operatorname{Lie}(H)=\\operatorname{Lie}(G)$, $H$ is smooth and $G$ is connected, then $H=G$; if the Lie algebras of smooth subgroups $H_1,\\dots,H_n$ generate $\\mathfrak g$ as a Lie algebra and $G$ is connected, then the $H_i$ generate $G$. (c) If $H$ acts on $G$ by conjugation, then $\\operatorname{Lie}(C_G(H))=\\mathfrak g^H$ and $\\operatorname{Lie}(N_G(H))/\\operatorname{Lie}(H)=(\\mathfrak g/\\operatorname{Lie}(H))^H$; in particular $\\dim C_G(H)\\le\\dim\\mathfrak g^H$, with equality iff $C_G(H)$ is smooth.",
+        "strategy": "Milne 10.14 (exactness and fibred products), 10.15-10.17 (equality and generation from Lie algebras) and 10.34 (fixed points and normalizers), with the tangent-space functoriality of batch 14. The proofs are formal from the description $\\operatorname{Lie}(G)(R)=\\ker(G(R[\\varepsilon])\\to G(R))$; (b) uses $\\dim\\operatorname{Lie}(G)\\ge\\dim G$ with equality iff $G$ is smooth (Milne 1.37).",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 10 (10.14)-(10.17) and (10.34), printed pp. 191-192 and 197-198; (1.36)-(1.37) and (2.51)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-limit-of-a-gm-orbit-and-concentrator-subscheme",
+        "kind": "definition",
+        "title": "Limits of one-parameter orbits and concentrator subschemes",
+        "deps": [
+          "def-algebraic-group-action-and-scheme-theoretic-stabilizer",
+          "def-separated-scheme-over-base",
+          "def-morphism-of-schemes",
+          "def-affine-scheme",
+          "def-ideal-sheaf"
+        ],
+        "statement": "Let $X$ be a separated $k$-scheme of finite type with an action of $\\mathbf G_m$ ([[def-algebraic-group-action-and-scheme-theoretic-stabilizer]]), and let $Z\\subseteq X$ be a $\\mathbf G_m$-stable closed subscheme. For a morphism $\\varphi:\\mathbf G_m\\times_k X_0\\to X$, the limit $\\lim_{t\\to0}\\varphi(t)$ exists if $\\varphi$ extends to a morphism $\\mathbf A^1\\times X_0\\to X$, in which case the extension and its value at $0$ are unique by separatedness; for a point $x\\in X(R)$ one writes $tx$ for the orbit map and asks that $t\\mapsto tx$ extend over $\\mathbf A^1_R$. When $X=\\operatorname{Spec}A$ is affine, the action is a $\\mathbb Z$-gradation $A=\\bigoplus_{n\\in\\mathbb Z}A_n$ and $\\lim_{t\\to0}tx$ exists iff $f_n(x)=0$ for all $f_n\\in A_n$ with $n<0$; the **concentrator subscheme** $X(Z)$ is the closed subscheme defined by the ideal generated by $A_0\\cap\\mathfrak a+\\sum_{n<0}A_n$, where $\\mathfrak a=\\ker(A\\to A(Z))$ is the graded ideal of $Z$. The associated functor sends $R$ to the set of $x\\in X(R)$ with $\\lim_{t\\to0}tx\\in Z(R)$.",
+        "strategy": "Definition record following Milne 13.17-13.21 and Conrad S4.1: the limit convention via extensions of orbit maps (Milne pp. 258-259), the gradation of an affine $\\mathbf G_m$-scheme, and Definition 13.21 of the concentrator subscheme. The functor-of-points description is stated here and proved in [[thm-concentrator-subscheme-representability-and-smoothness]]. No representability is asserted by the definition itself.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 13 (13.17)-(13.21), printed pp. 258-261"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "S4.1, discussion before Theorem 4.1.7 and [CGP, Lemma 2.1.4-2.1.5] cited there"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-concentrator-subscheme-representability-and-smoothness",
+        "kind": "theorem",
+        "title": "Representability and smoothness of concentrator subschemes",
+        "deps": [
+          "def-limit-of-a-gm-orbit-and-concentrator-subscheme",
+          "def-affine-scheme",
+          "def-separated-scheme-over-base",
+          "thm-global-sections-affine-scheme",
+          "thm-morphisms-into-affine-scheme-global-sections",
+          "lem-graded-nakayama",
+          "def-reduction-of-scheme",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $X$ be a separated $k$-scheme of finite type with a locally affine action of $\\mathbf G_m$ and let $Z\\subseteq X$ be a $\\mathbf G_m$-stable closed subscheme ([[def-limit-of-a-gm-orbit-and-concentrator-subscheme]]). Then the concentrator functor $R\\mapsto\\{x\\in X(R): \\lim_{t\\to0}tx\\text{ exists and lies in }Z(R)\\}$ is representable by a scheme $X(Z)$; its realization morphism $i:X(Z)\\to X$ is a local immersion and the limit morphism $p:X(Z)\\to Z$ is affine. If $X$ and $Z$ are smooth, then $X(Z)$ is smooth and $i$ identifies its geometric points with the indicated limit locus. If $X$ is affine, $i$ is a closed immersion; if $X$ and $Z$ are also smooth, $X(Z)$ is the unique smooth closed subscheme with that locus. The construction and the pair $(X(Z),p)$ commute with extension of the base field and with $\\mathbf G_m$-equivariant morphisms, and for the conjugation action of $\\mathbf G_m$ on a smooth affine group $G$ the scheme $G(\\{g:\\lim_{t\\to0}t\\cdot g=e\\})$ is a normal algebraic subgroup of $P_G(\\lambda)$.",
+        "strategy": "Milne 13.22-13.27: the affine case is proved by the graded Nakayama lemmas 13.25-13.27 and the regular-local-ring criterion 13.22; the general separated case is Proposition 13.58, by glueing the affine concentrators over a $\\mathbf G_m$-stable affine cover, with the limit morphism affine. Smoothness and uniqueness in the smooth case are 13.23. Equivariance and base change are immediate from the functorial description. The group case is Milne 13.28-13.29. AC is inherited from the geometric suppliers.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 13 (13.22)-(13.27) and (13.57)-(13.58), printed pp. 261-263 and 288-289"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "S4.1: existence of $P_G(\\lambda)$ and $U_G(\\lambda)$ as closed subgroup schemes via [CGP, Lemma 2.1.4-2.1.5]"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-graded-nakayama",
+        "kind": "lemma",
+        "title": "Graded Nakayama lemma",
+        "deps": [
+          "def-noetherian-ring",
+          "def-local-ring",
+          "def-krull-dimension-of-a-ring",
+          "def-embedding-dimension-and-regular-local-ring"
+        ],
+        "statement": "Let $A=\\bigoplus_{n\\in\\mathbb Z}A_n$ be a Noetherian graded commutative ring whose degree-zero part $A_0$ is local with maximal ideal $\\mathfrak m_0$, and assume that $\\mathfrak m=\\mathfrak m_0\\oplus\\bigoplus_{n\\neq0}A_n$ is an ideal of $A$. It is then a homogeneous maximal ideal, since $A/\\mathfrak m=A_0/\\mathfrak m_0$. For a finitely generated graded $A$-module $M$, the following are equivalent: (a) $M=\\mathfrak mM$; (b) $M_{\\mathfrak m}=0$; (c) $M=0$. More generally, if $N\\subseteq M$ are finitely generated graded $A$-modules, then $M=N+\\mathfrak mM$ iff $M_{\\mathfrak m}=N_{\\mathfrak m}$ iff $M=N$. If moreover $\\mathfrak a\\neq A$ is a graded ideal and $\\mathfrak b$ is the ideal generated by $\\mathfrak a_0+\\sum_{n<0}A_n$, then regularity of $A_{\\mathfrak m}$ and $(A/\\mathfrak a)_{\\mathfrak m}$ implies regularity of $(A/\\mathfrak b)_{\\mathfrak m}$.",
+        "strategy": "Milne 13.25-13.27: Nakayama for graded modules with local degree-zero part (writing $a=\\sum a_n$ with $a_0$ invertible), and Hesselink's comparison of embedding dimensions for the regular-local-ring statement 13.27. Standard commutative algebra, cited for completeness.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 13 (13.25)-(13.27), printed pp. 262-264; (13.2b)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fixed-point-schemes-and-centralizers-of-linearly-reductive-actions",
+        "kind": "theorem",
+        "title": "Fixed-point subschemes and centralizers of linearly reductive actions",
+        "deps": [
+          "thm-completion-is-exact-on-finite-modules",
+          "thm-associated-graded-ring-of-a-regular-local-ring",
+          "thm-krull-intersection-theorem",
+          "thm-multiplicative-type-groups-and-galois-character-modules",
+          "lem-smooth-finite-type-schemes-have-schematically-dense-rational-points",
+          "lem-nonaffine-affine-group-faithful-representation",
+          "def-algebraic-group-action-and-scheme-theoretic-stabilizer",
+          "def-smooth-morphism-schemes",
+          "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces",
+          "lem-multiplicative-type-groups-are-linearly-reductive",
+          "lem-regular-system-of-parameters-equivalent-basis",
+          "def-reduction-of-scheme",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice where the geometric suppliers of the named items use it. Let $G$ be a linearly reductive group variety over $k$ acting on a smooth variety $X$. Then the fixed-point subscheme $X^G$ is smooth (Milne, Ch. 13); if $S\\subseteq G(k)$ is Zariski-dense then $X^S=X^G$ and both are smooth (13.5-13.7); if $k$ is algebraically closed and $g\\in G(k)$ is semisimple, then the closure of the subgroup generated by $g$ is linearly reductive and $X^g=X^{G_0}$ is smooth (13.8). In particular, if a linearly reductive group $H$ acts on a smooth algebraic group $G$, then $G^H=C_G(H)$ is smooth (13.9), and for a subgroup $H\\subseteq G$ of multiplicative type the centralizer $C_G(H)$ and normalizer $N_G(H)$ are smooth, with no smoothness assumption on $H$. If $H$ is smooth, its geometric points are schematically dense, and these are also the unique smooth closed subgroup schemes whose geometric points are the centralizer and normalizer of $H(k^{\\mathrm a})$ (13.10-13.11). The pointwise identification is not asserted for nonsmooth $H$: for $H=\\mu_p$ embedded by $t\\mapsto\\operatorname{diag}(t,1)$ in $\\mathrm{GL}_2$ in characteristic $p$, $H(k^{\\mathrm a})=1$ but $C_G(H)$ is the diagonal torus.\n\n",
+        "strategy": "Direct proof on the current carrier: 1.1, 1.2, 2.1, 3.1, 4.1, 5.1; Let a linearly reductive algebraic group $H$ fix $x\\in X(\\bar k)$, write $A=\\mathcal O_{X_{\\bar k},x}$ with maximal ideal $\\mathfrak m$, and let $V=\\mathfrak m/\\mathfrak m^2$. Each jet $\\mathfrak m/\\mathfrak m^n$ is a finite-dimensional rational $H$-module. Complete reducibility [F2] makes the projection between successive jets split equivariantly. Starting with the identity on $V$, choose compatible equivariant lifts $V\\to\\mathfrak m/\\mathfrak m^n$ recursively; the existing AC premise permits this countable choice. Their inverse limit gives eq",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 13 (13.1)-(13.11), printed pp. 255-258; Ch. 12 (12.30) and (12.40)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S5.2, Corollary 123 and Proposition 144"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-fixed-loci-and-centralizers-of-torus-actions-are-connected",
+        "kind": "lemma",
+        "title": "Connectedness of fixed loci and centralizers of torus actions",
+        "deps": [
+          "thm-chevalley-constructible-image-varieties",
+          "prop-faithfully-flat-orbit-map-represents-coset-quotient",
+          "def-axiom-of-choice",
+          "def-borel-subgroup-and-maximal-torus",
+          "def-group-of-multiplicative-type-and-torus",
+          "thm-fixed-point-schemes-and-centralizers-of-linearly-reductive-actions",
+          "lem-lie-functor-exactness-fixed-points-and-generation",
+          "lem-nonaffine-affine-group-faithful-representation",
+          "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces",
+          "thm-borel-and-maximal-torus-conjugacy-over-algebraically-closed-field",
+          "thm-quotient-by-a-borel-subgroup-is-complete",
+          "thm-trigonalizable-extensions-split-over-algebraically-closed-fields",
+          "thm-maximal-tori-in-smooth-connected-solvable-groups-are-conjugate",
+          "lem-nonaffine-subgroup-scheme-stabilizer-of-line",
+          "thm-homogeneous-space-for-smooth-affine-group",
+          "thm-borel-fixed-point-for-complete-schemes",
+          "lem-nilpotent-group-structure-and-maximal-torus-criterion",
+          "lem-central-ga-subgroup-of-smooth-connected-unipotent-group",
+          "thm-nonaffine-affine-normal-group-quotient-affine",
+          "thm-global-functions-proper-integral-variety",
+          "thm-morphisms-into-affine-scheme-global-sections",
+          "lem-ag-flat-local-regularity-ascent-descent"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let a torus $S$ act by group automorphisms on a smooth connected group variety $G$ over $k$. Its fixed subgroup $G^S$ is smooth and $\\operatorname{Lie}(G^S)=\\mathfrak g^S$. If $G$ is affine, $G^S$ is also connected. In particular, the centralizer $C_G(S)$ of a torus subgroup $S\\subseteq G$ is smooth and connected when $G$ is smooth connected affine. For a maximal torus $T$ of such an affine $G$, the Cartan subgroup $C_G(T)$ is smooth connected nilpotent and satisfies $C_G(T)=N_G(C_G(T))^\\circ$. If $S\\subseteq B$ for a Borel subgroup $B$ of a smooth connected affine $G$ ([[def-borel-subgroup-and-maximal-torus]]), then $C_G(S)\\cap B$ is a Borel subgroup of $C_G(S)$. For an external action, $G^S$ denotes the fixed subgroup; the notation $C_G(S)$ is reserved for subgroup conjugation.",
+        "strategy": "Direct proof on the current carrier: 1.1, 1.2, 2.1, 2.2, 2.3, 3.1, 3.2; Smoothness of $G^S$ follows from [F1], without affineness. The dual-number fixed condition at the identity is precisely invariance in the tangent representation, so $\\operatorname{Lie}(G^S)=\\mathfrak g^S$. This also gives the centralizer formula when $S$ acts by subgroup conjugation.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 13 (13.9)-(13.10); Ch. 16 (16.47); Ch. 17 (17.28), (17.38)-(17.40), (17.46), (17.72)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S5.2, Proposition 144, pp. 58-63; S6.1, Corollary 158, p. 68"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 14,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-nilpotent-group-structure-and-maximal-torus-criterion",
+        "kind": "lemma",
+        "title": "Structure of connected nilpotent groups and the maximal-torus criterion",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-unipotent-algebraic-group",
+          "thm-unipotent-group-triangular-criterion",
+          "lem-upper-unitriangular-central-series",
+          "lem-unipotent-and-diagonalizable-intersection-is-trivial",
+          "def-group-of-multiplicative-type-and-torus",
+          "thm-lie-kolchin-for-smooth-connected-solvable-groups",
+          "def-trigonalizable-algebraic-group",
+          "thm-nonaffine-affine-normal-group-quotient-affine"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. (a) Let $G$ be a connected nilpotent affine algebraic group over $k$; then $Z(G)_s$, the largest subgroup of the centre of multiplicative type, is the largest algebraic subgroup of $G$ of multiplicative type ([[def-group-of-multiplicative-type-and-torus]]), it is central and characteristic, and $G/Z(G)_s$ is unipotent ([[def-unipotent-algebraic-group]]); if $G$ is smooth then $Z(G)_s$ is a torus, and over a perfect field the smooth connected nilpotent groups are exactly the products $U\\times T$ with $U$ smooth connected unipotent and $T$ a torus. (b) For a smooth connected affine group variety $G$ and a torus $S\\subseteq G$, the torus $S$ is maximal among the tori of $G$ if and only if $C_G(S)/S$ contains no nontrivial torus.",
+        "strategy": "Direct proof on the current carrier: 1.1, 1.2, 2.1, 2.2, 3.1, 3.2, 4.1; We first establish the rigidity input $\\operatorname{Hom}_{R\\text{-groups}}(M_R,U_R)=0$ for every $k$-algebra $R$, every multiplicative-type group $M$, and every unipotent group $U$. Faithfully flat base change splits $M$, so a homomorphism $M_R\\to\\mathbf G_{a,R}$ corresponds to a primitive element in $R[X(M)]$. Comparing the coefficients in $\\Delta(\\sum a_me_m)=\\sum a_me_m\\otimes e_m$ and $\\sum a_me_m\\otimes1+1\\otimes\\sum a_me_m$ forces every coefficient, including $a_0$, to vanish. For a general $U$, choose a minimal closed $k$-subgroup $H\\su",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 16 (16.13), (16.43)-(16.48), printed pp. 341-342; Ch. 17 (17.82)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S5.3, Propositions 125-127, pp. 53-58"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 10,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-cocharacter-limit-subgroups",
+        "kind": "theorem",
+        "title": "Limit subgroups attached to cocharacters",
+        "deps": [
+          "lem-nonaffine-affine-group-faithful-representation",
+          "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces",
+          "lem-lie-functor-exactness-fixed-points-and-generation",
+          "lem-orbit-map-faithfully-flat-and-orbit-locally-closed",
+          "prop-faithfully-flat-orbit-map-represents-coset-quotient",
+          "thm-unipotent-group-triangular-criterion",
+          "def-limit-of-a-gm-orbit-and-concentrator-subscheme",
+          "thm-concentrator-subscheme-representability-and-smoothness",
+          "lem-character-and-cocharacter-lattices-of-a-split-torus",
+          "def-split-reductive-algebraic-group",
+          "def-smooth-morphism-schemes",
+          "thm-chevalley-centralizer-radical-and-reductive-centralizers",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the geometric suppliers. Let $G$ be a smooth affine algebraic group over $k$ and let $\\lambda:\\mathbf G_m\\to G$ be a cocharacter, acting on $G$ by $t\\cdot g=\\lambda(t)g\\lambda(t)^{-1}$ ([[def-split-reductive-algebraic-group]] for the notation, [[def-limit-of-a-gm-orbit-and-concentrator-subscheme]]). Then $P_G(\\lambda)=G(\\{g:\\lim_{t\\to0}t\\cdot g\\text{ exists}\\})$, $Z_G(\\lambda)=C_G(\\lambda(\\mathbf G_m))$ and $U_G(\\lambda)$ (the fibre of $g\\mapsto\\lim_{t\\to0}t\\cdot g$ over $e$) are algebraic subgroups of $G$, with $P_G(\\lambda)\\cap P_G(-\\lambda)=Z_G(\\lambda)$ and $U_G(\\lambda)$ normal in $P_G(\\lambda)$; over $k^{\\mathrm a}$, $P_G(\\lambda)$ and $U_G(\\lambda)$ are the unique smooth subgroups whose geometric points are the $g$ with the indicated limits. Then $P_G(\\lambda),Z_G(\\lambda),U_G(\\lambda)$ are smooth; the multiplication map $U_G(\\lambda)\\rtimes Z_G(\\lambda)\\to P_G(\\lambda)$ is an isomorphism; $U_G(-\\lambda)\\times P_G(\\lambda)\\to G$ is an open immersion; $U_G(\\lambda)$ is connected and unipotent; and under the weight decomposition $\\mathfrak g=\\bigoplus_{n\\in\\mathbb Z}\\mathfrak g_n$ for the $\\mathbf G_m$-action one has $\\operatorname{Lie}Z_G(\\lambda)=\\mathfrak g_0$, $\\operatorname{Lie}U_G(\\lambda)=\\bigoplus_{n>0}\\mathfrak g_n$ and $\\operatorname{Lie}P_G(\\lambda)=\\mathfrak g_0\\oplus\\bigoplus_{n>0}\\mathfrak g_n$. If moreover $G$ is reductive, then $P_G(\\lambda)/U_G(\\lambda)\\cong Z_G(\\lambda)$ is reductive and $R_u(P_G(\\lambda))=U_G(\\lambda)$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1, 4.1, 5.1; The affine graded concentrator construction [F1] represents $P=P_G(\\lambda)$ and the identity concentrator $U=U_G(\\lambda)$ as closed subschemes of $G$. Conjugation acts by group automorphisms, so the limit of a product or inverse is the product or inverse of the limits, on every base algebra. Thus $P$ is a subgroup and its limit map $p:P\\to G$ is a homomorphism. Its image lies in the fixed subgroup $Z=Z_G(\\lambda)$, since a limit at zero is fixed; $p|_Z=\\operatorname{id}$ and $U=\\ker p$ is normal. Limits in both directions force every nonzero ",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 13 (13.28)-(13.33), printed pp. 264-270; Ch. 17 (17.60)"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "S4.1, Theorems 4.1.4 and 4.1.7, Proposition 4.1.10"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 20,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-luna-map-and-bialynicki-birula-decomposition",
+        "kind": "theorem",
+        "title": "Luna maps and the Bialynicki-Birula decomposition",
+        "deps": [
+          "def-limit-of-a-gm-orbit-and-concentrator-subscheme",
+          "thm-concentrator-subscheme-representability-and-smoothness",
+          "lem-graded-nakayama",
+          "def-smooth-morphism-schemes",
+          "def-complete-variety",
+          "thm-fixed-point-schemes-and-centralizers-of-linearly-reductive-actions",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $X$ be a smooth geometrically connected variety over $k$ with an action of $\\mathbf G_m$.\n\n(a) **Definite affine actions and Luna maps.** Suppose $X$ is affine and its coordinate ring is nonnegatively graded, $A=\\bigoplus_{n\\ge0}A_n$. Then the fixed locus $F=X^{\\mathbf G_m}=\\operatorname{Spec}A_0$ is smooth and connected, and the limit retraction $p:X\\to F$ realizes $X$ as the vector bundle associated with the finite projective $A_0$-module $I/I^2$, where $I=\\bigoplus_{n>0}A_n$. This isomorphism depends on choices of homogeneous lifts. If $x\\in F(k)$ and every tangent weight at $x$ is strictly positive, then $F=\\{x\\}$ and every Luna map $X\\to T_xX=T_x^+X$ obtained from a homogeneous complement of $\\mathfrak m_x^2$ in $\\mathfrak m_x$ is an equivariant isomorphism. More generally, an equivariant morphism between smooth geometrically connected affine varieties with strictly positive tangent weights at a fixed rational point is an isomorphism if its differential there is an isomorphism. No canonical choice of Luna map is asserted.\n\n(b) **Bialynicki-Birula decomposition.** Suppose the action is locally affine, $X$ is complete and the fixed scheme is finite and constant. For each fixed point $x$ the attracting scheme $X(x)$ is smooth, locally closed, and equivariantly isomorphic by a Luna map to the affine space $T_x^+X$. Its geometric points are precisely the $y$ with $\\lim_{t\\to0}ty=x$, and $T_xX(x)=T_x^+X$. The topological space of $X$ is the disjoint union of these cells. There is a unique attracting point $x^-$ with $X(x^-)$ open dense and a unique repelling point $x^+$ with $X(x^+)=\\{x^+\\}$. These conclusions apply to smooth homogeneous spaces satisfying the stated action hypotheses; affineness or strict contraction is not automatic for an arbitrary $G/P$.",
+        "strategy": "Milne 13.39-13.42 for Luna's theorem (graded Nakayama 13.39, definite actions 13.40, Theorem 13.41 and its corollary 13.42 for morphisms) and Milne 13.43-13.49 for the Bialynicki-Birula decomposition (Theorem 13.47 and Corollary 13.49), with the attracting/repelling-point description 13.50-13.53. The group and homogeneous-space cases follow by applying the affine-local theory to the action on $G$ or $G/P$ and using the representability theorem. Conrad S4.1 and [CGP, Prop. 2.1.8] give the independent dynamic treatment.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 13 (13.39)-(13.53), printed pp. 270-278"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "S4.1 and [CGP, Proposition 2.1.8]"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-connected-groups-of-rank-zero-are-unipotent",
+        "kind": "lemma",
+        "title": "Groups of rank zero are unipotent",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-unipotent-algebraic-group",
+          "thm-unipotent-group-triangular-criterion",
+          "def-group-of-multiplicative-type-and-torus",
+          "def-borel-subgroup-and-maximal-torus",
+          "thm-quotient-by-a-borel-subgroup-is-complete",
+          "thm-lie-kolchin-for-smooth-connected-solvable-groups",
+          "lem-smooth-trigonalizable-group-normal-series-refinement",
+          "thm-trigonalizable-extensions-split-over-algebraically-closed-fields",
+          "lem-nonaffine-subgroup-scheme-stabilizer-of-line",
+          "thm-homogeneous-space-for-smooth-affine-group",
+          "lem-ag-flat-local-regularity-ascent-descent",
+          "lem-complete-connected-scheme-to-affine-scheme-morphism-is-constant",
+          "def-radical-and-unipotent-radical-of-an-algebraic-group",
+          "def-split-reductive-algebraic-group",
+          "def-derived-subgroup-and-solvable-algebraic-group"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $G$ be a smooth connected affine group variety over $k$. Then $G$ is unipotent ([[def-unipotent-algebraic-group]]) if and only if $G_{k^{\\mathrm a}}$ contains no nontrivial torus, equivalently if and only if $G$ has rank $0$ ([[def-split-reductive-algebraic-group]]); in particular a smooth connected affine group variety of rank $0$ is unipotent. Consequently a smooth connected affine group variety of semisimple rank $0$ is solvable, and a reductive group of semisimple rank $0$ is a torus.",
+        "strategy": "Direct proof on the current carrier: 1.1, 1.2, 1.3, 2.1, 2.2; If $G$ is unipotent, then $G_{k^{\\mathrm a}}$ is unipotent and contains no nontrivial torus by [F1]. Conversely, suppose there is no such torus. By field-extension descent of unipotence we may work over $k^{\\mathrm a}$, and hence assume $k$ algebraically closed. Choose a Borel subgroup $B$ and write $B=B_u\\rtimes T$ by [F2]. Since $T\\subseteq G$ and there are no nontrivial tori, $T=1$, so $B=B_u$ is unipotent.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 16 (16.60), printed pp. 348-350; Ch. 14 (14.9); Ch. 20 (20.1)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S5.3, Propositions 125-127"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 20,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-weight-subgroups-of-a-torus-action",
+        "kind": "theorem",
+        "title": "T-stable subgroups attached to semigroups of characters",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-group-of-multiplicative-type-and-torus",
+          "lem-character-and-cocharacter-lattices-of-a-split-torus",
+          "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces",
+          "lem-fixed-loci-and-centralizers-of-torus-actions-are-connected",
+          "thm-cocharacter-limit-subgroups",
+          "thm-jacobian-criterion-smooth-morphism",
+          "thm-krull-intersection-theorem",
+          "lem-regular-system-of-parameters-equivalent-basis",
+          "lem-nonaffine-connected-group-geometrically-connected"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the geometric and smooth-local suppliers. Let $G$ be a smooth connected affine group variety over $k$ equipped with an action by automorphisms of a split torus $T$, and let $\\Psi=\\Psi(G,T)\\subseteq X(T)$ be the weights of $T$ on $\\mathfrak g=\\operatorname{Lie}G$. Then:\n\n(a) For every subsemigroup $A\\subseteq X(T)$, there is a unique $T$-stable smooth connected subgroup variety $H_A\\subseteq G$ with\n$$\\operatorname{Lie}H_A=\\bigoplus_{\\chi\\in A\\cap\\Psi}\\mathfrak g_\\chi.$$\nEvery $T$-stable smooth connected subgroup variety whose Lie algebra is contained in this subspace is contained in $H_A$. No finite generation, saturation, exclusion of $0$, or strictly definite cone condition is imposed on $A$.\n\n(b) For a nonzero weight $\\alpha$, let $(\\alpha)$ be the semigroup of strictly positive rational multiples of $\\alpha$ lying in $X(T)$, and let $\\lambda$ be a cocharacter with $\\langle\\alpha,\\lambda\\rangle>0$. Put $T_\\alpha=(\\ker\\alpha)_t$, the largest reduced subtorus of its kernel, and $G_\\alpha=G^{T_\\alpha}$, the fixed subgroup for the given external action. Then $H_{(\\alpha)}=U_{G_\\alpha}(\\lambda)$, the identity concentrator for this action on $G_\\alpha$; it is smooth connected unipotent and $T$-stable, with Lie algebra the sum of the strictly positive rational-$\\alpha$ weight spaces. Every $T$-stable **smooth** subgroup variety $H\\subseteq G$ with $\\operatorname{Lie}H\\supseteq\\operatorname{Lie}H_{(\\alpha)}$ contains $H_{(\\alpha)}$. The smoothness qualification is necessary: $\\alpha_p\\subseteq\\mathbf G_a$ with the scaling torus has the same Lie algebra as $\\mathbf G_a$, but does not contain that positive-weight subgroup.\n\n(c) The closed subgroup generated by two $T$-stable smooth connected subgroup varieties $H_1,H_2$ is smooth connected, and its weight semigroup is generated by their weight semigroups. Here a weight semigroup means the semigroup of nonempty finite sums of Lie weights; the empty weight set generates the empty semigroup. If $H_1,H_2$ generate $G$, this identifies the weight semigroup of $G$.\n\n",
+        "strategy": "Direct proof on the current carrier: 1.1, 1.2, 2.1, 3.1, 4.1, 4.2; Decompose $\\mathfrak m=\\bigoplus_\\chi\\mathfrak m_\\chi$ by [F1] and let $J_A$ be the ideal generated by $\\mathfrak m_\\chi$ for $\\chi\\notin A$. It is a Hopf ideal. For $f\\in\\mathfrak m_\\chi$, the reduced coproduct $\\Delta f-f\\otimes1-1\\otimes f$ belongs to $\\mathfrak m\\otimes\\mathfrak m$ and decomposes into terms of weights $\\beta,\\gamma$ with $\\beta+\\gamma=\\chi$. If $\\chi\\notin A$, at least one of $\\beta,\\gamma$ is outside $A$, so every term vanishes modulo $J_A$ in one factor. The antipode preserves weights and the augmentation ideal, and the c",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 16 (16.62)-(16.66), printed pp. 344-348; Ch. 13 (13.33)"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "S4.1-S4.2, Theorems 4.1.4, 4.1.7 and Lemma 4.2.2"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 21,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-homogeneous-curves-and-automorphisms-of-p1",
+        "kind": "lemma",
+        "title": "Homogeneous curves, the projective line and its automorphisms",
+        "deps": [
+          "thm-cocharacter-limit-subgroups",
+          "thm-luna-map-and-bialynicki-birula-decomposition",
+          "def-group-of-multiplicative-type-and-torus",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring",
+          "thm-homogeneous-space-for-smooth-affine-group",
+          "def-fibre-product-schemes-universal-property",
+          "def-smooth-morphism-schemes",
+          "def-complete-variety",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $k$ be a field. (a) A smooth complete connected curve $C$ over $k$ with a $k$-point that becomes isomorphic to $\\mathbf P^1$ over $k^{\\mathrm a}$ is isomorphic to $\\mathbf P^1$. (b) A smooth complete geometrically connected curve with a $k$-point, homogeneous under a smooth connected affine algebraic group, is isomorphic to $\\mathbf P^1$, and $\\operatorname{Aut}(\\mathbf P^1)=\\operatorname{PGL}_2$ as $k$-group schemes via the action on lines through the standard representation, the action being faithful with all automorphisms induced by $\\operatorname{PGL}_2$. (c) For a finite-dimensional representation $(V,r)$ of a torus $T$ ([[def-group-of-multiplicative-type-and-torus]]) with weight decomposition $V=\\bigoplus_i V_{\\chi_i}$, the fixed points of $T$ on $\\mathbf P(V)$ are the lines spanned by eigenvectors; if $T=\\mathbf G_m$ and every occurring weight space (including weight zero) is one-dimensional, then $\\mathbf P(V)^{\\mathbf G_m}$ is finite and constant, and the closure of a non-fixed orbit has exactly two fixed points, namely the limits $\\lim_{t\\to0}tx$ and $\\lim_{t\\to\\infty}tx$.",
+        "strategy": "Genus-zero descent and homogeneous curves; smooth quotient GL2/Gm and the three-section proof of Aut(P1)=PGL2 over arbitrary test algebras; projective fixed weight spaces and the two extremal-weight orbit limits.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 20 (20.2)-(20.12), printed pp. 406-412; Ch. 5 (5.49); Ch. 13 (13.20)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 21,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-sl2-structure-and-root-coordinates",
+        "kind": "lemma",
+        "title": "Structure of SL_2 and its root coordinates",
+        "deps": [
+          "lem-reductive-center-radical-and-semisimple-quotient",
+          "lem-maximal-tori-extension-conjugacy-and-derived-group",
+          "lem-unipotent-and-diagonalizable-intersection-is-trivial",
+          "lem-general-linear-group-scheme-and-its-coordinate-ring",
+          "def-morphism-and-closed-subgroup-scheme",
+          "lem-character-and-cocharacter-lattices-of-a-split-torus",
+          "thm-cocharacter-limit-subgroups",
+          "thm-homogeneous-space-for-smooth-affine-group",
+          "def-derived-subgroup-and-solvable-algebraic-group",
+          "lem-derived-subgroup-properties",
+          "lem-lie-functor-exactness-fixed-points-and-generation",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $k$ be a field, $T_2$ the diagonal torus of $\\mathrm{SL}_2$, $U^+=\\{\\binom{1\\ a}{0\\ 1}\\}$ and $U^-=\\{\\binom{1\\ 0}{a\\ 1}\\}$ ([[lem-general-linear-group-scheme-and-its-coordinate-ring]], [[def-morphism-and-closed-subgroup-scheme]]). Then: (a) $\\mathrm{SL}_2$ is generated by $U^+$ and $U^-$, and $\\mathrm{SL}_2$ and $\\mathrm{PGL}_2$ are perfect; (b) the isomorphisms $u_\\alpha(a)=\\binom{1\\ a}{0\\ 1}$ and $u_{-\\alpha}(a)=\\binom{1\\ 0}{a\\ 1}$ satisfy $tu_\\alpha(a)t^{-1}=u_\\alpha(\\alpha(t)a)$ and $tu_{-\\alpha}(a)t^{-1}=u_{-\\alpha}(\\alpha(t)^{-1}a)$ for $t=\\operatorname{diag}(x,x^{-1})$ and the root $\\alpha(t)=x^2$; (c) $n_\\alpha=u_\\alpha(1)u_{-\\alpha}(-1)u_\\alpha(1)=\\binom{0\\ 1}{-1\\ 0}$ represents the nontrivial element $s_\\alpha$ of $W(\\mathrm{SL}_2,T_2)$, $n_\\alpha^2=\\alpha^\\vee(-1)$, and $s_\\alpha$ acts on $X(T_2)$ by $\\chi\\mapsto\\chi-\\langle\\chi,\\alpha^\\vee\\rangle\\alpha$ with $\\alpha^\\vee=\\operatorname{id}$; (d) the natural surjection $\\mathrm{SL}_2\\to\\mathrm{PGL}_2$ is a central isogeny with kernel $\\mu_2$, $\\mathrm{SL}_2$ is simply connected, and every automorphism of $(\\mathrm{SL}_2,T_2)$ maps $U^+$ to $U^+$ or $U^-$ and is determined by its restrictions to $T_2$ and $U^+$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1, 4.1; For (a), work first over an algebraic closure and write $g=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$ with $ad-bc=1$. If $a\\ne0$, direct multiplication gives $g=u_{-\\alpha}(c/a)\\operatorname{diag}(a,a^{-1})u_\\alpha(b/a)$. Put $w(a)=u_\\alpha(a)u_{-\\alpha}(-a^{-1})u_\\alpha(a)=\\begin{pmatrix}0&a\\\\-a^{-1}&0\\end{pmatrix}$; then $w(a)w(-1)=\\operatorname{diag}(a,a^{-1})$. If $a=0$, then $c\\ne0$, and $u_\\alpha(1)g$ has nonzero top-left entry, reducing to the previous case. Thus $U^\\pm$ generate the smooth group $\\mathrm{SL}_2$: a closed subgroup containing ",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 20 (20.23)-(20.31) and (20.37)-(20.41), printed pp. 414-424"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "Example 4.1.5 and S1.3"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 21,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-rank-one-connected-groups",
+        "kind": "theorem",
+        "title": "Connected groups of semisimple rank one",
+        "deps": [
+          "def-radical-and-unipotent-radical-of-an-algebraic-group",
+          "def-split-reductive-algebraic-group",
+          "lem-homogeneous-curves-and-automorphisms-of-p1",
+          "lem-sl2-structure-and-root-coordinates",
+          "lem-connected-groups-of-rank-zero-are-unipotent",
+          "def-borel-subgroup-and-maximal-torus",
+          "thm-quotient-by-a-borel-subgroup-is-complete",
+          "lem-borel-subgroup-is-the-stabilizer-of-a-maximal-flag",
+          "thm-borel-and-maximal-torus-conjugacy-over-algebraically-closed-field",
+          "thm-maximal-tori-in-smooth-connected-solvable-groups-are-conjugate",
+          "lem-reductive-center-radical-and-semisimple-quotient",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $G$ be a connected nonsolvable affine group variety over $k$ and $T$ a maximal torus. For the equivalence and its geometric conclusions, base change $G$ and $T$ to an algebraic closure and form all radicals, Borels and quotients there. The following are equivalent: (a) the semisimple rank of $G$ is $1$; (b) over an algebraic closure, $T$ lies in exactly two Borel subgroups; (c) $\\dim G/B=1$ for a Borel subgroup $B$ containing $T$; (d) there is an isogeny $G/R(G)\\to\\mathrm{PGL}_2$. In this case, over an algebraic closure, $S=G/R(G)$ is semisimple of rank $1$ and dimension $3$. If $\\bar T$ is the image of $T$ in $S$, then\n$$\n\\operatorname{Lie}(S)=\\operatorname{Lie}(\\bar T)\\oplus\\mathfrak s_\\alpha\\oplus\\mathfrak s_{-\\alpha},\\qquad \\dim\\mathfrak s_\\alpha=\\dim\\mathfrak s_{-\\alpha}=1.\n$$\nFor a Borel subgroup $B$ containing $T$, after base change to an algebraic closure $G/B\\cong\\mathbf P^1$ and the action map $G\\to\\operatorname{Aut}(G/B)=\\mathrm{PGL}_2$ is surjective with kernel $q^{-1}(Z(S))$, where $q:G\\to S$ is the quotient map. In the semisimple quotient, the rank-one Bruhat decomposition is $S=\\bar B\\sqcup\\bar U\\bar n\\bar B$, where $\\bar B$ is the image of $B$, $\\bar U$ its unipotent radical, and $\\bar n$ represents the nontrivial Weyl element. Every connected nonsolvable split reductive group of total rank $1$ (and hence semisimple rank $1$) is isomorphic to $\\mathrm{SL}_2$ or $\\mathrm{PGL}_2$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1, 4.1, 5.1; Work over an algebraic closure. Set $S=G/R(G)$. By the radical-quotient theorem cited in [F1], $S$ is semisimple and its Borel variety identifies with that of $G$. The rank-one theorem cited in [F1] then gives the equivalence: in rank $1$ the Weyl group of $S$ acts faithfully and transitively on the Borel subgroups containing $\\bar T$, while the Borel-opposition lemma cited in [F1] distinguishes the positive and negative Borels; conversely, the two $T$-fixed points of the Borel variety and the fixed-point bound in [F3] force its dimension to be",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 17 (17.20); Ch. 20 (20.12), (20.15)-(20.22), and (20.33), printed pp. 355-421"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S6.2, Proposition 171"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 22,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-split-rank-one-reductive-classification",
+        "kind": "theorem",
+        "title": "Split reductive groups of semisimple rank one",
+        "deps": [
+          "thm-rank-one-connected-groups",
+          "lem-sl2-structure-and-root-coordinates",
+          "lem-reductive-center-radical-and-semisimple-quotient",
+          "def-split-reductive-algebraic-group",
+          "lem-maximal-tori-extension-conjugacy-and-derived-group",
+          "thm-homogeneous-space-for-smooth-affine-group",
+          "def-derived-subgroup-and-solvable-algebraic-group",
+          "lem-derived-subgroup-properties",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $(G,T)$ be a split reductive group over $k$ of semisimple rank $1$ ([[def-split-reductive-algebraic-group]]). Then there exists a homomorphism $v:(\\mathrm{SL}_2,T_2)\\to(G,T)$ with central kernel, and every such homomorphism is a central isogeny from $\\mathrm{SL}_2$ onto the derived group $G'$; any two differ by the inner automorphism defined by an element of $(N_{\\mathrm{SL}_2}(T_2)/\\mu_2)(k)$. Moreover $v$ maps $U^\\pm$ isomorphically onto the root groups of $\\Phi(G,T)$, and for either chosen root $\\alpha$, if $T_1=(T\\cap G')_t$ is the unique maximal torus of the derived group contained in $T$, then there is a unique cocharacter $\\alpha^\\vee\\in X_*(T_1)$ with $\\langle\\alpha,\\alpha^\\vee\\rangle=2$. In particular the two root groups generate $G\\prime$, which is isomorphic to $\\mathrm{SL}_2$ or $\\mathrm{PGL}_2$; together with $T$ they generate $G$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1; By [F1] and [F3], $G'$ is split semisimple of rank one with split maximal torus $T_1=(T\\cap G')_t$. The exact adjoint quotient of [F2] is $q:G\\to\\mathrm{PGL}_2$ with kernel $Z(G)$. Since $G=Z(G)_tG'$ and $q$ kills the central torus, $q(G')=\\mathrm{PGL}_2$. The centre of semisimple $G'$ is finite by [F1], so the restriction $G'\\to\\mathrm{PGL}_2$ has finite central kernel and is a central isogeny. Choose $q$ up to an inner automorphism of $\\mathrm{PGL}_2$ so that $q(T)$ is its diagonal torus; split maximal tori of $\\mathrm{PGL}_2$ are conjugate o",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 20 (20.27), (20.31)-(20.32), printed pp. 419-423; Ch. 12 (12.46); Ch. 17 (17.85)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S6.2, Proposition 174(ii)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 23,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-solvable-subgroups-and-the-radical-as-borel-intersection",
+        "kind": "theorem",
+        "title": "Solvable subgroups lie in Borel subgroups; the radical as a Borel intersection",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-borel-subgroup-and-maximal-torus",
+          "def-derived-subgroup-and-solvable-algebraic-group",
+          "def-radical-and-unipotent-radical-of-an-algebraic-group",
+          "def-parabolic-subgroup-of-an-affine-algebraic-group",
+          "thm-quotient-by-a-borel-subgroup-is-complete",
+          "thm-borel-fixed-point-for-complete-schemes",
+          "thm-borel-and-maximal-torus-conjugacy-over-algebraically-closed-field",
+          "lem-nonaffine-group-image-exact-quotient-properties",
+          "lem-nonaffine-reduced-neutral-subgroup-over-perfect-field",
+          "lem-cartan-subgroups-conjugacy-and-density",
+          "thm-fixed-point-schemes-and-centralizers-of-linearly-reductive-actions",
+          "thm-homogeneous-space-for-smooth-affine-group",
+          "lem-ag-flat-local-regularity-ascent-descent",
+          "thm-nonaffine-affine-normal-group-quotient-affine",
+          "def-quotient-sheaf-and-representable-quotient",
+          "def-complete-variety",
+          "def-proper-morphism"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $G$ be a smooth connected affine group variety over $k$. (a) Every smooth connected solvable subgroup $H$ is geometrically contained in a Borel: $H_{k^{\\mathrm a}}$ lies in a Borel of $G_{k^{\\mathrm a}}$. If $k$ is algebraically closed this containment holds over $k$. If $H$ is normal, it is contained in every Borel subgroup of $G$ defined over $k$, when such a Borel exists. Arbitrary-field rational containment without normality is not asserted. (b) If $k$ is algebraically closed, then $R(G)=(\\bigcap_{B\\ \\mathrm{Borel}}B)^\\circ_{\\mathrm{red}}$ is the largest smooth connected normal solvable subgroup ([[def-radical-and-unipotent-radical-of-an-algebraic-group]]). (c) A closed subgroup scheme $P\\subseteq G$, with no reducedness hypothesis, is parabolic in the sense that $G/P$ is complete ([[def-parabolic-subgroup-of-an-affine-algebraic-group]]) if and only if $P_{k^{\\mathrm a}}$ contains a Borel of $G_{k^{\\mathrm a}}$. Every such $P$ is geometrically connected and $N_G(P)=P$ scheme-theoretically; in particular these conclusions hold when $P$ contains a Borel defined over $k$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1, 4.1, 4.2; First suppose $k$ algebraically closed and choose a Borel $B$. The solvable group $H$ has a fixed point $gB$ in the complete quotient $G/B$ by [F1], so $H\\subseteq gBg^{-1}$. If $H$ is normal, its product $HB$ is a closed smooth connected subgroup by [F2], and is solvable: its normal subgroup $H$ and quotient, a homomorphic image of $B$, are solvable. Borel maximality among smooth connected solvable subgroups therefore gives $HB=B$, hence $H\\subseteq B$. This holds for every Borel. Over arbitrary $k$, apply this argument after algebraic closure",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 17 (17.16)-(17.19), (17.30)-(17.31), (17.49), printed pp. 355-361 and 367-368"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S5.4-S5.5, Theorems 130 and 157, pp. 58-65"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 16,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-cartan-subgroups-conjugacy-and-density",
+        "kind": "lemma",
+        "title": "Cartan subgroups: conjugacy and density",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-borel-subgroup-and-maximal-torus",
+          "def-group-of-multiplicative-type-and-torus",
+          "lem-fixed-loci-and-centralizers-of-torus-actions-are-connected",
+          "thm-fixed-point-schemes-and-centralizers-of-linearly-reductive-actions",
+          "thm-borel-and-maximal-torus-conjugacy-over-algebraically-closed-field",
+          "thm-maximal-tori-in-smooth-connected-solvable-groups-are-conjugate",
+          "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces",
+          "lem-smooth-finite-type-schemes-have-schematically-dense-rational-points",
+          "lem-lie-functor-exactness-fixed-points-and-generation",
+          "thm-homogeneous-space-for-smooth-affine-group",
+          "lem-ag-flat-local-regularity-ascent-descent",
+          "thm-nonaffine-affine-normal-group-quotient-affine",
+          "lem-nonaffine-reduced-neutral-subgroup-over-perfect-field",
+          "thm-quotient-by-a-borel-subgroup-is-complete",
+          "thm-global-functions-proper-integral-variety",
+          "thm-morphisms-into-affine-scheme-global-sections",
+          "lem-nonaffine-subgroup-scheme-stabilizer-of-line",
+          "lem-nilpotent-group-structure-and-maximal-torus-criterion",
+          "thm-trigonalizable-extensions-split-over-algebraically-closed-fields",
+          "def-unipotent-algebraic-group"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $G$ be a smooth connected affine group variety over an algebraically closed field $k$ and let $T$ be a maximal torus. (a) The Cartan subgroup $C_G(T)$ is smooth, connected and nilpotent, $C_G(T)=N_G(C_G(T))^\\circ$, and $C_G(T)$ is contained in every Borel subgroup of $G$ containing $T$; if $G$ is reductive then $C_G(T)=T$. (b) Any two Cartan subgroups of $G$ are conjugate by an element of $G(k)$, and the union of the Cartan subgroups contains a dense open subset of $G$. (c) For every Borel subgroup $B$ one has $Z(G)=Z(B)$. (d) If $H\\subseteq G$ contains a Cartan subgroup, then $N_G(H)^\\circ=H^\\circ$; in particular every Borel subgroup equals its own normalizer and $(N_G(B_u))_{\\mathrm{red}}=B$ for a maximal unipotent subgroup $B_u$ of a Borel subgroup $B$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1, 4.1, 4.2, 5.1, 5.2, 6.1; By [F1] the Cartan $C=C_G(T)$ is smooth connected nilpotent and satisfies $N_G(C)^\\circ=C$. It lies in some Borel $B'$ because it is connected solvable, and $T\\subseteq B'$. For any other Borel $B\\supseteq T$, [F2] gives $B=nB'n^{-1}$ with $n\\in N_G(T)(k)$. Such $n$ preserves $C$, so $C\\subseteq B$. In the reductive case [F7] gives $C=T$. This proves (a).",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 17 (17.21)-(17.22), (17.33), (17.43)-(17.50), printed pp. 358-368"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S6.1, Definition 155 and Corollary 158"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 15,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-chevalley-centralizer-radical-and-reductive-centralizers",
+        "kind": "theorem",
+        "title": "Chevalley's theorem and reductivity of torus centralizers",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-cartan-subgroups-conjugacy-and-density",
+          "thm-borel-and-maximal-torus-conjugacy-over-algebraically-closed-field",
+          "def-borel-subgroup-and-maximal-torus",
+          "thm-solvable-subgroups-and-the-radical-as-borel-intersection",
+          "def-radical-and-unipotent-radical-of-an-algebraic-group",
+          "lem-fixed-loci-and-centralizers-of-torus-actions-are-connected",
+          "thm-quotient-by-a-borel-subgroup-is-complete",
+          "lem-nonaffine-subgroup-scheme-stabilizer-of-line",
+          "thm-homogeneous-space-for-smooth-affine-group",
+          "prop-faithfully-flat-orbit-map-represents-coset-quotient",
+          "lem-orbit-map-faithfully-flat-and-orbit-locally-closed",
+          "thm-borel-fixed-point-for-complete-schemes",
+          "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces",
+          "lem-finite-dimensional-subcomodules-contain-elements",
+          "def-unipotent-algebraic-group",
+          "lem-nonaffine-reduced-neutral-subgroup-over-perfect-field",
+          "thm-maximal-tori-in-smooth-connected-solvable-groups-are-conjugate",
+          "lem-unipotent-and-diagonalizable-intersection-is-trivial",
+          "lem-nonaffine-group-image-exact-quotient-properties"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $G$ be a smooth connected affine group variety over an algebraically closed field $k$ and let $T$ be a maximal torus. Then Chevalley's theorem holds: $R_u(G)=(\\bigcap_{B\\supseteq T}B_u)^\\circ_{\\mathrm{red}}$ and $R_u(G)\\cdot T=(\\bigcap_{B\\supseteq T}B)^\\circ_{\\mathrm{red}}$, the intersections running over the finite set of Borel subgroups containing $T$. Consequently, for any torus $S$ in $G$ one has $R_u(C_G(S))=R_u(G)\\cap C_G(S)$, and for a torus $S$ acting on $G$ one has $R_u(G^S)=R_u(G)^S$. In particular, if $G$ is reductive, then $G^S$ is smooth, connected and reductive for every torus action by group automorphisms, in particular $C_G(S)$ has these properties for every torus $S\\subseteq G$, and $C_G(T)=T$ for every maximal torus $T$ of a reductive $G$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 1.2, 2.1, 2.2, 3.1, 3.2, 4.1, 5.1, 6.1; Let $I_u=(\\bigcap_{B\\supseteq T}B_u)^\\circ_{\\mathrm{red}}$ and $I=(\\bigcap_{B\\supseteq T}B)^\\circ_{\\mathrm{red}}$. The intersection set is finite by [F1]. These groups are smooth connected and normalized by $N_G(T)$, which permutes the factors; $I_u$ is unipotent as a subgroup of one $B_u$. The normal unipotent radical $R_u(G)$ lies in every $B$ by [F2] and then in every $B_u$ by its maximal normal-unipotent property, so $R_u(G)\\subseteq I_u$. We prove the reverse inclusion by the action on $X=G/B_0$.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 17 (17.52)-(17.59), printed pp. 368-371; S17h (17.65)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Theorem 157 and Corollary 158, Propositions 163-165"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 17,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-maximal-tori-extension-conjugacy-and-derived-group",
+        "kind": "lemma",
+        "title": "Maximal tori, field extensions, conjugacy and derived subgroups",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-borel-subgroup-and-maximal-torus",
+          "def-group-of-multiplicative-type-and-torus",
+          "lem-fixed-loci-and-centralizers-of-torus-actions-are-connected",
+          "lem-nilpotent-group-structure-and-maximal-torus-criterion",
+          "thm-unipotent-group-triangular-criterion",
+          "def-unipotent-algebraic-group",
+          "thm-borel-and-maximal-torus-conjugacy-over-algebraically-closed-field",
+          "thm-chevalley-centralizer-radical-and-reductive-centralizers",
+          "lem-nonempty-smooth-scheme-finite-separable-point",
+          "thm-multiplicative-type-groups-and-galois-character-modules",
+          "lem-nonaffine-group-image-exact-quotient-properties",
+          "lem-nonaffine-reduced-neutral-subgroup-over-perfect-field",
+          "lem-derived-subgroup-properties",
+          "thm-nonaffine-affine-normal-group-quotient-affine",
+          "lem-unipotent-and-diagonalizable-intersection-is-trivial"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $G$ be a smooth connected affine group variety over $k$. (a) A torus $T\\subseteq G$ is maximal iff $T_{k'}$ is maximal in $G_{k'}$ for every field extension $k'/k$; equivalently iff $C_G(T)/T$ contains no nontrivial torus. (b) There is a maximal torus of $G_{k^{\\mathrm a}}$ defined over $k$. (c) If $G$ is reductive, then a torus $T\\subseteq G$ is maximal iff $C_G(T)=T$. (d) If $N\\subseteq G$ is a smooth connected normal subgroup variety and $T$ a maximal torus of $G$, then $(T\\cap N)_t$, the largest subtorus of $T\\cap N$, is a maximal torus of $N$, and every maximal torus of $N$ arises this way. (e) If $G=G_1\\cdots G_n$ is an almost-direct product of connected subgroup varieties, then every maximal torus $T$ of $G$ is an almost-direct product $T=(T\\cap G_1)_t\\cdots(T\\cap G_n)_t$. (f) Any two maximal tori of $G$ become conjugate over some finite separable extension of $k$; in particular they are conjugate over a separably closed field.",
+        "strategy": "Direct proof on the current carrier: 1.1, 1.2, 2.1, 3.1, 4.1; Put $C=C_G(T)$ and $Q=C/T$, smooth connected affine by [F1] and [F6]. The maximal-torus criterion and [F5] give $T$ maximal in $G$ if and only if $Q$ is unipotent. Centralizers and represented normal quotients commute with field extension, and unipotence is detected and preserved by it [F2]. Applying the same criterion over every extension proves (a). No larger torus over an extension is asserted to descend to $k$.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 17 (17.81)-(17.87); Appendix A (A.48)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 18,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-abstract-root-datum-and-its-weyl-group",
+        "kind": "definition",
+        "title": "Root data and their Weyl groups",
+        "deps": [
+          "lem-character-and-cocharacter-lattices-of-a-split-torus",
+          "def-weyl-group-of-a-root-system",
+          "def-positive-system-and-base-of-simple-roots"
+        ],
+        "statement": "A **root datum** is a quadruple $(X,\\Phi,X^\\vee,\\Phi^\\vee)$ consisting of free $\\mathbb Z$-modules $X,X^\\vee$ of finite rank in perfect duality $\\langle\\ ,\\ \\rangle:X\\times X^\\vee\\to\\mathbb Z$, finite subsets $\\Phi\\subseteq X$ and $\\Phi^\\vee\\subseteq X^\\vee$, and a bijection $\\alpha\\mapsto\\alpha^\\vee$ from $\\Phi$ to $\\Phi^\\vee$, subject to (rd1) $\\langle\\alpha,\\alpha^\\vee\\rangle=2$ for all $\\alpha\\in\\Phi$; (rd2) the reflections $s_\\alpha(x)=x-\\langle x,\\alpha^\\vee\\rangle\\alpha$ and $s_{\\alpha^\\vee}(y)=y-\\langle\\alpha,y\\rangle\\alpha^\\vee$ satisfy $s_\\alpha(\\Phi)\\subseteq\\Phi$ and $s_{\\alpha^\\vee}(\\Phi^\\vee)\\subseteq\\Phi^\\vee$; (rd3) the group $W(R)$ generated by the $s_\\alpha$ acting on $X$ is finite. The root datum is **reduced** if $\\mathbb Q\\alpha\\cap\\Phi=\\{\\pm\\alpha\\}$ for every $\\alpha\\in\\Phi$. The group $W(R)$ is the **Weyl group**, $\\Phi$ the root system and $\\Phi^\\vee$ the coroot system; $W(R)$ acts dually on $X^\\vee$ by the $s_{\\alpha^\\vee}$, and $s_\\alpha$ fixes the hyperplane $\\langle\\ ,\\alpha^\\vee\\rangle=0$. For $V_{\\mathbb R}=X\\otimes_{\\mathbb Z}\\mathbb R$, the **Weyl chambers** are the connected components of $V_{\\mathbb R}\\smallsetminus\\bigcup_{\\alpha\\in\\Phi}\\{x:\\langle x,\\alpha^\\vee\\rangle=0\\}$, and a **base** is a linearly independent subset $\\Delta\\subseteq\\Phi$ such that every root is a $\\mathbb Z$-combination of $\\Delta$ with all coefficients of one sign. A root datum is **semisimple** if $Z\\Phi$ has finite index in $X$.\n\nThe reflection $s_\\alpha$ depends only on the pair $(\\alpha,\\alpha^\\vee)$: it fixes the hyperplane $\\langle\\ ,\\alpha^\\vee\\rangle=0$, sends $\\alpha$ to $-\\alpha$ by (rd1), and is determined by those two conditions on the rational direct sum $\\mathbb Q\\alpha\\oplus\\ker(\\langle\\ ,\\alpha^\\vee\\rangle:X\\otimes\\mathbb Q\\to\\mathbb Q)$. The lattice form above is related to the Euclidean root-system theory of [[def-weyl-group-of-a-root-system]] and [[def-positive-system-and-base-of-simple-roots]] through a $W$-invariant form on $V_{\\mathbb R}$, but no choice of invariant inner product belongs to the definition. The perfect character–cocharacter pairing for a split torus is supplied by [[lem-character-and-cocharacter-lattices-of-a-split-torus]]; roots and coroots are additional data, not supplied by that lattice lemma.\n\nAn **isomorphism of root data** $R=(X,\\Phi,X^\\vee,\\Phi^\\vee)\\to R_1=(X_1,\\Phi_1,X_1^\\vee,\\Phi_1^\\vee)$ is a pair of $\\mathbb Z$-linear isomorphisms $f:X\\to X_1$ and $f^\\vee:X_1^\\vee\\to X^\\vee$ that are transpose to one another, $\\langle f(x),y_1\\rangle=\\langle x,f^\\vee(y_1)\\rangle$ for all $x\\in X$, $y_1\\in X_1^\\vee$, and that carry $\\Phi$ bijectively onto $\\Phi_1$ with $f(\\alpha)^\\vee=f^\\vee{} ^{-1}(\\alpha^\\vee)$ for every $\\alpha\\in\\Phi$. Composites of isomorphisms are isomorphisms, with the evident inverses, so root data form a category whose isomorphisms are these pairs; this is the notion of isomorphism used when separating the root data of SL_2 and PGL_2.",
+        "strategy": "Record the provided core objects and constructions from the current Definition. Supplemental structural assertions carry exactly the local AC qualifications displayed there; the formal core retains its stated choice scope.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Appendix C (C.3)-(C.10) and (C.34), printed pp. 612-641"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S6.5, Definitions 177, p. 82"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "S1.5 (based root data) and S5.1 (root data of split reductive groups)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-root-datum-combinatorics",
+        "kind": "lemma",
+        "title": "Combinatorics of a reduced root datum",
+        "deps": [
+          "def-abstract-root-datum-and-its-weyl-group",
+          "def-weyl-group-of-a-root-system",
+          "thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers",
+          "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates",
+          "prop-the-weyl-group-is-finite-and-acts-faithfully-on-the-root-system",
+          "def-open-and-closed-weyl-chambers",
+          "prop-weyl-length-equals-positive-root-inversion-number",
+          "def-length-and-longest-element-of-a-finite-weyl-group"
+        ],
+        "statement": "Let $R=(X,\\Phi,X^\\vee,\\Phi^\\vee)$ be a reduced root datum ([[def-abstract-root-datum-and-its-weyl-group]]). Then: (a) $W(R)$ is finite and generated by the reflections $s_\\alpha$, $\\alpha\\in\\Phi$; for a base $\\Delta\\subseteq\\Phi$ it is generated by the simple reflections $s_\\alpha$, $\\alpha\\in\\Delta$; (b) the correspondences between bases, positive systems and Weyl chambers are bijective, and $W(R)$ acts simply transitively on the set of Weyl chambers, equivalently on the set of bases; (c) for a chosen positive system $\\Phi^+$ there is a unique longest element $w_0\\in W(R)$ with $w_0(\\Phi^+)=-\\Phi^+$, and for every $w\\in W(R)$ the integer $n(w)=|\\Phi^+\\cap w(\\Phi^-)|$ equals the length of $w$ with respect to the simple reflections, with $n(w^{-1})=n(w)$ and $n(w_0w)=|\\Phi^+|-n(w)$; (d) $\\Phi$ spans $V=X\\otimes\\mathbb Q$ iff the root datum is semisimple, and then $\\Phi$ is a reduced root system in $V$ in the Euclidean sense.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1, 4.1; Since $\\langle\\alpha,\\alpha^\\vee\\rangle=2$ by (rd1), every $\\alpha\\in\\Phi$ is nonzero, and $\\Phi$ is finite and spans $V_0$ by construction; each $s_\\alpha$ preserves $V_0$, acts on $x\\in V_0$ by $x\\mapsto x-\\langle x,\\alpha^\\vee\\rangle\\alpha$, fixes the hyperplane $\\langle\\ ,\\alpha^\\vee\\rangle=0$ and sends $\\alpha$ to $-\\alpha$. Restricting the coroots to $V_0$ gives functionals $\\bar\\alpha^\\vee$ with $\\langle\\Phi,\\bar\\alpha^\\vee\\rangle\\subseteq\\mathbb Z$ and $s_\\alpha(\\Phi)\\subseteq\\Phi$, so $(V_0,\\Phi)$ satisfies the root-system axioms with ",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Appendix C (C.11)-(C.34), printed pp. 625-641; Ch. 21 (21.81)-(21.82)"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "S1.5, especially Remark 1.4.6 and the discussion of $\\Phi^+_w$"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-roots-and-root-groups-of-a-split-reductive-group",
+        "kind": "definition",
+        "title": "Roots, root groups and the Weyl group of a split reductive group",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-chevalley-centralizer-radical-and-reductive-centralizers",
+          "lem-lie-functor-exactness-fixed-points-and-generation",
+          "def-split-reductive-algebraic-group",
+          "lem-character-and-cocharacter-lattices-of-a-split-torus",
+          "thm-weight-subgroups-of-a-torus-action",
+          "thm-cocharacter-limit-subgroups",
+          "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces",
+          "lem-adjoint-representation-of-an-affine-group-scheme",
+          "lem-fixed-loci-and-centralizers-of-torus-actions-are-connected",
+          "def-borel-subgroup-and-maximal-torus"
+        ],
+        "statement": "Let $(G,T)$ be a split reductive group over $k$ ([[def-split-reductive-algebraic-group]]). The **roots** $\\Phi(G,T)$ are the nontrivial characters $\\alpha\\in X(T)$ for which the adjoint weight space $\\mathfrak g_\\alpha$ in $\\mathfrak g=\\operatorname{Lie}G$ is nonzero. The adjoint action is rational, and the weight decomposition\n$$\\mathfrak g=\\mathfrak g_0\\oplus\\bigoplus_{\\alpha\\in\\Phi(G,T)}\\mathfrak g_\\alpha$$\nis the choice-free decomposition into character eigenspaces ([[lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces]], [[lem-adjoint-representation-of-an-affine-group-scheme]]). This nonzero-weight definition uses no choice principle.\n\nAssume the Axiom of Choice for the following supplemental structural facts and subgroup constructions ([[def-axiom-of-choice]]). The reductive centralizer identity $C_G(T)=T$ and Lie fixed-point equality give $\\mathfrak g_0=\\operatorname{Lie}T=C_{\\mathfrak g}(T)$ ([[thm-chevalley-centralizer-radical-and-reductive-centralizers]], [[lem-lie-functor-exactness-fixed-points-and-generation]]). For $\\alpha\\in\\Phi$, put $T_\\alpha=(\\ker\\alpha)_t=(\\ker\\alpha)^\\circ_{\\mathrm{red}}$, the maximal reduced subtorus of its kernel, of codimension one in $T$, and $G_\\alpha=C_G(T_\\alpha)$. The **root group** is $U_\\alpha=H_{(\\alpha)}\\subseteq G_\\alpha$, attached to the semigroup of strictly positive rational multiples of $\\alpha$ in $X(T)$; it is smooth connected unipotent and $T$-stable with Lie algebra $\\bigoplus_{\\beta\\in(\\alpha)\\cap\\Phi}\\mathfrak g_\\beta$. Its identity-concentrator construction takes place in $G_\\alpha$, not in all of $G$ ([[thm-weight-subgroups-of-a-torus-action]], [[thm-cocharacter-limit-subgroups]]).\n\nThe **Weyl group** is $W(G,T)=N_G(T)/T$. Under the stated AC premise it is a finite étale group scheme and acts faithfully on $X(T)$ (Milne21.1 and21.12). A Borel subgroup $B\\supseteq T$ determines the **positive roots** $\\Phi^+(B)=\\{\\alpha\\in\\Phi:\\mathfrak g_\\alpha\\subseteq\\operatorname{Lie}B\\}$ and negative roots $-\\Phi^+(B)$ ([[def-borel-subgroup-and-maximal-torus]], [[lem-character-and-cocharacter-lattices-of-a-split-torus]]). Root groups are independent of the auxiliary cocharacter because $(\\alpha)$ is intrinsic and its smooth connected subgroup is characterized by its specified Lie weight subspace. Two Borels containing $T$ give the same positive roots exactly when they are equal (Milne21.23 and21.35). These structural facts inherit the explicit AC premise; the definition of a root as a nonzero adjoint character above remains choice-free.",
+        "strategy": "Record the provided core objects and constructions from the current Definition. Supplemental structural assertions carry exactly the local AC qualifications displayed there; the formal core retains its stated choice scope.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 21 (21.1), (21.10)-(21.12), (21.23), (21.35); Ch. 16 (16.64)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 22,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-root-subgroups-of-a-split-reductive-group",
+        "kind": "theorem",
+        "title": "Root subgroups of a split reductive group and the reduced root datum",
+        "deps": [
+          "lem-reductive-center-radical-and-semisimple-quotient",
+          "def-roots-and-root-groups-of-a-split-reductive-group",
+          "lem-sl2-structure-and-root-coordinates",
+          "thm-weight-subgroups-of-a-torus-action",
+          "thm-split-rank-one-reductive-classification",
+          "thm-chevalley-centralizer-radical-and-reductive-centralizers",
+          "thm-cocharacter-limit-subgroups",
+          "lem-lie-functor-exactness-fixed-points-and-generation",
+          "lem-root-datum-combinatorics",
+          "def-abstract-root-datum-and-its-weyl-group",
+          "thm-luna-map-and-bialynicki-birula-decomposition",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $(G,T)$ be a split reductive group over $k$ and $\\alpha\\in\\Phi(G,T)$ a root ([[def-roots-and-root-groups-of-a-split-reductive-group]]). Then: (a) $G_\\alpha=C_G(T_\\alpha)$ is a split reductive subgroup of semisimple rank $1$ with $\\operatorname{Lie}(G_\\alpha)=\\mathfrak t\\oplus\\mathfrak g_\\alpha\\oplus\\mathfrak g_{-\\alpha}$ and $\\dim\\mathfrak g_\\alpha=\\dim\\mathfrak g_{-\\alpha}=1$, and the rational multiples of $\\alpha$ occurring in $\\Phi$ are only $\\pm\\alpha$; (b) the root group $U_\\alpha$ is $T$-stable, isomorphic to $\\mathbf G_a$, and has $\\operatorname{Lie}(U_\\alpha)=\\mathfrak g_\\alpha$; a smooth $T$-stable subgroup $H\\subseteq G$ contains $U_\\alpha$ iff $\\operatorname{Lie}(H)\\supseteq\\mathfrak g_\\alpha$; (c) $W(G_\\alpha,T)=\\{1,s_\\alpha\\}$ with the nontrivial element represented by some $n_\\alpha\\in N_{G_\\alpha}(T)(k)$, and there is a unique cocharacter $\\alpha^\\vee\\in X_*(T)$ with $s_\\alpha(x)=x-\\langle x,\\alpha^\\vee\\rangle\\alpha$ for all $x\\in X(T)$ and $\\langle\\alpha,\\alpha^\\vee\\rangle=2$; (d) $G$ is generated by $T$ and the root groups $U_\\alpha$, $\\alpha\\in\\Phi$; (e) $(X(T),\\Phi,\\alpha\\mapsto\\alpha^\\vee)$ is a reduced root datum and $W(G,T)$ coincides with the subgroup of $\\operatorname{GL}(X(T))$ generated by the $s_\\alpha$; (f) for a Borel subgroup $B\\supseteq T$ with positive system $\\Phi^+$, the multiplication map $\\prod_{\\alpha\\in\\Phi^+}U_\\alpha\\to B_u=R_u(B)$ is a $T$-equivariant isomorphism of varieties for any ordering of $\\Phi^+$, every smooth $T$-stable subgroup of $B_u$ is the product of the $U_\\alpha$ it contains, and a subset $\\Psi\\subseteq\\Phi^+$ is the weight set of a smooth connected $T$-stable subgroup of $B_u$ iff it is quasi-closed. Here quasi-closed means that for $\\alpha,\\beta\\in\\Psi$ and integers $i,j>0$, every root $i\\alpha+j\\beta$ whose Chevalley commutator coefficient $N_{\\alpha,\\beta;i,j}$ is nonzero in $k$ lies in $\\Psi$. Every closed subset of $\\Phi^+$ satisfies this condition; in characteristic $0$ or characteristic $p>3$, quasi-closure is equivalent to ordinary root closure, namely closure under sums that are roots.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1, 4.1, 5.1; The subtorus $T_\\alpha$ has codimension one in $T$ and is central in $G_\\alpha$. Thus the semisimple rank of the split reductive group $G_\\alpha$ is at most one. It is nonzero because its Lie algebra contains the nonzero root space $\\mathfrak g_\\alpha$, whereas a reductive group of semisimple rank zero is a torus. Apply [F2]: the central cover of $G_\\alpha\\prime$ has the two standard root groups of $\\mathrm{SL}_2$, with one-dimensional root spaces. The central torus $Z(G_\\alpha)_t$ contributes only zero weights, by the exact central-torus produ",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 21 (21.11)-(21.12), (21.37)-(21.38), (21.68), and Aside 21.95; Ch. 13 (13.41)-(13.42); Ch. 20 (20.32), (20.39)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S6.5, Theorems 178 and 180"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "S4.2, Lemma 4.2.2 and Theorem 4.2.6"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 24,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-borel-root-group-opposition",
+        "kind": "lemma",
+        "title": "A Borel subgroup contains exactly one of each opposite pair of root groups",
+        "deps": [
+          "thm-root-subgroups-of-a-split-reductive-group",
+          "thm-split-rank-one-reductive-classification",
+          "thm-cocharacter-limit-subgroups",
+          "def-borel-subgroup-and-maximal-torus",
+          "thm-borel-and-maximal-torus-conjugacy-over-algebraically-closed-field",
+          "thm-quotient-by-a-borel-subgroup-is-complete",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $(G,T)$ be a split reductive group over $k$ and let $\\alpha\\in\\Phi(G,T)$. Every Borel subgroup $B$ of $G$ containing $T$ contains exactly one of the two root groups $U_\\alpha$, $U_{-\\alpha}$, and $B\\cap G_\\alpha$ is a Borel subgroup of $G_\\alpha$; exactly two Borel subgroups of $G_\\alpha$ contain $T$, namely $U_\\alpha T$ and $U_{-\\alpha}T$. Moreover, for a cocharacter $\\lambda$ of $T$ that is regular ($\\langle\\alpha,\\lambda\\rangle\\neq0$ for all roots $\\alpha$), $P_G(\\lambda)$ is the unique Borel subgroup of $G$ containing $T$ with $\\operatorname{Lie}P_G(\\lambda)=\\mathfrak t\\oplus\\bigoplus_{\\langle\\alpha,\\lambda\\rangle>0}\\mathfrak g_\\alpha$, and $\\lambda\\mapsto P_G(\\lambda)$ induces a bijection from the set of Weyl chambers onto the set of Borel subgroups containing $T$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1; Work first over an algebraic closure. Put $S=T_\\alpha$ and $G_\\alpha=C_G(S)$. Since $S\\subseteq T\\subseteq B$, the centralizer-intersection theorem [F3] says that $B\\cap G_\\alpha$ is a Borel subgroup of $G_\\alpha$ containing $T$. The rank-one classification [F1] says that it is therefore exactly $U_\\alpha T$ or $U_{-\\alpha}T$, which proves that $B$ contains exactly one of the two root groups. The two rank-one Borels and the intersection are defined over $k$, so these equalities descend to $k$; the same argument applies to geometric Borels conta",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 17 (17.72); Ch. 21 (21.28)-(21.32), printed pp. 433-434; Ch. 20 (20.20)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S6.2, Proposition 171(i)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 25,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-weyl-group-borel-chambers",
+        "kind": "theorem",
+        "title": "The Weyl group, Borel subgroups and chambers of a split reductive group",
+        "deps": [
+          "thm-root-subgroups-of-a-split-reductive-group",
+          "lem-borel-root-group-opposition",
+          "lem-root-datum-combinatorics",
+          "thm-chevalley-centralizer-radical-and-reductive-centralizers",
+          "thm-cocharacter-limit-subgroups",
+          "def-axiom-of-choice",
+          "def-roots-and-root-groups-of-a-split-reductive-group"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $(G,T)$ be a split reductive group over $k$ with root datum $(X,\\Phi,\\alpha\\mapsto\\alpha^\\vee)$ ([[def-roots-and-root-groups-of-a-split-reductive-group]]). Then: (a) $W(G,T)=N_G(T)/T$ is a finite constant group scheme and $W(G,T)(k')=N_G(T)(k')/T(k')$ for every field $k'\\supseteq k$; (b) every split maximal torus of $G$ lies in a Borel subgroup, and every Borel subgroup of $G$ containing $T$ is of the form $P_G(\\lambda)$ for a regular cocharacter $\\lambda$, hence is split; (c) $W(G,T)$ acts simply transitively on the finite set of Borel subgroups of $G$ containing $T$, and the map sending a Borel subgroup to its system of positive roots is a bijection onto the set of positive systems; (d) there is a canonical isomorphism $W(G,T)\\cong W(R)$ of finite groups, and $W(G,T)$ is generated by the simple reflections $s_\\alpha$, $\\alpha\\in\\Delta$, for any base $\\Delta$; (e) for a Borel subgroup $B\\supseteq T$, for $w\\in W(G,T)$ and a representative $n_w\\in N_G(T)(k)$, the double coset $Bn_wB$ depends only on $w$ and $n_wU_\\alpha n_w^{-1}=U_{w\\alpha}$ for all roots $\\alpha$.",
+        "strategy": "Rational reflection representatives prove constantness and field-point lifting. The opposition supplier gives regular-cocharacter Borels over k; the cocharacter semidirect product and weighted root filtration give splitness. Root combinatorics give the chamber action; root containment proves conjugation of root groups.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 21 (21.1)-(21.2), (21.30), (21.33)-(21.34), (21.37)-(21.41), printed pp. 425-447"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "S6.5, Theorem 178(iv)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 26,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-root-datum-of-a-split-reductive-group",
+        "kind": "definition",
+        "title": "The root datum of a split reductive group",
+        "deps": [
+          "lem-cartan-subgroups-conjugacy-and-density",
+          "def-axiom-of-choice",
+          "thm-root-subgroups-of-a-split-reductive-group",
+          "thm-weyl-group-borel-chambers",
+          "def-abstract-root-datum-and-its-weyl-group",
+          "lem-character-and-cocharacter-lattices-of-a-split-torus",
+          "lem-reductive-center-radical-and-semisimple-quotient",
+          "lem-root-datum-combinatorics",
+          "def-split-reductive-algebraic-group"
+        ],
+        "statement": "Let $(G,T)$ be a split reductive group over $k$ ([[def-split-reductive-algebraic-group]]). Its **root datum** is the quadruple\n$$R(G,T)=(X(T),\\Phi(G,T),X_*(T),\\Phi^\\vee(G,T)),$$\nwhere the character and cocharacter lattices are those of [[lem-character-and-cocharacter-lattices-of-a-split-torus]], the roots are the nonzero adjoint characters, and $\\Phi^\\vee=\\{\\alpha^\\vee:\\alpha\\in\\Phi\\}$ consists of the associated coroots. Its **rank** is $\\operatorname{rank}_{\\mathbb Z}X(T)=\\dim T$. For a split Borel pair $(B,T)$, its base $\\Delta(B)$ consists of roots in $\\Phi^+(B)$ that are not sums of two positive roots; the pair gives the based root datum $(R(G,T),\\Delta(B))$.\n\nAssume the Axiom of Choice inherited from the root-group, Weyl and centre suppliers for the following structural assertions ([[def-axiom-of-choice]]). The coroots supplied by [[thm-root-subgroups-of-a-split-reductive-group]] are in bijection with the roots and satisfy $\\langle\\alpha,\\alpha^\\vee\\rangle=2$. This quadruple is a reduced root datum in the sense of [[def-abstract-root-datum-and-its-weyl-group]], its Weyl group is canonically $W(G,T)$, and $\\Delta(B)$ is a base whose nonnegative integral combinations recover $\\Phi^+(B)$ ([[thm-weyl-group-borel-chambers]], [[lem-root-datum-combinatorics]]). Its semisimple rank is $|\\Delta|=\\operatorname{rank}G-\\dim Z(G)$, and $G$ is semisimple exactly when $\\mathbb Z\\Phi$ has finite index in $X(T)$ ([[lem-reductive-center-radical-and-semisimple-quotient]]).\n\nThe isomorphism class of the unbased root datum is independent of the split Borel pair, but it is not asserted to have a unique abstract isomorphism: Weyl automorphisms already refute that assertion in type $A_1$. For two fixed split Borel pairs $(B,T),(B',T')$, conjugation by $g\\in G(k)$ carrying the first pair to the second induces a canonical comparison of their **based** root data. If $g'$ is another such element, $g^{-1}g'$ lies in $N_G(B)\\cap N_G(T)=B\\cap N_G(T)=T$, by Borel self-normality and the Weyl/Borel correspondence. Conjugation by $T$ acts trivially on its character and cocharacter lattices and preserves the root-coroot labels, so the two induced comparisons agree. Thus uniqueness applies to the comparison attached to the fixed based pairs, while the unbased datum is defined up to isomorphism class. ([[thm-weyl-group-borel-chambers]], [[lem-cartan-subgroups-conjugacy-and-density]])",
+        "strategy": "Record the provided core objects and constructions from the current Definition. Supplemental structural assertions carry exactly the local AC qualifications displayed there; the formal core retains its stated choice scope.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 21 (21.12), (21.35), (21.41)-(21.43); Appendix C.34; Ch. 19 (19.21)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 27,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-simple-reflection-double-coset-rule",
+        "kind": "lemma",
+        "title": "Simple reflections act on double cosets by the Tits rule",
+        "deps": [
+          "thm-weyl-group-borel-chambers",
+          "thm-root-subgroups-of-a-split-reductive-group",
+          "lem-sl2-structure-and-root-coordinates",
+          "lem-root-coordinate-cells-and-generation",
+          "lem-borel-root-group-opposition",
+          "def-root-datum-of-a-split-reductive-group",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $(G,T)$ be a split reductive group over $k$, $B\\supseteq T$ a Borel subgroup, $\\Delta$ the corresponding base and $W=N_G(T)/T$ ([[def-root-datum-of-a-split-reductive-group]]). For a simple root $\\alpha\\in\\Delta$ with image $s_\\alpha\\in W$ and any $w\\in W$ one has the Tits inclusions $s_\\alpha B(k)w\\subseteq B(k)wB(k)\\cup B(k)s_\\alpha wB(k)$. Equivalently, the quadruple $(G(k),B(k),N_G(T)(k),S)$ with $S=\\{s_\\alpha:\\alpha\\in\\Delta\\}$ is a Tits system (BN-pair) in the abstract group $G(k)$: (T1) $G(k)$ is generated by $B(k)$ and $N(k)$ and $B(k)\\cap N(k)=T(k)$ is normal in $N(k)$; (T2) the elements of $S$ are involutions generating $W(k)=N(k)/T(k)$; (T3) $sB(k)w\\subseteq B(k)wB(k)\\cup B(k)swB(k)$ for all $s\\in S$, $w\\in W$; (T4) $sB(k)s\\not\\subseteq B(k)$ for $s\\in S$. In particular $B(k)s_\\alpha B(k)\\cup B(k)=B(k)\\cup B(k)s_\\alpha B(k)$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 2.2, 3.1; The independent source-cell isomorphisms of [F1] give $G(k)=\\bigsqcup_w U^w(k)n_wB(k)$, so $G(k)$ is generated by $B(k)$ and $N(k)$. This is a point statement obtained from scheme isomorphisms defined over $k$, not from algebraic generation alone. The Weyl action on Borels is free by [F3], so $B(k)\\cap N(k)=T(k)$; this subgroup is normal in $N(k)$ by the normalizer definition. Thus(T1) holds. The field-point quotient description of [F3] identifies $N(k)/T(k)$ with $W$, generated by its simple reflections of order two, proving(T2).",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 21 (21.44)-(21.45) and (21.69)-(21.75), printed pp. 447-457"
+            },
+            {
+              "title": "N. Bourbaki, Groupes et algebres de Lie, Ch. IV-VI",
+              "url": "https://doi.org/10.1007/978-3-540-34491-9",
+              "locator": "Ch. IV, S2, Theoreme 1"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 28,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-root-coordinate-cells-and-generation",
+        "kind": "lemma",
+        "title": "Root coordinates, cell subgroups and generation",
+        "deps": [
+          "thm-cocharacter-limit-subgroups",
+          "thm-weyl-group-borel-chambers",
+          "thm-root-subgroups-of-a-split-reductive-group",
+          "thm-weight-subgroups-of-a-torus-action",
+          "lem-lie-functor-exactness-fixed-points-and-generation",
+          "lem-root-datum-combinatorics",
+          "def-axiom-of-choice",
+          "def-roots-and-root-groups-of-a-split-reductive-group"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $(G,T)$ be a split reductive group with Borel $B\\supseteq T$, base $\\Delta$ and $U=B_u$ ([[def-roots-and-root-groups-of-a-split-reductive-group]]). (a) $G$ is generated by $T$ and the subgroups $G_\\alpha$ for $\\alpha\\in\\Delta$, hence by $T$ and the $U_{\\pm\\alpha}$ with $\\alpha\\in\\Delta$; if $G$ is semisimple it is generated by the $U_\\alpha$, $\\alpha\\in\\Phi$. (b) For $w\\in W(G,T)$ let $U_w$ (resp. $U^w$) be the subgroup generated by the $U_\\alpha$ with $\\alpha\\in\\Phi^+\\cap w(\\Phi^+)$ (resp. $\\alpha\\in\\Phi^+\\cap w(\\Phi^-)$). These subgroups are smooth, connected and $T$-stable, equal to the products of their root groups in any order; the multiplication map $U_w\\times U^w\\to U$ is an isomorphism; and $U_\\alpha\\subseteq U_w$ iff $\\alpha\\in\\Phi^+\\cap w\\Phi^+$, while $U_\\alpha\\subseteq U^w$ iff $\\alpha\\in\\Phi^+\\cap w\\Phi^-$. (c) The isotropy group of $wB/B$ in $U$ equals $U_w$, the orbit map $U^w\\to UwB/B$ is an isomorphism, and $\\dim(UwB/B)=n(w)=|\\Phi^+\\cap w\\Phi^-|$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1; Let $H$ be the subgroup generated by $T$ and the $G_\\alpha$ for $\\alpha\\in\\Delta$. Each $G_\\alpha$ contains its two root groups and a representative of $s_\\alpha$, by the rank-one results in [F1]. As the simple reflections generate $W$, products of these representatives in $H$ represent every $w\\in W$. Conjugation by them and $W\\cdot\\Delta=\\Phi$ show that $H$ contains every root group. It therefore equals $G$ by [F1]. Each $G_\\alpha$ is generated by $T$ and its two root groups, so this also proves generation by $T$ and the simple positive and n",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 21 (21.62), (21.66), (21.77)-(21.79), printed pp. 445-452"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "Remark 1.4.6 and Theorem 1.4.12"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 27,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-bruhat-decomposition-for-split-reductive-group",
+        "kind": "theorem",
+        "title": "Bruhat decomposition for a split reductive group",
+        "deps": [
+          "def-unipotent-algebraic-group",
+          "lem-finite-dimensional-subcomodules-contain-elements",
+          "lem-representations-of-diagonalizable-groups-are-sums-of-eigenspaces",
+          "thm-fixed-point-schemes-and-centralizers-of-linearly-reductive-actions",
+          "thm-cocharacter-limit-subgroups",
+          "lem-root-coordinate-cells-and-generation",
+          "lem-simple-reflection-double-coset-rule",
+          "thm-weyl-group-borel-chambers",
+          "thm-root-subgroups-of-a-split-reductive-group",
+          "thm-luna-map-and-bialynicki-birula-decomposition",
+          "lem-borel-root-group-opposition",
+          "thm-quotient-by-a-borel-subgroup-is-complete",
+          "lem-borel-subgroup-is-the-stabilizer-of-a-maximal-flag",
+          "def-axiom-of-choice",
+          "def-root-datum-of-a-split-reductive-group"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $(G,T)$ be a split reductive group over $k$, $B\\supseteq T$ a Borel subgroup, $U=B_u$, $W=N_G(T)/T$, and choose representatives $n_w\\in N_G(T)(k)$ ([[def-root-datum-of-a-split-reductive-group]]). Then: (a) the double cosets $Bn_wB$ depend only on $w$, are smooth locally closed subvarieties of $G$, and $G$ is their disjoint union, $G=\\bigsqcup_{w\\in W}BwB=\\bigsqcup_{w\\in W}Bn_wB=\\bigsqcup_{w\\in W}U^wn_wB$; (b) for every $w$ the multiplication map $U^w\\times B\\to Bn_wB$ is an isomorphism, and $G/B=\\bigsqcup_wY(w)$ with $Y(w)=UwB/B\\cong\\mathbf A^{n(w)}$ an affine space of dimension $n(w)=|\\Phi^+\\cap w\\Phi^-|$; (c) the **big cell** $B^-B=U^-TB$ (with $B^-$ the opposite Borel, $B^-\\cap B=T$ and $U^-=B^-_u$) is open and dense in $G$, the multiplication map $U^-\\times T\\times U\\to G$ is an open immersion, the open dense longest Bruhat cell is $Bn_{w_0}B=n_{w_0}(B^-B)$, a translate of this opposite big cell. Its flag cell $Y(w_0)$ is the unique flag cell of maximal dimension $|\\Phi^+|$, while the group cell has dimension $\\dim G$; (d) on $k$-points, $G(k)=\\bigsqcup_wB(k)wB(k)$ is the Bruhat decomposition attached to the Tits system of [[lem-simple-reflection-double-coset-rule]], and the $G(k)$-orbits on $G/B\\times G/B$ are in bijection with the $B(k)$-double cosets of $G(k)$, hence indexed by $W$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 1.2, 2.1, 3.1, 4.1; Put $X=G/B$. The projective representation and separated torus weights in [F4] identify the chosen cocharacter's fixed scheme with the finite constant set $\\{n_wB\\}$. Invariant affine charts verify the local-affineness hypothesis of [F3]; $X$ is smooth geometrically connected and complete by [F4]. Thus [F3] gives attracting cells $Y(w)$. Their positive tangent spaces at $n_wB$ are the positive root spaces in $\\mathfrak g/\\operatorname{Ad}(n_w)\\mathfrak b$, indexed by $\\Phi^+\\cap w\\Phi^-$, so $\\dim Y(w)=n(w)$. The construction is over $k$ and do",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 13 (13.49)-(13.51); Ch. 21 (21.68)-(21.84), printed pp. 448-452"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "Theorem 1.4.12 and S1.4"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Proposition 171(i)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 29,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-parabolic-subgroup-of-an-affine-algebraic-group",
+        "kind": "definition",
+        "title": "Parabolic subgroups",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-radical-and-unipotent-radical-of-an-algebraic-group",
+          "def-group-scheme-over-a-field",
+          "def-smooth-morphism-schemes",
+          "def-affine-scheme",
+          "thm-homogeneous-space-for-smooth-affine-group",
+          "def-proper-morphism",
+          "def-complete-variety",
+          "def-unipotent-algebraic-group",
+          "def-derived-subgroup-and-solvable-algebraic-group",
+          "def-borel-subgroup-and-maximal-torus"
+        ],
+        "statement": "Let $G$ be a smooth affine algebraic group of finite type over $k$ ([[def-group-scheme-over-a-field]], [[def-smooth-morphism-schemes]], [[def-affine-scheme]]). A closed subgroup scheme $P\\subseteq G$ is a **parabolic subgroup** if the fppf quotient $G/P$ is representable and proper over $k$; when $G/P$ is an integral $k$-variety, this is equivalent to completeness ([[thm-homogeneous-space-for-smooth-affine-group]], [[def-proper-morphism]], [[def-complete-variety]]). The **unipotent radical** $R_u(P)\\subseteq P$ is the largest smooth connected normal unipotent subgroup ([[def-unipotent-algebraic-group]]), the **radical** $R(P)$ is the largest smooth connected normal solvable subgroup ([[def-derived-subgroup-and-solvable-algebraic-group]], [[def-radical-and-unipotent-radical-of-an-algebraic-group]]), and a **Levi subgroup** of $P$ is a smooth closed subgroup $L\\subseteq P$ such that the multiplication map $L\\ltimes R_u(P)\\to P$ is an isomorphism. Borel subgroups and the equivalence 'parabolic iff, over $k^{\\mathrm a}$, contains a Borel subgroup' are treated on this page in [[thm-solvable-subgroups-and-the-radical-as-borel-intersection]] and [[def-borel-subgroup-and-maximal-torus]].\n\nThe conditional proper-quotient definition above uses no choice principle. Assume the Axiom of Choice for the following supplemental representability and structural assertions ([[def-axiom-of-choice]]). Representability of $G/P$ is a theorem for smooth affine $G$ and closed $P$ ([[thm-homogeneous-space-for-smooth-affine-group]]); For an integral representable quotient, properness is equivalent to completeness in the convention of [[def-complete-variety]]. For a general quotient, properness is the defining condition; no integrality is assumed. The definition does not assume $P$ smooth or connected; in a smooth connected affine group such a parabolic is connected and self-normalizing by [[thm-solvable-subgroups-and-the-radical-as-borel-intersection]]. Smooth parabolic subgroup varieties form the class to which the standard $P_I$ and Levi classification below applies; nonsmooth Frobenius-thickened proper-quotient subgroups are retained by this general definition. The definition makes no reference to split reductive structure, so that the standard-parabolic theory can establish the equivalence for smooth subgroup varieties. In the Levi decomposition below the subgroup $L$ is required only to be smooth and closed; when $P$ is smooth, its unipotent radical is smooth and the product decomposition is a statement about schemes.",
+        "strategy": "Record the provided core objects and constructions from the current Definition. Supplemental structural assertions carry exactly the local AC qualifications displayed there; the formal core retains its stated choice scope.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 17 (17.12), (17.16) and (17.49), printed pp. 354-368; Ch. 21 (21.91)"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "S5.2 (parabolic subgroups) and S5.4 (Levi subgroups)"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 6,
+        "justified_by": [
+          "thm-solvable-subgroups-and-the-radical-as-borel-intersection"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-standard-levi-subgroup",
+        "kind": "lemma",
+        "title": "Standard Levi subgroups of a split reductive group",
+        "deps": [
+          "lem-borel-root-group-opposition",
+          "def-root-datum-of-a-split-reductive-group",
+          "thm-root-subgroups-of-a-split-reductive-group",
+          "thm-weyl-group-borel-chambers",
+          "thm-chevalley-centralizer-radical-and-reductive-centralizers",
+          "thm-cocharacter-limit-subgroups",
+          "lem-root-datum-combinatorics",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $(G,T)$ be a split reductive group with root datum $(X,\\Phi,\\alpha\\mapsto\\alpha^\\vee)$ and a Borel subgroup $B\\supseteq T$ with corresponding base $\\Delta=\\Delta(B)$ ([[def-root-datum-of-a-split-reductive-group]]), and let $I\\subseteq\\Delta$. Put $W_I=\\langle s_\\alpha\\rangle_{\\alpha\\in I}\\subseteq W$, $\\Phi_I=\\mathbb ZI\\cap\\Phi$, $T_I=(\\bigcap_{\\alpha\\in I}\\ker\\alpha)_t\\subseteq T$ and $L_I=C_G(T_I)$. Then: (a) $L_I$ is smooth connected reductive with maximal torus $T$, root system $\\Phi_I$ and root datum $(X(T),\\Phi_I,\\alpha\\mapsto\\alpha^\\vee)$, and Weyl group $W_I$; the root groups of $L_I$ are exactly the $U_\\alpha$ with $\\alpha\\in\\Phi_I$; (b) $T_I$ is the largest subtorus of $T$ killed by all $\\alpha\\in I$, and $L_I$ is generated by $T$ and the root groups $U_\\alpha$ with $\\alpha\\in\\Phi_I$; (c) $B\\cap L_I$ is a Borel subgroup $B_I$ of $L_I$ with positive system $\\Phi_I\\cap\\Phi^+(B)$ and base $I$; (d) for each $\\alpha\\in\\Delta$, choose a rational fundamental dual vector $\\eta_\\alpha\\in X_*(T)\\otimes\\mathbb Q$ with $\\langle\\beta,\\eta_\\alpha\\rangle=\\delta_{\\alpha\\beta}$, and let $\\lambda_\\alpha$ be any positive integral multiple lying in $X_*(T)$. For every $\\beta\\in\\Delta\\smallsetminus\\{\\alpha\\}$, every representative of $s_\\beta$ in $N_G(T)(k)$ lies in $P_G(\\lambda_\\alpha)(k)$, and this subgroup contains $G_\\beta$. Rational dual vectors need not themselves be integral cocharacters; a possible central component does not change the parabolic.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1; $L_I=C_G(T_I)$ is smooth connected reductive by [F1]; its Lie algebra is $\\mathfrak t\\oplus\\bigoplus_{\\alpha\\in\\Phi_I}\\mathfrak g_\\alpha$ because the characters vanishing on $T_I$ lie in the rational span of $I$. Each root has integral coefficients in the simple basis, so a root in this rational span has zero coefficients outside $I$ and lies in $\\mathbb ZI\\cap\\Phi$. Hence the roots of $(L_I,T)$ are precisely the elements of $\\Phi_I$, and the corresponding root groups are $U_\\alpha\\subseteq L_I$; the coroot assignment restricts, and the Weyl gr",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 21 (21.88)-(21.90), printed pp. 453-454"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "S5.2, especially the dynamic description of parabolic subgroups"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 28,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-parabolics-and-levi-decomposition",
+        "kind": "theorem",
+        "title": "Parabolic subgroups and Levi decomposition",
+        "deps": [
+          "lem-root-datum-combinatorics",
+          "thm-weight-subgroups-of-a-torus-action",
+          "lem-standard-levi-subgroup",
+          "def-parabolic-subgroup-of-an-affine-algebraic-group",
+          "thm-bruhat-decomposition-for-split-reductive-group",
+          "lem-simple-reflection-double-coset-rule",
+          "thm-root-subgroups-of-a-split-reductive-group",
+          "thm-weyl-group-borel-chambers",
+          "thm-chevalley-centralizer-radical-and-reductive-centralizers",
+          "thm-cocharacter-limit-subgroups",
+          "thm-quotient-by-a-borel-subgroup-is-complete",
+          "thm-borel-and-maximal-torus-conjugacy-over-algebraically-closed-field",
+          "thm-solvable-subgroups-and-the-radical-as-borel-intersection",
+          "def-axiom-of-choice",
+          "def-root-datum-of-a-split-reductive-group"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $(G,T)$ be a split reductive group over $k$, $B\\supseteq T$ a Borel subgroup with base $\\Delta$, and let $W$, $\\Phi^+$ be as above ([[def-root-datum-of-a-split-reductive-group]]). (a) For every subset $I\\subseteq\\Delta$ there is a unique smooth parabolic subgroup $P_I\\subseteq G$ containing $B$ with $P_I=\\bigsqcup_{w\\in W_I}C(w)$, where $C(w)=BwB$; the correspondence $I\\mapsto P_I$ is a bijection onto the set of smooth parabolic subgroup varieties of $G$ containing $B$, and the standard parabolic subgroups are exactly the groups $P_G(\\lambda)$ for cocharacters $\\lambda$ with $\\langle\\alpha,\\lambda\\rangle\\ge0$ for all $\\alpha\\in\\Phi^+$, with $I=\\{\\alpha\\in\\Delta:\\langle\\alpha,\\lambda\\rangle=0\\}$. (b) The unipotent radical of $P_I$ is $R_u(P_I)=U_I:=\\prod_{\\alpha\\in\\Phi^+\\smallsetminus\\Phi_I}U_\\alpha$, directly spanned in any order, and the multiplication map $R_u(P_I)\\rtimes L_I\\to P_I$ is a group-scheme isomorphism (Levi decomposition), with $L_I$ the standard Levi subgroup of [[lem-standard-levi-subgroup]]. (c) Every smooth parabolic subgroup of $G$ containing $B$ is $P_I$ for a unique $I$, and over an algebraically closed field every smooth parabolic subgroup of $G$ is conjugate by an element of $G(k)$ to a unique standard parabolic $P_I$. (d) $P_\\varnothing=B$ and $P_\\Delta=G$.\n\n\nThe general proper-quotient Definition still permits nonsmooth parabolic subgroup schemes; the standard classification above is restricted to smooth subgroup varieties. For example, in characteristic $p$, the Frobenius preimage $F_{\\mathrm{SL}_2}^{-1}(B^{(p)})$ is nonsmooth, contains $B$, and has proper quotient $\\mathbf P^{1,(p)}$, so it is not one of these smooth $P_I$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1, 3.2, 4.1; Choose an integral cocharacter $\\lambda$ whose simple-root pairings are zero on $I$ and strictly positive on $\\Delta\\smallsetminus I$: take the sum of rational dual vectors there and clear denominators as in the standard Levi lemma. Every root has simple coefficients of one sign, so $\\langle\\beta,\\lambda\\rangle=0$ exactly for $\\beta\\in\\Phi_I$, and the positive pairings occur precisely on $\\Phi^+\\smallsetminus\\Phi_I$. By [F2], the fixed group $Z_G(\\lambda)$ and $L_I=C_G(T_I)$ are smooth connected reductive with the same root spaces and torus. Th",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 21 (21.88) and (21.91)-(21.92), printed pp. 453-456"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "S5.2-S5.4, Corollaries 5.2.7-5.2.8 and the Levi existence results"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 30,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 892,
+    "id": "split-reductive-root-systems-bruhat-cells-and-parabolics-examples",
+    "kind": "B",
+    "category": "algebraic-geometry",
+    "title": "Split Reductive Root Systems, Bruhat Cells, and Parabolics -- Examples",
+    "companion": "split-reductive-root-systems-bruhat-cells-and-parabolics",
+    "requires": [
+      "split-reductive-root-systems-bruhat-cells-and-parabolics",
+      "bruhat-decomposition-and-flags-over-finite-fields"
+    ],
+    "items": [
+      {
+        "id": "ex-root-groups-and-bruhat-cells-for-sl2",
+        "kind": "example",
+        "title": "Root groups and Bruhat cells for SL_2",
+        "deps": [
+          "def-root-datum-of-a-split-reductive-group",
+          "lem-sl2-structure-and-root-coordinates",
+          "thm-bruhat-decomposition-for-split-reductive-group",
+          "thm-root-subgroups-of-a-split-reductive-group",
+          "lem-homogeneous-curves-and-automorphisms-of-p1",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $k$ be any field and $G=\\mathrm{SL}_2$ over $k$ with diagonal torus $T_2=\\{\\operatorname{diag}(x,x^{-1})\\}$, upper triangular Borel $B$, $U^+=\\{\\binom{1\\ a}{0\\ 1}\\}$ and $U^-=\\{\\binom{1\\ 0}{a\\ 1}\\}$ ([[def-root-datum-of-a-split-reductive-group]], [[lem-sl2-structure-and-root-coordinates]], [[thm-bruhat-decomposition-for-split-reductive-group]]). The root datum is $X(T_2)=\\mathbb Z\\chi$ with $\\alpha=2\\chi$ and $\\alpha^\\vee=\\chi^\\vee$, so $\\langle\\alpha,\\alpha^\\vee\\rangle=2$ and the group is simply connected; the root groups are $U_{\\pm\\alpha}=U^\\pm$, $n_\\alpha=\\binom{0\\ 1}{-1\\ 0}$ represents $s_\\alpha$, $tu_\\alpha(a)t^{-1}=u_\\alpha(\\alpha(t)a)$, and $\\mathfrak{sl}_2=\\mathfrak t\\oplus\\mathfrak g_\\alpha\\oplus\\mathfrak g_{-\\alpha}$ with $\\dim\\mathfrak g_{\\pm\\alpha}=1$. The Weyl group is $W=\\{1,s_\\alpha\\}\\cong\\mathbb Z/2$; the Bruhat decomposition is $G=B\\sqcup Bn_\\alpha B$ with $Bn_\\alpha B=U^+n_\\alpha B$ the open Bruhat cell, parametrized by $U^+\\times B\\cong\\mathbf A^1\\times\\mathbf G_m\\times\\mathbf A^1$; separately $U^-T_2U^+$ is the open Gaussian cell; on $k$-points $\\mathrm{SL}_2(k)=B(k)\\sqcup B(k)n_\\alpha B(k)$, while $G/B\\cong\\mathbf P^1$ with $G(k)$ acting through $\\mathrm{PGL}_2(k)$. The cell $B$ has dimension $2$ and the open Bruhat cell has dimension $3$; the unique longest element $w_0=s_\\alpha$ gives this dense open cell, and the opposite Borel is $B^-=U^-T$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1; The root datum and root coordinates are those of [F1]: $\\Phi=\\{\\pm2\\chi\\}$ with coroot $\\chi^\\vee$ and $\\langle\\alpha,\\alpha^\\vee\\rangle=2$, so the root datum is the simply connected rank-one datum; the root groups are $U_{\\pm\\alpha}=U^\\pm$, and the Lie algebra decomposes as $\\mathfrak{sl}_2=\\mathfrak t\\oplus\\mathfrak g_\\alpha\\oplus\\mathfrak g_{-\\alpha}$ with one-dimensional root spaces. The Weyl group is $W=N_G(T_2)/T_2=\\{1,s_\\alpha\\}\\cong\\mathbb Z/2$ because $\\mathrm{SL}_2$ has exactly two Borel subgroups containing $T_2$, namely $B$ and $U^-",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 20 (20.37)-(20.41), printed pp. 422-423; Ch. 21 (21.15) and (21.68)-(21.84)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Remark 172, p. 76"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 30,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-standard-parabolics-in-gl-n",
+        "kind": "example",
+        "title": "Standard parabolics in GL_n",
+        "deps": [
+          "def-root-datum-of-a-split-reductive-group",
+          "lem-sl2-structure-and-root-coordinates",
+          "thm-parabolics-and-levi-decomposition",
+          "thm-bruhat-decomposition-for-split-reductive-group",
+          "lem-standard-levi-subgroup",
+          "lem-root-coordinate-cells-and-generation",
+          "def-weyl-group-and-length-for-finite-gl-n",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the named suppliers. Let $k$ be a field and $n\\ge1$, $G=\\mathrm{GL}_n$ with standard split maximal torus $T=D_n$ of diagonal matrices and standard Borel $B$ of upper triangular matrices ([[def-root-datum-of-a-split-reductive-group]], [[thm-parabolics-and-levi-decomposition]]). The roots are $\\alpha_{ij}=\\chi_i-\\chi_j$ ($i\\neq j$) with root groups $U_{ij}=\\{I+aE_{ij}\\}$, and the base is $\\{\\alpha_{i,i+1}:1\\le i\\le n-1\\}$, identified with $\\{1,\\dots,n-1\\}$. For $I\\subseteq\\{1,\\dots,n-1\\}$ let $\\Delta\\smallsetminus I=\\{a_1,a_1+a_2,\\dots,a_1+\\cdots+a_{s-1}\\}$ with $a_i\\ge1$ and $\\sum a_i=n$; then $P_I$ consists of the block upper triangular matrices with diagonal blocks of sizes $a_1,\\dots,a_s$, arbitrary entries above the block diagonal and zero below, the standard Levi subgroup is $L_I=\\prod_i\\mathrm{GL}_{a_i}$ (block diagonal) and $R_u(P_I)$ is the block upper unitriangular subgroup, with identity diagonal blocks, zero blocks below them and arbitrary blocks above them; the multiplication $R_u(P_I)\\rtimes L_I\\to P_I$ is an isomorphism, $I\\mapsto P_I$ is a bijection onto the smooth parabolic subgroup varieties containing $B$, and $P_\\varnothing=B$, $P_{\\Delta}=G$. The maximal proper parabolics $P_{\\Delta\\smallsetminus\\{i\\}}$ are the stabilizers of the partial flags with a single subspace of dimension $i$, and the Bruhat cells of the complete flag variety $G/B$ are indexed by $S_n$ with $\\dim Y(w)=n(w)=\\#\\{(i,j):i<j,\\ w(i)>w(j)\\}$.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1; The roots and root groups of $\\mathrm{GL}_n$ are as in [F1]: the weight of the coordinate function $\\chi_i$ on $D_n$ is $\\chi_i(\\operatorname{diag}(x_1,\\dots,x_n))=x_i$; the adjoint action on $E_{ij}$ gives the weight $\\chi_i-\\chi_j$, and the root group $U_{ij}$ consists of the elementary matrices $I+aE_{ij}$, isomorphic to $\\mathbf G_a$; the positive roots relative to $B$ are those with $i<j$, and the simple roots $\\alpha_{i,i+1}$ form the base of the root system $A_{n-1}$.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 21 (21.16), (21.87), (21.93), printed pp. 429, 452 and 456-457; Ch. 7 (7.29)-(7.30)"
+            },
+            {
+              "title": "Brian Conrad, Reductive Group Schemes (SGA 3 summer school, Luminy; Panoramas et Syntheses)",
+              "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+              "locator": "Example 4.1.8 and S5.2"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 31,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-lie-root-system-does-not-record-full-root-datum",
+        "kind": "counterexample",
+        "title": "The Lie algebra and root system do not determine the root datum",
+        "deps": [
+          "thm-split-rank-one-reductive-classification",
+          "def-root-datum-of-a-split-reductive-group",
+          "lem-sl2-structure-and-root-coordinates",
+          "thm-root-subgroups-of-a-split-reductive-group",
+          "lem-root-datum-combinatorics",
+          "lem-reductive-center-radical-and-semisimple-quotient",
+          "def-axiom-of-choice"
+        ],
+        "statement": "The isomorphism class of the Lie algebra together with the abstract root system determines the root datum, and hence the split reductive group.",
+        "strategy": "Direct proof on the current carrier: 1.1, 2.1, 3.1; The Lie algebras agree and the abstract root systems agree: by [F2], $\\operatorname{Lie}(G_1)\\cong\\operatorname{Lie}(G_2)\\cong\\mathfrak{sl}_2$, and both root systems are $\\{\\pm\\alpha\\}$, abstractly the root system $A_1$; the groups are not isomorphic because their centres differ, $\\mu_2\\neq1$ by [F3].",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Groups (corrected 2022 printing, Cambridge University Press)",
+              "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+              "locator": "Ch. 21 (21.15), printed pp. 429-430; Ch. 20 (20.39)-(20.40)"
+            },
+            {
+              "title": "Florian Herzig, Linear Algebraic Groups (University of Toronto lecture notes, 2013)",
+              "url": "https://www.math.toronto.edu/~herzig/lin-alg-groups13.pdf",
+              "locator": "Remarks 179 and Theorem 178(iii), pp. 82-83"
+            }
+          ]
+        },
+        "design_row": "AG-GRP-4",
+        "local_addition": true,
+        "dependency_level": 28,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  }
+]

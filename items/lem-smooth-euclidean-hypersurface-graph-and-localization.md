@@ -35,6 +35,17 @@ sources:
     locator: Definition 14.2.1 and Corollary 14.2.2, printed p.104; Example 14.2.4, p.105; Definition 14.2.7 and Remark 14.2.8, p.106. The explicit graph determinant is derived locally in this item or its suppliers.
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-6.md"
+      - "research/frontier-38-owner-30-alpha-batch-6-5a.md"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u6.json"
+    content_sha256: "57262afe39b74cbb67c9077c2d9681d8e1a20ba52c8b9242711477258fb32c98"
   precheck: pass
 ---
 

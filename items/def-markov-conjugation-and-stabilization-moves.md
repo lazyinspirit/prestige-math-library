@@ -13,6 +13,13 @@ proof_strategy: not-applicable
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full item proof read and accepted exact subsequent delta; item def-markov-conjugation-and-stabilization-moves; evidence research/frontier-38-owner-30-reader-17.md, research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u17.json, research/frontier-38-owner-30-alpha-batch-17-5a-decisions.json. Original source/coverage limitations retained; no recursive audit of all prerequisites or full bibliography claimed. Restored from completed 2026-10-03 evidence; no new audit or independent audit of local repair claimed."
+    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
 sources:
   references:
     - title: "Birman and Brendle, Braids: A Survey, Handbook of Knot Theory chapter, author manuscript; section 2 before Theorem 4, printed pp. 17-19"

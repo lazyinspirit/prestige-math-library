@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-29.md"
+      - "research/frontier-38-owner-30-alpha-batch-29-5a.md"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u29.json"
+    content_sha256: "0e2ec7beeebf81323e3e9075f5009fe7ac52da08cb2c2f48a53908d351dcb569"
 id: lem-hilbert-regularity-independent-of-ambient-dimension
 kind: lemma
 title: "A Hilbert polynomial bounds regularity independently of ambient dimension"

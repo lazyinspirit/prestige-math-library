@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-20.md"
+      - "research/frontier-38-owner-30-alpha-batch-20-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-20-post-5a.json"
+    content_sha256: "42d41cbb5a3da9a7e9a213a7ff4a44d98d567e87b63564ad1260da0d6ccb062c"
 id: lem-smirnov-class-quotient-characterisation
 kind: lemma
 title: "The Smirnov class is the class of quotients by outer bounded functions"

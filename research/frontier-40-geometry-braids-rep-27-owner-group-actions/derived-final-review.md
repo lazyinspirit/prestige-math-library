@@ -1,0 +1,27 @@
+# Batch23 final source review and carrier freeze
+
+## Disposition
+
+The frozen inventory is53 items:50 A/3 B. The full commissioned `def-derived-scheme-and-cotangent-complex` now has a closed proof route under the exact authoritative-theorem alternative authorized by the owner. No statement, pair, scope or helper inventory is deleted or narrowed. Only that definition's strategy and dependency list changed in this continuation; its Statement is byte-for-byte preserved. All52 previously current ready records are preserved. Final scoped checks and the affected-record refresh are recorded in `derived-final-checks.json`; this is Step1 authoring-draft readiness, not native authored-item proof audit.
+
+## Independent review
+
+All delivered candidates listed in `derived-final-source-reading.json` were read in full, with their actual proof arguments checked. The direct algebraic local model bypasses the earlier general KS premise via stalk additive homology and bounded cycle/primitive solution witnesses. Actual local ring/module transfer, hypercover fibrancy, sheafification QE, coefficient and square-zero adjunctions supply global connective derivation representation.
+
+The stable packet matches exactly HAGII1.2.11 sequential spectra. The applicability packet verifies effective cofibration monos, stalk left properness, represented-cell compact support including site-cardinal sheaf gluing, ancestry closure, and acyclic generating-domain smallness. Full Hovey Definition2.1/Theorem2.2 and3.3/3.4 were rechecked: localization existence is an exact theorem application with all hypotheses supplied, not a fabricated local proof of Hirschhorn. The suspension unit, F0 realization, mapping-spectrum levels and coefficient/j_X pullback comparison check.
+
+The chart packet supplies actual varying-space enriched maps/composition and local components, with correct discrete truncation adjunction. Finitary many-sorted presentations and sheafification prove combinatoriality. Exact HA1.3.4.20/.21/.23/.24/.25 and HTT4.2.4.4 apply with checked simplicial/projective/chunk/coherent realization hypotheses. Their full statements and cited printed proofs were read; generic Joyal/DK foundations are authoritative imports under the explicitly authorized route, not claimed locally reconstructed.
+
+The affine-recognition packet constructs finite coskeleton layers. Additive-model transport and HTT Proposition7.2.2.12/Remark7.2.2.17 identify bounded derived-section cohomology. The fully read published `thm-qc-sheaf-affine-higher-cohomology-vanishes` supplies exact AC affine acyclicity. Basiswise Milnor towers are eventually constant, so lim-one vanishes. The proof identifies the homotopy sheaves of the reconstructed limit before concluding O->holim O_n is weak. No generic hypercompleteness-implies-convergence assumption, boundedness, dimension or Noetherian restriction is used.
+
+A real strict-map defect found by this reviewer was repaired before closure. An inclusion D(b) subset D(a) in Spec pi0A need not give a degreewise map A[a inverse]->A[b inverse]. `hagii-finite-label-localization-supplement.md` uses actual finite-label inclusion maps, weak same-open refinements, contractible union comma categories and derived left Kan unit/counit equivalence. Full HTT4.1.3.1,4.1.1.8,4.3.3.7 and HA's model-colimit comparison were independently rechecked. This supplies the full higher principal-diagram comparison, not only a localized homotopy category.
+
+For fixed continuous f, the mapping proof retains all components T_f whose pi0 ring maps induce f. Its literal restriction is a Kan fibration; the projective bar fibre has contractible derived localization-extension factors on every label chain, hence contractible homotopy totalization. Local morphisms are exactly the preimage of T_f. Constants/sections and strict pushforwards make composition natural; the inverse's coherent choices are contractible. Thus full affine maps, affine recognition and higher presentation compose to the commissioned derived locally ringed-space interface. Global cotangent localization/gluing and stable realization transport through this actual equivalence.
+
+## Source routes, consumers and limits
+
+The only new published prerequisite is affine QC acyclicity; the original statement already carries its AC. An exact scan of all selected manifests and published items/library found no direct or indirect consumers of this definition outside its own declaration. No other item Statement changed, so no external carrier repair is required. The existing batch15 cross-batch use map is unchanged. Hovey, HTT and HA full-document sources and exact selected headings are added to coverage and fetch-verified.
+
+Remaining mathematical blockers: none under the explicitly authorized exact-authoritative-theorem route. This does not assert recursively reconstructed Joyal/Dwyer–Kan/Hirschhorn foundations, arbitrary QCoh strictification, a general nonadditive local presheaf model, or unrelated stable dg/symmetric-monoidal equivalences. Those stronger results are unused. All commissioned clauses, full O_X module, separate pi0 pullback and corrected right-adjoint truncation survive.
+
+No other batch/shared plan/prose/ledger/engine control/publication/commit is changed. No Step1 gate retry is performed. Root owns task/prerequisite/seal integration and subsequent native authoring/audits after the explicit write-drain notice.

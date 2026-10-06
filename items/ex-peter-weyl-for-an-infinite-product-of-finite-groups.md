@@ -24,6 +24,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for ex-peter-weyl-for-an-infinite-product-of-finite-groups and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-11; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"dff589423be1f8f1d7cad97e0894e240eadd4138d715b4541f39b30faa91160c","evidence":["research/frontier-38-owner-30-reader-11.md","research/frontier-38-owner-30-reader-findings-11.json","research/frontier-38-owner-30-dispatch/reader-reader-11.result.json","research/frontier-38-owner-30-step5-hash-11-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/ex-peter-weyl-for-an-infinite-product-of-finite-groups.md","historical_raw_sha256":"6f7f9b875ea486e0e675a16ca679e4dfce3bfa68cd5d4db844d27f4f06dcac5d","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:37:53.223Z"}}
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

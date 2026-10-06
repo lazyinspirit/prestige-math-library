@@ -4,6 +4,19 @@ kind: theorem
 title: "Calderón–Zygmund operators are bounded on Lp"
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-5.md"
+      - "research/frontier-38-owner-30-alpha-batch-5-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-5-post.json"
+    reviewed_raw_sha256: "2ac212af5d145dbbb77d5f67315bff899c9a298ea46b2e4fdb4d54c8eadb55d4"
+    content_sha256: "f46e04733428e69eebcce3c0a0f9a968c9f65ebb9b580a90409ca8ea9bfb295f"
 pipeline_run: frontier-38-owner-30
 deps: [thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-monotone-convergence-for-the-integral, cor-l-p-norm-recovery-by-unit-l-q-pairings, def-calderon-zygmund-kernel-and-principal-value-operator, def-countable-choice, def-hilbert-space-adjoint, def-l-p-space-as-a-quotient-by-null-functions, def-sublinear-operator-weak-and-strong-type-p-q, lem-calderon-zygmund-lp-range-splits-into-interpolation-and-duality, thm-calderon-zygmund-operator-has-weak-type-one-one, thm-chebyshev-markov-inequality-for-the-integral, thm-complex-holder-minkowski-and-the-quotient-norm, thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p, thm-layer-cake-formula-for-l-p-powers, thm-tonelli-theorem-for-sigma-finite-product-spaces]
 proof_strategy: direct

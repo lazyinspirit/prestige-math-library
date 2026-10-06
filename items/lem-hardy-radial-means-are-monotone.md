@@ -4,6 +4,22 @@ kind: lemma
 title: "Radial p-means of a holomorphic function are nondecreasing"
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-03"
+    scope: "Cumulative whole-item verification: completed original Step5 full statement/definition and proof read plus the recorded later Step7 local mathematical corrections. Exact recovered original carrier and current post-correction carrier match recorded hashes; every substantive delta is covered by the cited correction reasoning. No independent audit of the local repairs and no new review round is claimed; supplier review is limited to interfaces used."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-20.md"
+      - "research/frontier-38-owner-30-alpha-batch-20-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-20-post-5a.json"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u20.json"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-repeat-r1-u20.json"
+    original_read_raw_sha256: "e07417f6a3bd8f2594230106c0b0fc8c5d0eb15870be8ca8ea30e76426a777fa"
+    repair_post_guard_sha256: "4d4d8a71d9f719292a17fe9306c48ef16df62eb00f600af036c9f01ba8071994"
+    content_sha256: "b0b274a40248c5f1965d5c996615518657cb1ce10627600d3fea2f7edfe24b79"
 pipeline_run: frontier-38-owner-30
 deps: [def-analytic-hardy-space-disc, cor-modulus-powers-of-holomorphic-functions-are-subharmonic, cor-holomorphic-functions-are-real-analytic-and-smooth, def-poisson-modification-of-a-subharmonic-function, thm-poisson-modification-preserves-subharmonicity-and-majorizes, thm-poisson-integral-solves-the-disc-dirichlet-problem, def-poisson-kernel-on-the-disc, lem-poisson-kernel-properties-on-the-disc, def-poisson-integral-of-finite-boundary-measure, thm-mean-value-property-for-plane-harmonic-functions, def-mean-value-property-for-plane-functions, thm-jensen-inequality-for-expectation, cor-lyapunov-moment-inequality-on-a-probability-space, def-the-one-dimensional-torus-and-normalized-haar-integral]
 proof_strategy: direct

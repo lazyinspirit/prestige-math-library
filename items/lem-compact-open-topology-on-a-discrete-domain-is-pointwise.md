@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-10.md"
+      - "research/frontier-38-owner-30-alpha-batch-10-5a.md"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u10.json"
+    content_sha256: "f06b336c7b6bb4d066fd1d87b1ab0a65ff912228736804ddba9de1b3c20643a1"
 id: lem-compact-open-topology-on-a-discrete-domain-is-pointwise
 kind: lemma
 title: On a discrete domain the compact-open topology is the topology of pointwise

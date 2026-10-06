@@ -18,6 +18,19 @@ sources:
       url: "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
       locator: "Claim 3.4 and its proof, printed pp. 480-481: maximal monomial implies m_{i,i}=m_{j,j}=m_{i,j}"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item read and recorded Step 7 mathematical repair review, including the used supplier interfaces; current mathematical content matches the bound evidence. The repair review is local and does not claim an independent audit of the repair."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-16.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-16.result.json
+      - research/frontier-38-owner-30-step5-hash-16-post-5a.json
+      - research/frontier-38-owner-30-alpha-batch-16-5a-decisions.json
+      - research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u16.json
+      - research/frontier-38-owner-30-dispatch/alpha-adjudicate-step7-v2-initial-r1-u16.result.json
   precheck: n/a
 ---
 ## Statement

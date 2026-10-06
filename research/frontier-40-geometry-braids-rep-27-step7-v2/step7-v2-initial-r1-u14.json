@@ -1,0 +1,110 @@
+{
+  "run": "frontier-40-geometry-braids-rep-27",
+  "phase": "initial",
+  "round": 1,
+  "unit": "14",
+  "input_sha256": "2f03bb52479aaa390bb3dcd48c71478e0016d3408c93c2f9769a7db5ae31ba68",
+  "decisions": [
+    {
+      "id": "ex-additive-and-infinitesimal-group-schemes",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "7b6dd5cdd4adbc82b748f69b8e14ef0edfd253a45e0431c8e6cc5ae0f2d1f591",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 omits finite generation although F1 defines group schemes to be of finite type. The Hopf algebra k[x_1,x_2,...] with primitive generators satisfies all Hopf identities but is not finitely generated: every finite collection of polynomials involves only finitely many variables. This is nonfatal to the Example because its four coordinate algebras are finitely generated, and its claimed group laws, closed immersions, point sets, reducedness and length are correct. F3 is now qualified and step 1.3 explicitly checks finite generation of both quotients.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.jmilne.org/math/Books/iAG2022.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-additive-and-infinitesimal-group-schemes",
+      "disposition": "repaired",
+      "post_sha256": "62faf75ab66c0f142f181afb591742fd42712b49ab6facac150362fea704b5ec",
+      "review_context_sha256": "131c7f6ad049fc356d716257c16f6d0f5b50ed3afd6404745f5190ef6cc1b21d",
+      "reason": "Checked the complete Example and all six verification steps against actual F1-F7 interfaces and the owning contract/page. Hopf identities on generators extend to algebra maps; Frobenius descends through both quotient ideals, and finite generation meets F1. Quotient ring maps are closed immersions and preserve all group structure maps. Algebra-valued points give the asserted subgroups, including the zero algebra. The substitution t=1+s, its explicit inverse and the basis 1,s,...,s^{p-1} prove length p and nonreducedness for every prime p, including 2. This is a local repair review, not independent review of my repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.jmilne.org/math/Books/iAG2022.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "subject": "ex-additive-and-infinitesimal-group-schemes",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "disposition": "fixed",
+      "reason": "F3 omits finite generation although F1 defines group schemes to be of finite type. The Hopf algebra k[x_1,x_2,...] with primitive generators satisfies all Hopf identities but is not finitely generated: every finite collection of polynomials involves only finitely many variables. This is nonfatal to the Example because its four coordinate algebras are finitely generated, and its claimed group laws, closed immersions, point sets, reducedness and length are correct. F3 is now qualified and step 1.3 explicitly checks finite generation of both quotients.",
+      "evidence_report": "research/frontier-40-geometry-braids-rep-27-step7-v2/step7-v2-initial-r1-u14.json",
+      "class": "accuracy",
+      "subclass": "missing-hypothesis"
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "none",
+      "reason": "No published defect was found in the actual supplier interfaces used by this repair. No Statement or Definition was changed, so there is no new supplier-interface event or published-consumer maintenance proposal."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim_and_conventions": "AC and a field k; characteristic p>0 only for alpha_p and mu_p. Library group schemes have finite type. No smoothness or reducedness assumption is added. The Example text is byte-unchanged; its SHA-256 is dfb0e476a26d153487034a99b1802f15b19da41c7a5a3bd144c6beae2cfd3d0f.",
+    "changes": "Qualified F3 by finite generation under the existing AC assumption; step 1.3 states quotient generators, cites F3 and writes a as the image of t. Assigned contract mirrors step 1.3 and adds its F3 citation uses; dependency declarations and the page are unchanged. No prior item verification.judge was present.",
+    "source_reading": {
+      "url": "https://www.jmilne.org/math/Books/iAG2022.pdf",
+      "locator": "Complete Definition 3.3, paragraph 3.4 and Proposition 3.6 with its proof, printed pp. 65-66, and Corollary 3.7, printed p. 67 (PDF zero-based pages 75-77; web text lines 3397-3467).",
+      "establishes": "Milne distinguishes finite generation from the Hopf axioms and uses finitely generated algebras for the affine algebraic-group equivalence. The proof reverses the structure-map diagrams through the affine anti-equivalence."
+    },
+    "dependency_ids": [
+      "def-axiom-of-choice",
+      "def-group-scheme-over-a-field",
+      "def-morphism-and-closed-subgroup-scheme",
+      "def-closed-immersion-schemes",
+      "thm-affine-scheme-ring-anti-equivalence",
+      "thm-affine-fibre-product-tensor-ring",
+      "lem-general-linear-group-scheme-and-its-coordinate-ring",
+      "lem-hopf-ideal-kernels-and-quotients",
+      "lem-quotient-spectrum-map-is-a-closed-immersion",
+      "def-commutative-hopf-algebra-over-a-field",
+      "def-polynomial-ring-over-a-commutative-ring"
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-additive-and-infinitesimal-group-schemes.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing; direct strategy passes."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-additive-and-infinitesimal-group-schemes.md library/scheme-theory/lie-algebras-and-infinitesimal-group-schemes-examples.md",
+        "exit_code": 0,
+        "result": "2 files; YAML and every math span parse; no delimiter errors."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-40-geometry-braids-rep-27-batch-14.proof-contracts.json --strict --items ex-additive-and-infinitesimal-group-schemes",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 items checked. Initial extraction failed with step-entry-input-omitted F1; corrected the extraction to use final tags."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-additive-and-infinitesimal-group-schemes.md",
+        "exit_code": 0,
+        "result": "1 item, 6 steps, 0 defects; run after final item edit."
+      },
+      {
+        "command": "node tools/step7-workflow.mjs review-contexts --run frontier-40-geometry-braids-rep-27 --items ex-additive-and-infinitesimal-group-schemes",
+        "exit_code": 0,
+        "result": "Captured post_sha256 and review_context_sha256 immediately after mathematical review, before any other supplier edit."
+      }
+    ],
+    "unresolved_mathematics": [],
+    "shared_lock_protocol": "Initial contract edit held the lock. Correction of the extraction was accidentally written after a failed reacquisition; release was refused because another unit owned the lock. Subsequently acquired the lock, reread and matched the exact assigned derivation and both F3 citation-use lists against the final item, passed focused strict proof-contract validation (0 errors, 0 warnings, 1/1 items), and released the lock. No additional write was needed, and no shared ledger or another unit's lock was altered.",
+    "next_action": "Completed assigned frontier repair and local checks; controller collects this report and owns rejudgment and central certification.",
+    "unresolved_obligations": []
+  }
+}

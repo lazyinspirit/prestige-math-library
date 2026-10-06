@@ -4,6 +4,19 @@ kind: example
 title: "Translation through the sl2 wall"
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-7.md"
+      - "research/frontier-38-owner-30-alpha-batch-7-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-7-post.json"
+    reviewed_raw_sha256: "46af9e872f32c3ff379c2457f7ec50870bcc3e819adbd78c2a5d9ae481a28bc7"
+    content_sha256: "3432328c5bb21f1e17a9991617667da6053f011efc43d5e305cd621be5a37a6b"
 deps:
   - def-axiom-of-choice
   - cor-central-characters-are-dot-weyl-orbits

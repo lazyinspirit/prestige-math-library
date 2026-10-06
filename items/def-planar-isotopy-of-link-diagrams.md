@@ -4,6 +4,21 @@ kind: definition
 title: "Planar isotopy of link diagrams"
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-03"
+    scope: "Cumulative whole-item verification: completed original Step5 full statement/definition and proof read plus the recorded later Step7 local mathematical corrections. Exact recovered original carrier and current post-correction carrier match recorded hashes; every substantive delta is covered by the cited correction reasoning. No independent audit of the local repairs and no new review round is claimed; supplier review is limited to interfaces used."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-17.md"
+      - "research/frontier-38-owner-30-alpha-batch-17-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-17-post-5a.json"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u17.json"
+    original_read_raw_sha256: "21ec14616fd673f5da9b42611096750ecc5b5a8d2e53311f550a89c5562df0a6"
+    repair_post_guard_sha256: "b4c56b0ed982339a0b60180e0d3edbcc6a9e722716d32e0fe742c260af8c467b"
+    content_sha256: "38b8f6750b442d3f660c93e2da6cbbd288dd089139bc28abc542594f0df0c53a"
 pipeline_run: frontier-38-owner-30
 deps: [def-regular-oriented-link-diagram,
        def-diffeomorphism-and-local-diffeomorphism-of-manifolds]

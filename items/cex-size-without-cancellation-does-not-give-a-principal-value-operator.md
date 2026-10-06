@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-5.md"
+      - "research/frontier-38-owner-30-alpha-batch-5-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-5-post-5a.json"
+    content_sha256: "f664437af6347738fa7edbee69f61d9560193f549455217b6e863f665f77a4c0"
 id: cex-size-without-cancellation-does-not-give-a-principal-value-operator
 kind: counterexample
 title: "Size without cancellation does not give a principal value"

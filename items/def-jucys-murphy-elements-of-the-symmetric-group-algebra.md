@@ -20,6 +20,19 @@ sources:
     - title: "Garsia, Young Seminormal Representation, Murphy Elements and Content Evaluations, UCSD lecture notes (2003), section 3, printed pp. 18-25"
       url: "https://www.math.ucsd.edu/~garsia/somepapers/Youngseminormal.pdf"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item read and recorded Step 7 mathematical repair review, including the used supplier interfaces; current mathematical content matches the bound evidence. The repair review is local and does not claim an independent audit of the repair."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-19.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-19.result.json
+      - research/frontier-38-owner-30-step5-hash-19-post-5a.json
+      - research/frontier-38-owner-30-alpha-batch-19-5a-decisions.json
+      - research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u19.json
+      - research/frontier-38-owner-30-dispatch/alpha-adjudicate-step7-v2-initial-r1-u19.result.json
   precheck: n/a
 ---
 

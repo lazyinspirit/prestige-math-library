@@ -72,10 +72,9 @@ In every case the right-hand side is finite, so $fg$ is integrable.
 
 1.2 For the endpoint pair $(p,q)=(1,\infty)$, let $M:=\|g\|_\infty$. By [L4] there is a measurable null set $N$ outside which $|fg|\le M|f|$. On $N$, [L8] gives zero integral for $|fg|\chi_N$ and $M|f|\chi_N$. Integrating the inequality on $X\setminus N$ with [L6] and [L7] therefore gives $\int|fg|\,d\mu\le M\int|f|\,d\mu=\|g\|_\infty\|f\|_1$. [L2, L4, L6, L7, L8, given]
 
-2.1 In the remaining strict-exponent case, Young's inequality applied pointwise to $u=|f|/A$ and $v=|g|/B$ gives [step 1.1, L1, L2, L5, L6, L7, algebra]
-$$\frac{|f||g|}{AB}\le\frac{|f|^p}{pA^p}+\frac{|g|^q}{qB^q}.$$ Integrating and using additivity, monotonicity, homogeneity, and the definitions of $A$ and $B$ yields $$\int |fg|\,d\mu\le\frac{B}{pA^{p-1}}\int |f|^p\,d\mu+\frac{A}{qB^{q-1}}\int |g|^q\,d\mu=\frac{AB}{p}+\frac{AB}{q}=AB.$$
+2.1 In the remaining strict-exponent case, Young's inequality applied pointwise to $u=|f|/A$ and $v=|g|/B$ gives [step 1.1, L1, L2, L5, L6, L7, algebra] $$\frac{|f||g|}{AB}\le\frac{|f|^p}{pA^p}+\frac{|g|^q}{qB^q}.$$ Integrating and using additivity, monotonicity, homogeneity, and the definitions of $A$ and $B$ yields $$\int |fg|\,d\mu\le\frac{B}{pA^{p-1}}\int |f|^p\,d\mu+\frac{A}{qB^{q-1}}\int |g|^q\,d\mu=\frac{AB}{p}+\frac{AB}{q}=AB.$$ [step 1.1, L1, L2, L5, L6, L7, algebra]
 
-2.2 The case $(p,q)=(\infty,1)$ is identical after exchanging $f$ and $g$. [step 1.2, given]
-$$\int |fg|\,d\mu\le\|f\|_\infty\|g\|_1.$$
+2.2 The case $(p,q)=(\infty,1)$ is identical after exchanging $f$ and $g$. [step 1.2, given] $$\int |fg|\,d\mu\le\|f\|_\infty\|g\|_1.$$ [step 1.2, given]
 
 3.1 Step 2.1 proves the strict-exponent case, and steps 1.2 and 2.2 prove the two endpoint cases. In every case the right-hand side is finite by [L2], so $fg$ is integrable. [step 2.1, step 1.2, step 2.2, L2] ∎
+

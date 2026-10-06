@@ -21,6 +21,18 @@ sources:
       url: "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
       locator: "Section 1.2, printed p. 473: 'The Lawrence-Krammer representation is the map from B_n to GL(H_2(C-tilde))'"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-16.md"
+      - "research/frontier-38-owner-30-alpha-batch-16-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-16-post.json"
+    reviewed_raw_sha256: "7aa24fb6d661f21881044a93fac66f13904e6170478774e98558efc1e507e208"
+    content_sha256: "445d27dd5073ed7851737c1395bf97cfb06aaeeef2ac69836daf43244868fe2f"
   precheck: n/a
   judge:
     model: "gpt-6.1-sol"

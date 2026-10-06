@@ -34,6 +34,17 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf"
       locator: "Discussion of the blow-up closure lemma 19.2.6 and of nonreduced centers, pp. 382-383, 392"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading, followed by recorded Step 7 current repair argument acceptance. The repair receipt records local author review; no independent repair audit is claimed. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u2.json"
+    content_sha256: "7f01f7432af2ce2ea2c155874573bc2ee1bd038de57a9a847eed5e3404e79206"
   precheck: pass
 ---
 

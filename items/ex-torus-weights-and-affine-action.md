@@ -9,7 +9,18 @@ provenance: {"statement": "ai-generated", "proof": "ai-altered"}
 sources: {"references": [{"title": "Michel Brion, Introduction to actions of algebraic groups (2010)", "url": "https://ccirm.centre-mersenne.org/item/10.5802/ccirm.1.pdf", "locator": "§1.1, Definitions 1.4, 1.6, 1.8, Lemma 1.5, Example 1.7 and Proposition 1.9; printed pp. 3–4"}, {"title": "Philippe Gille, Introduction to reductive group schemes over rings, full notes retrieved 2026-10-02", "url": "https://www.math.ens.psl.eu/~gille/prenotes/reductive.pdf", "locator": "§6, Proposition 6.0.5, pp. 25–27; Proposition 6.2.1, pp. 30–31; Theorem 6.3.1, p. 32"}, {"title": "J. S. Milne, Algebraic Groups (2022)", "url": "https://www.jmilne.org/math/Books/iAG2022.pdf", "locator": "§4(a) Remark 4.1, pp. 83–84; Proposition 4.7 and Corollary 4.8, p. 86; Theorem 12.12 and Remark 12.13, printed pp. 234–235"}]}
 generation: {"role": "example"}
 proof_strategy: direct
-verification: {"precheck": "pass", judge: {model: "gpt-6.1-sol", verdict: pass, date: 2026-10-03}}
+verification:
+  precheck: pass
+  judge:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-03
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-03
+    scope: historical complete Step5 reader; item ex-torus-weights-and-affine-action; evidence research/frontier-38-owner-30-reader-23.md, research/frontier-38-owner-30-reader-findings-23.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed.
+    delegated_by: tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane
 ---
 
 ## Example

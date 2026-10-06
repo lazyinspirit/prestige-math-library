@@ -53,15 +53,13 @@ required.
 
 1.1 Fix $n$ and put $b_n=\varepsilon 2^{-n-1}>0$. By [L1], $K_n$ has a finite closed-interval cover with total length at most $b_n/2$. Enlarge each of its finitely many intervals using [L2], spending in total less than $b_n/2$ in extra length. The resulting finite family of rational open intervals covers $K_n$ and has total length less than $b_n$. Closing those rational intervals preserves their lengths and still covers $K_n$. [L1, L2, L5, choose]
 
-1.2 By [L3], let $C_c$ be the finite list of rational closed intervals decoded from $c\in\mathbb N$ when it is a valid list code, and let invalid codes decode to the one-term list $[0,0]$. The set
-$$S_n=\{c\in\mathbb N:K_n\subseteq\bigcup C_c\text{ and the total length of }C_c\text{ is }<b_n\}$$
-is nonempty by step 1.1. Define $c_n:=\min S_n$ by [L4]. The formula for $S_n$ and least-number selection define the entire sequence $(c_n)$ in ZF; no independent choice of covers is made. [L3, L4, step 1.1, construct]
+2.1 By [L3], let $C_c$ be the finite list of rational closed intervals decoded from $c\in\mathbb N$ when it is a valid list code, and let invalid codes decode to the one-term list $[0,0]$. The set $$S_n=\{c\in\mathbb N:K_n\subseteq\bigcup C_c\text{ and the total length of }C_c\text{ is }<b_n\}$$ is nonempty by step 1.1. Define $c_n:=\min S_n$ by [L4]. The formula for $S_n$ and least-number selection define the entire sequence $(c_n)$ in ZF; no independent choice of covers is made. [L3, L4, step 1.1, construct]
 
-2.1 Write $C_{c_n}=([a_{n,0},d_{n,0}],\ldots,[a_{n,l_n-1},d_{n,l_n-1}])$. Extend each finite list to all $j\in\mathbb N$ by $[a_{n,j},d_{n,j}]=[0,0]$ for $j\ge l_n$. For $k=J(n,j)$, set $[A_k,D_k]=[a_{n,j},d_{n,j}]$. Because $J$ is a bijection, this defines a sequence of closed intervals covering every $K_n$, hence their union. [L3, L5, step 1.2, construct]
+3.1 Write $C_{c_n}=([a_{n,0},d_{n,0}],\ldots,[a_{n,l_n-1},d_{n,l_n-1}])$. Extend each finite list to all $j\in\mathbb N$ by $[a_{n,j},d_{n,j}]=[0,0]$ for $j\ge l_n$. For $k=J(n,j)$, set $[A_k,D_k]=[a_{n,j},d_{n,j}]$. Because $J$ is a bijection, this defines a sequence of closed intervals covering every $K_n$, hence their union. [L3, L5, step 2.1, construct]
 
-3.1 Fix any finite partial list $k<t$. Its inverse $J$-coordinates lie in some finite rectangle $n,j\le N$. All lengths are nonnegative, so its total length is at most the sum of the full finite list lengths for $n\le N$. Each such length is $<b_n$ by step 1.2, whence the partial total is at most $\sum_{n\le N}b_n\le\varepsilon$ by [L5]. [L5, step 1.2, step 2.1, algebra]
+4.1 Fix any finite partial list $k<t$. Its inverse $J$-coordinates lie in some finite rectangle $n,j\le N$. All lengths are nonnegative, so its total length is at most the sum of the full finite list lengths for $n\le N$. Each such length is $<b_n$ by step 2.1, whence the partial total is at most $\sum_{n\le N}b_n\le\varepsilon$ by [L5]. [L5, step 2.1, step 3.1, algebra]
 
-4.1 Steps 2.1 and 3.1 meet the covering and partial-sum conditions of [L1] for the given $\varepsilon$. As $\varepsilon>0$ was arbitrary, $\bigcup_nK_n$ is null. The only selections were finite choices in step 1.1 and least natural-number codes in step 1.2, both available in ZF. [L1, step 2.1, step 3.1] ∎
+5.1 Steps 3.1 and 4.1 meet the covering and partial-sum conditions of [L1] for the given $\varepsilon$. As $\varepsilon>0$ was arbitrary, $\bigcup_nK_n$ is null. The only selections were finite choices in step 1.1 and least natural-number codes in step 2.1, both available in ZF. [L1, step 3.1, step 4.1] ∎
 
 ## Source notes
 

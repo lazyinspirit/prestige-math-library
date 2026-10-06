@@ -30,6 +30,18 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf"
       locator: "Discussion of proper transforms and birationality, pp. 379-382"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post.json"
+    reviewed_raw_sha256: "76e8dcc4e6a3fdff82996db2fd4ecd4cbe694770b09e1f4196189e0b67417f34"
+    content_sha256: "cf161686e40cd486971e136a11126a8d734fc4bce37ec698a323cb5713312ba6"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

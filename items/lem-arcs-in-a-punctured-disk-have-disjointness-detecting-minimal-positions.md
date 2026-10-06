@@ -21,6 +21,17 @@ sources:
       url: "https://web.math.ucsb.edu/~bigelow/publications/03.pdf"
       locator: "Lemma 3.1 and its proof, printed p. 480: digon criterion invoked for noodle-tine pairs, with the extension of edges to simple closed curves"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-16.md"
+      - "research/frontier-38-owner-30-alpha-batch-16-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-16-post-5a.json"
+    content_sha256: "1ad9130f2d4fa030d30eb55e945387dcfbe5852ec3bad3bb3a1c512b3b63b908"
   precheck: n/a
 ---
 ## Statement

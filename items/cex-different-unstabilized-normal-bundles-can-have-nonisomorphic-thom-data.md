@@ -8,6 +8,17 @@ pipeline_run: frontier-38-owner-30
 deps: ["def-stable-normal-bundle-of-a-compact-smooth-manifold", "thm-stable-normal-bundle-is-independent-of-the-embedding", "prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product"]
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-14.md"
+      - "research/frontier-38-owner-30-alpha-batch-14-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-14-post-5a.json"
+    content_sha256: "cdce5a91fc14744c1587e4034ea269f5db46d714e7b014586599b267f945ff27"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

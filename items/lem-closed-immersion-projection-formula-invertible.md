@@ -36,6 +36,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for lem-closed-immersion-projection-formula-invertible and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-26; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"4147f3be362ba94a3109b46d1237223b9cd4eabc908b796d77a918feac5d838b","evidence":["research/frontier-38-owner-30-reader-26.md","research/frontier-38-owner-30-reader-findings-26.json","research/frontier-38-owner-30-dispatch/reader-reader-26.result.json","research/frontier-38-owner-30-step5-hash-26-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/lem-closed-immersion-projection-formula-invertible.md","historical_raw_sha256":"0455055a2ad7a77fba02fa78ee029fc82157b2a0c53615693d349d79ef0cc8da","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:32:12.121Z"}}
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

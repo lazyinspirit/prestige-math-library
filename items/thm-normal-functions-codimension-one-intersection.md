@@ -4,6 +4,19 @@ kind: theorem
 title: Regular functions on a normal variety are cut out in codimension one
 status: published
 origin: pipeline
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-1.md"
+      - "research/frontier-38-owner-30-alpha-batch-1-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-1-post.json"
+    reviewed_raw_sha256: "15cdda449ed3f4f45fec4914b812532718f413703e215b10ca0faaebb6b9c37a"
+    content_sha256: "29c5a801e4b0ebf4fa235b45738f7fcefedfdba486af33ace412f3bddb71434e"
 pipeline_run: frontier-38-owner-30
 dependency_level: 2
 proof_strategy: direct

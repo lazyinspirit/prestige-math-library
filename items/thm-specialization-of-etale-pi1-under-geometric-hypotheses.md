@@ -19,6 +19,7 @@ deps:
   - lem-tame-dvr-inertia-and-abhyankar-ramification-killing
 proof_strategy: direct
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for thm-specialization-of-etale-pi1-under-geometric-hypotheses and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-30; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"4a2d599206f44163f6c8d5b8fe73996439beb0ce212d69c64da66acf1726b987","evidence":["research/frontier-38-owner-30-reader-30.md","research/frontier-38-owner-30-reader-findings-30.json","research/frontier-38-owner-30-dispatch/reader-reader-30.result.json","research/frontier-38-owner-30-step5-hash-30-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/thm-specialization-of-etale-pi1-under-geometric-hypotheses.md","historical_raw_sha256":"d6925a8d9b3a2f02f10d04add10a255e4f5b748dce3b8a4180cb75063625331c","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:36:51.819Z"}}
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

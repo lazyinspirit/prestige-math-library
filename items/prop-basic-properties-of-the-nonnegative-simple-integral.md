@@ -45,17 +45,13 @@ Let $s,t$ be nonnegative simple measurable functions and let $c\ge0$.
 
 **Proof technique:** direct.
 
-1.1 Complete the representations of $s$ and $t$ with their zero-valued complements. [L1, construct]
-Take their finite measurable common refinement $(E_r)$. On each cell write $s=a_r$ and $t=b_r$. If $s\le t$, then $a_r\le b_r$.
+1.1 Complete the representations of $s$ and $t$ with their zero-valued complements. Take their finite measurable common refinement $(E_r)$. On each cell write $s=a_r$ and $t=b_r$. If $s\le t$, then $a_r\le b_r$. [L1, construct]
 
-1.2 The zero-scalar case is separate. [L2]
-When $c=0$, the function $cs$ is zero. Representing it by $0\chi_X$ gives $\int 0s\,d\mu=0$, even if $\mu(X)=+\infty$, by the definition's local zero-times-infinity convention.
+1.2 The zero-scalar case is separate. [L2] When $c=0$, the function $cs$ is zero. Representing it by $0\chi_X$ gives $\int 0s\,d\mu=0$, even if $\mu(X)=+\infty$, by the definition's local zero-times-infinity convention. [L2]
 
-2.1 Monotonicity follows cell by cell. [step 1.1, L2]
-On the common partition, $$\int s\,d\mu=\sum_r a_r\mu(E_r),\qquad \int t\,d\mu=\sum_r b_r\mu(E_r).$$ For finite or infinite $\mu(E_r)$, the local simple-integral convention makes $a_r\mu(E_r)\le b_r\mu(E_r)$ whenever $0\le a_r\le b_r$. Summing these nonnegative extended-real inequalities proves clause 1.
+2.1 Monotonicity follows cell by cell. [step 1.1, L2] On the common partition, $$\int s\,d\mu=\sum_r a_r\mu(E_r),\qquad \int t\,d\mu=\sum_r b_r\mu(E_r).$$ For finite or infinite $\mu(E_r)$, the local simple-integral convention makes $a_r\mu(E_r)\le b_r\mu(E_r)$ whenever $0\le a_r\le b_r$. Summing these nonnegative extended-real inequalities proves clause 1. [step 1.1, L2]
 
-2.2 Additivity follows on the same partition. [step 1.1, L2]
-The coefficient of $s+t$ on $E_r$ is $a_r+b_r$, and $$(a_r+b_r)\mu(E_r)=a_r\mu(E_r)+b_r\mu(E_r)$$ under the local zero-times-infinity convention. Finite sums in $[0,+\infty]$ can be regrouped without subtraction, so clause 3 follows.
+2.2 Additivity follows on the same partition. [step 1.1, L2] The coefficient of $s+t$ on $E_r$ is $a_r+b_r$, and $$(a_r+b_r)\mu(E_r)=a_r\mu(E_r)+b_r\mu(E_r)$$ under the local zero-times-infinity convention. Finite sums in $[0,+\infty]$ can be regrouped without subtraction, so clause 3 follows. [step 1.1, L2]
 
-2.3 For $c>0$, scalar multiplication holds cell by cell. [step 1.1, L2]
-The identity $(ca_r)\mu(E_r)=c(a_r\mu(E_r))$ is valid in $[0,+\infty]$ for positive $c$, and finite summation gives $\int cs\,d\mu=c\int s\,d\mu$. Together with the preceding cases, this proves all three clauses. ∎
+3.1 For $c>0$, scalar multiplication holds cell by cell. [step 1.1, L2] The identity $(ca_r)\mu(E_r)=c(a_r\mu(E_r))$ is valid in $[0,+\infty]$ for positive $c$, and finite summation gives $\int cs\,d\mu=c\int s\,d\mu$. Together with the preceding cases, this proves all three clauses. [step 1.1, L2] ∎
+

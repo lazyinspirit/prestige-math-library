@@ -42,6 +42,12 @@ sources:
       url: "https://math.mit.edu/~higgs/18.725_2015.pdf"
       locator: "Lecture 9, the blowup of A^n at the origin as a closed subvariety of A^n x P^{n-1}, PDF pp. 23-25"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "amended_repair"
+    date: 2026-10-03
+    scope: "Complete item claim and mathematical body read in delegated Step 5a adjudication; evidence: research/frontier-38-owner-30-alpha-batch-2-5a.md; immutable carrier: research/frontier-38-owner-30-step5-hash-2-post-5a.json; exact saved draft bytes in git d90f26208 match that carrier after exclusion of the later judge stamp. Current content matches the saved carrier except publication status and verification metadata. Source and supplier coverage is limited to the report."
+    delegated_by: "owner via tools/autopilot frontier-38-owner-30 5a-batch-2 dispatch"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -1,0 +1,116 @@
+---
+page: highest-weights-and-rational-representations-of-split-reductive-groups
+title: "Highest Weights and Rational Representations of Split Reductive Groups"
+status: draft
+requires: [affine-group-schemes-hopf-algebras-and-rational-representations, groups-of-multiplicative-type-and-arithmetic-tori, split-reductive-root-systems-bruhat-cells-and-parabolics]
+items:
+  - lem-power-extension-over-a-normal-affine-domain
+  - lem-trace-form-of-a-faithful-representation-of-a-semisimple-lie-algebra-is-nondegenerate
+  - def-contragredient-rational-representation
+  - def-simple-and-semisimple-representations
+  - lem-lie-algebra-of-the-stabilizer-of-a-subspace-and-lie-stable-subspaces
+  - lem-simple-rational-representations-are-finite-dimensional
+  - lem-tensor-and-hom-representations-are-rational
+  - lem-complete-reducibility-reduces-to-codimension-one-simple-submodules
+  - lem-semisimplicity-of-rational-representations-descends-along-field-extensions
+  - lem-top-exterior-power-detects-subspace-stabilizers
+  - lem-lie-ideals-and-normal-connected-subgroups-in-characteristic-zero
+  - thm-chevalley-line-stabilizer-of-an-algebraic-subgroup
+  - lem-lie-algebra-of-a-semisimple-group-in-characteristic-zero-is-semisimple
+  - lem-semisimple-groups-are-perfect-and-have-no-nontrivial-characters
+  - lem-casimir-element-of-a-rational-representation-is-an-endomorphism-of-g-modules
+  - thm-semisimple-groups-in-characteristic-zero-are-linearly-reductive
+  - thm-complete-reducibility-of-rational-modules-in-characteristic-zero
+  - def-weight-and-dominant-weight-of-a-rational-representation
+  - def-primitive-vector-of-a-rational-representation
+  - lem-root-group-expansion-of-a-weight-vector
+  - lem-tensor-products-of-primitive-vectors
+  - lem-normalizer-action-permutes-weight-spaces
+  - def-induced-coordinate-module-e-lambda
+  - prop-module-generated-by-a-primitive-vector
+  - lem-primitive-vectors-from-standard-maximal-parabolics
+  - prop-primitive-vectors-of-the-induced-coordinate-module
+  - thm-simple-rational-representations-have-a-highest-weight
+  - lem-centre-central-characters-and-descent-along-central-isogenies
+  - lem-fundamental-weights-of-split-semisimple-groups-have-primitive-multiples
+  - thm-simple-modules-with-equal-highest-weight-are-isomorphic
+  - lem-dominant-characters-of-split-semisimple-groups-arise-as-primitive-weights
+  - lem-dominant-characters-of-products-of-tori-and-split-semisimple-groups-arise-as-primitive-weights
+  - lem-dominant-characters-arise-as-primitive-weights-for-split-reductive-groups
+  - thm-dominant-weights-classify-simple-rational-modules-for-split-reductive-groups
+  - rem-highest-weight-classification-does-not-imply-semisimplicity-in-positive-characteristic
+examples: []
+---
+
+This page develops the highest-weight theory of the rational representations of
+a split reductive group over an arbitrary field. It begins with the
+representation-theoretic foundations: the dictionary between rational
+representations and comodules, the contragredient representation
+[[def-contragredient-rational-representation]], tensor, Hom and exterior-power
+representations [[lem-tensor-and-hom-representations-are-rational]], simple and
+semisimple representations [[def-simple-and-semisimple-representations]], and
+the finiteness theorem [[lem-simple-rational-representations-are-finite-dimensional]]
+that every simple rational representation of an affine group scheme of finite
+type is finite-dimensional.
+
+The linear-reductivity half of the page is characteristic-zero: the Lie algebra
+of a semisimple group is semisimple
+([[lem-lie-algebra-of-a-semisimple-group-in-characteristic-zero-is-semisimple]]),
+semisimple groups are perfect with no nontrivial characters
+([[lem-semisimple-groups-are-perfect-and-have-no-nontrivial-characters]]), the
+Casimir operator of a rational representation is a module endomorphism
+([[lem-casimir-element-of-a-rational-representation-is-an-endomorphism-of-g-modules]]),
+and these combine into the linear reductivity theorem
+[[thm-semisimple-groups-in-characteristic-zero-are-linearly-reductive]] and the
+complete-reducibility theorem
+[[thm-complete-reducibility-of-rational-modules-in-characteristic-zero]].
+Chevalley's line-stabilizer theorem
+[[thm-chevalley-line-stabilizer-of-an-algebraic-subgroup]] and the computation
+of Lie algebras of stabilizers
+[[lem-lie-algebra-of-the-stabilizer-of-a-subspace-and-lie-stable-subspaces]]
+supply the subgroup and ideal machinery, while
+[[lem-top-exterior-power-detects-subspace-stabilizers]] reduces a subspace
+stabilizer to a line stabilizer.
+
+The highest-weight half is characteristic-free. Weights, dominant weights and
+the dominance order are set up in
+[[def-weight-and-dominant-weight-of-a-rational-representation]], primitive
+vectors in [[def-primitive-vector-of-a-rational-representation]], and their
+root-group expansion and normalizer behaviour in
+[[lem-root-group-expansion-of-a-weight-vector]] and
+[[lem-normalizer-action-permutes-weight-spaces]]. Modules generated by a
+primitive vector have a one-dimensional top weight space and a simple quotient
+([[prop-module-generated-by-a-primitive-vector]]); the induced coordinate
+module $E(\lambda)$ and its fixed line are
+[[def-induced-coordinate-module-e-lambda]] and
+[[prop-primitive-vectors-of-the-induced-coordinate-module]]. Existence of a
+primitive vector of every dominant weight proceeds through the standard maximal
+parabolics [[lem-primitive-vectors-from-standard-maximal-parabolics]],
+fundamental-weight multiples
+[[lem-fundamental-weights-of-split-semisimple-groups-have-primitive-multiples]],
+tensor products [[lem-tensor-products-of-primitive-vectors]], the semisimple
+case [[lem-dominant-characters-of-split-semisimple-groups-arise-as-primitive-weights]],
+the product with a torus
+[[lem-dominant-characters-of-products-of-tori-and-split-semisimple-groups-arise-as-primitive-weights]]
+and the descent along the central isogeny
+$Z(G)_t\times G_{\mathrm{der}}\to G$, where $Z(G)_t$ is the largest central
+torus, rather than the possibly nonreduced identity component of the centre,
+([[lem-centre-central-characters-and-descent-along-central-isogenies]],
+[[lem-dominant-characters-arise-as-primitive-weights-for-split-reductive-groups]]).
+Simple representations of a split reductive group have a unique primitive
+line and highest weight
+([[thm-simple-rational-representations-have-a-highest-weight]]) and are
+determined up to isomorphism by it
+([[thm-simple-modules-with-equal-highest-weight-are-isomorphic]]), which yields
+the classification [[thm-dominant-weights-classify-simple-rational-modules-for-split-reductive-groups]].
+The remark [[rem-highest-weight-classification-does-not-imply-semisimplicity-in-positive-characteristic]]
+records that this classification says nothing about semisimplicity of extension
+modules, and the example companion
+[[highest-weights-and-rational-representations-of-split-reductive-groups-examples]] carries the $\mathrm{SL}_2$ computations and the
+positive-characteristic counterexample.
+
+The Axiom of Choice is carried only where the named suppliers use it, notably
+Cartier's smoothness theorem, the existence of the faithful finite-dimensional
+representation, the fppf quotient and the Noetherian finiteness inputs; the
+weight combinatorics and the root-group computations themselves are
+choice-free.

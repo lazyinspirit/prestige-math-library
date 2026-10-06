@@ -49,6 +49,7 @@ const { step7Stages } = await import(
 );
 
 const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
+const LUNA_MAX = MODEL_PROFILE_NAMES.lunaMax;
 // A live engine hot-reloads this stage module but retains its first models.mjs
 // import. The new profile name must also resolve in that already-running process.
 const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
@@ -940,16 +941,62 @@ function readStep8Changes(ctx): string[] {
 function step8ChangesOnDisk(ctx): string[] {
   // Certification errors are holds, not an empty mathematical change set.
   const certified = currentAuditorCreatedIds(ctx, 8);
-  try {
-    const touches = JSON.parse(readFileSync(R(ctx, touchesPath(ctx)), 'utf8'));
-    const baseline = [...(touches.snapshots ?? [])].reverse().find((s: any) => s.label === 'post-step7');
-    if (!baseline?.hashes) return [];
-    return readdirSync(R(ctx, 'items')).filter((name) => name.endsWith('.md'))
-      .map((name) => name.slice(0, -3)).filter((id) => !certified.has(id) && !isPublishedItem(ctx.repo, id)).filter((id) => {
-        const hash = shortHash(itemHashGuard(readFileSync(R(ctx, 'items', `${id}.md`), 'utf8')));
-        return !(id in baseline.hashes) || baseline.hashes[id] !== hash;
-      }).sort();
-  } catch { return []; }
+  // Use the receipt producer's exact ownership boundary before dispatch. A
+  // fresh read-only invocation also avoids caching its selection in live ESM.
+  const result = spawnSync(process.execPath, [...step8ChangesRefreshArgv(ctx), '--list'],
+    { cwd: ctx.repo, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+  if (result.error) throw result.error;
+  if (result.status !== 0 || result.stderr.trim())
+    throw Error(`Step-8 change scope is invalid: ${result.stderr.trim() || result.stdout.trim()}`);
+  const receipt = JSON.parse(result.stdout);
+  if (!Array.isArray(receipt.items) || receipt.run !== ctx.run)
+    throw Error('Step-8 change selector returned an invalid owning-run scope');
+  return receipt.items.filter((id: string) => !certified.has(id));
+}
+
+/** A guarded owner recovery may also owe a native consumer currency refresh.
+ * Keep those subjects separate from the mathematical change receipt. */
+function step8JudgeTargets(ctx): string[] {
+  const changed = step8ChangesOnDisk(ctx);
+  const closureFile = R(ctx, closurePath(ctx));
+  if (!existsSync(closureFile)) return changed;
+  const closure = JSON.parse(readFileSync(closureFile, 'utf8'));
+  if (closure.mode !== 'judge-closure' || closure.verified_against_current_context !== true
+    || !Array.isArray(closure.needs_rejudge) || closure.needs_rejudge.some((id: any) => typeof id !== 'string'))
+    throw Error('Step-8 currency refresh requires a valid current native judge closure');
+  // The canonical selector above validated every owning manifest against the
+  // frozen frontier and legitimate creations before these IDs are loaded.
+  const owned = new Set(batches(ctx).flatMap(batch =>
+    JSON.parse(readFileSync(R(ctx, `research/${ctx.run}-batch-${batch}.pages.json`), 'utf8'))
+      .flatMap(page => (page.items ?? []).map(item => typeof item === 'string' ? item : item.id))));
+  const currency = [...new Set<string>(closure.needs_rejudge)]
+    .filter(id => owned.has(id) && !changed.includes(id) && !isPublishedItem(ctx.repo, id)).sort();
+  if (!currency.length) return changed;
+  const recoveryDir = join(ctx.config?.stateDir ?? R(ctx, '.autopilot', ctx.run), 'recoveries');
+  const recoveries = existsSync(recoveryDir) ? readdirSync(recoveryDir)
+    .map(name => join(recoveryDir, name, 'manifest.json')).filter(existsSync)
+    .map(path => ({ path, receipt: JSON.parse(readFileSync(path, 'utf8')) }))
+    .sort((a, b) => Date.parse(b.receipt.at) - Date.parse(a.receipt.at)) : [];
+  const recovery = recoveries[0]?.receipt;
+  if (!recovery || recovery.run !== ctx.run || recovery.baseline !== 'post-step7'
+    || !Array.isArray(recovery.required_targets) || !recovery.required_targets.length
+    || !Array.isArray(recovery.allowed_targets) || !Array.isArray(recovery.reopened_stages)
+    || !recovery.reopened_stages.includes('8-changes-judge')
+    || recovery.required_targets.some(id => !changed.includes(id))
+    || currency.some(id => !recovery.allowed_targets.includes(id)))
+    throw Error(`Step-8 native currency target(s) require a guarded owner recovery: ${currency.join(', ')}`);
+  const authBytes = readFileSync(recovery.authorization, 'utf8');
+  const auth = JSON.parse(authBytes);
+  if (createHash('sha256').update(authBytes).digest('hex') !== recovery.authorization_sha256
+    || auth.version !== 1 || auth.run !== ctx.run || auth.baseline !== 'post-step7'
+    || auth.authorized_by !== 'owner' || typeof auth.authorization !== 'string' || !auth.authorization.trim()
+    || auth.recovery_id !== recovery.recovery_id
+    || JSON.stringify(auth.required_targets) !== JSON.stringify(recovery.required_targets)
+    || JSON.stringify(auth.allowed_targets) !== JSON.stringify(recovery.allowed_targets)
+    || auth.native_closure !== closurePath(ctx) || !Array.isArray(auth.context_only_targets)
+    || currency.some(id => !auth.context_only_targets.includes(id)))
+    throw Error('Step-8 native currency recovery authorization changed or is invalid');
+  return [...new Set([...changed, ...currency])].sort();
 }
 
 const step8ChangesGate = (ctx) => gate('step8-changes', ['node', 'tools/step8-changes.mjs',
@@ -1432,6 +1479,7 @@ export const stages = [
   {
     id: '1-drift',
     label: 'Step 1 — prerequisite-drift review',
+    modelProfile: LUNA_MAX,
     units: () => ['drift'],
     pattern: /^alpha-(?:alpha-)?drift-review\.result\.json$/,
     labelFor: () => 'drift-review',
@@ -2082,7 +2130,7 @@ export const stages = [
     pattern: resultPattern('tool', 'step8-changes-index|step8-changes-judge'),
     concurrency: 1,
     plan: (ctx) => {
-      const ids = ctx.doctor ? [] : step8ChangesOnDisk(ctx);
+      const ids = ctx.doctor ? [] : step8JudgeTargets(ctx);
       return [{
         role: 'tool',
         label: 'step8-changes-index',

@@ -21,6 +21,12 @@ sources:
     - title: "James, The Representation Theory of the Symmetric Groups, Lecture Notes in Mathematics 682, Springer (1978), section 25 (Young's orthogonal form, 25.1-25.5 and Theorem 25.3), printed pp. 114-124"
       url: "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "historical complete Step5 reader; item thm-young-orthogonal-form-from-seminormal-rescaling; evidence research/frontier-38-owner-30-reader-19.md, research/frontier-38-owner-30-reader-findings-19.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
+    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

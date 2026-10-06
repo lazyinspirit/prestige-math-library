@@ -11,6 +11,12 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: completed-existing-full-proof-reading
+    date: 2026-10-03
+    scope: "Existing completed full-item proof reading: research/frontier-38-owner-30-step5-fourier-resolution-amended-reviews.json#touched:4:lem-one-dimensional-hardy-inequality-on-the-half-line. Exact observed source raw SHA-256 b2e88f1e347b17ebc12edb92f4f470a7a10a953ebdc2f849684ae055974e7017 recovered from research/frontier-38-owner-30-dispatch/alpha-5a-batch-4.log:6009; its mathematics exactly matches git d90f26208 after verification exclusion. Current text has identical claim, facts, hypotheses, dependencies, sources and complete proof paragraphs, with only publication status, verification and formatting differences. Exact proof-step/reference bijection is saved in /tmp/frontier39-verification-last-two.json. Source/supplier reading limits in the historical reports remain applicable. This restores existing evidence and performs no new mathematical review or independent post-repair audit."
+    delegated_by: "owner via tools/autopilot frontier-38-owner-30 5a-batch-4 dispatch"
   judge:
     model: "gpt-6.1-sol"
     verdict: pass
@@ -75,8 +81,7 @@ with the same constant.
 
 3.1 The bound for bounded compactly supported $f$. By steps 2.1 and 2.2 and Holder's inequality [F1], $I=\int_0^\infty f\Phi\le\|f\|_p\|\Phi\|_{p'}\le p'\|f\|_p\,I^{1/p'}$. If $I=0$ there is nothing to prove; otherwise $0<I<+\infty$ by step 1.2, so dividing by $I^{1/p'}$ gives $I^{1/p}\le p'\|f\|_p$, which is the claimed inequality for $f$. [F1, step 1.2, step 2.1, step 2.2, algebra]
 
-
-4.1 The interval case. Let $f$ be supported in $(0,T)$ and extend it by zero to $(0,\infty)$; the extension has the same $L^p$ integral and its averaging function equals $t^{-1}\int_0^tf$ for $t\le T$, so $\int_0^Tt^{-p}(\int_0^tf)^pdt\le\int_0^\infty t^{-p}(\int_0^tf)^pdt\le(p')^p\int_0^\infty f^p=(p')^p\int_0^Tf^p$, the middle inequality being the general inequality obtained by combining the reduction of step 1.1 with the bounded-case bound of step 3.1. [F5, step 1.1, step 3.1, algebra]
+ 4.1 The interval case. Let $f$ be supported in $(0,T)$ and extend it by zero to $(0,\infty)$; the extension has the same $L^p$ integral and its averaging function equals $t^{-1}\int_0^tf$ for $t\le T$, so $\int_0^Tt^{-p}(\int_0^tf)^pdt\le\int_0^\infty t^{-p}(\int_0^tf)^pdt\le(p')^p\int_0^\infty f^p=(p')^p\int_0^Tf^p$, the middle inequality being the general inequality obtained by combining the reduction of step 1.1 with the bounded-case bound of step 3.1. [F5, step 1.1, step 3.1, algebra]
 
 5.1 Conclusion. Step 1.1 reduces the general measurable case to the bounded compactly supported case, which is step 3.1; step 1.3 shows the constant cannot be improved, and step 4.1 discharges the interval form. This proves both displayed inequalities, the sharpness assertion, and the statement for data supported in $(0,T)$. [step 1.1, step 3.1, step 1.3, step 4.1, given] ∎
 

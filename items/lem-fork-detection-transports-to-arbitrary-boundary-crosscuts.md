@@ -1,4 +1,15 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-16.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-16.result.json
+      - research/frontier-38-owner-30-step5-hash-16-post-5a.json
 id: lem-fork-detection-transports-to-arbitrary-boundary-crosscuts
 kind: lemma
 title: Fork detection transports to arbitrary boundary crosscuts

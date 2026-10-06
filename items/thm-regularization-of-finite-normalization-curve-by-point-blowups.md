@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for thm-regularization-of-finite-normalization-curve-by-point-blowups and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-27; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"d9e91c518c8a047a47fc7f0f86b2bbc6b290db0e74880bcef13515eec433dca7","evidence":["research/frontier-38-owner-30-reader-27.md","research/frontier-38-owner-30-reader-findings-27.json","research/frontier-38-owner-30-dispatch/reader-reader-27.result.json","research/frontier-38-owner-30-step5-hash-27-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/thm-regularization-of-finite-normalization-curve-by-point-blowups.md","historical_raw_sha256":"bd5847c771dc9d7879323105b089756fb3a16f354ff0831c21a34fa2385f114d","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:31:05.459Z"}}
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

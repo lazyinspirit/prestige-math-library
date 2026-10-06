@@ -59,7 +59,8 @@ Assume AC. For the rho-derived $\mu_\rho$ and $g\in G$, $d(g_*\mu_\rho)/d\mu_\rh
 
 2.1 For $\phi=T_Hf$, Weil’s formula and left invariance give $$\int_{G/H}\phi(gq)d\mu_\rho(q)=\int_G f(gx)\rho(x)dx=\int_G f(y)\rho(g^{-1}y)dy=\int_{G/H}\phi(q)D_g(q)d\mu_\rho(q).$$ The positive continuous density is locally bounded, so it defines a Radon measure relative to the Radon measure $\mu_\rho$. By [F3] the equality holds on every $C_c(G/H)$ function; [F4] identifies $g_*\mu_\rho=D_g\mu_\rho$. This proves the derivative formula. [A1, A2, F2, F3, F4, step 1.1]
 
-3.1 For $q=xH$, the ratios telescope: $$D_{g_1}(q)D_{g_2}(g_1^{-1}q)=\frac{\rho(g_1^{-1}x)}{\rho(x)}\frac{\rho(g_2^{-1}g_1^{-1}x)}{\rho(g_1^{-1}x)}=D_{g_1g_2}(q).$$ Together with step 1.1, this proves the stated cocycle identity and continuity. ∎ [A1, A2, step 1.1, step 2.1, algebra]
+3.1 For $q=xH$, the ratios telescope: $$D_{g_1}(q)D_{g_2}(g_1^{-1}q)=\frac{\rho(g_1^{-1}x)}{\rho(x)}\frac{\rho(g_2^{-1}g_1^{-1}x)}{\rho(g_1^{-1}x)}=D_{g_1g_2}(q).$$ Together with step 1.1, this proves the stated cocycle identity and continuity. [A1, A2, step 1.1, step 2.1, algebra] ∎
+
 ## Sources
 
 Bekka–de la Harpe–Valette, *Kazhdan’s Property (T)*, Appendix B §B.1, Theorem B.1.4 and its quotient-measure density calculation, PDF pp. 352–354. Full relevant text was inspected.

@@ -22,6 +22,20 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-03"
+    scope: "Cumulative whole-item verification: completed original Step5 full statement/definition and proof read plus the recorded later Step7 local mathematical corrections. Exact recovered original carrier and current post-correction carrier match recorded hashes; every substantive delta is covered by the cited correction reasoning. No independent audit of the local repairs and no new review round is claimed; supplier review is limited to interfaces used."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-3.md"
+      - "research/frontier-38-owner-30-alpha-batch-3-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-3-post-5a.json"
+      - "research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u3.json"
+    original_read_raw_sha256: "5d1987a35eca33370d985521cbb3a035613c5f19aa69165952ea314c08e04855"
+    repair_post_guard_sha256: "b686c2077a2a21970bb744286956889169a63d50b2c6b3795149a30281421892"
+    content_sha256: "fc8658b34746f6b3bb3f4635791b28cd9735e24117273319e810de5c142f232b"
   precheck: pass
 sources:
   references:

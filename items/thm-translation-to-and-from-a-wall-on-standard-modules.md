@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-7.md"
+      - "research/frontier-38-owner-30-alpha-batch-7-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-7-post-5a.json"
+    content_sha256: "5a0dcde8c9fd8decdb0ea1ecca39322f44e1d57ed7e90eb278d473c0bf69a35d"
 id: thm-translation-to-and-from-a-wall-on-standard-modules
 kind: theorem
 title: "Translation to and from a single wall on standard modules"

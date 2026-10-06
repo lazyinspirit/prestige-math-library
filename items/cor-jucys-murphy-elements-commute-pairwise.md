@@ -21,6 +21,12 @@ sources:
     - title: "Okounkov-Vershik, A New Approach to the Representation Theory of the Symmetric Groups, Selecta Math. (N.S.) 2 (1996) 581-605; complete arXiv repost math/0503040, equation (2.1) and its following commutativity observation, printed p. 10"
       url: "https://arxiv.org/pdf/math/0503040"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "amended_repair"
+    date: 2026-10-03
+    scope: "Complete item claim and mathematical body read in delegated Step 5a adjudication; evidence: research/frontier-38-owner-30-alpha-batch-19-5a.md; immutable carrier: research/frontier-38-owner-30-step5-hash-19-post-5a.json; exact saved draft bytes in git d90f26208 match that carrier after exclusion of the later judge stamp. Current content matches the saved carrier except publication status and verification metadata. Source and supplier coverage is limited to the report."
+    delegated_by: "owner via tools/autopilot frontier-38-owner-30 5a-batch-19 dispatch"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

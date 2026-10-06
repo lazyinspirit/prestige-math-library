@@ -1,4 +1,18 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item read and recorded Step 7 mathematical repair review, including the used supplier interfaces; current mathematical content matches the bound evidence. The repair review is local and does not claim an independent audit of the repair."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-5.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-5.result.json
+      - research/frontier-38-owner-30-step5-hash-5-post-5a.json
+      - research/frontier-38-owner-30-alpha-batch-5-5a-decisions.json
+      - research/frontier-38-owner-30-step7-v2/step7-v2-impact-initial-r1-u3.json
+      - research/frontier-38-owner-30-dispatch/alpha-repair-step7-v2-impact-initial-r1-u3.result.json
 id: ex-riesz-transform-as-a-standard-calderon-zygmund-operator
 kind: example
 title: "The Riesz kernel is a standard Calderón–Zygmund kernel"

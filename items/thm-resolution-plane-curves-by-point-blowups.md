@@ -52,6 +52,17 @@ sources:
       url: "https://stacks.math.columbia.edu/tag/0BI3"
       locator: "Lemmas 54.15.3, 54.15.4 and 54.15.6: contact descent and normal-crossing support; the delta recurrence is proved by the local suppliers here"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post-5a.json"
+    content_sha256: "602e3bb26cd4b519a064fd15e29634fef70e2361a2b82a600c00fcead65057c9"
   precheck: pass
 ---
 

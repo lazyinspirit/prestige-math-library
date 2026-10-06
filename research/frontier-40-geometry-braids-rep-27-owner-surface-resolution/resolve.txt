@@ -1,0 +1,3367 @@
+RESOLUTION OF SURFACES
+0ADW
+Contents
+1.
+Introduction
+1
+2.
+A trace map in positive characteristic
+3
+3.
+Quadratic transformations
+6
+4.
+Dominating by quadratic transformations
+10
+5.
+Dominating by normalized blowups
+11
+6.
+Modifying over local rings
+13
+7.
+Vanishing
+15
+8.
+Boundedness
+18
+9.
+Rational singularities
+24
+10.
+Formal arcs
+27
+11.
+Base change to the completion
+29
+12.
+Rational double points
+32
+13.
+Implied properties
+37
+14.
+Resolution
+39
+15.
+Embedded resolution
+42
+16.
+Contracting exceptional curves
+45
+17.
+Factorization birational maps
+52
+18.
+Other chapters
+53
+References
+54
+1. Introduction
+0ADX
+This chapter discusses resolution of singularities of surfaces following Lipman [Lip78]
+and mostly following the exposition of Artin in [Art86]. The main result (Theorem
+14.5) tells us that a Noetherian 2-dimensional scheme Y has a resolution of sin-
+gularities when it has a finite normalization Y ν →Y with finitely many singular
+points yi ∈Y ν and for each i the completion O∧
+Y ν,yi is normal.
+To be sure, if Y is a 2-dimensional scheme of finite type over a quasi-excellent base
+ring R (for example a field or a Dedekind domain with fraction field of characteristic
+0 such as Z) then the normalization of Y is finite, has finitely many singular points,
+and the completions of the local rings are normal. See the discussion in More on
+Algebra, Sections 48, 51, and 53 and More on Algebra, Lemma 43.2. Thus such a
+Y has a resolution of singularities.
+A rough outline of the proof is as follows. Let A be a Noetherian local domain of
+dimension 2. The steps of the proof are as follows
+N replace A by its normalization,
+This is a chapter of the Stacks Project, version ed88ff78, compiled on Jul 14, 2026.
+1
+
+RESOLUTION OF SURFACES
+2
+V prove Grauert-Riemenschneider,
+B show there is a maximum g of the lengths of H1(X, OX) over all normal
+modifications X →Spec(A) and reduce to the case g = 0,
+R we say A defines a rational singularity if g = 0 and in this case after a finite
+number of blowups we may assume A is Gorenstein and g = 0,
+D we say A defines a rational double point if g = 0 and A is Gorenstein and
+in this case we explicitly resolve singularities.
+Each of these steps needs assumptions on the ring A. We will discuss each of these
+in turn.
+Ad N: Here we need to assume that A has a finite normalization (this is not auto-
+matic). Throughout most of the chapter we will assume that our scheme is Nagata
+if we need to know some normalization is finite. However, being Nagata is a slightly
+stronger condition than is given to us in the statement of the theorem. A solution
+to this (slight) problem would have been to use that our ring A is formally unram-
+ified (i.e., its completion is reduced) and to use Lemma 11.5. However, the way
+our proof works, it turns out it is easier to use Lemma 11.6 to lift finiteness of the
+normalization over the completion to finiteness of the normalization over A.
+Ad V: This is Proposition 7.8 and it roughly states that for a normal modification
+f : X →Spec(A) one has R1f∗ωX = 0 where ωX is the dualizing module of X/A
+(Remark 7.7). In fact, by duality the result is equivalent to a statement (Lemma
+7.6) about the object Rf∗OX in the derived category D(A). Having said this, the
+proof uses the standard fact that components of the special fibre have positive
+conormal sheaves (Lemma 7.4).
+Ad B: This is in some sense the most subtle part of the proof. In the end we only
+need to use the output of this step when A is a complete Noetherian local ring,
+although the writeup is a bit more general. The terminology is set in Definition 8.3.
+If g (as defined above) is bounded, then a straightforward argument shows that we
+can find a normal modification X →Spec(A) such that all singular points of X
+are rational singularities, see Lemma 8.5. We show that given a finite extension
+A ⊂B, then g is bounded for B if it is bounded for A in the following two cases:
+(1) if the fraction field extension is separable, see Lemma 8.5 and (2) if the fraction
+field extension has degree p, the characteristic is p, and A is regular and complete,
+see Lemma 8.10.
+Ad R: Here we reduce the case g = 0 to the Gorenstein case. A marvellous fact,
+which makes everything work, is that the blowing up of a rational surface singularity
+is normal, see Lemma 9.4.
+Ad D: The resolution of rational double points proceeds more or less by hand, see
+Section 12. A rational double point is a hypersurface singularity (this is true but
+we don’t prove it as we don’t need it). The local equation looks like
+a11x2
+1 + a12x1x2 + a13x1x3 + a22x2
+2 + a23x2x3 + a33x2
+3 =
+X
+aijkxixjxk
+Using that the quadratic part cannot be zero because the multiplicity is 2 and
+remains 2 after any blowup and the fact that every blowup is normal one quickly
+achieves a resolution. One twist is that we do not have an invariant which de-
+creases every blowup, but we rely on the material on formal arcs from Section 10
+to demonstrate that the process stops.
+
+RESOLUTION OF SURFACES
+3
+To put everything together some additional work has to be done. The main kink is
+that we want to lift a resolution of the completion A∧to a resolution of Spec(A).
+In order to do this we first show that if a resolution exists, then there is a resolution
+by normalized blowups (Lemma 14.3). A sequence of normalized blowups can be
+lifted from the completion by Lemma 11.7. We then use this even in the proof of
+resolution of complete local rings A because our strategy works by induction on
+the degree of a finite inclusion A0 ⊂A with A0 regular, see Lemma 14.4. With
+a stronger result in B (such as is proved in Lipman’s paper) this step could be
+avoided.
+2. A trace map in positive characteristic
+0ADY
+Some of the results in this section can be deduced from the much more general
+discussion on traces on differential forms in de Rham Cohomology, Section 19. See
+Remark 2.3 for a discussion.
+We fix a prime number p.
+Let R be an Fp-algebra.
+Given an a ∈R set S =
+R[x]/(xp −a). Define an R-linear map
+Trx : ΩS/R −→ΩR
+by the rule
+xidx 7−→
+ 0
+if
+0 ≤i ≤p −2,
+da
+if
+i = p −1
+This makes sense as ΩS/R is a free R-module with basis xidx, 0 ≤i ≤p −1. The
+following lemma implies that the trace map is well defined, i.e., independent of the
+choice of the coordinate x.
+Lemma 2.1.
+0ADZ
+Let φ : R[x]/(xp−a) →R[y]/(yp−b) be an R-algebra homomorphism.
+Then Trx = Try ◦φ.
+Proof. Say φ(x) = λ0 + λ1y + . . . + λp−1yp−1 with λi ∈R. The condition that
+mapping x to λ0 + λ1y + . . . + λp−1yp−1 induces an R-algebra homomorphism
+R[x]/(xp −a) →R[y]/(yp −b) is equivalent to the condition that
+a = λp
+0 + λp
+1b + . . . + λp
+p−1bp−1
+in the ring R. Consider the polynomial ring
+Runiv = Fp[b, λ0, . . . , λp−1]
+with the element a = λp
+0 +λp
+1b+. . .+λp
+p−1bp−1 Consider the universal algebra map
+φuniv : Runiv[x]/(xp −a) →Runiv[y]/(yp −b) given by mapping x to λ0 + λ1y +
+. . . + λp−1yp−1. We obtain a canonical map
+Runiv −→R
+sending b, λi to b, λi. By construction we get a commutative diagram
+Runiv[x]/(xp −a)
+/
+φuniv
+
+R[x]/(xp −a)
+φ
+
+Runiv[y]/(yp −b)
+/ R[y]/(yp −b)
+and the horizontal arrows are compatible with the trace maps. Hence it suffices to
+prove the lemma for the map φuniv. Thus we may assume R = Fp[b, λ0, . . . , λp−1]
+
+RESOLUTION OF SURFACES
+4
+is a polynomial ring. We will check the lemma holds in this case by evaluating
+Try(φ(x)idφ(x)) for i = 0, . . . , p −1.
+The case 0 ≤i ≤p −2. Expand
+(λ0 + λ1y + . . . + λp−1yp−1)i(λ1 + 2λ2y + . . . + (p −1)λp−1yp−2)
+in the ring R[y]/(yp −b). We have to show that the coefficient of yp−1 is zero. For
+this it suffices to show that the expression above as a polynomial in y has vanishing
+coefficients in front of the powers ypk−1. Then we write our polynomial as
+d
+(i + 1)dy (λ0 + λ1y + . . . + λp−1yp−1)i+1
+and indeed the coefficients of ykp−1 are all zero.
+The case i = p −1. Expand
+(λ0 + λ1y + . . . + λp−1yp−1)p−1(λ1 + 2λ2y + . . . + (p −1)λp−1yp−2)
+in the ring R[y]/(yp −b). To finish the proof we have to show that the coefficient
+of yp−1 times db is da. Here we use that R is S/pS where S = Z[b, λ0, . . . , λp−1].
+Then the above, as a polynomial in y, is equal to
+d
+pdy (λ0 + λ1y + . . . + λp−1yp−1)p
+Since
+d
+dy(ypk) = pkypk−1 it suffices to understand the coefficients of ypk in the
+polynomial (λ0 + λ1y + . . . + λp−1yp−1)p modulo p. The sum of these terms gives
+λp
+0 + λp
+1yp + . . . + λp
+p−1yp(p−1) mod p
+Whence we see that we obtain after applying the operator
+d
+pdy and after reducing
+modulo yp −b the value
+λp
+1 + 2λp
+2b + . . . + (p −1)λp−1bp−2
+for the coefficient of yp−1 we wanted to compute. Now because a = λp
+0 +λp
+1b+. . .+
+λp
+p−1bp−1 in R we obtain that
+da = (λp
+1 + 2λp
+2b + . . . + (p −1)λp
+p−1bp−2)db
+in R. This proves that the coefficient of yp−1 is as desired.
+□
+Lemma 2.2.
+0AX5
+Let Fp ⊂Λ ⊂R ⊂S be ring extensions and assume that S is
+isomorphic to R[x]/(xp −a) for some a ∈R. Then there are canonical R-linear
+maps
+Tr : Ωt+1
+S/Λ −→Ωt+1
+R/Λ
+for t ≥0 such that
+η1 ∧. . . ∧ηt ∧xidx 7−→
+
+0
+if
+0 ≤i ≤p −2,
+η1 ∧. . . ∧ηt ∧da
+if
+i = p −1
+for ηi ∈ΩR/Λ and such that Tr annihilates the image of S ⊗R Ωt+1
+R/Λ →Ωt+1
+S/Λ.
+Proof. For t = 0 we use the composition
+ΩS/Λ →ΩS/R →ΩR →ΩR/Λ
+where the second map is Lemma 2.1. There is an exact sequence
+H1(LS/R)
+δ−→ΩR/Λ ⊗R S →ΩS/Λ →ΩS/R →0
+
+RESOLUTION OF SURFACES
+5
+(Algebra, Lemma 134.4). The module ΩS/R is free over S with basis dx and the
+module H1(LS/R) is free over S with basis xp −a which δ maps to −da ⊗1 in
+ΩR/Λ ⊗R S. In particular, if we set
+M = Coker(R →ΩR/Λ, 1 7→−da)
+then we see that Coker(δ) = M ⊗R S. We obtain a canonical map
+Ωt+1
+S/Λ →∧t
+S(Coker(δ)) ⊗S ΩS/R = ∧t
+R(M) ⊗R ΩS/R
+Now, since the image of the map Tr : ΩS/R →ΩR/Λ of Lemma 2.1 is contained in
+Rda we see that wedging with an element in the image annihilates da. Hence there
+is a canonical map
+∧t
+R(M) ⊗R ΩS/R →Ωt+1
+R/Λ
+mapping η1 ∧. . . ∧ηt ∧ω to η1 ∧. . . ∧ηt ∧Tr(ω).
+□
+Remark 2.3.
+0FLF
+Let Fp ⊂Λ ⊂R ⊂S and Tr be as in Lemma 2.2. By de Rham
+Cohomology, Proposition 19.3 there is a canonical map of complexes
+ΘS/R : Ω•
+S/Λ −→Ω•
+R/Λ
+The computation in de Rham Cohomology, Example 19.4 shows that ΘS/R(xidx) =
+Trx(xidx) for all i. Since TraceS/R = Θ0
+S/R is identically zero and since
+ΘS/R(a ∧b) = a ∧ΘS/R(b)
+for a ∈Ωi
+R/Λ and b ∈Ωj
+S/Λ it follows that Tr = ΘS/R. The advantage of using Tr
+is that it is a good deal more elementary to construct.
+Lemma 2.4.
+0AX6
+Let S be a scheme over Fp. Let f : Y →X be a finite morphism of
+Noetherian normal integral schemes over S. Assume
+(1) the extension of function fields is purely inseparable of degree p, and
+(2) ΩX/S is a coherent OX-module (for example if X is of finite type over S).
+For i ≥1 there is a canonical map
+Tr : f∗Ωi
+Y/S −→(Ωi
+X/S)∗∗
+whose stalk in the generic point of X recovers the trace map of Lemma 2.2.
+Proof. The exact sequence f ∗ΩX/S →ΩY/S →ΩY/X →0 shows that ΩY/S and
+hence f∗ΩY/S are coherent modules as well. Thus it suffices to prove the trace map
+in the generic point extends to stalks at x ∈X with dim(OX,x) = 1, see Divisors,
+Lemma 13.14. Thus we reduce to the case discussed in the next paragraph.
+Assume X = Spec(A) and Y = Spec(B) with A a discrete valuation ring and B
+finite over A. Since the induced extension L/K of fraction fields is purely insepa-
+rable, we see that B is local too. Hence B is a discrete valuation ring too. Then
+either
+(1) B/A has ramification index p and hence B = A[x]/(xp −a) where a ∈A is
+a uniformizer, or
+(2) mB = mAB and the residue field B/mAB is purely inseparable of degree p
+over κA = A/mA. Choose any x ∈B whose residue class is not in κA and
+then we’ll have B = A[x]/(xp −a) where a ∈A is a unit.
+Let Spec(Λ) ⊂S be an affine open such that X maps into Spec(Λ).
+Then we
+can apply Lemma 2.2 to see that the trace map extends to Ωi
+B/Λ →Ωi
+A/Λ for all
+i ≥1.
+□
+
+RESOLUTION OF SURFACES
+6
+3. Quadratic transformations
+0AGP
+In this section we study what happens when we blow up a nonsingular point on a
+surface. We hesitate the formally define such a morphism as a quadratic transfor-
+mation as on the one hand often other names are used and on the other hand the
+phrase “quadratic transformation” is sometimes used with a different meaning.
+Lemma 3.1.
+0AGQ
+Let (A, m, κ) be a regular local ring of dimension 2. Let f : X →
+S = Spec(A) be the blowing up of A in m wotj exceptional divisor E. There is a
+closed immersion
+r : X −→P1
+S
+over S such that
+(1) r|E : E →P1
+κ is an isomorphism,
+(2) OX(E) = OX(−1) = r∗OP1(−1), and
+(3) CE/X = (r|E)∗OP1(1) and NE/X = (r|E)∗OP1(−1).
+Proof. As A is regular of dimension 2 we can write m = (x, y).
+Then x and
+y placed in degree 1 generate the Rees algebra L
+n≥0 mn over A.
+Recall that
+X = Proj(L
+n≥0 mn), see Divisors, Lemma 33.2. Thus the surjection
+A[T0, T1] −→
+M
+n≥0 mn,
+T0 7→x, T1 7→y
+of graded A-algebras induces a closed immersion r : X →P1
+S = Proj(A[T0, T1])
+such that OX(1) = r∗OP1
+S(1), see Constructions, Lemma 11.5. This proves (2)
+because OX(E) = OX(−1) by Divisors, Lemma 33.4.
+To prove (1) note that
+M
+n≥0 mn
+⊗A κ =
+M
+n≥0 mn/mn+1 ∼= κ[x, y]
+a polynomial algebra, see Algebra, Lemma 106.1. This proves that the fibre of
+X →S over Spec(κ) is equal to Proj(κ[x, y]) = P1
+κ, see Constructions, Lemma
+11.6. Recall that E is the closed subscheme of X defined by mOX, i.e., E = Xκ.
+By our choice of the morphism r we see that r|E in fact produces the identification
+of E = Xκ with the special fibre of P1
+S →S.
+Part (3) follows from (1) and (2) and Divisors, Lemma 15.2.
+□
+Lemma 3.2.
+0AGR
+Let (A, m, κ) be a regular local ring of dimension 2. Let f : X →
+S = Spec(A) be the blowing up of A in m. Then X is an irreducible regular scheme.
+Proof. Observe that X is integral by Divisors, Lemma 33.9 and Algebra, Lemma
+106.2. To see X is regular it suffices to check that OX,x is regular for closed points
+x ∈X, see Properties, Lemma 9.2. Let x ∈X be a closed point. Since f is proper
+x maps to m, i.e., x is a point of the exceptional divisor E. Then E is an effective
+Cartier divisor and E ∼= P1
+κ. Thus if g ∈mx ⊂OX,x is a local equation for E, then
+OX,x/(g) ∼= OP1κ,x. Since P1
+κ is covered by two affine opens which are the spectrum
+of a polynomial ring over κ, we see that OP1κ,x is regular by Algebra, Lemma 114.1.
+We conclude by Algebra, Lemma 106.7.
+□
+Lemma 3.3.
+0C5G
+Let (A, m, κ) be a regular local ring of dimension 2. Let f : X →
+S = Spec(A) be the blowing up of A in m. Then Pic(X) = Z generated by OX(E).
+
+RESOLUTION OF SURFACES
+7
+Proof. Recall that E = P1
+κ has Picard group Z with generator O(1), see Divisors,
+Lemma 29.5. By Lemma 3.1 the invertible OX-module OX(E) restricts to O(−1).
+Hence OX(E) generates an infinite cyclic group in Pic(X). Since A is regular it
+is a UFD, see More on Algebra, Lemma 123.2.
+Then the punctured spectrum
+U = S \ {m} = X \ E has trivial Picard group, see Divisors, Lemma 29.4. Hence
+for every invertible OX-module L there is an isomorphism s : OU →L|U. Then
+s is a regular meromorphic section of L and we see that divL(s) = nE for some
+n ∈Z (Divisors, Definition 28.4). By Divisors, Lemma 28.6 (and the fact that X
+is normal by Lemma 3.2) we conclude that L = OX(nE).
+□
+Lemma 3.4.
+0AGS
+Let (A, m, κ) be a regular local ring of dimension 2. Let f : X →
+S = Spec(A) be the blowing up of A in m. Let F be a quasi-coherent OX-module.
+(1) Hp(X, F) = 0 for p ̸∈{0, 1},
+(2) H1(X, OX(n)) = 0 for n ≥−1,
+(3) H1(X, F) = 0 if F or F(1) is globally generated,
+(4) H0(X, OX(n)) = mmax(0,n),
+(5) lengthAH1(X, OX(n)) = −n(−n −1)/2 if n < 0.
+Proof. If m = (x, y), then X is covered by the spectra of the affine blowup algebras
+A[ m
+x ] and A[ m
+y ] because x and y placed in degree 1 generate the Rees algebra L mn
+over A.
+See Divisors, Lemma 33.2 and Constructions, Lemma 8.9.
+Since X is
+separated by Constructions, Lemma 8.8 we see that cohomology of quasi-coherent
+sheaves vanishes in degrees ≥2 by Cohomology of Schemes, Lemma 4.2.
+Let i : E →X be the exceptional divisor, see Divisors, Definition 33.1. Recall that
+OX(−E) = OX(1) is f-relatively ample, see Divisors, Lemma 33.4. Hence we know
+that H1(X, OX(−nE)) = 0 for some n > 0, see Cohomology of Schemes, Lemma
+16.2. Consider the filtration
+OX(−nE) ⊂OX(−(n −1)E) ⊂. . . ⊂OX(−E) ⊂OX ⊂OX(E)
+The successive quotients are the sheaves
+OX(−tE)/OX(−(t + 1)E) = OX(t)/I(t) = i∗OE(t)
+where I = OX(−E) is the ideal sheaf of E. By Lemma 3.1 we have E = P1
+κ and
+OE(1) indeed corresponds to the usual Serre twist of the structure sheaf on P1.
+Hence the cohomology of OE(t) vanishes in degree 1 for t ≥−1, see Cohomology
+of Schemes, Lemma 8.1. Since this is equal to H1(X, i∗OE(t)) (by Cohomology of
+Schemes, Lemma 2.4) we find that H1(X, OX(−(t + 1)E)) →H1(X, OX(−tE)) is
+surjective for t ≥−1. Hence
+0 = H1(X, OX(−nE)) −→H1(X, OX(−tE)) = H1(X, OX(t))
+is surjective for t ≥−1 which proves (2).
+Let F be globally generated. This means there exists a short exact sequence
+0 →G →
+M
+i∈I OX →F →0
+Note that H1(X, L
+i∈I OX) = L
+i∈I H1(X, OX) by Cohomology, Lemma 19.1. By
+part (2) we have H1(X, OX) = 0. If F(1) is globally generated, then we can find a
+surjection L
+i∈I OX(−1) →F and argue in a similar fashion. In other words, part
+(3) follows from part (2).
+
+RESOLUTION OF SURFACES
+8
+For part (4) we note that for all n large enough we have Γ(X, OX(n)) = mn, see
+Cohomology of Schemes, Lemma 14.3. If n ≥0, then we can use the short exact
+sequence
+0 →OX(n) →OX(n −1) →i∗OE(n −1) →0
+and the vanishing of H1 for the sheaf on the left to get a commutative diagram
+0
+/ mmax(0,n)
+/
+
+mmax(0,n−1)
+/
+
+mmax(0,n)/mmax(0,n−1)
+/
+
+0
+0
+/ Γ(X, OX(n))
+/ Γ(X, OX(n −1))
+/ Γ(E, OE(n −1))
+/ 0
+with exact rows. In fact, the rows are exact also for n < 0 because in this case
+the groups on the right are zero. In the proof of Lemma 3.1 we have seen that the
+right vertical arrow is an isomorphism (details omitted). Hence if the left vertical
+arrow is an isomorphism, so is the middle one. In this way we see that (4) holds
+by descending induction on n.
+Finally, we prove (5) by descending induction on n and the sequences
+0 →OX(n) →OX(n −1) →i∗OE(n −1) →0
+Namely, for n ≥−1 we already know H1(X, OX(n)) = 0. Since
+H1(X, i∗OE(−2)) = H1(E, OE(−2)) = H1(P1
+κ, O(−2)) ∼= κ
+by Cohomology of Schemes, Lemma 8.1 which has length 1 as an A-module, we
+conclude from the long exact cohomology sequence that (5) holds for n = −2. And
+so on and so forth.
+□
+Lemma 3.5.
+0AGT
+Let (A, m) be a regular local ring of dimension 2. Let f : X →S =
+Spec(A) be the blowing up of A in m. Let mn ⊂I ⊂m be an ideal. Let d ≥0 be
+the largest integer such that
+IOX ⊂OX(−dE)
+where E is the exceptional divisor. Set I′ = IOX(dE) ⊂OX. Then d > 0, the
+sheaf OX/I′ is supported in finitely many closed points x1, . . . , xr of X, and
+lengthA(A/I) > lengthAΓ(X, OX/I′)
+≥
+X
+i=1,...,r lengthOX,xi(OX,xi/I′
+xi)
+Proof. Since I ⊂m we see that every element of I vanishes on E. Thus we see
+that d ≥1. On the other hand, since mn ⊂I we see that d ≤n. Consider the short
+exact sequence
+0 →IOX →OX →OX/IOX →0
+Since IOX is globally generated, we see that H1(X, IOX) = 0 by Lemma 3.4.
+Hence we obtain a surjection A/I →Γ(X, OX/IOX). Consider the short exact
+sequence
+0 →OX(−dE)/IOX →OX/IOX →OX/OX(−dE) →0
+
+RESOLUTION OF SURFACES
+9
+By Divisors, Lemma 16.8 we see that OX(−dE)/IOX is supported in finitely many
+closed points of X. In particular, this coherent sheaf has vanishing higher coho-
+mology groups (detail omitted). Thus in the following diagram
+A/I
+
+0
+/ Γ(X, OX(−dE)/IOX)
+/ Γ(X, OX/IOX)
+/ Γ(X, OX/OX(−dE))
+/ 0
+the bottom row is exact and the vertical arrow surjective. We have
+lengthAΓ(X, OX(−dE)/IOX) < lengthA(A/I)
+since Γ(X, OX/OX(−dE)) is nonzero.
+Namely, the image of 1 ∈Γ(X, OX) is
+nonzero as d > 0.
+To finish the proof we translate the results above into the statements of the lemma.
+Since OX(dE) is invertible we have
+OX/I′ = OX(−dE)/IOX ⊗OX OX(dE).
+Thus OX/I′ and OX(−dE)/IOX are supported in the same set of finitely many
+closed points, say x1, . . . , xr ∈E ⊂X. Moreover we obtain
+Γ(X, OX(−dE)/IOX) =
+M
+OX(−dE)xi/IOX,xi ∼=
+M
+OX,xi/I′
+xi = Γ(X, OX/I′)
+because an invertible module over a local ring is trivial. Thus we obtain the strict
+inequality. We also get the second because
+lengthA(OX,xi/I′
+xi) ≥lengthOX,xi(OX,xi/I′
+xi)
+as is immediate from the definition of length.
+□
+Lemma 3.6.
+0B4L
+Let (A, m, κ) be a regular local ring of dimension 2. Let f : X →
+S = Spec(A) be the blowing up of A in m. Then ΩX/S = i∗ΩE/κ, where i : E →X
+is the immersion of the exceptional divisor.
+Proof. Writing P1 = P1
+S, let r : X →P1 be as in Lemma 3.1. Then we have an
+exact sequence
+CX/P1 →r∗ΩP1/S →ΩX/S →0
+see Morphisms, Lemma 33.15.
+Since ΩP1/S|E = ΩE/κ by Morphisms, Lemma
+33.10 it suffices to see that the first arrow defines a surjection onto the kernel of
+the canonical map r∗ΩP1/S →i∗ΩE/κ. This we can do locally. With notation as
+in the proof of Lemma 3.1 on an affine open of X the morphism f corresponds to
+the ring map
+A →A[t]/(xt −y)
+where x, y ∈m are generators. Thus d(xt−y) = xdt and ydt = t·xdt which proves
+what we want.
+□
+
+RESOLUTION OF SURFACES
+10
+4. Dominating by quadratic transformations
+0BFS
+Using the result above we can prove that blowups in points dominate any modifi-
+cation of a regular 2 dimensional scheme.
+Let X be a scheme. Let x ∈X be a closed point. As usual, we view i : x =
+Spec(κ(x)) →X as a closed subscheme. The blowing up X′ →X of X at x is
+the blowing up of X in the closed subscheme x ⊂X. Observe that if X is locally
+Noetherian, then X′ →X is projective (in particular proper) by Divisors, Lemma
+33.13.
+Lemma 4.1.
+0AHH
+Let X be a Noetherian scheme. Let T ⊂X be a finite set of closed
+points x such that OX,x is regular of dimension 2 for x ∈T. Let I ⊂OX be a
+quasi-coherent sheaf of ideals such that OX/I is supported on T. Then there exists
+a sequence
+Xn →Xn−1 →. . . →X1 →X0 = X
+where Xi+1 →Xi is the blowing up of Xi at a closed point lying above a point of T
+such that IOXn is an invertible ideal sheaf.
+Proof. Say T = {x1, . . . , xr}. Denote Ii the stalk of I at xi. Set
+ni = lengthOX,xi(OX,xi/Ii)
+This is finite as OX/I is supported on T and hence OX,xi/Ii has support equal
+to {mxi} (see Algebra, Lemma 62.3). We are going to use induction on P ni. If
+ni = 0 for all i, then I = OX and we are done.
+Suppose ni > 0. Let X′ →X be the blowing up of X in xi (see discussion above
+the lemma). Since Spec(OX,xi) →X is flat we see that X′ ×X Spec(OX,xi) is the
+blowup of the ring OX,xi in the maximal ideal, see Divisors, Lemma 33.3. Hence
+the square in the commutative diagram
+Proj(L
+d≥0 md
+xi)
+/
+
+X′
+
+Spec(OX,xi)
+/ X
+is cartesian. Let E ⊂X′ and E′ ⊂Proj(L
+d≥0 md
+xi) be the exceptional divisors.
+Let d ≥1 be the integer found in Lemma 3.5 for the ideal Ii ⊂OX,xi. Since the
+horizontal arrows in the diagram are flat, since E′ →E is surjective, and since E′
+is the pullback of E, we see that
+IOX′ ⊂OX′(−dE)
+(some details omitted). Set I′ = IOX′(dE) ⊂OX′. Then we see that OX′/I′ is
+supported in finitely many closed points T ′ ⊂|X′| because this holds over X \ {xi}
+and for the pullback to Proj(L
+d≥0 md
+xi). The final assertion of Lemma 3.5 tells
+us that the sum of the lengths of the stalks OX′,x′/I′OX′,x′ for x′ lying over xi is
+< ni. Hence the sum of the lengths has decreased.
+By induction hypothesis, there exists a sequence
+X′
+n →. . . →X′
+1 →X′
+of blowups at closed points lying over T ′ such that I′OX′
+n is invertible.
+Since
+I′OX′(−dE) = IOX′, we see that IOX′n = I′OX′n(−d(f ′)−1E) where f ′ : X′
+n →
+
+RESOLUTION OF SURFACES
+11
+X′ is the composition. Note that (f ′)−1E is an effective Cartier divisor by Divisors,
+Lemma 33.11. Thus we are done by Divisors, Lemma 14.7.
+□
+Lemma 4.2.
+0AHI
+Let X be a Noetherian scheme. Let T ⊂X be a finite set of closed
+points x such that OX,x is a regular local ring of dimension 2. Let f : Y →X be a
+proper morphism of schemes which is an isomorphism over U = X \ T. Then there
+exists a sequence
+Xn →Xn−1 →. . . →X1 →X0 = X
+where Xi+1 →Xi is the blowing up of Xi at a closed point xi lying above a point
+of T and a factorization Xn →Y →X of the composition.
+Proof. By More on Flatness, Lemma 31.4 there exists a U-admissible blowup
+X′ →X which dominates Y →X. Hence we may assume there exists an ideal
+sheaf I ⊂OX such that OX/I is supported on T and such that Y is the blowing
+up of X in I. By Lemma 4.1 there exists a sequence
+Xn →Xn−1 →. . . →X1 →X0 = X
+where Xi+1 →Xi is the blowing up of Xi at a closed point xi lying above a point of
+T such that IOXn is an invertible ideal sheaf. By the universal property of blowing
+up (Divisors, Lemma 33.5) we find the desired factorization.
+□
+Lemma 4.3.
+0C5H
+Let S be a scheme. Let X be a scheme over S which is regular
+and has dimension 2. Let Y be a proper scheme over S. Given an S-rational map
+f : U →Y from X to Y there exists a sequence
+Xn →Xn−1 →. . . →X1 →X0 = X
+and an S-morphism fn : Xn →Y such that Xi+1 →Xi is the blowing up of Xi at
+a closed point not lying over U and fn and f agree.
+Proof. We may assume U contains every point of codimension 1, see Morphisms,
+Lemma 43.5. Hence the complement T ⊂X of U is a finite set of closed points
+whose local rings are regular of dimension 2. Applying Divisors, Lemma 37.2 we find
+a proper morphism p : X′ →X which is an isomorphism over U and a morphism
+f ′ : X′ →Y agreeing with f over U. Apply Lemma 4.2 to the morphism p : X′ →
+X. The composition Xn →X′ →Y is the desired morphism.
+□
+5. Dominating by normalized blowups
+0BBR
+In this section we prove that a modification of a surface can be dominated by a
+sequence of normalized blowups in points.
+Definition 5.1.
+0BBS
+Let X be a scheme such that every quasi-compact open has finitely
+many irreducible components. Let x ∈X be a closed point. The normalized blowup
+of X at x is the composition X′′ →X′ →X where X′ →X is the blowup of X in
+x and X′′ →X′ is the normalization of X′.
+Here the normalization X′′ →X′ is defined as the scheme X′ has an open covering
+by opens which have finitely many irreducible components by Divisors, Lemma
+33.10. See Morphisms, Definition 55.1 for the definition of the normalization.
+In general the normalized blowing up need not be proper even when X is Noether-
+ian. Recall that a scheme is Nagata if it has an open covering by affines which are
+spectra of Nagata rings (Properties, Definition 13.1).
+
+RESOLUTION OF SURFACES
+12
+Lemma 5.2.
+0BFT
+In Definition 5.1 if X is Nagata, then the normalized blowing up of
+X at x is normal, Nagata, and proper over X.
+Proof. The blowup morphism X′ →X is proper (as X is locally Noetherian we
+may apply Divisors, Lemma 33.13). Thus X′ is Nagata (Morphisms, Lemma 18.1).
+Therefore the normalization X′′ →X′ is finite (Morphisms, Lemma 55.11) and we
+conclude that X′′ →X is proper as well (Morphisms, Lemmas 45.11 and 42.4).
+It follows that the normalized blowing up is a normal (Morphisms, Lemma 55.5)
+Nagata algebraic space.
+□
+In the following lemma we need to assume X is Noetherian in order to make sure
+that it has finitely many irreducible components. Then the properness of f : Y →X
+assures that Y has finitely many irreducible components too and it makes sense to
+require f to be birational (Morphisms, Definition 51.1).
+Lemma 5.3.
+0BBT
+Let X be a scheme which is Noetherian, Nagata, and has dimension
+2. Let f : Y →X be a proper birational morphism. Then there exists a commutative
+diagram
+Xn
+/
+
+Xn−1
+/ . . .
+/ X1
+/ X0
+
+Y
+/ X
+where X0 →X is the normalization and where Xi+1 →Xi is the normalized
+blowing up of Xi at a closed point.
+Proof. We will use the results of Morphisms, Sections 18, 53, and 55 without
+further mention. We may replace Y by its normalization. Let X0 →X be the
+normalization. The morphism Y →X factors through X0. Thus we may assume
+that both X and Y are normal.
+Assume X and Y are normal. The morphism f : Y →X is an isomorphism over
+an open which contains every point of codimension 0 and 1 in Y and every point of
+Y over which the fibre is finite, see Varieties, Lemma 17.3. Hence there is a finite
+set of closed points T ⊂X such that f is an isomorphism over X \ T. For each
+x ∈T the fibre Yx is a proper geometrically connected scheme of dimension 1 over
+κ(x), see More on Morphisms, Lemma 53.6. Thus
+BadCurves(f) = {C ⊂Y closed | dim(C) = 1, f(C) = a point}
+is a finite set. We will prove the lemma by induction on the number of elements of
+BadCurves(f). The base case is the case where BadCurves(f) is empty, and in
+that case f is an isomorphism.
+Fix x ∈T. Let X′ →X be the normalized blowup of X at x and let Y ′ be the
+normalization of Y ×X X′. Picture
+Y ′
+f ′
+/
+
+X′
+
+Y
+f
+/ X
+Let x′ ∈X′ be a closed point lying over x such that the fibre Y ′
+x′ has dimension
+≥1. Let C′ ⊂Y ′ be an irreducible component of Y ′
+x′, i.e., C′ ∈BadCurves(f ′).
+Since Y ′ →Y ×X X′ is finite we see that C′ must map to an irreducible component
+
+RESOLUTION OF SURFACES
+13
+C ⊂Yx. If is clear that C ∈BadCurves(f). Since Y ′ →Y is birational and
+hence an isomorphism over points of codimension 1 in Y , we see that we obtain an
+injective map
+BadCurves(f ′) −→BadCurves(f)
+Thus it suffices to show that after a finite number of these normalized blowups we
+get rid at of at least one of the bad curves, i.e., the displayed map is not surjective.
+We will get rid of a bad curve using an argument due to Zariski.
+Pick C ∈
+BadCurves(f) lying over our x. Denote OY,C the local ring of Y at the generic
+point of C. Choose an element u ∈OX,C whose image in the residue field R(C) is
+transcendental over κ(x) (we can do this because R(C) has transcendence degree
+1 over κ(x) by Varieties, Lemma 20.3). We can write u = a/b with a, b ∈OX,x as
+OY,C and OX,x have the same fraction fields. By our choice of u it must be the
+case that a, b ∈mx. Hence
+Nu,a,b = min{ordOY,C(a), ordOY,C(b)} > 0
+Thus we can do descending induction on this integer. Let X′ →X be the normal-
+ized blowing up of x and let Y ′ be the normalization of X′ ×X Y as above. We will
+show that if C is the image of some bad curve C′ ⊂Y ′ lying over x′ ∈X′, then
+there exists a choice of a′, b′OX′,x′ such that Nu,a′,b′ < Nu,a,b. This will finish the
+proof. Namely, since X′ →X factors through the blowing up, we see that there
+exists a nonzero element d ∈mx′ such that a = a′d and b = b′d (namely, take d
+to be the local equation for the exceptional divisor of the blowup). Since Y ′ →Y
+is an isomorphism over an open containing the generic point of C (seen above) we
+see that OY ′,C′ = OY,C. Hence
+ordOY,C(a) = ordOY ′,C′(a′d) = ordOY ′,C′(a′) + ordOY ′,C′(d) > ordOY ′,C′(a′)
+Similarly for b and the proof is complete.
+□
+Lemma 5.4.
+0C5I
+Let S be a scheme. Let X be a scheme over S which is Noetherian,
+Nagata, and has dimension 2. Let Y be a proper scheme over S. Given an S-
+rational map f : U →Y from X to Y there exists a sequence
+Xn →Xn−1 →. . . →X1 →X0 →X
+and an S-morphism fn : Xn →Y such that X0 →X is the normalization, Xi+1 →
+Xi is the normalized blowing up of Xi at a closed point, and fn and f agree.
+Proof. Applying Divisors, Lemma 37.2 we find a proper morphism p : X′ →X
+which is an isomorphism over U and a morphism f ′ : X′ →Y agreeing with
+f over U.
+Apply Lemma 5.3 to the morphism p : X′ →X.
+The composition
+Xn →X′ →Y is the desired morphism.
+□
+6. Modifying over local rings
+0AE1
+Let S be a scheme. Let s1, . . . , sn ∈S be pairwise distinct closed points. Assume
+that the open embedding
+U = S \ {s1, . . . , sn} −→S
+is quasi-compact. Denote FPS,{s1,...,sn} the category of morphisms f : X →S
+of finite presentation which induce an isomorphism f −1(U) →U. Morphisms are
+morphisms of schemes over S. For each i set Si = Spec(OS,si) and let Vi = Si\{si}.
+Denote FPSi,si the category of morphisms gi : Yi →Si of finite presentation which
+
+RESOLUTION OF SURFACES
+14
+induce an isomorphism g−1
+i
+(Vi) →Vi. Morphisms are morphisms over Si. Base
+change defines an functor
+(6.0.1)
+0BFU
+F : FPS,{s1,...,sn} −→FPS1,s1 × . . . × FPSn,sn
+To reduce at least some of the problems in this chapter to the case of local rings
+we have the following lemma.
+Lemma 6.1.
+0BFV
+The functor F (6.0.1) is an equivalence.
+Proof. For n = 1 this is Limits, Lemma 21.1. For n > 1 the lemma can be proved
+in exactly the same way or it can be deduced from it. For example, suppose that
+gi : Yi →Si are objects of FPSi,si. Then by the case n = 1 we can find f ′
+i : X′
+i →S
+of finite presentation which are isomorphisms over S \ {si} and whose base change
+to Si is gi. Then we can set
+f : X = X′
+1 ×S . . . ×S X′
+n →S
+This is an object of FPS,{s1,...,sn} whose base change by Si →S recovers gi. Thus
+the functor is essentially surjective. We omit the proof of fully faithfulness.
+□
+Lemma 6.2.
+0BFW
+Let S, si, Si be as in (6.0.1). If f : X →S corresponds to gi : Yi →Si
+under F, then f is separated, proper, finite, if and only if gi is so for i = 1, . . . , n.
+Proof. Follows from Limits, Lemma 21.2.
+□
+Lemma 6.3.
+0BFX
+Let S, si, Si be as in (6.0.1). If f : X →S corresponds to gi : Yi →Si
+under F, then Xsi ∼= (Yi)si as schemes over κ(si).
+Proof. This is clear.
+□
+Lemma 6.4.
+0BFY
+Let S, si, Si be as in (6.0.1) and assume f : X →S corresponds to
+gi : Yi →Si under F. Then there exists a factorization
+X = Zm →Zm−1 →. . . →Z1 →Z0 = S
+of f where Zj+1 →Zj is the blowing up of Zj at a closed point zj lying over
+{s1, . . . , sn} if and only if for each i there exists a factorization
+Yi = Zi,mi →Zi,mi−1 →. . . →Zi,1 →Zi,0 = Si
+of gi where Zi,j+1 →Zi,j is the blowing up of Zi,j at a closed point zi,j lying over
+si.
+Proof. Let’s start with a sequence of blowups Zm →Zm−1 →. . . →Z1 →Z0 = S.
+The first morphism Z1 →S is given by blowing up one of the si, say s1. Applying F
+to Z1 →S we find a blowup Z1,1 →S1 at s1 is the blowing up at s1 and otherwise
+Zi,0 = Si for i > 1. In the next step, we either blow up one of the si, i ≥2 on Z1 or
+we pick a closed point z1 of the fibre of Z1 →S over s1. In the first case it is clear
+what to do and in the second case we use that (Z1)s1 ∼= (Z1,1)s1 (Lemma 6.3) to get
+a closed point z1,1 ∈Z1,1 corresponding to z1. Then we set Z1,2 →Z1,1 equal to
+the blowing up in z1,1. Continuing in this manner we construct the factorizations
+of each gi.
+Conversely, given sequences of blowups Zi,mi →Zi,mi−1 →. . . →Zi,1 →Zi,0 = Si
+we construct the sequence of blowing ups of S in exactly the same manner.
+□
+Here is the analogue of Lemma 6.4 for normalized blowups.
+
+RESOLUTION OF SURFACES
+15
+Lemma 6.5.
+0BFZ
+Let S, si, Si be as in (6.0.1) and assume f : X →S corresponds to
+gi : Yi →Si under F. Assume every quasi-compact open of S has finitely many
+irreducible components. Then there exists a factorization
+X = Zm →Zm−1 →. . . →Z1 →Z0 = S
+of f where Zj+1 →Zj is the normalized blowing up of Zj at a closed point zj lying
+over {x1, . . . , xn} if and only if for each i there exists a factorization
+Yi = Zi,mi →Zi,mi−1 →. . . →Zi,1 →Zi,0 = Si
+of gi where Zi,j+1 →Zi,j is the normalized blowing up of Zi,j at a closed point zi,j
+lying over si.
+Proof. The assumption on S is used to assure us (successively) that the schemes
+we are normalizing have locally finitely many irreducible components so that the
+statement makes sense.
+Having said this the lemma follows by the exact same
+argument as used to prove Lemma 6.4.
+□
+7. Vanishing
+0AX7
+In this section we will often work in the following setting. Recall that a modification
+is a proper birational morphism between integral schemes (Morphisms, Definition
+52.11).
+Situation 7.1.
+0AX8
+Here (A, m, κ) be a local Noetherian normal domain of dimension
+2. Let s be the closed point of S = Spec(A) and U = S \ {s}. Let f : X →S be a
+modification. We denote C1, . . . , Cr the irreducible components of the special fibre
+Xs of f.
+By Varieties, Lemma 17.3 the morphism f defines an isomorphism f −1(U) →U.
+The special fibre Xs is proper over Spec(κ) and has dimension at most 1 by Varieties,
+Lemma 19.3. By Stein factorization (More on Morphisms, Lemma 53.6) we have
+f∗OX = OS and the special fibre Xs is geometrically connected over κ.
+If Xs
+has dimension 0, then f is finite (More on Morphisms, Lemma 44.2) and hence an
+isomorphism (Morphisms, Lemma 55.8). We will discard this uninteresting case
+and we conclude that dim(Ci) = 1 for i = 1, . . . , r.
+Lemma 7.2.
+0B4M
+In Situation 7.1 there exists a U-admissible blowup X′ →S which
+dominates X.
+Proof. This is a special case of More on Flatness, Lemma 31.4.
+□
+Lemma 7.3.
+0AX9
+In Situation 7.1 there exists a nonzero f ∈m such that for every
+i = 1, . . . , r there exist
+(1) a closed point xi ∈Ci with xi ̸∈Cj for j ̸= i,
+(2) a factorization f = gifi of f in OX,xi such that gi ∈mxi maps to a nonzero
+element of OCi,xi.
+Proof. We will use the observations made following Situation 7.1 without further
+mention. Pick a closed point xi ∈Ci which is not in Cj for j ̸= i. Pick gi ∈mxi
+which maps to a nonzero element of OCi,xi. Since the fraction field of A is the
+fraction field of OXi,xi we can write gi = ai/bi for some ai, bi ∈A. Take f =
+Q ai.
+□
+
+RESOLUTION OF SURFACES
+16
+Lemma 7.4.
+0AXA
+In Situation 7.1 assume X is normal. Let Z ⊂X be a nonempty
+effective Cartier divisor such that Z ⊂Xs set theoretically. Then the conormal
+sheaf of Z is not trivial. More precisely, there exists an i such that Ci ⊂Z and
+deg(CZ/X|Ci) > 0.
+Proof. We will use the observations made following Situation 7.1 without further
+mention. Let f be a function as in Lemma 7.3. Let ξi ∈Ci be the generic point.
+Let Oi be the local ring of X at ξi. Then Oi is a discrete valuation ring. Let ei
+be the valuation of f in Oi, so ei > 0. Let hi ∈Oi be a local equation for Z and
+let di be its valuation. Then di ≥0. Choose and fix i with di/ei maximal (then
+di > 0 as Z is not empty). Replace f by f di and Z by eiZ. This is permissible, by
+the relation OX(eiZ) = OX(Z)⊗ei, the relation between the conormal sheaf and
+OX(Z) (see Divisors, Lemmas 15.4 and 15.2, and since the degree gets multiplied
+by ei, see Varieties, Lemma 44.7. Let I be the ideal sheaf of Z so that CZ/X = I|Z.
+Consider the image f of f in Γ(Z, OZ). By our choices above we see that f vanishes
+in the generic points of irreducible components of Z (these are all generic points
+of Cj as Z is contained in the special fibre). On the other hand, Z is (S1) by
+Divisors, Lemma 16.6. Thus the scheme Z has no embedded associated points and
+we conclude that f = 0 (Divisors, Lemmas 4.3 and 5.6). Hence f is a global section
+of I which generates Iξi by construction. Thus the image si of f in Γ(Ci, I|Ci) is
+nonzero. However, our choice of f guarantees that si has a zero at xi. Hence the
+degree of I|Ci is > 0 by Varieties, Lemma 44.12.
+□
+Lemma 7.5.
+0AXB
+In Situation 7.1 assume X is normal and A Nagata. The map
+H1(X, OX) −→H1(f −1(U), OX)
+is injective.
+Proof. Let 0 →OX →E →OX →0 be the extension corresponding to a nontriv-
+ial element ξ of H1(X, OX) (Cohomology, Lemma 5.1). Let π : P = P(E) →X
+be the projective bundle associated to E. The surjection E →OX defines a section
+σ : X →P whose conormal sheaf is isomorphic to OX (Divisors, Lemma 32.6). If
+the restriction of ξ to f −1(U) is trivial, then we get a map E|f −1(U) →Of −1(U)
+splitting the injection OX →E. This defines a second section σ′ : f −1(U) →P dis-
+joint from σ. Since ξ is nontrivial we conclude that σ′ cannot extend to all of X and
+be disjoint from σ. Let X′ ⊂P be the scheme theoretic image of σ′ (Morphisms,
+Definition 6.2). Picture
+X′
+g
+ 
+/ P
+π
+
+f −1(U)
+σ′
+;
+/ X
+σ
+V
+The morphism P \ σ(X) →X is affine. If X′ ∩σ(X) = ∅, then X′ →X is both
+affine and proper, hence finite (Morphisms, Lemma 45.11), hence an isomorphism
+(as X is normal, see Morphisms, Lemma 55.8). This is impossible as mentioned
+above.
+Let Xν be the normalization of X′. Since A is Nagata, we see that Xν →X′ is
+finite (Morphisms, Lemmas 55.11 and 18.2). Let Z ⊂Xν be the pullback of the
+effective Cartier divisor σ(X) ⊂P. By the above we see that Z is not empty and is
+
+RESOLUTION OF SURFACES
+17
+contained in the closed fibre of Xν →S. Since P →X is smooth, we see that σ(X)
+is an effective Cartier divisor (Divisors, Lemma 23.8). Hence Z ⊂Xν is an effective
+Cartier divisor too. Since the conormal sheaf of σ(X) in P is OX, the conormal
+sheaf of Z in Xν (which is a priori invertible) is OZ by Morphisms, Lemma 32.4.
+This is impossible by Lemma 7.4 and the proof is complete.
+□
+Lemma 7.6.
+0AXC
+In Situation 7.1 assume X is normal and A Nagata. Then
+HomD(A)(κ[−1], Rf∗OX)
+is zero. This uses D(A) = DQCoh(OS) to think of Rf∗OX as an object of D(A).
+Proof. By adjointness of Rf∗and Lf ∗such a map is the same thing as a map
+α : Lf ∗κ[−1] →OX. Note that
+Hi(Lf ∗κ[−1]) =
+
+
+
+0
+if
+i > 1
+OXs
+if
+i = 1
+some OXs-module
+if
+i ≤0
+Since Hom(H0(Lf ∗κ[−1]), OX) = 0 as OX is torsion free, the spectral sequence for
+Ext (Cohomology on Sites, Example 32.1) implies that HomD(OX)(Lf ∗κ[−1], OX)
+is equal to Ext1
+OX(OXs, OX). We conclude that α : Lf ∗κ[−1] →OX is given by an
+extension
+0 →OX →E →OXs →0
+By Lemma 7.5 the pullback of this extension via the surjection OX →OXs is zero
+(since this pullback is clearly split over f −1(U)). Thus 1 ∈OXs lifts to a global
+section s of E. Multiplying s by the ideal sheaf I of Xs we obtain an OX-module
+map cs : I →OX. Applying f∗we obtain an A-linear map f∗cs : m →A. Since
+A is a Noetherian normal local domain this map is given by multiplication by an
+element a ∈A. Changing s into s −a we find that s is annihilated by I and the
+extension is trivial as desired.
+□
+Remark 7.7.
+0B4R
+Let X be an integral Noetherian normal scheme of dimension 2. In
+this case the following are equivalent
+(1) X has a dualizing complex ω•
+X,
+(2) there is a coherent OX-module ωX such that ωX[n] is a dualizing complex,
+where n can be any integer.
+This follows from the fact that X is Cohen-Macaulay (Properties, Lemma 12.7)
+and Duality for Schemes, Lemma 23.1. In this situation we will say that ωX is a
+dualizing module in accordance with Duality for Schemes, Section 22. In particular,
+when A is a Noetherian normal local domain of dimension 2, then we say A has a
+dualizing module ωA if the above is true. In this case, if X →Spec(A) is a normal
+modification, then X has a dualizing module too, see Duality for Schemes, Example
+22.1. In this situation we always denote ωX the dualizing module normalized with
+respect to ωA, i.e., such that ωX[2] is the dualizing complex normalized relative to
+ωA[2]. See Duality for Schemes, Section 20.
+The Grauert-Riemenschneider vanishing of the next proposition is a formal conse-
+quence of Lemma 7.6 and the general theory of duality.
+Proposition 7.8 (Grauert-Riemenschneider).
+0AXD
+In Situation 7.1 assume
+(1) X is a normal scheme,
+(2) A is Nagata and has a dualizing complex ω•
+A.
+
+RESOLUTION OF SURFACES
+18
+Let ωX be the dualizing module of X (Remark 7.7). Then R1f∗ωX = 0.
+Proof. In this proof we will use the identification D(A) = DQCoh(OS) to identify
+quasi-coherent OS-modules with A-modules. Moreover, we may assume that ω•
+A is
+normalized, see Dualizing Complexes, Section 16. Since X is a Noetherian normal
+2-dimensional scheme it is Cohen-Macaulay (Properties, Lemma 12.7). Thus ω•
+X =
+ωX[2] (Duality for Schemes, Lemma 23.1 and the normalization in Duality for
+Schemes, Example 22.1). If the proposition is false, then we can find a nonzero
+map R1f∗ωX →κ. In other words we obtain a nonzero map α : Rf∗ω•
+X →κ[1].
+Applying R HomA(−, ω•
+A) we get a nonzero map
+β : κ[−1] −→Rf∗OX
+which is impossible by Lemma 7.6. To see that R HomA(−, ω•
+A) does what we said,
+first note that
+R HomA(κ[1], ω•
+A) = R HomA(κ, ω•
+A)[−1] = κ[−1]
+as ω•
+A is normalized and we have
+R HomA(Rf∗ω•
+X, ω•
+A) = Rf∗R HomOX(ω•
+X, ω•
+X) = Rf∗OX
+The first equality by Duality for Schemes, Example 3.9 and the fact that ω•
+X = f !ω•
+A
+by construction, and the second equality because ω•
+X is a dualizing complex for X
+(which goes back to Duality for Schemes, Lemma 17.7).
+□
+8. Boundedness
+0AXE
+In this section we begin the discussion which will lead to a reduction to the case of
+rational singularities for 2-dimensional schemes.
+Lemma 8.1.
+0AXF
+Let (A, m, κ) be a Noetherian normal local domain of dimension 2.
+Consider a commutative diagram
+X′
+f ′
+#
+g
+/ X
+f
+{
+Spec(A)
+where f and f ′ are modifications as in Situation 7.1 and X normal. Then we have
+a short exact sequence
+0 →H1(X, OX) →H1(X′, OX′) →H0(X, R1g∗OX′) →0
+Also dim(Supp(R1g∗OX′)) = 0 and R1g∗OX′ is generated by global sections.
+Proof. We will use the observations made following Situation 7.1 without further
+mention. As X is normal and g is dominant and birational, we have g∗OX′ = OX,
+see for example More on Morphisms, Lemma 53.6.
+Since the fibres of g have
+dimension ≤1, we have Rpg∗OX′ = 0 for p > 1, see for example Cohomology of
+Schemes, Lemma 20.9. The support of R1g∗OX′ is contained in the set of points
+of X where the fibres of g′ have dimension ≥1. Thus it is contained in the set of
+images of those irreducible components C′ ⊂X′
+s which map to points of Xs which
+is a finite set of closed points (recall that X′
+s →Xs is a morphism of proper 1-
+dimensional schemes over κ). Then R1g∗OX′ is globally generated by Cohomology
+of Schemes, Lemma 9.10. Using the morphism f : X →S and the references above
+we find that Hp(X, F) = 0 for p > 1 for any coherent OX-module F. Hence the
+
+RESOLUTION OF SURFACES
+19
+short exact sequence of the lemma is a consequence of the Leray spectral sequence
+for g and OX′, see Cohomology, Lemma 13.4.
+□
+Lemma 8.2.
+0AXJ
+Let (A, m, κ) be a local normal Nagata domain of dimension 2. Let
+a ∈A be nonzero.
+There exists an integer N such that for every modification
+f : X →Spec(A) with X normal the A-module
+MX,a = Coker(A −→H0(Z, OZ))
+where Z ⊂X is cut out by a has length bounded by N.
+Proof. By the short exact sequence 0 →OX
+a−→OX →OZ →0 we see that
+(8.2.1)
+0AXK
+MX,a = H1(X, OX)[a]
+Here N[a] = {n ∈N | an = 0} for an A-module N. Thus if a divides b, then
+MX,a ⊂MX,b. Suppose that for some c ∈A the modules MX,c have bounded
+length. Then for every X we have an exact sequence
+0 →MX,c →MX,c2 →MX,c
+where the second arrow is given by multiplication by c. Hence we see that MX,c2
+has bounded length as well. Thus it suffices to find a c ∈A for which the lemma is
+true such that a divides cn for some n > 0. By More on Algebra, Lemma 127.6 we
+may assume A/(a) is a reduced ring.
+Assume that A/(a) is reduced. Let A/(a) ⊂B be the normalization of A/(a) in its
+quotient ring. Because A is Nagata, we see that Coker(A →B) is finite. We claim
+the length of this finite module is a bound. To see this, consider f : X →Spec(A)
+as in the lemma and let Z′ ⊂Z be the scheme theoretic closure of Z ∩f −1(U).
+Then Z′ →Spec(A/(a)) is finite for example by Varieties, Lemma 17.2. Hence
+Z′ = Spec(B′) with A/(a) ⊂B′ ⊂B. On the other hand, we claim the map
+H0(Z, OZ) →H0(Z′, OZ′)
+is injective.
+Namely, if s ∈H0(Z, OZ) is in the kernel, then the restriction
+of s to f −1(U) ∩Z is zero.
+Hence the image of s in H1(X, OX) vanishes in
+H1(f −1(U), OX). By Lemma 7.5 we see that s comes from an element ˜s of A.
+But by assumption ˜s maps to zero in B′ which implies that s = 0. Putting ev-
+erything together we see that MX,a is a subquotient of B′/A, namely not every
+element of B′ extends to a global section of OZ, but in any case the length of MX,a
+is bounded by the length of B/A.
+□
+In some cases, resolution of singularities reduces to the case of rational singularities.
+Definition 8.3.
+0B4N
+Let (A, m, κ) be a local normal Nagata domain of dimension 2.
+(1) We say A defines a rational singularity if for every normal modification
+X →Spec(A) we have H1(X, OX) = 0.
+(2) We say that reduction to rational singularities is possible for A if the length
+of the A-modules
+H1(X, OX)
+is bounded for all modifications X →Spec(A) with X normal.
+The meaning of the language in (2) is explained by Lemma 8.5. The following
+lemma says roughly speaking that local rings of modifications of Spec(A) with A
+defining a rational singularity also define rational singularities.
+
+RESOLUTION OF SURFACES
+20
+Lemma 8.4.
+0BG0
+Let (A, m, κ) be a local normal Nagata domain of dimension 2 which
+defines a rational singularity. Let A ⊂B be a local extension of domains with the
+same fraction field which is essentially of finite type such that dim(B) = 2 and B
+normal. Then B defines a rational singularity.
+Proof. Choose a finite type A-algebra C such that B = Cq for some prime q ⊂C.
+After replacing C by the image of C in B we may assume that C is a domain with
+fraction field equal to the fraction field of A. Then we can choose a closed immersion
+Spec(C) →An
+A and take the closure in Pn
+A to conclude that B is isomorphic to
+OX,x for some closed point x ∈X of a projective modification X →Spec(A).
+(Morphisms, Lemma 53.1, shows that κ(x) is finite over κ and then Morphisms,
+Lemma 21.2 shows that x is a closed point.) Let ν : Xν →X be the normalization.
+Since A is Nagata the morphism ν is finite (Morphisms, Lemma 55.11). Thus Xν is
+projective over A by More on Morphisms, Lemma 50.2. Since B = OX,x is normal,
+we see that OX,x = (ν∗OXν)x. Hence there is a unique point xν ∈Xν lying over x
+and OXν,xν = OX,x. Thus we may assume X is normal and projective over A. Let
+Y →Spec(OX,x) = Spec(B) be a modification with Y normal. We have to show
+that H1(Y, OY ) = 0. By Limits, Lemma 21.1 we can find a morphism of schemes
+g : X′ →X which is an isomorphism over X \ {x} such that X′ ×X Spec(OX,x) is
+isomorphic to Y . Then g is a modification as it is proper by Limits, Lemma 21.2.
+The local ring of X′ at a point of x′ is either isomorphic to the local ring of X at
+g(x′) if g(x′) ̸= x and if g(x′) = x, then the local ring of X′ at x′ is isomorphic
+to the local ring of Y at the corresponding point. Hence we see that X′ is normal
+as both X and Y are normal. Thus H1(X′, OX′) = 0 by our assumption on A.
+By Lemma 8.1 we have R1g∗OX′ = 0. Clearly this means that H1(Y, OY ) = 0 as
+desired.
+□
+Lemma 8.5.
+0B4P
+Let (A, m, κ) be a local normal Nagata domain of dimension 2. If
+reduction to rational singularities is possible for A, then there exists a finite sequence
+of normalized blowups
+X = Xn →Xn−1 →. . . →X1 →X0 = Spec(A)
+in closed points such that for any closed point x ∈X the local ring OX,x defines
+a rational singularity. In particular X →Spec(A) is a modification and X is a
+normal scheme projective over A.
+Proof. We choose a modification X →Spec(A) with X normal which maximizes
+the length of H1(X, OX). By Lemma 8.1 for any further modification g : X′ →X
+with X′ normal we have R1g∗OX′ = 0 and H1(X, OX) = H1(X′, OX′).
+Let x ∈X be a closed point. We will show that OX,x defines a rational singularity.
+Let Y →Spec(OX,x) be a modification with Y normal. We have to show that
+H1(Y, OY ) = 0.
+By Limits, Lemma 21.1 we can find a morphism of schemes
+g : X′ →X which is an isomorphism over X \ {x} such that X′ ×X Spec(OX,x) is
+isomorphic to Y . Then g is a modification as it is proper by Limits, Lemma 21.2.
+The local ring of X′ at a point of x′ is either isomorphic to the local ring of X at
+g(x′) if g(x′) ̸= x and if g(x′) = x, then the local ring of X′ at x′ is isomorphic
+to the local ring of Y at the corresponding point. Hence we see that X′ is normal
+as both X and Y are normal. By maximality we have R1g∗OX′ = 0 (see first
+paragraph). Clearly this means that H1(Y, OY ) = 0 as desired.
+
+RESOLUTION OF SURFACES
+21
+The conclusion is that we’ve found one normal modification X of Spec(A) such
+that the local rings of X at closed points all define rational singularities. Then we
+choose a sequence of normalized blowups Xn →. . . →X1 →Spec(A) such that Xn
+dominates X, see Lemma 5.3. For a closed point x′ ∈Xn mapping to x ∈X we
+can apply Lemma 8.4 to the ring map OX,x →OXn,x′ to see that OXn,x′ defines a
+rational singularity.
+□
+Lemma 8.6.
+0AXL
+Let A →B be a finite injective local ring map of local normal
+Nagata domains of dimension 2. Assume that the induced extension of fraction
+fields is separable. If reduction to rational singularities is possible for A then it is
+possible for B.
+Proof. Let n be the degree of the fraction field extension L/K. Let TraceL/K :
+L →K be the trace.
+Since the extension is finite separable the trace pairing
+(h, g) 7→TraceL/K(fg) is a nondegenerate bilinear form on L over K. See Fields,
+Lemma 20.7. Pick b1, . . . , bn ∈B which form a basis of L over K. By the above
+d = det(TraceL/K(bibj)) ∈A is nonzero.
+Let Y →Spec(B) be a modification with Y normal. We can find a U-admissible
+blowup X′ of Spec(A) such that the strict transform Y ′ of Y is finite over X′, see
+More on Flatness, Lemma 31.2. Picture
+Y ′
+
+/ Y
+/ Spec(B)
+
+X′
+/ Spec(A)
+After replacing X′ and Y ′ by their normalizations we may assume that X′ and Y ′
+are normal modifications of Spec(A) and Spec(B). In this way we reduce to the
+case where there exists a commutative diagram
+Y
+π
+
+g
+/ Spec(B)
+
+X
+f
+/ Spec(A)
+with X and Y normal modifications of Spec(A) and Spec(B) and π finite.
+The trace map on L over K extends to a map of OX-modules Trace : π∗OY →OX.
+Consider the map
+Φ : π∗OY −→O⊕n
+X ,
+s 7−→(Trace(b1s), . . . , Trace(bns))
+This map is injective (because it is injective in the generic point) and there is a
+map
+O⊕n
+X
+−→π∗OY ,
+(s1, . . . , sn) 7−→
+X
+bisi
+whose composition with Φ has matrix Trace(bibj).
+Hence the cokernel of Φ is
+annihilated by d. Thus we see that we have an exact sequence
+H0(X, Coker(Φ)) →H1(Y, OY ) →H1(X, OX)⊕n
+Since the right hand side is bounded by assumption, it suffices to show that the d-
+torsion in H1(Y, OY ) is bounded. This is the content of Lemma 8.2 and (8.2.1).
+□
+
+RESOLUTION OF SURFACES
+22
+Lemma 8.7.
+0B4Q
+Let A be a Nagata regular local ring of dimension 2. Then A defines
+a rational singularity.
+Proof. (The assumption that A be Nagata is not necessary for this proof, but we’ve
+only defined the notion of rational singularity in the case of Nagata 2-dimensional
+normal local domains.) Let X →Spec(A) be a modification with X normal. By
+Lemma 4.2 we can dominate X by a scheme Xn which is the last in a sequence
+Xn →Xn−1 →. . . →X1 →X0 = Spec(A)
+of blowing ups in closed points. By Lemma 3.2 the schemes Xi are regular, in
+particular normal (Algebra, Lemma 157.5). By Lemma 8.1 we have H1(X, OX) ⊂
+H1(Xn, OXn).
+Thus it suffices to prove H1(Xn, OXn) = 0.
+Using Lemma 8.1
+again, we see that it suffices to prove R1(Xi →Xi−1)∗OXi = 0 for i = 1, . . . , n.
+This follows from Lemma 3.4.
+□
+Lemma 8.8.
+0B4S
+Let A be a local normal Nagata domain of dimension 2 which has
+a dualizing complex ω•
+A. If there exists a nonzero d ∈A such that for all normal
+modifications X →Spec(A) the cokernel of the trace map
+Γ(X, ωX) →ωA
+is annihilated by d, then reduction to rational singularities is possible for A.
+Proof. For X →Spec(A) as in the statement we have to bound H1(X, OX). Let
+ωX be the dualizing module of X as in the statement of Grauert-Riemenschneider
+(Proposition 7.8). The trace map is the map Rf∗ωX →ωA described in Duality
+for Schemes, Section 7.
+By Grauert-Riemenschneider we have Rf∗ωX = f∗ωX
+thus the trace map indeed produces a map Γ(X, ωX) →ωA. By duality we have
+Rf∗ωX = R HomA(Rf∗OX, ωA) (this uses that ωX[2] is the dualizing complex on X
+normalized relative to ωA[2], see Duality for Schemes, Lemma 20.9 or more directly
+Section 19 or even more directly Example 3.9). The distinguished triangle
+A →Rf∗OX →R1f∗OX[−1] →A[1]
+is transformed by R HomA(−, ωA) into the short exact sequence
+0 →f∗ωX →ωA →Ext2
+A(R1f∗OX, ωA) →0
+(and Exti
+A(R1f∗OX, ωA) = 0 for i ̸= 2; this will follow from the discussion below
+as well). Since R1f∗OX is supported in {m}, the local duality theorem tells us that
+Ext2
+A(R1f∗OX, ωA) = Ext0
+A(R1f∗OX, ωA[2]) = HomA(R1f∗OX, E)
+is the Matlis dual of R1f∗OX (and the other ext groups are zero), see Dualizing
+Complexes, Lemma 18.4. By the equivalence of categories inherent in Matlis duality
+(Dualizing Complexes, Proposition 7.8), if R1f∗OX is not annihilated by d, then
+neither is the Ext2 above. Hence we see that H1(X, OX) is annihilated by d. Thus
+the required boundedness follows from Lemma 8.2 and (8.2.1).
+□
+Lemma 8.9.
+0B4T
+Let p be a prime number. Let A be a regular local ring of dimension
+2 and characteristic p. Let A0 ⊂A be a subring such that ΩA/A0 is free of rank
+r < ∞. Set ωA = Ωr
+A/A0. If X →Spec(A) is the result of a sequence of blowups in
+closed points, then there exists a map
+φX : (Ωr
+X/ Spec(A0))∗∗−→ωX
+extending the given identification in the generic point.
+
+RESOLUTION OF SURFACES
+23
+Proof. Observe that A is Gorenstein (Dualizing Complexes, Lemma 21.3) and
+hence the invertible module ωA does indeed serve as a dualizing module. Moreover,
+any X as in the lemma has an invertible dualizing module ωX as X is regular
+(hence Gorenstein) and proper over A, see Remark 7.7 and Lemma 3.2. Suppose
+we have constructed the map φX : (Ωr
+X/A0)∗∗→ωX and suppose that b : X′ →X
+is a blowup in a closed point. Set Ωr
+X = (Ωr
+X/A0)∗∗and Ωr
+X′ = (Ωr
+X′/A0)∗∗. Since
+ωX′ = b!(ωX) a map Ωr
+X′ →ωX′ is the same thing as a map Rb∗(Ωr
+X′) →ωX.
+See discussion in Remark 7.7 and Duality for Schemes, Section 19. Thus in turn it
+suffices to produce a map
+Rb∗(Ωr
+X′) −→Ωr
+X
+The sheaves Ωr
+X′ and Ωr
+X are invertible, see Divisors, Lemma 13.15. Consider the
+exact sequence
+b∗ΩX/A0 →ΩX′/A0 →ΩX′/X →0
+A local calculation shows that ΩX′/X is isomorphic to an invertible module on the
+exceptional divisor E, see Lemma 3.6. It follows that either
+Ωr
+X′ ∼= (b∗Ωr
+X)(E)
+or
+Ωr
+X′ ∼= b∗Ωr
+X
+see Divisors, Lemma 16.13. (The second possibility never happens in characteristic
+zero, but can happen in characteristic p.) In both cases we see that R1b∗(Ωr
+X′) = 0
+and b∗(Ωr
+X′) = Ωr
+X by Lemma 3.4.
+□
+Lemma 8.10.
+0B4U
+Let p be a prime number. Let A be a complete regular local ring of
+dimension 2 and characteristic p. Let L/K be a degree p inseparable extension of
+the fraction field K of A. Let B ⊂L be the integral closure of A. Then reduction
+to rational singularities is possible for B.
+Proof. We have A = k[[x, y]]. Write L = K[x]/(xp −f) for some f ∈A and denote
+g ∈B the congruence class of x, i.e., the element such that gp = f. By Algebra,
+Lemma 158.2 we see that df is nonzero in ΩK/Fp. By More on Algebra, Lemma
+47.5 there exists a subfield kp ⊂k′ ⊂k with pe = [k : k′] < ∞such that df is
+nonzero in ΩK/K0 where K0 is the fraction field of A0 = k′[[xp, yp]] ⊂A. Then
+ΩA/A0 = A ⊗k Ωk/k′ ⊕Adx ⊕Ady
+is finite free of rank e + 2. Set ωA = Ωe+2
+A/A0. Consider the canonical map
+Tr : Ωe+2
+B/A0 −→Ωe+2
+A/A0 = ωA
+of Lemma 2.4. By duality this determines a map
+c : Ωe+2
+B/A0 →ωB = HomA(B, ωA)
+Claim: the cokernel of c is annihilated by a nonzero element of B.
+Since df is nonzero in ΩA/A0 we can find η1, . . . , ηe+1 ∈ΩA/A0 such that θ =
+η1 ∧. . .∧ηe+1 ∧df is nonzero in ωA = Ωe+2
+A/A0. To prove the claim we will construct
+elements ωi of Ωe+2
+B/A0, i = 0, . . . , p−1 which are mapped to φi ∈ωB = HomA(B, ωA)
+with φi(gj) = δijθ for j = 0, . . . , p−1. Since {1, g, . . . , gp−1} is a basis for L/K this
+proves the claim. We set η = η1∧. . .∧ηe+1 so that θ = η∧df. Set ωi = η∧gp−1−idg.
+Then by construction we have
+φi(gj) = Tr(gjη ∧gp−1−idg) = Tr(η ∧gp−1−i+jdg) = δijθ
+by the explicit description of the trace map in Lemma 2.2.
+
+RESOLUTION OF SURFACES
+24
+Let Y →Spec(B) be a normal modification. Exactly as in the proof of Lemma
+8.6 we can reduce to the case where Y is finite over a modification X of Spec(A).
+By Lemma 4.2 we may even assume X →Spec(A) is the result of a sequence of
+blowing ups in closed points. Picture:
+Y
+π
+
+g
+/ Spec(B)
+
+X
+f
+/ Spec(A)
+We may apply Lemma 2.4 to π and we obtain the first arrow in
+π∗(Ωe+2
+Y/A0)
+Tr
+−→(Ωe+2
+X/A0)∗∗
+φX
+−−→ωX
+and the second arrow is from Lemma 8.9 (because f is a sequence of blowups in
+closed points). By duality for the finite morphism π this corresponds to a map
+cY : Ωe+2
+Y/A0 −→ωY
+extending the map c above.
+Hence we see that the image of Γ(Y, ωY ) →ωB
+contains the image of c. By our claim we see that the cokernel is annihilated by a
+fixed nonzero element of B. We conclude by Lemma 8.8.
+□
+9. Rational singularities
+0B4V
+In this section we reduce from rational singular points to Gorenstein rational sin-
+gular points. See [Lip69] and [Mat70].
+Situation 9.1.
+0B4W
+Here (A, m, κ) be a local normal Nagata domain of dimension 2
+which defines a rational singularity.
+Let s be the closed point of S = Spec(A)
+and U = S \ {s}. Let f : X →S be a modification with X normal. We denote
+C1, . . . , Cr the irreducible components of the special fibre Xs of f.
+Lemma 9.2.
+0B4X
+In Situation 9.1. Let F be a quasi-coherent OX-module. Then
+(1) Hp(X, F) = 0 for p ̸∈{0, 1}, and
+(2) H1(X, F) = 0 if F is globally generated.
+Proof. Part (1) follows from Cohomology of Schemes, Lemma 20.9. If F is globally
+generated, then there is a surjection L
+i∈I OX →F. By part (1) and the long exact
+sequence of cohomology this induces a surjection on H1. Since H1(X, OX) = 0
+as S has a rational singularity, and since H1(X, −) commutes with direct sums
+(Cohomology, Lemma 19.1) we conclude.
+□
+Lemma 9.3.
+0B4Y
+In Situation 9.1 assume E = Xs is an effective Cartier divisor. Let
+I be the ideal sheaf of E. Then H0(X, In) = mn and H1(X, In) = 0.
+Proof. We have H0(X, OX) = A, see discussion following Situation 7.1. Then
+m ⊂H0(X, I) ⊂H0(X, OX). The second inclusion is not an equality as Xs ̸= ∅.
+Thus H0(X, I) = m. As In = mnOX our Lemma 9.2 shows that H1(X, In) = 0.
+Choose generators x1, . . . , xµ+1 of m. These define global sections of I which gen-
+erate it. Hence a short exact sequence
+0 →F →O⊕µ+1
+X
+→I →0
+
+RESOLUTION OF SURFACES
+25
+Then F is a finite locally free OX-module of rank µ and F ⊗I is globally generated
+by Constructions, Lemma 13.9. Hence F ⊗In is globally generated for all n ≥1.
+Thus for n ≥2 we can consider the exact sequence
+0 →F ⊗In−1 →(In−1)⊕µ+1 →In →0
+Applying the long exact sequence of cohomology using that H1(X, F ⊗In−1) = 0
+by Lemma 9.2 we obtain that every element of H0(X, In) is of the form P xiai for
+some ai ∈H0(X, In−1). This shows that H0(X, In) = mn by induction.
+□
+Lemma 9.4.
+0B4Z
+In Situation 9.1 the blowup of Spec(A) in m is normal.
+Proof. Let X′ →Spec(A) be the blowup, in other words
+X′ = Proj(A ⊕m ⊕m2 ⊕. . .).
+is the Proj of the Rees algebra. This in particular shows that X′ is integral and
+that X′ →Spec(A) is a projective modification. Let X be the normalization of X′.
+Since A is Nagata, we see that ν : X →X′ is finite (Morphisms, Lemma 55.11).
+Let E′ ⊂X′ be the exceptional divisor and let E ⊂X be the inverse image. Let
+I′ ⊂OX′ and I ⊂OX be their ideal sheaves. Recall that I′ = OX′(1) (Divisors,
+Lemma 33.13). Observe that I = ν∗I′ and that E is an effective Cartier divisor
+(Divisors, Lemma 14.13). We are trying to show that ν is an isomorphism. As ν
+is finite, it suffices to show that OX′ →ν∗OX is an isomorphism. If not, then we
+can find an n ≥0 such that
+H0(X′, (I′)n) ̸= H0(X′, (ν∗OX) ⊗(I′)n)
+for example because we can recover quasi-coherent OX′-modules from their asso-
+ciated graded modules, see Properties, Lemma 29.3. By the projection formula we
+have
+H0(X′, (ν∗OX) ⊗(I′)n) = H0(X, ν∗(I′)n) = H0(X, In) = mn
+the last equality by Lemma 9.3. On the other hand, there is clearly an injection
+mn →H0(X′, (I′)n). Since H0(X′, (I′)n) is torsion free we conclude equality holds
+for all n, hence X = X′.
+□
+Lemma 9.5.
+0B63
+In Situation 9.1. Let X be the blowup of Spec(A) in m. Let E ⊂X
+be the exceptional divisor. With OX(1) = I as usual and OE(1) = OX(1)|E we
+have
+(1) E is a proper Cohen-Macaulay curve over κ.
+(2) OE(1) is very ample
+(3) deg(OE(1)) ≥1 and equality holds only if A is a regular local ring,
+(4) H1(E, OE(n)) = 0 for n ≥0, and
+(5) H0(E, OE(n)) = mn/mn+1 for n ≥0.
+Proof. Since OX(1) is very ample by construction, we see that its restriction to
+the special fibre E is very ample as well. By Lemma 9.4 the scheme X is normal.
+Then E is Cohen-Macaulay by Divisors, Lemma 16.6. Lemma 9.3 applies and we
+obtain (4) and (5) from the exact sequences
+0 →In+1 →In →i∗OE(n) →0
+and the long exact cohomology sequence. In particular, we see that
+deg(OE(1)) = χ(E, OE(1)) −χ(E, OE) = dim(m/m2) −1
+by Varieties, Definition 44.1. Thus (3) follows as well.
+□
+
+RESOLUTION OF SURFACES
+26
+Lemma 9.6.
+0BBU
+In Situation 9.1 assume A has a dualizing complex ω•
+A. With ωX
+the dualizing module of X, the trace map H0(X, ωX) →ωA is an isomorphism and
+consequently there is a canonical map f ∗ωA →ωX.
+Proof. By Grauert-Riemenschneider (Proposition 7.8) we see that Rf∗ωX = f∗ωX.
+By duality we have a short exact sequence
+0 →f∗ωX →ωA →Ext2
+A(R1f∗OX, ωA) →0
+(for example see proof of Lemma 8.8) and since A defines a rational singularity we
+obtain f∗ωX = ωA.
+□
+Lemma 9.7.
+0B64
+In Situation 9.1 assume A has a dualizing complex ω•
+A and is not
+regular. Let X be the blowup of Spec(A) in m with exceptional divisor E ⊂X. Let
+ωX be the dualizing module of X. Then
+(1) ωE = ωX|E ⊗OE(−1),
+(2) H1(X, ωX(n)) = 0 for n ≥0,
+(3) the map f ∗ωA →ωX of Lemma 9.6 is surjective.
+Proof. We will use the results of Lemma 9.5 without further mention. Observe
+that ωE = ωX|E ⊗OE(−1) by Duality for Schemes, Lemmas 14.2 and 9.7. Thus
+ωX|E = ωE(1). Consider the short exact sequences
+0 →ωX(n + 1) →ωX(n) →i∗ωE(n + 1) →0
+By Algebraic Curves, Lemma 6.4 we see that H1(E, ωE(n + 1)) = 0 for n ≥0.
+Thus we see that the maps
+. . . →H1(X, ωX(2)) →H1(X, ωX(1)) →H1(X, ωX)
+are surjective. Since H1(X, ωX(n)) is zero for n ≫0 (Cohomology of Schemes,
+Lemma 16.2) we conclude that (2) holds.
+By Algebraic Curves, Lemma 6.7 we see that ωX|E = ωE ⊗OE(1) is globally
+generated. Since we seen above that H1(X, ωX(1)) = 0 the map H0(X, ωX) →
+H0(E, ωX|E) is surjective. We conclude that ωX is globally generated hence (3)
+holds because Γ(X, ωX) = ωA is used in Lemma 9.6 to define the map.
+□
+Lemma 9.8.
+0BBV
+Let (A, m, κ) be a local normal Nagata domain of dimension 2 which
+defines a rational singularity. Assume A has a dualizing complex. Then there exists
+a finite sequence of blowups in singular closed points
+X = Xn →Xn−1 →. . . →X1 →X0 = Spec(A)
+such that Xi is normal for each i and such that the dualizing sheaf ωX of X is an
+invertible OX-module.
+Proof. The dualizing module ωA is a finite A-module whose stalk at the generic
+point is invertible. Namely, ωA ⊗A K is a dualizing module for the fraction field K
+of A, hence has rank 1. Thus there exists a blowup b : Y →Spec(A) such that the
+strict transform of ωA with respect to b is an invertible OY -module, see Divisors,
+Lemma 36.3. By Lemma 5.3 we can choose a sequence of normalized blowups
+Xn →Xn−1 →. . . →X1 →Spec(A)
+such that Xn dominates Y . By Lemma 9.4 and arguing by induction each Xi →
+Xi−1 is simply a blowing up.
+
+RESOLUTION OF SURFACES
+27
+We claim that ωXn is invertible. Since ωXn is a coherent OXn-module, it suffices to
+see its stalks are invertible modules. If x ∈Xn is a regular point, then this is clear
+from the fact that regular schemes are Gorenstein (Dualizing Complexes, Lemma
+21.3). If x is a singular point of Xn, then each of the images xi ∈Xi of x is a
+singular point (because the blowup of a regular point is regular by Lemma 3.2).
+Consider the canonical map f ∗
+nωA →ωXn of Lemma 9.6. For each i the morphism
+Xi+1 →Xi is either a blowup of xi or an isomorphism at xi. Since xi is always a
+singular point, it follows from Lemma 9.7 and induction that the maps f ∗
+i ωA →ωXi
+is always surjective on stalks at xi. Hence
+(f ∗
+nωA)x −→ωXn,x
+is surjective. On the other hand, by our choice of b the quotient of f ∗
+nωA by its
+torsion submodule is an invertible module L. Moreover, the dualizing module is
+torsion free (Duality for Schemes, Lemma 22.3). It follows that Lx ∼= ωXn,x and
+the proof is complete.
+□
+10. Formal arcs
+0BG1
+Let X be a locally Noetherian scheme. In this section we say that a formal arc
+in X is a morphism a : T →X where T is the spectrum of a complete discrete
+valuation ring R whose residue field κ is identified with the residue field of the
+image p of the closed point of Spec(R). Let us say that the formal arc a is centered
+at p in this case. We say the formal arc T →X is nonsingular if the induced map
+mp/m2
+p →mR/m2
+R is surjective.
+Let a : T →X, T = Spec(R) be a nonsingular formal arc centered at a closed point
+p of X. Assume X is locally Noetherian. Let b : X1 →X be the blowing up of X at
+x. Since a is nonsingular, we see that there is an element f ∈mp which maps to a
+uniformizer in R. In particular, we find that the generic point of T maps to a point
+of X not equal to p. In other words, with K the fraction field of R, the restriction
+of a defines a morphism Spec(K) →X \ {p}. Since the morphism b is proper and
+an isomorphism over X \ {x} we can apply the valuative criterion of properness to
+obtain a unique morphism a1 making the following diagram commute
+T
+a1 /
+a
+ 
+X1
+b
+
+X
+Let p1 ∈X1 be the image of the closed point of T. Observe that p1 is a closed
+point as it is a κ = κ(p)-rational point on the fibre of X1 →X over x. Since we
+have a factorization
+OX,x →OX1,p1 →R
+we see that a1 is a nonsingular formal arc as well.
+We can repeat the process and obtain a sequence of blowing ups
+T
+a
+
+a1
+%
+a2
+*
+a3
+,
+(X, p)
+(X1, p1)
+o
+(X2, p2)
+o
+(X3, p3)
+o
+. . .
+o
+This kind of sequence of blowups can be characterized as follows.
+
+RESOLUTION OF SURFACES
+28
+Lemma 10.1.
+0BG2
+Let X be a locally Noetherian scheme. Let
+(X, p) = (X0, p0) ←(X1, p1) ←(X2, p2) ←(X3, p3) ←. . .
+be a sequence of blowups such that
+(1) pi is closed, maps to pi−1, and κ(pi) = κ(pi−1),
+(2) there exists an x1 ∈mp whose image in mpi, i > 0 defines the exceptional
+divisor Ei ⊂Xi.
+Then the sequence is obtained from a nonsingular arc a : T →X as above.
+Proof. Let us write On = OXn,pn and O = OX,p. Denote m ⊂O and mn ⊂On
+the maximal ideals.
+We claim that xt
+1 ̸∈mt+1
+n
+. Namely, if this were the case, then in the local ring
+On+1 the element xt
+1 would be in the ideal of (t + 1)En+1. This contradicts the
+assumption that x1 defines En+1.
+For every n choose generators yn,1, . . . , yn,tn for mn. As mnOn+1 = x1On+1 by
+assumption (2), we can write yn,i = an,ix1 for some an,i ∈On+1. Since the map
+On →On+1 defines an isomorphism on residue fields by (1) we can choose cn,i ∈On
+having the same residue class as an,i. Then we see that
+mn = (x1, zn,1, . . . , zn,tn),
+zn,i = yn,i −cn,ix1
+and the elements zn,i map to elements of m2
+n+1 in On+1.
+Let us consider
+Jn = Ker(O →On/mn+1
+n
+)
+We claim that O/Jn has length n+1 and that O/(x1)+Jn equals the residue field.
+For n = 0 this is immediate. Assume the statement holds for n. Let f ∈Jn. Then
+in On we have
+f = axn+1
+1
++ xn
+1A1(zn,i) + xn−1
+1
+A2(zn,i) + . . . + An+1(zn,i)
+for some a ∈On and some Ai homogeneous of degree i with coefficients in On.
+Since O →On identifies residue fields, we may choose a ∈O (argue as in the
+construction of zn,i above). Taking the image in On+1 we see that f and axn+1
+1
+have the same image modulo mn+2
+n+1. Since xn+1
+n
+̸∈mn+2
+n+1 it follows that Jn/Jn+1
+has length 1 and the claim is true.
+Consider R = lim O/Jn. This is a quotient of the m-adic completion of O hence
+it is a complete Noetherian local ring. On the other hand, it is not finite length
+and x1 generates the maximal ideal. Thus R is a complete discrete valuation ring.
+The map O →R lifts to a local homomorphism On →R for every n.
+There
+are two ways to show this: (1) for every n one can use a similar procedure to
+construct On →Rn and then one can show that O →On →Rn factors through an
+isomorphism R →Rn, or (2) one can use Divisors, Lemma 33.6 to show that On
+is a localization of a repeated affine blowup algebra to explicitly construct a map
+On →R. Having said this it is clear that our sequence of blowups comes from the
+nonsingular arc a : T = Spec(R) →X.
+□
+The following lemma is a kind of Néron desingularization lemma.
+
+RESOLUTION OF SURFACES
+29
+Lemma 10.2.
+0BG3
+Let (A, m, κ) be a Noetherian local domain of dimension 2. Let
+A →R be a surjection onto a complete discrete valuation ring. This defines a
+nonsingular arc a : T = Spec(R) →Spec(A). Let
+Spec(A) = X0 ←X1 ←X2 ←X3 ←. . .
+be the sequence of blowing ups constructed from a. If Ap is a regular local ring
+where p = Ker(A →R), then for some i the scheme Xi is regular at xi.
+Proof. Let x1 ∈m map to a uniformizer of R. Observe that κ(p) = K is the
+fraction field of R. Write p = (x2, . . . , xr) with r minimal. If r = 2, then m =
+(x1, x2) and A is regular and the lemma is true. Assume r > 2. After renumbering
+if necessary, we may assume that x2 maps to a uniformizer of Ap. Then p/p2 +(x2)
+is annihilated by a power of x1. For i > 2 we can find ni ≥0 and ai ∈A such that
+xni
+1 xi −aix2 =
+X
+2≤j≤k ajkxjxk
+for some ajk ∈A. If ni = 0 for some i, then we can remove xi from the list of
+generators of p and we win by induction on r. If for some i the element ai is a
+unit, then we can remove x2 from the list of generators of p and we win in the same
+manner. Thus either ai ∈p or ai = uixm1
+1
+mod p for some m1 > 0 and unit ui ∈A.
+Thus we have either
+xni
+1 xi =
+X
+2≤j≤k ajkxjxk
+or
+xni
+1 xi −uixmi
+1 x2 =
+X
+2≤j≤k ajkxjxk
+We will prove that after blowing up the integers ni, mi decrease which will finish
+the proof.
+Let us see what happens with these equations on the affine blowup algebra A′ =
+A[m/x1]. As m = (x1, . . . , xr) we see that A′ is generated over R by yi = xi/x1 for
+i ≥2. Clearly A →R extends to A′ →R with kernel (y2, . . . , yr). Then we see
+that either
+xni−1
+1
+yi =
+X
+2≤j≤k ajkyjyk
+or
+xni−1
+1
+yi −uixm1−1
+1
+y2 =
+X
+2≤j≤k ajkyjyk
+and the proof is complete.
+□
+11. Base change to the completion
+0BG4
+The following simple lemma will turn out to be a useful tool in what follows.
+Lemma 11.1.
+0BG5
+Let (A, m, κ) be a local ring with finitely generated maximal ideal m.
+Let X be a scheme over A. Let Y = X ×Spec(A) Spec(A∧) where A∧is the m-adic
+completion of A. For a point q ∈Y with image p ∈X lying over the closed point of
+Spec(A) the local ring map OX,p →OY,q induces an isomorphism on completions.
+Proof. We may assume X is affine.
+Then we may write X = Spec(B).
+Let
+q ⊂B′ = B ⊗A A∧be the prime corresponding to q and let p ⊂B be the prime
+ideal corresponding to p. By Algebra, Lemma 96.3 we have
+B′/(m∧)nB′ = A∧/(m∧)n ⊗A B = A/mn ⊗A B = B/mnB
+for all n. Since mB ⊂p and m∧B′ ⊂q we see that B/pn and B′/qn are both
+quotients of the ring displayed above by the nth power of the same prime ideal.
+The lemma follows.
+□
+
+RESOLUTION OF SURFACES
+30
+Lemma 11.2.
+0BG6
+Let (A, m, κ) be a Noetherian local ring. Let X →Spec(A) be a
+morphism which is locally of finite type. Set Y = X ×Spec(A) Spec(A∧). Let y ∈Y
+with image x ∈X. Then
+(1) if OY,y is regular, then OX,x is regular,
+(2) if y is in the closed fibre, then OY,y is regular ⇔OX,x is regular, and
+(3) If X is proper over A, then X is regular if and only if Y is regular.
+Proof. Since A →A∧is faithfully flat (Algebra, Lemma 97.3), we see that Y →X
+is flat. Hence (1) by Algebra, Lemma 164.4. Lemma 11.1 shows the morphism
+Y →X induces an isomorphism on complete local rings at points of the special
+fibres. Thus (2) by More on Algebra, Lemma 44.4. If X is proper over A, then Y
+is proper over A∧(Morphisms, Lemma 42.5) and we see every closed point of X
+and Y lies in the closed fibre. Thus we see that Y is a regular scheme if and only
+if X is so by Properties, Lemma 9.2.
+□
+Lemma 11.3.
+0AFK
+Let (A, m) be a Noetherian local ring with completion A∧. Let
+U ⊂Spec(A) and U ∧⊂Spec(A∧) be the punctured spectra. If Y →Spec(A∧) is a
+U ∧-admissible blowup, then there exists a U-admissible blowup X →Spec(A) such
+that Y = X ×Spec(A) Spec(A∧).
+Proof. By definition there exists an ideal J ⊂A∧such that V (J) = {mA∧} and
+such that Y is the blowup of S∧in the closed subscheme defined by J, see Divisors,
+Definition 35.1. Since A∧is Noetherian this implies mnA∧⊂J for some n. Since
+A∧/mnA∧= A/mn we find an ideal mn ⊂I ⊂A such that J = IA∧. Let X →S
+be the blowup in I. Since A →A∧is flat we conclude that the base change of X is
+Y by Divisors, Lemma 33.3.
+□
+Lemma 11.4.
+0BG7
+Let (A, m, κ) be a Nagata local normal domain of dimension 2.
+Assume A defines a rational singularity and that the completion A∧of A is normal.
+Then
+(1) A∧defines a rational singularity, and
+(2) if X →Spec(A) is the blowing up in m, then for a closed point x ∈X the
+completion OX,x is normal.
+Proof. Let Y →Spec(A∧) be a modification with Y normal. We have to show that
+H1(Y, OY ) = 0. By Varieties, Lemma 17.3 Y →Spec(A∧) is an isomorphism over
+the punctured spectrum U ∧= Spec(A∧) \ {m∧}. By Lemma 7.2 there exists a U ∧-
+admissible blowup Y ′ →Spec(A∧) dominating Y . By Lemma 11.3 we find there
+exists a U-admissible blowup X →Spec(A) whose base change to A∧dominates Y .
+Since A is Nagata, we can replace X by its normalization after which X →Spec(A)
+is a normal modification (but possibly no longer a U-admissible blowup). Then
+H1(X, OX) = 0 as A defines a rational singularity. It follows that H1(X ×Spec(A)
+Spec(A∧), OX×Spec(A)Spec(A∧)) = 0 by flat base change (Cohomology of Schemes,
+Lemma 5.2 and flatness of A →A∧by Algebra, Lemma 97.2).
+We find that
+H1(Y, OY ) = 0 by Lemma 8.1.
+Finally, let X →Spec(A) be the blowing up of Spec(A) in m. Then Y = X ×Spec(A)
+Spec(A∧) is the blowing up of Spec(A∧) in m∧. By Lemma 9.4 we see that both
+Y and X are normal.
+On the other hand, A∧is excellent (More on Algebra,
+Proposition 53.3) hence every affine open in Y is the spectrum of an excellent
+normal domain (More on Algebra, Lemma 53.2). Thus for y ∈Y the ring map
+
+RESOLUTION OF SURFACES
+31
+OY,y →O∧
+Y,y is regular and by More on Algebra, Lemma 43.2 we find that O∧
+Y,y
+is normal. If x ∈X is a closed point of the special fibre, then there is a unique
+closed point y ∈Y lying over x. Since OX,x →OY,y induces an isomorphism on
+completions (Lemma 11.1) we conclude.
+□
+Lemma 11.5.
+0BG8
+Let (A, m) be a local Noetherian ring. Let X be a scheme over A.
+Assume
+(1) A is analytically unramified (Algebra, Definition 162.9),
+(2) X is locally of finite type over A, and
+(3) X →Spec(A) is étale at the generic points of irreducible components of X.
+Then the normalization of X is finite over X.
+Proof. Since A is analytically unramified it is reduced by Algebra, Lemma 162.10.
+Since the normalization of X depends only on the reduction of X, we may replace
+X by its reduction Xred; note that Xred →X is an isomorphism over the open U
+where X →Spec(A) is étale because U is reduced (Descent, Lemma 18.1) hence
+condition (3) remains true after this replacement.
+In addition we may and do
+assume that X = Spec(B) is affine.
+The map
+K =
+Y
+p⊂A minimal κ(p) −→K∧=
+Y
+p∧⊂A∧minimal κ(p∧)
+is injective because A →A∧is faithfully flat (Algebra, Lemma 97.3) hence induces
+a surjective map between sets of minimal primes (by going down for flat ring maps,
+see Algebra, Section 41). Both sides are finite products of fields as our rings are
+Noetherian. Let L = Q
+q⊂B minimal κ(q). Our assumption (3) implies that L =
+B ⊗A K and that K →L is a finite étale ring map (this is true because A →B
+is generically finite, for example use Algebra, Lemma 122.11 or the more detailed
+results in Morphisms, Section 52). Since B is reduced we see that B ⊂L. This
+implies that
+C = B ⊗A A∧⊂L ⊗A A∧= L ⊗K K∧= M
+Then M is the total ring of fractions of C and is a finite product of fields as a finite
+separable algebra over K∧. It follows that C is reduced and that its normalization
+C′ is the integral closure of C in M. The normalization B′ of B is the integral closure
+of B in L. By flatness of A →A∧we obtain an injective map B′ ⊗A A∧→M
+whose image is contained in C′. Picture
+B′ ⊗A A∧−→C′
+As A∧is Nagata (by Algebra, Lemma 162.8), we see that C′ is finite over C =
+B ⊗A A∧(see Algebra, Lemmas 162.8 and 162.2). As C is Noetherian, we conclude
+that B′ ⊗A A∧is finite over C = B ⊗A A∧. Therefore by faithfully flat descent
+(Algebra, Lemma 83.2) we see that B′ is finite over B which is what we had to
+show.
+□
+Lemma 11.6.
+0BG9
+Let (A, m, κ) be a Noetherian local ring. Let X →Spec(A) be a
+morphism which is locally of finite type. Set Y = X ×Spec(A) Spec(A∧). If the
+complement of the special fibre in Y is normal, then the normalization Xν →X is
+finite and the base change of Xν to Spec(A∧) recovers the normalization of Y .
+
+RESOLUTION OF SURFACES
+32
+Proof. There is an immediate reduction to the case where X = Spec(B) is affine
+with B a finite type A-algebra. Set C = B ⊗A A∧so that Y = Spec(C). Since
+A →A∧is faithfully flat, for any prime q ⊂B there exists a prime r ⊂C lying over
+q. Then Bq →Cr is faithfully flat. Hence if q does not lie over m, then Cr is normal
+by assumption on Y and we conclude that Bq is normal by Algebra, Lemma 164.3.
+In this way we see that X is normal away from the special fibre.
+Recall that the complete Noetherian local ring A∧is Nagata (Algebra, Lemma
+162.8). Hence the normalization Y ν →Y is finite (Morphisms, Lemma 55.11) and
+an isomorphism away from the special fibre. Say Y ν = Spec(C′). Then C →C′ is
+finite and an isomorphism away from V (mC). Since B →C is flat and induces an
+isomorphism B/mB →C/mC there exists a finite ring map B →B′ whose base
+change to C recovers C →C′. See More on Algebra, Lemma 91.17 and Remark
+91.20. Thus we find a finite morphism X′ →X which is an isomorphism away from
+the special fibre and whose base change recovers Y ν →Y . By the discussion in
+the first paragraph we see that X′ is normal at points not on the special fibre. For
+a point x ∈X′ on the special fibre we have a corresponding point y ∈Y ν and a
+flat map OX′,x →OY ν,y. Since OY ν,y is normal, so is OX′,x, see Algebra, Lemma
+164.3. Thus X′ is normal and it follows that it is the normalization of X.
+□
+Lemma 11.7.
+0BGA
+Let (A, m, κ) be a Noetherian local domain whose completion A∧
+is normal. Then given any sequence
+Yn →Yn−1 →. . . →Y1 →Spec(A∧)
+of normalized blowups, there exists a sequence of (proper) normalized blowups
+Xn →Xn−1 →. . . →X1 →Spec(A)
+whose base change to A∧recovers the given sequence.
+Proof. Given the sequence Yn →. . . →Y1 →Y0 = Spec(A∧) we inductively
+construct Xn →. . . →X1 →X0 = Spec(A). The base case is i = 0. Given Xi
+whose base change is Yi, let Y ′
+i →Yi be the blowing up in the closed point yi ∈Yi
+such that Yi+1 is the normalization of Yi. Since the closed fibres of Yi and Xi are
+isomorphic, the point yi corresponds to a closed point xi on the special fibre of Xi.
+Let X′
+i →Xi be the blowup of Xi in xi. Then the base change of X′
+i to Spec(A∧)
+is isomorphic to Y ′
+i . By Lemma 11.6 the normalization Xi+1 →X′
+i is finite and its
+base change to Spec(A∧) is isomorphic to Yi+1.
+□
+12. Rational double points
+0BGB
+In Section 9 we argued that resolution of 2-dimensional rational singularities reduces
+to the Gorenstein case. A Gorenstein rational surface singularity is a rational double
+point. We will resolve them by explicit computations.
+According to the discussion in Examples, Section 20 there exists a normal Noether-
+ian local domain A whose completion is isomorphic to C[[x, y, z]]/(z2). In this case
+one could say that A has a rational double point singularity, but on the other hand,
+Spec(A) does not have a resolution of singularities. This kind of behaviour cannot
+occur if A is a Nagata ring, see Algebra, Lemma 162.13.
+However, it gets worse as there exists a local normal Nagata domain A whose
+completion is C[[x, y, z]]/(yz) and another whose completion is C[[x, y, z]]/(y2−z3).
+
+RESOLUTION OF SURFACES
+33
+This is Example 2.5 of [Nis12]. This is why we need to assume the completion of
+our ring is normal in this section.
+Situation 12.1.
+0BGC
+Here (A, m, κ) be a Nagata local normal domain of dimension
+2 which defines a rational singularity, whose completion is normal, and which is
+Gorenstein. We assume A is not regular.
+The arguments in this section will show that repeatedly blowing up singular points
+resolves Spec(A) in this situation. We will need the following lemma in the course
+of the proof.
+Lemma 12.2.
+0BGD
+Let κ be a field. Let I ⊂κ[x, y] be an ideal. Let
+a + bx + cy + dx2 + exy + fy2 ∈I2
+for some a, b, c, d, e, f ∈k not all zero. If the colength of I in κ[x, y] is > 1, then
+a + bx + cy + dx2 + exy + fy2 = j(g + hx + iy)2 for some j, g, h, i ∈κ.
+Proof. Consider the partial derivatives b + 2dx + ey and c + ex + 2fy. By the
+Leibniz rules these are contained in I. If one of these is nonzero, then after a linear
+change of coordinates, i.e., of the form x 7→α + βx + γy and y 7→δ + ϵx + ζy, we
+may assume that x ∈I. Then we see that I = (x) or I = (x, F) with F a monic
+polynomial of degree ≥2 in y. In the first case the statement is clear. In the second
+case observe that we can write any element in I2 in the form
+A(x, y)x2 + B(y)xF + C(y)F 2
+for some A(x, y) ∈κ[x, y] and B, C ∈κ[y]. Thus
+a + bx + cy + dx2 + exy + fy2 = A(x, y)x2 + B(y)xF + C(y)F 2
+and by degree reasons we see that B = C = 0 and A is a constant.
+To finish the proof we need to deal with the case that both partial derivatives are
+zero. This can only happen in characteristic 2 and then we get
+a + dx2 + fy2 ∈I2
+We may assume f is nonzero (if not, then switch the roles of x and y).
+After
+dividing by f we obtain the case where the characteristic of κ is 2 and
+a + dx2 + y2 ∈I2
+If a and d are squares in κ, then we are done. If not, then there exists a derivation
+θ : κ →κ with θ(a) ̸= 0 or θ(d) ̸= 0, see Algebra, Lemma 158.2. We can extend
+this to a derivation of κ[x, y] by setting θ(x) = θ(y) = 0. Then we find that
+θ(a) + θ(d)x2 ∈I
+The case θ(d) = 0 is absurd. Thus we may assume that α + x2 ∈I for some α ∈κ.
+Combining with the above we find that a + αd + y2 ∈I. Hence
+J = (α + x2, a + αd + y2) ⊂I
+with codimension at most 2. Observe that J/J2 is free over κ[x, y]/J with basis
+α + x2 and a + αd + y2. Thus a + dx2 + y2 = 1 · (a + αd + y2) + d · (α + x2) ∈I2
+implies that the inclusion J ⊂I is strict. Thus we find a nonzero element of the
+form g + hx + iy + jxy in I. If j = 0, then I contains a linear form and we can
+conclude as in the first paragraph. Thus j ̸= 0 and dimκ(I/J) = 1 (otherwise we
+could find an element as above in I with j = 0). We conclude that I has the form
+
+RESOLUTION OF SURFACES
+34
+(α + x2, β + y2, g + hx + iy + jxy) with j ̸= 0 and has colength 3. In this case
+a + dx2 + y2 ∈I2 is impossible. This can be shown by a direct computation, but
+we prefer to argue as follows. Namely, to prove this statement we may assume that
+κ is algebraically closed. Then we can do a coordinate change x 7→√α + x and
+y 7→√β+y and assume that I = (x2, y2, g′+h′x+i′y+jxy) with the same j. Then
+g′ = h′ = i′ = 0 otherwise the colength of I is not 3. Thus we get I = (x2, y2, xy)
+and the result is clear.
+□
+Let (A, m, κ) be as in Situation 12.1. Let X →Spec(A) be the blowing up of m
+in Spec(A). By Lemma 9.4 we see that X is normal. All singularities of X are
+rational singularities by Lemma 8.4. Since ωA = A we see from Lemma 9.7 that
+ωX ∼= OX (see discussion in Remark 7.7 for conventions). Thus all singularities
+of X are Gorenstein. Moreover, the local rings of X at closed point have normal
+completions by Lemma 11.4. In other words, by blowing up Spec(A) we obtain a
+normal surface X whose singular points are as in Situation 12.1. We will use this
+below without further mention. (Note: we will see in the course of the discussion
+below that there are finitely many of these singular points.)
+Let E ⊂X be the exceptional divisor. We have ωE = OE(−1) by Lemma 9.7.
+By Lemma 9.5 we have κ = H0(E, OE). Thus E is a Gorenstein curve and by
+Riemann-Roch as discussed in Algebraic Curves, Section 5 we have
+χ(E, OE) = 1 −g = −(1/2) deg(ωE) = (1/2) deg(OE(1))
+where g = dimκ H1(E, OE) ≥0. Since deg(OE(1)) is positive by Varieties, Lemma
+44.15 we find that g = 0 and deg(OE(1)) = 2. It follows that we have
+dimκ(mn/mn+1) = 2n + 1
+by Lemma 9.5 and Riemann-Roch on E.
+Choose x1, x2, x3 ∈m which map to a basis of m/m2. Because dimκ(m2/m3) = 5
+the images of xixj, i ≥j in this κ-vector space satisfy a relation. In other words,
+we can find aij ∈A, i ≥j, not all contained in m, such that
+a11x2
+1 + a12x1x2 + a13x1x3 + a22x2
+2 + a23x2x3 + a33x2
+3 =
+X
+aijkxixjxk
+for some aijk ∈A where i ≤j ≤k. Denote a 7→a the map A →κ. The quadratic
+form q = P aijtitj ∈κ[t1, t2, t3] is well defined up to multiplication by an element
+of κ∗by our choices. If during the course of our arguments we find that aij = 0 in
+κ, then we can subsume the term aijxixj in the right hand side and assume aij = 0;
+this operation changes the aijk but not the other ai′j′.
+The blowing up is covered by 3 affine charts corresponding to the “variables”
+x1, x2, x3. By symmetry it suffices to study one of the charts. To do this let
+A′ = A[m/x1]
+be the affine blowup algebra (as in Algebra, Section 70). Since x1, x2, x3 generate
+m we see that A′ is generated by y2 = x2/x1 and y3 = x3/x1 over A. We will
+occasionally use y1 = 1 to simplify formulas. Moreover, looking at our relation
+above we find that
+a11 + a12y2 + a13y3 + a22y2
+2 + a23y2y3 + a33y2
+3 = x1(
+X
+aijkyiyjyk)
+
+RESOLUTION OF SURFACES
+35
+in A′. Recall that x1 ∈A′ defines the exceptional divisor E on our affine open of
+X which is therefore scheme theoretically given by
+κ[y2, y3]/(a11 + a12y2 + a13y3 + a22y2
+2 + a23y2y3 + a33y2
+3)
+In other words, E ⊂P2
+κ = Proj(κ[t1, t2, t3]) is the zero scheme of the quadratic
+form q introduced above.
+The quadratic form q is an important invariant of the singularity defined by A. Let
+us say we are in case II if q is a square of a linear form times an element of κ∗and
+in case I otherwise. Observe that we are in case II exactly if, after changing our
+choice of x1, x2, x3, we have
+x2
+3 =
+X
+aijkxixjxk
+in the local ring A.
+Let m′ ⊂A′ be a maximal ideal lying over m with residue field κ′. In other words,
+m′ corresponds to a closed point p ∈E of the exceptional divisor. Recall that the
+surjection
+κ[y2, y3] →κ′
+has kernel generated by two elements f2, f3 ∈κ[y2, y3] (see for example Algebra,
+Example 27.3 or the proof of Algebra, Lemma 114.1). Let z2, z3 ∈A′ map to f2, f3
+in κ[y2, y3]. Then we see that m′ = (x1, z2, z3) because x2 and x3 become divisible
+by x1 in A′.
+Claim. If X is singular at p, then κ′ = κ or we are in case II. Namely, if A′
+m′ is
+singular, then dimκ′ m′/(m′)2 = 3 which implies that dimκ′ m′/(m′)2 = 2 where m′
+is the maximal ideal of OE,p = OX,p/x1OX,p. This implies that
+q(1, y2, y3) = a11 + a12y2 + a13y3 + a22y2
+2 + a23y2y3 + a33y2
+3 ∈(f2, f3)2
+otherwise there would be a relation between the classes of z2 and z3 in m′/(m′)2.
+The claim now follows from Lemma 12.2.
+Resolution in case I. By the claim any singular point of X is κ-rational. Pick such
+a singular point p. We may choose our x1, x2, x3 ∈m such that p lies on the chart
+described above and has coordinates y2 = y3 = 0.
+Since it is a singular point
+arguing as in the proof of the claim we find that q(1, y2, y3) ∈(y2, y3)2. Thus we
+can choose a11 = a12 = a13 = 0 and q(t1, t2, t3) = q(t2, t3). It follows that
+E = V (q) ⊂P1
+κ
+either is the union of two distinct lines meeting at p or is a degree 2 curve with
+a unique κ-rational point (small detail omitted; use that q is not a square of a
+linear form up to a scalar). In both cases we conclude that X has a unique singular
+point p which is κ-rational. We need a bit more information in this case. First,
+looking at higher terms in the expression above, we find that a111 = 0 because p is
+singular. Then we can write a111 = b111x1 mod (x2, x3) for some b111 ∈A. Then
+the quadratic form at p for the generators x1, y2, y3 of m′ is
+q′ = b111t2
+1 + a112t1t2 + a113t1t3 + a22t2
+2 + a23t2t3 + a33t2
+3
+We see that E′ = V (q′) intersects the line t1 = 0 in either two points or one point
+of degree 2. We conclude that p lies in case I.
+
+RESOLUTION OF SURFACES
+36
+Suppose that the blowing up X′ →X of X at p again has a singular point p′. Then
+we see that p′ is a κ-rational point and we can blow up to get X′′ →X′. If this
+process does not stop we get a sequence of blowings up
+Spec(A) ←X ←X′ ←X′′ ←. . .
+We want to show that Lemma 10.1 applies to this situation. To do this we have to
+say something about the choice of the element x1 of m. Suppose that A is in case I
+and that X has a singular point. Then we will say that x1 ∈m is a good coordinate
+if for any (equivalently some) choice of x2, x3 the quadratic form q(t1, t2, t3) has
+the property that q(0, t2, t3) is not a scalar times a square. We have seen above
+that a good coordinate exists. If x1 is a good coordinate, then the singular point
+p ∈E of X does not lie on the hypersurface t1 = 0 because either this does not
+have a rational point or if it does, then it is not singular on X. Observe that this is
+equivalent to the statement that the image of x1 in OX,p cuts out the exceptional
+divisor E. Now the computations above show that if x1 is a good coordinate for
+A, then x1 ∈m′OX,p is a good coordinate for p.
+This of course uses that the
+notion of good coordinate does not depend on the choice of x2, x3 used to do the
+computation. Hence x1 maps to a good coordinate at p′, p′′, etc. Thus Lemma
+10.1 applies and our sequence of blowing ups comes from a nonsingular arc A →R.
+Then the map A∧→R is a surjection. Since the completion of A is normal, we
+conclude by Lemma 10.2 that after a finite number of blowups
+Spec(A∧) ←X∧←(X′)∧←. . .
+the resulting scheme (X(n))∧is regular. Since (X(n))∧→X(n) induces isomor-
+phisms on complete local rings (Lemma 11.1) we conclude that the same is true for
+X(n).
+Resolution in case II. Here we have
+x2
+3 =
+X
+aijkxixjxk
+in A for some choice of generators x1, x2, x3 of m. Then q = t2
+3 and E = 2C where
+C is a line. Recall that in A′ we get
+y2
+3 = x1(
+X
+aijkyiyjyk)
+Since we know that X is normal, we get a discrete valuation ring OX,ξ at the generic
+point ξ of C. The element y3 ∈A′ maps to a uniformizer of OX,ξ. Since x1 scheme
+theoretically cuts out E which is C with multiplicity 2, we see that x1 is a unit
+times y2
+3 in OX,ξ. Looking at our equality above we conclude that
+h(y2) = a111 + a112y2 + a122y2
+2 + a222y3
+2
+must be nonzero in the residue field of ξ.
+Now, suppose that p ∈C defines a
+singular point. Then y3 is zero at p and p must correspond to a zero of h by the
+reasoning used in proving the claim above. If h does not have a double zero at
+p, then the quadratic form q′ at p is not a square and we conclude that p falls in
+case I which we have treated above1. Since the degree of h is 3 we get at most
+1The maximal ideal at p in A′ is generated by y3, x1 and a third element g whose image in
+κ[y2] is the prime divisor of h corresponding to p. If this prime divisor doesn’t divide h twice,
+then we see that the quadratic form at p looks like
+y2
+3 −x1((something)x1 + (something)y3 + (unit)g)
+and this can never be a square in κ[y3, x1, g].
+
+RESOLUTION OF SURFACES
+37
+one singular point p ∈C falling into case II which is moreover κ-rational. After
+changing our choice of x1, x2, x3 we may assume this is the point y2 = y3 = 0.
+Then h = a122y2
+2 + a222y3
+2. Moreover, it still has to be the case that a113 = 0 for
+the quadratic form q′ to have the right shape. Thus the local ring OX,p defines a
+singularity as in the next paragraph.
+The final case we treat is the case where we can choose our generators x1, x2, x3 of
+m such that
+x2
+3 + x1(ax2
+2 + bx2x3 + cx2
+3) ∈m4
+for some a, b, c ∈A. This is a subclass of case II. If a = 0, then we can write
+a = a1x1 + a2x2 + a3x3 and we get after blowing up
+y2
+3 + x1(a1x1y2
+2 + a2x1y3
+2 + a3x1y2
+2y3 + by2y3 + cy2
+3) = x2
+1(
+X
+aijklyiyjykyl)
+This means that X is not normal2 a contradiction. By the result of the previous
+paragraph, if the blowup X has a singular point p which falls in case II, then there
+is only one and it is κ-rational. Computing the affine blowup algebras A[ m
+x2 ] and
+A[ m
+x3 ] the reader easily sees that p cannot be contained the corresponding opens of
+X. Thus p is in the spectrum of A[ m
+x1 ]. Doing the blowing up as before we see that
+p must be the point with coordinates y2 = y3 = 0 and the new equation looks like
+y2
+3 + x1(ay2
+2 + by2y3 + cy2
+3) ∈(m′)4
+which has the same shape as before and has the property that x1 defines the ex-
+ceptional divisor. Thus if the process does not stop we get an infinite sequence of
+blowups and on each of these x1 defines the exceptional divisor in the local ring of
+the singular point. Thus we can finish the proof using Lemmas 10.1 and 10.2 and
+the same reasoning as before.
+Lemma 12.3.
+0BGE
+Let (A, m, κ) be a local normal Nagata domain of dimension 2 which
+defines a rational singularity, whose completion is normal, and which is Gorenstein.
+Then there exists a finite sequence of blowups in singular closed points
+Xn →Xn−1 →. . . →X1 →X0 = Spec(A)
+such that Xn is regular and such that each intervening schemes Xi is normal with
+finitely many singular points of the same type.
+Proof. This is exactly what was proved in the discussion above.
+□
+13. Implied properties
+0BGF
+In this section we prove that for a Noetherian integral scheme the existence of a
+regular alteration has quite a few consequences. This section should be skipped by
+those not interested in “bad” Noetherian rings.
+Lemma 13.1.
+0BGG
+Let Y be a Noetherian integral scheme. Assume there exists an
+alteration f : X →Y with X regular. Then the normalization Y ν →Y is finite
+and Y has a dense open which is regular.
+2Namely, the equation shows that you get something singular along the 1-dimensional locus
+x1 = y3 = 0 which cannot happen for a normal surface.
+
+RESOLUTION OF SURFACES
+38
+Proof. It suffices to prove this when Y = Spec(A) where A is a Noetherian do-
+main. Let B be the integral closure of A in its fraction field. Set C = Γ(X, OX).
+By Cohomology of Schemes, Lemma 19.2 we see that C is a finite A-module. As
+X is normal (Properties, Lemma 9.4) we see that C is normal domain (Proper-
+ties, Lemma 7.9). Thus B ⊂C and we conclude that B is finite over A as A is
+Noetherian.
+There exists a nonempty open V ⊂Y such that f −1V →V is finite, see Mor-
+phisms, Definition 52.12. After shrinking V we may assume that f −1V →V is
+flat (Morphisms, Proposition 28.1). Thus f −1V →V is faithfully flat. Then V is
+regular by Algebra, Lemma 164.4.
+□
+Lemma 13.2.
+0BGH
+Let (A, m) be a local Noetherian ring. Let B ⊂C be finite A-
+algebras. Assume that (a) B is a normal ring, and (b) the m-adic completion C∧
+is a normal ring. Then B∧is a normal ring.
+Proof. Consider the commutative diagram
+B
+/
+
+C
+
+B∧
+/ C∧
+Recall that m-adic completion on the category of finite A-modules is exact because
+it is given by tensoring with the flat A-algebra A∧(Algebra, Lemma 97.2). We
+will use Serre’s criterion (Algebra, Lemma 157.4) to prove that the Noetherian ring
+B∧is normal. Let q ⊂B∧be a prime lying over p ⊂B. If dim(Bp) ≥2, then
+depth(Bp) ≥2 and since Bp →B∧
+q is flat we find that depth(B∧
+q ) ≥2 (Algebra,
+Lemma 163.2). If dim(Bp) ≤1, then Bp is either a discrete valuation ring or a field.
+In that case Cp is faithfully flat over Bp (because it is finite and torsion free). Hence
+B∧
+p →C∧
+p is faithfully flat and the same holds after localizing at q. As C∧and hence
+any localization is (S2) we conclude that B∧
+p is (S2) by Algebra, Lemma 164.5. All in
+all we find that (S2) holds for B∧. To prove that B∧is (R1) we only have to consider
+primes q ⊂B∧with dim(B∧
+q ) ≤1. Since dim(B∧
+q ) = dim(Bp) + dim(B∧
+q /pB∧
+q ) by
+Algebra, Lemma 112.6 we find that dim(Bp) ≤1 and we see that B∧
+q →C∧
+q is
+faithfully flat as before. We conclude using Algebra, Lemma 164.6.
+□
+Lemma 13.3.
+0BGI
+Let (A, m, κ) be a local Noetherian domain. Assume there exists
+an alteration f : X →Spec(A) with X regular. Then
+(1) there exists a nonzero f ∈A such that Af is regular,
+(2) the integral closure B of A in its fraction field is finite over A,
+(3) the m-adic completion of B is a normal ring, i.e., the completions of B at
+its maximal ideals are normal domains, and
+(4) the generic formal fibre of A is regular.
+Proof. Parts (1) and (2) follow from Lemma 13.1. We have to redo part of the
+proof of that lemma in order to set up notation for the proof of (3). Set C =
+Γ(X, OX). By Cohomology of Schemes, Lemma 19.2 we see that C is a finite A-
+module. As X is normal (Properties, Lemma 9.4) we see that C is normal domain
+(Properties, Lemma 7.9). Thus B ⊂C and we conclude that B is finite over A as
+A is Noetherian. By Lemma 13.2 in order to prove (3) it suffices to show that the
+m-adic completion C∧is normal.
+
+RESOLUTION OF SURFACES
+39
+By Algebra, Lemma 97.8 the completion C∧is the product of the completions of
+C at the prime ideals of C lying over m. There are finitely many of these and
+these are the maximal ideals m1, . . . , mr of C. (The corresponding result for B
+explains the final statement of the lemma.) Thus replacing A by Cmi and X by
+Xi = X ×Spec(C) Spec(Cmi) we reduce to the case discussed in the next paragraph.
+(Note that Γ(Xi, O) = Cmi by Cohomology of Schemes, Lemma 5.2.)
+Here A is a Noetherian local normal domain and f : X →Spec(A) is a regular
+alteration with Γ(X, OX) = A. We have to show that the completion A∧of A
+is a normal domain. By Lemma 11.2 Y = X ×Spec(A) Spec(A∧) is regular. Since
+Γ(Y, OY ) = A∧by Cohomology of Schemes, Lemma 5.2, we conclude that A∧is
+normal as before. Namely, Y is normal by Properties, Lemma 9.4. It is connected
+because Γ(Y, OY ) = A∧is local. Hence Y is normal and integral (as connected and
+normal implies integral for Noetherian schemes). Thus Γ(Y, OY ) = A∧is a normal
+domain by Properties, Lemma 7.9. This proves (3).
+Proof of (4). Let η ∈Spec(A) denote the generic point and denote by a subscript η
+the base change to η. Since f is an alteration, the scheme Xη is finite and faithfully
+flat over η. Since Y = X ×Spec(A)Spec(A∧) is regular by Lemma 11.2 we see that Yη
+is regular (as a limit of opens in Y ). Then Yη →Spec(A∧⊗Aκ(η)) is finite faithfully
+flat onto the generic formal fibre. We conclude by Algebra, Lemma 164.4.
+□
+14. Resolution
+0BGJ
+Here is a definition.
+Definition 14.1.
+0BGK
+Let Y be a Noetherian integral scheme. A resolution of singu-
+larities of Y is a modification f : X →Y such that X is regular.
+In the case of surfaces we sometimes want a bit more information.
+Definition 14.2.
+0BGL
+Let Y be a 2-dimensional Noetherian integral scheme. We say
+Y has a resolution of singularities by normalized blowups if there exists a sequence
+Yn →Yn−1 →. . . →Y1 →Y0 →Y
+where
+(1) Yi is proper over Y for i = 0, . . . , n,
+(2) Y0 →Y is the normalization,
+(3) Yi →Yi−1 is a normalized blowup for i = 1, . . . , n, and
+(4) Yn is regular.
+Observe that condition (1) implies that the normalization Y0 of Y is finite over Y
+and that the normalizations used in the normalized blowing ups are finite as well.
+Lemma 14.3.
+0BGM
+Let (A, m, κ) be a Noetherian local ring. Assume A is normal and
+has dimension 2. If Spec(A) has a resolution of singularities, then Spec(A) has a
+resolution by normalized blowups.
+Proof. By Lemma 13.3 the completion A∧of A is normal. By Lemma 11.2 we see
+that Spec(A∧) has a resolution. By Lemma 11.7 any sequence Yn →Yn−1 →. . . →
+Spec(A∧) of normalized blowups of comes from a sequence of normalized blowups
+Xn →. . . →Spec(A). Moreover if Yn is regular, then Xn is regular by Lemma
+11.2. Thus it suffices to prove the lemma in case A is complete.
+
+RESOLUTION OF SURFACES
+40
+Assume in addition A is a complete. We will use that A is Nagata (Algebra, Propo-
+sition 162.16), excellent (More on Algebra, Proposition 53.3), and has a dualizing
+complex (Dualizing Complexes, Lemma 22.4). Moreover, the same is true for any
+ring essentially of finite type over A. If B is a excellent local normal domain, then
+the completion B∧is normal (as B →B∧is regular and More on Algebra, Lemma
+43.2 applies). We will use this without further mention in the rest of the proof.
+Let X →Spec(A) be a resolution of singularities. Choose a sequence of normalized
+blowing ups
+Yn →Yn−1 →. . . →Y1 →Spec(A)
+dominating X (Lemma 5.3). The morphism Yn →X is an isomorphism away from
+finitely many points of X. Hence we can apply Lemma 4.2 to find a sequence of
+blowing ups
+Xm →Xm−1 →. . . →X
+in closed points such that Xm dominates Yn. Diagram
+Yn
+
+/ Spec(A)
+Xm
+/
+=
+X
+;
+To prove the lemma it suffices to show that a finite number of normalized blowups of
+Yn produce a regular scheme. By our diagram above we see that Yn has a resolution
+(namely Xm). As Yn is a normal surface this implies that Yn has at most finitely
+many singularities y1, . . . , yt (because Xm →Yn is an isomorphism away from the
+fibres of dimension 1, see Varieties, Lemma 17.3).
+Let xa ∈X be the image of ya. Then OX,xa is regular and hence defines a ra-
+tional singularity (Lemma 8.7). Apply Lemma 8.4 to OX,xa →OYn,ya to see that
+OYn,ya defines a rational singularity. By Lemma 9.8 there exists a finite sequence
+of blowups in singular closed points
+Ya,na →Ya,na−1 →. . . →Spec(OYn,ya)
+such that Ya,na is Gorenstein, i.e., has an invertible dualizing module. By (the
+essentially trivial) Lemma 6.4 with n′ = P na these sequences correspond to a
+sequence of blowups
+Yn+n′ →Yn+n′−1 →. . . →Yn
+such that Yn+n′ is normal and the local rings of Yn+n′ are Gorenstein. Using the
+references given above we can dominate Yn+n′ by a sequence of blowups Xm+m′ →
+. . . →Xm dominating Yn+n′ as in the following
+Yn+n′
+/ Yn
+
+/ Spec(A)
+Xm+m′
+:
+/ Xm
+/
+>
+X
+;
+Thus again Yn+n′ has a finite number of singular points y′
+1, . . . , y′
+s, but this time
+the singularities are rational double points, more precisely, the local rings OYn+n′,y′
+b
+are as in Lemma 12.3. Arguing exactly as above we conclude that the lemma is
+true.
+□
+
+RESOLUTION OF SURFACES
+41
+Lemma 14.4.
+0BGN
+Let (A, m, κ) be a Noetherian complete local ring. Assume A is a
+normal domain of dimension 2. Then Spec(A) has a resolution of singularities.
+Proof. A Noetherian complete local ring is J-2 (More on Algebra, Proposition
+49.7), Nagata (Algebra, Proposition 162.16), excellent (More on Algebra, Propo-
+sition 53.3), and has a dualizing complex (Dualizing Complexes, Lemma 22.4).
+Moreover, the same is true for any ring essentially of finite type over A. If B is
+a excellent local normal domain, then the completion B∧is normal (as B →B∧
+is regular and More on Algebra, Lemma 43.2 applies). In other words, the local
+rings which we encounter in the rest of the proof will have the required “excellency”
+properties required of them.
+Choose A0 ⊂A with A0 a regular complete local ring and A0 →A finite, see
+Algebra, Lemma 160.11. This induces a finite extension of fraction fields K/K0.
+We will argue by induction on [K : K0]. The base case is when the degree is 1 in
+which case A0 = A and the result is true.
+Suppose there is an intermediate field K0 ⊂L ⊂K, K0 ̸= L ̸= K. Let B ⊂A be
+the integral closure of A0 in L. By induction we choose a resolution of singularities
+Y →Spec(B). Let X be the normalization of Y ×Spec(B) Spec(A). Picture:
+X
+/
+
+Spec(A)
+
+Y
+/ Spec(B)
+Since A is J-2 the regular locus of X is open. Since X is a normal surface we
+conclude that X has at worst finitely many singular points x1, . . . , xn which are
+closed points with dim(OX,xi) = 2. For each i let yi ∈Y be the image. Since
+O∧
+Y,yi →O∧
+X,xi is finite of smaller degree than before we conclude by induction
+hypothesis that O∧
+X,xi has resolution of singularities. By Lemma 14.3 there is a
+sequence
+Z∧
+i,ni →. . . →Z∧
+i,1 →Spec(O∧
+X,xi)
+of normalized blowups with Z∧
+i,ni regular. By Lemma 11.7 there is a corresponding
+sequence of normalized blowing ups
+Zi,ni →. . . →Zi,1 →Spec(OX,xi)
+Then Zi,ni is a regular scheme by Lemma 11.2. By Lemma 6.5 we can fit these
+normalized blowing ups into a corresponding sequence
+Zn →Zn−1 →. . . →Z1 →X
+and of course Zn is regular too (look at the local rings). This proves the induction
+step.
+Assume there is no intermediate field K0 ⊂L ⊂K with K0 ̸= L ̸= K. Then either
+K/K0 is separable or the characteristic to K is p and [K : K0] = p. Then either
+Lemma 8.6 or 8.10 implies that reduction to rational singularities is possible. By
+Lemma 8.5 we conclude that there exists a normal modification X →Spec(A) such
+that for every singular point x of X the local ring OX,x defines a rational singularity.
+Since A is J-2 we find that X has finitely many singular points x1, . . . , xn. By
+Lemma 9.8 there exists a finite sequence of blowups in singular closed points
+Xi,ni →Xi,ni−1 →. . . →Spec(OX,xi)
+
+RESOLUTION OF SURFACES
+42
+such that Xi,ni is Gorenstein, i.e., has an invertible dualizing module. By (the
+essentially trivial) Lemma 6.4 with n = P na these sequences correspond to a
+sequence of blowups
+Xn →Xn−1 →. . . →X
+such that Xn is normal and the local rings of Xn are Gorenstein. Again Xn has
+a finite number of singular points x′
+1, . . . , x′
+s, but this time the singularities are
+rational double points, more precisely, the local rings OXn,x′
+i are as in Lemma 12.3.
+Arguing exactly as above we conclude that the lemma is true.
+□
+We finally come to the main theorem of this chapter.
+Theorem 14.5 (Lipman).
+0BGP
+[Lip78, Theorem on
+page 151]
+Let Y be a two dimensional integral Noetherian scheme.
+The following are equivalent
+(1) there exists an alteration X →Y with X regular,
+(2) there exists a resolution of singularities of Y ,
+(3) Y has a resolution of singularities by normalized blowups,
+(4) the normalization Y ν →Y is finite, Y ν has finitely many singular points
+y1, . . . , ym, and for each yi the completion of OY ν,yi is normal.
+Proof. The implications (3) ⇒(2) ⇒(1) are immediate.
+Let X →Y be an alteration with X regular. Then Y ν →Y is finite by Lemma
+13.1. Consider the factorization f : X →Y ν from Morphisms, Lemma 55.5. The
+morphism f is finite over an open V ⊂Y ν containing every point of codimension
+≤1 in Y ν by Varieties, Lemma 17.2. Then f is flat over V by Algebra, Lemma
+128.1 and the fact that a normal local ring of dimension ≤2 is Cohen-Macaulay by
+Serre’s criterion (Algebra, Lemma 157.4). Then V is regular by Algebra, Lemma
+164.4. As Y ν is Noetherian we conclude that Y ν \ V = {y1, . . . , ym} is finite. By
+Lemma 13.3 the completion of OY ν,yi is normal. In this way we see that (1) ⇒(4).
+Assume (4). We have to prove (3). We may immediately replace Y by its normal-
+ization. Let y1, . . . , ym ∈Y be the singular points. Applying Lemmas 14.4 and
+14.3 we find there exists a finite sequence of normalized blowups
+Yi,ni →Yi,ni−1 →. . . →Spec(O∧
+Y,yi)
+such that Yi,ni is regular. By Lemma 11.7 there is a corresponding sequence of
+normalized blowing ups
+Xi,ni →. . . →Xi,1 →Spec(OY,yi)
+Then Xi,ni is a regular scheme by Lemma 11.2. By Lemma 6.5 we can fit these
+normalized blowing ups into a corresponding sequence
+Xn →Xn−1 →. . . →X1 →Y
+and of course Xn is regular too (look at the local rings).
+This completes the
+proof.
+□
+15. Embedded resolution
+0BI3
+Given a curve on a surface there is a blowing up which turns the curve into a strict
+normal crossings divisor. In this section we will use that a one dimensional locally
+Noetherian scheme is normal if and only if it is regular (Algebra, Lemma 119.7).
+We will also use that any point on a locally Noetherian scheme specializes to a
+closed point (Properties, Lemma 5.9).
+
+RESOLUTION OF SURFACES
+43
+Lemma 15.1.
+0BI4
+Let Y be a one dimensional integral Noetherian scheme.
+The
+following are equivalent
+(1) there exists an alteration X →Y with X regular,
+(2) there exists a resolution of singularities of Y ,
+(3) there exists a finite sequence Yn →Yn−1 →. . . →Y1 →Y of blowups in
+closed points with Yn regular, and
+(4) the normalization Y ν →Y is finite.
+Proof. The implications (3) ⇒(2) ⇒(1) are immediate. The implication (1) ⇒
+(4) follows from Lemma 13.1. Observe that a normal one dimensional scheme is
+regular hence the implication (4) ⇒(2) is clear as well. Thus it remains to show
+that the equivalent conditions (1), (2), and (4) imply (3).
+Let f : X →Y be a resolution of singularities. Since the dimension of Y is one we
+see that f is finite by Varieties, Lemma 17.2. We will construct factorizations
+X →. . . →Y2 →Y1 →Y
+where Yi →Yi−1 is a blowing up of a closed point and not an isomorphism as long
+as Yi−1 is not regular. Each of these morphisms will be finite (by the same reason
+as above) and we will get a corresponding system
+f∗OX ⊃. . . ⊃f2,∗OY2 ⊃f1,∗OY1 ⊃OY
+where fi : Yi →Y is the structure morphism. Since Y is Noetherian, this increasing
+sequence of coherent submodules must stabilize (Cohomology of Schemes, Lemma
+10.1) which proves that for some n the scheme Yn is regular as desired. To construct
+Yi given Yi−1 we pick a singular closed point yi−1 ∈Yi−1 and we let Yi →Yi−1 be
+the corresponding blowup. Since X is regular of dimension 1 (and hence the local
+rings at closed points are discrete valuation rings and in particular PIDs), the ideal
+sheaf myi−1 · OX is invertible. By the universal property of blowing up (Divisors,
+Lemma 33.5) this gives us a factorization X →Yi. Finally, Yi →Yi−1 is not an
+isomorphism as myi−1 is not an invertible ideal.
+□
+Lemma 15.2.
+0BI5
+Let X be a Noetherian scheme. Let Y ⊂X be an integral closed
+subscheme of dimension 1 satisfying the equivalent conditions of Lemma 15.1. Then
+there exists a finite sequence
+Xn →Xn−1 →. . . →X1 →X
+of blowups in closed points such that the strict transform of Y in Xn is a regular
+curve.
+Proof. Let Yn →Yn−1 →. . . →Y1 →Y be the sequence of blowups given to us by
+Lemma 15.1. Let Xn →Xn−1 →. . . →X1 →X be the corresponding sequence of
+blowups of X. This works because the strict transform is the blowup by Divisors,
+Lemma 34.2.
+□
+Let X be a locally Noetherian scheme. Let Y, Z ⊂X be closed subschemes. Let
+p ∈Y ∩Z be a closed point. Assume that Y is integral of dimension 1 and that
+the generic point of Y is not contained in Z. In this situation we can consider the
+invariant
+(15.2.1)
+0BI6
+mp(Y ∩Z) = lengthOX,p(OY ∩Z,p)
+
+RESOLUTION OF SURFACES
+44
+This is an integer ≥1. Namely, if I, J ⊂OX,p are the ideals corresponding to
+Y, Z, then we see that OY ∩Z,p = OX,p/I + J has support equal to {mp} because
+we assumed that Y ∩Z does not contain the unique point of Y specializing to p.
+Hence the length is finite by Algebra, Lemma 62.3.
+Lemma 15.3.
+0BI7
+In the situation above let X′ →X be the blowing up of X in p.
+Let Y ′, Z′ ⊂X′ be the strict transforms of Y, Z. If OY,p is regular, then
+(1) Y ′ →Y is an isomorphism,
+(2) Y ′ meets the exceptional fibre E ⊂X′ in one point q and mq(Y ∩E) = 1,
+(3) if q ∈Z′ too, then mq(Y ∩Z′) < mp(Y ∩Z).
+Proof. Since OX,p →OY,p is surjective and OY,p is a discrete valuation ring,
+we can pick an element x1 ∈mp mapping to a uniformizer in OY,p. Choose an
+affine open U = Spec(A) containing p such that x1 ∈A.
+Let m ⊂A be the
+maximal ideal corresponding to p.
+Let I, J ⊂A be the ideals defining Y, Z in
+Spec(A). After shrinking U we may assume that m = I +(x1), in other words, that
+V (x1)∩U ∩Y = {p} scheme theoretically. We conclude that p is an effective Cartier
+divisor on Y and since Y ′ is the blowing up of Y in p (Divisors, Lemma 34.2) we
+see that Y ′ →Y is an isomorphism by Divisors, Lemma 33.7. The relationship
+m = I + (x1) implies that mn ⊂I + (xn
+1) hence we can define a map
+ψ : A[ m
+x1 ] −→A/I
+by sending y/xn
+1 ∈A[ m
+x1 ] to the class of a in A/I where a is chosen such that
+y ≡axn
+1 mod I. Then ψ corresponds to the morphism of Y ∩U into X′ over U
+given by Y ′ ∼= Y . Since the image of x1 in A[ m
+x1 ] cuts out the exceptional divisor
+we conclude that mq(Y ′, E) = 1.
+Finally, since J ⊂m implies that the ideal
+J′ ⊂A[ m
+x1 ] certainly contains the elements f/x1 for f ∈J. Thus if we choose
+f ∈J whose image f in A/I has minimal valuation equal to mp(Y ∩Z), then we
+see that ψ(f/x1) = f/x1 in A/I has valuation one less proving the last part of the
+lemma.
+□
+Lemma 15.4.
+0BI8
+Let X be a Noetherian scheme. Let Yi ⊂X, i = 1, . . . , n be an
+integral closed subschemes of dimension 1 each satisfying the equivalent conditions
+of Lemma 15.1. Then there exists a finite sequence
+Xn →Xn−1 →. . . →X1 →X
+of blowups in closed points such that the strict transform Y ′
+i ⊂Xn of Yi in Xn are
+pairwise disjoint regular curves.
+Proof. It follows from Lemma 15.2 that we may assume Yi is a regular curve for
+i = 1, . . . , n. For every i ̸= j and p ∈Yi ∩Yj we have the invariant mp(Yi ∩Yj)
+(15.2.1). If the maximum of these numbers is > 1, then we can decrease it (Lemma
+15.3) by blowing up in all the points p where the maximum is attained. If the
+maximum is 1 then we can separate the curves using the same lemma by blowing
+up in all these points p.
+□
+When our curve is contained on a regular surface we often want to turn it into a
+divisor with normal crossings.
+Lemma 15.5.
+0BIB
+Let X be a regular scheme of dimension 2. Let Z ⊂X be a proper
+closed subscheme. There exists a sequence
+Xn →. . . →X1 →X
+
+RESOLUTION OF SURFACES
+45
+of blowing ups in closed points such that the inverse image Zn of Z in Xn is an
+effective Cartier divisor.
+Proof. Let D ⊂Z be the largest effective Cartier divisor contained in Z. Then
+IZ ⊂ID and the quotient is supported in closed points by Divisors, Lemma 16.8.
+Thus we can write IZ = IZ′ID where Z′ ⊂X is a closed subscheme which set
+theoretically consists of finitely many closed points. Applying Lemma 4.1 we find
+a sequence of blowups as in the statement of our lemma such that IZ′OXn is
+invertible. This proves the lemma.
+□
+Lemma 15.6.
+0BIC
+Let X be a regular scheme of dimension 2. Let Z ⊂X be a proper
+closed subscheme such that every irreducible component Y ⊂Z of dimension 1
+satisfies the equivalent conditions of Lemma 15.1. Then there exists a sequence
+Xn →. . . →X1 →X
+of blowups in closed points such that the inverse image Zn of Z in Xn is an effective
+Cartier divisor supported on a strict normal crossings divisor.
+Proof. Let X′ →X be a blowup in a closed point p. Then the inverse image
+Z′ ⊂X′ of Z is supported on the strict transform of Z and the exceptional divisor.
+The exceptional divisor is a regular curve (Lemma 3.1) and the strict transform Y ′
+of each irreducible component Y is either equal to Y or the blowup of Y at p. Thus
+in this process we do not produce additional singular components of dimension 1.
+Thus it follows from Lemmas 15.5 and 15.4 that we may assume Z is an effective
+Cartier divisor and that all irreducible components Y of Z are regular. (Of course
+we cannot assume the irreducible components are pairwise disjoint because in each
+blowup of a point of Z we add a new irreducible component to Z, namely the
+exceptional divisor.)
+Assume Z is an effective Cartier divisor whose irreducible components Yi are reg-
+ular. For every i ̸= j and p ∈Yi ∩Yj we have the invariant mp(Yi ∩Yj) (15.2.1). If
+the maximum of these numbers is > 1, then we can decrease it (Lemma 15.3) by
+blowing up in all the points p where the maximum is attained (note that the “new”
+invariants mqi(Y ′
+i ∩E) are always 1). If the maximum is 1 then, if p ∈Y1 ∩. . . ∩Yr
+for some r > 2 and not any of the others (for example), then after blowing up p
+we see that Y ′
+1, . . . , Y ′
+r do not meet in points above p and mqi(Y ′
+i , E) = 1 where
+Y ′
+i ∩E = {qi}. Thus continuing to blowup points where more than 3 of the compo-
+nents of Z meet, we reach the situation where for every closed point p ∈X there is
+either (a) no curves Yi passing through p, (b) exactly one curve Yi passing through
+p and OYi,p is regular, or (c) exactly two curves Yi, Yj passing through p, the local
+rings OYi,p, OYj,p are regular and mp(Yi ∩Yj) = 1. This means that P Yi is a strict
+normal crossings divisor on the regular surface X, see Étale Morphisms, Lemma
+21.2.
+□
+16. Contracting exceptional curves
+0C2I
+Let X be a Noetherian scheme. Let E ⊂X be a closed subscheme with the following
+properties
+(1) E is an effective Cartier divisor on X,
+(2) there exists a field k and an isomorphism P1
+k →E of schemes,
+(3) the normal sheaf NE/X pulls back to OP1(−1).
+
+RESOLUTION OF SURFACES
+46
+Such a closed subscheme is called an exceptional curve of the first kind.
+Let X′ be a Noetherian scheme and let x ∈X′ be a closed point such that OX′,x is
+regular of dimension 2. Let b : X →X′ be the blowing up of X′ at x. In this case
+the exceptional fibre E ⊂X is an exceptional curve of the first kind. This follows
+from Lemma 3.1.
+Question: Is every exceptional curve of the first kind obtained as the fibre of a
+blowing up as above? In other words, does there always exist a proper morphism
+of schemes X →X′ such that E maps to a closed point x ∈X′, such that OX′,x is
+regular of dimension 2, and such that X is the blowing up of X′ at x. If true we
+say there exists a contraction of E.
+Lemma 16.1.
+0C5J
+Let X be a Noetherian scheme. Let E ⊂X be an exceptional curve
+of the first kind. If a contraction X →X′ of E exists, then it has the following
+universal property: for every morphism φ : X →Y such that φ(E) is a point, there
+is a unique factorization X →X′ →Y of φ.
+Proof. Let b : X →X′ be a contraction of E. As a topological space X′ is the
+quotient of X by the relation identifying all points of E to one point. Namely,
+b is proper (Divisors, Lemma 33.13 and Morphisms, Lemma 44.5) and surjective,
+hence defines a submersive map of topological spaces (Topology, Lemma 6.5). On
+the other hand, the canonical map OX′ →b∗OX is an isomorphism. Namely, this
+is clear over the complement of the image point x ∈X′ of E and on stalks at x
+the map is an isomorphism by part (4) of Lemma 3.4. Thus the pair (X′, OX′) is
+constructed from X by taking the quotient as a topological space and endowing
+this with b∗OX as structure sheaf.
+Given φ we can let φ′ : X′ →Y be the unique map of topological spaces such that
+φ = φ′ ◦b. Then the map
+φ♯: φ−1OY = b−1((φ′)−1OY ) →OX
+is adjoint to a map
+(φ′)♯: (φ′)−1OY →b∗OX = OX′
+Then (φ′, (φ′)♯) is a morphism of ringed spaces from X′ to Y such that we get
+the desired factorization. Since φ is a morphism of locally ringed spaces, it follows
+that φ′ is too. Namely, the only thing to check is that the map OY,y →OX′,x is
+local, where y ∈Y is the image of E under φ. This is true because an element
+f ∈my pulls back to a function on X which is zero in every point of E hence the
+pull back of f to X′ is a function defined on a neighbourhood of x in X′ with the
+same property. Then it is clear that this function must vanish at x as desired.
+□
+Lemma 16.2.
+0C5K
+Let X be a Noetherian scheme. Let E ⊂X be an exceptional curve
+of the first kind. If there exists a contraction of E, then it is unique up to unique
+isomorphism.
+Proof. This is immediate from the universal property of Lemma 16.1.
+□
+Lemma 16.3.
+0C2K
+Let X be a Noetherian scheme. Let E ⊂X be an exceptional curve
+of the first kind. Let En = nE and denote On its structure sheaf. Then
+A = lim H0(En, On)
+is a complete local Noetherian regular local ring of dimension 2 and Ker(A →
+H0(En, On)) is the nth power of its maximal ideal.
+
+RESOLUTION OF SURFACES
+47
+Proof. Recall that there exists an isomorphism P1
+k →E such that the normal
+sheaf of E in X pulls back to O(−1).
+Then H0(E, OE) = k.
+We will denote
+On(iE) the restriction of the invertible sheaf OX(iE) to En for all n ≥1 and i ∈Z.
+Recall that OX(−nE) is the ideal sheaf of En. Hence for d ≥0 we obtain a short
+exact sequence
+0 →OE(−(d + n)E) →On+1(−dE) →On(−dE) →0
+Since OE(−(d+n)E) = OP1
+k(d+n) the first cohomology group vanishes for all d ≥0
+and n ≥1. We conclude that the transition maps of the system H0(En, On(−dE))
+are surjective. For d = 0 we get an inverse system of surjections of rings such that
+the kernel of each transition map is a nilpotent ideal. Hence A = lim H0(En, On)
+is a local ring with residue field k and maximal ideal
+lim Ker(H0(En, On) →H0(E, OE)) = lim H0(En, On(−E))
+Pick x, y in this kernel mapping to a k-basis of H0(E, OE(−E)) = H0(P1
+k, O(1)).
+Then xd, xd−1y, . . . , yd are elements of lim H0(En, On(−dE)) which map to a basis
+of H0(E, OE(−dE)) = H0(P1
+k, O(d)). In this way we see that A is separated and
+complete with respect to the linear topology defined by the kernels
+In = Ker(A −→H0(En, On))
+We have x, y ∈I1, IdId′ ⊂Id+d′ and Id/Id+1 is a free k-module on xd, xd−1y, . . . , yd.
+We will show that Id = (x, y)d. Namely, if ze ∈Ie with e ≥d, then we can write
+ze = ae,0xd + ae,1xd−1y + . . . + ae,dyd + ze+1
+where ae,j ∈(x, y)e−d and ze+1 ∈Ie+1 by our description of Id/Id+1. Thus starting
+with some z = zd ∈Id we can do this inductively
+z =
+X
+e≥d
+X
+j ae,jxd−jyj
+with some ae,j ∈(x, y)e−d.
+Then aj = P
+e≥d ae,j exists (by completeness and
+the fact that ae,j ∈Ie−d) and we have z = P ae,jxd−jyj. Hence Id = (x, y)d.
+Thus A is (x, y)-adically complete.
+Then A is Noetherian by Algebra, Lemma
+97.5. It is clear that the dimension is 2 by the description of (x, y)d/(x, y)d+1 and
+Algebra, Proposition 60.9. Since the maximal ideal is generated by two elements it
+is regular.
+□
+Lemma 16.4.
+0C2L
+Let X be a Noetherian scheme. Let E ⊂X be an exceptional curve
+of the first kind. If there exists a morphism f : X →Y such that
+(1) Y is Noetherian,
+(2) f is proper,
+(3) f maps E to a point y of Y ,
+(4) f is quasi-finite at every point not in E,
+Then there exists a contraction of E and it is the Stein factorization of f.
+Proof. We apply More on Morphisms, Theorem 53.4 to get a Stein factorization
+X →X′ →Y . Then X →X′ satisfies all the hypotheses of the lemma (some
+details omitted). Thus after replacing Y by X′ we may in addition assume that
+f∗OX = OY and that the fibres of f are geometrically connected.
+Assume that f∗OX = OY and that the fibres of f are geometrically connected.
+Note that y ∈Y is a closed point as f is closed and E is closed. The restriction
+
+RESOLUTION OF SURFACES
+48
+f −1(Y \ {y}) →Y \ {y} of f is a finite morphism (More on Morphisms, Lemma
+44.1).
+Hence this restriction is an isomorphism since f∗OX = OY since finite
+morphisms are affine. To prove that OY,y is regular of dimension 2 we consider the
+isomorphism
+O∧
+Y,y −→lim H0(X ×Y Spec(OY,y/mn
+y), O)
+of Cohomology of Schemes, Lemma 20.7. Let En = nE as in Lemma 16.3. Observe
+that
+En ⊂X ×Y Spec(OY,y/mn
+y)
+because E ⊂Xy = X ×Y Spec(κ(y)). On the other hand, since E = f −1({y}) set
+theoretically (because the fibres of f are geometrically connected), we see that the
+scheme theoretic fibre Xy is scheme theoretically contained in En for some n > 0.
+Namely, apply Cohomology of Schemes, Lemma 10.2 to the coherent OX-module
+F = OXy and the ideal sheaf I of E and use that In is the ideal sheaf of En. This
+shows that
+X ×Y Spec(OY,y/mm
+y ) ⊂Enm
+Thus the inverse limit displayed above is equal to lim H0(En, On) which is a regular
+two dimensional local ring by Lemma 16.3. Hence OY,y is a two dimensional regular
+local ring because its completion is so (More on Algebra, Lemma 44.4 and 44.1).
+We still have to prove that f : X →Y is the blowup b : Y ′ →Y of Y at y. We
+encourage the reader to find her own proof. First, we note that Lemma 16.3 also
+implies that Xy = E scheme theoretically. Since the ideal sheaf of E is invertible,
+this shows that f −1my · OX is invertible. Hence we obtain a factorization
+X →Y ′ →Y
+of the morphism f by the universal property of blowing up, see Divisors, Lemma
+33.5. Recall that the exceptional fibre of E′ ⊂Y ′ is an exceptional curve of the first
+kind by Lemma 3.1. Let g : E →E′ be the induced morphism. Because for both
+E′ and E the conormal sheaf is generated by (pullbacks of) a and b, we see that
+the canonical map g∗CE′/Y ′ →CE/X (Morphisms, Lemma 32.3) is surjective. Since
+both are invertible, this map is an isomorphism. Since CE/X has positive degree, it
+follows that g cannot be a constant morphism. Hence g has finite fibres. Hence g is a
+finite morphism (same reference as above). However, since Y ′ is regular (and hence
+normal) at all points of E′ and since X →Y ′ is birational and an isomorphism
+away from E′, we conclude that X →Y ′ is an isomorphism by Varieties, Lemma
+17.3.
+□
+Lemma 16.5.
+0C5L
+Let b : X →X′ be the contraction of an exceptional curve of the
+first kind E ⊂X. Then there is a short exact sequence
+0 →Pic(X′) →Pic(X) →Z →0
+where the first map is pullback by b and the second map sends L to the degree of L
+on the exceptional curve E. The sequence is split by the map n 7→OX(−nE).
+Proof. Since E = P1
+k we see that the Picard group of E is Z, see Divisors, Lemma
+29.5. Hence we can think of the last map as L 7→L|E. The degree of the restriction
+of OX(E) to E is −1 by definition of exceptional curves of the first kind. Combining
+these remarks we see that it suffices to show that Pic(X′) →Pic(X) is injective
+with image the invertible sheaves restricting to OE on E.
+
+RESOLUTION OF SURFACES
+49
+Given an invertible OX′-module L′ we claim the map L′ →b∗b∗L′ is an isomor-
+phism.
+This is clear everywhere except possibly at the image point x ∈X′ of
+E. To check it is an isomorphism on stalks at x we may replace X′ by an open
+neighbourhood at x and assume L′ is OX′. Then we have to show that the map
+OX′ →b∗OX is an isomorphism. This follows from Lemma 3.4 part (4).
+Let L be an invertible OX-module with L|E = OE.
+Then we claim (1) b∗L is
+invertible and (2) b∗b∗L →L is an isomorphism. Statements (1) and (2) are clear
+over X′\{x}. Thus it suffices to prove (1) and (2) after base change to Spec(OX′,x).
+Computing b∗commutes with flat base change (Cohomology of Schemes, Lemma
+5.2) and similarly for b∗and formation of the adjunction map. But if X′ is the
+spectrum of a regular local ring then L is trivial by the description of the Picard
+group in Lemma 3.3. Thus the claim is proved.
+Combining the claims proved in the previous two paragraphs we see that the map
+L 7→b∗L is an inverse to the map
+Pic(X′) −→Ker(Pic(X) →Pic(E))
+and the lemma is proved.
+□
+Remark 16.6.
+0C5M
+Let b : X →X′ be the contraction of an exceptional curve of the
+first kind E ⊂X. From Lemma 16.5 we obtain an identification
+Pic(X) = Pic(X′) ⊕Z
+where L corresponds to the pair (L′, n) if and only if L = (b∗L′)(−nE), i.e.,
+L(nE) = b∗L′. In fact the proof of Lemma 16.5 shows that L′ = b∗L(nE). Of
+course the assignment L 7→L′ is a group homomorphism.
+Lemma 16.7.
+0C2J
+Let X be a Noetherian scheme. Let E ⊂X be an exceptional curve
+of the first kind. Let L be an invertible OX-module. Let n be the integer such that
+L|E has degree n viewed as an invertible module on P1. Then
+(1) If H1(X, L) = 0 and n ≥0, then H1(X, L(iE)) = 0 for 0 ≤i ≤n + 1.
+(2) If n ≤0, then H1(X, L) ⊂H1(X, L(E)).
+Proof. Observe that L|E = O(n) by Divisors, Lemma 29.5. Use induction, the
+long exact cohomology sequence associated to the short exact sequence
+0 →L →L(E) →L(E)|E →0,
+and use the fact that H1(P1, O(d)) = 0 for d ≥−1 and H0(P1, O(d)) = 0 for
+d ≤−1. Some details omitted.
+□
+Lemma 16.8.
+0C2M
+Let S = Spec(R) be an affine Noetherian scheme. Let X →S be
+a proper morphism. Let L be an ample invertible sheaf on X. Let E ⊂X be an
+exceptional curve of the first kind. Then
+(1) there exists a contraction b : X →X′ of E,
+(2) X′ is proper over S, and
+(3) the invertible OX′-module L′ is ample with L′ as in Remark 16.6.
+Proof. Let n be the degree of L|E as in Lemma 16.7. Observe that n > 0 as
+L is ample on E (Varieties, Lemma 44.14 and Properties, Lemma 27.3).
+After
+replacing L by a power we may assume Hi(X, L⊗e) = 0 for all i > 0 and e > 0, see
+Cohomology of Schemes, Lemma 17.1. Finally, after replacing L by another power
+
+RESOLUTION OF SURFACES
+50
+we may assume there exist global sections t0, . . . , tn of L which define a closed
+immersion ψ : X →Pn
+S, see Morphisms, Lemma 40.4.
+Set M = L(nE). Then M|E ∼= OE. Since we have the short exact sequence
+0 →M(−E) →M →OE →0
+and since H1(X, M(−E)) is zero (by Lemma 16.7 and the fact that n > 0) we
+can pick a section sn+1 of M which generates M|E.
+Finally, denote s0, . . . , sn
+the sections of M we get from the sections t0, . . . , tn of L chosen above via L ⊂
+L(nE) = M. Combined the sections s0, . . . , sn, sn+1 generate M in every point of
+X and therefore define a morphism
+φ : X −→Pn+1
+S
+over S, see Constructions, Lemma 13.1.
+Below we will check the conditions of Lemma 16.4. Once this is done we see that
+the Stein factorization X →X′ →Pn+1
+S
+of φ is the desired contraction which
+proves (1). Moreover, the morphism X′ →Pn+1
+S
+is finite hence X′ is proper over
+S (Morphisms, Lemmas 45.11 and 42.4). This proves (2). Observe that X′ has
+an ample invertible sheaf. Namely the pullback M′ of OPn+1
+S
+(1) is ample by Mor-
+phisms, Lemma 38.7. Observe that M′ pulls back to M on X (by Constructions,
+Lemma 13.1). Finally, M = L(nE). Since in the arguments above we have replaced
+the original L by a positive power we conclude that the invertible OX′-module L′
+mentioned in (3) of the lemma is ample on X′ by Properties, Lemma 27.2.
+Easy observations: Pn+1
+S
+is Noetherian and φ is proper. Details omitted.
+Next, we observe that any point of U = X \E is mapped to the open subscheme W
+of Pn+1
+S
+where one of the first n + 1 homogeneous coordinates is nonzero. On the
+other hand, any point of E is mapped to a point where the first n+1 homogeneous
+coordinates are all zero, in particular into the complement of W. Moreover, it is
+clear that there is a factorization
+U = φ−1(W)
+φ|U
+−−→W
+pr
+−→Pn
+S
+of ψ|U where pr is the projection using the first n + 1 coordinates and ψ : X →Pn
+S
+is the embedding chosen above. It follows that φ|U : U →W is quasi-finite.
+Finally, we consider the map φ|E : E →Pn+1
+S
+. Observe that for any point x ∈E
+the image φ(x) has its first n + 1 coordinates equal to zero, i.e., the morphism φ|E
+factors through the closed subscheme P0
+S ∼= S. The morphism E →S = Spec(R)
+factors as E →Spec(H0(E, OE)) →Spec(R) by Schemes, Lemma 6.4. Since by
+assumption H0(E, OE) is a field we conclude that E maps to a point in S ⊂Pn+1
+S
+which finishes the proof.
+□
+Lemma 16.9.
+0C2N
+Let S be a Noetherian scheme. Let f : X →S be a morphism of
+finite type. Let E ⊂X be an exceptional curve of the first kind which is in a fibre
+of f.
+(1) If X is projective over S, then there exists a contraction X →X′ of E and
+X′ is projective over S.
+(2) If X is quasi-projective over S, then there exists a contraction X →X′ of
+E and X′ is quasi-projective over S.
+
+RESOLUTION OF SURFACES
+51
+Proof. Both cases follow from Lemma 16.8 using standard results on ample in-
+vertible modules and (quasi-)projective morphisms.
+Proof of (1).
+Projectivity of f means that f is proper and there exists an f-
+ample invertible module L, see Morphisms, Lemma 44.13 and Definition 41.1. Let
+U ⊂S be an affine open containing the image of E. By Lemma 16.8 there exists
+a contraction c : f −1(U) →V ′ of E and an ample invertible module N ′ on V ′
+whose pullback to f −1(U) is equal to L(nE)|f −1(U).
+Let v ∈V ′ be the closed
+point such that c is the blowing up of v. Then we can glue V ′ and X \ E along
+f −1(U) \ E = V ′ \ {v} to get a scheme X′ over S. The morphisms c and idX\E
+glue to a morphism b : X →X′ which is the contraction of E. The inverse image
+of U in X′ is proper over U. On the other hand, the restriction of X′ →S to
+the complement of the image of v in S is isomorphic to the restriction of X →S
+to that open. Hence X′ →S is proper (as being proper is local on the base by
+Morphisms, Lemma 42.3). Finally, N ′ and L|X\E restrict to isomorphic invertible
+modules over f −1(U)\E = V ′ \{v} and hence glue to an invertible module L′ over
+X′. The restriction of L′ to the inverse image of U in X′ is ample because this is
+true for N ′. For affine opens of S avoiding the image of v, we see that the same is
+true because it holds for L. Thus L′ is (X′ →S)-relatively ample by Morphisms,
+Lemma 38.4 and (1) is proved.
+Proof of (2). We can write X as an open subscheme of a scheme X projective over
+S by Morphisms, Lemma 44.12. By (1) there is a contraction b : X →X
+′ and X
+′ is
+projective over S. Then we let X′ ⊂X be the image of X →X
+′; this is an open as
+b is an isomorphism away from E. Then X →X′ is the desired contraction. Note
+that X′ is quasi-projective over S as it has an S-relatively ample invertible module
+by the construction in the proof of part (1).
+□
+Lemma 16.10.
+0C5N
+Let S be a Noetherian scheme. Let f : X →S be a separated
+morphism of finite type with X regular of dimension 2. Then X is quasi-projective
+over S.
+Proof. By Chow’s lemma (Cohomology of Schemes, Lemma 18.1) there exists a
+proper morphism π : X′ →X which is an isomorphism over a dense open U ⊂X
+such that X′ →S is H-quasi-projective. By Lemma 4.3 there exists a sequence of
+blowups in closed points
+Xn →. . . →X1 →X0 = X
+and an S-morphism Xn →X′ extending the rational map U →X′. Observe that
+Xn →X is projective by Divisors, Lemma 33.13 and Morphisms, Lemma 44.14.
+This implies that Xn →X′ is projective by Morphisms, Lemma 44.15. Hence Xn →
+S is quasi-projective by Morphisms, Lemma 41.3 (and the fact that a projective
+morphism is quasi-projective, see Morphisms, Lemma 44.10). By Lemma 16.9 (and
+uniqueness of contractions Lemma 16.2) we conclude that Xn−1, . . . , X0 = X are
+quasi-projective over S as desired.
+□
+Lemma 16.11.
+0C5P
+Let S be a Noetherian scheme.
+Let f : X →S be a proper
+morphism with X regular of dimension 2. Then X is projective over S.
+Proof. This follows from Lemma 16.10 and Morphisms, Lemma 44.13.
+□
+
+RESOLUTION OF SURFACES
+52
+17. Factorization birational maps
+0C5Q
+Proper birational morphisms between nonsingular surfaces are given by sequences
+of quadratic transforms.
+Lemma 17.1.
+0C5R
+Let f : X →Y be a proper birational morphism between integral
+Noetherian schemes regular of dimension 2. Then f is a sequence of blowups in
+closed points.
+Proof. Let V ⊂Y be the maximal open over which f is an isomorphism. Then
+V contains all codimension 1 points of V (Varieties, Lemma 17.3). Let y ∈Y be
+a closed point not contained in V . Then we want to show that f factors through
+the blowup b : Y ′ →Y of Y at y. Namely, if this is true, then at least one (and
+in fact exactly one) component of the fibre f −1(y) will map isomorphically onto
+the exceptional curve in Y ′ and the number of curves in fibres of X →Y ′ will
+be strictly less that the number of curves in fibres of X →Y , so we conclude by
+induction. Some details omitted.
+By Lemma 4.3 we know that there exists a sequence of blowing ups
+X′ = Xn →Xn−1 →. . . →X1 →X0 = X
+in closed points lying over the fibre f −1(y) and a morphism X′ →Y ′ such that
+X′
+f ′
+
+/ X
+f
+
+Y ′
+/ Y
+is commutative. We want to show that the morphism X′ →Y ′ factors through X
+and hence we can use induction on n to reduce to the case where X′ →X is the
+blowup of X in a closed point x ∈X mapping to y.
+Let E ⊂X′ be the exceptional fibre of the blowing up X′ →X. If E maps to
+a point in Y ′, then we obtain the desired factorization by Lemma 16.1. We will
+prove that if this is not the case we obtain a contradiction. Namely, if f ′(E) is not
+a point, then E′ = f ′(E) must be the exceptional curve in Y ′. Picture
+E
+/
+g
+
+X′
+f ′
+
+/ X
+f
+
+E′
+/ Y ′
+/ Y
+Arguing as before f ′ is an isomorphism in an open neighbourhood of the generic
+point of E′. Hence g : E →E′ is a finite birational morphism. Then the inverse of
+g (a rational map) is everywhere defined by Morphisms, Lemma 43.5 and g is an
+isomorphism. Consider the map
+g∗CE′/Y ′ −→CE/X′
+of Morphisms, Lemma 32.3. Since the source and target are invertible modules of
+degree 1 on E = E′ = P1
+κ and since the map is nonzero (as f ′ is an isomorphism in
+the generic point of E) we conclude it is an isomorphism. By Morphisms, Lemma
+33.18 we conclude that ΩX′/Y ′|E = 0. This means that f ′ is unramified at every
+point of E (Morphisms, Lemma 36.14). Hence f ′ is quasi-finite at every point of
+E (Morphisms, Lemma 36.10). Hence the maximal open V ′ ⊂Y ′ over which f ′ is
+
+RESOLUTION OF SURFACES
+53
+an isomorphism contains E′ by Varieties, Lemma 17.3. This in turn implies that
+the inverse image of y in X′ is E′. Hence the inverse image of y in X is x. Hence
+x ∈X is in the maximal open over which f is an isomorphism by Varieties, Lemma
+17.3. This is a contradiction as we assumed that y is not in this open.
+□
+Lemma 17.2.
+0C5S
+Let S be a Noetherian scheme. Let X and Y be proper integral
+schemes over S which are regular of dimension 2. Then X and Y are S-birational
+if and only if there exists a diagram of S-morphisms
+X = X0 ←X1 ←. . . ←Xn = Ym →. . . →Y1 →Y0 = Y
+where each morphism is a blowup in a closed point.
+Proof. Let U ⊂X be open and let f : U →Y be the given S-rational map
+(which is invertible as an S-rational map).
+By Lemma 4.3 we can factor f as
+Xn →. . . →X1 →X0 = X and fn : Xn →Y . Since Xn is proper over S and Y
+separated over S the morphism fn is proper. Clearly fn is birational. Hence fn is a
+composition of contractions by Lemma 17.1. We omit the proof of the converse.
+□
+18. Other chapters
+Preliminaries
+(1) Introduction
+(2) Conventions
+(3) Set Theory
+(4) Categories
+(5) Topology
+(6) Sheaves on Spaces
+(7) Sites and Sheaves
+(8) Stacks
+(9) Fields
+(10) Commutative Algebra
+(11) Brauer Groups
+(12) Homological Algebra
+(13) Derived Categories
+(14) Simplicial Methods
+(15) More on Algebra
+(16) Smoothing Ring Maps
+(17) Sheaves of Modules
+(18) Modules on Sites
+(19) Injectives
+(20) Cohomology of Sheaves
+(21) Cohomology on Sites
+(22) Differential Graded Algebra
+(23) Divided Power Algebra
+(24) Differential Graded Sheaves
+(25) Hypercoverings
+Schemes
+(26) Schemes
+(27) Constructions of Schemes
+(28) Properties of Schemes
+(29) Morphisms of Schemes
+(30) Cohomology of Schemes
+(31) Divisors
+(32) Limits of Schemes
+(33) Varieties
+(34) Topologies on Schemes
+(35) Descent
+(36) Derived Categories of Schemes
+(37) More on Morphisms
+(38) More on Flatness
+(39) Groupoid Schemes
+(40) More on Groupoid Schemes
+(41) Étale Morphisms of Schemes
+Topics in Scheme Theory
+(42) Chow Homology
+(43) Intersection Theory
+(44) Picard Schemes of Curves
+(45) Weil Cohomology Theories
+(46) Adequate Modules
+(47) Dualizing Complexes
+(48) Duality for Schemes
+(49) Discriminants and Differents
+(50) de Rham Cohomology
+(51) Local Cohomology
+(52) Algebraic and Formal Geometry
+(53) Algebraic Curves
+(54) Resolution of Surfaces
+(55) Semistable Reduction
+(56) Functors and Morphisms
+
+RESOLUTION OF SURFACES
+54
+(57) Derived Categories of Varieties
+(58) Fundamental Groups of Schemes
+(59) Étale Cohomology
+(60) Crystalline Cohomology
+(61) Pro-étale Cohomology
+(62) Relative Cycles
+(63) More Étale Cohomology
+(64) The Trace Formula
+Algebraic Spaces
+(65) Algebraic Spaces
+(66) Properties of Algebraic Spaces
+(67) Morphisms of Algebraic Spaces
+(68) Decent Algebraic Spaces
+(69) Cohomology of Algebraic Spaces
+(70) Limits of Algebraic Spaces
+(71) Divisors on Algebraic Spaces
+(72) Algebraic Spaces over Fields
+(73) Topologies on Algebraic Spaces
+(74) Descent and Algebraic Spaces
+(75) Derived Categories of Spaces
+(76) More on Morphisms of Spaces
+(77) Flatness on Algebraic Spaces
+(78) Groupoids in Algebraic Spaces
+(79) More on Groupoids in Spaces
+(80) Bootstrap
+(81) Pushouts of Algebraic Spaces
+Topics in Geometry
+(82) Chow Groups of Spaces
+(83) Quotients of Groupoids
+(84) More on Cohomology of Spaces
+(85) Simplicial Spaces
+(86) Duality for Spaces
+(87) Formal Algebraic Spaces
+(88) Algebraization of Formal Spaces
+(89) Resolution of Surfaces Revisited
+Deformation Theory
+(90) Formal Deformation Theory
+(91) Deformation Theory
+(92) The Cotangent Complex
+(93) Deformation Problems
+Algebraic Stacks
+(94) Algebraic Stacks
+(95) Examples of Stacks
+(96) Sheaves on Algebraic Stacks
+(97) Criteria for Representability
+(98) Artin’s Axioms
+(99) Quot and Hilbert Spaces
+(100) Properties of Algebraic Stacks
+(101) Morphisms of Algebraic Stacks
+(102) Limits of Algebraic Stacks
+(103) Cohomology of Algebraic Stacks
+(104) Derived Categories of Stacks
+(105) Introducing Algebraic Stacks
+(106) More on Morphisms of Stacks
+(107) The Geometry of Stacks
+Topics in Moduli Theory
+(108) Moduli Stacks
+(109) Moduli of Curves
+Miscellany
+(110) Examples
+(111) Exercises
+(112) Guide to Literature
+(113) Desirables
+(114) Coding Style
+(115) Obsolete
+(116) GNU Free Documentation Li-
+cense
+(117) Auto Generated Index
+References
+[Art86]
+Michael Artin, Lipman’s proof of resolution of singularities for surfaces, Arithmetic ge-
+ometry (Storrs, Conn., 1984), Springer, New York, 1986, pp. 267–287.
+[Lip69]
+Joseph Lipman, Rational singularities, with applications to algebraic surfaces and unique
+factorization, Inst. Hautes Études Sci. Publ. Math. (1969), no. 36, 195–279.
+[Lip78]
+, Desingularization of two-dimensional schemes, Ann. Math. (2) 107 (1978),
+no. 1, 151–207.
+[Mat70] Arthur Mattuck, Complete ideals and monoidal transforms, Proc. Amer. Math. Soc. 26
+(1970), 555–560.
+[Nis12]
+Jun-ichi Nishimura, A few examples of local rings, I, Kyoto J. Math. 52 (2012), no. 1,
+51–87.

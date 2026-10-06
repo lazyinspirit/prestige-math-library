@@ -12,6 +12,18 @@ deps:
   - thm-tychonoff
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-30.md"
+      - "research/frontier-38-owner-30-alpha-batch-30-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-30-post.json"
+    reviewed_raw_sha256: "e731fc4111ee5a640d2766b3ee055e2ddc7884c818a4dc42e4f04667705ded3f"
+    content_sha256: "d54445e3671d084aa2722a7f706d50f33664bb60bad16722b5f57e6acdadbaf2"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -1,4 +1,16 @@
 ---
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Historical full Step 5 item mathematical read and adjudication where required, including the used supplier interfaces; current mathematical text matches the recorded postreview snapshot."
+    delegated_by: owner
+    evidence:
+      - research/frontier-38-owner-30-reader-27.md
+      - research/frontier-38-owner-30-dispatch/reader-reader-27.result.json
+      - research/frontier-38-owner-30-step5-hash-27-post-5a.json
+      - research/frontier-38-owner-30-alpha-batch-27-5a-decisions.json
 id: thm-embedded-snc-resolution-of-reduced-curve-on-regular-surface
 kind: theorem
 title: Embedded strict-normal-crossings resolution of a reduced curve on a regular surface

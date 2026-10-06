@@ -30,6 +30,17 @@ sources:
       url: "https://math.mit.edu/~higgs/18.725_2015.pdf"
       locator: "Lecture 9, Proposition 13 and its proof, PDF pp. 24-25"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post-5a.json"
+    content_sha256: "d7161221743e2e5cc45e507fec11b5b3a2d09c1362af4c38744af66c8bb9e502"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -17,7 +17,7 @@ sources:
   references:
     - title: "Beliakova–Putyra–Wehrli, Quantum Link Homology via Trace Functor I, §§3.8.4–3.8.6, printed pp.37–39"
       url: "https://arxiv.org/pdf/1605.03523"
-      locator: "§3.8.6, printed p.38: $\\mathrm{CH}_\\bullet(A,C_\\bullet):=\\mathrm{coInv}(C_\\bullet\\otimes_A R_\\bullet(A))$ for a complex of bimodules, and equation (3.44)."
+      locator: "§3.8.6, printed p.39: $\\mathrm{CH}_\\bullet(A,C_\\bullet):=\\mathrm{coInv}(C_\\bullet\\otimes_A R_\\bullet(A))$ for a complex of bimodules, and equation (3.44)."
     - title: "Charles A. Weibel, An Introduction to Homological Algebra, Chapter 9, §9.1, printed pp.300–304"
       url: "https://math.mit.edu/~hrm/palestine/weibel/09-hochschild_and_cyclic_homology.pdf"
       locator: "§9.1.1–9.1.5: Hochschild chains $C_n(A,M)=M\\otimes A^{\\otimes n}$ and the alternating boundary."
@@ -115,7 +115,7 @@ $H^i(HH_j(A,F))$ occur on the second page of
 This definition is the complex-level Hochschild construction of the source: for
 a complex of bimodules the Hochschild complex is formed degreewise and then
 totalized, and the hyperhomology is the homology of that total complex
-(BPW §3.8.6, printed p.38; Khovanov, printed pp.6–7). No projective resolution
+(BPW §3.8.6, printed p.39; Khovanov, printed pp.6–7). No projective resolution
 is fixed here; the identification of $T^\bullet(A,F)$ with the total complex of
 the reindexed two-sided bar resolution tensored over $A^e$ with $F$, and the
 consequent resolution independence of $\mathrm{HH}^{\mathrm{hyper},n}(A,F)$, is

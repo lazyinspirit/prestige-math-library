@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  verified: {"model":"gpt-6.1-sol","verdict":"pass","date":"2026-10-03","scope":"Recovered historical Step5 independent whole-item claim/body/proof read for def-dualizing-complex-on-projective-cm-scheme and actual needed supplier interfaces/source passages from frontier-38-owner-30 reader-28; unchanged reader mathematics. No fresh review or claim that a stamp was issued historically; external recursive proof closure/all bibliography excluded.","delegated_by":"owner via tools/autopilot frontier-38-owner-30 Step5 reader dispatch","content_sha256":"b35ee6fd0b6d170051ca6d3f03f049c3dbf42230d0a77034fa86c5afb600e3d0","evidence":["research/frontier-38-owner-30-reader-28.md","research/frontier-38-owner-30-reader-findings-28.json","research/frontier-38-owner-30-dispatch/reader-reader-28.result.json","research/frontier-38-owner-30-step5-hash-28-pre.json"],"historical_binding":{"commit":"d90f26208","file":"items/def-dualizing-complex-on-projective-cm-scheme.md","historical_raw_sha256":"46868bbb7166b33c7d1ebaa85031e98ec75644d2e850235c021cb5e1dca0ed05","transformations":["remove only judge stamp using stripJudgeStamp","publication changed status draft to published; verification metadata excluded from content hash"],"source_snapshot":"sources and source locators included in the exact bound mathematical carrier","read_completed_at":"2026-10-03T08:33:11.226Z"}}
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -88,4 +88,4 @@ $[B_{i+1}B_iB_{i+1}]=[B_{i,i+1,i}]+[B_{i+1}]$.
 
 
 
-6.1 Conclusion: a graded surjection that is a comparison of finite-dimensional $k$-vector spaces of equal dimension in each degree is an isomorphism, so $\operatorname{im}(1-e)\cong R\otimes_{R^{W_{i,i+1}}}R(3)=B_{i,i+1,i}$ with a degree-zero identification; combined with step 4.1 this gives $B_iB_{i+1}B_i\cong B_{i,i+1,i}\oplus B_i$. The second decomposition is the same argument with $s$ and $t$ interchanged, the identity $\partial_t^\beta(\alpha_s)=-1$ being symmetric, so $B_{i+1}B_iB_{i+1}\cong B_{i,i+1,i}\oplus B_{i+1}$. ∎ [F4, step 4.1, step 5.1]
+6.1 Conclusion: a graded surjection that is a comparison of finite-dimensional $k$-vector spaces of equal dimension in each degree is an isomorphism, so $\operatorname{im}(1-e)\cong R\otimes_{R^{W_{i,i+1}}}R(3)=B_{i,i+1,i}$ with a degree-zero identification; combined with step 4.1 this gives $B_iB_{i+1}B_i\cong B_{i,i+1,i}\oplus B_i$. The second decomposition is the same argument with $s$ and $t$ interchanged, the identity $\partial_t^\beta(\alpha_s)=-1$ being symmetric, so $B_{i+1}B_iB_{i+1}\cong B_{i,i+1,i}\oplus B_{i+1}$. [F4, step 4.1, step 5.1] ∎

@@ -21,6 +21,17 @@ sources:
       url: "https://arxiv.org/pdf/math/0204057"
       locator: "Section 2.1, printed p. 3: the covering character; the explicit labelled arcs and signs are in Bigelow 2001, section 2.1, pp. 475–476"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-16.md"
+      - "research/frontier-38-owner-30-alpha-batch-16-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-16-post-5a.json"
+    content_sha256: "bef927fc96080e3d0348b35b82d7f50828a2a980d0f17b676d6cd56e96b78c48"
   precheck: n/a
 ---
 ## Definition

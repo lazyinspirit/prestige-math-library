@@ -8,6 +8,18 @@ pipeline_run: frontier-38-owner-30
 deps: ["def-pontryagin-thom-collapse-of-an-embedded-submanifold", "lem-continuity-is-local-and-pastes"]
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-14.md"
+      - "research/frontier-38-owner-30-alpha-batch-14-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-14-post.json"
+    reviewed_raw_sha256: "e955310047da0ec57385cde04953903958906695d321f1939b3036f3e417bd09"
+    content_sha256: "47b41ceac15b13e23ae1e77d4c63638e0e09dd4e823baf8685ebff3e17d31794"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

@@ -19,7 +19,18 @@ const BODY_MARKER = /\n## (Proof|Refutation|Verification|Counterexample)\n/;
 /** Extract the checkable text: facts declarations + steps. New format = the
  *  "## Facts & Assumptions" section onward with markdown headings stripped;
  *  old format = the body after the proof-section heading. */
+// Bibliography and editorial notes are outside the phase proof. Keep every
+// declaration and proof step, and trim metadata only after the last proof heading.
+function phaseText(md: string): string {
+  const headings = [...md.matchAll(/^## (Proof|Refutation|Verification|Counterexample)\s*$/gm)];
+  const last = headings.at(-1)?.index;
+  if (last === undefined) return md;
+  const tail = md.slice(last);
+  const end = tail.search(/^## (Remarks|Sources|Source notes|References|Bibliography)\s*$/m);
+  return end < 0 ? md : md.slice(0, last + end);
+}
 function checkableText(md: string): string | null {
+  md = phaseText(md);
   const fa = md.split(/\n## Facts & Assumptions\n/);
   if (fa.length >= 2) return fa[fa.length - 1].replace(/^## .*$/gm, '').trim();
   const m = md.split(BODY_MARKER);

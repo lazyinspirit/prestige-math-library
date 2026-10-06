@@ -16,7 +16,7 @@ sources:
     - title: "Vakil §§22.2.18 and 22.3.9, pp.582–583, 590"
       url: "https://math.stanford.edu/~vakil/216blog/FOAGaug2922public.pdf"
 verification:
-  audited: 2026-09-27
+  precheck: pass
 ---
 
 ## Statement
@@ -63,6 +63,6 @@ is a finite separable extension of $k$.
 
 3.1 A derivation inverse to $\mathrm{d}$. Define $D:=\operatorname{id}_{\overline R}-s\circ\pi\colon\overline R\to\overline R$; its image lies in $\ker\pi=\mathfrak m/\mathfrak m^{2}$, and $D(x)=x$ for $x\in\mathfrak m/\mathfrak m^{2}$ because $\pi(x)=0$. For $u,v\in\overline R$ write $u=s(\pi(u))+D(u)$ and $v=s(\pi(v))+D(v)$; since $\pi$ is a ring map, $D(u)$ and $D(v)$ have square zero and their product with any element of $\mathfrak m/\mathfrak m^{2}$ vanishes, so expanding gives $uv=s(\pi(uv))+u\,D(v)+v\,D(u)$ and hence $D(uv)=uD(v)+vD(u)$. Thus $D$ is a $k$-derivation of $\overline R$ into the $\overline R$-module $\mathfrak m/\mathfrak m^{2}$, and composing with $R\to\overline R$ gives a $k$-derivation $R\to\mathfrak m/\mathfrak m^{2}$ whose value at $x\in\mathfrak m$ is the class of $x$ modulo $\mathfrak m^{2}$. [step 2.2, algebra]
 
-4.1 Conclusion. By [F1] the derivation of step 3.1 corresponds to an $R$-linear map $\Omega_{R/k}\to\mathfrak m/\mathfrak m^{2}$, which factors through $\Omega_{R/k}\otimes_R\kappa\to\mathfrak m/\mathfrak m^{2}$ because the target is annihilated by $\mathfrak m$, giving a $\kappa$-linear $\theta$ with $\theta(1\otimes\mathrm{d}x)=x\bmod\mathfrak m^{2}$ for $x\in R$. The first map of step 2.1 sends the class of $x\in\mathfrak m$ to $1\otimes\mathrm{d}x$, so $\theta$ is a left inverse of it and that map is injective; with step 2.1, the displayed sequence is exact. [step 2.1, step 3.1, F1]
+4.1 Conclusion. By [F1] the derivation of step 3.1 corresponds to an $R$-linear map $\Omega_{R/k}\to\mathfrak m/\mathfrak m^{2}$, which factors through $\Omega_{R/k}\otimes_R\kappa\to\mathfrak m/\mathfrak m^{2}$ because the target is annihilated by $\mathfrak m$, giving a $\kappa$-linear $\theta$ with $\theta(1\otimes\mathrm{d}x)=x\bmod\mathfrak m^{2}$ for $x\in\mathfrak m$. The first map of step 2.1 sends the class of $x\in\mathfrak m$ to $1\otimes\mathrm{d}x$, so $\theta$ is a left inverse of it and that map is injective; with step 2.1, the displayed sequence is exact. [step 2.1, step 3.1, F1]
 
 5.1 Finite separable residue concluded. By step 1.3 the hypothesis of the final clause gives $\Omega_{\kappa/k}=0$, so the exact sequence of step 4.1 reads $0\to\mathfrak m/\mathfrak m^{2}\to\Omega_{R/k}\otimes_R\kappa\to0$, that is, $\mathfrak m/\mathfrak m^{2}\cong\Omega_{R/k}\otimes_R\kappa$ via the first map. [step 1.3, step 4.1] ∎

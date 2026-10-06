@@ -21,6 +21,12 @@ sources:
     - title: "Garsia, Young Seminormal Representation, Murphy Elements and Content Evaluations, UCSD lecture notes (2003), section 2, printed pp. 12-18"
       url: "https://www.math.ucsd.edu/~garsia/somepapers/Youngseminormal.pdf"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "historical complete Step5 reader; item thm-gelfand-tsetlin-algebra-is-the-diagonal-algebra-in-the-young-basis; evidence research/frontier-38-owner-30-reader-19.md, research/frontier-38-owner-30-reader-findings-19.json. Original reports retain their scope and source limitations; no recursive audit of all published prerequisites or complete bibliography is claimed. Restored from completed 2026-10-03 evidence; no new audit performed."
+    delegated_by: "tools/autopilot frontier-38-owner-30 historical dispatched reader/repair lane"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

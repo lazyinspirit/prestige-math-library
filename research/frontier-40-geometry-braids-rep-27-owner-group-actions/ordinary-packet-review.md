@@ -1,0 +1,27 @@
+# Batch23 ordinary cotangent packet: owner review
+
+## Disposition
+
+`lem-cotangent-complex-resolution-independence` has a complete local ordinary-ring proof route. Eight authorized helper items precede it; inventory is 38 A and 3 B, within the 100 A cap. Full commissioned comparison, Tor-independent base change and composable-chain localization clauses remain. `def-derived-scheme-and-cotangent-complex` retains its full statement and corrected right-adjoint truncation, and remains held on the exact HAGII foundations below.
+
+## Proof verification
+
+The packet explicitly supplies boundary lifting, pullback/product stability under AC, and contraction of trivial-fibration fibres. Unique nondegenerate ancestors and boundary attachment justify lifting against every simplicial monomorphism. The free-forgetful standard resolution has a SET extra degeneracy; the proof does not pretend this is an algebra-linear contraction. Normalization and the prism map give module homology invariance. The boundary-filling criterion uses the acyclic normalized kernel, including degree zero, and proves actual trivial-Kan lifting.
+
+The bounded polynomial factorization category is small without a universe axiom. A common infinite cardinal contains every specified resolution and its standard resolution; enlargement is justified by the proved category comparison. Mapping simplicial sets into admissible polynomial resolutions are products of augmentation fibres, hence contractible under AC.
+
+The module-diagram category is proved abelian objectwise, with projective representables and canonical all-elements epimorphisms. These epimorphisms instantiate the published bounded-above projective-replacement/model/left-derived-functor suppliers in this actual category. The bar contraction and finite-diagonal double-complex argument compute derived colimit. Evaluation on a contractible cosimplicial object has a canonical projective-resolution roof; contractions prove quasi-isomorphy and are not choices of a canonical direct chain comparison. Scalar change uses the SAME representable-sum projective model, whose evaluations and colimit terms are free. The category comparison is identified with the identity on shared cosimplicial evaluation via the bar/augmentation maps.
+
+For cotangent base change, polynomial differential base change identifies the restricted diagram after coefficient extension. The standard free A-module complex computes derived tensor; the canonical tensor quasi-isomorphism yields termwise surjectivity and acyclic augmentation after coefficient change, hence actual trivial-Kan admissibility by the supplied criterion. The composite coefficient/category map is the standard functorial cotangent comparison. The published Tor identification supplies precisely the stated ordinary-pushout condition; flatness and the same-target localization follow. Explicit commutative unital ring wording on the standard/cotangent/H0 interfaces states the existing AG and Stacks convention.
+
+Exact full-source interfaces are Stacks Cotangent92.4-92.6/92.8, Simplicial14.18/21/23/27/30/31/34, and Cohomology on Sites39.1-39.8. The local proofs expand their construction arguments rather than importing a simplicial model structure.
+
+## Consumers and remaining hold
+
+Within batch23, standard resolution supplies the cotangent definition, H0/polynomial computation and ordinary comparison; the ordinary comparison directly supplies the derived definition. Those claims were checked supplier-first. The H0 calculation now explicitly presents the standard differential cokernel by derivation relations; the polynomial case uses the constant polynomial resolution and the proved comparison under inherited AC. The derived definition and the repaired H0/polynomial computation are the two direct batch23 consumers of the comparison; neither has additional batch23 consumers. The complete live use map scans all 27 selected manifests (801 items) plus library/ and items/; it finds no outside-batch consumer of the four edited ring interfaces. `ordinary-packet-consumer-map.json` records that scan. The simplicial-ring definition statement itself is unchanged. No other batches were edited or certified in this pass.
+
+HAGII1.2.1.2 assumes an instantiated simplicial algebra/module model context, its three Quillen adjunctions and equivalence of the middle derived adjunction. HAGII2.2.1 imports Quillen/monoidal transfer foundations not present locally. Genuine derived derivation representation, homotopy base change and quasi-coherent module gluing further require HAGII1.3.7.2, strictification and descent1.3.2.2(3). Retrieved HAGII gives conditional constructions; the present packet proves neither their imported premises nor homotopical module descent. Ordinary module diagrams and scheme/groupoid descent do not supply them. The remaining 62 A slots do not certify a recursively complete proof of those foundations. Keep this precise owner hold, without deleting any derived clause or adding unproved helpers.
+
+## Evidence and integration
+
+`ordinary-packet-proofs.md` contains every helper statement and full argument. `ordinary-packet-source-reading.json`, `ordinary-packet-inventory.json`, the updated `derived-blocker-map.json` and final scoped checks bind the evidence. This is stable Step1 authoring-draft readiness, not an authored-item/native proof-audit certificate. Root owns shared ledger and engine integration; no publication or commit was performed.

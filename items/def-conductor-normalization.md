@@ -12,6 +12,13 @@ deps: [def-normalization-affine-variety, thm-normalization-glues-variety, cor-af
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: completed-cumulative-mathematical-review
+    date: 2026-10-03
+    scope: "Cumulative verification supported by existing completed mathematical readings. Original complete Step 5a reader evidence research/frontier-38-owner-30-reader-1.md, followed by completed Step 7 repair/adjudication reasoning research/frontier-38-owner-30-step7-v2/step7-v2-initial-r1-u1.json, exact post_sha256 de719f1801b8f5ce7b7043c61ff7857c819e8654da4534f57e4f53f8a6ab2a78 with publication status normalized back to draft. The later reasoning covers the substantive changes; its local repair/self-review qualifications remain applicable. This reconciliation adds no new mathematical review, independent post-repair audit, source reading or judge acceptance."
+    delegated_by: "owner via tools/autopilot frontier-38-owner-30 step7-v2-initial-r1-u1 dispatch"
 sources:
   references:
     - title: "J. S. Milne, Algebraic Geometry (2025 version), Ch. 8 §b: the conductor of the normalization"

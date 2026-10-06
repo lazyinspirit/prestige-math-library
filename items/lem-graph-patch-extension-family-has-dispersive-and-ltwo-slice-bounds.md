@@ -25,6 +25,17 @@ deps:
 - def-countable-choice
 proof_strategy: direct
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    delegated_by: "owner via frontier-38-owner-30 build dispatch"
+    scope: "Historical completed Step 5 full authored item reading and mathematical acceptance; exact historical raw bytes differ from current only by publication status and verification metadata. Direct prerequisite interfaces checked; no recursive audit of supplier proofs."
+    evidence:
+      - "research/frontier-38-owner-30-reader-6.md"
+      - "research/frontier-38-owner-30-alpha-batch-6-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-6-post-5a.json"
+    content_sha256: "6795a9b324caf1b9e1a19b52fa1c83eac768ce26cc7fd2440de2d4b9e7c3e9a9"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"

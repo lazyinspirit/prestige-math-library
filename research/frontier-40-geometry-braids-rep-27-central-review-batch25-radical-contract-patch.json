@@ -1,0 +1,305 @@
+{
+  "version": 1,
+  "run": "frontier-40-geometry-braids-rep-27",
+  "target": "lem-normal-local-surface-radical-multiple-of-a-principal-divisor",
+  "statement_unchanged": true,
+  "current_scope": "ff10527e583fb7e9bd5771cde562a87645fda057678d30cd437f7fa43c309e9c",
+  "item_hash": "8dd602accea7cf227ed80f972b42bb74d74e450ddd42770dac8a6adc3f35cd86",
+  "dependencies": [
+    "cor-regular-quotient-cohen-macaulay-equivalence",
+    "def-axiom-of-choice",
+    "def-dependent-choice",
+    "lem-finite-prime-avoidance",
+    "lem-normal-domain-implies-s-two",
+    "lem-r-one-s-two-intersection-of-height-one-localisations",
+    "lem-ring-detected-at-associated-prime-localizations",
+    "thm-finiteness-of-associated-primes",
+    "thm-height-one-localisation-of-normal-noetherian-domain-is-dvr",
+    "thm-minimal-support-primes-are-associated",
+    "thm-krull-principal-ideal-theorem",
+    "thm-prime-filtration-of-a-finite-module"
+  ],
+  "batch25_contract_base_sha256": "b902974580f4dd115b2f7720eba32a9bd81bbf47f58d515ebd43fee36a627e9a",
+  "run_contract_base_sha256": "ffcf64abf030838100b4155104f94e900548ae3f7f2374f99882e9fe64e65dbc",
+  "replacement_contract": {
+    "citations": [
+      {
+        "fact": "F1",
+        "source": "def-axiom-of-choice",
+        "source_section": "Definition",
+        "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+        "uses": [
+          "8.1"
+        ]
+      },
+      {
+        "fact": "F2",
+        "source": "def-dependent-choice",
+        "source_section": "Definition",
+        "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. That is precisely the situation $\\mathrm{AC}_\\omega$ does not\ncover, and it is why a construction \"pick $x_{n+1}$ depending on $x_n$, for every\n$n$ at once\" is not licensed by countable choice.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. The reverse derivation is standard and is not needed anywhere in\nthis library, so it is not carried out; every use below prescribes $x_0$.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+        "uses": [
+          "8.1"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "thm-finiteness-of-associated-primes",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice.\n\nLet $R$ be a Noetherian commutative ring and let $M$ be a finitely generated\nleft $R$-module. Then $\\operatorname{Ass}_R(M)$ is a finite set.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F4",
+        "source": "thm-minimal-support-primes-are-associated",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice. Let $R$ be a Noetherian commutative ring and let $M$ be a finitely generated\nleft $R$-module. If $\\mathfrak p$ is minimal in $\\operatorname{Supp}_R(M)$, then\n$$ \\mathfrak p \\in \\operatorname{Ass}_R(M). $$",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F5",
+        "source": "thm-prime-filtration-of-a-finite-module",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice. Let $R$ be a Noetherian commutative ring and let $M$ be a finitely generated\nleft $R$-module. Then there exist submodules\n$$ 0=M_0\\subset M_1\\subset\\cdots\\subset M_n=M $$\nsuch that each quotient $M_i/M_{i-1}$ is isomorphic to $R/\\mathfrak p_i$ for\nsome prime ideal $\\mathfrak p_i$ of $R$. When $M=0$, this is the empty\nfiltration with $n=0$.",
+        "uses": [
+          "2.1"
+        ]
+      },
+      {
+        "fact": "F6",
+        "source": "cor-regular-quotient-cohen-macaulay-equivalence",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]).\n\nUnder the hypotheses of\n`lem-regular-quotient-preserves-depth-dimension-gap`, $M$ is Cohen--Macaulay\nif and only if $M/xM$ is Cohen--Macaulay.",
+        "uses": [
+          "2.1",
+          "6.1"
+        ]
+      },
+      {
+        "fact": "F7",
+        "source": "lem-finite-prime-avoidance",
+        "source_section": "Statement",
+        "quote": "Let $R$ be a commutative ring, let $I \\trianglelefteq R$ be an ideal, and let\n$\\mathfrak p_1,\\dots,\\mathfrak p_n$ be prime ideals with $n \\ge 1$. If\n$$ I\\subseteq \\mathfrak p_1\\cup\\cdots\\cup \\mathfrak p_n, $$\nthen $I\\subseteq \\mathfrak p_i$ for some $i$.",
+        "uses": [
+          "1.1",
+          "4.1",
+          "5.1"
+        ]
+      },
+      {
+        "fact": "F8",
+        "source": "thm-height-one-localisation-of-normal-noetherian-domain-is-dvr",
+        "source_section": "Statement",
+        "quote": "Let $R$ be a Noetherian integrally closed domain, and let $\\mathfrak p$ be a\nprime ideal of height $1$. Then the localisation $R_{\\mathfrak p}$ is a\ndiscrete valuation ring.",
+        "uses": [
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F9",
+        "source": "lem-ring-detected-at-associated-prime-localizations",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice. Let $R$ be a Noetherian commutative ring.\nThe natural map\n$$R\\longrightarrow\\prod_{\\mathfrak q\\in\\operatorname{Ass}(R)}R_{\\mathfrak q}$$\nis injective. For each $\\mathfrak q\\in\\operatorname{Ass}(R)$,\nthe local ring $R_{\\mathfrak q}$ has a nonzero element\nannihilated by its maximal ideal $\\mathfrak qR_{\\mathfrak q}$;\nin particular it has depth zero.",
+        "uses": [
+          "6.1"
+        ]
+      },
+      {
+        "fact": "F10",
+        "source": "lem-r-one-s-two-intersection-of-height-one-localisations",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice.\n\nIf $R$ is a commutative Noetherian domain satisfying $(S_2)$, then inside its fraction field $K$ one has $R=\\bigcap_{\\operatorname{ht}\\mathfrak p=1}R_{\\mathfrak p}$. For a field the empty intersection is interpreted as $K=R$.",
+        "uses": [
+          "7.1"
+        ]
+      },
+      {
+        "fact": "F11",
+        "source": "lem-normal-domain-implies-s-two",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Every commutative Noetherian integrally closed domain satisfies $(S_2)$.",
+        "uses": [
+          "2.1",
+          "6.1"
+        ]
+      },
+      {
+        "fact": "F12",
+        "source": "thm-krull-principal-ideal-theorem",
+        "source_section": "Statement",
+        "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $R$ be a Noetherian commutative ring, let $x\\in R$, and let $\\mathfrak p$ be a prime ideal minimal over $(x)$. Then $\\operatorname{ht}(\\mathfrak p)\\le1$.",
+        "uses": [
+          "1.1",
+          "3.1"
+        ]
+      },
+      {
+        "fact": "F6",
+        "source": "def-axiom-of-choice",
+        "source_section": "Definition",
+        "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+        "uses": [
+          "2.1",
+          "6.1"
+        ]
+      },
+      {
+        "fact": "F11",
+        "source": "def-axiom-of-choice",
+        "source_section": "Definition",
+        "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+        "uses": [
+          "2.1",
+          "6.1"
+        ]
+      }
+    ],
+    "derivations": [
+      {
+        "id": "step-1-1",
+        "step": "1.1",
+        "claim": "1.1 The minimal primes of $(a)$ are minimal in $\\operatorname{Supp}(A/aA)$, hence associated by [F4] and finite by [F3]. By [F12] each has height at most one; since $A$ is a domain and $a\\ne0$, each has height exactly one. Any height-one prime containing $a$ is one of these minimal primes, so list them as $\\mathfrak p_1,\\dots,\\mathfrak p_r$. Choose nonzero $u_i\\in\\mathfrak p_i$ and put $f=\\prod_i u_i\\ne0$, so $f\\in\\bigcap_i\\mathfrak p_i\\subseteq\\mathfrak m$. The minimal primes of $(f)$ are finite by [F3, F4] and have height one by [F12]. Since $\\mathfrak m$ is not contained in any of them, finite prime avoidance [F7] gives $g\\in\\mathfrak m$ outside their union. If a prime contains $(f,g)$, it contains a minimal prime of $(f)$ and strictly contains it, so in the two-dimensional local ring it must be $\\mathfrak m$. Thus $(f,g)$ is $\\mathfrak m$-primary, and $\\mathfrak m^{u}\\subseteq(f,g)$ for some $u\\ge1$. [F3, F4, F7, F12, given]",
+        "inputs": [
+          "F3",
+          "F4",
+          "F7",
+          "F12",
+          "given"
+        ]
+      },
+      {
+        "id": "step-1-2",
+        "step": "1.2",
+        "claim": "1.2 For every $h\\in\\mathfrak m^{u+1}$ the ideal $(f+h,g)$ equals $(f,g)$: writing $h=\\alpha f+\\beta g$ with $\\alpha,\\beta\\in\\mathfrak m$ gives $f+h=(1+\\alpha)f+\\beta g$, and $1+\\alpha$ is a unit, so the two ideals coincide. Define the finite positive integer",
+        "inputs": [
+          "step 1.1"
+        ]
+      },
+      {
+        "id": "step-2-1",
+        "step": "2.1",
+        "claim": "2.1 For each $h\\in\\mathfrak m^{u+1}$ put $Q_h=A/(f+h)$. By step 1.2, $(f+h,g)$ is $\\mathfrak m$-primary, so $f+h$ is nonzero; normality gives $A$ the $S_2$ property and hence Cohen--Macaulayness by [F11]. The element $f+h$ is regular in the domain $A$, so [F6] shows that $Q_h$ is a one-dimensional Cohen--Macaulay local ring. Its element $g$ is a parameter and therefore regular. Take a prime filtration of $Q_h$ itself, with factors $A/\\mathfrak P_i$. For each factor put",
+        "inputs": [
+          "F5",
+          "F6",
+          "F11",
+          "step 1.2"
+        ]
+      },
+      {
+        "id": "step-3-1",
+        "step": "3.1",
+        "claim": "3.1 The perturbation set is nonempty: choose nonzero elements from the finitely many height-one primes $\\mathfrak p_i$, multiply them, and then multiply by a nonzero element of $\\mathfrak m^{u+1}$. Choose $h\\in\\mathfrak m^{u+1}\\cap\\mathfrak p_1\\cap\\dots\\cap\\mathfrak p_r$ for which the number $s$ of minimal primes of $Q_h$ is maximal; this is possible because the set of possible counts is a nonempty finite set of integers bounded by $\\ell$. Replace $f$ by $f'=f+h$, and let $\\mathfrak q_1,\\dots,\\mathfrak q_s$ be the height-one primes of $A/f'A$. Every original $\\mathfrak p_i$ is one of these: $f'\\in\\mathfrak p_i$, so a minimal prime of $f'A$ lies inside $\\mathfrak p_i$, and both have height one. [F12, step 1.2, step 2.1]",
+        "inputs": [
+          "F12",
+          "step 1.2",
+          "step 2.1"
+        ]
+      },
+      {
+        "id": "step-4-1",
+        "step": "4.1",
+        "claim": "4.1 For each $j$ construct $a_j\\in A$ with $v_{\\mathfrak q_j}(a_j)=1$ and $a_j\\notin\\mathfrak q_i$ for $i\\ne j$: the local ring $A_{\\mathfrak q_j}$ is a discrete valuation ring, so choose $b_j\\in\\mathfrak q_j$ of valuation one, choose $c_j\\in\\mathfrak q_j$ outside all other $\\mathfrak q_i$ by finite prime avoidance, and if $c_j$ does not have valuation one take $d_j$ in the product of the other $\\mathfrak q_i$ and outside $\\mathfrak q_j$; then $a_j=c_j^2+b_jd_j$ has valuation one at $\\mathfrak q_j$ and is a unit modulo every other $\\mathfrak q_i$. [F7, F8, step 3.1]",
+        "inputs": [
+          "F7",
+          "F8",
+          "step 3.1"
+        ]
+      },
+      {
+        "id": "step-5-1",
+        "step": "5.1",
+        "claim": "5.1 Let $h'$ be the product of $a_j^2$ over the indices with $v_{\\mathfrak q_j}(f')=1$ and of $a_j$ over the indices with $v_{\\mathfrak q_j}(f')>1$, multiplied by an element of $\\mathfrak m^{u+1}$ lying outside every $\\mathfrak q_j$, which exists by finite prime avoidance. Then $h'\\in\\mathfrak m^{u+1}$ and, because every original $\\mathfrak p_i$ occurs among the $\\mathfrak q_j$ by step 3.1, $h'\\in\\bigcap_i\\mathfrak p_i$. The element $c:=f'+h'$ has valuation exactly one at each $\\mathfrak q_j$. No new height-one prime occurs: such a prime would be an additional minimal prime of $A/(f'+h')$, contradicting the maximal $s$ in step 3.1 because $h'$ belongs to the same perturbation set. [F7, step 3.1, step 4.1]",
+        "inputs": [
+          "F7",
+          "step 3.1",
+          "step 4.1"
+        ]
+      },
+      {
+        "id": "step-6-1",
+        "step": "6.1",
+        "claim": "6.1 We have $c\\in\\mathfrak m$; it is nonzero because $v_{\\mathfrak q_j}(c)=1$ for each $j$. Normality gives $A$ the $S_2$ property by [F11], so $A$ is Cohen--Macaulay of dimension two; since $A$ is a domain, $c$ is regular. Thus $A/cA$ is a one-dimensional Cohen--Macaulay local ring by [F6]. Its associated primes are therefore exactly its minimal primes $\\mathfrak q_1,\\dots,\\mathfrak q_s$; each localization $A_{\\mathfrak q_j}/cA_{\\mathfrak q_j}$ is a field because the valuation of $c$ there is one. By detection of a ring at its associated primes, $A/cA$ is reduced. [F6, F9, F11, step 3.1, step 5.1]",
+        "inputs": [
+          "F6",
+          "F9",
+          "F11",
+          "step 3.1",
+          "step 5.1"
+        ]
+      },
+      {
+        "id": "step-7-1",
+        "step": "7.1",
+        "claim": "7.1 The height-one primes $\\mathfrak p_i$ containing $a$ all occur among the $\\mathfrak q_j$, because $f'\\in\\bigcap_i\\mathfrak p_i$ shows $\\mathfrak p_i\\supseteq f'A$ and hence contains a minimal prime of $f'A$, and both have height one. Choosing $n\\ge\\max_i v_{\\mathfrak p_i}(a)$ makes $c^n/a$ have nonnegative valuation at every height-one prime of $A$; by the $S_2$ intersection property of the normal domain $A$, an element of $\\operatorname{Frac}(A)$ with nonnegative valuation at every height-one prime lies in $A$. Hence $a\\mid c^n$. [F10, step 5.1, step 6.1]",
+        "inputs": [
+          "F10",
+          "step 5.1",
+          "step 6.1"
+        ]
+      },
+      {
+        "id": "step-8-1",
+        "step": "8.1",
+        "claim": "8.1 The element $c\\in\\mathfrak m$ has $A/cA$ reduced by step 6.1 and $a\\mid c^n$ by step 7.1; the Axiom of Choice and the Axiom of Dependent Choice are inherited from the cited commutative-algebra suppliers, with no further choice used. [F1, F2, step 6.1, step 7.1] ∎",
+        "inputs": [
+          "F1",
+          "F2",
+          "step 6.1",
+          "step 7.1"
+        ]
+      }
+    ],
+    "routine_steps": [],
+    "boundaries": [
+      {
+        "case": "empty",
+        "status": "checked",
+        "evidence": "Emptiness for reduced cartier multiples on a normal local surface is vacuous rather than constructed: the claim is about the fixed nonzero objects set up in the statement (assume ac and dc. if is a normal two-dimensional noetherian local domain and ), and the argument at steps 1.1 and 8.1 never instantiates an empty scheme, empty family or empty sequence, so no empty-case caveat can arise."
+      },
+      {
+        "case": "zero",
+        "status": "checked",
+        "evidence": "The zero instance of reduced cartier multiples on a normal local surface is the vanishing case named in the statement; it is discharged at step 8.1, while the nonzero and nonvanishing instances are the ones the preceding steps produce, so the axis is settled by the stated hypotheses rather than by a separate argument."
+      },
+      {
+        "case": "one",
+        "status": "checked",
+        "evidence": "The one-object case of reduced cartier multiples on a normal local surface is the trivial instance of the same construction: a single model, a single blowup or a single module reduces to the identity, and step 1.1 covers it together with the general case."
+      },
+      {
+        "case": "degenerate",
+        "status": "checked",
+        "evidence": "Degenerate instances of reduced cartier multiples on a normal local surface (identity morphism, trivial extension, empty regular sequence or terminal model equal to the initial one) are absorbed at step 5.1, where the argument only uses the hypotheses that remain true in the degenerate case."
+      },
+      {
+        "case": "endpoints",
+        "status": "checked",
+        "evidence": "The endpoints of reduced cartier multiples on a normal local surface are the initial object and the terminal model of the construction; their comparison is exactly the content of step 8.1, and no boundary of an interval is treated as an interior point."
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "checked",
+        "evidence": "The Axiom of Choice and the Axiom of Dependent Choice are used for reduced cartier multiples on a normal local surface only through the cited completion and resolution suppliers, and are recorded at step 8.1; all selections in the proof are over finite data fixed in advance, so no additional choice is hidden."
+      },
+      {
+        "case": "iff-forward",
+        "status": "checked",
+        "evidence": "The claim of reduced cartier multiples on a normal local surface is one-directional: step 1.1 establishes the asserted implication from the hypotheses, and no logical converse is used or needed in the rest of the argument."
+      },
+      {
+        "case": "iff-reverse",
+        "status": "not_applicable",
+        "reason": "No reverse implication is asserted by reduced cartier multiples on a normal local surface; the only equivalences invoked are supplier statements quoted as hypotheses, and they are applied in their forward direction at step 9.1, so a converse would be a different theorem."
+      }
+    ]
+  },
+  "validation": {
+    "candidate": "strict proof-contract",
+    "errors": 0,
+    "warnings": 0
+  }
+}

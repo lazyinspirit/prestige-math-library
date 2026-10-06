@@ -38,6 +38,18 @@ sources:
       url: "https://math.stanford.edu/~vakil/216blog/FOAGjun2711publicnoindex.pdf"
       locator: "Exercises 19.4.C-D resolving A_n curve singularities, p. 391"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: pass
+    date: 2026-10-03
+    scope: "Whole authored item, including statement or definition, every proof or verification step, and used direct supplier interfaces; completed prior Step5 reader/adjudicator evidence reconciled to the current mathematics. Transitive supplier proofs were not audited in full."
+    delegated_by: "owner via tools/autopilot (frontier-38-owner-30)"
+    evidence:
+      - "research/frontier-38-owner-30-reader-2.md"
+      - "research/frontier-38-owner-30-alpha-batch-2-5a.md"
+      - "research/frontier-38-owner-30-step5-hash-2-post.json"
+    reviewed_raw_sha256: "cba4bf90be5358efb63747c24d17c2812060a7eaeca846dd2be9c521113b3260"
+    content_sha256: "c822568d42fcc32d7b5b06387da98117ef28887dbdf21866b0b7b483f532b94f"
   precheck: pass
   judge:
     model: "gpt-6.1-sol"
