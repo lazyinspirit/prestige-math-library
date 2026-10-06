@@ -56,6 +56,31 @@ test('stale labels and item cycles fail closed', () => {
   assert.match(dependencyLevels(cyclic).errors.join('\n'), /dependency cycle: .*lem-base/);
 });
 
+test('author planning recomputes live order without changing stale labels or allowing cycles', t => {
+  const root = mkdtempSync(join(tmpdir(), 'live-author-order-'));
+  mkdirSync(join(root, 'research'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const live = structuredClone(pages);
+  live[0].items[0].dependency_level = 1;
+  live[2].items[0].deps = ['thm-late'];
+  const first = join(root, 'research/demo-batch-1.pages.json');
+  const second = join(root, 'research/demo-batch-2.pages.json');
+  const firstBytes = JSON.stringify(live.slice(0, 2));
+  const secondBytes = JSON.stringify(live.slice(2));
+  writeFileSync(first, firstBytes);
+  writeFileSync(second, secondBytes);
+  assert.ok(dependencyLevels(live).errors.some(error => error.includes('dependency_level')));
+  const plan = step3PairPlan({ repo: root, run: 'demo' }, 'a', 'final');
+  const task = readFileSync(join(root, plan.task), 'utf8');
+  assert.match(task, /2\. thm-late/);
+  assert.ok(task.indexOf('1. lem-middle') < task.indexOf('2. thm-late'));
+  assert.equal(readFileSync(first, 'utf8'), firstBytes);
+  assert.equal(readFileSync(second, 'utf8'), secondBytes);
+  live[0].items[1].deps = ['thm-late'];
+  writeFileSync(first, JSON.stringify(live.slice(0, 2)));
+  assert.throws(() => step3PairPlan({ repo: root, run: 'demo' }, 'a', 'final'), /dependency cycle/);
+});
+
 test('Step 5 group adjudication task orders routed items across batches', t => {
   const root = mkdtempSync(join(tmpdir(), 'step5-level-order-'));
   mkdirSync(join(root, 'research'));

@@ -6,12 +6,6 @@ deps: ["lem-any-homology-theory-has-a-cellular-chain-complex-on-a-cw-pair", "lem
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
-verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
 sources:
   references:
     - title: "May, A Concise Course in Algebraic Topology, 15§2, first theorem and arbitrary-coefficient paragraph p.119"
@@ -20,6 +14,9 @@ sources:
 status: published
 origin: "pipeline"
 proof_strategy: "Project the attaching boundary onto each target cell sphere and use natural suspension/cofiber boundaries and the sphere-action lemma. Arbitrary additivity gives column-finite direct sums. This supplies the coefficient-matrix step missing from a bare five-lemma proof."
+verification:
+  precheck: pass
+  repair: research/frontier-41-ha-dt-29-main-merge-published-evidence/lem-axiomatic-cellular-boundaries-are-integral-incidence-matrices-with-coefficients.repair.json
 ---
 
 ## Statement
@@ -36,7 +33,7 @@ Its differential is the integral incidence matrix acting on $G$. In degree one t
 
 [F2] Let $n\ge0$ and $u:S^n\to S^n$ be continuous. If $u_*$ on $\widetilde H_n(S^n;\mathbb Z)$ is multiplication by $d$, then $u_*$ on $\widetilde h_n(S^n)\cong G$ for every ordinary theory $h$ is $d\,\mathrm{id}_G$. The identifications use the same oriented sphere generator; for $n=0$ use the difference of the two point classes. ([[lem-sphere-endomorphisms-act-by-the-same-integer-in-every-ordinary-theory]])
 
-[F3] For $n\ge2$ and oriented cells $e^n_\alpha$ and $e^{n-1}_\beta$, collapse the complement of $e^{n-1}_\beta$ in $X^{n-1}$ and compose the attaching map of $e^n_\alpha$ with the resulting quotient to $S^{n-1}$. Its induced endomorphism of oriented $\widetilde H_{n-1}(S^{n-1};\mathbb Z)$ is multiplication by a unique integer, denoted $[e^n_\alpha:e^{n-1}_\beta]$. For $n=1$, orient the characteristic interval of $e^1_\alpha$ from $-1$ to $+1$ and, for a vertex $v=e^0_\beta$, set $$[e^1_\alpha:v]=\mathbf 1_{\{\chi_\alpha(+1)=v\}}-\mathbf 1_{\{\chi_\alpha(-1)=v\}}.$$ Thus an oriented edge contributes its terminal vertex minus its initial vertex, and a loop with both endpoints at one vertex has incidence number zero there. ([[def-incidence-number-of-two-cw-cells]])
+[F3] For $n\ge2$ and oriented cells $e^n_\alpha$ and $e^{n-1}_\beta$, collapse the complement of $e^{n-1}_\beta$ in $X^{n-1}$ and compose the attaching map of $e^n_\alpha$ with the resulting quotient to $S^{n-1}$. Its induced endomorphism of oriented $\widetilde H_{n-1}(S^{n-1};\mathbb Z)$ is multiplication by a unique integer, denoted $[e^n_\alpha:e^{n-1}_\beta]$. For $n=1$, choose the characteristic interval compatibly with the orientation of $e^1_\alpha$, running from $-1$ to $+1$. Write the chosen vertex generator as $e_v=\varepsilon_v[v]$, where $[v]$ is the canonical positive point class and $\varepsilon_v\in\{1,-1\}$. Then $$[e^1_\alpha:e_v]=\varepsilon_v\bigl(\mathbf 1_{\{\chi_\alpha(+1)=v\}}-\mathbf 1_{\{\chi_\alpha(-1)=v\}}\bigr).$$ For canonical positive vertex generators this is terminal minus initial; a loop still has incidence number zero at its common endpoint. ([[def-incidence-number-of-two-cw-cells]])
 
 [F4] Let $X$ be a CW complex. For $n\geq1$, in the integral cellular chain groups with the chosen cell orientations, $$d_ne^n_\alpha=\sum_\beta[e^n_\alpha:e^{n-1}_\beta]e^{n-1}_\beta.$$ ([[thm-cellular-boundary-is-the-incidence-degree-matrix]])
 
@@ -44,6 +41,6 @@ Its differential is the integral incidence matrix acting on $G$. In degree one t
 
 1.1 By F1 the chain groups are direct sums of copies of $G$ on relative cells. For a source $r$-cell and target $(r-1)$-cell with $r\ge2$, project the boundary homomorphism onto the target summand. Naturality of the characteristic disk pair identifies this component with the attaching map followed by collapse onto the target cell sphere and the natural disk boundary identifications. The corresponding integer for integral singular homology is precisely the incidence number of F3 and F4. [F1, F3, F4]
 
-2.1 F2 says that this same sphere endomorphism acts on coefficient $G$ by that integer times the identity. For $r=1$, the boundary of the oriented interval is $(-g,g)$ at its two ends, so an edge contributes $g$ at the terminal vertex and $-g$ at the initial vertex. If the endpoints coincide they cancel; endpoints in $A$ vanish in the relative complex. [F2, F3, step 1.1]
+2.1 F2 says that this same sphere endomorphism acts on coefficient $G$ by that integer times the identity. For $r=1$, the boundary of the compatibly oriented interval is $(-g,g)$ in the canonical point coordinates at its initial and terminal ends. In the target coordinate belonging to $e_v=\varepsilon_v[v]$, the coefficient of $[v]\otimes g$ is $\varepsilon_v g$, since $[v]=\varepsilon_v e_v$. Thus projection to the $v$-summand gives $\varepsilon_v(\mathbf 1_{\{v_+=v\}}-\mathbf 1_{\{v_-=v\}})\,\mathrm{id}_G$, precisely the incidence entry of F3. With every $\varepsilon_v=1$ the old terminal-$g$ minus initial-$g$ formula is recovered. Coincident endpoints cancel, and endpoints in $A$ vanish in the relative complex. A negative vertex generator changes the algebraic coefficient coordinate by $-\mathrm{id}_G$; it is not implemented by a based degree-$-1$ self-map of $S^0$. [F2, F3, step 1.1]
 
 3.1 Each characteristic boundary has image in the finite union of closed cells supplied by closure finiteness, so only finitely many target cells can contribute to its column. Thus these components define a map of direct sums. At degree zero the outgoing differential is zero. The bases and component calculations identify the entire complex with the displayed tensor complex, for arbitrary $G$, including $G=0$ and pairs with no relative cells. [F1, step 1.1, step 2.1] ∎

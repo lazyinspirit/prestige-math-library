@@ -21,6 +21,19 @@ export function isPublishedItem(root, id) {
   return field(text, 'status') === 'published';
 }
 
+function definitionPrecheckNotApplicable(check, text, id) {
+  if (field(text, 'kind') !== 'definition'
+    || /^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(text)
+    || !check.command.includes('--json')) return false;
+  try {
+    const result = JSON.parse(check.output);
+    return result.summary?.files === 1 && result.summary.checked === 0
+      && result.summary.failed === 0 && result.results?.length === 1
+      && result.results[0].file === `items/${id}.md`
+      && result.results[0].item_id === id && result.results[0].status === 'not-applicable';
+  } catch { return false; }
+}
+
 /** Recorded local correction of an already-published carrier, never an audit
  * or permission for initial publication. All evidence is checked on disk. */
 export function recordedPublishedRepair(root, id, text, receiptPath) {
@@ -75,7 +88,8 @@ export function recordedPublishedRepair(root, id, text, receiptPath) {
           || arg === `tools/${tool}${tool === 'precheck' ? '.mts' : '.mjs'}`)
         || !Number.isFinite(checked) || checked < Date.parse(claim.claimed_at) || checked > recorded
         || typeof check.output !== 'string'
-        || !(tool === 'precheck' ? check.output.includes(`PASS items/${id}.md`) && check.output.includes('0 failing')
+        || !(tool === 'precheck' ? (check.output.includes(`PASS items/${id}.md`) && check.output.includes('0 failing')
+            || definitionPrecheckNotApplicable(check, text, id))
           : check.output.includes('OK — 1 file(s)')))
         return fail(`missing current successful local ${tool} check`);
     }

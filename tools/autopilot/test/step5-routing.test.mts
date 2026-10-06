@@ -12,6 +12,8 @@ import { step5Stages } from '../stages/mathlib.step5.mts';
 import { holdStep5 } from '../stages/step5-hold.mts';
 import { Executor } from '../src/executor.mts';
 import { itemHashGuard } from '../../item-hash.mjs';
+import { createHash } from 'node:crypto';
+import { historicalFindingHash, recordOwnerHistoricalRoutes } from '../../step5-owner-historical-routes.mjs';
 
 const REPO = join(import.meta.dirname, '..', '..', '..');
 const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
@@ -34,12 +36,12 @@ const stages = step5Stages(deps) as any[];
 const byId = (id: string) => stages.find((stage) => stage.id === id);
 const ordinaryCtx = { run: 'future-run', repo: mkdtempSync(join(tmpdir(), 'step5-ctx-')), dispatchDir: '/tmp/none' };
 
-test('5a adjudication runs Sol high and the 5b lead Sol xhigh, with tool lanes model-free', async () => {
+test('5a adjudication and the 5b lead run Sol 6.1 high, with tool lanes model-free', async () => {
   const { MODEL_PROFILE_NAMES } = await import('../../models.mjs');
   const stage = byId('5a-adjudicate');
-  assert.equal(stage.modelProfile({ role: 'alpha', job: 'adjudication' }), MODEL_PROFILE_NAMES.solHigh);
+  assert.equal(stage.modelProfile({ role: 'alpha', job: 'adjudication' }), MODEL_PROFILE_NAMES.sol61High);
   assert.equal(stage.modelProfile({ role: 'tool' }), undefined);
-  assert.equal(byId('5b-cross').modelProfile({ role: 'alpha' }), MODEL_PROFILE_NAMES.solXHigh);
+  assert.equal(byId('5b-cross').modelProfile({ role: 'alpha' }), MODEL_PROFILE_NAMES.sol61High);
   assert.equal(byId('5b-cross').modelProfile({ role: 'tool' }), undefined);
 });
 
@@ -864,4 +866,439 @@ test('precheck diagnostic headers own retry subjects without PASS rows or proof 
   assert.deepEqual(Executor.itemsNamedBy({ id: 'precheck', output } as any),
     ['prop-foreign-labels', 'lem-foreign-gap', 'thm-rejected']);
   assert.deepEqual(Executor.itemsNamedBy({ id: 'other-gate', output } as any), []);
+});
+
+function producerRoutingFixture(marker?: string, duplicateOwner = false, contractlessKind?: string, proofMarker?: string) {
+  const fx = fixture();
+  const producer = contractlessKind === 'definition' ? 'def-run-producer' : 'lem-run-producer', published = 'thm-transitive-published';
+  writeFileSync(join(fx.root, 'items', `${producer}.md`),
+    `---\nid: ${producer}\n${contractlessKind ? `kind: ${contractlessKind}\nprovenance:\n  proof: ${proofMarker ?? (contractlessKind === 'definition' ? 'not-applicable' : 'ai-altered')}\n` : ''}status: draft\n${marker === undefined ? '' : `pipeline_run: ${marker}\n`}deps: [${published}]\n---\n## Statement\nProducer.\n\n## Proof\n1.1 Done.\n`);
+  writeFileSync(join(fx.root, 'items', `${published}.md`),
+    `---\nid: ${published}\nstatus: published\ndeps: []\n---\n## Statement\nSupplier.\n`);
+  const consumer = join(fx.root, 'items', 'lem-ordinary-item.md');
+  writeFileSync(consumer, readFileSync(consumer, 'utf8').replace('deps: []', `deps: [${producer}]`));
+  writeFileSync(join(fx.root, 'research', 'r-batch-2.pages.json'), JSON.stringify([
+    { id: 'p2', category: 'test', items: [producer] },
+  ]));
+  writeFileSync(join(fx.root, 'library/test/p2.md'), '---\npage: p2\n---\nProducer page.\n');
+  writeFileSync(join(fx.root, 'research', 'r-batch-2.proof-contracts.json'), JSON.stringify({ contracts: contractlessKind ? {} : { [producer]: {} } }));
+  if (duplicateOwner) writeFileSync(join(fx.root, 'research', 'r-batch-3.pages.json'), JSON.stringify([
+    { id: 'p3', category: 'test', items: [producer] },
+  ]));
+  fx.run('hash', '--run', 'r', '--batch', '2', '--label', 'pre');
+  fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'pre');
+  fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'post');
+  const report = (target: string, type: string, consumerId = 'lem-ordinary-item') => {
+    writeFileSync(join(fx.root, 'research', 'r-reader-findings-1.json'), JSON.stringify({
+      batch: '1', coverage_note: 'Opened exact declared supplier path.', findings: [{
+        id: target, subject_type: type, consumer_id: consumerId,
+        location: 'Statement', defect: 'false-claim', evidence: 'Concrete counterexample in supplier.', severity: 'fatal',
+      }],
+    }));
+    return fx.attempt('split', '--run', 'r', '--batch', '1');
+  };
+  return { ...fx, producer, published, report };
+}
+
+for (const marker of [undefined, 'r']) test(`foreign producer routing accepts genuine manifest ownership with marker ${marker ?? 'absent'}`, () => {
+  const fx = producerRoutingFixture(marker);
+  try {
+    const result = fx.report(fx.producer, 'in-run-dependency');
+    assert.equal(result.status, 0, result.stderr);
+    const scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+    assert.equal(scope.reader_findings[0].producer_batch, '2');
+    assert.deepEqual(scope.reader_findings[0].dependency_path.map((row: any) => row.id), ['lem-ordinary-item', fx.producer]);
+    assert.equal(scope.reader_findings[0].observation_basis, 'unbound');
+    assert.equal(scope.reader_findings[0].observed_source, undefined);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('published closure traverses a genuine current-run draft producer without changing finding provenance', () => {
+  const fx = producerRoutingFixture();
+  try {
+    const result = fx.report(fx.published, 'published-dependency');
+    assert.equal(result.status, 0, result.stderr);
+    const scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+    assert.equal(scope.reader_findings[0].subject_type, 'published-dependency');
+    assert.equal(scope.reader_findings[0].consumer_id, 'lem-ordinary-item');
+    assert.equal(scope.reader_findings[0].producer_batch, undefined);
+    const badConsumer = fx.report(fx.published, 'published-dependency', 'cex-flagged-item');
+    assert.notEqual(badConsumer.status, 0);
+    assert.match(badConsumer.stderr, /assigned consumer/);
+    writeFileSync(join(fx.root, 'items', `${fx.published}.md`),
+      readFileSync(join(fx.root, 'items', `${fx.published}.md`), 'utf8').replace('status: published', 'status: draft'));
+    const outsideDraft = fx.report(fx.published, 'published-dependency');
+    assert.notEqual(outsideDraft.status, 0);
+    assert.match(outsideDraft.stderr, /out-of-scope/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+for (const variant of ['other-run', 'ambiguous']) test(`producer and transitive published routing reject ${variant} ownership`, () => {
+  const fx = producerRoutingFixture(variant === 'other-run' ? 'other-run' : undefined, variant === 'ambiguous');
+  try {
+    for (const [id, type] of [[fx.producer, 'in-run-dependency'], [fx.published, 'published-dependency']]) {
+      const result = fx.report(id, type);
+      assert.notEqual(result.status, 0);
+      assert.match(result.stderr, /out-of-scope/);
+    }
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+for (const [kind, proof, accepted] of [
+  ['definition', 'not-applicable', true],
+  ['definition', 'ai-altered', false],
+  ['lemma', 'ai-altered', false],
+] as const) test(`null-contract producer binding: ${kind}/${proof} ${accepted ? 'retains honest definition evidence' : 'fails closed'}`, () => {
+  const fx = producerRoutingFixture(undefined, false, kind, proof);
+  try {
+    const result = fx.report(fx.producer, 'in-run-dependency');
+    if (!accepted) {
+      assert.notEqual(result.status, 0);
+      assert.match(result.stderr, /lacks exact current\/pre-reader producer fingerprints/);
+      return;
+    }
+    assert.equal(result.status, 0, result.stderr);
+    const scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+    const finding = scope.reader_findings[0];
+    assert.match(finding.producer_carrier_at_split.item_sha256, /^[a-f0-9]{64}$/);
+    assert.match(finding.producer_carrier_at_split.manifest_sha256, /^[a-f0-9]{64}$/);
+    assert.equal(finding.producer_pre_snapshot.carrier.contract_sha256,
+      finding.producer_carrier_at_split.contract_sha256, 'both snapshots honestly record the missing definition proof contract');
+    assert.equal(finding.observation_basis, 'unbound');
+    assert.equal(finding.observed_sha256, null);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('exact owner historical routes retain native reader/refuter obligations after reviewed dependency removal', () => {
+  const fx = producerRoutingFixture('r');
+  try {
+    const initialConsumer = join(fx.root, 'items/lem-ordinary-item.md');
+    writeFileSync(initialConsumer, readFileSync(initialConsumer, 'utf8').replace('---\n', '---\nid: lem-ordinary-item\n'));
+    fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'pre');
+    fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'post');
+    assert.equal(fx.report(fx.producer, 'in-run-dependency').status, 0);
+    let scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+    writeFileSync(join(fx.root, 'research/r-refute-1.json'), JSON.stringify({ batch: '1', opened: scope.refuter_scope,
+      not_opened: [], coverage_note: 'Actual exact supplier opened.', flagged: [{ id: fx.producer,
+        location: 'Statement', defect: 'false-claim', evidence: 'Actual supplier counterexample.', severity: 'fatal' }] }));
+    fx.run('collect', '--run', 'r', '--batch', '1');
+    scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+    const sha = (bytes: any) => createHash('sha256').update(bytes).digest('hex');
+    const link = (path: string) => ({ path, sha256: sha(readFileSync(join(fx.root, path))) });
+    const sources = scope.reader_findings[0].dependency_path.map((node: any) => {
+      const path = `research/original-${node.id}.md`;
+      writeFileSync(join(fx.root, path), readFileSync(join(fx.root, 'items', `${node.id}.md`)));
+      return { id: node.id, ...link(path) };
+    });
+    const consumerPath = join(fx.root, 'items/lem-ordinary-item.md');
+    writeFileSync(consumerPath, readFileSync(consumerPath, 'utf8').replace(`deps: [${fx.producer}]`, 'deps: []'));
+    const before = fx.attempt('check', '--run', 'r', '--phase', 'adjudicate');
+    assert.match(before.stderr, /assigned consumer reaching/);
+    const guard = itemHashGuard(readFileSync(consumerPath, 'utf8'));
+    const findings = [...scope.reader_findings, ...scope.refuter_findings];
+    writeFileSync(join(fx.root, 'research/current-route-review.md'), `r lem-ordinary-item ${fx.producer} ${guard} ${findings.map((f: any) => f.obligation).join(' ')} actual owner review of dependency removal.`);
+    const doc = { version: 1, policy: 'owner-step5-historical-inrun-route-v1', run: 'r', step: 5,
+      owner: true, owner_identity: '/root', at: new Date().toISOString(), reason: 'Owner reviewed actual current proof and redundant dependency removal',
+      routes: findings.map((finding: any) => ({ batch: '1', obligation: finding.obligation,
+        finding_sha256: historicalFindingHash(finding), sources, reader_report: link('research/r-reader-findings-1.json'),
+        refuter_report: link('research/r-refute-1.json'), consumer_pre_snapshot: link('research/r-step5-hash-1-pre.json'),
+        consumer_post_snapshot: link('research/r-step5-hash-1-post.json'), producer_pre_snapshot: link('research/r-step5-hash-2-pre.json'),
+        review: link('research/current-route-review.md'), current_proof_review: { owner: true, removed_edges_reviewed: true,
+          no_unresolved_scope_dependency: true, consumer_guard_sha256: guard } })) };
+    writeFileSync(join(fx.root, 'research/historical-route-authorization.json'), JSON.stringify(doc));
+    recordOwnerHistoricalRoutes(fx.root, 'r', 'research/historical-route-authorization.json');
+    const after = fx.attempt('check', '--run', 'r', '--phase', 'adjudicate');
+    assert.doesNotMatch(after.stderr, /assigned consumer reaching|producer identity\/immutable pre-reader snapshot changed|out-of-scope|findings no longer match/);
+    assert.deepEqual(JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8')).reader_findings, scope.reader_findings);
+    // This attestation cannot authorize an unrelated obligation with the same path.
+    const changed = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+    changed.reader_findings[0].obligation = 'reader:1:invented';
+    writeFileSync(join(fx.root, 'research/r-step5-scope-1.json'), JSON.stringify(changed));
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /Missing exact historical scope finding/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('Step5 uses validated active ledger ownership without erasing historical rows', () => {
+  const fx = fixture();
+  try {
+    for (const label of ['pre', 'post']) fx.run('hash', '--run', 'r', '--batch', '1', '--label', label);
+    fx.run('split', '--run', 'r', '--batch', '1');
+    writeFileSync(join(fx.root, 'research/r-refute-1.json'), JSON.stringify({ batch: '1', opened: [...fx.ids, 'p'], not_opened: [], coverage_note: 'read', flagged: [{ id: 'lem-ordinary-item', location: 'Statement', defect: 'false-claim', evidence: 'Original observation.', severity: 'nonfatal' }] }));
+    fx.run('collect', '--run', 'r', '--batch', '1');
+    const path = join(fx.root, 'research/defect-ledger.jsonl');
+    const historical = { defect_id: 'old-defect', run: 'r', subject: 'lem-ordinary-item', caught_at_stage: '5a-adjudicate', severity: 'nonfatal', disposition: 'false-positive' };
+    const active = { ...historical, defect_id: 'active-defect', supersedes: ['old-defect'] };
+    const ledger = `${JSON.stringify(historical)}\n${JSON.stringify(active)}\n`;
+    writeFileSync(path, ledger);
+    writeFileSync(join(fx.root, 'research/r-alpha-batch-1-5a-decisions.json'), JSON.stringify({ version: 1, run: 'r', group: 'batch-1', decisions: [{ obligation: 'refuter:1:1', id: 'lem-ordinary-item', route: 'flagged', verdict: 'false_positive', evidence: 'Current review resolves the one actual finding.', defect_ids: ['active-defect'] }] }));
+    fx.run('stamp', '--run', 'r');
+    assert.match(fx.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+    assert.equal(readFileSync(path, 'utf8'), ledger, 'historical ledger bytes remain unchanged');
+    for (const invalid of [{ ...active, supersedes: ['future'] }, { ...active, subject: 'different-item' }]) {
+      writeFileSync(path, `${JSON.stringify(historical)}\n${JSON.stringify(invalid)}\n`);
+      const failed = fx.attempt('check', '--run', 'r', '--phase', 'adjudicate');
+      assert.notEqual(failed.status, 0);
+      assert.match(failed.stderr, /ledger-ownership-invalid/);
+    }
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+function stabilizedSharingFixture(kind: 'reader' | 'refuter', reverse = false, peers = 0, page = false, sameDefect = false) {
+  const fx = fixture(), id = page ? 'p' : 'lem-ordinary-item', original = `${kind}:1:1`, amendment = `post-reader:1:${id}`;
+  const finding = { id, location: 'Statement', defect: 'false-claim', evidence: 'Exact source defect requiring the later owner amendment.', severity: 'fatal' };
+  if (kind === 'reader') writeFileSync(join(fx.root, 'research/r-reader-findings-1.json'), JSON.stringify({ batch: '1', coverage_note: 'Actual source read.', findings: [{ ...finding, subject_type: page ? 'page' : 'in-flight-item' }] }));
+  fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'pre');
+  fx.run('post-reader', '--run', 'r', '--batch', '1');
+  let scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+  writeFileSync(join(fx.root, 'research/r-refute-1.json'), JSON.stringify({ batch: '1', opened: scope.refuter_scope,
+    not_opened: [], coverage_note: 'Actual source opened.', flagged: kind === 'refuter' ? [finding] : Array.from({ length: peers }, (_, n) => ({ ...finding, location: `Proof claim ${n + 1}`, defect: sameDefect ? finding.defect : 'unlicensed-inference' })) }));
+  fx.run('collect', '--run', 'r', '--batch', '1');
+  scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+  const snapshotPath = join(fx.root, 'research/r-step5-hash-1-post.json'), immutablePost = readFileSync(snapshotPath);
+  const itemPath = join(fx.root, page ? 'library/test/p.md' : `items/${id}.md`);
+  writeFileSync(itemPath, readFileSync(itemPath, 'utf8') + '\nActual later owner repair of the same historical source defect.\n');
+  fx.run('pre-5a', '--run', 'r');
+  const ledger: any = { defect_id: 'r-shared-source', run: 'r', subject: id, caught_at_stage: '5a-adjudicate', severity: 'fatal', disposition: 'fixed',
+    adjudication_ref: [original, amendment].map(obligation => ({ path: 'research/r-alpha-a-5a-decisions.json', obligation })) };
+  const source: any = { obligation: original, id, route: kind === 'reader' ? 'reader' : 'flagged', verdict: 'confirmed_fatal', defect_ids: [ledger.defect_id], evidence: 'The original source defect is genuine and now repaired.' };
+  const repair: any = { obligation: amendment, id, route: page ? 'page' : 'touched', verdict: 'amended_repair', repair_confidence: 1, defect_ids: [ledger.defect_id],
+    evidence: 'Owner amended the same current source after the native read.', same_defect_as: original,
+    same_defect_evidence: 'The later source amendment repairs exactly the original flagged statement defect without changing the historical finding.' };
+  const additional = Array.from({ length: peers }, (_, n) => ({ ...source, obligation: `refuter:1:${n + 1}`, route: 'flagged', same_defect_as: original,
+    same_defect_evidence: 'This actual refuter unlicensed inference is exactly the reader false-claim on the identical immutable observed source carrier.' }));
+  ledger.adjudication_ref.push(...additional.map(d => ({ path: 'research/r-alpha-a-5a-decisions.json', obligation: d.obligation })));
+  const doc = { version: 1, run: 'r', group: 'a', decisions: reverse ? [repair, source, ...additional] : [source, repair, ...additional] };
+  const write = () => { writeFileSync(join(fx.root, 'research/defect-ledger.jsonl'), JSON.stringify(ledger) + '\n'); writeFileSync(join(fx.root, 'research/r-alpha-a-5a-decisions.json'), JSON.stringify(doc)); };
+  write(); fx.run('stamp', '--run', 'r');
+  return { ...fx, scope, ledger, source, repair, doc, write, snapshotPath, immutablePost };
+}
+for (const kind of ['reader', 'refuter'] as const) for (const reverse of [false, true])
+  test(`stabilized same-source ${kind} amendment shares one closed row in ${reverse ? 'repair-first' : 'finding-first'} order`, () => {
+    const f = stabilizedSharingFixture(kind, reverse);
+    try {
+      assert.match(f.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+      assert.deepEqual(readFileSync(f.snapshotPath), f.immutablePost);
+      assert.deepEqual(JSON.parse(readFileSync(join(f.root, 'research/r-step5-scope-1.json'), 'utf8')), f.scope);
+      assert.equal(readFileSync(join(f.root, 'research/defect-ledger.jsonl'), 'utf8').trim().split('\n').length, 1);
+    } finally { rmSync(f.root, { recursive: true, force: true }); }
+  });
+
+test('stabilized shared repair rejects wrong identities, insufficient confidence/evidence, open or unbound rows and changed original carriers', () => {
+  for (const mutate of [
+    (f: any) => { f.repair.same_defect_as = 'reader:1:999'; },
+    (f: any) => { f.repair.same_defect_evidence = 'Too short'; },
+    (f: any) => { f.repair.repair_confidence = 0.99; },
+    (f: any) => { delete f.repair.repair_confidence; },
+    (f: any) => { f.repair.verdict = 'accepted_repair'; },
+    (f: any) => { f.repair.obligation = 'post-reader:2:lem-ordinary-item'; },
+    (f: any) => { f.repair.id = 'cex-flagged-item'; },
+    (f: any) => { f.ledger.disposition = 'open'; },
+    (f: any) => { f.ledger.adjudication_ref.pop(); },
+    (f: any) => { f.ledger.adjudication_ref[0].path = 'research/r-alpha-other-5a-decisions.json'; },
+    (f: any) => { const post = JSON.parse(readFileSync(f.snapshotPath, 'utf8')); post.hashes['lem-ordinary-item'].contract_sha256 = '0'.repeat(64); writeFileSync(f.snapshotPath, JSON.stringify(post)); },
+  ]) {
+    const f = stabilizedSharingFixture('refuter');
+    try {
+      mutate(f); f.write(); f.run('stamp', '--run', 'r');
+      assert.notEqual(f.attempt('check', '--run', 'r', '--phase', 'adjudicate').status, 0);
+    } finally { rmSync(f.root, { recursive: true, force: true }); }
+  }
+});
+
+test('a stabilized amendment already frozen into pre-5a cannot waive its source guard without exact shared finding evidence', () => {
+  const f = stabilizedSharingFixture('reader');
+  try {
+    delete f.repair.same_defect_as;
+    delete f.repair.same_defect_evidence;
+    f.write(); f.run('stamp', '--run', 'r');
+    const result = f.attempt('check', '--run', 'r', '--phase', 'adjudicate');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /stabilized amended_repair equal to pre-5a requires exact shared historical defect evidence/);
+  } finally { rmSync(f.root, { recursive: true, force: true }); }
+});
+
+function foreignCausalHelperFixture(helperFirst = true, findingCount = 1, producerRepair = false) {
+  const fx = producerRoutingFixture('r'), helper = 'lem-exact-causal-helper', original = 'reader:1:1';
+  const initialContractPath = join(fx.root, 'research/r-batch-2.proof-contracts.json');
+  const initialContract = JSON.parse(readFileSync(initialContractPath, 'utf8'));
+  initialContract.version = 1; initialContract.scope = [fx.producer];
+  writeFileSync(initialContractPath, JSON.stringify(initialContract));
+  writeFileSync(join(fx.root, 'research/r-alpha-groups.json'), JSON.stringify(helperFirst
+    ? [{ label: 'producer', covers: ['2'] }, { label: 'consumer', covers: ['1'] }]
+    : [{ label: 'consumer', covers: ['1'] }, { label: 'producer', covers: ['2'] }]));
+  writeFileSync(join(fx.root, 'research/r-reader-findings-2.json'), JSON.stringify({ batch: '2', coverage_note: 'Producer source read.', findings: [] }));
+  if (producerRepair) writeFileSync(join(fx.root, `items/${fx.producer}.md`), readFileSync(join(fx.root, `items/${fx.producer}.md`), 'utf8') + '\nActual supplier source repair.\n');
+  fx.run('post-reader', '--run', 'r', '--batch', '2');
+  const scope2 = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-2.json'), 'utf8'));
+  writeFileSync(join(fx.root, 'research/r-refute-2.json'), JSON.stringify({ batch: '2', opened: scope2.refuter_scope, not_opened: [], coverage_note: 'Producer sources opened.', flagged: [] }));
+  fx.run('collect', '--run', 'r', '--batch', '2');
+  const producerText = readFileSync(join(fx.root, `items/${fx.producer}.md`));
+  writeFileSync(join(fx.root, 'research/r-reader-findings-1.json'), JSON.stringify({ batch: '1', coverage_note: 'Actual assigned consumer supplier path read.', findings: Array.from({ length: findingCount }, () => ({ id: fx.producer,
+    subject_type: 'in-run-dependency', consumer_id: 'lem-ordinary-item', observed_source: { snapshot: 'current', item_sha256: createHash('sha256').update(producerText).digest('hex') },
+    location: 'Proof', defect: 'unlicensed-inference', evidence: 'The missing exact supplier helper is the historical gap.', severity: 'fatal' })) }));
+  fx.run('split', '--run', 'r', '--batch', '1');
+  const scope1 = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+  writeFileSync(join(fx.root, 'research/r-refute-1.json'), JSON.stringify({ batch: '1', opened: scope1.refuter_scope, not_opened: [], coverage_note: 'Consumer sources opened.', flagged: [] }));
+  fx.run('collect', '--run', 'r', '--batch', '1');
+  writeFileSync(join(fx.root, `items/${helper}.md`), `---\nid: ${helper}\nstatus: draft\ndeps: []\n---\n## Statement\nExact repair helper.\n\n## Proof\n1.1 Done.\n`);
+  const manifestPath = join(fx.root, 'research/r-batch-2.pages.json');
+  const pages = JSON.parse(readFileSync(manifestPath, 'utf8')); pages[0].items.push(helper); writeFileSync(manifestPath, JSON.stringify(pages));
+  const contractPath = join(fx.root, 'research/r-batch-2.proof-contracts.json');
+  const contract = JSON.parse(readFileSync(contractPath, 'utf8'));
+  contract.scope.push(helper); contract.contracts[helper] = {}; contract.contracts[fx.producer].risk_review = { status: 'complete' };
+  writeFileSync(contractPath, JSON.stringify(contract));
+  fx.run('pre-5a', '--run', 'r');
+  const helperObligation = `post-reader:2:${helper}`;
+  const ledger: any = { defect_id: 'r-exact-original-gap', run: 'r', subject: fx.producer, caught_at_stage: '5a-adjudicate', severity: 'fatal', disposition: 'fixed', adjudication_ref: [
+    { path: 'research/r-alpha-batch-2-5a-decisions.json', obligation: helperObligation },
+    { path: 'research/r-alpha-batch-1-5a-decisions.json', obligation: original }] };
+  const addition: any = { obligation: helperObligation, id: helper, route: 'touched', verdict: 'accepted_repair', repair_confidence: 1, defect_ids: [ledger.defect_id],
+    causal_subject: fx.producer, same_defect_as: original, same_defect_evidence: 'The added exact helper closes only the originally observed missing supplier inference, not an unrelated producer finding.', evidence: 'The new helper is the repair carrier for that exact original gap.' };
+  const finding: any = { obligation: original, id: fx.producer, route: 'reader', verdict: 'confirmed_fatal', producer_batch: '2', consumer_id: 'lem-ordinary-item', defect_ids: [ledger.defect_id], evidence: 'The actual original supplier gap is now closed by the exact helper.' };
+  const own = { version: 1, run: 'r', group: 'batch-2', decisions: [addition,
+    { obligation: `post-reader:2:${fx.producer}`, id: fx.producer, route: 'touched', verdict: 'reviewed_no_defect', change_kind: 'audit_enrichment', defect_ids: [], evidence: 'Risk-review recording only.' }] };
+  const peers = Array.from({ length: findingCount - 1 }, (_, n) => ({ ...finding, obligation: `reader:1:${n + 2}`,
+    same_defect_as: n === 0 ? original : `reader:1:${n + 1}`,
+    same_defect_evidence: 'These actual native findings identify exactly the same missing supplier inference on the same immutable producer source.' }));
+  ledger.adjudication_ref.push(...peers.map(d => ({ path: 'research/r-alpha-batch-1-5a-decisions.json', obligation: d.obligation })));
+  if (producerRepair) {
+    own.decisions = own.decisions.filter(d => d.obligation !== `post-reader:2:${fx.producer}`);
+    const obligation = `touched:2:${fx.producer}`;
+    own.decisions.push({ obligation, id: fx.producer, route: 'touched', verdict: 'accepted_repair', repair_confidence: 1, defect_ids: [ledger.defect_id],
+      same_defect_as: original, same_defect_evidence: 'This actual producer source repair closes the same missing supplier inference recorded in the immutable native consumer finding.', evidence: 'Exact supplier repair accepted.' } as any);
+    ledger.adjudication_ref.push({ path: 'research/r-alpha-batch-2-5a-decisions.json', obligation });
+  }
+  const other = { version: 1, run: 'r', group: 'batch-1', decisions: [finding, ...peers] };
+  const write = () => { writeFileSync(join(fx.root, 'research/defect-ledger.jsonl'), JSON.stringify(ledger) + '\n'); writeFileSync(join(fx.root, 'research/r-alpha-batch-2-5a-decisions.json'), JSON.stringify(own)); writeFileSync(join(fx.root, 'research/r-alpha-batch-1-5a-decisions.json'), JSON.stringify(other)); };
+  write(); fx.run('stamp', '--run', 'r');
+  return { ...fx, helper, ledger, addition, finding, own, other, write };
+}
+for (const helperFirst of [false, true]) test(`causal new helper preserves exact foreign finding sharing with ${helperFirst ? 'helper' : 'finding'} group first`, () => {
+  const f = foreignCausalHelperFixture(helperFirst);
+  try { assert.match(f.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/); }
+  finally { rmSync(f.root, { recursive: true, force: true }); }
+});
+
+test('reverse causal sharing refuses wrong cause, source link, evidence, row, references, added flag and producer snapshot', () => {
+  for (const mutate of [
+    (f: any) => { f.addition.causal_subject = 'lem-unrelated-producer'; },
+    (f: any) => { f.addition.same_defect_as = 'reader:1:999'; },
+    (f: any) => { f.addition.same_defect_evidence = 'Vague cause'; },
+    (f: any) => { f.ledger.subject = f.helper; },
+    (f: any) => { f.ledger.disposition = 'open'; },
+    (f: any) => { f.ledger.adjudication_ref.pop(); },
+    (f: any) => { f.ledger.adjudication_ref[0].path = 'research/r-alpha-other-5a-decisions.json'; },
+    (f: any) => { const path = join(f.root, 'research/r-step5-hash-2-post.json'); const post = JSON.parse(readFileSync(path, 'utf8')); const stabilized = JSON.parse(readFileSync(join(f.root, 'research/r-step5-hash-2-pre-5a.json'), 'utf8')); post.manifest.push(f.helper); post.hashes[f.helper] = stabilized.hashes[f.helper]; writeFileSync(path, JSON.stringify(post)); },
+    (f: any) => { const path = join(f.root, 'research/r-step5-scope-1.json'); const scope = JSON.parse(readFileSync(path, 'utf8')); scope.reader_findings[0].producer_pre_snapshot.sha256 = '0'.repeat(64); writeFileSync(path, JSON.stringify(scope)); },
+  ]) {
+    const f = foreignCausalHelperFixture(true);
+    try { mutate(f); f.write(); f.run('stamp', '--run', 'r'); assert.notEqual(f.attempt('check', '--run', 'r', '--phase', 'adjudicate').status, 0); }
+    finally { rmSync(f.root, { recursive: true, force: true }); }
+  }
+});
+
+function permutations<T>(values: T[]): T[][] {
+  return values.length ? values.flatMap((v, n) => permutations(values.filter((_, i) => i !== n)).map(rest => [v, ...rest])) : [[]];
+}
+
+test('strict four-owner reader/refuter/stabilized families are independent of all decision permutations', () => {
+  const f = stabilizedSharingFixture('reader', false, 2);
+  try {
+    const native = readFileSync(join(f.root, 'research/r-step5-scope-1.json'));
+    for (const order of permutations([...f.doc.decisions])) {
+      f.doc.decisions = order; f.write(); f.run('stamp', '--run', 'r');
+      assert.match(f.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/, order.map(d => d.obligation).join(', '));
+    }
+    assert.deepEqual(readFileSync(join(f.root, 'research/r-step5-scope-1.json')), native);
+    assert.deepEqual(readFileSync(f.snapshotPath), f.immutablePost);
+  } finally { rmSync(f.root, { recursive: true, force: true }); }
+});
+
+test('a later family anchor cannot launder unrelated, forged, stale or unbound third claims', () => {
+  for (const mutate of [
+    (f: any) => { f.doc.decisions[2].same_defect_as = 'reader:1:999'; },
+    (f: any) => { f.doc.decisions[2].same_defect_evidence = ''; },
+    (f: any) => { f.doc.decisions[2].id = 'cex-flagged-item'; },
+    (f: any) => { f.doc.decisions[2].verdict = 'confirmed_nonfatal'; },
+    (f: any) => { f.doc.decisions[2].subject_sha256 = '0'.repeat(64); },
+    (f: any) => { f.ledger.adjudication_ref.pop(); },
+    (f: any) => { const scope = JSON.parse(readFileSync(join(f.root, 'research/r-step5-scope-1.json'), 'utf8')); scope.refuter_findings[0].observed_sha256 = '0'.repeat(64); writeFileSync(join(f.root, 'research/r-step5-scope-1.json'), JSON.stringify(scope)); },
+  ]) {
+    const f = stabilizedSharingFixture('reader', false, 1);
+    try {
+      mutate(f); f.write();
+      // Keep the deliberately stale current guard instead of stamping it away.
+      if (f.doc.decisions[2].subject_sha256 !== '0'.repeat(64)) f.run('stamp', '--run', 'r');
+      assert.notEqual(f.attempt('check', '--run', 'r', '--phase', 'adjudicate').status, 0);
+    } finally { rmSync(f.root, { recursive: true, force: true }); }
+  }
+});
+
+for (const helperFirst of [true, false]) test(`five genuine foreign-producer findings retain every strict family anchor (${helperFirst ? 'producer' : 'consumer'} first)`, () => {
+  const f = foreignCausalHelperFixture(helperFirst, 5);
+  try {
+    for (const order of [f.other.decisions, [...f.other.decisions].reverse(), [f.other.decisions[2], f.other.decisions[4], f.other.decisions[0], f.other.decisions[3], f.other.decisions[1]]]) {
+      f.other.decisions = order; f.write(); f.run('stamp', '--run', 'r');
+      assert.match(f.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+    }
+    // Matching producer source bytes alone cannot manufacture an explicit link.
+    const unrelated = f.other.decisions.find(d => d.obligation === 'reader:1:5')!;
+    delete unrelated.same_defect_as; delete unrelated.same_defect_evidence;
+    f.write(); f.run('stamp', '--run', 'r');
+    assert.match(f.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /ledger-double-owned/);
+  } finally { rmSync(f.root, { recursive: true, force: true }); }
+});
+
+test('typed page reader/refuter/stabilized three-owner families support all permutations', () => {
+  const f = stabilizedSharingFixture('reader', false, 1, true);
+  try {
+    for (const order of permutations([...f.doc.decisions])) {
+      f.doc.decisions = order; f.write(); f.run('stamp', '--run', 'r');
+      assert.match(f.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+    }
+  } finally { rmSync(f.root, { recursive: true, force: true }); }
+});
+
+for (const producerFirst of [true, false]) test(`producer touched repair and two actual foreign findings retain compatible family anchors (${producerFirst ? 'producer' : 'consumer'} first)`, () => {
+  const f = foreignCausalHelperFixture(producerFirst, 2, true);
+  try {
+    for (const reverse of [false, true]) {
+      if (reverse) f.other.decisions.reverse();
+      f.write(); f.run('stamp', '--run', 'r');
+      assert.match(f.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+    }
+  } finally { rmSync(f.root, { recursive: true, force: true }); }
+});
+
+for (const page of [false, true]) test(`legacy native refuter omitted class resolves from exact immutable ${page ? 'page' : 'item'} carrier`, () => {
+  const f = stabilizedSharingFixture('reader', false, 2, page, true);
+  try {
+    const path = join(f.root, 'research/r-step5-scope-1.json'), native = readFileSync(path);
+    const scope = JSON.parse(native.toString());
+    assert.ok(scope.refuter_findings.every((row: any) => row.subject_type === undefined));
+    for (const order of permutations([...f.doc.decisions])) {
+      f.doc.decisions = order; f.write(); f.run('stamp', '--run', 'r');
+      assert.match(f.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+    }
+    assert.deepEqual(readFileSync(path), native);
+    assert.deepEqual(readFileSync(f.snapshotPath), f.immutablePost);
+  } finally { rmSync(f.root, { recursive: true, force: true }); }
+});
+
+test('omitted native refuter class inference refuses source, scope, observation and declared-class tampering', () => {
+  for (const mutate of [
+    (scope: any, post: any) => { scope.refuter_scope = scope.refuter_scope.filter((id: string) => id !== 'lem-ordinary-item'); },
+    (scope: any, post: any) => { post.manifest = post.manifest.filter((id: string) => id !== 'lem-ordinary-item'); },
+    (scope: any, post: any) => { post.hashes['lem-ordinary-item'].item_sha256 = '0'.repeat(64); },
+    (scope: any, post: any) => { scope.refuter_findings[0].observed_sha256 = '0'.repeat(64); },
+    (scope: any, post: any) => { scope.refuter_findings[0].subject_type = 'in-run-dependency'; },
+  ]) {
+    const f = stabilizedSharingFixture('reader', false, 1, false, true);
+    try {
+      const path = join(f.root, 'research/r-step5-scope-1.json'), scope = JSON.parse(readFileSync(path, 'utf8'));
+      const post = JSON.parse(readFileSync(f.snapshotPath, 'utf8')); mutate(scope, post);
+      writeFileSync(path, JSON.stringify(scope)); writeFileSync(f.snapshotPath, JSON.stringify(post));
+      assert.notEqual(f.attempt('check', '--run', 'r', '--phase', 'adjudicate').status, 0);
+    } finally { rmSync(f.root, { recursive: true, force: true }); }
+  }
 });

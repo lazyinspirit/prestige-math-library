@@ -1,0 +1,91 @@
+{
+  "run": "frontier-41-ha-dt-29",
+  "phase": "initial",
+  "round": 1,
+  "unit": "27",
+  "input_sha256": "79b0e989c27d1e96f1d9b9eaa6792321ec4c5196c7f8d892843c34832f7ef2a9",
+  "decisions": [
+    {
+      "id": "prop-finite-dimensional-module-categories-are-intrinsically-finite",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "90be890664d67db2720f50c7d616aa31148b2ff6dd9422be99a3fe43d58ef480",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 omits the finite-dimensional hypotheses of cor-dimensions-of-matrix-and-linear-map-spaces. With A=k and M=N=k[t], def-dimension supplies no dim_k M, so the unqualified formula is invalid. This is nonfatal because the only application, step 2.2, explicitly restricts M,N to finite-dimensional modules; its Hom-space bound and the proposition remain valid. Repaired F3 by qualifying only the dimension formula.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "prop-finite-dimensional-module-categories-are-intrinsically-finite",
+      "disposition": "repaired",
+      "post_sha256": "025e5e1ba6b72a495eb1ddbbfc8706d23ef3d2ab8210797b0919ec7d47992a50",
+      "review_context_sha256": "7b884ec8c7031ad15d78b18be18778fe2d06bb87157df3b85f018d79b29c01b7",
+      "reason": "Checked the statement, all seven proof steps, cited interfaces, owning contract and page. Finite-dimensional kernels, cokernels and biproducts give the abelian structure; the corrected F3 bounds Hom spaces. Minimum nonzero submodule dimension supplies a simple submodule and length induction. The regular-module composition series accounts for every simple via the least factor on which A maps nontrivially. The published cover proof constructs a finite-dimensional projective source without AC; its lifting property restricts to this full subcategory, and every submodule of that source is finite-dimensional, so superfluity restricts as well. Zero modules and A=0 are covered. This is a local review and repair, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "prop-finite-dimensional-module-categories-are-intrinsically-finite",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "finding": "F3 overstates a finite-dimensional dimension formula for arbitrary modules; step 2.2 already has the correct hypotheses.",
+      "repair": "Added the finite-dimensional-over-k condition to the dimension clause of F3.",
+      "adjudication_ref": [
+        {
+          "file": "research/frontier-41-ha-dt-29-step7-v2/step7-v2-initial-r1-u27.json",
+          "finding": "prop-finite-dimensional-module-categories-are-intrinsically-finite"
+        }
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_paths": [
+      "items/prop-finite-dimensional-module-categories-are-intrinsically-finite.md"
+    ],
+    "interface": "Statement and Definition sections are unchanged; no consumer examination or propagation is triggered. No new prerequisite, contract change, page change or AC assumption is needed.",
+    "evidence": [
+      "items/def-dimension.md, Definition: dimension exists only for finite-dimensional spaces.",
+      "items/cor-dimensions-of-matrix-and-linear-map-spaces.md, Statement: both vector spaces must be finite-dimensional.",
+      "items/thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras.md, complete proof steps 1.1\u20135.1: finite projective source, superfluity and uniqueness without arbitrary choice.",
+      "research/frontier-41-ha-dt-29-batch-27.proof-contracts.json: F3 citation already quotes the correct finite-dimensional interface; all seven derivations and boundaries remain applicable.",
+      "library/homological-algebra/finite-abelian-categories-and-eilenberg-watts.md: page promises intrinsic finiteness, preserved by this correction."
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/prop-finite-dimensional-module-categories-are-intrinsically-finite.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/prop-finite-dimensional-module-categories-are-intrinsically-finite.md",
+        "exit_code": 0,
+        "result": "1 file; YAML and all math spans parse; no rendering defects."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-41-ha-dt-29-batch-27.proof-contracts.json --strict --items prop-finite-dimensional-module-categories-are-intrinsically-finite",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 item checked."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/prop-finite-dimensional-module-categories-are-intrinsically-finite.md",
+        "exit_code": 0,
+        "result": "1 item, 7 steps, 0 defects."
+      }
+    ],
+    "published_ledger": "No published defect discovered; no update to research/published-consumer-supplier-ledger.md proposed.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and any required independent rejudgment; no judgment or certification written."
+  }
+}

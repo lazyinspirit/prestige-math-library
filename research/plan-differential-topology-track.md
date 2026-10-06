@@ -57,7 +57,8 @@ splice time.
 | DT-28 | `characteristic-class-obstructions-to-immersions-and-embeddings` | stable normal identities and explicit nonimmersion/nonembedding tests |
 | DT-29 | `foliation-holonomy-and-the-holonomy-groupoid` | germs, holonomy covers/groupoids and leafwise transport |
 | DT-30 | `reeb-stability-and-global-foliation-constructions` | compact-leaf stability, suspensions, mapping tori and Reeb components |
-| DT-31 | `codimension-one-foliations-and-secondary-classes` | transverse orientation, Bott vanishing, Godbillon--Vey and Novikov boundary |
+| DT-31a | `codimension-one-foliations-and-secondary-classes` | Bott/Godbillon--Vey and characteristic-disk foundations |
+| DT-31b | `vanishing-cycles-novikov-and-taut-foliations` | vanishing cycles, Novikov/Reeb, accessibility and tautness |
 | DT-32 | `exotic-smooth-structures-and-milnor-spheres` | Milnor bundles, smooth detection, homotopy-sphere group context |
 
 Every B page is the A id followed by `-examples`.  B pages contain only
@@ -1536,16 +1537,22 @@ treatment; the narrower specialisations are corroborated but not promoted.
 4. `cex-a-reeb-component-has-a-compact-boundary-leaf-with-infinite-holonomy-behaviour` — show spiralling and failure of product stability. **For:** tests item 4. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§2.3, 2.5--2.6, pp. 30--33, 44--55; Calegari §4.2, pp. 140--143; MIT 18.965 §§22--23, PDF pp. 54--56.
 5. `cex-a-compact-leaf-with-infinite-fundamental-group-can-still-have-trivial-holonomy` — use a product foliation. **For:** tests item 15. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§2.3, 2.5--2.6, pp. 30--33, 44--55; Calegari §4.2, pp. 140--143; MIT 18.965 §§22--23, PDF pp. 54--56.
 
-### DT-31 — Codimension-one foliations and secondary classes
+### DT-31a — Codimension One Foliations, Secondary Classes and Characteristic Disk Foundations
 
 **A page:** `codimension-one-foliations-and-secondary-classes`
 
-**Requires:** DT-15, DT-29--DT-30; DG differential forms/de Rham/Frobenius;
-AT fundamental-group/homology interfaces for Novikov consequences.
+**B page:** `codimension-one-foliations-and-secondary-classes-examples`
+
+**Approved owner split (2026-10-05):** 49 A items and 2 B items. The combined design is divided without changing any item ID, claim, proof strategy, source or prerequisite.
+
+**Requires:** DT-15, DT-29--DT-30; DG differential forms/de Rham/Frobenius and AT fundamental-group, cohomology and duality interfaces. Exact arrays are in §12.4 and the manifests.
 
 **Sources:** MMF §1.2, pp. 9--13 and §3.2, pp. 65--80; Hurder--Langevin,
 [“Dynamics and the Godbillon--Vey Class”](https://homepages.math.uic.edu/~hurder/papers/59manuscript-rev2016.pdf),
 §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
+
+
+**Designed mathematical claims:**
 
 1. `def-transversely-oriented-codimension-one-foliation-by-a-global-one-form` (definition) — choose a nowhere-zero $1$-form $\omega$ with $T\mathcal F=\ker\omega$ and $\omega\wedge d\omega=0$. **For:** translates DG Frobenius to the global cooriented setting. **Prov:** [S: literature-derived; P: not-applicable].
 2. `lem-frobenius-divisibility-gives-d-omega-equals-eta-wedge-omega` (lemma) — locally and then globally choose $\eta$ with $d\omega=\eta\wedge\omega$. **For:** starts Godbillon--Vey and fixes the wedge order. **Prov:** [S: literature-derived; P: literature-derived].
@@ -1556,32 +1563,156 @@ AT fundamental-group/homology interfaces for Novikov consequences.
 7. `cor-a-codimension-one-foliation-defined-by-a-closed-one-form-has-zero-godbillon-vey-class` (corollary) — choose $\eta=0$. **For:** gives the basic vanishing test. **Prov:** [S: literature-derived; P: literature-derived].
 8. `thm-godbillon-vey-class-is-invariant-under-smooth-foliated-concordance` (theorem) — extend the defining data over a foliated cobordism and use Stokes/de Rham restriction. **For:** connects the secondary class to DT cobordism. **Prov:** [S: literature-derived; P: literature-derived].
 9. `rem-classical-godbillon-vey-requires-at-least-c-two-regularity` (remark) — no general $C^1$ invariant is asserted. **For:** records the regularity threshold. **Prov:** [S: literature-derived; P: not-applicable].
-10. `def-reeb-component-in-a-cooriented-three-manifold-foliation` (definition) — a foliated solid torus has boundary leaf and interior leaves spiralling toward it. **For:** names the global obstruction piece. **Prov:** [S: literature-derived; P: not-applicable].
-11. `def-taut-codimension-one-foliation` (definition) — every leaf meets a closed transversal; on a compact connected manifold use the equivalent finite/one-transversal form under the source hypotheses. **For:** fixes the convention. **Prov:** [S: literature-derived; P: not-applicable].
-12. `lem-a-reeb-component-obstructs-tautness` (lemma) — its boundary leaf cannot be crossed by a closed everywhere-transverse curve without trapping. **For:** supplies the first implication. **Prov:** [S: literature-derived; P: literature-derived].
-13. `prop-transverse-volume-preserving-flow-implies-tautness-in-the-compact-cooriented-three-dimensional-setting` (proposition) — recurrence/volume gives closed transversals through leaves. **For:** provides a dynamical criterion with exact hypotheses. **Prov:** [S: literature-derived; P: literature-derived].
-14. `prop-a-leafwise-positive-closed-two-form-calibrates-a-taut-foliation` (proposition) — positivity and Stokes rule out dead ends and yield tautness under the compact oriented cooriented hypotheses. **For:** gives the form-theoretic criterion. **Prov:** [S: literature-derived; P: literature-derived].
-15. `def-vanishing-cycle-of-a-codimension-one-foliation` (definition) — a leafwise loop nontrivial in one leaf becomes trivial in nearby leaves through a transverse family. **For:** states Novikov's geometric input. **Prov:** [S: literature-derived; P: not-applicable].
-16. `lem-a-simple-vanishing-cycle-produces-a-compact-leaf` (lemma) — use leafwise disks and a limiting/innermost argument. **For:** first Novikov proof stage. **Prov:** [S: literature-derived; P: literature-derived].
-17. `lem-the-compact-leaf-produced-by-a-vanishing-cycle-bounds-a-reeb-component` (lemma) — holonomy and the solid-torus model give the component. **For:** second Novikov stage. **Prov:** [S: literature-derived; P: literature-derived].
-18. `thm-novikov-reeb-component-theorem` (theorem) — for a $C^2$ transversely oriented codimension-one foliation of a closed oriented $3$-manifold, a nullhomotopic closed transversal or a noninjective map $\pi_1(L)\to\pi_1(M)$ for some leaf forces a Reeb component. **For:** is the global obstruction theorem with its category and compactness hypotheses visible. **Prov:** [S: literature-derived; P: literature-derived].
-19. `cor-reebless-leaves-are-pi-one-injective-under-novikov-hypotheses` (corollary) — contrapose item 18. **For:** gives the essential-leaf consequence. **Prov:** [S: literature-derived; P: literature-derived].
-20. `rem-reebless-and-taut-are-not-equivalent-without-extra-hypotheses` (remark) — retain Calegari's compact/cooriented/atoroidal qualifications for converse implications. **For:** prevents exporting a three-manifold special case. **Prov:** [S: literature-derived; P: not-applicable].
-21. `rem-novikov-conclusions-do-not-extend-to-arbitrary-codimension-or-noncompact-manifolds` (remark) — the theorem is deliberately three-dimensional and codimension one. **For:** fixes scope. **Prov:** [S: literature-derived; P: not-applicable].
 
-**Hard-proof closure.**  The Godbillon--Vey proof includes closedness, both
-choice changes and concordance invariance.  Tautness equivalences retain
-compact oriented cooriented three-manifold hypotheses.  Novikov's theorem is
-split through vanishing cycle, compact leaf and Reeb component; it is not
-stated in arbitrary codimension.
+**Local proof closure:** Bott curvature/ideal vanishing, every Godbillon–Vey choice change and concordance proof, C¹/C² planar flows and period-frontier geometry, exact plaque/cap transport and finite fence foundations are proved in supplier order. The limit-cycle and limitwise-subgroup definitions stay here because the fixed-fence supplier consumes them. No item on this A page depends on the sequel.
 
-**B page:** `codimension-one-foliations-and-secondary-classes-examples`
+**Complete local A inventory (including proved prerequisite adapters):**
+
+- `lem-forms-annihilated-by-a-nowhere-vanishing-one-form-are-divisible-by-it` — Divisibility by a nowhere-vanishing one-form.
+- `lem-a-foliation-transverse-to-the-boundary-restricts-to-the-boundary` — Restriction of a foliation transverse to the boundary.
+- `def-bott-partial-connection-on-the-normal-bundle-of-a-foliation` — The Bott partial connection on the normal bundle of a foliation.
+- `lem-winding-number-jumps-by-one-across-a-regular-planar-arc` — The winding number jumps by one across a regular planar arc.
+- `lem-winding-number-is-locally-constant-via-integral-estimate` — The winding number is locally constant by an integral estimate.
+- `lem-c2-inverses-and-scalar-return-roots` — C² local inverses and scalar return roots.
+- `lem-c1-planar-fields-on-a-closed-disk-extend-to-a-neighborhood` — A C¹ planar field on a closed disk extends C¹ to a neighborhood.
+- `lem-c2-saddle-function-has-c1-morse-coordinates` — A C² saddle function has C¹ Morse coordinates.
+- `lem-the-bott-partial-connection-is-well-defined-and-flat-in-leaf-directions` — The Bott partial connection is well defined and flat along leaves.
+- `lem-c2-leaf-intersection-with-a-box-transversal-is-countable` — A C² leaf meets a local box transversal in at most countably many points.
+- `lem-finitely-cornered-regular-plane-curve-separates-without-choice` — A finitely cornered regular plane curve separates without choice.
+- `lem-c1-euclidean-maximal-flow-with-c2-upgrade` — C¹ Euclidean maximal flows, variational dependence and the finite C² upgrade.
+- `lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups` — Finite surface normal forms, Jordan disks, and torsion control.
+- `lem-frobenius-divisibility-gives-d-omega-equals-eta-wedge-omega` — Frobenius divisibility: d omega equals eta wedge omega.
+- `def-smooth-foliated-concordance` — Smooth foliated concordance of codimension-one foliations.
+- `lem-curvature-of-an-extending-bott-connection-lies-in-the-transverse-differential-ideal` — Curvature of an extending Bott connection lies in the transverse differential ideal.
+- `lem-characteristic-disk-map-can-be-put-in-generic-position-rel-boundary` — Relative generic position for characteristic disk maps.
+- `lem-characteristic-period-annulus-has-a-smooth-product-coordinate` — A C² product coordinate on a planar period annulus.
+- `lem-local-generalized-poincare-bendixson-for-a-precompact-planar-orbit` — Local generalized Poincaré–Bendixson theorem for a precompact planar orbit.
+- `lem-c1-planar-hyperbolic-gradient-has-local-stable-and-unstable-curves` — A C1 hyperbolic planar gradient has local stable and unstable curves.
+- `lem-eta-wedge-d-eta-is-closed` — The Godbillon-Vey form eta wedge d eta is closed.
+- `thm-bott-vanishing-for-real-pontryagin-monomials-of-a-codimension-q-foliation` — Bott vanishing for real Pontryagin monomials of a foliation.
+- `lem-c2-plaque-transport-and-transverse-fences-preserve-c2-regularity` — C² plaque transport and finite transverse fences preserve C² regularity.
+- `lem-characteristic-disk-center-saddle-index-count` — The characteristic disk has one more center than saddle.
+- `lem-finite-saddle-omega-graph-is-strongly-connected` — A finite saddle omega-graph is strongly connected and is a finite union of polycycles.
+- `lem-godbillon-vey-form-is-independent-of-the-choice-of-eta-up-to-an-exact-form` — Independence of the auxiliary form eta up to exact forms.
+- `lem-godbillon-vey-form-is-invariant-under-rescaling-the-defining-form` — Rescaling the defining form changes the Godbillon-Vey form by an exact form.
+- `lem-characteristic-disk-singular-images-can-be-separated-into-distinct-leaves-rel-collar` — Characteristic-disk singular images can be separated into distinct leaves relative to the boundary collar.
+- `lem-c2-first-integral-period-annuli-have-c2-products` — A C² first-integral period annulus has a C² leaf product.
+- `lem-fixed-cap-transverse-product-glues-by-unique-transverse-flow-roots` — A fixed cap product glues by unique transverse flow roots.
+- `lem-one-quadrant-homoclinic-disk-has-one-more-interior-center-than-saddle` — A one-quadrant homoclinic disk contains a center.
+- `lem-a-leafwise-loop-has-a-finite-transverse-double-point-representative` — Finite general position for a leafwise loop.
+- `def-godbillon-vey-class` — The Godbillon-Vey class of a codimension-one foliation.
+- `lem-one-sided-trivial-holonomy-classes-form-a-normal-subgroup` — One-sided trivial-holonomy classes form a normal subgroup.
+- `lem-nullhomotopy-persists-under-a-compact-transverse-deformation` — A compact leafwise nullhomotopy persists under a transverse deformation.
+- `lem-fixed-leafwise-cap-gives-a-joint-transverse-product-with-exact-collar` — A fixed leafwise cap gives a joint transverse product with exact collar data.
+- `lem-flat-drift-realizes-a-period-annulus-frontier-as-an-omega-limit` — A flat transverse drift realizes the period-annulus frontier as an omega-limit set.
+- `lem-separated-characteristic-disk-has-an-inclusion-minimal-nonidentity-simple-cycle` — A separated characteristic disk has a minimal nonidentity simple cycle.
+- `cor-a-codimension-one-foliation-defined-by-a-closed-one-form-has-zero-godbillon-vey-class` — Closed defining forms have vanishing Godbillon-Vey class.
+- `thm-godbillon-vey-class-is-invariant-under-smooth-foliated-concordance` — Godbillon-Vey invariance under smooth foliated concordance.
+- `rem-classical-godbillon-vey-requires-at-least-c-two-regularity` — The Godbillon-Vey class requires at least C-two regularity.
+- `def-limit-cycle-of-a-leaf-of-a-codimension-one-foliation` — Limit cycles of a leaf.
+- `lem-characteristic-period-annulus-has-an-orbit-or-polycycle-frontier` — A center period annulus has an orbit or polycycle frontier.
+- `def-limitwise-nullhomotopy-predicate-on-based-loops` — Limitwise-nullhomotopy predicate on based loops.
+- `lem-a-finite-characteristic-circuit-has-c2-regular-port-traces` — A finite characteristic circuit has C² regular port traces.
+- `lem-limitwise-nullhomotopy-predicate-descends-to-a-normal-subgroup` — Limitwise-nullhomotopy predicate descends to a normal subgroup.
+- `lem-saddle-polycycle-rounding-preserves-the-inward-transverse-family` — A saddle polycycle has a smooth transverse family on either adjacent annulus.
+- `def-limitwise-nullhomotopy-subgroup-of-a-leaf` — Limitwise-nullhomotopy subgroup of a leaf.
+- `lem-fixed-transverse-fences-have-a-finite-crossing-word` — Fixed transverse fences and their finite crossing words.
+
+**Companion examples:**
 
 1. `ex-a-fibration-over-the-circle-has-zero-godbillon-vey-class` — use a closed defining form. **For:** checks item 7. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §1.2 and §3.2, pp. 9--13, 65--80; Hurder--Langevin §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
 2. `ex-godbillon-vey-rescaling-calculation` — replace $\omega$ by $e^f\omega$ and compute the exact difference. **For:** verifies item 5. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §1.2 and §3.2, pp. 9--13, 65--80; Hurder--Langevin §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
-3. `ex-reeb-foliation-of-s-three-is-not-taut` — locate its Reeb components. **For:** checks item 12. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §1.2 and §3.2, pp. 9--13, 65--80; Hurder--Langevin §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
-4. `ex-fibre-foliation-of-a-mapping-torus-is-taut` — use a closed transversal. **For:** provides a positive model. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §1.2 and §3.2, pp. 9--13, 65--80; Hurder--Langevin §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
-5. `cex-a-noncompact-codimension-one-foliation-need-not-satisfy-novikov-compactness-conclusions` — exhibit escape at infinity. **For:** tests item 21. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §1.2 and §3.2, pp. 9--13, 65--80; Hurder--Langevin §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
+
+### DT-31b — Vanishing Cycles, Novikov and Taut Foliations
+
+**A page:** `vanishing-cycles-novikov-and-taut-foliations`
+
+**B page:** `vanishing-cycles-novikov-and-taut-foliations-examples`
+
+**Approved owner split (2026-10-05):** 50 A items and 3 B items. The combined design is divided without changing any item ID, claim, proof strategy, source or prerequisite.
+
+**Requires:** The first pair `codimension-one-foliations-and-secondary-classes`, followed by the same inherited supplier interfaces. DT-15, DT-29--DT-30; DG differential forms/de Rham/Frobenius and AT fundamental-group, cohomology and duality interfaces. Exact arrays are in §12.4 and the manifests.
+
+**Sources:** MMF §1.2, pp. 9--13 and §3.2, pp. 65--80; Hurder--Langevin,
+[“Dynamics and the Godbillon--Vey Class”](https://homepages.math.uic.edu/~hurder/papers/59manuscript-rev2016.pdf),
+§§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
+
+
+**Designed mathematical claims:**
+
+1. `def-reeb-component-in-a-cooriented-three-manifold-foliation` (definition) — a foliated solid torus has boundary leaf and interior leaves spiralling toward it. **For:** names the global obstruction piece. **Prov:** [S: literature-derived; P: not-applicable].
+2. `def-taut-codimension-one-foliation` (definition) — every leaf meets a closed transversal; on a compact connected manifold use the equivalent finite/one-transversal form under the source hypotheses. **For:** fixes the convention. **Prov:** [S: literature-derived; P: not-applicable].
+3. `lem-a-reeb-component-obstructs-tautness` (lemma) — its boundary leaf cannot be crossed by a closed everywhere-transverse curve without trapping. **For:** supplies the first implication. **Prov:** [S: literature-derived; P: literature-derived].
+4. `prop-transverse-volume-preserving-flow-implies-tautness-in-the-compact-cooriented-three-dimensional-setting` (proposition) — recurrence/volume gives closed transversals through leaves. **For:** provides a dynamical criterion with exact hypotheses. **Prov:** [S: literature-derived; P: literature-derived].
+5. `prop-a-leafwise-positive-closed-two-form-calibrates-a-taut-foliation` (proposition) — positivity and Stokes rule out dead ends and yield tautness under the compact oriented cooriented hypotheses. **For:** gives the form-theoretic criterion. **Prov:** [S: literature-derived; P: literature-derived].
+6. `def-vanishing-cycle-of-a-codimension-one-foliation` (definition) — a leafwise loop nontrivial in one leaf becomes trivial in nearby leaves through a transverse family. **For:** states Novikov's geometric input. **Prov:** [S: literature-derived; P: not-applicable].
+7. `lem-a-simple-vanishing-cycle-produces-a-compact-leaf` (lemma) — use leafwise disks and a limiting/innermost argument. **For:** first Novikov proof stage. **Prov:** [S: literature-derived; P: literature-derived].
+8. `lem-the-compact-leaf-produced-by-a-vanishing-cycle-bounds-a-reeb-component` (lemma) — holonomy and the solid-torus model give the component. **For:** second Novikov stage. **Prov:** [S: literature-derived; P: literature-derived].
+9. `thm-novikov-reeb-component-theorem` (theorem) — for a $C^2$ transversely oriented codimension-one foliation of a closed oriented $3$-manifold, a nullhomotopic closed transversal or a noninjective map $\pi_1(L)\to\pi_1(M)$ for some leaf forces a Reeb component. **For:** is the global obstruction theorem with its category and compactness hypotheses visible. **Prov:** [S: literature-derived; P: literature-derived].
+10. `cor-reebless-leaves-are-pi-one-injective-under-novikov-hypotheses` (corollary) — contrapose item 18. **For:** gives the essential-leaf consequence. **Prov:** [S: literature-derived; P: literature-derived].
+11. `rem-reebless-and-taut-are-not-equivalent-without-extra-hypotheses` (remark) — retain Calegari's compact/cooriented/atoroidal qualifications for converse implications. **For:** prevents exporting a three-manifold special case. **Prov:** [S: literature-derived; P: not-applicable].
+12. `rem-novikov-conclusions-do-not-extend-to-arbitrary-codimension-or-noncompact-manifolds` (remark) — the theorem is deliberately three-dimensional and codimension one. **For:** fixes scope. **Prov:** [S: literature-derived; P: not-applicable].
+
+**Local proof closure:** Characteristic-disk cancellation and finite search, one-sided Haefliger geometry, accessibility/tautness and the full vanishing-cycle → compact leaf → Reeb component chain retain all original compactness, regularity and choice hypotheses. Full Novikov and its π₁-injectivity consequence are preserved. Every use of first-pair foundations is an explicit backward item dependency.
+
+**Complete local A inventory (including proved prerequisite adapters):**
+
+- `def-taut-codimension-one-foliation` — Taut codimension-one foliations.
+- `def-dead-end-component` — Dead-end components.
+- `def-accessible-manifold-of-a-leaf` — The accessible manifold of a leaf.
+- `def-positive-transverse-accessibility-between-leaves` — Positive transverse accessibility between leaves.
+- `lem-a-taut-foliation-of-a-compact-connected-manifold-is-met-by-a-single-closed-transversal` — A taut foliation of a compact connected manifold has a single closed transversal.
+- `lem-finite-tangent-zero-count-and-inward-boundary-sum-without-general-thom-existence` — Finite tangent index count and inward boundary sum.
+- `def-reeb-component-in-a-cooriented-three-manifold-foliation` — Reeb components of a codimension-one foliation.
+- `lem-positive-transverse-accessibility-is-a-preorder` — Positive transverse accessibility is a preorder and mutual accessibility is an equivalence relation.
+- `lem-a-noncompact-leaf-of-a-compact-c2-foliation-meets-a-positive-closed-transversal` — A noncompact leaf meets a positive closed transversal at C2 regularity.
+- `def-foliation-component-by-mutual-positive-transverse-accessibility` — Foliation components as mutual positive transverse-accessibility classes.
+- `lem-null-simple-center-frontier-supplies-the-exact-cancellation-scalar` — A null simple center frontier supplies the exact cancellation scalar.
+- `lem-nested-pinched-center-frontier-has-a-strict-inner-disk-search` — A nested pinched center frontier gives a strict inner-disk search.
+- `lem-null-characteristic-frontier-cap-transports-nullity-to-adjacent-annulus` — A compact leafwise cap transports nullity across a regular characteristic orbit.
+- `lem-first-saddle-lobe-admits-a-collar-fixed-center-saddle-cancellation` — A first-saddle lobe admits a collar-fixed center–saddle cancellation.
+- `lem-area-minimal-three-sector-homoclinic-cycle-has-identity-inward-holonomy` — An area-minimal three-sector cycle has identity inward holonomy.
+- `lem-haefliger-nulltransversal-disk-has-a-minimal-one-sided-cycle` — A generic null-transversal disk has a minimal one-sided cycle.
+- `def-vanishing-cycle-of-a-codimension-one-foliation` — Vanishing cycles of a codimension-one foliation.
+- `lem-a-compact-leaf-near-a-compact-reference-leaf-is-a-one-sheeted-collar-graph` — Finite transversal control and compact collar graphs.
+- `lem-closed-null-fence-word-has-an-essential-lower-endpoint` — Closed null fence words have essential lower endpoints.
+- `lem-a-vanishing-cycle-determines-a-nontrivial-limitwise-nullhomotopy-class` — A vanishing cycle determines a nonzero limitwise-nullhomotopy class.
+- `lem-c2-spherical-leaf-stability-on-a-closed-manifold-needs-only-countable-choice` — Spherical stability at C² and countable-choice strength.
+- `lem-compatible-arbitrary-pi-fence-reduction` — Finite compatible reduction of an arbitrary Π fence.
+- `lem-no-transversal-leaf-bounds-a-positive-accessibility-region-with-finite-inward-boundary` — A no-transversal leaf bounds a finite inward accessibility region.
+- `lem-first-essential-loop-of-a-transverse-family-is-a-vanishing-cycle` — The first essential loop in a transverse family is a vanishing cycle.
+- `lem-a-no-transversal-leaf-is-a-torus-via-the-finite-accessibility-boundary-sum` — A no-transversal Π leaf is a torus.
+- `lem-canonical-jordan-cap-bundle-develops-coherently-over-every-positive-band` — Canonical Jordan cap development and an infinite normal clock.
+- `lem-a-foliation-is-taut-if-and-only-if-it-has-no-dead-end-component` — Tautness is equivalent to the absence of dead-end components.
+- `lem-center-frontier-selection-and-cancellation-search-has-a-finite-rank` — Center-frontier selection and cancellation have a finite rank.
+- `lem-a-nonzero-pi-class-on-a-torus-has-a-primitive-embedded-pi-root` — A torus Π class has a primitive embedded Π root.
+- `lem-paired-regular-disk-sweep-is-open-across-its-base-gluing` — Paired cap sweeps are locally open across their seams.
+- `lem-simple-lifted-caps-avoid-the-original-essential-loop-and-a-fixed-intrinsic-neighborhood` — Jordan lifted caps avoid the original essential loop.
+- `lem-a-reeb-component-obstructs-tautness` — A Reeb component obstructs tautness.
+- `prop-transverse-volume-preserving-flow-implies-tautness-in-the-compact-cooriented-three-dimensional-setting` — A transverse volume-preserving flow forces tautness.
+- `prop-a-leafwise-positive-closed-two-form-calibrates-a-taut-foliation` — A closed two-form positive on the leaves forces tautness and calibrates.
+- `lem-characteristic-disk-with-essential-boundary-data-produces-a-vanishing-cycle` — A characteristic disk with essential boundary data produces a vanishing cycle.
+- `lem-a-primitive-pi-torus-collar-has-contracting-longitude-and-exhausting-plane-caps` — A contracting longitude exhausts the nearby plane leaves.
+- `lem-an-infinite-cap-center-trajectory-has-recurrent-common-plaque-interior-patches` — Infinite cap tracks give actual common-plaque recurrence.
+- `rem-reebless-and-taut-are-not-equivalent-without-extra-hypotheses` — Reeblessness and tautness are not equivalent without extra hypotheses.
+- `lem-a-compressible-leaf-yields-a-vanishing-cycle` — A compressible leaf yields a vanishing cycle.
+- `lem-a-nullhomotopic-closed-transversal-yields-a-vanishing-cycle` — A null-homotopic closed transversal yields a vanishing cycle.
+- `lem-common-plaque-lifted-caps-admit-nested-source-disk-inclusions` — Recurrent caps have nested source-disk inclusions.
+- `lem-the-primitive-pi-cap-block-embeds-and-gives-the-global-reeb-model` — The primitive cap block embeds as the standard Reeb component.
+- `lem-a-paired-immersed-cap-sweep-excludes-a-positive-closed-transversal` — An immersed paired cap sweep excludes closed transversals.
+- `lem-recurrent-pi-side-leaf-identifies-a-distinct-accessibility-boundary-class` — A recurrent Π-side leaf gives a distinct accessibility boundary.
+- `lem-nontrivial-limitwise-nullhomotopy-class-forces-compact-boundary-leaf` — A nonzero limitwise-nullhomotopy class forces a compact boundary leaf.
+- `lem-a-simple-vanishing-cycle-produces-a-compact-leaf` — A nonzero limitwise-nullhomotopy class yields a compact boundary leaf.
+- `lem-the-compact-leaf-produced-by-a-vanishing-cycle-bounds-a-reeb-component` — The compact boundary leaf bounds a Reeb component.
+- `thm-novikov-reeb-component-theorem` — Novikov's Reeb component theorem.
+- `cor-reebless-leaves-are-pi-one-injective-under-novikov-hypotheses` — Reebless leaves are pi-one-injective and transverse loops are essential.
+- `rem-novikov-conclusions-do-not-extend-to-arbitrary-codimension-or-noncompact-manifolds` — Novikov's conclusions do not extend to higher dimensions or noncompact manifolds.
+
+**Companion examples:**
+
+1. `ex-reeb-foliation-of-s-three-is-not-taut` — locate its Reeb components. **For:** checks item 12. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §1.2 and §3.2, pp. 9--13, 65--80; Hurder--Langevin §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
+2. `ex-fibre-foliation-of-a-mapping-torus-is-taut` — use a closed transversal. **For:** provides a positive model. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §1.2 and §3.2, pp. 9--13, 65--80; Hurder--Langevin §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
+3. `cex-a-noncompact-codimension-one-foliation-need-not-satisfy-novikov-compactness-conclusions` — exhibit escape at infinity. **For:** tests item 21. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §1.2 and §3.2, pp. 9--13, 65--80; Hurder--Langevin §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
 
 ### DT-32 — Exotic smooth structures and Milnor spheres
 
@@ -2232,7 +2363,7 @@ replace both the old descriptive tokens and all preceding-B anchors.
 | `thom-spaces-normal-data-and-collapse-maps` | `smooth-vector-bundles-and-sections`; `sard-theorem-and-transversality`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `manifolds-with-boundary-collars-and-orientations`; `orientations-poincare-lefschetz-and-alexander-duality`; `topological-vector-bundles-and-grassmannian-classification`; `leray-hirsch-thom-isomorphism-and-gysin-sequences`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification` |
 | `pontryagin-thom-and-framed-cobordism` | `smooth-cobordism-relations-groups-and-rings`; `thom-spaces-normal-data-and-collapse-maps`; `sard-theorem-and-transversality`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `higher-homotopy-groups-and-cofiber-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `spectra-and-stable-homotopy-groups` |
 | `the-hopf-degree-theorem` | `smooth-cobordism-relations-groups-and-rings`; `pontryagin-thom-and-framed-cobordism`; `the-de-rham-theorem-and-degree`; `higher-homotopy-groups-and-cofiber-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation` |
-| `characteristic-numbers-and-cobordism-obstructions` | `intersection-pairings-self-intersection-and-euler-classes`; `smooth-cobordism-relations-groups-and-rings`; `thom-spaces-normal-data-and-collapse-maps`; `pontryagin-thom-and-framed-cobordism`; `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality`; `bocksteins-steenrod-squares-and-cohomology-operations`; `topological-vector-bundles-and-grassmannian-classification`; `leray-hirsch-thom-isomorphism-and-gysin-sequences`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification`; `spectra-and-stable-homotopy-groups` |
+| `characteristic-numbers-and-cobordism-obstructions` | `intersection-pairings-self-intersection-and-euler-classes`; `smooth-cobordism-relations-groups-and-rings`; `thom-spaces-normal-data-and-collapse-maps`; `pontryagin-thom-and-framed-cobordism`; `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality`; `bocksteins-steenrod-squares-and-cohomology-operations`; `topological-vector-bundles-and-grassmannian-classification`; `leray-hirsch-thom-isomorphism-and-gysin-sequences`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification`; `spectra-and-stable-homotopy-groups`; `thom-spectra-and-unoriented-bordism-detection` |
 | `the-hirzebruch-signature-theorem` | `intersection-pairings-self-intersection-and-euler-classes`; `smooth-cobordism-relations-groups-and-rings`; `characteristic-numbers-and-cobordism-obstructions`; `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification` |
 | `smooth-surgery-traces-and-handle-trading` | `sublevel-deformation-and-the-handle-attachment-theorem`; `handle-decompositions-duality-and-rearrangement`; `handle-cancellation-slides-and-elementary-moves`; `oriented-and-mod-two-intersection-numbers`; `intersection-pairings-self-intersection-and-euler-classes`; `smooth-cobordism-relations-groups-and-rings`; `thom-spaces-normal-data-and-collapse-maps`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `relative-homology-excision-and-mayer-vietoris`; `orientations-poincare-lefschetz-and-alexander-duality`; `higher-homotopy-groups-and-cofiber-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `obstruction-theory-postnikov-towers-and-classifying-spaces`; `the-fundamental-group` |
 | `the-whitney-trick-and-surgery-below-the-middle-dimension` | `handle-cancellation-slides-and-elementary-moves`; `oriented-and-mod-two-intersection-numbers`; `smooth-surgery-traces-and-handle-trading`; `sard-theorem-and-transversality`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `relative-homology-excision-and-mayer-vietoris`; `orientations-poincare-lefschetz-and-alexander-duality`; `higher-homotopy-groups-and-cofiber-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `the-fundamental-group` |
@@ -2245,6 +2376,7 @@ replace both the old descriptive tokens and all preceding-B anchors.
 | `foliation-holonomy-and-the-holonomy-groupoid` | `distributions-integral-manifolds-and-the-frobenius-theorem`; `sard-theorem-and-transversality`; `vector-fields-flows-and-lie-derivatives`; `subspaces-products-and-quotients`; `covering-spaces-and-lifting`; `the-fundamental-group` |
 | `reeb-stability-and-global-foliation-constructions` | `foliation-holonomy-and-the-holonomy-groupoid`; `distributions-integral-manifolds-and-the-frobenius-theorem`; `manifolds-with-boundary-collars-and-orientations`; `covering-spaces-and-lifting`; `the-fundamental-group`; `singular-cohomology-and-coefficient-theorems` |
 | `codimension-one-foliations-and-secondary-classes` | `smooth-cobordism-relations-groups-and-rings`; `foliation-holonomy-and-the-holonomy-groupoid`; `reeb-stability-and-global-foliation-constructions`; `distributions-integral-manifolds-and-the-frobenius-theorem`; `tensor-fields-exterior-algebra-and-differential-forms`; `the-exterior-derivative-and-cartan-calculus`; `integration-of-forms-and-the-general-stokes-theorem`; `the-de-rham-complex-homotopy-and-mayer-vietoris`; `chern-weil-theory-and-characteristic-forms`; `the-fundamental-group`; `singular-cohomology-and-coefficient-theorems`; `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification` |
+| `vanishing-cycles-novikov-and-taut-foliations` | `codimension-one-foliations-and-secondary-classes`; `smooth-cobordism-relations-groups-and-rings`; `foliation-holonomy-and-the-holonomy-groupoid`; `reeb-stability-and-global-foliation-constructions`; `distributions-integral-manifolds-and-the-frobenius-theorem`; `tensor-fields-exterior-algebra-and-differential-forms`; `the-exterior-derivative-and-cartan-calculus`; `integration-of-forms-and-the-general-stokes-theorem`; `the-de-rham-complex-homotopy-and-mayer-vietoris`; `chern-weil-theory-and-characteristic-forms`; `the-fundamental-group`; `singular-cohomology-and-coefficient-theorems`; `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification` |
 | `exotic-smooth-structures-and-milnor-spheres` | `intersection-pairings-self-intersection-and-euler-classes`; `smooth-cobordism-relations-groups-and-rings`; `thom-spaces-normal-data-and-collapse-maps`; `the-hirzebruch-signature-theorem`; `the-smooth-h-cobordism-theorem`; `fibrations-fiber-bundles-and-homotopy-exact-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `topological-vector-bundles-and-grassmannian-classification`; `leray-hirsch-thom-isomorphism-and-gysin-sequences`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification` |
 
 ### 12.5 Binding mathematical repairs to planned inventories
@@ -2282,9 +2414,13 @@ These amendments are mandatory before the affected empty A page is authored.
   graph--diagonal proof on nonorientable manifolds, DT-14 consumes AT-23's
   orientation local system and twisted Poincare duality. The Lefschetz--Hopf
   theorem remains valid for every closed smooth manifold.
-- **DT-19:** add AT-9 as in §12.4.  The proof of Thom's unoriented bordism
-  detection theorem must explicitly use Thom-space cohomology operations and
-  the stable PT map; characteristic-class naturality alone is insufficient.
+- **DT-19:** retain AT-9 for its Steenrod/Bockstein interfaces and add the
+  Algebraic Topology support page `thom-spectra-and-unoriented-bordism-detection` in §12.4. Move the
+  shared definition `def-thom-prespectrum-of-the-universal-real-and-oriented-bundles` to that support A page;
+  keep its three DT-19 consumers against the same item ID. Thom detection must
+  explicitly use Thom-space cohomology operations and the stable PT map;
+  characteristic-class naturality alone is insufficient. DT-9 gets no edge to
+  the support page.
 - **DT-21:** in items 1--2 require $0\le p\le m-1$ and
   $q=m-p\ge1$.  The dual sphere has dimension $q-1$ and the trace handle has
   index $p+1$.  No $S^{-1}$ “surgery” is silently included.
@@ -2349,17 +2485,83 @@ These amendments are mandatory before the affected empty A page is authored.
   bridge; algebraic Whitehead torsion remains wholly AT-owned.
 - **DT-32:** item 19 is not an adequate theorem statement while it says only
   “source-normalized combination.”  Let $M$ be a closed oriented
-  $7$-manifold with $H_3(M;\mathbb Z)=H_4(M;\mathbb Z)=0$ and let $W$ be a
-  compact oriented $8$-manifold with oriented boundary $M$.  Define the
-  relative lift $\bar p_1(W)\in H^4(W,M;\mathbb Z)$ and its square
-  $q(W)=\langle\bar p_1(W)^2,[W,M]\rangle$.  Replace item 19 by
+  $7$-manifold with $H^3(M;\mathbb Z)=H^4(M;\mathbb Z)=0$ and let $W$ be a
+  compact oriented $8$-manifold with oriented boundary $M$.  Since
+  $p_1(TW)|_M=p_1(TM)=0$, there is a unique relative lift
+  $\bar p_1(W)\in H^4(W,M;\mathbb Z)$; uniqueness follows from
+  $H^3(M;\mathbb Z)=0$.  Define
+  $q(W)=\langle\bar p_1(W)\smile\bar p_1(W),[W,M]\rangle$.  Prove locally
+  that this relative square equals the mixed evaluation with the absolute
+  $p_1(TW)$ class under the unique relative lift.
+  Replace item 19 by
   `thm-milnor-lambda-invariant-is-well-defined-modulo-seven`, with the exact
-  normalization from the cited full text (equivalently Milnor's residue of
-  $2q(W)-\sigma(W)$ modulo $7$, after reconciling his sign convention).
+  normalization from Milnor's full text, pp. 399--401, namely
+  $\lambda(M)=2q(W)-\sigma(W)\pmod 7$.  For a closed oriented glued
+  $8$-manifold $N$, put
+  $P_1(N)=\langle p_1(TN)^2,[N]\rangle$.  The signature theorem gives
+  $45\sigma(N)=7\langle p_2(TN),[N]\rangle-P_1(N)$, hence
+  $P_1(N)\equiv4\sigma(N)\pmod 7$ and
+  $2P_1(N)-\sigma(N)\equiv0\pmod 7$.  Prove that the relative Pontryagin
+  numbers glue to $P_1(N)$ and that signatures are additive under this
+  boundary gluing; the vanishing of $H^3(M)$ and $H^4(M)$ gives the unique
+  matching relative lift.  The displayed closed-manifold congruence then
+  proves independence under changing the filling.
   State that it is an oriented boundary-diffeomorphism invariant and changes
-  sign under orientation reversal.  Item 20 and its examples must perform
-  this exact modulo-seven arithmetic.  Do not substitute the later
-  Eells--Kuiper normalization without adding spin cobordism and its hypotheses.
+  sign under orientation reversal because the fundamental-class evaluations
+  $q$ and $\sigma$ change sign; the Pontryagin class itself is
+  orientation-independent.  Item 20 and its examples must perform this exact
+  modulo-seven arithmetic.  For the Euler $+1$ disk bundle, the locally proved
+  formulas $p_1(\xi_{h,j})=2(h-j)u$ and
+  $\langle u^2,[W,M]\rangle=1$ give
+  $\lambda(M_{h,j})=(h-j)^2-1\pmod 7$.  Prove the coefficient and sign in
+  this $p_1$ formula from the quaternionic clutching maps and their induced
+  complex orientations, with local clutching-degree and characteristic-class
+  additivity lemmas.  Do not use the Northwestern lecture's orientation
+  shorthand $p_1(-B')=-p_1(B')$ or its printed $1+3x$ denominator for
+  $\mathbb H P^2$.  Do not substitute the later Eells--Kuiper normalization
+  without adding spin cobordism and its hypotheses.  State the invariant on
+  boundary manifolds admitting such a bound unless the existence of a bound
+  for every manifold in a broader claimed domain is itself proved locally;
+  the concrete Milnor-sphere examples have the explicit disk-bundle bounds.
+  Batch 12 defines signature only for closed manifolds, so DT-32 must first
+  define the boundary middle form locally and prove its nondegeneracy,
+  finite-dimensionality, and gluing comparison from Poincare--Lefschetz
+  duality and the relative evaluation pairing.  Do not apply the closed
+  signature definition directly to $W$.
+
+  The F41 scaffold retains the planned 23 A claims and 5 B examples and adds
+  twenty local support items, all within this A/B pair and before their
+  consumers; this does not add a page or change the approved scope.  They are:
+
+  - lem-compact-smooth-manifolds-have-finite-cw-models-under-countable-choice
+  - lem-theta-n-connected-sum-operation-is-well-defined
+  - lem-orientation-reversal-is-inverse-in-theta-n
+  - lem-parallelizable-boundaries-form-a-subgroup
+  - lem-euler-number-is-the-clutching-degree
+  - lem-quaternionic-basic-clutchings-have-pontryagin-numbers-plus-and-minus-two
+  - lem-degree-four-characteristic-numbers-add-under-clutching-product
+  - def-boundary-middle-form-and-signature
+  - lem-boundary-middle-form-is-well-defined-and-glues
+  - lem-relative-pontryagin-square-equals-mixed-evaluation
+  - def-milnor-lambda-candidate-from-a-filling
+  - lem-relative-pontryagin-square-glues-across-a-seven-boundary
+  - lem-relative-kronecker-evaluation-is-well-defined-and-natural
+  - lem-relative-middle-cup-products-are-symmetric
+  - lem-relative-cap-evaluation-identity
+  - lem-collared-gluing-has-relative-excision-and-evaluation-maps
+  - lem-compact-oriented-boundary-manifolds-have-finite-dimensional-cohomology
+  - lem-integral-middle-cohomology-vanishing-implies-real-vanishing
+  - lem-thom-class-of-a-disk-bundle-pairs-with-the-base-generator
+  - lem-tangent-of-the-milnor-disk-bundle-has-the-required-stable-splitting
+
+  Their complete local strategies are required before authoring; the deep
+  stable-parallelizability and order-28 results remain the only
+  non-supplied, non-load-bearing claims in this pair.  State full AC on each
+  actual consumer of the characteristic-class, Gysin, self-intersection,
+  Thom/duality and closed-signature suppliers that require it.  Keep the
+  h-cobordism theorem and the Θₙ/bP group interfaces at ACω where that is the
+  only choice premise; do not propagate full AC merely through the
+  explanatory dependency of the published ACω definition.
 
 ### 12.6 Pair-by-pair disposition
 

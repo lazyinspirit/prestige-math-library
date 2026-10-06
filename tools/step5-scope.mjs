@@ -19,9 +19,12 @@ import { fileURLToPath } from 'node:url';
 import { split, yaml } from './pathway-lib.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { step5Escalations, externalContextReceipt } from './step5-escalations.mjs';
-import { activeOwnershipRows } from './defect-ownership.mjs';
 import { step5Adjudicators } from './step5-adjudicators.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
+import { loadOwnerIdMigrations } from './step5-owner-id-migrations.mjs';
+import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
+import { loadOwnerHistoricalRoutes } from './step5-owner-historical-routes.mjs';
+import { isCertifiedOwnerContextAddition } from './step5-owner-context-addition.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -212,6 +215,16 @@ function pageCarrier(value, orderAnchor = null) {
   return { ...carrier, item_order: itemOrder.map(String).filter((id) => anchor.has(id)) };
 }
 
+let ownerIdMigrations = null;
+function currentItemId(id, batch = null) {
+  if (ownerIdMigrations === null) {
+    try { ownerIdMigrations = loadOwnerIdMigrations(ROOT, run); }
+    catch (cause) { fail(`step5-scope: ${cause.message}`, 1); }
+  }
+  return ownerIdMigrations.find(row => row.old_id === id
+    && (batch === null || String(row.batch) === String(batch)))?.new_id ?? id;
+}
+
 function currentDecisionCarrier(decision, target, live) {
   if (target?.subject_type === 'in-run-dependency') {
     return producerCarrier(target.id, target.producer_batch);
@@ -227,7 +240,8 @@ function currentDecisionCarrier(decision, target, live) {
     return { item_sha256: existsSync(path) ? sha256(readFileSync(path)) : null };
   }
   if (target?.route === 'page') return pageCarrier(live?.pages[decision.id], target.order_anchor);
-  if (live?.items[decision.id]) return live.items[decision.id];
+  const currentId = currentItemId(decision.id, target?.batch ?? null);
+  if (live?.items[currentId]) return live.items[currentId];
   if (live?.pages[decision.id]) return pageCarrier(live.pages[decision.id]);
   return undefined;
 }
@@ -243,6 +257,16 @@ function currentAuditorCertification(target) {
   // The shared reader already checked the exact current carriers, excluding
   // only the mechanical judge stamp. Do not reintroduce a raw-byte comparison.
   return row ?? null;
+}
+
+function ownerContextAddition(id, batch) {
+  if (!/^rem-/.test(id)) return false;
+  const itemPath = R('items', id + '.md');
+  if (!existsSync(itemPath)) return false;
+  const item = yaml().parse(split(readFileSync(itemPath, 'utf8')).fm);
+  if (item?.kind !== 'remark' || item.proved_here !== false || item.provenance?.proof !== 'not-supplied') return false;
+  const certificates = loadAuditorCreatedCertifications(auditorCertificationsPath, { root: ROOT, run, steps: [5] });
+  return isCertifiedOwnerContextAddition({ id, batch, run, item, certificates });
 }
 
 function hashSnapshotErrors(doc, batch, label) {
@@ -339,12 +363,30 @@ function normalizeRefuterFindings(findings, batch, openedSet, reportError) {
   return normalizeFindings(findings, batch, openedSet, reportError, 'refuter');
 }
 
+function manifestProducers(manifests = manifestItems()) {
+  const producers = new Map();
+  for (const [producer, ids] of Object.entries(manifests)) for (const id of ids) {
+    if (!producers.has(id)) producers.set(id, []);
+    producers.get(id).push(producer);
+  }
+  return producers;
+}
+
+// Current manifests establish ownership. Older locally authored draft carriers
+// need not contain pipeline_run, but a contradictory explicit marker must fail
+// closed rather than importing another run's draft into this run's closure.
+function currentRunDraft(item, owners) {
+  return owners.length === 1 && item?.status === 'draft'
+    && (item.pipeline_run === undefined || item.pipeline_run === run);
+}
+
 /** Exact published dependency closure reachable from each assigned consumer. */
 function publishedDependencies(batchIds, allRunIds) {
   const Y = yaml();
   const owners = new Map();
   const claimed = claimedPublishedIds();
   const itemMetadata = new Map();
+  const producers = manifestProducers();
   const metadataFor = (id) => {
     if (itemMetadata.has(id)) return itemMetadata.get(id);
     const path = R('items', `${id}.md`);
@@ -390,12 +432,8 @@ function publishedDependencies(batchIds, allRunIds) {
 /** Other current-run producers reachable through declared item prerequisites.
  * Keep a concrete path; a run-wide inventory is not evidence of a dependency. */
 function inRunDependencies(batch, consumers, manifests = manifestItems()) {
-  const Y = yaml(), metadata = new Map(), producers = new Map(), result = new Map();
+  const Y = yaml(), metadata = new Map(), producers = manifestProducers(manifests), result = new Map();
   const claimed = claimedPublishedIds();
-  for (const [producer, ids] of Object.entries(manifests)) for (const id of ids) {
-    if (!producers.has(id)) producers.set(id, []);
-    producers.get(id).push(producer);
-  }
   const itemFor = id => {
     if (!metadata.has(id)) {
       const path = R('items', `${id}.md`);
@@ -422,9 +460,9 @@ function inRunDependencies(batch, consumers, manifests = manifestItems()) {
         if (typeof dep !== 'string' || path.includes(dep)) continue;
         const source = itemFor(dep), owners = producers.get(dep) ?? [];
         if (!source || (!owners.length && source.status !== 'published' && !claimed.has(dep))) continue;
+        if (owners.length && !currentRunDraft(source, owners)) continue;
         const next = [...path, dep];
-        if (owners.length === 1 && owners[0] !== batch
-          && source.status === 'draft' && source.pipeline_run === run) {
+        if (owners.length === 1 && owners[0] !== batch) {
           if (!result.has(dep)) result.set(dep, { producer_batch: owners[0], consumers: new Map() });
           result.get(dep).consumers.set(consumer, next);
         }
@@ -439,15 +477,39 @@ function findingDependencies(batch, consumers, findings, manifests = manifestIte
   const runIds = new Set(Object.values(manifests).flat()), assigned = new Set(consumers);
   if (!findings.some(row => row?.subject_type === 'in-run-dependency'
     || runIds.has(row?.id) && !assigned.has(row.id))) return new Map();
-  return inRunDependencies(batch, consumers, manifests);
+  const dependencies = inRunDependencies(batch, consumers, manifests);
+  for (const row of loadOwnerHistoricalRoutes(ROOT, run).filter(row => row.batch === String(batch))) {
+    const finding = row.finding;
+    if (!assigned.has(finding.consumer_id)) continue;
+    let route = dependencies.get(finding.id);
+    if (route?.consumers.has(finding.consumer_id) && !route.historical?.has(finding.consumer_id)) continue;
+    if (!route) { route = { producer_batch: finding.producer_batch, consumers: new Map() }; dependencies.set(finding.id, route); }
+    route.consumers.set(finding.consumer_id, finding.dependency_path.map(node => node.id));
+    route.historical ??= new Map();
+    if (!route.historical.has(finding.consumer_id)) route.historical.set(finding.consumer_id, new Map());
+    route.historical.get(finding.consumer_id).set(finding.obligation, finding);
+  }
+  return dependencies;
+}
+
+// Definition carriers are exact source/manifest evidence even when there is no
+// numbered-proof contract. The null contract hash records that absence; it is
+// not a proof certificate and does not waive normal definition adjudication.
+function definitionWithoutProofContract(id) {
+  const path = R('items', `${id}.md`);
+  if (!existsSync(path)) return false;
+  try {
+    const item = yaml().parse(split(readFileSync(path, 'utf8')).fm) ?? {};
+    return item.kind === 'definition' && item.provenance?.proof === 'not-applicable';
+  } catch { return false; }
 }
 
 function producerCarrier(id, producer) {
   const owners = Object.entries(manifestItems()).filter(([, ids]) => ids.includes(id)).map(([batch]) => batch);
   if (owners.length !== 1 || owners[0] !== String(producer)) return undefined;
   const contractPath = R('research', `${run}-batch-${producer}.proof-contracts.json`);
-  if (!existsSync(contractPath) || !readJson(contractPath, `producer ${producer} proof contract`).contracts?.[id]
-    || !manifestMetadata(String(producer)).itemRows.has(id)) return undefined;
+  if (!existsSync(contractPath) || (!readJson(contractPath, `producer ${producer} proof contract`).contracts?.[id]
+    && !definitionWithoutProofContract(id)) || !manifestMetadata(String(producer)).itemRows.has(id)) return undefined;
   const carrier = liveFingerprints(String(producer)).items[id];
   return carrier?.item_sha256 ? { producer_batch: String(producer), ...carrier } : undefined;
 }
@@ -455,17 +517,20 @@ function producerCarrier(id, producer) {
 function bindInRunFinding(finding, batch, dependencies, reportError) {
   const route = dependencies.get(finding.id), path = route?.consumers.get(finding.consumer_id);
   if (!route || !path) { reportError(`${finding.obligation} must name an assigned consumer reaching another exact current-run draft producer`); return; }
+  const historicalBindings = route.historical?.get(finding.consumer_id);
+  const frozen = historicalBindings?.get(finding.obligation);
+  if (historicalBindings && !frozen) { reportError(`${finding.obligation} has no exact owner historical route authorization`); return; }
   const current = producerCarrier(finding.id, route.producer_batch);
   const prePath = hashPath(route.producer_batch, 'pre');
   const pre = readJson(prePath, `producer ${route.producer_batch} pre-reader snapshot`);
   for (const message of hashSnapshotErrors(pre, route.producer_batch, 'pre')) reportError(`${finding.obligation} producer baseline: ${message}`);
   const historical = pre.hashes?.[finding.id];
-  if (!current || !historical || historical.contract_sha256 === hashValue(null) || !['item_sha256', 'contract_sha256', 'manifest_sha256']
+  if (!current || !historical || (historical.contract_sha256 === hashValue(null) && !definitionWithoutProofContract(finding.id)) || !['item_sha256', 'contract_sha256', 'manifest_sha256']
     .every(key => /^[a-f0-9]{64}$/.test(historical[key] ?? ''))) {
     reportError(`${finding.obligation} lacks exact current/pre-reader producer fingerprints`); return;
   }
   finding.producer_batch = route.producer_batch;
-  finding.dependency_path = path.map(id => ({ id, item_sha256: sha256(readFileSync(R('items', `${id}.md`))) }));
+  finding.dependency_path = frozen ? frozen.dependency_path : path.map(id => ({ id, item_sha256: sha256(readFileSync(R('items', `${id}.md`))) }));
   finding.producer_carrier_at_split = current;
   finding.producer_pre_snapshot = {
     path: `research/${run}-step5-hash-${route.producer_batch}-pre.json`,
@@ -663,7 +728,7 @@ if (command === 'split') {
     ...hashSnapshotErrors(post, batch, 'post').map((message) => `post ${message}`),
   ];
   if (snapshotErrors.length) fail(`step5-scope: batch ${batch} hash snapshot invalid: ${snapshotErrors.join('; ')}`);
-  if (!sameSet(post.manifest ?? Object.keys(post.hashes ?? {}), ids)) {
+  if (!sameSet((post.manifest ?? Object.keys(post.hashes ?? {})).map(id => currentItemId(id, batch)), ids)) {
     fail(`step5-scope: batch ${batch} post-reader hash does not match the current manifest`);
   }
   const currentPages = (manifestPages()[batch] ?? []).map((page) => page.id);
@@ -858,7 +923,7 @@ if (command === 'stamp') {
     for (const decision of doc.decisions) {
       const target = expected.get(decision.obligation);
       const batch = target?.batch ?? group.covers.find((candidate) =>
-        (manifests[candidate] ?? []).includes(decision.id)
+        (manifests[candidate] ?? []).includes(currentItemId(decision.id, candidate))
         || (pages[candidate] ?? []).some((page) => page.id === decision.id));
       if (decision.verdict === 'context_accepted') {
         const context = externalContextReceipt(ROOT, run, decision, target, group.label);
@@ -905,13 +970,22 @@ if (command === 'check') {
       if (phase !== 'final') {
         for (const id of scope.items ?? []) if (!(manifests[batch] ?? []).includes(id)) error('scope-removal', `[${id}] authored item removed before 5b`);
         if (!sameSet(scope.pages ?? [], (pages[batch] ?? []).map((p) => p.id))) error('scope-page-change', `batch ${batch} changed its page scope`);
-        for (const id of manifests[batch] ?? []) if (!(scope.items ?? []).includes(id) && !/^(def|lem)-/.test(id)) error('scope-addition', `[${id}] only local definitions and lemmas may be added at 5a`);
+        for (const id of manifests[batch] ?? []) if (!(scope.items ?? []).includes(id) && !/^(def|lem)-/.test(id) && !ownerContextAddition(id, batch)) error('scope-addition', `[${id}] only local definitions and lemmas may be added at 5a`);
       }
       continue;
     }
     const pre = readJson(hashPath(batch, 'pre'), `batch ${batch} pre-reader hash`);
     const post = readJson(hashPath(batch, 'post'), `batch ${batch} post-reader hash`);
     const derived = expectedSplit(pre, post);
+    // Owner migration projects historical post-reader IDs onto current
+    // carriers only. Actual reader removals remain forbidden, unchanged.
+    if (derived.removed.length) error('reader-removal', `batch ${batch} reader removed ${derived.removed.join(', ')}`);
+    const currentPostIds = derived.manifestPost.map(id => currentItemId(id, batch));
+    for (const id of currentPostIds) if (!(manifests[batch] ?? []).includes(id)) {
+      error('scope-removal', `[${id}] post-reader item removed without a valid owner representation migration`);
+    }
+    for (const id of manifests[batch] ?? []) if (!currentPostIds.includes(id)
+      && !/^(def|lem)-/.test(id) && !ownerContextAddition(id, batch)) error('scope-addition', `[${id}] unsupported post-reader item addition`);
     for (const message of hashSnapshotErrors(pre, batch, 'pre')) error('hash-invalid', `batch ${batch} pre ${message}`);
     for (const message of hashSnapshotErrors(post, batch, 'post')) error('hash-invalid', `batch ${batch} post ${message}`);
     if (scope.version !== 2) error('scope-identity', `batch ${batch} has unsupported scope version ${scope.version}`);
@@ -1022,10 +1096,11 @@ if (command === 'check') {
       try { ledgerRows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line)); }
       catch (cause) { error('ledger-invalid', cause.message); }
     }
-    const mine = ledgerRows.filter((row) => row.run === run);
+    const runRows = ledgerRows.filter((row) => row.run === run);
     const ownershipErrors = [];
-    const activeMine = activeOwnershipRows(mine, ownershipErrors);
+    const activeMine = activeOwnershipRows(runRows, ownershipErrors);
     for (const message of ownershipErrors) error('ledger-invalid', message);
+    const mine = activeMine;
     const earlyRows = activeMine.filter((row) => ['5a-adjudicate'].includes(row.caught_at_stage));
     // Owner adjudications can bind one already-applied repair or one physical
     // defect to distinct immutable observations. They never rewrite a finding.
@@ -1076,6 +1151,38 @@ if (command === 'check') {
     });
     const referenced = new Map();
     const contextualDefects = new Set();
+    const stabilizedChecks = [];
+    const findingSourceClasses = new Map();
+    function findingSourceClass(claim) {
+      const match = /^(reader|refuter):([1-9]\d*):([1-9]\d*)$/.exec(claim?.obligation ?? '');
+      if (!match || claim.route !== (match[1] === 'reader' ? 'reader' : 'flagged')) return null;
+      const key = `${claim.obligation}:${hashValue(claim.target)}`;
+      if (findingSourceClasses.has(key)) return findingSourceClasses.get(key);
+      const batch = match[2], scope = scopes[batch] ?? readJson(scopePath(batch), 'native finding source class');
+      const finding = scope[match[1] === 'reader' ? 'reader_findings' : 'refuter_findings']
+        ?.find(row => row.obligation === claim.obligation);
+      const { route: _route, ...target } = claim.target ?? {};
+      let kind = null;
+      if (scope.version === 2 && scope.run === run && String(scope.batch) === batch
+        && finding?.id === claim.id && hashValue(finding) === hashValue(target)) {
+        if (typeof finding.subject_type === 'string') kind = finding.subject_type;
+        else if (match[1] === 'refuter' && (scope.refuter_scope ?? []).includes(claim.id)) {
+          // Ordinary native refuters predate subject_type. Resolve that absent
+          // optional field from their actual typed immutable reader-post source;
+          // an in-run producer or a forged class cannot use this inference.
+          const post = readJson(hashPath(batch, 'post'), 'native refuter source class snapshot');
+          const page = (scope.page_manifest_post ?? []).includes(claim.id) && (post.page_manifest ?? []).includes(claim.id);
+          const item = (scope.manifest_post ?? []).includes(claim.id) && (post.manifest ?? []).includes(claim.id);
+          const observed = page ? post.page_hashes?.[claim.id] : post.hashes?.[claim.id];
+          if (page !== item && hashSnapshotErrors(post, batch, 'post').length === 0
+            && (page ? ['file_sha256', 'manifest_sha256'] : ['item_sha256', 'contract_sha256', 'manifest_sha256'])
+              .every(field => /^[a-f0-9]{64}$/.test(observed?.[field] ?? ''))
+            && finding.observed_sha256 === hashValue(page ? pageCarrier(observed) : observed)) kind = page ? 'page' : 'in-flight-item';
+        }
+      }
+      findingSourceClasses.set(key, kind);
+      return kind;
+    }
     const liveByBatch = new Map();
     const contractsByBatch = new Map();
     const ownableSubjects = new Set();
@@ -1133,9 +1240,10 @@ if (command === 'check') {
         error('decisions-shape', `group ${group.label} has wrong version, run, group, or decisions array`);
         continue;
       }
-      const seen = new Set();
+      const seen = new Set(), recognizedStabilizedShares = new Set(), pendingStabilizedAmendments = [];
       const expected = new Map(owed.map((row) => [row.obligation, row]));
       for (const decision of doc.decisions) {
+        const decisionErrorStart = errors.length, candidateSharing = [];
         if (!decision?.obligation || seen.has(decision.obligation)) {
           error('decision-duplicate', `group ${group.label} repeats or omits an obligation id`); continue;
         }
@@ -1211,7 +1319,7 @@ if (command === 'check') {
         }
         const decisionRows = [];
         for (const defectId of decision.defect_ids) {
-          const prior = referenced.get(defectId);
+          const compatible = (prior) => {
           const sameLocation = (left, right) => String(left ?? '').trim().toLowerCase() === String(right ?? '').trim().toLowerCase();
           const sameObservedCarrier = /^[a-f0-9]{64}$/.test(prior?.target?.observed_sha256 ?? '')
             && prior.target.observed_sha256 === target?.observed_sha256;
@@ -1221,15 +1329,66 @@ if (command === 'check') {
             && ['reader', 'flagged'].includes(prior.route)
             && ['reader', 'flagged'].includes(decision.route)
             && prior.verdict === decision.verdict
+            && findingSourceClass(prior) !== null
+            && findingSourceClass(prior) === findingSourceClass({ ...decision, target })
             && prior.target?.defect === target?.defect
             && ((prior.target?.severity === target?.severity
               && sameLocation(prior.target?.location, target?.location))
               || sameObservedCarrier);
-          const sharedCausalAddition = prior && target?.added
+          const sharedCausalAddition = prior && !['reader', 'flagged'].includes(prior.route) && target?.added
             && decision.same_defect_as === prior.obligation
             && decision.causal_subject === prior.id
             && typeof decision.same_defect_evidence === 'string'
             && decision.same_defect_evidence.trim();
+          // A genuine added repair helper can be encountered before the
+          // original cross-batch finding. Keep that causal sharing directional
+          // in evidence, but independent of group/decision iteration order.
+          const causalCurrent = { ...decision, target, decision_path: `research/${run}-alpha-${group.label}-5a-decisions.json` };
+          const causalHelper = prior?.target?.added === true ? prior : target?.added === true ? causalCurrent : null;
+          const causalFinding = causalHelper === prior ? causalCurrent : prior;
+          const causalMatch = /^(reader|refuter):([1-9]\d*):([1-9]\d*)$/.exec(causalFinding?.obligation ?? '');
+          let sharedFindingCausalAddition = false;
+          if (prior && causalHelper?.target?.added === true && causalMatch
+            && causalFinding.route === (causalMatch[1] === 'reader' ? 'reader' : 'flagged')
+            && causalHelper.same_defect_as === causalFinding.obligation && causalHelper.causal_subject === causalFinding.id
+            && typeof causalHelper.same_defect_evidence === 'string' && causalHelper.same_defect_evidence.trim().length >= 40
+            && ['accepted_repair', 'amended_repair'].includes(causalHelper.verdict)
+            && ['confirmed_fatal', 'confirmed_nonfatal'].includes(causalFinding.verdict)) {
+            const batch = causalMatch[2], scope = scopes[batch] ?? readJson(scopePath(batch), 'causal source finding scope');
+            const finding = scope[causalMatch[1] === 'reader' ? 'reader_findings' : 'refuter_findings']
+              ?.find(row => row.obligation === causalFinding.obligation);
+            const { route: _route, ...findingTarget } = causalFinding.target ?? {};
+            let sourceBinding = false;
+            if (finding?.subject_type === 'in-run-dependency') {
+              const producer = String(finding.producer_batch), path = hashPath(producer, 'pre');
+              const pre = readJson(path, 'causal producer immutable pre-reader snapshot');
+              sourceBinding = Boolean(producerCarrier(finding.id, producer))
+                && finding.producer_pre_snapshot?.path === `research/${run}-step5-hash-${producer}-pre.json`
+                && finding.producer_pre_snapshot.sha256 === sha256(readFileSync(path))
+                && hashSnapshotErrors(pre, producer, 'pre').length === 0
+                && hashValue(finding.producer_pre_snapshot.carrier) === hashValue({ producer_batch: producer, ...pre.hashes?.[finding.id] });
+            } else if (finding) {
+              const post = readJson(hashPath(batch, 'post'), 'causal source immutable reader-post snapshot');
+              const page = finding.subject_type === 'page' || (scope.page_manifest_post ?? []).includes(finding.id);
+              const observed = page ? post.page_hashes?.[finding.id] : post.hashes?.[finding.id];
+              sourceBinding = hashSnapshotErrors(post, batch, 'post').length === 0
+                && (page ? (scope.page_manifest_post ?? []).includes(finding.id) && (post.page_manifest ?? []).includes(finding.id)
+                  : (scope.manifest_post ?? []).includes(finding.id) && (post.manifest ?? []).includes(finding.id))
+                && (page ? ['file_sha256', 'manifest_sha256'] : ['item_sha256', 'contract_sha256', 'manifest_sha256'])
+                  .every(key => /^[a-f0-9]{64}$/.test(observed?.[key] ?? ''))
+                && finding.observed_sha256 === hashValue(page ? pageCarrier(observed) : observed);
+            }
+            const row = mine.find(row => row.defect_id === defectId);
+            const referencesBoth = [[causalHelper.decision_path, causalHelper.obligation], [causalFinding.decision_path, causalFinding.obligation]]
+              .every(([path, obligation]) => Array.isArray(row?.adjudication_ref)
+                && row.adjudication_ref.some(ref => ref?.path === path && ref.obligation === obligation));
+            sharedFindingCausalAddition = scope.version === 2 && scope.run === run && String(scope.batch) === batch
+              && finding?.id === causalFinding.id && hashValue(finding) === hashValue(findingTarget) && sourceBinding
+              && (causalMatch[1] !== 'refuter' || (scope.refuter_scope ?? []).includes(causalFinding.id))
+              && row?.subject === causalFinding.id && row.caught_at_stage === '5a-adjudicate'
+              && ['fixed', 'narrowed', 'dropped'].includes(row.disposition) && referencesBoth
+              && (causalFinding.verdict === 'confirmed_fatal' ? row.severity === 'fatal' : row.severity !== 'fatal');
+          }
           // One historical supplier defect may be the producer's reader
           // repair and another batch's uneditable reader finding. Retain both
           // obligations without manufacturing a second defect-ledger row.
@@ -1341,14 +1500,62 @@ if (command === 'check') {
               // repair decision retains its separate item-order anchor.
               && actualFinding.observed_sha256 === hashValue(pageRepair ? pageCarrier(observed) : observed);
           }
+          // An owner may amend a previously untouched, genuinely flagged
+          // source after reading. Stabilization creates a distinct obligation,
+          // not a second defect. Bind both exact obligations to the original
+          // typed reader-post carrier and one explicitly shared closed row.
+          const originalDecision = ['reader', 'flagged'].includes(currentDecision.route) ? currentDecision
+            : ['reader', 'flagged'].includes(prior?.route) ? prior : null;
+          const stabilizedRepair = originalDecision === currentDecision ? prior : currentDecision;
+          const originalMatch = /^(reader|refuter):([1-9]\d*):([1-9]\d*)$/.exec(originalDecision?.obligation ?? '');
+          let sharedStabilizedRepair = false;
+          if (prior && prior.id === decision.id && explicitShared && originalMatch
+            && originalDecision.route === (originalMatch[1] === 'reader' ? 'reader' : 'flagged')
+            && ['confirmed_fatal', 'confirmed_nonfatal'].includes(originalDecision.verdict)
+            && stabilizedRepair?.target?.stabilized === true && !stabilizedRepair.target.added
+            && ['touched', 'page'].includes(stabilizedRepair.route)
+            && stabilizedRepair.verdict === 'amended_repair' && stabilizedRepair.repair_confidence === 1
+            && stabilizedRepair.target.batch === originalMatch[2]
+            && stabilizedRepair.obligation === `post-reader:${originalMatch[2]}:${decision.id}`) {
+            const batch = originalMatch[2], page = stabilizedRepair.route === 'page';
+            const scope = scopes[batch] ?? readJson(scopePath(batch), 'original finding scope');
+            const finding = scope[originalMatch[1] === 'reader' ? 'reader_findings' : 'refuter_findings']
+              ?.find(row => row.obligation === originalDecision.obligation);
+            const { route: _route, ...findingTarget } = originalDecision.target ?? {};
+            const post = readJson(hashPath(batch, 'post'), 'immutable reader-post snapshot');
+            const observed = page ? post.page_hashes?.[decision.id] : post.hashes?.[decision.id];
+            const typed = page ? (scope.page_manifest_post ?? []).includes(decision.id)
+              && (post.page_manifest ?? []).includes(decision.id)
+              && ['file_sha256', 'manifest_sha256'].every(key => /^[a-f0-9]{64}$/.test(observed?.[key] ?? ''))
+              : (scope.manifest_post ?? []).includes(decision.id) && (post.manifest ?? []).includes(decision.id)
+                && ['item_sha256', 'contract_sha256', 'manifest_sha256'].every(key => /^[a-f0-9]{64}$/.test(observed?.[key] ?? ''));
+            const row = mine.find(row => row.defect_id === defectId);
+            const path = `research/${run}-alpha-${group.label}-5a-decisions.json`;
+            const referencesBoth = [originalDecision.obligation, stabilizedRepair.obligation].every(obligation =>
+              Array.isArray(row?.adjudication_ref) && row.adjudication_ref.some(ref => ref?.path === path && ref.obligation === obligation));
+            const actualTarget = stabilizedObligations(batch, scope).find(row => row.obligation === stabilizedRepair.obligation);
+            sharedStabilizedRepair = scope.version === 2 && scope.run === run && String(scope.batch) === batch
+              && finding?.id === decision.id && hashValue(finding) === hashValue(findingTarget)
+              && (originalMatch[1] !== 'refuter' || (scope.refuter_scope ?? []).includes(decision.id))
+              && hashSnapshotErrors(post, batch, 'post').length === 0 && typed
+              && finding.observed_sha256 === hashValue(page ? pageCarrier(observed) : observed)
+              && hashValue(actualTarget) === hashValue(stabilizedRepair.target)
+              && row?.subject === decision.id && row.caught_at_stage === '5a-adjudicate'
+              && ['fixed', 'narrowed', 'dropped'].includes(row.disposition) && referencesBoth
+              && (originalDecision.verdict === 'confirmed_fatal' ? row.severity === 'fatal' : row.severity !== 'fatal');
+          }
+          if (sharedStabilizedRepair) recognizedStabilizedShares.add(stabilizedRepair.obligation);
           const sharedOwnerAdjudication = prior
             && ownerSharedDefect(mine.find(row => row.defect_id === defectId), prior, { ...decision, target });
-          if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair && !sharedPostReaderRepair && !sharedReclassifiedFinding && !sharedOwnerAdjudication) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
-          if (!prior) referenced.set(defectId, {
+          return Boolean(sharedFinding || sharedCausalAddition || sharedProducerRepair || sharedPostReaderRepair
+            || sharedReclassifiedFinding || sharedStabilizedRepair || sharedFindingCausalAddition || sharedOwnerAdjudication);
+          };
+          candidateSharing.push({ defectId, compatible, anchor: {
             obligation: decision.obligation, id: decision.id, route: decision.route, verdict: decision.verdict, target,
             same_defect_as: decision.same_defect_as, same_defect_evidence: decision.same_defect_evidence,
-            repair_confidence: decision.repair_confidence,
-          });
+            repair_confidence: decision.repair_confidence, causal_subject: decision.causal_subject,
+            decision_path: `research/${run}-alpha-${group.label}-5a-decisions.json`,
+          } });
           const row = mine.find((candidate) => candidate.defect_id === defectId);
           if (!row) { error('ledger-ref-missing', `[${decision.id}] ${decision.obligation} names absent ${defectId}`); continue; }
           decisionRows.push(row);
@@ -1390,7 +1597,7 @@ if (command === 'check') {
         }
         if (phase === 'adjudicate') {
           const subjectBatch = target?.batch ?? group.covers.find((batch) =>
-            (manifests[batch] ?? []).includes(decision.id)
+            (manifests[batch] ?? []).includes(currentItemId(decision.id, batch))
             || (pages[batch] ?? []).some((page) => page.id === decision.id));
           const live = subjectBatch ? liveFor(subjectBatch) : null;
           const currentValue = currentDecisionCarrier(decision, target, live);
@@ -1418,9 +1625,15 @@ if (command === 'check') {
               if (decision.verdict === 'reverted_change' && currentSha !== hashValue(preValue)) {
                 error('decision-not-applied', `[${target.id}] reverted_change was not restored to the pre-reader state`);
               }
-              if (decision.verdict === 'amended_repair'
-                && [hashValue(preValue), hashValue(postValue)].includes(currentSha)) {
-                error('decision-not-applied', `[${target.id}] amended_repair must differ from both the pre-reader and reader-result carriers`);
+              if (decision.verdict === 'amended_repair') {
+                if (currentSha === hashValue(preValue) || currentSha === hashValue(postValue) && !target.stabilized) {
+                  error('decision-not-applied', `[${target.id}] amended_repair must differ from both the pre-reader and reader-result carriers`);
+                } else if (currentSha === hashValue(postValue) && target.stabilized) {
+                  // A genuine post-reader owner amendment may already be frozen
+                  // into pre-5a. Admit it only after exact shared-defect validation,
+                  // deferred so the finding and repair can appear in either order.
+                  pendingStabilizedAmendments.push({ obligation: decision.obligation, id: target.id });
+                }
               }
             }
             if (target?.observed_sha256 && decisionRows.some((row) => repaired.has(row.disposition))
@@ -1430,13 +1643,42 @@ if (command === 'check') {
             }
           }
         }
+        // Only independently valid decisions can anchor a sharing family.
+        // Pair compatibility is resolved after collection so a valid bridge
+        // cannot depend on which group or decision happened to come first.
+        if (errors.length === decisionErrorStart) for (const claim of candidateSharing) {
+          const family = referenced.get(claim.defectId) ?? [];
+          family.push(claim);
+          referenced.set(claim.defectId, family);
+        }
       }
+      stabilizedChecks.push(() => {
+        for (const row of pendingStabilizedAmendments) if (!recognizedStabilizedShares.has(row.obligation))
+          error('decision-not-applied', `[${row.id}] stabilized amended_repair equal to pre-5a requires exact shared historical defect evidence`);
+      });
       for (const [obligation, target] of expected) if (!seen.has(obligation)) {
         if (target?.direct && target.route === 'item'
           && currentAuditorCertification(target)) continue;
         error('decision-missing', `[${target.id}] ${group.label} did not decide ${obligation}`);
       }
     }
+    for (const [defectId, family] of referenced) {
+      const edges = family.map(() => new Set());
+      for (let i = 0; i < family.length; i++) for (let j = i + 1; j < family.length; j++) {
+        // Evaluate both directions: explicit links remain directional evidence,
+        // but iteration order is not evidence. Each edge keeps its full typed
+        // native-finding, snapshot, current-carrier and ledger checks.
+        const forward = family[i].compatible(family[j].anchor);
+        const reverse = family[j].compatible(family[i].anchor);
+        if (forward || reverse) { edges[i].add(j); edges[j].add(i); }
+      }
+      const reached = new Set([0]), pending = [0];
+      while (pending.length) for (const next of edges[pending.pop()]) {
+        if (!reached.has(next)) { reached.add(next); pending.push(next); }
+      }
+      if (reached.size !== family.length) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
+    }
+    for (const check of stabilizedChecks) check();
     // Published repairs retain their optional provenance files, but those
     // files are not a Step-5 certification or gate obligation.
     for (const row of earlyRows) {

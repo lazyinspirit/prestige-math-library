@@ -1,0 +1,777 @@
+[
+  {
+    "order": 567,
+    "id": "regular-homotopy-and-sphere-eversion",
+    "kind": "A",
+    "category": "differential-topology",
+    "title": "Regular Homotopy and Sphere Eversion",
+    "companion": "regular-homotopy-and-sphere-eversion-examples",
+    "requires": [
+      "formal-immersions-and-the-smale-hirsch-theorem",
+      "lie-groups-invariant-fields-and-the-exponential-map",
+      "covering-spaces-and-lifting",
+      "higher-homotopy-groups-and-cofiber-sequences",
+      "fibrations-fiber-bundles-and-homotopy-exact-sequences",
+      "hurewicz-whitehead-freudenthal-and-cw-approximation",
+      "symplectic-manifolds-moser-stability-and-darboux-weinstein-theory",
+      "stiefel-whitney-and-euler-classes-by-universal-constructions",
+      "simply-connected-plane-domains",
+      "the-gauss-bonnet-theorem-for-riemannian-surfaces",
+      "lie-subgroups-actions-and-homogeneous-spaces"
+    ],
+    "items": [
+      {
+        "id": "def-gauss-frame-map-of-an-immersion-into-euclidean-space",
+        "kind": "definition",
+        "title": "Gauss frame map of an immersion into Euclidean space",
+        "deps": [
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-tangent-bundle-as-a-disjoint-union",
+          "def-differential-of-a-smooth-map",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-frame-bundle-and-associated-vector-bundle",
+          "def-local-frame-and-global-frame-of-a-vector-bundle",
+          "def-vector-bundle-map-over-a-smooth-base-map"
+        ],
+        "statement": "Let $f:M^m\\to\\mathbb R^n$ be a smooth immersion with $n\\ge m$. Canonically trivializing the target tangent bundle makes its differential a smooth section\n$$x\\longmapsto df_x\\quad\\text{of}\\quad\\mathcal M=\\operatorname{Mono}(TM,\\varepsilon^n)\\longrightarrow M,$$\nwhose fibre consists of injective linear maps $T_xM\\to\\mathbb R^n$, with the subspace smooth structure in the space of linear maps. This is the **unnormalized Gauss data** of $f$.\n\nFor a smooth local tangent frame $(s_1,\\ldots,s_m)$, the **local Gauss frame map** is the full-rank matrix\n$$g_U(x)=(df_xs_1(x)\\mid\\cdots\\mid df_xs_m(x)).$$\nA change of frame by $A(x)\\in\\mathrm{GL}_m(\\mathbb R)$ changes this matrix to $g_U(x)A(x)$. These frame changes define the monomorphism bundle, and the smoothness of $df$ gives a smooth section in every such trivialization.\n\nIf a smooth tangent metric is supplied, write $E=V(TM,\\varepsilon^n)$ for the separate bundle of **isometric** linear injections into the Euclidean target. Its fibre in an orthonormal tangent frame is the Stiefel manifold $V_m(\\mathbb R^n)$. The **normalized Gauss section** is the fibrewise polar part\n$$Q_f=df\\,(df^*df)^{-1/2}\\in\\Gamma(E).$$\nPositivity of $df^*df$, smoothness of its positive square root, and independence of orthonormal tangent frames are proved in [[prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle]]. For an orthogonal change $U$ of tangent frame the normalized matrix changes to $Q_fU$. Ordinary Gram–Schmidt in an arbitrary frame does not supply this equivariant formula; polar normalization is the convention here.\n\nA global tangent frame identifies $\\mathcal M$ with the product bundle with fibre $\\operatorname{Mono}(\\mathbb R^m,\\mathbb R^n)$. Orthonormalizing that frame in the supplied metric identifies $E$ with the product bundle with fibre $V_m(\\mathbb R^n)$, so the normalized section becomes a global map into that Stiefel manifold. Without a global frame it remains a section of $E$. Polar decomposition retains a positive-definite factor in the monomorphism fibre, and the cited proposition proves the resulting deformation retraction onto the Stiefel fibre. For $m=0$ both fibres are points; for $n=m$ they are respectively $\\mathrm{GL}_m(\\mathbb R)$ and $O(m)$.\n\nNo tangent metric is part of the unnormalized datum; normalization uses the supplied metric. No orientation, properness or normal framing is required. The normal bundle is the quotient $\\varepsilon^n/df(TM)$ and is not part of these Gauss data. The model assertions in this definition are justified by the cited proposition, whose proof uses the raw full-rank matrix and frame-change definitions without assuming those assertions.",
+        "strategy": "Definition of the full monomorphism bundle and its separately metric-dependent normalized Stiefel model, with all normalization and section-space assertions justified by the existing direct consumer proposition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralph L. Cohen, Immersions of Manifolds and Homotopy Theory (Harvard CMSA Math-Science Literature Lecture write-up, June 30 2022), §1 “Vector bundle obstructions to embeddings and immersions” and §2.1–2.2 “Foundational work of Whitney, Smale, and Hirsch”, PDF pp. 4–10",
+              "url": "https://math.stanford.edu/~ralph/immersions-final.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 9: Immersions into Euclidean space, from Smale to Cohen (notes by M. Hoyois), PDF pp. 1–3",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/9euclidean.pdf"
+            }
+          ]
+        },
+        "justified_by": [
+          "prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle",
+        "kind": "proposition",
+        "title": "Euclidean formal immersions are sections of a Stiefel bundle",
+        "deps": [
+          "def-gauss-frame-map-of-an-immersion-into-euclidean-space",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+          "def-smooth-section-local-section-and-support",
+          "def-frame-bundle-and-associated-vector-bundle",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-vector-bundle-map-over-a-smooth-base-map",
+          "def-locally-trivial-fiber-bundle",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "prop-tangent-space-of-a-regular-level-set-is-the-kernel",
+          "cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame",
+          "lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots",
+          "thm-every-smooth-manifold-admits-a-riemannian-metric",
+          "def-countable-choice"
+        ],
+        "statement": "Let $M^m$ be a smooth manifold, let $n\\ge m$, and fix a smooth Riemannian metric on $TM$; such a metric exists under $\\mathrm{AC}_\\omega$, while the conclusions below require no additional choice once it is supplied. Give $\\varepsilon^n=M\\times\\mathbb R^n$ its Euclidean metric. Distinguish the monomorphism bundle $\\mathcal M=\\operatorname{Mono}(TM,\\varepsilon^n)$ from its orthonormal Stiefel subbundle $E=V(TM,\\varepsilon^n)$, whose fibre is $V_m(\\mathbb R^n)$, associated to the orthonormal frame bundle of $TM$. All section spaces carry the weak compact-open $C^\\infty$ topology. Then:\n\n1. Smooth bundle monomorphisms $B:TM\\to\\varepsilon^n$ over the identity correspond homeomorphically to $\\Gamma(\\mathcal M)$. Fibrewise polar normalization $B\\mapsto B(B^*B)^{-1/2}$ gives an $O(m)$-equivariant strong deformation retraction $\\Gamma(\\mathcal M)\\to\\Gamma(E)$. In an orthonormal frame, the polar map is a diffeomorphism $\\operatorname{Mono}(\\mathbb R^m,\\mathbb R^n)\\cong V_m(\\mathbb R^n)\\times\\operatorname{Sym}^+_m$, where the second factor consists of positive-definite self-adjoint $m\\times m$ matrices; thus the monomorphism fibre and the Stiefel fibre have the same homotopy type, rather than being identified homeomorphically.\n2. The canonical target tangent trivialization gives the actual homeomorphism $\\operatorname{FImm}(M,\\mathbb R^n)\\cong C^\\infty(M,\\mathbb R^n)\\times\\Gamma(\\mathcal M)$. Contracting the first factor and polar-normalizing the second give a homotopy equivalence $\\operatorname{FImm}(M,\\mathbb R^n)\\simeq\\Gamma(E)$. In particular the two spaces have the same path components and homotopy invariants. Under the actual homeomorphism, the derivative map is $f\\mapsto(f,df)$; in the normalized model it sends $df$ to its polar normalization.\n3. For the standard metric on $S^m$, the bundle $E=V(TS^m,\\varepsilon^n)$ is the pullback along $x\\mapsto T_xS^m\\in\\mathrm{Gr}_m(\\mathbb R^{m+1})$ of the bundle of isometric injections from the tautological $m$-plane to $\\mathbb R^n$. Whenever $TM$ is trivial, $E$ is trivial; in particular $V(TS^1,\\varepsilon^2)\\cong S^1\\times S^1$.\n\nNo orientation of $M$ or global tangent frame is needed. The normalization uses the supplied metric; metric existence for general $M$ is the only stated countable-choice use.",
+        "strategy": "The bundle of fibrewise injections of $TM$ into a trivial bundle is locally trivial: over a chart domain, a local frame of $TM$ and the standard frame of $\\varepsilon^n$ present a bundle monomorphism as a smooth family of rank-$m$ $n\\times m$ matrices, so the fibre is $\\operatorname{Mono}(\\mathbb R^m,\\mathbb R^n)\\cong V_m(\\mathbb R^n)$ and changes of frame act by right multiplication through $O(m)$. A smooth bundle map with injective fibres is the same thing as a smooth section of this bundle; both sides carry the compact-open $C^\\infty$ topology on the corresponding mapping spaces, and in local matrices the two topologies have the same basic neighbourhoods. Clause 2 is clause 1 applied to the pair $(f,df)$ and the canonical trivialisation $T\\mathbb R^n\\cong\\mathbb R^n\\times\\mathbb R^n$; injectivity of $df_x$ is exactly the immersion condition. Clause 3 is the defining universal property of the classifying map of $TS^m$: the frame bundle of $TS^m$ is the pullback of the universal principal $O(m)$-bundle, and passing to the associated Stiefel bundle gives the claim; a global frame trivialises the frame bundle and hence every associated bundle. This is the section-space description of [[def-space-of-immersions-and-space-of-formal-immersions]] in the Euclidean case, as used in the proof route of the design.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralph L. Cohen, Immersions of Manifolds and Homotopy Theory (Harvard CMSA Math-Science Literature Lecture write-up, June 30 2022), §1 “Vector bundle obstructions to embeddings and immersions” and §2.1–2.2 “Foundational work of Whitney, Smale, and Hirsch”, PDF pp. 4–10",
+              "url": "https://math.stanford.edu/~ralph/immersions-final.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-the-basepoint-evaluation-of-the-stiefel-section-space-is-a-fibration",
+        "kind": "lemma",
+        "title": "The basepoint evaluation on the Stiefel section space is a fibration",
+        "deps": [
+          "prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-locally-trivial-fiber-bundle",
+          "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+          "prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace",
+          "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "def-fiber-and-fiber-homotopy-equivalence",
+          "def-cofibration-and-homotopy-extension-property",
+          "def-compact-open-topology",
+          "def-higher-homotopy-group-by-based-cubes",
+          "prop-cubical-and-spherical-models-of-higher-homotopy-agree",
+          "prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "def-cw-complex-with-closure-finiteness-and-weak-topology",
+          "lem-stiefel-manifolds-are-connected-and-simply-connected-in-positive-codimension",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "thm-smooth-dependence-of-ode-solutions-on-parameters",
+          "lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots"
+        ],
+        "statement": "Let $1\\le m\\le n$, let $E=V(TS^m,\\varepsilon^n)\\to S^m$ be the orthonormal Stiefel model\nof the section-space proposition with fibre $F=V_m(\\mathbb R^n)$, let\n$x_0\\in S^m$, and let $\\Gamma$ be the space of smooth sections of $E$ with the\nweak compact-open $C^\\infty$ topology and $\\Gamma_*$ the subspace of sections that take a fixed\nchosen value $s_0(x_0)\\in E_{x_0}$. Then:\n\n1. The evaluation map $\\operatorname{ev}:\\Gamma\\to E_{x_0}$,\n   $s\\mapsto s(x_0)$, is a Hurewicz fibration with fibre $\\Gamma_*$.\n2. If $\\Gamma_*\\ne\\varnothing$, a trivialisation of the pullback of $E$\n   to the closed characteristic disk and a reference section identify\n   $\\Gamma_*$, up to homotopy, with the space of continuous based maps\n   $(S^m,x_0)\\to(V_m(\\mathbb R^n),e_0)$; hence\n   $\\pi_0(\\Gamma_*)\\cong\\pi_m(V_m(\\mathbb R^n))$ whenever $\\Gamma_*\\ne\\varnothing$;\n   if $\\Gamma\\ne\\varnothing$ and $n\\ge m+1$ then $\\Gamma_*\\ne\\varnothing$ as\n   well, because the fibre $F$ is path connected and evaluation is surjective\n   on path components. Via this bijection the class of a section in\n   $\\pi_0(\\Gamma_*)$ is its **difference class**: if two sections agree at\n   $x_0$, the resulting transported disk models give based maps $S^m\\to F$, and two\n   sections are homotopic through sections fixed at $x_0$ exactly when these\n   based maps are based-homotopic.\n3. The long exact sequence of the fibration in (1) yields an exact sequence of\n   pointed sets\n   $$\\pi_1(V_m(\\mathbb R^n))\\longrightarrow\\pi_0(\\Gamma_*)\\longrightarrow\\pi_0(\\Gamma)\\longrightarrow\\pi_0(V_m(\\mathbb R^n));$$\n   in particular, if $V_m(\\mathbb R^n)$ is simply connected and\n   $\\Gamma\\ne\\varnothing$ then the difference class induces a non-canonical\n   bijection $\\pi_0(\\Gamma)\\cong\\pi_m(V_m(\\mathbb R^n))$, and if\n   $\\pi_m(V_m(\\mathbb R^n))=0$, $n\\ge m+1$ and $\\Gamma\\ne\\varnothing$ then\n   $\\Gamma$ is path connected. The last conclusion requires a path-connected\n   fibre; it is not asserted for $n=m$.",
+        "strategy": "For (1): $S^m$ is a CW complex obtained from the point $x_0$ by attaching one $m$-cell, so the pair $(S^m,x_0)$ has the homotopy extension property; a homotopy of prescribed basepoint values together with a lift over the initial time is a lifting problem for the bundle $E$ over the relative CW pair $\\bigl(S^m\\times X\\times I,\\;S^m\\times X\\times\\{0\\}\\cup\\{x_0\\}\\times X\\times I\\bigr)$, solved cell by cell with the homotopy lifting property of a fibre bundle over a paracompact base; this is the standard evaluation fibration of a section space (Hatcher \\u00a74.2\\u20134.3). For (2): $S^m\\setminus\\{x_0\\}$ is the domain of a chart of $S^m$, so $TS^m$ is trivialised there by the coordinate frame and $E$ restricts to the product $D^m\\times F$; a section of $E$ over $S^m$ is then the same thing as a map $\\gamma:D^m\\to F$ whose boundary sphere $\\partial D^m$ maps into the fibre over $x_0$, that is, a based map $(S^m,x_0)\\to(F,e_0)$, and homotopies of sections fixing $x_0$ are homotopies of such based maps relative to $\\partial D^m$; the based homotopy classes are $\\pi_m(F)$ by the cubical-to-spherical comparison. For (3): apply the long exact sequence of (1) and use $\\pi_0(F)=0$, which holds because $n\\ge m+1$ forces $V_m(\\mathbb R^n)$ to be path connected; exactness identifies the kernel of $\\pi_0(\\Gamma_*)\\to\\pi_0(\\Gamma)$ with the image of $\\pi_1(F)$, giving the stated bijection when $\\pi_1(F)=0$ and the stated connectedness when $\\pi_m(F)=0$. Countable choice is inherited from the numerable-bundle Hurewicz fibration theorem, which well-orders its transport data.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology, §1.3 (covering isomorphisms on higher homotopy groups) and §4.2–4.3 (fibrations, long exact sequence, evaluation fibrations of mapping spaces), printed pp. 75, 342, 375–440",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Immersions of Manifolds and Homotopy Theory (Harvard CMSA Math-Science Literature Lecture write-up, June 30 2022), §1 “Vector bundle obstructions to embeddings and immersions” and §2.1–2.2 “Foundational work of Whitney, Smale, and Hirsch”, PDF pp. 4–10",
+              "url": "https://math.stanford.edu/~ralph/immersions-final.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-stiefel-manifolds-are-connected-and-simply-connected-in-positive-codimension",
+        "kind": "lemma",
+        "title": "Stiefel manifolds are connected, and simply connected in positive codimension",
+        "deps": [
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+          "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "def-locally-trivial-fiber-bundle",
+          "def-higher-homotopy-group-by-based-cubes",
+          "prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant",
+          "thm-lower-dimensional-sphere-maps-are-based-nullhomotopic",
+          "cor-euclidean-spheres-are-path-connected",
+          "def-n-connected-space-and-n-connected-map",
+          "ex-orthogonal-and-special-orthogonal-lie-groups"
+        ],
+        "statement": "For $1\\le m\\le n$: (a) $V_m(\\mathbb R^n)$ is path connected when $n\\ge m+1$; (b) $\\pi_1(V_m(\\mathbb R^n))=0$ when $n\\ge m+2$. In particular $V_m(\\mathbb R^n)$ is simply connected for $n\\ge m+2$, and $V_m(\\mathbb R^{m+1})\\cong SO(m+1)$ is connected, with $V_1(\\mathbb R^k)=S^{k-1}$. No orientation of the frames is involved: $V_m(\\mathbb R^n)$ is the space of ordered orthonormal $m$-frames.",
+        "strategy": "Proof by induction on $m$. The forgetful map $V_m(\\mathbb R^n)\\to V_1(\\mathbb R^n)=S^{n-1}$, $(e_1,\\dots,e_m)\\mapsto e_1$, is the fibre bundle $SO(n)/SO(n-m)\\to SO(n)/SO(n-1)=S^{n-1}$ with fibre $SO(n-1)/SO(n-m)\\cong V_{m-1}(\\mathbb R^{n-1})$; local triviality is the homogeneous-space fibration, which is numerable because $S^{n-1}$ is a CW complex, hence a Hurewicz fibration. For (a), the long exact sequence gives $\\pi_0(V_{m-1}(\\mathbb R^{n-1}))\\to\\pi_0(V_m(\\mathbb R^n))\\to\\pi_0(S^{n-1})$; the outer terms vanish for $n\\ge m+1\\ge2$ by induction and by connectedness of spheres, so $\\pi_0(V_m(\\mathbb R^n))=0$; the base case $m=1$ is $S^{n-1}$ with $n\\ge2$. For (b), the sequence gives $\\pi_1(V_{m-1}(\\mathbb R^{n-1}))\\to\\pi_1(V_m(\\mathbb R^n))\\to\\pi_1(S^{n-1})$; for $n\\ge m+2$ the induction hypothesis applies to $V_{m-1}(\\mathbb R^{n-1})$ because $n-1\\ge (m-1)+2$, and $\\pi_1(S^{n-1})=0$ for $n\\ge3$ by the lower-dimensional nullhomotopy theorem; hence $\\pi_1(V_m(\\mathbb R^n))=0$. The base case $m=1$ is $S^{n-1}$ with $n\\ge3$. The identification $V_m(\\mathbb R^{m+1})\\cong O(m+1)/O(1)\\cong SO(m+1)$ is the quotient description in the definition of the Stiefel spaces. Countable choice is inherited from the numerable-bundle fibration theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor and James Stasheff, Characteristic Classes, §5 (Stiefel and Grassmann manifolds and their connectivity), printed pp. 55–66",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            },
+            {
+              "title": "Allen Hatcher, Algebraic Topology, §1.3 (covering isomorphisms on higher homotopy groups) and §4.2–4.3 (fibrations, long exact sequence, evaluation fibrations of mapping spaces), printed pp. 75, 342, 375–440",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-the-second-homotopy-group-of-so-three-vanishes",
+        "kind": "lemma",
+        "title": "The second homotopy group of SO(3) vanishes",
+        "deps": [
+          "lem-pi-three-so-three-generated-by-the-quaternion-double-cover",
+          "ex-su-two-to-so-three-as-a-covering-homomorphism",
+          "thm-lower-dimensional-sphere-maps-are-based-nullhomotopic",
+          "prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant",
+          "def-higher-homotopy-group-by-based-cubes",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "ex-orthogonal-and-special-orthogonal-lie-groups",
+          "def-cross-product-in-r3",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal"
+        ],
+        "statement": "$\\pi_2(\\mathrm{SO}(3),I)=0$. More precisely, for the two-sheeted covering homomorphism $\\rho:S^3\\to\\mathrm{SO}(3)$, $\\rho(q)(v)=qvq^{-1}$, from the unit quaternions onto the rotations of $\\operatorname{Im}\\mathbb H$, the induced homomorphism $\\rho_*:\\pi_2(S^3,1)\\to\\pi_2(\\mathrm{SO}(3),I)$ is a bijection and $\\pi_2(S^3,1)=0$. Consequently also $\\pi_2(O(3))=0$ and $\\pi_2(V_2(\\mathbb R^3))=0$, because $(u,v)\\mapsto(u,v,u\\times v)$ is a homeomorphism $V_2(\\mathbb R^3)\\to O(3)$ and $O(3)$ is the disjoint union of the two cosets of $\\mathrm{SO}(3)$, each homeomorphic to $\\mathrm{SO}(3)$.",
+        "strategy": "Clause 2 of the quoted covering lemma states that for every covering projection $p:E\\to B$ the induced map $p_*:\\pi_n(E,e_0)\\to\\pi_n(B,p(e_0))$ is an isomorphism for every $n\\ge2$; the quaternion double cover is constructed in the quoted example and its kernel and two-sheetedness are proved there. Hence $\\rho_*:\\pi_2(S^3,1)\\to\\pi_2(\\mathrm{SO}(3),I)$ is an isomorphism. Every based map $S^2\\to S^3$ is nullhomotopic by the lower-dimensional nullhomotopy theorem, so $\\pi_2(S^3,1)=0$ and therefore $\\pi_2(\\mathrm{SO}(3),I)=0$. For the second sentence: $(u,v)\\mapsto(u,v,u\\times v)$ is a bijection from ordered orthonormal pairs to $O(3)$ (the third column is determined and the cross product identities give orthogonality and determinant $\\pm1$), with inverse given by the first two columns, hence a homeomorphism; $O(3)$ is the disjoint union of $\\mathrm{SO}(3)$ and the coset of a reflection, and left translation identifies each coset with $\\mathrm{SO}(3)$, so the inclusion induces isomorphisms on all homotopy groups. The argument makes only finitely many choices and uses no choice principle beyond the published suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology, §1.3 (covering isomorphisms on higher homotopy groups) and §4.2–4.3 (fibrations, long exact sequence, evaluation fibrations of mapping spaces), printed pp. 75, 342, 375–440",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-rotation-number-of-an-immersed-oriented-circle-in-the-plane",
+        "kind": "definition",
+        "title": "Rotation number of an immersed oriented circle in the plane",
+        "deps": [
+          "def-degree-of-a-circle-loop",
+          "cor-degree-descends-to-circle-loop-classes",
+          "thm-circle-loops-are-path-homotopic-iff-they-have-equal-degree",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-tangent-bundle-as-a-disjoint-union",
+          "def-differential-of-a-smooth-map",
+          "cor-winding-number-classifies-loops-in-the-punctured-plane",
+          "thm-winding-number-equals-circle-degree",
+          "def-rotation-index-of-a-regular-closed-plane-curve",
+          "def-smooth-manifold"
+        ],
+        "statement": "Let $S^1$ be oriented and parametrised as $\\mathbb R/2\\pi\\mathbb Z$ with the\npositive orientation, let $\\partial_\\theta$ be the corresponding positively\noriented unit tangent vector field of $S^1$, and let $f:S^1\\to\\mathbb R^2$ be a\nsmooth immersion, that is, a regular closed curve\n([[def-immersion-submersion-and-constant-rank-map]],\n[[def-smooth-manifold]]). Writing $T\\mathbb R^2\\cong\\mathbb R^2\\times\\mathbb R^2$\nfor the canonical identification, the differential\n([[def-differential-of-a-smooth-map]], [[def-tangent-bundle-as-a-disjoint-union]])\ngives for each $\\theta$ the velocity vector $df_\\theta(\\partial_\\theta)$, which\nis nonzero because $f$ is an immersion.\n\nThe **normalised velocity**, or unit tangent, of $f$ is the map\n$$\\tau_f:S^1\\longrightarrow S^1,\\qquad \\tau_f(\\theta)=\\frac{df_\\theta(\\partial_\\theta)}{\\lvert df_\\theta(\\partial_\\theta)\\rvert},$$\nwhich is continuous because the velocity never vanishes and every nonzero\nvector is a positive multiple of a unique unit vector.\n\nThe **rotation number** (also **rotation index**) of $f$ is\n$$\\operatorname{rot}(f):=\\deg(\\tau_f)\\in\\mathbb Z,$$\nthe degree of the unit tangent map. Concretely, after choosing the base point\n$\\theta_0=[0]$, identifying the unit circle with $\\mathbb R/\\mathbb Z$ by the\nstandard parametrisation and rotating the *target* circle by a constant so that\n$\\tau_f(\\theta_0)$ corresponds to $[0]$, the class of $\\tau_f$ is a based loop\nin the sense of [[def-degree-of-a-circle-loop]], and its degree is the integer\n$\\operatorname{rot}(f)$; the constant rotation of the target plane changes\nneither the winding number nor the degree, and the degree descends to based\nloop classes ([[cor-degree-descends-to-circle-loop-classes]]), so the value is\nindependent of the choice of $\\theta_0$ and of the lift used to compute it\n([[thm-circle-loops-are-path-homotopic-iff-they-have-equal-degree]]).\n\nEquivalent formulations, all taking the same value:\n\n- The velocity curve $t\\mapsto f'(t)$ is a closed $C^1$, hence rectifiable,\n  loop in $\\mathbb C^\\times=\\mathbb R^2\\setminus\\{0\\}$, and\n  $\\operatorname{rot}(f)$ is its **winding number about the origin**: the\n  normalised velocity $t\\mapsto f'(t)/\\lvert f'(t)\\rvert$ is exactly\n  $\\tau_f$, and after the constant rotation\n  $\\gamma\\mapsto\\gamma/\\gamma(t_0)$ of the target plane, which changes neither\n  the winding number about $0$ nor the degree of the normalised loop,\n  [[thm-winding-number-equals-circle-degree]] identifies $n(\\gamma,0)$ with the\n  degree of the normalised loop, while\n  [[cor-winding-number-classifies-loops-in-the-punctured-plane]] identifies that\n  winding number with the class in $\\pi_1(\\mathbb C^\\times,1)\\cong\\mathbb Z$.\n- $\\operatorname{rot}(f)$ equals $\\frac{1}{2\\pi}$ times the **total signed\n  turning angle** of the tangent, i.e. the rotation index of the regular closed\n  plane curve $f$ in the sense of\n  [[def-rotation-index-of-a-regular-closed-plane-curve]], where the tangent\n  angle is lifted continuously and the corner jumps are zero for a smooth\n  curve.\n\nThe normalisation is fixed by the round unit circle: the immersion\n$\\theta\\mapsto(\\cos\\theta,\\sin\\theta)$ traversed once in the positive direction\nhas unit tangent $(-\\sin\\theta,\\cos\\theta)$ winding once positively, hence rotation number $+1$, and its reverse has\nrotation number $-1$. Reversing the orientation of the domain negates the\nrotation number, while a regular (orientation-preserving) reparametrisation\nleaves it unchanged; for the tangent-angle model these two facts are part of\nthe well-definedness statement of\n[[def-rotation-index-of-a-regular-closed-plane-curve]].\n\nNo convexity, simplicity, self-intersection restriction or properness is\nimposed; $\\operatorname{rot}$ is an invariant of the oriented immersed circle,\nnot of its image.",
+        "strategy": "Definition. The rotation number is the degree of the unit tangent map; the identification with the winding number of the velocity is positive pointwise normalisation, and the identification with the total signed turning angle is the standard unwinding of the argument. Well-definedness (independence of the regular parametrisation and the sign under orientation reversal) is proved in the stated degree items, not here; nothing else is claimed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hassler Whitney, On regular closed curves in the plane, Compositio Mathematica 4 (1937), pp. 276–284, §1 (rotation number and invariance), §2 (Theorem 1, deformation theorem) and §3 (Lemma 2, Theorem 2)",
+              "url": "https://www.numdam.org/item/CM_1937__4__276_0.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-formal-immersions-of-the-circle-in-the-plane-are-classified-by-the-winding-number",
+        "kind": "lemma",
+        "title": "Formal immersions of the circle in the plane are classified by the winding number",
+        "deps": [
+          "prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle",
+          "def-rotation-number-of-an-immersed-oriented-circle-in-the-plane",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-frame-bundle-and-associated-vector-bundle",
+          "def-local-frame-and-global-frame-of-a-vector-bundle",
+          "cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame",
+          "thm-circle-loops-are-path-homotopic-iff-they-have-equal-degree",
+          "cor-degree-descends-to-circle-loop-classes",
+          "thm-winding-number-equals-circle-degree",
+          "cor-winding-number-classifies-loops-in-the-punctured-plane",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-space-of-immersions-and-space-of-formal-immersions"
+        ],
+        "statement": "Let $E=V(TS^1,\\varepsilon^2)\\to S^1$ be the Stiefel bundle of the\nsection-space proposition for $M=S^1$ and $n=2$, with fibre\n$V_1(\\mathbb R^2)=S^1$. Then $E\\cong S^1\\times S^1$ is trivial, its section\nspace $\\Gamma$ is homeomorphic to $C^\\infty(S^1,S^1)$ with the weak smooth topology, and\n$\\pi_0(\\Gamma)\\cong\\mathbb Z$ by degree. The resulting **winding invariant**\n$w(f,F)\\in\\mathbb Z$ of a formal immersion $(f,F)$ is the degree of the section\nexpressed in a fixed trivialisation; for the derivative $(f,df)$ of an\nimmersion it equals the rotation number $\\operatorname{rot}(f)$ of the\npreceding definition. Two formal immersions of $S^1$ into $\\mathbb R^2$ lie in\nthe same path component of $\\operatorname{FImm}(S^1,\\mathbb R^2)$ if and only\nif their winding invariants are equal.",
+        "strategy": "The tangent bundle of the circle is trivial, so a global frame trivialises the frame bundle and, by the proposition, the associated bundle of injections: $E\\cong S^1\\times S^1$, and sections of a product bundle over $S^1$ are exactly maps $S^1\\to S^1$. Their homotopy classes are the degree, by the circle degree classification. In this trivialisation the second component of $(f,df)$ is the velocity $df(\\partial_\\theta)$ up to the identification of $TS^1$ with $S^1\\times\\mathbb R$; dividing by the smooth positive function $\\lvert df(\\partial_\\theta)\\rvert$ is a homotopy of nowhere-zero sections, so the class of the section is the class of the unit tangent map, which is the rotation number.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hassler Whitney, On regular closed curves in the plane, Compositio Mathematica 4 (1937), pp. 276–284, §1 (rotation number and invariance), §2 (Theorem 1, deformation theorem) and §3 (Lemma 2, Theorem 2)",
+              "url": "https://www.numdam.org/item/CM_1937__4__276_0.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-regular-homotopy-preserves-the-formal-gauss-class",
+        "kind": "lemma",
+        "title": "Regular homotopy preserves the formal Gauss class",
+        "deps": [
+          "prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle",
+          "def-regular-homotopy-of-immersions",
+          "lem-the-derivative-map-is-continuous",
+          "lem-smooth-families-and-path-components-in-the-weak-topology",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "thm-the-exponential-law",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-countable-choice"
+        ],
+        "statement": "Let $M^m,N^n$ be smooth manifolds with $m\\le n$ (no compactness of $M$ is needed for this invariance) and let $H:M\\times[0,1]\\to N$ be a regular homotopy, that is, a smooth map whose restriction $H_t$ to every slice is an immersion. Then $t\\mapsto(H_t,dH_t)$ is a continuous path in $\\operatorname{FImm}(M,N)$ for the weak compact-open $C^\\infty$ topology, and consequently every homotopy invariant of formal data is constant along a regular homotopy: the path component of $(H_t,dH_t)$ in $\\operatorname{FImm}(M,N)$ does not depend on $t$. For $M=S^m,N=\\mathbb R^n$ this invariant is the Gauss frame class of the preceding items (the difference class in $\\pi_m(V_m(\\mathbb R^n))$ when $n\\ge m+2$); for $M=S^1,N=\\mathbb R^2$ it is the winding number, i.e. the rotation number. In particular two regularly homotopic immersions have homotopic formal data, which is the necessity half of every classification on this page.",
+        "strategy": "The adjoint $[0,1]\\to C^\\infty(M,N)$ of the smooth map $H$ is continuous for the weak compact-open $C^\\infty$ topology (the exponential law, specialising the smoothing lemma to the compact parameter interval, and directly from the definition of the topology on the source $M\\times[0,1]$), and its image lies in $\\operatorname{Imm}(M,N)$ because every slice is an immersion; the derivative map $D$ is continuous, so $t\\mapsto D(H_t)=(H_t,dH_t)$ is a continuous path in $\\operatorname{FImm}(M,N)$. The class of a point along a path in a topological space is constant, which is the assertion. Countable choice is inherited through the smoothing/approximation supplier used in the compact-source case.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Immersions of Manifolds and Homotopy Theory (Harvard CMSA Math-Science Literature Lecture write-up, June 30 2022), §1 “Vector bundle obstructions to embeddings and immersions” and §2.1–2.2 “Foundational work of Whitney, Smale, and Hirsch”, PDF pp. 4–10",
+              "url": "https://math.stanford.edu/~ralph/immersions-final.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-whitney-graustein-classification-of-plane-circle-immersions",
+        "kind": "theorem",
+        "title": "Whitney–Graustein classification of plane circle immersions",
+        "deps": [
+          "lem-regular-homotopy-preserves-the-formal-gauss-class",
+          "lem-formal-immersions-of-the-circle-in-the-plane-are-classified-by-the-winding-number",
+          "def-rotation-number-of-an-immersed-oriented-circle-in-the-plane",
+          "cor-regular-homotopy-classes-of-immersions-are-formal-homotopy-classes",
+          "thm-smale-hirsch-immersion-theorem",
+          "def-regular-homotopy-of-immersions",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-weak-homotopy-equivalence",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-countable-choice"
+        ],
+        "statement": "Let $f,g:S^1\\to\\mathbb R^2$ be oriented immersions of the circle (regular closed curves). Then $f$ and $g$ are regularly homotopic through immersions if and only if their rotation numbers agree, $\\operatorname{rot}(f)=\\operatorname{rot}(g)$. Equivalently, the rotation number induces a bijection $\\pi_0\\operatorname{Imm}(S^1,\\mathbb R^2)\\cong\\mathbb Z$; every integer is realised by the $k$-fold positively or negatively oriented round circle, and the invariant detects the orientation: the reverse of a curve with rotation number $k$ has rotation number $-k$, so a circle cannot be turned inside out in the plane through immersions.",
+        "strategy": "Necessity: a regular homotopy gives a continuous path of formal data (the invariance lemma), and the winding invariant of the circle lemma is constant along such a path and equals the rotation number; hence regularly homotopic immersions have equal rotation numbers. Sufficiency: if the rotation numbers agree, the formal data of $f$ and $g$ have the same winding invariant and are therefore homotopic through formal immersions; the Smale\\u2013Hirsch theorem gives a weak homotopy equivalence $\\operatorname{Imm}(S^1,\\mathbb R^2)\\to\\operatorname{FImm}(S^1,\\mathbb R^2)$ (positive codimension $1<2$, closed compact source), hence a bijection on path components, so $f$ and $g$ are regularly homotopic. The classical deformation proof of [[whit37]] deforms the velocity through nonvanishing fields with prescribed total turning and then corrects the average; the two routes prove the same statement. The realisation of all integers and the sign under orientation reversal are the explicit $k$-fold circle computations. Countable choice is inherited from the Smale\\u2013Hirsch supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hassler Whitney, On regular closed curves in the plane, Compositio Mathematica 4 (1937), pp. 276–284, §1 (rotation number and invariance), §2 (Theorem 1, deformation theorem) and §3 (Lemma 2, Theorem 2)",
+              "url": "https://www.numdam.org/item/CM_1937__4__276_0.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 13
+      },
+      {
+        "id": "thm-smale-classification-of-sphere-immersions-in-euclidean-space",
+        "kind": "theorem",
+        "title": "Smale classification of sphere immersions in Euclidean space",
+        "deps": [
+          "lem-the-basepoint-evaluation-of-the-stiefel-section-space-is-a-fibration",
+          "lem-stiefel-manifolds-are-connected-and-simply-connected-in-positive-codimension",
+          "lem-the-second-homotopy-group-of-so-three-vanishes",
+          "lem-formal-immersions-of-the-circle-in-the-plane-are-classified-by-the-winding-number",
+          "prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle",
+          "lem-formal-immersion-gives-the-tangent-normal-bundle-identity",
+          "def-whitney-sum-of-vector-bundles",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "ex-orthogonal-and-special-orthogonal-lie-groups",
+          "cor-regular-homotopy-classes-of-immersions-are-formal-homotopy-classes",
+          "thm-smale-hirsch-immersion-theorem",
+          "def-weak-homotopy-equivalence",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-countable-choice",
+          "cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame",
+          "prop-tangent-space-of-a-regular-level-set-is-the-kernel"
+        ],
+        "statement": "Let $1\\le m\\le n$, let $F=V_m(\\mathbb R^n)\\cong O(n)/O(n-m)$ be the Stiefel\nmanifold of orthonormal $m$-frames, and let\n$E=V(TS^m,\\varepsilon^n)\\to S^m$ be the Stiefel bundle of the section-space\nproposition. Its sections are the fibrewise-injection part of the formal\nnon-holonomic data, and the projection\n$\\operatorname{FImm}(S^m,\\mathbb R^n)\\to\\Gamma(E)$ forgetting the underlying\nmap and polar-normalizing the fibrewise injection is a homotopy equivalence, so path components of $\\Gamma(E)$ and of\n$\\operatorname{FImm}(S^m,\\mathbb R^n)$ agree.\n\n1. If $n\\ge m+2$, then $F$ is simply connected, $E$ admits sections (because\n   $TS^m\\oplus\\varepsilon^{n-m}\\cong\\varepsilon^n$), and the difference class of\n   the evaluation lemma induces a non-canonical bijection\n   $\\pi_0\\Gamma(E)\\cong\\pi_m(V_m(\\mathbb R^n))=\\pi_m(O(n)/O(n-m))$. Since the\n   Smale–Hirsch derivative map is a weak homotopy equivalence, the same set\n   classifies regular homotopy classes of immersions: there is a non-canonical\n   bijection between regular homotopy classes of immersions\n   $S^m\\to\\mathbb R^n$ and $\\pi_m(O(n)/O(n-m))$, realised by the clutching\n   difference class of the tangent framings.\n2. If $n=m+1$, then $V_m(\\mathbb R^{m+1})\\cong\\mathrm{SO}(m+1)$ and the\n   difference class gives a non-canonical bijection\n   $\\pi_m(\\mathrm{SO}(m+1))\\to\\pi_0\\Gamma(E)\\cong\\pi_0\\operatorname{Imm}(S^m,\\mathbb R^{m+1})$;\n   in particular, if $\\pi_m(\\mathrm{SO}(m+1))=0$ then all immersions\n   $S^m\\to\\mathbb R^{m+1}$ are regularly homotopic.\n3. The instances used on this page: $m=1$, $n=2$, where\n   $\\pi_0\\operatorname{Imm}(S^1,\\mathbb R^2)\\cong\\mathbb Z$ with the rotation\n   number as invariant; and $m=2$, $n=3$, where\n   $\\pi_2(\\mathrm{SO}(3))=0$ and hence all immersions $S^2\\to\\mathbb R^3$ are\n   regularly homotopic.",
+        "strategy": "Clause 1: the fibre is simply connected by the Stiefel connectivity lemma; the difference-class bijection is the evaluation lemma; sections exist because the tangent bundle of the sphere is stably trivial, $TS^m\\oplus\\varepsilon^1\\cong\\varepsilon^{m+1}$, which is the tangent-normal identity applied to the standard embedding together with the triviality of the normal line, and adding $n-m-1$ trivial summands gives a bundle monomorphism $TS^m\\to\\varepsilon^n$; the immersion statement is the induced bijection on path components of the Smale\\u2013Hirsch weak homotopy equivalence. Clause 2: $V_m(\\mathbb R^{m+1})=O(m+1)/O(1)\\cong SO(m+1)$ and the exact sequence of the evaluation lemma exhibits $\\pi_0\\Gamma(E)$ as a quotient of $\\pi_0(\\Gamma_*)\\cong\\pi_m(SO(m+1))$ because $\\pi_0(F)=0$; the specialisation $m=2$ uses the vanishing of $\\pi_2(SO(3))$. The circle instance is the separate circle computation. These are the statements of Smale's classification of sphere immersions (Francis Lecture 10, Theorem 0.2 and Corollary 0.3; Cohen Theorem 5), with the clutching/tangent condition printed explicitly. Countable choice is inherited from Smale\\u2013Hirsch.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Immersions of Manifolds and Homotopy Theory (Harvard CMSA Math-Science Literature Lecture write-up, June 30 2022), §1 “Vector bundle obstructions to embeddings and immersions” and §2.1–2.2 “Foundational work of Whitney, Smale, and Hirsch”, PDF pp. 4–10",
+              "url": "https://math.stanford.edu/~ralph/immersions-final.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 13
+      },
+      {
+        "id": "lem-standard-and-reflected-two-sphere-immersions-have-homotopic-formal-data-in-r-three",
+        "kind": "lemma",
+        "title": "Standard and reflected two-sphere immersions have homotopic formal data in $\\mathbb R^3$",
+        "deps": [
+          "lem-the-second-homotopy-group-of-so-three-vanishes",
+          "lem-the-basepoint-evaluation-of-the-stiefel-section-space-is-a-fibration",
+          "prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle",
+          "lem-stiefel-manifolds-are-connected-and-simply-connected-in-positive-codimension",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-higher-homotopy-group-by-based-cubes",
+          "def-countable-choice"
+        ],
+        "statement": "Let $\\iota:S^2\\hookrightarrow\\mathbb R^3$ be the standard inclusion of the unit\nsphere and let $a:S^2\\to S^2$, $a(x)=-x$, be the antipodal map; equivalently\nreplace $\\iota$ by $r\\circ\\iota$ for a reflection $r$ of $\\mathbb R^3$, which\ndiffers from $\\iota\\circ a$ by an orientation-preserving rotation of the\ntarget. Then the formal immersions $(\\iota,d\\iota)$ and\n$(\\iota\\circ a,d(\\iota\\circ a))$ lie in the same path component of\n$\\operatorname{FImm}(S^2,\\mathbb R^3)$. More precisely, after trivialising the\nStiefel bundle $V(TS^2,\\varepsilon^3)$ over the two hemispheres, the difference\nof the two Gauss frame sections over the equator glues to a continuous map\n$F:S^2\\to V_2(\\mathbb R^3)\\cong\\mathrm{SO}(3)$ whose homotopy class in\n$\\pi_2(\\mathrm{SO}(3))$ measures the obstruction to homotoping the formal data;\nsince $\\pi_2(\\mathrm{SO}(3))=0$ and $O(3)$ is the disjoint union of two copies\nof $\\mathrm{SO}(3)$, also $\\pi_2(O(3))=0$, $F$ is nullhomotopic, and the two\nformal data are homotopic. This vanishing is the algebraic content of the\neversion.",
+        "strategy": "The bundle $E=V(TS^2,\\varepsilon^3)$ admits the section $d\\iota$, so $\\Gamma(E)\\ne\\varnothing$; its fibre $V_2(\\mathbb R^3)\\cong O(3)$ is connected and has $\\pi_2=0$, so by the evaluation lemma $\\pi_0\\Gamma(E)$ is a quotient of $\\pi_2(V_2(\\mathbb R^3))=0$, that is, $\\Gamma(E)$ is path connected; hence all formal immersions of $S^2$ into $\\mathbb R^3$, in particular those of $\\iota$ and of its reflection, are homotopic. The explicit description of the difference as the gluing of the two hemispherical framings along the equator is the clutching construction in the sources; when the bundle is trivialised over each hemisphere the obstruction is the class of a map $S^2\\to V_2(\\mathbb R^3)$, and the class vanishes because the group is null in degree two. Countable choice is inherited from the evaluation-fibration supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            },
+            {
+              "title": "Allen Hatcher, Algebraic Topology, §1.3 (covering isomorphisms on higher homotopy groups) and §4.2–4.3 (fibrations, long exact sequence, evaluation fibrations of mapping spaces), printed pp. 75, 342, 375–440",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-sphere-eversion",
+        "kind": "theorem",
+        "title": "Sphere eversion",
+        "deps": [
+          "lem-standard-and-reflected-two-sphere-immersions-have-homotopic-formal-data-in-r-three",
+          "thm-smale-classification-of-sphere-immersions-in-euclidean-space",
+          "lem-the-second-homotopy-group-of-so-three-vanishes",
+          "thm-smale-hirsch-immersion-theorem",
+          "cor-regular-homotopy-classes-of-immersions-are-formal-homotopy-classes",
+          "def-regular-homotopy-of-immersions",
+          "def-weak-homotopy-equivalence",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-countable-choice",
+          "thm-jordan-brouwer-separation",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-axiom-of-choice"
+        ],
+        "statement": "The standard embedding $\\iota:S^2\\hookrightarrow\\mathbb R^3$ is regularly homotopic, through immersions $S^2\\to\\mathbb R^3$, to its inside-out reflection $\\iota\\circ a$ (equivalently to $r\\circ\\iota$ for a reflection $r$ of $\\mathbb R^3$). More precisely, every two immersions $S^2\\to\\mathbb R^3$ are regularly homotopic: the space $\\operatorname{Imm}(S^2,\\mathbb R^3)$ is path connected, and a regular homotopy from $\\iota$ to $\\iota\\circ a$ cannot be chosen through embeddings.",
+        "strategy": "The formal data of the two immersions are homotopic by the preceding lemma. The Smale\\u2013Hirsch derivative map $\\operatorname{Imm}(S^2,\\mathbb R^3)\\to\\operatorname{FImm}(S^2,\\mathbb R^3)$ is a weak homotopy equivalence ($2<3$, compact closed source, positive codimension), hence induces a bijection on $\\pi_0$; a weak homotopy equivalence also induces a bijection between the sets of path components, so the two immersions lie in one path component of the immersion space, i.e. are regularly homotopic. Alternatively the classification theorem clause 2 with $\\pi_2(SO(3))=0$ gives the path connectivity of the whole immersion space directly. The last sentence is the separate remark on isotopies through embeddings. Countable choice is inherited from Smale\\u2013Hirsch.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Immersions of Manifolds and Homotopy Theory (Harvard CMSA Math-Science Literature Lecture write-up, June 30 2022), §1 “Vector bundle obstructions to embeddings and immersions” and §2.1–2.2 “Foundational work of Whitney, Smale, and Hirsch”, PDF pp. 4–10",
+              "url": "https://math.stanford.edu/~ralph/immersions-final.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 14
+      },
+      {
+        "id": "rem-sphere-eversion-cannot-be-an-isotopy-through-embeddings",
+        "kind": "remark",
+        "title": "Sphere eversion cannot be an isotopy through embeddings",
+        "deps": [
+          "thm-sphere-eversion",
+          "def-regular-homotopy-of-immersions",
+          "def-smooth-embedding",
+          "cor-an-injective-immersion-from-a-compact-manifold-is-an-embedding",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-orientable-manifold",
+          "thm-jordan-brouwer-separation",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-axiom-of-choice"
+        ],
+        "statement": "No homotopy from $\\iota$ to $\\iota\\circ a$ (or to $r\\circ\\iota$) through embeddings of $S^2$ into $\\mathbb R^3$ exists, so every eversion contains slices that are not injective; self-intersections are unavoidable. The invariant is the coorientation: an embedding of $S^2$ into $\\mathbb R^3$ bounds a ball, and along a continuous family of embeddings the bounded complementary component varies continuously (Jordan\\u2013Brouwer separation), so the normal direction pointing into the bounded side and the orientation of the parametrisation relative to it are locally constant; $\\iota$ has the positively oriented parametrisation with respect to the outward normal while $\\iota\\circ a$ and $r\\circ\\iota$ have the opposite sign, so $\\iota$ and $\\iota\\circ a$ lie in different path components of $\\operatorname{Emb}(S^2,\\mathbb R^3)$. Equivalently, an ambient isotopy of $\\mathbb R^3$ preserves the side of the image, whereas eversion reverses the inside/outside labelling. Regular homotopy is strictly coarser than isotopy here: the two maps are in one path component of $\\operatorname{Imm}(S^2,\\mathbb R^3)$ by the eversion theorem and in different path components of $\\operatorname{Emb}(S^2,\\mathbb R^3)$.",
+        "strategy": "Remark. The first sentence is proved by the coorientation sign described in the statement; a homotopy through embeddings would be a path of embeddings, along which the bounded complementary component and the orientation sign of the parametrisation with respect to the outward normal are continuous, hence constant, while the sign changes from $+1$ for the standard inclusion to $-1$ for its antipodal or reflected version. The separation fact used is the Jordan\\u2013Brouwer theorem for a smoothly embedded two-sphere; no proof of the eversion is repeated here. P: not-applicable (recorded remark).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralph L. Cohen, Immersions of Manifolds and Homotopy Theory (Harvard CMSA Math-Science Literature Lecture write-up, June 30 2022), §1 “Vector bundle obstructions to embeddings and immersions” and §2.1–2.2 “Foundational work of Whitney, Smale, and Hirsch”, PDF pp. 4–10",
+              "url": "https://math.stanford.edu/~ralph/immersions-final.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 15
+      },
+      {
+        "id": "rem-regular-homotopy-allows-self-intersections-but-never-rank-drop",
+        "kind": "remark",
+        "title": "Regular homotopy allows self-intersections but never a rank drop",
+        "deps": [
+          "def-regular-homotopy-of-immersions",
+          "def-immersion-submersion-and-constant-rank-map",
+          "cor-the-immersion-and-submersion-loci-are-open",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "rem-sphere-eversion-cannot-be-an-isotopy-through-embeddings"
+        ],
+        "statement": "A regular homotopy $H:M\\times[0,1]\\to N$ of immersions requires every slice $H_t$ to be immersive: the rank of $dH_t$ is $\\dim M$ at every point of every slice, and no slice may contain a point of rank drop, a cusp of the parametrised family or a point whose derivative degenerates. Self-intersections, by contrast, are permitted: an immersion may identify two distinct points $x\\ne y$ with $H_t(x)=H_t(y)$ provided the images of $T_xM$ and $T_yM$ are distinct linear subspaces; immersions are only required to be locally injective. During an eversion of $S^2$ in $\\mathbb R^3$ the slices must acquire self-intersections and cannot be embeddings (the preceding remark), while no slice may have a rank drop, so the two phenomena are logically independent. The immersion condition is open in the strong topology on a compact source, so a rank drop can only occur by leaving that open set.",
+        "strategy": "Remark. It fixes the exact meaning of the family condition: the fibrewise injectivity of $dH_t$ is a pointwise condition on each slice, whereas injectivity of $H_t$ is not a local differential condition and is never required. The openness statement is the published open-immersion-loci item. P: not-applicable (recorded remark).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Immersions of Manifolds and Homotopy Theory (Harvard CMSA Math-Science Literature Lecture write-up, June 30 2022), §1 “Vector bundle obstructions to embeddings and immersions” and §2.1–2.2 “Foundational work of Whitney, Smale, and Hirsch”, PDF pp. 4–10",
+              "url": "https://math.stanford.edu/~ralph/immersions-final.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 16
+      },
+      {
+        "id": "rem-sphere-immersion-groups-are-at-computations-not-dt-constructions",
+        "kind": "remark",
+        "title": "Sphere immersion groups are AT computations, not DT constructions",
+        "deps": [
+          "lem-stiefel-manifolds-are-connected-and-simply-connected-in-positive-codimension",
+          "lem-the-second-homotopy-group-of-so-three-vanishes",
+          "thm-smale-classification-of-sphere-immersions-in-euclidean-space",
+          "def-higher-homotopy-group-by-based-cubes"
+        ],
+        "statement": "The homotopy-theoretic inputs used on this page \\u2014 $\\pi_2(\\mathrm{SO}(3))=0$ and $\\pi_1(\\mathrm{SO}(2))\\cong\\mathbb Z$ through the quaternion double cover and the covering isomorphism on $\\pi_n$ for $n\\ge2$, the Stiefel connectivities $\\pi_0(V_m(\\mathbb R^n))=0$ for $n\\ge m+1$ and $\\pi_1(V_m(\\mathbb R^n))=0$ for $n\\ge m+2$, and the higher homotopy exact sequences of the fibrations $V_m(\\mathbb R^n)\\to S^{n-1}$ and $O(n-m)\\to O(n)$ \\u2014 are algebraic-topology computations owned by [[higher-homotopy-groups-and-cofiber-sequences]], [[fibrations-fiber-bundles-and-homotopy-exact-sequences]], [[covering-spaces-and-lifting]] and [[hurewicz-whitehead-freudenthal-and-cw-approximation]]. This page consumes them and contributes only the differential-topological reduction: the Smale\\u2013Hirsch weak homotopy equivalence (from the predecessor page), the identification of formal data with Stiefel sections, and the clutching difference class that turns the classification into these groups. No new homotopy-theoretic machinery is minted here, and conversely the groups $\\pi_m(V_m(\\mathbb R^n))$ remain AT-owned inputs; each use is recorded in the dependencies of the items above.",
+        "strategy": "Remark. It records the ownership seam of the design's warning: DT consumes the Stiefel homotopy groups and does not construct them, and the very definition of the groups, the long exact sequences and the covering isomorphisms live on the named AT pages. P: not-applicable (recorded remark).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology, §1.3 (covering isomorphisms on higher homotopy groups) and §4.2–4.3 (fibrations, long exact sequence, evaluation fibrations of mapping spaces), printed pp. 75, 342, 375–440",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 14
+      }
+    ]
+  },
+  {
+    "order": 568,
+    "id": "regular-homotopy-and-sphere-eversion-examples",
+    "kind": "B",
+    "category": "differential-topology",
+    "title": "Regular Homotopy and Sphere Eversion — Examples",
+    "companion": "regular-homotopy-and-sphere-eversion",
+    "requires": [
+      "regular-homotopy-and-sphere-eversion",
+      "the-de-rham-theorem-and-degree"
+    ],
+    "items": [
+      {
+        "id": "ex-plane-circle-immersions-of-rotation-number-k",
+        "kind": "example",
+        "title": "Plane circle immersions of rotation number $k$",
+        "deps": [
+          "def-rotation-number-of-an-immersed-oriented-circle-in-the-plane",
+          "thm-whitney-graustein-classification-of-plane-circle-immersions",
+          "prop-degree-of-the-power-map-on-the-circle",
+          "thm-winding-number-equals-circle-degree",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-degree-of-a-circle-loop",
+          "def-countable-choice"
+        ],
+        "statement": "For every integer $k\\ne0$ the map $\\gamma_k:S^1\\to\\mathbb R^2$, $\\gamma_k(\\theta)=(\\cos k\\theta,\\sin k\\theta)$, with $S^1=\\mathbb R/2\\pi\\mathbb Z$ positively oriented, is an immersion: $\\gamma_k'(\\theta)=k(-\\sin k\\theta,\\cos k\\theta)$ never vanishes. Its unit tangent map is $\\theta\\mapsto(-\\sin k\\theta,\\cos k\\theta)$, the $k$-th power of the standard unit-speed circle map, of degree $k$; hence $\\operatorname{rot}(\\gamma_k)=k$. For $k<0$ this is the $|k|$-fold circle traversed in the negative direction, so the construction realises every nonzero integer. The remaining value $k=0$ is realised by the Gerono lemniscate $\\delta(\\theta)=(\\cos\\theta,\\sin2\\theta)$, whose velocity $(-\\sin\\theta,2\\cos2\\theta)$ is nonvanishing: the positive $x$-axis of the velocity plane is met exactly twice, at $\\theta=5\\pi/4$ and $\\theta=7\\pi/4$, with opposite signed crossing directions, so the winding is $0$ and $\\operatorname{rot}(\\delta)=0$. By the Whitney\\u2013Graustein theorem, $\\gamma_k$ and $\\gamma_l$ are regularly homotopic if and only if $k=l$, and the family $\\{\\gamma_k:k\\in\\mathbb Z\\}\\cup\\{\\delta\\}$ contains exactly one regular homotopy class for each rotation number.",
+        "strategy": "Direct computation: the derivative of $\\gamma_k$ is displayed and nonvanishing, and the unit tangent map is the $k$-fold power of the identity loop, whose degree is $k$ by the power-map degree computation; for the lemniscate the velocity is nonvanishing and its winding is computed by counting signed crossings of a ray, giving zero. The classification statement is the Whitney\\u2013Graustein theorem. Countable choice is inherited through the classification theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hassler Whitney, On regular closed curves in the plane, Compositio Mathematica 4 (1937), pp. 276–284, §1 (rotation number and invariance), §2 (Theorem 1, deformation theorem) and §3 (Lemma 2, Theorem 2)",
+              "url": "https://www.numdam.org/item/CM_1937__4__276_0.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 14
+      },
+      {
+        "id": "cex-the-figure-eight-and-round-circle-are-not-regularly-homotopic-as-oriented-immersions",
+        "kind": "counterexample",
+        "title": "The figure eight and the round circle are not regularly homotopic as oriented immersions",
+        "deps": [
+          "def-degree-of-a-circle-loop",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-rotation-number-of-an-immersed-oriented-circle-in-the-plane",
+          "thm-whitney-graustein-classification-of-plane-circle-immersions"
+        ],
+        "statement": "**False claim:** any two oriented immersed circles in the plane are regularly\nhomotopic; in particular the Gerono lemniscate and the round circle, despite\nboth being simple closed pictures of one loop, represent the same regular\nhomotopy class.\n\nThe claim fails because the regular homotopy invariant of oriented immersed\ncircles is the rotation number, which is not changed by bending, translating or\nself-crossing moves but jumps between the two curves in question.",
+        "strategy": "The two rotation numbers are computed in the companion example: the lemniscate's velocity has winding zero and the circle's unit tangent map has degree one. They differ, so the classification theorem separates the two classes. The remark about the doubly traversed circle is the explicit family $\\gamma_2$ from the same example. This is the design's intended use: self-intersection count is not the invariant.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hassler Whitney, On regular closed curves in the plane, Compositio Mathematica 4 (1937), pp. 276–284, §1 (rotation number and invariance), §2 (Theorem 1, deformation theorem) and §3 (Lemma 2, Theorem 2)",
+              "url": "https://www.numdam.org/item/CM_1937__4__276_0.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 14
+      },
+      {
+        "id": "ex-formal-frame-homotopy-behind-sphere-eversion",
+        "kind": "example",
+        "title": "Formal frame homotopy behind sphere eversion",
+        "deps": [
+          "lem-standard-and-reflected-two-sphere-immersions-have-homotopic-formal-data-in-r-three",
+          "lem-the-second-homotopy-group-of-so-three-vanishes",
+          "lem-pi-three-so-three-generated-by-the-quaternion-double-cover",
+          "thm-covering-space-lifting-criterion",
+          "thm-homotopy-lifting-for-covering-maps",
+          "thm-lower-dimensional-sphere-maps-are-based-nullhomotopic",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "cor-euclidean-spheres-are-path-connected"
+        ],
+        "statement": "Let $\\iota:S^2\\hookrightarrow\\mathbb R^3$ be the standard embedding and $\\iota\\circ a$ its antipodal version. Trivialise the Stiefel bundle $V(TS^2,\\varepsilon^3)$ over the closed upper and lower hemispheres (contractible, hence chart domains with coordinate frames); the Gauss frame sections of $d\\iota$ and of $d(\\iota\\circ a)$ then agree near the poles and differ over the equator by a loop of frames, and gluing the upper section to the lower section twisted by that loop yields a continuous map $F:S^2\\to V_2(\\mathbb R^3)\\cong O(3)$. Since $S^2$ is simply connected, $F$ lifts along the two-sheeted covering $\\rho:S^3\\to\\mathrm{SO}(3)$ to a map $\\widetilde F:S^2\\to S^3$; every based map $S^2\\to S^3$ is nullhomotopic, and projecting a nullhomotopy gives a nullhomotopy of $F$. Hence the difference class $[F]\\in\\pi_2(O(3))=\\pi_2(\\mathrm{SO}(3))$ is zero and the two formal framings are homotopic. This finite check \\u2014 a lift through the quaternion double cover plus $\\pi_2(S^3)=0$ \\u2014 is the algebraic input that the eversion theorem converts into a genuine regular homotopy of immersions.",
+        "strategy": "The hemisphere triviality, the gluing loop and the resulting map $F$ are the clutching description of the formal difference class of the preceding lemma; the covering lifting criterion applies because $S^2$ is simply connected and locally path connected, and the homotopy lifting property of a covering lifts nullhomotopies back; the nullhomotopy of $\\widetilde F$ exists because $\\pi_2(S^3)=0$. Projecting it along $\\rho$ gives the nullhomotopy of $F$, so the difference class vanishes. Countable choice is inherited through the suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            },
+            {
+              "title": "Allen Hatcher, Algebraic Topology, §1.3 (covering isomorphisms on higher homotopy groups) and §4.2–4.3 (fibrations, long exact sequence, evaluation fibrations of mapping spaces), printed pp. 75, 342, 375–440",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-a-homotopy-through-maps-with-a-rank-drop-is-not-a-regular-homotopy",
+        "kind": "counterexample",
+        "title": "A homotopy through maps with a rank drop is not a regular homotopy",
+        "deps": [
+          "def-regular-homotopy-of-immersions",
+          "def-immersion-submersion-and-constant-rank-map",
+          "cor-the-immersion-and-submersion-loci-are-open",
+          "rem-regular-homotopy-allows-self-intersections-but-never-rank-drop",
+          "def-smooth-family-of-maps-and-evaluation-map"
+        ],
+        "statement": "Define $H:S^1\\times[0,1]\\to\\mathbb R^2$ by $H_t(\\theta)=((1-t)\\cos\\theta+t,(1-t)\\sin\\theta)$. For every $t<1$ the slice $H_t$ is an immersion, because its derivative $(-(1-t)\\sin\\theta,(1-t)\\cos\\theta)$ has norm $1-t$ and never vanishes, and $H_0$ is the standard unit circle. But $H_1$ is the constant map at $(1,0)$, with $dH_1=0$ at every point: the family has a rank drop at the final time. Hence $H$ is a smooth homotopy through maps from an immersion to a non-immersion that is immersive at every earlier time, and it is not a regular homotopy and cannot be used to conclude any regular-homotopy statement; in particular it does not show that the circle is regularly homotopic to a point. The example separates the two conditions used on this page: slicewise rank $\\dim M$ for every time (regular homotopy) versus mere continuity of the family (arbitrary homotopy).",
+        "strategy": "Direct computation of the derivative of $H_t$ shows it vanishes identically exactly at $t=1$; for $t<1$ it has constant norm $1-t>0$, so each earlier slice is an immersion. A regular homotopy would require the final slice to be immersive, which it is not. This is the design's pinch-a-circle test for the rank-drop remark.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralph L. Cohen, Immersions of Manifolds and Homotopy Theory (Harvard CMSA Math-Science Literature Lecture write-up, June 30 2022), §1 “Vector bundle obstructions to embeddings and immersions” and §2.1–2.2 “Foundational work of Whitney, Smale, and Hirsch”, PDF pp. 4–10",
+              "url": "https://math.stanford.edu/~ralph/immersions-final.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 10: Classifying immersions of spheres, after Smale (notes by A. Beaudry), PDF pp. 1–2",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/10eversing.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 17
+      },
+      {
+        "id": "ex-a-boy-surface-immersion-of-real-projective-two-space",
+        "kind": "example",
+        "title": "A Boy surface immersion of real projective two-space",
+        "deps": [
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-normal-bundle-of-a-formal-immersion",
+          "prop-first-stiefel-whitney-class-classifies-orientability",
+          "ex-real-projective-space-is-orientable-exactly-in-odd-dimension",
+          "def-real-projective-bundle-and-tautological-line",
+          "cor-an-injective-immersion-from-a-compact-manifold-is-an-embedding",
+          "def-smooth-embedding",
+          "def-orientable-manifold",
+          "cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame",
+          "thm-orientability-is-equivalent-to-a-nowhere-vanishing-top-form"
+        ],
+        "statement": "There is a smooth immersion $\\beta:\\mathbb{RP}^2\\to\\mathbb R^3$ whose image is Boy's surface. The Bryant\\u2013Kusner parametrisation of it is given on the closed unit disk $\\lvert w\\rvert\\le1$ by the real and imaginary parts of the rational expressions displayed in the sources, followed by inversion in the unit sphere; it satisfies $P(w)=P(-1/w^\\star)$ in general and $P(w)=P(-w)$ on the boundary circle, so it descends to the quotient of the disk by the antipodal boundary identification, which is $\\mathbb{RP}^2$, and it has injective differential, so $\\beta$ is an immersion (Kusner verifies immersedness explicitly for the minimal surface, and inversion in the unit sphere is a local diffeomorphism away from the origin; the three planar ends close smoothly at the triple point under inversion). Every immersion $f:\\mathbb{RP}^2\\to\\mathbb R^3$ has nontrivial normal line bundle: a global nonvanishing normal field $n$ together with the standard orientation of $\\mathbb R^3$ would orient the tangent planes by declaring a basis $(v_1,v_2)$ of $T_x\\mathbb{RP}^2$ positive exactly when $(v_1,v_2,n(x))$ is a positive basis of $T_{f(x)}\\mathbb R^3$, contradicting nonorientability of $\\mathbb{RP}^2$; equivalently $w_1(\\nu_f)=w_1(T\\mathbb{RP}^2)\\ne0$ for the tautological generator. Boy's surface is therefore the exact analogue in codimension one of the phenomenon that a nonorientable hypersurface has no global normal side, and it has self-intersections because an injective immersion of a compact manifold would be an embedding and a closed nonorientable surface does not embed in $\\mathbb R^3$.",
+        "strategy": "The parametrisation and the inversion construction are taken from the cited Kusner\\u2013Karcher treatments; immersedness is the explicit verification for the odd-p minimal surfaces of Kusner (p=3) together with the standard fact that inversion is a local diffeomorphism off the origin and that a planar end closes smoothly to a triple point. The normal-bundle argument is the elementary coorientation computation in the statement; the last sentence uses that a proper injective immersion of a compact manifold is an embedding and that a closed nonorientable surface cannot embed in $\\mathbb R^3$ as a hypersurface (the mod-two separation argument).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rob Kusner, Conformal geometry and complete minimal surfaces, Bulletin of the AMS (N.S.) 17 (1987), no. 2, pp. 291–295, Theorem B and Remark 1 (explicit Weierstrass data for the odd-p surfaces M_p, immersedness of M_p)",
+              "url": "https://www.ams.org/journals/bull/1987-17-02/S0273-0979-1987-15564-9/S0273-0979-1987-15564-9.pdf"
+            },
+            {
+              "title": "Hermann Karcher, Boy's Surface (Bryant–Kusner), 3D-XplorMath / Virtual Math Museum surface gallery, 2-page write-up: the Bryant–Kusner parametrization and the inversion construction of Boy's surface from the 3-ended minimal projective plane",
+              "url": "https://virtualmathmuseum.org/docs/Boy_s_Surface_Bryant-Kusner_.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      }
+    ]
+  }
+]

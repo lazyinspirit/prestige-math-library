@@ -1,0 +1,1388 @@
+[
+  {
+    "order": 541,
+    "id": "vector-field-index-euler-characteristic-and-poincare-hopf",
+    "kind": "A",
+    "category": "differential-topology",
+    "title": "Vector Field Index Euler Characteristic and Poincare Hopf",
+    "companion": "vector-field-index-euler-characteristic-and-poincare-hopf-examples",
+    "requires": [
+      "morse-critical-points-hessians-and-indices",
+      "morse-inequalities-and-the-handle-chain-complex",
+      "oriented-and-mod-two-intersection-numbers",
+      "intersection-pairings-self-intersection-and-euler-classes",
+      "vector-fields-flows-and-lie-derivatives",
+      "manifolds-with-boundary-collars-and-orientations",
+      "the-de-rham-theorem-and-degree",
+      "singular-chains-and-singular-homology",
+      "cw-complexes-and-cellular-homology",
+      "orientations-poincare-lefschetz-and-alexander-duality",
+      "obstruction-theory-postnikov-towers-and-classifying-spaces",
+      "chern-weil-theory-and-characteristic-forms"
+    ],
+    "items": [
+      {
+        "id": "def-euler-characteristic-of-a-compact-manifold",
+        "kind": "definition",
+        "title": "Euler characteristic of a compact manifold",
+        "deps": [
+          "def-singular-chain-complex-and-singular-homology",
+          "def-dimension",
+          "def-rationals",
+          "def-smooth-manifold",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-euler-characteristic-of-a-finite-cw-complex",
+          "thm-euler-poincare-formula-for-finite-cw-complexes",
+          "thm-cellular-homology-computes-singular-homology",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Let $M$ be a compact smooth $n$-manifold, possibly with boundary\n([[def-smooth-manifold]] in the boundaryless case,\n[[def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary]] in the\nboundary case). Its **Euler characteristic** is\n$$\\chi(M):=\\sum_{i=0}^{n}(-1)^i\\dim_{\\mathbb Q}H_i(M;\\mathbb Q)\\in\\mathbb Z,$$\nthe alternating sum of the rational Betti numbers of the singular homology of\n$M$ ([[def-singular-chain-complex-and-singular-homology]], [[def-dimension]],\n[[def-rationals]]). The empty manifold has $\\chi(\\varnothing)=0$, the empty\nsum. The sum is finite because $\\dim_{\\mathbb Q}H_i(M;\\mathbb Q)<\\infty$ for\nevery $i$ and $H_i(M;\\mathbb Q)=0$ for $i>n$; that finiteness is proved on this\npage in\n[[prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions]],\nwhich is why it is recorded as the well-definedness pointer rather than assumed\nhere. The definition itself uses no orientation and no choice of field or\ncoefficient system.\n\nWhen $M$ has a finite CW model, $\\chi(M)$ agrees with its cell-count Euler\ncharacteristic ([[def-euler-characteristic-of-a-finite-cw-complex]]): the\nfinite rational cellular complex has one generator per cell, and alternating\nrank-nullity cancels boundary dimensions. Cellular homology\n([[thm-cellular-homology-computes-singular-homology]]) therefore identifies\nthat cell count with the rational Betti alternating sum. The integral\nEuler-Poincare formula\n([[thm-euler-poincare-formula-for-finite-cw-complexes]]) gives the same count.\nThe relative version is proved in\n[[prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions]].\nThe cited well-definedness proposition assumes the Axiom of Choice\n([[def-axiom-of-choice]]) to obtain an excellent Morse function. The formula\nfor $\\chi$ makes no selection of auxiliary data.",
+        "strategy": "Assembly of published AT interfaces; the finiteness assertion is the one non-formal clause and is justified on this page by [[prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions]] (which needs the axiom of choice through the existence of an excellent Morse function, hence [[def-axiom-of-choice]] is declared).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, printed pp. 32-41 (the Euler number of a compact manifold as an alternating sum of ranks of homology groups)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a75 and \u00a77, printed pp. 132-150 (Euler characteristic as an alternating sum)"
+            }
+          ]
+        },
+        "justified_by": [
+          "prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions",
+        "kind": "proposition",
+        "title": "Finiteness and additivity of the Euler characteristic",
+        "deps": [
+          "def-euler-characteristic-of-a-compact-manifold",
+          "def-singular-chain-complex-and-singular-homology",
+          "def-dimension",
+          "def-rationals",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "thm-mayer-vietoris-sequence-in-singular-homology",
+          "thm-cellular-homology-computes-singular-homology",
+          "def-euler-characteristic-of-a-finite-cw-complex",
+          "thm-euler-poincare-formula-for-finite-cw-complexes",
+          "prop-euler-characteristic-is-additive-for-finite-cw-pairs",
+          "def-double-of-a-smooth-manifold-with-boundary",
+          "thm-the-double-has-a-well-defined-smooth-structure",
+          "thm-collar-neighborhood-theorem",
+          "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+          "cor-every-compact-smooth-manifold-admits-an-excellent-morse-function",
+          "def-axiom-of-choice",
+          "prop-morse-handle-chain-complex-computes-singular-homology",
+          "lem-exact-sequence-dimension-inequality",
+          "thm-universal-coefficient-theorem-for-homology-over-a-pid",
+          "thm-relative-cellular-homology-computes-relative-singular-homology",
+          "prop-cofibrations-are-characterized-by-a-retraction-of-the-mapping-cylinder-strip",
+          "lem-second-countable-smooth-manifolds-have-cw-homotopy-type"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a compact\nsmooth $n$-manifold, possibly with boundary.\n\n(i) Each $\\dim_{\\mathbb Q}H_i(M;\\mathbb Q)$ is finite and\n$H_i(M;\\mathbb Q)=0$ for $i>n$, so $\\chi(M)$ of\n[[def-euler-characteristic-of-a-compact-manifold]] is a well-defined integer.\n\n(ii) If $A\\subseteq M$ is a compact smooth submanifold, possibly with boundary,\nand $(M,A)$ is homotopy equivalent as a pair to a finite relative CW pair\nwith $c_k$ relative $k$-cells, then\n$$\\chi(M)=\\chi(A)+\\sum_k(-1)^kc_k=\\chi(A)+\\sum_k(-1)^k\\dim_{\\mathbb Q}H_k(M,A;\\mathbb Q).$$\n\n(iii) If $M=M_1\\cup_NM_2$ with $M_1,M_2$ compact smooth submanifolds,\npossibly with boundary, $N=M_1\\cap M_2$ a common compact smooth submanifold, and\nthe inclusions $N\\hookrightarrow M_i$ cofibrations, then\n$$\\chi(M)=\\chi(M_1)+\\chi(M_2)-\\chi(N).$$",
+        "strategy": "1.1 For (i), the empty case is immediate. Otherwise the folding retraction [F1] gives $q_*i_*=\\operatorname{id}$ on rational homology, so $H_i(M;\\mathbb Q)$ embeds as a direct summand of $H_i(DM;\\mathbb Q)$. Under the assumed Axiom of Choice, choose an excellent Morse function on the closed double and apply [F2]. Its handle complex is finite-dimensional and concentrated in degrees $0,\\dots,n$; its homology, and hence the summand for $M$, is finite-dimensional and zero above $n$. This establishes well-definedness without presupposing $\\chi(M)$. [F1, F2, given, algebra]\n\n1.2 For (iii), replace the glued space by the double mapping cylinder $P=M_1\\cup_{N\\times\\{0\\}}(N\\times I)\\cup_{N\\times\\{1\\}}M_2$. We verify that collapsing the cylinder is a homotopy equivalence $P\\to M$. Let $C=M_1\\cup_N(N\\times I)$, with collapse $f:C\\to M_1$. By [F6] extend the track $H(n,t)=[n,t]$ and the initial inclusion of $M_1$ to $H:M_1\\times I\\to C$. Set $j=H_1$, so $j(n)=[n,1]$. Then $fH$ joins $\\operatorname{id}_{M_1}$ to $fj$ relative to $N$. On $C$, use $H(x,t)$ for $x\\in M_1$ and $[n,s+t(1-s)]$ for $[n,s]$ in the cylinder; the formulas agree at $s=0$, define a homotopy from $\\operatorname{id}_C$ to $jf$, and fix the free end $N\\times\\{1\\}$. Gluing these maps and homotopies to the identity of $M_2$ proves the asserted equivalence. The compact subspaces $M_i$ are closed in $M$, so their pushout topology is the topology of $M_1\\cup M_2=M$ by finite closed pasting. [F6, construct]\n\n2.1 For (ii), step 1.1 applies to both $M$ and $A$. In the pair long exact sequence [F3], $H_k(M,A;\\mathbb Q)$ lies between a quotient of $H_k(M;\\mathbb Q)$ and a subspace of $H_{k-1}(A;\\mathbb Q)$; it is therefore finite-dimensional and vanishes outside a finite range. Alternating summation of this exact sequence gives $\\chi(M)-\\chi(A)=\\sum_k(-1)^k\\dim H_k(M,A;\\mathbb Q)$ by [F4], applied after cyclically relabelling the three terms if necessary. The given equivalence of pairs induces isomorphisms on these relative groups: the absolute homology maps are isomorphisms by [F3], and exactness of the pair sequences gives injectivity and surjectivity of the relative maps by lifting and subtracting successive neighbouring classes. Now [F5] computes the relative alternating sum as $\\sum_k(-1)^kc_k$, proving both equalities without requiring a finite absolute CW structure on $A$. [F3, F4, F5, step 1.1, algebra]\n\n3.1 The open subsets $U=M_1\\cup(N\\times[0,2/3))$ and $V=M_2\\cup(N\\times(1/3,1])$ cover $P$. They deformation retract to $M_1,M_2$, while $U\\cap V=N\\times(1/3,2/3)$ retracts to $N$. Thus [F3] and step 1.2 give a Mayer\u2013Vietoris sequence with homology terms those of $N$, $M_1\\sqcup M_2$ and $M$. All terms are finite-dimensional and vanish outside a finite range by step 1.1. Applying [F4] at $t=-1$ gives $\\chi(N)-\\chi(M_1)-\\chi(M_2)+\\chi(M)=0$, as required. [F3, F4, step 1.1, step 1.2, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, printed pp. 32-41 (Euler number, finiteness, and additivity for compact manifolds)"
+            },
+            {
+              "title": "Allen Hatcher, Algebraic Topology, Section 2.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "Section 2.2, Euler characteristic of finite CW pairs and the Mayer-Vietoris sequence, printed pp. 125-150"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a77, cell-count Euler characteristic, printed pp. 148-150"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "def-reduced-degree-into-the-zero-sphere",
+        "kind": "definition",
+        "title": "The reduced degree of a map into the 0-sphere",
+        "deps": [
+          "def-euclidean-spheres-and-closed-balls",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-induced-boundary-orientation",
+          "def-degree-of-a-map-between-oriented-closed-manifolds",
+          "def-reduced-homology-theory-and-augmentation",
+          "lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count"
+        ],
+        "statement": "Write $S^0=\\{-1,+1\\}=\\partial[-1,1]$ for the $0$-sphere\n([[def-euclidean-spheres-and-closed-balls]]) and orient it by the boundary\norientation of the interval $[-1,1]$ ([[def-induced-boundary-orientation]]):\nthe point $+1$ carries the sign $+1$ and the point $-1$ the sign $-1$, since an\norientation of a $0$-manifold is a sign at each point\n([[def-oriented-smooth-manifold-and-oriented-chart]]). Let $(P,s)$ be a finite\noriented $0$-manifold, that is, a finite set $P$ together with a sign\n$s(x)\\in\\{+1,-1\\}$ for every $x\\in P$\n([[def-oriented-smooth-manifold-and-oriented-chart]]); it is **balanced** when\n$$\\sum_{x\\in P}s(x)=0.$$\nFor a **balanced** $(P,s)$ and a map $f:P\\to S^0$ \u2014 every map is continuous because $P$ is discrete and\n$S^0$ is discrete \u2014 define the **reduced degree**\n$$\\deg(f):=\\frac{1}{2}\\sum_{x\\in P}s(x)\\,f(x)\\in\\mathbb Z,$$\nthe signed count of the values divided by two, where the values\n$f(x)\\in\\{-1,+1\\}$ are read in $\\mathbb R$. This is well defined: since $f$\ntakes only the two values $\\pm1$, balance gives\n$\\sum_{f(x)=+1}s(x)=-\\sum_{f(x)=-1}s(x)$, hence\n$\\sum_x s(x)f(x)=2\\sum_{f(x)=+1}s(x)$ is even, and replacing $s$ by $-s$\nchanges the sign of $\\deg(f)$ exactly as changing an orientation changes the\nordinary degree ([[def-degree-of-a-map-between-oriented-closed-manifolds]]).\n\nThe case $P=S^0$ with the standard orientation above is balanced, and then\n$$\\deg(f)=\\frac{f(+1)-f(-1)}{2}\\in\\{-1,0,+1\\}.$$\nThis is the induced map on the reduced group\n$\\widetilde H_0(S^0;\\mathbb Z)\\cong\\mathbb Z$ generated by the difference of\nthe two point classes ([[def-reduced-homology-theory-and-augmentation]]): the\nidentity has reduced degree $+1$, the antipodal map $-1$, and the two constant\nmaps $0$. It is the scalar replacement for the fundamental-class degree of\n[[def-degree-of-a-map-between-oriented-closed-manifolds]], whose scalar\ndefinition is stated only for nonempty connected closed oriented manifolds and\ntherefore does not apply to a source as disconnected as $S^0$.\n\nThe motivating balanced sources are boundaries: if $W$ is a compact oriented\nsmooth $1$-manifold and $\\partial W$ carries the induced boundary orientation,\nthen $\\sum_{p\\in\\partial W}\\varepsilon(p)=0$\n([[lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count]]),\nso $\\partial W$ is balanced and every map $\\partial W\\to S^0$ has a reduced\ndegree. No choice principle is used in the definition; the cited boundary-count\nlemma assumes $\\mathrm{AC}_\\omega$.",
+        "strategy": "Authored local prerequisite supplying the 0-dimensional (S^0) convention for the local index; see items/def-reduced-degree-into-the-zero-sphere.md.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology, \u00a72.1 and \u00a73.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+              "locator": "Degree opening paragraph, printed p. 134 (the scalar degree is stated for $n\\ge1$), together with the reduced homology $\\widetilde H_0$ of \u00a72.1"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-reduced-degree-into-the-zero-sphere-is-homotopy-invariant-and-multiplicative",
+        "kind": "lemma",
+        "title": "Reduced degree into the 0-sphere is homotopy invariant and multiplicative",
+        "deps": [
+          "def-reduced-degree-into-the-zero-sphere",
+          "def-euclidean-spheres-and-closed-balls",
+          "def-subspace-topology-top",
+          "thm-connected-subsets-of-r-are-intervals",
+          "thm-product-of-connected-spaces"
+        ],
+        "statement": "Let $(P,s)$ be a balanced oriented finite $0$-manifold, so that every map\n$P\\to S^0$ has a reduced degree, and let $f:P\\to S^0$ be a map\n([[def-reduced-degree-into-the-zero-sphere]]).\n\n(i) If $F:P\\times[0,1]\\to S^0$ is continuous and $F_t(x):=F(x,t)$, then\n$F_t=F_0$ for every $t\\in[0,1]$; in particular $\\deg F_t=\\deg F_0$.\n\n(ii) If $g:S^0\\to S^0$ is any map and $\\deg g$ denotes its reduced degree as a\nself-map of $S^0$, then $\\deg(g\\circ f)=\\deg(g)\\deg(f)$.",
+        "strategy": "**Proof technique:** direct; split the composition law by the three possible\nreduced degrees of the self-map $g$.\n\n1.1 The product $P\\times[0,1]$ is the disjoint union of the connected subsets $\\{x\\}\\times[0,1]$, one for each $x\\in P$; a continuous map from a connected space into $S^0$ is constant, so $F$ is constant on each $\\{x\\}\\times[0,1]$, hence $F_t(x)=F(x,t)=F(x,0)=F_0(x)$ for all $x\\in P$ and $t\\in[0,1]$; equal maps have equal reduced degree, which proves (i). [F2, F3, algebra]\n\n1.2 Suppose $g$ is not constant. A map $S^0\\to S^0$ is determined by the pair $\\bigl(g(+1),g(-1)\\bigr)$, so a nonconstant $g$ sends $+1$ and $-1$ to different values; hence $g$ is either the identity, with $\\sigma:=+1$ and $g(y)=y$ for both $y$, or the antipodal map $g(y)=-y$, with $\\sigma:=-1$, so that $g(y)=\\sigma y$ for all $y\\in S^0$; then $g\\circ f=\\sigma f$ and, by linearity of the defining signed count, $\\deg(g\\circ f)=\\frac12\\sum_x s(x)\\sigma f(x)=\\sigma\\deg(f)$, while $\\sigma=\\deg(g)$ by [F1], the identity and the antipodal map having reduced degrees $+1$ and $-1$; thus $\\deg(g\\circ f)=\\deg(g)\\deg(f)$. [F1, algebra]\n\n2.1 If $g$ is constant with value $c\\in S^0$, then $g\\circ f$ is the constant map $c$ and $\\deg(g\\circ f)=\\frac12 c\\sum_{x\\in P}s(x)=0$ by balance, while $\\deg(g)=\\frac12(c-c)=0$ by [F1]; hence again $\\deg(g\\circ f)=0=\\deg(g)\\deg(f)$, which completes (ii). [F1, step 1.2, algebra] \u220e",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology, \u00a72.1 and \u00a73.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+              "locator": "Degree opening paragraph, printed p. 134 (degree properties: homotopy invariance and multiplicativity), together with the reduced homology $\\widetilde H_0$ of \u00a72.1"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-isolated-zero-and-local-index-of-a-vector-field",
+        "kind": "definition",
+        "title": "Isolated zero and local index of a vector field",
+        "deps": [
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "def-smooth-manifold",
+          "def-manifold-chart-coordinate-domain-and-coordinate-functions",
+          "def-induced-tangent-bundle-chart",
+          "def-degree-of-a-map-between-oriented-closed-manifolds",
+          "def-reduced-degree-into-the-zero-sphere",
+          "thm-degree-is-invariant-under-proper-smooth-homotopy",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the canonical smooth tangent-bundle structure.\n\nLet $M$ be a smooth $n$-manifold without boundary, $n\\ge1$, and let $X$ be a\nsmooth vector field on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], [[def-smooth-manifold]]).\nA point $p\\in M$ is an **isolated zero** of $X$ when $X(p)=0$ and some chart\naround $p$ contains no other zero of $X$; equivalently, the set of zeros of $X$\nhas $p$ as an isolated point in a chart around $p$\n([[def-manifold-chart-coordinate-domain-and-coordinate-functions]]).\n\nFor an isolated zero choose a smooth chart $(\\varphi,U)$ of the smooth\nstructure of $M$ with $\\varphi(p)=0$ and write\n$$X_\\varphi(u):=(d\\varphi_{\\varphi^{-1}(u)})X(\\varphi^{-1}(u))\\in\\mathbb R^n$$\nfor the chart representative of $X$\n([[def-induced-tangent-bundle-chart]]). Since $p$ is an isolated zero there is\n$\\varepsilon>0$ with $X_\\varphi\\ne0$ on\n$\\overline B_\\varepsilon(0)\\setminus\\{0\\}\\subseteq\\varphi(U)$, so the normalized field\n$v\\mapsto X_\\varphi(\\varepsilon v)/|X_\\varphi(\\varepsilon v)|$ is a continuous\nmap $S^{n-1}\\to S^{n-1}$. The **local index of $X$ at $p$** is\n$$\\operatorname{ind}_pX:=\\deg\\Bigl(S^{n-1}\\to S^{n-1},\\ v\\mapsto \\frac{X_\\varphi(\\varepsilon v)}{|X_\\varphi(\\varepsilon v)|}\\Bigr),$$\nthe degree of\n[[def-degree-of-a-map-between-oriented-closed-manifolds]] computed with the\nstandard orientations of the two copies of $S^{n-1}$, for $n\\ge2$.\n\nFor $n=1$ the same formula is read in dimension zero: the sphere\n$S^{0}=\\{\\pm1\\}$ parametrizes $\\partial[-\\varepsilon,\\varepsilon]$ by\n$v\\mapsto\\varepsilon v$,\nand the displayed map is a map $S^0\\to S^0$ whose **reduced degree** in the\nsense of [[def-reduced-degree-into-the-zero-sphere]] is declared to be the\nindex,\n$$\\operatorname{ind}_pX=\\frac{f(+1)-f(-1)}{2}\\in\\{-1,0,+1\\},\\qquad f(v)=\\frac{X_\\varphi(\\varepsilon v)}{|X_\\varphi(\\varepsilon v)|}.$$\nThis case is well posed for every $0<\\varepsilon'<\\varepsilon$: the two signs\nof $X_\\varphi$ on $(0,\\varepsilon)$ and on $(-\\varepsilon,0)$ are each constant,\nbecause $X_\\varphi$ is continuous and nowhere zero on either half-interval, so\nthe two values $f(\\pm1)$ do not depend on $\\varepsilon'$; for $n\\ge2$ the value\nis independent of $\\varepsilon$ by the homotopy $v\\mapsto X_\\varphi(((1-t)\\varepsilon+t\\varepsilon')v)/|\\cdot|$ on the zero-free annulus\n([[thm-degree-is-invariant-under-proper-smooth-homotopy]]). The value is also\nindependent of the smooth chart and admissible radius, and of trivializations whose\nfibre orientation matches the chosen base orientation\n([[lem-vector-field-index-is-independent-of-chart-ball-and-trivialization]]);\nin particular no orientation of $M$ is required, because a chart change\nmultiplies both the source and the target orientation by the same sign, and the\n$n=1$ case is the same statement read on the $0$-sphere.\nEvery statement on this page assumes $n\\ge1$; the index is a signed integer,\n$\\operatorname{ind}_pX\\in\\mathbb Z$.",
+        "strategy": "Definition by the Euclidean model and the sphere degree; well-definedness is deferred in the style of the DT-11 intersection sign and is the content of [[lem-vector-field-index-is-independent-of-chart-ball-and-trivialization]]. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, printed pp. 32-33 (definition of the index of an isolated zero by the degree of the normalized field on a small sphere)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a75, printed pp. 132-134 (the index via local parametrizations, with the Jacobian sign)"
+            },
+            {
+              "title": "Joel W. Robbin and Dietmar A. Salamon, Introduction to Differential Topology (web draft 2018, complete PDF)",
+              "url": "https://umutvg.github.io/difftop.pdf",
+              "locator": "Definition 2.2.2, printed p. 31 (index of an isolated zero)"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-vector-field-index-is-independent-of-chart-ball-and-trivialization"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-vector-field-index-is-independent-of-chart-ball-and-trivialization",
+        "kind": "lemma",
+        "title": "The local index is independent of chart, ball and trivialization",
+        "deps": [
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-reduced-degree-into-the-zero-sphere",
+          "lem-reduced-degree-into-the-zero-sphere-is-homotopy-invariant-and-multiplicative",
+          "def-degree-of-a-map-between-oriented-closed-manifolds",
+          "prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism",
+          "prop-degree-is-multiplicative-under-composition",
+          "thm-degree-is-invariant-under-proper-smooth-homotopy",
+          "thm-chain-rule-for-differentials-of-smooth-maps",
+          "cor-the-differential-of-a-diffeomorphism-is-an-isomorphism",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the canonical smooth tangent-bundle structure.\n\nLet $M$ be a smooth $n$-manifold without boundary, $n\\ge1$, let $X$ have an\nisolated zero $p$, and let $\\varphi,\\psi$ be smooth charts of the given smooth structure centered at $p$, with\nadmissible radii $\\varepsilon,\\delta$ as in\n[[def-isolated-zero-and-local-index-of-a-vector-field]]. Then the maps\n$$f_\\varphi(v)=\\frac{X_\\varphi(\\varepsilon v)}{|X_\\varphi(\\varepsilon v)|},\\qquad f_\\psi(v)=\\frac{X_\\psi(\\delta v)}{|X_\\psi(\\delta v)|}$$\nhave the same degree, using reduced degree when $n=1$. Thus the local index\nis independent of chart and radius. On a coordinate ball it is also\nunchanged by a smooth fibre trivialization preserving the coordinate\norientation. Equivalently, base and fibre orientations must be chosen\nconsistently; reversing only the fibre orientation reverses the degree.\nNo orientation of $M$ is required.",
+        "strategy": "1.1 Within either chart, varying the radius through positive admissible radii gives the homotopy $v\\mapsto X_\\varphi(r(t)v)/|X_\\varphi(r(t)v)|$, since its numerator is nonzero. Its degree is constant by [F2] or [F3]. Shrink both radii to a common $\\rho>0$ such that the transition and its inverse are defined and all points used below lie in a zero-free punctured coordinate ball. [F2, F3, given]\n\n1.2 Put $\\sigma(u)=X_\\varphi(u)/|X_\\varphi(u)|$, $f(v)=\\sigma(\\rho v)$ and $u(v)=\\theta^{-1}(\\rho v)$. The normalized $\\psi$-field is $g(v)=L_{d\\theta_{u(v)}}(\\sigma(u(v)))$ by [F1]. Since $d\\theta_{u(v)}$ tends uniformly to the invertible matrix $A=d\\theta_0$, interpolation of this matrix to $A$ stays invertible for small $\\rho$, giving $g\\simeq L_A\\circ\\sigma\\circ u$. The radial homotopy $u_t(v)=((1-t)|u(v)|+t\\rho)u(v)/|u(v)|$ stays in the zero-free punctured ball; hence $L_A\\sigma(u_t(v))$ joins this last map to $L_A\\circ f\\circ\\widetilde u$, where $\\widetilde u=u/|u|$. Finally $\\widetilde u(v)=L_{A^{-1}}(v)+O(\\rho)$ uniformly, so normalized convex interpolation gives $\\widetilde u\\simeq L_{A^{-1}}$. Thus $g\\simeq L_A\\circ f\\circ L_{A^{-1}}$. [F1, F4, construct, algebra]\n\n2.1 Multiplicativity and [F4] now give $\\deg g=(\\operatorname{sign}\\det A)^2\\deg f=\\deg f$, also for reduced degree at $n=1$. Step 1.1 restores the original radii, proving equality of indices. This does not assert that $f_\\varphi$ and $f_\\psi$ themselves are homotopic: for $X(t)=t^2$ and $\\psi=-\\varphi$, they are the distinct constant maps of $S^0$, both of degree zero. [F2, F3, F4, step 1.1, step 1.2, algebra]\n\n3.1 On a coordinate ball an orientation-preserving trivialization changes components to $B(u)X_\\varphi(u)$ with $B(u)\\in GL_n^+(\\mathbb R)$. Contracting $B(u)$ to $B(0)$ through $B((1-t)u)$ gives a nonzero homotopy on the sphere. The resulting degree is $\\deg L_{B(0)}\\deg f=\\deg f$ by [F4]. A negative determinant instead multiplies it by $-1$, which is compensated if the base orientation is also reversed. These are exactly the consistent orientation conventions in the statement. [F2, F3, F4, step 2.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, printed pp. 33-35 (Lemmas 1-2: the index is independent of the chart and of the small sphere)"
+            },
+            {
+              "title": "Joel W. Robbin and Dietmar A. Salamon, Introduction to Differential Topology (web draft 2018, complete PDF)",
+              "url": "https://umutvg.github.io/difftop.pdf",
+              "locator": "Definition 2.2.2 and Lemma 2.2.3 discussion, printed pp. 31-32 (well-definedness of the index)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-nondegenerate-zero-of-a-vector-field",
+        "kind": "definition",
+        "title": "Nondegenerate zero of a vector field",
+        "deps": [
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "def-differential-of-a-smooth-map",
+          "def-induced-tangent-bundle-chart",
+          "def-tangent-bundle-as-a-disjoint-union",
+          "prop-the-zero-section-is-a-smooth-embedding",
+          "prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components",
+          "def-local-frame-and-global-frame-of-a-vector-bundle",
+          "thm-smooth-inverse-function-theorem-on-manifolds",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the canonical smooth tangent-bundle structure.\n\nLet $M$ be a smooth $n$-manifold, $X$ a smooth vector field on $M$ and $p\\in M$\na zero of $X$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]). View\n$X$ as a smooth section $X:M\\to TM$\n([[prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components]]).\nThe zero section $0_M$ is a smooth embedding\n([[prop-the-zero-section-is-a-smooth-embedding]]), so its differential\n$d(0_M)_p:T_pM\\to T_{(p,0)}TM$ is injective\n([[def-differential-of-a-smooth-map]]), and the **vertical quotient** at $p$ is\n$$N_p:=T_{(p,0)}TM\\big/ d(0_M)_p(T_pM).$$\nSince $X$ is a section, both $dX_p$ and $d(0_M)_p$ are right inverses of the\nprojection $d\\pi_{(p,0)}$; hence the class of $dX_p$ in\n$\\operatorname{Hom}(T_pM,N_p)$ is the **vertical derivative**\n$$DX_p\\in\\operatorname{End}(T_pM),$$\nread through the canonical identification $N_p\\cong T_pM$: explicitly, the\ndifference $dX_p-d(0_M)_p$ takes values in the vertical space\n$\\ker d\\pi_{(p,0)}$, and $DX_p$ is that difference followed by the canonical\nisomorphism from the vertical space $V_{(p,0)}=\\ker d\\pi_{(p,0)}$ to $T_pM$. In\nan induced tangent-bundle chart $\\widetilde\\varphi$ over a chart $\\varphi$ with\n$\\varphi(p)=0$ the section reads $u\\mapsto(u,X_\\varphi(u))$ and\n$DX_p$ corresponds to the ordinary derivative $DX_\\varphi(0)$ of the chart\nrepresentative $X_\\varphi$\n([[def-induced-tangent-bundle-chart]],\n[[def-local-frame-and-global-frame-of-a-vector-bundle]]); a change of chart\nconjugates $DX_p$ by an isomorphism, so invertibility and the determinant\n$\\det DX_p$ are independent of the chart\n([[def-tangent-bundle-as-a-disjoint-union]]).\n\nThe zero $p$ is **nondegenerate** when $DX_p$ is invertible. A nondegenerate\nzero is isolated: in a chart, $X_\\varphi(0)=0$ and $DX_\\varphi(0)$ is\ninvertible, so $X_\\varphi$ is a diffeomorphism near $0$ by the inverse function\ntheorem ([[thm-smooth-inverse-function-theorem-on-manifolds]]) and its only\nzero near $0$ is $0$ itself. In particular a nondegenerate zero is an isolated\nzero and $X$ has no other zero in some neighbourhood of $p$. The vertical derivative itself requires no further choice once the smooth\ntangent-bundle structure is supplied.",
+        "strategy": "Definition of the linearization as the vertical quotient of the section differential; isolatedness is the inverse function theorem. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, definition preceding Lemma 4, printed p. 37 (a nondegenerate zero has invertible Jacobian)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a75, printed pp. 132-134 (the index near a zero, with the Jacobian criterion for nondegeneracy)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-index-of-a-nondegenerate-vector-field-zero",
+        "kind": "theorem",
+        "title": "The index of a nondegenerate vector-field zero",
+        "deps": [
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-nondegenerate-zero-of-a-vector-field",
+          "lem-vector-field-index-is-independent-of-chart-ball-and-trivialization",
+          "lem-reduced-degree-into-the-zero-sphere-is-homotopy-invariant-and-multiplicative",
+          "def-degree-of-a-map-between-oriented-closed-manifolds",
+          "prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps",
+          "thm-degree-is-invariant-under-proper-smooth-homotopy",
+          "prop-degree-is-multiplicative-under-composition",
+          "def-induced-tangent-bundle-chart",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the canonical smooth tangent-bundle structure.\n\nLet $M$ be a smooth $n$-manifold, $n\\ge1$, let $X$ be a smooth vector field and\nlet $p$ be a nondegenerate zero of $X$\n([[def-nondegenerate-zero-of-a-vector-field]]). Then\n$$\\operatorname{ind}_pX=\\operatorname{sign}\\det(DX_p:T_pM\\to T_pM)\\in\\{+1,-1\\}.$$\nIn particular every nondegenerate zero has index $+1$ or $-1$.",
+        "strategy": "1.1 Take a chart as in [F1] and put $A:=DX_\\varphi(0)$, so $X_\\varphi(u)=Au+R(u)$ with $R(u)=O(|u|^2)$ and $A$ invertible; write $c:=|A^{-1}|^{-1}>0$ and $|R(u)|\\le C|u|^2$ with $C>0$. For $\\varepsilon<c/(2C)$ and $v\\in S^{n-1}$ the vector $Av+t\\varepsilon^{-1}R(\\varepsilon v)$ with $t\\in[0,1]$ has norm at least $c-\\varepsilon^{-1}C\\varepsilon^2\\ge c/2>0$, so $H_t(v):=\\bigl(Av+t\\varepsilon^{-1}R(\\varepsilon v)\\bigr)/|\\cdots|$ is a homotopy from the normalized linear map $L_A$ to the normalized chart field $v\\mapsto X_\\varphi(\\varepsilon v)/|X_\\varphi(\\varepsilon v)|$. [F1, algebra]\n\n2.1 For $n\\ge2$ homotopy invariance gives $\\operatorname{ind}_pX=\\deg L_A=\\operatorname{sign}\\det A$, and for $n=1$ the same homotopy is one of maps $S^0\\to S^0$, so by [F3] the reduced degrees agree and again $\\operatorname{ind}_pX=\\deg L_A=\\operatorname{sign}\\det A$; since $A$ corresponds to $DX_p$ by [F1], $\\det A$ and $DX_p$ have the same sign and $\\operatorname{ind}_pX=\\operatorname{sign}\\det(DX_p)\\in\\{+1,-1\\}$, because $DX_p$ is invertible. [F1, F2, F3, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, Lemmas 4-5, printed pp. 37-38 (the index of a nondegenerate zero is the sign of the Jacobian determinant)"
+            },
+            {
+              "title": "Joel W. Robbin and Dietmar A. Salamon, Introduction to Differential Topology (web draft 2018, complete PDF)",
+              "url": "https://umutvg.github.io/difftop.pdf",
+              "locator": "Lemma 2.2.3, printed p. 32 (sign rule for nondegenerate zeros)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-local-index-is-additive-under-a-transverse-perturbation",
+        "kind": "lemma",
+        "title": "The local index is additive under a transverse perturbation",
+        "deps": [
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-nondegenerate-zero-of-a-vector-field",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "lem-index-sum-of-an-outward-field-is-the-gauss-degree",
+          "lem-vector-field-index-is-independent-of-chart-ball-and-trivialization",
+          "thm-morse-sard-for-smooth-manifolds",
+          "cor-regular-values-have-null-complement-and-are-dense",
+          "def-induced-boundary-orientation",
+          "def-embedded-smooth-submanifold-with-boundary",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-induced-tangent-bundle-chart",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $M$ be a smooth $n$-manifold, $n\\ge1$, let $X$ be a smooth vector field\nwith an isolated zero at $p$, and let $B\\subseteq M$ be an embedded closed ball\nwith $p\\in\\operatorname{int}B$, $X\\ne0$ on $\\partial B$, and no zero of $X$ in\n$\\operatorname{int}B$ other than $p$ (such a ball exists in a chart around $p$).\n\n(i) Choose an orientation of $B$ and a smooth trivialization of $TM|_B$\npreserving that orientation, and orient $\\partial B$ as the boundary of $B$;\nthen $\\operatorname{ind}_pX$ equals the degree of\n$x\\mapsto X(x)/|X(x)|$ from $\\partial B$ to $S^{n-1}$ (the reduced degree for\n$n=1$).\n\n(ii) If $X'$ is a smooth vector field on $M$ with $X'=X$ outside\n$\\operatorname{int}B$ and only nondegenerate zeros $q_1,\\dots,q_k$ in\n$\\operatorname{int}B$, then $\\sum_{i=1}^k\\operatorname{ind}_{q_i}X'=\n\\operatorname{ind}_pX$.\n\n(iii) Consequently every isolated zero can be perturbed, supported in an\narbitrarily small ball around it, to finitely many nondegenerate zeros with the\nsame index sum.",
+        "strategy": "1.1 Choose a smooth parametrization $b:D^n\\to B$ and pull back the field as $Y(u)=(db_u)^{-1}X(b(u))$ on $D:=D^n$: this is a smooth field on the compact manifold $D$ with boundary, with the single zero $b^{-1}(p)$ and $Y\\ne0$ on $\\partial D$; [F2] applied to $N=D$ gives $\\operatorname{ind}_{b^{-1}(p)}Y=\\deg(\\partial D\\to S^{n-1},y\\mapsto Y(y)/|Y(y)|)$, and this degree is the degree of $x\\mapsto X(x)/|X(x)|$ on $\\partial B$ in the induced trivialization; any other orientation-compatible trivialization has the same degree by the matrix-contraction argument of [F1]; hence (i). [F1, F2, F5, algebra]\n\n2.1 For (ii), the same computation applies to the transported field $Y'$ on $D$: its zeros in $\\operatorname{int}D$ are $b^{-1}(q_1),\\dots,b^{-1}(q_k)$ and it agrees with $Y$ on $\\partial D$, so [F2] gives $\\sum_i\\operatorname{ind}_{b^{-1}(q_i)}Y'=\\deg(\\partial D,\\,Y/|Y|)=\\operatorname{ind}_pX$ by step 1.1; the indices are transported back by [F1], and each equals $\\pm1$ by [F3]. [F1, F2, F3, step 1.1, algebra]\n\n3.1 For (iii), let $B$ be an arbitrarily small embedded closed ball around $p$ with no other zero of $X$ in its interior and let $\\varphi$ be a chart on a neighbourhood of $B$ with $\\varphi(p)=0$; choose a smooth radial bump $\\lambda$ equal to $1$ on a ball $B_1\\subset B$ around $p$ and supported in a slightly larger ball $B_2$ with $B_1\\subseteq B_2$, $\\overline{B_2}\\subseteq\\operatorname{int}B$, and $B_2$ containing no zero of $X$ except $p$, and by [F4] choose a regular value $y$ of $X_\\varphi$ with $|y|$ smaller than the (positive) minimum of $|X_\\varphi|$ on the compact collar $\\operatorname{supp}\\lambda\\setminus B_1$. Then $X':=X-\\lambda y$ (read in the chart) equals $X$ outside $\\operatorname{supp}\\lambda\\subseteq\\operatorname{int}B$, is nowhere zero on the collar $\\operatorname{supp}\\lambda\\setminus B_1$, and on $B_1$ has the zeros $(X_\\varphi)^{-1}(y)$, a finite set of nondegenerate points because $y$ is a regular value; all these zeros lie in $\\operatorname{int}B_2\\subseteq\\operatorname{int}B$, so (ii) applies and gives $\\sum_i\\operatorname{ind}_{q_i}X'=\\operatorname{ind}_pX$, with each index $\\pm1$ by [F3]. [F3, F4, F5, step 1.1, step 2.1, construct, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, Lemma 3 and its Step 2, printed pp. 35-36 and p. 40 (the sum of indices over a ball equals the boundary degree, and a generic perturbation preserves it)"
+            },
+            {
+              "title": "Joel W. Robbin and Dietmar A. Salamon, Introduction to Differential Topology (web draft 2018, complete PDF)",
+              "url": "https://umutvg.github.io/difftop.pdf",
+              "locator": "Lemma 2.3.3, printed p. 34 (perturbation of a degenerate zero into nondegenerate zeros with the same index sum)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a76, Exercise 3 and its hint, printed pp. 145-147 (a ball's zero count by the boundary map)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "prop-vector-field-zero-index-is-a-zero-section-intersection-number",
+        "kind": "proposition",
+        "title": "The index of a zero is its zero-section intersection number",
+        "deps": [
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-nondegenerate-zero-of-a-vector-field",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "def-oriented-intersection-number",
+          "def-local-oriented-intersection-sign",
+          "def-product-orientation",
+          "def-tangent-bundle-as-a-disjoint-union",
+          "prop-the-zero-section-is-a-smooth-embedding",
+          "def-transverse-embedded-submanifolds",
+          "thm-oriented-intersection-number-is-homotopy-invariant",
+          "lem-normal-push-off-zeros-are-self-intersection-points",
+          "lem-compact-transverse-complementary-intersections-are-finite",
+          "def-induced-tangent-bundle-chart",
+          "def-countable-choice"
+        ],
+        "statement": "Assume countable choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]). Let $M$ be a closed oriented smooth $n$-manifold,\n$n\\ge1$, and give $TM$ the orientation which along the zero section is the direct sum of the\nhorizontal (tangent) orientation of the base and the vertical (fibre)\norientation, first factor first ([[def-product-orientation]],\n[[def-tangent-bundle-as-a-disjoint-union]]), orient both submanifolds by their projections to $M$, and let $X_0\\subset TM$ be the zero\nsection ([[prop-the-zero-section-is-a-smooth-embedding]]) and let $\\Gamma_X$ be\nthe graph of a smooth vector field $X$ transverse to $X_0$, so that the zeros\nof $X$ are nondegenerate. Then, with the oriented intersection number of\n[[def-oriented-intersection-number]],\n$$I(X_0,\\Gamma_X)=\\sum_{p:X(p)=0}\\operatorname{ind}_pX,$$\nand at each zero the local oriented intersection sign of\n[[def-local-oriented-intersection-sign]] satisfies\n$\\varepsilon_{(X_0,\\Gamma_X)}(p)=\\operatorname{ind}_pX$.",
+        "strategy": "1.1 Write $\\Gamma_X=\\{(x,X(x)):x\\in M\\}\\subseteq TM$. Since $\\Gamma_X\\cap X_0=\\{(p,0):X(p)=0\\}$, the intersection points are the zeros of $X$; at such a point the transversality of $\\Gamma_X$ to $X_0$ is equivalent to the surjectivity of $DX_p$ (the tangent spaces are the horizontal space and the graph of $DX_p$), so transversality means invertibility of $DX_p$ at every zero, i.e. nondegeneracy; by [F1] the intersection is finite, and by [F4] each intersection point carries index $\\operatorname{sign}\\det(DX_p)$. [F1, F3, F4, algebra]\n\n2.1 At a zero $p$, the local sign $\\varepsilon_{(X_0,\\Gamma_X)}(p)$ is computed in the chart of [F3] as the determinant sign of the block-triangular matrix with diagonal blocks $I_n$ and $DX_p$, hence equals $\\operatorname{sign}\\det(DX_p)=\\operatorname{ind}_pX$; this proves the pointwise identity and, summing over the finitely many intersection points with [F2], also $I(X_0,\\Gamma_X)=\\sum_{p}\\operatorname{ind}_pX$. The countable choice hypothesis is inherited from the transverse-representative selection in the definition of the oriented intersection number for non-transverse maps ([[def-oriented-intersection-number]], [[thm-oriented-intersection-number-is-homotopy-invariant]]), although for the transverse pair considered here the sum is choice-free. [F2, F3, F4, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a75, printed pp. 137-140 (the graph of a field and the zero section, exercises 6-9 and their hints)"
+            },
+            {
+              "title": "John W. Milnor and James D. Stasheff, Characteristic Classes (Princeton University Press, 1974; complete PDF)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "\u00a79 and \u00a711, printed pp. 95-104 and 115-125 (the zero-section intersection interpretation of the Euler class)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-negation-scales-the-local-index-by-minus-one-to-the-dimension",
+        "kind": "lemma",
+        "title": "Negation scales the local index by $(-1)^n$",
+        "deps": [
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-reduced-degree-into-the-zero-sphere",
+          "lem-reduced-degree-into-the-zero-sphere-is-homotopy-invariant-and-multiplicative",
+          "prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps",
+          "prop-degree-is-multiplicative-under-composition",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the canonical smooth tangent-bundle structure.\n\nLet $M$ be a smooth $n$-manifold, $n\\ge1$, and let $X$ be a smooth vector field\nwith an isolated zero at $p$ ([[def-isolated-zero-and-local-index-of-a-vector-field]]).\nThen $-X$ has an isolated zero at $p$ and\n$$\\operatorname{ind}_p(-X)=(-1)^n\\operatorname{ind}_pX.$$",
+        "strategy": "1.1 The field $-X$ vanishes exactly where $X$ does, so $p$ is an isolated zero of $-X$; in the same chart $(-X)_\\varphi=-X_\\varphi$, so its normalized map is $v\\mapsto-X_\\varphi(\\varepsilon v)/|X_\\varphi(\\varepsilon v)|=(\\alpha\\circ f)(v)$, where $\\alpha(v)=-v$ is the antipodal map of $S^{n-1}$ and $f$ is the normalized map of $X$. [F1, algebra]\n\n2.1 For $n\\ge2$ multiplicativity of the degree under composition gives $\\operatorname{ind}_p(-X)=\\deg\\alpha\\cdot\\deg f=(-1)^n\\operatorname{ind}_pX$ by [F2], and for $n=1$ the same computation with reduced degrees gives $\\operatorname{ind}_p(-X)=(-1)^1\\operatorname{ind}_pX$, since $(-1)^n=(-1)^1$ for $n=1$. [F1, F2, F3, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, printed p. 39 (applying the theorem to X and to -X in odd dimensions)"
+            },
+            {
+              "title": "Joel W. Robbin and Dietmar A. Salamon, Introduction to Differential Topology (web draft 2018, complete PDF)",
+              "url": "https://umutvg.github.io/difftop.pdf",
+              "locator": "Definition 2.2.2 and the sign conventions for -X, printed p. 31"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-index-sum-of-an-outward-field-is-the-gauss-degree",
+        "kind": "lemma",
+        "title": "The index sum of an outward field is the Gauss degree",
+        "deps": [
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-reduced-degree-into-the-zero-sphere",
+          "lem-reduced-degree-into-the-zero-sphere-is-homotopy-invariant-and-multiplicative",
+          "def-degree-of-a-map-between-oriented-closed-manifolds",
+          "thm-degree-is-invariant-under-proper-smooth-homotopy",
+          "thm-regular-value-formula-for-degree",
+          "lem-degree-is-well-defined-and-independent-of-the-normalized-top-form",
+          "def-inward-outward-and-boundary-tangent-vectors",
+          "def-embedded-smooth-submanifold-with-boundary",
+          "def-induced-boundary-orientation",
+          "def-volume-form-on-an-oriented-manifold",
+          "def-integral-of-a-compactly-supported-top-form-on-an-oriented-manifold",
+          "lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count",
+          "thm-general-stokes-theorem",
+          "def-countable-choice",
+          "thm-morse-sard-for-smooth-manifolds",
+          "cor-regular-values-have-null-complement-and-are-dense"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $N\\subset\\mathbb R^m$ be a compact smooth $m$-dimensional submanifold with\nboundary, $m\\ge1$ ([[def-embedded-smooth-submanifold-with-boundary]]), and let\n$Y$ be a smooth vector field on $N$ with only isolated zeros and $Y\\ne0$ on\n$\\partial N$. Then, summing the componentwise degrees over the components of\n$\\partial N$ with the boundary orientation ([[def-induced-boundary-orientation]]),\n$$\\sum_{x\\in N,\\ Y(x)=0}\\operatorname{ind}_xY=\\deg\\Bigl(\\partial N\\to S^{m-1},\\ x\\mapsto\\frac{Y(x)}{|Y(x)|}\\Bigr).$$\nFor $m=1$ the right-hand side is read as the reduced degree of the map\n$\\partial N\\to S^0$: the oriented boundary of a compact oriented $1$-manifold is\nbalanced ([[lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count]]),\nso the reduced degree of [[def-reduced-degree-into-the-zero-sphere]] applies.\nIf in addition $Y$ points strictly outward along $\\partial N$\n([[def-inward-outward-and-boundary-tangent-vectors]]), the right-hand side\nequals $\\deg(g)$ for the Gauss map $g:\\partial N\\to S^{m-1}$ sending $x$ to the\noutward unit normal. In particular the index sum is independent of $Y$.",
+        "strategy": "1.1 By [F1] the zeros $p_1,\\dots,p_k$ of $Y$ are finite; choose pairwise disjoint closed coordinate balls $D_1,\\dots,D_k\\subseteq N$ around them, so small that $Y\\ne0$ on $\\overline{D_i}\\setminus\\{p_i\\}$ and $\\partial D_i\\cap\\partial N=\\varnothing$, and let $N':=N\\setminus\\bigcup_i\\operatorname{int}D_i$, a compact oriented $m$-manifold with boundary on which the normalized field $f:=Y/|Y|:N'\\to S^{m-1}$ is smooth. Its boundary is $\\partial N'=\\partial N\\sqcup\\bigsqcup_i\\partial D_i$, where each $\\partial D_i$ carries, as a piece of $\\partial N'$, the orientation opposite to the boundary orientation of the removed ball $D_i$, since the outward normals of $N'$ and of $D_i$ are opposite along $\\partial D_i$. [F1, F2, algebra]\n\n2.1 For $m\\ge2$ choose a volume form $\\omega$ on $S^{m-1}$ with $\\int_{S^{m-1}}\\omega=1$ and apply [F4] to $\\alpha=f^*\\omega$: since $d\\omega=0$, $\\int_{\\partial N'}f^*\\omega=\\int_{N'}f^*d\\omega=0$. Evaluating the boundary integral componentwise with [F3] gives $0=\\deg(\\partial N\\to S^{m-1})-\\sum_i\\operatorname{ind}_{p_i}Y$, because each small sphere $\\partial D_i$ is mapped by $f$ with degree $\\operatorname{ind}_{p_i}Y$ in its own boundary orientation by [F2] and therefore contributes $-\\operatorname{ind}_{p_i}Y$ to $\\partial N'$. [F2, F3, F4, step 1.1, algebra]\n\n3.1 For $m=1$ use instead the $0$-form $\\omega$ on $S^0$ with $\\omega(\\pm1)=\\pm1$, so that $\\int_{S^0}\\omega=2$ and $\\int_{\\partial N'}f^*\\omega=\\sum_{x\\in\\partial N'}\\varepsilon(x)f(x)$; Stokes gives $\\sum_{x\\in\\partial N'}\\varepsilon(x)f(x)=0$, and each removed pair contributes $f(p_i-\\delta_i)-f(p_i+\\delta_i)=-2\\operatorname{ind}_{p_i}Y$ with the orientation of step 1.1 by [F2], so $\\sum_i\\operatorname{ind}_{p_i}Y=\\frac12\\sum_{x\\in\\partial N}\\varepsilon(x)f(x)=\\deg(\\partial N\\to S^0)$ by [F5], the claimed formula; this and step 2.1 prove the first assertion in both dimensions, and with it the index sum depends only on the boundary values of the normalized field. [F2, F4, F5, step 1.1, algebra]\n\n4.1 If $Y$ is strictly outward, [F6] gives a homotopy from $x\\mapsto Y(x)/|Y(x)|$ to the Gauss map $g$, so their degrees agree and the right-hand side equals $\\deg(g)$; since $\\deg(g)$ does not involve $Y$, the index sum is independent of the choice of the outward field. [F3, F6, step 3.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, Lemma 3 (Hopf) with its proof, printed pp. 35-36"
+            },
+            {
+              "title": "Joel W. Robbin and Dietmar A. Salamon, Introduction to Differential Topology (web draft 2018, complete PDF)",
+              "url": "https://umutvg.github.io/difftop.pdf",
+              "locator": "Lemma 2.3.2 (Hopf) with proof, printed pp. 33-34"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-poincare-hopf-for-closed-manifolds",
+        "kind": "theorem",
+        "title": "Poincare-Hopf for closed manifolds",
+        "deps": [
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-nondegenerate-zero-of-a-vector-field",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "lem-local-index-is-additive-under-a-transverse-perturbation",
+          "lem-index-sum-of-an-outward-field-is-the-gauss-degree",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "thm-weak-whitney-proper-embedding-theorem",
+          "thm-euclidean-tubular-neighbourhood-theorem",
+          "cor-a-closed-euclidean-submanifold-has-a-smooth-neighbourhood-retraction",
+          "def-riemannian-gradient-of-a-smooth-function",
+          "lem-riemannian-gradient-vanishes-exactly-at-critical-points",
+          "thm-every-smooth-manifold-admits-a-riemannian-metric",
+          "cor-every-compact-smooth-manifold-admits-an-excellent-morse-function",
+          "def-morse-function-and-excellent-morse-function",
+          "def-nondegenerate-critical-point-nullity-index-and-coindex",
+          "cor-morse-gradient-zero-contributes-minus-one-to-the-index-power-lambda",
+          "prop-singular-homology-of-a-disjoint-union-is-the-direct-sum",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "cor-morse-euler-characteristic-identity"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a closed\nsmooth $n$-manifold, $n\\ge1$, and let $X$ be a smooth vector field on $M$ with\nonly isolated zeros ([[def-isolated-zero-and-local-index-of-a-vector-field]]).\nThen\n$$\\sum_{p:X(p)=0}\\operatorname{ind}_pX=\\chi(M),$$\nwith $\\chi$ as in [[def-euler-characteristic-of-a-compact-manifold]]. In\nparticular the sum is independent of $X$ and vanishes over the empty zero set;\nfor disconnected $M$ the statement is applied componentwise.",
+        "strategy": "1.1 Reduction to nondegenerate zeros: by [F1] the zeros of $X$ are finite, and in pairwise disjoint small balls around them $X$ may be replaced by fields whose zeros in those balls are nondegenerate with the same index sum; the replacements paste smoothly with the unchanged field outside and produce a smooth field $X_0$ on $M$ with only nondegenerate zeros and $\\sum_{p}\\operatorname{ind}_pX_0=\\sum_p\\operatorname{ind}_pX$. Since the right-hand side $\\chi(M)$ does not involve $X$, it suffices to prove the identity for fields with nondegenerate zeros. [F1, algebra]\n\n2.1 An invariant: embed $M$ properly in $\\mathbb R^k$ with $k=2n+1$ by [F3] and let $N$ be a closed tubular neighbourhood given by normal addition (radius $\\varepsilon>0$ uniform by compactness of $M$) with nearest-point retraction $r:N\\to M$. Define $w(z):=z-r(z)+X_0(r(z))$ for $z\\in N$; the two summands are orthogonal, since $z-r(z)\\perp T_{r(z)}M$ and $X_0(r(z))\\in T_{r(z)}M$. Hence $w(z)=0$ iff $z=r(z)\\in M$ and $X_0(z)=0$: the zeros of $w$ are exactly the zeros of $X_0$, viewed in $M\\subseteq N$. On $\\partial N$ we have $|z-r(z)|=\\varepsilon$ and the outward normal is $(z-r(z))/\\varepsilon$, so $\\langle w(z),z-r(z)\\rangle=\\varepsilon^2>0$: the field $w$ points strictly outward, and in particular $w\\ne0$ on $\\partial N$. At a zero $p\\in M$ the derivative of $w$ as a map on $N\\subseteq\\mathbb R^k$ is $D w_p=D X_0{}_p\\oplus I$ in the splitting $T_pN=T_pM\\oplus T_pM^\\perp$ (the map $z\\mapsto z-r(z)$ has derivative the orthogonal projection onto the normal space), so $\\det Dw_p=\\det(DX_0)_p$ and $\\operatorname{ind}_p w=\\operatorname{ind}_pX_0$ by the determinant sign formula. Hopf's boundary lemma [F2] applied to $N$ therefore gives $$\\sum_{p:X_0(p)=0}\\operatorname{ind}_pX_0=\\deg(g:\\partial N\\to S^{k-1}),$$ a number depending only on $M$ (through its embedding and tube), not on $X_0$. [F2, F3, step 1.1, algebra]\n\n3.1 Evaluation: choose an excellent Morse function $f:M\\to\\mathbb R$ by [A1] and [F4] and a Riemannian metric $g$, and take $X_0:=\\operatorname{grad}_gf$, a field with only nondegenerate zeros. By [F4] each critical point $p$ contributes $(-1)^{\\operatorname{ind}(p)}$, so the invariant of step 2.1 equals $\\sum_p(-1)^{\\operatorname{ind}(p)}=\\chi(M)$ by [F5]; combining with steps 1.1 and 2.1 gives $\\sum_p\\operatorname{ind}_pX=\\chi(M)$ for the original field $X$, which is therefore independent of $X$ and equal to $0$ when $X$ has no zeros. [F4, F5, step 1.1, step 2.1, algebra]\n\n4.1 If $M$ is disconnected, apply the identity on each component and add: the index sum splits over the components, and $\\chi$ is additive over disjoint unions by [F5], so the same identity holds; the empty zero set is included (the empty alternating sum is $0$). [F5, step 3.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, Theorem 1, printed pp. 38-39 (invariance), and Step 1, p. 40 (Morse evaluation sketch)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a75, the Poincare-Hopf index theorem and its proof, printed pp. 134-137"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-nowhere-zero-vector-field-forces-zero-euler-characteristic",
+        "kind": "corollary",
+        "title": "A nowhere-zero vector field forces zero Euler characteristic",
+        "deps": [
+          "thm-poincare-hopf-for-closed-manifolds",
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a closed smooth\n$n$-manifold, $n\\ge1$, and suppose $M$ admits a smooth vector field $X$ with no\nzeros at all. Then $\\chi(M)=0$\n([[def-euler-characteristic-of-a-compact-manifold]]).",
+        "strategy": "1.1 The zero set of $X$ is empty by hypothesis, so it consists of isolated zeros vacuously and the hypothesis of [F1] is satisfied; the index sum $\\sum_{p:X(p)=0}\\operatorname{ind}_pX$ is the empty sum $0$. [F1, algebra]\n\n2.1 Poincare-Hopf [F1] now gives $\\chi(M)=\\sum_{p:X(p)=0}\\operatorname{ind}_pX=0$. [F1, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, the corollary on nowhere-zero fields and the odd-dimensional Euler number, printed p. 39"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a75, the Poincare-Hopf index theorem statement and its nowhere-zero consequence, printed p. 134"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-morse-gradient-zero-contributes-minus-one-to-the-index-power-lambda",
+        "kind": "corollary",
+        "title": "A Morse gradient zero contributes $(-1)^\\lambda$ to the index",
+        "deps": [
+          "def-nondegenerate-zero-of-a-vector-field",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "lem-negation-scales-the-local-index-by-minus-one-to-the-dimension",
+          "def-riemannian-gradient-of-a-smooth-function",
+          "lem-riemannian-gradient-vanishes-exactly-at-critical-points",
+          "def-nondegenerate-critical-point-nullity-index-and-coindex",
+          "lem-critical-hessian-agrees-with-the-levi-civita-hessian",
+          "def-morse-function-and-excellent-morse-function",
+          "def-hessian-of-a-function-at-a-critical-point",
+          "cor-index-and-coindex-swap-under-negation",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "def-countable-choice",
+          "thm-sylvesters-law-of-inertia"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the canonical smooth tangent-bundle structure.\n\nLet $M$ be a closed smooth $n$-manifold, $n\\ge1$, and let $f:M\\to\\mathbb R$ be a Morse\nfunction ([[def-morse-function-and-excellent-morse-function]]), let $g$ be a\nRiemannian metric on $M$\n([[def-riemannian-metric-and-riemannian-manifold]]) and let $p$ be a critical\npoint of $f$ of index $\\lambda=\\operatorname{ind}(p)$\n([[def-nondegenerate-critical-point-nullity-index-and-coindex]]). Then\n$\\operatorname{grad}_gf$ has a nondegenerate zero at $p$ with\n$$\\operatorname{ind}_p(\\operatorname{grad}_gf)=(-1)^{\\lambda},\\qquad \\operatorname{ind}_p(-\\operatorname{grad}_gf)=(-1)^{n-\\lambda}.$$",
+        "strategy": "1.1 By [F1] the field $\\operatorname{grad}_gf$ has a zero at $p$ (and only at the critical points), and by [F2] its linearization there is the nondegenerate Hessian with $\\lambda$ negative and $n-\\lambda$ positive entries in its inertia normal form; hence $p$ is a nondegenerate zero and $\\operatorname{sign}\\det(D\\operatorname{grad}_gf)_p=(-1)^{\\lambda}$. [F1, F2, algebra]\n\n2.1 The determinant formula [F3] gives $\\operatorname{ind}_p(\\operatorname{grad}_gf)=(-1)^{\\lambda}$, and the negation rule gives $\\operatorname{ind}_p(-\\operatorname{grad}_gf)=(-1)^n(-1)^{\\lambda}=(-1)^{n-\\lambda}$, the second formula; equivalently, $-\\operatorname{grad}_gf=\\operatorname{grad}_g(-f)$ has index $(-1)^{\\operatorname{ind}_p(-f)}=(-1)^{n-\\lambda}$ by the index swap of [F3]. [F2, F3, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, printed pp. 37-39 (the index of the gradient at a critical point is the sign of the Hessian determinant)"
+            },
+            {
+              "title": "Liviu Nicolaescu, An Invitation to Morse Theory (2nd ed.)",
+              "url": "https://www3.nd.edu/~lnicolae/Morse2nd.pdf",
+              "locator": "Ch. 2 \u00a72.3, printed pp. 46-49 (Morse indices and the Euler characteristic identity)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-morse-critical-point-sum-is-the-euler-characteristic",
+        "kind": "corollary",
+        "title": "The Morse critical-point sum is the Euler characteristic",
+        "deps": [
+          "thm-poincare-hopf-for-closed-manifolds",
+          "cor-morse-gradient-zero-contributes-minus-one-to-the-index-power-lambda",
+          "def-riemannian-gradient-of-a-smooth-function",
+          "thm-every-smooth-manifold-admits-a-riemannian-metric",
+          "def-morse-function-and-excellent-morse-function",
+          "lem-riemannian-gradient-vanishes-exactly-at-critical-points",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a closed smooth\n$n$-manifold with $n\\ge1$, and let $f:M\\to\\mathbb R$ be a Morse function\n([[def-morse-function-and-excellent-morse-function]]) and let $g$ be a\nRiemannian metric on $M$\n([[thm-every-smooth-manifold-admits-a-riemannian-metric]]). Then\n$$\\sum_{p\\in\\operatorname{Crit}(f)}(-1)^{\\operatorname{ind}(p)}=\\chi(M),$$\nthe sum over the finitely many critical points of $f$.",
+        "strategy": "1.1 The critical points of a Morse function on a closed manifold are finitely many and each is a nondegenerate zero of $\\operatorname{grad}_gf$; hence the field has only isolated zeros and [F2] gives $\\sum_p\\operatorname{ind}_p(\\operatorname{grad}_gf)=\\chi(M)$. [F1, F2, algebra]\n\n2.1 By [F1] each summand is $\\operatorname{ind}_p(\\operatorname{grad}_gf)=(-1)^{\\operatorname{ind}(p)}$, so substituting into step 1.1 gives $\\sum_{p\\in\\operatorname{Crit}(f)}(-1)^{\\operatorname{ind}(p)}=\\chi(M)$. [F1, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, Theorem 1 and the odd-dimensional corollary, printed pp. 38-39"
+            },
+            {
+              "title": "Liviu Nicolaescu, An Invitation to Morse Theory (2nd ed.)",
+              "url": "https://www3.nd.edu/~lnicolae/Morse2nd.pdf",
+              "locator": "Corollary 2.3.3 and its discussion, printed pp. 48-49 (the alternating critical-point sum equals the Euler characteristic)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-closed-odd-dimensional-manifolds-have-zero-euler-characteristic",
+        "kind": "corollary",
+        "title": "Closed odd-dimensional manifolds have zero Euler characteristic",
+        "deps": [
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "lem-negation-scales-the-local-index-by-minus-one-to-the-dimension",
+          "thm-poincare-hopf-for-closed-manifolds",
+          "cor-every-compact-smooth-manifold-admits-an-excellent-morse-function",
+          "def-riemannian-gradient-of-a-smooth-function",
+          "lem-riemannian-gradient-vanishes-exactly-at-critical-points",
+          "thm-every-smooth-manifold-admits-a-riemannian-metric",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "def-morse-function-and-excellent-morse-function",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a closed smooth\n$n$-manifold with $n$ odd. Then $\\chi(M)=0$\n([[def-euler-characteristic-of-a-compact-manifold]]).",
+        "strategy": "1.1 Choose an excellent Morse function $f$ and a Riemannian metric $g$; the field $X=\\operatorname{grad}_gf$ has only isolated (indeed nondegenerate) zeros, so [F3] gives $\\chi(M)=\\sum_p\\operatorname{ind}_pX$. [F1, F3, algebra]\n\n2.1 The field $-X$ has the same zero set, and since $n$ is odd [F2] gives $\\operatorname{ind}_p(-X)=-\\operatorname{ind}_pX$; applying [F3] to $-X$ gives $\\chi(M)=\\sum_p\\operatorname{ind}_p(-X)=-\\sum_p\\operatorname{ind}_pX=-\\chi(M)$ by step 1.1. Hence $2\\chi(M)=0$ in $\\mathbb Z$, so $\\chi(M)=0$. [F2, F3, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, printed p. 39 (the odd-dimensional Euler number vanishes because X and -X give opposite sums)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a75, printed pp. 134-137 (odd-dimensional consequence of the index theorem)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-degree-zero-unit-vector-field-on-a-sphere-extends-over-the-ball",
+        "kind": "lemma",
+        "title": "A degree-zero sphere map extends over the ball without zeros",
+        "deps": [
+          "def-degree-of-a-map-between-oriented-closed-manifolds",
+          "def-degree-of-a-self-map-of-an-oriented-sphere",
+          "cor-homology-of-spheres",
+          "prop-degree-is-homotopy-invariant-and-multiplicative-under-composition",
+          "prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "thm-based-sphere-maps-are-classified-by-geometric-degree",
+          "def-euclidean-spheres-and-closed-balls",
+          "def-the-standard-smooth-step-function",
+          "thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic",
+          "def-countable-choice"
+        ],
+        "statement": "Assume countable choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]). Let $m\\ge1$ and let $u:S^m\\to S^m$ be a continuous\nmap of degree $0$\n([[def-degree-of-a-map-between-oriented-closed-manifolds]]). Then $u$ is\nhomotopic to a constant map, and there is a continuous nowhere-zero map\n$$F:D^{m+1}\\to\\mathbb R^{m+1}\\setminus\\{0\\}$$\nwith $D^{m+1}=\\overline B_2(0,1)$ and $F|_{S^m}=u$\n([[def-euclidean-spheres-and-closed-balls]]). If $u$ is smooth, $F$ can be\nchosen smooth with $F(x)=u(x/|x|)$ for every $x$ with $|x|\\ge\\frac23$; in\nparticular $F$ restricts to $u$ on $S^m$.",
+        "strategy": "1.1 Fix $b\\in S^m$. If $u(b)=b$ put $R:=\\operatorname{id}$; otherwise put $R(x):=x-2\\langle x,w\\rangle w/|w|^2$ with $w:=u(b)-b\\ne0$. A direct computation gives $|R(x)|=|x|$, $R^2=\\operatorname{id}$ and $R(w)=-w$, hence $R(u(b))=R(b)+R(w)=u(b)-(u(b)-b)=b$; thus $R$ restricts to a self-map of $S^m$ and is its own continuous inverse, so $g:=R\\circ u$ is a based self-map of $S^m$ at $b$ with $\\deg g=\\deg R\\cdot\\deg u=0$. [F1, F5, algebra]\n\n2.1 By [F2] the degree is an isomorphism $\\pi_m(S^m,b)\\to\\mathbb Z$, so $g$, having degree $0$, is based-homotopic to the constant map at $b$; applying the continuous map $R$ to that based homotopy exhibits a homotopy from $u=R^{-1}\\circ g$ to the constant map at $R(b)$, proving that $u$ is homotopic to a constant. [F1, F2, step 1.1]\n\n3.1 Let $H:S^m\\times[0,1]\\to S^m$ be a homotopy with $H_0=u$ and $H_1\\equiv c$, and define $F(0):=c$ and $F(x):=H(x/|x|,\\,1-|x|)$ for $x\\in D^{m+1}\\setminus\\{0\\}$. Then $F$ is continuous away from $0$ as a composite of continuous maps, and for $x\\to0$ continuity at every point of $S^m\\times\\{1\\}$ and a finite subcover of the compact sphere give $H(v,t)\\to c$ uniformly in $v$ as $t\\to1$, so $F(x)\\to c$; on $S^m$ we have $1-|x|=0$ and $F(x)=H(x,0)=u(x)$; and $F$ takes values in $S^m\\subseteq\\mathbb R^{m+1}\\setminus\\{0\\}$, so $F$ is nowhere zero. [F2, F5, step 2.1, algebra]\n\n4.1 Suppose now that $u$ is smooth. By [F3] the continuously homotopic smooth maps $u$ and the constant $c$ are smoothly homotopic; let $H'$ be a smooth homotopy from $u$ to $c$ and put $\\varphi(t):=\\sigma(3t-1)$, so that $\\varphi$ is smooth with $\\varphi(t)=0$ for $t\\le1/3$ and $\\varphi(t)=1$ for $t\\ge2/3$ by [F4]. Then $H''(x,t):=H'(x,\\varphi(t))$ is a smooth homotopy from $u$ to $c$ with $H''(x,t)=u(x)$ for $t\\le1/3$, and we redefine $F(0):=c$, $F(x):=H''(x/|x|,1-|x|)$ for $x\\ne0$. This $F$ is smooth on $\\{0<|x|<1\\}$ and equals $c$ for $0<|x|\\le1/3$ (where $1-|x|\\ge2/3$), so it is smooth at $0$ as well; on the collar $\\{|x|\\ge2/3\\}$ it equals $H''(x/|x|,1-|x|)=u(x/|x|)$, a smooth function of $x$ on that collar because $|x|\\ge2/3>0$, and at the boundary points $|x|=1$ it equals $u(x)$, where $x/|x|=x$; so $F$ is smooth on $D^{m+1}$ with $F(x)=u(x/|x|)$ for $|x|\\ge2/3$, and it takes values in $S^m$, hence is nowhere zero. [A1, F3, F4, F5, step 3.1, construct, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a76, Exercises 3 and 5 with their hints, printed pp. 145-147 (a degree-zero map of a sphere is homotopic to a constant, and the homotopy fills the ball)"
+            },
+            {
+              "title": "Joel W. Robbin and Dietmar A. Salamon, Introduction to Differential Topology (web draft 2018, complete PDF)",
+              "url": "https://umutvg.github.io/difftop.pdf",
+              "locator": "Ch. 3 \u00a73.3 (Hopf degree theorem) and Ch. 2 (extension of boundary data), printed pp. 34-35"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-two-points-avoiding-a-finite-set-lie-in-a-common-embedded-ball",
+        "kind": "lemma",
+        "title": "Two points avoiding a finite set lie in a common embedded ball",
+        "deps": [
+          "def-smooth-manifold",
+          "prop-topological-manifolds-are-locally-compact-and-locally-path-connected",
+          "thm-connected-and-locally-path-connected-implies-path-connected",
+          "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "def-embedded-smooth-submanifold-with-boundary",
+          "def-countable-choice",
+          "thm-weak-whitney-proper-embedding-theorem",
+          "cor-a-closed-embedded-submanifold-of-a-complete-riemannian-manifold-is-complete-in-the-induced-metric",
+          "thm-hopf-rinow",
+          "thm-parallel-transport-is-a-linear-isomorphism",
+          "prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume"
+        ],
+        "statement": "Assume countable choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]). Let $M$ be a connected boundaryless smooth $n$-manifold,\n$n\\ge2$, let $p\\ne q\\in M$ and let $F\\subset M\\setminus\\{p,q\\}$ be finite. Then\nthere are a smooth embedded closed arc $\\gamma\\subseteq M\\setminus F$ from $p$\nto $q$ and a smoothly embedded closed ball $B\\subseteq M$ with\n$p,q\\in\\operatorname{int}B$ and $B\\cap F=\\varnothing$\n([[def-embedded-smooth-submanifold-with-boundary]]).",
+        "strategy": "1.1 Put $U=M\\setminus F$. A punctured coordinate ball in dimension $n\\ge2$ is path-connected: join two nonzero points by a broken line through a third point avoiding the two lines through the puncture. To see that $U$ is connected, suppose $U=A\\sqcup B$ were a separation. For each $x\\in F$ choose a coordinate ball meeting $F$ only at $x$; its connected punctured ball lies entirely in $A$ or entirely in $B$. Add $x$ to that side. The resulting two sets are disjoint nonempty open sets covering $M$, a contradiction. Hence $U$ is connected and path-connected by [F1]. [F1, given, algebra]\n\n2.1 Embed $U$ properly in $\\mathbb R^{2n+1}$ by [F2]. Its image is closed: a convergent sequence of image points lies in a compact Euclidean ball; properness gives a compact preimage, and a convergent subsequence shows the limit is in the image. The induced metric is complete by [F2]. By [F3] a nonconstant minimizing geodesic $\\gamma:[0,1]\\to U$ joins $p$ to $q$. It has constant positive speed and is injective, since deleting any nonconstant loop would shorten it. A continuous injection from the compact interval into a Hausdorff manifold is an embedding, so this is a smooth embedded arc. [F2, F3, step 1.1, construct]\n\n3.1 Geodesic completeness extends $\\gamma$ beyond both endpoints. Choose $a>0$ small enough that its restriction to $[-a,1+a]$ remains an embedding: the positive tangent makes it locally injective at each endpoint, and compactness separates these small endpoint continuations from the portions of the original arc outside their coordinate neighbourhoods and from each other. Let $W=U\\setminus\\{\\gamma(-a),\\gamma(1+a)\\}$ and $S=\\gamma((-a,1+a))$. Then $S$ is boundaryless and closed in $W$, since its closure in $U$ is the extended compact arc and only the two removed endpoints are missing. Apply [F5] to $S\\subset W$. Parallel-transport an orthonormal normal basis along the geodesic by [F4]; its tangent is parallel, so the transported vectors stay normal and give a smooth frame of the normal quotient bundle. The tube is therefore parametrized near its zero section by $(t,z)\\in(-a,1+a)\\times\\mathbb R^{n-1}$. [F3, F4, F5, step 2.1, construct]\n\n4.1 Choose $L$ with $1/2<L<1/2+a$. Compactness of $[1/2-L,1/2+L]$ in the zero section supplies $\\varepsilon>0$ such that the ellipsoid $E=\\{(t,z):((t-1/2)/L)^2+|z|^2/\\varepsilon^2\\le1\\}$ is contained in the tube domain: cover that compact segment by finitely many product neighbourhoods in the open domain and take a common positive fibre radius. The ellipsoid is affinely diffeomorphic to $D^n$, and its tube image is a smooth embedded closed ball $B\\subset W\\subset M\\setminus F$. The points $(0,0)$ and $(1,0)$ satisfy the strict ellipsoid inequality because $L>1/2$, so $p,q\\in\\operatorname{int}B$. The original arc lies in this ball and avoids $F$, completing both assertions. [F5, step 3.1, construct, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf",
+              "locator": "Section 19.1 and Theorem 19.2.1, printed pp. 139-144 (complete induced metrics and minimizing geodesics); the extended-arc and ellipsoid construction is derived here"
+            },
+            {
+              "title": "John M. Lee, Introduction to Smooth Manifolds, 2nd ed.",
+              "url": "https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf",
+              "locator": "Theorems 6.15 and 6.24 (proper embeddings and tubular neighbourhoods)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-opposite-index-nondegenerate-zeros-cancel-in-a-ball",
+        "kind": "lemma",
+        "title": "Opposite-index nondegenerate zeros cancel in a ball",
+        "deps": [
+          "lem-local-index-is-additive-under-a-transverse-perturbation",
+          "lem-index-sum-of-an-outward-field-is-the-gauss-degree",
+          "lem-degree-zero-unit-vector-field-on-a-sphere-extends-over-the-ball",
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-nondegenerate-zero-of-a-vector-field",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "def-induced-tangent-bundle-chart",
+          "def-embedded-smooth-submanifold-with-boundary",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-countable-choice"
+        ],
+        "statement": "Assume countable choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]). Let $M$ be a smooth $n$-manifold, $n\\ge2$, let $X$\nbe a smooth vector field and let $B\\subseteq M$ be a smoothly embedded closed\nball whose interior contains exactly two zeros $p,q$ of $X$, both\nnondegenerate and of opposite index, with $X\\ne0$ on $\\partial B$\n([[def-embedded-smooth-submanifold-with-boundary]]). Then there is a smooth\nvector field $X'$ on $M$ with $X'=X$ outside $\\operatorname{int}B$ (in\nparticular on a neighbourhood of $\\partial B$) and $X'\\ne0$ on $B$; thus $X'$\nhas exactly the zeros of $X$ outside $B$ and none in $B$.",
+        "strategy": "1.1 In the parametrization of [F1] the normalized field $u(y):=Y(y)/|Y(y)|$ on the boundary sphere is smooth and its degree equals $\\operatorname{ind}_{b^{-1}(p)}Y+\\operatorname{ind}_{b^{-1}(q)}Y=0$ by [F1] and [F3]. [F1, F3, algebra]\n\n2.1 Fix $0<r_0<1$ so that $Y\\ne0$ on the collar $\\{r_0\\le\\|y\\|\\le1\\}$, put $u_0(v):=Y(r_0v)/|Y(r_0v)|$, and note that the ball of radius $r_0$ contains the same two zeros, so [F1] gives $\\deg u_0=0$ as well; by [F2] applied to $u_0$ there is a smooth nowhere-zero $F_0$ on $\\overline B_{r_0}(0)$ with $F_0(y)=u_0(y/\\|y\\|)$ for $\\frac23r_0\\le\\|y\\|\\le r_0$. Put $\\Psi(v,s):=Y(sv)/|Y(sv)|$ on $S^{n-1}\\times[r_0,1]$, choose by [F4] a smooth function $\\sigma:[r_0,1]\\to[r_0,1]$ with $\\sigma(s)=s$ for $s$ near $1$ and $\\sigma(s)=r_0$ for $s$ near $r_0$, and define $F:=F_0$ on $\\overline B_{r_0}(0)$ and $F(y):=\\Psi(y/\\|y\\|,\\sigma(\\|y\\|))$ for $r_0\\le\\|y\\|\\le1$: the two formulas agree on the sphere $\\|y\\|=r_0$, where both equal $u_0(y/\\|y\\|)$ and are independent of $\\|y\\|$ in a one-sided neighbourhood of it, so $F$ is smooth and nowhere zero on $\\overline B_2(0,1)$, and $F(y)=Y(y)/|Y(y)|$ on a collar $\\{\\|y\\|\\ge1-\\delta\\}$ because $\\sigma(s)=s$ there. [F1, F2, F3, F4, step 1.1, construct]\n\n3.1 Choose by [F4] a smooth bump $\\mu$ equal to $1$ on a neighbourhood of the collar $\\{\\|y\\|\\ge1-\\delta\\}$ and supported in a slightly larger zero-free collar, extend $\\mu|Y|$ smoothly by zero from that zero-free collar, and write $\\psi:=\\mu\\,|Y|+(1-\\mu)c$ with a positive constant $c$, and put $X'':=\\psi\\,F$; then $\\psi$ is smooth and positive on the ball with $\\psi=|Y|$ on $\\{\\|y\\|\\ge1-\\delta\\}$, so $X''$ is a smooth nowhere-zero field on the ball, and on that collar $X''=|Y|\\cdot Y/|Y|=Y$. Therefore the field equal to $X''$ on $B$ (transported back by $db$) and to $X$ outside $\\operatorname{int}B$ is smooth, agrees with $X$ on a neighbourhood of $\\partial B$ and outside $\\operatorname{int}B$, and is nowhere zero on $B$. [F1, F4, step 2.1, construct, algebra]\n\n4.1 The resulting smooth field $X'$ on $M$ therefore has no zero in $B$ and coincides with $X$ off $\\operatorname{int}B$, so its zero set is exactly the zero set of $X$ outside $B$, as claimed. [step 3.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a76, Exercises 10-13 with hints, printed pp. 146-148 (cancelling a pair of opposite zeros inside a ball via the degree-zero extension)"
+            },
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, Step 2, printed p. 40 (index-preserving local perturbation; cancellation here uses the separately proved degree-zero extension)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-reflection-of-an-outward-field-extends-over-the-double",
+        "kind": "lemma",
+        "title": "The reflection of an outward field extends over the double",
+        "deps": [
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "lem-vector-field-index-is-independent-of-chart-ball-and-trivialization",
+          "lem-negation-scales-the-local-index-by-minus-one-to-the-dimension",
+          "def-double-of-a-smooth-manifold-with-boundary",
+          "thm-the-double-has-a-well-defined-smooth-structure",
+          "thm-collar-neighborhood-theorem",
+          "def-inward-outward-and-boundary-tangent-vectors",
+          "thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves",
+          "thm-smooth-inverse-function-theorem-on-manifolds",
+          "def-countable-choice",
+          "thm-inward-pointing-vector-fields-have-local-forward-semiflows-at-the-boundary"
+        ],
+        "statement": "Assume countable choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]). Let $M$ be a compact smooth $n$-manifold with\nboundary, $n\\ge1$, and let $X$ be a smooth vector field that is nonzero and points\nstrictly outward along $\\partial M$\n([[def-inward-outward-and-boundary-tangent-vectors]]). Choose the collar generated by the inward field $-X$. Let $DM$ be the\nsmooth double defined by this collar, with seam involution $\\tau$\ninterchanging the two labelled halves\n([[def-double-of-a-smooth-manifold-with-boundary]],\n[[thm-the-double-has-a-well-defined-smooth-structure]]). Then\n$$X^+(y)=X(y)\\ \\ (y\\in M_+),\\qquad X^+(\\tau y)=-d\\tau_y\\bigl(X(y)\\bigr)\\ \\ (y\\in M_+)$$\ndefines a smooth vector field on this double (an arbitrary fixed collar\nneed not give a smooth field); its zeros are exactly the two copies of\nthe zeros of $X$, and for every isolated zero $p\\in\\operatorname{int}M$\n$$\\operatorname{ind}_{\\tau p}(X^+)=(-1)^n\\operatorname{ind}_pX.$$",
+        "strategy": "1.1 If $\\partial M=\\varnothing$, the double is the disjoint union of two copies, and the two fields are $X$ and $-X$. Otherwise use the single global flow collar $c(x,u)$ of [F4] to define the double's smooth structure. Its seam charts have signed coordinate $u$, with $\\tau(x,u)=(x,-u)$. This is the collar-defined double of [F1], rather than a replacement of an already fixed smooth structure while keeping $X$ unchanged. [F1, F4, given, construct]\n\n2.1 In these charts $X=-\\partial_u$ on the first half. Reflection followed by negation gives $-d\\tau(-\\partial_u)=-\\partial_u$ on the second half. The prescriptions therefore agree at the seam and give one smooth nonzero expression there. Off the seam they are $X$ and the push-forward of $-X$, so they are smooth globally. [F1, F4, step 1.1, algebra]\n\n3.1 There are no seam zeros, and off the seam the zero set consists precisely of the two copies of $X^{-1}(0)$. For any isolated zero $p$, a chart at $p$ transported by $\\tau$ identifies the second field with $-X$. Chart invariance and [F5] give $\\operatorname{ind}_{\\tau p}X^+=\\operatorname{ind}_p(-X)=(-1)^n\\operatorname{ind}_pX$. The same computation applies to the two disjoint copies when the boundary is empty. [F3, F5, step 1.1, step 2.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, Step 3, printed pp. 40-41 (boundary smoothness caveat; the flow-collar doubling construction here is derived from the cited local suppliers)"
+            },
+            {
+              "title": "Joel W. Robbin and Dietmar A. Salamon, Introduction to Differential Topology (web draft 2018, complete PDF)",
+              "url": "https://umutvg.github.io/difftop.pdf",
+              "locator": "Theorem 2.3.1 and its boundary discussion, printed p. 33 (the boundary form via the double)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-index-sum-of-an-outward-field-on-an-even-dimensional-manifold",
+        "kind": "lemma",
+        "title": "The index sum of an outward field on an even-dimensional manifold",
+        "deps": [
+          "thm-poincare-hopf-for-closed-manifolds",
+          "prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions",
+          "cor-closed-odd-dimensional-manifolds-have-zero-euler-characteristic",
+          "lem-reflection-of-an-outward-field-extends-over-the-double",
+          "lem-local-index-is-additive-under-a-transverse-perturbation",
+          "lem-negation-scales-the-local-index-by-minus-one-to-the-dimension",
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-nondegenerate-zero-of-a-vector-field",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "def-inward-outward-and-boundary-tangent-vectors",
+          "def-double-of-a-smooth-manifold-with-boundary",
+          "thm-the-double-has-a-well-defined-smooth-structure",
+          "thm-collar-neighborhood-theorem",
+          "prop-cofibrations-are-characterized-by-a-retraction-of-the-mapping-cylinder-strip",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a compact\nsmooth $n$-manifold with nonempty boundary, $n$ even, and let $X$ be a smooth\nvector field with only isolated zeros that is nonzero and strictly outward\nalong $\\partial M$ ([[def-inward-outward-and-boundary-tangent-vectors]]). Then\n$$\\sum_{p:X(p)=0}\\operatorname{ind}_pX=\\chi(M).$$",
+        "strategy": "1.1 Apply the reduction of [F1] and replace $X$ by a field $X_0$ with only nondegenerate zeros, the same index sum, and still strictly outward on $\\partial M$; it suffices to prove the identity for $X_0$, and by [[thm-index-of-a-nondegenerate-vector-field-zero]] each of its zeros has index $\\pm1$. [F1, algebra]\n\n2.1 Form the field-adapted double $DM$ and the reflected field $X_0^+$; by [F2] the zeros of $X_0^+$ are the two copies of the zeros of $X_0$ and, since $n$ is even, $\\operatorname{ind}_{\\tau p}X_0^+=(-1)^n\\operatorname{ind}_pX_0=\\operatorname{ind}_pX_0$, so the index sum over $DM$ is twice the index sum over $M$; Poincare-Hopf [F3] gives $2\\sum_p\\operatorname{ind}_pX_0=\\chi(DM)$. [F2, F3, step 1.1, algebra]\n\n3.1 By [F4], $\\chi(DM)=\\chi(M\\cup_{\\partial M}M)=2\\chi(M)-\\chi(\\partial M)=2\\chi(M)$; substituting into step 2.1 gives $2\\sum_p\\operatorname{ind}_pX_0=2\\chi(M)$, hence $\\sum_p\\operatorname{ind}_pX_0=\\chi(M)$ in $\\mathbb Z$, and by step 1.1 the same identity holds for the original field $X$. [F4, step 1.1, step 2.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, Step 3, printed pp. 40-41 (boundary smoothness caveat; the even-dimensional doubling argument here is derived from the cited local suppliers)"
+            },
+            {
+              "title": "Joel W. Robbin and Dietmar A. Salamon, Introduction to Differential Topology (web draft 2018, complete PDF)",
+              "url": "https://umutvg.github.io/difftop.pdf",
+              "locator": "Theorem 2.3.1, printed p. 33 (the boundary form with an outward field)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-poincare-hopf-with-outward-pointing-boundary",
+        "kind": "theorem",
+        "title": "Poincare-Hopf with outward-pointing boundary",
+        "deps": [
+          "thm-poincare-hopf-for-closed-manifolds",
+          "lem-index-sum-of-an-outward-field-on-an-even-dimensional-manifold",
+          "lem-local-index-is-additive-under-a-transverse-perturbation",
+          "prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions",
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "def-nondegenerate-zero-of-a-vector-field",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "def-inward-outward-and-boundary-tangent-vectors",
+          "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a compact\nsmooth $n$-manifold, $n\\ge1$, and let $X$ be a smooth vector field with only\nisolated zeros that is nonzero and strictly outward along $\\partial M$\n([[def-inward-outward-and-boundary-tangent-vectors]]; the boundary clause is\nvacuous when $\\partial M=\\varnothing$). Then\n$$\\sum_{p:X(p)=0}\\operatorname{ind}_pX=\\chi(M).$$",
+        "strategy": "1.1 If $\\partial M=\\varnothing$ or $n$ is even the statement is [F1]; assume therefore that $n$ is odd and $\\partial M\\ne\\varnothing$. Apply [F5] to replace $X$ by a field $X_0$ with only nondegenerate zeros, the same index sum and still strictly outward, and put $W:=M\\times[0,1]$ and $Z(x,t):=(X_0(x),\\,(t-\\tfrac12)\\partial_t)$. [F2, F5, algebra]\n\n2.1 The zeros of $Z$ are exactly the points $(p,\\tfrac12)$ with $X_0(p)=0$, all interior, and by [F3] each is nondegenerate with $\\operatorname{ind}_{(p,1/2)}Z=\\operatorname{ind}_pX_0$; the field $Z$ is strictly outward along $\\partial W$ by [F4]. Since $\\dim W=n+1$ is even, the even-dimensional boundary lemma [F1] applies to $(W,Z)$ and gives $\\sum_{p}\\operatorname{ind}_pX_0=\\sum_{(p,1/2)}\\operatorname{ind}_{(p,1/2)}Z=\\chi(W)=\\chi(M)$ by [F2]. [F1, F2, F3, F4, step 1.1, algebra]\n\n3.1 By step 1.1 the index sum of $X_0$ equals that of $X$, so $\\sum_p\\operatorname{ind}_pX=\\chi(M)$; the remaining cases were handled in step 1.1, completing the proof. [F1, step 1.1, step 2.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, Step 3 of the proof of Theorem 1, printed pp. 40-41 (boundary case, with the outward-field convention)"
+            },
+            {
+              "title": "Joel W. Robbin and Dietmar A. Salamon, Introduction to Differential Topology (web draft 2018, complete PDF)",
+              "url": "https://umutvg.github.io/difftop.pdf",
+              "locator": "Theorem 2.3.1, printed p. 33 (boundary form of Poincare-Hopf with an outward-pointing field)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "cor-euler-number-of-the-tangent-bundle-is-the-euler-characteristic",
+        "kind": "corollary",
+        "title": "The Euler number of the tangent bundle is the Euler characteristic",
+        "deps": [
+          "cor-morse-gradient-zero-contributes-minus-one-to-the-index-power-lambda",
+          "cor-morse-euler-characteristic-identity",
+          "def-euler-class-by-zero-section-pullback-of-the-thom-class",
+          "thm-self-intersection-is-the-euler-number-of-the-normal-bundle",
+          "cor-diagonal-self-intersection-is-the-euler-number-of-tm",
+          "prop-mod-two-self-intersection-needs-no-orientation",
+          "thm-mod-two-euler-class-is-the-top-stiefel-whitney-class",
+          "prop-vector-field-zero-index-is-a-zero-section-intersection-number",
+          "def-self-intersection-number-of-an-oriented-submanifold",
+          "def-riemannian-gradient-of-a-smooth-function",
+          "lem-riemannian-gradient-vanishes-exactly-at-critical-points",
+          "cor-every-compact-smooth-manifold-admits-an-excellent-morse-function",
+          "def-morse-function-and-excellent-morse-function",
+          "thm-every-smooth-manifold-admits-a-riemannian-metric",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "def-axiom-of-choice",
+          "lem-second-countable-smooth-manifolds-have-cw-homotopy-type"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]).\n\n(i) Let $M$ be a closed oriented smooth $n$-manifold, $n\\ge1$. Then the Euler number of\nthe tangent bundle satisfies\n$$\\langle e(TM),[M]\\rangle=\\chi(M),$$\nwhere $e(TM)\\in H^n(M;\\mathbb Z)$ is the Euler class of\n[[def-euler-class-by-zero-section-pullback-of-the-thom-class]] and the bracket\nis the Kronecker evaluation; equivalently the diagonal satisfies\n$\\Delta_M\\cdot\\Delta_M=\\chi(M)$ in the self-intersection number of\n[[def-self-intersection-number-of-an-oriented-submanifold]].\n\n(ii) For any closed smooth $n$-manifold with $n\\ge1$,\n$$\\langle w_n(TM),[M]\\rangle_2\\equiv\\chi(M)\\pmod 2,$$\nwith $w_n$ the top Stiefel-Whitney class.",
+        "strategy": "1.1 For (i): by [F1] the section $s=\\operatorname{grad}_gf$ is transverse to the zero section with zero set $\\operatorname{Crit}(f)$, and by [F2] its signed zero count equals $\\langle e(TM),[M]\\rangle$; by [F3] that signed count is $\\sum_p(-1)^{\\operatorname{ind}(p)}=\\chi(M)$, so $\\langle e(TM),[M]\\rangle=\\chi(M)$. [F1, F2, F3, F4, algebra]\n\n2.1 The diagonal statement of [F3] identifies $\\Delta_M\\cdot\\Delta_M$ with $\\langle e(TM),[M]\\rangle$, so it equals $\\chi(M)$ as well. [F3, step 1.1, algebra]\n\n3.1 For (ii): the unsigned count $\\#\\operatorname{Crit}(f)$ of the transverse section $\\operatorname{grad}_gf$ satisfies $\\#\\operatorname{Crit}(f)\\equiv\\langle w_n(TM),[M]\\rangle_2$ by [F3], while $\\#\\operatorname{Crit}(f)\\equiv\\sum_p(-1)^{\\operatorname{ind}(p)}=\\chi(M)\\pmod 2$ because $(-1)^{\\lambda}\\equiv1$; hence $\\langle w_n(TM),[M]\\rangle_2\\equiv\\chi(M)\\pmod2$. [F3, F4, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor and James D. Stasheff, Characteristic Classes (Princeton University Press, 1974; complete PDF)",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf",
+              "locator": "\u00a79 and \u00a711, printed pp. 95-104 and 115-137 (the Euler class evaluated on the fundamental class is the signed zero count)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a75 and \u00a76, printed pp. 134-140 (the index sum and the Euler number)"
+            },
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy (author draft)",
+              "url": "https://math.stanford.edu/~ralph/bookR4.pdf",
+              "locator": "Ch. 9, Theorem 9.12 and its corollaries (self-intersection of the diagonal and the Euler characteristic)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-converse-poincare-hopf-for-nowhere-zero-fields",
+        "kind": "theorem",
+        "title": "Converse Poincare-Hopf for nowhere-zero fields",
+        "deps": [
+          "thm-poincare-hopf-for-closed-manifolds",
+          "cor-nowhere-zero-vector-field-forces-zero-euler-characteristic",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "lem-local-index-is-additive-under-a-transverse-perturbation",
+          "lem-two-points-avoiding-a-finite-set-lie-in-a-common-embedded-ball",
+          "lem-opposite-index-nondegenerate-zeros-cancel-in-a-ball",
+          "lem-closed-connected-one-manifolds-are-circles",
+          "cor-morse-gradient-zero-contributes-minus-one-to-the-index-power-lambda",
+          "cor-every-compact-smooth-manifold-admits-an-excellent-morse-function",
+          "def-riemannian-gradient-of-a-smooth-function",
+          "lem-riemannian-gradient-vanishes-exactly-at-critical-points",
+          "thm-every-smooth-manifold-admits-a-riemannian-metric",
+          "def-morse-function-and-excellent-morse-function",
+          "def-nondegenerate-zero-of-a-vector-field",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a closed\nconnected smooth $n$-manifold, $n\\ge1$. Then $M$ admits a nowhere-zero smooth\nvector field ([[def-smooth-vector-field-as-a-tangent-bundle-section]]) if and\nonly if $\\chi(M)=0$ ([[def-euler-characteristic-of-a-compact-manifold]]).",
+        "strategy": "1.1 The forward implication is [F1]. For the converse, the empty manifold has the empty nowhere-zero field. A nonempty closed connected $1$-manifold is a circle by [F2]; transporting its rotational field gives a nowhere-zero field. [F1, F2, given, construct]\n\n1.2 Let $n\\ge2$ and $\\chi(M)=0$. Choose the Morse gradient $X$ of [F3]. Its finite zero set has indices $\\pm1$, and their sum is zero by [F4], so the numbers of positive and negative zeros agree. If there are no zeros, the claim follows immediately. [F3, F4, given, algebra]\n\n2.1 Otherwise select one zero of each sign and use [F5] with the finite set of all other current zeros. The resulting ball contains exactly that pair and no boundary zero. Cancel the pair inside it, leaving the field unchanged near the boundary and outside the ball. No new zeros are introduced, and every other zero and its local germ are unchanged. Thus the new field again has equally many positive and negative nondegenerate zeros, with two fewer zeros. Repeating this finite process ends with a smooth nowhere-zero field. This uses neither disjoint supports nor a claim that deleting balls preserves connectedness. [F5, step 1.2, construct, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a76, Exercises 10-13 with hints, printed pp. 146-148 (existence of a nowhere-zero field after cancelling opposite zeros)"
+            },
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, Hopf's existence remark and the circle case, printed pp. 39-40"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-closed-connected-one-manifolds-are-circles",
+        "kind": "lemma",
+        "title": "Nonempty closed connected 1-manifolds are circles",
+        "deps": [
+          "lem-boundary-of-a-compact-one-manifold-has-even-cardinality",
+          "def-circle-as-real-line-mod-integers",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-smooth-manifold",
+          "def-compact-space",
+          "def-connected-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Every nonempty closed connected smooth\n$1$-manifold is diffeomorphic to the circle $S^1=\\mathbb R/\\mathbb Z$ with its\nstandard smooth structure\n([[def-circle-as-real-line-mod-integers]],\n[[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]). Here *closed*\nmeans compact with empty boundary; the empty manifold is excluded because it is\nconnected under [[def-connected-space]] but is not diffeomorphic to a circle.",
+        "strategy": "1.1 By [F2] the manifold $M$ is compact with $\\partial M=\\varnothing$, so [F1] provides a diffeomorphism from $M$ onto a finite disjoint union $\\bigsqcup_{i\\in F}S^1_i\\sqcup\\bigsqcup_{j\\in G}[0,1]_j$; a diffeomorphism of manifolds with boundary carries boundary to boundary, and the boundary of the target is the union of the two endpoints of each interval component, so $\\varnothing=\\partial M$ corresponds to $\\bigsqcup_{j\\in G}\\{0,1\\}$ and forces $G=\\varnothing$. [A1, F1, F2, algebra]\n\n2.1 Consequently $M$ is diffeomorphic to $\\bigsqcup_{i\\in F}S^1_i$, a disjoint union of $|F|$ copies of the circle. Each circle is a nonempty connected component of that disjoint union, so the union is connected only when $|F|\\le1$, and $M$ is nonempty, so $|F|=1$; hence $M$ is diffeomorphic to the standard circle $S^1$, the model $\\mathbb R/\\mathbb Z$ of [F3], as claimed. [F1, F3, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Appendix, printed pp. 55-57 (classification of compact 1-manifolds; the circle alternative)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "rem-the-outward-boundary-hypothesis-cannot-be-replaced-by-nonzero-on-the-boundary",
+        "kind": "remark",
+        "title": "The outward boundary hypothesis cannot be replaced by nonzero on the boundary",
+        "deps": [
+          "thm-poincare-hopf-with-outward-pointing-boundary",
+          "lem-index-sum-of-an-outward-field-is-the-gauss-degree",
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "def-inward-outward-and-boundary-tangent-vectors",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) for the applications of the general index theorems below.\n\nThe hypothesis in [[thm-poincare-hopf-with-outward-pointing-boundary]] is\nstrictly stronger than \"$X\\ne0$ on $\\partial M$\": a field that is nonzero on\nthe boundary but not outward, with only isolated zeros, contributes a boundary\ncorrection term. On the\nclosed unit ball $D^n\\subseteq\\mathbb R^n$, $n\\ge3$ odd, the inward radial\nfield $X(u)=-u$ is nonzero on $\\partial D^n$ and has the single zero $0$, which\nis nondegenerate with linearization $-I_n$\n([[def-inward-outward-and-boundary-tangent-vectors]],\n[[def-isolated-zero-and-local-index-of-a-vector-field]]); by\n[[thm-index-of-a-nondegenerate-vector-field-zero]] its index is\n$\\operatorname{sign}\\det(-I_n)=(-1)^n=-1$. On the other hand\n$\\chi(D^n)=1$, because $D^n$ is contractible with the rational homology of a\npoint ([[cor-contractible-nonempty-spaces-have-the-homology-of-a-point]], [[def-axiom-of-choice]],\n[[def-euler-characteristic-of-a-compact-manifold]]). Hence\n$\\sum_p\\operatorname{ind}_pX=-1\\ne1=\\chi(D^n)$: nonzero on the boundary does\nnot suffice, and the outwardness in the boundary form is a genuine hypothesis\nrather than a convenience.\n\nIn even dimensions the inward radial field on $D^n$ has index $+1$\nand happens to agree with $\\chi(D^n)=1$, despite not being outward. Thus\nequality of the index sum with $\\chi$ does not imply outwardness.\nFor a compact smooth full-dimensional Euclidean domain $N\\subset\\mathbb R^n$,\n$n\\ge1$, the boundary lemma identifies the index sum of a smooth field with\nonly isolated zeros and nonzero on $\\partial N$ with the degree of its\nnormalized boundary map (reduced degree when $n=1$). Outwardness\nis sufficient to identify that degree with the Gauss degree, which equals\n$\\chi(N)$ by the outward-boundary theorem. This sphere-map description\nuses the Euclidean tangent trivialization and is not asserted for an\narbitrary manifold with a possibly nontrivial tangent bundle.",
+        "strategy": "Verified by the explicit linear field: the linearization at $0$ is $-I_n$, its determinant sign is $(-1)^n$, and the boundary behaviour is inward. This is the standard caution attached to the boundary form in the sources.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, Step 3 and the preceding discussion of the boundary hypothesis, printed pp. 40-41"
+            },
+            {
+              "title": "Joel W. Robbin and Dietmar A. Salamon, Introduction to Differential Topology (web draft 2018, complete PDF)",
+              "url": "https://umutvg.github.io/difftop.pdf",
+              "locator": "Theorem 2.3.1 and its hypotheses, printed p. 33"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 9
+      }
+    ]
+  },
+  {
+    "order": 542,
+    "id": "vector-field-index-euler-characteristic-and-poincare-hopf-examples",
+    "kind": "B",
+    "category": "differential-topology",
+    "title": "Vector Field Index Euler Characteristic and Poincare Hopf \u2014 Examples",
+    "companion": "vector-field-index-euler-characteristic-and-poincare-hopf",
+    "requires": [
+      "vector-field-index-euler-characteristic-and-poincare-hopf"
+    ],
+    "items": [
+      {
+        "id": "ex-hairy-ball-theorem-for-even-spheres",
+        "kind": "example",
+        "title": "The hairy-ball theorem for even spheres",
+        "deps": [
+          "cor-nowhere-zero-vector-field-forces-zero-euler-characteristic",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "cor-homology-of-spheres",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) for the applications of Poincare-Hopf below.\n\nLet $m\\ge1$ and $M=S^{2m}\\subseteq\\mathbb R^{2m+1}$. Then\n$$\\chi(S^{2m})=1+1=2$$\n([[def-euler-characteristic-of-a-compact-manifold]]), so by\n[[cor-nowhere-zero-vector-field-forces-zero-euler-characteristic]] no smooth\nvector field on $S^{2m}$ can be nowhere zero\n([[def-smooth-vector-field-as-a-tangent-bundle-section]]): every smooth field\non an even-dimensional sphere has at least one zero. This recovers the\nclassical hairy-ball theorem by the Euler-characteristic route rather than by\nthe degree of the antipodal map.",
+        "strategy": "1.1 By [F1] the only nonzero rational Betti numbers of $S^{2m}$ are in degrees $0$ and $2m$, both equal to $1$, so the alternating sum of the definition gives $\\chi(S^{2m})=(-1)^0\\cdot1+(-1)^{2m}\\cdot1=2\\ne0$. [F1, algebra]\n\n2.1 If a smooth field on $S^{2m}$ were nowhere zero, [F2] would force $\\chi(S^{2m})=0$, contradicting step 1.1; hence every smooth vector field on an even-dimensional sphere has at least one zero. [F2, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a75, printed p. 134 (the even-dimensional sphere as the standard application)"
+            },
+            {
+              "title": "Allen Hatcher, Algebraic Topology, Section 2.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "Example 2.42 and the Euler characteristic of spheres, printed p. 141"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-a-nowhere-zero-vector-field-on-an-odd-sphere",
+        "kind": "example",
+        "title": "A nowhere-zero vector field on an odd sphere",
+        "deps": [
+          "thm-converse-poincare-hopf-for-nowhere-zero-fields",
+          "cor-closed-odd-dimensional-manifolds-have-zero-euler-characteristic",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "def-induced-tangent-bundle-chart",
+          "lem-tangent-bundle-chart-transitions-are-smooth-with-smooth-inverses",
+          "thm-curve-contact-classes-are-canonically-isomorphic-to-derivation-tangent-vectors",
+          "cor-homology-of-spheres",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Let $m\\ge1$ and identify $\\mathbb R^{2m}$ with $\\mathbb C^m$. The field\n$$X(z):=iz=(iz_1,\\dots,iz_m)$$\non the unit sphere $S^{2m-1}\\subseteq\\mathbb C^m$ is a smooth vector field\n([[def-smooth-vector-field-as-a-tangent-bundle-section]]), tangent to the\nsphere because $\\operatorname{Re}\\langle iz,z\\rangle=\n\\operatorname{Re}(i|z|^2)=0$ on $|z|=1$, and nowhere zero because\n$|iz|=1$. Hence $S^{2m-1}$ admits a nowhere-zero vector field, in agreement\nwith $\\chi(S^{2m-1})=0$\n([[cor-homology-of-spheres]]). Under the Axiom of Choice\n([[def-axiom-of-choice]]), this also agrees with\n[[cor-closed-odd-dimensional-manifolds-have-zero-euler-characteristic]] and\n[[thm-converse-poincare-hopf-for-nowhere-zero-fields]]; for $m=1$ this is the\nstandard unit field on $S^1$.",
+        "strategy": "Explicit real-linear field; a finite hemisphere atlas supplies the canonical tangent-bundle structure without choice, and its local section coefficients are smooth. AC is used only in the general theorem comparisons.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a75, printed pp. 30-31 (the explicit nowhere-zero tangent field on odd-dimensional spheres)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a75, printed p. 134 (existence for odd-dimensional spheres)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-source-sink-and-saddle-indices-on-a-surface",
+        "kind": "example",
+        "title": "Source, sink and saddle indices on a surface",
+        "deps": [
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-nondegenerate-zero-of-a-vector-field",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the canonical smooth tangent-bundle structure.\n\nOn a chart of a surface identified with $\\mathbb R^2$ consider the smooth\nvector fields ([[def-smooth-vector-field-as-a-tangent-bundle-section]])\n$$X_1(x,y)=(x,y),\\qquad X_2(x,y)=(-x,-y),\\qquad X_3(x,y)=(x,-y).$$\nEach has its only zero at the origin, with linearizations $I$, $-I$ and\n$\\operatorname{diag}(1,-1)$; by\n[[thm-index-of-a-nondegenerate-vector-field-zero]] the indices are\n$$\\operatorname{ind}_0X_1=\\operatorname{sign}\\det I=+1,\\qquad \\operatorname{ind}_0X_2=\\operatorname{sign}\\det(-I)=+1,\\qquad \\operatorname{ind}_0X_3=\\operatorname{sign}\\det\\operatorname{diag}(1,-1)=-1.$$\nThus the source and the sink of a surface field both have index $+1$, while the\nsaddle has index $-1$, matching the circulation, source, sink and saddle\npictures of the classical treatment.",
+        "strategy": "1.1 The fields $X_1,X_2,X_3$ are linear, so their derivatives at every point are the matrices $I$, $-I$ and $\\operatorname{diag}(1,-1)$; each matrix is invertible, and $X_i(u)=A_iu=0$ has the unique solution $u=0$ since $A_i$ is invertible, so the origin is the only zero of each field and it is nondegenerate. [F1, algebra]\n\n2.1 The determinants are $\\det I=1$, $\\det(-I)=(-1)^2=1$ and $\\det\\operatorname{diag}(1,-1)=-1$, so [F2] gives the displayed indices $+1,+1,-1$; in particular a source and a sink on a surface both contribute $+1$, and a saddle contributes $-1$. [F2, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a75, Figure 3-18 and the surrounding discussion of indices, printed p. 133"
+            },
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, Lemma 5, printed pp. 37-38 (sign of the Jacobian determinant)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-outward-radial-field-on-a-disk",
+        "kind": "example",
+        "title": "The outward radial field on a disk",
+        "deps": [
+          "thm-poincare-hopf-with-outward-pointing-boundary",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+          "def-inward-outward-and-boundary-tangent-vectors",
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "def-euclidean-spheres-and-closed-balls",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) for the applications of Poincare-Hopf below.\n\nOn the closed unit ball $D^n=\\overline B_2(0,1)\\subseteq\\mathbb R^n$, $n\\ge1$\n([[def-euclidean-spheres-and-closed-balls]]), the radial field $X(u)=u$ points\nstrictly outward along $\\partial D^n$\n([[def-inward-outward-and-boundary-tangent-vectors]]) and has its only zero at\nthe centre, nondegenerate with linearization $I_n$ and index\n$\\operatorname{sign}\\det I_n=+1$\n([[thm-index-of-a-nondegenerate-vector-field-zero]]). Since $D^n$ is\ncontractible, $H_0(D^n;\\mathbb Q)\\cong\\mathbb Q$ and all higher rational\nhomology vanishes\n([[cor-contractible-nonempty-spaces-have-the-homology-of-a-point]]), so\n$\\chi(D^n)=1$ ([[def-euler-characteristic-of-a-compact-manifold]]); the index\nsum $+1$ equals $\\chi(D^n)$, verifying the boundary form\n[[thm-poincare-hopf-with-outward-pointing-boundary]] in the simplest case.",
+        "strategy": "1.1 The field $X$ is linear with $DX_u=I_n$, invertible at every point, so its only zero is the centre $0$ and that zero is nondegenerate; by [F2] its index is $\\operatorname{sign}\\det I_n=+1$, so the index sum is $+1$. [F2, algebra]\n\n2.1 On the boundary sphere the outward normal is the radial vector $u$, so $\\langle X(u),u\\rangle=|u|^2=1>0$ and the field is strictly outward by [F1]; by [F3] the index sum equals $\\chi(D^n)$, and the value $+1$ computed in step 1.1 matches $\\chi(D^n)=1$. [F1, F3, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, the disk example on printed p. 36 (outward field, index sum one)"
+            },
+            {
+              "title": "Joel W. Robbin and Dietmar A. Salamon, Introduction to Differential Topology (web draft 2018, complete PDF)",
+              "url": "https://umutvg.github.io/difftop.pdf",
+              "locator": "Theorem 2.3.1 and its simplest instance, printed p. 33"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 9
+      },
+      {
+        "id": "cex-an-inward-radial-field-violates-the-outward-boundary-formula",
+        "kind": "counterexample",
+        "title": "An inward radial field violates the outward boundary formula",
+        "deps": [
+          "thm-poincare-hopf-with-outward-pointing-boundary",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+          "def-inward-outward-and-boundary-tangent-vectors",
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "def-euclidean-spheres-and-closed-balls",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the canonical smooth tangent-bundle structure and the cited local-index theorem.\n\nThe inward radial field on the closed unit ball shows that the conclusion of\n[[thm-poincare-hopf-with-outward-pointing-boundary]] fails if \"strictly\noutward\" is weakened to \"nonzero on $\\partial M$\": on\n$D^n=\\overline B_2(0,1)\\subseteq\\mathbb R^n$ with $n\\ge3$ odd, the field\n$X(u)=-u$ is smooth and nonzero on $\\partial D^n$ but strictly inward there,\nits only zero is the centre with index $\\operatorname{sign}\\det(-I_n)=(-1)^n=-1$\n([[thm-index-of-a-nondegenerate-vector-field-zero]]), while $\\chi(D^n)=1$\n([[cor-contractible-nonempty-spaces-have-the-homology-of-a-point]],\n[[def-euler-characteristic-of-a-compact-manifold]]). Hence\n$\\sum_p\\operatorname{ind}_pX=-1\\ne1=\\chi(D^n)$, so \"nonzero on the boundary\" is\nnot enough.",
+        "strategy": "1.1 The field $X(u)=-u$ is linear with derivative $-I_n$ everywhere, so its only zero is the centre $0$ and it is nondegenerate there with index $(-1)^n=-1$ because $n$ is odd; on the boundary sphere $\\langle X(u),u\\rangle=-1<0$, so $X$ is nonzero but strictly inward. [F1, F2, algebra]\n\n2.1 On the other hand $\\chi(D^n)=1$ by [F3], so the index sum $-1$ differs from $\\chi(D^n)=1$; therefore the conclusion of the boundary form of Poincare-Hopf fails for this field even though it is nonzero on the boundary, and the outwardness hypothesis of [[thm-poincare-hopf-with-outward-pointing-boundary]] is load bearing. [F3, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, the discussion of the boundary hypothesis in Step 3, printed pp. 40-41"
+            },
+            {
+              "title": "Joel W. Robbin and Dietmar A. Salamon, Introduction to Differential Topology (web draft 2018, complete PDF)",
+              "url": "https://umutvg.github.io/difftop.pdf",
+              "locator": "Theorem 2.3.1 and its outwardness hypothesis, printed p. 33"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 9
+      },
+      {
+        "id": "cex-an-interval-has-nonzero-euler-characteristic-despite-being-odd-dimensional",
+        "kind": "counterexample",
+        "title": "An interval has nonzero Euler characteristic despite being odd-dimensional",
+        "deps": [
+          "cor-closed-odd-dimensional-manifolds-have-zero-euler-characteristic",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+          "thm-poincare-hopf-with-outward-pointing-boundary",
+          "def-inward-outward-and-boundary-tangent-vectors",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "def-interval",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) for the applications of Poincare-Hopf below.\n\nThe closedness hypothesis in\n[[cor-closed-odd-dimensional-manifolds-have-zero-euler-characteristic]] cannot\nbe dropped: the closed interval $[0,1]$ ([[def-interval]]) is a compact smooth\n$1$-manifold with boundary, of odd dimension, and\n$$\\chi([0,1])=1\\ne0,$$ because $[0,1]$ is contractible, so\n$H_0([0,1];\\mathbb Q)\\cong\\mathbb Q$ and all higher rational homology vanishes\n([[cor-contractible-nonempty-spaces-have-the-homology-of-a-point]],\n[[def-euler-characteristic-of-a-compact-manifold]]). The boundary form\n[[thm-poincare-hopf-with-outward-pointing-boundary]] is consistent with this:\nthe outward field $X(t)=t-\\tfrac12$ has its only zero at $t=\\tfrac12$,\nnondegenerate with linearization $1$ and index $+1$\n([[thm-index-of-a-nondegenerate-vector-field-zero]]), so its index sum $1$\nequals $\\chi([0,1])$, exactly as the outward-boundary formula requires.",
+        "strategy": "1.1 The interval $[0,1]$ has dimension one, which is odd, but by [F1] its Euler characteristic is $\\chi([0,1])=1\\ne0$; thus the conclusion of the odd-dimensional vanishing fails as soon as the closedness hypothesis is dropped. [F1, algebra]\n\n2.1 The standard outward field $X(t)=t-\\tfrac12$ has the single nondegenerate zero $t=\\tfrac12$ of index $+1$ by [F2], so its index sum is $1=\\chi([0,1])$ and the outward-boundary formula remains true here; the interval therefore refutes only the closedness hypothesis of the odd-dimensional corollary, not the boundary form itself. [F2, F3, step 1.1, algebra] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "John W. Milnor, Topology from the Differentiable Viewpoint (complete 76-page PDF, including the appendix Classifying 1-manifolds)",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "\u00a76, printed pp. 39-41 (the closedness hypothesis in the odd-dimensional vanishing)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 \u00a75, printed p. 134 (the boundary case and its conventions)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 9
+      }
+    ]
+  }
+]

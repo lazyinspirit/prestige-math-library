@@ -51,7 +51,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validateFrontier } from './step7-rounds.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
-import { activeOwnershipRows } from './defect-ownership.mjs';
+import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
 
 const STEP5_SCOPE_TOOL = fileURLToPath(new URL('./step5-scope.mjs', import.meta.url));
 const STEP5_CLOSE_TOOL = fileURLToPath(new URL('./step5-close.mjs', import.meta.url));

@@ -1322,11 +1322,13 @@ function step3AuthorScopeNote(): string {
 
 function authorItemOrder(snapshot: any, pairIds: string[]): string {
   const all = snapshot.pages.flatMap((page: any) => page.items ?? []);
-  // Historical completed runs predate scaffold labels. New runs are gated on
-  // them in Step 1; once any label exists, partial or stale labels fail closed.
+  // Historical completed runs predate scaffold labels. Task planning uses the
+  // current DAG: concurrent authors can change suppliers before consumers
+  // refresh their stored labels. The Step-1 and final author gates still check
+  // every stored label on stable content.
   if (!all.some((item: any) => item.dependency_level !== undefined)) return '';
   const owned = new Set(pairIds.flatMap(id => (snapshot.pairs.get(id) ?? []).map((page: any) => page.id)));
-  const order = orderedItems(snapshot.pages).filter(row => owned.has(row.page));
+  const order = orderedItems(snapshot.pages, { validateLabels: false }).filter(row => owned.has(row.page));
   return `- Audit and author in this exact dependency-level order (lower first; ties by page order and item ID):\n${order.map(row => `  ${row.level}. ${row.id} (${row.page})`).join('\n')}\n`;
 }
 

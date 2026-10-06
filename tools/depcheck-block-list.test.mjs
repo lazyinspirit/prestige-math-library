@@ -13,7 +13,7 @@ test('depcheck rejects draft items listed by block-form published pages', () => 
     mkdirSync(join(root, 'tools'));
     mkdirSync(join(root, 'items'));
     mkdirSync(join(root, 'library', 'test'), { recursive: true });
-    for (const file of ['depcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs'])
+    for (const file of ['depcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'published-repair-policy.mjs', 'item-hash.mjs'])
       copyFileSync(join(HERE, file), join(root, 'tools', file));
     for (const id of ['lem-indented', 'lem-indentless', 'ex-next-line-flow']) {
       writeFileSync(join(root, 'items', `${id}.md`),

@@ -11,14 +11,14 @@ provenance:
 deps: [def-based-cellular-chain-complex-of-a-universal-cover, lem-universal-cover-cellular-boundary-and-lifted-maps-are-right-group-ring-linear, thm-a-chain-map-is-a-homotopy-equivalence-exactly-when-its-cone-is-contractible, thm-cellular-approximation-for-maps-of-cw-pairs, lem-cellular-mapping-cylinders-and-relative-cylinders-are-cw-complexes, lem-cw-homotopy-equivalence-inclusions-are-strong-deformation-retracts, prop-relative-cw-inclusions-are-cofibrations, def-homotopy-equivalence, def-mapping-cone-of-a-chain-map, def-chain-homotopy-equivalence, def-chain-homotopy, prop-chain-homotopy-is-an-equivalence-relation, lem-chain-homotopy-is-compatible-with-addition-and-composition, def-contractible-complex, def-direct-sum-of-a-family-of-modules, def-chain-complex-in-an-abelian-category]
 proof_strategy: direct
 verification:
-  audited: 2026-09-27
+  repair: research/frontier-41-ha-dt-29-owner-published-repair-evidence/lem-a-lifted-cellular-homotopy-equivalence-has-a-contractible-algebraic-mapping-cone.repair.json
   precheck: pass
 sources:
   scraped: []
   references:
-    - title: "Lück, §3.1, pp.27–31"
+    - title: "Lück, A Basic Introduction to Surgery Theory, §2.2"
       url: "https://him-lueck.uni-bonn.de/data/ictp.pdf"
-      locator: "§3.1, pp.27–31"
+      locator: "§2.2, printed pp.27–31; cone contractibility p.28 and equivariant lifted chain equivalence pp.30–31"
     - title: "Davis–Kirk, §11.4, p.343"
       url: "https://www.maths.gla.ac.uk/~mpowell/Davis_Kirk_Lecture%20notes%20in%20algebraic%20topology.pdf"
       locator: "§11.4, p.343"

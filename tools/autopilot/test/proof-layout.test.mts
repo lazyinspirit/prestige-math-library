@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { scanProofFiles, writeProofLayout } from '../../proof-layout.mjs';
-import { proofLayoutInputs, proofLayoutPath, verifyProofLayout } from '../../proof-layout-receipt.mjs';
+import { proofLayoutInputs, proofLayoutPath, proofLayoutScope, verifyProofLayout } from '../../proof-layout-receipt.mjs';
 import { itemHashGuard, shortHash } from '../../item-hash.mjs';
 import { stages } from '../stages/mathlib.mts';
 
@@ -52,10 +52,13 @@ function fixture() {
   mkdirSync(join(root, 'research'));
   mkdirSync(join(root, 'library', 'algebra'), { recursive: true });
   writeFileSync(join(root, 'research', 'demo-scope-ledger.json'), JSON.stringify({ pages: [
-    { id: 'page-a', kind: 'A' }, { id: 'page-a-examples', kind: 'B' },
+    { id: 'page-a', kind: 'A', batch: '1' }, { id: 'page-a-examples', kind: 'B', batch: '1' },
   ] }));
   writeFileSync(join(root, 'library', 'algebra', 'page-a.md'), '---\npage: page-a\nitems: [thm-a]\n---\nA');
   writeFileSync(join(root, 'library', 'algebra', 'page-a-examples.md'), '---\npage: page-a-examples\nexamples:\n- thm-b\n- thm-a\n---\nB');
+  writeFileSync(join(root, 'research', 'demo-batch-1.pages.json'), JSON.stringify([
+    { id: 'page-a', items: [{ id: 'thm-a' }] }, { id: 'page-a-examples', items: ['thm-b', 'thm-a'] },
+  ]));
   const hashes = {};
   for (const id of ['thm-a', 'thm-b', 'thm-outside']) {
     const raw = item(good).replace('id: thm-a', `id: ${id}`);
@@ -66,28 +69,84 @@ function fixture() {
   return root;
 }
 
-test('one scan covers A/B/shared/touched items; receipts reject stale content, scope and renderer hashes', () => {
+test('one scan covers current A/B/shared items; receipts reject stale content, scope and renderer hashes', () => {
   const root = fixture();
   try {
     const path = join(root, 'items', 'thm-outside.md');
     writeFileSync(path, readFileSync(path, 'utf8').replace('First argument.', 'Changed first argument.'));
-    assert.deepEqual(proofLayoutInputs('demo', root).scope.files, ['items/thm-a.md', 'items/thm-b.md', 'items/thm-outside.md']);
+    assert.deepEqual(proofLayoutInputs('demo', root).scope.files, ['items/thm-a.md', 'items/thm-b.md']);
     const report = writeProofLayout('demo', root);
-    assert.equal(report.steps, 6);
+    assert.equal(report.steps, 4);
     assert.equal(verifyProofLayout('demo', root).gates['proof-blue-tags'], 'pass');
     const receiptPath = proofLayoutPath('demo', root), bytes = readFileSync(receiptPath, 'utf8');
     assert.deepEqual(writeProofLayout('demo', root), report, 'second gate reuses the same SSR scan');
     assert.equal(readFileSync(receiptPath, 'utf8'), bytes);
-    writeFileSync(path, readFileSync(path, 'utf8') + '\nLate change');
+    const manifestPath = join(root, 'research', 'demo-batch-1.pages.json');
+    const manifestBytes = readFileSync(manifestPath, 'utf8');
+    writeFileSync(manifestPath, manifestBytes + '\n');
     assert.throws(() => verifyProofLayout('demo', root), /stale/);
-    writeFileSync(path, item(good).replace('id: thm-a', 'id: thm-outside').replace('First argument.', 'Changed first argument.'));
+    writeFileSync(manifestPath, manifestBytes);
+    writeFileSync(join(root, 'items', 'thm-unrelated-late-addition.md'), 'Unrelated malformed item');
+    writeFileSync(path, readFileSync(path, 'utf8') + '\nUnrelated late change');
+    assert.deepEqual(verifyProofLayout('demo', root), report);
+    const active = join(root, 'items', 'thm-a.md'), activeBytes = readFileSync(active, 'utf8');
+    writeFileSync(active, activeBytes + '\nLate change');
+    assert.throws(() => verifyProofLayout('demo', root), /stale/);
+    writeFileSync(active, activeBytes);
     const broken = { ...report, dependencies: { ...report.dependencies, bogus: 'changed' } };
     writeFileSync(receiptPath, JSON.stringify(broken));
     assert.throws(() => verifyProofLayout('demo', root), /stale/);
     writeFileSync(receiptPath, bytes);
     const page = join(root, 'library', 'algebra', 'page-a-examples.md');
     writeFileSync(page, readFileSync(page, 'utf8').replace('- thm-b\n', ''));
-    assert.throws(() => verifyProofLayout('demo', root), /stale/);
+    assert.throws(() => verifyProofLayout('demo', root), /absent from current run pages/);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('manifest scope survives historical retirement and rejects missing or ambiguous current subjects', () => {
+  const root = fixture();
+  const manifest = join(root, 'research', 'demo-batch-1.pages.json');
+  const rows = [
+    { id: 'page-a', items: ['thm-a'] }, { id: 'page-a-examples', items: ['thm-b', 'thm-a'] },
+  ];
+  try {
+    const active = join(root, 'items', 'thm-a.md');
+    const bytes = readFileSync(active, 'utf8');
+    writeFileSync(active, bytes.replace('kind: theorem', 'aliases: [prop-retired]\nkind: theorem'));
+    // A retired carrier occurs in old corpus snapshots, but its real current
+    // owner is already promised by the manifests; history cannot add subjects.
+    writeFileSync(join(root, 'research', 'demo-touches.json'), JSON.stringify({ snapshots: [
+      { hashes: { 'prop-retired': 'old' } }, { hashes: { 'prop-retired': 'changed' } },
+    ] }));
+    assert.deepEqual(proofLayoutScope('demo', root).files, ['items/thm-a.md', 'items/thm-b.md']);
+    rows[0].items = ['prop-retired'];
+    writeFileSync(manifest, JSON.stringify(rows));
+    assert.deepEqual(proofLayoutScope('demo', root).files, ['items/thm-a.md', 'items/thm-b.md']);
+    const collision = join(root, 'items', 'prop-retired.md');
+    writeFileSync(collision, item(good).replace('id: thm-a', 'id: prop-retired'));
+    assert.throws(() => proofLayoutScope('demo', root), /collides with a real item file/);
+    rmSync(collision);
+    const second = join(root, 'items', 'thm-b.md');
+    const secondBytes = readFileSync(second, 'utf8');
+    writeFileSync(second, secondBytes.replace('kind: theorem', 'aliases: [prop-retired]\nkind: theorem'));
+    assert.throws(() => proofLayoutScope('demo', root), /ambiguous current ownership/);
+    writeFileSync(second, secondBytes);
+    rows[0].items = ['thm-missing'];
+    writeFileSync(manifest, JSON.stringify(rows));
+    assert.throws(() => proofLayoutScope('demo', root), /missing items\/thm-missing.md/);
+    rows[0].items = ['thm-outside'];
+    writeFileSync(manifest, JSON.stringify(rows));
+    assert.throws(() => proofLayoutScope('demo', root), /absent from current run pages/);
+    rows[0].items = ['thm-a'];
+    writeFileSync(manifest, JSON.stringify(rows));
+    rmSync(active);
+    assert.throws(() => proofLayoutScope('demo', root), /scoped item thm-a has no/);
+    assert.throws(() => scanProofFiles(['items/prop-retired.md'], root), /ENOENT/);
+    writeFileSync(active, bytes);
+    writeFileSync(manifest, '[]');
+    assert.throws(() => proofLayoutScope('demo', root), /empty or malformed manifest/);
+    rmSync(manifest);
+    assert.throws(() => proofLayoutScope('demo', root), /missing research\/demo-batch-1.pages.json/);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 

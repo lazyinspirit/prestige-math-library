@@ -2,35 +2,68 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { REPO, WEB_DIR, precheckSource } from './paths.mjs';
-import { runScope, sha256 } from './step9-lib.mjs';
+import { runScope, sha256, splitFrontmatter } from './step9-lib.mjs';
+import { frontmatterList } from './frontmatter-list.mjs';
 import { LAYOUT_GATES } from './proof-layout-core.mjs';
 
 export const proofLayoutPath = (run, root = REPO) => join(root, 'research', `${run}-proof-layout.json`);
 
 export function proofLayoutScope(run, root = REPO) {
   const scope = runScope(run, root);
+  // Seal the run's workflow history without using its corpus inventory as scope.
   const touchFile = `research/${run}-touches.json`;
   const touches = JSON.parse(readFileSync(join(root, touchFile), 'utf8'));
   if (!Array.isArray(touches.snapshots) || !touches.snapshots.length
     || touches.snapshots.some(s => !s.hashes || typeof s.hashes !== 'object')) throw Error('proof-layout: missing or malformed touch snapshots');
-  const manifests = readdirSync(join(root, 'research')).filter(name =>
-    name.startsWith(`${run}-batch-`) && /^\d+\.pages\.json$/.test(name.slice(`${run}-batch-`.length))).sort();
-  if (!manifests.length) throw Error('proof-layout: missing frontier manifests');
-  const ids = new Set();
-  for (const name of manifests) {
-    const pages = JSON.parse(readFileSync(join(root, 'research', name), 'utf8'));
-    if (!Array.isArray(pages) || !pages.length) throw Error(`proof-layout: malformed manifest ${name}`);
-    for (const page of pages) for (const item of page.items ?? []) ids.add(typeof item === 'string' ? item : item.id);
+  // The current batch manifests own validator subjects. Touch snapshots are
+  // historical corpus inventories, including retired IDs and unrelated repairs;
+  // they must not create Step-9 subjects (CLAUDE.md §25).
+  const manifestFiles = [...new Set(scope.pages.map(page => {
+    if (!/^\d+$/.test(page.batch)) throw Error(`proof-layout: page ${page.id} has no valid manifest batch`);
+    return `research/${run}-batch-${page.batch}.pages.json`;
+  }))].sort();
+  if (!manifestFiles.length) throw Error('proof-layout: missing frontier manifests');
+  const owners = new Map();
+  for (const item of scope.items) {
+    const fm = splitFrontmatter(readFileSync(join(root, item.file), 'utf8')).frontmatter;
+    for (const alias of frontmatterList(fm, 'aliases')) {
+      const ids = owners.get(alias) ?? new Set();
+      ids.add(item.id);
+      owners.set(alias, ids);
+    }
   }
-  const files = [...ids].sort().map(id => {
-    if (!/^[a-z][a-z0-9-]*$/.test(id)) throw Error(`proof-layout: invalid item ID ${id}`);
-    const file = `items/${id}.md`;
+  const currentIds = new Set(scope.items.map(item => item.id));
+  const canonical = id => {
+    if (typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/.test(id)) throw Error(`proof-layout: invalid item ID ${id}`);
+    if (currentIds.has(id)) return id;
+    const candidates = owners.get(id);
+    if (candidates?.size && existsSync(join(root, `items/${id}.md`))) throw Error(`proof-layout: alias ${id} collides with a real item file`);
+    if (candidates?.size === 1) return [...candidates][0];
+    if (candidates?.size > 1) throw Error(`proof-layout: ambiguous current ownership for ${id}`);
+    if (!existsSync(join(root, `items/${id}.md`))) throw Error(`proof-layout: missing items/${id}.md`);
+    throw Error(`proof-layout: manifest item ${id} is absent from current run pages`);
+  };
+  const pages = new Map();
+  for (const file of manifestFiles) {
     if (!existsSync(join(root, file))) throw Error(`proof-layout: missing ${file}`);
-    return file;
-  });
+    const raw = JSON.parse(readFileSync(join(root, file), 'utf8'));
+    const rows = Array.isArray(raw) ? raw : raw.pages;
+    if (!Array.isArray(rows) || !rows.length) throw Error(`proof-layout: empty or malformed manifest ${file}`);
+    for (const row of rows) {
+      if (typeof row.id !== 'string' || pages.has(row.id) || !Array.isArray(row.items) || !row.items.length) {
+        throw Error(`proof-layout: invalid or duplicate manifest page ${row.id}`);
+      }
+      pages.set(row.id, [...new Set(row.items.map(item => canonical(typeof item === 'string' ? item : item?.id)))].sort());
+    }
+  }
+  if (pages.size !== scope.pages.length || scope.pages.some(page =>
+    JSON.stringify(pages.get(page.id)) !== JSON.stringify([...new Set(page.items)].sort()))) {
+    throw Error('proof-layout: current manifests and run pages disagree');
+  }
+  const files = [...new Set([...pages.values()].flat())].sort().map(id => `items/${id}.md`);
   if (!files.length) throw Error('proof-layout: empty item scope');
   return { pages: scope.pages.map(p => ({ id: p.id, kind: p.kind, file: p.file, items: p.items })), files,
-    inputs: [...new Set([scope.ledger, touchFile, ...manifests.map(name => `research/${name}`), ...scope.pages.map(p => p.file), ...files])].sort() };
+    inputs: [...new Set([scope.ledger, touchFile, ...manifestFiles, ...scope.pages.map(p => p.file), ...files])].sort() };
 }
 
 function sourceFiles(dir) {

@@ -1,0 +1,619 @@
+[
+  {
+    "order": 919,
+    "id": "eilenberg-watts-theorem-and-natural-transformations",
+    "kind": "A",
+    "category": "homological-algebra",
+    "title": "Eilenberg–Watts Theorem and Natural Transformations",
+    "companion": "eilenberg-watts-theorem-and-natural-transformations-examples",
+    "requires": [
+      "tensor-products-of-modules",
+      "free-modules-and-exact-sequences",
+      "abelian-categories",
+      "limits-and-colimits",
+      "adjunctions-units-and-counits",
+      "tor-flatness-and-global-dimension"
+    ],
+    "items": [
+      {
+        "id": "def-additive-cocontinuous-module-functor",
+        "kind": "definition",
+        "title": "Additive cocontinuous module functors and their category",
+        "deps": [
+          "def-additive-functor",
+          "def-preservation-reflection-creation-continuity-and-cocontinuity",
+          "def-functor-category",
+          "def-left-exact-and-right-exact-functor",
+          "def-left-and-right-modules",
+          "rem-category-theory-class-and-size-conventions"
+        ],
+        "dependency_level": 0,
+        "justified_by": [
+          "lem-additive-cocontinuous-module-functors-form-a-category"
+        ],
+        "statement": "Let $A$ and $B$ be unital rings. A functor $F:A\\text{-Mod}\\to B\\text{-Mod}$ is **additive cocontinuous** when it is additive and preserves every small (set-indexed) colimit. Equivalently, an additive functor is cocontinuous exactly when it preserves arbitrary direct sums and cokernels (the characterization proved in the following lemma). Restricting the functors between $A\\text{-Mod}$ and $B\\text{-Mod}$ to the additive cocontinuous ones, with all natural transformations as morphisms, componentwise identities and vertical composition, gives a locally small category $\\mathrm{Fun}^{\\mathrm{coc}}_{\\mathrm{add}}(A\\text{-Mod},B\\text{-Mod})$. The term is a property of a functor; no commutativity of $A$ or $B$ is assumed, and no choice is used.",
+        "proof_strategy": "Define the property on functors between the fixed module categories $A\\text{-Mod}$ and $B\\text{-Mod}$ ([[def-left-and-right-modules]]; both are abelian and cocomplete by [[thm-modules-over-a-ring-form-an-abelian-category]] and [[thm-rmod-is-complete-and-cocomplete]]). Cocontinuity is preservation of every small colimit in the sense of [[def-preservation-reflection-creation-continuity-and-cocontinuity]] and additivity is [[def-additive-functor]]. The class is large, so form it inside the definable-class convention of [[rem-category-theory-class-and-size-conventions]] rather than as a small functor category; [[def-functor-category]] is the small-source construction being restricted. The assertion that the restricted class is a locally small category is not free: it is justified by [[lem-additive-cocontinuous-module-functors-form-a-category]], which proves closure under identities and composition and the local-smallness argument that natural transformations are determined by their component at $A$. The right-exactness reformulation cited in the definition is proved in [[lem-additive-module-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving]]; the definition itself asserts no further theorem.\n\n**Proof technique:** construction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-tensoring-with-a-right-module-is-additive-right-exact-and-preserves-direct-sums",
+        "kind": "lemma",
+        "title": "The functor $M\\otimes_A-$ is additive, right exact, and preserves direct sums over an arbitrary unital ring",
+        "deps": [
+          "thm-universal-property-of-module-tensor-products",
+          "prop-functoriality-of-module-tensor-products",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "def-direct-sum-of-a-family-of-modules",
+          "thm-universal-property-of-module-direct-sums",
+          "def-exact-and-short-exact-sequences-of-modules",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "thm-bimodule-actions-induced-on-tensor-products",
+          "def-bimodule"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $A$ be a unital ring and $M$ a right $A$-module. Then the functor $T_M=M\\otimes_A-:A\\text{-Mod}\\to\\mathbf{Ab}$ is additive, preserves cokernels (so it is right exact: every exact sequence $X\\to Y\\to Z\\to 0$ of left $A$-modules induces an exact sequence $M\\otimes_AX\\to M\\otimes_AY\\to M\\otimes_AZ\\to 0$), and preserves arbitrary direct sums: the natural map $\\bigoplus_{i\\in I}(M\\otimes_AX_i)\\to M\\otimes_A(\\bigoplus_{i\\in I}X_i)$ induced by the coordinate inclusions is an isomorphism, including $I=\\varnothing$. If $M$ is a $(B,A)$-bimodule then $T_M$ takes values in left $B$-modules and all the displayed maps are $B$-linear. No commutativity of $A$ or $B$ is assumed and no choice is used.",
+        "proof_strategy": "(1) Additivity: for parallel left $A$-linear maps $f,g:X\\to Y$, both $(f+g)\\otimes1$ and $f\\otimes1+g\\otimes1$ are group homomorphisms ([[thm-universal-property-of-module-tensor-products]], [[prop-functoriality-of-module-tensor-products]]) that agree on every elementary tensor, and elementary tensors generate ([[def-tensor-product-of-modules-by-generators-and-relations]]).\n\n(2) Direct sums: let $\\Phi=\\bigoplus_i(M\\otimes_AX_i)\\to M\\otimes_A(\\bigoplus_iX_i)$ be induced by the maps $\\jmath_i\\otimes1$ from the universal property of the direct sum ([[def-direct-sum-of-a-family-of-modules]], [[thm-universal-property-of-module-direct-sums]]), and let $\\Psi$ be induced from the balanced pairing $(m,(x_i))\\mapsto(m\\otimes x_i)_i$, which has finite support. Then $\\Psi\\Phi$ fixes every $\\jmath_i(m\\otimes x_i)$ and $\\Phi\\Psi$ fixes every elementary tensor, so both composites are the identity by the two universal properties.\n\n(3) Right exactness: given an exact $X\\xrightarrow fY\\xrightarrow gZ\\to0$, the map $1\\otimes g$ is surjective because $g$ is surjective and every tensor is a finite sum of elementary tensors; functoriality gives $(1\\otimes g)(1\\otimes f)=0$. Let $Q=(M\\otimes_AY)/\\operatorname{im}(1\\otimes f)$ as an abelian group ([[def-quotient-group]]). For $z\\in Z$ choose $y\\in Y$ with $g(y)=z$ and set $b(m,z)=[m\\otimes y]\\in Q$; if $y'$ is another lift then $y-y'=f(x)$, so $m\\otimes y-m\\otimes y'=(1\\otimes f)(m\\otimes x)\\in\\operatorname{im}(1\\otimes f)$ and $b$ is well defined. The identities $[(m+m')\\otimes y]=[m\\otimes y]+[m'\\otimes y]$, $[m\\otimes(y+y')]=[m\\otimes y]+[m\\otimes y']$ and $[(ma)\\otimes y]=[m\\otimes(ay)]$ make $b$ balanced, so the universal property gives $h:M\\otimes_AZ\\to Q$ with $h(m\\otimes z)=[m\\otimes y]$. Then $h\\circ(1\\otimes g)$ and $(1\\otimes g)\\circ h$ are the identity on generators, so $1\\otimes g$ presents $M\\otimes_AZ$ as $(M\\otimes_AY)/\\operatorname{im}(1\\otimes f)$; hence $\\ker(1\\otimes g)=\\operatorname{im}(1\\otimes f)$ ([[def-exact-and-short-exact-sequences-of-modules]], [[def-module-homomorphism-kernel-image-and-cokernel]]).\n\n(4) Bimodules: if $M$ is a $(B,A)$-bimodule, $M\\otimes_AX$ carries the left $B$-action $b'(m\\otimes x)=(b'm)\\otimes x$ ([[thm-bimodule-actions-induced-on-tensor-products]]), every pairing above is $B$-linear in $m$, and every induced map is therefore $B$-linear. No step chooses elements globally, so no choice is used.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-evaluation-on-the-regular-module-has-a-commuting-right-action",
+        "kind": "lemma",
+        "title": "$F(A)$ is a $(B,A)$-bimodule for every additive functor $F$",
+        "deps": [
+          "def-bimodule",
+          "def-additive-functor",
+          "def-functor-and-contravariant-functor",
+          "def-left-and-right-modules"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $A,B$ be unital rings and $F:A\\text{-Mod}\\to B\\text{-Mod}$ additive. On the left $B$-module $M=F(A)$ define, for $a\\in A$ and $m\\in M$, $ma:=F(r_a)(m)$, where $r_a:A\\to A$, $r_a(x)=xa$ is right multiplication (a left $A$-linear endomorphism of $A$). Together with the given left $B$-action, this makes $M$ a $(B,A)$-bimodule: the right $A$-action satisfies the unit, associativity, and distributivity laws and commutes with the left $B$-action. No commutativity of the rings is assumed and no choice is used.",
+        "proof_strategy": "Each $r_a$ is a left $A$-module endomorphism of $A$, so $F(r_a)$ is a well-defined $B$-linear endomorphism of $M$. The right-module laws follow from functoriality and additivity of $F$ ([[def-functor-and-contravariant-functor]], [[def-additive-functor]]): $r_1=\\mathrm{id}_A$ gives $m1=m$; $r_{a+a'}=r_a+r_{a'}$ gives $m(a+a')=ma+ma'$; $r_{aa'}=r_{a'}\\circ r_a$ gives $m(aa')=(ma)a'$. The two actions commute because each $F(r_a)$ is $B$-linear: $b(ma)=bF(r_a)(m)=F(r_a)(bm)=(bm)a$. Hence $M$ is a $(B,A)$-bimodule in the sense of [[def-bimodule]]. No element of an auxiliary set is chosen.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-tensor-hom-adjunction-for-bimodules",
+        "kind": "lemma",
+        "title": "Tensor-Hom adjunction for bimodules over arbitrary unital rings",
+        "deps": [
+          "def-bimodule",
+          "def-left-and-right-modules",
+          "def-balanced-and-bilinear-maps",
+          "thm-universal-property-of-module-tensor-products",
+          "thm-bimodule-actions-induced-on-tensor-products",
+          "def-hom-groups-and-induced-hom-maps",
+          "prop-functoriality-of-module-tensor-products",
+          "def-adjunction-by-unit-counit-and-triangle-identities"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $A,B$ be unital rings, $M$ a $(B,A)$-bimodule, $X$ a left $A$-module and $Y$ a left $B$-module. Then $\\operatorname{Hom}_B(M,Y)$ is a left $A$-module under $(a\\varphi)(m)=\\varphi(ma)$, and currying $\\Theta:\\operatorname{Hom}_B(M\\otimes_AX,Y)\\to\\operatorname{Hom}_A(X,\\operatorname{Hom}_B(M,Y))$, $\\Theta(F)(x)=[m\\mapsto F(m\\otimes x)]$, is a natural bijection; its inverse sends $\\varphi$ to the $B$-linear map $M\\otimes_AX\\to Y$ determined by $m\\otimes x\\mapsto\\varphi(x)(m)$. Consequently $T_M=M\\otimes_A-$ is left adjoint to $\\operatorname{Hom}_B(M,-)$. No commutativity is assumed and no choice is used.",
+        "proof_strategy": "Well-definedness of the left $A$-action: for fixed $\\varphi$ the map $m\\mapsto\\varphi(ma)$ is additive and $B$-linear, since $\\varphi(b(ma))=(\\varphi(bm))a$ by $B$-linearity of $\\varphi$ and the commuting actions of [[def-bimodule]]; the module laws follow from those of $M$ and of the abelian group $\\operatorname{Hom}_B(M,Y)$ ([[def-hom-groups-and-induced-hom-maps]]).\n\nFor $F\\in\\operatorname{Hom}_B(M\\otimes_AX,Y)$, $\\Theta(F)(x)$ is $B$-linear, and $\\Theta(F)$ is $A$-linear because $\\Theta(F)(ax)(m)=F(m\\otimes ax)=F((ma)\\otimes x)=\\Theta(F)(x)(ma)=(a\\Theta(F)(x))(m)$ by balance. For $\\varphi\\in\\operatorname{Hom}_A(X,\\operatorname{Hom}_B(M,Y))$, the prescription $u(m\\otimes x)=\\varphi(x)(m)$ is additive in each variable and balanced: $u(ma\\otimes x)=\\varphi(x)(ma)=(a\\varphi(x))(m)=\\varphi(ax)(m)=u(m\\otimes ax)$; it is $B$-linear since each $\\varphi(x)$ is. The universal property of the tensor product ([[thm-universal-property-of-module-tensor-products]]) makes $u$ well defined, and the tensor product carries the left $B$-action needed for the statement ([[thm-bimodule-actions-induced-on-tensor-products]]). The two constructions are inverse on generators, hence inverse by the universal property; naturality in $X$ and $Y$ is the commutativity of the evident squares, checked on $m\\otimes x$ and using functoriality ([[prop-functoriality-of-module-tensor-products]]). This is the objectwise form of $T_M\\dashv\\operatorname{Hom}_B(M,-)$. No element is chosen.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-additive-cocontinuous-module-functors-form-a-category",
+        "kind": "lemma",
+        "title": "Additive cocontinuous module functors form a locally small category",
+        "deps": [
+          "def-additive-cocontinuous-module-functor",
+          "def-additive-functor",
+          "def-natural-transformation",
+          "def-vertical-composition-of-natural-transformations",
+          "lem-vertical-composition-of-natural-transformations-is-natural",
+          "cor-every-module-is-a-quotient-of-a-free-module",
+          "thm-a-left-exact-functor-preserves-monomorphisms-and-a-right-exact-functor-preserves-epimorphisms",
+          "def-left-exact-and-right-exact-functor",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "def-direct-sum-of-a-family-of-modules",
+          "thm-universal-property-of-module-direct-sums"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $A,B$ be unital rings. The additive cocontinuous functors $A\\text{-Mod}\\to B\\text{-Mod}$, with all natural transformations as morphisms, componentwise identities and vertical composition, form a category. It is locally small: for any two such functors $F,G$ the map $\\eta\\mapsto\\eta_A$ from the class of natural transformations $F\\Rightarrow G$ into the set $\\operatorname{Hom}_B(F(A),G(A))$ is injective, so each Hom-collection is a set. No choice is used.",
+        "proof_strategy": "Closure and category axioms: the identity functor preserves every colimit, and a composite of additive cocontinuous functors is additive and cocontinuous because a colimit preserved by the first functor is carried to one preserved by the second; identities and vertical composition obey the functor-category laws componentwise ([[def-natural-transformation]], [[def-vertical-composition-of-natural-transformations]]).\n\nLocal smallness: fix $F,G$ and a natural $\\eta:F\\Rightarrow G$. For a free module $A^{(I)}=\\bigoplus_{i\\in I}A$ ([[def-direct-sum-of-a-family-of-modules]]) naturality of $\\eta$ at the coproduct inclusions $\\iota_i:A\\to A^{(I)}$ gives $\\eta_{A^{(I)}}\\circ F(\\iota_i)=G(\\iota_i)\\circ\\eta_A$; since $F$ and $G$ preserve the coproduct and the inclusions are jointly epic ([[thm-universal-property-of-module-direct-sums]]), $\\eta_{A^{(I)}}$ is determined by $\\eta_A$. For arbitrary $X$ take the canonical free cover $q_X:A^{(|X|)}\\to X$ ([[cor-every-module-is-a-quotient-of-a-free-module]]). A cocontinuous functor is right exact, hence preserves epimorphisms ([[thm-a-left-exact-functor-preserves-monomorphisms-and-a-right-exact-functor-preserves-epimorphisms]]), so $F(q_X)$ and $G(q_X)$ are epic, and naturality $\\eta_X\\circ F(q_X)=G(q_X)\\circ\\eta_{A^{(|X|)}}$ together with the previous step determines $\\eta_X$ from $\\eta_A$. Therefore $\\eta\\mapsto\\eta_A$ is injective into the set $\\operatorname{Hom}_B(F(A),G(A))$, and the restricted class is a locally small category. No presentation or element is chosen globally.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-additive-module-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving",
+        "kind": "lemma",
+        "title": "Cocontinuity of an additive module functor equals right exactness plus coproduct preservation",
+        "deps": [
+          "def-additive-cocontinuous-module-functor",
+          "def-left-exact-and-right-exact-functor",
+          "thm-small-colimits-from-coproducts-and-coequalizers",
+          "thm-rmod-is-complete-and-cocomplete",
+          "cor-in-a-preadditive-category-the-coequalizer-of-a-parallel-pair-is-the-cokernel-of-their-difference",
+          "thm-an-additive-functor-preserves-finite-biproducts",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "def-direct-sum-of-a-family-of-modules",
+          "thm-universal-property-of-module-direct-sums"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $A,B$ be unital rings and $F:A\\text{-Mod}\\to B\\text{-Mod}$ additive. Then $F$ preserves all small colimits if and only if $F$ preserves cokernels and arbitrary direct sums. Equivalently, $F$ is additive cocontinuous if and only if it is right exact (preserves every finite colimit that exists) and preserves arbitrary coproducts. No commutativity and no choice are used.",
+        "proof_strategy": "($\\Leftarrow$) Assume $F$ preserves cokernels and arbitrary direct sums. Let $D:\\mathcal J\\to A\\text{-Mod}$ be a small diagram with colimit $L$. By [[thm-small-colimits-from-coproducts-and-coequalizers]] the colimit $L$ is the coequalizer of $d,c:R\\rightrightarrows S$ with $R=\\coprod_{u}D(j)$, $S=\\coprod_jD(j)$; these colimits exist by [[thm-rmod-is-complete-and-cocomplete]]. In the additive category $A\\text{-Mod}$ the coequalizer of $d,c$ is the cokernel of $d-c$ ([[cor-in-a-preadditive-category-the-coequalizer-of-a-parallel-pair-is-the-cokernel-of-their-difference]]), which $F$ preserves; and $F$ preserves the two coproducts, so $F(L)$ is the coequalizer of $F(d),F(c)$. Applying the construction theorem to $F\\circ D$ identifies that coequalizer as a colimit of $F\\circ D$; hence $F$ preserves all small colimits.\n\n($\\Rightarrow$) Each coproduct and each cokernel is a small colimit, so a cocontinuous $F$ preserves them; preservation of finite colimits is right exactness in the sense of [[def-left-exact-and-right-exact-functor]].\n\nThe equivalence of 'preserves cokernels' with 'right exact' for additive functors uses that an additive functor preserves finite biproducts ([[thm-an-additive-functor-preserves-finite-biproducts]]), the identification of coequalizers with cokernels of differences quoted above, and the existence of the relevant colimits in the abelian module category ([[thm-modules-over-a-ring-form-an-abelian-category]]). No step selects elements or presentations.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-canonical-eilenberg-watts-comparison-is-balanced-and-natural",
+        "kind": "lemma",
+        "title": "The canonical comparison to the tensor functor of $F(A)$ is balanced and natural",
+        "deps": [
+          "lem-evaluation-on-the-regular-module-has-a-commuting-right-action",
+          "thm-universal-property-of-module-tensor-products",
+          "thm-bimodule-actions-induced-on-tensor-products",
+          "def-natural-transformation",
+          "def-balanced-and-bilinear-maps",
+          "def-left-and-right-modules",
+          "prop-functoriality-of-module-tensor-products"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $A,B$ be unital rings, $F:A\\text{-Mod}\\to B\\text{-Mod}$ additive, and $M=F(A)$ with the $(B,A)$-bimodule structure of the evaluation lemma. For $x\\in X$ let $\\ell_x:A\\to X$, $\\ell_x(a)=ax$. Then $\\beta_X:M\\times X\\to F(X)$, $\\beta_X(m,x)=F(\\ell_x)(m)$, is balanced and $B$-linear in $m$, so it induces a unique group homomorphism $\\tau_X:M\\otimes_AX\\to F(X)$ with $\\tau_X(m\\otimes x)=F(\\ell_x)(m)$; each $\\tau_X$ is $B$-linear, and $\\tau:\\,M\\otimes_A-\\Rightarrow F$ is natural: $F(u)\\tau_X=\\tau_Y(1_M\\otimes u)$ for every left $A$-linear $u:X\\to Y$. The construction of $\\tau$ chooses no presentation of $X$ and no elements.",
+        "proof_strategy": "Each $\\ell_x$ is left $A$-linear, and $\\ell_{x+x'}=\\ell_x+\\ell_{x'}$; additivity of $F$ gives additivity of $\\beta_X$ in $x$, while $F(\\ell_x)$ is additive in $m$. Balance: $\\ell_{ax}=\\ell_x\\circ r_a$, so $\\beta_X(ma,x)=F(\\ell_x)F(r_a)(m)=F(\\ell_{ax})(m)=\\beta_X(m,ax)$. $B$-linearity in $m$: $F(\\ell_x)$ is $B$-linear, and $M\\otimes_AX$ carries the left $B$-action $b(m\\otimes x)=(bm)\\otimes x$ ([[thm-bimodule-actions-induced-on-tensor-products]]). The universal property of the tensor product ([[thm-universal-property-of-module-tensor-products]]) yields the unique homomorphism $\\tau_X$ with the displayed formula, and it is $B$-linear because $\\beta_X$ is $B$-linear in its first variable. Naturality: $u\\circ\\ell_x=\\ell_{u(x)}$, hence $F(u)F(\\ell_x)=F(\\ell_{u(x)})$; evaluating on $m$ gives $F(u)\\tau_X(m\\otimes x)=\\tau_Y(m\\otimes u(x))=\\tau_Y(1_M\\otimes u)(m\\otimes x)$, and elementary tensors generate ([[prop-functoriality-of-module-tensor-products]], [[def-natural-transformation]]). No presentation is chosen, so well-definedness precedes any universality or presentation claim.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-canonical-free-presentation-controls-eilenberg-watts-comparison",
+        "kind": "lemma",
+        "title": "Canonical free presentations force the comparison to be an isomorphism",
+        "deps": [
+          "lem-canonical-eilenberg-watts-comparison-is-balanced-and-natural",
+          "lem-evaluation-on-the-regular-module-has-a-commuting-right-action",
+          "lem-additive-module-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving",
+          "lem-tensoring-with-a-right-module-is-additive-right-exact-and-preserves-direct-sums",
+          "cor-every-module-is-a-quotient-of-a-free-module",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "def-exact-and-short-exact-sequences-of-modules",
+          "def-kernels-and-cokernels-as-equalizers-and-coequalizers",
+          "def-direct-sum-of-a-family-of-modules",
+          "thm-universal-property-of-module-direct-sums",
+          "prop-functoriality-of-module-tensor-products"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $A,B$ be unital rings and $F:A\\text{-Mod}\\to B\\text{-Mod}$ additive, right exact, and coproduct-preserving; put $M=F(A)$ with the $(B,A)$-bimodule structure of the evaluation lemma. Then the canonical comparison $\\tau:M\\otimes_A-\\Rightarrow F$ is a natural isomorphism. Consequently $F$ is naturally isomorphic to the tensor functor $T_{F(A)}$. No commutativity and no choice are used.",
+        "proof_strategy": "(i) At $A$: $\\tau_A(m\\otimes a)=F(\\ell_a)(m)=ma$, which is the tensor-unit isomorphism $\\rho_M:M\\otimes_AA\\to M$ ([[thm-unit-isomorphisms-for-module-tensor-products]]).\n\n(ii) At a free module $A^{(I)}=\\bigoplus_{i\\in I}A$: both $F$ and $T_M$ preserve the coproduct (hypothesis; [[lem-tensoring-with-a-right-module-is-additive-right-exact-and-preserves-direct-sums]]), and naturality of $\\tau$ at the coproduct inclusions exhibits $\\tau_{A^{(I)}}$ as $\\bigoplus_i\\tau_A$ under the canonical identifications, hence an isomorphism.\n\n(iii) At arbitrary $X$: build the canonical presentation $A^{(|K_X|)}\\xrightarrow{d_X}A^{(|X|)}\\xrightarrow{q_X}X\\to0$, where $q_X(e_x)=x$ is the free cover of [[cor-every-module-is-a-quotient-of-a-free-module]] and $d_X$ is the composite of a free cover of $K_X=\\ker q_X$ with the inclusion; it is exact at $A^{(|X|)}$ and at $X$, and the first map need not be monic ([[def-exact-and-short-exact-sequences-of-modules]]). Applying the right-exact functors $F$ and $T_M$ and the natural $\\tau$ produces a map of right-exact sequences whose first two vertical arrows are isomorphisms by (ii). Cokernel universality-not a five-lemma shortcut-produces the induced map $\\tau_X$ and shows it is an isomorphism: the inverse on cokernels is the unique map induced by the two inverse isomorphisms on the free terms. Hence $\\tau_X$ is an isomorphism for every $X$, and $\\tau$ was already natural, so $\\tau$ is a natural isomorphism. No presentation independence argument is needed because $\\tau$ was defined before any presentation was chosen.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            },
+            {
+              "title": "P. Etingof, S. Gelaki, D. Nikshych, V. Ostrik, Tensor Categories, §1.8, Proposition 1.8.10 (finite-dimensional free-presentation argument)",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-natural-transformations-of-tensor-functors-are-bimodule-maps",
+        "kind": "theorem",
+        "title": "Natural transformations between tensor functors are bimodule maps",
+        "deps": [
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "thm-bimodule-actions-induced-on-tensor-products",
+          "prop-functoriality-of-module-tensor-products",
+          "def-bimodule",
+          "def-natural-transformation",
+          "def-vertical-composition-of-natural-transformations",
+          "def-hom-groups-and-induced-hom-maps"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $A,B$ be unital rings and $M,M'$ $(B,A)$-bimodules, with tensor functors $T_M=M\\otimes_A-$ and $T_{M'}=M'\\otimes_A-$. Under the tensor-unit isomorphisms $M\\otimes_AA\\cong M$ and $M'\\otimes_AA\\cong M'$, every natural transformation $\\eta:T_M\\Rightarrow T_{M'}$ corresponds to a $B$-linear map $f=\\rho_{M'}^{-1}\\circ\\eta_A\\circ\\rho_M:M\\to M'$ satisfying $f(ma)=f(m)a$ for all $a\\in A$, i.e. a $(B,A)$-bimodule map, and then $\\eta_X=f\\otimes1_X$ for every left $A$-module $X$. Conversely every bimodule map $f:M\\to M'$ yields a natural transformation with components $f\\otimes1_X$. The two assignments are inverse bijections $\\operatorname{Nat}(T_M,T_{M'})\\cong\\operatorname{Hom}_{B\\text{-}A}(M,M')$, compatible with addition, identities, and vertical composition. No commutativity and no choice are used.",
+        "proof_strategy": "Given $\\eta$, define $f$ by the displayed formula using the tensor-unit isomorphisms ([[thm-unit-isomorphisms-for-module-tensor-products]]); this is a $B$-linear map. Naturality of $\\eta$ at the right multiplications $r_a:A\\to A$ reads $\\eta_A\\circ(1_M\\otimes r_a)=(1_{M'}\\otimes r_a)\\circ\\eta_A$ and, evaluated on $m\\otimes1$, gives $f(ma)=f(m)a$; so $f$ is a bimodule map ([[def-bimodule]]). Naturality at $\\ell_x:A\\to X$ reads $\\eta_X\\circ(1_M\\otimes\\ell_x)=(1_{M'}\\otimes\\ell_x)\\circ\\eta_A$ and, evaluated on $m\\otimes1$, gives $\\eta_X(m\\otimes x)=f(m)\\otimes x$; since elementary tensors generate, $\\eta_X=f\\otimes1_X$ and $\\eta$ is determined by $f$ ([[prop-functoriality-of-module-tensor-products]]). Conversely, for a bimodule map $f$ the components $f\\otimes1_X$ are natural in $X$ by functoriality of the tensor product. The correspondences preserve addition because $\\otimes$ is additive on morphisms, fix identities, and respect vertical composition because $(f\\otimes1_X)\\circ(g\\otimes1_X)=(f\\circ g)\\otimes1_X$; hence they are inverse bijections ([[def-hom-groups-and-induced-hom-maps]], [[def-natural-transformation]]). Nothing is chosen.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-eilenberg-watts-for-arbitrary-unital-rings",
+        "kind": "theorem",
+        "title": "Eilenberg-Watts theorem for arbitrary unital rings",
+        "deps": [
+          "def-additive-cocontinuous-module-functor",
+          "lem-additive-cocontinuous-module-functors-form-a-category",
+          "lem-additive-module-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving",
+          "lem-evaluation-on-the-regular-module-has-a-commuting-right-action",
+          "lem-tensoring-with-a-right-module-is-additive-right-exact-and-preserves-direct-sums",
+          "lem-canonical-free-presentation-controls-eilenberg-watts-comparison",
+          "thm-natural-transformations-of-tensor-functors-are-bimodule-maps",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "def-bimodule"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $A,B$ be unital rings. (i) For every $(B,A)$-bimodule $M$ the functor $T_M=M\\otimes_A-$ is additive, right exact, coproduct-preserving and therefore cocontinuous, and the assignment $M\\mapsto T_M$ is functorial: a bimodule map $f:M\\to M'$ gives the natural transformation with components $f\\otimes1_X$. (ii) Conversely every additive cocontinuous functor $F:A\\text{-Mod}\\to B\\text{-Mod}$ is naturally isomorphic to $T_{F(A)}$, where $F(A)$ carries the $(B,A)$-bimodule structure $ma=F(r_a)(m)$. Hence, up to natural isomorphism, the additive cocontinuous functors are exactly the tensor functors with bimodule kernels: the quasi-inverse of $M\\mapsto T_M$ is $F\\mapsto F({}_AA)$. No commutativity of $A$ or $B$ is assumed and no choice is used.",
+        "proof_strategy": "For (ii), the equivalence between cocontinuity and right exactness plus coproduct preservation ([[lem-additive-module-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving]]) places $F$ in the class handled by [[lem-canonical-free-presentation-controls-eilenberg-watts-comparison]], whose canonical comparison $\\tau:T_{F(A)}\\Rightarrow F$ is built in [[lem-canonical-eilenberg-watts-comparison-is-balanced-and-natural]] and proved to be a natural isomorphism; the bimodule structure on $F(A)$ is [[lem-evaluation-on-the-regular-module-has-a-commuting-right-action]]. For (i), additivity, right exactness, and direct-sum preservation of $T_M$ are [[lem-tensoring-with-a-right-module-is-additive-right-exact-and-preserves-direct-sums]], and those give cocontinuity again by the colimit characterization; functoriality of $M\\mapsto T_M$ is functoriality of the tensor product, $f\\mapsto f\\otimes1$. The category statement for the functor side, including local smallness of the Hom-collections appearing in the equivalence, is [[lem-additive-cocontinuous-module-functors-form-a-category]]. Every argument uses only universal properties of tensor products, direct sums, and cokernels, so neither commutativity nor choice is used.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Fuchs, G. Schaumann, C. Schweigert, Eilenberg-Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, introduction (classical statement for unital rings)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            },
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-eilenberg-watts-is-an-equivalence-of-hom-categories",
+        "kind": "corollary",
+        "title": "Eilenberg-Watts is an equivalence of Hom categories",
+        "deps": [
+          "thm-eilenberg-watts-for-arbitrary-unital-rings",
+          "thm-natural-transformations-of-tensor-functors-are-bimodule-maps",
+          "lem-additive-cocontinuous-module-functors-form-a-category",
+          "def-full-faithful-and-essentially-surjective-functor",
+          "thm-fully-faithful-split-essentially-surjective-characterises-equivalence",
+          "def-natural-isomorphism",
+          "def-bimodule"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $A,B$ be unital rings. The assignment $M\\mapsto T_M$ extends to an equivalence of categories between the category of $(B,A)$-bimodules with bimodule maps and the category of additive cocontinuous functors $A\\text{-Mod}\\to B\\text{-Mod}$ with natural transformations. It is full and faithful with $\\operatorname{Nat}(T_M,T_{M'})\\cong\\operatorname{Hom}_{B\\text{-}A}(M,M')$, naturally in $M$ and $M'$, and essentially surjective by the theorem; a quasi-inverse is $F\\mapsto F({}_AA)$. In particular $T_M\\cong T_{M'}$ if and only if $M\\cong M'$ as $(B,A)$-bimodules. No commutativity and no choice are used.",
+        "proof_strategy": "Fullness and faithfulness are the bijection [[thm-natural-transformations-of-tensor-functors-are-bimodule-maps]]; it is compatible with identities and composition because $\\otimes$ acts functorially and additively on morphisms, so $M\\mapsto T_M$ is a functor. Essential surjectivity is part (ii) of [[thm-eilenberg-watts-for-arbitrary-unital-rings]]. A functor that is full, faithful, and essentially surjective is an equivalence, and on objects the round trip $F\\mapsto F(A)\\mapsto T_{F(A)}$ is the canonical natural isomorphism $\\tau$ of the free-presentation lemma. The functor side is a locally small category by [[lem-additive-cocontinuous-module-functors-form-a-category]], and the bimodule side is locally small because each $\\operatorname{Hom}_{B\\text{-}A}(M,M')$ is a set of functions ([[def-bimodule]]), so the equivalence is an equivalence of categories in the definable-class convention. Nothing is chosen.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-cocontinuous-additive-module-functors-admit-right-adjoints",
+        "kind": "corollary",
+        "title": "Additive cocontinuous module functors admit right adjoints",
+        "deps": [
+          "thm-eilenberg-watts-for-arbitrary-unital-rings",
+          "lem-tensor-hom-adjunction-for-bimodules",
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "def-horizontal-composition-and-whiskering-of-natural-transformations",
+          "def-natural-isomorphism",
+          "def-vertical-composition-of-natural-transformations",
+          "def-bimodule",
+          "cor-left-adjoints-preserve-colimits"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $A,B$ be unital rings. Every additive cocontinuous functor $F:A\\text{-Mod}\\to B\\text{-Mod}$ admits a right adjoint $B\\text{-Mod}\\to A\\text{-Mod}$: if $M$ is a $(B,A)$-bimodule with $F\\cong T_M$, then $F$ is left adjoint to $\\operatorname{Hom}_B(M,-)$. In particular $F$ is a left adjoint, so it preserves every colimit that exists. No commutativity and no choice are used.",
+        "proof_strategy": "By [[thm-eilenberg-watts-for-arbitrary-unital-rings]], $F$ is naturally isomorphic to $T_{F(A)}$. The tensor-Hom adjunction for bimodules over arbitrary unital rings ([[lem-tensor-hom-adjunction-for-bimodules]]) gives $T_M\\dashv\\operatorname{Hom}_B(M,-)$ for $M=F(A)$, in the sense of [[def-adjunction-by-unit-counit-and-triangle-identities]]; conjugating the unit and counit by the natural isomorphism $F\\cong T_M$ transfers the adjunction to $F$. Left adjoints preserve colimits, and the statement is not made for arbitrary functors that merely admit an adjoint; additivity is a hypothesis here.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-exact-module-tensor-functors-correspond-to-right-flat-bimodules",
+        "kind": "corollary",
+        "title": "Exact module tensor functors correspond to right-flat bimodules",
+        "deps": [
+          "thm-eilenberg-watts-for-arbitrary-unital-rings",
+          "cor-eilenberg-watts-is-an-equivalence-of-hom-categories",
+          "lem-tensoring-with-a-right-module-is-additive-right-exact-and-preserves-direct-sums",
+          "def-left-and-right-flat-modules-over-an-arbitrary-ring",
+          "def-exact-functor-between-abelian-categories",
+          "thm-one-sided-and-two-sided-exactness-by-short-exact-sequences",
+          "def-exact-and-short-exact-sequences-of-modules",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "thm-abelian-groups-form-an-abelian-category",
+          "def-bimodule"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $A,B$ be unital rings and $M$ a $(B,A)$-bimodule. Then the tensor functor $T_M=M\\otimes_A-:A\\text{-Mod}\\to B\\text{-Mod}$ is exact if and only if $M$ is flat as a right $A$-module. Under the Eilenberg-Watts equivalence this is a bijection between isomorphism classes of exact tensor functors $A\\text{-Mod}\\to B\\text{-Mod}$ and right-flat $(B,A)$-bimodules. No commutativity and no choice are used.",
+        "proof_strategy": "By definition ([[def-left-and-right-flat-modules-over-an-arbitrary-ring]]) the right $A$-module $M$ is flat exactly when $M\\otimes_A-$ is exact on left $A$-modules, i.e. exactly when the underlying abelian-group-valued functor preserves kernels and cokernels. Kernels and cokernels in $B\\text{-Mod}$ are those of the underlying abelian groups ([[def-module-homomorphism-kernel-image-and-cokernel]], [[thm-modules-over-a-ring-form-an-abelian-category]], [[thm-abelian-groups-form-an-abelian-category]]), so $T_M$ is exact as a functor of abelian categories ([[def-exact-functor-between-abelian-categories]]) if and only if its underlying functor to $\\mathbf{Ab}$ is exact, which is precisely right flatness of $M$. The restriction statement follows from the Eilenberg-Watts equivalence ([[thm-eilenberg-watts-for-arbitrary-unital-rings]]): essential surjectivity identifies the exact cocontinuous functors with the tensor functors, and exactness is invariant under natural isomorphism. No left-side projectivity is asserted; projectivity of $M$ as a left $B$-module controls images of projectives, not this exactness condition. No choice is used.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 920,
+    "id": "eilenberg-watts-theorem-and-natural-transformations-examples",
+    "kind": "B",
+    "category": "homological-algebra",
+    "title": "Eilenberg–Watts Theorem and Natural Transformations — Examples",
+    "companion": "eilenberg-watts-theorem-and-natural-transformations",
+    "requires": [
+      "eilenberg-watts-theorem-and-natural-transformations"
+    ],
+    "items": [
+      {
+        "id": "ex-natural-transformations-between-tensor-composites",
+        "kind": "example",
+        "title": "Natural transformations between tensor composites are governed by bimodule maps",
+        "deps": [
+          "thm-natural-transformations-of-tensor-functors-are-bimodule-maps",
+          "thm-associativity-of-balanced-tensor-products",
+          "thm-bimodule-actions-induced-on-tensor-products",
+          "def-bimodule",
+          "prop-functoriality-of-module-tensor-products",
+          "def-natural-transformation",
+          "def-vertical-composition-of-natural-transformations",
+          "lem-vertical-composition-of-natural-transformations-is-natural",
+          "thm-universal-property-of-module-tensor-products",
+          "def-balanced-and-bilinear-maps",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "def-direct-sum-of-a-family-of-modules",
+          "thm-universal-property-of-module-direct-sums"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $A,B,C$ be unital rings, $M$ a $(B,A)$-bimodule and $N$ a $(C,B)$-bimodule, with further bimodules $M',N'$ of the same types. The associativity isomorphism $(N\\otimes_BM)\\otimes_AX\\to N\\otimes_B(M\\otimes_AX)$ identifies the composite $T_N\\circ T_M$ with the tensor functor $T_{N\\otimes_BM}$ of the $(C,A)$-bimodule $N\\otimes_BM$. Consequently natural transformations $T_N\\circ T_M\\Rightarrow T_{N'}\\circ T_{M'}$ correspond bijectively to $(C,A)$-bimodule maps $N\\otimes_BM\\to N'\\otimes_BM'$; each pair of bimodule maps $g:N\\to N'$, $f:M\\to M'$ yields the transformation with components $(g\\otimes f)\\otimes1_X$, $n\\otimes m\\otimes x\\mapsto g(n)\\otimes f(m)\\otimes x$. Not every bimodule map $N\\otimes_BM\\to N'\\otimes_BM'$ is of the form $g\\otimes f$, and the classification covers all of them. No commutativity and no choice are used.",
+        "proof_strategy": "Associativity of balanced tensor products ([[thm-associativity-of-balanced-tensor-products]]) gives the natural isomorphism $N\\otimes_B(M\\otimes_AX)\\cong(N\\otimes_BM)\\otimes_AX$, and the outer actions make $N\\otimes_BM$ a $(C,A)$-bimodule ( [[thm-bimodule-actions-induced-on-tensor-products]] ). Applying [[thm-natural-transformations-of-tensor-functors-are-bimodule-maps]] to the two tensor functors with kernels $N\\otimes_BM$ and $N'\\otimes_BM'$ gives the bijection with all $(C,A)$-bimodule maps. For a pair $(g,f)$ the formula on generators is checked using $(g\\otimes f)(n\\otimes m)=g(n)\\otimes f(m)$; naturality and balance follow from functoriality of $\\otimes$. For the final claim, over a field $k$ take $N=M=k^2$ and $N'=M'=k$; then $k^2\\otimes_kk^2\\cong\\operatorname{Mat}_2(k)$ and a decomposition of a functional as $g\\otimes f$ corresponds to a rank-one matrix, whereas the trace $\\operatorname{Mat}_2(k)\\to k$ is a bimodule map with matrix $I_2$ of rank two and is therefore not of the form $g\\otimes f$. No step chooses a basis of an infinite-dimensional space or a presentation.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-eilenberg-watts-recovers-extension-of-scalars",
+        "kind": "example",
+        "title": "Eilenberg-Watts recovers extension of scalars",
+        "deps": [
+          "thm-eilenberg-watts-for-arbitrary-unital-rings",
+          "lem-evaluation-on-the-regular-module-has-a-commuting-right-action",
+          "def-restriction-and-extension-of-scalars",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "thm-extension-of-scalars-is-left-adjoint-to-restriction",
+          "cor-left-adjoints-preserve-colimits"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $f:R\\to S$ be a unital homomorphism of commutative rings and let ${}_SS_R$ be the $(S,R)$-bimodule with left action by multiplication and right action $s\\cdot r=s f(r)$ of [[def-restriction-and-extension-of-scalars]]. Then the tensor functor $T_S=S\\otimes_R-$ is exactly the extension of scalars along $f$; it is additive and cocontinuous; and its Eilenberg-Watts kernel is $T_S(R)=S\\otimes_RR\\cong S$ with the right action of the evaluation lemma equal to the displayed action $s\\cdot r=sf(r)$. Thus the Eilenberg-Watts theorem recovers extension of scalars with kernel ${}_SS_R$. The same bimodule and computation apply to an arbitrary unital ring homomorphism, but the published definition of extension of scalars is stated for commutative rings. No choice is used.",
+        "proof_strategy": "Extension of scalars along $f$ is by definition the functor $S\\otimes_R-$ ([[def-restriction-and-extension-of-scalars]]), which is $T_S$ for the displayed $(S,R)$-bimodule; it is additive, and it is cocontinuous because it is left adjoint to restriction of scalars ([[thm-extension-of-scalars-is-left-adjoint-to-restriction]], [[cor-left-adjoints-preserve-colimits]]). The tensor-unit isomorphism ([[thm-unit-isomorphisms-for-module-tensor-products]]) gives $S\\otimes_RR\\cong S$ by $s\\otimes r\\mapsto sf(r)$. Evaluating the right action of [[lem-evaluation-on-the-regular-module-has-a-commuting-right-action]] on this identification: the right multiplication $r_r$ on $R$ acts on $S\\otimes_RR$ by $s\\otimes x\\mapsto s\\otimes(xr)$, which corresponds to $s\\,f(xr)=sf(x)f(r)$, so the reconstructed right action is $s\\cdot r=sf(r)$, exactly the published action. Hence the kernel of the extension functor is ${}_SS_R$ and the theorem applies with no further checks. For arbitrary unital $f$, the same associativity and unit checks give a $(S,R)$-bimodule, but the published definition covers only the commutative case; that caveat is recorded, not used.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Kamensky, Non-Commutative Algebra (BGU course notes, Spring 2017), §5.1, Theorem 5.1.43, Proposition 5.1.40, Lemma 5.1.46, Corollaries 5.1.48-5.1.49",
+              "url": "https://mkamensky.github.io/teaching/2017s/noncommutative-algebra/notes.pdf"
+            },
+            {
+              "title": "A. Nyman and S. P. Smith, A Generalization of Watts's Theorem: Right Exact Functors on Module Categories, arXiv:0806.0832, Theorem 1.1-1.2, Propositions 3.2-3.3, Lemma 3.4",
+              "url": "https://arxiv.org/pdf/0806.0832"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-right-exact-module-functor-without-coproduct-preservation-is-not-tensor",
+        "kind": "counterexample",
+        "title": "A right exact module functor without coproduct preservation is not tensor",
+        "deps": [
+          "thm-eilenberg-watts-for-arbitrary-unital-rings",
+          "def-axiom-of-choice",
+          "def-direct-sum-of-a-family-of-modules",
+          "thm-universal-property-of-module-direct-sums",
+          "thm-one-sided-and-two-sided-exactness-by-short-exact-sequences",
+          "def-exact-and-short-exact-sequences-of-modules",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "def-left-and-right-modules"
+        ],
+        "dependency_level": 4,
+        "generation": {
+          "role": "counterexample"
+        },
+        "statement": "Assume the Axiom of Choice. Let $k$ be a field and let $F(V)=\\prod_{n\\ge0}V$ be the countable product of copies of a $k$-vector space $V$, with coordinatewise linear maps. Then $F$ is additive and exact, hence right exact, but it does not preserve coproducts: for the family $(k)_{j\\in\\mathbb N}$ the canonical comparison $\\bigoplus_jF(k)\\to F(\\bigoplus_jk)$ has image the families of vectors in $\\bigoplus_jk$ whose supports are contained in one fixed finite subset of $\\mathbb N$, so the family $(e_n)_{n\\ge0}$ of standard basis vectors is not in the image. Consequently $F$ is not naturally isomorphic to any tensor functor $T_N=N\\otimes_k-$, since tensor functors preserve coproducts. Thus the coproduct-preservation hypothesis of the Eilenberg-Watts theorem cannot be dropped even for exact functors. The Axiom of Choice is used exactly to lift a countable family of surjections coordinatewise; the argument is not choice-free.",
+        "proof_strategy": "Additivity of $F$ is coordinatewise. Under AC, $F$ is exact: products of injective linear maps are injective, and a countable product of surjective linear maps is surjective because a preimage can be chosen in each nonempty fibre ([[def-axiom-of-choice]]). Coproduct failure: identify $F(\\bigoplus_jk)=\\prod_n\\bigoplus_jk$ and $\\bigoplus_jF(k)=\\bigoplus_j\\prod_nk$; an element of the latter is a finite family of scalar sequences, so the $n$-th coordinate of its image is supported in the union of the finitely many supports of that family ([[def-direct-sum-of-a-family-of-modules]], [[thm-universal-property-of-module-direct-sums]]). The family $(e_n)_n$, where $e_n$ is the $n$-th standard basis vector of $\\bigoplus_jk$, has infinite support and is not in the image; hence the canonical comparison is not surjective and $F$ does not preserve this coproduct. If $F\\cong T_N$, then $N\\cong F(k)=\\prod_nk$ and the natural isomorphism would conjugate the canonical comparison of $F$ to that of $T_N$; but $T_N$ preserves coproducts by the Eilenberg-Watts theorem ([[thm-eilenberg-watts-for-arbitrary-unital-rings]]), contradiction. So no tensor functor represents $F$. The only choice made is the coordinatewise selection of lifts.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": []
+        }
+      },
+      {
+        "id": "cex-coproduct-preserving-left-exact-module-functor-is-not-tensor",
+        "kind": "counterexample",
+        "title": "A coproduct-preserving left exact module functor is not tensor",
+        "deps": [
+          "thm-eilenberg-watts-for-arbitrary-unital-rings",
+          "thm-hom-functors-are-left-exact",
+          "def-left-exact-and-right-exact-functor",
+          "thm-a-left-exact-functor-preserves-monomorphisms-and-a-right-exact-functor-preserves-epimorphisms",
+          "thm-abelian-groups-form-an-abelian-category",
+          "prop-abelian-groups-are-z-modules",
+          "def-hom-groups-and-induced-hom-maps",
+          "def-direct-sum-of-a-family-of-modules",
+          "thm-universal-property-of-module-direct-sums",
+          "def-integers-modulo-n",
+          "def-addition-and-multiplication-modulo-n"
+        ],
+        "dependency_level": 4,
+        "generation": {
+          "role": "counterexample"
+        },
+        "statement": "Let $F(X)=\\operatorname{Hom}_{\\mathbb Z}(\\mathbb Z/2,X):\\mathbf{Ab}\\to\\mathbf{Ab}$. Then $F$ is an additive functor of module categories over $\\mathbb Z$, it preserves arbitrary direct sums (a homomorphism from the finitely generated module $\\mathbb Z/2$ into a direct sum has image in a finite subsum), and it is left exact. It is not right exact: applying it to the surjection $\\mathbb Z\\to\\mathbb Z/2$ gives the zero map $0=\\operatorname{Hom}_{\\mathbb Z}(\\mathbb Z/2,\\mathbb Z)\\to\\operatorname{Hom}_{\\mathbb Z}(\\mathbb Z/2,\\mathbb Z/2)\\cong\\mathbb Z/2$, which is not surjective. Hence $F$ is not naturally isomorphic to any tensor functor $T_N=N\\otimes_{\\mathbb Z}-$, because tensor functors are right exact. Thus coproduct preservation together with left exactness does not imply that a functor is tensor. No choice is used.",
+        "proof_strategy": "Additivity: $\\operatorname{Hom}_{\\mathbb Z}(\\mathbb Z/2,-)$ acts on homomorphisms by postcomposition and $\\operatorname{Hom}$ is an abelian group under pointwise addition ([[def-hom-groups-and-induced-hom-maps]]); postcomposition is additive. Coproduct preservation: an element $x\\in\\bigoplus_iX_i$ has finite support ( [[def-direct-sum-of-a-family-of-modules]] ), and a homomorphism $\\varphi:\\mathbb Z/2\\to\\bigoplus_iX_i$ has $2\\varphi(1)=0$, so each coordinate of $\\varphi(1)$ is annihilated by 2 and the coordinates outside a finite set vanish; hence $\\operatorname{Hom}(\\mathbb Z/2,\\bigoplus_iX_i)\\cong\\bigoplus_i\\operatorname{Hom}(\\mathbb Z/2,X_i)$ via the canonical map, using the direct-sum universal property ([[thm-universal-property-of-module-direct-sums]]). Left exactness is [[thm-hom-functors-are-left-exact]] (covariant Hom is left exact). Failure of right exactness: $\\operatorname{Hom}_{\\mathbb Z}(\\mathbb Z/2,\\mathbb Z)=0$ because $\\mathbb Z$ has no nonzero element of order 2, so the map induced by the surjection $\\mathbb Z\\to\\mathbb Z/2$ is $0\\to\\mathbb Z/2$, not surjective; thus $F$ is not right exact ([[def-left-exact-and-right-exact-functor]]). If $F\\cong T_N$, then $F$ would be right exact since $T_N$ is right exact by the Eilenberg-Watts theorem ([[thm-eilenberg-watts-for-arbitrary-unital-rings]]); contradiction. Hence $F$ is not tensor, even though it preserves coproducts and is left exact. No choice is used.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": []
+        }
+      }
+    ]
+  }
+]

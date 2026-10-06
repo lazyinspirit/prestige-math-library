@@ -2,7 +2,8 @@
 // validate-plan.mjs — mechanical circularity + ordering validator for the
 // planned page stack. Run BEFORE authoring a single item.
 //
-//   node validate-plan.mjs plan-spec.json [--repo DIR]   # --repo defaults to this checkout
+//   node validate-plan.mjs plan-spec.json [--repo DIR] [--pages-file FILE] [--run RUN]
+// --run selects current manifest subjects; all suppliers remain graph context.
 //
 // Guarantees checked (each a hard error unless marked WARN):
 //   1. resolve       every dep resolves to a planned item or an item already in items/
@@ -55,6 +56,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { REPO } from './paths.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { frontierGateScope } from './frontier-gate-scope.mjs';
 
 const args = process.argv.slice(2);
 let selectedPages = null;
@@ -73,13 +75,29 @@ if (selectionFlags.length) {
   args.splice(i, 2);
 }
 const selectedPage = id => selectedPages === null || selectedPages.has(id);
-const specPath = args.find((a) => !a.startsWith('--'));
+const valueFlags = new Set(['--repo', '--max-items', '--rehomed', '--run']);
+const specPath = args.find((a, i) => !a.startsWith('--') && !valueFlags.has(args[i - 1]));
 const repo = argVal('--repo') ?? REPO;
+const runPositions = args.flatMap((arg, i) => arg === '--run' ? [i] : []);
+if (runPositions.length > 1) die('--run may be specified once');
+const run = argVal('--run');
+let selectedItemIds = null;
+if (runPositions.length) {
+  if (!run || run.startsWith('--')) die('--run requires a current frontier run');
+  try {
+    const scope = frontierGateScope({ repo, run }, { requireItemFiles: false });
+    if (selectedPages !== null && (selectedPages.size !== scope.pages.size
+      || [...selectedPages].some(id => !scope.pages.has(id))))
+      die('--pages-file must exactly match the current run manifests when used with --run');
+    selectedPages = scope.pages; selectedItemIds = scope.items;
+  } catch (error) { die(`frontier gate selection: ${error.message}`); }
+}
+
 // The owner raised the default to 100 on 2026-09-26. A run-specific override
 // still needs a recorded scope decision.
 const maxItems = Number(argVal('--max-items') ?? 100);
 const SET_THEORY_DEFERRED_PAGE = 'deferred-set-theory-beyond-choice';
-if (!specPath) die('usage: validate-plan.mjs <plan-spec.json> [--repo DIR] [--max-items N] [--rehomed FILE] [--pages-file FILE]');
+if (!specPath) die('usage: validate-plan.mjs <plan-spec.json> [--repo DIR] [--max-items N] [--rehomed FILE] [--pages-file FILE] [--run RUN]');
 
 // --rehomed: the owner-approved RE-HOME receipt (see the `dup-id` note below).
 // Absent, nothing changes: every clash between a planned id and an already
@@ -157,6 +175,9 @@ const itemById = new Map();     // itemId -> item
 const posInPage = new Map();    // itemId -> index within its page
 for (const id of selectedPages ?? []) if (!pages.some(p => p.id === id))
   err('focus-page-unknown', `--pages-file names unknown page "${id}"`);
+if (run) for (const id of selectedPages)
+  if (pages.filter(p => p.id === id).length !== 1)
+    die(`frontier gate selection: page ${id} must occur exactly once in the plan`);
 
 for (const p of pages) {
   // "P" = a page ALREADY PUBLISHED in the repo, declared here only so the new
@@ -181,6 +202,10 @@ for (const p of pages) {
     else if (selectedPage(p.id) && !it.id.startsWith(want + '-')) err('prefix', `${it.id}: kind ${it.kind} requires prefix "${want}-"`);
   });
 }
+
+if (selectedItemIds) for (const id of selectedItemIds)
+  if (!itemById.has(id) || !selectedPages.has(pageOfItem.get(id).id))
+    err('frontier-selection', `current manifest item ${id} is absent from the selected plan pages`);
 
 const pageOrder = new Map(pages.map((p, i) => [p.id, i]));
 
@@ -334,10 +359,14 @@ function sccs(nodes, succ) {
 }
 
 const canonicalItem = id => itemById.has(id) ? id : (canonicalExisting.get(id) ?? id);
+// Selected items retain both approved scaffold and actual authored edges.
+// Outside suppliers use their actual authored deps when available.
+const prerequisiteEdges = id => selectedPage(pageOfItem.get(id)?.id)
+  ? [...new Set([...(itemById.get(id)?.deps ?? []), ...(existingPrerequisiteEdges.get(id) ?? [])])]
+  : (existingPrerequisiteEdges.get(id) ?? itemById.get(id)?.deps ?? []);
 const itemSucc = selectedPages === null
   ? id => (itemById.get(id)?.deps ?? []).filter(d => itemById.has(d))
-  : id => (itemById.get(id)?.deps ?? existingPrerequisiteEdges.get(id) ?? [])
-    .map(canonicalItem).filter(d => itemById.has(d) || existing.has(d));
+  : id => prerequisiteEdges(id).map(canonicalItem).filter(d => itemById.has(d) || existing.has(d));
 function reachableContext(roots, succ) {
   const context = new Map(roots), queue = [...context.keys()];
   for (let i = 0; i < queue.length; i++) for (const next of succ(queue[i]))
@@ -349,9 +378,10 @@ const scopedItems = pages.filter(p => selectedPage(p.id)).flatMap(p =>
 const itemContext = reachableContext(scopedItems, itemSucc);
 const itemRoots = selectedPages === null ? [...itemById.keys()] : [...itemContext.keys()];
 if (selectedPages !== null) for (const [id, root] of itemContext) {
-  if (selectedPage(pageOfItem.get(id)?.id)) continue; // local check already reported these
-  for (const dep of itemById.get(id)?.deps ?? existingPrerequisiteEdges.get(id) ?? [])
-    if (!itemById.has(dep) && !existing.has(dep))
+  const local = selectedPage(pageOfItem.get(id)?.id);
+  for (const dep of prerequisiteEdges(id))
+    if (!(local && (itemById.get(id)?.deps ?? []).includes(dep))
+      && !itemById.has(canonicalItem(dep)) && !existing.has(canonicalItem(dep)))
       err('resolve', `page ${root}: prerequisite ${id} depends on "${dep}", which is neither planned nor in items/`);
 }
 for (const comp of sccs(itemRoots, itemSucc)) {
@@ -362,10 +392,17 @@ for (const comp of sccs(itemRoots, itemSucc)) {
 // ---------------------------------------------------------------- check 3: page cycles
 
 const pageSucc = (pid) => {
-  const p = pages.find((x) => x.id === pid), out = new Set();
-  for (const it of p?.items ?? []) for (const d of it.deps ?? []) {
-    const dp = pageOfItem.get(d);
-    if (dp && dp.id !== pid) out.add(dp.id);
+  const p = pages.find(x => x.id === pid), out = new Set();
+  const plannedItems = (p?.items ?? []).map(it => it.id);
+  const roots = selectedPages === null ? plannedItems
+    : selectedPage(pid) ? [...new Set([...plannedItems, ...(itemsOnHomePage.get(pid) ?? [])])]
+    : (itemsOnHomePage.get(pid) ?? plannedItems);
+  for (const id of roots) {
+    const deps = selectedPages === null ? itemById.get(id)?.deps ?? [] : itemSucc(id);
+    for (const dep of deps) {
+      const home = pageOfItem.get(dep)?.id ?? (selectedPages === null ? undefined : homePageOf.get(dep));
+      if (home && home !== pid) out.add(home);
+    }
   }
   return [...out];
 };

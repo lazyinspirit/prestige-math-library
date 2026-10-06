@@ -1,0 +1,1105 @@
+[
+  {
+    "order": 561,
+    "id": "the-smooth-h-cobordism-theorem",
+    "kind": "A",
+    "category": "differential-topology",
+    "title": "The Smooth H Cobordism Theorem",
+    "companion": "the-smooth-h-cobordism-theorem-examples",
+    "requires": [
+      "handle-decompositions-duality-and-rearrangement",
+      "handle-cancellation-slides-and-elementary-moves",
+      "morse-inequalities-and-the-handle-chain-complex",
+      "oriented-and-mod-two-intersection-numbers",
+      "smooth-surgery-traces-and-handle-trading",
+      "the-whitney-trick-and-surgery-below-the-middle-dimension",
+      "relative-homology-excision-and-mayer-vietoris",
+      "cw-complexes-and-cellular-homology",
+      "orientations-poincare-lefschetz-and-alexander-duality",
+      "higher-homotopy-groups-and-cofiber-sequences",
+      "hurewicz-whitehead-freudenthal-and-cw-approximation",
+      "the-fundamental-group"
+    ],
+    "items": [
+      {
+        "id": "def-h-cobordism",
+        "kind": "definition",
+        "title": "h-Cobordism",
+        "deps": [
+          "def-smooth-cobordism-triad-for-morse-theory",
+          "def-homotopy-equivalence",
+          "def-smooth-embedding",
+          "def-compact-space"
+        ],
+        "statement": "An **h-cobordism** is a compact smooth cobordism triad $(W;M_0,M_1)$\n([[def-smooth-cobordism-triad-for-morse-theory]]) with $\\dim W=n+1\\ge2$ for\nwhich both inclusions\n\n$$M_0\\hookrightarrow W,\\qquad M_1\\hookrightarrow W$$\n\nare homotopy equivalences ([[def-homotopy-equivalence]]). The inclusions are\nsmooth embeddings of the faces into $W$ ([[def-smooth-embedding]]), and\ncompactness of $W$ is the compactness carried by the triad\n([[def-compact-space]]).\n\nBecause the triad has $\\partial W=M_0\\sqcup M_1$ with $M_0$ and $M_1$ closed\nembedded smooth submanifolds of $\\partial W$ of dimension $n=\\dim W-1$, the two\nfaces of an h-cobordism are closed smooth $n$-manifolds. By\n[[def-homotopy-equivalence]], the inclusion $\\iota_i:M_i\\hookrightarrow W$ is a\nhomotopy equivalence exactly when there is a continuous map $r_i:W\\to M_i$ with\n\n$$r_i\\circ\\iota_i\\simeq\\operatorname{id}_{M_i},\\qquad\\iota_i\\circ r_i\\simeq\\operatorname{id}_W;$$\n\nthese are the homotopy-inverse identities. They do not by themselves specify a\nretraction fixing the face pointwise or a homotopy relative to that face. No map\n$W\\to M_i$ is required to be smooth.\n\nThe definition is symmetric in the two faces: interchanging $M_0$ and $M_1$\nleaves both conditions unchanged, so whenever $(W;M_0,M_1)$ is an h-cobordism\nthe reversed triad $(W;M_1,M_0)$ is one as well, with the same collars read in\nthe reversed order. A **trivial h-cobordism** is an h-cobordism diffeomorphic\nto the product $M_0\\times[0,1]$ relative to $M_0$; the faces $M_0$ and $M_1$ of\nan h-cobordism are called **h-cobordant**, whether or not that h-cobordism is\ntrivial. Equivalently, two closed smooth manifolds are h-cobordant when there\nexists an h-cobordism with those faces.\n\nNo simple connectivity, orientability or coefficient hypothesis is part of the\ndefinition, no hypothesis on the fundamental groups beyond what the homotopy\nequivalences already impose is made, and the two faces need not be\ndiffeomorphic.",
+        "strategy": "Definition. It states the hypothesis of the smooth h-cobordism theorem symmetrically in the two ends, so that dualising a proof by reversing the triad is legitimate. Nothing is proved and no existence statement is made.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; Concluding Remarks, printed pp. 113--114"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-relative-homology-of-an-h-cobordism-vanishes-at-both-ends",
+        "kind": "lemma",
+        "title": "Relative homology of an h-cobordism vanishes at both ends",
+        "deps": [
+          "def-h-cobordism",
+          "def-relative-singular-homology",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+          "def-homotopy-equivalence"
+        ],
+        "statement": "Let $(W;M_0,M_1)$ be an h-cobordism ([[def-h-cobordism]]) and let $G$ be any\nabelian coefficient group. Then $H_k(W,M_0;G)=0$ and $H_k(W,M_1;G)=0$ for every\n$k\\ge0$; equivalently, each inclusion $M_i\\hookrightarrow W$ induces an\nisomorphism $H_k(M_i;G)\\to H_k(W;G)$ for all $k\\ge0$. In particular\n$H_k(W,M_i;\\mathbb Z)=0$ for both ends. No orientability, finite generation or\nsimple connectivity hypothesis is used, and the conclusion is symmetric in the\ntwo ends.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 By [F1] the inclusion $\\iota_0:M_0\\hookrightarrow W$ is a homotopy equivalence, so by [F2] the induced map $H_k(\\iota_0;G):H_k(M_0;G)\\to H_k(W;G)$ is an isomorphism for every $k\\ge0$, in particular surjective; the same applies to $\\iota_1:M_1\\hookrightarrow W$. [F1, F2, given]\n\n2.1 Fix $k\\ge0$ and read the exact sequence of [F3] for the pair $(W,M_0)$ around $H_k(W,M_0;G)$, namely $H_k(M_0;G)\\xrightarrow{H_k(\\iota_0;G)}H_k(W;G)\\to H_k(W,M_0;G)\\xrightarrow{\\delta}H_{k-1}(M_0;G)\\xrightarrow{H_{k-1}(\\iota_0;G)}H_{k-1}(W;G)$. Surjectivity of $H_k(\\iota_0;G)$ together with exactness at $H_k(W;G)$ makes $H_k(W;G)\\to H_k(W,M_0;G)$ the zero map; injectivity of $H_{k-1}(\\iota_0;G)$ together with exactness at $H_{k-1}(M_0;G)$ makes $\\delta$ the zero map (for $k=0$ the group $H_{-1}(M_0;G)$ is zero, so $\\delta$ is automatically zero). The image of the zero map $H_k(W;G)\\to H_k(W,M_0;G)$ is $0$, so exactness at $H_k(W,M_0;G)$ gives $\\ker\\delta=0$, and since $\\delta=0$ this says $H_k(W,M_0;G)=0$. [F3, step 1.1]\n\n3.1 Interchanging the roles of $M_0$ and $M_1$, which is legitimate for an h-cobordism by [F1], the argument of step 2.1 gives $H_k(W,M_1;G)=0$ for every $k\\ge0$. By step 1.1 each inclusion induces an isomorphism in every degree, and specialising $G=\\mathbb Z$ gives $H_k(W,M_0;\\mathbb Z)=H_k(W,M_1;\\mathbb Z)=0$. [F1, F2, F3, step 1.1, step 2.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; Concluding Remarks, printed pp. 113--114"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "prop-h-cobordisms-admit-adapted-ordered-handle-decompositions",
+        "kind": "proposition",
+        "title": "h-Cobordisms admit adapted ordered handle decompositions",
+        "deps": [
+          "def-h-cobordism",
+          "thm-adapted-excellent-morse-functions-exist-on-compact-cobordisms",
+          "thm-morse-rearrangement-by-index",
+          "thm-self-indexing-morse-function-existence",
+          "lem-handles-of-equal-index-can-be-attached-on-one-level",
+          "def-morse-function-adapted-to-a-cobordism",
+          "def-handle-decomposition-relative-to-the-incoming-boundary",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $(W;M_0,M_1)$ be a\ncompact h-cobordism with $\\dim W=n+1$ ([[def-h-cobordism]]). Then there are an\nadapted complete downward gradient-like field $X$ for a Morse function $f$ on\n$W$ and an adapted Morse function $g$, equal to $f$ near $\\partial W$ and with\nthe same critical points and indices, whose critical levels are strictly\nordered by index: all critical points of a given index $k$ lie at one common\nlevel $c_k$, and $c_0<\\dots<c_{n+1}$\n([[def-morse-function-adapted-to-a-cobordism]]). Consequently $W$ admits a\nhandle decomposition relative to $M_0$ in which all $k$-handles are attached at\nthe single level $c_k$, before all handles of index $k+1$, with one handle of\nindex $k$ for each index-$k$ critical point\n([[def-handle-decomposition-relative-to-the-incoming-boundary]]); in particular\nno handle is attached before all lower-index handles, and the fixed boundary\ncollars contain no handle. This holds in every dimension and without any simple\nconnectivity hypothesis.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Apply [F1] to the collared triad $(W;M_0,M_1)$, which is compact by the definition of an h-cobordism, to get an adapted excellent Morse function $f$ and an adapted complete downward gradient-like field $X$ agreeing with the product model on the fixed collars, so that by [F2] the faces are the level sets $f^{-1}(0)=M_0$, $f^{-1}(1)=M_1$ and the boundary collars contain no critical point. [F1, F2, given]\n\n2.1 Apply the rearrangement theorem [F3] to $(f,X)$ to obtain an adapted field for an excellent function whose critical levels are ordered by index, and then apply the self-indexing theorem [F4] to that excellent pair to put all critical points of index $k$ at one common level $c_k$ with $c_0<\\dots<c_{n+1}$; the modification is supported near the finitely many critical levels, so the boundary product model on the fixed collars is preserved, and compact interior field modifications preserve collar-extension completeness: extend the change by zero to the complete carrier and apply the compact-support construction of [F1]. Retain the original pair $(f,X)$ from step 1.1 for the statement’s first clause; the self-indexed function has its own adapted field. No assertion that the final field descends for the original $f$ is needed. The countable choice principle is inherited from [F1]–[F4] and [F8]. [F3, F4, F8, given, step 1.1]\n\n3.1 Apply [F6] to a small regular-endpoint band around each occupied critical level $c_k$ of the self-indexed function. Its critical points all have index $k$, and no other critical value lies in the band, so crossing it attaches disjoint $k$-handles, one per critical point. Concatenate these successive sublevel attachments in increasing order of $k$; [F4] supplies the resulting decomposition of the whole triad, and [F6] permits any order within each disjoint family. By [F7] this is a handle decomposition relative to $M_0$ with the stated handle list and level structure. The fixed boundary collars contain no critical point by [F2], so contain no handle. [F2, F4, F6, F7, step 2.1]\n\n4.1 Therefore every compact h-cobordism admits an adapted field and a Morse function whose critical levels are strictly ordered by index, together with the resulting handle decomposition relative to $M_0$ with all $k$-handles attached at one level before all $(k+1)$-handles and one handle per critical point. No simple connectivity of the faces or of $W$ and no dimension restriction beyond $\\dim W=n+1$ was used, since the suppliers [F1], [F3], [F4], [F6] hold for arbitrary compact triads. [F1, F3, F4, F6, given, step 3.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; §4 rearrangement and §5 self-indexing, printed pp. 37--66"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "prop-relative-handle-chain-complex-of-a-cobordism",
+        "kind": "proposition",
+        "title": "The relative handle chain complex computes $H_*(W,M_0)$ and has the intersection matrix as its differential",
+        "deps": [
+          "def-handle-decomposition-relative-to-the-incoming-boundary",
+          "lem-a-handle-decomposition-gives-a-relative-cw-complex",
+          "thm-relative-cellular-homology-computes-relative-singular-homology",
+          "thm-relative-homology-of-consecutive-cw-skeleta",
+          "def-cellular-boundary-from-three-consecutive-skeleta",
+          "lem-relative-homology-of-the-standard-handle-pair",
+          "lem-handle-boundary-coefficients-are-attaching-belt-intersection-numbers",
+          "lem-long-exact-sequence-of-a-triple-in-singular-homology",
+          "def-attaching-belt-intersection-matrix-of-adjacent-index-handles",
+          "def-relative-singular-homology",
+          "def-countable-choice",
+          "thm-excision-for-singular-homology",
+          "prop-singular-homology-of-a-disjoint-union-is-the-direct-sum",
+          "thm-naturality-of-the-long-exact-sequence-of-a-pair",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-attaching-a-smooth-handle-with-corner-rounding"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $(W;M_0,M_1)$ be a compact collared triad with a finite index-ordered handle decomposition relative to $M_0$. Let $W_k$ be the collar together with the handles of index at most $k$, and set $W_{-1}=M_0$. Put $C_k=H_k(W_k,W_{k-1};\\mathbb Z)$ for $k\\ge0$, $C_{-1}=0$, and $\\partial_0=0$. For $k\\ge1$, define $\\partial_k:C_k\\to C_{k-1}$ by the connecting map of the triple $(W_k,W_{k-1},W_{k-2})$. Then each $C_k$ is free on the oriented relative core classes of the $k$-handles, $\\partial^2=0$, and $H_k(C_\\bullet)\\cong H_k(W,M_0;\\mathbb Z)$ for every $k\\ge0$.\n\nFor an oriented $W$, make the attaching spheres transverse to the belt spheres. Choose the belt orientations so that their oriented normal $k$-frames agree with the chosen $k$-core orientations, and use the boundary orientations on the upper attaching spheres. If $g_i$ is a $(k+1)$-handle and $e_j$ a $k$-handle, then\n$$\\partial_{k+1}[g_i]=\\sum_j I(A_i,B_j)[e_j].$$\nThus the matrix with upper handles in rows and lower handles in columns acts on **row** coordinate vectors by $x\\mapsto xM$; the usual column-coordinate matrix is $M^T$. In the middle range, when the outgoing boundary preceding the $k$-handles is connected, this is the matrix of [[def-attaching-belt-intersection-matrix-of-adjacent-index-handles]]. For disconnected stages the displayed coefficient formula still defines the incidence matrix, without invoking that definition outside its domain. Endpoint coefficients use the signed incidences of the attaching $0$-sphere, or the dual incidences of belt $0$-spheres. A presentation with only indices $k,k+1$ has the complex $0\\to C_{k+1}\\xrightarrow{\\partial_{k+1}}C_k\\to0$.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Product collars let us enlarge the lower stage slightly across each attaching seam and retract that enlargement onto the lower stage. Excision then identifies the relative homology of the next index stage with that of the disjoint union of its handle pairs; the retraction and excision preserve the relative core classes. By [F1]–[F2], $H_i(W_k,W_{k-1};\\mathbb Z)$ is zero unless $i=k$, and in that degree is free on these cores. At $k=0$, compressing the initial collar onto $M_0$ gives the same calculation, including disjoint $0$-handles. [F1, F2, F4, given]\n\n2.1 Write $\\delta_k:C_k\\to H_{k-1}(W_{k-1})$ for the pair connector and $p_{k-1}:H_{k-1}(W_{k-1})\\to C_{k-1}$ for the quotient map. By [F3], $\\partial_k=p_{k-1}\\delta_k$. Exactness of the pair $(W_{k-1},W_{k-2})$ gives $\\delta_{k-1}p_{k-1}=0$, so $\\partial_{k-1}\\partial_k=p_{k-2}\\delta_{k-1}p_{k-1}\\delta_k=0$ for $k\\ge2$. For $k=1$ this follows from $\\partial_0=0$. [F3, step 1.1, algebra]\n\n3.1 The triple sequences and step 1.1 show inductively that $H_i(W_j,M_0)=0$ for $i>j$. Fix $k\\ge0$. The triple $(W_k,W_{k-1},M_0)$ therefore injects $H_k(W_k,M_0)$ into $C_k$. Its image is the kernel of the connector into $H_{k-1}(W_{k-1},M_0)$, which itself injects into $C_{k-1}$ by the triple $(W_{k-1},W_{k-2},M_0)$ when $k\\ge1$. Naturality and the connector factorization identify that composite with $\\partial_k$. For $k=0$ the target is zero. Hence $H_k(W_k,M_0)$ identifies with $\\ker\\partial_k$. [F3, step 1.1, step 2.1, algebra]\n\n4.1 The triple $(W_{k+1},W_k,M_0)$ identifies $H_k(W_{k+1},M_0)$ with the cokernel of $C_{k+1}\\to H_k(W_k,M_0)$, because $H_k(W_{k+1},W_k)=0$. Under step 3.1 this map is $\\partial_{k+1}$. Adding stages of index $j\\ge k+2$ changes neither $H_k$ nor its map, since both $H_{k+1}(W_j,W_{j-1})$ and $H_k(W_j,W_{j-1})$ vanish. The finite filtration therefore gives $H_k(W,M_0)\\cong\\ker\\partial_k/\\operatorname{im}\\partial_{k+1}$. [F3, step 1.1, step 3.1, algebra]\n\n5.1 The pair connector sends an upper core class to its oriented attaching sphere. To read its coefficient at $e_j$, collapse the preceding stage and all other $k$-handle summands. In the outgoing piece $D^k\\times S^{d-k-1}$ of $e_j$, $d=\\dim W$, the resulting map to $D^k/S^{k-1}$ is projection onto the $D^k$ factor. A regular value at its center has preimages exactly $A_i\\cap B_j$; the local degrees are $I(A_i,B_j)$'s local signs by the normal-orientation convention. Summing gives the displayed formula. For $k=0$ the connector records the two signed endpoints, and for $k=d-1$ the same calculation is dual. This local argument applies to a relative triad as well as a closed manifold. The coordinate convention and the two-index assertion now follow from steps 1.1–4.1. [F3, F4, step 1.1, step 4.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; §§3 and 7, printed pp. 23--36 and 79--92 (Theorems 3.14 and 7.4, Corollary 7.3)"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, Oxford University Press 2002; complete electronic copy)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Chapter 8 §§8.1--8.2, printed pp. 147--163 (electronic pp. 154--170)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-handle-elimination-by-trading-a-pair",
+        "kind": "lemma",
+        "title": "Elimination lemma: trading a handle for a handle two indices higher",
+        "deps": [
+          "def-handle-decomposition-relative-to-the-incoming-boundary",
+          "def-geometric-cancelling-handle-pair",
+          "thm-handle-cancellation",
+          "thm-creation-of-a-cancelling-handle-pair",
+          "lem-attaching-handles-along-isotopic-attaching-embeddings-preserves-the-diffeomorphism-type",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-countable-choice",
+          "lem-isotopy-extension-for-a-compact-source-with-boundary",
+          "lem-handles-of-equal-index-can-be-attached-on-one-level"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $W$ be a compact smooth $(n+1)$-manifold with a finite index-ordered handle decomposition relative to its incoming face, all indices at least $q$, where $1\\le q\\le n-2$. Put $N_j=\\partial_1W_j$, and let $N_q^\\circ$ be the common part of $N_q$ and $N_{q+1}$ obtained by deleting the closed attaching tubes of the existing $(q+1)$-handles. Fix a $q$-handle $e$ and a framed attaching embedding $\\alpha:S^q\\times D^{n-q}\\hookrightarrow N_q^\\circ$. Suppose:\n\n1. in $N_q$, $\\alpha$ is isotopic through framed attaching embeddings to one whose core meets the belt of $e$ transversely once and misses every other $q$-handle belt;\n2. in $N_{q+1}$, $\\alpha$ is isotopic through framed attaching embeddings to a **standard trivial embedding**, the composite of the standard framed sphere $S^q\\times D^{n-q}\\hookrightarrow D^n$ with an embedded $n$-disk in $N_{q+1}$.\n\nThen a presentation of the same $W$ relative to its incoming face is obtained by deleting $e$ and adding one $(q+2)$-handle, with every other handle index and number unchanged. The diffeomorphism transports later attaching data. Core-sphere nullhomotopy alone does not specify the second framed hypothesis.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Temporarily stop the presentation at $W_{q+1}$. At the standard trivial embedding of hypothesis 2 introduce a $(q+1),(q+2)$ pair by [F1]. Use that framed isotopy and [F2] to move the new lower attachment to $\\alpha$ in $N_{q+1}$, carrying the new upper attachment along. Restore all higher handles by transporting their attaching data. If a stage is disconnected, perform the construction on its affected connected component and leave the others fixed. [F1, F2, given, construct]\n\n2.1 Because the entire image of $\\alpha$ lies in the common part $N_q^\\circ$, the new $(q+1)$-handle can instead be attached at $N_q$, before all old $(q+1)$-handles: their disjoint attaching-region quotient is the same whichever is attached first. Move $e$ to the end of its $q$-index family by [F3]. Apply the framed isotopy of hypothesis 1 to the new upper attachment in the resulting $N_q$, carrying all later attaching data by [F2]. Now $e$ and that new $(q+1)$-handle are consecutive and meet once. [F2, F3, step 1.1, given]\n\n3.1 Cancel this consecutive pair by [F4]. The deleted handles are $e$ and the newly introduced $(q+1)$-handle; the new $(q+2)$-handle survives, and every old higher handle is carried by the cancellation diffeomorphism. Thus the counts change exactly as asserted, relative to the incoming face. This is the two-isotopy and disjoint-reordering proof of the cited Lück Elimination Lemma, without an isotopy-to-slide decomposition premise. [F4, step 2.1] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5); Elimination Lemma 1.16 with its proof on printed pp. 7--9"
+            },
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; §8 index-lowering argument, printed pp. 93--104"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 9
+      },
+      {
+        "id": "lem-zero-and-one-handles-can-be-eliminated-in-a-simply-connected-h-cobordism",
+        "kind": "lemma",
+        "title": "Zero- and one-handles are eliminated in a simply connected h-cobordism",
+        "deps": [
+          "def-h-cobordism",
+          "prop-h-cobordisms-admit-adapted-ordered-handle-decompositions",
+          "lem-handle-elimination-by-trading-a-pair",
+          "prop-connected-cobordisms-admit-presentations-without-superfluous-zero-handles",
+          "lem-metastable-embedding-for-maps-from-a-compact-manifold",
+          "lem-arcs-in-a-connected-submanifold-avoiding-finitely-many-double-points",
+          "lem-a-handle-decomposition-gives-a-relative-cw-complex",
+          "lem-high-relative-cells-do-not-change-lower-homotopy",
+          "cor-every-continuous-map-between-smooth-manifolds-is-homotopic-to-a-smooth-map",
+          "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-simply-connected",
+          "def-countable-choice",
+          "thm-handle-duality-from-negating-a-morse-function",
+          "thm-seifert-van-kampen",
+          "thm-relative-whitney-approximation-for-manifold-valued-maps",
+          "thm-parametric-transversality",
+          "thm-transverse-preimage-theorem",
+          "lem-outgoing-boundary-of-a-handle-attachment-trades-the-disk-factors",
+          "lem-real-stiefel-spaces-with-complement-rank-at-least-two-are-simply-connected",
+          "thm-weak-whitney-proper-embedding-theorem"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $(W;M_0,M_1)$ be an\nh-cobordism with $\\dim W=n+1$, $n\\ge5$, whose faces $M_0,M_1$ are closed simply\nconnected $n$-manifolds and whose total space $W$ is connected\n([[def-h-cobordism]], [[def-simply-connected]]). Then $W$ admits a handle\ndecomposition relative to $M_0$ with no handles of index $0$ or $1$;\nequivalently, after self-indexing, every handle has index at least $2$. The\nelimination proceeds one handle at a time: each $1$-handle can be traded for a\n$3$-handle without changing $W$ relative to $M_0$. The dimension hypothesis\n$n\\ge5$ enters here for the first time, in the construction of the embedded\nnull-homotopy disk.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 By [F1] choose an ordered presentation without $0$-handles. Write $T_j=W_j$ for the trace through index $j$ and $N_j=\\partial_1T_j$. The initial outgoing level is $M_0$. Deleting the finitely many $1$-handle attaching disks leaves it connected: paths may be rerouted around each disk through its connected boundary sphere, since $n\\ge5$. [F1, given, construct]\n\n2.1 In the outgoing piece of a selected $1$-handle $e$, take $D^1\\times\\{x\\}$ with $x\\in S^{n-1}$. Join its endpoints by an embedded arc in the punctured $M_0$ and smooth the two corners; the arc can be chosen by smoothing a path and applying the relative curve embedding case of [F3]. The resulting circle $\\gamma\\subset N_1$ meets the belt of $e$ once at the midpoint of that outgoing core arc, and misses the other $1$-handle belts. Perturb the old $2$-handle core circles to miss $\\gamma$: $1+1<n$. Shrink their normal tubes, so $\\gamma$ and a small neighborhood lie in the common unchanged part of $N_1$ and $N_2$. These attaching isotopies transport the later handles. [F3, F4, step 1.1, construct]\n\n3.1 $\\gamma$ is nullhomotopic in $N_2$. Indeed $W$ is simply connected by its incoming homotopy equivalence. The remaining forward handles after $T_2$ have indices at least three, so $\\pi_1(T_2)\\to\\pi_1(W)$ is an isomorphism. The reversed presentation of $T_2$ relative to $N_2$ has indices $n-1,n$, both at least four, so $\\pi_1(N_2)\\to\\pi_1(T_2)$ is an isomorphism as well. These applications concern the correct forward and reverse traces; no claim that index-three cells preserve $\\pi_2$ is needed. [F2, step 2.1, given]\n\n4.1 A continuous filling disk can be made smooth relative to $\\gamma$: insert the smooth boundary loop on a radial collar, extend that collar slightly past the disk boundary, and apply relative approximation on this extended source. Then use [F3] to embed the disk relative to its boundary, since $5\\le n$. Its normal bundle is trivial: in a finite Euclidean embedding, radial transport of its smooth orthogonal projection produces a frame over the contractible disk. Append the disk's outward boundary-normal line to that frame. For the tube near the disk boundary, extend its embedding slightly in the outward boundary-normal direction. The local inverse-function tube construction in [F4], followed by compactness of the disk and separation of distinct zero-section points, gives one sufficiently small embedded tube along the full disk, including its boundary. This does not require the closed boundaryless-submanifold hypothesis of the global tubular theorem. That tube gives the standard framed circle $S^1\\times D^{n-1}$ along $\\gamma$ in $N_2$. In tubular disk coordinates radial contraction into a small interior disk exhibits its standard triviality by a framed isotopy. Shrink its circle tube to remain in the common part of $N_1,N_2$, and read that same framed circle as an attachment in $N_1$. No disk avoidance of full-dimensional higher attaching regions is asserted or needed. [F3, F4, step 2.1, step 3.1, construct]\n\n5.1 This framed circle satisfies both hypotheses of [F5], so trade $e$ for a $3$-handle. Repeating finitely removes all $1$-handles. The procedure removes only $0$- and $1$-handles and introduces only $3$-handles, carrying all other data. Index ordering can be restored by [F1]. Hence every remaining index is at least two, and an existing upper bound of at least three is preserved. The sole disk-embedding restriction is $n\\ge5$. [F1, F5, step 4.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; §8 Theorem 8.1, printed pp. 93--104"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5); Lemma 1.21, printed p. 13"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 10
+      },
+      {
+        "id": "lem-duality-eliminates-top-and-cotop-handles",
+        "kind": "lemma",
+        "title": "Duality eliminates the top and codimension-one handles",
+        "deps": [
+          "def-h-cobordism",
+          "lem-zero-and-one-handles-can-be-eliminated-in-a-simply-connected-h-cobordism",
+          "def-dual-handle-decomposition",
+          "thm-handle-duality-from-negating-a-morse-function",
+          "prop-dual-elimination-of-top-index-handles",
+          "def-smooth-cobordism-triad-for-morse-theory",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). In the situation of the\nprevious lemma, $W$ also admits a handle decomposition relative to $M_0$ with no\nhandles of index $n$ or $n+1$; combining the two results, $W$ admits a\npresentation relative to $M_0$ in which every handle has index between $2$ and\n$n-1$. Both statements are obtained from the low-index elimination by running it\non the reversed triad $(W;M_1,M_0)$ and dualising\n([[def-h-cobordism]]).",
+        "strategy": "**Proof technique:** direct.\n\n1.1 By [F1] the reversed triad $(W;M_1,M_0)$ is again an h-cobordism with the same dimension, and its faces are the same closed simply connected $n$-manifolds in the opposite order while $W$ remains connected; hence the low-index elimination [F2] applies to the reversed triad and gives a presentation of $W$ relative to $M_1$ with no handles of index $0$ or $1$. [F1, F2, given]\n\n2.1 Negate the Morse function of the reversed presentation and dualise by [F3]: a handle of index $k$ in the presentation relative to $M_1$ becomes a handle of index $n+1-k$ in a presentation relative to $M_0$, with attaching and belt spheres interchanged. Absent indices $0$ and $1$ therefore become absent indices $n+1$ and $n$, so the dual presentation relative to $M_0$ has no handles of index $n+1$ or $n$. [F3, step 1.1]\n\n3.1 To obtain the two exclusions simultaneously, first eliminate $0,1$ relative to $M_0$ by [F2]. Its reversed presentation has every index at most $n-1$. Apply the actual low-index procedure to that presentation relative to $M_1$: by [F4] it deletes $0,1$ and introduces only $3$, so its maximum stays at most $n-1$, because $n\\ge5$. Reverse back by [F3]. The resulting original indices lie between $2$ and $n-1$; both exclusions now hold in one presentation. No composition of two independently chosen presentations or face-fixing diffeomorphisms is being assumed. [F2, F3, F4, step 2.1, given] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; Concluding Remarks, printed pp. 113--114"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 11
+      },
+      {
+        "id": "lem-belt-sphere-complements-in-low-handle-levels-preserve-the-fundamental-group",
+        "kind": "lemma",
+        "title": "Belt-sphere complements in low handle levels preserve the fundamental group",
+        "deps": [
+          "def-countable-choice",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "lem-outgoing-boundary-of-a-handle-attachment-trades-the-disk-factors",
+          "thm-handle-duality-from-negating-a-morse-function",
+          "thm-seifert-van-kampen",
+          "thm-parametric-transversality",
+          "thm-transverse-preimage-theorem",
+          "def-h-cobordism",
+          "thm-relative-whitney-approximation-for-manifold-valued-maps",
+          "lem-metastable-embedding-for-maps-from-a-compact-manifold",
+          "thm-whitney-trick-in-the-two-dimensional-borderline-case",
+          "thm-whitney-move-removes-a-cancelling-pair-of-intersections",
+          "lem-real-stiefel-spaces-with-complement-rank-at-least-two-are-simply-connected"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem, proof of Theorem 6.4",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Printed pp.71–76: trajectories identify the belt-sphere complement with the attaching-sphere complement; the fundamental-group condition in Theorem 6.6."
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Lemmas 1.21–1.24",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Printed pp.13–18: h-cobordism incoming fundamental groups, homology lemma and low-index elimination; finite-complement proof supplied here."
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $W$ have a finite handle decomposition relative to a closed connected incoming $n$-manifold $M$, $n\\ge5$, with all handles of index at least $q$, $2\\le q\\le n-2$. Let $T=W_q$ be the trace through its $q$-handles, $N=\\partial_1T$, and let $B_1,\\ldots,B_c\\subset N$ be their belt spheres. If $q=2$, assume $\\pi_1(M)\\to\\pi_1(T)$ is injective. Then $N\\setminus\\bigcup_jB_j\\to N$ induces an isomorphism of fundamental groups, as does the complement of any subfamily. The $q=2$ assumption holds for an h-cobordism and for a presentation whose $2$-handle attaching circles are nullhomotopic in $M$.\n\nFor $q=2$, let an embedded $2$-sphere $A\\subset N$ and one belt sphere have an opposite-sign pair with a nullhomotopic Whitney circle avoiding every other belt. Then that pair admits a clean framed Whitney disk whose interior avoids $A$ and all belt spheres, and the associated isotopy of $A$ removes the pair without changing its intersections with any other belt. A finite collection of additional embedded $2$-spheres disjoint from the two boundary arcs may also be avoided by the disk and its tube. The assertion is about complements of the actual handle belt spheres; it does not assert complement injection for an arbitrary codimension-two embedded sphere.",
+        "strategy": "**Given:** The finite handle data and incoming connected manifold, countable choice, and for $q=2$ the stated incoming fundamental-group injection.\n\n1.1 Put $Q=M\\setminus\\bigcup_j\\operatorname{int}(S^{q-1}\\times D^{n-q+1})$, using the actual framed attaching tubes. By [F1], $N\\setminus\\bigcup_jB_j$ is $Q$ with the pieces $(D^q\\setminus\\{0\\})\\times S^{n-q}$ glued along $S^{q-1}\\times S^{n-q}$. Radially retract each punctured $D^q$ to its boundary, keeping that boundary fixed. Thus this complement deformation retracts to $Q$, with the corner collars included. Also $Q$ is homotopy equivalent to $M$ minus the attaching cores $S^{q-1}$. Their codimension is $n-q+1\\ge3$. By [F4] loops and disk nullhomotopies in $M$ can avoid these finitely many cores, relative to prescribed endpoints or boundary collars: their expected intersection dimensions are $q-n<0$ and $q+1-n\\le-1$. Therefore $\\pi_1(Q)\\to\\pi_1(M)$ is an isomorphism. These identifications commute with the inclusions into the trace $T$. [F1, F4, construct, algebra]\n\n2.1 For $q\\ge3$, [F3] makes $\\pi_1(M)\\to\\pi_1(T)$ an isomorphism. For $q=2$ it is a surjection, since attaching a $2$-handle only kills the attaching loop; the assumed injection makes it an isomorphism too. Reading the trace backwards attaches only handles of index $n+1-q\\ge3$, so [F2] and [F3] make $\\pi_1(N)\\to\\pi_1(T)$ an isomorphism. Step 1.1 now identifies the complement-to-$N$ map as the comparison between two isomorphisms to $\\pi_1(T)$, proving the first assertion. For a subfamily, every loop in its complement can be perturbed away from the remaining belts because they have codimension $q\\ge2$ and $1-q<0$. Hence the full-complement map onto the subfamily-complement fundamental group is surjective. Since its composite to $\\pi_1(N)$ is an isomorphism, the subfamily map to $\\pi_1(N)$ is also injective and surjective. [F2, F3, F4, step 1.1, construct]\n\n3.1 If $W$ is an h-cobordism, its remaining handles beyond $T=W_q$ have index at least $q+1\\ge3$, so [F3] gives $\\pi_1(T)\\cong\\pi_1(W)$. The incoming inclusion $M\\to W$ is an isomorphism by [F5], and therefore $M\\to T$ is an isomorphism. If instead all $2$-handle attaching loops are nullhomotopic, their normal closures are zero and the incoming map is again an isomorphism. This proves the two advertised sufficient conditions, without assuming that a simply connected outgoing level alone controls an arbitrary codimension-two complement. [F3, F5, step 2.1]\n\n3.2 For the $q=2$ pair form the usual clean boundary annulus in its sheet and fixed corner collars. Its inner circle $\\lambda$ misses all belts and the $2$-sphere $A$, and is homotopic in $N$ to the original Whitney circle. Step 2.1 makes the full belt-complement map injective, so $\\lambda$ bounds a disk in that full complement. Smooth and embed the disk relative to its annulus collar using [F4] and [F6]. Perturb its interior in the belt complement to avoid $A$ and any additional prescribed $2$-spheres: each incidence dimension is $2+2-n<0$. Small relative perturbations preserve its compact embedded collar and embeddedness. Thus the resulting disk misses every belt in its interior and every additional $2$-sphere as requested. [F4, F6, step 2.1, construct, algebra]\n\n4.1 The framing part is the exact $r=2$ construction of [F6]: opposite corner signs match the oriented endpoint values of its rank-one partial $E$ frame, tangent to $A$ on its arc and normal to the selected belt on the other. Trivialize the rank-$(n-2)$ disk-normal bundle by radial projection transport; the partial-frame loop lies in $V_1(\\mathbb R^{n-2})$, simply connected since $n\\ge5$. Extend and smooth $E$ relative to its collars, then frame its orthogonal complement $H$ over the disk. This gives an admissible frame with no arbitrary preassigned full boundary class. By [F7] a thin tube gives the desired isotopy of $A$. It avoids the other belts and additional spheres by step 3.2 and compact separation outside the designated collars, so no new intersection with them is created. The choices are finite or are the declared countable-choice approximation inputs. [F6, F7, step 3.2, construct] ∎"
+      },
+      {
+        "id": "lem-homology-lemma-realizes-handle-bases-by-isotopy",
+        "kind": "lemma",
+        "title": "Homology lemma: a handle-basis class is realized by a sphere meeting the belt sphere once",
+        "deps": [
+          "prop-relative-handle-chain-complex-of-a-cobordism",
+          "def-attaching-belt-intersection-matrix-of-adjacent-index-handles",
+          "lem-handle-boundary-coefficients-are-attaching-belt-intersection-numbers",
+          "thm-high-dimensional-whitney-trick",
+          "thm-whitney-trick-in-the-two-dimensional-borderline-case",
+          "lem-arcs-in-a-connected-submanifold-avoiding-finitely-many-double-points",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-simply-connected",
+          "def-countable-choice",
+          "lem-belt-sphere-complements-in-low-handle-levels-preserve-the-fundamental-group"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $W$ be a compact\nsmooth $(n+1)$-manifold with a finite handle decomposition relative to\n$\\partial_0W$ in which all handles have index $\\ge q$, where $2\\le q\\le n-3$,\nand suppose the outgoing boundary $\\partial_1W_q$ is simply connected\n([[def-simply-connected]]). Let $f:S^q\\hookrightarrow\\partial_1W_q$ be an\nembedded sphere whose class in $C_q=H_q(W_q,W_{q-1};\\mathbb Z)$ equals\n$\\pm[\\varphi]$ for the basis element $[\\varphi]$ of some $q$-handle $\\varphi$\n([[prop-relative-handle-chain-complex-of-a-cobordism]]). Then $f$ is isotopic in\n$\\partial_1W_q$ to an embedding that meets the belt sphere of $\\varphi$\ntransversely in exactly one point and is disjoint from the belt spheres of all\nother $q$-handles ([[def-k-handle-core-cocore-attaching-region-and-belt-sphere]]).\nIn the special case that the presentation consists of two adjacent index\nclasses $q,q+1$, the hypothesis on the class says exactly that the intersection\nvector of $f$ with the belt spheres is $\\pm$ a standard basis vector.\n\nFor $q=2$, also assume that $\\pi_1(\\partial_0W)\\to\\pi_1(W_2)$ is injective. In the h-cobordism applications this follows from the incoming homotopy equivalence and the absence of later handles below index three; nullhomotopic $2$-handle attaching circles also suffice.",
+        "strategy": "1.1 Isotope $f$ transverse to the finitely many belt spheres. By [F1] its signed intersection coordinates are $\\pm1$ at the distinguished belt and zero at every other belt. Unless the required configuration already holds, one belt therefore has an opposite-sign surplus pair. [F1, given]\n\n2.1 Choose sheet arcs avoiding every other intersection by [F2]. Their circle is nullhomotopic because the outgoing level is simply connected. For $3\\le q\\le n-3$, both sheet dimensions are at least three and [F3] supplies the Whitney move; choose the disk and tube disjoint from all other spheres by their codimension-at-least-three dimension counts. For $q=2$, [F4] gives the full belt-complement injection from the explicit incoming assumption, fills the shifted circle in that complement and clears all other $2$-sphere attaching images. The helper supplies the clean admissibly framed disk and pair removal. [F2, F3, F4, step 1.1]\n\n3.1 Each move lowers the finite intersection count by two, preserves the other intersections and transports any given normal frame. Iterating leaves one point at the distinguished belt and none at the others, because the signed sums remain $\\pm1$ and zero. This proves the stated generic range with its exact $q=2$ condition. [F1, F4, step 2.1] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5); Homology Lemma 1.22, printed pp. 14--15"
+            },
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; §§6--7 (Theorems 7.6 and Lemma 7.7), printed pp. 67--92"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-modification-lemma-for-embedded-spheres-in-a-handle-presentation",
+        "kind": "lemma",
+        "title": "Modification lemma: prescribed class changes by isotopy of an embedded boundary sphere",
+        "deps": [
+          "prop-relative-handle-chain-complex-of-a-cobordism",
+          "lem-handle-boundary-coefficients-are-attaching-belt-intersection-numbers",
+          "lem-embedded-bands-joining-two-framed-spheres-exist",
+          "def-handle-slide-of-one-k-handle-over-another",
+          "lem-attaching-handles-along-isotopic-attaching-embeddings-preserves-the-diffeomorphism-type",
+          "def-smooth-embedding",
+          "def-countable-choice",
+          "lem-outgoing-boundary-of-a-handle-attachment-trades-the-disk-factors"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $W$ be a compact\nsmooth $(n+1)$-manifold with a finite handle decomposition relative to\n$\\partial_0W$ in which all handles have index $\\ge q$, where $2\\le q\\le n-2$,\nand suppose the middle boundary $N_q=\\partial_1W_q$ is connected. Let\n$f:S^q\\hookrightarrow\\partial_1^\\circ W_q$ be an embedded sphere and let\n$x_1,\\dots,x_r\\in\\mathbb Z$, where $r$ is the number of $(q+1)$-handles. Then\nthere is an embedded sphere $g:S^q\\hookrightarrow\\partial_1^\\circ W_q$\n([[def-smooth-embedding]]), isotopic to $f$ in $\\partial_1W_{q+1}$, whose class\nin $C_q$ satisfies\n$[g]=[f]+\\sum_j x_j\\,\\partial_{q+1}[\\varphi_j]$, where the $[\\varphi_j]$ are the\ncore classes of the $(q+1)$-handles and $\\partial_{q+1}$ is the handle-chain\ndifferential of the relative complex\n([[prop-relative-handle-chain-complex-of-a-cobordism]]). Thus an arbitrary\ninteger combination of boundary classes of higher handles can be added to the\nclass of an embedded sphere by an isotopy that becomes trivial one level higher.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Fix a $(q+1)$-handle $\\varphi_j$. Choose a parallel copy $P_j$ of its attaching sphere just outside its closed attaching tube, using the extension over a neighborhood of the normal disk factor. It lies in $N_q^\\circ$, the open complement of all closed upper attaching tubes. In $N_{q+1}$ it bounds the outgoing disk $D^{q+1}\\times\\{z\\}$, $z\\in S^{n-q-1}$, together with the short annular collar from its boundary to $P_j$. This is an embedded disk with interior in that handle's outgoing piece, disjoint from any sphere in the common part. Its normal disk coordinates give the standard bounding-disk framing. In $C_q$, $[P_j]=\\partial_{q+1}[\\varphi_j]$ with compatible orientations, by [F1]. [F1, F3, given, construct]\n\n2.1 $N_q^\\circ$ is connected: the upper attaching cores have codimension $n-q\\ge2$, so paths can be rerouted in finitely many product charts off the cores, and radial retraction in each punctured tube pushes them outside the closed smaller tubes. Apply [F2] within this common part to band-sum $f$ with $P_j$. The band interior can avoid both spheres and all other attaching tubes. The resulting $q$-sphere $g$ is embedded and remains in $N_q^\\circ$. An oriented pair-of-pants bordism in a thin neighborhood of the band has boundary $g-f-P_j$, so in $C_q$ its fundamental chain gives $[g]=[f]+[P_j]$. Choose the orientation of the added parallel copy, rather than reverse $f$, to obtain either sign. [F1, F2, step 1.1, construct, algebra]\n\n3.1 In $N_{q+1}$, slide the added lobe back along the band and across the embedded disk of step 1.1. The disk interior is in the new handle's outgoing region, whereas $f$ and the band are in the common part. A thin product neighborhood of their union therefore gives the usual embedded isotopy from the band-sum to $f$, fixed outside that neighborhood. If $f$ has a normal frame, use the bounding-disk frame for $P_j$ and the matching band frame; this isotopy transports the full frame and gives a framed isotopy as well. Thus no implication from a vanishing homology class to embedding triviality is used. [F2, F3, step 1.1, step 2.1, construct]\n\n4.1 Repeat with fresh disjoint parallel copies $|x_j|$ times, using the sign of $x_j$, and then over the finite upper-handle list. At every iteration the new sphere is in the common part and is isotopic one level higher to the preceding sphere. The additive computation gives $[g]=[f]+\\sum_jx_j\\partial_{q+1}[\\varphi_j]$. In particular, a standard trivial framed starting sphere yields a sphere framed-isotopic to it in $N_{q+1}$. This proves the assertion, including zero coefficients and an empty upper-handle list. [step 2.1, step 3.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5); Modification Lemma 1.23, printed p. 16"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, Oxford University Press 2002; complete electronic copy)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Chapter 8 §§8.1--8.2, printed pp. 147--163 (electronic pp. 154--170)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-handle-trading-concentrates-an-acyclic-simply-connected-presentation-in-two-adjacent-middle-indices",
+        "kind": "lemma",
+        "title": "Trading concentrates a simply connected h-cobordism in two adjacent middle indices",
+        "deps": [
+          "def-h-cobordism",
+          "lem-relative-homology-of-an-h-cobordism-vanishes-at-both-ends",
+          "prop-h-cobordisms-admit-adapted-ordered-handle-decompositions",
+          "lem-zero-and-one-handles-can-be-eliminated-in-a-simply-connected-h-cobordism",
+          "lem-duality-eliminates-top-and-cotop-handles",
+          "lem-handle-elimination-by-trading-a-pair",
+          "lem-homology-lemma-realizes-handle-bases-by-isotopy",
+          "lem-modification-lemma-for-embedded-spheres-in-a-handle-presentation",
+          "prop-relative-handle-chain-complex-of-a-cobordism",
+          "def-dual-handle-decomposition",
+          "thm-handle-duality-from-negating-a-morse-function",
+          "def-simply-connected",
+          "def-countable-choice",
+          "lem-belt-sphere-complements-in-low-handle-levels-preserve-the-fundamental-group"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $(W;M_0,M_1)$ be an\nh-cobordism with $\\dim W=n+1$, $n\\ge5$, $W$ connected and $M_0,M_1$ closed\nsimply connected ([[def-h-cobordism]], [[def-simply-connected]]). Then for every\ninteger $k$ with $2\\le k\\le n-2$ there is a handle decomposition of $W$\nrelative to $M_0$ whose handles all have index $k$ or $k+1$, with the same\nnumber $r$ of each; the relative handle chain complex of that presentation is\n$0\\to\\mathbb Z^r\\xrightarrow{\\partial_{k+1}}\\mathbb Z^r\\to0$, and since\n$H_*(W,M_0;\\mathbb Z)=0$ the differential $\\partial_{k+1}$ is an isomorphism.\nNo other handles survive, and the presentation can be chosen index-ordered with\nall $k$-handles attached at one level and all $(k+1)$-handles at the next\n([[prop-relative-handle-chain-complex-of-a-cobordism]]).",
+        "strategy": "1.1 By [F1] take an ordered presentation with indices at least two and at most $n-1$. Each incoming inclusion is a homotopy equivalence and the relative homology vanishes by [F2]. [F1, F2, given]\n\n2.1 Eliminate the indices $q=2,\\ldots,k-1$, not the desired surviving index $k$. At each stage $N_q=\\partial_1W_q$ is simply connected: the later handles have index at least $q+1\\ge3$, so $\\pi_1(W_q)\\cong\\pi_1(W)=1$, and the reversed trace from $N_q$ has only index $n+1-q\\ge4$ handles, so $\\pi_1(N_q)\\cong\\pi_1(W_q)$. These are the handle fundamental-group comparisons of the belt-complement helper in [F4]. With no indices below $q$, one has $C_{q-1}=0$ and $\\partial_{q+1}$ is onto $C_q$. For a fixed $q$-handle $e$, choose coefficients $y_j$ with $\\sum_jy_j\\partial_{q+1}[\\varphi_j]=[e]$. Start with a trivial framed $q$-sphere of class zero and apply [F3] to obtain $\\beta$ of class $[e]$, isotopic to that trivial sphere one level higher. Use the framed version of [F3], starting with the standard trivial frame, so $\\beta$ is framed-isotopic to that trivial sphere in the next level. [F2, F3, F4, step 1.1]\n\n3.1 Since $q\\le k-1\\le n-3$, [F4] applies to $\\beta$. Its $q=2$ incoming condition follows from simple connectivity of $M_0$, or equivalently from the h-cobordism fundamental-group isomorphism. Carry the higher attaching embeddings along the resulting ambient isotopy; its induced diffeomorphism of the next level preserves standard framed triviality. A diffeomorphism maps a standard framed disk embedding to another such embedding. By [F5] trade $e$ for one $(q+2)$-handle. Finite repetition eliminates all original indices below $k$. [F3, F4, F5, step 2.1]\n\n4.1 Reverse the triad and perform the same low-index eliminations through dual index $n-k-1$. Every such index is at most $n-3$; the opposite incoming face is simply connected, so the same $q=2$ condition holds. Trading a dual $r$-handle for a dual $(r+2)$-handle introduces original index $n-r-1\\ge k$, and thus never recreates an original handle below $k$. This removes all original indices at least $k+2$ while preserving the prior low elimination. The surviving original indices are exactly $k,k+1$, for the full stated $2\\le k\\le n-2$ range. [F4, F5, F6, step 3.1]\n\n5.1 The surviving relative chain complex is concentrated in degrees $k,k+1$ and has zero homology by [F2]. Its differential is injective and surjective, giving equal finite handle numbers and the stated two-term isomorphism. The normal form retains every advertised index without invoking the unproved arbitrary-sphere flipped endpoint. [F2, step 4.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5); Normal Form Lemma 1.24, printed pp. 16--17"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, Oxford University Press 2002; complete electronic copy)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Chapter 8 §§8.1--8.2, printed pp. 147--163 (electronic pp. 154--170); Proposition 8.31"
+            },
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; §8, printed pp. 93--104"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 12
+      },
+      {
+        "id": "def-middle-handle-intersection-matrix-of-an-h-cobordism",
+        "kind": "definition",
+        "title": "The middle-handle intersection matrix of an h-cobordism",
+        "deps": [
+          "def-attaching-belt-intersection-matrix-of-adjacent-index-handles",
+          "prop-relative-handle-chain-complex-of-a-cobordism",
+          "lem-handle-trading-concentrates-an-acyclic-simply-connected-presentation-in-two-adjacent-middle-indices",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-local-oriented-intersection-sign",
+          "def-oriented-intersection-number",
+          "def-mod-two-intersection-number",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-countable-choice",
+          "def-orientation-local-system-and-orientation-cover",
+          "thm-creation-of-a-cancelling-handle-pair",
+          "thm-handle-cancellation",
+          "thm-parametric-transversality",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "thm-compactly-supported-vector-fields-are-complete",
+          "thm-fundamental-theorem-on-flows"
+        ],
+        "statement": "In the situation of the concentration lemma\n([[lem-handle-trading-concentrates-an-acyclic-simply-connected-presentation-in-two-adjacent-middle-indices]]),\nchoose an orientation of $W$. Such an orientation exists: choose one at an interior basepoint and transport it along paths by [[def-orientation-local-system-and-orientation-cover]]. Transport depends only on endpoint-fixed path homotopy, so simple connectivity makes its value at each point unique. In each chart the transported value is constant in the orientation-cover coordinate; hence it is a continuous local orientation. The boundary collars extend this orientation to $W$ and induce one on each level. This is a single initial choice, not a family of independent choices.\n\nLet the presentation of the h-cobordism have handles $e_1,\\dots,e_r$ of index\n$k$ and $g_1,\\dots,g_r$ of index $k+1$, $2\\le k\\le n-2$, attached at the two\nconsecutive levels, and let $N$ be the outgoing boundary after the $k$-handles\n([[def-k-handle-core-cocore-attaching-region-and-belt-sphere]]). After an\narbitrarily small isotopy of the attaching data the attaching spheres $A_i$ of\nthe $g_i$ and the belt spheres $B_j$ of the $e_j$ are transverse, and the\n**middle-handle intersection matrix** of the h-cobordism for the chosen\npresentation is\n\n$$M=(I(A_i,B_j))\\in M_r(\\mathbb Z),$$\n\nthe matrix of oriented intersection numbers in $N$\n([[def-oriented-intersection-number]], [[def-local-oriented-intersection-sign]]).\nThe sphere orientations use the core and belt-normal convention of the relative\nhandle-chain proposition and the boundary orientation of $N$ when $W$ is oriented\n([[def-oriented-smooth-manifold-and-oriented-chart]]); without orientations the\nmatrix $(\\#_2(A_i\\cap B_j))\\in M_r(\\mathbb Z/2)$ with entries the mod-two\nintersection numbers is defined ([[def-mod-two-intersection-number]]).\n\nBy the relative handle chain complex\n([[prop-relative-handle-chain-complex-of-a-cobordism]]) this matrix represents\n$\\partial_{k+1}:C_{k+1}\\to C_k$ on row coordinate vectors, $x\\mapsto xM$;\nthe matrix on column coordinate vectors is $M^T$. For a fixed handle count, slides, sign changes and renumbering give the corresponding basis changes of this differential. Presentation changes may also insert or delete an isolated geometrically cancelling $k/(k+1)$ pair ([[thm-creation-of-a-cancelling-handle-pair]], [[thm-handle-cancellation]]). Its attaching and belt spheres have no incidences with the old handles and meet one another once, so the new matrix is $M\\oplus(\\varepsilon)$, $\\varepsilon=\\pm1$, or $M\\oplus(1)$ after reorientation. In particular the empty and one-pair presentations of $S^n\\times[0,1]$ have matrices of sizes $0$ and $1$; presentation-dependence includes stabilization, which cannot be produced by size-preserving basis changes alone. The\nmatrix is only readable for a configuration that is already transverse; if some\npair is not transverse, the matrix is read after a small isotopy, which does not\nchange the presented manifold. Countable choice is inherited from the\nintersection-number and handle suppliers ([[def-countable-choice]]).\n\nFor fixed oriented attaching data the entries are independent of the small transverse isotopy, by the homotopy-invariance clause of [[def-oriented-intersection-number]]; the same holds modulo two by [[def-mod-two-intersection-number]]. For $r=0$ the matrix is empty and the corresponding differential is the unique isomorphism $0\\to0$.\n\nThe transverse isotopy can be chosen arbitrarily small: on the compact middle level $N$, finitely many chart vector fields multiplied by compactly supported bumps span $TN$ ([[lem-manifold-bump-for-a-compact-set-inside-an-open-set]]). Compose their small-time flows to obtain a finite-parameter family $H_s$ of diffeomorphisms with $H_0=\\mathrm{id}$ ([[thm-compactly-supported-vector-fields-are-complete]], [[thm-fundamental-theorem-on-flows]]). The evaluation $(x,s)\\mapsto H_s(x)$ is a submersion for $s$ in a sufficiently small parameter ball, by the spanning condition at $s=0$ and compactness. Applied to the disjoint union of attaching spheres, parametric transversality to each of the finitely many fixed belt spheres gives parameters arbitrarily near zero that are good for all pairs ([[thm-parametric-transversality]]). The isotopy $t\\mapsto H_{ts}$ applied to all upper attaching embeddings transports their framings and preserves their mutual disjointness; the belt spheres remain the fixed comparison family.",
+        "strategy": "Definition. The middle level $N$ is a closed smooth $n$-manifold, the two families of spheres $A_i$ and $B_j$ have complementary dimensions $k$ and $n-k$ summing to $\\dim N=n$, and finitely many transverse intersections are finite. The identification with the chain differential is the content of the relative handle chain complex proposition and of the coefficient lemma, not a new claim. Nothing is proved and no independence of the presentation is asserted here.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; Concluding Remarks, printed pp. 113--114"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, Oxford University Press 2002; complete electronic copy)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Chapter 8 §§8.1--8.2, printed pp. 147--163 (electronic pp. 154--170)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 13
+      },
+      {
+        "id": "lem-acyclicity-makes-the-simply-connected-middle-handle-matrix-unimodular",
+        "kind": "lemma",
+        "title": "Acyclicity makes the simply connected middle-handle matrix unimodular",
+        "deps": [
+          "lem-relative-homology-of-an-h-cobordism-vanishes-at-both-ends",
+          "prop-relative-handle-chain-complex-of-a-cobordism",
+          "lem-handle-trading-concentrates-an-acyclic-simply-connected-presentation-in-two-adjacent-middle-indices",
+          "def-middle-handle-intersection-matrix-of-an-h-cobordism",
+          "lem-relative-homology-of-the-standard-handle-pair",
+          "def-determinant-of-a-square-matrix",
+          "cor-operator-determinant-on-the-general-linear-group",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $(W;M_0,M_1)$ be a\nconnected simply connected h-cobordism with $\\dim W=n+1$, $n\\ge5$, and let a\npresentation relative to $M_0$ have handles only in indices $k,k+1$ with\n$2\\le k\\le n-2$, with $r$ handles of each index (as supplied by the\nconcentration lemma\n([[lem-handle-trading-concentrates-an-acyclic-simply-connected-presentation-in-two-adjacent-middle-indices]])).\nThen the middle-handle intersection matrix $M\\in M_r(\\mathbb Z)$\n([[def-middle-handle-intersection-matrix-of-an-h-cobordism]]) is invertible over\n$\\mathbb Z$, i.e. its determinant is $\\pm1$, and\n$M\\in\\operatorname{GL}_r(\\mathbb Z)$. Equivalently, the differential\n$\\partial_{k+1}:C_{k+1}\\to C_k$ of the relative handle chain complex is an\nisomorphism of finitely generated free abelian groups.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 By the concentration lemma the presentation has handles only in the two adjacent indices $k,k+1$, so by [F1] the relative handle chain complex is $0\\to C_{k+1}\\xrightarrow{\\partial_{k+1}}C_k\\to0$ with $C_k,C_{k+1}$ free abelian and bases given by the handle cores, and the row-coordinate matrix of $\\partial_{k+1}$ in these bases is $M$ (the column-coordinate matrix is $M^T$). [F1, F2, given]\n\n2.1 Vanishing of the relative homology [F3] is exactly acyclicity of this complex: $H_{k+1}(C_\\bullet)=\\ker\\partial_{k+1}=0$ and $H_k(C_\\bullet)=C_k/\\operatorname{im}\\partial_{k+1}=0$. Hence $\\partial_{k+1}$ is injective and surjective, that is, a bijection of abelian groups. [F3, step 1.1]\n\n3.1 A bijection between the finitely generated free abelian groups $C_{k+1}$ and $C_k$ forces their ranks to be equal, and the row-coordinate matrix of $\\partial_{k+1}$ is a square integer matrix invertible over $\\mathbb Z$ (its inverse is the matrix of the inverse isomorphism). For $r>0$, view this matrix and its integer inverse over $\\mathbb Q$. The field determinant identity in [F4] gives $\\det M\\det M^{-1}=1$; both determinants are integers by the Leibniz formula, so each is $\\pm1$. For $r=0$, set the empty determinant equal to $1$ by the empty-product convention; the empty matrix is its own inverse. Thus $M\\in\\operatorname{GL}_r(\\mathbb Z)$. [F2, F4, step 2.1]\n\n4.1 By the definition of the middle-handle matrix [F1] this invertible matrix is exactly $M$, so $M$ is unimodular with $\\det M=\\pm1$. This is Ranicki's unimodularity proposition specialised to the trivial fundamental group, where the group ring reduces to $\\mathbb Z$. [F1, step 3.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, Oxford University Press 2002; complete electronic copy)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Chapter 8 §§8.1--8.2, printed pp. 147--163 (electronic pp. 154--170); Proposition 8.32"
+            },
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; §7, printed pp. 79--92"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 14
+      },
+      {
+        "id": "lem-handle-slides-reduce-a-unimodular-middle-handle-matrix-to-the-identity",
+        "kind": "lemma",
+        "title": "Handle slides, renumberings and reorientations reduce a unimodular middle-handle matrix to the identity",
+        "deps": [
+          "def-countable-choice",
+          "def-determinant-of-a-square-matrix",
+          "def-matrix-equivalence-and-smith-normal-form-over-a-pid",
+          "def-middle-handle-intersection-matrix-of-an-h-cobordism",
+          "lem-acyclicity-makes-the-simply-connected-middle-handle-matrix-unimodular",
+          "lem-handle-slides-act-by-elementary-basis-change-on-handle-chains",
+          "lem-handle-slides-preserve-the-relative-diffeomorphism-type",
+          "thm-smith-normal-form-existence-over-a-pid"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). (i) Every invertible\ninteger matrix $A\\in\\operatorname{GL}_r(\\mathbb Z)$ can be carried to the\nidentity by finitely many operations of the following three kinds: add an\ninteger multiple of one row (respectively column) to another row (respectively\ncolumn); interchange two rows (respectively columns); multiply a row\n(respectively column) by $-1$. (ii) Consequently, if an h-cobordism as in the\nprevious lemma is presented with handles only in indices $k,k+1$ and\nmiddle-handle intersection matrix $M\\in\\operatorname{GL}_r(\\mathbb Z)$\n([[lem-acyclicity-makes-the-simply-connected-middle-handle-matrix-unimodular]]),\nthen $W$ admits a presentation relative to $M_0$ with the same indices and the\nsame number of handles whose middle-handle intersection matrix is the identity\n$I_r$: each operation of (i) is realised by a handle slide, a renumbering of\nequal-index handles or a reorientation of a handle core or cocore, all of which\npreserve $W$ relative to $M_0$.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 A finite elementary reduction exists directly over $\\mathbb Z$. For $r=0$ there is nothing to do. For $r\\ge1$, the entries of the first column of $A$ have gcd $1$: the first row of the integer inverse of $A$ supplies an integer linear combination equal to $1$. Apply the Euclidean algorithm to pairs of entries, using row swaps and subtraction of integer multiples; every nonzero remainder is smaller in absolute value than the previous divisor, so each pair reduction terminates. Iterating through the finite column yields $(1,0,\\ldots,0)^T$, with a final sign change if needed. Then subtract suitable multiples of column one from the other columns to clear the first row. The resulting matrix is $\\operatorname{diag}(1,B)$ with $B\\in\\operatorname{GL}_{r-1}(\\mathbb Z)$, because the performed operations are invertible over $\\mathbb Z$. Repeat on $B$; induction on the matrix size terminates with $I_r$. All operations are exactly additions, swaps and sign changes, proving (i). This also gives the required elementary implementation of the Smith-form conclusion of [F1]. [F1, F2, given, algebra]\n\n2.1 For an upper slide $g_{i'}'=g_{i'}+\\varepsilon g_i$, linearity gives $R_{i'}'=R_{i'}+\\varepsilon R_i$. For a lower slide $e_{j'}'=e_{j'}+\\varepsilon e_j$, rewrite each boundary in the new basis: $e_{j'}=e_{j'}'-\\varepsilon e_j'$. Thus $C_j'=C_j-\\varepsilon C_{j'}$ and the other columns are unchanged. Choosing the opposite slide direction realizes any desired target column addition; finitely repeating a unit addition realizes any integer multiple. In ambient dimension $n+1$, both handle indices $k,k+1$ lie between $1$ and $(n+1)-2=n-1$, so [F3] applies throughout $2\\le k\\le n-2$. Swaps and sign changes are relabelings and reorientations by [F4]. [F3, F4, step 1.1, algebra]\n\n3.1 Apply to the presentation of (ii) the finite sequence of handle slides, renumberings and reorientations corresponding to the algebraic sequence of step 1.1: each step preserves $W$ relative to $M_0$, so the final presentation has the same indices and the same number of handles and its middle-handle intersection matrix is $I_r$ by [F1] and the definition of the matrix as the differential $\\partial_{k+1}$ in the handle bases. [F4, given, step 2.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, Oxford University Press 2002; complete electronic copy)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Chapter 8 §§8.1--8.2, printed pp. 147--163 (electronic pp. 154--170); Proposition 8.32 and its proof"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5); Lemma 1.24 and the diagonalisation step of Theorem 1.2"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 15
+      },
+      {
+        "id": "lem-whitney-trick-realizes-algebraic-middle-handle-cancellation-geometrically",
+        "kind": "lemma",
+        "title": "The Whitney trick realizes algebraic middle-handle cancellation geometrically",
+        "deps": [
+          "def-middle-handle-intersection-matrix-of-an-h-cobordism",
+          "lem-handle-slides-reduce-a-unimodular-middle-handle-matrix-to-the-identity",
+          "thm-high-dimensional-whitney-trick",
+          "thm-whitney-trick-in-the-two-dimensional-borderline-case",
+          "lem-arcs-in-a-connected-submanifold-avoiding-finitely-many-double-points",
+          "lem-attaching-handles-along-isotopic-attaching-embeddings-preserves-the-diffeomorphism-type",
+          "def-simply-connected",
+          "def-transverse-complementary-dimensional-intersection-set",
+          "lem-compact-transverse-complementary-intersections-are-finite",
+          "def-countable-choice",
+          "lem-belt-sphere-complements-in-low-handle-levels-preserve-the-fundamental-group",
+          "thm-handle-duality-from-negating-a-morse-function",
+          "def-h-cobordism",
+          "thm-seifert-van-kampen"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $(W;M_0,M_1)$ be a\nconnected simply connected h-cobordism with $\\dim W=n+1\\ge6$, presented relative\nto $M_0$ with handles $e_1,\\dots,e_r$ of index $k$ and $g_1,\\dots,g_r$ of index\n$k+1$, $2\\le k\\le n-2$, with middle-handle intersection matrix equal to the\nidentity $I_r$ (all intersections transverse, the oriented intersection numbers\nbeing $\\delta_{ij}$)\n([[def-middle-handle-intersection-matrix-of-an-h-cobordism]]). Then there is a\npresentation of $W$ relative to $M_0$ with the same handles such that, for every\n$i,j$, the attaching sphere $A_i$ of $g_i$ meets the belt sphere $B_j$ of $e_j$\ntransversely with $A_i\\cap B_j$ a single point if $i=j$ and $A_i\\cap B_j=\\varnothing$\nif $i\\ne j$. The modification is realised by isotopies of the attaching\nembeddings; equivalently the algebraic identity matrix is upgraded to a\ngeometric single-point configuration.",
+        "strategy": "1.1 Work in the common middle level of the entire two-index presentation, before isolating any pair of critical points. That level is simply connected: the reverse trace through the $k$-handles and the later forward handles have indices at least three, so both its fundamental group and that of $W$ agree. By [F1] the intersections are finite, and each $(i,j)$ signed sum is $\\delta_{ij}$. Any surplus set therefore has an opposite-sign pair. Both sheet dimensions $k$ and $n-k$ are at least two, so choose its two sheet arcs avoiding every other intersection by [F2]; their circle contracts in this level. [F1, F2, given]\n\n2.1 For $3\\le k\\le n-3$, apply [F3], choosing the disk and tube to avoid every other attaching and belt sphere by codimension at least three. For $k=2$, apply the belt-complement construction of [F4] from $M_0$: fill the shifted loop in the complement of all belts and clear the finitely many $2$-sphere attaching images, obtaining an admissibly framed disk with no other incidences. This moves only the selected attaching sphere and keeps the entire attaching family embedded and disjoint. [F3, F4, step 1.1]\n\n2.2 For $k=n-2$, view the level from $M_1$. The original attaching spheres are the belts of its dual $2$-handles by [F4]. Exchange the selected sheets and use the helper to isotope the original belt $B_j\\cong S^2$ against the fixed original attaching sphere $A_i$, with the disk in the complement of every $A_l$ and avoiding every other $B_l\\cong S^2$. The two signs remain opposite when the sheets are exchanged, and the loop is still null. If the auxiliary ambient isotopy is $H_t$, apply $H_t^{-1}$ to $A_i$ alone and leave the original belts fixed. The identity $H_1^{-1}(A_i)\\cap B_j=H_1^{-1}(A_i\\cap H_1(B_j))$ removes exactly the pair. Its tube avoids all other attaching spheres and belts, so their configurations stay fixed. This proves the flipped endpoint for the actual handle spheres. [F2, F4, step 1.1]\n\n3.1 Repeat the appropriate pair removal finitely. Every step decreases the intersection count by two, preserves the other intersections and transports the attaching framing. The invariant signed sums leave exactly one transverse point when $i=j$ and none when $i\\ne j$. By [F5] the resulting isotopies of the attaching embeddings preserve the presented cobordism relative to $M_0$. The same handles therefore realize the geometric identity matrix for every $2\\le k\\le n-2$. No early critical-level rearrangement is required before the geometric disjunction has been achieved. [F1, F3, F4, F5, step 2.1, step 2.2] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; §6 (Second Cancellation Theorem 6.4 and Corollary 6.5), printed pp. 67--78"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 16
+      },
+      {
+        "id": "lem-middle-handle-pairs-with-one-geometric-intersection-cancel",
+        "kind": "lemma",
+        "title": "Middle-handle pairs with one geometric intersection cancel",
+        "deps": [
+          "lem-whitney-trick-realizes-algebraic-middle-handle-cancellation-geometrically",
+          "thm-handle-cancellation",
+          "def-geometric-cancelling-handle-pair",
+          "def-handle-decomposition-relative-to-the-incoming-boundary",
+          "def-countable-choice",
+          "prop-relative-handle-chain-complex-of-a-cobordism",
+          "lem-relative-homology-of-an-h-cobordism-vanishes-at-both-ends",
+          "lem-handles-of-equal-index-can-be-attached-on-one-level"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $(W;M_0,M_1)$ be a\nconnected simply connected h-cobordism with $\\dim W=n+1\\ge6$ presented relative\nto $M_0$ with handles only in indices $k,k+1$, $2\\le k\\le n-2$, and suppose the\nattaching sphere of each $(k+1)$-handle meets the belt sphere of exactly one\n$k$-handle in a single transverse point and is disjoint from the other belt\nspheres (the configuration produced by the geometric realisation lemma\n([[lem-whitney-trick-realizes-algebraic-middle-handle-cancellation-geometrically]])).\nThen $W$ admits a handle decomposition relative to $M_0$ with no handles at all:\neach pair consisting of a $k$-handle and the $(k+1)$-handle meeting its belt\nsphere once is geometrically cancelling\n([[def-geometric-cancelling-handle-pair]]), and the pairs may be deleted one\nafter another, the attaching data of the remaining handles being transported by\nthe relative diffeomorphism.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 The two-index relative chain complex is acyclic by [[prop-relative-handle-chain-complex-of-a-cobordism]] and [[lem-relative-homology-of-an-h-cobordism-vanishes-at-both-ends]], so its differential is an isomorphism. Each upper core maps to $\\pm$ one lower basis generator by the single-point hypothesis. Surjectivity ensures every lower generator occurs and injectivity ensures none occurs twice. Hence the intersection configuration gives a bijective pairing of the two finite handle families. [F1, given, algebra]\n\n2.1 Select a matched pair. Reorder the lower handles to put its lower member last and the upper handles to put its upper member first, using [[lem-handles-of-equal-index-can-be-attached-on-one-level]]. They are now consecutive, so [F2] cancels them. Its cancellation model can be supported off the other belt spheres: the selected attaching sphere misses those belts, and a small neighborhood of its attaching data and the chosen lower handle avoids them. Transport the other upper attaching embeddings by the cancellation diffeomorphism; their intersections with the untouched belts stay as prescribed. [F1, F2, step 1.1, construct]\n\n3.1 Repeat with the remaining finite matched list. Each cancellation removes two handles and preserves the manifold relative to $M_0$. The empty case requires no operation. When no pair remains, [F3] gives the empty presentation, diffeomorphic to $M_0\\times[0,1]$ by rescaling its collar coordinate. [F2, F3, step 2.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; §6, printed pp. 67--78"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5); Cancellation Lemma 1.12"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 17
+      },
+      {
+        "id": "thm-critical-point-free-cobordism-is-a-product-relative-to-the-incoming-boundary",
+        "kind": "theorem",
+        "title": "A cobordism with no handles is a product",
+        "deps": [
+          "thm-regular-interval-diffeomorphism",
+          "prop-deformation-lemma-for-a-critical-point-free-slab",
+          "lem-normalized-gradient-crosses-a-compact-regular-band-in-controlled-time",
+          "cor-regular-sublevels-are-diffeomorphic",
+          "def-morse-function-adapted-to-a-cobordism",
+          "def-handle-decomposition-relative-to-the-incoming-boundary",
+          "lem-product-cobordisms-have-critical-point-free-presentations",
+          "thm-morse-functions-and-handle-decompositions-correspond",
+          "def-countable-choice",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "thm-every-smooth-manifold-admits-a-riemannian-metric",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "thm-compactly-supported-vector-fields-are-complete",
+          "thm-fundamental-theorem-on-flows"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $(W;M_0,M_1)$ be a\ncompact smooth triad with $\\dim W=n+1$ admitting a handle decomposition\nrelative to $M_0$ with empty handle list\n([[def-handle-decomposition-relative-to-the-incoming-boundary]]).\nEquivalently, $W$ admits an adapted Morse function without critical points\n(equivalently, $W$ is diffeomorphic to a collar $M_0\\times[0,\\varepsilon]$)\n([[def-morse-function-adapted-to-a-cobordism]]). Then $W$ is diffeomorphic to\n$M_0\\times[0,1]$ relative to $M_0$; that is, there is a diffeomorphism\n$W\\to M_0\\times[0,1]$ whose restriction to $M_0$ is the identity. Conversely a\nproduct cobordism has an empty presentation.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 By [F1] applied to the empty list, $W$ is diffeomorphic relative to $M_0$ to the collar $M_0\\times[0,\\varepsilon]$; composing with the reparametrization $M_0\\times[0,\\varepsilon]\\to M_0\\times[0,1]$, $(x,t)\\mapsto(x,t/\\varepsilon)$, which fixes $M_0\\times\\{0\\}$ pointwise, gives a diffeomorphism $W\\to M_0\\times[0,1]$ whose restriction to $M_0$ is the identity. [F1, given]\n\n1.2 Conversely let $W$ be a product cobordism; by [F4] its projection is an adapted Morse function without critical points and $W$ carries the empty handle list relative to $M_0$, which also shows that the empty-presentation formulation and the critical-point-free Morse formulation describe the same triads by [F2]. [F2, F4, given]\n\n2.1 For the critical-point-free formulation, append signed collars to obtain a boundaryless neighborhood of $W$. Smoothness up to the boundary gives local extensions of $f$, and [[thm-smooth-partitions-of-unity-exist-on-manifolds]] patches them to a smooth extension near $W$, equal to $f$ there. Compactness and $df\\ne0$ give a smaller neighborhood on which the extension still has nonzero differential. Choose a metric by [[thm-every-smooth-manifold-admits-a-riemannian-metric]] and multiply its normalized ascending gradient by a compactly supported cutoff equal to one near $W$ ([[lem-manifold-bump-for-a-compact-set-inside-an-open-set]]). Its ambient flow $\\Phi$ is complete by [[thm-compactly-supported-vector-fields-are-complete]], and $df(\\Phi'_t)=1$ while the trajectory is in $W$. At $M_0$ it enters $W$ and at $M_1$ it exits; a first exit before the prescribed value would be at neither boundary fiber, which is impossible. Thus $T(x,t)=\\Phi_t(x)$ maps $M_0\\times[0,1]$ onto $W$, with inverse $y\\mapsto(\\Phi_{-f(y)}(y),f(y))$. Flow uniqueness and smooth dependence, including the signed collars, make these inverse diffeomorphisms ([[thm-fundamental-theorem-on-flows]]). This proves the boundary version directly; it does not apply a boundaryless closed-band theorem to $W$ without an extension. [F2, F3, step 1.2, construct]\n\n3.1 Combining step 1.1 with steps 1.2 and 2.1 proves both directions and the claimed equivalence: the empty presentation forces $W\\cong M_0\\times[0,1]$ relative to $M_0$, and a product cobordism has an empty presentation. This is Milnor's product theorem for a critical-point-free slab. [F1, F2, F4, step 1.1, step 1.2, step 2.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; Concluding Remarks, printed pp. 113--114"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-smooth-simply-connected-h-cobordism-theorem",
+        "kind": "theorem",
+        "title": "The smooth simply connected h-cobordism theorem",
+        "deps": [
+          "def-h-cobordism",
+          "prop-h-cobordisms-admit-adapted-ordered-handle-decompositions",
+          "lem-relative-homology-of-an-h-cobordism-vanishes-at-both-ends",
+          "lem-zero-and-one-handles-can-be-eliminated-in-a-simply-connected-h-cobordism",
+          "lem-duality-eliminates-top-and-cotop-handles",
+          "lem-handle-trading-concentrates-an-acyclic-simply-connected-presentation-in-two-adjacent-middle-indices",
+          "lem-acyclicity-makes-the-simply-connected-middle-handle-matrix-unimodular",
+          "lem-handle-slides-reduce-a-unimodular-middle-handle-matrix-to-the-identity",
+          "lem-whitney-trick-realizes-algebraic-middle-handle-cancellation-geometrically",
+          "lem-middle-handle-pairs-with-one-geometric-intersection-cancel",
+          "thm-critical-point-free-cobordism-is-a-product-relative-to-the-incoming-boundary",
+          "def-simply-connected",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $(W;M_0,M_1)$ be an\nh-cobordism with $\\dim W=n+1\\ge6$ (equivalently $n\\ge5$), where $M_0,M_1$ are\nclosed simply connected $n$-manifolds and $W$ is connected\n([[def-h-cobordism]], [[def-simply-connected]]). Then $W$ is diffeomorphic to\n$M_0\\times[0,1]$ relative to $M_0$: there is a diffeomorphism\n$W\\to M_0\\times[0,1]$ that is the identity on $M_0$. In particular every\nh-cobordism over a closed simply connected $n$-manifold with $n\\ge5$ is trivial.\nThe dimension hypothesis $n\\ge5$ is used in the elimination of one-handles and\nin the Whitney-trick step; simple connectivity is used in those steps and in the\ndiagonalisation.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 By [F1] put the h-cobordism in self-indexed form relative to $M_0$, so that its handles are attached in order of increasing index and $H_k(W,M_0;\\mathbb Z)=0$ for all $k$ by [F2]; the relative handle chain complex of this presentation computes $H_*(W,M_0;\\mathbb Z)$. [F1, F2, given]\n\n2.1 Use the simultaneous elimination supplied by the duality lemma in [F3]: its low-eliminate/reverse/low-eliminate/reverse procedure yields one presentation relative to $M_0$ with every index between $2$ and $n-1$. [F3, step 1.1]\n\n3.1 Since $n\\ge5$ there is an admissible index $k$ with $2\\le k\\le n-2$ (for instance $k=2$, and in higher dimensions any $k$ with $3\\le k\\le n-3$), and by [F4] the presentation may be concentrated in the two adjacent indices $k,k+1$: handles only of index $k$ and $k+1$ remain, with the same number $r$ of each, and the relative handle complex is $0\\to\\mathbb Z^r\\to\\mathbb Z^r\\to0$ with differential an isomorphism because the homology $H_*(W,M_0;\\mathbb Z)$ vanishes by [F2]. [F2, F4, step 2.1]\n\n4.1 By [F5] the middle-handle intersection matrix $M$ of this presentation is invertible over $\\mathbb Z$, and handle slides, renumbering and reorientation carry it to the identity $I_r$ without changing $W$ relative to $M_0$; by [F6] the Whitney trick then upgrades the algebraic identity to the geometric single-point configuration, in which each $(k+1)$-handle meets the belt sphere of exactly one $k$-handle once and is disjoint from the others, and the resulting pairs are deleted one after another by handle cancellation. [F5, F6, step 3.1]\n\n5.1 When all pairs have been cancelled, the presentation of $W$ relative to $M_0$ is empty, and by [F7] an empty presentation is exactly a product: there is a diffeomorphism $W\\to M_0\\times[0,1]$ whose restriction to $M_0$ is the identity. Hence every h-cobordism over a closed simply connected $n$-manifold with $n\\ge5$ is trivial. This is the classical smooth simply connected h-cobordism theorem of Milnor, Lück and Ranicki. [F7, given, step 4.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; Theorem 9.1, printed p. 108"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5); Theorem 1.2, p. 2"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, Oxford University Press 2002; complete electronic copy)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Chapter 8 §§8.1--8.2, printed pp. 147--163 (electronic pp. 154--170); Theorem 8.34"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 18
+      },
+      {
+        "id": "cor-high-dimensional-simply-connected-h-cobordant-manifolds-are-diffeomorphic",
+        "kind": "corollary",
+        "title": "High-dimensional simply connected h-cobordant manifolds are diffeomorphic",
+        "deps": [
+          "thm-smooth-simply-connected-h-cobordism-theorem",
+          "def-h-cobordism",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-smooth-embedding",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $M_0,M_1$ be closed simply connected smooth $n$-manifolds with $n\\ge5$. If\n$M_0$ and $M_1$ are h-cobordant, i.e. if there is a compact smooth h-cobordism\n$(W;M_0,M_1)$ with $\\dim W=n+1$ ([[def-h-cobordism]]), then $M_0$ and $M_1$ are\ndiffeomorphic.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 $W$ is connected because its incoming inclusion is a homotopy equivalence from the connected $M_0$; the inverse homotopies connect every point of $W$ to that face. Thus every hypothesis of [L1], including countable choice, holds: there is a diffeomorphism $F:W\\to M_0\\times[0,1]$ that is the identity on $M_0$; since $F$ maps the boundary of $W$ to the boundary of $M_0\\times[0,1]$ and already maps $M_0$ onto $M_0\\times\\{0\\}$, it maps the other face $M_1$ diffeomorphically onto the complementary face $M_0\\times\\{1\\}$. [L1, given]\n\n2.1 The restriction $F|_{M_1}:M_1\\to M_0\\times\\{1\\}$ is therefore a diffeomorphism, and the second projection $(x,1)\\mapsto x$ is a diffeomorphism $M_0\\times\\{1\\}\\to M_0$ by [L2]; composing gives a diffeomorphism $M_1\\to M_0$, so the two h-cobordant manifolds are diffeomorphic. [L2, step 1.1] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; Corollary 9.2 and the classification consequence, printed pp. 108--110"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 19
+      },
+      {
+        "id": "cor-high-dimensional-smooth-poincare-for-homotopy-spheres-bounding-a-contractible-manifold",
+        "kind": "corollary",
+        "title": "Homotopy spheres of dimension at least five bounding a contractible manifold are standard spheres",
+        "deps": [
+          "thm-smooth-simply-connected-h-cobordism-theorem",
+          "thm-whitehead-theorem",
+          "thm-relative-hurewicz-theorem",
+          "thm-fully-relative-poincare-lefschetz-duality",
+          "thm-excision-for-singular-homology",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "cor-seifert-van-kampen-simply-connected-overlap",
+          "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+          "thm-higher-dimensional-spheres-are-simply-connected",
+          "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+          "thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally",
+          "prop-first-stiefel-whitney-class-classifies-orientability",
+          "def-homotopy-equivalence",
+          "def-simply-connected",
+          "def-compact-space",
+          "def-countable-choice",
+          "def-smooth-manifold",
+          "def-smooth-embedding",
+          "thm-collar-neighborhood-theorem",
+          "def-smooth-collar-of-a-manifold-boundary",
+          "def-axiom-of-choice",
+          "lem-a-handle-decomposition-gives-a-relative-cw-complex",
+          "thm-long-exact-sequence-of-relative-homotopy-groups",
+          "thm-absolute-hurewicz-theorem",
+          "thm-cellular-approximation-for-maps-of-cw-pairs",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a compact\ncontractible smooth $(n+1)$-manifold with connected boundary $\\Sigma=\\partial X$,\nwhere $n\\ge5$ and $\\Sigma$ is a homotopy $n$-sphere (equivalently by Hurewicz and Whitehead:\n$\\Sigma$ is simply connected and\n$H_*(\\Sigma;\\mathbb Z)\\cong H_*(S^n;\\mathbb Z)$)\n([[def-simply-connected]], [[thm-absolute-hurewicz-theorem]], [[thm-whitehead-theorem]]). Then $X$ is\ndiffeomorphic to the disk $D^{n+1}$, and $\\Sigma$ is diffeomorphic to $S^n$.\nConsequently a smooth homotopy $n$-sphere, $n\\ge5$, that bounds a compact\ncontractible smooth manifold is diffeomorphic to the standard sphere, and no\nexotic sphere in these dimensions bounds a contractible manifold.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Choose an embedded closed $(n+1)$-disk $D^{n+1}\\subset\\operatorname{int}X$ ([[def-smooth-embedding]]) and put $W:=X\\setminus\\operatorname{int}D^{n+1}$; then $W$ is a compact smooth $(n+1)$-manifold with boundary the disjoint union $\\Sigma\\sqcup S^n$ of the given boundary and the boundary sphere of the removed disk, and $W$ is connected: remove a point at the disk center, reroute paths locally around that point in dimension $n+1\\ge6$, then radially retract the punctured disk onto its boundary. The same construction retains compactness and the smooth boundary collars. [F1, given]\n\n1.2 The compact smooth $X$ has CW homotopy type by [F6], and a finite chart cover with a subordinate smooth partition ([[thm-smooth-partitions-of-unity-exist-on-manifolds]]) supplies a numeration of its tangent bundle. Thus [F2] applies to this bundle. $X$ is orientable: $H_*(X;\\mathbb Z/2)=H_*(\\mathrm{pt};\\mathbb Z/2)$ by [F1], so the universal coefficient sequence gives $H^1(X;\\mathbb Z/2)=0$ (both $\\operatorname{Hom}(H_1(X),\\mathbb Z/2)$ and $\\operatorname{Ext}(H_0(X),\\mathbb Z/2)$ vanish because $H_1(X)=0$ and $H_0(X)=\\mathbb Z$ is free); hence $w_1(TX)=0$ and by [F2] the tangent bundle $TX$ is orientable, so $X$ carries an orientation and $W$ inherits the restricted orientation. [F1, F2, F6, given]\n\n2.1 $\\pi_1(W)=1$: use the open cover $U=X\\setminus D_0$, $V=\\operatorname{int}D^{n+1}$, where $D_0$ is a smaller concentric closed disk. Radial compression retracts $U$ onto $W$, $V$ is contractible and $U\\cap V\\cong S^n\\times(a,1)$ is simply connected by [F3]. Both open members are path connected by step 1.1 and radial compression. Van Kampen therefore gives $\\pi_1(X)\\cong\\pi_1(W)*\\pi_1(D^{n+1})=\\pi_1(W)$, and $\\pi_1(X)=1$ because $X$ is contractible, so $\\pi_1(W)=1$. [F3, given]\n\n2.2 $H_*(W,S^n;\\mathbb Z)=0$: let $D_0\\subset\\operatorname{int}D^{n+1}$ be a smaller closed concentric disk; then excision [F4] with $Z=D_0$ and $A=D^{n+1}$ gives $H_*(X-D_0,D^{n+1}-D_0;\\mathbb Z)\\cong H_*(X,D^{n+1};\\mathbb Z)=0$, the last vanishing because $X$ and $D^{n+1}$ are acyclic and [F4] computes the pair by its long exact sequence; the pair $(X-D_0,D^{n+1}-D_0)$ deformation retracts through a collar onto $(W,S^n)$, so $H_*(W,S^n;\\mathbb Z)=0$ as well. [F4, step 1.1]\n\n3.1 $H_*(W,\\Sigma;\\mathbb Z)=0$: by step 1.2 the manifold $W$ is compact and $\\mathbb Z$-oriented with boundary the disjoint union $\\Sigma\\sqcup S^n$, so [F5] with $A=S^n$, $B=\\Sigma$ gives $H_k(W,\\Sigma;\\mathbb Z)\\cong H^{n+1-k}(W,S^n;\\mathbb Z)$; by the universal coefficient sequence [F1] applied to the relative chain complex and step 2.2, the group $H^{n+1-k}(W,S^n;\\mathbb Z)$ vanishes, so $H_k(W,\\Sigma;\\mathbb Z)=0$. [F1, F5, step 1.2, step 2.2]\n\n4.1 Both end inclusions induce homology isomorphisms by the pair sequences and steps 2.2–3.1. The sources and $W$ are nonempty simply connected. Transport each map to the finite CW models of [F6] and replace it by a cellular map under AC ([[thm-cellular-approximation-for-maps-of-cw-pairs]]). Its CW mapping-cylinder pair is $1$-connected and has zero relative integral homology. Inductively, if its relative homotopy groups below $j\\ge2$ vanish, relative Hurewicz in [F6] identifies $\\pi_j$ with the zero $H_j$; hence all relative groups vanish. The relative homotopy exact sequence makes the map a weak equivalence, and Whitehead yields a homotopy inverse. Transport it back to the original manifolds. Thus the two actual end inclusions are homotopy equivalences and $W$ is an h-cobordism. [F4, F6, step 2.1, step 2.2, step 3.1]\n\n5.1 By the h-cobordism theorem [F8] applied to the h-cobordism $W$ with $\\dim W=n+1\\ge6$, there is a diffeomorphism $W\\to S^n\\times[0,1]$ that is the identity on $S^n$; its restriction to the other face is a diffeomorphism $\\Sigma\\to S^n$. Gluing the disk back along the collar by [F7] identifies $X$ with $(S^n\\times[0,1])\\cup_{S^n\\times\\{0\\}}D^{n+1}\\cong D^{n+1}$, so $X$ is diffeomorphic to the disk and $\\Sigma$ to $S^n$. This is Milnor's Proposition A of §9. [F7, F8, step 4.1] ∎\n\nThe full AC hypothesis licenses the cited UCT, orientability, duality, Hurewicz and CW comparison results as stated. The h-cobordism theorem itself uses only countable choice; AC supplies it by restricting a choice function to a countable family. For the parenthetical homology-sphere criterion, absolute Hurewicz gives vanishing homotopy below n and a map $S^n\\to\\Sigma$ representing a generator of $H_n$; it is a homology equivalence, so the same CW comparison proves it is a homotopy equivalence.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; §9 Proposition A, printed pp. 110--113"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 19
+      },
+      {
+        "id": "rem-the-h-cobordism-theorem-does-not-cover-boundary-dimension-four",
+        "kind": "remark",
+        "title": "The h-cobordism theorem does not cover boundary dimension four",
+        "deps": [
+          "def-h-cobordism",
+          "thm-smooth-simply-connected-h-cobordism-theorem",
+          "rem-the-smooth-whitney-trick-fails-in-dimension-four"
+        ],
+        "statement": "The dimension hypothesis $n\\ge5$ (equivalently $\\dim W\\ge6$) in the smooth\nh-cobordism theorem ([[thm-smooth-simply-connected-h-cobordism-theorem]]) cannot\nbe relaxed to $n=4$. Two distinct obstructions are recorded here.\n\n(i) The proof route stops working: the general-position argument that produces a\nclean embedded Whitney disk in a middle level of dimension $n$ requires both\nsheet dimensions at most $n-3$, or one of them at least $3$ in the borderline\nversion, and in boundary dimension four the relevant ambient middle level is\nfour-dimensional, where the smooth Whitney trick genuinely fails\n([[rem-the-smooth-whitney-trick-fails-in-dimension-four]]).\n\n(ii) The conclusion itself fails in the smooth category in general: the\ns-cobordism theorem, and with it the triviality statement of the h-cobordism\ntheorem, is known to be false for $n=\\dim M_0=4$ in general by Donaldson's work\n(Lück §1.5, printed p. 21, citing Donaldson, *Irrationality and the\nh-cobordism conjecture*, J. Differential Geom. **26** (1987) 141--168), while in\nthe topological category the corresponding statement for $n=4$ holds for good\nfundamental groups, in particular for the trivial group, by Freedman. For\nsimply connected 4-manifolds the failure is documented explicitly: there are\nsmooth orientable simply connected 4-manifolds that are all smoothly\ns-cobordant and homeomorphic but pairwise not diffeomorphic, so no h-cobordism\nbetween two of them is a product (Kasprowski--Powell--Ray, EMS Surv. Math. Sci.\n**9** (2022) 193--249, Example 1.13 and §5.8, where the first pair is due to\nDonaldson). Milnor's Concluding Remarks distinguish total dimension four (boundary\ndimension three), where the four-disk conjecture is discussed, from total\ndimension five (the boundary-dimension-four case here). The historical\nfour-disk discussion is not a statement about this boundary-dimension-four\nrange.\n\nNo smooth four-dimensional Poincaré or disk conclusion may be read off the\ntheorem of this page: the smooth statement is genuinely restricted to boundary\ndimension at least five ([[def-h-cobordism]]).",
+        "strategy": "Remark. It states the boundary of the development and the exact place where the dimension hypothesis is load-bearing, and it records the failure of the conclusion as a theorem of the literature rather than a gap in exposition. Nothing new is proved.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; Concluding Remarks, printed pp. 113--114"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1 §1.5 Miscellaneous, printed p. 21 (the s-cobordism theorem is false for n = dim M_0 = 4 in general by Donaldson's work; true for good fundamental groups in the topological category by Freedman)"
+            },
+            {
+              "title": "Daniel Kasprowski, Mark Powell and Arunima Ray, Counterexamples in 4-manifold topology, EMS Surveys in Mathematical Sciences 9 (2022) 193--249",
+              "url": "https://eprints.gla.ac.uk/288630/1/288630.pdf",
+              "locator": "Example 1.13 and §5.8 (infinitely many smooth orientable simply connected 4-manifolds that are all smoothly s-cobordant and homeomorphic but not diffeomorphic; the first pair is due to Donaldson)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 19
+      }
+    ]
+  },
+  {
+    "order": 562,
+    "id": "the-smooth-h-cobordism-theorem-examples",
+    "kind": "B",
+    "category": "differential-topology",
+    "title": "The Smooth H Cobordism Theorem — Examples",
+    "companion": "the-smooth-h-cobordism-theorem",
+    "requires": [
+      "the-smooth-h-cobordism-theorem",
+      "pontryagin-thom-and-framed-cobordism"
+    ],
+    "items": [
+      {
+        "id": "ex-a-product-cobordism-is-an-h-cobordism",
+        "kind": "example",
+        "title": "A product cobordism is an h-cobordism",
+        "deps": [
+          "def-h-cobordism",
+          "def-retraction-and-deformation-retract",
+          "lem-product-cobordisms-have-critical-point-free-presentations",
+          "def-countable-choice",
+          "lem-relative-homology-of-an-h-cobordism-vanishes-at-both-ends",
+          "thm-smooth-simply-connected-h-cobordism-theorem"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $M_0$ be a closed smooth $n$-manifold with $n\\ge1$ and let $W=M_0\\times[0,1]$ with faces\n$M_0\\times\\{0\\}$ and $M_0\\times\\{1\\}$. Then\n$(W;M_0\\times\\{0\\},M_0\\times\\{1\\})$ is an h-cobordism: the maps\n$W\\to M_0\\times\\{i\\}$, $(x,t)\\mapsto(x,i)$, are retractions and the linear\nhomotopies $(x,t)\\mapsto(x,(1-s)t+si)$ are deformation retractions fixing\n$M_0\\times\\{i\\}$ pointwise, so both inclusions are homotopy equivalences. Its\nhandle decomposition relative to $M_0\\times\\{0\\}$ is empty, its relative\nhomology vanishes in all degrees, and if $M_0$ is simply connected with $n\\ge5$\nthe h-cobordism theorem returns exactly this product.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 The projections $r_i:W\\to M_0\\times\\{i\\}$, $r_i(x,t)=(x,i)$, are continuous and satisfy $r_i(\\iota_i(x))=r_i(x,i)=(x,i)=\\iota_i(x)$ for every $x\\in M_0$, so by [F1] each $r_i$ is a retraction onto the corresponding face. [F1, given]\n\n1.2 Read the product presentation through [F3]: $W$ has the empty handle list relative to $M_0\\times\\{0\\}$, and no handle is attached. [F3, given]\n\n2.1 The linear homotopy $H_s(x,t)=(x,(1-s)t+si)$ is continuous with $H_0=\\operatorname{id}_W$ and $H_1=\\iota_i\\circ r_i$, and it satisfies $H_s(x,i)=(x,i)$ for all $s$; hence by [F1] each face is a deformation retract of $W$, in particular each inclusion is a homotopy equivalence with homotopy inverse $r_i$. The product is a compact smooth triad with its product collars and dimension $n+1\\ge2$, so by [F2] the triad $(W;M_0\\times\\{0\\},M_0\\times\\{1\\})$ is an h-cobordism. [F1, F2, step 1.1]\n\n3.1 The relative homology now vanishes by [[lem-relative-homology-of-an-h-cobordism-vanishes-at-both-ends]], applied to step 2.1. Therefore the product cobordism has an empty presentation and vanishing relative homology; when $M_0$ is simply connected of dimension $n\\ge5$, the later h-cobordism theorem applied to this h-cobordism returns precisely the product it started from, so the product is the trivial model that the theorem's conclusion describes. [step 1.2, step 2.1] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; Concluding Remarks, printed pp. 113--114"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-an-elementary-cancelling-handle-pair-gives-a-product-cobordism",
+        "kind": "example",
+        "title": "An elementary cancelling handle pair gives a product cobordism",
+        "deps": [
+          "def-h-cobordism",
+          "def-geometric-cancelling-handle-pair",
+          "thm-handle-cancellation",
+          "thm-creation-of-a-cancelling-handle-pair",
+          "def-handle-decomposition-relative-to-the-incoming-boundary",
+          "def-attaching-belt-intersection-matrix-of-adjacent-index-handles",
+          "lem-geometric-cancellation-is-a-unit-entry-in-the-handle-matrix",
+          "lem-compact-transverse-complementary-intersections-are-finite",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $M_0$ be a closed smooth $n$-manifold, and let $W$ be obtained from the\ncollar $M_0\\times[0,1]$ by attaching a $k$-handle and then a $(k+1)$-handle,\n$0\\le k\\le n-1$, whose attaching sphere meets the belt sphere of the $k$-handle\ntransversely in exactly one point and lies in the standard complementary\nconfiguration on a disc of the outgoing boundary. Then $W$ is diffeomorphic to\n$M_0\\times[0,1]$ relative to $M_0\\times\\{0\\}$; in particular $W$ is an\nh-cobordism, and if $M_0$ is oriented and $1\\le k\\le n-2$ the attaching-belt intersection matrix of the connected collar component containing the pair in\nthe two-index presentation is the $1\\times1$ matrix $(\\varepsilon)$ with\n$\\varepsilon=\\pm1$ the local intersection sign, normalisable to $(1)$ by\nreorienting a core or cocore. Without orientations, in the same middle range, the corresponding one-entry matrix is $(1)$ modulo two. Thus the local model of the theorem's\ncancellation step is realised by a genuine product.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 The given configuration is exactly the hypothesis of [F1]: the handles $h^k$, $h^{k+1}$ are consecutive, the attaching sphere of $h^{k+1}$ meets the belt sphere of $h^k$ transversely in exactly one point, so $h^k,h^{k+1}$ form a geometrically cancelling pair. [F1, given]\n\n1.2 Suppose $M_0$ is oriented and $1\\le k\\le n-2$, and use the induced orientations on the handles and middle level. Restrict to the connected collar component containing the prescribed boundary disc: its outgoing boundary before the pair is connected, as required by the matrix definition, and every other component has an empty handle list. This component’s two-handle presentation has a single $k$-handle and a single $(k+1)$-handle, so by the matrix definition the intersection matrix is the $1\\times1$ matrix with the single entry given by the oriented intersection number of the two spheres; by [F5] that entry is $\\pm1$ equal to the local intersection sign of the unique transverse point, and the finiteness underlying the count is [F6]. Without orientations [F5] supplies instead the mod-two entry $1$. Reorienting the core of $h^k$ or the cocore of $h^{k+1}$ reverses the induced orientation of the corresponding sphere and hence the sign of the entry alone, so the matrix is normalisable to $(1)$. [F5, F6, given]\n\n1.3 Conversely, by [F3] a geometrically cancelling consecutive pair with the standard complementary configuration may be inserted at any prescribed disc of the outgoing boundary of any presentation without changing the presented manifold relative to the incoming boundary; hence the displayed configuration is exactly the inverse of a trivial local modification of the collar. [F3, given]\n\n2.1 Apply the cancellation theorem to the connected collar component containing the given outgoing disk, and leave all other collar components fixed. For the geometrically cancelling pair of step 1.1, the manifold $W=M_0\\times[0,1]+h^k+h^{k+1}$ is diffeomorphic to the collar $M_0\\times[0,1]$ relative to $M_0\\times\\{0\\}$, and the diffeomorphism may be taken supported in a collar of the affected disc and the two handles; the cancelled manifold is presented relative to $M_0\\times\\{0\\}$ by the empty handle list, which by [F4] is diffeomorphic to $M_0\\times[0,\\varepsilon]$, and the collar reparametrization gives $M_0\\times[0,1]$. [F2, F4, step 1.1]\n\n3.1 The diffeomorphism $F:W\\to M_0\\times[0,1]$ of step 2.1 is the identity on $M_0\\times\\{0\\}=M_0$ and carries the second face of $W$ onto $M_0\\times\\{1\\}$, so it conjugates the inclusion $M_0\\hookrightarrow W$ to the standard inclusion of the face $M_0\\times\\{0\\}$ and the other face inclusion to the standard inclusion of $M_0\\times\\{1\\}$ composed with a diffeomorphism of that face; both standard inclusions are homotopy equivalences (via the projections $(x,t)\\mapsto(x,i)$ and the linear homotopies). Hence both face inclusions of $W$ are homotopy equivalences and, by [F7], $W$ is an h-cobordism. [F7, step 2.1]\n\n4.1 Therefore an elementary cancelling pair attached to a collar builds a genuine product: $W\\cong M_0\\times[0,1]$ relative to $M_0\\times\\{0\\}$, so $W$ is an h-cobordism, the connected component containing the pair has two-index intersection matrix $(\\varepsilon)$ with $\\varepsilon=\\pm1$ normalisable to $(1)$ when $M_0$ is oriented and $1\\le k\\le n-2$ (without orientations, in the same middle range, use the mod-two entry), and by step 1.3 the configuration is precisely the inverse of the trivial local modification that inserts a cancelling pair. This is the local model of the cancellation step of the h-cobordism theorem. [F1, F2, F3, step 1.2, step 1.3, step 2.1, step 3.1] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; §5 cancellation, printed pp. 45--66"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1, printed pp. 1--22 (§§1.1--1.5); Lemmas 1.12--1.13, printed pp. 7--8"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 9
+      },
+      {
+        "id": "cex-a-homology-cobordism-need-not-be-an-h-cobordism",
+        "kind": "counterexample",
+        "title": "A homology cobordism need not be an h-cobordism",
+        "deps": [
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "cor-seifert-van-kampen-simply-connected-overlap",
+          "def-countable-choice",
+          "def-h-cobordism",
+          "def-homotopy-equivalence",
+          "def-relative-singular-homology",
+          "lem-a-handle-decomposition-gives-a-relative-cw-complex",
+          "lem-metastable-embedding-for-maps-from-a-compact-manifold",
+          "lem-outgoing-boundary-of-a-handle-attachment-trades-the-disk-factors",
+          "lem-positively-oriented-bases-are-path-connected",
+          "prop-higher-homotopy-basepoint-transport-and-moving-homotopies",
+          "prop-relative-transversality-preserves-a-map-on-a-closed-good-region",
+          "thm-cellular-approximation-for-maps-of-cw-pairs",
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "thm-cellular-homology-computes-singular-homology",
+          "thm-fully-relative-poincare-lefschetz-duality",
+          "thm-handle-duality-from-negating-a-morse-function",
+          "thm-higher-dimensional-spheres-are-simply-connected",
+          "thm-induced-fundamental-group-map-functoriality",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "thm-mayer-vietoris-sequence-in-singular-homology",
+          "thm-morse-functions-and-handle-decompositions-correspond",
+          "thm-relative-whitney-approximation-for-manifold-valued-maps",
+          "thm-seifert-van-kampen",
+          "thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally",
+          "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "def-axiom-of-choice"
+        ],
+        "statement": "**False claim:** every compact connected oriented smooth cobordism $W$ with boundary $\\partial W=N\\sqcup S$, where $N,S$ are closed connected manifolds and both inclusions induce integral homology isomorphisms, is an h-cobordism.\n\nThe counterexample below is a smooth $6$-dimensional homology cobordism with $S\\cong S^5$, $\\pi_1(S)=1$, and $\\pi_1(W)\\ne1$.",
+        "strategy": "1.1 (The $1$-handlebody.) Let $Y$ be the $0$-handle with the two $1$-handles attached orientation-compatibly. It is compact, connected and oriented, and has the homotopy type of the wedge of two circles by [F1], so $\\pi_1(Y)$ is freely generated by $a,b$. Its boundary is connected: each $1$-handle deletes two $5$-disks from the connected boundary and joins their boundary spheres by the connected cylinder $[-1,1]\\times S^4$. The dual decomposition of $(Y,\\partial Y)$ has only indices $5,6$ by [F4]. A relative CW pair with cells only in dimensions at least $3$ induces a fundamental-group isomorphism: cellular approximation moves loops into the boundary and homotopies of loops into the boundary because their domains have dimensions $1,2$. Hence $\\pi_1(\\partial Y)\\to\\pi_1(Y)$ is an isomorphism and the words $w_1,w_2$ can be represented by loops in $\\partial Y$. [F1, F4, F5, given, A1]\n\n2.1 (Embedded framed attaching loops.) Apply [F2] first to smooth representatives and then to their disjoint union $S^1\\sqcup S^1\\to\\partial Y$. The target has dimension $5\\ge2\\cdot1+1$, so a homotopic embedding gives two disjoint embedded circles representing the words (up to basepoint conjugacy, which leaves their normal closure unchanged). Each oriented circle in the oriented $5$-manifold has an oriented rank-four normal bundle. Pull that bundle back to $[0,1]$ by cutting the circle at one point: finite successive local trivializations give a smooth oriented frame over the interval, arranged near the endpoints to be the pullbacks of one fixed seam trivialization up to constant matrices. The endpoint gluing is then a constant $A\\in\\mathrm{GL}^+(4,\\mathbb R)$. By [F3] join the identity to $A^{-1}$ by a smooth path, made constant near its endpoints, and multiply the interval frame by that path. The adjusted frames agree under endpoint gluing and are smooth across the seam, giving a global framing. Tubular neighbourhoods supply disjoint attaching regions $S^1\\times D^4$, so attach two orientation-compatible $2$-handles to obtain a compact oriented smooth $6$-manifold $X$. [F2, F3, step 1.1, construct, A1]\n\n3.1 (Boundary connectedness and group.) Removing the two circle cores from $\\partial Y$ leaves it path connected: a path between two points can be perturbed relative to endpoints to be transverse to those circles, and $1+1<5$ forces the perturbed path to miss them. Radially pushing the punctured normal $4$-disks outward shows that deleting the interiors of small tubular neighbourhoods also leaves a connected complement. Each $2$-handle replaces $S^1\\times D^4$ by the connected $D^2\\times S^3$, glued along the connected $S^1\\times S^3$; hence $N=\\partial X$ is connected. It is a closed smooth $5$-manifold. The dual decomposition of $(X,N)$ has indices $4,5,6$, so the same relative cellular-approximation argument as in step 1.1 gives $\\pi_1(N)\\cong\\pi_1(X)$. [F2, F3, F4, step 1.1, step 2.1, A1]\n\n3.2 (Acyclicity.) By [F1], $X$ has one $0$-cell, two $1$-cells and two $2$-cells with attaching words $w_1,w_2$. Traversing a letter contributes its signed exponent to the incidence degree on the corresponding $1$-cell; the exponent vectors are $(2,-3)$ for $w_1$ and $(-3,5)$ for $w_2$, since $2-5=-3$ for the exponent of $a$ in $w_2$. Thus the cellular chain complex is $0\\to\\mathbb Z^2\\xrightarrow{d_2}\\mathbb Z^2\\xrightarrow{0}\\mathbb Z\\to0$, with $d_2=\\begin{pmatrix}2&-3\\\\-3&5\\end{pmatrix}$. Its determinant is $10-9=1$ and its integral inverse is $\\begin{pmatrix}5&3\\\\3&2\\end{pmatrix}$. Consequently $H_0(X;\\mathbb Z)=\\mathbb Z$ and $\\widetilde H_j(X;\\mathbb Z)=0$ for every $j$. [F1, step 2.1, algebra]\n\n4.1 (A nontrivial fundamental group.) Van Kampen gives $\\pi_1(X)=\\langle a,b\\mid a^2b^{-3}=1,\\ a^2(b^{-1}a)^{-5}=1\\rangle$. Map $a$ to $(12)(34)$ and $b$ to $(135)$ in the permutation group on five letters, composing right to left. Then $a^2=b^3=1$, and direct composition gives $b^{-1}a=(12534)$, of order $5$, so both relators map to the identity. This defines a homomorphism from $\\pi_1(X)$ whose value on $a$ is nonidentity, proving $\\pi_1(X)\\ne1$; step 3.1 also gives $\\pi_1(N)\\ne1$. [F5, step 2.1, step 3.1, construct, algebra]\n\n4.2 (Puncturing and the open cover.) Choose one interior coordinate disk $j:B^6\\hookrightarrow\\operatorname{int}X$, let $D=j(B^6)$ and $S=\\partial D\\cong S^5$, and put $W=X\\setminus\\operatorname{int}D$. It is a compact oriented smooth manifold with boundary $N\\sqcup S$. Set $D_0=j(\\{|x|\\le1/2\\})$, $U=X\\setminus D_0$, $V=\\operatorname{int}D$. These are open in $X$, cover it, and overlap in $j(\\{1/2<|x|<1\\})\\cong S^5\\times(1/2,1)$. The overlap retracts onto its radius-$3/4$ sphere, and $U$ strongly deformation retracts onto $W$ by pushing radius $r$ to $(1-t)r+t$ on $1/2<r\\le1$ and fixing $W$. The radius-$3/4$ sphere inclusion and $S$ inclusion in $U$ are homotopic by interpolating radii. The open ball $V$ contracts radially to its centre. The reduced degree-zero Mayer--Vietoris sequence, with connected overlap, connected $V$ and connected $X$, gives $\\widetilde H_0(U)=0$; since $U$ is a manifold it is locally path connected and therefore path connected, as is $W$. [F6, step 3.1, step 3.2, construct]\n\n5.1 (The sphere end is a homology equivalence.) For $j\\ge1$, the Mayer--Vietoris map $H_j(U\\cap V)\\to H_j(U)\\oplus H_j(V)$ is an isomorphism because both adjacent positive-degree groups of $X$ vanish by step 3.2 and $H_j(V)=0$. Via the radial homotopies in step 4.2 this is exactly the inclusion-induced map $H_j(S;\\mathbb Z)\\to H_j(W;\\mathbb Z)$. In degree zero it is an isomorphism since $S,W$ are nonempty and connected. The long exact sequence of $(W,S)$ therefore gives $H_j(W,S;\\mathbb Z)=0$ for all $j\\ge0$. [F6, step 3.2, step 4.2]\n\n6.1 (The other end is a homology equivalence.) The relative singular chain complex is free over $\\mathbb Z$ (its basis is the singular simplices not lying wholly in $S$). Its homology vanishes by step 5.1, so the universal coefficient sequence in [F7] has zero Hom and Ext terms and gives $H^p(W,S;\\mathbb Z)=0$ for every $p$. Duality with $\\partial W=N\\sqcup S$ then gives $H_j(W,N;\\mathbb Z)=H^{6-j}(W,S;\\mathbb Z)=0$ for $0\\le j\\le6$; for $j>6$, apply the Morse/handle correspondence of [F4] to the compact triad $(W;N,S)$ and the CW comparison of [F1]: its relative cells have indices at most $6$, so those higher relative homology groups also vanish. Thus the long exact sequence of $(W,N)$ makes its inclusion an integral homology isomorphism in every degree. [F1, F4, F6, F7, step 4.2, step 5.1]\n\n7.1 (Failure of the h-cobordism condition.) In the cover of step 4.2, $V$ is contractible and $U\\cap V\\simeq S^5$ is simply connected; van Kampen gives $\\pi_1(U)\\cong\\pi_1(X)$. The radial deformation retraction identifies $\\pi_1(W)\\cong\\pi_1(U)\\ne1$ by step 4.1. But $\\pi_1(S)=\\pi_1(S^5)=1$ by [F5], so $S\\hookrightarrow W$ cannot be a homotopy equivalence by [F8]. Both end inclusions are integral homology isomorphisms by steps 5.1 and 6.1, yet one fails the defining homotopy-equivalence condition. Hence $W$ is a homology cobordism which is not an h-cobordism, refuting the claim. [F5, F8, step 4.1, step 4.2, step 5.1, step 6.1] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alexandra Du, Contractible 4-Manifolds (Oberlin College senior thesis, 2022; complete text)",
+              "url": "https://etd.ohiolink.edu/acprod/odb_etd/ws/send_file/send?accession=oberlin1655202551635123&disposition=inline",
+              "locator": "§4, pp. 14--17 (Mazur manifolds: W_k is a 0-handle with a dotted 1-handle and a k-framed 2-handle, W_k × [0,1] ≅ D^5, M_k = ∂W_k is a homology 3-sphere, and π_1(M_{-3}) ≅ ⟨a,b | b^5 = a^7, b^4 = a^2ba^2⟩ is infinite and nonabelian)"
+            },
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §1, printed pp. 1--10 (relative homology of an h-cobordism and the simple-connectivity hypothesis of the theorem)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-a-four-dimensional-boundary-case-is-outside-the-smooth-h-cobordism-theorem",
+        "kind": "counterexample",
+        "title": "A four-dimensional boundary case is outside the smooth h-cobordism theorem",
+        "deps": [
+          "thm-smooth-simply-connected-h-cobordism-theorem",
+          "rem-the-h-cobordism-theorem-does-not-cover-boundary-dimension-four",
+          "rem-the-smooth-whitney-trick-fails-in-dimension-four",
+          "def-h-cobordism",
+          "def-simply-connected"
+        ],
+        "statement": "**False claim:** every compact smooth h-cobordism over a closed simply connected\nmanifold of dimension four is diffeomorphic to the product. More precisely: the\ndimension hypothesis $n\\ge5$ of the smooth h-cobordism theorem\n([[thm-smooth-simply-connected-h-cobordism-theorem]]) can be weakened to $n=4$,\nso that every h-cobordism of boundary dimension four over a closed simply\nconnected 4-manifold is trivial.",
+        "strategy": "1.1 The proof route fails in boundary dimension four: by [F1], a clean embedded Whitney disk in a four-dimensional middle level cannot generally be produced, since the general-position dimension count for complementary sheets of dimensions $2$ and $2$ gives no room for an embedded disk; the Whitney-trick step of the theorem is therefore unavailable exactly when $n=4$. [F1, given]\n\n2.1 The conclusion also fails, so the failure is not merely a gap in the proof: by [F2] there are smooth orientable simply connected 4-manifolds that are smoothly s-cobordant and homeomorphic but not diffeomorphic, and an s-cobordism is in particular an h-cobordism between them; were such an h-cobordism diffeomorphic to the product relative to its incoming boundary, [F3] would make its two faces diffeomorphic, contradicting the choice of the pair. [F2, F3, given, step 1.1]\n\n3.1 Therefore the hypothesis $n\\ge5$ of the smooth h-cobordism theorem cannot be weakened to $n=4$: the dimension count at the Whitney step stops working and the conclusion itself is false in general for simply connected closed 4-manifolds, while the parallel topological statement for good fundamental groups is a genuinely different theorem. No smooth four-dimensional Poincaré or disk conclusion follows from the theorem of this page, whose statement is restricted to boundary dimension at least five by [F4]. [F2, F4, step 2.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory (ICTP lecture notes, 27 October 2004; complete author text)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf",
+              "locator": "Chapter 1 §1.5 Miscellaneous, printed p. 21"
+            },
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; Concluding Remarks, printed pp. 113--114"
+            },
+            {
+              "title": "Daniel Kasprowski, Mark Powell and Arunima Ray, Counterexamples in 4-manifold topology, EMS Surveys in Mathematical Sciences 9 (2022) 193--249",
+              "url": "https://eprints.gla.ac.uk/288630/1/288630.pdf",
+              "locator": "Example 1.13 and §5.8 (smoothly s-cobordant, homeomorphic, non-diffeomorphic simply connected 4-manifolds, first pair due to Donaldson)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 20
+      },
+      {
+        "id": "ex-the-handle-matrix-of-a-simple-acyclic-presentation",
+        "kind": "example",
+        "title": "The handle matrix of a simple acyclic presentation",
+        "deps": [
+          "def-determinant-of-a-square-matrix",
+          "def-matrix-product-and-identity-matrix",
+          "def-middle-handle-intersection-matrix-of-an-h-cobordism",
+          "lem-acyclicity-makes-the-simply-connected-middle-handle-matrix-unimodular",
+          "lem-handle-slides-reduce-a-unimodular-middle-handle-matrix-to-the-identity",
+          "thm-smith-normal-form-existence-over-a-pid",
+          "def-countable-choice",
+          "lem-whitney-trick-realizes-algebraic-middle-handle-cancellation-geometrically",
+          "lem-middle-handle-pairs-with-one-geometric-intersection-cancel"
+        ],
+        "statement": "The matrix $A=\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}$ lies in\n$\\operatorname{GL}_2(\\mathbb Z)$ (its determinant is $1$). It is carried to the\nidentity by the following elementary operations, each of the kinds realised\ngeometrically by handle slides, renaming and reorientation: interchange the two\nrows, giving $\\begin{pmatrix}1&1\\\\2&1\\end{pmatrix}$; subtract twice row $1$ from\nrow $2$, giving $\\begin{pmatrix}1&1\\\\0&-1\\end{pmatrix}$; subtract column $1$\nfrom column $2$, giving $\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$; multiply row\n$2$ by $-1$, giving $I_2$. Consequently, under $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), a connected simply connected h-cobordism of dimension $n+1\\ge6$, presented in indices $k,k+1$, $2\\le k\\le n-2$, with two\nmiddle handles of each of two adjacent indices and intersection matrix $A$ can\nbe slid to a presentation with matrix $I_2$, after which the Whitney trick\nproduces a cancelling pair configuration and the pairs cancel; this is the\nfinite model for the diagonalisation and cancellation steps of the theorem\n([[def-middle-handle-intersection-matrix-of-an-h-cobordism]]).",
+        "strategy": "**Proof technique:** direct.\n\n1.1 The determinant of $A$ is $2\\cdot1-1\\cdot1=1$, so by [F1] the matrix $A$ is invertible over $\\mathbb Z$ with $A\\in\\operatorname{GL}_2(\\mathbb Z)$ and inverse $\\begin{pmatrix}1&-1\\\\-1&2\\end{pmatrix}$, whose product with $A$ is the identity. [F1, given]\n\n1.2 The displayed operations transform $A$ into $I_2$: interchanging the rows gives $\\begin{pmatrix}1&1\\\\2&1\\end{pmatrix}$; subtracting twice the first row from the second gives $\\begin{pmatrix}1&1\\\\0&-1\\end{pmatrix}$; subtracting the first column from the second gives $\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$; multiplying the second row by $-1$ gives $\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}=I_2$. Each step is a row or column addition, an interchange or a sign change, so the sequence is exactly the reduction of [F2]. [F1, F2, given]\n\n2.1 If a two-index h-cobordism presentation with matrix $A$ satisfies the stated dimension, simple-connectivity and countable-choice hypotheses, [F3] realizes exactly these four operations by slides, relabeling and reorientation, preserving the manifold relative to the incoming face. Its matrix becomes $I_2$. Then [[lem-whitney-trick-realizes-algebraic-middle-handle-cancellation-geometrically]] and [[lem-middle-handle-pairs-with-one-geometric-intersection-cancel]] give geometric cancellation and the product presentation. This is conditional on such a handle presentation; invertibility of an arbitrary integer matrix alone is not an existence construction of a cobordism. [F2, F3, step 1.2] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow, Princeton University Press 1965; scanned edition with searchable text layer)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf",
+              "locator": "Introduction and §§1--9, printed pp. 1--113; §5 and §7, printed pp. 45--66 and 79--92"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, Oxford University Press 2002; complete electronic copy)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Chapter 8 §§8.1--8.2, printed pp. 147--163 (electronic pp. 154--170)"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 16
+      }
+    ]
+  }
+]

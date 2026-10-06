@@ -11,14 +11,17 @@
 // must still clear its own audit and judge, but reopening every transitive
 // consumer for a wording repair would drown the actual defect signal.  Changes
 // to title, logical metadata, Facts, Statement/Definition/Example, or Remarks
-// require a documented review of current logical consumers and direct citation
-// consumers. --direct-boundary stops logical propagation after one dependency
+// enter the legacy surface inventory. A hash-bound claim-preservation receipt
+// can prove an original Statement/Definition unchanged and retain that event as
+// maintenance rather than create consumer review duties. Other surface changes
+// require documented consumer review. --direct-boundary stops propagation after one dependency
 // edge: a consumer whose exported interface changes is separately a changed
 // source in this window (or in the next window after a later repair).
-// --items-file gates only selected consumers, retaining changed external
-// suppliers when the complete graph shows an actual selected consumer.
+// --items-file gates selected consumers while retaining external changed suppliers
+// that actually reach them through the complete dependency/citation graph.
 
-import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync, realpathSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { itemHashGuard, itemSurfaceHash, shortHash } from './item-hash.mjs';
@@ -39,6 +42,7 @@ const useCurrent = argv.includes('--current');
 const directBoundary = argv.includes('--direct-boundary');
 const receiptPath = option('--receipt');
 const templatePath = option('--template');
+const refreshPath = option('--refresh-receipt');
 if (!touchesPath || !fromLabel) usage();
 if (receiptPath && templatePath) die('use either --receipt or --template, not both');
 
@@ -86,8 +90,72 @@ if (!before.surfaces || !after.surfaces) {
   die('selected snapshots predate public-surface fingerprints; take a fresh baseline and post-repair snapshot with touchlog.mjs');
 }
 
-const allChanged = [...new Set([...Object.keys(before.surfaces), ...Object.keys(after.surfaces)])]
+const surfaceChanges = [...new Set([...Object.keys(before.surfaces), ...Object.keys(after.surfaces)])]
   .filter((id) => before.surfaces[id] !== after.surfaces[id]).sort();
+
+// Legacy surface fingerprints include proof dependencies and other metadata.
+// Exact retained baseline bytes can prove that an original Statement/Definition
+// survived such a repair. Keep the surface event as maintenance inventory;
+// it does not create consumer review duties for an unchanged supplier claim.
+const sha = value => createHash('sha256').update(value).digest('hex');
+const maintenance = new Set();
+const scopeReceiptPath = receiptPath ?? refreshPath;
+let scopeReceipt = null;
+if (scopeReceiptPath && existsSync(resolvePath(scopeReceiptPath))) {
+  try { scopeReceipt = JSON.parse(readFileSync(resolvePath(scopeReceiptPath), 'utf8')); }
+  catch { /* ordinary receipt parsing below reports the original error */ }
+}
+function boundResearch(link) {
+  const path = resolvePath(String(link?.path ?? ''));
+  if (!/^[a-f0-9]{64}$/.test(link?.sha256 ?? '')
+    || !realpathSync(path).startsWith(`${realpathSync(join(REPO, 'research'))}/`))
+    throw Error('claim preservation requires a hash-bound research file');
+  const bytes = readFileSync(path);
+  if (sha(bytes) !== link.sha256) throw Error('claim preservation evidence hash mismatch');
+  return bytes;
+}
+function originalClaim(text, kind) {
+  const claims = [...split(text).body.matchAll(/^## (Statement|Definition)[ \t]*\r?\n[\s\S]*?(?=^## |$(?![\s\S]))/gm)];
+  const heading = kind === 'definition' ? 'Definition' : 'Statement';
+  if (!['definition', 'lemma', 'theorem', 'proposition', 'corollary'].includes(kind)
+    || claims.length !== 1 || claims[0][1] !== heading
+    || !claims[0][0].replace(/^##[^\n]*\n/, '').trim())
+    throw Error('claim preservation needs exactly one nonempty original Statement/Definition');
+  return claims[0][0];
+}
+if (scopeReceipt?.claim_preservations !== undefined) {
+  if (!Array.isArray(scopeReceipt.claim_preservations)) error('receipt-claim-preservation', 'claim_preservations must be an array');
+  else for (const link of scopeReceipt.claim_preservations) {
+    try {
+      const proof = JSON.parse(boundResearch(link).toString('utf8'));
+      if (proof.version !== 1 || proof.policy !== 'impact-claim-preservation-v1'
+        || proof.owner !== true || proof.owner_identity !== '/root'
+        || !Number.isFinite(Date.parse(proof.at)) || !String(proof.reason ?? '').trim()
+        || !/^[a-zA-Z0-9_-]+$/.test(proof.id ?? '')
+        || !surfaceChanges.includes(proof.id) || maintenance.has(proof.id)
+        || proof.window?.before_snapshot_sha256 !== sha(JSON.stringify(before))
+        || proof.window?.after_snapshot_sha256 !== sha(JSON.stringify(after))
+        || proof.window?.from !== before.label || proof.window?.to !== after.label)
+        throw Error('invalid claim preservation identity, authority or frozen window');
+      const old = boundResearch(proof.before).toString('utf8');
+      const now = readFileSync(join(REPO, 'items', `${proof.id}.md`), 'utf8');
+      const oldFm = split(old).fm, newFm = split(now).fm;
+      const kind = scalar(oldFm, 'kind');
+      if (scalar(oldFm, 'id') !== proof.id || scalar(newFm, 'id') !== proof.id
+        || kind !== scalar(newFm, 'kind')
+        || shortHash(itemHashGuard(old)) !== before.hashes?.[proof.id]
+        || shortHash(itemSurfaceHash(old)) !== before.surfaces[proof.id]
+        || itemHashGuard(now) !== proof.after?.guard_sha256
+        || itemSurfaceHash(now) !== proof.after?.surface_sha256
+        || shortHash(itemHashGuard(now)) !== after.hashes?.[proof.id]
+        || shortHash(itemSurfaceHash(now)) !== after.surfaces[proof.id]
+        || originalClaim(old, kind) !== originalClaim(now, kind)
+        || sha(originalClaim(old, kind)) !== proof.claim_sha256)
+        throw Error('claim preservation baseline/current carriers or literal claim mismatch');
+      maintenance.add(proof.id);
+    } catch (cause) { error('receipt-claim-preservation', `${scopeReceiptPath}: ${cause.message}`); }
+  }
+}
 
 const items = new Map();
 const aliases = new Map();
@@ -138,8 +206,8 @@ for (const item of items.values()) {
   }
 }
 
-const impacts = [];
-for (const source of allChanged) {
+const allImpacts = [];
+for (const source of surfaceChanges) {
   const logical = logicalConsumers(reverseDeps, source, { directBoundary });
   const citations = directCitations.get(source) ?? new Map();
   const required = new Set([...logical, ...citations.keys()]);
@@ -149,7 +217,7 @@ for (const source of allChanged) {
   // selected consumer; unrelated source events cannot invalidate this scope.
   const scopedRequired = [...required].filter((id) => includesItem(itemScope, id)).sort();
   if (!includesItem(itemScope, source) && !scopedRequired.length) continue;
-  impacts.push({
+  allImpacts.push({
     source,
     source_exists: items.has(source),
     logical_consumers: [...logical].filter((id) => includesItem(itemScope, id)).sort(),
@@ -158,7 +226,10 @@ for (const source of allChanged) {
     required_review: scopedRequired,
   });
 }
-const changed = impacts.map((impact) => impact.source);
+const impacts = allImpacts.filter(impact => !maintenance.has(impact.source));
+const maintenanceImpacts = allImpacts.filter(impact => maintenance.has(impact.source))
+  .map(({ required_review: consumers, ...impact }) => ({ ...impact, consumers }));
+const changed = impacts.map(impact => impact.source);
 const required = [...new Set(impacts.flatMap((impact) => impact.required_review))].sort();
 
 const template = {
@@ -185,17 +256,22 @@ if (templatePath) {
 // until an Alpha writes the real dispositions. Existing dispositions are
 // never modified and never deleted (an id that left the impact set keeps its
 // row as history; the check only warns on extras).
-const refreshPath = option('--refresh-receipt');
 if (refreshPath) {
+  if (errors.length) die(errors.map(entry => `${entry.code}: ${entry.message}`).join('\n'));
   let receipt = template;
   if (existsSync(resolvePath(refreshPath))) {
     try { receipt = JSON.parse(readFileSync(resolvePath(refreshPath), 'utf8')); }
     catch (cause) { die(`${refreshPath}: unreadable — ${cause.message}`); }
   }
   receipt.version = 1;
+  receipt.source = template.source;
   if (directBoundary) receipt.scope = template.scope;
   receipt.changed_interfaces = changed;
   receipt.required_review = required;
+  if (maintenance.size || receipt.maintenance_changes !== undefined || receipt.maintenance_impacts !== undefined) {
+    receipt.maintenance_changes = [...maintenance].sort();
+    receipt.maintenance_impacts = maintenanceImpacts;
+  }
   receipt.dispositions = Array.isArray(receipt.dispositions) ? receipt.dispositions : [];
   const have = new Set(receipt.dispositions.map((d) => d?.id));
   const added = required.filter((id) => !have.has(id));
@@ -237,8 +313,7 @@ if (receiptPath) {
         if (!entry || typeof entry.id !== 'string') { error('receipt-disposition-shape', `${receiptPath}: every disposition needs an item id`); continue; }
         if (dispositions.has(entry.id)) error('receipt-disposition-duplicate', `${receiptPath}: duplicate disposition for ${entry.id}`);
         dispositions.set(entry.id, entry);
-        // Out-of-frontier rows remain historical evidence, including genuine
-        // pending findings. Only current required consumers are gate subjects.
+        // Historical out-of-frontier findings do not become current gate subjects.
         if (itemScope.selected !== null && !required.includes(entry.id)) continue;
         if (!['still-licensed', 'repaired', 'not-load-bearing'].includes(entry.status)) {
           error('receipt-disposition-status', `${receiptPath}: ${entry.id} has an invalid or unresolved status`);
@@ -253,7 +328,8 @@ if (receiptPath) {
 }
 
 const summary = { changed_interfaces: changed.length, required_review: required.length, errors: errors.length, warnings: warnings.length };
-const result = { summary, changed, impacts, required_review: required, errors, warnings };
+const result = { summary, changed, impacts, required_review: required,
+  ...(maintenance.size ? { maintenance_changes: [...maintenance].sort(), maintenance_impacts: maintenanceImpacts } : {}), errors, warnings };
 if (asJson) console.log(JSON.stringify(result, null, 2));
 else {
   console.log(`impact-audit: ${changed.length} changed public interface(s), ${required.length} affected item(s)`);

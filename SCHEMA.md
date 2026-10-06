@@ -105,7 +105,10 @@
   markers in the canonical published ledger; that text identifies the item and
   current hash. `local_checks.precheck` and `.rendercheck` each record the
   actual command, successful output, exit code, check date and current content
-  hash. Depcheck reports this state as `published-local-repair`; stale,
+  hash. For a Definition without a phase proof, precheck records its actual
+  one-file `--json` result with status `not-applicable`, zero checked proofs
+  and zero failures; renderer and ownership checks remain mandatory.
+  Depcheck reports this state as `published-local-repair`; stale,
   missing or mismatched evidence remains an error. There is no item gate,
   rejudgment or adjudication duty for this recorded repair state.
 

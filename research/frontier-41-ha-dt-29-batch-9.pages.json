@@ -1,0 +1,1081 @@
+[
+  {
+    "order": 549,
+    "id": "pontryagin-thom-and-framed-cobordism",
+    "kind": "A",
+    "category": "differential-topology",
+    "title": "Pontryagin Thom and Framed Cobordism",
+    "companion": "pontryagin-thom-and-framed-cobordism-examples",
+    "requires": [
+      "smooth-cobordism-relations-groups-and-rings",
+      "thom-spaces-normal-data-and-collapse-maps",
+      "sard-theorem-and-transversality",
+      "whitney-embedding-tubular-neighbourhoods-and-approximation",
+      "higher-homotopy-groups-and-cofiber-sequences",
+      "hurewicz-whitehead-freudenthal-and-cw-approximation",
+      "spectra-and-stable-homotopy-groups",
+      "trigonometric-and-oscillatory-examples-in-one-variable"
+    ],
+    "items": [
+      {
+        "id": "def-framing-of-a-normal-bundle",
+        "kind": "definition",
+        "title": "Framings of a normal bundle",
+        "deps": [
+          "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "prop-normal-and-conormal-bundles-are-smooth-vector-bundles",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-smooth-embedding",
+          "prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle",
+          "def-compact-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $S\\subseteq X$ be a closed embedded smooth submanifold of a smooth manifold $X$ without boundary, with normal bundle $\\nu(S)=TX|_S/TS$ of rank $k$, a smooth vector bundle over $S$ by [[prop-normal-and-conormal-bundles-are-smooth-vector-bundles]]. A framing of $S$ in $X$ is a smooth bundle isomorphism $\\varphi:\\nu(S)\\to S\\times\\mathbb R^k$ over $\\mathrm{id}_S$, equivalently a trivialization of $\\nu(S)$ or a global frame of its sections; a framed submanifold is a pair $(S,\\varphi)$. Under a supplied Riemannian metric on $X$ the orthogonal-complement model of the normal bundle is canonically identified with $\\nu(S)$, so this is Milnor's framing of the orthogonal complement written in the metric-free quotient convention. Rank $k=0$ and $S=\\varnothing$ are included: a framing of a rank-zero bundle is the unique isomorphism and the empty framing is unique. A framing is an actual trivialization of $\\nu(S)$, never merely a stable isomorphism of it.",
+        "strategy": "Restate Freed's Definition 2.31 in the library's normal-quotient convention of [[def-normal-and-conormal-bundles-of-an-embedded-submanifold]], using [[prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle]] for the comparison with Milnor's metric framings, and fix the rank-zero and empty conventions. The countable-choice hypothesis is inherited solely from the smooth normal-bundle structure; no further choice is used. This item fixes notation and proves nothing.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Lecture 2, Definition 2.31, printed p.20"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Section 7, definition of a framing, printed p.42"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Definition 6.14, electronic p.114"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "def-framed-cobordism-of-embedded-submanifolds",
+        "kind": "definition",
+        "title": "Framed cobordism of framed submanifolds",
+        "deps": [
+          "def-framing-of-a-normal-bundle",
+          "def-unoriented-smooth-cobordism-of-closed-manifolds",
+          "def-neat-submanifold-of-a-manifold-with-boundary",
+          "def-smooth-embedding",
+          "def-smooth-manifold",
+          "def-compact-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $X$ be a closed smooth manifold and $k\\ge0$. A framed cobordism from a closed framed codimension-$k$ submanifold $(N_0,\\varphi_0)$ of $X$ to another $(N_1,\\varphi_1)$ is data $(W,\\theta_0,\\theta_1,\\Psi)$: a compact neat embedded submanifold $W\\subseteq X\\times I$ of dimension $\\dim X-k+1$ with $\\partial W=N_0\\sqcup N_1$ (the $N_i$ read in $X\\times\\{i\\}$); collar embeddings $\\theta_0:N_0\\times[0,\\varepsilon)\\to W$ and $\\theta_1:N_1\\times(1-\\varepsilon,1]\\to W$ with $\\theta_i(x,i)=(x,i)$ whose images are exactly the ends $W\\cap(X\\times[0,\\varepsilon))$ and $W\\cap(X\\times(1-\\varepsilon,1])$; and a framing $\\Psi:\\nu(W\\subseteq X\\times I)\\to W\\times\\mathbb R^k$ whose pullback under $\\theta_i$ equals $\\varphi_i$ composed with the product projection, the $I$-direction being tangent to $W$ along $\\theta_i$ so that $\\nu(W)|_{N_i}$ is canonically $\\nu(N_i\\subseteq X)$. Two framed submanifolds are framed cobordant when such data exist. No orientation of $X$ or of the $N_i$ is used, and the collars are part of the data.",
+        "strategy": "Mirror DT-15's collar-decorated bordism definition [[def-unoriented-smooth-cobordism-of-closed-manifolds]] in the normal-quotient convention of the previous item, making the collars part of the data so that the framing restriction at each end is literal and no boundary sign is left implicit. Neatness uses [[def-neat-submanifold-of-a-manifold-with-boundary]]; the product condition is what identifies $\\nu(W)|_{N_i}$ with $\\nu(N_i\\subseteq X)$, and the metric-free normal quotient avoids choosing a metric on $X$. A definition: nothing is proved and $\\mathrm{AC}_\\omega$ is inherited.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Section 7, framed cobordism definition, printed pp.42-43"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Definition 1.19 and (2.31), printed pp.8-9 and 20"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Definitions 6.14 and 6.16, electronic p.114"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "lem-framed-cobordism-is-an-equivalence-relation",
+        "kind": "lemma",
+        "title": "Framed cobordism is an equivalence relation",
+        "deps": [
+          "def-framed-cobordism-of-embedded-submanifolds",
+          "def-framing-of-a-normal-bundle",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "thm-chain-rule-for-differentials-of-smooth-maps",
+          "def-equivalence-relation",
+          "def-neat-submanifold-of-a-manifold-with-boundary",
+          "def-smooth-manifold",
+          "def-compact-space",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-compactness-under-continuous-maps",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. For every closed smooth $X$ and $k\\ge0$, framed cobordism of closed framed codimension-$k$ submanifolds of $X$ is an equivalence relation. Reflexivity is the cylinder $N\\times I\\subseteq X\\times I$ with $\\Psi=\\varphi\\circ\\mathrm{pr}_N$; symmetry is the reflection $\\rho(x,t)=(x,1-t)$ with the transported framing $\\Psi\\circ d\\rho^{-1}$; transitivity is gluing two framed cobordisms along their common product end inside $X\\times[0,2]\\cong X\\times I$, where the two framings agree along the common end and glue smoothly.",
+        "strategy": "Cylinder: $N\\times I$ is neat, its normal bundle is the pullback of $\\nu(N)$, and $\\varphi\\circ\\mathrm{pr}_N$ restricts to $\\varphi$ at both ends. Reversal: $\\rho$ is a diffeomorphism of $X\\times I$; the transported framing restricts at the ends to $\\varphi_{1-i}$ because $d\\rho$ is the identity on $TX$ and $-1$ on the (tangent) $I$-direction there. Transitivity: after the standard identification $X\\times[0,2]\\cong X\\times I$, both cobordisms are vertical products in a neighbourhood of the common end, so their union is a smooth neat submanifold with no corner and the two framings agree on the overlap, giving a smooth framing. The collar arguments follow the DT-15 pattern of [[lem-collar-gluing-and-corner-smoothing-give-transitivity]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Section 7, 'Again this is an equivalence relation', printed p.43"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Definitions 1.19 and 2.31, printed pp.8-9 and 20"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Definition 6.16, electronic p.114"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "prop-a-framing-identifies-the-thom-target-with-a-sphere-smash-product",
+        "kind": "proposition",
+        "title": "A framing identifies the Thom target with a sphere smash product",
+        "deps": [
+          "def-framing-of-a-normal-bundle",
+          "def-countable-choice",
+          "prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product",
+          "def-disk-bundle-sphere-bundle-and-thom-space",
+          "lem-thom-space-is-independent-of-the-bundle-metric-up-to-canonical-homeomorphism",
+          "def-smash-product-of-based-spaces",
+          "prop-smash-product-is-associative-symmetric-and-unital-up-to-the-canonical-homeomorphisms",
+          "def-compactly-generated-based-space-and-well-pointed-object"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $(N,\\varphi)$ be a closed framed codimension-$k$ submanifold of a closed smooth $X$, with normal bundle $\\nu=\\nu(N\\subseteq X)$. Then $\\varphi$ induces a based homeomorphism $\\Phi_\\varphi:\\operatorname{Th}(\\nu)\\to N_+\\wedge S^k$, natural in the framed data, and the composite of a collapse $c:X_+\\to\\operatorname{Th}(\\nu)$ with the based projection $N_+\\wedge S^k\\to S^0\\wedge S^k=S^k$ is a based map $X_+\\to S^k$. The homeomorphism is independent of the metric used on $\\nu$ up to the canonical radial homeomorphism. For $k=0$ the target is $S^0$, and for $N=\\varnothing$ every space occurring is the one-point based space.",
+        "strategy": "Apply DT-16's [[prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product]] to the trivial bundle $N\\times\\mathbb R^k$ and transport along the bundle isomorphism $\\varphi$; the naturality clause of that proposition supplies naturality in the framed data, and [[lem-thom-space-is-independent-of-the-bundle-metric-up-to-canonical-homeomorphism]] removes the metric choice. The projection is the smash of the based collapse $N_+\\to S^0$ with the identity of $S^k$ in the convention of [[def-smash-product-of-based-spaces]]; the rank-zero and empty clauses are those of the DT-16 proposition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. P. May, A Concise Course in Algebraic Topology",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
+              "locator": "Chapter 23, section 5, printed pp.194-196"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "equation (2.34), printed p.21"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Section 7, proof of Theorem C, printed pp.46-47"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "def-pontryagin-thom-map-of-a-framed-submanifold",
+        "kind": "definition",
+        "title": "The Pontryagin-Thom map of a framed submanifold",
+        "deps": [
+          "def-framing-of-a-normal-bundle",
+          "prop-a-framing-identifies-the-thom-target-with-a-sphere-smash-product",
+          "def-pontryagin-thom-collapse-of-an-embedded-submanifold",
+          "def-disk-bundle-sphere-bundle-and-thom-space",
+          "lem-collapse-map-is-continuous-and-smooth-away-from-the-basepoint",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $X$ be closed and let $(N,\\varphi)$ be a closed framed codimension-$k$ submanifold, $k\\ge0$. Choose a compatible tubular chart and radius for the normal datum $(N\\times\\mathbb R^k,\\varphi^{-1})$ as in [[def-pontryagin-thom-collapse-of-an-embedded-submanifold]]; this gives the collapse $c:X_+\\to\\operatorname{Th}(N\\times\\mathbb R^k)$. The Pontryagin-Thom map of $(N,\\varphi)$ is the based map $f_{(N,\\varphi)}:X_+\\to S^k$ obtained by composing $c$ with the framing-induced homeomorphism of the previous item and the based projection $N_+\\wedge S^k\\to S^k$; its restriction to $X$ is written $f_{(N,\\varphi)}:X\\to S^k$. The target $S^k=D^k/S^{k-1}$ and the framing fixes the identification of the normal fibres with $\\mathbb R^k$. Other compatible tube data give based homotopic maps, while the framing is data and can change the class.",
+        "strategy": "The definition composes three supplied maps: DT-16's collapse, the framing homeomorphism, and the based projection. All tube choices (chart, metric, radius) are auxiliary and removed in the next lemma; the framing pins the sign convention through the structure homeomorphism $D^k/S^{k-1}\\cong S^k$. No choice beyond the inherited countable choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "equations (2.34) and (2.36), printed pp.21-22"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Section 7, proof of Theorem C, printed pp.46-48"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Pontryagin-Thom construction 6.8, electronic pp.111-112"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "lem-changing-framed-tube-data-changes-the-pontryagin-thom-map-by-based-homotopy",
+        "kind": "lemma",
+        "title": "Tube independence of the Pontryagin-Thom map",
+        "deps": [
+          "def-pontryagin-thom-map-of-a-framed-submanifold",
+          "lem-collapse-map-is-independent-of-tubular-neighbourhood-and-radius-up-to-based-homotopy",
+          "prop-a-framing-identifies-the-thom-target-with-a-sphere-smash-product",
+          "lem-collapse-map-is-continuous-and-smooth-away-from-the-basepoint",
+          "def-homotopy-relative-and-path-homotopy"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $(N,\\varphi)$ be a closed framed codimension-$k$ submanifold of a closed smooth $X$. Pontryagin-Thom maps of $(N,\\varphi)$ built from any two compatible tubular charts, any two supplied metrics on $N\\times\\mathbb R^k$, and any two sufficiently small positive radii are based homotopic as maps $X_+\\to S^k$. The framing is fixed data: a bundle automorphism of the normal datum that is not the identity on the normal quotient does not preserve the class in general.",
+        "strategy": "DT-16's [[lem-collapse-map-is-independent-of-tubular-neighbourhood-and-radius-up-to-based-homotopy]] supplies a based homotopy between the two collapse maps into $\\operatorname{Th}(N\\times\\mathbb R^k)$; composing a based homotopy with the fixed continuous based map $\\operatorname{Th}(N\\times\\mathbb R^k)\\to N_+\\wedge S^k\\to S^k$ preserves the based homotopy. Metric changes are absorbed by the canonical radial identification of DT-16. The closure warning that a normal automorphism is not an auxiliary choice is copied from the cited lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "'Part of Theorem 2.35 is that the resulting map ... (is) independent of these choices', printed pp.21-22"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Theorem A, printed pp.44-46"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "def-pontryagin-thom-collapse-of-a-framed-neat-cobordism",
+        "kind": "definition",
+        "title": "Collapse of a framed neat cobordism in $X\\times I$",
+        "deps": [
+          "def-framed-cobordism-of-embedded-submanifolds",
+          "def-pontryagin-thom-collapse-of-an-embedded-submanifold",
+          "lem-tubular-charts-realize-a-prescribed-normal-identification",
+          "thm-neat-submanifolds-have-boundary-adapted-slice-charts",
+          "lem-collapse-map-is-continuous-and-smooth-away-from-the-basepoint",
+          "def-framing-of-a-normal-bundle",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $X$ be closed, $k\\ge0$, and let $(W,\\theta_0,\\theta_1,\\Psi)$ be a framed cobordism in $X\\times I$ from $(N_0,\\varphi_0)$ to $(N_1,\\varphi_1)$. Choose a neat compatible tubular chart of $W$ in $X\\times I$, a metric on $W\\times\\mathbb R^k$ and a radius, as in the DT-16 collapse definition. The collapse of the framed cobordism is the map $c_W:X\\times I\\to S^k$ that sends a point of the tube to its framed $\\mathbb R^k$-coordinate in $S^k$ and every point outside the tube (including the added boundary basepoint copies) to the basepoint. It is continuous; its restrictions to $X\\times\\{0\\}$ and $X\\times\\{1\\}$ are the Pontryagin-Thom maps of $(N_0,\\varphi_0)$ and $(N_1,\\varphi_1)$ computed with the induced boundary tube data; hence $c_W$ is a homotopy between them.",
+        "strategy": "Instantiate DT-16's collapse definition with a boundary-adapted neat tube, using [[thm-neat-submanifolds-have-boundary-adapted-slice-charts]] and [[lem-tubular-charts-realize-a-prescribed-normal-identification]]; the collar product structure along the ends identifies the boundary restrictions with the boundaryless collapses of the $N_i$ in $X\\cong X\\times\\{i\\}$. Continuity follows from the closed-pasting argument of [[lem-collapse-map-is-continuous-and-smooth-away-from-the-basepoint]] applied to the compact tube and its complement in $X\\times I$. The normal-data conventions and the restriction of the identification to the boundary are exactly the clauses of DT-16's [[lem-based-homotopies-transverse-to-the-zero-section-give-normal-cobordisms]]; countable choice is inherited from the compatible-chart existence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "well-definedness of the inverse map, printed p.27"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "proof of Theorem B, printed p.50"
+            },
+            {
+              "title": "John Milnor and James Munkres, Differential Topology (Prentice-Hall, 1974)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/difftop.pdf",
+              "locator": "proof of Theorem 3.14, printed p.26"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "lem-framed-cobordant-submanifolds-have-homotopic-collapse-maps",
+        "kind": "lemma",
+        "title": "Framed cobordant submanifolds have homotopic Pontryagin-Thom maps",
+        "deps": [
+          "def-pontryagin-thom-collapse-of-a-framed-neat-cobordism",
+          "lem-changing-framed-tube-data-changes-the-pontryagin-thom-map-by-based-homotopy",
+          "def-pontryagin-thom-map-of-a-framed-submanifold",
+          "def-framed-cobordism-of-embedded-submanifolds",
+          "def-homotopy-relative-and-path-homotopy"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $X$ be closed and let $(N_0,\\varphi_0)$, $(N_1,\\varphi_1)$ be closed framed codimension-$k$ submanifolds of $X$. If they are framed cobordant, then their Pontryagin-Thom maps $X\\to S^k$ are homotopic, indeed based homotopic as maps $X_+\\to S^k$, and a framed cobordism supplies an explicit homotopy $X\\times I\\to S^k$ whose end restrictions are the two maps up to based homotopy.",
+        "strategy": "Take the collapse $c_W$ of the framed cobordism from the previous item. Its end restrictions are Pontryagin-Thom maps of the boundary framed submanifolds computed with the induced tube data; [[lem-changing-framed-tube-data-changes-the-pontryagin-thom-map-by-based-homotopy]] identifies each of these with the Pontryagin-Thom map of the given framed data up to based homotopy. Concatenating the two based homotopies with $c_W$ gives the result. Compactness of $W$ and $X$ makes the tube compact and its complement closed, which is what the collapse uses.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Theorem B, first direction, printed p.50"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "well-definedness of $\\psi$: a framed bordism gives a collapse map $\\Delta^1\\times M\\to S^q$, printed p.27"
+            },
+            {
+              "title": "John Milnor and James Munkres, Differential Topology (Prentice-Hall, 1974)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/difftop.pdf",
+              "locator": "Theorem 3.14, printed pp.25-26"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "def-framed-regular-preimage-of-a-map-to-a-sphere",
+        "kind": "definition",
+        "title": "Framed regular preimages of a map to a sphere",
+        "deps": [
+          "prop-transverse-preimage-carries-a-pulled-back-normal-structure",
+          "def-framing-of-a-normal-bundle",
+          "def-disk-bundle-sphere-bundle-and-thom-space",
+          "def-orientation-of-a-finite-dimensional-real-vector-space",
+          "def-transverse-smooth-maps",
+          "prop-transversality-to-a-point-is-the-regular-value-condition",
+          "prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product",
+          "cor-regular-values-form-a-dense-g-delta-set",
+          "def-smooth-manifold",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Fix the standard orientation of $S^k$ and identify $S^k=D^k/S^{k-1}$ with the one-point compactification $\\mathbb R^k\\cup\\{\\infty\\}$ of the zero section of the trivial rank-$k$ bundle over a point, so the centre $y_0$ corresponds to $0$. Let $X$ be a closed smooth manifold, $f:X\\to S^k$ smooth, $y\\in S^k$ a regular value, and $b=(b_1,\\dots,b_k)$ a positively oriented basis of $T_yS^k$, read as the trivialization $\\beta:T_yS^k\\to\\mathbb R^k$. Then $N=f^{-1}(y)$ is a closed embedded submanifold of $X$ of codimension $k$, and the differential of $f$ factors through the normal quotient to a smooth bundle isomorphism $\\nu(N\\subseteq X)\\to(f|_N)^*TS^k$; composing with $\\beta$ gives a framing $f_*b:\\nu(N\\subseteq X)\\to N\\times\\mathbb R^k$. The pair $(N,f_*b)$ is the framed regular preimage of $(f,y,b)$; independence of the regular value and positive basis for k>=1 is proved in the two following lemmas. Rank zero and $N=\\varnothing$ are included. Regular-value independence is not asserted for rank zero.",
+        "strategy": "This is the special case $E=\\mathbb R^k\\times\\{\\mathrm{pt}\\}$ of DT-16's [[prop-transverse-preimage-carries-a-pulled-back-normal-structure]]: the trivial rank-$k$ bundle over the one-point base has zero section $\\{0\\}\\subseteq\\mathbb R^k=D^k/S^{k-1}\\subseteq S^k$, $f$ is smooth near the preimage, and transversality to the zero section is exactly regularity of $y$. Clauses (i)-(ii) of that proposition give the closed embedded submanifold and the identification of the normal bundle with the pullback; inserting the positive basis turns the target factor into $\\mathbb R^k$, which is the framing. The countable-choice hypothesis is inherited exactly from that proposition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Section 7, the Pontryagin manifold $(f^{-1}(y),f_*b)$, printed p.43"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Definition 2.31, printed p.20, and Example 6.15"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Example 6.7, electronic p.111"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "lem-positively-oriented-bases-are-path-connected",
+        "kind": "lemma",
+        "title": "Positively oriented bases of an oriented vector space are path-connected",
+        "deps": [
+          "def-invertible-matrix-and-general-linear-group",
+          "thm-invertible-matrices-factor-into-elementary-matrices",
+          "def-elementary-matrix",
+          "def-orientation-of-a-finite-dimensional-real-vector-space",
+          "def-path-connected",
+          "def-matrix-product-and-identity-matrix",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "cor-invertible-matrix-has-unit-determinant",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "cor-sine-and-cosine-are-one-lipschitz",
+          "thm-intermediate-value",
+          "def-the-standard-smooth-step-function"
+        ],
+        "statement": "Let $V$ be a finite-dimensional real vector space with an orientation. The set of positively oriented bases of $V$ is path-connected; equivalently $\\mathrm{GL}^+(k,\\mathbb R)$ is path-connected. In particular, for the oriented vector space $T_yS^k$, any two positive bases at $y$ can be joined by a continuous path of positive bases.",
+        "strategy": "Identify the positive bases with $\\mathrm{GL}^+(k,\\mathbb R)$ after fixing one basis. Factor an invertible matrix into elementary matrices ([[thm-invertible-matrices-factor-into-elementary-matrices]]): row-addition matrices lie on the path $I+tE$ and positive diagonal scalings on $(1-t)I+tD$, both inside $\\mathrm{GL}^+$ for $t\\in[0,1]$; the negative-determinant factors occur in an even number and can be paired so that each pair is a product of shears and positive scalings, each deformable to the identity. Equivalently, Gram-Schmidt reduces the problem to $\\mathrm{SO}(k)$ and an oriented orthonormal frame is connected to the standard frame by finitely many plane rotations. Both are finite explicit constructions, so no choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Section 7, Lemma 1: the space of positive bases is $\\mathrm{GL}^+(p,\\mathbb R)$, hence connected, printed p.44"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Exercise 5.28: Gram-Schmidt deformation retracts $\\mathrm{GL}_q(\\mathbb R)$ onto $O(q)$, printed p.42"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-homotopic-maps-with-a-common-regular-value-have-framed-cobordant-preimages",
+        "kind": "lemma",
+        "title": "Homotopic maps with a common regular value have framed-cobordant preimages",
+        "deps": [
+          "prop-transverse-preimage-carries-a-pulled-back-normal-structure",
+          "prop-relative-transversality-preserves-a-map-on-a-closed-good-region",
+          "def-framed-regular-preimage-of-a-map-to-a-sphere",
+          "def-framed-cobordism-of-embedded-submanifolds",
+          "prop-transversality-to-a-point-is-the-regular-value-condition",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-disk-bundle-sphere-bundle-and-thom-space",
+          "def-countable-choice",
+          "def-the-standard-smooth-step-function"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $X$ be closed and let $f_0,f_1:X\\to S^k$ be smoothly homotopic maps for which $y\\in S^k$ is a regular value of both, with a fixed positive basis $b$ of $T_yS^k$. Then the framed regular preimages $(f_0^{-1}(y),f_{0*}b)$ and $(f_1^{-1}(y),f_{1*}b)$ are framed cobordant. Consequently the framed class of a regular preimage is unchanged under smooth homotopy when the regular value is held fixed.",
+        "strategy": "Apply DT-16's [[lem-based-homotopies-transverse-to-the-zero-section-give-normal-cobordisms]] to the trivial rank-$k$ bundle over a point. Any continuous homotopy from $f_0$ to $f_1$ whose ends are smooth and transverse to the zero section near their zero preimages can be replaced by a based homotopy, fixed on the ends, that is smooth and transverse near its zero preimage; its zero preimage $W$ is a compact neat embedded submanifold of $X\\times I$ whose normal bundle is identified with the pullback of the trivial bundle, i.e. carries a framing $\\Psi$, and that identification restricts to the endpoint framings induced by $df_i$ and the same positive basis $b$. This is exactly a framed cobordism in the sense of the framed-cobordism definition; reparametrising the homotopy puts it in collar form.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Theorem 3.9 proof and Lemma 3.12, printed pp.27-28"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Lemma 3, printed p.45"
+            },
+            {
+              "title": "John Milnor and James Munkres, Differential Topology (Prentice-Hall, 1974)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/difftop.pdf",
+              "locator": "Theorem 3.14, printed pp.25-26"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "lem-regular-value-choice-does-not-change-the-framed-cobordism-class",
+        "kind": "lemma",
+        "title": "The framed preimage class is independent of regular value and positive basis",
+        "deps": [
+          "def-framed-regular-preimage-of-a-map-to-a-sphere",
+          "lem-positively-oriented-bases-are-path-connected",
+          "lem-homotopic-maps-with-a-common-regular-value-have-framed-cobordant-preimages",
+          "def-framed-cobordism-of-embedded-submanifolds",
+          "lem-framed-cobordism-is-an-equivalence-relation",
+          "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
+          "def-the-standard-smooth-step-function",
+          "thm-morse-sard-for-smooth-manifolds",
+          "cor-regular-values-form-a-dense-g-delta-set",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $X$ be closed and $f:X\\to S^k$ smooth. (i) At a regular value $y$, two positive bases $b,b'$ of $T_yS^k$ give framed-cobordant framed preimages $(N,f_*b)$ and $(N,f_*b')$. (ii) If $y,y'$ are regular values with positive bases $b,b'$, then the framed preimages are framed cobordant; consequently the framed cobordism class of a regular preimage depends only on the smooth homotopy class of $f$, and homotopic maps give framed-cobordant preimages for any choices of regular values and positive bases.",
+        "strategy": "(i) The change-of-basis matrix lies in $\\mathrm{GL}^+(k,\\mathbb R)$, which is path-connected by the previous lemma; a smooth path $b_t$ of positive bases through $b$ makes $(x,t)\\mapsto f_*b_t$ a framing of the cylinder $N\\times I\\subseteq X\\times I$ whose restrictions at the ends are $f_*b$ and $f_*b'$, so the cylinder is a framed cobordism. (ii) Choose an orientation-preserving rotation family $R_t$ of $S^k$ with $R_0=\\mathrm{id}$ and $R_1(y)=y'$ (the explicit rotation in the plane spanned by $y,y'$, with the antipodal case handled by a perpendicular rotation), and put $F(x,t)=R_tf(x)$. Then $y'$ is a regular value of both $F_0=f$ and $F_1=R_1f$, because $(R_1f)^{-1}(y')=f^{-1}(y)$ and $d(R_1f)=dR_1\\circ df$ is onto there; the homotopy lemma gives a framed cobordism between $(f^{-1}(y'),f_*b')$ and $(f^{-1}(y),f_*(b'\\circ dR_1))$. Since $R_1$ is orientation-preserving, $b'\\circ dR_1$ is a positive basis at $y$, so (i) identifies the second class with $(f^{-1}(y),f_*b)$. Combining the cobordisms yields (ii).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Theorem A and Lemmas 1-2, printed pp.44-46"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Theorem 3.9, well-definedness of $\\varphi$, printed p.27"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "lem-regular-preimage-after-collapse-recovers-the-original-framed-submanifold",
+        "kind": "lemma",
+        "title": "The regular preimage of the collapse recovers the original framed submanifold",
+        "deps": [
+          "def-pontryagin-thom-map-of-a-framed-submanifold",
+          "def-framed-regular-preimage-of-a-map-to-a-sphere",
+          "prop-a-framing-identifies-the-thom-target-with-a-sphere-smash-product",
+          "def-pontryagin-thom-collapse-of-an-embedded-submanifold",
+          "lem-changing-framed-tube-data-changes-the-pontryagin-thom-map-by-based-homotopy",
+          "def-framing-of-a-normal-bundle",
+          "def-orientation-of-a-finite-dimensional-real-vector-space",
+          "lem-collapse-map-is-continuous-and-smooth-away-from-the-basepoint"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $X$ be closed and $(N,\\varphi)$ a closed framed codimension-$k$ submanifold, $k\\ge1$, with Pontryagin-Thom map $f=f_{(N,\\varphi)}:X\\to S^k$. Then the centre $y_0$ (the image of the zero section under the structure identification) is a regular value of $f$, one has $f^{-1}(y_0)=N$, and the framing $f_*b$ determined by the positive basis $b$ of $T_{y_0}S^k$ corresponding to the structure identification is exactly $\\varphi$. Thus the framed regular preimage of $(f,y_0,b)$ is $(N,\\varphi)$ on the nose.",
+        "strategy": "In a compatible tube, $f$ is the composite of the tube coordinate $(s,v)\\mapsto(s,v/\\rho)$ with the framing and the quotient map to $D^k/S^{k-1}$. The vertical derivative at $(s,0)$ is the inverse of the framing (equivalently the framing, under the fixed identification convention), so $f$ is a submersion along $N$, its fibre over the centre is exactly $N$, and the induced normal framing is $\\varphi$. This is the local computation of DT-16's [[lem-collapse-map-is-continuous-and-smooth-away-from-the-basepoint]] at the zero section, read through the framing identification of the Thom target. No choice is used beyond the tube data, which the tube-independence lemma removes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Theorem C and its proof: $\\pi^{-1}(0)=N$ with the given framing, printed pp.46-48"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "(2.34) and (3.11), printed pp.21 and 28"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Pontryagin-Thom construction 6.8, electronic pp.111-112"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "lem-collapse-after-regular-preimage-is-homotopic-to-the-original-map",
+        "kind": "lemma",
+        "title": "The collapse of a regular preimage is homotopic to the original map",
+        "deps": [
+          "def-pontryagin-thom-map-of-a-framed-submanifold",
+          "def-framed-regular-preimage-of-a-map-to-a-sphere",
+          "lem-regular-preimage-after-collapse-recovers-the-original-framed-submanifold",
+          "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "lem-smooth-maps-paste-over-an-open-cover",
+          "thm-chain-rule-for-differentials-of-smooth-maps",
+          "def-homotopy-relative-and-path-homotopy"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $X$ be closed, $f:X\\to S^k$ smooth, $y$ a regular value with positive basis $b$, $(N,\\varphi=f_*b)$ the framed preimage, and $g=f_{(N,\\varphi)}$ its Pontryagin-Thom map. Then $g$ is smoothly homotopic to $f$ by a homotopy that is constant on a neighbourhood of $N$ and on the complement of a compact tube; in particular the collapse-after-preimage composition is the identity on smooth homotopy classes.",
+        "strategy": "Choose a tubular chart of $N$ in $X$ on which $f$ takes the normal form given by its differential, using [[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]] and the regular-value hypothesis. First homotope $f$, localized in the tube and equal to the collapse map outside, so that $f$ and $g$ agree on a smaller tube and have the same derivative along $N$: this is the cutoff deformation along the framing coordinate (Freed (3.13)/Milnor Lemma 4). Then deform inside the affine chart $S^k\\setminus\\{\\text{antipode}\\}$ by the straight-line homotopy between the two maps, which is well defined because the maps agree near $N$ and agree with the collapse (hence avoid the antipode) outside a neighbourhood of $N$; this is Milnor's Lemma 4. Every homotopy is fixed on the complement of a compact tube, hence on any prescribed closed set missed by the tube, and the pasting uses [[lem-continuity-is-local-and-pastes]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Lemma 4 and the proof of Theorem B, printed pp.48-50"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Lemma 3.12 and its proof, printed pp.27-28"
+            },
+            {
+              "title": "John Milnor and James Munkres, Differential Topology (Prentice-Hall, 1974)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/difftop.pdf",
+              "locator": "Theorem 3.16, first half of the injectivity argument, printed pp.27-28"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "justified_by": []
+      },
+      {
+        "id": "lem-based-and-free-homotopy-classes-of-sphere-maps-agree",
+        "kind": "lemma",
+        "title": "Based and free homotopy classes of maps between spheres agree",
+        "deps": [
+          "def-higher-homotopy-group-by-based-cubes",
+          "thm-higher-homotopy-classes-form-groups-and-are-abelian-above-degree-one",
+          "lem-cubical-concatenation-is-well-defined-on-higher-homotopy-classes",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-euclidean-spheres-and-closed-balls",
+          "lem-straight-line-homotopies-are-continuous",
+          "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus"
+        ],
+        "statement": "For $n,k\\ge1$ the forgetful map $\\pi_n(S^k)\\to[S^n,S^k]$ from based homotopy classes to free homotopy classes of continuous maps is a bijection (a based homotopy is in particular a free homotopy, so the map is well defined).",
+        "strategy": "Surjectivity: given $f:S^n\\to S^k$, choose an explicit path of rotations $R_t$ of $S^k$ with $R_1(f(*))=*$ (rotate in the two-plane spanned by $f(*)$ and $*$; if they are antipodal use a perpendicular intermediate rotation); then $R_t\\circ f$ is a free homotopy from $f$ to the based map $R_1\\circ f$. Injectivity: a free homotopy between based maps $f_0,f_1$ is a map $F:D^{n+1}\\to S^k$ on the disk with boundary values $f_0$ and $f_1$; precomposing $F$ with a self-homotopy-equivalence of the disk that carries the radial segment from the centre to the boundary basepoint into the basepoint and fixes that boundary basepoint produces a based homotopy from $f_0$ to $f_1$ (Freed's Figure 13 argument). Both steps are explicit and use no choice principle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Lemma 4.16 and Figure 13, printed pp.32-33"
+            },
+            {
+              "title": "J. P. May, A Concise Course in Algebraic Topology",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
+              "locator": "Chapter 9, section 4, printed p.67"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "thm-pontryagin-thom-correspondence-in-fixed-codimension",
+        "kind": "theorem",
+        "title": "The Pontryagin-Thom correspondence in fixed codimension",
+        "deps": [
+          "def-pontryagin-thom-map-of-a-framed-submanifold",
+          "lem-framed-cobordant-submanifolds-have-homotopic-collapse-maps",
+          "lem-homotopic-maps-with-a-common-regular-value-have-framed-cobordant-preimages",
+          "lem-regular-value-choice-does-not-change-the-framed-cobordism-class",
+          "lem-regular-preimage-after-collapse-recovers-the-original-framed-submanifold",
+          "lem-collapse-after-regular-preimage-is-homotopic-to-the-original-map",
+          "def-framed-regular-preimage-of-a-map-to-a-sphere",
+          "lem-based-and-free-homotopy-classes-of-sphere-maps-agree",
+          "def-framed-cobordism-of-embedded-submanifolds",
+          "lem-framed-cobordism-is-an-equivalence-relation",
+          "thm-morse-sard-for-smooth-manifolds",
+          "cor-regular-values-form-a-dense-g-delta-set",
+          "cor-every-continuous-map-between-smooth-manifolds-is-homotopic-to-a-smooth-map",
+          "thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic",
+          "def-higher-homotopy-group-by-based-cubes",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge k\\ge1$ the collapse construction and the framed-regular-preimage construction define mutually inverse bijections between the set of framed cobordism classes of closed framed $(n-k)$-submanifolds of $S^n$ and the $n$-th homotopy group $\\pi_n(S^k)$; equivalently, they give a bijection with the set $[S^n,S^k]$ of free homotopy classes of continuous maps. This is the Pontryagin-Thom theorem in fixed codimension, with the empty preimage and the zero-dimensional case n=k included.",
+        "strategy": "Define $\\Phi$ from framed cobordism classes to $\\pi_n(S^k)$ by the Pontryagin-Thom map: the previous cobordism-to-homotopy lemma makes it well defined. Define $\\Psi$ from $\\pi_n(S^k)$ to framed cobordism classes by replacing a class with a smooth representative ([[cor-every-continuous-map-between-smooth-manifolds-is-homotopic-to-a-smooth-map]], [[thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic]]), choosing a regular value and a positive basis ([[thm-morse-sard-for-smooth-manifolds]], [[cor-regular-values-form-a-dense-g-delta-set]]) and taking the framed regular preimage; the two independence lemmas make $\\Psi$ well defined. The recovery lemma shows $\\Psi\\circ\\Phi=\\mathrm{id}$ at the level of framed classes, and the collapse-after-preimage lemma shows $\\Phi\\circ\\Psi=\\mathrm{id}$ on homotopy classes. Finally the based/free lemma identifies $\\pi_n(S^k)$ with free homotopy classes. The hypotheses $n\\ge k\\ge1$ keep the preimage dimension nonnegative and the target sphere positive-dimensional.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Theorems A, B and C, printed pp.42-51"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Theorem 3.9, printed pp.26-28"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "6.10 and Proposition 6.13, electronic pp.112-113"
+            },
+            {
+              "title": "John Milnor and James Munkres, Differential Topology (Prentice-Hall, 1974)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/difftop.pdf",
+              "locator": "Theorems 3.15 and 3.16, printed pp.26-28"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "justified_by": []
+      },
+      {
+        "id": "def-stabilized-framed-cobordism-colimit",
+        "kind": "definition",
+        "title": "Stabilized framed cobordism and the framed bordism group",
+        "deps": [
+          "def-framed-cobordism-of-embedded-submanifolds",
+          "lem-framed-cobordism-is-an-equivalence-relation",
+          "thm-pontryagin-thom-correspondence-in-fixed-codimension",
+          "thm-disjoint-union-makes-bordism-classes-abelian-groups",
+          "def-smooth-manifold",
+          "def-compact-space"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. For $d\\ge0$ and $k\\ge1$ let $\\mathrm{Cob}_d(k)$ be the set of framed cobordism classes of closed framed $d$-submanifolds of $S^{d+k}$ (codimension $k$; the fixed-codimension theorem applies with $n=d+k\\ge k$). The equatorial stabilization $\\sigma:\\mathrm{Cob}_d(k)\\to\\mathrm{Cob}_d(k+1)$ sends the class of $(N,\\varphi)$ to the class of $(i(N),\\varphi\\oplus\\nu_{\\mathrm{eq}})$, where $i:S^{d+k}\\hookrightarrow S^{d+k+1}$ is the equatorial inclusion and $\\nu_{\\mathrm{eq}}$ is the outward unit normal framing of the equator; framed cobordisms are carried to framed cobordisms by $i\\times\\mathrm{id}_I$, so $\\sigma$ is well defined. The framed bordism group $\\Omega^{\\mathrm{fr}}_d$ is the colimit of $\\mathrm{Cob}_d(1)\\to\\mathrm{Cob}_d(2)\\to\\cdots$, i.e. the quotient of $\\bigsqcup_{k\\ge1}\\mathrm{Cob}_d(k)$ that identifies $s$ with $\\sigma(s)$; disjoint union of representatives in disjoint affine charts makes it an abelian group with the empty manifold as zero, compatibly with stabilization. This is the group of framed cobordisms of closed $d$-manifolds (Ranicki's Definition 6.16, Freed's Proposition 5.21): a stable framing is a stabilization class of actual normal framings in spheres, and no representative lives in a fixed sphere.",
+        "strategy": "Well-definedness of $\\sigma$: the equatorial inclusion is a smooth embedding, its image is a framed submanifold with framing $\\varphi\\oplus\\nu_{\\mathrm{eq}}$, and a framed cobordism in $S^{d+k}\\times I$ maps to a framed cobordism in $S^{d+k+1}\\times I$ under $i\\times\\mathrm{id}$ with the framings related by the constant normal field; hence classes map to classes. Group structure: represent two classes at a common large level in two disjoint affine charts as in DT-15's [[thm-disjoint-union-makes-bordism-classes-abelian-groups]]; the operation is compatible with the stabilizations, so it descends to the colimit, and the inverse of a class is represented by the same manifold with the framing reflected in one normal direction, since the cylinder with the interpolated framing bounds the disjoint union. Countable choice is inherited from the framed-cobordism relation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Definitions 6.14 and 6.16, and the proof of Theorem 6.17, electronic pp.114-115"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "(4.42)-(4.43) printed p.36 and Proposition 5.21 printed p.41"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": []
+      },
+      {
+        "id": "lem-stabilization-of-a-framed-submanifold-suspends-the-pontryagin-thom-map",
+        "kind": "lemma",
+        "title": "Stabilizing a framed submanifold suspends its Pontryagin-Thom map",
+        "deps": [
+          "def-stabilized-framed-cobordism-colimit",
+          "thm-pontryagin-thom-correspondence-in-fixed-codimension",
+          "prop-a-framing-identifies-the-thom-target-with-a-sphere-smash-product",
+          "def-pontryagin-thom-map-of-a-framed-submanifold",
+          "lem-stabilizing-a-normal-bundle-suspends-its-thom-space",
+          "def-reduced-cone-suspension-and-cofiber-sequence",
+          "prop-loop-suspension-adjunction-on-based-homotopy-classes",
+          "def-smash-product-of-based-spaces",
+          "prop-smash-product-is-associative-symmetric-and-unital-up-to-the-canonical-homeomorphisms",
+          "def-suspension-prespectrum-and-sphere-prespectrum",
+          "def-stable-stem-of-the-sphere"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $d\\ge0$, $k\\ge1$ and let $(N,\\varphi)$ be a closed framed $d$-submanifold of $S^{d+k}$ with Pontryagin-Thom map $f:S^{d+k}\\to S^k$. Let $\\sigma(N,\\varphi)\\subseteq S^{d+k+1}$ be its equatorial stabilization and $E:\\pi_{d+k}(S^k)\\to\\pi_{d+k+1}(S^{k+1})$ the suspension homomorphism determined by the sphere-prespectrum homeomorphism $S^1\\wedge S^k\\cong S^{k+1}$. Then the Pontryagin-Thom class of $\\sigma(N,\\varphi)$ is the suspension of the class of $(N,\\varphi)$: $\\mathrm{PT}(\\sigma(N,\\varphi))=E(\\mathrm{PT}(N,\\varphi))$ in $\\pi_{d+k+1}(S^{k+1})$. The same identity holds for the stabilized classes under $\\sigma$.",
+        "strategy": "Identify $S^{d+k+1}$ with the reduced suspension of $S^{d+k}$ in the two-cone model with the equator as the middle slice ([[def-reduced-cone-suspension-and-cofiber-sequence]]). The tube of $\\sigma(N)$ is the product of a tube of $N$ with the added normal direction, so its collapse map is the suspension of the collapse map of $N$; this uses DT-16's [[lem-stabilizing-a-normal-bundle-suspends-its-thom-space]] to identify $\\operatorname{Th}(\\nu\\oplus\\varepsilon^1)\\cong\\operatorname{Th}(\\nu)\\wedge S^1$ and the naturality of the framing identification, which turns the suspension of the composed map into the suspension followed by the homeomorphism $S^k\\wedge S^1\\cong S^{k+1}$ used to define $E$. Framed cobordisms stabilize by the same construction, so the identity descends to $\\mathrm{Cob}_d(k)\\to\\mathrm{Cob}_d(k+1)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "(4.42)-(4.43): $\\sigma$ sits $S^m\\subset S^{m+1}$ as the equator and prepends $\\partial/\\partial x_1$, printed p.36"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Proposition 6.18(i): the equatorial sphere $S^m\\subset S^{m+k}$ with its standard framing and the J-homomorphism, electronic pp.115-116"
+            }
+          ]
+        },
+        "dependency_level": 8,
+        "justified_by": []
+      },
+      {
+        "id": "thm-stable-pontryagin-thom-identifies-framed-bordism-with-stable-stems",
+        "kind": "theorem",
+        "title": "The stable Pontryagin-Thom theorem identifies framed bordism with stable stems",
+        "deps": [
+          "thm-pontryagin-thom-correspondence-in-fixed-codimension",
+          "lem-stabilization-of-a-framed-submanifold-suspends-the-pontryagin-thom-map",
+          "def-stabilized-framed-cobordism-colimit",
+          "def-stable-stem-of-the-sphere",
+          "prop-the-sphere-prespectrum-homotopy-groups-are-the-stable-stems",
+          "lem-freudenthal-identifies-the-eventual-suspension-system-for-spheres",
+          "thm-higher-homotopy-classes-form-groups-and-are-abelian-above-degree-one",
+          "lem-cubical-concatenation-is-well-defined-on-higher-homotopy-classes",
+          "thm-disjoint-union-makes-bordism-classes-abelian-groups",
+          "lem-framed-cobordant-submanifolds-have-homotopic-collapse-maps",
+          "lem-regular-value-choice-does-not-change-the-framed-cobordism-class",
+          "lem-homotopic-maps-with-a-common-regular-value-have-framed-cobordant-preimages",
+          "lem-regular-preimage-after-collapse-recovers-the-original-framed-submanifold",
+          "def-framed-regular-preimage-of-a-map-to-a-sphere",
+          "def-pontryagin-thom-map-of-a-framed-submanifold",
+          "def-framed-cobordism-of-embedded-submanifolds",
+          "lem-framed-cobordism-is-an-equivalence-relation",
+          "prop-cubical-and-spherical-models-of-higher-homotopy-agree",
+          "def-higher-homotopy-group-by-based-cubes",
+          "def-wedge-of-pointed-spaces",
+          "prop-transverse-preimage-carries-a-pulled-back-normal-structure",
+          "prop-transversality-to-a-point-is-the-regular-value-condition"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. For every $d\\ge0$ the levelwise Pontryagin-Thom bijections $\\mathrm{Cob}_d(k)\\to\\pi_{d+k}(S^k)$ are compatible with the stabilization maps $\\sigma$ and the suspension homomorphisms $E$, and hence induce a bijection $\\Omega^{\\mathrm{fr}}_d\\to\\pi_d^s$ between the framed bordism group of closed $d$-manifolds and the $d$-th stable stem of the sphere. The bijection is an isomorphism of abelian groups for disjoint union on the left and addition in $\\pi_d^s$ on the right; it is the stable Pontryagin-Thom theorem.",
+        "strategy": "The stabilization lemma gives a morphism of directed systems from $(\\mathrm{Cob}_d(k),\\sigma)$ to $(\\pi_{d+k}(S^k),E)$ that is levelwise bijective by the fixed-codimension theorem, so passing to the colimit gives a bijection of the colimits: a class in the colimit is represented at some finite level, and two representatives agree after further stabilization. The right-hand colimit is $\\pi_d^s$ by definition ([[def-stable-stem-of-the-sphere]]), with [[prop-the-sphere-prespectrum-homotopy-groups-are-the-stable-stems]] and [[lem-freudenthal-identifies-the-eventual-suspension-system-for-spheres]] identifying its eventual value. Additivity: two classes can be represented at a common large level in disjoint affine charts, and the collapse of a disjoint union is the pinch composite of the two collapse maps, which is the sum in $\\pi_{d+k}(S^k)$ (Milnor's union remark; the group law on the colimit is disjoint union by the definition item). Both sides are compatible with stabilization, so the isomorphism is additive.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Theorem 6.17: $\\Omega^{\\mathrm{fr}}_m=\\varinjlim_k B_m(S^{m+k},\\ast,\\epsilon^k)=\\varinjlim_k\\pi_{m+k}(S^k)=\\pi^S_m$, electronic pp.114-115"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Corollary 5.22 and Proposition 5.21, printed p.41"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Sections 7-8, including the union/pinch remark, printed pp.42-51"
+            }
+          ]
+        },
+        "dependency_level": 9,
+        "justified_by": []
+      },
+      {
+        "id": "rem-normal-framing-stable-normal-framing-and-tangential-framing-are-distinct-data",
+        "kind": "remark",
+        "title": "Normal framings, stable normal framings and tangential framings are distinct data",
+        "deps": [
+          "def-framing-of-a-normal-bundle",
+          "def-stable-normal-bundle-of-a-compact-smooth-manifold",
+          "thm-stable-normal-bundle-is-independent-of-the-embedding",
+          "def-stabilized-framed-cobordism-colimit",
+          "thm-stable-pontryagin-thom-identifies-framed-bordism-with-stable-stems"
+        ],
+        "statement": "An actual normal framing, a stable normal framing (a trivialization of the stable normal bundle after the relevant trivial summands are added), and a stable tangential framing (a trivialization of $TM\\oplus\\varepsilon^j$) are three different data types. A normal framing of $N\\subseteq S^m$ determines a stable tangential framing, and after a splitting of the ambient tangent sequence and the stable trivialization of $TS^m$ it corresponds to a stable normal framing up to homotopy; an actual framing of $\\nu(N)$ is not a trivialization of the stable class, and a stable framing neither singles out a level $k$ nor an embedding. In particular the elements of $\\Omega^{\\mathrm{fr}}_d$ are stabilization classes, not framed submanifolds of a fixed sphere; only at a sufficiently large level does a representative become an actual framed submanifold.",
+        "strategy": "Convention remark; the identification of stable normal and stable tangential framings is Freed Proposition 5.19, and the passage from an actual framing of an equatorially embedded submanifold to a stable framing is the stabilization of the definition item. The warning is exactly that the three structures are not silently interchangeable and that the stable theorem's left-hand side is a colimit.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "(5.15)-(5.19) and Proposition 5.21, printed pp.40-41"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Section 7, definitions of framings and Theorem B, printed pp.42-50"
+            }
+          ]
+        },
+        "dependency_level": 10,
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 550,
+    "id": "pontryagin-thom-and-framed-cobordism-examples",
+    "kind": "B",
+    "category": "differential-topology",
+    "title": "Pontryagin Thom and Framed Cobordism \u2014 Examples",
+    "companion": "pontryagin-thom-and-framed-cobordism",
+    "requires": [
+      "pontryagin-thom-and-framed-cobordism"
+    ],
+    "items": [
+      {
+        "id": "ex-framed-zero-manifolds-and-signed-points",
+        "kind": "example",
+        "title": "Framed zero-manifolds and signed points",
+        "deps": [
+          "def-countable-choice",
+          "thm-pontryagin-thom-correspondence-in-fixed-codimension",
+          "def-framed-regular-preimage-of-a-map-to-a-sphere",
+          "def-pontryagin-thom-map-of-a-framed-submanifold",
+          "thm-based-sphere-maps-are-classified-by-geometric-degree",
+          "thm-regular-value-formula-for-degree",
+          "def-orientation-of-a-finite-dimensional-real-vector-space",
+          "def-framing-of-a-normal-bundle"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$, inherited from the Pontryagin\u2013Thom suppliers. For $n\\ge1$, a closed framed $0$-dimensional submanifold of $S^n$ is a finite set of points, each framed by a basis of $T_xS^n$; call the framing positive when that basis is positively oriented for the standard orientation of $S^n$, and let $\\mathrm{sgn}(x)=\\pm1$ accordingly. Framed cobordism classes of such points are classified by the signed count $\\sum_x\\mathrm{sgn}(x)\\in\\mathbb Z$: under the fixed-codimension correspondence with $k=n$ the signed count is the degree of the Pontryagin-Thom map $S^n\\to S^n$, and $\\pi_n(S^n)\\cong\\mathbb Z$ by degree. A single positively framed point realizes $+1$, its orientation reversal $-1$, and the empty $0$-manifold $0$.",
+        "strategy": "Local computation: on a coordinate ball around a point, the collapse of a positively framed point is a degree-$+1$ map of the ball onto $S^n$ (the boundary of the ball goes to the basepoint); a negatively framed point gives degree $-1$. Disjoint union of framed points gives the pinched sum of the collapse maps, which is addition of degrees. Comparing with the fixed-codimension bijection and the degree isomorphism $\\pi_n(S^n)\\cong\\mathbb Z$ gives the classification.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Section 7, framed 0-manifolds and the Hopf theorem, printed pp.50-51"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Proposition 6.13 and the framed cobordism rank-zero case, electronic pp.113-114"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": []
+      },
+      {
+        "id": "ex-pontryagin-thom-map-of-the-standard-framed-equator",
+        "kind": "example",
+        "title": "The Pontryagin-Thom map of the standard framed equator",
+        "deps": [
+          "def-countable-choice",
+          "def-framed-cobordism-of-embedded-submanifolds",
+          "def-framing-of-a-normal-bundle",
+          "def-pontryagin-thom-map-of-a-framed-submanifold",
+          "def-stabilized-framed-cobordism-colimit",
+          "lem-framed-cobordant-submanifolds-have-homotopic-collapse-maps",
+          "lem-stabilization-of-a-framed-submanifold-suspends-the-pontryagin-thom-map",
+          "thm-based-sphere-maps-are-classified-by-geometric-degree",
+          "thm-pontryagin-thom-correspondence-in-fixed-codimension",
+          "thm-regular-value-formula-for-degree"
+        ],
+        "statement": "For $m\\ge1$ let $S^{m-1}\\subseteq S^m$ be the equator, framed by the outward\nunit normal of the closed northern hemisphere. The standard hemisphere sweep\nin $S^m\\times I$ is a compact neat framed cobordism from this framed equator to\nthe empty manifold, so the framed equator is framed null-cobordant and its\nPontryagin-Thom map $S^m\\to S^1$ is nullhomotopic; for $m=1$ the two equator\npoints carry opposite signs and the signed count is $0$. The equator is the\nequatorial stabilization of the equator one dimension lower, so the example\nexhibits the $\\sigma$-to-$E$ compatibility on the trivial class, in contrast\nwith the generator of the corresponding stable stem, which is represented by a\nsingle positively framed point.",
+        "strategy": "A null-cobordism of the framed equator is obtained by the standard hemisphere sweep in $S^m\\times I$: the graph of a boundary-defining function over the closed northern hemisphere, carrying the induced normal framing, is a compact neat framed cobordism from the framed equator to the empty manifold, with endpoint collars straightened as in the framed-cobordism definition. Then the cobordism-to-homotopy lemma makes the Pontryagin-Thom map nullhomotopic. The stabilization statement is the compatibility lemma applied to the canonical equators, and the generator contrast is the framed-point example together with degree classification.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Section 7, framed submanifolds and Theorem B, printed pp.42-50"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Exercise 5.34: the canonically framed equatorial sphere is null bordant, printed p.43"
+            }
+          ]
+        },
+        "dependency_level": 9,
+        "justified_by": []
+      },
+      {
+        "id": "ex-framed-links-represent-elements-of-pi-three-of-s-two",
+        "kind": "example",
+        "title": "The framed unknot represents a generator of $\\pi_3(S^2)$",
+        "deps": [
+          "def-the-standard-smooth-step-function",
+          "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+          "thm-covering-space-lifting-criterion",
+          "thm-pontryagin-thom-correspondence-in-fixed-codimension",
+          "def-framed-regular-preimage-of-a-map-to-a-sphere",
+          "lem-collapse-after-regular-preimage-is-homotopic-to-the-original-map",
+          "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+          "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "thm-lower-dimensional-sphere-maps-are-based-nullhomotopic",
+          "thm-based-sphere-maps-are-classified-by-geometric-degree",
+          "thm-higher-dimensional-spheres-are-simply-connected",
+          "cor-real-line-is-universal-cover-of-circle",
+          "lem-covering-homotopies-lift-by-finite-local-strips",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "statement": "Assume AC, which supplies both the numerable-bundle lifting hypothesis and the countable choice inherited by regular-preimage, collapse and Pontryagin\u2013Thom suppliers. Let $h:S^3\\subseteq\\mathbb C^2\\to\\mathbb CP^1\\cong S^2$, $h(z_1,z_2)=[z_1:z_2]$, be the Hopf map. The fibre over $[1:0]$ is the standard unknot $U=\\{z_2=0\\}\\cong S^1$, and the differential of $h$ at the regular value $[1:0]$ frames the normal bundle of $U$ in $S^3$; let $(U,h_*b)$ be this framed unknot. Then the Pontryagin-Thom map of $(U,h_*b)$ is homotopic to $h$, and since the Hopf fibration's long exact sequence gives $h_*:\\pi_3(S^3)\\to\\pi_3(S^2)$ an isomorphism while $\\pi_3(S^3)\\cong\\mathbb Z$, the class of the framed unknot is a generator of $\\pi_3(S^2)\\cong\\mathbb Z$. No Hopf-invariant theory is developed.",
+        "strategy": "The fibre $U$ is a closed embedded circle and $[1:0]$ is a regular value of the smooth map $h$; the framed regular preimage is $(U,h_*b)$ by definition. The collapse-after-preimage lemma gives a smooth homotopy from its Pontryagin-Thom map to $h$. For the homotopy groups: the Hopf map is a numerable circle bundle hence a Hurewicz fibration; its long exact sequence contains $\\pi_3(S^1)\\to\\pi_3(S^3)\\to\\pi_3(S^2)\\to\\pi_2(S^1)$, where $\\pi_k(S^1)=0$ for $k\\ge2$ by the contractible universal cover and $\\pi_2(S^3)=\\pi_1(S^3)=0$ by the lower-dimensional nullhomotopy theorem; exactness makes $h_*$ an isomorphism, and $\\pi_3(S^3)\\cong\\mathbb Z$ by degree classification. Hence $\\pi_3(S^2)\\cong\\mathbb Z$ with generator the class of $h$, and the framed unknot's class is that generator.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "Exercise 5.35: the line map $S^3\\to\\mathbb CP^1$ is not null homotopic, printed p.43"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Example 6.20: framed knots in $S^3$, the linking-number invariant and the Hopf isomorphism $\\pi_3(S^2)\\cong\\mathbb Z$, electronic pp.115-116"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Section 7, Pontryagin's framed 1-manifolds and the remark on $m=p+1\\ge4$, printed pp.50-51"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": []
+      },
+      {
+        "id": "cex-changing-a-framing-can-change-the-pontryagin-thom-class",
+        "kind": "counterexample",
+        "title": "A framing, not just the submanifold, determines the Pontryagin-Thom class",
+        "deps": [
+          "cor-real-line-is-universal-cover-of-circle",
+          "def-axiom-of-choice",
+          "def-framed-cobordism-of-embedded-submanifolds",
+          "def-framed-regular-preimage-of-a-map-to-a-sphere",
+          "lem-collapse-after-regular-preimage-is-homotopic-to-the-original-map",
+          "lem-covering-homotopies-lift-by-finite-local-strips",
+          "lem-framed-cobordant-submanifolds-have-homotopic-collapse-maps",
+          "thm-based-sphere-maps-are-classified-by-geometric-degree",
+          "thm-higher-dimensional-spheres-are-simply-connected",
+          "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+          "thm-pontryagin-thom-correspondence-in-fixed-codimension"
+        ],
+        "statement": "The Pontryagin-Thom class of a framed submanifold depends only on the\nunderlying submanifold, not on the framing.",
+        "strategy": "The unknot $U=\\{z_2=0\\}\\subseteq S^3$ bounds the disk $\\{z\\in S^3:\\mathrm{Im}(z_2)=0,\\ \\mathrm{Re}(z_2)\\ge0\\}\\cong D^2$; framing that disk by its normal line restricts to a framing of $U$ under which $U$ is framed null-cobordant, and then the cobordism-to-homotopy lemma makes the Pontryagin-Thom map nullhomotopic. The Hopf framing gives a generator by the previous example. A generator of $\\mathbb Z$ is not $0$, so the two maps are not homotopic.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Example 6.20 and Remark 5.26 on twists of framings, electronic pp.115-116 and p.25"
+            },
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "(5.25)-(5.26) twists of framings and Exercise 5.35, printed pp.42-43"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Section 7, a framing is part of the data of a framed submanifold, printed pp.42-44"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": []
+      },
+      {
+        "id": "ex-stabilizing-a-framed-submanifold-suspends-its-collapse-map",
+        "kind": "example",
+        "title": "Stabilizing a framed point suspends its collapse map",
+        "deps": [
+          "def-countable-choice",
+          "def-framing-of-a-normal-bundle",
+          "def-stabilized-framed-cobordism-colimit",
+          "def-stable-stem-of-the-sphere",
+          "def-suspension-prespectrum-and-sphere-prespectrum",
+          "lem-stabilization-of-a-framed-submanifold-suspends-the-pontryagin-thom-map",
+          "thm-based-sphere-maps-are-classified-by-geometric-degree",
+          "thm-pontryagin-thom-correspondence-in-fixed-codimension",
+          "thm-regular-value-formula-for-degree"
+        ],
+        "statement": "Let $p\\in S^1$ be a single positively framed point; its Pontryagin-Thom map\nis the degree-$+1$ self-map of $S^1$, the generator of\n$\\pi_1(S^1)\\cong\\mathbb Z$ (the framed-point example). Its equatorial\nstabilization is the same point in $S^2$ with the prepended normal framing,\nwhose Pontryagin-Thom map is the suspension $E$ of the degree-$+1$ map, i.e.\nthe degree-$+1$ self-map of $S^2$, the generator of\n$\\pi_2(S^2)\\cong\\mathbb Z$. Iterating, the stabilization of the positively\nframed point of $S^k$ is the positively framed point of $S^{k+1}$ and the\nclasses are related by the suspension isomorphisms\n$E:\\pi_k(S^k)\\to\\pi_{k+1}(S^{k+1})$. This verifies the\nstabilization-to-suspension compatibility on a nonzero class.",
+        "strategy": "Apply the general stabilization lemma to the positively framed point in $S^1$; the suspension of the degree-one self-map of $S^1$ is the degree-one self-map of $S^2$ under the sphere-prespectrum homeomorphism, and both are generators by the degree classification. Iteration uses the same lemma level by level.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel S. Freed, Bordism: Old and New (lecture notes, UT Austin, Fall 2012)",
+              "url": "https://people.math.harvard.edu/~dafr/bordism.pdf",
+              "locator": "(4.42)-(4.43) and Lemma 4.16, printed pp.32-36"
+            },
+            {
+              "title": "John Milnor, Topology from the Differentiable Viewpoint",
+              "url": "https://people.math.osu.edu/davis.12/courses/7851/milnortop.pdf",
+              "locator": "Section 7, framed 0-manifolds and the Hopf theorem, printed pp.50-51"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery (Oxford Mathematical Monographs, 2002)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Definition 6.16 and Proposition 6.18, electronic pp.114-116"
+            }
+          ]
+        },
+        "dependency_level": 9,
+        "justified_by": []
+      }
+    ]
+  }
+]

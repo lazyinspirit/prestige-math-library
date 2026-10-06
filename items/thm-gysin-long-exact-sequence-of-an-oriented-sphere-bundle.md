@@ -7,9 +7,6 @@ origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-gysin-pushforward-for-an-oriented-vector-bundle-zero-section, thm-long-exact-sequence-of-a-pair-in-singular-cohomology, prop-relative-cup-products-are-natural-and-compatible-with-connectors, def-serre-edge-homomorphisms-and-transgression, thm-cohomological-serre-spectral-sequence, thm-gysin-sequence-from-a-sphere-fiber-serre-spectral-sequence, def-axiom-of-choice]
 proof_strategy: direct
-verification:
-  audited: 2026-09-14
-  precheck: pass
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -21,6 +18,9 @@ sources:
     - title: "Miller, MIT 18.906 notes, Lectures 26 and 35"
       url: "https://ocw.mit.edu/courses/18-906/algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
       locator: "transgression and Euler/Gysin comparison, printed pp.89–92 and 129–132"
+verification:
+  precheck: pass
+  repair: research/frontier-41-ha-dt-29-main-merge-published-evidence/thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle.repair.json
 ---
 
 ## Statement
@@ -61,4 +61,4 @@ but not by that path-connected-sphere Serre comparison.
 
 3.1 The sphere fiber has dimension $n-1\geq1$, so [F5] applies with its symbol $n$ replaced by $n-1$.  Its only differential is precisely the $d_n$ of step 1.2, and its cup map is multiplication by that transgression.  Hence its Serre sequence agrees term-for-term with step 2.1 and the two Euler classes are equal. [F4, F5, step 2.1, step 1.2]
 
-4.1 For $n=0$, $S(\xi)=\varnothing$, $e=1$, and the sequence alternates an identity with zero groups.  For $n=1$, the pair sequence remains valid (an oriented line is covered directly), while [F5] is inapplicable because $S^0$ is not path-connected.  Empty bases, the zero ring, zero/unit Euler classes, negative degrees, both pair-sequence endpoints, the connector sign and identity pullbacks are included in steps 1.1–3.1.  AC is used exactly through [A1]; rewriting the supplied pair sequence adds no choice.  No splitting or converse is asserted. [F1, F2, F3, F4, F5, A1, step 1.1, step 2.1, step 1.2, step 3.1] ∎
+4.1 For $n=0$, $D(\xi)=B$, $S(\xi)=\varnothing$, and the supplied Thom class is the orientation unit $o\in H^0(B;R)$. The two bundle maps are identities, so [F2] gives $e=o$ and the cup map is multiplication by $o$, an isomorphism with inverse multiplication by $o^{-1}$. Thus the sequence alternates these isomorphisms with zero groups; they are identities for the standard unit orientation $o=1$.  For $n=1$, the pair sequence remains valid (an oriented line is covered directly), while [F5] is inapplicable because $S^0$ is not path-connected.  Empty bases, the zero ring, zero/unit Euler classes, negative degrees, both pair-sequence endpoints, the connector sign and identity pullbacks are included in steps 1.1–3.1.  AC is used exactly through [A1]; rewriting the supplied pair sequence adds no choice.  No splitting or converse is asserted. [F1, F2, F3, F4, F5, A1, step 1.1, step 2.1, step 1.2, step 3.1] ∎

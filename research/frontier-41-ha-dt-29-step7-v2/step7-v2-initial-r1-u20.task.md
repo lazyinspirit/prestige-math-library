@@ -1,0 +1,104 @@
+# Step 7 adjudicate: initial, round 1, unit 20
+
+- Read briefs/step7-adjudicator.md.
+
+- Frozen inputs: /home/lazyinspirit/Projects/prestige-math-library-frontier-41-ha-dt-29/research/frontier-41-ha-dt-29-step7-v2/initial-1.json.
+
+- Write only your assigned frontier item files, their necessary owning contracts/metadata, and /home/lazyinspirit/Projects/prestige-math-library-frontier-41-ha-dt-29/research/frontier-41-ha-dt-29-step7-v2/step7-v2-initial-r1-u20.json.
+
+- Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.
+
+- SCOPE: repair only assigned draft frontier items. Published repairs have no item gate, rejudge or adjudication obligation; record their findings separately. Outside consumers are handled by consumer maintenance. Record affected uses without turning them into frontier blockers.
+
+- You may create, fully author, and register a new item only to meet a genuine unsatisfied prerequisite of an assigned repair; explain its exact consuming proof step. No unrelated additions.
+
+- Optional supporting_evidence is reserved for {"research/path/to/file": "64-character SHA-256 of exact file bytes"}. Put narrative evidence, check summaries and repair explanations in repair_notes, not supporting_evidence. Do not use invented paths or hashes.
+
+- Use logical validity as ground truth. Never pretend to understand something you do not; escalate any uncertainty and potentially defective published consumers to the owner. Consult authoritative sources when uncertain, check their hypotheses and reasoning, and check for errors in sources.
+
+- Make repairs mathematically sound and cite dependencies accurately. State important caveats when appropriate; write concisely without compromising correctness or completeness; do not repeat arguments or add unnecessary filler.
+
+- Repair confirmed defects fully. Only an actual ## Statement or ## Definition change triggers direct-consumer examination, whether the supplier is published or not. Compare sections directly. Proof-only, citation, dependency and metadata changes with unchanged statements do not propagate. Identify direct consumers and exact affected uses; never pre-expand through unchanged consumer statements.
+
+- Return a decision for every exact rejected tuple; decisions use outcome confirmed_fatal, confirmed_nonfatal, or false_positive. Each confirmed_fatal decision requires defect_type: logic, dependency_citation, or other, based on the actual finding. Both confirmed fatal and confirmed nonfatal findings require completed repairs. Do not edit false-positive items.
+
+- Return JSON {run:"frontier-41-ha-dt-29",phase:"initial",round:1,unit:"20",input_sha256:"79b0e989c27d1e96f1d9b9eaa6792321ec4c5196c7f8d892843c34832f7ef2a9",decisions:[],reviews:[],created_items:[],downstream:[]}. Copy these exact identity values; a phase such as impact-repeat is not repeat. Each decision includes id,model,context_sha256,outcome,reason,uncertain:false,source_urls:[...],familiar:boolean. Each review includes id,disposition:"repaired"|"unaffected"|"authored",post_sha256,review_context_sha256,reason,uncertain:false,source_urls,familiar. Disposition describes the item carrier: if its itemHashGuard is unchanged from the assignment before hash, use unaffected even when you repaired a contract or page; retain those metadata repairs explicitly in the reason and metadata_repair_only:true. Never claim an item repair without an item change. All assigned and created items require a review; only a newly created item uses authored. Each created_items row includes id,kind,home_page,batch,consumers:[direct consumer IDs],reason,uncertain:false,source_urls,familiar. Reasons must explain actual logical checks (at least 40 characters). familiar:false requires authoritative source URLs actually consulted; never switch it to true merely to pass validation. Unresolved uncertainty blocks completion.
+
+- Immediately after completing each mathematical review, before editing another supplier, run node tools/step7-workflow.mjs review-contexts --run frontier-41-ha-dt-29 --items ID and copy its post_sha256 and review_context_sha256 into that review. You may batch ids reviewed on the same stable state. Never recompute an old review's context after a supplier edit without actually reviewing its effects again. The controller will schedule unresolved effects before certification.
+
+- The assigned tuples below are ordered by increasing in-run dependency level. Adjudicate and repair lower-level items before higher-level items within this batch; keep multiple tuples for the same item together.
+
+- Assigned item order: 0:lem-positive-intermediate-cohomology-of-a-one-point-compactified-euclidean-space-vanishes, 0:lem-pullback-of-a-trivial-smooth-vector-bundle-is-canonically-trivial, 1:lem-an-embedding-into-r-n-gives-the-same-normal-bundle-identity, 3:lem-an-immersion-into-r-n-gives-a-rank-n-minus-m-representative-of-the-stable-normal-bundle, 4:prop-euler-class-of-an-oriented-even-rank-normal-bundle-controls-self-intersection, 5:cor-embedding-obstructions-include-all-immersion-normal-class-obstructions, 14:rem-characteristic-class-vanishing-is-only-necessary-for-embedding.
+
+- Include canonical defect-ledger and published-ledger proposed updates in your report as ledger_updates. The controller merges shared adjudication evidence; do not edit shared ledgers concurrently. No claims of source reading you did not perform.
+
+- For gate repair, also return gate_resolutions:[{index,reason,uncertain:false,source_urls:[],familiar:true}] for every diagnostic assigned to your unit, even when it names no item. Diagnose and repair its metadata or tool failure; an empty item assignment does not excuse a gate failure.
+
+- Empty assignments return empty arrays. For every changed Statement/Definition, put every direct dependency/reference consumer in downstream, including consumers whose examined uses remain sound and consumers already covered by an assigned review. The array is an examination inventory, not a list of items to edit. Record each exact affected use and disposition in the report; proof-only intermediate repairs do not restart propagation. For a consumer absent from the dependency/reference graph, include downstream_uses:{ID:"exact affected mathematical use, at least 40 characters"}. Outside consumers go to separate maintenance.
+
+- Assigned input:
+  [
+    {
+      "id": "lem-positive-intermediate-cohomology-of-a-one-point-compactified-euclidean-space-vanishes",
+      "model": "gpt-6.1-sol",
+      "keep": false,
+      "reason": "Step 1.1 uses y_{N+1} for y∈R^{N+1}, but lem-metrics-on-rn defines coordinates only for k<N+1, namely 0,…,N. Thus y_{N+1} is undefined and the proposed inverse ψ is not well-defined.",
+      "context_sha256": "dc9eef0ee3da4db1ccee3bedb8d49eae37e81554f04cd5ac572d852ac80c5eab",
+      "item_sha256": "ea05457275e5c785e798408268825886aa91f2470277840070df2926a73f90fd",
+      "at": "2026-10-06T07:01:12.764Z"
+    },
+    {
+      "id": "lem-pullback-of-a-trivial-smooth-vector-bundle-is-canonically-trivial",
+      "model": "gpt-6.1-sol",
+      "keep": false,
+      "reason": "F2 attributes specific induced charts to the pullback theorem, but its supplied interface only asserts a smooth vector-bundle structure. Step 2.1 assumes those charts without establishing them, so the explicit canonical map's smoothness is unsupported.",
+      "context_sha256": "05ce8c9ed9dd0a233bb24c6698ae60b96af63e8abdb9027b06a5910b850b9e54",
+      "item_sha256": "f800f0274c44885e22c05fa9b7c4309ac564eea5d77ecfee819a6b54f74299f5",
+      "at": "2026-10-06T07:01:20.461Z"
+    },
+    {
+      "id": "lem-an-embedding-into-r-n-gives-the-same-normal-bundle-identity",
+      "model": "gpt-6.1-sol",
+      "keep": false,
+      "reason": "[F3] asserts rank N−m for every compact embedding without requiring N≥m. The empty smooth 1-manifold embeds in R^0, giving the impossible rank −1. The supplied stable-normal-inverse interface explicitly requires this dimension qualification.",
+      "context_sha256": "ffd0faab4f9999698d2b7eb1872898352388cfbc6be3eecdc4903f7efd0ef527",
+      "item_sha256": "35b2f77700771f7fd772792427588c7284a1116146db454f261f0d70f74a3e35",
+      "at": "2026-10-06T07:01:23.442Z"
+    },
+    {
+      "id": "lem-an-immersion-into-r-n-gives-a-rank-n-minus-m-representative-of-the-stable-normal-bundle",
+      "model": "gpt-6.1-sol",
+      "keep": false,
+      "reason": "F1 inaccurately restates the dependency: a formal immersion forces m≤n only for nonempty M. For M=∅ and m>n the unique pair is a formal immersion; F2 also wrongly assigns its quotient rank n−m rather than the specified rank zero.",
+      "context_sha256": "95c089860377500df5f86b179c05ba6baf8698ed4bb079cfc727ce456991bebd",
+      "item_sha256": "841ad09925fd8dab11b43d808592513aa57dbbb7cf1d177b025137ad31be0912",
+      "at": "2026-10-06T07:01:18.828Z"
+    },
+    {
+      "id": "prop-euler-class-of-an-oriented-even-rank-normal-bundle-controls-self-intersection",
+      "model": "gpt-6.1-sol",
+      "keep": false,
+      "reason": "F6 omits the embedding supplier’s m,k≥1 restrictions. The allowed embedding of a point into R^0 has zero normal bundle with e(ν)=1 and normal w_0=1, contradicting F6’s asserted vanishing.",
+      "context_sha256": "6700ab83873821b8925d9f4f86eba89befa097faf220227fb3789199310cd8c4",
+      "item_sha256": "7debad0dd405b4ed237021e98befdd1f4703337889d4f68932287819ed5571fb",
+      "at": "2026-10-06T07:01:47.159Z"
+    },
+    {
+      "id": "cor-embedding-obstructions-include-all-immersion-normal-class-obstructions",
+      "model": "gpt-6.1-sol",
+      "keep": false,
+      "reason": "F3 and step 2.1 drop the embedding lemma's hypothesis n>m. The empty closed 1-manifold embeds in R^0, but its normal bundle cannot be a rank −1 stable normal inverse. The supplied A/B interface explicitly requires a dimension qualification for empty sources.",
+      "context_sha256": "3921aa00ba0cabc464d32393ece9c6c8c13f1240484c585738e881b5c52d11f9",
+      "item_sha256": "32072aac81a25db591447136bb7e4a39d6a6a136f46aecafe9c313e7c021ecfe",
+      "at": "2026-10-06T07:01:33.422Z"
+    },
+    {
+      "id": "rem-characteristic-class-vanishing-is-only-necessary-for-embedding",
+      "model": "gpt-6.1-sol",
+      "keep": false,
+      "reason": "The Euler-vanishing claim omits the cited positive-dimension and positive-codimension hypotheses. A point embeds in R^0 with an oriented rank-zero normal bundle whose Euler class is 1 in H^0(point;Z), not zero.",
+      "context_sha256": "ff624ee7c2e2f36f975d3465f394acefdea62e4bd1dd910d78dedd7b40cd9e23",
+      "item_sha256": "93b64ec06f8d9c36ae78559f617ca132f32eae69413d06500301e204ef0fafea",
+      "at": "2026-10-06T07:01:45.503Z"
+    }
+  ]

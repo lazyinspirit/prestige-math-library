@@ -1,0 +1,100 @@
+{
+  "run": "frontier-41-ha-dt-29",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "8",
+  "input_sha256": "e63a74889091885770262b7bebe83e5ee6e257122dd9f5fd7afaf8eeda90002c",
+  "decisions": [
+    {
+      "id": "lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "aae5187182c14fe0d368c04e21ae474b0fdb29c41cdf58b65e29ea311ef28cec",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed fatal misuse of a prerequisite: for f(u)=2u and U=(-1,1), the chart representative has domain (-1/2,1/2) and maps into (-1,1), so it is not the Euclidean self-map asserted in original step 2.1. The repair applies the explicit sphere-map comparison in the conjugation lemma proof to the original self-map f:M→M with h=id_M and the two arbitrary charts; its hypotheses are satisfied without an invariant chart domain.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent",
+      "disposition": "repaired",
+      "post_sha256": "e58e9f60c96295b90cc141d5fec5e487b14b84178a3b307e6bae1bfc12a67c57",
+      "review_context_sha256": "2aa26ac1bb88b87726eaf94ce7250b6d5cf988a1405db1ea5f9116f41b3b2d0b",
+      "reason": "Reviewed the full conjugation proof, including radial interpolation, the two cancelling determinant signs, and the uniform o(|g(k(u))|) error that keeps the comparison homotopy nonzero, including reduced degree for n=1. Specializing that comparison to h=id_M proves chartwise equality for the original self-map. Radius interpolation stays in the zero-free punctured ball, and equal germs have identical displacement maps on a smaller common ball. The u−u² example has reduced degree zero in either chart. No statement, page interface or choice requirement changed. This is a local review of my repair, not an independent audit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "entry": {
+        "defect_id": "frontier-41-ha-dt-29-step7-repeat-r1-u8-chart-representative-domain",
+        "run": "frontier-41-ha-dt-29",
+        "class": "accuracy",
+        "subclass": "dependency-misuse",
+        "severity": "fatal",
+        "location": "Proof step 2.1 and Facts L1",
+        "subject": "lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent",
+        "caught_at_stage": "7.5-repeat",
+        "caught_by_role": "alpha-adjudicate",
+        "disposition": "fixed",
+        "adjudication_ref": [
+          "research/frontier-41-ha-dt-29-step7-v2/step7-v2-repeat-r1-u8.json"
+        ],
+        "evidence": [
+          {
+            "path": "items/lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent.md",
+            "note": "Confirmed fatal misuse of a prerequisite: for f(u)=2u and U=(-1,1), the chart representative has domain (-1/2,1/2) and maps into (-1,1), so it is not the Euclidean self-map asserted in original step 2.1. The repair applies the explicit sphere-map comparison in the conjugation lemma proof to the original self-map f:M→M with h=id_M and the two arbitrary charts; its hypotheses are satisfied without an invariant chart domain."
+          }
+        ]
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim_and_conventions": "All admissible smooth chart degrees agree; within one chart admissible radii give homotopic sphere maps. Displacement is id−f, with reduced degree (h(+1)−h(-1))/2 for n=1. Germ locality and the distinction between numerical degree equality and cross-chart homotopy remain intact.",
+    "dependencies_examined": [
+      "def-local-fixed-point-index",
+      "lem-local-fixed-point-index-is-invariant-under-diffeomorphism-conjugation",
+      "thm-degree-is-invariant-under-proper-smooth-homotopy",
+      "lem-reduced-degree-into-the-zero-sphere-is-homotopy-invariant-and-multiplicative"
+    ],
+    "source_evidence": "Repository conjugation lemma read completely, especially Proof 1.1–4.1; original self-map f and h=id_M satisfy its hypotheses. Homotopy degree and reduced-degree suppliers were read; properness holds because the sphere homotopy domain is compact. No external full text was consulted or claimed.",
+    "statement_sha256": "73b668572319bfe606409e80fceef77c5d531e349032bf8f179eaa58e018b3d2",
+    "statement_unchanged": true,
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing — all clean"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent.md",
+        "exit_code": 0,
+        "result": "1 file; math and frontmatter parse; no rendering errors"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent.md",
+        "exit_code": 0,
+        "result": "1 items, 3 steps, 0 defects"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-41-ha-dt-29-batch-8.proof-contracts.json --strict --items lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 item checked"
+      }
+    ],
+    "published_findings": "None found in this assigned proof repair; no published-ledger update proposed.",
+    "remaining_obligations": [],
+    "next_action": "Controller collection and any required independent rejudgment/certification; no workers or cycle launched by this adjudicator.",
+    "contract_repair": "Under the shared write lock, reread the batch contract and changed only this item entry: step 2.1 claim and inputs, explicit exact supplier-proof quotations and their specialization, and local risk notes. The supplier Statement quotation remains exact. Released the lock after the focused strict check passed."
+  }
+}

@@ -278,6 +278,23 @@ for (const p of pages) {
   }
 }
 
+// Structural boundaries apply to the selected consumers' prerequisite and
+// definition-discharge context; supplier audit/format checks stay unselected.
+const graphContext = new Map(), graphQueue = [];
+for (const id of itemScope.selected === null ? items.keys() : itemScope.selected)
+  if (items.has(id)) { graphContext.set(id, id); graphQueue.push(id); }
+for (let i = 0; i < graphQueue.length; i++) {
+  const id = graphQueue[i];
+  for (const raw of [...items.get(id).deps, ...items.get(id).justified]) {
+    const next = resolve(raw);
+    if (next && !graphContext.has(next)) {
+      graphContext.set(next, graphContext.get(id)); graphQueue.push(next);
+    }
+  }
+}
+const graphOrigin = id => itemScope.selected === null || includesItem(itemScope, id)
+  ? '' : `${items.get(graphContext.get(id)).file}: prerequisite ${id}: `;
+
 for (const it of items.values()) {
   if (!includesItem(itemScope, it.id)) continue;
   // A `proved_here: false` item has no proof, so `audited` (an audit OF A PROOF)
@@ -311,7 +328,7 @@ for (const it of items.values()) {
 for (const p of pages) {
   for (const source of [...p.items, ...p.examples]) {
     const sourceId = resolve(source);
-    if (!sourceId || !includesItem(itemScope, sourceId)) continue;
+    if (!sourceId || !graphContext.has(sourceId)) continue;
     for (const dep of items.get(sourceId).deps) {
       const targetId = resolve(dep);
       const targetHomes = targetId && homesOf.get(targetId);
@@ -319,9 +336,9 @@ for (const p of pages) {
       if (targetHomes.has(p.page)) continue; // legal earlier item on the same B page
       const legacyReason = legacyBLeafEdges.get(`${sourceId}\u0000${targetId}`);
       if (legacyReason) {
-        warn('b-leaf-legacy', `${items.get(sourceId).file}: grandfathered B-page dependency "${dep}" — ${legacyReason}`);
+        warn('b-leaf-legacy', `${graphOrigin(sourceId)}${items.get(sourceId).file}: grandfathered B-page dependency "${dep}" — ${legacyReason}`);
       } else {
-        err('b-leaf-content', `${items.get(sourceId).file}: depends on "${dep}", which lives only on B/examples page(s) ${[...targetHomes].join(', ')}`);
+        err('b-leaf-content', `${graphOrigin(sourceId)}${items.get(sourceId).file}: depends on "${dep}", which lives only on B/examples page(s) ${[...targetHomes].join(', ')}`);
       }
     }
   }
@@ -440,10 +457,10 @@ function reaches(from, to) {
 }
 
 for (const it of items.values())
-  if (includesItem(itemScope, it.id)) for (const j of it.justified) {
+  if (graphContext.has(it.id)) for (const j of it.justified) {
     const r = resolve(j);
     if (r && !reaches(r, it.id))
-      err('justification-backward', `${it.file}: justified_by "${j}", but "${j}" does not depend on "${it.id}" — it is a genuine prerequisite and belongs in deps`);
+      err('justification-backward', `${graphOrigin(it.id)}${it.file}: justified_by "${j}", but "${j}" does not depend on "${it.id}" — it is a genuine prerequisite and belongs in deps`);
   }
 // Keep the full graph available, but visit only prerequisite closures of the
 // selected consumers. Context attributes supplier cycles to their scoped root.
@@ -458,10 +475,8 @@ function reachableContext(roots, succ) {
   }
   return context;
 }
-const selectedRoots = itemScope.selected === null ? [...items.keys()]
-  : [...itemScope.selected].filter(id => items.has(id));
-const itemContext = reachableContext(selectedRoots.map(id => [id, id]), itemSucc);
-for (const comp of sccs(selectedRoots, itemSucc)) {
+const itemContext = reachableContext([...graphContext], itemSucc);
+for (const comp of sccs([...itemContext.keys()], itemSucc)) {
   const self = comp.length === 1 && itemSucc(comp[0]).includes(comp[0]);
   if (comp.length > 1 || self)
     err('item-cycle', `${itemScope.selected === null ? '' : `${items.get(itemContext.get(comp[0])).file}: prerequisite cycle: `}CIRCULAR: ${comp.slice().reverse().join(' -> ')} -> ${comp[comp.length - 1]}`);
@@ -509,6 +524,7 @@ const summary = {
     scope: 'focused-items', item_checks: [...itemScope.selected].sort(),
     page_checks: [...selectedPages].sort(),
     prerequisite_item_cycle_checks: itemContext.size,
+    dependency_closure_items: graphContext.size, dependency_closure_pages: pageContext.size,
     prerequisite_page_cycle_checks: pageContext.size,
   }),
 };

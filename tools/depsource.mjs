@@ -33,35 +33,34 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { frontmatterList } from './frontmatter-list.mjs';
-import { includesItem, parseItemScope, unknownItems } from './item-scope.mjs';
+import { parseItemScope, includesItem, unknownItems } from './item-scope.mjs';
+import { readRunManifestPages } from './run-manifest-pages.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const itemScope = parseItemScope(process.argv.slice(2));
-const args = itemScope.args;
+const args = [...itemScope.args];
+const runPositions = args.flatMap((arg, i) => arg === '--run' ? [i] : []);
+if (runPositions.length > 1) throw Error('--run may be specified once');
+const run = runPositions.length ? args[runPositions[0] + 1] : null;
+if (runPositions.length && (!run || run.startsWith('--') || itemScope.selected === null))
+  throw Error('--run requires a run identity and a nonempty --items-file selection');
+if (runPositions.length) args.splice(runPositions[0], 2);
 const asJson = args.includes('--json');
 const pageFilter = args.includes('--page') ? args[args.indexOf('--page') + 1] : null;
-const run = args.includes('--run') ? args[args.indexOf('--run') + 1] : null;
-if (args.includes('--run') && !/^[a-zA-Z0-9_-]+$/.test(run ?? ''))
-  throw new Error('--run requires a valid run ID');
 const specPath = args.find((a) => a.endsWith('.json')) ?? 'research/plan-spec.json';
 
 const spec = JSON.parse(readFileSync(join(REPO, specPath), 'utf8'));
-// Load every scaffold/home before selecting consumers: unselected suppliers
-// remain available, including run additions not yet spliced into plan-spec.
-const planned = [...spec.pages];
-const runPages = [];
-if (run) {
-  const runFiles = readdirSync(join(REPO, 'research')).filter((f) =>
-    new RegExp(`^${run}-batch-\\d+\\.pages\\.json$`).test(f)).sort();
-  if (!runFiles.length) throw new Error(`No run manifests found for ${run}`);
-  for (const file of runFiles) {
-    for (const page of JSON.parse(readFileSync(join(REPO, 'research', file), 'utf8'))) {
-      runPages.push(page);
-      const old = planned.findIndex((p) => p.id === page.id);
-      if (old >= 0) planned[old] = page;
-      else planned.push(page);
-    }
-  }
+const currentPages = run ? readRunManifestPages(REPO, run) : [];
+const currentItems = new Set(currentPages.flatMap(page => page.items.map(item => item.id)));
+if (run) for (const id of unknownItems(itemScope, currentItems))
+  throw Error(`--items-file names item "${id}" outside current run manifests`);
+// Preserve all external planned suppliers while current manifests own their
+// actual entries, order and homes before Step 4 splices the canonical plan.
+const planned = (spec.pages ?? []).map(page => ({ ...page, items: (page.items ?? []).filter(item => !currentItems.has(item.id)) }));
+for (const page of currentPages) {
+  const prior = planned.findIndex(value => value.id === page.id);
+  if (prior < 0) planned.push(page);
+  else planned[prior] = { ...planned[prior], ...page, items: [...planned[prior].items, ...page.items] };
 }
 const plannedPageOf = new Map(); // planned item id -> page
 const plannedOrder = new Map(); // planned item id -> page order
@@ -71,6 +70,9 @@ for (const p of planned) {
     plannedOrder.set(it.id, p.order);
   }
 }
+
+if (itemScope.selected && pageFilter && [...itemScope.selected].some(id => plannedPageOf.get(id)?.id !== pageFilter))
+  throw Error('--page excludes selected frontier items');
 
 // ---------------------------------------------------------------- authored side
 
@@ -99,6 +101,7 @@ for (const [id, it] of authored) for (const a of it.aliases) aliasTo.set(a, id);
 
 // home page of an authored item, and whether that page is published
 const homeOf = new Map();
+const authoredPages = new Map();
 (function walk(dir, cat) {
   if (!existsSync(dir)) return;
   for (const e of readdirSync(dir, { withFileTypes: true })) {
@@ -111,19 +114,16 @@ const homeOf = new Map();
       status: scalar(fm, 'status') ?? 'draft',
       path: [...cat, scalar(fm, 'page') ?? basename(e.name, '.md')].join('/'),
     };
+    authoredPages.set(page.id, page);
     for (const id of [...listOf(fm, 'items'), ...listOf(fm, 'examples')])
       if (!homeOf.has(id)) homeOf.set(id, page);
   }
 })(join(REPO, 'library'), []);
-
-// Run manifests supply authoritative homes before splice; all outside homes
-// remain available when resolving selected consumers' prerequisites.
-for (const page of runPages)
-  for (const item of page.items ?? [])
-    homeOf.set(item.id, {
-      id: page.id, status: page.status ?? 'draft',
-      path: `${page.category}/${page.id}`,
-    });
+for (const page of currentPages) {
+  const home = authoredPages.get(page.id) ?? { id: page.id, status: 'draft', path: `${page.category}/${page.id}` };
+  if (home.path !== `${page.category}/${page.id}`) throw Error(`Current manifest home disagrees with authored page ${page.id}`);
+  for (const item of page.items) homeOf.set(item.id, home);
+}
 
 // ------------------------------------------------------------------- classify
 

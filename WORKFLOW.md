@@ -47,6 +47,34 @@
 
 ## Supervise and clear gates
 
+The engine derives validator subjects from the current run's nonempty batch
+manifests. Precheck receives explicit item files; rendercheck and prosecheck
+receive those files and the manifest page files. Depcheck, fwdcheck, extcheck and
+depsource receive a nonempty `--items-file` selection; pathcheck receives a
+nonempty `--pages-file` selection (companions map to their main page). These
+opt-in validators still load the complete corpus for supplier resolution and
+relevant graph checks. Depcheck reports page hygiene only on pages containing
+selected subjects, checks structural B-page/discharge boundaries in their item
+prerequisite closure, and checks item/page cycles reachable from those roots;
+unrelated page defects, multi-home warnings and disconnected cycles are outside
+the battery. Its bare invocation continues to check the complete corpus.
+Depsource additionally receives `--run RUN`: validated current manifests overlay
+subject entries and current item homes before Step 4 splices the canonical plan.
+The full plan remains external supplier context. Validate-plan also receives
+`--run RUN`: page and item diagnostics concern manifest pages; reachable item,
+induced-page and declared-prerequisite cycles remain checked. External authored
+suppliers use their current item files and page homes, rather than obsolete
+planned dependency records. Definition `justified_by` discharges remain forward
+well-definedness checks, not logical prerequisite edges. Missing manifest pages
+or items in the selected plan fail closed, including before authoring when item
+files need not exist yet. Missing/empty manifests,
+unknown run subjects and unresolved dependencies remain failures. Pathway placement of draft pages remains advisory.
+Unrelated items and pages are context rather than formatting, audit or repair
+subjects. Bare validator commands retain their historical whole-corpus behavior.
+Missing, malformed, empty or unknown selections fail closed. Selector JSON files
+are immutable and content-addressed in OS temporary storage; descriptors for
+future stages defer selection until execution and write no run state.
+
 - Steps 1–4: review drift and scaffold, assign groups, audit scaffolds and
   author, then splice the plan.
 - Steps 5–7: independent reader/refuter review and cross-group closure, frozen
@@ -65,8 +93,13 @@
 - Step 9 readiness ends with `proof-step-separation` and `proof-blue-tags`.
   They share one deterministic renderer pass and write
   `research/RUN-proof-layout.json`. Scope is the exact current manifest item
-  inventory; unrelated changed items are excluded. Manifest bytes, page bytes
-  and the run touch record remain sealed inputs. Introductions and notes after the final tagged QED remain
+  inventory on the run's A/B pages, including their shared published items;
+  unrelated changed items are excluded. Manifest bytes, page bytes and the run
+  touch record remain sealed inputs. Historical touch snapshots never add
+  validator subjects. Manifest selections are checked against current page
+  inventories. A legacy manifest alias resolves only to one real current
+  page-owned item; missing subjects, ambiguous ownership and manifest/page
+  disagreements fail closed. Introductions and notes after the final tagged QED remain
   prose; each numbered step must form one row with valid trailing blue tags.
   Failure is an owner hold, with file, section, step, source line and reason.
   Repair on stable content, refresh invalidated evidence, then retry readiness.
@@ -91,6 +124,9 @@
   write consumers before in-run suppliers finish, but must name the missing supplier and
   proof use, then reconcile escalated decisions before the Step-3 gate. The pre-author
   snapshot is taken before authors start; Step 4 splices the plan afterward.
+  Author task planning recomputes order from the current dependency graph while
+  sibling authors are writing. It does not rewrite stored level labels; the
+  scaffold and final author gates still require correct labels on stable content.
 - Pair-author dispatch receipts distinguish the runner's `process_exit_code`
   from the dispatch `exit_code`. Missing or empty item/page files, proof contracts
   or the assigned report make an otherwise zero-exit pair dispatch fail.
@@ -220,6 +256,84 @@ Authors wait for the snapshot process to finish. Every existing gate still check
 the full frontier after writers drain; Step 4 waits for complete Step-3 closure.
 Restart the controller when selecting the run-local stage table.
 
+An explicitly owner-authorized Step-3 pair split preserves the immutable auditor
+baseline. After manifests settle and before dispatching either split author, call
+`registerOwnerPairSplit(root, run, { from_page, new_pages, authorization })` from
+`tools/step3-auditor-items.mjs`. Keep the original A/B identities in the retained
+pair; `new_pages` lists its A page and the new A page. Authorization supplies
+`owner: true`, `reason`, a research JSON `evidence` path and its raw-byte
+`evidence_sha256`. That evidence must contain version 1, the run, `owner: true`,
+`action: "step3-owner-pair-split"`, and the exact `from_page`, ordered `new_pages`
+and reason. The separate append-only `RUN-step3-owner-pair-splits.json` binds the
+immutable baseline, exact original item partition, and both pre-author scope
+hashes. It grants no scope review or item audit; original items remain original,
+and each split still needs its ordinary scope decision before additions can
+use auditor certification. Do not edit live engine state or move the baseline.
+
+
+### Step 3 owner-spawned creation origin
+
+A genuinely new local supplier written by an owner-spawned helper has a distinct
+origin receipt, registered with
+`node tools/step3-owner-creation.mjs register --run RUN --id ITEM --evidence research/JSON`.
+The registrar never edits the original Step 3 auditor baseline. It excludes IDs
+already in that inventory or its existing-file list, and refuses to replace an
+origin or reclassify an existing native creation certificate.
+
+The evidence JSON uses `version: 1`, `step: 3`,
+`policy: owner-spawned-step3-creation-v1`,
+`evidence_class: owner-spawned-creation`, exact `run`, `id`, `page`, string `batch`,
+`owner: true`, `owner_identity`, a distinct actual `author.identity` under
+`/root/...`, `attested_at`, `reason`, and `owner_held_escalation`.
+It binds both `baseline_sha256` (SHA-256 of `JSON.stringify` of the parsed original
+baseline) and `baseline_file_sha256` (original raw bytes).
+`step3OwnerCreationClaim(loadStep3(root, run), id)` supplies the exact current
+`page`, `batch`, `claim_sha256` and `item_file_sha256` fields. Claim identity binds
+the manifest's ID, kind, title and statement plus the authored Statement/Definition
+sections. Subsequent proof repairs need a fresh ordinary owner decision; changing
+the claim or home invalidates this origin and requires owner-held resolution.
+
+`author.timeline` must either contain `mode: known`, genuine `started_at` and
+`ended_at` after the baseline and before attestation, or `mode: unknown`,
+`after_baseline: true` and an explicit `reason`, with no invented timestamps.
+`sources` lists existing research files as `{ role, path, sha256 }` with roles
+`assignment`, `authorship` and `escalation`. Assignment evidence must identify the
+run, item, owner and actual author; authorship evidence must identify the run,
+item, author, claim hash and authored-byte hash; escalation evidence must identify
+the run and exact held escalation. Stale source bytes invalidate registration.
+No `author_result` field is accepted.
+
+Creation is origin only. The Step 3 certifier excludes a validated owner creation
+from auditor-created classification only after an ordinary current
+`recordStep3` owner `repaired` decision binds its current proof inputs and examined
+dependencies, including its declared manifest and authored dependencies. It emits
+no auditor item or scope certificate for that creation. Scope approval, native
+unit coverage and mathematical acceptance remain their ordinary obligations.
+For a dependency-ordered pass after every writer drains, load one context with
+`const snapshot = loadStep3(root, run)` and pass it as the optional third argument
+`recordStep3(root, decision, snapshot)`. Only a genuine context for the exact root
+and run is accepted. This reuses manifest parsing and transitive input caches;
+ordinary two-argument calls still load fresh inputs and all receipt/history
+semantics are unchanged. Snapshot reuse assumes stable files: before issuing a
+certification bundle or attempting a gate, load a new context, compare the complete
+current inventory and all final item hashes/receipts, and require
+`checkStep3(fresh, 'final').closed`. Any midpass mutation requires a fresh complete
+pass; a cached snapshot is never evidence that current on-disk inputs passed.
+
+Before `recordStep3` replaces an item-owner decision, it preserves the actual
+current receipt bytes under
+`research/RUN-step3b-owner-history-ITEM/JSON-DIGEST.json`. History is immutable and
+is captured only from the canonical current receipt; there is no retrospective
+history registrar. A prior native certificate may validate its historical repair
+marker against this archive while the next certification requires the ordinary
+current owner decision. An archived repair never substitutes for current
+acceptance, and native author-result validation remains mandatory.
+
+All other additions retain native provenance checks. Late sibling supplier inputs
+may be owner-recertified when the item's own file is still in a genuine successful
+native author write window; a new helper or later own-proof edit cannot borrow an
+old result without surviving immutable native origin evidence.
+
 ## Controls
 
 The `frontier-39-step6-recovery.mts` table is restricted to run
@@ -275,6 +389,22 @@ fixes reach live gate descriptors without changing the recovery cap or stage ord
   receipts record both profiles. Remove it after recovery. Restart the controller for
   configuration or imported registry changes; stage module changes hot-reload.
 
+## Step 5 owner context additions
+
+The active version-2 reader route and the historical version-3 direct route
+apply the same current certified owner-Remark exception. A post-reader Remark
+without that exact creation provenance and explicit not-supplied proof status
+remains an unsupported addition.
+
+The ordinary local-addition guard remains limited to Definitions and Lemmas. An
+owner-created Remark may also retain an explicitly unproved claim when its
+current Step-5 certificate validates the supported owner-spawned creation origin,
+its exact batch and carriers, and its item declares `proved_here: false` and
+`provenance.proof: not-supplied`. This is source context, not a new proved
+theorem. Native certification, missing creation evidence, supplied proofs and
+other item kinds do not qualify. Ordinary routing and prerequisite checks still
+apply; this exception does not change immutable reader scope or findings.
+
 ## Step 5b impact windows
 
 The lead task and engine gates use `--direct-boundary` for both impact windows:
@@ -316,10 +446,13 @@ identity, and current source, producer contract and manifest fingerprints.
 Another run's draft or an arbitrary run item cannot enter through this route.
 Producer membership does not certify its mathematics.
 
+Unique current-manifest ownership and draft status establish a producer's run
+identity even when an older carrier omits `pipeline_run`; an explicit marker
+naming another run is rejected. Ambiguous ownership is rejected as well.
 Published-dependency routing follows actual `deps`/`justified_by` edges through
-readable current-manifest prerequisites as context. These run items are never
-recorded as published subjects; only reachable published or claimed suppliers
-enter that route. Drafts outside the current manifests do not extend its closure.
+readable current-manifest prerequisites as context, retaining their reachable
+published or claimed suppliers. These run items are never recorded as published
+subjects. Drafts outside the current manifests do not extend its closure.
 
 The original `reader:BATCH:K` obligation stays with the consumer batch's Alpha;
 the producer remains outside its edit scope. Its source is added to the normal
@@ -330,6 +463,8 @@ dependency level as read-only work. An unresolved current supplier defect must
 be escalated to its owner; normal producer and consumer proof acceptance still
 applies.
 
+Definition producers marked `proof: not-applicable` retain exact source and manifest fingerprints even when their numbered-proof contract is absent; its hash explicitly records `null`. This is routing evidence, not a proof waiver, and ordinary definition adjudication remains required. Other proof-bearing producers require a contract.
+
 Routing stores the immutable producer pre-reader snapshot separately from the
 current producer carrier. A reader may supply optional
 `observed_source: {snapshot: "pre" | "current", item_sha256: "<raw SHA-256>"}`
@@ -338,6 +473,15 @@ hash against the declared producer snapshot. Without a binding, the observation
 is explicitly `unbound`, with a null observed-carrier hash. A historical baseline
 is not relabeled as a full-byte observation, and corrected current bytes are not
 treated as the original defective source.
+
+When an actual reviewed proof repair removes a redundant historical dependency
+route, the owner may explicitly register the exact surviving native obligation
+with `tools/step5-owner-historical-routes.mjs`. Follow its
+[exact-byte source and owner-review requirements](tools/step5-owner-historical-routes.md).
+Only a complete original hash-bound YAML path, immutable report/pre-snapshot
+identity, original batch assignment and current owner proof review support this
+exception. Current producer fingerprints and ordinary adjudication remain
+mandatory; historical observations and native findings are never rewritten.
 
 Alpha decisions for this route retain `producer_batch` and `consumer_id`, decide
 the normal finding verdict and reference exactly one closed defect-ledger row.
@@ -362,6 +506,57 @@ to its exact scope row and verifies its observed composite carrier against the
 immutable post-reader snapshot. Existing current carrier, severity, repaired
 disposition and ledger checks still apply, in either decision iteration order.
 This is not a general duplicate-ledger exemption or source acceptance.
+
+For an existing source repaired only after the native read, stabilization instead
+creates `post-reader:BATCH:ID`. Its exact expected target must be
+`stabilized: true`, and its decision must be `amended_repair` with
+`repair_confidence: 1`. It may share the existing actual same-batch
+`reader:BATCH:K` or `refuter:BATCH:K` defect row only for the same ID, with the
+explicit same-defect link and evidence above. The gate validates the complete
+original finding against its scope and typed immutable reader-post item/page
+carrier, and the repair against the exact stabilized obligation. The one ledger
+row must have a repaired disposition (`fixed`, `narrowed`, or `dropped`), the
+proper severity, and `adjudication_ref` entries naming both exact obligations
+at the actual group decision-file path. Both decisions remain required, in
+either iteration order. The original finding, report and snapshot stay unchanged;
+no second manufactured defect row or rewritten observation is needed. Added
+helpers retain the separate existing causal-addition rule. Ordinary current
+fingerprint, stamps and gate checks still apply. When this exact owner amendment
+has already been frozen into `pre-5a`, its current carrier may equal that
+stabilized carrier only after the complete shared-finding rule succeeds. It must
+still differ from the immutable reader-post source; ordinary and unshared
+amendments retain their original source guards. This avoids demanding an
+artificial extra edit merely to recertify the already completed amendment.
+
+An actual added repair helper may causally close an existing exact
+`reader:BATCH:K` or `refuter:BATCH:K` finding in another group. Its
+`causal_subject` must name that original finding's subject; `same_defect_as`
+must name that exact obligation, with at least 40 characters explaining the
+actual causal repair. The helper's added target and completed repair verdict,
+actual finding/scope identity, source snapshot binding and current normal
+carrier checks remain mandatory. For an in-run producer, the recorded producer
+pre-reader path, raw snapshot hash and typed carrier must remain unchanged.
+The same repaired ledger row must name the original subject and retain both
+exact obligation references at their actual decision-file paths. Sharing works
+whether the helper group or finding group is checked first. An unrelated
+producer defect stays separate; helper creation never licenses relabelling a
+finding or manufacturing a defect row. Existing touched-consumer causal addition
+behavior is unchanged.
+
+When one closed row has three or more owners, the gate retains every independently
+validated decision as a possible anchor. It verifies the existing strict sharing
+rules for each pair in either iteration order and requires the entire family to
+be connected by valid pairs. Thus a reader, two refuters and a stabilized owner
+amendment may share one genuine defect without requiring every finding to name
+the first decision. Every claim still needs its real native scope/source binding,
+current carrier, severity/disposition and applicable exact ledger references.
+A matching item ID or producer preimage alone does not create a same-defect link;
+explicit evidence and compatible typed source classes remain required.
+Ordinary native refuter records may omit their optional `subject_type`. The
+sharing validator resolves this omission only from the exact native scope row,
+its actual refuter assignment and the uniquely typed immutable reader-post
+item/page carrier matching the recorded observed hash. Explicit source classes
+remain unchanged; foreign producer findings cannot masquerade as local items.
 
 The same rule admits a property-typed `page:BATCH:ID` accepted/amended repair
 with confidence one and an actual same-batch refuter finding. The page must be
@@ -718,3 +913,14 @@ closeout does not push, publish, change stages or revise the workflow.
   preparation stopped before creating state, use
   `prepare --source OLD --run NEW --resume-preparation`. It accepts only
   byte-identical generated files and unchanged source evidence.
+
+## Frontier 41 main integration history
+
+The sealed source41 Step7 certificate retains its original full shared-ledger
+carrier after the merge restores native39/40 journals. Verification requires the
+exact original certificate and ledger hashes, an owner recovery record, every
+original row unchanged, exactly1948 added39/40 rows, and an identical ordered41
+projection. It accepts no other evidence change or new mathematical verdict.
+The same binding preserves the original human ledger and admits its exact
+current native rendering. All230 other certificate evidence artifacts remain
+unchanged; neither history carrier changes a proof or a judgment.

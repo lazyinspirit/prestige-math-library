@@ -1,0 +1,13 @@
+# Nonorientable Lefschetz-Hopf owner repair proposal
+
+The companion JSON contains two complete draft A-lemma texts and exact theorem, corollary, and oriented-diagonal integration instructions. Only these research artifacts were written; active batch-8 files were not edited. This is a constructive proof proposal, not engine evidence, independent review, or mathematical acceptance.
+
+The full all-map claim is preserved. The homological diagonal has coefficient p2*O; the cohomological diagonal class has coefficient p1*O. Pulling along (id,f) therefore gives O even if f does not lift. The displacement normal convention is first minus second, so the local derivative is I-Df. The coefficient (-1)^p in the dual-basis diagonal expansion is proved by a complete test calculation.
+
+The smallest local route adds (1) orientation-coefficient parity descent, twisted product pairings and rational Kunneth, and (2) a supported diagonal class made from ordinary oriented Thom classes upstairs, with its cap normalization, trace contraction, and local fixed-point evaluation. Existing published twisted Poincare duality is used for dual bases. The route requires no global map lift and no unproved general twisted Thom theorem. Its current-run suppliers must stabilize before integration and certification.
+
+Actual source text was inspected in Hatcher (printed pp.321 and 336) and Ionel/Lin (printed pp.52 and 55). Ionel Theorem 155 is explicitly for diffeomorphisms of closed oriented manifolds. Hatcher supplies transfer and twisted duality, not this complete diagonal adapter. The missing work in the prior source-based proof was a coefficient-typed, locally normalized diagonal adapter; the proposed lemmas supply that argument rather than claim it already appeared in either source.
+
+Actual current defects: the original diagonal proof step 1.1 equates unequal displayed test values; step 2.1 assumes f×id is a diffeomorphism and gives an invalid graph-PD formula for arbitrary f. The revised supplier should retain the sound diagonal/cup contraction but replace that false graph formula by its defining pairing identity. The theorem's disconnected reduction must drop components mapped into distinct components from both index and trace sums. The unrestricted geometric homotopy-invariance clause should then be restored.
+
+No precheck, renderer layout, gate, or independent acceptance is claimed. Root should integrate only after engine writers drain, check the explicit new/changed paths, and recertify against stabilized suppliers. Any unresolved objection must be recorded exactly without weakening the full claim or manufacturing a pass.

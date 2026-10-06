@@ -1,5 +1,21 @@
 # Homological algebra track: complexes, derived functors, Ext, Tor, and spectral sequences
 
+## Owner expansion — Eilenberg–Watts and Morita theory, 2026-10-04
+
+The existing homological algebra track is built and published. The historical
+commission and completion notes below remain run evidence. This amendment adds
+five **new future A/B pairs**, HA-25–HA-29, without reopening or replacing any
+published pair. The complete statements, local proofs, definition justifications,
+and source-gap reconciliation are at the end of this file. Machine inventories
+and the future-plan integration receipt are in `research/eilenberg-watts-expansion/`.
+Canonical future page item arrays remain empty until the engine's scaffold stage;
+the separate proposed inventory records every intended supplier and proof.
+
+The owner's additional requirements bind this extension: build from existing
+library mathematics, close exposition gaps in sources locally, and justify
+constructions and definitions in separate lemmas where needed. Sources provide
+provenance and comparison, never unproved load-bearing prerequisites.
+
 ## Binding UC34 repair reconciliation — 2026-09-09
 
 The published arbitrary-ring projective-flat and Tor-zero items now use
@@ -5385,3 +5401,1001 @@ lowering E1, existence-qualified mapping at infinity and regular/coregular
 stabilization; no unbounded abutment theorem is imported. See
 `phase-2-catchup-24-step5-dependency-reconciliation.md` for the bounded metadata
 handoff. Authored drafts still await Step6; no published proof is repaired.
+
+## HA-25–HA-29. Eilenberg–Watts expansion: conventions and exact statements
+
+This is an expansion of the published track, commissioned 2026-10-04. Its five
+pairs are:
+
+| label | A page | scope |
+|---|---|---|
+| HA-25 | `eilenberg-watts-theorem-and-natural-transformations` | arbitrary unital rings, canonical comparison, transformations, adjoints, flatness |
+| HA-26 | `morita-bicategories-and-projective-generators` | bicategory coherence, biequivalence, reconstruction, invertible bimodules, centers |
+| HA-27 | `finite-abelian-categories-and-eilenberg-watts` | intrinsic finite categories, finite right/left exact variants, adjoints |
+| HA-28 | `deligne-products-and-categorical-eilenberg-watts` | Deligne existence, categorical kernels, explicit ends/coends, Nakayama |
+| HA-29 | `graded-eilenberg-watts-and-shift-coherence` | coherent shifts, homogeneous actions, transformations, derived boundary |
+
+Every B companion is the A id followed by `-examples`, requires its own A page,
+and is a dependency leaf. The exact item inventories, including definition
+`justified_by` links, are in `eilenberg-watts-expansion/proposed-items.json`.
+All proof labels P1–P14 and B1–B5 below are binding authoring contracts, not
+promises to find proofs later. Existing item definitions are reused verbatim
+within their stated scopes; new items isolate additional constructions.
+
+**Handedness.** Use LEFT modules throughout this extension, matching the
+published graded-bimodule and bounded-complex pages. A 1-cell $A\to B$ is a
+$B$–$A$ bimodule $M$, and its functor is $T_M(X)=M\otimes_A X$.
+A $C$–$B$ bimodule $N$ composes with $M$ as $N\otimes_B M$. The right-module
+form in the owner's original question is obtained by taking opposite rings:
+$X\mapsto X\otimes_A M$, with composite kernel $M\otimes_B N$.
+No commutativity of the rings is assumed. For $k$-linear variants, algebras and
+bimodules are $k$-central. General rings do not require a field; the finite-module
+variant works over any field. For the abstract FSS triangle use an algebraically
+closed field, exactly as in that source; a broader field claim is unnecessary.
+
+**Size and choices.** Use the existing class/size convention and locally small
+categories. Presentations of ordinary and graded modules below are canonical,
+indexed by the underlying set or homogeneous elements, so no global choice or
+choice of resolutions enters Eilenberg–Watts. When working in an abstract
+category, supplied universal-object data (finite biproducts, copowers, cokernels,
+and the chosen module models/equivalence data) are part of the construction.
+Ends and coends are indexed over supplied small skeletons; their universal
+properties are invariant under the supplied model equivalences.
+An essentially-surjective functor is not silently converted into an arbitrarily
+chosen class-wide inverse. The intrinsic finite characterization first proves
+full faithfulness and essential surjectivity; a chosen finite-category model
+includes inverse data. No source-only recorded theorem is a prerequisite.
+
+The classical statement is an equivalence of categories
+
+$$\operatorname{Bimod}(B,A)\simeq\operatorname{Fun}_{\mathrm{add},\mathrm{colim}}(A\text{-}\operatorname{Mod},B\text{-}\operatorname{Mod}),\qquad M\longmapsto M\otimes_A-.$$
+
+Its inverse is $F\mapsto F({}_AA)$ with the right action of P2. In particular,
+
+$$\operatorname{Nat}(T_M,T_{M'})\cong\operatorname{Hom}_{B\text{-}A}(M,M').$$
+
+Together with the unit and composition comparisons of P5, this gives a
+biequivalence of the Morita bicategory and the 2-category of module categories
+and additive colimit-preserving functors. One may include categories with
+supplied equivalences to module categories, or cocomplete abelian categories
+with supplied small projective generators, by P6. This is a biequivalence,
+not a strict one-to-one classification of rings: different Morita-equivalent
+rings give equivalent module categories.
+
+For finite-dimensional algebras and FINITE-dimensional modules the statement is
+
+$$\operatorname{Bimod}_{\mathrm{fd}}(B,A)\simeq\operatorname{Rex}_k(A\text{-}\mathrm{mod},B\text{-}\mathrm{mod}).$$
+
+There are no arbitrary coproducts in these finite categories. P9 also proves
+
+$$\operatorname{Bimod}_{\mathrm{fd}}(B,A)\simeq\operatorname{Lex}_k(A\text{-}\mathrm{mod},B\text{-}\mathrm{mod}),\qquad M\longmapsto\operatorname{Hom}_A(M^*,-).$$
+
+Here $M^*$ is an $A$–$B$ bimodule; the $B$-action on Hom is induced by its
+right $B$-action. P10–P11 give the model-independent form
+
+$$\operatorname{Lex}_k(\mathcal A,\mathcal B)\simeq\mathcal A^{\mathrm{op}}\boxtimes\mathcal B\simeq\operatorname{Rex}_k(\mathcal A,\mathcal B).$$
+
+The equivalence between Lex and Rex is not the inclusion of exact functors and
+need not respect identity functors or ordinary composition. P12 proves the
+Nakayama correction explicitly. An algebra bimodule is an OBJECT of a
+bimodule category; a bimodule CATEGORY over tensor categories is different
+additional structure. This extension does not conflate these meanings.
+
+## HA-25. Full local proofs: arbitrary rings and natural transformations
+
+### P1. Functor-category and colimit definitions
+
+Define an additive cocontinuous module functor to be an additive functor
+preserving every set-indexed colimit. Restricting the existing functor category
+to these objects and all natural transformations gives a category: componentwise
+identities and vertical composition satisfy naturality and the category laws.
+For an additive functor, preservation of all small colimits is equivalent to
+preservation of coproducts and cokernels. Indeed a coequalizer of $f,g$ in a
+module category is $\operatorname{coker}(f-g)$; additivity identifies its image
+with the corresponding coequalizer. The existing
+`thm-small-colimits-from-coproducts-and-coequalizers` now applies. Preservation
+of cokernels is right exactness, using the existing abelian exactness results.
+Conversely a cocontinuous functor preserves both constructions. Thus the
+classical alternative hypothesis is **additive, right exact, and preserving
+arbitrary direct sums**.
+
+For these functors natural transformations are determined by their component at
+$A$: naturality for coproduct inclusions determines all free-module components,
+and a free surjection onto $X$, sent to an epimorphism by the source functor,
+determines the component at $X$. Hence these Hom collections embed in the set
+of module maps $F(A)\to G(A)$; P4 describes the exact subset. This also closes
+the local-smallness issue of the restricted functor category.
+
+### P2. Action and canonical comparison: well-definedness before universality
+
+Let $F:A\text{-}\operatorname{Mod}\to B\text{-}\operatorname{Mod}$ be additive
+and put $M=F(A)$. For $a\in A$, right multiplication $r_a(x)=xa$ is LEFT
+$A$-linear. Set $ma=F(r_a)(m)$. Since $r_b r_a=r_{ab}$, functoriality gives
+$(ma)b=m(ab)$; $r_1=1$ gives the unit, and additivity gives distributivity in
+$a$. Each $F(r_a)$ is $B$-linear, so the actions commute. This proves that
+$F(A)$ is a bimodule, including the handedness that the bare formula conceals.
+
+For $x\in X$ let $\ell_x:A\to X$ send $a$ to $ax$. Set
+$\beta_X(m,x)=F(\ell_x)(m)$. Additivity in $m$ and $x$, $B$-linearity in $m$,
+and $\ell_{ax}=\ell_x r_a$ give
+$\beta_X(ma,x)=\beta_X(m,ax)$. The existing tensor universal property gives
+one and only one $B$-linear map
+
+$$\tau_X:M\otimes_A X\longrightarrow F(X),\qquad m\otimes x\longmapsto F(\ell_x)(m).$$
+
+For $u:X\to Y$, $u\ell_x=\ell_{u(x)}$, so
+$F(u)\tau_X=\tau_Y(1_M\otimes u)$. This proves naturality on every module
+without choosing a presentation. If $F$ is $k$-linear, applying it to
+$r_{c1_A}$ shows the left and right $k$-actions on $M$ agree.
+
+### P3. Canonical presentations give the entire Eilenberg–Watts proof
+
+For $X=A$, $\tau_A$ is the tensor unit isomorphism, since
+$\tau_A(m\otimes a)=ma$. If $F$ preserves coproducts, the same assertion holds
+for every free module $A^{(I)}$: both functors identify its image with $M^{(I)}$,
+and naturality for each inclusion of a copy of $A$ makes $\tau$ the identity
+under these identifications.
+
+For any module $X$, take the canonical free surjection
+$q_X:A^{(\lvert X\rvert)}\to X$, $e_x\mapsto x$, put $K_X=\ker q_X$, and use
+the canonical free surjection onto $K_X$. Its composite with inclusion is
+$d_X:A^{(\lvert K_X\rvert)}\to A^{(\lvert X\rvert)}$. This gives an exact
+presentation with no assertion that the first map is monic. Tensor is right
+exact by the existing library theorem. If $F$ is right exact, applying the two
+functors and $\tau$ gives a map between cokernel diagrams whose first two
+vertical arrows are isomorphisms. The induced third arrow $\tau_X$ is an
+isomorphism: its inverse is the unique map on the other cokernel induced by
+the two inverse arrows. This argument uses cokernel universality, not a
+five-lemma shortcut. Since P2 already proves naturality, there is no remaining
+presentation-independence issue. Thus every allowed $F$ is $T_{F(A)}$.
+
+Conversely $T_M$ is additive, right exact, and preserves arbitrary direct sums
+by the published tensor results, so P1 proves that it preserves all small
+colimits. This proves both directions, not just representability of $F$.
+
+### P4. Transformations, equivalence, adjoints, and the exactness restriction
+
+Let $\eta:T_M\Rightarrow T_{M'}$. Via the unit isomorphisms at $A$ its component
+is a $B$-linear map $f:M\to M'$. Naturality for $r_a$ gives $f(ma)=f(m)a$,
+so it is a bimodule map. Naturality for $\ell_x$ then gives
+$\eta_X(m\otimes x)=f(m)\otimes x$. Elementary tensors generate, so
+$\eta_X=f\otimes1_X$ and $\eta$ is uniquely determined. Conversely balancing
+and functoriality of tensor prove that these components give a natural
+transformation for every bimodule map $f$. The bijection respects addition,
+identities, and vertical composition. For arbitrary represented functors
+conjugate by P3's canonical comparisons. Applying a natural transformation
+$F\Rightarrow G$ at $A$ respects the action of P2 and these comparisons,
+so evaluation and tensor are genuinely quasi-inverse functors of categories.
+
+The published Hom–tensor adjunction supplies
+$T_M\dashv\operatorname{Hom}_B(M,-)$, with left $A$-action
+$(a\phi)(m)=\phi(ma)$. Consequently every allowed $F$ has a right adjoint.
+Conversely an ADDITIVE left adjoint preserves colimits, so lies in P1's class;
+no claim is made that every ordinary functor admitting an adjoint is additive.
+Finally $T_M$ is exact if and only if $M$ is flat as a RIGHT $A$-module, by the
+published arbitrary-ring definition of flatness. Projectivity of $M$ on the
+LEFT $B$ side controls images of projectives, not this exactness condition;
+the published HA-18 theorem already proves the separate assertion.
+
+## HA-26. Full local proofs: coherence, generators, and Morita equivalence
+
+### P5. Definitions of bicategory, pseudofunctor, and biequivalence, with coherence
+
+A bicategory has objects and a category of 1-cells and 2-cells for each ordered
+pair, composition functors on those categories, identity 1-cells, and invertible
+natural associator and unitors. The associator must satisfy the pentagon;
+the unitors and associator must satisfy the triangle. A pseudofunctor maps
+these data, equipped with invertible identity and composition comparisons,
+satisfying the corresponding unit and associativity diagrams. A biequivalence
+is a pseudofunctor inducing equivalences on all Hom categories and having every
+target object equivalent to an image object (with supplied equivalence data
+when a chosen inverse is needed). These are axioms on data, not an assertion
+that a tensor construction satisfies them; that assertion is the next lemma.
+The existing strict 2-category definition is the special case where all
+comparisons are identities, and gives a consistent example of these axioms.
+
+More explicitly, write $g\circ f$ for composition, $*$ for horizontal
+composition of 2-cells, and $\alpha_{h,g,f}:(h\circ g)\circ f\to
+h\circ(g\circ f)$, $\lambda_f:1_B\circ f\to f$,
+$\rho_f:f\circ1_A\to f$. Composition of 2-cells in the following formulas
+is read right to left. The pentagon and triangle are
+
+$$\alpha_{k,h,g\circ f}\,\alpha_{k\circ h,g,f}=(1_k*\alpha_{h,g,f})\,\alpha_{k,h\circ g,f}\,(\alpha_{k,h,g}*1_f),\qquad (1_g*\lambda_f)\,\alpha_{g,1_B,f}=\rho_g*1_f.$$
+
+For a pseudofunctor use comparisons
+$\phi_{g,f}:F(g)\circ F(f)\to F(g\circ f)$ and
+$\phi_A:1_{F(A)}\to F(1_A)$. Its precise coherence equations are
+
+$$F(\alpha_{h,g,f})\,\phi_{h\circ g,f}\,(\phi_{h,g}*1_{F(f)})=\phi_{h,g\circ f}\,(1_{F(h)}*\phi_{g,f})\,\alpha_{F(h),F(g),F(f)}.$$
+
+$$F(\lambda_f)\,\phi_{1_B,f}\,(\phi_B*1_{F(f)})=\lambda_{F(f)},\qquad F(\rho_f)\,\phi_{f,1_A}\,(1_{F(f)}*\phi_A)=\rho_{F(f)}.$$
+
+Objects are equivalent in a bicategory when there are 1-cells in both
+directions with invertible 2-cells identifying their composites with the
+respective identities. For the tensor construction below these equations
+are checked explicitly rather than supplied as an unproved coherence theorem.
+
+For the Morita bicategory use unital rings, $B$–$A$ bimodules for $A\to B$,
+bimodule maps as 2-cells, composition $N\otimes_B M$, and the regular bimodule
+$A$ as identity. Tensoring maps is balanced and preserves identities and
+composition, by the existing tensor functoriality. The associator and unitors
+are the existing balanced-tensor isomorphisms. On an elementary tensor with
+four factors both pentagon paths give the same rebracketed four factors;
+on an elementary tensor involving a unit factor both triangle paths perform
+the same multiplication. Every tensor is a finite sum of such tensors.
+Thus the diagrams commute on all elements. Naturality follows from the same
+formulas. This separately proves the well-definedness of the bicategory.
+
+The target is the strict 2-category of module categories, the functors of P1,
+and all natural transformations. Composition stays in P1. Map a bimodule
+$M$ to $T_M$ and a map $f$ to $f\otimes1$. Its composition comparison is
+
+$$N\otimes_B(M\otimes_A X)\cong(N\otimes_B M)\otimes_A X.$$
+
+Its identity comparison is $A\otimes_A X\cong X$. Their coherence follows
+from the elementwise pentagon and triangle just checked, now with a final
+module $X$. For maps $f:M\to M'$ and $g:N\to N'$, horizontal composition
+corresponds to $g\otimes_B f$, since either whiskering order sends
+$n\otimes m\otimes x$ to $g(n)\otimes f(m)\otimes x$. Vertical composition
+and identities were checked in P4; this proves interchange as well.
+P4 gives every local equivalence, and every target module category is an
+image by definition. This proves the claimed biequivalence. A transformation
+between two composite functors is therefore precisely a bimodule map between
+the two composite tensor kernels, including all source/target actions.
+
+### P6. Projective-generator reconstruction, including the inverse construction
+
+Define a **small projective generator** in a cocomplete locally small abelian
+category $\mathcal C$ to be a projective generator $P$ such that
+$\mathcal C(P,-)$ preserves every set-indexed coproduct. Here “small” means
+this specific compactness property, not a small underlying set. For modules
+a **progenerator** means a finitely generated projective generator. Neither
+phrase adds existence as an axiom: the regular module is an example, and the
+following lemmas justify the constructions made from such data.
+
+Let $E=\operatorname{End}_{\mathcal C}(P)$ and $A=E^{\mathrm{op}}$.
+Addition and bilinear composition in the existing preadditive category make
+$E$ a unital ring; reversing multiplication gives $A$ without any arbitrary
+objectwise action choices. Put $H(X)=\mathcal C(P,X)$, a LEFT $A$-module by
+$e^{\mathrm{op}}h=h e$. Functoriality of postcomposition proves that $H$ is a
+functor. Projectivity makes it exact and smallness makes it preserve coproducts.
+The generator property makes it faithful: if $u\ne v$, some $P\to X$
+detects $u-v$. In particular $H(Z)=0$ forces $1_Z=0$, hence $Z=0$.
+
+Construct $L:A\text{-}\operatorname{Mod}\to\mathcal C$ explicitly. For a
+module $V$, use the canonical presentation of P3 and replace each free module
+$A^{(I)}$ by the supplied copower $P^{(I)}$. A map of free modules is a
+column-finite matrix over $A$. Replace its entry $e^{\mathrm{op}}$ by
+$e:P\to P$. Opposite multiplication is exactly what makes matrix
+composition agree with morphism composition here. Take the supplied cokernel
+of the resulting map. To justify independence and functoriality, map this
+cokernel into $Y$: maps from $P^{(I)}$ to $Y$ are families of elements of
+$H(Y)$, and the relations imposed by the presentation are exactly the
+$A$-linear relations of $V$. Thus, naturally,
+
+$$\mathcal C(L(V),Y)\cong\operatorname{Hom}_A(V,H(Y)).$$
+
+This represents a fixed functor independent of the presentation. The existing
+uniqueness of representing objects yields unique comparison isomorphisms;
+the same universal property gives $L$ on maps and proves its identity and
+composition laws. Hence $L\dashv H$. This closes the inverse-definition gap.
+
+On $A^{(I)}$ the adjunction unit is the canonical isomorphism to $H(P^{(I)})$:
+$H(P)=E\cong {}_AA$ via $e\leftrightarrow e^{\mathrm{op}}$, and smallness
+handles the coproduct. Exactness of $H$ applied to the cokernel defining $L(V)$
+therefore proves that the unit $V\to HL(V)$ is an isomorphism for every $V$.
+The triangle identity gives $H(\epsilon_X)\eta_{H(X)}=1$, so $H(\epsilon_X)$
+is an isomorphism. Exactness of $H$ and $H(Z)=0\Rightarrow Z=0$ show that
+$\ker\epsilon_X$ and $\operatorname{coker}\epsilon_X$ vanish. The existing
+balancedness of abelian categories makes $\epsilon_X$ an isomorphism.
+Thus the explicitly supplied functors $H,L$ are inverse equivalences.
+
+For a projective module $P$, split its canonical free surjection
+$B^{(\lvert P\rvert)}\to P$. If $P$ is small, the section factors through
+finitely many summands; the resulting finite free cover still splits, so $P$
+is finitely generated. Conversely a finitely generated module's map into a
+direct sum has image in finitely many summands, since a finite generating set
+has finite total support. Hence finitely generated projectives are small.
+Finite free modules are projective by lifting finitely many basis vectors;
+finite choice suffices. This proves the progenerator identification without
+using projectivity of arbitrary free modules or importing AC implicitly.
+
+### P7. Dual basis, invertibility, and center: complete Morita proof
+
+For a finite projective left $B$-module $P$, write it as a summand of $B^n$
+using a finite split cover, and restrict the coordinate maps. This gives
+$p_i\in P$ and $\phi_i\in\operatorname{Hom}_B(P,B)$ with
+$p=\sum_i\phi_i(p)p_i$. For any $Y$, the map
+
+$$\operatorname{Hom}_B(P,B)\otimes_B Y\longrightarrow\operatorname{Hom}_B(P,Y),\qquad\phi\otimes y\longmapsto(p\mapsto\phi(p)y)$$
+
+is balanced and has inverse $h\mapsto\sum_i\phi_i\otimes h(p_i)$.
+The first composite is identity by the displayed dual-basis formula; the
+second is identity because
+$\phi=\sum_i\phi_i\phi(p_i)$ in the RIGHT $B$-module of dual maps.
+Both maps are natural. If $P$ has a right $A$-action, the Hom action is
+$(a\phi)(p)=\phi(pa)$; naturality proves that the isomorphism respects it.
+
+Two rings are Morita equivalent when their module categories are equivalent
+by additive functors. If $F:A\text{-}\operatorname{Mod}\to
+B\text{-}\operatorname{Mod}$ is such an equivalence, its inverse and $F$
+preserve colimits by their universal properties. P3 represents them by $M$
+and $N$. P4 applied to their unit and counit isomorphisms gives
+
+$$N\otimes_B M\cong {}_AA_A,\qquad M\otimes_A N\cong {}_BB_B.$$
+
+Conversely two such bimodule isomorphisms give inverse tensor functors by the
+associator and unitors of P5. If adjoint-equivalence data are desired, use the
+existing result that an equivalence can be made an adjoint equivalence;
+the two arbitrary initial isomorphisms need not themselves satisfy its triangle.
+This proves Morita equivalence iff invertibility of a 1-cell of the bicategory.
+
+Equivalences also preserve projectivity, coproducts, and the separating
+property, so $P=F(A)$ is a small projective generator of $B$-modules.
+Full faithfulness identifies $\operatorname{End}_B(P)$ with
+$\operatorname{End}_A(A)=A^{\mathrm{op}}$; this is precisely the action of P2.
+Conversely a left $B$ progenerator with specified
+$A\cong\operatorname{End}_B(P)^{\mathrm{op}}$ gives the equivalence of P6.
+P7's dual-basis lemma identifies its Hom inverse with tensor by
+$P^\vee=\operatorname{Hom}_B(P,B)$, so it supplies the actual inverse
+bimodule, not merely an abstract inverse functor.
+
+Finally P4 applied to the regular bimodule identifies natural endomorphisms
+of the identity with $\operatorname{End}_{A\text{-}A}(A)$. Such a map is
+$f(a)=af(1)=f(1)a$, so $f(1)\in Z(A)$, and every central element defines
+one. Composition corresponds to multiplication. Conjugating natural
+endomorphisms by the supplied equivalence and its unit/counit gives a ring
+isomorphism of these endomorphism rings; hence $Z(A)\cong Z(B)$.
+
+## HA-27. Full local proofs: finite categories and the left exact variant
+
+### P8. Intrinsic finite definition and its module realization
+
+Reuse `def-k-linear-category-and-k-linear-functor`,
+`def-locally-finite-k-linear-abelian-category`, and
+`def-finite-k-linear-abelian-category`, all already published on
+`tensor-and-fusion-categories`. The last definition includes finitely many
+simple isomorphism classes and supplied projective covers of the simples;
+it is not just “finite length and finite Hom”. The realization theorem below
+supplies the missing module-model justification without editing that published
+definition or introducing a second definition. For functor constructions use
+supplied finite universal-object and model data as in the standing convention.
+
+For each simple representative $S_i$, use its projective cover
+$Q_i\to S_i$ from the defining hypotheses; only finitely many choices are made. Put $P=\bigoplus_iQ_i$.
+Induct on the length of $X$ to construct an epimorphism from a finite sum of
+these $Q_i$ onto $X$. The zero object is immediate. In a sequence
+$0\to X'\to X\to S_i\to0$, lift $Q_i\to S_i$ through $X\to S_i$ by
+projectivity and combine it with the inductively supplied epimorphism onto
+$X'$. The combined map is epic: its cokernel vanishes on $X'$ and on the
+simple quotient. Every $Q_i$ is a summand of $P$, so a finite sum of $P$
+also covers $X$. Projectivity and the resulting separating property make
+$P$ a projective generator. This argument uses projective epimorphisms,
+not the unproved existence of abstract projective covers.
+
+Let $A=\operatorname{End}(P)^{\mathrm{op}}$, a finite-dimensional algebra
+because Hom spaces are finite. The exact functor $H=\mathcal C(P,-)$ takes
+values in finite-dimensional left $A$-modules. Every object has a finite
+presentation $P^m\to P^n\to X\to0$: first cover $X$, then cover the kernel.
+Conversely every finite-dimensional $A$-module has a finite free presentation:
+a finite vector-space basis generates it and the kernel of $A^n\to V$ is
+finite-dimensional. Replacing the presenting matrix by maps between copies
+of $P$ gives a cokernel whose image under $H$ is $V$. The representing-map
+argument of P6, restricted to these finite presentations, proves full
+faithfulness and independence of presentation. Thus $H$ is fully faithful
+and essentially surjective. With supplied realization data it is the claimed
+module equivalence; it does not select an inverse over a proper class.
+
+Conversely finite-dimensional $A$-modules have finite Hom and finite length
+because dimension strictly decreases in proper inclusions. The published
+`thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras`
+supplies the projective covers required by the existing definition; finite
+free covers also give projective epimorphisms directly. Every simple module is a quotient of
+$A$ (send $1$ to a nonzero element); a finite composition series of $A$
+therefore lists all possible simple isomorphism classes by Jordan–Hölder.
+This proves all the existing intrinsic hypotheses and closes both directions
+of the definition's module-model justification. If “enough projectives” instead
+means a projective epimorphism onto each object, the generator construction and
+realization above still apply; transporting the published finite-module cover
+theorem back then supplies the simple covers. Thus those two conventions agree
+here, without presuming cover existence in arbitrary abelian categories. No semisimplicity or algebraically closed field
+was used in this argument.
+
+### P9. Finite right exactness, left exactness, and adjoints
+
+For finite-dimensional $A,B$, the action and comparison of P2 still exist.
+An additive functor preserves finite biproducts. The finite presentations in
+P8 and the cokernel argument of P3 therefore prove
+$F\cong F(A)\otimes_A-$ for every $k$-linear right exact functor on finite
+modules. Its kernel is finite-dimensional because $F(A)$ is an object of the
+target. Conversely tensor by such a kernel is right exact and remains finite:
+it is a quotient of $M\otimes_k X$. P4 determines ALL natural transformations
+using only $A$ and the maps $\ell_x$; arbitrary coproducts played no role
+there. P5's associators, units, and coherence restrict to finite modules.
+Thus this is a finite Hom equivalence and a finite bicategorical equivalence.
+
+For a finite-dimensional module $X$, the vector-space dual has the opposite
+module action, $(a\lambda)(x)=\lambda(xa)$ or $(\lambda a)(x)=\lambda(ax)$
+as appropriate. The same formulas on a bimodule give its reversed commuting
+actions. Duality is exact: any finite vector-space short exact sequence
+splits by extending a finite basis, so its dual sequence is exact. Evaluation
+$X\to X^{**}$ is an isomorphism with the original actions and is natural.
+Thus duality is a contravariant equivalence of the finite module categories;
+no corresponding assertion is made for all infinite modules.
+
+If $F:A\text{-}\mathrm{mod}\to B\text{-}\mathrm{mod}$ is left exact, define
+$F^d(Y)=F(Y^*)^*$ on left $A^{\mathrm{op}}$-modules. Dual exactness makes this
+right exact. Finite Eilenberg–Watts gives
+$F^d(Y)=K\otimes_{A^{\mathrm{op}}}Y$ with
+$K=F(A^*)^*$ a $B^{\mathrm{op}}$–$A^{\mathrm{op}}$ bimodule. Put
+$M=K^*=F(A^*)$, regarded as $B$–$A$. Taking the dual of this formula gives
+
+$$F(X)\cong\operatorname{Hom}_A(M^*,X),\qquad(bf)(u)=f(ub).$$
+
+To verify the dual-tensor identity explicitly, a functional on
+$K\otimes_{A^{\mathrm{op}}}X^*$ sends $u\in K$ to an element of $X^{**}=X$;
+balancing is exactly $A$-linearity of the resulting map. Evaluation constructs
+the inverse. The $B$-action is the displayed precomposition action. This
+proves the Hom formula and all naturality, rather than treating it as an
+unexplained dualization. The same duality transports P4's morphism bijection
+and gives the Lex equivalence on kernels.
+
+The tensor adjoint is $\operatorname{Hom}_B(M,-)$ and takes finite modules
+to finite modules. The left adjoint to the Hom formula is
+$M^*\otimes_B-$ by the same published Hom–tensor adjunction. Conversely
+an additive right/left adjoint preserves finite limits/colimits, hence is
+left/right exact. This proves the finite adjoint characterizations.
+
+Finally exactness of $M\otimes_A-$ on finite left modules is equivalent,
+by finite duality and the dual-tensor pairing, to exactness of
+$\operatorname{Hom}_{A^{\mathrm{op}}}(M,-)$ on finite RIGHT modules.
+Apply this to a finite free cover of $M$ to lift its identity and split that
+cover. Thus $M$ is a finite projective right module, which is right flat by
+the published projective-flat theorem (or the finite direct-summand tensor
+argument). Conversely a finite projective right module is a summand of a
+finite free module and its tensor functor is exact on all modules.
+This proves the finite exact-kernel characterization without importing the
+unproved general assertion “finitely presented flat implies projective”.
+
+## HA-28. Full local proofs: Deligne products, kernels, and Nakayama
+
+### P10. Existence justifies the Deligne-product definition
+
+For a finite-dimensional vector space $V$ and an object $Y$ of a $k$-linear
+abelian category, define a finite copower $V\otimes_k Y$ by
+$\mathcal C(V\otimes_k Y,Z)\cong
+\operatorname{Hom}_k(V,\mathcal C(Y,Z))$. Choose one finite basis of $V$:
+the finite biproduct of copies of $Y$ represents this functor. A change of
+basis gives an invertible scalar matrix on that biproduct; the representing
+property makes the comparison unique and its composition laws automatic.
+Thus the copower is basis independent up to its specified unique comparison;
+with supplied universal-object data it is functorial in both variables. This
+is a separate existence lemma, not an assumed vector-space action on an
+abstract category.
+
+Define $\mathcal C\boxtimes\mathcal D$ to be a $k$-linear abelian category
+with a bilinear functor $\boxtimes$ right exact in each variable such that
+restriction along it is an equivalence
+
+$$\operatorname{Rex}_k(\mathcal C\boxtimes\mathcal D,\mathcal E)\simeq\operatorname{Rex}_{k,k}(\mathcal C\times\mathcal D,\mathcal E)$$
+
+for every $k$-linear abelian target $\mathcal E$ with supplied finite
+universal-object data. The right side consists of bifunctors right exact
+in each variable and their natural transformations. The universal property
+is an equivalence of CATEGORIES, not just a bijection on functor objects.
+Existence is asserted only after the following construction, and uniqueness
+means equivalence respecting the universal bifunctor, not literal equality.
+
+For finite-dimensional algebras $R,S$, put $T=R\otimes_kS$ and take
+$T\text{-}\mathrm{mod}$, with $X\boxtimes Y=X\otimes_kY$ and the evident
+commuting actions. It is abelian and finite. For a right exact bilinear
+$H:R\text{-}\mathrm{mod}\times S\text{-}\mathrm{mod}\to\mathcal E$ set
+$W=H(R,S)$. Applying $H$ to right multiplications in the first and second
+variable gives commuting right $R$- and $S$-actions by endomorphisms of $W$,
+hence a right $T$-action. Construct $\bar H(Z)$ from a finite free
+$T$-presentation of $Z$, replacing $T^n$ by $W^n$ and matrix entries by these
+endomorphisms and then taking a cokernel. Maps out of this cokernel identify
+with $T$-linear maps from $Z$ to $\mathcal E(W,E)$, whose LEFT $T$-action
+is precomposition with the right action on $W$. Therefore the construction
+is presentation independent, functorial, and additive, exactly as in P6.
+It is right exact: for a cokernel sequence of $T$-modules the just-described
+Hom characterization turns maps out into the corresponding kernel of Hom
+maps. By Yoneda this says that $\bar H$ preserves that cokernel.
+
+Present $X$ over $R$ and $Y$ over $S$ by finite free modules. Right exactness
+in each variable expresses $H(X,Y)$ as the successive cokernels of the two
+presenting matrices on copies of $W$. In $X\otimes_kY$, the two families of
+relations are exactly those same matrices viewed over $T$. The universal
+property of a cokernel shows that the successive cokernels impose both
+relation families, independent of their order. Hence
+$\bar H(X\otimes_kY)\cong H(X,Y)$ naturally. A transformation of such
+bifunctors is determined on $(R,S)$ by the presentation epimorphisms; its
+component there commutes with the two actions and extends uniquely over
+all finite $T$-presentations. Conversely every extended transformation
+restricts to that bifunctor transformation. This proves the equivalence
+of categories in the definition, including full faithfulness. Every right
+exact functor out of $T$-modules is determined by its value on $T$ and
+its action, by the same finite-presentation argument, proving uniqueness.
+Transport along the supplied module models of P8 proves existence and
+uniqueness for abstract finite categories. This fills the finite case of the
+sketch in EGNO §1.11 without relying on its coalgebra realization theorem.
+
+Finite duality identifies $(A\text{-}\mathrm{mod})^{\mathrm{op}}$ with
+$A^{\mathrm{op}}\text{-}\mathrm{mod}$. Hence
+$\mathcal A^{\mathrm{op}}\boxtimes\mathcal B$ identifies with finite
+$B$–$A$ bimodules: under the algebra model an external tensor
+$\bar a\boxtimes b$ is $b\otimes_ka^*$, with the evident actions.
+All objects are modules over $B\otimes_kA^{\mathrm{op}}$; most are not
+single external tensors. Taking opposites of the universal property also
+gives its LEFT-exact version, because duality reverses exactness and the
+category of finite $(R\otimes S)^{\mathrm{op}}$-modules is the opposite
+Deligne category. This justifies extending the left exact external-tensor
+formula in P11, rather than misusing the right-exact universal property.
+
+### P11. Categorical triangle and explicit end/coend universal maps
+
+Use the bimodule model of P10. P9 identifies a kernel $M$ with
+$\Phi^r(M)=M\otimes_A-$ and $\Phi^l(M)=\operatorname{Hom}_A(M^*,-)$;
+both are equivalences, including their transformations. On the external
+kernel $b\otimes a^*$, finite tensor-duality gives, naturally,
+
+$$\Phi^l(\bar a\boxtimes b)(X)=\operatorname{Hom}_{\mathcal A}(a,X)\otimes_k b,\qquad\Phi^r(\bar a\boxtimes b)(X)=\operatorname{Hom}_{\mathcal A}(X,a)^*\otimes_k b.$$
+
+For the right formula, use
+$\operatorname{Hom}_A(X,a)^*\cong a^*\otimes_A X$ from the finite
+balanced evaluation pairing. For the left formula use
+$\operatorname{Hom}_A(a\otimes b^*,X)\cong
+\operatorname{Hom}_A(a,X)\otimes b$. Both identifications respect the
+$B$-action. Arbitrary kernels use the equivalences and presentations above,
+not an unsupported assumption that every kernel is external.
+
+The abstract inverse formulas are
+
+$$\Psi^l(F)=\int^{a\in\mathcal A}\bar a\boxtimes F(a),\qquad\Psi^r(G)=\int_{a\in\mathcal A}\bar a\boxtimes G(a).$$
+
+These are respectively a COEND and an END. Their existence cannot follow
+from completeness/cocompleteness of finite module categories, which need
+not admit infinite sums or products. Here is the local finite existence proof.
+
+If $F=\operatorname{Hom}_A(U,-)$ with $U=M^*$, the coend diagram in
+bimodules is $F(a)\otimes_ka^*$. Its universal cowedge into $M=U^*$ sends
+$f\otimes\lambda$ to the functional $u\mapsto\lambda(f(u))$.
+It is dinatural because composition can be moved from $f$ to $\lambda$,
+and is $B$–$A$ linear by the prescribed actions. For any cowedge into $Z$,
+its component at $a=U$ on $1_U\otimes\lambda$ defines a map
+$U^*\to Z$. Dinaturality for $f:U\to a$ forces its value on every
+$f\otimes\lambda$ to be its value on $1_U\otimes(\lambda f)$.
+Thus this map is the unique factorization. Its right $A$-linearity follows
+from the right action on $U^*$ in that component. For left $B$-linearity,
+right multiplication $R_b:U\to U$ is $A$-linear and dinaturality gives
+$t_U(1_U\otimes(\lambda R_b))=t_U(R_b\otimes\lambda)$; the latter is
+$b\,t_U(1_U\otimes\lambda)$ by the left $B$-action on
+$\operatorname{Hom}_A(U,U)$. Hence the factorization is a bimodule map.
+This proves the coend universal property using only finite-dimensional objects. In particular $\Psi^l\Phi^l(M)=M$.
+
+If $G=M\otimes_A-$, its end diagram is $G(a)\otimes_ka^*$, which as a
+vector space is $\operatorname{Hom}_k(a,G(a))$. The wedge from $M$ sends
+$m$ to the linear map $x\mapsto m\otimes x$; equivalently, on a finite
+basis it sends $m$ to $\sum_i(m\otimes x_i)\otimes x_i^*$.
+It is basis independent since this is the canonical Hom–tensor
+identification, and dinatural since $G(u)(m\otimes x)=m\otimes u(x)$.
+It is also $B$–$A$ linear.
+Given any wedge from a bimodule $Z$, write its components as
+$t_a:Z\to\operatorname{Hom}_k(a,G(a))$. Define
+$f:Z\to M$ by $f(z)=t_A(z)(1)$ under $G(A)\cong M$.
+Dinaturality for $\ell_x:A\to a$ gives
+$t_a(z)(x)=G(\ell_x)(t_A(z)(1))=f(z)\otimes x$.
+Thus the wedge factors uniquely through this $f$. Left $B$-linearity is
+immediate. Right $A$-linearity follows from
+$t_A(za)(1)=t_A(z)(a)=G(r_a)(t_A(z)(1))=f(z)a$,
+using the action on $A^*$ and dinaturality for $r_a$.
+This proves the end universal property and $\Psi^r\Phi^r(M)=M$.
+Transformations commute with these universal maps, so the formulas are
+functorial and are quasi-inverse equivalences, not just object identifications.
+Transport to the supplied abstract module models proves the categorical
+triangle in exactly the finite scope of FSS Theorem 3.2.
+
+For two right exact functors the kernel of their composite is
+$N\otimes_B M$ by P5. P4 identifies its transformations with maps of
+these composite bimodules. The Deligne kernel composition is this operation
+transported through the equivalence, not the external Deligne product of
+kernels. Its associativity and unit coherence are therefore those already
+proved in P5. This is the precise categorical matrix-calculus statement
+needed here; FSS's additional convolution formulas are not imported as
+unproved suppliers.
+
+### P12. Nakayama definitions and their justification
+
+Define $\Gamma^{rl}=\Phi^r\Psi^l$ and
+$\Gamma^{lr}=\Phi^l\Psi^r$. P11 makes these quasi-inverse equivalences
+of FUNCTOR categories. Define $N^r_{\mathcal A}=\Gamma^{rl}(1_{\mathcal A})$
+and $N^l_{\mathcal A}=\Gamma^{lr}(1_{\mathcal A})$, viewing the identity
+as left exact and right exact respectively. This definition is justified
+separately: P11 proves existence of its ends/coends, functoriality, and
+independence up to the canonical comparisons under supplied model changes.
+
+In the algebra model, $\Psi^l(1)$ is $A^*$, since
+$1(X)=\operatorname{Hom}_A(A,X)$ and $M^*=A$ in the Lex formula.
+In contrast $\Psi^r(1)=A$ in the Rex formula. Consequently
+
+$$N^r(X)=A^*\otimes_A X,\qquad N^l(X)=\operatorname{Hom}_A(A^*,X).$$
+
+The published Hom–tensor adjunction proves $N^r\dashv N^l$ and gives
+well-defined natural unit/counit satisfying the triangles. This supplies the
+separate definition-justification lemma. Equivalently, the intrinsic formulas
+are $N^r(X)=\int^a\operatorname{Hom}(X,a)^*\otimes a$ and
+$N^l(X)=\int_a\operatorname{Hom}(a,X)\otimes a$, whose universal maps
+come from P11; their existence is not inferred from unrestricted coend
+preservation. The regular and coregular kernels are distinct in general.
+Thus the Lex-to-Rex equivalence sends identity to Nakayama and is not in
+general a monoidal equivalence of ordinary endofunctor composition categories.
+
+For finite projective $P$, the dual-basis isomorphism of P7, followed by finite
+duality, gives
+$D\operatorname{Hom}_A(P,X)\cong\operatorname{Hom}_A(X,A^*\otimes_A P)$,
+where $D=\operatorname{Hom}_k(-,k)$. One can check it first for $P=A$:
+$\operatorname{Hom}_A(X,A^*)\cong X^*$ sends $h$ to
+$x\mapsto h(x)(1)$, with inverse
+$\lambda\mapsto[x\mapsto(a\mapsto\lambda(ax))]$.
+Finite sums and direct summands then give the formula for every finite
+projective $P$. No Serre-functor claim on the whole abelian category follows.
+If supplied bimodule data identify $A^*\cong A$ (the symmetric-algebra
+condition), both Nakayama functors identify with identity by tensor units
+and $\operatorname{Hom}_A(A,X)\cong X$. This is a conditional specialization,
+not a claim that every finite algebra is symmetric or self-injective.
+
+## HA-29. Full local proofs: graded reconstruction and its boundary
+
+### P13. Coherent shifts, their category, and the graded theorem
+
+Use the existing shift $X\{r\}_d=X_{d-r}$ and degree-zero morphisms. A
+coherently shift-compatible additive functor has natural isomorphisms
+$\theta_{X,r}:F(X\{r\})\to F(X)\{r\}$ such that
+$\theta_{X,0}=1$ and
+$\theta_{X,r+s}=(\theta_{X,r}\{s\})\theta_{X\{r\},s}$ under the canonical
+shift identifications. A transformation $\eta:F\Rightarrow G$ must satisfy
+$\theta^G_{X,r}\eta_{X\{r\}}=(\eta_X\{r\})\theta^F_{X,r}$.
+These are supplied equivariance data, not mere existence of unrelated shift
+isomorphisms. Identities satisfy this equation and composing two such squares
+proves closure under vertical composition. Composing functors equips them
+with the composite shift comparison and its cocycle follows by substituting
+the two cocycles. Hence the definition produces actual Hom categories and a
+2-category; this is its separate justification lemma.
+
+Fix a field $k$ for this classification theorem, reusing the published
+`def-k-linear-category-and-k-linear-functor`; HA-18's broader commutative-ground-ring
+constructions remain available with their original hypotheses.
+Let $F:\operatorname{Gr}(A)\to\operatorname{Gr}(B)$ be $k$-linear, right
+exact, coproduct preserving, and equipped with these coherent comparisons.
+Put $M=F(A)$. For homogeneous $a\in A_d$, right multiplication is the
+degree-zero map $r_a:A\{d\}\to A$. Define right multiplication on $M$ by
+$F(r_a)\theta_{A,d}^{-1}:M\{d\}\to M$. This raises original degrees by
+$d$. Naturality of $\theta$ and its cocycle identify the composite
+multiplications by $a\in A_d$ and $b\in A_e$ with $F(r_{ab})$ using
+$r_{ab}=r_b(r_a\{e\})$. Thus $(ma)b=m(ab)$. The unit condition gives
+$m1=m$, and additivity extends the action from homogeneous elements to
+all finite homogeneous sums. It commutes with the $B$-action because every
+map defining it is $B$-linear. $k$-linearity gives the central ground action.
+This proves the graded kernel action; arbitrary degree-zero endomorphisms
+of $A$ alone would only recover $A_0$ and would be insufficient.
+
+For homogeneous $x\in X_d$, the map $\ell_x:A\{d\}\to X$ sends $1$ to
+$x$. Define the comparison on homogeneous tensors by
+$\tau_X(m\otimes x)=F(\ell_x)\theta_{A,d}^{-1}(m)$, viewing $m$ in
+$M\{d\}$ on the right. It has the correct total degree. Naturality of
+$\theta$ and the multiplication computation show balancing for homogeneous
+$a$, and additivity gives balancing in general. The existing graded tensor
+universal construction makes $\tau_X$ a degree-zero $B$-linear map. The same
+formula proves naturality and compatibility with every shift comparison.
+For $X=A\{d\}$ it is an isomorphism by the shift unit and tensor unit;
+coproducts give the same for sums of shifts of $A$.
+
+Every graded module has a canonical homogeneous free cover indexed by all
+its homogeneous elements, putting the generator for $x\in X_d$ in degree
+$d$. Its kernel is graded by the published degreewise kernel lemma, so it
+has the same kind of homogeneous free cover. Right exactness gives a
+cokernel diagram as in P3; the two free comparison arrows are isomorphisms,
+so the comparison at $X$ is an isomorphism. Conversely a graded bimodule
+tensor functor preserves coproducts and is right exact by the homogeneous
+balanced presentation, and its canonical shift comparisons satisfy the
+cocycle on elementary tensors. This proves the graded theorem in both
+directions, with the same cocontinuity/right-exact-plus-sums equivalence
+as P1.
+
+A shift-compatible natural transformation is determined by its component
+on $A$: its components on $A\{d\}$ are forced by the equivariance square.
+Naturality for $r_a$ now forces the evaluated map to respect every homogeneous
+right action, hence the whole graded right action. Naturality for $\ell_x$
+forces all components to be $f\otimes1$. Conversely every degree-zero graded
+bimodule map gives a transformation with the stated equivariance.
+The tensor associators and unitors preserve total degrees and the shift
+comparisons on elementary tensors, so P5's coherence proves the graded
+bicategorical version with these specific 2-cells.
+
+This is a deliberate refinement of Hazrat's conventions: Definition 2.3.3
+uses strict commutation with shifts, and Remark 2.3.4 explicitly does NOT
+restrict its natural transformations to commute with shifts. The all-2-cell
+bijection here requires the stronger equivariant-transformation convention.
+The B5 witness below explains why that extra restriction is necessary.
+The general right exact graded statement is proved above from the local
+presentation machinery; Hazrat Theorem 2.3.7 supplies the independently
+checked equivalence-special case, not a verbatim source for this stronger
+Hom-category statement.
+
+### P14. Derived adjacency uses the existing bounded-complex theorems
+
+The existing `thm-bounded-bimodule-tensor-associativity-unit-and-cone-compatibility`
+and `thm-inverse-bimodule-complexes-give-derived-tensor-equivalences` already
+supply the precise bounded-complex counterpart: preserve their termwise
+left/right projectivity, graded/cochain distinction, homotopy data, and
+boundedness assumptions. These are proved local suppliers and are not
+re-authored here. Composition tensors the bimodule complexes with the signed
+cochain totalization; internal degrees introduce no extra cochain sign.
+The extension's orientation remark states only that supplied inverse
+complexes give those equivalences. It makes NO assertion that every abstract
+triangulated functor or natural transformation is induced by a bimodule
+complex. A dg/stable enhancement and its appropriate notion of morphism are
+needed for such a broader classification, outside these five pairs. Likewise
+relative tensor categories, Radford's $S^4$ theorem, arbitrary Grothendieck
+categories, and schemes are not prerequisites disguised as “adjacent theory”.
+
+## B1–B5. Explicit examples and hypothesis witnesses
+
+### B1. Classical examples
+
+Extension of scalars for $A\to B$ is recovered by the kernel ${}_BB_A$;
+$F(A)=B\otimes_AA\cong B$ and P2 gives precisely that right action.
+For a right exact functor failing the sums hypothesis, take
+$F(V)=\prod_{n\ge0}V$ on vector spaces over a field. A coordinatewise product
+of a surjection is surjective using AC, so the functor is exact under AC.
+The canonical map $\bigoplus_j\prod_n k\to\prod_n\bigoplus_j k$ misses
+$(e_n)_n$, whose support moves with $n$; thus it fails coproduct preservation
+and cannot be tensor. This example MUST declare `def-axiom-of-choice` and its
+coordinatewise lifting use. It is not a choice-free supplier theorem.
+For a sums-preserving functor failing right exactness take
+$F(X)=\operatorname{Hom}_{\mathbb Z}(\mathbb Z/2,X)$. It commutes with sums
+because its source is finitely generated, but the surjection
+$\mathbb Z\to\mathbb Z/2$ is sent to $0\to\mathbb Z/2$, which is not
+surjective. It is not tensor. For composites with kernels $N\otimes_BM$
+and $N'\otimes_BM'$, the map $g\otimes f$ gives component
+$n\otimes m\otimes x\mapsto g(n)\otimes f(m)\otimes x$; P4 also
+classifies bimodule maps not themselves decomposable as $g\otimes f$.
+
+### B2. Morita witnesses
+
+Let $B=\operatorname{Mat}_n(k)$, $e=E_{11}$, and $A=eBe\cong k$.
+Use $M=Be$ and $N=eB$. Multiplication gives
+$N\otimes_BM\to eBe$ with inverse $a\mapsto e\otimes a$:
+$x\otimes y=e\otimes xy$ by balancing since $x=ex$.
+Multiplication $M\otimes_AN\to B$ has inverse
+$E_{ij}\mapsto E_{i1}\otimes E_{1j}$ extended linearly; multiplying either
+way yields the same matrix units and balanced tensors. This explicitly
+realizes Morita equivalence. For a generator that is projective but not small,
+use $P=k^{(\mathbb N)}$: the identity map to that direct sum has no finite
+support, so $\operatorname{Hom}(P,-)$ does not preserve sums. Projectivity
+of this infinite free module is used under AC; declare that assumption.
+The center example sends $z\in Z(A)$ to $x\mapsto zx$ on each left module;
+$A$-linearity and naturality follow directly, and P4 shows every natural
+endomorphism arises this way.
+
+### B3. Finite witnesses
+
+For $A=B=k[\epsilon]/(\epsilon^2)$ and $M=A/(\epsilon)$, tensoring is right
+exact between finite categories; it kills the inclusion
+$(\epsilon)\hookrightarrow A$ after identifying the tensor source with $k$.
+Thus it is not left exact, despite being a finite right exact functor with a
+right adjoint. No arbitrary coproduct hypothesis can be imposed in this
+category. As a category with finite Hom and finite length but not finite in
+P8's sense, take finite-support families of finite-dimensional vector spaces
+indexed by $\mathbb N$, with componentwise maps. It is abelian, has finite
+Hom, finite-length objects and enough projectives, but the objects supported
+at single indices give infinitely many nonisomorphic simple objects. Any
+candidate finite generator has finite support and misses another such simple.
+
+### B4. Deligne and Nakayama witnesses
+
+For finite vector spaces the tensor-product algebra is $k\otimes_kk=k$,
+so $\mathrm{vect}_{\mathrm{fd}}\boxtimes\mathrm{vect}_{\mathrm{fd}}\simeq
+\mathrm{vect}_{\mathrm{fd}}$ with its ordinary tensor universal bifunctor.
+For a nonidentity Nakayama functor use the algebra with basis $e_1,e_2,u$,
+$1=e_1+e_2$, $e_i^2=e_i$, $e_1u=u=ue_2$, and all other basis products
+zero (upper triangular $2\times2$ matrices). The projective left module
+$Ae_1$ has dimension one. But
+$A^*\otimes_AAe_1\cong A^*e_1$ has dimension two, because right $e_1$
+on the dual is precomposition by left multiplication $e_1$, and $e_1A$
+has basis $e_1,u$. Therefore $N^r$ is not identity, and $A^*$ is not
+isomorphic to $A$ as bimodule. P11's end for identity is $A$, while its
+coend for identity is $A^*$, an explicit regular/coregular distinction.
+For a kernel that is not external take the regular $A$–$A$ bimodule for
+this algebra. If it were $b\otimes a^*$, its dimension three would force
+one factor to have dimension one and the other dimension three. A
+one-dimensional left or right module has $u$ acting as zero (the two
+orthogonal idempotents sum to the unit). But on the regular bimodule left
+multiplication sends $e_2$ to $u$, and right multiplication sends $e_1$
+to $u$. Both are nonzero, a contradiction.
+
+### B5. Grading witnesses
+
+For $A=B=k$ concentrated in degree zero, let $F(X)$ be $X_0$ placed in degree
+zero. It is exact and preserves coproducts, and $F(k)=k$, but
+$F(k\{1\})=0$ whereas $k\otimes k\{1\}=k\{1\}\ne0$.
+It has no shift comparisons, so cannot be classified by the graded kernel
+$F(k)$; any tensor kernel would already be forced to be $k$ at $k$.
+On the same category, the identity functor has ordinary natural
+transformations multiplying each degree $d$ by an arbitrary scalar
+$\lambda_d$. Naturality follows degreewise, but the shift-equivariance square
+forces $\lambda_{d+r}=\lambda_d$ for all $d,r$. Thus unconstrained
+transformations are not determined by their component on $k$; exactly the
+constant families are the scalar graded-bimodule maps. Finally the internal
+shift $X\mapsto X\{r\}$ has kernel $A\{r\}$, with the standard commuting
+shift comparisons. This internal shift is distinct from the cochain shift
+of P14.
+
+## Eilenberg–Watts source reading, exposition gaps, and local closure
+
+Online bibliographic search used Crossref's title queries to identify Watts's
+original paper and the FSS article. General search endpoints were attempted;
+Google and DuckDuckGo returned challenges and Bing returned irrelevant
+results, so none supplied mathematical evidence. The author's MIT-hosted
+EGNO book, the full arXiv FSS article (HTML and PDF), and Hazrat's arXiv book
+were obtained directly and their relevant sections read. Exact retrieval
+hashes, reading scopes, and unsuccessful source accesses are recorded in
+`eilenberg-watts-expansion/source-manifest.json`. Downloading a complete book
+is not represented as reading the whole book.
+
+| source read | authoritative scope | exposition gap or caveat | local closure |
+|---|---|---|---|
+| Etingof–Gelaki–Nikshych–Ostrik, *Tensor Categories*, §1.8, Definitions 1.8.5–1.8.6, Proposition 1.8.10, Corollary 1.8.11; printed pp.9–11 | intrinsic finite categories; finite right exact tensor theorem; left exact scalar representability | inverse presentation independence/functoriality is stated as easy; projective-generator realization compressed | P2–P3 prove the canonical natural comparison before choosing presentations; P8 constructs the finite generator and presentation realization |
+| Same book §1.11, Definition 1.11.1 and Proposition 1.11.2; printed pp.15–16 | Deligne universal property and existence | proof explicitly only a sketch, using a coalgebra-realization theorem; transformations and model changes compressed | P10 proves the finite algebra construction and its universal property on functors AND transformations, without coalgebra realization |
+| Fuchs–Schaumann–Schweigert, *Eilenberg–Watts calculus for finite categories and a bimodule Radford $S^4$ theorem*, arXiv:1612.04561v3, §2.1 Lemmas 2.1–2.2; §§3.1–3.2 Theorem 3.2; §3.5 Lemmas 3.15–3.16 and formulas (3.56)–(3.58) | left/right exact triangle, finite end/coend inverses, Nakayama | Lemma 2.1 recalls external theorems; Theorem 3.2(i) invokes Shimizu; finite end/coend existence is not a consequence of arbitrary completeness | P9 proves both finite functor classifications and adjoints; P10 proves Deligne; P11 constructs both universal kernels explicitly; P12 identifies and justifies Nakayama |
+| Hazrat, *Graded Rings and Graded Grothendieck Groups*, arXiv:1405.5071, §2.3 Definition 2.3.3, Remark 2.3.4, Theorem 2.3.7; printed pp.118–121 | shift-commuting equivalences are tensor equivalences | strict shift convention; Remark 2.3.4 allows transformations not commuting with shifts; final dual-basis isomorphism refers to an external textbook | P7 supplies the dual-basis inverse; P13 states coherent shift data and restricts the 2-cells explicitly; B5 proves why the stronger restriction is essential |
+| Watts, *Intrinsic characterizations of some additive functors*, Proc. AMS 11 (1960), 5–8, DOI 10.1090/S0002-9939-1960-0118757-0 | original bibliographic attribution only | AMS access returned a one-page JavaScript/cookie challenge, not the article; ORIGINAL PROOF NOT READ | no claim is made to have found a defect in this unread proof; P1–P4 give the full local arbitrary-ring proof, compared to FSS's classical statement |
+
+These are gaps in what the inspected passages supply as self-contained proofs,
+not allegations that their theorems are false. No original-source mathematical
+error was established. Their omitted arguments are replaced by the explicit
+local arguments above. No derived, tensor-category Radford, general
+coalgebra, or abstract enhancement theorem is used in any proof.
+
+Definition checks are explicit: P1 restricts an actual functor category;
+P2 constructs the commuting action and proves the comparison is balanced;
+P5 verifies tensor coherence; P6 constructs the generator inverse and proves
+presentation independence; P8 justifies the published intrinsic finite definition and its module-model characterization; P10 supplies
+copower existence and the Deligne universal property; P11 supplies finite
+end/coend existence; P12 justifies Nakayama and its adjunction; P13 proves the
+shift-data category and reconstructed homogeneous action. The data-only
+bicategory and small-projective-generator definitions assert axioms, with
+nonempty instances and the actual construction lemmas kept separate.
+
+The scoped checker validates all proposed dependencies against authored local
+items or earlier items in these five pairs, their page reachability, definition
+justification direction, absence of B suppliers, collisions, order, and page
+size, then runs the canonical validator on an inventory-hydrated temporary
+plan. This is planning and local mathematical review, not a publication or
+independent proof-audit certificate. Future authoring must preserve these
+statements and arguments and undergo the normal engine's audits.
+
+## Eilenberg–Watts binding item inventory
+
+Each proof-location label refers to the full local argument above. Definitions with
+`justified_by` use separate construction lemmas; those links are not prerequisite
+edges back into the definitions. This table and the JSON inventory must agree.
+
+### eilenberg-watts-theorem-and-natural-transformations
+
+| proposed id | kind | full local proof | definition justification |
+|---|---|---|---|
+| `def-additive-cocontinuous-module-functor` | definition | P1 | `lem-additive-cocontinuous-module-functors-form-a-category` |
+| `lem-additive-cocontinuous-module-functors-form-a-category` | lemma | P1 | — |
+| `lem-additive-module-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving` | lemma | P1 | — |
+| `lem-evaluation-on-the-regular-module-has-a-commuting-right-action` | lemma | P2 | — |
+| `lem-canonical-eilenberg-watts-comparison-is-balanced-and-natural` | lemma | P2 | — |
+| `lem-canonical-free-presentation-controls-eilenberg-watts-comparison` | lemma | P3 | — |
+| `thm-eilenberg-watts-for-arbitrary-unital-rings` | theorem | P3 | — |
+| `thm-natural-transformations-of-tensor-functors-are-bimodule-maps` | theorem | P4 | — |
+| `cor-eilenberg-watts-is-an-equivalence-of-hom-categories` | corollary | P4 | — |
+| `cor-cocontinuous-additive-module-functors-admit-right-adjoints` | corollary | P4 | — |
+| `cor-exact-module-tensor-functors-correspond-to-right-flat-bimodules` | corollary | P4 | — |
+
+### eilenberg-watts-theorem-and-natural-transformations-examples
+
+| proposed id | kind | full local proof | definition justification |
+|---|---|---|---|
+| `ex-eilenberg-watts-recovers-extension-of-scalars` | example | B1 | — |
+| `cex-right-exact-module-functor-without-coproduct-preservation-is-not-tensor` | counterexample | B1 | — |
+| `cex-coproduct-preserving-left-exact-module-functor-is-not-tensor` | counterexample | B1 | — |
+| `ex-natural-transformations-between-tensor-composites` | example | B1 | — |
+
+### morita-bicategories-and-projective-generators
+
+| proposed id | kind | full local proof | definition justification |
+|---|---|---|---|
+| `def-bicategory-pseudofunctor-and-biequivalence` | definition | P5 | — |
+| `def-morita-bicategory-of-rings-and-bimodules` | definition | P5 | `lem-bimodule-tensor-associators-and-unitors-satisfy-bicategory-coherence` |
+| `lem-bimodule-tensor-associators-and-unitors-satisfy-bicategory-coherence` | lemma | P5 | — |
+| `lem-tensoring-defines-a-pseudofunctor-with-interchange` | lemma | P5 | — |
+| `thm-eilenberg-watts-biequivalence-for-module-categories` | theorem | P5 | — |
+| `def-small-projective-generator-and-progenerator` | definition | P6 | `lem-small-projective-modules-are-exactly-finitely-generated-projective-modules` |
+| `lem-copower-presentation-construction-is-left-adjoint-to-generator-hom` | lemma | P6 | — |
+| `thm-cocomplete-abelian-category-with-small-projective-generator-is-a-module-category` | theorem | P6 | — |
+| `lem-small-projective-modules-are-exactly-finitely-generated-projective-modules` | lemma | P6 | — |
+| `lem-finite-projective-dual-basis-gives-tensor-hom-isomorphism` | lemma | P7 | — |
+| `thm-morita-equivalence-is-invertibility-of-a-bimodule` | theorem | P7 | — |
+| `cor-center-is-morita-invariant-via-natural-endomorphisms` | corollary | P7 | — |
+
+### morita-bicategories-and-projective-generators-examples
+
+| proposed id | kind | full local proof | definition justification |
+|---|---|---|---|
+| `ex-matrix-ring-morita-pair-with-explicit-tensor-inverses` | example | B2 | — |
+| `cex-a-projective-generator-need-not-be-small` | counterexample | B2 | — |
+| `ex-central-elements-as-natural-endomorphisms-of-the-identity` | example | B2 | — |
+
+### finite-abelian-categories-and-eilenberg-watts
+
+| proposed id | kind | full local proof | definition justification |
+|---|---|---|---|
+| `lem-projectives-covering-the-simple-objects-generate-every-finite-length-object` | lemma | P8 | — |
+| `thm-intrinsic-finite-category-hypotheses-give-a-finite-projective-generator` | theorem | P8 | — |
+| `thm-finite-abelian-categories-are-finite-dimensional-module-categories` | theorem | P8 | — |
+| `lem-finite-module-duality-is-exact-with-commuting-bimodule-actions` | lemma | P9 | — |
+| `thm-finite-eilenberg-watts-for-right-exact-linear-functors` | theorem | P9 | — |
+| `thm-finite-left-exact-functors-are-hom-functors-with-dual-bimodule-kernels` | theorem | P9 | — |
+| `cor-finite-one-sided-exactness-is-equivalent-to-existence-of-the-corresponding-adjoint` | corollary | P9 | — |
+| `cor-finite-eilenberg-watts-is-a-biequivalence` | corollary | P9 | — |
+| `cor-exact-finite-tensor-functors-have-right-projective-kernels` | corollary | P9 | — |
+
+### finite-abelian-categories-and-eilenberg-watts-examples
+
+| proposed id | kind | full local proof | definition justification |
+|---|---|---|---|
+| `ex-finite-right-exact-functor-needs-no-infinite-coproduct-hypothesis` | example | B3 | — |
+| `cex-finite-length-and-finite-hom-do-not-imply-finite-category` | counterexample | B3 | — |
+| `ex-dual-numbers-tensor-functor-is-right-exact-but-not-left-exact` | example | B3 | — |
+
+### deligne-products-and-categorical-eilenberg-watts
+
+| proposed id | kind | full local proof | definition justification |
+|---|---|---|---|
+| `lem-finite-vector-space-copowers-in-a-linear-abelian-category` | lemma | P10 | — |
+| `def-deligne-product-of-finite-linear-categories` | definition | P10 | `thm-finite-deligne-products-exist-by-tensor-product-algebras` |
+| `lem-bilinear-right-exact-functors-are-determined-by-the-pair-of-regular-modules` | lemma | P10 | — |
+| `thm-finite-deligne-products-exist-by-tensor-product-algebras` | theorem | P10 | — |
+| `lem-opposite-deligne-product-identifies-with-finite-bimodules` | lemma | P10 | — |
+| `thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories` | theorem | P11 | — |
+| `lem-finite-eilenberg-watts-kernel-end-and-coend-exist-with-explicit-universal-maps` | lemma | P11 | — |
+| `cor-kernel-composition-and-transformations-use-balanced-tensor-products` | corollary | P11 | — |
+| `def-left-and-right-nakayama-functors-by-finite-kernel-calculus` | definition | P12 | `lem-nakayama-kernels-give-well-defined-adjoint-functors` |
+| `lem-nakayama-kernels-give-well-defined-adjoint-functors` | lemma | P12 | — |
+| `prop-left-to-right-exact-equivalence-sends-identity-to-nakayama` | proposition | P12 | — |
+| `prop-projective-nakayama-pairing-and-symmetric-algebra-specialization` | proposition | P12 | — |
+
+### deligne-products-and-categorical-eilenberg-watts-examples
+
+| proposed id | kind | full local proof | definition justification |
+|---|---|---|---|
+| `ex-deligne-product-of-finite-vector-space-categories` | example | B4 | — |
+| `cex-left-to-right-exact-equivalence-need-not-preserve-the-identity` | counterexample | B4 | — |
+| `ex-kernel-end-and-coend-distinguish-regular-and-coregular-bimodules` | example | B4 | — |
+| `cex-a-deligne-kernel-need-not-be-one-external-tensor-factor` | counterexample | B4 | — |
+
+### graded-eilenberg-watts-and-shift-coherence
+
+| proposed id | kind | full local proof | definition justification |
+|---|---|---|---|
+| `def-coherently-shift-compatible-functor-and-natural-transformation` | definition | P13 | `lem-coherent-shift-functors-and-transformations-form-hom-categories` |
+| `lem-coherent-shift-functors-and-transformations-form-hom-categories` | lemma | P13 | — |
+| `lem-homogeneous-right-multiplication-reconstructs-the-graded-kernel-action` | lemma | P13 | — |
+| `lem-homogeneous-free-presentations-prove-the-graded-comparison` | lemma | P13 | — |
+| `thm-graded-eilenberg-watts-with-coherent-shifts` | theorem | P13 | — |
+| `cor-graded-bimodule-maps-classify-shift-compatible-transformations` | corollary | P13 | — |
+| `cor-graded-eilenberg-watts-respects-bicategory-coherence` | corollary | P13 | — |
+| `rem-derived-tensor-composition-and-the-enhancement-boundary` | remark | P14 | — |
+
+### graded-eilenberg-watts-and-shift-coherence-examples
+
+| proposed id | kind | full local proof | definition justification |
+|---|---|---|---|
+| `cex-degree-zero-projection-is-exact-cocontinuous-but-not-graded-tensor` | counterexample | B5 | — |
+| `cex-unrestricted-graded-natural-transformations-are-not-determined-by-the-regular-module` | counterexample | B5 | — |
+| `ex-internal-shift-as-a-graded-eilenberg-watts-kernel` | example | B5 | — |

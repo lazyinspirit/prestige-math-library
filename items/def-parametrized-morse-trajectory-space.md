@@ -23,7 +23,7 @@ sources:
 ## Definition
 
 Fix a complete downward gradient-like vector field $X$ for $f$.  For distinct critical points $p,q$, let $\widetilde{\mathcal M}_X(p,q)$ be the set of full $X$-orbits $\gamma:\mathbb R\to M$ satisfying
-$$\dot\gamma=X(\gamma),\qquad \lim_{t\to-\infty}\gamma(t)=p,qquad \lim_{t\to+\infty}\gamma(t)=q.$$
+$$\dot\gamma=X(\gamma),\qquad \lim_{t\to-\infty}\gamma(t)=p,\qquad \lim_{t\to+\infty}\gamma(t)=q.$$
 When $X$ is understood we write $\widetilde{\mathcal M}(p,q)$.  Existence and uniqueness for the complete flow make evaluation at zero a bijection with the point-marked intersection
 
 $$\operatorname{ev}_0:\widetilde{\mathcal M}(p,q)\longrightarrow W^u(p)\cap W^s(q),\qquad\gamma\longmapsto\gamma(0).$$

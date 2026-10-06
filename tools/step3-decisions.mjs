@@ -5,6 +5,8 @@ import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { yaml } from './pathway-lib.mjs';
 import { loadStep3AuditorProvenance } from './auditor-created-items.mjs';
+import { ownerPairSplitScopes } from './step3-auditor-items.mjs';
+import { preserveStep3OwnerReceipt } from './step3-owner-history.mjs';
 
 const safe = s => {
   if (!/^[a-zA-Z0-9_-]+$/.test(s ?? '')) throw Error('Invalid run or target ID');
@@ -13,6 +15,8 @@ const safe = s => {
 const json = p => JSON.parse(readFileSync(p, 'utf8'));
 const hash = x => createHash('sha256').update(JSON.stringify(x)).digest('hex');
 const read = p => existsSync(p) ? json(p) : null;
+// Only genuine loader contexts may opt into a writer-drained stable pass.
+const loadedSnapshots = new WeakSet();
 const file = (root, run, stage, id, owner) => join(root, 'research',
   `${safe(run)}-step${stage}-${owner ? 'owner' : 'review'}-${safe(id)}.json`);
 function receipt(s, phase, id, owner) {
@@ -35,13 +39,14 @@ function auditorCertifications(s) {
   if (row) {
     loadStep3AuditorProvenance(s.root, s.run);
     const baseline = read(join(s.root, 'research', `${s.run}-step3-auditor-baseline.json`));
+    const splitScopes = baseline ? ownerPairSplitScopes(s.root, s.run, baseline, s) : [];
     if (baseline?.version !== 1 || baseline.run !== s.run
       || baseline.policy !== 'auditor-authored-step3-bypass-v1'
       || !Array.isArray(baseline.items) || !Array.isArray(baseline.existing_item_files)
       || !Array.isArray(baseline.scopes) || row.baseline_sha256 !== hash(baseline)
       || row.items.some(item => baseline.items.some(original => original.id === item.id)
         || baseline.existing_item_files.includes(item.id))
-      || row.scopes.some(scope => !baseline.scopes.some(original => original.page === scope.page
+      || row.scopes.some(scope => !([...baseline.scopes, ...splitScopes]).some(original => original.page === scope.page
         && original.sha256 === scope.baseline_sha256)))
       throw Error('Invalid Step 3 auditor certification baseline/origin');
   }
@@ -57,6 +62,9 @@ function auditorScopeCertification(s, id) {
 function auditorItemCertification(s, id) {
   const row = auditorCertifications(s)?.items.find(value => value.id === id);
   const live = s.items.get(id);
+  // Historical repair receipts prove native origin, never current acceptance.
+  // itemDecision handles a present current owner decision before this fallback.
+  if (row?.owner_recertification && !receipt(s, 'item', id, true)) return null;
   if (!row || !Array.isArray(row.dependencies) || row.page !== live?.page.id
     || row.batch !== String(live?.page.batch)) return null;
   return row.sha256 === itemHash(s, id, row.dependencies) ? row : null;
@@ -92,7 +100,9 @@ export function loadStep3(root, run) {
   const planned = new Map();
   for (const page of read(join(dir, 'plan-spec.json'))?.pages ?? [])
     for (const item of page.items ?? []) planned.set(item.id, { item, page });
-  return { root, run, pages, pairs, items, planned, cache: new Map() };
+  const snapshot = { root, run, pages, pairs, items, planned, cache: new Map() };
+  loadedSnapshots.add(snapshot);
+  return snapshot;
 }
 
 // Proof repairs do not reopen scope. Changed claims or inventory do.
@@ -235,9 +245,13 @@ export function checkStep3(s, phase) {
     closed: work.length === 0, work };
 }
 
-export function recordStep3(root, { run, phase, page, item, decision, reason, owner = false, confidence, dependencies }) {
+// Optional snapshot reuse is valid only for a stable, writer-drained pass. The
+// caller must re-load and check the complete current inventory before closure.
+export function recordStep3(root, { run, phase, page, item, decision, reason, owner = false, confidence, dependencies }, snapshot = undefined) {
   if (!reason?.trim()) throw Error('An evidence/reason is required');
-  const s = loadStep3(root, run), id = phase === 'scope' ? page : item;
+  if (snapshot !== undefined && (!loadedSnapshots.has(snapshot) || resolve(snapshot.root) !== resolve(root) || snapshot.run !== run))
+    throw Error('Stable Step 3 snapshot must be a loadStep3 context for the exact root and run');
+  const s = snapshot ?? loadStep3(root, run), id = phase === 'scope' ? page : item;
   if (!['scope', 'item'].includes(phase)) throw Error('phase must be scope or item');
   const allowed = phase === 'scope' ? owner ? ['proceed', 'merge', 'enrich'] : ['sufficient', 'insufficient']
     : owner ? ['repaired', 'hold', 'reopen'] : ['accept', 'repaired', 'escalate'];
@@ -266,6 +280,7 @@ export function recordStep3(root, { run, phase, page, item, decision, reason, ow
     reason, ...(phase === 'item' ? { dependencies: [...new Set(dependencies)].sort() } : {}),
     ...(reopenedReview ? { reopens_review_sha256: hash(reopenedReview) } : {}),
     sha256: phase === 'scope' ? scopeHash(s, id) : itemHash(s, id, dependencies), at: new Date().toISOString() };
+  if (phase === 'item' && owner) preserveStep3OwnerReceipt(root, run, id);
   writeFileSync(file(root, run, phase === 'scope' ? '3a' : '3b', id, owner), JSON.stringify(row, null, 2) + '\n');
   return row;
 }

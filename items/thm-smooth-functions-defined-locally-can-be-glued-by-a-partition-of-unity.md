@@ -6,15 +6,12 @@ status: published
 origin: session
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 deps: [def-smooth-partition-of-unity-subordinate-to-an-open-cover, lem-smooth-maps-paste-over-an-open-cover, thm-a-locally-finite-sum-of-smooth-functions-is-smooth]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -24,6 +21,9 @@ sources:
       url: "https://www2.math.ethz.ch/will-merry/files/Merry%20-%20Differential%20Geometry%20(2021).pdf"
     - title: "Nigel Hitchin, Differentiable Manifolds"
       url: "https://web.archive.org/web/20201111215108id_/https://people.maths.ox.ac.uk/hitchin/files/LectureNotes/Differentiable_manifolds/manifolds2014.pdf"
+verification:
+  precheck: pass
+  repair: research/frontier-41-ha-dt-29-main-merge-published-evidence/thm-smooth-functions-defined-locally-can-be-glued-by-a-partition-of-unity.repair.json
 ---
 
 ## Statement
@@ -52,4 +52,4 @@ defines a smooth function $F:M\to\mathbb R$.
 
 2.1 By [F1] and step 1.1, the family $(\operatorname{supp}(F_i))_{i\in I}$ is locally finite. Hence the sum $F:=\sum_i F_i$ is well defined and smooth by [L2]. [F1, L2, step 1.1]
 
-3.1 Let $p\in M$. If $\phi_i(p)\ne 0$, then $p\in U_i$ and step 1.1 gives $F_i(p)=\phi_i(p)f_i(p)$. If $\phi_i(p)=0$, then $p\notin \operatorname{supp}(\phi_i)$, so step 1.1 gives $F_i(p)=0=\phi_i(p)f_i(p)$. Thus $F(p)=\sum_i \phi_i(p)f_i(p)$, and this pointwise formula is smooth by step 2.1. [F1, step 1.1, step 2.1] ∎
+3.1 Let $p\in M$. If $p\in U_i$, step 1.1 gives $F_i(p)=\phi_i(p)f_i(p)$, including when $\phi_i(p)=0$. If $p\notin U_i$, then [F1] implies $p\notin\operatorname{supp}(\phi_i)$, so the zero extension in step 1.1 gives $F_i(p)=0$; the summand $\phi_i(p)f_i(p)$ is interpreted as zero there. Local finiteness in [F1] ensures that only finitely many supports contain $p$, and all other summands vanish. Thus the stated pointwise sum equals $\sum_i F_i(p)=F(p)$ and is smooth by step 2.1. [F1, step 1.1, step 2.1] ∎

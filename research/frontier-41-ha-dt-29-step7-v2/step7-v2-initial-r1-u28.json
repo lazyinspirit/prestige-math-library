@@ -1,0 +1,134 @@
+{
+  "run": "frontier-41-ha-dt-29",
+  "phase": "initial",
+  "round": 1,
+  "unit": "28",
+  "input_sha256": "79b0e989c27d1e96f1d9b9eaa6792321ec4c5196c7f8d892843c34832f7ef2a9",
+  "decisions": [
+    {
+      "id": "thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "84feab55b63d0e1832f523ec41925285ca2b031b92aa6e637032761be41d8b33",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original step 4.1 asserted the promised (co)end quasi-inverses without any formulas, dinatural families or universal-property proof. F1/F2 establish only evaluation kernels; the later kernel lemma cannot supply this theorem through its dependency on it. This is a missing logical argument, repaired by explicit universal bimodule wedges and cowedges, not by weakening the claim.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/html/1612.04561v3"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories",
+      "disposition": "repaired",
+      "post_sha256": "8cf1abbaf972c5c0dccc0548ab12126fa6de336bd2df1f35ef28033caaec6bb5",
+      "review_context_sha256": "3cb196577140cb06469f6223821057d69ce25b1aad8554d8b65d708bcd4c245e",
+      "reason": "Checked tensor/Hom classification with all natural transformations, external-factor duality, both bimodule actions, and the universal factorization and uniqueness maps for the end G(R) and coend G(R*). Transport identifies these with the required quasi-inverses on objects and transformations. The Statement is byte-identical to the rejected carrier. This is a local review and repair, not independent review of my repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/html/1612.04561v3"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "subject": "thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories",
+      "run": "frontier-41-ha-dt-29",
+      "caught_at_stage": "7.1-adjudicate",
+      "caught_by_role": "alpha-adjudicate",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "location": "Proof, original step 4.1",
+      "disposition": "fixed",
+      "finding": "Evaluation equivalences alone do not construct the promised coend/end quasi-inverses; no universal families were given, and citing the later dependent kernel lemma would be circular.",
+      "repair": "Current steps 1.2, 2.2 and 2.3 construct both bimodule universal families and their unique factorization maps. Step 4.1 identifies them with evaluation quasi-inverses, including natural transformations.",
+      "post_sha256": "8cf1abbaf972c5c0dccc0548ab12126fa6de336bd2df1f35ef28033caaec6bb5",
+      "evidence": "research/frontier-41-ha-dt-29-step7-v2/step7-v2-initial-r1-u28.json",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/html/1612.04561v3"
+      ],
+      "familiar": false
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "subject": "thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories",
+      "disposition": "no_update_required",
+      "reason": "The repaired carrier is draft. Its Statement is byte-identical to the rejected carrier, so no supplier-interface event or direct-consumer maintenance is triggered. No potentially defective published consumer was discovered in the assigned review. Published definitions used for universal properties were read without editing their carriers.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "item": "thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories",
+    "claim": "Categorical Eilenberg–Watts triangle, external tensor formulas, and coend/end quasi-inverses; supplied small finite module models and inherited AC-dependent Deligne product. Statement unchanged.",
+    "sources_consulted": [
+      {
+        "url": "https://arxiv.org/html/1612.04561v3",
+        "locators": "§2.1 Lemma 2.1; §2.4 Proposition 2.8, complete end proof (2.18)–(2.28) and coend assertion; §3.1 Definition 3.1 and complete Theorem 3.2 proof (3.2), (3.7)–(3.12).",
+        "qualification": "The paper assumes algebraically closed k globally. The repaired local argument uses only finite-dimensional linear algebra and the supplied module classification, so works over the statement’s arbitrary field. The source omits the analogous coend proof; it is explicitly proved locally."
+      }
+    ],
+    "dependency_ids": [
+      "thm-finite-eilenberg-watts-for-right-exact-linear-functors",
+      "thm-finite-left-exact-functors-are-hom-functors-with-dual-bimodule-kernels",
+      "lem-opposite-deligne-product-identifies-with-finite-bimodules",
+      "thm-finite-abelian-categories-are-finite-dimensional-module-categories",
+      "lem-finite-module-duality-is-exact-with-commuting-bimodule-actions",
+      "def-end-and-coend",
+      "def-axiom-of-choice"
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing after adopting phase ordering and correcting remapped step references."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/frontier-41-ha-dt-29-batch-28.proof-contracts.json --strict --items thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 item checked."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories.md",
+        "exit_code": 0,
+        "result": "1 file, all math spans and frontmatter parse with the real renderer dependencies."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories.md",
+        "exit_code": 0,
+        "result": "1 item, 7 steps, 0 defects; run after the last item edit."
+      },
+      {
+        "command": "node tools/depcheck.mjs --items-file /tmp/step7-u28-items.json",
+        "exit_code": 0,
+        "result": "Selected item and page metadata checks and dependency-closure cycle checks passed; closure covers 536 items and 146 pages."
+      },
+      {
+        "command": "node tools/depsource.mjs --run frontier-41-ha-dt-29 --items-file /tmp/step7-u28-items.json",
+        "exit_code": 0,
+        "result": "20 dependencies: 15 published, 5 draft suppliers; 0 unresolved, 0 planned-later."
+      },
+      {
+        "command": "Direct comparison with /tmp/step7-u28-before.md; assigned manifest proof mirror check",
+        "exit_code": 0,
+        "result": "Statement byte-identical; assigned manifest proof exactly matches current Proof section."
+      }
+    ],
+    "pending_operations": [],
+    "mathematical_uncertainty": false,
+    "next_action": "Controller collects this report and performs its ordinary frontier closure and independent rejudgment; no worker, judge, certificate or round transition was launched by this adjudicator.",
+    "metadata_repairs": "Under step7-shared-write-lock acquire/reread/edit/check/release, synchronized only this item’s owning batch-28 contract and manifest entry. Added existing def-end-and-coend as an actual prerequisite and def-axiom-of-choice for the already stated inherited assumption. Corrected stale boundary/risk evidence that had claimed the subsequent supplier established the promised inverses; the new proof establishes them internally. Prior source quotations and other item contracts remain intact.",
+    "review_hash_recording": "Ran the required review-contexts command immediately after completing the mathematical review, before editing any other supplier. Preserved its exact hashes; metadata synchronization did not alter the item carrier.",
+    "raw_before_sha256": "a3e6b67801bd03ae68693066a7a88dd7d7acd4f03a53320e48439bfb1bae2941",
+    "raw_after_sha256": "0d885d738a11f61a03550e29b574a024eae587ba15cca13b9d34bc195a16b3dc"
+  }
+}

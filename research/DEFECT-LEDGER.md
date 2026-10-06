@@ -1,15 +1,15 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 30af37de592e by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 2978ff1f24fd by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 11853 |
+| defects caught before publication | 14866 |
 | now mechanically prevented | 371 |
 | escaped to publication | 1 |
-| still open | 27 |
+| still open | 38 |
 
 ## frontier-11 — 4 row(s)
 
@@ -719,6 +719,109 @@
 | other | 1 |  |  |  |
 | false-decline |  |  |  | 1 |
 
+## frontier-39-analysis-30 — 1132 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate | 7-rejudge | 7.2-impact |
+|---|---|---|---|---|---|
+| false-or-overstrong-statement | 161 |  | 12 | 1 |  |
+| citation-inaccurate | 128 |  | 14 |  | 4 |
+| invalid-inference | 137 |  | 5 | 1 |  |
+| missing-hypothesis | 120 |  | 14 |  |  |
+| citation-inflated | 70 |  | 9 |  | 2 |
+| missing-choice-scope | 72 | 1 | 1 |  |  |
+| arithmetic-error | 46 |  |  |  |  |
+| citation-missing | 38 |  | 5 |  |  |
+| false-claim | 36 |  |  |  |  |
+| unlicensed-inference | 33 |  |  |  |  |
+| ill-typed-claim | 24 |  | 4 |  |  |
+| reader-repair | 28 |  |  |  |  |
+| false-computation | 24 |  | 1 |  |  |
+| ill-typed-construction | 19 |  | 3 | 1 |  |
+| unsupported-inference | 22 |  |  |  |  |
+| undefined-notation | 13 |  | 4 | 2 |  |
+| citation-truncated | 9 |  | 4 |  |  |
+| invalid-witness | 10 |  | 1 |  |  |
+| citation-misattributed | 10 |  |  |  |  |
+| ill-formed | 9 |  |  |  |  |
+| false-or-overstrong-title | 6 |  |  |  |  |
+| false-boundary-disposition | 5 |  |  |  |  |
+| missing-case | 4 |  |  |  |  |
+| source-locator | 4 |  |  |  |  |
+| overstrong-title-or-statement | 3 |  |  |  |  |
+| other | 1 | 2 |  |  |  |
+| invalid-refutation | 2 |  |  |  |  |
+| contract-mismatch | 2 |  |  |  |  |
+| coordinate-typing | 2 |  |  |  |  |
+| missing-map | 1 |  |  |  |  |
+| compact-increment-domain | 1 |  |  |  |  |
+| citation-corrupted | 1 |  |  |  |  |
+
+## frontier-40-geometry-braids-rep-27 — 816 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate | owner |
+|---|---|---|---|---|
+| citation-inaccurate | 89 |  | 41 |  |
+| invalid-inference | 71 | 1 | 51 |  |
+| reader-repair | 89 |  |  |  |
+| false-or-overstrong-statement | 74 |  | 2 |  |
+| missing-hypothesis | 60 | 1 | 7 |  |
+| unsupported-inference | 44 |  |  |  |
+| citation-inflated | 35 |  | 2 |  |
+| unlicensed-inference | 32 |  |  |  |
+| ill-typed-construction | 31 |  |  |  |
+| missing-choice-scope | 30 |  |  | 1 |
+| citation-missing | 29 |  |  |  |
+| ill-typed-claim | 27 |  |  |  |
+| undefined-notation | 16 |  | 1 |  |
+| false-or-overstrong-title | 16 |  |  |  |
+| false-boundary-disposition | 16 |  |  |  |
+| missing-case | 11 |  |  |  |
+| false-claim | 10 |  |  |  |
+| citation-misattributed | 8 |  |  |  |
+| citation-truncated | 5 |  |  |  |
+| ill-formed | 5 |  |  |  |
+| invalid-witness | 2 |  |  |  |
+| false-computation | 2 |  |  |  |
+| missing-map | 2 |  |  |  |
+| citation-corrupted | 1 |  |  |  |
+| contract-mismatch | 1 |  |  |  |
+| arithmetic-error | 1 |  |  |  |
+| invalid-refutation | 1 |  |  |  |
+| overstrong-title-or-statement | 1 |  |  |  |
+
+## frontier-41-ha-dt-29 — 1065 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate | owner |
+|---|---|---|---|---|
+| invalid-inference | 157 |  |  |  |
+| reader-repair | 126 |  |  |  |
+| missing-hypothesis | 116 | 1 | 3 | 5 |
+| other | 11 |  | 100 |  |
+| false-or-overstrong-statement | 70 |  |  |  |
+| citation-inaccurate | 62 | 1 |  |  |
+| ill-typed-claim | 56 |  |  | 1 |
+| ill-typed-construction | 52 | 1 |  |  |
+| missing-choice-scope | 39 | 2 |  | 5 |
+| false-boundary-disposition | 35 |  |  |  |
+| unlicensed-inference | 32 |  |  |  |
+| citation-inflated | 23 | 1 |  | 4 |
+| false-claim | 26 |  |  |  |
+| false-computation | 21 |  |  |  |
+| invalid-witness | 20 |  |  |  |
+| ill-formed | 17 |  |  |  |
+| citation-missing | 11 | 4 |  |  |
+| undefined-notation | 13 |  |  |  |
+| unsupported-inference | 10 |  | 1 | 1 |
+| false-or-overstrong-title | 8 |  |  |  |
+| citation-misattributed | 4 | 2 |  |  |
+| missing-case | 6 |  |  |  |
+| arithmetic-error | 6 |  |  |  |
+| missing-map | 4 |  |  |  |
+| contract-mismatch | 1 |  |  | 2 |
+| scope-drop | 2 |  |  |  |
+| frontmatter-schema | 2 |  |  |  |
+| invalid-refutation | 1 |  |  |  |
+
 ## phase-2-catchup-24 — 14 row(s)
 
 | subclass | 6b-adjudicate |
@@ -998,3 +1101,14 @@
 - `frontier-12-D008` frontier-12 · other · spine-audit receipt
 - `frontier-13-D053` frontier-13 · other · tools/precheck.mts
 - `pre-frontier-13-D003` pre-frontier-13 · other · tools/run-wave.test.mjs
+- `research/frontier-40-geometry-braids-rep-27-B11-crossing-locator-open` frontier-40-geometry-braids-rep-27 · citation-inaccurate · def-positive-and-negative-khovanov-rozansky-crossing-complexes
+- `frontier-39-analysis-30-5a-b11-poincare-cc-owner-held` frontier-39-analysis-30 · missing-hypothesis · thm-poincare-inequality-for-w-one-p-zero
+- `f39-b16-poincare-choice-open` frontier-39-analysis-30 · missing-choice-scope · thm-poincare-inequality-for-w-one-p-zero
+- `f39-analysis-b10-5a-poincare-choice-statement` frontier-39-analysis-30 · missing-hypothesis · thm-poincare-inequality-for-w-one-p-zero
+- `f39-a6-grand-kernel-open` frontier-39-analysis-30 · ill-formed · lem-grand-maximal-function-is-dominated-by-the-tangential-maximal-function
+- `f39a30-b9-5a-053` frontier-39-analysis-30 · missing-hypothesis · thm-gagliardo-nirenberg-sobolev-inequality-for-p-one
+- `f39a30-b9-5a-056` frontier-39-analysis-30 · missing-hypothesis · lem-weak-partial-derivatives-lower-sobolev-order
+- `f39a30-b9-5a-061` frontier-39-analysis-30 · citation-inaccurate · thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n
+- `f39a30-b9-5a-063` frontier-39-analysis-30 · overstrong-title-or-statement · rellich-kondrachov-and-sobolev-compactness-examples
+- `f39-b13-higher-sobolev-u-scope` frontier-39-analysis-30 · missing-hypothesis · thm-higher-order-sobolev-embedding
+- `frontier-40-geometry-braids-rep-27-step7-owner-chern-character-rank-open` frontier-40-geometry-braids-rep-27 · missing-hypothesis · def-chern-character-and-todd-class

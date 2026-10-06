@@ -32,7 +32,68 @@ const evidenceText = row => typeof row.reason === 'string' && row.reason.trim().
   && Array.isArray(row.source_urls) && row.source_urls.every(url=>/^https:\/\//.test(url))
   && (row.source_urls.length > 0 || row.familiar === true);
 const requireValue=(condition,message)=>{if(!condition)throw Error(message);};
-const verifyEvidence=evidence=>{for(const [p,hash]of Object.entries(evidence??{}))requireValue(existsSync(p)&&digest(readFileSync(p,'utf8'))===hash,`Step 7 evidence changed: ${p}`);};
+// A sealed source41 certificate may retain its original shared ledger carrier
+// after integration restores unrelated native frontier39/40 history. This is
+// a historical-byte bridge, never a new judgment or a mutable certificate.
+function restoredLedgerHistory(root, run, certificate, path, expected) {
+  const originRun='frontier-41-ha-dt-29';
+  const originCertificate='d1693df50e4d8beb126371fb9f209a2202e6f7474969ec5c7dc133316563a20f';
+  const originLedger='a09e73a5779cc22e9f8c68ceaa12051b1738b0aa43ed052c17f124394cbdbfa8';
+  if(run!==originRun||certificate.sha256!==originCertificate||expected!==originLedger
+    ||resolve(root,path)!==join(resolve(root),'research','defect-ledger.jsonl'))return false;
+  const directory=workflowDir(root,run), marker=join(directory,'merge-history-recovery.json');
+  if(!existsSync(marker))return false;
+  const receipt=read(marker),archive=join(directory,'source41-defect-ledger.jsonl');
+  const bytes=readFileSync(archive,'utf8'),current=readFileSync(resolve(root,path),'utf8');
+  requireValue(receipt.version===1&&receipt.policy==='step7-source41-ledger-history-bridge-v1'
+    &&receipt.run===run&&receipt.owner===true&&receipt.owner_identity==='/root'
+    &&receipt.source_commit==='7d58c00a7d9109bdcc6a07a32718d6f4ea2a9438'
+    &&receipt.certificate_sha256===originCertificate
+    &&receipt.original_ledger_sha256===originLedger&&digest(bytes)===originLedger
+    &&receipt.current_ledger_sha256===digest(current)
+    &&Number.isFinite(Date.parse(receipt.at))&&String(receipt.reason??'').trim().length>0,
+    'invalid source41 shared-ledger recovery binding');
+  const decode=text=>text.split(/\r?\n/).filter(Boolean).map(JSON.parse);
+  const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'
+    ?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
+  const original=decode(bytes),live=decode(current),byId=new Map();
+  for(const row of original){requireValue(typeof row.defect_id==='string'&&!byId.has(row.defect_id),
+    'ambiguous original source41 ledger identity');byId.set(row.defect_id,row);}
+  const seen=new Set();let restored=0;
+  for(const row of live){
+    requireValue(typeof row.defect_id==='string'&&!seen.has(row.defect_id),'ambiguous integrated ledger identity');
+    seen.add(row.defect_id);
+    const prior=byId.get(row.defect_id);
+    if(prior)requireValue(JSON.stringify(canonical(prior))===JSON.stringify(canonical(row)),
+      `source41 original ledger row changed: ${row.defect_id}`);
+    else{requireValue(['frontier-39-analysis-30','frontier-40-geometry-braids-rep-27'].includes(row.run),
+      `unrelated ledger addition in source41 recovery: ${row.defect_id}`);restored++;}
+  }
+  requireValue(original.every(row=>seen.has(row.defect_id))&&restored===1948,
+    'source41 recovery must preserve every original row and exactly restored native history');
+  requireValue(JSON.stringify(canonical(original.filter(row=>row.run===run)))
+    ===JSON.stringify(canonical(live.filter(row=>row.run===run))),
+    'source41 current-run ledger projection changed');
+  return true;
+}
+function restoredRenderedLedgerHistory(root, run, certificate, path, expected) {
+  const original='fed9e7d84607a4a631d0e4e358f6780ac15e09558b4481667ea643dc2ee65ffe';
+  if (run!=='frontier-41-ha-dt-29'||expected!==original
+    ||resolve(root,path)!==join(resolve(root),'research','DEFECT-LEDGER.md')) return false;
+  if (!restoredLedgerHistory(root,run,certificate,'research/defect-ledger.jsonl',
+    'a09e73a5779cc22e9f8c68ceaa12051b1738b0aa43ed052c17f124394cbdbfa8')) return false;
+  const directory=workflowDir(root,run),receipt=read(join(directory,'merge-history-recovery.json'));
+  requireValue(receipt.original_rendered_ledger_sha256===original
+    &&digest(readFileSync(join(directory,'source41-DEFECT-LEDGER.md'),'utf8'))===original
+    &&receipt.current_rendered_ledger_sha256===digest(readFileSync(resolve(root,path),'utf8')),
+    'source41 derived ledger history binding changed');
+  return true;
+}
+const verifyEvidence=(evidence,history=null)=>{for(const [p,hash]of Object.entries(evidence??{}))requireValue(
+  existsSync(p)&&(digest(readFileSync(p,'utf8'))===hash
+    ||history&&(restoredLedgerHistory(history.root,history.run,history.certificate,p,hash)
+      ||restoredRenderedLedgerHistory(history.root,history.run,history.certificate,p,hash))),
+  `Step 7 evidence changed: ${p}`);};
 const rawHashes=root=>Object.fromEntries(readLibraryItems(root).map(row=>[row.id,row.sha256]));
 const creationId=/^(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 function subjectScope(pack,created=[]) {
@@ -873,7 +934,7 @@ export function verifyCertification(root,run,{allowMissing=true}={}) {
   requireValue(sha256===digest(payload),'Step 7 certification payload changed');
   const seen=new Set();for(const item of row.items){requireValue(!seen.has(item.id)&&['item_sha256','context_sha256','guard_sha256'].every(k=>/^[a-f0-9]{64}$/.test(item[k]??'')),`malformed Step 7 certificate item ${item.id}`);seen.add(item.id);}
   const created=new Set();for(const item of row.creations??[]){requireValue(!created.has(item.id)&&seen.has(item.id)&&typeof item.author_result==='string',`malformed Step 7 creation ${item.id}`);created.add(item.id);creationRegistration(root,run,item);}
-  verifyEvidence(row.evidence);
+  verifyEvidence(row.evidence,{root,run,certificate:row});
   return row;
 }
 

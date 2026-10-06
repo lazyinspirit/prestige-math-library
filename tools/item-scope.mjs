@@ -9,21 +9,29 @@ const ITEM_ID = /^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/;
  * callers retain their existing whole-corpus behavior.
  */
 export function parseItemScope(argv) {
+  return parseScope(argv, '--items-file', ITEM_ID, 'item');
+}
+
+export function parsePageScope(argv) {
+  return parseScope(argv, '--pages-file', /^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'page');
+}
+
+function parseScope(argv, flag, pattern, label) {
   const args = [...argv];
-  const positions = args.flatMap((arg, index) => arg === '--items-file' ? [index] : []);
-  if (positions.length > 1) throw new Error('--items-file may be specified once');
+  const positions = args.flatMap((arg, index) => arg === flag ? [index] : []);
+  if (positions.length > 1) throw new Error(`${flag} may be specified once`);
   if (!positions.length) return { selected: null, args };
 
   const index = positions[0];
   const path = args[index + 1];
-  if (!path || path.startsWith('--')) throw new Error('--items-file requires a JSON file path');
+  if (!path || path.startsWith('--')) throw new Error(`${flag} requires a JSON file path`);
   const selectionPath = resolve(process.cwd(), path);
   let ids;
   try { ids = JSON.parse(readFileSync(selectionPath, 'utf8')); }
-  catch (error) { throw new Error(`cannot read item selection ${path}: ${error.message}`); }
-  if (!Array.isArray(ids) || ids.length === 0 || ids.some(id => typeof id !== 'string' || !ITEM_ID.test(id)))
-    throw new Error('item selection must be a nonempty JSON array of canonical item IDs');
-  if (new Set(ids).size !== ids.length) throw new Error('item selection contains duplicate IDs');
+  catch (error) { throw new Error(`cannot read ${label} selection ${path}: ${error.message}`); }
+  if (!Array.isArray(ids) || ids.length === 0 || ids.some(id => typeof id !== 'string' || !pattern.test(id)))
+    throw new Error(`${label} selection must be a nonempty JSON array of canonical ${label} IDs`);
+  if (new Set(ids).size !== ids.length) throw new Error(`${label} selection contains duplicate IDs`);
   args.splice(index, 2);
   return { selected: new Set(ids), args, selectionPath };
 }

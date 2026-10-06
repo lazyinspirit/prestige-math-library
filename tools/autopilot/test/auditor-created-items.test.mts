@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, utimesSync, rmSync, copyFileSync, symlinkSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, utimesSync, rmSync, copyFileSync, symlinkSync, chmodSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
@@ -13,9 +13,11 @@ import {
   authorResultAllowed,
   recordOwnerRecertification,
   recordOwnerCreation,
+  recordOwnerSourceArchive,
+  recordOwnerContextArchive,
 } from '../../auditor-created-items.mjs';
-import { writeAuditorBaseline, certifyAuditorItems } from '../../step3-auditor-items.mjs';
-import { recordStep3 } from '../../step3-decisions.mjs';
+import { writeAuditorBaseline, certifyAuditorItems, registerOwnerPairSplit, ownerPairSplitScopes } from '../../step3-auditor-items.mjs';
+import { recordStep3, loadStep3, scopeHash, scopeDecision } from '../../step3-decisions.mjs';
 import { itemHashGuard, itemHashJudge } from '../../item-hash.mjs';
 
 const REPO = process.env.AUTOPILOT_TEST_REPO
@@ -819,6 +821,17 @@ test('Step-3 first certification pairs original author provenance with a current
     started_at: '2025-01-01T00:00:00.000Z', ended_at: '2025-01-01T00:00:10.000Z',
   }));
 
+  assert.throws(() => certifyAuditorItems(root, 'r'), /changed after its latest successful Step 3/,
+    'a late owner-created file cannot borrow an old covering result as its origin');
+  // Establish genuine native creation in its own write window before testing
+  // later owner recertification against the immutable surviving native receipt.
+  utimesSync(itemPath, new Date('2025-01-01T00:00:05.000Z'), new Date('2025-01-01T00:00:05.000Z'));
+  certifyAuditorItems(root, 'r');
+  writeFileSync(itemPath, `${item(id)}\nLater owner proof repair.\n`);
+  utimesSync(itemPath, repairedAt, repairedAt);
+  recordStep3(root, { run: 'r', phase: 'item', page: undefined, item: id,
+    decision: 'repaired', dependencies: [], reason: 'Owner checked the later repaired proof.',
+    owner: true, confidence: undefined });
   const receipt = certifyAuditorItems(root, 'r');
   assert.equal(receipt.items.length, 1);
   assert.equal(receipt.items[0].author_result, authorLabel);
@@ -949,7 +962,7 @@ test('judge closure requires full current carriers without fabricating a verdict
   copyFileSync(join(REPO, 'tools/level-coverage.mjs'), join(root, 'tools/level-coverage.mjs'));
   for (const module of ['models', 'judge-currency', 'step7-adjudication-compat', 'step7-terminal-resolution',
     'step7-certification-consumer', 'step7-workflow', 'step7-rounds', 'context-hash-pool',
-    'auditor-created-items', 'item-hash', 'frontmatter-list', 'published-repair-policy'])
+    'auditor-created-items', 'item-hash', 'frontmatter-list', 'published-repair-policy', 'content-policy-lib'])
     symlinkSync(join(REPO, `tools/${module}.mjs`), join(root, `tools/${module}.mjs`));
   const manifest = join(root, 'scope.pages.json');
   const ledger = join(root, 'judge.jsonl');
@@ -1327,9 +1340,9 @@ test('later native promotion validates and preserves the owner-created Step-5 or
     'research/r-step7-auditor-certifications.json')), /owner creation/);
 });
 
-function currentDefinitionReviewFixture(t: any, { ballLemma = false } = {}) {
+function currentDefinitionReviewFixture(t: any, { ballLemma = false, proofReview = false } = {}) {
   const id = ballLemma ? 'lem-euclidean-balls-are-bounded-c-one-domains' : 'lem-created';
-  const kind = ballLemma ? 'lemma' : 'definition';
+  const kind = ballLemma || proofReview ? 'lemma' : 'definition';
   const seedItem = item(id).replace('kind: lemma', `kind: ${kind}`);
   const f = carriedStep5Fixture(t, { id, seedItem, seedManifestItem: {
     id, kind, deps: [], statement: 'Old description' } });
@@ -1449,4 +1462,437 @@ test('ball-lemma review rejects unsupported kinds, missing proof checks, unrevie
   other.payload.repair_kind = 'current-ball-lemma-manifest-review'; other.write();
   assert.throws(() => recordOwnerRecertification(other.root, 'r', 5, other.id, other.evidence,
     'Ball-lemma authorization cannot cover another subject'), /eligible Step 5 owner bootstrap/);
+});
+
+
+function splitFixture(t: any) {
+  const root = fixture();
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const path = join(root, 'research/r-batch-1.pages.json');
+  const pages = [
+    { id: 'page-a', kind: 'A', companion: 'page-b', items: [{ id: 'lem-base', deps: [] }, { id: 'lem-moved', deps: [] }] },
+    { id: 'page-b', kind: 'B', companion: 'page-a', items: [] },
+  ];
+  writeFileSync(path, JSON.stringify(pages));
+  writeAuditorBaseline(root, 'r');
+  const baselinePath = join(root, 'research/r-step3-auditor-baseline.json');
+  const baselineBytes = readFileSync(baselinePath, 'utf8');
+  const moved = pages[0].items.pop();
+  const current = [...pages, { id: 'page-c', kind: 'A', companion: 'page-d', items: [moved] },
+    { id: 'page-d', kind: 'B', companion: 'page-c', items: [] }];
+  const write = () => writeFileSync(path, JSON.stringify(current));
+  write();
+  const reason = 'Owner authorized conserving all items across the two pairs';
+  const evidence = 'research/split-authorization.json';
+  const bytes = JSON.stringify({ version: 1, run: 'r', owner: true, action: 'step3-owner-pair-split',
+    from_page: 'page-a', new_pages: ['page-a', 'page-c'], reason });
+  writeFileSync(join(root, evidence), bytes);
+  const input = { from_page: 'page-a', new_pages: ['page-a', 'page-c'],
+    authorization: { owner: true, reason, evidence, evidence_sha256: sha(bytes) } };
+  return { root, current, write, baselinePath, baselineBytes, input };
+}
+
+test('owner pair split supplements both scopes without moving the immutable inventory', t => {
+  const f = splitFixture(t);
+  const registered = registerOwnerPairSplit(f.root, 'r', f.input);
+  assert.deepEqual(registered.split.items.map((row: any) => row.id), ['lem-base', 'lem-moved']);
+  assert.equal(registered.split.items.find((row: any) => row.id === 'lem-moved').page, 'page-c');
+  assert.equal(readFileSync(f.baselinePath, 'utf8'), f.baselineBytes);
+  assert.deepEqual(ownerPairSplitScopes(f.root, 'r').map((row: any) => row.page), ['page-a', 'page-c']);
+  assert.throws(() => registerOwnerPairSplit(f.root, 'r', f.input), /replace an existing/);
+});
+
+test('owner pair split refuses losses, additions, fabricated authorization and baseline tampering', t => {
+  for (const mutate of [
+    (f: any) => { f.current[2].items = []; f.write(); },
+    (f: any) => { f.current[2].items.push({ id: 'lem-added', deps: [] }); f.write(); },
+    (f: any) => { f.current[0].items.push(f.current[2].items[0]); f.write(); },
+    (f: any) => { f.input.authorization.owner = false; },
+    (f: any) => { f.input.authorization.evidence_sha256 = '0'.repeat(64); },
+    (f: any) => { f.input.authorization.reason = 'Invented authorization'; },
+  ]) {
+    const f = splitFixture(t); mutate(f);
+    assert.throws(() => registerOwnerPairSplit(f.root, 'r', f.input));
+    assert.equal(readFileSync(f.baselinePath, 'utf8'), f.baselineBytes);
+  }
+  const f = splitFixture(t);
+  registerOwnerPairSplit(f.root, 'r', f.input);
+  writeFileSync(f.baselinePath, f.baselineBytes + '\n');
+  assert.throws(() => ownerPairSplitScopes(f.root, 'r'), /immutable baseline binding/);
+});
+
+test('new split pair certifies auditor additions while original items retain their evidence class', t => {
+  const f = splitFixture(t);
+  registerOwnerPairSplit(f.root, 'r', f.input);
+  const before = scopeHash(loadStep3(f.root, 'r'), 'page-c');
+  recordStep3(f.root, { run: 'r', phase: 'scope', page: 'page-c', owner: true,
+    decision: 'proceed', reason: 'Owner approved the split scope' });
+  f.current[2].items.push({ id: 'lem-added', deps: [] } as any);
+  f.current[0].items.push({ id: 'lem-added-retained', deps: [] }); f.write();
+  writeFileSync(join(f.root, 'items/lem-added.md'), item('lem-added'));
+  writeFileSync(join(f.root, 'items/lem-added-retained.md'), item('lem-added-retained'));
+  writeFileSync(join(f.root, 'research/r-dispatch/alpha-high-retained.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha-high', label: 'step3b-pair-page-a-0123456789abcdef', covers: ['page-a'], ok: true,
+    started_at: '2000-01-01T00:00:00Z', ended_at: '2100-01-01T00:00:00Z',
+  }));
+  writeFileSync(join(f.root, 'research/r-dispatch/alpha-high-split.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha-high', label: 'step3b-pair-page-c-0123456789abcdef', covers: ['page-c'], ok: true,
+    started_at: '2000-01-01T00:00:00Z', ended_at: '2100-01-01T00:00:00Z',
+  }));
+  const receipt = certifyAuditorItems(f.root, 'r');
+  assert.deepEqual(receipt.items.map((row: any) => row.id), ['lem-added', 'lem-added-retained']);
+  assert.equal(receipt.scopes.find((row: any) => row.page === 'page-c').baseline_sha256, before);
+  assert.equal(scopeDecision(loadStep3(f.root, 'r'), 'page-c').closed, true);
+  assert.equal(readFileSync(f.baselinePath, 'utf8'), f.baselineBytes);
+  f.current[2].items = f.current[2].items.filter((row: any) => row.id !== 'lem-moved'); f.write();
+  assert.throws(() => certifyAuditorItems(f.root, 'r'), /item mapping changed/);
+});
+
+
+test('registration permits unrelated author additions but rejects stealing another baseline pair item', t => {
+  for (const steal of [false, true]) {
+    const f = splitFixture(t);
+    const baseline: any = JSON.parse(f.baselineBytes);
+    baseline.items.push({ id: 'lem-unrelated', page: 'page-e', batch: '1' });
+    baseline.scopes.push({ page: 'page-e', sha256: '1'.repeat(64) });
+    writeFileSync(f.baselinePath, JSON.stringify(baseline));
+    f.current.push({ id: 'page-e', kind: 'A', companion: 'page-f', items: [
+      { id: 'lem-unrelated', deps: [] }, { id: 'lem-unrelated-added', deps: [] }] } as any,
+      { id: 'page-f', kind: 'B', companion: 'page-e', items: [] } as any);
+    if (steal) {
+      f.current[4].items.shift(); f.current[2].items.push({ id: 'lem-unrelated', deps: [] } as any);
+    }
+    f.write();
+    if (steal) assert.throws(() => registerOwnerPairSplit(f.root, 'r', f.input), /unrelated original item/);
+    else assert.equal(registerOwnerPairSplit(f.root, 'r', f.input).split.items.length, 2);
+  }
+});
+
+test('exact historical owner source archive permits genuine canonical updates without changing origin', t => {
+  const f = ownerCreationFixture(t);
+  const source = 'research/owner-source.md';
+  recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence);
+  const originPath = join(f.root, `research/r-step5-owner-creation-${f.id}.json`);
+  const originalOrigin = readFileSync(originPath), originalSource = readFileSync(join(f.root, source));
+  const certificate = join(f.root, 'research/r-step5-auditor-certifications.json');
+  certifyAuditorCreatedItems(f.root, 'r', 5);
+  const archive = recordOwnerSourceArchive(f.root, 'r', 5, f.id, source, '/root', 'Preserve actual escalation before genuine owner resolution');
+  assert.equal(archive.reused, false);
+  assert.deepEqual(readFileSync(archive.archive), originalSource);
+  assert.equal(recordOwnerSourceArchive(f.root, 'r', 5, f.id, source, '/root', 'Same historical source').reused, true);
+  writeFileSync(join(f.root, source), 'Genuine updated owner resolution');
+  assert.equal(loadAuditorCreatedCertifications(certificate).length, 1);
+  assert.equal(certifyAuditorCreatedItems(f.root, 'r', 5).items.length, 1);
+  assert.deepEqual(readFileSync(originPath), originalOrigin);
+  assert.throws(() => recordOwnerSourceArchive(f.root, 'r', 5, f.id, source, '/root', 'Too late'), /before archive/);
+  writeFileSync(f.path, item(f.id).replace('Immediate.', 'Changed current proof.'));
+  assert.throws(() => loadAuditorCreatedCertifications(certificate), /stale Step 5/);
+});
+
+test('archive command rejects changed, unbound, cross-run and non-Step-5 sources', t => {
+  const f = ownerCreationFixture(t);
+  recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence);
+  assert.throws(() => recordOwnerSourceArchive(f.root, 'other', 5, f.id, 'research/owner-source.md', '/root', 'Reason'));
+  assert.throws(() => recordOwnerSourceArchive(f.root, 'r', 7, f.id, 'research/owner-source.md', '/root', 'Reason'));
+  assert.throws(() => recordOwnerSourceArchive(f.root, 'r', 5, f.id, 'research/unbound.md', '/root', 'Reason'));
+  assert.throws(() => recordOwnerSourceArchive(f.root, 'r', 5, f.id, 'research/owner-source.md', '', 'Reason'));
+  writeFileSync(join(f.root, 'research/owner-source.md'), 'Already changed');
+  assert.throws(() => recordOwnerSourceArchive(f.root, 'r', 5, f.id, 'research/owner-source.md', '/root', 'Reason'), /stale owner creation source/);
+});
+
+test('archive bytes, receipt identity and immutable-origin binding fail closed on tamper', t => {
+  for (const mutate of [
+    (f: any, a: any) => writeFileSync(a.archive, 'Fabricated archive'),
+    (f: any, a: any) => { const row = JSON.parse(readFileSync(a.path, 'utf8')); row.run = 'other'; writeFileSync(a.path, JSON.stringify(row)); },
+    (f: any, a: any) => { const row = JSON.parse(readFileSync(a.path, 'utf8')); row.origin.sha256 = '0'.repeat(64); writeFileSync(a.path, JSON.stringify(row)); },
+    (f: any, a: any) => { const row = JSON.parse(readFileSync(a.path, 'utf8')); row.source.path = 'research/different-source.md'; writeFileSync(a.path, JSON.stringify(row)); },
+    (f: any, a: any) => { const row = JSON.parse(readFileSync(a.path, 'utf8')); row.archive.path = '../outside.md'; writeFileSync(a.path, JSON.stringify(row)); },
+    (f: any, a: any) => { const path = join(f.root, `research/r-step5-owner-creation-${f.id}.json`); const row = JSON.parse(readFileSync(path, 'utf8')); row.reason += ' changed'; writeFileSync(path, JSON.stringify(row)); },
+  ]) {
+    const f = ownerCreationFixture(t);
+    recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence);
+    certifyAuditorCreatedItems(f.root, 'r', 5);
+    const a = recordOwnerSourceArchive(f.root, 'r', 5, f.id, 'research/owner-source.md', '/root', 'Preserve original');
+    // Make files writable solely to model deliberate tampering with immutable artifacts.
+    chmodSync(a.archive, 0o600); chmodSync(a.path, 0o600);
+    mutate(f, a);
+    writeFileSync(join(f.root, 'research/owner-source.md'), 'Genuine updated resolution');
+    assert.throws(() => loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')));
+  }
+});
+
+test('owner creation can explicitly recertify a completed contract review before first stage certification', t => {
+  const f = ownerCreationFixture(t);
+  const contractPath = join(f.root, 'research/r-batch-1.proof-contracts.json');
+  const contracts = JSON.parse(readFileSync(contractPath, 'utf8'));
+  contracts.contracts[f.id] = { risk_review: { status: 'open' } };
+  writeFileSync(contractPath, JSON.stringify(contracts));
+  f.receipt.carriers.contract_sha256 = hashValue(contracts.contracts[f.id]);
+  f.receipt.carriers.step5_subject_sha256 = hashValue({ item_sha256: f.receipt.carriers.item_file_sha256,
+    manifest_sha256: f.receipt.carriers.manifest_sha256, contract_sha256: f.receipt.carriers.contract_sha256 });
+  f.write();
+  recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence);
+  const originPath = join(f.root, `research/r-step5-owner-creation-${f.id}.json`);
+  const immutableOrigin = readFileSync(originPath);
+  contracts.contracts[f.id].risk_review.status = 'complete';
+  writeFileSync(contractPath, JSON.stringify(contracts));
+  const evidence = 'research/owner-current-before-first-cert.md';
+  writeStep5Evidence(f.root, f.id, join(f.root, evidence));
+  const receipt = recordOwnerRecertification(f.root, 'r', 5, f.id, evidence, 'Owner personally checked the current proof and completed contract risk review');
+  const recorded = JSON.parse(readFileSync(receipt.path, 'utf8'));
+  assert.equal(recorded.author_result, undefined);
+  assert.equal(recorded.basis, undefined);
+  assert.equal(recorded.owner_creation.path, `research/r-step5-owner-creation-${f.id}.json`);
+  assert.equal(recordOwnerRecertification(f.root, 'r', 5, f.id, evidence, 'Same reviewed content').reused, true);
+  const certificate = certifyAuditorCreatedItems(f.root, 'r', 5);
+  assert.equal(certificate.items[0].author_result, undefined);
+  assert.equal(certificate.items[0].evidence_class, 'owner-spawned-creation');
+  assert.equal(certificate.items[0].owner_recertification.path, `research/${receipt.path.split('/').at(-1)}`);
+  assert.equal(loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')).length, 1);
+  assert.deepEqual(readFileSync(originPath), immutableOrigin);
+});
+
+test('pre-certificate owner recertification rejects missing origin, source tamper, wrong home and stale evidence', t => {
+  for (const mutate of [
+    (f: any) => rmSync(join(f.root, `research/r-step5-owner-creation-${f.id}.json`)),
+    (f: any) => writeFileSync(join(f.root, 'research/owner-source.md'), 'Altered source'),
+    (f: any) => { const p = join(f.root, `research/r-step5-owner-creation-${f.id}.json`); const origin = JSON.parse(readFileSync(p, 'utf8')); origin.baseline_sha256 = '0'.repeat(64); writeFileSync(p, JSON.stringify(origin)); },
+    (f: any) => { const p = join(f.root, 'research/r-batch-1.pages.json'); const pages = JSON.parse(readFileSync(p, 'utf8')); pages[0].id = 'different-home'; writeFileSync(p, JSON.stringify(pages)); },
+    (f: any) => { const p = join(f.root, 'research/r-batch-1.pages.json'); const pages = JSON.parse(readFileSync(p, 'utf8')); pages[0].items = pages[0].items.filter((row: any) => row.id !== f.id); writeFileSync(p, JSON.stringify(pages)); writeFileSync(join(f.root, 'research/r-batch-2.pages.json'), JSON.stringify([{ id: 'page-a', items: [{ id: f.id, deps: [] }] }])); },
+    (f: any) => writeFileSync(join(f.root, 'research/early-current.md'), `${f.id} r stale hashes`),
+  ]) {
+    const f = ownerCreationFixture(t);
+    recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence);
+    const evidence = 'research/early-current.md';
+    writeStep5Evidence(f.root, f.id, join(f.root, evidence));
+    mutate(f);
+    assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, evidence, 'Actual owner review'));
+  }
+});
+
+function currentProofManifestReviewFixture(t: any, { consumerId = 'lem-proof-consumer' } = {}) {
+  const f = currentDefinitionReviewFixture(t, { proofReview: true });
+  const supplier = 'lem-proof-supplier', consumer = consumerId;
+  writeFileSync(join(f.root, `items/${supplier}.md`), item(supplier));
+  writeFileSync(join(f.root, `items/${consumer}.md`), item(consumer).replace('justified_by: []', `justified_by: [${f.id}]`).replace('Immediate.', `Uses [[${f.id}|the exact supplier]].`));
+  writeFileSync(f.itemPath, readFileSync(f.itemPath, 'utf8').replace('deps: []', `deps: [${supplier}]`));
+  const pages = JSON.parse(readFileSync(f.manifestPath, 'utf8'));
+  pages[0].items.find((row: any) => row.id === f.id).deps = [supplier];
+  writeFileSync(f.manifestPath, JSON.stringify(pages));
+  const currentEntry = { ...pages[0].items.find((row: any) => row.id === f.id), __step6_page_id: 'page-a' };
+  const text = readFileSync(f.itemPath, 'utf8');
+  const current = { guard_sha256: itemHashGuard(text), judge_sha256: itemHashJudge(text), item_file_sha256: sha(text),
+    manifest_sha256: hashValue(currentEntry), contract_sha256: hashValue(JSON.parse(readFileSync(f.contractPath, 'utf8')).contracts[f.id]), step5_subject_sha256: '' };
+  current.step5_subject_sha256 = hashValue({ item_sha256: current.item_file_sha256, manifest_sha256: current.manifest_sha256, contract_sha256: current.contract_sha256 });
+  f.payload.repair_kind = 'current-proof-manifest-review';
+  f.payload.current_carriers = current; f.payload.current_manifest_entry = currentEntry;
+  f.payload.current_manifest_sha256 = current.manifest_sha256;
+  f.payload.owner_authorization.owner_identity = '/root';
+  f.payload.review = { current_item_and_contract_checked: true, current_manifest_matches_item: true,
+    no_unresolved_defect: true, current_proof_suppliers_and_direct_consumers_checked: true,
+    current_proof_checked: true, current_suppliers_checked: true, current_direct_consumers_checked: true,
+    suppliers: [supplier], direct_consumers: [consumer], context_items: [consumer, supplier].sort().map(id => ({ id,
+      guard_sha256: itemHashGuard(readFileSync(join(f.root, `items/${id}.md`), 'utf8')) })) };
+  f.payload.proof_checks = {};
+  for (const kind of ['precheck', 'rendercheck', 'strict-contract']) {
+    const argv = kind === 'precheck' ? ['node', 'tools/tsx-run.mjs', 'tools/precheck.mts', `items/${f.id}.md`]
+      : kind === 'rendercheck' ? ['node', 'tools/rendercheck.mjs', `items/${f.id}.md`]
+      : ['node', 'tools/proof-contract.mjs', 'research/r-batch-1.proof-contracts.json', '--strict', '--items', f.id];
+    const bytes = JSON.stringify({ version: 1, run: 'r', step: 5, id: f.id, kind, observed_at: new Date().toISOString(),
+      exit_code: 0, argv, current_carriers: current });
+    const path = `research/current-proof-${kind}-check.json`;
+    writeFileSync(join(f.root, path), bytes); f.payload.proof_checks[kind] = { path, sha256: sha(bytes) };
+  }
+  f.write();
+  return f;
+}
+
+test('generic current proof/manifest review preserves Stage3 origin and unknown historical delta', t => {
+  const f = currentProofManifestReviewFixture(t);
+  const result = recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence, 'Root personally reviewed current proof, actual suppliers and every direct consumer');
+  const receipt = JSON.parse(readFileSync(result.path, 'utf8'));
+  assert.equal(receipt.basis, 'initial-step5-current-proof-manifest-review');
+  assert.equal(receipt.historical_delta_unknown, true);
+  assert.equal(receipt.author_result, 'alpha-5a-a.result.json');
+  const certified = certifyAuditorCreatedItems(f.root, 'r', 5);
+  assert.equal(certified.items[0].origin_step, 3);
+  assert.equal(loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')).length, 1);
+  writeFileSync(join(f.root, 'items/lem-proof-supplier.md'), item('lem-proof-supplier') + '\nChanged supplier claim.\n');
+  assert.throws(() => loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')), /invalid owner recertification/);
+});
+
+test('generic current proof review rejects absent authority/provenance, wrong homes, omitted context, source and check tamper', t => {
+  for (const mutate of [
+    (f: any) => { f.payload.owner_authorization.owner = false; },
+    (f: any) => { f.payload.owner_authorization.owner_identity = '/root/invented'; },
+    (f: any) => { f.payload.historical_delta_unknown = false; },
+    (f: any) => { f.payload.baseline_manifest_entry = f.baselineManifestEntry; },
+    (f: any) => { f.payload.batch = '2'; },
+    (f: any) => { f.payload.page = 'wrong-home'; },
+    (f: any) => { f.payload.current_carriers.guard_sha256 = '0'.repeat(64); },
+    (f: any) => { f.payload.current_carriers.judge_sha256 = '0'.repeat(64); },
+    (f: any) => { f.payload.review.current_proof_checked = false; },
+    (f: any) => { f.payload.review.current_suppliers_checked = false; },
+    (f: any) => { f.payload.review.current_direct_consumers_checked = false; },
+    (f: any) => { f.payload.review.suppliers = []; },
+    (f: any) => { f.payload.review.direct_consumers = []; },
+    (f: any) => { f.payload.review.context_items.pop(); },
+    (f: any) => { f.payload.sources[0].sha256 = '0'.repeat(64); },
+    (f: any) => { delete f.payload.proof_checks.precheck; },
+    (f: any) => { f.payload.proof_checks.rendercheck.sha256 = '0'.repeat(64); },
+    (f: any) => { const path = join(f.root, f.payload.proof_checks['strict-contract'].path); const check = JSON.parse(readFileSync(path, 'utf8')); check.exit_code = 1; const bytes = JSON.stringify(check); writeFileSync(path, bytes); f.payload.proof_checks['strict-contract'].sha256 = sha(bytes); },
+    (f: any) => { writeFileSync(join(f.root, 'items/lem-unlisted-consumer.md'), item('lem-unlisted-consumer').replace('justified_by: []', `justified_by: [${f.id}]`)); },
+    (f: any) => { rmSync(join(f.root, 'research/r-step3-auditor-certifications.json')); },
+    (f: any) => { const path = join(f.root, 'research/r-step5-auditor-baseline.json'); const baseline = JSON.parse(readFileSync(path, 'utf8')); baseline.item_carriers[f.id].page = 'wrong'; writeFileSync(path, JSON.stringify(baseline)); },
+    (f: any) => { rmSync(join(f.root, 'research/r-dispatch/alpha-5a-a.result.json')); },
+  ]) {
+    const f = currentProofManifestReviewFixture(t); mutate(f); f.write();
+    assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence, 'Insufficient evidence cannot create a bootstrap'));
+  }
+});
+
+function unchangedProofManifestFixture(t: any) {
+  const f = currentProofManifestReviewFixture(t);
+  const path = join(f.root, 'research/r-step5-auditor-baseline.json');
+  const baseline = JSON.parse(readFileSync(path, 'utf8'));
+  // This fixture's Step5 boundary already contains the exact current item;
+  // only its manifest/contract projection changes after that boundary.
+  for (const key of ['guard_sha256', 'judge_sha256', 'item_file_sha256'])
+    baseline.item_carriers[f.id][key] = f.payload.current_carriers[key];
+  baseline.item_carriers[f.id].step5_subject_sha256 = hashValue({ item_sha256: baseline.item_carriers[f.id].item_file_sha256,
+    manifest_sha256: baseline.item_carriers[f.id].manifest_sha256, contract_sha256: baseline.item_carriers[f.id].contract_sha256 });
+  writeFileSync(path, JSON.stringify(baseline));
+  f.payload.current_item_unchanged = true; f.write();
+  return f;
+}
+
+test('explicit full owner proof review can certify changed manifest carriers without an artificial source edit', t => {
+  const f = unchangedProofManifestFixture(t), before = readFileSync(f.itemPath);
+  const result = recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence, 'Owner reviewed exact unchanged item and current manifest maintenance');
+  const receipt = JSON.parse(readFileSync(result.path, 'utf8'));
+  assert.equal(receipt.basis, 'initial-step5-current-proof-manifest-review');
+  assert.equal(receipt.current_item_unchanged, true);
+  assert.equal(receipt.historical_delta_unknown, true);
+  assert.equal(certifyAuditorCreatedItems(f.root, 'r', 5).items[0].origin_step, 3);
+  assert.equal(loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')).length, 1);
+  assert.deepEqual(readFileSync(f.itemPath), before);
+  receipt.current_item_unchanged = false; writeFileSync(result.path, JSON.stringify(receipt));
+  assert.throws(() => loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')), /invalid owner recertification/);
+});
+
+test('unchanged-item manifest review refuses absent delta, authority, origin, source/check hashes and context', t => {
+  for (const mutate of [
+    (f: any) => { delete f.payload.current_item_unchanged; },
+    (f: any) => { f.payload.owner_authorization.owner = false; },
+    (f: any) => { f.payload.current_manifest_entry.kind = 'definition'; },
+    (f: any) => { f.payload.current_carriers.item_file_sha256 = '0'.repeat(64); },
+    (f: any) => { f.payload.review.current_proof_checked = false; },
+    (f: any) => { f.payload.review.context_items.pop(); },
+    (f: any) => { f.payload.sources[0].sha256 = '0'.repeat(64); },
+    (f: any) => { f.payload.proof_checks.precheck.sha256 = '0'.repeat(64); },
+    (f: any) => { rmSync(join(f.root, 'research/r-step3-auditor-certifications.json')); },
+    (f: any) => { rmSync(join(f.root, 'research/r-dispatch/alpha-5a-a.result.json')); },
+    (f: any) => { const p = join(f.root, 'research/r-step5-auditor-baseline.json'); const b = JSON.parse(readFileSync(p, 'utf8')); b.item_carriers[f.id] = { page: 'page-a', batch: '1', ...f.payload.current_carriers }; writeFileSync(p, JSON.stringify(b)); f.payload.baseline_manifest_sha256 = f.payload.current_manifest_sha256; },
+  ]) {
+    const f = unchangedProofManifestFixture(t); mutate(f); f.write();
+    assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence, 'An unchanged item needs exact full evidence and a real carrier delta'));
+  }
+});
+
+
+function historicalProofContextFixture(t: any, { contextId = 'lem-proof-consumer' } = {}) {
+  const f = currentProofManifestReviewFixture(t, { consumerId: contextId });
+  recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+    'Root personally checked the original current proof context');
+  certifyAuditorCreatedItems(f.root, 'r', 5);
+  const certPath = 'research/r-step5-auditor-certifications.json';
+  const source = 'research/actual-before-consumer.md';
+  copyFileSync(join(f.root, `items/${contextId}.md`), join(f.root, source));
+  writeFileSync(join(f.root, `items/${contextId}.md`),
+    readFileSync(join(f.root, `items/${contextId}.md`), 'utf8') + '\nAn actual later consumer edit.\n');
+  return { ...f, certPath, contextId, source };
+}
+
+test('exact historical context archive preserves old proof receipt, never current validation', t => {
+  const f = historicalProofContextFixture(t);
+  const certBefore = readFileSync(join(f.root, f.certPath), 'utf8');
+  const evidenceBefore = readFileSync(f.evidence, 'utf8');
+  assert.throws(() => loadAuditorCreatedCertifications(join(f.root, f.certPath)));
+  const result = recordOwnerContextArchive(f.root, 'r', 5, f.id, f.certPath,
+    f.contextId, f.source, '/root', 'Preserve actual retained bytes of the originally reviewed consumer');
+  assert.match(result.path, /r-step5-owner-context-archive-lem-created-[a-f0-9]{64}-lem-proof-consumer\.json$/);
+  assert.equal(result.reused, false);
+  assert.equal(loadAuditorCreatedCertifications(join(f.root, f.certPath)).length, 1);
+  assert.equal(readFileSync(join(f.root, f.certPath), 'utf8'), certBefore);
+  assert.equal(readFileSync(f.evidence, 'utf8'), evidenceBefore);
+  assert.equal(recordOwnerContextArchive(f.root, 'r', 5, f.id, f.certPath,
+    f.contextId, f.source, '/root', 'Same actual archive').reused, true);
+  assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+    'Current acceptance must still reject obsolete context guards'));
+});
+
+test('long historical context identities fit NAME_MAX without weakening full identity or hash bindings', t => {
+  const f = historicalProofContextFixture(t, { contextId: `lem-proof-consumer-${'c'.repeat(160)}` });
+  const before = readFileSync(join(f.root, f.certPath));
+  const result = recordOwnerContextArchive(f.root, 'r', 5, f.id, f.certPath,
+    f.contextId, f.source, '/root', 'Preserve exact original bytes with a long context ID');
+  const archive = JSON.parse(readFileSync(result.path, 'utf8'));
+  assert.match(result.path, /r-step5-owner-context-archive-[a-f0-9]{64}\.json$/);
+  for (const path of [result.path, archive.context.path, archive.certification.path])
+    assert.ok(Buffer.byteLength(path.split('/').at(-1)!) <= 255);
+  assert.equal(archive.id, f.id);
+  assert.equal(archive.context.id, f.contextId);
+  assert.equal(loadAuditorCreatedCertifications(join(f.root, f.certPath)).length, 1);
+  assert.deepEqual(readFileSync(join(f.root, f.certPath)), before);
+  assert.equal(recordOwnerContextArchive(f.root, 'r', 5, f.id, f.certPath,
+    f.contextId, f.source, '/root', 'Reuse exact archive').reused, true);
+  assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, f.evidence,
+    'Historical archive cannot certify current changed context'));
+  chmodSync(result.path, 0o644);
+  archive.context.id = `${f.contextId}-wrong`;
+  writeFileSync(result.path, JSON.stringify(archive));
+  assert.throws(() => loadAuditorCreatedCertifications(join(f.root, f.certPath)), /Invalid historical context archive/);
+});
+
+test('historical context archive refuses false authority, wrong identity, guard and outside sources', t => {
+  for (const mutate of [
+    (f: any) => { f.owner = '/root/other'; },
+    (f: any) => { f.contextId = 'lem-unreviewed'; },
+    (f: any) => { writeFileSync(join(f.root, f.source), item('lem-wrong-id')); },
+    (f: any) => { writeFileSync(join(f.root, f.source), item(f.contextId)); },
+    (f: any) => { f.source = `items/${f.contextId}.md`; },
+    (f: any) => { const outside = join(f.root, `items/${f.contextId}.md`); const link = 'research/escaping-before.md'; symlinkSync(outside, join(f.root, link)); f.source = link; },
+    (f: any) => { const cert = JSON.parse(readFileSync(join(f.root, f.certPath), 'utf8')); cert.run = 'other'; writeFileSync(join(f.root, f.certPath), JSON.stringify(cert)); },
+    (f: any) => { const cert = JSON.parse(readFileSync(join(f.root, f.certPath), 'utf8')); cert.items[0].owner_recertification.sha256 = '0'.repeat(64); writeFileSync(join(f.root, f.certPath), JSON.stringify(cert)); },
+    (f: any) => { const cert = JSON.parse(readFileSync(join(f.root, f.certPath), 'utf8')); cert.items[0].contract_sha256 = '0'.repeat(64); writeFileSync(join(f.root, f.certPath), JSON.stringify(cert)); },
+    (f: any) => { writeFileSync(f.evidence, readFileSync(f.evidence, 'utf8') + '\nTampered original evidence.\n'); },
+  ]) {
+    const f: any = historicalProofContextFixture(t); f.owner = '/root'; mutate(f);
+    assert.throws(() => recordOwnerContextArchive(f.root, 'r', 5, f.id, f.certPath,
+      f.contextId, f.source, f.owner, 'Actual archive attempt'));
+  }
+});
+
+test('historical context bindings fail closed on archive, certificate, evidence or receipt tamper', t => {
+  for (const mutate of [
+    (f: any, archive: any) => writeFileSync(join(f.root, archive.context.path), 'corrupt archived item'),
+    (f: any, archive: any) => writeFileSync(join(f.root, archive.certification.path), '{}'),
+    (f: any, archive: any) => writeFileSync(join(f.root, archive.owner_recertification.path), '{}'),
+    (f: any, archive: any) => writeFileSync(join(f.root, archive.evidence.path), 'corrupt original evidence'),
+    (_f: any, archive: any) => { archive.id = 'lem-other-subject'; },
+    (_f: any, archive: any) => { archive.context.id = 'lem-other-context'; },
+    (_f: any, archive: any) => { archive.context.guard_sha256 = '0'.repeat(64); },
+    (_f: any, archive: any) => { archive.evidence.sha256 = '0'.repeat(64); },
+    (_f: any, archive: any) => { archive.owner_recertification.sha256 = '0'.repeat(64); },
+  ]) {
+    const f = historicalProofContextFixture(t);
+    const result = recordOwnerContextArchive(f.root, 'r', 5, f.id, f.certPath,
+      f.contextId, f.source, '/root', 'Preserve exact old review context');
+    const archive = JSON.parse(readFileSync(result.path, 'utf8'));
+    for (const path of [result.path, ...[archive.context, archive.certification, archive.owner_recertification, archive.evidence].map(link => join(f.root, link.path))]) chmodSync(path, 0o644);
+    mutate(f, archive); writeFileSync(result.path, JSON.stringify(archive));
+    assert.throws(() => loadAuditorCreatedCertifications(join(f.root, f.certPath)));
+    assert.throws(() => recordOwnerContextArchive(f.root, 'r', 5, f.id, f.certPath,
+      f.contextId, f.source, '/root', 'Do not bless a corrupt existing archive'));
+  }
 });
