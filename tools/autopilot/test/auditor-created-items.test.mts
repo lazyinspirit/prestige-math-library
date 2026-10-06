@@ -1619,3 +1619,52 @@ test('archive bytes, receipt identity and immutable-origin binding fail closed o
     assert.throws(() => loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')));
   }
 });
+
+test('owner creation can explicitly recertify a completed contract review before first stage certification', t => {
+  const f = ownerCreationFixture(t);
+  const contractPath = join(f.root, 'research/r-batch-1.proof-contracts.json');
+  const contracts = JSON.parse(readFileSync(contractPath, 'utf8'));
+  contracts.contracts[f.id] = { risk_review: { status: 'open' } };
+  writeFileSync(contractPath, JSON.stringify(contracts));
+  f.receipt.carriers.contract_sha256 = hashValue(contracts.contracts[f.id]);
+  f.receipt.carriers.step5_subject_sha256 = hashValue({ item_sha256: f.receipt.carriers.item_file_sha256,
+    manifest_sha256: f.receipt.carriers.manifest_sha256, contract_sha256: f.receipt.carriers.contract_sha256 });
+  f.write();
+  recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence);
+  const originPath = join(f.root, `research/r-step5-owner-creation-${f.id}.json`);
+  const immutableOrigin = readFileSync(originPath);
+  contracts.contracts[f.id].risk_review.status = 'complete';
+  writeFileSync(contractPath, JSON.stringify(contracts));
+  const evidence = 'research/owner-current-before-first-cert.md';
+  writeStep5Evidence(f.root, f.id, join(f.root, evidence));
+  const receipt = recordOwnerRecertification(f.root, 'r', 5, f.id, evidence, 'Owner personally checked the current proof and completed contract risk review');
+  const recorded = JSON.parse(readFileSync(receipt.path, 'utf8'));
+  assert.equal(recorded.author_result, undefined);
+  assert.equal(recorded.basis, undefined);
+  assert.equal(recorded.owner_creation.path, `research/r-step5-owner-creation-${f.id}.json`);
+  assert.equal(recordOwnerRecertification(f.root, 'r', 5, f.id, evidence, 'Same reviewed content').reused, true);
+  const certificate = certifyAuditorCreatedItems(f.root, 'r', 5);
+  assert.equal(certificate.items[0].author_result, undefined);
+  assert.equal(certificate.items[0].evidence_class, 'owner-spawned-creation');
+  assert.equal(certificate.items[0].owner_recertification.path, `research/${receipt.path.split('/').at(-1)}`);
+  assert.equal(loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')).length, 1);
+  assert.deepEqual(readFileSync(originPath), immutableOrigin);
+});
+
+test('pre-certificate owner recertification rejects missing origin, source tamper, wrong home and stale evidence', t => {
+  for (const mutate of [
+    (f: any) => rmSync(join(f.root, `research/r-step5-owner-creation-${f.id}.json`)),
+    (f: any) => writeFileSync(join(f.root, 'research/owner-source.md'), 'Altered source'),
+    (f: any) => { const p = join(f.root, `research/r-step5-owner-creation-${f.id}.json`); const origin = JSON.parse(readFileSync(p, 'utf8')); origin.baseline_sha256 = '0'.repeat(64); writeFileSync(p, JSON.stringify(origin)); },
+    (f: any) => { const p = join(f.root, 'research/r-batch-1.pages.json'); const pages = JSON.parse(readFileSync(p, 'utf8')); pages[0].id = 'different-home'; writeFileSync(p, JSON.stringify(pages)); },
+    (f: any) => { const p = join(f.root, 'research/r-batch-1.pages.json'); const pages = JSON.parse(readFileSync(p, 'utf8')); pages[0].items = pages[0].items.filter((row: any) => row.id !== f.id); writeFileSync(p, JSON.stringify(pages)); writeFileSync(join(f.root, 'research/r-batch-2.pages.json'), JSON.stringify([{ id: 'page-a', items: [{ id: f.id, deps: [] }] }])); },
+    (f: any) => writeFileSync(join(f.root, 'research/early-current.md'), `${f.id} r stale hashes`),
+  ]) {
+    const f = ownerCreationFixture(t);
+    recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence);
+    const evidence = 'research/early-current.md';
+    writeStep5Evidence(f.root, f.id, join(f.root, evidence));
+    mutate(f);
+    assert.throws(() => recordOwnerRecertification(f.root, 'r', 5, f.id, evidence, 'Actual owner review'));
+  }
+});

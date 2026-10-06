@@ -682,11 +682,16 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
   const priorPath = auditorCreatedCertificationsPath(root, run, step);
   const prior = existsSync(priorPath)
     ? provenanceRows(root, run, step).find(value => value.id === id) : null;
-  const bootstrap = !prior
+  // A valid immutable owner origin exists independently of the first whole-stage
+  // certificate. Explicit current-carrier recertification can precede that gate.
+  const creation = prior?.owner_creation ? ownerCreation(root, run, id, prior.owner_creation)
+    : step === 5 && !prior ? ownerCreation(root, run, id) : null;
+  if (creation && (row.page !== creation.receipt.page || row.batch !== String(creation.receipt.batch)))
+    throw Error(`${id}: owner creation home and batch cannot be changed by recertification`);
+  const bootstrap = !prior && !creation
     ? step === 5 ? bootstrapStep5Author(root, run, id, row, hashes, evidenceText)
       : step === 7 ? bootstrapStep7Author(root, run, id, row, hashes) : null
     : null;
-  const creation = prior?.owner_creation ? ownerCreation(root, run, id, prior.owner_creation) : null;
   const authorResult = prior?.author_result ?? bootstrap?.result_file;
   if (!authorResult && !creation) throw Error(`${id}: no prior auditor-created certification to recertify or eligible Step ${step} owner bootstrap`);
   if (!evidenceText.includes(id))

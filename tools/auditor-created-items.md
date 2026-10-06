@@ -87,11 +87,25 @@ JSON null when absent. The subject hash uses the sorted object with
 `item_sha256` (raw item hash), `manifest_sha256`, and `contract_sha256`.
 Baseline digest uses `JSON.stringify` of the parsed baseline, without sorting.
 
-After certification, changed carriers require the existing explicit
-`owner-recertify` command and a research report naming the run, item, and exact
+After `owner-create`, changed carriers require the existing explicit
+`owner-recertify` command, including changes before the first whole-stage
+certification, and a research report naming the run, item, and exact
 current raw item, manifest and contract hashes. That receipt links the immutable
 owner creation origin instead of inventing a native author result. Until it is
-recorded and certification refreshed, currency checks fail. A later native
+recorded and certification refreshed, currency checks fail.
+
+A valid immutable owner creation origin is sufficient for this explicit
+recertification even when no prior whole-stage certificate exists. For example,
+a genuine owner-created prerequisite may initially have an open contract risk
+review. After the owner personally adjudicates its proof and marks the actual
+review complete, the changed contract hash requires a current research report
+and `owner-recertify` before the first `certify`. The command validates the
+original creation and all source provenance, binds every current carrier, and
+preserves the original home and batch. Its receipt contains `owner_creation`
+and no native `author_result` or native-bootstrap basis. Missing or tampered
+origins, changed source evidence without a valid archive, a different home or
+batch, and stale current reports fail closed. This does not waive the initial
+mathematical review or certify the whole stage automatically. A later native
 Step-7/8 promotion still requires its genuine dispatch and item-specific stage
 delta; its `origin_step: 5` recursively validates this original owner evidence.
 Every downstream scope, coverage, guard and judge-stamp consumer uses the
