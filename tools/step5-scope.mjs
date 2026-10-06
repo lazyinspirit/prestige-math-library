@@ -975,7 +975,7 @@ if (command === 'check') {
       error('scope-removal', `[${id}] post-reader item removed without a valid owner representation migration`);
     }
     for (const id of manifests[batch] ?? []) if (!currentPostIds.includes(id)
-      && !/^(def|lem)-/.test(id)) error('scope-addition', `[${id}] unsupported post-reader item addition`);
+      && !/^(def|lem)-/.test(id) && !ownerContextAddition(id, batch)) error('scope-addition', `[${id}] unsupported post-reader item addition`);
     for (const message of hashSnapshotErrors(pre, batch, 'pre')) error('hash-invalid', `batch ${batch} pre ${message}`);
     for (const message of hashSnapshotErrors(post, batch, 'post')) error('hash-invalid', `batch ${batch} post ${message}`);
     if (scope.version !== 2) error('scope-identity', `batch ${batch} has unsupported scope version ${scope.version}`);

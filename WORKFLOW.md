@@ -317,6 +317,11 @@ old result without surviving immutable native origin evidence.
 
 ## Step 5 owner context additions
 
+The active version-2 reader route and the historical version-3 direct route
+apply the same current certified owner-Remark exception. A post-reader Remark
+without that exact creation provenance and explicit not-supplied proof status
+remains an unsupported addition.
+
 The ordinary local-addition guard remains limited to Definitions and Lemmas. An
 owner-created Remark may also retain an explicitly unproved claim when its
 current Step-5 certificate validates the supported owner-spawned creation origin,
