@@ -96,7 +96,10 @@ function acquireAppendLock(timeoutMs = 30_000) {
 
 const STAGES = ['1-scaffold', '2-assign', '3a-scope', '3-baseline', '3b-author', '4-splice', '4-baseline',
   '5a-prepare', '5a-adjudicate', '5a-baseline', '5b-edges', '5b-cross', '5b-close', '6-judge', '7-baseline',
-  '7-adjudicate', '7-rejudge', '8-scope', '8-receipt', '9-report',
+  '7-adjudicate', '7-rejudge',
+  // Exact native frontier-owner stage; recorded detection time is not an alias
+  // for adjudication and does not grant dispatch or mathematical coverage.
+  '7.2-impact', '8-scope', '8-receipt', '9-report',
   'A0', 'A1', 'A2', 'A3', 'A4', 'A6', 'A7', 'A8', 'A9', 'A10',
   'owner', 'escaped-to-publication', 'post-publication', 'unknown',
   // Historical rows keep their original stage identity; these are not active
@@ -141,6 +144,9 @@ const ENUMS = {
   // Keep one role value per registered GPT judge lane so dispositions remain
   // valid when the active GPT lineup changes.
   caught_by_role: ['beta', 'reader', 'refuter', 'judge-terra', 'judge-sol', 'judge-gpt54',
+    // Recorded label for the native alpha-repair frontier-owner lane.
+    // Admit this exact spelling; every row still passes the full closed schema.
+    'frontier-owner-alpha-repair',
     'group-alpha', 'lead-alpha', 'final-adjudicator', 'orchestrator', 'owner', 'gate', 'detector', 'unknown'],
   disposition: ['fixed', 'narrowed', 'deferred', 'dropped', 'open', 'false-positive', 'nonfatal-recorded'],
 };

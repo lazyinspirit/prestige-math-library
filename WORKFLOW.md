@@ -128,6 +128,10 @@
   their original subclass and location labels as historical taxonomy; every
   other field check and backward same-run/subject supersedes linkage remain
   required for the selected run. New appends always require current canonical labels.
+  The closed ledger schema includes the exact native `7.2-impact` stage and
+  `frontier-owner-alpha-repair`, the recorded label for its `alpha-repair`
+  frontier owner lane. These labels preserve detection provenance; they grant
+  no dispatch coverage or mathematical acceptance.
   A prior repair captured after correction, or one physical defect reported
   against distinct carriers, requires explicit owner evidence binding the exact
   obligations, ledger row, current raw bytes and native report hashes. A prior
