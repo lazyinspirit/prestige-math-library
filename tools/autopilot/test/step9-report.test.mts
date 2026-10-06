@@ -25,6 +25,7 @@ function fixture() {
   mkdirSync(join(root, 'library', 'analysis'), { recursive: true });
   writeFileSync(join(root, 'tools', 'pathway-closure.mjs'), 'console.log("fixture pathway closed");\n');
   writeFileSync(join(root, 'research', 'demo-scope-ledger.json'), JSON.stringify({ pages: [{ id: 'page-a', kind: 'A', batch: '1' }] }));
+  writeFileSync(join(root, 'research', 'demo-batch-1.pages.json'), JSON.stringify([{ id: 'page-a', items: ['thm-a'] }]));
   writeFileSync(join(root, 'research', 'demo-deferred-pairs.json'), JSON.stringify({ run: 'demo', deferred: [
     { page: 'future-pair', companion: 'future-pair-examples', reason: 'Its required supplier page is unbuilt.' },
   ] }));

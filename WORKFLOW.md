@@ -88,8 +88,11 @@ future stages defer selection until execution and write no run state.
 - Step 9 readiness ends with `proof-step-separation` and `proof-blue-tags`.
   They share one deterministic renderer pass and write
   `research/RUN-proof-layout.json`. Scope includes every item on the run's A/B
-  pages, shared published items, and additional items changed since the first
-  run touch snapshot. Introductions and notes after the final tagged QED remain
+  pages and shared published items, selected from the current batch manifests
+  and checked against the current page inventories. Historical touch snapshots
+  and unrelated corpus changes do not add validator subjects. A legacy manifest
+  alias resolves only to one real current page-owned item; missing subjects,
+  ambiguous ownership and manifest/page disagreements fail closed. Introductions and notes after the final tagged QED remain
   prose; each numbered step must form one row with valid trailing blue tags.
   Failure is an owner hold, with file, section, step, source line and reason.
   Repair on stable content, refresh invalidated evidence, then retry readiness.
