@@ -315,6 +315,17 @@ old result without surviving immutable native origin evidence.
   receipts record both profiles. Remove it after recovery. Restart the controller for
   configuration or imported registry changes; stage module changes hot-reload.
 
+## Step 5 owner context additions
+
+The ordinary local-addition guard remains limited to Definitions and Lemmas. An
+owner-created Remark may also retain an explicitly unproved claim when its
+current Step-5 certificate validates the supported owner-spawned creation origin,
+its exact batch and carriers, and its item declares `proved_here: false` and
+`provenance.proof: not-supplied`. This is source context, not a new proved
+theorem. Native certification, missing creation evidence, supplied proofs and
+other item kinds do not qualify. Ordinary routing and prerequisite checks still
+apply; this exception does not change immutable reader scope or findings.
+
 ## Step 5b impact windows
 
 The lead task and engine gates use `--direct-boundary` for both impact windows:

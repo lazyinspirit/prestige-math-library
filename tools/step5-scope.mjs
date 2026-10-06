@@ -24,6 +24,7 @@ import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { loadOwnerIdMigrations } from './step5-owner-id-migrations.mjs';
 import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
 import { loadOwnerHistoricalRoutes } from './step5-owner-historical-routes.mjs';
+import { isCertifiedOwnerContextAddition } from './step5-owner-context-addition.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -250,6 +251,16 @@ function currentAuditorCertification(target) {
   // The shared reader already checked the exact current carriers, excluding
   // only the mechanical judge stamp. Do not reintroduce a raw-byte comparison.
   return row ?? null;
+}
+
+function ownerContextAddition(id, batch) {
+  if (!/^rem-/.test(id)) return false;
+  const itemPath = R('items', id + '.md');
+  if (!existsSync(itemPath)) return false;
+  const item = yaml().parse(split(readFileSync(itemPath, 'utf8')).fm);
+  if (item?.kind !== 'remark' || item.proved_here !== false || item.provenance?.proof !== 'not-supplied') return false;
+  const certificates = loadAuditorCreatedCertifications(auditorCertificationsPath, { root: ROOT, run, steps: [5] });
+  return isCertifiedOwnerContextAddition({ id, batch, run, item, certificates });
 }
 
 function hashSnapshotErrors(doc, batch, label) {
@@ -949,7 +960,7 @@ if (command === 'check') {
       if (phase !== 'final') {
         for (const id of scope.items ?? []) if (!(manifests[batch] ?? []).includes(id)) error('scope-removal', `[${id}] authored item removed before 5b`);
         if (!sameSet(scope.pages ?? [], (pages[batch] ?? []).map((p) => p.id))) error('scope-page-change', `batch ${batch} changed its page scope`);
-        for (const id of manifests[batch] ?? []) if (!(scope.items ?? []).includes(id) && !/^(def|lem)-/.test(id)) error('scope-addition', `[${id}] only local definitions and lemmas may be added at 5a`);
+        for (const id of manifests[batch] ?? []) if (!(scope.items ?? []).includes(id) && !/^(def|lem)-/.test(id) && !ownerContextAddition(id, batch)) error('scope-addition', `[${id}] only local definitions and lemmas may be added at 5a`);
       }
       continue;
     }
