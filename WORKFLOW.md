@@ -451,6 +451,16 @@ producer defect stays separate; helper creation never licenses relabelling a
 finding or manufacturing a defect row. Existing touched-consumer causal addition
 behavior is unchanged.
 
+When one closed row has three or more owners, the gate retains every independently
+validated decision as a possible anchor. It verifies the existing strict sharing
+rules for each pair in either iteration order and requires the entire family to
+be connected by valid pairs. Thus a reader, two refuters and a stabilized owner
+amendment may share one genuine defect without requiring every finding to name
+the first decision. Every claim still needs its real native scope/source binding,
+current carrier, severity/disposition and applicable exact ledger references.
+A matching item ID or producer preimage alone does not create a same-defect link;
+explicit evidence and compatible typed source classes remain required.
+
 The same rule admits a property-typed `page:BATCH:ID` accepted/amended repair
 with confidence one and an actual same-batch refuter finding. The page must be
 in the scope's changed-page and post-page inventories and the immutable

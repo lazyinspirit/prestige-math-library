@@ -1092,6 +1092,7 @@ if (command === 'check') {
     const mine = activeRows.filter((row) => row.run === run);
     const earlyRows = mine.filter((row) => ['5a-adjudicate'].includes(row.caught_at_stage));
     const referenced = new Map();
+    const stabilizedChecks = [];
     const liveByBatch = new Map();
     const contractsByBatch = new Map();
     const ownableSubjects = new Set();
@@ -1152,6 +1153,7 @@ if (command === 'check') {
       const seen = new Set(), recognizedStabilizedShares = new Set(), pendingStabilizedAmendments = [];
       const expected = new Map(owed.map((row) => [row.obligation, row]));
       for (const decision of doc.decisions) {
+        const decisionErrorStart = errors.length, candidateSharing = [];
         if (!decision?.obligation || seen.has(decision.obligation)) {
           error('decision-duplicate', `group ${group.label} repeats or omits an obligation id`); continue;
         }
@@ -1206,7 +1208,7 @@ if (command === 'check') {
         }
         const decisionRows = [];
         for (const defectId of decision.defect_ids) {
-          const prior = referenced.get(defectId);
+          const compatible = (prior) => {
           const sameLocation = (left, right) => String(left ?? '').trim().toLowerCase() === String(right ?? '').trim().toLowerCase();
           const sameObservedCarrier = /^[a-f0-9]{64}$/.test(prior?.target?.observed_sha256 ?? '')
             && prior.target.observed_sha256 === target?.observed_sha256;
@@ -1216,6 +1218,7 @@ if (command === 'check') {
             && ['reader', 'flagged'].includes(prior.route)
             && ['reader', 'flagged'].includes(decision.route)
             && prior.verdict === decision.verdict
+            && prior.target?.subject_type === target?.subject_type
             && prior.target?.defect === target?.defect
             && ((prior.target?.severity === target?.severity
               && sameLocation(prior.target?.location, target?.location))
@@ -1430,13 +1433,15 @@ if (command === 'check') {
               && (originalDecision.verdict === 'confirmed_fatal' ? row.severity === 'fatal' : row.severity !== 'fatal');
           }
           if (sharedStabilizedRepair) recognizedStabilizedShares.add(stabilizedRepair.obligation);
-          if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair && !sharedPostReaderRepair && !sharedReclassifiedFinding && !sharedStabilizedRepair && !sharedFindingCausalAddition) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
-          if (!prior) referenced.set(defectId, {
+          return Boolean(sharedFinding || sharedCausalAddition || sharedProducerRepair || sharedPostReaderRepair
+            || sharedReclassifiedFinding || sharedStabilizedRepair || sharedFindingCausalAddition);
+          };
+          candidateSharing.push({ defectId, compatible, anchor: {
             obligation: decision.obligation, id: decision.id, route: decision.route, verdict: decision.verdict, target,
             same_defect_as: decision.same_defect_as, same_defect_evidence: decision.same_defect_evidence,
             repair_confidence: decision.repair_confidence, causal_subject: decision.causal_subject,
             decision_path: `research/${run}-alpha-${group.label}-5a-decisions.json`,
-          });
+          } });
           const row = mine.find((candidate) => candidate.defect_id === defectId);
           if (!row) { error('ledger-ref-missing', `[${decision.id}] ${decision.obligation} names absent ${defectId}`); continue; }
           decisionRows.push(row);
@@ -1523,15 +1528,42 @@ if (command === 'check') {
             }
           }
         }
+        // Only independently valid decisions can anchor a sharing family.
+        // Pair compatibility is resolved after collection so a valid bridge
+        // cannot depend on which group or decision happened to come first.
+        if (errors.length === decisionErrorStart) for (const claim of candidateSharing) {
+          const family = referenced.get(claim.defectId) ?? [];
+          family.push(claim);
+          referenced.set(claim.defectId, family);
+        }
       }
-      for (const row of pendingStabilizedAmendments) if (!recognizedStabilizedShares.has(row.obligation))
-        error('decision-not-applied', `[${row.id}] stabilized amended_repair equal to pre-5a requires exact shared historical defect evidence`);
+      stabilizedChecks.push(() => {
+        for (const row of pendingStabilizedAmendments) if (!recognizedStabilizedShares.has(row.obligation))
+          error('decision-not-applied', `[${row.id}] stabilized amended_repair equal to pre-5a requires exact shared historical defect evidence`);
+      });
       for (const [obligation, target] of expected) if (!seen.has(obligation)) {
         if (target?.direct && target.route === 'item'
           && currentAuditorCertification(target)) continue;
         error('decision-missing', `[${target.id}] ${group.label} did not decide ${obligation}`);
       }
     }
+    for (const [defectId, family] of referenced) {
+      const edges = family.map(() => new Set());
+      for (let i = 0; i < family.length; i++) for (let j = i + 1; j < family.length; j++) {
+        // Evaluate both directions: explicit links remain directional evidence,
+        // but iteration order is not evidence. Each edge keeps its full typed
+        // native-finding, snapshot, current-carrier and ledger checks.
+        const forward = family[i].compatible(family[j].anchor);
+        const reverse = family[j].compatible(family[i].anchor);
+        if (forward || reverse) { edges[i].add(j); edges[j].add(i); }
+      }
+      const reached = new Set([0]), pending = [0];
+      while (pending.length) for (const next of edges[pending.pop()]) {
+        if (!reached.has(next)) { reached.add(next); pending.push(next); }
+      }
+      if (reached.size !== family.length) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
+    }
+    for (const check of stabilizedChecks) check();
     // Published repairs retain their optional provenance files, but those
     // files are not a Step-5 certification or gate obligation.
     for (const row of earlyRows) {
