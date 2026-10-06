@@ -1,0 +1,317 @@
+{
+  "version": 1,
+  "run": "frontier-39-analysis-30",
+  "mode": "prepare-only",
+  "owned_paths": [
+    "tools/autopilot/stages/frontier-39-step6-recovery.mts",
+    "WORKFLOW.md"
+  ],
+  "repository_mutated": false,
+  "tests_run": false,
+  "validators_run": false,
+  "guards": [
+    {
+      "path": "tools/autopilot/stages/frontier-39-step6-recovery.mts",
+      "sha256": "8119a89d6ffe170044adf2c7e428de3d2aca653999c60c84a990296866dbaaf8",
+      "mtime_utc": "2026-10-06T01:21:29.145392+00:00"
+    },
+    {
+      "path": "WORKFLOW.md",
+      "sha256": "da67c28e527974daa65ba8e84d61c729fac6ba123d145b9047dcc0aab5d419c4",
+      "mtime_utc": "2026-10-06T03:57:54.662418+00:00"
+    },
+    {
+      "path": "tools/step7-frontier-gate.mjs",
+      "sha256": "eff1fcd5757976808d630329061b6780834410cfd6c0557be1bb53f11893d748",
+      "mtime_utc": "2026-10-06T03:11:04.289623+00:00"
+    },
+    {
+      "path": "tools/frontier-item-gate.mjs",
+      "sha256": "1300e6bec4f7777a1bfd193cae0e3b5e04a1e0ef7cacc4411fafdd245e375dce",
+      "mtime_utc": "2026-10-06T03:11:04.289623+00:00"
+    },
+    {
+      "path": "tools/autopilot/stages/mathlib.step7.mts",
+      "sha256": "af0ae9222272e86d18024d9fa32aa8b124f05f30ebee3b75804bea8408b04825",
+      "mtime_utc": "2026-10-06T03:13:47.591327+00:00"
+    },
+    {
+      "path": "tools/autopilot/stages/mathlib.mts",
+      "sha256": "f1e9ed052d49868c4ba479e77d23d34f47e33a0de56812154f79d650c1a3965b",
+      "mtime_utc": "2026-10-06T03:46:15.856035+00:00"
+    },
+    {
+      "path": "tools/autopilot/src/executor.mts",
+      "sha256": "e546805777ac61a2206d487d9aac798bd9e2c0eee6d7d32745e567d6e50ff3eb",
+      "mtime_utc": "2026-10-02T17:30:01.097872+00:00"
+    },
+    {
+      "path": "tools/autopilot/bin/autopilot.mts",
+      "sha256": "e80b4f5f6f7ba85797804cd269f92e49e85c845939e9573c4d092eeaa21ebb87",
+      "mtime_utc": "2026-09-27T09:12:37.634030+00:00"
+    }
+  ],
+  "controller": {
+    "pid": 60856,
+    "run": "frontier-39-analysis-30",
+    "started_at": "2026-10-06T01:33:11.031Z"
+  },
+  "actual_native_gate_events": [
+    {
+      "line": 2582,
+      "at": "2026-10-06T04:00:07.473Z",
+      "type": "gate",
+      "id": "precheck",
+      "code": 1,
+      "ok": false,
+      "why": "Error: Unsupported frontier validator flag",
+      "output_sha256": "078d6c9338ffc4ae012d0dae75cf759a0ce00e34e9ddbfcd37404c6b758136d5"
+    },
+    {
+      "line": 2587,
+      "at": "2026-10-06T04:00:11.748Z",
+      "type": "gate-advisory",
+      "id": "rendercheck",
+      "code": 1,
+      "ok": false,
+      "why": "Error: Unsupported frontier validator flag",
+      "output_sha256": "078d6c9338ffc4ae012d0dae75cf759a0ce00e34e9ddbfcd37404c6b758136d5"
+    },
+    {
+      "line": 2589,
+      "at": "2026-10-06T04:00:11.835Z",
+      "type": "gate-advisory",
+      "id": "prosecheck",
+      "code": 1,
+      "ok": false,
+      "why": "Error: Unsupported frontier validator flag",
+      "output_sha256": "078d6c9338ffc4ae012d0dae75cf759a0ce00e34e9ddbfcd37404c6b758136d5"
+    }
+  ],
+  "actual_stage_reload_events": [
+    {
+      "at": "2026-10-06T03:14:13.207Z",
+      "type": "stages-reloaded",
+      "message": "stage table reloaded from /home/lazyinspirit/Projects/prestige-math-library/tools/autopilot/stages/frontier-39-step6-recovery.mts"
+    },
+    {
+      "at": "2026-10-06T03:46:27.924Z",
+      "type": "stages-reloaded",
+      "message": "stage table reloaded from /home/lazyinspirit/Projects/prestige-math-library/tools/autopilot/stages/frontier-39-step6-recovery.mts"
+    }
+  ],
+  "actual_gate_argv_available": false,
+  "argv_evidence_limit": "Gate runner receives logger: () => {} in the executor for primary and advisory calls. Gate results record output/code, not argv. Historical argv is not persisted and cannot be claimed as directly observed.",
+  "source_diagnosis": "The selected recovery table statically imports unversioned mathlib.mts. Query-versioned reloads of the selected recovery table therefore retain its first cached mathlib export. That export closes over the pre-correction Step7 frontier adapter, which appended item paths after frontier-item-gate.mjs --. All three native validators reject those paths as Unsupported frontier validator flag before selector construction.",
+  "source_reconstructed_old_argv": {
+    "precheck": [
+      "node",
+      "tools/frontier-item-gate.mjs",
+      "--run",
+      "frontier-39-analysis-30",
+      "--tool",
+      "precheck",
+      "--",
+      "<frozen draft frontier item paths appended by old decorator>"
+    ],
+    "rendercheck": [
+      "node",
+      "tools/frontier-item-gate.mjs",
+      "--run",
+      "frontier-39-analysis-30",
+      "--tool",
+      "rendercheck",
+      "--",
+      "<frozen draft frontier item paths appended by old decorator>"
+    ],
+    "prosecheck": [
+      "node",
+      "tools/frontier-item-gate.mjs",
+      "--run",
+      "frontier-39-analysis-30",
+      "--tool",
+      "prosecheck",
+      "--",
+      "<frozen draft frontier item paths appended by old decorator>"
+    ]
+  },
+  "current_preserved_native_argv": {
+    "precheck": [
+      "node",
+      "tools/frontier-item-gate.mjs",
+      "--run",
+      "frontier-39-analysis-30",
+      "--tool",
+      "precheck",
+      "--"
+    ],
+    "rendercheck": [
+      "node",
+      "tools/frontier-item-gate.mjs",
+      "--run",
+      "frontier-39-analysis-30",
+      "--tool",
+      "rendercheck",
+      "--"
+    ],
+    "prosecheck": [
+      "node",
+      "tools/frontier-item-gate.mjs",
+      "--run",
+      "frontier-39-analysis-30",
+      "--tool",
+      "prosecheck",
+      "--"
+    ]
+  },
+  "scope": {
+    "frontier_path": "research/frontier-39-analysis-30-step7-v2/frontier.json",
+    "frontier_raw_sha256": "0a98a783229403087b1031a534db2748b3511f0ce30f0357de791f879b193585",
+    "frozen_count": 929,
+    "manifest_count": 30,
+    "current_manifest_item_count": 929,
+    "manifest_paths_sha256": [
+      {
+        "path": "research/frontier-39-analysis-30-batch-1.pages.json",
+        "sha256": "d63de07d16b4576ff9e3423040eac318e16aa1d362410f828ffb83284bf7319a"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-10.pages.json",
+        "sha256": "56d1c3eccff9f671243bdd4b479bbd01ad28331b1dccc377f2043f06e8dac173"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-11.pages.json",
+        "sha256": "7b2d82621090b8c39776e8b84e5041da9600730cfda1744b37c2707d2d747f78"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-12.pages.json",
+        "sha256": "836b641e7a568bad9bc13bbc37a2f9e13e7650c831c0c3c7bd034c7c6b46a366"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-13.pages.json",
+        "sha256": "a9f7d0c2e07df48bbafcc5eb3b4e16d5f6fc7d9cfe68f677d5492bde46e1c601"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-14.pages.json",
+        "sha256": "0dc737dd21bc7e57d76e9a43297676a5a3020c6de35328aef05fbc029b6bd6b0"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-15.pages.json",
+        "sha256": "921cc7e1ccc04e65df4aeac007f74a247c98bc8b63bee26acd26e12849d2e960"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-16.pages.json",
+        "sha256": "404568de20d88ced194f1d3235a226511a6f9c7a0f1b34a9d23091cead5d7ab9"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-17.pages.json",
+        "sha256": "3c926118ebe459602a33f403bb8a005f5b1cf2e4814cd158a966b743df9ce2c1"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-18.pages.json",
+        "sha256": "b6d9d0f258335f45f4f8b0821947728c0c4314b79f79ba99e01ea02a00ac41d4"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-19.pages.json",
+        "sha256": "4b4791d5482a4154ca724d480ea8113c1a00698ddba0c42fcca0276bb53adfac"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-2.pages.json",
+        "sha256": "d0b24814282a4b80dd4134056552efbb8c9dbd27b88146a4ac93b863088f6bca"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-20.pages.json",
+        "sha256": "9b3a0ed1c1fbd34ecef29f138358267998121841aaebe4339dbe5d99fa6b8f60"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-21.pages.json",
+        "sha256": "57ce8ef2b551aaa4a21bb2ca1c1ffb6b7fcac319f11bb2f8fd49dfd07b803a26"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-22.pages.json",
+        "sha256": "966b90e844b5c26ef1f089f0d20a3eb3a0dc57f6cb069138a12b62c6b796a3b2"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-23.pages.json",
+        "sha256": "cc0e0bb0b8a4491eece74f344930d2f8aed43991a798887d08c40c0c71563bb7"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-24.pages.json",
+        "sha256": "17a533b88a6655eca82c1c8298e7174b1dd6f2dae85a0af065f4f9c37506b90f"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-25.pages.json",
+        "sha256": "4f06a1c4af396efbb1aaa0335256da942187948a891b10d20645e77cc13c3ea0"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-26.pages.json",
+        "sha256": "629d23e849c7f070d57ce08509caf6fd0926464cac4bc6af327c0bea52b16fa4"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-27.pages.json",
+        "sha256": "2b540d317a15b826e1dc1d0ca04ae5b9782fe02fa4adc458c05cddf7ed4581f9"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-28.pages.json",
+        "sha256": "de19aceafe7198b4de901944f8646f0650315ade23cd30d6ebaafec31e9c82e5"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-29.pages.json",
+        "sha256": "c89afb65a329268d75a3bf3b7e305f04c559676287c9b53f50740a9cd6afaf6e"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-3.pages.json",
+        "sha256": "bef4f68d5c3823fcf7a30b79301013647c5bc3759f3a7fde06004b0e4c73c4f8"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-30.pages.json",
+        "sha256": "e5f5e4a38b2dfb5dbec838f87497098f65659a486df7a84c7d447e1cb4790444"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-4.pages.json",
+        "sha256": "5441b260d45e36b36958cf9525a422a4589829a2b9d60bf7cf4ed099a90450d3"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-5.pages.json",
+        "sha256": "0d2479b4a4664ba86d1b548ac0b84a477a5600f3a2489981721b1f370390a8c4"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-6.pages.json",
+        "sha256": "34706dea33a4b3f514b57c349d2dbbf266a8defffdfc202b8c8fcad027b4db80"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-7.pages.json",
+        "sha256": "3252390a0aecd1cf8994e4cfa55b533c9c1614c761bfd37313f43c2de6a9f663"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-8.pages.json",
+        "sha256": "c9c3dba4dbad5a3c2d5bd92ee2296fce79d95c62f0c5e1f0c0a192ff1a162780"
+      },
+      {
+        "path": "research/frontier-39-analysis-30-batch-9.pages.json",
+        "sha256": "d3b75708d511761a98c6849c71cc4c8bd750596190457bcbe085c1c3ff90b0ae"
+      }
+    ]
+  },
+  "preserved_obligations": [
+    "Canonical stage order and gate roster unchanged",
+    "Step6 concurrency 3 and JUDGE_CONCURRENCY_GPT_6_1_SOL=3 unchanged",
+    "Adapter derives exact nonempty manifest item/page selections; missing scope still throws",
+    "Native gate liveness and raw output unchanged",
+    "Global/runtime/unknown diagnostic blocking unchanged",
+    "Full supplier context and relevant frontier dependency closure unchanged"
+  ],
+  "other_actual_diagnostics_delegated_to_engine_7_9": [
+    "splice-verify",
+    "proof-contract",
+    "defect-ledger"
+  ],
+  "integration": "Root should apply only these guarded hunks after native writers drain; restart or reload through the native controller, then run the engine-owned same complete scoped gate. Preserve all existing concurrent adapter/stage edits.",
+  "root_integration": {
+    "at": "2026-10-06T04:09:41.571892+00:00",
+    "native_writers_drained": true,
+    "controller_stopped": true,
+    "next_native_stage": "7.10-gate",
+    "native_7_9_recertification_passed": true
+  }
+}

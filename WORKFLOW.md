@@ -187,7 +187,9 @@ The `frontier-39-step6-recovery.mts` table is restricted to run
 `frontier-39-analysis-30`. It caps Step-6 dispatches and native Sol61 judge calls
 at three after the recorded provider outage; models, coverage and gates remain
 unchanged. Select it in that run's state-directory configuration after workers
-drain and the controller stops, then use one bounded native recovery.
+drain and the controller stops, then use one bounded native recovery. The recovery
+wrapper forwards its reload version to the canonical stage table so sibling stage
+fixes reach live gate descriptors without changing the recovery cap or stage order.
 
 - Current agent defaults and Step-5/6 review profiles use GPT-6.1 Sol at high
   effort. DeepSeek V4.1 Flash max assignments remain explicit. Legacy Sol and
