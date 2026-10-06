@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 30af37de592e by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ a09e73a5779c by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 11853 |
+| defects caught before publication | 12918 |
 | now mechanically prevented | 371 |
 | escaped to publication | 1 |
 | still open | 27 |
@@ -718,6 +718,39 @@
 | invalid-refutation | 1 |  |  |  |
 | other | 1 |  |  |  |
 | false-decline |  |  |  | 1 |
+
+## frontier-41-ha-dt-29 — 1065 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate | owner |
+|---|---|---|---|---|
+| invalid-inference | 157 |  |  |  |
+| reader-repair | 126 |  |  |  |
+| missing-hypothesis | 116 | 1 | 3 | 5 |
+| other | 11 |  | 100 |  |
+| false-or-overstrong-statement | 70 |  |  |  |
+| citation-inaccurate | 62 | 1 |  |  |
+| ill-typed-claim | 56 |  |  | 1 |
+| ill-typed-construction | 52 | 1 |  |  |
+| missing-choice-scope | 39 | 2 |  | 5 |
+| false-boundary-disposition | 35 |  |  |  |
+| unlicensed-inference | 32 |  |  |  |
+| citation-inflated | 23 | 1 |  | 4 |
+| false-claim | 26 |  |  |  |
+| false-computation | 21 |  |  |  |
+| invalid-witness | 20 |  |  |  |
+| ill-formed | 17 |  |  |  |
+| citation-missing | 11 | 4 |  |  |
+| undefined-notation | 13 |  |  |  |
+| unsupported-inference | 10 |  | 1 | 1 |
+| false-or-overstrong-title | 8 |  |  |  |
+| citation-misattributed | 4 | 2 |  |  |
+| missing-case | 6 |  |  |  |
+| arithmetic-error | 6 |  |  |  |
+| missing-map | 4 |  |  |  |
+| contract-mismatch | 1 |  |  | 2 |
+| scope-drop | 2 |  |  |  |
+| frontmatter-schema | 2 |  |  |  |
+| invalid-refutation | 1 |  |  |  |
 
 ## phase-2-catchup-24 — 14 row(s)
 

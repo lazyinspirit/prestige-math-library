@@ -38,7 +38,7 @@ identifies the target with $H^{k+n}(B;R)$.  Under that identification,
 cup-product naturality and the Euler definition give
 $$s^*s_!(a)=a\smile s^*j^*u_\xi=a\smile e_{\rm Th}(\xi).$$
 
-For rank zero, $s_!$ is the identity and multiplication by $e=1$.  Empty
+For rank zero, $D(\xi)=B$, $S(\xi)=\varnothing$, and the supplied Thom class is its orientation unit $o\in H^0(B;R)$. Thus $s_!(a)=a\smile o$ and $e=o$, by the displayed composite. This is an isomorphism with inverse multiplication by $o^{-1}$, and is the identity for the standard unit orientation $o=1$.  Empty
 bases and the zero ring give the unique zero maps.  At $k=0$ the unit maps to
 $j^*u$; negative-degree sources are zero.  Both radial endpoints, the zero
 section, identity bundle maps, and zero inputs are included.  The displayed

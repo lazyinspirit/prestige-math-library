@@ -1,0 +1,729 @@
+[
+  {
+    "order": 923,
+    "id": "finite-abelian-categories-and-eilenberg-watts",
+    "kind": "A",
+    "category": "homological-algebra",
+    "title": "Finite Abelian Categories and Eilenberg–Watts",
+    "companion": "finite-abelian-categories-and-eilenberg-watts-examples",
+    "requires": [
+      "morita-bicategories-and-projective-generators",
+      "modular-representations-and-projective-covers",
+      "tensor-and-fusion-categories"
+    ],
+    "items": [
+      {
+        "id": "def-superfluous-subobject-and-projective-cover-in-an-abelian-category",
+        "kind": "definition",
+        "title": "Superfluous subobjects and projective covers in an abelian category",
+        "deps": [
+          "def-abelian-category",
+          "def-essential-epimorphism-and-projective-cover",
+          "def-finite-k-linear-abelian-category",
+          "def-kernels-and-cokernels-as-equalizers-and-coequalizers",
+          "def-monomorphism-and-epimorphism",
+          "def-projective-object",
+          "def-subobject-and-quotient-object",
+          "def-the-join-of-subobjects-in-an-abelian-category",
+          "rem-category-theory-class-and-size-conventions"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $\\mathcal C$ be an abelian category and let $n:N\\to P$ be a monomorphism, regarded as the subobject $[n]$ of $P$ ([[def-subobject-and-quotient-object]]). The subobject $[n]$ is **superfluous** when for every subobject $[m]:M\\to P$ whose join with $[n]$ satisfies $[n]+[m]=[1_P]$ one already has $[m]=[1_P]$ ([[def-the-join-of-subobjects-in-an-abelian-category]]). An epimorphism $\\pi:Q\\to X$ is **essential** when $\\ker\\pi$ is a superfluous subobject of $Q$ ([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]], [[def-monomorphism-and-epimorphism]]), and a **projective cover** of $X$ is an essential epimorphism $\\pi:Q\\to X$ with $Q$ projective ([[def-projective-object]]). On a module category this is exactly the published notion of [[def-essential-epimorphism-and-projective-cover]]: joins of submodules are their sums, so the condition '$N+M=P$ implies $M=P$' is that definition's superfluous-kernel condition verbatim, with the same projective-source requirement. This is the general form of the projective-cover clause of [[def-finite-k-linear-abelian-category]]. The definition asserts no existence, selects no object and uses no choice.",
+        "proof_strategy": "This is a definition; the only obligation is the agreement claim with the module notion, and it is definitional: in a module category the join of two submodules is their sum, so 'the only submodule $M\\le P$ with $N+M=P$ is $P$' is precisely the superfluous-kernel condition of [[def-essential-epimorphism-and-projective-cover]], and the projective-source clause is identical. No cover existence is assumed here; every later existence hypothesis is stated explicitly.\n\n**Proof technique:** define.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Peter Webb, A Course in Finite Group Representation Theory (23 Feb 2016 draft), Chapter 7 (projective covers of finite-dimensional modules)",
+              "url": "https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-support-families-of-finite-dimensional-vector-spaces-are-locally-finite",
+        "kind": "lemma",
+        "title": "Finite-support families of finite-dimensional vector spaces are locally finite but not finite",
+        "deps": [
+          "cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero",
+          "cor-dimension-of-a-direct-sum",
+          "cor-dimensions-of-matrix-and-linear-map-spaces",
+          "cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension",
+          "def-abelian-category",
+          "def-abelian-subcategory-and-exact-embedding",
+          "def-additive-category",
+          "def-biproduct",
+          "def-dimension",
+          "def-finite-k-linear-abelian-category",
+          "def-generator-and-cogenerator-of-a-category",
+          "def-image-and-coimage-in-a-category-with-kernels-and-cokernels",
+          "def-k-linear-category-and-k-linear-functor",
+          "def-linear-map",
+          "def-locally-finite-k-linear-abelian-category",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-object-of-finite-length",
+          "def-product-category",
+          "def-projective-object",
+          "def-separating-set-and-coseparating-set",
+          "def-simple-object",
+          "def-subcategory-and-full-subcategory",
+          "def-subobject-and-quotient-object",
+          "def-superfluous-subobject-and-projective-cover-in-an-abelian-category",
+          "def-the-quotient-of-an-object-by-a-subobject",
+          "thm-a-small-product-of-abelian-categories-is-abelian",
+          "thm-dimension-formula",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-length-is-additive-along-a-subobject",
+          "thm-module-kernel-image-and-injectivity",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "thm-rank-nullity",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $k$ be a field and let $\\mathcal C$ be the category whose objects are the families $(V_n)_{n\\in\\mathbb N}$ of finite-dimensional $k$-vector spaces with $V_n=0$ for all but finitely many $n$, and whose morphisms $(V_n)\\to(W_n)$ are the families $(f_n:V_n\\to W_n)$ of $k$-linear maps, with componentwise identities and composition. Then $\\mathcal C$ is a $k$-linear abelian category in which kernels, cokernels and finite biproducts are computed componentwise; every hom-space is finite-dimensional over $k$; every object has finite length; every object is projective, hence every simple object has a projective cover; and the objects $S_m$ with $(S_m)_m=k$ and $(S_m)_n=0$ for $n\\ne m$ are pairwise non-isomorphic simple objects. Consequently $\\mathcal C$ is locally finite and has enough projectives, but it has infinitely many isomorphism classes of simple objects and no object of $\\mathcal C$ is a generator, so $\\mathcal C$ is not a finite $k$-linear abelian category. No choice is used.",
+        "proof_strategy": "Identify $\\mathcal C$ with the full subcategory of the product category $\\prod_{n\\in\\mathbb N}\\mathbf{Vect}_k^{\\mathrm{fd}}$ ([[def-product-category]]) on the objects of finite support. Each factor is abelian: the category $\\mathbf{Vect}_k$ of $k$-vector spaces is the module category $k\\text{-}\\mathbf{Mod}$ ([[thm-modules-over-a-ring-form-an-abelian-category]]), and its full subcategory of finite-dimensional spaces is closed under finite direct sums and under kernels and cokernels of its morphisms ([[def-module-homomorphism-kernel-image-and-cokernel]], [[thm-rank-nullity]], [[thm-dimension-formula]], [[def-linear-map]]), so it inherits AB1 and AB2 and is abelian ([[def-abelian-category]], [[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]); hence the small product is abelian ([[thm-a-small-product-of-abelian-categories-is-abelian]]) with componentwise zero object, biproducts, kernels and cokernels. The finite-support objects contain the zero object, are closed under finite biproducts, and are closed under kernels and cokernels of maps between them (a subobject of a finite-support family has finite support, and the componentwise cokernel of such a map has finite support); these componentwise (co)limits satisfy AB1 and AB2 because they do in every factor, so $\\mathcal C$ is abelian. $k$-linearity: $\\operatorname{Hom}_{\\mathcal C}(V,W)=\\prod_{n\\in\\operatorname{supp}V\\cup\\operatorname{supp}W}\\operatorname{Hom}_k(V_n,W_n)$ is a finite product of finite-dimensional spaces, hence finite-dimensional ([[def-dimension]], [[def-k-linear-category-and-k-linear-functor]]), and composition is componentwise bilinear. Simples: a nonzero subobject of $S_m$ has a nonzero component in degree $m$, hence is all of $S_m$ ([[def-simple-object]]); conversely a nonzero $V$ has some $V_n\\ne0$, and a line $L\\subseteq V_n$ gives a nonzero subobject isomorphic to $S_n$, so a simple $V$ is isomorphic to some $S_n$; distinct $m$ give non-isomorphic $S_m$ because $(S_m)_n=k$ exactly when $n=m$. Projectivity: $\\operatorname{Hom}_{\\mathcal C}(V,-)\\cong\\prod_n\\operatorname{Hom}_k(V_n,(-)_n)$ is a finite product of exact functors, each $V_n$ being a finite direct sum of copies of $k$, which is projective by [[prop-modules-over-a-field-are-projective-flat-and-injective]]; by condition 2 of [[thm-projective-object-characterisations]] every object is projective, and the identity of a simple object is a projective cover since its kernel is zero, which is superfluous ([[def-superfluous-subobject-and-projective-cover-in-an-abelian-category]]). Finite length: induct on $d=\\sum_n\\dim_kV_n$ ([[def-object-of-finite-length]]); if $d>0$ pick a line $L\\subseteq V_n$ in a nonzero degree and form the short exact sequence $0\\to S_n\\to V\\to V/S_n\\to0$ ([[def-the-quotient-of-an-object-by-a-subobject]]); the quotient has $\\sum\\dim=d-1$, so [[thm-length-is-additive-along-a-subobject]] and the induction give $\\ell(V)=1+\\ell(V/S_n)<\\infty$. No generator: if an object $P$ has finite support $F$ and $m\\notin F$, then $\\operatorname{Hom}_{\\mathcal C}(P,S_m)=0=\\operatorname{Hom}_{\\mathcal C}(0,S_m)$ while $1_{S_m}\\ne0$, so $\\{P\\}$ is not separating and $P$ is not a generator ([[def-generator-and-cogenerator-of-a-category]]). All constructions are componentwise and no choice is used.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Fuchs, Schaumann, Schweigert, Eilenberg–Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, §2.1 (Lemma 2.1, Lemma 2.2, Corollary 2.3, equation (2.1)) and §§3.1–3.2 (Definition 3.1, Theorem 3.2)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-finite-dimensional-module-categories-are-intrinsically-finite",
+        "kind": "proposition",
+        "title": "Finite-dimensional module categories satisfy the intrinsic finiteness conditions",
+        "deps": [
+          "cor-dimension-of-a-direct-sum",
+          "cor-dimensions-of-matrix-and-linear-map-spaces",
+          "def-abelian-category",
+          "def-abelian-subcategory-and-exact-embedding",
+          "def-composition-series-and-composition-factors-of-an-object",
+          "def-dimension",
+          "def-finite-k-linear-abelian-category",
+          "def-image-and-coimage-in-a-category-with-kernels-and-cokernels",
+          "def-k-linear-category-and-k-linear-functor",
+          "def-locally-finite-k-linear-abelian-category",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-object-of-finite-length",
+          "def-projective-module",
+          "def-quotient-module",
+          "def-simple-module",
+          "def-subcategory-and-full-subcategory",
+          "def-submodule",
+          "def-superfluous-subobject-and-projective-cover-in-an-abelian-category",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-length-is-additive-along-a-subobject",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras",
+          "thm-quotient-module-universal-property",
+          "thm-rank-nullity",
+          "thm-well-ordering-principle"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $A$ be a finite-dimensional unital algebra over a field $k$, and let $A\\text{-}\\mathrm{mod}$ denote the category of finite-dimensional left $A$-modules with $A$-linear maps. Then $A\\text{-}\\mathrm{mod}$ is a finite $k$-linear abelian category in the intrinsic sense of [[def-finite-k-linear-abelian-category]]: it is a locally finite $k$-linear abelian category ([[def-locally-finite-k-linear-abelian-category]]); every simple object has a projective cover, namely the cover supplied by [[thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras]] and identified with the general notion by [[def-superfluous-subobject-and-projective-cover-in-an-abelian-category]]; and there are finitely many isomorphism classes of simple objects. Moreover every simple left $A$-module is isomorphic to a composition factor of the regular module ${}_AA$, and every finite-dimensional module has length at most its $k$-dimension. No choice is used.",
+        "proof_strategy": "$A\\text{-}\\mathrm{mod}$ is a full subcategory of the abelian category of all left $A$-modules ([[thm-modules-over-a-ring-form-an-abelian-category]], [[def-module-homomorphism-kernel-image-and-cokernel]]) that is closed under finite direct sums and under kernels and cokernels of its morphisms: kernels and images of $A$-linear maps of finite-dimensional spaces are finite-dimensional, quotients of finite-dimensional modules are finite-dimensional, and finite direct sums of finite-dimensional modules are finite-dimensional. It therefore inherits AB1 and AB2 and is abelian ([[def-abelian-category]]); its hom-spaces are subspaces of the finite-dimensional spaces $\\operatorname{Hom}_k(M,N)$, hence finite-dimensional, and composition is $k$-bilinear, so it is $k$-linear ([[def-k-linear-category-and-k-linear-functor]]). Finite length: a proper inclusion $N\\subsetneq M$ strictly increases $k$-dimension, so a strictly decreasing chain of submodules of $M$ has at most $\\dim_kM+1$ terms; hence $M$ has a composition series and $\\ell(M)\\le\\dim_kM$ ([[def-object-of-finite-length]], [[def-composition-series-and-composition-factors-of-an-object]]). Enough projectives: the published theorem gives each finite-dimensional module, in particular each simple module, a projective cover in the module sense, which is a projective cover in the sense of [[def-superfluous-subobject-and-projective-cover-in-an-abelian-category]] since the two conditions agree there. Finitely many simples: let $S$ be simple and $0\\ne s\\in S$; the map $\\varphi:A\\to S$, $\\varphi(a)=as$, is $A$-linear with $\\varphi(1)=s\\ne0$, so its image is a nonzero submodule of the simple module $S$ and $\\varphi$ is surjective. Take a composition series $0=A_0<\\cdots<A_m=A$ of the regular module and let $j\\ge1$ be minimal with $\\varphi(A_j)\\ne0$; then $\\varphi(A_{j-1})=0$, so $\\varphi$ factors through the nonzero simple quotient $A_j/A_{j-1}$ ([[thm-quotient-module-universal-property]], [[def-quotient-module]]), which forces $S\\cong A_j/A_{j-1}$ ([[def-simple-module]]). Every simple module is thus one of the finitely many composition factors of ${}_AA$, so there are finitely many simple isomorphism classes. All selections are finite (a composition series of the finite-dimensional module $A$ and its finite factor list), so no choice is used.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Fuchs, Schaumann, Schweigert, Eilenberg–Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, §2.1 (Lemma 2.1, Lemma 2.2, Corollary 2.3, equation (2.1)) and §§3.1–3.2 (Definition 3.1, Theorem 3.2)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            },
+            {
+              "title": "Peter Webb, A Course in Finite Group Representation Theory (23 Feb 2016 draft), Chapter 7 (projective covers of finite-dimensional modules)",
+              "url": "https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-module-duality-is-exact-with-commuting-bimodule-actions",
+        "kind": "lemma",
+        "title": "Finite module duality is exact with commuting bimodule actions",
+        "deps": [
+          "cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension",
+          "def-algebraic-dual-and-linear-functional",
+          "def-bimodule",
+          "def-dimension",
+          "def-dual-family-associated-to-a-basis",
+          "def-equivalence-and-adjoint-equivalence-of-categories",
+          "def-exact-and-short-exact-sequences-of-modules",
+          "def-functor-and-contravariant-functor",
+          "def-hom-groups-and-induced-hom-maps",
+          "def-k-linear-category-and-k-linear-functor",
+          "def-left-and-right-modules",
+          "def-linear-map",
+          "def-monomorphism-and-epimorphism",
+          "def-natural-isomorphism",
+          "def-opposite-ring",
+          "def-vector-space-of-linear-maps",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-dual-family-is-a-basis-in-finite-dimension",
+          "thm-quotient-module-universal-property",
+          "thm-rank-nullity",
+          "thm-splitting-lemma-for-modules",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis"
+        ],
+        "dependency_level": 0,
+        "statement": "Throughout, a bimodule over $k$-algebras means a $k$-vector space with $k$-bilinear commuting actions and agreeing scalar actions: $(c1_B)m=m(c1_A)=cm$ for $c\\in k$ in a $(B,A)$-bimodule. This compatibility is an additional requirement beyond the ring-bimodule definition [[def-bimodule]].\n\nLet $A$ be a finite-dimensional unital algebra over a field $k$, and let\n$A\\text{-}\\mathrm{mod}$ denote the category of finite-dimensional left\n$A$-modules with $A$-linear maps. For such a module $X$ put\n$X^{*}=\\operatorname{Hom}_k(X,k)=\\mathcal L(X,k)$ with the right $A$-action\n$(\\lambda\\cdot a)(x)=\\lambda(ax)$, equivalently the left\n$A^{\\mathrm{op}}$-action $a\\cdot\\lambda:=\\lambda\\cdot a$; for an $A$-linear\n$u:X\\to Y$ put $u^{*}(\\lambda)=\\lambda\\circ u$ for $\\lambda\\in Y^{*}$. Then:\n\n(i) $(-)^{*}$ is a contravariant $k$-linear functor from\n$A\\text{-}\\mathrm{mod}$ to the category of finite-dimensional left\n$A^{\\mathrm{op}}$-modules, and the evaluation\n$\\operatorname{ev}_X:X\\to X^{**}$, $\\operatorname{ev}_X(x)(\\lambda)=\\lambda(x)$,\nis a natural isomorphism, so $(-)^{*}$ is a contravariant equivalence;\n\n(ii) $(-)^{*}$ is exact, carrying every short exact sequence\n$0\\to X\\xrightarrow{i}Y\\xrightarrow{q}Z\\to0$ of finite-dimensional left\n$A$-modules to the short exact sequence\n$0\\to Z^{*}\\xrightarrow{q^{*}}Y^{*}\\xrightarrow{i^{*}}X^{*}\\to0$;\n\n(iii) if $B$ is a unital $k$-algebra and $X$ is a finite-dimensional\n$(A,B)$-bimodule, then $X^{*}$ is a $(B,A)$-bimodule under the commuting\nactions $(b\\cdot\\lambda)(x)=\\lambda(xb)$ and $(\\lambda\\cdot a)(x)=\\lambda(ax)$,\nand duality is a contravariant equivalence between the categories of\nfinite-dimensional $(A,B)$-bimodules and finite-dimensional $(B,A)$-bimodules,\nwith the $k$-linear maps that are simultaneously $A$-linear and $B$-linear as\nmorphisms.\n\nNo choice is used.",
+        "proof_strategy": "Use k-bilinear commuting actions with agreeing k-scalars. Define dual actions and transpose maps, verify their module laws and natural double-dual evaluation. Extend a finite basis along an injection to prove dual surjectivity; rank-nullity identifies middle kernel and image. Evaluation is linear for both actions, giving the bimodule duality. Only finitely many bases and extensions are chosen.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Fuchs, Schaumann, Schweigert, Eilenberg–Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, §2.1 (Lemma 2.1, Lemma 2.2, Corollary 2.3, equation (2.1)) and §§3.1–3.2 (Definition 3.1, Theorem 3.2)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-projectives-covering-the-simple-objects-generate-every-finite-length-object",
+        "kind": "lemma",
+        "title": "Projective epimorphisms onto the simples generate every finite-length object",
+        "deps": [
+          "cor-an-additive-category-is-an-ab-enriched-category-with-a-zero-object-and-finite-biproducts",
+          "def-abelian-category",
+          "def-additive-category",
+          "def-biproduct",
+          "def-composition-series-and-composition-factors-of-an-object",
+          "def-finite-k-linear-abelian-category",
+          "def-kernels-and-cokernels-as-equalizers-and-coequalizers",
+          "def-locally-finite-k-linear-abelian-category",
+          "def-object-of-finite-length",
+          "def-preadditive-category",
+          "def-projective-object",
+          "def-simple-object",
+          "def-subobject-and-quotient-object",
+          "def-superfluous-subobject-and-projective-cover-in-an-abelian-category",
+          "def-the-quotient-of-an-object-by-a-subobject",
+          "prop-basic-calculus-of-monomorphisms-and-epimorphisms",
+          "prop-biproducts-are-associative-commutative-and-unital-up-to-canonical-isomorphism",
+          "thm-length-is-additive-along-a-subobject"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $\\mathcal C$ be a locally finite $k$-linear abelian category with finitely\nmany isomorphism classes of simple objects, represented by $S_1,\\dots,S_n$, and\nsuppose that for each $i$ a projective epimorphism $Q_i\\twoheadrightarrow S_i$\nis chosen (for instance the projective cover supplied by\n[[def-superfluous-subobject-and-projective-cover-in-an-abelian-category]] when\n$\\mathcal C$ is finite in the intrinsic sense). Then for every object $X$ of\nfinite length there are integers $m_i\\ge0$ and an epimorphism\n$\\bigoplus_{i=1}^nQ_i^{m_i}\\twoheadrightarrow X$; in particular, with\n$P=\\bigoplus_iQ_i$, every object of $\\mathcal C$ admits an epimorphism\n$P^m\\twoheadrightarrow X$ for some $m\\ge0$. Only the finitely many chosen maps\n$Q_i\\twoheadrightarrow S_i$ are selected, and no other choice is used.",
+        "proof_strategy": "Induct on length, starting at the zero object. If Y is the penultimate composition-series object, the induction source is W=the finite biproduct of Q_j^{m_j}. Lift a chosen projective epimorphism onto the final simple quotient. A map annihilating W plus this lift factors through the quotient and is zero by epic cancellation, so the combined map is epic. Regroup the finite summands and use the split projection from P^{sum m_i}.\n\n**Proof technique:** induction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Fuchs, Schaumann, Schweigert, Eilenberg–Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, §2.1 (Lemma 2.1, Lemma 2.2, Corollary 2.3, equation (2.1)) and §§3.1–3.2 (Definition 3.1, Theorem 3.2)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-intrinsic-finite-category-hypotheses-give-a-finite-projective-generator",
+        "kind": "theorem",
+        "title": "Intrinsic finite category hypotheses give a finite projective generator",
+        "deps": [
+          "def-abelian-category",
+          "def-algebra-over-a-commutative-ring",
+          "def-biproduct",
+          "def-composition-series-and-composition-factors-of-an-object",
+          "def-dimension",
+          "def-finite-k-linear-abelian-category",
+          "def-full-faithful-and-essentially-surjective-functor",
+          "def-generator-and-cogenerator-of-a-category",
+          "def-image-and-coimage-in-a-category-with-kernels-and-cokernels",
+          "def-k-linear-category-and-k-linear-functor",
+          "def-locally-finite-k-linear-abelian-category",
+          "def-monomorphism-and-epimorphism",
+          "def-object-of-finite-length",
+          "def-opposite-ring",
+          "def-projective-object",
+          "def-separating-set-and-coseparating-set",
+          "def-simple-object",
+          "def-subobject-and-quotient-object",
+          "def-superfluous-subobject-and-projective-cover-in-an-abelian-category",
+          "lem-endomorphism-ring-of-an-object-in-a-preadditive-category",
+          "lem-projectives-covering-the-simple-objects-generate-every-finite-length-object",
+          "prop-basic-calculus-of-monomorphisms-and-epimorphisms",
+          "prop-finite-dimensional-module-categories-are-intrinsically-finite",
+          "thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism",
+          "thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras",
+          "thm-projective-object-characterisations"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $\\mathcal C$ be a finite $k$-linear abelian category, with simple\nrepresentatives $S_1,\\dots,S_n$ and chosen projective covers\n$Q_i\\twoheadrightarrow S_i$, and put $P=\\bigoplus_{i=1}^nQ_i$ and\n$A=\\operatorname{End}_{\\mathcal C}(P)^{\\mathrm{op}}$. Then: (i) $P$ is\nprojective; (ii) $P$ is a generator of $\\mathcal C$, that is, $\\{P\\}$ is\nseparating; (iii) $A$ is a finite-dimensional unital $k$-algebra; (iv)\n$\\mathcal C(P,-)$ is exact and faithful; and (v) every object of $\\mathcal C$ is\na quotient of a finite direct sum of copies of $P$. The proof uses only that\neach $Q_i\\twoheadrightarrow S_i$ is a projective epimorphism, never the\nsuperfluity of its kernel, so the same conclusions hold if \"enough projectives\"\nis read as \"every simple object admits a projective epimorphism onto it\"; for\nthe finite module categories of\n[[prop-finite-dimensional-module-categories-are-intrinsically-finite]] the two\nreadings coincide. Only the finitely many covers $Q_i$ are selected; no further\nchoice is used.",
+        "proof_strategy": "Lift each entire injection Q_i into P along an epimorphism onto P; coproduct uniqueness gives a section, so P is projective. For a nonzero image Z, lift onto a simple quotient from Q_i; the resulting h:Q_i into Z is nonzero, not necessarily epic. Lift again through X onto Z and compose with the split projection P onto Q_i to separate distinct maps. End(P)^op is finite-dimensional with central scalar units; projectivity gives Hom exactness, separation gives faithfulness and the covering lemma gives finite quotients.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Fuchs, Schaumann, Schweigert, Eilenberg–Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, §2.1 (Lemma 2.1, Lemma 2.2, Corollary 2.3, equation (2.1)) and §§3.1–3.2 (Definition 3.1, Theorem 3.2)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-finite-abelian-categories-are-finite-dimensional-module-categories",
+        "kind": "theorem",
+        "title": "Finite abelian categories admit finite-dimensional module models",
+        "deps": [
+          "cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero",
+          "cor-every-module-is-a-quotient-of-a-free-module",
+          "def-abelian-category",
+          "def-biproduct",
+          "def-dimension",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-equivalence-and-adjoint-equivalence-of-categories",
+          "def-exact-and-short-exact-sequences-of-modules",
+          "def-finite-k-linear-abelian-category",
+          "def-full-faithful-and-essentially-surjective-functor",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-generator-and-cogenerator-of-a-category",
+          "def-image-and-coimage-in-a-category-with-kernels-and-cokernels",
+          "def-initial-terminal-and-zero-object",
+          "def-k-linear-category-and-k-linear-functor",
+          "def-kernels-and-cokernels-as-equalizers-and-coequalizers",
+          "def-locally-finite-k-linear-abelian-category",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-natural-isomorphism",
+          "def-projective-object",
+          "def-simple-object",
+          "def-subobject-and-quotient-object",
+          "def-superfluous-subobject-and-projective-cover-in-an-abelian-category",
+          "def-the-join-of-subobjects-in-an-abelian-category",
+          "def-the-quotient-of-an-object-by-a-subobject",
+          "lem-endomorphism-ring-of-an-object-in-a-preadditive-category",
+          "lem-projectives-covering-the-simple-objects-generate-every-finite-length-object",
+          "prop-equivalences-preserve-reflect-and-create-limits-and-colimits",
+          "prop-finite-dimensional-module-categories-are-intrinsically-finite",
+          "prop-fully-faithful-functors-reflect-isomorphisms",
+          "thm-fully-faithful-split-essentially-surjective-characterises-equivalence",
+          "thm-intrinsic-finite-category-hypotheses-give-a-finite-projective-generator",
+          "thm-projective-object-characterisations",
+          "thm-universal-property-of-module-direct-sums"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $\\mathcal C$ be a finite $k$-linear abelian category, let $S_1,\\dots,S_n$ be\nrepresentatives of its simple objects with chosen projective covers\n$Q_i\\twoheadrightarrow S_i$, and put $P=\\bigoplus_iQ_i$ and\n$A=\\operatorname{End}_{\\mathcal C}(P)^{\\mathrm{op}}$. Then $A$ is a\nfinite-dimensional unital $k$-algebra and\n$H=\\mathcal C(P,-):\\mathcal C\\to A\\text{-}\\mathrm{mod}$ is a fully faithful, essentially surjective $k$-linear\nfunctor, where $A\\text{-}\\mathrm{mod}$ is the category of\nfinite-dimensional left $A$-modules: $H$ is faithful, full and exact, and every\nfinite-dimensional left $A$-module is isomorphic to $H(X)$ for some object $X$\nof $\\mathcal C$, with the preimage exhibited by the finite-presentation\nconstruction in the proof. If a splitting of essential surjectivity is additionally supplied — an object $X_V$ and an isomorphism $H(X_V)\\to V$ for every target module $V$ — then $H$ is a $k$-linear equivalence in the specified-quasi-inverse sense of [[def-equivalence-and-adjoint-equivalence-of-categories]]. Conversely any such $k$-linear equivalence from a finite-dimensional module category transfers the intrinsic finiteness conditions, so the usual equivalence formulation holds when these splitting data are supplied. Fullness, faithfulness, exactness and objectwise essential surjectivity use only finite choices. Selecting finite presentations separately for each $V$ does not itself supply a simultaneous splitting; no choice-free existence of that splitting is asserted.",
+        "proof_strategy": "Use H(X)=C(P,X) with A=End(P)^op acting by precomposition. Projectivity and separation give exactness and faithfulness. From the finite presentation P^s -> P^r -> X -> 0, apply H in the same covariant direction, obtaining A^s -> A^r -> H(X) -> 0. Maps from finite free modules come from biproduct components; faithfulness and cokernel factorisation give fullness. A finite presentation of each target module gives an objectwise preimage by a cokernel. A specified quasi-inverse is constructed only from supplied simultaneous preimages and isomorphisms, using unique lifts on morphisms. Conversely an equivalence transfers kernels, cokernels, simple subobjects, projectivity and superfluity.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Fuchs, Schaumann, Schweigert, Eilenberg–Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, §2.1 (Lemma 2.1, Lemma 2.2, Corollary 2.3, equation (2.1)) and §§3.1–3.2 (Definition 3.1, Theorem 3.2)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-finite-eilenberg-watts-for-right-exact-linear-functors",
+        "kind": "theorem",
+        "title": "Finite Eilenberg–Watts for right exact linear functors",
+        "deps": [
+          "def-functor-category",
+          "cor-every-module-is-a-quotient-of-a-free-module",
+          "def-additive-functor",
+          "def-bimodule",
+          "def-equivalence-and-adjoint-equivalence-of-categories",
+          "def-exact-and-short-exact-sequences-of-modules",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-k-linear-category-and-k-linear-functor",
+          "def-left-exact-and-right-exact-functor",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-natural-transformation",
+          "lem-canonical-eilenberg-watts-comparison-is-balanced-and-natural",
+          "lem-canonical-free-presentation-controls-eilenberg-watts-comparison",
+          "lem-evaluation-on-the-regular-module-has-a-commuting-right-action",
+          "lem-tensoring-with-a-right-module-is-additive-right-exact-and-preserves-direct-sums",
+          "prop-finite-dimensional-module-categories-are-intrinsically-finite",
+          "prop-functoriality-of-module-tensor-products",
+          "thm-an-additive-functor-preserves-finite-biproducts",
+          "thm-bimodule-actions-induced-on-tensor-products",
+          "thm-natural-transformations-of-tensor-functors-are-bimodule-maps",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "thm-universal-property-of-module-tensor-products"
+        ],
+        "dependency_level": 3,
+        "statement": "Throughout, a bimodule over $k$-algebras means a $k$-vector space with $k$-bilinear commuting actions and agreeing scalar actions: $(c1_B)m=m(c1_A)=cm$ for $c\\in k$ in a $(B,A)$-bimodule. This compatibility is an additional requirement beyond the ring-bimodule definition [[def-bimodule]].\n\nFor assertions forming categories of functors, fix a set of allowed finite-dimensional $k$-vector space structures containing $k$ and the underlying spaces of the algebras considered, and closed under finite biproducts, subspaces, quotients, $k$-tensor products, $k$-duals and spaces of linear maps. Allow every compatible algebra, module and bimodule structure on these spaces. The resulting module categories are small, so their functors and natural transformations are set-coded as required by [[def-functor-category]]. The objectwise formulas apply without this size restriction; no category of proper-class functors is asserted.\n\nLet $A$ and $B$ be finite-dimensional unital algebras over a field $k$, and let\n$A\\text{-}\\mathrm{mod}$ and $B\\text{-}\\mathrm{mod}$ be the categories of\nfinite-dimensional left modules.\n\n(i) For every finite-dimensional $(B,A)$-bimodule $M$ the functor\n$T_M=M\\otimes_A-:A\\text{-}\\mathrm{mod}\\to B\\text{-}\\mathrm{mod}$ is well\ndefined, $k$-linear and right exact.\n\n(ii) Conversely every $k$-linear right exact functor\n$F:A\\text{-}\\mathrm{mod}\\to B\\text{-}\\mathrm{mod}$ is naturally isomorphic to\n$T_{F(A)}$, where $F(A)$ carries the $(B,A)$-bimodule structure of\n[[lem-evaluation-on-the-regular-module-has-a-commuting-right-action]];\nexplicitly the canonical comparison $\\tau_X:F(A)\\otimes_AX\\to F(X)$,\n$\\tau_X(m\\otimes x)=F(\\ell_x)(m)$ with $\\ell_x(a)=ax$, is a natural\nisomorphism.\n\n(iii) For finite-dimensional $(B,A)$-bimodules $M,M'$ the assignment\n$f\\mapsto(f\\otimes1_X)_X$ is a bijection\n$\\operatorname{Hom}_{B\\text{-}A}(M,M')\\to\\operatorname{Nat}(T_M,T_{M'})$,\ncompatible with addition, identities and vertical composition.\n\n(iv) Hence $M\\mapsto T_M$ is an equivalence of categories between the category\nof finite-dimensional $(B,A)$-bimodules with bimodule maps and the category of\n$k$-linear right exact functors $A\\text{-}\\mathrm{mod}\\to B\\text{-}\\mathrm{mod}$\nwith all natural transformations. No commutativity of $A$ or $B$ is assumed and\nno choice is used.",
+        "proof_strategy": "Work with agreeing k-scalar actions and the stated small allowed-space setting when forming functor categories. Finite basis tensors span M tensor_A X, so tensor functors stay finite. Evaluation F(A) has ma=F(r_a)(m), and k-linearity gives m(c1_A)=cm. The balanced canonical comparison uses only A, X and ell_x, so the all-module calculations restrict to finite modules. It is the unit at A and an isomorphism on finite biproducts. A finite presentation and cokernel universality extend the isomorphism to X. Naturality at r_a and ell_x classifies all transformations by bimodule maps. Evaluation at A is an explicit quasi-inverse, with comparison natural in F and tensor-unit natural in M; no simultaneous selection is required.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Fuchs, Schaumann, Schweigert, Eilenberg–Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, §2.1 (Lemma 2.1, Lemma 2.2, Corollary 2.3, equation (2.1)) and §§3.1–3.2 (Definition 3.1, Theorem 3.2)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-finite-left-exact-functors-are-hom-functors-with-dual-bimodule-kernels",
+        "kind": "theorem",
+        "title": "Finite left exact functors are Hom functors with dual bimodule kernels",
+        "deps": [
+          "thm-right-adjoints-preserve-limits",
+          "def-functor-category",
+          "def-algebraic-dual-and-linear-functional",
+          "def-bimodule",
+          "def-dimension",
+          "def-equivalence-and-adjoint-equivalence-of-categories",
+          "def-exact-and-short-exact-sequences-of-modules",
+          "def-functor-and-contravariant-functor",
+          "def-k-linear-category-and-k-linear-functor",
+          "def-left-and-right-modules",
+          "def-left-exact-and-right-exact-functor",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-natural-isomorphism",
+          "def-natural-transformation",
+          "def-opposite-ring",
+          "def-vector-space-of-linear-maps",
+          "lem-evaluation-on-the-regular-module-has-a-commuting-right-action",
+          "lem-finite-module-duality-is-exact-with-commuting-bimodule-actions",
+          "lem-tensor-hom-adjunction-for-bimodules",
+          "thm-finite-eilenberg-watts-for-right-exact-linear-functors",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "thm-universal-property-of-module-tensor-products",
+          "thm-yoneda-lemma-is-natural-in-both-variables"
+        ],
+        "dependency_level": 4,
+        "statement": "Throughout, a bimodule over $k$-algebras means a $k$-vector space with $k$-bilinear commuting actions and agreeing scalar actions: $(c1_B)m=m(c1_A)=cm$ for $c\\in k$ in a $(B,A)$-bimodule. This compatibility is an additional requirement beyond the ring-bimodule definition [[def-bimodule]].\n\nFor assertions forming categories of functors, fix a set of allowed finite-dimensional $k$-vector space structures containing $k$ and the underlying spaces of the algebras considered, and closed under finite biproducts, subspaces, quotients, $k$-tensor products, $k$-duals and spaces of linear maps. Allow every compatible algebra, module and bimodule structure on these spaces. The resulting module categories are small, so their functors and natural transformations are set-coded as required by [[def-functor-category]]. The objectwise formulas apply without this size restriction; no category of proper-class functors is asserted.\n\nLet $A,B$ be finite-dimensional unital algebras over a field $k$. Let\n${}_AA_A$ be the regular bimodule and let $A^{*}=\\operatorname{Hom}_k(A,k)$ be\nits $k$-dual with the commuting actions $(a\\cdot\\lambda)(x)=\\lambda(xa)$ and\n$(\\lambda\\cdot a)(x)=\\lambda(ax)$, regarded as a left $A$-module. Let\n$F:A\\text{-}\\mathrm{mod}\\to B\\text{-}\\mathrm{mod}$ be a $k$-linear left exact\nfunctor and put $M=F(A^{*})$ with the right $A$-action\n$m\\cdot a=F(\\lambda\\mapsto\\lambda\\cdot a)(m)$; then $M$ is a\nfinite-dimensional $(B,A)$-bimodule. There is a natural isomorphism of left\n$B$-modules\n\n$$F(X)\\cong\\operatorname{Hom}_A(M^{*},X)$$\n\nfor every finite-dimensional left $A$-module $X$, where $M^{*}$ is the\n$(A,B)$-bimodule dual to $M$ and the left $B$-action on the Hom is\n$(b\\varphi)(u)=\\varphi(u\\cdot b)$; the isomorphism is natural in $X$.\nConsequently $M\\mapsto\\operatorname{Hom}_A(M^{*},-)$ is an equivalence of\ncategories between finite-dimensional $(B,A)$-bimodules with bimodule maps and\n$k$-linear left exact functors $A\\text{-}\\mathrm{mod}\\to B\\text{-}\\mathrm{mod}$\nwith all natural transformations, with quasi-inverse $F\\mapsto F(A^{*})$. No\ncommutativity of $A$ or $B$ and no choice are used.",
+        "proof_strategy": "Use the agreeing-scalar and small allowed-space conventions. A* is an (A,A)-bimodule; its right multiplications are in F domain and induce the right A-action on M=F(A*). Exact finite duality converts left exact F to right exact F^d:A^op-mod -> B^op-mod. Finite Eilenberg-Watts gives K=M* with left A/right B actions. Interpret K as right A^op and X* as left A^op; evaluation u tensor lambda -> lambda(phi(u)) identifies the dual tensor with Hom_A(M*,X), with right B before dualizing and left B after dualizing. Tensor-Hom adjunction proves these Hom functors land in Lex. Yoneda and naturality at right B-multiplications classify transformations by dual bimodule maps. Evaluation at A* is an explicit quasi-inverse; Hom_A(M*,A*) identifies naturally with M by phi -> m with u(m)=phi(u)(1), inverse m -> (u -> (a -> u(ma))).\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Fuchs, Schaumann, Schweigert, Eilenberg–Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, §2.1 (Lemma 2.1, Lemma 2.2, Corollary 2.3, equation (2.1)) and §§3.1–3.2 (Definition 3.1, Theorem 3.2)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-finite-one-sided-exactness-is-equivalent-to-existence-of-the-corresponding-adjoint",
+        "kind": "corollary",
+        "title": "Finite one-sided exactness is equivalent to existence of the corresponding adjoint",
+        "deps": [
+          "cor-left-adjoints-preserve-colimits",
+          "def-abelian-category",
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "def-bimodule",
+          "def-dimension",
+          "def-exact-and-short-exact-sequences-of-modules",
+          "def-hom-groups-and-induced-hom-maps",
+          "def-left-exact-and-right-exact-functor",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "lem-tensor-hom-adjunction-for-bimodules",
+          "prop-finite-dimensional-module-categories-are-intrinsically-finite",
+          "thm-an-abelian-category-has-all-finite-limits-and-all-finite-colimits",
+          "thm-finite-eilenberg-watts-for-right-exact-linear-functors",
+          "thm-finite-left-exact-functors-are-hom-functors-with-dual-bimodule-kernels",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "thm-right-adjoints-preserve-limits"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $A,B$ be finite-dimensional unital algebras over a field $k$ and let $F:A\\text{-}\\mathrm{mod}\\to B\\text{-}\\mathrm{mod}$ be a $k$-linear functor between the categories of finite-dimensional left modules. Then: (i) $F$ is right exact if and only if $F$ has a right adjoint; more precisely, if $F$ is right exact then $F\\cong T_{F(A)}$ and $\\operatorname{Hom}_B(F(A),-)$ is a right adjoint taking finite-dimensional modules to finite-dimensional modules, while a functor with a right adjoint preserves every finite colimit that exists in $A\\text{-}\\mathrm{mod}$ and hence is right exact. (ii) $F$ is left exact if and only if $F$ has a left adjoint; if $F$ is left exact then $F\\cong\\operatorname{Hom}_A(M^{*},-)$ with $M=F(A^{*})$ and $M^{*}\\otimes_B-$ is a left adjoint, while a functor with a left adjoint preserves every finite limit that exists and hence is left exact. No commutativity and no choice are used.",
+        "proof_strategy": "(i) If $F$ is right exact then $F\\cong T_{F(A)}$ by [[thm-finite-eilenberg-watts-for-right-exact-linear-functors]], and $T_{F(A)}$ is left adjoint to $\\operatorname{Hom}_B(F(A),-)$ by [[lem-tensor-hom-adjunction-for-bimodules]]; for finite-dimensional $Y$ the space $\\operatorname{Hom}_B(F(A),Y)$ is finite-dimensional because $F(A)$ and $Y$ are, so the adjoint stays in the finite module categories ([[def-dimension]]). Conversely if $F$ has a right adjoint $G$, then $F$ is a left adjoint and preserves every colimit that exists ([[cor-left-adjoints-preserve-colimits]]); since $A\\text{-}\\mathrm{mod}$ is abelian it has all finite colimits, so $F$ preserves finite colimits and is right exact ([[def-left-exact-and-right-exact-functor]], [[def-module-homomorphism-kernel-image-and-cokernel]]). (ii) If $F$ is left exact then $F\\cong\\operatorname{Hom}_A(M^{*},-)$ with $M=F(A^{*})$ by [[thm-finite-left-exact-functors-are-hom-functors-with-dual-bimodule-kernels]], and $M^{*}\\otimes_B-$ is left adjoint to $\\operatorname{Hom}_A(M^{*},-)$ by [[lem-tensor-hom-adjunction-for-bimodules]] applied to the $(A,B)$-bimodule $M^{*}$; the left adjoint preserves the finite module categories because $M^{*}\\otimes_BY$ is a quotient of $M^{*}\\otimes_kY$ and so finite-dimensional. Conversely if $F$ has a left adjoint then $F$ is a right adjoint and preserves every limit that exists ([[thm-right-adjoints-preserve-limits]]); all finite limits exist in $A\\text{-}\\mathrm{mod}$, so $F$ is left exact ([[def-left-exact-and-right-exact-functor]]). No commutativity and no choice are used.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Fuchs, Schaumann, Schweigert, Eilenberg–Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, §2.1 (Lemma 2.1, Lemma 2.2, Corollary 2.3, equation (2.1)) and §§3.1–3.2 (Definition 3.1, Theorem 3.2)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-finite-eilenberg-watts-is-a-biequivalence",
+        "kind": "corollary",
+        "title": "Finite Eilenberg–Watts is a biequivalence",
+        "deps": [
+          "def-bicategory-pseudofunctor-and-biequivalence",
+          "def-bimodule",
+          "def-equivalence-and-adjoint-equivalence-of-categories",
+          "def-functor-category",
+          "def-left-exact-and-right-exact-functor",
+          "def-morita-bicategory-of-rings-and-bimodules",
+          "def-natural-isomorphism",
+          "def-natural-transformation",
+          "def-strict-two-category",
+          "lem-tensoring-defines-a-pseudofunctor-with-interchange",
+          "prop-finite-dimensional-module-categories-are-intrinsically-finite",
+          "thm-finite-eilenberg-watts-for-right-exact-linear-functors"
+        ],
+        "dependency_level": 5,
+        "statement": "Throughout, a bimodule over $k$-algebras means a $k$-vector space with $k$-bilinear commuting actions and agreeing scalar actions: $(c1_B)m=m(c1_A)=cm$ for $c\\in k$ in a $(B,A)$-bimodule. This compatibility is an additional requirement beyond the ring-bimodule definition [[def-bimodule]].\n\nFor assertions forming categories of functors, fix a set of allowed finite-dimensional $k$-vector space structures containing $k$ and the underlying spaces of the algebras considered, and closed under finite biproducts, subspaces, quotients, $k$-tensor products, $k$-duals and spaces of linear maps. Allow every compatible algebra, module and bimodule structure on these spaces. The resulting module categories are small, so their functors and natural transformations are set-coded as required by [[def-functor-category]]. The objectwise formulas apply without this size restriction; no category of proper-class functors is asserted.\n\nLet $A,B$ range over finite-dimensional unital algebras over a field $k$, and\nconsider the assignment $\\Phi(A)=A\\text{-}\\mathrm{mod}$,\n$\\Phi(M)=T_M=M\\otimes_A-$, $\\Phi(f)=f\\otimes1$ on finite-dimensional bimodules\nand bimodule maps. (i) For all $A,B$ the assignment $M\\mapsto T_M$ is an\nequivalence of categories between finite-dimensional $(B,A)$-bimodules with\nbimodule maps and $k$-linear right exact functors\n$A\\text{-}\\mathrm{mod}\\to B\\text{-}\\mathrm{mod}$ with all natural\ntransformations, so it is full, faithful and essentially surjective. (ii) The\ncomposition and unit comparisons of the pseudofunctor\n[[lem-tensoring-defines-a-pseudofunctor-with-interchange]] restrict to\nfinite-dimensional algebras and finite-dimensional modules: the associativity\nisomorphism $N\\otimes_B(M\\otimes_A-)\\cong(N\\otimes_BM)\\otimes_A-$ with\ncomponents $N\\otimes_B(M\\otimes_AX)\\cong(N\\otimes_BM)\\otimes_AX$ and the inverse unit\nisomorphism $X\\cong A\\otimes_AX$ are natural isomorphisms of\nfinite-dimensional modules, and the pseudofunctor coherence equations remain\nsatisfied. Consequently these data define a biequivalence from the bicategory\nof finite-dimensional algebras, finite-dimensional bimodules and bimodule maps\nto the 2-category of finite-dimensional module categories, $k$-linear right\nexact functors and natural transformations. No commutativity and no choice are\nused.",
+        "proof_strategy": "Use agreeing scalars and the common set of allowed spaces, so every finite module source is small and functor hom-categories consist of set-coded objects and maps. The local tensor assignment is the equivalence with explicit evaluation quasi-inverse supplied by finite Eilenberg-Watts. Tensor products of finite bimodules remain finite. Use composition comparison alpha inverse and unit comparison lambda inverse, X -> A tensor_A X. Check associativity, unit paths and horizontal naturality directly on elementary tensors under those comparisons. Each target object A-mod is Phi(A), so the biequivalence criterion applies. The schematic unrestricted supplier is used only for its explicit comparison formulas.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Fuchs, Schaumann, Schweigert, Eilenberg–Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, §2.1 (Lemma 2.1, Lemma 2.2, Corollary 2.3, equation (2.1)) and §§3.1–3.2 (Definition 3.1, Theorem 3.2)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-exact-finite-tensor-functors-have-right-projective-kernels",
+        "kind": "corollary",
+        "title": "Exact finite tensor functors have projective right-module kernels",
+        "deps": [
+          "cor-every-module-is-a-quotient-of-a-free-module",
+          "def-bimodule",
+          "def-dimension",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-exact-functor-between-abelian-categories",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-hom-groups-and-induced-hom-maps",
+          "def-left-and-right-flat-modules-over-an-arbitrary-ring",
+          "def-left-and-right-modules",
+          "def-left-exact-and-right-exact-functor",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-projective-module",
+          "def-split-monomorphism-and-split-epimorphism",
+          "lem-finite-module-duality-is-exact-with-commuting-bimodule-actions",
+          "lem-projective-modules-are-flat-over-an-arbitrary-ring",
+          "lem-tensor-hom-adjunction-for-bimodules",
+          "thm-finite-left-exact-functors-are-hom-functors-with-dual-bimodule-kernels",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "thm-projective-module-characterizations",
+          "thm-splitting-lemma-for-modules",
+          "thm-universal-property-of-module-direct-sums",
+          "thm-universal-property-of-module-tensor-products"
+        ],
+        "dependency_level": 5,
+        "statement": "Throughout, a bimodule over $k$-algebras means a $k$-vector space with $k$-bilinear commuting actions and agreeing scalar actions: $(c1_B)m=m(c1_A)=cm$ for $c\\in k$ in a $(B,A)$-bimodule. This compatibility is an additional requirement beyond the ring-bimodule definition [[def-bimodule]].\n\nLet $A,B$ be finite-dimensional unital algebras over a field $k$ and let $M$ be\na finite-dimensional $(B,A)$-bimodule with associated tensor functor\n$T_M=M\\otimes_A-:A\\text{-}\\mathrm{mod}\\to B\\text{-}\\mathrm{mod}$. Then the\nfollowing are equivalent: (1) $T_M$ is exact on finite-dimensional left\n$A$-modules, equivalently $M$ is flat as a right $A$-module; (2) $M$ is a\nprojective right $A$-module. Since $M$ is finite-dimensional, (2) is also\nequivalent to $M$ being a direct summand of a finite free right $A$-module and\nto $M$ being finitely generated and projective. No choice is used.",
+        "proof_strategy": "Require agreeing k-scalar actions. Projective M is flat, so its tensor functor is exact on all left modules and thus on finite ones. In the other direction exact finite duality and the balanced functional pairing give (M tensor_A X)* = Hom_{A^op}(M,X*). Exactness of tensor on finite left modules gives exactness of Hom on finite right modules. Lift 1_M through a finite free cover p:A^n onto M to obtain h with ph=1. For an arbitrary surjection e:E onto N prime and f:M into N prime, choose finite basis lifts of fp:A^n into N prime and compose with h. Thus M is projective against arbitrary targets without AC. Finite generation and the finite-free-summand criterion complete all equivalences.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Fuchs, Schaumann, Schweigert, Eilenberg–Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, §2.1 (Lemma 2.1, Lemma 2.2, Corollary 2.3, equation (2.1)) and §§3.1–3.2 (Definition 3.1, Theorem 3.2)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 924,
+    "id": "finite-abelian-categories-and-eilenberg-watts-examples",
+    "kind": "B",
+    "category": "homological-algebra",
+    "title": "Finite Abelian Categories and Eilenberg–Watts — Examples",
+    "companion": "finite-abelian-categories-and-eilenberg-watts",
+    "requires": [
+      "finite-abelian-categories-and-eilenberg-watts"
+    ],
+    "items": [
+      {
+        "id": "ex-finite-right-exact-functor-needs-no-infinite-coproduct-hypothesis",
+        "kind": "example",
+        "title": "A finite right exact functor needs no infinite-coproduct hypothesis",
+        "deps": [
+          "thm-eilenberg-watts-for-arbitrary-unital-rings",
+          "cor-finite-one-sided-exactness-is-equivalent-to-existence-of-the-corresponding-adjoint",
+          "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+          "def-dimension",
+          "def-hom-groups-and-induced-hom-maps",
+          "def-left-and-right-modules",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-products-and-coproducts",
+          "def-quotient-ring",
+          "def-simple-module",
+          "prop-finite-dimensional-module-categories-are-intrinsically-finite",
+          "thm-finite-eilenberg-watts-for-right-exact-linear-functors",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "thm-universal-property-of-module-direct-sums"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $k$ be a field, let $A=k[\\varepsilon]/(\\varepsilon^{2})$ be the algebra of\ndual numbers ([[def-polynomial-ring-over-a-commutative-ring]],\n[[def-quotient-ring]]) and let $S=A/(\\varepsilon)$ be its simple module\n([[def-simple-module]]). Then: (i) $A\\text{-}\\mathrm{mod}$ has no countable\ncoproduct of copies of $A$, so it is not cocomplete; (ii) nevertheless the functor\n$T_S=S\\otimes_A-$, the case $M=S$ of the finite Eilenberg–Watts theorem, is\nright exact with right adjoint $\\operatorname{Hom}_A(S,-)$, and it is classified\nby its kernel $T_S(A)\\cong S$. Its right exactness, its right adjoint and its\nclassification use only finite free presentations and the finite biproducts of\n$A\\text{-}\\mathrm{mod}$; no infinite coproducts are formed. Thus the finite classification requires no additional preservation hypothesis about infinite coproducts. Preservation of coproducts that do exist remains a meaningful condition; nonexistence of one countable coproduct does not make that condition vacuous. No choice is used.",
+        "proof_strategy": "For the nonzero simple quotient S, Hom_A(A,S)=S by evaluation at 1. If a countable coproduct of regular modules existed in the finite category, restriction along its injections would give a k-linear bijection Hom_A(X,S) -> S^N. Explicit finite-support e_n are independent, contradicting finite dimension of Hom_A(X,S). Yet T_S is right exact, has the finite Hom right adjoint and kernel S by the finite classification and tensor unit. No infinite coproduct assumption is used. The all-module theorem has a distinct unrestricted domain; preservation of existing coproducts is meaningful, and a countable family of zeros has coproduct zero. No semisimplicity refutation is needed.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Fuchs, Schaumann, Schweigert, Eilenberg–Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, §2.1 (Lemma 2.1, Lemma 2.2, Corollary 2.3, equation (2.1)) and §§3.1–3.2 (Definition 3.1, Theorem 3.2)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-finite-length-and-finite-hom-do-not-imply-finite-category",
+        "kind": "counterexample",
+        "title": "Finite length and finite Hom do not imply a finite category",
+        "deps": [
+          "def-finite-k-linear-abelian-category",
+          "def-generator-and-cogenerator-of-a-category",
+          "def-locally-finite-k-linear-abelian-category",
+          "def-projective-object",
+          "def-simple-object",
+          "def-superfluous-subobject-and-projective-cover-in-an-abelian-category",
+          "lem-finite-support-families-of-finite-dimensional-vector-spaces-are-locally-finite"
+        ],
+        "dependency_level": 2,
+        "statement": "The statement 'a $k$-linear abelian category with finite-dimensional hom-spaces, finite-length objects and enough projective covers is finite' is false. The category $\\mathcal C$ of finite-support $\\mathbb N$-indexed families of finite-dimensional $k$-vector spaces with componentwise maps is $k$-linear and abelian, has finite-dimensional hom-spaces, every object has finite length and every simple object has a projective cover, but the objects $S_m$ concentrated in a single degree are pairwise non-isomorphic simple objects, so $\\mathcal C$ has infinitely many isomorphism classes of simple objects; moreover no object of $\\mathcal C$ is a generator. Hence local finiteness together with enough projectives does not imply the fourth intrinsic finiteness condition of [[def-finite-k-linear-abelian-category]]. No choice is used.",
+        "proof_strategy": "All the asserted properties of $\\mathcal C$ are proved in [[lem-finite-support-families-of-finite-dimensional-vector-spaces-are-locally-finite]]: $\\mathcal C$ is $k$-linear and abelian with componentwise (co)limits, hom-spaces are finite-dimensional, every object has finite length, every object is projective (so every simple object has a projective cover, [[def-superfluous-subobject-and-projective-cover-in-an-abelian-category]]), the $S_m$ are pairwise non-isomorphic simple objects, and no object is a generator ([[def-generator-and-cogenerator-of-a-category]]). Since the intrinsic definition of a finite $k$-linear abelian category requires finitely many simple isomorphism classes, $\\mathcal C$ is locally finite with enough projectives but not finite; this is exactly the failure of clause (iv) while clauses (i)-(iii) hold. No choice is used.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-dual-numbers-tensor-functor-is-right-exact-but-not-left-exact",
+        "kind": "example",
+        "title": "The dual-numbers tensor functor is right exact but not left exact",
+        "deps": [
+          "cor-exact-finite-tensor-functors-have-right-projective-kernels",
+          "cor-finite-one-sided-exactness-is-equivalent-to-existence-of-the-corresponding-adjoint",
+          "def-dimension",
+          "def-exact-and-short-exact-sequences-of-modules",
+          "def-left-and-right-flat-modules-over-an-arbitrary-ring",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-projective-module",
+          "def-quotient-ring",
+          "def-simple-module",
+          "lem-tensor-hom-adjunction-for-bimodules",
+          "prop-finite-dimensional-module-categories-are-intrinsically-finite",
+          "thm-finite-eilenberg-watts-for-right-exact-linear-functors",
+          "thm-finite-left-exact-functors-are-hom-functors-with-dual-bimodule-kernels",
+          "thm-splitting-lemma-for-modules",
+          "thm-unit-isomorphisms-for-module-tensor-products"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $k$ be a field, let $A=k[\\varepsilon]/(\\varepsilon^{2})$ be the algebra of\ndual numbers ([[def-polynomial-ring-over-a-commutative-ring]],\n[[def-quotient-ring]]) and let $S=A/(\\varepsilon)$ be its simple module\n([[def-simple-module]]). Then the tensor functor\n$T_S=S\\otimes_A-:A\\text{-}\\mathrm{mod}\\to A\\text{-}\\mathrm{mod}$ is right exact\nbut not left exact. Explicitly, applied to the non-split short exact sequence\n$0\\to(\\varepsilon)\\to A\\to S\\to0$ of finite-dimensional $A$-modules it yields,\nunder the identifications $S\\otimes_A(\\varepsilon)\\cong S$, $S\\otimes_AA\\cong S$\nand $S\\otimes_AS\\cong S$, the sequence\n$S\\xrightarrow{0}S\\xrightarrow{\\cong}S\\to0$; the comparison map\n$S\\otimes_A(\\varepsilon)\\to S\\otimes_AA$ is zero and therefore is not\ninjective, so $T_S$ is not left exact. Consistently, $T_S$ has a right adjoint\n$\\operatorname{Hom}_A(S,-)$ but no left adjoint, and its kernel $S$ is not a\nprojective right $A$-module. No choice is used.",
+        "proof_strategy": "A has basis 1,epsilon with epsilon squared zero; S=A/(epsilon) is one-dimensional, simple, and isomorphic to the ideal (epsilon). The sequence 0 -> (epsilon) -> A -> S -> 0 cannot split, because epsilon acts nontrivially on A and trivially on S plus S. Right exact tensoring gives the sequence S -> S -> S -> 0; its first map is zero and its second map is an isomorphism. Thus this sequence is exact at the middle term; failure of left exactness is failure of injectivity of the first map from nonzero S. The adjoint corollary gives a right adjoint and no left adjoint; projective kernels would give exactness, so S is not right projective. No published semisimplicity refutation is needed.\n\n**Proof technique:** direct.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Etingof, Gelaki, Nikshych, Ostrik, Tensor Categories, §1.8 (Definitions 1.8.1–1.8.6, Proposition 1.8.10, Corollary 1.8.11, Remark 1.8.7), printed pp.9–11; §1.11 only for the deferred Deligne boundary",
+              "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+            },
+            {
+              "title": "Fuchs, Schaumann, Schweigert, Eilenberg–Watts calculus for finite categories and a bimodule Radford S^4 theorem, arXiv:1612.04561v3, §2.1 (Lemma 2.1, Lemma 2.2, Corollary 2.3, equation (2.1)) and §§3.1–3.2 (Definition 3.1, Theorem 3.2)",
+              "url": "https://arxiv.org/pdf/1612.04561v3"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

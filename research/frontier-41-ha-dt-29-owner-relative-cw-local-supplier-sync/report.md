@@ -1,0 +1,13 @@
+# Relative CW local-supplier mechanical synchronization
+
+Run `frontier-41-ha-dt-29`; target `lem-a-handle-decomposition-gives-a-relative-cw-complex`. Root is the mathematical source correction author and personally read/accepted the three existing local proof constructions. `/root/step5_adapted_whitney_tube` performed only the requested mechanical manifest/contract/page prerequisite synchronization. No item mathematical source or other scope/native history/control was written by this author.
+
+The target Statement is byte-unchanged. Manifest1's target dependencies and strategy now match the current source. The contract's F6 contains three exact published Statement quotations, plus `local_supplier_proof_uses` retaining the exact relevant internal proof steps and their proper scope. The contract validator accepts only Statement/Definition-like source sections, so no unsupported `source_section: Proof` was invented. The supplemental excerpts distinguish the general HEP-only relative-inverse proof construction from the published CW-subcomplex Statement; no CW structure on the original smooth stage is asserted. Derivations and justification inputs now use root's current F6 tags, with A1 retained only as literature context.
+
+The page already required `higher-homotopy-groups-and-cofiber-sequences`, home of mapping-cylinder and cofibration-product suppliers. Added only the missing earlier published home `homology-axioms-degree-and-classical-applications`, order366.009, for the CW-inverse proof construction; target page order527 is later. The owning manifest page requires matches the source page. No shared plan was written; `plan-delta.json` supplies root the one-entry and precise prerequisite update.
+
+Actual focused checks passed: target precheck1/1, rendercheck of target and A-page2files, proof-layout1item/4steps/0defects, strict target contract1/1/zero errors/warnings. These checks are mechanical, not a new review verdict. Root's source before carrier is `research/frontier-41-ha-dt-29-owner-relative-cw-local-suppliers-before.md`; this task additionally archived manifest, contract and page before bytes.
+
+`ordinary-metadata-delta.json` identifies the exact updates. `ordinary-decision-proposal.json` retains the existing amended-repair/defect ownership and adds the root-current local-prerequisite resolution without claiming a new native read. `ordinary-decision-before.json` retains the actual current prior row, and `current-carriers.json` records current raw/guard/judge/manifest/contract/subject hashes as observations only. Root owns final plan merge, ordinary subject sealing and any required recertification after drainage.
+
+This writer is drained; no further source or metadata writing is planned.

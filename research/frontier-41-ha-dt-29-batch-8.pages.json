@@ -1,0 +1,1273 @@
+[
+  {
+    "order": 543,
+    "id": "fixed-point-index-and-the-lefschetz-theorem",
+    "kind": "A",
+    "category": "differential-topology",
+    "title": "Fixed Point Index and the Lefschetz Theorem",
+    "companion": "fixed-point-index-and-the-lefschetz-theorem-examples",
+    "requires": [
+      "oriented-and-mod-two-intersection-numbers",
+      "intersection-pairings-self-intersection-and-euler-classes",
+      "vector-field-index-euler-characteristic-and-poincare-hopf",
+      "sard-theorem-and-transversality",
+      "the-de-rham-theorem-and-degree",
+      "singular-chains-and-singular-homology",
+      "singular-cohomology-and-coefficient-theorems",
+      "cup-cap-cross-products-and-cohomology-rings",
+      "orientations-poincare-lefschetz-and-alexander-duality",
+      "local-coefficients-twisted-homology-and-duality",
+      "lie-subgroups-actions-and-homogeneous-spaces"
+    ],
+    "items": [
+      {
+        "id": "lem-a-closed-discrete-subset-of-a-compact-space-is-finite",
+        "kind": "lemma",
+        "title": "A closed discrete subset of a compact space is finite",
+        "deps": [
+          "def-compact-space",
+          "def-subspace-topology-top",
+          "def-topological-space"
+        ],
+        "statement": "Let $X$ be a compact topological space ([[def-compact-space]]) and let $S\\subseteq X$ be closed and discrete, meaning that for every $s\\in S$ there is an open $U_s\\subseteq X$ with $U_s\\cap S=\\{s\\}$ ([[def-subspace-topology-top]], [[def-topological-space]]). Then $S$ is finite.",
+        "strategy": "Form the open cover by comprehension: {X\\S} together with every open U whose intersection with S is a singleton. This does not choose an indexed family of neighborhoods. Compactness gives a finite subcover; an empty subcover forces X=S=∅. Otherwise intersect its finite listing with S. Each trace is empty or a singleton, so their union S is finite without a choice principle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed pp. 126-127 (compactness produces finitely many fixed points in the splitting argument)"
+            },
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §6, printed pp. 13-14 (fixed point sets are compact/finite in the index axioms)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-fixed-points-are-graph-diagonal-intersections",
+        "kind": "lemma",
+        "title": "Fixed points are exactly the intersections of the graph with the diagonal",
+        "deps": [
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold",
+          "prop-the-diagonal-is-an-embedded-submanifold",
+          "def-the-diagonal-of-a-space"
+        ],
+        "statement": "Let $M$ be a smooth manifold and $f:M\\to M$ a smooth map ([[def-c-r-and-smooth-maps-between-smooth-manifolds]]) with graph $\\Gamma_f=\\{(x,f(x)):x\\in M\\}\\subseteq M\\times M$ ([[prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold]]) and diagonal $\\Delta_M=\\{(x,x):x\\in M\\}$ ([[def-the-diagonal-of-a-space]], [[prop-the-diagonal-is-an-embedded-submanifold]]). Then for every $x\\in M$,\n$$x\\in\\operatorname{Fix}(f)\\iff(x,f(x))\\in\\Gamma_f\\cap\\Delta_M\\iff(x,x)\\in\\Gamma_f,$$\nso the graph map $\\gamma_f:M\\to M\\times M$, $\\gamma_f(x)=(x,f(x))$, satisfies $\\gamma_f^{-1}(\\Delta_M)=\\{(x,x):x\\in\\operatorname{Fix}(f)\\}$: fixed points of $f$ are exactly the intersections of the graph with the diagonal.",
+        "strategy": "Immediate from the definitions: $(x,f(x))\\in\\Delta_M$ means $x=f(x)$, and the three displayed conditions are the same equation. No smoothness beyond the existence of the objects, and no choice principle, is used; the empty and zero-dimensional cases are included.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed p. 119 (a fixed point is precisely an intersection point of graph(f) with the diagonal)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed p. 54 (fixed points as intersections of the graph with the diagonal)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-nondegenerate-fixed-point",
+        "kind": "definition",
+        "title": "Nondegenerate fixed point",
+        "deps": [
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-smooth-manifold",
+          "def-differential-of-a-smooth-map",
+          "def-linear-isomorphism-and-invertible-linear-map",
+          "thm-smooth-inverse-function-theorem-on-manifolds"
+        ],
+        "statement": "Let $M$ be a smooth $n$-manifold and let $f:M\\to M$ be a smooth map with a fixed point $x$; identify $T_{f(x)}M$ with $T_xM$ along $f(x)=x$, so that the differential is an endomorphism $Df_x:T_xM\\to T_xM$ ([[def-differential-of-a-smooth-map]]). The fixed point $x$ is **nondegenerate** when $I-Df_x$ is an isomorphism of $T_xM$ ([[def-linear-isomorphism-and-invertible-linear-map]]), equivalently when $1$ is not an eigenvalue of $Df_x$. A nondegenerate fixed point is isolated: in a chart at $x$ the displacement $u\\mapsto u-\\widehat f(u)$ has invertible derivative $I-D\\widehat f(0)$ at $u=0$, hence is a local diffeomorphism near $0$ ([[thm-smooth-inverse-function-theorem-on-manifolds]]) with the unique zero $0$ there, so a neighbourhood of $x$ contains no other fixed point. No choice principle is used, and $n=0$ is allowed (then $I-Df_x$ is an isomorphism of the zero space and the condition is vacuous).",
+        "strategy": "Definition of the linearization condition, with isolatedness supplied by the inverse function theorem, in the exact form used by the local index of [[def-local-fixed-point-index]]. The convention is $I-Df_x$, not $Df_x-I$; with the other ordering the determinant changes by the sign $(-1)^n$. No orientation of $M$ is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed pp. 120-121 (the Lefschetz condition: df_x-I an isomorphism; Lefschetz points are isolated)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed p. 54 (a fixed point is nondegenerate if the graph is transverse to the diagonal at it; sign(x)=sign det(I-df))"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-graph-transversality-is-fixed-point-nondegeneracy",
+        "kind": "lemma",
+        "title": "Graph-diagonal transversality is exactly fixed-point nondegeneracy",
+        "deps": [
+          "def-nondegenerate-fixed-point",
+          "lem-fixed-points-are-graph-diagonal-intersections",
+          "prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold",
+          "prop-the-diagonal-is-an-embedded-submanifold",
+          "def-transverse-embedded-submanifolds",
+          "thm-canonical-tangent-and-cotangent-splittings-for-products",
+          "def-differential-of-a-smooth-map",
+          "def-linear-isomorphism-and-invertible-linear-map",
+          "def-the-diagonal-of-a-space",
+          "thm-chain-rule-for-differentials-of-smooth-maps",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "thm-rank-nullity"
+        ],
+        "statement": "Let $M$ be a smooth $n$-manifold, $f:M\\to M$ smooth, $\\Gamma_f$ its graph and $\\Delta_M$ the diagonal ([[prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold]], [[prop-the-diagonal-is-an-embedded-submanifold]]), and let $\\gamma_f(x)=(x,f(x))$. For a fixed point $x$ the following are equivalent:\n(i) $\\Gamma_f$ and $\\Delta_M$ are transverse at $\\gamma_f(x)$ ([[def-transverse-embedded-submanifolds]]), i.e. $T_{\\gamma_f(x)}\\Gamma_f+T_{\\gamma_f(x)}\\Delta_M=T_{\\gamma_f(x)}(M\\times M)$ in the canonical splitting $T_{(x,x)}(M\\times M)\\cong T_xM\\oplus T_xM$ of [[thm-canonical-tangent-and-cotangent-splittings-for-products]];\n(ii) $I-Df_x$ is invertible ([[def-linear-isomorphism-and-invertible-linear-map]]);\n(iii) $x$ is a nondegenerate fixed point ([[def-nondegenerate-fixed-point]]).\nFor $x\\notin\\operatorname{Fix}(f)$ one has $\\gamma_f(x)\\notin\\Delta_M$ and transversality at $\\gamma_f(x)$ holds automatically. Consequently the graph map $\\gamma_f$ is transverse to $\\Delta_M$ if and only if every fixed point of $f$ is nondegenerate.",
+        "strategy": "In the splitting $T_{(x,x)}(M\\times M)=T_xM\\oplus T_xM$ the tangent space of $\\Gamma_f$ at $\\gamma_f(x)$ is the graph $\\{(v,Df_xv):v\\in T_xM\\}$ and that of $\\Delta_M$ is the diagonal $\\{(v,v)\\}$; both are $n$-dimensional, so transversality is equivalent to the two subspaces meeting only in $0$. A vector forms $(v,v)=(w,Df_xw)$ exactly when $v=w$ and $(I-Df_x)v=0$; the intersection is therefore $\\{(v,v):(I-Df_x)v=0\\}$, which is zero precisely when $I-Df_x$ is injective, hence invertible in finite dimension ([[def-linear-isomorphism-and-invertible-linear-map]]). Points over non-fixed points are not in the diagonal, so transversality there is vacuous and the global equivalence follows. No orientation, metric or choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed pp. 120-121 (graph(df_x) meets the diagonal only at 0 iff df_x has no nonzero fixed vector)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed p. 54 (x is nondegenerate iff the graph is transverse to the diagonal at x)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-local-fixed-point-index",
+        "kind": "definition",
+        "title": "Isolated fixed point and local fixed point index",
+        "deps": [
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-smooth-manifold",
+          "def-manifold-chart-coordinate-domain-and-coordinate-functions",
+          "def-degree-of-a-map-between-oriented-closed-manifolds",
+          "thm-degree-is-invariant-under-proper-smooth-homotopy"
+        ],
+        "justified_by": [
+          "lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent"
+        ],
+        "statement": "Let $M$ be a smooth $n$-manifold without boundary, $n\\ge1$\n([[def-smooth-manifold]]), let $f:M\\to M$ be a smooth map\n([[def-c-r-and-smooth-maps-between-smooth-manifolds]]) and let $x$ be an\n**isolated** fixed point of $f$, i.e. some neighbourhood of $x$ contains no\nother fixed point. Choose a smooth chart $(\\varphi,U)$ from the smooth atlas of $M$\n([[def-smooth-manifold]]) with $x\\in U$ and\n$\\varphi(x)=0$\n([[def-manifold-chart-coordinate-domain-and-coordinate-functions]]) and\n$\\varepsilon>0$ such that the closed ball $\\overline{B_\\varepsilon(0)}$ lies\nin $\\varphi(U\\cap f^{-1}(U))$ and\n$\\widehat f(u):=\\varphi(f(\\varphi^{-1}(u)))\\neq u$ for $0<|u|\\le\\varepsilon$, and\nset $g(u):=u-\\widehat f(u)$. The **local fixed point index** of $f$ at $x$ is\nthe degree\n\n$$\\operatorname{ind}_x(f):=\\deg\\Bigl(S^{n-1}\\to S^{n-1},\\ v\\mapsto\\frac{g(\\varepsilon v)}{|g(\\varepsilon v)|}\\Bigr)\\in\\mathbb Z$$\n\nof [[def-degree-of-a-map-between-oriented-closed-manifolds]] for $n\\ge2$,\nboth spheres carrying their boundary orientations. For $n=1$ use the reduced\ndegree of [[def-reduced-degree-into-the-zero-sphere]]: if $h(v)=g(\\varepsilon v)/|g(\\varepsilon v)|$,\nthen $\\operatorname{ind}_x(f)=(h(+1)-h(-1))/2$. Radius independence follows by\nradial interpolation in the zero-free punctured ball, using\n[[thm-degree-is-invariant-under-proper-smooth-homotopy]] for $n\\ge2$ and\n[[lem-reduced-degree-into-the-zero-sphere-is-homotopy-invariant-and-multiplicative]] for $n=1$ and of the chart, the\nball and the neighbourhood by\n[[lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent]]; it\nuses no orientation of $M$, because a chart change multiplies source and target\norientations by the same sign. The empty sum over a fixed-point-free map is $0$\nby convention, and this local-index definition is restricted to $n\\ge1$.",
+        "strategy": "Definition by the Euclidean displacement model and the sphere degree, in the exact form of [[def-isolated-zero-and-local-index-of-a-vector-field]] applied to the chart displacement field; well-definedness is deferred to [[lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent]] in the style of DT-11's intersection sign. No choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §6, printed p. 13 (I(f,x0) is the topological degree of id-f near an isolated fixed point)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed p. 54 (the index of an isolated fixed point as the appropriate map between spheres)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-local-fixed-point-index-is-invariant-under-diffeomorphism-conjugation",
+        "kind": "lemma",
+        "title": "The local fixed point index is invariant under conjugation by a local diffeomorphism",
+        "deps": [
+          "def-local-fixed-point-index",
+          "prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism",
+          "prop-degree-is-multiplicative-under-composition",
+          "thm-degree-is-invariant-under-proper-smooth-homotopy",
+          "cor-multivariable-taylor-formula-with-peano-remainder",
+          "thm-regular-value-formula-for-degree"
+        ],
+        "statement": "Let $M$ be a smooth $n$-manifold without boundary, $n\\ge1$, let $f:M\\to M$ have an isolated fixed point $x$, let $h:N\\to M$ be a diffeomorphism from a neighbourhood of $y\\in N$ onto a neighbourhood of $x$ with $h(y)=x$, and let $f':=h^{-1}\\circ f\\circ h$ (defined near $y$) have the isolated fixed point $y$. Then\n$$\\operatorname{ind}_y(f')=\\operatorname{ind}_x(f)$$\n([[def-local-fixed-point-index]]). In particular, if $\\pi:\\widetilde M\\to M$ is a covering map, $\\widetilde f$ is a lift of $f$ ($\\pi\\circ\\widetilde f=f\\circ\\pi$) and $\\widetilde x$ is a fixed point of $\\widetilde f$ with $\\pi(\\widetilde x)=x$, then $\\operatorname{ind}_{\\widetilde x}(\\widetilde f)=\\operatorname{ind}_x(f)$ whenever $x$ is an isolated fixed point of $f$.",
+        "strategy": "Choose charts near $x$ and $y$ in which $h$ becomes the identity of a Euclidean ball: in these charts the displacement representatives $u-\\widehat f(u)$ of $f$ and $f'$ coincide, so the normalized sphere maps are literally the same and their degrees agree. For the covering case, $\\pi$ restricts to a diffeomorphism from a neighbourhood of $\\widetilde x$ onto a neighbourhood of $x$ and conjugates $\\widetilde f$ to $f$ there, so the first clause applies. The statement transports local indices across the orientation double cover in [[lem-fixed-point-sum-of-the-two-lifts-of-a-self-map]]; no orientation of either manifold and no choice principle are used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §5, printed p. 136 (the local number is invariant under diffeomorphic reparametrization)"
+            },
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §6, printed p. 13 (the index is local and independent of the chosen neighbourhood)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent",
+        "kind": "lemma",
+        "title": "The local fixed point index is independent of chart, ball and neighbourhood",
+        "deps": [
+          "def-local-fixed-point-index",
+          "lem-local-fixed-point-index-is-invariant-under-diffeomorphism-conjugation",
+          "prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism",
+          "prop-degree-is-multiplicative-under-composition",
+          "thm-degree-is-invariant-under-proper-smooth-homotopy",
+          "thm-regular-value-formula-for-degree",
+          "cor-the-differential-of-a-diffeomorphism-is-an-isomorphism"
+        ],
+        "statement": "Let $M$ be a smooth $n$-manifold without boundary, $n\\ge1$, and let\n$f:M\\to M$ be smooth with an isolated fixed point $x$. Then the choices\nentering [[def-local-fixed-point-index]] do not affect the value: any two\nadmissible charts at $x$ produce the same degree, and any two admissible\nradii in one chart produce homotopic normalized sphere maps. For $n=1$ the\ndegree is reduced degree; maps from different charts need not be homotopic\n(for $f(u)=u-u^2$ on $\\mathbb R$, the charts $u$ and $-u$ give the two\ndifferent constant maps $S^0\\to S^0$, each of reduced degree $0$). Consequently\n$\\operatorname{ind}_x(f)$ is a well-defined integer depending only on the germ\nof $f$ at $x$, and it is computed by the displayed formula in every admissible smooth chart and\nevery sufficiently small ball around $x$.",
+        "strategy": "Radius: for $0<\\varepsilon'<\\varepsilon$ the normalizations $v\\mapsto g(\\varepsilon v)/|g(\\varepsilon v)|$ and $v\\mapsto g(\\varepsilon'v)/|g(\\varepsilon'v)|$ are homotopic through $v\\mapsto g(t\\varepsilon v)/|g(t\\varepsilon v)|$, which is nonzero throughout because $g\\neq0$ on $0<|u|<\\varepsilon$; degree invariance is [[thm-degree-is-invariant-under-proper-smooth-homotopy]]. Charts: let $A=d(\\psi\\circ\\varphi^{-1})_0$, an isomorphism of $\\mathbb R^n$ ([[cor-the-differential-of-a-diffeomorphism-is-an-isomorphism]]). The two displacement representatives are related by the transition near $0$, so their normalized maps differ by a reparametrization $v\\mapsto Av/|Av|$ of the source sphere and by the corresponding normalization of the target; both have degree $\\operatorname{sign}\\det A$ ([[thm-regular-value-formula-for-degree]], [[prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism]]), and by multiplicativity of degree ([[prop-degree-is-multiplicative-under-composition]]) the two factors cancel, so the degrees agree. Neighbourhoods are compared through a common smaller ball. The argument is the chart-independence proof of [[lem-vector-field-index-is-independent-of-chart-ball-and-trivialization]] in the fixed point language, and it uses no orientation of $M$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §5, printed p. 136 (index invariance under reparametrization, well-definedness on manifolds)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed p. 54 (the index is well defined independent of metric, trivialization and radius)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-index-of-a-nondegenerate-fixed-point",
+        "kind": "theorem",
+        "title": "The index of a nondegenerate fixed point is the sign of det(I-Df)",
+        "deps": [
+          "def-local-fixed-point-index",
+          "lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent",
+          "lem-local-fixed-point-index-is-invariant-under-diffeomorphism-conjugation",
+          "def-nondegenerate-fixed-point",
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-nondegenerate-zero-of-a-vector-field",
+          "thm-index-of-a-nondegenerate-vector-field-zero",
+          "def-differential-of-a-smooth-map",
+          "def-induced-tangent-bundle-chart"
+        ],
+        "statement": "Let $M$ be a smooth $n$-manifold without boundary, $n\\ge1$, and let $x$ be a nondegenerate fixed point of a smooth map $f:M\\to M$ ([[def-nondegenerate-fixed-point]]). Then\n$$\\operatorname{ind}_x(f)=\\operatorname{sign}\\det(I-Df_x:T_xM\\to T_xM)\\in\\{+1,-1\\},$$\nso every nondegenerate fixed point has index $+1$ or $-1$. The convention is $I-Df_x$, not $Df_x-I$; in the other ordering the value is multiplied by $(-1)^n$, which is the source of sign discrepancies between references.",
+        "strategy": "Work in a chart at $x$ and put $\\widehat f=\\varphi\\circ f\\circ\\varphi^{-1}$, $g(u)=u-\\widehat f(u)$. Then $g$ is a smooth vector field on the chart ball (a smooth section of the trivial tangent bundle, [[def-induced-tangent-bundle-chart]]) with $g(0)=0$ and vertical derivative $Dg_0=I-Df_x$ invertible ([[def-differential-of-a-smooth-map]], [[def-nondegenerate-zero-of-a-vector-field]]). By [[def-isolated-zero-and-local-index-of-a-vector-field]] the vector field index $\\operatorname{ind}_0g$ is exactly the degree of $v\\mapsto g(\\varepsilon v)/|g(\\varepsilon v)|$, which is $\\operatorname{ind}_x(f)$ by [[def-local-fixed-point-index]]; hence $\\operatorname{ind}_x(f)=\\operatorname{ind}_0g$ by [[lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent]]. The in-run theorem [[thm-index-of-a-nondegenerate-vector-field-zero]] gives $\\operatorname{ind}_0g=\\operatorname{sign}\\det Dg_0=\\operatorname{sign}\\det(I-Df_x)$. No orientation of $M$ and no choice principle are used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §5, printed p. 12 (each transverse intersection is signed by the sign of det(I-Df_x))"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed p. 54 (sign(x)=sign det(I-df))"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed pp. 121-122 (local number equals sign det(df_x-I); the I-Df convention used here differs by (-1)^n)"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-local-fixed-point-index-splits-under-perturbation",
+        "kind": "lemma",
+        "title": "An isolated fixed point splits under perturbation, preserving its index",
+        "deps": [
+          "def-local-fixed-point-index",
+          "thm-index-of-a-nondegenerate-fixed-point",
+          "lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent",
+          "def-nondegenerate-fixed-point",
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-nondegenerate-zero-of-a-vector-field",
+          "lem-local-index-is-additive-under-a-transverse-perturbation",
+          "thm-morse-sard-for-smooth-manifolds",
+          "cor-regular-values-have-null-complement-and-are-dense",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-manifold-chart-coordinate-domain-and-coordinate-functions",
+          "def-linear-isomorphism-and-invertible-linear-map",
+          "lem-a-closed-discrete-subset-of-a-compact-space-is-finite",
+          "def-countable-choice"
+        ],
+        "statement": "Assume countable choice. Let $M$ be a closed smooth $n$-manifold, $n\\ge1$, and $f:M\\to M$ smooth with all fixed points isolated. For every open neighbourhood $V$ of a fixed point $x$, there is a smooth $g$, arbitrarily close to $f$, homotopic to it through a homotopy supported in a compact subset of $V$, such that every fixed point of $g$ in $V$ is nondegenerate. Choose disjoint small closed chart balls $B_z\\Subset V$ around the finitely many points $z\\in\\operatorname{Fix}(f)\\cap V$. The construction keeps $g=f$ outside their interiors, and each local replacement satisfies $$\\sum_{y\\in\\operatorname{Fix}(g)\\cap B_z}\\operatorname{ind}_y(g)=\\operatorname{ind}_z(f).$$ In particular if $V\\cap\\operatorname{Fix}(f)=\\{x\\}$, its new fixed-point index sum is $\\operatorname{ind}_x(f)$; for general $V$ the global index sum is unchanged. All sums are finite. Thus one isolated point can be split in an isolating neighbourhood, or all isolated points in a prescribed neighbourhood can be split simultaneously.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** Countable choice and a closed smooth $n$-manifold $M$, $n\\ge1$, a smooth $f:M\\to M$ with\nall fixed points isolated, a fixed point $x$ of $f$ and a neighbourhood $V$ of\n$x$.\n\n[F1] The index $\\operatorname{ind}_x(f)$ is the degree of the normalized\ndisplacement $v\\mapsto d(\\varepsilon v)/|d(\\varepsilon v)|$ in an admissible\nchart, where $d(u)=u-\\widehat f(u)$; it is independent of the chart and radius\n([[def-local-fixed-point-index]],\n[[lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent]]).\n\n[F2] Let $B$ be an embedded closed ball with $X\\ne0$ on $\\partial B$ and let\n$X'$ agree with $X$ outside $\\operatorname{int}B$ and have only nondegenerate\nzeros in $\\operatorname{int}B$; then the sum of the indices of those zeros equals\nthe boundary degree of $X/|X|$ on $\\partial B$, and hence equals the index of the\nunique zero of $X$ in $\\operatorname{int}B$ when $X$ has exactly one there\n([[lem-local-index-is-additive-under-a-transverse-perturbation]]).\n\n[F3] For a smooth map $G$ with isolated fixed point $y$, nondegeneracy of $y$ is\nthe invertibility of $I-DG_y$\n([[def-nondegenerate-fixed-point]]), and then\n$\\operatorname{ind}_y(G)=\\operatorname{sign}\\det(I-DG_y)$\n([[thm-index-of-a-nondegenerate-fixed-point]]); the chart displacement\n$u\\mapsto u-\\widehat G(u)$ is a smooth vector field whose zeros are the fixed\npoints of $\\widehat G$, with nondegenerate zeros corresponding to nondegenerate\nfixed points and with the same index\n([[def-isolated-zero-and-local-index-of-a-vector-field]],\n[[def-nondegenerate-zero-of-a-vector-field]]).\n\n[F4] Regular values of a smooth map are dense and their complement is null\n([[thm-morse-sard-for-smooth-manifolds]],\n[[cor-regular-values-have-null-complement-and-are-dense]]); for a compact set\n$K$ inside an open set $U$ there is a smooth bump equal to $1$ near $K$ and\nsupported in $U$ ([[lem-manifold-bump-for-a-compact-set-inside-an-open-set]]).\n\n[F5] A closed discrete subset of a compact space is finite\n([[lem-a-closed-discrete-subset-of-a-compact-space-is-finite]]).\n\n## Proof\n\n1.1 Chart ball and displacement field. Fix a target chart $(\\varphi,U_0)$ at $x$ with $\\varphi(x)=0$. By continuity restrict the source to $U_0\\cap f^{-1}(U_0)$ and set $d(u):=u-\\widehat f(u)$ there. Choose $\\varepsilon>0$ with $\\overline{B_\\varepsilon(0)}\\subseteq\\varphi(V)\\cap\\varphi(U_0)$ and $d\\neq0$ on $0<|u|\\le\\varepsilon$, which is possible because $x$ is an isolated fixed point, and put $B:=\\varphi^{-1}(\\overline{B_\\varepsilon(0)})$; then $B\\Subset V$, and by [F1] the index $\\operatorname{ind}_x(f)$ equals the degree of $u\\mapsto d(u)/|d(u)|$ on the sphere $|u|=\\varepsilon$, i.e. the index of the vector field $d$ at its only zero $0$ in $\\operatorname{int}B$. Choose also an open ball $B'\\Subset B$ around $x$ containing no other fixed point of $f$, and a bump $\\rho$ equal to $1$ on $\\varphi(B')$ and supported in $B$ by [F4]. [given, F1, F4]\n\n2.1 The perturbation. Let $K$ be the compact set where $0<\\rho<1$ (its closure in $B$); it contains no zero of $d$, because the only zero of $d$ in $B$ is $0$ and $\\rho(0)=1$. Let $m:=\\min_K|d|>0$. By [F4] choose a regular value $a$ of $d$ with $|a|<m/2$, also smaller than the positive distance of the compact set $\\widehat f(\\varphi(B))$ from the complement of $\\varphi(U_0)$. It may be arbitrarily small. Define $g:M\\to M$ by $g(p):=\\varphi^{-1}\\bigl(\\widehat f(\\varphi(p))+\\rho(\\varphi(p))\\,a\\bigr)$ for $p\\in B$ and $g(p):=f(p)$ for $p\\notin\\operatorname{supp}\\rho$; this is well defined and smooth because $\\operatorname{supp}\\rho\\subseteq B$, and $g=f$ outside the compact set $\\operatorname{supp}\\rho\\subseteq V$. The formula $g_t(p):=\\varphi^{-1}(\\widehat f(\\varphi(p))+t\\rho(\\varphi(p))a)$ on $B$ and $g_t(p):=f(p)$ outside $\\operatorname{supp}\\rho$ defines a smooth homotopy from $g_0=f$ to $g_1=g$ supported in $V$. [step 1.1, F4]\n\n3.1 Fixed points of the perturbation. Let $u\\in\\varphi(B)$ with $g(\\varphi^{-1}(u))=\\varphi^{-1}(u)$, i.e. $d(u)=\\rho(u)a$. If $0<\\rho(u)<1$ then $u\\in K$ and $|d(u)|=\\rho(u)|a|<m\\le|d(u)|$, a contradiction; the case $\\rho(u)=0$ would give $d(u)=0$ at a point other than $0$, also impossible. Hence $\\rho(u)=1$, $d(u)=a$, and $u$ is a regular point of $d$, i.e. $Dd_u=I-D\\widehat f_u$ is invertible; hence every fixed point of $g$ in $B$ is nondegenerate. Outside $B$ the map $g$ equals $f$, and the fixed points of $f$ outside $B$ are isolated by hypothesis; since all fixed points of $f$ are isolated and $M$ is compact, $\\operatorname{Fix}(f)$ is closed and discrete, hence finite by [F5], and the regular preimages $d^{-1}(a)\\cap\\varphi(B)$ are closed and discrete in the compact $\\varphi(B)$, hence finite by [F5] as well. [step 2.1, F3, F5, given]\n\n4.1 Index preservation. On the chart domain the field $d'(u):=u-\\widehat g(u)=d(u)-\\rho(u)a$ agrees with $d$ outside $\\operatorname{int}B$ and has only nondegenerate zeros in $\\operatorname{int}B$ by step 3.1; by [F2] the sum of the indices of those zeros equals the index of $d$ at its unique zero $0$ in $\\operatorname{int}B$, which is $\\operatorname{ind}_x(f)$ by step 1.1. By [F3] the index of each zero of $d'$ equals the local index of the corresponding fixed point of $g$, so the split fixed points of $g$ in $B$ have total index $\\operatorname{ind}_x(f)$. A fixed point $y$ of $f$ with $y\\notin\\operatorname{supp}\\rho$ is a fixed point of $g$ and, since $\\operatorname{supp}\\rho$ is closed and $y\\notin\\operatorname{supp}\\rho$, the two maps agree on a neighbourhood of $y$, so their germs at $y$ coincide and, by the germ clause of [[lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent]], $\\operatorname{ind}_y(g)=\\operatorname{ind}_y(f)$; fixed points of $f$ inside $B$ other than $x$ do not exist by the choice of $B'$. Since $\\operatorname{Fix}(f)$ is finite and the split points are finitely many regular preimages, the sums are finite, and the two displayed identities follow. No orientation of $M$ is used. Countable choice is retained from the stated Sard supplier. [step 3.1, step 1.1, F2, F3]\n\n5.1 For an arbitrary $V$, the fixed points of $f$ lying in it form a finite set. Choose mutually disjoint balls $B_z\\Subset V$ around all of them, each isolating its centre and satisfying step1.1. Perform steps1.1–4.1 in each ball. The supports are disjoint and the formulas equal $f$ near every ball boundary, so they glue to one smooth map and one smooth supported homotopy. No new fixed point occurs outside the balls, and every old fixed point inside $V$ was included; hence every new fixed point in $V$ is nondegenerate. Summing the local identities gives global index preservation. Since there are finitely many bumps and all perturbation vectors may be chosen arbitrarily small, any prescribed smooth-neighbourhood bound is met by taking their finitely many vectors small enough. [step 1.1, step 2.1, step 3.1, step 4.1, F5] ∎\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed pp. 126-127 (Splitting Proposition: a small generic perturbation splits a fixed point into Lefschetz fixed points, supported near it)"
+            },
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §6, printed pp. 13-15 (the index is unchanged under a compactly fixed perturbation and additive over disjoint pieces)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "def-global-geometric-lefschetz-number",
+        "kind": "definition",
+        "title": "Geometric Lefschetz number (index sum)",
+        "deps": [
+          "def-local-fixed-point-index",
+          "lem-a-closed-discrete-subset-of-a-compact-space-is-finite",
+          "lem-fixed-points-are-graph-diagonal-intersections",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-smooth-manifold",
+          "thm-hausdorff-iff-the-diagonal-is-closed",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "def-continuous-map-top",
+          "def-compact-space"
+        ],
+        "statement": "Let $M$ be a closed (compact, boundaryless) smooth $n$-manifold, $n\\ge1$, and let $f:M\\to M$ be a smooth map all of whose fixed points are isolated ([[def-local-fixed-point-index]]). Then $\\operatorname{Fix}(f)$ is finite: it is closed, being the preimage under the continuous graph map $x\\mapsto(x,f(x))$ of the diagonal, which is closed in the Hausdorff space $M\\times M$ ([[thm-hausdorff-iff-the-diagonal-is-closed]], [[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]], [[def-continuous-map-top]]), and it is discrete by hypothesis, so [[lem-a-closed-discrete-subset-of-a-compact-space-is-finite]] gives finiteness. The **geometric Lefschetz number** of $f$ is\n$$I(f):=\\sum_{x\\in\\operatorname{Fix}(f)}\\operatorname{ind}_x(f)\\in\\mathbb Z,$$\nthe finite sum of the local fixed point indices of [[def-local-fixed-point-index]]; for a fixed-point-free $f$ this is the empty sum $I(f)=0$. The number is defined without orienting $M$ and without any choice principle. It is not asserted here to be homotopy invariant or to equal a homology trace: those are [[thm-lefschetz-hopf-index-formula]] and [[cor-lefschetz-number-is-homotopy-invariant]].",
+        "strategy": "Definition by the finite index sum, with the compactness and Hausdorff finiteness argument displayed. The signs are fixed by [[def-local-fixed-point-index]], so the sum is orientation-free; no choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed p. 119 (the global Lefschetz number of a Lefschetz map is the sum of its local numbers)"
+            },
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §5, printed p. 12 (I(f) defined as the signed count of fixed points)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-algebraic-lefschetz-number",
+        "kind": "definition",
+        "title": "Algebraic Lefschetz number via rational homology traces",
+        "deps": [
+          "def-singular-chain-complex-and-singular-homology",
+          "def-trace-of-an-endomorphism",
+          "def-rationals",
+          "def-lefschetz-number-of-a-finite-cw-self-map",
+          "thm-cellular-homology-computes-singular-homology",
+          "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+          "prop-morse-handle-chain-complex-computes-singular-homology",
+          "prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "cor-every-compact-smooth-manifold-admits-an-excellent-morse-function"
+        ],
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a closed smooth $n$-manifold and let $f:M\\to M$ be continuous. Its **Lefschetz number** is\n$$L(f):=\\sum_{i=0}^{n}(-1)^i\\operatorname{tr}\\bigl(f_*:H_i(M;\\mathbb Q)\\to H_i(M;\\mathbb Q)\\bigr)\\in\\mathbb Q,$$\nthe alternating sum of the traces of the induced rational homology endomorphisms ([[def-singular-chain-complex-and-singular-homology]], [[def-trace-of-an-endomorphism]], [[def-rationals]]). The sum is finite and every trace is of a finite-dimensional operator because $\\dim_{\\mathbb Q}H_i(M;\\mathbb Q)<\\infty$ and $H_i(M;\\mathbb Q)=0$ for $i>n$ ([[prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions]], clause (i), which is where the Axiom of Choice enters, through the existence of an excellent Morse function). When a finite CW model whose cellular chains compute $H_*(M;\\mathbb Q)$ is available ([[prop-morse-handle-chain-complex-computes-singular-homology]], [[thm-cellular-homology-computes-singular-homology]]), this number agrees with the published finite-CW Lefschetz number [[def-lefschetz-number-of-a-finite-cw-self-map]] of the induced self-map transported along the homotopy equivalence; the comparison is a consistency statement, not part of the definition. Homotopic maps have the same $L$ because they induce the same maps on homology ([[cor-homotopic-maps-induce-the-same-map-on-singular-homology]], [[thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology]]). No orientation, no smoothness of $f$ and no field other than $\\mathbb Q$ is used.",
+        "strategy": "Assembly of the published homology and trace interfaces; the finiteness clause is justified by the in-run proposition exactly as DT-13's Euler characteristic definition uses it, and the finite-CW comparison records the interface with the AT-owned Lefschetz number. AC enters only through that finiteness proposition and the Morse/handle suppliers of the comparison; the definition itself makes no further choices.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §5, printed p. 12 (L(f)=sum (-1)^q trace(f_{*q}) over rational homology)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed p. 54 (Theorem 155: L(f)=sum (-1)^k trace(f_{*,k}))"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-the-local-intersection-sign-of-the-graph-and-diagonal",
+        "kind": "lemma",
+        "title": "The local intersection sign of graph against diagonal is sign det(I-Df)",
+        "deps": [
+          "lem-fixed-points-are-graph-diagonal-intersections",
+          "lem-graph-transversality-is-fixed-point-nondegeneracy",
+          "def-local-fixed-point-index",
+          "thm-index-of-a-nondegenerate-fixed-point",
+          "def-local-oriented-intersection-sign",
+          "def-oriented-intersection-number",
+          "thm-intersection-number-under-factor-interchange",
+          "prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold",
+          "prop-the-diagonal-is-an-embedded-submanifold",
+          "thm-canonical-tangent-and-cotangent-splittings-for-products",
+          "def-product-orientation",
+          "def-differential-of-a-smooth-map",
+          "cor-determinant-is-alternating-multilinear-in-the-rows",
+          "def-countable-choice"
+        ],
+        "statement": "Let $M$ be a closed oriented smooth $n$-manifold, let $f:M\\to M$ be smooth with all fixed points nondegenerate, let $\\Gamma_f\\subseteq M\\times M$ be the graph oriented by the diffeomorphism $x\\mapsto(x,f(x))$ onto $M$ and let $\\Delta_M$ be the diagonal oriented by $x\\mapsto(x,x)$, with $M\\times M$ carrying the product orientation ([[def-product-orientation]]). Then at each fixed point $x$, for the ordered pair of factors $(\\Gamma_f,\\Delta_M)$, the local oriented intersection sign of [[def-local-oriented-intersection-sign]] is\n$$\\varepsilon_{(\\Gamma_f,\\Delta_M)}(x)=\\operatorname{sign}\\det(I-Df_x)=\\operatorname{ind}_x(f).$$\nConsequently the oriented intersection numbers of [[def-oriented-intersection-number]] satisfy\n$$I(\\gamma_f,\\Delta_M)=I(\\Gamma_f,\\Delta_M)=\\sum_{x\\in\\operatorname{Fix}(f)}\\operatorname{ind}_x(f)=I(f),$$\nthe graph map being $\\gamma_f(x)=(x,f(x))$ ([[prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold]]), and the sum is finite because $\\Gamma_f$ and $\\Delta_M$ are closed complementary submanifolds of the closed oriented $M\\times M$. The factor order matters: in the order $(\\Delta_M,\\Gamma_f)$ every local sign is multiplied by $(-1)^n$ ([[thm-intersection-number-under-factor-interchange]]).",
+        "strategy": "Take an oriented basis $(e_1,\\dots,e_n)$ of $T_xM$; then $\\{(e_i,Df_xe_i)\\}$ is a positively oriented basis of $T_{\\gamma_f(x)}\\Gamma_f$ (the graph orientation transported from $M$) and $\\{(e_j,e_j)\\}$ one of $T_{(x,x)}\\Delta_M$. In the ambient ordered basis $((e_1,0),\\dots,(e_n,0),(0,e_1),\\dots,(0,e_n))$ the concatenated basis has block matrix $\\begin{pmatrix}I&I\\\\Df_x&I\\end{pmatrix}$, which is carried by the shear that subtracts the $Df_x$-image of the first block of columns from the second to the block-triangular matrix $\\begin{pmatrix}I&0\\\\Df_x&I-Df_x\\end{pmatrix}$ with the same determinant $\\det(I-Df_x)$ ([[cor-determinant-is-alternating-multilinear-in-the-rows]]); this is exactly the sign defining $\\varepsilon_{(\\Gamma_f,\\Delta_M)}(x)$ ([[def-local-oriented-intersection-sign]]). The equality with $\\operatorname{ind}_x(f)$ is [[thm-index-of-a-nondegenerate-fixed-point]]. Transversality of $\\gamma_f$ to $\\Delta_M$ is [[lem-graph-transversality-is-fixed-point-nondegeneracy]], so the finite transverse sum of [[def-oriented-intersection-number]] consists exactly of the fixed points; the submanifold form $I(\\Gamma_f,\\Delta_M)=I(i_{\\Gamma_f},\\Delta_M)$ has the same local signs under the graph diffeomorphism. The interchange sign is [[thm-intersection-number-under-factor-interchange]] with $a=b=n$. No metric and no extra choice beyond the countable choice recorded in [[def-oriented-intersection-number]] are used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed pp. 121-122 (the local number is the orientation number of the graph against the diagonal, computed as a determinant)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed p. 54 (sign(x)=sign det(I-df), normal bundle of the diagonal identified with the tangent bundle)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-diagonal-class-expansion-gives-the-alternating-trace",
+        "kind": "lemma",
+        "title": "The diagonal and graph classes contract to the alternating trace",
+        "deps": [
+          "lem-orientation-twisted-diagonal-realizes-the-lefschetz-trace",
+          "def-algebraic-lefschetz-number",
+          "def-global-geometric-lefschetz-number",
+          "def-cap-duality-map-for-an-oriented-manifold",
+          "thm-poincare-duality-for-oriented-topological-manifolds",
+          "prop-cap-product-naturality-and-projection-formula",
+          "def-kronecker-evaluation-pairing",
+          "lem-the-local-intersection-sign-of-the-graph-and-diagonal",
+          "def-geometric-intersection-pairing-on-a-closed-oriented-manifold",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC ([[def-axiom-of-choice]]). Let $M$ be a closed oriented smooth $n$-manifold and $f:M\\to M$ smooth. For a homogeneous basis $\\alpha_{p,j}$ of $H^p(M;\\mathbb Q)$, choose the dual basis $\\beta_{p,j}\\in H^{n-p}(M;\\mathbb Q)$ with $\\langle\\beta_{p,j}\\smile\\alpha_{p,k},[M]\\rangle=\\delta_{jk}$. In the cohomology-first cap convention,\n$$\\mathrm{PD}[\\Delta_M]=\\sum_{p,j}(-1)^p\\beta_{p,j}\\times\\alpha_{p,j}.$$\nWriting $\\gamma_f(x)=(x,f(x))$ for the graph map,\n$$\\langle\\gamma_f^*\\mathrm{PD}[\\Delta_M],[M]\\rangle=\\langle\\mathrm{PD}[\\Gamma_f]\\smile\\mathrm{PD}[\\Delta_M],[M\\times M]\\rangle=L(f).$$\nThe graph Poincare dual is characterized by $\\langle\\mathrm{PD}[\\Gamma_f]\\smile\\varphi,[M\\times M]\\rangle=\\langle\\gamma_f^*\\varphi,[M]\\rangle$ for every degree-$n$ cohomology class $\\varphi$. When $n\\ge1$ and the fixed points are nondegenerate, this value is $I(f)$, the graph-diagonal intersection number in the local displacement convention $u-v$ ([[def-global-geometric-lefschetz-number]], [[def-geometric-intersection-pairing-on-a-closed-oriented-manifold]]).",
+        "strategy": "## Facts & Assumptions\n\n**Given:** $M,f$, the bases, and AC as in the statement.\n\n[F1] [[lem-orientation-twisted-diagonal-realizes-the-lefschetz-trace]] supplies the normalized diagonal class, the signed dual-basis expansion, graph-pullback trace, and nondegenerate local evaluation. The chosen orientation trivializes its orientation coefficient system.\n\n[F2] Poincare duality is the inverse of cohomology-first cap with the fundamental class ([[def-cap-duality-map-for-an-oriented-manifold]], [[thm-poincare-duality-for-oriented-topological-manifolds]]). Cup and cap satisfy the composition and naturality formulas ([[prop-cap-product-naturality-and-projection-formula]], [[def-kronecker-evaluation-pairing]]).\n\n[F3] The local displacement convention $u-v$ identifies the graph-diagonal local signs with fixed-point indices ([[lem-the-local-intersection-sign-of-the-graph-and-diagonal]], [[def-geometric-intersection-pairing-on-a-closed-oriented-manifold]]).\n\n## Proof\n\n1.1 Trivialize the orientation system by the given orientation of $M$. The cap-normalized diagonal class of [F1] becomes $\\mathrm{PD}[\\Delta_M]$ by [F2]. Its expansion is exactly the displayed formula, and [F1]'s graph pullback gives $\\langle\\gamma_f^*\\mathrm{PD}[\\Delta_M],[M]\\rangle=L(f)$. [given, F1, F2]\n\n2.1 Since the graph is oriented by $\\gamma_f$, its fundamental homology class is $(\\gamma_f)_*[M]$. For every degree-$n$ class $\\varphi$, [F2] gives $\\langle\\mathrm{PD}[\\Gamma_f]\\smile\\varphi,[M\\times M]\\rangle=\\langle\\varphi,\\mathrm{PD}[\\Gamma_f]\\cap[M\\times M]\\rangle=\\langle\\varphi,(\\gamma_f)_*[M]\\rangle=\\langle\\gamma_f^*\\varphi,[M]\\rangle$. Taking $\\varphi=\\mathrm{PD}[\\Delta_M]$ proves the cup contraction identity from step 1.1. [F2, step 1.1]\n\n3.1 For nondegenerate fixed points, [F1] evaluates this graph pullback as the sum of the local signs $\\operatorname{sign}\\det(I-Df_x)$. By [F3] this is both $I(f)$ and the stated graph-diagonal intersection number. AC is inherited from [F1] and Poincare duality. [F1, F3, step 1.1, step 2.1] ∎\n The geometric index clause assumes n>=1; the cohomology trace remains valid for n=0.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 16, printed pp. 51-52 (Lemma 150: the diagonal splits as sum (-1)^{dim h_i} h_i x h_i; the intersection pairing sign rule), and Lecture 17, printed p. 54 (the same splitting for the graph)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed pp. 119-122 (global Lefschetz number as the intersection number of graph and diagonal, with the local determinant computation)"
+            }
+          ]
+        },
+        "dependency_level": 10,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-lefschetz-hopf-index-formula-for-nondegenerate-fixed-points",
+        "kind": "lemma",
+        "title": "Lefschetz-Hopf index formula for nondegenerate fixed points (orientable case)",
+        "deps": [
+          "lem-orientation-twisted-diagonal-realizes-the-lefschetz-trace",
+          "def-global-geometric-lefschetz-number",
+          "def-algebraic-lefschetz-number",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC ([[def-axiom-of-choice]]). Let $M$ be a closed oriented smooth\n$n$-manifold, $n\\ge1$, and let $f:M\\to M$ be smooth with every fixed point\nnondegenerate. Then $\\operatorname{Fix}(f)$ is finite, the geometric Lefschetz\nnumber is defined ([[def-global-geometric-lefschetz-number]]), and\n$$I(f)=\\sum_{x\\in\\operatorname{Fix}(f)}\\operatorname{ind}_x(f)=L(f),$$\nwhere $L(f)$ is the algebraic Lefschetz number of\n[[def-algebraic-lefschetz-number]].",
+        "strategy": "## Facts & Assumptions\n\n**Given:** A closed oriented smooth $n$-manifold $M$ and a smooth self-map $f$ whose fixed points are all nondegenerate; assume AC.\n\n[F1] [[lem-orientation-twisted-diagonal-realizes-the-lefschetz-trace]] proves the graph-pullback trace and its nondegenerate fixed-point evaluation, without an orientation restriction.\n\n[F2] [[def-global-geometric-lefschetz-number]] defines the finite index sum, and [[def-algebraic-lefschetz-number]] defines the rational homology alternating trace.\n\n## Proof\n\n1.1 On each component carried into itself, [F1] gives finiteness and identifies the finite local index sum with its Lefschetz trace. A component carried into a different component has no fixed points and a zero source-to-source diagonal block in homology, hence contributes zero to both quantities. Compactness gives finitely many components, so these finite sums exhaust both quantities of [F2]. [given, F1, F2]\n\n2.1 Summing the component identities gives $I(f)=L(f)$. The supplied orientation is compatible with [F1]'s twisted proof by trivializing its orientation system, and AC is inherited from that supplier. [F1, step 1.1] ∎\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed pp. 119-122 (for a Lefschetz map the global intersection number is the sum of the local numbers)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed pp. 54-55 (Theorem 155 for a diffeomorphism with isolated fixed points; the diagonal splitting proof)"
+            }
+          ]
+        },
+        "dependency_level": 10,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-the-orientable-double-cover-of-a-smooth-manifold",
+        "kind": "lemma",
+        "title": "The orientation double cover of a smooth manifold is closed, orientable and canonical",
+        "deps": [
+          "def-orientation-local-system-and-orientation-cover",
+          "def-orientable-manifold",
+          "def-smooth-manifold",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "def-deck-transformation-and-deck-group",
+          "def-regular-covering",
+          "def-smooth-atlas",
+          "prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets",
+          "thm-path-lifting-for-covering-maps",
+          "lem-connected-covers-of-smooth-manifolds-have-a-canonical-smooth-structure",
+          "thm-compactness-is-invariant-under-finite-sheeted-coverings",
+          "prop-local-path-connectedness-lifts-and-descends-along-coverings",
+          "thm-connected-and-locally-path-connected-implies-path-connected",
+          "prop-topological-manifolds-are-locally-compact-and-locally-path-connected",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure"
+        ],
+        "statement": "Let $M$ be a connected smooth $n$-manifold. Then there is a connected smooth $n$-manifold $\\widetilde M$, the **orientation double cover**, together with a smooth two-sheeted covering map $\\pi:\\widetilde M\\to M$ ([[def-covering-map-and-evenly-covered-neighbourhoods]]) and a deck transformation $\\tau:\\widetilde M\\to\\widetilde M$ with $\\tau^2=\\mathrm{id}_{\\widetilde M}$ and $\\pi\\circ\\tau=\\pi$ ([[def-deck-transformation-and-deck-group]]), such that $\\widetilde M$ is orientable ([[def-orientable-manifold]]) and indeed canonically oriented ([[def-oriented-smooth-manifold-and-oriented-chart]]). If $M$ is closed then $\\widetilde M$ is closed. The covering is regular ([[def-regular-covering]]) with deck group $\\mathbb Z/2$ acting freely and transitively on every fibre. If $M$ is orientable then $\\widetilde M\\cong M\\times\\mathbb Z/2$ with $\\tau$ exchanging the two components; if $M$ is nonorientable then $\\widetilde M$ is connected. The underlying set is the orientation cover of [[def-orientation-local-system-and-orientation-cover]]; its smooth structure and canonical orientation are the ones induced by charts of $M$.",
+        "strategy": "Model $\\widetilde M:=\\{(x,o_x):x\\in M,\\ o_x$ an orientation of $T_xM\\}$ with $\\pi(x,o_x)=x$ and $\\tau(x,o_x)=(x,-o_x)$. For a chart $(U,\\varphi)$ of $M$ the two sheets $\\{(x,\\pm[d\\varphi_x]):x\\in U\\}$ are declared charts of $\\widetilde M$; the transition maps between such charts are $(\\psi\\circ\\varphi^{-1})$ or its precomposition with the sheet flip, hence smooth ([[prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets]], [[def-smooth-atlas]]), which gives a smooth atlas and makes $\\pi$ a local diffeomorphism and a covering map. Each point carries its own orientation $o_x$, which orients $T_{(x,o_x)}\\widetilde M$ via $d\\pi^{-1}$; these orientations are continuous over the overlaps by the way the sheets are defined, so $\\widetilde M$ is canonically oriented. $\\tau$ is a smooth involution swapping the sheets, so it is a deck transformation; the deck group is $\\mathbb Z/2$ and acts freely and transitively on fibres. Closedness is inherited because $\\pi$ is a local diffeomorphism of a compact base: a cover of a compact space is compact. If $M$ is nonorientable, a path in $\\widetilde M$ joining $(x,o_x)$ to $\\tau(x,o_x)$ would project to a loop in $M$ reversing the orientation along a null sequence of charts, contradicting nonorientability; path lifting ([[thm-path-lifting-for-covering-maps]]) makes this precise, and then $\\widetilde M$ is connected. If $M$ is orientable, a global orientation trivializes the cover as $M\\times\\mathbb Z/2$. The construction uses no orientation of $M$ and no choice beyond the chart data.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology (complete book PDF)",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "§3.3, printed pp. 234-235 (the orientable two-sheeted cover, constructed from local orientations, and the orientable double cover of a nonorientable manifold)"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-the-derivative-lift-of-a-smooth-self-map-to-the-orientation-double-cover",
+        "kind": "lemma",
+        "title": "A smooth self-map lifts canonically to the orientation double cover",
+        "deps": [
+          "lem-the-orientable-double-cover-of-a-smooth-manifold",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-differential-of-a-smooth-map",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "thm-smooth-inverse-function-theorem-on-manifolds",
+          "thm-chain-rule-for-differentials-of-smooth-maps"
+        ],
+        "statement": "Let $M$ be a connected smooth $n$-manifold, $\\pi:\\widetilde M\\to M$ its orientation double cover and $\\tau$ the deck transformation ([[lem-the-orientable-double-cover-of-a-smooth-manifold]]). Every smooth map $f:M\\to M$ ([[def-c-r-and-smooth-maps-between-smooth-manifolds]]) has two lifts through $\\pi$, namely\n$$\\widetilde f(x,o_x):=(f(x),\\ Df_x(o_x)),\\qquad \\widetilde f':=\\tau\\circ\\widetilde f,$$\nand they satisfy $\\pi\\circ\\widetilde f=\\pi\\circ\\widetilde f'=f\\circ\\pi$ and $\\tau\\circ\\widetilde f=\\widetilde f\\circ\\tau$, $\\tau\\circ\\widetilde f'=\\widetilde f'\\circ\\tau$; both are smooth ([[def-differential-of-a-smooth-map]]). If $f$ is a diffeomorphism, so are $\\widetilde f$ and $\\widetilde f'$. The construction is canonical, i.e. it involves no choices.",
+        "strategy": "Over a chart $U$ of $M$ write $\\widetilde M|_U\\cong U\\times\\{\\pm1\\}$; the formula becomes $(u,\\pm)\\mapsto(\\widehat f(u),\\ \\operatorname{sign}\\det D\\widehat f_u\\cdot(\\pm))$, which is smooth because $D\\widehat f_u$ is continuous and the sign of its determinant is locally constant wherever it is nonzero. The identity $\\pi\\circ\\widetilde f=f\\circ\\pi$ is the definition, and $\\tau\\circ\\widetilde f=\\widetilde f\\circ\\tau$ follows from $Df_x(-o_x)=-Df_x(o_x)$; the two lifts are distinct because $\\tau$ has no fixed point, and a two-sheeted cover has exactly two lifts, so they exhaust them. Naturality of the derivative under a local diffeomorphism shows that a diffeomorphism induce diffeomorphism lifts. No choice principle is used beyond the chart data.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology (complete book PDF)",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "§3.3, printed pp. 234-235 (naturality of the orientable double cover); the derivative pushforward of local orientations is the smooth refinement used here"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 1 §5 / Ch. 3 §4 (smooth maps push forward tangent orientations; used implicitly throughout)"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-fixed-point-sum-of-the-two-lifts-of-a-self-map",
+        "kind": "lemma",
+        "title": "The two lifts of a self-map carry twice the fixed point index sum",
+        "deps": [
+          "lem-the-derivative-lift-of-a-smooth-self-map-to-the-orientation-double-cover",
+          "def-local-fixed-point-index",
+          "lem-local-fixed-point-index-is-invariant-under-diffeomorphism-conjugation",
+          "def-global-geometric-lefschetz-number",
+          "lem-fixed-points-are-graph-diagonal-intersections",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "lem-a-closed-discrete-subset-of-a-compact-space-is-finite"
+        ],
+        "statement": "Let $M$ be a connected closed smooth $n$-manifold, $\\pi:\\widetilde M\\to M$ its orientation double cover, let $f:M\\to M$ be smooth with isolated fixed points, and let $\\widetilde f,\\widetilde f'$ be the two lifts ([[lem-the-derivative-lift-of-a-smooth-self-map-to-the-orientation-double-cover]]). Then $\\widetilde f$ and $\\widetilde f'$ have isolated fixed points, their fixed point sets are finite, and\n$$\\sum_{\\widetilde x\\in\\operatorname{Fix}(\\widetilde f)}\\operatorname{ind}_{\\widetilde x}(\\widetilde f)+\\sum_{\\widetilde x\\in\\operatorname{Fix}(\\widetilde f')}\\operatorname{ind}_{\\widetilde x}(\\widetilde f')=2\\sum_{x\\in\\operatorname{Fix}(f)}\\operatorname{ind}_x(f).$$\nMore precisely, over each fixed point $x$ of $f$ the two points of the fibre $\\pi^{-1}(x)$ are fixed by exactly one of the two lifts and exactly two fixed points of the disjoint union $\\widetilde f\\sqcup\\widetilde f'$ lie over $x$, each with local index $\\operatorname{ind}_x(f)$.",
+        "strategy": "Fix a fixed point $x$ and let $\\pi^{-1}(x)=\\{a,\\tau a\\}$. The derivative $Df_x$ either preserves or reverses each orientation of $T_xM$; accordingly $\\widetilde f$ either fixes both $a,\\tau a$ or swaps them, and $\\widetilde f'=\\tau\\circ\\widetilde f$ does the opposite, so exactly two fixed points of $\\widetilde f\\sqcup\\widetilde f'$ lie over $x$. They are isolated because their projections are isolated and $\\pi$ is a local diffeomorphism, and their local indices equal $\\operatorname{ind}_x(f)$: $\\pi$ restricts to a diffeomorphism from a neighbourhood of the point onto a neighbourhood of $x$ conjugating the lift to $f$, so [[lem-local-fixed-point-index-is-invariant-under-diffeomorphism-conjugation]] applies. Summing over the finitely many fixed points of $f$ ([[def-global-geometric-lefschetz-number]]) gives the identity; the two sums on the left are finite by the same closed-discrete-compact argument ([[lem-a-closed-discrete-subset-of-a-compact-space-is-finite]]) applied to $\\widetilde M$, or directly by the displayed two-to-one correspondence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology (complete book PDF)",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "§3.3, printed pp. 234-235 (the two points of a fibre over a point of a nonorientable manifold, exchanged by the deck transformation)"
+            },
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §6, printed p. 13 (the local index is a local invariant of the germ, hence preserved by a local diffeomorphism)"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-lefschetz-numbers-of-the-two-lifts-sum-to-twice-the-base-lefschetz-number",
+        "kind": "lemma",
+        "title": "The Lefschetz numbers of the two lifts sum to twice the base Lefschetz number",
+        "deps": [
+          "def-algebraic-lefschetz-number",
+          "lem-the-derivative-lift-of-a-smooth-self-map-to-the-orientation-double-cover",
+          "lem-the-orientable-double-cover-of-a-smooth-manifold",
+          "cor-cohomology-over-a-field-is-dual-to-homology-over-that-field",
+          "def-trace-of-an-endomorphism",
+          "prop-singular-chains-and-homology-are-covariantly-functorial",
+          "prop-singular-cohomology-is-contravariantly-functorial",
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "def-deck-transformation-and-deck-group",
+          "thm-covering-space-lifting-criterion",
+          "thm-uniqueness-of-lifts-from-a-connected-space",
+          "cor-connected-cover-of-a-simply-connected-space-is-trivial",
+          "def-standard-topological-simplex-and-its-affine-face-maps",
+          "def-singular-simplex-and-singular-chain-group-with-coefficients",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC ([[def-axiom-of-choice]]). Let $M$ be a connected closed smooth $n$-manifold, $\\pi:\\widetilde M\\to M$ its orientation double cover with deck transformation $\\tau$ ([[lem-the-orientable-double-cover-of-a-smooth-manifold]]), let $f:M\\to M$ be continuous and let $\\widetilde f$ be a lift of $f$ commuting with $\\tau$ (for smooth $f$ one exists, [[lem-the-derivative-lift-of-a-smooth-self-map-to-the-orientation-double-cover]]). Then\n$$L(\\widetilde f)+L(\\tau\\circ\\widetilde f)=2L(f),$$\nwhere $L$ is the algebraic Lefschetz number of [[def-algebraic-lefschetz-number]]. Equivalently, if $H_*(\\widetilde M;\\mathbb Q)=V_+\\oplus V_-$ is the eigenspace decomposition of $\\tau_*$ with eigenvalues $+1$ and $-1$, then $\\pi_*$ restricts to an isomorphism $V_+\\cong H_*(M;\\mathbb Q)$ that conjugates $\\widetilde f_*|_{V_+}$ to $f_*$, and\n$$L(\\widetilde f)+L(\\tau\\circ\\widetilde f)=2\\sum_i(-1)^i\\operatorname{tr}\\bigl(\\widetilde f_*|V_+^i\\bigr)=2L(f).$$",
+        "strategy": "Transfer construction on rational chains. For a singular simplex $\\sigma:\\Delta^k\\to M$ let $\\tau_\\#(\\sigma)$ be the sum of the two lifts of $\\sigma$ through $\\pi$ (the set of lifts has exactly two elements by the lifting criterion, since the standard simplex is convex and simply connected, [[thm-covering-space-lifting-criterion]], [[thm-uniqueness-of-lifts-from-a-connected-space]], [[cor-connected-cover-of-a-simply-connected-space-is-trivial]], [[def-standard-topological-simplex-and-its-affine-face-maps]]); the sum over the full lift set is independent of any selection, so the extension to a rational-linear map $\\tau_\\#:C_*(M;\\mathbb Q)\\to C_*(\\widetilde M;\\mathbb Q)$ is canonical. It is a chain map because restriction to a face bijects lift sets (each lift of a face extends uniquely to a lift of the simplex). One checks $\\pi_\\#\\tau_\\#=2\\,\\mathrm{id}$ and $\\tau_\\#\\pi_\\#=\\mathrm{id}+\\tau_\\#$ on chains, hence on homology $\\pi_*\\tau_*=2$ and $\\tau_*\\pi_*=1+\\tau_*$. From $\\tau_*^2=1$, the homology splits as $V_+\\oplus V_-$. Then $\\pi_*$ is surjective (given $y$, $\\pi_*(\\tau_*y)=2y$) and its restriction to $V_+$ is injective (if $x\\in V_+$ and $\\pi_*x=0$, then $0=\\tau_*\\pi_*x=(1+\\tau_*)x=2x$), so $V_+\\cong H_*(M;\\mathbb Q)$ via $\\pi_*$; naturality $\\pi_*\\widetilde f_*=f_*\\pi_*$ conjugates $\\widetilde f_*|_{V_+}$ to $f_*$, and $\\widetilde f_*$ preserves $V_\\pm$ because $\\widetilde f$ commutes with $\\tau$. Therefore $\\operatorname{tr}(\\widetilde f_*|V_+^i)=\\operatorname{tr}(f_*|H_i(M;\\mathbb Q))$. Finally $(\\tau\\circ\\widetilde f)_*=\\tau_*\\widetilde f_*$ acts as $+\\widetilde f_*$ on $V_+$ and $-\\widetilde f_*$ on $V_-$ (the lifts commute with $\\tau$), so the graded signed traces add: $L(\\widetilde f)+L(\\tau\\widetilde f)=2\\sum_i(-1)^i\\operatorname{tr}(\\widetilde f_*|V_+^i)=2L(f)$. Comparing traces of dual maps over the field $\\mathbb Q$ ([[cor-cohomology-over-a-field-is-dual-to-homology-over-that-field]]) allows the same computation in cohomology, which is how the source states the transfer. AC enters only through the finiteness of rational homology in [[def-algebraic-lefschetz-number]]; the transfer sum itself is canonical, so no additional selection is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology (complete book PDF)",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "§3.G, printed pp. 321-322 (the transfer tau assigns to a simplex the sum of its lifts; pi^tau=n and tau pi=1+g; Proposition 3G.1 identifies the pullback with the deck invariants)"
+            },
+            {
+              "title": "Allen Hatcher, Algebraic Topology (complete book PDF)",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "§3.3, printed pp. 234-235 (the orientable double cover and its deck group Z/2)"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-lefschetz-hopf-index-formula",
+        "kind": "theorem",
+        "title": "Lefschetz-Hopf index formula",
+        "deps": [
+          "def-global-geometric-lefschetz-number",
+          "def-algebraic-lefschetz-number",
+          "lem-local-fixed-point-index-splits-under-perturbation",
+          "lem-orientation-twisted-diagonal-realizes-the-lefschetz-trace",
+          "prop-singular-homology-of-a-disjoint-union-is-the-direct-sum",
+          "lem-a-closed-discrete-subset-of-a-compact-space-is-finite",
+          "thm-hausdorff-iff-the-diagonal-is-closed",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "def-connected-component-and-quasicomponent",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC ([[def-axiom-of-choice]]). Let $M$ be a closed smooth $n$-manifold, $n\\ge1$, possibly disconnected or nonorientable, and let $f:M\\to M$ be smooth with only isolated fixed points. Then $\\operatorname{Fix}(f)$ is finite, its geometric index sum $I(f)=\\sum_x\\operatorname{ind}_x(f)$ is defined ([[def-global-geometric-lefschetz-number]]), and $I(f)=L(f)$, where $L(f)$ is the algebraic Lefschetz number of [[def-algebraic-lefschetz-number]].",
+        "strategy": "## Facts & Assumptions\n\n**Given:** $M,n,f$ and AC as in the statement.\n\n[F1] A continuous self-map of a Hausdorff space has a closed fixed set, since the diagonal is closed; a closed discrete subset of a compact space is finite ([[thm-hausdorff-iff-the-diagonal-is-closed]], [[lem-a-closed-discrete-subset-of-a-compact-space-is-finite]]).\n\n[F2] [[lem-local-fixed-point-index-splits-under-perturbation]] permits a smooth homotopy supported in a small ball isolating a fixed point which replaces that point by finitely many nondegenerate fixed points with the same total index.\n\n[F3] [[lem-orientation-twisted-diagonal-realizes-the-lefschetz-trace]] proves $I(g)=L(g)$ for every smooth self-map of a connected closed manifold whose fixed points are nondegenerate, without an orientation or lifting hypothesis.\n\n[F4] Manifold components are open; compactness gives finitely many. Their rational homology groups decompose as a finite direct sum, and the trace is the sum of the diagonal component-block traces ([[def-connected-component-and-quasicomponent]], [[prop-singular-homology-of-a-disjoint-union-is-the-direct-sum]], [[def-algebraic-lefschetz-number]]). Homotopic maps induce the same homology maps ([[cor-homotopic-maps-induce-the-same-map-on-singular-homology]]).\n\n## Proof\n\n1.1 By [F1] isolation and compactness make the fixed set finite. Choose pairwise disjoint admissible balls isolating its points. Applying [F2] successively in these balls yields a smooth map $g$ homotopic to $f$, unchanged outside the balls, with every fixed point nondegenerate and $I(g)=I(f)$. There are no additional fixed points outside the balls because $g=f$ there, and the finite index sum is defined by [[def-global-geometric-lefschetz-number]]. [given, F1, F2]\n\n2.1 Each connected component $C$ is carried by $g$ into a single component, since its image is connected. If that component is $C$, [F3] applies to the self-map $g|_C$ and gives $I(g|_C)=L(g|_C)$. If it is a different component, $C$ has no fixed points, and the source-to-$C$ diagonal block of $g_*$ on the homology direct sum in [F4] is zero. Thus that component contributes zero both to the index sum and to the trace. Summing the finitely many diagonal-block identities gives $I(g)=L(g)$. [F3, F4, step 1.1]\n\n3.1 Since $f$ and $g$ are homotopic, [F4] gives $L(f)=L(g)$. Combining with the preceding steps gives $I(f)=I(g)=L(g)=L(f)$. AC is inherited from the finite-dimensional Lefschetz-number and twisted diagonal suppliers; the perturbations and the finite component decomposition require no global orientation or lift of either map. [F4, step 1.1, step 2.1] ∎\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed pp. 119-131 (Lefschetz fixed-point theory on a compact oriented manifold: global intersection number, local numbers, splitting) and §5, printed pp. 134-137 (the flow/Lefschetz derivation of Poincare-Hopf)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed pp. 54-55 (Theorem 155 and the diagonal-splitting proof, with sign det(I-df))"
+            },
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §§5-6, printed pp. 11-16 (Theorem 5.1: I(f)=L(f) for compact connected oriented smooth manifolds, including the index axioms)"
+            }
+          ]
+        },
+        "dependency_level": 10,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-lefschetz-number-is-homotopy-invariant",
+        "kind": "corollary",
+        "title": "The Lefschetz number is a homotopy invariant",
+        "deps": [
+          "def-algebraic-lefschetz-number",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "def-global-geometric-lefschetz-number",
+          "thm-lefschetz-hopf-index-formula",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC ([[def-axiom-of-choice]]). Let $M$ be a closed smooth manifold and let $f,g:M\\to M$ be homotopic continuous maps. Then $L(f)=L(g)$ ([[def-algebraic-lefschetz-number]]). If $\\dim M\\ge1$ and $f$ and $g$ are smooth with isolated fixed points, then their geometric index sums satisfy $I(f)=I(g)$ ([[def-global-geometric-lefschetz-number]]).",
+        "strategy": "## Facts & Assumptions\n\n**Given:** $M,f,g$ and AC as in the statement.\n\n[F1] The Lefschetz number is the alternating rational homology trace, and homotopic maps induce the same homology maps ([[def-algebraic-lefschetz-number]], [[cor-homotopic-maps-induce-the-same-map-on-singular-homology]]).\n\n[F2] For smooth maps with isolated fixed points, [[thm-lefschetz-hopf-index-formula]] identifies the geometric index sum of [[def-global-geometric-lefschetz-number]] with the algebraic Lefschetz number.\n\n## Proof\n\n1.1 A homotopy from $f$ to $g$ gives $f_*=g_*$ on every rational homology group by [F1]. The finite alternating sums of their traces therefore agree: $L(f)=L(g)$. [given, F1]\n\n2.1 If $\\dim M\\ge1$ and both maps are smooth with isolated fixed points, [F2] applies to each map without any orientability or lifting restriction. Hence $I(f)=L(f)=L(g)=I(g)$. AC is inherited from the Lefschetz-number and index-formula suppliers. [F2, step 1.1] ∎\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed p. 120 (L(f) is a homotopy invariant)"
+            },
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §7, printed p. 16 (L(f) is invariant under homotopy since the induced homology maps agree)"
+            }
+          ]
+        },
+        "dependency_level": 11,
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-lefschetz-fixed-point-theorem",
+        "kind": "theorem",
+        "title": "Lefschetz fixed point theorem",
+        "deps": [
+          "def-algebraic-lefschetz-number",
+          "cor-lefschetz-number-is-homotopy-invariant",
+          "thm-lefschetz-hopf-index-formula",
+          "thm-whitney-approximation-for-euclidean-valued-maps",
+          "thm-lefschetz-fixed-point-theorem-for-finite-complexes",
+          "def-lefschetz-number-of-a-finite-cw-self-map",
+          "thm-cellular-homology-computes-singular-homology",
+          "prop-morse-handle-chain-complex-computes-singular-homology",
+          "lem-a-handle-decomposition-gives-a-relative-cw-complex",
+          "cor-every-compact-smooth-manifold-admits-an-excellent-morse-function",
+          "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-compact-space"
+        ],
+        "statement": "Assume AC ([[def-axiom-of-choice]]; countable choice is used through the approximation theorem). Let $M$ be a closed smooth manifold and let $f:M\\to M$ be continuous. If\n$$L(f)\\ne0$$\n([[def-algebraic-lefschetz-number]]), then $f$ has a fixed point. Equivalently, a fixed-point-free continuous self-map of a closed smooth manifold has Lefschetz number zero. No converse is asserted.",
+        "strategy": "Contrapositive. Suppose $f$ is fixed-point free. Embed $M$ as a closed embedded submanifold of some $\\mathbb R^N$ with tubular neighbourhood $U$ carrying a smooth retraction $r:U\\to M$ ([[thm-weak-whitney-proper-embedding-theorem]], [[thm-euclidean-tubular-neighbourhood-theorem]], [[cor-a-closed-euclidean-submanifold-has-a-smooth-neighbourhood-retraction]]); shrinking $U$ if necessary, $U$ contains the tube $\\{y:\\operatorname{dist}(y,M)<\\rho\\}$ for some $\\rho>0$ because $M$ is compact. Since $x\\mapsto|f(x)-x|$ is continuous and positive on the compact $M$ ([[def-compact-space]]), there is $\\delta>0$ with $|f(x)-x|\\ge\\delta$ for all $x$. By [[thm-whitney-approximation-for-euclidean-valued-maps]] (which assumes countable choice, [[def-countable-choice]]) there is a smooth $H:M\\to\\mathbb R^N$ with $|H(x)-f(x)|<\\varepsilon$ for a constant $\\varepsilon<\\min(\\rho/2,\\delta/4)$. Then $H(M)\\subseteq U$, so $g:=r\\circ H$ is smooth and $|r(y)-f(x)|\\le2|y-f(x)|$ for $y$ in the tube, whence $|g(x)-f(x)|\\le2\\varepsilon<\\delta/2$ and $|g(x)-x|\\ge\\delta/2>0$: $g$ is fixed-point free. The affine homotopy $r((1-t)f(x)+tH(x))$ is defined because each segment lies in the $\\varepsilon$-ball around $f(x)\\subseteq U$ and joins $f$ to $g$, so $g\\simeq f$ and $L(g)=L(f)$ ([[cor-lefschetz-number-is-homotopy-invariant]]). Since $g$ is smooth and fixed-point free, $I(g)=0$ is the empty sum and [[thm-lefschetz-hopf-index-formula]] gives $L(g)=0$, hence $L(f)=0$. Contrapositively $L(f)\\ne0$ forces a fixed point. AC enters through the finiteness in the definition of $L$ and the Hopf formula; AC_omega through the approximation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed p. 120 (Smooth Lefschetz Fixed-Point Theorem: L(f) nonzero implies a fixed point)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed p. 55 (Corollary 156: the topological Lefschetz fixed point theorem)"
+            },
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §5, printed p. 13 (Theorem 5.1 and the fixed point consequence)"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "cor-lefschetz-number-of-the-identity-is-the-euler-characteristic",
+        "kind": "corollary",
+        "title": "The Lefschetz number of the identity is the Euler characteristic",
+        "deps": [
+          "def-algebraic-lefschetz-number",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions",
+          "cor-lefschetz-number-is-homotopy-invariant",
+          "thm-lefschetz-hopf-index-formula",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC ([[def-axiom-of-choice]]). Let $M$ be a closed smooth manifold. Then\n$$L(\\mathrm{id}_M)=\\chi(M),$$\nwith $L$ of [[def-algebraic-lefschetz-number]] and $\\chi$ the rational-Betti-number Euler characteristic of [[def-euler-characteristic-of-a-compact-manifold]]. Consequently $L(f)=\\chi(M)$ for every continuous $f$ homotopic to the identity, and if such an $f$ is smooth with isolated fixed points then its index sum is $\\chi(M)$.",
+        "strategy": "The identity induces the identity on each $H_i(M;\\mathbb Q)$, whose trace is $\\dim_{\\mathbb Q}H_i(M;\\mathbb Q)$; the alternating sum is $\\chi(M)$ by the definitions (finiteness in both places is the in-run proposition [[prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions]], which is where AC enters). The remaining clauses are [[cor-lefschetz-number-is-homotopy-invariant]] and [[thm-lefschetz-hopf-index-formula]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed p. 120 (L(identity)=I(diagonal,diagonal)=Euler characteristic)"
+            },
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §6, printed p. 15 (if f is homotopic to the identity then L(f)=chi(M))"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "prop-small-time-flow-fixed-point-indices-agree-with-vector-field-zero-indices",
+        "kind": "proposition",
+        "title": "Small-time flow fixed point indices and vector field zero indices",
+        "deps": [
+          "def-local-fixed-point-index",
+          "thm-index-of-a-nondegenerate-fixed-point",
+          "lem-local-fixed-point-index-is-coordinate-and-neighbourhood-independent",
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "def-nondegenerate-zero-of-a-vector-field",
+          "lem-vector-field-index-is-independent-of-chart-ball-and-trivialization",
+          "lem-negation-scales-the-local-index-by-minus-one-to-the-dimension",
+          "def-local-and-global-flow",
+          "def-integral-curve-of-a-vector-field",
+          "thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves",
+          "def-differential-of-a-smooth-map",
+          "def-manifold-chart-coordinate-domain-and-coordinate-functions",
+          "thm-smooth-inverse-function-theorem-on-manifolds",
+          "thm-degree-is-invariant-under-proper-smooth-homotopy",
+          "lem-reduced-degree-into-the-zero-sphere-is-homotopy-invariant-and-multiplicative"
+        ],
+        "statement": "Let $M$ be a smooth $n$-manifold without boundary, $n\\ge1$, let $X$ be a smooth vector field with an isolated zero at $p$ ([[def-isolated-zero-and-local-index-of-a-vector-field]]) and let $\\varphi$ be the local flow of $X$ ([[def-local-and-global-flow]], [[def-integral-curve-of-a-vector-field]]). Then for every sufficiently small $t\\ne0$ the point $p$ is an isolated fixed point of the time-$t$ map $\\varphi_t$, and\n$$\\operatorname{ind}_p(\\varphi_t)=(-1)^n\\operatorname{ind}_pX\\quad(t>0),\\qquad \\operatorname{ind}_p(\\varphi_{-t})=\\operatorname{ind}_pX\\quad(t>0).$$\nThe sign $(-1)^n$ is the consistent short-time sign: the displacement $\\mathrm{id}-\\varphi_t$ is asymptotic to $-tX$ near a zero, so the two local indices differ by the sign of $-\\mathrm{id}$ on $\\mathbb R^n$.",
+        "strategy": "Choose a chart ball $B$ around $p$ on which $X\\neq0$ off $p$ and on which the flow satisfies $\\varphi_t(x)=x+tX(x)+O(t^2)$ uniformly in $x$, as follows from the integral form $\\varphi_t(x)=x+\\int_0^tX(\\varphi_s(x))\\,ds$ and smooth dependence on $(t,x)$ ([[thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves]]). For small $t\\ne0$ define the vector field $Y_t(u):=(u-\\widehat\\varphi_t(u))/t$ on the chart ball; it is nonzero on a fixed sphere $|u|=\\varepsilon$ for small $t$, and $Y_t\\to-\\widetilde X$ in $C^1$ as $t\\to0^+$. Hence for small $t>0$ the fields $Y_t$ and $-\\widetilde X$ are homotopic through nonvanishing fields on that sphere, so their indices agree. The fixed point index $\\operatorname{ind}_p(\\varphi_t)$ is, by [[def-local-fixed-point-index]], exactly the degree of the normalized map $v\\mapsto(u-\\widehat\\varphi_t(u))$ on that sphere, which by [[def-isolated-zero-and-local-index-of-a-vector-field]] is the vector field index of $Y_t$; and the index of $-\\widetilde X$ is $(-1)^n\\operatorname{ind}_pX$ by the in-run lemma [[lem-negation-scales-the-local-index-by-minus-one-to-the-dimension]] (via chart independence, [[lem-vector-field-index-is-independent-of-chart-ball-and-trivialization]]). Replacing $t$ by $-t$ changes the sign of the limit, giving the second identity. Away from $p$, fixed points of $\\varphi_t$ for small $t$ are zeros of $X$: if $X(x)\\neq0$, the flow box of the local integral curve moves $x$ for all small nonzero $t$, so $x$ is not fixed; hence $p$ is isolated for $\\varphi_t$, and for a nondegenerate zero the derivative formula $D\\varphi_t(p)=\\exp(t\\,DX_p)$ makes this explicit ([[thm-index-of-a-nondegenerate-fixed-point]]). Degenerate zeros are handled by the same limit argument, so no splitting is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §5, printed pp. 134-137 (a family tangent to a vector field at time zero has local numbers equal to the indices of the field; the flow and its first-order approximation are examples)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed p. 55 (Examples 157-158: a zero of a vector field gives a fixed point of the flow, connecting to Poincare-Hopf)"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "rem-isolated-does-not-imply-nondegenerate",
+        "kind": "remark",
+        "title": "Isolated fixed points need not be nondegenerate",
+        "deps": [
+          "def-nondegenerate-fixed-point",
+          "def-local-fixed-point-index",
+          "lem-local-fixed-point-index-splits-under-perturbation",
+          "lem-graph-transversality-is-fixed-point-nondegeneracy",
+          "thm-index-of-a-nondegenerate-fixed-point",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-linear-isomorphism-and-invertible-linear-map"
+        ],
+        "statement": "Isolatedness of a fixed point is strictly weaker than nondegeneracy. A fixed point is nondegenerate when $I-Df_x$ is invertible ([[def-nondegenerate-fixed-point]]), whereas the local fixed point index of [[def-local-fixed-point-index]] is defined for every isolated fixed point, including degenerate ones. Example: for the local model $f(z)=z+z^2$ on $\\mathbb C$, the origin is the only fixed point near $0$, while $Df_0=I$ and $I-Df_0=0$ is not invertible, so $0$ is isolated but degenerate ([[def-linear-isomorphism-and-invertible-linear-map]]); its index is $2$, because $\\mathrm{id}-f=-z^2$ and the normalized map on the circle $|z|=\\varepsilon$ is $w\\mapsto-w^2$, of degree $2$. Thus determinant formulas such as [[thm-index-of-a-nondegenerate-fixed-point]] do not apply to degenerate fixed points, while the definition and the splitting of [[lem-local-fixed-point-index-splits-under-perturbation]] still do; $f$ extends to a smooth self-map of $S^2$ whose fixed points are exactly $0$ and $\\infty$, and the companion examples page computes both indices.",
+        "strategy": "Verified by the explicit local computation: $Df_0=I$, the displacement $-z^2$ has degree $2$ on a small circle, and the fixed point equation $z+z^2=z$ has the unique solution $z=0$ near the origin. The extension to $S^2$ is the polynomial map of degree $2$, used as the standard caution that transversality (nondegeneracy) is a stronger hypothesis than isolatedness in the Lefschetz-Hopf theory. The map $z\\mapsto z+z^m$ appears in GP as the standard example of a non-Lefschetz map.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed p. 126 (polynomial maps z -> z+z^m are not Lefschetz: fixed points may be degenerate)"
+            },
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §7, printed p. 16 (the converse of the Lefschetz theorem fails for subtle reasons; local indices of isolated fixed points can be arbitrary integers)"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "rem-lefschetz-index-formula-recovers-poincare-hopf",
+        "kind": "remark",
+        "title": "The Lefschetz index formula recovers Poincare-Hopf",
+        "deps": [
+          "prop-small-time-flow-fixed-point-indices-agree-with-vector-field-zero-indices",
+          "thm-lefschetz-hopf-index-formula",
+          "cor-lefschetz-number-is-homotopy-invariant",
+          "cor-lefschetz-number-of-the-identity-is-the-euler-characteristic",
+          "thm-poincare-hopf-for-closed-manifolds",
+          "cor-closed-odd-dimensional-manifolds-have-zero-euler-characteristic",
+          "def-isolated-zero-and-local-index-of-a-vector-field",
+          "thm-weak-whitney-proper-embedding-theorem",
+          "thm-euclidean-tubular-neighbourhood-theorem",
+          "cor-a-closed-euclidean-submanifold-has-a-smooth-neighbourhood-retraction",
+          "lem-negation-scales-the-local-index-by-minus-one-to-the-dimension",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "statement": "Let $M$ be a closed smooth $n$-manifold and let $X$ be a smooth vector field with isolated zeros, with flow $\\varphi$ ([[def-local-and-global-flow]]). For small $t>0$ the time-$t$ map is homotopic to the identity, so $L(\\varphi_t)=\\chi(M)$ ([[cor-lefschetz-number-of-the-identity-is-the-euler-characteristic]]); the Lefschetz-Hopf formula gives $I(\\varphi_t)=\\chi(M)$ ([[thm-lefschetz-hopf-index-formula]]); and [[prop-small-time-flow-fixed-point-indices-agree-with-vector-field-zero-indices]] gives $I(\\varphi_t)=(-1)^n\\sum_{X(p)=0}\\operatorname{ind}_pX$. Hence\n$$\\sum_{X(p)=0}\\operatorname{ind}_pX=(-1)^n\\chi(M),$$\nwhich is Poincare-Hopf when $n$ is even, and for odd $n$ reduces to Poincare-Hopf because a closed odd-dimensional smooth manifold has $\\chi(M)=0$ ([[cor-closed-odd-dimensional-manifolds-have-zero-euler-characteristic]]); in both parities the index sum equals $\\chi(M)$, recovering the in-run theorem [[thm-poincare-hopf-for-closed-manifolds]]. The sign $(-1)^n$ is the only point at which a careless choice of flow direction or of the determinant convention $I-Df$ versus $Df-I$ changes the conclusion.",
+        "strategy": "Direct substitution of the listed items, with the two parity cases. The identity-homotopy clause is genuine because the flow maps $\\varphi_t$ for small $t$ are homotopic to the identity through $s\\mapsto\\varphi_{st}$; the definitions of [[def-isolated-zero-and-local-index-of-a-vector-field]] supply the vector-field index. AC is inherited from the Lefschetz-Hopf theorem and the Euler characteristic.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §5, printed pp. 134-137 (the flow argument deriving the Poincare-Hopf theorem from the Lefschetz number)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed p. 55 (Examples 157-158 and the closing remark connecting the flow to Poincare-Hopf)"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "lem-orientation-coefficients-as-deck-eigenspaces-and-product-pairings",
+        "kind": "lemma",
+        "title": "Orientation coefficients are deck eigenspaces, with product and duality pairings",
+        "deps": [
+          "def-homology-and-cohomology-with-local-coefficients",
+          "def-cup-and-cap-products-with-local-coefficient-pairings",
+          "lem-the-orientable-double-cover-of-a-smooth-manifold",
+          "thm-covering-space-lifting-criterion",
+          "thm-uniqueness-of-lifts-from-a-connected-space",
+          "thm-cohomological-kunneth-isomorphism-under-finite-free-hypotheses",
+          "thm-poincare-duality-with-the-orientation-local-system",
+          "lem-canonical-twisted-fundamental-classes-over-compact-subsets",
+          "cor-cohomology-over-a-field-is-dual-to-homology-over-that-field",
+          "thm-singular-cohomology-is-graded-commutative",
+          "def-algebraic-lefschetz-number",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume AC. Let $M$ be a connected closed smooth $n$-manifold, $\\mathcal O=\\mathcal O_M^{\\mathbb Q}$ its rational orientation system, and $\\pi:\\widetilde M\\to M$ its orientation cover with involution $\\tau$. Cohomology with constant coefficients and with $\\mathcal O$ identifies respectively with the $+1$ and $-1$ eigenspaces of $\\tau^*$ on $H^*(\\widetilde M;\\mathbb Q)$. With $p_1,p_2:M\\times M\\to M$, cross products give\n$$H^r(M\\times M;p_1^*\\mathcal O)\\cong\\bigoplus_{i+j=r}H^i(M;\\mathcal O)\\otimes H^j(M;\\mathbb Q),$$\nand the analogous formula with $p_2^*\\mathcal O$ has the two coefficient systems reversed. The pairing\n$$H^{n-p}(M;\\mathcal O)\\otimes H^p(M;\\mathbb Q)\\longrightarrow\\mathbb Q,\\qquad (\\beta,\\alpha)\\longmapsto\\langle\\beta\\smile\\alpha,[M]^{\\mathrm{tw}}\\rangle$$\nis perfect. These products obey the usual Koszul rule, including graded commutativity with the coefficient factors interchanged, and evaluation on the product twisted fundamental class is the product of the two factor evaluations. The orientation system of $M\\times M$ is $p_1^*\\mathcal O\\otimes p_2^*\\mathcal O$, with factor order first then second.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** The objects and AC in the statement.\n\n[F1] [[def-homology-and-cohomology-with-local-coefficients]].\n\n[F2] [[def-cup-and-cap-products-with-local-coefficient-pairings]].\n\n[F3] [[lem-the-orientable-double-cover-of-a-smooth-manifold]].\n\n[F4] [[thm-covering-space-lifting-criterion]].\n\n[F5] [[thm-uniqueness-of-lifts-from-a-connected-space]].\n\n[F6] [[thm-cohomological-kunneth-isomorphism-under-finite-free-hypotheses]].\n\n[F7] [[thm-poincare-duality-with-the-orientation-local-system]].\n\n[F8] [[lem-canonical-twisted-fundamental-classes-over-compact-subsets]].\n\n[F9] [[cor-cohomology-over-a-field-is-dual-to-homology-over-that-field]].\n\n[F10] [[thm-singular-cohomology-is-graded-commutative]].\n\n[F11] [[def-algebraic-lefschetz-number]].\n\n[F12] [[def-axiom-of-choice]].\n\n## Proof\n\n1.1 On the cover, the tautological local orientation at $(x,o)$ trivializes $\\pi^*\\mathcal O$: a fiber coefficient is written $c\\,o$ with $c\\in\\mathbb Q$. A local cochain $\\varphi$ therefore assigns to a lifted simplex $\\widetilde\\sigma$ the scalar obtained by expressing $\\varphi(\\pi\\widetilde\\sigma)$ in the tautological orientation at its initial vertex. Replacing the lift by $\\tau\\widetilde\\sigma$ negates this scalar. Conversely an anti-invariant scalar cochain defines a fiber value independent of the lift, since both scalar and orientation negate. For constant coefficients the same construction has no sign and gives invariant cochains. Each simplex lifts after its initial vertex is specified, and lift uniqueness makes restriction to faces agree with coefficient transport; thus these are inverse cochain maps, also for relative pairs. [given, F1, F3, F4, F5]\n\n2.1 For a cochain complex with an involution $t$ commuting with its differential, $P_\\pm=(1\\pm t)/2$ are complementary cochain projections. An invariant or anti-invariant cohomology class has a cocycle representative in the same subcomplex by applying the corresponding projection. If a cocycle in that subcomplex bounds in the full complex, applying the projection to a primitive makes it bound there. Thus cohomology of the subcomplex equals the corresponding cohomology eigenspace. This proves the first assertion using step 1.1. For chains the identical proof uses the weighted sum of the two lifts: changing a chosen orientation negates both its coefficient and the lift difference. This identifies local chains with the anti-invariant chains, up to the harmless normalization factor two, and respects boundaries. [step 1.1, algebra]\n\n3.1 Apply step 1.1 on the four-sheeted cover $q=\\pi\\times\\pi$. A $p_1^*\\mathcal O$ cochain is exactly a cochain anti-invariant under $(\\tau,1)$ and invariant under $(1,\\tau)$; a $p_2^*\\mathcal O$ cochain has the reversed parities. The commuting projections $(1\\pm(\\tau,1)^*)/2$ and $(1\\pm(1,\\tau)^*)/2$ show, by step 2.1, that these identifications also hold in cohomology. The ordinary rational Kunneth isomorphism on $\\widetilde M\\times\\widetilde M$ is natural for both involutions. Restricting it to the $(-,+)$ and $(+,-)$ summands gives exactly the two claimed cross-product isomorphisms; each degree has finitely many summands and finite-dimensional factors by closed-manifold finiteness. [F6, F11, step 1.1, step 2.1]\n\n4.1 The local cup formula lifts to the ordinary scalar cup formula because transport of the tautological orientation along a lifted simplex is precisely its orientation-system transport. Consequently its cross-product and cup signs are the ordinary ones on $q$. Pullback to the relevant parity subcomplex is injective on cohomology by step 2.1, so graded commutativity and the Koszul rule upstairs prove these identities downstairs. On every product chart the ordered tangent splitting identifies the product orientation system with $p_1^*\\mathcal O\\otimes p_2^*\\mathcal O$. This local identification is independent of the two orientation choices since a reversal negates the corresponding factor on each side. Hence it is a global identification. [F2, F10, step 1.1, step 3.1]\n\n5.1 The canonical twisted fundamental chain on $M$ pulls up by the weighted lift construction to the ordinary fundamental class of the canonically oriented cover; pairing a lifted orientation-coefficient cocycle with that class is twice its downstairs evaluation, since each simplex has two lifts with equal signed evaluations. For $q$ the factor is four. Ordinary product evaluation on $\\widetilde M\\times\\widetilde M$, divided by four, is therefore the product of the two downstairs evaluations (each divided by two). These statements also follow simplexwise from the lift sums, so do not depend on a triangulation. The local characterization of the twisted fundamental classes supplies the classes used here. [F2, F8, step 2.1, step 4.1]\n\n6.1 Twisted Poincare duality sends $\\beta\\in H^{n-p}(M;\\mathcal O)$ to $\\beta\\cap[M]^{\\mathrm{tw}}\\in H_p(M;\\mathbb Q)$ using the canonical pairing $\\mathcal O\\otimes\\mathcal O\\to\\underline{\\mathbb Q}$, $(c o)\\otimes(d o)\\mapsto cd$; this pairing is independent of $o$ since both factors negate. The cohomology-first cap identity gives $\\langle\\beta\\smile\\alpha,[M]^{\\mathrm{tw}}\\rangle=\\langle\\alpha,\\beta\\cap[M]^{\\mathrm{tw}}\\rangle$. Duality is an isomorphism and rational cohomology is the full dual of finite-dimensional rational homology, so this pairing is perfect. AC is inherited from the duality, Kunneth and finiteness suppliers. No map $f$, and no lift of a map $f$, has been assumed or constructed. [F2, F7, F9, F11, F12, step 5.1] ∎\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Sections 3.G–3.H; local adapter proved here",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "Printed pp. 321–322 (transfer and invariant cohomology), 327–336 (local coefficients and twisted duality); not a citation for an already-proved Lefschetz adapter."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-orientation-twisted-diagonal-realizes-the-lefschetz-trace",
+        "kind": "lemma",
+        "title": "The orientation-twisted diagonal realizes the Lefschetz trace",
+        "deps": [
+          "lem-orientation-coefficients-as-deck-eigenspaces-and-product-pairings",
+          "thm-poincare-duality-with-the-orientation-local-system",
+          "lem-canonical-twisted-fundamental-classes-over-compact-subsets",
+          "def-cup-and-cap-products-with-local-coefficient-pairings",
+          "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "thm-excision-and-mayer-vietoris-with-local-coefficients",
+          "thm-thom-isomorphism-for-oriented-vector-bundles",
+          "thm-naturality-and-uniqueness-of-thom-classes",
+          "lem-normal-thom-class-realizes-the-poincare-dual-of-a-submanifold",
+          "lem-the-orientable-double-cover-of-a-smooth-manifold",
+          "def-algebraic-lefschetz-number",
+          "thm-index-of-a-nondegenerate-fixed-point",
+          "lem-graph-transversality-is-fixed-point-nondegeneracy",
+          "cor-cohomology-over-a-field-is-dual-to-homology-over-that-field",
+          "def-trace-of-an-endomorphism",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume AC. Let $M$ be a connected closed smooth $n$-manifold and $\\mathcal O=\\mathcal O_M^{\\mathbb Q}$. Orient the normal coordinate to its diagonal by **first minus second**: $(u,v)\\mapsto u-v$. There is a normalized supported diagonal class $u_\\Delta\\in H^n(M\\times M,(M\\times M)\\setminus\\Delta;p_1^*\\mathcal O)$; write $U$ for its absolute image. With $\\delta(x)=(x,x)$,\n$$U\\cap[M\\times M]^{\\mathrm{tw}}=\\delta_*[M]^{\\mathrm{tw}}\\quad\\text{in }H_n(M\\times M;p_2^*\\mathcal O).$$\nChoose a basis $\\alpha_{p,j}$ of $H^p(M;\\mathbb Q)$ and the uniquely dual basis $\\beta_{p,j}\\in H^{n-p}(M;\\mathcal O)$ satisfying $\\langle\\beta_{p,j}\\smile\\alpha_{p,k},[M]^{\\mathrm{tw}}\\rangle=\\delta_{jk}$. Then\n$$U=\\sum_{p,j}(-1)^p\\,\\beta_{p,j}\\times\\alpha_{p,j}.$$\nFor every smooth map $f:M\\to M$, its graph map $\\gamma_f(x)=(x,f(x))$ pulls the coefficient system $p_1^*\\mathcal O$ back to $\\mathcal O$, and\n$$\\langle\\gamma_f^*U,[M]^{\\mathrm{tw}}\\rangle=\\sum_p(-1)^p\\operatorname{tr}(f^*:H^p(M;\\mathbb Q)\\to H^p(M;\\mathbb Q))=L(f).$$\nIf $n\\ge1$ and all fixed points of $f$ are nondegenerate, the left side is $\\sum_x\\operatorname{sign}\\det(I-Df_x)=I(f)$. No orientability or lifting hypothesis on $f$ is needed.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** The objects and AC in the statement.\n\n[F1] [[lem-orientation-coefficients-as-deck-eigenspaces-and-product-pairings]].\n\n[F2] [[thm-poincare-duality-with-the-orientation-local-system]].\n\n[F3] [[lem-canonical-twisted-fundamental-classes-over-compact-subsets]].\n\n[F4] [[def-cup-and-cap-products-with-local-coefficient-pairings]].\n\n[F5] [[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]].\n\n[F6] [[thm-excision-and-mayer-vietoris-with-local-coefficients]].\n\n[F7] [[thm-thom-isomorphism-for-oriented-vector-bundles]].\n\n[F8] [[thm-naturality-and-uniqueness-of-thom-classes]].\n\n[F9] [[lem-normal-thom-class-realizes-the-poincare-dual-of-a-submanifold]].\n\n[F10] [[lem-the-orientable-double-cover-of-a-smooth-manifold]].\n\n[F11] [[def-algebraic-lefschetz-number]].\n\n[F12] [[thm-index-of-a-nondegenerate-fixed-point]].\n\n[F13] [[lem-graph-transversality-is-fixed-point-nondegeneracy]].\n\n[F14] [[cor-cohomology-over-a-field-is-dual-to-homology-over-that-field]].\n\n[F15] [[def-trace-of-an-endomorphism]].\n\n[F16] [[def-axiom-of-choice]].\n\n## Proof\n\n1.1 Construct the supported class without an unoriented Thom theorem. Pull a tubular neighborhood of $\\Delta$ back to $\\widetilde M\\times\\widetilde M$. Its zero set is the disjoint union $Z_0=\\{(a,a)\\}$ and $Z_1=\\{(a,\\tau a)\\}$. On either normal bundle, $d\\pi_a(v)-d\\pi_b(w)$ identifies the normal quotient with $T_{\\pi(a)}M$; use the tautological orientation at $a$ to orient it. Each is thus an oriented rank-$n$ bundle, so its unique fiber-normalized ordinary rational Thom class exists. Their sum, extended from disjoint tubes, is a relative class on the four-sheeted cover. The first deck involution reverses the specified normal orientation, and the second preserves it; uniqueness of the Thom classes therefore makes the sum anti-invariant under the first and invariant under the second. The relative version of [F1] descends it uniquely to $u_\\Delta$ with coefficient $p_1^*\\mathcal O$. On a common base chart its fiber normalization is the generator for $u-v$, with coefficient the orientation of that chart. [given, F1, F5, F6, F7, F8, F10]\n\n2.1 Check the cap normalization. On the oriented four-sheeted ambient manifold, let $Z_i$ have the orientation of its first factor. The ordered tangent-then-normal basis with normal coordinate $u-v$ has determinant $(-1)^n$ relative to ambient first-then-second coordinates: in equal base coordinates its block matrix is $\\left(\\begin{smallmatrix}I&I\\\\I&0\\end{smallmatrix}\\right)$. If the second lift has the opposite base orientation there is the additional sign from that orientation reversal. The cohomology-first normal-cap formula [F9] supplies the further shuffle sign $(-1)^{n^2}=(-1)^n$. Thus the two $(-1)^n$ factors cancel. After descent the second-factor orientation discrepancy is precisely carried by the coefficient $p_2^*\\mathcal O$, and the result is the diagonal's canonical twisted fundamental class with that coefficient. For completeness this is a global equality, not merely a local sign test: in the tube, cap has support in the zero section after the fiber retraction; its pushforward to that section is a top twisted class, and its restrictions at every point are the just-computed canonical local generators. Uniqueness of the top twisted fundamental class gives that class, and the natural cap formula and open-tube inclusion give the asserted ambient equality. These formulas hold with local coefficients because the face transports in [F4] are exactly the scalar formulas in every lifted chart, and step 1.1's relative descent is injective. [F2, F3, F4, F9, step 1.1]\n\n3.1 Characterize $U$ by testing. For every $\\varphi\\in H^n(M\\times M;p_2^*\\mathcal O)$, the cap identity and step 2.1 give $\\langle U\\smile\\varphi,[M\\times M]^{\\mathrm{tw}}\\rangle=\\langle\\delta^*\\varphi,[M]^{\\mathrm{tw}}\\rangle$. The coefficient contraction is $p_1^*\\mathcal O\\otimes(p_1^*\\mathcal O\\otimes p_2^*\\mathcal O)\\to p_2^*\\mathcal O$, so the typing is exact. This pairing separates $H^n(M\\times M;p_1^*\\mathcal O)$: [F1]'s Kunneth decompositions and perfect factor pairings make its matrix a blockwise tensor product of invertible matrices, with unit Koszul signs. [F1, F4, step 2.1]\n\n4.1 Test the proposed expansion on $\\varphi=\\alpha_{p,k}\\times\\beta_{p,l}$. A term $\\beta_{r,j}\\times\\alpha_{r,j}$ can pair nontrivially only for $r=p$. Its product evaluation is $(-1)^p\\langle\\beta_{p,j}\\smile\\alpha_{p,k},[M]^{\\mathrm{tw}}\\rangle\\langle\\alpha_{p,j}\\smile\\beta_{p,l},[M]^{\\mathrm{tw}}\\rangle=(-1)^{p+p(n-p)}\\delta_{jk}\\delta_{jl}$, where the first $(-1)^p$ is the cross-product Koszul sign $(-1)^{p^2}$. Including the proposed coefficient $(-1)^p$ leaves $(-1)^{p(n-p)}\\delta_{kl}$. The diagonal evaluation is exactly $\\langle\\alpha_{p,k}\\smile\\beta_{p,l},[M]^{\\mathrm{tw}}\\rangle=(-1)^{p(n-p)}\\delta_{kl}$. These tests span by [F1], and step 3.1 separates classes, proving the expansion with the stated sign. [F1, step 3.1, algebra]\n\n5.1 Pull back along the graph. Since $p_1\\gamma_f=\\mathrm{id}_M$, no coefficient comparison involving $f^*\\mathcal O$ is required. Write $f^*\\alpha_{p,j}=\\sum_k a_{kj}\\alpha_{p,k}$. Naturality of cup and cross products in [F4] gives $\\gamma_f^*U=\\sum_{p,j}(-1)^p\\beta_{p,j}\\smile f^*\\alpha_{p,j}$, whose evaluation is $\\sum_{p,j}(-1)^p a_{jj}$ by the chosen duality. This is the alternating cohomology trace, and it equals the homology trace by field duality. This uses the graph pullback directly; it never asserts that $f\\times\\mathrm{id}$ is a diffeomorphism. [F1, F4, F11, F14, F15, step 4.1]\n\n6.1 If every fixed point is nondegenerate, graph transversality gives a finite preimage of the diagonal. Pull the relative supported class back along $\\gamma_f$ and excise disjoint coordinate balls around these points. In such a ball its normal coordinate is $u-\\widehat f(u)$, and its derivative at the point is $I-Df_x$. Pullback of the oriented normal Thom generator evaluates on the local twisted fundamental class by the degree of this map; for its invertible derivative this degree is $\\operatorname{sign}\\det(I-Df_x)$ by [F12]. Excision and the finite decomposition of the relative fundamental class add these evaluations. Consequently the absolute evaluation in step 5.1 is the sum of these local signs, namely $I(f)$. Changing chart orientation reverses both the normal generator and the twisted fundamental coefficient, so the integer local value is unchanged. [F3, F6, F8, F12, F13, step 1.1, step 5.1]\n\n7.1 Empty fixed set gives a relative pullback through an empty support, hence zero and the empty index sum. The construction also covers orientable $M$ (its orientation cover has two components); an orientation trivializes $\\mathcal O$ and gives the ordinary diagonal and graph-pullback formula. AC enters through the stated duality, Kunneth, tubular and Thom suppliers and the finite-dimensional trace definition. [F1, F2, F5, F7, F11, F16, step 5.1, step 6.1] ∎\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Sections 3.G–3.H; local adapter proved here",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "Printed pp. 321–322 (transfer and invariant cohomology), 327–336 (local coefficients and twisted duality); not a citation for an already-proved Lefschetz adapter."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 9
+      }
+    ]
+  },
+  {
+    "order": 544,
+    "id": "fixed-point-index-and-the-lefschetz-theorem-examples",
+    "kind": "B",
+    "category": "differential-topology",
+    "title": "Fixed Point Index and the Lefschetz Theorem — Examples",
+    "companion": "fixed-point-index-and-the-lefschetz-theorem",
+    "requires": [
+      "fixed-point-index-and-the-lefschetz-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-rotations-of-the-two-sphere-and-their-lefschetz-number",
+        "kind": "example",
+        "title": "Rotations of the two-sphere and their Lefschetz number",
+        "deps": [
+          "thm-lefschetz-hopf-index-formula",
+          "thm-index-of-a-nondegenerate-fixed-point",
+          "def-global-geometric-lefschetz-number",
+          "def-algebraic-lefschetz-number",
+          "cor-lefschetz-number-of-the-identity-is-the-euler-characteristic",
+          "cor-homology-of-spheres",
+          "def-degree-of-a-self-map-of-an-oriented-sphere",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-axiom-of-choice",
+          "prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism"
+        ],
+        "statement": "Let $R:S^2\\to S^2$ be a rotation of the unit sphere. Then $L(R)=2=\\chi(S^2)$\n([[def-algebraic-lefschetz-number]]). For a rotation by an angle\n$\\theta\\notin2\\pi\\mathbb Z$ the fixed point set is exactly the two poles, both fixed\npoints are nondegenerate of index $+1$, and therefore\n$I(R)=1+1=2=L(R)$\n([[def-global-geometric-lefschetz-number]],\n[[thm-lefschetz-hopf-index-formula]]). For the identity (angles in $2\\pi\\mathbb Z$)\nthe fixed set is the whole sphere and the geometric index sum is not\ndefined directly, while the Lefschetz number is still $2$, because every rotation is\nhomotopic to the identity.",
+        "strategy": "Compute in the tangent plane at a pole: $DR_\\theta$ is a rotation matrix $R$ with $\\det(I-R)=2-2\\cos\\theta>0$ for $\\theta\\notin2\\pi\\mathbb Z$, so both local indices are $+1$ and $I(R_\\theta)=2$. The homotopy to the identity (through the rotations $R_{t\\theta}$) and the identity formula give $L=2$, and the direct trace computation agrees. The degenerate case $\\theta=0$ is excluded from the index formula but the identity clause covers it.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed pp. 123-124 (the southward map of S^2 has a source and a sink, both of local number +1, and L=2=chi(S^2))"
+            },
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §6, printed p. 15 (Example 6.1: L=1+(-1)^n deg f; Example 6.3: a rotation of S^2 has L=2)"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "ex-degree-d-map-on-a-sphere-has-lefschetz-number-one-plus-minus-d",
+        "kind": "example",
+        "title": "Degree-d self-maps of a sphere have Lefschetz number 1+(-1)^n d",
+        "deps": [
+          "def-algebraic-lefschetz-number",
+          "def-degree-of-a-self-map-of-an-oriented-sphere",
+          "cor-homology-of-spheres",
+          "thm-lefschetz-hopf-index-formula",
+          "thm-index-of-a-nondegenerate-fixed-point",
+          "def-local-fixed-point-index",
+          "def-global-geometric-lefschetz-number",
+          "thm-lefschetz-fixed-point-theorem",
+          "thm-degree-is-invariant-under-path-homotopy",
+          "thm-regular-value-formula-for-degree",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Let $n\\ge1$ and let $f:S^n\\to S^n$ be continuous of degree $d\\in\\mathbb Z$ ([[def-degree-of-a-self-map-of-an-oriented-sphere]]). Then $f_*$ is the identity on $H_0(S^n;\\mathbb Q)$ and multiplication by $d$ on $H_n(S^n;\\mathbb Q)$, while all other rational homology groups vanish ([[cor-homology-of-spheres]]); hence\n$$L(f)=1+(-1)^nd$$\n([[def-algebraic-lefschetz-number]]). On $S^2$ and for $d\\ge2$ this is realized by the smooth map $z\\mapsto z^d$ on $S^2=\\mathbb C\\cup\\{\\infty\\}$, of degree $d$ ([[thm-regular-value-formula-for-degree]]), whose fixed points are $0,\\infty$ and the $d-1$ roots of $z^{d-1}=1$. Each is nondegenerate with local index $+1$: at a root $Df$ is multiplication by $d$ and $\\det(I-Df)=(1-d)^2>0$, while $Df_0=Df_\\infty=0$ gives $I-Df=I$ ([[thm-index-of-a-nondegenerate-fixed-point]]); the index sum is $d+1=L(f)$, as the Lefschetz-Hopf formula requires ([[thm-lefschetz-hopf-index-formula]], [[def-global-geometric-lefschetz-number]]). For $d=0$ the constant map has $L=1$ and its single fixed point has index $+1$. The parity matters: on odd-dimensional spheres $L(f)=1-d$, so a degree-one map has Lefschetz number zero, while on even-dimensional spheres $L(f)=1+d$ can never vanish.",
+        "strategy": "The trace computation is immediate from the description of rational homology of spheres and the definition of the degree through $H_n$. For the smooth model, the degree of $z\\mapsto z^d$ is $d$ because a regular value has $d$ preimages with positive local signs ([[thm-regular-value-formula-for-degree]]), the fixed points are computed from $z^d=z$, and every local index is $+1$ by the determinant formula, using that at a simple root $z^{d-1}=1$ one has $Df=d$ as a real $2\\times2$ matrix and at $0,\\infty$ the derivative vanishes. No choice principle beyond the definition of $L$ is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §6, printed p. 15 (Example 6.1: cellular chain computation gives L(f)=1+(-1)^n deg f)"
+            },
+            {
+              "title": "Eleny Ionel, notes by Andrew Lin, Stanford Math 215B Differential Topology, Winter 2023 (complete 63-page lecture notes)",
+              "url": "https://web.stanford.edu/~lindrew/math215B.pdf",
+              "locator": "Lecture 17, printed p. 54 (Example: L of a sphere self-map in terms of its degree)"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "ex-a-torus-translation-has-zero-lefschetz-number-and-no-fixed-points",
+        "kind": "example",
+        "title": "A torus translation has zero Lefschetz number and no fixed points",
+        "deps": [
+          "def-algebraic-lefschetz-number",
+          "cor-lefschetz-number-is-homotopy-invariant",
+          "cor-lefschetz-number-of-the-identity-is-the-euler-characteristic",
+          "def-euler-characteristic-of-a-compact-manifold",
+          "prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions",
+          "def-euler-characteristic-of-a-finite-cw-complex",
+          "def-cw-complex-with-closure-finiteness-and-weak-topology",
+          "def-cell-attachment-by-a-characteristic-map",
+          "thm-lefschetz-fixed-point-theorem",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Let $T^2=\\mathbb R^2/\\mathbb Z^2$ and let $f:T^2\\to T^2$, $f(x)=x+a$, be the translation by $a\\notin\\mathbb Z^2$. Then $f$ has no fixed point: $x+a=x$ in $T^2$ would force $a\\in\\mathbb Z^2$. The map is homotopic to the identity through the translations $x\\mapsto x+ta$, so\n$$L(f)=L(\\mathrm{id}_{T^2})=\\chi(T^2)=0$$\n([[cor-lefschetz-number-is-homotopy-invariant]], [[cor-lefschetz-number-of-the-identity-is-the-euler-characteristic]]). Here $\\chi(T^2)=0$: the quotient $T^2=[0,1]^2/\\!\\sim$ carries the standard finite CW structure with one $0$-cell, two $1$-cells and one $2$-cell attached along the commutator $aba^{-1}b^{-1}$ ([[def-cw-complex-with-closure-finiteness-and-weak-topology]], [[def-cell-attachment-by-a-characteristic-map]]), so clause (ii) of [[prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions]] applied to the pair $(T^2,\\varnothing)$ gives $\\chi(T^2)=\\chi(\\varnothing)+1-2+1=0$, the cell-count sum of [[def-euler-characteristic-of-a-finite-cw-complex]]. Thus the translation has $L(f)=0$ and no fixed points, so the vanishing of the Lefschetz number is consistent with the theorem of [[thm-lefschetz-fixed-point-theorem]] and shows that its nonzero hypothesis is sufficient but not necessary.",
+        "strategy": "Compute $\\chi(T^2)$ from the standard finite CW structure: one $0$-cell, two $1$-cells and one $2$-cell give the cell-count sum $1-2+1=0$, and clause (ii) of the in-run finite-cell additivity proposition identifies this cell count with the rational Betti Euler characteristic of [[def-euler-characteristic-of-a-compact-manifold]] for the pair $(T^2,\\varnothing)$. Homotopy invariance gives $L(f)=L(\\mathrm{id}_{T^2})$ and the identity formula gives $L(\\mathrm{id}_{T^2})=\\chi(T^2)=0$. The absence of fixed points is the explicit computation in the universal cover. No choice beyond the definition of $L$ is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed p. 120 (maps homotopic to the identity have Lefschetz number the Euler characteristic; fixed-point-free examples force chi=0)"
+            },
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §7, printed p. 16 (the converse of the Lefschetz theorem fails: L(f)=0 does not force fixed points)"
+            },
+            {
+              "title": "Allen Hatcher, Algebraic Topology (complete book PDF)",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "Chapter 0, printed pp. 5-6 (the torus S^1 x S^1 built from one 0-cell, two 1-cells and one 2-cell)"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "ex-a-degenerate-isolated-fixed-point-with-nonzero-local-index",
+        "kind": "example",
+        "title": "A degenerate isolated fixed point with nonzero local index",
+        "deps": [
+          "def-local-fixed-point-index",
+          "rem-isolated-does-not-imply-nondegenerate",
+          "thm-lefschetz-hopf-index-formula",
+          "thm-index-of-a-nondegenerate-fixed-point",
+          "def-global-geometric-lefschetz-number",
+          "def-degree-of-a-self-map-of-an-oriented-sphere",
+          "thm-degree-is-invariant-under-path-homotopy",
+          "thm-regular-value-formula-for-degree",
+          "cor-homology-of-spheres",
+          "def-algebraic-lefschetz-number",
+          "def-axiom-of-choice"
+        ],
+        "statement": "On $S^2=\\mathbb C\\cup\\{\\infty\\}$ let $f(z)=z+z^2$, with $f(\\infty)=\\infty$. Then $\\operatorname{Fix}(f)=\\{0,\\infty\\}$: the equation $z+z^2=z$ gives $z=0$, and the chart $w=1/z$ shows that $\\infty$ is fixed. At $0$ the differential is $Df_0=I$, so $I-Df_0=0$ is not invertible and $0$ is isolated but degenerate ([[rem-isolated-does-not-imply-nondegenerate]]); nevertheless its local index is nonzero: the displacement is $\\mathrm{id}-f=-z^2$, whose normalized map on the circle $|z|=\\varepsilon$ is $w\\mapsto-w^2$ of degree $2$, so $\\operatorname{ind}_0(f)=2$ ([[def-local-fixed-point-index]]). In the chart $w=1/z$ one computes $g(w)=1/f(1/w)=w^2/(1+w)=w^2+O(w^3)$, so the displacement $w-g(w)$ has invertible linear part $1$ at $w=0$: the fixed point $\\infty$ is nondegenerate with $\\operatorname{ind}_\\infty(f)=+1$ ([[thm-index-of-a-nondegenerate-fixed-point]]). The map has degree $2$, since it is homotopic through the degree-two polynomials $z^2+tz$ to $z^2$ ([[thm-degree-is-invariant-under-path-homotopy]], [[thm-regular-value-formula-for-degree]]), so $L(f)=1+2=3$ ([[def-algebraic-lefschetz-number]], [[cor-homology-of-spheres]]) and the index sum $I(f)=2+1=3$ verifies the Lefschetz-Hopf formula in a case with a degenerate fixed point ([[thm-lefschetz-hopf-index-formula]]).",
+        "strategy": "All statements are explicit computations: the fixed point equation in two charts, the degree of $w\\mapsto-w^2$ on the circle, the linear part of the displacement at infinity, and the degree of a quadratic rational map via the regular-value formula. The example tests that the determinant formula applies only to the nondegenerate point while the degree definition covers the degenerate one, and that the global formula still holds.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed pp. 126-127 (the standard non-Lefschetz example z -> z+z^m and the splitting of degenerate fixed points)"
+            },
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §7, printed p. 17 (fixed point indices of isolated fixed points are the local data entering L(f), including index 0 and mixed signs)"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "cex-vanishing-lefschetz-number-allows-fixed-points",
+        "kind": "counterexample",
+        "title": "A vanishing Lefschetz number with canceling fixed points",
+        "deps": [
+          "thm-lefschetz-fixed-point-theorem",
+          "thm-lefschetz-hopf-index-formula",
+          "thm-index-of-a-nondegenerate-fixed-point",
+          "def-local-fixed-point-index",
+          "def-algebraic-lefschetz-number",
+          "def-global-geometric-lefschetz-number",
+          "def-degree-of-a-circle-loop",
+          "thm-degree-map-on-the-circle-is-a-homomorphism",
+          "cor-homology-of-spheres",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Let $S^1=\\mathbb R/\\mathbb Z$ and let $f:S^1\\to S^1$ be the smooth map\n$$f(t)=t+\\frac{\\varepsilon}{2\\pi}\\sin(2\\pi t),\\qquad 0<\\varepsilon<1.$$\nIts fixed points are exactly $t=0$ and $t=1/2$, because $f(t)-t=\\frac{\\varepsilon}{2\\pi}\\sin(2\\pi t)$ vanishes precisely at the multiples of $1/2$ in $\\mathbb R/\\mathbb Z$. Both fixed points are nondegenerate with opposite indices: $f'(0)=1+\\varepsilon>1$ gives $\\operatorname{ind}_0(f)=\\operatorname{sign}(1-f'(0))=-1$, while $f'(1/2)=1-\\varepsilon<1$ gives $\\operatorname{ind}_{1/2}(f)=+1$ ([[thm-index-of-a-nondegenerate-fixed-point]]). Hence\n$$I(f)=-1+1=0$$\n([[def-global-geometric-lefschetz-number]]). The map has degree $1$, since its lift to $\\mathbb R$ satisfies $\\widetilde f(t+1)=\\widetilde f(t)+1$ ([[def-degree-of-a-circle-loop]], [[thm-degree-map-on-the-circle-is-a-homomorphism]]), and $H_0(S^1;\\mathbb Q)=H_1(S^1;\\mathbb Q)=\\mathbb Q$ ([[cor-homology-of-spheres]]), so\n$$L(f)=1-1=0$$\n([[def-algebraic-lefschetz-number]]), in agreement with the Lefschetz-Hopf formula ([[thm-lefschetz-hopf-index-formula]]). Thus $L(f)=0$ does not imply that $f$ is fixed-point free, even when all fixed points are nondegenerate: the two nonzero local indices cancel, so the converse of [[thm-lefschetz-fixed-point-theorem]] fails for reasons beyond degeneracy.",
+        "strategy": "Explicit computation: solve $f(t)=t$ using the zeros of the sine, compute $f'=1+\\varepsilon\\cos(2\\pi t)$ at the two fixed points, apply the determinant formula, compare with the degree-one trace computation, and observe the cancellation. The witness is a diffeomorphism-like degree-one map, so no degeneracy or non-smoothness is involved.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Wong, Lectures on Fixed Point Theory, Mini-Course XV Encontro Brasileiro de Topologia, Rio Claro 2006 (complete notes)",
+              "url": "https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf",
+              "locator": "Lecture II §§7-8, printed pp. 16-18 (the converse of the Lefschetz theorem fails; Jiang's example has L(f)=0 with fixed points of indices 1, -1 and 0)"
+            },
+            {
+              "title": "Victor Guillemin and Alan Pollack, Differential Topology (Prentice-Hall 1974; complete 236-page PDF)",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/GP.pdf",
+              "locator": "Ch. 3 §4, printed p. 126 (degenerate but canceling fixed points are the standard obstruction to a converse)"
+            }
+          ]
+        },
+        "dependency_level": 13
+      }
+    ]
+  }
+]

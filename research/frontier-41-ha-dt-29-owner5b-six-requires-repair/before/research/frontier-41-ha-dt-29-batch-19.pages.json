@@ -1,0 +1,1035 @@
+[
+  {
+    "order": 569,
+    "id": "isotopy-extension-and-embedding-theory-beyond-whitney",
+    "kind": "A",
+    "category": "differential-topology",
+    "title": "Isotopy Extension and Embedding Theory Beyond Whitney",
+    "companion": "isotopy-extension-and-embedding-theory-beyond-whitney-examples",
+    "requires": [
+      "formal-immersions-and-the-smale-hirsch-theorem",
+      "the-whitney-trick-and-surgery-below-the-middle-dimension",
+      "sard-theorem-and-transversality",
+      "whitney-embedding-tubular-neighbourhoods-and-approximation",
+      "vector-fields-flows-and-lie-derivatives"
+    ],
+    "items": [
+      {
+        "id": "def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy",
+        "kind": "definition",
+        "title": "Smooth isotopies, diffeotopies and ambient isotopies",
+        "deps": [
+          "def-smooth-embedding",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "def-compact-space",
+          "def-regular-homotopy-of-immersions"
+        ],
+        "statement": "Let $M$ and $N$ be smooth manifolds (possibly with boundary, [[def-smooth-map-between-manifolds-with-boundary]]) and let $I=[0,1]$. A **smooth isotopy of $M$ in $N$** is a smooth map $F:M\\times I\\to N$ such that every slice $F_t:=F(\\cdot,t)$ is a smooth embedding ([[def-smooth-embedding]]); if in addition $F_0=f_0$ and $F_1=f_1$, then $F$ is a smooth isotopy from $f_0$ to $f_1$, and $f_0,f_1$ are **isotopic**. A **smooth diffeotopy** of $N$, also called an **ambient isotopy**, is a smooth map $H:N\\times I\\to N$ with $H_0=\\mathrm{id}_N$ and every $H_t$ a diffeomorphism ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]); it **extends** an isotopy $F$ of $M$ when $H_t\\circ F_0=F_t$ for all $t\\in I$. A diffeotopy is **compactly supported** if there is a compact $K\\subseteq N$ with $H_t=\\mathrm{id}_N$ outside $K$ for every $t$ ([[def-compact-space]]), and is **stationary near the ends** if $H_t$ is independent of $t$ near $t=0$ and near $t=1$; the same terms apply to isotopies.\n\nThe **track** of $F$ is the level-preserving map\n$$\\overline F:M\\times I\\longrightarrow N\\times I,\\qquad \\overline F(x,t)=(F(x,t),t),$$\nand the **support** of $F$ is the closure of the set $\\{x\\in M:F(x,t)\\neq F(x,0)\\ \\text{for some}\\ t\\in I\\}$. Equivalently, $F$ is a smooth family of embeddings parametrised by $I$ in the sense of [[def-smooth-family-of-maps-and-evaluation-map]]. Here smoothness is tested in product charts by local extension of the coordinate functions to Euclidean open sets; when both $M$ and $I$ have boundary this is the explicit product-corner convention. For boundaryless parameter manifolds it is exactly the cited smooth-family definition; the same evaluation convention is used for $I$. The track is a map of this kind, retaining the time coordinate: it is not the parametrised image surface $F(M\\times I)$ alone, and every statement on this page about the track refers to the map $\\overline F$ and to its image $\\overline F(M\\times I)\\subseteq N\\times I$.\n\nOn this page an *isotopy* is always a family of embeddings, as above. A family of immersions that need not be injective is a **regular homotopy** ([[def-regular-homotopy-of-immersions]]); the sources' occasional use of the word \"isotopy\" for a family of immersions is never imported here, and where a source means a regular homotopy the term *regular homotopy* is used. Smoothness of a time reparametrisation, compactness of $M$ or $N$, properness, orientability and any choice principle are not part of the definition: they are hypotheses of the theorems that use it, and each of those states its own hypotheses.",
+        "strategy": "Definition fixing terminology. It separates the three notions the design and the sources use: an isotopy of embeddings, a diffeotopy of the ambient manifold, and the action of the latter on an embedding; it also reserves \u201cregular homotopy\u201d for families of immersions, matching [[def-regular-homotopy-of-immersions]]. Nothing is proved. The one convention needing care is that the *track* is the graph map $x\\mapsto(x,t)$ (which retains the time coordinate), not the parametrised image surface alone; the isotopy extension theorem and its local prerequisites are stated for the track. Track images and supports are used with their displayed meanings throughout the page.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-embedding-isotopy-has-a-well-defined-velocity-field-along-its-image",
+        "kind": "lemma",
+        "title": "The velocity field of an isotopy is well defined along its image",
+        "deps": [
+          "def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy",
+          "def-smooth-embedding",
+          "prop-a-proper-injective-immersion-is-a-smooth-embedding",
+          "def-differential-of-a-smooth-map",
+          "def-tangent-bundle-as-a-disjoint-union",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "def-embedded-submanifold-and-slice-chart",
+          "def-compact-space",
+          "thm-smooth-inverse-function-theorem-on-manifolds",
+          "lem-a-vector-field-along-an-embedded-submanifold-extends-to-a-neighbourhood-and-globally-when-closed",
+          "prop-the-image-of-a-smooth-embedding-is-an-embedded-submanifold",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "prop-a-map-into-a-product-is-smooth-iff-its-components-are-smooth",
+          "thm-chain-rule-for-differentials-of-smooth-maps",
+          "prop-smooth-maps-are-continuous",
+          "def-smooth-manifold",
+          "thm-finite-products-of-compact-spaces",
+          "thm-heine-borel-r",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "def-interior-point-boundary-point-interior-and-boundary-of-a-manifold"
+        ],
+        "statement": "Let $M$ be a compact smooth manifold, let $N$ be a smooth manifold and let $F:M\\times I\\to N$ be a smooth isotopy of embeddings with track $\\overline F$ and $S:=\\overline F(M\\times I)\\subseteq N\\times I$ ([[def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy]]). Then:\n\n1. $\\overline F$ is a smooth embedding and its image $S$ is closed and diffeomorphic to $M\\times I$. At time endpoints the image is a submanifold with boundary; when $N$ has boundary, smoothness is understood by local coordinate extension, rather than the boundaryless slice-chart definition.\n2. The horizontal velocity $Y$, well defined by\n$$Y(F(x,t),t):=dF_{(x,t)}(0,\\partial_t)\\in T_{F(x,t)}N\\subseteq T_{(F(x,t),t)}(N\\times I),$$\nis a smooth horizontal field along $S$: its pullback by $\\overline F$ is smooth up to the time endpoints, it takes values in the subbundle $TN\\oplus 0$, and it satisfies $d\\overline F_{(x,t)}(\\partial_t)=(Y(\\overline F(x,t)),\\partial_t)$.\n3. If $F$ takes values in $\\partial N$, then $Y$ takes values in the subbundle $T(\\partial N)$; if $F$ takes values in the interior of $N$, then so does the base point of $Y$.\n\nNo orientation, properness or injectivity beyond that of the isotopy is used, and no choice principle is needed.",
+        "strategy": "For (1): $\\overline F$ is a smooth immersion, because $d\\overline F_{(x,t)}$ restricts to the injective $d(F_t)_x$ on $T_xM$ and to the identity on the $I$ factor; it is injective, because a level-preserving map with injective slices is injective; and $M\\times I$ is compact, so $\\overline F$ is proper, and the published criterion [[prop-a-proper-injective-immersion-is-a-smooth-embedding]] makes $\\overline F$ an embedding. An embedded submanifold that is compact is closed in the Hausdorff manifold $N\\times I$. For (2): well-definedness is the injectivity of $\\overline F$ just proved, together with the level-preservation that forces equal first coordinates; smoothness is local: on a slice chart of $S$ the inverse of the embedding $\\overline F$ is smooth, and on the two pieces $Y$ is the composite of the smooth maps $(y,t)\\mapsto F_t^{-1}(y)$ and $(x,t)\\mapsto\\partial_tF(x,t)$; the tangent identity is the chain rule for $\\overline F$. For (3): a smooth curve that stays in the boundary stratum (respectively in the interior) of $N$ has velocities tangent to that stratum, so the horizontal partial derivative does too. No partition of unity, and hence no countable choice, occurs.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "Julian Chaidez, Notes on Smooth Topology and Symplectic Embedding Problems (Berkeley Geometry REU), Proposition 2.38 (Picard\u2013Lindel\u00f6f for time-dependent fields) and Theorem 2.39 (isotopy extension), printed pp. 35\u201336",
+              "url": "https://julianchaidez.net/materials/reu/notes_on_smooth_and_symplectic_topology.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-an-isotopy-velocity-field-extends-over-a-tubular-neighbourhood",
+        "kind": "lemma",
+        "title": "The velocity field of an isotopy extends to a neighbourhood",
+        "deps": [
+          "lem-embedding-isotopy-has-a-well-defined-velocity-field-along-its-image",
+          "lem-a-vector-field-along-an-embedded-submanifold-extends-to-a-neighbourhood-and-globally-when-closed",
+          "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "def-tubular-neighbourhood-of-an-embedded-submanifold",
+          "def-neat-submanifold-of-a-manifold-with-boundary",
+          "def-interior-point-boundary-point-interior-and-boundary-of-a-manifold",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary",
+          "thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set",
+          "def-countable-choice",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-embedded-submanifold-and-slice-chart",
+          "prop-smooth-maps-are-continuous"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $M$ be a compact smooth manifold, $N$ a smooth manifold, $F:M\\times I\\to N$ a smooth isotopy of embeddings with track $S\\subseteq N\\times I$ and horizontal velocity $Y$ ([[lem-embedding-isotopy-has-a-well-defined-velocity-field-along-its-image]]). Then:\n\n1. There are an open neighbourhood $\\Omega$ of $S$ in $N\\times I$ and a smooth map $\\widetilde Y:\\Omega\\to TN$ with $\\widetilde Y(y,t)\\in T_yN$ and $\\widetilde Y|_S=Y$.\n2. If $N$ has boundary and $F$ takes values in $\\partial N$, then, after shrinking $\\Omega$, the extension can be chosen tangent to $\\partial N$ along $\\Omega\\cap(\\partial N\\times I)$; if $F$ takes values in the interior, the extension can be chosen with values in $T(N\\setminus\\partial N)$, which is its natural value on the part of $\\Omega$ lying over the interior.\n3. For every open neighbourhood $W$ of $S$ in $N\\times I$ there is such an extension with $\\Omega\\subseteq W$; more generally, if $A\\subseteq S$ is compact and $\\widetilde Y_0$ is a smooth extension of $Y$ defined on a neighbourhood of $A$, the extension may be chosen to agree with $\\widetilde Y_0$ on a (possibly smaller) neighbourhood of $A$. If boundary tangency is also required, the prescribed extension must satisfy that tangency on its domain.\n\nThe extension is horizontal: only the $TN$ component is prescribed or changed, not the unit time component.",
+        "strategy": "Clause 1 is the neighbourhood half of the published extension lemma [[lem-a-vector-field-along-an-embedded-submanifold-extends-to-a-neighbourhood-and-globally-when-closed]] applied to the closed embedded submanifold $S$ of the smooth manifold $N\\times I$; smoothness of $Y$ along $S$ is [[lem-embedding-isotopy-has-a-well-defined-velocity-field-along-its-image]]. Clause 2 repeats that slice-chart construction in boundary-adapted charts: near a boundary point, write $N$ as a half-space in which $\\partial N$ is a coordinate hyperplane, extend the tangential components constantly in the normal direction off the stratum, and multiply by a cutoff that equals one on the stratum, which keeps the extended field tangent to the stratum; over the interior part the same construction is performed in interior charts. Clause 3 uses the tubular neighbourhood theorem [[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]] to shrink the domain into $W$, and the smooth Urysohn lemma [[thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set]] together with a partition of unity to blend the constructed extension with $\\widetilde Y_0$ near $A$ without changing it near $A$. Countable choice is used only through these cutoff and partition-of-unity selections, as on the vector-fields and tubular-neighbourhood pages.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "Julian Chaidez, Notes on Smooth Topology and Symplectic Embedding Problems (Berkeley Geometry REU), Proposition 2.38 (Picard\u2013Lindel\u00f6f for time-dependent fields) and Theorem 2.39 (isotopy extension), printed pp. 35\u201336",
+              "url": "https://julianchaidez.net/materials/reu/notes_on_smooth_and_symplectic_topology.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-compactness-allows-a-cutoff-to-produce-a-compactly-supported-time-dependent-field",
+        "kind": "lemma",
+        "title": "Compactness gives a compactly supported time-dependent velocity field",
+        "deps": [
+          "lem-an-isotopy-velocity-field-extends-over-a-tubular-neighbourhood",
+          "def-time-dependent-vector-field-and-evolution-operator",
+          "def-smooth-section-local-section-and-support",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary",
+          "thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set",
+          "def-compact-space",
+          "def-countable-choice",
+          "lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure",
+          "def-embedded-submanifold-and-slice-chart",
+          "prop-smooth-maps-are-continuous"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $M$ be a compact smooth manifold, $N$ a smooth manifold, and let $F:M\\times I\\to N$ be a smooth isotopy of embeddings that is **constant near the ends**: for some $\\varepsilon\\in(0,\\tfrac12)$, $F(x,t)=F(x,0)$ for all $x$ and $t\\le\\varepsilon$, and $F(x,t)=F(x,1)$ for all $x$ and $t\\ge1-\\varepsilon$. Let $W\\subseteq N$ be an open neighbourhood of the compact image $F(M\\times I)$ with $\\overline W$ compact. Then there is a smooth time-dependent vector field $G:N\\times I\\to TN$ on $N$ ([[def-time-dependent-vector-field-and-evolution-operator]]) such that:\n\n1. $\\bigcup_{t\\in I}\\operatorname{supp}G_t$ is contained in a compact subset of $W$, where $G_t=G(\\cdot,t)$; its closure is therefore compact;\n2. $G_t(F(x,t))=\\partial_tF(x,t)$ for every $(x,t)\\in M\\times I$;\n3. $G_t=0$ for $t\\le\\varepsilon/2$ and for $t\\ge1-\\varepsilon/2$.",
+        "strategy": "The track $S=\\overline F(M\\times I)$ is compact because $M$ is compact, so it admits a relatively compact open neighbourhood $\\Omega$ with $\\Omega\\subseteq W\\times I$; by [[lem-an-isotopy-velocity-field-extends-over-a-tubular-neighbourhood]] the horizontal velocity extends to a smooth $\\widetilde Y$ on $\\Omega$ with values in $TN$. Choose a smooth cutoff $\\psi:N\\to[0,1]$ with $\\psi=1$ on the compact image $F(M\\times I)$ and $\\operatorname{supp}\\psi\\subseteq W$, supplied by [[thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set]], and a smooth $\\beta:I\\to[0,1]$ with $\\beta=1$ on $[\\varepsilon,1-\\varepsilon]$ and $\\beta=0$ on $[0,\\varepsilon/2]\\cup[1-\\varepsilon/2,1]$. Set $G(y,t):=\\beta(t)\\psi(y)\\widetilde Y(y,t)$ on $\\Omega$ and $G:=0$ outside the support of the product. The support condition makes $G$ a well-defined smooth field on all of $N\\times I$ whose supports have compact union inside $\\overline W$. Clause 2 holds because $\\psi=1$ on the image $F(M\\times I)$ and, on that image, either $\\beta=1$ (when $\\partial_tF\\neq0$ is possible) or $\\partial_tF=0$ (on the two end intervals). Clause 3 is the choice of $\\beta$. Countable choice enters only through the cutoff and partition-of-unity selections, exactly as in [[thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "Julian Chaidez, Notes on Smooth Topology and Symplectic Embedding Problems (Berkeley Geometry REU), Proposition 2.38 (Picard\u2013Lindel\u00f6f for time-dependent fields) and Theorem 2.39 (isotopy extension), printed pp. 35\u201336",
+              "url": "https://julianchaidez.net/materials/reu/notes_on_smooth_and_symplectic_topology.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-the-extended-time-dependent-field-has-a-global-time-one-flow",
+        "kind": "lemma",
+        "title": "A compactly supported time-dependent field has a global time-one flow",
+        "deps": [
+          "lem-compactness-allows-a-cutoff-to-produce-a-compactly-supported-time-dependent-field",
+          "thm-compactly-supported-time-dependent-vector-fields-have-global-evolution-on-a-compact-time-interval",
+          "prop-time-dependent-evolution-satisfies-the-two-time-cocycle-law",
+          "def-complete-vector-field",
+          "def-countable-choice",
+          "def-time-dependent-vector-field-and-evolution-operator",
+          "thm-unique-maximal-integral-curve-through-each-point",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $G:N\\times I\\to TN$ be a smooth time-dependent vector field on a smooth manifold $N$ whose union of supports $\\bigcup_{t\\in I}\\operatorname{supp}G_t$ is contained in a compact subset of $N$ ([[def-time-dependent-vector-field-and-evolution-operator]]), as produced in [[lem-compactness-allows-a-cutoff-to-produce-a-compactly-supported-time-dependent-field]]. If $N$ has boundary, assume additionally that $G_t$ is tangent to $\\partial N$ there for every $t$. Then there is a unique global **evolution operator** $\\Psi_{t,s}:N\\to N$, $s,t\\in I$, such that:\n\n1. $\\Psi_{s,s}=\\mathrm{id}_N$ and $\\Psi_{u,t}\\circ\\Psi_{t,s}=\\Psi_{u,s}$ for all $s,t,u\\in I$;\n2. every $\\Psi_{t,s}$ is a diffeomorphism of $N$, with inverse $\\Psi_{s,t}$;\n3. for fixed $s$ and $y$ the curve $t\\mapsto\\Psi_{t,s}(y)$ solves $\\frac{d}{dt}\\Psi_{t,s}(y)=G_t(\\Psi_{t,s}(y))$ and $\\Psi_{s,s}(y)=y$;\n4. $\\Psi_{t,s}=\\mathrm{id}_N$ whenever $G$ vanishes identically between $s$ and $t$.\n\nConsequently $H_t:=\\Psi_{t,0}$ is a compactly supported ambient isotopy with $H_0=\\mathrm{id}_N$, inverse $H_t^{-1}=\\Psi_{0,t}$, and $H_t$ stationary on every time interval on which $G$ vanishes ([[def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy]]).",
+        "strategy": "Apply the published theorem [[thm-compactly-supported-time-dependent-vector-fields-have-global-evolution-on-a-compact-time-interval]] to the compact interval $I$ and the field $G$, whose supports have compact union: it supplies the global evolution operator with properties (1) and (3) and the smoothness of $(t,s,y)\\mapsto\\Psi_{t,s}(y)$. Property (2) follows from the cocycle law $\\Psi_{s,t}\\circ\\Psi_{t,s}=\\Psi_{s,s}=\\mathrm{id}_N$ and $\\Psi_{t,s}\\circ\\Psi_{s,t}=\\mathrm{id}_N$, which is [[prop-time-dependent-evolution-satisfies-the-two-time-cocycle-law]]. Property (4) is uniqueness of solutions of smooth ordinary differential equations: on an interval where $G$ vanishes, the constant curve is a solution with the same initial value. Countable choice is inherited from the local existence theory recorded on the vector-fields page, exactly as in the contract of the published theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "Julian Chaidez, Notes on Smooth Topology and Symplectic Embedding Problems (Berkeley Geometry REU), Proposition 2.38 (Picard\u2013Lindel\u00f6f for time-dependent fields) and Theorem 2.39 (isotopy extension), printed pp. 35\u201336",
+              "url": "https://julianchaidez.net/materials/reu/notes_on_smooth_and_symplectic_topology.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-isotopy-extension",
+        "kind": "theorem",
+        "title": "The isotopy extension theorem",
+        "deps": [
+          "def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy",
+          "lem-embedding-isotopy-has-a-well-defined-velocity-field-along-its-image",
+          "lem-an-isotopy-velocity-field-extends-over-a-tubular-neighbourhood",
+          "lem-compactness-allows-a-cutoff-to-produce-a-compactly-supported-time-dependent-field",
+          "lem-the-extended-time-dependent-field-has-a-global-time-one-flow",
+          "def-smooth-embedding",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-compact-space",
+          "def-countable-choice",
+          "thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set",
+          "lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "def-interior-point-boundary-point-interior-and-boundary-of-a-manifold",
+          "thm-unique-maximal-integral-curve-through-each-point",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary",
+          "prop-smooth-maps-are-continuous"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$.\n\n1. **Compact main case.** Let $M$ be a compact smooth manifold without boundary, let $N$ be a smooth manifold without boundary, let $F:M\\times I\\to N$ be a smooth isotopy of embeddings that is constant near the ends of $I$, and let $W$ be an open neighbourhood of $F(M\\times I)$ in $N$. Then there is an ambient isotopy $H:N\\times I\\to N$ with $H_0=\\mathrm{id}_N$, every $H_t$ a diffeomorphism, $H_t\\circ F_0=F_t$ for all $t\\in I$, $H_t=\\mathrm{id}_N$ outside $W$ for every $t$, and $H_t$ stationary near the ends; if $F$ is constant near the ends with parameter $\\varepsilon$, then $H_t=\\mathrm{id}_N$ for $t\\le\\varepsilon/2$ and $H_t=H_1$ for $t\\ge1-\\varepsilon/2$.\n2. **Relative form.** Let $N$ be boundaryless, $U\\subseteq N$ open, $A\\subseteq U$ compact, and let $F:U\\times I\\to N$ be a smooth isotopy of embeddings whose track image is open in $N\\times I$. Then there is a compactly supported ambient isotopy $H$ of $N$ with $H_t\\circ F_0=F_t$ on a neighbourhood of $A$ for every $t$.\n3. **Boundary stratum.** If $N$ has boundary and $F(M\\times I)\\subseteq\\partial N$, then the ambient isotopy of clause 1 can be chosen with every $H_t$ carrying $\\partial N$ onto itself; if $F(M\\times I)\\subseteq N\\setminus\\partial N$, it can be chosen compactly supported in $N\\setminus\\partial N$.\n4. **General isotopies.** Clause 1 remains true without the hypothesis that $F$ be constant near the ends: every smooth isotopy of a compact $M$ extends, with support in any prescribed neighbourhood $W$ of $F(M\\times I)$.",
+        "strategy": "Clauses 1 and 3 are assembled from the three local steps. Let $G$ be the compactly supported time-dependent field of [[lem-compactness-allows-a-cutoff-to-produce-a-compactly-supported-time-dependent-field]], agreeing with the velocity along the track and supported in a compact subset of a prescribed neighbourhood of the track, and let $H_t:=\\Psi_{t,0}$ be its global flow from [[lem-the-extended-time-dependent-field-has-a-global-time-one-flow]]; the boundary clauses use the stratum-tangent extension of [[lem-an-isotopy-velocity-field-extends-over-a-tubular-neighbourhood]] so that the flow preserves the stratum. Each $H_t$ is a diffeomorphism and fixes every point outside $\\operatorname{supp}G_t$, hence every point outside $W$. For the identity $H_t\\circ F_0=F_t$, fix $x\\in M$: the curves $t\\mapsto F_t(x)$ and $t\\mapsto H_t(F_0(x))$ have the same initial point and the same derivative at every $t$, by clause 2 of the cutoff lemma and the defining ODE of the flow; uniqueness of solutions of smooth ODEs gives equality. The stationary assertions on the end intervals are clause 3 of the cutoff lemma and clause 4 of the flow lemma.\nClause 2: the velocity $(t,y)\\mapsto\\partial_tF(F_t^{-1}(y),t)$ is a smooth field on the open subset $F(U\\times I)\\subseteq N\\times I$; extend it by zero outside and multiply by a cutoff equal to one on a compact neighbourhood of the *track over $A$* and supported in the open set where the track is defined, then solve the resulting compactly supported ODE. The time-one maps $H_t$ then satisfy $H_t\\circ F_0=F_t$ near $A$ by the same uniqueness argument applied to the finitely many curves through $A$. Openness of the track image is used to keep the extended field smooth across the boundary of the track.\nClause 4: given an arbitrary smooth isotopy $F$ on $M\\times I$, extend it to a smooth isotopy $\\widehat F$ on $M\\times[-\\delta,1+\\delta]$ by clamping time: $\\widehat F(x,t):=F(x,\\gamma(t))$ for a smooth $\\gamma:[-\\delta,1+\\delta]\\to[0,1]$ that is strictly increasing from $0$ to $1$ on the middle interval and constant near the two ends of the larger interval. Then $\\widehat F$ is constant near the ends of its interval and clause 1 applied to $\\widehat F$ yields an ambient isotopy $\\widehat H$ with $\\widehat H_t\\circ F_0=F_{\\gamma(t)}$; substituting $t\\mapsto\\gamma^{-1}(t)$ for $t\\in[0,1]$ gives the required ambient isotopy of the original $F$, still supported in $W$ and smooth because $\\gamma^{-1}$ is smooth on $[0,1]$. This is the standard \u201cmake the isotopy stationary near the ends\u201d reduction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "Julian Chaidez, Notes on Smooth Topology and Symplectic Embedding Problems (Berkeley Geometry REU), Proposition 2.38 (Picard\u2013Lindel\u00f6f for time-dependent fields) and Theorem 2.39 (isotopy extension), printed pp. 35\u201336",
+              "url": "https://julianchaidez.net/materials/reu/notes_on_smooth_and_symplectic_topology.pdf"
+            },
+            {
+              "title": "The Isotopy Extension Theorem (University of California, Riverside, graduate differential topology hand-out, 2010), complete 14-page document: statement and applications of the isotopy extension theorem, uniqueness of tubular and collar neighbourhoods, and the knotted-line counterexample to ambient extension",
+              "url": "https://math.ucr.edu/~res/math260s10/isotopyextension.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 9
+      },
+      {
+        "id": "cor-isotopic-embeddings-have-diffeomorphic-complements",
+        "kind": "corollary",
+        "title": "Isotopic embeddings of a compact manifold have diffeomorphic complements",
+        "deps": [
+          "thm-isotopy-extension",
+          "def-smooth-embedding",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-countable-choice",
+          "def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy",
+          "def-compact-space"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $N$ be a smooth manifold without boundary, let $M$ be a compact smooth manifold and let $f_0,f_1:M\\to N$ be isotopic embeddings. Then there is a diffeomorphism $H:N\\to N$ with $H\\circ f_0=f_1$; consequently $H$ restricts to a diffeomorphism of pairs $(N,f_0(M))\\cong(N,f_1(M))$, hence restricts to a diffeomorphism of complements\n$$N\\setminus f_0(M)\\cong N\\setminus f_1(M).$$\nMoreover, if $W$ is a smooth manifold containing $M$ as an embedded submanifold and $f_0$ extends to an embedding $W\\to N$, then $f_1$ extends to an embedding $W\\to N$ as well.",
+        "strategy": "Let $F:M\\times I\\to N$ be an isotopy with $F_0=f_0$, $F_1=f_1$. Apply clause 4 (or clause 1 after the time-clamping reduction) of [[thm-isotopy-extension]] to obtain an ambient isotopy $H$ of $N$ with $H_t\\circ f_0=F_t$; set $H:=H_1$. Then $H$ is a diffeomorphism by [[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]], $H\\circ f_0=f_1$, and $H$ carries $f_0(M)$ onto $f_1(M)$, so it restricts to a diffeomorphism of the complements, which are the images of $N\\setminus f_0(M)$ under $H$ and its inverse. The extension clause follows as in the classical use of isotopy extension: if $g:W\\to N$ is an embedding extending $f_0$, then $H\\circ g$ is an embedding extending $f_1$. Countable choice is inherited from the isotopy extension theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "The Isotopy Extension Theorem (University of California, Riverside, graduate differential topology hand-out, 2010), complete 14-page document: statement and applications of the isotopy extension theorem, uniqueness of tubular and collar neighbourhoods, and the knotted-line counterexample to ambient extension",
+              "url": "https://math.ucr.edu/~res/math260s10/isotopyextension.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 10
+      },
+      {
+        "id": "cor-tubular-neighbourhoods-are-unique-up-to-ambient-isotopy",
+        "kind": "corollary",
+        "title": "Compatible tubular neighbourhoods agree near compact sets up to ambient isotopy",
+        "deps": [
+          "thm-isotopy-extension",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary",
+          "prop-two-tubular-neighbourhood-germs-are-isomorphic-near-the-zero-section",
+          "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "def-tubular-neighbourhood-of-an-embedded-submanifold",
+          "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-countable-choice",
+          "def-compact-space",
+          "def-smooth-embedding",
+          "lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure",
+          "thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $N$ be a smooth manifold without boundary, let $S\\subseteq N$ be a closed embedded submanifold, let $\\nu(S)$ be its normal bundle ([[def-normal-and-conormal-bundles-of-an-embedded-submanifold]]), and let $\\Phi_1,\\Phi_2:\\Omega\\to N$ be two tubular neighbourhood embeddings of the same open disc bundle $\\Omega=D(\\nu(S))$ whose restrictions to the zero section are the inclusion of $S$ ([[def-tubular-neighbourhood-of-an-embedded-submanifold]]). Assume that $d\\Phi_1$ and $d\\Phi_2$ induce the same isomorphism from each vertical fibre $\\nu(S)_p$ to the ambient normal quotient $T_pN/T_pS$. (The usual normalization makes both induced maps the identity; merely fixing the zero section is insufficient.) Then, after shrinking $\\Omega$ around the zero section, the two embeddings are isotopic through tubular neighbourhood embeddings fixing $S$ pointwise. Consequently, for every compact $A\\subseteq S$ there is an ambient isotopy $H_t$ of $N$ with $H_0=\\mathrm{id}_N$, compact support, $H_t\\circ\\Phi_1=\\Phi_t$ on a neighbourhood of $A$ for every $t$ (in particular $H_1\\circ\\Phi_1=\\Phi_2$ there), and $H_t$ fixing a neighbourhood of $A$ in $S$ pointwise; when $S$ is compact one may take $A=S$ and obtain the agreement on a neighbourhood of all of $S$, with support in any prescribed neighbourhood of $\\Phi_1(\\Omega)\\cup\\Phi_2(\\Omega)$.",
+        "strategy": "By the published uniqueness of tubular neighbourhoods [[prop-two-tubular-neighbourhood-germs-are-isomorphic-near-the-zero-section]], after shrinking there is a diffeomorphism $\\Psi:\\Omega_1'\\to\\Omega_2'$ with $\\Phi_2\\circ\\Psi=\\Phi_1$ and $\\Psi$ the identity on the zero section. The classical shrinking construction (Hirsch, uniqueness of tubular neighbourhoods; UCR notes, pp. 5--8) deforms such a $\\Psi$ to a bundle automorphism over $S$ through diffeomorphisms fixing the zero section, and the linear interpolation in the fibres then gives a smooth isotopy $\\Phi_t$ of tubular neighbourhood embeddings from $\\Phi_1$ to $\\Phi_2$ with $\\Phi_t|_S=\\mathrm{id}_S$; equivalently, on the disc-bundle model, $\\Phi_t(v)=(1-t)^{-1}\\Phi_1((1-t)v)$ near $t=1$. The track of this isotopy is open in $N\\times I$ because each slice is an open embedding and varies smoothly; applying the relative form, clause 2, of [[thm-isotopy-extension]] to the open source $\\Omega$ and the compact set $A$ (or all of a compact $S$) produces the ambient isotopy, whose support can be taken in a prescribed neighbourhood of the track by the support clause of the theorem. Countable choice is inherited from the isotopy extension theorem and the tubular neighbourhood theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "The Isotopy Extension Theorem (University of California, Riverside, graduate differential topology hand-out, 2010), complete 14-page document: statement and applications of the isotopy extension theorem, uniqueness of tubular and collar neighbourhoods, and the knotted-line counterexample to ambient extension",
+              "url": "https://math.ucr.edu/~res/math260s10/isotopyextension.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 10
+      },
+      {
+        "id": "lem-the-diagonal-of-a-smooth-manifold-is-a-closed-embedded-submanifold",
+        "kind": "lemma",
+        "title": "The diagonal of a smooth manifold is a closed embedded submanifold",
+        "deps": [
+          "def-smooth-manifold",
+          "def-embedded-submanifold-and-slice-chart",
+          "def-smooth-embedding",
+          "def-product-topology",
+          "prop-smooth-maps-are-continuous",
+          "prop-the-diagonal-is-an-embedded-submanifold",
+          "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "prop-a-map-into-a-product-is-smooth-iff-its-components-are-smooth",
+          "prop-identity-maps-and-composites-of-smooth-maps-are-smooth",
+          "thm-chain-rule-for-differentials-of-smooth-maps",
+          "def-differential-of-a-smooth-map",
+          "lem-slice-chart-restrictions-form-a-smooth-atlas",
+          "prop-smoothness-into-an-embedded-submanifold-is-an-initial-property",
+          "prop-smoothness-of-a-map-on-an-embedded-submanifold-is-local-in-the-ambient-space",
+          "def-homeomorphism-and-open-maps",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds"
+        ],
+        "statement": "Let $X$ be a smooth manifold and let $\\Delta_X:=\\{(x,x):x\\in X\\}\\subseteq X\\times X$ be the diagonal. Then $\\Delta_X$ is a closed embedded submanifold of $X\\times X$, the diagonal map $\\delta:X\\to X\\times X$, $\\delta(x)=(x,x)$, is a smooth embedding onto $\\Delta_X$, and $\\Delta_X$ has a canonical smooth structure making $\\delta$ a diffeomorphism onto it. No orientation, metric, properness or choice principle is involved.",
+        "strategy": "Take a smooth atlas $(U_\\alpha,\\varphi_\\alpha)$ of $X$. On the product chart $U_\\alpha\\times U_\\alpha$ of $X\\times X$, the diagonal corresponds to $\\{(\\xi,\\xi)\\}\\subseteq\\varphi_\\alpha(U_\\alpha)\\times\\varphi_\\alpha(U_\\alpha)$, which is the graph of the identity map of the open set $\\varphi_\\alpha(U_\\alpha)\\subseteq\\mathbb R^n$; a graph of a smooth map over an open set is an embedded submanifold of the product ([[def-embedded-submanifold-and-slice-chart]]), and these local models glue because the transition maps are diffeomorphisms compatible with the diagonal. The diagonal map $\\delta$ is smooth in these charts and is a homeomorphism onto its image, being the inverse of the smooth projection $\\Delta_X\\to X$; hence it is a smooth embedding ([[def-smooth-embedding]]) and its image is an embedded submanifold diffeomorphic to $X$. Finally $\\Delta_X$ is closed: $X$ is Hausdorff, so the complement of the diagonal is open, and $X\\times X$ carries the product topology ([[def-product-topology]], [[prop-smooth-maps-are-continuous]]).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            },
+            {
+              "title": "Arkadiy Skopenkov, Embedding and Knotting of Manifolds in Euclidean Spaces (arXiv:math/0604045), \u00a71, article pp. 2\u20135 (self-intersection set; ambient versus non-ambient isotopy) and \u00a72, article pp. 6\u201314 (Theorems 2.1\u20132.3 and 2.8; the modulo 2 and integral Whitney obstruction; the Whitney invariant); \u00a73 and \u00a75 used only for the recorded knotting boundary",
+              "url": "https://arxiv.org/pdf/math/0604045"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-self-transverse-immersion-and-double-point-locus",
+        "kind": "definition",
+        "title": "Self-transverse immersions and the double point locus",
+        "deps": [
+          "lem-the-diagonal-of-a-smooth-manifold-is-a-closed-embedded-submanifold",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-a-smooth-map-transverse-to-an-embedded-submanifold",
+          "def-smooth-embedding",
+          "def-embedded-submanifold-and-slice-chart",
+          "def-local-oriented-intersection-sign",
+          "cor-every-immersion-is-locally-an-embedding"
+        ],
+        "statement": "Let $f:M^m\\to X$ be a smooth immersion. Write $\\Delta_M$ and $\\Delta_X$ for the diagonals, embedded by [[lem-the-diagonal-of-a-smooth-manifold-is-a-closed-embedded-submanifold]]. Its **ordered coincidence locus** is\n$$\\Delta_2(f)=\\{(x,y)\\in M\\times M\\setminus\\Delta_M:f(x)=f(y)\\}.$$\nIts **unordered branch-pair set** is\n$$D(f)=\\{\\{x,y\\}:x\\ne y,\\ f(x)=f(y)\\}=\\Delta_2(f)/(x,y)\\sim(y,x),$$\nand its **collision image** is $\\Sigma(f)=f(\\operatorname{pr}_1\\Delta_2(f))\\subseteq X$. The common-image map $D(f)\\to\\Sigma(f)$ is surjective. It is bijective exactly when no image point has three or more preimages. At an image point with $k$ preimages, $D(f)$ has one element for each of the $\\binom{k}{2}$ unordered branch pairs, rather than one element for the image point. A **genuine double point** is a point of $X$ with exactly two preimages. The term double-point locus refers to the branch-pair locus; it does not exclude higher-multiplicity collision images.\n\nThe immersion is **self-transverse** when\n$$f\\times f:M\\times M\\setminus\\Delta_M\\to X\\times X$$\nis transverse to $\\Delta_X$ ([[def-a-smooth-map-transverse-to-an-embedded-submanifold]]). Equivalently, for every distinct $x,y$ with common image $r$, one has $df_x(T_xM)+df_y(T_yM)=T_rX$. This is pairwise transversality and does not assert absence of triple points. Each selected preimage gives a local embedded sheet by [[cor-every-immersion-is-locally-an-embedding]]; in ambient dimension $2m$, a selected coincident pair has complementary tangent planes, and its two local sheet disks are supplied by [[lem-a-double-point-of-a-self-transverse-immersion-has-two-disjoint-embedded-sheet-disks]]. This statement about a selected pair does not say that these are all sheets over $r$.\n\nIf $M$ and $X^{2m}$ are oriented, every ordered coincident branch pair has the sign $\\varepsilon(x,y)\\in\\{\\pm1\\}$ of [[def-local-oriented-intersection-sign]], computed with the $x$ branch first. Swapping the two oriented $m$-blocks multiplies this sign by $(-1)^{m^2}=(-1)^m$. Consequently for even $m$ it defines an ordering-independent sign on each element of $D(f)$; for odd $m$ an ordering is needed. At a multiple collision image, different branch pairs need not have the same sign, so no single sign is assigned to that image. None of these definitions asserts finiteness, compactness, orientability, absence of triples or any choice principle.",
+        "strategy": "Definition fixing the general-position convention used by every later item of the pair. The definition is meaningful because the diagonal is an embedded submanifold of $X\\times X$ ([[lem-the-diagonal-of-a-smooth-manifold-is-a-closed-embedded-submanifold]]), so transversality to it is defined. Nothing is proved; in particular no claim is made that $\\Delta_2(f)$ is a manifold (that is [[lem-double-point-locus-has-expected-dimension-two-m-minus-n]]), nor that a general immersion is self-transverse. The ordering convention for the local sign is recorded because self-intersections, unlike intersections of two distinct submanifolds, carry an unordered pair of branches and the parity of $m$ decides whether the sign is intrinsic.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            },
+            {
+              "title": "Arkadiy Skopenkov, Embedding and Knotting of Manifolds in Euclidean Spaces (arXiv:math/0604045), \u00a71, article pp. 2\u20135 (self-intersection set; ambient versus non-ambient isotopy) and \u00a72, article pp. 6\u201314 (Theorems 2.1\u20132.3 and 2.8; the modulo 2 and integral Whitney obstruction; the Whitney invariant); \u00a73 and \u00a75 used only for the recorded knotting boundary",
+              "url": "https://arxiv.org/pdf/math/0604045"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-a-double-point-of-a-self-transverse-immersion-has-two-disjoint-embedded-sheet-disks"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-double-point-locus-has-expected-dimension-two-m-minus-n",
+        "kind": "lemma",
+        "title": "The double point locus has the expected dimension $2m-n$",
+        "deps": [
+          "def-self-transverse-immersion-and-double-point-locus",
+          "thm-transverse-preimage-theorem",
+          "def-a-smooth-map-transverse-to-an-embedded-submanifold",
+          "def-embedded-submanifold-and-slice-chart",
+          "def-differential-of-a-smooth-map",
+          "cor-negative-expected-dimension-generic-intersections-are-empty",
+          "def-countable-choice",
+          "lem-the-diagonal-of-a-smooth-manifold-is-a-closed-embedded-submanifold",
+          "thm-chain-rule-for-differentials-of-smooth-maps",
+          "prop-smoothness-of-a-map-on-an-embedded-submanifold-is-local-in-the-ambient-space",
+          "cor-every-immersion-is-locally-an-embedding",
+          "prop-smooth-maps-are-continuous",
+          "def-transverse-smooth-maps"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $f:M^m\\to X^n$ be a self-transverse immersion, with double point locus $\\Delta_2(f)$, double point set $\\Sigma(f)$ and swap involution $\\tau(x,y)=(y,x)$ as in [[def-self-transverse-immersion-and-double-point-locus]]. Then:\n\n1. $\\Delta_2(f)$ is a closed embedded submanifold of the open submanifold $M\\times M\\setminus\\Delta_M$ of $M\\times M$, and if $2m-n\\ge0$ it has pure dimension $2m-n$;\n2. if $2m-n<0$, then $\\Delta_2(f)=\\varnothing$ and $\\Sigma(f)=\\varnothing$;\n3. the swap involution restricts to a smooth free involution of $\\Delta_2(f)$; the map\n$$q:\\Delta_2(f)\\longrightarrow X,\\qquad q(x,y):=f(x)=f(y),$$\nis a smooth immersion with image $\\Sigma(f)$ and satisfies $q\\circ\\tau=q$, and every point of $\\Delta_2(f)$ has a neighbourhood on which $q$ is an embedding; $q$ induces a surjection from the orbit set $\\Delta_2(f)/\\tau$ onto $\\Sigma(f)$ sending an orbit to its common image, and this surjection is a bijection exactly when no point of $X$ is the image of more than two points of $M$; in that case $\\Sigma(f)$ is the quotient of $\\Delta_2(f)$ by the free involution and $q$ is two-to-one onto its image.\n\nNo finiteness of $\\Delta_2(f)$ is asserted.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 The map $f\\times f$ is smooth on the open submanifold $M\\times M\\setminus\\Delta_M$ and transverse to $\\Delta_X$ there by [F1]; by [L3] the diagonal $\\Delta_X$ is an embedded submanifold of $X\\times X$ of codimension $2n-n=n$. Applying [L1] to the restriction of $f\\times f$ to $M\\times M\\setminus\\Delta_M$ yields that $\\Delta_2(f)$ is an embedded submanifold of $M\\times M\\setminus\\Delta_M$ of codimension $n$, that is, of pure dimension $2m-n$ when $2m-n\\ge0$, and in particular $\\Delta_2(f)$ carries the subspace topology by [L5]. [L1, L3, L5, F1, A1]\n\n1.2 The tangent space description at a point $(x,y)\\in\\Delta_2(f)$ with $r=f(x)=f(y)$: by [L1], a tangent vector lies in $T_{(x,y)}\\Delta_2(f)$ exactly when its image under $d(f\\times f)_{(x,y)}$ lies in $T_{(r,r)}\\Delta_X$. By [L6] applied to the components $\\pi_1\\circ(f\\times f)=f\\circ\\pi_1$ and $\\pi_2\\circ(f\\times f)=f\\circ\\pi_2$, this image is $(df_x(v),df_y(w))$ for a tangent vector $(v,w)\\in T_xM\\oplus T_yM$, while $T_{(r,r)}\\Delta_X=\\{(u,u):u\\in T_rX\\}$; hence $$T_{(x,y)}\\Delta_2(f)=\\{(v,w)\\in T_xM\\oplus T_yM:df_x(v)=df_y(w)\\}.$$ [L1, L6, F1]\n\n1.3 The set $\\Delta_2(f)$ is closed in $M\\times M\\setminus\\Delta_M$: it is the preimage under the continuous map $f\\times f$ of the closed set $\\Delta_X$ by [L3] and [L9]. [L3, L9, F1]\n\n2.1 Suppose $2m-n<0$, that is $2m+n<2n$. The map $f\\times f$, restricted to $M\\times M\\setminus\\Delta_M$, and the inclusion $\\Delta_X\\hookrightarrow X\\times X$ are transverse by [F1] and [L2], with source dimensions $2m$ and $n$ and target dimension $2n$; by [L4] their fibre product is empty. The fibre product projects bijectively onto the set of pairs $(u,\\delta)$ with $f\\times f(u)=\\delta$ and $\\delta\\in\\Delta_X$, which is exactly $\\Delta_2(f)$, so $\\Delta_2(f)=\\varnothing$ and hence $\\Sigma(f)=f(\\operatorname{pr}_1\\Delta_2(f))=\\varnothing$. [L2, L4, F1, step 1.1]\n\n2.2 The swap $\\tau(x,y)=(y,x)$ is a diffeomorphism of $M\\times M$ (an involution, smooth with smooth inverse), and it preserves $M\\times M\\setminus\\Delta_M$ and the condition $f(x)=f(y)$; hence it restricts to a smooth involution of the embedded submanifold $\\Delta_2(f)$ that is free, since $\\tau(x,y)=(x,y)$ would force $x=y$, which is excluded on $M\\times M\\setminus\\Delta_M$. [L7, F1, step 1.1]\n\n2.3 The map $q(x,y)=f(x)=f(y)$ is smooth on $\\Delta_2(f)$: it is the restriction of the smooth ambient map $M\\times M\\setminus\\Delta_M\\to X$, $(x,y)\\mapsto f(x)$, so the criterion of [L7] applies. Its differential is injective at every point: by [L6], $dq_{(x,y)}(v,w)=df_x(v)$ for $(v,w)\\in T_{(x,y)}\\Delta_2(f)$; if $dq_{(x,y)}(v,w)=0$ then $df_y(w)=df_x(v)=0$ by the description of step 1.2, so $w=0$ and then $v=0$ because $df_x$ and $df_y$ are injective. Hence $q$ is an immersion, and by [L8] every point of $\\Delta_2(f)$ has a neighbourhood on which $q$ is an embedding onto an embedded submanifold of $X$. [L6, L7, L8, F1, step 1.2]\n\n3.1 By definition of $\\Sigma(f)$ as $f(\\operatorname{pr}_1\\Delta_2(f))$ the image of $q$ is $\\Sigma(f)$, and $q\\circ\\tau=q$ because $\\tau$ only exchanges the two coordinates, which have equal images. [F1, step 2.3]\n\n4.1 The fibres of $q$ are unions of $\\tau$-orbits: $q(x,y)=r$ if and only if $x$ and $y$ are two distinct points of the preimage $f^{-1}(r)$, so $q^{-1}(r)$ is in bijection with the ordered pairs of distinct points of $f^{-1}(r)$, on which $\\tau$ acts by exchanging the two entries. Consequently $q$ induces a well-defined surjection $\\Delta_2(f)/\\tau\\to\\Sigma(f)$ sending the orbit of $(x,y)$ to $f(x)$, and this map is injective exactly when every fibre $f^{-1}(r)$ with $r\\in\\Sigma(f)$ consists of exactly two points, that is, exactly when no point of $X$ is the image of more than two points of $M$. [F1, step 3.1]\n\n5.1 The claims are steps 1.1 and 1.3 for clause 1, step 2.1 for clause 2, and steps 2.2, 2.3, 3.1 and 4.1 for clause 3. No finiteness of $\\Delta_2(f)$ was used or asserted. [step 1.1, step 1.3, step 2.1, step 2.2, step 2.3, step 3.1, step 4.1] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            },
+            {
+              "title": "Arkadiy Skopenkov, Embedding and Knotting of Manifolds in Euclidean Spaces (arXiv:math/0604045), \u00a71, article pp. 2\u20135 (self-intersection set; ambient versus non-ambient isotopy) and \u00a72, article pp. 6\u201314 (Theorems 2.1\u20132.3 and 2.8; the modulo 2 and integral Whitney obstruction; the Whitney invariant); \u00a73 and \u00a75 used only for the recorded knotting boundary",
+              "url": "https://arxiv.org/pdf/math/0604045"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-a-self-transverse-immersion-has-no-double-points-when-n-is-greater-than-two-m",
+        "kind": "lemma",
+        "title": "A self-transverse immersion has no double points when $n>2m$",
+        "deps": [
+          "def-self-transverse-immersion-and-double-point-locus",
+          "lem-double-point-locus-has-expected-dimension-two-m-minus-n",
+          "cor-negative-expected-dimension-generic-intersections-are-empty",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $f:M^m\\to X^n$ be a self-transverse immersion with $n>2m$. Then $\\Delta_2(f)=\\varnothing$, so $f$ is injective. No properness or compactness of $M$ is used; in particular self-transversality, not genericity, is the hypothesis.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 The hypothesis $n>2m$ is $2m-n<0$, so clause 2 of [L1] applies to the self-transverse immersion $f$ and gives $\\Delta_2(f)=\\varnothing$ and $\\Sigma(f)=\\varnothing$. The negative expected dimension is the instance of [L2] for the transverse pair $(f\\times f,\\ \\Delta_X\\hookrightarrow X\\times X)$, whose source dimensions $2m$ and $n$ sum to less than the target dimension $2n$ exactly when $2m<n$. [L1, L2, A1]\n\n2.1 By [F1] an element of $\\Delta_2(f)$ is a pair of distinct points with equal image; since $\\Delta_2(f)=\\varnothing$ there are no such pairs, hence $f(x)=f(y)$ implies $x=y$, that is, $f$ is injective. [F1, step 1.1]\n\n3.1 Therefore every self-transverse immersion from an $m$-manifold into an $n$-manifold with $n>2m$ is injective, without any compactness or properness hypothesis and with self-transversality in place of genericity. [step 1.1, step 2.1] \u220e",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            },
+            {
+              "title": "Arkadiy Skopenkov, Embedding and Knotting of Manifolds in Euclidean Spaces (arXiv:math/0604045), \u00a71, article pp. 2\u20135 (self-intersection set; ambient versus non-ambient isotopy) and \u00a72, article pp. 6\u201314 (Theorems 2.1\u20132.3 and 2.8; the modulo 2 and integral Whitney obstruction; the Whitney invariant); \u00a73 and \u00a75 used only for the recorded knotting boundary",
+              "url": "https://arxiv.org/pdf/math/0604045"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-a-proper-injective-immersion-is-an-embedding",
+        "kind": "corollary",
+        "title": "A proper injective immersion is an embedding",
+        "deps": [
+          "prop-a-proper-injective-immersion-is-a-smooth-embedding",
+          "lem-a-self-transverse-immersion-has-no-double-points-when-n-is-greater-than-two-m",
+          "def-smooth-embedding",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-countable-choice",
+          "def-compact-space",
+          "def-smooth-manifold",
+          "prop-smooth-maps-are-continuous",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-closed-subspace-of-a-compact-space-is-compact"
+        ],
+        "statement": "A proper injective immersion between smooth manifolds is a smooth embedding. Consequently, if $f:M^m\\to X^n$ is a proper self-transverse immersion with $n>2m$, then $f$ is a smooth embedding; if $M$ is closed, self-transversality with $n>2m$ alone suffices, properness being automatic.",
+        "strategy": "The general criterion is the published proposition [[prop-a-proper-injective-immersion-is-a-smooth-embedding]]; it is consumed here, not reproved, so that the page does not duplicate the DG embedding-material proof. The new content is its high-codimension instance: by [[lem-a-self-transverse-immersion-has-no-double-points-when-n-is-greater-than-two-m]] a self-transverse immersion with $n>2m$ is injective, so a proper one is an embedding by the criterion; for closed $M$ every continuous map to a Hausdorff manifold is proper, so properness is automatic. This is the design's split of the former \u201cgeneric proper immersion\u201d row into a lemma about double points and a corollary about the embedding upgrade.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            },
+            {
+              "title": "Arkadiy Skopenkov, Embedding and Knotting of Manifolds in Euclidean Spaces (arXiv:math/0604045), \u00a71, article pp. 2\u20135 (self-intersection set; ambient versus non-ambient isotopy) and \u00a72, article pp. 6\u201314 (Theorems 2.1\u20132.3 and 2.8; the modulo 2 and integral Whitney obstruction; the Whitney invariant); \u00a73 and \u00a75 used only for the recorded knotting boundary",
+              "url": "https://arxiv.org/pdf/math/0604045"
+            },
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-a-double-point-of-a-self-transverse-immersion-has-two-disjoint-embedded-sheet-disks",
+        "kind": "lemma",
+        "title": "A double point has two disjoint embedded sheet disks meeting transversely",
+        "deps": [
+          "def-self-transverse-immersion-and-double-point-locus",
+          "def-smooth-embedding",
+          "def-immersion-submersion-and-constant-rank-map",
+          "cor-every-immersion-is-locally-an-embedding",
+          "def-embedded-submanifold-and-slice-chart",
+          "def-smooth-manifold",
+          "cor-transverse-intersection-theorem",
+          "thm-smooth-inverse-function-theorem-on-manifolds",
+          "def-differential-of-a-smooth-map",
+          "def-local-oriented-intersection-sign",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "prop-smooth-maps-are-continuous"
+        ],
+        "statement": "Let $f:M^m\\to X^{2m}$ be a self-transverse immersion and let $x\\neq y$ be a selected coincident branch pair with common image $r$. Then there are disjoint closed embedded disks $D_x\\ni x$, $D_y\\ni y$ in $M$ such that:\n\n1. $f|_{D_x}$ and $f|_{D_y}$ are smooth embeddings whose images $A:=f(D_x)$ and $B:=f(D_y)$ are closed embedded $m$-disks in $X$ meeting transversely, with $A\\cap B=\\{r\\}$;\n2. the local sign of the branch pair $(A,B)$ at $r$ is the local sign of the selected branch pair ([[def-self-transverse-immersion-and-double-point-locus]], [[def-local-oriented-intersection-sign]]).\n\nEquivalently, in suitable charts of $M$ at $x$ and $y$ and of $X$ at $r$, the branch maps take the standard forms $u\\mapsto(u,0)$ and $v\\mapsto(0,v)$ on $\\mathbb R^m$, so that near $r$ the pair of branches is the standard transverse pair $(\\mathbb R^m\\times\\{0\\},\\{0\\}\\times\\mathbb R^m)$ in $\\mathbb R^{2m}$.\n\nThese disks describe the selected pair; they do not exclude other preimages over $r$. If $r$ is a genuine double point, the selected two preimages are the entire fibre.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Since $f$ is an immersion and $x\\neq y$, [L1] supplies open neighbourhoods $U$ of $x$ and $V$ of $y$ with $U\\cap V=\\varnothing$ such that $f|_U$ and $f|_V$ are embeddings onto embedded $m$-submanifolds $A_0:=f(U)$ and $B_0:=f(V)$ of $X$; disjointness of $U$ and $V$ is possible because $M$ is Hausdorff by [L6]. [L1, L2, L6]\n\n2.1 The submanifolds $A_0$ and $B_0$ meet transversely at $r$: their tangent spaces at $r$ are $df_x(T_xM)$ and $df_y(T_yM)$, which span $T_rX$ by [F1] as a direct sum. [F1, step 1.1]\n\n3.1 By [L3], $A_0\\cap B_0$ is an embedded submanifold of $X$ of codimension $m+m=2m=\\dim X$, that is, of dimension $0$; by the slice-chart description [L2] applied at $r$, there is an open neighbourhood $W$ of $r$ in $X$ with $A_0\\cap B_0\\cap W=\\{r\\}$. [L2, L3, step 2.1]\n\n4.1 Choose closed disks $D_x\\subseteq U$ around $x$ and $D_y\\subseteq V$ around $y$ so small that $f(D_x)\\subseteq W$ and $f(D_y)\\subseteq W$; this is possible by continuity of $f$ at $x$ and $y$, which map to $r$, and by taking, in a chart of $M$ at $x$ (respectively at $y$), a sufficiently small closed coordinate ball. Then $D_x\\cap D_y=\\varnothing$, and $f(D_x)\\cap f(D_y)\\subseteq A_0\\cap B_0\\cap W=\\{r\\}$, while $r=f(x)=f(y)$ lies in both images, so $A\\cap B=\\{r\\}$ for $A:=f(D_x)$, $B:=f(D_y)$. [L6, step 1.1, step 3.1, construct]\n\n4.2 For the coordinate model, choose a slice chart $(W_1,\\chi_1)$ of $X$ at $r$ for $A_0$ with $\\chi_1(r)=0$ and $\\chi_1(A_0\\cap W_1)=\\chi_1(W_1)\\cap(\\mathbb R^m\\times\\{0\\})$ by [L2], and shrink $W_1$ so that $r$ is the only point of $A_0\\cap B_0$ in it, as in step 3.1. The image $C:=\\chi_1(B_0\\cap W_1)$ is an embedded $m$-submanifold of $\\mathbb R^{2m}$ through $0$ whose tangent space at $0$ is complementary to $\\mathbb R^m\\times\\{0\\}$ by step 2.1, so the second projection $\\pi_2$ restricts to $C$ with $d(\\pi_2|_C)_0$ an isomorphism; by [L4] the projection $\\pi_2|_C$ is a local diffeomorphism at $0$, whence $C$ is near $0$ the graph $\\{(g(w),w)\\}$ of a smooth map $g$ defined near $0$ in $\\mathbb R^m$ with $g(0)=0$. The map $\\Psi(u,v):=(u-g(v),v)$ is then a local diffeomorphism of $\\mathbb R^{2m}$ at $0$ fixing $0$, and it carries $C$ to $\\{0\\}\\times\\mathbb R^m$ while fixing $\\mathbb R^m\\times\\{0\\}$ pointwise; hence in the chart $\\Psi\\circ\\chi_1$ the branch $A_0$ is $\\{v=0\\}$ and the branch $B_0$ is $\\{u=0\\}$. Composing with the (smooth) inverse of the embedding $f|_U$ in these coordinates exhibits $f$ near $x$ as $u\\mapsto(u,0)$, and similarly near $y$ as $v\\mapsto(0,v)$, which is the displayed standard model. [L2, L4, step 2.1, step 3.1]\n\n5.1 The maps $f|_{D_x}$ and $f|_{D_y}$ are smooth embeddings: they are restrictions of the embeddings $f|_U$, $f|_V$ to the closed disks, hence injective immersions, and each is a continuous bijection from a compact disk onto its image, with continuous inverse because the inverse is the restriction of the continuous inverse of the ambient embedding. The images $A$ and $B$ are compact, hence closed in the Hausdorff space $X$ by [L6], and each is the image of a closed $m$-disk under an embedding, so each is a closed embedded $m$-disk in $X$. [F2, L6, step 4.1]\n\n6.1 The disks $A$ and $B$ meet transversely at $r$, with $A\\cap B=\\{r\\}$, and the local sign of the branch pair $(A,B)$ at $r$ is the local sign of the selected branch pair: by [L5] the local sign of the selected branch pair is by definition the local oriented intersection sign of the two ordered branch disks at $r$, computed with the first branch first, which is exactly the local sign of the pair $(A,B)$. [L5, step 4.1, step 5.1]\n\n7.1 The disks constructed in steps 4.1 and 5.1, with the model of step 4.2, satisfy clauses 1 and 2 of the statement. [step 4.1, step 5.1, step 6.1, step 4.2] \u220e",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            },
+            {
+              "title": "Arkadiy Skopenkov, Embedding and Knotting of Manifolds in Euclidean Spaces (arXiv:math/0604045), \u00a71, article pp. 2\u20135 (self-intersection set; ambient versus non-ambient isotopy) and \u00a72, article pp. 6\u201314 (Theorems 2.1\u20132.3 and 2.8; the modulo 2 and integral Whitney obstruction; the Whitney invariant); \u00a73 and \u00a75 used only for the recorded knotting boundary",
+              "url": "https://arxiv.org/pdf/math/0604045"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-primary-double-point-obstruction-to-removing-self-intersections",
+        "kind": "definition",
+        "title": "The primary double point obstruction to removing self-intersections",
+        "deps": [
+          "def-self-transverse-immersion-and-double-point-locus",
+          "lem-fundamental-group-label-is-the-obstruction-to-contracting-the-whitney-circle",
+          "def-local-oriented-intersection-sign",
+          "cor-every-immersion-is-locally-an-embedding",
+          "def-compact-space",
+          "thm-smooth-inverse-function-theorem-on-manifolds"
+        ],
+        "statement": "Let $f:M^m\\looparrowright X^{2m}$ be a self-transverse immersion of a closed manifold. Use the ordered locus $\\Delta_2(f)$, unordered branch-pair set $D(f)$, and collision image $\\Sigma(f)$ of [[def-self-transverse-immersion-and-double-point-locus]]. The branch-pair set is finite: local injectivity gives an open neighbourhood of the diagonal in compact $M\\times M$ containing no off-diagonal coincidence, so $\\Delta_2(f)$ is a closed subset of its compact complement; it is discrete directly: in a common target chart, the difference map $(u,v)\\mapsto\\chi(f(u))-\\chi(f(v))$ has invertible derivative at each coincident pair because the two tangent images are complementary, so [[thm-smooth-inverse-function-theorem-on-manifolds]] isolates that pair. Compact discreteness makes the locus finite. This argument uses [[cor-every-immersion-is-locally-an-embedding]] and [[def-compact-space]]. It also applies whenever finiteness of $D(f)$ is given directly.\n\nThe **primary double point data** are:\n\n1. The unoriented count $\\bar I(f)=\\#D(f)\\bmod2\\in\\mathbb Z_2$, counting unordered branch pairs, including distinct pairs over a triple image.\n2. If $M$ and $X$ are oriented and $m$ is even, the integral count\n$$I(f)=\\sum_{d\\in D(f)}\\varepsilon(d)\\in\\mathbb Z.$$\nEach sign is the local sign of that branch pair and is independent of its ordering, by [[def-local-oriented-intersection-sign]]. For odd $m$ the pair sign changes under interchange, so an ordering must be fixed if signs are used; the unoriented count remains defined. These counts equal image-point counts only in the absence of triple or higher-multiplicity images.\n3. For a chosen pair of genuine double points with chosen joining source arcs, the group obstruction is the class of the resulting Whitney circle in $\\pi_1(X)$, with a base whisker fixed if a based class is required. In branch-label notation, fixed source paths and compatible whiskers give labels for the two branch pairs, and the selected circle is null-homotopic exactly when those labels agree, in the precise chosen-path sense of [[lem-fundamental-group-label-is-the-obstruction-to-contracting-the-whitney-circle]]. The circle and paths are part of the data; path independence is not asserted without the additional trivial-image hypothesis of that supplier. There is no construction of a nontrivial label by a codimension-at-least-three meridian. If $X$ is simply connected every such circle class is trivial.\n\nAn embedding has $D(f)=\\Sigma(f)=\\varnothing$, so both defined counts vanish. Counts alone do not classify embeddings up to isotopy. The disjunction criterion on this page uses admissible pairs and, in the simply connected oriented even-dimensional case, the vanishing integral branch-pair count (the disjunction proposition below). No general invariance statement is asserted here. In the Euclidean even-dimensional oriented setting, the later normal push-off argument identifies twice this integral count with minus the normal Euler number; this definition does not consume that later result. All labelled choices are finite data; no Axiom of Choice is needed by this definition.",
+        "strategy": "The finite set of unordered double points makes the mod-two sum well defined. Swapping two oriented tangent blocks of dimension $m$ multiplies the local intersection determinant by $(-1)^{m^2}=(-1)^m$, so an even-dimensional source has an ordering-independent integral sum, while odd-dimensional sources require an ordering or mod-two coefficients. For the labelled clause, concatenate the two chosen sheet paths and whiskers to form the based loop. The supplied fundamental-group label lemma computes the class of the Whitney circle as the product of one label and the inverse of the other. Thus it is null-homotopic exactly when those compatible labels agree. Changing sheet paths multiplies labels by images of sheet loops; this ambiguity disappears under the stated trivial-image hypothesis. Changing a common whisker conjugates both labels and preserves equality. No invariance or sufficiency theorem is used to define the data; an embedding has an empty double-point set directly.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            },
+            {
+              "title": "Arkadiy Skopenkov, Embedding and Knotting of Manifolds in Euclidean Spaces (arXiv:math/0604045), \u00a71, article pp. 2\u20135 (self-intersection set; ambient versus non-ambient isotopy) and \u00a72, article pp. 6\u201314 (Theorems 2.1\u20132.3 and 2.8; the modulo 2 and integral Whitney obstruction; the Whitney invariant); \u00a73 and \u00a75 used only for the recorded knotting boundary",
+              "url": "https://arxiv.org/pdf/math/0604045"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-a-collared-whitney-disk-can-be-made-disjoint-from-an-entire-compact-immersed-image",
+        "kind": "lemma",
+        "title": "A collared Whitney disk can avoid an entire compact immersed image",
+        "deps": [
+          "def-countable-choice",
+          "cor-every-immersion-is-locally-an-embedding",
+          "thm-parametric-transversality",
+          "prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold",
+          "prop-countable-unions-and-subsets-of-manifold-null-sets-are-null",
+          "thm-transverse-preimage-theorem",
+          "lem-the-diagonal-of-a-smooth-manifold-is-a-closed-embedded-submanifold",
+          "thm-weak-whitney-proper-embedding-theorem",
+          "thm-euclidean-tubular-neighbourhood-theorem",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "prop-a-proper-injective-immersion-is-a-smooth-embedding",
+          "def-compact-space",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "thm-smooth-inverse-function-theorem-on-manifolds"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Theorem 7.27(ii), proof and Lemma 7.28, printed pp. 138\u2013140",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro",
+              "locator": "Printed pp. 139\u2013140: collared disk outside f(N), correction of one normal summand, and alteration of only one source sheet."
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $S$ be either the ordinary disk $D^2$ or the fixed convex Whitney bigon $B=\\{(u,v):-1\\le u\\le1,\\ |v|\\le1-u^2\\}$. On the bigon, smoothness means local restriction of a smooth map on an open subset of $\\mathbb R^2$, including its two fixed corner charts. Let $M^m$ be closed, $m\\ge3$, let $X^{2m}$ be boundaryless, and let $f:M\\looparrowright X$ be an immersion. Suppose a smooth disk/bigon map $H:S\\to X$ is an embedding on a boundary collar and the interior of that collar is disjoint from $f(M)$. Then arbitrarily close to $H$ there is an embedded disk $W$ homotopic to $H$ relative to a smaller fixed boundary collar and satisfying $W(\\operatorname{int}S)\\cap f(M)=\\varnothing$. If $H$ is already an embedding, $W$ can be chosen arbitrarily $C^1$-close through embedded disks, and any supplied framing that already extends over $H$ is transported with unchanged boundary values. For a Whitney boundary at two genuine transverse double points, avoiding all other collision preimages, the supporting tube can be chosen disjoint from neighbourhoods of those other double points and meeting the immersed image only in the designated source-sheet collars. This is an immersion-image adapter; it does not assert extension of an arbitrary prescribed boundary frame.",
+        "strategy": "**Proof technique:** direct.\n\n**Given:** Countable choice, a closed smooth $m$-manifold $M$, $m\\ge3$, an immersion $f:M\\to X^{2m}$, and a smooth disk/bigon map $H:S\\to X$ whose restriction to an open boundary collar is an embedding and whose collar interior is disjoint from $f(M)$. For a Whitney circle use the fixed bigon $B$ rather than round its transverse-sheet corners. At $(\\pm1,0)$, the functions $\\rho_\\pm=1-u^2\\pm v$ have independent gradients, so the inverse function theorem gives a quadrant chart with $\\rho_\\pm\\ge0$. Away from these two points the boundary is smooth. These explicit charts are the meaning of its fixed corner convention; all perturbations vanish on a neighbourhood of the entire boundary.\n\n1.1 Compactness makes $f$ proper and $f(M)$ closed. Cover $M$ by finitely many immersion charts $U_i$ on which $f$ is an embedding; use slightly smaller relatively compact charts covering $M$. Fix closed nested collars $C\\subset\\operatorname{int}_{S}C^+$ inside the given collar, and keep $H$ fixed on a neighbourhood of $C$. The transition annulus is compact, embedded, and disjoint from $f(M)$; its positive distance from this closed image and openness of embeddings on the larger compact collar let all sufficiently small perturbations preserve these properties on the protected collar. No positive distance is asserted on the whole open disk interior, which accumulates on its boundary in $f(M)$. [F1, F4, given, construct]\n\n1.2 Make $H$ an immersion relative to the collar. Embed $X$ in Euclidean space and use its smooth neighbourhood retraction as in the published tubular-target perturbation supplier. On finitely many disk charts covering the compact unprotected core, choose smooth bumps supported off $C$, equal to one on smaller charts, and multiply these bumps by the constant and both coordinate functions. Give each of these three profiles independent ambient-vector parameters. Composing the resulting Euclidean perturbation with the target retraction gives a family whose 1-jet parameter differential spans independently the value and both derivative columns at each core point: constants vary the value, and a linear combination of constant and coordinate profiles vanishing at that point varies either derivative column without varying the value. Surjectivity holds at parameter zero and, by a finite compact cover, on a sufficiently small parameter ball. The rank-$r$ matrix stratum for maps $\\mathbb R^2\\to\\mathbb R^{2m}$ has codimension $(2-r)(2m-r)$: on the chart where an $r\\times r$ minor is invertible, the remaining Schur-complement block must vanish and gives exactly that many independent equations. Parametric transversality to the rank-0 and rank-1 strata therefore avoids both, because their codimensions exceed 2 (the least is $2m-1>2$). On the protected collar immersion persists by smallness. Choose a sufficiently small good parameter, obtaining an immersion $h$ fixed near $C$. This uses only finitely many profiles and the actual parametric-transversality theorem; no unproved relative jet theorem is invoked. [F2, F3, F4, F5, construct, algebra]\n\n2.1 A compact immersion $h:S\\to X$ has a uniform near-diagonal injectivity radius, stable under sufficiently small $C^1$ perturbations. To see the stability rather than merely assert it, cover $S$ by finitely many smaller disk charts in which a two-coordinate projection of a target chart composed with $h$ has derivative near a fixed invertible matrix. Shrink to convex charts. For all close maps the derivative of the projected map still differs from that matrix by less than its least singular value, so integration along the segment between two source points proves injectivity there. A Lebesgue radius for this finite cover excludes coincidences with $0<d(z,z')<\\delta$. This argument applies in the fixed boundary and quadrant charts too, or on the convex bigon itself, because every perturbation vanishes near its boundary. Now use finitely many finer bump charts of diameter less than $\\delta/3$, supported off $C$, with independent constant-vector parameters. They span value directions on the unprotected core. On the transition collar any unmoved pair is already distinct, and charts and parameter size can be chosen so that any possible separated coincidence involving that collar has at least one point in the fully adjustable core; compactness excludes the other pairs. For a pair at distance at least $\\delta$ the parameters supported at its adjustable point move that image in all target directions while leaving the other point fixed. Thus the pair evaluation $(z,z',a)\\mapsto(h_a(z),h_a(z'))$ is transverse to the target diagonal at every possible coincidence. Parametric transversality makes the separated coincidence preimage empty since its expected dimension is $4-2m<0$. Apply it on an open separated-pair region (or its boundary strata separately); the uniform near-diagonal estimate excludes all remaining pairs. The map is still an immersion by $C^1$ smallness and hence a compact injective immersion, so is an embedding $w_0$, fixed on the collar. [F1, F3, F4, F5, step 1.2, construct, algebra]\n\n3.1 Finally perturb this embedded disk to avoid the entire immersed image. A sufficiently small $C^1$ perturbation of a compact embedding remains embedded, by the uniform local estimate and the positive separation of images of pairs outside a diagonal neighbourhood. Construct a finite value-spanning parameter family $w_a$ supported off the protected collar, using the same bump/retraction construction; on its compact transition annulus avoidance of $f(M)$ persists by smallness. For each immersion chart put $R_i=\\{(f(y),y):y\\in U_i\\}\\subset X\\times U_i$. This is an embedded graph of codimension $2m$, even when different branches of $f(M)$ cross. On the adjustable disk region the map $(z,y,a)\\mapsto(w_a(z),y)$ is transverse to $R_i$ because the parameter derivative spans $T_{w_a(z)}X$. On the protected collar interior and transition annulus there are no incidences at all. Relative parametric transversality, implemented by these vanishing profiles, gives parameters for which every slice is transverse to every $R_i$; the exceptional sets have finite null union, and good parameters exist arbitrarily near zero. The incidence preimage has dimension $2+m-2m=2-m<0$, hence is empty for $m\\ge3$. The finite charts cover every source branch, so $w_a(\\operatorname{int}S)\\cap f(M)=\\varnothing$, including all double-point branches. Boundary incidences are intentionally excluded from the domain of this transversality argument. Set $W=w_a$ at one such small parameter. [F1, F3, F4, F5, step 1.1, step 2.1, construct, algebra]\n\n4.1 Straight parameter segments in the retraction families give smooth homotopies relative to the fixed collar. The disk can be chosen arbitrarily close to $H$; when $H$ was already an embedded disk, steps 1.2 and 2.1 are unnecessary and step 3.1 alone gives arbitrarily $C^1$-small perturbations through embedded disks. For an actual supplied frame, regard $X$ as embedded in Euclidean space, with its induced inner product. At each disk point project the original normal vectors first orthogonally into $T_{W(z)}X$ and then orthogonally off $dW_z(T_zS)$. These smooth projections restrict to an isomorphism from the old normal fibre to the new one for $C^1$-close disks, since at $W=H$ their restriction is the identity and the least singular value stays positive on the compact disk. Where the collar is fixed the projection is the identity. This explicitly transports the frame and preserves its actual boundary values; no separate bundle-isotopy theorem is assumed. Thus any supplied boundary framing that already extended remains unchanged there and still extends; no assertion is made that an arbitrary prescribed boundary framing extends initially. For the support clause, local injectivity of the compact immersion excludes a neighbourhood of the source diagonal from its ordered coincidence locus; that locus is therefore compact, as is its collision image. A genuine transverse double point is isolated in that image: the selected two sheet charts give one isolated coincidence, and compactness of the source outside those charts excludes every further branch near it. Removing the two selected isolated collision images leaves a compact set disjoint from $W$, including its boundary by the Whitney-boundary hypothesis. Compactness therefore permits a disk tube disjoint from neighbourhoods of all remaining collision images, whether or not they were finite. Near its boundary the tube meets $f(M)$ only in the designated source-sheet collars: compactness of the complement of those source collars excludes stray branches, while the local immersion charts give the designated sheets. This is the required cleanliness relative to the entire image. [F1, F2, F4, step 3.1, construct] \u220e"
+      },
+      {
+        "id": "lem-a-small-regular-homotopy-removes-triple-points-and-preserves-transverse-branch-pairs",
+        "kind": "lemma",
+        "title": "A small regular homotopy removes triple images and preserves transverse branch pairs",
+        "deps": [
+          "def-self-transverse-immersion-and-double-point-locus",
+          "cor-local-normal-form-for-immersions",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "thm-parametric-transversality",
+          "prop-countable-unions-and-subsets-of-manifold-null-sets-are-null",
+          "prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold",
+          "lem-the-diagonal-of-a-smooth-manifold-is-a-closed-embedded-submanifold",
+          "thm-transverse-preimage-theorem",
+          "thm-smooth-inverse-function-theorem-on-manifolds",
+          "def-local-oriented-intersection-sign",
+          "def-regular-homotopy-of-immersions",
+          "def-compact-space",
+          "def-countable-choice",
+          "def-primary-double-point-obstruction-to-removing-self-intersections"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Chapter 7 (Whitney general-position and immersion setting); finite branch-preserving proof supplied here",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Every pairwise self-transverse immersion $f:M^m\\looparrowright X^{2m}$ of a closed manifold, $m\\ge1$, admits an arbitrarily small smooth regular homotopy to a self-transverse immersion $g$ with no triple or higher-multiplicity collision image. Its finite unordered branch-pair set $D(g)$ is in bijection with $D(f)$ by smooth persistence of the ordered coincidences. With orientations and compatible branch orderings, the correspondence preserves every local pair sign. In particular it preserves the integral branch-pair count for oriented even $m$, and always preserves the mod-two branch-pair count. Pairwise self-transversality is retained as the original hypothesis; no absence-of-triples assumption is added.",
+        "strategy": "**Proof technique:** direct.\n\n**Given:** Countable Choice, a closed smooth $m$-manifold $M$ with $m\\ge1$, a smooth $2m$-manifold $X$, and a pairwise self-transverse immersion $f:M\\to X$.\n\n1.1 If $M$ is empty the assertion is immediate, so assume it is nonempty. By [F1] choose finitely many closed convex source coordinate balls $V_i$ whose interiors cover $M$ and whose slightly enlarged balls lie in immersion charts, with a target $m$-coordinate projection $p_i$ satisfying $p_i\\circ f=\\operatorname{id}$ in source coordinates. For every sufficiently $C^1$-close map $g$, the target charts remain defined on $V_i$ and $\\|D(p_i\\circ g)-I\\|<1/2$ there. For $u,v$ in a convex ball, integrating the derivative along the segment gives $\\|(p_i\\circ g)(u)-(p_i\\circ g)(v)-(u-v)\\|\\le\\|u-v\\|/2$. Thus $g$ is injective on every $V_i$ and its derivative is injective there; consequently it is an immersion everywhere. Put $N=\\bigcup_i\\operatorname{int}V_i\\times\\operatorname{int}V_i$. It is an open neighbourhood of the diagonal, and no off-diagonal coincidence of any such $g$ lies in $N$. The compact sets $K_2=M^2\\setminus N$ and $K_3=\\{(x_1,x_2,x_3):(x_i,x_j)\\in K_2\\text{ for every }i\\ne j\\}$ contain all possible pair and triple configurations of those maps and avoid every relevant partial diagonal. [F1, F6, given, construct]\n\n2.1 For each configuration in $K_2$ or $K_3$ take two or three disjoint small source neighbourhoods and bumps equal to one near the respective points, supported in those neighbourhoods. Shrink their supports so their compact images under $f$ lie inside target coordinate charts with a positive coordinate margin. Each bump carries its own $2m$ target-translation parameters. On its source support translate target coordinates by the bump times that parameter, and leave the map unchanged outside the support. The translation is defined for all small parameters by the margin and is smooth across the source-support boundary because the bump vanishes on an open neighbourhood of the chart boundary. Compose the finitely many such source-dependent translations, retaining each parameter block independently. Compactness of $K_2$ and $K_3$ lets a finite set of these configuration neighbourhoods cover both. This defines one finite-dimensional smooth family $f_v$, $v$ in a small ball, with $f_0=f$; by step 1.1 every member, including $f_{tv}$ for $0\\le t\\le1$, is an immersion. [F2, F6, step 1.1, construct]\n\n3.1 At $v=0$, the parameters belonging to a configuration move its two or three image values independently in all target directions: its source supports are disjoint and its bumps equal one there, while all other translation factors are the identity at zero. Therefore the pair and triple evaluation maps $E_k(x_1,\\ldots,x_k,v)=(f_v(x_1),\\ldots,f_v(x_k))$, $k=2,3$, have surjective parameter differentials on open neighbourhoods of $K_k$ at zero. Shrink the parameter ball uniformly using the finite compact covers, so these evaluations remain submersions on those neighbourhoods for every parameter in the ball. The pair diagonal in $X^2$ has codimension $2m$ by [F4]; the small diagonal in $X^3$ is closed embedded with codimension $4m$, since product target coordinates identify it with $\\{(a,a,a)\\}$ and its two independent differences give $4m$ normal coordinates. Thus [F3] supplies arbitrarily small parameters transverse to both diagonals. For one such parameter $v$, the pair locus is zero-dimensional and the triple locus has expected dimension $3m-4m=-m<0$, hence is empty by [F4]. All possible configurations were in $K_2,K_3$, so $f_v$ is self-transverse globally and no image point has three or more preimages. [F3, F4, step 1.1, step 2.1, algebra]\n\n3.2 The original ordered coincidence locus is finite: it is closed in $K_2$ and is discrete by pairwise transversality and [F4], so compactness makes it finite. Near each original ordered pair $(x,y)$, choose a common target chart $\\chi$ about $f(x)=f(y)$ and put $A(u,w,v)=\\chi(f_v(u))-\\chi(f_v(w))$. The derivative in $(u,w)$ at $(x,y,0)$ is $d\\chi\\circ(df_x,-df_y)$, an isomorphism by pairwise transversality in dimension $2m$. Apply [F5] to $(u,w,v)\\mapsto(A(u,w,v),v)$. Its block derivative is invertible, so for all sufficiently small $v$ there is exactly one smoothly varying ordered coincidence near $(x,y)$; its transverse derivative remains invertible. Choose disjoint ordered-pair neighbourhoods, equivariant under swap. On the compact complement of their smaller interiors in $K_2$ there is no original coincidence. Uniform smallness of the finite smooth family keeps its image in the complement of the closed pair diagonal there, so no new coincidence occurs. The persisted pairs therefore exhaust the new locus, and quotienting the swap correspondence gives a bijection $D(f)\\to D(f_v)$ even when several original pairs had the same collision image. [F4, F5, F6, step 1.1, step 2.1, construct]\n\n4.1 If orientations and an ordering of each original branch pair are fixed, persist that ordering along the correspondence. Its sign is the sign of the determinant of the two branch tangent blocks; the determinant remains nonzero by step 3.2, so its sign is unchanged. For even $m$ this descends to unordered branch pairs and preserves $I(f)$; without orientations the bijection preserves the mod-two branch-pair count. Choose the good parameter of step 3.1 small enough also to satisfy step 3.2 and set $H(x,t)=f_{tv}(x)$. This is a smooth regular homotopy by step 2.1, with the claimed generic endpoint and preserved branch-pair data. [F3, F5, F6, F7, step 2.1, step 3.1, step 3.2] \u220e"
+      },
+      {
+        "id": "prop-whitney-disjunction-removes-algebraically-cancelling-double-points-in-the-stable-range",
+        "kind": "proposition",
+        "title": "Whitney disjunction removes algebraically cancelling double points",
+        "deps": [
+          "def-self-transverse-immersion-and-double-point-locus",
+          "lem-double-point-locus-has-expected-dimension-two-m-minus-n",
+          "lem-a-double-point-of-a-self-transverse-immersion-has-two-disjoint-embedded-sheet-disks",
+          "def-local-whitney-move",
+          "thm-whitney-move-removes-a-cancelling-pair-of-intersections",
+          "lem-whitney-disk-framing-obstruction-can-be-corrected-under-the-standard-high-dimensional-hypotheses",
+          "lem-fundamental-group-label-is-the-obstruction-to-contracting-the-whitney-circle",
+          "lem-arcs-in-a-connected-submanifold-avoiding-finitely-many-double-points",
+          "def-regular-homotopy-of-immersions",
+          "def-simply-connected",
+          "def-self-intersection-number-of-an-oriented-submanifold",
+          "def-compact-space",
+          "prop-a-proper-injective-immersion-is-a-smooth-embedding",
+          "def-countable-choice",
+          "def-whitney-circle-for-a-pair-of-intersection-points",
+          "def-primary-double-point-obstruction-to-removing-self-intersections",
+          "lem-a-collared-whitney-disk-can-be-made-disjoint-from-an-entire-compact-immersed-image",
+          "lem-a-small-regular-homotopy-removes-triple-points-and-preserves-transverse-branch-pairs",
+          "thm-relative-whitney-approximation-for-manifold-valued-maps",
+          "thm-parametric-transversality",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "thm-transverse-preimage-theorem"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $M$ be a closed connected $m$-manifold, $m\\ge3$, and let $f:M^m\\looparrowright X^{2m}$ be a pairwise self-transverse immersion.\n\n1. Select two distinct genuine double points $r_1,r_2$, so each has exactly two preimages, and two disjoint joining source arcs that avoid every other collision preimage and give a Whitney circle $\\gamma=\\alpha*\\beta$. Suppose $\\gamma$ is null-homotopic and the selected branch pairing has opposite local signs, with compatible branch orientations along the arcs. For even $m$, signs of oriented branch pairs are ordering-independent; for odd $m$, branch orderings and joining arcs are chosen together and the signs refer to those choices. Then there is a smooth regular homotopy $f_t$ through immersions, with $f_0=f$ and $f_1$ self-transverse, supported near a clean framed Whitney bigon whose interior avoids the entire immersed image. It is fixed near every other collision image, removes exactly the two selected branch pairs, and satisfies\n$$\\Sigma(f_1)=\\Sigma(f)\\setminus\\{r_1,r_2\\}.$$\nNo new branch pair appears, and every other collision germ remains unchanged. Intermediate maps may have the branch tangency at which the pair cancels; their source differentials remain injective.\n\n2. If $\\Sigma(f)$ can be partitioned into finitely many pairs of genuine double points admissible as in clause 1, then $f$ is regularly homotopic to a self-transverse injective immersion and hence, by compactness of $M$, to an embedding.\n\nIn particular, if $M$ and $X$ are oriented, $X$ is simply connected, $m$ is even, and the integral unordered branch-pair count $I(f)$ of [[def-primary-double-point-obstruction-to-removing-self-intersections]] vanishes, then $f$ is regularly homotopic to an embedding. This last criterion holds for every pairwise self-transverse $f$, even with triple images initially: a small regular homotopy first separates them while preserving all branch pairs and signs.\n\nPairing, compatible signs and the chosen circle's null-homotopy are load-bearing. No classification of embeddings up to isotopy is asserted.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Choose disjoint source arc neighbourhoods $P,Q\\subset M$, with smaller closed arc neighbourhoods inside them. Along either arc the immersion is an embedding because its interior contains no double-point preimage; shrink the source neighbourhoods using local embedding charts and compactness of the arcs. Their images meet each other only at the two prescribed corners, and meet no other branch there: otherwise a sequence of unwanted incidences as the neighbourhoods shrink would converge to an additional double-point preimage on an arc or to an extra branch at a prescribed double point. The genuine-double-point hypothesis says that there are exactly two preimages at each selected corner; all other collision images are avoided by the arcs. Use the fixed Whitney bigon $B=\\{(u,v):-1\\le u\\le1,\\ |v|\\le1-u^2\\}$ with the explicit quadrant charts of [L1]. At the two corners use the complementary-sheet coordinates; opposite local signs allow the standard Whitney collar to be sewn between the arc collars. Its interior leaves the selected sheet in a transverse direction, and at a corner lies in the quadrant between the two sheet axes, so it meets neither axis. Compactness/properness excludes every remaining branch from a sufficiently small collar. As the circle is null-homotopic, the inner boundary of this collar also bounds a continuous disk (it is homotopic through the collar to the original circle). Attach that disk to the collar and smooth relative to a smaller fixed bigon boundary neighbourhood using relative Whitney approximation on the open interior. To see this as an ordinary-manifold application, the attached map is already smooth on the collar interior; apply the relative theorem on $\\operatorname{int}B$ with a closed inner collar where it is smooth, and extend by the original boundary model. Thus both corners stay fixed and no arbitrary rounding off the sheets is used. Apply the immersion-image adapter to obtain an embedded disk $W$ with interior disjoint from all of $f(M)$, fixed on the collar and avoiding neighbourhoods of every other double point. [F1, L1, L5, A1, given, construct]\n\n2.1 The branch-normal data along the Whitney circle give an admissible splitting into ranks $m-1$ and $m-1$ of the rank-$2m-2$ normal bundle of the collared disk. The orientations involved here are those over the contractible disk and the two source arc neighbourhoods; the original opposite-sign hypothesis is the corner compatibility. No orientation of all of $M$ or $X$ is added to clause 1. The corrected framing supplier asserts existence of an admissible extendible choice, permitting correction of the frame within one summand while fixing its subspace and its values at both corners. The normal-summand surjection proved in that supplier realizes the inverse of the discrepancy loop in $SO(2m-2)$ within $SO(m-1)$, valid also at $m=3$, so this correction kills the discrepancy from a global disk normal frame. The correction is supported in the interior of one boundary arc; it changes no sheet or disk. Obtain a clean framed disk. This uses an admissible extendible framing, never an arbitrary fixed circle-normal framing. [L2, A1, step 1.1, construct]\n\n3.1 Choose the framing tube and the selected smaller source patch $P$ so that the local Whitney model isotopy $G_t$ is the identity near the image of $\\partial P$, moves only the first sheet as compared with the fixed second sheet, and is supported in a compact tube around $W$. The local construction of [L3], applied to these sheet patches, provides an isotopy of the first sheet, relative to its boundary, whose final image intersects the fixed second sheet with precisely the prescribed cancelling pair removed. The tube is disjoint from all other source-image branches except the chosen sheet collars by step 1.1; shrink its radius using the compact disk core and the compact image of the source outside slightly enlarged $P,Q$, and use the fixed collar charts near the boundary. The local model is embedded on $P$ at every time and unchanged near $\\partial P$. [L1, L3, step 1.1, step 2.1, construct]\n\n4.1 Define $f_t(x)=G_t(f(x))$ for $x\\in P$, and $f_t(x)=f(x)$ for $x\\notin P$. The two formulas agree on an open neighbourhood of $\\partial P$ for every $t$, so they glue to a smooth map on $M\\times I$. On $P$, $d f_t=dG_t\\circ df$ is injective because $G_t$ is a local ambient diffeomorphism, and on the complement $df_t=df$ is injective; the agreement region handles patch boundaries. Thus every $f_t$ is an immersion and the family is a regular homotopy. The second source sheet $Q$ remains fixed. Applying $G_t$ to the entire immersion would preserve all coincidences and is explicitly not the construction. At the cancellation parameter the two branches may be tangent, although each source branch remains immersed. [L3, L4, step 3.1, construct]\n\n5.1 At time one the model removes exactly the intersections at $r_1,r_2$ between the selected sheets and creates none. It creates no self-intersection within the moved patch because that patch stays embedded. A new intersection with any other branch is excluded by the tube cleanliness in step 3.1, and all other double-point neighbourhoods are fixed. Thus $\\Sigma(f_1)=\\Sigma(f)\\setminus\\{r_1,r_2\\}$ and all remaining crossings retain their original self-transverse local models. The endpoint $f_1$ is self-transverse. Together with step 4.1 this proves clause 1 with the corrected endpoint-only transversality condition. [F1, L3, L4, step 3.1, step 4.1]\n\n6.1 There are finitely many double points: local injectivity excludes a neighbourhood of the diagonal in compact $M\\times M$, and the transverse coincidence locus is a discrete closed subset of its compact complement. For a finite admissible pairing apply clause 1 successively. After each move the unmoved double-point germs and signs remain fixed. Transport the endpoints of any planned source arcs by the already constructed regular homotopy; the corresponding ambient Whitney circles remain null-homotopic because their parametrized loops vary by a homotopy. Rechoose the arcs by small source perturbations relative to the endpoint collars to avoid the finitely many remaining preimages and each other, using the finite relative bump/diagonal argument of [L7] with expected dimension $2-m<0$. Small perturbations preserve embeddedness by the local-injectivity and compact separated-pair estimate. This changes no ambient homotopy class. At every stage apply the adapter to the current immersion, rather than assume pairwise disjointness of all prior disks or closeness to an arbitrary null-homotopy preserves cleanliness. After finitely many removals the endpoint is an injective immersion of compact $M$, hence an embedding. Reparametrize each regular homotopy to be constant near its endpoints before concatenating, giving a smooth regular homotopy. [F1, L4, L5, L7, A1, step 5.1, construct]\n\n7.1 For the final integral criterion, $M$ and $X$ are oriented, $m$ is even, $X$ is simply connected and $I(f)=0$. Apply [L6] first to obtain a self-transverse immersion $g$ with no triple image and with $I(g)=I(f)=0$. Its finitely many unordered branch pairs now correspond bijectively to genuine collision images, so the vanishing finite sum pairs each positive sign with a negative sign. Connectedness and [L5] supply embedded source arcs avoiding the finitely many other collision preimages; To make the arcs disjoint, keep small disjoint endpoint collars fixed and perturb the second arc using finitely many source-chart translations times bumps spanning all target value directions along its compact interior. The evaluation into $M$ is transverse to the first embedded arc; [L7] yields a slice transverse to it. Its intersection preimage has expected dimension $1-(m-1)=2-m<0$, so is empty. Small $C^1$ perturbations keep the arc embedded: local convex-chart projection estimates give uniform local injectivity, and pairs outside their common chart neighbourhood have a positive separation on a compact set. Smallness also preserves avoidance of the finite collision preimages; the whole perturbation is relative to the endpoint collars and gives a homotopy of the selected arc. Ambient simple connectivity makes each resulting Whitney circle null-homotopic. The pairs are admissible, so step 6.1 gives an embedding endpoint. Concatenate with the small regular homotopy from $f$ to $g$, smoothing the time parameter as in step 6.1. This preserves the criterion for the original pairwise self-transverse immersion, including its possible initial triple images. [L5, L6, L7, A1, step 6.1, construct] \u220e",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            },
+            {
+              "title": "Arkadiy Skopenkov, Embedding and Knotting of Manifolds in Euclidean Spaces (arXiv:math/0604045), \u00a71, article pp. 2\u20135 (self-intersection set; ambient versus non-ambient isotopy) and \u00a72, article pp. 6\u201314 (Theorems 2.1\u20132.3 and 2.8; the modulo 2 and integral Whitney obstruction; the Whitney invariant); \u00a73 and \u00a75 used only for the recorded knotting boundary",
+              "url": "https://arxiv.org/pdf/math/0604045"
+            },
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d, \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Theorem 7.27(ii), proof and Lemma 7.28, printed pp.138\u2013140",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "rem-vanishing-primary-double-point-and-characteristic-obstructions-do-not-classify-embeddings",
+        "kind": "remark",
+        "title": "Vanishing primary and characteristic obstructions do not classify embeddings",
+        "deps": [
+          "def-primary-double-point-obstruction-to-removing-self-intersections",
+          "prop-whitney-disjunction-removes-algebraically-cancelling-double-points-in-the-stable-range",
+          "def-smooth-embedding",
+          "def-regular-homotopy-of-immersions",
+          "def-immersion-submersion-and-constant-rank-map",
+          "thm-isotopy-extension"
+        ],
+        "statement": "Assume AC for the characteristic-class clauses ([[def-axiom-of-choice]]). Every embedding is an immersion with empty double point set ([[def-smooth-embedding]], [[def-immersion-submersion-and-constant-rank-map]]), so the primary double point obstruction of [[def-primary-double-point-obstruction-to-removing-self-intersections]] vanishes for every embedding; and its normal bundle satisfies the usual rank restrictions on characteristic classes. A rank-$k$ real bundle has $w_i=0$ for $i>k$ and $p_i=0$ for $2i>k$; the cohomological degree $4i$ of $p_i$ need not be at most $k$ ([[def-stiefel-whitney-classes-from-the-projective-bundle-relation]], [[def-pontryagin-classes-by-complexification]]). Nevertheless these vanishings do not classify embeddings up to isotopy, and Smale\u2013Hirsch theory for immersions must not be applied to embeddings without additional knotting data.\n\nThe standard witness is codimension three: the standard embedding $S^3\\hookrightarrow\\mathbb R^6$ and a knotted embedding $S^3\\hookrightarrow\\mathbb R^6$ (Haefliger's trefoil) are both injective immersions with empty double point sets and trivial normal bundles \u2014 their normal bundles are oriented rank-three bundles, classified by $[S^2,SO(3)]=0$ by [[thm-oriented-clutching-classifies-oriented-bundles-over-spheres]] and [[lem-the-second-homotopy-group-of-so-three-vanishes]] \u2014 and they are not isotopic; in the strict metastable classification range the Haefliger\u2013Weber isovariant (deleted-product) invariant supplies the additional data, and this boundary is recorded, not proved, in [[rem-metastable-embedding-classification-requires-additional-deleted-product-machinery]]. This witness shows that these primary and characteristic data do not classify embeddings in general. It does not assert that every characteristic class must vanish for every embedding, or that no restricted embedding problem can be classified by such data.\n\nConsequently the disjunction statement of [[prop-whitney-disjunction-removes-algebraically-cancelling-double-points-in-the-stable-range]] is a statement about regularly homotoping a self-transverse immersion, not about isotoping embeddings, and [[thm-isotopy-extension]] converts isotopies of embeddings into ambient isotopies only for families that are already given. The cancellation criterion concerns the finite branch-pair count and admissible Whitney circles, with self-transverse endpoints. In the simply connected oriented even-dimensional stable range it supplies a regular homotopy to an embedding after first separating triple images; it does not supply an isotopy between two given embeddings.",
+        "strategy": "Remark collecting the boundary of the page. The facts recorded are: (i) the double point set of an embedding is empty, so the obstruction of the preceding definition vanishes (trivial from the definitions); (ii) the existence of knotted embeddings in codimension three with trivial normal bundle and no double points (Haefliger's trefoil $S^3\\subset\\mathbb R^6$; Skopenkov \u00a72--3, Example 3.4 and \u00a75), so the vanishing data do not force isotopy; and (iii) the metastable classification by isovariant maps of the deleted product (Wall Theorem 6.4.8 and the Haefliger--Weber theorem), which is recorded without proof as [[rem-metastable-embedding-classification-requires-additional-deleted-product-machinery]]. No proof obligation: the remark prevents a standard misuse of Smale--Hirsch and characteristic-class tests rather than asserting a new classification.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arkadiy Skopenkov, Embedding and Knotting of Manifolds in Euclidean Spaces (arXiv:math/0604045), \u00a71, article pp. 2\u20135 (self-intersection set; ambient versus non-ambient isotopy) and \u00a72, article pp. 6\u201314 (Theorems 2.1\u20132.3 and 2.8; the modulo 2 and integral Whitney obstruction; the Whitney invariant); \u00a73 and \u00a75 used only for the recorded knotting boundary",
+              "url": "https://arxiv.org/pdf/math/0604045"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 10
+      },
+      {
+        "id": "rem-metastable-embedding-classification-requires-additional-deleted-product-machinery",
+        "kind": "remark",
+        "title": "Metastable embedding classification requires deleted-product machinery",
+        "deps": [
+          "def-self-transverse-immersion-and-double-point-locus",
+          "def-smooth-embedding",
+          "def-homotopy-relative-and-path-homotopy"
+        ],
+        "statement": "Recorded boundary result (not proved here). Let $V$ be a compact $v$-manifold and $M$ an $m$-manifold in the metastable range $2m\\ge3(v+1)$. The **deleted product** of $V$ is $V^{(2)}=V\\times V\\setminus\\Delta_V$ with the involution $(x,y)\\mapsto(y,x)$; a continuous map $G:V\\times V\\to M\\times M$ is **equivariant** when it commutes with factor interchange, and **isovariant** when it is equivariant and $G^{-1}(\\Delta_M)=\\Delta_V$. These are maps on the full product; their restrictions off the diagonal are maps of deleted products. Then the Haefliger\u2013Weber (deleted-product) theory gives the classification:\n\n1. a continuous map $f:V\\to M$ is homotopic to a smooth embedding ([[def-smooth-embedding]]) if and only if $f\\times f$ is equivariantly homotopic ([[def-homotopy-relative-and-path-homotopy]]) to an isovariant map;\n2. if $2m>3(v+1)$, two smooth embeddings $f_0,f_1:V\\to M$ are diffeotopic if and only if $f_0\\times f_0$ and $f_1\\times f_1$ are isovariantly homotopic;\n\nThe cited Euclidean survey gives the corresponding smooth and piecewise-linear deleted-product formulation. No unrestricted topological-category version is asserted here. These statements are recorded from Wall, Theorem 6.4.8, printed p. 189; their proofs and the obstructions involved are outside this page. Skopenkov, Theorem 5.4, article p. 32, states the Euclidean-target version in terms of the Haefliger\u2013Wu invariant: surjectivity when $2m=3v+3$ and bijectivity when $2m\\ge3v+4$. No item on this page depends on this remark: it records the exact statement-and-construction boundary of the commissioned level, exactly as the design requires, and it is one of the recorded, non-load-bearing boundary leaves of this pair. In particular the disjunction theory of [[def-self-transverse-immersion-and-double-point-locus]] does not extend to a classification of embeddings without the deleted-product machinery recorded here.",
+        "strategy": "Bibliographic boundary. The recorded claim is the existence and role of the Haefliger--Weber deleted-product classification in the metastable range, as in Skopenkov \u00a75 (Theorem 5.4) and Wall \u00a76.4 (Theorems 6.4.8--6.4.9, whose proof Wall gives only in outline and attributes to Haefliger). No proof is attempted, no dependency is created, and the item is declared proved_here:false with an external dependency so that the claim is sourced rather than asserted as local mathematics. By \u00a712.1 of the plan this is one of the three not-supplied orientation leaves of the differential-topology track and must remain non-load-bearing.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arkadiy Skopenkov, Embedding and Knotting of Manifolds in Euclidean Spaces (arXiv:math/0604045), \u00a71, article pp. 2\u20135 (self-intersection set; ambient versus non-ambient isotopy) and \u00a72, article pp. 6\u201314 (Theorems 2.1\u20132.3 and 2.8; the modulo 2 and integral Whitney obstruction; the Whitney invariant); \u00a73 and \u00a75 used only for the recorded knotting boundary",
+              "url": "https://arxiv.org/pdf/math/0604045"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proved_here": false,
+        "verification": {
+          "precheck": "n/a"
+        },
+        "external_dependency": {
+          "source_url": "https://arxiv.org/pdf/math/0604045",
+          "exact_statement": "Haefliger--Weber theorem (Skopenkov \u00a75, Theorem 5.4): for a compact manifold $V$ the embeddability and isotopy classification in the metastable range is given by the equivariant homotopy class of the map of the deleted product $V\\times V\\setminus\\Delta_V\\to S^{m-1}$; Wall Theorem 6.4.8 states the smooth version: a map $f:V\\to M$ is homotopic to a smooth embedding if and only if $f\\times f$ is equivariantly homotopic to an isovariant map (the condition $2m\\ge3(v+1)$), and embeddings are classified up to diffeotopy by isovariant homotopy when $2m>3(v+1)$.",
+          "local_proof_attempt": "None on this page. The disjunction method and the deleted-product machinery that prove the theorem occupy Skopenkov \u00a7\u00a75--8 and are a separate development; this page stops at the primary double point obstruction and the Whitney disjunction and records the classification as a boundary.",
+          "necessity": "It records the exact stopping point of the page: the preceding propositions remove algebraically cancelling double points of an immersion, and the question of classifying embeddings beyond vanishing of that obstruction is precisely the Haefliger--Weber problem, out of scope here."
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "rem-isotopy-extension-needs-compact-source-or-proper-support-control",
+        "kind": "remark",
+        "title": "Isotopy extension needs compact source or proper support control",
+        "deps": [
+          "thm-isotopy-extension",
+          "def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy",
+          "def-smooth-embedding",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds"
+        ],
+        "statement": "The isotopy extension theorem [[thm-isotopy-extension]] assumes a compact source $M$ (or, in the relative form, control on a compact set), and compactness is used at three separate places: the track is compact, so finitely many local velocity-extension charts suffice; the velocity field can be cut off with compact support; and the resulting time-dependent field is complete on the finite time interval. For an arbitrary isotopy of a noncompact manifold there need not be any ambient isotopy extending it, so the compact-source hypothesis is load-bearing and cannot simply be dropped.\n\nThe standard counterexample (Hirsch, Exercise 9, p. 183, reproduced in the UCR hand-out): a properly embedded copy $L\\subseteq\\mathbb R^3$ of the real line obtained from the $x$-axis by tying a small trefoil knot in a finite segment is smoothly isotopic to the straight line $\\mathbb R$ through embeddings \u2014 roll the knot out to infinity along the line \u2014 but no ambient isotopy of $\\mathbb R^3$ carries $L$ to $\\mathbb R$: such an ambient isotopy would restrict to a diffeomorphism of the complements ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]], [[def-smooth-embedding]]), whereas $\\pi_1(\\mathbb R^3\\setminus L)$ is the nonabelian trefoil knot group and $\\pi_1(\\mathbb R^3\\setminus\\mathbb R)\\cong\\mathbb Z$, so the complements are not even homotopy equivalent. The isotopy of embeddings here is a genuine smooth isotopy in the sense of [[def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy]]; only the ambient extension fails.\n\nThe bounded-velocity forms of the theorem (Hirsch Theorems 1.6\u20131.7) are the correct substitute for compactness when the source is closed in the ambient manifold and the isotopy has bounded velocity in a complete metric: then the associated time-dependent field of bounded velocity is complete and generates an ambient isotopy. This remark asserts no new theorem; it records the exact hypothesis of [[thm-isotopy-extension]] that the counterexample tests and the substitute that restores the conclusion.",
+        "strategy": "Remark guarding the main theorem. It records the two sources of compactness in the construction (compact track for the tube and the cutoff; compact support for completeness of the flow) and the standard counterexample from Hirsch, Exercise 9, p. 183, reproduced in the UCR hand-out: the noncompact-line isotopy exists but cannot be ambient because it would produce a diffeomorphism of complements with non-isomorphic fundamental groups. No proof obligation: the example is cited, and its role is to delimit the hypotheses of [[thm-isotopy-extension]] rather than to assert a new theorem. The bounded-velocity versions are recorded as the correct substitute.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "The Isotopy Extension Theorem (University of California, Riverside, graduate differential topology hand-out, 2010), complete 14-page document: statement and applications of the isotopy extension theorem, uniqueness of tubular and collar neighbourhoods, and the knotted-line counterexample to ambient extension",
+              "url": "https://math.ucr.edu/~res/math260s10/isotopyextension.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 10
+      }
+    ]
+  },
+  {
+    "order": 570,
+    "id": "isotopy-extension-and-embedding-theory-beyond-whitney-examples",
+    "kind": "B",
+    "category": "differential-topology",
+    "title": "Isotopy Extension and Embedding Theory Beyond Whitney \u2014 Examples",
+    "companion": "isotopy-extension-and-embedding-theory-beyond-whitney",
+    "requires": [
+      "isotopy-extension-and-embedding-theory-beyond-whitney",
+      "regular-homotopy-and-sphere-eversion"
+    ],
+    "items": [
+      {
+        "id": "lem-an-ambient-isotopy-preserves-the-orientation-of-an-invariant-round-sphere",
+        "kind": "lemma",
+        "title": "An ambient isotopy preserves the orientation of an invariant round sphere",
+        "deps": [
+          "def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy",
+          "def-induced-boundary-orientation",
+          "cor-diffeomorphisms-preserve-interior-and-boundary",
+          "prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-orientable-manifold",
+          "thm-intermediate-value",
+          "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+          "def-higher-derivatives-and-smoothness",
+          "def-directional-and-partial-derivatives"
+        ],
+        "statement": "Let $H:\\mathbb R^3\\times I\\to\\mathbb R^3$ be an ambient isotopy with $H_0=\\mathrm{id}$ ([[def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy]]) and suppose $H_1$ maps the closed unit ball $B^3\\subseteq\\mathbb R^3$ to itself. Then $H_1$ restricts to a diffeomorphism of the unit sphere $S^2=\\partial B^3$ of degree $+1$; that is, $H_1|_{S^2}$ preserves the boundary orientation of $S^2$ ([[def-induced-boundary-orientation]]). Consequently, if $r:\\mathbb R^3\\to\\mathbb R^3$ is a linear reflection in a plane through the origin (so $\\det r=-1$ and $r$ preserves $S^2$), there is no such ambient isotopy with $H_1|_{S^2}=r|_{S^2}$.",
+        "strategy": "For every $t$, the determinant $x\\mapsto\\det dH_t(x)$ is continuous and nowhere zero on the connected manifold $\\mathbb R^3$; the function $(x,t)\\mapsto\\det dH_t(x)$ is continuous on the connected set $\\mathbb R^3\\times I$ and equals $1$ at $t=0$, so it is everywhere positive. Hence $H_1$ preserves the ambient orientation at every point. Since $H_1(S^2)=S^2$ and $H_1$ is a diffeomorphism of $\\mathbb R^3$, the bounded component of $\\mathbb R^3\\setminus S^2$ maps to the bounded component; more explicitly, $H_1(B^3)$ is a connected bounded open set with boundary $S^2$, hence equals the open ball, so $H_1$ maps $B^3$ to $B^3$ ([[cor-diffeomorphisms-preserve-interior-and-boundary]]). Its differential therefore carries the outward normal at each point of $S^2$ to the outward normal, and preserving the ambient orientation it preserves the induced boundary orientation; by [[prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism]] the degree of $H_1|_{S^2}$ is $+1$. A reflection of $S^2$ has degree $-1$ ([[ex-degree-of-a-reflection-of-a-sphere]]), so $H_1|_{S^2}=r|_{S^2}$ is impossible.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-ambient-isotopy-of-an-unknotted-circle-in-r-three",
+        "kind": "example",
+        "title": "Extending a visible isotopy of an unknotted circle in $\\mathbb R^3$",
+        "deps": [
+          "thm-isotopy-extension",
+          "def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy",
+          "def-smooth-embedding",
+          "def-countable-choice",
+          "prop-a-proper-injective-immersion-is-a-smooth-embedding",
+          "lem-stiefel-manifolds-are-connected-and-simply-connected-in-positive-codimension",
+          "def-compact-space"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $S^1\\subseteq\\mathbb R^2\\times\\{0\\}\\subseteq\\mathbb R^3$ be the unit circle with inclusion map $f_0$, and let $f_1:S^1\\to\\mathbb R^3$ be a round circle of radius $\\lambda>0$ centred at $c\\in\\mathbb R^3$, written as the affine image $f_1(x)=c+\\lambda Qf_0(x)$ of $f_0$ for some $Q\\in SO(3)$. Then there is a compactly supported ambient isotopy $H$ of $\\mathbb R^3$ with $H_0=\\mathrm{id}$ and $H_1\\circ f_0=f_1$: every round circle is carried to every other by an ambient isotopy supported in any prescribed open neighbourhood of the entire isotopy image $F(S^1\\times I)$ constructed below. The example exhibits the hypothesis check of [[thm-isotopy-extension]] in the simplest case ($M=S^1$ compact, $N=\\mathbb R^3$ without boundary, no boundary stratum, no properness issue) and shows that the visible motion of a round circle is always realisable ambiently.",
+        "strategy": "Write $f_1=c+\\lambda Q f_0$ with $Q\\in SO(3)$; if the given parametrisation of the target circle is a negatively oriented affine image, precompose with the rotation of $S^1$ by $\\pi$, which is itself an isotopy of the source through diffeomorphisms and hence changes $f_1$ by an isotopy of embeddings, reducing to the displayed case. Choose the explicit smooth path $Q_t$ in $SO(3)$ from $Q_0=\\mathrm{id}$ to $Q_1=Q$ given by rotating about the axis of $Q$ through the angle $t\\theta$, where $\\theta$ is the rotation angle of $Q$, and put $F_t(x):=t\\,c+((1-t)+t\\lambda)Q_tf_0(x)$. Each $F_t$ is the restriction of an invertible affine map (a rotation, a homothety with positive factor and a translation), hence an embedding of $S^1$, and $F$ is smooth on $S^1\\times I$ with $F_0=f_0$ and $F_1=f_1$. Since the source is compact, clause 4 of [[thm-isotopy-extension]] applies and produces the required compactly supported ambient isotopy, supported in any prescribed neighbourhood of the track $F(S^1\\times I)$. Countable choice is inherited from the isotopy extension theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "The Isotopy Extension Theorem (University of California, Riverside, graduate differential topology hand-out, 2010), complete 14-page document: statement and applications of the isotopy extension theorem, uniqueness of tubular and collar neighbourhoods, and the knotted-line counterexample to ambient extension",
+              "url": "https://math.ucr.edu/~res/math260s10/isotopyextension.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 10
+      },
+      {
+        "id": "ex-isotopic-submanifolds-have-isomorphic-normal-bundles-and-complements",
+        "kind": "example",
+        "title": "Compact isotopic submanifolds have isomorphic normal bundles and diffeomorphic complements",
+        "deps": [
+          "thm-isotopy-extension",
+          "cor-isotopic-embeddings-have-diffeomorphic-complements",
+          "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "def-smooth-embedding",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-countable-choice",
+          "def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy",
+          "def-tangent-bundle-as-a-disjoint-union",
+          "def-differential-of-a-smooth-map"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $N$ be a smooth manifold without boundary, let $M$ be a compact smooth manifold and let $f_0,f_1:M\\to N$ be isotopic embeddings with normal bundles $\\nu_0=f_0^*TN/TM$ and $\\nu_1=f_1^*TN/TM$ ([[def-normal-and-conormal-bundles-of-an-embedded-submanifold]]). Then $\\nu_0\\cong\\nu_1$ as smooth vector bundles over $M$ and $N\\setminus f_0(M)\\cong N\\setminus f_1(M)$; under AC every characteristic class defined on these normal bundles agrees (for orientation-dependent classes, use orientations transported by the displayed bundle isomorphism) and the complements are diffeomorphic. The example verifies the two embedding invariants supplied by isotopy: the ambient diffeomorphism of [[cor-isotopic-embeddings-have-diffeomorphic-complements]] intertwines the normal bundles, and [[thm-isotopy-extension]] is the source of that diffeomorphism. (The converse fails: trivial normal bundles do not force isotopy, as the reflected-sphere counterexample on this page shows.)",
+        "strategy": "Let $H$ be the ambient isotopy of [[thm-isotopy-extension]] with $H_t\\circ f_0=F_t$ and $H\\circ f_0=f_1$. Its differential restricts to a bundle isomorphism $TN|_{f_0(M)}\\to TN|_{f_1(M)}$ covering $f_1\\circ f_0^{-1}$; on the level of $M$ it induces a bundle map $\\nu_0\\to\\nu_1$ over the identity of $M$ because the tangent summand $TM$ is carried to $TM$ by the chain rule $dH\\circ df_0=df_1$. A bundle map that is an isomorphism on each fibre is a bundle isomorphism, so characteristic classes agree. The complement statement is [[cor-isotopic-embeddings-have-diffeomorphic-complements]]. The parenthetical failure of the converse is the content of the reflected-sphere counterexample on this page. Countable choice is inherited.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 11
+      },
+      {
+        "id": "cex-the-reflected-sphere-embedding-is-regularly-homotopic-but-not-isotopic-to-the-standard-one",
+        "kind": "counterexample",
+        "title": "A reflected sphere embedding is regularly homotopic but not isotopic to the standard one",
+        "deps": [
+          "thm-isotopy-extension",
+          "thm-smale-classification-of-sphere-immersions-in-euclidean-space",
+          "cor-regular-homotopy-classes-of-immersions-are-formal-homotopy-classes",
+          "lem-standard-and-reflected-two-sphere-immersions-have-homotopic-formal-data-in-r-three",
+          "def-regular-homotopy-of-immersions",
+          "def-smooth-embedding",
+          "prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism",
+          "def-countable-choice",
+          "def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy",
+          "def-induced-boundary-orientation",
+          "cor-diffeomorphisms-preserve-interior-and-boundary",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-orientable-manifold",
+          "thm-intermediate-value",
+          "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+          "def-higher-derivatives-and-smoothness",
+          "def-directional-and-partial-derivatives"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $\\iota:S^2\\hookrightarrow\\mathbb R^3$ be the standard inclusion of the unit sphere and let $r:\\mathbb R^3\\to\\mathbb R^3$ be a linear reflection, $\\det r=-1$, so that $r\\circ\\iota$ is again an embedding of $S^2$. Then:\n1. $\\iota$ and $r\\circ\\iota$ are regularly homotopic as immersions of $S^2$ into $\\mathbb R^3$;\n2. $\\iota$ and $r\\circ\\iota$ are not isotopic as embeddings: there is neither a level-preserving homotopy through embeddings nor an ambient isotopy of $\\mathbb R^3$ carrying $\\iota$ to $r\\circ\\iota$;\nso regular homotopy is strictly coarser than isotopy of embeddings for $S^2$ in $\\mathbb R^3$. This is the design's \u201cregularly homotopic but not isotopic\u201d counterexample in the provable instance; the historically first instance (a knotted circle versus the round circle in $\\mathbb R^3$) is recorded as a boundary rather than proved, because the knot-theoretic non-isotopy invariant $\\pi_1(\\mathbb R^3\\setminus L)$ belongs to the low-dimensional/knot track and not to this run's closure.",
+        "strategy": "Clause 1: both maps are immersions, and [[thm-smale-classification-of-sphere-immersions-in-euclidean-space]], clause 3, records that for $m=2,n=3$ all immersions $S^2\\to\\mathbb R^3$ are regularly homotopic because $\\pi_2(SO(3))=0$; the formal-data computation is the one of the DT-26 pair, consumed here through its classification theorem ([[cor-regular-homotopy-classes-of-immersions-are-formal-homotopy-classes]]). Clause 2: suppose an isotopy of embeddings from $\\iota$ to $r\\circ\\iota$ existed. Applying [[thm-isotopy-extension]] to it (compact source $S^2$, $\\mathbb R^3$ boundaryless) gives an ambient isotopy $H$ of $\\mathbb R^3$ with $H_0=\\mathrm{id}$ and $H_1\\circ\\iota=r\\circ\\iota$, i.e. $H_1|_{S^2}=r|_{S^2}$. Since $H_1(S^2)=S^2$, the previous lemma on this page forces $\\deg(H_1|_{S^2})=+1$, whereas the reflection $r$ restricts to a map of degree $\\det r=-1$ ([[prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism]], [[ex-degree-of-a-reflection-of-a-sphere]]); this contradiction yields the claim. Note that the contradiction is obtained through the isotopy extension theorem of this page, so the example also exercises [[thm-isotopy-extension]]. Countable choice is inherited from the Smale--Hirsch classification chain.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology (Graduate Texts in Mathematics 33, Springer 1976; full text retrieved from the Internet Archive Wayback Machine snapshot of the luis.impa.br course copy), Chapter 8 \u201cIsotopy\u201d \u00a71, printed pp. 177\u2013183 (Theorems 1.1\u20131.8 and Exercises 3, 7, 9, 10, 11, 16, printed pp. 182\u2013184)",
+              "url": "https://web.archive.org/web/20230823153633/https://luis.impa.br/aulas/anvar/Hirsch_DifferentialTopology.pdf"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 14
+      },
+      {
+        "id": "ex-double-point-dimension-count-for-surfaces-in-four-and-five-space",
+        "kind": "example",
+        "title": "The double point dimension count for surfaces in four- and five-space",
+        "deps": [
+          "lem-double-point-locus-has-expected-dimension-two-m-minus-n",
+          "lem-a-self-transverse-immersion-has-no-double-points-when-n-is-greater-than-two-m",
+          "def-self-transverse-immersion-and-double-point-locus",
+          "def-immersion-submersion-and-constant-rank-map",
+          "cor-every-immersion-is-locally-an-embedding",
+          "prop-a-proper-injective-immersion-is-a-smooth-embedding",
+          "def-compact-space",
+          "def-countable-choice",
+          "lem-the-diagonal-of-a-smooth-manifold-is-a-closed-embedded-submanifold",
+          "def-embedded-submanifold-and-slice-chart",
+          "thm-finite-products-of-compact-spaces",
+          "thm-closed-subspace-of-a-compact-space-is-compact"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $M^2$ be a closed connected surface ($m=2$). Then:\n\n1. for a self-transverse immersion $f:M^2\\looparrowright\\mathbb R^4$ the expected dimension is $2m-n=0$: the double point locus is a closed $0$-dimensional submanifold of $M\\times M\\setminus\\Delta_M$, the double point set is finite, and the selected branch pairs are isolated and transverse; several pairs may initially have the same collision image;\n2. for a self-transverse immersion $f:M^2\\looparrowright\\mathbb R^5$ the expected dimension is $-1<0$: the double point locus is empty, so $f$ is an injective immersion, and since $M$ is closed $f$ is an embedding.\n\nThe example shows why dimension four is the critical case for surfaces: it is exactly there that the double points are isolated rather than absent, so that the algebraic branch-pair count can be nonzero; the $m\\ge3$ disjunction theorem does not cover this surface-in-four-space case. In five-space the configuration space argument already forbids double points.",
+        "strategy": "Both clauses are the dimension count [[lem-double-point-locus-has-expected-dimension-two-m-minus-n]] specialised to $m=2$: the locus is a closed embedded submanifold of dimension $2m-n$ when that is nonnegative, and empty when it is negative. For clause 1, local injectivity of the immersion ([[cor-every-immersion-is-locally-an-embedding]]) together with compactness of $M$ gives a neighbourhood of the diagonal in $M\\times M$ containing no double point pair, so $\\Delta_2(f)$ is a closed subset of the compact complement of that neighbourhood; being 0-dimensional it is discrete and compact, hence finite, and so is its image $\\Sigma(f)$. For clause 2, emptiness of the double point locus is injectivity ([[def-self-transverse-immersion-and-double-point-locus]]), and an injective immersion from closed $M$ is an embedding by the proper injective immersion criterion ([[prop-a-proper-injective-immersion-is-a-smooth-embedding]]). Countable choice is inherited from the transversality items.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156, Cambridge University Press 2016; full text retrieved from the Internet Archive Wayback Machine snapshot of the ETH Z\u00fcrich course copy), Chapter 6 \u00a7\u00a76.2\u20136.4, printed pp. 169\u2013192 (Theorem 6.2.1; Propositions 6.3.1 and 6.3.3; Theorems 6.3.2, 6.3.4, 6.3.6, 6.4.5, 6.4.8 and 6.4.9; Lemma 6.3.5)",
+              "url": "https://web.archive.org/web/20241113132819/https://people.math.ethz.ch/~dkosanovic/24-FS/Wall-Differential-Topology.pdf"
+            },
+            {
+              "title": "Arkadiy Skopenkov, Embedding and Knotting of Manifolds in Euclidean Spaces (arXiv:math/0604045), \u00a71, article pp. 2\u20135 (self-intersection set; ambient versus non-ambient isotopy) and \u00a72, article pp. 6\u201314 (Theorems 2.1\u20132.3 and 2.8; the modulo 2 and integral Whitney obstruction; the Whitney invariant); \u00a73 and \u00a75 used only for the recorded knotting boundary",
+              "url": "https://arxiv.org/pdf/math/0604045"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4
+      }
+    ]
+  }
+]

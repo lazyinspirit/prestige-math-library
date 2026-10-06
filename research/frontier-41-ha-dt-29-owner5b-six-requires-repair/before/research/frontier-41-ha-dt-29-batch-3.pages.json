@@ -1,0 +1,881 @@
+[
+  {
+    "order": 533,
+    "id": "handle-cancellation-slides-and-elementary-moves",
+    "kind": "A",
+    "category": "differential-topology",
+    "title": "Handle Cancellation Slides and Elementary Moves",
+    "companion": "handle-cancellation-slides-and-elementary-moves-examples",
+    "requires": [
+      "sublevel-deformation-and-the-handle-attachment-theorem",
+      "handle-decompositions-duality-and-rearrangement",
+      "oriented-and-mod-two-intersection-numbers",
+      "whitney-embedding-tubular-neighbourhoods-and-approximation",
+      "vector-fields-flows-and-lie-derivatives",
+      "manifolds-with-boundary-collars-and-orientations",
+      "fundamental-solutions-newtonian-potentials-and-green-functions",
+      "geodesics-the-exponential-map-completeness-and-hopf-rinow"
+    ],
+    "items": [
+      {
+        "id": "def-geometric-cancelling-handle-pair",
+        "kind": "definition",
+        "title": "Geometrically cancelling adjacent handle pair",
+        "deps": [
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-handle-decomposition-relative-to-the-incoming-boundary",
+          "def-transverse-complementary-dimensional-intersection-set",
+          "def-transverse-embedded-submanifolds"
+        ],
+        "statement": "Let $(W;M_0,M_1)$ be a compact collared triad and let $h^k,h^{k+1}$ be consecutive handles of a finite handle decomposition relative to $M_0$ ($0\\le k\\le n-1$). Write $M=\\partial_+(W_0\\cup h^k)$ for the outgoing boundary after the lower handle. The pair is **geometrically cancelling** when the attaching sphere $A\\subset M$ of $h^{k+1}$ and the belt sphere $B\\subset M$ of $h^k$ meet transversely in exactly one point. For $1\\le k\\le n-2$ both spheres are positive-dimensional, $\\dim A=k$ and $\\dim B=n-k-1$, so $\\dim A+\\dim B=\\dim M$ and transversality is the usual complementary-dimensional condition. Endpoint conventions, which are part of the definition: for $k=0$ the belt sphere $B$ is the entire new boundary component $S^{n-1}$ of the attached $0$-handle, the attaching sphere $A$ of the $1$-handle is a $0$-sphere, and \"meets transversely in one point\" means that exactly one of the two points of $A$ lies in $B$ (transversality is then automatic); for $k=n-1$ the roles are dual: $A$ is an entire boundary component $S^{n-1}$ of $M$ and exactly one of the two points of the $0$-sphere $B$ lies in $A$. The definition asserts no cancellation; it only fixes the configuration.\n\nThe intersection in the definition is the transverse complementary-dimensional intersection of [[def-transverse-complementary-dimensional-intersection-set]] in the closed $(n-1)$-manifold $M$, so it is a finite set of points whenever the two spheres are transverse; the middle cases $1\\le k\\le n-2$ are the ones for which the attaching-belt intersection matrix is defined. No orientation is used and no choice principle enters.",
+        "strategy": "Definition. It fixes the exact geometric configuration on which the cancellation theorem, the intersection matrix and the elementary moves of this page are built. The middle manifold is the outgoing boundary after the lower handle, so the attaching sphere of the upper handle is read in the same manifold as the belt sphere of the lower one; the intersection is the transverse complementary-dimensional one of the published intersection theory. The endpoint cases are printed because a $0$-handle's belt sphere and an $n$-handle's attaching sphere are whole boundary components, so the general-position phrase must be interpreted as a count of the points of the opposite sphere that lie in them. Nothing is proved and no existence statement is made.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            },
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow), §§4--6, printed pp. 37--78, with §5 pp. 45--66 read in full",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-attaching-handles-along-isotopic-attaching-embeddings-preserves-the-diffeomorphism-type",
+        "kind": "lemma",
+        "title": "Isotopic attaching embeddings give diffeomorphic handle attachments",
+        "deps": [
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism",
+          "def-smooth-collar-of-a-manifold-boundary",
+          "thm-collar-neighborhood-theorem",
+          "def-smooth-embedding",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "def-countable-choice",
+          "thm-smooth-inverse-function-theorem-on-manifolds",
+          "def-time-dependent-vector-field-and-evolution-operator",
+          "thm-compactly-supported-time-dependent-vector-fields-have-global-evolution-on-a-compact-time-interval",
+          "prop-time-dependent-evolution-satisfies-the-two-time-cocycle-law",
+          "lem-handles-of-equal-index-can-be-attached-on-one-level"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $W^n$ be a compact smooth manifold with boundary, $0\\le k\\le n$, and let $\\varphi_0,\\varphi_1:S^{k-1}\\times D^{n-k}\\to\\partial W$ be attaching embeddings that extend over a neighbourhood of the disk factor. Suppose there is a smooth isotopy $\\varphi_t$ between them through such embeddings, constant for $t$ near $0$ and $1$. Then the handle attachments $W\\cup_{\\varphi_0}(D^k\\times D^{n-k})$ and $W\\cup_{\\varphi_1}(D^k\\times D^{n-k})$, with corners rounded, are diffeomorphic by a diffeomorphism that is the identity outside a collar of the swept attaching regions. If later handles of a presentation are attached to the swept region, the same diffeomorphism carries their attaching data, so the two total manifolds are diffeomorphic as well.",
+        "strategy": "The hypothesis that the isotopy is constant near the boundary sphere of the attaching region confines the moving set to a compact subset of the interior, so the isotopy generates a compactly supported ambient diffeotopy of $\\partial W$. That diffeotopy is carried into a collar of $\\partial W$ in $W$ by reparametrizing the collar parameter ($c(p,s)\\mapsto c(H_{\\chi(s)}(p),s)$ with $\\chi=1$ near the inner end and $\\chi=0$ near the outer end), using the collar theorem. The two glued manifolds are then identified through the isotopy, and the rounding independence lemma and a collar reparametrization absorb the corner data. Countable Choice enters only through the collar and flow suppliers; the local statement is choice-free when the isotopy is given.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            },
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow), §§4--6, printed pp. 37--78, with §5 pp. 45--66 read in full",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-transverse-complementary-spheres-have-product-charts",
+        "kind": "lemma",
+        "title": "Transverse submanifolds have product charts",
+        "deps": [
+          "def-transverse-embedded-submanifolds",
+          "thm-smooth-inverse-function-theorem-on-manifolds",
+          "def-embedded-submanifold-and-slice-chart",
+          "def-smooth-manifold",
+          "def-differential-of-a-smooth-map"
+        ],
+        "statement": "Let $N$ be a smooth $m$-manifold and let $S_1,S_2\\subseteq N$ be transverse embedded submanifolds meeting at a point $p$, with $\\dim S_1+\\dim S_2=m$. Then there are an open neighbourhood $U$ of $p$ and a chart $\\phi:(U,p)\\to(\\mathbb R^m,0)$ such that $\\phi(S_1\\cap U)=\\mathbb R^{a}\\times\\{0\\}\\cap\\phi(U)$ and $\\phi(S_2\\cap U)=\\{0\\}\\times\\mathbb R^{b}\\cap\\phi(U)$, where $a=\\dim S_1$ and $b=\\dim S_2$. More generally, if finitely many embedded submanifolds $S_1,\\dots,S_r$ pass through $p$ with $T_pN=T_pS_1\\oplus\\cdots\\oplus T_pS_r$, then one chart simultaneously maps each $S_i\\cap U$ to a coordinate subspace.",
+        "strategy": "Choose for each $S_i$ local smooth functions whose common zero set is $S_i$ and whose differentials at $p$ span the annihilator of $T_pS_i$; mutual transversality makes all these differentials together linearly independent, so they extend to a basis of $T_p^*N$ and integrate to a chart by the inverse function theorem. The zero loci become coordinate subspaces. This is Wall's normal-form Lemma 4.8.1 in the special case of two complementary-dimensional submanifolds, and the argument is finite-dimensional and choice-free.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-standard-complementary-pair-fills-an-n-ball",
+        "kind": "lemma",
+        "title": "The standard complementary pair fills a ball",
+        "deps": [
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-smooth-embedding",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "thm-smooth-inverse-function-theorem-on-manifolds",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $0\\le k\\le n-1$ and let $1\\times\\varphi_0:S^k\\times D^{n-k-1}\\to S^k\\times D^{n-k}$ be the standard hemisphere attaching embedding, where $\\varphi_0:D^{n-k-1}\\to\\partial D^{n-k}$ is the stereographic embedding of $D^{n-k-1}$ onto the upper hemisphere of $\\partial D^{n-k}$. Then: (i) $(S^k\\times D^{n-k})\\cup_{1\\times\\varphi_0}(D^{k+1}\\times D^{n-k-1})\\cong D^n$ after rounding the corner along $S^k\\times S^{n-k-2}$; (ii) for the standard equatorial embedding $\\sigma:S^{k-1}\\times D^{n-k}\\to\\partial D^n$ one has $D^n\\cup_\\sigma(D^k\\times D^{n-k})\\cong S^k\\times D^{n-k}$; moreover the two diffeomorphisms may be chosen compatibly, so that the $n$-disc with a standard $k$-handle followed by the standard $(k+1)$-handle is again an $n$-disc.",
+        "strategy": "(i) is Wall's Lemma 5.4.2. For $r=k$ he exhibits explicit confocal coordinates $x_i=\\mu_i\\sqrt{1+\\|\\nu\\|^2}$, $y_i=\\nu_i\\sqrt{1-\\|\\mu\\|^2}$ identifying the union with a standard ball-like region, then rounds the corner using the radial vector field through the $r$-sphere, and finally identifies the attaching map. (ii) is the elementary computation $D^n\\cup_\\sigma(D^k\\times D^{n-k})=(D^k\\cup_{S^{k-1}}D^k)\\times D^{n-k}=S^k\\times D^{n-k}$ for the standard hemisphere decomposition of $\\partial D^n$. The rounding independence lemma makes the corner choices irrelevant. Countable Choice is used through the collar and rounding suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-one-intersection-gives-the-standard-local-cancelling-model",
+        "kind": "lemma",
+        "title": "One transverse intersection gives the standard local cancelling model",
+        "deps": [
+          "def-geometric-cancelling-handle-pair",
+          "lem-attaching-handles-along-isotopic-attaching-embeddings-preserves-the-diffeomorphism-type",
+          "lem-transverse-complementary-spheres-have-product-charts",
+          "lem-standard-complementary-pair-fills-an-n-ball",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-tubular-neighbourhood-of-an-embedded-submanifold",
+          "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "prop-two-tubular-neighbourhood-germs-are-isomorphic-near-the-zero-section",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $h^k,h^{k+1}$ be attached in that order to a compact manifold $W_0$ and suppose they are geometrically cancelling at the intersection point $P$ of the attaching sphere $A$ of $h^{k+1}$ with the belt sphere $B$ of $h^k$ in the middle boundary $M=\\partial_+(W_0\\cup h^k)$. Then there are an embedded closed disc $E\\subset M$ with $P\\in\\operatorname{int}E$ and attaching data $\\tilde\\varphi,\\tilde\\psi$, isotopic to the given data through embeddings fixed outside a compact neighbourhood of the two attaching regions, such that after the isotopy the pair is the standard complementary pair attached to $E$: the lower attaching embedding restricts to the standard equatorial embedding $S^{k-1}\\times D^{n-k}\\hookrightarrow E\\subset M$ and the upper attaching embedding restricts over $E\\cup h^k$ to the standard hemisphere embedding of the standard model lemma. Consequently a neighbourhood of the two cores and of the affected part of the middle boundary is diffeomorphic to the standard complementary pair model, and the affected region of $M$ lies in $E$. The diffeotopies are supported in a neighbourhood of the two attaching regions.",
+        "strategy": "At $P$ the two spheres are transverse and complementary-dimensional, so the product-chart lemma flattens $A$ and $B$ to coordinate subspaces in one chart. The attaching embeddings are tubular neighbourhood embeddings of $A$ and $B$; by uniqueness of tubular neighbourhood germs up to isotopy they may be straightened inside the chart. The single intersection point then gives the standard local picture in which the lower a-sphere bounds a disc $B^k$ inside a chart ball and the upper a-sphere meets it once; following Wall's proof of Theorem 5.4.3, the union of the two attaching regions together with the regular part of $M$ that they bound can be isotoped inside one embedded disc $E\\subset M$. Isotopy invariance of attachments transports the straightened data back to the given ones. Countable Choice enters through the tubular-neighbourhood and collaring suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-handle-cancellation",
+        "kind": "theorem",
+        "title": "Handle cancellation",
+        "deps": [
+          "def-geometric-cancelling-handle-pair",
+          "lem-one-intersection-gives-the-standard-local-cancelling-model",
+          "lem-standard-complementary-pair-fills-an-n-ball",
+          "lem-boundary-connected-sum-with-a-disk-does-not-change-the-diffeomorphism-type",
+          "def-handle-decomposition-relative-to-the-incoming-boundary",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism",
+          "lem-attaching-handles-along-isotopic-attaching-embeddings-preserves-the-diffeomorphism-type",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $W$ be a compact connected smooth $n$-manifold with collared boundary $\\partial W=\\partial_0W\\sqcup\\partial_1W$, let $\\varphi:S^{k-1}\\times D^{n-k}\\to\\partial_1W$ be an attaching embedding of a $k$-handle and let $\\psi:S^k\\times D^{n-k-1}\\to\\partial_1(W\\cup_\\varphi h^k)$ be an attaching embedding of a $(k+1)$-handle attached after it, where $0\\le k\\le n-1$. If the attaching sphere of $h^{k+1}$ meets the belt sphere of $h^k$ transversely in exactly one point, then $W\\cup_\\varphi h^k\\cup_\\psi h^{k+1}$ is diffeomorphic to $W$ relative to $\\partial_0W$. Consequently a geometrically cancelling consecutive pair may be deleted from, or added to, any handle presentation of the same manifold; the diffeomorphism may be taken to act only in a collar of the affected boundary disc and in the two handles, so the attaching data of all later handles are carried along.",
+        "strategy": "By the local model lemma the affected region of $\\partial_1W$ is a disc $E$ to which the pair is attached in the standard way. By the standard-pair lemma the union of $E$, the two handle bodies and the collar is an $n$-disc attached to $W$ along $E$, so the union is the boundary connected sum $W\\natural D^n$; the in-run boundary-connected-sum-with-a-disk lemma (scaffolded with the previous pair of this run) then identifies it with $W$ by a diffeomorphism equal to the identity outside a collar of $E$. The relative statement uses the collars of the faces: the diffeomorphism is the identity on $\\partial_0W$ and can be chosen fixed outside a collar of $E$ and the two handles, so any later attaching data are transported. Countable Choice enters through the collar and disc-absorption suppliers. This is Wall's Handle Cancellation Theorem 5.4.3 and Lück's Cancellation Lemma 1.12.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            },
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow), §§4--6, printed pp. 37--78, with §5 pp. 45--66 read in full",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-creation-of-a-cancelling-handle-pair",
+        "kind": "theorem",
+        "title": "Creation of a cancelling handle pair",
+        "deps": [
+          "def-geometric-cancelling-handle-pair",
+          "thm-handle-cancellation",
+          "lem-standard-complementary-pair-fills-an-n-ball",
+          "lem-boundary-connected-sum-with-a-disk-does-not-change-the-diffeomorphism-type",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-handle-decomposition-relative-to-the-incoming-boundary",
+          "lem-attaching-handles-along-isotopic-attaching-embeddings-preserves-the-diffeomorphism-type",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $W$ be a compact connected smooth $n$-manifold with collared boundary $\\partial W=\\partial_0W\\sqcup\\partial_1W$, with $\\partial_1W\\neq\\varnothing$, and let $0\\le k\\le n-1$. For every point $x\\in\\partial_1W$ and every neighbourhood $V$ of $x$ in $\\partial_1W$ there are attaching embeddings of a $k$-handle $h^k$ and, after it, a $(k+1)$-handle $h^{k+1}$ whose attaching regions lie in $V$ and form the standard complementary pair on an embedded disc $E\\subset V$, and the resulting manifold $W\\cup h^k\\cup h^{k+1}$ is diffeomorphic to $W$ relative to $\\partial_0W$. Equivalently, every handle presentation of $W$ may be modified by introducing a geometrically cancelling pair of consecutive indices at any prescribed disc of the outgoing boundary, without changing the manifold; the pair is the inverse local modification of the cancellation theorem.",
+        "strategy": "Choose a small disc $E\\subset V$ around $x$ and attach an $n$-disc $D^n$ to $W$ along $E$; the in-run disc-absorption lemma gives $W\\natural D^n\\cong W$ relative to $\\partial_0W$. By the standard-pair lemma the attached disc can be decomposed as $D^n=D^n\\cup h^k\\cup h^{k+1}$ with the two handles attached in the standard complementary way to a disc of its boundary (the elementary identity $D^n\\cup_\\sigma h^k=S^k\\times D^{n-k}$, then the standard $(k+1)$-handle fills the ball again), or equivalently the standard pair of the model lemma may be cancelled by the cancellation theorem. The absorption diffeomorphism carries the free hemisphere and the pair into $V$, and isotopy invariance of attachments identifies the standard data with data on an embedded disc in $V$. Hence $W\\cong W\\natural D^n=W\\cup h^k\\cup h^{k+1}$ relative to $\\partial_0W$. This is Wall's Theorem 5.4.4 and Lück's Lemma 1.13. Countable Choice enters through the disc-absorption and corner-rounding suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-embedded-bands-joining-two-framed-spheres-exist",
+        "kind": "lemma",
+        "title": "Embedded bands joining two framed spheres exist",
+        "deps": [
+          "def-smooth-embedding",
+          "def-smooth-manifold",
+          "def-tubular-neighbourhood-of-an-embedded-submanifold",
+          "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "thm-connected-and-locally-path-connected-implies-path-connected",
+          "prop-topological-manifolds-are-locally-compact-and-locally-path-connected",
+          "def-embedded-submanifold-and-slice-chart",
+          "lem-puncturing-connected-open-subset-of-rn-preserves-path-connectedness",
+          "thm-weak-whitney-proper-embedding-theorem",
+          "def-pullback-riemannian-metric",
+          "cor-a-closed-embedded-submanifold-of-a-complete-riemannian-manifold-is-complete-in-the-induced-metric",
+          "def-riemannian-distance-on-a-connected-manifold",
+          "thm-hopf-rinow",
+          "prop-length-dominates-endpoint-distance",
+          "prop-exponential-map-scales-geodesic-time",
+          "def-countable-choice",
+          "thm-gram-schmidt-orthonormalisation",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "thm-smooth-dependence-of-ode-solutions-on-parameters",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $N$ be a connected smooth $m$-manifold with $m\\ge2$, let $1\\le k\\le m-1$, and let $S_1,S_2\\subset N$ be disjoint compact embedded $(k-1)$-spheres with chosen trivializations of their normal bundles near chosen points $x_i\\in S_i$. Then there are an embedded band $\\beta:D^{k-1}\\times I\\to N$ and a trivialization of the normal bundle of $\\beta$ such that $\\beta$ meets $S_1\\cup S_2$ exactly in the two end discs $\\beta(D^{k-1}\\times\\{0\\})\\subseteq S_1$ and $\\beta(D^{k-1}\\times\\{1\\})\\subseteq S_2$, meeting the spheres in the standard normal position along them, the interior of $\\beta$ is disjoint from $S_1\\cup S_2$, and the framing of $\\beta$ restricted to the end discs matches the given sphere framings. For $k=1$ the band is an embedded arc joining $x_1$ to $x_2$ and meeting $S_1\\cup S_2$ only at its endpoints.",
+        "strategy": "Take a path from $x_1$ to $x_2$ (connected manifolds are path-connected by the local path-connectedness of manifolds). Approximate it relative to the endpoints by a smooth path transverse to the closed embedded submanifold $S_1\\cup S_2$ (transversality homotopy theorem); since $1+(k-1)<m$, transversality forces the interior of the path to miss both spheres, and a further generic perturbation makes the path a simple arc. Let $T$ be a thin tubular neighbourhood of the arc. Trivialize the normal bundle of the arc (automatic over an interval) and choose a $(k-1)$-plane subbundle of it whose fibres at the endpoints are the tangent planes $T_{x_i}S_i$; the space of $(k-1)$-frames in the normal $(m-1)$-space is connected because $k-1<m-1$, so the interpolation exists. Exponentiating a small disk of this subbundle gives the band, and the normal framing data give the claimed trivialization. Countable Choice is used by the transversality and tubular-neighbourhood suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-handle-slide-of-one-k-handle-over-another",
+        "kind": "definition",
+        "title": "Handle slide of one k-handle over another",
+        "deps": [
+          "lem-embedded-bands-joining-two-framed-spheres-exist",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-smooth-embedding",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $W$ be a compact smooth $n$-manifold with collared boundary, let $M\\subseteq\\partial_+W$ be a connected boundary region, and let $h_1,h_2$ be $k$-handles attached to $M$ by embeddings $f_1,f_2$ with disjoint images, where $1\\le k\\le n-2$. A **slide of $h_1$ over $h_2$** is determined by a band datum: points $x_i$ in the attaching spheres $f_i(S^{k-1}\\times\\{0\\})$, trivializations of the normal bundles of the attaching spheres near $x_i$ compatible with the framings of $f_i$, and an embedded band $\\beta$ with framing as supplied by the band lemma. The slid handle $h_1'$ is the $k$-handle attached to $M$ by the embedding $f_1'$ whose core sphere is obtained from $f_1(S^{k-1}\\times\\{0\\})\\setminus\\operatorname{int}\\beta_0$ and from $f_2(S^{k-1}\\times\\{0\\})\\setminus\\operatorname{int}\\beta_1$ pushed off along the band framing, where $\\beta_0,\\beta_1$ are the two end discs, together with the two side components $\\partial D^{k-1}\\times I$ of the band, smoothed along the gluing circles; the framing of $f_1'$ is built from the framings of $f_1$ and $f_2$ and the band framing, and extends to an embedding of the attaching region. Equivalently, in the band-sum picture, the attaching sphere of $h_1'$ is the connected sum of the attaching sphere of $h_1$ with a framed parallel copy of the attaching sphere of $h_2$ along the band, so that the slid attachment is disjoint from the attachment of $h_2$. Different band data may give different slides; all of them are called slides of $h_1$ over $h_2$. For $k=1$ the general formula is read in the $0$-dimensional sense: the band is an arc joining a point of the first attaching $0$-sphere to a framed parallel point of the second, and the slid attaching $0$-sphere is obtained from the first by replacing that point with the parallel point.\n\nThe slid handle is well defined because the band and its framing are supplied by [[lem-embedded-bands-joining-two-framed-spheres-exist]]; the smoothing of the two gluing circles is the standard smoothing along the boundaries of the removed end discs, and the extension of the framing exists because the normal bundle of the new sphere agrees with the two old framings on the complementary arcs and with the band framing on the sides. No uniqueness of the slide is asserted: different band data may give different slides of $h_1$ over $h_2$, and all of them are called slides. Countable Choice is inherited only through the band-existence lemma, and the definition makes no existence claim beyond what that lemma provides.",
+        "strategy": "Definition. Existence of the band and framing is the content of the preceding lemma; the smoothing of the two gluing circles is the standard connected-sum smoothing along the boundary of the removed end discs, and the framing extension exists because the normal bundle of the new sphere agrees with the two old framings on the two complementary arcs and with the band framing on the sides. Nothing else is asserted; in particular no uniqueness of the slide is claimed. Countable Choice is inherited from the band-existence lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-handle-slides-preserve-the-relative-diffeomorphism-type",
+        "kind": "lemma",
+        "title": "Handle slides preserve the relative diffeomorphism type",
+        "deps": [
+          "def-handle-slide-of-one-k-handle-over-another",
+          "lem-embedded-bands-joining-two-framed-spheres-exist",
+          "lem-attaching-handles-along-isotopic-attaching-embeddings-preserves-the-diffeomorphism-type",
+          "lem-handles-of-equal-index-can-be-attached-on-one-level",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $h_1,h_2$ be $k$-handles attached to $M\\subseteq\\partial_+W$ as in the slide definition, with $1\\le k\\le n-2$, and let $h_1'$ be a slide of $h_1$ over $h_2$ (the slid handle attached to $M$ by the band move). Then $W\\cup_{f_1}h_1\\cup_{f_2}h_2$ and $W\\cup_{f_1'}h_1'\\cup_{f_2}h_2$ are diffeomorphic relative to $\\partial_0W$; more precisely there is a diffeomorphism supported in a neighbourhood of the two handles and the band region carrying the first presentation to the second. Consequently a handle slide does not change the diffeomorphism type of the presented manifold and may be performed on any of two equal-index handles.",
+        "strategy": "Follow Wall's proof of the Handle Addition Theorem 5.4.5. The attaching embedding $f_1$ is deformed by a diffeotopy of $\\partial_+(W\\cup h_2)$ supported near the core disc of $h_2$: the attaching sphere is dragged across the core disc and the framing is carried along; the endpoint of the drag is a band move along a pushoff of the other attaching sphere, i.e. the slide. Since the handle is attached after the other, isotopy invariance of attachments gives $W\\cup h_2\\cup h_1\\cong W\\cup h_2\\cup h_1'$, and equal-index handles may be reordered to return to the order $(h_1',h_2)$, all relative to $\\partial_0W$. The band construction of the slide definition is exactly the local picture of the diffeotopy, so the two descriptions agree. Countable Choice is inherited from the isotopy and band suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-handle-slides-act-by-elementary-basis-change-on-handle-chains",
+        "kind": "lemma",
+        "title": "Handle slides act by elementary basis change on handle chains",
+        "deps": [
+          "def-handle-slide-of-one-k-handle-over-another",
+          "lem-handle-slides-preserve-the-relative-diffeomorphism-type",
+          "lem-a-handle-decomposition-gives-a-relative-cw-complex",
+          "thm-relative-homology-of-consecutive-cw-skeleta",
+          "cor-relative-homology-of-a-single-handle-pair",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $W$ have a handle presentation in which all handles of index $\\le k-1$ precede the $k$-handles, and let $h_1,h_2$ be two $k$-handles with a slide datum. Then the relative homology group $H_k(W^k,W^{k-1};\\mathbb Z)$ is free with basis the relative fundamental classes $[C_j]$ of the handle cores, and the core $C_1'$ of the slid handle satisfies $[C_1']=[C_1]\\pm[C_2]$; the sign is determined by the orientations of the framings and the slide path. With respect to the handle basis, a slide therefore acts on the $k$-th handle chain group by the elementary basis change $e_1\\mapsto e_1\\pm e_2$ (and correspondingly for the slid second handle).",
+        "strategy": "The handle filtration gives a relative CW pair with one $k$-cell per $k$-handle, so the relative homology of consecutive skeleta is free on the handle cores. The slid core is the union of the band, the complement of the end disc in the old core, and the corresponding part of a pushoff of the other core; comparing it with $C_1\\mp C_2$ exhibits the difference as the boundary of the band disc relative to $W^{k-1}$, hence the class identity. This is Wall's bookkeeping in the proof of Theorem 5.4.5 (the classes of the handles in $H_k$ change by $\\eta+\\varepsilon\\xi$) and the standard chain-level interpretation. Countable Choice is inherited from the in-run handle-decomposition suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "def-attaching-belt-intersection-matrix-of-adjacent-index-handles",
+        "kind": "definition",
+        "title": "Attaching-belt intersection matrix of adjacent-index handles",
+        "deps": [
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-handle-decomposition-relative-to-the-incoming-boundary",
+          "def-transverse-complementary-dimensional-intersection-set",
+          "lem-compact-transverse-complementary-intersections-are-finite",
+          "def-oriented-intersection-number",
+          "def-mod-two-intersection-number",
+          "def-local-oriented-intersection-sign",
+          "def-induced-boundary-orientation",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $W$ be a compact smooth $n$-manifold with collared boundary, let $1\\le k\\le n-2$, and let an index-ordered presentation attach $k$-handles $e_1,\\dots,e_m$ to a connected outgoing boundary $M$, then attach $(k+1)$-handles $g_1,\\dots,g_\\ell$ to the middle boundary $N=\\partial_+(W\\cup e_1\\cup\\cdots\\cup e_m)$. Suppose every attaching sphere $A_i=g_i(S^k\\times\\{0\\})$ meets every belt sphere $B_j$ of $e_j$ transversely. If $W$ is oriented and the spheres carry the orientations induced by the handle framings and the induced boundary orientation of $N$, put $M_{ij}=I(A_i,B_j)\\in\\mathbb Z$, the oriented intersection number. Without orientations put $M_{ij}\\in\\mathbb Z_2$, the mod-2 intersection number. The resulting $\\ell\\times m$ matrix is the **attaching-belt intersection matrix** of the adjacent-index handles. If a pair is not transverse the matrix is defined only after an arbitrarily small isotopy of the attaching data; by isotopy invariance this does not change the presented manifold, but the entries may depend on the chosen isotopy, so the matrix is used on this page only for configurations already transverse.\n\nThe matrix depends on the chosen index-ordered presentation, on the framings and orientations of the handles, and — through the isotopy used to reach a transverse configuration — on that isotopy. For $k=n-1$ the roles of the two families degenerate and the matrix is not defined here: the definition is restricted to the middle range $1\\le k\\le n-2$, and the endpoint indices $k=0$ and $k=n-1$ are treated separately. When every pair is transverse the entries are finite sums of local signs by [[lem-compact-transverse-complementary-intersections-are-finite]], and the fixed-transverse entries are choice-free; Countable Choice is inherited only from the published intersection-number definitions cited above.",
+        "strategy": "Definition. The middle boundary is a closed smooth manifold, the two families of spheres have complementary dimensions $k$ and $n-k-1$ summing to $\\dim N=n-1$, and transverse intersections are finite by compactness, so the oriented or mod-2 intersection number is defined and finite. The orientations of the attaching and belt spheres come from the handle coordinates and the framing data of the attachment; the ambient orientation is the induced boundary orientation of the stage. Countable Choice is inherited from the published intersection-number definitions, which select transverse representatives for the homotopy-invariant extension; the fixed-transverse-case entries themselves are choice-free.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow), §§4--6, printed pp. 37--78, with §5 pp. 45--66 read in full",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-geometric-cancellation-is-a-unit-entry-in-the-handle-matrix",
+        "kind": "lemma",
+        "title": "Geometric cancellation is a unit entry in the handle matrix",
+        "deps": [
+          "def-attaching-belt-intersection-matrix-of-adjacent-index-handles",
+          "def-local-oriented-intersection-sign",
+          "def-oriented-intersection-number",
+          "def-mod-two-intersection-number",
+          "cor-oriented-intersection-reduces-to-mod-two-intersection",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. In the situation of the matrix definition, suppose the attaching sphere $A_i$ of the $(k+1)$-handle $g_i$ meets the belt sphere $B_j$ of the $k$-handle $e_j$ transversely in exactly one point. Then the oriented entry is $M_{ij}=\\pm1$, equal to the local intersection sign of that point; in particular a geometrically cancelling pair has a unit entry in $\\mathbb Z$. Without orientations the mod-2 entry is $1\\in\\mathbb Z_2$, also a unit.",
+        "strategy": "The oriented intersection number is the sum of the local signs over the finite transverse intersection set; with exactly one point the sum is the single local sign, which is $\\pm1$ by definition. Reducing mod 2 sends the unique point to $1$. No other entry is affected.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow), §§4--6, printed pp. 37--78, with §5 pp. 45--66 read in full",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "prop-elementary-matrix-operations-are-realized-by-handle-slides",
+        "kind": "proposition",
+        "title": "Elementary matrix operations are realized by handle slides",
+        "deps": [
+          "def-attaching-belt-intersection-matrix-of-adjacent-index-handles",
+          "lem-handle-slides-preserve-the-relative-diffeomorphism-type",
+          "lem-handle-slides-act-by-elementary-basis-change-on-handle-chains",
+          "thm-oriented-intersection-number-is-homotopy-invariant",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $M$ be the attaching-belt intersection matrix of an index-ordered presentation with $1\\le k\\le n-2$. (i) If the $k$-handle $e_{j'}$ is replaced by its slide over $e_j$, then the new matrix is obtained from the old by the elementary column operation $C_{j'}\\mapsto C_{j'}\\pm C_j$, all other columns unchanged. (ii) If in addition $k+1\\le n-2$ and the $(k+1)$-handle $g_{i'}$ is replaced by its slide over $g_i$, then the new matrix is obtained by the elementary row operation $R_{i'}\\mapsto R_{i'}\\pm R_i$, all other rows unchanged. (iii) Reorienting the core of a handle or its cocore multiplies the corresponding row or column by $-1$. Consequently handle slides together with the orientation conventions realize the elementary row and column operations on the matrix; this proposition does not assert that an arbitrary matrix can be reduced to normal form by slides, which is the content of the later Whitney-trick and h-cobordism pages.",
+        "strategy": "For (i) and (ii) combine the slide lemma with the class-change lemma: replacing a handle by its slide changes the corresponding chain generator by adding $\\pm$ the other generator, and the matrix entries are computed by intersecting the fixed opposite family with the (isotoped) belt or attaching spheres. The diffeotopy of the attaching data sweeps the belt or attaching sphere across the other handle's core disc, and the change of each entry is the intersection number with that disc, equal to the entry against the other handle by homotopy invariance of the intersection number. (iii) is the definition of the orientations involved. Wall's Theorem 5.4.5 realizes the class change geometrically, and Lück's Isotopy Lemma 1.8 justifies comparing the two presentations. Countable Choice is inherited from the intersection-number and slide suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-algebraic-cancellation-does-not-yet-give-geometric-cancellation",
+        "kind": "lemma",
+        "title": "Algebraic cancellation does not yet give geometric cancellation",
+        "deps": [
+          "def-attaching-belt-intersection-matrix-of-adjacent-index-handles",
+          "lem-geometric-cancellation-is-a-unit-entry-in-the-handle-matrix",
+          "def-oriented-intersection-number",
+          "def-mod-two-intersection-number",
+          "def-local-oriented-intersection-sign",
+          "def-oriented-smooth-manifold-and-oriented-chart",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "lem-standard-complementary-pair-fills-an-n-ball",
+          "def-transverse-embedded-submanifolds",
+          "def-transverse-complementary-dimensional-intersection-set",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. The oriented intersection number does not determine the geometric intersection set: on the closed oriented $3$-manifold $N=S^2\\times S^1$ there are an embedded $2$-sphere $A$ and an embedded circle $B$, meeting transversely, with exactly three intersection points whose local signs are $+1,+1,-1$, so that $I(A,B)=1$ while the geometric intersection has three points. Consequently a unit entry of an attaching-belt intersection matrix does not by itself exhibit a geometrically cancelling pair: the single-point hypothesis of the cancellation theorem is strictly stronger than a unit or an odd algebraic count, and the reduction of the excess intersection pairs requires the ambient-isotopy input of the Whitney trick, which is not available on this page. The configuration is realized with $A$ the attaching sphere of a $3$-handle and $B$ the belt sphere of a $2$-handle in the middle boundary of the standard $4$-dimensional model $D^4\\cup h^2$.",
+        "strategy": "Start with the sphere $S^2\\times\\{u_0\\}$ and the circle $\\{p\\}\\times S^1$ in $N=S^2\\times S^1$; they meet once transversely, with local sign $+1$ after choosing the product orientations. Push a small disk of the sphere across the circle: the finger move creates one additional pair of transverse intersections whose local signs are opposite, leaving the orbit of the original point unchanged. The result is an embedded sphere $A$ meeting $B$ in three points with signs $+1,+1,-1$, and the oriented intersection number is still $1$. The handle realization uses the standard middle-boundary model of a $0$-framed $2$-handle attached to $D^4$ (a single index-$2$ critical point), whose outgoing boundary is $S^2\\times S^1$ with belt sphere the $S^1$ factor. Compare with the unit-entry lemma: the entry is $1$ but the geometric hypothesis of the cancellation theorem fails. Countable Choice is inherited from the intersection-number definitions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow), §§4--6, printed pp. 37--78, with §5 pp. 45--66 read in full",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "prop-morse-cancellation-criterion-via-a-unique-connecting-orbit",
+        "kind": "proposition",
+        "title": "Morse cancellation criterion via a unique connecting orbit",
+        "deps": [
+          "def-morse-function-adapted-to-a-cobordism",
+          "lem-spheres-of-adjacent-critical-levels-have-product-neighbourhoods",
+          "def-morse-trajectory-from-p-to-q",
+          "def-downward-gradient-like-vector-field",
+          "lem-local-morse-sublevel-pair-is-a-handle-pair",
+          "thm-regular-interval-diffeomorphism",
+          "thm-fundamental-theorem-on-flows",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $(W;M_0,M_1)$ be a compact collared triad with adapted excellent Morse function $f$ and adapted field $X$, and let $a<b$ be regular values such that the closed slab $K=f^{-1}[a,b]$ is compact and contains exactly two critical points $p,q$, of indices $k$ and $k+1$, with $a<f(p)<f(q)<b$ and $0\\le k\\le n-1$. Let $v\\in(f(p),f(q))$ be regular, let $B_p\\subset f^{-1}(v)$ be the stable sphere of $p$ and $A_q\\subset f^{-1}(v)$ the unstable sphere of $q$ of dimensions $n-k-1$ and $k$. If $A_q$ meets $B_p$ transversely in exactly one point, then $M_b$ is diffeomorphic to $M_a\\times[a,b]$ relative to $M_a$; equivalently the two critical points, and the $k$- and $(k+1)$-handles of the induced presentation, cancel, and the slab is a product. The hypothesis says exactly that there is a single transverse connecting orbit from $q$ to $p$ and no competing broken trajectory data in the slab.",
+        "strategy": "This is Milnor's First Cancellation Theorem 5.4 read in \\S5, pp. 45--66. The single transverse intersection point corresponds to exactly one trajectory from $q$ to $p$; the spheres and the trajectory correspondence are supplied by the in-run sphere lemma, which identifies $A_q\\cap B_p$ with trajectories whose limits lie in the two critical levels. Milnor's proof first adjusts the field near the trajectory so that a normal-form hypothesis (his 5.5, proved through Theorem 5.6) holds, then replaces the field on a small neighbourhood of the trajectory by a nowhere-zero field whose trajectories all run from the upper to the lower regular level, and finally constructs an adapted Morse function without critical points agreeing with $f$ near the faces; the regular-interval theorem converts the resulting flow into the product diffeomorphism. The local handle model supplies the identification with the induced handles. No Morse--Smale genericity theorem is used: transversality of the two spheres is a hypothesis here. Countable Choice is inherited from the adapted-field and regular-band suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow), §§4--6, printed pp. 37--78, with §5 pp. 45--66 read in full",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-cancellation-modification-can-be-supported-in-a-trajectory-neighbourhood",
+        "kind": "lemma",
+        "title": "The cancellation modification is supported in a trajectory neighbourhood",
+        "deps": [
+          "prop-morse-cancellation-criterion-via-a-unique-connecting-orbit",
+          "def-morse-function-adapted-to-a-cobordism",
+          "lem-adapted-descending-field-near-a-compact-morse-band",
+          "thm-regular-interval-diffeomorphism",
+          "thm-fundamental-theorem-on-flows",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. In the situation of the Morse cancellation criterion let $T$ be the unique trajectory from $q$ to $p$ and let $U$ be any open neighbourhood of $\\overline{T}\\cup\\{p,q\\}$ in the interior of the slab. Then the modification of the Morse data can be chosen supported in $U$: there are a smooth function $f'$ and a smooth field $X'$ on the slab, adapted for $(W;M_0,M_1)$, agreeing with $f$ and $X$ outside $U$ and near the two faces, such that $f'$ has no critical points in the slab, $X'$ is nowhere zero with $df'(X')<0$ off the critical set, and the product diffeomorphism of the criterion agrees with the flow of $X$ outside $U$. In particular no other critical point and no trajectory outside $U$ is affected, and the modification is relative to the incoming boundary.",
+        "strategy": "Milnor's proof of Theorem 5.4 produces the new field $\\xi'$ by altering the given gradient-like field on an arbitrarily small neighbourhood of the single trajectory $T$, with $\\xi'$ equal to a nowhere-zero field whose trajectories run from the upper to the lower level; the construction of his Theorem 5.6 (isotopy of the transverse sphere inside a prescribed neighbourhood, Lemmas 5.7--5.9) is supported exactly there. Gluing with a bump function on the slab and multiplying by a cutoff supported in $U$ preserves smoothness and adaptedness, because $U$ is contained in the interior of the slab and meets only the two critical points and $T$. The regular-interval theorem then identifies the modified slab with a product. Countable Choice is inherited from the adapted-field and regular-band suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow), §§4--6, printed pp. 37--78, with §5 pp. 45--66 read in full",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "rem-handle-slides-are-not-handle-cancellations",
+        "kind": "remark",
+        "title": "Handle slides are not handle cancellations",
+        "deps": [
+          "def-geometric-cancelling-handle-pair",
+          "thm-handle-cancellation",
+          "def-handle-slide-of-one-k-handle-over-another",
+          "lem-handle-slides-preserve-the-relative-diffeomorphism-type",
+          "lem-handle-slides-act-by-elementary-basis-change-on-handle-chains",
+          "cor-relative-homology-of-a-single-handle-pair"
+        ],
+        "statement": "A handle slide changes the attaching data of one handle and the handle-chain basis by an elementary operation, but it changes the number of handles of no index; a handle cancellation removes two handles of consecutive indices and decreases the handle counts in those two indices by one each. In particular a slide is not a cancellation, the algebraic effect of a slide (an elementary row or column operation on the intersection matrix) is not the removal of a unit entry from that matrix, and the two moves serve different purposes: slides perform basis changes, cancellation reduces the number of handles. Handles can never be removed one at a time, because the Euler characteristic of the pair is independent of the presentation.\n\nThis remark collects the definitions and lemmas of the page and states the contrast between the two moves, with no separate proof. The one-handle-at-a-time obstruction is the standard Euler-characteristic count: the relative Euler characteristic $\\chi(W,\\partial_0W)=\\sum_q(-1)^q p_q$ is computed from the number $p_q$ of $q$-handles and is independent of the presentation (the count is recorded in the discussion following [[cor-relative-homology-of-a-single-handle-pair]]), so removing a single handle would have to change $\\chi$ unless it is balanced by another handle of the opposite parity — which is exactly the cancellation of a consecutive pair, or more generally an algebraic relation between the handle counts. Slides change no count at all: they only replace one attaching embedding by another, so the handle numbers $p_q$ are literally the same. Thus a slide is a basis change and a cancellation is a reduction, and the algebraic effect of a slide on the intersection matrix (an elementary row or column operation) is a different operation from the removal of a unit entry.",
+        "strategy": "Remark collecting the definitions and lemmas of the page. No separate proof; the one-handle-at-a-time obstruction is the standard Euler-characteristic count of Lück's Lemma 1.12 discussion and of the published relative-homology computation for a single handle pair.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "rem-elementary-moves-do-not-constitute-full-cerf-theory-here",
+        "kind": "remark",
+        "title": "Elementary moves do not constitute full Cerf theory here",
+        "deps": [
+          "def-geometric-cancelling-handle-pair",
+          "thm-handle-cancellation",
+          "thm-creation-of-a-cancelling-handle-pair",
+          "def-handle-slide-of-one-k-handle-over-another",
+          "lem-handle-slides-preserve-the-relative-diffeomorphism-type",
+          "lem-algebraic-cancellation-does-not-yet-give-geometric-cancellation",
+          "prop-morse-cancellation-criterion-via-a-unique-connecting-orbit"
+        ],
+        "statement": "This page records only the elementary moves: introduction and cancellation of a complementary pair of consecutive indices (birth and death), handle slides (handle additions), and the elementary matrix operations they induce on the attaching-belt intersection matrix. It does not construct a one-parameter family of Morse functions, does not assert that any two Morse functions or handle presentations of a cobordism are connected by finitely many of these moves, and does not develop Cerf theory, pseudo-isotopy or the classification of one-parameter families. The removal of excess geometric intersections by ambient isotopy (the Whitney trick) is likewise not available here: the cancellation theorem is proved only under its exact single-transverse-intersection hypothesis.\n\nThis remark fixes the proof boundary of the page and is not an existence or classification statement, with no separate proof. The excess-intersection step is deferred, as recorded in the coverage of this pair, to [[the-whitney-trick-and-surgery-below-the-middle-dimension]], because the cancellation theorem and its local model are proved here only under the exact single-transverse-intersection hypothesis.",
+        "strategy": "Remark fixing the proof boundary of the page. No separate proof; the scope statements follow from the inventory of this page and the deferrals recorded in its coverage notes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow), §§4--6, printed pp. 37--78, with §5 pp. 45--66 read in full",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 9,
+        "forward_refs": [
+          "thm-high-dimensional-whitney-trick"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 534,
+    "id": "handle-cancellation-slides-and-elementary-moves-examples",
+    "kind": "B",
+    "category": "differential-topology",
+    "title": "Handle Cancellation Slides and Elementary Moves — Examples",
+    "companion": "handle-cancellation-slides-and-elementary-moves",
+    "requires": [
+      "handle-cancellation-slides-and-elementary-moves"
+    ],
+    "items": [
+      {
+        "id": "ex-cancelling-zero-one-handle-pair",
+        "kind": "example",
+        "title": "A cancelling zero-one handle pair",
+        "deps": [
+          "def-geometric-cancelling-handle-pair",
+          "thm-handle-cancellation",
+          "lem-standard-complementary-pair-fills-an-n-ball",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-countable-choice"
+        ],
+        "statement": "In dimension $n\\ge1$ attach a $0$-handle $h^0$ to a compact manifold $W$ as a disjoint ball $D^n$ and then attach a $1$-handle $h^1$ by an embedding $S^0\\times D^{n-1}\\to\\partial_+(W\\sqcup D^n)$ whose attaching $0$-sphere consists of one point on the new boundary sphere $S^{n-1}$ of $h^0$ (its belt sphere) and one point on $\\partial_+W$. In the endpoint convention of the definition the pair is geometrically cancelling, exactly one point of the $0$-sphere lying in the belt sphere with transversality automatic, and $W\\sqcup D^n\\cup h^1\\cong W$ relative to $\\partial_-W$. The local model is the identity $(S^0\\times D^n)\\cup h^1\\cong D^n$: two $n$-balls joined by a $1$-handle are one $n$-ball.",
+        "strategy": "Apply the standard complementary pair lemma at $k=0$, which is Wall's Lemma 5.4.2 in the case $r=0$, and then the cancellation theorem. The example checks the endpoint conventions: the belt sphere of a $0$-handle is a whole boundary component, so \"one point\" counts the points of the attaching $0$-sphere that lie in it, and the union is a boundary connected sum with a disc, which is $W$ again. The matrix definition of this page is stated for $1\\le k\\le n-2$, so the endpoint case is handled directly by the geometric criterion.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-cancelling-one-two-handle-pair-on-a-surface",
+        "kind": "example",
+        "title": "A cancelling one-two handle pair on a surface",
+        "deps": [
+          "def-geometric-cancelling-handle-pair",
+          "lem-one-intersection-gives-the-standard-local-cancelling-model",
+          "thm-handle-cancellation",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-local-oriented-intersection-sign",
+          "def-mod-two-intersection-number",
+          "def-countable-choice"
+        ],
+        "statement": "In dimension $n=2$ start with a closed disc $D^2$ (a $0$-handle) and attach a $1$-handle (a band) along two disjoint intervals of $\\partial D^2$; the result is an annulus whose two boundary circles each contain exactly one point of the belt sphere $S^0$ of the band. Attach a $2$-handle (a disc) along one boundary circle. Then the attaching sphere of the $2$-handle meets the belt sphere of the $1$-handle in exactly one point, the pair is geometrically cancelling, and $D^2\\cup h^1\\cup h^2\\cong D^2$. The transverse count of the unique intersection point is $1$ mod $2$ and has local sign $\\pm1$; the matrix definition of this page is stated for $1\\le k\\le n-2$ and does not cover the endpoint case $n=2$, which is handled here directly by the geometric criterion.",
+        "strategy": "Draw the annulus and its two boundary circles: the belt sphere of the $1$-handle consists of the two points where the core of the band meets its end arcs, one on each boundary circle. The $2$-handle attaches along a boundary circle, meeting exactly one belt point; a $0$-dimensional and a $1$-dimensional submanifold of a $1$-manifold meet transversely in isolated points automatically. Apply the cancellation theorem and compute the entry by the local-sign and mod-2 conventions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow), §§4--6, printed pp. 37--78, with §5 pp. 45--66 read in full",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-a-handle-slide-realizes-an-elementary-row-operation",
+        "kind": "example",
+        "title": "A handle slide realizes an elementary row operation",
+        "deps": [
+          "def-handle-slide-of-one-k-handle-over-another",
+          "lem-handle-slides-preserve-the-relative-diffeomorphism-type",
+          "lem-handle-slides-act-by-elementary-basis-change-on-handle-chains",
+          "def-attaching-belt-intersection-matrix-of-adjacent-index-handles",
+          "prop-elementary-matrix-operations-are-realized-by-handle-slides",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "lem-standard-complementary-pair-fills-an-n-ball",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-local-oriented-intersection-sign",
+          "def-mod-two-intersection-number",
+          "def-oriented-intersection-number",
+          "def-countable-choice"
+        ],
+        "statement": "In dimension $n=4$ start from the $0$-handle $D^4$ and attach the standard $1$-handle $h^1$ along the equatorial embedding, so that $D^4\\cup h^1\\cong S^1\\times D^3$ and the middle boundary is $N=\\partial_+(D^4\\cup h^1)\\cong S^1\\times S^2$ with belt sphere $B=\\{p\\}\\times S^2$ of $h^1$ a $2$-sphere. Attach two $2$-handles $g_1,g_2$ to $N$ along embedded circles $\\gamma_1,\\gamma_2\\subseteq N$ with disjoint images, chosen so that $\\gamma_1$ meets $B$ transversely in exactly one point and $\\gamma_2$ is disjoint from $B$. Indexing rows by the $2$-handles and the single column by the $1$-handle, the attaching-belt matrix is the column $(\\pm1,0)^T$ over $\\mathbb Z$ for suitable orientations, respectively $(1,0)^T$ over $\\mathbb Z_2$. Slide the $2$-handle $g_2$ over $g_1$. The total $4$-manifold is unchanged by the slide, while the same column becomes $(\\pm1,\\pm1)^T$ over $\\mathbb Z$, respectively $(1,1)^T$ over $\\mathbb Z_2$: exactly the elementary row operation $R_2\\mapsto R_2\\pm R_1$.",
+        "strategy": "Model $V$ as a $3$-ball with two bands; the belt sphere of a $1$-handle is the circle bounding its cocore disk, and the matrix entries are the intersection numbers of $\\gamma$ with those two circles, read from the picture. Perform the slide in the case $k=1$ of the definition (one foot of $h_2$ is moved along an arc to a foot of $h_1$), apply the slide lemmas, and recompute the intersections; the change of the second entry is the intersection with the swept core disc of $h_1$, i.e. the first entry, and the signs follow from the local sign convention. This exhibits the $k=1$, $n=3$ case of the matrix-operation proposition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            },
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 9
+      },
+      {
+        "id": "cex-algebraic-intersection-one-with-three-geometric-points",
+        "kind": "counterexample",
+        "title": "Algebraic intersection one with three geometric points",
+        "deps": [
+          "def-attaching-belt-intersection-matrix-of-adjacent-index-handles",
+          "lem-geometric-cancellation-is-a-unit-entry-in-the-handle-matrix",
+          "lem-algebraic-cancellation-does-not-yet-give-geometric-cancellation",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-oriented-intersection-number",
+          "def-local-oriented-intersection-sign",
+          "def-mod-two-intersection-number",
+          "thm-handle-cancellation",
+          "def-countable-choice"
+        ],
+        "statement": "In the standard $4$-dimensional model $W=D^4\\cup h^2$ whose middle boundary is $N\\cong S^2\\times S^1$ with belt sphere $B=\\{p\\}\\times S^1$ of the $2$-handle, let $A\\subset N$ be the $2$-sphere obtained from $S^2\\times\\{u_0\\}$ by a finger move across $B$. Then $A$ meets $B$ transversely in exactly three points with local signs $+1,+1,-1$; the oriented intersection number is $I(A,B)=1$ and the mod-2 number is $1$, while the attaching sphere $A$ and the belt sphere $B$ do not meet in one point. Hence the attached $3$-handle and the $2$-handle form a pair whose matrix entry is a unit but which is not geometrically cancelling: the cancellation theorem does not apply, and the removal of the extra pair of opposite intersections is the Whitney-trick step, deferred to a later page.",
+        "strategy": "Compute on $N=S^2\\times S^1$: the sphere $S^2\\times\\{u_0\\}$ meets $B$ once, transversely, and a finger move pushes a small disk of the sphere across $B$, creating one extra pair of transverse intersections with opposite local signs and changing nothing else. The local signs come from the product orientation of $N$; the oriented count is therefore $1$ and the geometric count is $3$. The middle-boundary model is the standard one-point index-$2$ handle attachment, whose outgoing boundary is $S^2\\times S^1$ with belt sphere the $S^1$ factor. Compare with the unit-entry lemma and the cancellation criterion: a unit entry does not supply a single geometric intersection point.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Milnor, Lectures on the h-Cobordism Theorem (notes by L. Siebenmann and J. Sondow), §§4--6, printed pp. 37--78, with §5 pp. 45--66 read in full",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/surgery/hcobord.pdf"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "cex-adjacent-index-handles-with-zero-intersection-do-not-cancel",
+        "kind": "counterexample",
+        "title": "Adjacent-index handles with zero intersection do not cancel",
+        "deps": [
+          "def-geometric-cancelling-handle-pair",
+          "thm-handle-cancellation",
+          "def-attaching-belt-intersection-matrix-of-adjacent-index-handles",
+          "lem-geometric-cancellation-is-a-unit-entry-in-the-handle-matrix",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "cor-one-critical-point-cell-attachment-homotopy-type",
+          "def-countable-choice"
+        ],
+        "statement": "In dimension $n=3$ start from $W_0=D^3$, attach a $1$-handle $h^1$ along two disks of $\\partial D^3$, so that $W_1=D^3\\cup h^1\\cong S^1\\times D^2$ is a solid torus, and attach a $2$-handle $h^2$ along an embedded circle $\\gamma\\subset\\partial W_1$ that bounds a closed disk in $\\partial W_1$ disjoint from the belt sphere $S^1$ of $h^1$; such a circle is disjoint from the belt sphere, so the matrix entry is $0$ over both $\\mathbb Z$ and $\\mathbb Z_2$. Then the pair $(h^1,h^2)$ is not geometrically cancelling and does not cancel: $W_1\\cup h^2$ has fundamental group $\\mathbb Z$, because the attaching circle is null-homotopic in the solid torus and the relation it adds is trivial, while $W_0=D^3$ is simply connected. Hence no diffeomorphism relative to the lower stage removes the pair.",
+        "strategy": "Model $W_1$ as the solid torus and $\\gamma$ as a meridian, parallel to and disjoint from the belt sphere of the $1$-handle. Attaching the $2$-handle along a null-homotopic circle replaces the attachment relative to $W_1$ by the attachment of a $2$-cell along a null-homotopic map, so it adds a trivial relation to $\\pi_1$; the published one-critical-point cell-attachment computation gives $\\pi_1(W_1\\cup h^2)\\cong\\pi_1(W_1)\\cong\\mathbb Z$. Since $\\pi_1(D^3)=1$, the total is not diffeomorphic to $W_0$ relative to the lower stage, even though the algebraic and geometric intersection counts are zero. This shows that the one-point criterion cannot be replaced by a count-only condition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Lück, A Basic Introduction to Surgery Theory, Ch. 1 §§1.1--1.3, printed pp. 4--17 (Lemmas 1.7--1.13, 1.16)",
+              "url": "https://him-lueck.uni-bonn.de/data/ictp.pdf"
+            },
+            {
+              "title": "C. T. C. Wall, Differential Topology (Cambridge Studies in Advanced Mathematics 156), §5.4, printed pp. 143--148, and Lemma 4.8.1, §4.8, printed pp. 122--125",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 8
+      }
+    ]
+  }
+]

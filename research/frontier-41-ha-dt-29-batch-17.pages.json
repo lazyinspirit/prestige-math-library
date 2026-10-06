@@ -1,0 +1,1482 @@
+[
+  {
+    "order": 565,
+    "id": "formal-immersions-and-the-smale-hirsch-theorem",
+    "kind": "A",
+    "category": "differential-topology",
+    "title": "Formal Immersions and the Smale Hirsch Theorem",
+    "companion": "formal-immersions-and-the-smale-hirsch-theorem-examples",
+    "requires": [
+      "morse-functions-critical-values-and-genericity",
+      "sublevel-deformation-and-the-handle-attachment-theorem",
+      "handle-decompositions-duality-and-rearrangement",
+      "smooth-vector-bundles-and-sections",
+      "sard-theorem-and-transversality",
+      "whitney-embedding-tubular-neighbourhoods-and-approximation",
+      "obstruction-theory-postnikov-towers-and-classifying-spaces",
+      "topological-vector-bundles-and-grassmannian-classification",
+      "leray-hirsch-thom-isomorphism-and-gysin-sequences",
+      "direct-matrix-factorisations-lu-cholesky-and-qr",
+      "tangent-cotangent-and-the-differential"
+    ],
+    "items": [
+      {
+        "id": "def-formal-immersion-between-smooth-manifolds",
+        "kind": "definition",
+        "title": "Formal immersion between smooth manifolds",
+        "deps": [
+          "def-smooth-manifold",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-tangent-bundle-as-a-disjoint-union",
+          "def-differential-of-a-smooth-map",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-vector-bundle-map-over-a-smooth-base-map",
+          "def-immersion-submersion-and-constant-rank-map",
+          "thm-the-global-differential-of-a-smooth-map-is-smooth",
+          "def-countable-choice",
+          "thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure",
+          "def-induced-tangent-bundle-chart",
+          "lem-tangent-bundle-chart-transitions-are-smooth-with-smooth-inverses"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ for the smooth tangent-bundle constructions. Let $M^m$ and $N^n$ be smooth manifolds, with their canonical smooth tangent bundles ([[thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure]], [[def-induced-tangent-bundle-chart]], [[lem-tangent-bundle-chart-transitions-are-smooth-with-smooth-inverses]]) and smooth global differential ([[thm-the-global-differential-of-a-smooth-map-is-smooth]]). A **formal immersion** from $M$ to $N$ is a pair $(f,F)$ in which $f:M\\to N$ is a smooth map and $F:TM\\to TN$ is a smooth bundle map over $f$, meaning $\\pi_N\\circ F=f\\circ\\pi_M$ where $\\pi_M,\\pi_N$ are the bundle projections, and $F_x:=F|_{T_xM}:T_xM\\to T_{f(x)}N$ is injective for every $x\\in M$. The pair is a formal immersion of rank $m$ into rank $n$, so, when $M$ is nonempty, necessarily $m\\le n$; equality of ranks is allowed and makes each $F_x$ a linear isomorphism. A smooth map $f$ is an immersion exactly when $(f,df)$ is a formal immersion; no orientation, metric, framing or properness is part of the datum. If $M$ is empty the unique pair satisfies the fibre condition vacuously, irrespective of the dimensions.",
+        "strategy": "Definition. It records the homotopy-theoretic datum of immersion theory, using the published tangent bundle, differential and bundle-map items. The fibrewise injectivity condition is a pointwise condition on a smooth bundle map. Nothing is proved.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+        "kind": "definition",
+        "title": "The weak compact-open C-infinity topology on mapping spaces",
+        "deps": [
+          "def-smooth-manifold",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-topology-basis-subbasis",
+          "def-continuous-map-top",
+          "def-compact-open-topology",
+          "def-metrizable-space",
+          "def-compact-space",
+          "thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure",
+          "def-countable-choice"
+        ],
+        "statement": "Let $M$ and $Q$ be smooth manifolds with $M$ second countable (all smooth manifolds here are Hausdorff and second countable). The **weak (compact-open) $C^\\infty$ topology** on $C^\\infty(M,Q)$ is generated by the following subbasis. A basic set is determined by finitely many data: charts $(U_i,\\varphi_i)$ of $M$ and $(V_i,\\psi_i)$ of $Q$, compact sets $K_i\\subseteq U_i$ with $f(K_i)\\subseteq V_i$ for the reference map $f$, an integer $r_i\\ge0$ and a tolerance $\\varepsilon_i>0$; it consists of all smooth $g:M\\to Q$ with $g(K_i)\\subseteq V_i$ and $$\\max_{|\\alpha|\\le r_i}\\ \\sup_{x\\in\\varphi_i(K_i)}\\bigl|D^\\alpha(\\psi_i\\circ g\\circ\\varphi_i^{-1})(x)-D^\\alpha(\\psi_i\\circ f\\circ\\varphi_i^{-1})(x)\\bigr|<\\varepsilon_i $$ for every $i$. The weak topology is the topology generated by all these basic sets, as the reference map $f$ and the finitely many data vary; at each point of a finite intersection, shrinking the tolerances around that point gives a basic neighbourhood contained in the intersection, so these sets form a basis. Empty compact pieces impose no condition and are omitted from the displayed supremum. This is the only topology on $C^\\infty(M,Q)$ used on this page. It does not depend on the chosen atlases of $M$ and $Q$ ([[lem-the-weak-smooth-topology-is-independent-of-the-chosen-atlas]]), and for compact $M$ the immersion condition is open in it ([[lem-the-immersion-condition-is-open-in-the-weak-topology-for-compact-sources]]). Under $\\mathrm{AC}_\\omega$ the same construction applies to the total spaces $TM$ and $TN$, with their canonical smooth structures ([[thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure]]).",
+        "strategy": "Definition. It fixes one topology, as required by the design amendment: the weak compact-open $C^\\infty$ topology, under which the Smale–Hirsch map is a weak homotopy equivalence. Well-definedness (independence of the charts and of the enumeration) is the next lemma. No smoothness, completeness or Baire property is claimed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            },
+            {
+              "title": "Janek Wilhelm, The Smale–Hirsch Immersion Theorem and other Applications to Closed Manifolds, §§1–2, PDF pp. 1–3 (Theorem 1, relative parametric C⁰-dense h-principle for immersions with q > n; microextension and local h-principle 8.3.1)",
+              "url": "https://www2.mathematik.hu-berlin.de/~wendl/Sommer2025/hPrinzip/20250530_Wilhelm.pdf"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-the-weak-smooth-topology-is-independent-of-the-chosen-atlas"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-the-weak-smooth-topology-is-independent-of-the-chosen-atlas",
+        "kind": "lemma",
+        "title": "The weak smooth topology is independent of the chosen atlas",
+        "deps": [
+          "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+          "def-smooth-manifold",
+          "def-compact-space",
+          "thm-chain-rule-for-differentials-of-smooth-maps",
+          "thm-heine-cantor-metric",
+          "thm-compactness-agrees-with-metric-compactness",
+          "lem-coordinate-balls-form-a-basis-of-a-topological-manifold",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "thm-extreme-value-metric"
+        ],
+        "statement": "The weak compact-open $C^\\infty$ topology on $C^\\infty(M,Q)$ is independent of the atlases of the fixed smooth structures used to describe it. In particular any supplied countable locally finite smooth atlas suffices. It is the initial topology for restriction of all jets to compact subsets of $M$: on an arbitrary compact $K$, restriction retains every coordinate derivative of every order, not merely the values of the map on $K$. Thus two smooth maps agreeing on $K$ but having different derivatives there have different restricted jet data.",
+        "strategy": "A basic set for one atlas is a basic set for any finer atlas: a compact set meeting finitely many chart domains is covered by finitely many charts of the finer atlas, and the two finitely many derivative conditions are comparable by the chain rule on the overlaps, with the comparison constants finite by compactness and the Heine–Cantor theorem. Conversely every basic set of the finer atlas is open for the coarser one by the same argument on a finite cover of each compact chart piece. Finiteness of the comparison over each $K_i$ is where compactness enters.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-space-of-immersions-and-space-of-formal-immersions",
+        "kind": "definition",
+        "title": "Space of immersions and space of formal immersions",
+        "deps": [
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-smooth-manifold",
+          "def-product-topology",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the canonical smooth tangent bundles and the weak topology on their total spaces. For smooth manifolds $M^m,N^n$ with $m\\le n$, let $\\operatorname{Imm}(M,N)\\subseteq C^\\infty(M,N)$ be the set of immersions and let $\\operatorname{FImm}(M,N)\\subseteq C^\\infty(M,N)\\times C^\\infty(TM,TN)$ be the set of formal immersions $(f,F)$. Both carry the subspace topology inherited from the weak compact-open $C^\\infty$ topologies on $C^\\infty(M,N)$ and $C^\\infty(TM,TN)$ defined above (for $\\operatorname{FImm}$ the product topology). The projection $\\operatorname{FImm}(M,N)\\to C^\\infty(M,N)$, $(f,F)\\mapsto f$, is continuous and its image contains $\\operatorname{Imm}(M,N)$ under $f\\mapsto(f,df)$. The formal-immersion space fibres over $C^\\infty(M,N)$ with fibre over $f$ the set of injective smooth bundle maps $TM\\to f^*TN$; this description is recorded but the fibre structure is not used until the normal-bundle items.",
+        "strategy": "Definition. It fixes the two spaces and their topologies; only the weak compact-open topology is used, so all statements below are statements about that topology. Nothing is proved.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-joint-jet-continuity-and-the-weak-smooth-topology",
+        "kind": "lemma",
+        "title": "Joint jet continuity characterises the weak smooth topology",
+        "deps": [
+          "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "thm-the-exponential-law",
+          "def-compact-open-topology",
+          "def-smooth-manifold",
+          "def-compact-space",
+          "thm-compactness-agrees-with-metric-compactness",
+          "lem-continuity-is-local-and-pastes",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "lem-coordinate-balls-form-a-basis-of-a-topological-manifold"
+        ],
+        "statement": "Let $P$ be a topological space, let $M,Q$ be smooth manifolds, and let $\\Phi:P\\to C^\\infty(M,Q)$ be a map with adjoint $\\varphi:P\\times M\\to Q$, $\\varphi(p,x):=\\Phi(p)(x)$ ([[thm-the-exponential-law]], [[def-compact-open-topology]]). Then:\n\n(i) if $\\Phi$ is continuous for the weak compact-open $C^\\infty$ topology, then for every chart $(U,\\alpha)$ of $M$, every compact $K\\subseteq U$, every chart $(V,\\beta)$ of $Q$ and every $p_0\\in P$ with $\\Phi(p_0)(K)\\subseteq V$ there are a neighbourhood $W$ of $p_0$ with $\\Phi(W)(K)\\subseteq V$ and, for every multi-index $\\gamma$, a continuous function $(p,x)\\mapsto D^\\gamma(\\beta\\circ\\Phi(p)\\circ\\alpha^{-1})(\\alpha(x))$ on $W\\times K$;\n\n(ii) conversely, if $P$ is a smooth manifold and the adjoint $\\varphi$ is smooth, then $\\Phi$ is continuous for the weak $C^\\infty$ topology; more generally, if the adjoint $\\varphi$ is continuous and the local jet functions of (i) are jointly continuous near every point at which they are defined, then $\\Phi$ is continuous.",
+        "strategy": "Both directions are bookkeeping with the definition of the weak topology: basic sets constrain finitely many derivatives on finitely many compact pieces, so continuity gives joint continuity of the jets by a triangle inequality with a fixed smooth map; conversely a compactness (tube-lemma) argument upgrades joint jet continuity to membership in every basic set.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: the flexible-sheaf discussion and the compact-open C^infinity topology",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "Morris W. Hirsch, Differential Topology, Ch. 2 §1, pp. 34–36 (the weak and strong C^r topologies and their chartwise description)",
+              "url": "https://people.dm.unipi.it/benedett/HIRSCH.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-the-immersion-condition-is-open-in-the-weak-topology-for-compact-sources",
+        "kind": "lemma",
+        "title": "For compact sources the immersion condition is open in the weak smooth topology",
+        "deps": [
+          "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-vector-bundle-map-over-a-smooth-base-map",
+          "prop-smoothness-of-a-bundle-map-is-equivalent-to-smooth-local-matrices",
+          "thm-extreme-value-metric",
+          "def-compact-space",
+          "def-smooth-manifold",
+          "lem-coordinate-balls-form-a-basis-of-a-topological-manifold",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "def-countable-choice"
+        ],
+        "statement": "Let $M$ be a compact smooth $m$-manifold and $N$ a smooth $n$-manifold. Then:\n\n(i) $\\operatorname{Imm}(M,N)$ is open in $C^\\infty(M,N)$ for the weak compact-open $C^\\infty$ topology;\n\n(ii) under $\\mathrm{AC}_\\omega$ for the canonical smooth tangent bundles and their total-space mapping topology, for every smooth $f:M\\to N$ the set of smooth bundle maps $F:TM\\to TN$ over $f$ with $F_x$ injective for every $x$ is open in the space of smooth bundle maps over $f$ with the subspace topology inherited from $C^\\infty(TM,TN)$; equivalently $\\operatorname{FImm}(M,N)$ is open in the subspace of $C^\\infty(M,N)\\times C^\\infty(TM,TN)$ consisting of pairs with a bundle-map second component over the first.\n\nThe compactness of $M$ is essential: the condition is imposed at every point, and only a compact source lets one control all of $M$ by finitely many compact chart pieces.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** A compact smooth $m$-manifold $M$, a smooth $n$-manifold $N$, and $\\mathrm{AC}_\\omega$ for the tangent-bundle topology ([[def-countable-choice]]). The genuine and formal loci are examined at separate arbitrary points.\n\n[F1] Basic open sets of the weak compact-open $C^\\infty$ topology on $C^\\infty(M,N)$ are determined by finitely many charts $(U_i,\\varphi_i)$ of $M$, $(V_i,\\psi_i)$ of $N$, compact sets $K_i\\subseteq U_i$, integers $r_i\\ge0$ and tolerances $\\varepsilon_i>0$; the same construction applies to $C^\\infty(TM,TN)$ ([[def-weak-compact-open-smooth-topology-on-mapping-spaces]]).\n\n[L1] A smooth map $g$ is an immersion exactly when $\\operatorname{rank}dg_x=m$ at every $x$, i.e. some $m\\times m$ minor of the Jacobian in any chart pair is nonzero ([[def-immersion-submersion-and-constant-rank-map]]).\n\n[L2] In local trivializations of $TM$ and $TN$ a bundle map over $f$ is given by a smooth matrix function on the source chart, and smoothness of the bundle map is equivalent to smoothness of these local matrices ([[prop-smoothness-of-a-bundle-map-is-equivalent-to-smooth-local-matrices]], [[def-vector-bundle-map-over-a-smooth-base-map]]).\n\n[L3] A continuous real-valued function on a nonempty compact metric space attains a minimum, so a continuous strictly positive function has a positive minimum ([[thm-extreme-value-metric]], [[def-compact-space]]); a compact manifold is covered by finitely many small compact chart pieces lying inside prescribed chart domains ([[lem-coordinate-balls-form-a-basis-of-a-topological-manifold]], [[lem-compactness-of-a-subspace-is-ambient]]).\n\n## Proof\n\n**Proof technique:** direct.\n\n1.1 Empty $M$ and $m=0$ have automatic injectivity; if $M$ is nonempty and $m>n$, both loci are empty and open. For (i) in the remaining case, fix an arbitrary immersion $f:M\\to N$. Around each source point take a source chart mapped by $f$ into a target chart, and a smaller compact coordinate ball whose interior contains that point. Compactness selects finitely many such pieces $K_i\\subset U_i$ covering $M$, with $f(U_i)\\subset V_i$. Write $J_i(x)=D(\\psi_i\\circ f\\circ\\varphi_i^{-1})(\\varphi_i(x))$; its entries are continuous and bounded on $K_i$. [F1, L1, L3, given, construct]\n\n2.1 For each $i$ and $x\\in K_i$ some $m\\times m$ minor of $J_i(x)$ is nonzero by [L1], so the maximum $\\delta_i(x)$ of the absolute determinants of the finitely many minors is a continuous strictly positive function on $K_i$; by [L3] it has a positive minimum $c_i$. Let $B_i\\ge1$ bound the absolute values of all entries of $J_i$ on $K_i$. The determinant of an $m\\times m$ matrix is a polynomial in the entries, so there is $\\eta_i>0$, depending only on $m$, $B_i$, $c_i$, such that any matrix $J'$ with $|J'-J_i(x)|<\\eta_i$ entrywise satisfies $|\\det J'-\\det J_i(x)|<c_i/2$ for the maximizing minor, hence has a nonzero $m\\times m$ minor. Choosing the finitely many $\\eta_i$ uses no choice, and may be taken in the form $2^{-k}$ with the least suitable $k$. [L1, L3, step 1.1, algebra, choose]\n\n3.1 Let $\\mathcal U$ be the basic weak open set of maps $g:M\\to N$ determined by the data $(U_i,\\varphi_i)$, $(V_i,\\psi_i)$, $K_i$, $r_i=1$, $\\varepsilon_i=\\eta_i$. Its definition constrains the partial derivatives of first order of $\\psi_i\\circ g\\circ\\varphi_i^{-1}$ on $\\varphi_i(K_i)$ to differ from those of $f$ by less than $\\eta_i$; in particular every entry of the Jacobian of $g$ differs from the corresponding entry of $J_i$ by less than $\\eta_i$ at every point of $K_i$. By step 2.1 every such $g$ has rank $m$ at every point of $M$, so by [L1] every $g\\in\\mathcal U$ is an immersion. Hence $\\operatorname{Imm}(M,N)$ contains the basic neighbourhood $\\mathcal U$ of $f$ and is open. [F1, L1, step 2.1, algebra]\n\n4.1 For (ii), independently fix an arbitrary fibrewise injective pair $(f,F)$, whose base map need not be an immersion. Choose compact pieces $K_i$ and induced bundle charts over source and target chart domains. In such charts a bundle map has the form $(x,v)\\mapsto(g(x),A_i(x)v)$. The compact set of vectors $(x,e_j)$ with $x\\in K_i$, $1\\le j\\le m$, is a valid compact test set in $TM$; zeroth-order control of the images of these vectors controls every column of $A_i$. Zeroth-order control of $g$ keeps these images in the same target bundle chart. Each matrix $A_i$ has rank $m$ by the injectivity of $F$, so its own maximum of absolute $m$-minors has a positive minimum on $K_i$. Apply the polynomial determinant estimate of step 2.1 to these matrices, independently of $df$. This gives a neighbourhood of the pair $(f,F)$, among all bundle-map pairs, on which all fibre maps remain injective. Restricting that neighbourhood to the fixed-base fibre proves its openness as well. [F1, L2, step 2.1, construct] ∎\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Differential Topology, Ch. 2 §1, pp. 34–36 (the strong C^r and C^infinity topologies; openness of the immersion condition) and Ch. 2 §3",
+              "url": "https://people.dm.unipi.it/benedett/HIRSCH.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 and the flexible-sheaf discussion",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-compact-parameter-pair",
+        "kind": "definition",
+        "title": "Compact parameter pairs and relative families",
+        "deps": [
+          "def-countable-choice",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-smooth-manifold",
+          "def-compact-space",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "def-homotopy-relative-and-path-homotopy",
+          "thm-the-exponential-law",
+          "def-compact-open-topology"
+        ],
+        "statement": "A **compact parameter pair** is a pair $(P,Q)$ in which $P=P_0\\times[0,1]^d$, where $P_0$ is a compact smooth manifold without boundary (possibly empty) and $d\\ge0$, and $Q\\subseteq P$ is closed (possibly empty); $P$ is the **parameter manifold** and $Q$ the **relative parameter set**. Smoothness in the interval coordinates means local smooth extendibility to open Euclidean neighbourhoods, including at corners. This class contains spheres, cubes and intervals and is closed under products with $[0,1]$, so it also contains the homotopy parameters used below. The smoothing constructions extend the interval coordinates by clamping them before convolution; they do not require a tubular neighbourhood theorem for manifolds with corners.\n\nLet $M$ and $N$ be smooth manifolds and let $(P,Q)$ be a compact parameter pair.\n\nFor families and homotopies of formal immersions below, assume $\\dim M\\le\\dim N$, as required by the supplied immersion mapping spaces; the map-family clauses have no dimension restriction.\n\n- A **smooth $P$-family of maps $M\\to N$** is a smooth map $F:P\\times M\\to N$, with **slices** $F_p:=F(p,\\cdot)$; $F$ is also called the evaluation map of the family ([[def-smooth-family-of-maps-and-evaluation-map]]).\n- A **continuous $P$-family** is a continuous map $\\Phi:P\\to C^\\infty(M,N)$ for the weak compact-open $C^\\infty$ topology ([[def-weak-compact-open-smooth-topology-on-mapping-spaces]]). By the exponential law its **adjoint** $P\\times M\\to N$, $(p,x)\\mapsto\\Phi(p)(x)$, is continuous ([[thm-the-exponential-law]], [[def-compact-open-topology]]). The family is **smooth** when it is the transpose of a smooth $P$-family, i.e. $\\Phi(p)=F_p$ for a smooth $F$.\n- Under $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the canonical tangent bundles and their total-space mapping topology, a **family of formal immersions** over $P$ is a continuous map $\\Phi:P\\to\\operatorname{FImm}(M,N)$ ([[def-space-of-immersions-and-space-of-formal-immersions]]); it is **smooth** when it is the transpose of a pair $(f,F)$ of smooth maps $f:P\\times M\\to N$, $F:P\\times TM\\to TN$ with $F$ a fibrewise injective smooth bundle map over $f$ ([[def-formal-immersion-between-smooth-manifolds]]). A family is **genuine** when its slices lie in $\\operatorname{Imm}(M,N)$, and **holonomic** on a subset $A\\subseteq P$ when $F_p=df_p$ for every $p\\in A$; it is **smoothly holonomic** on $A$ when some open neighbourhood $W$ of $A$ in $P$ carries a smooth family $g:W\\times M\\to N$ with $f=g$ and $F=dg$ on $W\\times M$.\n- Under the same $\\mathrm{AC}_\\omega$ assumption, a **homotopy of $P$-families** of formal immersions is a continuous map $H:P\\times[0,1]\\to\\operatorname{FImm}(M,N)$, read as a family parametrized by the compact manifold with boundary $P\\times[0,1]$; it is **relative to $Q$** when $H(q,s)=H(q,0)$ for all $q\\in Q$ and $s\\in[0,1]$, and **relative to $\\partial P$** in the smooth case when it is constant along $\\partial P\\times[0,1]$. A homotopy is **smooth** when it is given by a smooth family over $P\\times[0,1]$; a smooth homotopy of genuine families is a homotopy through genuine families, i.e. a **regular homotopy** when $P$ is a point.",
+        "strategy": "Definition. It fixes the parameter pairs and the relative holonomicity conventions used by the parametric statements of this page: compact boundaryless parameter manifolds with a closed relative set, smooth adjoints, and homotopies over the compact manifold with boundary P x [0,1]. Nothing is proved.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            },
+            {
+              "title": "Janek Wilhelm, The Smale–Hirsch Immersion Theorem and other Applications to Closed Manifolds, §§1–2, PDF pp. 1–3 (Theorem 1, relative parametric C⁰-dense h-principle for immersions with q > n; microextension and local h-principle 8.3.1)",
+              "url": "https://www2.mathematik.hu-berlin.de/~wendl/Sommer2025/hPrinzip/20250530_Wilhelm.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-smoothing-formal-immersion-families",
+        "kind": "lemma",
+        "title": "Smoothing continuous families of formal immersions",
+        "deps": [
+          "def-compact-parameter-pair",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "lem-joint-jet-continuity-and-the-weak-smooth-topology",
+          "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+          "def-vector-bundle-map-over-a-smooth-base-map",
+          "def-pullback-vector-bundle-as-a-fibre-product",
+          "thm-the-pullback-fibre-product-is-a-smooth-vector-bundle",
+          "def-dual-and-hom-vector-bundles",
+          "thm-relative-whitney-approximation-for-manifold-valued-maps",
+          "def-countable-choice",
+          "thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space",
+          "thm-euclidean-tubular-neighbourhood-theorem",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "thm-extreme-value-metric",
+          "thm-heine-cantor-metric"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $M^m,N^n$ be smooth manifolds with $m\\le n$, $(P,Q)$ a compact parameter pair, and $\\Phi:P\\to\\operatorname{FImm}(M,N)$ a continuous family whose adjoint formal data are smooth on $W\\times M$ for some open $W\\supseteq Q$ in $P$. Then $\\Phi$ is homotopic relative to $Q$ to a smooth family, through formal immersions, and the homotopy is fixed on an open parameter neighbourhood of $Q$. In particular this applies when the family is smoothly holonomic on $Q$, as in [[def-compact-parameter-pair]]. Compactness of $M$ is not required.",
+        "strategy": "Encode formal-immersion data as a continuous map into the open manifold of fibrewise injective homomorphisms over M x N, apply relative Whitney approximation on P x M to a closed set where the data are holonomic, and read the homotopy back as a homotopy of families using joint jet continuity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John M. Lee, Introduction to Smooth Manifolds, 2nd ed., Theorems 6.21 and 6.26, pp. 136–141 (relative Whitney approximation)",
+              "url": "https://dokumen.pub/introduction-to-smooth-manifolds-2nd-ed-9781441999818-9781441999825-1441999817-1441999825.html"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: §1 (smooth families of formal immersions)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-smoothing-genuine-immersion-families",
+        "kind": "lemma",
+        "title": "Smoothing continuous families of genuine immersions",
+        "deps": [
+          "def-compact-parameter-pair",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-regular-homotopy-of-immersions",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "lem-joint-jet-continuity-and-the-weak-smooth-topology",
+          "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+          "thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space",
+          "thm-euclidean-tubular-neighbourhood-theorem",
+          "def-normal-addition-map-for-a-euclidean-submanifold",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-heine-cantor-metric",
+          "thm-extreme-value-metric",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "def-compact-space",
+          "def-countable-choice",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $M^m$ be compact, $N^n$ smooth, $m\\le n$, and $(P,Q)$ a compact parameter pair. A continuous family $\\Phi:P\\to\\operatorname{Imm}(M,N)$ whose adjoint is smooth on $W\\times M$ for some open $W\\supseteq Q$ is homotopic, through genuine families and relative to $Q$, to a smooth family agreeing with it on a parameter neighbourhood of $Q$. Every continuous path in $\\operatorname{Imm}(M,N)$ is homotopic relative to its endpoints to a smooth path. Consequently its path components are regular homotopy classes.",
+        "strategy": "Ambient construction: embed N in Euclidean space with a tubular retraction, extend the family constantly along a retraction of a neighbourhood of the parameter manifold, average against a mollifier in the parameter variable while tracking the first x-derivatives, and use the uniform positive determinant margin on the compact product to keep every slice an immersion; near the relative set the original smooth data are kept.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John M. Lee, Introduction to Smooth Manifolds, 2nd ed., Theorem 6.24 and the approximation of maps by mollification, pp. 139–141",
+              "url": "https://dokumen.pub/introduction-to-smooth-manifolds-2nd-ed-9781441999818-9781441999825-1441999817-1441999825.html"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Question 1.2 and the compact-open C^infinity topology on Imm(M,N)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "Morris W. Hirsch, Differential Topology, Ch. 2 §1–§2, pp. 34–38 (the C^infinity topology and smooth approximation of maps)",
+              "url": "https://people.dm.unipi.it/benedett/HIRSCH.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-smooth-families-and-path-components-in-the-weak-topology",
+        "kind": "lemma",
+        "title": "Smooth families and path components in the weak topology",
+        "deps": [
+          "def-compact-parameter-pair",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-regular-homotopy-of-immersions",
+          "lem-smoothing-formal-immersion-families",
+          "lem-smoothing-genuine-immersion-families",
+          "lem-joint-jet-continuity-and-the-weak-smooth-topology",
+          "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+          "def-compact-space",
+          "thm-the-exponential-law",
+          "def-compact-open-topology",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $M$ be compact, $N$ smooth, and $(P,Q)$ a compact parameter pair. Every continuous $P$-family of smooth maps with adjoint smooth near $Q\\times M$ is homotopic relative to $Q$ to a smooth family. For the following immersion-family assertions assume $\\dim M\\le\\dim N$. If its values are genuine immersions, the homotopy remains genuine; for formal immersions, the hypothesis concerns both adjoint maps and the homotopy remains formal. Path components of $\\operatorname{Imm}(M,N)$ are regular homotopy classes. Based homotopy sets defined by spheres or cubes agree with those defined by smooth families, for both genuine and formal immersion spaces. Formal-family smoothing itself does not require compact $M$.",
+        "strategy": "Use the exponential law for the compact-open topology (published) and apply relative Whitney approximation to the adjoint map $P\\times M\\to N$ on the compact manifold $P\\times M$, relative to the closed set $Q\\times M$ on which the adjoint is already smooth. Since $M$ is compact the weak compact-open topology on $C^\\infty(M,N)$ is the strong Whitney topology, in which the set of immersions is open and the fibrewise-injectivity condition for $F$ is open as well: a sufficiently fine approximation of a family of immersions (respectively formal immersions) stays a family of immersions (respectively formal immersions). For $Q=\\varnothing$ and $P=[0,1]$ this identifies paths with regular homotopies. If $P$ has boundary or corners, smoothness and approximation are understood relative to its strata, as in the library's conventions. Only countable choice is used, through the published relative approximation theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "def-derivative-map-from-immersions-to-formal-immersions",
+        "kind": "definition",
+        "title": "The derivative map from immersions to formal immersions",
+        "deps": [
+          "def-countable-choice",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-differential-of-a-smooth-map",
+          "def-vector-bundle-map-over-a-smooth-base-map"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the canonical smooth tangent bundles and their total-space mapping topology. The **derivative map** $D:\\operatorname{Imm}(M,N)\\to\\operatorname{FImm}(M,N)$ is $D(f):=(f,df)$, where $df:TM\\to TN$ is the differential of $f$, which is a smooth bundle map over $f$ and fibrewise injective exactly because $f$ is an immersion. Thus $D$ is the inclusion of the holonomic (genuine) formal immersions into all formal immersions; both its source and target are the spaces of the preceding items, with the weak compact-open $C^\\infty$ topology.",
+        "strategy": "Definition. The well-definedness of $D$ uses the published differential and bundle-map items: $df$ covers $f$ and is fibrewise injective for an immersion. Continuity is proved in the next lemma. Nothing else is claimed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-the-derivative-map-is-continuous",
+        "kind": "lemma",
+        "title": "The derivative map is continuous",
+        "deps": [
+          "def-derivative-map-from-immersions-to-formal-immersions",
+          "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+          "prop-smoothness-of-a-bundle-map-is-equivalent-to-smooth-local-matrices",
+          "thm-chain-rule-for-differentials-of-smooth-maps",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "thm-the-global-differential-of-a-smooth-map-is-smooth",
+          "def-countable-choice",
+          "lem-coordinate-balls-form-a-basis-of-a-topological-manifold",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "lem-the-weak-smooth-topology-is-independent-of-the-chosen-atlas"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ for the smooth tangent-bundle structures. The derivative map $D:\\operatorname{Imm}(M,N)\\to\\operatorname{FImm}(M,N)$, $f\\mapsto(f,df)$, is continuous for the weak compact-open $C^\\infty$ topologies.",
+        "strategy": "In local charts the components of the differential are the first partial derivatives of the components of $f$, by the chain rule and the published local description of bundle maps by matrices. A basic weak neighbourhood of $df$ constrains finitely many derivatives of $f$ of order at most $r+1$ on each of finitely many compact chart pieces, so its preimage is a basic weak neighbourhood of $f$. This proves continuity directly, with no compactness of $M$ needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-regular-homotopy-of-immersions",
+        "kind": "definition",
+        "title": "Regular homotopy of immersions",
+        "deps": [
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-compact-parameter-pair",
+          "def-smooth-family-of-maps-and-evaluation-map",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$ for the associated tangent-bundle mapping spaces ([[def-countable-choice]]), and let $M^m,N^n$ be smooth manifolds with $m\\le n$. A **regular homotopy** between immersions $f_0,f_1:M\\to N$ is a smooth map $H:M\\times[0,1]\\to N$ such that $H_t:=H(\\cdot,t)$ is an immersion for every $t\\in[0,1]$, with $H_0=f_0$ and $H_1=f_1$. Equivalently, $H$ is a path in $\\operatorname{Imm}(M,N)$ whose adjoint is smooth; for compact $M$ the smoothing lemma identifies such paths, up to homotopy rel the ends, with arbitrary continuous paths in the weak topology, while for noncompact $M$ only the smooth direction is asserted. A regular homotopy is **relative to** a closed subset $A\\subseteq M$ when $H(a,t)=f_0(a)=f_1(a)$ for every $a\\in A$ and $t\\in[0,1]$; the value may vary with $a$. A smooth homotopy of formal immersions is a path in $\\operatorname{FImm}(M,N)$ with jointly smooth base maps and bundle maps, fixing both of them pointwise over $A$ in the relative case.",
+        "strategy": "Definition. It reserves “regular homotopy” for families of immersions and defines the relative version used in the parametric statements. Isotopy is reserved for embeddings elsewhere; the equivalence-relation properties and the identification with path components are proved in the smoothing lemma and in the final corollary.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-parametric-immersion-extension-on-a-disk",
+        "kind": "lemma",
+        "title": "Immersion extension on a disk: absolute and relative parametric forms",
+        "deps": [
+          "prop-cofibrations-are-characterized-by-a-retraction-of-the-mapping-cylinder-strip",
+          "lem-pushouts-and-products-preserve-the-cofibrations-used-here",
+          "lem-smoothing-genuine-immersion-families",
+          "lem-smoothing-formal-immersion-families",
+          "lem-restriction-of-formal-immersion-data-has-the-parametric-lifting-property",
+          "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "lem-finite-relative-homotopy-lifting-across-a-weak-equivalence",
+          "lem-a-handle-decomposition-gives-a-relative-cw-complex",
+          "thm-adapted-excellent-morse-functions-exist-on-compact-cobordisms",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "thm-morse-sard-for-euclidean-maps",
+          "def-compact-parameter-pair",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-derivative-map-from-immersions-to-formal-immersions",
+          "def-weak-homotopy-equivalence",
+          "def-frame-bundle-and-associated-vector-bundle",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-hurewicz-and-serre-fibrations",
+          "thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space",
+          "thm-euclidean-tubular-neighbourhood-theorem",
+          "def-normal-addition-map-for-a-euclidean-submanifold",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "def-countable-choice",
+          "thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function",
+          "lem-regular-sublevels-are-compact-manifolds-with-boundary",
+          "thm-morse-functions-and-handle-decompositions-correspond",
+          "thm-collar-neighborhood-theorem",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign"
+        ],
+        "statement": "Assume countable choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $0\\le k\\le n$ and let $N$ be a smooth $n$-manifold without boundary. (i) **Absolute form.** The inclusion $\\operatorname{Imm}(D^k,N)\\subseteq\\operatorname{FImm}(D^k,N)$ is a weak homotopy equivalence: every formal immersion of the closed disk is homotopic, through formal immersions, to a genuine one, and finite CW parameter pairs admit lifting up to homotopy relative to prescribed genuine boundary data. The separate compact smooth parameter form below requires neighbourhood-holonomic relative input. (ii) **Relative parametric form.** Suppose $0\\le k<n$, let $D^k\\subseteq U\\subseteq\\mathbb R^k$ with $U$ an open neighbourhood of the closed unit disk, and let $A\\subseteq D^k$ be a closed collar neighbourhood of $\\partial D^k$. Let $(P,Q)$ be a compact parameter pair ([[def-compact-parameter-pair]]) with $P$ boundaryless, so $Q\\subseteq P$ is closed (possibly empty). Let $(f,F)=(f_p,F_p)_{p\\in P}$ be a smooth $P$-family of formal immersions of $U$ such that the original family is smoothly holonomic on $Q$ (on an open parameter neighbourhood of $Q$) and holonomic on a neighbourhood of $A$ for every $p\\in P$. Then there is a homotopy of $P$-families of formal immersions from $(f,F)$ to a family $(g,G)$ with $G=dg$, constant on $Q$ and on $A$. The hypothesis $k<n$ is needed for the relative statement; the absolute statement (i) holds also for $k=n$ and is what supplies the base case over a $0$-handle.\n\n(iii) **Full-column core and handle form.** For $0\\le j\\le m\\le n$ with $j<n$, retain all $m$ source columns over $D^j$. On the holonomic side the first $j$ columns equal the core derivative; on the formal side they are independent monomorphism columns. The derivative comparison is a weak equivalence both on the absolute core spaces and on their extension fibres over prescribed holonomic boundary jets, using the first-jet interface of [[lem-restriction-of-formal-immersion-data-has-the-parametric-lifting-property]]. For compact parameter pairs with neighbourhood-holonomic relative data, the comparison preserves prescribed attaching germs and the relative parameters. Realization near the core and positive cocore compression give the corresponding relative integration on an $m$-dimensional $j$-handle; cocore directions remain source directions.\n\n(iv) **Compact-source parameter transfer.** More generally, if the derivative map for a compact smooth source $X$ is a weak equivalence, it has the relative parametric conclusion for every compact parameter pair of [[def-compact-parameter-pair]], including interval factors: continuous formal data smoothly holonomic on a neighbourhood of $Q$ deform relative to $Q$ to genuine data, and smooth input admits smooth output and a smooth formal deformation. This implication uses a compact collared parameter neighbourhood and finite CW models, not an arbitrary compact-pair consequence of weak equivalence.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** Countable choice, a smooth $N^n$ without boundary and $0\\le k\\le n$; $D^k$ denotes the closed unit disk, with smooth maps understood to extend locally across its boundary. For the relative assertion, the parameter pair and collar data are those in the Statement.\n\n[F1] Write $V_k(TN)=\\{(y,L):y\\in N,\\ L:\\mathbb R^k\\hookrightarrow T_yN\\}$. The trivialization $TD^k=D^k\\times\\mathbb R^k$ identifies a formal immersion with a map $x\\mapsto(f(x),F_x)$ into this frame space. The evaluation maps are $e_F(f,F)=(f(0),F_0)$ and $e_I(g)=(g(0),dg_0)$ ([[def-frame-bundle-and-associated-vector-bundle]], [[def-stiefel-space-grassmannian-and-tautological-bundle]], [[def-formal-immersion-between-smooth-manifolds]]).\n\n[F2] Under countable choice, embed $N$ in a finite-dimensional Euclidean space and apply the Euclidean tubular neighbourhood theorem. Normal addition and normal-bundle projection give a smooth retraction $r:W\\to N$ on an open neighbourhood $W$ of the embedded $N$; $dr_y$ restricts to the identity on $T_yN$ ([[thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space]], [[thm-euclidean-tubular-neighbourhood-theorem]], [[def-normal-addition-map-for-a-euclidean-submanifold]], [[def-countable-choice]]).\n\n[F3] The genuine and formal smoothing lemmas preserve rank and prescribed neighbourhood-smooth relative data ([[lem-smoothing-genuine-immersion-families]], [[lem-smoothing-formal-immersion-families]]). Smooth partitions of unity exist on the frame manifold under countable choice ([[thm-smooth-partitions-of-unity-exist-on-manifolds]]). Mapping spaces have the weak compact-open smooth topology ([[def-space-of-immersions-and-space-of-formal-immersions]]).\n\n[F4] Dimension-qualified core restriction, retaining all source columns, is a genuine and formal Serre fibration for core index $j<n$ ([[lem-restriction-of-formal-immersion-data-has-the-parametric-lifting-property]]). Their exact homotopy sequences include component actions ([[thm-long-exact-sequence-of-homotopy-groups-of-a-fibration]]).\n\n[F5] A weak equivalence lifts maps and homotopies up to homotopy relative to any finite CW pair ([[lem-finite-relative-homotopy-lifting-across-a-weak-equivalence]]). Under countable choice compact smooth manifolds have finite CW models, and compact triads with finite handle presentations have finite CW pair models ([[lem-a-handle-decomposition-gives-a-relative-cw-complex]], [[thm-adapted-excellent-morse-functions-exist-on-compact-cobordisms]]). A collar makes its inclusion a cofibration: in outward collar coordinate $r$, the strip retraction sends $(r,t)$ to $(r-t,0)$ when $r\\ge t$, and to $(0,t-r)$ when $r\\le t$, with a cutoff to the identity outside a larger collar. Products and endpoint unions retain the required cofibration ([[prop-cofibrations-are-characterized-by-a-retraction-of-the-mapping-cylinder-strip]], [[lem-pushouts-and-products-preserve-the-cofibrations-used-here]]). Smooth bumps and regular levels select compact neighbourhoods of closed relative sets ([[lem-manifold-bump-for-a-compact-set-inside-an-open-set]], [[thm-morse-sard-for-euclidean-maps]]).\n\n[F6] Under countable choice there is a smooth nonnegative proper exhaustion on $U$ ([[thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function]]). Sard supplies regular levels; their compact sublevels are smooth manifolds with boundary ([[thm-morse-sard-for-euclidean-maps]], [[lem-regular-sublevels-are-compact-manifolds-with-boundary]]). Each compact band has a finite handle presentation from an adapted excellent Morse function ([[thm-adapted-excellent-morse-functions-exist-on-compact-cobordisms]], [[thm-morse-functions-and-handle-decompositions-correspond]]), with indices at most $k$. Collars exist under the same hypothesis ([[thm-collar-neighborhood-theorem]]). Parameter mollification and finite Riemann sums of its bump kernel give first-jet approximations on compact chart pieces ([[def-mollifier-family-generated-by-a-unit-mass-smooth-bump]], [[thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign]]).\n\n## Proof\n\n**Proof technique:** direct absolute comparison, then induction on core dimension and finite relative parameter lifting.\n\n1.1 The formal evaluation has the section $c(y,L)(x)=(y,L)$. The homotopy $(f(x),F_x)\\mapsto(f(tx),F_{tx})$, $1\\ge t\\ge0$, is a homotopy through formal immersions from the identity to $c e_F$: here $F_{tx}$ is read using the fixed trivialization of $TD^k$, without multiplication by $t$. It is continuous in the weak smooth topology and fixes constant formal data. Thus $e_F$ is a homotopy equivalence. [F1, F3, construct]\n\n1.2 For each frame $(y,L)$, the maps $x\\mapsto r(y+aLx)$ are defined and are immersions for all sufficiently small $a>0$, uniformly for frames in a neighbourhood of $(y,L)$. Indeed their derivatives divided by $a$ are $dr_{y+aLx}L$, which converge uniformly for $x\\in D^k$ to the injective map $L$. Choose neighbourhoods with positive constant bounds on $a$ and a subordinate locally finite smooth partition; the weighted average of smaller such constants gives a positive smooth function $\\epsilon(y,L)$ such that every $0<a\\le\\epsilon(y,L)$ works. Hence $s(y,L)(x)=r(y+\\epsilon(y,L)Lx)$ defines a continuous map $s:V_k(TN)\\to\\operatorname{Imm}(D^k,N)$. Its evaluation is $(y,\\epsilon(y,L)L)$, homotopic to $(y,L)$ by positive scalar multiplication. [F1, F2, F3, construct, choose]\n\n2.1 Let $K$ be a compact parameter space and $g:K\\to\\operatorname{Imm}(D^k,N)$ a continuous family. Put $y_p=g_p(0)$ and $L_p=dg_p(0)$. Choose a common $\\delta>0$ smaller than every $\\epsilon(y_p,L_p)$ and sufficiently small for the following construction. First precompose with $x\\mapsto tx$, $1\\ge t\\ge\\delta$, obtaining $g_p(\\delta x)$ through immersions. Next, for $\\delta\\ge t>0$, set $h_{p,t}(x)=r(y_p+\\delta(g_p(tx)-y_p)/t)$ and at $t=0$ set $h_{p,0}(x)=r(y_p+\\delta L_px)$. Taylor's integral formula gives $(g_p(tx)-y_p)/t=\\int_0^1dg_p(utx)x\\,du$, so this formula extends continuously in every spatial derivative to $t=0$. Its derivative divided by $\\delta$ is $dr_{y_p+\\delta(g_p(tx)-y_p)/t}dg_p(tx)$ and is uniformly close to $L_p$ for $0\\le t\\le\\delta$. Compactness gives a uniform positive injectivity margin, so all $h_{p,t}$ are immersions and their arguments lie in $W$. At $t=\\delta$ this is $g_p(\\delta x)$, since $r$ fixes $N$. [F2, F3, step 1.2, construct, choose]\n\n3.1 Increase $a$ from $\\delta$ to $\\epsilon(y_p,L_p)$ in $r(y_p+aL_px)$. Step 1.2 keeps this a family of immersions and joins the endpoint of step 2.1 to $s e_I(g_p)$. Thus every compact family is homotopic through immersions to $s e_I$ of that family. This applies to spheres and to homotopies parametrized by disks or sphere-times-interval, and together with $e_I s\\simeq\\mathrm{id}$ proves that $e_I$ induces a bijection on path components and isomorphisms on all homotopy groups, with the usual basepoint paths provided by these homotopies. Consequently $e_I$ is a weak homotopy equivalence. For $k=0$ all spaces and evaluations are simply $N$. [step 1.2, step 2.1, F1, construct]\n\n4.1 The derivative map $D:g\\mapsto(g,dg)$ satisfies $e_FD=e_I$. Since both evaluations are weak homotopy equivalences by steps 1.1 and 3.1, $D$ is a weak homotopy equivalence. This constructively proves the absolute weak-equivalence assertion in every dimension $k\\le n$, including equality; it does not use a genuine-immersion restriction fibration. [step 1.1, step 3.1, F1]\n\n5.1 The absolute comparison also holds for full $m$-column core data on $D^j$, $j\\le m\\le n$, whose first $j$ columns are the core derivative on the genuine side. Forget the extra $m-j$ columns. The genuine and formal forgetful maps have the same fibres: a transversal $(m-j)$-frame modulo the tangent image, with arbitrary tangent components of its lifts. For nearby base data, identify target tangent fibres by the local addition, then identify tangent images and normal complements by orthogonal projection. This gives local product charts on each locus where the fibre is nonempty. These admissible loci are open and path-saturated: finite successive normal transports along a compact path carry any existing transverse frame to the endpoint. Therefore an ordinary weak equivalence restricts to those loci before their extra-column fibration comparison is used. Compact-cube homotopies lift by finite successive projection transports, followed by the collar/frame operators in [F4]. Thus these maps are Serre fibrations, and their derivative square has identical fibre maps. The ordinary disk equivalence from step 4.1 and the exact sequences [F4] give the full-column core equivalence. This argument does not integrate cocore directions as parameters; it carries their transverse derivative columns as bundle data. [F2, F4, step 4.1, construct]\n\n6.1 We prove boundary-relative core comparison by induction on $j<n$, simultaneously for every $j\\le m\\le n$. The $j=0$ case is the equality of the genuine and formal point/frame data, with empty boundary. Suppose the comparison is proved below $j$. The ordinary derivative map for $S^{j-1}$ is a weak equivalence: assemble its two $(j-1)$-disks along their common boundary, using the previously proved relative core comparison. First-jet matching can be made matching of actual immersion germs. In an inner collar let $g,h$ be the two extensions of the same full boundary jet, with $h$ the canonical local-addition extension. In target logarithm coordinates $g-h=O(r^2)$ and $d(g-h)=O(r)$, uniformly over compact parameter families. Replacing $g$ by $h+\\chi(r/\\epsilon)(g-h)$ changes its derivative by $O(\\epsilon)$, because $d\\chi(r/\\epsilon)(g-h)=O(\\epsilon)$; therefore a sufficiently small common $\\epsilon$ keeps the full derivative injective and makes $g=h$ on a smaller collar. This pinching is relative where the maps already agree, and parametric cutoffs keep a supplied genuine family on a parameter neighbourhood unchanged. Formal full jets are matched by the analogous collar operator. The resulting disk homotopies glue smoothly to the sphere. Applying the same extra-column forgetful comparison as in step 5.1 gives the weak equivalence on full-column boundary data over $S^{j-1}$. The formal boundary space also retains the actual radial derivative $C$ of its base map, independently of $B(r)$. Those $C$ fields have an affine contractible fibre; the linear homotopy $C\\mapsto(1-s)C+sB(r)$ retracts it to the graph supplied by genuine data. Thus this additional actual base jet does not change the boundary comparison, and it ensures formal base maps as well as bundle columns match their first jets when pasted. [F2, F4, step 5.1, construct]\n\n7.1 Compare the genuine and formal restriction fibrations of [F4] for the $j$-disk. Their total-space map is the equivalence of step 5.1, and their boundary-space map is the equivalence of step 6.1. Their fibre map over each corresponding genuine boundary datum is therefore a weak equivalence, by the exact-sequence comparison, including degrees zero and one. Existence of a genuine extension when a formal extension exists follows too: choose a genuine total datum in the formal extension's component; its boundary datum lies in the component of the prescribed boundary datum by the boundary equivalence. Lift a genuine boundary path backwards using [F4] to obtain a genuine extension of the prescribed boundary. Thus no formal extension component is silently excluded by an empty genuine fibre. For boundary data varying with a finite CW parameter, pull back both restriction fibrations over that boundary family. The fibre comparison just proved gives fibrewise lifting up to homotopy: factor it by the fibrewise mapping-path space, whose fibre over a parameter is the homotopy fibre of that weak equivalence, hence weakly contractible. The projection of this fibrewise mapping-path replacement to the formal extension space pulled back over genuine boundary data is a Serre fibration: lift the genuine endpoint along the boundary track, then lift the formal connecting-path rectangle with both endpoints prescribed, by the relative cubical construction of [F4]. Its fibres are the weakly contractible homotopy fibres just identified, so its exact sequence makes that projection a weak equivalence. Apply [F5] to a finite CW parameter pair and this projection, with the constant connecting paths on prescribed genuine parameters. It gives a lift up to homotopy relative to those parameters. Lift that homotopy backwards through the projection to obtain an exact lift of the original formal section. Its connecting paths remain in the fibres over the original boundary data. Thus the resulting sections and formal homotopies preserve that spatial boundary family throughout. Prescribed genuine parameter cells stay fixed. Thus finite-relative lifting holonomizes every finite CW parameter family of formal extensions, fixing its prescribed genuine parameters and boundary jets. The pinching construction in step 6.1 upgrades fixed boundary jets to the prescribed actual collar germ, so the original spatial collar data remain fixed. This completes the core-dimension induction. [F4, F5, step 5.1, step 6.1]\n\n8.1 The same relative core comparison applies to an $m$-dimensional $j$-handle. Realize its holonomic full-column core data by local addition in the $m-j$ cocore directions; the derivative along the core is the full monomorphism, hence the maps are immersions on a common compact-parameter neighbourhood of the core. Near the attaching collar use the already prescribed genuine maps. Their first jets agree on the attaching core, so the $O(r^2)$ pinching argument matches their germs on the overlap while preserving rank. This gives an immersion on a neighbourhood of the union of the core and the attaching collar. Relative parameter control requires retaining the original whole-handle immersion on a smaller parameter neighbourhood of $Q$. On the transition strip inside its given genuine neighbourhood, blend this original map with the canonical core realization in target logarithm coordinates. They share full core first jets, so their difference is $O(|v|^2)$ and its derivative is $O(|v|)$; differentiated cocore cutoffs therefore contribute $O(\\delta)$ and preserve rank for a common sufficiently small radius. Use the original map throughout the smaller parameter neighbourhood. Compress the whole handle into the resulting domain by embeddings $(x,v)\\mapsto(x,\\lambda(p,x)v)$, with $0<\\lambda\\le1$, equal to one near $Q$ and on a smaller attaching collar and small away from slightly larger neighbourhoods of those regions. Transition inside the region already covered by the prescribed genuine maps. Its derivative has triangular blocks $I,\\lambda I$, so is invertible even though $d\\lambda$ is nonzero. The isotopy from $\\lambda=1$ gives the comparison with the original formal family, is fixed on the attaching collar, and never drops cocore rank. The formal comparison transports tangent summands with the nonzero scale, or uses the horizontal/vertical identity transport at the collapsed core, rather than setting vertical derivatives to zero. This proves the fixed-source relative handle comparison required by the core argument. [F2, F4, step 6.1, step 7.1, construct]\n\n9.1 We explain the compact smooth parameter pair, rather than identifying it with an arbitrary compact pair. Let $W$ be the open parameter neighbourhood of $Q$ on which the original family is genuine. Choose a smooth bump equal to one near $Q$ with support in $W$, and a regular level to obtain a compact collared parameter neighbourhood $U$ with $Q\\subset\\operatorname{int}U\\subset U\\subset W$. For interval/corner factors work in a compact smooth parameter neighbourhood $P_0\\times D^d_R$ containing $P_0\\times[0,1]^d$. Extend the continuous family by clamping the interval coordinates. On a neighbourhood of $Q$, use the given smooth local extensions instead: a finite parameter cover and parameter-only partition paste smooth extensions of the prescribed genuine maps in the target embedding, then retract to $N$ and set their formal columns equal to the source derivative of that pasted map. On this neighbourhood the columns are not extended independently, so holonomicity is retained. The extensions agree on $P$; compactness and openness of full rank preserve holonomicity on a smaller ambient neighbourhood of $Q$. A cutoff inside the original neighbourhood pastes this with the clamped continuous family. After the deformation restrict back to $P$. The finite Morse/handle construction in [F5] applied to $U$ and the compact complement of its interior produces a finite CW model $(K,L)$ of the parameter pair $(P,U)$. If $U$ has only a finite CW model, replace it by that model before attaching the finitely many complement cells: transport the attaching maps through its homotopy inverse, with attaching collars carrying the required homotopies. This gives maps of pairs $a:(P,U)\\to(K,L)$ and $b:(K,L)\\to(P,U)$ with pair homotopies $ba\\simeq\\mathrm{id}$ and $ab\\simeq\\mathrm{id}$. Every track starting in $U$ stays in $U$, where the given family is genuine. Apply the fibrewise finite lifting of step 7.1 on $(K,L)$ and pull back by $a$. If the spatial boundary family was pulled back through $ba$, transport it back along the pair homotopy using the compact-parameter lifting supplied in [F4]. Do this also for the formal deformation with its genuine endpoints prescribed; the endpoint-relative cubical lifts in the path variable keep those endpoints. The resulting boundary track followed by its reverse contracts to the fixed original boundary family, and another such lift makes the deformation stationary on that spatial boundary. On $U$ the resulting genuine family is regularly homotopic to the prescribed one, via its composite with the pair homotopy. Extend the reverse regular homotopy to all of $P$ using the homotopy extension property of the collared inclusion $U\\subset P$. This extension may move spatial boundary data. Write its projected boundary track as $\\beta(p,t)$, starting at the original $b_p$; it is constant on $U$. For each $(p,t)$ lift the reversed track $s\\mapsto\\beta(p,(1-s)t)$, starting from the extended genuine datum. The compact-parameter lifting formulas of [F4] are stationary on constant tracks, so these lifts preserve the prescribed correction on $U$ and the initial datum at $t=0$. Their endpoints give a corrected genuine homotopy over the original $b_p$ for every $p,t$, ending at the original family on $U$. Concatenating the formal homotopy with this correction produces on $U$ a track followed by its reverse. Contract these loops, and use the same collar homotopy extension property on $P\\times I$ relative to $P\\times\\partial I\\cup U\\times I$. Rebase this formal extension too: lift its reversed projected boundary tracks, now with parameters $P\\times I$ and the contraction variable, by the formal version of [F4]. On the prescribed ends and on $U$ those projections are constant, so stationary lifting leaves the given loop contraction and both endpoints unchanged. The resulting homotopy is stationary on $U$ and lies over the original spatial boundary throughout. The jet pinching of step 6.1 retains the full prescribed spatial collar germ. Thus it is relative to $Q$. All choices are finite, except the explicitly countable-choice suppliers in [F5]. [F3, F5, step 7.1, step 8.1, construct, choose]\n\n10.1 First prepare a common holonomic neighbourhood of $A$ in $U$. If $P$ is empty the conclusion is immediate; otherwise $F=df$ on $P\\times A$, so $df$ has a positive minimum least singular value $c$ there. Joint smoothness and compactness give a source neighbourhood $V$ of $A$, with compact closure in $U$, on which the least singular value of $df$ is greater than $c/2$ and $\\|F-df\\|<c/4$, uniformly in $p$. Choose a smooth source cutoff $\\chi=1$ on a neighbourhood of $A$, supported in $V$, and replace $F$ by $(1-s\\chi)F+s\\chi df$. Every interpolated map remains injective by these estimates. The base map is unchanged; the bundle homotopy fixes $A$ and the given parameter neighbourhood of $Q$, since $F=df$ there. At its endpoint the family is holonomic on one common open source neighbourhood of $A$, including an outer strip beyond $\\partial D^k$, without assuming any uniform width for the original pointwise holonomic neighbourhoods. Cut a smaller disk inside this prepared holonomic collar and leave all original data on $A$ unchanged. Apply steps 7.1 and 9.1 with $j=m=k<n$ to that disk and its now common collar-holonomic data. They give the relative deformation on the smaller disk. Extend it by the prepared data on the surrounding holonomic collar and on the rest of $U$; the agreement on an open collar makes the extension smooth in the source. Smooth genuine output families are obtained with the genuine smoothing supplier, fixing the original parameter neighbourhood of $Q$ and prescribed spatial collar. Make the formal deformation constant on small temporal endpoint collars and use formal-family smoothing relative to those endpoint and parameter neighbourhoods. These smoothing operations preserve full fibrewise rank, since their compact jet errors may be chosen below the positive injectivity margin. Multiply their parameter-mollification correction by a fixed smooth source cutoff zero on the prescribed collar, with transition inside a region where the original reference is already jointly smooth. Its differentiated error has the additional term $d\\chi$ times the zeroth-order mollification error, also tending uniformly to zero. Thus first jets remain small and the prescribed spatial collar maps and bundle columns are kept exactly. Thus a smooth relative deformation is obtained when the input is smooth. The absolute case $k=n$ was already proved in step 4.1 and is not used as a spatially relative disk theorem. [F3, F4, F5, step 4.1, step 7.1, step 9.1]\n\n11.1 It remains to make the family genuine on all of $U$. For $k=0$ every formal datum is already holonomic. Otherwise, the common holonomic neighbourhood prepared in step 10.1 contains an annulus about $\\partial D^k$. Choose $\\epsilon>0$ small enough that the closed disk $B$ of radius $1+\\epsilon$ lies in $U$ and its outer collar lies in that annulus. The inner-disk integration of step 10.1, joined to the unchanged prepared annulus, therefore ends genuine on an open neighbourhood of $B$. Choose regular compact sublevels $K_i$ of the exhaustion in [F6], with $B\\subset\\operatorname{int}K_0$, $K_i\\subset\\operatorname{int}K_{i+1}$, and union $U$. The regular levels can be selected by least eligible rational values: properness makes the critical-value set closed on bounded intervals, and Sard makes it have empty interior. Fix collars and finite handle presentations for $K_0\\setminus\\operatorname{int}B$ and for all subsequent bands before deforming any data; this is an independent countable selection. Every handle has index $j\\le k<n$. Apply the relative integration of steps 7.1–9.1, with full source rank $m=k$, to each finite presentation, fixing the preceding genuine compact stage and a smaller collar and a fixed parameter neighbourhood of $Q$. These steps do not require absence of top-index $k$-handles, since $k<n$. Each finite-stage deformation extends to global formal data: its formulas are defined on a neighbourhood of the compact handle, and substitution of the time $t\\chi(x)$, with $\\chi=1$ near the processed region and supported in that neighbourhood, leaves a formal monomorphism at every point. The same time is substituted in its base map and bundle columns. On the incoming fixed germ the deformation is stationary. A top-index handle has all its boundary in that germ, so extension there is by the identity; other handles have an outgoing cocore buffer for the cutoff. [F4, F5, F6, step 8.1, step 9.1, step 10.1, construct]\n\n12.1 The successive deformation choices in step 11.1 can be made without dependent choice. Fix countable coordinate, framed and bump data for the parameter, source and time charts. On each compact stage, finite rational combinations of translated and rescaled bumps form a countable dense family of smooth ambient corrections in the first-jet norm: mollify, approximate the integral and its first derivatives by finite Riemann sums, and then approximate their centres, scales and coefficients by rationals. Multiply corrections by fixed masks vanishing on the frozen source and parameter neighbourhoods and the initial time collar; include countably many collar widths and temporal subdivisions. At final time set the candidate bundle columns equal to the differential of its candidate base map on a smaller processed source neighbourhood, using a cutoff supported in the genuine endpoint collar of a successful witness. Make candidates constant on temporal endpoint collars, retract their base maps to $N$, and project columns to its tangent spaces. A successful smooth witness exists by steps 8.1–10.1 applied to this compact stage. Approximation sufficiently close to that witness preserves its compact injectivity margins and the tubular domain, including the bounded derivatives of the masks. The endpoint derivative replacement is also close to the witness, which is already holonomic there. Thus at least one candidate works. Select the least working candidate in the fixed enumeration; select the least eligible dyadic collar widths in the explicit lifting formulas. Recursion by these uniquely specified integers determines the stages; only the fixed geometric data and band presentations used countable choice. [F2, F3, F6, step 8.1, step 10.1, step 11.1, construct]\n\n13.1 Concatenate the finite-stage homotopies on intervals tending to $1$, with smooth reparametrizations constant near their ends. Keep a fixed open neighbourhood of each completed $K_i$ unchanged thereafter. Every compact subset of $U$ lies in some $K_i$, so all its source derivatives are eventually stationary; the endpoint at time $1$ is a genuine immersion everywhere on $U$, and the homotopy is continuous in the weak smooth topology. With smooth stage data it is jointly smooth, since locally it is constant near time $1$. It fixes $A$ and the retained neighbourhood of $Q$. This proves the original all-$U$ conclusion, including any additional components. Steps 5.1–8.1 and 9.1 prove (iii). For (iv), choose a compact collared parameter neighbourhood $R$ with $Q\\subset\\operatorname{int}R\\subset R\\subset W$, where the given data on $W$ are smooth and genuine. The finite pair model $(K,L)\\simeq(P,R)$ of [F5] and finite relative lifting give a genuine family after pullback, agreeing on $R$ with the prescribed family composed with the pair-model homotopy inverse. The pair homotopy gives a genuine track on $R$ back to the original family; extend it over $P$ by the collar HEP. Concatenate this correction with the formal deformation. On $R$ its track is the pair-homotopy track followed by its reverse. Contract that retraced loop and extend the contraction by HEP on $P\\times I$ relative to $P\\times\\partial I\\cup R\\times I$. The endpoints stay fixed and the formal deformation becomes stationary on $R$. This is the part of step 9.1 that does not require any spatial-boundary rebasings, so it applies to any derivative weak equivalence on compact $X$. Interval factors use the ambient parameter extension described there. Smooth the genuine endpoint relative to a smaller neighbourhood of $Q$, using compactness of $X$. For smooth original data, make the formal deformation constant near its temporal ends and apply formal smoothing relative to those ends and that neighbourhood; both temporal endpoint families are then smooth, so this gives a smooth formal homotopy with genuine endpoint. Continuous original data require only the continuous formal deformation already constructed. This proves (iv) and completes all assertions. [F3, F5, F6, step 5.1, step 7.1, step 8.1, step 9.1, step 11.1, step 12.1, construct] ∎\n\n## Source and proof scope\n\nThe constructive covering-homotopy supplier follows Smale's original normal-bump formula and Hirsch's full-column core interfaces, not the abbreviated Francis sketches. The proof above gives a boundary-relative full-source-column core comparison and its handle transfer. The relative parameter input is holonomic on an open neighbourhood of $Q$; no arbitrary closed compact-pair lifting assertion is inferred solely from weak equivalence.\n",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            },
+            {
+              "title": "Janek Wilhelm, The Smale–Hirsch Immersion Theorem and other Applications to Closed Manifolds, §§1–2, PDF pp. 1–3 (Theorem 1, relative parametric C⁰-dense h-principle for immersions with q > n; microextension and local h-principle 8.3.1)",
+              "url": "https://www2.mathematik.hu-berlin.de/~wendl/Sommer2025/hPrinzip/20250530_Wilhelm.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-restriction-of-formal-immersion-data-has-the-parametric-lifting-property",
+        "kind": "lemma",
+        "title": "Restriction of formal-immersion data has the parametric lifting property",
+        "deps": [
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space",
+          "thm-euclidean-tubular-neighbourhood-theorem",
+          "thm-smooth-inverse-function-theorem-on-manifolds",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+          "def-hurewicz-and-serre-fibrations",
+          "def-tubular-neighbourhood-of-an-embedded-submanifold",
+          "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary",
+          "def-countable-choice",
+          "prop-bundle-maps-over-f-are-sections-of-the-pulled-back-hom-bundle",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-immersion-submersion-and-constant-rank-map"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $0\\le k\\le m\\le n$ with $k<n$, and let $N^n$ be boundaryless. A **holonomic core datum** on $D^k$ is a pair $(g,B)$ with $g:D^k\\to N$ a smooth immersion and $B:D^k\\times\\mathbb R^m\\to g^*TN$ a smooth fibrewise monomorphism whose first $k$ columns are $dg$ in the standard coordinates. Its restriction to $S^{k-1}$ retains all $m$ columns, including the outward radial column; on tangent vectors to the sphere it agrees with the derivative of the boundary map. Use the weak smooth topology on all this data. Restriction from holonomic core data to such boundary data is a Serre fibration. The analogous formal restriction retains the base boundary values, the full monomorphism $B$, and independently the actual radial base derivative $C=\\partial_rf$; the derivative in tangential boundary directions is already determined by the boundary map. It is also a Serre fibration. On genuine data $C=B(r)$, but for formal data that equality is not imposed. This independent base jet is needed to glue actual smooth base maps, not just their formal bundle columns. For $k=0$ the boundary is empty.\n\nThis is the dimension-qualified first-jet/germ lifting interface. The $m-k$ cocore columns remain derivatives in source directions; they are not parameter directions. A holonomic core datum is realized by an immersion near $D^k\\times\\{0\\}$ in the $m$-dimensional handle by a local addition applied to its transverse columns. No genuine restriction fibration for an arbitrary codimension-zero pair is asserted. The construction also lifts compact smooth parameter families by finite parameter fragmentation. Parameter-relative versions fix a region where the input boundary homotopy is constant; general finite cubical relative lifting follows from the Serre lifting property.",
+        "strategy": "Owner-authorized constructive repair from full Smale covering-homotopy source, actual library suppliers, compact-parameter germ comparisons and compatible source exhaustion. Supplied proof awaits root personal adjudication; local checks are not independent mathematical acceptance.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen Smale, The Classification of Immersions of Spheres in Euclidean Spaces, Annals of Mathematics 69 (1959), pp. 329–335, Theorem 1.1 and formula (17)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/smale4.pdf"
+            },
+            {
+              "title": "Morris W. Hirsch, Immersions of Manifolds, Transactions AMS 93 (1959), pp. 245–257, Theorems 1.1 and 3.5–3.7",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/hirsch.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-regular-sublevels-are-compact-manifolds-with-boundary",
+        "kind": "lemma",
+        "title": "Regular sublevels are compact manifolds with boundary",
+        "deps": [
+          "def-closed-sublevel-and-level-set-of-a-smooth-function",
+          "def-critical-point-and-critical-value-of-a-smooth-function",
+          "def-morse-function-and-excellent-morse-function",
+          "cor-local-normal-form-for-submersions",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-smooth-manifold",
+          "thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold",
+          "def-compact-space"
+        ],
+        "statement": "Let $f:M\\to\\mathbb R$ be smooth on a boundaryless smooth $m$-manifold and let $c$ be a regular value such that the closed sublevel $f^{-1}((-\\infty,c])$ is compact. Then $f^{-1}((-\\infty,c])$ is a compact smooth $m$-dimensional submanifold with boundary, its boundary is the level $f^{-1}(c)$, its interior is the open sublevel $f^{-1}((-\\infty,c))$, and the boundary is empty exactly when the level is empty; in that case $f^{-1}((-\\infty,c])=f^{-1}((-\\infty,c))$ is a compact manifold without boundary. In particular every regular sublevel of a Morse function whose sublevels are compact is a compact manifold with boundary.",
+        "strategy": "At a point with $f(x)<c$, continuity gives a neighbourhood of $x$ inside the open sublevel, so such points are interior points of the sublevel. At a point of the level set, which is regular by hypothesis, the local normal form for submersions identifies $f$ near $x$ with a coordinate function in suitable charts; after centring the target chart at $c$ the sublevel is a half-space and the level set is the bounding hyperplane. Transition maps between two such half-space charts are restrictions of smooth chart changes of $M$, so the sublevel carries a smooth structure with boundary $f^{-1}(c)$ and interior $f^{-1}((-\\infty,c))$; the boundary is closed and embedded. Compactness is the hypothesis, and if $c\\notin f(M)$ no point of the sublevel lies on the level, so the sublevel is a compact manifold without boundary.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Liviu I. Nicolaescu, An Invitation to Morse Theory, 2nd ed., Ch. 2 §2.2 “The Topology of Sublevel Sets” (exhaustive Morse functions, compact sublevel sets, handle attachment across critical values), printed pp. 37–56",
+              "url": "https://www3.nd.edu/~lnicolae/Morse2nd.pdf"
+            },
+            {
+              "title": "John M. Lee, Introduction to Smooth Manifolds, regular level set theorem and its sublevel corollary",
+              "url": "https://math.mit.edu/~hrm/palestine/lee-smooth-manifolds.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-the-disk-bundle-of-a-smooth-vector-bundle-is-a-compact-manifold-with-boundary",
+        "kind": "lemma",
+        "title": "Disk bundles over compact bases are compact manifolds with boundary",
+        "deps": [
+          "def-disk-sphere-and-thom-space-of-a-metric-vector-bundle",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-smooth-fibre-bundle-and-local-trivialization",
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "lem-regular-sublevels-are-compact-manifolds-with-boundary",
+          "thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold",
+          "def-embedded-smooth-submanifold-with-boundary",
+          "def-compact-space",
+          "lem-coordinate-balls-form-a-basis-of-a-topological-manifold",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "cor-local-normal-form-for-submersions"
+        ],
+        "statement": "Let $E\\to M$ be a smooth rank-$q$ vector bundle over a boundaryless smooth manifold, with a supplied smooth bundle metric $h$. The closed disk bundle $D_h(E)=\\{\\|v\\|_h\\le1\\}$ is a smooth manifold with boundary of dimension $\\dim M+q$, with boundary $S_h(E)=\\{\\|v\\|_h=1\\}$ and interior $\\{\\|v\\|_h<1\\}$. The projection and zero section are smooth. If $M$ is compact, the disk bundle and its boundary are compact. For $q=0$ the disk bundle is $M$ and the boundary is empty; when $\\dim M+q\\ge1$ the boundary is a closed embedded smooth manifold of dimension $\\dim M+q-1$.",
+        "strategy": "Local trivializations and the Cholesky square root of the smooth Gram matrix straighten the metric disk to the standard disk in each chart; the transition maps are smooth, the boundary is the sphere bundle, and compactness follows from a finite trivializing cover of a compact base.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-open-manifolds-admit-exhaustions-with-no-caps",
+        "kind": "lemma",
+        "title": "Open manifolds admit exhaustions with no caps",
+        "deps": [
+          "thm-extreme-value-metric",
+          "lem-regular-sublevels-are-compact-manifolds-with-boundary",
+          "cor-local-normal-form-for-submersions",
+          "thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function",
+          "cor-regular-values-have-null-complement-and-are-dense",
+          "lem-regular-sublevels-are-compact-manifolds-with-boundary",
+          "def-closed-sublevel-and-level-set-of-a-smooth-function",
+          "def-embedded-smooth-submanifold-with-boundary",
+          "def-interior-point-boundary-point-interior-and-boundary-of-a-manifold",
+          "thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold",
+          "def-connected-space",
+          "def-connected-component-and-quasicomponent",
+          "def-locally-connected",
+          "def-smooth-manifold",
+          "def-compact-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assume the axiom of countable choice. Let $M$ be a nonempty connected open smooth $m$-manifold without boundary: every connected component of a manifold is open and closed, so here no component is compact, and connectedness makes $M$ noncompact. Then there is a sequence $\\varnothing\\neq M_0\\subseteq M_1\\subseteq M_2\\subseteq\\cdots$ of compact $m$-submanifolds with boundary such that $M_j\\subseteq\\operatorname{int}M_{j+1}$, $M=\\bigcup_jM_j$, and for every $j$ the complement $M\\setminus\\operatorname{int}M_j$ has no compact connected component. Call a compact connected component of $M\\setminus\\operatorname{int}M_j$ a cap of $M_j$; the conclusion is that no $M_j$ has a cap. Consequently, for every $j$ and every connected component $C$ of the band $M_{j+1}\\setminus\\operatorname{int}M_j$ the outgoing boundary $C\\cap\\partial M_{j+1}$ is nonempty; the incoming boundary $C\\cap\\partial M_j$ may be empty.",
+        "strategy": "By countable choice choose a smooth nonnegative exhausting function $h:M\\to[0,\\infty)$ whose closed sublevel sets are compact (the published exhaustion-function theorem), so that in particular $h$ attains a minimum. Choose a regular value $b_0>\\min_Mh$ and then regular values $b_j\\in(b_0+j,b_0+j+1)$ for $j\\ge1$: the critical values of $h$ are null by Sard and hence cannot fill an interval, so each of these intervals contains a regular value. Each $K_j:=h^{-1}((-\\infty,b_j])$ is a compact manifold with boundary $h^{-1}(b_j)$ and interior $h^{-1}((-\\infty,b_j))$ by the regular-sublevel lemma, and $K_j\\subseteq\\operatorname{int}K_{j+1}$ because $b_j<b_{j+1}$ are regular. A cap of $K_j$ is a compact connected component $Z$ of $M\\setminus\\operatorname{int}K_j$, a compact manifold with boundary $\\partial Z=Z\\cap h^{-1}(b_j)$: this boundary is nonempty, since otherwise $Z$ would be a nonempty compact open and closed subset of the connected noncompact $M$; it is a closed $(m-1)$-submanifold of the compact manifold $h^{-1}(b_j)$ of the same dimension, hence a union of components of $h^{-1}(b_j)$; distinct caps have disjoint boundaries. A manifold is locally connected, so its components are open, and the components of the compact space $h^{-1}(b_j)$ therefore form a finite open cover: there are only finitely many caps $Z_1,\\dots,Z_r$. Put $K_j^+:=K_j\\cup Z_1\\cup\\cdots\\cup Z_r$: each $Z_i$ is glued to $K_j$ along its entire boundary, a union of whole boundary components of $K_j$, so the union is a compact smooth manifold with boundary without corners (two half-spaces glued along their common boundary hyperplane). Moreover $M\\setminus\\operatorname{int}K_j^+=(M\\setminus\\operatorname{int}K_j)\\setminus(Z_1\\cup\\cdots\\cup Z_r)$ is a union of components of $M\\setminus\\operatorname{int}K_j$, all noncompact, so $K_j^+$ has no cap. Now build the sequence: given a cap-free $M_j$, choose the least $k$ with $M_j\\subseteq\\operatorname{int}K_k$ (it exists because the $K_k$ exhaust $M$ and $M_j$ is compact) and set $M_{j+1}:=K_k^+$; then $M_j\\subseteq\\operatorname{int}K_k\\subseteq\\operatorname{int}M_{j+1}$ and $M_{j+1}$ is cap-free. Start with $M_0:=K_0^+$, which is nonempty because $b_0>\\min_Mh$ and compact, and is cap-free. The indices $k$ strictly increase, so the $M_j$ exhaust $M$. Finally, if a connected component $C$ of a band had $C\\cap\\partial M_{j+1}=\\varnothing$, then $\\partial C\\subseteq\\partial M_j$, and $C$ would be a compact component of $M\\setminus\\operatorname{int}M_j$: it is compact, hence closed in $M$; and it is open in $M\\setminus\\operatorname{int}M_j$, because at a point of $\\partial C\\subseteq\\partial M_j$ we have $\\partial M_j\\cap\\partial M_{j+1}=\\varnothing$, so a small ball around the point lies in $\\operatorname{int}M_{j+1}$ and its outside-of-$M_j$ half is connected to $C$ inside the band. That is a cap of $M_j$, contradicting cap-freeness. Only countable choice is used, through the exhaustion function and the Sard selection of regular values; no genericity theorem and no full axiom of choice is invoked.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Liviu I. Nicolaescu, An Invitation to Morse Theory, 2nd ed., Ch. 2 §2.2 “The Topology of Sublevel Sets” (exhaustive Morse functions, compact sublevel sets, handle attachment across critical values), printed pp. 37–56",
+              "url": "https://www3.nd.edu/~lnicolae/Morse2nd.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem, Lemma 1.6 (a manifold has a handle decomposition without n-handles iff it is open)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-open-manifolds-admit-handle-filtrations-without-top-index-handles",
+        "kind": "lemma",
+        "title": "Open manifolds admit handle filtrations without top-index handles",
+        "deps": [
+          "lem-open-manifolds-admit-exhaustions-with-no-caps",
+          "prop-dual-elimination-of-top-index-handles",
+          "def-handle-decomposition-relative-to-the-incoming-boundary",
+          "def-smooth-cobordism-triad-for-morse-theory",
+          "def-countable-choice",
+          "def-locally-connected",
+          "thm-collar-neighborhood-theorem",
+          "thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold",
+          "def-embedded-smooth-submanifold-with-boundary",
+          "def-compact-space"
+        ],
+        "statement": "Assume the axiom of countable choice. Let $M$ be a nonempty connected open smooth $m$-manifold without boundary (no compact component, hence noncompact). Then there is a sequence $M_0\\subseteq M_1\\subseteq M_2\\subseteq\\cdots$ of compact $m$-submanifolds with boundary with $M_j\\subseteq\\operatorname{int}M_{j+1}$ and $M=\\bigcup_jM_j$ such that for every $j$ the band $M_{j+1}\\setminus\\operatorname{int}M_j$ has the following presentation: each connected component $C$ of the band has nonempty outgoing boundary $\\partial^+C=C\\cap\\partial M_{j+1}$ and admits a handle decomposition relative to $\\partial^-C=C\\cap\\partial M_j$ with no handles of index $m$. Equivalently, $M_{j+1}$ is obtained from $M_j$ by first extending the boundary through a collar, then adding finitely many disjoint components by $0$-handles and attaching finitely many further handles of index at most $m-1$; no $m$-handle is ever needed. Countable choice also selects one finite handle presentation for each band component; the bands are fixed before these independent selections.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** $\\mathrm{AC}_\\omega$ and a connected open smooth $m$-manifold $M$ without boundary and with no compact component.\n\n[F1] The cap-free exhaustion: there are compact $m$-submanifolds with boundary $M_0\\subseteq M_1\\subseteq\\cdots$ with $M_j\\subseteq\\operatorname{int}M_{j+1}$ and $M=\\bigcup_jM_j$, such that no $M_j$ has a cap and every connected component of every band $M_{j+1}\\setminus\\operatorname{int}M_j$ has nonempty outgoing boundary ([[lem-open-manifolds-admit-exhaustions-with-no-caps]]).\n\n[L1] DT-6 dual elimination: a compact connected triad $(W;M_0,M_1)$ with $M_1\\neq\\varnothing$ admits a handle decomposition relative to $M_0$ with no handles of index $\\dim W$, and the conventions of the relative handle decomposition and of a smooth cobordism triad allow the empty incoming face and the empty outgoing face ([[prop-dual-elimination-of-top-index-handles]], [[def-handle-decomposition-relative-to-the-incoming-boundary]], [[def-smooth-cobordism-triad-for-morse-theory]]); the proposition assumes $\\mathrm{AC}_\\omega$.\n\n[L2] Every compact manifold with boundary has a collar, its boundary is a closed embedded submanifold, and a compact locally connected space has finitely many components ([[thm-collar-neighborhood-theorem]], [[thm-the-boundary-is-a-closed-embedded-smooth-n-minus-one-manifold]], [[def-embedded-smooth-submanifold-with-boundary]], [[def-locally-connected]], [[def-compact-space]]).\n\n## Proof\n\n**Proof technique:** direct.\n\n1.1 Fix $j$ and a connected component $C$ of the band $M_{j+1}\\setminus\\operatorname{int}M_j$. The band is a compact $m$-manifold with boundary and $C$ is a compact connected component of it; the boundary of $C$ is the disjoint union of the faces $C\\cap\\partial M_j$ and $C\\cap\\partial M_{j+1}$, each a closed embedded submanifold of the corresponding boundary, and [L2] supplies collars of both. Hence $(C;C\\cap\\partial M_j,C\\cap\\partial M_{j+1})$ is a compact connected smooth cobordism triad, and its outgoing face $C\\cap\\partial M_{j+1}$ is nonempty by the cap-freeness in [F1]. [F1, L2, given, construct]\n\n2.1 Apply [L1] to this triad: because the outgoing face is nonempty, $C$ admits a handle decomposition relative to the incoming face $C\\cap\\partial M_j$ with no handles of index $m=\\dim C$. When the incoming face is empty, the same proposition is applied with the empty incoming face convention, so the presentation begins with $0$-handles and again uses no $m$-handle. [L1, step 1.1]\n\n3.1 The band has finitely many connected components by compactness and local connectedness [L2]. Assembling the presentations of its components and the collar $\\partial M_j\\times[0,\\varepsilon]$ implicit in the relative convention gives a presentation of $M_{j+1}$ from $M_j$: extend the boundary through the collar, then add each component by $0$-handles and further handles of index at most $m-1$. In particular no $m$-handle is ever needed. [F1, L1, L2, step 2.1, construct]\n\n4.1 The only in-run suppliers used are [F1] and [L1], both of which assume $\\mathrm{AC}_\\omega$, and the standard collar and boundary items of [L2]; no handle cancellation, Whitney trick or later page is invoked. The bands have already been fixed; each has finitely many components. Index a band component $C$ by its band number and the least member of a fixed countable coordinate basis contained in $\\operatorname{int}_M C$. Each component has a nonempty ambient interior, so such a member exists. Distinct components of one band have disjoint interiors and therefore cannot receive the same nonempty basis member. This gives an injection into $\\mathbb N\\times\\mathbb N$. Countable choice selects a complete finite handle presentation for each of this at-most-countable family of nonempty witness sets. This proves the claimed filtration and the stated description of the band presentations. [F1, L1, L2, step 3.1] ∎\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            },
+            {
+              "title": "Janek Wilhelm, The Smale–Hirsch Immersion Theorem and other Applications to Closed Manifolds, §§1–2, PDF pp. 1–3 (Theorem 1, relative parametric C⁰-dense h-principle for immersions with q > n; microextension and local h-principle 8.3.1)",
+              "url": "https://www2.mathematik.hu-berlin.de/~wendl/Sommer2025/hPrinzip/20250530_Wilhelm.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-formal-immersion-homotopies-extend-over-a-subcritical-handle",
+        "kind": "lemma",
+        "title": "Formal-immersion homotopies extend over a subcritical handle",
+        "deps": [
+          "lem-formal-immersion-homotopies-extend-over-a-collar",
+          "lem-parametric-immersion-extension-on-a-disk",
+          "lem-restriction-of-formal-immersion-data-has-the-parametric-lifting-property",
+          "def-compact-parameter-pair",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-k-handle-core-cocore-attaching-region-and-belt-sphere",
+          "def-attaching-a-smooth-handle-with-corner-rounding",
+          "def-hurewicz-and-serre-fibrations",
+          "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "def-weak-homotopy-equivalence",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $0\\le k\\le m\\le n$ with $k<n$, let $N^n$ be a smooth manifold without boundary, let $A$ be a compact smooth $m$-manifold with boundary, and attach an $m$-dimensional $k$-handle $H=D^k\\times D^{m-k}$ to obtain $M$. The restriction of holonomic full-$m$-column core/germ data to the attaching boundary jet is a Serre fibration. If the derivative map on $A$ is a weak homotopy equivalence, so is the derivative map on $M$. A compact-parameter formal family that is genuine on an open source neighbourhood of $A$ and smoothly holonomic on a closed relative parameter set $Q$ can be deformed to genuine immersions relative to $A$ and $Q$. The $m-k$ cocore factor remains a source factor. For $k=0$ the attaching region is empty; $k=m$ is allowed precisely when $m<n$.\n\nThe lifting assertion concerns the exact first-jet/germ interface proved below, rather than an unrestricted codimension-zero restriction theorem.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** The boundaryless target $N^n$, handle, compact parameter pair, neighbourhood-holonomic relative data, and countable choice.\n\n[F1] Full-column core restriction is a genuine/formal Serre fibration, with compact smooth parameter lifting ([[lem-restriction-of-formal-immersion-data-has-the-parametric-lifting-property]]).\n\n[F2] Statement (iii) of [[lem-parametric-immersion-extension-on-a-disk]] supplies relative full-column core integration and positive cocore compression, preserving attaching germs. Its Statement (iv) transfers any compact-source derivative weak equivalence to the prescribed compact parameter class, with neighbourhood-holonomic relative input. In each use the source retains all $m$ columns and the core index is $k<n$.\n\n[F3] An outward collar and the compact source have homotopy-equivalent genuine and formal mapping spaces; this comparison preserves source dimension ([[lem-formal-immersion-homotopies-extend-over-a-collar]]).\n\n[F4] The geometric handle and its attaching-region smooth gluing have the specified source tangent directions ([[def-k-handle-core-cocore-attaching-region-and-belt-sphere]], [[def-attaching-a-smooth-handle-with-corner-rounding]]). Weak equivalence means all components and all based homotopy groups ([[def-weak-homotopy-equivalence]]).\n\n## Proof\n\n**Proof technique:** direct, using full-column core comparison and relative cocore compression.\n\n1.1 The core lifting assertion is exactly [F1] with core dimension $k$, full column rank $m$, and target dimension $n$. The transverse columns are extended as frames in the normal quotient and with their tangential lift components; they are not differentiated parameter coordinates. The assumption $k<n$ supplies the positive normal direction in its covering-homotopy construction. [F1, F4, given]\n\n1.2 For the relative family, use its given genuine map on a source neighbourhood of $A$ as reference in the attaching collar. Restrict the formal data on the handle to the $k$-core, retaining all $m$ columns. Its attaching jet is the jet of that reference. By [F2] this family deforms through full-column formal core data to holonomic core data, with the attaching jet and the parameter neighbourhood of $Q$ fixed. Realize the holonomic data near the core by target local addition in the cocore directions. Pinch this realization to the given reference near the attaching core: identical full first jets make the difference $O(|v|^2)$ and the first derivative difference $O(|v|)$, so the differentiated cutoff has size $O(\\delta)$ on a cocore neighbourhood of radius $\\delta$. Compactness gives one small radius preserving full rank for all parameters and homotopy times. These formulas match an actual open attaching germ, hence they glue to the unchanged immersion on $A$. [F1, F2, F4, construct]\n\n2.1 The resulting genuine map is defined near the union of the core and the attaching collar, and equals the original whole-handle immersion on a smaller parameter neighbourhood of $Q$. To obtain this, on a parameter transition strip inside the given holonomic neighbourhood blend the original immersion and the reconstructed map in local-addition coordinates near the core. Their identical full core jets give $O(|v|^2)$ value and $O(|v|)$ derivative errors, so compactness and a sufficiently small common cocore radius preserve rank. On that smaller parameter neighbourhood keep the original map on the entire handle; the compression below is the identity there. Pull it back by the handle compression of [F2], with positive cocore scale $\\lambda(p,x)$ equal to one near $Q$ and throughout a smaller attaching collar and transitioning inside the already prescribed reference region. This embeds the whole handle in that union, fixes $A$, and has triangular derivative blocks $I,\\lambda I$. The associated formal homotopy starts from the original data: compress the original pair by this embedding isotopy, transport its full tangent columns to the core by the horizontal/vertical identity identifications, and reconstruct over a small cocore neighbourhood using the core homotopy. When the base map is not holonomic in the cocore directions, its vertical Taylor term can be interpolated to the supplied transverse formal columns freely; the base map has no immersion constraint during a formal homotopy. On the attaching region these terms already agree with the reference derivative. Transport target tangent fibres by local addition and interpolate the bundle columns after shrinking the cocore radius; their differences tend uniformly to zero from the common core monomorphism, so injectivity is preserved. This is fixed on the reference germ and on $Q$, and proves relative full-handle integration. [F1, F2, step 1.2, construct]\n\n3.1 For the weak-equivalence preservation, take a sphere or disk parameter test with a formal family on $M$ and the prescribed genuine boundary family. An enlarged source collar $A^+$ inside the attaching region has the same derivative equivalence as $A$ by [F3]. The finite relative lifting in [F2] first holonomizes the family on $A^+$, keeping its prescribed genuine parameter data. Extend this deformation to the handle core using the formal first-jet lifting of [F1] on the cut attaching boundary. Reconstruct full formal handle data by the compression and target/bundle transport of step 2.1, using the varying $A^+$ family as attaching reference. This gives a global formal homotopy, then step 1.2–2.1 makes the whole handle genuine. All reconstructions are supported outside the fixed smaller $A$ collar where required; no all-boundary-jet extension of an arbitrary $A$ map is inferred from a bump function. Sphere tests give surjectivity and disk tests with their genuine boundary fixed give injectivity on each homotopy group and on components. Thus $D_M$ is a weak equivalence. [F1, F2, F3, F4, step 1.2, step 2.1] ∎\n",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "Janek Wilhelm, The Smale–Hirsch Immersion Theorem and other Applications to Closed Manifolds, §§1–2, PDF pp. 1–3 (Theorem 1, relative parametric C⁰-dense h-principle for immersions with q > n; microextension and local h-principle 8.3.1)",
+              "url": "https://www2.mathematik.hu-berlin.de/~wendl/Sommer2025/hPrinzip/20250530_Wilhelm.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-formal-immersion-homotopies-extend-over-a-collar",
+        "kind": "lemma",
+        "title": "Formal-immersion homotopies extend over a collar",
+        "deps": [
+          "thm-collar-neighborhood-theorem",
+          "def-smooth-collar-of-a-manifold-boundary",
+          "def-derivative-map-from-immersions-to-formal-immersions",
+          "def-weak-homotopy-equivalence",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-countable-choice"
+        ],
+        "statement": "Assume countable choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $X$ be a compact smooth $m$-manifold with boundary, and attach an outward collar to form $X^+=X\\cup_{\\partial X}(\\partial X\\times[-1,0])$, using a fixed smooth collar to give the union its smooth structure. Let $X^\\circ=\\operatorname{int}X$ and let $N$ be a smooth manifold with $\\dim N\\ge m$. Then each restriction map in\n$$\\operatorname{Imm}(X^+,N)\\longrightarrow\\operatorname{Imm}(X,N)\\longrightarrow\\operatorname{Imm}(X^\\circ,N)$$\nand in the analogous sequence for $\\operatorname{FImm}$ is a homotopy equivalence for the weak compact-open smooth topology. Consequently the derivative map is a weak homotopy equivalence on any one of $X^+$, $X$, and $X^\\circ$ if and only if it is one on the other two. The homotopy inverses and their comparison homotopies are given by precomposition with smooth embeddings supported in a collar; they apply simultaneously to parameter families and fix data on a core outside that collar. Thus formal-immersion families and homotopies extend across the attached collar up to these comparison homotopies.\n\nAll three source manifolds have dimension $m$. An immersion of $X\\times[0,1]$ has source dimension $m+1$ and is a different object from a path of immersions of $X$; no product-source assertion is intended.",
+        "strategy": "Owner-authorized constructive repair from full Smale covering-homotopy source, actual library suppliers, compact-parameter germ comparisons and compatible source exhaustion. Supplied proof awaits root personal adjudication; local checks are not independent mathematical acceptance.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-smale-hirsch-for-open-source-manifolds",
+        "kind": "theorem",
+        "title": "Smale–Hirsch for open source manifolds",
+        "deps": [
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "lem-open-manifolds-admit-handle-filtrations-without-top-index-handles",
+          "lem-formal-immersion-homotopies-extend-over-a-subcritical-handle",
+          "lem-formal-immersion-homotopies-extend-over-a-collar",
+          "lem-parametric-immersion-extension-on-a-disk",
+          "lem-smooth-families-and-path-components-in-the-weak-topology",
+          "lem-smoothing-formal-immersion-families",
+          "lem-smoothing-genuine-immersion-families",
+          "def-compact-parameter-pair",
+          "def-weak-homotopy-equivalence",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-derivative-map-from-immersions-to-formal-immersions",
+          "def-smooth-manifold",
+          "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "prop-dual-elimination-of-top-index-handles",
+          "def-smooth-cobordism-triad-for-morse-theory",
+          "def-handle-decomposition-relative-to-the-incoming-boundary",
+          "def-countable-choice",
+          "thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space",
+          "thm-euclidean-tubular-neighbourhood-theorem",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "thm-every-smooth-manifold-admits-a-riemannian-metric",
+          "thm-extreme-value-metric",
+          "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "lem-joint-jet-continuity-and-the-weak-smooth-topology",
+          "prop-relative-cw-inclusions-are-cofibrations"
+        ],
+        "statement": "Assume the axiom of countable choice. Let $M$ be an open smooth $m$-manifold without boundary (no compact connected component; every component of a manifold is open and closed) and let $N$ be a smooth $n$-manifold without boundary with $m\\le n$. Then the derivative map $$D:\\operatorname{Imm}(M,N)\\longrightarrow\\operatorname{FImm}(M,N)$$ is a weak homotopy equivalence for the weak compact-open $C^\\infty$ topology. Moreover, the relative parametric form holds for compact parameter pairs ([[def-compact-parameter-pair]]): for every compact parameter pair $(P,Q)$ and every continuous map $\\Phi:P\\to\\operatorname{FImm}(M,N)$ that is smoothly holonomic on $Q$ (the original data are smooth and holonomic on an open parameter neighbourhood of $Q$), there is a homotopy of $\\Phi$ relative to $Q$ to a continuous family of genuine immersions $P\\to\\operatorname{Imm}(M,N)$; moreover a smooth family of formal immersions that is holonomic on a neighbourhood of $Q$ can be deformed, relative to $Q$, to a smooth family of genuine immersions. The equidimensional case $m=n$ is covered; no strict-codimension hypothesis is imposed.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** Countable choice, a boundaryless open source $M^m$ with no compact connected component, target $N^n$ with $m\\le n$, and a compact parameter pair whose original formal family is smoothly holonomic on $Q$.\n\n[F1] Cap-free compact exhaustions and no-top-index finite handle filtrations are supplied by [[lem-open-manifolds-admit-handle-filtrations-without-top-index-handles]]. Initial components with nonempty boundary admit no-top-index presentations by [[prop-dual-elimination-of-top-index-handles]].\n\n[F2] Full-source subcritical handle integration and compact-parameter core lifting are constructive ([[lem-formal-immersion-homotopies-extend-over-a-subcritical-handle]], [[lem-parametric-immersion-extension-on-a-disk]]). Fixed-dimension collar comparison is [[lem-formal-immersion-homotopies-extend-over-a-collar]].\n\n[F3] Formal-family smoothing applies to arbitrary sources ([[lem-smoothing-formal-immersion-families]]). The genuine-family and path smoothing suppliers require compact sources, and are used only on compact stages ([[lem-smoothing-genuine-immersion-families]], [[lem-smooth-families-and-path-components-in-the-weak-topology]]). The noncompact genuine-family extension is proved separately in step 1.3. Weak continuity is joint continuity of source jets ([[lem-joint-jet-continuity-and-the-weak-smooth-topology]]), and the topology tests compact source sets ([[def-space-of-immersions-and-space-of-formal-immersions]], [[def-weak-homotopy-equivalence]]).\n\n[F4] Parameter convolution with a supplied unit-mass smooth bump approximates continuous data and their source derivatives on compact sets; differentiating convolution is valid ([[def-mollifier-family-generated-by-a-unit-mass-smooth-bump]], [[thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign]]).\n\n[F5] Countable choice supplies a target Euclidean embedding and tubular retraction, a source metric, and a countable locally finite smooth partition with compact chart supports ([[thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space]], [[thm-euclidean-tubular-neighbourhood-theorem]], [[thm-every-smooth-manifold-admits-a-riemannian-metric]], [[thm-smooth-partitions-of-unity-exist-on-manifolds]]). Smooth cutoffs retain a prescribed compact parameter neighbourhood; positive continuous functions have positive minima on compact sets ([[lem-manifold-bump-for-a-compact-set-inside-an-open-set]], [[thm-extreme-value-metric]]). Finite CW boundary inclusions have HEP with arbitrary targets ([[prop-relative-cw-inclusions-are-cofibrations]]).\n\n## Proof\n\n**Proof technique:** direct compatible exhaustion construction, with a deterministic countable selection rule.\n\n1.1 If $M$ is empty, both spaces are singleton spaces. An open zero-manifold with no compact component is empty, since every singleton component is compact. Treat a nonempty connected positive-dimensional source first. Choose the compact filtration $K_j\\subset\\operatorname{int}K_{j+1}$ in [F1]. Each component of $K_0$ has nonempty boundary: a boundaryless codimension-zero component would be open and closed in the ambient connected noncompact manifold. Dual elimination gives a finite presentation with indices $k<m\\le n$. Every later band has a finite presentation with the same strict inequality $k<m$. Hence all its handles satisfy the integration hypothesis $k<n$, also when $m=n$. [F1, given]\n\n1.2 Specify the stage choices to avoid replacing countable choice by dependent choice. Fix beforehand countable coordinate and framed covers, target embedding/retraction, bump functions and mollifier translates for the source, and finite covers for the compact parameter manifold. Countable choice suffices for this countable fixed geometric data. On a finite stage, finite rational linear combinations of the fixed smooth bump translates form a countable dense family of Euclidean smooth corrections in the needed first-jet norm. Indeed first mollify a compactly supported correction; its differentiated convolution converges by [F4]. Approximate that integral and its first derivatives by a finite Riemann sum of bump translates, then approximate the finitely many centres and coefficients by rationals. Uniform continuity of the bump derivatives gives simultaneous first-jet approximation. Apply this on the finitely many coordinate pieces and paste with the fixed partition. The same argument approximates bundle-column corrections in zeroth order. [F3, F4, construct, choose]\n\n1.3 We extend genuine-family smoothing to noncompact $M$ before using it. Let $a(p,x)=e(g_p(x))$ for a continuous compact-parameter genuine family, smooth on a parameter neighbourhood $W$ of its relative set. The permitted ambient first jets are $(z,L)$ with $z$ in the tubular domain and $dr_zL$ injective. For each precompact source chart, compactness of its closure times $P$ gives a positive jet-error bound. A locally finite subordinate partition averages smaller such bounds to a positive continuous tolerance $\\eta(x)$ valid at every $p$: at $x$ the average is at most the largest active bound, which is valid at that point. Fix a countable locally finite smooth partition $(\\lambda_j)$ with compact supports $C_j$. Mollify $a$ only in the parameter variables, using the tubular projection on $P_0$ and interval clamps as in the compact smoothing proof. Choose a constant radius $\\delta_j$ for each support so that its value and first source-derivative errors are less than $2^{-j-4}\\min_{C_j}\\eta/(1+\\sup_{C_j}|d\\lambda_j|)$. These are independent countably many choices; least sufficiently small dyadic radii suffice. Put $b=\\sum_j\\lambda_j a_{\\delta_j}$. Since $\\sum_jd\\lambda_j=0$, $$d_xb-d_xa=\\sum_j\\lambda_j(d_xa_{\\delta_j}-d_xa)+\\sum_jd\\lambda_j(a_{\\delta_j}-a).$$ Both this error and $b-a$ are smaller than $\\eta(x)/4$, by the displayed bounds and the convergent geometric sum. Thus the straight ambient homotopy from $a$ to $b$, followed by $r$, remains immersive everywhere. For the relative version replace $b$ by $\\chi(p)a+(1-\\chi(p))b$, with $\\chi=1$ near the relative set and supported in $W$; there is no source derivative of $\\chi$. This endpoint is jointly smooth, agrees with the original family near the relative set, and the homotopy is weakly continuous in every source derivative by local finiteness. Empty supports are omitted. The same estimates allow source cutoffs on compact stage constructions: their derivatives contribute bounded multiples of the value error. No uniform global rank margin or global convolution radius is required. [F3, F4, F5, construct, choose]\n\n2.1 Start with the original global formal family, smoothed relative to a fixed parameter neighbourhood of $Q$ by [F3]. Apply [F2] over the finite initial presentation to make it genuine on $K_0$ and a small outward source collar. Choose once a compact collar enlargement $V_0$ in that genuine region. Inductively integrate the finite presentation of the next band relative to the genuine neighbourhood of $V_j$, retaining a smaller collar around its incoming face, and end genuine on a collar enlargement $V_{j+1}$ of $K_{j+1}$. Adding or shortening the incoming collar changes neither source dimension nor the handle indices. The relative construction fixes $V_j$ pointwise, and we retain it as a common fixed neighbourhood at every subsequent stage. The fixed parameter neighbourhood of $Q$ is also retained at every stage. [F1, F2, F3, step 1.1, construct]\n\n2.2 Enumerate candidate relative formal homotopies from those corrections, retaining the current input exactly near initial time and on the frozen source and parameter neighbourhoods. Use a fixed cutoff zero on the relative region, with its transition supported where an existing smooth witness is already unchanged. Precompose every candidate with a fixed smooth temporal reparametrization constant on both endpoint collars. Near final time replace the candidate bundle columns by the differential of its candidate final base map only on a source neighbourhood of the compact stage being holonomized. Use a temporal cutoff equal to one near final time, multiplied by a source cutoff $\\zeta$ equal to one near that stage and supported in the final genuine collar of a successful witness. Outside this collar retain the candidate formal columns; in particular the original possibly nonholonomic data outside the compact support are unchanged. The finite presentation may include a fixed small outgoing collar, so such $\\zeta$ can be included in the enumerated stage masks. Project Euclidean columns to the tangent bundle of the retracted candidate base map. At initial time this is the current formal datum; on the fixed regions it is unchanged because those data are genuine; at final time it is holonomic on the prescribed compact stage and its smaller outgoing collar by construction. A successful relative stage witness exists by [F2]. Smooth its parameter and time variables using [F3], relative to the frozen source and parameter neighbourhoods, then impose final holonomicity by the same endpoint derivative replacement. Compact first-jet margins make these operations rank-preserving. Make that witness constant in temporal endpoint collars. The candidate endpoint replacement is supported within its constant final-time collar, so candidate final derivatives and candidate bundle columns lie over the same base map. The density from step 1.2 approximates it closely enough that every candidate column map remains injective on the compact parameter-source-time set, the endpoint remains immersive, and the maps stay in the tubular domain. Source cutoffs contribute only their bounded derivatives times the small zeroth-order errors. Thus at least one candidate satisfies the finite-stage conditions. Select the least such candidate in the fixed natural-number enumeration. Likewise choose the least dyadic collar width and least integer subdivision satisfying the explicit compact bounds in the core lifting formulas. This is a uniquely defined selection rule depending on the current input, so ordinary recursion defines the entire stage sequence. There is no invocation of dependent choice to select unspecified successive deformation witnesses. [F2, F3, F4, step 1.2, construct]\n\n3.1 These are global formal homotopies with compact source support. The handle construction of [F2] is defined on an ambient neighbourhood of its compact handle: its cocore compression and local-addition formulas extend to slightly larger cocore disks, while its attaching region is already the given reference germ. Since $k<m$, the nonattaching faces have a cocore collar available; the finitely many formulas therefore extend into an outgoing buffer contained in a later $K_i$. Use the parameter-time smoothing of step 2.2 before this construction; source-dependent time substitution then remains source-smooth. On that buffer cut off the homotopy time by a source function $\\chi$ equal to one near the processed compact stage and zero outside the buffer: use $(f_{t\\chi(x)},F_{t\\chi(x)})$. This is still a formal immersion because the same time is used in the base map and its fibre monomorphism; a formal bundle map need not equal the derivative of its base map on the transition region. Where $\\chi=1$ the new family is genuine, and outside the buffer it is unchanged. At an incoming frozen neighbourhood no cutoff modification is made. Thus each stage has a global endpoint and all stages concatenate exactly. No arbitrary all-boundary-jet extension or dependent limit of local section margins is used. [F2, step 2.1, construct]\n\n4.1 Put the stage homotopies on $[t_j,t_{j+1}]$, where $t_j=1-2^{-j}$, and use a smooth reparametrization constant near both endpoints. Define the family at $t=1$ by its eventual value at each source point. Every compact source set $C$ lies inside some $V_j$ and all later homotopies are fixed on a common open neighbourhood of $C$. Hence each spatial derivative on $P\\times C$ is stationary for all sufficiently late times; in particular it is jointly continuous at $t=1$. By [F3] the full homotopy is weakly continuous, its endpoint is smooth in the source and genuine everywhere, and it is relative to $Q$. In the smooth version, every source point has a neighbourhood on which the evaluation map is independent of $t$ near $1$, so the evaluation map is smooth there as well as at the finitely many earlier joins. This proves the stated smooth relative form too. [F3, step 2.1, step 3.1, step 2.2, construct]\n\n5.1 For surjectivity, represent a based formal homotopy class by a sphere family and collapse a small parameter neighbourhood of the marked point to that point. This precomposition is homotopic to the identity fixing the marked point and makes the family holonomic and smooth there; step 4.1 then gives a genuine representative with that basepoint fixed. For injectivity in a based test, first perform the same collapse near the marked boundary point and extend its formal derivative homotopy over the disk by [F5]. The resulting genuine boundary family is constant near that point. An arbitrary continuous genuine boundary family of a formal disk can then be smoothed through genuine families by step 1.3, relative to a constant neighbourhood of its marked point when a based test requires one. Extend its formal derivative homotopy to the disk by the finite CW boundary HEP of [F5]. Reparametrize the resulting disk radially to be constant in the inward collar coordinate near its boundary; its formal data there are the derivatives of the now smooth genuine boundary family. Step 4.1 applies relative to that collar and produces a genuine filling of the smoothed boundary. Attach the reverse preliminary genuine boundary homotopy as an annulus to recover a filling of the original boundary family. These are continuous genuine families on the entire noncompact source, so they prove injectivity in every degree, including degree one. The interval test gives the component comparison in the same way. All based corrections fix the marked genuine basepoint. This is weak equivalence, without requiring a compact parameter map to factor through a finite source stage. [F2, F3, F5, step 1.3, step 4.1, construct]\n\n6.1 A second-countable manifold has at most countably many components, because each open component contains a distinct member of a fixed countable basis. Mapping spaces split as products over them in the weak topology: a compact source set meets only finitely many components. Apply the deterministic construction componentwise using the fixed countable geometric data; coordinatewise products of the resulting maps and homotopies are therefore weakly continuous. Homotopy groups of products are computed by coordinate maps and homotopies, and the countable choice premise supplies the componentwise component representatives where needed. This proves both the weak-equivalence and relative-family assertions on all of $M$. Only the fixed countable geometric selections and the explicitly countable-choice suppliers use $\\mathrm{AC}_\\omega$; the recursive deformation choices use the least-candidate rule. [F1, F2, F3, step 2.2, step 4.1, step 5.1] ∎\n",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "Janek Wilhelm, The Smale–Hirsch Immersion Theorem and other Applications to Closed Manifolds, §§1–2, PDF pp. 1–3 (Theorem 1, relative parametric C⁰-dense h-principle for immersions with q > n; microextension and local h-principle 8.3.1)",
+              "url": "https://www2.mathematik.hu-berlin.de/~wendl/Sommer2025/hPrinzip/20250530_Wilhelm.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 9
+      },
+      {
+        "id": "def-normal-bundle-of-a-formal-immersion",
+        "kind": "definition",
+        "title": "Normal bundle of a formal immersion",
+        "deps": [
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-quotient-vector-bundle-by-a-subbundle",
+          "thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle",
+          "def-pullback-vector-bundle-as-a-fibre-product",
+          "thm-the-pullback-fibre-product-is-a-smooth-vector-bundle",
+          "def-vector-bundle-map-over-a-smooth-base-map",
+          "thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric",
+          "prop-orthogonal-complements-of-subbundles-are-smooth-subbundles",
+          "prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle",
+          "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "def-countable-choice"
+        ],
+        "statement": "Let $(f,F)$ be a formal immersion from $M^m$ to $N^n$. The **normal bundle of the formal immersion** is the quotient vector bundle $$\\nu_F:=f^*TN\\big/F(TM)$$ over $M$, of rank $n-m$ when $m\\le n$, where $f^*TN=M\\times_{f}TN$ is the pullback bundle and $F(TM)\\subseteq f^*TN$ is the image subbundle (a smooth subbundle because $F$ is a fibrewise injective bundle map over $f$). If $M=\\varnothing$ and $m>n$, the quotient is the empty bundle, which we regard as rank zero; no negative rank is assigned. If a smooth bundle metric is chosen on $f^*TN$, the fibrewise orthogonal complement of $F(TM)$ is a smooth subbundle of $f^*TN$ that represents $\\nu_F$ canonically and identifies it with the orthogonal normal bundle; different metrics give canonically isomorphic orthogonal complements, so the isomorphism class of $\\nu_F$ is intrinsic. When $(f,F)=(f,df)$ for a genuine immersion, $\\nu_{df}$ is the normal bundle of the immersion, whose isomorphism class agrees with the normal bundle of the embedded image when the immersion is an embedding.",
+        "strategy": "Definition. The quotient of a vector bundle by a subbundle is a smooth vector bundle (DG quotient theorem), and the pullback bundle is smooth (DG pullback theorem). The metric complement is smooth (DG orthogonal-complement proposition), and the identification of the quotient with a complement is the published normal-bundle dictionary. Nothing is proved; the tangent-normal identity is the next lemma. Only countable choice is used, through the published bundle-metric, complement and quotient items.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-formal-immersion-gives-the-tangent-normal-bundle-identity"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-formal-immersion-gives-the-tangent-normal-bundle-identity",
+        "kind": "lemma",
+        "title": "Formal immersion gives the tangent normal-bundle identity",
+        "deps": [
+          "def-normal-bundle-of-a-formal-immersion",
+          "def-whitney-sum-of-vector-bundles",
+          "cor-every-vector-subbundle-has-a-smooth-complement",
+          "thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle",
+          "def-pullback-vector-bundle-as-a-fibre-product",
+          "def-countable-choice",
+          "thm-the-pullback-fibre-product-is-a-smooth-vector-bundle",
+          "prop-bundle-maps-over-f-are-sections-of-the-pulled-back-hom-bundle",
+          "def-quotient-vector-bundle-by-a-subbundle",
+          "prop-orthogonal-complements-of-subbundles-are-smooth-subbundles",
+          "thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric",
+          "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. For every formal immersion $(f,F)$ from $M^m$ to $N^n$ the image $F(TM)$ is a smooth subbundle of the pullback $f^*TN$, and the quotient normal bundle $\\nu_F:=f^*TN/F(TM)$ has rank $n-m$ when $m\\le n$; if $M=\\varnothing$ and $m>n$, use the empty rank-zero bundle as in [[def-normal-bundle-of-a-formal-immersion]]. The quotient map exhibits the short exact sequence of smooth vector bundles over $M$ $$0\\longrightarrow TM\\xrightarrow{\\ F\\ }f^*TN\\longrightarrow\\nu_F\\longrightarrow0,$$ which splits over $M$: a smooth complement $C\\subseteq f^*TN$ of $F(TM)$ restricts to an isomorphism $C\\to\\nu_F$ and gives a smooth bundle isomorphism $TM\\oplus\\nu_F\\to f^*TN$, $(v,q(c))\\mapsto F(v)+c$. The splitting is not canonical in general; if a bundle metric on $f^*TN$ is chosen, the orthogonal complement $F(TM)^{\\perp}$ is a canonical complement for that metric, the orthogonal splitting $TM\\oplus F(TM)^{\\perp}\\cong f^*TN$ restricts to $F$ on the tangent summand, and different metrics give isomorphic splittings. In particular, for a genuine immersion the isomorphism identifies the normal bundle of the immersion with the quotient $f^*TN/df(TM)$.",
+        "strategy": "The sequence $0\\to TM\\xrightarrow{F}f^*TN\\to\\nu_F\\to0$ is exact by construction of the quotient, and $F_x$ is injective, so $\\nu_F$ has rank $n-m$. A subbundle of a smooth vector bundle has a smooth complement (published complement theorem); for a complement $C$ the map $TM\\oplus C\\to f^*TN$, $(v,c)\\mapsto F(v)+c$, is a smooth bundle map that is fibrewise an isomorphism because $F_x$ is injective and $\\dim C=n-m$, and the quotient map restricts to an isomorphism $C\\to\\nu_F$; this gives the stated isomorphism with $\\nu_F$. The metric form is the published orthogonal-complement dictionary: a metric makes the complement canonical for that metric, but no complement, and hence no splitting, is canonical in general. The complement and quotient items used here assume countable choice; no further choice is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-positive-codimension-thickening-reduces-closed-sources-to-the-open-case",
+        "kind": "lemma",
+        "title": "Positive-codimension thickening reduces closed sources to the open case",
+        "deps": [
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "thm-smale-hirsch-for-open-source-manifolds",
+          "def-normal-bundle-of-a-formal-immersion",
+          "lem-formal-immersion-gives-the-tangent-normal-bundle-identity",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "lem-the-disk-bundle-of-a-smooth-vector-bundle-is-a-compact-manifold-with-boundary",
+          "def-whitney-sum-of-vector-bundles",
+          "cor-every-vector-subbundle-has-a-smooth-complement",
+          "thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric",
+          "thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space",
+          "thm-euclidean-tubular-neighbourhood-theorem",
+          "lem-normal-addition-is-a-local-diffeomorphism-along-the-zero-section",
+          "def-tubular-neighbourhood-of-an-embedded-submanifold",
+          "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "def-hurewicz-and-serre-fibrations",
+          "def-weak-homotopy-equivalence",
+          "lem-formal-immersion-homotopies-extend-over-a-collar",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $M^m$ be closed, $N^n$ boundaryless, and $m<n$. Fix a rank-$q$ smooth bundle $E\\to M$, where $q=n-m>0$, and a bundle metric on $E$. Write $B=D(E)$. Define the enriched spaces\n$$\\mathcal F_E=\\{(f,F,\\alpha):(f,F)\\in\\operatorname{FImm}(M,N),\\ \\alpha:E\\overset{\\cong}{\\longrightarrow}f^*TN/F(TM)\\},$$\n$$\\mathcal I_E=\\{(g,\\alpha):g\\in\\operatorname{Imm}(M,N),\\ \\alpha:E\\overset{\\cong}{\\longrightarrow}g^*TN/dg(TM)\\}.$$\nThe normal identification $\\alpha$ is part of the datum, not a condition defining a subspace of the ordinary immersion space. Use the weak smooth topology also on these bundle maps. The reduction comprises: (i) every datum in $\\mathcal F_E$ admits a formal extension to $B$; (ii) restriction to the zero section, with the induced quotient identification from the vertical derivative, gives weak homotopy equivalences $r_I:\\operatorname{Imm}(B,N)\\to\\mathcal I_E$ and $r_F:\\operatorname{FImm}(B,N)\\to\\mathcal F_E$; (iii) the equidimensional open-source theorem on $\\operatorname{int}B$, the fixed-dimension collar comparison, and these restriction maps give the enriched derivative equivalence. Descent to ordinary immersion spaces additionally compares the two normal-identification forgetful fibrations, with their common fibre the smooth bundle automorphism space of $E$. Relative families use data holonomic on open neighbourhoods of the prescribed closed parameter set.",
+        "strategy": "Owner-authorized constructive repair from full Smale covering-homotopy source, actual library suppliers, compact-parameter germ comparisons and compatible source exhaustion. Supplied proof awaits root personal adjudication; local checks are not independent mathematical acceptance.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 10
+      },
+      {
+        "id": "thm-smale-hirsch-immersion-theorem",
+        "kind": "theorem",
+        "title": "The Smale–Hirsch immersion theorem",
+        "deps": [
+          "lem-parametric-immersion-extension-on-a-disk",
+          "lem-finite-relative-homotopy-lifting-across-a-weak-equivalence",
+          "lem-a-handle-decomposition-gives-a-relative-cw-complex",
+          "def-compact-parameter-pair",
+          "thm-smale-hirsch-for-open-source-manifolds",
+          "lem-positive-codimension-thickening-reduces-closed-sources-to-the-open-case",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-derivative-map-from-immersions-to-formal-immersions",
+          "def-weak-homotopy-equivalence",
+          "def-countable-choice",
+          "lem-formal-immersion-homotopies-extend-over-a-subcritical-handle"
+        ],
+        "statement": "Assume the axiom of countable choice. Let $M^m$ and $N^n$ be smooth manifolds without boundary with $m<n$. Then the derivative map\n$$D:\\operatorname{Imm}(M,N)\\longrightarrow\\operatorname{FImm}(M,N),\\qquad f\\longmapsto(f,df),$$\nis a weak homotopy equivalence for the weak compact-open $C^\\infty$ topology. Its relative parametric form is stated for compact parameter pairs [[def-compact-parameter-pair]]: a continuous family of formal immersions that is smoothly holonomic on the prescribed closed sub-parameter set $Q$ can be deformed relative to $Q$ to a continuous family of genuine immersions. Here smoothly holonomic means that the original data are smooth and holonomic on an open parameter neighbourhood of $Q$, as in that definition. A smooth family with this property admits a smooth relative deformation. Positive codimension is essential for the closed-source assertion.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** Countable choice, boundaryless $M^m,N^n$ with $m<n$, and the compact parameter pair with original neighbourhood-holonomic relative data.\n\n[F1] Open-source derivative equivalence holds also in equal dimension, with compatible relative compact-parameter homotopies ([[thm-smale-hirsch-for-open-source-manifolds]]).\n\n[F2] The normal disk-bundle reduction constructs genuine and formal restriction comparisons on the enriched normal-identification spaces, and proves their forgetful Serre lifting comparison with common fibre $\\operatorname{Aut}(E)$ ([[lem-positive-codimension-thickening-reduces-closed-sources-to-the-open-case]]).\n\n[F3] The weak equivalence includes every component and every based homotopy group ([[def-weak-homotopy-equivalence]]). Finite relative parameter lifting is [[lem-finite-relative-homotopy-lifting-across-a-weak-equivalence]], and the countable-choice finite parameter model is [[lem-a-handle-decomposition-gives-a-relative-cw-complex]]. Statement (iv) of [[lem-parametric-immersion-extension-on-a-disk]] is the compact-source neighbourhood-pair transfer, including interval factors and smooth relative output. It applies to the compact closed source components below; the open components use [F1].\n\n## Proof\n\n**Proof technique:** direct open/closed comparison and normal-identification fibration descent.\n\n1.1 For a connected noncompact source, [F1] applies because such a boundaryless component is open in the no-compact-component sense. Suppose the connected source is closed. For any fixed normal-bundle type $E$ of rank $n-m>0$, its open disk-bundle interior has dimension $n$ and every component is noncompact. Apply [F1] there. The dimension-preserving collar and enriched restriction comparisons of [F2] show that the derivative map on the enriched spaces $\\mathcal I_E\\to\\mathcal F_E$ is a weak equivalence. [F1, F2, given]\n\n2.1 The enriched spaces are not ordinary formal components. Their forgetful maps over the loci of normal type $E$ are Serre fibrations, with fibre the actual isomorphisms $E\\cong\\nu$, which after one identification form $\\operatorname{Aut}(E)$. The derivative induces the identity on that common fibre. The exact-sequence and component-action comparison in [F2] therefore descends the enriched equivalence to the ordinary locus, at every genuine basepoint. Every formal component meets some such locus, taking $E$ to be the datum's own normal bundle; all compact based homotopies and paths in that locus have their identifications transported by the forgetful lifting comparison. This accounts for their monodromy rather than discarding the identification fibre. Consequently the ordinary closed-source derivative map is a weak equivalence on all components and at every basepoint. [F2, F3, step 1.1]\n\n3.1 For disconnected $M$, its second-countable component set is at most countable. The weak mapping spaces are products over source components: every tested compact source set meets only finitely many components. Componentwise maps and homotopies therefore compute homotopy groups and components of the product. The component comparisons of steps 1.1–2.1 give all higher isomorphisms, and countable choice gives the product component bijection. Empty sources give singleton spaces. Thus the ordinary derivative map is a weak equivalence for all the stated sources. [F1, F3, step 1.1, step 2.1]\n\n4.1 Fix one compact collared parameter neighbourhood $R$ with $Q\\subset\\operatorname{int}R\\subset R\\subset W$, where the original data on $W\\times M$ are smooth and holonomic. For every closed source component $X$, compactness and the ordinary derivative weak equivalence of steps 1.1–2.1 satisfy exactly the compact-source transfer hypothesis in [F3]. It gives a formal deformation to genuine families, fixed on $R$ before smoothing and hence fixed on a common smaller neighbourhood of $Q$ afterward; smooth original data give a smooth deformation. The finite pair model of $(P,R)$ can be fixed once for all these components. For each noncompact source component apply the direct relative construction of [F1], fixing that same smaller parameter neighbourhood. The at-most-countably many component constructions may be selected by countable choice. Their product homotopy is weakly continuous because every compact source set meets finitely many components; smoothness is local on those open components. This proves the relative conclusions on all of $M$. The compact-source transfer is applied only after ordinary weak equivalence is established by the normal-identification fibration descent, so varying normal-bundle identifications and their monodromy are retained. [F1, F2, F3, step 1.1, step 2.1, step 3.1, construct] ∎\n",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            },
+            {
+              "title": "Janek Wilhelm, The Smale–Hirsch Immersion Theorem and other Applications to Closed Manifolds, §§1–2, PDF pp. 1–3 (Theorem 1, relative parametric C⁰-dense h-principle for immersions with q > n; microextension and local h-principle 8.3.1)",
+              "url": "https://www2.mathematik.hu-berlin.de/~wendl/Sommer2025/hPrinzip/20250530_Wilhelm.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 11
+      },
+      {
+        "id": "cor-regular-homotopy-classes-of-immersions-are-formal-homotopy-classes",
+        "kind": "corollary",
+        "title": "Regular homotopy classes of immersions are formal homotopy classes",
+        "deps": [
+          "lem-finite-relative-homotopy-lifting-across-a-weak-equivalence",
+          "def-compact-parameter-pair",
+          "thm-smale-hirsch-immersion-theorem",
+          "lem-smooth-families-and-path-components-in-the-weak-topology",
+          "def-regular-homotopy-of-immersions",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-weak-homotopy-equivalence",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $m<n$, let $M$ be a compact smooth boundaryless $m$-manifold and let $N^n$ be smooth and boundaryless. The derivative map induces a bijection\n$$\\{\\text{regular homotopy classes of immersions }M\\to N\\}\\longleftrightarrow\\{\\text{homotopy classes of formal immersions }M\\to N\\}.$$\nThus two immersions are regularly homotopic if and only if their formal derivatives are homotopic through formal immersions. For every finite CW pair $(P,Q)$ and a fixed genuine family on $Q$, derivative induces a bijection between relative homotopy classes of continuous $P$-families of genuine and formal immersions with that prescribed restriction. The compact smooth parameter-pair form is exactly that of the main theorem: original formal data smoothly holonomic on an open parameter neighbourhood of $Q$ admit relative holonomization; the same holds for a prescribed formal family homotopy whose relative end and parameter data satisfy that neighbourhood hypothesis. A smooth input admits a smooth relative deformation.",
+        "strategy": "Owner-authorized constructive repair from full Smale covering-homotopy source, actual library suppliers, compact-parameter germ comparisons and compatible source exhaustion. Supplied proof awaits root personal adjudication; local checks are not independent mathematical acceptance.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            },
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 12,
+        "external_refs": [
+          "rem-arbitrary-compact-parameter-immersion-classification-needs-a-mapping-space-comparison"
+        ]
+      },
+      {
+        "id": "rem-arbitrary-compact-parameter-immersion-classification-needs-a-mapping-space-comparison",
+        "kind": "remark",
+        "title": "Arbitrary compact-parameter immersion classification needs a mapping-space comparison",
+        "deps": [
+          "def-countable-choice",
+          "def-weak-homotopy-equivalence",
+          "def-homotopy-relative-and-path-homotopy",
+          "def-space-of-immersions-and-space-of-formal-immersions"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Morris W. Hirsch, Immersions of Manifolds, Transactions AMS 93 (1959), pp. 242–276; ordinary regular-homotopy and full-column core comparison context, not a proof for arbitrary compact parameter pairs",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/hirsch.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proved_here": false,
+        "external_dependency": {
+          "source_url": "https://www.maths.ed.ac.uk/~v1ranick/papers/hirsch.pdf",
+          "exact_statement": "and more generally for every compact pair $(P,Q)$ and every basepoint the relative homotopy sets of $\\operatorname{Imm}(M,N)$ and $\\operatorname{FImm}(M,N)$ agree. This is the parametrised classification statement: for compact $M$ and $P$ a compact parameter space, regular homotopy classes of $P$-families of immersions are the homotopy classes of $P$-families of formal immersions.",
+          "local_proof_attempt": "The main derivative weak equivalence gives ordinary components and finite-CW relative lifting. Its compact smooth parameter form needs the original family holonomic on an open parameter neighbourhood of the closed relative set. Extending these conclusions to arbitrary compact pairs was attempted by applying the source theorem to P times M, which changes source dimension, and by inferring arbitrary mapping-space comparison from weak equivalence. Neither argument proves the quoted claims. A globally continuous Hurewicz lifting/comparison construction, or a proved CW/ANR-type plus holonomic cofibration/relative mapping-space theorem, remains missing.",
+          "necessity": "This source-backed orientation records the previously promised generality without using it as a logical prerequisite. The original corollary and all its actual consumers need only ordinary components, finite-CW comparison or the permitted neighbourhood-holonomic compact smooth parameter form."
+        },
+        "statement": "For compact smooth $M$ with positive codimension, the two original broader clauses are retained verbatim:\n\n> and more generally for every compact pair $(P,Q)$ and every basepoint the relative homotopy sets of $\\operatorname{Imm}(M,N)$ and $\\operatorname{FImm}(M,N)$ agree.\n\n> This is the parametrised classification statement: for compact $M$ and $P$ a compact parameter space, regular homotopy classes of $P$-families of immersions are the homotopy classes of $P$-families of formal immersions.\n\nNo proof of these arbitrary-compact assertions is supplied here. The cited Hirsch paper provides the ordinary immersion-theory context; it is not asserted to prove either recorded general compact-pair clause. This remark is a source-context orientation, not a theorem or a dependency supplier.",
+        "strategy": "Owner-created source-context orientation retaining the original arbitrary-compact clauses verbatim without proof. No general compact-pair theorem or native author result is claimed.",
+        "dependency_level": 13
+      },
+      {
+        "id": "rem-smale-hirsch-is-a-weak-homotopy-equivalence-not-asserted-as-an-actual-homotopy-equivalence",
+        "kind": "remark",
+        "title": "Smale–Hirsch is a weak homotopy equivalence, not asserted as an actual homotopy equivalence",
+        "deps": [
+          "lem-the-immersion-condition-is-open-in-the-weak-topology-for-compact-sources",
+          "thm-smale-hirsch-immersion-theorem",
+          "thm-smale-hirsch-for-open-source-manifolds",
+          "def-weak-compact-open-smooth-topology-on-mapping-spaces",
+          "def-weak-homotopy-equivalence"
+        ],
+        "statement": "The Smale–Hirsch theorem asserts that $D$ is a weak homotopy equivalence, not that it is a homotopy equivalence; the statement is not strengthened here to the existence of a homotopy inverse, since the mapping spaces are not known to be CW complexes or ANRs in this development. The conclusions on $\\pi_0$ and based homotopy groups follow from weak homotopy equivalence. Relative family conclusions use the separately stated relative parametric theorem and its hypotheses; they are not consequences of weak homotopy equivalence alone for arbitrary parameter pairs. The topology is part of the statement: the theorem is proved for the weak (compact-open) $C^\\infty$ topology on $\\operatorname{Imm}$ and $\\operatorname{FImm}$, and no other topology on the mapping spaces is used. For compact sources the immersion condition is open in that topology ([[lem-the-immersion-condition-is-open-in-the-weak-topology-for-compact-sources]]), which is what the smoothing argument uses; the strong Whitney topology is deliberately not invoked, so no comparison with it is needed. No properness, completeness or boundedness of the immersion data is required.",
+        "strategy": "Remark. It records the exact strength of the theorem, the topology in which it is proved, and the boundary of what is claimed for the strong topology. No proof obligation beyond the cited items. The remark records the strength of the conclusion and does not remove the choice assumption of the theorem it describes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            },
+            {
+              "title": "Janek Wilhelm, The Smale–Hirsch Immersion Theorem and other Applications to Closed Manifolds, §§1–2, PDF pp. 1–3 (Theorem 1, relative parametric C⁰-dense h-principle for immersions with q > n; microextension and local h-principle 8.3.1)",
+              "url": "https://www2.mathematik.hu-berlin.de/~wendl/Sommer2025/hPrinzip/20250530_Wilhelm.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 12
+      },
+      {
+        "id": "rem-a-closed-n-manifold-cannot-immerse-in-r-n",
+        "kind": "remark",
+        "title": "A nonempty closed n-manifold cannot immerse in R-n for n at least one",
+        "deps": [
+          "def-immersion-submersion-and-constant-rank-map",
+          "cor-local-normal-form-for-immersions",
+          "def-diffeomorphism-and-local-diffeomorphism-of-manifolds",
+          "cor-rn-is-polygonally-connected-and-locally-path-connected",
+          "def-smooth-manifold",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "def-connected-space",
+          "def-topological-manifold-without-boundary",
+          "def-compact-space",
+          "lem-compactness-of-a-subspace-is-ambient"
+        ],
+        "statement": "Let $n\\ge1$ and let $M$ be a nonempty closed smooth $n$-manifold. Then there is no immersion $M\\to\\mathbb R^n$; consequently positive codimension is necessary in the equidimensional closed-source case, and every formal immersion of this nonempty $M$ into $\\mathbb R^n$ is non-holonomic. More generally, an equidimensional immersion $M^n\\to N^n$ from a closed $M$ is a local diffeomorphism, hence an open map, and its image is open and closed in the target; since $M$ is compact and nonempty the image is nonempty compact and open, so it is a union of components of $N$. For $N=\\mathbb R^n$ connected and noncompact this is impossible.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** $n\\ge1$, a nonempty closed smooth $n$-manifold $M$, a smooth $n$-manifold $N$, and an immersion $f:M\\to N$.\n\n[L1] An immersion at $p$ has the local normal form $u\\mapsto(u,0)$ in adapted charts ([[cor-local-normal-form-for-immersions]]); in the equidimensional case $m=n$ there are no normal coordinates and the model is $u\\mapsto u$ on an open subset of $\\mathbb R^n$, so the restriction of $f$ is a diffeomorphism onto an open subset of $N$ ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]).\n\n[L2] The continuous image of a compact space is compact: pull an open cover of the image back to an open cover of the source, extract a finite subcover, and take its images ([[def-compact-space]], [[lem-compactness-of-a-subspace-is-ambient]]). A compact subset of a Hausdorff space is closed ([[thm-compact-subset-of-a-hausdorff-space-is-closed]]); $M$ is compact and $N$ is Hausdorff ([[def-smooth-manifold]], [[def-topological-manifold-without-boundary]]).\n\n[L3] $\\mathbb R^n$ is connected for every $n\\ge1$ ([[cor-rn-is-polygonally-connected-and-locally-path-connected]]), and a nonempty subset that is both open and closed in a connected space is the whole space ([[def-connected-space]]).\n\n## Proof\n\n**Proof technique:** direct.\n\n1.1 Fix $x\\in M$. Since $f$ is an immersion at $x$ and $\\dim M=\\dim N=n$, [L1] gives charts near $x$ and $f(x)$ in which $f$ reads as the identity on an open subset of $\\mathbb R^n$; hence some open neighbourhood $U_x$ of $x$ is mapped diffeomorphically onto an open subset $f(U_x)$ of $N$. Therefore $f(M)=\\bigcup_{x\\in M}f(U_x)$ is open in $N$, and $f$ is a local diffeomorphism. [L1, given, choose]\n\n2.1 Since $M$ is nonempty and compact, [L2] makes $f(M)$ nonempty and compact, and since $N$ is Hausdorff, [L2] makes $f(M)$ closed in $N$. [L2, given, step 1.1]\n\n3.1 An open and closed subset of a locally connected space is a union of components; in particular, if $N$ is connected then the nonempty clopen set $f(M)$ equals $N$. Applying this with $N=\\mathbb R^n$ and [L3] gives $f(M)=\\mathbb R^n$. [L3, step 1.1, step 2.1]\n\n4.1 But $\\mathbb R^n$ is not compact: the open cover by the balls of radius $k$, $k\\ge1$, has no finite subcover, because a finite union of bounded sets is bounded while $\\mathbb R^n$ is unbounded. This contradicts step 2.1 with $f(M)=\\mathbb R^n$. Hence no immersion $M\\to\\mathbb R^n$ exists; since a smooth map $f$ is an immersion exactly when $(f,df)$ is a formal immersion, no formal immersion of this nonempty $M$ into $\\mathbb R^n$ is holonomic, and equidimensional immersions into a general target $N$ have image a union of components of $N$ by step 3.1. [step 3.1, algebra, given] ∎\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 0
+      }
+    ]
+  },
+  {
+    "order": 566,
+    "id": "formal-immersions-and-the-smale-hirsch-theorem-examples",
+    "kind": "B",
+    "category": "differential-topology",
+    "title": "Formal Immersions and the Smale Hirsch Theorem — Examples",
+    "companion": "formal-immersions-and-the-smale-hirsch-theorem",
+    "requires": [
+      "formal-immersions-and-the-smale-hirsch-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-immersing-the-circle-in-the-plane-from-a-formal-line-monomorphism",
+        "kind": "example",
+        "title": "Immersing the circle in the plane from a formal line monomorphism",
+        "deps": [
+          "def-formal-immersion-between-smooth-manifolds",
+          "thm-smale-hirsch-immersion-theorem",
+          "cor-regular-homotopy-classes-of-immersions-are-formal-homotopy-classes",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-space-of-immersions-and-space-of-formal-immersions",
+          "def-countable-choice",
+          "def-vector-bundle-map-over-a-smooth-base-map",
+          "def-frame-bundle-and-associated-vector-bundle",
+          "def-degree-of-a-circle-loop",
+          "cor-degree-descends-to-circle-loop-classes",
+          "thm-circle-loops-are-path-homotopic-iff-they-have-equal-degree",
+          "prop-standard-circle-loops-have-their-integer-degrees"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Give the unit circle its counterclockwise orientation and global tangent vector $\\tau(x)=ix$, identifying $\\mathbb R^2$ with $\\mathbb C$. A formal immersion is uniquely described by a smooth base map $f:S^1\\to\\mathbb R^2$ and a nowhere-zero vector field $v(x)=F_x(\\tau(x))\\in\\mathbb R^2$. Write $v=\\ell u$ with $\\ell>0$ and $u:S^1\\to S^1$. The positive-length functions and base maps are contractible, so formal homotopy classes are classified by the degree of $u$. The Smale–Hirsch theorem and its component corollary identify these with regular homotopy classes of parametrized immersed plane curves. The derivative of the standard inclusion has $u(x)=ix$, of degree $+1$.",
+        "strategy": "Owner-authorized constructive repair from full Smale covering-homotopy source, actual library suppliers, compact-parameter germ comparisons and compatible source exhaustion. Supplied proof awaits root personal adjudication; local checks are not independent mathematical acceptance.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 13
+      },
+      {
+        "id": "ex-the-standard-sphere-immersion-and-its-normal-line",
+        "kind": "example",
+        "title": "The standard sphere immersion and its normal line",
+        "deps": [
+          "def-normal-bundle-of-a-formal-immersion",
+          "lem-formal-immersion-gives-the-tangent-normal-bundle-identity",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-immersion-submersion-and-constant-rank-map",
+          "def-tangent-bundle-as-a-disjoint-union",
+          "def-countable-choice",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle"
+        ],
+        "statement": "Let $j:S^2\\hookrightarrow\\mathbb R^3$ be the standard unit sphere inclusion. Then $(j,dj)$ is a formal immersion, and the normal bundle of the formal immersion is $\\nu_{dj}=dj(TS^2)^\\perp$, the fibrewise orthogonal complement of the tangent planes of $S^2$ in $j^*T\\mathbb R^3$. The outward unit normal $N(x)=x$ is a global nonvanishing section, so $\\nu_{dj}\\cong\\varepsilon^1$ is trivial, and the tangent-normal identity gives $$TS^2\\oplus\\varepsilon^1\\;\\cong\\;j^*T\\mathbb R^3=\\varepsilon^3,$$ the standard trivialization of the tangent bundle of $S^2$ stabilised by one trivial line. The bundle isomorphism $(v,a)\\mapsto v+ax$ therefore trivializes $TS^2\\oplus\\varepsilon^1$; the inverse images of the standard basis vectors $e_i$ give the global frame $x\\mapsto(e_i-\\langle e_i,x\\rangle x,\\langle e_i,x\\rangle)$, $i=1,2,3$, while $TS^2$ alone admits no nowhere-zero global section by the hairy-ball theorem, recorded but not proved on this page ([[rem-the-hairy-ball-theorem-for-even-dimensional-spheres]]); hence the extra normal line is essential and the splitting is not a triviality of $TS^2$. This verifies the tangent-normal identity in the first nontrivial even-dimensional case and provides the normal line used in the sphere-eversion computation on the next page.",
+        "strategy": "Compute $d\\iota$ and identify the normal direction with the radial vector $x$; the outward unit normal is a global nonvanishing section of the normal bundle, so $\\nu_{d\\iota}\\cong\\varepsilon^1$; apply the identity $TS^2\\oplus\\nu\\cong\\varepsilon^3$. The non-triviality of $TS^2$ is not proved here: it is the recorded hairy-ball statement cited through external_refs, as the schema requires for unproved recorded results, and only the bundle identity and the triviality of the normal line are verified on this page.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 3,
+        "external_refs": [
+          "rem-the-hairy-ball-theorem-for-even-dimensional-spheres"
+        ]
+      },
+      {
+        "id": "ex-an-open-parallelizable-manifold-immerses-in-euclidean-space-of-equal-dimension",
+        "kind": "example",
+        "title": "An open parallelizable manifold immerses in Euclidean space of equal dimension",
+        "deps": [
+          "thm-smale-hirsch-for-open-source-manifolds",
+          "rem-a-closed-n-manifold-cannot-immerse-in-r-n",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-local-frame-and-global-frame-of-a-vector-bundle",
+          "cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame",
+          "def-countable-choice"
+        ],
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $M$ be an open (no compact component) smooth $m$-manifold whose tangent bundle is trivial, $TM\\cong M\\times\\mathbb R^m$; for instance $M=\\mathbb R^m$ minus a point, the open annulus $S^1\\times(0,1)\\subset\\mathbb R^2$ in the case $m=2$, or any open subset of $\\mathbb R^m$. Then $M$ immerses in $\\mathbb R^m$, and even every formal immersion $M\\to\\mathbb R^m$ (equivalently, after fixing a global frame of $TM$ and the standard frame of $T\\mathbb R^m$, a pair consisting of a smooth map $M\\to\\mathbb R^m$ and a smooth map $M\\to GL_m(\\mathbb R)$) is homotopic through formal immersions to a genuine immersion. Indeed a global frame of $TM$ together with the standard frame of $T\\mathbb R^m$ defines a formal immersion $(f,F)$ for every smooth $f$, and the open-source Smale–Hirsch theorem deforms it to a genuine immersion in the equidimensional case. For $m\\ge1$, a nonempty closed $m$-manifold is excluded by the equidimensional obstruction, so the open-source hypothesis is essential. In dimension zero an open manifold in this convention is empty; nonempty compact zero-manifolds do admit immersions into $\\mathbb R^0$.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** $\\mathrm{AC}_\\omega$ and an open (no compact component) smooth $m$-manifold $M$ whose tangent bundle is trivial, $TM\\cong M\\times\\mathbb R^m$.\n\n[F1] A vector bundle is trivial if and only if it has a global frame, and a global frame is the same as a family of everywhere linearly independent sections ([[def-local-frame-and-global-frame-of-a-vector-bundle]], [[cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame]]).\n\n[L1] The open-source Smale–Hirsch theorem: for an open source $M$ and $m\\le n$ the derivative map $D:\\operatorname{Imm}(M,N)\\to\\operatorname{FImm}(M,N)$ is a weak homotopy equivalence, with the relative parametric form; in particular every formal immersion is homotopic through formal immersions to a genuine immersion ([[thm-smale-hirsch-for-open-source-manifolds]]).\n\n[L2] A smooth map $f:M\\to\\mathbb R^m$ together with a bundle map $F:TM\\to T\\mathbb R^m$ over $f$ that is fibrewise injective is a formal immersion ([[def-formal-immersion-between-smooth-manifolds]]); after fixing frames of both trivial bundles, smooth bundle maps $TM\\to T\\mathbb R^m$ over a fixed base correspond exactly to smooth matrix-valued maps $M\\to\\operatorname{Mat}_{m\\times m}(\\mathbb R)$; the fibrewise injective maps correspond exactly to smooth maps $M\\to GL_m(\\mathbb R)$ ([[def-smooth-vector-bundle-rank-fibre-and-trivial-bundle]]).\n\n## Verification\n\n**Proof technique:** direct.\n\n1.1 Choose a global frame of $TM$ by [F1] and the standard frame of $T\\mathbb R^m$; for any smooth $f:M\\to\\mathbb R^m$, define $F$ to be the bundle map over $f$ that carries the frame of $TM$ to the standard frame of $T\\mathbb R^m$ fibrewise. Then $F$ is a fibrewise linear isomorphism, hence fibrewise injective, and $(f,F)$ is a formal immersion by [L2]. [F1, L2, given, construct]\n\n2.1 Since $M$ has no compact component, [L1] applies in the equidimensional case $m=n$: the formal immersion $(f,F)$ is homotopic through formal immersions to a genuine immersion $g:M\\to\\mathbb R^m$, so $M$ immerses in $\\mathbb R^m$ and every formal immersion is homotopic through formal immersions to a genuine one. [L1, step 1.1]\n\n3.1 For $m\\ge1$, a nonempty closed $m$-manifold is excluded: by the equidimensional obstruction [[rem-a-closed-n-manifold-cannot-immerse-in-r-n]] no nonempty closed $m$-manifold immerses in $\\mathbb R^m$, so openness of the source is essential; the examples $M=\\mathbb R^m$ minus a point, the open annulus $S^1\\times(0,1)\\subset\\mathbb R^2$, and open subsets of $\\mathbb R^m$ have trivial tangent bundles and no compact component, so the theorem applies to them. For $m=0$, the no-compact-component condition forces $M=\\varnothing$, since each point is a compact component; its unique map to $\\mathbb R^0$ is an immersion. The countable-choice assumption of [L1] is inherited. [L1, step 2.1] ∎\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Francis, The h-Principle, Lectures 5 & 6: The Hirsch–Smale theorem (notes by C. Elliott), PDF pp. 1–4: Lemma 1.1, Corollary 1.2, Lemma 1.3 (Hirsch–Smale Fibration Lemma, n > k), Theorems 1.5 and 1.7, Lemma 1.6, Lemma 1.9",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/5%266smalehirsch.pdf"
+            },
+            {
+              "title": "Janek Wilhelm, The Smale–Hirsch Immersion Theorem and other Applications to Closed Manifolds, §§1–2, PDF pp. 1–3 (Theorem 1, relative parametric C⁰-dense h-principle for immersions with q > n; microextension and local h-principle 8.3.1)",
+              "url": "https://www2.mathematik.hu-berlin.de/~wendl/Sommer2025/hPrinzip/20250530_Wilhelm.pdf"
+            },
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 10
+      },
+      {
+        "id": "cex-a-closed-manifold-with-formally-plausible-rank-data-needs-positive-codimension",
+        "kind": "counterexample",
+        "title": "A closed manifold with formally plausible rank data needs positive codimension",
+        "deps": [
+          "rem-a-closed-n-manifold-cannot-immerse-in-r-n",
+          "thm-smale-hirsch-immersion-theorem",
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-local-frame-and-global-frame-of-a-vector-bundle",
+          "cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame"
+        ],
+        "statement": "The $n$-torus $T^n=S^1\\times\\cdots\\times S^1$ admits formal immersions into $\\mathbb R^n$ for every $n\\ge1$: it is a product of circles, the standard angular fields give a global frame of $TT^n\\cong T^n\\times\\mathbb R^n$, and the identity bundle map is fibrewise injective. Yet no nonempty closed $n$-manifold — in particular not $T^n$ — admits an immersion into $\\mathbb R^n$. Thus the rank data $TM\\oplus\\nu\\cong\\varepsilon^n$ with $\\nu$ of rank zero is formally plausible but geometrically impossible, and the equidimensional closed-source case genuinely needs the positive-codimension hypothesis; the Smale–Hirsch theorem is not contradicted, because its closed-source form requires $m<n$.",
+        "strategy": "Take the framing of $TT^n$ coming from the standard angular fields of the circle factors as the formal datum; any immersion into $\\mathbb R^n$ would be a local diffeomorphism of a compact manifold, hence an open map with compact nonempty image, which is closed in the Hausdorff target and therefore equal to the connected target, contradicting compactness. This is the equidimensional obstruction remark applied to $T^n$; it also shows the formal datum is not holonomic. The closing mention of the Smale–Hirsch theorem is only the consistency check that its closed-source hypotheses are not met and is not used as a proof input.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            },
+            {
+              "title": "John Francis, The h-Principle, Lecture 3: Immersion theory (notes by O. Gwilliam), PDF pp. 1–4: Proposition 2.2 (disk), Definition 2.5 (Serre fibration), Definition 2.6 and Proposition 2.7 (flexible sheaves)",
+              "url": "https://sites.math.northwestern.edu/jnf960/classes/hprin/3immersions.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 12
+      },
+      {
+        "id": "cex-a-bundle-map-with-rank-drop-is-not-a-formal-immersion",
+        "kind": "counterexample",
+        "title": "A bundle map with rank drop is not a formal immersion",
+        "deps": [
+          "def-formal-immersion-between-smooth-manifolds",
+          "def-vector-bundle-map-over-a-smooth-base-map",
+          "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "def-differential-of-a-smooth-map"
+        ],
+        "statement": "Let $M=N=\\mathbb R^2$, $f=\\mathrm{id}$, and let $F:T\\mathbb R^2\\to T\\mathbb R^2$ be the constant bundle map over the identity given in the standard trivializations by the matrix $\\mathrm{diag}(1,0)$. Then $F$ is smooth and covers $f$, but $F_x$ has rank one at every point $x$, so $(f,F)$ is not a formal immersion: fibrewise injectivity is a pointwise condition on every fibre, and it fails at every point. In particular a bundle map that is injective on a dense open set, or injective outside a proper closed subset, or of maximal rank outside a point, is not a formal immersion unless injectivity holds at every point; surjectivity of the base map or linearity of the bundle map do not substitute for the fibrewise condition.",
+        "strategy": "Display the constant matrix and compute its kernel: at every point the vertical vector $(0,1)$ lies in the kernel of $F$, so no point satisfies the defining injectivity condition. The verification is a direct linear-algebra computation in the standard charts.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralph L. Cohen, Bundles, Manifolds, and Homotopy, Ch. 7 §2 “Obstructions to the existence of embeddings and immersions, the Hirsch–Smale theorem”, printed pp. 226–232 (Theorem 7.5, Corollary 7.6)",
+              "url": "http://math.stanford.edu/~ralph/bookR4.pdf"
+            },
+            {
+              "title": "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)",
+              "url": "https://math.uchicago.edu/~shmuel/tom-readings/ranicki-intro"
+            }
+          ]
+        },
+        "justified_by": [],
+        "dependency_level": 1
+      }
+    ]
+  }
+]

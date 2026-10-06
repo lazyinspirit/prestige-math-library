@@ -2974,3 +2974,17 @@ Completed batch8's arbitrary-subspace/cofibration counterexample explicitly
 declares `thm-intermediate-value`. The canonical plan matches its authored
 manifest; this earlier published supplier adds no pair or published repair.
 See `phase-2-catchup-24-step5-dependency-reconciliation.md`.
+
+## Frontier 41 Algebraic Topology support pair (approved 2026-10-04)
+
+Add one A/B pair at plan orders 548.5/548.6:
+
+- A: `thom-spectra-and-unoriented-bordism-detection`.
+- B: `thom-spectra-and-unoriented-bordism-detection-examples`.
+- Sole A-page prerequisite: `thom-spaces-normal-data-and-collapse-maps` (published order 547); B requires only its A page.
+
+The A page locally constructs the shared MO/MSO fixed-coordinate Thom prespectrum, the mod-two Steenrod/Thom coalgebra and freeness input, the finite-range Thom detector, its integral and homotopy comparisons, and the rational Hurewicz theorem used by DT-19. The B page contains four worked examples and is a leaf. Its complete item statements, proof strategies, direct dependencies, source locators, and dependency order are recorded in `research/frontier-41-ha-dt-29-at-support-thom-detection-integration-draft.md`. The current inventory has 54 new local A items, four B examples, and one existing combined prespectrum definition moved from DT-19; the move does not create a second MO-only definition.
+
+Every published item dependency of the new pair lies in page 547’s transitive prerequisite closure. The staged proof records include the Steenrod/Adem presentation, Eilenberg–Mac Lane range, Whitney-sum coalgebra and its separate well-definedness lemma, generic graded module-coalgebra freeness theorem, Thom connectivity and detector construction, integral finite-generation/UCT comparison, finite-range homotopy comparison, and rational Hurewicz argument. The coalgebra and finite detector definitions each name their separate local justification lemma. The shared prespectrum definition carries its construction proof and direct CW/CGWH suppliers.
+
+Add the A page as a page-level prerequisite of DT-19, `characteristic-numbers-and-cobordism-obstructions`, at order 553. Move `def-thom-prespectrum-of-the-universal-real-and-oriented-bundles` from that page to the new A page and keep the three DT-19 item consumers against this same item ID. DT-9, `pontryagin-thom-and-framed-cobordism`, receives no new edge. The AT pair is in the future frontier plan and is not a published library page.

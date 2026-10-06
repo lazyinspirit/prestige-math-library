@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-essential-epimorphism-and-projective-cover, thm-projective-module-characterizations, cor-every-module-is-a-quotient-of-a-free-module]
+deps: [def-essential-epimorphism-and-projective-cover, def-projective-module, thm-free-modules-are-projective-with-choice-boundary]
 proof_strategy: direct
 verification:
   audited: 2026-09-04
@@ -32,15 +32,17 @@ $\rho\circ f=\pi$.
 
 [F1] A projective cover is a projective surjection with superfluous kernel ([[def-essential-epimorphism-and-projective-cover]]).
 
-[L1] Projective modules are direct summands of free modules ([[thm-projective-module-characterizations]]).
+[F2] Projectivity is the lifting property against surjective module homomorphisms ([[def-projective-module]]).
+
+[L1] For a free module with a finite enumerated basis, choosing lifts of its finitely many basis values and extending linearly proves projectivity in ZF, without AC ([[thm-free-modules-are-projective-with-choice-boundary]], finite-basis clause).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Choose a finite $k$-basis $m_1,\ldots,m_r$ of $M$. It also generates $M$ as an $A$-module, so sending the standard generators to the $m_i$ gives a surjection $\varepsilon:A^r\to M$. Among the direct summands $P$ of the finite-dimensional module $A^r$ for which $\varepsilon|_P:P\to M$ is surjective, choose one of minimal $k$-dimension; the family is nonempty because it contains $A^r$. Put $\pi:=\varepsilon|_P$. The module $P$ is projective by [L1]. [L1, given, choose, construct]
+1.1 Choose a finite $k$-basis $m_1,\ldots,m_r$ of $M$. It also generates $M$ as an $A$-module, so sending the standard generators to the $m_i$ gives a surjection $\varepsilon:A^r\to M$. Among the direct summands $P$ of the finite-dimensional module $A^r$ for which $\varepsilon|_P:P\to M$ is surjective, choose one of minimal $k$-dimension; the family is nonempty because it contains $A^r$. Put $\pi:=\varepsilon|_P$, and write $j:P\to A^r$ and $s:A^r\to P$ for the inclusion and projection, with $sj=1_P$. For any surjection $q:E\to X$ and map $u:P\to X$, choose $y_i\in E$ with $q(y_i)=u(s(e_i))$ for the finitely many standard basis vectors $e_i$. These finite choices need no AC by [L1]. The formula $v(\sum_i a_i e_i)=\sum_i a_i y_i$ defines an $A$-linear map $v:A^r\to E$ with $qv=us$, so $q(vj)=usj=u$. Thus $P$ is projective by [F2], including when $r=0$. [F2, L1, given, choose, construct]
 
-2.1 Put $K=\ker\pi$, and suppose $N\le P$ satisfies $N+K=P$. Then $\pi|_N:N\to M$ is surjective. Projectivity of $P$ supplies a map $h:P\to N$ with $(\pi|_N)h=\pi$; write $f:P\to P$ for $h$ followed by the inclusion. Thus $\pi f=\pi$, and hence $\pi f^n=\pi$ for every $n\ge1$. [F1, L1, step 1.1, construct]
+2.1 Put $K=\ker\pi$, and suppose $N\le P$ satisfies $N+K=P$. Then $\pi|_N:N\to M$ is surjective. Projectivity of $P$ supplies a map $h:P\to N$ with $(\pi|_N)h=\pi$; write $f:P\to P$ for $h$ followed by the inclusion. Thus $\pi f=\pi$, and hence $\pi f^n=\pi$ for every $n\ge1$. [F2, step 1.1, construct]
 
 3.1 Since $P$ is finite-dimensional, the kernels and images of the powers of $f$ stabilize. For a sufficiently large $n$, $$P=\ker(f^n)\oplus\operatorname{im}(f^n):$$ the intersection is zero because $f^n(x)=0$ for $x=f^n(y)$ implies $f^{2n}(y)=0$ and stabilization gives $f^n(y)=0$, while rank-nullity gives that the two dimensions sum to $\dim_kP$. The restriction of $\pi$ to $\operatorname{im}(f^n)$ is surjective because $\pi f^n=\pi$. Minimality of $P$ in step 1.1 therefore forces $\ker(f^n)=0$. Hence $f$ is injective and thus bijective, so $P=f(P)\subseteq N$. Therefore $N=P$, $K$ is superfluous, and $\pi$ is a projective cover. [F1, step 1.1, step 2.1, algebra]
 

@@ -22,6 +22,6 @@ sources:
 
 For $n\ge2$ and oriented cells $e^n_\alpha$ and $e^{n-1}_\beta$, collapse the complement of $e^{n-1}_\beta$ in $X^{n-1}$ and compose the attaching map of $e^n_\alpha$ with the resulting quotient to $S^{n-1}$. Its induced endomorphism of oriented $\widetilde H_{n-1}(S^{n-1};\mathbb Z)$ is multiplication by a unique integer, denoted $[e^n_\alpha:e^{n-1}_\beta]$.
 
-For $n=1$, orient the characteristic interval of $e^1_\alpha$ from $-1$ to $+1$ and, for a vertex $v=e^0_\beta$, set
-$$[e^1_\alpha:v]=\mathbf 1_{\{\chi_\alpha(+1)=v\}}-\mathbf 1_{\{\chi_\alpha(-1)=v\}}.$$
-Thus an oriented edge contributes its terminal vertex minus its initial vertex, and a loop with both endpoints at one vertex has incidence number zero there.
+For $n=1$, choose the characteristic parametrization so the interval from $-1$ to $+1$ represents the chosen generator of $e^1_\alpha$. Write the chosen zero-cell generator as $e_v=\varepsilon_v[v]$, with $\varepsilon_v\in\{1,-1\}$ and $[v]$ the canonical point class in $H_0(X^0;\mathbb Z)$. For $v=e^0_\beta$ set
+$$[e^1_\alpha:v]=\varepsilon_v\bigl(\mathbf 1_{\{\chi_\alpha(+1)=v\}}-\mathbf 1_{\{\chi_\alpha(-1)=v\}}\bigr).$$
+Indeed the singular boundary is $[\chi_\alpha(+1)]-[\chi_\alpha(-1)]$ and $[v]=\varepsilon_v e_v$, so this is precisely its coefficient in the chosen cellular basis. Canonical positive vertex generators give the usual terminal-minus-initial formula. Equal endpoints cancel for either sign. The negative vertex choice is an algebraic basis change, not a based self-map of $S^0$ of degree $-1$.
