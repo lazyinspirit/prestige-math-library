@@ -46,8 +46,7 @@ items: [lem-subgroup-lattice-of-a-finite-cyclic-group,
         thm-infinitely-many-primes-congruent-to-one-modulo-n,
         lem-a-finite-abelian-group-is-a-quotient-of-a-power-of-a-cyclic-group,
         thm-every-finite-abelian-group-is-a-galois-group-over-the-rationals,
-        prop-subfields-of-rational-cyclotomic-fields-are-abelian-over-the-rationals,
-        rem-kronecker-weber]
+        prop-subfields-of-rational-cyclotomic-fields-are-abelian-over-the-rationals]
 examples: [ex-the-galois-group-of-f-eight-over-f-two,
            ex-the-subfield-lattice-of-the-field-of-order-two-to-the-twelve,
            ex-the-monic-irreducible-cubics-over-f-two-and-the-divisor-sum-identity,

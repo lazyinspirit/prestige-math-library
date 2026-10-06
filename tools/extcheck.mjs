@@ -3,72 +3,23 @@
 //
 //   node tools/extcheck.mjs [--ledger] [--json] [--quiet] [--repo DIR] [--items-file PATH]
 //
-// Owner instruction, 2026-07-25: the deferred results of DEFERRED.md (measure
-// theory, functional analysis, set theory beyond choice, algebraic topology, the
-// open problems) are to be INCLUDED in the library, and they and their
-// consequences must be visibly different from everything else INCLUDING ordinary
-// forward references and their consequences; every unproved dependency inside a
-// proof must be visibly distinct from every other dependency; and the reader
-// must be reminded that such a dependency is not developed here.
+// Active recorded-not-proved items and external_refs have been retired.
+// This gate rejects their reintroduction, both corpus-wide and in explicit item
+// scope. Historical archives/receipts are not traversed. Legacy shape checks,
+// dependency closure and ledger diagnostics remain readable so residual active
+// records can be diagnosed without changing historical evidence formats.
 //
-// The content mechanism is one frontmatter flag, `proved_here: false`, plus one
-// optional list, `external_refs`. Everything else is derived, so nothing can go
-// stale:
-//
-//   * an item with the flag STATES a result this library does not prove;
-//   * any item whose `deps` reach one, transitively, RESTS on unproved material;
-//   * an item that MENTIONS one without depending on it declares `external_refs`,
-//     which seeds the same closure (owner decision 2026-07-25, "mark the full
-//     cone") WITHOUT adding a logical edge -- see the note below;
-//   * the renderer marks both, and marks every fact and every step tag that
-//     carries such a dependency (web/lib/library-external.ts, ItemBody.tsx).
-//
-// WHY `external_refs` IS A SEPARATE FIELD AND NOT JUST A `deps` ENTRY.
-// `deps` is defined by SCHEMA.md §3 as what an item's statement or proof
-// LOGICALLY DEPENDS ON, and it is the graph that depcheck's acyclicity check,
-// fwdcheck's page ordering, the page prerequisite closure and the flowchart all
-// read. The definition of the Axiom of Choice does not logically depend on
-// Cohen's independence theorem; it merely mentions it. Putting the mention in
-// `deps` would inject a false edge into all four of those consumers at once.
-// `external_refs` seeds the ‡ contagion and nothing else.
-//
-// This is a THIRD tier, ranked above forward references: "developed later in
-// this library" is a far weaker caveat than "never proved here at all", so an
-// item that is both renders as unproved.
-//
-// HARD ERRORS
-//   unproved-kind        `proved_here: false` on something other than a remark
-//   unproved-has-proof   such an item carries a Proof/Refutation section
-//   unproved-precheck    such an item does not record `verification.precheck: n/a`
-//   unproved-uncited     such an item has no entry in sources.references
-//   unproved-judged      such an item carries a verification.judge block: there
-//                        is no proof to judge, so a verdict would be meaningless
-//   external-dangling    an `external_refs` entry names no item
-//   external-not-unproved  an `external_refs` entry names an item this library
-//                        DOES prove; the field is only for recorded-not-proved
-//   external-in-deps     an id is in both `deps` and `external_refs`; a logical
-//                        dependency is already a stronger seed, so pick one
-//   external-unused      an `external_refs` entry is never linked in the body,
-//                        so the declaration marks the item for nothing visible
-//
-//   foundations-deferred-dependency  an item homed on a Foundations page has
-//                        a deps/justified_by/forward_refs path to an item on
-//                        Set Theory Beyond Choice: Recorded, Not Proved Here
-//
-// WARNINGS
-//   unproved-on-published  a PUBLISHED item rests on unproved material (correct
-//                          and marked, but worth seeing every run)
+// HARD ERRORS additionally include:
+//   unproved-record-retired  any active proved_here: false item
+//   external-refs-retired    any nonempty active external_refs declaration
+//   external-fallback-retired any active external_dependency fallback record
 //
 // Exit 0 iff there are no hard errors.
-//
-// This repository-wide gate keeps legacy recorded results structurally valid.
-// `tools/content-policy.mjs` adds the stricter future-batch requirement that a
-// newly introduced external fallback expose its exact source URL, exact sourced
-// statement, failed local route, and necessity.
 
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseFrontmatter } from './content-policy-lib.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { includesItem, parseItemScope, unknownItems } from './item-scope.mjs';
 
@@ -114,7 +65,14 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
   if (!f.endsWith('.md')) continue;
   const src = readFileSync(join(REPO, `items/${f}`), 'utf8');
   const { fm, body } = split(src);
-  const id = scalar(fm, 'id') ?? basename(f, '.md');
+  let metadata;
+  try { metadata = parseFrontmatter(fm); }
+  catch (cause) {
+    const id = scalar(fm, 'id') ?? basename(f, '.md');
+    if (includesItem(itemScope, id)) err('item-frontmatter-invalid', `items/${f}: ${cause.message}`);
+    metadata = {};
+  }
+  const id = typeof metadata.id === 'string' ? metadata.id : scalar(fm, 'id') ?? basename(f, '.md');
   items.set(id, {
     id,
     file: `items/${f}`,
@@ -124,7 +82,10 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
     justified: list(fm, 'justified_by'),
     forward: list(fm, 'forward_refs'),
     externalRefs: list(fm, 'external_refs'),
-    provedHere: scalar(fm, 'proved_here') !== 'false',
+    provedHere: metadata.proved_here !== false && metadata.proved_here !== 'false',
+    externalDeclared: metadata.external_refs !== undefined && metadata.external_refs !== null
+      && !(Array.isArray(metadata.external_refs) && metadata.external_refs.length === 0),
+    externalFallback: Object.hasOwn(metadata, 'external_dependency'),
     precheck: nested(fm, 'verification', 'precheck'),
     hasJudge: /^\s+judge:/m.test(fm),
     hasRefs: /^\s+references:/m.test(fm) && /^\s+-\s+title:/m.test(fm),
@@ -140,11 +101,9 @@ for (const id of unknownItems(itemScope, items.keys()))
 
 // ------------------------------------- Set Theory bootstrapping hard boundary
 //
-// The Foundations track exists to replace the Set Theory deferred catalogue.
-// Its authored items may mention a deferred result through `external_refs` as
-// non-load-bearing orientation, but no logical or well-definedness path may
-// reach the catalogue. This is category-aware and transitive so an apparently
-// innocent dependency on an older orientation remark cannot launder the edge.
+// Retain the historical category-aware dependency diagnostic for any residual
+// catalogue items. The general retirement checks below forbid active unproved
+// records and external mentions in every category.
 
 const foundationsItems = new Set();
 const itemsOnLibraryPage = new Map();
@@ -246,6 +205,18 @@ for (const id of [...foundationsItems].sort()) {
   const path = deferredPath(id);
   if (path)
     err('foundations-deferred-dependency', `${items.get(id)?.file ?? `research/plan-spec.json#${id}`}: Foundations dependency path reaches Set Theory recorded-not-proved material: ${path.join(' -> ')}`);
+}
+
+// ---------------------------------------------------- retired active fields
+
+for (const it of items.values()) {
+  if (!includesItem(itemScope, it.id)) continue;
+  if (!it.provedHere)
+    err('unproved-record-retired', `${it.file}: proved_here: false is forbidden in active content; supply a local proof or archive the unsupported item`);
+  if (it.externalDeclared)
+    err('external-refs-retired', `${it.file}: external_refs is retired; remove external mentions or replace them with proved local suppliers`);
+  if (it.externalFallback)
+    err('external-fallback-retired', `${it.file}: external_dependency is retired; a cited external result cannot replace a local proof`);
 }
 
 // -------------------------------------------------------- shape of an unproved item
@@ -358,17 +329,16 @@ if (writeLedger) {
     '',
     'GENERATED by `node tools/extcheck.mjs --ledger`. Do not edit by hand.',
     '',
-    'Results this library RECORDS but does not PROVE (`proved_here: false`), and',
-    'everything in the library that rests on one. Both are rendered with the',
-    'fuchsia / dotted / ‡ marker, which outranks the sky / dashed / ↗ marker used',
-    'for ordinary forward references.',
+    'Residual active `proved_here: false` records and their dependency consequences.',
+    'These records are forbidden; this diagnostic ledger is not an authoring allowance.',
+    'Historical archived records are not included.',
     '',
     `**${unproved.length} recorded-not-proved, ${consequences.length} consequence(s).**`,
     '',
     '## Recorded but not proved here',
     '',
   ];
-  if (!unproved.length) lines.push('_None yet._', '');
+  if (!unproved.length) lines.push('_None._', '');
   for (const id of unproved) lines.push(`- \`${id}\``);
   lines.push('', '## Results resting on them', '');
   if (!consequences.length) lines.push('_None._', '');
@@ -401,7 +371,7 @@ if (asJson) {
     for (const e of errors) console.log(`  [${e.code}] ${e.msg}`);
     console.log('\nFAIL');
   } else {
-    console.log('\nOK — every recorded-not-proved statement is a cited remark with no proof, and every consequence is marked.');
+    console.log('\nOK — no active recorded-not-proved items, external references or external fallback records in the checked scope.');
   }
 }
 

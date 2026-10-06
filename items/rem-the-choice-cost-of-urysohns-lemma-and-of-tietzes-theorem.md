@@ -15,18 +15,9 @@ deps: [thm-urysohn-lemma, thm-tietze-extension-theorem,
        thm-perfectly-normal-implies-completely-normal, rem-separation-axiom-conventions,
        rem-choice-ledger]
 justified_by: []
-external_refs: [rem-urysohn-lemma-not-a-zf-theorem]
 aliases: []
 landmark: false
 short: "choice-cost ledger for this page"
-verification:
-  precheck: n/a
-  verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-09
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -35,6 +26,8 @@ sources:
     - title: "Urysohn's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Urysohn%27s_lemma"
 pipeline_run: null
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/rem-the-choice-cost-of-urysohns-lemma-and-of-tietzes-theorem.json
 ---
 
 This remark extends the choice-strength bookkeeping of [[rem-choice-ledger]]
@@ -126,13 +119,8 @@ selection is made, with no member of the family depending on an earlier
 choice. That is the textbook shape of $\mathrm{AC}_\omega$ with no disguise
 needed, unlike the two DC arguments on this page.
 
-## What this page does not attempt to show
+## What the proof-cost ledger establishes
 
-Nothing here shows dependent choice is *necessary* for Urysohn's lemma or for
-Tietze's theorem; that would be an independence result, and this library
-proves none. What is recorded, with sources, in
-[[rem-urysohn-lemma-not-a-zf-theorem]] is that the classical $T_4$ form of
-Urysohn's lemma is a theorem of neither ZF nor ZF together with countable
-choice, so the DC hypothesis carried by every theorem on this page cannot be
-weakened to countable choice without leaving the space of what has been
-established.
+The listed hypotheses are sufficient for the displayed local arguments.
+No necessity, independence, or nonimplication claim is inferred from the fact
+that a particular argument spends DC or countable choice.

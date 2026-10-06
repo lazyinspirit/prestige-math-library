@@ -15,8 +15,6 @@ items: [def-minimal-normal-subgroup-and-socle,
         def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types,
         lem-product-action-wreath-products-are-primitive-under-the-standard-hypotheses,
         rem-onan-scott-eight-type-and-five-type-conventions,
-        rem-onan-scott-classification-of-finite-primitive-groups,
-        rem-cfsg-refinements-of-the-onan-scott-reduction,
         prop-two-transitive-groups-have-affine-or-almost-simple-socle-type,
         rem-algorithmic-role-of-onan-scott]
 examples: [fs-the-socle-is-always-a-single-simple-group,
@@ -25,10 +23,17 @@ examples: [fs-the-socle-is-always-a-single-simple-group,
            fs-the-onan-scott-theorem-requires-the-classification-of-finite-simple-groups]
 ---
 
-This page isolates the socle-level structure behind finite primitive groups.
-The local development proves the elementary minimal-normal-subgroup facts that
-make the type language honest, and then records the five-type O'Nan-Scott
-landscape in the convention of the cited Liebeck–Praeger–Saxl proof.
-That proof uses Schreier's theorem, a consequence of CFSG, in two structural
-branches. The source-specific refutation below identifies those uses without
-claiming that CFSG is logically necessary for every possible proof.
+This page develops the socle-level structure of finite primitive groups.
+Distinct minimal normal subgroups centralize one another, finite minimal normal
+subgroups are characteristically simple, and the socle admits a direct-product
+decomposition. In a faithful primitive action each minimal normal subgroup is
+transitive; two distinct ones are regular, so there are at most two.
+
+A unique abelian minimal normal subgroup gives affine type. The separate local
+proposition proves that a finite 2-transitive group is affine or almost simple.
+The five-type and eight-type terminology is compared without an exhaustiveness
+claim for arbitrary primitive groups. The final remark gives a terminating
+finite enumeration of minimal normal subgroups and the socle, using the proved
+transitivity theorem as a structural check. The source-specific false statement
+identifies two explicit Schreier invocations in the cited LPS proof; it makes no
+claim that CFSG is necessary for every proof of the classification.

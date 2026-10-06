@@ -39,7 +39,7 @@ items: [def-primary-component-of-a-module-over-a-domain,
         lem-linear-primary-companion-block-is-similar-to-a-jordan-block,
         thm-jordan-canonical-form-from-pid-module-structure,
         prop-module-and-jordan-string-block-data-agree,
-        thm-matrices-are-similar-iff-their-invariant-factors-agree]
+        thm-matrices-are-similar-iff-their-invariant-factors-agree, thm-word-problem-for-finitely-generated-abelian-groups]
 examples: []
 ---
 

@@ -4,15 +4,13 @@ title: "Littlewood Paley Theory and Square Functions — Examples"
 status: draft
 requires: [littlewood-paley-theory-and-square-functions]
 items: []
-examples:
-  - ex-square-function-of-one-frequency-localised-function
-  - ex-dyadic-square-function-of-two-separated-frequency-packets
-  - cex-sharp-frequency-cutoffs-do-not-have-uniform-lone-kernels
-  - rem-littlewood-paley-linfinity-endpoint-needs-bmo-carleson-control
-  - ex-sobolev-weight-on-a-single-dyadic-annulus
+examples: [ex-square-function-of-one-frequency-localised-function,
+        ex-dyadic-square-function-of-two-separated-frequency-packets,
+        cex-sharp-frequency-cutoffs-do-not-have-uniform-lone-kernels,
+        ex-sobolev-weight-on-a-single-dyadic-annulus]
 ---
 
-These examples and the recorded endpoint remark anchor the strict-range theory
+These examples anchor the strict-range theory
 of the companion page and display the exact places where its constants and its
 hypotheses are used. All of them work with a fixed admissible partition in the
 sense of the companion page.
@@ -35,7 +33,4 @@ The counterexample shows that the smoothness of the partition is used
 essentially: for the sharp interval cutoffs the inverse Fourier transforms are
 $e^{3\pi ix}\sin(\pi x)/(\pi x)$ up to scaling, whose modulus is not
 integrable, so the uniform $L^1$ kernel bound of the smooth theory fails
-already in one dimension. The closing remark records the endpoint ladder that
-replaces the strict-range theorem at the endpoints—dyadic $H^1$ at the bottom
-and BMO with the Carleson condition at the top—and is cited orientation only,
-never a dependency.
+already in one dimension.

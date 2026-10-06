@@ -6,7 +6,6 @@ requires: [bmo-john-nirenberg-and-h1-duality]
 items: []
 examples:
   - ex-bmo-seminorm-is-unchanged-by-adding-a-constant
-  - rem-one-grid-dyadic-bmo-is-not-identical-to-bmo
   - ex-logarithm-is-in-bmo-but-not-linfinity
   - cex-bmo-functions-need-not-be-globally-integrable
   - ex-john-nirenberg-tail-integration
@@ -15,7 +14,7 @@ examples:
 
 These examples accompany the BMO and $H^1$-duality page. The tail-integration
 example inherits Countable Choice from the John-Nirenberg theorem; the other
-proved examples are choice-free. The recorded remark is not used anywhere.
+examples are choice-free.
 
 The first example checks that the seminorm is unchanged by adding a constant,
 so it descends to the quotient and is a norm there. The logarithm
@@ -30,12 +29,6 @@ is absolutely integrable; it can exist even without cancellation of $f$. The
 arithmetic of the John-Nirenberg tail is also carried out explicitly: inserting
 the exponential bound into the layer-cake formula recovers the $L^q$
 oscillation bound with an explicit constant, which is the mechanism behind the
-equivalence of the $L^q$ seminorms on the companion page. Finally, the recorded
-remark states Mei's circle comparison: the BMO seminorm over all arcs is
-equivalent to the sum of two dyadic seminorms when their relative shift
-$\delta$ satisfies $d(\delta)>0$. Separately, Kinnunen's signed-logarithm
-example on the line shows that a single dyadic grid cannot replace arbitrary
-intervals there. These results are quoted, not proved, and no item depends on
-them.
+equivalence of the $L^q$ seminorms on the companion page. 
 
 The lacunary exponential-sum example uses a low/high frequency split: the low part is made nearly constant on each interval, while rapid decay of the adapted bump transform controls the high part in local L2. It records Tao’s Exercise Q4 with the implied frequency-comparability constants explicit.

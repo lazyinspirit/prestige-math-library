@@ -4,10 +4,8 @@ title: "Poisson Summation Sampling and Lattice Duality — Examples"
 status: draft
 items: []
 examples: [ex-dual-lattice-and-covolume-for-a-diagonal-scaling,
-           ex-shannon-reconstruction-of-a-sinc-function,
-           cex-undersampling-identifies-two-distinct-pure-frequencies,
-           rem-lone-integrability-alone-does-not-license-pointwise-poisson-summation,
-           rem-gaussian-theta-reciprocity-is-already-instantiated-on-functional-analysis]
+        ex-shannon-reconstruction-of-a-sinc-function,
+        cex-undersampling-identifies-two-distinct-pure-frequencies]
 ---
 
 These examples exercise the lattice conventions of the companion page in the
@@ -32,15 +30,11 @@ dual lattice is invisible at the sampling points; being constant-modulus, these
 witnesses are not in $L^2$ and so do not conflict with the reconstruction
 theorem.
 
-The two recorded remarks guard the scope. Laugesen's step-function periodisation
-[[rem-lone-integrability-alone-does-not-license-pointwise-poisson-summation]]
-shows that bare $L^1$ data do not license pointwise Poisson summation: at the
-jump the periodisation has assigned value $2\pi$, while its Fourier series
-converges to the midpoint $3\pi$ of its one-sided limits. Half-open lattice
-cells remain disjoint. The example shows that additional pointwise regularity
-or summability is needed; it does not make the theorem’s particular two-sided
-polynomial decay bounds necessary for every function.
-Finally
-[[rem-gaussian-theta-reciprocity-is-already-instantiated-on-functional-analysis]]
-records that the Gaussian/theta instance is already proved on the
-functional-analysis page and is cited here rather than duplicated.
+The Gaussian Poisson identity and theta reciprocity are proved under
+Countable Choice in
+[[ex-poisson-summation-for-the-gaussian-and-theta-functional-equation]]
+on the functional-analysis examples page. That calculation gives
+$\theta(t)=t^{-1/2}\theta(1/t)$ for
+$\theta(t)=\sum_{k\in\mathbb Z}e^{-\pi tk^2}$ and $t>0$.
+The pointwise summation theorem on the companion page retains its explicit
+regularity and decay assumptions.

@@ -12,7 +12,6 @@ items: [def-full-rank-lattice-covolume-and-dual-lattice,
         lem-lattice-periodic-continuous-functions-are-determined-by-their-lattice-fourier-coefficients,
         thm-poisson-summation-for-a-full-rank-lattice,
         thm-poisson-summation-under-two-sided-polynomial-decay,
-        rem-schwartz-poisson-formula-is-owned-by-functional-analysis,
         lem-dirac-comb-of-a-full-rank-lattice-transforms-to-the-dual-comb,
         lem-sampling-produces-periodisation-in-frequency,
         lem-bandlimited-samples-are-fourier-coefficients-on-the-band-interval,
@@ -45,9 +44,9 @@ $\sum_{\lambda\in\Lambda}f(\lambda)=c^{-1}\sum_{\lambda^*\in\Lambda^*}\widehat f
 for Schwartz $f$ ([[thm-poisson-summation-for-a-full-rank-lattice]]) and, under
 the exact two-sided $(n+\varepsilon)$-decay hypotheses of the source, the same
 pointwise identity for continuous integrable functions
-([[thm-poisson-summation-under-two-sided-polynomial-decay]]); the recorded
-orientation [[rem-schwartz-poisson-formula-is-owned-by-functional-analysis]]
-keeps the unit-lattice case owned by the functional-analysis page.
+([[thm-poisson-summation-under-two-sided-polynomial-decay]]). The published
+[[thm-poisson-summation-for-schwartz-functions]] supplies the unit-lattice
+identity under Countable Choice.
 
 The distributional side of the same algebra is
 $\mathcal F\operatorname{comb}_\Lambda=c^{-1}\operatorname{comb}_{\Lambda^*}$

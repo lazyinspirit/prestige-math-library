@@ -4,7 +4,6 @@ title: "Decision Problems for Finitely Presented Groups - Examples"
 status: published
 items: []
 examples: [ex-word-problem-by-free-reduction,
-           ex-word-problem-in-a-finite-cyclic-presentation,
            ex-conjugacy-in-a-free-group-by-cyclic-reduction,
            ex-todd-coxeter-as-a-partial-coset-enumeration-procedure,
            ex-an-algebraic-relator-area-computation,

@@ -40,7 +40,7 @@ const manifestOnly = argv.includes('--manifest-only');
 // --audit (owner, 2026-08-02, AUDIT-WORKFLOW.md): published-page audit scope.
 // The scope is retro-tagged legacy content, so the future-batch containment
 // rules that cannot be applied retroactively (generated roles, the
-// ai-generated dependency prohibition, structured external records) downgrade
+// ai-generated dependency prohibition) downgrade
 // to visible warnings routed to genrisk/owner dispositions, while provenance
 // coverage and source accountability stay hard. Every scoped item must have a
 // row in the supplied --ledger provenance evidence ledger(s) matching its
@@ -113,6 +113,22 @@ const scalar = (doc, key) => typeof doc[key] === 'string' ? doc[key] : undefined
 const hasSection = (doc, key) => Object.hasOwn(doc, key);
 const list = (doc, key) => Array.isArray(doc[key])
   ? doc[key].filter((value) => typeof value === 'string') : [];
+
+// Historical fields remain parseable, but active items and planned records may
+// no longer use the retired recorded-not-proved route. Audit mode has no waiver.
+function rejectRetiredExternalRecord(metadata, file, id) {
+  if (metadata.proved_here === false || metadata.proved_here === 'false') {
+    error('unproved-record-retired', `${file}: proved_here: false is forbidden in active content; supply a local proof or archive the unsupported item`, id);
+  }
+  const refs = metadata.external_refs;
+  if (refs !== undefined && refs !== null && !(Array.isArray(refs) && refs.length === 0)) {
+    error('external-refs-retired', `${file}: external_refs is retired; remove external mentions or replace them with proved local suppliers`, id);
+  }
+  if (hasSection(metadata, 'external_dependency')) {
+    error('external-fallback-retired', `${file}: external_dependency is retired; a cited external result cannot replace a local proof`, id);
+  }
+}
+
 function readBatch(path) {
   try {
     const doc = JSON.parse(readFileSync(resolvePath(path), 'utf8'));
@@ -219,7 +235,14 @@ for (const file of files) {
         continue;
       }
       seen.add(id);
+      if (planned && typeof planned === 'object') {
+        rejectRetiredExternalRecord(planned, `${file}#${id}`, id);
+      }
       if (manifestOnly) {
+        const existing = items.get(resolve(id));
+        if (existing && !existing.frontmatterError) {
+          rejectRetiredExternalRecord(existing.metadata, existing.file, existing.id);
+        }
         // A RE-HOME is not a mint (owner, 2026-08-06). Both checks below exist to
         // stop a batch claiming an id that is already someone else's; neither can
         // tell that apart from moving an existing item to an earlier page, which
@@ -265,6 +288,10 @@ if (manifestOnly) for (const [id, planned] of plannedItems) {
       error('batch-dependency-shape', `${planned.file}: ${id} has a malformed dependency`, id);
       continue;
     }
+    const existing = items.get(resolve(raw));
+    if (existing && !existing.provedHere) {
+      error('unproved-dependency-retired', `${id} depends on retired unproved record ${existing.id}; supply a proved local replacement`, id);
+    }
     const target = plannedItems.get(raw);
     if (target) {
       // Both of these are rules about what a batch may be SCAFFOLDED to do.
@@ -309,6 +336,7 @@ if (!manifestOnly) for (const id of scope) {
     error('item-frontmatter-invalid', `${item.file}: ${item.frontmatterError}`, item.id);
     continue;
   }
+  rejectRetiredExternalRecord(item.metadata, item.file, item.id);
   // Reader-facing notation (owner, 2026-08-11). `\iota(n)` — the canonical
   // embedding of a natural number into Z or R, written explicitly around its
   // argument — is banned in new content: write the number. It reads as an
@@ -398,6 +426,9 @@ if (!manifestOnly) for (const id of scope) {
   for (const raw of item.deps) {
     const targetId = resolve(raw);
     const target = targetId && items.get(targetId);
+    if (target && !target.provedHere) {
+      error('unproved-dependency-retired', `${item.file}: depends on retired unproved record ${target.id}; supply a proved local replacement`, item.id);
+    }
     if (target?.provenance.statement === 'ai-generated') {
       // In audit scope this is a discovered legacy fact, not a fresh authoring
       // choice: the seed and its cone belong to genrisk.mjs, whose receipt
@@ -410,7 +441,7 @@ if (!manifestOnly) for (const id of scope) {
           + '; its provenance.statement is ai-generated. '
           + (auditMode
             ? 'Legacy audit scope: the seed requires a genrisk.mjs disposition.'
-            : 'Use a literature-derived or ai-altered statement, prove the needed step inline, rescope, or use the documented external fallback.'),
+            : 'Use a proved literature-derived or ai-altered supplier, prove the needed step inline, or keep the unsupported branch blocked.'),
         item.id,
       );
     }
@@ -440,27 +471,6 @@ if (!manifestOnly) for (const id of scope) {
       // An ai-generated lemma cannot be a legal dependency target, so a
       // decomposition belongs inline unless an eligible source-backed statement
       // can replace it. The permitted generated roles are all non-load-bearing.
-    }
-  }
-
-  const externalPresent = hasSection(item.metadata, 'external_dependency');
-  if (item.provedHere && externalPresent) {
-    error('external-on-proved', `${item.file}: external_dependency is valid only on proved_here: false fallback records`, item.id);
-  }
-  if (!item.provedHere) {
-    const values = Object.fromEntries(['source_url', 'exact_statement', 'local_proof_attempt', 'necessity']
-      .map((key) => [key, nested(item.metadata, 'external_dependency', key)]));
-    for (const [key, value] of Object.entries(values)) {
-      // Legacy deferred-catalogue items predate the structured record; in audit
-      // scope its absence is visible but the sources_checked refresh, not this
-      // record, is their gate.
-      if (typeof value !== 'string' || !value.trim()) (auditMode ? warn : error)('external-record-missing', `${item.file}: external_dependency.${key} is ${auditMode ? 'absent on this legacy proved_here: false item' : 'required for an in-flight external fallback'}`, item.id);
-    }
-    if (values.source_url && (typeof values.source_url !== 'string' || !/^https?:\/\//.test(values.source_url))) {
-      error('external-source-url', `${item.file}: external_dependency.source_url must be an http(s) URL`, item.id);
-    }
-    if (values.source_url && !referenceUrls(item.metadata).includes(values.source_url)) {
-      error('external-source-reference', `${item.file}: external_dependency.source_url must exactly match a sources.references URL`, item.id);
     }
   }
 }

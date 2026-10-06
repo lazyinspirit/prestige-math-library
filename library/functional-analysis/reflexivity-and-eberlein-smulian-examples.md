@@ -3,7 +3,11 @@ page: reflexivity-and-eberlein-smulian-examples
 title: Reflexivity and Eberlein Smulian — Examples
 status: published
 items: []
-examples: [ex-hilbert-spaces-are-uniformly-convex, ex-reflexivity-of-ell-p-and-lp, cex-c0-is-not-reflexive, cex-weak-and-norm-topologies-differ-on-ell-one-despite-identical-convergent-sequences, rem-complex-bishop-phelps-for-general-convex-sets, ex-norm-attaining-functionals-on-a-hilbert-space]
+examples: [ex-hilbert-spaces-are-uniformly-convex,
+        ex-reflexivity-of-ell-p-and-lp,
+        cex-c0-is-not-reflexive,
+        cex-weak-and-norm-topologies-differ-on-ell-one-despite-identical-convergent-sequences,
+        ex-norm-attaining-functionals-on-a-hilbert-space]
 ---
 
 The examples put the abstract criteria into familiar spaces.  The
@@ -16,9 +20,7 @@ concrete missing bidual vector.
 
 Schur's theorem and a finite-common-kernel argument show that the weak and
 norm topologies on $\ell^1$ are different even though they have exactly the
-same convergent sequences.  The Bishop--Phelps boundary remark records
-Lomonosov's complex general-convex counterexample without using it as a local
-proof supplier.  Finally, a direct nearest-point proof of Riesz
+same convergent sequences. Finally, a direct nearest-point proof of Riesz
 representation shows, under Countable Choice, that every bounded functional
 on a real or complex Hilbert space attains its norm; the zero functional and
 the library's linear-first convention are handled explicitly.

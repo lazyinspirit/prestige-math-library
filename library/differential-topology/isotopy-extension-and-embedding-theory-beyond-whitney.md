@@ -3,32 +3,18 @@ page: isotopy-extension-and-embedding-theory-beyond-whitney
 title: Isotopy Extension and Embedding Theory Beyond Whitney
 status: draft
 requires: [formal-immersions-and-the-smale-hirsch-theorem, the-whitney-trick-and-surgery-below-the-middle-dimension, sard-theorem-and-transversality, whitney-embedding-tubular-neighbourhoods-and-approximation, vector-fields-flows-and-lie-derivatives, regular-homotopy-and-sphere-eversion]
-items:
-- def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy
-- lem-embedding-isotopy-has-a-well-defined-velocity-field-along-its-image
-- lem-an-isotopy-velocity-field-extends-over-a-tubular-neighbourhood
-- lem-compactness-allows-a-cutoff-to-produce-a-compactly-supported-time-dependent-field
-- lem-the-extended-time-dependent-field-has-a-global-time-one-flow
-- thm-isotopy-extension
-- cor-isotopic-embeddings-have-diffeomorphic-complements
-- cor-tubular-neighbourhoods-are-unique-up-to-ambient-isotopy
-- lem-the-diagonal-of-a-smooth-manifold-is-a-closed-embedded-submanifold
-- def-self-transverse-immersion-and-double-point-locus
-- lem-double-point-locus-has-expected-dimension-two-m-minus-n
-- lem-a-self-transverse-immersion-has-no-double-points-when-n-is-greater-than-two-m
-- cor-a-proper-injective-immersion-is-an-embedding
-- lem-a-double-point-of-a-self-transverse-immersion-has-two-disjoint-embedded-sheet-disks
-- def-primary-double-point-obstruction-to-removing-self-intersections
-- lem-a-collared-whitney-disk-can-be-made-disjoint-from-an-entire-compact-immersed-image
-- lem-a-small-regular-homotopy-removes-triple-points-and-preserves-transverse-branch-pairs
-- prop-whitney-disjunction-removes-algebraically-cancelling-double-points-in-the-stable-range
-- rem-vanishing-primary-double-point-and-characteristic-obstructions-do-not-classify-embeddings
-- rem-metastable-embedding-classification-requires-additional-deleted-product-machinery
-- rem-isotopy-extension-needs-compact-source-or-proper-support-control
+items: [def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy, lem-embedding-isotopy-has-a-well-defined-velocity-field-along-its-image, lem-an-isotopy-velocity-field-extends-over-a-tubular-neighbourhood, lem-compactness-allows-a-cutoff-to-produce-a-compactly-supported-time-dependent-field, lem-the-extended-time-dependent-field-has-a-global-time-one-flow, thm-isotopy-extension, cor-isotopic-embeddings-have-diffeomorphic-complements, cor-tubular-neighbourhoods-are-unique-up-to-ambient-isotopy, lem-the-diagonal-of-a-smooth-manifold-is-a-closed-embedded-submanifold, def-self-transverse-immersion-and-double-point-locus, lem-double-point-locus-has-expected-dimension-two-m-minus-n, lem-a-self-transverse-immersion-has-no-double-points-when-n-is-greater-than-two-m, cor-a-proper-injective-immersion-is-an-embedding, lem-a-double-point-of-a-self-transverse-immersion-has-two-disjoint-embedded-sheet-disks, def-primary-double-point-obstruction-to-removing-self-intersections, lem-a-collared-whitney-disk-can-be-made-disjoint-from-an-entire-compact-immersed-image, lem-a-small-regular-homotopy-removes-triple-points-and-preserves-transverse-branch-pairs, prop-whitney-disjunction-removes-algebraically-cancelling-double-points-in-the-stable-range, lem-the-round-circle-and-its-reflection-are-not-isotopic-embeddings-in-the-plane, rem-vanishing-primary-double-point-and-characteristic-obstructions-do-not-classify-embeddings, rem-isotopy-extension-needs-compact-source-or-proper-support-control]
 examples: []
 ---
 This page is the ambient side of embedding theory beyond the Whitney existence theorems. It fixes the notions of isotopy of embeddings, diffeotopy and ambient isotopy; proves the isotopy extension theorem with its relative, boundary-stratum and general forms; and records two classical consequences: isotopic embeddings of a compact manifold have diffeomorphic complements, and tubular neighbourhoods inducing the same vertical normal-quotient maps agree near compact subsets of the zero section up to ambient isotopy. The construction is the standard one: the velocity of the isotopy is a smooth field along its track, extended over a neighbourhood, cut off with compact support and integrated to an ambient isotopy, with the identity $H_t\circ F_0=F_t$ following from uniqueness of solutions of the defining ODE.
 
 The second half turns from ambient motion to obstruction theory. A self-transverse immersion has a double point locus in $M\times M$ of expected dimension $2m-n$; in the stable range ($n>2m$) self-transversality already forces injectivity, so a proper self-transverse immersion is an embedding. In ambient dimension $2m$ with $m\ge3$, Whitney disjunction removes two genuine double points with compatible opposite signs and a null-homotopic circle by changing one source sheet, with the other fixed. The disk interior avoids the entire immersed image; self-transversality is required at the endpoints. Counts are over unordered branch pairs, rather than collision image points. A small regular homotopy separates triple images while preserving those pairs and signs, so in the simply connected oriented even-dimensional case a zero integral branch-pair count still gives an embedding endpoint.
 
-The page is honest about its boundaries. Primary double-point and characteristic data do not classify embeddings up to isotopy in general: the recorded witness is Haefliger's codimension-three trefoil sphere. The metastable classification requires the Haefliger–Weber deleted-product machinery, which this page records without proof and does not use, and the extension theorem itself needs a compact source or bounded-velocity control, as the knotted-line counterexample shows.
+Primary double-point and characteristic data do not classify embeddings up
+to isotopy in general. The round parametrized circle and its reflection in the
+plane have no double points and have trivial normal line bundles, yet their
+opposite orientations cannot be joined by an isotopy of embeddings
+([[lem-the-round-circle-and-its-reflection-are-not-isotopic-embeddings-in-the-plane]]).
+The revised scope remark retains this local witness and the precise Whitney
+disjunction hypotheses. Isotopy extension itself needs a compact source or
+bounded-velocity control, as the knotted-line counterexample shows.

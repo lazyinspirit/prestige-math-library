@@ -8,8 +8,7 @@ provenance:
   statement: ai-generated
   proof: not-applicable
 deps: [def-oriented-integral, def-darboux-integral, thm-darboux-equals-riemann, thm-ftc-first-part, thm-ftc-second-part, thm-substitution, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-integral-test-for-series, thm-second-mean-value-theorem-for-integrals, def-the-integral-function, thm-additivity-over-subintervals]
-external_refs: [rem-ftc-absolutely-continuous, rem-dominated-convergence-theorem]
-forward_refs: [cex-spikes-with-integral-one-converging-pointwise-to-zero, cex-an-integrable-function-with-no-primitive, cex-a-function-with-a-primitive-that-is-not-integrable, thm-dominated-convergence]
+forward_refs: [cex-spikes-with-integral-one-converging-pointwise-to-zero, cex-an-integrable-function-with-no-primitive, cex-a-function-with-a-primitive-that-is-not-integrable, thm-dominated-convergence, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]
 justified_by: []
 aliases: []
 landmark: false
@@ -23,14 +22,7 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus"
 pipeline_run: null
 verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-24'
-    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-08-outside-receipts.jsonl.
-      Local checks and any separate second-reader evidence are recorded in the run
-      report; this is not an independent judge verdict or whole-library certification.
-    delegated_by: user
+  repair: research/recorded-retirement-2026-10-06/receipts/rem-integral-conventions-and-scope.json
 ---
 
 This item is the ledger of the page: what "integrable" means here, what the
@@ -135,20 +127,9 @@ currently proves.
 
 ## 6. Two results a reader will want next
 
-Both are mentioned here for orientation only; nothing on this page or its
-companion rests on either. The sharp FTC remains unproved in this library.
-Dominated convergence is proved on the later
-[[thm-dominated-convergence]] page, although the earlier
-[[rem-dominated-convergence-theorem]] page records it without a proof.
+Both are later results in the reading order. The sharp FTC is proved in
+[[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]]
+and dominated convergence in [[thm-dominated-convergence]].
 
-- [[rem-ftc-absolutely-continuous]] — the sharp form of the fundamental theorem:
-  the absolutely continuous functions are exactly those for which $G'$ exists
-  almost everywhere, $G'\in L^1$, and
-  $G(x)=G(a)+\int_a^x G'$ for every $x\in[a,b]$. The two counterexamples on the companion page,
-  [[cex-an-integrable-function-with-no-primitive]] and
-  [[cex-a-function-with-a-primitive-that-is-not-integrable]], are precisely the
-  two ways the naive form fails, and that sharp form is the answer.
-- [[rem-dominated-convergence-theorem]] — the earlier external record of the
-  theorem that licenses interchanging a limit with an integral under a
-  domination hypothesis, and the natural sequel to the spike counterexample
-  above. The later [[thm-dominated-convergence]] supplies a proof.
+- Under Countable Choice and Dependent Choice, the sharp FTC identifies absolutely continuous real functions on $[a,b]$ with those satisfying $G'\in L^1$ almost everywhere and $G(x)=G(a)+\int_a^xG'$ for every $x$ in the interval. The two companion counterexamples, [[cex-an-integrable-function-with-no-primitive]] and [[cex-a-function-with-a-primitive-that-is-not-integrable]], show the limitations of the earlier primitive-based formulations.
+- Dominated convergence licenses interchanging the pointwise almost-everywhere limit with the Lebesgue integral under an integrable domination hypothesis, providing the later sequel to the spike counterexample.

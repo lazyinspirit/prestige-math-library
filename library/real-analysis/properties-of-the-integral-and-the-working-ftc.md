@@ -2,19 +2,7 @@
 page: properties-of-the-integral-and-the-working-ftc
 title: "Properties of the Integral and the Working FTC"
 status: published
-items: [def-oriented-integral, lem-integrability-on-a-subinterval,
-        thm-linearity-of-the-integral, thm-monotonicity-of-the-integral,
-        thm-additivity-over-subintervals,
-        lem-changing-a-function-at-finitely-many-points,
-        thm-composition-with-a-continuous-function,
-        cor-integrability-of-absolute-values-products-and-lattice-operations,
-        thm-first-mean-value-theorem-for-integrals, def-the-integral-function,
-        thm-the-integral-function-is-lipschitz, thm-ftc-first-part,
-        thm-ftc-second-part, cor-primitives-of-a-continuous-function,
-        thm-integration-by-parts, thm-substitution,
-        thm-second-mean-value-theorem-for-integrals,
-        thm-nonnegative-continuous-with-zero-integral-vanishes,
-        thm-integral-test-for-series, rem-integral-conventions-and-scope]
+items: [def-oriented-integral, lem-integrability-on-a-subinterval, thm-linearity-of-the-integral, thm-monotonicity-of-the-integral, thm-additivity-over-subintervals, lem-changing-a-function-at-finitely-many-points, thm-composition-with-a-continuous-function, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-first-mean-value-theorem-for-integrals, def-the-integral-function, thm-the-integral-function-is-lipschitz, thm-ftc-first-part, thm-ftc-second-part, cor-primitives-of-a-continuous-function, thm-integration-by-parts, thm-substitution, thm-second-mean-value-theorem-for-integrals, thm-nonnegative-continuous-with-zero-integral-vanishes, thm-integral-test-for-series, rem-integral-conventions-and-scope]
 examples: []
 ---
 
@@ -111,8 +99,10 @@ derivatives and is not developed on this page. The current
 Darboux/L'Hopital/Taylor page also explicitly excludes the integral remainder.
 Bounded variation with
 the Riemann-Stieltjes integral, and improper integrals, are each a later page of
-this track; the sharp form of the fundamental theorem is not a planned page at
-all but a recorded-not-proved result, [[rem-ftc-absolutely-continuous]]. Arzelà's bounded
+this track; the sharp form of the fundamental theorem is proved later in
+[[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]],
+under Countable Choice and Dependent Choice, on the measure-theory page
+[[absolute-continuity-and-the-sharp-fundamental-theorem-of-calculus]]. Arzelà's bounded
 convergence theorem is not here: it is a genuine theorem about the Riemann
 integral, but no complete proof route was certifiable at scaffold time, and the
 counterexample that motivates it —

@@ -1,7 +1,7 @@
 ---
 id: rem-continuum-hypothesis
 kind: remark
-title: "The continuum hypothesis, and what this page does not prove"
+title: "The continuum hypothesis and the later local consistency results"
 status: published
 origin: session
 provenance:
@@ -9,20 +9,10 @@ provenance:
   proof: not-applicable
 deps: [thm-cantor-powerset, thm-r-uncountable, def-countable, def-equinumerous, lem-countable-iff-surjection-from-n, lem-pigeonhole]
 justified_by: []
-external_refs: [rem-independence-of-ch-and-gch, rem-gch-implies-ac,
-                rem-godel-constructible-universe,
-                rem-cohen-forcing-ac-independent]
+forward_refs: [cor-positive-relative-consistency-of-ch-and-gch, cor-formal-negative-consistency-of-ch-and-gch, thm-sierpinski-arbitrary-set-gch-implies-choice]
 aliases: [rem-ch]
 landmark: false
-short: "CH is independent of ZFC"
-verification:
-  precheck: n/a
-  verified:
-    model: claude-sonnet-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
+short: "CH and its local consistency suppliers"
 sources:
   scraped: []
   references:
@@ -37,6 +27,8 @@ sources:
     - title: "Cantor's theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cantor%27s_theorem"
 pipeline_run: null
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/rem-continuum-hypothesis.json
 ---
 
 ## Remark
@@ -63,17 +55,16 @@ only the displayed form is used below. Determining the exact choiceless
 relationship between the formulations belongs to the later symmetric-model
 development.
 
-**CH is independent of ZFC** ([[rem-independence-of-ch-and-gch]]). Gödel (1938)
-showed that ZFC cannot refute it, by constructing the inner model $L$ of
-constructible sets, in which CH holds ([[rem-godel-constructible-universe]]).
-Cohen (1963) showed that ZFC cannot prove it, by inventing forcing and building a
-model of ZFC in which CH fails ([[rem-cohen-forcing-ac-independent]] is the same
-method). Together, if ZFC is consistent then so are ZFC + CH and ZFC + not CH, so
-CH is settled by neither. Both results are external to this library: neither the
-constructible universe nor forcing is developed here, and both are quoted with
-references rather than proved. As with the false statements
-on this page, the honest form of the conclusion is conditional on the consistency
-of ZFC, which cannot be proved inside ZFC.
+**Later local consistency results.**
+[[cor-positive-relative-consistency-of-ch-and-gch]] proves that
+$\operatorname{Con}(\mathrm{ZFC})$ implies consistency of both
+$\mathrm{ZFC}+\mathrm{CH}$ and $\mathrm{ZFC}+\mathrm{GCH}$.
+[[cor-formal-negative-consistency-of-ch-and-gch]] proves, as an external
+metatheorem using a separate construction for each fixed finite fragment, the
+corresponding consistency implications for not CH and not GCH. Its contract
+claims no PA proof of a uniform refutation transformer. Together these imply
+that, if ZFC is consistent, it decides neither CH nor GCH: a proof of either
+sentence would contradict consistency of the extension by its negation.
 
 **What this page has not proved.** CH is usually stated about $\mathbb{R}$: that
 every uncountable set of reals is equinumerous with $\mathbb{R}$. That form is
@@ -87,24 +78,15 @@ bridge between them is not available here — it needs binary expansions, which
 are developed much later, on the same later page. Nothing on this page depends
 on that bridge.
 
-**None of this affects the theorems proved here.** Countability of $\mathbb{Q}$,
-uncountability of $\mathbb{R}$ and of the irrationals, and Cantor's theorem are
-all decided, and all are theorems of ZF, choice included nowhere. Independence
-enters only for statements that compare sizes strictly between $\mathbb{N}$ and
-$\mathcal{P}(\mathbb{N})$, and for the choice principles recorded in
-[[def-countable-choice]] and its companions.
+**The countability results have their own proofs.** Countability of
+$\mathbb Q$, uncountability of $\mathbb R$ and of the irrationals, and Cantor's
+theorem on this page are proved without a choice axiom. The later consistency
+comparisons are not premises of those arguments.
 
-The generalised continuum hypothesis (GCH), that
-$A \prec B \prec \mathcal{P}(A)$ never holds for infinite $A$, is also
-independent of ZFC ([[rem-independence-of-ch-and-gch]]), in the same conditional
-sense as CH above: if ZFC is consistent, then so are ZFC + GCH and
-ZFC + not GCH, and that consistency assumption cannot be dropped. GCH implies CH,
-being its instance at $A = \mathbb{N}$, an instance the hypothesis "for infinite
-$A$" genuinely licenses: $\mathbb{N} \not\approx n$ for every natural number $n$
-(claim 4 of [[lem-pigeonhole]]), so $\mathbb{N}$ is not finite in the sense of
-[[def-countable]]. GCH is stronger in a striking further
-sense: over ZF it even implies the Axiom of Choice, a result of Sierpiński
-([[rem-gch-implies-ac]]). That implication, too, is quoted and not proved here.
-That CH does not conversely imply GCH is again a relative-consistency statement
-rather than a theorem, conditional on the consistency of ZFC, and it is likewise
-not proved here.
+The **generalised continuum hypothesis** (GCH) asserts that there are no
+infinite $A$ and set $B$ with $A\prec B\prec\mathcal P(A)$. It implies CH by
+its instance at $A=\mathbb N$, since $\mathbb N$ is infinite by claim 4 of
+[[lem-pigeonhole]]. The later
+[[thm-sierpinski-arbitrary-set-gch-implies-choice]] proves in ZF that this
+arbitrary-set formulation of GCH implies AC. This implication uses no
+consistency assumption and is distinct from the two consistency comparisons.

@@ -14,19 +14,10 @@ deps: [lem-a-dyadic-scale-of-open-sets-defines-a-continuous-function,
        def-interior-closure-boundary-top, def-interval, def-topological-space,
        def-subspace-topology-top, lem-real-line-is-a-metric-space]
 justified_by: []
-external_refs: [rem-urysohn-lemma-not-a-zf-theorem]
 aliases: [thm-urysohn]
 landmark: true
 short: "Urysohn's lemma (DC)"
 proof_strategy: constructive
-verification:
-  precheck: pass
-  verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-09
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -41,6 +32,8 @@ sources:
     - title: "Axiom of dependent choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_dependent_choice"
 pipeline_run: null
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/thm-urysohn-lemma.json
 ---
 
 ## Statement
@@ -56,18 +49,11 @@ $(X, \mathcal{T})$ be a topological space.
    continuous function into $[0,1]$ separating them in the sense of clause 1,
    then $X$ is normal. **This direction uses no choice principle.**
 
-**Where the choice principle of clause 1 is spent, and why not less.** The
-construction below builds, for each $n \in \mathbb{N}$, an assignment of an
-open set to every dyadic rational of level $n$, extending the level-$(n-1)$
-assignment; at each single level the finitely many new open sets are chosen at
-once by [[lem-finite-choice]], a theorem of ZF, but stringing together
-infinitely many such levels, each depending on the one before, is exactly the
-situation dependent choice is for. The published
-[[rem-urysohn-lemma-not-a-zf-theorem]] records, with its sources, that
-$\mathrm{ZF}$ and even $\mathrm{ZF}$ together with the Axiom of Countable
-Choice do not suffice, and that dependent choice does; nothing here claims
-dependent choice is *necessary* for clause 1, only that the construction given
-is carried out in $\mathrm{ZF} + \mathrm{DC}$.
+**Where the choice principle of clause 1 is spent.** At each dyadic level
+finitely many new open sets are selected by [[lem-finite-choice]], a theorem
+of ZF. Dependent choice assembles a sequence of admissible levels, each
+extending its predecessor. This proves sufficiency of DC for this construction;
+it asserts no necessity or independence result.
 
 ## Facts & Assumptions
 
@@ -151,7 +137,9 @@ is carried out in $\mathrm{ZF} + \mathrm{DC}$.
 
 ## Remarks
 
-- **The lemma is stated for a normal space, not a $T_4$ space.** $T_1$ is used nowhere above; it is needed only to turn a *point* into a closed set, which is the extra step the next corollary spends. The published [[rem-urysohn-lemma-not-a-zf-theorem]] states the classical $T_4$ form; the form proved here is the more general one, and the two are not in tension — the $T_4$ form follows by adding the $T_1$ hypothesis, which is not used in this proof at all.
+- **The lemma is stated for a normal space.** $T_1$ is used nowhere above;
+  it is needed only to turn a point into a closed set, the extra step used by
+  the separation-chain corollary.
 
 - **Only clause 1 costs a choice principle**, and it is spent at exactly one place: the single application of dependent choice in step 12.1, which strings together the countably many admissible levels built one finite step at a time in steps 5.1–10.1. Every other existential instantiation above (steps 2.1, 2.2 and 6.1) draws from a single nonempty set or, in step 6.1, from a finite family of them via [[lem-finite-choice]], and neither costs anything beyond ZF.
 

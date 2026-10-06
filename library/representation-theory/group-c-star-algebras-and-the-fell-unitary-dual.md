@@ -13,7 +13,6 @@ items:
   - lem-operators-commuting-with-a-point-separating-family-of-multiplications-are-multiplications
   - lem-positive-type-functions-satisfy-translation-estimates
   - lem-quadratic-form-of-a-self-adjoint-operator-attains-the-norm
-  - rem-the-kernel-map-need-not-be-injective-outside-type-i
   - def-fell-topology-on-the-unitary-dual
   - lem-a-nondegenerate-l1-representation-recovers-a-unitary-group-representation
   - lem-c-star-algebras-and-closed-ideals-have-positive-contractive-approximate-units

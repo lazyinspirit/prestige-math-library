@@ -27,8 +27,7 @@ items: [def-total-winding-homomorphism-of-the-punctured-disk,
         prop-reduced-and-unreduced-burau-representations-have-the-same-kernel,
         lem-the-minus-one-specialization-of-three-strand-burau-has-kernel-generated-by-delta-to-the-fourth,
         lem-reduced-burau-detects-every-power-of-delta-to-the-fourth-in-b-three,
-        thm-reduced-burau-is-faithful-for-at-most-three-strands,
-        rem-current-faithfulness-status-of-the-reduced-burau-representation]
+        thm-reduced-burau-is-faithful-for-at-most-three-strands]
 examples: []
 ---
 
@@ -66,7 +65,6 @@ counterpart, as the companion page's counterexample shows.
 The final items evaluate at $t=-1$: the kernel of $\bar\rho_3(-1)$ is the
 infinite cyclic central subgroup $\langle\Delta^4\rangle$, the representation
 detects every nonzero power of $\Delta^4$, and consequently the reduced Burau
-representation is faithful for $1\le n\le3$; the case $n=4$ is not claimed and
-the known nonfaithfulness for $n\ge5$ is recorded in the closing remark. The
+representation is faithful for $1\le n\le3$; no faithfulness conclusion for $n\ge4$ is asserted. The
 Axiom of Choice is inherited through the Artin-presentation completeness and
 mapping-class identifications and the geometric meridian-action supplier; the module, matrix and specialization computations are choice free.

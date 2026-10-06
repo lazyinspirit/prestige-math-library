@@ -8,19 +8,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [def-derivative, thm-algebra-of-derivatives, thm-chain-rule, lem-derivative-of-a-power, thm-algebra-of-continuous-functions, thm-two-sided-limit-iff-both-one-sided, def-one-sided-limits, def-function-limit, lem-limit-is-local, def-darboux-sums, def-darboux-integral, def-bounded-set, def-integer-power, lem-power-monotone, def-canonical-natural, lem-of-naturals-positive, thm-of-archimedean, cor-archimedean-reciprocal, thm-ftc-second-part, def-max-min, lem-finite-set-has-max, def-interval, def-limit-point-r, def-ordered-field, def-complete-ordered-field]
+forward_refs: [thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]
 justified_by: []
 aliases: []
 landmark: true
 short: "a primitive whose derivative is not integrable"
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-10
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -31,6 +24,8 @@ sources:
     - title: "J. M. H. Olmsted, Counterexamples in Analysis: Differentiation"
       url: "https://people.math.sc.edu/girardi/m555/10S/diff-counterexs.pdf"
 pipeline_run: null
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/cex-a-function-with-a-primitive-that-is-not-integrable.json
 ---
 
 ## Statement refuted
@@ -140,4 +135,4 @@ the argument and no limit function is formed.
 
 - **The two exponents are what the construction turns on.** Differentiability at $0$ needs $c_n/\alpha_n \to 0$, and unboundedness of $G'$ needs $c_n/h_n \to \infty$; with $\alpha_n = 1/\iota(n+2)$ the choices $c_n = \alpha_n^{2}$ and $h_n = \alpha_n^{4}$ give $c_n/\alpha_n = \alpha_n \to 0$ and $c_n/h_n = \alpha_n^{-2} \to \infty$. Any pair of exponents with the same two properties would do; these are verified explicitly in steps 6.1 and 6.2 because the construction is only as good as those two inequalities.
 
-- **What this refutes and what it does not.** It refutes the claim that every derivative is Riemann integrable, hence the naive reading of [[thm-ftc-second-part]] with its integrability hypothesis deleted. It says nothing about whether $G'$ has a primitive — it does, namely $G$ — and nothing about the sharp class of functions for which $\int_a^b G' = G(b)-G(a)$ holds, which this library records but does not prove ([[rem-integral-conventions-and-scope]]).
+- **What this refutes and what it does not.** It refutes the claim that every derivative is Riemann integrable, hence the naive reading of [[thm-ftc-second-part]] with its integrability hypothesis deleted. It says nothing about whether $G'$ has a primitive — it does, namely $G$ — and nothing about the sharp class of functions for which $\int_a^b G' = G(b)-G(a)$ holds, whose later Lebesgue-integral formulation is proved under Countable Choice and Dependent Choice in [[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]].

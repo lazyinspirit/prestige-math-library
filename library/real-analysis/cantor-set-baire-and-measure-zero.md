@@ -52,12 +52,11 @@ $\mathbb{Q}$ and, at every stage, takes the interval whose two rational endpoint
 have least index among those meeting the requirements, exactly the canonical
 selection of [[thm-perfect-set-uncountable-r]]; the recursion is then a single
 application of [[thm-recursion]] to a total map.
-[[rem-baire-in-r-is-choice-free]] states what that does and does not establish,
-and it is careful about the difference: nothing here bears on the Baire theorem
-for general complete metric spaces, whose strength over ZF is a quoted external
-result recorded in [[rem-baire-category-choice-strength]] and not proved in this
-library. That remark is the one item on the page resting on unproved material,
-and it is marked accordingly.
+[[rem-baire-in-r-is-choice-free]] records the exact least-index selection
+used here. The later [[thm-separable-complete-metric-baire-in-zf]] proves the
+same choice-free method for spaces with a fixed countable dense sequence;
+[[thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf]] proves
+the equivalence of the unrestricted complete-metric principle with DC over ZF.
 
 **Measure.** [[def-measure-zero-and-content-zero]] defines both notions by covers
 of intervals, countable for *measure zero* and finite for *content zero*, and

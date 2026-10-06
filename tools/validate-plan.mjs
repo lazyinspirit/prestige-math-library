@@ -182,10 +182,11 @@ if (run) for (const id of selectedPages)
 for (const p of pages) {
   // "P" = a page ALREADY PUBLISHED in the repo, declared here only so the new
   // stack can name it as a prerequisite. It has no companion and no item list.
-  // 'X' = a page that RECORDS results this library does not prove (SCHEMA §3
-  // proved_here). It has no companion, no item ceiling, and no prerequisites:
-  // it states, it does not derive, so anything may depend on it.
-  if (selectedPage(p.id) && !['A', 'B', 'P', 'X'].includes(p.kind)) err('kind', `page ${p.id}: kind must be "A", "B", "P" or "X"`);
+  // Historical X catalogue pages remain readable in archived plans, but cannot
+  // be selected for active authoring after recorded-material retirement.
+  if (selectedPage(p.id) && (p.kind === 'X' || p.category === 'not-proved-here'))
+    err('unproved-catalogue-retired', `page ${p.id}: recorded-not-proved catalogue pages are retired; plan locally proved prerequisites instead`);
+  else if (selectedPage(p.id) && !['A', 'B', 'P'].includes(p.kind)) err('kind', `page ${p.id}: kind must be "A", "B" or "P"`);
   (selectedPages === null ? p.items : (p.items ?? [])).forEach((it, i) => {
     if (itemById.has(it.id) && (selectedPage(p.id) || selectedPage(pageOfItem.get(it.id).id))) err('dup-id', `${it.id} declared on both ${pageOfItem.get(it.id).id} and ${p.id}`);
     // An id that already exists in items/ is only a violation if it is HOMED on a

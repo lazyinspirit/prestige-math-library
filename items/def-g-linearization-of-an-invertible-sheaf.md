@@ -8,16 +8,10 @@ pipeline_run: frontier-40-geometry-braids-rep-27
 dependency_level: 0
 justified_by: []
 aliases: []
-external_refs: [rem-linearization-existence-outside-this-pair]
 deps: [def-rational-action-on-affine-variety, def-classical-algebraic-prevariety-regular-maps-and-varieties, def-invertible-sheaf, def-morphism-locally-ringed-spaces]
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   references:
     - title: "Michel Brion, Introduction to actions of algebraic groups, Les cours du CIRM 1 (2010), no. 1, 1-22"
@@ -51,4 +45,4 @@ where $m_G:G\times G\to G$ is the multiplication; at $(g,h,x)$ both sides map th
 
 For any algebraic character $\chi:G\to\mathbf G_m=\mathbb C^\times$ the **twist** $(L,m)_\chi$ multiplies the fibre action by $\chi(g)$ and is again a linearization of the same invertible sheaf. In particular linearizations are not unique, the trivial action admits the trivial linearization of $\mathcal O_X$ and its twists, and for a finite-dimensional rational $G$-module $V$ the induced action on the tautological line bundle linearizes $\mathcal O_{\mathbf P(V)}(-1)$, and its dual linearizes $\mathcal O_{\mathbf P(V)}(1)$.
 
-The two main theorems of this page always assume that a linearization is given; no general existence of linearizations is claimed here, and the recorded external existence theorem is [[rem-linearization-existence-outside-this-pair]].
+The two main theorems of this page always assume that a linearization is given; no general existence of linearizations is claimed here.

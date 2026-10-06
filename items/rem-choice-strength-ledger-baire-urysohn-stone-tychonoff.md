@@ -4,7 +4,7 @@ kind: remark
 title: "Choice ledger for Baire, Urysohn, Stone, and Tychonoff"
 status: published
 origin: pipeline
-deps: [thm-separable-complete-metric-baire-in-zf, thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf, thm-dmc-implies-compact-hausdorff-baire, thm-compact-hausdorff-baire-iff-dmc, thm-dc-iff-products-compact-hausdorff-are-baire, thm-dmc-implies-urysohn-lemma, rem-dmc-versus-dc-over-zf-is-open, thm-stone-metric-spaces-are-paracompact, thm-products-of-cofinite-spaces-compact-iff-bpi, thm-compact-t1-product-theorem-iff-ac, thm-arbitrary-compact-product-theorem-iff-ac, rem-urysohn-implies-dmc-open-status, rem-stone-exact-choice-strength-open-status, cor-brunner-models-also-refute-tietze-extension, cor-bpi-does-not-imply-dmc, cor-dmc-is-not-provable-in-zf, rem-dmc-mc-ac-zfa-qualification, thm-relative-consistency-countable-choice-without-urysohn, thm-relative-consistency-bpi-without-urysohn, thm-relative-consistency-dc-without-stone, thm-relative-consistency-bpi-without-stone]
+deps: [cor-dmc-is-not-provable-in-zf, thm-separable-complete-metric-baire-in-zf, thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf, thm-dmc-implies-compact-hausdorff-baire, thm-compact-hausdorff-baire-iff-dmc, thm-dc-iff-products-compact-hausdorff-are-baire, thm-dmc-implies-urysohn-lemma, rem-dmc-versus-dc-over-zf-is-open, thm-stone-metric-spaces-are-paracompact, thm-products-of-cofinite-spaces-compact-iff-bpi, thm-compact-t1-product-theorem-iff-ac, thm-arbitrary-compact-product-theorem-iff-ac, rem-urysohn-implies-dmc-open-status, rem-stone-exact-choice-strength-open-status, cor-brunner-models-also-refute-tietze-extension, cor-bpi-does-not-imply-dmc, rem-dmc-mc-ac-zfa-qualification, thm-relative-consistency-dc-without-stone]
 justified_by: []
 provenance:
   statement: ai-altered
@@ -28,23 +28,21 @@ sources:
       url: "https://topology.nipissingu.ca/tp/reprints/v42/tp42021.pdf"
       locator: "Discussion before Proposition 2.13, journal p. 282"
 verification:
-  audited: 2026-09-22
+  repair: research/recorded-retirement-2026-10-06/receipts/rem-choice-strength-ledger-baire-urysohn-stone-tychonoff.json
 ---
 
 ## Statement
 
 Ledger: separable complete metric Baire is a theorem of $\mathrm{ZF}$; complete
 metric Baire is DC; compact-Hausdorff Baire is exactly DMC; Baireness of
-products of compact Hausdorff spaces is DC; DMC implies Urysohn's lemma, while,
-relative to the consistency of ZF, countable choice and BPI are each consistent
-with the failure of Urysohn's lemma and of bounded Tietze extension; Stone
-follows from AC, while relative to the consistency of ZF both DC and BPI are
-separately consistent with a metrizable space having an open cover with no
+products of compact Hausdorff spaces is DC; DMC implies Urysohn's lemma;
+failure of Urysohn separation implies failure of DMC and bounded Tietze extension; the local positive implication does not provide a countermodel; Stone
+follows from AC, while the separate DC supplier states, relative to the consistency of ZF, that DC is consistent with a metrizable space having an open cover with no
 locally finite open refinement; the stronger
 per-cover effective refinement assertion for discrete metrizable spaces implies
 AC; compact Hausdorff products and cofinite products have the strength of BPI;
 compact $T_1$ and arbitrary compact products have the strength of AC. DC
-implies DMC; if ZF is consistent, ZF does not prove DMC; and DMC-to-DC over
+implies DMC; DMC-to-DC over
 $\mathrm{ZF}$ remains open.
 
 ## Remarks
@@ -59,22 +57,18 @@ $\mathrm{ZF}$ remains open.
   [[thm-dc-iff-products-compact-hausdorff-are-baire]] is the product row, which
   is DC and not merely DMC.
 
-- **Urysohn rows.** [[thm-dmc-implies-urysohn-lemma]] is the positive row;
-  [[thm-relative-consistency-countable-choice-without-urysohn]] and
-  [[thm-relative-consistency-bpi-without-urysohn]] are the two separations, and
-  [[cor-brunner-models-also-refute-tietze-extension]] records the bounded-Tietze
-  consequence. The status of the converse is
-  [[rem-urysohn-implies-dmc-open-status]].
+- **Urysohn rows.** [[thm-dmc-implies-urysohn-lemma]] proves the positive
+  implication, and [[cor-dmc-is-not-provable-in-zf]] proves its contraposition. [[cor-brunner-models-also-refute-tietze-extension]] proves that
+  any supplied normal-space separation obstruction also obstructs bounded
+  Tietze extension; it asserts no countermodel existence. The converse
+  comparison is posed as a question in [[rem-urysohn-implies-dmc-open-status]].
 
-- **Stone rows.** [[thm-stone-metric-spaces-are-paracompact]] is the AC row;
-  [[thm-relative-consistency-dc-without-stone]] and
-  [[thm-relative-consistency-bpi-without-stone]] are relative-consistency
-  separations from DC and BPI, respectively. In the BPI model the sharper
-  obstruction is a metrizable space with an open cover having no point-finite
-  open refinement, hence no locally finite open refinement;
-  [[thm-effective-metacompact-discrete-metrics-implies-ac]] is the effective
-  strengthening, and the exact strength of the ordinary theorem is recorded as
-  open in [[rem-stone-exact-choice-strength-open-status]].
+- **Stone rows.** [[thm-stone-metric-spaces-are-paracompact]] is the AC row.
+  The separate [[thm-relative-consistency-dc-without-stone]] is the existing
+  DC-comparison supplier. No BPI-to-Stone nonimplication is supplied here.
+  [[thm-effective-metacompact-discrete-metrics-implies-ac]] proves the effective
+  strengthening with a refinement map; the distinction from the ordinary
+  theorem is explained in [[rem-stone-exact-choice-strength-open-status]].
 
 - **Tychonoff rows.** Cofinite products and compact Hausdorff products have the
   strength of BPI ([[thm-products-of-cofinite-spaces-compact-iff-bpi]], and the
@@ -83,9 +77,9 @@ $\mathrm{ZF}$ remains open.
   ([[thm-compact-t1-product-theorem-iff-ac]],
   [[thm-arbitrary-compact-product-theorem-iff-ac]]).
 
-- **Principle rows.** DC implies DMC and, assuming the consistency of ZF, DMC is
-  not a ZF theorem ([[cor-dmc-is-not-provable-in-zf]]); BPI does not imply DMC
-  ([[cor-bpi-does-not-imply-dmc]]); the qualifications over $\mathrm{ZFA}$ and
-  the openness of the reversal are in [[rem-dmc-mc-ac-zfa-qualification]] and
+- **Principle rows.** DC implies DMC. [[cor-bpi-does-not-imply-dmc]] gives only the conditional
+  criterion: if ZF+BPI+not Urysohn is consistent, ZF+BPI cannot prove DMC. No
+  consistency of that counterexample theory is established by that corollary; the base-theory qualifications and
+  the separate reversal question are in [[rem-dmc-mc-ac-zfa-qualification]] and
   [[rem-dmc-versus-dc-over-zf-is-open]]. No strict DMC-versus-DC claim over
   $\mathrm{ZF}$ is made anywhere in this ledger.

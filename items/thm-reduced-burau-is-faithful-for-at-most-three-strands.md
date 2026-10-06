@@ -16,7 +16,7 @@ deps:
   - def-garside-half-twist-and-simple-positive-braid
   - lem-units-and-powers-of-the-laurent-polynomial-ring
   - def-axiom-of-choice
-external_refs: [rem-current-faithfulness-status-of-the-reduced-burau-representation]
+external_refs: []
 justified_by: []
 landmark: true
 proof_strategy: direct
@@ -34,12 +34,6 @@ sources:
     - title: "Stephen J. Bigelow, The Burau representation is not faithful for n = 5, Geometry & Topology 3 (1999) 397-404, Theorems 1.2 and 1.4 (printed pp. 397-399)"
       url: "https://arxiv.org/pdf/math/9904100"
       locator: "Theorems 1.2 and 1.4, printed pp. 397-399"
-verification:
-  precheck: pass
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 ---
 
 ## Statement
@@ -59,10 +53,7 @@ $\ker\bar\rho_3(-1)=\langle\Delta^4\rangle$
 ([[lem-the-minus-one-specialization-of-three-strand-burau-has-kernel-generated-by-delta-to-the-fourth]]),
 say $\beta=\Delta^{4k}$, and
 [[lem-reduced-burau-detects-every-power-of-delta-to-the-fourth-in-b-three]]
-forces $t^{6k}=1$, hence $k=0$ and $\beta=1$. The known nonfaithfulness for
-$n\ge5$ is recorded separately in
-[[rem-current-faithfulness-status-of-the-reduced-burau-representation]] and is
-not used here; the case $n=4$ is not claimed. Magnus and Peluso established
+forces $t^{6k}=1$, hence $k=0$ and $\beta=1$. The case $n=4$ is not claimed. Magnus and Peluso established
 faithfulness for $n=3$ by a direct algebraic computation, and the argument for
 $n=3$ given here, via the $t=-1$ specialization, is independent of theirs. The
 AC hypothesis is exactly the inherited one.
@@ -91,4 +82,4 @@ AC hypothesis is exactly the inherited one.
 
 1.3 *The case $n=3$.* Let $\beta\in\ker\bar\rho_3$, so $\bar\rho_3(\beta)=I_2$. Applying the evaluation homomorphism of [F3] entrywise gives $\bar\rho_3(-1)(\beta)=I_2$, so $\beta\in\ker\bar\rho_3(-1)=\langle\Delta^4\rangle$, say $\beta=\Delta^{4k}$ with $k\in\mathbb Z$. Then [F4] gives $I_2=\bar\rho_3(\beta)=\bar\rho_3(\Delta^{4k})=t^{6k}I_2$, so $t^{6k}=1$ and hence $k=0$; therefore $\beta=\Delta^0=1$. Since $\beta$ was an arbitrary element of the kernel, $\ker\bar\rho_3$ is trivial and $\bar\rho_3$ is faithful. [F3, F4]
 
-2.1 *Conclusion.* Steps 1.1, 1.2 and 1.3 cover $n=1,2,3$ respectively, so the reduced Burau representation is faithful for $1\le n\le3$. The nonfaithfulness results for $n\ge5$ and the unreviewed claim for $n=4$ are not used. AC is inherited through the cited representation items as declared; the group-theoretic and specialization computations are choice free. [step 1.1, step 1.2, step 1.3] ∎
+2.1 *Conclusion.* Steps 1.1, 1.2 and 1.3 cover $n=1,2,3$ respectively, so the reduced Burau representation is faithful for $1\le n\le3$. AC is inherited through the cited representation items as declared; the group-theoretic and specialization computations are choice free. [step 1.1, step 1.2, step 1.3] ∎

@@ -12,8 +12,6 @@ items: [lem-a-finite-coordinate-bump-map-embeds-a-compact-manifold-in-some-eucli
         lem-a-generic-projection-can-preserve-properness,
         thm-weak-whitney-proper-embedding-theorem,
         thm-weak-whitney-immersion-theorem,
-        rem-strong-whitney-embedding-theorem,
-        rem-strong-whitney-immersion-theorem,
         def-tubular-neighbourhood-of-an-embedded-submanifold,
         def-normal-addition-map-for-a-euclidean-submanifold,
         lem-normal-addition-is-a-local-diffeomorphism-along-the-zero-section,

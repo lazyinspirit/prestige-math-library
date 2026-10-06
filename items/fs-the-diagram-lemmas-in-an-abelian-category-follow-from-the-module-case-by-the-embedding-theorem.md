@@ -1,25 +1,16 @@
 ---
 id: fs-the-diagram-lemmas-in-an-abelian-category-follow-from-the-module-case-by-the-embedding-theorem
 kind: false-statement
-title: "FALSE: the diagram lemmas in an abelian category follow from the module case by the embedding theorem"
+title: "FALSE: this page proves the diagram lemmas by reducing to the module case"
 status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [rem-the-freyd-mitchell-embedding-theorem,
-       rem-why-the-diagram-lemmas-are-not-proved-by-the-embedding-theorem,
-       thm-the-connecting-morphism-exists-and-is-unique]
+deps: [thm-the-connecting-morphism-exists-and-is-unique]
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-30
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-30
 sources:
   scraped: []
   references:
@@ -28,12 +19,15 @@ sources:
     - title: "Peter Freyd, Abelian Categories"
       url: "https://www.tac.mta.ca/tac/reprints/articles/3/tr3.pdf"
 pipeline_run: frontier-24
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/fs-the-diagram-lemmas-in-an-abelian-category-follow-from-the-module-case-by-the-embedding-theorem.json
 ---
 
 ## Statement
 
-The diagram lemmas for an arbitrary abelian category can be proved on this page
-simply by reducing to the already-published module case via Freyd-Mitchell.
+The proof of the diagram lemmas supplied on this page reduces the
+connecting-morphism construction to the already-published module case via
+Freyd-Mitchell.
 
 ## Facts & Assumptions
 
@@ -43,6 +37,6 @@ simply by reducing to the already-published module case via Freyd-Mitchell.
 
 ## Refutation
 
-1.1 The proposed reduction already fails at scope: [[rem-the-freyd-mitchell-embedding-theorem]] records the smallness condition on Freyd-Mitchell, so the route is not a theorem about arbitrary abelian categories. [given]
+1.1 The construction in [L1] takes place in the given abelian category: it forms the connecting morphism through its intrinsic kernels and cokernels and proves the required factorization and uniqueness there. This is the proof supplied on the page for the connecting-morphism step in the diagram lemmas. [L1]
 
-2.1 Even inside that smaller scope, [[rem-why-the-diagram-lemmas-are-not-proved-by-the-embedding-theorem]] records that this library does not take the embedding-theorem route, and [L1] supplies the intrinsic construction it uses instead. Therefore the statement is false as a description of the page's proof method. [L1, step 1.1] ∎
+2.1 Consequently the statement, read as a description of this page's proof, is false: the connecting-morphism argument it supplies is the intrinsic argument in step 1.1. The assertion here concerns the displayed proof method; it makes no claim that an embedding argument is mathematically impossible in a setting where an appropriate embedding has been established. [L1, step 1.1] ∎

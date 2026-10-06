@@ -2,30 +2,7 @@
 page: fourier-restriction-and-the-stein-tomas-theorem
 title: Fourier Restriction and the Stein–Tomas Theorem
 status: published
-items:
-- def-euclidean-hypersurface-normal-shape-operator-and-curvature
-- lem-smooth-euclidean-hypersurface-graph-and-localization
-- def-fourier-restriction-and-adjoint-extension-operators
-- lem-fourier-pairing-for-a-finite-measure-and-schwartz-data
-- lem-unit-sphere-is-lebesgue-null
-- lem-sphere-finite-graph-charts-and-surface-density
-- lem-van-der-corput-oscillatory-integral-estimate
-- lem-shape-operator-and-gauss-kronecker-curvature-of-a-graph
-- lem-restriction-and-extension-estimates-are-dual
-- lem-stationary-phase-for-a-nondegenerate-compactly-supported-phase
-- lem-spherical-cap-and-dual-slab-scales
-- lem-compact-curved-hypersurface-finite-graph-cover
-- lem-tt-star-reduces-extension-to-convolution-with-surface-measure-transform
-- lem-cap-wave-packet-has-dual-tube-concentration
-- lem-localized-curved-patch-measure-transform-decay
-- lem-stationary-phase-decay-for-spherical-surface-measure
-- lem-graph-patch-extension-family-has-dispersive-and-ltwo-slice-bounds
-- thm-knapp-necessary-condition-for-spherical-ltwo-restriction
-- lem-stein-tomas-tt-star-bound-from-fractional-integration
-- thm-stein-tomas-spherical-restriction-theorem
-- cor-stein-tomas-for-compact-hypersurfaces-with-nonzero-curvature
-- rem-the-general-fourier-restriction-problem
-- rem-restriction-estimates-and-the-missing-strichartz-interface
+items: [def-euclidean-hypersurface-normal-shape-operator-and-curvature, lem-smooth-euclidean-hypersurface-graph-and-localization, def-fourier-restriction-and-adjoint-extension-operators, lem-fourier-pairing-for-a-finite-measure-and-schwartz-data, lem-unit-sphere-is-lebesgue-null, lem-sphere-finite-graph-charts-and-surface-density, lem-van-der-corput-oscillatory-integral-estimate, lem-shape-operator-and-gauss-kronecker-curvature-of-a-graph, lem-restriction-and-extension-estimates-are-dual, lem-stationary-phase-for-a-nondegenerate-compactly-supported-phase, lem-spherical-cap-and-dual-slab-scales, lem-compact-curved-hypersurface-finite-graph-cover, lem-tt-star-reduces-extension-to-convolution-with-surface-measure-transform, lem-cap-wave-packet-has-dual-tube-concentration, lem-localized-curved-patch-measure-transform-decay, lem-stationary-phase-decay-for-spherical-surface-measure, lem-graph-patch-extension-family-has-dispersive-and-ltwo-slice-bounds, thm-knapp-necessary-condition-for-spherical-ltwo-restriction, lem-stein-tomas-tt-star-bound-from-fractional-integration, thm-stein-tomas-spherical-restriction-theorem, cor-stein-tomas-for-compact-hypersurfaces-with-nonzero-curvature]
 examples: []
 ---
 
@@ -59,8 +36,7 @@ $q\ge q_0=2(n+1)/(n-1)$), and the finite curved graph localization transfers the
 compact hypersurfaces with everywhere nonvanishing extrinsic Gaussian
 curvature.
 
-Two recorded orientations close the page: the general restriction problem
-remains open for $n\ge3$, and the Strichartz comparison concerns paraboloid extension and is
-non-load-bearing in this run. Countable Choice is declared and propagated
+The estimates developed here concern $L^2$ surface densities. Countable
+Choice is declared and propagated
 through the chart, partition, density, duality and extension interfaces used
 by the proofs.

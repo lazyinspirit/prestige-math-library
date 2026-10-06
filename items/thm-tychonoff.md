@@ -9,19 +9,11 @@ provenance:
   proof: ai-altered
 deps: [thm-alexander-subbase-lemma, def-compact-space, def-product-topology, def-topology-basis-subbasis, def-axiom-of-choice, thm-zorn, def-topological-space]
 justified_by: []
+forward_refs: [thm-compact-t1-product-theorem-iff-ac]
 aliases: [thm-tychonoff-theorem]
-external_refs: [rem-schechter-kelley-tychonoff]
 landmark: true
 short: "Tychonoff's theorem"
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-05
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -34,6 +26,8 @@ sources:
     - title: "Stacks Project, Tag 08ZU"
       url: "https://stacks.math.columbia.edu/tag/08ZU"
 pipeline_run: null
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/thm-tychonoff.json
 ---
 
 ## Statement
@@ -84,7 +78,12 @@ once directly at step 2.1, to produce a point of a product of nonempty sets.
 
 **Why a subbasic cover is easy and an arbitrary cover is not.** A member of $\mathcal{G}$ restricts exactly one coordinate, so a subbasic cover of $P$ sorts itself into the families $\mathcal{U}_i$, one per coordinate, and the whole argument is the observation that one of those families must already cover its own factor. A member of an arbitrary open cover is a union of basic sets, each restricting its own finite set of coordinates, so such a member need not be determined by any finite set of coordinates and the cover admits no such sorting; that is why the theorem is proved through [[thm-alexander-subbase-lemma]] rather than directly.
 
-**The theorem implies the Axiom of Choice**, so the hypothesis cannot be dropped; that implication is not proved in this library, and the exact form it takes is recorded in [[rem-schechter-kelley-tychonoff]], which corrects the classical derivation. The choice ledger for this page is [[rem-compactness-conventions-and-choice-ledger]].
+**The unrestricted product principle implies AC.** The later
+[[thm-compact-t1-product-theorem-iff-ac]] proves this already for compact
+$T_1$ factors, using a cofinite space with a separately adjoined isolated point
+and the finite-intersection characterization of compactness. Its forward
+implication uses the theorem proved here. The choice ledger for this page is
+[[rem-compactness-conventions-and-choice-ledger]].
 
 **For an index set that is a natural number neither use of choice is needed**, and the result is then [[thm-finite-products-of-compact-spaces]], a theorem of ZF proved on this page by induction and the tube lemma.
 

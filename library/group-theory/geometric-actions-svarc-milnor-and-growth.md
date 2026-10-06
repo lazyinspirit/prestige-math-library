@@ -18,13 +18,10 @@ items: [def-isometric-proper-and-cobounded-actions-on-metric-spaces,
         def-polynomial-subexponential-exponential-and-intermediate-growth,
         thm-free-groups-of-rank-at-least-two-have-exponential-growth,
         def-homogeneous-dimension-of-a-finitely-generated-nilpotent-group,
-        rem-bass-guivarch-growth-degree-formula,
-        cor-finitely-generated-nilpotent-groups-have-polynomial-growth,
-        rem-gromov-polynomial-growth-theorem,
-        rem-grigorchuk-groups-of-intermediate-growth]
+        cor-finitely-generated-nilpotent-groups-have-polynomial-growth]
 examples: []
 ---
 
 This page uses the published word-metric and quasi-isometry machinery, together with geodesic metric spaces and nilpotent-group conventions, to move from algebraic generators to geometric actions. The key background facts are that word metrics on finitely generated groups are comparable across finite generating sets, quasi-isometries compose, and lower-central quotients of nilpotent groups carry the rank data used by the Bass-Guivarch degree.
 
-With that background fixed, the page defines geometric actions, proves the Švarc-Milnor lemma, and turns growth into a coarse invariant. The later items show that growth type survives both changes of generators and quasi-isometry, identify free groups as exponential, package the nilpotent degree in the homogeneous dimension, and then mark the two major external boundaries honestly: Bass-Guivarch for exact nilpotent degree and Gromov for polynomial growth versus virtual nilpotence. The companion examples measure those statements against lattices, trees, the Heisenberg group, and the standard failure modes.
+With that background fixed, the page defines geometric actions, proves the Švarc-Milnor lemma, and turns growth into a coarse invariant. The later items show that growth type survives both changes of generators and quasi-isometry, identify free groups as exponential, and define the homogeneous dimension of a finitely generated nilpotent group. The proved local [[thm-bass-guivarch-growth-degree-formula-with-proof]] supplies the bound used by [[cor-finitely-generated-nilpotent-groups-have-polynomial-growth]]. The companion examples compute growth for lattices, trees and the Heisenberg group.

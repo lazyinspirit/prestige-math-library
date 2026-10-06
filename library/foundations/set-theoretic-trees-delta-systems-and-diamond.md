@@ -2,7 +2,46 @@
 page: "set-theoretic-trees-delta-systems-and-diamond"
 title: "Set-Theoretic Trees, Delta Systems, and Diamond"
 status: published
-items: ["def-set-theoretic-tree-and-levels", "lem-tree-predecessors-and-common-extensions", "def-kappa-tree-and-tree-property", "def-normal-splitting-set-theoretic-tree", "lem-normal-set-theoretic-tree-sequence-representation", "def-aronszajn-suslin-and-special-tree", "thm-konig-finite-level-tree", "lem-countable-normal-tree-cofinal-branch", "lem-splitting-cofinal-branch-gives-antichain", "lem-bounded-rational-tree-limit-extension", "thm-special-aronszajn-tree-construction", "def-finite-delta-system", "thm-regular-uncountable-finite-delta-system", "cor-indexed-omega-one-delta-system", "def-poset-ccc-and-knaster-property", "def-finite-support-poset-product", "lem-finite-knaster-poset-products", "thm-finite-support-knaster-poset-products", "lem-cocountable-ultrafilter-on-uncountable-set", "lem-aronszajn-finite-petals-incomparability", "def-finite-aronszajn-specialization-poset", "thm-aronszajn-specialization-poset-ccc", "lem-specialization-dense-domains-and-union", "def-diamond-on-omega-one", "prop-diamond-implies-continuum-hypothesis", "def-ostaszewski-club-principle", "prop-diamond-implies-ostaszewski-club", "def-jensen-square-sequence", "lem-countable-tree-antichain-sealing", "lem-club-tree-coding-antichain-reflection", "thm-diamond-constructs-normal-suslin-tree", "thm-splitting-suslin-tree-poset-square-not-ccc", "def-suslin-line-order-interface", "rem-kurepa-suslin-line-tree-interface", "def-partition-arrow-notation", "thm-infinite-ramsey-finite-colors", "def-finite-beth-iteration-above-a-cardinal", "lem-erdos-rado-pattern-closure-and-end-homogeneity", "thm-general-cardinal-erdos-rado", "rem-ramsey-and-erdos-rado-orientation", "def-pruned-tree-products-and-dense-matrices", "rem-halpern-lauchli-finite-tree-statement"]
+items: [def-set-theoretic-tree-and-levels,
+        lem-tree-predecessors-and-common-extensions,
+        def-kappa-tree-and-tree-property,
+        def-normal-splitting-set-theoretic-tree,
+        lem-normal-set-theoretic-tree-sequence-representation,
+        def-aronszajn-suslin-and-special-tree,
+        thm-konig-finite-level-tree,
+        lem-countable-normal-tree-cofinal-branch,
+        lem-splitting-cofinal-branch-gives-antichain,
+        lem-bounded-rational-tree-limit-extension,
+        thm-special-aronszajn-tree-construction,
+        def-finite-delta-system,
+        thm-regular-uncountable-finite-delta-system,
+        cor-indexed-omega-one-delta-system,
+        def-poset-ccc-and-knaster-property,
+        def-finite-support-poset-product,
+        lem-finite-knaster-poset-products,
+        thm-finite-support-knaster-poset-products,
+        lem-cocountable-ultrafilter-on-uncountable-set,
+        lem-aronszajn-finite-petals-incomparability,
+        def-finite-aronszajn-specialization-poset,
+        thm-aronszajn-specialization-poset-ccc,
+        lem-specialization-dense-domains-and-union,
+        def-diamond-on-omega-one,
+        prop-diamond-implies-continuum-hypothesis,
+        def-ostaszewski-club-principle,
+        prop-diamond-implies-ostaszewski-club,
+        def-jensen-square-sequence,
+        lem-countable-tree-antichain-sealing,
+        lem-club-tree-coding-antichain-reflection,
+        thm-diamond-constructs-normal-suslin-tree,
+        thm-splitting-suslin-tree-poset-square-not-ccc,
+        def-suslin-line-order-interface,
+        def-partition-arrow-notation,
+        thm-infinite-ramsey-finite-colors,
+        def-finite-beth-iteration-above-a-cardinal,
+        lem-erdos-rado-pattern-closure-and-end-homogeneity,
+        thm-general-cardinal-erdos-rado,
+        rem-ramsey-and-erdos-rado-orientation,
+        def-pruned-tree-products-and-dense-matrices]
 examples: []
 ---
 
@@ -12,4 +51,6 @@ The finite delta-system theorem supports two compatibility arguments. Knaster pr
 
 Diamond is an explicit additional assumption for the normal Suslin-tree construction. At a guessed maximal antichain, covering branches seal the antichain at a countable limit level. A club of agreement between ordinal node codes and tree levels makes the stationary guesses apply to final antichains. The resulting splitting Suslin tree is ccc, while its square has an explicitly indexed uncountable antichain. Diamond also implies CH and the stated club principle; the square-sequence definition includes coherence, order-type bounds and the no-thread condition.
 
-The partition strand proves infinite Ramsey for finite colors and the full finite-arity Erdős–Rado relation for arbitrary infinite cardinals, including its zero-index case. Pattern closure produces an end-homogeneous sequence before the arity induction. Kurepa’s line/tree equivalences and the finite-tree Halpern–Läuchli statement are recorded without proof, with their designated later proof destinations retained. Their interface definitions and elementary instances are explicit; neither recorded result is used as a proved prerequisite here.
+The partition strand proves infinite Ramsey for finite colors and the full finite-arity Erdős–Rado relation for arbitrary infinite cardinals, including its zero-index case. Pattern closure produces an end-homogeneous sequence before the arity induction. The line-order and pruned-tree product definitions specify the remaining
+interfaces and their elementary instances; no line/tree equivalence or general
+finite-tree partition theorem is asserted here.

@@ -9,18 +9,10 @@ provenance:
   proof: not-applicable
 deps: [def-compact-space, lem-compactness-of-a-subspace-is-ambient, thm-baire-category-locally-compact-hausdorff, lem-dependent-choice-along-a-sequence-of-relations, thm-compactness-agrees-with-metric-compactness, thm-compact-iff-fip, thm-alexander-subbase-lemma, thm-tychonoff, thm-finite-products-of-compact-spaces, lem-tube-lemma-for-a-compact-factor, def-compactness-variants, thm-compactness-variants-hierarchy, thm-ordinal-spaces-and-compactness, thm-the-long-line-is-countably-compact-and-not-compact, def-locally-compact-space, def-one-point-compactification, def-hausdorff-space, thm-zorn, def-axiom-of-choice, def-countable-choice, def-dependent-choice, lem-finite-choice, rem-choice-strengths]
 justified_by: []
-external_refs: [rem-schechter-kelley-tychonoff, rem-baire-category-choice-strength]
+forward_refs: [thm-compact-t1-product-theorem-iff-ac, thm-separable-complete-metric-baire-in-zf, thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf, thm-compact-hausdorff-baire-iff-dmc]
 aliases: [rem-compactness-choice-ledger]
 landmark: false
 short: "conventions and the choice ledger"
-verification:
-  precheck: n/a
-  verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-05
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -31,6 +23,8 @@ sources:
     - title: "H. Herrlich, Axiom of Choice, Lecture Notes in Mathematics 1876, Springer 2006"
       url: "https://link.springer.com/book/10.1007/11601562"
 pipeline_run: null
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/rem-compactness-conventions-and-choice-ledger.json
 ---
 
 ## Three conventions, fixed once
@@ -116,11 +110,9 @@ arbitrary index set, that is the full Axiom of Choice
 obtain a maximal open cover without a finite subcover; [[thm-tychonoff]] inherits
 that use and spends it a second time directly, to produce a point of a product of
 nonempty sets; and [[fs-compact-implies-sequentially-compact]] inherits both,
-since its witness is compact by Tychonoff. Tychonoff's theorem **implies** the
-Axiom of Choice, so, under the standing assumption that ZF is consistent, no proof
-of it in ZF alone can exist; the exact form of
-that implication, and the correction of the classical derivation, are recorded in
-[[rem-schechter-kelley-tychonoff]], which this library states and does not prove.
+since its witness is compact by Tychonoff. The later [[thm-compact-t1-product-theorem-iff-ac]] proves that the
+unrestricted compact-product principle implies AC already on compact $T_1$
+factors, using the isolated-point repair of the cofinite coordinate spaces.
 The AC-based upper bound furnished by the local proof of the ultrafilter lemma
 is recorded in [[rem-choice-strengths]]; no lower-bound separation is used here.
 
@@ -148,9 +140,13 @@ of that cost. And [[thm-baire-category-locally-compact-hausdorff]], which spends
 it once, through [[lem-dependent-choice-along-a-sequence-of-relations]], to run a
 shrinking construction whose admissible successors change with the stage. In both
 cases dependent choice is an upper bound on the cost of the argument given here
-and is not asserted to be necessary; for the Baire theorem in particular the
-several versions of the statement correspond to different principles over ZF, as
-[[rem-baire-category-choice-strength]] records.
+and is not asserted to be necessary. Later,
+[[thm-separable-complete-metric-baire-in-zf]] proves the separable complete-metric
+version without choice,
+[[thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf]] identifies
+the unrestricted complete-metric principle with DC, and
+[[thm-compact-hausdorff-baire-iff-dmc]] identifies the compact Hausdorff principle
+with dependent multiple choice.
 
 **The metric ledger is separate and remains in force.** What each implication
 between the compactness properties of a *metric* space costs is recorded in

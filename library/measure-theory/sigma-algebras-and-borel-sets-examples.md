@@ -17,6 +17,11 @@ examples: [ex-trivial-and-discrete-sigma-algebras,
            fs-every-monotone-class-is-an-algebra,
            fs-every-subset-of-r-is-borel,
            fs-countably-infinite-sigma-algebras-exist,
-           rem-the-borel-hierarchy-never-stabilizes,
            fs-the-borel-hierarchy-closes-after-two-steps]
 ---
+
+These examples compute sigma-algebras from finite partitions, countable sets
+and traces on the Cantor set, and exhibit the limits of closure properties for
+unions, monotone classes and lambda systems. The final refutation uses the
+proved rank-three separation in [[thm-universal-borel-sets-and-strict-hierarchy]],
+under AC, to show that the Borel hierarchy does not close after two steps.

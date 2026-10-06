@@ -2,7 +2,7 @@
 page: banach-space-differential-calculus-and-banach-manifolds
 title: Banach-Space Differential Calculus and Banach Manifolds
 status: published
-items: [def-frechet-derivative-between-banach-spaces, lem-the-frechet-derivative-is-unique, thm-chain-sum-product-and-composition-rules-for-banach-derivatives, def-c-k-map-between-banach-spaces, lem-banach-mean-value-estimate-on-a-convex-set, thm-inverse-function-theorem-for-banach-spaces, thm-implicit-function-theorem-for-banach-spaces, def-countable-base-banach-manifold-and-smooth-map, def-tangent-space-and-differential-on-a-banach-manifold, lem-banach-manifold-differentials-are-chart-independent, def-split-banach-submanifold, thm-regular-value-theorem-for-banach-manifolds, def-smooth-banach-vector-bundle-and-section, thm-a-transverse-banach-bundle-section-has-a-split-zero-submanifold, def-fredholm-map-between-banach-manifolds, lem-local-finite-dimensional-reduction-for-a-fredholm-map, rem-fredholm-maps-have-countable-proper-local-restrictions, rem-critical-images-of-proper-local-fredholm-restrictions-are-nowhere-dense, prop-the-index-of-a-fredholm-map-is-locally-constant, rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel]
+items: [def-frechet-derivative-between-banach-spaces, lem-the-frechet-derivative-is-unique, thm-chain-sum-product-and-composition-rules-for-banach-derivatives, def-c-k-map-between-banach-spaces, lem-banach-mean-value-estimate-on-a-convex-set, thm-inverse-function-theorem-for-banach-spaces, thm-implicit-function-theorem-for-banach-spaces, def-countable-base-banach-manifold-and-smooth-map, def-tangent-space-and-differential-on-a-banach-manifold, lem-banach-manifold-differentials-are-chart-independent, def-split-banach-submanifold, thm-regular-value-theorem-for-banach-manifolds, def-smooth-banach-vector-bundle-and-section, thm-a-transverse-banach-bundle-section-has-a-split-zero-submanifold, def-fredholm-map-between-banach-manifolds, lem-local-finite-dimensional-reduction-for-a-fredholm-map, prop-the-index-of-a-fredholm-map-is-locally-constant, rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel]
 examples: []
 ---
 
@@ -52,8 +52,5 @@ submanifold with tangent equal to that kernel, the definition of a Fredholm map
 between Banach manifolds with its
 pointwise index, the local finite-dimensional reduction of a Fredholm map to the
 normal form $(u,v)\mapsto(u,g(u,v))$ with finite-dimensional obstruction map
-$g$. Two following draft remarks explicitly record Smale's external countable
-proper-localization and nowhere-dense critical-image results; they are the
-bounded backward prerequisites for the existing DT-4 Sard--Smale theorem and
-are not local proofs. The block ends with local constancy of the index, which
+$g$. The block ends with local constancy of the index, which
 makes the index constant on connected components.

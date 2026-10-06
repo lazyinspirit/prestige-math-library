@@ -9,22 +9,10 @@ provenance:
   proof: not-applicable
 deps: [def-choice-function, def-axiom-of-choice, def-countable, thm-well-ordering-principle, lem-countable-iff-surjection-from-n]
 justified_by: []
-external_refs: [rem-feferman-levy-model, rem-cohen-first-model]
+forward_refs: [cor-relative-consistency-of-feferman-levy-choice-failures-over-zf]
 aliases: [def-ac-omega, axiom-of-countable-choice]
 landmark: false
 short: "$\\mathrm{AC}_\\omega$"
-verification:
-  precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -37,6 +25,8 @@ sources:
     - title: "Axiom of choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
 pipeline_run: null
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/def-countable-choice.json
 ---
 
 ## Definition
@@ -64,44 +54,32 @@ countable family of nonempty sets ([[def-countable]]) has a choice function.
   choice function $g$ on the at most countable family $\{\, X_n : n \in \mathbb{N} \,\}$
   gives $f(n) := g(X_n)$.
 
-- **$\mathrm{AC}_\omega$ is strictly weaker than the Axiom of Choice**
-  ([[def-axiom-of-choice]]): AC implies it immediately, since AC applies to every
-  family, while it is consistent with ZF that $\mathrm{AC}_\omega$ holds and AC
-  fails. **It is also strictly stronger than what ZF proves**: it is consistent
-  with ZF that $\mathrm{AC}_\omega$ fails, as Cohen's first model shows, since an
-  infinite set of reals with no countably infinite subset
-  ([[rem-cohen-first-model]]) is already a failure of $\mathrm{AC}_\omega$; the
-  Feferman-Levy model ([[rem-feferman-levy-model]]) is a second witness. Both
-  statements are conditional on the consistency of ZF and are external results,
-  established by forcing and by permutation models; they are recorded here with
-  references and are **not** proved in this library, which contains neither
-  technique. Of the two, only the failure of $\mathrm{AC}_\omega$ is recorded in
-  this library's catalogue of unproved results; the separation of
-  $\mathrm{AC}_\omega$ from AC in the other direction is quoted from the
-  references alone.
+- **AC implies countable choice.** The Axiom of Choice
+  ([[def-axiom-of-choice]]) applies to the family of values of any sequence of
+  nonempty sets; composing the resulting choice function with the sequence
+  gives the function required above.
 
-- **Dependent choice sits between them.** The Axiom of Dependent Choice
-  (DC) says that if $R$ is a relation on a nonempty set $X$ such that every
-  $x \in X$ has some $y$ with $x \mathbin{R} y$, then there is a sequence
-  $(x_n)_{n \in \mathbb{N}}$ with $x_n \mathbin{R} x_{n+1}$ for all $n$. In ZF,
-  $\mathrm{AC} \Rightarrow \mathrm{DC} \Rightarrow \mathrm{AC}_\omega$; both
-  implications are theorems of ZF, and neither is proved here. That neither
-  reverses is a pair of relative-consistency results of the same kind as in the
-  previous bullet: if ZF is consistent, then so are ZF + DC + (not AC) and
-  ZF + $\mathrm{AC}_\omega$ + (not DC). Both are established by forcing and by
-  permutation models, are quoted here from the references rather than proved, and
-  cannot be stated without the consistency hypothesis; so "DC is *strictly*
-  between AC and $\mathrm{AC}_\omega$" is shorthand for those two conditional
-  statements and is never used here as a standalone assertion. DC is the
-  principle that legitimises "choose $x_0$, then choose $x_1$ depending on
-  $x_0$, and so on"; $\mathrm{AC}_\omega$ only legitimises countably many
-  *independent* choices made at once.
+- **Dependent choices and independent choices have different input data.**
+  Countable choice selects from a family fixed in advance. Dependent choice
+  instead asks for a sequence following an entire relation, where the available
+  successors depend on the preceding term. The later
+  [[thm-choice-implies-dependent-implies-countable-choice]] proves
+  $\mathrm{AC}\Rightarrow\mathrm{DC}\Rightarrow\mathrm{AC}_\omega$ in ZF.
+  This remark makes no assertion about reversing either implication.
+
+- **A locally proved failure comparison appears later.**
+  [[cor-relative-consistency-of-feferman-levy-choice-failures-over-zf]] proves
+  the external implication from consistency of ZF to consistency of
+  $\mathrm{ZF}+\neg\mathrm{AC}_\omega$, together with the stated
+  Feferman–Levy properties. Hence, if ZF is consistent, it cannot prove
+  countable choice: a ZF proof would also hold in that consistent extension.
+  This is a conditional consistency comparison, not an assertion that
+  countable choice fails in the present development.
 
 - **Being an axiom, $\mathrm{AC}_\omega$ carries no well-definedness obligation**,
   which is why this item has no `justified_by`. Its role in this library is
   bookkeeping: [[thm-countable-union-of-countable]] assumes it and flags the
-  exact step that spends it. Whether the assumption can be removed requires the
-  later symmetric-model development and is not inferred here.
+  exact step that spends it. No necessity claim is inferred from that proof.
 
 - Every result *proved* on this page other than
   [[thm-countable-union-of-countable]] is a theorem of ZF alone. In particular

@@ -8,13 +8,11 @@ pipeline_run: frontier-41-ha-dt-29
 deps: [lem-finite-relative-homotopy-lifting-across-a-weak-equivalence, def-compact-parameter-pair, thm-smale-hirsch-immersion-theorem, lem-smooth-families-and-path-components-in-the-weak-topology, def-regular-homotopy-of-immersions, def-space-of-immersions-and-space-of-formal-immersions, def-weak-homotopy-equivalence, def-homotopy-relative-and-path-homotopy, def-countable-choice]
 justified_by: []
 aliases: []
-external_refs: [rem-arbitrary-compact-parameter-immersion-classification-needs-a-mapping-space-comparison]
+external_refs: []
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pass
 sources:
   references:
     - title: "Andrew Ranicki, Algebraic and Geometric Surgery, Ch. 7 §7.4 “The Smale–Hirsch classification of immersions”, printed pp. 142–146 (Theorem 7.35, Proposition 7.39)"
@@ -56,4 +54,4 @@ Thus two immersions are regularly homotopic if and only if their formal derivati
 
 ## Scope orientation
 
-The original arbitrary compact-pair and arbitrary compact-parameter clauses are preserved verbatim, explicitly without proof, in [[rem-arbitrary-compact-parameter-immersion-classification-needs-a-mapping-space-comparison]]. That remark is an external orientation, not a logical prerequisite of this corollary or its consumers.
+The proved relative comparison applies to finite CW pairs and to the neighbourhood-relative compact smooth parameter data specified in the Statement. It does not assert classification for an arbitrary compact parameter pair.

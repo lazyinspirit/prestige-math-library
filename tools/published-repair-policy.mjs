@@ -21,8 +21,10 @@ export function isPublishedItem(root, id) {
   return field(text, 'status') === 'published';
 }
 
-function definitionPrecheckNotApplicable(check, text, id) {
-  if (field(text, 'kind') !== 'definition'
+function nonProofPrecheckNotApplicable(check, text, id, before) {
+  if (!['definition', 'remark', 'example'].includes(field(text, 'kind'))
+    || field(text, 'kind') !== field(before, 'kind')
+    || /^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(before)
     || /^## (?:Proof|Refutation|Counterexample|Verification)\b/m.test(text)
     || !check.command.includes('--json')) return false;
   try {
@@ -89,7 +91,7 @@ export function recordedPublishedRepair(root, id, text, receiptPath) {
         || !Number.isFinite(checked) || checked < Date.parse(claim.claimed_at) || checked > recorded
         || typeof check.output !== 'string'
         || !(tool === 'precheck' ? (check.output.includes(`PASS items/${id}.md`) && check.output.includes('0 failing')
-            || definitionPrecheckNotApplicable(check, text, id))
+            || nonProofPrecheckNotApplicable(check, text, id, before))
           : check.output.includes('OK — 1 file(s)')))
         return fail(`missing current successful local ${tool} check`);
     }

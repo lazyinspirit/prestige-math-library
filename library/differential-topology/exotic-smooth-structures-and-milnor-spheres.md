@@ -13,7 +13,6 @@ items: [def-exotic-smooth-structure-and-exotic-sphere,
         thm-h-cobordism-identifies-theta-n-with-oriented-diffeomorphism-classes-for-n-at-least-five,
         lem-parallelizable-boundaries-form-a-subgroup,
         def-b-p-n-plus-one-subgroup-of-homotopy-spheres,
-        rem-homotopy-spheres-stable-parallelizability-recorded-not-proved,
         def-quaternionic-clutching-bundles-xi-h-j-over-s-four,
         lem-euler-number-is-the-clutching-degree,
         lem-quaternionic-basic-clutchings-have-pontryagin-numbers-plus-and-minus-two,
@@ -43,7 +42,6 @@ items: [def-exotic-smooth-structure-and-exotic-sphere,
         lem-relative-pontryagin-square-glues-across-a-seven-boundary,
         thm-milnor-lambda-invariant-is-well-defined-modulo-seven,
         thm-milnor-constructed-manifolds-homeomorphic-but-not-diffeomorphic-to-s-seven,
-        rem-kervaire-milnor-theta-seven-calculation-recorded-not-proved,
         rem-the-theta-seven-calculation-consumes-stable-stems-j-and-kervaire-milnor-arithmetic,
         rem-none-of-the-high-dimensional-exotic-sphere-results-settle-the-smooth-four-dimensional-poincare-problem]
 examples: []
@@ -71,10 +69,11 @@ closed manifold, and the resulting invariant $\lambda(M)=2q(W)-\sigma(W)$
 modulo seven is proved independent of the supplied filling and negated by
 orientation reversal. The final theorem computes $\lambda(M_{2,-1})\equiv1$
 and $\lambda(M_{1,0})=0$, exhibiting a seven-sphere homeomorphic but not
-diffeomorphic to the standard one. [[rem-homotopy-spheres-stable-parallelizability-recorded-not-proved|Stable parallelizability of homotopy spheres]] and the
-[[rem-kervaire-milnor-theta-seven-calculation-recorded-not-proved|Kervaire-Milnor order-28 calculation]]
-are recorded as sourced remarks whose proofs are not supplied here. They orient
-the examples without serving as prerequisites for these local results.
+diffeomorphic to the standard one. The finite calculation distinguishes explicit
+members of the Milnor family by their modulo-seven invariants
+([[rem-the-theta-seven-calculation-consumes-stable-stems-j-and-kervaire-milnor-arithmetic]]).
+These constructions do not establish a classification of all smooth homotopy
+seven-spheres or an order for their connected-sum group.
 
 All choice assumptions are stated on the items that use them: full choice for
 the characteristic-class, Gysin, Thom and signature suppliers, and countable

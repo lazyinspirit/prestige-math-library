@@ -2,23 +2,22 @@
 id: rem-proof-cost-of-the-carleson-hunt-theorem
 kind: remark
 title: What the Carleson–Hunt proof requires
-deps: []
+deps: [thm-carleson-hunt-maximal-inequality-on-the-torus, lem-carleson-density-selection, lem-carleson-size-selection, lem-carleson-single-tree-estimate, lem-hunt-exceptional-set-and-distribution-estimates, lem-carleson-restricted-weak-interpolation, lem-wave-packet-model-dominates-the-linearised-carleson-operator, lem-carleson-real-line-to-torus-transfer, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
-verification:
-  audited: 2026-09-07
 sources:
   references: [{title: 'Lacey, Carleson’s Theorem: Proof, Complements, Variations', url: 'https://arxiv.org/pdf/math/0307008', locator: '§3 before §3.1, pp. 11–14; §7 opening and §7.2 opening through (7.9), pp. 24–26'}]
-external_refs: [rem-carleson-hunt-almost-everywhere-convergence]
 status: published
 origin: pipeline
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/rem-proof-cost-of-the-carleson-hunt-theorem.json
 ---
 
-## One proof route
+## One local proof route
 
-The Lacey–Thiele route to [[rem-carleson-hunt-almost-everywhere-convergence]] uses a decomposition in time and frequency. Lacey's survey works with a real-line model; it is not a local transference argument to the torus.
+Assume the Axiom of Choice ([[def-axiom-of-choice]]) for the Fourier and measure interfaces of the following proved suppliers. The local conclusion is [[thm-carleson-hunt-maximal-inequality-on-the-torus]], a strong maximal estimate for symmetric partial sums on the normalized period-one torus, at each $1<p<\infty$.
 
-In §3, tiles are organized into trees. Lemma 3.6 reduces residual density and controls the total length of selected tree tops by inverse density. Lemma 3.9 reduces residual size with an inverse-square size bound on that total length. Lemma 3.11 bounds a tree contribution by its top length times its size and density. Matching density with squared size balances these estimates, and (3.13)–(3.16) leave scale contributions bounded by multiples of $\min\{2^{-n},2^n\}$, summable over $n\in\mathbb Z$.
+The real-line tile argument uses [[lem-carleson-density-selection]] and [[lem-carleson-size-selection]] to select forests and [[lem-carleson-single-tree-estimate]] to bound a tree contribution. The exceptional-set argument and distribution bootstrap of [[lem-hunt-exceptional-set-and-distribution-estimates]] give finite tile models uniform restricted weak type at every exponent strictly between one and infinity. Then [[lem-carleson-restricted-weak-interpolation]] gives uniform strong bounds at the desired exponent.
 
-The $L^p$ extension in §7 uses distributional estimates and interpolation. For the large testing-set case, its opening removes an exceptional set defined by a maximal function and separately treats tiles inside and outside that set. This is a sourced roadmap of one method. The density, size, tree and exceptional-set estimates have not been proved on this page.
+The packet averaging and reconstruction argument in [[lem-wave-packet-model-dominates-the-linearised-carleson-operator]] passes those model bounds to the real-line Carleson maximal operator on Schwartz inputs. Finally [[lem-carleson-real-line-to-torus-transfer]] uses a slowly varying Schwartz window on trigonometric polynomials, periodic averaging, Fejer approximation and monotone convergence to obtain the torus estimate. This supplies the transference argument as well as the time-frequency model estimates. The local theorem assembles these interfaces; the assumption AC is inherited from them.

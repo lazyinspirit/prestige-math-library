@@ -89,4 +89,4 @@ Assume AC inherited from the invariant-theory, Proj and ample-sheaf suppliers. L
 ## Remarks
 
 - **The repair of the Veronese step.** The projectivity of $Y$ uses [[lem-proj-of-finitely-generated-graded-algebra-is-projective]] in its corrected form, for the particular common multiple $d=kL$ supplied there; the equality of the loci under every positive power $m$ is proved separately and does not use generation in degree one of an arbitrary Veronese.
-- **No linearization existence.** The result assumes the linearization of $L$; the recorded external statement [[rem-linearization-existence-outside-this-pair]] is neither used nor needed.
+- **No linearization existence.** The result assumes the linearization of $L$.

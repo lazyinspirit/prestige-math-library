@@ -59,36 +59,36 @@
   statement cannot be a `deps` target.
   Omit `generation` for other statement provenance.
 
-### Later and unproved material
+### Later material and retired external records
 
 - `forward_refs: [id, ...]` declares linked targets on strictly later planned
   pages. Do not repeat them in `deps` or `justified_by`. Only corollaries,
   examples, counterexamples, false statements, and remarks may use one outside
   Remarks. Same-page links are ordinary links.
-- `proved_here: false` records a result without proving it. It must be a
-  `remark` with a `sources.references` entry, `verification.precheck: n/a`,
-  no Proof or Refutation section, and no `verification.judge`.
-- `external_refs: [id, ...]` declares linked mentions of `proved_here: false`
-  items. Do not also put the target in `deps`. A mention does not create a
-  logical prerequisite.
-- For those build batch items, `proved_here: false` also requires
-  `external_dependency` with `source_url`, `exact_statement`,
-  `local_proof_attempt`, and `necessity`.
-  `source_url` must be HTTP(S) and match a `sources.references` URL exactly.
-- Items in the `foundations` category, including planned prerequisites, may
-  not reach *Set Theory Beyond Choice: Recorded, Not Proved Here* through
-  `deps`, `justified_by`, or `forward_refs`.
+- Active library items must supply their mathematical arguments locally or
+  depend on proved local suppliers. `proved_here: false`, nonempty
+  `external_refs`, and `external_dependency` fallback records are forbidden in
+  active `items/` content and new authoring manifests, including audit scope.
+  A citation documents a source; it does not replace a proof. If a required
+  supplier cannot be proved, keep that branch blocked or archive its unsupported
+  content rather than creating an unproved fallback.
+- Historical archives and receipts retain their original metadata. The legacy
+  `proved_here`, `external_refs`, and `external_dependency` fields remain
+  readable for historical evidence; they confer no active authoring permission.
+  Validators inspect active `items/` content, not historical archive copies.
 
 ### Verification fields
 
 - `verification.precheck: pass` records a successful format check;
-  `n/a` applies to recorded unproved results. A format pass is not a proof of
-  mathematical validity.
+  `n/a` applies when no proof phase is applicable, such as a definition or
+  prose remark. Historical unproved archives may retain their original `n/a`
+  marker. A format pass is not a proof of mathematical validity.
 - A published proved-here item needs `verification.audited` (owner audit) or
   `verification.verified` (delegated audit with `model`, `verdict`, `date`,
-  `scope`, and `delegated_by`). A published unproved item instead needs
-  `verification.sources_checked` (`date`, `scope`, `by`). A judge stamp
-  alone does not satisfy publication checks.
+  `scope`, and `delegated_by`). Historical unproved archives may retain
+  `verification.sources_checked` (`date`, `scope`, `by`); this marker grants
+  no permission for active unproved content. A judge stamp alone does not
+  satisfy publication checks.
 - An authorized correction to an **already published** proved-here item may
   replace stale audit stamps with `verification.repair: research/<receipt>.json`
   under CLAUDE §8. This records a local repair, not a whole-item audit or new
@@ -105,7 +105,8 @@
   markers in the canonical published ledger; that text identifies the item and
   current hash. `local_checks.precheck` and `.rendercheck` each record the
   actual command, successful output, exit code, check date and current content
-  hash. For a Definition without a phase proof, precheck records its actual
+  hash. For a definition, remark, or example that has no phase proof in either the
+  original or corrected carrier and retains its kind, precheck records its actual
   one-file `--json` result with status `not-applicable`, zero checked proofs
   and zero failures; renderer and ownership checks remain mandatory.
   Depcheck reports this state as `published-local-repair`; stale,
@@ -174,13 +175,15 @@
   each prerequisite in the same or an earlier part. Empty parts, missing pages
   or briefs, duplicate placements, orphan briefs, and out-of-order prerequisites
   are errors. Missing pathways, unplaced draft pages, singleton parts, and briefs
-  over 120 words warn; `not-proved-here` is exempt from the missing-pathway warning.
+  over 120 words warn. The legacy `not-proved-here` pathway exemption remains
+  readable for historical records; new unproved catalogue pages are forbidden.
 
 ## Checks
 
 - `tools/depcheck.mjs` checks IDs, dependencies, page lists, cycles, and
   publication evidence; `tools/fwdcheck.mjs` and `tools/extcheck.mjs` check
-  later and unproved references.
+  later references and enforce retirement of active unproved records and
+  external references.
 - `tools/precheck.mts` checks proof format; `tools/rendercheck.mjs` checks YAML,
   math, and diagram rendering; `tools/pathcheck.mjs` checks category overviews
   and pathways.
@@ -191,3 +194,5 @@
 - `tools/content-policy.mjs` applies provenance, source, and generated-claim
   rules to an explicit run or audit scope. Other run gates and their commands
   are described in [WORKFLOW.md](WORKFLOW.md).
+
+Active plans may use A, B and existing-prerequisite P pages. The historical X catalogue page kind and `not-proved-here` category are retired and rejected by `validate-plan`.

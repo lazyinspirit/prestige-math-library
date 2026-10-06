@@ -15,18 +15,10 @@ deps: [def-t0-and-t1-spaces, def-hausdorff-space, def-urysohn-space,
        def-countable-choice,
        def-compact-space, thm-compact-subset-of-a-hausdorff-space-is-closed]
 justified_by: []
-external_refs: [rem-urysohn-lemma-not-a-zf-theorem]
+forward_refs: [thm-urysohn-lemma]
 aliases: []
 landmark: false
 short: "separation-axiom conventions and the missing arrow"
-verification:
-  precheck: n/a
-  verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-03
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -43,6 +35,8 @@ sources:
     - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 33: The Urysohn Lemma (East Tennessee State University)"
       url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-33.pdf"
 pipeline_run: null
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/rem-separation-axiom-conventions.json
 ---
 
 The separation axioms are the part of general topology where textbooks disagree
@@ -87,7 +81,7 @@ is treated as a synonym.
 - **Completely Hausdorff**: distinct points are separated by a continuous
   real-valued function. Some texts attach Urysohn's name to *this* condition
   instead. This library does not define it.
-- **Urysohn's lemma**: the theorem that in a normal $T_1$ space two disjoint
+- **Urysohn's lemma**: the theorem, proved later under dependent choice, that in a normal $T_1$ space two disjoint
   closed sets are separated by a continuous function into $[0,1]$. It is a
   theorem about *sets*, not points, and it is unrelated to either space
   condition.
@@ -113,12 +107,11 @@ page. What would license it is a page
 proving Urysohn's lemma, which in this library's plan sits above the present
 one.
 
-**The gap is not mere bookkeeping.** Urysohn's lemma is not a theorem of ZF, nor
-of ZF together with countable choice: this is recorded, with its sources, in
-[[rem-urysohn-lemma-not-a-zf-theorem]], which this remark mentions without
-depending on. So the missing arrow is missing for a reason stronger than the
-reading order — no rearrangement of the material already on this page could
-supply it, and any page that does supply it must record a choice principle.
+**The later proof records its hypothesis.** The dyadic construction in
+[[thm-urysohn-lemma]] assumes dependent choice and identifies the step that
+assembles all finite levels. That provides a proved route for the missing arrow,
+with an explicit sufficient hypothesis; this remark asserts no independence
+result.
 
 **Everything else in the classical chain is here.** In particular
 $T_6 \Rightarrow T_5$ *is* proved ([[thm-perfectly-normal-implies-completely-normal]]),

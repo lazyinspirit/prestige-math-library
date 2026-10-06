@@ -1,15 +1,15 @@
 ---
 id: cor-dmc-is-not-provable-in-zf
 kind: corollary
-title: "If ZF is consistent, DMC is not provable in ZF"
+title: "A failure of Urysohn separation forces failure of DMC"
 status: published
 origin: pipeline
-deps: [thm-relative-consistency-countable-choice-without-urysohn, thm-dmc-implies-urysohn-lemma, def-countable-choice, def-dependent-multiple-choice-finite-level-tree]
+deps: [thm-dmc-implies-urysohn-lemma, def-dependent-multiple-choice-finite-level-tree, def-normal-and-t4-spaces]
 justified_by: []
 provenance:
   statement: ai-altered
   proof: ai-altered
-proof_strategy: contradiction
+proof_strategy: direct
 sources:
   scraped: []
   references:
@@ -20,30 +20,26 @@ sources:
       url: "https://doi.org/10.1090/proc/14848"
       locator: "Published erratum to the cited theorem"
 verification:
-  audited: 2026-09-22
+  repair: research/recorded-retirement-2026-10-06/receipts/cor-dmc-is-not-provable-in-zf.json
 ---
+
 
 ## Statement
 
-If $\mathrm{ZF}$ is consistent, then $\mathrm{ZF}$ does not prove DMC
-([[def-dependent-multiple-choice-finite-level-tree]]); indeed there is a model of
-$\mathrm{ZF}$ with countable choice ([[def-countable-choice]]) in which DMC
-fails.
+Over ZF, failure of Urysohn's lemma implies failure of DMC
+([[def-dependent-multiple-choice-finite-level-tree]]). In particular, if any
+consistent theory $T$ extends ZF and includes $\neg\mathrm{URY}$, then ZF does
+not prove DMC. No existence or consistency of such a $T$ is asserted.
 
 ## Facts & Assumptions
 
-**Given:** The assumed consistency of $\mathrm{ZF}$.
+**Given:** ZF, with $\neg\mathrm{URY}$ for the first claim; and a consistent
+extending theory $T$ containing $\neg\mathrm{URY}$ for the second claim.
 
-[F1] Relative to $\operatorname{Con}(\mathrm{ZF})$, the theory $\mathrm{ZF} + \mathrm{AC}_{\omega} + \neg\mathrm{URY}$ is consistent ([[thm-relative-consistency-countable-choice-without-urysohn]]).
-
-[F2] DMC implies Urysohn's lemma over $\mathrm{ZF}$ ([[thm-dmc-implies-urysohn-lemma]]).
+[F1] Over ZF, DMC implies Urysohn's lemma
+([[thm-dmc-implies-urysohn-lemma]]).
 
 ## Proof
+ 1.1 Under $\neg\mathrm{URY}$, DMC would give $\mathrm{URY}$ by F1, a contradiction. Therefore $\neg\mathrm{DMC}$ holds. This proves the internal implication over ZF. [given, F1]
 
-**Proof technique:** contradiction.
-
-1.1 Assume $\operatorname{Con}(\mathrm{ZF})$ and suppose $\mathrm{ZF}$ proves DMC. [assume-contra, given]
-
-2.1 Then $\mathrm{ZF} + \mathrm{AC}_{\omega}$ proves DMC, hence by [F2] proves $\mathrm{URY}$; but by [F1] the theory $\mathrm{ZF}+\mathrm{AC}_{\omega}+\neg\mathrm{URY}$ is consistent, and it would prove both $\mathrm{URY}$ and its negation, hence be inconsistent. [step 1.1, F1, F2]
-
-3.1 This contradiction shows that $\mathrm{ZF}$ does not prove DMC, conditionally on $\operatorname{Con}(\mathrm{ZF})$; the witness model supplied by [F1] has countable choice, while Urysohn's lemma fails there and therefore DMC fails. [step 2.1, F1, F2, discharge-contradiction] ∎
+2.1 If ZF proved DMC, the same finite derivation would hold in the extending $T$, and the finite ZF proof F1 would give $\mathrm{URY}$ in $T$. Together with its axiom $\neg\mathrm{URY}$ this contradicts consistency of $T$. Thus ZF cannot prove DMC under the stated additional consistency hypothesis. [given, F1, step 1.1] ∎

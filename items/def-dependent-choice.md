@@ -13,14 +13,6 @@ forward_refs: [rem-compactness-choice-ledger-metric]
 aliases: [def-dc]
 landmark: true
 short: "dependent choice (DC)"
-verification:
-  precheck: n/a
-  verified:
-    model: gpt-5.6-sol
-    verdict: certify
-    date: 2026-09-08
-    scope: owner-authorized-published-repair
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -31,6 +23,8 @@ sources:
     - title: "H. Herrlich, Axiom of Choice, Lecture Notes in Mathematics 1876, Springer 2006"
       url: "https://link.springer.com/book/10.1007/11601562"
 pipeline_run: null
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/def-dependent-choice.json
 ---
 
 ## Definition
@@ -60,9 +54,10 @@ by $\mathbb{N}$. In both, the family is given before any selection is made. DC i
 the principle needed when the $n$-th set to select from is not known until the
 first $n$ selections have been made: here the admissible values of $x_{n+1}$ are
 exactly the $R$-successors of $x_n$, so the family being chosen from is built
-along the choosing. That is precisely the situation $\mathrm{AC}_\omega$ does not
-cover, and it is why a construction "pick $x_{n+1}$ depending on $x_n$, for every
-$n$ at once" is not licensed by countable choice.
+along the choosing. Thus the displayed recursion is directly an instance of
+DC; it is not itself an application of the fixed-family formulation of
+countable choice. This observation concerns the input to the two axioms and
+makes no claim about a nonimplication between them.
 
 **The starting point may be dropped.** The formally weaker statement obtained by
 deleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there
@@ -79,16 +74,15 @@ $x_n \mathbin{R} x_{n+1}$ at every index.
 
 ## Remarks
 
-**Where DC sits among the choice principles.** It is a standard fact, proved in
-the references and **not** in this library, that
+**Locally proved implications between the choice principles.** The later
+[[thm-choice-implies-dependent-implies-countable-choice]] proves in ZF that
 
-$$\mathrm{AC} \;\Longrightarrow\; \mathrm{DC} \;\Longrightarrow\; \mathrm{AC}_\omega ,$$
+$$\mathrm{AC}\Longrightarrow\mathrm{DC}\Longrightarrow\mathrm{AC}_\omega.$$
 
-and that neither implication reverses. The non-reversals are relative-consistency
-results: what they establish is that ZF, if consistent, does not prove the
-missing implications, never that those implications are false. This library
-contains neither forcing nor permutation models and proves no independence
-result, so all of that is quoted from the references and used nowhere.
+Its first implication uses AC to select a successor for each state and then
+recurses on that specified function. Its second applies DC to the set of finite
+partial selections, starting from the empty function, and takes their union.
+This item makes no assertion about reversing either implication.
 
 **Nothing in this library proves DC, and nothing assumes it silently.** Like
 [[def-axiom-of-choice]] and [[def-countable-choice]], DC is a statement that may
@@ -96,9 +90,7 @@ be assumed or not. Every theorem whose proof uses it says so in its own
 statement, and the accounting for the compactness page is collected in
 [[rem-compactness-choice-ledger-metric]].
 
-**An upper bound, never a lower one.** When a later item records that its proof
-uses DC, the claim made is that the argument given here is carried out in
-$\mathrm{ZF} + \mathrm{DC}$. No item claims that DC is *necessary* for the
-statement proved, because establishing necessity means separating the statement
-from ZF, and that is an independence result of exactly the kind this library does
-not prove.
+**The cost of a particular argument.** When an item records a DC use,
+it asserts that the written argument is carried out in $\mathrm{ZF}+\mathrm{DC}$.
+Necessity or equivalence needs a separate proof and does not follow from the
+chosen argument alone.

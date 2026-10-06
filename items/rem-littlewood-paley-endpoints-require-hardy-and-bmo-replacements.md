@@ -1,13 +1,12 @@
 ---
 id: rem-littlewood-paley-endpoints-require-hardy-and-bmo-replacements
 kind: remark
-title: "The Littlewood-Paley equivalence is strict-range: the endpoints need H1 and BMO"
+title: "Littlewood-Paley endpoint scope and the H1-BMO dual pair"
 status: draft
 origin: pipeline
 pipeline_run: frontier-39-analysis-30
 dependency_level: 13
 deps: [thm-littlewood-paley-square-function-equivalence-on-lp, def-real-hardy-space-by-a-radial-maximal-function, def-bmo-seminorm-and-quotient-by-constants, thm-real-hone-bmo-duality, def-axiom-of-choice]
-external_refs: [rem-square-function-characterisation-of-real-hone]
 justified_by: []
 aliases: []
 provenance:
@@ -25,27 +24,8 @@ sources:
 
 ## Statement
 
-The two-sided square-function equivalence of
-[[thm-littlewood-paley-square-function-equivalence-on-lp]] is asserted only
-for $1<p<\infty$. It is not asserted at $p=1$ or $p=\infty$. The classical
-lower-endpoint scale is real Hardy space $H^1(\mathbb R^n)$
-([[def-real-hardy-space-by-a-radial-maximal-function]]); the recorded
-homogeneous square-function characterization is
-[[rem-square-function-characterisation-of-real-hone]]. At the upper endpoint
-the natural dual scale is BMO modulo constants
-([[def-bmo-seminorm-and-quotient-by-constants]]), by the duality
-[[thm-real-hone-bmo-duality]]. These endpoint scales do not assert an endpoint
-extension for the inhomogeneous square function of the strict-range theorem.
+The two-sided square-function equivalence of [[thm-littlewood-paley-square-function-equivalence-on-lp]] is stated for $1<p<\infty$. Its contract supplies no estimate at $p=1$ or $p=\infty$, so substituting either endpoint into it or its consumers is not justified by that theorem.
 
-Accordingly the classical endpoint scales are $(H^1,\mathrm{BMO}/\mathbb C)$
-in place of $(L^1,L^\infty)$. No endpoint substitution may be made into the
-strict-range theorem or its consumers. This is a scope remark, not a proof: it
-names the endpoint scales and proves nothing about $H^1$ or $\mathrm{BMO}$
-beyond the recorded characterization, definitions and duality.
+The locally defined real Hardy space $H^1(\mathbb R^n)$ is [[def-real-hardy-space-by-a-radial-maximal-function]]. Under the Axiom of Choice, its continuous dual is isomorphic, with equivalent norms, to BMO modulo constants ([[def-bmo-seminorm-and-quotient-by-constants]], [[thm-real-hone-bmo-duality]]), with the fixed Hardy kernel and auxiliary order required by that duality theorem. Thus the library supplies the pair $(H^1,\mathrm{BMO}/\mathbb C)$ as a proved duality of these defined spaces. That duality supplies no square-function endpoint estimate on its own.
 
-**Choice.** The upper-endpoint identification uses the duality theorem
-[[thm-real-hone-bmo-duality]], which assumes the full Axiom of Choice; that
-assumption is inherited here and declared through [[def-axiom-of-choice]]. The
-lower-endpoint identification uses only the definition of $H^1$ and the
-recorded square-function characterisation. No other step of this page uses
-the Axiom of Choice.
+**Choice.** The dual identification inherits the full Axiom of Choice from [[thm-real-hone-bmo-duality]], declared through [[def-axiom-of-choice]]. The strict-range statement is used only within its own hypotheses. The conclusions here use the defined spaces and local duality; no homogeneous or inhomogeneous endpoint square-function characterization is asserted.

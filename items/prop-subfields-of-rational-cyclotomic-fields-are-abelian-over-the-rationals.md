@@ -12,13 +12,6 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-25
 sources:
   scraped: []
   references:
@@ -27,6 +20,8 @@ sources:
     - title: "J. S. Milne, Fields and Galois Theory, v5.10, Chapter 5, cyclotomic extensions"
       url: "https://www.jmilne.org/math/CourseNotes/FT.pdf"
 pipeline_run: null
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/prop-subfields-of-rational-cyclotomic-fields-are-abelian-over-the-rationals.json
 ---
 
 ## Statement
@@ -58,6 +53,3 @@ $\operatorname{Gal}(F/\mathbb Q)$ is abelian.
 
 4.1 A quotient of an abelian group is abelian, since the images of two commuting elements commute and every element of $G/H$ is such an image; so $\operatorname{Gal}(F/\mathbb Q)$ is abelian. [step 1.1, step 3.1, L3] ∎
 
-## Remarks
-
-- **This is the proved half of the Kronecker–Weber picture on this page.** Every subfield of a rational cyclotomic field is abelian over $\mathbb Q$; the converse is recorded separately as [[rem-kronecker-weber]].

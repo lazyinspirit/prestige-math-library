@@ -7,15 +7,8 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [thm-hahn-banach-dominated-extension, rem-halpern-levy-bpi-not-ac]
+deps: [thm-hahn-banach-dominated-extension, thm-zorn, def-axiom-of-choice]
 justified_by: []
-verification:
-  audited: 2026-09-05
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
 sources:
   scraped: []
   references:
@@ -27,6 +20,8 @@ sources:
       url: "https://doi.org/10.4064/fm-138-1-13-19"
     - title: "J. Pawlikowski, The Hahn-Banach theorem implies the Banach-Tarski paradox"
       url: "https://doi.org/10.4064/fm-138-1-21-22"
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/rem-choice-strength-of-hahn-banach.json
 ---
 
 ## Remark
@@ -35,15 +30,11 @@ The proof of [[thm-hahn-banach-dominated-extension]] on this page is a Zorn
 proof, so that proof route uses the Axiom of Choice through [[thm-zorn]]. That
 is a proof cost, not the exact cost of the theorem itself.
 
-The sharper ledger is recorded in [[rem-hahn-banach-choice-strength]]. For the
-reader of this page, the key points are these:
-
-- the Boolean prime ideal theorem implies Hahn-Banach;
-- relative to the consistency of ZF, Hahn-Banach does not imply the Boolean
-  prime ideal theorem, so Hahn-Banach is strictly weaker than full choice by
-  [[rem-halpern-levy-bpi-not-ac]];
-- Hahn-Banach already implies the existence of a non-Lebesgue measurable set
-  and the Banach-Tarski paradox.
+This establishes AC ([[def-axiom-of-choice]]) as a sufficient hypothesis for
+the extension theorem proved here. It establishes no converse implication or
+strict comparison with another choice principle. The exact use of Zorn is to
+select a maximal dominated extension; the one-step lemma then forces its domain
+to be the whole vector space.
 
 So later pages should cite Hahn-Banach itself when they use the extension
 theorem, and should cite Zorn only when they really use this maximal-extension

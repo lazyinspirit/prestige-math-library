@@ -14,7 +14,6 @@ items: [def-two-design,
         def-steiner-systems-and-steiner-triple-systems,
         cor-steiner-triple-systems-force-v-congruent-one-or-three-mod-six,
         thm-bose-construction-produces-a-steiner-triple-system,
-        rem-skolem-construction-produces-a-steiner-triple-system,
         thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six,
         def-finite-projective-plane,
         lem-every-line-in-a-finite-projective-plane-has-the-same-number-of-points,
@@ -40,7 +39,8 @@ The page defines $2$-designs, symmetric designs, Steiner triple systems, finite
 projective planes, and Latin squares. It proves the parameter identities and
 divisibility conditions, establishes Fisher's inequality and the constant
 block-intersection property of symmetric designs, constructs the $3\bmod6$
-Steiner triple systems of order greater than $3$ by Bose and records the
-$1\bmod6$ Skolem branch as a sourced input before the existence theorem, then
+Steiner triple systems of order greater than $3$ by Bose and states the exact
+existence criterion. The Skolem branch uses an explicit quasigroup and exhaustive pair coverage
+to supply orders congruent to $1\bmod6$. The page then
 counts points and lines in projective planes, builds $PG(2,q)$, and finishes
 with the finite-field family of mutually orthogonal Latin squares.

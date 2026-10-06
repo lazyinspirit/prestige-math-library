@@ -1,25 +1,19 @@
 ---
 id: rem-the-theta-seven-calculation-consumes-stable-stems-j-and-kervaire-milnor-arithmetic
 kind: remark
-title: "Scope of the order-28 calculation"
+title: "Scope of the finite Milnor-sphere calculation"
 status: draft
 origin: pipeline
 pipeline_run: frontier-41-ha-dt-29
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: []
-external_refs: [rem-kervaire-milnor-theta-seven-calculation-recorded-not-proved]
+deps: [thm-milnor-constructed-manifolds-homeomorphic-but-not-diffeomorphic-to-s-seven, thm-milnor-lambda-invariant-is-well-defined-modulo-seven]
+external_refs: []
 justified_by: []
 aliases: []
 landmark: false
 dependency_level: 0
-verification:
-  precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-06
 sources:
   scraped: []
   references:
@@ -28,32 +22,8 @@ sources:
       locator: "printed p. 504 (statement of the order-28 result in the introduction) and printed p. 512 (the table of Theta_n and bP_{n+1}); the surrounding sections import the stable stem, image-of-J and framed-surgery computations that are not reproduced on this page"
 ---
 
-## Scope of the recorded classification
+## Scope of the finite calculation
 
-The classification $\Theta_7\cong\mathbb Z/28$ with $bP_8=\Theta_7$ is recorded in
-[[rem-kervaire-milnor-theta-seven-calculation-recorded-not-proved]] as a sourced
-statement whose proof is **not supplied here**. Its complete
-proof consumes three inputs beyond the finite Milnor disk-bundle calculation
-developed on this page:
+The local construction and invariant calculation establish the explicit exotic sphere $M_{2,-1}$ and the formula $\lambda(M_{h,j})=(h-j)^2-1\pmod7$ for $h+j=1$, under the choice assumptions of [[thm-milnor-constructed-manifolds-homeomorphic-but-not-diffeomorphic-to-s-seven]]. Substituting $(h,j)=(1,0)$ gives $\lambda(M_{1,0})=1^2-1=0$, while $(h,j)=(2,-1)$ gives $\lambda(M_{2,-1})=3^2-1=8\equiv1\pmod7$. The invariant is preserved by orientation-preserving diffeomorphisms and negated by orientation reversal ([[thm-milnor-lambda-invariant-is-well-defined-modulo-seven]]). Since neither $1$ nor $-1$ equals $0$ modulo seven, these two manifolds cannot be diffeomorphic in either orientation.
 
-1. the stable homotopy stems of the sphere in the relevant degrees, including
-   the stable homotopy groups of $SO$ used in the $J$-homomorphism analysis;
-2. the image of the stable $J$-homomorphism, with the Adams injectivity input
-   in the relevant residue classes; and
-3. the framed-surgery and Kervaire-Milnor arithmetic that identifies the
-   cyclic order and the subgroup $bP_8$.
-
-None of these inputs is proved in this library, and none is a premise of the
-concrete construction of the bundles $\xi_{h,j}$, of the homology and
-homotopy seven-sphere recognition, or of the modulo-seven invariant that
-distinguishes the two explicit examples. The recorded order-28 statement is
-therefore deliberately non-load-bearing: no construction, exoticness claim or
-detector on this page depends on its conclusion.
-
-## Locator note
-
-The inspected portion of the Kervaire-Milnor paper contains the order-28
-statement and the quotient table at printed p. 512, which are statement and
-table locators, not a local derivation. The later sections carrying the stable
-stem and framed-surgery computations were not inspected for this page, so the
-proof boundary recorded here is deliberately conservative.
+These are constructions and obstruction calculations for specified manifolds. This remark asserts no classification of all smooth homotopy seven-spheres, no group order, and no exhaustion of diffeomorphism types by this family. Such conclusions require additional proofs beyond the displayed local calculations.

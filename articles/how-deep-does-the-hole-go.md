@@ -3,8 +3,8 @@ slug: how-deep-does-the-hole-go
 title: "How deep does the hole go?"
 status: published
 date: "2026-08-19"
-description: "The squeeze that defines area has a proved boundary: a set of points with no area at all, and past it a road the library records but has not yet built."
-purpose: "Mark the exact boundary of the series' definition of area: a proved set the squeeze cannot trap, and the measure-theory road recorded past it."
+description: "The squeeze that defines area has a proved boundary: a set of points with no Jordan content, followed by the locally proved measure-theory extension."
+purpose: "Mark the exact boundary of the series' definition of area: a proved set the squeeze cannot trap, and the locally proved measure-theory road past it."
 series: circle-area
 seriesTitle: "Why is the area of a circle πr²?"
 part: 5
@@ -25,14 +25,14 @@ Take the rational points of the unit square: every point whose two coordinates a
 
 ## The road past the squeeze
 
-The repair is to allow countably many covering boxes instead of finitely many. That road is Lebesgue measure ([[rem-lebesgue-measure-and-integral]]), under which the rational points above become measurable with measure zero. The library records this theory on its recorded-not-proved page, marked ‡, and has started the foundations it rests on: the [[def-borel-sigma-algebra|Borel σ-algebra]] is published, with proofs.
+The repair is to allow countably many covering boxes instead of finitely many. That road is [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra|Lebesgue measure]], with a locally proved construction. Assuming Countable Choice, the rational points above become measurable with measure zero ([[prop-countable-subsets-of-rn-are-lebesgue-null]]). The library develops the [[def-borel-sigma-algebra|Borel σ-algebra]] and proves that Lebesgue measure is a complete measure ([[thm-lebesgue-measure-is-a-complete-measure]]).
 
-## The bottom
+## A further boundary
 
-Even the repaired notion leaves sets behind. With the Axiom of Choice there is a set of real numbers that is not Lebesgue measurable ([[rem-vitali-non-measurable-set]]). And in three dimensions a closed ball can be cut into finitely many pieces and reassembled, by rigid motions alone, into two balls congruent to the original ([[rem-banach-tarski]]). If every piece carried a volume that is nonnegative, survives rigid motions, and adds over pieces, the two sides would force $V = 2V$ with $V > 0$. Some of those pieces can have no volume under any definition meeting Part 1's requirements.
+Even this extension leaves sets behind. Under the Axiom of Choice, representatives for rational-difference classes form a Vitali set ([[thm-vitali-sets-exist-under-choice-on-r-over-q]]), and the library proves that this set is not Lebesgue measurable ([[thm-a-vitali-set-is-not-lebesgue-measurable]]). The selection assumption and the nonmeasurability argument are stated separately, with their prerequisites.
 
 ## What the answer rests on
 
 One of Part 1's requirements was a choice: the unit square has area $1$. Change the unit and every area rescales with it. The theorem's content is the ratio between the disc and the square, and the series showed that ratio is π, a number defined with no circle in it and recovered in the circle's length, its polygons, and its area.
 
-That is the bottom of this hole as the library records it today: area is earned by a squeeze, the squeeze has a proved boundary, and the road past the boundary is marked ‡ until its proofs are built. The question that opened Part 1 is answered, and every step of the answer can be checked. Other holes start with other innocent questions.
+Area is earned by a squeeze, the squeeze has a proved boundary, and Lebesgue measure extends it through another locally proved construction. The Vitali argument gives a further boundary under its stated choice assumption. The question that opened Part 1 is answered, and every step of the answer can be checked. Other holes start with other innocent questions.

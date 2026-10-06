@@ -9,24 +9,19 @@ provenance:
   proof: ai-altered
 deps: [cor-steiner-triple-systems-force-v-congruent-one-or-three-mod-six,
        thm-bose-construction-produces-a-steiner-triple-system,
-       rem-skolem-construction-produces-a-steiner-triple-system,
+       thm-skolem-construction-produces-a-steiner-triple-system,
        def-steiner-systems-and-steiner-triple-systems,
        def-two-design,
        def-congruence-modulo-an-integer]
 landmark: true
 proof_strategy: direct
-verification:
-  audited: 2026-08-26
-  precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-26
 sources:
   scraped: []
   references:
     - title: "Jonathan Davidson, Steiner Triple Systems"
       url: "https://jjdavidson.github.io/notes/design-theory/03steiner-triple.html"
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six.json
 ---
 
 ## Statement
@@ -42,7 +37,7 @@ $v\equiv1$ or $3\pmod6$.
 
 [L2] For every natural number $m\ge1$, Bose's construction yields a Steiner triple system of order $6m+3$ ([[thm-bose-construction-produces-a-steiner-triple-system]]).
 
-[L3] For every integer $m\ge1$, Skolem's construction yields a Steiner triple system of order $6m+1$ ([[rem-skolem-construction-produces-a-steiner-triple-system]]).
+[L3] For every integer $m\ge1$, Skolem's construction yields a Steiner triple system of order $6m+1$ ([[thm-skolem-construction-produces-a-steiner-triple-system]]).
 
 [L4] A Steiner triple system of order $v$ is a $2$-$(v,3,1)$ design, and a $2$-design requires $2\le3<v$ ([[def-steiner-systems-and-steiner-triple-systems]], [[def-two-design]]).
 

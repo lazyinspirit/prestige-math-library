@@ -9,8 +9,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 deps:
-- lem-the-second-homotopy-group-of-so-three-vanishes
-- thm-oriented-clutching-classifies-oriented-bundles-over-spheres
+- lem-the-round-circle-and-its-reflection-are-not-isotopic-embeddings-in-the-plane
 - def-pontryagin-classes-by-complexification
 - def-stiefel-whitney-classes-from-the-projective-bundle-relation
 - def-axiom-of-choice
@@ -21,8 +20,7 @@ deps:
 - def-immersion-submersion-and-constant-rank-map
 - thm-isotopy-extension
 justified_by: []
-external_refs:
-- rem-metastable-embedding-classification-requires-additional-deleted-product-machinery
+external_refs: []
 aliases: []
 landmark: false
 sources:
@@ -40,8 +38,8 @@ sources:
 ---
 ## Remark
 
-Assume AC for the characteristic-class clauses ([[def-axiom-of-choice]]). Every embedding is an immersion with empty double point set ([[def-smooth-embedding]], [[def-immersion-submersion-and-constant-rank-map]]), so the primary double point obstruction of [[def-primary-double-point-obstruction-to-removing-self-intersections]] vanishes for every embedding; and its normal bundle satisfies the usual rank restrictions on characteristic classes. A rank-$k$ real bundle has $w_i=0$ for $i>k$ and $p_i=0$ for $2i>k$; the cohomological degree $4i$ of $p_i$ need not be at most $k$ ([[def-stiefel-whitney-classes-from-the-projective-bundle-relation]], [[def-pontryagin-classes-by-complexification]]). Nevertheless these vanishings do not classify embeddings up to isotopy, and Smale–Hirsch theory for immersions must not be applied to embeddings without additional knotting data.
+Assume AC for the characteristic-class clauses ([[def-axiom-of-choice]]). Every embedding is an immersion with empty double point set ([[def-smooth-embedding]], [[def-immersion-submersion-and-constant-rank-map]]), so, in the $m$-into-$2m$ setting of [[def-primary-double-point-obstruction-to-removing-self-intersections]], its defined primary counts vanish and its selected-pair conditions are vacuous; and its normal bundle satisfies the usual rank restrictions on characteristic classes. A rank-$k$ real bundle has $w_i=0$ for $i>k$ and $p_i=0$ for $2i>k$; the cohomological degree $4i$ of $p_i$ need not be at most $k$ ([[def-stiefel-whitney-classes-from-the-projective-bundle-relation]], [[def-pontryagin-classes-by-complexification]]). Nevertheless these vanishings do not classify embeddings up to isotopy, and Smale–Hirsch theory for immersions must not be applied to embeddings without additional knotting data.
 
-The standard witness is codimension three: the standard embedding $S^3\hookrightarrow\mathbb R^6$ and a knotted embedding $S^3\hookrightarrow\mathbb R^6$ (Haefliger's trefoil) are both injective immersions with empty double point sets and trivial normal bundles — their normal bundles are oriented rank-three bundles, classified by $[S^2,SO(3)]=0$ by [[thm-oriented-clutching-classifies-oriented-bundles-over-spheres]] and [[lem-the-second-homotopy-group-of-so-three-vanishes]] — and they are not isotopic; in the strict metastable classification range the Haefliger–Weber isovariant (deleted-product) invariant supplies the additional data, and this boundary is recorded, not proved, in [[rem-metastable-embedding-classification-requires-additional-deleted-product-machinery]]. This witness shows that these primary and characteristic data do not classify embeddings in general. It does not assert that every characteristic class must vanish for every embedding, or that no restricted embedding problem can be classified by such data.
+A proved witness consists of the standard and reflected parametrized embeddings $S^1\hookrightarrow\mathbb R^2$ in [[lem-the-round-circle-and-its-reflection-are-not-isotopic-embeddings-in-the-plane]]. Both have empty double point sets and trivial normal line bundles, hence zero primary unoriented double point count and identical stable characteristic classes, but they are not isotopic. The primary count is within the definition’s $m$-into-$2m$ setting with $m=1$, and is zero because the double point set is empty. Every selected-pair Whitney-circle condition is vacuous. The integral count is not invoked, since $m$ is odd. This witness shows that these primary and characteristic data do not classify embeddings in general. It does not assert that every characteristic class vanishes for every embedding, or that no restricted embedding problem can be classified by such data.
 
 Consequently the disjunction statement of [[prop-whitney-disjunction-removes-algebraically-cancelling-double-points-in-the-stable-range]] is a statement about regularly homotoping a self-transverse immersion, not about isotoping embeddings, and [[thm-isotopy-extension]] converts isotopies of embeddings into ambient isotopies only for families that are already given. The cancellation criterion concerns the finite branch-pair count and admissible Whitney circles, with self-transverse endpoints. In the simply connected oriented even-dimensional stable range it supplies a regular homotopy to an embedding after first separating triple images; it does not supply an isotopy between two given embeddings.

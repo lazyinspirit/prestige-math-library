@@ -3,7 +3,7 @@ page: modules-over-a-pid-and-canonical-forms-examples
 title: "Modules over a Principal Ideal Domain and the Canonical Forms — Examples"
 status: published
 items: []
-examples: [prop-smith-normal-form-algorithm-over-a-euclidean-domain,
+examples: [ex-word-problem-in-a-finite-cyclic-presentation, prop-smith-normal-form-algorithm-over-a-euclidean-domain,
            ex-smith-normal-form-of-an-explicit-integer-matrix,
            ex-abelian-groups-of-order-three-hundred-sixty-in-both-canonical-forms,
            ex-z-squared-modulo-two-diagonal-relations-is-cyclic-of-order-six,

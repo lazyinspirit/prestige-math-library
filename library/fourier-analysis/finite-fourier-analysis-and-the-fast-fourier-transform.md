@@ -14,8 +14,7 @@ items: [def-counting-inner-product-on-complex-functions-on-z-mod-n,
         lem-radix-two-even-odd-dft-factorisation,
         def-recursive-radix-two-fast-fourier-transform,
         thm-radix-two-fft-arithmetic-complexity,
-        thm-radix-two-fft-correctness,
-        rem-cooley-tukey-factorisation-for-composite-lengths]
+        thm-radix-two-fft-correctness]
 examples: []
 ---
 
@@ -39,9 +38,8 @@ factors $e^{-2\pi ik/N}$; the recursive algorithm built from that step is define
 for lengths $N=2^{m}$, proved to compute the unnormalised transform, and shown
 to use at most $2m\,2^{m}=2N\log_2N$ complex additions and multiplications in an
 explicitly stated operation model that excludes twiddle evaluation, index
-arithmetic and bit complexity. The final remark records, without proving it,
-the mixed-radix Cooley–Tukey generalisation to composite lengths and the fact
-that the power-of-two bound is not a claim about prime lengths. The companion
+arithmetic and bit complexity. This recursive algorithm and its bound apply
+to the specified power-of-two lengths. The companion
 page executes the small cases: the transforms at $N=1$ and $N=2$, a four-point
 cyclic convolution computed through the transform, the full four-point radix-two
 recursion, and two counterexamples showing the wrap of an unpadded product and

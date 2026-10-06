@@ -4,7 +4,7 @@ kind: remark
 title: "DMC, Multiple Choice, and AC qualifications"
 status: published
 origin: pipeline
-deps: [def-dependent-multiple-choice-finite-level-tree, thm-dependent-choice-and-finite-multiple-selections, thm-multiple-choice-equivalent-to-choice-in-zf, cor-dmc-is-not-provable-in-zf, def-dependent-choice, def-axiom-of-choice, def-multiple-and-dependent-multiple-choice]
+deps: [def-dependent-multiple-choice-finite-level-tree, thm-dependent-choice-and-finite-multiple-selections, thm-multiple-choice-equivalent-to-choice-in-zf, def-dependent-choice, def-axiom-of-choice, def-multiple-and-dependent-multiple-choice]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -16,15 +16,13 @@ sources:
       url: "https://lim.univ-reunion.fr/staff/mar/mem-HDR.pdf"
       locator: "Section 2, pp. 5-8"
 verification:
-  audited: 2026-09-22
+  repair: research/recorded-retirement-2026-10-06/receipts/rem-dmc-mc-ac-zfa-qualification.json
 ---
 
 ## Statement
 
 DC implies DMC. DMC together with finite-selection countable choice implies DC.
-In $\mathrm{ZF}$, Multiple Choice is equivalent to AC, but that equivalence must
-not be imported into $\mathrm{ZFA}$; the cited permutation-model strictness
-results are $\mathrm{ZFA}$ qualifications only. No strict DMC-versus-DC claim is
+In $\mathrm{ZF}$, Multiple Choice is equivalent to AC, and the cited proof is specifically over $\mathrm{ZF}$. No strict DMC-versus-DC claim is
 made over $\mathrm{ZF}$.
 
 ## Remarks
@@ -42,14 +40,9 @@ made over $\mathrm{ZF}$.
   is a theorem about $\mathrm{ZF}$; it says nothing about $\mathrm{ZFA}$, where
   the same sentence is not available at this point in the library.
 
-- **The ZFA qualification.** The separations known for DMC are obtained in
-  permutation models with atoms; they are therefore theorems about
-  $\mathrm{ZFA}$ and are not transferred to $\mathrm{ZF}$ by this item. In
-  particular the strictness of DMC below DC over $\mathrm{ZF}$ is not asserted,
-  and the only ZF-side nonprovability recorded here is
-  [[cor-dmc-is-not-provable-in-zf]], conditional on
-  $\operatorname{Con}(\mathrm{ZF})$.
+- **The base theory matters.** The two local implications above are stated
+  over ZF. A statement proved over ZF is not thereby proved over ZFA; any
+  comparison over a theory with atoms needs its own proof and hypotheses.
 
-- **Consumers.** Any use of "DMC is weaker than DC" must name the theory: the
-  $\mathrm{ZFA}$ model supplies the separation there, while over $\mathrm{ZF}$
-  the question is open, as recorded by the dated status item of this page.
+- **Consumers.** DC implies DMC by the cited local theorem. The strictness of
+  that implication is not asserted here.

@@ -9,18 +9,10 @@ provenance:
   proof: not-applicable
 deps: [def-topological-space, def-dense-top, def-sequence-convergence-top, def-interior-closure-boundary-top, def-natural-numbers]
 justified_by: []
+forward_refs: [thm-separable-complete-metric-baire-in-zf, thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf]
 aliases: []
-external_refs: [rem-baire-category-choice-strength]
 landmark: true
 short: "Baire space"
-verification:
-  precheck: n/a
-  verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-05
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -29,6 +21,8 @@ sources:
     - title: "Baire category theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Baire_category_theorem"
 pipeline_run: null
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/def-baire-space.json
 ---
 
 ## Definition
@@ -84,9 +78,9 @@ assumed here beyond the definition, so the notion applies to spaces with no metr
 and no countability property.
 
 **Which spaces satisfy it, and at what cost.** Every locally compact Hausdorff
-space is a Baire space, assuming dependent choice
-([[thm-baire-category-locally-compact-hausdorff]]); the corresponding statement
-for complete metric spaces, and the exact choice principles the several versions
-of the Baire category theorem are equivalent to over ZF, are recorded in
-[[rem-baire-category-choice-strength]], which this library states and does not
-prove.
+space is a Baire space under dependent choice
+([[thm-baire-category-locally-compact-hausdorff]]). The later
+[[thm-separable-complete-metric-baire-in-zf]] proves the separable complete-metric
+case without choice, by selecting least indices from one fixed dense sequence;
+[[thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf]] proves
+the equivalence of the unrestricted complete-metric principle with DC over ZF.

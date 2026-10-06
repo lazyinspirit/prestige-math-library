@@ -3,7 +3,7 @@ page: bochner-inversion-and-plancherel-on-lca-groups-examples
 title: "Bochner Inversion and Plancherel on LCA Groups — Examples"
 status: draft
 items: []
-examples: [ex-haar-normalisations-on-the-circle-and-the-integers,
+examples: [ex-gelfand-transform-of-l-one-of-an-lca-group, ex-haar-normalisations-on-the-circle-and-the-integers,
            ex-haar-normalisations-on-a-finite-abelian-group-and-its-dual,
            ex-a-character-is-positive-definite,
            cex-a-continuous-function-of-modulus-at-most-one-need-not-be-positive-definite,
@@ -34,3 +34,5 @@ cannot recover every arbitrary representative everywhere: changing an $L^1$
 function at a single point preserves its class and transform, so the
 inversion integral, being determined by the class, cannot recover the altered
 pointwise value.
+
+The Fourier/Gelfand example applies the companion page’s convolution algebra and scalar-unitization character-space theorem. Its positive-phase formula conjugates the character parameter in the companion page’s conjugate-phase convention.

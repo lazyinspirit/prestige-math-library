@@ -5,8 +5,7 @@ status: published
 items: [def-riesz-potential-of-order-alpha,
         lem-riesz-potential-near-far-splitting,
         lem-hedberg-pointwise-inequality,
-        thm-hardy-littlewood-sobolev-fractional-integration,
-        rem-fractional-integration-endpoints]
+        thm-hardy-littlewood-sobolev-fractional-integration]
 examples: []
 ---
 
@@ -36,5 +35,5 @@ $\|I_\alpha f\|_q\le C_{n,\alpha,p}\|f\|_p$, and that on the dense smooth
 core the map is the pointwise integral, whose unique bounded dense-core
 extension is the same almost-everywhere integral operator. Countable Choice is
 declared on every item consuming the maximal-function, Tonelli, polar,
-measurability, density, completeness or extension interfaces, and the
-endpoint remark is recorded, not proved, and supplies no argument.
+measurability, density, completeness or extension interfaces. The bound
+proved here has the strict exponent range $1<p<n/\alpha$.

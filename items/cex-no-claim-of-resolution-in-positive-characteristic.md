@@ -22,8 +22,6 @@ deps:
 - thm-prime-subfield-classification
 - lem-derivative-ideals-have-the-same-support
 proof_strategy: direct
-external_refs:
-- rem-positive-characteristic-resolution-status
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -69,5 +67,5 @@ The two characteristic-two examples below refute the two conjuncts of the statem
 
 ## Remarks
 
-- Both obstructions used in the refutation are verified above. The source's additional assertion about departure from arbitrary hypersurfaces under point-blowup sequences is not used in this proof. The status of the positive-characteristic problem is recorded in [[rem-positive-characteristic-resolution-status]], which is cited as an external mention and is deliberately **not** a dependency: it is a `proved_here: false` remark and nothing in this item's argument uses it.
+- Both obstructions used in the refutation are verified above. The source's additional assertion about departure from arbitrary hypersurfaces under point-blowup sequences is not used in this proof.
 - Both examples use only the derivative ideals, the order function and the maximal-order mechanism of this page; no positive-characteristic resolution statement is claimed.

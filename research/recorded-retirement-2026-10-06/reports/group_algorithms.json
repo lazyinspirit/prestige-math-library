@@ -1,0 +1,83 @@
+{
+  "group": "group_algorithms",
+  "scope": "One targeted source/dependency audit and one prepared repair pass; actual repository unchanged by this agent.",
+  "prepared_items": [
+    {
+      "id": "thm-word-problem-for-finitely-generated-abelian-groups",
+      "action": "replace-proof",
+      "before_claim": "Every finitely generated abelian group has solvable word problem.",
+      "after_claim": "Same universal claim; explicitly gives a terminating algorithm for every finite presentation known to present an abelian group.",
+      "removed_dependencies": [
+        "rem-finitely-generated-abelian-groups-admit-invariant-factor-normal-form"
+      ],
+      "replacement_dependencies": [
+        "def-group-presentation",
+        "thm-abelianisation-of-a-free-group-is-free-abelian",
+        "lem-subgroups-of-z-are-cyclic",
+        "thm-smith-normal-form-existence-over-a-pid"
+      ],
+      "proof": "Finite-rank subgroup induction supplies finite presentation without AC; exponent sums identify relation lattice exactly; enumerate bounded integer unimodular changes of basis until Smith form is found using proved existence; transformed exponent vector divisibility decides identity.",
+      "downstream": [
+        "ex-word-problem-in-a-finite-cyclic-presentation"
+      ],
+      "downstream_action": "No statement weakening; cyclic example still valid without edits.",
+      "choice": "None; avoids arbitrary-rank subgroup lemma that assumes AC.",
+      "note": "Euclidean-algorithm proposition not used because its home is only B/examples."
+    },
+    {
+      "id": "rem-algorithmic-role-of-onan-scott",
+      "action": "replace-statement-and-prose",
+      "before_claim": "O Nan\u2013Scott classification reduces primitive-group questions to affine, almost-simple, diagonal, product-action and twisted-wreath socle branches.",
+      "after_claim": "Finite enumeration computes minimal normal subgroups and the socle; a proved local theorem gives transitivity in a faithful primitive action.",
+      "removed_dependencies": [
+        "rem-onan-scott-classification-of-finite-primitive-groups"
+      ],
+      "replacement_dependencies": [
+        "def-minimal-normal-subgroup-and-socle",
+        "thm-minimal-normal-subgroups-of-faithful-primitive-groups-are-transitive"
+      ],
+      "mathematical_tradeoff": "Withdraws unsupported complete classification branches, while retaining an explicit terminating structural computation and proved transitivity. Existing ID retained for compatibility but title revised.",
+      "downstream": [],
+      "downstream_action": "No item consumers found; parent must update containing page classification prose when retiring its recorded theorem.",
+      "choice": "None"
+    }
+  ],
+  "withdrawals_recommended": [
+    {
+      "id": "fs-every-nonamenable-group-contains-a-rank-two-free-subgroup",
+      "action": "archive-remove-consumer",
+      "reason": "The refutation contains no witness construction and relies solely on recorded nonamenable groups without free subgroups. Burnside/Tarski constructions require substantial unproved theory. Removing the dependency alone would leave exactly the same logical gap.",
+      "unresolved_supplier": "A completely locally proved nonamenable group without a nonabelian free subgroup.",
+      "downstream_items": [],
+      "page": "library/group-theory/amenable-groups-and-folner-criteria.md"
+    },
+    {
+      "id": "fs-gromovs-polynomial-growth-theorem-is-proved-on-this-page",
+      "action": "archive-remove-consumer",
+      "reason": "Pure proof-boundary metaclaim whose entire refutation is the soon-retired record marking the theorem unproved; no independent mathematical content or mathematical counterexample.",
+      "downstream_items": [],
+      "page": "library/group-theory/geometric-actions-svarc-milnor-and-growth-examples.md"
+    },
+    {
+      "id": "fs-schur-zassenhaus-conjugacy-needs-no-solvability-or-deeper-input",
+      "action": "archive-remove-consumer",
+      "reason": "Existing argument proves only that one local proof has a solvability hypothesis. It does not prove the claimed necessity of solvability or deeper input in all proofs. Retiring the full-general conjugacy record removes its editorial basis. Keep the locally proved conditional conjugacy theorem itself.",
+      "retained_local_result": "thm-schur-zassenhaus-conjugacy-when-kernel-or-quotient-is-solvable",
+      "downstream_items": [],
+      "page": "library/group-theory/group-extensions-complements-and-schur-zassenhaus.md"
+    }
+  ],
+  "new_items": [],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs /tmp/retire-recorded-library/prepared/group_algorithms/items/thm-word-problem-for-finitely-generated-abelian-groups.md /tmp/retire-recorded-library/prepared/group_algorithms/items/rem-algorithmic-role-of-onan-scott.md",
+      "exit_code": 0,
+      "output": "proof-layout: 2 items, 6 steps, 0 defects"
+    }
+  ],
+  "audit_limitations": "Existing local suppliers were read fully for exact use; no authoritative external full text was needed for the elementary replacement arguments. No review, judge, precheck, rendercheck or test dispatch run. Verification stamps omitted from prepared items; parent owns metadata and receipts. Three withdrawal recommendations require parent integration decision; no replacement files provided for them.",
+  "page_impacts": [
+    "library/group-theory/socles-and-the-onan-scott-landscape.md: placement remains valid for revised remark, but classification prose must follow parent retirement decision.",
+    "library/group-theory/decision-problems-for-finitely-presented-groups.md: theorem statement preserved; no consumer edits needed."
+  ]
+}

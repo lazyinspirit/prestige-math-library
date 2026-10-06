@@ -27,7 +27,6 @@ items:
   - cor-dyadic-partition-choice-does-not-change-the-lp-square-function-space
   - thm-littlewood-paley-characterisation-of-hilbert-sobolev-spaces
   - def-lusin-area-function-for-a-fixed-admissible-kernel
-  - rem-square-function-characterisation-of-real-hone
   - rem-littlewood-paley-endpoints-require-hardy-and-bmo-replacements
 examples: []
 ---
@@ -74,12 +73,12 @@ Hilbert–Sobolev spaces, $\|f\|_{H^s}^2\asymp\sum_j2^{2js}\|\Delta_jf\|_2^2$,
 and shows that the choice of admissible partition does not change the
 square-function space.
 
-Only the strict range is claimed for the inhomogeneous square function. The
-recorded classical lower-endpoint scale is real Hardy space $H^1$,
-characterised among $L^1$ functions by an integrable homogeneous square
-function; its elements have mean zero. The classical upper dual scale is
-$\mathrm{BMO}$ modulo constants. These records do not extend the
-inhomogeneous theorem to either endpoint. The Lusin area function is defined
+Only the strict range is claimed for the inhomogeneous square function.
+The endpoint remark identifies real Hardy space $H^1$ through its radial
+maximal-function definition and cites the proved local duality
+[[thm-real-hone-bmo-duality]], under AC: bounded functionals on $H^1$ are
+represented by BMO functions modulo constants. This supplies no endpoint
+square-function characterization. The Lusin area function is defined
 as a conical functional, with no asserted equivalence to the square function. The cutoff must be smooth:
 sharp interval indicators have kernels of infinite $L^1$ norm, as recorded on
 the companion examples page.

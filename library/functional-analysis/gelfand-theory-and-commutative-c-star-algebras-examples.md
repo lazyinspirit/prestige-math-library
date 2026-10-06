@@ -3,7 +3,7 @@ page: gelfand-theory-and-commutative-c-star-algebras-examples
 title: Gelfand Theory and Commutative C Star Algebras — Examples
 status: published
 items: []
-examples: [ex-maximal-ideal-space-of-c-of-k, ex-maximal-ideal-space-of-the-disc-algebra, ex-gelfand-transform-of-ell-one-of-z, cex-gelfand-transform-of-a-banach-algebra-need-not-be-isometric, ex-banach-stone-weighted-composition-isometries, ex-gelfand-kolmogorov-recovers-beta-x-not-x, ex-stone-duality-for-a-power-set-algebra, ex-stone-duality-for-a-finite-boolean-algebra, rem-nagata-cp-theorem-remains-topological, rem-gerlits-nagy-remains-selection-principle-theory, rem-linear-dugundji-extension-remains-topological, ex-c-zero-of-a-locally-compact-space, ex-unitization-corresponds-to-one-point-compactification, rem-wiener-lemma-is-developed-on-the-fourier-analysis-track]
+examples: [ex-maximal-ideal-space-of-c-of-k, ex-maximal-ideal-space-of-the-disc-algebra, ex-gelfand-transform-of-ell-one-of-z, cex-gelfand-transform-of-a-banach-algebra-need-not-be-isometric, ex-banach-stone-weighted-composition-isometries, ex-gelfand-kolmogorov-recovers-beta-x-not-x, ex-stone-duality-for-a-power-set-algebra, ex-stone-duality-for-a-finite-boolean-algebra, ex-c-zero-of-a-locally-compact-space, ex-unitization-corresponds-to-one-point-compactification, rem-wiener-lemma-is-developed-on-the-fourier-analysis-track]
 ---
 
 These companion examples exercise the Gelfand machinery of the main page on its
@@ -32,8 +32,5 @@ case where ultrafilters are principal and the Stone space is discrete. On the
 nonunital side, $c_0(\mathbb N)$ has exactly the evaluation characters, no unit
 and the finite-support characteristic functions as an approximate unit, and its
 minimal unitization is the algebra of convergent sequences, corresponding to the
-one-point compactification of $\mathbb N$. Three orientation remarks record
-results that remain outside this pair — Nagata's $C_p$ theorem, the
-Gerlits–Nagy selection-principle equivalence and Dugundji's linear extension
-problem — each explicitly deferred and used nowhere in a proof; a fourth records
-that the Wiener inverse theorem belongs to the Fourier-analysis track.
+one-point compactification of $\mathbb N$. The final orientation remark points to the Wiener inverse theorem on the
+Fourier-analysis track.

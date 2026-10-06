@@ -24,13 +24,11 @@ items: [def-mean-on-bounded-functions-on-a-group,
         thm-tarski-alternative,
         thm-free-group-of-rank-two-is-nonamenable,
         cor-groups-containing-a-rank-two-free-subgroup-are-nonamenable,
-        thm-amenability-is-a-quasi-isometry-invariant-for-finitely-generated-groups,
-        rem-nonamenable-groups-without-nonabelian-free-subgroups]
+        thm-amenability-is-a-quasi-isometry-invariant-for-finitely-generated-groups]
 examples: [fs-amenable-means-finite,
-           fs-every-nonamenable-group-contains-a-rank-two-free-subgroup,
-           fs-one-finite-folner-set-proves-amenability,
-           fs-folner-sequences-exist-for-every-uncountable-amenable-group,
-           fs-paradoxical-decomposition-means-a-set-theoretic-partition-without-group-translates]
+        fs-one-finite-folner-set-proves-amenability,
+        fs-folner-sequences-exist-for-every-uncountable-amenable-group,
+        fs-paradoxical-decomposition-means-a-set-theoretic-partition-without-group-translates]
 ---
 
 This page treats amenability through three linked lenses: invariant means,

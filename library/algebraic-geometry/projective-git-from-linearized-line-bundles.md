@@ -8,7 +8,6 @@ requires: [reductive-affine-invariant-theory-and-geometric-quotients,
            cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes]
 items: [def-g-linearization-of-an-invertible-sheaf,
         lem-proj-of-finitely-generated-graded-algebra-is-projective,
-        rem-linearization-existence-outside-this-pair,
         lem-linearizations-powers-and-equivariant-section-ring,
         def-good-and-geometric-quotients-for-group-actions,
         def-invariant-section-ring-and-projective-git-quotient,
@@ -32,10 +31,8 @@ proves which quotient properties hold on the semistable and on the stable
 locus. The construction is the classical one: take the graded ring of invariant
 sections of all positive tensor powers of the linearized sheaf and form its
 Proj. The linearization is part of the data, not a consequence of it, so every
-theorem assumes a linearized sheaf outright and no item asserts that an
-arbitrary ample sheaf can be linearized; the recorded existence result for a
-positive power, with its connectedness and normality hypotheses, stays outside
-the pair.
+theorem assumes a linearized sheaf outright. The construction begins with
+this specified equivariant structure on the ample sheaf.
 
 The first definitions fix the vocabulary. A $G$-linearization of an invertible
 sheaf is an action on the total space covering the action on $X$ whose fibre

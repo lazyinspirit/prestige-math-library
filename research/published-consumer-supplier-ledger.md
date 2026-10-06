@@ -37104,3 +37104,323 @@ All five direct item consumers of the newly corrected coefficient Statement are 
 - No direct or transitive logical consumer in the current Frontier39 or40 item inventories. Source41 affected cellular and Gysin consumers are retained with their corresponding signed-basis and orientation-unit repairs.
 - Actual one-file precheck and renderer checks succeeded on this content; Definitions have an authentic JSON not-applicable phase-format result.
 <!-- local-published-repair:frontier-41-ha-dt-29:owner-main-merge:thm-smooth-functions-defined-locally-can-be-glued-by-a-partition-of-unity:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:def-baire-space:begin -->
+### def-baire-space — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `5434d5d6bc074bc4215af612e262dd3658e8d04aec6754347df0e1898999b81c`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/def-baire-space.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:def-baire-space:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:def-countable-choice:begin -->
+### def-countable-choice — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `fe7830166f1f594953ce1b7bf6857eb32f6f71e0b02cf1af540d24120ec8e418`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/def-countable-choice.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:def-countable-choice:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:def-dependent-choice:begin -->
+### def-dependent-choice — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `96560f1ccc3649078fd02136a0c6045ae46ed98d7fea99bed165247c85b68fb0`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/def-dependent-choice.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:def-dependent-choice:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-choice-costs-of-vitali-bernstein-and-free-ultrafilters:begin -->
+### rem-choice-costs-of-vitali-bernstein-and-free-ultrafilters — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: rem-vitali-non-measurable-set. Proved/new locally proved suppliers: thm-a-vitali-set-is-not-lebesgue-measurable, thm-ultrafilter-lemma, def-filter, def-ultrafilter, def-axiom-of-choice. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `28d6aaea8fead1411909a7ba81e5c06e57bb0c9ee248cb4cf7d61fa2846c86f2`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-choice-costs-of-vitali-bernstein-and-free-ultrafilters.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-choice-costs-of-vitali-bernstein-and-free-ultrafilters:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-choice-strength-of-hahn-banach:begin -->
+### rem-choice-strength-of-hahn-banach — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: rem-halpern-levy-bpi-not-ac. Proved/new locally proved suppliers: thm-zorn, def-axiom-of-choice. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `7bce66f426e9e10b32685b8f0f241b8139e5dd127378e06fbafb4995e3ce2824`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-choice-strength-of-hahn-banach.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-choice-strength-of-hahn-banach:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-compactness-conventions-and-choice-ledger:begin -->
+### rem-compactness-conventions-and-choice-ledger — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `94b6edf103de46684a7116e26ac67e93b2f3fe0c8d63333ad538d10c16b43753`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-compactness-conventions-and-choice-ledger.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-compactness-conventions-and-choice-ledger:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-continuum-hypothesis:begin -->
+### rem-continuum-hypothesis — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `fb30a8766472661832c58fc827abcb60db0d9c763a990a457e636fe52acacae4`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-continuum-hypothesis.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-continuum-hypothesis:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-general-complete-metric-baire-proof-would-overstate-the-choice-cost:begin -->
+### rem-general-complete-metric-baire-proof-would-overstate-the-choice-cost — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: rem-baire-category-choice-strength. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `fae4514c7fa1797d0be01ece68303ea471dd349565fc1662d8de712399dc588b`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-general-complete-metric-baire-proof-would-overstate-the-choice-cost.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-general-complete-metric-baire-proof-would-overstate-the-choice-cost:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-hahn-banach-open-choice-questions:begin -->
+### rem-hahn-banach-open-choice-questions — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: rem-hahn-banach-hamel-basis-open, rem-hahn-banach-discontinuous-additive-open. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `a96d55665dc1ef70a93de8b3429c619f20a600353353da1436fb7ed9192dee56`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-hahn-banach-open-choice-questions.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-hahn-banach-open-choice-questions:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-separation-axiom-conventions:begin -->
+### rem-separation-axiom-conventions — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `ca74af5e955050b69e6002c9e453069972c01702cc1cb2a437ce59a2981dde2e`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-separation-axiom-conventions.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-separation-axiom-conventions:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-the-choice-cost-of-urysohns-lemma-and-of-tietzes-theorem:begin -->
+### rem-the-choice-cost-of-urysohns-lemma-and-of-tietzes-theorem — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `e0965b62501639eb5f2813956c553f88641fd90ef5d231ba6c3603ecdcf168e7`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-the-choice-cost-of-urysohns-lemma-and-of-tietzes-theorem.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-the-choice-cost-of-urysohns-lemma-and-of-tietzes-theorem:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:thm-baire-category-locally-compact-hausdorff:begin -->
+### thm-baire-category-locally-compact-hausdorff — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `165ce198a0fbcc91bd875e881bdd5e8724b1ac11ffef0346b1a563c8d6957bd9`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/thm-baire-category-locally-compact-hausdorff.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:thm-baire-category-locally-compact-hausdorff:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:thm-tychonoff:begin -->
+### thm-tychonoff — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `a6eaf37455c905a2dbeae0aaa26482963aada5b09744f7041d8850607ab4d7d6`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/thm-tychonoff.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:thm-tychonoff:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:thm-urysohn-lemma:begin -->
+### thm-urysohn-lemma — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `7b629b9cc264bb880a44e4d0e725eee7aa9f8d282c214945beec976487b652e9`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/thm-urysohn-lemma.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:thm-urysohn-lemma:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:cex-a-function-with-a-primitive-that-is-not-integrable:begin -->
+### cex-a-function-with-a-primitive-that-is-not-integrable — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/functional_algebra.json.
+
+Current canonical hash: `946e686f50a524f7f653b35a7358660e09077949d8a851d945919527e6c7f6d6`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/cex-a-function-with-a-primitive-that-is-not-integrable.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:cex-a-function-with-a-primitive-that-is-not-integrable:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:ex-gelfand-transform-of-l-one-of-an-lca-group:begin -->
+### ex-gelfand-transform-of-l-one-of-an-lca-group — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: rem-lca-group-algebra-and-character-space-external. Proved/new locally proved suppliers: lem-lca-scalar-unitization-character-space-and-spectrum. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/functional_algebra.json.
+
+Current canonical hash: `2e643db9d9ed8e0295bfede01b3a5e2b632cb6bdcd38bc8a89ee135ab309f06a`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/ex-gelfand-transform-of-l-one-of-an-lca-group.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:ex-gelfand-transform-of-l-one-of-an-lca-group:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:fs-the-diagram-lemmas-in-an-abelian-category-follow-from-the-module-case-by-the-embedding-theorem:begin -->
+### fs-the-diagram-lemmas-in-an-abelian-category-follow-from-the-module-case-by-the-embedding-theorem — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: rem-the-freyd-mitchell-embedding-theorem, rem-why-the-diagram-lemmas-are-not-proved-by-the-embedding-theorem. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/functional_algebra.json.
+
+Current canonical hash: `5701c0ae6bc358e245ec8a7c519b7effd20b018b396e7c8997b1d38787ca1df5`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/fs-the-diagram-lemmas-in-an-abelian-category-follow-from-the-module-case-by-the-embedding-theorem.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:fs-the-diagram-lemmas-in-an-abelian-category-follow-from-the-module-case-by-the-embedding-theorem:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:prop-subfields-of-rational-cyclotomic-fields-are-abelian-over-the-rationals:begin -->
+### prop-subfields-of-rational-cyclotomic-fields-are-abelian-over-the-rationals — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/functional_algebra.json.
+
+Current canonical hash: `ce14a60020148440638ddc1be581b363f356509ae05bfadbdcb3edb229b0a95d`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/prop-subfields-of-rational-cyclotomic-fields-are-abelian-over-the-rationals.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:prop-subfields-of-rational-cyclotomic-fields-are-abelian-over-the-rationals:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-cauchy-kovalevskaya-proof-boundary:begin -->
+### rem-cauchy-kovalevskaya-proof-boundary — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: rem-cauchy-kovalevskaya-theorem-for-a-noncharacteristic-analytic-cauchy-problem. Proved/new locally proved suppliers: thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/functional_algebra.json.
+
+Current canonical hash: `668a07deac93f0c388a38dc0b482ced8164ff4ea52468f4a03745cfb5621fffd`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-cauchy-kovalevskaya-proof-boundary.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-cauchy-kovalevskaya-proof-boundary:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-duality-as-a-dual-space-statement:begin -->
+### rem-duality-as-a-dual-space-statement — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: rem-the-p-equals-infinity-case-is-recorded-not-proved-here. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/functional_algebra.json.
+
+Current canonical hash: `66d917a976553f6aaf5c7df689f0cfc84f9343f5f6d0e096d7f3e6202fc4fd79`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-duality-as-a-dual-space-statement.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-duality-as-a-dual-space-statement:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-integral-conventions-and-scope:begin -->
+### rem-integral-conventions-and-scope — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/functional_algebra.json.
+
+Current canonical hash: `1e7c03f185542455e01415e06cd3b9c61997f8df3da3b6b22ea248834c3b87b3`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-integral-conventions-and-scope.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-integral-conventions-and-scope:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:cor-lp-fourier-series-converges-almost-everywhere-for-p-greater-than-one:begin -->
+### cor-lp-fourier-series-converges-almost-everywhere-for-p-greater-than-one — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Proved/new locally proved suppliers: thm-carleson-hunt-maximal-inequality-on-the-torus, def-axiom-of-choice. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/fourier.json.
+
+Current canonical hash: `e7ae993ef22b65e714c6cda20343daab6afc377f4c5a6bcdc86c9dc909316d12`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/cor-lp-fourier-series-converges-almost-everywhere-for-p-greater-than-one.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:cor-lp-fourier-series-converges-almost-everywhere-for-p-greater-than-one:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-hausdorff-dimension-orients-the-weierstrass-graph:begin -->
+### rem-hausdorff-dimension-orients-the-weierstrass-graph — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/fourier.json.
+
+Current canonical hash: `16bef68398525699c62beb95d88afdbd941989668b236dfb1c815f4e40a97006`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-hausdorff-dimension-orients-the-weierstrass-graph.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-hausdorff-dimension-orients-the-weierstrass-graph:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-lone-fourier-series-can-diverge-almost-everywhere:begin -->
+### rem-lone-fourier-series-can-diverge-almost-everywhere — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Proved/new locally proved suppliers: thm-kolmogorov-lone-fourier-series-diverges-almost-everywhere, thm-carleson-hunt-maximal-inequality-on-the-torus, def-axiom-of-choice. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/fourier.json.
+
+Current canonical hash: `9f0ab8825130fd4a0248f27e5911c2fcc592ddcc1ace1156678706e5cb7f4b75`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-lone-fourier-series-can-diverge-almost-everywhere.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-lone-fourier-series-can-diverge-almost-everywhere:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-proof-cost-of-the-carleson-hunt-theorem:begin -->
+### rem-proof-cost-of-the-carleson-hunt-theorem — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Proved/new locally proved suppliers: thm-carleson-hunt-maximal-inequality-on-the-torus, lem-carleson-density-selection, lem-carleson-size-selection, lem-carleson-single-tree-estimate, lem-hunt-exceptional-set-and-distribution-estimates, lem-carleson-restricted-weak-interpolation, lem-wave-packet-model-dominates-the-linearised-carleson-operator, lem-carleson-real-line-to-torus-transfer, def-axiom-of-choice. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/fourier.json.
+
+Current canonical hash: `3197186a746e998948e6b3e248cdc5545962919bdaeb69cf34cbab8309d060e1`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-proof-cost-of-the-carleson-hunt-theorem.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-proof-cost-of-the-carleson-hunt-theorem:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-the-lone-endpoint-is-excluded-from-carleson-hunt:begin -->
+### rem-the-lone-endpoint-is-excluded-from-carleson-hunt — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Proved/new locally proved suppliers: thm-kolmogorov-lone-fourier-series-diverges-almost-everywhere, def-axiom-of-choice. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/fourier.json.
+
+Current canonical hash: `dc438e1af972fe236b0cdbd3144ff509dd6edb6e00e0f407f0d10b686e91fe36`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-the-lone-endpoint-is-excluded-from-carleson-hunt.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-the-lone-endpoint-is-excluded-from-carleson-hunt:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-algorithmic-role-of-onan-scott:begin -->
+### rem-algorithmic-role-of-onan-scott — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: rem-onan-scott-classification-of-finite-primitive-groups. Proved/new locally proved suppliers: def-minimal-normal-subgroup-and-socle, thm-minimal-normal-subgroups-of-faithful-primitive-groups-are-transitive. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/group_algorithms.json.
+
+Current canonical hash: `42e9d2e6f7faa93f2e97c47bd9bd0df4086db6ee841c2b209d0704e53ee97356`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-algorithmic-role-of-onan-scott.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-algorithmic-role-of-onan-scott:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:thm-word-problem-for-finitely-generated-abelian-groups:begin -->
+### thm-word-problem-for-finitely-generated-abelian-groups — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: rem-finitely-generated-abelian-groups-admit-invariant-factor-normal-form. Proved/new locally proved suppliers: def-group-presentation, thm-abelianisation-of-a-free-group-is-free-abelian, lem-subgroups-of-z-are-cyclic, thm-smith-normal-form-existence-over-a-pid. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/group_algorithms.json.
+
+Current canonical hash: `03304b7734aa6ee57d2f528b5025054afc1c8f608641b3022bc225e8ae008fec`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/thm-word-problem-for-finitely-generated-abelian-groups.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:thm-word-problem-for-finitely-generated-abelian-groups:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:fs-the-borel-hierarchy-closes-after-two-steps:begin -->
+### fs-the-borel-hierarchy-closes-after-two-steps — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: rem-the-borel-hierarchy-never-stabilizes. Proved/new locally proved suppliers: thm-universal-borel-sets-and-strict-hierarchy, lem-sequence-spaces-continuously-inject-into-the-real-line, lem-cantor-and-baire-sequence-coding, thm-compactness-under-continuous-maps, thm-compact-subset-of-a-hausdorff-space-is-closed, lem-real-line-is-a-metric-space, def-countable-borel-hierarchy, def-axiom-of-choice. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/metrization.json.
+
+Current canonical hash: `2efb9e20dbb76b0826997d6bf260528cc0a95b92516daf2494b4421dfca2be0f`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/fs-the-borel-hierarchy-closes-after-two-steps.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:fs-the-borel-hierarchy-closes-after-two-steps:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:thm-bing-metrization:begin -->
+### thm-bing-metrization — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: rem-metric-spaces-have-sigma-discrete-bases. Proved/new locally proved suppliers: lem-metric-spaces-have-sigma-discrete-open-bases, def-axiom-of-choice, def-metric-space. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/metrization.json.
+
+Current canonical hash: `576fed0ce6eef15416ff57f2e07c9c52256ef0ffaf8136e5a2d85a33aff896e8`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/thm-bing-metrization.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:thm-bing-metrization:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six:begin -->
+### thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: rem-skolem-construction-produces-a-steiner-triple-system. Proved/new locally proved suppliers: thm-skolem-construction-produces-a-steiner-triple-system. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/combinatorics.json.
+
+Current canonical hash: `154b1b4108e5afb8a0e79d7649deb88d0fc6576a0e7ec8ea3d77a6aa21101f81`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:cor-brunner-models-also-refute-tietze-extension:begin -->
+### cor-brunner-models-also-refute-tietze-extension — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: lem-brunner-choice-and-urysohn-obstructions, lem-brunner-urysohn-obstruction-is-injectively-boundable, thm-relative-consistency-countable-choice-without-urysohn, thm-relative-consistency-bpi-without-urysohn. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `447383c396e5a33fd7cb2c4985df4d05cb7dc4e9ad24c00791e84c08e306e58f`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/cor-brunner-models-also-refute-tietze-extension.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:cor-brunner-models-also-refute-tietze-extension:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:cor-dmc-is-not-provable-in-zf:begin -->
+### cor-dmc-is-not-provable-in-zf — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: thm-relative-consistency-countable-choice-without-urysohn, def-countable-choice. Proved/new locally proved suppliers: def-normal-and-t4-spaces. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `137960de2dc4b1185c2c4e194294d54d9c6666a4cafa894b5383dad0f30f3b9e`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/cor-dmc-is-not-provable-in-zf.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:cor-dmc-is-not-provable-in-zf:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:cor-zf-does-not-prove-urysohn-lemma:begin -->
+### cor-zf-does-not-prove-urysohn-lemma — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: thm-relative-consistency-countable-choice-without-urysohn, def-countable-choice. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `e612ae14f21b79fd8e2a1b4c4910934595ae92984fbb8ce4aaa4e17705129df4`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/cor-zf-does-not-prove-urysohn-lemma.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:cor-zf-does-not-prove-urysohn-lemma:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-choice-strength-ledger-baire-urysohn-stone-tychonoff:begin -->
+### rem-choice-strength-ledger-baire-urysohn-stone-tychonoff — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: thm-relative-consistency-countable-choice-without-urysohn, thm-relative-consistency-bpi-without-urysohn, thm-relative-consistency-bpi-without-stone. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `d825b026997eb4da7bdfbd43942d1dc544fa8074e4610abd2832745a923c38a4`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-choice-strength-ledger-baire-urysohn-stone-tychonoff.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-choice-strength-ledger-baire-urysohn-stone-tychonoff:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-dmc-mc-ac-zfa-qualification:begin -->
+### rem-dmc-mc-ac-zfa-qualification — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: cor-dmc-is-not-provable-in-zf. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `ddb82640a658453feed30f57fd925ea956fa887c9b069eee9562306baaf3f449`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-dmc-mc-ac-zfa-qualification.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-dmc-mc-ac-zfa-qualification:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-urysohn-implies-dmc-open-status:begin -->
+### rem-urysohn-implies-dmc-open-status — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: thm-relative-consistency-countable-choice-without-urysohn, thm-relative-consistency-bpi-without-urysohn, cor-zf-does-not-prove-urysohn-lemma. Proved/new locally proved suppliers: cor-dmc-is-not-provable-in-zf. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `c61bc417214be9957dbfc124ec9e50b211dde447b2145720339fe1cbcc1c4c75`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-urysohn-implies-dmc-open-status.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-urysohn-implies-dmc-open-status:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:fs-all-finite-simple-groups-are-alternating-or-cyclic:begin -->
+### fs-all-finite-simple-groups-are-alternating-or-cyclic — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Proved/new locally proved suppliers: lem-psl-two-seven-is-simple-of-order-168, cor-alternating-group-is-normal-and-has-half-the-elements. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/cfsg.json.
+
+Current canonical hash: `1121f261ae5dd148cdac072de1f2772bdaca28a12a887ea466434e6ec6afe874`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/fs-all-finite-simple-groups-are-alternating-or-cyclic.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:fs-all-finite-simple-groups-are-alternating-or-cyclic:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:cor-bpi-does-not-imply-dmc:begin -->
+### cor-bpi-does-not-imply-dmc — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: thm-relative-consistency-bpi-without-urysohn. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `d171592f0e3dec4baf55150431240d98abf0da4b047047712d063865e72475e1`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/cor-bpi-does-not-imply-dmc.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:cor-bpi-does-not-imply-dmc:end -->
+
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-stone-exact-choice-strength-open-status:begin -->
+### rem-stone-exact-choice-strength-open-status — recorded-material retirement
+
+Retire recorded/unproved prerequisite and contextual claims; retain only locally supplied mathematics. Removed deps: thm-relative-consistency-bpi-without-stone. Exact argument and downstream decisions: research/recorded-retirement-2026-10-06/reports/choice_topology.json.
+
+Current canonical hash: `c0871c48ebad11754c57a15b7fe3cdd12d79b3d441e37f537973660b610ab3a9`. Before carrier: `research/recorded-retirement-2026-10-06/before/items/rem-stone-exact-choice-strength-open-status.md`. The original provenance and verification are preserved verbatim there. The helper performed a bounded local argument repair; the orchestrator integrated it. Successful local precheck, rendercheck and proof-layout checks are formatting evidence, not independent mathematical audit or judgment.
+<!-- local-published-repair:recorded-retirement-2026-10-06:rem-stone-exact-choice-strength-open-status:end -->

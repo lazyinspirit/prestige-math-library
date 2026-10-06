@@ -10,17 +10,10 @@ provenance:
 deps: [thm-vitali-sets-exist-under-choice-on-r-over-q,
        thm-bernstein-sets-exist-under-a-well-ordering-of-r,
        thm-a-free-ultrafilter-on-n-is-not-lebesgue-measurable,
-       rem-vitali-non-measurable-set, rem-choice-strengths]
+       thm-a-vitali-set-is-not-lebesgue-measurable, thm-ultrafilter-lemma, def-filter, def-ultrafilter, def-axiom-of-choice, rem-choice-strengths]
 justified_by: []
 aliases: []
 landmark: false
-verification:
-  audited: 2026-08-26
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-26
 sources:
   scraped: []
   references:
@@ -31,15 +24,17 @@ sources:
     - title: "Jacek Cichoń, Aleksander Kharazishvili, and Bogdan Węglorz, Subsets of the Real Line, Chapter 8"
       url: "https://ki.pwr.edu.pl/cichon/Materialy/BOOK.pdf"
 pipeline_run: null
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/rem-choice-costs-of-vitali-bernstein-and-free-ultrafilters.json
 ---
 
 Choice enters this page in three genuinely different ways.
 
 First, [[thm-vitali-sets-exist-under-choice-on-r-over-q]] uses a selector on the
-family of rational-equivalence classes meeting $[0,1]$. The later theorem that a
-Vitali set is nonmeasurable uses only countably many translates of an already
-chosen selector, so the cost is concentrated in the existence step, not in the
-measure argument.
+family of rational-equivalence classes meeting $[0,1]$. [[thm-a-vitali-set-is-not-lebesgue-measurable]] treats an already given
+selector by countably many rational translates. Its statement also assumes AC,
+which supplies the countable choice inherited from the local Lebesgue measure
+construction; the measure argument therefore has an explicit inherited cost.
 
 Second, [[thm-bernstein-sets-exist-under-a-well-ordering-of-r]] uses a well-order
 of the real line and a transfinite construction through the perfect subsets.
@@ -49,9 +44,16 @@ development, not by one choice function on one fixed family.
 
 Third, [[thm-a-free-ultrafilter-on-n-is-not-lebesgue-measurable]] is intentionally
 one-directional. It proves what follows from **being given** a free ultrafilter,
-namely nonmeasurability; it does not produce a free ultrafilter. The existence
-cost is recorded elsewhere in [[rem-choice-strengths]].
+namely nonmeasurability; it does not produce a free ultrafilter. Under AC, take the family of cofinite subsets of $\mathbb N$. It is a proper
+filter ([[def-filter]]): $\mathbb N$ is cofinite, $\varnothing$ is not because
+$\mathbb N$ is infinite, the complement of the intersection of two members is
+a finite union of finite sets, and a superset of a cofinite set is cofinite.
+[[thm-ultrafilter-lemma]] extends this filter to an ultrafilter. For every
+$n\in\mathbb N$ that extension contains $\mathbb N\setminus\{n\}$, which
+is absent from the principal ultrafilter at $n$; hence the extension is free
+([[def-ultrafilter]]). As [[rem-choice-strengths]] explains, the local proof
+of the extension theorem uses AC ([[def-axiom-of-choice]]).
+
 
 These are upper bounds supplied by the local constructions. The page makes no
-claim that any displayed hypothesis is weakest possible. Such lower bounds must
-wait until the Solovay and Shelah model constructions are proved locally.
+claim that any displayed hypothesis is weakest possible. The arguments summarized here establish no lower bounds.

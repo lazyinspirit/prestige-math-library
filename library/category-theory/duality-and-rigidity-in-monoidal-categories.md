@@ -27,7 +27,6 @@ items: [def-left-dual-and-right-dual-object,
         rem-pivotal-and-spherical-structures-vary-by-monoidal-automorphisms-of-the-identity,
         thm-in-a-spherical-category-the-left-and-right-traces-agree,
         thm-basic-properties-of-the-categorical-trace,
-        rem-the-exact-sequence-additivity-of-trace-and-its-missing-hypotheses,
         def-twist-and-ribbon-structure,
         thm-a-twist-on-a-braided-rigid-category-is-the-same-thing-as-a-pivotal-structure-of-drinfeld-type,
         rem-rigidity-alone-does-not-make-a-tensor-category]

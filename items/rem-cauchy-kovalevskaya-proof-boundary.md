@@ -7,21 +7,14 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [rem-cauchy-kovalevskaya-theorem-for-a-noncharacteristic-analytic-cauchy-problem]
+deps: [thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem]
 justified_by: []
-verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "Part III: Analysis of Partial Differential Equations"
       url: "https://giacomoageno.github.io/LectureNotesAPDE.pdf"
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/rem-cauchy-kovalevskaya-proof-boundary.json
 ---
 
-[[rem-cauchy-kovalevskaya-theorem-for-a-noncharacteristic-analytic-cauchy-problem]]
-is recorded without its majorant-series proof.  In particular, this page does
-not extend it to arbitrary smooth coefficients or data, and no later item may
-use the recorded theorem as a dependency.
+[[thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem]] is proved in this library by analytic flattening, normal-form reduction and coefficient-majorant arguments. Its conclusion is local existence and uniqueness of an analytic solution germ for analytic Cauchy data on a noncharacteristic analytic hypersurface. For an implicit nonlinear equation it fixes a compatible jet and its selected analytic branch. These hypotheses do not assert an extension to arbitrary smooth coefficients or data.

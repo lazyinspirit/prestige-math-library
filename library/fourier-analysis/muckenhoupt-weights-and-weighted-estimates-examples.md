@@ -4,12 +4,7 @@ title: "Muckenhoupt Weights and Weighted Estimates — Examples"
 status: draft
 requires: [muckenhoupt-weights-and-weighted-estimates]
 items: []
-examples:
-  - ex-power-weight-a-p-range
-  - cex-power-weight-fails-at-both-a-p-endpoints
-  - ex-a-one-power-weight-range
-  - rem-a-doubling-weight-need-not-be-a-p
-  - ex-weighted-norm-of-an-interval-indicator
+examples: [ex-power-weight-a-p-range, cex-power-weight-fails-at-both-a-p-endpoints, ex-a-one-power-weight-range, ex-weighted-norm-of-an-interval-indicator]
 ---
 
 These examples calibrate the weighted classes of the companion page on the
@@ -20,13 +15,9 @@ growth at infinity; the second records the two endpoint failures, where the
 weight either is not locally integrable or makes the second factor of the
 $A_p$ product diverge logarithmically, so that the admissible interval is open
 at both ends. The third example identifies the $A_1$ range
-$-n<\alpha\le0$ as a strict subinterval of the doubling range, exhibiting the
-$p\downarrow1$ limit of the $A_p$ intervals.
+$-n<\alpha\le0$ and exhibits the $p\downarrow1$ limit of the $A_p$ intervals.
 
-The fourth entry is a recorded orientation remark: for $\alpha>n(p-1)$ the
-power weight is doubling but lies in no $A_p$ at that exponent, so the doubling
-property does not characterise Muckenhoupt membership. The last example
-computes the weighted norm of an interval indicator exactly,
+The last example computes the weighted norm of an interval indicator exactly,
 $\|\mathbf 1_{(0,r)}\|_{L^p(w)}=(r^{\alpha+1}/(\alpha+1))^{1/p}$ on the line,
 and records its divergence as $\alpha\downarrow-1$, tying the abstract
 integrability thresholds to an explicit weighted integral.

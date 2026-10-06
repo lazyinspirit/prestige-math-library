@@ -9,19 +9,11 @@ provenance:
   proof: ai-altered
 deps: [lem-dependent-choice-along-a-sequence-of-relations, def-baire-space, def-compact-space, thm-compact-iff-fip, thm-compact-subset-of-a-hausdorff-space-is-closed, def-locally-compact-space, thm-locally-compact-hausdorff-basics, def-hausdorff-space, def-dense-top, def-interior-closure-boundary-top, def-topological-space, def-subspace-topology-top, def-dependent-choice, def-sequence-convergence-top, def-natural-numbers]
 justified_by: []
-external_refs: [rem-baire-category-choice-strength]
+forward_refs: [thm-compact-hausdorff-baire-iff-dmc]
 aliases: [thm-baire-category-lch]
 landmark: true
 short: "Baire category for locally compact Hausdorff"
 proof_strategy: direct
-verification:
-  precheck: pass
-  verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-05
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -34,6 +26,8 @@ sources:
     - title: "Stacks Project, Section 5.13: Locally quasi-compact spaces"
       url: "https://stacks.math.columbia.edu/tag/08ZQ"
 pipeline_run: null
+verification:
+  repair: research/recorded-retirement-2026-10-06/receipts/thm-baire-category-locally-compact-hausdorff.json
 ---
 
 ## Statement
@@ -47,14 +41,6 @@ every sequence $(U_n)_{n \in \mathbb{N}}$ of dense open subsets of $X$
 ([[def-dense-top]], [[def-sequence-convergence-top]]), the intersection
 $\bigcap_{n \in \mathbb{N}} U_n$ is dense in $X$.
 
-**Dependent choice is sufficient here and no claim of necessity is made.** The
-several statements that go by the name "Baire category theorem" have different
-choice-theoretic statuses over ZF. The compact Hausdorff version is equivalent
-to dependent multiple choice; DC implies DMC in ZF, the reversal remains open
-in ZF, and DMC does not imply DC in ZFA. That account is
-[[rem-baire-category-choice-strength]], which this library states and does not
-prove. Nothing below asserts that dependent choice is needed for the statement
-above.
 
 ## Facts & Assumptions
 
@@ -95,6 +81,11 @@ above.
 9.1 So every nonempty open $W$ meets $\bigcap_{n \in \mathbb{N}} U_n$, which by [L1] makes that intersection dense; as $(U_n)$ was an arbitrary sequence of dense open sets, $X$ is a Baire space. [L1, step 1.1, step 8.1] ∎
 
 ## Remarks
+
+**Dependent choice is sufficient here.** The proof below records its exact
+use and makes no assertion that DC is necessary. For the compact Hausdorff
+subclass, the later [[thm-compact-hausdorff-baire-iff-dmc]] proves the precise
+equivalence with dependent multiple choice over ZF.
 
 **Where each hypothesis is spent.** Local compactness and the Hausdorff condition enter only through [L2], the shrinking clause of [[thm-locally-compact-hausdorff-basics]], which is used twice: once to start the construction and once to continue it. Compactness of $\overline{V_0}$ is used once, at step 7.1, to turn a decreasing sequence of nonempty closed sets into a common point; that is the finite intersection characterisation [[thm-compact-iff-fip]] and nothing else.
 

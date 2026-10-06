@@ -3,35 +3,7 @@ page: real-hardy-spaces-maximal-functions-and-atoms
 title: "Real Hardy Spaces Maximal Functions and Atoms"
 status: draft
 requires: [hilbert-and-riesz-transforms, calderon-zygmund-decomposition-and-singular-integrals, distributions-test-functions-and-differentiation, tempered-distributions-and-the-fourier-transform, the-maximal-function-and-lebesgue-differentiation]
-items:
-  - def-hp-atom-with-moment-order
-  - lem-existence-of-schwartz-functions-with-flat-fourier-transform-at-the-origin
-  - lem-local-polynomial-projections-match-moments-through-order-s
-  - lem-schwartz-dilations-preserve-schwartz-space
-  - lem-whitney-decomposition-of-proper-open-subsets-of-euclidean-space
-  - lem-whitney-type-ball-cover-of-a-proper-open-set
-  - def-radial-and-nontangential-maximal-functions-of-a-tempered-distribution
-  - lem-approximate-identities-in-schwartz-space-converge-in-tempered-distributions
-  - lem-schwartz-deconvolution-along-dyadic-dilations
-  - def-grand-maximal-test-class-of-order-n
-  - lem-tangential-maximal-function-norm-bound
-  - lem-grand-maximal-function-is-dominated-by-the-tangential-maximal-function
-  - lem-smooth-maximal-functions-of-tempered-distributions-are-borel-measurable
-  - lem-truncated-maximal-function-estimates
-  - def-real-hardy-space-by-a-radial-maximal-function
-  - lem-grand-maximal-function-controls-admissible-radial-and-nontangential-maximal-functions
-  - lem-an-hp-atom-has-uniform-hp-quasinorm
-  - lem-calderon-reproducing-formula-for-the-hardy-decomposition
-  - rem-riesz-transform-characterisation-of-real-hone
-  - thm-maximal-function-characterisations-of-real-hardy-spaces
-  - cor-real-hardy-space-equals-lp-for-p-greater-than-one
-  - lem-ellp-sums-of-hp-atoms-converge-in-tempered-distributions
-  - lem-hardy-calderon-zygmund-level-decomposition-produces-atoms
-  - thm-atomic-characterisation-of-real-hp
-  - rem-real-hp-is-quasi-banach-below-one
-  - thm-calderon-zygmund-operators-map-hone-to-lone-under-cancellation
-  - thm-fourier-transform-decay-of-real-hardy-space-elements
-  - cor-integrable-hardy-functions-have-vanishing-moments-in-the-atomic-range
+items: [def-hp-atom-with-moment-order, lem-existence-of-schwartz-functions-with-flat-fourier-transform-at-the-origin, lem-local-polynomial-projections-match-moments-through-order-s, lem-schwartz-dilations-preserve-schwartz-space, lem-whitney-decomposition-of-proper-open-subsets-of-euclidean-space, lem-whitney-type-ball-cover-of-a-proper-open-set, def-radial-and-nontangential-maximal-functions-of-a-tempered-distribution, lem-approximate-identities-in-schwartz-space-converge-in-tempered-distributions, lem-schwartz-deconvolution-along-dyadic-dilations, def-grand-maximal-test-class-of-order-n, lem-tangential-maximal-function-norm-bound, lem-grand-maximal-function-is-dominated-by-the-tangential-maximal-function, lem-smooth-maximal-functions-of-tempered-distributions-are-borel-measurable, lem-truncated-maximal-function-estimates, def-real-hardy-space-by-a-radial-maximal-function, lem-grand-maximal-function-controls-admissible-radial-and-nontangential-maximal-functions, lem-an-hp-atom-has-uniform-hp-quasinorm, lem-calderon-reproducing-formula-for-the-hardy-decomposition, thm-maximal-function-characterisations-of-real-hardy-spaces, cor-real-hardy-space-equals-lp-for-p-greater-than-one, lem-ellp-sums-of-hp-atoms-converge-in-tempered-distributions, lem-hardy-calderon-zygmund-level-decomposition-produces-atoms, thm-atomic-characterisation-of-real-hp, rem-real-hp-is-quasi-banach-below-one, thm-calderon-zygmund-operators-map-hone-to-lone-under-cancellation, thm-fourier-transform-decay-of-real-hardy-space-elements, cor-integrable-hardy-functions-have-vanishing-moments-in-the-atomic-range]
 examples: []
 ---
 
@@ -89,5 +61,4 @@ refinement, and hence the vanishing of all moments through order
 $\lfloor n(1/p-1)\rfloor$ for $H^p$ functions whose weighted moments through that order are absolutely integrable. Calderon-Zygmund
 operators with standard Holder kernels map $H^1$ boundedly into $L^1$; that
 theorem assumes Countable Choice, and the quasi-Banach remark records that
-$\|\cdot\|_{H^p}$ is only a quasi-norm for $p<1$. The Riesz-transform
-characterisation of $H^1$ is quoted from the literature and is not proved here.
+$\|\cdot\|_{H^p}$ is only a quasi-norm for $p<1$. 

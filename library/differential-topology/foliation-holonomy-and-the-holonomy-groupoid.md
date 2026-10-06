@@ -23,8 +23,7 @@ items: [def-local-transversal-to-a-regular-foliation,
         prop-quotient-foliation-under-a-free-proper-foliated-action,
         def-suspension-foliation-of-a-group-action,
         prop-suspension-holonomy-is-the-germ-of-the-monodromy-action,
-        rem-holonomy-is-a-germ-not-a-globally-defined-return-map,
-        rem-holonomy-and-monodromy-groupoids-need-not-be-hausdorff]
+        rem-holonomy-is-a-germ-not-a-globally-defined-return-map]
 examples: []
 ---
 
@@ -56,8 +55,7 @@ components of intrinsic leaf preimages (the transverse fibre products), and the 
 properly discontinuous foliated action, applied in particular to suspensions
 of representations $\pi_1(B,b_0)\to\operatorname{Diff}(F)$, where the holonomy
 germ of a base loop is the germ of the represented inverse monodromy. The
-final remarks record that holonomy by itself specifies a germ and does not specify a global
-return map, and that holonomy and monodromy groupoids can fail to be
-Hausdorff. Countable choice $\mathrm{AC}_\omega$ is the standing choice
+closing remark explains that holonomy specifies a germ, so a global return
+map requires additional domain data. Countable choice $\mathrm{AC}_\omega$ is the standing choice
 assumption through the smooth-distribution and holonomy interface; no full
 axiom of choice is invoked.
