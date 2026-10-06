@@ -1113,3 +1113,71 @@ test('a stabilized amendment already frozen into pre-5a cannot waive its source 
     assert.match(result.stderr, /stabilized amended_repair equal to pre-5a requires exact shared historical defect evidence/);
   } finally { rmSync(f.root, { recursive: true, force: true }); }
 });
+
+function foreignCausalHelperFixture(helperFirst = true) {
+  const fx = producerRoutingFixture('r'), helper = 'lem-exact-causal-helper', original = 'reader:1:1';
+  const initialContractPath = join(fx.root, 'research/r-batch-2.proof-contracts.json');
+  const initialContract = JSON.parse(readFileSync(initialContractPath, 'utf8'));
+  initialContract.version = 1; initialContract.scope = [fx.producer];
+  writeFileSync(initialContractPath, JSON.stringify(initialContract));
+  writeFileSync(join(fx.root, 'research/r-alpha-groups.json'), JSON.stringify(helperFirst
+    ? [{ label: 'producer', covers: ['2'] }, { label: 'consumer', covers: ['1'] }]
+    : [{ label: 'consumer', covers: ['1'] }, { label: 'producer', covers: ['2'] }]));
+  writeFileSync(join(fx.root, 'research/r-reader-findings-2.json'), JSON.stringify({ batch: '2', coverage_note: 'Producer source read.', findings: [] }));
+  fx.run('post-reader', '--run', 'r', '--batch', '2');
+  const scope2 = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-2.json'), 'utf8'));
+  writeFileSync(join(fx.root, 'research/r-refute-2.json'), JSON.stringify({ batch: '2', opened: scope2.refuter_scope, not_opened: [], coverage_note: 'Producer sources opened.', flagged: [] }));
+  fx.run('collect', '--run', 'r', '--batch', '2');
+  const producerText = readFileSync(join(fx.root, `items/${fx.producer}.md`));
+  writeFileSync(join(fx.root, 'research/r-reader-findings-1.json'), JSON.stringify({ batch: '1', coverage_note: 'Actual assigned consumer supplier path read.', findings: [{ id: fx.producer,
+    subject_type: 'in-run-dependency', consumer_id: 'lem-ordinary-item', observed_source: { snapshot: 'current', item_sha256: createHash('sha256').update(producerText).digest('hex') },
+    location: 'Proof', defect: 'unlicensed-inference', evidence: 'The missing exact supplier helper is the historical gap.', severity: 'fatal' }] }));
+  fx.run('split', '--run', 'r', '--batch', '1');
+  const scope1 = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
+  writeFileSync(join(fx.root, 'research/r-refute-1.json'), JSON.stringify({ batch: '1', opened: scope1.refuter_scope, not_opened: [], coverage_note: 'Consumer sources opened.', flagged: [] }));
+  fx.run('collect', '--run', 'r', '--batch', '1');
+  writeFileSync(join(fx.root, `items/${helper}.md`), `---\nid: ${helper}\nstatus: draft\ndeps: []\n---\n## Statement\nExact repair helper.\n\n## Proof\n1.1 Done.\n`);
+  const manifestPath = join(fx.root, 'research/r-batch-2.pages.json');
+  const pages = JSON.parse(readFileSync(manifestPath, 'utf8')); pages[0].items.push(helper); writeFileSync(manifestPath, JSON.stringify(pages));
+  const contractPath = join(fx.root, 'research/r-batch-2.proof-contracts.json');
+  const contract = JSON.parse(readFileSync(contractPath, 'utf8'));
+  contract.scope.push(helper); contract.contracts[helper] = {}; contract.contracts[fx.producer].risk_review = { status: 'complete' };
+  writeFileSync(contractPath, JSON.stringify(contract));
+  fx.run('pre-5a', '--run', 'r');
+  const helperObligation = `post-reader:2:${helper}`;
+  const ledger: any = { defect_id: 'r-exact-original-gap', run: 'r', subject: fx.producer, caught_at_stage: '5a-adjudicate', severity: 'fatal', disposition: 'fixed', adjudication_ref: [
+    { path: 'research/r-alpha-batch-2-5a-decisions.json', obligation: helperObligation },
+    { path: 'research/r-alpha-batch-1-5a-decisions.json', obligation: original }] };
+  const addition: any = { obligation: helperObligation, id: helper, route: 'touched', verdict: 'accepted_repair', repair_confidence: 1, defect_ids: [ledger.defect_id],
+    causal_subject: fx.producer, same_defect_as: original, same_defect_evidence: 'The added exact helper closes only the originally observed missing supplier inference, not an unrelated producer finding.', evidence: 'The new helper is the repair carrier for that exact original gap.' };
+  const finding: any = { obligation: original, id: fx.producer, route: 'reader', verdict: 'confirmed_fatal', producer_batch: '2', consumer_id: 'lem-ordinary-item', defect_ids: [ledger.defect_id], evidence: 'The actual original supplier gap is now closed by the exact helper.' };
+  const own = { version: 1, run: 'r', group: 'batch-2', decisions: [addition,
+    { obligation: `post-reader:2:${fx.producer}`, id: fx.producer, route: 'touched', verdict: 'reviewed_no_defect', change_kind: 'audit_enrichment', defect_ids: [], evidence: 'Risk-review recording only.' }] };
+  const other = { version: 1, run: 'r', group: 'batch-1', decisions: [finding] };
+  const write = () => { writeFileSync(join(fx.root, 'research/defect-ledger.jsonl'), JSON.stringify(ledger) + '\n'); writeFileSync(join(fx.root, 'research/r-alpha-batch-2-5a-decisions.json'), JSON.stringify(own)); writeFileSync(join(fx.root, 'research/r-alpha-batch-1-5a-decisions.json'), JSON.stringify(other)); };
+  write(); fx.run('stamp', '--run', 'r');
+  return { ...fx, helper, ledger, addition, finding, own, other, write };
+}
+for (const helperFirst of [false, true]) test(`causal new helper preserves exact foreign finding sharing with ${helperFirst ? 'helper' : 'finding'} group first`, () => {
+  const f = foreignCausalHelperFixture(helperFirst);
+  try { assert.match(f.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/); }
+  finally { rmSync(f.root, { recursive: true, force: true }); }
+});
+
+test('reverse causal sharing refuses wrong cause, source link, evidence, row, references, added flag and producer snapshot', () => {
+  for (const mutate of [
+    (f: any) => { f.addition.causal_subject = 'lem-unrelated-producer'; },
+    (f: any) => { f.addition.same_defect_as = 'reader:1:999'; },
+    (f: any) => { f.addition.same_defect_evidence = 'Vague cause'; },
+    (f: any) => { f.ledger.subject = f.helper; },
+    (f: any) => { f.ledger.disposition = 'open'; },
+    (f: any) => { f.ledger.adjudication_ref.pop(); },
+    (f: any) => { f.ledger.adjudication_ref[0].path = 'research/r-alpha-other-5a-decisions.json'; },
+    (f: any) => { const path = join(f.root, 'research/r-step5-hash-2-post.json'); const post = JSON.parse(readFileSync(path, 'utf8')); const stabilized = JSON.parse(readFileSync(join(f.root, 'research/r-step5-hash-2-pre-5a.json'), 'utf8')); post.manifest.push(f.helper); post.hashes[f.helper] = stabilized.hashes[f.helper]; writeFileSync(path, JSON.stringify(post)); },
+    (f: any) => { const path = join(f.root, 'research/r-step5-scope-1.json'); const scope = JSON.parse(readFileSync(path, 'utf8')); scope.reader_findings[0].producer_pre_snapshot.sha256 = '0'.repeat(64); writeFileSync(path, JSON.stringify(scope)); },
+  ]) {
+    const f = foreignCausalHelperFixture(true);
+    try { mutate(f); f.write(); f.run('stamp', '--run', 'r'); assert.notEqual(f.attempt('check', '--run', 'r', '--phase', 'adjudicate').status, 0); }
+    finally { rmSync(f.root, { recursive: true, force: true }); }
+  }
+});

@@ -425,6 +425,21 @@ still differ from the immutable reader-post source; ordinary and unshared
 amendments retain their original source guards. This avoids demanding an
 artificial extra edit merely to recertify the already completed amendment.
 
+An actual added repair helper may causally close an existing exact
+`reader:BATCH:K` or `refuter:BATCH:K` finding in another group. Its
+`causal_subject` must name that original finding's subject; `same_defect_as`
+must name that exact obligation, with at least 40 characters explaining the
+actual causal repair. The helper's added target and completed repair verdict,
+actual finding/scope identity, source snapshot binding and current normal
+carrier checks remain mandatory. For an in-run producer, the recorded producer
+pre-reader path, raw snapshot hash and typed carrier must remain unchanged.
+The same repaired ledger row must name the original subject and retain both
+exact obligation references at their actual decision-file paths. Sharing works
+whether the helper group or finding group is checked first. An unrelated
+producer defect stays separate; helper creation never licenses relabelling a
+finding or manufacturing a defect row. Existing touched-consumer causal addition
+behavior is unchanged.
+
 The same rule admits a property-typed `page:BATCH:ID` accepted/amended repair
 with confidence one and an actual same-batch refuter finding. The page must be
 in the scope's changed-page and post-page inventories and the immutable

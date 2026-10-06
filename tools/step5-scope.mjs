@@ -1209,11 +1209,60 @@ if (command === 'check') {
             && ((prior.target?.severity === target?.severity
               && sameLocation(prior.target?.location, target?.location))
               || sameObservedCarrier);
-          const sharedCausalAddition = prior && target?.added
+          const sharedCausalAddition = prior && !['reader', 'flagged'].includes(prior.route) && target?.added
             && decision.same_defect_as === prior.obligation
             && decision.causal_subject === prior.id
             && typeof decision.same_defect_evidence === 'string'
             && decision.same_defect_evidence.trim();
+          // A genuine added repair helper can be encountered before the
+          // original cross-batch finding. Keep that causal sharing directional
+          // in evidence, but independent of group/decision iteration order.
+          const causalCurrent = { ...decision, target, decision_path: `research/${run}-alpha-${group.label}-5a-decisions.json` };
+          const causalHelper = prior?.target?.added === true ? prior : target?.added === true ? causalCurrent : null;
+          const causalFinding = causalHelper === prior ? causalCurrent : prior;
+          const causalMatch = /^(reader|refuter):([1-9]\d*):([1-9]\d*)$/.exec(causalFinding?.obligation ?? '');
+          let sharedFindingCausalAddition = false;
+          if (prior && causalHelper?.target?.added === true && causalMatch
+            && causalFinding.route === (causalMatch[1] === 'reader' ? 'reader' : 'flagged')
+            && causalHelper.same_defect_as === causalFinding.obligation && causalHelper.causal_subject === causalFinding.id
+            && typeof causalHelper.same_defect_evidence === 'string' && causalHelper.same_defect_evidence.trim().length >= 40
+            && ['accepted_repair', 'amended_repair'].includes(causalHelper.verdict)
+            && ['confirmed_fatal', 'confirmed_nonfatal'].includes(causalFinding.verdict)) {
+            const batch = causalMatch[2], scope = scopes[batch] ?? readJson(scopePath(batch), 'causal source finding scope');
+            const finding = scope[causalMatch[1] === 'reader' ? 'reader_findings' : 'refuter_findings']
+              ?.find(row => row.obligation === causalFinding.obligation);
+            const { route: _route, ...findingTarget } = causalFinding.target ?? {};
+            let sourceBinding = false;
+            if (finding?.subject_type === 'in-run-dependency') {
+              const producer = String(finding.producer_batch), path = hashPath(producer, 'pre');
+              const pre = readJson(path, 'causal producer immutable pre-reader snapshot');
+              sourceBinding = Boolean(producerCarrier(finding.id, producer))
+                && finding.producer_pre_snapshot?.path === `research/${run}-step5-hash-${producer}-pre.json`
+                && finding.producer_pre_snapshot.sha256 === sha256(readFileSync(path))
+                && hashSnapshotErrors(pre, producer, 'pre').length === 0
+                && hashValue(finding.producer_pre_snapshot.carrier) === hashValue({ producer_batch: producer, ...pre.hashes?.[finding.id] });
+            } else if (finding) {
+              const post = readJson(hashPath(batch, 'post'), 'causal source immutable reader-post snapshot');
+              const page = finding.subject_type === 'page' || (scope.page_manifest_post ?? []).includes(finding.id);
+              const observed = page ? post.page_hashes?.[finding.id] : post.hashes?.[finding.id];
+              sourceBinding = hashSnapshotErrors(post, batch, 'post').length === 0
+                && (page ? (scope.page_manifest_post ?? []).includes(finding.id) && (post.page_manifest ?? []).includes(finding.id)
+                  : (scope.manifest_post ?? []).includes(finding.id) && (post.manifest ?? []).includes(finding.id))
+                && (page ? ['file_sha256', 'manifest_sha256'] : ['item_sha256', 'contract_sha256', 'manifest_sha256'])
+                  .every(key => /^[a-f0-9]{64}$/.test(observed?.[key] ?? ''))
+                && finding.observed_sha256 === hashValue(page ? pageCarrier(observed) : observed);
+            }
+            const row = mine.find(row => row.defect_id === defectId);
+            const referencesBoth = [[causalHelper.decision_path, causalHelper.obligation], [causalFinding.decision_path, causalFinding.obligation]]
+              .every(([path, obligation]) => Array.isArray(row?.adjudication_ref)
+                && row.adjudication_ref.some(ref => ref?.path === path && ref.obligation === obligation));
+            sharedFindingCausalAddition = scope.version === 2 && scope.run === run && String(scope.batch) === batch
+              && finding?.id === causalFinding.id && hashValue(finding) === hashValue(findingTarget) && sourceBinding
+              && (causalMatch[1] !== 'refuter' || (scope.refuter_scope ?? []).includes(causalFinding.id))
+              && row?.subject === causalFinding.id && row.caught_at_stage === '5a-adjudicate'
+              && ['fixed', 'narrowed', 'dropped'].includes(row.disposition) && referencesBoth
+              && (causalFinding.verdict === 'confirmed_fatal' ? row.severity === 'fatal' : row.severity !== 'fatal');
+          }
           // One historical supplier defect may be the producer's reader
           // repair and another batch's uneditable reader finding. Retain both
           // obligations without manufacturing a second defect-ledger row.
@@ -1370,11 +1419,12 @@ if (command === 'check') {
               && (originalDecision.verdict === 'confirmed_fatal' ? row.severity === 'fatal' : row.severity !== 'fatal');
           }
           if (sharedStabilizedRepair) recognizedStabilizedShares.add(stabilizedRepair.obligation);
-          if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair && !sharedPostReaderRepair && !sharedReclassifiedFinding && !sharedStabilizedRepair) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
+          if (prior && !sharedFinding && !sharedCausalAddition && !sharedProducerRepair && !sharedPostReaderRepair && !sharedReclassifiedFinding && !sharedStabilizedRepair && !sharedFindingCausalAddition) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
           if (!prior) referenced.set(defectId, {
             obligation: decision.obligation, id: decision.id, route: decision.route, verdict: decision.verdict, target,
             same_defect_as: decision.same_defect_as, same_defect_evidence: decision.same_defect_evidence,
-            repair_confidence: decision.repair_confidence,
+            repair_confidence: decision.repair_confidence, causal_subject: decision.causal_subject,
+            decision_path: `research/${run}-alpha-${group.label}-5a-decisions.json`,
           });
           const row = mine.find((candidate) => candidate.defect_id === defectId);
           if (!row) { error('ledger-ref-missing', `[${decision.id}] ${decision.obligation} names absent ${defectId}`); continue; }
