@@ -95,8 +95,41 @@ recorded and certification refreshed, currency checks fail. A later native
 Step-7/8 promotion still requires its genuine dispatch and item-specific stage
 delta; its `origin_step: 5` recursively validates this original owner evidence.
 Every downstream scope, coverage, guard and judge-stamp consumer uses the
-shared validating loader. Original source artifacts must remain byte-stable;
-changed source evidence is an error, never implicit reauthorization.
+shared validating loader. Original source artifacts must remain byte-stable unless the supported exact-byte
+archive command below preserves their bound historical bytes before mutation.
+Changed source evidence without that archive remains an error, never implicit
+reauthorization.
+
+## Historical source archive before a genuine owner resolution
+
+A genuine canonical decision file can be mutable while an owner creation origin
+binds its historical escalation bytes. Before updating that canonical decision,
+explicitly preserve the exact current original bytes for each affected origin:
+
+```sh
+node tools/auditor-created-items.mjs owner-source-archive --run RUN --step 5 --id ITEM --source research/ORIGINAL_SOURCE.json --owner-identity /root --reason "Actual reason for preserving historical escalation before owner resolution"
+```
+
+This narrowly supersedes the source-path-must-never-change rule only for the
+exact source bound by the immutable Step-5 owner creation origin. The command
+requires the source's current raw SHA256 to equal the origin's original source
+hash. It writes an immutable raw-byte archive and owner receipt under
+`research/`, using exclusive creation and read-only permissions. The receipt
+binds run, step, item, the unchanged origin path and raw hash, original source
+path and hash, archive path and the identical raw hash, actual observation time,
+owner identity and reason. It refuses archival after source mutation; it cannot
+recover missing historical bytes or bless changed evidence.
+
+The shared provenance loader resolves an explicitly valid archive against that
+exact immutable origin/source binding. It rejects changed archive bytes,
+cross-run/item receipts, altered origin links, different original source paths,
+and mismatching hashes. Without an archive receipt, strict original-source hash
+validation remains mandatory. A corrupt archive never falls back to the current
+source. The immutable creation origin, native dispatch histories and historical
+evidence remain unchanged; actual canonical owner resolutions may then update
+the genuine mutable decision file. This archive grants no current mathematical
+acceptance, carrier currency, native authorship or gate bypass; changed item,
+manifest and contract carriers retain their existing recertification rules.
 
 ## Missing historical definition manifest projection
 

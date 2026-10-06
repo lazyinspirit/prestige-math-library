@@ -51,7 +51,64 @@ const researchFile = (root, path) => {
   return file;
 };
 
-function validateOwnerCreation(root, run, id, receipt) {
+const OWNER_SOURCE_ARCHIVE_POLICY = 'owner-creation-source-archive-v1';
+const ownerSourceArchivePaths = (root, run, id, originSha, source) => {
+  const stem = `${safe(run, 'run')}-step5-owner-source-archive-${safe(id, 'item ID')}-${hashValue({ origin_sha256: originSha, source: { path: source.path, sha256: source.sha256 } })}`;
+  return { receipt: join(root, 'research', `${stem}.json`), archive: join(root, 'research', `${stem}.source`) };
+};
+function archivedOwnerSource(root, run, id, originSha, source) {
+  const paths = ownerSourceArchivePaths(root, run, id, originSha, source);
+  if (!existsSync(paths.receipt)) return null;
+  const receipt = read(researchFile(root, paths.receipt));
+  const originPath = `research/${ownerCreationPath(root, run, id).split('/').at(-1)}`;
+  const archivePath = `research/${paths.archive.split('/').at(-1)}`;
+  if (Object.keys(receipt).some(key => !['version', 'policy', 'run', 'step', 'id', 'owner', 'owner_identity', 'at', 'reason', 'origin', 'source', 'archive'].includes(key))
+    || receipt.version !== 1 || receipt.policy !== OWNER_SOURCE_ARCHIVE_POLICY
+    || receipt.run !== run || receipt.step !== 5 || receipt.id !== id || receipt.owner !== true
+    || typeof receipt.owner_identity !== 'string' || !receipt.owner_identity.trim()
+    || !Number.isFinite(Date.parse(receipt.at)) || !String(receipt.reason ?? '').trim()
+    || receipt.origin?.path !== originPath || receipt.origin?.sha256 !== originSha
+    || receipt.source?.path !== source.path || receipt.source?.sha256 !== source.sha256
+    || receipt.archive?.path !== archivePath || receipt.archive?.sha256 !== source.sha256)
+    throw Error(`${id}: invalid owner creation source archive binding`);
+  const bytes = readFileSync(researchFile(root, receipt.archive.path));
+  if (sha(bytes) !== source.sha256) throw Error(`${id}: stale owner creation source archive`);
+  return bytes;
+}
+
+// Preserve exact historical bytes before changing a genuine mutable source.
+// This records no native dispatch, mathematical judgment, or new creation.
+export function recordOwnerSourceArchive(root, run, step, id, sourcePath, ownerIdentity, reason) {
+  if (Number(step) !== 5) throw Error('Owner source archive supports Step 5 only');
+  safe(run, 'run'); safe(id, 'item ID');
+  if (!String(ownerIdentity ?? '').trim() || !String(reason ?? '').trim()) throw Error('Owner identity and reason are required');
+  const creation = ownerCreation(root, run, id);
+  if (!creation) throw Error(`${id}: missing immutable owner creation origin`);
+  const source = creation.receipt.sources.find(row => row.path === sourcePath);
+  if (!source || creation.receipt.sources.some(row => row.path === sourcePath && row.sha256 !== source.sha256))
+    throw Error(`${id}: source is not bound by immutable owner creation origin`);
+  const bytes = readFileSync(researchFile(root, source.path));
+  if (sha(bytes) !== source.sha256) throw Error(`${id}: source must match original hash before archive`);
+  const originSha = creation.marker.sha256;
+  const paths = ownerSourceArchivePaths(root, run, id, originSha, source);
+  const prior = archivedOwnerSource(root, run, id, originSha, source);
+  if (prior) return { path: paths.receipt, archive: paths.archive, reused: true };
+  const receipt = { version: 1, policy: OWNER_SOURCE_ARCHIVE_POLICY, run, step: 5, id,
+    owner: true, owner_identity: ownerIdentity, at: new Date().toISOString(), reason,
+    origin: creation.marker, source: { path: source.path, sha256: source.sha256 },
+    archive: { path: `research/${paths.archive.split('/').at(-1)}`, sha256: source.sha256 } };
+  if (existsSync(paths.archive)) {
+    if (sha(readFileSync(researchFile(root, paths.archive))) !== source.sha256) throw Error(`${id}: refusing different existing source archive`);
+  } else writeFileSync(paths.archive, bytes, { flag: 'wx', mode: 0o444 });
+  // Recheck the origin and source just before committing the immutable receipt.
+  if (sha(readFileSync(ownerCreationPath(root, run, id))) !== originSha
+    || sha(readFileSync(researchFile(root, source.path))) !== source.sha256)
+    throw Error(`${id}: source/origin changed during archival`);
+  writeFileSync(paths.receipt, `${JSON.stringify(receipt, null, 2)}\n`, { flag: 'wx', mode: 0o444 });
+  return { path: paths.receipt, archive: paths.archive, reused: false };
+}
+
+function validateOwnerCreation(root, run, id, receipt, originSha = null) {
   const baseline = stageBaseline(root, run, 5);
   const timeline = receipt?.author?.timeline;
   const at = Date.parse(receipt?.attested_at), baselineAt = Date.parse(baseline.at);
@@ -84,9 +141,10 @@ function validateOwnerCreation(root, run, id, receipt) {
   for (const source of receipt.sources) {
     if (!['assignment', 'escalation', 'authorship'].includes(source.role)
       || !/^[a-f0-9]{64}$/.test(source.sha256 ?? '')) throw Error(`${id}: invalid owner creation source`);
-    const bytes = readFileSync(researchFile(root, source.path), 'utf8');
+    const bytes = originSha ? archivedOwnerSource(root, run, id, originSha, source)
+      ?? readFileSync(researchFile(root, source.path)) : readFileSync(researchFile(root, source.path));
     if (sha(bytes) !== source.sha256) throw Error(`${id}: stale owner creation source`);
-    texts.push(bytes);
+    texts.push(bytes.toString('utf8'));
   }
   if (!['assignment', 'escalation', 'authorship'].every(role => receipt.sources.some(s => s.role === role))
     || ![run, id, receipt.author.identity, receipt.owner_held_escalation]
@@ -98,7 +156,7 @@ function ownerCreation(root, run, id, marker = null) {
   const path = ownerCreationPath(root, run, id);
   if (!existsSync(path)) return null;
   const bytes = readFileSync(path, 'utf8');
-  const receipt = validateOwnerCreation(root, run, id, JSON.parse(bytes));
+  const receipt = validateOwnerCreation(root, run, id, JSON.parse(bytes), sha(bytes));
   const link = { path: `research/${path.split('/').at(-1)}`, sha256: sha(bytes) };
   if (marker && (marker.path !== link.path || marker.sha256 !== link.sha256))
     throw Error(`${id}: invalid owner creation provenance link`);
@@ -1055,18 +1113,21 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const args = process.argv.slice(2), command = args[0];
     const value = flag => { const at = args.indexOf(flag); return at < 0 ? undefined : args[at + 1]; };
     const run = value('--run'), step = Number(value('--step'));
-    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7|8; owner-create --run RUN --step 5 --id ITEM --evidence research/JSON; owner-recertify --run RUN --step 5|7|8 --id ITEM --evidence research/FILE --reason TEXT';
+    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7|8; owner-create --run RUN --step 5 --id ITEM --evidence research/JSON; owner-source-archive --run RUN --step 5 --id ITEM --source research/FILE --owner-identity OWNER --reason TEXT; owner-recertify --run RUN --step 5|7|8 --id ITEM --evidence research/FILE --reason TEXT';
     if (!run || ![5, 7, 8].includes(step)) throw Error(usage);
     const result = command === 'baseline'
       ? writeAuditorCreatedBaseline(process.cwd(), run, step)
       : command === 'certify' ? certifyAuditorCreatedItems(process.cwd(), run, step)
         : command === 'owner-create'
           ? recordOwnerCreation(process.cwd(), run, step, value('--id'), value('--evidence'))
+        : command === 'owner-source-archive'
+          ? recordOwnerSourceArchive(process.cwd(), run, step, value('--id'), value('--source'), value('--owner-identity'), value('--reason'))
         : command === 'owner-recertify'
           ? recordOwnerRecertification(process.cwd(), run, step, value('--id'), value('--evidence'), value('--reason'))
           : null;
     if (!result) throw Error(usage);
-    if (['owner-recertify', 'owner-create'].includes(command)) console.log(`step${step}-${command === 'owner-create' ? 'owner-creation' : 'owner-recertification'}: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
+    if (command === 'owner-source-archive') console.log(`step5-owner-source-archive: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
+    else if (['owner-recertify', 'owner-create'].includes(command)) console.log(`step${step}-${command === 'owner-create' ? 'owner-creation' : 'owner-recertification'}: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
     else console.log(`step${step}-auditor-${command === 'baseline' ? 'baseline' : 'certifications'}: ${result.items.length ?? result.items} item(s) ${result.reused ? 'reused' : command === 'baseline' ? 'recorded' : 'certified'}`);
   } catch (error) {
     console.error(error.message);

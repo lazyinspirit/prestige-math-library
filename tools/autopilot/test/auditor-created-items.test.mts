@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, utimesSync, rmSync, copyFileSync, symlinkSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, utimesSync, rmSync, copyFileSync, symlinkSync, chmodSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
@@ -13,6 +13,7 @@ import {
   authorResultAllowed,
   recordOwnerRecertification,
   recordOwnerCreation,
+  recordOwnerSourceArchive,
 } from '../../auditor-created-items.mjs';
 import { writeAuditorBaseline, certifyAuditorItems, registerOwnerPairSplit, ownerPairSplitScopes } from '../../step3-auditor-items.mjs';
 import { recordStep3, loadStep3, scopeHash, scopeDecision } from '../../step3-decisions.mjs';
@@ -1563,5 +1564,58 @@ test('registration permits unrelated author additions but rejects stealing anoth
     f.write();
     if (steal) assert.throws(() => registerOwnerPairSplit(f.root, 'r', f.input), /unrelated original item/);
     else assert.equal(registerOwnerPairSplit(f.root, 'r', f.input).split.items.length, 2);
+  }
+});
+
+test('exact historical owner source archive permits genuine canonical updates without changing origin', t => {
+  const f = ownerCreationFixture(t);
+  const source = 'research/owner-source.md';
+  recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence);
+  const originPath = join(f.root, `research/r-step5-owner-creation-${f.id}.json`);
+  const originalOrigin = readFileSync(originPath), originalSource = readFileSync(join(f.root, source));
+  const certificate = join(f.root, 'research/r-step5-auditor-certifications.json');
+  certifyAuditorCreatedItems(f.root, 'r', 5);
+  const archive = recordOwnerSourceArchive(f.root, 'r', 5, f.id, source, '/root', 'Preserve actual escalation before genuine owner resolution');
+  assert.equal(archive.reused, false);
+  assert.deepEqual(readFileSync(archive.archive), originalSource);
+  assert.equal(recordOwnerSourceArchive(f.root, 'r', 5, f.id, source, '/root', 'Same historical source').reused, true);
+  writeFileSync(join(f.root, source), 'Genuine updated owner resolution');
+  assert.equal(loadAuditorCreatedCertifications(certificate).length, 1);
+  assert.equal(certifyAuditorCreatedItems(f.root, 'r', 5).items.length, 1);
+  assert.deepEqual(readFileSync(originPath), originalOrigin);
+  assert.throws(() => recordOwnerSourceArchive(f.root, 'r', 5, f.id, source, '/root', 'Too late'), /before archive/);
+  writeFileSync(f.path, item(f.id).replace('Immediate.', 'Changed current proof.'));
+  assert.throws(() => loadAuditorCreatedCertifications(certificate), /stale Step 5/);
+});
+
+test('archive command rejects changed, unbound, cross-run and non-Step-5 sources', t => {
+  const f = ownerCreationFixture(t);
+  recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence);
+  assert.throws(() => recordOwnerSourceArchive(f.root, 'other', 5, f.id, 'research/owner-source.md', '/root', 'Reason'));
+  assert.throws(() => recordOwnerSourceArchive(f.root, 'r', 7, f.id, 'research/owner-source.md', '/root', 'Reason'));
+  assert.throws(() => recordOwnerSourceArchive(f.root, 'r', 5, f.id, 'research/unbound.md', '/root', 'Reason'));
+  assert.throws(() => recordOwnerSourceArchive(f.root, 'r', 5, f.id, 'research/owner-source.md', '', 'Reason'));
+  writeFileSync(join(f.root, 'research/owner-source.md'), 'Already changed');
+  assert.throws(() => recordOwnerSourceArchive(f.root, 'r', 5, f.id, 'research/owner-source.md', '/root', 'Reason'), /stale owner creation source/);
+});
+
+test('archive bytes, receipt identity and immutable-origin binding fail closed on tamper', t => {
+  for (const mutate of [
+    (f: any, a: any) => writeFileSync(a.archive, 'Fabricated archive'),
+    (f: any, a: any) => { const row = JSON.parse(readFileSync(a.path, 'utf8')); row.run = 'other'; writeFileSync(a.path, JSON.stringify(row)); },
+    (f: any, a: any) => { const row = JSON.parse(readFileSync(a.path, 'utf8')); row.origin.sha256 = '0'.repeat(64); writeFileSync(a.path, JSON.stringify(row)); },
+    (f: any, a: any) => { const row = JSON.parse(readFileSync(a.path, 'utf8')); row.source.path = 'research/different-source.md'; writeFileSync(a.path, JSON.stringify(row)); },
+    (f: any, a: any) => { const row = JSON.parse(readFileSync(a.path, 'utf8')); row.archive.path = '../outside.md'; writeFileSync(a.path, JSON.stringify(row)); },
+    (f: any, a: any) => { const path = join(f.root, `research/r-step5-owner-creation-${f.id}.json`); const row = JSON.parse(readFileSync(path, 'utf8')); row.reason += ' changed'; writeFileSync(path, JSON.stringify(row)); },
+  ]) {
+    const f = ownerCreationFixture(t);
+    recordOwnerCreation(f.root, 'r', 5, f.id, f.evidence);
+    certifyAuditorCreatedItems(f.root, 'r', 5);
+    const a = recordOwnerSourceArchive(f.root, 'r', 5, f.id, 'research/owner-source.md', '/root', 'Preserve original');
+    // Make files writable solely to model deliberate tampering with immutable artifacts.
+    chmodSync(a.archive, 0o600); chmodSync(a.path, 0o600);
+    mutate(f, a);
+    writeFileSync(join(f.root, 'research/owner-source.md'), 'Genuine updated resolution');
+    assert.throws(() => loadAuditorCreatedCertifications(join(f.root, 'research/r-step5-auditor-certifications.json')));
   }
 });
