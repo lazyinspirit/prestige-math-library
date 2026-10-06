@@ -1093,6 +1093,37 @@ if (command === 'check') {
     const earlyRows = mine.filter((row) => ['5a-adjudicate'].includes(row.caught_at_stage));
     const referenced = new Map();
     const stabilizedChecks = [];
+    const findingSourceClasses = new Map();
+    function findingSourceClass(claim) {
+      const match = /^(reader|refuter):([1-9]\d*):([1-9]\d*)$/.exec(claim?.obligation ?? '');
+      if (!match || claim.route !== (match[1] === 'reader' ? 'reader' : 'flagged')) return null;
+      const key = `${claim.obligation}:${hashValue(claim.target)}`;
+      if (findingSourceClasses.has(key)) return findingSourceClasses.get(key);
+      const batch = match[2], scope = scopes[batch] ?? readJson(scopePath(batch), 'native finding source class');
+      const finding = scope[match[1] === 'reader' ? 'reader_findings' : 'refuter_findings']
+        ?.find(row => row.obligation === claim.obligation);
+      const { route: _route, ...target } = claim.target ?? {};
+      let kind = null;
+      if (scope.version === 2 && scope.run === run && String(scope.batch) === batch
+        && finding?.id === claim.id && hashValue(finding) === hashValue(target)) {
+        if (typeof finding.subject_type === 'string') kind = finding.subject_type;
+        else if (match[1] === 'refuter' && (scope.refuter_scope ?? []).includes(claim.id)) {
+          // Ordinary native refuters predate subject_type. Resolve that absent
+          // optional field from their actual typed immutable reader-post source;
+          // an in-run producer or a forged class cannot use this inference.
+          const post = readJson(hashPath(batch, 'post'), 'native refuter source class snapshot');
+          const page = (scope.page_manifest_post ?? []).includes(claim.id) && (post.page_manifest ?? []).includes(claim.id);
+          const item = (scope.manifest_post ?? []).includes(claim.id) && (post.manifest ?? []).includes(claim.id);
+          const observed = page ? post.page_hashes?.[claim.id] : post.hashes?.[claim.id];
+          if (page !== item && hashSnapshotErrors(post, batch, 'post').length === 0
+            && (page ? ['file_sha256', 'manifest_sha256'] : ['item_sha256', 'contract_sha256', 'manifest_sha256'])
+              .every(field => /^[a-f0-9]{64}$/.test(observed?.[field] ?? ''))
+            && finding.observed_sha256 === hashValue(page ? pageCarrier(observed) : observed)) kind = page ? 'page' : 'in-flight-item';
+        }
+      }
+      findingSourceClasses.set(key, kind);
+      return kind;
+    }
     const liveByBatch = new Map();
     const contractsByBatch = new Map();
     const ownableSubjects = new Set();
@@ -1218,7 +1249,8 @@ if (command === 'check') {
             && ['reader', 'flagged'].includes(prior.route)
             && ['reader', 'flagged'].includes(decision.route)
             && prior.verdict === decision.verdict
-            && prior.target?.subject_type === target?.subject_type
+            && findingSourceClass(prior) !== null
+            && findingSourceClass(prior) === findingSourceClass({ ...decision, target })
             && prior.target?.defect === target?.defect
             && ((prior.target?.severity === target?.severity
               && sameLocation(prior.target?.location, target?.location))

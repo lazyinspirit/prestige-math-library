@@ -465,6 +465,11 @@ the first decision. Every claim still needs its real native scope/source binding
 current carrier, severity/disposition and applicable exact ledger references.
 A matching item ID or producer preimage alone does not create a same-defect link;
 explicit evidence and compatible typed source classes remain required.
+Ordinary native refuter records may omit their optional `subject_type`. The
+sharing validator resolves this omission only from the exact native scope row,
+its actual refuter assignment and the uniquely typed immutable reader-post
+item/page carrier matching the recorded observed hash. Explicit source classes
+remain unchanged; foreign producer findings cannot masquerade as local items.
 
 The same rule admits a property-typed `page:BATCH:ID` accepted/amended repair
 with confidence one and an actual same-batch refuter finding. The page must be

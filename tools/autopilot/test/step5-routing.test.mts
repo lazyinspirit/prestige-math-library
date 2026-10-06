@@ -1043,7 +1043,7 @@ test('Step5 uses validated active ledger ownership without erasing historical ro
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 
-function stabilizedSharingFixture(kind: 'reader' | 'refuter', reverse = false, peers = 0, page = false) {
+function stabilizedSharingFixture(kind: 'reader' | 'refuter', reverse = false, peers = 0, page = false, sameDefect = false) {
   const fx = fixture(), id = page ? 'p' : 'lem-ordinary-item', original = `${kind}:1:1`, amendment = `post-reader:1:${id}`;
   const finding = { id, location: 'Statement', defect: 'false-claim', evidence: 'Exact source defect requiring the later owner amendment.', severity: 'fatal' };
   if (kind === 'reader') writeFileSync(join(fx.root, 'research/r-reader-findings-1.json'), JSON.stringify({ batch: '1', coverage_note: 'Actual source read.', findings: [{ ...finding, subject_type: page ? 'page' : 'in-flight-item' }] }));
@@ -1051,7 +1051,7 @@ function stabilizedSharingFixture(kind: 'reader' | 'refuter', reverse = false, p
   fx.run('post-reader', '--run', 'r', '--batch', '1');
   let scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
   writeFileSync(join(fx.root, 'research/r-refute-1.json'), JSON.stringify({ batch: '1', opened: scope.refuter_scope,
-    not_opened: [], coverage_note: 'Actual source opened.', flagged: kind === 'refuter' ? [finding] : Array.from({ length: peers }, (_, n) => ({ ...finding, location: `Proof claim ${n + 1}`, defect: 'unlicensed-inference' })) }));
+    not_opened: [], coverage_note: 'Actual source opened.', flagged: kind === 'refuter' ? [finding] : Array.from({ length: peers }, (_, n) => ({ ...finding, location: `Proof claim ${n + 1}`, defect: sameDefect ? finding.defect : 'unlicensed-inference' })) }));
   fx.run('collect', '--run', 'r', '--batch', '1');
   scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step5-scope-1.json'), 'utf8'));
   const snapshotPath = join(fx.root, 'research/r-step5-hash-1-post.json'), immutablePost = readFileSync(snapshotPath);
@@ -1268,4 +1268,37 @@ for (const producerFirst of [true, false]) test(`producer touched repair and two
       assert.match(f.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
     }
   } finally { rmSync(f.root, { recursive: true, force: true }); }
+});
+
+for (const page of [false, true]) test(`legacy native refuter omitted class resolves from exact immutable ${page ? 'page' : 'item'} carrier`, () => {
+  const f = stabilizedSharingFixture('reader', false, 2, page, true);
+  try {
+    const path = join(f.root, 'research/r-step5-scope-1.json'), native = readFileSync(path);
+    const scope = JSON.parse(native.toString());
+    assert.ok(scope.refuter_findings.every((row: any) => row.subject_type === undefined));
+    for (const order of permutations([...f.doc.decisions])) {
+      f.doc.decisions = order; f.write(); f.run('stamp', '--run', 'r');
+      assert.match(f.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+    }
+    assert.deepEqual(readFileSync(path), native);
+    assert.deepEqual(readFileSync(f.snapshotPath), f.immutablePost);
+  } finally { rmSync(f.root, { recursive: true, force: true }); }
+});
+
+test('omitted native refuter class inference refuses source, scope, observation and declared-class tampering', () => {
+  for (const mutate of [
+    (scope: any, post: any) => { scope.refuter_scope = scope.refuter_scope.filter((id: string) => id !== 'lem-ordinary-item'); },
+    (scope: any, post: any) => { post.manifest = post.manifest.filter((id: string) => id !== 'lem-ordinary-item'); },
+    (scope: any, post: any) => { post.hashes['lem-ordinary-item'].item_sha256 = '0'.repeat(64); },
+    (scope: any, post: any) => { scope.refuter_findings[0].observed_sha256 = '0'.repeat(64); },
+    (scope: any, post: any) => { scope.refuter_findings[0].subject_type = 'in-run-dependency'; },
+  ]) {
+    const f = stabilizedSharingFixture('reader', false, 1, false, true);
+    try {
+      const path = join(f.root, 'research/r-step5-scope-1.json'), scope = JSON.parse(readFileSync(path, 'utf8'));
+      const post = JSON.parse(readFileSync(f.snapshotPath, 'utf8')); mutate(scope, post);
+      writeFileSync(path, JSON.stringify(scope)); writeFileSync(f.snapshotPath, JSON.stringify(post));
+      assert.notEqual(f.attempt('check', '--run', 'r', '--phase', 'adjudicate').status, 0);
+    } finally { rmSync(f.root, { recursive: true, force: true }); }
+  }
 });
