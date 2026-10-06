@@ -489,8 +489,11 @@ validation uses the same selected page scope, including before scaffold item
 lists are populated; it checks the frontier's declarations without gating
 unrelated plan entries.
 
-Step-5 closure and Step-9 pathway gates use the same frontier selectors.
-The scoped prose check includes existing pathways of selected categories.
+Step-5 closure, Step-8 impact closure and Step-9 pathway gates use the same
+frontier selectors. Step-8 impact closure keeps the cumulative `pre-author`
+to latest snapshot window and its existing receipt, with full supplier context
+and only selected consumers as review subjects. The scoped prose check includes
+existing pathways of selected categories.
 
 Step-5 published-dependency findings outside the manifest inventory may close
 only their owned consumer use through `context_accepted`. The root receipt binds

@@ -2182,7 +2182,7 @@ export const stages = [
       auditorCreatedGate(ctx, 8),
       manifestDepsGate(ctx),
       gate('splice-verify', ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--verify']),
-      gate('impact-receipt', ['node', 'tools/impact-audit.mjs',
+      frontierItemGate(ctx, 'impact-receipt', 'impact-audit', [
         '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
         '--direct-boundary',
         '--receipt', `research/${ctx.run}-impact.json`]),
