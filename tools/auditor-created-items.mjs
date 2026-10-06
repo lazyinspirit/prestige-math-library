@@ -358,6 +358,257 @@ function closedStep5LacunaryBootstrap(root, run, id, hashes, receipt, evidenceTe
   } catch { return null; }
 }
 
+// Load only this sealed owner origin after its authenticated native Step-7
+// supplier-quotation update. The old receipt remains immutable; inverse replay
+// must recover its exact contract, and current native certification is separate.
+function closedStep5GrandMaximalBootstrap(root, run, id, hashes, receipt, evidenceText) {
+  if (run !== 'frontier-39-analysis-30'
+    || id !== 'lem-grand-maximal-function-is-dominated-by-the-tangential-maximal-function'
+    || receipt.basis !== 'initial-step5-authenticated-native-input-manifest-mirror') return null;
+  try {
+    const closure = read(join(root, 'research', `${run}-step5-closure.json`));
+    const closedAt = Date.parse(closure.closed_at);
+    const closeResult = read(join(root, 'research', `${run}-dispatch`, 'tool-step5-close.result.json'));
+    if (closure.version !== 2 || closure.run !== run || closure.status !== 'closed'
+      || !Number.isFinite(closedAt) || !(Date.parse(receipt.at) <= closedAt)
+      || closure.final_item_hashes?.[id] !== hashes.guard_sha256
+      || closeResult.run !== run || closeResult.role !== 'tool' || closeResult.label !== 'step5-close'
+      || closeResult.ok !== true || closeResult.written_by !== 'autopilot'
+      || !closeResult.covers?.includes('all') || !(Date.parse(closeResult.ended_at) >= closedAt)) return null;
+    const artifacts = Object.entries(closure.artifacts ?? {});
+    if (!artifacts.length || artifacts.some(([path, expected]) =>
+      !/^[a-f0-9]{64}$/.test(expected ?? '')
+      || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
+    const boundary = stageBaseline(root, run, 7), before = boundary.item_carriers?.[id];
+    if (!before || before.batch !== '5' || before.page !== 'real-hardy-spaces-maximal-functions-and-atoms'
+      || !(Date.parse(boundary.at) >= closedAt)
+      || CARRIER_KEYS.some(key => before[key] !== hashes[key])) return null;
+    const frozenPath = `research/${run}-step5-hash-5-post-5a.json`;
+    if (!closure.artifacts[frozenPath]) return null;
+    const frozen = read(researchFile(root, frozenPath)), carrier = frozen.hashes?.[id];
+    if (frozen.run !== run || String(frozen.batch) !== '5' || frozen.label !== 'post-5a'
+      || carrier?.item_sha256 !== hashes.item_file_sha256
+      || carrier.manifest_sha256 !== hashes.manifest_sha256
+      || carrier.contract_sha256 !== hashes.contract_sha256) return null;
+    const live = inventory(root, run).find(row => row.id === id);
+    if (!live || live.page !== before.page || live.batch !== before.batch
+      || !dependencyMetadataMirrorsItem(root, id, live.manifest_entry)
+      || !sourceMetadataMirrorsItem(root, id, live.manifest_entry)) return null;
+    const current = carrierHashes(root, run, live);
+    if (['guard_sha256', 'judge_sha256', 'item_file_sha256', 'manifest_sha256']
+      .some(key => current[key] !== hashes[key]) || current.contract_sha256 === hashes.contract_sha256) return null;
+    const after = stageBaseline(root, run, 8).item_carriers?.[id];
+    if (!after || after.page !== live.page || after.batch !== live.batch
+      || CARRIER_KEYS.some(key => after[key] !== current[key])) return null;
+    const certificate = read(join(root, 'research', `${run}-step7-v2`, 'certification.json'));
+    const { sha256, ...payload } = certificate;
+    const item = certificate.items?.find(row => row.id === id);
+    if (certificate.version !== 2 || certificate.run !== run || sha256 !== sha(JSON.stringify(payload))
+      || !item || item.guard_sha256 !== current.guard_sha256 || item.item_sha256 !== current.judge_sha256) return null;
+    const now = currentHashesMany(root, [id]).get(id);
+    if (!now || now.item_sha256 !== item.item_sha256 || now.context_sha256 !== item.context_sha256) return null;
+    const nativeEvidence = Object.entries(certificate.evidence ?? {});
+    if (!nativeEvidence.length || nativeEvidence.some(([path, expected]) =>
+      !/^[a-f0-9]{64}$/.test(expected ?? '')
+      || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
+    const bound = path => nativeEvidence.some(([candidate, expected]) =>
+      resolve(root, candidate) === resolve(root, path) && expected === sha(readFileSync(researchFile(root, path))));
+    const reportPath = `research/${run}-step7-v2/step7-v2-impact-initial-r1-u1.json`;
+    const packPath = `research/${run}-step7-v2/impact-initial-1.json`;
+    const resultPath = `research/${run}-dispatch/alpha-repair-step7-v2-impact-initial-r1-u1.result.json`;
+    const closedPath = `research/${run}-step7-v2/impact-initial-1-closed.json`;
+    if (![reportPath, packPath, resultPath, closedPath].every(bound)) return null;
+    const report = read(researchFile(root, reportPath)), pack = read(researchFile(root, packPath));
+    const result = read(researchFile(root, resultPath)), closed = read(researchFile(root, closedPath));
+    const reviews = report.reviews?.filter(row => row.id === id), review = reviews?.[0];
+    if (report.run !== run || report.phase !== 'impact-initial' || report.round !== 1 || String(report.unit) !== '1'
+      || report.input_sha256 !== sha(JSON.stringify(pack))
+      || pack.run !== run || pack.phase !== report.phase || pack.round !== report.round
+      || pack.before?.[id] !== hashes.guard_sha256 || !pack.assignments?.['1']?.includes(id)
+      || !pack.impacts?.some(row => row.id === id
+        && sameCanonical(row.suppliers, ['def-grand-maximal-test-class-of-order-n']))
+      || result.run !== run || result.role !== 'alpha-repair' || !authorResultAllowed(7, result)
+      || result.label !== 'step7-v2-impact-initial-r1-u1' || !result.covers.includes('1')
+      || reviews?.length !== 1 || review.disposition !== 'unaffected' || review.metadata_repair_only !== true
+      || review.uncertain !== false || review.post_sha256 !== current.guard_sha256
+      || review.reason !== item.reason || closed.run !== run || closed.errors?.length !== 0
+      || !closed.reviews?.some(row => sameCanonical(row, review))) return null;
+    const evidence = step5ManifestRepairEvidence(evidenceText), native = evidence?.native_review;
+    const logBytes = readFileSync(researchFile(root, native?.log?.path), 'utf8');
+    if (sha(logBytes) !== native.log.sha256) return null;
+    const contract = contractEntry(join(root, 'research', `${run}-batch-5.proof-contracts.json`), id);
+    const citations = contract?.citations?.filter(row => row.fact === 'F3'
+      && row.source === 'def-grand-maximal-test-class-of-order-n');
+    const citation = citations?.[0];
+    const supplierText = readFileSync(join(root, 'items', 'def-grand-maximal-test-class-of-order-n.md'), 'utf8');
+    const supplierClaim = supplierText.match(/^## Definition\s*\r?\n([\s\S]*?)(?=^## |$(?![\s\S]))/m)?.[1]?.trim();
+    if (contract.citations.length !== 4 || citations.length !== 1 || citation.fact !== 'F3'
+      || citation.source !== 'def-grand-maximal-test-class-of-order-n'
+      || citation.source_section !== 'Definition' || citation.quote !== supplierClaim
+      || !sameCanonical(citation.uses, ['1.1', '2.1'])) return null;
+    // The successful native Step-5 log printed the raw supplier Definition.
+    // Its exact bytes, bounded by the next section/frontmatter/native event,
+    // must invert only this F3 quote to the sealed historical full contract.
+    const recovered = new Map();
+    for (const marker of logBytes.matchAll(/^id: def-grand-maximal-test-class-of-order-n$/gm)) {
+      const tail = logBytes.slice(marker.index + marker[0].length);
+      const section = tail.match(/^## Definition\s*\r?\n([\s\S]*?)(?=^## |^---$|^### |^exec$|^thinking$|^codex$|$(?![\s\S]))/m);
+      if (!section) continue;
+      const quote = section[1].trim(), candidate = structuredClone(contract);
+      candidate.citations.find(row => row.fact === 'F3'
+        && row.source === 'def-grand-maximal-test-class-of-order-n').quote = quote;
+      if (hashValue(candidate) === hashes.contract_sha256) recovered.set(quote, candidate);
+    }
+    if (recovered.size !== 1) return null;
+    const historicalContract = [...recovered.values()][0];
+    return bootstrapStep5Author(root, run, id, live, hashes, evidenceText, { historicalContract });
+  } catch { return null; }
+}
+
+
+// The native Step-7 cone repair changed this carried item's mathematical
+// interface. Load its sealed Step-5 owner receipt only as historical origin,
+// using exact old carriers and a separate current native proof/context seal.
+function closedStep5TruncatedBootstrap(root, run, id, hashes, receipt, evidenceText) {
+  if (run !== 'frontier-39-analysis-30'
+    || id !== 'lem-truncated-maximal-function-estimates'
+    || receipt.basis !== 'initial-step5-authenticated-native-input-manifest-mirror') return null;
+  try {
+    const closure = read(join(root, 'research', `${run}-step5-closure.json`));
+    const closedAt = Date.parse(closure.closed_at);
+    const closeResult = read(join(root, 'research', `${run}-dispatch`, 'tool-step5-close.result.json'));
+    if (closure.version !== 2 || closure.run !== run || closure.status !== 'closed'
+      || !Number.isFinite(closedAt) || !(Date.parse(receipt.at) <= closedAt)
+      || closure.final_item_hashes?.[id] !== hashes.guard_sha256
+      || closeResult.run !== run || closeResult.role !== 'tool' || closeResult.label !== 'step5-close'
+      || closeResult.ok !== true || closeResult.written_by !== 'autopilot'
+      || !closeResult.covers?.includes('all') || !(Date.parse(closeResult.ended_at) >= closedAt)) return null;
+    const artifacts = Object.entries(closure.artifacts ?? {});
+    if (!artifacts.length || artifacts.some(([path, expected]) =>
+      !/^[a-f0-9]{64}$/.test(expected ?? '')
+      || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
+    const boundary = stageBaseline(root, run, 7), before = boundary.item_carriers?.[id];
+    if (!before || before.batch !== '5' || before.page !== 'real-hardy-spaces-maximal-functions-and-atoms'
+      || !(Date.parse(boundary.at) >= closedAt)
+      || CARRIER_KEYS.some(key => before[key] !== hashes[key])) return null;
+    const frozenPath = `research/${run}-step5-hash-5-post-5a.json`;
+    if (!closure.artifacts[frozenPath]) return null;
+    const frozen = read(researchFile(root, frozenPath)), carrier = frozen.hashes?.[id];
+    if (frozen.run !== run || String(frozen.batch) !== '5' || frozen.label !== 'post-5a'
+      || carrier?.item_sha256 !== hashes.item_file_sha256
+      || carrier.manifest_sha256 !== hashes.manifest_sha256
+      || carrier.contract_sha256 !== hashes.contract_sha256) return null;
+    const live = inventory(root, run).find(row => row.id === id);
+    const currentText = readFileSync(join(root, 'items', `${safe(id)}.md`), 'utf8');
+    const currentFm = yaml().parse(split(currentText).fm) ?? {};
+    const claim = currentText.match(/^## Statement\s*\r?\n([\s\S]*?)(?=^## |$(?![\s\S]))/m)?.[1]?.trim();
+    if (!live || live.page !== before.page || live.batch !== before.batch
+      || !['kind', 'title', 'deps', 'provenance', 'sources', 'dependency_level']
+        .every(key => sameCanonical(live.manifest_entry[key], currentFm[key]))
+      || live.manifest_entry.statement !== claim) return null;
+    const current = carrierHashes(root, run, live);
+    if (current.guard_sha256 === hashes.guard_sha256
+      || current.manifest_sha256 === hashes.manifest_sha256
+      || current.contract_sha256 === hashes.contract_sha256) return null;
+    const after = stageBaseline(root, run, 8).item_carriers?.[id];
+    if (!after || after.page !== live.page || after.batch !== live.batch
+      || CARRIER_KEYS.some(key => after[key] !== current[key])) return null;
+    const certificate = read(join(root, 'research', `${run}-step7-v2`, 'certification.json'));
+    const { sha256, ...payload } = certificate;
+    const item = certificate.items?.find(row => row.id === id);
+    if (certificate.version !== 2 || certificate.run !== run || sha256 !== sha(JSON.stringify(payload))
+      || !item || item.guard_sha256 !== current.guard_sha256 || item.item_sha256 !== current.judge_sha256) return null;
+    const now = currentHashesMany(root, [id]).get(id);
+    if (!now || now.item_sha256 !== item.item_sha256 || now.context_sha256 !== item.context_sha256) return null;
+    const nativeEvidence = Object.entries(certificate.evidence ?? {});
+    if (!nativeEvidence.length || nativeEvidence.some(([path, expected]) =>
+      !/^[a-f0-9]{64}$/.test(expected ?? '')
+      || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
+    const bound = path => nativeEvidence.some(([candidate, expected]) =>
+      resolve(root, candidate) === resolve(root, path) && expected === sha(readFileSync(researchFile(root, path))));
+    const reportPath = `research/${run}-step7-v2/step7-v2-initial-r1-u5.json`;
+    const packPath = `research/${run}-step7-v2/initial-1.json`;
+    const resultPath = `research/${run}-dispatch/alpha-adjudicate-step7-v2-initial-r1-u5.result.json`;
+    const collectedPath = `research/${run}-step7-v2/initial-1-collected.json`;
+    if (![reportPath, packPath, resultPath, collectedPath].every(bound)) return null;
+    const report = read(researchFile(root, reportPath)), pack = read(researchFile(root, packPath));
+    const result = read(researchFile(root, resultPath)), collected = read(researchFile(root, collectedPath));
+    const decisions = report.decisions?.filter(row => row.id === id), decision = decisions?.[0];
+    const reviews = report.reviews?.filter(row => row.id === id), review = reviews?.[0];
+    const tuples = pack.assignments?.['5']?.filter(row => row.id === id), tuple = tuples?.[0];
+    if (report.run !== run || report.phase !== 'initial' || report.round !== 1 || String(report.unit) !== '5'
+      || report.input_sha256 !== sha(JSON.stringify(pack))
+      || pack.run !== run || pack.phase !== report.phase || pack.round !== report.round
+      || pack.before?.[id] !== hashes.guard_sha256 || tuples?.length !== 1
+      || tuple.keep !== false || tuple.item_sha256 !== hashes.judge_sha256
+      || decisions?.length !== 1 || decision.outcome !== 'confirmed_fatal' || decision.defect_type !== 'logic'
+      || decision.uncertain !== false || decision.model !== tuple.model
+      || decision.context_sha256 !== tuple.context_sha256
+      || result.run !== run || result.role !== 'alpha-adjudicate' || !authorResultAllowed(7, result)
+      || result.label !== 'step7-v2-initial-r1-u5' || !result.covers.includes('5')
+      || reviews?.length !== 1 || review.disposition !== 'repaired' || review.uncertain !== false
+      || review.post_sha256 !== current.guard_sha256
+      || collected.run !== run || collected.phase !== 'initial' || collected.round !== 1
+      || collected.errors?.length !== 0 || !collected.reviews?.some(row => sameCanonical(row, review))
+      || !report.repair_notes?.interface_changes?.includes(id)
+      || !report.repair_notes?.downstream_examinations?.some(row => row.supplier === id
+        && row.id === 'thm-maximal-function-characterisations-of-real-hardy-spaces'
+        && row.disposition === 'unchanged_sound')) return null;
+    // The later owner lane reviewed the actual repaired carrier after its
+    // Definition supplier changed; its current native seal remains required.
+    const impactReportPath = `research/${run}-step7-v2/step7-v2-impact-initial-r1-u1.json`;
+    const impactPackPath = `research/${run}-step7-v2/impact-initial-1.json`;
+    const impactResultPath = `research/${run}-dispatch/alpha-repair-step7-v2-impact-initial-r1-u1.result.json`;
+    const impactClosedPath = `research/${run}-step7-v2/impact-initial-1-closed.json`;
+    if (![impactReportPath, impactPackPath, impactResultPath, impactClosedPath].every(bound)) return null;
+    const impactReport = read(researchFile(root, impactReportPath)), impactPack = read(researchFile(root, impactPackPath));
+    const impactResult = read(researchFile(root, impactResultPath)), impactClosed = read(researchFile(root, impactClosedPath));
+    const impactReviews = impactReport.reviews?.filter(row => row.id === id), impactReview = impactReviews?.[0];
+    if (impactReport.run !== run || impactReport.phase !== 'impact-initial' || impactReport.round !== 1
+      || String(impactReport.unit) !== '1' || impactReport.input_sha256 !== sha(JSON.stringify(impactPack))
+      || impactPack.run !== run || impactPack.phase !== impactReport.phase || impactPack.round !== 1
+      || impactPack.before?.[id] !== current.guard_sha256 || !impactPack.assignments?.['1']?.includes(id)
+      || !impactPack.impacts?.some(row => row.id === id
+        && row.suppliers?.includes('def-grand-maximal-test-class-of-order-n'))
+      || impactResult.run !== run || impactResult.role !== 'alpha-repair' || !authorResultAllowed(7, impactResult)
+      || impactResult.label !== 'step7-v2-impact-initial-r1-u1' || !impactResult.covers.includes('1')
+      || impactReviews?.length !== 1 || impactReview.disposition !== 'unaffected'
+      || impactReview.metadata_repair_only !== true || impactReview.uncertain !== false
+      || impactReview.post_sha256 !== current.guard_sha256 || impactReview.reason !== item.reason
+      || impactClosed.run !== run || impactClosed.errors?.length !== 0
+      || !impactClosed.reviews?.some(row => sameCanonical(row, impactReview))) return null;
+    const evidence = step5ManifestRepairEvidence(evidenceText), native = evidence?.native_review;
+    if (!evidence?.current_manifest_entry || hashValue(evidence.current_manifest_entry) !== hashes.manifest_sha256) return null;
+    const step5Log = readFileSync(researchFile(root, native?.log?.path), 'utf8');
+    if (sha(step5Log) !== native.log.sha256) return null;
+    // These are observed bytes with sealed preimage hashes, never inverse
+    // edits that would invent the historical radial proof or its contract.
+    const oldItems = new Map();
+    for (const marker of step5Log.matchAll(new RegExp(`^---\\r?\\nid: ${id}\\r?\\n`, 'gm'))) {
+      const tail = step5Log.slice(marker.index);
+      const end = tail.search(/^exec$/m);
+      if (end < 0) continue;
+      const text = tail.slice(0, end).trimEnd() + '\n';
+      if (sha(text) === hashes.item_file_sha256 && itemHashGuard(text) === hashes.guard_sha256
+        && itemHashJudge(text) === hashes.judge_sha256) oldItems.set(text, text);
+    }
+    if (oldItems.size !== 1) return null;
+    const historicalItemText = [...oldItems.values()][0];
+    const step7LogPath = resolve(root, result.log);
+    const step7Log = readFileSync(researchFile(root, step7LogPath), 'utf8');
+    const oldContracts = new Map();
+    for (const match of step7Log.matchAll(new RegExp(`^${id}\\r?\\n(\\{[\\s\\S]*?^\\})`, 'gm'))) {
+      const candidate = JSON.parse(match[1]);
+      if (hashValue(candidate) === hashes.contract_sha256) oldContracts.set(hashValue(candidate), candidate);
+    }
+    if (oldContracts.size !== 1) return null;
+    const historicalContract = [...oldContracts.values()][0];
+    return bootstrapStep5Author(root, run, id,
+      { ...live, manifest_entry: evidence.current_manifest_entry }, hashes, evidenceText,
+      { historicalItemText, historicalContract });
+  } catch { return null; }
+}
+
 function ownerRecertification(root, run, step, id, hashes, authorResult, basis = null,
   { historical = false } = {}) {
   const path = ownerRecertificationPath(root, run, step, id, hashes);
@@ -387,7 +638,9 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
   const step5Bootstrap = step === 5 && receipt.basis !== undefined && liveRow
     ? bootstrapStep5Author(root, run, id, liveRow, hashes, evidenceText)
       ?? (historical ? closedStep5GraphBootstrap(root, run, id, hashes, receipt, evidenceText)
-        ?? closedStep5LacunaryBootstrap(root, run, id, hashes, receipt, evidenceText) : null)
+        ?? closedStep5LacunaryBootstrap(root, run, id, hashes, receipt, evidenceText)
+        ?? closedStep5GrandMaximalBootstrap(root, run, id, hashes, receipt, evidenceText)
+        ?? closedStep5TruncatedBootstrap(root, run, id, hashes, receipt, evidenceText) : null)
     : null;
   if (receipt.version !== 1 || receipt.policy !== OWNER_RECERTIFICATION_POLICY
     || receipt.run !== run || receipt.step !== Number(step) || receipt.id !== id
@@ -467,7 +720,7 @@ function bootstrapStep7Author(root, run, id, row, hashes) {
 // hash-bound owner receipt, not that result, attests either late repair.
 const step5BootstrapContext = new Map();
 function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '',
-  { closedGraphOrigin = false, historicalContract = null } = {}) {
+  { closedGraphOrigin = false, historicalContract = null, historicalItemText = null } = {}) {
   const key = `${root}\0${run}`;
   if (!step5BootstrapContext.has(key)) {
     step5BootstrapContext.set(key, {
@@ -493,7 +746,7 @@ function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '',
   const manifestRepair = before.judge_sha256 !== hashes.judge_sha256
     && before.manifest_sha256 !== hashes.manifest_sha256
     ? step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText,
-      { closedGraphOrigin, historicalContract }) : null;
+      { closedGraphOrigin, historicalContract, historicalItemText }) : null;
   if (!contractOnly && !itemRepair && !manifestRepair) return null;
   const baselineAt = Date.parse(baseline.at);
   const eligible = context.authors.filter(author => {
@@ -594,7 +847,7 @@ function dependencyMetadataMirrorsItem(root, id, currentEntry) {
 // it preserves the unknown historical delta and binds the current projection,
 // actual source evidence and direct consumers without inventing a preimage.
 function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText,
-  { closedGraphOrigin = false, historicalContract = null } = {}) {
+  { closedGraphOrigin = false, historicalContract = null, historicalItemText = null } = {}) {
   const evidence = step5ManifestRepairEvidence(evidenceText);
   if (!evidence || evidence.version !== 1 || evidence.policy !== 'step5-manifest-repair-evidence-v1'
     || evidence.run !== run || evidence.step !== 5 || evidence.id !== id
@@ -757,7 +1010,13 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
     // that the reviewed mathematics and contract are still current.
     try {
       const baselineText = evidence.baseline_item_text;
-      const currentText = readFileSync(join(root, 'items', `${safe(id)}.md`), 'utf8');
+      const currentText = historicalItemText
+        ?? readFileSync(join(root, 'items', `${safe(id)}.md`), 'utf8');
+      if (historicalItemText !== null && (run !== 'frontier-39-analysis-30'
+        || id !== 'lem-truncated-maximal-function-estimates'
+        || sha(historicalItemText) !== hashes.item_file_sha256
+        || itemHashGuard(historicalItemText) !== hashes.guard_sha256
+        || itemHashJudge(historicalItemText) !== hashes.judge_sha256)) return null;
       const nativeMirror = kind === 'authenticated-native-input-manifest-mirror';
       if (!nativeMirror && (typeof baselineText !== 'string' || sha(baselineText) !== before.item_file_sha256
         || itemHashJudge(baselineText) !== before.judge_sha256)) return null;

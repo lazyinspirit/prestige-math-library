@@ -439,6 +439,33 @@ mathematical contracts; all original native review and decision checks still run
 against that recovered contract. The receipt and evidence remain immutable.
 This path does not refresh live mathematical evidence or create a new origin.
 
+For the same run's grand maximal domination lemma, historical loading permits
+only the native Step-7 update of its F3 grand maximal Definition quotation.
+The original logged vertical-tab correction and root's F1 supplier-alignment
+replay remain required by the ordinary Step-5 bootstrap. The old raw Definition
+must come from that authenticated native Step-5 log; changing only this quote
+must recover the sealed historical full and mathematical contracts. The current
+item and manifest, sealed Step-5/Step-7 boundaries, native impact-initial-r1-u1
+producer and closed aggregate, current Step-8 boundary and central Step-7
+item/context certification are required independently. This preserves the
+original native and owner authors and leaves the closed receipt immutable.
+
+For `frontier-39-analysis-30`'s carried truncated maximal estimates lemma, the
+closed Step-5 owner receipt remains historical origin evidence after the native
+Step-7 fatal repair replaces its radial truncated grand operator with the full
+aperture-one cone supremum. Historical loading requires the sealed Step-5
+closure and post-5a carriers, identical Step-7 starting boundary, and exact old
+item, manifest and contract preimages recovered from actual native inputs and
+matching every historical carrier hash. The original Step-5 native review,
+subject decision, owner evidence and Step-3 origin checks run against those old
+carriers. Separately, loading requires the rejected native tuple, successful
+repair dispatch and collected repaired review, the actual direct-consumer
+examination, subsequent supplier-impact closure, and current central Step-7
+item/context certification matching the immutable Step-8 boundary. Current
+claim, source and dependency mirrors remain required. This path preserves the
+receipt and evidence, does not replay the repaired current proof as historical
+mathematics, and cannot replace current review or reopen Step 5.
+
 The dilation's public `owner-recertify --refresh-evidence` option refreshes
 only an authorized `accepted_repair` to `amended_repair` decision binding on
 identical carriers, preserving every other stable review field. It writes a
